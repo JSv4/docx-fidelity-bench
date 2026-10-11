@@ -1,0 +1,13 @@
+# Authorship and artifact rights
+
+John Scrudato IV owns the original harness, adapter, documentation, fixture generator, text, and diamond graphic authored for this repository. The MIT license covers these files and the generated DOCX fixtures. No document templates, input documents, corpus downloads, embedded font files, or vendored libraries are included.
+
+`bench/fixtures.py` is the complete source of every fixture. It constructs OOXML packages from literal text and generates the diamond image from pixel coordinates. `fixtures/manifest.json` records each document hash, generator hash, author, license, origin, asset statement, expected text, and assertions. CI regenerates every package and compares the bytes.
+
+Contributions must include an author and rights record. Adding an asset requires a generator or an individually reviewed origin and redistribution grant. Git tracking alone is insufficient. Inputs are never fetched from a corpus service. Fixtures are immutable during rendering.
+
+The harness uses the Python standard library. LibreOffice, Poppler, qpdf, fontconfig, Node.js, and Docxodus are separately provisioned executables or renderer packages; their implementations are not copied into this repository. Their own licenses continue to apply: [LibreOffice MPL-2.0 and its distributed component notices](https://www.libreoffice.org/licenses/), Poppler GPL-2.0 or GPL-3.0 as recorded in the installed package's copyright inventory, [qpdf Apache-2.0](https://qpdf.readthedocs.io/en/stable/license.html), fontconfig MIT, Node.js MIT with its distributed notices, and Docxodus MIT with its package notices. The benchmark invokes them through process or public API boundaries. Installation does not change their licensing; consult each installed distribution's complete notices.
+
+The core documents request Liberation Serif. Install the unmodified Liberation font package separately and retain its [SIL Open Font License notices](https://github.com/liberationfonts/liberation-fonts/blob/main/LICENSE). Font binaries are not committed. A run records the exact regular, bold, italic, and bold-italic file hashes, rejects family substitution, and checks PDF font identities. Generated reference and candidate PDFs can contain font subsets; retain the recorded font contract with the artifact bundle.
+
+Before registering operator-captured Word PDFs, approve the input, image, font embedding, and artifact-publication rights. Capture metadata must explicitly attest approval. Generated reports and PDF bundles stay outside the source tree and are published as CI artifacts. This file describes the included inventory and process; it does not extend the license of separately installed software.

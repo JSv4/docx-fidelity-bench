@@ -1,0 +1,902 @@
+{
+  "schema": 1,
+  "suite": {
+    "id": "core-v1",
+    "version": 1,
+    "cases": [
+      "columns-continuous",
+      "columns-balanced",
+      "columns-break",
+      "paragraph-contract",
+      "paragraph-heading",
+      "paragraph-keep",
+      "notes-footnote",
+      "notes-endnote",
+      "tables-nested",
+      "tables-margins",
+      "images-square",
+      "images-tight"
+    ]
+  },
+  "cases": [
+    {
+      "id": "columns-continuous",
+      "version": 1,
+      "category": "columns",
+      "description": "Two columns with continuous section behavior",
+      "input": "fixtures/columns-continuous.docx",
+      "sha256": "bdda6db961a6f93797c47f8a0f2efccf7754cd8fa32a06fb689e076577a17861",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "C01": 1,
+        "C02": 1,
+        "C03": 1,
+        "C04": 1,
+        "C05": 1,
+        "C06": 1,
+        "C07": 1,
+        "C08": 1,
+        "C09": 1,
+        "C10": 1,
+        "C11": 1,
+        "C12": 1,
+        "Columns": 1,
+        "Continuous": 1,
+        "The": 24,
+        "and": 12,
+        "before": 12,
+        "check.": 12,
+        "compares": 12,
+        "crew": 12,
+        "each": 12,
+        "evening": 12,
+        "for": 12,
+        "height": 12,
+        "keeps": 12,
+        "morning": 12,
+        "next": 12,
+        "notes": 12,
+        "of": 12,
+        "open": 12,
+        "records": 12,
+        "route": 12,
+        "survey": 12,
+        "team": 12,
+        "the": 60,
+        "tower": 12,
+        "visit.": 12
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 1,
+          "marker": "C01",
+          "occurrence": 1,
+          "page": "reference",
+          "rect": [
+            72,
+            60,
+            300,
+            720
+          ]
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+      }
+    },
+    {
+      "id": "columns-balanced",
+      "version": 1,
+      "category": "columns",
+      "description": "Two columns with balanced ending section behavior",
+      "input": "fixtures/columns-balanced.docx",
+      "sha256": "e5d9d9f1f2441d74160babb319263b0d0a01cec3e4b01b652d138df4fec54e53",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "AfterColumns": 1,
+        "Balanced": 1,
+        "C01": 1,
+        "C02": 1,
+        "C03": 1,
+        "C04": 1,
+        "C05": 1,
+        "C06": 1,
+        "C07": 1,
+        "C08": 1,
+        "C09": 1,
+        "C10": 1,
+        "C11": 1,
+        "C12": 1,
+        "Columns": 1,
+        "The": 25,
+        "and": 12,
+        "before": 13,
+        "check.": 12,
+        "columns": 1,
+        "compares": 12,
+        "crew": 12,
+        "each": 12,
+        "end": 1,
+        "evening": 12,
+        "for": 12,
+        "full": 1,
+        "height": 12,
+        "keeps": 12,
+        "morning": 12,
+        "next": 12,
+        "notes": 12,
+        "of": 12,
+        "open": 12,
+        "paragraph.": 1,
+        "records": 12,
+        "route": 12,
+        "survey": 12,
+        "team": 12,
+        "the": 60,
+        "this": 1,
+        "tower": 12,
+        "two": 1,
+        "visit.": 12,
+        "width": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 1,
+          "marker": "C01",
+          "occurrence": 1,
+          "page": "reference",
+          "rect": [
+            72,
+            60,
+            300,
+            720
+          ]
+        },
+        {
+          "type": "marker-region",
+          "version": 1,
+          "marker": "C07",
+          "occurrence": 1,
+          "page": "reference",
+          "rect": [
+            318,
+            60,
+            540,
+            720
+          ]
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+      }
+    },
+    {
+      "id": "columns-break",
+      "version": 1,
+      "category": "columns",
+      "description": "Two columns with continuous section behavior",
+      "input": "fixtures/columns-break.docx",
+      "sha256": "cc3ec2acb6578135406ab52e64dd981ef6d50d36c75321676fb32389456bb02b",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Break": 1,
+        "C01": 1,
+        "C02": 1,
+        "C03": 1,
+        "C04": 1,
+        "C05": 1,
+        "C06": 1,
+        "C07": 1,
+        "C08": 1,
+        "C09": 1,
+        "C10": 1,
+        "C11": 1,
+        "C12": 1,
+        "Columns": 1,
+        "The": 24,
+        "and": 12,
+        "before": 12,
+        "check.": 12,
+        "compares": 12,
+        "crew": 12,
+        "each": 12,
+        "evening": 12,
+        "for": 12,
+        "height": 12,
+        "keeps": 12,
+        "morning": 12,
+        "next": 12,
+        "notes": 12,
+        "of": 12,
+        "open": 12,
+        "records": 12,
+        "route": 12,
+        "survey": 12,
+        "team": 12,
+        "the": 60,
+        "tower": 12,
+        "visit.": 12
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 1,
+          "marker": "C01",
+          "occurrence": 1,
+          "page": "reference",
+          "rect": [
+            72,
+            60,
+            300,
+            720
+          ]
+        },
+        {
+          "type": "marker-region",
+          "version": 1,
+          "marker": "C07",
+          "occurrence": 1,
+          "page": "reference",
+          "rect": [
+            318,
+            60,
+            540,
+            720
+          ]
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+      }
+    },
+    {
+      "id": "paragraph-contract",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Authored agreement with justified multi-page flow",
+      "input": "fixtures/paragraph-contract.docx",
+      "sha256": "6b2926adc3bec2bb319d74097a834bace936d207f833791710ab3ce55b955c6b",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Clause01": 1,
+        "Clause02": 1,
+        "Clause03": 1,
+        "Clause04": 1,
+        "Clause05": 1,
+        "Clause06": 1,
+        "Clause07": 1,
+        "Clause08": 1,
+        "Clause09": 1,
+        "Clause10": 1,
+        "Clause11": 1,
+        "Clause12": 1,
+        "Clause13": 1,
+        "Clause14": 1,
+        "Clause15": 1,
+        "Clause16": 1,
+        "Clause17": 1,
+        "Clause18": 1,
+        "Clause19": 1,
+        "Clause20": 1,
+        "Clause21": 1,
+        "Clause22": 1,
+        "Clause23": 1,
+        "Clause24": 1,
+        "Each": 24,
+        "Service": 1,
+        "The": 24,
+        "agreed": 24,
+        "agreement": 1,
+        "and": 48,
+        "date,": 24,
+        "for": 24,
+        "includes": 24,
+        "inspect": 24,
+        "layout": 1,
+        "measured": 24,
+        "name": 24,
+        "next": 24,
+        "of": 24,
+        "office.": 24,
+        "parties": 24,
+        "person": 24,
+        "project": 24,
+        "quantity": 24,
+        "record": 24,
+        "report": 24,
+        "responsible": 24,
+        "review.": 24,
+        "sample,": 24,
+        "schedule": 24,
+        "send": 24,
+        "the": 192,
+        "to": 24,
+        "will": 24,
+        "written": 24
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+      }
+    },
+    {
+      "id": "paragraph-heading",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Space before a heading at a page start",
+      "input": "fixtures/paragraph-heading.docx",
+      "sha256": "b48a0d18f7726e9d2e27264efc8951ae58682011196c5791b18a19c9222057a2",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "First": 1,
+        "HeadingMarker": 1,
+        "The": 3,
+        "a": 1,
+        "and": 1,
+        "before": 1,
+        "check.": 1,
+        "compares": 1,
+        "contains": 1,
+        "crew": 1,
+        "each": 1,
+        "evening": 1,
+        "first": 1,
+        "for": 1,
+        "height": 1,
+        "introduction.": 1,
+        "keeps": 1,
+        "morning": 1,
+        "next": 1,
+        "notes": 1,
+        "of": 1,
+        "open": 1,
+        "page": 2,
+        "records": 1,
+        "route": 1,
+        "short": 1,
+        "survey": 1,
+        "team": 1,
+        "the": 5,
+        "tower": 1,
+        "visit.": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 1,
+          "marker": "HeadingMarker",
+          "occurrence": 1,
+          "page": 2,
+          "rect": [
+            72,
+            60,
+            540,
+            160
+          ]
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+      }
+    },
+    {
+      "id": "paragraph-keep",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Heading and paragraph keep behavior near a page boundary",
+      "input": "fixtures/paragraph-keep.docx",
+      "sha256": "b6ef72c1e025d6e6deb70dd6f34068844f057cf45aefff004782c2f4a12d74e5",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "A": 30,
+        "KeepBody": 1,
+        "KeepHeading": 1,
+        "Kept": 1,
+        "Row00": 1,
+        "Row01": 1,
+        "Row02": 1,
+        "Row03": 1,
+        "Row04": 1,
+        "Row05": 1,
+        "Row06": 1,
+        "Row07": 1,
+        "Row08": 1,
+        "Row09": 1,
+        "Row10": 1,
+        "Row11": 1,
+        "Row12": 1,
+        "Row13": 1,
+        "Row14": 1,
+        "Row15": 1,
+        "Row16": 1,
+        "Row17": 1,
+        "Row18": 1,
+        "Row19": 1,
+        "Row20": 1,
+        "Row21": 1,
+        "Row22": 1,
+        "Row23": 1,
+        "Row24": 1,
+        "Row25": 1,
+        "Row26": 1,
+        "Row27": 1,
+        "Row28": 1,
+        "Row29": 1,
+        "The": 2,
+        "and": 2,
+        "available": 30,
+        "band.": 30,
+        "before": 1,
+        "check.": 1,
+        "compares": 1,
+        "crew": 1,
+        "each": 1,
+        "establishes": 30,
+        "evening": 1,
+        "for": 1,
+        "heading": 1,
+        "height": 1,
+        "keeps": 1,
+        "line": 30,
+        "morning": 1,
+        "next": 1,
+        "notes": 1,
+        "of": 1,
+        "open": 1,
+        "page": 30,
+        "paragraph": 1,
+        "records": 1,
+        "route": 1,
+        "short": 30,
+        "survey": 1,
+        "team": 1,
+        "the": 35,
+        "tower": 1,
+        "visit.": 1
+      },
+      "assertions": [
+        {
+          "type": "same-page",
+          "version": 1,
+          "markers": [
+            "KeepHeading",
+            "KeepBody"
+          ]
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+      }
+    },
+    {
+      "id": "notes-footnote",
+      "version": 1,
+      "category": "notes",
+      "description": "Footnote body and automatic marker",
+      "input": "fixtures/notes-footnote.docx",
+      "sha256": "869c9f6534b83eb7548384d7701dbe7a9ef438352e34f945e96da83a57691f7b",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "1": 2,
+        "Footnote": 1,
+        "NoteAnchor": 1,
+        "NoteText": 1,
+        "The": 4,
+        "and": 1,
+        "before": 2,
+        "check.": 1,
+        "checked": 1,
+        "compares": 1,
+        "crew": 1,
+        "departure.": 1,
+        "distance": 1,
+        "each": 1,
+        "evening": 1,
+        "five": 1,
+        "for": 1,
+        "height": 1,
+        "is": 2,
+        "keeps": 1,
+        "miles.": 1,
+        "morning": 1,
+        "next": 1,
+        "notes": 1,
+        "of": 1,
+        "open": 1,
+        "placement": 1,
+        "recorded": 1,
+        "records": 1,
+        "route": 2,
+        "survey": 1,
+        "team": 1,
+        "the": 5,
+        "tower": 1,
+        "visit.": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 1,
+          "marker": "NoteText",
+          "occurrence": 1,
+          "page": "reference",
+          "rect": [
+            60,
+            650,
+            552,
+            750
+          ]
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+      }
+    },
+    {
+      "id": "notes-endnote",
+      "version": 1,
+      "category": "notes",
+      "description": "Endnote body and automatic marker",
+      "input": "fixtures/notes-endnote.docx",
+      "sha256": "b4e463d900047a5677d2e890676b58b6841df2a02dedfda8ef2d735470a0752d",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Endnote": 1,
+        "NoteAnchor": 1,
+        "NoteText": 1,
+        "The": 4,
+        "and": 1,
+        "before": 2,
+        "check.": 1,
+        "checked": 1,
+        "compares": 1,
+        "crew": 1,
+        "departure.": 1,
+        "distance": 1,
+        "each": 1,
+        "evening": 1,
+        "five": 1,
+        "for": 1,
+        "height": 1,
+        "i": 2,
+        "is": 2,
+        "keeps": 1,
+        "miles.": 1,
+        "morning": 1,
+        "next": 1,
+        "notes": 1,
+        "of": 1,
+        "open": 1,
+        "placement": 1,
+        "recorded": 1,
+        "records": 1,
+        "route": 2,
+        "survey": 1,
+        "team": 1,
+        "the": 5,
+        "tower": 1,
+        "visit.": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 1,
+          "marker": "NoteText",
+          "occurrence": 1,
+          "page": "reference",
+          "rect": [
+            60,
+            120,
+            552,
+            420
+          ]
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+      }
+    },
+    {
+      "id": "tables-nested",
+      "version": 1,
+      "category": "tables",
+      "description": "Nested table with visible outer and inner cells",
+      "input": "fixtures/tables-nested.docx",
+      "sha256": "b2cabf4d8e659fc893662fe8820df6cc5517918780c0ec47e88cf86e6e97654b",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "AfterTable": 1,
+        "InnerLeft": 1,
+        "InnerRight": 1,
+        "Nested": 1,
+        "OuterLeft": 1,
+        "OuterRight": 1,
+        "spacing": 1,
+        "table": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+      }
+    },
+    {
+      "id": "tables-margins",
+      "version": 1,
+      "category": "tables",
+      "description": "Table-level cell margins inherited by each cell",
+      "input": "fixtures/tables-margins.docx",
+      "sha256": "753ec081275f97b66c642173b714782667c2b5bd52d349e95b7266678bb16331",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "AfterMargins": 1,
+        "CellLeft": 1,
+        "CellRight": 1,
+        "Inherited": 1,
+        "SecondLeft": 1,
+        "SecondRight": 1,
+        "cell": 1,
+        "margins": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+      }
+    },
+    {
+      "id": "images-square",
+      "version": 1,
+      "category": "images",
+      "description": "Square wrapping around an authored diamond",
+      "input": "fixtures/images-square.docx",
+      "sha256": "5f78dba417ba93dcbc1c129d260ec5ade197f087cfea981564daa6a90cb54a1e",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Square": 1,
+        "The": 16,
+        "Wrap00": 1,
+        "Wrap01": 1,
+        "Wrap02": 1,
+        "Wrap03": 1,
+        "Wrap04": 1,
+        "Wrap05": 1,
+        "Wrap06": 1,
+        "Wrap07": 1,
+        "and": 8,
+        "before": 8,
+        "check.": 8,
+        "compares": 8,
+        "crew": 8,
+        "each": 8,
+        "evening": 8,
+        "for": 8,
+        "height": 8,
+        "image": 1,
+        "keeps": 8,
+        "morning": 8,
+        "next": 8,
+        "notes": 8,
+        "of": 8,
+        "open": 8,
+        "records": 8,
+        "route": 8,
+        "survey": 8,
+        "team": 8,
+        "the": 40,
+        "tower": 8,
+        "visit.": 8,
+        "wrapping": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+      }
+    },
+    {
+      "id": "images-tight",
+      "version": 1,
+      "category": "images",
+      "description": "Tight wrapping around an authored diamond",
+      "input": "fixtures/images-tight.docx",
+      "sha256": "1e8e18ad646236237fa9a6f6a7cc6d8faa024cf970a7b4388b0c98cc7a91b7b5",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "The": 16,
+        "Tight": 1,
+        "Wrap00": 1,
+        "Wrap01": 1,
+        "Wrap02": 1,
+        "Wrap03": 1,
+        "Wrap04": 1,
+        "Wrap05": 1,
+        "Wrap06": 1,
+        "Wrap07": 1,
+        "and": 8,
+        "before": 8,
+        "check.": 8,
+        "compares": 8,
+        "crew": 8,
+        "each": 8,
+        "evening": 8,
+        "for": 8,
+        "height": 8,
+        "image": 1,
+        "keeps": 8,
+        "morning": 8,
+        "next": 8,
+        "notes": 8,
+        "of": 8,
+        "open": 8,
+        "records": 8,
+        "route": 8,
+        "survey": 8,
+        "team": 8,
+        "the": 40,
+        "tower": 8,
+        "visit.": 8,
+        "wrapping": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+      }
+    }
+  ]
+}

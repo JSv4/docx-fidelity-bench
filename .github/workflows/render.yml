@@ -1,0 +1,83 @@
+name: Measure Docxodus against LibreOffice
+on:
+  workflow_dispatch:
+    inputs:
+      candidate:
+        description: Exact Docxodus commit
+        required: true
+        default: '449662c8a0f22a71574f86ec4f609588026e93e8'
+        type: string
+permissions:
+  contents: read
+jobs:
+  measure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Audit original inputs
+        run: |
+          python3 -m bench.audit
+          python3 -m unittest discover -s tests
+          mkdir -p runs
+          echo '<!doctype html><title>Rendering evidence</title><p>Setup is pending or failed.</p><p><a href="candidate/index.html">Candidate report if available</a></p>' > runs/index.html
+      - name: Checkout pinned renderer production source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: JSv4/Docxodus
+          ref: ${{ inputs.candidate }}
+          path: renderer
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/*/
+            /Docxodus/
+            /wasm/
+            /scripts/
+            /npm/
+            /npm-export/
+            /docs/schemas/
+            !/npm/tests/
+            !/npm-export/tests/
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: '22'
+      - name: Provision external measurement utilities and open fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libreoffice-writer poppler-utils qpdf fontconfig fonts-liberation2
+          dotnet workload install wasm-tools
+      - name: Build exact production export runtime
+        env:
+          CANDIDATE_COMMIT: ${{ inputs.candidate }}
+        run: python3 -m bench build-docxodus --source renderer --commit "$CANDIDATE_COMMIT"
+      - name: Provision Chromium sandbox host
+        run: |
+          npm --prefix renderer/npm exec -- playwright install --with-deps chromium
+          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+      - name: Register immutable LibreOffice reference bundle
+        run: python3 -m bench reference libreoffice --out references/lo
+      - name: Verify identical-engine calibration
+        run: |
+          python3 -m bench run --reference references/lo/bundle.json --adapter libreoffice --candidate reference-calibration --out runs/calibration --gate close
+          python3 -c 'import json; r=json.load(open("runs/calibration/result.json")); assert r["summary"]["score"] == 100, r["summary"]'
+      - name: Measure delivered candidate PDFs
+        env:
+          CANDIDATE_COMMIT: ${{ inputs.candidate }}
+        run: |
+          export DOCXODUS_SOURCE_ROOT="$PWD/renderer"
+          export DOCXODUS_EXPORT_MODULE="$PWD/renderer/npm-export/dist/index.js"
+          python3 -m bench run --reference references/lo/bundle.json --adapter docxodus --candidate "$CANDIDATE_COMMIT" --out runs/candidate --gate report
+      - name: Preserve reports and exact reference bundle
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: rendering-evidence
+          path: |
+            runs/
+            references/
+          retention-days: 30
+          if-no-files-found: error
