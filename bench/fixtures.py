@@ -142,8 +142,10 @@ def generate():
         marker = 'i' if kind == 'endnote' else '1'
         texts = [title, first, marker, marker, note, prose]
         body = para(title, '<w:pStyle w:val="Title"/>') + para(runs=run(first + ' ') + f'<w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr><w:{kind}Reference w:id="1"/></w:r>') + para(prose)
-        rect = [60, 650, 552, 750] if kind == 'footnote' else [60, 120, 552, 420]
-        add('notes-' + kind, 'notes', kind.title() + ' body and automatic marker', texts, body, notes=(kind, note), assertions=[{'type': 'marker-region', 'version': 1, 'marker': 'NoteText', 'occurrence': 1, 'page': 'reference', 'rect': rect}])
+        assertion = {'type': 'marker-region', 'version': 1, 'marker': 'NoteText', 'occurrence': 1, 'page': 'reference', 'rect': [60, 650, 552, 750]} if kind == 'footnote' else {'type': 'marker-reference-position', 'version': 1, 'marker': 'NoteText', 'tolerancePt': 0.5}
+        add('notes-' + kind, 'notes', kind.title() + ' body and automatic marker', texts, body, notes=(kind, note), assertions=[assertion])
+        if kind == 'endnote':
+            cases[-1]['version'] = 2
     title = 'Nested table spacing'
     texts = [title, 'OuterLeft', 'OuterRight', 'InnerLeft', 'InnerRight', 'AfterTable']
     inner = table([[cell(texts[3]), cell(texts[4])]], width=4200)
@@ -163,7 +165,7 @@ def generate():
             texts.append(text)
             body += para(runs=(drawing(wrap) if i == 0 else '') + run(text))
         add('images-' + wrap, 'images', wrap.title() + ' wrapping around an authored diamond', texts, body, image=True)
-    registry = {'schema': 1, 'suite': {'id': 'core-v1', 'version': 1, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v2', 'version': 2, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

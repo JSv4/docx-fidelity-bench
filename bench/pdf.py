@@ -107,6 +107,11 @@ def correctness(case, reference, candidate):
             if assertion['type'] == 'same-page':
                 anchors = [marker(candidate, m) for m in assertion['markers']]
                 passed = len({a['page'] for a in anchors}) == 1
+            elif assertion['type'] == 'marker-reference-position':
+                a = marker(candidate, assertion['marker'])
+                expected = marker(reference, assertion['marker'])
+                tolerance = assertion['tolerancePt']
+                passed = a['page'] == expected['page'] and all(abs(x - y) <= tolerance for x, y in zip(a['rect'][:2], expected['rect'][:2]))
             else:
                 a = marker(candidate, assertion['marker'], assertion['occurrence'])
                 expected_page = marker(reference, assertion['marker'])['page'] if assertion['page'] == 'reference' else assertion['page']

@@ -140,6 +140,23 @@ class CoverageContract(unittest.TestCase):
 
 
 class PdfContract(unittest.TestCase):
+    def position_checks(self, x=100, y=200, page=1):
+        geometry = [{'media': [0, 0, 612, 792], 'crop': [0, 0, 612, 792], 'rotation': 0}]
+        reference = {'geometry': geometry, 'fonts': ['LiberationSerif'], 'tokens': {'Note': 1}, 'words': [{'text': 'Note', 'page': 1, 'rect': [100, 200, 130, 212]}]}
+        candidate = copy.deepcopy(reference)
+        candidate['words'][0] = {'text': 'Note', 'page': page, 'rect': [x, y, x + 30, y + 12]}
+        declaration = {'fonts': ['Liberation Serif'], 'tokens': {'Note': 1}, 'assertions': [{'type': 'marker-reference-position', 'version': 1, 'marker': 'Note', 'tolerancePt': 0.5}]}
+        return pdf.correctness(declaration, reference, candidate)[-1]['passed']
+
+    def test_marker_reference_position_tolerates_declared_distance(self):
+        self.assertTrue(self.position_checks(x=100.25, y=200.25))
+
+    def test_marker_reference_position_rejects_moved_note(self):
+        self.assertFalse(self.position_checks(y=202))
+
+    def test_marker_reference_position_rejects_wrong_page(self):
+        self.assertFalse(self.position_checks(page=2))
+
     def doc(self, extra=None):
         page = {'/Parent': '2 0 R'}
         page.update(extra or {})
@@ -196,8 +213,8 @@ class RegistryContract(unittest.TestCase):
 
     def test_next_suite_version_is_extensible(self):
         registry = common.read_json(common.ROOT / 'fixtures/manifest.json')
-        registry['suite']['version'] = 2
-        self.assertEqual(common.validate_registry(registry)['suite']['version'], 2)
+        registry['suite']['version'] = 3
+        self.assertEqual(common.validate_registry(registry)['suite']['version'], 3)
 
     def test_stale_input_digest_is_rejected(self):
         registry = common.read_json(common.ROOT / 'fixtures/manifest.json')

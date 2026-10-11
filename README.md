@@ -2,7 +2,7 @@
 
 An independent MIT benchmark of delivered PDF rendering. The harness and all 12 input documents are authored in this repository. It measures layout, visible content, physical pages, fonts, and declared feature assertions. It produces portable HTML evidence and JSON measurements.
 
-The initial reference track is **LibreOffice**. Word Online, OneDrive, and desktop Word captures can be registered separately; **Word fidelity is not measured until those references exist**. This is an initial engineering benchmark, with report-only renderer CI. Close-match thresholds have not been calibrated as release gates.
+The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word Online, OneDrive, and desktop Word captures can be registered separately; **Word fidelity is not measured until those references exist**. The current suite is `core-v2`, with report-only renderer CI. Close-match thresholds have not been calibrated as release gates.
 
 ## What is included
 
@@ -61,7 +61,7 @@ Regression comparison refuses changed references, fonts, measurement tools, suit
 
 ## Add a case or adapter
 
-Author a focused DOCX with original text and graphics, add a generator and rights record, declare all visible token counts and versioned assertions, and add its ID and primary category to a versioned suite. The runner discovers manifest records; no scoring change is needed to add a case. The current check registry supports `marker-region` and `same-page`; unknown types and versions are rejected. New check implementations need positive and negative examples. The initial corpus generator is intentionally transparent and deterministic.
+Author a focused DOCX with original text and graphics, add a generator and rights record, declare all visible token counts and versioned assertions, and add its ID and primary category to a versioned suite. The runner discovers manifest records; no scoring change is needed to add a case. The current check registry supports `marker-region`, `same-page`, and `marker-reference-position`; unknown types and versions are rejected. The latter compares a unique marker's page and top-left PDF position with its reference, within the declared tolerance in points. New check implementations need positive and negative examples. The corpus generator is intentionally transparent and deterministic.
 
 Adding or changing cases requires a new suite version and a like-for-like rerun of the prior suite for historical comparisons. New references are explicitly pending until registered. No case is dropped because a renderer fails it.
 

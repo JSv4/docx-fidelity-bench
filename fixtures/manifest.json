@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "suite": {
-    "id": "core-v1",
-    "version": 1,
+    "id": "core-v2",
+    "version": 2,
     "cases": [
       "columns-continuous",
       "columns-balanced",
@@ -95,7 +95,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
       }
     },
     {
@@ -195,7 +195,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
       }
     },
     {
@@ -287,7 +287,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
       }
     },
     {
@@ -370,7 +370,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
       }
     },
     {
@@ -443,7 +443,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
       }
     },
     {
@@ -545,7 +545,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
       }
     },
     {
@@ -622,12 +622,12 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
       }
     },
     {
       "id": "notes-endnote",
-      "version": 1,
+      "version": 2,
       "category": "notes",
       "description": "Endnote body and automatic marker",
       "input": "fixtures/notes-endnote.docx",
@@ -684,22 +684,15 @@
       },
       "assertions": [
         {
-          "type": "marker-region",
+          "type": "marker-reference-position",
           "version": 1,
           "marker": "NoteText",
-          "occurrence": 1,
-          "page": "reference",
-          "rect": [
-            60,
-            120,
-            552,
-            420
-          ]
+          "tolerancePt": 0.5
         }
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
       }
     },
     {
@@ -735,7 +728,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
       }
     },
     {
@@ -771,7 +764,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
       }
     },
     {
@@ -833,7 +826,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
       }
     },
     {
@@ -895,7 +888,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "2b856c1856fd4b02d7329c50d74334d42fe9b784dda3fe7d7dba3c079001f438"
+        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
       }
     }
   ]
