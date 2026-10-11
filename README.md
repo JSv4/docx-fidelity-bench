@@ -4,6 +4,8 @@ An independent MIT benchmark of delivered PDF rendering. The harness and all 12 
 
 The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word Online, OneDrive, and desktop Word captures can be registered separately; **Word fidelity is not measured until those references exist**. The current suite is `core-v3`, with report-only renderer CI. Close-match thresholds have not been calibrated as release gates.
 
+The [2026-10-11 results](RESULTS.md) measure remote Docxodus main `6e0e6ca` on all 12 cases: 57.92/100, with 9/12 mandatory passes and 1/12 close matches. Repeated LibreOffice exports score 100/100. Full evidence is retained by the linked CI run.
+
 ## What is included
 
 | Category | Cases |
