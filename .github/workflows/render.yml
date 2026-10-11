@@ -19,6 +19,7 @@ jobs:
         run: |
           python3 -m bench.audit
           python3 -m unittest discover -s tests
+          node --test tests/test-adapter.mjs
           mkdir -p runs
           echo '<!doctype html><title>Rendering evidence</title><p>Setup is pending or failed.</p><p><a href="candidate/index.html">Candidate report if available</a></p>' > runs/index.html
       - name: Checkout pinned renderer production source

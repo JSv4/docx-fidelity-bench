@@ -14,4 +14,6 @@ jobs:
           python3 -m bench validate
           python3 -m bench.audit
       - name: Exercise scoring and failure contracts
-        run: python3 -m unittest discover -s tests -v
+        run: |
+          python3 -m unittest discover -s tests -v
+          node --test tests/test-adapter.mjs

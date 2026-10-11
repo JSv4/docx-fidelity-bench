@@ -9,6 +9,7 @@ let source = '';
 for await (const chunk of process.stdin) source += chunk;
 const request = JSON.parse(source);
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
+let phase = 'setup';
 try {
   if (request.protocol !== 1) throw new Error('Unknown request protocol');
   const modulePath = process.env.DOCXODUS_EXPORT_MODULE;
@@ -36,6 +37,7 @@ try {
   }
   const bytes = await readFile(request.input);
   if (hash(bytes) !== request.inputSha256) throw new Error('Input digest mismatch');
+  phase = 'conversion';
   const result = await convertDocxToPdf(new Uint8Array(bytes), {
     reviewProfile: request.profile.review,
     commentProfile: request.profile.comments,
@@ -50,9 +52,10 @@ try {
     throw error;
   }
   const runtime = Object.fromEntries(['playwrightVersion', 'browserProduct', 'browserBuild', 'executableSha256', 'launchFlags', 'operatingSystem', 'architecture'].map(key => [key, observed[key]]));
+  phase = 'artifact';
   await writeFile(request.output, result.pdf, { flag: 'wx' });
   await writeFile(request.report, JSON.stringify(result.renderReport, null, 2) + '\n', { flag: 'wx' });
   process.stdout.write(JSON.stringify({ protocol: 1, status: 'ok', pdfSha256: hash(result.pdf), renderer: { name: 'docxodus', commit, node: process.version, runtime, build }, productionReport: request.report }));
 } catch (error) {
-  process.stdout.write(JSON.stringify({ protocol: 1, status: error.code === 'ENVIRONMENT_INELIGIBLE' ? 'unmeasured' : 'failed', error: { code: error.code ?? 'ADAPTER_FAILURE', message: error.message } }));
+  process.stdout.write(JSON.stringify({ protocol: 1, status: error.code === 'ENVIRONMENT_INELIGIBLE' || phase !== 'conversion' ? 'unmeasured' : 'failed', error: { code: error.code ?? 'ADAPTER_FAILURE', phase, message: error.message } }));
 }
