@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "suite": {
-    "id": "core-v2",
-    "version": 2,
+    "id": "core-v3",
+    "version": 3,
     "cases": [
       "columns-continuous",
       "columns-balanced",
@@ -21,7 +21,7 @@
   "cases": [
     {
       "id": "columns-continuous",
-      "version": 1,
+      "version": 2,
       "category": "columns",
       "description": "Two columns with continuous section behavior",
       "input": "fixtures/columns-continuous.docx",
@@ -81,7 +81,7 @@
       "assertions": [
         {
           "type": "marker-region",
-          "version": 1,
+          "version": 2,
           "marker": "C01",
           "occurrence": 1,
           "page": "reference",
@@ -90,17 +90,18 @@
             60,
             300,
             720
-          ]
+          ],
+          "tolerancePt": 0.0001
         }
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
+        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
       }
     },
     {
       "id": "columns-balanced",
-      "version": 1,
+      "version": 2,
       "category": "columns",
       "description": "Two columns with balanced ending section behavior",
       "input": "fixtures/columns-balanced.docx",
@@ -168,7 +169,7 @@
       "assertions": [
         {
           "type": "marker-region",
-          "version": 1,
+          "version": 2,
           "marker": "C01",
           "occurrence": 1,
           "page": "reference",
@@ -177,11 +178,12 @@
             60,
             300,
             720
-          ]
+          ],
+          "tolerancePt": 0.0001
         },
         {
           "type": "marker-region",
-          "version": 1,
+          "version": 2,
           "marker": "C07",
           "occurrence": 1,
           "page": "reference",
@@ -190,17 +192,18 @@
             60,
             540,
             720
-          ]
+          ],
+          "tolerancePt": 0.0001
         }
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
+        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
       }
     },
     {
       "id": "columns-break",
-      "version": 1,
+      "version": 2,
       "category": "columns",
       "description": "Two columns with continuous section behavior",
       "input": "fixtures/columns-break.docx",
@@ -260,7 +263,7 @@
       "assertions": [
         {
           "type": "marker-region",
-          "version": 1,
+          "version": 2,
           "marker": "C01",
           "occurrence": 1,
           "page": "reference",
@@ -269,11 +272,12 @@
             60,
             300,
             720
-          ]
+          ],
+          "tolerancePt": 0.0001
         },
         {
           "type": "marker-region",
-          "version": 1,
+          "version": 2,
           "marker": "C07",
           "occurrence": 1,
           "page": "reference",
@@ -282,12 +286,13 @@
             60,
             540,
             720
-          ]
+          ],
+          "tolerancePt": 0.0001
         }
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
+        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
       }
     },
     {
@@ -370,12 +375,12 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
+        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
       }
     },
     {
       "id": "paragraph-heading",
-      "version": 1,
+      "version": 2,
       "category": "paragraphs",
       "description": "Space before a heading at a page start",
       "input": "fixtures/paragraph-heading.docx",
@@ -429,7 +434,7 @@
       "assertions": [
         {
           "type": "marker-region",
-          "version": 1,
+          "version": 2,
           "marker": "HeadingMarker",
           "occurrence": 1,
           "page": 2,
@@ -438,12 +443,13 @@
             60,
             540,
             160
-          ]
+          ],
+          "tolerancePt": 0.0001
         }
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
+        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
       }
     },
     {
@@ -545,12 +551,12 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
+        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
       }
     },
     {
       "id": "notes-footnote",
-      "version": 1,
+      "version": 2,
       "category": "notes",
       "description": "Footnote body and automatic marker",
       "input": "fixtures/notes-footnote.docx",
@@ -608,7 +614,7 @@
       "assertions": [
         {
           "type": "marker-region",
-          "version": 1,
+          "version": 2,
           "marker": "NoteText",
           "occurrence": 1,
           "page": "reference",
@@ -617,12 +623,13 @@
             650,
             552,
             750
-          ]
+          ],
+          "tolerancePt": 0.0001
         }
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
+        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
       }
     },
     {
@@ -692,7 +699,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
+        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
       }
     },
     {
@@ -728,7 +735,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
+        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
       }
     },
     {
@@ -764,7 +771,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
+        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
       }
     },
     {
@@ -826,7 +833,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
+        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
       }
     },
     {
@@ -888,7 +895,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "ee70b226aa470e49366bd3d34dcec68eddfbb0481aa4b17a8ad038f94432b26a"
+        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
       }
     }
   ]

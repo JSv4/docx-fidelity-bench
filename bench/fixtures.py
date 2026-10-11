@@ -91,10 +91,14 @@ def package(path, body, final_section=None, notes=None, image=False):
 def generate():
     cases = []
     def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None):
+        assertions = assertions or []
+        for assertion in assertions:
+            if assertion['type'] == 'marker-region':
+                assertion.update(version=2, tolerancePt=0.0001)
         path = ROOT / 'fixtures' / (case_id + '.docx')
         package(path, body, sect, notes, image)
         inventory = dict(sorted(Counter(' '.join(text).split()).items()))
-        cases.append({'id': case_id, 'version': 1, 'category': category, 'description': description, 'input': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'rights': {'author': 'John Scrudato IV', 'license': 'MIT', 'origin': 'Authored by bench/fixtures.py in this repository', 'assets': 'All text and graphics are generated here; no embedded font files'}, 'profile': {'review': 'final', 'comments': 'hidden'}, 'fonts': [FONT], 'tokens': inventory, 'assertions': assertions or [], 'generator': {'path': 'bench/fixtures.py', 'sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}})
+        cases.append({'id': case_id, 'version': 2 if any(a['type'] == 'marker-region' for a in assertions) else 1, 'category': category, 'description': description, 'input': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'rights': {'author': 'John Scrudato IV', 'license': 'MIT', 'origin': 'Authored by bench/fixtures.py in this repository', 'assets': 'All text and graphics are generated here; no embedded font files'}, 'profile': {'review': 'final', 'comments': 'hidden'}, 'fonts': [FONT], 'tokens': inventory, 'assertions': assertions, 'generator': {'path': 'bench/fixtures.py', 'sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}})
     prose = 'The survey team records the height of each tower before the evening check. The next crew compares the notes and keeps the route open for the morning visit.'
     for case_id, ending in [('columns-continuous', 'continuous'), ('columns-balanced', 'balanced ending'), ('columns-break', 'continuous')]:
         title = case_id.replace('-', ' ').title()
@@ -165,7 +169,7 @@ def generate():
             texts.append(text)
             body += para(runs=(drawing(wrap) if i == 0 else '') + run(text))
         add('images-' + wrap, 'images', wrap.title() + ' wrapping around an authored diamond', texts, body, image=True)
-    registry = {'schema': 1, 'suite': {'id': 'core-v2', 'version': 2, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v3', 'version': 3, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

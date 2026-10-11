@@ -117,7 +117,8 @@ def correctness(case, reference, candidate):
                 expected_page = marker(reference, assertion['marker'])['page'] if assertion['page'] == 'reference' else assertion['page']
                 l, t, r, b = assertion['rect']
                 x, y, xx, yy = a['rect']
-                passed = a['page'] == expected_page and l <= x <= xx <= r and t <= y <= yy <= b
+                tolerance = assertion['tolerancePt'] if assertion['version'] == 2 else 0
+                passed = a['page'] == expected_page and l - tolerance <= x <= xx <= r + tolerance and t - tolerance <= y <= yy <= b + tolerance
             checks.append({'name': 'assertion-' + assertion['type'], 'passed': passed, 'declaration': assertion})
         except ValueError as error:
             checks.append({'name': 'assertion-' + assertion['type'], 'passed': False, 'error': str(error), 'declaration': assertion})

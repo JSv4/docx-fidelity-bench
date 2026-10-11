@@ -140,6 +140,26 @@ class CoverageContract(unittest.TestCase):
 
 
 class PdfContract(unittest.TestCase):
+    def region_check(self, x=100, version=2, page=1):
+        geometry = [{'media': [0, 0, 612, 792], 'crop': [0, 0, 612, 792], 'rotation': 0}]
+        reference = {'geometry': geometry, 'fonts': ['LiberationSerif'], 'tokens': {'Marker': 1}, 'words': [{'text': 'Marker', 'page': 1, 'rect': [100, 200, 130, 212]}]}
+        candidate = copy.deepcopy(reference)
+        candidate['words'][0] = {'text': 'Marker', 'page': page, 'rect': [x, 200, x + 30, 212]}
+        declaration = {'fonts': ['Liberation Serif'], 'tokens': {'Marker': 1}, 'assertions': [{'type': 'marker-region', 'version': version, 'marker': 'Marker', 'occurrence': 1, 'page': 'reference', 'rect': [100, 190, 140, 220], 'tolerancePt': 0.0001}]}
+        return pdf.correctness(declaration, reference, candidate)[-1]['passed']
+
+    def test_region_tolerates_pdf_serialization_rounding(self):
+        self.assertTrue(self.region_check(x=99.999987))
+
+    def test_region_rejects_position_outside_declared_tolerance(self):
+        self.assertFalse(self.region_check(x=99.999))
+
+    def test_region_tolerance_cannot_change_page_membership(self):
+        self.assertFalse(self.region_check(page=2))
+
+    def test_region_version_one_keeps_exact_boundaries(self):
+        self.assertFalse(self.region_check(x=99.999987, version=1))
+
     def position_checks(self, x=100, y=200, page=1):
         geometry = [{'media': [0, 0, 612, 792], 'crop': [0, 0, 612, 792], 'rotation': 0}]
         reference = {'geometry': geometry, 'fonts': ['LiberationSerif'], 'tokens': {'Note': 1}, 'words': [{'text': 'Note', 'page': 1, 'rect': [100, 200, 130, 212]}]}
@@ -213,8 +233,8 @@ class RegistryContract(unittest.TestCase):
 
     def test_next_suite_version_is_extensible(self):
         registry = common.read_json(common.ROOT / 'fixtures/manifest.json')
-        registry['suite']['version'] = 3
-        self.assertEqual(common.validate_registry(registry)['suite']['version'], 3)
+        registry['suite']['version'] = 4
+        self.assertEqual(common.validate_registry(registry)['suite']['version'], 4)
 
     def test_stale_input_digest_is_rejected(self):
         registry = common.read_json(common.ROOT / 'fixtures/manifest.json')

@@ -65,10 +65,11 @@ def validate_registry(registry=None):
         if not case['tokens'] or any(not isinstance(n, int) or n < 1 for n in case['tokens'].values()):
             raise ValueError('Invalid token inventory')
         for assertion in case['assertions']:
-            if assertion.get('version') != 1 or assertion.get('type') not in {'marker-region', 'same-page', 'marker-reference-position'}:
+            versions = {'marker-region': {1, 2}, 'same-page': {1}, 'marker-reference-position': {1}}
+            if assertion.get('version') not in versions.get(assertion.get('type'), set()):
                 raise ValueError('Unknown assertion type or version')
-            if assertion['type'] == 'marker-reference-position':
+            if assertion['type'] == 'marker-reference-position' or (assertion['type'] == 'marker-region' and assertion['version'] == 2):
                 tolerance = assertion.get('tolerancePt')
-                if not isinstance(tolerance, (int, float)) or not math.isfinite(tolerance) or tolerance < 0 or not isinstance(assertion.get('marker'), str):
-                    raise ValueError('Invalid marker reference position declaration')
+                if isinstance(tolerance, bool) or not isinstance(tolerance, (int, float)) or not math.isfinite(tolerance) or tolerance < 0 or not isinstance(assertion.get('marker'), str):
+                    raise ValueError('Invalid marker tolerance declaration')
     return registry
