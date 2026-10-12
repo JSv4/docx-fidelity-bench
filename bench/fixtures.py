@@ -68,9 +68,12 @@ def zip_write(path, parts):
             archive.writestr(item, payload.encode() if isinstance(payload, str) else payload)
 
 
-def package(path, body, final_section=None, notes=None, image=False):
+def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None):
     namespaces = f'xmlns:w="{W}" xmlns:r="{R}" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"'
+    namespaces += namespaces_extra
     styles = f'''<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/><w:sz w:val="22"/><w:color w:val="000000"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="120" w:line="276" w:lineRule="auto"/><w:widowControl/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style><w:style w:type="paragraph" w:styleId="Title"><w:name w:val="Title"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:after="240"/></w:pPr><w:rPr><w:b/><w:sz w:val="32"/></w:rPr></w:style></w:styles>'''
+    if styles_xml is not None:
+        styles = styles_xml
     relations = [('rStyles', 'styles', 'styles.xml'), ('rSettings', 'settings', 'settings.xml')]
     overrides = [('document', 'document.main'), ('styles', 'styles'), ('settings', 'settings')]
     parts = {'word/document.xml': f'<w:document {namespaces}><w:body>{body}{final_section or section()}</w:body></w:document>', 'word/styles.xml': styles, 'word/settings.xml': f'<w:settings xmlns:w="{W}"><w:footnotePr><w:numFmt w:val="decimal"/></w:footnotePr><w:endnotePr><w:numFmt w:val="lowerRoman"/></w:endnotePr><w:compat><w:compatSetting w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="15"/></w:compat></w:settings>'}
@@ -90,13 +93,13 @@ def package(path, body, final_section=None, notes=None, image=False):
 
 def generate():
     cases = []
-    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None):
+    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None):
         assertions = assertions or []
         for assertion in assertions:
             if assertion['type'] == 'marker-region':
                 assertion.update(version=2, tolerancePt=0.0001)
         path = ROOT / 'fixtures' / (case_id + '.docx')
-        package(path, body, sect, notes, image)
+        package(path, body, sect, notes, image, namespaces_extra, styles_xml)
         inventory = dict(sorted(Counter(' '.join(text).split()).items()))
         cases.append({'id': case_id, 'version': 2 if any(a['type'] == 'marker-region' for a in assertions) else 1, 'category': category, 'description': description, 'input': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'rights': {'author': 'John Scrudato IV', 'license': 'MIT', 'origin': 'Authored by bench/fixtures.py in this repository', 'assets': 'All text and graphics are generated here; no embedded font files'}, 'profile': {'review': 'final', 'comments': 'hidden'}, 'fonts': [FONT], 'tokens': inventory, 'assertions': assertions, 'generator': {'path': 'bench/fixtures.py', 'sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}})
     prose = 'The survey team records the height of each tower before the evening check. The next crew compares the notes and keeps the route open for the morning visit.'
@@ -169,7 +172,40 @@ def generate():
             texts.append(text)
             body += para(runs=(drawing(wrap) if i == 0 else '') + run(text))
         add('images-' + wrap, 'images', wrap.title() + ' wrapping around an authored diamond', texts, body, image=True)
-    registry = {'schema': 1, 'suite': {'id': 'core-v3', 'version': 3, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Independent textbox pair for Docxodus #1076. No renderer fixture/helper is imported.
+    # The body and following line remain away from the page-positioned textbox.
+    texts = ['Drawing register begins.', 'TextboxLabel Cedar sample tray.',
+             'FollowingMarker The tray is ready.']
+    textbox_styles = f'''<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>
+      <w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/>
+      <w:color w:val="000000"/><w:sz w:val="22"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>
+      <w:widowControl/><w:spacing w:after="120" w:line="276" w:lineRule="auto"/>
+      </w:pPr></w:pPrDefault></w:docDefaults>
+      <w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>'''
+    for relative_zero in (False, True):
+        relative = ('<wp14:sizeRelH relativeFrom="margin"><wp14:pctWidth>0</wp14:pctWidth></wp14:sizeRelH>'
+                    '<wp14:sizeRelV relativeFrom="margin"><wp14:pctHeight>0</wp14:pctHeight></wp14:sizeRelV>') if relative_zero else ''
+        box = f'''<w:r><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0"
+          simplePos="0" relativeHeight="1" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1">
+          <wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="page"><wp:posOffset>1828800</wp:posOffset></wp:positionH>
+          <wp:positionV relativeFrom="page"><wp:posOffset>1828800</wp:posOffset></wp:positionV>
+          <wp:extent cx="2743200" cy="914400"/><wp:wrapNone/><wp:docPr id="1" name="Authored tray label"/>
+          <wp:cNvGraphicFramePr/><a:graphic><a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">
+          <wps:wsp><wps:cNvSpPr txBox="1"/><wps:spPr><a:xfrm><a:off x="0" y="0"/>
+          <a:ext cx="2743200" cy="914400"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:noFill/>
+          <a:ln w="12700"><a:solidFill><a:srgbClr val="000000"/></a:solidFill></a:ln></wps:spPr>
+          <wps:txbx><w:txbxContent>{para(texts[1])}</w:txbxContent></wps:txbx>
+          <wps:bodyPr lIns="0" tIns="0" rIns="0" bIns="0"><a:noAutofit/></wps:bodyPr></wps:wsp>
+          </a:graphicData></a:graphic>{relative}</wp:anchor></w:drawing></w:r>'''
+        cid = 'drawings-textbox-zero-relative' if relative_zero else 'drawings-textbox-absolute'
+        add(cid, 'images', 'Page-positioned 216 by 72pt textbox with ' + ('zero relative dimensions' if relative_zero else 'absolute extent'),
+            texts, para(runs=run(texts[0]) + box) + para(texts[2]),
+            styles_xml=textbox_styles,
+            namespaces_extra=' xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing"',
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'TextboxLabel', 'occurrence': 1,
+                         'page': 1, 'rect': [144, 144, 360, 216]},
+                        {'type': 'same-page', 'version': 1, 'markers': ['TextboxLabel', 'FollowingMarker']}])
+    registry = {'schema': 1, 'suite': {'id': 'core-v4', 'version': 4, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

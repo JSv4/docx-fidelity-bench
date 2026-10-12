@@ -1,10 +1,10 @@
 # DOCX fidelity bench
 
-An independent MIT benchmark of delivered PDF rendering. The harness and all 12 input documents are authored in this repository. It measures layout, visible content, physical pages, fonts, and declared feature assertions. It produces portable HTML evidence and JSON measurements.
+An independent MIT benchmark of delivered PDF rendering. The harness and all 14 input documents are authored in this repository. It measures layout, visible content, physical pages, fonts, and declared feature assertions. It produces portable HTML evidence and JSON measurements.
 
-The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word Online, OneDrive, and desktop Word captures can be registered separately; **Word fidelity is not measured until those references exist**. The current suite is `core-v3`, with report-only renderer CI. Close-match thresholds have not been calibrated as release gates.
+The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word Online, OneDrive, and desktop Word captures can be registered separately; **Word fidelity is not measured until those references exist**. The current suite is `core-v4`, with report-only renderer CI. Close-match thresholds have not been calibrated as release gates.
 
-The [2026-10-11 results](RESULTS.md) measure remote Docxodus main `6e0e6ca` on all 12 cases: 57.92/100, with 9/12 mandatory passes and 1/12 close matches. Repeated LibreOffice exports score 100/100. Full evidence is retained by the linked CI run.
+The [2026-10-11 results](RESULTS.md) measure remote Docxodus main `6e0e6ca` on the 12-case `core-v3` suite: 57.92/100, with 9/12 mandatory passes and 1/12 close matches. Repeated LibreOffice exports score 100/100. Full evidence is retained by the linked CI run. `core-v4` adds an absolute textbox control and a zero-relative-dimension reproduction for [Docxodus #1076](https://github.com/JSv4/Docxodus/issues/1076). The prior 12 DOCX inputs are byte-identical; new reference registration and a full `core-v4` score remain pending. Historical `core-v3` scores cannot be compared directly with the expanded suite.
 
 ## What is included
 
@@ -14,7 +14,7 @@ The [2026-10-11 results](RESULTS.md) measure remote Docxodus main `6e0e6ca` on a
 | Paragraphs | Authored agreement, heading at page start, heading kept with following paragraph |
 | Notes | Footnote placement, lower-Roman endnote placement |
 | Tables | Nested table, inherited cell margins |
-| Images | Square and tight wrapping around an authored diamond |
+| Images | Square and tight wrapping around an authored diamond; absolute and zero-relative textbox dimensions |
 
 Each fixture has its own hash, generator identity, rights record, complete visible token inventory, and optional placement assertions in [the manifest](fixtures/manifest.json). Regenerating the corpus must produce identical bytes. See [authorship and rights](RIGHTS.md).
 

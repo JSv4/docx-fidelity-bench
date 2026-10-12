@@ -217,7 +217,33 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 12)
+        self.assertEqual(len(common.validate_registry()['cases']), 14)
+
+    def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        registry = common.validate_registry()
+        records = {c['id']: c for c in registry['cases']}
+        pair = [records['drawings-textbox-' + suffix] for suffix in ('absolute', 'zero-relative')]
+        wp = '{http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing}'
+        wp14 = '{http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing}'
+        with ZipFile(common.ROOT / pair[0]['input']) as control, ZipFile(common.ROOT / pair[1]['input']) as zero:
+            self.assertEqual(control.namelist(), zero.namelist())
+            for name in control.namelist():
+                if name != 'word/document.xml':
+                    self.assertEqual(control.read(name), zero.read(name))
+            original = ET.fromstring(control.read('word/document.xml'))
+            actual = ET.fromstring(zero.read('word/document.xml'))
+            anchor = actual.find('.//' + wp + 'anchor')
+            self.assertEqual(anchor.find(wp + 'extent').attrib, {'cx': '2743200', 'cy': '914400'})
+            for axis, percent in [('H', 'Width'), ('V', 'Height')]:
+                relative = anchor.find(wp14 + 'sizeRel' + axis)
+                self.assertEqual(relative.find(wp14 + 'pct' + percent).text, '0')
+                anchor.remove(relative)
+            self.assertEqual(ET.tostring(original), ET.tostring(actual))
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
+        self.assertEqual(registry['suite']['id'], 'core-v4')
 
     def test_unknown_assertion_is_rejected(self):
         registry = common.read_json(common.ROOT / 'fixtures/manifest.json')
