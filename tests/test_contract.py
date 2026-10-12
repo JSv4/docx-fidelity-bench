@@ -217,7 +217,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 24)
+        self.assertEqual(len(common.validate_registry()['cases']), 28)
 
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
@@ -243,7 +243,44 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v7')
+        self.assertEqual(registry['suite']['id'], 'core-v8')
+
+    def test_line_break_pairs_preserve_line_runs_properties_and_package_content(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        for variant, count in [('plain', 90), ('blanks', 92)]:
+            pair = [records[f'paragraphs-line-breaks-{variant}-{kind}'] for kind in ('control', 'breaks')]
+            with ZipFile(common.ROOT / pair[0]['input']) as control, ZipFile(common.ROOT / pair[1]['input']) as breaks:
+                self.assertEqual(control.namelist(), breaks.namelist())
+                for name in control.namelist():
+                    if name != 'word/document.xml':
+                        self.assertEqual(control.read(name), breaks.read(name))
+                original = ET.fromstring(control.read('word/document.xml'))
+                actual = ET.fromstring(breaks.read('word/document.xml'))
+                paragraphs = original.findall('.//' + w + 'p')
+                paragraph = actual.find('.//' + w + 'p')
+                self.assertEqual(len(paragraphs), count)
+                self.assertEqual(len(actual.findall('.//' + w + 'p')), 1)
+                self.assertEqual(len(actual.findall('.//' + w + 'br')), count - 1)
+                self.assertTrue(all(not br.attrib for br in actual.iter(w + 'br')))
+                reconstructed, block = [], []
+                for child in list(paragraph)[1:]:
+                    if child.find(w + 'br') is not None:
+                        reconstructed.append(block)
+                        block = []
+                    else:
+                        block.append(ET.tostring(child))
+                reconstructed.append(block)
+                self.assertEqual(reconstructed, [[ET.tostring(r) for r in list(p)[1:]] for p in paragraphs])
+                properties = paragraph.find(w + 'pPr')
+                self.assertEqual(properties.find(w + 'widowControl').get(w + 'val'), '0')
+                self.assertEqual(properties.find(w + 'spacing').get(w + 'line'), '400')
+                self.assertTrue(all(ET.tostring(p.find(w + 'pPr')) == ET.tostring(properties) for p in paragraphs))
+                self.assertEqual(ET.tostring(original.find('.//' + w + 'sectPr')), ET.tostring(actual.find('.//' + w + 'sectPr')))
+            self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+            self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
 
     def test_vertical_merge_pairs_preserve_all_other_package_content(self):
         import xml.etree.ElementTree as ET

@@ -286,7 +286,29 @@ def generate():
                                    'markers': [f'Entry{n:02d}' for n in range(first, first + span)]})
             add(cid, 'tables', 'Twenty-row ledger with ' + ('an intact' if merged else 'no') + ' vertical merge at ' + location,
                 texts, body, styles_xml=ledger_styles, assertions=assertions)
-    registry = {'schema': 1, 'suite': {'id': 'core-v7', 'version': 7, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Original archive register for Docxodus #1080. Ninety short lines occupy
+    # three pages. The control uses separate paragraphs; the reproduction uses
+    # one paragraph with text-wrapping breaks. Blank variants also test consecutive
+    # breaks near page boundaries. No product fixture or helper is imported.
+    line_properties = '<w:widowControl w:val="0"/><w:spacing w:before="0" w:after="0" w:line="400" w:lineRule="exact"/>'
+    for blanks in (False, True):
+        texts = [f'Record{index:03d} Elm archive checked.' for index in range(1, 91)]
+        blocks = []
+        for index, text in enumerate(texts, 1):
+            blocks.append(run(text))
+            if blanks and index in (32, 64):
+                blocks.append('')
+        for hard_breaks in (False, True):
+            body = para(props=line_properties, runs='<w:r><w:br/></w:r>'.join(blocks)) if hard_breaks else ''.join(
+                para(props=line_properties, runs=block) for block in blocks)
+            cid = 'paragraphs-line-breaks-' + ('blanks-' if blanks else 'plain-') + ('breaks' if hard_breaks else 'control')
+            add(cid, 'paragraphs', 'Three-page archive register using ' + ('explicit line breaks' if hard_breaks else 'individual paragraphs')
+                + (' with two empty lines' if blanks else ''), texts, body, styles_xml=ledger_styles,
+                assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'Record001', 'occurrence': 1,
+                             'page': 1, 'rect': [72, 72, 540, 105]},
+                            {'type': 'marker-region', 'version': 2, 'marker': 'Record090', 'occurrence': 1,
+                             'page': 3, 'rect': [72, 60, 540, 720]}])
+    registry = {'schema': 1, 'suite': {'id': 'core-v8', 'version': 8, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

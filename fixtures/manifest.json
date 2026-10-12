@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "suite": {
-    "id": "core-v7",
-    "version": 7,
+    "id": "core-v8",
+    "version": 8,
     "cases": [
       "columns-continuous",
       "columns-balanced",
@@ -27,7 +27,11 @@
       "tables-vmerge-early-control",
       "tables-vmerge-early-merged",
       "tables-vmerge-boundary-control",
-      "tables-vmerge-boundary-merged"
+      "tables-vmerge-boundary-merged",
+      "paragraphs-line-breaks-plain-control",
+      "paragraphs-line-breaks-plain-breaks",
+      "paragraphs-line-breaks-blanks-control",
+      "paragraphs-line-breaks-blanks-breaks"
     ]
   },
   "cases": [
@@ -108,7 +112,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -210,7 +214,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -304,7 +308,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -387,7 +391,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -461,7 +465,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -563,7 +567,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -641,7 +645,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -711,7 +715,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -747,7 +751,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -783,7 +787,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -845,7 +849,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -907,7 +911,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -970,7 +974,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -1030,7 +1034,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -1093,7 +1097,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -1146,7 +1150,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -1199,7 +1203,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -1243,7 +1247,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -1287,7 +1291,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -1342,7 +1346,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -1428,7 +1432,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -1522,7 +1526,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -1607,7 +1611,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     },
     {
@@ -1701,7 +1705,607 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
+      }
+    },
+    {
+      "id": "paragraphs-line-breaks-plain-control",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "Three-page archive register using individual paragraphs",
+      "input": "fixtures/paragraphs-line-breaks-plain-control.docx",
+      "sha256": "a69c3e983a3ecb43a75067b2ba3f822ea9bd71879b441cf0dde5be32f8338ba7",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Elm": 90,
+        "Record001": 1,
+        "Record002": 1,
+        "Record003": 1,
+        "Record004": 1,
+        "Record005": 1,
+        "Record006": 1,
+        "Record007": 1,
+        "Record008": 1,
+        "Record009": 1,
+        "Record010": 1,
+        "Record011": 1,
+        "Record012": 1,
+        "Record013": 1,
+        "Record014": 1,
+        "Record015": 1,
+        "Record016": 1,
+        "Record017": 1,
+        "Record018": 1,
+        "Record019": 1,
+        "Record020": 1,
+        "Record021": 1,
+        "Record022": 1,
+        "Record023": 1,
+        "Record024": 1,
+        "Record025": 1,
+        "Record026": 1,
+        "Record027": 1,
+        "Record028": 1,
+        "Record029": 1,
+        "Record030": 1,
+        "Record031": 1,
+        "Record032": 1,
+        "Record033": 1,
+        "Record034": 1,
+        "Record035": 1,
+        "Record036": 1,
+        "Record037": 1,
+        "Record038": 1,
+        "Record039": 1,
+        "Record040": 1,
+        "Record041": 1,
+        "Record042": 1,
+        "Record043": 1,
+        "Record044": 1,
+        "Record045": 1,
+        "Record046": 1,
+        "Record047": 1,
+        "Record048": 1,
+        "Record049": 1,
+        "Record050": 1,
+        "Record051": 1,
+        "Record052": 1,
+        "Record053": 1,
+        "Record054": 1,
+        "Record055": 1,
+        "Record056": 1,
+        "Record057": 1,
+        "Record058": 1,
+        "Record059": 1,
+        "Record060": 1,
+        "Record061": 1,
+        "Record062": 1,
+        "Record063": 1,
+        "Record064": 1,
+        "Record065": 1,
+        "Record066": 1,
+        "Record067": 1,
+        "Record068": 1,
+        "Record069": 1,
+        "Record070": 1,
+        "Record071": 1,
+        "Record072": 1,
+        "Record073": 1,
+        "Record074": 1,
+        "Record075": 1,
+        "Record076": 1,
+        "Record077": 1,
+        "Record078": 1,
+        "Record079": 1,
+        "Record080": 1,
+        "Record081": 1,
+        "Record082": 1,
+        "Record083": 1,
+        "Record084": 1,
+        "Record085": 1,
+        "Record086": 1,
+        "Record087": 1,
+        "Record088": 1,
+        "Record089": 1,
+        "Record090": 1,
+        "archive": 90,
+        "checked.": 90
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "Record001",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            72,
+            72,
+            540,
+            105
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "Record090",
+          "occurrence": 1,
+          "page": 3,
+          "rect": [
+            72,
+            60,
+            540,
+            720
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
+      }
+    },
+    {
+      "id": "paragraphs-line-breaks-plain-breaks",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "Three-page archive register using explicit line breaks",
+      "input": "fixtures/paragraphs-line-breaks-plain-breaks.docx",
+      "sha256": "fabe03a4ebdfa14a38f669c101185b2d1c18f2c49b1002dd53756d36d4321e42",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Elm": 90,
+        "Record001": 1,
+        "Record002": 1,
+        "Record003": 1,
+        "Record004": 1,
+        "Record005": 1,
+        "Record006": 1,
+        "Record007": 1,
+        "Record008": 1,
+        "Record009": 1,
+        "Record010": 1,
+        "Record011": 1,
+        "Record012": 1,
+        "Record013": 1,
+        "Record014": 1,
+        "Record015": 1,
+        "Record016": 1,
+        "Record017": 1,
+        "Record018": 1,
+        "Record019": 1,
+        "Record020": 1,
+        "Record021": 1,
+        "Record022": 1,
+        "Record023": 1,
+        "Record024": 1,
+        "Record025": 1,
+        "Record026": 1,
+        "Record027": 1,
+        "Record028": 1,
+        "Record029": 1,
+        "Record030": 1,
+        "Record031": 1,
+        "Record032": 1,
+        "Record033": 1,
+        "Record034": 1,
+        "Record035": 1,
+        "Record036": 1,
+        "Record037": 1,
+        "Record038": 1,
+        "Record039": 1,
+        "Record040": 1,
+        "Record041": 1,
+        "Record042": 1,
+        "Record043": 1,
+        "Record044": 1,
+        "Record045": 1,
+        "Record046": 1,
+        "Record047": 1,
+        "Record048": 1,
+        "Record049": 1,
+        "Record050": 1,
+        "Record051": 1,
+        "Record052": 1,
+        "Record053": 1,
+        "Record054": 1,
+        "Record055": 1,
+        "Record056": 1,
+        "Record057": 1,
+        "Record058": 1,
+        "Record059": 1,
+        "Record060": 1,
+        "Record061": 1,
+        "Record062": 1,
+        "Record063": 1,
+        "Record064": 1,
+        "Record065": 1,
+        "Record066": 1,
+        "Record067": 1,
+        "Record068": 1,
+        "Record069": 1,
+        "Record070": 1,
+        "Record071": 1,
+        "Record072": 1,
+        "Record073": 1,
+        "Record074": 1,
+        "Record075": 1,
+        "Record076": 1,
+        "Record077": 1,
+        "Record078": 1,
+        "Record079": 1,
+        "Record080": 1,
+        "Record081": 1,
+        "Record082": 1,
+        "Record083": 1,
+        "Record084": 1,
+        "Record085": 1,
+        "Record086": 1,
+        "Record087": 1,
+        "Record088": 1,
+        "Record089": 1,
+        "Record090": 1,
+        "archive": 90,
+        "checked.": 90
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "Record001",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            72,
+            72,
+            540,
+            105
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "Record090",
+          "occurrence": 1,
+          "page": 3,
+          "rect": [
+            72,
+            60,
+            540,
+            720
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
+      }
+    },
+    {
+      "id": "paragraphs-line-breaks-blanks-control",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "Three-page archive register using individual paragraphs with two empty lines",
+      "input": "fixtures/paragraphs-line-breaks-blanks-control.docx",
+      "sha256": "942ab73197db4c502b170026317d133b82923c74b8c55e001e77e1cea573e9cf",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Elm": 90,
+        "Record001": 1,
+        "Record002": 1,
+        "Record003": 1,
+        "Record004": 1,
+        "Record005": 1,
+        "Record006": 1,
+        "Record007": 1,
+        "Record008": 1,
+        "Record009": 1,
+        "Record010": 1,
+        "Record011": 1,
+        "Record012": 1,
+        "Record013": 1,
+        "Record014": 1,
+        "Record015": 1,
+        "Record016": 1,
+        "Record017": 1,
+        "Record018": 1,
+        "Record019": 1,
+        "Record020": 1,
+        "Record021": 1,
+        "Record022": 1,
+        "Record023": 1,
+        "Record024": 1,
+        "Record025": 1,
+        "Record026": 1,
+        "Record027": 1,
+        "Record028": 1,
+        "Record029": 1,
+        "Record030": 1,
+        "Record031": 1,
+        "Record032": 1,
+        "Record033": 1,
+        "Record034": 1,
+        "Record035": 1,
+        "Record036": 1,
+        "Record037": 1,
+        "Record038": 1,
+        "Record039": 1,
+        "Record040": 1,
+        "Record041": 1,
+        "Record042": 1,
+        "Record043": 1,
+        "Record044": 1,
+        "Record045": 1,
+        "Record046": 1,
+        "Record047": 1,
+        "Record048": 1,
+        "Record049": 1,
+        "Record050": 1,
+        "Record051": 1,
+        "Record052": 1,
+        "Record053": 1,
+        "Record054": 1,
+        "Record055": 1,
+        "Record056": 1,
+        "Record057": 1,
+        "Record058": 1,
+        "Record059": 1,
+        "Record060": 1,
+        "Record061": 1,
+        "Record062": 1,
+        "Record063": 1,
+        "Record064": 1,
+        "Record065": 1,
+        "Record066": 1,
+        "Record067": 1,
+        "Record068": 1,
+        "Record069": 1,
+        "Record070": 1,
+        "Record071": 1,
+        "Record072": 1,
+        "Record073": 1,
+        "Record074": 1,
+        "Record075": 1,
+        "Record076": 1,
+        "Record077": 1,
+        "Record078": 1,
+        "Record079": 1,
+        "Record080": 1,
+        "Record081": 1,
+        "Record082": 1,
+        "Record083": 1,
+        "Record084": 1,
+        "Record085": 1,
+        "Record086": 1,
+        "Record087": 1,
+        "Record088": 1,
+        "Record089": 1,
+        "Record090": 1,
+        "archive": 90,
+        "checked.": 90
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "Record001",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            72,
+            72,
+            540,
+            105
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "Record090",
+          "occurrence": 1,
+          "page": 3,
+          "rect": [
+            72,
+            60,
+            540,
+            720
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
+      }
+    },
+    {
+      "id": "paragraphs-line-breaks-blanks-breaks",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "Three-page archive register using explicit line breaks with two empty lines",
+      "input": "fixtures/paragraphs-line-breaks-blanks-breaks.docx",
+      "sha256": "2667c1a128ba867648fdedd03b65a394580553ea631a47adb866bf5a3a340193",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Elm": 90,
+        "Record001": 1,
+        "Record002": 1,
+        "Record003": 1,
+        "Record004": 1,
+        "Record005": 1,
+        "Record006": 1,
+        "Record007": 1,
+        "Record008": 1,
+        "Record009": 1,
+        "Record010": 1,
+        "Record011": 1,
+        "Record012": 1,
+        "Record013": 1,
+        "Record014": 1,
+        "Record015": 1,
+        "Record016": 1,
+        "Record017": 1,
+        "Record018": 1,
+        "Record019": 1,
+        "Record020": 1,
+        "Record021": 1,
+        "Record022": 1,
+        "Record023": 1,
+        "Record024": 1,
+        "Record025": 1,
+        "Record026": 1,
+        "Record027": 1,
+        "Record028": 1,
+        "Record029": 1,
+        "Record030": 1,
+        "Record031": 1,
+        "Record032": 1,
+        "Record033": 1,
+        "Record034": 1,
+        "Record035": 1,
+        "Record036": 1,
+        "Record037": 1,
+        "Record038": 1,
+        "Record039": 1,
+        "Record040": 1,
+        "Record041": 1,
+        "Record042": 1,
+        "Record043": 1,
+        "Record044": 1,
+        "Record045": 1,
+        "Record046": 1,
+        "Record047": 1,
+        "Record048": 1,
+        "Record049": 1,
+        "Record050": 1,
+        "Record051": 1,
+        "Record052": 1,
+        "Record053": 1,
+        "Record054": 1,
+        "Record055": 1,
+        "Record056": 1,
+        "Record057": 1,
+        "Record058": 1,
+        "Record059": 1,
+        "Record060": 1,
+        "Record061": 1,
+        "Record062": 1,
+        "Record063": 1,
+        "Record064": 1,
+        "Record065": 1,
+        "Record066": 1,
+        "Record067": 1,
+        "Record068": 1,
+        "Record069": 1,
+        "Record070": 1,
+        "Record071": 1,
+        "Record072": 1,
+        "Record073": 1,
+        "Record074": 1,
+        "Record075": 1,
+        "Record076": 1,
+        "Record077": 1,
+        "Record078": 1,
+        "Record079": 1,
+        "Record080": 1,
+        "Record081": 1,
+        "Record082": 1,
+        "Record083": 1,
+        "Record084": 1,
+        "Record085": 1,
+        "Record086": 1,
+        "Record087": 1,
+        "Record088": 1,
+        "Record089": 1,
+        "Record090": 1,
+        "archive": 90,
+        "checked.": 90
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "Record001",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            72,
+            72,
+            540,
+            105
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "Record090",
+          "occurrence": 1,
+          "page": 3,
+          "rect": [
+            72,
+            60,
+            540,
+            720
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "dd97023583a6002dc71d59633220a3a281e2e832399201c239ecac787f9a030b"
       }
     }
   ]
