@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "suite": {
-    "id": "core-v3",
-    "version": 3,
+    "id": "core-v4",
+    "version": 4,
     "cases": [
       "columns-continuous",
       "columns-balanced",
@@ -15,7 +15,9 @@
       "tables-nested",
       "tables-margins",
       "images-square",
-      "images-tight"
+      "images-tight",
+      "drawings-textbox-absolute",
+      "drawings-textbox-zero-relative"
     ]
   },
   "cases": [
@@ -96,7 +98,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
+        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
       }
     },
     {
@@ -198,7 +200,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
+        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
       }
     },
     {
@@ -292,7 +294,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
+        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
       }
     },
     {
@@ -375,7 +377,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
+        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
       }
     },
     {
@@ -449,7 +451,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
+        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
       }
     },
     {
@@ -551,7 +553,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
+        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
       }
     },
     {
@@ -629,7 +631,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
+        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
       }
     },
     {
@@ -699,7 +701,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
+        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
       }
     },
     {
@@ -735,7 +737,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
+        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
       }
     },
     {
@@ -771,7 +773,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
+        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
       }
     },
     {
@@ -833,7 +835,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
+        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
       }
     },
     {
@@ -895,7 +897,133 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3d777c1b17c3391cbfcc3e92b716bc11b9210b177f4de1ea71f9c6aa94da96d9"
+        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
+      }
+    },
+    {
+      "id": "drawings-textbox-absolute",
+      "version": 2,
+      "category": "images",
+      "description": "Page-positioned 216 by 72pt textbox with absolute extent",
+      "input": "fixtures/drawings-textbox-absolute.docx",
+      "sha256": "377f42e8d25d76c644700e9cdebf97c0fe663934c8fbf74e1efd26b459f9512f",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Cedar": 1,
+        "Drawing": 1,
+        "FollowingMarker": 1,
+        "TextboxLabel": 1,
+        "The": 1,
+        "begins.": 1,
+        "is": 1,
+        "ready.": 1,
+        "register": 1,
+        "sample": 1,
+        "tray": 1,
+        "tray.": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "TextboxLabel",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            144,
+            144,
+            360,
+            216
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "same-page",
+          "version": 1,
+          "markers": [
+            "TextboxLabel",
+            "FollowingMarker"
+          ]
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
+      }
+    },
+    {
+      "id": "drawings-textbox-zero-relative",
+      "version": 2,
+      "category": "images",
+      "description": "Page-positioned 216 by 72pt textbox with zero relative dimensions",
+      "input": "fixtures/drawings-textbox-zero-relative.docx",
+      "sha256": "9b713a91e7a80794f84712af04e79d4f627a24b5963dd5163102c4eb9508b139",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Cedar": 1,
+        "Drawing": 1,
+        "FollowingMarker": 1,
+        "TextboxLabel": 1,
+        "The": 1,
+        "begins.": 1,
+        "is": 1,
+        "ready.": 1,
+        "register": 1,
+        "sample": 1,
+        "tray": 1,
+        "tray.": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "TextboxLabel",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            144,
+            144,
+            360,
+            216
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "same-page",
+          "version": 1,
+          "markers": [
+            "TextboxLabel",
+            "FollowingMarker"
+          ]
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
       }
     }
   ]
