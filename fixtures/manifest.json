@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "suite": {
-    "id": "core-v4",
-    "version": 4,
+    "id": "core-v5",
+    "version": 5,
     "cases": [
       "columns-continuous",
       "columns-balanced",
@@ -17,7 +17,9 @@
       "images-square",
       "images-tight",
       "drawings-textbox-absolute",
-      "drawings-textbox-zero-relative"
+      "drawings-textbox-zero-relative",
+      "paragraphs-header-empty",
+      "paragraphs-header-hidden"
     ]
   },
   "cases": [
@@ -98,7 +100,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
+        "sha256": "a437b9f44fd159cf65ebe81589246de62c9f480af3929b45c4ec16fd213c9299"
       }
     },
     {
@@ -200,7 +202,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
+        "sha256": "a437b9f44fd159cf65ebe81589246de62c9f480af3929b45c4ec16fd213c9299"
       }
     },
     {
@@ -294,7 +296,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
+        "sha256": "a437b9f44fd159cf65ebe81589246de62c9f480af3929b45c4ec16fd213c9299"
       }
     },
     {
@@ -377,7 +379,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
+        "sha256": "a437b9f44fd159cf65ebe81589246de62c9f480af3929b45c4ec16fd213c9299"
       }
     },
     {
@@ -451,7 +453,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
+        "sha256": "a437b9f44fd159cf65ebe81589246de62c9f480af3929b45c4ec16fd213c9299"
       }
     },
     {
@@ -553,7 +555,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
+        "sha256": "a437b9f44fd159cf65ebe81589246de62c9f480af3929b45c4ec16fd213c9299"
       }
     },
     {
@@ -631,7 +633,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
+        "sha256": "a437b9f44fd159cf65ebe81589246de62c9f480af3929b45c4ec16fd213c9299"
       }
     },
     {
@@ -701,7 +703,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
+        "sha256": "a437b9f44fd159cf65ebe81589246de62c9f480af3929b45c4ec16fd213c9299"
       }
     },
     {
@@ -737,7 +739,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
+        "sha256": "a437b9f44fd159cf65ebe81589246de62c9f480af3929b45c4ec16fd213c9299"
       }
     },
     {
@@ -773,7 +775,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
+        "sha256": "a437b9f44fd159cf65ebe81589246de62c9f480af3929b45c4ec16fd213c9299"
       }
     },
     {
@@ -835,7 +837,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
+        "sha256": "a437b9f44fd159cf65ebe81589246de62c9f480af3929b45c4ec16fd213c9299"
       }
     },
     {
@@ -897,7 +899,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
+        "sha256": "a437b9f44fd159cf65ebe81589246de62c9f480af3929b45c4ec16fd213c9299"
       }
     },
     {
@@ -960,7 +962,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
+        "sha256": "a437b9f44fd159cf65ebe81589246de62c9f480af3929b45c4ec16fd213c9299"
       }
     },
     {
@@ -1023,7 +1025,113 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "8262db012267648ed9af47e0408b7106ffc0943d549677b48a18be18634e0bef"
+        "sha256": "a437b9f44fd159cf65ebe81589246de62c9f480af3929b45c4ec16fd213c9299"
+      }
+    },
+    {
+      "id": "paragraphs-header-empty",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "Header with empty first paragraph and visible following line",
+      "input": "fixtures/paragraphs-header-empty.docx",
+      "sha256": "01d0b729406ffea62592e408aea0317fb7781379cf20f1e58c9ef93020a7ab68",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "BodyMarker": 1,
+        "HeaderMarker": 1,
+        "Night": 1,
+        "The": 1,
+        "archive": 1,
+        "cedar": 1,
+        "drawer": 1,
+        "is": 1,
+        "ready.": 1,
+        "register.": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "HeaderMarker",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            72,
+            45,
+            540,
+            80
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "a437b9f44fd159cf65ebe81589246de62c9f480af3929b45c4ec16fd213c9299"
+      }
+    },
+    {
+      "id": "paragraphs-header-hidden",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "Header with hidden-only first paragraph and visible following line",
+      "input": "fixtures/paragraphs-header-hidden.docx",
+      "sha256": "5283fe2c0733febe8cfde45ff4afb44d7b04c3db66405027577204d2928ba97d",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "BodyMarker": 1,
+        "HeaderMarker": 1,
+        "Night": 1,
+        "The": 1,
+        "archive": 1,
+        "cedar": 1,
+        "drawer": 1,
+        "is": 1,
+        "ready.": 1,
+        "register.": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "HeaderMarker",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            72,
+            45,
+            540,
+            80
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "a437b9f44fd159cf65ebe81589246de62c9f480af3929b45c4ec16fd213c9299"
       }
     }
   ]

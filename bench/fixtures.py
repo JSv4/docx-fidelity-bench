@@ -68,7 +68,7 @@ def zip_write(path, parts):
             archive.writestr(item, payload.encode() if isinstance(payload, str) else payload)
 
 
-def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None):
+def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None, story=None):
     namespaces = f'xmlns:w="{W}" xmlns:r="{R}" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"'
     namespaces += namespaces_extra
     styles = f'''<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/><w:sz w:val="22"/><w:color w:val="000000"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="120" w:line="276" w:lineRule="auto"/><w:widowControl/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style><w:style w:type="paragraph" w:styleId="Title"><w:name w:val="Title"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:after="240"/></w:pPr><w:rPr><w:b/><w:sz w:val="32"/></w:rPr></w:style></w:styles>'''
@@ -77,6 +77,12 @@ def package(path, body, final_section=None, notes=None, image=False, namespaces_
     relations = [('rStyles', 'styles', 'styles.xml'), ('rSettings', 'settings', 'settings.xml')]
     overrides = [('document', 'document.main'), ('styles', 'styles'), ('settings', 'settings')]
     parts = {'word/document.xml': f'<w:document {namespaces}><w:body>{body}{final_section or section()}</w:body></w:document>', 'word/styles.xml': styles, 'word/settings.xml': f'<w:settings xmlns:w="{W}"><w:footnotePr><w:numFmt w:val="decimal"/></w:footnotePr><w:endnotePr><w:numFmt w:val="lowerRoman"/></w:endnotePr><w:compat><w:compatSetting w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="15"/></w:compat></w:settings>'}
+    if story:
+        kind, content = story
+        root = 'hdr' if kind == 'header' else 'ftr'
+        parts[f'word/{kind}1.xml'] = f'<w:{root} xmlns:w="{W}">{content}</w:{root}>'
+        relations.append(('rStory', kind, kind + '1.xml'))
+        overrides.append((kind + '1', kind))
     if notes:
         kind, text = notes
         parts[f'word/{kind}s.xml'] = f'<w:{kind}s xmlns:w="{W}"><w:{kind} w:type="separator" w:id="-1"><w:p><w:r><w:separator/></w:r></w:p></w:{kind}><w:{kind} w:type="continuationSeparator" w:id="0"><w:p><w:r><w:continuationSeparator/></w:r></w:p></w:{kind}><w:{kind} w:id="1">{para(runs=f"<w:r><w:{kind}Ref/></w:r>" + run(" " + text))}</w:{kind}></w:{kind}s>'
@@ -93,13 +99,13 @@ def package(path, body, final_section=None, notes=None, image=False, namespaces_
 
 def generate():
     cases = []
-    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None):
+    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None):
         assertions = assertions or []
         for assertion in assertions:
             if assertion['type'] == 'marker-region':
                 assertion.update(version=2, tolerancePt=0.0001)
         path = ROOT / 'fixtures' / (case_id + '.docx')
-        package(path, body, sect, notes, image, namespaces_extra, styles_xml)
+        package(path, body, sect, notes, image, namespaces_extra, styles_xml, story)
         inventory = dict(sorted(Counter(' '.join(text).split()).items()))
         cases.append({'id': case_id, 'version': 2 if any(a['type'] == 'marker-region' for a in assertions) else 1, 'category': category, 'description': description, 'input': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'rights': {'author': 'John Scrudato IV', 'license': 'MIT', 'origin': 'Authored by bench/fixtures.py in this repository', 'assets': 'All text and graphics are generated here; no embedded font files'}, 'profile': {'review': 'final', 'comments': 'hidden'}, 'fonts': [FONT], 'tokens': inventory, 'assertions': assertions, 'generator': {'path': 'bench/fixtures.py', 'sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}})
     prose = 'The survey team records the height of each tower before the evening check. The next crew compares the notes and keeps the route open for the morning visit.'
@@ -205,7 +211,24 @@ def generate():
             assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'TextboxLabel', 'occurrence': 1,
                          'page': 1, 'rect': [144, 144, 360, 216]},
                         {'type': 'same-page', 'version': 1, 'markers': ['TextboxLabel', 'FollowingMarker']}])
-    registry = {'schema': 1, 'suite': {'id': 'core-v4', 'version': 4, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Independent hidden-header pair for Docxodus #1077. The empty first paragraph
+    # is the passing control; the visible second line exposes paragraph-mark flow.
+    header_styles = f'''<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>
+      <w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/>
+      <w:color w:val="000000"/><w:sz w:val="22"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>
+      <w:spacing w:after="0" w:line="240" w:lineRule="auto"/>
+      </w:pPr></w:pPrDefault></w:docDefaults></w:styles>'''
+    texts = ['HeaderMarker Night archive register.', 'BodyMarker The cedar drawer is ready.']
+    header_section = section().replace('<w:sectPr>', '<w:sectPr><w:headerReference w:type="default" r:id="rStory"/>')
+    for hidden in (False, True):
+        first = para(runs=run('SecretMarker Concealed archive note.', '<w:vanish/>')) if hidden else para(runs='')
+        cid = 'paragraphs-header-hidden' if hidden else 'paragraphs-header-empty'
+        add(cid, 'paragraphs', 'Header with ' + ('hidden-only' if hidden else 'empty') + ' first paragraph and visible following line',
+            texts, para(texts[1]), sect=header_section, styles_xml=header_styles,
+            story=('header', first + para(texts[0])),
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'HeaderMarker', 'occurrence': 1,
+                         'page': 1, 'rect': [72, 45, 540, 80]}])
+    registry = {'schema': 1, 'suite': {'id': 'core-v5', 'version': 5, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
