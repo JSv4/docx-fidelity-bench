@@ -231,7 +231,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 57)
+        self.assertEqual(len(common.validate_registry()['cases']), 68)
 
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
@@ -257,7 +257,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v13')
+        self.assertEqual(registry['suite']['id'], 'core-v14')
 
     def test_legacy_header_pairs_preserve_everything_except_number_representation(self):
         import xml.etree.ElementTree as ET
@@ -343,6 +343,35 @@ class RegistryContract(unittest.TestCase):
                             changed += 1
                 self.assertEqual(changed, 8)
                 self.assertEqual(ET.tostring(unit_xml), ET.tostring(control_xml))
+            self.assertEqual(actual['tokens'], expected['tokens'])
+            self.assertEqual(actual['assertions'], expected['assertions'])
+
+    def test_page_margin_units_change_only_declared_margin_attributes(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        for name, edge, band, control in [('pt', '54pt', '18pt', 'twips'),
+                ('in', '0.75in', '0.25in', 'twips'), ('cm', '1.905cm', '0.635cm', 'twips'),
+                ('mm', '19.05mm', '6.35mm', 'twips'), ('pc', '4.5pc', '1.5pc', 'twips'),
+                ('pi', '4.5pi', '1.5pi', 'twips'), ('multipage-pt', '54pt', '18pt', 'multipage-twips'),
+                ('small-mm', '25mm', None, 'small-twips')]:
+            actual, expected = [records['paragraphs-page-margins-' + n] for n in (name, control)]
+            with ZipFile(common.ROOT / actual['input']) as a, ZipFile(common.ROOT / expected['input']) as b:
+                self.assertEqual(a.namelist(), b.namelist())
+                for part in a.namelist():
+                    if part != 'word/document.xml':
+                        self.assertEqual(a.read(part), b.read(part))
+                unit, numeric = [ET.fromstring(z.read('word/document.xml')) for z in (a, b)]
+                margins = unit.find('.//' + w + 'pgMar')
+                if band is None:
+                    self.assertEqual(margins.get(w + 'left'), edge)
+                    margins.set(w + 'left', '1417')
+                else:
+                    for attr in ('top', 'right', 'bottom', 'left', 'header', 'footer'):
+                        self.assertEqual(margins.get(w + attr), band if attr in ('header', 'footer') else edge)
+                        margins.set(w + attr, '360' if attr in ('header', 'footer') else '1080')
+                self.assertEqual(ET.tostring(unit), ET.tostring(numeric))
             self.assertEqual(actual['tokens'], expected['tokens'])
             self.assertEqual(actual['assertions'], expected['assertions'])
 
