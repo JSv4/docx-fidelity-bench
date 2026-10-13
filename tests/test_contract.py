@@ -231,7 +231,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 42)
+        self.assertEqual(len(common.validate_registry()['cases']), 48)
 
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
@@ -257,7 +257,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v11')
+        self.assertEqual(registry['suite']['id'], 'core-v12')
 
     def test_legacy_header_pairs_preserve_everything_except_number_representation(self):
         import xml.etree.ElementTree as ET
@@ -319,6 +319,30 @@ class RegistryContract(unittest.TestCase):
                                  [ET.tostring(e) for e in list(trees[1])[:2]])
             self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
             self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
+
+    def test_border_size_cards_change_only_the_optional_size_attribute(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        for style in ('single', 'dashed'):
+            omitted = records[f'paragraphs-border-size-{style}-omitted']
+            for suffix, size in [('zero', '0'), ('thin', '2')]:
+                control = records[f'paragraphs-border-size-{style}-{suffix}']
+                with ZipFile(common.ROOT / omitted['input']) as a, ZipFile(common.ROOT / control['input']) as b:
+                    self.assertEqual(a.namelist(), b.namelist())
+                    for name in a.namelist():
+                        if name != 'word/document.xml':
+                            self.assertEqual(a.read(name), b.read(name))
+                    expected, actual = [ET.fromstring(z.read('word/document.xml')) for z in (a, b)]
+                    sides = actual.find('.//' + w + 'pBdr')
+                    self.assertEqual(len(sides), 4)
+                    for side in sides:
+                        self.assertEqual(side.get(w + 'sz'), size)
+                        del side.attrib[w + 'sz']
+                    self.assertEqual(ET.tostring(expected), ET.tostring(actual))
+                self.assertEqual(omitted['tokens'], control['tokens'])
+                self.assertEqual(omitted['assertions'], control['assertions'])
 
     def test_fractional_page_pairs_change_only_one_half_point_dimension(self):
         import xml.etree.ElementTree as ET
