@@ -3,7 +3,7 @@ import shutil
 import tempfile
 import subprocess
 from pathlib import Path
-from . import adapters, metrics, pdf, report
+from . import adapters, metrics, pdf, report, reference_controls
 from .common import ROOT, contained, digest, identity, read_json, validate_registry, write_json
 from .environment import environment
 
@@ -28,14 +28,74 @@ def reference_bundle(output):
 
 
 def validate_bundle(bundle, root, registry, env):
-    if bundle['schema'] != 1 or bundle['track'] not in {'libreoffice', 'word-online', 'word-onedrive', 'word-desktop'}:
+    if bundle['schema'] != 1 or bundle['track'] not in {'libreoffice', reference_controls.TRACK, 'word-online', 'word-onedrive', 'word-desktop'}:
         raise ValueError('Unknown reference track or bundle version')
     if bundle['suiteDigest'] != identity(registry) or bundle['environment'] != env['contract']:
         raise ValueError('Reference suite or measurement/font environment changed')
+    source_bundle = None
+    if bundle['track'] == reference_controls.TRACK:
+        if bundle.get('sourceBundle') != 'direct/bundle.json' or bundle.get('controlPolicy') != reference_controls.policy():
+            raise ValueError('Equivalent-control reference policy is missing or changed')
+        source_path = contained(root, bundle['sourceBundle'])
+        source_bundle = read_json(source_path)
+        if source_bundle['track'] != 'libreoffice' or identity(source_bundle) != bundle.get('sourceBundleDigest'):
+            raise ValueError('Equivalent-control source bundle is stale or is not direct LibreOffice')
+        validate_bundle(source_bundle, source_path.parent, registry, env)
+        if set(bundle['cases']) != set(source_bundle['cases']):
+            raise ValueError('Equivalent-control bundle changed reference coverage')
+    elif any(key in bundle for key in ('sourceBundle', 'sourceBundleDigest', 'controlPolicy')) or any('referenceSource' in entry for entry in bundle['cases'].values()):
+        raise ValueError('Equivalent-control evidence cannot be labeled as a direct reference track')
     for cid, entry in bundle['cases'].items():
         case = next((c for c in registry['cases'] if c['id'] == cid), None)
         if not case or case['sha256'] != entry['inputSha256'] or digest(contained(root, entry['pdf'])) != entry['pdfSha256']:
             raise ValueError('Stale or unknown reference: ' + cid)
+        if source_bundle is not None:
+            source = reference_controls.source(case, registry, ROOT)
+            capture = source_bundle['cases'].get(source['caseId'])
+            if entry.get('referenceSource') != source or capture is None:
+                raise ValueError('Equivalent-control source declaration changed: ' + cid)
+            for key in ('eligible', 'pdfSha256', 'inspection', 'renderer'):
+                if entry.get(key) != capture.get(key):
+                    raise ValueError('Equivalent-control capture evidence changed: ' + cid)
+
+
+def equivalent_reference_bundle(output, reference):
+    registry = validate_registry()
+    env = environment([f for c in registry['cases'] for f in c['fonts']])
+    source_root = Path(reference).resolve().parent
+    original = read_json(reference)
+    if original['track'] != 'libreoffice':
+        raise ValueError('Equivalent controls require an immutable direct LibreOffice bundle')
+    validate_bundle(original, source_root, registry, env)
+    records = {c['id']: c for c in registry['cases']}
+    if set(original['cases']) != set(records):
+        raise ValueError('Capture every original input before deriving equivalent-control references')
+    sources = {cid: reference_controls.source(case, registry, ROOT) for cid, case in records.items()}
+    output = Path(output).resolve()
+    output.mkdir(parents=True, exist_ok=False)
+    direct = output / 'direct'
+    direct.mkdir()
+    for capture in original['cases'].values():
+        target = contained(direct, capture['pdf'])
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(contained(source_root, capture['pdf']), target)
+    write_json(direct / 'bundle.json', original)
+    bundle = {'schema': 1, 'track': reference_controls.TRACK, 'suiteDigest': original['suiteDigest'],
+              'environment': original['environment'], 'sourceBundle': 'direct/bundle.json',
+              'sourceBundleDigest': identity(original), 'controlPolicy': reference_controls.policy(), 'cases': {}}
+    for cid, case in records.items():
+        source = sources[cid]
+        capture = original['cases'][source['caseId']]
+        path = output / cid / 'reference.pdf'
+        path.parent.mkdir()
+        shutil.copyfile(contained(source_root, capture['pdf']), path)
+        entry = dict(capture, inputSha256=case['sha256'], pdf=str(path.relative_to(output)), referenceSource=source)
+        bundle['cases'][cid] = entry
+        print(cid + ': ' + source['kind'] + ' reference from ' + source['caseId'] +
+              (' registered' if entry['eligible'] else ' ineligible'), flush=True)
+    write_json(output / 'bundle.json', bundle)
+    validate_bundle(bundle, output, registry, env)
+    return bundle
 
 
 def run(output, reference, adapter, candidate):
@@ -44,6 +104,7 @@ def run(output, reference, adapter, candidate):
     ref_root = Path(reference).resolve().parent
     bundle = read_json(reference)
     validate_bundle(bundle, ref_root, registry, env)
+    direct_bundle = read_json(contained(ref_root, bundle['sourceBundle'])) if bundle['track'] == reference_controls.TRACK else None
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=False)
     contract = {'metric': metrics.CONTRACT, 'suiteDigest': identity(registry), 'referenceDigest': identity(bundle), 'environment': env['contract'], 'adapter': adapter if isinstance(adapter, str) else {'argv': adapter, 'sourceSha256': digest(ROOT / 'adapters/docxodus.mjs')}}
@@ -58,10 +119,19 @@ def run(output, reference, adapter, candidate):
                 raise ValueError('Required reference is missing or ineligible')
             reference_path = contained(ref_root, entry['pdf'])
             shutil.copyfile(reference_path, folder / 'reference.pdf')
+            if direct_bundle is not None:
+                outcome['referenceSource'] = entry['referenceSource']
+                if entry['referenceSource']['kind'] == 'equivalent-control':
+                    direct_capture = direct_bundle['cases'][case['id']]
+                    direct_root = contained(ref_root, bundle['sourceBundle']).parent
+                    shutil.copyfile(contained(direct_root, direct_capture['pdf']), folder / 'direct-reference.pdf')
             reference_info = pdf.inspect_pdf(reference_path)
             if not pdf.inventory_check(reference_info, case) or not pdf.font_check(reference_info, case['fonts']):
                 raise ValueError('Reference content or fonts are ineligible')
-            request = {'protocol': 1, 'input': str(contained(ROOT, case['input'])), 'inputSha256': case['sha256'], 'output': str(folder / 'candidate.pdf'), 'report': str(folder / 'production.json'), 'profile': case['profile'], 'fontDirectories': env['fontDirectories'], 'candidate': candidate, 'timeoutMs': 120000}
+            render_case = case
+            if adapter == 'libreoffice-reference' and direct_bundle is not None:
+                render_case = next(c for c in registry['cases'] if c['id'] == entry['referenceSource']['caseId'])
+            request = {'protocol': 1, 'input': str(contained(ROOT, render_case['input'])), 'inputSha256': render_case['sha256'], 'output': str(folder / 'candidate.pdf'), 'report': str(folder / 'production.json'), 'profile': case['profile'], 'fontDirectories': env['fontDirectories'], 'candidate': candidate, 'timeoutMs': 120000}
             try:
                 response = adapters.render(adapter, request)
             except (RuntimeError, subprocess.TimeoutExpired) as error:
@@ -99,6 +169,8 @@ def run(output, reference, adapter, candidate):
                     outcome.update(status='measured', score=metrics.case_score(outcome['pages'], outcome['checks']), close=all(c['passed'] for c in outcome['checks']) and all(p.get('close', False) for p in outcome['pages']))
             if digest(contained(ROOT, case['input'])) != case['sha256']:
                 raise ValueError('Renderer modified source bytes')
+            if digest(request['input']) != request['inputSha256']:
+                raise ValueError('Renderer modified reference source bytes')
         except Exception as error:
             outcome.update(status='unmeasured', error=f'{type(error).__name__}: {error}')
             outcome.pop('score', None)

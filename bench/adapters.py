@@ -21,7 +21,7 @@ def libreoffice(input, output):
 
 
 def render(adapter, request):
-    if adapter == 'libreoffice':
+    if adapter in ('libreoffice', 'libreoffice-reference'):
         return libreoffice(request['input'], request['output'])
     response = json.loads(execute(adapter, input=json.dumps(request), timeout=request['timeoutMs'] / 1000 + 15))
     if response.get('protocol') != 1 or response.get('status') not in {'ok', 'failed', 'unmeasured'}:
