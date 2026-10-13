@@ -448,7 +448,35 @@ def generate():
         add('paragraphs-page-margins-' + name, 'paragraphs', 'Original Chestnut millimeter margin and rounded twip control',
             [text], para(text), sect, styles_xml=margin_styles, assertions=[{'type': 'marker-reference-position', 'version': 1,
                                                    'marker': 'MarginMillimeters', 'tolerancePt': 0.5}])
-    registry = {'schema': 1, 'suite': {'id': 'core-v14', 'version': 14, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    row_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:cs="{FONT}"/><w:sz w:val="22"/></w:rPr></w:rPrDefault></w:docDefaults></w:styles>'
+    row_units = [('pt', '36pt'), ('in', '0.5in'), ('cm', '1.27cm'), ('mm', '12.7mm'),
+                 ('pc', '3pc'), ('pi', '3pi'), ('twips', '720'), ('fractional-pt', '25.075pt'),
+                 ('fractional-twips', '502'), ('multipage-pt', '36pt'), ('multipage-twips', '720'),
+                 ('exact-pt', '36pt'), ('exact-twips', '720')]
+    for name, value in row_units:
+        count = 30 if name.startswith('multipage') else 3
+        rule = 'exact' if name.startswith('exact') else 'atLeast'
+        texts = []
+        rows = []
+        for index in range(1, count + 1):
+            left = f'Birch{index:02d} Original height record.'
+            right = f'Entry{index:02d} Complete second cell.'
+            texts += [left, right]
+            cells = ''.join('<w:tc><w:tcPr><w:tcW w:w="3600" w:type="dxa"/></w:tcPr>'
+                            + para(text, '<w:spacing w:after="0"/>') + '</w:tc>' for text in (left, right))
+            rows.append(f'<w:tr><w:trPr><w:trHeight w:val="{value}" w:hRule="{rule}"/></w:trPr>{cells}</w:tr>')
+        borders = '<w:tblBorders>' + ''.join(f'<w:{side} w:val="single" w:sz="6" w:color="444444"/>'
+                    for side in ('top', 'left', 'bottom', 'right', 'insideH', 'insideV')) + '</w:tblBorders>'
+        body = '<w:tbl><w:tblPr><w:tblW w:w="7200" w:type="dxa"/>' + borders + '<w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="3600"/><w:gridCol w:w="3600"/></w:tblGrid>' + ''.join(rows) + '</w:tbl>'
+        assertions = [{'type': 'marker-region', 'version': 2, 'marker': 'Birch01', 'occurrence': 1,
+                       'page': 1, 'rect': [72, 60, 540, 720]},
+                      {'type': 'marker-region', 'version': 2, 'marker': f'Birch{count:02d}', 'occurrence': 1,
+                       'page': 'reference', 'rect': [72, 60, 540, 720]}]
+        assertions.append({'type': 'marker-reference-position', 'version': 1,
+                           'marker': f'Birch{count:02d}', 'tolerancePt': 0.5})
+        add('tables-row-height-' + name, 'tables', 'Original Birch ledger row height in ' + value + ' with ' + rule,
+            texts, body, sect=section().replace('w:footer="720"', 'w:footer="720" w:gutter="0"'), styles_xml=row_styles, assertions=assertions)
+    registry = {'schema': 1, 'suite': {'id': 'core-v15', 'version': 15, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
