@@ -17,6 +17,10 @@ RULES = {
         'control': 'paragraphs-page-number-restarted-field',
         'rule': 'legacy-decimal-page-field-v1',
     },
+    'tables-row-height-exact-pt': {
+        'control': 'tables-row-height-exact-twips',
+        'rule': 'exact-row-height-points-to-twips-v1',
+    },
 }
 
 
@@ -61,6 +65,17 @@ def legacy_as_field(data):
     return root
 
 
+def exact_height_as_twips(data):
+    root = ET.fromstring(data)
+    heights = list(root.iter(W + 'trHeight'))
+    if len(heights) != 3 or any(height.get(W + 'val') != '36pt' or
+                               height.get(W + 'hRule') != 'exact' for height in heights):
+        raise ValueError('Expected three exact 36pt row heights')
+    for height in heights:
+        height.set(W + 'val', str(36 * 20))
+    return root
+
+
 def source(case, registry, root):
     rule = RULES.get(case['id'])
     if rule is None:
@@ -75,20 +90,28 @@ def source(case, registry, root):
     paths = [contained(root, c['input']) for c in (case, control)]
     if any(digest(path) != record['sha256'] for path, record in zip(paths, (case, control))):
         raise ValueError('Equivalent control input digest changed: ' + case['id'])
+    if rule['rule'] == 'legacy-decimal-page-field-v1':
+        changed_part, normalize = 'word/header1.xml', legacy_as_field
+        changed_error = 'Equivalent control changes the decimal PAGE representation'
+    elif rule['rule'] == 'exact-row-height-points-to-twips-v1':
+        changed_part, normalize = 'word/document.xml', exact_height_as_twips
+        changed_error = 'Equivalent control changes row layout beyond the exact-height lexical value'
+    else:
+        raise ValueError('Unknown equivalent-control rule')
     with ZipFile(paths[0]) as original, ZipFile(paths[1]) as comparison:
         names = original.namelist()
         other = comparison.namelist()
         if len(names) != len(set(names)) or len(other) != len(set(other)) or set(names) != set(other):
             raise ValueError('Equivalent control changes package members: ' + case['id'])
         for name in names:
-            if name == 'word/header1.xml':
-                expected = legacy_as_field(original.read(name))
+            if name == changed_part:
+                expected = normalize(original.read(name))
                 actual = ET.fromstring(comparison.read(name))
                 if ET.tostring(expected) != ET.tostring(actual):
-                    raise ValueError('Equivalent control changes the decimal PAGE representation')
+                    raise ValueError(changed_error)
             elif original.read(name) != comparison.read(name):
                 raise ValueError('Equivalent control changes package part: ' + name)
-        if 'word/header1.xml' not in names:
-            raise ValueError('Equivalent control is missing its running story')
+        if changed_part not in names:
+            raise ValueError('Equivalent control is missing its declared package part')
     return {'kind': 'equivalent-control', 'caseId': control['id'], 'input': control['input'],
             'inputSha256': control['sha256'], 'rule': rule['rule']}

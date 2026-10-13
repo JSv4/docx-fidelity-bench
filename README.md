@@ -48,7 +48,7 @@ Open `runs/example/index.html`. The adapter uses `@docxodus/export`'s public PDF
 
 `BENCH_LIBREOFFICE` can select an explicit LibreOffice executable. All tool versions and binary hashes, font hashes, reference PDF hashes, profiles, metric version, and suite identity are recorded. Retain `bundle.json` and its PDFs together; comparisons against a different reference bundle are rejected. Reference regeneration can change PDF metadata and therefore creates a new bundle identity.
 
-For the two legacy page-number cases, [equivalent-control references](docs/REFERENCE_CONTROLS.md) register the paired complex decimal PAGE captures from PR #7 in a distinct `libreoffice-equivalent-controls` track. The original candidate inputs, expected number inventories, and assertions are preserved; the source bundle and direct captures remain available in the evidence.
+For the two legacy page-number cases and exact point-valued row-height case, [equivalent-control references](docs/REFERENCE_CONTROLS.md) register the paired complex decimal PAGE and whole-twip captures from PRs #7 and #12 in a distinct `libreoffice-equivalent-controls` track. The original candidate inputs, complete token inventories, and assertions are preserved; the source bundle and direct captures remain available in the evidence.
 
 For an identical-engine calibration run, use `--adapter libreoffice --candidate YOUR_REFERENCE_BUILD`. The reports must reach 100 with mandatory checks passing before treating the measurement setup as established.
 

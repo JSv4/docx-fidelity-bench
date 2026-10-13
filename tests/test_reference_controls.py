@@ -23,10 +23,10 @@ class EquivalentControlContract(unittest.TestCase):
         self.records = {c['id']: c for c in self.registry['cases']}
         self.env = {'contract': {'tools': {}, 'fonts': {}}, 'fontDirectories': []}
 
-    def changed_pair(self, case_id, part, change):
+    def changed_pair(self, case_id, part, change, pair=(LEGACY, FIELD)):
         registry = copy.deepcopy(self.registry)
         records = {c['id']: c for c in registry['cases']}
-        for cid in (LEGACY, FIELD):
+        for cid in pair:
             record = records[cid]
             with ZipFile(common.ROOT / record['input']) as archive:
                 parts = {name: archive.read(name) for name in archive.namelist()}
@@ -38,7 +38,7 @@ class EquivalentControlContract(unittest.TestCase):
                 for name, data in parts.items():
                     archive.writestr(name, data)
             record['sha256'] = common.digest(target)
-        return registry, records[LEGACY]
+        return registry, records[pair[0]]
 
     def direct_bundle(self):
         root = self.root / 'raw'
@@ -79,6 +79,52 @@ class EquivalentControlContract(unittest.TestCase):
             self.assertEqual(source['kind'], 'equivalent-control')
             self.assertEqual(source['caseId'], 'paragraphs-page-number-' + variant + '-field')
             self.assertEqual(source['inputSha256'], self.records[source['caseId']]['sha256'])
+
+    def test_original_pr_exact_point_height_proves_720_twip_control(self):
+        cid = 'tables-row-height-exact-pt'
+        source = reference_controls.source(self.records[cid], self.registry, common.ROOT)
+        self.assertEqual(source['kind'], 'equivalent-control')
+        self.assertEqual(source['caseId'], 'tables-row-height-exact-twips')
+        self.assertEqual(source['rule'], 'exact-row-height-points-to-twips-v1')
+
+    def test_different_numeric_height_is_rejected(self):
+        pair = ('tables-row-height-exact-pt', 'tables-row-height-exact-twips')
+        registry, case = self.changed_pair(pair[1], 'word/document.xml',
+            lambda data: data.replace(b'w:val="720"', b'w:val="719"'), pair=pair)
+        with self.assertRaisesRegex(ValueError, 'row layout'):
+            reference_controls.source(case, registry, self.root)
+
+    def test_exact_height_cannot_be_replaced_with_minimum_height(self):
+        pair = ('tables-row-height-exact-pt', 'tables-row-height-exact-twips')
+        registry, case = self.changed_pair(pair[1], 'word/document.xml',
+            lambda data: data.replace(b'w:hRule="exact"', b'w:hRule="atLeast"'), pair=pair)
+        with self.assertRaisesRegex(ValueError, 'row layout'):
+            reference_controls.source(case, registry, self.root)
+
+    def test_different_point_height_is_rejected(self):
+        pair = ('tables-row-height-exact-pt', 'tables-row-height-exact-twips')
+        registry, case = self.changed_pair(pair[0], 'word/document.xml',
+            lambda data: data.replace(b'w:val="36pt"', b'w:val="35pt"'), pair=pair)
+        with self.assertRaisesRegex(ValueError, 'three exact 36pt'):
+            reference_controls.source(case, registry, self.root)
+
+    def test_changed_table_width_is_rejected(self):
+        pair = ('tables-row-height-exact-pt', 'tables-row-height-exact-twips')
+        registry, case = self.changed_pair(pair[1], 'word/document.xml',
+            lambda data: data.replace(b'w:w="7200"', b'w:w="7300"'), pair=pair)
+        with self.assertRaisesRegex(ValueError, 'row layout'):
+            reference_controls.source(case, registry, self.root)
+
+    def test_incomplete_exact_unit_capture_uses_complete_control_and_preserves_raw(self):
+        root, bundle = self.derived_bundle()
+        direct = common.read_json(root / 'direct/bundle.json')
+        cid, control = 'tables-row-height-exact-pt', 'tables-row-height-exact-twips'
+        self.assertFalse(direct['cases'][cid]['eligible'])
+        self.assertTrue(bundle['cases'][cid]['eligible'])
+        self.assertEqual(bundle['cases'][cid]['inputSha256'], self.records[cid]['sha256'])
+        self.assertEqual(bundle['cases'][cid]['pdfSha256'], direct['cases'][control]['pdfSha256'])
+        self.assertEqual(bundle['cases'][cid]['referenceSource']['inputSha256'], self.records[control]['sha256'])
+        runner.validate_bundle(bundle, root, self.registry, self.env)
 
     def test_roman_field_cannot_replace_decimal_legacy_number(self):
         registry, case = self.changed_pair(FIELD, 'word/header1.xml',
