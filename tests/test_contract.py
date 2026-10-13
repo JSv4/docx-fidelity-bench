@@ -231,7 +231,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 68)
+        self.assertEqual(len(common.validate_registry()['cases']), 81)
 
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
@@ -257,7 +257,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v14')
+        self.assertEqual(registry['suite']['id'], 'core-v15')
 
     def test_legacy_header_pairs_preserve_everything_except_number_representation(self):
         import xml.etree.ElementTree as ET
@@ -371,6 +371,34 @@ class RegistryContract(unittest.TestCase):
                     for attr in ('top', 'right', 'bottom', 'left', 'header', 'footer'):
                         self.assertEqual(margins.get(w + attr), band if attr in ('header', 'footer') else edge)
                         margins.set(w + attr, '360' if attr in ('header', 'footer') else '1080')
+                self.assertEqual(ET.tostring(unit), ET.tostring(numeric))
+            self.assertEqual(actual['tokens'], expected['tokens'])
+            self.assertEqual(actual['assertions'], expected['assertions'])
+
+    def test_row_height_pairs_change_only_the_height_lexical_value(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        for name, value, control in [('pt', '36pt', 'twips'), ('in', '0.5in', 'twips'),
+                ('cm', '1.27cm', 'twips'), ('mm', '12.7mm', 'twips'), ('pc', '3pc', 'twips'),
+                ('pi', '3pi', 'twips'), ('fractional-pt', '25.075pt', 'fractional-twips'),
+                ('multipage-pt', '36pt', 'multipage-twips'), ('exact-pt', '36pt', 'exact-twips')]:
+            actual, expected = [records['tables-row-height-' + n] for n in (name, control)]
+            with ZipFile(common.ROOT / actual['input']) as a, ZipFile(common.ROOT / expected['input']) as b:
+                self.assertEqual(a.namelist(), b.namelist())
+                for part in a.namelist():
+                    if part != 'word/document.xml':
+                        self.assertEqual(a.read(part), b.read(part))
+                unit, numeric = [ET.fromstring(z.read('word/document.xml')) for z in (a, b)]
+                heights = unit.findall('.//' + w + 'trHeight')
+                self.assertEqual(len(heights), 30 if name.startswith('multipage') else 3)
+                self.assertIn({'type': 'marker-reference-position', 'version': 1,
+                    'marker': 'Birch30' if name.startswith('multipage') else 'Birch03',
+                    'tolerancePt': 0.5}, actual['assertions'])
+                for height in heights:
+                    self.assertEqual(height.get(w + 'val'), value)
+                    height.set(w + 'val', '502' if name.startswith('fractional') else '720')
                 self.assertEqual(ET.tostring(unit), ET.tostring(numeric))
             self.assertEqual(actual['tokens'], expected['tokens'])
             self.assertEqual(actual['assertions'], expected['assertions'])
