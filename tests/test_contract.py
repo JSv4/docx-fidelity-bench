@@ -217,7 +217,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 16)
+        self.assertEqual(len(common.validate_registry()['cases']), 20)
 
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
@@ -243,7 +243,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v5')
+        self.assertEqual(registry['suite']['id'], 'core-v6')
 
     def test_unknown_assertion_is_rejected(self):
         registry = common.read_json(common.ROOT / 'fixtures/manifest.json')
@@ -273,6 +273,58 @@ class RegistryContract(unittest.TestCase):
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertNotIn('SecretMarker', pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
+
+    def test_inline_pair_differs_only_in_paragraph_indentation(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records[cid] for cid in ('paragraphs-inline-control', 'paragraphs-zero-width')]
+        w = '{' + fixtures.W + '}'
+        with ZipFile(common.ROOT / pair[0]['input']) as control, ZipFile(common.ROOT / pair[1]['input']) as zero:
+            self.assertEqual(control.namelist(), zero.namelist())
+            for name in control.namelist():
+                if name != 'word/document.xml':
+                    self.assertEqual(control.read(name), zero.read(name))
+            original = ET.fromstring(control.read('word/document.xml'))
+            actual = ET.fromstring(zero.read('word/document.xml'))
+            properties = actual.find('.//' + w + 'pPr')
+            indentation = properties.find(w + 'ind')
+            self.assertEqual(indentation.attrib, {w + 'left': '5000', w + 'right': '5000'})
+            properties.remove(indentation)
+            self.assertEqual(ET.tostring(original), ET.tostring(actual))
+        self.assertEqual(pair[0]['tokens'], {'Z': 1})
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+
+    def test_empty_drawing_host_keeps_absolute_drawing_and_following_content(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records[cid] for cid in ('drawings-textbox-absolute', 'drawings-textbox-empty-host')]
+        w = '{' + fixtures.W + '}'
+        with ZipFile(common.ROOT / pair[0]['input']) as control, ZipFile(common.ROOT / pair[1]['input']) as empty:
+            self.assertEqual(control.namelist(), empty.namelist())
+            for name in control.namelist():
+                if name != 'word/document.xml':
+                    self.assertEqual(control.read(name), empty.read(name))
+            original = ET.fromstring(control.read('word/document.xml'))
+            actual = ET.fromstring(empty.read('word/document.xml'))
+            host = original.find(w + 'body/' + w + 'p')
+            host.remove(host.find(w + 'r'))
+            self.assertEqual(ET.tostring(original), ET.tostring(actual))
+        self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
+        self.assertNotIn('Drawing', pair[1]['tokens'])
+        self.assertIn('TextboxLabel', pair[1]['tokens'])
+        self.assertIn('FollowingMarker', pair[1]['tokens'])
+
+    def test_overindented_word_retains_literal_word_and_declares_reference_wrapping(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        record = next(c for c in common.validate_registry()['cases'] if c['id'] == 'paragraphs-overindented-word')
+        with ZipFile(common.ROOT / record['input']) as archive:
+            document = ET.fromstring(archive.read('word/document.xml'))
+        self.assertEqual(document.find('.//{' + fixtures.W + '}t').text, 'ABC')
+        self.assertEqual(record['tokens'], {'A': 1, 'B': 1, 'C': 1})
+        self.assertEqual(record['assertions'][0]['markers'], ['A', 'B', 'C'])
 
     def test_unknown_version_is_rejected(self):
         registry = common.read_json(common.ROOT / 'fixtures/manifest.json')

@@ -211,6 +211,14 @@ def generate():
             assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'TextboxLabel', 'occurrence': 1,
                          'page': 1, 'rect': [144, 144, 360, 216]},
                         {'type': 'same-page', 'version': 1, 'markers': ['TextboxLabel', 'FollowingMarker']}])
+        if not relative_zero:
+            add('drawings-textbox-empty-host', 'images',
+                'Absolute textbox promoted out of a host paragraph containing only the drawing',
+                texts[1:], para(runs=box) + para(texts[2]), styles_xml=textbox_styles,
+                namespaces_extra=' xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing"',
+                assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'TextboxLabel', 'occurrence': 1,
+                             'page': 1, 'rect': [144, 144, 360, 216]},
+                            {'type': 'same-page', 'version': 1, 'markers': ['TextboxLabel', 'FollowingMarker']}])
     # Independent hidden-header pair for Docxodus #1077. The empty first paragraph
     # is the passing control; the visible second line exposes paragraph-mark flow.
     header_styles = f'''<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>
@@ -228,7 +236,26 @@ def generate():
             story=('header', first + para(texts[0])),
             assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'HeaderMarker', 'occurrence': 1,
                          'page': 1, 'rect': [72, 45, 540, 80]}])
-    registry = {'schema': 1, 'suite': {'id': 'core-v5', 'version': 5, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # An original one-glyph pair isolates print measurement from word wrapping.
+    # The available paragraph width is negative; its visible inline glyph remains measurable.
+    overindent = '<w:ind w:left="5000" w:right="5000"/>'
+    for indented in (False, True):
+        cid = 'paragraphs-zero-width' if indented else 'paragraphs-inline-control'
+        left = 320 if indented else 70
+        add(cid, 'paragraphs', 'Visible inline glyph in ' + ('a zero-width' if indented else 'an ordinary') + ' paragraph',
+            ['Z'], para('Z', overindent if indented else ''), styles_xml=header_styles,
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'Z', 'occurrence': 1,
+                         'page': 1, 'rect': [left, 60, left + 35, 105]}])
+    # A whole word also wraps into three single-letter lines when its paragraph has no
+    # available width. The reference PDF's visible-word inventory and final glyph region
+    # ensure that accepting measurable descendants preserves every painted letter.
+    add('paragraphs-overindented-word', 'paragraphs',
+        'Overindented ABC word with reference letter wrapping and measurable inline descendants',
+        ['A B C'], para('ABC', overindent), styles_xml=header_styles,
+        assertions=[{'type': 'same-page', 'version': 1, 'markers': ['A', 'B', 'C']},
+                    {'type': 'marker-region', 'version': 2, 'marker': 'C', 'occurrence': 1,
+                     'page': 1, 'rect': [320, 85, 355, 130]}])
+    registry = {'schema': 1, 'suite': {'id': 'core-v6', 'version': 6, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
