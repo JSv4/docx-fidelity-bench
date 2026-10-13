@@ -381,7 +381,22 @@ def generate():
                              'page': 'reference', 'rect': [72, 60, 540, 725]},
                             {'type': 'marker-reference-position', 'version': 1, 'marker': 'Ledger002', 'tolerancePt': 0.5},
                             {'type': 'marker-reference-position', 'version': 1, 'marker': 'Ledger045', 'tolerancePt': 0.5}])
-    registry = {'schema': 1, 'suite': {'id': 'core-v11', 'version': 11, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Original paragraph-border cards for Docxodus #1084. The optional size
+    # has an application-defined default; explicit zero supplies the policy
+    # control, and explicit two preserves the thin-border fidelity gap.
+    for border_style in ('single', 'dashed'):
+        for size in (None, '0', '2'):
+            size_attr = '' if size is None else f' w:sz="{size}"'
+            borders = ''.join(f'<w:{side} w:val="{border_style}" w:color="246B7D" w:space="4"{size_attr}/>'
+                              for side in ('top', 'left', 'bottom', 'right'))
+            text = 'BorderCard Juniper register inspected.'
+            body = para(text, '<w:pBdr>' + borders + '</w:pBdr><w:spacing w:before="0" w:after="0"/>')
+            add('paragraphs-border-size-' + border_style + '-' + ('omitted' if size is None else 'zero' if size == '0' else 'thin'),
+                'paragraphs', 'Original border card with ' + border_style + ' borders and ' + ('omitted application-defined size' if size is None else 'explicit size ' + size),
+                [text], body, styles_xml=ledger_styles,
+                assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'BorderCard', 'occurrence': 1,
+                             'page': 1, 'rect': [72, 60, 540, 130]}])
+    registry = {'schema': 1, 'suite': {'id': 'core-v12', 'version': 12, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
