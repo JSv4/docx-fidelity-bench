@@ -326,7 +326,35 @@ def generate():
                 [text], para(text), sect=sect, styles_xml=ledger_styles,
                 assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'PageBoxMarker', 'occurrence': 1,
                              'page': 1, 'rect': [72, 60, 540, 105]}])
-    registry = {'schema': 1, 'suite': {'id': 'core-v9', 'version': 9, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Original running-story number pair for Docxodus #1082. Legacy pgNum
+    # blocks must remain decimal even when the section asks for Roman numbering.
+    # Complex PAGE controls have an explicit Arabic switch. Simple fields also
+    # record the independently discovered cached-result rendering gap.
+    for restarted in (False, True):
+        for kind in ('field', 'simple-field', 'legacy'):
+            start = 12 if restarted else 1
+            body_texts = [f'Archive{index:02d} Maple register inspected.' for index in range(1, 4)]
+            body = ''.join(para(text, '<w:pageBreakBefore/>' if index else '') for index, text in enumerate(body_texts))
+            numbering = f'<w:pgNumType w:fmt="{"upperRoman" if restarted else "decimal"}" w:start="{start}"/>'
+            sect = section().replace('<w:sectPr>', '<w:sectPr><w:headerReference w:type="default" r:id="rStory"/>')
+            sect = sect.replace('<w:cols ', numbering + '<w:cols ')
+            header_run = '<w:r><w:rPr><w:i/><w:sz w:val="24"/></w:rPr>'
+            result = header_run + '<w:t>1</w:t></w:r>'
+            if kind == 'legacy':
+                header = header_run + '<w:pgNum/></w:r>'
+            elif kind == 'simple-field':
+                header = '<w:fldSimple w:instr=" PAGE \\* Arabic ">' + result + '</w:fldSimple>'
+            else:
+                header = '<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE \\* Arabic </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r>' + result + '<w:r><w:fldChar w:fldCharType="end"/></w:r>'
+            cid = 'paragraphs-page-number-' + ('restarted-' if restarted else 'ordinary-') + kind
+            texts = body_texts + [str(start + index) for index in range(3)]
+            add(cid, 'paragraphs', 'Three-page running story with ' + {'legacy': 'legacy pgNum', 'field': 'equivalent complex decimal PAGE field', 'simple-field': 'equivalent simple decimal PAGE field'}[kind]
+                + (' and a Roman-numbered section restarted at twelve' if restarted else ''),
+                texts, body, sect=sect, styles_xml=ledger_styles,
+                story=('header', para(runs=header, props='<w:spacing w:after="0"/>')),
+                assertions=[{'type': 'marker-region', 'version': 2, 'marker': str(start + index), 'occurrence': 1,
+                             'page': index + 1, 'rect': [72, 30, 540, 65]} for index in range(3)])
+    registry = {'schema': 1, 'suite': {'id': 'core-v10', 'version': 10, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

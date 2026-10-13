@@ -231,7 +231,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 32)
+        self.assertEqual(len(common.validate_registry()['cases']), 38)
 
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
@@ -257,7 +257,42 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v9')
+        self.assertEqual(registry['suite']['id'], 'core-v10')
+
+    def test_legacy_header_pairs_preserve_everything_except_number_representation(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        for variant in ['ordinary', 'restarted']:
+            for kind in ('field', 'simple-field'):
+                pair = [records[f'paragraphs-page-number-{variant}-{k}'] for k in (kind, 'legacy')]
+                with ZipFile(common.ROOT / pair[0]['input']) as field, ZipFile(common.ROOT / pair[1]['input']) as legacy:
+                    self.assertEqual(field.namelist(), legacy.namelist())
+                    for name in field.namelist():
+                        if name != 'word/header1.xml':
+                            self.assertEqual(field.read(name), legacy.read(name))
+                    expected = ET.fromstring(field.read('word/header1.xml'))
+                    actual = ET.fromstring(legacy.read('word/header1.xml'))
+                    paragraph = expected.find(w + 'p')
+                    if kind == 'simple-field':
+                        simple = paragraph.find(w + 'fldSimple')
+                        self.assertEqual(simple.get(w + 'instr'), ' PAGE \\* Arabic ')
+                        r = simple.find(w + 'r')
+                        paragraph.remove(simple)
+                    else:
+                        self.assertEqual(paragraph.find('.//' + w + 'instrText').text, ' PAGE \\* Arabic ')
+                        self.assertEqual([e.get(w + 'fldCharType') for e in paragraph.iter(w + 'fldChar')],
+                                         ['begin', 'separate', 'end'])
+                        runs = paragraph.findall(w + 'r')
+                        r = next(e for e in runs if e.find(w + 't') is not None)
+                        for run in runs:
+                            paragraph.remove(run)
+                    r.remove(r.find(w + 't')); ET.SubElement(r, w + 'pgNum')
+                    paragraph.append(r)
+                    self.assertEqual(ET.tostring(expected), ET.tostring(actual))
+                self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+                self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
 
     def test_fractional_page_pairs_change_only_one_half_point_dimension(self):
         import xml.etree.ElementTree as ET
