@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "suite": {
-    "id": "core-v10",
-    "version": 10,
+    "id": "core-v11",
+    "version": 11,
     "cases": [
       "columns-continuous",
       "columns-balanced",
@@ -41,7 +41,11 @@
       "paragraphs-page-number-ordinary-legacy",
       "paragraphs-page-number-restarted-field",
       "paragraphs-page-number-restarted-simple-field",
-      "paragraphs-page-number-restarted-legacy"
+      "paragraphs-page-number-restarted-legacy",
+      "notes-explicit-breaks-paragraph-control",
+      "notes-explicit-breaks-breaks",
+      "notes-explicit-breaks-blanks-paragraph-control",
+      "notes-explicit-breaks-blanks-breaks"
     ]
   },
   "cases": [
@@ -122,7 +126,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -224,7 +228,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -318,7 +322,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -401,7 +405,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -475,7 +479,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -577,7 +581,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -655,7 +659,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -725,7 +729,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -761,7 +765,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -797,7 +801,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -859,7 +863,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -921,7 +925,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -984,7 +988,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -1044,7 +1048,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -1107,7 +1111,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -1160,7 +1164,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -1213,7 +1217,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -1257,7 +1261,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -1301,7 +1305,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -1356,7 +1360,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -1442,7 +1446,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -1536,7 +1540,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -1621,7 +1625,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -1715,7 +1719,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -1865,7 +1869,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -2015,7 +2019,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -2165,7 +2169,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -2315,7 +2319,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -2362,7 +2366,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -2409,7 +2413,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -2456,7 +2460,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -2503,7 +2507,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -2583,7 +2587,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -2663,7 +2667,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -2743,7 +2747,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -2823,7 +2827,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -2903,7 +2907,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     },
     {
@@ -2983,7 +2987,683 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "3379016c7784c9bae7fa35737c8ef7b3d4472b5d9b72691958112ddc71992c4a"
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
+      }
+    },
+    {
+      "id": "notes-explicit-breaks-paragraph-control",
+      "version": 2,
+      "category": "notes",
+      "description": "Ninety-line original footnote inventory with paragraph boundaries",
+      "input": "fixtures/notes-explicit-breaks-paragraph-control.docx",
+      "sha256": "f20c238f896d0c89431f9ddc3084af5d29634cc07c02e97cec9fc3622b2fde20",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "1": 2,
+        "CiteMarker": 1,
+        "Ledger001": 1,
+        "Ledger002": 1,
+        "Ledger003": 1,
+        "Ledger004": 1,
+        "Ledger005": 1,
+        "Ledger006": 1,
+        "Ledger007": 1,
+        "Ledger008": 1,
+        "Ledger009": 1,
+        "Ledger010": 1,
+        "Ledger011": 1,
+        "Ledger012": 1,
+        "Ledger013": 1,
+        "Ledger014": 1,
+        "Ledger015": 1,
+        "Ledger016": 1,
+        "Ledger017": 1,
+        "Ledger018": 1,
+        "Ledger019": 1,
+        "Ledger020": 1,
+        "Ledger021": 1,
+        "Ledger022": 1,
+        "Ledger023": 1,
+        "Ledger024": 1,
+        "Ledger025": 1,
+        "Ledger026": 1,
+        "Ledger027": 1,
+        "Ledger028": 1,
+        "Ledger029": 1,
+        "Ledger030": 1,
+        "Ledger031": 1,
+        "Ledger032": 1,
+        "Ledger033": 1,
+        "Ledger034": 1,
+        "Ledger035": 1,
+        "Ledger036": 1,
+        "Ledger037": 1,
+        "Ledger038": 1,
+        "Ledger039": 1,
+        "Ledger040": 1,
+        "Ledger041": 1,
+        "Ledger042": 1,
+        "Ledger043": 1,
+        "Ledger044": 1,
+        "Ledger045": 1,
+        "Ledger046": 1,
+        "Ledger047": 1,
+        "Ledger048": 1,
+        "Ledger049": 1,
+        "Ledger050": 1,
+        "Ledger051": 1,
+        "Ledger052": 1,
+        "Ledger053": 1,
+        "Ledger054": 1,
+        "Ledger055": 1,
+        "Ledger056": 1,
+        "Ledger057": 1,
+        "Ledger058": 1,
+        "Ledger059": 1,
+        "Ledger060": 1,
+        "Ledger061": 1,
+        "Ledger062": 1,
+        "Ledger063": 1,
+        "Ledger064": 1,
+        "Ledger065": 1,
+        "Ledger066": 1,
+        "Ledger067": 1,
+        "Ledger068": 1,
+        "Ledger069": 1,
+        "Ledger070": 1,
+        "Ledger071": 1,
+        "Ledger072": 1,
+        "Ledger073": 1,
+        "Ledger074": 1,
+        "Ledger075": 1,
+        "Ledger076": 1,
+        "Ledger077": 1,
+        "Ledger078": 1,
+        "Ledger079": 1,
+        "Ledger080": 1,
+        "Ledger081": 1,
+        "Ledger082": 1,
+        "Ledger083": 1,
+        "Ledger084": 1,
+        "Ledger085": 1,
+        "Ledger086": 1,
+        "Ledger087": 1,
+        "Ledger088": 1,
+        "Ledger089": 1,
+        "Ledger090": 1,
+        "The": 1,
+        "Willow": 91,
+        "counted.": 90,
+        "detailed": 1,
+        "has": 1,
+        "inventory": 91,
+        "note.": 1,
+        "one": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "CiteMarker",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            72,
+            60,
+            540,
+            130
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "Ledger090",
+          "occurrence": 1,
+          "page": "reference",
+          "rect": [
+            72,
+            60,
+            540,
+            725
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Ledger002",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Ledger045",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
+      }
+    },
+    {
+      "id": "notes-explicit-breaks-breaks",
+      "version": 2,
+      "category": "notes",
+      "description": "Ninety-line original footnote inventory with explicit text-wrapping breaks",
+      "input": "fixtures/notes-explicit-breaks-breaks.docx",
+      "sha256": "c4754173a610a4aa53bc5f96decb96bd339e387a6186cc29e39d3d544048baa8",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "1": 2,
+        "CiteMarker": 1,
+        "Ledger001": 1,
+        "Ledger002": 1,
+        "Ledger003": 1,
+        "Ledger004": 1,
+        "Ledger005": 1,
+        "Ledger006": 1,
+        "Ledger007": 1,
+        "Ledger008": 1,
+        "Ledger009": 1,
+        "Ledger010": 1,
+        "Ledger011": 1,
+        "Ledger012": 1,
+        "Ledger013": 1,
+        "Ledger014": 1,
+        "Ledger015": 1,
+        "Ledger016": 1,
+        "Ledger017": 1,
+        "Ledger018": 1,
+        "Ledger019": 1,
+        "Ledger020": 1,
+        "Ledger021": 1,
+        "Ledger022": 1,
+        "Ledger023": 1,
+        "Ledger024": 1,
+        "Ledger025": 1,
+        "Ledger026": 1,
+        "Ledger027": 1,
+        "Ledger028": 1,
+        "Ledger029": 1,
+        "Ledger030": 1,
+        "Ledger031": 1,
+        "Ledger032": 1,
+        "Ledger033": 1,
+        "Ledger034": 1,
+        "Ledger035": 1,
+        "Ledger036": 1,
+        "Ledger037": 1,
+        "Ledger038": 1,
+        "Ledger039": 1,
+        "Ledger040": 1,
+        "Ledger041": 1,
+        "Ledger042": 1,
+        "Ledger043": 1,
+        "Ledger044": 1,
+        "Ledger045": 1,
+        "Ledger046": 1,
+        "Ledger047": 1,
+        "Ledger048": 1,
+        "Ledger049": 1,
+        "Ledger050": 1,
+        "Ledger051": 1,
+        "Ledger052": 1,
+        "Ledger053": 1,
+        "Ledger054": 1,
+        "Ledger055": 1,
+        "Ledger056": 1,
+        "Ledger057": 1,
+        "Ledger058": 1,
+        "Ledger059": 1,
+        "Ledger060": 1,
+        "Ledger061": 1,
+        "Ledger062": 1,
+        "Ledger063": 1,
+        "Ledger064": 1,
+        "Ledger065": 1,
+        "Ledger066": 1,
+        "Ledger067": 1,
+        "Ledger068": 1,
+        "Ledger069": 1,
+        "Ledger070": 1,
+        "Ledger071": 1,
+        "Ledger072": 1,
+        "Ledger073": 1,
+        "Ledger074": 1,
+        "Ledger075": 1,
+        "Ledger076": 1,
+        "Ledger077": 1,
+        "Ledger078": 1,
+        "Ledger079": 1,
+        "Ledger080": 1,
+        "Ledger081": 1,
+        "Ledger082": 1,
+        "Ledger083": 1,
+        "Ledger084": 1,
+        "Ledger085": 1,
+        "Ledger086": 1,
+        "Ledger087": 1,
+        "Ledger088": 1,
+        "Ledger089": 1,
+        "Ledger090": 1,
+        "The": 1,
+        "Willow": 91,
+        "counted.": 90,
+        "detailed": 1,
+        "has": 1,
+        "inventory": 91,
+        "note.": 1,
+        "one": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "CiteMarker",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            72,
+            60,
+            540,
+            130
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "Ledger090",
+          "occurrence": 1,
+          "page": "reference",
+          "rect": [
+            72,
+            60,
+            540,
+            725
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Ledger002",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Ledger045",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
+      }
+    },
+    {
+      "id": "notes-explicit-breaks-blanks-paragraph-control",
+      "version": 2,
+      "category": "notes",
+      "description": "Ninety-line original footnote inventory with paragraph boundaries and two empty lines after each twenty-five entries",
+      "input": "fixtures/notes-explicit-breaks-blanks-paragraph-control.docx",
+      "sha256": "b3ffa242385da8f153606a54644251dd8ef26de76f472511502a63b7f30a14ea",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "1": 2,
+        "CiteMarker": 1,
+        "Ledger001": 1,
+        "Ledger002": 1,
+        "Ledger003": 1,
+        "Ledger004": 1,
+        "Ledger005": 1,
+        "Ledger006": 1,
+        "Ledger007": 1,
+        "Ledger008": 1,
+        "Ledger009": 1,
+        "Ledger010": 1,
+        "Ledger011": 1,
+        "Ledger012": 1,
+        "Ledger013": 1,
+        "Ledger014": 1,
+        "Ledger015": 1,
+        "Ledger016": 1,
+        "Ledger017": 1,
+        "Ledger018": 1,
+        "Ledger019": 1,
+        "Ledger020": 1,
+        "Ledger021": 1,
+        "Ledger022": 1,
+        "Ledger023": 1,
+        "Ledger024": 1,
+        "Ledger025": 1,
+        "Ledger026": 1,
+        "Ledger027": 1,
+        "Ledger028": 1,
+        "Ledger029": 1,
+        "Ledger030": 1,
+        "Ledger031": 1,
+        "Ledger032": 1,
+        "Ledger033": 1,
+        "Ledger034": 1,
+        "Ledger035": 1,
+        "Ledger036": 1,
+        "Ledger037": 1,
+        "Ledger038": 1,
+        "Ledger039": 1,
+        "Ledger040": 1,
+        "Ledger041": 1,
+        "Ledger042": 1,
+        "Ledger043": 1,
+        "Ledger044": 1,
+        "Ledger045": 1,
+        "Ledger046": 1,
+        "Ledger047": 1,
+        "Ledger048": 1,
+        "Ledger049": 1,
+        "Ledger050": 1,
+        "Ledger051": 1,
+        "Ledger052": 1,
+        "Ledger053": 1,
+        "Ledger054": 1,
+        "Ledger055": 1,
+        "Ledger056": 1,
+        "Ledger057": 1,
+        "Ledger058": 1,
+        "Ledger059": 1,
+        "Ledger060": 1,
+        "Ledger061": 1,
+        "Ledger062": 1,
+        "Ledger063": 1,
+        "Ledger064": 1,
+        "Ledger065": 1,
+        "Ledger066": 1,
+        "Ledger067": 1,
+        "Ledger068": 1,
+        "Ledger069": 1,
+        "Ledger070": 1,
+        "Ledger071": 1,
+        "Ledger072": 1,
+        "Ledger073": 1,
+        "Ledger074": 1,
+        "Ledger075": 1,
+        "Ledger076": 1,
+        "Ledger077": 1,
+        "Ledger078": 1,
+        "Ledger079": 1,
+        "Ledger080": 1,
+        "Ledger081": 1,
+        "Ledger082": 1,
+        "Ledger083": 1,
+        "Ledger084": 1,
+        "Ledger085": 1,
+        "Ledger086": 1,
+        "Ledger087": 1,
+        "Ledger088": 1,
+        "Ledger089": 1,
+        "Ledger090": 1,
+        "The": 1,
+        "Willow": 91,
+        "counted.": 90,
+        "detailed": 1,
+        "has": 1,
+        "inventory": 91,
+        "note.": 1,
+        "one": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "CiteMarker",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            72,
+            60,
+            540,
+            130
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "Ledger090",
+          "occurrence": 1,
+          "page": "reference",
+          "rect": [
+            72,
+            60,
+            540,
+            725
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Ledger002",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Ledger045",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
+      }
+    },
+    {
+      "id": "notes-explicit-breaks-blanks-breaks",
+      "version": 2,
+      "category": "notes",
+      "description": "Ninety-line original footnote inventory with explicit text-wrapping breaks and two empty lines after each twenty-five entries",
+      "input": "fixtures/notes-explicit-breaks-blanks-breaks.docx",
+      "sha256": "9bfa7f0401cebe54304af15e92a82c272d25edcd70083bc7a806f2713732af5c",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "1": 2,
+        "CiteMarker": 1,
+        "Ledger001": 1,
+        "Ledger002": 1,
+        "Ledger003": 1,
+        "Ledger004": 1,
+        "Ledger005": 1,
+        "Ledger006": 1,
+        "Ledger007": 1,
+        "Ledger008": 1,
+        "Ledger009": 1,
+        "Ledger010": 1,
+        "Ledger011": 1,
+        "Ledger012": 1,
+        "Ledger013": 1,
+        "Ledger014": 1,
+        "Ledger015": 1,
+        "Ledger016": 1,
+        "Ledger017": 1,
+        "Ledger018": 1,
+        "Ledger019": 1,
+        "Ledger020": 1,
+        "Ledger021": 1,
+        "Ledger022": 1,
+        "Ledger023": 1,
+        "Ledger024": 1,
+        "Ledger025": 1,
+        "Ledger026": 1,
+        "Ledger027": 1,
+        "Ledger028": 1,
+        "Ledger029": 1,
+        "Ledger030": 1,
+        "Ledger031": 1,
+        "Ledger032": 1,
+        "Ledger033": 1,
+        "Ledger034": 1,
+        "Ledger035": 1,
+        "Ledger036": 1,
+        "Ledger037": 1,
+        "Ledger038": 1,
+        "Ledger039": 1,
+        "Ledger040": 1,
+        "Ledger041": 1,
+        "Ledger042": 1,
+        "Ledger043": 1,
+        "Ledger044": 1,
+        "Ledger045": 1,
+        "Ledger046": 1,
+        "Ledger047": 1,
+        "Ledger048": 1,
+        "Ledger049": 1,
+        "Ledger050": 1,
+        "Ledger051": 1,
+        "Ledger052": 1,
+        "Ledger053": 1,
+        "Ledger054": 1,
+        "Ledger055": 1,
+        "Ledger056": 1,
+        "Ledger057": 1,
+        "Ledger058": 1,
+        "Ledger059": 1,
+        "Ledger060": 1,
+        "Ledger061": 1,
+        "Ledger062": 1,
+        "Ledger063": 1,
+        "Ledger064": 1,
+        "Ledger065": 1,
+        "Ledger066": 1,
+        "Ledger067": 1,
+        "Ledger068": 1,
+        "Ledger069": 1,
+        "Ledger070": 1,
+        "Ledger071": 1,
+        "Ledger072": 1,
+        "Ledger073": 1,
+        "Ledger074": 1,
+        "Ledger075": 1,
+        "Ledger076": 1,
+        "Ledger077": 1,
+        "Ledger078": 1,
+        "Ledger079": 1,
+        "Ledger080": 1,
+        "Ledger081": 1,
+        "Ledger082": 1,
+        "Ledger083": 1,
+        "Ledger084": 1,
+        "Ledger085": 1,
+        "Ledger086": 1,
+        "Ledger087": 1,
+        "Ledger088": 1,
+        "Ledger089": 1,
+        "Ledger090": 1,
+        "The": 1,
+        "Willow": 91,
+        "counted.": 90,
+        "detailed": 1,
+        "has": 1,
+        "inventory": 91,
+        "note.": 1,
+        "one": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "CiteMarker",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            72,
+            60,
+            540,
+            130
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "Ledger090",
+          "occurrence": 1,
+          "page": "reference",
+          "rect": [
+            72,
+            60,
+            540,
+            725
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Ledger002",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Ledger045",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "44c5a2453974ca27ff553f5bc6f86786bb761cb36b29a2172c963a96c5742bb6"
       }
     }
   ]

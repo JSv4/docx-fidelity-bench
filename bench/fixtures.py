@@ -68,7 +68,7 @@ def zip_write(path, parts):
             archive.writestr(item, payload.encode() if isinstance(payload, str) else payload)
 
 
-def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None, story=None):
+def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None, story=None, notes_xml=None):
     namespaces = f'xmlns:w="{W}" xmlns:r="{R}" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"'
     namespaces += namespaces_extra
     styles = f'''<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/><w:sz w:val="22"/><w:color w:val="000000"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="120" w:line="276" w:lineRule="auto"/><w:widowControl/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style><w:style w:type="paragraph" w:styleId="Title"><w:name w:val="Title"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:after="240"/></w:pPr><w:rPr><w:b/><w:sz w:val="32"/></w:rPr></w:style></w:styles>'''
@@ -85,7 +85,8 @@ def package(path, body, final_section=None, notes=None, image=False, namespaces_
         overrides.append((kind + '1', kind))
     if notes:
         kind, text = notes
-        parts[f'word/{kind}s.xml'] = f'<w:{kind}s xmlns:w="{W}"><w:{kind} w:type="separator" w:id="-1"><w:p><w:r><w:separator/></w:r></w:p></w:{kind}><w:{kind} w:type="continuationSeparator" w:id="0"><w:p><w:r><w:continuationSeparator/></w:r></w:p></w:{kind}><w:{kind} w:id="1">{para(runs=f"<w:r><w:{kind}Ref/></w:r>" + run(" " + text))}</w:{kind}></w:{kind}s>'
+        content = notes_xml if notes_xml is not None else para(runs=f"<w:r><w:{kind}Ref/></w:r>" + run(" " + text))
+        parts[f'word/{kind}s.xml'] = f'<w:{kind}s xmlns:w="{W}"><w:{kind} w:type="separator" w:id="-1"><w:p><w:r><w:separator/></w:r></w:p></w:{kind}><w:{kind} w:type="continuationSeparator" w:id="0"><w:p><w:r><w:continuationSeparator/></w:r></w:p></w:{kind}><w:{kind} w:id="1">{content}</w:{kind}></w:{kind}s>'
         relations.append(('rNotes', kind + 's', kind + 's.xml'))
         overrides.append((kind + 's', kind + 's'))
     if image:
@@ -99,13 +100,13 @@ def package(path, body, final_section=None, notes=None, image=False, namespaces_
 
 def generate():
     cases = []
-    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None):
+    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None):
         assertions = assertions or []
         for assertion in assertions:
             if assertion['type'] == 'marker-region':
                 assertion.update(version=2, tolerancePt=0.0001)
         path = ROOT / 'fixtures' / (case_id + '.docx')
-        package(path, body, sect, notes, image, namespaces_extra, styles_xml, story)
+        package(path, body, sect, notes, image, namespaces_extra, styles_xml, story, notes_xml)
         inventory = dict(sorted(Counter(' '.join(text).split()).items()))
         cases.append({'id': case_id, 'version': 2 if any(a['type'] == 'marker-region' for a in assertions) else 1, 'category': category, 'description': description, 'input': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'rights': {'author': 'John Scrudato IV', 'license': 'MIT', 'origin': 'Authored by bench/fixtures.py in this repository', 'assets': 'All text and graphics are generated here; no embedded font files'}, 'profile': {'review': 'final', 'comments': 'hidden'}, 'fonts': [FONT], 'tokens': inventory, 'assertions': assertions, 'generator': {'path': 'bench/fixtures.py', 'sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}})
     prose = 'The survey team records the height of each tower before the evening check. The next crew compares the notes and keeps the route open for the morning visit.'
@@ -354,7 +355,33 @@ def generate():
                 story=('header', para(runs=header, props='<w:spacing w:after="0"/>')),
                 assertions=[{'type': 'marker-region', 'version': 2, 'marker': str(start + index), 'occurrence': 1,
                              'page': index + 1, 'rect': [72, 30, 540, 65]} for index in range(3)])
-    registry = {'schema': 1, 'suite': {'id': 'core-v10', 'version': 10, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Independently authored long footnote ledgers for Docxodus #1083.
+    for blanks in (False, True):
+        texts = [f'Ledger{index:03d} Willow inventory counted.' for index in range(1, 91)]
+        line_runs = []
+        for index, text in enumerate(texts):
+            line_runs.append(run((' ' if index == 0 else '') + text))
+            if blanks and (index + 1) % 25 == 0:
+                line_runs.extend(['', ''])
+        props = '<w:widowControl w:val="0"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="exact"/>'
+        marker = '<w:r><w:footnoteRef/></w:r>'
+        body_text = 'CiteMarker The Willow inventory has one detailed note.'
+        body = para(runs=run(body_text + ' ') + '<w:r><w:footnoteReference w:id="1"/></w:r>')
+        for paragraphs in (True, False):
+            note = ''.join(para(props=props, runs=(marker if index == 0 else '') + line)
+                           for index, line in enumerate(line_runs)) if paragraphs else para(
+                               props=props, runs=marker + '<w:r><w:br/></w:r>'.join(line_runs))
+            cid = 'notes-explicit-breaks-' + ('blanks-' if blanks else '') + ('paragraph-control' if paragraphs else 'breaks')
+            add(cid, 'notes', 'Ninety-line original footnote inventory with ' + ('paragraph boundaries' if paragraphs else 'explicit text-wrapping breaks')
+                + (' and two empty lines after each twenty-five entries' if blanks else ''),
+                [body_text, '1', '1'] + texts, body, notes=('footnote', ''), notes_xml=note, styles_xml=ledger_styles,
+                assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'CiteMarker', 'occurrence': 1,
+                             'page': 1, 'rect': [72, 60, 540, 130]},
+                            {'type': 'marker-region', 'version': 2, 'marker': 'Ledger090', 'occurrence': 1,
+                             'page': 'reference', 'rect': [72, 60, 540, 725]},
+                            {'type': 'marker-reference-position', 'version': 1, 'marker': 'Ledger002', 'tolerancePt': 0.5},
+                            {'type': 'marker-reference-position', 'version': 1, 'marker': 'Ledger045', 'tolerancePt': 0.5}])
+    registry = {'schema': 1, 'suite': {'id': 'core-v11', 'version': 11, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

@@ -231,7 +231,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 38)
+        self.assertEqual(len(common.validate_registry()['cases']), 42)
 
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
@@ -257,7 +257,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v10')
+        self.assertEqual(registry['suite']['id'], 'core-v11')
 
     def test_legacy_header_pairs_preserve_everything_except_number_representation(self):
         import xml.etree.ElementTree as ET
@@ -293,6 +293,32 @@ class RegistryContract(unittest.TestCase):
                     self.assertEqual(ET.tostring(expected), ET.tostring(actual))
                 self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
                 self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
+
+    def test_footnote_break_pairs_preserve_note_lines_and_other_parts(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        for variant in ('', 'blanks-'):
+            pair = [records[f'notes-explicit-breaks-{variant}{kind}'] for kind in ('paragraph-control', 'breaks')]
+            with ZipFile(common.ROOT / pair[0]['input']) as control, ZipFile(common.ROOT / pair[1]['input']) as breaks:
+                self.assertEqual(control.namelist(), breaks.namelist())
+                for name in control.namelist():
+                    if name != 'word/footnotes.xml':
+                        self.assertEqual(control.read(name), breaks.read(name))
+                trees = [ET.fromstring(z.read('word/footnotes.xml')) for z in (control, breaks)]
+                notes = [next(n for n in t if n.get(w + 'id') == '1') for t in trees]
+                self.assertEqual(len(notes[1].findall(w + 'p')), 1)
+                self.assertEqual(len(notes[1].findall('.//' + w + 'br')), len(notes[0]) - 1)
+                self.assertEqual([t.text for t in notes[0].iter(w + 't')], [t.text for t in notes[1].iter(w + 't')])
+                properties = ET.tostring(notes[1].find(w + 'p').find(w + 'pPr'))
+                self.assertTrue(all(ET.tostring(p.find(w + 'pPr')) == properties for p in notes[0]))
+                for n in notes:
+                    self.assertEqual(len(n.findall('.//' + w + 'footnoteRef')), 1)
+                self.assertEqual([ET.tostring(e) for e in list(trees[0])[:2]],
+                                 [ET.tostring(e) for e in list(trees[1])[:2]])
+            self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+            self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
 
     def test_fractional_page_pairs_change_only_one_half_point_dimension(self):
         import xml.etree.ElementTree as ET
