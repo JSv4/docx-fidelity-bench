@@ -231,7 +231,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 48)
+        self.assertEqual(len(common.validate_registry()['cases']), 57)
 
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
@@ -257,7 +257,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v12')
+        self.assertEqual(registry['suite']['id'], 'core-v13')
 
     def test_legacy_header_pairs_preserve_everything_except_number_representation(self):
         import xml.etree.ElementTree as ET
@@ -319,6 +319,32 @@ class RegistryContract(unittest.TestCase):
                                  [ET.tostring(e) for e in list(trees[1])[:2]])
             self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
             self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
+
+    def test_indentation_units_change_only_equivalent_measure_attributes(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        for name, value, control in [('pt', '36pt', 'twips'), ('in', '0.5in', 'twips'), ('cm', '1.27cm', 'twips'),
+                                     ('mm', '12.7mm', 'twips'), ('pc', '3pc', 'twips'), ('pi', '3pi', 'twips'),
+                                     ('small-pt', '12pt', 'small-twips')]:
+            actual, expected = [records['paragraphs-indentation-' + n] for n in (name, control)]
+            with ZipFile(common.ROOT / actual['input']) as a, ZipFile(common.ROOT / expected['input']) as b:
+                self.assertEqual(a.namelist(), b.namelist())
+                for part in a.namelist():
+                    if part != 'word/document.xml':
+                        self.assertEqual(a.read(part), b.read(part))
+                unit_xml, control_xml = [ET.fromstring(z.read('word/document.xml')) for z in (a, b)]
+                changed = 0
+                for ind in unit_xml.iter(w + 'ind'):
+                    for attr in list(ind.attrib):
+                        if ind.get(attr) == value:
+                            ind.set(attr, '240' if control == 'small-twips' else '720')
+                            changed += 1
+                self.assertEqual(changed, 8)
+                self.assertEqual(ET.tostring(unit_xml), ET.tostring(control_xml))
+            self.assertEqual(actual['tokens'], expected['tokens'])
+            self.assertEqual(actual['assertions'], expected['assertions'])
 
     def test_border_size_cards_change_only_the_optional_size_attribute(self):
         import xml.etree.ElementTree as ET
