@@ -255,7 +255,38 @@ def generate():
         assertions=[{'type': 'same-page', 'version': 1, 'markers': ['A', 'B', 'C']},
                     {'type': 'marker-region', 'version': 2, 'marker': 'C', 'occurrence': 1,
                      'page': 1, 'rect': [320, 85, 355, 130]}])
-    registry = {'schema': 1, 'suite': {'id': 'core-v6', 'version': 6, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Original delivery ledger for Docxodus #1079. Whole rows fit on a page;
+    # each pair differs only in the vertical merge elements. Continuations have
+    # no visible text, so the pairs declare identical complete token inventories.
+    ledger_styles = f'''<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>
+      <w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="22"/>
+      </w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="auto"/>
+      </w:pPr></w:pPrDefault></w:docDefaults></w:styles>'''
+    for location, first, span in [('early', 1, 2), ('boundary', 11, 3)]:
+        for merged in (False, True):
+            texts, rows = [], []
+            for index in range(1, 21):
+                continuing = first < index < first + span
+                left = '' if continuing else f'Lot{index:02d} Birch sample.'
+                right = f'Entry{index:02d} Delivery ledger.'
+                if left:
+                    texts.append(left)
+                texts.append(right)
+                merge = ('<w:vMerge w:val="restart"/>' if index == first else '<w:vMerge/>' if continuing else '') if merged else ''
+                cells = '<w:tc><w:tcPr><w:tcW w:w="4680" w:type="dxa"/>' + merge + '</w:tcPr>' + para(left) + '</w:tc>'
+                cells += '<w:tc><w:tcPr><w:tcW w:w="4680" w:type="dxa"/></w:tcPr>' + para(right) + '</w:tc>'
+                rows.append('<w:tr><w:trPr><w:trHeight w:val="1100" w:hRule="atLeast"/><w:cantSplit/></w:trPr>' + cells + '</w:tr>')
+            body = '<w:tbl><w:tblPr><w:tblW w:w="9360" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr>'
+            body += '<w:tblGrid><w:gridCol w:w="4680"/><w:gridCol w:w="4680"/></w:tblGrid>' + ''.join(rows) + '</w:tbl>'
+            cid = 'tables-vmerge-' + location + ('-merged' if merged else '-control')
+            assertions = [{'type': 'marker-region', 'version': 2, 'marker': 'Entry20', 'occurrence': 1,
+                           'page': 2, 'rect': [305, 60, 540, 720]}]
+            if merged:
+                assertions.append({'type': 'same-page', 'version': 1,
+                                   'markers': [f'Entry{n:02d}' for n in range(first, first + span)]})
+            add(cid, 'tables', 'Twenty-row ledger with ' + ('an intact' if merged else 'no') + ' vertical merge at ' + location,
+                texts, body, styles_xml=ledger_styles, assertions=assertions)
+    registry = {'schema': 1, 'suite': {'id': 'core-v7', 'version': 7, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

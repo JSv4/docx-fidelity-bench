@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "suite": {
-    "id": "core-v6",
-    "version": 6,
+    "id": "core-v7",
+    "version": 7,
     "cases": [
       "columns-continuous",
       "columns-balanced",
@@ -23,7 +23,11 @@
       "paragraphs-header-hidden",
       "paragraphs-inline-control",
       "paragraphs-zero-width",
-      "paragraphs-overindented-word"
+      "paragraphs-overindented-word",
+      "tables-vmerge-early-control",
+      "tables-vmerge-early-merged",
+      "tables-vmerge-boundary-control",
+      "tables-vmerge-boundary-merged"
     ]
   },
   "cases": [
@@ -104,7 +108,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "de352d1ea6f649c74e172c003ba9bb4b154e7a0c552f521a45f4bee6e2fd91fa"
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
       }
     },
     {
@@ -206,7 +210,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "de352d1ea6f649c74e172c003ba9bb4b154e7a0c552f521a45f4bee6e2fd91fa"
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
       }
     },
     {
@@ -300,7 +304,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "de352d1ea6f649c74e172c003ba9bb4b154e7a0c552f521a45f4bee6e2fd91fa"
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
       }
     },
     {
@@ -383,7 +387,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "de352d1ea6f649c74e172c003ba9bb4b154e7a0c552f521a45f4bee6e2fd91fa"
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
       }
     },
     {
@@ -457,7 +461,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "de352d1ea6f649c74e172c003ba9bb4b154e7a0c552f521a45f4bee6e2fd91fa"
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
       }
     },
     {
@@ -559,7 +563,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "de352d1ea6f649c74e172c003ba9bb4b154e7a0c552f521a45f4bee6e2fd91fa"
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
       }
     },
     {
@@ -637,7 +641,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "de352d1ea6f649c74e172c003ba9bb4b154e7a0c552f521a45f4bee6e2fd91fa"
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
       }
     },
     {
@@ -707,7 +711,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "de352d1ea6f649c74e172c003ba9bb4b154e7a0c552f521a45f4bee6e2fd91fa"
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
       }
     },
     {
@@ -743,7 +747,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "de352d1ea6f649c74e172c003ba9bb4b154e7a0c552f521a45f4bee6e2fd91fa"
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
       }
     },
     {
@@ -779,7 +783,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "de352d1ea6f649c74e172c003ba9bb4b154e7a0c552f521a45f4bee6e2fd91fa"
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
       }
     },
     {
@@ -841,7 +845,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "de352d1ea6f649c74e172c003ba9bb4b154e7a0c552f521a45f4bee6e2fd91fa"
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
       }
     },
     {
@@ -903,7 +907,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "de352d1ea6f649c74e172c003ba9bb4b154e7a0c552f521a45f4bee6e2fd91fa"
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
       }
     },
     {
@@ -966,7 +970,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "de352d1ea6f649c74e172c003ba9bb4b154e7a0c552f521a45f4bee6e2fd91fa"
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
       }
     },
     {
@@ -1026,7 +1030,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "de352d1ea6f649c74e172c003ba9bb4b154e7a0c552f521a45f4bee6e2fd91fa"
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
       }
     },
     {
@@ -1089,7 +1093,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "de352d1ea6f649c74e172c003ba9bb4b154e7a0c552f521a45f4bee6e2fd91fa"
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
       }
     },
     {
@@ -1142,7 +1146,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "de352d1ea6f649c74e172c003ba9bb4b154e7a0c552f521a45f4bee6e2fd91fa"
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
       }
     },
     {
@@ -1195,7 +1199,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "de352d1ea6f649c74e172c003ba9bb4b154e7a0c552f521a45f4bee6e2fd91fa"
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
       }
     },
     {
@@ -1239,7 +1243,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "de352d1ea6f649c74e172c003ba9bb4b154e7a0c552f521a45f4bee6e2fd91fa"
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
       }
     },
     {
@@ -1283,7 +1287,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "de352d1ea6f649c74e172c003ba9bb4b154e7a0c552f521a45f4bee6e2fd91fa"
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
       }
     },
     {
@@ -1338,7 +1342,366 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "de352d1ea6f649c74e172c003ba9bb4b154e7a0c552f521a45f4bee6e2fd91fa"
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+      }
+    },
+    {
+      "id": "tables-vmerge-early-control",
+      "version": 2,
+      "category": "tables",
+      "description": "Twenty-row ledger with no vertical merge at early",
+      "input": "fixtures/tables-vmerge-early-control.docx",
+      "sha256": "3259e46032710352674fa6722e4cf0cc2d8c5cc599fcb3d48a5a9463aa0a9baa",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Birch": 19,
+        "Delivery": 20,
+        "Entry01": 1,
+        "Entry02": 1,
+        "Entry03": 1,
+        "Entry04": 1,
+        "Entry05": 1,
+        "Entry06": 1,
+        "Entry07": 1,
+        "Entry08": 1,
+        "Entry09": 1,
+        "Entry10": 1,
+        "Entry11": 1,
+        "Entry12": 1,
+        "Entry13": 1,
+        "Entry14": 1,
+        "Entry15": 1,
+        "Entry16": 1,
+        "Entry17": 1,
+        "Entry18": 1,
+        "Entry19": 1,
+        "Entry20": 1,
+        "Lot01": 1,
+        "Lot03": 1,
+        "Lot04": 1,
+        "Lot05": 1,
+        "Lot06": 1,
+        "Lot07": 1,
+        "Lot08": 1,
+        "Lot09": 1,
+        "Lot10": 1,
+        "Lot11": 1,
+        "Lot12": 1,
+        "Lot13": 1,
+        "Lot14": 1,
+        "Lot15": 1,
+        "Lot16": 1,
+        "Lot17": 1,
+        "Lot18": 1,
+        "Lot19": 1,
+        "Lot20": 1,
+        "ledger.": 20,
+        "sample.": 19
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "Entry20",
+          "occurrence": 1,
+          "page": 2,
+          "rect": [
+            305,
+            60,
+            540,
+            720
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+      }
+    },
+    {
+      "id": "tables-vmerge-early-merged",
+      "version": 2,
+      "category": "tables",
+      "description": "Twenty-row ledger with an intact vertical merge at early",
+      "input": "fixtures/tables-vmerge-early-merged.docx",
+      "sha256": "992d48e6756e6e753e3cba81c545c60d6b19aca750caea9f0c8de0eef2b448be",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Birch": 19,
+        "Delivery": 20,
+        "Entry01": 1,
+        "Entry02": 1,
+        "Entry03": 1,
+        "Entry04": 1,
+        "Entry05": 1,
+        "Entry06": 1,
+        "Entry07": 1,
+        "Entry08": 1,
+        "Entry09": 1,
+        "Entry10": 1,
+        "Entry11": 1,
+        "Entry12": 1,
+        "Entry13": 1,
+        "Entry14": 1,
+        "Entry15": 1,
+        "Entry16": 1,
+        "Entry17": 1,
+        "Entry18": 1,
+        "Entry19": 1,
+        "Entry20": 1,
+        "Lot01": 1,
+        "Lot03": 1,
+        "Lot04": 1,
+        "Lot05": 1,
+        "Lot06": 1,
+        "Lot07": 1,
+        "Lot08": 1,
+        "Lot09": 1,
+        "Lot10": 1,
+        "Lot11": 1,
+        "Lot12": 1,
+        "Lot13": 1,
+        "Lot14": 1,
+        "Lot15": 1,
+        "Lot16": 1,
+        "Lot17": 1,
+        "Lot18": 1,
+        "Lot19": 1,
+        "Lot20": 1,
+        "ledger.": 20,
+        "sample.": 19
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "Entry20",
+          "occurrence": 1,
+          "page": 2,
+          "rect": [
+            305,
+            60,
+            540,
+            720
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "same-page",
+          "version": 1,
+          "markers": [
+            "Entry01",
+            "Entry02"
+          ]
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+      }
+    },
+    {
+      "id": "tables-vmerge-boundary-control",
+      "version": 2,
+      "category": "tables",
+      "description": "Twenty-row ledger with no vertical merge at boundary",
+      "input": "fixtures/tables-vmerge-boundary-control.docx",
+      "sha256": "4566c815720a96876c866e409213e684d3205f6a63e63649486b1808c585f551",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Birch": 18,
+        "Delivery": 20,
+        "Entry01": 1,
+        "Entry02": 1,
+        "Entry03": 1,
+        "Entry04": 1,
+        "Entry05": 1,
+        "Entry06": 1,
+        "Entry07": 1,
+        "Entry08": 1,
+        "Entry09": 1,
+        "Entry10": 1,
+        "Entry11": 1,
+        "Entry12": 1,
+        "Entry13": 1,
+        "Entry14": 1,
+        "Entry15": 1,
+        "Entry16": 1,
+        "Entry17": 1,
+        "Entry18": 1,
+        "Entry19": 1,
+        "Entry20": 1,
+        "Lot01": 1,
+        "Lot02": 1,
+        "Lot03": 1,
+        "Lot04": 1,
+        "Lot05": 1,
+        "Lot06": 1,
+        "Lot07": 1,
+        "Lot08": 1,
+        "Lot09": 1,
+        "Lot10": 1,
+        "Lot11": 1,
+        "Lot14": 1,
+        "Lot15": 1,
+        "Lot16": 1,
+        "Lot17": 1,
+        "Lot18": 1,
+        "Lot19": 1,
+        "Lot20": 1,
+        "ledger.": 20,
+        "sample.": 18
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "Entry20",
+          "occurrence": 1,
+          "page": 2,
+          "rect": [
+            305,
+            60,
+            540,
+            720
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
+      }
+    },
+    {
+      "id": "tables-vmerge-boundary-merged",
+      "version": 2,
+      "category": "tables",
+      "description": "Twenty-row ledger with an intact vertical merge at boundary",
+      "input": "fixtures/tables-vmerge-boundary-merged.docx",
+      "sha256": "464d8892a368dd864a8feec410a124f83bc65fcea94136715c0bb779c5ecda44",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Birch": 18,
+        "Delivery": 20,
+        "Entry01": 1,
+        "Entry02": 1,
+        "Entry03": 1,
+        "Entry04": 1,
+        "Entry05": 1,
+        "Entry06": 1,
+        "Entry07": 1,
+        "Entry08": 1,
+        "Entry09": 1,
+        "Entry10": 1,
+        "Entry11": 1,
+        "Entry12": 1,
+        "Entry13": 1,
+        "Entry14": 1,
+        "Entry15": 1,
+        "Entry16": 1,
+        "Entry17": 1,
+        "Entry18": 1,
+        "Entry19": 1,
+        "Entry20": 1,
+        "Lot01": 1,
+        "Lot02": 1,
+        "Lot03": 1,
+        "Lot04": 1,
+        "Lot05": 1,
+        "Lot06": 1,
+        "Lot07": 1,
+        "Lot08": 1,
+        "Lot09": 1,
+        "Lot10": 1,
+        "Lot11": 1,
+        "Lot14": 1,
+        "Lot15": 1,
+        "Lot16": 1,
+        "Lot17": 1,
+        "Lot18": 1,
+        "Lot19": 1,
+        "Lot20": 1,
+        "ledger.": 20,
+        "sample.": 18
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "Entry20",
+          "occurrence": 1,
+          "page": 2,
+          "rect": [
+            305,
+            60,
+            540,
+            720
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "same-page",
+          "version": 1,
+          "markers": [
+            "Entry11",
+            "Entry12",
+            "Entry13"
+          ]
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "8a182901bcac9e370ffb4d54c416185eab3296dd88ec62e83e39d2464ddfdda9"
       }
     }
   ]

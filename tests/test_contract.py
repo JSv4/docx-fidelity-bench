@@ -217,7 +217,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 20)
+        self.assertEqual(len(common.validate_registry()['cases']), 24)
 
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
@@ -243,7 +243,30 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v6')
+        self.assertEqual(registry['suite']['id'], 'core-v7')
+
+    def test_vertical_merge_pairs_preserve_all_other_package_content(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
+        for location, expected_span in [('early', 2), ('boundary', 3)]:
+            pair = [records[f'tables-vmerge-{location}-{kind}'] for kind in ('control', 'merged')]
+            with ZipFile(common.ROOT / pair[0]['input']) as control, ZipFile(common.ROOT / pair[1]['input']) as merged:
+                self.assertEqual(control.namelist(), merged.namelist())
+                for name in control.namelist():
+                    if name != 'word/document.xml':
+                        self.assertEqual(control.read(name), merged.read(name))
+                original = ET.fromstring(control.read('word/document.xml'))
+                actual = ET.fromstring(merged.read('word/document.xml'))
+                self.assertEqual(len(actual.findall('.//' + w + 'tr')), 20)
+                self.assertEqual(len(actual.findall('.//' + w + 'vMerge')), expected_span)
+                for properties in actual.iter(w + 'tcPr'):
+                    for element in list(properties):
+                        if element.tag == w + 'vMerge':
+                            properties.remove(element)
+                self.assertEqual(ET.tostring(original), ET.tostring(actual))
+                self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
 
     def test_unknown_assertion_is_rejected(self):
         registry = common.read_json(common.ROOT / 'fixtures/manifest.json')
