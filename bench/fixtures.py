@@ -68,7 +68,7 @@ def zip_write(path, parts):
             archive.writestr(item, payload.encode() if isinstance(payload, str) else payload)
 
 
-def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None, story=None, notes_xml=None):
+def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None):
     namespaces = f'xmlns:w="{W}" xmlns:r="{R}" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"'
     namespaces += namespaces_extra
     styles = f'''<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/><w:sz w:val="22"/><w:color w:val="000000"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="120" w:line="276" w:lineRule="auto"/><w:widowControl/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style><w:style w:type="paragraph" w:styleId="Title"><w:name w:val="Title"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:after="240"/></w:pPr><w:rPr><w:b/><w:sz w:val="32"/></w:rPr></w:style></w:styles>'''
@@ -77,11 +77,10 @@ def package(path, body, final_section=None, notes=None, image=False, namespaces_
     relations = [('rStyles', 'styles', 'styles.xml'), ('rSettings', 'settings', 'settings.xml')]
     overrides = [('document', 'document.main'), ('styles', 'styles'), ('settings', 'settings')]
     parts = {'word/document.xml': f'<w:document {namespaces}><w:body>{body}{final_section or section()}</w:body></w:document>', 'word/styles.xml': styles, 'word/settings.xml': f'<w:settings xmlns:w="{W}"><w:footnotePr><w:numFmt w:val="decimal"/></w:footnotePr><w:endnotePr><w:numFmt w:val="lowerRoman"/></w:endnotePr><w:compat><w:compatSetting w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="15"/></w:compat></w:settings>'}
-    if story:
-        kind, content = story
+    for index, (kind, content) in enumerate(([story] if story else []) + (stories or [])):
         root = 'hdr' if kind == 'header' else 'ftr'
         parts[f'word/{kind}1.xml'] = f'<w:{root} xmlns:w="{W}">{content}</w:{root}>'
-        relations.append(('rStory', kind, kind + '1.xml'))
+        relations.append(('rStory' if index == 0 else f'rStory{index}', kind, kind + '1.xml'))
         overrides.append((kind + '1', kind))
     if notes:
         kind, text = notes
@@ -100,13 +99,13 @@ def package(path, body, final_section=None, notes=None, image=False, namespaces_
 
 def generate():
     cases = []
-    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None):
+    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None):
         assertions = assertions or []
         for assertion in assertions:
             if assertion['type'] == 'marker-region':
                 assertion.update(version=2, tolerancePt=0.0001)
         path = ROOT / 'fixtures' / (case_id + '.docx')
-        package(path, body, sect, notes, image, namespaces_extra, styles_xml, story, notes_xml)
+        package(path, body, sect, notes, image, namespaces_extra, styles_xml, story, notes_xml, stories)
         inventory = dict(sorted(Counter(' '.join(text).split()).items()))
         cases.append({'id': case_id, 'version': 2 if any(a['type'] == 'marker-region' for a in assertions) else 1, 'category': category, 'description': description, 'input': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'rights': {'author': 'John Scrudato IV', 'license': 'MIT', 'origin': 'Authored by bench/fixtures.py in this repository', 'assets': 'All text and graphics are generated here; no embedded font files'}, 'profile': {'review': 'final', 'comments': 'hidden'}, 'fonts': [FONT], 'tokens': inventory, 'assertions': assertions, 'generator': {'path': 'bench/fixtures.py', 'sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}})
     prose = 'The survey team records the height of each tower before the evening check. The next crew compares the notes and keeps the route open for the morning visit.'
@@ -417,7 +416,39 @@ def generate():
         assertions.append({'type': 'marker-reference-position', 'version': 1, 'marker': 'InsetMarker', 'tolerancePt': 0.5})
         add('paragraphs-indentation-' + name, 'paragraphs', 'Original Elm indentation inventory in ' + value,
             texts, body, styles_xml=indent_styles, assertions=assertions)
-    registry = {'schema': 1, 'suite': {'id': 'core-v13', 'version': 13, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    margin_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:cs="{FONT}"/><w:sz w:val="22"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl/><w:spacing w:after="120" w:line="276" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>'
+    margin_units = [('pt', '54pt', '18pt'), ('in', '0.75in', '0.25in'),
+                    ('cm', '1.905cm', '0.635cm'), ('mm', '19.05mm', '6.35mm'),
+                    ('pc', '4.5pc', '1.5pc'), ('pi', '4.5pi', '1.5pi'), ('twips', '1080', '360')]
+    for name, edge, band in margin_units + [('multipage-pt', '54pt', '18pt'), ('multipage-twips', '1080', '360')]:
+        count = 80 if name.startswith('multipage') else 16
+        pages = 2 if name.startswith('multipage') else 1
+        texts = ['MarginTop Chestnut margin records begin here.',
+                 'MarginWide ' + ('The archive crew measures the page before numbering each entry. ' * 5).strip()]
+        texts += [f'Chestnut{i:03d} The margin register retains this original line.' for i in range(1, count + 1)]
+        texts += ['MarginEnd Chestnut margin records end here.']
+        body = ''.join(para(text, '<w:spacing w:after="0" w:line="240" w:lineRule="auto"/>') for text in texts)
+        sect = f'<w:sectPr><w:headerReference w:type="default" r:id="rStory"/><w:footerReference w:type="default" r:id="rStory1"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="{edge}" w:right="{edge}" w:bottom="{edge}" w:left="{edge}" w:header="{band}" w:footer="{band}" w:gutter="0"/></w:sectPr>'
+        header, footer = 'MarginHead Chestnut running header.', 'MarginFoot Chestnut running footer.'
+        assertions = [{'type': 'marker-region', 'version': 2, 'marker': 'MarginTop', 'occurrence': 1,
+                       'page': 1, 'rect': [54, 54, 558, 738]},
+                      {'type': 'marker-reference-position', 'version': 1, 'marker': 'MarginTop', 'tolerancePt': 0.5},
+                      {'type': 'marker-region', 'version': 2, 'marker': 'MarginEnd', 'occurrence': 1,
+                       'page': pages, 'rect': [54, 54, 558, 738]}]
+        if pages == 1:
+            assertions += [{'type': 'marker-region', 'version': 2, 'marker': marker, 'occurrence': 1,
+                            'page': 1, 'rect': rect} for marker, rect in
+                           [('MarginHead', [54, 0, 558, 54]), ('MarginFoot', [54, 738, 558, 792])]]
+        add('paragraphs-page-margins-' + name, 'paragraphs', 'Original Chestnut page and story margins in ' + edge,
+            texts + [header, footer] * pages, body, sect, assertions=assertions,
+            story=('header', para(header)), stories=[('footer', para(footer))], styles_xml=margin_styles)
+    for name, value in [('small-mm', '25mm'), ('small-twips', '1417')]:
+        text = 'MarginMillimeters Chestnut documents a millimeter left margin.'
+        sect = f'<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="{value}" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr>'
+        add('paragraphs-page-margins-' + name, 'paragraphs', 'Original Chestnut millimeter margin and rounded twip control',
+            [text], para(text), sect, styles_xml=margin_styles, assertions=[{'type': 'marker-reference-position', 'version': 1,
+                                                   'marker': 'MarginMillimeters', 'tolerancePt': 0.5}])
+    registry = {'schema': 1, 'suite': {'id': 'core-v14', 'version': 14, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
