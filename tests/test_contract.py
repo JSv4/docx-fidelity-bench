@@ -217,7 +217,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 14)
+        self.assertEqual(len(common.validate_registry()['cases']), 16)
 
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
@@ -243,13 +243,36 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v4')
+        self.assertEqual(registry['suite']['id'], 'core-v5')
 
     def test_unknown_assertion_is_rejected(self):
         registry = common.read_json(common.ROOT / 'fixtures/manifest.json')
         registry['cases'][0]['assertions'].append({'type': 'unimplemented', 'version': 1})
         with self.assertRaises(ValueError):
             common.validate_registry(registry)
+
+    def test_hidden_header_pair_changes_only_the_empty_paragraph_run(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records['paragraphs-header-' + suffix] for suffix in ('empty', 'hidden')]
+        w = '{' + fixtures.W + '}'
+        with ZipFile(common.ROOT / pair[0]['input']) as control, ZipFile(common.ROOT / pair[1]['input']) as hidden:
+            self.assertEqual(control.namelist(), hidden.namelist())
+            for name in control.namelist():
+                if name != 'word/header1.xml':
+                    self.assertEqual(control.read(name), hidden.read(name))
+            original = ET.fromstring(control.read('word/header1.xml'))
+            actual = ET.fromstring(hidden.read('word/header1.xml'))
+            first = actual.find(w + 'p')
+            concealed = first.find(w + 'r')
+            self.assertIsNotNone(concealed.find(w + 'rPr/' + w + 'vanish'))
+            self.assertEqual(concealed.find(w + 't').text, 'SecretMarker Concealed archive note.')
+            first.remove(concealed)
+            self.assertEqual(ET.tostring(original), ET.tostring(actual))
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        self.assertNotIn('SecretMarker', pair[1]['tokens'])
+        self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
 
     def test_unknown_version_is_rejected(self):
         registry = common.read_json(common.ROOT / 'fixtures/manifest.json')
