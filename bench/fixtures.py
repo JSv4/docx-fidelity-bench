@@ -68,7 +68,7 @@ def zip_write(path, parts):
             archive.writestr(item, payload.encode() if isinstance(payload, str) else payload)
 
 
-def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None):
+def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None):
     namespaces = f'xmlns:w="{W}" xmlns:r="{R}" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"'
     namespaces += namespaces_extra
     styles = f'''<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/><w:sz w:val="22"/><w:color w:val="000000"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="120" w:line="276" w:lineRule="auto"/><w:widowControl/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style><w:style w:type="paragraph" w:styleId="Title"><w:name w:val="Title"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:after="240"/></w:pPr><w:rPr><w:b/><w:sz w:val="32"/></w:rPr></w:style></w:styles>'''
@@ -94,18 +94,20 @@ def package(path, body, final_section=None, notes=None, image=False, namespaces_
     parts['word/_rels/document.xml.rels'] = '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' + ''.join(f'<Relationship Id="{i}" Type="{R}/{kind}" Target="{target}"/>' for i, kind, target in relations) + '</Relationships>'
     parts['_rels/.rels'] = f'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rDocument" Type="{R}/officeDocument" Target="word/document.xml"/></Relationships>'
     parts['[Content_Types].xml'] = '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Default Extension="png" ContentType="image/png"/>' + ''.join(f'<Override PartName="/word/{name}.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.{kind}+xml"/>' for name, kind in overrides) + '</Types>'
+    if extra_parts:
+        parts.update(extra_parts)
     zip_write(path, parts)
 
 
 def generate():
     cases = []
-    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None):
+    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None):
         assertions = assertions or []
         for assertion in assertions:
             if assertion['type'] == 'marker-region':
                 assertion.update(version=2, tolerancePt=0.0001)
         path = ROOT / 'fixtures' / (case_id + '.docx')
-        package(path, body, sect, notes, image, namespaces_extra, styles_xml, story, notes_xml, stories)
+        package(path, body, sect, notes, image, namespaces_extra, styles_xml, story, notes_xml, stories, extra_parts)
         inventory = dict(sorted(Counter(' '.join(text).split()).items()))
         cases.append({'id': case_id, 'version': 2 if any(a['type'] == 'marker-region' for a in assertions) else 1, 'category': category, 'description': description, 'input': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'rights': {'author': 'John Scrudato IV', 'license': 'MIT', 'origin': 'Authored by bench/fixtures.py in this repository', 'assets': 'All text and graphics are generated here; no embedded font files'}, 'profile': {'review': 'final', 'comments': 'hidden'}, 'fonts': [FONT], 'tokens': inventory, 'assertions': assertions, 'generator': {'path': 'bench/fixtures.py', 'sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}})
     prose = 'The survey team records the height of each tower before the evening check. The next crew compares the notes and keeps the route open for the morning visit.'
@@ -476,7 +478,17 @@ def generate():
                            'marker': f'Birch{count:02d}', 'tolerancePt': 0.5})
         add('tables-row-height-' + name, 'tables', 'Original Birch ledger row height in ' + value + ' with ' + rule,
             texts, body, sect=section().replace('w:footer="720"', 'w:footer="720" w:gutter="0"'), styles_xml=row_styles, assertions=assertions)
-    registry = {'schema': 1, 'suite': {'id': 'core-v15', 'version': 15, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    for name, entry in [('control', None), ('zero', '[trash]/0000.dat'),
+                        ('upper', '[trash]/ABCD.dat'), ('lower', '[trash]/00af.dat')]:
+        text = 'ResourceTop Acacia records retain every original entry.'
+        extras = {entry: b'<obsolete>Discarded independent Acacia fragment'} if entry else None
+        add('paragraphs-standard-trash-' + name, 'paragraphs', 'Original Acacia ledger with ' + (entry or 'no trash item'),
+            [text], para(text), sect=section().replace('w:footer="720"', 'w:footer="720" w:gutter="0"'),
+            styles_xml=row_styles, extra_parts=extras, assertions=[
+                {'type': 'marker-region', 'version': 2, 'marker': 'ResourceTop', 'occurrence': 1,
+                 'page': 1, 'rect': [72, 60, 540, 720]},
+                {'type': 'marker-reference-position', 'version': 1, 'marker': 'ResourceTop', 'tolerancePt': 0.5}])
+    registry = {'schema': 1, 'suite': {'id': 'core-v16', 'version': 16, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

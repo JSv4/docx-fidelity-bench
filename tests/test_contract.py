@@ -231,7 +231,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 81)
+        self.assertEqual(len(common.validate_registry()['cases']), 85)
 
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
@@ -257,7 +257,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v15')
+        self.assertEqual(registry['suite']['id'], 'core-v16')
 
     def test_legacy_header_pairs_preserve_everything_except_number_representation(self):
         import xml.etree.ElementTree as ET
@@ -402,6 +402,19 @@ class RegistryContract(unittest.TestCase):
                 self.assertEqual(ET.tostring(unit), ET.tostring(numeric))
             self.assertEqual(actual['tokens'], expected['tokens'])
             self.assertEqual(actual['assertions'], expected['assertions'])
+
+    def test_standard_trash_pairs_add_only_the_declared_opaque_item(self):
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        control = records['paragraphs-standard-trash-control']
+        for name, entry in [('zero', '[trash]/0000.dat'), ('upper', '[trash]/ABCD.dat'), ('lower', '[trash]/00af.dat')]:
+            actual = records['paragraphs-standard-trash-' + name]
+            with ZipFile(common.ROOT / actual['input']) as a, ZipFile(common.ROOT / control['input']) as b:
+                self.assertEqual(set(a.namelist()) - set(b.namelist()), {entry})
+                for part in b.namelist(): self.assertEqual(a.read(part), b.read(part))
+                self.assertEqual(a.read(entry), b'<obsolete>Discarded independent Acacia fragment')
+            self.assertEqual(actual['tokens'], control['tokens'])
+            self.assertEqual(actual['assertions'], control['assertions'])
 
     def test_border_size_cards_change_only_the_optional_size_attribute(self):
         import xml.etree.ElementTree as ET
