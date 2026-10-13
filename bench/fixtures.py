@@ -308,7 +308,25 @@ def generate():
                              'page': 1, 'rect': [72, 72, 540, 105]},
                             {'type': 'marker-region', 'version': 2, 'marker': 'Record090', 'occurrence': 1,
                              'page': 3, 'rect': [72, 60, 540, 720]}])
-    registry = {'schema': 1, 'suite': {'id': 'core-v8', 'version': 8, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Original archive cards for Docxodus #1081. A half-point height/width
+    # exposes Chromium PDF size quantization. Controls change only that axis
+    # to an integral point. Strict benchmark physical-geometry checks remain.
+    for axis, integral in [('height', (606, 878)), ('width', (626, 852))]:
+        for fractional in (False, True):
+            width, height = integral
+            if fractional:
+                if axis == 'height':
+                    height += 0.5
+                else:
+                    width += 0.5
+            sect = section().replace('w:w="12240" w:h="15840"', f'w:w="{int(width * 20)}" w:h="{int(height * 20)}"')
+            cid = f'paragraphs-page-size-{axis}-' + ('fractional' if fractional else 'control')
+            text = 'PageBoxMarker Alder archive card.'
+            add(cid, 'paragraphs', 'Archive card with ' + ('a half-point' if fractional else 'an integral') + ' page ' + axis,
+                [text], para(text), sect=sect, styles_xml=ledger_styles,
+                assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'PageBoxMarker', 'occurrence': 1,
+                             'page': 1, 'rect': [72, 60, 540, 105]}])
+    registry = {'schema': 1, 'suite': {'id': 'core-v9', 'version': 9, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

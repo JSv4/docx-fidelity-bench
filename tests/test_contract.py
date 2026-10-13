@@ -140,6 +140,20 @@ class CoverageContract(unittest.TestCase):
 
 
 class PdfContract(unittest.TestCase):
+    def test_fractional_chromium_page_size_error_remains_a_mandatory_failure(self):
+        declaration = {'fonts': ['Liberation Serif'], 'tokens': {}, 'assertions': []}
+        for expected, actual in [([0, 0, 606, 878.5], [0, 0, 606, 877.91998]),
+                                 ([0, 0, 626.5, 852], [0, 0, 625.91998, 852])]:
+            reference = {'geometry': [{'media': expected, 'crop': expected, 'rotation': 0}],
+                         'fonts': ['LiberationSerif'], 'tokens': {}, 'words': []}
+            candidate = copy.deepcopy(reference)
+            candidate['geometry'][0].update(media=actual, crop=actual)
+            checks = pdf.correctness(declaration, reference, candidate)
+            self.assertFalse(checks[-1]['passed'])
+            self.assertEqual(checks[-1]['name'], 'physical-geometry-page-1')
+            self.assertTrue(all(check['passed'] for check in checks[:-1]))
+            self.assertEqual(metrics.case_score([{'score': 100}], checks), 0)
+
     def region_check(self, x=100, version=2, page=1):
         geometry = [{'media': [0, 0, 612, 792], 'crop': [0, 0, 612, 792], 'rotation': 0}]
         reference = {'geometry': geometry, 'fonts': ['LiberationSerif'], 'tokens': {'Marker': 1}, 'words': [{'text': 'Marker', 'page': 1, 'rect': [100, 200, 130, 212]}]}
@@ -217,7 +231,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 28)
+        self.assertEqual(len(common.validate_registry()['cases']), 32)
 
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
@@ -243,7 +257,29 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v8')
+        self.assertEqual(registry['suite']['id'], 'core-v9')
+
+    def test_fractional_page_pairs_change_only_one_half_point_dimension(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        for axis, attribute in [('height', 'h'), ('width', 'w')]:
+            pair = [records[f'paragraphs-page-size-{axis}-{kind}'] for kind in ('control', 'fractional')]
+            with ZipFile(common.ROOT / pair[0]['input']) as control, ZipFile(common.ROOT / pair[1]['input']) as fractional:
+                self.assertEqual(control.namelist(), fractional.namelist())
+                for name in control.namelist():
+                    if name != 'word/document.xml':
+                        self.assertEqual(control.read(name), fractional.read(name))
+                original = ET.fromstring(control.read('word/document.xml'))
+                actual = ET.fromstring(fractional.read('word/document.xml'))
+                before = original.find('.//' + w + 'pgSz')
+                after = actual.find('.//' + w + 'pgSz')
+                self.assertEqual(int(after.get(w + attribute)) - int(before.get(w + attribute)), 10)
+                after.set(w + attribute, before.get(w + attribute))
+                self.assertEqual(ET.tostring(original), ET.tostring(actual))
+            self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+            self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
 
     def test_line_break_pairs_preserve_line_runs_properties_and_package_content(self):
         import xml.etree.ElementTree as ET
