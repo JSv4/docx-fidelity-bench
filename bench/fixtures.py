@@ -502,22 +502,25 @@ def generate():
     # the same intact merge in markup both Word and LibreOffice honor; see REFERENCE_CONTROLS.md.
     ledger('boundary', 11, 3, True, kept=True)
     # Regression coverage for Docxodus #1122: an exact row keeps its declared height when its
-    # content needs more. The second row's cell holds two lines in an 18pt exact row; the third
-    # row's position shows whether the height rule was honored rather than grown to fit.
+    # content needs more. The second row's cell ends with an empty 36pt paragraph mark in an 18pt
+    # exact row; the third row's position shows whether the height rule was honored rather than
+    # grown to fit. The excess is a paragraph mark, not text, so the visible-token inventory does
+    # not depend on how a provider writes clipped glyphs into the PDF text layer.
     overflow_rows = []
     overflow_texts = []
     for index in range(1, 4):
-        left = [f'Birch{index:02d} Exact record.'] + (['Overflow Birch continuation line.'] if index == 2 else [])
+        left = f'Birch{index:02d} Exact record.'
         right = f'Entry{index:02d} Exact cell.'
-        overflow_texts += left + [right]
-        cells = ('<w:tc><w:tcPr><w:tcW w:w="3600" w:type="dxa"/></w:tcPr>' + ''.join(para(text, '<w:spacing w:after="0"/>') for text in left) + '</w:tc>'
+        overflow_texts += [left, right]
+        tall_mark = para(props='<w:spacing w:after="0"/><w:rPr><w:sz w:val="72"/></w:rPr>', runs='') if index == 2 else ''
+        cells = ('<w:tc><w:tcPr><w:tcW w:w="3600" w:type="dxa"/></w:tcPr>' + para(left, '<w:spacing w:after="0"/>') + tall_mark + '</w:tc>'
                  + '<w:tc><w:tcPr><w:tcW w:w="3600" w:type="dxa"/></w:tcPr>' + para(right, '<w:spacing w:after="0"/>') + '</w:tc>')
         overflow_rows.append(f'<w:tr><w:trPr><w:trHeight w:val="360" w:hRule="exact"/></w:trPr>{cells}</w:tr>')
     overflow_borders = '<w:tblBorders>' + ''.join(f'<w:{side} w:val="single" w:sz="6" w:color="444444"/>'
                                                  for side in ('top', 'left', 'bottom', 'right', 'insideH', 'insideV')) + '</w:tblBorders>'
     overflow_body = ('<w:tbl><w:tblPr><w:tblW w:w="7200" w:type="dxa"/>' + overflow_borders + '<w:tblLayout w:type="fixed"/></w:tblPr>'
                      '<w:tblGrid><w:gridCol w:w="3600"/><w:gridCol w:w="3600"/></w:tblGrid>' + ''.join(overflow_rows) + '</w:tbl>')
-    add('tables-row-height-exact-overflow', 'tables', 'Birch ledger with an exact 18pt row whose cell content needs two lines',
+    add('tables-row-height-exact-overflow', 'tables', 'Birch ledger with an exact 18pt row whose cell content needs more height',
         overflow_texts, overflow_body, sect=section().replace('w:footer="720"', 'w:footer="720" w:gutter="0"'), styles_xml=row_styles,
         assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5}
                     for marker in ('Birch01', 'Birch03')])
