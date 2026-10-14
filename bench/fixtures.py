@@ -501,6 +501,74 @@ def generate():
     # violating the original same-page declaration. Keep-with-next on the merged rows states
     # the same intact merge in markup both Word and LibreOffice honor; see REFERENCE_CONTROLS.md.
     ledger('boundary', 11, 3, True, kept=True)
+    # Regression coverage for Docxodus #1122: an exact row keeps its declared height when its
+    # content needs more. The second row's cell holds two lines in an 18pt exact row; the third
+    # row's position shows whether the height rule was honored rather than grown to fit.
+    overflow_rows = []
+    overflow_texts = []
+    for index in range(1, 4):
+        left = [f'Birch{index:02d} Exact record.'] + (['Overflow Birch continuation line.'] if index == 2 else [])
+        right = f'Entry{index:02d} Exact cell.'
+        overflow_texts += left + [right]
+        cells = ('<w:tc><w:tcPr><w:tcW w:w="3600" w:type="dxa"/></w:tcPr>' + ''.join(para(text, '<w:spacing w:after="0"/>') for text in left) + '</w:tc>'
+                 + '<w:tc><w:tcPr><w:tcW w:w="3600" w:type="dxa"/></w:tcPr>' + para(right, '<w:spacing w:after="0"/>') + '</w:tc>')
+        overflow_rows.append(f'<w:tr><w:trPr><w:trHeight w:val="360" w:hRule="exact"/></w:trPr>{cells}</w:tr>')
+    overflow_borders = '<w:tblBorders>' + ''.join(f'<w:{side} w:val="single" w:sz="6" w:color="444444"/>'
+                                                 for side in ('top', 'left', 'bottom', 'right', 'insideH', 'insideV')) + '</w:tblBorders>'
+    overflow_body = ('<w:tbl><w:tblPr><w:tblW w:w="7200" w:type="dxa"/>' + overflow_borders + '<w:tblLayout w:type="fixed"/></w:tblPr>'
+                     '<w:tblGrid><w:gridCol w:w="3600"/><w:gridCol w:w="3600"/></w:tblGrid>' + ''.join(overflow_rows) + '</w:tbl>')
+    add('tables-row-height-exact-overflow', 'tables', 'Birch ledger with an exact 18pt row whose cell content needs two lines',
+        overflow_texts, overflow_body, sect=section().replace('w:footer="720"', 'w:footer="720" w:gutter="0"'), styles_xml=row_styles,
+        assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5}
+                    for marker in ('Birch01', 'Birch03')])
+    # Regression coverage for Docxodus #1115: simple PAGE and NUMPAGES fields in one header.
+    # Each page reads "Leaf N of 3": pages 1 and 2 have unique number markers, and the complete
+    # inventory requires four 3s, so a cached NUMPAGES or PAGE result fails it.
+    folio_texts = [f'Folio{index:02d} Maple register inspected.' for index in range(1, 4)]
+    folio_body = ''.join(para(text, '<w:pageBreakBefore/>' if index else '') for index, text in enumerate(folio_texts))
+    folio_run = '<w:r><w:rPr><w:i/><w:sz w:val="24"/></w:rPr><w:t>{}</w:t></w:r>'
+    folio_run = folio_run.replace('<w:t>', '<w:t xml:space="preserve">')
+    folio_header = (folio_run.format('Leaf ') + '<w:fldSimple w:instr=" PAGE ">' + folio_run.format('1') + '</w:fldSimple>'
+                    + folio_run.format(' of ') + '<w:fldSimple w:instr=" NUMPAGES ">' + folio_run.format('1') + '</w:fldSimple>')
+    folio_sect = section().replace('<w:sectPr>', '<w:sectPr><w:headerReference w:type="default" r:id="rStory"/>')
+    add('paragraphs-page-number-numpages-simple-field', 'paragraphs',
+        'Three-page running story with simple PAGE and NUMPAGES fields in one italic header line',
+        folio_texts + [f'Leaf {index} of 3' for index in range(1, 4)], folio_body, sect=folio_sect, styles_xml=ledger_styles,
+        story=('header', para(runs=folio_header, props='<w:spacing w:after="0"/>')),
+        assertions=[{'type': 'marker-region', 'version': 2, 'marker': str(index + 1), 'occurrence': 1,
+                     'page': index + 1, 'rect': [72, 30, 540, 65]} for index in range(2)])
+    # Regression coverage for Docxodus #1126: horizontal border spacing on indented, hanging and
+    # adjacent grouped paragraphs. Text keeps its indentation; borders sit outside it.
+    spacing_texts = ['SpacingPlain Juniper card keeps its text at the margin.',
+                     'SpacingIndent Juniper card keeps its text at the left indent.',
+                     'SpacingGroupOne ' + ('Juniper grouped card wraps across the full measure of its text band. ' * 2).strip(),
+                     'SpacingGroupTwo Juniper grouped card shares the same border.',
+                     'SpacingHanging ' + ('Juniper hanging card wraps beneath its hanging indent. ' * 3).strip()]
+    def spaced_border(space, size='8'):
+        return '<w:pBdr>' + ''.join(f'<w:{side} w:val="single" w:sz="{size}" w:space="{space}" w:color="246B7D"/>'
+                                    for side in ('top', 'left', 'bottom', 'right')) + '</w:pBdr>'
+    spacing_props = [spaced_border('4'),
+                     spaced_border('12') + '<w:ind w:left="1440" w:right="720"/>',
+                     spaced_border('8') + '<w:ind w:left="720"/>',
+                     spaced_border('8') + '<w:ind w:left="720"/>',
+                     spaced_border('6', '4') + '<w:ind w:left="1440" w:hanging="720"/>']
+    spacing_body = ''.join(para(text, props + '<w:spacing w:before="240" w:after="0"/>' if index in (0, 1, 2, 4) else props + '<w:spacing w:after="0"/>')
+                           for index, (text, props) in enumerate(zip(spacing_texts, spacing_props)))
+    add('paragraphs-border-spacing-indented', 'paragraphs',
+        'Bordered Juniper cards with positive spacing, indents, a grouped pair and a hanging indent',
+        spacing_texts, spacing_body, styles_xml=ledger_styles,
+        assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5}
+                    for marker in ('SpacingPlain', 'SpacingIndent', 'SpacingGroupOne', 'SpacingGroupTwo', 'SpacingHanging')])
+    # Regression coverage for Docxodus #1125: half-point width and height together, with ink
+    # placed near every page edge by small margins.
+    edge_texts = ['EdgeTop Rowan card begins near the upper edge.'] + [f'Rowan{index:02d} edge register line.' for index in range(1, 65)] + ['EdgeEnd Rowan card ends near the lower edge.']
+    edge_sect = ('<w:sectPr><w:pgSz w:w="12130" w:h="17570"/><w:pgMar w:top="360" w:right="360" w:bottom="360" w:left="360" '
+                 'w:header="180" w:footer="180" w:gutter="0"/><w:cols w:num="1" w:space="480"/></w:sectPr>')
+    edge_body = ''.join(para(text, '<w:jc w:val="right"/>' if index % 2 else '') for index, text in enumerate(edge_texts))
+    add('paragraphs-page-size-edge-ink', 'paragraphs', 'Rowan card with half-point width and height and ink near every edge',
+        edge_texts, edge_body, sect=edge_sect, styles_xml=ledger_styles,
+        assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5}
+                    for marker in ('EdgeTop', 'Rowan63', 'EdgeEnd')])
     registry = {'schema': 1, 'suite': {'id': 'core-v17', 'version': 17, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
