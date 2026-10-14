@@ -19,13 +19,16 @@ def main():
     refs = ref.add_subparsers(dest='operation', required=True)
     create = refs.add_parser('libreoffice')
     create.add_argument('--out', required=True)
+    controls = refs.add_parser('equivalent-controls')
+    controls.add_argument('--reference', required=True, help='Immutable direct LibreOffice bundle')
+    controls.add_argument('--out', required=True)
     capture = refs.add_parser('import')
     capture.add_argument('--metadata', required=True)
     capture.add_argument('--pdf-dir', required=True)
     capture.add_argument('--out', required=True)
     run = sub.add_parser('run')
     run.add_argument('--reference', required=True)
-    run.add_argument('--adapter', choices=['docxodus', 'libreoffice'], required=True)
+    run.add_argument('--adapter', choices=['docxodus', 'libreoffice', 'libreoffice-reference'], required=True)
     run.add_argument('--candidate', required=True, help='Exact source commit for Docxodus; explicit identity for other adapters')
     run.add_argument('--out', required=True)
     run.add_argument('--gate', choices=['report', 'mandatory', 'close'], default='report')
@@ -44,10 +47,12 @@ def main():
         docxodus(args.source, args.commit)
     elif args.command == 'reference' and args.operation == 'libreoffice':
         runner.reference_bundle(args.out)
+    elif args.command == 'reference' and args.operation == 'equivalent-controls':
+        runner.equivalent_reference_bundle(args.out, args.reference)
     elif args.command == 'reference':
         import_reference(registry, args)
     elif args.command == 'run':
-        adapter = 'libreoffice' if args.adapter == 'libreoffice' else ['node', str(ROOT / 'adapters/docxodus.mjs')]
+        adapter = args.adapter if args.adapter != 'docxodus' else ['node', str(ROOT / 'adapters/docxodus.mjs')]
         result = runner.run(args.out, args.reference, adapter, args.candidate)
         print(result['summary'])
         if not result['summary']['complete']:
