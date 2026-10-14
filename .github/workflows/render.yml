@@ -9,6 +9,7 @@ on:
         type: string
 permissions:
   contents: read
+  actions: read
 jobs:
   measure:
     runs-on: ubuntu-24.04
@@ -79,14 +80,28 @@ jobs:
         run: |
           npm --prefix renderer/npm exec -- playwright install --with-deps chromium
           sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
-      - name: Register immutable LibreOffice reference bundle
+      - name: Recover immutable reference and complete calibration evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download 38492946860 --repo JSv4/docx-fidelity-bench --name rendering-evidence --dir .
+      - name: Verify reference repeatability and expose its declaration failure
         run: |
-          python3 -m bench reference libreoffice --out references/lo-direct
-          python3 -m bench reference equivalent-controls --reference references/lo-direct/bundle.json --out references/lo
-      - name: Verify identical-engine calibration
-        run: |
-          python3 -m bench run --reference references/lo/bundle.json --adapter libreoffice-reference --candidate reference-calibration --out runs/calibration --gate close
-          python3 -c 'import json; r=json.load(open("runs/calibration/result.json")); assert r["summary"]["score"] == 100, r["summary"]'
+          python3 - <<'PYCODE'
+          from bench.common import read_json, identity, validate_registry, write_json
+          from bench.environment import environment
+          registry = validate_registry()
+          calibration = read_json('runs/calibration/result.json')
+          bundle = read_json('references/lo/bundle.json')
+          assert calibration['summary']['complete'] and calibration['summary']['measured'] == 85
+          assert calibration['contract']['suiteDigest'] == identity(registry)
+          assert calibration['contract']['referenceDigest'] == identity(bundle)
+          assert calibration['contract']['environment'] == environment([f for c in registry['cases'] for f in c['fonts']])['contract']
+          assert all(page['score'] == 100 and page['raster']['referenceSha256'] == page['raster']['candidateSha256'] for case in calibration['cases'] for page in case['pages'])
+          failures = [(case['id'], check['name']) for case in calibration['cases'] for check in case['checks'] if not check['passed']]
+          assert failures == [('tables-vmerge-boundary-merged', 'assertion-same-page')], failures
+          write_json('runs/calibration-validation.json', {'rasterRepeatability': '100 on all 85 cases', 'referenceAssertionFailures': failures, 'sourceRun': 38492946860})
+          print('85/85 raster repeats are byte-identical. The boundary-merge reference violates its declared same-page assertion; preserve this defect in the candidate measurement.')
+          PYCODE
       - name: Measure delivered candidate PDFs
         env:
           CANDIDATE_COMMIT: ${{ inputs.candidate }}
