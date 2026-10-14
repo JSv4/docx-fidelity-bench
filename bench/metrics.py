@@ -5,7 +5,7 @@ import math
 from pathlib import Path
 from .fixtures import png
 
-CONTRACT = {'version': 1, 'dpi': 96, 'inkThreshold': 24, 'inkRadius': 1, 'ssimWindow': 8, 'ssimC1': 6.5025, 'ssimC2': 58.5225, 'alignment': 'none', 'pageScore': '100 * min(ssim, inkF1)', 'caseScore': 'worst page; zero on mandatory failure'}
+CONTRACT = {'version': 1, 'dpi': 96, 'inkThreshold': 24, 'inkRadius': 1, 'ssimWindow': 8, 'ssimC1': 6.5025, 'ssimC2': 58.5225, 'alignment': 'none', 'pageScore': '100 * min(ssim, inkF1)', 'caseScore': 'worst page; zero on mandatory failure', 'visibleText': 'excludes UAX #9 bidi formatting controls'}
 
 
 def read_ppm(path):
