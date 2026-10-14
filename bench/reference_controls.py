@@ -21,6 +21,10 @@ RULES = {
         'control': 'tables-row-height-exact-twips',
         'rule': 'exact-row-height-points-to-twips-v1',
     },
+    'tables-vmerge-boundary-merged': {
+        'control': 'tables-vmerge-boundary-merged-kept',
+        'rule': 'vertical-merge-keep-with-next-v1',
+    },
 }
 
 
@@ -76,6 +80,33 @@ def exact_height_as_twips(data):
     return root
 
 
+def merge_kept_with_next(data):
+    """Hold each row of the single vertical merge with the next, ending at its last row."""
+    root = ET.fromstring(data)
+    tables = list(root.iter(W + 'tbl'))
+    if len(tables) != 1:
+        raise ValueError('Expected one ledger table')
+    rows = tables[0].findall(W + 'tr')
+    merged = [index for index, row in enumerate(rows)
+              if any(cell.find(W + 'tcPr/' + W + 'vMerge') is not None for cell in row.findall(W + 'tc'))]
+    if not merged or merged != list(range(merged[0], merged[-1] + 1)) or len(merged) < 2:
+        raise ValueError('Expected one contiguous vertical merge')
+    starts = [cell for index in merged for cell in rows[index].findall(W + 'tc')
+              if cell.find(W + 'tcPr/' + W + 'vMerge') is not None and
+              cell.find(W + 'tcPr/' + W + 'vMerge').get(W + 'val') == 'restart']
+    if len(starts) != 1 or starts[0] not in rows[merged[0]].findall(W + 'tc'):
+        raise ValueError('Expected one vertical merge starting on its first row')
+    if any(element.tag == W + 'keepNext' for element in root.iter()):
+        raise ValueError('Original already keeps paragraphs with the next')
+    for row in rows[merged[0]:merged[-1]]:
+        for paragraph in row.iter(W + 'p'):
+            properties = paragraph.find(W + 'pPr')
+            if properties is None or list(properties):
+                raise ValueError('Merged-row paragraph properties have additional content')
+            ET.SubElement(properties, W + 'keepNext')
+    return root
+
+
 def source(case, registry, root):
     rule = RULES.get(case['id'])
     if rule is None:
@@ -96,6 +127,9 @@ def source(case, registry, root):
     elif rule['rule'] == 'exact-row-height-points-to-twips-v1':
         changed_part, normalize = 'word/document.xml', exact_height_as_twips
         changed_error = 'Equivalent control changes row layout beyond the exact-height lexical value'
+    elif rule['rule'] == 'vertical-merge-keep-with-next-v1':
+        changed_part, normalize = 'word/document.xml', merge_kept_with_next
+        changed_error = 'Equivalent control changes the ledger beyond keeping its merged rows together'
     else:
         raise ValueError('Unknown equivalent-control rule')
     with ZipFile(paths[0]) as original, ZipFile(paths[1]) as comparison:

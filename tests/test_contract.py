@@ -61,6 +61,25 @@ class MetricContract(unittest.TestCase):
     def test_single_window_ssim_matches_constant_image_formula(self):
         self.assertAlmostEqual(metrics.ssim(b'\0' * 9, b'\xff' * 9, 3, 1), 6.5025 / (65025 + 6.5025), places=12)
 
+    def test_one_pixel_blank_canvas_edge_is_not_a_layout_difference(self):
+        reference = raster(16, 17, positions=[(5, 5), (6, 5)])
+        candidate = raster(16, 16, positions=[(5, 5), (6, 5)])
+        self.assertTrue(metrics.canvas_compatible((16, 17), (16, 16)))
+        padded = metrics.union_canvas(candidate, 16, 16, 16, 17)
+        self.assertEqual(padded, reference)
+        self.assertEqual(metrics.page_metrics(reference, padded, 16, 17)['score'], 100)
+
+    def test_union_canvas_keeps_origin_and_edge_ink(self):
+        # Ink on the reference's extra edge row has no candidate counterpart and is still measured.
+        reference = raster(17, 17, positions=[(5, 5), (16, 16)])
+        candidate = metrics.union_canvas(raster(16, 16, positions=[(5, 5)]), 16, 16, 17, 17)
+        self.assertEqual(candidate[(5 * 17 + 5) * 3:(5 * 17 + 5) * 3 + 3], b'\0\0\0')
+        self.assertLess(metrics.page_metrics(reference, candidate, 17, 17)['recall'], 1)
+
+    def test_canvas_difference_beyond_one_pixel_fails(self):
+        self.assertFalse(metrics.canvas_compatible((16, 18), (16, 16)))
+        self.assertFalse(metrics.canvas_compatible((14, 16), (16, 16)))
+
     def test_ppm_keeps_whitespace_valued_first_pixel(self):
         with tempfile.TemporaryDirectory() as temp:
             path = Path(temp) / 'page.ppm'
@@ -235,6 +254,17 @@ class PdfContract(unittest.TestCase):
         with self.assertRaises(ValueError):
             pdf.marker({'words': words}, 'Marker')
 
+    def test_reference_must_satisfy_its_declared_assertions(self):
+        geometry = [{'media': [0, 0, 612, 792], 'crop': [0, 0, 612, 792], 'rotation': 0, 'userUnit': 1}] * 2
+        declaration = {'fonts': ['Liberation Serif'], 'tokens': {'Entry11': 1, 'Entry12': 1},
+                       'assertions': [{'type': 'same-page', 'version': 1, 'markers': ['Entry11', 'Entry12']},
+                                      {'type': 'marker-reference-position', 'version': 1, 'marker': 'Entry12', 'tolerancePt': 0.5}]}
+        def capture(second_page):
+            words = [{'text': 'Entry11', 'page': 1, 'rect': [1, 2, 3, 4]}, {'text': 'Entry12', 'page': second_page, 'rect': [1, 9, 3, 11]}]
+            return {'geometry': geometry, 'fonts': ['LiberationSerif'], 'tokens': {'Entry11': 1, 'Entry12': 1}, 'words': words}
+        self.assertEqual(pdf.reference_failures(declaration, capture(1)), [])
+        self.assertEqual(pdf.reference_failures(declaration, capture(2)), ['assertion-same-page'])
+
     def test_lost_note_fails_inventory(self):
         self.assertFalse(pdf.inventory_check({'tokens': {'Body': 1}}, {'tokens': {'Body': 1, 'Note': 1}}))
 
@@ -250,7 +280,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 85)
+        self.assertEqual(len(common.validate_registry()['cases']), 86)
 
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
@@ -276,7 +306,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v16')
+        self.assertEqual(registry['suite']['id'], 'core-v17')
 
     def test_legacy_header_pairs_preserve_everything_except_number_representation(self):
         import xml.etree.ElementTree as ET

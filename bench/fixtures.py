@@ -264,30 +264,35 @@ def generate():
       <w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="22"/>
       </w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="auto"/>
       </w:pPr></w:pPrDefault></w:docDefaults></w:styles>'''
+    def ledger(location, first, span, merged, kept=False):
+        texts, rows = [], []
+        for index in range(1, 21):
+            continuing = first < index < first + span
+            left = '' if continuing else f'Lot{index:02d} Birch sample.'
+            right = f'Entry{index:02d} Delivery ledger.'
+            if left:
+                texts.append(left)
+            texts.append(right)
+            merge = ('<w:vMerge w:val="restart"/>' if index == first else '<w:vMerge/>' if continuing else '') if merged else ''
+            # The kept control holds each merged row with the next one, the declared intact merge.
+            keep = '<w:keepNext/>' if kept and first <= index < first + span - 1 else ''
+            cells = '<w:tc><w:tcPr><w:tcW w:w="4680" w:type="dxa"/>' + merge + '</w:tcPr>' + para(left, keep) + '</w:tc>'
+            cells += '<w:tc><w:tcPr><w:tcW w:w="4680" w:type="dxa"/></w:tcPr>' + para(right, keep) + '</w:tc>'
+            rows.append('<w:tr><w:trPr><w:trHeight w:val="1100" w:hRule="atLeast"/><w:cantSplit/></w:trPr>' + cells + '</w:tr>')
+        body = '<w:tbl><w:tblPr><w:tblW w:w="9360" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr>'
+        body += '<w:tblGrid><w:gridCol w:w="4680"/><w:gridCol w:w="4680"/></w:tblGrid>' + ''.join(rows) + '</w:tbl>'
+        cid = 'tables-vmerge-' + location + ('-merged' if merged else '-control') + ('-kept' if kept else '')
+        assertions = [{'type': 'marker-region', 'version': 2, 'marker': 'Entry20', 'occurrence': 1,
+                       'page': 2, 'rect': [305, 60, 540, 720]}]
+        if merged:
+            assertions.append({'type': 'same-page', 'version': 1,
+                               'markers': [f'Entry{n:02d}' for n in range(first, first + span)]})
+        add(cid, 'tables', 'Twenty-row ledger with ' + ('an intact' if merged else 'no') + ' vertical merge at ' + location
+            + (', each merged row kept with the next' if kept else ''),
+            texts, body, styles_xml=ledger_styles, assertions=assertions)
     for location, first, span in [('early', 1, 2), ('boundary', 11, 3)]:
         for merged in (False, True):
-            texts, rows = [], []
-            for index in range(1, 21):
-                continuing = first < index < first + span
-                left = '' if continuing else f'Lot{index:02d} Birch sample.'
-                right = f'Entry{index:02d} Delivery ledger.'
-                if left:
-                    texts.append(left)
-                texts.append(right)
-                merge = ('<w:vMerge w:val="restart"/>' if index == first else '<w:vMerge/>' if continuing else '') if merged else ''
-                cells = '<w:tc><w:tcPr><w:tcW w:w="4680" w:type="dxa"/>' + merge + '</w:tcPr>' + para(left) + '</w:tc>'
-                cells += '<w:tc><w:tcPr><w:tcW w:w="4680" w:type="dxa"/></w:tcPr>' + para(right) + '</w:tc>'
-                rows.append('<w:tr><w:trPr><w:trHeight w:val="1100" w:hRule="atLeast"/><w:cantSplit/></w:trPr>' + cells + '</w:tr>')
-            body = '<w:tbl><w:tblPr><w:tblW w:w="9360" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr>'
-            body += '<w:tblGrid><w:gridCol w:w="4680"/><w:gridCol w:w="4680"/></w:tblGrid>' + ''.join(rows) + '</w:tbl>'
-            cid = 'tables-vmerge-' + location + ('-merged' if merged else '-control')
-            assertions = [{'type': 'marker-region', 'version': 2, 'marker': 'Entry20', 'occurrence': 1,
-                           'page': 2, 'rect': [305, 60, 540, 720]}]
-            if merged:
-                assertions.append({'type': 'same-page', 'version': 1,
-                                   'markers': [f'Entry{n:02d}' for n in range(first, first + span)]})
-            add(cid, 'tables', 'Twenty-row ledger with ' + ('an intact' if merged else 'no') + ' vertical merge at ' + location,
-                texts, body, styles_xml=ledger_styles, assertions=assertions)
+            ledger(location, first, span, merged)
     # Original archive register for Docxodus #1080. Ninety short lines occupy
     # three pages. The control uses separate paragraphs; the reproduction uses
     # one paragraph with text-wrapping breaks. Blank variants also test consecutive
@@ -488,7 +493,11 @@ def generate():
                 {'type': 'marker-region', 'version': 2, 'marker': 'ResourceTop', 'occurrence': 1,
                  'page': 1, 'rect': [72, 60, 540, 720]},
                 {'type': 'marker-reference-position', 'version': 1, 'marker': 'ResourceTop', 'tolerancePt': 0.5}])
-    registry = {'schema': 1, 'suite': {'id': 'core-v16', 'version': 16, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Reference control for bench #17: LibreOffice splits the boundary merge across pages,
+    # violating the original same-page declaration. Keep-with-next on the merged rows states
+    # the same intact merge in markup both Word and LibreOffice honor; see REFERENCE_CONTROLS.md.
+    ledger('boundary', 11, 3, True, kept=True)
+    registry = {'schema': 1, 'suite': {'id': 'core-v17', 'version': 17, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

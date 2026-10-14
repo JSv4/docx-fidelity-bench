@@ -5,7 +5,7 @@ import math
 from pathlib import Path
 from .fixtures import png
 
-CONTRACT = {'version': 1, 'dpi': 96, 'inkThreshold': 24, 'inkRadius': 1, 'ssimWindow': 8, 'ssimC1': 6.5025, 'ssimC2': 58.5225, 'alignment': 'none', 'pageScore': '100 * min(ssim, inkF1)', 'caseScore': 'worst page; zero on mandatory failure', 'visibleText': 'excludes UAX #9 bidi formatting controls'}
+CONTRACT = {'version': 2, 'dpi': 96, 'inkThreshold': 24, 'inkRadius': 1, 'ssimWindow': 8, 'ssimC1': 6.5025, 'ssimC2': 58.5225, 'alignment': 'none', 'pageScore': '100 * min(ssim, inkF1)', 'caseScore': 'worst page; zero on mandatory failure', 'visibleText': 'excludes UAX #9 bidi formatting controls', 'canvas': 'rasters within 1 pixel per axis share a white union canvas at the CropBox top-left origin; larger differences fail'}
 
 
 def read_ppm(path):
@@ -34,6 +34,27 @@ def read_ppm(path):
     if len(pixels) != width * height * 3:
         raise ValueError('Raster byte length does not match dimensions')
     return width, height, pixels
+
+
+# One 96-DPI pixel is 0.75pt. Two pages whose physical boxes agree within the 0.25pt geometry
+# tolerance can still round to canvases one pixel apart, because Poppler sizes each raster from
+# its own fractional extent. That difference is blank edge, not layout, so both rasters are placed
+# unchanged at their shared top-left origin on a white union canvas. Nothing is resized, shifted or
+# aligned, and a larger difference remains a mandatory raster-dimensions failure.
+CANVAS_TOLERANCE_PX = 1
+
+
+def canvas_compatible(reference_size, candidate_size):
+    return all(abs(a - b) <= CANVAS_TOLERANCE_PX for a, b in zip(reference_size, candidate_size))
+
+
+def union_canvas(pixels, width, height, union_width, union_height):
+    if (width, height) == (union_width, union_height):
+        return pixels
+    row_padding = b'\xff' * ((union_width - width) * 3)
+    rows = [pixels[y * width * 3:(y + 1) * width * 3] + row_padding for y in range(height)]
+    rows += [b'\xff' * (union_width * 3)] * (union_height - height)
+    return b''.join(rows)
 
 
 def ink_mask(pixels):

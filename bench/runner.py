@@ -20,10 +20,11 @@ def reference_bundle(output):
         path = folder / 'reference.pdf'
         response = adapters.libreoffice(contained(ROOT, case['input']), path)
         info = pdf.inspect_pdf(path)
-        eligible = pdf.inventory_check(info, case) and pdf.font_check(info, case['fonts'])
-        bundle['cases'][case['id']] = {'inputSha256': case['sha256'], 'pdf': str(path.relative_to(output)), 'pdfSha256': digest(path), 'renderer': response['renderer'], 'eligible': eligible, 'inspection': info}
+        failures = pdf.reference_failures(case, info)
+        eligible = not failures
+        bundle['cases'][case['id']] = {'inputSha256': case['sha256'], 'pdf': str(path.relative_to(output)), 'pdfSha256': digest(path), 'renderer': response['renderer'], 'eligible': eligible, 'ineligibleChecks': failures, 'inspection': info}
         write_json(output / 'bundle.json', bundle)
-        print(case['id'] + (': reference registered' if eligible else ': reference ineligible (see token/font evidence)'), flush=True)
+        print(case['id'] + (': reference registered' if eligible else ': reference ineligible (' + ', '.join(failures) + ')'), flush=True)
     return bundle
 
 
@@ -126,8 +127,9 @@ def run(output, reference, adapter, candidate):
                     direct_root = contained(ref_root, bundle['sourceBundle']).parent
                     shutil.copyfile(contained(direct_root, direct_capture['pdf']), folder / 'direct-reference.pdf')
             reference_info = pdf.inspect_pdf(reference_path)
-            if not pdf.inventory_check(reference_info, case) or not pdf.font_check(reference_info, case['fonts']):
-                raise ValueError('Reference content or fonts are ineligible')
+            failures = pdf.reference_failures(case, reference_info)
+            if failures:
+                raise ValueError('Reference fails its own mandatory checks: ' + ', '.join(failures))
             render_case = case
             if adapter == 'libreoffice-reference' and direct_bundle is not None:
                 render_case = next(c for c in registry['cases'] if c['id'] == entry['referenceSource']['caseId'])
@@ -158,14 +160,17 @@ def run(output, reference, adapter, candidate):
                                 continue
                             rw, rh, rp = metrics.read_ppm(rpages[i])
                             cw, ch, cp = metrics.read_ppm(cpages[i])
-                            if (rw, rh) != (cw, ch):
+                            if not metrics.canvas_compatible((rw, rh), (cw, ch)):
                                 outcome['pages'].append({'score': 0.0, 'dimensionsMismatch': True})
-                                outcome['checks'].append({'name': f'raster-dimensions-page-{i+1}', 'passed': False})
+                                outcome['checks'].append({'name': f'raster-dimensions-page-{i+1}', 'passed': False, 'reference': [rw, rh], 'candidate': [cw, ch]})
                                 continue
-                            measurements = metrics.page_metrics(rp, cp, rw, rh)
-                            measurements['raster'] = {'width': rw, 'height': rh, 'referenceSha256': digest(rpages[i]), 'candidateSha256': digest(cpages[i])}
+                            width, height = max(rw, cw), max(rh, ch)
+                            rp = metrics.union_canvas(rp, rw, rh, width, height)
+                            cp = metrics.union_canvas(cp, cw, ch, width, height)
+                            measurements = metrics.page_metrics(rp, cp, width, height)
+                            measurements['raster'] = {'width': width, 'height': height, 'reference': [rw, rh], 'candidate': [cw, ch], 'referenceSha256': digest(rpages[i]), 'candidateSha256': digest(cpages[i])}
                             outcome['pages'].append(measurements)
-                            metrics.write_images(folder, i + 1, rp, cp, rw, rh)
+                            metrics.write_images(folder, i + 1, rp, cp, width, height)
                     outcome.update(status='measured', score=metrics.case_score(outcome['pages'], outcome['checks']), close=all(c['passed'] for c in outcome['checks']) and all(p.get('close', False) for p in outcome['pages']))
             if digest(contained(ROOT, case['input'])) != case['sha256']:
                 raise ValueError('Renderer modified source bytes')

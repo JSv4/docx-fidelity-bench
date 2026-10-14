@@ -112,6 +112,18 @@ def marker(info, text, occurrence=1):
     return matches[0]
 
 
+def reference_failures(case, info):
+    """Name every mandatory check a reference capture fails against its own declaration.
+
+    A reference is measured as its own candidate: its visible tokens, fonts and declared feature
+    assertions must hold. Reference-relative positions are trivially satisfied; absolute regions
+    and same-page groups are not, so a capture that violates the fixture's declared layout is
+    ineligible rather than the standard every candidate is judged against.
+    """
+    failures = [check['name'] for check in correctness(case, info, info) if not check['passed']]
+    return failures
+
+
 def correctness(case, reference, candidate):
     checks = [{'name': 'page-count', 'passed': len(reference['geometry']) == len(candidate['geometry'])}, {'name': 'expected-visible-tokens', 'passed': inventory_check(candidate, case), 'missing': dict(Counter(case['tokens']) - Counter(candidate['tokens'])), 'extra': dict(Counter(candidate['tokens']) - Counter(case['tokens'])), 'normalizedRaw': dict(Counter(w['raw'] for w in candidate['words'] if 'raw' in w))}, {'name': 'declared-font-families', 'passed': font_check(candidate, case['fonts']), 'observed': candidate['fonts']}]
     for i in range(max(len(reference['geometry']), len(candidate['geometry']))):
