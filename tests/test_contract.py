@@ -61,6 +61,25 @@ class MetricContract(unittest.TestCase):
     def test_single_window_ssim_matches_constant_image_formula(self):
         self.assertAlmostEqual(metrics.ssim(b'\0' * 9, b'\xff' * 9, 3, 1), 6.5025 / (65025 + 6.5025), places=12)
 
+    def test_one_pixel_blank_canvas_edge_is_not_a_layout_difference(self):
+        reference = raster(16, 17, positions=[(5, 5), (6, 5)])
+        candidate = raster(16, 16, positions=[(5, 5), (6, 5)])
+        self.assertTrue(metrics.canvas_compatible((16, 17), (16, 16)))
+        padded = metrics.union_canvas(candidate, 16, 16, 16, 17)
+        self.assertEqual(padded, reference)
+        self.assertEqual(metrics.page_metrics(reference, padded, 16, 17)['score'], 100)
+
+    def test_union_canvas_keeps_origin_and_edge_ink(self):
+        # Ink on the reference's extra edge row has no candidate counterpart and is still measured.
+        reference = raster(17, 17, positions=[(5, 5), (16, 16)])
+        candidate = metrics.union_canvas(raster(16, 16, positions=[(5, 5)]), 16, 16, 17, 17)
+        self.assertEqual(candidate[(5 * 17 + 5) * 3:(5 * 17 + 5) * 3 + 3], b'\0\0\0')
+        self.assertLess(metrics.page_metrics(reference, candidate, 17, 17)['recall'], 1)
+
+    def test_canvas_difference_beyond_one_pixel_fails(self):
+        self.assertFalse(metrics.canvas_compatible((16, 18), (16, 16)))
+        self.assertFalse(metrics.canvas_compatible((14, 16), (16, 16)))
+
     def test_ppm_keeps_whitespace_valued_first_pixel(self):
         with tempfile.TemporaryDirectory() as temp:
             path = Path(temp) / 'page.ppm'

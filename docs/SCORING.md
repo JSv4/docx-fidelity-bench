@@ -4,13 +4,13 @@ This benchmark compares the PDF delivered by a renderer with an immutable refere
 
 ## Page measurements
 
-Rasterize both PDFs with the same Poppler executable at 96 DPI using their physical CropBox. Compare pixels at their original positions. Do not align, resize, warp, remove content, or mask regions. Rasters with different dimensions fail a mandatory check and score zero.
+Rasterize both PDFs with the same Poppler executable at 96 DPI using their physical CropBox. Compare pixels at their original positions. Do not align, resize, warp, remove content, or mask regions. Poppler sizes each raster from its own fractional page extent, so two pages whose physical boxes agree within the 0.25-point geometry tolerance can differ by one pixel. When each raster dimension differs by at most one pixel, place both rasters unchanged at their CropBox top-left origin on a white canvas of the larger width and height; the added edge is blank, and any ink there is still measured. Rasters that differ by more than one pixel in either dimension fail a mandatory check and score zero. The physical geometry check applies independently.
 
 Ink is any pixel with at least one RGB channel below 231. Precision is the fraction of candidate ink pixels that have reference ink within one pixel horizontally, vertically, or diagonally. Recall is the fraction of reference ink pixels that have candidate ink within the same radius. The one-pixel radius is about 0.75 PDF points at 96 DPI.
 
 Ink F1 is `2 × precision × recall / (precision + recall)`. If their sum is zero, F1 is zero. If one mask is empty and the other contains ink, F1 is zero. If both are empty, F1 is one. Blank pages still face page count and content checks.
 
-SSIM uses luminance `0.2126 R + 0.7152 G + 0.0722 B`, non-overlapping 8 by 8 windows, smaller windows at page edges, population variance/covariance, C1 = 6.5025, and C2 = 58.5225. For each window, multiply `(2 μr μc + C1)` by `(2 covariance + C2)` and divide by `(μr² + μc² + C1) × (variance_r + variance_c + C2)`. Average window values by pixel count. Preserve the raw mean and clamp it to zero through one for scoring. This is metric version 1, implemented in `bench/metrics.py`.
+SSIM uses luminance `0.2126 R + 0.7152 G + 0.0722 B`, non-overlapping 8 by 8 windows, smaller windows at page edges, population variance/covariance, C1 = 6.5025, and C2 = 58.5225. For each window, multiply `(2 μr μc + C1)` by `(2 covariance + C2)` and divide by `(μr² + μc² + C1) × (variance_r + variance_c + C2)`. Average window values by pixel count. Preserve the raw mean and clamp it to zero through one for scoring. This is metric version 2, implemented in `bench/metrics.py`.
 
 The page score is `100 × min(SSIM, ink F1)`. Keep full precision in JSON and round only for display. For precision 0.96 and recall 0.90, F1 is 0.929032. If SSIM is 0.985, the page scores 92.90. This means the weaker similarity measure is approximately 0.929; it does not mean 92.90 percent of the document is correct.
 
