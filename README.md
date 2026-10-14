@@ -44,7 +44,7 @@ python3 -m bench run --reference references/lo-v1/bundle.json \
   --adapter docxodus --candidate FULL_COMMIT_SHA --out runs/example --gate report
 ```
 
-Open `runs/example/index.html`. The adapter uses `@docxodus/export`'s public PDF API, requires the source-bound build record, verifies input and output digests, retains the production report, uses configured fonts, and keeps Chromium's process sandbox. It never silently uses an unrecorded distribution directory. On a host without the required sandbox, the result is unmeasured, not a claimed rendering failure.
+Open `runs/example/index.html`. In CI, the `reference_run` input reuses an earlier run's immutable reference bundle and its 100-point calibration instead of registering new captures, then runs `bench compare --tolerance 0` against that run's candidate result as report-only evidence. Fresh registrations change the bundle identity, which `compare` correctly refuses. The adapter uses `@docxodus/export`'s public PDF API, requires the source-bound build record, verifies input and output digests, retains the production report, uses configured fonts, and keeps Chromium's process sandbox. It never silently uses an unrecorded distribution directory. On a host without the required sandbox, the result is unmeasured, not a claimed rendering failure.
 
 `BENCH_LIBREOFFICE` can select an explicit LibreOffice executable. All tool versions and binary hashes, font hashes, reference PDF hashes, profiles, metric version, and suite identity are recorded. Retain `bundle.json` and its PDFs together; comparisons against a different reference bundle are rejected. Reference regeneration can change PDF metadata and therefore creates a new bundle identity.
 
