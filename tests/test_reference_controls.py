@@ -158,6 +158,51 @@ class EquivalentControlContract(unittest.TestCase):
         self.assertEqual(bundle['cases'][MERGED]['pdfSha256'], direct['cases'][KEPT]['pdfSha256'])
         runner.validate_bundle(bundle, root, self.registry, self.env)
 
+    def test_unit_minimum_heights_prove_whole_twip_controls(self):
+        for unit in ('pt', 'in', 'cm', 'mm', 'pc', 'pi', 'multipage-pt'):
+            cid = 'tables-row-height-' + unit
+            source = reference_controls.source(self.records[cid], self.registry, common.ROOT)
+            control = 'tables-row-height-multipage-twips' if unit.startswith('multipage') else 'tables-row-height-twips'
+            self.assertEqual((source['kind'], source['caseId']), ('equivalent-control', control))
+
+    def test_fractional_point_height_uses_bounded_nearest_twip_control(self):
+        source = reference_controls.source(self.records['tables-row-height-fractional-pt'], self.registry, common.ROOT)
+        self.assertEqual((source['kind'], source['caseId']), ('nearest-twip-control', 'tables-row-height-fractional-twips'))
+        self.assertEqual(source['bound'], {'perRowPt': '0.025', 'maxDisplacementPt': '0.050'})
+
+    def test_inexact_unit_height_cannot_claim_an_exact_twip_control(self):
+        pair = ('tables-row-height-cm', 'tables-row-height-twips')
+        registry, case = self.changed_pair(pair[0], 'word/document.xml',
+            lambda data: data.replace(b'w:val="1.27cm"', b'w:val="1.28cm"'), pair=pair)
+        with self.assertRaisesRegex(ValueError, 'not a whole number of twips'):
+            reference_controls.source(case, registry, self.root)
+
+    def test_minimum_height_cannot_be_replaced_with_exact_height(self):
+        pair = ('tables-row-height-mm', 'tables-row-height-twips')
+        registry, case = self.changed_pair(pair[1], 'word/document.xml',
+            lambda data: data.replace(b'w:hRule="atLeast"', b'w:hRule="exact"'), pair=pair)
+        with self.assertRaisesRegex(ValueError, 'minimum-height'):
+            reference_controls.source(case, registry, self.root)
+
+    def test_mixed_row_heights_are_rejected(self):
+        pair = ('tables-row-height-pt', 'tables-row-height-twips')
+        registry, case = self.changed_pair(pair[0], 'word/document.xml',
+            lambda data: data.replace(b'w:val="36pt"', b'w:val="37pt"', 1), pair=pair)
+        with self.assertRaisesRegex(ValueError, 'uniform'):
+            reference_controls.source(case, registry, self.root)
+
+    def test_nearest_twip_rule_rejects_wrong_rounding_and_loose_bounds(self):
+        pair = ('tables-row-height-fractional-pt', 'tables-row-height-fractional-twips')
+        registry, case = self.changed_pair(pair[1], 'word/document.xml',
+            lambda data: data.replace(b'w:val="502"', b'w:val="501"'), pair=pair)
+        with self.assertRaisesRegex(ValueError, 'minimum-height'):
+            reference_controls.source(case, registry, self.root)
+        data = b'<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">' + \
+            b'<w:trHeight w:val="25.075pt" w:hRule="atLeast"/>' * 30 + b'</w:document>'
+        loose = {'assertions': [{'type': 'marker-reference-position', 'version': 1, 'marker': 'M', 'tolerancePt': 0.5}]}
+        with self.assertRaisesRegex(ValueError, 'not bounded'):
+            reference_controls.nearest_twip_bound(loose, data)
+
     def test_roman_field_cannot_replace_decimal_legacy_number(self):
         registry, case = self.changed_pair(FIELD, 'word/header1.xml',
                                            lambda data: data.replace(b'Arabic', b'ROMAN'))

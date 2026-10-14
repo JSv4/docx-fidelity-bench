@@ -10,6 +10,25 @@ PR #7 also authored equivalent complex decimal PAGE controls and proved that eac
 
 A reference capture is eligible only when it passes the case's own mandatory checks: the complete visible token inventory, the declared font families, and every declared assertion. Reference-relative positions are satisfied trivially, but absolute regions and same-page groups are not. Registration records the failing checks as `ineligibleChecks`, and every run repeats the check before measuring. A capture that contradicts the fixture's declared layout is not used as the standard for candidates. It stays in the direct bundle as visible evidence.
 
+## Unit-valued minimum row heights (bench #16)
+
+LibreOffice 25.8.7.3 reads a unit-valued `w:trHeight` as a tiny twip value. In the direct captures of the `36pt`, `0.5in`, `1.27cm`, `12.7mm`, `3pc`, `3pi` and `25.075pt` `atLeast` fixtures, every table collapses: `Birch03` sits at Y=99.999pt instead of 146.699pt, and the 30-row point ledger fits on one page instead of two. Those captures still pass their own declarations because their only position check is reference-relative, so their failure is invisible to eligibility. These cases are therefore captured through whole-twip controls.
+
+**`minimum-row-height-units-to-twips-v1`** applies to the six 36pt-equivalent forms and the multipage point ledger. The proof requires:
+- every `w:trHeight` in the original to carry the same unit value with `w:hRule="atLeast"` and no other attributes;
+- that value, computed exactly in decimal, to be a whole number of twips;
+- the control to differ only by that number.
+
+All six forms are exactly 720 twips, and they use `tables-row-height-twips` (or `tables-row-height-multipage-twips`). An inexact unit value, a different rule, or a mixed table is rejected.
+
+**`minimum-row-height-nearest-twip-v1`** applies to `tables-row-height-fractional-pt`. Its value of 25.075pt is 501.5 twips and has no whole-twip form. LibreOffice lays rows out in whole twips: 501 and 502 twips put `Birch03` at 124.799 and 124.899pt, so no LibreOffice capture can represent the original exactly.
+- The rule rounds half up to 502 twips, the existing `tables-row-height-fractional-twips` fixture.
+- It records the displacement bound: 0.025pt per row, and at most 0.05pt for `Birch03` after two rows.
+- It requires that bound to be no more than a tenth of the case's smallest reference-position tolerance (0.5pt).
+- This reference is labeled `nearest-twip-control`, not `equivalent-control`, in the bundle and in the report. The 25.075pt candidate is still compared with it at full metric strength.
+
+The original unit fixtures, their 0.5-point last-row assertions and the collapsed direct captures are preserved.
+
 ## Kept boundary merge (bench #17)
 
 `tables-vmerge-boundary-merged` declares that `Entry11`, `Entry12` and `Entry13` stay together on one page. Rows 11–13 are joined by one vertical merge, and every row has `cantSplit`. LibreOffice 25.8.7.3 places row 11 on page 1 and rows 12–13 on page 2, so its direct capture fails the declared `same-page` assertion and is ineligible.
