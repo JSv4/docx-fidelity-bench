@@ -203,6 +203,33 @@ class EquivalentControlContract(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'not bounded'):
             reference_controls.nearest_twip_bound(loose, data)
 
+    def test_conflicting_indentation_aliases_use_logical_only_controls(self):
+        for form in ('pt', 'in', 'cm', 'mm', 'pc', 'pi', 'twips', 'small-pt', 'small-twips'):
+            source = reference_controls.source(self.records['paragraphs-indentation-' + form], self.registry, common.ROOT)
+            control = 'paragraphs-indentation-' + ('small-' if form.startswith('small') else '') + 'twips-logical-only'
+            self.assertEqual((source['caseId'], source['rule']), (control, 'logical-indentation-without-conflicting-aliases-v1'))
+
+    def test_logical_control_cannot_change_the_logical_edge(self):
+        pair = ('paragraphs-indentation-twips', 'paragraphs-indentation-twips-logical-only')
+        registry, case = self.changed_pair(pair[1], 'word/document.xml',
+            lambda data: data.replace(b'w:start="720" w:end="720"', b'w:start="1440" w:end="1440"'), pair=pair)
+        with self.assertRaisesRegex(ValueError, 'logical edges'):
+            reference_controls.source(case, registry, self.root)
+
+    def test_agreeing_aliases_are_not_a_conflict_to_remove(self):
+        pair = ('paragraphs-indentation-twips', 'paragraphs-indentation-twips-logical-only')
+        registry, case = self.changed_pair(pair[0], 'word/document.xml',
+            lambda data: data.replace(b'w:left="1440" w:right="1440"', b'w:left="720" w:right="720"'), pair=pair)
+        with self.assertRaisesRegex(ValueError, 'conflicting legacy aliases'):
+            reference_controls.source(case, registry, self.root)
+
+    def test_inexact_unit_indent_cannot_use_twip_control(self):
+        pair = ('paragraphs-indentation-cm', 'paragraphs-indentation-twips-logical-only')
+        registry, case = self.changed_pair(pair[0], 'word/document.xml',
+            lambda data: data.replace(b'1.27cm', b'1.3cm'), pair=pair)
+        with self.assertRaisesRegex(ValueError, 'whole number of twips'):
+            reference_controls.source(case, registry, self.root)
+
     def test_roman_field_cannot_replace_decimal_legacy_number(self):
         registry, case = self.changed_pair(FIELD, 'word/header1.xml',
                                            lambda data: data.replace(b'Arabic', b'ROMAN'))

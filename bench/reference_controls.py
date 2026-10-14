@@ -34,6 +34,10 @@ RULES = {
         'control': 'tables-row-height-fractional-twips',
         'rule': 'minimum-row-height-nearest-twip-v1',
     },
+    **{'paragraphs-indentation-' + form: {
+        'control': 'paragraphs-indentation-' + ('small-' if form.startswith('small') else '') + 'twips-logical-only',
+        'rule': 'logical-indentation-without-conflicting-aliases-v1',
+    } for form in ('pt', 'in', 'cm', 'mm', 'pc', 'pi', 'twips', 'small-pt', 'small-twips')},
     'tables-vmerge-boundary-merged': {
         'control': 'tables-vmerge-boundary-merged-kept',
         'rule': 'vertical-merge-keep-with-next-v1',
@@ -142,6 +146,38 @@ def nearest_twip_bound(case, data):
     return {'perRowPt': str(per_row), 'maxDisplacementPt': str(bound)}
 
 
+def logical_indentation(data):
+    """Write exact unit indents as twips and drop legacy aliases that contradict logical edges.
+
+    ECMA-376 Part 4 §14.3.1.2 treats w:left/w:right as the transitional names of w:start/w:end.
+    The original Elm inventories give one RTL paragraph both pairs with different values, so the
+    paragraph's width is ambiguous; LibreOffice uses the legacy pair. The control states only the
+    logical pair the fixture is named for.
+    """
+    root = ET.fromstring(data)
+    indents = list(root.iter(W + 'ind'))
+    for indent in indents:
+        for name, value in list(indent.attrib.items()):
+            if name not in {W + edge for edge in ('left', 'right', 'start', 'end', 'firstLine', 'hanging')}:
+                raise ValueError('Unexpected indentation attribute')
+            if not value.isdigit():
+                twips = unit_twips(value)
+                if twips is None or twips != twips.to_integral_value():
+                    raise ValueError('Indentation is not a whole number of twips: ' + value)
+                indent.set(name, str(int(twips)))
+    logical = [indent for indent in indents if W + 'start' in indent.attrib or W + 'end' in indent.attrib]
+    if len(logical) != 1:
+        raise ValueError('Expected one logical indentation')
+    indent = logical[0]
+    edges = [(W + 'start', W + 'left'), (W + 'end', W + 'right')]
+    if any(alias not in indent.attrib or edge not in indent.attrib or indent.get(alias) == indent.get(edge)
+           for edge, alias in edges):
+        raise ValueError('Expected conflicting legacy aliases on both logical edges')
+    for _, alias in edges:
+        del indent.attrib[alias]
+    return root
+
+
 def merge_kept_with_next(data):
     """Hold each row of the single vertical merge with the next, ending at its last row."""
     root = ET.fromstring(data)
@@ -193,6 +229,9 @@ def source(case, registry, root):
         nearest = rule['rule'] == 'minimum-row-height-nearest-twip-v1'
         changed_part, normalize = 'word/document.xml', lambda data: minimum_heights(data, nearest)
         changed_error = 'Equivalent control changes row layout beyond the minimum-height lexical value'
+    elif rule['rule'] == 'logical-indentation-without-conflicting-aliases-v1':
+        changed_part, normalize = 'word/document.xml', logical_indentation
+        changed_error = 'Equivalent control changes indentation beyond the logical edges'
     elif rule['rule'] == 'vertical-merge-keep-with-next-v1':
         changed_part, normalize = 'word/document.xml', merge_kept_with_next
         changed_error = 'Equivalent control changes the ledger beyond keeping its merged rows together'

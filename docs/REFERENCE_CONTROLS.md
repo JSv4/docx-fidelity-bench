@@ -29,6 +29,25 @@ All six forms are exactly 720 twips, and they use `tables-row-height-twips` (or 
 
 The original unit fixtures, their 0.5-point last-row assertions and the collapsed direct captures are preserved.
 
+## Logical indentation without conflicting aliases (bench #18)
+
+Each `paragraphs-indentation-*` inventory has one RTL paragraph that carries two pairs of edges: the logical `w:start`/`w:end` at the form's value (36pt or 12pt), and the legacy `w:left`/`w:right` at 1440 twips. ECMA-376 Part 4 §14.3.1.2 treats `left`/`right` as the transitional names of `start`/`end`, so assigning them different values leaves the paragraph width ambiguous.
+
+The two renderers resolve the ambiguity differently:
+- LibreOffice 25.8.7.3 uses the legacy pair. The logical paragraph then wraps onto four lines and pushes `FirstMarker` to Y=160.999pt.
+- Docxodus uses the logical pair the fixture is named for (`LogicalMarker`).
+
+LibreOffice does parse every unit form correctly: all six unit captures are word-for-word identical to the twip capture. The conflict alone explains the mismatch.
+
+Two authored controls state only the logical edges: `paragraphs-indentation-twips-logical-only` (720) and `paragraphs-indentation-small-twips-logical-only` (240). The `logical-indentation-without-conflicting-aliases-v1` proof proceeds in three steps:
+1. It rewrites every unit-valued indent of the original as exact whole twips. A value that is not a whole number of twips is rejected.
+2. It requires exactly one logical indentation whose legacy aliases conflict on both edges, then removes those two aliases.
+3. It requires the control to match the result. Every other package part, the tokens, the assertions and the fonts must be identical.
+
+LibreOffice places the control's `FirstMarker` at Y=148.349pt. The nine original fixtures, their assertions and the direct captures are preserved.
+
+**Adjudication is pending.** Word's precedence for this conflicting input has not been captured. This control does not establish that logical edges win in Word, and Docxodus's precedence was not changed to match it. A Word capture of the original fixtures will be registered on its own track and judged against the same assertions.
+
 ## Kept boundary merge (bench #17)
 
 `tables-vmerge-boundary-merged` declares that `Entry11`, `Entry12` and `Entry13` stay together on one page. Rows 11–13 are joined by one vertical merge, and every row has `cantSplit`. LibreOffice 25.8.7.3 places row 11 on page 1 and rows 12–13 on page 2, so its direct capture fails the declared `same-page` assertion and is ineligible.
