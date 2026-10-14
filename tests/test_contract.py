@@ -216,6 +216,25 @@ class PdfContract(unittest.TestCase):
         with self.assertRaises(ValueError):
             pdf.marker({'words': [{'text': 'Marker'}, {'text': 'Marker'}]}, 'Marker')
 
+    @staticmethod
+    def bbox(*texts):
+        words = ''.join(f'<word xMin="{i}" yMin="1" xMax="{i + 1}" yMax="2">{t}</word>' for i, t in enumerate(texts))
+        return f'<html xmlns="http://www.w3.org/1999/xhtml"><body><doc><page>{words}</page></doc></body></html>'
+
+    def test_bidi_controls_do_not_change_visible_words(self):
+        words = pdf.bbox_words(self.bbox('‎LogicalMarker', 'inspected‎', '‏', '⁧Elm⁩'))
+        self.assertEqual([w['text'] for w in words], ['LogicalMarker', 'inspected', '', 'Elm'])
+        self.assertEqual(words[0]['raw'], '‎LogicalMarker')
+        self.assertNotIn('raw', pdf.bbox_words(self.bbox('Elm'))[0])
+        self.assertEqual(pdf.marker({'words': words}, 'LogicalMarker')['rect'], [0.0, 1.0, 1.0, 2.0])
+
+    def test_visible_characters_are_never_normalized(self):
+        # Letters, punctuation and non-bidi invisible characters remain visible-text differences.
+        words = pdf.bbox_words(self.bbox('Marker.', 'Mark​er', 'Mar­ker'))
+        self.assertEqual([w['text'] for w in words], ['Marker.', 'Mark​er', 'Mar­ker'])
+        with self.assertRaises(ValueError):
+            pdf.marker({'words': words}, 'Marker')
+
     def test_lost_note_fails_inventory(self):
         self.assertFalse(pdf.inventory_check({'tokens': {'Body': 1}}, {'tokens': {'Body': 1, 'Note': 1}}))
 

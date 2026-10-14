@@ -7,6 +7,16 @@ from collections import Counter
 from pathlib import Path
 from .common import execute
 
+# Unicode bidirectional formatting controls (UAX #9 explicit marks, embeddings, overrides and
+# isolates). They steer direction and are invisible, so a renderer that inserts them around LTR
+# text in an RTL paragraph has not added or removed a visible word. They are removed from
+# comparison text only; each affected word keeps its raw extraction in `raw`.
+BIDI_CONTROLS = frozenset('\u061c\u200e\u200f\u202a\u202b\u202c\u202d\u202e\u2066\u2067\u2068\u2069')
+
+
+def visible_text(text):
+    return ''.join(ch for ch in text if ch not in BIDI_CONTROLS)
+
 
 def geometries(document):
     objects = document['qpdf'][1]
@@ -57,15 +67,23 @@ def geometries(document):
 def inspect_pdf(path):
     structure = json.loads(execute(['qpdf', '--json=2', '--json-key=pages', '--json-key=qpdf', path]))
     geometry = geometries(structure)
-    xml = execute(['pdftotext', '-bbox-layout', '-enc', 'UTF-8', path, '-'])
-    words = []
-    for page_no, page in enumerate(ET.fromstring(xml).iter('{http://www.w3.org/1999/xhtml}page'), 1):
-        for word in page.iter('{http://www.w3.org/1999/xhtml}word'):
-            words.append({'text': ''.join(word.itertext()), 'page': page_no, 'rect': [float(word.get(k)) for k in ('xMin', 'yMin', 'xMax', 'yMax')]})
+    words = bbox_words(execute(['pdftotext', '-bbox-layout', '-enc', 'UTF-8', path, '-']))
     fonts_output = execute(['pdffonts', path])
     font_lines = fonts_output.splitlines()[2:]
     fonts = [line.split()[0].split('+')[-1] for line in font_lines if line.strip()]
-    return {'geometry': geometry, 'words': words, 'tokens': dict(Counter(w['text'] for w in words)), 'fonts': fonts}
+    return {'geometry': geometry, 'words': words, 'tokens': dict(Counter(w['text'] for w in words if w['text'])), 'fonts': fonts}
+
+
+def bbox_words(xml):
+    words = []
+    for page_no, page in enumerate(ET.fromstring(xml).iter('{http://www.w3.org/1999/xhtml}page'), 1):
+        for word in page.iter('{http://www.w3.org/1999/xhtml}word'):
+            raw = ''.join(word.itertext())
+            entry = {'text': visible_text(raw), 'page': page_no, 'rect': [float(word.get(k)) for k in ('xMin', 'yMin', 'xMax', 'yMax')]}
+            if entry['text'] != raw:
+                entry['raw'] = raw
+            words.append(entry)
+    return words
 
 
 def rasterize(pdf, folder):
@@ -95,7 +113,7 @@ def marker(info, text, occurrence=1):
 
 
 def correctness(case, reference, candidate):
-    checks = [{'name': 'page-count', 'passed': len(reference['geometry']) == len(candidate['geometry'])}, {'name': 'expected-visible-tokens', 'passed': inventory_check(candidate, case), 'missing': dict(Counter(case['tokens']) - Counter(candidate['tokens'])), 'extra': dict(Counter(candidate['tokens']) - Counter(case['tokens']))}, {'name': 'declared-font-families', 'passed': font_check(candidate, case['fonts']), 'observed': candidate['fonts']}]
+    checks = [{'name': 'page-count', 'passed': len(reference['geometry']) == len(candidate['geometry'])}, {'name': 'expected-visible-tokens', 'passed': inventory_check(candidate, case), 'missing': dict(Counter(case['tokens']) - Counter(candidate['tokens'])), 'extra': dict(Counter(candidate['tokens']) - Counter(case['tokens'])), 'normalizedRaw': dict(Counter(w['raw'] for w in candidate['words'] if 'raw' in w))}, {'name': 'declared-font-families', 'passed': font_check(candidate, case['fonts']), 'observed': candidate['fonts']}]
     for i in range(max(len(reference['geometry']), len(candidate['geometry']))):
         passed = i < len(reference['geometry']) and i < len(candidate['geometry'])
         if passed:
