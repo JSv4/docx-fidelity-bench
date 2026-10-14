@@ -5,7 +5,7 @@ on:
       candidate:
         description: Exact Docxodus commit
         required: true
-        default: '6e0e6ca34407b2e805b5d784cb58a23d15e45853'
+        default: 'a56b4484384770a1b30a8680179667afec4523d5'
         type: string
 permissions:
   contents: read
@@ -80,10 +80,12 @@ jobs:
           npm --prefix renderer/npm exec -- playwright install --with-deps chromium
           sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
       - name: Register immutable LibreOffice reference bundle
-        run: python3 -m bench reference libreoffice --out references/lo
+        run: |
+          python3 -m bench reference libreoffice --out references/lo-direct
+          python3 -m bench reference equivalent-controls --reference references/lo-direct/bundle.json --out references/lo
       - name: Verify identical-engine calibration
         run: |
-          python3 -m bench run --reference references/lo/bundle.json --adapter libreoffice --candidate reference-calibration --out runs/calibration --gate close
+          python3 -m bench run --reference references/lo/bundle.json --adapter libreoffice-reference --candidate reference-calibration --out runs/calibration --gate close
           python3 -c 'import json; r=json.load(open("runs/calibration/result.json")); assert r["summary"]["score"] == 100, r["summary"]'
       - name: Measure delivered candidate PDFs
         env:
