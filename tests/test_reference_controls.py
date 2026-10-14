@@ -12,6 +12,8 @@ from bench import common, reference_controls, runner
 
 LEGACY = 'paragraphs-page-number-ordinary-legacy'
 FIELD = 'paragraphs-page-number-ordinary-field'
+MERGED = 'tables-vmerge-boundary-merged'
+KEPT = 'tables-vmerge-boundary-merged-kept'
 
 
 class EquivalentControlContract(unittest.TestCase):
@@ -44,7 +46,8 @@ class EquivalentControlContract(unittest.TestCase):
         root = self.root / 'raw'
         root.mkdir()
         cases = {}
-        missing = {LEGACY, 'paragraphs-page-number-restarted-legacy', 'tables-row-height-exact-pt'}
+        missing = {LEGACY, 'paragraphs-page-number-restarted-legacy', 'tables-row-height-exact-pt',
+                   'tables-vmerge-boundary-merged'}
         for case in self.registry['cases']:
             path = root / case['id'] / 'reference.pdf'
             path.parent.mkdir()
@@ -124,6 +127,35 @@ class EquivalentControlContract(unittest.TestCase):
         self.assertEqual(bundle['cases'][cid]['inputSha256'], self.records[cid]['sha256'])
         self.assertEqual(bundle['cases'][cid]['pdfSha256'], direct['cases'][control]['pdfSha256'])
         self.assertEqual(bundle['cases'][cid]['referenceSource']['inputSha256'], self.records[control]['sha256'])
+        runner.validate_bundle(bundle, root, self.registry, self.env)
+
+    def test_kept_ledger_proves_the_declared_intact_boundary_merge(self):
+        source = reference_controls.source(self.records[MERGED], self.registry, common.ROOT)
+        self.assertEqual((source['caseId'], source['rule']), (KEPT, 'vertical-merge-keep-with-next-v1'))
+
+    def test_keeping_rows_beyond_the_merge_is_rejected(self):
+        # Row 13 ends the merge; holding it with row 14 would move content the merge does not span.
+        def keep_row_13(data):
+            rows = data.split(b'<w:tr>')
+            rows[13] = rows[13].replace(b'<w:pPr />', b'<w:pPr><w:keepNext /></w:pPr>').replace(
+                b'<w:pPr/>', b'<w:pPr><w:keepNext/></w:pPr>').replace(b'<w:pPr></w:pPr>', b'<w:pPr><w:keepNext/></w:pPr>')
+            return b'<w:tr>'.join(rows)
+        registry, case = self.changed_pair(KEPT, 'word/document.xml', keep_row_13, pair=(MERGED, KEPT))
+        with self.assertRaisesRegex(ValueError, 'merged rows together'):
+            reference_controls.source(case, registry, self.root)
+
+    def test_unmerged_ledger_cannot_be_a_kept_merge_control(self):
+        registry, case = self.changed_pair(KEPT, 'word/document.xml',
+            lambda data: data.replace(b'<w:vMerge w:val="restart"/>', b''), pair=(MERGED, KEPT))
+        with self.assertRaisesRegex(ValueError, 'merged rows together'):
+            reference_controls.source(case, registry, self.root)
+
+    def test_split_merge_capture_uses_kept_control_and_preserves_raw(self):
+        root, bundle = self.derived_bundle()
+        direct = common.read_json(root / 'direct/bundle.json')
+        self.assertFalse(direct['cases'][MERGED]['eligible'])
+        self.assertTrue(bundle['cases'][MERGED]['eligible'])
+        self.assertEqual(bundle['cases'][MERGED]['pdfSha256'], direct['cases'][KEPT]['pdfSha256'])
         runner.validate_bundle(bundle, root, self.registry, self.env)
 
     def test_roman_field_cannot_replace_decimal_legacy_number(self):
@@ -211,6 +243,7 @@ class EquivalentControlContract(unittest.TestCase):
         root, bundle = self.derived_bundle()
         requests = []
 
+        # Opaque captures carry no page geometry; reference self-checks are covered in test_contract.
         def inspect(path):
             record = self.records[Path(path).parent.name]
             return {'tokens': record['tokens'], 'fonts': ['LiberationSerif']}
@@ -221,6 +254,7 @@ class EquivalentControlContract(unittest.TestCase):
 
         with patch.object(runner, 'environment', return_value=self.env), \
                 patch.object(runner.pdf, 'inspect_pdf', side_effect=inspect), \
+                patch.object(runner.pdf, 'reference_failures', return_value=[]), \
                 patch.object(runner.adapters, 'render', side_effect=render), redirect_stdout(StringIO()):
             result = runner.run(self.root / 'run', root / 'bundle.json', adapter, 'test-candidate')
         return {Path(r['input']).stem: r for r in requests}, result

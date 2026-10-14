@@ -254,6 +254,17 @@ class PdfContract(unittest.TestCase):
         with self.assertRaises(ValueError):
             pdf.marker({'words': words}, 'Marker')
 
+    def test_reference_must_satisfy_its_declared_assertions(self):
+        geometry = [{'media': [0, 0, 612, 792], 'crop': [0, 0, 612, 792], 'rotation': 0, 'userUnit': 1}] * 2
+        declaration = {'fonts': ['Liberation Serif'], 'tokens': {'Entry11': 1, 'Entry12': 1},
+                       'assertions': [{'type': 'same-page', 'version': 1, 'markers': ['Entry11', 'Entry12']},
+                                      {'type': 'marker-reference-position', 'version': 1, 'marker': 'Entry12', 'tolerancePt': 0.5}]}
+        def capture(second_page):
+            words = [{'text': 'Entry11', 'page': 1, 'rect': [1, 2, 3, 4]}, {'text': 'Entry12', 'page': second_page, 'rect': [1, 9, 3, 11]}]
+            return {'geometry': geometry, 'fonts': ['LiberationSerif'], 'tokens': {'Entry11': 1, 'Entry12': 1}, 'words': words}
+        self.assertEqual(pdf.reference_failures(declaration, capture(1)), [])
+        self.assertEqual(pdf.reference_failures(declaration, capture(2)), ['assertion-same-page'])
+
     def test_lost_note_fails_inventory(self):
         self.assertFalse(pdf.inventory_check({'tokens': {'Body': 1}}, {'tokens': {'Body': 1, 'Note': 1}}))
 
@@ -269,7 +280,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 85)
+        self.assertEqual(len(common.validate_registry()['cases']), 86)
 
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
@@ -295,7 +306,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v16')
+        self.assertEqual(registry['suite']['id'], 'core-v17')
 
     def test_legacy_header_pairs_preserve_everything_except_number_representation(self):
         import xml.etree.ElementTree as ET

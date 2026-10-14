@@ -20,10 +20,11 @@ def reference_bundle(output):
         path = folder / 'reference.pdf'
         response = adapters.libreoffice(contained(ROOT, case['input']), path)
         info = pdf.inspect_pdf(path)
-        eligible = pdf.inventory_check(info, case) and pdf.font_check(info, case['fonts'])
-        bundle['cases'][case['id']] = {'inputSha256': case['sha256'], 'pdf': str(path.relative_to(output)), 'pdfSha256': digest(path), 'renderer': response['renderer'], 'eligible': eligible, 'inspection': info}
+        failures = pdf.reference_failures(case, info)
+        eligible = not failures
+        bundle['cases'][case['id']] = {'inputSha256': case['sha256'], 'pdf': str(path.relative_to(output)), 'pdfSha256': digest(path), 'renderer': response['renderer'], 'eligible': eligible, 'ineligibleChecks': failures, 'inspection': info}
         write_json(output / 'bundle.json', bundle)
-        print(case['id'] + (': reference registered' if eligible else ': reference ineligible (see token/font evidence)'), flush=True)
+        print(case['id'] + (': reference registered' if eligible else ': reference ineligible (' + ', '.join(failures) + ')'), flush=True)
     return bundle
 
 
@@ -126,8 +127,9 @@ def run(output, reference, adapter, candidate):
                     direct_root = contained(ref_root, bundle['sourceBundle']).parent
                     shutil.copyfile(contained(direct_root, direct_capture['pdf']), folder / 'direct-reference.pdf')
             reference_info = pdf.inspect_pdf(reference_path)
-            if not pdf.inventory_check(reference_info, case) or not pdf.font_check(reference_info, case['fonts']):
-                raise ValueError('Reference content or fonts are ineligible')
+            failures = pdf.reference_failures(case, reference_info)
+            if failures:
+                raise ValueError('Reference fails its own mandatory checks: ' + ', '.join(failures))
             render_case = case
             if adapter == 'libreoffice-reference' and direct_bundle is not None:
                 render_case = next(c for c in registry['cases'] if c['id'] == entry['referenceSource']['caseId'])

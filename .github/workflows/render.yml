@@ -79,11 +79,13 @@ jobs:
         run: |
           npm --prefix renderer/npm exec -- playwright install --with-deps chromium
           sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
-      - name: Register immutable LibreOffice reference bundle
-        run: python3 -m bench reference libreoffice --out references/lo
-      - name: Verify identical-engine calibration
+      - name: Register immutable LibreOffice reference bundles
         run: |
-          python3 -m bench run --reference references/lo/bundle.json --adapter libreoffice --candidate reference-calibration --out runs/calibration --gate close
+          python3 -m bench reference libreoffice --out references/lo-direct
+          python3 -m bench reference equivalent-controls --reference references/lo-direct/bundle.json --out references/lo
+      - name: Verify reference-provider calibration
+        run: |
+          python3 -m bench run --reference references/lo/bundle.json --adapter libreoffice-reference --candidate reference-calibration --out runs/calibration --gate close
           python3 -c 'import json; r=json.load(open("runs/calibration/result.json")); assert r["summary"]["score"] == 100, r["summary"]'
       - name: Measure delivered candidate PDFs
         env:
