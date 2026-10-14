@@ -122,7 +122,7 @@ def run(output, reference, adapter, candidate):
             shutil.copyfile(reference_path, folder / 'reference.pdf')
             if direct_bundle is not None:
                 outcome['referenceSource'] = entry['referenceSource']
-                if entry['referenceSource']['kind'] == 'equivalent-control':
+                if entry['referenceSource']['kind'] != 'direct':
                     direct_capture = direct_bundle['cases'][case['id']]
                     direct_root = contained(ref_root, bundle['sourceBundle']).parent
                     shutil.copyfile(contained(direct_root, direct_capture['pdf']), folder / 'direct-reference.pdf')

@@ -18,9 +18,11 @@ def save(output, result):
         pages = []
         artifacts = ''.join(f'<a href="{cid}/{name}">{label}</a> ' for name, label in [('reference.pdf', 'Reference PDF'), ('direct-reference.pdf', 'Original direct reference PDF'), ('candidate.pdf', 'Candidate PDF'), ('production.json', 'Production report')] if (output / case['id'] / name).is_file())
         source = case.get('referenceSource')
-        source_note = ('<p>Reference captured from equivalent control <code>' + escape(source['caseId']) +
-                       '</code> using ' + escape(source['rule']) + '. The scored fixture remains <code>' + cid +
-                       '</code>.</p>') if source and source['kind'] == 'equivalent-control' else ''
+        bound = source.get('bound') if source else None
+        source_note = ('<p>Reference captured from ' + ('nearest-twip' if bound else 'equivalent') + ' control <code>' + escape(source['caseId']) +
+                       '</code> using ' + escape(source['rule']) +
+                       ('; it displaces declared reference positions by at most ' + escape(bound['maxDisplacementPt']) + 'pt' if bound else '') +
+                       '. The scored fixture remains <code>' + cid + '</code>.</p>') if source and source['kind'] != 'direct' else ''
         for number, page in enumerate(case.get('pages', []), 1):
             if page.get('unmatched') or page.get('dimensionsMismatch'):
                 pages.append(f'<p>Page {number}: {escape(str(page))}</p>')

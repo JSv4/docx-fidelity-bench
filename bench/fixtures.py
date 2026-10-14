@@ -407,21 +407,25 @@ def generate():
     # 240-twip control. Each package exercises physical/logical edges and a
     # bordered hanging paragraph, whose wrapper has a separate indent path.
     indent_styles = ledger_styles.replace(f'w:hAnsi="{FONT}"', f'w:hAnsi="{FONT}" w:cs="{FONT}"')
-    for name, value in [('pt', '36pt'), ('in', '0.5in'), ('cm', '1.27cm'), ('mm', '12.7mm'),
-                        ('pc', '3pc'), ('pi', '3pi'), ('twips', '720'), ('small-pt', '12pt'), ('small-twips', '240')]:
+    # Reference controls for bench #18 omit the conflicting legacy aliases on the logical paragraph.
+    indentation_forms = [('pt', '36pt'), ('in', '0.5in'), ('cm', '1.27cm'), ('mm', '12.7mm'),
+                         ('pc', '3pc'), ('pi', '3pi'), ('twips', '720'), ('small-pt', '12pt'), ('small-twips', '240')]
+    for name, value in indentation_forms + [('twips-logical-only', '720'), ('small-twips-logical-only', '240')]:
         words = 'Elm archive entries remain in order while the register is inspected. '
         texts = [marker + ' ' + (words * 3).strip() for marker in ('InsetMarker', 'LogicalMarker', 'FirstMarker', 'BoxMarker')]
         # Avoid detached bidi punctuation in Poppler's whole-word inventory.
         texts[1] = texts[1].replace('.', '')
+        aliases = '' if name.endswith('logical-only') else ' w:left="1440" w:right="1440"'
         props = [f'<w:ind w:left="{value}" w:right="{value}"/>',
-                 f'<w:bidi/><w:ind w:start="{value}" w:end="{value}" w:left="1440" w:right="1440"/>',
+                 f'<w:bidi/><w:ind w:start="{value}" w:end="{value}"{aliases}/>',
                  f'<w:ind w:left="{value}" w:firstLine="{value}"/>',
                  f'<w:pBdr><w:bottom w:val="single" w:sz="8" w:color="246B7D"/></w:pBdr><w:ind w:left="{value}" w:hanging="{value}"/>']
         body = ''.join(para(text, prop) for text, prop in zip(texts, props))
         assertions = [{'type': 'marker-region', 'version': 2, 'marker': marker, 'occurrence': 1,
                        'page': 1, 'rect': [72, 60, 540, 400]} for marker in ('InsetMarker', 'LogicalMarker', 'FirstMarker', 'BoxMarker')]
         assertions.append({'type': 'marker-reference-position', 'version': 1, 'marker': 'InsetMarker', 'tolerancePt': 0.5})
-        add('paragraphs-indentation-' + name, 'paragraphs', 'Original Elm indentation inventory in ' + value,
+        add('paragraphs-indentation-' + name, 'paragraphs', 'Original Elm indentation inventory in ' + value
+            + (' without conflicting legacy aliases on the logical paragraph' if not aliases else ''),
             texts, body, styles_xml=indent_styles, assertions=assertions)
     margin_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:cs="{FONT}"/><w:sz w:val="22"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl/><w:spacing w:after="120" w:line="276" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>'
     margin_units = [('pt', '54pt', '18pt'), ('in', '0.75in', '0.25in'),
