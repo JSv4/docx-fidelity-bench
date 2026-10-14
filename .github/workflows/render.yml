@@ -72,18 +72,13 @@ jobs:
           sudo dpkg -i "$install_dir"/LibreOffice_*/DEBS/*.deb
           sudo find /opt/libreoffice25.8/share/fonts -type f -iname '*.ttf' -delete
           "$BENCH_LIBREOFFICE" --version
-      - name: Build exact production export runtime
-        env:
-          CANDIDATE_COMMIT: ${{ inputs.candidate }}
-        run: python3 -m bench build-docxodus --source renderer --commit "$CANDIDATE_COMMIT"
-      - name: Provision Chromium sandbox host
-        run: |
-          npm --prefix renderer/npm exec -- playwright install --with-deps chromium
-          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
       - name: Recover immutable reference and complete calibration evidence
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh run download 38492946860 --repo JSv4/docx-fidelity-bench --name rendering-evidence --dir .
+        run: |
+          gh run download 38492946860 --repo JSv4/docx-fidelity-bench --name rendering-evidence --dir references/recovered
+          cp -a references/recovered/references/. references/
+          cp -a references/recovered/runs/calibration runs/calibration
       - name: Verify reference repeatability and expose its declaration failure
         run: |
           python3 - <<'PYCODE'
@@ -102,6 +97,14 @@ jobs:
           write_json('runs/calibration-validation.json', {'rasterRepeatability': '100 on all 85 cases', 'referenceAssertionFailures': failures, 'sourceRun': 38492946860})
           print('85/85 raster repeats are byte-identical. The boundary-merge reference violates its declared same-page assertion; preserve this defect in the candidate measurement.')
           PYCODE
+      - name: Build exact production export runtime
+        env:
+          CANDIDATE_COMMIT: ${{ inputs.candidate }}
+        run: python3 -m bench build-docxodus --source renderer --commit "$CANDIDATE_COMMIT"
+      - name: Provision Chromium sandbox host
+        run: |
+          npm --prefix renderer/npm exec -- playwright install --with-deps chromium
+          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
       - name: Measure delivered candidate PDFs
         env:
           CANDIDATE_COMMIT: ${{ inputs.candidate }}
@@ -109,6 +112,41 @@ jobs:
           export DOCXODUS_SOURCE_ROOT="$PWD/renderer"
           export DOCXODUS_EXPORT_MODULE="$PWD/renderer/npm-export/dist/index.js"
           python3 -m bench run --reference references/lo/bundle.json --adapter docxodus --candidate "$CANDIDATE_COMMIT" --out runs/candidate --gate report
+      - name: Capture causal HTML and PageMap diagnostics
+        if: ${{ !cancelled() }}
+        run: |
+          test -f runs/candidate/result.json || exit 0
+          python3 - <<'PYCODE'
+          from bench.common import write_json, validate_registry
+          from bench.environment import environment
+          write_json('runs/diagnostic-fonts.json', environment([f for c in validate_registry()['cases'] for f in c['fonts']])['fontDirectories'])
+          PYCODE
+          node --input-type=module - <<'JSCODE'
+          import { readFile, writeFile, mkdir } from 'node:fs/promises';
+          import { resolve } from 'node:path';
+          import { renderDocxArtifacts } from './renderer/npm-export/dist/index.js';
+          const registry = JSON.parse(await readFile('fixtures/manifest.json','utf8'));
+          const result = JSON.parse(await readFile('runs/candidate/result.json','utf8'));
+          const fontDirectories = JSON.parse(await readFile('runs/diagnostic-fonts.json','utf8'));
+          const controls = ['paragraph-contract','paragraph-heading','paragraph-keep','notes-footnote','notes-endnote','images-square','images-tight','tables-nested','tables-margins','paragraphs-inline-control'];
+          const selected = result.cases.filter(c => !(c.score >= 95) || controls.includes(c.id));
+          for (const outcome of selected) {
+            const fixture = registry.cases.find(c => c.id === outcome.id);
+            const folder = resolve('runs/diagnostics',outcome.id);
+            await mkdir(folder,{recursive:true});
+            try {
+              const artifacts = await renderDocxArtifacts(new Uint8Array(await readFile(fixture.input)), {outputs:['html','pdf'],reviewProfile:fixture.profile.review,commentProfile:fixture.profile.comments,fontDirectories,strictFonts:true,timeoutMs:120000});
+              await writeFile(resolve(folder,'candidate.html'),artifacts.html);
+              await writeFile(resolve(folder,'candidate.pdf'),artifacts.pdf);
+              await writeFile(resolve(folder,'pageMap.json'),JSON.stringify(artifacts.pageMap,null,2));
+              await writeFile(resolve(folder,'production.json'),JSON.stringify(artifacts.renderReport,null,2));
+              console.log(outcome.id+': diagnostics captured');
+            } catch(error) {
+              await writeFile(resolve(folder,'failure.json'),JSON.stringify(error.toJSON?.() ?? {message:error.message,code:error.code,phase:error.phase},null,2));
+              console.log(outcome.id+': '+error.code+' '+error.phase);
+            }
+          }
+          JSCODE
       - name: Preserve reports and exact reference bundle
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
