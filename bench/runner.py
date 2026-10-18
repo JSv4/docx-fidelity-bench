@@ -283,7 +283,7 @@ def validate_result(result):
         if not isinstance(profiles, dict) or not set(profiles).issubset(html_declarations):
             raise ValueError('Invalid delivered HTML profile contract')
         from .common import validate_render_profile
-        for profile in profiles.values(): validate_render_profile(profile)
+        for profile in profiles.values(): validate_render_profile(profile, allow_additional_css=True)
         if any(html_artifacts.needs_browser(d) for d in html_declarations.values()):
             if (type(result['contract'].get('htmlBrowserInspectorVersion')) is not int or
                     result['contract']['htmlBrowserInspectorVersion'] != html_artifacts.BROWSER_VERSION or

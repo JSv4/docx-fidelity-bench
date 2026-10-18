@@ -99,6 +99,7 @@ test('public profiles and optional delivered HTML retain verified artifact ident
       ['html-failure', 'word', 'inline', 'unmeasured'], ['html-unverified', 'word', 'margin', 'unmeasured'],
       ['shared-budget', 'word', 'endnotes', 'ok'],
       ['html-override', 'word', 'inline', 'ok', { review: 'final', comments: 'hidden' }],
+      ['html-css', 'word', 'hidden', 'ok', { review: 'final', comments: 'hidden', additionalCss: 'p > span {font-size:32px}' }],
       ['reader', 'word', 'hidden', 'ok', undefined, 'observe'],
       ['style-reader', 'word', 'hidden', 'ok', undefined, 'style'],
       ['reader-no-path', 'word', 'hidden', 'unmeasured', undefined, 'missing'],
@@ -118,6 +119,7 @@ test('public profiles and optional delivered HTML retain verified artifact ident
       assert.equal(options.markupPresentation, markupPresentation);
       assert.equal(Object.hasOwn(options, 'markupPresentation'), markupPresentation !== undefined);
       assert.equal(options.commentProfile, comments);
+      assert.equal(options.additionalCss, undefined);
       if (htmlStatus) {
         assert.equal(result.htmlArtifact.status, htmlStatus);
         if (htmlStatus === 'ok') {
@@ -129,6 +131,7 @@ test('public profiles and optional delivered HTML retain verified artifact ident
           assert.equal(htmlOptions.commentProfile, htmlProfile?.comments ?? profile.comments);
           assert.equal(htmlOptions.markupPresentation, htmlProfile ? undefined : profile.markupPresentation);
           assert.deepEqual(result.htmlArtifact.profile, htmlProfile ?? profile);
+          assert.equal(htmlOptions.additionalCss, htmlProfile?.additionalCss);
           if (['observe', 'style'].includes(observe)) {
             const facts = JSON.parse(readFileSync(output + '.observations.json'));
             assert.equal(result.htmlArtifact.browserFactsSha256, hash(readFileSync(output + '.observations.json')));
