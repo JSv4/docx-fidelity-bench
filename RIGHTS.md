@@ -17,3 +17,5 @@ The footer-frame reproduction and ordinary-flow control are original literal-tex
 The long-comment reproduction, short-note control and DOM observer are original work authored in this repository. All comment words, author metadata and OOXML are generated here. No renderer fixtures or content are imported.
 
 The nested-reply, flat-note and author-header cases are original literal-text OOXML authored by `bench/fixtures.py`. Their comment graph, author names and dates are generated here; no external or renderer fixture content is used.
+
+The durable timestamp and date-caption fixtures are original literal-text OOXML authored by `bench/fixtures.py`. All comment content, metadata and identifiers are generated here; no renderer fixtures are imported.
