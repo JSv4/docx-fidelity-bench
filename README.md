@@ -150,3 +150,13 @@ registration and full-suite scoring are pending.
 for Docxodus #1188, plus plain-hyperlink controls. Each candidate must compare the original
 source pair before export. `redline-v2` adds the same trigger/control to independent
 accept/reject scoring. All preceding PDF and redline input bytes remain unchanged.
+
+The [completed #1188 run](https://github.com/JSv4/docx-fidelity-bench/actions/runs/39155544679)
+measures Docxodus `f4c0617`: all four new PDF views pass mandatory checks and score 99.648–99.654,
+with calibration 100. Both new redline cases score 100 (original main: defect 0, control 100).
+The archived run used the 153-case development registry before the Times New Roman case merged;
+its full score is 87.216 with 143/153 mandatory passes. This branch retains that new font case
+and all 150 preceding inputs unchanged, for 154 PDF cases. The four #1188 input pairs and
+expected documents are byte-identical to the measured run; the archived score is not a full
+154-case score. Candidate/reference screenshots for every new view are in the run's
+`rendering-evidence` attachment.
