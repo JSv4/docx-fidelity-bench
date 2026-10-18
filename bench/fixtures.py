@@ -68,7 +68,7 @@ def zip_write(path, parts):
             archive.writestr(item, payload.encode() if isinstance(payload, str) else payload)
 
 
-def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None):
+def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None):
     namespaces = f'xmlns:w="{W}" xmlns:r="{R}" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"'
     namespaces += namespaces_extra
     styles = f'''<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/><w:sz w:val="22"/><w:color w:val="000000"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="120" w:line="276" w:lineRule="auto"/><w:widowControl/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style><w:style w:type="paragraph" w:styleId="Title"><w:name w:val="Title"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:after="240"/></w:pPr><w:rPr><w:b/><w:sz w:val="32"/></w:rPr></w:style></w:styles>'''
@@ -88,6 +88,10 @@ def package(path, body, final_section=None, notes=None, image=False, namespaces_
         parts[f'word/{kind}s.xml'] = f'<w:{kind}s xmlns:w="{W}"><w:{kind} w:type="separator" w:id="-1"><w:p><w:r><w:separator/></w:r></w:p></w:{kind}><w:{kind} w:type="continuationSeparator" w:id="0"><w:p><w:r><w:continuationSeparator/></w:r></w:p></w:{kind}><w:{kind} w:id="1">{content}</w:{kind}></w:{kind}s>'
         relations.append(('rNotes', kind + 's', kind + 's.xml'))
         overrides.append((kind + 's', kind + 's'))
+    if numbering_xml is not None:
+        parts['word/numbering.xml'] = numbering_xml
+        relations.append(('rNumbering', 'numbering', 'numbering.xml'))
+        overrides.append(('numbering', 'numbering'))
     if footnote_list:
         assert not notes, 'Use either one note or a list of footnotes'
         # Several numbered footnotes, each given as (id, literal note content).
@@ -108,13 +112,13 @@ def package(path, body, final_section=None, notes=None, image=False, namespaces_
 
 def generate():
     cases = []
-    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None):
+    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None):
         assertions = assertions or []
         for assertion in assertions:
             if assertion['type'] == 'marker-region':
                 assertion.update(version=2, tolerancePt=0.0001)
         path = ROOT / 'fixtures' / (case_id + '.docx')
-        package(path, body, sect, notes, image, namespaces_extra, styles_xml, story, notes_xml, stories, extra_parts, footnote_list)
+        package(path, body, sect, notes, image, namespaces_extra, styles_xml, story, notes_xml, stories, extra_parts, footnote_list, numbering_xml)
         inventory = dict(sorted(Counter(' '.join(text).split()).items()))
         cases.append({'id': case_id, 'version': 2 if any(a['type'] == 'marker-region' for a in assertions) else 1, 'category': category, 'description': description, 'input': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'rights': {'author': 'John Scrudato IV', 'license': 'MIT', 'origin': 'Authored by bench/fixtures.py in this repository', 'assets': 'All text and graphics are generated here; no embedded font files'}, 'profile': {'review': 'final', 'comments': 'hidden'}, 'fonts': [FONT], 'tokens': inventory, 'assertions': assertions, 'generator': {'path': 'bench/fixtures.py', 'sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}})
     prose = 'The survey team records the height of each tower before the evening check. The next crew compares the notes and keeps the route open for the morning visit.'
@@ -801,7 +805,16 @@ def generate():
             [text], para(runs=run(text, current + revision)), styles_xml=format_styles)
         cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
         cases[-1]['htmlAssertions'] = [{'type': 'marker-attribute', 'version': 1, 'marker': 'FormatLabel', 'attribute': 'title', 'equals': 'Bold added'}]
-    registry = {'schema': 1, 'suite': {'id': 'core-v23', 'version': 23, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Original numbered heading with a hidden paragraph mark, and visible-mark control.
+    mark_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="24"/></w:rPr></w:rPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style><w:style w:type="paragraph" w:styleId="Heading2"><w:name w:val="heading 2"/><w:basedOn w:val="Normal"/><w:pPr><w:outlineLvl w:val="1"/></w:pPr><w:rPr><w:b/></w:rPr></w:style></w:styles>'
+    mark_numbering = f'<w:numbering xmlns:w="{W}"><w:abstractNum w:abstractNumId="1"><w:multiLevelType w:val="singleLevel"/><w:lvl w:ilvl="0"><w:start w:val="1"/><w:numFmt w:val="decimal"/><w:suff w:val="space"/><w:lvlText w:val="%1."/></w:lvl></w:abstractNum><w:num w:numId="1"><w:abstractNumId w:val="1"/></w:num></w:numbering>'
+    for case_id, hidden in [('paragraph-mark-hidden-numbered-heading', True), ('paragraph-mark-visible-numbered-control', False)]:
+        heading, following = 'CedarHeading.', 'CedarBody Return the archive folder before dusk.'
+        props = '<w:pStyle w:val="Heading2"/><w:numPr><w:ilvl w:val="0"/><w:numId w:val="1"/></w:numPr><w:rPr><w:vanish w:val="' + ('1' if hidden else '0') + '"/></w:rPr>'
+        add(case_id, 'paragraphs', 'Numbered heading with ' + ('hidden paragraph mark (Docxodus #1223)' if hidden else 'explicitly visible paragraph mark control'),
+            ['1.', heading, following], para(heading, props) + para(' ' + following), styles_xml=mark_styles, numbering_xml=mark_numbering,
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5} for marker in ('CedarHeading.', 'CedarBody')])
+    registry = {'schema': 1, 'suite': {'id': 'core-v24', 'version': 24, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

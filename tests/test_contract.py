@@ -337,7 +337,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 123)
+        self.assertEqual(len(common.validate_registry()['cases']), 125)
 
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
@@ -363,7 +363,30 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v23')
+        self.assertEqual(registry['suite']['id'], 'core-v24')
+
+    def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records[c] for c in ('paragraph-mark-hidden-numbered-heading', 'paragraph-mark-visible-numbered-control')]
+        w = '{' + fixtures.W + '}'
+        with ZipFile(common.ROOT / pair[0]['input']) as hidden, ZipFile(common.ROOT / pair[1]['input']) as visible:
+            self.assertEqual(hidden.namelist(), visible.namelist())
+            for name in hidden.namelist():
+                if name != 'word/document.xml':
+                    self.assertEqual(hidden.read(name), visible.read(name))
+            first, second = [ET.fromstring(z.read('word/document.xml')) for z in (hidden, visible)]
+            mark = first.find('.//' + w + 'pPr/' + w + 'rPr/' + w + 'vanish')
+            self.assertEqual(mark.get(w + 'val'), '1')
+            mark.set(w + 'val', '0')
+            self.assertEqual(ET.tostring(first), ET.tostring(second))
+            numbering = ET.fromstring(hidden.read('word/numbering.xml'))
+            self.assertEqual(numbering.find('.//' + w + 'lvlText').get(w + 'val'), '%1.')
+            self.assertEqual(first.find('.//' + w + 'numPr/' + w + 'numId').get(w + 'val'), '1')
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        self.assertEqual(pair[0]['tokens']['1.'], 1)
+        self.assertEqual({a['marker'] for a in pair[0]['assertions']}, {'CedarHeading.', 'CedarBody'})
 
     def test_legacy_header_pairs_preserve_everything_except_number_representation(self):
         import xml.etree.ElementTree as ET
