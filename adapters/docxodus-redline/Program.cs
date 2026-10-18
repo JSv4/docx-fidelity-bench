@@ -44,6 +44,9 @@ internal static class Program
             var diff = new DocxDiffSettings { AuthorForRevisions = author, DateTimeForRevisions = date };
             switch (operation)
             {
+                case "build" when documents.Count >= 2:
+                    result = DocumentBuilder.BuildDocument(documents.ConvertAll(d => new Source(d.Document, false)));
+                    break;
                 case "compare" when documents.Count == 2:
                     result = DocxCompare.Compare(documents[0].Document, documents[1].Document, diff);
                     break;

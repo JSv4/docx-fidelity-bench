@@ -155,7 +155,7 @@ def libreoffice_batch(env, folder, items, attempts=2):
 # Candidates
 # ---------------------------------------------------------------------------------------------
 
-def run_candidate(adapter, build, case, output, candidate):
+def run_candidate(adapter, build, case, output, candidate, timeout=300):
     if adapter == 'authored':
         shutil.copyfile(contained(ROOT, case['authored']['path']), output)
         return {'status': 'ok', 'outputSha256': digest(output), 'engine': {'name': 'authored-redline'}}
@@ -165,7 +165,7 @@ def run_candidate(adapter, build, case, output, candidate):
     inputs = [{'path': str(contained(ROOT, i['path'])), 'sha256': i['sha256'], 'author': i.get('author')} for i in case['inputs']]
     request = {'protocol': 1, 'operation': case['operation'], 'inputs': inputs, 'output': str(output),
                'settings': {'author': 'Bench', 'date': '2026-01-01T00:00:00Z'}}
-    response = json.loads(execute([_dotnet(), str(Path(build).resolve() / 'bin' / 'DocxBenchRedline.dll')], input=json.dumps(request), timeout=300))
+    response = json.loads(execute([_dotnet(), str(Path(build).resolve() / 'bin' / 'DocxBenchRedline.dll')], input=json.dumps(request), timeout=timeout))
     if response.get('protocol') != 1 or response.get('status') not in ('ok', 'failed', 'unmeasured'):
         raise ValueError('Invalid redline adapter response')
     if response['status'] == 'ok' and digest(output) != response.get('outputSha256'):

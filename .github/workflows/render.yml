@@ -81,7 +81,9 @@ jobs:
       - name: Build exact production export runtime
         env:
           CANDIDATE_COMMIT: ${{ inputs.candidate }}
-        run: python3 -m bench build-docxodus --source renderer --commit "$CANDIDATE_COMMIT"
+        run: |
+          python3 -m bench build-docxodus --source renderer --commit "$CANDIDATE_COMMIT"
+          python3 -m bench redline build-docxodus --source renderer --commit "$CANDIDATE_COMMIT" --out "$RUNNER_TEMP/pdf-operations"
       - name: Verify installed observer browser API
         run: DOCXODUS_SOURCE_ROOT="$PWD/renderer" node --test tests/test-playwright-runtime.mjs
       - name: Provision Chromium sandbox host
@@ -130,6 +132,7 @@ jobs:
         run: |
           export DOCXODUS_SOURCE_ROOT="$PWD/renderer"
           export DOCXODUS_EXPORT_MODULE="$PWD/renderer/npm-export/dist/index.js"
+          export DOCXODUS_OPERATION_BUILD="$RUNNER_TEMP/pdf-operations"
           python3 -m bench run --reference references/lo/bundle.json --adapter docxodus --candidate "$CANDIDATE_COMMIT" --out runs/candidate --gate report
       - name: Compare with the reused run's candidate
         if: ${{ inputs.reference_run != '' }}
