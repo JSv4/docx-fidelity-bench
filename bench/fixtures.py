@@ -53,11 +53,11 @@ def comment_view_mark(kind, identifier=11):
     return '<w:r>' + marker + '</w:r>' if kind == 'Reference' else marker
 
 
-def comment_view_wrapper(kind, content):
+def comment_view_wrapper(kind, content, tag='cedar'):
     if kind == 'sdt':
-        return '<w:sdt><w:sdtPr><w:tag w:val="cedar"/><w:id w:val="4100"/></w:sdtPr><w:sdtContent>' + content + '</w:sdtContent></w:sdt>'
+        return f'<w:sdt><w:sdtPr><w:tag w:val="{tag}"/><w:id w:val="4100"/></w:sdtPr><w:sdtContent>' + content + '</w:sdtContent></w:sdt>'
     if kind == 'customxml':
-        return '<w:customXml w:element="cedar">' + content + '</w:customXml>'
+        return f'<w:customXml w:element="{tag}">' + content + '</w:customXml>'
     return content
 
 
@@ -88,6 +88,23 @@ def comment_view_cases():
         cases.append({'id': 'reviewer-added-comment' if added else 'reviewer-comment-control',
                       'operation': 'consolidate', 'issue': 1196, 'control': not added,
                       'sources': sources, 'expected': [document(added, True), sources[0]]})
+    return cases
+
+
+def duplicate_comment_cases():
+    """Invalid duplicate references must not manufacture a second comment in either view."""
+    cases = []
+    for wrapper in ('sdt', 'customxml'):
+        for duplicate in (True, False):
+            def document(tag, extra):
+                content = (comment_view_mark('RangeStart') + run('Cedar clause' if tag == 'Maple' else 'Cedar revised clause')
+                           + comment_view_mark('RangeEnd') + comment_view_mark('Reference') * (2 if extra else 1))
+                return {'body': para('Maple opening') + comment_view_wrapper(wrapper, para(runs=content), tag)
+                        + para('Birch closing'), 'comments_xml': comment_view_note()}
+            cases.append({'id': 'duplicate-comment-' + wrapper + ('' if duplicate else '-control'),
+                          'operation': 'compare', 'issue': 1197, 'control': not duplicate, 'wrapper': wrapper,
+                          'sources': [document('Maple', duplicate), document('Birch', duplicate)],
+                          'expected': [document('Birch', False), document('Maple', False)]})
     return cases
 
 
@@ -1157,7 +1174,7 @@ def generate():
             cases[-1]['profile']['review'] = review
             cases[-1]['preparation'] = {'operation': operation, 'inputs': sources}
 
-    for case in comment_view_cases():
+    for case in comment_view_cases() + duplicate_comment_cases():
         sources = []
         for i, document in enumerate(case['sources']):
             path = ROOT / 'fixtures' / 'comment-views' / (case['id'] + f'-{i}.docx')
@@ -1172,7 +1189,7 @@ def generate():
                 texts, **document)
             cases[-1]['profile']['review'] = review
             cases[-1]['preparation'] = {'operation': case['operation'], 'inputs': sources}
-    registry = {'schema': 1, 'suite': {'id': 'core-v37', 'version': 37, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v38', 'version': 38, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

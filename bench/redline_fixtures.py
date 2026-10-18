@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
-from .fixtures import custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper
+from .fixtures import custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases
 
 ROOT = Path(__file__).resolve().parents[1]
 W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
@@ -168,6 +168,9 @@ def package(path, body, styles=None, header=None, comments=None, footnotes=None,
 # declared-ineligible comparison is not applied; the run fails as unmeasured if the calibration
 # disagrees with this table in either direction.
 LIBREOFFICE_INELIGIBLE = {
+    **{'redline-duplicate-comment-' + wrapper + suffix: (('accepted', 'rejected'),
+       'LibreOffice retains both revision-scoped comments and an empty paragraph after resolving the replaced wrapper copies')
+       for wrapper in ('sdt', 'customxml') for suffix in ('', '-control')},
     'redline-comment-add-customxml': (('accepted', 'rejected'), 'LibreOffice retains both revision-scoped comments and an empty paragraph after resolving the replaced paragraph/wrapper copies'),
     'redline-comment-remove-sdt': (('accepted', 'rejected'), 'LibreOffice retains both revision-scoped comments and an empty paragraph after resolving the replaced paragraph/wrapper copies'),
     'redline-reviewer-added-comment': (('rejected',), 'LibreOffice keeps the comment whose markers are in rejected insertion revisions'),
@@ -242,6 +245,7 @@ def generate():
     identity(corpus)
     inline_custom_xml(corpus)
     comment_views(corpus)
+    duplicate_comments(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -729,6 +733,29 @@ def comment_views(corpus):
                    'Exact comment anchors across a one-sided wrapper' if case['operation'] == 'compare' else
                    'A reviewer adds a comment to unchanged text while another edits a separate paragraph',
                    case['operation'], roles, expected, authored)
+
+
+def duplicate_comments(corpus):
+    for case in duplicate_comment_cases():
+        name = 'redline-' + case['id']
+        def file(role, document):
+            return corpus.file(name, role, body=document['body'], comments=document['comments_xml'])
+        inputs = [dict(file(role, document), role=role)
+                  for role, document in zip(('left', 'right'), case['sources'])]
+        expected = {view: file(view, document) for view, document in zip(('accepted', 'rejected'), case['expected'])}
+        rev = Revisions()
+        body = p(t('Maple opening'))
+        for tag, kind, identifier in [('Maple', 'del', 11), ('Birch', 'ins', 12)]:
+            mark = rev.dele if kind == 'del' else rev.ins
+            content = (mark(comment_view_mark('RangeStart', identifier)) + mark(t('Cedar clause' if tag == 'Maple' else 'Cedar revised clause'))
+                       + mark(comment_view_mark('RangeEnd', identifier)) + mark(comment_view_mark('Reference', identifier)))
+            body += comment_view_wrapper(case['wrapper'], p(content, mark=rev.mark(kind)), tag)
+        body += p(t('Birch closing'))
+        authored = corpus.file(name, 'authored-redline', body=body,
+                               comments=comment_view_note(11) + comment_view_note(12))
+        corpus.add(name, 'comments', 'control' if case['control'] else 'reproducer', 'JSv4/Docxodus#1197',
+                   'One comment per resolved wrapper despite duplicate references in the source' if not case['control'] else
+                   'The same wrapper replacement with one valid comment reference', 'compare', inputs, expected, authored)
 
 
 def identity(corpus):

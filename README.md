@@ -2,7 +2,7 @@
 
 An independent MIT benchmark of delivered PDF rendering and of document comparison. The harness and every input document are authored in this repository. It measures layout, visible content, physical pages, fonts, and declared feature assertions. It produces portable HTML evidence and JSON measurements.
 
-The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v37`, with report-only renderer CI. A separate comparison track, `redline-v2`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
+The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v38`, with report-only renderer CI. A separate comparison track, `redline-v2`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
 
 `core-v36` adds six PDF views for Docxodus #1190: table-boundary comparison, row-boundary consolidation,
 and a plain-paragraph text control, each in final and original views. Candidates perform the operation
@@ -129,7 +129,7 @@ registration and full-suite scoring are pending.
 
 ## Redline track
 
-The comparison track asks whether a redline is exactly reversible. Each of its 50 authored cases gives a candidate a document pair (or a base and two reviewers, or one document carrying tracked changes) and declares what accept-all and reject-all must produce. The benchmark accepts and rejects the candidate's output with its own revision engine, compared on a semantic view of text, field characters, bookmark and comment markers, note references and paragraph styles, and with LibreOffice's accept-all/reject-all through headless UNO, compared on text. It also checks that the package adds no Open XML SDK validation errors and satisfies declared structural assertions, such as unique style ids, valid paragraph ids, untouched unchanged text and a folded paragraph count. A case scores 100 only when everything holds. Every reproducer, for Docxodus issues #1165, #1166, #1167, #1170, #1174, #1175, #1176, #1183 and #1184 and for one bookmark-placement defect found while authoring the suite, has a control without the trigger, and an authored-redline calibration must score 100.
+The comparison track asks whether a redline is exactly reversible. Each of its 54 authored cases gives a candidate a document pair (or a base and two reviewers, or one document carrying tracked changes) and declares what accept-all and reject-all must produce. The benchmark accepts and rejects the candidate's output with its own revision engine, compared on a semantic view of text, field characters, bookmark and comment markers, note references and paragraph styles, and with LibreOffice's accept-all/reject-all through headless UNO, compared on text. It also checks that the package adds no Open XML SDK validation errors and satisfies declared structural assertions, such as unique style ids, valid paragraph ids, untouched unchanged text and a folded paragraph count. A case scores 100 only when everything holds. Every reproducer, for Docxodus issues #1165, #1166, #1167, #1170, #1174, #1175, #1176, #1183 and #1184 and for one bookmark-placement defect found while authoring the suite, has a control without the trigger, and an authored-redline calibration must score 100.
 
 ```sh
 python3 -m bench redline build-validator --out /path/to/validator
@@ -173,3 +173,8 @@ expected documents are byte-identical to the measured run; the archived score is
 `rendering-evidence` attachment.
 
 `core-v37` adds ten final/original PDF views for one-sided comment wrappers (#1195) and reviewer-added comments (#1196), with five corresponding independent redline cases and controls. Candidate preparation invokes comparison or consolidation before production export. PDF comments are hidden, so PDFs measure body text/layout; the redline track independently checks comment range positions, references, definitions and reviewer revisions. All 154 preceding PDF inputs and 39 preceding redline input sets remain unchanged. New reference calibration and candidate scoring are pending.
+
+`core-v38` adds eight final/original PDF views and four independent redline cases for #1197.
+Invalid repeated references inside replaced content-control/custom-XML wrappers must resolve to one
+comment, as in the valid-reference controls. PDF checks retain body content/layout; redline checks
+verify exact comment definitions and anchors. All preceding packages remain byte-identical.
