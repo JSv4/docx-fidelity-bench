@@ -51,13 +51,17 @@ test('public profiles and optional delivered HTML retain verified artifact ident
     // Protocol-only fake: its output records the public options, never a fidelity result.
     const browserPath = join(root, 'protocol-browser');
     writeFileSync(browserPath, 'protocol browser');
+    writeFileSync(join(root, '.gitignore'), 'protocol-browser\n');
     const browserSha = hash('protocol browser');
     mkdirSync(join(root, 'npm-export/node_modules/@playwright/browser-chromium'), { recursive: true });
+    mkdirSync(join(root, 'npm-export/node_modules/playwright-core'), { recursive: true });
     writeFileSync(join(root, 'npm-export/package.json'), '{}');
-    writeFileSync(join(root, 'npm-export/node_modules/@playwright/browser-chromium/index.js'), `
+    // The installer has no browser API; only playwright-core exports chromium.
+    writeFileSync(join(root, 'npm-export/node_modules/@playwright/browser-chromium/index.js'), 'module.exports = {};');
+    writeFileSync(join(root, 'npm-export/node_modules/playwright-core/index.js'), `
       exports.chromium = { executablePath: () => ${JSON.stringify(browserPath)},
         launch: async options => {
-          if (!options.chromiumSandbox || options.timeout <= 0) throw new Error('Invalid observer launch');
+          if (!options.chromiumSandbox || options.timeout <= 0 || options.executablePath !== ${JSON.stringify(browserPath)}) throw new Error('Invalid observer launch');
           return { close: async () => {}, newContext: async options => {
             if (options.javaScriptEnabled || !options.offline) throw new Error('Observer policy changed');
             return { close: async () => {}, newPage: async () => ({
@@ -146,5 +150,18 @@ test('public profiles and optional delivered HTML retain verified artifact ident
         }
       } else assert.equal(Object.hasOwn(result, 'htmlArtifact'), false);
     }
+    // An API loaded successfully must still reject a different executable.
+    writeFileSync(browserPath, 'different protocol browser');
+    const output = join(root, 'browser-mismatch.pdf');
+    const result = request({ protocol: 1, candidate, input, inputSha256: hash('protocol input'), output,
+      report: output + '.json', profile: { review: 'final', comments: 'hidden' },
+      fontDirectories: [], timeoutMs: 120000, htmlOutput: output + '.html', htmlReport: output + '.html.json',
+      htmlObservations: output + '.observations.json',
+      htmlAssertions: [{ type: 'marker-readable', version: 1, marker: 'FormatLabel', tokens: ['FormatLabel'] }] },
+      { DOCXODUS_SOURCE_ROOT: root, DOCXODUS_EXPORT_MODULE: modulePath });
+    assert.equal(result.status, 'ok');
+    assert.equal(result.htmlArtifact.status, 'unmeasured');
+    assert.match(result.htmlArtifact.error, /observer browser differs/);
+    assert.equal(existsSync(output + '.observations.json'), false);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
