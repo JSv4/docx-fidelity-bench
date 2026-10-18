@@ -57,7 +57,9 @@ class EquivalentControlContract(unittest.TestCase):
                 'inputSha256': case['sha256'], 'pdf': str(path.relative_to(root)),
                 'pdfSha256': common.digest(path), 'eligible': case['id'] not in missing,
                 'renderer': {'name': 'libreoffice', 'version': 'test-only'},
-                'inspection': {'tokens': case['tokens'], 'fonts': ['LiberationSerif']},
+                'inspection': {'tokens': case['tokens'], 'fonts': ['LiberationSerif'],
+                               **({'pdfTextNormalization': case['pdfTextNormalization'], 'decorativeWords': []}
+                                  if case.get('pdfTextNormalization') else {})},
             }
         bundle = {'schema': 1, 'track': 'libreoffice', 'suiteDigest': common.identity(self.registry),
                   'environment': self.env['contract'], 'cases': cases}
@@ -318,7 +320,8 @@ class EquivalentControlContract(unittest.TestCase):
         # Opaque captures carry no page geometry; reference self-checks are covered in test_contract.
         def inspect(path):
             record = self.records[Path(path).parent.name]
-            return {'tokens': record['tokens'], 'fonts': ['LiberationSerif']}
+            return {'tokens': record['tokens'], 'fonts': ['LiberationSerif'],
+                    'words': [{'text': token} for token, count in record['tokens'].items() for _ in range(count)]}
 
         def render(adapter, request):
             requests.append(request)
