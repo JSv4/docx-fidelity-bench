@@ -779,7 +779,16 @@ def generate():
             add('decoration-' + label + suffix, 'paragraphs',
                 label.replace('-', ' ').title() + (' simpler control' if suffix else ' reproduction (Docxodus #1220)'),
                 texts, body, styles_xml=decoration_styles)
-    registry = {'schema': 1, 'suite': {'id': 'core-v21', 'version': 21, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Word-style revision bars use the text column as their origin, including zero indent.
+    change_bar_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:color w:val="000000"/><w:sz w:val="22"/></w:rPr></w:rPrDefault></w:docDefaults></w:styles>'
+    for case_id, indent in [('revision-change-bar-zero-indent', 0), ('revision-change-bar-indented-control', 720)]:
+        original, inserted = 'CedarBar The crew ', 'updates the cedar ledger.'
+        insertion = '<w:ins w:id="1" w:author="Cedar Reviewer" w:date="2026-09-10T12:00:00Z">' + run(inserted) + '</w:ins>'
+        body = para(props=f'<w:ind w:left="{indent}"/>', runs=run(original) + insertion)
+        add(case_id, 'paragraphs', 'Word-style revision bar with ' + ('zero indent (Docxodus #1221)' if indent == 0 else 'half-inch indent control'),
+            [original + inserted], body, styles_xml=change_bar_styles)
+        cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden', 'markupPresentation': 'word'}
+    registry = {'schema': 1, 'suite': {'id': 'core-v22', 'version': 22, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

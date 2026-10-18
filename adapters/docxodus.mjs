@@ -41,6 +41,7 @@ try {
   const result = await convertDocxToPdf(new Uint8Array(bytes), {
     reviewProfile: request.profile.review,
     commentProfile: request.profile.comments,
+    ...(request.profile.markupPresentation === undefined ? {} : { markupPresentation: request.profile.markupPresentation }),
     timeoutMs: request.timeoutMs,
     fontDirectories: request.fontDirectories,
     strictFonts: true,
