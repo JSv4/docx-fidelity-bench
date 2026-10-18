@@ -954,7 +954,25 @@ def generate():
         cases[-1]['htmlAssertions'] = [
             {'type': 'marker-attribute', 'version': 1, 'marker': marker, 'attribute': 'data-date', 'equals': date},
             {'type': 'marker-readable', 'version': 1, 'marker': marker, 'tokens': ['BirchYearNote', marker] if authored else ['Jan', '2,', marker]}]
-    registry = {'schema': 1, 'suite': {'id': 'core-v29', 'version': 29, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Independent original comment return link and ordinary body bookmark control.
+    for comments in [True, False]:
+        text = ['Juniper navigation anchor.', 'Juniper bookmark destination.', 'JuniperBodyReturn']
+        start = '<w:commentRangeStart w:id="4"/>' if comments else ''
+        end = '<w:commentRangeEnd w:id="4"/><w:r><w:commentReference w:id="4"/></w:r>' if comments else ''
+        body = para(runs=start + run(text[0]) + end)
+        body += para(runs='<w:bookmarkStart w:id="31" w:name="JuniperDestination"/>' + run(text[1]) + '<w:bookmarkEnd w:id="31"/>')
+        body += para(runs='<w:hyperlink w:anchor="JuniperDestination">' + run(text[2]) + '</w:hyperlink>')
+        comment = '<w:comment w:id="4" w:author="">' + para('JuniperNote Return to the marked words.') + '</w:comment>'
+        add('comments-paginated-return-link' if comments else 'comments-body-bookmark-return-control',
+            'paragraphs', 'A paginated margin note returns to its unique rendered body reference (Docxodus #1229)' if comments else
+            'An ordinary body bookmark link stays active without repeated comment copies', text, body,
+            styles_xml=comment_styles, comments_xml=comment if comments else None)
+        cases[-1]['htmlProfile'] = {'review': 'final', 'comments': 'margin'}
+        cases[-1]['htmlAssertions'] = ([
+            {'type': 'marker-attribute', 'version': 1, 'marker': '↩', 'attribute': 'href', 'equals': '#comment-ref-4'},
+            {'type': 'marker-attribute', 'version': 1, 'marker': '[4]', 'attribute': 'id', 'equals': 'comment-ref-4'}] if comments else [
+            {'type': 'marker-attribute', 'version': 1, 'marker': 'JuniperBodyReturn', 'attribute': 'href', 'equals': '#JuniperDestination'}])
+    registry = {'schema': 1, 'suite': {'id': 'core-v30', 'version': 30, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

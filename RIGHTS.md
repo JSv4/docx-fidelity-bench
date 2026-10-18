@@ -19,3 +19,5 @@ The long-comment reproduction, short-note control and DOM observer are original 
 The nested-reply, flat-note and author-header cases are original literal-text OOXML authored by `bench/fixtures.py`. Their comment graph, author names and dates are generated here; no external or renderer fixture content is used.
 
 The durable timestamp and date-caption fixtures are original literal-text OOXML authored by `bench/fixtures.py`. All comment content, metadata and identifiers are generated here; no renderer fixtures are imported.
+
+The comment-return and ordinary body-bookmark fixtures are original literal-text OOXML authored by `bench/fixtures.py`. All phrases, comment metadata and bookmark identifiers are generated here; no renderer fixture or external document content is imported.
