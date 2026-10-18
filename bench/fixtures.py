@@ -68,7 +68,7 @@ def zip_write(path, parts):
             archive.writestr(item, payload.encode() if isinstance(payload, str) else payload)
 
 
-def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None):
+def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None):
     namespaces = f'xmlns:w="{W}" xmlns:r="{R}" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"'
     namespaces += namespaces_extra
     styles = f'''<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/><w:sz w:val="22"/><w:color w:val="000000"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="120" w:line="276" w:lineRule="auto"/><w:widowControl/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style><w:style w:type="paragraph" w:styleId="Title"><w:name w:val="Title"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:after="240"/></w:pPr><w:rPr><w:b/><w:sz w:val="32"/></w:rPr></w:style></w:styles>'''
@@ -96,6 +96,13 @@ def package(path, body, final_section=None, notes=None, image=False, namespaces_
         parts['word/commentsExtended.xml'] = comments_extended_xml
         relations.append(('rCommentTopology', 'http://schemas.microsoft.com/office/2011/relationships/commentsExtended', 'commentsExtended.xml'))
         overrides.append(('commentsExtended', 'commentsExtended'))
+    for name, payload, relation in [
+            ('commentsIds', comments_ids_xml, 'http://schemas.microsoft.com/office/2016/09/relationships/commentsIds'),
+            ('commentsExtensible', comments_extensible_xml, 'http://schemas.microsoft.com/office/2018/08/relationships/commentsExtensible')]:
+        if payload is not None:
+            parts[f'word/{name}.xml'] = payload
+            relations.append(('r' + name, relation, name + '.xml'))
+            overrides.append((name, name))
     if numbering_xml is not None:
         parts['word/numbering.xml'] = numbering_xml
         relations.append(('rNumbering', 'numbering', 'numbering.xml'))
@@ -120,13 +127,13 @@ def package(path, body, final_section=None, notes=None, image=False, namespaces_
 
 def generate():
     cases = []
-    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None):
+    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None):
         assertions = assertions or []
         for assertion in assertions:
             if assertion['type'] == 'marker-region':
                 assertion.update(version=2, tolerancePt=0.0001)
         path = ROOT / 'fixtures' / (case_id + '.docx')
-        package(path, body, sect, notes, image, namespaces_extra, styles_xml, story, notes_xml, stories, extra_parts, footnote_list, numbering_xml, comments_xml, comments_extended_xml)
+        package(path, body, sect, notes, image, namespaces_extra, styles_xml, story, notes_xml, stories, extra_parts, footnote_list, numbering_xml, comments_xml, comments_extended_xml, comments_ids_xml, comments_extensible_xml)
         inventory = dict(sorted(Counter(' '.join(text).split()).items()))
         cases.append({'id': case_id, 'version': 2 if any(a['type'] == 'marker-region' for a in assertions) else 1, 'category': category, 'description': description, 'input': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'rights': {'author': 'John Scrudato IV', 'license': 'MIT', 'origin': 'Authored by bench/fixtures.py in this repository', 'assets': 'All text and graphics are generated here; no embedded font files'}, 'profile': {'review': 'final', 'comments': 'hidden'}, 'fonts': [FONT], 'tokens': inventory, 'assertions': assertions, 'generator': {'path': 'bench/fixtures.py', 'sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}})
     prose = 'The survey team records the height of each tower before the evening check. The next crew compares the notes and keeps the route open for the morning visit.'
@@ -906,7 +913,48 @@ def generate():
         cases[-1]['htmlProfile'] = {'review': 'final', 'comments': 'margin'}
         cases[-1]['htmlAssertions'] = [{'type': 'marker-computed-style', 'version': 1, 'marker': author,
                                        'property': 'font-size', 'equals': '12.24px'}]
-    registry = {'schema': 1, 'suite': {'id': 'core-v28', 'version': 28, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Original durable UTC timestamp and legacy-only control. PDF comments stay hidden;
+    # the inline HTML attribute independently measures the instant, without caption formatting.
+    date = '2027-01-02T04:30:00Z'
+    cid = 'http://schemas.microsoft.com/office/word/2016/wordml/cid'
+    cex = 'http://schemas.microsoft.com/office/word/2018/wordml/cex'
+    w14 = 'http://schemas.microsoft.com/office/word/2010/wordml'
+    for modern in [True, False]:
+        case_id = 'comments-durable-utc-timestamp' if modern else 'comments-legacy-utc-control'
+        anchor = 'BirchDateAnchor The crew verifies the timestamp.'
+        body = para(runs='<w:commentRangeStart w:id="4"/>' + run(anchor) +
+                    '<w:commentRangeEnd w:id="4"/><w:r><w:commentReference w:id="4"/></w:r>')
+        stamp = '2027-01-01T23:30:00Z' if modern else date
+        comment = (f'<w:comment w:id="4" w:author="Birch Reviewer" w:date="{stamp}">'
+                   f'<w:p xmlns:w14="{w14}" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" '
+                   'mc:Ignorable="w14" w14:paraId="00DD00DD">' + run('BirchDateNote Check the clock.') + '</w:p></w:comment>')
+        ids = f'<c:commentsIds xmlns:c="{cid}"><c:commentId c:paraId="00DD00DD" c:durableId="03CC03CC"/></c:commentsIds>'
+        extensible = f'<e:commentsExtensible xmlns:e="{cex}"><e:commentExtensible e:durableId="03CC03CC" e:dateUtc="{date}"/></e:commentsExtensible>'
+        add(case_id, 'paragraphs', 'Modern durable timestamp overrides legacy date (Docxodus #1228)' if modern else
+            'The same effective timestamp supplied only in the legacy attribute', [anchor], body,
+            styles_xml=comment_styles, comments_xml=comment, comments_ids_xml=ids if modern else None,
+            comments_extensible_xml=extensible if modern else None)
+        cases[-1]['htmlProfile'] = {'review': 'final', 'comments': 'inline'}
+        cases[-1]['htmlAssertions'] = [{'type': 'marker-attribute', 'version': 1,
+            'marker': 'BirchDateAnchor', 'attribute': 'data-date', 'equals': date}]
+    # The year reproduction is paired with an authored year token, which is already
+    # readable without generated date captions. Both use the same margin font contract.
+    for authored in [False, True]:
+        anchor = 'BirchYearAnchor The crew verifies the calendar.'
+        body = para(runs='<w:commentRangeStart w:id="4"/>' + run(anchor) +
+                    '<w:commentRangeEnd w:id="4"/><w:r><w:commentReference w:id="4"/></w:r>')
+        note = 'BirchYearNote YearProof2027' if authored else 'BirchYearNote Check the calendar.'
+        comment = f'<w:comment w:id="4" w:author="Birch Reviewer" w:date="{date}">' + para(note) + '</w:comment>'
+        add('comments-authored-year-control' if authored else 'comments-margin-year', 'paragraphs',
+            'An authored year token is readable independently of generated captions' if authored else
+            'Margin date must include its calendar year (Docxodus #1228)', [anchor], body,
+            styles_xml=comment_styles, comments_xml=comment)
+        cases[-1]['htmlProfile'] = {'review': 'final', 'comments': 'margin'}
+        marker = 'YearProof2027' if authored else '2027'
+        cases[-1]['htmlAssertions'] = [
+            {'type': 'marker-attribute', 'version': 1, 'marker': marker, 'attribute': 'data-date', 'equals': date},
+            {'type': 'marker-readable', 'version': 1, 'marker': marker, 'tokens': ['BirchYearNote', marker] if authored else ['Jan', '2,', marker]}]
+    registry = {'schema': 1, 'suite': {'id': 'core-v29', 'version': 29, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

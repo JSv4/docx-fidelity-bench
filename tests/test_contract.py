@@ -337,7 +337,45 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 135)
+        self.assertEqual(len(common.validate_registry()['cases']), 139)
+
+    def test_comment_date_pair_joins_last_paragraph_to_durable_utc_record(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        modern, legacy = [records[c] for c in ('comments-durable-utc-timestamp', 'comments-legacy-utc-control')]
+        w = '{' + fixtures.W + '}'
+        cid = '{http://schemas.microsoft.com/office/word/2016/wordml/cid}'
+        cex = '{http://schemas.microsoft.com/office/word/2018/wordml/cex}'
+        w14 = '{http://schemas.microsoft.com/office/word/2010/wordml}'
+        with ZipFile(common.ROOT / modern['input']) as first, ZipFile(common.ROOT / legacy['input']) as second:
+            self.assertEqual(first.read('word/document.xml'), second.read('word/document.xml'))
+            comment = ET.fromstring(first.read('word/comments.xml')).find(w + 'comment')
+            control = ET.fromstring(second.read('word/comments.xml')).find(w + 'comment')
+            mapping = ET.fromstring(first.read('word/commentsIds.xml')).find(cid + 'commentId')
+            utc = ET.fromstring(first.read('word/commentsExtensible.xml')).find(cex + 'commentExtensible')
+            self.assertEqual(comment.findall(w + 'p')[-1].get(w14 + 'paraId'), mapping.get(cid + 'paraId'))
+            self.assertEqual(mapping.get(cid + 'durableId'), utc.get(cex + 'durableId'))
+            self.assertNotEqual(comment.get(w + 'date'), utc.get(cex + 'dateUtc'))
+            self.assertEqual(control.get(w + 'date'), utc.get(cex + 'dateUtc'))
+            self.assertNotIn('word/commentsExtensible.xml', second.namelist())
+        self.assertEqual(modern['tokens'], legacy['tokens'])
+        for record in [modern, legacy]:
+            self.assertEqual(record['profile'], {'review': 'final', 'comments': 'hidden'})
+            self.assertEqual(record['htmlProfile'], {'review': 'final', 'comments': 'inline'})
+            self.assertEqual(record['htmlAssertions'], [{'type': 'marker-attribute', 'version': 1,
+                'marker': 'BirchDateAnchor', 'attribute': 'data-date', 'equals': '2027-01-02T04:30:00Z'}])
+
+    def test_year_caption_and_authored_token_control_have_explicit_coverage(self):
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        margin, authored = [records[c] for c in ('comments-margin-year', 'comments-authored-year-control')]
+        self.assertEqual(margin['tokens'], authored['tokens'])
+        self.assertEqual(margin['htmlProfile'], authored['htmlProfile'])
+        self.assertEqual(margin['htmlProfile']['comments'], 'margin')
+        for record, marker in [(margin, '2027'), (authored, 'YearProof2027')]:
+            self.assertEqual(record['htmlAssertions'], [
+                {'type': 'marker-attribute', 'version': 1, 'marker': marker, 'attribute': 'data-date', 'equals': '2027-01-02T04:30:00Z'},
+                {'type': 'marker-readable', 'version': 1, 'marker': marker, 'tokens': ['Jan', '2,', marker] if marker == '2027' else ['BirchYearNote', marker]}])
 
     def test_comment_pair_changes_only_note_length_and_declares_both_profiles(self):
         import xml.etree.ElementTree as ET
@@ -419,7 +457,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v28')
+        self.assertEqual(registry['suite']['id'], 'core-v29')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
