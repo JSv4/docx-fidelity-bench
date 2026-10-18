@@ -85,4 +85,6 @@ versions that reject this option yield an unmeasured HTML result. For serializer
 experiments, record explicitly when the baseline enables the API while retaining the unfixed
 core serializer; do not attribute an unknown-option failure to CSS rendering.
 
-PDF preparation also accepts `consolidate` with a base and at least one reviewer. Reviewer names default to `Reviewer1`, `Reviewer2`, and so on, matching the independent redline cases.
+PDF preparation also accepts `compare` with exactly two inputs and `consolidate` with a base followed
+by reviewer inputs. The native adapter assigns omitted reviewer names as `Reviewer1`, `Reviewer2`, etc.
+Both use the same source-bound operation build and immutable input checks as `build`.

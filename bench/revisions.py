@@ -433,10 +433,7 @@ class _Walker:
                 out.append(self.paragraph(child, path))
             elif tag == w('tbl'):
                 table = path + '/tbl' + str(index('tbl'))
-                rows = [r for r in _flatten(child, w('tr'))]
-                for r, row in enumerate(rows):
-                    for c, cell in enumerate(_flatten(row, w('tc'))):
-                        self.blocks(cell, f'{table}/tr{r}/tc{c}', out)
+                self.table_stream(child, w('tr'), table, out)
             elif tag == w('sdt'):
                 content = child.find(w('sdtContent'))
                 self.blocks(content if content is not None else [], path + '/sdt' + str(index('sdt')), out)
@@ -447,11 +444,24 @@ class _Walker:
             elif tag in WRAPPERS or (tag.startswith('{' + MC + '}') and tag != FALLBACK):
                 self.blocks(child, path, out, counters)
 
+    def table_stream(self, container, child_tag, path, out):
+        index = 0
+        for child in _flatten(container, child_tag):
+            if child.tag in BLOCK_MARKERS:
+                out.append({'path': path, 'marker': self.marker(child)})
+                continue
+            child_path = path + '/' + child_tag.split('}', 1)[-1] + str(index)
+            index += 1
+            if child_tag == w('tr'):
+                self.table_stream(child, w('tc'), child_path, out)
+            else:
+                self.blocks(child, child_path, out)
+
 
 def _flatten(element, tag):
-    """Rows of a table or cells of a row, looking through row/cell-level sdt and customXml wrappers."""
+    """Rows/cells and their boundary markers, looking through structural wrappers."""
     for child in element:
-        if child.tag == tag:
+        if child.tag == tag or child.tag in BLOCK_MARKERS:
             yield child
         elif child.tag in (w('sdt'), w('customXml')):
             inner = child.find(w('sdtContent')) if child.tag == w('sdt') else child

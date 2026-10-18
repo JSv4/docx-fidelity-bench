@@ -179,6 +179,8 @@ LIBREOFFICE_INELIGIBLE = {
     'redline-comment-para-id-collision': (('accepted', 'rejected'), 'LibreOffice keeps a comment whose markers lie in resolved revisions and leaves an empty paragraph where a replaced wrapper copy is removed'),
     'redline-wrapper-para-id-copies': (('accepted', 'rejected'), 'LibreOffice keeps a comment whose markers lie in resolved revisions and leaves an empty paragraph where a replaced wrapper copy is removed'),
     'redline-comment-para-id-control': (('accepted', 'rejected'), 'LibreOffice keeps a comment whose markers lie in resolved revisions and leaves an empty paragraph where a replaced wrapper copy is removed'),
+    'redline-boundary-bookmark-compare-tbl': (('accepted', 'rejected'), 'LibreOffice has no tracked bookmark changes; the authored redline exposes zero revisions'),
+    'redline-boundary-bookmark-compare-tr': (('accepted', 'rejected'), 'LibreOffice has no tracked bookmark changes; the authored redline exposes zero revisions'),
     'redline-header-bookmark-only': (('accepted', 'rejected'), 'LibreOffice has no tracked bookmark changes; the redline holds no revision it can see'),
     'redline-body-bookmark-only-control': (('accepted', 'rejected'), 'LibreOffice has no tracked bookmark changes; the redline holds no revision it can see'),
 }
@@ -236,6 +238,7 @@ def generate():
     styles(corpus)
     rejects(corpus)
     consolidate(corpus)
+    table_boundary_bookmarks(corpus)
     identity(corpus)
     inline_custom_xml(corpus)
     comment_views(corpus)
@@ -630,6 +633,39 @@ def consolidate(corpus):
                     dict(files['reviewer2'], role='reviewer', author='Reviewer2')],
                    {'accepted': files['merged'], 'rejected': files['base']}, authored,
                    [untracked('Ledger opening', 'Entry alpha first.', CLOSING)])
+
+
+def table_boundary_bookmarks(corpus):
+    for operation in ('compare', 'consolidate'):
+        for level in ('tbl', 'tr', 'p'):
+            name = 'redline-boundary-bookmark-' + operation + '-' + ('paragraph-control' if level == 'p' else level)
+            def body(marked, edited, rev=None):
+                start, end = (bookmark(True, 73, 'HazelBoundary'), bookmark(False, 73)) if marked and level != 'p' else ('', '')
+                if marked and rev and level != 'p':
+                    start, end = rev.ins(start, 'Reviewer1'), rev.ins(end, 'Reviewer1')
+                value = t('Hazel lower') + ((rev.ins(t(' revised'), 'Reviewer2') if rev else t(' revised')) if edited else '')
+                content = table([[p(t('Hazel upper')), p(t('Birch upper'))], [p(value), p(t('Birch lower'))]])
+                if level == 'tbl':
+                    content = content.replace('</w:tr><w:tr>', '</w:tr>' + start + '<w:tr>', 1).replace('</w:tbl>', end + '</w:tbl>')
+                elif level == 'tr':
+                    content = content.replace('</w:tc><w:tc>', '</w:tc>' + start + '<w:tc>', 1).replace('</w:tc></w:tr>', '</w:tc>' + end + '</w:tr>', 1)
+                else:
+                    content = content.replace(t('Birch upper'), start + t('Birch upper') +
+                        ((rev.ins(t(' checked'), 'Reviewer1') if rev else t(' checked')) if marked else '') + end, 1)
+                return p(t('Hazel boundary ledger')) + content + p(t(CLOSING))
+            variants = [(False, False), (True, False)] + ([(False, True)] if operation == 'consolidate' else [])
+            inputs = []
+            for index, variant in enumerate(variants):
+                record = corpus.file(name, 'source-' + str(index), body=body(*variant))
+                role = ('left' if index == 0 else 'right') if operation == 'compare' else ('base' if index == 0 else 'reviewer')
+                inputs.append(dict(record, role=role, **({'author': 'Reviewer' + str(index)} if role == 'reviewer' else {})))
+            accepted = corpus.file(name, 'accepted', body=body(True, operation == 'consolidate'))
+            authored = corpus.file(name, 'authored-redline', body=body(True, operation == 'consolidate', Revisions()))
+            corpus.add(name, 'bookmarks', 'control' if level == 'p' else 'reproducer', 'JSv4/Docxodus#1190',
+                       operation.title() + (' independent plain-text edits (control)' if level == 'p' else
+                           ' a bookmark directly in ' + level + ', with an independent table edit for consolidation'),
+                       operation, inputs, {'accepted': accepted, 'rejected': {k: inputs[0][k] for k in ('path', 'sha256')}}, authored,
+                       [untracked('Hazel upper', 'Birch upper', CLOSING)])
 
 
 # ---------------------------------------------------------------------------------------------
