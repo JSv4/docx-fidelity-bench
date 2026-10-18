@@ -696,47 +696,55 @@ def generate():
             assertions=[{'type': 'marker-region', 'version': 2, 'marker': f'TallNote{keep_line:03d}', 'occurrence': 1, 'page': 1, 'rect': [60, 60, 552, 760]},
                         {'type': 'marker-reference-position', 'version': 1, 'marker': 'TallBody01', 'tolerancePt': 0.5},
                         {'type': 'marker-reference-position', 'version': 1, 'marker': 'TallNote070', 'tolerancePt': 0.5}])
+    # Note text markers are taken from a note's second or later line: the first line begins with the
+    # note number, whose superscript width differs between providers.
     # #1179: once a note continues onto the next page, no later note starts below it on its page.
+    # One line cites both notes, so both citations are on page 1 whatever the note layout.
     for name, long_count in [('notes-continued-note-last', 30), ('notes-continued-note-last-control', 4)]:
         lead, lead_xml = body_lines('SplitLead', 20)
         a_lines, a_xml = note('SplitNoteA', long_count)
-        b_lines, b_xml = note('ShortNoteB', 1)
+        b_lines, b_xml = note('ShortNoteB', 2)
         after, after_xml = body_lines('SplitBody', 30)
-        texts = lead + ['SplitCiteA Spruce register cites the long note.', '1', '1', 'SplitCiteB Spruce register cites the short note.', '2', '2'] + a_lines + b_lines + after
-        body = lead_xml + cite('SplitCiteA Spruce register cites the long note.', 1) + cite('SplitCiteB Spruce register cites the short note.', 2) + after_xml
+        line = 'SplitCite Spruce register cites the long note'
+        texts = lead + [line, '1', 'and', 'the', 'short', 'note.', '2', '1', '2'] + a_lines + b_lines + after
+        both = para(props=note_props, runs=run(line) + reference(1).strip() + run(' and the short note.') + reference(2).strip())
+        body = lead_xml + both + after_xml
         last = a_lines[-1].split()[0]
-        assertions = [{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5} for marker in ('SplitCiteB', 'ShortNoteB001', last, 'SplitBody01')]
-        if long_count > 4:
-            assertions.append({'type': 'same-page', 'version': 1, 'markers': [last, 'ShortNoteB001']})
-        add(name, 'notes', 'Two citations on page 1: a ' + ('thirty-line note that continues onto page 2' if long_count > 4 else 'four-line note that fits') + ', then a one-line note',
+        assertions = [{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5} for marker in ('SplitCite', 'ShortNoteB002', last, 'SplitBody01')]
+        assertions.append({'type': 'same-page', 'version': 1, 'markers': [last, 'ShortNoteB002']})
+        add(name, 'notes', 'One line on page 1 cites a ' + ('thirty-line note that continues onto page 2' if long_count > 4 else 'four-line note that fits') + ' and a two-line note, which must follow it',
             texts, body, sect=note_section, styles_xml=ledger_styles, footnote_list=[(1, a_xml), (2, b_xml)], assertions=assertions)
     # #1182: a carried note that does not end on a page; later citations wait for its end.
     a_lines, a_xml = note('CarriedNote', 90)
-    b_lines, b_xml = note('DeferredNoteB', 1)
-    c_lines, c_xml = note('DeferredNoteC', 1)
+    b_lines, b_xml = note('DeferredNoteB', 2)
+    c_lines, c_xml = note('DeferredNoteC', 2)
     after, after_xml = body_lines('CarriedBody', 12)
     texts = ['CarriedCite Spruce register cites the carried note.', '1', '1', 'DeferredCiteB Spruce register cites a deferred note.', '2', '2',
              'DeferredCiteC Spruce register cites another deferred note.', '3', '3'] + a_lines + b_lines + c_lines + after
     body = (cite('CarriedCite Spruce register cites the carried note.', 1) + cite('DeferredCiteB Spruce register cites a deferred note.', 2)
             + cite('DeferredCiteC Spruce register cites another deferred note.', 3) + after_xml)
-    add('notes-carried-note-defers-citations', 'notes', 'Ninety-line note carried across pages; two later citations and their one-line notes follow it (positions follow the reference; Word adjudication pending)',
+    add('notes-carried-note-defers-citations', 'notes', 'Ninety-line note carried across pages; two later citations and their two-line notes follow it (positions follow the reference; Word adjudication pending)',
         texts, body, sect=note_section, styles_xml=ledger_styles, footnote_list=[(1, a_xml), (2, b_xml), (3, c_xml)],
         assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5}
-                    for marker in ('DeferredCiteB', 'DeferredNoteB001', 'DeferredNoteC001', 'CarriedNote090', 'CarriedBody01')])
-    # #1180: a keep-with-next heading and its citing paragraph beside a running note continuation.
-    lead, lead_xml = body_lines('KeepLead', 24)
-    a_lines, a_xml = note('KeepCarried', 24)
-    b_lines, b_xml = note('KeepNoteTwo', 1)
-    after, after_xml = body_lines('KeepTail', 12)
-    heading = 'KeepHeading Spruce section heading.'
-    follow = 'KeepFollow Spruce paragraph cites a short note.'
-    texts = lead + ['KeepCite Spruce register cites the carried note.', '1', '1', heading, follow, '2', '2'] + a_lines + b_lines + after
-    body = (lead_xml + cite('KeepCite Spruce register cites the carried note.', 1) + para(heading, note_props + '<w:keepNext/>')
-            + cite(follow, 2) + after_xml)
-    add('notes-keep-next-beside-continuation', 'notes', 'Keep-with-next heading and a paragraph citing a one-line note while a twenty-four-line note continues',
-        texts, body, sect=note_section, styles_xml=ledger_styles, footnote_list=[(1, a_xml), (2, b_xml)],
-        assertions=[{'type': 'same-page', 'version': 1, 'markers': ['KeepHeading', 'KeepFollow']}]
-        + [{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5} for marker in ('KeepHeading', 'KeepNoteTwo001', 'KeepTail01')])
+                    for marker in ('DeferredCiteB', 'DeferredNoteB002', 'DeferredNoteC002', 'CarriedNote090', 'CarriedBody01')])
+    # #1180: a keep-with-next heading and the paragraph it keeps, near the foot of a page whose note
+    # continues onto the next one. The kept pair must share a page.
+    # A sixty-line note with an eight-line kept paragraph was also tried; LibreOffice 25.8.7.3 strands
+    # its heading, so it cannot be a LibreOffice-referenced case.
+    for name, note_count, chain_lines in [('notes-keep-next-beside-continuation', 30, 1)]:
+        lead, lead_xml = body_lines('KeepLead', 30)
+        a_lines, a_xml = note('KeepCarried', note_count)
+        b_lines, b_xml = note('KeepNoteTwo', 2)
+        after, after_xml = body_lines('KeepTail', 40)
+        heading = 'KeepHeading Spruce section heading.'
+        chain = [f'KeepFollow{i:02d} Spruce kept paragraph line.' for i in range(1, chain_lines + 1)]
+        texts = lead + ['KeepCite Spruce register cites the carried note.', '1', '1', heading] + chain + ['2', '2'] + a_lines + b_lines + after
+        chain_xml = para(props=note_props + '<w:keepLines/>', runs='<w:r><w:br/></w:r>'.join(run(x) for x in chain) + reference(2))
+        body = lead_xml + cite('KeepCite Spruce register cites the carried note.', 1) + para(heading, note_props + '<w:keepNext/>') + chain_xml + after_xml
+        add(name, 'notes', f'Keep-with-next heading and a {chain_lines}-line kept paragraph citing a two-line note after a {note_count}-line note cited on line 31',
+            texts, body, sect=note_section, styles_xml=ledger_styles, footnote_list=[(1, a_xml), (2, b_xml)],
+            assertions=[{'type': 'same-page', 'version': 1, 'markers': ['KeepHeading', 'KeepFollow01']}]
+            + [{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5} for marker in ('KeepHeading', 'KeepNoteTwo002', 'KeepTail01')])
     # A table row citing a keep-lines note too tall for the rest of the page.
     lead, lead_xml = body_lines('TableLead', 30)
     a_lines, a_xml = note('TableKeepNote', 12, keep=True)
@@ -748,7 +756,7 @@ def generate():
     add('notes-keep-lines-note-in-table', 'notes', 'Table row on body line 31 citing a twelve-line keep-lines note that does not fit below it (positions follow the reference; Word adjudication pending)',
         texts, lead_xml + table_xml + after_xml, sect=note_section, styles_xml=ledger_styles, footnote_list=[(1, a_xml)],
         assertions=[{'type': 'same-page', 'version': 1, 'markers': ['TableKeepNote001', 'TableKeepNote012']}]
-        + [{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5} for marker in ('TableCite', 'TableKeepNote001', 'TableTail01')])
+        + [{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5} for marker in ('TableCite', 'TableKeepNote002', 'TableTail01')])
     registry = {'schema': 1, 'suite': {'id': 'core-v18', 'version': 18, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
