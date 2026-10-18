@@ -5,7 +5,7 @@ import math
 from pathlib import Path
 from .fixtures import png
 
-CONTRACT = {'version': 2, 'dpi': 96, 'inkThreshold': 24, 'inkRadius': 1, 'ssimWindow': 8, 'ssimC1': 6.5025, 'ssimC2': 58.5225, 'alignment': 'none', 'pageScore': '100 * min(ssim, inkF1)', 'caseScore': 'worst page; zero on mandatory failure', 'visibleText': 'excludes UAX #9 bidi formatting controls', 'canvas': 'rasters within 1 pixel per axis share a white union canvas at the CropBox top-left origin; larger differences fail'}
+CONTRACT = {'version': 3, 'clippedText': 'declared exact-row tokens may be absent or whole up to their authored count', 'dpi': 96, 'inkThreshold': 24, 'inkRadius': 1, 'ssimWindow': 8, 'ssimC1': 6.5025, 'ssimC2': 58.5225, 'alignment': 'none', 'pageScore': '100 * min(ssim, inkF1)', 'caseScore': 'worst page; zero on mandatory failure', 'visibleText': 'excludes UAX #9 bidi formatting controls', 'canvas': 'rasters within 1 pixel per axis share a white union canvas at the CropBox top-left origin; larger differences fail'}
 
 
 def read_ppm(path):
