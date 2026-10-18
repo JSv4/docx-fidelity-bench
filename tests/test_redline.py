@@ -46,10 +46,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v1')
-        self.assertEqual(len(registry['cases']), 37)
+        self.assertEqual(registry['suite']['id'], 'redline-v2')
+        self.assertEqual(len(registry['cases']), 39)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -247,6 +247,51 @@ def body_texts(package, mode=None):
 
 
 class EngineSemantics(unittest.TestCase):
+    def test_custom_xml_envelopes_resolve_markup_without_removing_payload(self):
+        payload = '<w:r><w:t>kept</w:t></w:r>'
+        empty = '<w:customXml w:element="empty"><w:customXmlPr/></w:customXml>'
+        for kind in ('Ins', 'Del', 'MoveFrom', 'MoveTo'):
+            start = lambda id: f'<w:customXml{kind}RangeStart w:id="{id}" w:author="Rae"/>'
+            end = lambda id: f'<w:customXml{kind}RangeEnd w:id="{id}"/>'
+            for split in (False, True):
+                marked = ('<w:customXml w:element="marked"><w:customXmlPr/>' +
+                          (end(1) if split else '') + payload +
+                          (start(2) if split else '') + '</w:customXml>')
+                package = fragment('<w:p><w:customXml w:element="outer">' + start(1) + marked +
+                                   end(2 if split else 1) + '</w:customXml>' + empty + '</w:p>')
+                for mode, author in (('accept', None), ('reject', None), ('accept', 'Rae'), ('accept', 'Other')):
+                    with self.subTest(kind=kind, split=split, mode=mode, author=author):
+                        effective = mode if author is None else 'accept' if author == 'Rae' else 'reject'
+                        removed = kind in (('Del', 'MoveFrom') if effective == 'accept' else ('Ins', 'MoveTo'))
+                        resolved = revisions.resolve(package.story_parts(), mode, author)
+                        root = resolved[package.main]
+                        self.assertEqual([e.get(W + 'element') for e in root.iter(W + 'customXml')],
+                                         ['outer', 'empty'] if removed else ['outer', 'marked', 'empty'])
+                        self.assertEqual(len(list(root.iter(W + 'customXmlPr'))), 1 if removed else 2)
+                        self.assertEqual(revisions.revision_count(resolved), 0)
+                        expected = fragment('<w:p><w:customXml w:element="outer">' +
+                                            (payload if removed else '<w:customXml w:element="marked">' + payload + '</w:customXml>') +
+                                            '</w:customXml>' + empty + '</w:p>')
+                        self.assertEqual(revisions.view(package, resolved), revisions.view(expected))
+
+    def test_custom_xml_range_resolution_rejects_incomplete_or_ambiguous_markup(self):
+        start = '<w:customXmlDelRangeStart w:id="1"/>'
+        end = '<w:customXmlDelRangeEnd w:id="1"/>'
+        payload = '<w:r><w:t>kept</w:t></w:r>'
+        for markup in (start + '<w:customXml>' + end + payload + '</w:customXml>',
+                       start + '<w:customXml>' + payload + '</w:customXml>',
+                       start + start + '<w:customXml>' + payload + '</w:customXml>' + end):
+            with self.subTest(markup=markup), self.assertRaises(ValueError):
+                revisions.resolve(fragment('<w:p>' + markup + '</w:p>').story_parts(), 'accept')
+
+    def test_custom_xml_enclosing_range_removes_nested_tags_but_not_nested_text(self):
+        package = fragment('<w:p><w:customXmlDelRangeStart w:id="1"/>'
+                           '<w:customXml><w:customXml><w:r><w:t>kept</w:t></w:r></w:customXml></w:customXml>'
+                           '<w:customXmlDelRangeEnd w:id="1"/></w:p>')
+        expected = fragment('<w:p><w:r><w:t>kept</w:t></w:r></w:p>')
+        self.assertEqual(revisions.view(package, revisions.resolve(package.story_parts(), 'accept')),
+                         revisions.view(expected))
+
     def test_deleted_paragraph_mark_joins_the_following_paragraph(self):
         package = fragment('<w:p><w:pPr><w:rPr><w:del w:id="1"/></w:rPr></w:pPr><w:r><w:t>one </w:t></w:r></w:p><w:p><w:r><w:t>two</w:t></w:r></w:p>')
         self.assertEqual(body_texts(package, 'accept'), ['one two'])

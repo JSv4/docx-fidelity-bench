@@ -13,6 +13,7 @@ import json
 from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
+from .fixtures import custom_xml_link
 
 ROOT = Path(__file__).resolve().parents[1]
 W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
@@ -20,7 +21,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v1', 'version': 1}
+SUITE = {'id': 'redline-v2', 'version': 2}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -233,6 +234,7 @@ def generate():
     rejects(corpus)
     consolidate(corpus)
     identity(corpus)
+    inline_custom_xml(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -629,6 +631,20 @@ def consolidate(corpus):
 # ---------------------------------------------------------------------------------------------
 # Identity calibration: an exact package and a differently serialized equal document
 # ---------------------------------------------------------------------------------------------
+
+def inline_custom_xml(corpus):
+    for wrapped in (True, False):
+        name = 'redline-inline-customxml' if wrapped else 'redline-inline-hyperlink-control'
+        def body(content):
+            return (p(t('MapleBefore ') + custom_xml_link(content, wrapped) + t(' MapleAfter'))
+                    + p(bookmark(True, 91, 'BirchTarget') + t('BirchTarget.') + bookmark(False, 91)))
+        rev = Revisions()
+        corpus.compare(name, 'revisions', 'reproducer' if wrapped else 'control', 'JSv4/Docxodus#1188',
+                       'Edited inline custom XML inside a hyperlink' if wrapped else 'The same edit inside a plain hyperlink',
+                       {'body': body(t('OakOpened'))}, {'body': body(t('OakClosed'))},
+                       {'body': body(rev.dele(t('OakOpened')) + rev.ins(t('OakClosed')))},
+                       [untracked('MapleBefore', 'MapleAfter', 'BirchTarget.')])
+
 
 def identity(corpus):
     texts = ['Survey register for the north ridge.', 'The crew compares the notes and keeps the route open.', CLOSING]
