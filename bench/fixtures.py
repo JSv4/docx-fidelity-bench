@@ -68,10 +68,10 @@ def zip_write(path, parts):
             archive.writestr(item, payload.encode() if isinstance(payload, str) else payload)
 
 
-def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None):
+def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT):
     namespaces = f'xmlns:w="{W}" xmlns:r="{R}" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"'
     namespaces += namespaces_extra
-    styles = f'''<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/><w:sz w:val="22"/><w:color w:val="000000"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="120" w:line="276" w:lineRule="auto"/><w:widowControl/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style><w:style w:type="paragraph" w:styleId="Title"><w:name w:val="Title"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:after="240"/></w:pPr><w:rPr><w:b/><w:sz w:val="32"/></w:rPr></w:style></w:styles>'''
+    styles = f'''<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{font}" w:hAnsi="{font}" w:eastAsia="{font}" w:cs="{font}"/><w:sz w:val="22"/><w:color w:val="000000"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="120" w:line="276" w:lineRule="auto"/><w:widowControl/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style><w:style w:type="paragraph" w:styleId="Title"><w:name w:val="Title"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:after="240"/></w:pPr><w:rPr><w:b/><w:sz w:val="32"/></w:rPr></w:style></w:styles>'''
     if styles_xml is not None:
         styles = styles_xml
     relations = [('rStyles', 'styles', 'styles.xml'), ('rSettings', 'settings', 'settings.xml')]
@@ -127,15 +127,15 @@ def package(path, body, final_section=None, notes=None, image=False, namespaces_
 
 def generate():
     cases = []
-    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None):
+    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT):
         assertions = assertions or []
         for assertion in assertions:
             if assertion['type'] == 'marker-region':
                 assertion.update(version=2, tolerancePt=0.0001)
         path = ROOT / 'fixtures' / (case_id + '.docx')
-        package(path, body, sect, notes, image, namespaces_extra, styles_xml, story, notes_xml, stories, extra_parts, footnote_list, numbering_xml, comments_xml, comments_extended_xml, comments_ids_xml, comments_extensible_xml)
+        package(path, body, sect, notes, image, namespaces_extra, styles_xml, story, notes_xml, stories, extra_parts, footnote_list, numbering_xml, comments_xml, comments_extended_xml, comments_ids_xml, comments_extensible_xml, font=font)
         inventory = dict(sorted(Counter(' '.join(text).split()).items()))
-        cases.append({'id': case_id, 'version': 2 if any(a['type'] == 'marker-region' for a in assertions) else 1, 'category': category, 'description': description, 'input': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'rights': {'author': 'John Scrudato IV', 'license': 'MIT', 'origin': 'Authored by bench/fixtures.py in this repository', 'assets': 'All text and graphics are generated here; no embedded font files'}, 'profile': {'review': 'final', 'comments': 'hidden'}, 'fonts': [FONT], 'tokens': inventory, 'assertions': assertions, 'generator': {'path': 'bench/fixtures.py', 'sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}})
+        cases.append({'id': case_id, 'version': 2 if any(a['type'] == 'marker-region' for a in assertions) else 1, 'category': category, 'description': description, 'input': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'rights': {'author': 'John Scrudato IV', 'license': 'MIT', 'origin': 'Authored by bench/fixtures.py in this repository', 'assets': 'All text and graphics are generated here; no embedded font files'}, 'profile': {'review': 'final', 'comments': 'hidden'}, 'fonts': [font], 'tokens': inventory, 'assertions': assertions, 'generator': {'path': 'bench/fixtures.py', 'sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}})
     prose = 'The survey team records the height of each tower before the evening check. The next crew compares the notes and keeps the route open for the morning visit.'
     for case_id, ending in [('columns-continuous', 'continuous'), ('columns-balanced', 'balanced ending'), ('columns-break', 'continuous')]:
         title = case_id.replace('-', ' ').title()
@@ -166,6 +166,11 @@ def generate():
         texts.append(text)
         body += para(text, '<w:jc w:val="both"/>')
     add('paragraph-contract', 'paragraphs', 'Authored agreement with justified multi-page flow', texts, body)
+    # Keep the original Liberation Serif baseline byte-identical. Word Online can
+    # export this explicitly requested family without substituting its font.
+    add('paragraph-contract-times-new-roman', 'paragraphs',
+        'The same justified agreement in Times New Roman for Word adjudication (bench #33)',
+        texts, body, font='Times New Roman')
     texts = ['First page', 'The first page contains a short introduction.', 'HeadingMarker', prose]
     body = para(texts[0], '<w:pStyle w:val="Title"/>') + para(texts[1]) + para(texts[2], '<w:pageBreakBefore/><w:keepNext/><w:spacing w:before="360" w:after="120"/>') + para(texts[3])
     add('paragraph-heading', 'paragraphs', 'Space before a heading at a page start', texts, body, assertions=[{'type': 'marker-region', 'version': 1, 'marker': 'HeadingMarker', 'occurrence': 1, 'page': 2, 'rect': [72, 60, 540, 160]}])
@@ -1046,7 +1051,7 @@ def generate():
                 'The same story paragraphs without borders', texts, body, sect=sect,
                 stories=[('header', header), ('footer', footer)], notes=(kind, ''), notes_xml=note,
                 assertions=[{'type': 'same-page', 'version': 1, 'markers': ['CedarBodyOne', 'CedarHeaderOne', 'CedarFooterOne', 'CedarNoteOne']}])
-    registry = {'schema': 1, 'suite': {'id': 'core-v33', 'version': 33, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v34', 'version': 34, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

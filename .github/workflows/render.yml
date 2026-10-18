@@ -54,10 +54,15 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
         with:
           node-version: '22'
-      - name: Provision external measurement utilities and open fonts
+      - name: Provision external measurement utilities and declared fonts
         run: |
           sudo apt-get update
+          echo 'ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true' | sudo debconf-set-selections
           sudo apt-get install -y libreoffice-writer poppler-utils qpdf fontconfig fonts-liberation2
+          sudo apt-get install -y ttf-mscorefonts-installer
+          # The export font loader rejects symlinks, including installer filename aliases.
+          sudo find /usr/share/fonts/truetype/msttcorefonts -maxdepth 1 -type l -delete
+          fc-cache -f
           dotnet workload install wasm-tools
       - name: Install signed LibreOffice 25.8.7.3 reference runtime
         if: ${{ inputs.reference_run == '' }}
