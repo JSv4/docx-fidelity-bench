@@ -4,7 +4,7 @@ import tempfile
 import subprocess
 from pathlib import Path
 from . import adapters, metrics, pdf, report, reference_controls
-from .common import ROOT, contained, digest, identity, read_json, validate_registry, write_json
+from .common import WORD_TRACKS, ROOT, contained, digest, identity, read_json, validate_registry, write_json
 from .environment import environment
 
 
@@ -20,7 +20,7 @@ def reference_bundle(output):
         path = folder / 'reference.pdf'
         response = adapters.libreoffice(contained(ROOT, case['input']), path)
         info = pdf.inspect_pdf(path)
-        failures = pdf.reference_failures(case, info)
+        failures = pdf.reference_failures(case, info, 'libreoffice')
         eligible = not failures
         bundle['cases'][case['id']] = {'inputSha256': case['sha256'], 'pdf': str(path.relative_to(output)), 'pdfSha256': digest(path), 'renderer': response['renderer'], 'eligible': eligible, 'ineligibleChecks': failures, 'inspection': info}
         write_json(output / 'bundle.json', bundle)
@@ -29,7 +29,7 @@ def reference_bundle(output):
 
 
 def validate_bundle(bundle, root, registry, env):
-    if bundle['schema'] != 1 or bundle['track'] not in {'libreoffice', reference_controls.TRACK, 'word-online', 'word-onedrive', 'word-desktop'}:
+    if bundle['schema'] != 1 or bundle['track'] not in {'libreoffice', reference_controls.TRACK} | WORD_TRACKS:
         raise ValueError('Unknown reference track or bundle version')
     if bundle['suiteDigest'] != identity(registry) or bundle['environment'] != env['contract']:
         raise ValueError('Reference suite or measurement/font environment changed')
@@ -127,7 +127,7 @@ def run(output, reference, adapter, candidate):
                     direct_root = contained(ref_root, bundle['sourceBundle']).parent
                     shutil.copyfile(contained(direct_root, direct_capture['pdf']), folder / 'direct-reference.pdf')
             reference_info = pdf.inspect_pdf(reference_path)
-            failures = pdf.reference_failures(case, reference_info)
+            failures = pdf.reference_failures(case, reference_info, bundle['track'])
             if failures:
                 raise ValueError('Reference fails its own mandatory checks: ' + ', '.join(failures))
             render_case = case
@@ -150,7 +150,9 @@ def run(output, reference, adapter, candidate):
                 except (RuntimeError, ValueError) as error:
                     outcome.update(status='measured', score=0.0, close=False, checks=[{'name': 'valid-pdf', 'passed': False, 'error': str(error)}])
                 else:
-                    outcome['checks'] = pdf.correctness(case, reference_info, candidate_info)
+                    # LibreOffice measured against a LibreOffice track is a calibration of the reference engine.
+                    calibration = adapter in ('libreoffice', 'libreoffice-reference')
+                    outcome['checks'] = pdf.correctness(pdf.binding_case(case, bundle['track'], calibration), reference_info, candidate_info)
                     with tempfile.TemporaryDirectory(dir=folder) as tmp:
                         rpages = pdf.rasterize(reference_path, Path(tmp) / 'r')
                         cpages = pdf.rasterize(candidate_path, Path(tmp) / 'c')

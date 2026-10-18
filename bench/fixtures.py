@@ -721,10 +721,16 @@ def generate():
              'DeferredCiteC Spruce register cites another deferred note.', '3', '3'] + a_lines + b_lines + c_lines + after
     body = (cite('CarriedCite Spruce register cites the carried note.', 1) + cite('DeferredCiteB Spruce register cites a deferred note.', 2)
             + cite('DeferredCiteC Spruce register cites another deferred note.', 3) + after_xml)
-    add('notes-carried-note-defers-citations', 'notes', 'Ninety-line note carried across pages; two later citations and their two-line notes follow it (positions follow the reference; Word adjudication pending)',
+    # In Word reference PDFs, the citing paragraphs after a carried note start, with their notes, on
+    # the page where the carried note ends; the page between holds only the continuation. LibreOffice
+    # 25.8.7.3 places the first deferred citation beside the running continuation instead.
+    word = {'adjudicated': 'word'}
+    add('notes-carried-note-defers-citations', 'notes', 'Ninety-line note carried across pages; two later citations and their two-line notes follow it where the carried note ends (Word-adjudicated)',
         texts, body, sect=note_section, styles_xml=ledger_styles, footnote_list=[(1, a_xml), (2, b_xml), (3, c_xml)],
-        assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5}
-                    for marker in ('DeferredCiteB', 'DeferredNoteB002', 'DeferredNoteC002', 'CarriedNote090', 'CarriedBody01')])
+        assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'CarriedCite', 'occurrence': 1, 'page': 1, 'rect': [60, 60, 552, 760]},
+                    dict({'type': 'same-page', 'version': 1, 'markers': ['CarriedNote090', 'DeferredCiteB', 'DeferredNoteB002']}, **word),
+                    {'type': 'same-page', 'version': 1, 'markers': ['DeferredCiteC', 'DeferredNoteC002']},
+                    dict({'type': 'marker-region', 'version': 2, 'marker': 'DeferredCiteB', 'occurrence': 1, 'page': 3, 'rect': [60, 60, 552, 760]}, **word)])
     # #1180: a keep-with-next heading and the paragraph it keeps, near the foot of a page whose note
     # continues onto the next one. The kept pair must share a page.
     note_count, chain_lines = 30, 1
@@ -749,11 +755,14 @@ def generate():
     cell_xml = cite('TableCite Spruce row cites a kept note.', 1)
     table_xml = ('<w:tbl><w:tblPr><w:tblW w:w="9360" w:type="dxa"/>' + exact_borders + '<w:tblLayout w:type="fixed"/></w:tblPr>'
                  '<w:tblGrid><w:gridCol w:w="9360"/></w:tblGrid><w:tr><w:tc><w:tcPr><w:tcW w:w="9360" w:type="dxa"/></w:tcPr>' + cell_xml + '</w:tc></w:tr></w:tbl>')
-    add('notes-keep-lines-note-in-table', 'notes', 'Table row on body line 31 citing a twelve-line keep-lines note that does not fit below it (positions follow the reference; Word adjudication pending)',
+    # Word reference PDFs move the citing row to the next page with its kept note; LibreOffice keeps
+    # the row on page 1 and sends the note on alone.
+    add('notes-keep-lines-note-in-table', 'notes', 'Table row on body line 31 citing a twelve-line keep-lines note that does not fit below it; the row moves to the note\'s page (Word-adjudicated)',
         texts, lead_xml + table_xml + after_xml, sect=note_section, styles_xml=ledger_styles, footnote_list=[(1, a_xml)],
-        assertions=[{'type': 'same-page', 'version': 1, 'markers': ['TableKeepNote001', 'TableKeepNote012']}]
-        + [{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5} for marker in ('TableCite', 'TableKeepNote002', 'TableTail01')])
-    registry = {'schema': 1, 'suite': {'id': 'core-v19', 'version': 19, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+        assertions=[{'type': 'same-page', 'version': 1, 'markers': ['TableKeepNote001', 'TableKeepNote012']},
+                    {'type': 'marker-region', 'version': 2, 'marker': 'TableLead30', 'occurrence': 1, 'page': 1, 'rect': [60, 60, 552, 760]},
+                    dict({'type': 'same-page', 'version': 1, 'markers': ['TableCite', 'TableKeepNote002', 'TableTail01']}, adjudicated='word')])
+    registry = {'schema': 1, 'suite': {'id': 'core-v20', 'version': 20, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

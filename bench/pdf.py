@@ -5,7 +5,7 @@ import math
 import xml.etree.ElementTree as ET
 from collections import Counter
 from pathlib import Path
-from .common import execute
+from .common import WORD_TRACKS, execute
 
 # Unicode bidirectional formatting controls (UAX #9 explicit marks, embeddings, overrides and
 # isolates). They steer direction and are invisible, so a renderer that inserts them around LTR
@@ -112,16 +112,31 @@ def marker(info, text, occurrence=1):
     return matches[0]
 
 
-def reference_failures(case, info):
+def binding_case(case, track, reproduces_reference=False):
+    """The case as it binds a capture on `track`.
+
+    An assertion marked `"adjudicated": "word"` records layout measured in Word reference PDFs that
+    LibreOffice is known not to follow. It binds every candidate and every Word reference. It does
+    not bind a LibreOffice capture: neither when deciding a LibreOffice reference's eligibility, nor
+    when LibreOffice itself is measured against a LibreOffice track as a calibration
+    (`reproduces_reference`).
+    """
+    if track in WORD_TRACKS or not reproduces_reference:
+        return case
+    return dict(case, assertions=[a for a in case['assertions'] if a.get('adjudicated') != 'word'])
+
+
+def reference_failures(case, info, track='libreoffice'):
     """Name every mandatory check a reference capture fails against its own declaration.
 
     A reference is measured as its own candidate: its visible tokens, fonts and declared feature
     assertions must hold. Reference-relative positions are trivially satisfied; absolute regions
     and same-page groups are not, so a capture that violates the fixture's declared layout is
-    ineligible rather than the standard every candidate is judged against.
+    ineligible rather than the standard every candidate is judged against. Word-adjudicated
+    assertions apply only on Word tracks (see `binding_case`).
     """
-    failures = [check['name'] for check in correctness(case, info, info) if not check['passed']]
-    return failures
+    case = binding_case(case, track, reproduces_reference=True)
+    return [check['name'] for check in correctness(case, info, info) if not check['passed']]
 
 
 def correctness(case, reference, candidate):

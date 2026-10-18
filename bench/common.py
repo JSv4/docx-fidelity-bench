@@ -8,6 +8,8 @@ import math
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+# Word reference tracks. `word` is the provider-neutral track; a capture that names no specific route uses it.
+WORD_TRACKS = frozenset({'word', 'word-online', 'word-onedrive', 'word-desktop'})
 
 
 def digest(path):
@@ -68,6 +70,10 @@ def validate_registry(registry=None):
             versions = {'marker-region': {1, 2}, 'same-page': {1}, 'marker-reference-position': {1}}
             if assertion.get('version') not in versions.get(assertion.get('type'), set()):
                 raise ValueError('Unknown assertion type or version')
+            if assertion.get('adjudicated', 'word') != 'word':
+                raise ValueError('Unknown assertion adjudication')
+            if 'adjudicated' in assertion and (assertion['type'] == 'marker-reference-position' or assertion.get('page') == 'reference'):
+                raise ValueError('A Word-adjudicated assertion cannot be relative to the reference')
             if assertion['type'] == 'marker-reference-position' or (assertion['type'] == 'marker-region' and assertion['version'] == 2):
                 tolerance = assertion.get('tolerancePt')
                 if isinstance(tolerance, bool) or not isinstance(tolerance, (int, float)) or not math.isfinite(tolerance) or tolerance < 0 or not isinstance(assertion.get('marker'), str):
