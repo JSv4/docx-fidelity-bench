@@ -337,7 +337,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 150)
+        self.assertEqual(len(common.validate_registry()['cases']), 154)
 
     def test_agreement_font_variant_changes_only_the_declared_family(self):
         from zipfile import ZipFile

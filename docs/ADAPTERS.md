@@ -12,8 +12,11 @@ A known conversion or unsupported-feature failure returns `status: "failed"` and
 
 ## Redline adapters
 
-PDF cases may declare `preparation: {operation: "build", inputs: [{path, sha256}, ...]}`.
-Their ordinary `input` is an independently authored expected composite used for reference capture;
+PDF cases may declare `preparation: {operation: "build" | "compare", inputs: [{path, sha256}, ...]}`.
+`build` takes at least two sources; `compare` takes exactly two, original then revised, and uses
+the existing public `DocxCompare.Compare` adapter. The declared review profile resolves the resulting
+redline during production export, so both final and original views can be measured.
+Their ordinary `input` is an independently authored expected document used for reference capture;
 it is never substituted for a candidate build. The harness invokes the existing native adapter's
 `build` operation, verifies its source-bound build and source digests, retains `candidate.docx`,
 then renders those bytes through the public WASM/PDF path with the remaining conversion deadline.
