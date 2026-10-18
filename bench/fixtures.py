@@ -34,6 +34,14 @@ def para(text='', props='', runs=None):
     return f'<w:p><w:pPr>{props}</w:pPr>{run(text) if runs is None else runs}</w:p>'
 
 
+def custom_xml_link(content, wrapped):
+    """Original inline carrier shared by the PDF and redline comparison cases."""
+    if wrapped:
+        content = ('<w:customXml w:element="entry"><w:customXmlPr>'
+                   '<w:attr w:name="key" w:val="cedar"/></w:customXmlPr>' + content + '</w:customXml>')
+    return '<w:hyperlink w:anchor="BirchTarget">' + content + '</w:hyperlink>'
+
+
 def section(cols=1, kind=None):
     mode = f'<w:type w:val="{kind}"/>' if kind else ''
     return f'<w:sectPr>{mode}<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720"/><w:cols w:num="{cols}" w:space="480"/></w:sectPr>'
@@ -1051,6 +1059,23 @@ def generate():
                 'The same story paragraphs without borders', texts, body, sect=sect,
                 stories=[('header', header), ('footer', footer)], notes=(kind, ''), notes_xml=note,
                 assertions=[{'type': 'same-page', 'version': 1, 'markers': ['CedarBodyOne', 'CedarHeaderOne', 'CedarFooterOne', 'CedarNoteOne']}])
+    for wrapped in (True, False):
+        cid = 'compare-inline-customxml' if wrapped else 'compare-inline-hyperlink-control'
+        def compared_body(word):
+            return (para(runs=run('MapleBefore ') + custom_xml_link(run(word), wrapped) + run(' MapleAfter'))
+                    + para(runs='<w:bookmarkStart w:id="91" w:name="BirchTarget"/>' + run('BirchTarget.') + '<w:bookmarkEnd w:id="91"/>'))
+        sources = []
+        for side, word in [('left', 'OakOpened'), ('right', 'OakClosed')]:
+            path = ROOT / 'fixtures' / 'compare' / (cid + '-' + side + '.docx')
+            package(path, compared_body(word))
+            sources.append({'path': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()})
+        for review, word in [('final', 'OakClosed'), ('original', 'OakOpened')]:
+            add(cid + '-' + review, 'paragraphs',
+                'Compare changed inline custom XML inside a hyperlink (Docxodus #1188)' if wrapped else
+                'Compare the same text inside a plain hyperlink',
+                ['MapleBefore', word, 'MapleAfter', 'BirchTarget.'], compared_body(word))
+            cases[-1]['profile']['review'] = review
+            cases[-1]['preparation'] = {'operation': 'compare', 'inputs': sources}
     # Boundary markers are invisible in PDF: these cases verify both resolved views retain table content.
     # The companion redline cases independently check marker identity, placement and reviewer attribution.
     for operation, level in [('compare', 'tbl'), ('consolidate', 'tr'), ('consolidate', 'p')]:
@@ -1082,7 +1107,7 @@ def generate():
                 boundary_body(review == 'final', edited))
             cases[-1]['profile']['review'] = review
             cases[-1]['preparation'] = {'operation': operation, 'inputs': sources}
-    registry = {'schema': 1, 'suite': {'id': 'core-v35', 'version': 35, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v36', 'version': 36, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

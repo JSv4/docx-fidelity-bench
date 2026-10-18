@@ -2,9 +2,9 @@
 
 An independent MIT benchmark of delivered PDF rendering and of document comparison. The harness and every input document are authored in this repository. It measures layout, visible content, physical pages, fonts, and declared feature assertions. It produces portable HTML evidence and JSON measurements.
 
-The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v34`, with report-only renderer CI. A separate comparison track, `redline-v1`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
+The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v36`, with report-only renderer CI. A separate comparison track, `redline-v2`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
 
-`core-v35` adds six PDF views for Docxodus #1190: table-boundary comparison, row-boundary consolidation,
+`core-v36` adds six PDF views for Docxodus #1190: table-boundary comparison, row-boundary consolidation,
 and a plain-paragraph text control, each in final and original views. Candidates perform the operation
 on the authored source inputs before production PDF export; references use independently authored
 expected documents. All 150 prior PDF inputs are unchanged. Bookmarks have no visible ink, so these
@@ -127,7 +127,7 @@ registration and full-suite scoring are pending.
 
 ## Redline track
 
-The comparison track asks whether a redline is exactly reversible. Each of its 43 authored cases gives a candidate a document pair (or a base and two reviewers, or one document carrying tracked changes) and declares what accept-all and reject-all must produce. The benchmark accepts and rejects the candidate's output with its own revision engine, compared on a semantic view of text, field characters, bookmark and comment markers, note references and paragraph styles, and with LibreOffice's accept-all/reject-all through headless UNO, compared on text. It also checks that the package adds no Open XML SDK validation errors and satisfies declared structural assertions, such as unique style ids, valid paragraph ids, untouched unchanged text and a folded paragraph count. A case scores 100 only when everything holds. Every reproducer, for Docxodus issues #1165, #1166, #1167, #1170, #1174, #1175, #1176, #1183 and #1184 and for one bookmark-placement defect found while authoring the suite, has a control without the trigger, and an authored-redline calibration must score 100.
+The comparison track asks whether a redline is exactly reversible. Each of its 45 authored cases gives a candidate a document pair (or a base and two reviewers, or one document carrying tracked changes) and declares what accept-all and reject-all must produce. The benchmark accepts and rejects the candidate's output with its own revision engine, compared on a semantic view of text, field characters, bookmark and comment markers, note references and paragraph styles, and with LibreOffice's accept-all/reject-all through headless UNO, compared on text. It also checks that the package adds no Open XML SDK validation errors and satisfies declared structural assertions, such as unique style ids, valid paragraph ids, untouched unchanged text and a folded paragraph count. A case scores 100 only when everything holds. Every reproducer, for Docxodus issues #1165, #1166, #1167, #1170, #1174, #1175, #1176, #1183 and #1184 and for one bookmark-placement defect found while authoring the suite, has a control without the trigger, and an authored-redline calibration must score 100.
 
 ```sh
 python3 -m bench redline build-validator --out /path/to/validator
@@ -154,3 +154,18 @@ with matching unbordered controls for [Docxodus #1203](https://github.com/JSv4/D
 Each card includes two adjacent bordered paragraphs and an unbordered paragraph. The body card
 is a control for the same grouping mechanism. All 145 earlier inputs are unchanged. Reference
 registration and full-suite scoring are pending.
+
+`core-v36` adds final and original PDF views of an edited hyperlink containing inline custom XML
+for Docxodus #1188, plus plain-hyperlink controls. Each candidate must compare the original
+source pair before export. `redline-v2` adds the same trigger/control to independent
+accept/reject scoring. All preceding PDF and redline input bytes remain unchanged.
+
+The [completed #1188 run](https://github.com/JSv4/docx-fidelity-bench/actions/runs/39155544679)
+measures Docxodus `f4c0617`: all four new PDF views pass mandatory checks and score 99.648–99.654,
+with calibration 100. Both new redline cases score 100 (original main: defect 0, control 100).
+The archived run used the 153-case development registry before the Times New Roman case merged;
+its full score is 87.216 with 143/153 mandatory passes. This branch retains that new font case
+and all 150 preceding inputs unchanged, for 154 PDF cases. The four #1188 input pairs and
+expected documents are byte-identical to the measured run; the archived score is not a full
+154-case score. Candidate/reference screenshots for every new view are in the run's
+`rendering-evidence` attachment.
