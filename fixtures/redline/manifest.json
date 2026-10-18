@@ -1,0 +1,2318 @@
+{
+  "schema": 1,
+  "suite": {
+    "id": "redline-v1",
+    "version": 1,
+    "cases": [
+      "redline-field-result-beside-edit",
+      "redline-field-result-end-control",
+      "redline-field-result-tab-control",
+      "redline-field-toc-page-numbers",
+      "redline-field-toc-entry-retitled-control",
+      "redline-field-toc-page-number-control",
+      "redline-field-shared-end-append",
+      "redline-field-shared-end-trim",
+      "redline-field-shared-end-control",
+      "redline-field-close-open-sdt",
+      "redline-field-close-open-body",
+      "redline-field-close-open-sdt-control",
+      "redline-comment-straddles-sdt",
+      "redline-comment-straddles-sdt-control",
+      "redline-comment-straddles-customxml",
+      "redline-comment-straddles-customxml-control",
+      "redline-comment-para-id-collision",
+      "redline-wrapper-para-id-copies",
+      "redline-comment-para-id-control",
+      "redline-header-bookmark-only",
+      "redline-body-bookmark-only-control",
+      "redline-bookmark-end-after-replaced-word",
+      "redline-bookmark-end-after-replaced-word-control",
+      "redline-bookmark-between-blocks-fold-text",
+      "redline-bookmark-between-blocks-fold-text-control",
+      "redline-bookmark-between-blocks-fold-table",
+      "redline-bookmark-between-blocks-fold-table-control",
+      "redline-style-id-cross-type",
+      "redline-style-id-same-type-control",
+      "redline-reject-customxml",
+      "redline-reject-math",
+      "redline-reject-ruby",
+      "redline-reject-direct-control",
+      "redline-consolidate-cell-bookmark",
+      "redline-consolidate-cell-text-control",
+      "redline-identity-bytes",
+      "redline-identity-reserialized"
+    ]
+  },
+  "cases": [
+    {
+      "id": "redline-field-result-beside-edit",
+      "version": 1,
+      "category": "fields",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1165",
+      "description": "PAGEREF result changes from 1 to 7 while the word before the field is deleted",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-field-result-beside-edit/left.docx",
+          "sha256": "7346ddc8c57b49b561a3312e899774e84a1f7e13932fe51690538255649e48f8",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-field-result-beside-edit/right.docx",
+          "sha256": "6bcf7f953e60351d4c6e2cfcd5142a875f7d5143c2a68d4d16285d2b5caf05af",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-field-result-beside-edit/right.docx",
+          "sha256": "6bcf7f953e60351d4c6e2cfcd5142a875f7d5143c2a68d4d16285d2b5caf05af"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-field-result-beside-edit/left.docx",
+          "sha256": "7346ddc8c57b49b561a3312e899774e84a1f7e13932fe51690538255649e48f8"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-field-result-beside-edit/authored-redline.docx",
+        "sha256": "ab6e3969a3e7a722266b85bfc4957ae16ecc90652e0ce214c34d6b21a1b76a07"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Survey register for the north ridge.",
+            "Alpha",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": false,
+        "rejected": true,
+        "note": "LibreOffice recomputes a PAGEREF result on import and ignores revisions inside it"
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-field-result-end-control",
+      "version": 1,
+      "category": "fields",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1165",
+      "description": "PAGEREF result that ends its paragraph changes from 1 to 7; nothing else in the paragraph changes",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-field-result-end-control/left.docx",
+          "sha256": "1ddd1e7af2b442941e23b747a98e078731e1dfab208f25654a719bd128dfd34d",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-field-result-end-control/right.docx",
+          "sha256": "6bcf7f953e60351d4c6e2cfcd5142a875f7d5143c2a68d4d16285d2b5caf05af",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-field-result-end-control/right.docx",
+          "sha256": "6bcf7f953e60351d4c6e2cfcd5142a875f7d5143c2a68d4d16285d2b5caf05af"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-field-result-end-control/left.docx",
+          "sha256": "1ddd1e7af2b442941e23b747a98e078731e1dfab208f25654a719bd128dfd34d"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-field-result-end-control/authored-redline.docx",
+        "sha256": "a39352403a8d6a657dc9265b034092e75993472df1f61d63b52bb7ff0e179ce1"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Survey register for the north ridge.",
+            "Alpha",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": false,
+        "rejected": false,
+        "note": "LibreOffice recomputes a PAGEREF result on import and ignores revisions inside it"
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-field-result-tab-control",
+      "version": 1,
+      "category": "fields",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1165",
+      "description": "PAGEREF result after a tab changes from 1 to 7; nothing else in the paragraph changes",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-field-result-tab-control/left.docx",
+          "sha256": "bf077d714b4183e98026478b75208c39a8a499c2925b0522c3b59d80c5e21a2e",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-field-result-tab-control/right.docx",
+          "sha256": "bd840c542cc66bb263c9f8be711090e1767361d98697d200ba9777ad25d2f9d2",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-field-result-tab-control/right.docx",
+          "sha256": "bd840c542cc66bb263c9f8be711090e1767361d98697d200ba9777ad25d2f9d2"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-field-result-tab-control/left.docx",
+          "sha256": "bf077d714b4183e98026478b75208c39a8a499c2925b0522c3b59d80c5e21a2e"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-field-result-tab-control/authored-redline.docx",
+        "sha256": "6cc01f7715865be42ef6d5a138d852af35edde4d8cc9daec11bb6b51511a5bdb"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Survey register for the north ridge.",
+            "Alpha",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": false,
+        "rejected": false,
+        "note": "LibreOffice recomputes a PAGEREF result on import and ignores revisions inside it"
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-field-toc-page-numbers",
+      "version": 1,
+      "category": "fields",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1165",
+      "description": "Table of contents whose two entry page numbers change from 1 and 2 to 2 and 3",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-field-toc-page-numbers/left.docx",
+          "sha256": "396cbba5b4c96956a56fba808477e8a50a447c274ae5f115ee8d707ca465fc7e",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-field-toc-page-numbers/right.docx",
+          "sha256": "812326d28844e0457a5ec3eed6035acedffcdf6f157d7dcbcfa276b9c23bf7b2",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-field-toc-page-numbers/right.docx",
+          "sha256": "812326d28844e0457a5ec3eed6035acedffcdf6f157d7dcbcfa276b9c23bf7b2"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-field-toc-page-numbers/left.docx",
+          "sha256": "396cbba5b4c96956a56fba808477e8a50a447c274ae5f115ee8d707ca465fc7e"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-field-toc-page-numbers/authored-redline.docx",
+        "sha256": "d9251c964778ccd163203ab2cd810729580ca4236214076f70efe8369a4ce3a5"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Ridge survey",
+            "Ridge survey notes are filed.",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-field-toc-entry-retitled-control",
+      "version": 1,
+      "category": "fields",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1165",
+      "description": "A word is inserted inside the second heading, away from its bookmark ends; its table-of-contents entry changes both its title and its page number",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-field-toc-entry-retitled-control/left.docx",
+          "sha256": "396cbba5b4c96956a56fba808477e8a50a447c274ae5f115ee8d707ca465fc7e",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-field-toc-entry-retitled-control/right.docx",
+          "sha256": "b0ec92488b711465da3ae116730a89920e5ab7babc875729f569e786a4b2be07",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-field-toc-entry-retitled-control/right.docx",
+          "sha256": "b0ec92488b711465da3ae116730a89920e5ab7babc875729f569e786a4b2be07"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-field-toc-entry-retitled-control/left.docx",
+          "sha256": "396cbba5b4c96956a56fba808477e8a50a447c274ae5f115ee8d707ca465fc7e"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-field-toc-entry-retitled-control/authored-redline.docx",
+        "sha256": "4ddb812b4207686e5b39843efa7aaf4f8f1a5a65f1051571a867056aab97434e"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Ridge survey",
+            "Ridge survey notes are filed.",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-field-toc-page-number-control",
+      "version": 1,
+      "category": "fields",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1165",
+      "description": "Table of contents whose second entry page number alone changes from 2 to 3",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-field-toc-page-number-control/left.docx",
+          "sha256": "396cbba5b4c96956a56fba808477e8a50a447c274ae5f115ee8d707ca465fc7e",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-field-toc-page-number-control/right.docx",
+          "sha256": "386ace63870833691c1d84f6b95af96650a606858f12c51a19ec6586f1c1194e",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-field-toc-page-number-control/right.docx",
+          "sha256": "386ace63870833691c1d84f6b95af96650a606858f12c51a19ec6586f1c1194e"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-field-toc-page-number-control/left.docx",
+          "sha256": "396cbba5b4c96956a56fba808477e8a50a447c274ae5f115ee8d707ca465fc7e"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-field-toc-page-number-control/authored-redline.docx",
+        "sha256": "9bada6fcecdcb3a0bf1707723d4aac836911c4a4dfd8270388663ca5b4cd49b8"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Ridge survey",
+            "Ridge survey notes are filed.",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-field-shared-end-append",
+      "version": 1,
+      "category": "fields",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1165",
+      "description": "Field spanning two paragraphs; the revision appends text before the shared field end",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-field-shared-end-append/left.docx",
+          "sha256": "22b5d779f73ac34a5228d0aec65d461642712a8d6476ce84478e5d281e99be9b",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-field-shared-end-append/right.docx",
+          "sha256": "47d0c6337e8ab9c188526fc52c681102a803f38c70c6abd5c611d97ca3094edc",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-field-shared-end-append/right.docx",
+          "sha256": "47d0c6337e8ab9c188526fc52c681102a803f38c70c6abd5c611d97ca3094edc"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-field-shared-end-append/left.docx",
+          "sha256": "22b5d779f73ac34a5228d0aec65d461642712a8d6476ce84478e5d281e99be9b"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-field-shared-end-append/authored-redline.docx",
+        "sha256": "4e860caaef8cdb390661eac359b985c425bd532306ad03ac04623a0af698e4c9"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Field register opening paragraph.",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-field-shared-end-trim",
+      "version": 1,
+      "category": "fields",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1165",
+      "description": "Field spanning two paragraphs; the revision trims text before the shared field end",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-field-shared-end-trim/left.docx",
+          "sha256": "7e233242a0c59e7a8ca9f95f58058f8ec1c27c5b936a689a3a103db139e37290",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-field-shared-end-trim/right.docx",
+          "sha256": "22b5d779f73ac34a5228d0aec65d461642712a8d6476ce84478e5d281e99be9b",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-field-shared-end-trim/right.docx",
+          "sha256": "22b5d779f73ac34a5228d0aec65d461642712a8d6476ce84478e5d281e99be9b"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-field-shared-end-trim/left.docx",
+          "sha256": "7e233242a0c59e7a8ca9f95f58058f8ec1c27c5b936a689a3a103db139e37290"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-field-shared-end-trim/authored-redline.docx",
+        "sha256": "c5d153c95f92c3e552c2116e78477daad37d04cbf82b33e6e46b8d76a908e25f"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Field register opening paragraph.",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-field-shared-end-control",
+      "version": 1,
+      "category": "fields",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1165",
+      "description": "Field spanning two paragraphs; the revision edits the opening paragraph away from the field end",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-field-shared-end-control/left.docx",
+          "sha256": "22b5d779f73ac34a5228d0aec65d461642712a8d6476ce84478e5d281e99be9b",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-field-shared-end-control/right.docx",
+          "sha256": "3d3ffc057510450bd55c072a235094caed423a537f6f21004b5ea4a4b0df77e8",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-field-shared-end-control/right.docx",
+          "sha256": "3d3ffc057510450bd55c072a235094caed423a537f6f21004b5ea4a4b0df77e8"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-field-shared-end-control/left.docx",
+          "sha256": "22b5d779f73ac34a5228d0aec65d461642712a8d6476ce84478e5d281e99be9b"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-field-shared-end-control/authored-redline.docx",
+        "sha256": "0fa13365317aeb5d2fce1994c388c8e542d939543c40b324c7cd7e065eb3d5b6"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Field register opening paragraph.",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-field-close-open-sdt",
+      "version": 1,
+      "category": "fields",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1166",
+      "description": "Two paragraph-spanning fields where inside a block content control, one paragraph closes the first field and opens the second; text is inserted beside the closing field character",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-field-close-open-sdt/left.docx",
+          "sha256": "fc31f42f6eb94787ba223e1c804e1d43cbd6a04ef02a70ee91a0593f06272655",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-field-close-open-sdt/right.docx",
+          "sha256": "7910d449b295368b12207af70f6e98a5cd1d490e9a90e41a6de16ea88208ed15",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-field-close-open-sdt/right.docx",
+          "sha256": "7910d449b295368b12207af70f6e98a5cd1d490e9a90e41a6de16ea88208ed15"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-field-close-open-sdt/left.docx",
+          "sha256": "fc31f42f6eb94787ba223e1c804e1d43cbd6a04ef02a70ee91a0593f06272655"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-field-close-open-sdt/authored-redline.docx",
+        "sha256": "6486173007e1b15227476f0785680c548c2f0a54ab4bd043d4080076a6517240"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Register opening paragraph.",
+            "Lead",
+            "ending.",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-field-close-open-body",
+      "version": 1,
+      "category": "fields",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1166",
+      "description": "Two paragraph-spanning fields where one body paragraph closes the first field and opens the second; text is inserted beside the closing field character",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-field-close-open-body/left.docx",
+          "sha256": "b072a5f7c9d3e1daac2ff87539c5cdc9e49d47dfac09a15830e3c045c4034db1",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-field-close-open-body/right.docx",
+          "sha256": "0d5c82a7ee09ecad58e3c7dfe2c4afbaac89ebdce27295c843122cbc6668fd68",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-field-close-open-body/right.docx",
+          "sha256": "0d5c82a7ee09ecad58e3c7dfe2c4afbaac89ebdce27295c843122cbc6668fd68"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-field-close-open-body/left.docx",
+          "sha256": "b072a5f7c9d3e1daac2ff87539c5cdc9e49d47dfac09a15830e3c045c4034db1"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-field-close-open-body/authored-redline.docx",
+        "sha256": "7aaa4872984d034a9a248d5c63b2ba83acba7cac18c02507724fb80141bade57"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Register opening paragraph.",
+            "Lead",
+            "ending.",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-field-close-open-sdt-control",
+      "version": 1,
+      "category": "fields",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1166",
+      "description": "Two paragraph-spanning fields where inside a block content control, the first field closes and the second opens in separate paragraphs; text is inserted beside the closing field character",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-field-close-open-sdt-control/left.docx",
+          "sha256": "d090335bb89ea699e2aeb297618d399ac81ffc8b27c135c7e0dcf74b8c6fec80",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-field-close-open-sdt-control/right.docx",
+          "sha256": "cec12f1bbcde53acd4c68adcaa549347331ad28288a4731aa252369c74fa3ff9",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-field-close-open-sdt-control/right.docx",
+          "sha256": "cec12f1bbcde53acd4c68adcaa549347331ad28288a4731aa252369c74fa3ff9"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-field-close-open-sdt-control/left.docx",
+          "sha256": "d090335bb89ea699e2aeb297618d399ac81ffc8b27c135c7e0dcf74b8c6fec80"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-field-close-open-sdt-control/authored-redline.docx",
+        "sha256": "a54837c5686b103a8f37681bc46437bced3afa74193ba647185a92a45ff78de0"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Register opening paragraph.",
+            "Lead",
+            "ending.",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-comment-straddles-sdt",
+      "version": 1,
+      "category": "comments",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1167",
+      "description": "Comment opening before a block content control and ending between its paragraphs, with its reference inside it; text is inserted inside the wrapper",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-comment-straddles-sdt/left.docx",
+          "sha256": "39515c1307b2f6165178fa6637cbddcd636e50f0ebe22c4a33f596603f305ea7",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-comment-straddles-sdt/right.docx",
+          "sha256": "a5a344fd6dc1ddf19011e6d6ec6e667a4e3cc1cff5b181d0d6b929c61ae6bcec",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-comment-straddles-sdt/right.docx",
+          "sha256": "a5a344fd6dc1ddf19011e6d6ec6e667a4e3cc1cff5b181d0d6b929c61ae6bcec"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-comment-straddles-sdt/left.docx",
+          "sha256": "39515c1307b2f6165178fa6637cbddcd636e50f0ebe22c4a33f596603f305ea7"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-comment-straddles-sdt/authored-redline.docx",
+        "sha256": "cb68740a6eca0b36d7a0e0f7dd6b26d6b44ee4fb3bcf6271f14f7ff76130815b"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Before the clause",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": false,
+        "rejected": false,
+        "note": "LibreOffice keeps a comment whose markers lie in resolved revisions and leaves an empty paragraph where a replaced wrapper copy is removed"
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-comment-straddles-sdt-control",
+      "version": 1,
+      "category": "comments",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1167",
+      "description": "Comment wholly before a block content control; text is inserted inside the wrapper",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-comment-straddles-sdt-control/left.docx",
+          "sha256": "9ba48e1f51a5483cdb5f63b9976ea2702009ebc30f2540b366ec7114e6bc71bd",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-comment-straddles-sdt-control/right.docx",
+          "sha256": "476113413a8413b919fe34b275280ff91f6527adefb743bc5fdaa615b9951c71",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-comment-straddles-sdt-control/right.docx",
+          "sha256": "476113413a8413b919fe34b275280ff91f6527adefb743bc5fdaa615b9951c71"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-comment-straddles-sdt-control/left.docx",
+          "sha256": "9ba48e1f51a5483cdb5f63b9976ea2702009ebc30f2540b366ec7114e6bc71bd"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-comment-straddles-sdt-control/authored-redline.docx",
+        "sha256": "8946b1c7a3252152c2ac4fa0eeb52c71d680e77ce8748669c2158f32ca584165"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Before the clause",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-comment-straddles-customxml",
+      "version": 1,
+      "category": "comments",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1167",
+      "description": "Comment opening before a block custom XML element and ending between its paragraphs, with its reference inside it; text is inserted inside the wrapper",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-comment-straddles-customxml/left.docx",
+          "sha256": "a49cf7f187711440a8cbef0547122f042bb7fac1615b21882a0b98bb8f0f9d01",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-comment-straddles-customxml/right.docx",
+          "sha256": "69dbef37c6e80bc678a5efe9abb2d2c2350d887099305197359883709b68cf10",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-comment-straddles-customxml/right.docx",
+          "sha256": "69dbef37c6e80bc678a5efe9abb2d2c2350d887099305197359883709b68cf10"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-comment-straddles-customxml/left.docx",
+          "sha256": "a49cf7f187711440a8cbef0547122f042bb7fac1615b21882a0b98bb8f0f9d01"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-comment-straddles-customxml/authored-redline.docx",
+        "sha256": "c44e887ae476aa09b8114a3a253a64d39209f64093c3e51adecc6e94d9f5fa3a"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Before the clause",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": false,
+        "rejected": false,
+        "note": "LibreOffice keeps a comment whose markers lie in resolved revisions and leaves an empty paragraph where a replaced wrapper copy is removed"
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-comment-straddles-customxml-control",
+      "version": 1,
+      "category": "comments",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1167",
+      "description": "Comment wholly before a block custom XML element; text is inserted inside the wrapper",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-comment-straddles-customxml-control/left.docx",
+          "sha256": "77bb2d66cb9151d5627e4c8c04e4ed8b24163a8b6631b7692c1ac7cb87495c1b",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-comment-straddles-customxml-control/right.docx",
+          "sha256": "a545e9dd55b389f57cb13379a1e3e26ed64c378691ece5060c076f549e2085dd",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-comment-straddles-customxml-control/right.docx",
+          "sha256": "a545e9dd55b389f57cb13379a1e3e26ed64c378691ece5060c076f549e2085dd"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-comment-straddles-customxml-control/left.docx",
+          "sha256": "77bb2d66cb9151d5627e4c8c04e4ed8b24163a8b6631b7692c1ac7cb87495c1b"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-comment-straddles-customxml-control/authored-redline.docx",
+        "sha256": "eaa7e5aae87e754995e0b82708c32b773ea322f2b1a29a67d35cab201cdb9cff"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Before the clause",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-comment-para-id-collision",
+      "version": 1,
+      "category": "comments",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1170",
+      "description": "Comments inside a content control the comparison replaces whole; the first body paragraph id is one past the largest comment paragraph id",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-comment-para-id-collision/left.docx",
+          "sha256": "9b6da729a74a49c8993689b27c8680641f7c0264519caa14939e5fbe8b87df30",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-comment-para-id-collision/right.docx",
+          "sha256": "9e1ca41b942616efeb3772fe9ebe165aaa0d1f5319b452d6299c740b4761773f",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-comment-para-id-collision/right.docx",
+          "sha256": "9e1ca41b942616efeb3772fe9ebe165aaa0d1f5319b452d6299c740b4761773f"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-comment-para-id-collision/left.docx",
+          "sha256": "9b6da729a74a49c8993689b27c8680641f7c0264519caa14939e5fbe8b87df30"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-comment-para-id-collision/authored-redline.docx",
+        "sha256": "e43a6233b0607949e4204ff000f7f4e1261242446a15ba2ed4ee808ca758b346"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Register opening paragraph.",
+            "Closing line remains unchanged."
+          ]
+        },
+        {
+          "type": "para-ids-valid",
+          "version": 1,
+          "scope": "redline"
+        }
+      ],
+      "libreoffice": {
+        "accepted": false,
+        "rejected": false,
+        "note": "LibreOffice keeps a comment whose markers lie in resolved revisions and leaves an empty paragraph where a replaced wrapper copy is removed"
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-wrapper-para-id-copies",
+      "version": 1,
+      "category": "comments",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1170",
+      "description": "Comments inside a content control the comparison replaces whole; every paragraph inside the content control carries a paragraph id",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-wrapper-para-id-copies/left.docx",
+          "sha256": "1a1d6defe2f8de51a535ae14ff2285568e9ce9c756fb78b5e57a46de7bdfe770",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-wrapper-para-id-copies/right.docx",
+          "sha256": "ab5bed5390c49d2bdda67e414f26f5e9182052fdb6120c83ce62499b9367268d",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-wrapper-para-id-copies/right.docx",
+          "sha256": "ab5bed5390c49d2bdda67e414f26f5e9182052fdb6120c83ce62499b9367268d"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-wrapper-para-id-copies/left.docx",
+          "sha256": "1a1d6defe2f8de51a535ae14ff2285568e9ce9c756fb78b5e57a46de7bdfe770"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-wrapper-para-id-copies/authored-redline.docx",
+        "sha256": "35d4dcee9a6524a30d5ca88f4ab78a5b70ebbd0e219b7b0d70c3e67dab5dc33a"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Register opening paragraph.",
+            "Closing line remains unchanged."
+          ]
+        },
+        {
+          "type": "para-ids-valid",
+          "version": 1,
+          "scope": "redline"
+        }
+      ],
+      "libreoffice": {
+        "accepted": false,
+        "rejected": false,
+        "note": "LibreOffice keeps a comment whose markers lie in resolved revisions and leaves an empty paragraph where a replaced wrapper copy is removed"
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-comment-para-id-control",
+      "version": 1,
+      "category": "comments",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1170",
+      "description": "Comments inside a content control the comparison replaces whole; only the paragraphs outside the content control carry ids, far from the comment ids",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-comment-para-id-control/left.docx",
+          "sha256": "47889669867607f922fe37945dd33284dce070a679df35ca0937d32b92913769",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-comment-para-id-control/right.docx",
+          "sha256": "8cdc43d5110f1f8d5df6fd0340df0efc0bdf3e3efb24c9c5843b23fae683f748",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-comment-para-id-control/right.docx",
+          "sha256": "8cdc43d5110f1f8d5df6fd0340df0efc0bdf3e3efb24c9c5843b23fae683f748"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-comment-para-id-control/left.docx",
+          "sha256": "47889669867607f922fe37945dd33284dce070a679df35ca0937d32b92913769"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-comment-para-id-control/authored-redline.docx",
+        "sha256": "ba7314a77d4f140da01c5fe750d1dc842a8c116416713a59c11b78c1efd8361a"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Register opening paragraph.",
+            "Closing line remains unchanged."
+          ]
+        },
+        {
+          "type": "para-ids-valid",
+          "version": 1,
+          "scope": "redline"
+        }
+      ],
+      "libreoffice": {
+        "accepted": false,
+        "rejected": false,
+        "note": "LibreOffice keeps a comment whose markers lie in resolved revisions and leaves an empty paragraph where a replaced wrapper copy is removed"
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-header-bookmark-only",
+      "version": 1,
+      "category": "bookmarks",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1174",
+      "description": "The only difference is a bookmark around the second header paragraph",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-header-bookmark-only/left.docx",
+          "sha256": "8d2635659ac9e7f128e90b8bd0d49a0efb1ba234934d2970a560b11cce5a2b84",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-header-bookmark-only/right.docx",
+          "sha256": "6bfeb2eadc18b5fa904951d79f29a83774c8217604b0769afe4e52c3f9349a12",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-header-bookmark-only/right.docx",
+          "sha256": "6bfeb2eadc18b5fa904951d79f29a83774c8217604b0769afe4e52c3f9349a12"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-header-bookmark-only/left.docx",
+          "sha256": "8d2635659ac9e7f128e90b8bd0d49a0efb1ba234934d2970a560b11cce5a2b84"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-header-bookmark-only/authored-redline.docx",
+        "sha256": "ed3ddd6a089d19c69ad2fa9f6f081edd658a644e1fa50748313ec0fb745ff7f6"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "headers",
+          "texts": [
+            "Header first line.",
+            "Header second line."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": false,
+        "rejected": false,
+        "note": "LibreOffice has no tracked bookmark changes; the redline holds no revision it can see"
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-body-bookmark-only-control",
+      "version": 1,
+      "category": "bookmarks",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1174",
+      "description": "The only difference is a bookmark around the second body paragraph",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-body-bookmark-only-control/left.docx",
+          "sha256": "acee4923ad89d18b716aeab206b843fe785709ad0b734a531f2d0a993ff00733",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-body-bookmark-only-control/right.docx",
+          "sha256": "e537cce39c9caf2699bc2e17127f0618585f360dcd7a698f7fe85be3f4ba869d",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-body-bookmark-only-control/right.docx",
+          "sha256": "e537cce39c9caf2699bc2e17127f0618585f360dcd7a698f7fe85be3f4ba869d"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-body-bookmark-only-control/left.docx",
+          "sha256": "acee4923ad89d18b716aeab206b843fe785709ad0b734a531f2d0a993ff00733"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-body-bookmark-only-control/authored-redline.docx",
+        "sha256": "e3b4a591082962d53516a2e896f66cb5f40761995b18911ed0bd4beae9563119"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Body first line.",
+            "Body second line."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": false,
+        "rejected": false,
+        "note": "LibreOffice has no tracked bookmark changes; the redline holds no revision it can see"
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-bookmark-end-after-replaced-word",
+      "version": 1,
+      "category": "bookmarks",
+      "kind": "reproducer",
+      "issue": null,
+      "description": "Bookmarked paragraph whose last word is replaced; no Docxodus issue yet",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-bookmark-end-after-replaced-word/left.docx",
+          "sha256": "774d8d01a2028ec06b235a0baf4893b3a80c4328bc4efb7534566ea59ce9df5d",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-bookmark-end-after-replaced-word/right.docx",
+          "sha256": "1c792623e7d5d7b544db3cd5038d25a3b9455b218aef5f833389e7a7d461c0fe",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-bookmark-end-after-replaced-word/right.docx",
+          "sha256": "1c792623e7d5d7b544db3cd5038d25a3b9455b218aef5f833389e7a7d461c0fe"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-bookmark-end-after-replaced-word/left.docx",
+          "sha256": "774d8d01a2028ec06b235a0baf4893b3a80c4328bc4efb7534566ea59ce9df5d"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-bookmark-end-after-replaced-word/authored-redline.docx",
+        "sha256": "0750c5986fcaca4615c0e510f3565b119a75ffcfcb109ad451b7eec0e4bcaade"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Opening line of the survey.",
+            "Valley",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-bookmark-end-after-replaced-word-control",
+      "version": 1,
+      "category": "bookmarks",
+      "kind": "control",
+      "issue": null,
+      "description": "Bookmarked paragraph whose text gains a word inside the bookmark; no Docxodus issue yet",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-bookmark-end-after-replaced-word-control/left.docx",
+          "sha256": "774d8d01a2028ec06b235a0baf4893b3a80c4328bc4efb7534566ea59ce9df5d",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-bookmark-end-after-replaced-word-control/right.docx",
+          "sha256": "7d35d6098c59c1347a78556ebf838a619a0962d843d74a076df7d5aa950e1da8",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-bookmark-end-after-replaced-word-control/right.docx",
+          "sha256": "7d35d6098c59c1347a78556ebf838a619a0962d843d74a076df7d5aa950e1da8"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-bookmark-end-after-replaced-word-control/left.docx",
+          "sha256": "774d8d01a2028ec06b235a0baf4893b3a80c4328bc4efb7534566ea59ce9df5d"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-bookmark-end-after-replaced-word-control/authored-redline.docx",
+        "sha256": "5a4508519459dff3c4d1e9a948fc96499dcdcddb8475fc28e3b9fcf373b4625d"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Opening line of the survey.",
+            "Valley",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-bookmark-between-blocks-fold-text",
+      "version": 1,
+      "category": "bookmarks",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1183",
+      "description": "Three paragraphs whose heading bookmark ends between blocks, replaced by one paragraph; the redline keeps the folded paragraph count",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-bookmark-between-blocks-fold-text/left.docx",
+          "sha256": "98f7e7972788be160d8071865022bf991fc2557c648c82308cdae989e652c7e2",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-bookmark-between-blocks-fold-text/right.docx",
+          "sha256": "ed955de6d66602ad90ec155be3d2dba7d5f6cc3e875fbd57908009819c903627",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-bookmark-between-blocks-fold-text/right.docx",
+          "sha256": "ed955de6d66602ad90ec155be3d2dba7d5f6cc3e875fbd57908009819c903627"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-bookmark-between-blocks-fold-text/left.docx",
+          "sha256": "98f7e7972788be160d8071865022bf991fc2557c648c82308cdae989e652c7e2"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-bookmark-between-blocks-fold-text/authored-redline.docx",
+        "sha256": "b8b89159081187d3d92f5edc526879ba70b4da4b2c11777b197ed46dd8feea5f"
+      },
+      "assertions": [
+        {
+          "type": "paragraph-count",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "count": 3
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-bookmark-between-blocks-fold-text-control",
+      "version": 1,
+      "category": "bookmarks",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1183",
+      "description": "Three paragraphs whose heading bookmark ends inside the paragraph, replaced by one paragraph; the redline keeps the folded paragraph count",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-bookmark-between-blocks-fold-text-control/left.docx",
+          "sha256": "e5ff113c2635d4b4e09641b68f9033929bb26639fa8ac763ff4f8c302625946b",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-bookmark-between-blocks-fold-text-control/right.docx",
+          "sha256": "ed955de6d66602ad90ec155be3d2dba7d5f6cc3e875fbd57908009819c903627",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-bookmark-between-blocks-fold-text-control/right.docx",
+          "sha256": "ed955de6d66602ad90ec155be3d2dba7d5f6cc3e875fbd57908009819c903627"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-bookmark-between-blocks-fold-text-control/left.docx",
+          "sha256": "e5ff113c2635d4b4e09641b68f9033929bb26639fa8ac763ff4f8c302625946b"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-bookmark-between-blocks-fold-text-control/authored-redline.docx",
+        "sha256": "6cdbac846b20bbf297d73ec4279c170e7b4b7b96a209b60596b62cd40cc89a7d"
+      },
+      "assertions": [
+        {
+          "type": "paragraph-count",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "count": 3
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-bookmark-between-blocks-fold-table",
+      "version": 1,
+      "category": "bookmarks",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1183",
+      "description": "Three paragraphs whose heading bookmark ends between blocks, replaced by a two-by-two table and an empty paragraph; the redline keeps the folded paragraph count",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-bookmark-between-blocks-fold-table/left.docx",
+          "sha256": "98f7e7972788be160d8071865022bf991fc2557c648c82308cdae989e652c7e2",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-bookmark-between-blocks-fold-table/right.docx",
+          "sha256": "259ee05d408739013fc2695684249a9b142cb9b08ea8a91b08f1bdbfc3cb3356",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-bookmark-between-blocks-fold-table/right.docx",
+          "sha256": "259ee05d408739013fc2695684249a9b142cb9b08ea8a91b08f1bdbfc3cb3356"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-bookmark-between-blocks-fold-table/left.docx",
+          "sha256": "98f7e7972788be160d8071865022bf991fc2557c648c82308cdae989e652c7e2"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-bookmark-between-blocks-fold-table/authored-redline.docx",
+        "sha256": "270c9518924a841f8e22489c3f324f950336fed94a0f3b28c795fb44331baddd"
+      },
+      "assertions": [
+        {
+          "type": "paragraph-count",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "count": 7
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-bookmark-between-blocks-fold-table-control",
+      "version": 1,
+      "category": "bookmarks",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1183",
+      "description": "Three paragraphs whose heading bookmark ends inside the paragraph, replaced by a two-by-two table and an empty paragraph; the redline keeps the folded paragraph count",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-bookmark-between-blocks-fold-table-control/left.docx",
+          "sha256": "e5ff113c2635d4b4e09641b68f9033929bb26639fa8ac763ff4f8c302625946b",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-bookmark-between-blocks-fold-table-control/right.docx",
+          "sha256": "259ee05d408739013fc2695684249a9b142cb9b08ea8a91b08f1bdbfc3cb3356",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-bookmark-between-blocks-fold-table-control/right.docx",
+          "sha256": "259ee05d408739013fc2695684249a9b142cb9b08ea8a91b08f1bdbfc3cb3356"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-bookmark-between-blocks-fold-table-control/left.docx",
+          "sha256": "e5ff113c2635d4b4e09641b68f9033929bb26639fa8ac763ff4f8c302625946b"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-bookmark-between-blocks-fold-table-control/authored-redline.docx",
+        "sha256": "69bb3554f676e33304865886a1285677c5f2b1d40f934f60fc057bf879ec08d7"
+      },
+      "assertions": [
+        {
+          "type": "paragraph-count",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "count": 7
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-style-id-cross-type",
+      "version": 1,
+      "category": "styles",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1184",
+      "description": "Unreferenced style id DocID is a paragraph style in the original and a character style in the revision",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-style-id-cross-type/left.docx",
+          "sha256": "fb589bbc7bce09f24017d15a81f28c7163b2a82e07df453199126346317be63b",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-style-id-cross-type/right.docx",
+          "sha256": "ccd80ab083824ae831d06c670fbb14dc41bc5355c37e9003a9f1cbc2cf26a0f1",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-style-id-cross-type/right.docx",
+          "sha256": "ccd80ab083824ae831d06c670fbb14dc41bc5355c37e9003a9f1cbc2cf26a0f1"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-style-id-cross-type/left.docx",
+          "sha256": "fb589bbc7bce09f24017d15a81f28c7163b2a82e07df453199126346317be63b"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-style-id-cross-type/authored-redline.docx",
+        "sha256": "969706c13a5fc38d63327690703ff529fa84811e4d613deb03378bbd7882ab6e"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "The",
+            "paragraph.",
+            "Closing line remains unchanged."
+          ]
+        },
+        {
+          "type": "style-ids-unique",
+          "version": 1,
+          "scope": "redline"
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-style-id-same-type-control",
+      "version": 1,
+      "category": "styles",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1184",
+      "description": "Unreferenced style id DocID is a paragraph style in the original and a different paragraph style in the revision",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-style-id-same-type-control/left.docx",
+          "sha256": "fb589bbc7bce09f24017d15a81f28c7163b2a82e07df453199126346317be63b",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-style-id-same-type-control/right.docx",
+          "sha256": "b0942ca0aa02263e3019b009e7158401e72f7f7e0e356921eadd42c5bcd8e4e5",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-style-id-same-type-control/right.docx",
+          "sha256": "b0942ca0aa02263e3019b009e7158401e72f7f7e0e356921eadd42c5bcd8e4e5"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-style-id-same-type-control/left.docx",
+          "sha256": "fb589bbc7bce09f24017d15a81f28c7163b2a82e07df453199126346317be63b"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-style-id-same-type-control/authored-redline.docx",
+        "sha256": "969706c13a5fc38d63327690703ff529fa84811e4d613deb03378bbd7882ab6e"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "The",
+            "paragraph.",
+            "Closing line remains unchanged."
+          ]
+        },
+        {
+          "type": "style-ids-unique",
+          "version": 1,
+          "scope": "redline"
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-reject-customxml",
+      "version": 1,
+      "category": "revisions",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1176",
+      "description": "Rejecting one insertion and one deletion held by an inline custom XML element",
+      "operation": "reject",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-reject-customxml/tracked.docx",
+          "sha256": "8bcb12f7608c566e56e66157afe0f92089962f81c9996f048ade23e327877b0a",
+          "role": "input"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-reject-customxml/original.docx",
+          "sha256": "531df9d88b20283e6831ae2bb47f9af5b37b9f11232914ac6af8c2bdaf90181d"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-reject-customxml/original.docx",
+        "sha256": "531df9d88b20283e6831ae2bb47f9af5b37b9f11232914ac6af8c2bdaf90181d"
+      },
+      "assertions": [
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-reject-math",
+      "version": 1,
+      "category": "revisions",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1176",
+      "description": "Rejecting one insertion and one deletion held by an Office Math zone",
+      "operation": "reject",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-reject-math/tracked.docx",
+          "sha256": "ac4ff5e10fff4df73540e073c357ef1e5a6c6229fbb7a15e6c61cf24cffe98df",
+          "role": "input"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-reject-math/original.docx",
+          "sha256": "eaea2a6fd48a9c9ad4b53f4d751640434955fb9f5d37cff8f21e6dbbd1e23e15"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-reject-math/original.docx",
+        "sha256": "eaea2a6fd48a9c9ad4b53f4d751640434955fb9f5d37cff8f21e6dbbd1e23e15"
+      },
+      "assertions": [
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-reject-ruby",
+      "version": 1,
+      "category": "revisions",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1176",
+      "description": "Rejecting one insertion and one deletion held by a ruby base",
+      "operation": "reject",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-reject-ruby/tracked.docx",
+          "sha256": "293e5b1edf186d5e44ae8d651bfc337ede23d1347e9f36efa1b645ccd63e49f8",
+          "role": "input"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-reject-ruby/original.docx",
+          "sha256": "7bbc0c11d3e2c4ef4d79c95d114befdc11626d77f419dc3056cbe40e21e78489"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-reject-ruby/original.docx",
+        "sha256": "7bbc0c11d3e2c4ef4d79c95d114befdc11626d77f419dc3056cbe40e21e78489"
+      },
+      "assertions": [
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-reject-direct-control",
+      "version": 1,
+      "category": "revisions",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1176",
+      "description": "Rejecting one insertion and one deletion held by the paragraph itself",
+      "operation": "reject",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-reject-direct-control/tracked.docx",
+          "sha256": "41380faabed2f16965dbe9b2816f9b65bdd0819e3f3cc89b19229e9180b90a6d",
+          "role": "input"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-reject-direct-control/original.docx",
+          "sha256": "bf34afca87d0f1c96dd1841745164699394ce2baaa01b08b3ec63a7c097709ad"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-reject-direct-control/original.docx",
+        "sha256": "bf34afca87d0f1c96dd1841745164699394ce2baaa01b08b3ec63a7c097709ad"
+      },
+      "assertions": [
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-consolidate-cell-bookmark",
+      "version": 1,
+      "category": "consolidate",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1175",
+      "description": "Two reviewers: the first adds a bookmark around an entry inside a table cell, the second edits the opening paragraph",
+      "operation": "consolidate",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-consolidate-cell-bookmark/base.docx",
+          "sha256": "94d39e784a9904dd55eb5dd0f420193394bc30c29376e39d297409a715e89a2b",
+          "role": "base"
+        },
+        {
+          "path": "fixtures/redline/redline-consolidate-cell-bookmark/reviewer1.docx",
+          "sha256": "ce81d601a0367135182f602b2cb2b59ff09db39218b4f809edbadc54f33086e6",
+          "role": "reviewer",
+          "author": "Reviewer1"
+        },
+        {
+          "path": "fixtures/redline/redline-consolidate-cell-bookmark/reviewer2.docx",
+          "sha256": "9f8e7e892f8d2e3e07d76bc3d69fc7697d3ed781829578e62a2a3e970b492e4a",
+          "role": "reviewer",
+          "author": "Reviewer2"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-consolidate-cell-bookmark/merged.docx",
+          "sha256": "3b3f010858df2f0c8236ce0b9988bbc4687bb89dea666e4db109b99756e943c9"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-consolidate-cell-bookmark/base.docx",
+          "sha256": "94d39e784a9904dd55eb5dd0f420193394bc30c29376e39d297409a715e89a2b"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-consolidate-cell-bookmark/authored-redline.docx",
+        "sha256": "72cb6deb189dc7f698bdf61b73bc9f9e89c9f9171bccef94c000eda297077089"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Ledger opening",
+            "Entry alpha first.",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-consolidate-cell-text-control",
+      "version": 1,
+      "category": "consolidate",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1175",
+      "description": "Two reviewers: the first edits an entry inside a table cell, the second edits the opening paragraph",
+      "operation": "consolidate",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-consolidate-cell-text-control/base.docx",
+          "sha256": "94d39e784a9904dd55eb5dd0f420193394bc30c29376e39d297409a715e89a2b",
+          "role": "base"
+        },
+        {
+          "path": "fixtures/redline/redline-consolidate-cell-text-control/reviewer1.docx",
+          "sha256": "f5bd33e14369ec7ec00896c1d6d2e449ef230a930d1e4dd9b8c89402e67e2119",
+          "role": "reviewer",
+          "author": "Reviewer1"
+        },
+        {
+          "path": "fixtures/redline/redline-consolidate-cell-text-control/reviewer2.docx",
+          "sha256": "9f8e7e892f8d2e3e07d76bc3d69fc7697d3ed781829578e62a2a3e970b492e4a",
+          "role": "reviewer",
+          "author": "Reviewer2"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-consolidate-cell-text-control/merged.docx",
+          "sha256": "d99e29f3f092acc17f51a5c67e9325d31b6f08e4e576c545b321104e4aaf55f6"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-consolidate-cell-text-control/base.docx",
+          "sha256": "94d39e784a9904dd55eb5dd0f420193394bc30c29376e39d297409a715e89a2b"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-consolidate-cell-text-control/authored-redline.docx",
+        "sha256": "1f8b6eea8594d261e1aedede0a2365dcb40d9210eea4946d84102046862e0c86"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Ledger opening",
+            "Entry alpha first.",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-identity-bytes",
+      "version": 1,
+      "category": "identity",
+      "kind": "identity",
+      "issue": null,
+      "description": "Byte-identical packages",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-identity-bytes/left.docx",
+          "sha256": "bd14c9b4418c9cbf0f0c44e7bbef3c838ce2070de598161ed30fd1feaf709ff3",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-identity-bytes/left.docx",
+          "sha256": "bd14c9b4418c9cbf0f0c44e7bbef3c838ce2070de598161ed30fd1feaf709ff3",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-identity-bytes/left.docx",
+          "sha256": "bd14c9b4418c9cbf0f0c44e7bbef3c838ce2070de598161ed30fd1feaf709ff3"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-identity-bytes/left.docx",
+          "sha256": "bd14c9b4418c9cbf0f0c44e7bbef3c838ce2070de598161ed30fd1feaf709ff3"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-identity-bytes/left.docx",
+        "sha256": "bd14c9b4418c9cbf0f0c44e7bbef3c838ce2070de598161ed30fd1feaf709ff3"
+      },
+      "assertions": [
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "redline",
+          "max": 0
+        },
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Survey register for the north ridge.",
+            "The crew compares the notes and keeps the route open.",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    },
+    {
+      "id": "redline-identity-reserialized",
+      "version": 1,
+      "category": "identity",
+      "kind": "identity",
+      "issue": null,
+      "description": "Equal text, styles and structure serialized with different run splits and revision-save ids",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-identity-reserialized/left.docx",
+          "sha256": "bd14c9b4418c9cbf0f0c44e7bbef3c838ce2070de598161ed30fd1feaf709ff3",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-identity-reserialized/right.docx",
+          "sha256": "d27d87154f0cb0876dc1d3aaf7808f7820d1d57457ef6ac371d88c0720b2441a",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-identity-reserialized/right.docx",
+          "sha256": "d27d87154f0cb0876dc1d3aaf7808f7820d1d57457ef6ac371d88c0720b2441a"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-identity-reserialized/left.docx",
+          "sha256": "bd14c9b4418c9cbf0f0c44e7bbef3c838ce2070de598161ed30fd1feaf709ff3"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-identity-reserialized/left.docx",
+        "sha256": "bd14c9b4418c9cbf0f0c44e7bbef3c838ce2070de598161ed30fd1feaf709ff3"
+      },
+      "assertions": [
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "redline",
+          "max": 0
+        },
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Survey register for the north ridge.",
+            "The crew compares the notes and keeps the route open.",
+            "Closing line remains unchanged."
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "ece5541a51b0799d1e56a96c3eec92aa8819af11e426d75f9649c8a42b108ee0"
+      }
+    }
+  ]
+}

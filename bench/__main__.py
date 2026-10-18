@@ -36,10 +36,32 @@ def main():
     compare.add_argument('previous')
     compare.add_argument('current')
     compare.add_argument('--tolerance', type=float, required=True, help='Explicit calibrated tolerance, in the units of each metric')
+    red = sub.add_parser('redline', help='Comparison (redline) track; see docs/REDLINE.md')
+    reds = red.add_subparsers(dest='operation', required=True)
+    reds.add_parser('validate')
+    rbuild = reds.add_parser('build-docxodus')
+    rbuild.add_argument('--source', required=True)
+    rbuild.add_argument('--commit', required=True)
+    rbuild.add_argument('--out', required=True)
+    rvalidator = reds.add_parser('build-validator')
+    rvalidator.add_argument('--out', required=True)
+    rrun = reds.add_parser('run')
+    rrun.add_argument('--adapter', choices=['docxodus', 'authored'], required=True)
+    rrun.add_argument('--candidate', required=True, help='Exact source commit for Docxodus; explicit identity for the authored calibration')
+    rrun.add_argument('--build', help='Directory written by `redline build-docxodus`')
+    rrun.add_argument('--validator', help='Directory written by `redline build-validator`; without it the run is incomplete')
+    rrun.add_argument('--case', action='append', help='Restrict to one case (diagnostic; never a complete run unless every case is listed)')
+    rrun.add_argument('--out', required=True)
+    rrun.add_argument('--gate', choices=['report', 'pass'], default='report')
+    rcompare = reds.add_parser('compare')
+    rcompare.add_argument('previous')
+    rcompare.add_argument('current')
     record = sub.add_parser('record-propose')
     record.add_argument('result')
     record.add_argument('--out', required=True)
     args = parser.parse_args()
+    if args.command == 'redline':
+        return redline_command(args)
     registry = validate_registry()
     if args.command == 'validate':
         print(f'Validated {len(registry["cases"])} authored cases in {registry["suite"]["id"]}')
@@ -77,6 +99,29 @@ def main():
             raise ValueError('Record proposal destination already exists')
         write_json(target, {'schema': 1, 'status': 'proposal-requires-evidence-review', 'result': result})
         print('Prepared a proposal; no existing record was changed')
+    return 0
+
+
+def redline_command(args):
+    from . import redline, redline_build
+    if args.operation == 'validate':
+        registry = redline.validate_registry()
+        print(f'Validated {len(registry["cases"])} authored redline cases in {registry["suite"]["id"]}')
+    elif args.operation == 'build-docxodus':
+        redline_build.build_docxodus(args.source, args.commit, args.out)
+    elif args.operation == 'build-validator':
+        redline_build.build_validator(args.out)
+    elif args.operation == 'run':
+        result = redline.run(args.out, args.adapter, args.candidate, args.build, args.validator, args.case)
+        print(result['summary'])
+        if not result['summary']['complete']:
+            return 2
+        if args.gate == 'pass' and result['summary']['passRate'] != 1:
+            return 1
+    else:
+        findings = redline.compare(read_json(args.previous), read_json(args.current))
+        print('\n'.join(findings) or 'No regression')
+        return int(bool(findings))
     return 0
 
 

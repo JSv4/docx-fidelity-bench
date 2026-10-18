@@ -2,6 +2,8 @@
 
 This benchmark compares the PDF delivered by a renderer with an immutable reference PDF. It reports a layout similarity score, mandatory correctness checks, and measured coverage together. A high layout score alone does not prove correct text, links, color, reading order, or every DOCX feature. The first track uses LibreOffice; Word scores require separately registered Word captures.
 
+The comparison (redline) track has its own contract: authored document pairs, accept/reject round trips through two independent engines, validity, and declared structural assertions. It is described in `docs/REDLINE.md` and is not part of the PDF suite score.
+
 ## Page measurements
 
 Rasterize both PDFs with the same Poppler executable at 96 DPI using their physical CropBox. Compare pixels at their original positions. Do not align, resize, warp, remove content, or mask regions. Poppler sizes each raster from its own fractional page extent, so two pages whose physical boxes agree within the 0.25-point geometry tolerance can differ by one pixel. When each raster dimension differs by at most one pixel, place both rasters unchanged at their CropBox top-left origin on a white canvas of the larger width and height; the added edge is blank, and any ink there is still measured. Rasters that differ by more than one pixel in either dimension fail a mandatory check and score zero. The physical geometry check applies independently.
