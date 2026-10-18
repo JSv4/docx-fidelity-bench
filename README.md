@@ -182,3 +182,5 @@ verify exact comment definitions and anchors. All preceding packages remain byte
 `core-v39` adds a keep-with-next heading followed by a splittable long paragraph and a keep-lines
 control (#1182). Marker assertions require the heading and first body line together on the original
 page for the reproducer, on the next page for the control, and retain every line of both documents.
+
+`core-v40` adds an original exact-height header row whose hidden paragraphs cross the header band, plus a wider-band control for [Docxodus #1200](https://github.com/JSv4/Docxodus/issues/1200). The visible inventory is exact; bounded `clippedTokens` allow whole hidden words or their absence while rejecting partial glyph fragments. Metric contract 3 records this explicit rule. All 180 prior PDF inputs remain byte-identical. Full reference registration and scoring are pending.

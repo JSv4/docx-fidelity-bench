@@ -117,6 +117,36 @@ def validate_registry(registry=None):
                     raise ValueError('Stale preparation source digest')
         if not case['tokens'] or any(not isinstance(n, int) or n < 1 for n in case['tokens'].values()):
             raise ValueError('Invalid token inventory')
+        if 'clippedTokens' in case:
+            optional = case['clippedTokens']
+            if (not isinstance(optional, dict) or not optional or set(optional) & set(case['tokens']) or
+                    any(not isinstance(word, str) or len(word.split()) != 1 or type(count) is not int or count < 1
+                        for word, count in optional.items())):
+                raise ValueError('Invalid clipped token inventory')
+            from collections import Counter
+            w = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
+            all_words, row_words = Counter(), Counter()
+            with ZipFile(contained(ROOT, case['input'])) as archive:
+                for name in archive.namelist():
+                    if not name.startswith('word/') or not name.endswith('.xml'): continue
+                    xml = ET.fromstring(archive.read(name))
+                    all_words.update(' '.join(t.text or '' for t in xml.iter(w + 't')).split())
+                    for row in xml.iter(w + 'tr'):
+                        height = row.find(w + 'trPr/' + w + 'trHeight')
+                        if height is not None and height.get(w + 'hRule') == 'exact':
+                            for cell in row.findall(w + 'tc'):
+                                offset = 0
+                                for paragraph in cell.findall(w + 'p'):
+                                    spacing = paragraph.find(w + 'pPr/' + w + 'spacing')
+                                    if (spacing is None or spacing.get(w + 'lineRule') != 'exact' or
+                                            not spacing.get(w + 'line', '').isdigit() or
+                                            spacing.get(w + 'before') != '0' or spacing.get(w + 'after') != '0'):
+                                        break
+                                    if offset >= int(height.get(w + 'val', '0')):
+                                        row_words.update(' '.join(t.text or '' for t in paragraph.iter(w + 't')).split())
+                                    offset += int(spacing.get(w + 'line'))
+            if any(all_words[word] != count or row_words[word] != count for word, count in optional.items()):
+                raise ValueError('Clipped tokens must occur only below an exact row height, with authored exact line spacing and counts')
         validate_render_profile(case['profile'])
         validate_pdf_text_policy(case)
         if not isinstance(case.get('htmlAssertions', []), list):

@@ -328,6 +328,13 @@ class PdfContract(unittest.TestCase):
     def test_duplicate_text_fails_inventory(self):
         self.assertFalse(pdf.inventory_check({'tokens': {'Body': 2}}, {'tokens': {'Body': 1}}))
 
+    def test_clipped_words_may_be_whole_or_absent_but_never_fragmented_or_duplicated(self):
+        case = {'tokens': {'Body': 1}, 'clippedTokens': {'HiddenCedar': 1, 'HiddenBirch': 1}}
+        for extra in [{}, {'HiddenCedar': 1}, {'HiddenBirch': 1}, {'HiddenCedar': 1, 'HiddenBirch': 1}]:
+            self.assertTrue(pdf.inventory_check({'tokens': {'Body': 1, **extra}}, case))
+        for actual in [{'Body': 1, 'H': 1}, {'Body': 1, 'HiddenCedar': 2}, {'HiddenBirch': 1}, {'Body': 2}]:
+            self.assertFalse(pdf.inventory_check({'tokens': actual}, case))
+
     def test_wrong_font_fails(self):
         self.assertFalse(pdf.font_check({'fonts': ['OtherSerif']}, ['Liberation Serif']))
 
@@ -336,8 +343,18 @@ class PdfContract(unittest.TestCase):
 
 
 class RegistryContract(unittest.TestCase):
+    def test_clipped_inventory_cannot_exempt_visible_or_missing_source_text(self):
+        registry = common.read_json(common.ROOT / 'fixtures/manifest.json')
+        common.validate_registry(registry)
+        for optional in [{}, {'HdrBirch': True}, {'HdrBirch': 2}, {'Missing': 1}, {'Hdr Alder': 1},
+                         {'BodyWillow': 1}, {'HdrAlder': 1}]:
+            with self.subTest(optional=optional):
+                edited = copy.deepcopy(registry)
+                edited['cases'][-1]['clippedTokens'] = optional
+                with self.assertRaises(ValueError): common.validate_registry(edited)
+
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 180)
+        self.assertEqual(len(common.validate_registry()['cases']), 182)
 
     def test_agreement_font_variant_changes_only_the_declared_family(self):
         from zipfile import ZipFile
@@ -512,7 +529,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v39')
+        self.assertEqual(registry['suite']['id'], 'core-v40')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET

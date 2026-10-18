@@ -128,7 +128,9 @@ def font_check(info, families):
 
 
 def inventory_check(info, case):
-    return info['tokens'] == case['tokens']
+    optional = case.get('clippedTokens', {})
+    return ({word: count for word, count in info['tokens'].items() if word not in optional} == case['tokens']
+            and all(0 <= info['tokens'].get(word, 0) <= count for word, count in optional.items()))
 
 
 def marker(info, text, occurrence=1):
@@ -167,6 +169,10 @@ def reference_failures(case, info, track='libreoffice'):
 
 def correctness(case, reference, candidate):
     checks = [{'name': 'page-count', 'passed': len(reference['geometry']) == len(candidate['geometry'])}, {'name': 'expected-visible-tokens', 'passed': inventory_check(candidate, case), 'missing': dict(Counter(case['tokens']) - Counter(candidate['tokens'])), 'extra': dict(Counter(candidate['tokens']) - Counter(case['tokens'])), 'normalizedRaw': dict(Counter(w['raw'] for w in candidate['words'] if 'raw' in w))}, {'name': 'declared-font-families', 'passed': font_check(candidate, case['fonts']), 'observed': candidate['fonts']}]
+    if case.get('clippedTokens'):
+        checks[1]['clippedTokens'] = case['clippedTokens']
+        checks[1]['observedClippedTokens'] = {word: candidate['tokens'].get(word, 0) for word in case['clippedTokens']}
+        checks[1]['extra'] = dict(Counter(candidate['tokens']) - Counter(case['tokens']) - Counter(case['clippedTokens']))
     if case.get('pdfTextNormalization'):
         checks[1]['decorativeWords'] = candidate.get('decorativeWords', [])
         checks.append({'name': 'declared-pdf-text-normalization',

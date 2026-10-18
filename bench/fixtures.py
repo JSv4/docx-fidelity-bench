@@ -1205,7 +1205,21 @@ def generate():
                         {'type': 'same-page', 'version': 1, 'markers': ['CedarHeading', 'BirchLine01']},
                         {'type': 'marker-region', 'version': 2, 'marker': 'BirchLine20', 'occurrence': 1,
                          'page': 2, 'rect': [72, 60, 540, 720]}])
-    registry = {'schema': 1, 'suite': {'id': 'core-v39', 'version': 39, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # The row hides Birch and Cedar wholly. A PDF may omit them or retain complete words, but
+    # letters cut out by the enclosing header band are not valid optional tokens.
+    for control in (False, True):
+        names = ['HdrAlder', 'HdrBirch', 'HdrCedar']
+        header_table = exact_table([exact_row(300, [''.join(para(t, exact(300)) for t in names),
+                                            para('HdrValue', exact(300))])])
+        sect = section().replace('<w:sectPr>', '<w:sectPr><w:headerReference w:type="default" r:id="rStory"/>')
+        if control: sect = sect.replace('w:top="1440"', 'w:top="2160"')
+        add('tables-exact-row-header-' + ('wide-control' if control else 'band-clip'), 'tables',
+            'Exact 15pt header row with two hidden paragraphs under a ' + ('72pt control' if control else '36pt clipping')
+            + ' header band (Docxodus #1200)', ['HdrAlder', 'HdrValue', 'BodyWillow'],
+            para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
+            assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
+        cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
+    registry = {'schema': 1, 'suite': {'id': 'core-v40', 'version': 40, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
