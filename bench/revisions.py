@@ -116,13 +116,60 @@ def _marked(element, policy):
     return holder is not None and any(child.tag in WRAPPERS and _removes(child, policy) for child in holder)
 
 
-def _resolve_content(element, policy):
+def _removed_custom_xml(root, policy):
+    """Find envelopes whose opening and closing tags are both removed by markup ranges.
+
+    ECMA-376 §17.13.5.5/7/9/11 ranges apply to XML tags, independently of their payload.
+    Event positions allow one enclosing range or separate ranges crossing each boundary.
+    Partial tag removal needs tree reconstruction that this engine does not implement.
+    """
+    positions, starts, ends = {}, {}, {}
+    clock = 0
+
+    def visit(element):
+        nonlocal clock
+        opening = clock
+        clock += 1
+        tag = element.tag
+        if tag in RANGE_REVISIONS and tag.startswith(w('customXml')):
+            start = tag.endswith('Start')
+            key = (tag[:-5] if start else tag[:-3], element.get(w('id')))
+            records = starts if start else ends
+            if key[1] is None or (start and key in records):
+                raise ValueError('Invalid custom-XML revision range identity')
+            records.setdefault(key, (opening, element))
+        for child in element:
+            visit(child)
+        positions[element] = (opening, clock)
+        clock += 1
+
+    visit(root)
+    removed_ranges = []
+    for key, (opening, record) in starts.items():
+        if key not in ends or ends[key][0] <= opening:
+            raise ValueError('Unmatched custom-XML revision range')
+        kind = key[0].removeprefix(w('customXml')).removesuffix('Range')
+        if w(kind[0].lower() + kind[1:]) in REMOVED[policy(record)]:
+            removed_ranges.append((opening, ends[key][0]))
+    removed = set()
+    for element, boundaries in positions.items():
+        if element.tag != w('customXml'):
+            continue
+        covered = [any(start < boundary < end for start, end in removed_ranges) for boundary in boundaries]
+        if any(covered) and not all(covered):
+            raise ValueError('Partial custom-XML tag removal is unsupported')
+        if all(covered):
+            removed.add(element)
+    return removed
+
+
+def _resolve_content(element, policy, removed_xml):
     kept = []
     for child in list(element):
         tag = child.tag
         if tag in WRAPPERS and element.tag not in MARKER_PARENTS:
             if not _removes(child, policy):
-                _resolve_content(child, policy)
+                _resolve_content(child, policy, removed_xml)
                 kept.extend(list(child))
             continue
         if tag in RANGE_REVISIONS:
@@ -140,7 +187,10 @@ def _resolve_content(element, policy):
             mark = child.find(w('pPr') + '/' + w('rPr'))
             if mark is not None and any(item.tag in WRAPPERS and _removes(item, policy) for item in mark):
                 child.set(MARK_REMOVED, '1')
-        _resolve_content(child, policy)
+        _resolve_content(child, policy, removed_xml)
+        if child in removed_xml:
+            kept.extend(c for c in child if c.tag != w('customXmlPr'))
+            continue
         if tag in MARKER_PARENTS or tag == w('tcPr'):
             for item in [c for c in child if c.tag in WRAPPERS or c.tag in CELL_MARKERS]:
                 child.remove(item)
@@ -233,7 +283,7 @@ def resolve(parts, mode, author=None):
     resolved = {}
     for name, root in parts.items():
         tree = copy.deepcopy(root)
-        _resolve_content(tree, policy)
+        _resolve_content(tree, policy, _removed_custom_xml(tree, policy))
         _resolve_properties(tree, policy)
         body = tree.find(w('body'))
         _merge_paragraphs(tree, tree, body)
