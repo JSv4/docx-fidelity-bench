@@ -51,7 +51,7 @@ No other case score decreased.
 
 ## Remaining differences (not mandatory failures)
 
-- **`paragraph-contract` 92.07, unchanged (#1124).** Docxodus's justified lines end at 539.99pt. The LibreOffice reference's lines end 0.64–1.29pt short of the 540pt margin. Glyph advances agree. This needs a Word capture to adjudicate (#33); no LibreOffice-specific change was made.
+- **`paragraph-contract` 92.07, unchanged (#1124).** Docxodus's justified lines end at 539.99pt. The LibreOffice reference's lines end 0.64–1.29pt short of the 540pt margin. Glyph advances agree closely. No LibreOffice-specific change was made. The later [Word capture and Times New Roman variant](paragraph-contract-word.md) retain this original baseline; Word's capture of the Liberation Serif input is ineligible because it substitutes the font.
 - **Long notes about 90.5.** The note lines match the reference positions within 0.5pt. What remains is the continuation separator's style: a full-width light rule versus LibreOffice's 2-inch black rule.
 - **Dashed border cards about 95.3–95.6.** LibreOffice paints a fixed 8pt dash with a 2.5pt gap. Docxodus keeps its CSS dash rhythm. Word's pattern is not captured.
 

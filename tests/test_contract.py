@@ -337,7 +337,27 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 149)
+        self.assertEqual(len(common.validate_registry()['cases']), 150)
+
+    def test_agreement_font_variant_changes_only_the_declared_family(self):
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        original, word = [records[c] for c in ('paragraph-contract', 'paragraph-contract-times-new-roman')]
+        self.assertEqual(original['sha256'], '6b2926adc3bec2bb319d74097a834bace936d207f833791710ab3ce55b955c6b')
+        self.assertEqual(original['fonts'], ['Liberation Serif'])
+        self.assertEqual(word['fonts'], ['Times New Roman'])
+        for key in ('tokens', 'profile', 'assertions'):
+            self.assertEqual(original[key], word[key])
+        with ZipFile(common.ROOT / original['input']) as a, ZipFile(common.ROOT / word['input']) as b:
+            self.assertEqual(a.namelist(), b.namelist())
+            for name in a.namelist():
+                expected = a.read(name)
+                if name == 'word/styles.xml':
+                    expected = expected.replace(b'Liberation Serif', b'Times New Roman')
+                self.assertEqual(expected, b.read(name), name)
+        self.assertTrue(pdf.font_check({'fonts': ['TimesNewRomanPSMT', 'TimesNewRomanPS-BoldMT']}, word['fonts']))
+        self.assertFalse(pdf.font_check({'fonts': ['LiberationSerif']}, word['fonts']))
+        self.assertFalse(pdf.font_check({'fonts': ['TimesNewRomanPSMT']}, original['fonts']))
 
     def test_return_link_pair_keeps_a_real_comment_reference_and_body_bookmark_control(self):
         import xml.etree.ElementTree as ET
@@ -492,7 +512,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v33')
+        self.assertEqual(registry['suite']['id'], 'core-v34')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
