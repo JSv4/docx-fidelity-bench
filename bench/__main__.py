@@ -77,8 +77,13 @@ def main():
         adapter = args.adapter if args.adapter != 'docxodus' else ['node', str(ROOT / 'adapters/docxodus.mjs')]
         result = runner.run(args.out, args.reference, adapter, args.candidate)
         print(result['summary'])
-        if not result['summary']['complete']:
+        if 'htmlSummary' in result:
+            print('Delivered HTML:', result['htmlSummary'])
+        html_summary = result.get('htmlSummary', {'complete': True, 'passed': 0, 'required': 0})
+        if not result['summary']['complete'] or not html_summary['complete']:
             return 2
+        if args.gate in {'mandatory', 'close'} and html_summary['passed'] != html_summary['required']:
+            return 1
         if args.gate == 'mandatory' and result['summary']['mandatoryPassRate'] != 1:
             return 1
         if args.gate == 'close' and result['summary']['closeMatchRate'] != 1:
@@ -90,7 +95,7 @@ def main():
     else:
         result = read_json(args.result)
         runner.validate_result(result)
-        if not result['summary']['complete'] or result['contractDigest'] != identity(result['contract']):
+        if not result['summary']['complete'] or not result.get('htmlSummary', {'complete': True})['complete'] or result['contractDigest'] != identity(result['contract']):
             raise ValueError('Incomplete or corrupt runs cannot propose a record')
         if result['contract']['suiteDigest'] != identity(registry):
             raise ValueError('Stale fixture or suite cannot propose a record')

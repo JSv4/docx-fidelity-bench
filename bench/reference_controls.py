@@ -216,6 +216,8 @@ def source(case, registry, root):
     for key in ('category', 'fonts', 'profile', 'tokens', 'assertions'):
         if case[key] != control[key]:
             raise ValueError('Equivalent control changes ' + key + ': ' + case['id'])
+    if case.get('htmlAssertions', []) != control.get('htmlAssertions', []):
+        raise ValueError('Equivalent control changes delivered HTML assertions: ' + case['id'])
     paths = [contained(root, c['input']) for c in (case, control)]
     if any(digest(path) != record['sha256'] for path, record in zip(paths, (case, control))):
         raise ValueError('Equivalent control input digest changed: ' + case['id'])

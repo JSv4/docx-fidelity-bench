@@ -66,6 +66,13 @@ def validate_registry(registry=None):
             raise ValueError('Stale generator digest: ' + case['id'])
         if not case['tokens'] or any(not isinstance(n, int) or n < 1 for n in case['tokens'].values()):
             raise ValueError('Invalid token inventory')
+        if not isinstance(case.get('htmlAssertions', []), list):
+            raise ValueError('Delivered HTML assertions must be a list')
+        for assertion in case.get('htmlAssertions', []):
+            if (not isinstance(assertion, dict) or set(assertion) != {'type', 'version', 'marker', 'attribute', 'equals'} or
+                    assertion['type'] != 'marker-attribute' or type(assertion['version']) is not int or assertion['version'] != 1 or
+                    any(not isinstance(assertion[k], str) or not assertion[k] for k in ('marker', 'attribute', 'equals'))):
+                raise ValueError('Unknown or invalid delivered HTML assertion')
         for assertion in case['assertions']:
             versions = {'marker-region': {1, 2}, 'same-page': {1}, 'marker-reference-position': {1}}
             if assertion.get('version') not in versions.get(assertion.get('type'), set()):
