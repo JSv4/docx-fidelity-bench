@@ -337,7 +337,42 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 139)
+        self.assertEqual(len(common.validate_registry()['cases']), 141)
+
+    def test_return_link_pair_keeps_a_real_comment_reference_and_body_bookmark_control(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        note, control = [records[c] for c in ('comments-paginated-return-link', 'comments-body-bookmark-return-control')]
+        w = '{' + fixtures.W + '}'
+        with ZipFile(common.ROOT / note['input']) as first, ZipFile(common.ROOT / control['input']) as second:
+            root, plain = [ET.fromstring(z.read('word/document.xml')) for z in (first, second)]
+            reference = root.find('.//' + w + 'commentReference')
+            self.assertEqual(reference.get(w + 'id'), '4')
+            comment = ET.fromstring(first.read('word/comments.xml')).find(w + 'comment')
+            self.assertEqual(comment.get(w + 'id'), reference.get(w + 'id'))
+            self.assertEqual(comment.get(w + 'author'), '')
+            self.assertIsNone(comment.get(w + 'date'))
+            self.assertNotIn('word/comments.xml', second.namelist())
+            for parent in root.iter():
+                for child in list(parent):
+                    if child.tag in {w + 'commentRangeStart', w + 'commentRangeEnd'} or (
+                            child.tag == w + 'r' and child.find(w + 'commentReference') is not None):
+                        parent.remove(child)
+            self.assertEqual(ET.tostring(root), ET.tostring(plain))
+            bookmark = plain.find('.//' + w + 'bookmarkStart').get(w + 'name')
+            self.assertEqual(bookmark, 'JuniperDestination')
+            self.assertEqual(plain.find('.//' + w + 'hyperlink').get(w + 'anchor'), bookmark)
+            self.assertEqual(first.read('word/styles.xml'), second.read('word/styles.xml'))
+        self.assertEqual(note['tokens'], control['tokens'])
+        self.assertEqual(note['profile'], {'review': 'final', 'comments': 'hidden'})
+        self.assertEqual(note['htmlProfile'], {'review': 'final', 'comments': 'margin'})
+        self.assertEqual(note['htmlProfile'], control['htmlProfile'])
+        self.assertEqual(note['htmlAssertions'], [
+            {'type': 'marker-attribute', 'version': 1, 'marker': '↩', 'attribute': 'href', 'equals': '#comment-ref-4'},
+            {'type': 'marker-attribute', 'version': 1, 'marker': '[4]', 'attribute': 'id', 'equals': 'comment-ref-4'}])
+        self.assertEqual(control['htmlAssertions'], [
+            {'type': 'marker-attribute', 'version': 1, 'marker': 'JuniperBodyReturn', 'attribute': 'href', 'equals': '#JuniperDestination'}])
 
     def test_comment_date_pair_joins_last_paragraph_to_durable_utc_record(self):
         import xml.etree.ElementTree as ET
@@ -457,7 +492,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v29')
+        self.assertEqual(registry['suite']['id'], 'core-v30')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
