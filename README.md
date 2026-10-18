@@ -2,7 +2,9 @@
 
 An independent MIT benchmark of delivered PDF rendering and of document comparison. The harness and every input document are authored in this repository. It measures layout, visible content, physical pages, fonts, and declared feature assertions. It produces portable HTML evidence and JSON measurements.
 
-The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v39`, with report-only renderer CI. A separate comparison track, `redline-v2`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
+The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v42`, with report-only renderer CI. A separate comparison track, `redline-v2`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
+
+`core-v42` adds twelve PDF views for reused comment IDs and independent reviewer additions (#1210), including distinct-ID controls. Six independent redline cases verify exact comment anchors and definitions.
 
 `core-v36` adds six PDF views for Docxodus #1190: table-boundary comparison, row-boundary consolidation,
 and a plain-paragraph text control, each in final and original views. Candidates perform the operation

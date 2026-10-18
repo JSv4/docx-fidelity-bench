@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
-from .fixtures import custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases, consolidated_field_cases, complex_field as field
+from .fixtures import custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases, consolidated_field_cases, comment_identity_cases, complex_field as field
 
 ROOT = Path(__file__).resolve().parents[1]
 W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
@@ -156,6 +156,10 @@ def package(path, body, styles=None, header=None, comments=None, footnotes=None,
 # declared-ineligible comparison is not applied; the run fails as unmeasured if the calibration
 # disagrees with this table in either direction.
 LIBREOFFICE_INELIGIBLE = {
+    **{'redline-comment-identity-' + kind:
+       (('accepted', 'rejected') if kind == 'replaced-id' else ('rejected',),
+        'LibreOffice retains comment definitions after their insertion/deletion markers are resolved; independent markup and schema checks remain required')
+       for kind in ('reused-id', 'replaced-id', 'distinct-control', 'reviewer-collision', 'reviewer-identical', 'reviewer-control')},
     **{'redline-duplicate-comment-' + wrapper + suffix: (('accepted', 'rejected'),
        'LibreOffice retains both revision-scoped comments and an empty paragraph after resolving the replaced wrapper copies')
        for wrapper in ('sdt', 'customxml') for suffix in ('', '-control')},
@@ -235,6 +239,7 @@ def generate():
     comment_views(corpus)
     duplicate_comments(corpus)
     consolidated_fields(corpus)
+    comment_identities(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -765,6 +770,38 @@ def consolidated_fields(corpus):
         corpus.add(name, 'fields', 'control' if case['control'] else 'reproducer', 'JSv4/Docxodus#1206',
                    case['description'] + ': ' + case['kind'], 'consolidate', inputs, expected, authored,
                    [untracked('Alder', 'tail')])
+
+
+def comment_identities(corpus):
+    for case in comment_identity_cases():
+        name = 'redline-' + case['id']
+        def file(role, document):
+            return corpus.file(name, role, body=document['body'], comments=document['comments_xml'])
+        inputs = [file(str(i), document) for i, document in enumerate(case['sources'])]
+        expected = {view: file(view, document) for view, document in zip(('accepted', 'rejected'), case['expected'])}
+        rev = Revisions()
+        def annotated(content, identifier, mark=lambda value: value):
+            return mark(comment_view_mark('RangeStart', identifier)) + content + mark(comment_view_mark('RangeEnd', identifier)) + mark(comment_view_mark('Reference', identifier))
+        if case['operation'] == 'compare':
+            opening = annotated(t('AlderFirst'), 2, rev.ins)
+            previous = annotated(t('BirchSecond'), 0)
+            if case['kind'] == 'replaced-id':
+                previous = annotated(t('BirchSecond'), 0, rev.dele)
+            body = p(opening + t(' ') + previous + t(' tail') + rev.ins(t(' revised')))
+            notes = comment_view_note(0, 'Old cedar note') + comment_view_note(2, 'New willow note')
+            roles = [dict(item, role=role) for item, role in zip(inputs, ('left', 'right'))]
+        else:
+            body, notes = '', ''
+            for identifier, word in enumerate(('Alder', 'Birch')):
+                author = f'Reviewer{identifier + 1}'
+                body += p(annotated(t(word) + rev.ins(t(' revised'), author), identifier,
+                                    lambda value: rev.ins(value, author)))
+                notes += comment_view_note(identifier, 'Check clause' if case['kind'] == 'reviewer-identical' else 'Check ' + word.lower())
+            roles = [dict(inputs[0], role='base')] + [dict(item, role='reviewer', author=f'Reviewer{i}')
+                                                     for i, item in enumerate(inputs[1:], 1)]
+        authored = corpus.file(name, 'authored-redline', body=body, comments=notes)
+        corpus.add(name, 'comments', 'control' if case['control'] else 'reproducer', 'JSv4/Docxodus#1210',
+                   case['description'] + ': ' + case['kind'], case['operation'], roles, expected, authored)
 
 
 def identity(corpus):

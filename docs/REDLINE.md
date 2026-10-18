@@ -102,3 +102,5 @@ contain one reference. Controls replace the same wrappers with valid single refe
 redlines carry one comment per view. LibreOffice retains both comments and an empty paragraph in each
 resolved view (including the controls), so those accept/reject checks are declared ineligible after
 capturing the discrepancy. Independent marker, definition and schema checks remain mandatory.
+
+The #1210 cases distinguish package-local comment IDs from definition identity: an old note retained under a new ID, a replaced note, independent reviewer additions with different or identical text, and distinct-ID controls. Exact accepted/rejected anchors and definitions remain mandatory.

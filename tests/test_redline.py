@@ -47,9 +47,9 @@ class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
         self.assertEqual(registry['suite']['id'], 'redline-v2')
-        self.assertEqual(len(registry['cases']), 58)
+        self.assertEqual(len(registry['cases']), 64)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}

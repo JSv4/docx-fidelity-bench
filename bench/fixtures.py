@@ -43,9 +43,9 @@ def custom_xml_link(content, wrapped):
 
 
 
-def comment_view_note(identifier=11):
+def comment_view_note(identifier=11, text='Review the cedar clause.'):
     return (f'<w:comment w:id="{identifier}" w:author="Cedar" w:initials="C" w:date="2026-01-01T00:00:00Z">'
-            + para('Review the cedar clause.') + '</w:comment>')
+            + para(text) + '</w:comment>')
 
 
 def comment_view_mark(kind, identifier=11):
@@ -119,6 +119,42 @@ def complex_field(instruction, result_runs, begin=True, end=True):
     if end:
         out += '<w:r><w:fldChar w:fldCharType="end"/></w:r>'
     return out
+
+
+def comment_identity_cases():
+    """Package-local ids cannot identify different notes or independent reviewer additions."""
+    def marked(text, identifier):
+        content = run(text)
+        return content if identifier is None else (comment_view_mark('RangeStart', identifier) + content
+                + comment_view_mark('RangeEnd', identifier) + comment_view_mark('Reference', identifier))
+    cases = []
+    for kind in ('reused-id', 'replaced-id', 'distinct-control'):
+        def document(revised):
+            old = 1 if revised and kind != 'distinct-control' else 0
+            new = 2 if kind == 'distinct-control' else 0
+            keep = not revised or kind != 'replaced-id'
+            return {'body': para(runs=marked('AlderFirst', new if revised else None) + run(' ')
+                    + marked('BirchSecond', old if keep else None)
+                    + run(' tail revised' if revised else ' tail')),
+                    'comments_xml': (comment_view_note(old, 'Old cedar note') if keep else '')
+                        + (comment_view_note(new, 'New willow note') if revised else '')}
+        sources = [document(False), document(True)]
+        cases.append({'id': 'comment-identity-' + kind, 'kind': kind, 'operation': 'compare',
+                      'sources': sources, 'expected': [sources[1], sources[0]]})
+    for kind in ('reviewer-collision', 'reviewer-identical', 'reviewer-control'):
+        def document(first, second):
+            body, notes = '', ''
+            for index, (word, changed) in enumerate((('Alder', first), ('Birch', second))):
+                identifier = index if kind == 'reviewer-control' or (first and second) else 0
+                body += para(runs=marked(word + (' revised' if changed else ''), identifier if changed else None))
+                if changed:
+                    notes += comment_view_note(identifier, 'Check clause' if kind == 'reviewer-identical' else 'Check ' + word.lower())
+            return {'body': body, 'comments_xml': notes or None}
+        sources = [document(False, False), document(True, False), document(False, True)]
+        cases.append({'id': 'comment-identity-' + kind, 'kind': kind, 'operation': 'consolidate',
+                      'sources': sources, 'expected': [document(True, True), sources[0]]})
+    return [dict(case, issue=1210, control=case['kind'].endswith('control'),
+                 description='Comment definition identity across reused ids') for case in cases]
 
 
 def consolidated_field_cases():
@@ -1208,7 +1244,7 @@ def generate():
             cases[-1]['profile']['review'] = review
             cases[-1]['preparation'] = {'operation': operation, 'inputs': sources}
 
-    for case in comment_view_cases() + duplicate_comment_cases() + consolidated_field_cases():
+    for case in comment_view_cases() + duplicate_comment_cases() + consolidated_field_cases() + comment_identity_cases():
         sources = []
         for i, document in enumerate(case['sources']):
             path = ROOT / 'fixtures' / case.get('directory', 'comment-views') / (case['id'] + f'-{i}.docx')
@@ -1255,7 +1291,7 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v41', 'version': 41, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v42', 'version': 42, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
