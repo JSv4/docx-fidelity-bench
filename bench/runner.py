@@ -112,6 +112,10 @@ def run(output, reference, adapter, candidate):
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=False)
     contract = {'metric': metrics.CONTRACT, 'suiteDigest': identity(registry), 'referenceDigest': identity(bundle), 'environment': env['contract'], 'adapter': adapter if isinstance(adapter, str) else {'argv': adapter, 'sourceSha256': digest(ROOT / 'adapters/docxodus.mjs')}}
+    if any(c.get('preparation') for c in registry['cases']):
+        contract['preparationSources'] = {name: digest(ROOT / name) for name in
+            ['bench/adapters.py', 'bench/redline.py', 'bench/redline_build.py', 'bench/revisions.py',
+             'adapters/docxodus-redline/Program.cs', 'adapters/docxodus-redline/DocxBenchRedline.csproj']}
     pdf_policies = {c['id']: c['pdfTextNormalization'] for c in registry['cases'] if c.get('pdfTextNormalization')}
     if pdf_policies:
         contract.update(pdfTextNormalizations=pdf_policies, pdfTextInspectorVersion=pdf.PDF_TEXT_POLICY_VERSION,
@@ -153,6 +157,8 @@ def run(output, reference, adapter, candidate):
             if adapter == 'libreoffice-reference' and direct_bundle is not None:
                 render_case = next(c for c in registry['cases'] if c['id'] == entry['referenceSource']['caseId'])
             request = {'protocol': 1, 'input': str(contained(ROOT, render_case['input'])), 'inputSha256': render_case['sha256'], 'output': str(folder / 'candidate.pdf'), 'report': str(folder / 'production.json'), 'profile': case['profile'], 'fontDirectories': env['fontDirectories'], 'candidate': candidate, 'timeoutMs': 120000}
+            if case.get('preparation'):
+                request['preparation'] = case['preparation']
             if case['id'] in html_declarations:
                 request.update(htmlOutput=str(folder / 'candidate.html'), htmlReport=str(folder / 'html-production.json'))
                 if case.get('htmlProfile'): request['htmlProfile'] = case['htmlProfile']

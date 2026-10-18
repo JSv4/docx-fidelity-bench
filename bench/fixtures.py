@@ -987,7 +987,37 @@ def generate():
             'additionalCss': selector + ' {font-size:32px !important;line-height:1.5 !important;}'}
         cases[-1]['htmlAssertions'] = [{'type': 'marker-computed-style', 'version': 1,
             'marker': 'Fir', 'property': 'font-size', 'equals': '32px'}]
-    registry = {'schema': 1, 'suite': {'id': 'core-v31', 'version': 31, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # The reference is an independently authored composite. Candidates must build their own
+    # composite from the source pair, so rendering a pre-fixed package cannot mask a merge defect.
+    defaults = (f'<w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/>'
+                '<w:sz w:val="22"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+                '<w:spacing w:after="120" w:line="280" w:lineRule="exact"/></w:pPr></w:pPrDefault></w:docDefaults>')
+    paragraph_style = ('<w:style w:type="paragraph" w:styleId="Shared"><w:name w:val="Body blue"/>'
+                       '<w:rPr><w:color w:val="0000C0"/></w:rPr></w:style>')
+    def character_style(style_id):
+        return (f'<w:style w:type="character" w:styleId="{style_id}"><w:name w:val="Emphasis red"/>'
+                '<w:rPr><w:b/><w:color w:val="C00000"/><w:sz w:val="32"/></w:rPr></w:style>')
+    def style_part(styles):
+        return f'<w:styles xmlns:w="{W}">{defaults}{styles}</w:styles>'
+    first = para('AlderBuild The blue source.', '<w:pStyle w:val="Shared"/>')
+    for collision in [True, False]:
+        cid = 'builder-cross-type-style' if collision else 'builder-distinct-style-control'
+        incoming_id = 'Shared' if collision else 'Separate'
+        second = para(runs=run('BirchBuild The red source.', f'<w:rStyle w:val="{incoming_id}"/>'))
+        sources = []
+        for suffix, body, styles in [('first', first, paragraph_style), ('second', second, character_style(incoming_id))]:
+            path = ROOT / 'fixtures' / 'build' / (cid + '-' + suffix + '.docx')
+            package(path, body, styles_xml=style_part(styles))
+            sources.append({'path': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()})
+        expected_second = para(runs=run('BirchBuild The red source.', '<w:rStyle w:val="Separate"/>'))
+        add(cid, 'paragraphs',
+            'Build two sources whose paragraph and character styles share an ID (Docxodus #1186)' if collision else
+            'Build the same sources with distinct style IDs',
+            ['AlderBuild The blue source.', 'BirchBuild The red source.'], first + expected_second,
+            styles_xml=style_part(paragraph_style + character_style('Separate')),
+            assertions=[{'type': 'same-page', 'version': 1, 'markers': ['AlderBuild', 'BirchBuild']}])
+        cases[-1]['preparation'] = {'operation': 'build', 'inputs': sources}
+    registry = {'schema': 1, 'suite': {'id': 'core-v32', 'version': 32, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

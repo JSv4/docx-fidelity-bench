@@ -12,6 +12,20 @@ A known conversion or unsupported-feature failure returns `status: "failed"` and
 
 ## Redline adapters
 
+PDF cases may declare `preparation: {operation: "build", inputs: [{path, sha256}, ...]}`.
+Their ordinary `input` is an independently authored expected composite used for reference capture;
+it is never substituted for a candidate build. The harness invokes the existing native adapter's
+`build` operation, verifies its source-bound build and source digests, retains `candidate.docx`,
+then renders those bytes through the public WASM/PDF path with the remaining conversion deadline.
+The operation uses `DocumentBuilder.BuildDocument` with `KeepSections=false` for every source.
+The harness independently checks that the built package has unique style IDs; a duplicate is a
+measured preparation failure, even if a PDF renderer would tolerate the invalid package.
+Set `DOCXODUS_OPERATION_BUILD` to a directory produced by `bench redline build-docxodus` at the
+same candidate commit. Missing operation support is unmeasured. `libreoffice-reference` calibrates
+the authored composite's PDF only; it does not attest the document-building operation.
+Preparation source packages follow the same generation, rights, digest and external-resource
+checks as ordinary PDF inputs. Build identity and the produced package digest accompany each result.
+
 The redline track uses its own protocol version 1. The request carries `protocol`, `operation` (`compare`, `consolidate` or `reject`), `inputs` (absolute `path`, `sha256` and, for consolidation reviewers, `author`), a new `output` path and fixed `settings` (`author`, `date`). An `ok` response carries `status`, `outputSha256` and `engine` identity; `failed` and `unmeasured` carry a structured `error` with the phase that failed. The harness re-verifies the output digest and the unchanged inputs. `adapters/docxodus-redline` is the Docxodus implementation; it is compiled from a clean, exact-commit checkout by `bench redline build-docxodus`, and the harness checks that build record, not the adapter, before each case. See [the redline scoring contract](REDLINE.md).
 
 ## Optional delivered HTML evidence

@@ -15,18 +15,19 @@ def audit():
         if registry != regenerated:
             raise ValueError('Manifest is not generated from the declared original corpus source')
         for case in registry['cases']:
-            expected = Path(temp) / case['input']
-            actual = ROOT / case['input']
-            if actual.read_bytes() != expected.read_bytes():
-                raise ValueError('Fixture differs from its generator: ' + case['id'])
-            with ZipFile(actual) as archive:
-                for name in archive.namelist():
-                    if 'font' in name.lower() or name.startswith('customXml/'):
-                        raise ValueError('Unexpected embedded asset: ' + name)
-                    if name.endswith('.rels'):
-                        for relationship in ET.fromstring(archive.read(name)):
-                            if relationship.get('TargetMode') == 'External':
-                                raise ValueError('External document resource is not permitted')
+            paths = [case['input']] + [s['path'] for s in case.get('preparation', {}).get('inputs', [])]
+            for path in paths:
+                actual = ROOT / path
+                if actual.read_bytes() != (Path(temp) / path).read_bytes():
+                    raise ValueError('Fixture differs from its generator: ' + path)
+                with ZipFile(actual) as archive:
+                    for name in archive.namelist():
+                        if 'font' in name.lower() or name.startswith('customXml/'):
+                            raise ValueError('Unexpected embedded asset: ' + name)
+                        if name.endswith('.rels'):
+                            for relationship in ET.fromstring(archive.read(name)):
+                                if relationship.get('TargetMode') == 'External':
+                                    raise ValueError('External document resource is not permitted')
     redline_registry = redline.validate_registry()
     with tempfile.TemporaryDirectory() as temp, patch.object(redline_fixtures, 'ROOT', Path(temp)):
         if redline_fixtures.generate() != redline_registry:

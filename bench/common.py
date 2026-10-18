@@ -106,6 +106,14 @@ def validate_registry(registry=None):
             raise ValueError('Stale input digest: ' + case['id'])
         if digest(contained(ROOT, case['generator']['path'])) != case['generator']['sha256']:
             raise ValueError('Stale generator digest: ' + case['id'])
+        if 'preparation' in case:
+            preparation = case['preparation']
+            if (not isinstance(preparation, dict) or set(preparation) != {'operation', 'inputs'} or preparation['operation'] != 'build' or
+                    not isinstance(preparation['inputs'], list) or len(preparation['inputs']) < 2):
+                raise ValueError('Invalid document preparation')
+            for source in preparation['inputs']:
+                if not isinstance(source, dict) or set(source) != {'path', 'sha256'} or digest(contained(ROOT, source['path'])) != source['sha256']:
+                    raise ValueError('Stale preparation source digest')
         if not case['tokens'] or any(not isinstance(n, int) or n < 1 for n in case['tokens'].values()):
             raise ValueError('Invalid token inventory')
         validate_render_profile(case['profile'])
