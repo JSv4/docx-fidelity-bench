@@ -155,7 +155,7 @@ def import_reference(registry, args):
             raise ValueError('Capture PDF mismatch: ' + case['id'])
         target = output / (case['id'] + '.pdf')
         shutil.copyfile(source, target)
-        info = pdf.inspect_pdf(target)
+        info = pdf.inspect_case_pdf(target, case)
         failures = pdf.reference_failures(case, info, metadata['track'])
         bundle['cases'][case['id']] = {'inputSha256': case['sha256'], 'pdf': target.name, 'pdfSha256': digest(target), 'eligible': not failures, 'ineligibleChecks': failures, 'inspection': info}
     write_json(output / 'bundle.json', bundle)

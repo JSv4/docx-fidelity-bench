@@ -2,6 +2,7 @@
 from __future__ import annotations
 import json
 import math
+import re
 import xml.etree.ElementTree as ET
 from collections import Counter
 from pathlib import Path
@@ -62,6 +63,31 @@ def geometries(document):
     if not result:
         raise ValueError('PDF contains no pages')
     return result
+
+
+PDF_TEXT_POLICIES = frozenset({'isolated-dot-leaders-v1'})
+PDF_TEXT_POLICY_VERSION = 1
+
+
+def normalize_text(info, policy):
+    """Keep raw words/geometry and omit declared isolated leader glyphs from token counts only.
+
+    Never split a word, infer coordinates, or change the raster. Glued leader/content words remain
+    ordinary words and fail the exact inventory. Source validation forbids authored ellipses under
+    this opt-in policy, so an authored punctuation word cannot disappear as decoration.
+    """
+    if policy is None:
+        return info
+    if not isinstance(policy, str) or policy not in PDF_TEXT_POLICIES:
+        raise ValueError('Unknown PDF text normalization policy')
+    decorative = [w for w in info['words'] if re.fullmatch(r'\.{3,}', w['text'])]
+    tokens = dict(Counter(w['text'] for w in info['words']
+                          if w['text'] and not re.fullmatch(r'\.{3,}', w['text'])))
+    return dict(info, tokens=tokens, decorativeWords=decorative, pdfTextNormalization=policy)
+
+
+def inspect_case_pdf(path, case):
+    return normalize_text(inspect_pdf(path), case.get('pdfTextNormalization'))
 
 
 def inspect_pdf(path):
@@ -141,6 +167,10 @@ def reference_failures(case, info, track='libreoffice'):
 
 def correctness(case, reference, candidate):
     checks = [{'name': 'page-count', 'passed': len(reference['geometry']) == len(candidate['geometry'])}, {'name': 'expected-visible-tokens', 'passed': inventory_check(candidate, case), 'missing': dict(Counter(case['tokens']) - Counter(candidate['tokens'])), 'extra': dict(Counter(candidate['tokens']) - Counter(case['tokens'])), 'normalizedRaw': dict(Counter(w['raw'] for w in candidate['words'] if 'raw' in w))}, {'name': 'declared-font-families', 'passed': font_check(candidate, case['fonts']), 'observed': candidate['fonts']}]
+    if case.get('pdfTextNormalization'):
+        checks[1]['decorativeWords'] = candidate.get('decorativeWords', [])
+        checks.append({'name': 'declared-pdf-text-normalization',
+                       'passed': candidate.get('pdfTextNormalization') == case['pdfTextNormalization']})
     for i in range(max(len(reference['geometry']), len(candidate['geometry']))):
         passed = i < len(reference['geometry']) and i < len(candidate['geometry'])
         if passed:

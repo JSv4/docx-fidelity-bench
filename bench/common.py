@@ -5,6 +5,8 @@ import os
 import subprocess
 import re
 import math
+import xml.etree.ElementTree as ET
+from zipfile import ZipFile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -50,6 +52,28 @@ def contained(root, relative):
     return path
 
 
+def validate_pdf_text_policy(case, root=None):
+    root = ROOT if root is None else root
+    if 'pdfTextNormalization' not in case:
+        return
+    if case['pdfTextNormalization'] != 'isolated-dot-leaders-v1':
+        raise ValueError('Unknown PDF text normalization policy')
+    w = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
+    has_dot_tab = False
+    has_tab_character = False
+    with ZipFile(contained(root, case['input'])) as archive:
+        for name in archive.namelist():
+            if not name.startswith('word/') or not name.endswith('.xml'):
+                continue
+            xml = ET.fromstring(archive.read(name))
+            if any('...' in (node.text or '') for node in xml.iter()):
+                raise ValueError('Decorative dot policy cannot suppress authored ellipses')
+            has_dot_tab |= any(node.get(w + 'leader') == 'dot' for node in xml.iter(w + 'tab'))
+            has_tab_character |= any(run.find(w + 'tab') is not None for run in xml.iter(w + 'r'))
+    if not has_dot_tab or not has_tab_character:
+        raise ValueError('Decorative dot policy requires an authored dot-leader tab')
+
+
 def validate_registry(registry=None):
     registry = registry or read_json(ROOT / 'fixtures/manifest.json')
     if registry.get('schema') != 1 or not isinstance(registry['suite'].get('version'), int) or registry['suite']['version'] < 1:
@@ -66,6 +90,7 @@ def validate_registry(registry=None):
             raise ValueError('Stale generator digest: ' + case['id'])
         if not case['tokens'] or any(not isinstance(n, int) or n < 1 for n in case['tokens'].values()):
             raise ValueError('Invalid token inventory')
+        validate_pdf_text_policy(case)
         if not isinstance(case.get('htmlAssertions', []), list):
             raise ValueError('Delivered HTML assertions must be a list')
         for assertion in case.get('htmlAssertions', []):

@@ -814,7 +814,30 @@ def generate():
         add(case_id, 'paragraphs', 'Numbered heading with ' + ('hidden paragraph mark (Docxodus #1223)' if hidden else 'explicitly visible paragraph mark control'),
             ['1.', heading, following], para(heading, props) + para(' ' + following), styles_xml=mark_styles, numbering_xml=mark_numbering,
             assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5} for marker in ('CedarHeading.', 'CedarBody')])
-    registry = {'schema': 1, 'suite': {'id': 'core-v24', 'version': 24, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Original manual labels with a hanging indent and two stops, plus a narrow left-tab control.
+    tab_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="24"/></w:rPr></w:rPrDefault></w:docDefaults></w:styles>'
+    tab_entries = [('3.2.', 'CedarTitle01 Sample inventory', '7'),
+                   ('3.12.', 'CedarTitle02 Storage schedule', '18'),
+                   ('3.13.', 'CedarTitle03 Map register', '104')]
+    for case_id, control in [('tabs-hanging-manual-labels', False), ('tabs-left-narrow-label-control', True)]:
+        entries = tab_entries[:1] if control else tab_entries
+        texts, body, markers = [], '', []
+        for label, title, page in entries:
+            stops = '<w:tab w:val="left" w:pos="1800"/>'
+            if not control: stops += '<w:tab w:val="right" w:leader="dot" w:pos="9000"/>'
+            props = '<w:tabs>' + stops + '</w:tabs><w:spacing w:after="0" w:line="240" w:lineRule="exact"/><w:ind w:left="1800" w:hanging="720"/>'
+            content = run(label) + '<w:r><w:tab/></w:r>' + run(title + ' ')
+            if not control: content += '<w:r><w:tab/></w:r>' + run(' ' + page)
+            body += para(props=props, runs=content)
+            texts += [label, title] + ([] if control else [page])
+            markers += [title.split()[0]] + ([] if control else [page])
+        add(case_id, 'paragraphs', 'Narrow manual label with a single left title tab control' if control else
+            'Three manual labels with hanging indentation, a left title stop and right page-number stop with dot leader (Docxodus #1224)',
+            texts, body, styles_xml=tab_styles,
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker,
+                         'tolerancePt': 0.5} for marker in markers])
+        if not control: cases[-1]['pdfTextNormalization'] = 'isolated-dot-leaders-v1'
+    registry = {'schema': 1, 'suite': {'id': 'core-v25', 'version': 25, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

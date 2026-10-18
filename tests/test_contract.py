@@ -337,7 +337,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 125)
+        self.assertEqual(len(common.validate_registry()['cases']), 127)
 
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
@@ -363,7 +363,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v24')
+        self.assertEqual(registry['suite']['id'], 'core-v25')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
@@ -387,6 +387,33 @@ class RegistryContract(unittest.TestCase):
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['tokens']['1.'], 1)
         self.assertEqual({a['marker'] for a in pair[0]['assertions']}, {'CedarHeading.', 'CedarBody'})
+
+    def test_manual_tab_reproducer_and_narrow_left_control(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        repro, control = [records[c] for c in ('tabs-hanging-manual-labels', 'tabs-left-narrow-label-control')]
+        w = '{' + fixtures.W + '}'
+        with ZipFile(common.ROOT / repro['input']) as many, ZipFile(common.ROOT / control['input']) as one:
+            for name in many.namelist():
+                if name != 'word/document.xml': self.assertEqual(many.read(name), one.read(name))
+            paragraphs = ET.fromstring(many.read('word/document.xml')).findall('.//' + w + 'body/' + w + 'p')
+            self.assertEqual(len(paragraphs), 3)
+            self.assertEqual([p.find(w + 'r/' + w + 't').text for p in paragraphs], ['3.2.', '3.12.', '3.13.'])
+            for paragraph in paragraphs:
+                stops = paragraph.findall(w + 'pPr/' + w + 'tabs/' + w + 'tab')
+                self.assertEqual([(t.get(w + 'val'), t.get(w + 'pos'), t.get(w + 'leader')) for t in stops],
+                                 [('left', '1800', None), ('right', '9000', 'dot')])
+                self.assertEqual(len(paragraph.findall(w + 'r/' + w + 'tab')), 2)
+                self.assertEqual(paragraph.find(w + 'pPr/' + w + 'spacing').get(w + 'lineRule'), 'exact')
+            ordinary = ET.fromstring(one.read('word/document.xml'))
+            self.assertEqual(len(ordinary.findall('.//' + w + 'body/' + w + 'p')), 1)
+            self.assertEqual(len(ordinary.findall('.//' + w + 'r/' + w + 'tab')), 1)
+        for number in ('7', '18', '104'):
+            self.assertEqual(repro['tokens'][number], 1)
+            self.assertNotIn(number, control['tokens'])
+        self.assertEqual(len(repro['assertions']), 6)
+        self.assertEqual(control['assertions'][0]['marker'], 'CedarTitle01')
 
     def test_legacy_header_pairs_preserve_everything_except_number_representation(self):
         import xml.etree.ElementTree as ET

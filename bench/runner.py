@@ -20,7 +20,7 @@ def reference_bundle(output):
         folder.mkdir()
         path = folder / 'reference.pdf'
         response = adapters.libreoffice(contained(ROOT, case['input']), path)
-        info = pdf.inspect_pdf(path)
+        info = pdf.inspect_case_pdf(path, case)
         failures = pdf.reference_failures(case, info, 'libreoffice')
         eligible = not failures
         bundle['cases'][case['id']] = {'inputSha256': case['sha256'], 'pdf': str(path.relative_to(output)), 'pdfSha256': digest(path), 'renderer': response['renderer'], 'eligible': eligible, 'ineligibleChecks': failures, 'inspection': info}
@@ -51,6 +51,8 @@ def validate_bundle(bundle, root, registry, env):
         case = next((c for c in registry['cases'] if c['id'] == cid), None)
         if not case or case['sha256'] != entry['inputSha256'] or digest(contained(root, entry['pdf'])) != entry['pdfSha256']:
             raise ValueError('Stale or unknown reference: ' + cid)
+        if case.get('pdfTextNormalization') and entry.get('inspection', {}).get('pdfTextNormalization') != case['pdfTextNormalization']:
+            raise ValueError('Reference PDF text normalization evidence is missing or changed')
         if source_bundle is not None:
             source = reference_controls.source(case, registry, ROOT)
             capture = source_bundle['cases'].get(source['caseId'])
@@ -110,6 +112,10 @@ def run(output, reference, adapter, candidate):
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=False)
     contract = {'metric': metrics.CONTRACT, 'suiteDigest': identity(registry), 'referenceDigest': identity(bundle), 'environment': env['contract'], 'adapter': adapter if isinstance(adapter, str) else {'argv': adapter, 'sourceSha256': digest(ROOT / 'adapters/docxodus.mjs')}}
+    pdf_policies = {c['id']: c['pdfTextNormalization'] for c in registry['cases'] if c.get('pdfTextNormalization')}
+    if pdf_policies:
+        contract.update(pdfTextNormalizations=pdf_policies, pdfTextInspectorVersion=pdf.PDF_TEXT_POLICY_VERSION,
+                        pdfTextInspectorSha256=digest(Path(pdf.__file__)))
     html_declarations = {c['id']: c['htmlAssertions'] for c in registry['cases'] if c.get('htmlAssertions')}
     # A reference-engine calibration measures PDFs; it cannot attest another artifact's metadata.
     if adapter in ('libreoffice', 'libreoffice-reference'):
@@ -134,7 +140,7 @@ def run(output, reference, adapter, candidate):
                     direct_capture = direct_bundle['cases'][case['id']]
                     direct_root = contained(ref_root, bundle['sourceBundle']).parent
                     shutil.copyfile(contained(direct_root, direct_capture['pdf']), folder / 'direct-reference.pdf')
-            reference_info = pdf.inspect_pdf(reference_path)
+            reference_info = pdf.inspect_case_pdf(reference_path, case)
             failures = pdf.reference_failures(case, reference_info, bundle['track'])
             if failures:
                 raise ValueError('Reference fails its own mandatory checks: ' + ', '.join(failures))
@@ -156,7 +162,7 @@ def run(output, reference, adapter, candidate):
             else:
                 candidate_path = folder / 'candidate.pdf'
                 try:
-                    candidate_info = pdf.inspect_pdf(candidate_path)
+                    candidate_info = pdf.inspect_case_pdf(candidate_path, case)
                 except (RuntimeError, ValueError) as error:
                     outcome.update(status='measured', score=0.0, close=False, checks=[{'name': 'valid-pdf', 'passed': False, 'error': str(error)}])
                 else:
@@ -249,6 +255,15 @@ def math_valid_tolerance(value):
 def validate_result(result):
     if result['schema'] != 1 or result['contract']['metric'] != metrics.CONTRACT or identity(result['contract']) != result['contractDigest']:
         raise ValueError('Invalid result measurement contract')
+    pdf_policies = result['contract'].get('pdfTextNormalizations', {})
+    if 'pdfTextNormalizations' in result['contract'] and (not isinstance(pdf_policies, dict) or
+            any(not isinstance(policy, str) or policy not in pdf.PDF_TEXT_POLICIES for policy in pdf_policies.values()) or
+            not set(pdf_policies).issubset(result['suite']['cases']) or
+            type(result['contract'].get('pdfTextInspectorVersion')) is not int or
+            result['contract'].get('pdfTextInspectorVersion') != pdf.PDF_TEXT_POLICY_VERSION or
+            not isinstance(result['contract'].get('pdfTextInspectorSha256'), str) or
+            not re.fullmatch('[a-f0-9]{64}', result['contract']['pdfTextInspectorSha256'])):
+        raise ValueError('Invalid declared PDF text normalization contract')
     html_declarations = result['contract'].get('htmlAssertions', {})
     if html_declarations:
         if (result['contract'].get('htmlInspectorVersion') != html_artifacts.VERSION or
@@ -259,5 +274,11 @@ def validate_result(result):
     if expected != result['summary']:
         raise ValueError('Invalid coverage or aggregation summary')
     for case in result['cases']:
+        if case['id'] in pdf_policies and case['status'] == 'measured':
+            failed_conversion = any(c['name'] in ('conversion', 'valid-pdf') and c['passed'] is False
+                                    for c in case['checks'])
+            observations = [c for c in case['checks'] if c['name'] == 'declared-pdf-text-normalization']
+            if not failed_conversion and (len(observations) != 1 or type(observations[0].get('passed')) is not bool):
+                raise ValueError('Missing or invalid PDF text normalization observation')
         if case['status'] == 'measured' and case['score'] != metrics.case_score(case['pages'], case['checks']):
             raise ValueError('Invalid case score')
