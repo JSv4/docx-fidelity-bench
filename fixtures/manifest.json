@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "suite": {
-    "id": "core-v17",
-    "version": 17,
+    "id": "core-v18",
+    "version": 18,
     "cases": [
       "columns-continuous",
       "columns-balanced",
@@ -95,7 +95,26 @@
       "tables-row-height-exact-overflow",
       "paragraphs-page-number-numpages-simple-field",
       "paragraphs-border-spacing-indented",
-      "paragraphs-page-size-edge-ink"
+      "paragraphs-page-size-edge-ink",
+      "paragraphs-page-margins-1417-underfull",
+      "paragraphs-page-margins-1417-overfull",
+      "paragraphs-page-margins-1417-control-underfull",
+      "paragraphs-page-margins-1417-control-overfull",
+      "tables-row-height-exact-hidden-paragraph",
+      "tables-row-height-exact-hidden-control",
+      "tables-row-height-exact-zero-borderless",
+      "tables-row-height-exact-zero-only",
+      "tables-header-repeat-exact",
+      "tables-header-repeat-atleast",
+      "tables-row-height-exact-border-clip",
+      "tables-row-height-atleast-border-clip",
+      "notes-tall-note-first-line",
+      "notes-tall-note-mid-page",
+      "notes-continued-note-last",
+      "notes-continued-note-last-control",
+      "notes-carried-note-defers-citations",
+      "notes-keep-next-beside-continuation",
+      "notes-keep-lines-note-in-table"
     ]
   },
   "cases": [
@@ -176,7 +195,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -278,7 +297,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -372,7 +391,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -455,7 +474,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -529,7 +548,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -631,7 +650,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -709,7 +728,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -779,7 +798,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -815,7 +834,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -851,7 +870,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -913,7 +932,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -975,7 +994,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -1038,7 +1057,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -1098,7 +1117,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -1161,7 +1180,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -1214,7 +1233,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -1267,7 +1286,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -1311,7 +1330,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -1355,7 +1374,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -1410,7 +1429,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -1496,7 +1515,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -1590,7 +1609,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -1675,7 +1694,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -1769,7 +1788,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -1919,7 +1938,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -2069,7 +2088,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -2219,7 +2238,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -2369,7 +2388,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -2416,7 +2435,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -2463,7 +2482,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -2510,7 +2529,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -2557,7 +2576,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -2637,7 +2656,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -2717,7 +2736,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -2797,7 +2816,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -2877,7 +2896,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -2957,7 +2976,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -3037,7 +3056,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -3206,7 +3225,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -3375,7 +3394,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -3544,7 +3563,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -3713,7 +3732,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -3760,7 +3779,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -3807,7 +3826,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -3854,7 +3873,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -3901,7 +3920,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -3948,7 +3967,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -3995,7 +4014,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -4102,7 +4121,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -4209,7 +4228,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -4316,7 +4335,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -4423,7 +4442,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -4530,7 +4549,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -4637,7 +4656,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -4744,7 +4763,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -4851,7 +4870,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -4958,7 +4977,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -5065,7 +5084,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -5172,7 +5191,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -5308,7 +5327,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -5444,7 +5463,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -5580,7 +5599,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -5716,7 +5735,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -5852,7 +5871,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -5988,7 +6007,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -6124,7 +6143,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -6296,7 +6315,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -6468,7 +6487,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -6510,7 +6529,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -6552,7 +6571,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -6627,7 +6646,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -6702,7 +6721,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -6777,7 +6796,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -6852,7 +6871,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -6927,7 +6946,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -7002,7 +7021,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -7077,7 +7096,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -7152,7 +7171,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -7227,7 +7246,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -7356,7 +7375,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -7485,7 +7504,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -7560,7 +7579,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -7635,7 +7654,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -7691,7 +7710,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -7747,7 +7766,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -7803,7 +7822,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -7859,7 +7878,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -7953,7 +7972,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -8003,7 +8022,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -8071,7 +8090,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -8157,7 +8176,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     },
     {
@@ -8282,7 +8301,2019 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "a8c26d2fa8c976358af651c5ce3dd3542eae3624986c548b8f42a9c3f2f9f6ff"
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
+      }
+    },
+    {
+      "id": "paragraphs-page-margins-1417-underfull",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "A4 page with 1417-twip margins; twelve exact lines fall one twip short of the body band",
+      "input": "fixtures/paragraphs-page-margins-1417-underfull.docx",
+      "sha256": "69567d4632b50a06af7478f6310521c46e715594764d0cb7e092cb6d7b9a3d0a",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Fir": 12,
+        "Geometry01": 1,
+        "Geometry02": 1,
+        "Geometry03": 1,
+        "Geometry04": 1,
+        "Geometry05": 1,
+        "Geometry06": 1,
+        "Geometry07": 1,
+        "Geometry08": 1,
+        "Geometry09": 1,
+        "Geometry10": 1,
+        "Geometry11": 1,
+        "Geometry12": 1,
+        "entry.": 12,
+        "margin": 12,
+        "register": 12
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "Geometry12",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            60,
+            60,
+            540,
+            790
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Geometry01",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Geometry12",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
+      }
+    },
+    {
+      "id": "paragraphs-page-margins-1417-overfull",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "A4 page with 1417-twip margins; twelve exact lines overfill by one twip the body band",
+      "input": "fixtures/paragraphs-page-margins-1417-overfull.docx",
+      "sha256": "876c0509b9944a464fb5b75f34c8f03fd2f6549137f9b8c7c2743c041c9d8e7b",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Fir": 12,
+        "Geometry01": 1,
+        "Geometry02": 1,
+        "Geometry03": 1,
+        "Geometry04": 1,
+        "Geometry05": 1,
+        "Geometry06": 1,
+        "Geometry07": 1,
+        "Geometry08": 1,
+        "Geometry09": 1,
+        "Geometry10": 1,
+        "Geometry11": 1,
+        "Geometry12": 1,
+        "entry.": 12,
+        "margin": 12,
+        "register": 12
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "Geometry12",
+          "occurrence": 1,
+          "page": 2,
+          "rect": [
+            60,
+            60,
+            540,
+            790
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Geometry01",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Geometry12",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
+      }
+    },
+    {
+      "id": "paragraphs-page-margins-1417-control-underfull",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "A4 page with 1416/1418-twip control margins; twelve exact lines fall one twip short of the body band",
+      "input": "fixtures/paragraphs-page-margins-1417-control-underfull.docx",
+      "sha256": "23f2eb05e47a5b59f0b8052fcfcb33f59899f46296e4eda305774a6ed56a7398",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Fir": 12,
+        "Geometry01": 1,
+        "Geometry02": 1,
+        "Geometry03": 1,
+        "Geometry04": 1,
+        "Geometry05": 1,
+        "Geometry06": 1,
+        "Geometry07": 1,
+        "Geometry08": 1,
+        "Geometry09": 1,
+        "Geometry10": 1,
+        "Geometry11": 1,
+        "Geometry12": 1,
+        "entry.": 12,
+        "margin": 12,
+        "register": 12
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "Geometry12",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            60,
+            60,
+            540,
+            790
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Geometry01",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Geometry12",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
+      }
+    },
+    {
+      "id": "paragraphs-page-margins-1417-control-overfull",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "A4 page with 1416/1418-twip control margins; twelve exact lines overfill by one twip the body band",
+      "input": "fixtures/paragraphs-page-margins-1417-control-overfull.docx",
+      "sha256": "2d47476a6055c80f068246bd44d79de24af87d8c100ded7458f43850da0673ee",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Fir": 12,
+        "Geometry01": 1,
+        "Geometry02": 1,
+        "Geometry03": 1,
+        "Geometry04": 1,
+        "Geometry05": 1,
+        "Geometry06": 1,
+        "Geometry07": 1,
+        "Geometry08": 1,
+        "Geometry09": 1,
+        "Geometry10": 1,
+        "Geometry11": 1,
+        "Geometry12": 1,
+        "entry.": 12,
+        "margin": 12,
+        "register": 12
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "Geometry12",
+          "occurrence": 1,
+          "page": 2,
+          "rect": [
+            60,
+            60,
+            540,
+            790
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Geometry01",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Geometry12",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
+      }
+    },
+    {
+      "id": "tables-row-height-exact-hidden-paragraph",
+      "version": 1,
+      "category": "tables",
+      "description": "Exact 15pt rows; the second row cell holds three paragraphs, the third wholly hidden by the row height",
+      "input": "fixtures/tables-row-height-exact-hidden-paragraph.docx",
+      "sha256": "573410e20e4808ccdda0f6cfb97fb58dc288666bb3d60f0e55f4916292da4ec8",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Birch": 3,
+        "Entry01": 1,
+        "Entry02": 1,
+        "Entry03": 1,
+        "Exact": 3,
+        "Hidden01": 1,
+        "Hidden02": 1,
+        "Hidden03": 1,
+        "HiddenAfter": 1,
+        "The": 1,
+        "below": 1,
+        "cell.": 3,
+        "continues": 1,
+        "ledger": 1,
+        "record.": 3,
+        "table.": 1,
+        "the": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Hidden03",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "HiddenAfter",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
+      }
+    },
+    {
+      "id": "tables-row-height-exact-hidden-control",
+      "version": 1,
+      "category": "tables",
+      "description": "Exact 15pt rows; the second row cell holds two paragraphs, the second partly hidden",
+      "input": "fixtures/tables-row-height-exact-hidden-control.docx",
+      "sha256": "79b69db30ddde8c2f44dfd72aee9310db717ec0b3a39aa66b307694faaaf0060",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Birch": 3,
+        "Entry01": 1,
+        "Entry02": 1,
+        "Entry03": 1,
+        "Exact": 3,
+        "Hidden01": 1,
+        "Hidden02": 1,
+        "Hidden03": 1,
+        "HiddenAfter": 1,
+        "The": 1,
+        "below": 1,
+        "cell.": 3,
+        "continues": 1,
+        "ledger": 1,
+        "record.": 3,
+        "table.": 1,
+        "the": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Hidden03",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "HiddenAfter",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
+      }
+    },
+    {
+      "id": "tables-row-height-exact-zero-borderless",
+      "version": 1,
+      "category": "tables",
+      "description": "Borderless table with one exact zero-height row between two visible rows",
+      "input": "fixtures/tables-row-height-exact-zero-borderless.docx",
+      "sha256": "fdea64816a0fde9919356b940b7213a1b1527bc2ab63488027ce312805eb32e8",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Entry01": 1,
+        "Entry03": 1,
+        "Rowan": 2,
+        "The": 2,
+        "Visible": 2,
+        "Zero01": 1,
+        "Zero03": 1,
+        "ZeroAfter": 1,
+        "ZeroBefore": 1,
+        "above": 1,
+        "below": 1,
+        "cell.": 2,
+        "continues": 1,
+        "opens": 1,
+        "record.": 2,
+        "register": 2,
+        "table.": 2,
+        "the": 2
+      },
+      "assertions": [
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "ZeroAfter",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Zero03",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
+      }
+    },
+    {
+      "id": "tables-row-height-exact-zero-only",
+      "version": 1,
+      "category": "tables",
+      "description": "Borderless table made only of exact zero-height rows",
+      "input": "fixtures/tables-row-height-exact-zero-only.docx",
+      "sha256": "4dbf9026f3314bc4505a3a1f65c8487c5d5fe74c18756cdcc46f1fe963bff2ca",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "The": 2,
+        "ZeroAfter": 1,
+        "ZeroBefore": 1,
+        "above": 1,
+        "below": 1,
+        "continues": 1,
+        "opens": 1,
+        "register": 2,
+        "table.": 2,
+        "the": 2
+      },
+      "assertions": [
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "ZeroAfter",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
+      }
+    },
+    {
+      "id": "tables-header-repeat-exact",
+      "version": 1,
+      "category": "tables",
+      "description": "Sixty exact rows under a repeated exact header row across two pages",
+      "input": "fixtures/tables-header-repeat-exact.docx",
+      "sha256": "27b47cfd73e134778e6c372ebbecc3f69f523c596d0037d0b051b8d219329c54",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Cedar01": 1,
+        "Cedar02": 1,
+        "Cedar03": 1,
+        "Cedar04": 1,
+        "Cedar05": 1,
+        "Cedar06": 1,
+        "Cedar07": 1,
+        "Cedar08": 1,
+        "Cedar09": 1,
+        "Cedar10": 1,
+        "Cedar11": 1,
+        "Cedar12": 1,
+        "Cedar13": 1,
+        "Cedar14": 1,
+        "Cedar15": 1,
+        "Cedar16": 1,
+        "Cedar17": 1,
+        "Cedar18": 1,
+        "Cedar19": 1,
+        "Cedar20": 1,
+        "Cedar21": 1,
+        "Cedar22": 1,
+        "Cedar23": 1,
+        "Cedar24": 1,
+        "Cedar25": 1,
+        "Cedar26": 1,
+        "Cedar27": 1,
+        "Cedar28": 1,
+        "Cedar29": 1,
+        "Cedar30": 1,
+        "Cedar31": 1,
+        "Cedar32": 1,
+        "Cedar33": 1,
+        "Cedar34": 1,
+        "Cedar35": 1,
+        "Cedar36": 1,
+        "Cedar37": 1,
+        "Cedar38": 1,
+        "Cedar39": 1,
+        "Cedar40": 1,
+        "Cedar41": 1,
+        "Cedar42": 1,
+        "Cedar43": 1,
+        "Cedar44": 1,
+        "Cedar45": 1,
+        "Cedar46": 1,
+        "Cedar47": 1,
+        "Cedar48": 1,
+        "Cedar49": 1,
+        "Cedar50": 1,
+        "Cedar51": 1,
+        "Cedar52": 1,
+        "Cedar53": 1,
+        "Cedar54": 1,
+        "Cedar55": 1,
+        "Cedar56": 1,
+        "Cedar57": 1,
+        "Cedar58": 1,
+        "Cedar59": 1,
+        "Cedar60": 1,
+        "Entry": 2,
+        "Entry01": 1,
+        "Entry02": 1,
+        "Entry03": 1,
+        "Entry04": 1,
+        "Entry05": 1,
+        "Entry06": 1,
+        "Entry07": 1,
+        "Entry08": 1,
+        "Entry09": 1,
+        "Entry10": 1,
+        "Entry11": 1,
+        "Entry12": 1,
+        "Entry13": 1,
+        "Entry14": 1,
+        "Entry15": 1,
+        "Entry16": 1,
+        "Entry17": 1,
+        "Entry18": 1,
+        "Entry19": 1,
+        "Entry20": 1,
+        "Entry21": 1,
+        "Entry22": 1,
+        "Entry23": 1,
+        "Entry24": 1,
+        "Entry25": 1,
+        "Entry26": 1,
+        "Entry27": 1,
+        "Entry28": 1,
+        "Entry29": 1,
+        "Entry30": 1,
+        "Entry31": 1,
+        "Entry32": 1,
+        "Entry33": 1,
+        "Entry34": 1,
+        "Entry35": 1,
+        "Entry36": 1,
+        "Entry37": 1,
+        "Entry38": 1,
+        "Entry39": 1,
+        "Entry40": 1,
+        "Entry41": 1,
+        "Entry42": 1,
+        "Entry43": 1,
+        "Entry44": 1,
+        "Entry45": 1,
+        "Entry46": 1,
+        "Entry47": 1,
+        "Entry48": 1,
+        "Entry49": 1,
+        "Entry50": 1,
+        "Entry51": 1,
+        "Entry52": 1,
+        "Entry53": 1,
+        "Entry54": 1,
+        "Entry55": 1,
+        "Entry56": 1,
+        "Entry57": 1,
+        "Entry58": 1,
+        "Entry59": 1,
+        "Entry60": 1,
+        "Header": 60,
+        "HeaderLeft": 2,
+        "HeaderRight": 2,
+        "Ledger": 2,
+        "Repeated": 60,
+        "column.": 4,
+        "ledger.": 60,
+        "table.": 60
+      },
+      "assertions": [
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Cedar01",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Cedar35",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Cedar60",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
+      }
+    },
+    {
+      "id": "tables-header-repeat-atleast",
+      "version": 1,
+      "category": "tables",
+      "description": "Sixty exact rows under a repeated atLeast header row across two pages",
+      "input": "fixtures/tables-header-repeat-atleast.docx",
+      "sha256": "2f51a6d947e854215df7afdf627d3e13cc4400f112dc2ee1f9cbdd1c9d2738c1",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Cedar01": 1,
+        "Cedar02": 1,
+        "Cedar03": 1,
+        "Cedar04": 1,
+        "Cedar05": 1,
+        "Cedar06": 1,
+        "Cedar07": 1,
+        "Cedar08": 1,
+        "Cedar09": 1,
+        "Cedar10": 1,
+        "Cedar11": 1,
+        "Cedar12": 1,
+        "Cedar13": 1,
+        "Cedar14": 1,
+        "Cedar15": 1,
+        "Cedar16": 1,
+        "Cedar17": 1,
+        "Cedar18": 1,
+        "Cedar19": 1,
+        "Cedar20": 1,
+        "Cedar21": 1,
+        "Cedar22": 1,
+        "Cedar23": 1,
+        "Cedar24": 1,
+        "Cedar25": 1,
+        "Cedar26": 1,
+        "Cedar27": 1,
+        "Cedar28": 1,
+        "Cedar29": 1,
+        "Cedar30": 1,
+        "Cedar31": 1,
+        "Cedar32": 1,
+        "Cedar33": 1,
+        "Cedar34": 1,
+        "Cedar35": 1,
+        "Cedar36": 1,
+        "Cedar37": 1,
+        "Cedar38": 1,
+        "Cedar39": 1,
+        "Cedar40": 1,
+        "Cedar41": 1,
+        "Cedar42": 1,
+        "Cedar43": 1,
+        "Cedar44": 1,
+        "Cedar45": 1,
+        "Cedar46": 1,
+        "Cedar47": 1,
+        "Cedar48": 1,
+        "Cedar49": 1,
+        "Cedar50": 1,
+        "Cedar51": 1,
+        "Cedar52": 1,
+        "Cedar53": 1,
+        "Cedar54": 1,
+        "Cedar55": 1,
+        "Cedar56": 1,
+        "Cedar57": 1,
+        "Cedar58": 1,
+        "Cedar59": 1,
+        "Cedar60": 1,
+        "Entry": 2,
+        "Entry01": 1,
+        "Entry02": 1,
+        "Entry03": 1,
+        "Entry04": 1,
+        "Entry05": 1,
+        "Entry06": 1,
+        "Entry07": 1,
+        "Entry08": 1,
+        "Entry09": 1,
+        "Entry10": 1,
+        "Entry11": 1,
+        "Entry12": 1,
+        "Entry13": 1,
+        "Entry14": 1,
+        "Entry15": 1,
+        "Entry16": 1,
+        "Entry17": 1,
+        "Entry18": 1,
+        "Entry19": 1,
+        "Entry20": 1,
+        "Entry21": 1,
+        "Entry22": 1,
+        "Entry23": 1,
+        "Entry24": 1,
+        "Entry25": 1,
+        "Entry26": 1,
+        "Entry27": 1,
+        "Entry28": 1,
+        "Entry29": 1,
+        "Entry30": 1,
+        "Entry31": 1,
+        "Entry32": 1,
+        "Entry33": 1,
+        "Entry34": 1,
+        "Entry35": 1,
+        "Entry36": 1,
+        "Entry37": 1,
+        "Entry38": 1,
+        "Entry39": 1,
+        "Entry40": 1,
+        "Entry41": 1,
+        "Entry42": 1,
+        "Entry43": 1,
+        "Entry44": 1,
+        "Entry45": 1,
+        "Entry46": 1,
+        "Entry47": 1,
+        "Entry48": 1,
+        "Entry49": 1,
+        "Entry50": 1,
+        "Entry51": 1,
+        "Entry52": 1,
+        "Entry53": 1,
+        "Entry54": 1,
+        "Entry55": 1,
+        "Entry56": 1,
+        "Entry57": 1,
+        "Entry58": 1,
+        "Entry59": 1,
+        "Entry60": 1,
+        "Header": 60,
+        "HeaderLeft": 2,
+        "HeaderRight": 2,
+        "Ledger": 2,
+        "Repeated": 60,
+        "column.": 4,
+        "ledger.": 60,
+        "table.": 60
+      },
+      "assertions": [
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Cedar01",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Cedar35",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "Cedar60",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
+      }
+    },
+    {
+      "id": "tables-row-height-exact-border-clip",
+      "version": 1,
+      "category": "tables",
+      "description": "Three-line bordered paragraph in an 18pt exact row, clipped by the row height with side borders kept; border clipping is measured by the raster score only",
+      "input": "fixtures/tables-row-height-exact-border-clip.docx",
+      "sha256": "7540042614e252153e5e805784dce0f71da4782303e715a104c3f2b5a27cab55",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "BoxAfter": 1,
+        "BoxCell": 1,
+        "BoxClip": 1,
+        "Juniper": 1,
+        "Neighbour": 1,
+        "The": 1,
+        "card": 1,
+        "card.": 1,
+        "cell.": 1,
+        "continues.": 1,
+        "register": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "BoxClip",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "BoxAfter",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
+      }
+    },
+    {
+      "id": "tables-row-height-atleast-border-clip",
+      "version": 1,
+      "category": "tables",
+      "description": "Three-line bordered paragraph in an 18pt atLeast row (control: the row grows)",
+      "input": "fixtures/tables-row-height-atleast-border-clip.docx",
+      "sha256": "97f9e9a9cbed9b5cc911885d9dc7bba5686792a51d385a286e8454c8167d3502",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "BoxAfter": 1,
+        "BoxCell": 1,
+        "BoxClip": 1,
+        "Juniper": 1,
+        "Neighbour": 1,
+        "The": 1,
+        "card": 1,
+        "card.": 1,
+        "cell.": 1,
+        "continues.": 1,
+        "register": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "BoxClip",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "BoxAfter",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
+      }
+    },
+    {
+      "id": "notes-tall-note-first-line",
+      "version": 2,
+      "category": "notes",
+      "description": "Seventy-line footnote cited on body line 1; the note fills nearly all of the rest of page 1",
+      "input": "fixtures/notes-tall-note-first-line.docx",
+      "sha256": "b8a8dbd76ac9c9528d54b540f0ad7e0700efef6cf21e3168ec214a8b5c809142",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "1": 2,
+        "Spruce": 101,
+        "TallBody01": 1,
+        "TallBody02": 1,
+        "TallBody03": 1,
+        "TallBody04": 1,
+        "TallBody05": 1,
+        "TallBody06": 1,
+        "TallBody07": 1,
+        "TallBody08": 1,
+        "TallBody09": 1,
+        "TallBody10": 1,
+        "TallBody11": 1,
+        "TallBody12": 1,
+        "TallBody13": 1,
+        "TallBody14": 1,
+        "TallBody15": 1,
+        "TallBody16": 1,
+        "TallBody17": 1,
+        "TallBody18": 1,
+        "TallBody19": 1,
+        "TallBody20": 1,
+        "TallBody21": 1,
+        "TallBody22": 1,
+        "TallBody23": 1,
+        "TallBody24": 1,
+        "TallBody25": 1,
+        "TallBody26": 1,
+        "TallBody27": 1,
+        "TallBody28": 1,
+        "TallBody29": 1,
+        "TallBody30": 1,
+        "TallCite": 1,
+        "TallNote001": 1,
+        "TallNote002": 1,
+        "TallNote003": 1,
+        "TallNote004": 1,
+        "TallNote005": 1,
+        "TallNote006": 1,
+        "TallNote007": 1,
+        "TallNote008": 1,
+        "TallNote009": 1,
+        "TallNote010": 1,
+        "TallNote011": 1,
+        "TallNote012": 1,
+        "TallNote013": 1,
+        "TallNote014": 1,
+        "TallNote015": 1,
+        "TallNote016": 1,
+        "TallNote017": 1,
+        "TallNote018": 1,
+        "TallNote019": 1,
+        "TallNote020": 1,
+        "TallNote021": 1,
+        "TallNote022": 1,
+        "TallNote023": 1,
+        "TallNote024": 1,
+        "TallNote025": 1,
+        "TallNote026": 1,
+        "TallNote027": 1,
+        "TallNote028": 1,
+        "TallNote029": 1,
+        "TallNote030": 1,
+        "TallNote031": 1,
+        "TallNote032": 1,
+        "TallNote033": 1,
+        "TallNote034": 1,
+        "TallNote035": 1,
+        "TallNote036": 1,
+        "TallNote037": 1,
+        "TallNote038": 1,
+        "TallNote039": 1,
+        "TallNote040": 1,
+        "TallNote041": 1,
+        "TallNote042": 1,
+        "TallNote043": 1,
+        "TallNote044": 1,
+        "TallNote045": 1,
+        "TallNote046": 1,
+        "TallNote047": 1,
+        "TallNote048": 1,
+        "TallNote049": 1,
+        "TallNote050": 1,
+        "TallNote051": 1,
+        "TallNote052": 1,
+        "TallNote053": 1,
+        "TallNote054": 1,
+        "TallNote055": 1,
+        "TallNote056": 1,
+        "TallNote057": 1,
+        "TallNote058": 1,
+        "TallNote059": 1,
+        "TallNote060": 1,
+        "TallNote061": 1,
+        "TallNote062": 1,
+        "TallNote063": 1,
+        "TallNote064": 1,
+        "TallNote065": 1,
+        "TallNote066": 1,
+        "TallNote067": 1,
+        "TallNote068": 1,
+        "TallNote069": 1,
+        "TallNote070": 1,
+        "body": 30,
+        "cites": 1,
+        "line.": 100,
+        "note": 70,
+        "note.": 1,
+        "register": 1,
+        "tall": 1,
+        "the": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "TallNote030",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            60,
+            60,
+            552,
+            760
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "TallBody01",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "TallNote070",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
+      }
+    },
+    {
+      "id": "notes-tall-note-mid-page",
+      "version": 2,
+      "category": "notes",
+      "description": "Seventy-line footnote cited on body line 11; the note fills nearly all of the rest of page 1",
+      "input": "fixtures/notes-tall-note-mid-page.docx",
+      "sha256": "615be08ee5c154a628ea280b583af9a77a568657519b44df93c7aabc02ceae4f",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "1": 2,
+        "Spruce": 111,
+        "TallBody01": 1,
+        "TallBody02": 1,
+        "TallBody03": 1,
+        "TallBody04": 1,
+        "TallBody05": 1,
+        "TallBody06": 1,
+        "TallBody07": 1,
+        "TallBody08": 1,
+        "TallBody09": 1,
+        "TallBody10": 1,
+        "TallBody11": 1,
+        "TallBody12": 1,
+        "TallBody13": 1,
+        "TallBody14": 1,
+        "TallBody15": 1,
+        "TallBody16": 1,
+        "TallBody17": 1,
+        "TallBody18": 1,
+        "TallBody19": 1,
+        "TallBody20": 1,
+        "TallBody21": 1,
+        "TallBody22": 1,
+        "TallBody23": 1,
+        "TallBody24": 1,
+        "TallBody25": 1,
+        "TallBody26": 1,
+        "TallBody27": 1,
+        "TallBody28": 1,
+        "TallBody29": 1,
+        "TallBody30": 1,
+        "TallCite": 1,
+        "TallLead01": 1,
+        "TallLead02": 1,
+        "TallLead03": 1,
+        "TallLead04": 1,
+        "TallLead05": 1,
+        "TallLead06": 1,
+        "TallLead07": 1,
+        "TallLead08": 1,
+        "TallLead09": 1,
+        "TallLead10": 1,
+        "TallNote001": 1,
+        "TallNote002": 1,
+        "TallNote003": 1,
+        "TallNote004": 1,
+        "TallNote005": 1,
+        "TallNote006": 1,
+        "TallNote007": 1,
+        "TallNote008": 1,
+        "TallNote009": 1,
+        "TallNote010": 1,
+        "TallNote011": 1,
+        "TallNote012": 1,
+        "TallNote013": 1,
+        "TallNote014": 1,
+        "TallNote015": 1,
+        "TallNote016": 1,
+        "TallNote017": 1,
+        "TallNote018": 1,
+        "TallNote019": 1,
+        "TallNote020": 1,
+        "TallNote021": 1,
+        "TallNote022": 1,
+        "TallNote023": 1,
+        "TallNote024": 1,
+        "TallNote025": 1,
+        "TallNote026": 1,
+        "TallNote027": 1,
+        "TallNote028": 1,
+        "TallNote029": 1,
+        "TallNote030": 1,
+        "TallNote031": 1,
+        "TallNote032": 1,
+        "TallNote033": 1,
+        "TallNote034": 1,
+        "TallNote035": 1,
+        "TallNote036": 1,
+        "TallNote037": 1,
+        "TallNote038": 1,
+        "TallNote039": 1,
+        "TallNote040": 1,
+        "TallNote041": 1,
+        "TallNote042": 1,
+        "TallNote043": 1,
+        "TallNote044": 1,
+        "TallNote045": 1,
+        "TallNote046": 1,
+        "TallNote047": 1,
+        "TallNote048": 1,
+        "TallNote049": 1,
+        "TallNote050": 1,
+        "TallNote051": 1,
+        "TallNote052": 1,
+        "TallNote053": 1,
+        "TallNote054": 1,
+        "TallNote055": 1,
+        "TallNote056": 1,
+        "TallNote057": 1,
+        "TallNote058": 1,
+        "TallNote059": 1,
+        "TallNote060": 1,
+        "TallNote061": 1,
+        "TallNote062": 1,
+        "TallNote063": 1,
+        "TallNote064": 1,
+        "TallNote065": 1,
+        "TallNote066": 1,
+        "TallNote067": 1,
+        "TallNote068": 1,
+        "TallNote069": 1,
+        "TallNote070": 1,
+        "body": 40,
+        "cites": 1,
+        "line.": 110,
+        "note": 70,
+        "note.": 1,
+        "register": 1,
+        "tall": 1,
+        "the": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "TallNote023",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            60,
+            60,
+            552,
+            760
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "TallBody01",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "TallNote070",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
+      }
+    },
+    {
+      "id": "notes-continued-note-last",
+      "version": 1,
+      "category": "notes",
+      "description": "Two citations on page 1: a thirty-line note that continues onto page 2, then a one-line note",
+      "input": "fixtures/notes-continued-note-last.docx",
+      "sha256": "9363fc3f1de3a7ab7b7850f6aa0ce279ca94f3eb10a145eb40488d9a155d4c0d",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "1": 2,
+        "2": 2,
+        "ShortNoteB001": 1,
+        "SplitBody01": 1,
+        "SplitBody02": 1,
+        "SplitBody03": 1,
+        "SplitBody04": 1,
+        "SplitBody05": 1,
+        "SplitBody06": 1,
+        "SplitBody07": 1,
+        "SplitBody08": 1,
+        "SplitBody09": 1,
+        "SplitBody10": 1,
+        "SplitBody11": 1,
+        "SplitBody12": 1,
+        "SplitBody13": 1,
+        "SplitBody14": 1,
+        "SplitBody15": 1,
+        "SplitBody16": 1,
+        "SplitBody17": 1,
+        "SplitBody18": 1,
+        "SplitBody19": 1,
+        "SplitBody20": 1,
+        "SplitBody21": 1,
+        "SplitBody22": 1,
+        "SplitBody23": 1,
+        "SplitBody24": 1,
+        "SplitBody25": 1,
+        "SplitBody26": 1,
+        "SplitBody27": 1,
+        "SplitBody28": 1,
+        "SplitBody29": 1,
+        "SplitBody30": 1,
+        "SplitCiteA": 1,
+        "SplitCiteB": 1,
+        "SplitLead01": 1,
+        "SplitLead02": 1,
+        "SplitLead03": 1,
+        "SplitLead04": 1,
+        "SplitLead05": 1,
+        "SplitLead06": 1,
+        "SplitLead07": 1,
+        "SplitLead08": 1,
+        "SplitLead09": 1,
+        "SplitLead10": 1,
+        "SplitLead11": 1,
+        "SplitLead12": 1,
+        "SplitLead13": 1,
+        "SplitLead14": 1,
+        "SplitLead15": 1,
+        "SplitLead16": 1,
+        "SplitLead17": 1,
+        "SplitLead18": 1,
+        "SplitLead19": 1,
+        "SplitLead20": 1,
+        "SplitNoteA001": 1,
+        "SplitNoteA002": 1,
+        "SplitNoteA003": 1,
+        "SplitNoteA004": 1,
+        "SplitNoteA005": 1,
+        "SplitNoteA006": 1,
+        "SplitNoteA007": 1,
+        "SplitNoteA008": 1,
+        "SplitNoteA009": 1,
+        "SplitNoteA010": 1,
+        "SplitNoteA011": 1,
+        "SplitNoteA012": 1,
+        "SplitNoteA013": 1,
+        "SplitNoteA014": 1,
+        "SplitNoteA015": 1,
+        "SplitNoteA016": 1,
+        "SplitNoteA017": 1,
+        "SplitNoteA018": 1,
+        "SplitNoteA019": 1,
+        "SplitNoteA020": 1,
+        "SplitNoteA021": 1,
+        "SplitNoteA022": 1,
+        "SplitNoteA023": 1,
+        "SplitNoteA024": 1,
+        "SplitNoteA025": 1,
+        "SplitNoteA026": 1,
+        "SplitNoteA027": 1,
+        "SplitNoteA028": 1,
+        "SplitNoteA029": 1,
+        "SplitNoteA030": 1,
+        "Spruce": 83,
+        "body": 50,
+        "cites": 2,
+        "line.": 81,
+        "long": 1,
+        "note": 31,
+        "note.": 2,
+        "register": 2,
+        "short": 1,
+        "the": 2
+      },
+      "assertions": [
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "SplitCiteB",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "ShortNoteB001",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "SplitNoteA030",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "SplitBody01",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "same-page",
+          "version": 1,
+          "markers": [
+            "SplitNoteA030",
+            "ShortNoteB001"
+          ]
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
+      }
+    },
+    {
+      "id": "notes-continued-note-last-control",
+      "version": 1,
+      "category": "notes",
+      "description": "Two citations on page 1: a four-line note that fits, then a one-line note",
+      "input": "fixtures/notes-continued-note-last-control.docx",
+      "sha256": "19d918df4adfd3103279862bd32f56c9b9f759d8f2ee830aa05be18148817e9d",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "1": 2,
+        "2": 2,
+        "ShortNoteB001": 1,
+        "SplitBody01": 1,
+        "SplitBody02": 1,
+        "SplitBody03": 1,
+        "SplitBody04": 1,
+        "SplitBody05": 1,
+        "SplitBody06": 1,
+        "SplitBody07": 1,
+        "SplitBody08": 1,
+        "SplitBody09": 1,
+        "SplitBody10": 1,
+        "SplitBody11": 1,
+        "SplitBody12": 1,
+        "SplitBody13": 1,
+        "SplitBody14": 1,
+        "SplitBody15": 1,
+        "SplitBody16": 1,
+        "SplitBody17": 1,
+        "SplitBody18": 1,
+        "SplitBody19": 1,
+        "SplitBody20": 1,
+        "SplitBody21": 1,
+        "SplitBody22": 1,
+        "SplitBody23": 1,
+        "SplitBody24": 1,
+        "SplitBody25": 1,
+        "SplitBody26": 1,
+        "SplitBody27": 1,
+        "SplitBody28": 1,
+        "SplitBody29": 1,
+        "SplitBody30": 1,
+        "SplitCiteA": 1,
+        "SplitCiteB": 1,
+        "SplitLead01": 1,
+        "SplitLead02": 1,
+        "SplitLead03": 1,
+        "SplitLead04": 1,
+        "SplitLead05": 1,
+        "SplitLead06": 1,
+        "SplitLead07": 1,
+        "SplitLead08": 1,
+        "SplitLead09": 1,
+        "SplitLead10": 1,
+        "SplitLead11": 1,
+        "SplitLead12": 1,
+        "SplitLead13": 1,
+        "SplitLead14": 1,
+        "SplitLead15": 1,
+        "SplitLead16": 1,
+        "SplitLead17": 1,
+        "SplitLead18": 1,
+        "SplitLead19": 1,
+        "SplitLead20": 1,
+        "SplitNoteA001": 1,
+        "SplitNoteA002": 1,
+        "SplitNoteA003": 1,
+        "SplitNoteA004": 1,
+        "Spruce": 57,
+        "body": 50,
+        "cites": 2,
+        "line.": 55,
+        "long": 1,
+        "note": 5,
+        "note.": 2,
+        "register": 2,
+        "short": 1,
+        "the": 2
+      },
+      "assertions": [
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "SplitCiteB",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "ShortNoteB001",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "SplitNoteA004",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "SplitBody01",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
+      }
+    },
+    {
+      "id": "notes-carried-note-defers-citations",
+      "version": 1,
+      "category": "notes",
+      "description": "Ninety-line note carried across pages; two later citations and their one-line notes follow it (positions follow the reference; Word adjudication pending)",
+      "input": "fixtures/notes-carried-note-defers-citations.docx",
+      "sha256": "8f30f5e7df97eda9614c91272834300441e7f4d1fa55696ec7ec91208eaa0ef2",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "1": 2,
+        "2": 2,
+        "3": 2,
+        "CarriedBody01": 1,
+        "CarriedBody02": 1,
+        "CarriedBody03": 1,
+        "CarriedBody04": 1,
+        "CarriedBody05": 1,
+        "CarriedBody06": 1,
+        "CarriedBody07": 1,
+        "CarriedBody08": 1,
+        "CarriedBody09": 1,
+        "CarriedBody10": 1,
+        "CarriedBody11": 1,
+        "CarriedBody12": 1,
+        "CarriedCite": 1,
+        "CarriedNote001": 1,
+        "CarriedNote002": 1,
+        "CarriedNote003": 1,
+        "CarriedNote004": 1,
+        "CarriedNote005": 1,
+        "CarriedNote006": 1,
+        "CarriedNote007": 1,
+        "CarriedNote008": 1,
+        "CarriedNote009": 1,
+        "CarriedNote010": 1,
+        "CarriedNote011": 1,
+        "CarriedNote012": 1,
+        "CarriedNote013": 1,
+        "CarriedNote014": 1,
+        "CarriedNote015": 1,
+        "CarriedNote016": 1,
+        "CarriedNote017": 1,
+        "CarriedNote018": 1,
+        "CarriedNote019": 1,
+        "CarriedNote020": 1,
+        "CarriedNote021": 1,
+        "CarriedNote022": 1,
+        "CarriedNote023": 1,
+        "CarriedNote024": 1,
+        "CarriedNote025": 1,
+        "CarriedNote026": 1,
+        "CarriedNote027": 1,
+        "CarriedNote028": 1,
+        "CarriedNote029": 1,
+        "CarriedNote030": 1,
+        "CarriedNote031": 1,
+        "CarriedNote032": 1,
+        "CarriedNote033": 1,
+        "CarriedNote034": 1,
+        "CarriedNote035": 1,
+        "CarriedNote036": 1,
+        "CarriedNote037": 1,
+        "CarriedNote038": 1,
+        "CarriedNote039": 1,
+        "CarriedNote040": 1,
+        "CarriedNote041": 1,
+        "CarriedNote042": 1,
+        "CarriedNote043": 1,
+        "CarriedNote044": 1,
+        "CarriedNote045": 1,
+        "CarriedNote046": 1,
+        "CarriedNote047": 1,
+        "CarriedNote048": 1,
+        "CarriedNote049": 1,
+        "CarriedNote050": 1,
+        "CarriedNote051": 1,
+        "CarriedNote052": 1,
+        "CarriedNote053": 1,
+        "CarriedNote054": 1,
+        "CarriedNote055": 1,
+        "CarriedNote056": 1,
+        "CarriedNote057": 1,
+        "CarriedNote058": 1,
+        "CarriedNote059": 1,
+        "CarriedNote060": 1,
+        "CarriedNote061": 1,
+        "CarriedNote062": 1,
+        "CarriedNote063": 1,
+        "CarriedNote064": 1,
+        "CarriedNote065": 1,
+        "CarriedNote066": 1,
+        "CarriedNote067": 1,
+        "CarriedNote068": 1,
+        "CarriedNote069": 1,
+        "CarriedNote070": 1,
+        "CarriedNote071": 1,
+        "CarriedNote072": 1,
+        "CarriedNote073": 1,
+        "CarriedNote074": 1,
+        "CarriedNote075": 1,
+        "CarriedNote076": 1,
+        "CarriedNote077": 1,
+        "CarriedNote078": 1,
+        "CarriedNote079": 1,
+        "CarriedNote080": 1,
+        "CarriedNote081": 1,
+        "CarriedNote082": 1,
+        "CarriedNote083": 1,
+        "CarriedNote084": 1,
+        "CarriedNote085": 1,
+        "CarriedNote086": 1,
+        "CarriedNote087": 1,
+        "CarriedNote088": 1,
+        "CarriedNote089": 1,
+        "CarriedNote090": 1,
+        "DeferredCiteB": 1,
+        "DeferredCiteC": 1,
+        "DeferredNoteB001": 1,
+        "DeferredNoteC001": 1,
+        "Spruce": 107,
+        "a": 1,
+        "another": 1,
+        "body": 12,
+        "carried": 1,
+        "cites": 3,
+        "deferred": 2,
+        "line.": 104,
+        "note": 92,
+        "note.": 3,
+        "register": 3,
+        "the": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "DeferredCiteB",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "DeferredNoteB001",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "DeferredNoteC001",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "CarriedNote090",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "CarriedBody01",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
+      }
+    },
+    {
+      "id": "notes-keep-next-beside-continuation",
+      "version": 1,
+      "category": "notes",
+      "description": "Keep-with-next heading and a paragraph citing a one-line note while a twenty-four-line note continues",
+      "input": "fixtures/notes-keep-next-beside-continuation.docx",
+      "sha256": "af61e3b490bcea709b8937473260a506c0f7d8d96aa034bb5a58374d6c193339",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "1": 2,
+        "2": 2,
+        "KeepCarried001": 1,
+        "KeepCarried002": 1,
+        "KeepCarried003": 1,
+        "KeepCarried004": 1,
+        "KeepCarried005": 1,
+        "KeepCarried006": 1,
+        "KeepCarried007": 1,
+        "KeepCarried008": 1,
+        "KeepCarried009": 1,
+        "KeepCarried010": 1,
+        "KeepCarried011": 1,
+        "KeepCarried012": 1,
+        "KeepCarried013": 1,
+        "KeepCarried014": 1,
+        "KeepCarried015": 1,
+        "KeepCarried016": 1,
+        "KeepCarried017": 1,
+        "KeepCarried018": 1,
+        "KeepCarried019": 1,
+        "KeepCarried020": 1,
+        "KeepCarried021": 1,
+        "KeepCarried022": 1,
+        "KeepCarried023": 1,
+        "KeepCarried024": 1,
+        "KeepCite": 1,
+        "KeepFollow": 1,
+        "KeepHeading": 1,
+        "KeepLead01": 1,
+        "KeepLead02": 1,
+        "KeepLead03": 1,
+        "KeepLead04": 1,
+        "KeepLead05": 1,
+        "KeepLead06": 1,
+        "KeepLead07": 1,
+        "KeepLead08": 1,
+        "KeepLead09": 1,
+        "KeepLead10": 1,
+        "KeepLead11": 1,
+        "KeepLead12": 1,
+        "KeepLead13": 1,
+        "KeepLead14": 1,
+        "KeepLead15": 1,
+        "KeepLead16": 1,
+        "KeepLead17": 1,
+        "KeepLead18": 1,
+        "KeepLead19": 1,
+        "KeepLead20": 1,
+        "KeepLead21": 1,
+        "KeepLead22": 1,
+        "KeepLead23": 1,
+        "KeepLead24": 1,
+        "KeepNoteTwo001": 1,
+        "KeepTail01": 1,
+        "KeepTail02": 1,
+        "KeepTail03": 1,
+        "KeepTail04": 1,
+        "KeepTail05": 1,
+        "KeepTail06": 1,
+        "KeepTail07": 1,
+        "KeepTail08": 1,
+        "KeepTail09": 1,
+        "KeepTail10": 1,
+        "KeepTail11": 1,
+        "KeepTail12": 1,
+        "Spruce": 64,
+        "a": 1,
+        "body": 36,
+        "carried": 1,
+        "cites": 2,
+        "heading.": 1,
+        "line.": 61,
+        "note": 25,
+        "note.": 2,
+        "paragraph": 1,
+        "register": 1,
+        "section": 1,
+        "short": 1,
+        "the": 1
+      },
+      "assertions": [
+        {
+          "type": "same-page",
+          "version": 1,
+          "markers": [
+            "KeepHeading",
+            "KeepFollow"
+          ]
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "KeepHeading",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "KeepNoteTwo001",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "KeepTail01",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
+      }
+    },
+    {
+      "id": "notes-keep-lines-note-in-table",
+      "version": 1,
+      "category": "notes",
+      "description": "Table row on body line 31 citing a twelve-line keep-lines note that does not fit below it (positions follow the reference; Word adjudication pending)",
+      "input": "fixtures/notes-keep-lines-note-in-table.docx",
+      "sha256": "4a6b14c3cc5c4e56cf8a10e9085d6400fac96167fc6e6fdbeabcf041fbcec630",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "1": 2,
+        "Spruce": 51,
+        "TableCite": 1,
+        "TableKeepNote001": 1,
+        "TableKeepNote002": 1,
+        "TableKeepNote003": 1,
+        "TableKeepNote004": 1,
+        "TableKeepNote005": 1,
+        "TableKeepNote006": 1,
+        "TableKeepNote007": 1,
+        "TableKeepNote008": 1,
+        "TableKeepNote009": 1,
+        "TableKeepNote010": 1,
+        "TableKeepNote011": 1,
+        "TableKeepNote012": 1,
+        "TableLead01": 1,
+        "TableLead02": 1,
+        "TableLead03": 1,
+        "TableLead04": 1,
+        "TableLead05": 1,
+        "TableLead06": 1,
+        "TableLead07": 1,
+        "TableLead08": 1,
+        "TableLead09": 1,
+        "TableLead10": 1,
+        "TableLead11": 1,
+        "TableLead12": 1,
+        "TableLead13": 1,
+        "TableLead14": 1,
+        "TableLead15": 1,
+        "TableLead16": 1,
+        "TableLead17": 1,
+        "TableLead18": 1,
+        "TableLead19": 1,
+        "TableLead20": 1,
+        "TableLead21": 1,
+        "TableLead22": 1,
+        "TableLead23": 1,
+        "TableLead24": 1,
+        "TableLead25": 1,
+        "TableLead26": 1,
+        "TableLead27": 1,
+        "TableLead28": 1,
+        "TableLead29": 1,
+        "TableLead30": 1,
+        "TableTail01": 1,
+        "TableTail02": 1,
+        "TableTail03": 1,
+        "TableTail04": 1,
+        "TableTail05": 1,
+        "TableTail06": 1,
+        "TableTail07": 1,
+        "TableTail08": 1,
+        "a": 1,
+        "body": 38,
+        "cites": 1,
+        "kept": 1,
+        "line.": 50,
+        "note": 12,
+        "note.": 1,
+        "row": 1
+      },
+      "assertions": [
+        {
+          "type": "same-page",
+          "version": 1,
+          "markers": [
+            "TableKeepNote001",
+            "TableKeepNote012"
+          ]
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "TableCite",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "TableKeepNote001",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "TableTail01",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "d98d208621bb2e27799d0d048cf878817ad0e3b74f6e6026fa3d7ea35aa4b675"
       }
     }
   ]

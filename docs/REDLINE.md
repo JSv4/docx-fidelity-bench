@@ -1,0 +1,91 @@
+# Redline track scoring
+
+The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
+
+The suite is `redline-v1`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+
+## Cases
+
+`bench/redline_fixtures.py` authors every package from literal text and original OOXML. Regenerating it must reproduce every file byte for byte; `python3 -m bench.audit` and the tests check this. Each case records:
+
+- `operation` and its `inputs`, each with a path, SHA-256 and role (`left`/`right`, `base`/`reviewer`, or the tracked `input`);
+- `expected`: for `compare` and `consolidate`, the document accept-all must produce (`accepted`: the revised document, or for consolidation the authored merge of every reviewer's change) and the document reject-all must produce (`rejected`: the original or base); for `reject`, the `output` the operation must produce;
+- `authored`: a redline (or resolved output) that is correct by construction, used for calibration;
+- `assertions`: declared, versioned structural checks;
+- `libreoffice`: for each expected document, whether LibreOffice can make that comparison (see below), with the reason when it cannot;
+- `kind` (`reproducer`, `control` or `identity`), the Docxodus issue it pins, the rights record and the generator identity.
+
+Every reproducer has a control: the same document shape without the trigger. Controls show that a failure belongs to the reported defect, not to the shape. Two identity cases calibrate the pipeline: a byte-identical pair, and a pair with equal content serialized with different run splits and revision-save ids, on which a comparison must report no change.
+
+## Checks
+
+A case scores **100** when every applicable check passes and **0** otherwise. There is no partial credit: a redline that is wrong on accept or reject is wrong. The evidence keeps a similarity ratio and a short diff for each failed comparison as diagnostics only.
+
+1. **Conversion and integrity.** The candidate returns status `ok` with the output's digest. Its inputs are unchanged. The output opens as a package with one main document. The case's expected documents and authored redline are re-verified against the manifest digests when the case is scored. A known candidate failure (`failed`) scores zero; an unverifiable build or environment (`unmeasured`) blocks the suite score.
+2. **Round trip through the benchmark's revision engine.** `bench/revisions.py` accepts every revision of the candidate's package and compares the result with `expected.accepted`, then rejects every revision and compares with `expected.rejected`. For `reject` cases, the candidate's output itself is compared with `expected.output`. This engine is written for this repository and shares no code with any candidate. It applies ECMA-376 Part 1 §17.13.5 markup directly:
+   - accepting keeps `w:ins` and `w:moveTo` content and drops `w:del` and `w:moveFrom` content; rejecting does the reverse, restoring deleted text and field instructions;
+   - a removed paragraph mark joins its paragraph to the next paragraph of the same container, whose properties the joined paragraph keeps; a removed mark with no following paragraph keeps its paragraph unless the paragraph is empty and not the last of the body or the only paragraph of a cell, note, comment or header;
+   - row markers (`w:trPr/w:ins|del`), cell markers (`w:cellIns`/`w:cellDel`) and revision markers in a math run's properties are resolved; move range markers and custom-XML range markers (which record only the insertion or deletion of custom-XML tags) are dropped;
+   - property-change records (`w:rPrChange`, `w:pPrChange`, `w:sectPrChange`, `w:tblPrChange`, `w:trPrChange`, `w:tcPrChange`, `w:tblGridChange`, `w:tblPrExChange`, `w:numberingChange`) are dropped on accept and restore the prior properties on reject;
+   - a block content control or custom-XML element left with no content is removed, as is a table left with no rows.
+   - For `consolidate`, attribution is checked too: accepting only one reviewer's revisions (by `w:author`) and rejecting every other revision must reproduce that reviewer's document.
+3. **Round trip through LibreOffice.** `bench/lo_revisions.py` runs LibreOffice's own accept-all and reject-all (`.uno:AcceptAllTrackedChanges`, `.uno:RejectAllTrackedChanges`) through headless UNO, in a private profile and process, and saves the result with LibreOffice's Word filter. The expected document takes the same path, loaded and saved without an operation, so LibreOffice's import and export normalization applies equally to both sides. The two are compared on the text view. CI pins LibreOffice 25.8.7.3.
+4. **Validity.** The pinned Open XML SDK validator (`tools/ooxml-validator`, DocumentFormat.OpenXml 3.5.1, file format `Microsoft365`) checks the candidate's package and every input. A finding counts by its error id, part and description; the package fails when any finding occurs more often than in every input. An XPath alone never distinguishes findings, so a moved error is not new and a duplicated one is. A run without the validator has no suite score.
+5. **Declared assertions**, each versioned:
+   - `untracked-text` v1 (scope `redline`): each listed text occurs in a paragraph of the declared `story` (`body`, or `headers` for every referenced header and footer) outside every `w:ins`, `w:del`, `w:moveFrom` and `w:moveTo`. A tracked span breaks the paragraph's untracked text, so text cannot be assembled across it, and text placed in a part the view does not read (an unreferenced comment, note or header) does not count. Cases list only text a correct redline leaves unchanged, so deleting and reinserting a whole document, which would otherwise pass both round trips, fails;
+   - `paragraph-count` v1: the number of `w:p` in the body of the raw redline (scope `redline`). This is a minimality requirement, not reversibility: the #1183 cases use it to require that the revised document's paragraph folds into the deleted one, as Word's compare does;
+   - `para-ids-valid` v1: every `w14:paraId` in every XML part is eight hexadecimal digits, below `0x80000000`, and unique across the package;
+   - `style-ids-unique` v1: no two `w:style` elements share a `w:styleId`, whatever their types;
+   - `revision-count` v1: at most `max` revision records in the redline or output (scope `redline` or `output`); a `w:delText` or `w:delInstrText` outside any deletion also counts. Every `reject` case requires zero.
+
+Unknown assertion types, versions or scopes are rejected when the registry is loaded.
+
+## The semantic view
+
+View version 1 is a JSON value with one entry per story:
+
+- `body`; each header and footer as `section{n}:{header|footer}:{type}`, following the section's references; each note as `footnote{k}`/`endnote{k}`, numbered by first reference; each comment as `comment{k}`, numbered by first marker, with its author.
+- Each story is a list of blocks in document order. A paragraph records its container path (`body/tbl0/tr1/tc0`, `body/sdt0`, `body/customXml0:element`), its paragraph style resolved to the style's type and name, and its inline tokens. A bookmark, comment range or permission marker between blocks is its own record at that position.
+- Inline tokens are text (`w:t`, restored `w:delText`, tabs, breaks, hyphen characters), and markers: `field-begin`, `field-separate`, `field-end` and `field-instruction:…` for complex fields, `field-simple:…` for simple fields, `bookmark-start:NAME`/`bookmark-end:NAME`, `comment-start:k`/`comment-end:k`/`comment-reference:k`, note references and marks, objects, and the boundaries of inline content controls, custom-XML elements, hyperlinks, ruby and math zones. Field characters are therefore compared by count and order, bookmarks by name and position, comments by position and content.
+- Revision ids, bookmark ids, comment ids, `w14:paraId`, revision-save ids and run boundaries are not part of the view. Character formatting and paragraph properties other than the style are not compared in version 1.
+- One empty paragraph at the very end of the body is dropped. A document's final paragraph mark cannot be deleted, so accepting the deletion of the last paragraphs legitimately leaves one.
+- Of `mc:AlternateContent`, only the chosen branch is read; `mc:Fallback` is skipped.
+
+The **text view** keeps only each paragraph's path and text. It is the LibreOffice comparison.
+
+## LibreOffice: limits and eligibility
+
+LibreOffice is an independent established engine, but it does not represent everything a redline can carry. On 25.8.7.3:
+
+- it recomputes `PAGEREF` results on import and ignores revisions inside a field result;
+- it has no tracked bookmark changes, so a bookmark-only redline holds no revision it can see;
+- it re-encodes fields and tables of contents, unwraps custom XML, rewrites content controls and regenerates paragraph ids, so field characters, markers, paragraph ids and style ids are judged only by the benchmark's engine and the `redline`-scope assertions;
+- accepting the deletion of a document's last paragraphs leaves an empty final paragraph (handled by the view, above).
+
+A LibreOffice comparison applies to a case only where the case declares it eligible. The authored redline is run through LibreOffice in the same session as the candidate. It must show LibreOffice seeing its revisions (`redlinesBefore` above zero when it has any), resolving all of them (`redlinesAfter` zero), and reproducing the expected text view. That calibration must match the declaration in both directions; any disagreement makes the case unmeasured rather than passed. A session that fails on a benchmark fixture is repeated once from a fresh profile before the case is left unmeasured. A candidate output LibreOffice cannot load, or whose revisions it leaves unresolved, fails the comparison.
+
+Bookmarks have no tracked-change form in Word or LibreOffice. A redline can still mark a bookmark as inserted or deleted with `w:ins`/`w:del` around its markers, which the schema allows; whether bookmark changes round-trip is judged by the benchmark's engine alone. A declared-ineligible comparison is reported as not applicable with its reason. In `redline-v1`, 19 of 70 LibreOffice comparisons are declared ineligible: the field-result and bookmark-only cases for the reasons above, and the cases whose wrapper the comparison replaces whole with comments inside, because LibreOffice keeps a comment whose markers lie in resolved revisions and leaves an empty paragraph where a replaced wrapper copy is removed.
+
+## Suite score and comparisons
+
+Cases belong to one category: `fields`, `comments`, `bookmarks`, `styles`, `revisions`, `consolidate` or `identity`. The suite score is the mean of the category means, published only when every case is measured. The report also gives the pass rate, passes by kind, and how many LibreOffice comparisons applied.
+
+`bench redline compare BEFORE AFTER` refuses results with a different metric, suite digest, environment (LibreOffice and its Python, harness file digests, validator build) or adapter, but accepts different candidate commits. Both results must be complete runs of the same suite; a `--case` run is a diagnostic and is never complete. It lists each case that scored 100 before and does not now.
+
+## Calibration
+
+`--adapter authored` returns each case's authored redline. It must score 100 on every case with every check applicable to it, which shows that the declared expectations, the engine and the eligibility table are mutually consistent. CI runs it before the candidate. The tests also check that copying either input, a doubled field character, a duplicated style id, out-of-range or duplicated paragraph ids, and a whole-document delete-and-reinsert all fail.
+
+## Run
+
+```sh
+python3 -m bench redline validate
+python3 -m bench redline build-validator --out /path/to/validator
+python3 -m bench redline build-docxodus --source /path/to/Docxodus --commit FULL_COMMIT_SHA --out /path/to/adapter
+python3 -m bench redline run --adapter authored --candidate authored-calibration --validator /path/to/validator --out runs/redline-calibration
+python3 -m bench redline run --adapter docxodus --candidate FULL_COMMIT_SHA --build /path/to/adapter --validator /path/to/validator --out runs/redline
+```
+
+`build-docxodus` requires a clean checkout at the exact commit. It compiles `adapters/docxodus-redline` against that checkout's `Docxodus/Docxodus.csproj` into the output directory and records the commit, tree, adapter source digests, build recipe digest, .NET SDK version and every built assembly's digest in `redline-build.json`. Each case re-verifies that record and the checkout before invoking the adapter. The adapter calls `DocxCompare.Compare`, `DocxCompare.Consolidate` or `RevisionProcessor.RejectRevisions`, with the author `Bench` and the fixed date `2026-01-01T00:00:00Z` so outputs are reproducible.
+
+LibreOffice is found through `BENCH_LIBREOFFICE` or `PATH`; the UNO driver runs under `BENCH_LIBREOFFICE_PYTHON`, or the `python` LibreOffice ships beside `soffice`, or `/usr/bin/python3`. Their versions and digests are recorded with the run.

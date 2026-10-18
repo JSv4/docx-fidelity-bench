@@ -280,7 +280,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 92)
+        self.assertEqual(len(common.validate_registry()['cases']), 111)
 
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
@@ -306,7 +306,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v17')
+        self.assertEqual(registry['suite']['id'], 'core-v18')
 
     def test_legacy_header_pairs_preserve_everything_except_number_representation(self):
         import xml.etree.ElementTree as ET
@@ -570,6 +570,55 @@ class RegistryContract(unittest.TestCase):
                             properties.remove(element)
                 self.assertEqual(ET.tostring(original), ET.tostring(actual))
                 self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+
+    def test_1417_margin_pairs_change_only_the_margin_values(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        for fill, page in [('underfull', 1), ('overfull', 2)]:
+            pair = [records[f'paragraphs-page-margins-{name}-{fill}'] for name in ('1417', '1417-control')]
+            with ZipFile(common.ROOT / pair[0]['input']) as a, ZipFile(common.ROOT / pair[1]['input']) as b:
+                self.assertEqual(a.namelist(), b.namelist())
+                for name in a.namelist():
+                    if name != 'word/document.xml':
+                        self.assertEqual(a.read(name), b.read(name))
+                original, control = [ET.fromstring(z.read('word/document.xml')) for z in (a, b)]
+                margins = original.find('.//' + w + 'pgMar')
+                self.assertEqual([margins.get(w + side) for side in ('top', 'right', 'bottom', 'left')], ['1417'] * 4)
+                for side, value in zip(('top', 'right', 'bottom', 'left'), ('1416', '1418', '1418', '1416')):
+                    margins.set(w + side, value)
+                self.assertEqual(ET.tostring(original), ET.tostring(control))
+                heights = [int(s.get(w + 'line')) for s in original.iter(w + 'spacing')]
+                self.assertEqual(sum(heights), 16838 - 2 * 1417 + (1 if page == 2 else -1))
+            self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+            self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
+
+    def test_rule_pairs_change_only_the_height_rule(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        for exact, at_least, rows in [('tables-header-repeat-exact', 'tables-header-repeat-atleast', 1),
+                                      ('tables-row-height-exact-border-clip', 'tables-row-height-atleast-border-clip', 1)]:
+            with ZipFile(common.ROOT / records[exact]['input']) as a, ZipFile(common.ROOT / records[at_least]['input']) as b:
+                for name in a.namelist():
+                    if name != 'word/document.xml':
+                        self.assertEqual(a.read(name), b.read(name))
+                original, control = [ET.fromstring(z.read('word/document.xml')) for z in (a, b)]
+                changed = [h for h in original.iter(w + 'trHeight')][:rows]
+                for height in changed:
+                    self.assertEqual(height.get(w + 'hRule'), 'exact')
+                    height.set(w + 'hRule', 'atLeast')
+                self.assertEqual(ET.tostring(original), ET.tostring(control))
+            self.assertEqual(records[exact]['tokens'], records[at_least]['tokens'])
+
+    def test_repeated_header_text_is_counted_once_per_page(self):
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        for rule in ('exact', 'atleast'):
+            tokens = records['tables-header-repeat-' + rule]['tokens']
+            self.assertEqual((tokens['HeaderLeft'], tokens['HeaderRight']), (2, 2))
+            self.assertNotIn('HeaderLeft', [a.get('marker') for a in records['tables-header-repeat-' + rule]['assertions']])
 
     def test_unknown_assertion_is_rejected(self):
         registry = common.read_json(common.ROOT / 'fixtures/manifest.json')

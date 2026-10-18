@@ -68,7 +68,7 @@ def zip_write(path, parts):
             archive.writestr(item, payload.encode() if isinstance(payload, str) else payload)
 
 
-def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None):
+def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None):
     namespaces = f'xmlns:w="{W}" xmlns:r="{R}" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"'
     namespaces += namespaces_extra
     styles = f'''<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/><w:sz w:val="22"/><w:color w:val="000000"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="120" w:line="276" w:lineRule="auto"/><w:widowControl/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style><w:style w:type="paragraph" w:styleId="Title"><w:name w:val="Title"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:after="240"/></w:pPr><w:rPr><w:b/><w:sz w:val="32"/></w:rPr></w:style></w:styles>'''
@@ -88,6 +88,13 @@ def package(path, body, final_section=None, notes=None, image=False, namespaces_
         parts[f'word/{kind}s.xml'] = f'<w:{kind}s xmlns:w="{W}"><w:{kind} w:type="separator" w:id="-1"><w:p><w:r><w:separator/></w:r></w:p></w:{kind}><w:{kind} w:type="continuationSeparator" w:id="0"><w:p><w:r><w:continuationSeparator/></w:r></w:p></w:{kind}><w:{kind} w:id="1">{content}</w:{kind}></w:{kind}s>'
         relations.append(('rNotes', kind + 's', kind + 's.xml'))
         overrides.append((kind + 's', kind + 's'))
+    if footnote_list:
+        assert not notes, 'Use either one note or a list of footnotes'
+        # Several numbered footnotes, each given as (id, literal note content).
+        separators = '<w:footnote w:type="separator" w:id="-1"><w:p><w:r><w:separator/></w:r></w:p></w:footnote><w:footnote w:type="continuationSeparator" w:id="0"><w:p><w:r><w:continuationSeparator/></w:r></w:p></w:footnote>'
+        parts['word/footnotes.xml'] = f'<w:footnotes xmlns:w="{W}">{separators}' + ''.join(f'<w:footnote w:id="{i}">{c}</w:footnote>' for i, c in footnote_list) + '</w:footnotes>'
+        relations.append(('rNotes', 'footnotes', 'footnotes.xml'))
+        overrides.append(('footnotes', 'footnotes'))
     if image:
         parts['word/media/diamond.png'] = png(160, 160, lambda x, y: (0, 0, 0, 255) if abs(x - 79.5) + abs(y - 79.5) < 75 else (255, 255, 255, 0), alpha=True)
         relations.append(('rImage', 'image', 'media/diamond.png'))
@@ -101,13 +108,13 @@ def package(path, body, final_section=None, notes=None, image=False, namespaces_
 
 def generate():
     cases = []
-    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None):
+    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None):
         assertions = assertions or []
         for assertion in assertions:
             if assertion['type'] == 'marker-region':
                 assertion.update(version=2, tolerancePt=0.0001)
         path = ROOT / 'fixtures' / (case_id + '.docx')
-        package(path, body, sect, notes, image, namespaces_extra, styles_xml, story, notes_xml, stories, extra_parts)
+        package(path, body, sect, notes, image, namespaces_extra, styles_xml, story, notes_xml, stories, extra_parts, footnote_list)
         inventory = dict(sorted(Counter(' '.join(text).split()).items()))
         cases.append({'id': case_id, 'version': 2 if any(a['type'] == 'marker-region' for a in assertions) else 1, 'category': category, 'description': description, 'input': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'rights': {'author': 'John Scrudato IV', 'license': 'MIT', 'origin': 'Authored by bench/fixtures.py in this repository', 'assets': 'All text and graphics are generated here; no embedded font files'}, 'profile': {'review': 'final', 'comments': 'hidden'}, 'fonts': [FONT], 'tokens': inventory, 'assertions': assertions, 'generator': {'path': 'bench/fixtures.py', 'sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}})
     prose = 'The survey team records the height of each tower before the evening check. The next crew compares the notes and keeps the route open for the morning visit.'
@@ -572,7 +579,177 @@ def generate():
         edge_texts, edge_body, sect=edge_sect, styles_xml=ledger_styles,
         assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5}
                     for marker in ('EdgeTop', 'Rowan63', 'EdgeEnd')])
-    registry = {'schema': 1, 'suite': {'id': 'core-v17', 'version': 17, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # core-v18: rendering regressions from Docxodus #1164, #1168, #1171 and #1178-#1182. Lines use
+    # exact spacing so each page band holds a known number of lines.
+    def exact(twips):
+        return f'<w:widowControl w:val="0"/><w:spacing w:before="0" w:after="0" w:line="{twips}" w:lineRule="exact"/>'
+    # Docxodus #1164: A4 with 1417-twip (70.85pt) margins around a 14004-twip body band. Twelve exact
+    # lines one twip short of the band must stay on page 1; one twip over, the last line moves to page 2.
+    # The one-twip margins keep a correct paginator off floating-point ties. Controls use 1416/1418 twips
+    # (70.8pt/70.9pt), which have the same band but no fractional tenth of a point.
+    for name, margins in [('1417', (1417, 1417, 1417, 1417)), ('1417-control', (1416, 1418, 1418, 1416))]:
+        for fill, last, page in [('underfull', 1166, 1), ('overfull', 1168, 2)]:
+            top, right, bottom, left = margins
+            sect = (f'<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="{top}" w:right="{right}" w:bottom="{bottom}" '
+                    f'w:left="{left}" w:header="709" w:footer="709" w:gutter="0"/><w:cols w:space="708"/></w:sectPr>')
+            texts = [f'Geometry{i:02d} Fir margin register entry.' for i in range(1, 13)]
+            body = ''.join(para(text, exact(last if i == 12 else 1167)) for i, text in enumerate(texts, 1))
+            fill_label = 'fall one twip short of' if fill == 'underfull' else 'overfill by one twip'
+            add(f'paragraphs-page-margins-{name}-{fill}', 'paragraphs',
+                f'A4 page with {"1417-twip" if name == "1417" else "1416/1418-twip control"} margins; twelve exact lines {fill_label} the body band',
+                texts, body, sect=sect, styles_xml=ledger_styles,
+                assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'Geometry12', 'occurrence': 1, 'page': page,
+                             'rect': [60, 60, 540, 790]},
+                            {'type': 'marker-reference-position', 'version': 1, 'marker': 'Geometry01', 'tolerancePt': 0.5},
+                            {'type': 'marker-reference-position', 'version': 1, 'marker': 'Geometry12', 'tolerancePt': 0.5}])
+    # Docxodus #1168: exact-height rows that hide a whole paragraph or have zero height. Hidden
+    # content carries no visible tokens, so the inventory does not depend on how a provider writes
+    # clipped glyphs into the PDF text layer.
+    exact_borders = '<w:tblBorders>' + ''.join(f'<w:{side} w:val="single" w:sz="6" w:color="444444"/>' for side in ('top', 'left', 'bottom', 'right', 'insideH', 'insideV')) + '</w:tblBorders>'
+    def exact_table(rows, borders=exact_borders):
+        return ('<w:tbl><w:tblPr><w:tblW w:w="7200" w:type="dxa"/>' + borders + '<w:tblLayout w:type="fixed"/></w:tblPr>'
+                '<w:tblGrid><w:gridCol w:w="3600"/><w:gridCol w:w="3600"/></w:tblGrid>' + ''.join(rows) + '</w:tbl>')
+    def exact_row(height, cells, rule='exact', header=False):
+        props = ('<w:tblHeader/>' if header else '') + f'<w:trHeight w:val="{height}" w:hRule="{rule}"/>'
+        return '<w:tr><w:trPr>' + props + '</w:trPr>' + ''.join(f'<w:tc><w:tcPr><w:tcW w:w="3600" w:type="dxa"/></w:tcPr>{c}</w:tc>' for c in cells) + '</w:tr>'
+    blank = para(runs=run('     '), props='<w:spacing w:after="0"/>')
+    tight = '<w:spacing w:after="0"/>'
+    for name, hidden in [('exact-hidden-paragraph', True), ('exact-hidden-control', False)]:
+        texts, rows = [], []
+        for index in range(1, 4):
+            left, right = f'Hidden{index:02d} Birch record.', f'Entry{index:02d} Exact cell.'
+            texts += [left, right]
+            cell_xml = para(left, tight) + (para(props=tight, runs='') + blank if index == 2 and hidden else para(props=tight, runs='') if index == 2 else '')
+            rows.append(exact_row(300, [cell_xml, para(right, tight)]))
+        texts.append('HiddenAfter The ledger continues below the table.')
+        add('tables-row-height-' + name, 'tables',
+            'Exact 15pt rows; the second row cell ' + ('holds three paragraphs, the third wholly hidden by the row height' if hidden else 'holds two paragraphs, the second partly hidden'),
+            texts, exact_table(rows) + para(texts[-1], tight), sect=section().replace('w:footer="720"', 'w:footer="720" w:gutter="0"'), styles_xml=row_styles,
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5} for marker in ('Hidden03', 'HiddenAfter')])
+    for name, only in [('exact-zero-borderless', False), ('exact-zero-only', True)]:
+        texts = ['ZeroBefore The register opens above the table.']
+        rows = []
+        for index in range(1, 4):
+            if only or index == 2:
+                rows.append(exact_row(0, [blank, blank]))
+            else:
+                left, right = f'Zero{index:02d} Rowan record.', f'Entry{index:02d} Visible cell.'
+                texts += [left, right]
+                rows.append(exact_row(360, [para(left, tight), para(right, tight)], rule='atLeast'))
+        texts.append('ZeroAfter The register continues below the table.')
+        body = para(texts[0], tight) + exact_table(rows, '<w:tblBorders>' + ''.join(f'<w:{side} w:val="nil"/>' for side in ('top', 'left', 'bottom', 'right', 'insideH', 'insideV')) + '</w:tblBorders>') + para(texts[-1], tight)
+        add('tables-row-height-' + name, 'tables',
+            'Borderless table ' + ('made only of exact zero-height rows' if only else 'with one exact zero-height row between two visible rows'),
+            texts, body, sect=section().replace('w:footer="720"', 'w:footer="720" w:gutter="0"'), styles_xml=row_styles,
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': 'ZeroAfter', 'tolerancePt': 0.5}]
+            + ([] if only else [{'type': 'marker-reference-position', 'version': 1, 'marker': 'Zero03', 'tolerancePt': 0.5}]))
+    # Docxodus #1171: a repeated header row with exact and atLeast rules, and a bordered paragraph
+    # inside an exact row. Header text repeats once per page, so it is counted, not used as a marker.
+    for rule in ('exact', 'atLeast'):
+        texts, rows = [], [exact_row(400, [para('HeaderLeft Ledger column.', tight), para('HeaderRight Entry column.', tight)], rule=rule, header=True)]
+        for index in range(1, 61):
+            left, right = f'Cedar{index:02d} Repeated ledger.', f'Entry{index:02d} Header table.'
+            texts += [left, right]
+            rows.append(exact_row(360, [para(left, tight), para(right, tight)]))
+        texts += ['HeaderLeft Ledger column.', 'HeaderRight Entry column.'] * 2
+        add('tables-header-repeat-' + rule.lower(), 'tables', f'Sixty exact rows under a repeated {rule} header row across two pages',
+            texts, exact_table(rows), sect=section().replace('w:footer="720"', 'w:footer="720" w:gutter="0"'), styles_xml=row_styles,
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5} for marker in ('Cedar01', 'Cedar35', 'Cedar60')])
+    for rule in ('exact', 'atLeast'):
+        boxed = '<w:pBdr>' + ''.join(f'<w:{side} w:val="single" w:sz="12" w:space="2" w:color="246B7D"/>' for side in ('top', 'left', 'bottom', 'right')) + '</w:pBdr><w:spacing w:after="0"/>'
+        texts = ['BoxClip Juniper card.', 'BoxCell Neighbour cell.', 'BoxAfter The card register continues.']
+        cell_xml = para(props=boxed, runs=run(texts[0] + ' ') + '<w:r><w:br/></w:r><w:r><w:br/></w:r>' + run('   '))
+        body = exact_table([exact_row(360, [cell_xml, para(texts[1], tight)], rule=rule)]) + para(texts[2], tight)
+        add('tables-row-height-' + ('exact' if rule == 'exact' else 'atleast') + '-border-clip', 'tables',
+            f'Three-line bordered paragraph in an 18pt {rule} row' + (', clipped by the row height with side borders kept; border clipping is measured by the raster score only' if rule == 'exact' else ' (control: the row grows)'),
+            texts, body, sect=section().replace('w:footer="720"', 'w:footer="720" w:gutter="0"'), styles_xml=row_styles,
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5} for marker in ('BoxClip', 'BoxAfter')])
+    # Docxodus #1178-#1182: footnote layout around long and carried notes. Every body and note line
+    # is an exact 18pt line, so a 648pt body band holds 36 lines.
+    note_props = exact(360)
+    def reference(number):
+        return ' <w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr><w:footnoteReference w:id="' + str(number) + '"/></w:r>'
+    def note(prefix, count, keep=False):
+        lines = [f'{prefix}{i:03d} Spruce note line.' for i in range(1, count + 1)]
+        props = note_props + ('<w:keepLines/>' if keep else '')
+        if keep:
+            content = para(props=props, runs='<w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr><w:footnoteRef/></w:r>' + run(' ') + '<w:r><w:br/></w:r>'.join(run(x) for x in lines))
+        else:
+            content = ''.join(para(props=props, runs=('<w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr><w:footnoteRef/></w:r>' + run(' ') if i == 0 else '') + run(x)) for i, x in enumerate(lines))
+        return lines, content
+    def cite(text, number):
+        return para(props=note_props, runs=run(text + ' ').replace('</w:t></w:r>', '</w:t></w:r>', 1).rstrip() + reference(number).strip())
+    def body_lines(prefix, count):
+        lines = [f'{prefix}{i:02d} Spruce body line.' for i in range(1, count + 1)]
+        return lines, ''.join(para(x, note_props) for x in lines)
+    note_section = section().replace('w:footer="720"', 'w:footer="720" w:gutter="0"')
+    # #1178: a note that fills nearly a whole page under its citing line, cited first and mid-page.
+    for name, before in [('notes-tall-note-first-line', 0), ('notes-tall-note-mid-page', 10)]:
+        lead, lead_xml = body_lines('TallLead', before)
+        tall, tall_xml = note('TallNote', 70)
+        after, after_xml = body_lines('TallBody', 30)
+        texts = lead + ['TallCite Spruce register cites the tall note.', '1', '1'] + tall + after
+        body = lead_xml + cite('TallCite Spruce register cites the tall note.', 1) + after_xml
+        keep_line = 30 if before == 0 else 23
+        add(name, 'notes', f'Seventy-line footnote cited on body line {before + 1}; the note fills nearly all of the rest of page 1',
+            texts, body, sect=note_section, styles_xml=ledger_styles, footnote_list=[(1, tall_xml)],
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': f'TallNote{keep_line:03d}', 'occurrence': 1, 'page': 1, 'rect': [60, 60, 552, 760]},
+                        {'type': 'marker-reference-position', 'version': 1, 'marker': 'TallBody01', 'tolerancePt': 0.5},
+                        {'type': 'marker-reference-position', 'version': 1, 'marker': 'TallNote070', 'tolerancePt': 0.5}])
+    # #1179: once a note continues onto the next page, no later note starts below it on its page.
+    for name, long_count in [('notes-continued-note-last', 30), ('notes-continued-note-last-control', 4)]:
+        lead, lead_xml = body_lines('SplitLead', 20)
+        a_lines, a_xml = note('SplitNoteA', long_count)
+        b_lines, b_xml = note('ShortNoteB', 1)
+        after, after_xml = body_lines('SplitBody', 30)
+        texts = lead + ['SplitCiteA Spruce register cites the long note.', '1', '1', 'SplitCiteB Spruce register cites the short note.', '2', '2'] + a_lines + b_lines + after
+        body = lead_xml + cite('SplitCiteA Spruce register cites the long note.', 1) + cite('SplitCiteB Spruce register cites the short note.', 2) + after_xml
+        last = a_lines[-1].split()[0]
+        assertions = [{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5} for marker in ('SplitCiteB', 'ShortNoteB001', last, 'SplitBody01')]
+        if long_count > 4:
+            assertions.append({'type': 'same-page', 'version': 1, 'markers': [last, 'ShortNoteB001']})
+        add(name, 'notes', 'Two citations on page 1: a ' + ('thirty-line note that continues onto page 2' if long_count > 4 else 'four-line note that fits') + ', then a one-line note',
+            texts, body, sect=note_section, styles_xml=ledger_styles, footnote_list=[(1, a_xml), (2, b_xml)], assertions=assertions)
+    # #1182: a carried note that does not end on a page; later citations wait for its end.
+    a_lines, a_xml = note('CarriedNote', 90)
+    b_lines, b_xml = note('DeferredNoteB', 1)
+    c_lines, c_xml = note('DeferredNoteC', 1)
+    after, after_xml = body_lines('CarriedBody', 12)
+    texts = ['CarriedCite Spruce register cites the carried note.', '1', '1', 'DeferredCiteB Spruce register cites a deferred note.', '2', '2',
+             'DeferredCiteC Spruce register cites another deferred note.', '3', '3'] + a_lines + b_lines + c_lines + after
+    body = (cite('CarriedCite Spruce register cites the carried note.', 1) + cite('DeferredCiteB Spruce register cites a deferred note.', 2)
+            + cite('DeferredCiteC Spruce register cites another deferred note.', 3) + after_xml)
+    add('notes-carried-note-defers-citations', 'notes', 'Ninety-line note carried across pages; two later citations and their one-line notes follow it (positions follow the reference; Word adjudication pending)',
+        texts, body, sect=note_section, styles_xml=ledger_styles, footnote_list=[(1, a_xml), (2, b_xml), (3, c_xml)],
+        assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5}
+                    for marker in ('DeferredCiteB', 'DeferredNoteB001', 'DeferredNoteC001', 'CarriedNote090', 'CarriedBody01')])
+    # #1180: a keep-with-next heading and its citing paragraph beside a running note continuation.
+    lead, lead_xml = body_lines('KeepLead', 24)
+    a_lines, a_xml = note('KeepCarried', 24)
+    b_lines, b_xml = note('KeepNoteTwo', 1)
+    after, after_xml = body_lines('KeepTail', 12)
+    heading = 'KeepHeading Spruce section heading.'
+    follow = 'KeepFollow Spruce paragraph cites a short note.'
+    texts = lead + ['KeepCite Spruce register cites the carried note.', '1', '1', heading, follow, '2', '2'] + a_lines + b_lines + after
+    body = (lead_xml + cite('KeepCite Spruce register cites the carried note.', 1) + para(heading, note_props + '<w:keepNext/>')
+            + cite(follow, 2) + after_xml)
+    add('notes-keep-next-beside-continuation', 'notes', 'Keep-with-next heading and a paragraph citing a one-line note while a twenty-four-line note continues',
+        texts, body, sect=note_section, styles_xml=ledger_styles, footnote_list=[(1, a_xml), (2, b_xml)],
+        assertions=[{'type': 'same-page', 'version': 1, 'markers': ['KeepHeading', 'KeepFollow']}]
+        + [{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5} for marker in ('KeepHeading', 'KeepNoteTwo001', 'KeepTail01')])
+    # A table row citing a keep-lines note too tall for the rest of the page.
+    lead, lead_xml = body_lines('TableLead', 30)
+    a_lines, a_xml = note('TableKeepNote', 12, keep=True)
+    after, after_xml = body_lines('TableTail', 8)
+    texts = lead + ['TableCite Spruce row cites a kept note.', '1', '1'] + a_lines + after
+    cell_xml = cite('TableCite Spruce row cites a kept note.', 1)
+    table_xml = ('<w:tbl><w:tblPr><w:tblW w:w="9360" w:type="dxa"/>' + exact_borders + '<w:tblLayout w:type="fixed"/></w:tblPr>'
+                 '<w:tblGrid><w:gridCol w:w="9360"/></w:tblGrid><w:tr><w:tc><w:tcPr><w:tcW w:w="9360" w:type="dxa"/></w:tcPr>' + cell_xml + '</w:tc></w:tr></w:tbl>')
+    add('notes-keep-lines-note-in-table', 'notes', 'Table row on body line 31 citing a twelve-line keep-lines note that does not fit below it (positions follow the reference; Word adjudication pending)',
+        texts, lead_xml + table_xml + after_xml, sect=note_section, styles_xml=ledger_styles, footnote_list=[(1, a_xml)],
+        assertions=[{'type': 'same-page', 'version': 1, 'markers': ['TableKeepNote001', 'TableKeepNote012']}]
+        + [{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5} for marker in ('TableCite', 'TableKeepNote001', 'TableTail01')])
+    registry = {'schema': 1, 'suite': {'id': 'core-v18', 'version': 18, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

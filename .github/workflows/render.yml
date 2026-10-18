@@ -147,3 +147,70 @@ jobs:
             references/
           retention-days: 30
           if-no-files-found: error
+  redline:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      BENCH_LIBREOFFICE: /opt/libreoffice25.8/program/soffice
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Validate the redline corpus
+        run: |
+          python3 -m bench redline validate
+          python3 -m unittest discover -s tests -p test_redline.py
+          mkdir -p runs
+      - name: Checkout pinned comparison library source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: JSv4/Docxodus
+          ref: ${{ inputs.candidate }}
+          path: renderer
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/*/
+            /Docxodus/
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68
+        with:
+          dotnet-version: '10.0.x'
+      - name: Install signed LibreOffice 25.8.7.3 revision engine
+        run: |
+          # The distribution package supplies runtime dependencies and a UNO-capable fallback Python.
+          sudo apt-get update
+          sudo apt-get install -y libreoffice-writer python3-uno
+          install_dir="$RUNNER_TEMP/lo-redline-install"
+          mkdir -p "$install_dir"
+          archive_url='https://downloadarchive.documentfoundation.org/libreoffice/old/25.8.7.3/deb/x86_64/LibreOffice_25.8.7.3_Linux_x86-64_deb.tar.gz'
+          curl --fail --location --retry 5 --retry-all-errors --proto '=https' --tlsv1.2 "$archive_url" -o "$install_dir/runtime.tar.gz"
+          curl --fail --location --retry 5 --proto '=https' --tlsv1.2 "$archive_url.asc" -o "$install_dir/runtime.asc"
+          curl --fail --location --retry 5 --proto '=https' --tlsv1.2 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xC2839ECAD9408FBE9531C3E9F434A1EFAFEEAEA3' -o "$install_dir/signing-key.asc"
+          mkdir "$install_dir/keyring"
+          chmod 700 "$install_dir/keyring"
+          gpg --homedir "$install_dir/keyring" --batch --import "$install_dir/signing-key.asc"
+          fingerprint=$(gpg --homedir "$install_dir/keyring" --with-colons --fingerprint C2839ECAD9408FBE9531C3E9F434A1EFAFEEAEA3 | awk -F: '$1 == "fpr" {print $10; exit}')
+          test "$fingerprint" = 'C2839ECAD9408FBE9531C3E9F434A1EFAFEEAEA3'
+          gpg --homedir "$install_dir/keyring" --batch --verify "$install_dir/runtime.asc" "$install_dir/runtime.tar.gz"
+          tar -xzf "$install_dir/runtime.tar.gz" -C "$install_dir"
+          sudo dpkg -i "$install_dir"/LibreOffice_*/DEBS/*.deb
+          "$BENCH_LIBREOFFICE" --version
+          ls -l /opt/libreoffice25.8/program/python* || true
+      - name: Build the validator and the source-bound comparison adapter
+        env:
+          CANDIDATE_COMMIT: ${{ inputs.candidate }}
+        run: |
+          python3 -m bench redline build-validator --out "$RUNNER_TEMP/validator"
+          python3 -m bench redline build-docxodus --source renderer --commit "$CANDIDATE_COMMIT" --out "$RUNNER_TEMP/adapter"
+      - name: Calibrate with the authored redlines
+        run: python3 -m bench redline run --adapter authored --candidate authored-calibration --validator "$RUNNER_TEMP/validator" --out runs/redline-calibration --gate pass
+      - name: Measure the candidate's redlines
+        env:
+          CANDIDATE_COMMIT: ${{ inputs.candidate }}
+        run: python3 -m bench redline run --adapter docxodus --candidate "$CANDIDATE_COMMIT" --build "$RUNNER_TEMP/adapter" --validator "$RUNNER_TEMP/validator" --out runs/redline --gate report
+      - name: Preserve redline evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: redline-evidence
+          path: runs/
+          retention-days: 30
+          if-no-files-found: warn
