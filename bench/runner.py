@@ -123,6 +123,11 @@ def run(output, reference, adapter, candidate):
     if html_declarations:
         contract.update(htmlAssertions=html_declarations, htmlInspectorVersion=html_artifacts.VERSION,
                         htmlInspectorSha256=digest(Path(html_artifacts.__file__)))
+        html_profiles = {c['id']: c['htmlProfile'] for c in registry['cases'] if c['id'] in html_declarations and c.get('htmlProfile')}
+        if html_profiles: contract['htmlProfiles'] = html_profiles
+        if any(html_artifacts.needs_browser(d) for d in html_declarations.values()):
+            contract.update(htmlBrowserInspectorVersion=html_artifacts.BROWSER_VERSION,
+                            htmlBrowserInspectorSha256=digest(html_artifacts.BROWSER_SOURCE))
     result = {'schema': 1, 'suite': registry['suite'], 'candidate': candidate, 'track': bundle['track'], 'contract': contract, 'contractDigest': identity(contract), 'cases': []}
     for case in registry['cases']:
         folder = output / case['id']
@@ -150,6 +155,9 @@ def run(output, reference, adapter, candidate):
             request = {'protocol': 1, 'input': str(contained(ROOT, render_case['input'])), 'inputSha256': render_case['sha256'], 'output': str(folder / 'candidate.pdf'), 'report': str(folder / 'production.json'), 'profile': case['profile'], 'fontDirectories': env['fontDirectories'], 'candidate': candidate, 'timeoutMs': 120000}
             if case['id'] in html_declarations:
                 request.update(htmlOutput=str(folder / 'candidate.html'), htmlReport=str(folder / 'html-production.json'))
+                if case.get('htmlProfile'): request['htmlProfile'] = case['htmlProfile']
+                if html_artifacts.needs_browser(case['htmlAssertions']):
+                    request.update(htmlAssertions=case['htmlAssertions'], htmlObservations=str(folder / 'html-browser.json'))
             try:
                 response = adapters.render(adapter, request)
             except (RuntimeError, subprocess.TimeoutExpired) as error:
@@ -191,7 +199,7 @@ def run(output, reference, adapter, candidate):
                             metrics.write_images(folder, i + 1, rp, cp, width, height)
                     outcome.update(status='measured', score=metrics.case_score(outcome['pages'], outcome['checks']), close=all(c['passed'] for c in outcome['checks']) and all(p.get('close', False) for p in outcome['pages']))
             if case['id'] in html_declarations:
-                outcome['html'] = html_artifacts.inspect(folder, response, html_declarations[case['id']])
+                outcome['html'] = html_artifacts.inspect(folder, response, html_declarations[case['id']], case.get('htmlProfile'))
             if digest(contained(ROOT, case['input'])) != case['sha256']:
                 raise ValueError('Renderer modified source bytes')
             if digest(request['input']) != request['inputSha256']:
@@ -208,7 +216,7 @@ def run(output, reference, adapter, candidate):
         result['contractDigest'] = identity(contract)
         result['summary'] = metrics.aggregate(result['cases'], registry['suite']['cases'])
         if html_declarations:
-            result['htmlSummary'] = html_artifacts.aggregate(result['cases'], html_declarations)
+            result['htmlSummary'] = html_artifacts.aggregate(result['cases'], html_declarations, contract.get('htmlBrowserInspectorSha256'), contract.get('htmlProfiles'))
         report.save(output, result)
         html_note = ''
         if case['id'] in html_declarations:
@@ -265,10 +273,27 @@ def validate_result(result):
             not re.fullmatch('[a-f0-9]{64}', result['contract']['pdfTextInspectorSha256'])):
         raise ValueError('Invalid declared PDF text normalization contract')
     html_declarations = result['contract'].get('htmlAssertions', {})
+    if (not isinstance(html_declarations, dict) or not set(html_declarations).issubset(result['suite']['cases']) or
+            any(not isinstance(d, list) or not d for d in html_declarations.values())):
+        raise ValueError('Invalid delivered HTML assertion contract')
     if html_declarations:
-        if (result['contract'].get('htmlInspectorVersion') != html_artifacts.VERSION or
+        for declarations in html_declarations.values():
+            for declaration in declarations: html_artifacts.validate_declaration(declaration)
+        profiles = result['contract'].get('htmlProfiles', {})
+        if not isinstance(profiles, dict) or not set(profiles).issubset(html_declarations):
+            raise ValueError('Invalid delivered HTML profile contract')
+        from .common import validate_render_profile
+        for profile in profiles.values(): validate_render_profile(profile)
+        if any(html_artifacts.needs_browser(d) for d in html_declarations.values()):
+            if (type(result['contract'].get('htmlBrowserInspectorVersion')) is not int or
+                    result['contract']['htmlBrowserInspectorVersion'] != html_artifacts.BROWSER_VERSION or
+                    not isinstance(result['contract'].get('htmlBrowserInspectorSha256'), str) or
+                    not re.fullmatch('[a-f0-9]{64}', result['contract']['htmlBrowserInspectorSha256'])):
+                raise ValueError('Invalid HTML browser inspector contract')
+        if (type(result['contract'].get('htmlInspectorVersion')) is not int or
+                result['contract'].get('htmlInspectorVersion') != html_artifacts.VERSION or
                 not isinstance(result['contract'].get('htmlInspectorSha256'), str) or
-                not re.fullmatch('[0-9a-f]{64}', result['contract']['htmlInspectorSha256']) or result.get('htmlSummary') != html_artifacts.aggregate(result['cases'], html_declarations)):
+                not re.fullmatch('[0-9a-f]{64}', result['contract']['htmlInspectorSha256']) or result.get('htmlSummary') != html_artifacts.aggregate(result['cases'], html_declarations, result['contract'].get('htmlBrowserInspectorSha256'), profiles)):
             raise ValueError('Invalid delivered HTML measurement contract or summary')
     expected = metrics.aggregate(result['cases'], result['suite']['cases'])
     if expected != result['summary']:

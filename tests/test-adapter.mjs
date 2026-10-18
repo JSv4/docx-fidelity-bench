@@ -49,20 +49,38 @@ test('public profiles and optional delivered HTML retain verified artifact ident
     mkdirSync(join(root, 'npm-export', 'dist'), { recursive: true });
     const modulePath = join(root, 'npm-export', 'dist', 'index.js');
     // Protocol-only fake: its output records the public options, never a fidelity result.
+    const browserPath = join(root, 'protocol-browser');
+    writeFileSync(browserPath, 'protocol browser');
+    const browserSha = hash('protocol browser');
+    mkdirSync(join(root, 'npm-export/node_modules/@playwright/browser-chromium'), { recursive: true });
+    writeFileSync(join(root, 'npm-export/package.json'), '{}');
+    writeFileSync(join(root, 'npm-export/node_modules/@playwright/browser-chromium/index.js'), `
+      exports.chromium = { executablePath: () => ${JSON.stringify(browserPath)},
+        launch: async options => {
+          if (!options.chromiumSandbox || options.timeout <= 0) throw new Error('Invalid observer launch');
+          return { close: async () => {}, newContext: async options => {
+            if (options.javaScriptEnabled || !options.offline) throw new Error('Observer policy changed');
+            return { close: async () => {}, newPage: async () => ({
+              setDefaultTimeout() {}, emulateMedia: async () => {}, setContent: async () => {},
+              evaluate: async (fn, declarations) => declarations ? [{ index: 0, marker: 'FormatLabel', matches: 1 }] : undefined
+            }) };
+          } };
+        } };
+    `);
     const module = `export async function checkExportEnvironment() { return { ok: true }; }
       export async function convertDocxToPdf(bytes, options) {
         if (options.commentProfile === 'endnotes') await new Promise(resolve => setTimeout(resolve, 25));
         return {
         pdf: Buffer.from(JSON.stringify(options)), renderReport: { environment: {
-          verification: 'nodeVerified', fidelityTier: 'releaseBaselined', observed: { browserBuild: 'contract-only' }
+          verification: 'nodeVerified', fidelityTier: 'releaseBaselined', observed: { browserBuild: 'contract-only', executableSha256: '${browserSha}' }
         } }
       }; }
       export async function convertDocxToStandaloneHtml(bytes, options) {
         if (options.commentProfile === 'inline') throw new Error('HTML fixture failure');
         if (options.commentProfile === 'endnotes' && options.timeoutMs >= 100) throw new Error('Conversion budget was reset');
-        return { html: '<span title="Bold added">FormatLabel</span>', renderReport: { environment: {
+        return { html: '<span title="Bold added">FormatLabel</span>', renderReport: { publicOptions: options, environment: {
           verification: 'nodeVerified', fidelityTier: options.commentProfile === 'margin' ? 'experimental' : 'releaseBaselined',
-          observed: { browserBuild: 'contract-only' }
+          observed: { browserBuild: 'contract-only', executableSha256: '${browserSha}' }
         } } };
       }`;
     writeFileSync(modulePath, module);
@@ -76,15 +94,21 @@ test('public profiles and optional delivered HTML retain verified artifact ident
       files: { 'npm-export/dist/index.js': hash(module) },
     }));
     const input = join(root, 'input.docx'); writeFileSync(input, 'protocol input');
-    for (const [name, markupPresentation, comments, htmlStatus] of [
+    for (const [name, markupPresentation, comments, htmlStatus, htmlProfile, observe] of [
       ['default', undefined, 'hidden', undefined], ['word', 'word', 'hidden', 'ok'],
       ['html-failure', 'word', 'inline', 'unmeasured'], ['html-unverified', 'word', 'margin', 'unmeasured'],
       ['shared-budget', 'word', 'endnotes', 'ok'],
+      ['html-override', 'word', 'inline', 'ok', { review: 'final', comments: 'hidden' }],
+      ['reader', 'word', 'hidden', 'ok', undefined, 'observe'],
+      ['reader-no-path', 'word', 'hidden', 'unmeasured', undefined, 'missing'],
     ]) {
       const profile = { review: 'markup', comments, ...(markupPresentation ? { markupPresentation } : {}) };
       const output = join(root, `output-${name}.pdf`);
       const result = request({ protocol: 1, candidate, input, inputSha256: hash('protocol input'), output,
-        report: output + '.json', profile, fontDirectories: [], timeoutMs: name === 'shared-budget' ? 100 : 120000,
+        report: output + '.json', profile, ...(htmlProfile ? { htmlProfile } : {}),
+        ...(observe ? { htmlAssertions: [{ type: 'marker-readable', version: 1, marker: 'FormatLabel', tokens: ['FormatLabel'] }],
+          ...(observe === 'observe' ? { htmlObservations: output + '.observations.json' } : {}) } : {}),
+        fontDirectories: [], timeoutMs: name === 'shared-budget' ? 100 : 120000,
         ...(htmlStatus ? { htmlOutput: output + '.html', htmlReport: output + '.html.json' } : {}) },
         { DOCXODUS_SOURCE_ROOT: root, DOCXODUS_EXPORT_MODULE: modulePath });
       assert.equal(result.status, 'ok', JSON.stringify(result.error));
@@ -99,7 +123,23 @@ test('public profiles and optional delivered HTML retain verified artifact ident
           assert.equal(result.htmlArtifact.sha256, hash(readFileSync(output + '.html')));
           assert.match(readFileSync(output + '.html', 'utf8'), /title="Bold added"/);
           assert.ok(existsSync(output + '.html.json'));
-        } else assert.equal(existsSync(output + '.html'), false);
+          const htmlOptions = JSON.parse(readFileSync(output + '.html.json')).publicOptions;
+          assert.equal(htmlOptions.reviewProfile, htmlProfile?.review ?? profile.review);
+          assert.equal(htmlOptions.commentProfile, htmlProfile?.comments ?? profile.comments);
+          assert.equal(htmlOptions.markupPresentation, htmlProfile ? undefined : profile.markupPresentation);
+          assert.deepEqual(result.htmlArtifact.profile, htmlProfile ?? profile);
+          if (observe === 'observe') {
+            const facts = JSON.parse(readFileSync(output + '.observations.json'));
+            assert.equal(result.htmlArtifact.browserFactsSha256, hash(readFileSync(output + '.observations.json')));
+            assert.equal(facts.htmlSha256, result.htmlArtifact.sha256);
+            assert.equal(facts.executableSha256, browserSha);
+            assert.equal(facts.inspectorSha256, hash(readFileSync(new URL('../bench/html_browser.mjs', import.meta.url))));
+            assert.equal(facts.observations[0].marker, 'FormatLabel');
+          }
+        } else {
+          assert.equal(existsSync(output + '.html'), observe === 'missing');
+          if (observe === 'missing') assert.match(result.htmlArtifact.error, /observation path is missing/);
+        }
       } else assert.equal(Object.hasOwn(result, 'htmlArtifact'), false);
     }
   } finally { rmSync(root, { recursive: true, force: true }); }

@@ -337,7 +337,25 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 129)
+        self.assertEqual(len(common.validate_registry()['cases']), 131)
+
+    def test_comment_pair_changes_only_note_length_and_declares_both_profiles(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records[c] for c in ('comments-long-scrollable-margin', 'comments-short-margin-control')]
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        with ZipFile(common.ROOT / pair[0]['input']) as long, ZipFile(common.ROOT / pair[1]['input']) as short:
+            self.assertEqual(long.namelist(), short.namelist())
+            for name in long.namelist():
+                if name != 'word/comments.xml': self.assertEqual(long.read(name), short.read(name))
+            for archive, record, count in zip((long, short), pair, (240, 8)):
+                tokens = ET.fromstring(archive.read('word/comments.xml')).find('.//{' + fixtures.W + '}t').text.split()
+                self.assertEqual(tokens, [f'CedarNote{i:03d}' for i in range(count)])
+                self.assertEqual(record['profile'], {'review': 'final', 'comments': 'hidden'})
+                self.assertEqual(record['htmlProfile'], {'review': 'final', 'comments': 'margin'})
+                self.assertEqual(record['htmlAssertions'], [{'type': 'marker-readable', 'version': 1,
+                                                          'marker': tokens[-1], 'tokens': tokens}])
 
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
@@ -363,7 +381,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v26')
+        self.assertEqual(registry['suite']['id'], 'core-v27')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET

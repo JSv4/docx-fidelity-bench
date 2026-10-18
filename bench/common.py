@@ -74,6 +74,16 @@ def validate_pdf_text_policy(case, root=None):
         raise ValueError('Decorative dot policy requires an authored dot-leader tab')
 
 
+def validate_render_profile(profile):
+    if (not isinstance(profile, dict) or not {'review', 'comments'}.issubset(profile) or
+            set(profile) - {'review', 'comments', 'markupPresentation'} or
+            not isinstance(profile.get('review'), str) or profile['review'] not in {'final', 'original', 'markup'} or
+            not isinstance(profile.get('comments'), str) or profile['comments'] not in {'hidden', 'inline', 'margin', 'endnotes'} or
+            ('markupPresentation' in profile and (not isinstance(profile['markupPresentation'], str) or profile['markupPresentation'] not in {'html', 'word'}))):
+        raise ValueError('Invalid declared artifact profile')
+    return profile
+
+
 def validate_registry(registry=None):
     registry = registry or read_json(ROOT / 'fixtures/manifest.json')
     if registry.get('schema') != 1 or not isinstance(registry['suite'].get('version'), int) or registry['suite']['version'] < 1:
@@ -93,11 +103,13 @@ def validate_registry(registry=None):
         validate_pdf_text_policy(case)
         if not isinstance(case.get('htmlAssertions', []), list):
             raise ValueError('Delivered HTML assertions must be a list')
+        from .html_artifacts import validate_declaration
         for assertion in case.get('htmlAssertions', []):
-            if (not isinstance(assertion, dict) or set(assertion) != {'type', 'version', 'marker', 'attribute', 'equals'} or
-                    assertion['type'] != 'marker-attribute' or type(assertion['version']) is not int or assertion['version'] != 1 or
-                    any(not isinstance(assertion[k], str) or not assertion[k] for k in ('marker', 'attribute', 'equals'))):
-                raise ValueError('Unknown or invalid delivered HTML assertion')
+            validate_declaration(assertion)
+        if 'htmlProfile' in case:
+            validate_render_profile(case['htmlProfile'])
+            if not case.get('htmlAssertions'):
+                raise ValueError('An HTML profile override requires declared HTML checks')
         for assertion in case['assertions']:
             versions = {'marker-region': {1, 2}, 'same-page': {1}, 'marker-reference-position': {1}}
             if assertion.get('version') not in versions.get(assertion.get('type'), set()):

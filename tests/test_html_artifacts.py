@@ -117,6 +117,17 @@ class HtmlArtifactContract(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'coverage'):
             runner.validate_result(value)
 
+    def test_malformed_measurements_and_assertion_contracts_are_rejected(self):
+        for declarations in (None, [], {'sample': None}, {'sample': []}, {'other': [ASSERTION]}):
+            value = self.result('<span title="Bold added">FormatLabel</span>')
+            value['contract']['htmlAssertions'] = declarations
+            value['contractDigest'] = common.identity(value['contract'])
+            with self.assertRaises(ValueError): runner.validate_result(value)
+        value = self.result('<span title="Bold added">FormatLabel</span>')
+        value['cases'][0]['html'] = None
+        with self.assertRaisesRegex(ValueError, 'measurement'):
+            runner.validate_result(value)
+
     def test_cli_gates_distinguish_failed_and_unmeasured_html(self):
         import sys
         from unittest.mock import patch
@@ -152,7 +163,7 @@ class HtmlArtifactContract(unittest.TestCase):
 
 
 class HtmlRunnerIntegration(unittest.TestCase):
-    def measured(self, title, adapter='contract'):
+    def measured(self, title, adapter='contract', declaration=ASSERTION, html_profile=None, browser_facts=None):
         from unittest.mock import patch
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
@@ -161,7 +172,8 @@ class HtmlRunnerIntegration(unittest.TestCase):
             raster = root / 'page.ppm'; raster.write_bytes(b'P6\n1 1\n255\n\xff\xff\xff')
             case = {'id': 'sample', 'category': 'paragraphs', 'input': 'input.docx', 'sha256': common.digest(source),
                     'profile': {'review': 'markup', 'comments': 'hidden'}, 'fonts': [], 'tokens': {'FormatLabel': 1},
-                    'assertions': [], 'htmlAssertions': [ASSERTION]}
+                    'assertions': [], 'htmlAssertions': [declaration]}
+            if html_profile is not None: case['htmlProfile'] = html_profile
             registry = {'suite': {'id': 'contract', 'version': 1, 'cases': ['sample']}, 'cases': [case]}
             bundle = {'track': 'libreoffice', 'cases': {'sample': {'eligible': True, 'pdf': 'reference.pdf'}}}
             common.write_json(root / 'bundle.json', bundle)
@@ -174,6 +186,15 @@ class HtmlRunnerIntegration(unittest.TestCase):
                     path = Path(request['htmlOutput'])
                     path.write_text(f'<span title="{title}">FormatLabel</span>')
                     response['htmlArtifact'] = {'status': 'ok', 'sha256': common.digest(path)}
+                    if html_profile is not None: response['htmlArtifact']['profile'] = html_profile
+                    if browser_facts is not None and 'htmlObservations' in request:
+                        facts = dict(browser_facts, schema=1, htmlSha256=common.digest(path),
+                                     inspectorSha256=common.digest(html_artifacts.BROWSER_SOURCE),
+                                     policy=html_artifacts.BROWSER_POLICY, executableSha256='a' * 64)
+                        facts_path = Path(request['htmlObservations'])
+                        common.write_json(facts_path, facts)
+                        response['htmlArtifact']['browserFactsSha256'] = common.digest(facts_path)
+                        response['renderer']['runtime'] = {'executableSha256': 'a' * 64}
                 return response
             with patch.object(runner, 'ROOT', root), patch.object(runner, 'validate_registry', return_value=registry), \
                  patch.object(runner, 'environment', return_value={'contract': {}, 'fontDirectories': []}), \
@@ -216,3 +237,26 @@ class HtmlRunnerIntegration(unittest.TestCase):
         self.assertNotIn('htmlSummary', result)
         self.assertNotIn('Delivered HTML feature checks', page)
         self.assertEqual(result['summary']['score'], 100)
+
+    def test_readable_html_request_and_profile_cannot_be_silently_omitted(self):
+        # Protocol-only measurements: prove orchestration, not renderer fidelity.
+        declaration = {'type': 'marker-readable', 'version': 1, 'marker': 'FormatLabel', 'tokens': ['FormatLabel']}
+        observation = {'index': 0, 'marker': 'FormatLabel', 'matches': 1, 'text': 'FormatLabel',
+                       'blockText': 'FormatLabel', 'before': [0, 0, 50, 10], 'after': [0, 0, 50, 10],
+                       'viewport': [0, 0, 1280, 1024], 'ports': []}
+        profile = {'review': 'final', 'comments': 'margin'}
+        result, request, _ = self.measured('ignored', declaration=declaration, html_profile=profile,
+                                          browser_facts={'observations': [observation]})
+        self.assertEqual(request['htmlProfile'], profile)
+        self.assertEqual(request['htmlAssertions'], [declaration])
+        self.assertTrue(request['htmlObservations'].endswith('/html-browser.json'))
+        self.assertEqual(result['contract']['htmlProfiles'], {'sample': profile})
+        self.assertEqual(result['contract']['htmlBrowserInspectorSha256'], common.digest(html_artifacts.BROWSER_SOURCE))
+        self.assertEqual(result['htmlSummary']['passed'], 1)
+        missing, _, _ = self.measured('ignored', declaration=declaration, html_profile=profile)
+        self.assertFalse(missing['htmlSummary']['complete'])
+        changed = copy.deepcopy(result)
+        changed['contract'].pop('htmlBrowserInspectorSha256')
+        changed['contractDigest'] = common.identity(changed['contract'])
+        with self.assertRaisesRegex(ValueError, 'browser inspector'):
+            runner.validate_result(changed)
