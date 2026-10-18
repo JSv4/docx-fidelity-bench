@@ -762,7 +762,24 @@ def generate():
         assertions=[{'type': 'same-page', 'version': 1, 'markers': ['TableKeepNote001', 'TableKeepNote012']},
                     {'type': 'marker-region', 'version': 2, 'marker': 'TableLead30', 'occurrence': 1, 'page': 1, 'rect': [60, 60, 552, 760]},
                     dict({'type': 'same-page', 'version': 1, 'markers': ['TableCite', 'TableKeepNote002', 'TableTail01']}, adjudicated='word')])
-    registry = {'schema': 1, 'suite': {'id': 'core-v20', 'version': 20, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Original decoration pairs for Docxodus #1220. Raster measurements, rather than text
+    # inventories, distinguish line count, pattern and color; each reproducer has a simple control.
+    decoration_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:color w:val="000000"/><w:sz w:val="40"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl/><w:spacing w:after="120"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>'
+    decoration_pairs = [
+        ('double-underline', '<w:u w:val="double"/>', '<w:u w:val="single"/>'),
+        ('double-strike', '<w:dstrike/>', '<w:strike/>'),
+        ('underline-and-strike', '<w:strike/><w:u w:val="single"/>', '<w:u w:val="single"/>'),
+        ('dotted-blue-underline', '<w:u w:val="dotted" w:color="0000FF"/>', '<w:u w:val="single" w:color="0000FF"/>'),
+    ]
+    for label, repro, control in decoration_pairs:
+        for suffix, properties in [('', repro), ('-control', control)]:
+            texts = ['CedarRule The archive crew labels each cedar tray.',
+                     'PlainRule The next tray awaits inspection.']
+            body = para(runs=run(texts[0], properties)) + para(texts[1])
+            add('decoration-' + label + suffix, 'paragraphs',
+                label.replace('-', ' ').title() + (' simpler control' if suffix else ' reproduction (Docxodus #1220)'),
+                texts, body, styles_xml=decoration_styles)
+    registry = {'schema': 1, 'suite': {'id': 'core-v21', 'version': 21, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
