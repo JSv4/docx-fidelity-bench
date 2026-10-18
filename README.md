@@ -2,7 +2,7 @@
 
 An independent MIT benchmark of delivered PDF rendering and of document comparison. The harness and every input document are authored in this repository. It measures layout, visible content, physical pages, fonts, and declared feature assertions. It produces portable HTML evidence and JSON measurements.
 
-The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v38`, with report-only renderer CI. A separate comparison track, `redline-v2`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
+The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v39`, with report-only renderer CI. A separate comparison track, `redline-v2`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
 
 `core-v36` adds six PDF views for Docxodus #1190: table-boundary comparison, row-boundary consolidation,
 and a plain-paragraph text control, each in final and original views. Candidates perform the operation
@@ -178,3 +178,7 @@ expected documents are byte-identical to the measured run; the archived score is
 Invalid repeated references inside replaced content-control/custom-XML wrappers must resolve to one
 comment, as in the valid-reference controls. PDF checks retain body content/layout; redline checks
 verify exact comment definitions and anchors. All preceding packages remain byte-identical.
+
+`core-v39` adds a keep-with-next heading followed by a splittable long paragraph and a keep-lines
+control (#1182). Marker assertions require the heading and first body line together on the original
+page for the reproducer, on the next page for the control, and retain every line of both documents.

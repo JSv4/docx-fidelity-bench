@@ -1189,7 +1189,23 @@ def generate():
                 texts, **document)
             cases[-1]['profile']['review'] = review
             cases[-1]['preparation'] = {'operation': case['operation'], 'inputs': sources}
-    registry = {'schema': 1, 'suite': {'id': 'core-v38', 'version': 38, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    lead = [f'MapleLead{i:02d} register retained.' for i in range(1, 16)]
+    following = [f'BirchLine{i:02d} inventory retained.' for i in range(1, 21)]
+    for kept in (False, True):
+        body = para(props=line_properties, runs='<w:r><w:br/></w:r>'.join(run(t) for t in lead))
+        body += para('CedarHeading', line_properties + '<w:keepNext/>')
+        body += para(props=line_properties + ('<w:keepLines/>' if kept else ''),
+                     runs='<w:r><w:br/></w:r>'.join(run(t) for t in following))
+        body += para('WillowClose', line_properties)
+        add('paragraph-keep-next-' + ('kept-control' if kept else 'fragment'), 'paragraphs',
+            'Keep a heading with a ' + ('whole kept paragraph (control)' if kept else 'valid first fragment of a splittable paragraph') + ' (Docxodus #1182)',
+            lead + ['CedarHeading'] + following + ['WillowClose'], body,
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'CedarHeading', 'occurrence': 1,
+                         'page': 2 if kept else 1, 'rect': [72, 60, 540, 720]},
+                        {'type': 'same-page', 'version': 1, 'markers': ['CedarHeading', 'BirchLine01']},
+                        {'type': 'marker-region', 'version': 2, 'marker': 'BirchLine20', 'occurrence': 1,
+                         'page': 2, 'rect': [72, 60, 540, 720]}])
+    registry = {'schema': 1, 'suite': {'id': 'core-v39', 'version': 39, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
