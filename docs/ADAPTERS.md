@@ -13,3 +13,20 @@ A known conversion or unsupported-feature failure returns `status: "failed"` and
 ## Redline adapters
 
 The redline track uses its own protocol version 1. The request carries `protocol`, `operation` (`compare`, `consolidate` or `reject`), `inputs` (absolute `path`, `sha256` and, for consolidation reviewers, `author`), a new `output` path and fixed `settings` (`author`, `date`). An `ok` response carries `status`, `outputSha256` and `engine` identity; `failed` and `unmeasured` carry a structured `error` with the phase that failed. The harness re-verifies the output digest and the unchanged inputs. `adapters/docxodus-redline` is the Docxodus implementation; it is compiled from a clean, exact-commit checkout by `bench redline build-docxodus`, and the harness checks that build record, not the adapter, before each case. See [the redline scoring contract](REDLINE.md).
+
+## Optional delivered HTML evidence
+
+A case can declare version 1 `htmlAssertions` of type `marker-attribute`, with a unique literal
+`marker`, an `attribute` name and its exact expected `equals` value. The runner then supplies new
+`htmlOutput` and `htmlReport` destinations alongside the PDF destinations. These paths are selected
+by the harness, never by a fixture. The Docxodus adapter calls the public standalone HTML API,
+requires the same verified pinned runtime as the PDF, shares the request conversion deadline, retains its production report, and returns
+`htmlArtifact: { status: "ok", sha256: "…" }`. An unavailable API, failed delivery or unverified
+runtime returns `htmlArtifact: { status: "unmeasured", error: "…" }` while retaining the measured PDF.
+It never converts a missing HTML observation into a PDF score of zero or a feature pass.
+
+The harness verifies the delivered file's digest and reads its actual markup independently of
+renderer diagnostics. It checks the nearest attribute across all inline fragments of one unique
+marker, decodes entities, preserves the browser's first duplicate attribute, and excludes head,
+script, style, template and explicitly hidden content. It checks attributes, not computed CSS or
+interactive behavior. PDF reference eligibility and reference-engine calibration stay PDF-only.

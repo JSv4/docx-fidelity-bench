@@ -2,8 +2,9 @@ from __future__ import annotations
 import shutil
 import tempfile
 import subprocess
+import re
 from pathlib import Path
-from . import adapters, metrics, pdf, report, reference_controls
+from . import adapters, metrics, pdf, report, reference_controls, html_artifacts
 from .common import WORD_TRACKS, ROOT, contained, digest, identity, read_json, validate_registry, write_json
 from .environment import environment
 
@@ -109,6 +110,13 @@ def run(output, reference, adapter, candidate):
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=False)
     contract = {'metric': metrics.CONTRACT, 'suiteDigest': identity(registry), 'referenceDigest': identity(bundle), 'environment': env['contract'], 'adapter': adapter if isinstance(adapter, str) else {'argv': adapter, 'sourceSha256': digest(ROOT / 'adapters/docxodus.mjs')}}
+    html_declarations = {c['id']: c['htmlAssertions'] for c in registry['cases'] if c.get('htmlAssertions')}
+    # A reference-engine calibration measures PDFs; it cannot attest another artifact's metadata.
+    if adapter in ('libreoffice', 'libreoffice-reference'):
+        html_declarations = {}
+    if html_declarations:
+        contract.update(htmlAssertions=html_declarations, htmlInspectorVersion=html_artifacts.VERSION,
+                        htmlInspectorSha256=digest(Path(html_artifacts.__file__)))
     result = {'schema': 1, 'suite': registry['suite'], 'candidate': candidate, 'track': bundle['track'], 'contract': contract, 'contractDigest': identity(contract), 'cases': []}
     for case in registry['cases']:
         folder = output / case['id']
@@ -134,6 +142,8 @@ def run(output, reference, adapter, candidate):
             if adapter == 'libreoffice-reference' and direct_bundle is not None:
                 render_case = next(c for c in registry['cases'] if c['id'] == entry['referenceSource']['caseId'])
             request = {'protocol': 1, 'input': str(contained(ROOT, render_case['input'])), 'inputSha256': render_case['sha256'], 'output': str(folder / 'candidate.pdf'), 'report': str(folder / 'production.json'), 'profile': case['profile'], 'fontDirectories': env['fontDirectories'], 'candidate': candidate, 'timeoutMs': 120000}
+            if case['id'] in html_declarations:
+                request.update(htmlOutput=str(folder / 'candidate.html'), htmlReport=str(folder / 'html-production.json'))
             try:
                 response = adapters.render(adapter, request)
             except (RuntimeError, subprocess.TimeoutExpired) as error:
@@ -174,6 +184,8 @@ def run(output, reference, adapter, candidate):
                             outcome['pages'].append(measurements)
                             metrics.write_images(folder, i + 1, rp, cp, width, height)
                     outcome.update(status='measured', score=metrics.case_score(outcome['pages'], outcome['checks']), close=all(c['passed'] for c in outcome['checks']) and all(p.get('close', False) for p in outcome['pages']))
+            if case['id'] in html_declarations:
+                outcome['html'] = html_artifacts.inspect(folder, response, html_declarations[case['id']])
             if digest(contained(ROOT, case['input'])) != case['sha256']:
                 raise ValueError('Renderer modified source bytes')
             if digest(request['input']) != request['inputSha256']:
@@ -189,8 +201,15 @@ def run(output, reference, adapter, candidate):
         contract['candidateRuntime'] = {'runtime': runtimes[0] if runtimes else None, 'node': nodes[0] if nodes else None}
         result['contractDigest'] = identity(contract)
         result['summary'] = metrics.aggregate(result['cases'], registry['suite']['cases'])
+        if html_declarations:
+            result['htmlSummary'] = html_artifacts.aggregate(result['cases'], html_declarations)
         report.save(output, result)
-        print(case['id'] + ': ' + outcome['status'] + (' score ' + str(round(outcome['score'], 2)) if 'score' in outcome else ' ' + outcome.get('error', '')), flush=True)
+        html_note = ''
+        if case['id'] in html_declarations:
+            observation = outcome.get('html', {})
+            state = ('passed' if all(c['passed'] for c in observation.get('checks', [])) else 'failed') if observation.get('status') == 'measured' else 'unmeasured'
+            html_note = '; delivered HTML ' + state
+        print(case['id'] + ': ' + outcome['status'] + (' score ' + str(round(outcome['score'], 2)) if 'score' in outcome else ' ' + outcome.get('error', '')) + html_note, flush=True)
     return result
 
 
@@ -201,12 +220,16 @@ def compare(previous, current, tolerance):
         raise ValueError('Regression tolerance must be finite and nonnegative')
     if not previous['summary']['complete'] or not current['summary']['complete']:
         raise ValueError('Cannot gate or refresh an incomplete run')
+    if any(not r.get('htmlSummary', {'complete': True})['complete'] for r in (previous, current)):
+        raise ValueError('Cannot gate unmeasured delivered HTML checks')
     if previous['contractDigest'] != current['contractDigest'] or identity(previous['contract']) != previous['contractDigest'] or identity(current['contract']) != current['contractDigest']:
         raise ValueError('Measurement contract changed or is corrupt')
     findings = []
     before = {c['id']: c for c in previous['cases']}
     for case in current['cases']:
         old = before[case['id']]
+        if any(not c['passed'] for c in case.get('html', {}).get('checks', [])):
+            findings.append(case['id'] + ': delivered HTML check failure')
         if any(not c['passed'] for c in case['checks']):
             findings.append(case['id'] + ': mandatory check failure')
         if len(old['pages']) != len(case['pages']):
@@ -226,6 +249,12 @@ def math_valid_tolerance(value):
 def validate_result(result):
     if result['schema'] != 1 or result['contract']['metric'] != metrics.CONTRACT or identity(result['contract']) != result['contractDigest']:
         raise ValueError('Invalid result measurement contract')
+    html_declarations = result['contract'].get('htmlAssertions', {})
+    if html_declarations:
+        if (result['contract'].get('htmlInspectorVersion') != html_artifacts.VERSION or
+                not isinstance(result['contract'].get('htmlInspectorSha256'), str) or
+                not re.fullmatch('[0-9a-f]{64}', result['contract']['htmlInspectorSha256']) or result.get('htmlSummary') != html_artifacts.aggregate(result['cases'], html_declarations)):
+            raise ValueError('Invalid delivered HTML measurement contract or summary')
     expected = metrics.aggregate(result['cases'], result['suite']['cases'])
     if expected != result['summary']:
         raise ValueError('Invalid coverage or aggregation summary')

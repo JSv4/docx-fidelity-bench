@@ -788,7 +788,20 @@ def generate():
         add(case_id, 'paragraphs', 'Word-style revision bar with ' + ('zero indent (Docxodus #1221)' if indent == 0 else 'half-inch indent control'),
             [original + inserted], body, styles_xml=change_bar_styles)
         cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden', 'markupPresentation': 'word'}
-    registry = {'schema': 1, 'suite': {'id': 'core-v22', 'version': 22, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # The bold-only revision inherits its font/size; the control states the same values explicitly.
+    format_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="24"/></w:rPr></w:rPrDefault></w:docDefaults></w:styles>'
+    fonts = f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/>'
+    size = '<w:sz w:val="24"/>'
+    for case_id, explicit in [('revision-label-inherited-font', False), ('revision-label-explicit-font-control', True)]:
+        text = 'FormatLabel The cedar ledger is ready.'
+        current = fonts + '<w:b/>' + size if explicit else '<w:b/>'
+        previous = fonts + size if explicit else ''
+        revision = '<w:rPrChange w:id="1" w:author="Cedar Reviewer" w:date="2026-09-10T12:00:00Z"><w:rPr>' + previous + '</w:rPr></w:rPrChange>'
+        add(case_id, 'paragraphs', 'Bold-only formatting revision with ' + ('explicit matching font and size control' if explicit else 'inherited font and size (Docxodus #1222)'),
+            [text], para(runs=run(text, current + revision)), styles_xml=format_styles)
+        cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
+        cases[-1]['htmlAssertions'] = [{'type': 'marker-attribute', 'version': 1, 'marker': 'FormatLabel', 'attribute': 'title', 'equals': 'Bold added'}]
+    registry = {'schema': 1, 'suite': {'id': 'core-v23', 'version': 23, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

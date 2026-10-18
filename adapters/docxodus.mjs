@@ -28,7 +28,8 @@ try {
   for (const [name, digest] of Object.entries(build.files)) {
     if (hash(await readFile(resolve(root, name))) !== digest) throw new Error('Build artifact digest mismatch: ' + name);
   }
-  const { convertDocxToPdf, checkExportEnvironment } = await import(pathToFileURL(modulePath));
+  const renderer = await import(pathToFileURL(modulePath));
+  const { convertDocxToPdf, checkExportEnvironment } = renderer;
   const environment = await checkExportEnvironment();
   if (!environment.ok) {
     const error = new Error(JSON.stringify(environment.findings));
@@ -38,25 +39,47 @@ try {
   const bytes = await readFile(request.input);
   if (hash(bytes) !== request.inputSha256) throw new Error('Input digest mismatch');
   phase = 'conversion';
-  const result = await convertDocxToPdf(new Uint8Array(bytes), {
+  const options = {
     reviewProfile: request.profile.review,
     commentProfile: request.profile.comments,
     ...(request.profile.markupPresentation === undefined ? {} : { markupPresentation: request.profile.markupPresentation }),
     timeoutMs: request.timeoutMs,
     fontDirectories: request.fontDirectories,
     strictFonts: true,
-  });
-  const observed = result.renderReport.environment?.observed;
-  if (result.renderReport.environment?.verification !== 'nodeVerified' || result.renderReport.environment?.fidelityTier !== 'releaseBaselined' || !observed?.browserBuild) {
-    const error = new Error('Production output is not from the verified pinned export runtime');
-    error.code = 'ENVIRONMENT_INELIGIBLE';
-    throw error;
-  }
-  const runtime = Object.fromEntries(['playwrightVersion', 'browserProduct', 'browserBuild', 'executableSha256', 'launchFlags', 'operatingSystem', 'architecture'].map(key => [key, observed[key]]));
+  };
+  const runtimeOf = report => {
+    const observed = report.environment?.observed;
+    if (report.environment?.verification !== 'nodeVerified' || report.environment?.fidelityTier !== 'releaseBaselined' || !observed?.browserBuild) {
+      const error = new Error('Production output is not from the verified pinned export runtime');
+      error.code = 'ENVIRONMENT_INELIGIBLE';
+      throw error;
+    }
+    return Object.fromEntries(['playwrightVersion', 'browserProduct', 'browserBuild', 'executableSha256', 'launchFlags', 'operatingSystem', 'architecture'].map(key => [key, observed[key]]));
+  };
+  const deadline = performance.now() + request.timeoutMs;
+  const result = await convertDocxToPdf(new Uint8Array(bytes), options);
+  const runtime = runtimeOf(result.renderReport);
   phase = 'artifact';
   await writeFile(request.output, result.pdf, { flag: 'wx' });
   await writeFile(request.report, JSON.stringify(result.renderReport, null, 2) + '\n', { flag: 'wx' });
-  process.stdout.write(JSON.stringify({ protocol: 1, status: 'ok', pdfSha256: hash(result.pdf), renderer: { name: 'docxodus', commit, node: process.version, runtime, build }, productionReport: request.report }));
+  let htmlArtifact;
+  if (request.htmlOutput) {
+    try {
+      if (typeof renderer.convertDocxToStandaloneHtml !== 'function' || !request.htmlReport)
+        throw new Error('The declared standalone HTML output is unavailable');
+      const remaining = Math.floor(deadline - performance.now());
+      if (remaining <= 0) throw new Error('No conversion time remains for the declared HTML output');
+      const html = await renderer.convertDocxToStandaloneHtml(new Uint8Array(bytes), { ...options, timeoutMs: remaining });
+      if (typeof html.html !== 'string' || JSON.stringify(runtimeOf(html.renderReport)) !== JSON.stringify(runtime))
+        throw new Error('Delivered HTML does not match the verified PDF runtime');
+      await writeFile(request.htmlOutput, html.html, { flag: 'wx' });
+      await writeFile(request.htmlReport, JSON.stringify(html.renderReport, null, 2) + '\n', { flag: 'wx' });
+      htmlArtifact = { status: 'ok', sha256: hash(html.html) };
+    } catch (error) {
+      htmlArtifact = { status: 'unmeasured', error: error.message };
+    }
+  }
+  process.stdout.write(JSON.stringify({ protocol: 1, status: 'ok', pdfSha256: hash(result.pdf), renderer: { name: 'docxodus', commit, node: process.version, runtime, build }, productionReport: request.report, ...(htmlArtifact ? { htmlArtifact } : {}) }));
 } catch (error) {
   process.stdout.write(JSON.stringify({ protocol: 1, status: error.code === 'ENVIRONMENT_INELIGIBLE' || phase !== 'conversion' ? 'unmeasured' : 'failed', error: { code: error.code ?? 'ADAPTER_FAILURE', phase, message: error.message } }));
 }

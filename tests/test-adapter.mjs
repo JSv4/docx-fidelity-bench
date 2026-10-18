@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { mkdtempSync, rmSync, mkdirSync, writeFileSync, readFileSync } from 'node:fs';
+import { mkdtempSync, rmSync, mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -37,7 +37,7 @@ test('invalid renderer source cannot become a zero fidelity score', () => {
   }
 });
 
-test('markup presentation reaches the public export API and absent settings stay absent', () => {
+test('public profiles and optional delivered HTML retain verified artifact identity', () => {
   const root = mkdtempSync(join(tmpdir(), 'docx-profile-contract-'));
   const hash = value => createHash('sha256').update(value).digest('hex');
   const git = (...args) => {
@@ -50,11 +50,21 @@ test('markup presentation reaches the public export API and absent settings stay
     const modulePath = join(root, 'npm-export', 'dist', 'index.js');
     // Protocol-only fake: its output records the public options, never a fidelity result.
     const module = `export async function checkExportEnvironment() { return { ok: true }; }
-      export async function convertDocxToPdf(bytes, options) { return {
+      export async function convertDocxToPdf(bytes, options) {
+        if (options.commentProfile === 'endnotes') await new Promise(resolve => setTimeout(resolve, 25));
+        return {
         pdf: Buffer.from(JSON.stringify(options)), renderReport: { environment: {
           verification: 'nodeVerified', fidelityTier: 'releaseBaselined', observed: { browserBuild: 'contract-only' }
         } }
-      }; }`;
+      }; }
+      export async function convertDocxToStandaloneHtml(bytes, options) {
+        if (options.commentProfile === 'inline') throw new Error('HTML fixture failure');
+        if (options.commentProfile === 'endnotes' && options.timeoutMs >= 100) throw new Error('Conversion budget was reset');
+        return { html: '<span title="Bold added">FormatLabel</span>', renderReport: { environment: {
+          verification: 'nodeVerified', fidelityTier: options.commentProfile === 'margin' ? 'experimental' : 'releaseBaselined',
+          observed: { browserBuild: 'contract-only' }
+        } } };
+      }`;
     writeFileSync(modulePath, module);
     writeFileSync(join(root, 'package.json'), JSON.stringify({ type: 'module' }));
     git('init', '-q'); git('add', '.');
@@ -66,17 +76,31 @@ test('markup presentation reaches the public export API and absent settings stay
       files: { 'npm-export/dist/index.js': hash(module) },
     }));
     const input = join(root, 'input.docx'); writeFileSync(input, 'protocol input');
-    for (const markupPresentation of [undefined, 'word']) {
-      const profile = { review: 'markup', comments: 'hidden', ...(markupPresentation ? { markupPresentation } : {}) };
-      const output = join(root, `output-${markupPresentation ?? 'default'}.pdf`);
+    for (const [name, markupPresentation, comments, htmlStatus] of [
+      ['default', undefined, 'hidden', undefined], ['word', 'word', 'hidden', 'ok'],
+      ['html-failure', 'word', 'inline', 'unmeasured'], ['html-unverified', 'word', 'margin', 'unmeasured'],
+      ['shared-budget', 'word', 'endnotes', 'ok'],
+    ]) {
+      const profile = { review: 'markup', comments, ...(markupPresentation ? { markupPresentation } : {}) };
+      const output = join(root, `output-${name}.pdf`);
       const result = request({ protocol: 1, candidate, input, inputSha256: hash('protocol input'), output,
-        report: output + '.json', profile, fontDirectories: [], timeoutMs: 120000 },
+        report: output + '.json', profile, fontDirectories: [], timeoutMs: name === 'shared-budget' ? 100 : 120000,
+        ...(htmlStatus ? { htmlOutput: output + '.html', htmlReport: output + '.html.json' } : {}) },
         { DOCXODUS_SOURCE_ROOT: root, DOCXODUS_EXPORT_MODULE: modulePath });
       assert.equal(result.status, 'ok', JSON.stringify(result.error));
       const options = JSON.parse(readFileSync(output, 'utf8'));
       assert.equal(options.reviewProfile, 'markup');
       assert.equal(options.markupPresentation, markupPresentation);
       assert.equal(Object.hasOwn(options, 'markupPresentation'), markupPresentation !== undefined);
+      assert.equal(options.commentProfile, comments);
+      if (htmlStatus) {
+        assert.equal(result.htmlArtifact.status, htmlStatus);
+        if (htmlStatus === 'ok') {
+          assert.equal(result.htmlArtifact.sha256, hash(readFileSync(output + '.html')));
+          assert.match(readFileSync(output + '.html', 'utf8'), /title="Bold added"/);
+          assert.ok(existsSync(output + '.html.json'));
+        } else assert.equal(existsSync(output + '.html'), false);
+      } else assert.equal(Object.hasOwn(result, 'htmlArtifact'), false);
     }
   } finally { rmSync(root, { recursive: true, force: true }); }
 });

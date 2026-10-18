@@ -35,3 +35,21 @@ Regression comparison requires an unchanged measurement contract: metric version
 Before enabling a release gate, measure repeated reference and candidate exports and deliberate errors. The automated calibration tests cover identical images, blank/missing ink, shifted ink, threshold boundaries, changed colors, missing pages, duplicate text, ambiguous markers, wrong fonts, changed page units, stale identities, and incomplete coverage. Compare identical-engine exports as an integration check. Noise tolerances require review of repeated measurements; they are never chosen to make a desired candidate pass.
 
 A regression record proposal requires a complete, intact result and the current suite. It writes a new proposal and does not refresh records automatically. Review paired images, overlays, PDFs, diagnostics, and environment identities before accepting one. A regression pass can coexist with visible differences; preserve those differences in the report.
+
+## Delivered HTML feature checks
+
+Some rendering defects concern a delivered HTML tooltip rather than printed ink. A case may
+therefore declare separately versioned `htmlAssertions` in addition to its PDF assertions. The
+harness checks the delivered standalone HTML, not the renderer's internal diagnostics. The source
+artifact digest, inspector version/source hash and exact declarations are retained in the run contract.
+
+These checks do not alter PDF raster measurements, PDF case scores, category means or reference
+eligibility. Reports show a separate HTML coverage/pass summary. Missing or mismatched artifacts
+are unmeasured HTML observations; an observed wrong attribute is a measured feature failure.
+`--gate report` requires complete declared HTML coverage as well as complete PDF coverage;
+`mandatory` and `close` also require the HTML checks to pass. Regression comparison refuses
+unmeasured HTML coverage and flags an observed HTML failure even when the PDF score stays 100.
+Record proposals require complete declared coverage. Reference-engine calibration checks only its
+PDF artifacts and does not claim to validate another renderer's HTML metadata.
+
+HTML feature checks assert the fixture's explicit delivery contract. They are not a Word PDF-fidelity score.
