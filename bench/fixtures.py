@@ -108,6 +108,40 @@ def duplicate_comment_cases():
     return cases
 
 
+def complex_field(instruction, result_runs, begin=True, end=True):
+    """Complex field characters; a field may open or close outside this run sequence."""
+    out = ''
+    if begin:
+        out += ('<w:r><w:fldChar w:fldCharType="begin"/></w:r>'
+                f'<w:r><w:instrText xml:space="preserve">{escape(instruction)}</w:instrText></w:r>'
+                '<w:r><w:fldChar w:fldCharType="separate"/></w:r>')
+    out += result_runs
+    if end:
+        out += '<w:r><w:fldChar w:fldCharType="end"/></w:r>'
+    return out
+
+
+def consolidated_field_cases():
+    """Independent field-envelope and ordinary-text consolidation documents."""
+    cases = []
+    for kind in ('result-edit', 'prefix-delete', 'bookmark-added', 'plain-control'):
+        def document(reviewer, final=False):
+            edited = reviewer == 1 or final
+            prefix = 'Alder ' if edited and kind == 'prefix-delete' else 'Alder birch '
+            result = '7' if edited and kind != 'prefix-delete' else '1'
+            content = run(result) if kind == 'plain-control' else complex_field(' PAGE ', run(result))
+            if edited and kind == 'bookmark-added':
+                content = '<w:bookmarkStart w:id="5" w:name="CedarRange"/>' + content + '<w:bookmarkEnd w:id="5"/>'
+            suffix = ' tail more' if reviewer == 2 or final else ' tail'
+            return {'body': para(runs=run(prefix) + content + run(suffix))}
+        sources = [document(i) for i in range(3)]
+        cases.append({'id': 'consolidated-field-' + kind, 'kind': kind, 'operation': 'consolidate',
+                      'issue': 1206, 'control': kind == 'plain-control', 'directory': 'field-views',
+                      'description': 'Complex field boundaries across independent reviewer edits',
+                      'sources': sources, 'expected': [document(0, True), sources[0]]})
+    return cases
+
+
 def section(cols=1, kind=None):
     mode = f'<w:type w:val="{kind}"/>' if kind else ''
     return f'<w:sectPr>{mode}<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720"/><w:cols w:num="{cols}" w:space="480"/></w:sectPr>'
@@ -1174,18 +1208,20 @@ def generate():
             cases[-1]['profile']['review'] = review
             cases[-1]['preparation'] = {'operation': operation, 'inputs': sources}
 
-    for case in comment_view_cases() + duplicate_comment_cases():
+    for case in comment_view_cases() + duplicate_comment_cases() + consolidated_field_cases():
         sources = []
         for i, document in enumerate(case['sources']):
-            path = ROOT / 'fixtures' / 'comment-views' / (case['id'] + f'-{i}.docx')
+            path = ROOT / 'fixtures' / case.get('directory', 'comment-views') / (case['id'] + f'-{i}.docx')
             package(path, **document)
             sources.append({'path': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()})
         for review, document in zip(('final', 'original'), case['expected']):
             import xml.etree.ElementTree as ET
             root = ET.fromstring(f'<w:body xmlns:w="{W}">' + document['body'] + '</w:body>')
             texts = [e.text or '' for e in root.iter('{' + W + '}t')]
+            if case.get('directory') == 'field-views' and not case['control']:
+                texts = ['1' if text == '7' else text for text in texts]  # PAGE recalculates on this one-page document.
             add(case['id'] + '-' + review, 'paragraphs',
-                ('Control for ' if case['control'] else 'Reproduce ') + f"Docxodus #{case['issue']} comment views",
+                ('Control for ' if case['control'] else 'Reproduce ') + f"Docxodus #{case['issue']} " + case.get('description', 'comment views'),
                 texts, **document)
             cases[-1]['profile']['review'] = review
             cases[-1]['preparation'] = {'operation': case['operation'], 'inputs': sources}
@@ -1219,7 +1255,7 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v40', 'version': 40, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v41', 'version': 41, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

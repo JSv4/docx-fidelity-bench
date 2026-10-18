@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
-from .fixtures import custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases
+from .fixtures import custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases, consolidated_field_cases, complex_field as field
 
 ROOT = Path(__file__).resolve().parents[1]
 W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
@@ -69,18 +69,6 @@ def p(content='', props='', mark='', para_id=None):
     ppr = f'<w:pPr>{props}{rpr}</w:pPr>' if props or rpr else ''
     return f'<w:p{identity}>{ppr}{content}</w:p>'
 
-
-def field(instruction, result_runs, begin=True, end=True):
-    """Complex field characters; a field may open or close outside this run sequence."""
-    out = ''
-    if begin:
-        out += ('<w:r><w:fldChar w:fldCharType="begin"/></w:r>'
-                f'<w:r><w:instrText xml:space="preserve">{escape(instruction)}</w:instrText></w:r>'
-                '<w:r><w:fldChar w:fldCharType="separate"/></w:r>')
-    out += result_runs
-    if end:
-        out += '<w:r><w:fldChar w:fldCharType="end"/></w:r>'
-    return out
 
 
 def bookmark(start, identifier, name=None):
@@ -246,6 +234,7 @@ def generate():
     inline_custom_xml(corpus)
     comment_views(corpus)
     duplicate_comments(corpus)
+    consolidated_fields(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -756,6 +745,26 @@ def duplicate_comments(corpus):
         corpus.add(name, 'comments', 'control' if case['control'] else 'reproducer', 'JSv4/Docxodus#1197',
                    'One comment per resolved wrapper despite duplicate references in the source' if not case['control'] else
                    'The same wrapper replacement with one valid comment reference', 'compare', inputs, expected, authored)
+
+
+def consolidated_fields(corpus):
+    for case in consolidated_field_cases():
+        name = 'redline-' + case['id']
+        inputs = [dict(corpus.file(name, str(i), **document), role='base' if i == 0 else 'reviewer',
+                       **({'author': f'Reviewer{i}'} if i else {}))
+                  for i, document in enumerate(case['sources'])]
+        expected = {view: corpus.file(name, view, **document)
+                    for view, document in zip(('accepted', 'rejected'), case['expected'])}
+        rev = Revisions()
+        prefix = t('Alder ') + (rev.dele(t('birch '), 'Reviewer1') if case['kind'] == 'prefix-delete' else t('birch '))
+        result = t('1') if case['kind'] == 'prefix-delete' else rev.dele(t('1'), 'Reviewer1') + rev.ins(t('7'), 'Reviewer1')
+        content = result if case['control'] else field(' PAGE ', result)
+        if case['kind'] == 'bookmark-added':
+            content = rev.ins(bookmark(True, 5, 'CedarRange'), 'Reviewer1') + content + rev.ins(bookmark(False, 5), 'Reviewer1')
+        authored = corpus.file(name, 'authored-redline', body=p(prefix + content + t(' tail') + rev.ins(t(' more'), 'Reviewer2')))
+        corpus.add(name, 'fields', 'control' if case['control'] else 'reproducer', 'JSv4/Docxodus#1206',
+                   case['description'] + ': ' + case['kind'], 'consolidate', inputs, expected, authored,
+                   [untracked('Alder', 'tail')])
 
 
 def identity(corpus):
