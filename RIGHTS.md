@@ -13,3 +13,5 @@ The core documents request Liberation Serif. Install the unmodified Liberation f
 Before registering operator-captured Word PDFs, approve the input, image, font embedding, and artifact-publication rights. Capture metadata must explicitly attest approval. Generated reports and PDF bundles stay outside the source tree and are published as CI artifacts. This file describes the included inventory and process; it does not extend the license of separately installed software.
 
 The footer-frame reproduction and ordinary-flow control are original literal-text OOXML generated entirely by `bench/fixtures.py`, with no imported document content.
+
+The long-comment reproduction, short-note control and DOM observer are original work authored in this repository. All comment words, author metadata and OOXML are generated here. No renderer fixtures or content are imported.

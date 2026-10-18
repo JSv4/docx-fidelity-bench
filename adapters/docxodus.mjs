@@ -1,9 +1,11 @@
 // Original protocol adapter. The renderer is separately built and provisioned.
 import { readFile, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
+import { createRequire } from 'node:module';
 import { pathToFileURL } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { resolve } from 'node:path';
+import { inspectReadableHtml, needsBrowser, LAUNCH_ARGS } from '../bench/html_browser.mjs';
 
 let source = '';
 for await (const chunk of process.stdin) source += chunk;
@@ -39,14 +41,17 @@ try {
   const bytes = await readFile(request.input);
   if (hash(bytes) !== request.inputSha256) throw new Error('Input digest mismatch');
   phase = 'conversion';
-  const options = {
-    reviewProfile: request.profile.review,
-    commentProfile: request.profile.comments,
-    ...(request.profile.markupPresentation === undefined ? {} : { markupPresentation: request.profile.markupPresentation }),
+  const profileOptions = profile => ({
+    reviewProfile: profile.review,
+    commentProfile: profile.comments,
+    ...(profile.markupPresentation === undefined ? {} : { markupPresentation: profile.markupPresentation }),
+  });
+  const sharedOptions = {
     timeoutMs: request.timeoutMs,
     fontDirectories: request.fontDirectories,
     strictFonts: true,
   };
+  const options = { ...sharedOptions, ...profileOptions(request.profile) };
   const runtimeOf = report => {
     const observed = report.environment?.observed;
     if (report.environment?.verification !== 'nodeVerified' || report.environment?.fidelityTier !== 'releaseBaselined' || !observed?.browserBuild) {
@@ -69,12 +74,36 @@ try {
         throw new Error('The declared standalone HTML output is unavailable');
       const remaining = Math.floor(deadline - performance.now());
       if (remaining <= 0) throw new Error('No conversion time remains for the declared HTML output');
-      const html = await renderer.convertDocxToStandaloneHtml(new Uint8Array(bytes), { ...options, timeoutMs: remaining });
+      const htmlProfile = request.htmlProfile ?? request.profile;
+      const html = await renderer.convertDocxToStandaloneHtml(new Uint8Array(bytes), {
+        ...sharedOptions, ...profileOptions(htmlProfile), timeoutMs: remaining,
+      });
       if (typeof html.html !== 'string' || JSON.stringify(runtimeOf(html.renderReport)) !== JSON.stringify(runtime))
         throw new Error('Delivered HTML does not match the verified PDF runtime');
       await writeFile(request.htmlOutput, html.html, { flag: 'wx' });
       await writeFile(request.htmlReport, JSON.stringify(html.renderReport, null, 2) + '\n', { flag: 'wx' });
-      htmlArtifact = { status: 'ok', sha256: hash(html.html) };
+      htmlArtifact = { status: 'ok', sha256: hash(html.html), profile: htmlProfile };
+      if (needsBrowser(request.htmlAssertions ?? [])) {
+        if (!request.htmlObservations) throw new Error('The declared browser HTML observation path is missing');
+        const budget = Math.floor(deadline - performance.now());
+        if (budget <= 0) throw new Error('No conversion time remains for HTML observation');
+        const provisioned = createRequire(resolve(root, 'npm-export/package.json'))('@playwright/browser-chromium');
+        const executablePath = provisioned.chromium.executablePath();
+        const executableSha256 = hash(await readFile(executablePath));
+        if (executableSha256 !== runtime.executableSha256)
+          throw new Error('The HTML observer browser differs from the verified renderer browser');
+        const browser = await provisioned.chromium.launch({ executablePath, chromiumSandbox: true,
+          args: LAUNCH_ARGS, timeout: budget });
+        try {
+          const observationBudget = Math.floor(deadline - performance.now());
+          const facts = await inspectReadableHtml(browser, html.html, request.htmlAssertions, observationBudget);
+          facts.inspectorSha256 = hash(await readFile(new URL('../bench/html_browser.mjs', import.meta.url)));
+          facts.executableSha256 = executableSha256;
+          const encoded = JSON.stringify(facts, null, 2) + '\n';
+          await writeFile(request.htmlObservations, encoded, { flag: 'wx' });
+          htmlArtifact.browserFactsSha256 = hash(encoded);
+        } finally { await browser.close(); }
+      }
     } catch (error) {
       htmlArtifact = { status: 'unmeasured', error: error.message };
     }

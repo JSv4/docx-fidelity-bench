@@ -50,14 +50,14 @@ A regression record proposal requires a complete, intact result and the current 
 
 ## Delivered HTML feature checks
 
-Some rendering defects concern a delivered HTML tooltip rather than printed ink. A case may
+Some rendering defects concern a delivered HTML tooltip or scrollable comment rather than printed ink. A case may
 therefore declare separately versioned `htmlAssertions` in addition to its PDF assertions. The
 harness checks the delivered standalone HTML, not the renderer's internal diagnostics. The source
 artifact digest, inspector version/source hash and exact declarations are retained in the run contract.
 
 These checks do not alter PDF raster measurements, PDF case scores, category means or reference
 eligibility. Reports show a separate HTML coverage/pass summary. Missing or mismatched artifacts
-are unmeasured HTML observations; an observed wrong attribute is a measured feature failure.
+are unmeasured HTML observations; an observed wrong attribute or inaccessible declared paragraph is a measured feature failure.
 `--gate report` requires complete declared HTML coverage as well as complete PDF coverage;
 `mandatory` and `close` also require the HTML checks to pass. Regression comparison refuses
 unmeasured HTML coverage and flags an observed HTML failure even when the PDF score stays 100.
@@ -65,3 +65,5 @@ Record proposals require complete declared coverage. Reference-engine calibratio
 PDF artifacts and does not claim to validate another renderer's HTML metadata.
 
 HTML feature checks assert the fixture's explicit delivery contract. They are not a Word PDF-fidelity score.
+
+Version 1 `marker-readable` requires the complete authored paragraph in order and its unique final token to be visible after user-accessible scrolling. Actual range rectangles, clipping ancestors and overflow modes come from a separate offline browser context with scripts disabled; the inspector recomputes pass/fail and verifies the HTML, observer and browser executable hashes. A distinct full `htmlProfile`, when declared, is bound separately from the PDF profile. These checks make no claim that a static PDF prints all scrollable comment text, or that every word has been compared as pixels.

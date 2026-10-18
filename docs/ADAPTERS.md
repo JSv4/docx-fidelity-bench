@@ -28,5 +28,25 @@ It never converts a missing HTML observation into a PDF score of zero or a featu
 The harness verifies the delivered file's digest and reads its actual markup independently of
 renderer diagnostics. It checks the nearest attribute across all inline fragments of one unique
 marker, decodes entities, preserves the browser's first duplicate attribute, and excludes head,
-script, style, template and explicitly hidden content. It checks attributes, not computed CSS or
-interactive behavior. PDF reference eligibility and reference-engine calibration stay PDF-only.
+script, style, template and explicitly hidden content. Attribute assertions check attributes rather than computed CSS. PDF reference eligibility and reference-engine calibration stay PDF-only.
+
+A `marker-readable` version 1 assertion declares a unique final `marker` and the complete ordered
+`tokens` of its authored paragraph. The runner supplies `htmlAssertions` and a new
+`htmlObservations` destination. An optional full `htmlProfile` replaces the PDF profile for the HTML
+conversion, including any omitted markup-presentation setting; both profiles are bound to the run
+contract. For example, a hidden-comments PDF can have a margin-comments HTML companion.
+
+The original observer in `bench/html_browser.mjs` opens the delivered bytes in a separate browser
+context with a 1280×1024 viewport, scripts disabled, offline mode and screen media. It uses the same
+verified browser executable as the production renderer, with the process sandbox enabled. It records
+visible text, nearest-block text, marker ranges, ancestor clipping rectangles and overflow modes before
+and after scrolling only `auto`/`scroll` ports. It also scrolls the browser viewport. It never scrolls a
+`hidden`/`clip` port to manufacture access. All observation work shares the original conversion deadline.
+
+The adapter writes raw observations, their HTML/source/executable identities and the fixed policy to
+`htmlObservations`, then returns its digest as `htmlArtifact.browserFactsSha256`. The Python inspector
+verifies those identities and independently derives the result from the raw facts. Passing requires an
+intact ordered paragraph, one positive-sized tail range, and full containment in the final viewport and
+every clipping ancestor. Content initially clipped by a non-scrollable ancestor fails. Missing evidence
+is unmeasured. This checks the declared paragraph and tail access; it is not a general per-word pixel,
+paint-occlusion or interactive-application fidelity test.
