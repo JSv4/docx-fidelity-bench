@@ -88,6 +88,8 @@ def validate_registry(registry=None):
 # Environment: LibreOffice, its Python, and the optional validator
 # ---------------------------------------------------------------------------------------------
 
+# LibreOffice's bundled Python is a wrapper that sets PYTHONHOME, so the driver cannot run in isolated
+# mode (-I). -s and -P still keep user site packages and the script and working directories off sys.path.
 def libreoffice_paths():
     executable = os.environ.get('BENCH_LIBREOFFICE') or shutil.which('libreoffice') or shutil.which('soffice')
     if not executable:
@@ -105,7 +107,7 @@ def libreoffice_paths():
 def environment(validator=None):
     executable, soffice, python = libreoffice_paths()
     version = execute([executable, '--version']).strip()
-    probe = execute([python, '-I', '-c', 'import sys, uno; print(sys.version.split()[0])']).strip()
+    probe = execute([python, '-s', '-P', '-c', 'import sys, uno; print(sys.version.split()[0])']).strip()
     contract = {'libreoffice': {'version': version, 'sha256': digest(soffice)},
                 'libreofficePython': {'version': probe, 'sha256': digest(python.resolve())},
                 'harness': {name: digest(ROOT / name) for name in HARNESS},
@@ -127,7 +129,7 @@ def libreoffice_batch(env, folder, items, attempts=2):
     for attempt in range(attempts):
         for item in items:
             Path(item['output']).unlink(missing_ok=True)
-        process = subprocess.Popen([env['python'], '-I', str(ROOT / 'bench/lo_revisions.py')], stdin=subprocess.PIPE,
+        process = subprocess.Popen([env['python'], '-s', '-P', str(ROOT / 'bench/lo_revisions.py')], stdin=subprocess.PIPE,
                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, start_new_session=True)
         try:
             stdout, stderr = process.communicate(json.dumps(job), timeout=600)
