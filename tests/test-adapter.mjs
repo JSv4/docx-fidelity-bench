@@ -100,14 +100,15 @@ test('public profiles and optional delivered HTML retain verified artifact ident
       ['shared-budget', 'word', 'endnotes', 'ok'],
       ['html-override', 'word', 'inline', 'ok', { review: 'final', comments: 'hidden' }],
       ['reader', 'word', 'hidden', 'ok', undefined, 'observe'],
+      ['style-reader', 'word', 'hidden', 'ok', undefined, 'style'],
       ['reader-no-path', 'word', 'hidden', 'unmeasured', undefined, 'missing'],
     ]) {
       const profile = { review: 'markup', comments, ...(markupPresentation ? { markupPresentation } : {}) };
       const output = join(root, `output-${name}.pdf`);
       const result = request({ protocol: 1, candidate, input, inputSha256: hash('protocol input'), output,
         report: output + '.json', profile, ...(htmlProfile ? { htmlProfile } : {}),
-        ...(observe ? { htmlAssertions: [{ type: 'marker-readable', version: 1, marker: 'FormatLabel', tokens: ['FormatLabel'] }],
-          ...(observe === 'observe' ? { htmlObservations: output + '.observations.json' } : {}) } : {}),
+        ...(observe ? { htmlAssertions: [observe === 'style' ? { type: 'marker-computed-style', version: 1, marker: 'FormatLabel', property: 'font-size', equals: '13.6px' } : { type: 'marker-readable', version: 1, marker: 'FormatLabel', tokens: ['FormatLabel'] }],
+          ...(['observe', 'style'].includes(observe) ? { htmlObservations: output + '.observations.json' } : {}) } : {}),
         fontDirectories: [], timeoutMs: name === 'shared-budget' ? 100 : 120000,
         ...(htmlStatus ? { htmlOutput: output + '.html', htmlReport: output + '.html.json' } : {}) },
         { DOCXODUS_SOURCE_ROOT: root, DOCXODUS_EXPORT_MODULE: modulePath });
@@ -128,7 +129,7 @@ test('public profiles and optional delivered HTML retain verified artifact ident
           assert.equal(htmlOptions.commentProfile, htmlProfile?.comments ?? profile.comments);
           assert.equal(htmlOptions.markupPresentation, htmlProfile ? undefined : profile.markupPresentation);
           assert.deepEqual(result.htmlArtifact.profile, htmlProfile ?? profile);
-          if (observe === 'observe') {
+          if (['observe', 'style'].includes(observe)) {
             const facts = JSON.parse(readFileSync(output + '.observations.json'));
             assert.equal(result.htmlArtifact.browserFactsSha256, hash(readFileSync(output + '.observations.json')));
             assert.equal(facts.htmlSha256, result.htmlArtifact.sha256);

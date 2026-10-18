@@ -68,7 +68,7 @@ def zip_write(path, parts):
             archive.writestr(item, payload.encode() if isinstance(payload, str) else payload)
 
 
-def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None):
+def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None):
     namespaces = f'xmlns:w="{W}" xmlns:r="{R}" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"'
     namespaces += namespaces_extra
     styles = f'''<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/><w:sz w:val="22"/><w:color w:val="000000"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="120" w:line="276" w:lineRule="auto"/><w:widowControl/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style><w:style w:type="paragraph" w:styleId="Title"><w:name w:val="Title"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:after="240"/></w:pPr><w:rPr><w:b/><w:sz w:val="32"/></w:rPr></w:style></w:styles>'''
@@ -92,6 +92,10 @@ def package(path, body, final_section=None, notes=None, image=False, namespaces_
         parts['word/comments.xml'] = f'<w:comments xmlns:w="{W}">{comments_xml}</w:comments>'
         relations.append(('rComments', 'comments', 'comments.xml'))
         overrides.append(('comments', 'comments'))
+    if comments_extended_xml is not None:
+        parts['word/commentsExtended.xml'] = comments_extended_xml
+        relations.append(('rCommentTopology', 'http://schemas.microsoft.com/office/2011/relationships/commentsExtended', 'commentsExtended.xml'))
+        overrides.append(('commentsExtended', 'commentsExtended'))
     if numbering_xml is not None:
         parts['word/numbering.xml'] = numbering_xml
         relations.append(('rNumbering', 'numbering', 'numbering.xml'))
@@ -106,7 +110,7 @@ def package(path, body, final_section=None, notes=None, image=False, namespaces_
     if image:
         parts['word/media/diamond.png'] = png(160, 160, lambda x, y: (0, 0, 0, 255) if abs(x - 79.5) + abs(y - 79.5) < 75 else (255, 255, 255, 0), alpha=True)
         relations.append(('rImage', 'image', 'media/diamond.png'))
-    parts['word/_rels/document.xml.rels'] = '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' + ''.join(f'<Relationship Id="{i}" Type="{R}/{kind}" Target="{target}"/>' for i, kind, target in relations) + '</Relationships>'
+    parts['word/_rels/document.xml.rels'] = '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' + ''.join(f'<Relationship Id="{i}" Type="{kind if kind.startswith("http") else R + "/" + kind}" Target="{target}"/>' for i, kind, target in relations) + '</Relationships>'
     parts['_rels/.rels'] = f'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rDocument" Type="{R}/officeDocument" Target="word/document.xml"/></Relationships>'
     parts['[Content_Types].xml'] = '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Default Extension="png" ContentType="image/png"/>' + ''.join(f'<Override PartName="/word/{name}.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.{kind}+xml"/>' for name, kind in overrides) + '</Types>'
     if extra_parts:
@@ -116,13 +120,13 @@ def package(path, body, final_section=None, notes=None, image=False, namespaces_
 
 def generate():
     cases = []
-    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None):
+    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None):
         assertions = assertions or []
         for assertion in assertions:
             if assertion['type'] == 'marker-region':
                 assertion.update(version=2, tolerancePt=0.0001)
         path = ROOT / 'fixtures' / (case_id + '.docx')
-        package(path, body, sect, notes, image, namespaces_extra, styles_xml, story, notes_xml, stories, extra_parts, footnote_list, numbering_xml, comments_xml)
+        package(path, body, sect, notes, image, namespaces_extra, styles_xml, story, notes_xml, stories, extra_parts, footnote_list, numbering_xml, comments_xml, comments_extended_xml)
         inventory = dict(sorted(Counter(' '.join(text).split()).items()))
         cases.append({'id': case_id, 'version': 2 if any(a['type'] == 'marker-region' for a in assertions) else 1, 'category': category, 'description': description, 'input': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'rights': {'author': 'John Scrudato IV', 'license': 'MIT', 'origin': 'Authored by bench/fixtures.py in this repository', 'assets': 'All text and graphics are generated here; no embedded font files'}, 'profile': {'review': 'final', 'comments': 'hidden'}, 'fonts': [FONT], 'tokens': inventory, 'assertions': assertions, 'generator': {'path': 'bench/fixtures.py', 'sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}})
     prose = 'The survey team records the height of each tower before the evening check. The next crew compares the notes and keeps the route open for the morning visit.'
@@ -869,7 +873,40 @@ def generate():
             [body_text], body, styles_xml=comment_styles, comments_xml=comment)
         cases[-1]['htmlProfile'] = {'review': 'final', 'comments': 'margin'}
         cases[-1]['htmlAssertions'] = [{'type': 'marker-readable', 'version': 1, 'marker': tokens[-1], 'tokens': tokens}]
-    registry = {'schema': 1, 'suite': {'id': 'core-v27', 'version': 27, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # A three-level thread and three flat notes, with identical body and comment text.
+    for case_id, threaded in [('comments-nested-reply-size', True), ('comments-flat-note-size-control', False)]:
+        ids = ['00000010', '00000020', '00000030']
+        body_text = 'CedarThreadBody The archive crew checks the cedar tray.'
+        body = para(runs='<w:commentRangeStart w:id="0"/>' + run(body_text) + '<w:commentRangeEnd w:id="0"/>'
+                    + ''.join(f'<w:r><w:commentReference w:id="{i}"/></w:r>' for i in range(3)))
+        comments = ''.join(f'<w:comment w:id="{i}" w:author="Cedar ArchiveReviewerwithalongunbrokentoken" w:date="2026-09-10T12:00:00Z">'
+                           + f'<w:p xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" w14:paraId="{pid}">'
+                           + run(f'CedarThread{i} Check the tray.') + '</w:p></w:comment>' for i, pid in enumerate(ids))
+        topology = '<w15:commentsEx xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml">' + ''.join(
+            f'<w15:commentEx w15:paraId="{pid}"' + (f' w15:paraIdParent="{ids[i - 1]}"' if threaded and i else '') + '/>'
+            for i, pid in enumerate(ids)) + '</w15:commentsEx>'
+        add(case_id, 'paragraphs', 'Root, reply and nested reply with a long author (Docxodus #1227)' if threaded else
+            'The same three comment bodies and authors without parent relationships',
+            [body_text], body, sect=section().replace('w:right="1440"', 'w:right="2880"'),
+            styles_xml=comment_styles, comments_xml=comments, comments_extended_xml=topology)
+        cases[-1]['htmlProfile'] = {'review': 'final', 'comments': 'margin'}
+        cases[-1]['htmlAssertions'] = [{'type': 'marker-computed-style', 'version': 1, 'marker': f'CedarThread{i}',
+                                       'property': 'font-size', 'equals': '13.6px'} for i in range(3)]
+    # Header containment is isolated from nesting: one long author and a short-author control.
+    for case_id, author in [('comments-long-author-header', 'CedarArchivistwithalongunbrokentoken'),
+                            ('comments-short-author-header-control', 'Cy')]:
+        body_text = 'CedarHeaderBody The archive crew checks the tray.'
+        body = para(runs='<w:commentRangeStart w:id="0"/>' + run(body_text)
+                    + '<w:commentRangeEnd w:id="0"/><w:r><w:commentReference w:id="0"/></w:r>')
+        # The literal trailing space separates the author's marker from adjacent date text in HTML.
+        comment = f'<w:comment w:id="0" w:author="{author} " w:date="2026-09-10T12:00:00Z">' + para('CedarHeaderNote Review the tray.') + '</w:comment>'
+        add(case_id, 'paragraphs', 'A long unbroken author in a one-inch review margin (Docxodus #1227)' if len(author) > 2 else
+            'The same note and margin with a short author whose header fits',
+            [body_text], body, styles_xml=comment_styles, comments_xml=comment)
+        cases[-1]['htmlProfile'] = {'review': 'final', 'comments': 'margin'}
+        cases[-1]['htmlAssertions'] = [{'type': 'marker-computed-style', 'version': 1, 'marker': author,
+                                       'property': 'font-size', 'equals': '12.24px'}]
+    registry = {'schema': 1, 'suite': {'id': 'core-v28', 'version': 28, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

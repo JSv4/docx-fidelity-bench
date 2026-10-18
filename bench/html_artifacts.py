@@ -1,4 +1,4 @@
-"""Read delivered HTML attributes independently of renderer diagnostics.
+"""Read declared delivered HTML features independently of renderer diagnostics.
 
 These feature checks accompany PDF evidence; they do not change the PDF raster score.
 """
@@ -18,7 +18,7 @@ BROWSER_POLICY = {'viewport': {'width': 1280, 'height': 1024}, 'javaScriptEnable
 
 
 def needs_browser(declarations):
-    return any(d['type'] == 'marker-readable' for d in declarations)
+    return any(d['type'] != 'marker-attribute' for d in declarations)
 
 
 def validate_declaration(declaration):
@@ -34,6 +34,11 @@ def validate_declaration(declaration):
         if (set(declaration) != {'type', 'version', 'marker', 'tokens'} or not isinstance(tokens, list) or not tokens or
                 any(not isinstance(t, str) or not t or re.search(r'\s', t) for t in tokens) or tokens[-1] != declaration['marker']):
             raise ValueError('Unknown or invalid readable HTML assertion')
+    elif declaration.get('type') == 'marker-computed-style':
+        if (set(declaration) != {'type', 'version', 'marker', 'property', 'equals'} or
+                declaration.get('property') != 'font-size' or not isinstance(declaration.get('equals'), str) or
+                re.fullmatch(r'(?:0|[1-9][0-9]*)(?:\.[0-9]+)?px', declaration['equals']) is None):
+            raise ValueError('Unknown or invalid computed HTML style assertion')
     else:
         raise ValueError('Unknown or invalid delivered HTML assertion')
 
@@ -47,7 +52,7 @@ def within(rectangle, clip, axis):
     return rectangle[axis] >= clip[axis] - 1 and rectangle[axis + 2] <= clip[axis + 2] + 1
 
 
-def readable_pass(declaration, observation, index):
+def marker_geometry_pass(declaration, observation, index):
     if (not isinstance(observation, dict) or type(observation.get('index')) is not int or observation.get('index') != index or
             observation.get('marker') != declaration['marker'] or type(observation.get('matches')) is not int or
             observation['matches'] < 0 or not isinstance(observation.get('text'), str) or not isinstance(observation.get('ports'), list)):
@@ -57,13 +62,10 @@ def readable_pass(declaration, observation, index):
         raise ValueError('Inconsistent HTML marker inventory')
     if observation['matches'] != 1:
         return False
-    if not isinstance(observation.get('blockText'), str):
-        raise ValueError('Missing readable paragraph text')
     if not all(valid_rectangle(observation.get(k)) for k in ('before', 'after', 'viewport')):
         raise ValueError('Malformed readable marker geometry')
     after = observation['after']
-    passed = (observation['blockText'] == ' '.join(declaration['tokens']) and
-              after[2] > after[0] and after[3] > after[1] and
+    passed = (after[2] > after[0] and after[3] > after[1] and
               observation['viewport'][2] > observation['viewport'][0] and observation['viewport'][3] > observation['viewport'][1] and
               all(within(after, observation['viewport'], axis) for axis in (0, 1)))
     for port in observation['ports']:
@@ -77,6 +79,24 @@ def readable_pass(declaration, observation, index):
             if port[name] != 'visible' and (port['clipAfter'][axis + 2] <= port['clipAfter'][axis] or not within(after, port['clipAfter'], axis)):
                 passed = False
     return passed
+
+
+def readable_pass(declaration, observation, index):
+    passed = marker_geometry_pass(declaration, observation, index)
+    if observation['matches'] != 1: return False
+    if not isinstance(observation.get('blockText'), str):
+        raise ValueError('Missing readable paragraph text')
+    return passed and observation['blockText'] == ' '.join(declaration['tokens'])
+
+
+def computed_style_pass(declaration, observation, index):
+    passed = marker_geometry_pass(declaration, observation, index)
+    if observation['matches'] != 1: return False
+    style = observation.get('computedStyle')
+    values = style.get(declaration['property']) if isinstance(style, dict) else None
+    if not isinstance(values, list) or not values or any(not isinstance(v, str) for v in values):
+        raise ValueError('Missing computed HTML style observation')
+    return passed and all(v == declaration['equals'] for v in values)
 
 
 def browser_metadata_valid(value, html_sha, inspector_sha, runtime):
@@ -176,16 +196,22 @@ def inspect(folder, response, declarations, profile=None):
             if not browser_metadata_valid(browser, record['sha256'], digest(BROWSER_SOURCE), runtime):
                 raise ValueError('HTML browser observation identity differs')
             observations = browser.get('observations')
-            indexes = [i for i, d in enumerate(declarations) if d['type'] == 'marker-readable']
+            indexes = [i for i, d in enumerate(declarations) if d['type'] != 'marker-attribute']
             if (not isinstance(observations, list) or len(observations) != len(indexes) or
                     [o.get('index') if isinstance(o, dict) else None for o in observations] != indexes):
                 raise ValueError('HTML browser observations do not cover the declarations')
             result['browser'] = {k: v for k, v in browser.items() if k != 'observations'}
             for index, observation in zip(indexes, observations):
                 declaration = declarations[index]
-                checks.append({'name': f'html-readable-{index + 1}', 'marker': declaration['marker'],
-                               'tokens': declaration['tokens'], 'observation': observation,
-                               'passed': readable_pass(declaration, observation, index)})
+                if declaration['type'] == 'marker-readable':
+                    checks.append({'name': f'html-readable-{index + 1}', 'marker': declaration['marker'],
+                                   'tokens': declaration['tokens'], 'observation': observation,
+                                   'passed': readable_pass(declaration, observation, index)})
+                else:
+                    checks.append({'name': f'html-style-{index + 1}', 'marker': declaration['marker'],
+                                   'property': declaration['property'], 'expected': declaration['equals'],
+                                   'observation': observation,
+                                   'passed': computed_style_pass(declaration, observation, index)})
         result['checks'] = sorted(checks, key=lambda c: int(c['name'].rsplit('-', 1)[1]))
     except (UnicodeError, ValueError, TypeError) as error:
         return {'status': 'unmeasured', 'error': str(error)}
@@ -220,9 +246,13 @@ def aggregate(cases, declarations, browser_sha=None, profiles=None):
                 if declaration['type'] == 'marker-attribute':
                     valid = (item.get('name') == f'html-attribute-{index + 1}' and item.get('attribute') == declaration['attribute'] and
                              item.get('expected') == declaration['equals'] and item['passed'] == (item.get('actual') == declaration['equals']))
-                else:
+                elif declaration['type'] == 'marker-readable':
                     valid = (item.get('name') == f'html-readable-{index + 1}' and item.get('tokens') == declaration['tokens'] and
                              item['passed'] == readable_pass(declaration, item.get('observation'), index))
+                else:
+                    valid = (item.get('name') == f'html-style-{index + 1}' and item.get('property') == declaration['property'] and
+                             item.get('expected') == declaration['equals'] and
+                             item['passed'] == computed_style_pass(declaration, item.get('observation'), index))
                 if not valid: raise ValueError('Invalid delivered HTML check coverage')
             measured += 1
             passed += all(c['passed'] for c in checks)

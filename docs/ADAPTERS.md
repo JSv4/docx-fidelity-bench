@@ -50,3 +50,13 @@ intact ordered paragraph, one positive-sized tail range, and full containment in
 every clipping ancestor. Content initially clipped by a non-scrollable ancestor fails. Missing evidence
 is unmeasured. This checks the declared paragraph and tail access; it is not a general per-word pixel,
 paint-occlusion or interactive-application fidelity test.
+
+
+Version 1 `marker-computed-style` declares a unique `marker`, `property: "font-size"` and an exact
+pixel value in `equals`, such as `"13.6px"`. Other properties and malformed values are rejected.
+The same independent browser observer records `computedStyle`, mapping the property to the computed
+values of every visible text-node fragment covered by the marker. Python requires every value to
+match, in addition to a positive range fully contained in the final viewport and each clipping ancestor.
+A missing observation is unmeasured; an observed size mismatch or clipped marker is a measured
+failure. This does not claim to inspect every character's font across the whole document or to measure
+paint occlusion. The source-bound observer, browser policy and artifact identities are unchanged.

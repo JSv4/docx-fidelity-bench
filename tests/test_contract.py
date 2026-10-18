@@ -337,7 +337,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 131)
+        self.assertEqual(len(common.validate_registry()['cases']), 135)
 
     def test_comment_pair_changes_only_note_length_and_declares_both_profiles(self):
         import xml.etree.ElementTree as ET
@@ -356,6 +356,44 @@ class RegistryContract(unittest.TestCase):
                 self.assertEqual(record['htmlProfile'], {'review': 'final', 'comments': 'margin'})
                 self.assertEqual(record['htmlAssertions'], [{'type': 'marker-readable', 'version': 1,
                                                           'marker': tokens[-1], 'tokens': tokens}])
+
+    def test_nested_comment_control_changes_only_parent_links(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records[c] for c in ('comments-nested-reply-size', 'comments-flat-note-size-control')]
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        self.assertEqual(pair[0]['htmlAssertions'], pair[1]['htmlAssertions'])
+        w15 = '{http://schemas.microsoft.com/office/word/2012/wordml}'
+        with ZipFile(common.ROOT / pair[0]['input']) as nested, ZipFile(common.ROOT / pair[1]['input']) as flat:
+            self.assertEqual(nested.namelist(), flat.namelist())
+            for name in nested.namelist():
+                if name != 'word/commentsExtended.xml': self.assertEqual(nested.read(name), flat.read(name))
+            first = ET.fromstring(nested.read('word/commentsExtended.xml'))
+            second = ET.fromstring(flat.read('word/commentsExtended.xml'))
+            parents = [entry.attrib.pop(w15 + 'paraIdParent', None) for entry in first]
+            self.assertEqual(parents, [None, '00000010', '00000020'])
+            self.assertEqual(ET.tostring(first), ET.tostring(second))
+
+    def test_comment_header_control_changes_only_the_author(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records[c] for c in ('comments-long-author-header', 'comments-short-author-header-control')]
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        with ZipFile(common.ROOT / pair[0]['input']) as long, ZipFile(common.ROOT / pair[1]['input']) as short:
+            self.assertEqual(long.namelist(), short.namelist())
+            for name in long.namelist():
+                if name != 'word/comments.xml': self.assertEqual(long.read(name), short.read(name))
+            first, second = [ET.fromstring(z.read('word/comments.xml')) for z in (long, short)]
+            w = '{' + fixtures.W + '}'
+            for tree, record in zip((first, second), pair):
+                author = tree.find(w + 'comment').get(w + 'author')
+                self.assertTrue(author.endswith(' '))
+                self.assertEqual(record['htmlAssertions'], [{'type': 'marker-computed-style', 'version': 1,
+                    'marker': author.strip(), 'property': 'font-size', 'equals': '12.24px'}])
+            first.find(w + 'comment').set(w + 'author', second.find(w + 'comment').get(w + 'author'))
+            self.assertEqual(ET.tostring(first), ET.tostring(second))
 
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
@@ -381,7 +419,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v27')
+        self.assertEqual(registry['suite']['id'], 'core-v28')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET

@@ -67,3 +67,8 @@ PDF artifacts and does not claim to validate another renderer's HTML metadata.
 HTML feature checks assert the fixture's explicit delivery contract. They are not a Word PDF-fidelity score.
 
 Version 1 `marker-readable` requires the complete authored paragraph in order and its unique final token to be visible after user-accessible scrolling. Actual range rectangles, clipping ancestors and overflow modes come from a separate offline browser context with scripts disabled; the inspector recomputes pass/fail and verifies the HTML, observer and browser executable hashes. A distinct full `htmlProfile`, when declared, is bound separately from the PDF profile. These checks make no claim that a static PDF prints all scrollable comment text, or that every word has been compared as pixels.
+
+Version 1 `marker-computed-style` adds exact computed `font-size` checks for unique HTML markers.
+Every visible inline fragment of the marker must have the declared pixel size, and the marker must
+have positive, accessible geometry under the same clipping policy as readability assertions. Mixed
+styles cannot pass by reporting only the first fragment. These checks remain separate from PDF scores.
