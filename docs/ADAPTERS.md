@@ -2,7 +2,7 @@
 
 Protocol version 1 uses one JSON request on stdin and one JSON response on stdout. The runner invokes an explicit command vector without a shell. Fixture records cannot select executable commands. Add adapter selection in `bench/__main__.py`; metrics and fixture IDs stay unchanged.
 
-The request contains `protocol`, absolute `input` and `output` paths, `inputSha256`, a production `report` destination, an explicit `profile` (`review`, `comments`), `fontDirectories`, exact `candidate` identity, and `timeoutMs`. The input is immutable. Output paths are new and must not be overwritten. The renderer must use the declared fonts and view.
+The request contains `protocol`, absolute `input` and `output` paths, `inputSha256`, a production `report` destination, an explicit `profile` (`review`, `comments`, optional `markupPresentation`), `fontDirectories`, exact `candidate` identity, and `timeoutMs`. `markupPresentation: "word"` selects Word-style tracked-change appearance for a markup review profile; omitting it retains the renderer default. The input is immutable. Output paths are new and must not be overwritten. The renderer must use the declared fonts and view.
 
 An `ok` response contains `protocol: 1`, `status: "ok"`, `pdfSha256`, and `renderer` identity. Candidate PDF bytes must exist at the requested path and match the digest. Include candidate source/build identity and runtime identity. The Docxodus adapter retains a complete production report and source-bound build record.
 
