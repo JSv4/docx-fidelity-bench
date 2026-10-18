@@ -74,13 +74,21 @@ def validate_pdf_text_policy(case, root=None):
         raise ValueError('Decorative dot policy requires an authored dot-leader tab')
 
 
-def validate_render_profile(profile):
+def validate_render_profile(profile, *, allow_additional_css=False):
+    allowed = {'review', 'comments', 'markupPresentation'}
+    if allow_additional_css: allowed.add('additionalCss')
     if (not isinstance(profile, dict) or not {'review', 'comments'}.issubset(profile) or
-            set(profile) - {'review', 'comments', 'markupPresentation'} or
+            set(profile) - allowed or
             not isinstance(profile.get('review'), str) or profile['review'] not in {'final', 'original', 'markup'} or
             not isinstance(profile.get('comments'), str) or profile['comments'] not in {'hidden', 'inline', 'margin', 'endnotes'} or
             ('markupPresentation' in profile and (not isinstance(profile['markupPresentation'], str) or profile['markupPresentation'] not in {'html', 'word'}))):
         raise ValueError('Invalid declared artifact profile')
+    if 'additionalCss' in profile:
+        css = profile['additionalCss']
+        if not isinstance(css, str) or not css:
+            raise ValueError('HTML stylesheet must be nonempty text')
+        try: css.encode('utf-8', errors='strict')
+        except UnicodeError as error: raise ValueError('Malformed Unicode HTML stylesheet') from error
     return profile
 
 
@@ -100,6 +108,7 @@ def validate_registry(registry=None):
             raise ValueError('Stale generator digest: ' + case['id'])
         if not case['tokens'] or any(not isinstance(n, int) or n < 1 for n in case['tokens'].values()):
             raise ValueError('Invalid token inventory')
+        validate_render_profile(case['profile'])
         validate_pdf_text_policy(case)
         if not isinstance(case.get('htmlAssertions', []), list):
             raise ValueError('Delivered HTML assertions must be a list')
@@ -107,7 +116,7 @@ def validate_registry(registry=None):
         for assertion in case.get('htmlAssertions', []):
             validate_declaration(assertion)
         if 'htmlProfile' in case:
-            validate_render_profile(case['htmlProfile'])
+            validate_render_profile(case['htmlProfile'], allow_additional_css=True)
             if not case.get('htmlAssertions'):
                 raise ValueError('An HTML profile override requires declared HTML checks')
         for assertion in case['assertions']:

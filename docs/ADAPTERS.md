@@ -60,3 +60,10 @@ match, in addition to a positive range fully contained in the final viewport and
 A missing observation is unmeasured; an observed size mismatch or clipped marker is a measured
 failure. This does not claim to inspect every character's font across the whole document or to measure
 paint occlusion. The source-bound observer, browser policy and artifact identities are unchanged.
+
+An HTML profile may additionally declare nonempty, well-formed Unicode `additionalCss`.
+The Docxodus adapter forwards it only for the HTML conversion; it never alters the PDF profile.
+The full stylesheet is bound through the declared HTML profile and artifact identity. Export
+versions that reject this option yield an unmeasured HTML result. For serializer regression
+experiments, record explicitly when the baseline enables the API while retaining the unfixed
+core serializer; do not attribute an unknown-option failure to CSS rendering.

@@ -972,7 +972,22 @@ def generate():
             {'type': 'marker-attribute', 'version': 1, 'marker': '↩', 'attribute': 'href', 'equals': '#comment-ref-4'},
             {'type': 'marker-attribute', 'version': 1, 'marker': '[4]', 'attribute': 'id', 'equals': 'comment-ref-4'}] if comments else [
             {'type': 'marker-attribute', 'version': 1, 'marker': 'JuniperBodyReturn', 'attribute': 'href', 'equals': '#JuniperDestination'}])
-    registry = {'schema': 1, 'suite': {'id': 'core-v30', 'version': 30, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Same original DOCX bytes; only delivered HTML stylesheet selectors differ.
+    for child in [True, False]:
+        text = ['PineCssNode Cascade proof.', 'PinePlainNode Unchanged body.']
+        add('html-css-child-selector' if child else 'html-css-descendant-control', 'paragraphs',
+            'A CSS child selector must survive XML serialization (Docxodus #1230)' if child else
+            'A descendant selector supplies the same style without a raw greater-than character',
+            text, para(runs='<w:commentRangeStart w:id="4"/>' + run(text[0]) +
+                '<w:commentRangeEnd w:id="4"/><w:r><w:commentReference w:id="4"/></w:r>') + para(text[1]),
+            styles_xml=comment_styles,
+            comments_xml='<w:comment w:id="4" w:author="">' + para('Fir') + '</w:comment>')
+        selector = 'div > p' if child else 'div p'
+        cases[-1]['htmlProfile'] = {'review': 'final', 'comments': 'margin',
+            'additionalCss': selector + ' {font-size:32px !important;line-height:1.5 !important;}'}
+        cases[-1]['htmlAssertions'] = [{'type': 'marker-computed-style', 'version': 1,
+            'marker': 'Fir', 'property': 'font-size', 'equals': '32px'}]
+    registry = {'schema': 1, 'suite': {'id': 'core-v31', 'version': 31, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

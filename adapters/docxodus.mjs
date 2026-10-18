@@ -41,7 +41,8 @@ try {
   const bytes = await readFile(request.input);
   if (hash(bytes) !== request.inputSha256) throw new Error('Input digest mismatch');
   phase = 'conversion';
-  const profileOptions = profile => ({
+  const profileOptions = (profile, html = false) => ({
+    ...(html && profile.additionalCss !== undefined ? { additionalCss: profile.additionalCss } : {}),
     reviewProfile: profile.review,
     commentProfile: profile.comments,
     ...(profile.markupPresentation === undefined ? {} : { markupPresentation: profile.markupPresentation }),
@@ -76,7 +77,7 @@ try {
       if (remaining <= 0) throw new Error('No conversion time remains for the declared HTML output');
       const htmlProfile = request.htmlProfile ?? request.profile;
       const html = await renderer.convertDocxToStandaloneHtml(new Uint8Array(bytes), {
-        ...sharedOptions, ...profileOptions(htmlProfile), timeoutMs: remaining,
+        ...sharedOptions, ...profileOptions(htmlProfile, true), timeoutMs: remaining,
       });
       if (typeof html.html !== 'string' || JSON.stringify(runtimeOf(html.renderReport)) !== JSON.stringify(runtime))
         throw new Error('Delivered HTML does not match the verified PDF runtime');

@@ -27,6 +27,20 @@ The [2026-10-14 core-v17 Docxodus results](docs/results/core-v17-docxodus.md) re
 
 `core-v30` adds an original paginated comment return link and an ordinary body-bookmark link control for [Docxodus #1229](https://github.com/JSv4/Docxodus/issues/1229). Their body content and PDF profile are the same; the reproduction carries a comment and checks both the delivered return `href` and its body's `[4]` target ID. The control checks its authored body-bookmark `href`. PDF evidence covers body text, fonts and physical pages; return navigation is measured in delivered HTML. Native browser tests additionally cover keyboard navigation, later pages, floating body frames, hidden/clipped/transparent and ambiguous targets. All 139 earlier DOCX hashes remain unchanged. New reference registration and full-suite scoring remain pending.
 
+`core-v31` adds an original CSS child-selector repro and a descendant-selector control for
+[Docxodus #1230](https://github.com/JSv4/Docxodus/issues/1230), bringing the suite to 143 cases.
+The two DOCX packages are byte-identical. Their PDF profiles use no CSS override; their separate
+HTML profiles apply equivalent 32px styles to a short margin-note marker. Unlike body text
+frozen with print-precision scaling, the note retains its requested CSS size. The existing
+computed-style observer requires every visible marker fragment to have that size. `additionalCss` is permitted only in HTML profiles,
+forwarded only for HTML export, and bound to the HTML artifact contract. Reference PDF renderers
+need no custom-CSS support. All 141 preceding DOCX hashes remain unchanged.
+
+Older Node exports that reject `additionalCss` are unmeasured for these HTML checks. A controlled
+before/after comparison may use an API-enabled baseline with only the core CSS serializer patch
+reverted; this distinction must be recorded. The original native conversion API independently
+reproduces the defect on unmodified main. New references and full-suite scoring remain pending.
+
 ## What is included
 
 | Category | Cases |

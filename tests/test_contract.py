@@ -337,7 +337,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 141)
+        self.assertEqual(len(common.validate_registry()['cases']), 143)
 
     def test_return_link_pair_keeps_a_real_comment_reference_and_body_bookmark_control(self):
         import xml.etree.ElementTree as ET
@@ -492,7 +492,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v30')
+        self.assertEqual(registry['suite']['id'], 'core-v31')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET

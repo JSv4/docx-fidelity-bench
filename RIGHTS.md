@@ -21,3 +21,6 @@ The nested-reply, flat-note and author-header cases are original literal-text OO
 The durable timestamp and date-caption fixtures are original literal-text OOXML authored by `bench/fixtures.py`. All comment content, metadata and identifiers are generated here; no renderer fixtures are imported.
 
 The comment-return and ordinary body-bookmark fixtures are original literal-text OOXML authored by `bench/fixtures.py`. All phrases, comment metadata and bookmark identifiers are generated here; no renderer fixture or external document content is imported.
+
+The CSS selector pair for Docxodus #1230 uses newly authored Pine text and generated OOXML.
+Both cases share original DOCX bytes and use no third-party text, graphics or embedded fonts.
