@@ -90,3 +90,7 @@ python3 -m bench redline run --adapter docxodus --candidate FULL_COMMIT_SHA --bu
 `build-docxodus` requires a clean checkout at the exact commit. It compiles `adapters/docxodus-redline` against that checkout's `Docxodus/Docxodus.csproj` into the output directory and records the commit, tree, adapter source digests, build recipe digest, .NET SDK version and every built assembly's digest in `redline-build.json`. Each case re-verifies that record and the checkout before invoking the adapter. The adapter calls `DocxCompare.Compare`, `DocxCompare.Consolidate` or `RevisionProcessor.RejectRevisions`, with the author `Bench` and the fixed date `2026-01-01T00:00:00Z` so outputs are reproducible.
 
 LibreOffice is found through `BENCH_LIBREOFFICE` or `PATH`; the UNO driver runs under `BENCH_LIBREOFFICE_PYTHON`, or the `python` LibreOffice ships beside `soffice`, or `/usr/bin/python3`. Their versions and digests are recorded with the run.
+
+The #1190 cases cover bookmarks directly under tables and rows, plus plain-text paragraph controls, for comparison
+and consolidation. The semantic view retains table/row marker order alongside cell contents; moving a
+marker to a different row/cell boundary changes that view. The original 37 inputs are byte-identical.

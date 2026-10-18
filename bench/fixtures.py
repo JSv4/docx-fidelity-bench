@@ -1076,7 +1076,38 @@ def generate():
                 ['MapleBefore', word, 'MapleAfter', 'BirchTarget.'], compared_body(word))
             cases[-1]['profile']['review'] = review
             cases[-1]['preparation'] = {'operation': 'compare', 'inputs': sources}
-    registry = {'schema': 1, 'suite': {'id': 'core-v35', 'version': 35, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Boundary markers are invisible in PDF: these cases verify both resolved views retain table content.
+    # The companion redline cases independently check marker identity, placement and reviewer attribution.
+    for operation, level in [('compare', 'tbl'), ('consolidate', 'tr'), ('consolidate', 'p')]:
+        cid = 'boundary-bookmark-' + operation + '-' + ('paragraph-control' if level == 'p' else level)
+        def boundary_body(marked, edited):
+            start = '<w:bookmarkStart w:id="73" w:name="HazelBoundary"/>' if marked and level != 'p' else ''
+            end = '<w:bookmarkEnd w:id="73"/>' if marked and level != 'p' else ''
+            value = 'Hazel lower revised' if edited else 'Hazel lower'
+            content = table([[cell('Hazel upper'), cell('Birch upper')], [cell(value), cell('Birch lower')]])
+            if level == 'tbl':
+                content = content.replace('</w:tr><w:tr>', '</w:tr>' + start + '<w:tr>', 1).replace('</w:tbl>', end + '</w:tbl>')
+            elif level == 'tr':
+                content = content.replace('</w:tc><w:tc>', '</w:tc>' + start + '<w:tc>', 1).replace('</w:tc></w:tr>', '</w:tc>' + end + '</w:tr>', 1)
+            else:
+                content = content.replace(run('Birch upper'), start + run('Birch upper' + (' checked' if marked else '')) + end, 1)
+            return para('Hazel boundary ledger') + content + para('Ledger complete')
+        sources = []
+        variants = [(False, False), (True, False)] + ([(False, True)] if operation == 'consolidate' else [])
+        for index, (marked, edited) in enumerate(variants):
+            path = ROOT / 'fixtures' / 'compare' / (cid + '-' + str(index) + '.docx')
+            package(path, boundary_body(marked, edited))
+            sources.append({'path': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()})
+        for review in ('final', 'original'):
+            edited = review == 'final' and operation == 'consolidate'
+            add(cid + '-' + review, 'tables',
+                operation.title() + (' independent plain-text edits (control)' if level == 'p' else
+                    ' a bookmark between ' + {'tbl': 'rows', 'tr': 'cells'}[level]) + ' (Docxodus #1190)',
+                ['Hazel boundary ledger', 'Hazel upper', 'Birch upper' + (' checked' if level == 'p' and review == 'final' else ''), 'Hazel lower' + (' revised' if edited else ''), 'Birch lower', 'Ledger complete'],
+                boundary_body(review == 'final', edited))
+            cases[-1]['profile']['review'] = review
+            cases[-1]['preparation'] = {'operation': operation, 'inputs': sources}
+    registry = {'schema': 1, 'suite': {'id': 'core-v36', 'version': 36, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
