@@ -337,7 +337,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 127)
+        self.assertEqual(len(common.validate_registry()['cases']), 129)
 
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
@@ -363,7 +363,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v25')
+        self.assertEqual(registry['suite']['id'], 'core-v26')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
@@ -387,6 +387,27 @@ class RegistryContract(unittest.TestCase):
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['tokens']['1.'], 1)
         self.assertEqual({a['marker'] for a in pair[0]['assertions']}, {'CedarHeading.', 'CedarBody'})
+
+    def test_footer_frame_pair_changes_only_frame_properties(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records[c] for c in ('footer-paragraph-text-frame', 'footer-paragraph-flow-control')]
+        w = '{' + fixtures.W + '}'
+        with ZipFile(common.ROOT / pair[0]['input']) as framed, ZipFile(common.ROOT / pair[1]['input']) as control:
+            self.assertEqual(framed.namelist(), control.namelist())
+            for name in framed.namelist():
+                if name != 'word/footer1.xml': self.assertEqual(framed.read(name), control.read(name))
+            first, second = [ET.fromstring(z.read('word/footer1.xml')) for z in (framed, control)]
+            properties = first.find(w + 'p/' + w + 'pPr')
+            frame = properties.find(w + 'framePr')
+            self.assertEqual(frame.attrib, {w + 'w': '10080', w + 'hAnchor': 'page', w + 'vAnchor': 'text',
+                                           w + 'x': '840', w + 'y': '20', w + 'wrap': 'auto'})
+            properties.remove(frame)
+            self.assertEqual(ET.tostring(first), ET.tostring(second))
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
+        self.assertEqual({a['marker'] for a in pair[0]['assertions']}, {'CedarFrameBody', 'CedarFrame01', 'CedarSheet01'})
 
     def test_manual_tab_reproducer_and_narrow_left_control(self):
         import xml.etree.ElementTree as ET
