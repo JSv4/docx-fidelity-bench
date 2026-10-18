@@ -84,3 +84,5 @@ The full stylesheet is bound through the declared HTML profile and artifact iden
 versions that reject this option yield an unmeasured HTML result. For serializer regression
 experiments, record explicitly when the baseline enables the API while retaining the unfixed
 core serializer; do not attribute an unknown-option failure to CSS rendering.
+
+PDF preparation also accepts `consolidate` with a base and at least one reviewer. Reviewer names default to `Reviewer1`, `Reviewer2`, and so on, matching the independent redline cases.

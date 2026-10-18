@@ -42,6 +42,55 @@ def custom_xml_link(content, wrapped):
     return '<w:hyperlink w:anchor="BirchTarget">' + content + '</w:hyperlink>'
 
 
+
+def comment_view_note(identifier=11):
+    return (f'<w:comment w:id="{identifier}" w:author="Cedar" w:initials="C" w:date="2026-01-01T00:00:00Z">'
+            + para('Review the cedar clause.') + '</w:comment>')
+
+
+def comment_view_mark(kind, identifier=11):
+    marker = f'<w:comment{kind} w:id="{identifier}"/>'
+    return '<w:r>' + marker + '</w:r>' if kind == 'Reference' else marker
+
+
+def comment_view_wrapper(kind, content):
+    if kind == 'sdt':
+        return '<w:sdt><w:sdtPr><w:tag w:val="cedar"/><w:id w:val="4100"/></w:sdtPr><w:sdtContent>' + content + '</w:sdtContent></w:sdt>'
+    if kind == 'customxml':
+        return '<w:customXml w:element="cedar">' + content + '</w:customXml>'
+    return content
+
+
+def comment_view_cases():
+    """Literal source/expected documents shared by PDF and independent redline fixtures."""
+    cases = []
+    for name, before, after in [('comment-add-customxml', '', 'customxml'),
+                               ('comment-remove-sdt', 'sdt', ''),
+                               ('comment-wrapper-control', 'sdt', 'sdt')]:
+        documents = []
+        for revised, wrapper in [(False, before), (True, after)]:
+            word = 'revised' if revised and before == after else 'inner'
+            body = (para(runs=run('Maple opening') + comment_view_mark('RangeStart'))
+                    + comment_view_wrapper(wrapper, para(runs=run(f'Cedar {word} clause')
+                        + comment_view_mark('RangeEnd') + comment_view_mark('Reference')))
+                    + para('Birch closing'))
+            documents.append({'body': body, 'comments_xml': comment_view_note()})
+        cases.append({'id': name, 'operation': 'compare', 'issue': 1195, 'control': before == after,
+                      'sources': documents, 'expected': [documents[1], documents[0]], 'wrappers': (before, after)})
+    for added in (True, False):
+        def document(commented, revised):
+            opening = run('Maple clause')
+            if commented:
+                opening = comment_view_mark('RangeStart') + opening + comment_view_mark('RangeEnd') + comment_view_mark('Reference')
+            return {'body': para(runs=opening) + para('Birch closing' + (' revised' if revised else '')),
+                    'comments_xml': comment_view_note() if commented else None}
+        sources = [document(False, False), document(added, False), document(False, True)]
+        cases.append({'id': 'reviewer-added-comment' if added else 'reviewer-comment-control',
+                      'operation': 'consolidate', 'issue': 1196, 'control': not added,
+                      'sources': sources, 'expected': [document(added, True), sources[0]]})
+    return cases
+
+
 def section(cols=1, kind=None):
     mode = f'<w:type w:val="{kind}"/>' if kind else ''
     return f'<w:sectPr>{mode}<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720"/><w:cols w:num="{cols}" w:space="480"/></w:sectPr>'
@@ -1076,7 +1125,22 @@ def generate():
                 ['MapleBefore', word, 'MapleAfter', 'BirchTarget.'], compared_body(word))
             cases[-1]['profile']['review'] = review
             cases[-1]['preparation'] = {'operation': 'compare', 'inputs': sources}
-    registry = {'schema': 1, 'suite': {'id': 'core-v35', 'version': 35, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    for case in comment_view_cases():
+        sources = []
+        for i, document in enumerate(case['sources']):
+            path = ROOT / 'fixtures' / 'comment-views' / (case['id'] + f'-{i}.docx')
+            package(path, **document)
+            sources.append({'path': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()})
+        for review, document in zip(('final', 'original'), case['expected']):
+            import xml.etree.ElementTree as ET
+            root = ET.fromstring(f'<w:body xmlns:w="{W}">' + document['body'] + '</w:body>')
+            texts = [e.text or '' for e in root.iter('{' + W + '}t')]
+            add(case['id'] + '-' + review, 'paragraphs',
+                ('Control for ' if case['control'] else 'Reproduce ') + f"Docxodus #{case['issue']} comment views",
+                texts, **document)
+            cases[-1]['profile']['review'] = review
+            cases[-1]['preparation'] = {'operation': case['operation'], 'inputs': sources}
+    registry = {'schema': 1, 'suite': {'id': 'core-v36', 'version': 36, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
