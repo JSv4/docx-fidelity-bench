@@ -1076,7 +1076,8 @@ def generate():
         for review in ('final', 'original'):
             edited = review == 'final' and operation == 'consolidate'
             add(cid + '-' + review, 'tables',
-                operation.title() + ' a bookmark between ' + {'tbl': 'rows', 'tr': 'cells', 'p': 'plain paragraph runs (control)' }[level] + ' (Docxodus #1190)',
+                operation.title() + (' independent plain-text edits (control)' if level == 'p' else
+                    ' a bookmark between ' + {'tbl': 'rows', 'tr': 'cells'}[level]) + ' (Docxodus #1190)',
                 ['Hazel boundary ledger', 'Hazel upper', 'Birch upper' + (' checked' if level == 'p' and review == 'final' else ''), 'Hazel lower' + (' revised' if edited else ''), 'Birch lower', 'Ledger complete'],
                 boundary_body(review == 'final', edited))
             cases[-1]['profile']['review'] = review

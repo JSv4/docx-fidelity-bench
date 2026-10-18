@@ -656,7 +656,8 @@ def table_boundary_bookmarks(corpus):
             accepted = corpus.file(name, 'accepted', body=body(True, operation == 'consolidate'))
             authored = corpus.file(name, 'authored-redline', body=body(True, operation == 'consolidate', Revisions()))
             corpus.add(name, 'bookmarks', 'control' if level == 'p' else 'reproducer', 'JSv4/Docxodus#1190',
-                       operation.title() + ' a bookmark directly in ' + level + ', with an independent table edit for consolidation',
+                       operation.title() + (' independent plain-text edits (control)' if level == 'p' else
+                           ' a bookmark directly in ' + level + ', with an independent table edit for consolidation'),
                        operation, inputs, {'accepted': accepted, 'rejected': {k: inputs[0][k] for k in ('path', 'sha256')}}, authored,
                        [untracked('Hazel upper', 'Birch upper', CLOSING)])
 
