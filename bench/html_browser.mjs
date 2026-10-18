@@ -41,7 +41,7 @@ export function collectReadableFacts(declarations) {
   for (let index = 0; index < declarations.length; index++) {
     const declaration = declarations[index];
     if (declaration.type === 'marker-attribute') continue;
-    if (declaration.type !== 'marker-readable') throw new Error('Unknown browser HTML assertion');
+    if (!['marker-readable', 'marker-computed-style'].includes(declaration.type)) throw new Error('Unknown browser HTML assertion');
     const pattern = new RegExp('(?<![\\p{L}\\p{N}_])' + escape(declaration.marker) + '(?![\\p{L}\\p{N}_])', 'gu');
     const matches = Array.from(text.matchAll(pattern));
     const facts = { index, marker: declaration.marker, matches: matches.length, text: normalized, ports: [] };
@@ -50,6 +50,11 @@ export function collectReadableFacts(declarations) {
     const first = segments.find(s => s.start <= start && s.end > start);
     const last = segments.find(s => s.start < end && s.end >= end);
     if (!first || !last) throw new Error('Marker offsets do not map to delivered text nodes');
+    if (declaration.type === 'marker-computed-style') {
+      if (declaration.property !== 'font-size') throw new Error('Unknown computed HTML style property');
+      facts.computedStyle = { [declaration.property]: segments.filter(s => s.start < end && s.end > start)
+        .map(s => getComputedStyle(s.node.parentElement).getPropertyValue(declaration.property)) };
+    }
     let block = first.node.parentElement;
     while (block?.parentElement && !['block', 'flow-root', 'flex', 'grid', 'list-item', 'table-cell'].includes(getComputedStyle(block).display)) {
       block = block.parentElement;
