@@ -88,12 +88,13 @@ try {
         if (!request.htmlObservations) throw new Error('The declared browser HTML observation path is missing');
         const budget = Math.floor(deadline - performance.now());
         if (budget <= 0) throw new Error('No conversion time remains for HTML observation');
-        const provisioned = createRequire(resolve(root, 'npm-export/package.json'))('@playwright/browser-chromium');
-        const executablePath = provisioned.chromium.executablePath();
+        // browser-chromium provisions the executable; playwright-core exposes its API.
+        const { chromium } = createRequire(resolve(root, 'npm-export/package.json'))('playwright-core');
+        const executablePath = chromium.executablePath();
         const executableSha256 = hash(await readFile(executablePath));
         if (executableSha256 !== runtime.executableSha256)
           throw new Error('The HTML observer browser differs from the verified renderer browser');
-        const browser = await provisioned.chromium.launch({ executablePath, chromiumSandbox: true,
+        const browser = await chromium.launch({ executablePath, chromiumSandbox: true,
           args: LAUNCH_ARGS, timeout: budget });
         try {
           const observationBudget = Math.floor(deadline - performance.now());

@@ -82,6 +82,8 @@ jobs:
         env:
           CANDIDATE_COMMIT: ${{ inputs.candidate }}
         run: python3 -m bench build-docxodus --source renderer --commit "$CANDIDATE_COMMIT"
+      - name: Verify installed observer browser API
+        run: DOCXODUS_SOURCE_ROOT="$PWD/renderer" node --test tests/test-playwright-runtime.mjs
       - name: Provision Chromium sandbox host
         run: |
           npm --prefix renderer/npm exec -- playwright install --with-deps chromium
