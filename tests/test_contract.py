@@ -337,7 +337,7 @@ class PdfContract(unittest.TestCase):
 
 class RegistryContract(unittest.TestCase):
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 111)
+        self.assertEqual(len(common.validate_registry()['cases']), 119)
 
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
@@ -363,7 +363,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v20')
+        self.assertEqual(registry['suite']['id'], 'core-v21')
 
     def test_legacy_header_pairs_preserve_everything_except_number_representation(self):
         import xml.etree.ElementTree as ET
