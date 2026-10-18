@@ -96,3 +96,9 @@ and consolidation. The semantic view retains table/row marker order alongside ce
 marker to a different row/cell boundary changes that view. The original 37 inputs are byte-identical.
 
 The #1195 one-sided-wrapper authored redlines calibrate structurally and against the SDK, but LibreOffice retains both revision-scoped comments and an empty paragraph after accept/reject. The #1196 reviewer-added comment calibrates under LibreOffice accept; LibreOffice reject retains the comment. Those specific views are declared ineligible for LibreOffice checks; independent marker/definition and per-reviewer accept/reject checks remain mandatory.
+
+The #1197 source reproducers intentionally contain two references to one comment; expected documents
+contain one reference. Controls replace the same wrappers with valid single references. The authored
+redlines carry one comment per view. LibreOffice retains both comments and an empty paragraph in each
+resolved view (including the controls), so those accept/reject checks are declared ineligible after
+capturing the discrepancy. Independent marker, definition and schema checks remain mandatory.
