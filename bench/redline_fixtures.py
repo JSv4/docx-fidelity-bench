@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
-from .fixtures import custom_xml_link
+from .fixtures import custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper
 
 ROOT = Path(__file__).resolve().parents[1]
 W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
@@ -168,6 +168,9 @@ def package(path, body, styles=None, header=None, comments=None, footnotes=None,
 # declared-ineligible comparison is not applied; the run fails as unmeasured if the calibration
 # disagrees with this table in either direction.
 LIBREOFFICE_INELIGIBLE = {
+    'redline-comment-add-customxml': (('accepted', 'rejected'), 'LibreOffice retains both revision-scoped comments and an empty paragraph after resolving the replaced paragraph/wrapper copies'),
+    'redline-comment-remove-sdt': (('accepted', 'rejected'), 'LibreOffice retains both revision-scoped comments and an empty paragraph after resolving the replaced paragraph/wrapper copies'),
+    'redline-reviewer-added-comment': (('rejected',), 'LibreOffice keeps the comment whose markers are in rejected insertion revisions'),
     'redline-field-result-beside-edit': (('accepted',), 'LibreOffice recomputes a PAGEREF result on import and ignores revisions inside it'),
     'redline-field-result-end-control': (('accepted', 'rejected'), 'LibreOffice recomputes a PAGEREF result on import and ignores revisions inside it'),
     'redline-field-result-tab-control': (('accepted', 'rejected'), 'LibreOffice recomputes a PAGEREF result on import and ignores revisions inside it'),
@@ -238,6 +241,7 @@ def generate():
     table_boundary_bookmarks(corpus)
     identity(corpus)
     inline_custom_xml(corpus)
+    comment_views(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -680,6 +684,51 @@ def inline_custom_xml(corpus):
                        {'body': body(t('OakOpened'))}, {'body': body(t('OakClosed'))},
                        {'body': body(rev.dele(t('OakOpened')) + rev.ins(t('OakClosed')))},
                        [untracked('MapleBefore', 'MapleAfter', 'BirchTarget.')])
+
+
+
+def comment_views(corpus):
+    for case in comment_view_cases():
+        name = 'redline-' + case['id']
+        def file(role, document):
+            return corpus.file(name, role, body=document['body'], comments=document['comments_xml'])
+        inputs = [file(str(i), document) for i, document in enumerate(case['sources'])]
+        expected = {view: file(view, document) for view, document in zip(('accepted', 'rejected'), case['expected'])}
+        rev = Revisions()
+        if case['operation'] == 'compare':
+            before, after = case['wrappers']
+            if case['control']:
+                body = case['sources'][0]['body']
+                # Replace only the literal inner word, retaining one wrapper and one comment.
+                from .fixtures import run
+                body = body.replace(run('Cedar inner clause'), t('Cedar ') + rev.dele(t('inner')) + rev.ins(t('revised')) + t(' clause'))
+                notes = comment_view_note()
+            else:
+                body = p(t('Maple opening') + rev.dele(comment_view_mark('RangeStart', 11))
+                         + rev.ins(comment_view_mark('RangeStart', 12)))
+                for wrapper, kind, identifier in [(before, 'del', 11), (after, 'ins', 12)]:
+                    mark = rev.dele if kind == 'del' else rev.ins
+                    body += comment_view_wrapper(wrapper, p(mark(t('Cedar inner clause'))
+                        + mark(comment_view_mark('RangeEnd', identifier)) + mark(comment_view_mark('Reference', identifier)),
+                        mark=rev.mark(kind)))
+                body += p(t('Birch closing'))
+                notes = comment_view_note(11) + comment_view_note(12)
+            roles = [dict(inputs[0], role='left'), dict(inputs[1], role='right')]
+        else:
+            opening = t('Maple clause')
+            if not case['control']:
+                opening = (rev.ins(comment_view_mark('RangeStart'), 'Reviewer1') + opening
+                           + rev.ins(comment_view_mark('RangeEnd'), 'Reviewer1')
+                           + rev.ins(comment_view_mark('Reference'), 'Reviewer1'))
+            body = p(opening) + p(t('Birch closing') + rev.ins(t(' revised'), 'Reviewer2'))
+            notes = None if case['control'] else comment_view_note()
+            roles = [dict(inputs[0], role='base')] + [dict(item, role='reviewer', author=f'Reviewer{i}')
+                                                     for i, item in enumerate(inputs[1:], 1)]
+        authored = corpus.file(name, 'authored-redline', body=body, comments=notes)
+        corpus.add(name, 'comments', 'control' if case['control'] else 'reproducer', f"JSv4/Docxodus#{case['issue']}",
+                   'Exact comment anchors across a one-sided wrapper' if case['operation'] == 'compare' else
+                   'A reviewer adds a comment to unchanged text while another edits a separate paragraph',
+                   case['operation'], roles, expected, authored)
 
 
 def identity(corpus):

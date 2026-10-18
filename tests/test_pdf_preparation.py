@@ -13,7 +13,7 @@ from bench.common import ROOT, digest, read_json, validate_registry
 class PdfPreparationTests(unittest.TestCase):
     def test_pdf_receives_prepared_document_and_preserves_source_pair(self):
         cases = read_json(ROOT / 'fixtures/manifest.json')['cases']
-        for case_id in ('builder-cross-type-style', 'compare-inline-customxml-final'):
+        for case_id in ('builder-cross-type-style', 'compare-inline-customxml-final', 'reviewer-added-comment-final'):
             with self.subTest(case=case_id):
                 self.assert_prepared_document(next(c for c in cases if c['id'] == case_id))
 
@@ -47,7 +47,7 @@ class PdfPreparationTests(unittest.TestCase):
 
     def test_preparation_rejects_unknown_operations_and_wrong_source_counts(self):
         registry = read_json(ROOT / 'fixtures/manifest.json')
-        for operation, count in [('compare', 1), ('compare', 3), ('build', 1), ('unknown', 2)]:
+        for operation, count in [('compare', 1), ('compare', 3), ('build', 1), ('consolidate', 1), ('unknown', 2)]:
             with self.subTest(operation=operation, count=count):
                 changed = copy.deepcopy(registry)
                 case = next(c for c in changed['cases'] if c.get('preparation'))

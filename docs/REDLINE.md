@@ -94,3 +94,5 @@ LibreOffice is found through `BENCH_LIBREOFFICE` or `PATH`; the UNO driver runs 
 The #1190 cases cover bookmarks directly under tables and rows, plus plain-text paragraph controls, for comparison
 and consolidation. The semantic view retains table/row marker order alongside cell contents; moving a
 marker to a different row/cell boundary changes that view. The original 37 inputs are byte-identical.
+
+The #1195 one-sided-wrapper authored redlines calibrate structurally and against the SDK, but LibreOffice retains both revision-scoped comments and an empty paragraph after accept/reject. The #1196 reviewer-added comment calibrates under LibreOffice accept; LibreOffice reject retains the comment. Those specific views are declared ineligible for LibreOffice checks; independent marker/definition and per-reviewer accept/reject checks remain mandatory.
