@@ -108,8 +108,9 @@ def validate_registry(registry=None):
             raise ValueError('Stale generator digest: ' + case['id'])
         if 'preparation' in case:
             preparation = case['preparation']
-            if (not isinstance(preparation, dict) or set(preparation) != {'operation', 'inputs'} or preparation['operation'] != 'build' or
-                    not isinstance(preparation['inputs'], list) or len(preparation['inputs']) < 2):
+            if (not isinstance(preparation, dict) or set(preparation) != {'operation', 'inputs'} or preparation['operation'] not in {'build', 'compare', 'consolidate'} or
+                    not isinstance(preparation['inputs'], list) or len(preparation['inputs']) < 2 or
+                    (preparation['operation'] == 'compare' and len(preparation['inputs']) != 2)):
                 raise ValueError('Invalid document preparation')
             for source in preparation['inputs']:
                 if not isinstance(source, dict) or set(source) != {'path', 'sha256'} or digest(contained(ROOT, source['path'])) != source['sha256']:

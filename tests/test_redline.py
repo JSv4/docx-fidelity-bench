@@ -46,10 +46,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v1')
-        self.assertEqual(len(registry['cases']), 37)
+        self.assertEqual(registry['suite']['id'], 'redline-v2')
+        self.assertEqual(len(registry['cases']), 43)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1190)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -122,6 +122,19 @@ class AuthoredCalibration(unittest.TestCase):
 
 
 class GamingIsRejected(unittest.TestCase):
+    def test_moving_a_table_boundary_bookmark_changes_the_semantic_view(self):
+        for level in ('tbl', 'tr'):
+            with self.subTest(level=level):
+                record = case('redline-boundary-bookmark-compare-' + level)
+                package = load(record['expected']['accepted'])
+                parts = package.story_parts()
+                root = parts[package.main]
+                marker = next(root.iter(revisions.w('bookmarkStart')))
+                parent = next(e for e in root.iter() if marker in list(e))
+                parent.remove(marker)
+                parent.insert(0, marker)
+                self.assertNotEqual(revisions.view(package), revisions.view(package, parts))
+
     def test_copying_either_input_fails_a_round_trip(self):
         for record in cases(operation='compare'):
             if record['kind'] == 'identity':
