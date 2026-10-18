@@ -265,6 +265,63 @@ class PdfContract(unittest.TestCase):
         self.assertEqual(pdf.reference_failures(declaration, capture(1)), [])
         self.assertEqual(pdf.reference_failures(declaration, capture(2)), ['assertion-same-page'])
 
+    def test_word_adjudicated_assertions_bind_candidates_and_word_references_only(self):
+        geometry = [{'media': [0, 0, 612, 792], 'crop': [0, 0, 612, 792], 'rotation': 0, 'userUnit': 1}] * 2
+        declaration = {'fonts': ['Liberation Serif'], 'tokens': {'Cite': 1, 'Note': 1},
+                       'assertions': [{'type': 'same-page', 'version': 1, 'markers': ['Cite', 'Note'], 'adjudicated': 'word'}]}
+        words = [{'text': 'Cite', 'page': 1, 'rect': [1, 2, 3, 4]}, {'text': 'Note', 'page': 2, 'rect': [1, 9, 3, 11]}]
+        split = {'geometry': geometry, 'fonts': ['LiberationSerif'], 'tokens': {'Cite': 1, 'Note': 1}, 'words': words}
+        self.assertEqual(pdf.reference_failures(declaration, split, 'libreoffice'), [])
+        self.assertEqual(pdf.reference_failures(declaration, split, 'word'), ['assertion-same-page'])
+        self.assertFalse(pdf.correctness(declaration, split, split)[-1]['passed'])
+
+    def test_libreoffice_calibration_is_not_held_to_word_adjudicated_layout(self):
+        declaration = {'assertions': [{'type': 'same-page', 'version': 1, 'markers': ['a'], 'adjudicated': 'word'}, {'type': 'same-page', 'version': 1, 'markers': ['b']}]}
+        self.assertEqual(len(pdf.binding_case(declaration, 'libreoffice', reproduces_reference=True)['assertions']), 1)
+        self.assertEqual(len(pdf.binding_case(declaration, 'libreoffice-equivalent-controls', reproduces_reference=True)['assertions']), 1)
+        self.assertEqual(len(pdf.binding_case(declaration, 'libreoffice')['assertions']), 2)
+        self.assertEqual(len(pdf.binding_case(declaration, 'word', reproduces_reference=True)['assertions']), 2)
+
+    def test_word_capture_failing_adjudicated_layout_is_registered_ineligible(self):
+        import argparse
+        from bench import __main__ as cli
+        registry = common.validate_registry()
+        record = next(c for c in registry['cases'] if c['id'] == 'notes-keep-lines-note-in-table')
+        info = {'geometry': [{'media': [0, 0, 612, 792], 'crop': [0, 0, 612, 792], 'rotation': 0, 'userUnit': 1}] * 2,
+                'fonts': ['LiberationSerif'], 'tokens': dict(record['tokens']), 'words': []}
+        markers = {'TableKeepNote001': 2, 'TableKeepNote012': 2, 'TableLead30': 1, 'TableCite': 1, 'TableKeepNote002': 2, 'TableTail01': 2}
+        info['words'] = [{'text': m, 'page': page, 'rect': [72, 100, 120, 112]} for m, page in markers.items()]
+        env = {'contract': {'fonts': {'font': 1}, 'tools': {}}, 'fontDirectories': []}
+        with tempfile.TemporaryDirectory() as temp:
+            source = Path(temp) / 'pdfs'
+            source.mkdir()
+            (source / (record['id'] + '.pdf')).write_bytes(b'%PDF-capture')
+            metadata = {'track': 'word', 'rightsApproved': True, 'capturedAt': 'x', 'provider': 'Microsoft Word', 'method': 'PDF export',
+                        'reportedBuild': None, 'platform': 'p', 'profile': {'review': 'final', 'comments': 'hidden'}, 'fontContract': {'font': 1},
+                        'cases': {record['id']: {'inputSha256': record['sha256'], 'pdfSha256': common.digest(source / (record['id'] + '.pdf'))}}}
+            common.write_json(Path(temp) / 'capture.json', metadata)
+            args = argparse.Namespace(metadata=str(Path(temp) / 'capture.json'), pdf_dir=str(source), out=str(Path(temp) / 'out'))
+            with patch.object(cli, 'environment', return_value=env), patch.object(cli.pdf, 'inspect_pdf', return_value=info):
+                cli.import_reference(registry, args)
+            entry = common.read_json(Path(temp) / 'out' / 'bundle.json')['cases'][record['id']]
+        self.assertFalse(entry['eligible'])
+        self.assertEqual(entry['ineligibleChecks'], ['assertion-same-page'])
+
+    def test_adjudicated_assertion_cannot_be_reference_relative(self):
+        registry = common.read_json(common.ROOT / 'fixtures/manifest.json')
+        registry['cases'][0]['assertions'].append({'type': 'marker-reference-position', 'version': 1, 'marker': 'x', 'tolerancePt': 0.5, 'adjudicated': 'word'})
+        with self.assertRaises(ValueError):
+            common.validate_registry(registry)
+
+    def test_unknown_adjudication_is_rejected(self):
+        registry = common.read_json(common.ROOT / 'fixtures/manifest.json')
+        registry['cases'][0]['assertions'].append({'type': 'same-page', 'version': 1, 'markers': ['a'], 'adjudicated': 'libreoffice'})
+        with self.assertRaises(ValueError):
+            common.validate_registry(registry)
+
+    def test_word_track_is_a_known_reference_track(self):
+        self.assertIn('word', common.WORD_TRACKS)
+
     def test_lost_note_fails_inventory(self):
         self.assertFalse(pdf.inventory_check({'tokens': {'Body': 1}}, {'tokens': {'Body': 1, 'Note': 1}}))
 
@@ -306,7 +363,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v19')
+        self.assertEqual(registry['suite']['id'], 'core-v20')
 
     def test_legacy_header_pairs_preserve_everything_except_number_representation(self):
         import xml.etree.ElementTree as ET

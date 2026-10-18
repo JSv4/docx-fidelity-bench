@@ -1,15 +1,15 @@
 # Word reference registration
 
-Word references are pending in the initial corpus. Capture each exact input externally with Word Online PDF export, OneDrive PDF conversion, or licensed desktop Word. Record each provider as a distinct track, preserve the original PDF, and inspect it before import. Check that Word did not repair the input, alter fields or view settings, or substitute the declared font.
+Capture each exact input externally with Word's own PDF export, preserve the original PDF, and inspect it before import. Use the provider-neutral `word` track unless a capture route needs its own track; tracks are never mixed. Check that Word did not repair the input, alter fields or view settings, or substitute the declared font.
 
 The JSON metadata must contain:
 
 ```json
 {
-  "track": "word-online",
+  "track": "word",
   "rightsApproved": true,
   "capturedAt": "ISO 8601 timestamp",
-  "provider": "Microsoft Word Online",
+  "provider": "Microsoft Word",
   "method": "PDF export",
   "reportedBuild": null,
   "platform": "Recorded browser and operating system",
@@ -25,4 +25,6 @@ The JSON metadata must contain:
 
 The font contract must include the actual regular, bold, italic, and bold-italic files, matching the harness environment. The example above is deliberately incomplete. Copy the exact `environment.fonts` object from the relevant reference bundle rather than fabricating font hashes. Record unavailable cloud build information as `null`. `rightsApproved` attests the operator's review of input, image, font embedding, and publication rights.
 
-Supply PDFs named `CASE_ID.pdf`. Run `bench reference import` with the metadata file, PDF directory, and a new output directory. Source and PDF digests, view, font contract, PDF font identities, and the complete visible token inventory are checked. Missing cases remain pending. Import records capture facts; it does not establish that an operator's declared provider or build is authentic. Retain the operator-reviewed capture evidence with the bundle.
+Supply PDFs named `CASE_ID.pdf`. Run `bench reference import` with the metadata file, PDF directory, and a new output directory. Source and PDF digests, view, font contract, PDF font identities, the complete visible token inventory and every declared assertion are checked. Missing cases remain pending. Import records capture facts; it does not establish that an operator's declared provider or build is authentic. Retain the operator-reviewed capture evidence with the bundle.
+
+Import runs each capture through its case's own mandatory checks: the visible token inventory, the declared font families and every declared assertion, including Word-adjudicated ones. A capture that fails any of them is registered with `eligible: false` and its `ineligibleChecks`, kept as evidence and not used as a standard. A Word installation without the declared font substitutes another (for example a metric-compatible Times New Roman for Liberation Serif); such a capture fails `declared-font-families` and stays ineligible. Its layout can still inform declared assertions, but it cannot be scored against.

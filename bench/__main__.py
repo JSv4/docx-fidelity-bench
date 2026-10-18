@@ -3,7 +3,7 @@ import argparse
 import sys
 from pathlib import Path
 from . import metrics, pdf, runner
-from .common import ROOT, digest, identity, read_json, validate_registry, write_json
+from .common import WORD_TRACKS, ROOT, digest, identity, read_json, validate_registry, write_json
 from .environment import environment
 from .build import docxodus
 
@@ -128,7 +128,7 @@ def redline_command(args):
 def import_reference(registry, args):
     import shutil
     metadata = read_json(args.metadata)
-    if metadata.get('track') not in {'word-online', 'word-onedrive', 'word-desktop'} or metadata.get('rightsApproved') is not True:
+    if metadata.get('track') not in WORD_TRACKS or metadata.get('rightsApproved') is not True:
         raise ValueError('Explicit Word capture track and approved artifact rights are required')
     for key in ('capturedAt', 'provider', 'method', 'reportedBuild', 'platform', 'profile', 'fontContract', 'cases'):
         if key not in metadata:
@@ -151,7 +151,8 @@ def import_reference(registry, args):
         target = output / (case['id'] + '.pdf')
         shutil.copyfile(source, target)
         info = pdf.inspect_pdf(target)
-        bundle['cases'][case['id']] = {'inputSha256': case['sha256'], 'pdf': target.name, 'pdfSha256': digest(target), 'eligible': pdf.inventory_check(info, case) and pdf.font_check(info, case['fonts']), 'inspection': info}
+        failures = pdf.reference_failures(case, info, metadata['track'])
+        bundle['cases'][case['id']] = {'inputSha256': case['sha256'], 'pdf': target.name, 'pdfSha256': digest(target), 'eligible': not failures, 'ineligibleChecks': failures, 'inspection': info}
     write_json(output / 'bundle.json', bundle)
     print(f'Registered {len(bundle["cases"])} Word captures; absent cases remain pending')
 
