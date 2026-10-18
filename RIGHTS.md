@@ -11,3 +11,5 @@ The harness uses the Python standard library. Its opt-in PDF dot-leader token po
 The core documents request Liberation Serif. Install the unmodified Liberation font package separately and retain its [SIL Open Font License notices](https://github.com/liberationfonts/liberation-fonts/blob/main/LICENSE). Font binaries are not committed. A run records the exact regular, bold, italic, and bold-italic file hashes, rejects family substitution, and checks PDF font identities. Generated reference and candidate PDFs can contain font subsets; retain the recorded font contract with the artifact bundle.
 
 Before registering operator-captured Word PDFs, approve the input, image, font embedding, and artifact-publication rights. Capture metadata must explicitly attest approval. Generated reports and PDF bundles stay outside the source tree and are published as CI artifacts. This file describes the included inventory and process; it does not extend the license of separately installed software.
+
+The footer-frame reproduction and ordinary-flow control are original literal-text OOXML generated entirely by `bench/fixtures.py`, with no imported document content.

@@ -837,7 +837,20 @@ def generate():
             assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker,
                          'tolerancePt': 0.5} for marker in markers])
         if not control: cases[-1]['pdfTextNormalization'] = 'isolated-dot-leaders-v1'
-    registry = {'schema': 1, 'suite': {'id': 'core-v25', 'version': 25, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Original page-anchored footer frame and otherwise identical ordinary-flow control.
+    frame_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="24"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="exact"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>'
+    frame_section = section().replace('<w:sectPr>', '<w:sectPr><w:footerReference w:type="default" r:id="rStory"/>')
+    for case_id, framed in [('footer-paragraph-text-frame', True), ('footer-paragraph-flow-control', False)]:
+        body_text, frame_text, centered = 'CedarFrameBody Keep the archive tray clear.', 'CedarFrame01 Archive ledger.', 'CedarSheet01 Page control.'
+        properties = '<w:framePr w:w="10080" w:hAnchor="page" w:vAnchor="text" w:x="840" w:y="20" w:wrap="auto"/>' if framed else ''
+        footer = para(frame_text, properties) + para(centered, '<w:jc w:val="center"/>')
+        add(case_id, 'paragraphs', 'Footer paragraph with a page-anchored text frame (Docxodus #1225)' if framed else
+            'Identical footer paragraphs without frame properties, preserving ordinary flow',
+            [body_text, frame_text, centered], para(body_text), sect=frame_section,
+            styles_xml=frame_styles, story=('footer', footer),
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker,
+                         'tolerancePt': 0.5} for marker in ('CedarFrameBody', 'CedarFrame01', 'CedarSheet01')])
+    registry = {'schema': 1, 'suite': {'id': 'core-v26', 'version': 26, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
