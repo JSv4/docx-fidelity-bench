@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v4`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v5`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -109,3 +109,5 @@ The #1210 cases distinguish package-local comment IDs from definition identity: 
 The #1206 consolidation cases combine a field-result edit, a prefix deletion or an added bookmark with a second reviewer’s tail edit; an ordinary-text pair is the control. All field characters and cached results are checked structurally after accept/reject, and all eight LibreOffice revision comparisons apply. PDF references recalculate body PAGE fields to 1 while the renderer intentionally retains cached body results, including the accepted 7; the two affected final PDF views retain their failing token checks rather than hiding this difference. A locked-field probe also recalculates in LibreOffice 25.8.7.3.
 
 The #1211 body pair checks a removed comment reference in an edited paragraph and an unchanged-paragraph control. LibreOffice retains the comment after accepting the edited case and sees no revisions in the marker-only control; those three comparisons are declared ineligible from authored calibration. Independent markup and schema checks remain mandatory.
+
+The #1212 note-insertion pair checks reference-to-definition identity in all resolved reviewer views. Authored redlines use sequential IDs in body order: LibreOffice misloads the valid nonsequential ordering. The prefix case leaves an empty first paragraph on LibreOffice reject, so only that comparison is ineligible; the suffix control and other comparisons calibrate. Full markup and schema checks remain mandatory.

@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
-from .fixtures import custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases, consolidated_field_cases, comment_identity_cases, removed_comment_cases, complex_field as field
+from .fixtures import custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases, consolidated_field_cases, comment_identity_cases, removed_comment_cases, note_insertion_cases, complex_field as field
 
 ROOT = Path(__file__).resolve().parents[1]
 W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
@@ -21,7 +21,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v4', 'version': 4}
+SUITE = {'id': 'redline-v5', 'version': 5}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -156,6 +156,8 @@ def package(path, body, styles=None, header=None, comments=None, footnotes=None,
 # declared-ineligible comparison is not applied; the run fails as unmeasured if the calibration
 # disagrees with this table in either direction.
 LIBREOFFICE_INELIGIBLE = {
+    'redline-consolidated-note-prefix': (('rejected',),
+        'LibreOffice leaves an empty first paragraph when rejecting the authored inserted paragraph; note contents and all other views calibrate'),
     'redline-removed-comment-body-edited': (('accepted',),
         'LibreOffice retains the removed comment after accepting its deletion markers'),
     'redline-removed-comment-body-unchanged-control': (('accepted', 'rejected'),
@@ -245,6 +247,7 @@ def generate():
     consolidated_fields(corpus)
     comment_identities(corpus)
     removed_comments(corpus)
+    inserted_notes(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -836,6 +839,34 @@ def identity(corpus):
                'Equal text, styles and structure serialized with different run splits and revision-save ids',
                'compare', [dict(a, role='left'), dict(b, role='right')], {'accepted': b, 'rejected': a}, a,
                [{'type': 'revision-count', 'version': 1, 'scope': 'redline', 'max': 0}, untracked(*texts)])
+
+
+def inserted_notes(corpus):
+    for case in note_insertion_cases():
+        name = 'redline-' + case['id']
+        def file(role, document):
+            notes = ''.join(f'<w:footnote w:id="{i}">{xml}</w:footnote>' for i, xml in document['footnote_list'])
+            return corpus.file(name, role, body=document['body'], footnotes=notes)
+        inputs = [dict(file(str(i), document), role='base' if i == 0 else 'reviewer',
+                       **({'author': f'Reviewer{i}'} if i else {})) for i, document in enumerate(case['sources'])]
+        expected = {view: file(view, document) for view, document in zip(('accepted', 'rejected'), case['expected'])}
+        rev = Revisions()
+        # Author sequential ids in redline body order, independently of the candidate.
+        first, second, added = (2, 3, 1) if case['before'] else (1, 2, 3)
+        def ref(i):
+            return f'<w:r><w:footnoteReference w:id="{i}"/></w:r>'
+        body = p(t('Cedar lead')) + p(t('Dune citation') + rev.ins(t(' revised'), 'Reviewer2') + ref(first))
+        body += p(t('Reed citation') + ref(second)) + p(t('Willow tail'))
+        inserted = p(rev.ins(t('Birch inserted clause') + ref(added), 'Reviewer1'), mark=rev.mark('ins', 'Reviewer1'))
+        body = inserted + body if case['before'] else body + inserted
+        notes = []
+        for identifier, text in ((first, 'Cobalt reference'), (second, 'Amber reference'), (added, 'Birch added reference')):
+            content = '<w:r><w:footnoteRef/></w:r>' + t(' ' + text)
+            content = p(rev.ins(content, 'Reviewer1'), mark=rev.mark('ins', 'Reviewer1')) if identifier == added else p(content)
+            notes.append((identifier, f'<w:footnote w:id="{identifier}">{content}</w:footnote>'))
+        authored = corpus.file(name, 'authored-redline', body=body, footnotes=''.join(xml for _, xml in sorted(notes)))
+        corpus.add(name, 'consolidate', 'control' if case['control'] else 'reproducer', 'JSv4/Docxodus#1212',
+                   case['description'], 'consolidate', inputs, expected, authored)
 
 
 if __name__ == '__main__':
