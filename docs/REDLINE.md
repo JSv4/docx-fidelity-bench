@@ -103,5 +103,7 @@ redlines carry one comment per view. LibreOffice retains both comments and an em
 resolved view (including the controls), so those accept/reject checks are declared ineligible after
 capturing the discrepancy. Independent marker, definition and schema checks remain mandatory.
 
+The #1210 cases distinguish package-local comment IDs from definition identity: an old note retained under a new ID, a replaced note, independent reviewer additions with different or identical text, and distinct-ID controls. Exact accepted/rejected anchors and definitions remain mandatory.
+
 
 The #1206 consolidation cases combine a field-result edit, a prefix deletion or an added bookmark with a second reviewer’s tail edit; an ordinary-text pair is the control. All field characters and cached results are checked structurally after accept/reject, and all eight LibreOffice revision comparisons apply. PDF references recalculate body PAGE fields to 1 while the renderer intentionally retains cached body results, including the accepted 7; the two affected final PDF views retain their failing token checks rather than hiding this difference. A locked-field probe also recalculates in LibreOffice 25.8.7.3.
