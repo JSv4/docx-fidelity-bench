@@ -991,6 +991,9 @@ def generate():
                 '<w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="4320"/>'
                 '</w:tblGrid>' + ''.join('<w:tr><w:tc><w:tcPr><w:tcW w:w="4320" w:type="dxa"/>'
                 '</w:tcPr>' + content + '</w:tc></w:tr>' for content in contents) + '</w:tbl>')
+    # The reference importer needs a paragraph after a footnote table. Its one-twip line
+    # avoids padding away the nested cell's overflowing synthetic blank on unfixed renderers.
+    note_table_tail = '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="1" w:lineRule="exact"/><w:rPr><w:sz w:val="2"/></w:rPr></w:pPr></w:p>'
     for nested in (False, True):
         content = note_table(note_rows)
         if nested:
@@ -1000,7 +1003,7 @@ def generate():
                                          if nested else ' without an enclosing table (control)'),
             body_text + ['1', '1'] + note_text,
             cite(body_text[0], 1) + ''.join(para(text, note_props) for text in body_text[1:]),
-            sect=note_section, styles_xml=ledger_styles, footnote_list=[(1, content)],
+            sect=note_section, styles_xml=ledger_styles, footnote_list=[(1, content + note_table_tail)],
             assertions=[{'type': 'same-page', 'version': 1,
                          'markers': ['WillowBody01', 'WillowNote01', 'WillowNote03']}])
     # #1178: a note that fills nearly a whole page under its citing line, cited first and mid-page.
