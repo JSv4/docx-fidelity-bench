@@ -157,6 +157,44 @@ def note_insertion_cases():
     return cases
 
 
+def bookmark_review_container(kind, content):
+    if kind == 'sdt':
+        return comment_view_wrapper('sdt', content)
+    if kind == 'cell':
+        return table([['<w:tc><w:tcPr/>' + content + '</w:tc>', cell('Birch register')]])
+    return content
+
+
+def bookmark_reviewer_cases():
+    """Original paragraph, wrapper and cell cases plus independently selectable removals."""
+    cases = []
+    start = '<w:bookmarkStart w:id="7" w:name="CedarRange"/>'
+    end = '<w:bookmarkEnd w:id="7"/>'
+    for container in ('paragraph', 'sdt', 'cell'):
+        for edited in (True, False):
+            def document(marked, changed):
+                word = 'meadow' if changed and edited else 'grove'
+                content = (start if marked else '') + run('Cedar ' + word) + (end if marked else '')
+                return dict(body=bookmark_review_container(container, para(runs=content))
+                            + para('Willow tail' + (' revised' if changed and not edited else '')))
+            sources = [document(not edited, False), document(True, False), document(not edited, True)]
+            cases.append(dict(id='reviewer-bookmark-' + container + ('-edited' if edited else '-outside-control'),
+                              container=container, edited=edited, directory='bookmark-reviewers', category='paragraphs',
+                              operation='consolidate', issue=1212, control=not edited,
+                              description='Reviewer bookmark with a text edit ' + ('inside ' if edited else 'outside ') + container,
+                              sources=sources, expected=[document(True, True), sources[0]]))
+    for moved in (True, False):
+        def document(position):
+            return dict(body=''.join((start if i == position else '') + para(text) + (end if i == position else '')
+                                    for i, text in enumerate(('Cedar clause', 'Dune clause', 'Willow tail'))))
+        sources = [document(0), document(-1), document(1 if moved else 0)]
+        cases.append(dict(id='reviewer-bookmark-' + ('move-and-remove' if moved else 'single-remove-control'),
+                          moved=moved, directory='bookmark-reviewers', category='paragraphs', operation='consolidate',
+                          issue=1212, control=not moved, description='Independent reviewer decisions for a shared bookmark',
+                          sources=sources, expected=[document(1 if moved else -1), sources[0]]))
+    return cases
+
+
 def complex_field(instruction, result_runs, begin=True, end=True):
     """Complex field characters; a field may open or close outside this run sequence."""
     out = ''
@@ -1312,7 +1350,7 @@ def generate():
             cases[-1]['profile']['review'] = review
             cases[-1]['preparation'] = {'operation': operation, 'inputs': sources}
 
-    for case in comment_view_cases() + duplicate_comment_cases() + consolidated_field_cases() + comment_identity_cases() + bookmark_boundary_cases() + removed_comment_cases() + note_insertion_cases():
+    for case in comment_view_cases() + duplicate_comment_cases() + consolidated_field_cases() + comment_identity_cases() + bookmark_boundary_cases() + removed_comment_cases() + note_insertion_cases() + bookmark_reviewer_cases():
         sources = []
         for i, document in enumerate(case['sources']):
             path = ROOT / 'fixtures' / case.get('directory', 'comment-views') / (case['id'] + f'-{i}.docx')
@@ -1361,7 +1399,7 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v46', 'version': 46, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v47', 'version': 47, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

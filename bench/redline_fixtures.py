@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
-from .fixtures import custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases, consolidated_field_cases, comment_identity_cases, removed_comment_cases, note_insertion_cases, complex_field as field
+from .fixtures import custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases, consolidated_field_cases, comment_identity_cases, removed_comment_cases, note_insertion_cases, bookmark_reviewer_cases, bookmark_review_container, complex_field as field
 
 ROOT = Path(__file__).resolve().parents[1]
 W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
@@ -21,7 +21,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v5', 'version': 5}
+SUITE = {'id': 'redline-v6', 'version': 6}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -156,6 +156,9 @@ def package(path, body, styles=None, header=None, comments=None, footnotes=None,
 # declared-ineligible comparison is not applied; the run fails as unmeasured if the calibration
 # disagrees with this table in either direction.
 LIBREOFFICE_INELIGIBLE = {
+    **{'redline-reviewer-bookmark-' + kind: (('accepted', 'rejected'),
+       'LibreOffice exposes zero revisions for the authored bookmark-only removal/movement; semantic, reviewer and schema checks remain mandatory')
+       for kind in ('move-and-remove', 'single-remove-control')},
     'redline-consolidated-note-prefix': (('rejected',),
         'LibreOffice leaves an empty first paragraph when rejecting the authored inserted paragraph; note contents and all other views calibrate'),
     'redline-removed-comment-body-edited': (('accepted',),
@@ -248,6 +251,7 @@ def generate():
     comment_identities(corpus)
     removed_comments(corpus)
     inserted_notes(corpus)
+    reviewer_bookmarks(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -865,6 +869,31 @@ def inserted_notes(corpus):
             content = p(rev.ins(content, 'Reviewer1'), mark=rev.mark('ins', 'Reviewer1')) if identifier == added else p(content)
             notes.append((identifier, f'<w:footnote w:id="{identifier}">{content}</w:footnote>'))
         authored = corpus.file(name, 'authored-redline', body=body, footnotes=''.join(xml for _, xml in sorted(notes)))
+        corpus.add(name, 'consolidate', 'control' if case['control'] else 'reproducer', 'JSv4/Docxodus#1212',
+                   case['description'], 'consolidate', inputs, expected, authored)
+
+
+def reviewer_bookmarks(corpus):
+    for case in bookmark_reviewer_cases():
+        name = 'redline-' + case['id']
+        inputs = [dict(corpus.file(name, str(i), **document), role='base' if i == 0 else 'reviewer',
+                       **({'author': f'Reviewer{i}'} if i else {})) for i, document in enumerate(case['sources'])]
+        expected = {view: corpus.file(name, view, **document)
+                    for view, document in zip(('accepted', 'rejected'), case['expected'])}
+        rev = Revisions()
+        if 'container' in case:
+            content = (rev.ins(bookmark(True, 7, 'CedarRange'), 'Reviewer1') if case['edited'] else bookmark(True, 7, 'CedarRange')) + t('Cedar ')
+            content += rev.dele(t('grove'), 'Reviewer2') + rev.ins(t('meadow'), 'Reviewer2') if case['edited'] else t('grove')
+            content += rev.ins(bookmark(False, 7), 'Reviewer1') if case['edited'] else bookmark(False, 7)
+            body = bookmark_review_container(case['container'], p(content))
+            body += p(t('Willow tail') + (rev.ins(t(' revised'), 'Reviewer2') if not case['edited'] else ''))
+        else:
+            def removed(marker):
+                return rev.dele(rev.dele(marker, 'Reviewer2') if case['moved'] else marker, 'Reviewer1')
+            body = removed(bookmark(True, 7, 'CedarRange')) + p(t('Cedar clause')) + removed(bookmark(False, 7))
+            body += (rev.ins(bookmark(True, 9, 'CedarRange'), 'Reviewer2') if case['moved'] else '') + p(t('Dune clause'))
+            body += (rev.ins(bookmark(False, 9), 'Reviewer2') if case['moved'] else '') + p(t('Willow tail'))
+        authored = corpus.file(name, 'authored-redline', body=body)
         corpus.add(name, 'consolidate', 'control' if case['control'] else 'reproducer', 'JSv4/Docxodus#1212',
                    case['description'], 'consolidate', inputs, expected, authored)
 
