@@ -21,7 +21,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v2', 'version': 2}
+SUITE = {'id': 'redline-v3', 'version': 3}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -503,9 +503,8 @@ def folds(corpus):
             return p(t('Opening line of the survey.')) + p(bookmark(True, 5, '_Toc5') + content + bookmark(False, 5)) + p(t(CLOSING))
         rev = Revisions()
         tracked = (t('Valley ') + rev.dele(t('survey')) + rev.ins(t('study'))) if kind == 'reproducer' else (t('Valley ') + rev.ins(t('ridge ')) + t('survey'))
-        corpus.compare(name, 'bookmarks', kind, None,
-                       'Bookmarked paragraph whose ' + ('last word is replaced' if kind == 'reproducer' else 'text gains a word inside the bookmark')
-                       + '; no Docxodus issue yet',
+        corpus.compare(name, 'bookmarks', kind, 'JSv4/Docxodus#1218',
+                       'Bookmarked paragraph whose ' + ('last word is replaced' if kind == 'reproducer' else 'text gains a word inside the bookmark'),
                        {'body': marked(t('Valley survey'))}, {'body': marked(t(revised))}, {'body': marked(tracked)},
                        [untracked('Opening line of the survey.', 'Valley', CLOSING)])
     for name, between, right_kind in [('redline-bookmark-between-blocks-fold-text', True, 'text'),
