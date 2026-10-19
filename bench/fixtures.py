@@ -986,13 +986,16 @@ def generate():
     note_rows = [para(props=note_props, runs=(
         '<w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr><w:footnoteRef/></w:r>'
         + run(' ') if i == 0 else '') + run(text)) for i, text in enumerate(note_text)]
-    def note_table(contents):
+    def note_table(contents, columns=1):
+        width = 4320 // columns
         return ('<w:tbl><w:tblPr><w:tblW w:w="4320" w:type="dxa"/>'
-                '<w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="4320"/>'
-                '</w:tblGrid>' + ''.join('<w:tr><w:tc><w:tcPr><w:tcW w:w="4320" w:type="dxa"/>'
-                '</w:tcPr>' + content + '</w:tc></w:tr>' for content in contents) + '</w:tbl>')
-    # The reference importer needs a paragraph after a footnote table. Its one-twip line
-    # avoids padding away the nested cell's overflowing synthetic blank on unfixed renderers.
+                '<w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>' + f'<w:gridCol w:w="{width}"/>' * columns
+                + '</w:tblGrid>' + ''.join('<w:tr>' + ''.join(
+                    f'<w:tc><w:tcPr><w:tcW w:w="{width}" w:type="dxa"/></w:tcPr>' + cell + '</w:tc>'
+                    for cell in ([content] if isinstance(content, str) else content))
+                    + '</w:tr>' for content in contents) + '</w:tbl>')
+    # A final paragraph lets the reference importer finish the note table. Keep its line tiny
+    # so the nested cell's structural tail remains an effective overflow reproduction.
     note_table_tail = '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="1" w:lineRule="exact"/><w:rPr><w:sz w:val="2"/></w:rPr></w:pPr></w:p>'
     for nested in (False, True):
         content = note_table(note_rows)
@@ -1006,6 +1009,33 @@ def generate():
             sect=note_section, styles_xml=ledger_styles, footnote_list=[(1, content + note_table_tail)],
             assertions=[{'type': 'same-page', 'version': 1,
                          'markers': ['WillowBody01', 'WillowNote01', 'WillowNote03']}])
+    # Whole rows are the control for nesting, and three lines control each oversized cell shape.
+    for name, count, nested, packed, columns, wrapped in [
+            ('nested', 80, True, False, 1, False), ('rows-control', 80, False, False, 1, False),
+            ('tall-row', 80, False, True, 1, False), ('tall-row-control', 3, False, True, 1, False),
+            ('nested-wrapped', 80, True, True, 2, True), ('nested-wrapped-control', 3, True, True, 2, True),
+            ('row-wrapped', 80, False, True, 2, True), ('row-wrapped-control', 3, False, True, 2, True)]:
+        lines = [[f'Pine{col + 1}N{i:03d} Row.' for i in range(1, count + 1)] for col in range(columns)]
+        paragraphs = []
+        for col, labels in enumerate(lines):
+            ref = ('<w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr><w:footnoteRef/></w:r>'
+                   + run(' ') if col == 0 else '')
+            paragraphs.append([para(props=note_props, runs=ref + '<w:r><w:br/></w:r>'.join(run(x) for x in labels))]
+                              if wrapped else [para(props=note_props, runs=(ref if i == 0 else '') + run(text))
+                                               for i, text in enumerate(labels)])
+        contents = [[''.join(items) for items in paragraphs]] if packed else list(zip(*paragraphs))
+        content = note_table(contents, columns)
+        if nested:
+            content = note_table([content + '<w:p/>'])
+        add('notes-table-flow-' + name, 'notes',
+            f'{count} lines in a {columns}-cell footnote table with '
+            + ('one wrapped paragraph per cell' if wrapped else 'separate paragraphs')
+            + (' inside a nested table' if nested else '') + (' (control)' if 'control' in name else ''),
+            body_text + ['1', '1'] + [text for labels in lines for text in labels],
+            cite(body_text[0], 1) + ''.join(para(text, note_props) for text in body_text[1:]),
+            sect=note_section, styles_xml=ledger_styles, footnote_list=[(1, content + note_table_tail)],
+            assertions=[{'type': 'same-page', 'version': 1,
+                         'markers': ['WillowBody01'] + [labels[0].split()[0] for labels in lines]}])
     # #1178: a note that fills nearly a whole page under its citing line, cited first and mid-page.
     for name, before in [('notes-tall-note-first-line', 0), ('notes-tall-note-mid-page', 10)]:
         lead, lead_xml = body_lines('TallLead', before)
@@ -1454,7 +1484,7 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v49', 'version': 49, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v50', 'version': 50, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

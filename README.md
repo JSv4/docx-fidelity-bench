@@ -2,9 +2,9 @@
 
 An independent MIT benchmark of delivered PDF rendering and of document comparison. The harness and every input document are authored in this repository. It measures layout, visible content, physical pages, fonts, and declared feature assertions. It produces portable HTML evidence and JSON measurements.
 
-The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v49`, with report-only renderer CI. A separate comparison track, `redline-v7`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
+The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v50`, with report-only renderer CI. A separate comparison track, `redline-v7`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
 
-`core-v49` adds an original fitting nested footnote table and a matching ordinary-table control for Docxodus #1217. The nested cell ends with an unformatted structural paragraph; both cases require complete PDF text and keep all three note rows with their citation. Earlier DOCX bytes are unchanged. The redline suite remains `redline-v7`.
+`core-v50` adds original oversized footnote tables for Docxodus #1217: nested rows, a tall row of paragraphs, and two-cell rows with long wrapped paragraphs, both directly and nested. Each has a whole-row or fitting-size control. Complete text, fonts, page geometry and the first note line's citation page remain mandatory. All earlier DOCX bytes are unchanged; the redline suite remains `redline-v7`.
 
 `core-v47` and `redline-v6` add eight original bookmark-reviewer cases for Docxodus #1212: same-paragraph edits in body paragraphs, content controls and table cells, their outside-edit controls, and independent removal/movement decisions. Each case has final/original PDF views and an authored redline with per-reviewer projections. All earlier DOCX bytes remain unchanged.
 
