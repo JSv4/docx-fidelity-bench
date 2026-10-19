@@ -26,3 +26,5 @@ The CSS selector pair for Docxodus #1230 uses newly authored Pine text and gener
 Both cases share original DOCX bytes and use no third-party text, graphics or embedded fonts.
 
 The Times New Roman agreement variant for bench #33 reuses this repository's original agreement text and OOXML. Only its requested font family changes; it contains no embedded font files or imported document content.
+
+The consolidated-field fixtures for Docxodus #1206 use original Alder/Birch text and literal OOXML authored here. Source documents, expected final/original views and authored redlines contain no imported renderer fixtures or third-party document content.
