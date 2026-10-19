@@ -33,7 +33,7 @@ def audit():
         if redline_fixtures.generate() != redline_registry:
             raise ValueError('Redline manifest is not generated from the declared original corpus source')
         for case in redline_registry['cases']:
-            for record in case['inputs'] + list(case['expected'].values()) + [case['authored']]:
+            for record in redline.artifact_records(case):
                 actual = ROOT / record['path']
                 if actual.read_bytes() != (Path(temp) / record['path']).read_bytes():
                     raise ValueError('Redline fixture differs from its generator: ' + record['path'])

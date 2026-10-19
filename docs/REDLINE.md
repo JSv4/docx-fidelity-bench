@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v5`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v7`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -11,6 +11,7 @@ The suite is `redline-v5`, in `fixtures/redline/manifest.json`. It is separate f
 - `operation` and its `inputs`, each with a path, SHA-256 and role (`left`/`right`, `base`/`reviewer`, or the tracked `input`);
 - `expected`: for `compare` and `consolidate`, the document accept-all must produce (`accepted`: the revised document, or for consolidation the authored merge of every reviewer's change) and the document reject-all must produce (`rejected`: the original or base); for `reject`, the `output` the operation must produce;
 - `authored`: a redline (or resolved output) that is correct by construction, used for calibration;
+- optional `reviewerExpected`: independently authored documents, with paths and SHA-256 digests, for every consolidation reviewer when conflict resolution or consensus attribution makes a selective result differ from an input; all selective comparisons remain mandatory;
 - `assertions`: declared, versioned structural checks;
 - `libreoffice`: for each expected document, whether LibreOffice can make that comparison (see below), with the reason when it cannot;
 - `kind` (`reproducer`, `control` or `identity`), the Docxodus issue it pins, the rights record and the generator identity.
@@ -29,7 +30,7 @@ A case scores **100** when every applicable check passes and **0** otherwise. Th
    - custom-XML insertion, deletion and move ranges resolve the enclosing tags independently of their content. One enclosing range or two ranges crossing the opening and closing tags can remove an envelope; untracked content and unrelated empty inline envelopes survive. Partial removal of only one tag is reported as unsupported rather than treated as a successful resolution (see [custom-XML range semantics](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.wordprocessing.customxmlinsrangestart));
    - property-change records (`w:rPrChange`, `w:pPrChange`, `w:sectPrChange`, `w:tblPrChange`, `w:trPrChange`, `w:tcPrChange`, `w:tblGridChange`, `w:tblPrExChange`, `w:numberingChange`) are dropped on accept and restore the prior properties on reject;
    - a block content control or custom-XML element left with no content is removed, as is a table left with no rows.
-   - For `consolidate`, attribution is checked too: accepting only one reviewer's revisions (by `w:author`) and rejecting every other revision must reproduce that reviewer's document.
+   - For `consolidate`, attribution is checked too: accepting only one reviewer's revisions (by `w:author`) and rejecting every other revision must reproduce that reviewer's document, or the explicitly declared `reviewerExpected` projection. The bookmark-name cases declare the default base-wins policy: competing new ranges are absent, independent text edits survive, and a consensus range is credited to the first reviewer. These expectations are authored independently of candidate output and included in digest and regeneration audits.
 3. **Round trip through LibreOffice.** `bench/lo_revisions.py` runs LibreOffice's own accept-all and reject-all (`.uno:AcceptAllTrackedChanges`, `.uno:RejectAllTrackedChanges`) through headless UNO, in a private profile and process, and saves the result with LibreOffice's Word filter. The expected document takes the same path, loaded and saved without an operation, so LibreOffice's import and export normalization applies equally to both sides. The two are compared on the text view. CI pins LibreOffice 25.8.7.3.
 4. **Validity.** The pinned Open XML SDK validator (`tools/ooxml-validator`, DocumentFormat.OpenXml 3.5.1, file format `Microsoft365`) checks the candidate's package and every input. A finding counts by its error id, part and description; the package fails when any finding occurs more often than in every input. An XPath alone never distinguishes findings, so a moved error is not new and a duplicated one is. A run without the validator has no suite score.
 5. **Declared assertions**, each versioned:
