@@ -178,6 +178,19 @@ def consolidated_field_cases():
     return cases
 
 
+def bookmark_boundary_cases():
+    """PDF views complement the redline track's bookmark-extent checks."""
+    def document(text):
+        return {'body': para(runs='<w:bookmarkStart w:id="5" w:name="AlderRange"/>' + run(text)
+                             + '<w:bookmarkEnd w:id="5"/>') + para('Cedar closing ledger.')}
+    return [dict(id='bookmark-boundary-' + kind, operation='compare', issue=1218,
+                 control=kind == 'insertion-control', directory='bookmark-views',
+                 description='Bookmark extent when editing its enclosed text',
+                 sources=[document('Alder survey'), document(revised)],
+                 expected=[document(revised), document('Alder survey')])
+            for kind, revised in [('replacement', 'Alder study'), ('insertion-control', 'Alder ridge survey')]]
+
+
 def section(cols=1, kind=None):
     mode = f'<w:type w:val="{kind}"/>' if kind else ''
     return f'<w:sectPr>{mode}<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720"/><w:cols w:num="{cols}" w:space="480"/></w:sectPr>'
@@ -1244,7 +1257,7 @@ def generate():
             cases[-1]['profile']['review'] = review
             cases[-1]['preparation'] = {'operation': operation, 'inputs': sources}
 
-    for case in comment_view_cases() + duplicate_comment_cases() + consolidated_field_cases() + comment_identity_cases():
+    for case in comment_view_cases() + duplicate_comment_cases() + consolidated_field_cases() + comment_identity_cases() + bookmark_boundary_cases():
         sources = []
         for i, document in enumerate(case['sources']):
             path = ROOT / 'fixtures' / case.get('directory', 'comment-views') / (case['id'] + f'-{i}.docx')
@@ -1291,7 +1304,7 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v42', 'version': 42, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v43', 'version': 43, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
