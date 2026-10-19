@@ -979,6 +979,33 @@ def generate():
         lines = [f'{prefix}{i:02d} Spruce body line.' for i in range(1, count + 1)]
         return lines, ''.join(para(x, note_props) for x in lines)
     note_section = section().replace('w:footer="720"', 'w:footer="720" w:gutter="0"')
+    # #1217: the mandatory empty paragraph after a nested table is structural. A synthetic
+    # full-size blank run there used to protrude from an otherwise fitting footnote's band.
+    body_text = [f'WillowBody{i:02d} Reed ledger line.' for i in range(1, 62)]
+    note_text = [f'WillowNote{i:02d} Reed note row.' for i in range(1, 4)]
+    note_rows = [para(props=note_props, runs=(
+        '<w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr><w:footnoteRef/></w:r>'
+        + run(' ') if i == 0 else '') + run(text)) for i, text in enumerate(note_text)]
+    def note_table(contents):
+        return ('<w:tbl><w:tblPr><w:tblW w:w="4320" w:type="dxa"/>'
+                '<w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="4320"/>'
+                '</w:tblGrid>' + ''.join('<w:tr><w:tc><w:tcPr><w:tcW w:w="4320" w:type="dxa"/>'
+                '</w:tcPr>' + content + '</w:tc></w:tr>' for content in contents) + '</w:tbl>')
+    # The reference importer needs a paragraph after a footnote table. Its one-twip line
+    # avoids padding away the nested cell's overflowing synthetic blank on unfixed renderers.
+    note_table_tail = '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="1" w:lineRule="exact"/><w:rPr><w:sz w:val="2"/></w:rPr></w:pPr></w:p>'
+    for nested in (False, True):
+        content = note_table(note_rows)
+        if nested:
+            content = note_table([content + '<w:p/>'])
+        add('notes-fitting-' + ('nested-table' if nested else 'table-control'), 'notes',
+            'Three-row footnote table' + (' nested in a cell with an unformatted structural tail paragraph'
+                                         if nested else ' without an enclosing table (control)'),
+            body_text + ['1', '1'] + note_text,
+            cite(body_text[0], 1) + ''.join(para(text, note_props) for text in body_text[1:]),
+            sect=note_section, styles_xml=ledger_styles, footnote_list=[(1, content + note_table_tail)],
+            assertions=[{'type': 'same-page', 'version': 1,
+                         'markers': ['WillowBody01', 'WillowNote01', 'WillowNote03']}])
     # #1178: a note that fills nearly a whole page under its citing line, cited first and mid-page.
     for name, before in [('notes-tall-note-first-line', 0), ('notes-tall-note-mid-page', 10)]:
         lead, lead_xml = body_lines('TallLead', before)
@@ -1427,7 +1454,7 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v48', 'version': 48, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v49', 'version': 49, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
