@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
-from .fixtures import custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases, consolidated_field_cases, comment_identity_cases, complex_field as field
+from .fixtures import custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases, consolidated_field_cases, comment_identity_cases, removed_comment_cases, complex_field as field
 
 ROOT = Path(__file__).resolve().parents[1]
 W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
@@ -21,7 +21,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v3', 'version': 3}
+SUITE = {'id': 'redline-v4', 'version': 4}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -156,6 +156,10 @@ def package(path, body, styles=None, header=None, comments=None, footnotes=None,
 # declared-ineligible comparison is not applied; the run fails as unmeasured if the calibration
 # disagrees with this table in either direction.
 LIBREOFFICE_INELIGIBLE = {
+    'redline-removed-comment-body-edited': (('accepted',),
+        'LibreOffice retains the removed comment after accepting its deletion markers'),
+    'redline-removed-comment-body-unchanged-control': (('accepted', 'rejected'),
+        'LibreOffice exposes zero revisions for comment-marker changes without a text edit'),
     **{'redline-comment-identity-' + kind:
        (('accepted', 'rejected') if kind == 'replaced-id' else ('rejected',),
         'LibreOffice retains comment definitions after their insertion/deletion markers are resolved; independent markup and schema checks remain required')
@@ -240,6 +244,7 @@ def generate():
     duplicate_comments(corpus)
     consolidated_fields(corpus)
     comment_identities(corpus)
+    removed_comments(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -726,6 +731,19 @@ def comment_views(corpus):
                    'Exact comment anchors across a one-sided wrapper' if case['operation'] == 'compare' else
                    'A reviewer adds a comment to unchanged text while another edits a separate paragraph',
                    case['operation'], roles, expected, authored)
+
+
+def removed_comments(corpus):
+    for case in removed_comment_cases():
+        rev = Revisions()
+        content = (rev.dele(comment_view_mark('RangeStart', 0)) + p(t('Dune clause'))
+                   + rev.dele(comment_view_mark('RangeEnd', 0))
+                   + p(t('Reed tail') + (rev.ins(t(' revised')) if case['edited'] else '')
+                       + rev.dele(comment_view_mark('Reference', 0))))
+        authored = dict(body=content, comments=comment_view_note(0, 'Check dune clause'))
+        corpus.compare('redline-' + case['id'], 'comments', 'control' if case['control'] else 'reproducer',
+                       'JSv4/Docxodus#1211', case['description'],
+                       *[dict(body=s['body'], comments=s['comments_xml']) for s in case['sources']], authored)
 
 
 def duplicate_comments(corpus):

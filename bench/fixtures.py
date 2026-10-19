@@ -108,6 +108,29 @@ def duplicate_comment_cases():
     return cases
 
 
+def removed_comment_cases(stories=('body',)):
+    """A removed comment's reference is in an edited or unchanged paragraph."""
+    cases = []
+    for story in stories:
+        for edited in (True, False):
+            def document(revised):
+                content = (('' if revised else comment_view_mark('RangeStart', 0)) + para('Dune clause')
+                           + ('' if revised else comment_view_mark('RangeEnd', 0))
+                           + para(runs=run('Reed tail revised' if revised and edited else 'Reed tail')
+                                  + ('' if revised else comment_view_mark('Reference', 0))))
+                doc = dict(body=content, comments_xml=None if revised else comment_view_note(0, 'Check dune clause'))
+                if story != 'body':
+                    doc.update(body=para('Willow body'), story=(story, content),
+                               final_section=section().replace('<w:sectPr>', f'<w:sectPr><w:{story}Reference w:type="default" r:id="rStory"/>'))
+                return doc
+            sources = [document(False), document(True)]
+            cases.append(dict(id='removed-comment-' + story + ('-edited' if edited else '-unchanged-control'),
+                              story=story, edited=edited, operation='compare', issue=1211, control=not edited,
+                              description='Removed comment reference in a ' + story + ' paragraph',
+                              sources=sources, expected=[sources[1], sources[0]]))
+    return cases
+
+
 def complex_field(instruction, result_runs, begin=True, end=True):
     """Complex field characters; a field may open or close outside this run sequence."""
     out = ''
@@ -1257,7 +1280,7 @@ def generate():
             cases[-1]['profile']['review'] = review
             cases[-1]['preparation'] = {'operation': operation, 'inputs': sources}
 
-    for case in comment_view_cases() + duplicate_comment_cases() + consolidated_field_cases() + comment_identity_cases() + bookmark_boundary_cases():
+    for case in comment_view_cases() + duplicate_comment_cases() + consolidated_field_cases() + comment_identity_cases() + bookmark_boundary_cases() + removed_comment_cases():
         sources = []
         for i, document in enumerate(case['sources']):
             path = ROOT / 'fixtures' / case.get('directory', 'comment-views') / (case['id'] + f'-{i}.docx')
@@ -1304,7 +1327,7 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v43', 'version': 43, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v44', 'version': 44, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
