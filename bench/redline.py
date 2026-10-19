@@ -39,6 +39,10 @@ HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'b
 # Registry
 # ---------------------------------------------------------------------------------------------
 
+def artifact_records(case):
+    return case['inputs'] + list(case['expected'].values()) + [case['authored']] + list(case.get('reviewerExpected', {}).values())
+
+
 def validate_registry(registry=None):
     registry = registry or read_json(MANIFEST)
     if registry.get('schema') != 1 or not isinstance(registry['suite'].get('version'), int) or registry['suite']['version'] < 1:
@@ -60,7 +64,10 @@ def validate_registry(registry=None):
         declared = case.get('libreoffice', {})
         if {k for k in declared if k != 'note'} != expected or any(not isinstance(declared[k], bool) for k in expected) or (not all(declared[k] for k in expected) and not declared.get('note')):
             raise ValueError('Invalid LibreOffice eligibility declaration: ' + case['id'])
-        for record in case['inputs'] + list(case['expected'].values()) + [case['authored']]:
+        if 'reviewerExpected' in case and (operation != 'consolidate' or
+                set(case['reviewerExpected']) != {i['author'] for i in case['inputs'] if i['role'] == 'reviewer'}):
+            raise ValueError('Reviewer expectations must name every consolidation reviewer: ' + case['id'])
+        for record in artifact_records(case):
             if digest(contained(ROOT, record['path'])) != record['sha256']:
                 raise ValueError('Stale redline input digest: ' + case['id'] + ' ' + record['path'])
         if digest(contained(ROOT, case['generator']['path'])) != case['generator']['sha256']:
@@ -269,10 +276,14 @@ def score_case(case, folder, adapter, build, candidate, env, validator):
                 outcome['checks'].append(_comparison('markup-' + key, revisions.view(revisions.Package(str(expected[key]))),
                                                      revisions.view(package, resolved[key])))
         if case['operation'] == 'consolidate':
-            # Attribution: accepting one reviewer's revisions and rejecting every other must give that
-            # reviewer's document.
+            # Conflict policies can intentionally suppress a competing edit. Those cases declare
+            # independently authored projections; ordinary merges still reproduce each input.
             for path, record in zip(inputs, case['inputs']):
                 if record['role'] == 'reviewer':
+                    projection = case.get('reviewerExpected', {}).get(record['author'], record)
+                    path = contained(ROOT, projection['path'])
+                    if digest(path) != projection['sha256']:
+                        raise ValueError('Reviewer expectation changed during the run: ' + projection['path'])
                     outcome['checks'].append(_comparison('markup-reviewer-' + record['author'], revisions.view(revisions.Package(str(path))),
                                                          revisions.view(package, revisions.resolve(parts, 'accept', record['author']))))
         outcome['checks'].extend(_libreoffice_checks(case, folder, env, output, authored, expected))

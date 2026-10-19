@@ -195,6 +195,34 @@ def bookmark_reviewer_cases():
     return cases
 
 
+def bookmark_conflict_cases():
+    """Competing names resolve against the base while an independent text edit survives."""
+    cases = []
+    start = '<w:bookmarkStart w:id="7" w:name="SharedRange"/>'
+    end = '<w:bookmarkEnd w:id="7"/>'
+    def document(position=-1, inline=False, extent=None, revised=False):
+        body = ''
+        for i, text in enumerate(('Cedar clause', 'Dune clause', 'Reed tail' + (' revised' if revised else ''))):
+            content = run(text)
+            if i == position and inline:
+                length = len(text) if extent is None else extent
+                content = start + run(text[:length]) + end + (run(text[length:]) if length < len(text) else '')
+            body += (start if i == position and not inline else '') + para(runs=content)
+            body += end if i == position and not inline else ''
+        return dict(body=body)
+    for kind in ('block-position', 'mixed-position', 'inline-extent', 'consensus-control'):
+        control = kind == 'consensus-control'
+        first_inline = kind == 'inline-extent'
+        sources = [document(), document(0, first_inline),
+                   document(0 if control or first_inline else 1, kind in ('mixed-position', 'inline-extent'),
+                            5 if first_inline else None, revised=True)]
+        cases.append(dict(id='bookmark-name-' + kind, directory='bookmark-name-conflicts', category='paragraphs',
+                          operation='consolidate', issue=1212, control=control,
+                          description='Same-name reviewer bookmarks with ' + kind.replace('-', ' '),
+                          sources=sources, expected=[document(0 if control else -1, revised=True), sources[0]]))
+    return cases
+
+
 def complex_field(instruction, result_runs, begin=True, end=True):
     """Complex field characters; a field may open or close outside this run sequence."""
     out = ''
@@ -1350,7 +1378,7 @@ def generate():
             cases[-1]['profile']['review'] = review
             cases[-1]['preparation'] = {'operation': operation, 'inputs': sources}
 
-    for case in comment_view_cases() + duplicate_comment_cases() + consolidated_field_cases() + comment_identity_cases() + bookmark_boundary_cases() + removed_comment_cases() + note_insertion_cases() + bookmark_reviewer_cases():
+    for case in comment_view_cases() + duplicate_comment_cases() + consolidated_field_cases() + comment_identity_cases() + bookmark_boundary_cases() + removed_comment_cases() + note_insertion_cases() + bookmark_reviewer_cases() + bookmark_conflict_cases():
         sources = []
         for i, document in enumerate(case['sources']):
             path = ROOT / 'fixtures' / case.get('directory', 'comment-views') / (case['id'] + f'-{i}.docx')
@@ -1399,7 +1427,7 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v47', 'version': 47, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v48', 'version': 48, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

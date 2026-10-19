@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
-from .fixtures import custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases, consolidated_field_cases, comment_identity_cases, removed_comment_cases, note_insertion_cases, bookmark_reviewer_cases, bookmark_review_container, complex_field as field
+from .fixtures import custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases, consolidated_field_cases, comment_identity_cases, removed_comment_cases, note_insertion_cases, bookmark_reviewer_cases, bookmark_review_container, bookmark_conflict_cases, complex_field as field
 
 ROOT = Path(__file__).resolve().parents[1]
 W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
@@ -21,7 +21,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v6', 'version': 6}
+SUITE = {'id': 'redline-v7', 'version': 7}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -252,6 +252,7 @@ def generate():
     removed_comments(corpus)
     inserted_notes(corpus)
     reviewer_bookmarks(corpus)
+    bookmark_conflicts(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -896,6 +897,27 @@ def reviewer_bookmarks(corpus):
         authored = corpus.file(name, 'authored-redline', body=body)
         corpus.add(name, 'consolidate', 'control' if case['control'] else 'reproducer', 'JSv4/Docxodus#1212',
                    case['description'], 'consolidate', inputs, expected, authored)
+
+
+def bookmark_conflicts(corpus):
+    for case in bookmark_conflict_cases():
+        name = 'redline-' + case['id']
+        inputs = [dict(corpus.file(name, str(i), **document), role='base' if i == 0 else 'reviewer',
+                       **({'author': f'Reviewer{i}'} if i else {})) for i, document in enumerate(case['sources'])]
+        expected = {view: corpus.file(name, view, **document)
+                    for view, document in zip(('accepted', 'rejected'), case['expected'])}
+        rev = Revisions()
+        body = (rev.ins(bookmark(True, 7, 'SharedRange'), 'Reviewer1') if case['control'] else '') + p(t('Cedar clause'))
+        body += rev.ins(bookmark(False, 7), 'Reviewer1') if case['control'] else ''
+        body += p(t('Dune clause')) + p(t('Reed tail') + rev.ins(t(' revised'), 'Reviewer2'))
+        authored = corpus.file(name, 'authored-redline', body=body)
+        corpus.add(name, 'consolidate', 'control' if case['control'] else 'reproducer', 'JSv4/Docxodus#1212',
+                   case['description'], 'consolidate', inputs, expected, authored)
+        # BaseWins removes both contested ranges. Consensus is credited to the first reviewer.
+        corpus.cases[-1]['reviewerExpected'] = {
+            'Reviewer1': corpus.file(name, 'reviewer1', **(case['sources'][1] if case['control'] else case['sources'][0])),
+            'Reviewer2': corpus.file(name, 'reviewer2', body=p(t('Cedar clause')) + p(t('Dune clause')) + p(t('Reed tail revised'))),
+        }
 
 
 if __name__ == '__main__':

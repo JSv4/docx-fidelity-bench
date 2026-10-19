@@ -46,8 +46,8 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v6')
-        self.assertEqual(len(registry['cases']), 76)
+        self.assertEqual(registry['suite']['id'], 'redline-v7')
+        self.assertEqual(len(registry['cases']), 80)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
         self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218)})
 
@@ -65,7 +65,7 @@ class RedlineRegistry(unittest.TestCase):
             expected = common.read_json(redline.MANIFEST)
             self.assertEqual(generated, expected)
             for record in expected['cases']:
-                for item in record['inputs'] + list(record['expected'].values()) + [record['authored']]:
+                for item in redline.artifact_records(record):
                     self.assertEqual((Path(temp) / item['path']).read_bytes(), (common.ROOT / item['path']).read_bytes())
 
     def test_stale_digest_and_unknown_assertion_are_rejected(self):
@@ -85,10 +85,33 @@ class RedlineRegistry(unittest.TestCase):
 
     def test_inputs_carry_no_embedded_fonts_or_custom_xml_parts(self):
         for record in cases():
-            for item in record['inputs'] + list(record['expected'].values()) + [record['authored']]:
+            for item in redline.artifact_records(record):
                 for name in members(item):
                     self.assertNotIn('font', name.lower())
                     self.assertFalse(name.startswith('customXml/'))
+
+    def test_reviewer_expectations_require_all_authors_and_valid_digests(self):
+        registry = common.read_json(redline.MANIFEST)
+        target = next(c for c in registry['cases'] if 'reviewerExpected' in c)
+        projection = target['reviewerExpected'].pop('Reviewer1')
+        with self.assertRaisesRegex(ValueError, 'every consolidation reviewer'):
+            redline.validate_registry(registry)
+        target['reviewerExpected']['Reviewer1'] = dict(projection, sha256='0' * 64)
+        with self.assertRaisesRegex(ValueError, 'Stale redline input digest'):
+            redline.validate_registry(registry)
+
+    def test_conflict_projections_still_reject_wrong_attribution(self):
+        record = case('redline-bookmark-name-consensus-control')
+        package = load(record['authored'])
+        parts = package.story_parts()
+        for author, expected in record['reviewerExpected'].items():
+            self.assertEqual(revisions.view(package, revisions.resolve(parts, 'accept', author)), revisions.view(load(expected)))
+        for root in parts.values():
+            for e in root.iter():
+                if e.get(revisions.w('author')) == 'Reviewer2':
+                    e.set(revisions.w('author'), 'Reviewer1')
+        self.assertNotEqual(revisions.view(package, revisions.resolve(parts, 'accept', 'Reviewer2')),
+                            revisions.view(load(record['reviewerExpected']['Reviewer2'])))
 
 
 class AuthoredCalibration(unittest.TestCase):
