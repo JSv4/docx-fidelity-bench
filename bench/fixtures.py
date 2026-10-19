@@ -131,6 +131,32 @@ def removed_comment_cases(stories=('body',)):
     return cases
 
 
+def note_insertion_cases():
+    """An inserted paragraph renumbers existing footnotes; a suffix is the control."""
+    cases = []
+    for before in (True, False):
+        def document(inserted, edited):
+            entries = [('Cedar lead', None), ('Dune citation' + (' revised' if edited else ''), 'Cobalt reference'),
+                       ('Reed citation', 'Amber reference'), ('Willow tail', None)]
+            if inserted:
+                entries.insert(0 if before else len(entries), ('Birch inserted clause', 'Birch added reference'))
+            body, notes = '', []
+            for text, note in entries:
+                content = run(text)
+                if note:
+                    identifier = len(notes) + 1
+                    content += f'<w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr><w:footnoteReference w:id="{identifier}"/></w:r>'
+                    notes.append((identifier, para(runs='<w:r><w:footnoteRef/></w:r>' + run(' ' + note))))
+                body += para(runs=content)
+            return dict(body=body, footnote_list=notes)
+        sources = [document(False, False), document(True, False), document(False, True)]
+        cases.append(dict(id='consolidated-note-' + ('prefix' if before else 'suffix-control'), before=before,
+                          directory='note-views', category='notes', operation='consolidate', issue=1212,
+                          control=not before, description='Inserted paragraph cites a footnote ' + ('before' if before else 'after') + ' existing notes',
+                          sources=sources, expected=[document(True, True), sources[0]]))
+    return cases
+
+
 def complex_field(instruction, result_runs, begin=True, end=True):
     """Complex field characters; a field may open or close outside this run sequence."""
     out = ''
@@ -1280,7 +1306,7 @@ def generate():
             cases[-1]['profile']['review'] = review
             cases[-1]['preparation'] = {'operation': operation, 'inputs': sources}
 
-    for case in comment_view_cases() + duplicate_comment_cases() + consolidated_field_cases() + comment_identity_cases() + bookmark_boundary_cases() + removed_comment_cases():
+    for case in comment_view_cases() + duplicate_comment_cases() + consolidated_field_cases() + comment_identity_cases() + bookmark_boundary_cases() + removed_comment_cases() + note_insertion_cases():
         sources = []
         for i, document in enumerate(case['sources']):
             path = ROOT / 'fixtures' / case.get('directory', 'comment-views') / (case['id'] + f'-{i}.docx')
@@ -1288,11 +1314,13 @@ def generate():
             sources.append({'path': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()})
         for review, document in zip(('final', 'original'), case['expected']):
             import xml.etree.ElementTree as ET
-            root = ET.fromstring(f'<w:body xmlns:w="{W}">' + document['body'] + '</w:body>')
+            content = document['body'] + ''.join(xml for _, xml in document.get('footnote_list', []))
+            root = ET.fromstring(f'<w:body xmlns:w="{W}">' + content + '</w:body>')
             texts = [e.text or '' for e in root.iter('{' + W + '}t')]
+            texts += [str(i) for i, _ in document.get('footnote_list', []) for _ in range(2)]
             if case.get('directory') == 'field-views' and not case['control']:
                 texts = ['1' if text == '7' else text for text in texts]  # PAGE recalculates on this one-page document.
-            add(case['id'] + '-' + review, 'paragraphs',
+            add(case['id'] + '-' + review, case.get('category', 'paragraphs'),
                 ('Control for ' if case['control'] else 'Reproduce ') + f"Docxodus #{case['issue']} " + case.get('description', 'comment views'),
                 texts, **document)
             cases[-1]['profile']['review'] = review
@@ -1327,7 +1355,7 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v44', 'version': 44, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v45', 'version': 45, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
