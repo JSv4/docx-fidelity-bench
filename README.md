@@ -56,6 +56,8 @@ reproduces the defect on unmodified main. New references and full-suite scoring 
 
 `core-v34` adds `paragraph-contract-times-new-roman` for [bench #33](https://github.com/JSv4/docx-fidelity-bench/issues/33), bringing the suite to 150 cases. It differs from the original justified agreement only in its requested font family. Word Online substitutes Times New Roman when the original requests Liberation Serif; the explicit variant allows a comparison with the declared family. All 149 preceding DOCX hashes remain unchanged. Both cases retain their full token inventories and raster measurements; neither declares marker-position assertions. Times New Roman is separately provisioned for rendering. Word is used only to capture reference PDFs, and is not a harness or test dependency. The [Word capture and focused comparison](docs/results/paragraph-contract-word.md) retain font-version differences and the original ineligible capture. New full-suite reference registration and scoring remain pending.
 
+`core-v41` adds eight final/original PDF views and four independent complex-field consolidation cases for #1206. The redline track checks field characters, cached results, bookmarks and reviewer attribution. PDF references recalculate body PAGE fields; Docxodus intentionally preserves their cached body text, so the two final views with an edited cache report a visible-token mismatch (7 versus 1). This difference remains measured, with no token exclusion or relaxed assertion. The other six views compare retained text and layout directly.
+
 ## What is included
 
 | Category | Cases |
