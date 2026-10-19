@@ -979,19 +979,25 @@ def generate():
         + [{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5} for marker in ('KeepHeading', 'KeepNoteTwo002', 'KeepTail01')])
     # A table row citing a keep-lines note too tall for the rest of the page.
     lead, lead_xml = body_lines('TableLead', 30)
-    a_lines, a_xml = note('TableKeepNote', 12, keep=True)
     after, after_xml = body_lines('TableTail', 8)
-    texts = lead + ['TableCite Spruce row cites a kept note.', '1', '1'] + a_lines + after
     cell_xml = cite('TableCite Spruce row cites a kept note.', 1)
     table_xml = ('<w:tbl><w:tblPr><w:tblW w:w="9360" w:type="dxa"/>' + exact_borders + '<w:tblLayout w:type="fixed"/></w:tblPr>'
                  '<w:tblGrid><w:gridCol w:w="9360"/></w:tblGrid><w:tr><w:tc><w:tcPr><w:tcW w:w="9360" w:type="dxa"/></w:tcPr>' + cell_xml + '</w:tc></w:tr></w:tbl>')
     # Word reference PDFs move the citing row to the next page with its kept note; LibreOffice keeps
     # the row on page 1 and sends the note on alone.
-    add('notes-keep-lines-note-in-table', 'notes', 'Table row on body line 31 citing a twelve-line keep-lines note that does not fit below it; the row moves to the note\'s page (Word-adjudicated)',
-        texts, lead_xml + table_xml + after_xml, sect=note_section, styles_xml=ledger_styles, footnote_list=[(1, a_xml)],
-        assertions=[{'type': 'same-page', 'version': 1, 'markers': ['TableKeepNote001', 'TableKeepNote012']},
-                    {'type': 'marker-region', 'version': 2, 'marker': 'TableLead30', 'occurrence': 1, 'page': 1, 'rect': [60, 60, 552, 760]},
-                    dict({'type': 'same-page', 'version': 1, 'markers': ['TableCite', 'TableKeepNote002', 'TableTail01']}, adjudicated='word')])
+    for count, name in [(12, 'notes-keep-lines-note-in-table'), (2, 'notes-keep-lines-table-fitting-control')]:
+        a_lines, a_xml = note('TableKeepNote', count, keep=True)
+        texts = lead + ['TableCite Spruce row cites a kept note.', '1', '1'] + a_lines + after
+        pairing = {'type': 'same-page', 'version': 1, 'markers': ['TableCite', 'TableKeepNote002', 'TableTail01']}
+        if count == 12:
+            pairing['adjudicated'] = 'word'
+        control_page = [] if count == 12 else [
+            {'type': 'marker-region', 'version': 2, 'marker': 'TableCite', 'occurrence': 1, 'page': 1, 'rect': [60, 60, 552, 760]}]
+        add(name, 'notes', ('Table row on body line 31 citing a twelve-line keep-lines note that does not fit below it; the row moves to the note\'s page (Word-adjudicated)' if count == 12 else
+                           'Control for Docxodus #1217: the table row and its two-line kept note fit together on page 1'),
+            texts, lead_xml + table_xml + after_xml, sect=note_section, styles_xml=ledger_styles, footnote_list=[(1, a_xml)],
+            assertions=[{'type': 'same-page', 'version': 1, 'markers': ['TableKeepNote001', f'TableKeepNote{count:03d}']},
+                        {'type': 'marker-region', 'version': 2, 'marker': 'TableLead30', 'occurrence': 1, 'page': 1, 'rect': [60, 60, 552, 760]}, pairing] + control_page)
     # Original decoration pairs for Docxodus #1220. Raster measurements, rather than text
     # inventories, distinguish line count, pattern and color; each reproducer has a simple control.
     decoration_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:color w:val="000000"/><w:sz w:val="40"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl/><w:spacing w:after="120"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>'
@@ -1355,7 +1361,7 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v45', 'version': 45, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v46', 'version': 46, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
