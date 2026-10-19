@@ -2,9 +2,9 @@
 
 An independent MIT benchmark of delivered PDF rendering and of document comparison. The harness and every input document are authored in this repository. It measures layout, visible content, physical pages, fonts, and declared feature assertions. It produces portable HTML evidence and JSON measurements.
 
-The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v45`, with report-only renderer CI. A separate comparison track, `redline-v5`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
+The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v46`, with report-only renderer CI. A separate comparison track, `redline-v5`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
 
-`core-v45` adds four PDF views and two redline cases for an inserted paragraph whose new footnote renumbers existing notes during consolidation (#1212). A suffix insertion is the control. Each citation must retain its own note content after accepting all, rejecting all, and accepting one reviewer.
+`core-v46` adds a fitting-note control for the existing Word-adjudicated table citation case (#1217). The original twelve-line kept note must stay with its citing row on page 2; the two-line control fits beside its citation on page 1. The original reproducer and all earlier DOCX bytes are unchanged.
 
 `core-v36` adds six PDF views for Docxodus #1190: table-boundary comparison, row-boundary consolidation,
 and a plain-paragraph text control, each in final and original views. Candidates perform the operation
