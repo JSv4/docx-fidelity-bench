@@ -1189,6 +1189,21 @@ def generate():
             styles_xml=stamp_styles, story=('footer', footer),
             assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker,
                          'tolerancePt': 0.5} for marker in ('ElmStampBody', 'ElmStamp01', 'ElmSheet01')])
+    # #1276 review: the style centres its frame with w:xAlign; the paragraph's own framePr sets w:x.
+    # The paragraph's offset wins over the style's alignment. The control restates every attribute.
+    align_frame = 'w:w="2880" w:wrap="around" w:vAnchor="text" w:hAnchor="page" w:xAlign="center" w:y="40"'
+    offset_frame = 'w:w="2880" w:wrap="around" w:vAnchor="text" w:hAnchor="page" w:x="2000" w:y="40"'
+    align_styles = frame_styles.replace('</w:styles>', '<w:style w:type="paragraph" w:customStyle="1" w:styleId="CentredFrame">'
+                                        f'<w:name w:val="Centred Frame"/><w:pPr><w:framePr {align_frame}/></w:pPr></w:style></w:styles>')
+    for case_id, direct in [('footer-style-frame-align-direct-offset', 'w:wrap="around" w:x="2000"'), ('footer-style-frame-align-full-direct-control', offset_frame)]:
+        body_text, frame_text, centered = 'LarchAlignBody Keep the tally sheet flat.', 'LarchAlign01 Tally mark.', 'LarchSheet01 Leaf control.'
+        footer = para(frame_text, f'<w:pStyle w:val="CentredFrame"/><w:framePr {direct}/>') + para(centered, '<w:jc w:val="center"/>')
+        add(case_id, 'paragraphs', "Style-centred footer frame under a direct framePr that sets only w:wrap and w:x (Docxodus #1276)"
+            if direct != offset_frame else 'The same style-centred footer frame with every frame attribute restated directly, w:x in place of w:xAlign (control)',
+            [body_text, frame_text, centered], para(body_text), sect=frame_section,
+            styles_xml=align_styles, story=('footer', footer),
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker,
+                         'tolerancePt': 0.5} for marker in ('LarchAlignBody', 'LarchAlign01', 'LarchSheet01')])
     # A margin comment that exceeds its HTML viewport, and the same short-note control.
     # PDFs deliberately hide comments; interactive readability is measured in delivered HTML.
     comment_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:color w:val="000000"/><w:sz w:val="22"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl/><w:spacing w:after="120" w:line="276" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>'
