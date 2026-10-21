@@ -354,7 +354,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 241)
+        self.assertEqual(len(common.validate_registry()['cases']), 244)
 
     def test_agreement_font_variant_changes_only_the_declared_family(self):
         from zipfile import ZipFile
@@ -529,7 +529,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v49')
+        self.assertEqual(registry['suite']['id'], 'core-v50')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
@@ -601,6 +601,41 @@ class RegistryContract(unittest.TestCase):
             self.assertNotIn(number, control['tokens'])
         self.assertEqual(len(repro['assertions']), 6)
         self.assertEqual(control['assertions'][0]['marker'], 'CedarTitle01')
+
+    def test_right_stop_reproducers_differ_from_their_control_only_in_the_trigger(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        indent, markup, control = [records['tabs-right-stop-' + c] for c in ('in-right-indent', 'inline-markup', 'plain-control')]
+        w = '{' + fixtures.W + '}'
+        def document(case):
+            with ZipFile(common.ROOT / case['input']) as archive:
+                return ET.fromstring(archive.read('word/document.xml'))
+        def strip_indent(xml):
+            for ind in xml.iter(w + 'ind'): ind.attrib.pop(w + 'right', None)
+            return ET.tostring(xml)
+        plain, indented, marked = document(control), document(indent), document(markup)
+        # The indent reproducer is the control plus an 864-twip right indent on every entry.
+        self.assertEqual([i.get(w + 'right') for i in indented.iter(w + 'ind')], ['864'] * 4)
+        self.assertEqual(strip_indent(indented), ET.tostring(plain))
+        for paragraph in plain.iter(w + 'p'):
+            stops = paragraph.findall(w + 'pPr/' + w + 'tabs/' + w + 'tab')
+            self.assertEqual([(t.get(w + 'val'), t.get(w + 'pos'), t.get(w + 'leader')) for t in stops],
+                             [('left', '1296', None), ('right', '9360', 'dot')])
+            self.assertIsNone(paragraph.find(w + 'pPr/' + w + 'ind').get(w + 'right'))
+        # The markup reproducer adds one inert item per entry and nothing else.
+        self.assertEqual(len(list(marked.iter(w + 'bookmarkStart'))), 1)
+        self.assertEqual(len(list(marked.iter(w + 'noBreakHyphen'))), 1)
+        self.assertEqual(len(list(marked.iter(w + 'u'))), 2)
+        self.assertEqual(len(list(marked.iter(w + 'strike'))), 2)
+        self.assertEqual(len(list(plain.iter(w + 'tab'))), len(list(marked.iter(w + 'tab'))))
+        self.assertEqual(markup['tokens'].get('AlderTitle02'), 1)
+        self.assertEqual(markup['tokens'].get('Spillway-West'), 1)
+        for case in (indent, markup, control):
+            self.assertEqual({a['marker'] for a in case['assertions']},
+                             {'AlderTitle01', 'AlderTitle02', 'AlderTitle03', 'AlderTitle04', '3', '12', '27', '140'})
+            self.assertEqual(case['pdfTextNormalization'], 'isolated-dot-leaders-v1')
+        self.assertEqual(indent['tokens'], control['tokens'])
 
     def test_legacy_header_pairs_preserve_everything_except_number_representation(self):
         import xml.etree.ElementTree as ET

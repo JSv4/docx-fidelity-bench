@@ -2,7 +2,9 @@
 
 An independent MIT benchmark of delivered PDF rendering and of document comparison. The harness and every input document are authored in this repository. It measures layout, visible content, physical pages, fonts, and declared feature assertions. It produces portable HTML evidence and JSON measurements.
 
-The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v49`, with report-only renderer CI. A separate comparison track, `redline-v7`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
+The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v50`, with report-only renderer CI. A separate comparison track, `redline-v7`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
+
+`core-v50` adds three original leader-line cases for Docxodus #1275. Four entries each have a label, a left title stop, and a right dot-leader page-number stop at the column edge. In `tabs-right-stop-in-right-indent`, an 864-twip right indent ends each line before that stop. In `tabs-right-stop-inline-markup`, the entries carry an empty bookmark, a non-breaking hyphen, underlined tab runs and struck tab runs. `tabs-right-stop-plain-control` has neither. Title and page-number position assertions check that each entry stays on one line, with its number on the stop. Earlier DOCX bytes are unchanged. The redline suite remains `redline-v7`.
 
 `core-v49` adds an original fitting nested footnote table and a matching ordinary-table control for Docxodus #1217. The nested cell ends with an unformatted structural paragraph; both cases require complete PDF text and keep all three note rows with their citation. Earlier DOCX bytes are unchanged. The redline suite remains `redline-v7`.
 
