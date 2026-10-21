@@ -37,13 +37,28 @@ export function collectReadableFacts(declarations) {
   }
   const normalized = text.replace(/\s+/g, ' ').trim();
   const escape = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const find = marker => Array.from(text.matchAll(new RegExp('(?<![\\p{L}\\p{N}_])' + escape(marker) + '(?![\\p{L}\\p{N}_])', 'gu')));
+  const blockOf = offset => {
+    let element = segments.find(s => s.start <= offset && s.end > offset)?.node.parentElement;
+    while (element?.parentElement && !['block', 'flow-root', 'flex', 'grid', 'list-item', 'table-cell'].includes(getComputedStyle(element).display)) {
+      element = element.parentElement;
+    }
+    return element;
+  };
+  // Content-box width of a marker's nearest block: the line length left for its text.
+  // Padding and borders are scaled like the rendered box, as portRectangle scales client sizes.
+  const contentWidth = element => {
+    const style = getComputedStyle(element), width = element.getBoundingClientRect().width;
+    const scale = element.offsetWidth ? width / element.offsetWidth : 1;
+    return width - scale * ['paddingLeft', 'paddingRight', 'borderLeftWidth', 'borderRightWidth']
+      .reduce((sum, name) => sum + parseFloat(style[name]), 0);
+  };
   const observations = [];
   for (let index = 0; index < declarations.length; index++) {
     const declaration = declarations[index];
     if (declaration.type === 'marker-attribute') continue;
-    if (!['marker-readable', 'marker-computed-style'].includes(declaration.type)) throw new Error('Unknown browser HTML assertion');
-    const pattern = new RegExp('(?<![\\p{L}\\p{N}_])' + escape(declaration.marker) + '(?![\\p{L}\\p{N}_])', 'gu');
-    const matches = Array.from(text.matchAll(pattern));
+    if (!['marker-readable', 'marker-computed-style', 'marker-block-width'].includes(declaration.type)) throw new Error('Unknown browser HTML assertion');
+    const matches = find(declaration.marker);
     const facts = { index, marker: declaration.marker, matches: matches.length, text: normalized, ports: [] };
     if (matches.length !== 1) { observations.push(facts); continue; }
     const start = matches[0].index, end = start + declaration.marker.length;
@@ -55,9 +70,12 @@ export function collectReadableFacts(declarations) {
       facts.computedStyle = { [declaration.property]: segments.filter(s => s.start < end && s.end > start)
         .map(s => getComputedStyle(s.node.parentElement).getPropertyValue(declaration.property)) };
     }
-    let block = first.node.parentElement;
-    while (block?.parentElement && !['block', 'flow-root', 'flex', 'grid', 'list-item', 'table-cell'].includes(getComputedStyle(block).display)) {
-      block = block.parentElement;
+    const block = blockOf(start);
+    if (declaration.type === 'marker-block-width') {
+      const reference = find(declaration.reference);
+      facts.blockWidth = contentWidth(block);
+      facts.reference = { marker: declaration.reference, matches: reference.length,
+        ...(reference.length === 1 ? { blockWidth: contentWidth(blockOf(reference[0].index)) } : {}) };
     }
     // Use the same visible-node inventory as the marker search. textContent would
     // count a hidden middle word as readable even when only the final word paints.

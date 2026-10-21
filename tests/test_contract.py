@@ -354,7 +354,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 241)
+        self.assertEqual(len(common.validate_registry()['cases']), 243)
 
     def test_agreement_font_variant_changes_only_the_declared_family(self):
         from zipfile import ZipFile
@@ -471,19 +471,29 @@ class RegistryContract(unittest.TestCase):
         import xml.etree.ElementTree as ET
         from zipfile import ZipFile
         records = {c['id']: c for c in common.validate_registry()['cases']}
-        pair = [records[c] for c in ('comments-nested-reply-size', 'comments-flat-note-size-control')]
-        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
-        self.assertEqual(pair[0]['htmlAssertions'], pair[1]['htmlAssertions'])
         w15 = '{http://schemas.microsoft.com/office/word/2012/wordml}'
-        with ZipFile(common.ROOT / pair[0]['input']) as nested, ZipFile(common.ROOT / pair[1]['input']) as flat:
-            self.assertEqual(nested.namelist(), flat.namelist())
-            for name in nested.namelist():
-                if name != 'word/commentsExtended.xml': self.assertEqual(nested.read(name), flat.read(name))
-            first = ET.fromstring(nested.read('word/commentsExtended.xml'))
-            second = ET.fromstring(flat.read('word/commentsExtended.xml'))
-            parents = [entry.attrib.pop(w15 + 'paraIdParent', None) for entry in first]
-            self.assertEqual(parents, [None, '00000010', '00000020'])
-            self.assertEqual(ET.tostring(first), ET.tostring(second))
+        for ids, root in [(('comments-nested-reply-size', 'comments-flat-note-size-control'), 1),
+                          (('comments-nested-reply-width', 'comments-flat-note-width-control'), 4)]:
+            pair = [records[c] for c in ids]
+            self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+            self.assertEqual(pair[0]['htmlAssertions'], pair[1]['htmlAssertions'])
+            with ZipFile(common.ROOT / pair[0]['input']) as nested, ZipFile(common.ROOT / pair[1]['input']) as flat:
+                self.assertEqual(nested.namelist(), flat.namelist())
+                for name in nested.namelist():
+                    if name != 'word/commentsExtended.xml': self.assertEqual(nested.read(name), flat.read(name))
+                first = ET.fromstring(nested.read('word/commentsExtended.xml'))
+                second = ET.fromstring(flat.read('word/commentsExtended.xml'))
+                parents = [entry.attrib.pop(w15 + 'paraIdParent', None) for entry in first]
+                self.assertEqual(parents, [None, f'000000{root}0', f'000000{root + 1}0'])
+                self.assertEqual(ET.tostring(first), ET.tostring(second))
+
+    def test_reply_width_pair_measures_each_reply_against_the_root_note(self):
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        for case_id in ('comments-nested-reply-width', 'comments-flat-note-width-control'):
+            self.assertEqual(records[case_id]['htmlProfile'], {'review': 'final', 'comments': 'margin'})
+            self.assertEqual(records[case_id]['htmlAssertions'], [
+                {'type': 'marker-block-width', 'version': 1, 'marker': f'CedarWidth{i}',
+                 'reference': 'CedarWidth0', 'tolerancePx': 0.5} for i in (1, 2)])
 
     def test_comment_header_control_changes_only_the_author(self):
         import xml.etree.ElementTree as ET
@@ -529,7 +539,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v49')
+        self.assertEqual(registry['suite']['id'], 'core-v50')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET

@@ -1209,6 +1209,26 @@ def generate():
         cases[-1]['htmlProfile'] = {'review': 'final', 'comments': 'margin'}
         cases[-1]['htmlAssertions'] = [{'type': 'marker-computed-style', 'version': 1, 'marker': f'CedarThread{i}',
                                        'property': 'font-size', 'equals': '13.6px'} for i in range(3)]
+    # Reply text width is isolated from size: the same thread and flat control, measured by line length.
+    for case_id, threaded in [('comments-nested-reply-width', True), ('comments-flat-note-width-control', False)]:
+        ids = ['00000040', '00000050', '00000060']
+        body_text = 'CedarWidthBody The archive crew measures the cedar tray.'
+        body = para(runs='<w:commentRangeStart w:id="0"/>' + run(body_text) + '<w:commentRangeEnd w:id="0"/>'
+                    + ''.join(f'<w:r><w:commentReference w:id="{i}"/></w:r>' for i in range(3)))
+        comments = ''.join(f'<w:comment w:id="{i}" w:author="Cedar Reviewer" w:date="2026-09-10T12:00:00Z">'
+                           + f'<w:p xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" w14:paraId="{pid}">'
+                           + run(f'CedarWidth{i} Measure the tray and record its full width.') + '</w:p></w:comment>'
+                           for i, pid in enumerate(ids))
+        topology = '<w15:commentsEx xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml">' + ''.join(
+            f'<w15:commentEx w15:paraId="{pid}"' + (f' w15:paraIdParent="{ids[i - 1]}"' if threaded and i else '') + '/>'
+            for i, pid in enumerate(ids)) + '</w15:commentsEx>'
+        add(case_id, 'paragraphs', 'Root, reply and nested reply whose text must keep the root width (Docxodus #1277)' if threaded else
+            'The same three comment bodies without parent relationships',
+            [body_text], body, sect=section().replace('w:right="1440"', 'w:right="2880"'),
+            styles_xml=comment_styles, comments_xml=comments, comments_extended_xml=topology)
+        cases[-1]['htmlProfile'] = {'review': 'final', 'comments': 'margin'}
+        cases[-1]['htmlAssertions'] = [{'type': 'marker-block-width', 'version': 1, 'marker': f'CedarWidth{i}',
+                                       'reference': 'CedarWidth0', 'tolerancePx': 0.5} for i in (1, 2)]
     # Header containment is isolated from nesting: one long author and a short-author control.
     for case_id, author in [('comments-long-author-header', 'CedarArchivistwithalongunbrokentoken'),
                             ('comments-short-author-header-control', 'Cy')]:
@@ -1454,7 +1474,7 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v49', 'version': 49, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v50', 'version': 50, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

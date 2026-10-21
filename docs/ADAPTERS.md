@@ -78,6 +78,13 @@ A missing observation is unmeasured; an observed size mismatch or clipped marker
 failure. This does not claim to inspect every character's font across the whole document or to measure
 paint occlusion. The source-bound observer, browser policy and artifact identities are unchanged.
 
+Version 1 `marker-block-width` declares a unique `marker`, a different unique `reference` marker and a
+`tolerancePx` greater than 0 and at most 2. The observer records `blockWidth`, the content-box width
+(border box less padding and borders) of the marker's nearest block, and `reference` with the reference
+marker's match count and block width. Python requires both markers to be unique, the marker to pass
+the readable-geometry policy, and the two widths to differ by no more than the tolerance. Missing or
+inconsistent width facts are unmeasured; a narrower or wider block is a measured failure.
+
 An HTML profile may additionally declare nonempty, well-formed Unicode `additionalCss`.
 The Docxodus adapter forwards it only for the HTML conversion; it never alters the PDF profile.
 The full stylesheet is bound through the declared HTML profile and artifact identity. Export
