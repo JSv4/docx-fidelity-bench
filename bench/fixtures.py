@@ -1175,6 +1175,35 @@ def generate():
             styles_xml=frame_styles, story=('footer', footer),
             assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker,
                          'tolerancePt': 0.5} for marker in ('CedarFrameBody', 'CedarFrame01', 'CedarSheet01')])
+    # #1276: a paragraph style defines a page-anchored footer frame; the paragraph's own framePr
+    # sets only w:wrap. The control restates every style attribute directly, so both resolve alike.
+    style_frame = 'w:w="8640" w:wrap="auto" w:vAnchor="text" w:hAnchor="page" w:x="1008" w:y="40"'
+    stamp_styles = frame_styles.replace('</w:styles>', '<w:style w:type="paragraph" w:customStyle="1" w:styleId="StampFrame">'
+                                        f'<w:name w:val="Stamp Frame"/><w:pPr><w:framePr {style_frame}/></w:pPr></w:style></w:styles>')
+    for case_id, direct in [('footer-style-frame-partial-direct', 'w:wrap="auto"'), ('footer-style-frame-full-direct-control', style_frame)]:
+        body_text, frame_text, centered = 'ElmStampBody Keep the stamp ledger dry.', 'ElmStamp01 Archive stamp.', 'ElmSheet01 Leaf control.'
+        footer = para(frame_text, f'<w:pStyle w:val="StampFrame"/><w:framePr {direct}/>') + para(centered, '<w:jc w:val="center"/>')
+        add(case_id, 'paragraphs', 'Style-defined footer frame under a direct framePr that sets only w:wrap (Docxodus #1276)'
+            if direct != style_frame else 'The same style-defined footer frame with every frame attribute restated directly (control)',
+            [body_text, frame_text, centered], para(body_text), sect=frame_section,
+            styles_xml=stamp_styles, story=('footer', footer),
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker,
+                         'tolerancePt': 0.5} for marker in ('ElmStampBody', 'ElmStamp01', 'ElmSheet01')])
+    # #1276 review: the style centres its frame with w:xAlign; the paragraph's own framePr sets w:x.
+    # The paragraph's offset wins over the style's alignment. The control restates every attribute.
+    align_frame = 'w:w="2880" w:wrap="around" w:vAnchor="text" w:hAnchor="page" w:xAlign="center" w:y="40"'
+    offset_frame = 'w:w="2880" w:wrap="around" w:vAnchor="text" w:hAnchor="page" w:x="2000" w:y="40"'
+    align_styles = frame_styles.replace('</w:styles>', '<w:style w:type="paragraph" w:customStyle="1" w:styleId="CentredFrame">'
+                                        f'<w:name w:val="Centred Frame"/><w:pPr><w:framePr {align_frame}/></w:pPr></w:style></w:styles>')
+    for case_id, direct in [('footer-style-frame-align-direct-offset', 'w:wrap="around" w:x="2000"'), ('footer-style-frame-align-full-direct-control', offset_frame)]:
+        body_text, frame_text, centered = 'LarchAlignBody Keep the tally sheet flat.', 'LarchAlign01 Tally mark.', 'LarchSheet01 Leaf control.'
+        footer = para(frame_text, f'<w:pStyle w:val="CentredFrame"/><w:framePr {direct}/>') + para(centered, '<w:jc w:val="center"/>')
+        add(case_id, 'paragraphs', "Style-centred footer frame under a direct framePr that sets only w:wrap and w:x (Docxodus #1276)"
+            if direct != offset_frame else 'The same style-centred footer frame with every frame attribute restated directly, w:x in place of w:xAlign (control)',
+            [body_text, frame_text, centered], para(body_text), sect=frame_section,
+            styles_xml=align_styles, story=('footer', footer),
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker,
+                         'tolerancePt': 0.5} for marker in ('LarchAlignBody', 'LarchAlign01', 'LarchSheet01')])
     # A margin comment that exceeds its HTML viewport, and the same short-note control.
     # PDFs deliberately hide comments; interactive readability is measured in delivered HTML.
     comment_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:color w:val="000000"/><w:sz w:val="22"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl/><w:spacing w:after="120" w:line="276" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>'
@@ -1454,7 +1483,7 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v49', 'version': 49, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v50', 'version': 50, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

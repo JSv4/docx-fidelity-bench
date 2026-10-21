@@ -2,7 +2,9 @@
 
 An independent MIT benchmark of delivered PDF rendering and of document comparison. The harness and every input document are authored in this repository. It measures layout, visible content, physical pages, fonts, and declared feature assertions. It produces portable HTML evidence and JSON measurements.
 
-The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v49`, with report-only renderer CI. A separate comparison track, `redline-v7`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
+The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v50`, with report-only renderer CI. A separate comparison track, `redline-v7`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
+
+`core-v50` adds an original paragraph-style footer frame whose paragraph restates only `w:wrap` in its own `w:framePr`, and a control that restates every frame attribute directly, for Docxodus #1276. Both should resolve to the style's 432pt page-anchored frame 50.4pt from the page edge; body, frame-text and centered-footer position assertions retain misplacement. A second pair puts a 144pt frame in a style that centres it with `w:xAlign`: the reproducer's own `w:framePr` sets only `w:wrap` and `w:x`, and the control restates every attribute with `w:x` in place of `w:xAlign`. Both should place the frame 100pt from the page edge, not centred. Earlier DOCX bytes are unchanged. The redline suite remains `redline-v7`.
 
 `core-v49` adds an original fitting nested footnote table and a matching ordinary-table control for Docxodus #1217. The nested cell ends with an unformatted structural paragraph; both cases require complete PDF text and keep all three note rows with their citation. Earlier DOCX bytes are unchanged. The redline suite remains `redline-v7`.
 
