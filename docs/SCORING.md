@@ -81,3 +81,8 @@ Version 1 `marker-computed-style` adds exact computed `font-size` checks for uni
 Every visible inline fragment of the marker must have the declared pixel size, and the marker must
 have positive, accessible geometry under the same clipping policy as readability assertions. Mixed
 styles cannot pass by reporting only the first fragment. These checks remain separate from PDF scores.
+
+Version 1 `marker-block-width` compares the content-box width of a unique marker's nearest block with
+that of a unique `reference` marker's block, within a declared `tolerancePx` of at most 2px. The
+marker must have positive, accessible geometry under the same clipping policy. A missing or
+duplicate reference fails; missing width facts are unmeasured. These checks remain separate from PDF scores.
