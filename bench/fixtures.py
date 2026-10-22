@@ -1139,12 +1139,14 @@ def generate():
         add(case_id, 'paragraphs', 'Numbered heading with ' + ('hidden paragraph mark (Docxodus #1223)' if hidden else 'explicitly visible paragraph mark control'),
             ['1.', heading, following], para(heading, props) + para(' ' + following), styles_xml=mark_styles, numbering_xml=mark_numbering,
             assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5} for marker in ('CedarHeading.', 'CedarBody')])
-    # Docxodus #1294: three run-in sections (a heading whose hidden paragraph mark joins it to the
-    # body paragraph that follows). The heading carries keep-with-next and keep-lines; the closing
-    # body paragraph keeps its lines but not its block with the next one. Each section is three lines
-    # (the heading shares the first), and 26 lead lines leave room for exactly two sections: if the
-    # heading's keep-with-next governed the joined block the sections would chain into one group that moves to page 2 together. The control
-    # gives the headings no keep properties, so the same two-and-one split holds either way.
+    # Docxodus #1294: three run-in sections, each a heading whose hidden paragraph mark joins it to
+    # the body paragraph after it. The heading carries keepNext and keepLines; the closing body
+    # paragraph keeps its lines but not its block with the next one. Each section is three lines (the
+    # heading shares the first) and 26 lead lines leave room for exactly two. The layout asserted is
+    # the one Docxodus #1294 specifies: the closing paragraph's properties govern the joined block, so
+    # two sections stay on page 1 and the third starts page 2. LibreOffice 25.8.7.3 applies the
+    # heading's keepNext to the block and chains all three onto page 2; Word adjudication is pending.
+    # The control gives the headings no keep properties, so the same split holds under either reading.
     run_in_lead = [f'AlderLead{i:02d} register retained.' for i in range(1, 27)]
     run_in_names = ['RunInAlder', 'RunInBirch', 'RunInCedar']
     for case_id, trigger in [('paragraph-mark-hidden-run-in-keep', True), ('paragraph-mark-hidden-run-in-keep-control', False)]:
@@ -1158,7 +1160,7 @@ def generate():
             texts += [f'{name}.'] + lines
         body += para('RunInClose', line_properties)
         add(case_id, 'paragraphs',
-            'Run-in sections joined by hidden paragraph marks; ' + ('headings carry keep-with-next and keep-lines (Docxodus #1294)'
+            'Run-in sections joined by hidden paragraph marks; ' + ('headings carry keepNext and keepLines, the closing paragraphs govern the block (behaviour specified by Docxodus #1294)'
                                                                        if trigger else 'headings without keep properties (control)'),
             texts + ['RunInClose'], body,
             assertions=[{'type': 'marker-region', 'version': 2, 'marker': marker, 'occurrence': 1,

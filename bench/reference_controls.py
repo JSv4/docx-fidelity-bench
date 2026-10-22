@@ -42,6 +42,10 @@ RULES = {
         'control': 'tables-vmerge-boundary-merged-kept',
         'rule': 'vertical-merge-keep-with-next-v1',
     },
+    'paragraph-mark-hidden-run-in-keep': {
+        'control': 'paragraph-mark-hidden-run-in-keep-control',
+        'rule': 'run-in-heading-keep-removed-v1',
+    },
 }
 
 
@@ -205,6 +209,28 @@ def merge_kept_with_next(data):
     return root
 
 
+def run_in_heading_keep_removed(data):
+    """Drop keepNext and keepLines from every hidden-mark paragraph, the run-in headings.
+
+    LibreOffice 25.8.7.3 gives a block joined through a hidden paragraph mark the first paragraph's
+    keep properties, so a heading's keepNext chains the joined sections together. Docxodus #1294
+    specifies that the closing paragraph's properties govern instead; with the headings' keep
+    properties absent, the two readings agree and LibreOffice's capture shows the specified layout.
+    """
+    root = ET.fromstring(data)
+    headings = [p for p in root.iter(W + 'p') if p.find(W + 'pPr/' + W + 'rPr/' + W + 'vanish') is not None]
+    if not headings:
+        raise ValueError('Expected hidden-mark run-in headings')
+    for heading in headings:
+        properties = heading.find(W + 'pPr')
+        keeps = [child for child in properties if child.tag in (W + 'keepNext', W + 'keepLines')]
+        if {child.tag for child in keeps} != {W + 'keepNext', W + 'keepLines'} or any(child.attrib for child in keeps):
+            raise ValueError('Run-in heading does not carry plain keepNext and keepLines')
+        for child in keeps:
+            properties.remove(child)
+    return root
+
+
 def source(case, registry, root):
     rule = RULES.get(case['id'])
     if rule is None:
@@ -239,6 +265,9 @@ def source(case, registry, root):
     elif rule['rule'] == 'vertical-merge-keep-with-next-v1':
         changed_part, normalize = 'word/document.xml', merge_kept_with_next
         changed_error = 'Equivalent control changes the ledger beyond keeping its merged rows together'
+    elif rule['rule'] == 'run-in-heading-keep-removed-v1':
+        changed_part, normalize = 'word/document.xml', run_in_heading_keep_removed
+        changed_error = 'Equivalent control changes the run-in sections beyond the headings\' keep properties'
     else:
         raise ValueError('Unknown equivalent-control rule')
     with ZipFile(paths[0]) as original, ZipFile(paths[1]) as comparison:

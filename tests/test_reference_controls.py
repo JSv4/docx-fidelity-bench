@@ -14,6 +14,8 @@ LEGACY = 'paragraphs-page-number-ordinary-legacy'
 FIELD = 'paragraphs-page-number-ordinary-field'
 MERGED = 'tables-vmerge-boundary-merged'
 KEPT = 'tables-vmerge-boundary-merged-kept'
+RUN_IN = 'paragraph-mark-hidden-run-in-keep'
+RUN_IN_CONTROL = RUN_IN + '-control'
 
 
 class EquivalentControlContract(unittest.TestCase):
@@ -47,7 +49,7 @@ class EquivalentControlContract(unittest.TestCase):
         root.mkdir()
         cases = {}
         missing = {LEGACY, 'paragraphs-page-number-restarted-legacy', 'tables-row-height-exact-pt',
-                   'tables-vmerge-boundary-merged'}
+                   'tables-vmerge-boundary-merged', RUN_IN}
         for case in self.registry['cases']:
             path = root / case['id'] / 'reference.pdf'
             path.parent.mkdir()
@@ -158,6 +160,25 @@ class EquivalentControlContract(unittest.TestCase):
         self.assertFalse(direct['cases'][MERGED]['eligible'])
         self.assertTrue(bundle['cases'][MERGED]['eligible'])
         self.assertEqual(bundle['cases'][MERGED]['pdfSha256'], direct['cases'][KEPT]['pdfSha256'])
+        runner.validate_bundle(bundle, root, self.registry, self.env)
+
+    def test_run_in_pair_differs_only_in_the_headings_keep_properties(self):
+        source = reference_controls.source(self.records[RUN_IN], self.registry, common.ROOT)
+        self.assertEqual((source['caseId'], source['rule']), (RUN_IN_CONTROL, 'run-in-heading-keep-removed-v1'))
+
+    def test_run_in_control_changing_anything_else_is_rejected(self):
+        for change in (lambda data: data.replace(b'RunInCedar.', b'RunInCedar!', 1),
+                       lambda data: data.replace(b'<w:keepLines/>', b'', 1)):
+            registry, case = self.changed_pair(RUN_IN_CONTROL, 'word/document.xml', change, pair=(RUN_IN, RUN_IN_CONTROL))
+            with self.assertRaisesRegex(ValueError, "headings' keep properties"):
+                reference_controls.source(case, registry, self.root)
+
+    def test_run_in_capture_uses_the_control_and_preserves_raw(self):
+        root, bundle = self.derived_bundle()
+        direct = common.read_json(root / 'direct/bundle.json')
+        self.assertFalse(direct['cases'][RUN_IN]['eligible'])
+        self.assertTrue(bundle['cases'][RUN_IN]['eligible'])
+        self.assertEqual(bundle['cases'][RUN_IN]['pdfSha256'], direct['cases'][RUN_IN_CONTROL]['pdfSha256'])
         runner.validate_bundle(bundle, root, self.registry, self.env)
 
     def test_unit_minimum_heights_prove_whole_twip_controls(self):

@@ -64,6 +64,12 @@ Every other package part, the tokens, the assertions, the fonts, the profile and
 
 How Word itself paginates this merge is not yet adjudicated. When a Word capture is registered, it is judged against the same original assertion.
 
+## Run-in sections joined by hidden marks (Docxodus #1294)
+
+`paragraph-mark-hidden-run-in-keep` declares that two of three run-in sections stay on page 1 and the third starts page 2. The layout is the behaviour Docxodus #1294 specifies (the closing paragraph of a joined block governs its keep properties); it is not a measured Word fact. LibreOffice 25.8.7.3 applies the heading's keepNext to the joined block and chains all three sections onto page 2, so its direct capture fails the declared region assertions and is ineligible.
+
+`paragraph-mark-hidden-run-in-keep-control` is the authored control: the same document with no keepNext or keepLines on the headings, where both readings agree. The **`run-in-heading-keep-removed-v1`** proof requires every hidden-mark paragraph in the original to carry plain keepNext and keepLines, and the control to differ only by their removal. Every other package part, the tokens, the assertions, the fonts and the profile must match. The reference therefore rests on the specified behaviour. Word adjudication is pending.
+
 ## Register the paired captures
 
 First capture every original input with the existing command. Then derive a separately named reference track from that immutable bundle:
