@@ -1139,6 +1139,33 @@ def generate():
         add(case_id, 'paragraphs', 'Numbered heading with ' + ('hidden paragraph mark (Docxodus #1223)' if hidden else 'explicitly visible paragraph mark control'),
             ['1.', heading, following], para(heading, props) + para(' ' + following), styles_xml=mark_styles, numbering_xml=mark_numbering,
             assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5} for marker in ('CedarHeading.', 'CedarBody')])
+    # Docxodus #1294: three run-in sections, each a heading whose hidden paragraph mark joins it to
+    # the body paragraph after it. The heading carries keepNext and keepLines; the closing body
+    # paragraph keeps its lines but not its block with the next one. Each section is three lines (the
+    # heading shares the first) and 26 lead lines leave room for exactly two. The layout asserted is
+    # the one Docxodus #1294 specifies: the closing paragraph's properties govern the joined block, so
+    # two sections stay on page 1 and the third starts page 2. LibreOffice 25.8.7.3 applies the
+    # heading's keepNext to the block and chains all three onto page 2; Word adjudication is pending.
+    # The control gives the headings no keep properties, so the same split holds under either reading.
+    run_in_lead = [f'AlderLead{i:02d} register retained.' for i in range(1, 27)]
+    run_in_names = ['RunInAlder', 'RunInBirch', 'RunInCedar']
+    for case_id, trigger in [('paragraph-mark-hidden-run-in-keep', True), ('paragraph-mark-hidden-run-in-keep-control', False)]:
+        heading_keep = '<w:keepNext/><w:keepLines/>' if trigger else ''
+        body = para(props=line_properties, runs='<w:r><w:br/></w:r>'.join(run(t) for t in run_in_lead))
+        texts = list(run_in_lead)
+        for name in run_in_names:
+            lines = [f' {name}Body{i} clause text retained.' for i in range(1, 4)]
+            body += para(f'{name}.', heading_keep + line_properties + '<w:rPr><w:b/><w:vanish/></w:rPr>')
+            body += para(props='<w:keepLines/>' + line_properties, runs='<w:r><w:br/></w:r>'.join(run(t) for t in lines))
+            texts += [f'{name}.'] + lines
+        body += para('RunInClose', line_properties)
+        add(case_id, 'paragraphs',
+            'Run-in sections joined by hidden paragraph marks; ' + ('headings carry keepNext and keepLines, the closing paragraphs govern the block (behaviour specified by Docxodus #1294)'
+                                                                       if trigger else 'headings without keep properties (control)'),
+            texts + ['RunInClose'], body,
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': marker, 'occurrence': 1,
+                         'page': page, 'rect': [72, 60, 540, 720]}
+                        for marker, page in [('RunInAlder.', 1), ('RunInBirchBody3', 1), ('RunInCedar.', 2)]])
     # Original manual labels with a hanging indent and two stops, plus a narrow left-tab control.
     tab_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="24"/></w:rPr></w:rPrDefault></w:docDefaults></w:styles>'
     tab_entries = [('3.2.', 'CedarTitle01 Sample inventory', '7'),
@@ -1454,7 +1481,7 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v49', 'version': 49, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v50', 'version': 50, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
