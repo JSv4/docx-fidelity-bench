@@ -2,7 +2,9 @@
 
 An independent MIT benchmark of delivered PDF rendering and of document comparison. The harness and every input document are authored in this repository. It measures layout, visible content, physical pages, fonts, and declared feature assertions. It produces portable HTML evidence and JSON measurements.
 
-The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v49`, with report-only renderer CI. A separate comparison track, `redline-v7`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
+The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v50`, with report-only renderer CI. A separate comparison track, `redline-v7`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
+
+`core-v50` adds an original run-in pair for Docxodus #1294: three run-in sections whose headings (keep-with-next and keep-lines, hidden paragraph mark) join the paragraph that follows, filling the end of a page, and a control whose headings carry no keep properties. A joined block keeps with the next block as its closing paragraph does, so two sections stay on page 1 and the third starts page 2; a renderer that applies the heading's keep-with-next to the whole block chains all three onto page 2. Earlier DOCX bytes are unchanged. The redline suite remains `redline-v7`.
 
 `core-v49` adds an original fitting nested footnote table and a matching ordinary-table control for Docxodus #1217. The nested cell ends with an unformatted structural paragraph; both cases require complete PDF text and keep all three note rows with their citation. Earlier DOCX bytes are unchanged. The redline suite remains `redline-v7`.
 
