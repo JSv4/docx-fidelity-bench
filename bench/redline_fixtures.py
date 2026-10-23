@@ -17,11 +17,12 @@ from .fixtures import custom_xml_link, comment_view_cases, comment_view_mark, co
 
 ROOT = Path(__file__).resolve().parents[1]
 W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
+W15 = 'http://schemas.microsoft.com/office/word/2012/wordml'
 R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v7', 'version': 7}
+SUITE = {'id': 'redline-v9', 'version': 9}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -114,7 +115,7 @@ def zip_write(path, parts):
             archive.writestr(item, payload.encode() if isinstance(payload, str) else payload)
 
 
-def package(path, body, styles=None, header=None, comments=None, footnotes=None, settings_extra=''):
+def package(path, body, styles=None, header=None, comments=None, footnotes=None, settings_extra='', comments_extended=None):
     """One minimal, valid WordprocessingML package. Optional story parts take literal XML."""
     relations = [('rStyles', 'styles', 'styles.xml'), ('rSettings', 'settings', 'settings.xml')]
     overrides = [('/word/document.xml', 'document.main'), ('/word/styles.xml', 'styles'), ('/word/settings.xml', 'settings')]
@@ -129,6 +130,10 @@ def package(path, body, styles=None, header=None, comments=None, footnotes=None,
         parts['word/comments.xml'] = f'<w:comments {NAMESPACES}>{comments}</w:comments>'
         relations.append(('rComments', 'comments', 'comments.xml'))
         overrides.append(('/word/comments.xml', 'comments'))
+    if comments_extended is not None:
+        parts['word/commentsExtended.xml'] = f'<w15:commentsEx xmlns:w15="{W15}">{comments_extended}</w15:commentsEx>'
+        relations.append(('rCommentsEx', 'http://schemas.microsoft.com/office/2011/relationships/commentsExtended', 'commentsExtended.xml'))
+        overrides.append(('/word/commentsExtended.xml', 'commentsExtended'))
     if footnotes is not None:
         separators = ('<w:footnote w:type="separator" w:id="-1"><w:p><w:r><w:separator/></w:r></w:p></w:footnote>'
                       '<w:footnote w:type="continuationSeparator" w:id="0"><w:p><w:r><w:continuationSeparator/></w:r></w:p></w:footnote>')
@@ -140,7 +145,7 @@ def package(path, body, styles=None, header=None, comments=None, footnotes=None,
     parts['word/settings.xml'] = (f'<w:settings xmlns:w="{W}">{settings_extra}<w:compat><w:compatSetting w:name="compatibilityMode" '
                                   'w:uri="http://schemas.microsoft.com/office/word" w:val="15"/></w:compat></w:settings>')
     parts['word/_rels/document.xml.rels'] = ('<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
-                                             + ''.join(f'<Relationship Id="{i}" Type="{R}/{k}" Target="{target}"/>' for i, k, target in relations)
+                                             + ''.join(f'<Relationship Id="{i}" Type="{k if "://" in k else R + "/" + k}" Target="{target}"/>' for i, k, target in relations)
                                              + '</Relationships>')
     parts['_rels/.rels'] = ('<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
                             f'<Relationship Id="rDocument" Type="{R}/officeDocument" Target="word/document.xml"/></Relationships>')
@@ -165,6 +170,9 @@ LIBREOFFICE_INELIGIBLE = {
         'LibreOffice retains the removed comment after accepting its deletion markers'),
     'redline-removed-comment-body-unchanged-control': (('accepted', 'rejected'),
         'LibreOffice exposes zero revisions for comment-marker changes without a text edit'),
+    **{'redline-comment-reply-' + kind: (('accepted', 'rejected'),
+       'LibreOffice exposes zero revisions for an added reply whose markers are the only change, and keeps the reply on reject')
+       for kind in ('id-less-root', 'renumbered-root', 'root-para-id-control')},
     **{'redline-comment-identity-' + kind:
        (('accepted', 'rejected') if kind == 'replaced-id' else ('rejected',),
         'LibreOffice retains comment definitions after their insertion/deletion markers are resolved; independent markup and schema checks remain required')
@@ -253,6 +261,7 @@ def generate():
     inserted_notes(corpus)
     reviewer_bookmarks(corpus)
     bookmark_conflicts(corpus)
+    reply_parents(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -922,3 +931,36 @@ def bookmark_conflicts(corpus):
 
 if __name__ == '__main__':
     print(f'Authored {len(generate()["cases"])} deterministic redline cases')
+
+
+# ---------------------------------------------------------------------------------------------
+# Docxodus #1312: a reply the revision adds to a comment the original numbers differently or not at all
+# ---------------------------------------------------------------------------------------------
+
+def reply_parents(corpus):
+    root_text, reply_text = 'Check the delivery date.', 'Friday is confirmed.'
+    def thread_entry(para_id, parent=None):
+        return f'<w15:commentEx w15:paraId="{para_id}"' + (f' w15:paraIdParent="{parent}"' if parent else '') + ' w15:done="0"/>'
+    def body(replied, rev=None):
+        mark = rev.ins if rev else (lambda content: content)
+        start = comment_marks('rangeStart', 1) + (mark(comment_marks('rangeStart', 2)) if replied else '')
+        end = (comment_marks('rangeEnd', 1) + comment_marks('reference', 1)
+               + (mark(comment_marks('rangeEnd', 2)) + mark(comment_marks('reference', 2)) if replied else ''))
+        return p(t('Register opening paragraph.')) + p(start + t('The seller delivers the goods.') + end) + p(t(CLOSING))
+    def document(root_id, reply_id=None, rev=None):
+        notes = comment(1, root_text, para_id=root_id) + (comment(2, reply_text, para_id=reply_id) if reply_id else '')
+        threads = None if root_id is None else thread_entry(root_id) + (thread_entry(reply_id, root_id) if reply_id else '')
+        return {'body': body(reply_id is not None, rev), 'comments': notes, 'comments_extended': threads}
+    for name, kind, original_id, revised_ids, redline_ids, description in [
+            ('redline-comment-reply-id-less-root', 'reproducer', None, ('00000001', '00000002'), ('00000001', '00000002'),
+             'the original root comment has no paragraph id and no commentsExtended part'),
+            ('redline-comment-reply-renumbered-root', 'reproducer', '0000000A', ('0000000B', '0000000C'), ('0000000A', '0000000C'),
+             'the revision numbers the root comment\'s paragraph id differently from the original'),
+            ('redline-comment-reply-root-para-id-control', 'control', '00000001', ('00000001', '00000002'), ('00000001', '00000002'),
+             'both documents give the root comment the same paragraph id')]:
+        corpus.compare(name, 'comments', kind, 'JSv4/Docxodus#1312',
+                       'The revision adds a threaded reply to an unchanged comment; ' + description,
+                       document(original_id), document(*revised_ids), document(*redline_ids, rev=Revisions()),
+                       [untracked('Register opening paragraph.', 'The seller delivers the goods.', CLOSING),
+                        {'type': 'comment-threads', 'version': 1, 'scope': 'redline', 'threads': [[reply_text, root_text]]},
+                        {'type': 'para-ids-valid', 'version': 1, 'scope': 'redline'}])
