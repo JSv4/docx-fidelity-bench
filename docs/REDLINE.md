@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v10`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v11`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -134,3 +134,31 @@ contain the same original Marsh station agreement in different OOXML conformance
 Their expected documents and authored redlines are Transitional. The Strict reproducer fails
 on Docxodus main before #1355; the control passes. See the labelled screenshots and capture
 record under `docs/results/strict-semantic-limits/`.
+
+## Session column widths
+
+The `table-widths` operation opens one original package through the public `DocxSession` API,
+changes its first table's column widths, records `ListRevisions().Count` and saves the result.
+The versioned `tableWidths` declaration supplies the positive twip widths and tracking mode;
+`revisionRegistry` requires one entry for tracked edits and zero for untracked controls. Missing,
+wrongly typed or incorrect counts fail the case. Authored calibration uses its declared count,
+not a claim to have executed the candidate API. Metric contract version 3 records this requirement.
+
+The `table-widths` assertion v1 checks exact grid, cell and table widths in the accepted and
+rejected views, including `dxa` types. The general text view intentionally ignores these
+formatting properties, so it cannot replace these assertions. A width-only mutant still passes
+the text view and fails the new assertions. Independent property resolution and schema checks
+remain mandatory.
+
+The four `redline-table-column-widths-*` cases start with two rows and columns of 2400/3200
+twips. The full edit changes both columns to 2600/3000; the partial edit keeps 2400 and changes
+only the second column to 3000. Each has an untracked control. Tracked reject restores the
+original widths; either resolution of the revision-free control keeps the new widths.
+
+LibreOffice 25.8.7.3 exposes zero revisions for both schema-valid authored property-only
+redlines, for accept and reject alike. Those four text comparisons are explicitly ineligible;
+the four control comparisons remain eligible. The harness recalibrates and fails as unmeasured
+if the observed eligibility ever differs. This follows the existing policy used for other
+revision kinds LibreOffice cannot expose. The exact width, registry and schema checks remain
+mandatory. Labelled page rasters and diagnostic source-bound results are under
+`docs/results/column-width-revisions/`; these are focused runs, not a full-suite score.

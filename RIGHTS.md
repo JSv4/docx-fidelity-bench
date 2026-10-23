@@ -61,3 +61,9 @@ The Strict semantic-limit pair for Docxodus #1352 is original literal-text OOXML
 redlines are authored here; no renderer fixtures or third-party content are imported. The
 labelled screenshot sheets under `docs/results/strict-semantic-limits/` show LibreOffice 25.8.7.3
 page rasters of these original inputs and Docxodus comparison outputs, with recorded API outcomes.
+
+The column-width revision quartet for Docxodus #1322 is original literal-text OOXML authored by
+`bench/redline_fixtures.py`. Gauge labels, grids, width properties and expected native revisions
+are generated here. No renderer fixtures or third-party content are imported. The labelled
+screenshot sheets under `docs/results/column-width-revisions/` are LibreOffice 25.8.7.3 page
+rasters of Docxodus outputs from these original inputs, with recorded schema and registry outcomes.

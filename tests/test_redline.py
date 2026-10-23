@@ -46,10 +46,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v10')
-        self.assertEqual(len(registry['cases']), 85)
+        self.assertEqual(registry['suite']['id'], 'redline-v11')
+        self.assertEqual(len(registry['cases']), 89)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1352)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1322, 1352)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -134,6 +134,9 @@ class AuthoredCalibration(unittest.TestCase):
         for record in cases():
             package = load(record['authored'])
             resolved = {'redline': None, 'output': None}
+            if record['operation'] != 'reject':
+                resolved.update(accepted=revisions.resolve(package.story_parts(), 'accept'),
+                                rejected=revisions.resolve(package.story_parts(), 'reject'))
             for assertion in record['assertions']:
                 self.assertTrue(redline._assertion(assertion, package, resolved)['passed'], record['id'] + ' ' + assertion['type'])
 
@@ -145,6 +148,18 @@ class AuthoredCalibration(unittest.TestCase):
 
 
 class GamingIsRejected(unittest.TestCase):
+    def test_table_width_changes_cannot_hide_behind_unchanged_text(self):
+        record = case('redline-table-column-widths-full')
+        declaration = next(a for a in record['assertions'] if a['type'] == 'table-widths' and a['scope'] == 'accepted')
+        package = load(record['authored'])
+        for target in ('tblGrid/gridCol', 'tr/tc/tcPr/tcW', 'tblPr/tblW'):
+            parts = revisions.resolve(package.story_parts(), 'accept')
+            table = next(parts[package.main].iter(revisions.w('tbl')))
+            path = '/'.join(revisions.w(name) for name in target.split('/'))
+            table.find(path).set(revisions.w('w'), '9999')
+            self.assertEqual(revisions.view(package, parts), revisions.view(load(record['expected']['accepted'])))
+            self.assertFalse(redline._assertion(declaration, package, {'accepted': parts})['passed'], target)
+
     def test_moving_a_table_boundary_bookmark_changes_the_semantic_view(self):
         for level in ('tbl', 'tr'):
             with self.subTest(level=level):
@@ -424,6 +439,22 @@ class EngineSemantics(unittest.TestCase):
 
 
 class ScoringContract(unittest.TestCase):
+    def test_public_registry_count_is_mandatory_and_typed_for_width_operations(self):
+        import shutil
+        record = case('redline-table-column-widths-full')
+        def candidate(_adapter, _build, _case, output, _candidate):
+            shutil.copyfile(common.ROOT / record['authored']['path'], output)
+            return dict(response, status='ok')
+        for count, expected_score in [(None, 0), (True, 0), (3, 0), (1, 100)]:
+            response = {} if count is None else {'revisionRegistryCount': count}
+            with self.subTest(count=count), tempfile.TemporaryDirectory() as temp, \
+                    patch.object(redline, 'run_candidate', side_effect=candidate), \
+                    patch.object(redline, '_libreoffice_checks', return_value=[]), \
+                    patch.object(redline, 'validate_packages', side_effect=lambda _v, paths: {str(p): [] for p in paths}):
+                outcome = redline.score_case(record, Path(temp), 'docxodus', 'build', 'commit', {}, 'validator')
+                self.assertEqual(outcome['status'], 'measured')
+                self.assertEqual(outcome['score'], expected_score)
+
     def test_missing_or_wrong_semantic_measurements_cannot_pass_an_identity_case(self):
         import shutil
         record = case('redline-semantic-raw-limits-transitional-control')

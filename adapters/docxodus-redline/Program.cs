@@ -72,6 +72,24 @@ internal static class Program
             var diff = new DocxDiffSettings { AuthorForRevisions = author, DateTimeForRevisions = date };
             switch (operation)
             {
+                case "table-widths" when documents.Count == 1:
+                {
+                    var spec = settings["tableWidths"] as JsonObject ?? throw new InvalidDataException("Missing table widths");
+                    if ((int?)spec["version"] != 1) throw new InvalidDataException("Unknown table width version");
+                    var widths = (spec["widths"] as JsonArray ?? throw new InvalidDataException("Missing widths"))
+                        .Select(value => (int)value!).ToArray();
+                    using var session = new DocxSession(documents[0].Document.DocumentByteArray, new DocxSessionSettings
+                    {
+                        RevisionAuthor = author,
+                        TrackedChanges = (bool?)spec["tracked"] == true ? TrackedChangeMode.RenderInline : TrackedChangeMode.Accept,
+                    });
+                    var anchor = session.Project().AnchorIndex.Values.First(a => a.Anchor.Scope == "body" && a.Anchor.Kind == "tc").Anchor.Id;
+                    var edit = session.SetColumnWidths(anchor, widths);
+                    if (!edit.Success) throw new InvalidOperationException(edit.Error?.Message ?? "Column width operation failed");
+                    response["revisionRegistryCount"] = session.ListRevisions().Count;
+                    result = new WmlDocument("column-widths.docx", session.Save());
+                    break;
+                }
                 case "build" when documents.Count >= 2:
                     result = DocumentBuilder.BuildDocument(documents.ConvertAll(d => new Source(d.Document, false)));
                     break;
