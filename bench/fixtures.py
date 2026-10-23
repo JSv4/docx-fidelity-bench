@@ -1389,6 +1389,81 @@ def generate():
             assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker,
                          'tolerancePt': 0.5} for marker in markers])
         cases[-1]['pdfTextNormalization'] = 'isolated-dot-leaders-v1'
+    # #1285: four more leader-line shapes, each with an 864-twip right indent as above. Every
+    # reproducer has a control that differs from it only in the trigger, except the wrapped titles,
+    # whose control is tabs-right-stop-in-right-indent (the same entries with titles that fit).
+    def leader_case(case_id, description, entries, stops, number_runs=None, wrap=None, target_pages=False):
+        texts, body, markers = [], '', []
+        for i, (label, title, page, second) in enumerate(entries):
+            props = (f'<w:tabs>{stops(i)}</w:tabs><w:spacing w:after="0" w:line="240" w:lineRule="exact"/>'
+                     '<w:ind w:left="1296" w:right="864" w:hanging="648"/>')
+            content = run(label) + '<w:r><w:tab/></w:r>' + run(title + ' ') + '<w:r><w:tab/></w:r>'
+            content += number_runs(i, page) if number_runs else run(' ' + page)
+            if second: content += '<w:r><w:tab/></w:r>' + run(second)
+            body += para(props=props, runs=wrap(i, content) if wrap else content)
+            texts += [label, title, page] + ([second] if second else [])
+            markers += [title.split()[0], title.split()[-1], page] + ([second] if second else [])
+        for i in range(len(entries) if target_pages else 0):
+            target = f'BirchTarget{i + 1:02d}'
+            body += para(props='<w:pageBreakBefore/>', runs=f'<w:bookmarkStart w:id="{20 + i}" w:name="_Birch{i}"/>' + run(target) + f'<w:bookmarkEnd w:id="{20 + i}"/>')
+            texts.append(target)
+        add(case_id, 'paragraphs', description, texts, body, styles_xml=tab_styles,
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker,
+                         'tolerancePt': 0.5} for marker in dict.fromkeys(markers)])
+        cases[-1]['pdfTextNormalization'] = 'isolated-dot-leaders-v1'
+    leader_stops = lambda i: '<w:tab w:val="left" w:pos="1296"/><w:tab w:val="right" w:leader="dot" w:pos="9360"/>'
+    birch = [('2.1.', 'BirchTitle01 Quarry access roads', '2', None), ('2.2.', 'BirchTitle02 Spillway', '3', None),
+             ('2.3.', 'BirchTitle03 Culvert inspection and annual load ratings', '4', None), ('2.4.', 'BirchTitle04 Riprap', '5', None)]
+    # LibreOffice recomputes the field's result, so the space before it is a run of its own.
+    pageref = lambda i, page: run(' ') + ('<w:r><w:fldChar w:fldCharType="begin"/></w:r>'
+                               f'<w:r><w:instrText xml:space="preserve"> PAGEREF _Birch{i} \\h </w:instrText></w:r>'
+                               '<w:r><w:fldChar w:fldCharType="separate"/></w:r>' + run(page) +
+                               '<w:r><w:fldChar w:fldCharType="end"/></w:r>')
+    leader_case('tabs-right-stop-pageref-field', 'Four leader lines whose page numbers are PAGEREF complex fields to bookmarks on pages 2-5 (Docxodus #1285)',
+                birch, leader_stops, number_runs=pageref, target_pages=True)
+    leader_case('tabs-right-stop-pageref-control', 'The same four leader lines with plain-text page numbers (control)',
+                birch, leader_stops, number_runs=lambda i, page: run(' ') + run(page), target_pages=True)
+    leader_case('tabs-right-stop-wrapped-title', 'Four leader lines whose titles wrap past the right indent, the last to three lines (Docxodus #1285)',
+                [('2.1.', 'CedarTitle01 Culvert inspection, annual load ratings and scour monitoring for the northern spillway approach', '27', None),
+                 ('2.2.', 'CedarTitle02 Quarry access roads, haul route maintenance and dust suppression along the eastern boundary', '31', None),
+                 ('2.3.', 'CedarTitle03 Riprap placement, toe protection and settlement surveys at the downstream face of the main embankment and the auxiliary outlet', '140', None),
+                 ('2.4.', 'CedarTitle04 Spillway gates', '152', None)], leader_stops)
+    # The first right stop (8800) lies inside the right indent; the next is a right stop at the
+    # column edge or a left stop at 8900. The control moves both before the line end (8496).
+    elm = [('2.1.', 'ElmTitle01 Spillway', '12', '34'), ('2.2.', 'ElmTitle02 Riprap', '56', '78'),
+           ('2.3.', 'ElmTitle03 Culverts', '90', 'Ra'), ('2.4.', 'ElmTitle04 Outlets', '91', 'Rb')]
+    def second_stops(first, right_second, left_second):
+        return lambda i: (f'<w:tab w:val="left" w:pos="1296"/><w:tab w:val="right" w:leader="dot" w:pos="{first}"/>' +
+                          (f'<w:tab w:val="right" w:pos="{right_second}"/>' if i < 2 else f'<w:tab w:val="left" w:pos="{left_second}"/>'))
+    leader_case('tabs-right-stop-second-stop-in-indent', 'Four leader lines with a second stop after a right stop inside the right indent (Docxodus #1285)',
+                elm, second_stops(8800, 9360, 8900))
+    leader_case('tabs-right-stop-second-stop-control', 'The same four leader lines with both stops before the line end (control)',
+                elm, second_stops(8000, 8400, 8100))
+    fir = [('2.1.', 'FirTitle01 Quarry access roads', '3', None), ('2.2.', 'FirTitle02 Spillway', '12', None),
+           ('2.3.', 'FirTitle03 Culvert inspection and annual load ratings', '27', None), ('2.4.', 'FirTitle04 Riprap', '140', None)]
+    linked = lambda bookmark: lambda i, content: (
+        f'<w:hyperlink w:anchor="_FirTarget{i}">' +
+        (f'<w:bookmarkStart w:id="{30 + i}" w:name="_FirEntry{i}"/><w:bookmarkEnd w:id="{30 + i}"/>' if bookmark else '') +
+        content + '</w:hyperlink>')
+    leader_case('tabs-right-stop-linked-bookmark', 'Four linked leader lines, each with its bookmark inside the link (Docxodus #1285)',
+                fir, leader_stops, wrap=linked(True))
+    leader_case('tabs-right-stop-linked-control', 'The same four linked leader lines without bookmarks (control)',
+                fir, leader_stops, wrap=linked(False))
+    # Completion review: a short suffix can remain beside the overhanging stop, but a long one
+    # must wrap into the column instead of being forced past the page in one no-wrap box.
+    for long_tail in (False, True):
+        suffix = ' '.join(f'TailWord{i:02}' for i in range(24)) if long_tail else 'Oak'
+        props = ('<w:tabs><w:tab w:val="left" w:pos="1296"/><w:tab w:val="right" w:pos="8800"/>'
+                 '<w:tab w:val="left" w:pos="8900"/></w:tabs><w:spacing w:after="0" w:line="240" w:lineRule="exact"/>'
+                 '<w:ind w:left="1296" w:right="864" w:hanging="648"/>')
+        content = (run('2.1.') + '<w:r><w:tab/></w:r>' + run('Spillway ') + '<w:r><w:tab/></w:r>'
+                   + run(' 12 ') + '<w:r><w:tab/></w:r>' + run(suffix))
+        add('tabs-right-stop-' + ('long-tail' if long_tail else 'short-tail-control'), 'paragraphs',
+            'Long text after an overhanging right stop and a final left tab stays inside the column (Docxodus #1285)' if long_tail else
+            'A short suffix after the same stops stays beside them (control)',
+            ['2.1.', 'Spillway', '12', suffix], para(props=props, runs=content), styles_xml=tab_styles,
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'TailWord23' if long_tail else 'Oak',
+                         'occurrence': 1, 'page': 1, 'rect': [72, 72, 540, 200] if long_tail else [515, 70, 540, 85]}])
     # Original page-anchored footer frame and otherwise identical ordinary-flow control.
     frame_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="24"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="exact"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>'
     frame_section = section().replace('<w:sectPr>', '<w:sectPr><w:footerReference w:type="default" r:id="rStory"/>')
@@ -1681,7 +1756,7 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v57', 'version': 57, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v58', 'version': 58, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
