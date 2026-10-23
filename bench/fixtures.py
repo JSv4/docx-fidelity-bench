@@ -1449,6 +1449,21 @@ def generate():
                 fir, leader_stops, wrap=linked(True))
     leader_case('tabs-right-stop-linked-control', 'The same four linked leader lines without bookmarks (control)',
                 fir, leader_stops, wrap=linked(False))
+    # Completion review: a short suffix can remain beside the overhanging stop, but a long one
+    # must wrap into the column instead of being forced past the page in one no-wrap box.
+    for long_tail in (False, True):
+        suffix = ' '.join(f'TailWord{i:02}' for i in range(24)) if long_tail else 'Oak'
+        props = ('<w:tabs><w:tab w:val="left" w:pos="1296"/><w:tab w:val="right" w:pos="8800"/>'
+                 '<w:tab w:val="left" w:pos="8900"/></w:tabs><w:spacing w:after="0" w:line="240" w:lineRule="exact"/>'
+                 '<w:ind w:left="1296" w:right="864" w:hanging="648"/>')
+        content = (run('2.1.') + '<w:r><w:tab/></w:r>' + run('Spillway ') + '<w:r><w:tab/></w:r>'
+                   + run(' 12 ') + '<w:r><w:tab/></w:r>' + run(suffix))
+        add('tabs-right-stop-' + ('long-tail' if long_tail else 'short-tail-control'), 'paragraphs',
+            'Long text after an overhanging right stop and a final left tab stays inside the column (Docxodus #1285)' if long_tail else
+            'A short suffix after the same stops stays beside them (control)',
+            ['2.1.', 'Spillway', '12', suffix], para(props=props, runs=content), styles_xml=tab_styles,
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'TailWord23' if long_tail else 'Oak',
+                         'occurrence': 1, 'page': 1, 'rect': [72, 72, 540, 200] if long_tail else [515, 70, 540, 85]}])
     # Original page-anchored footer frame and otherwise identical ordinary-flow control.
     frame_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="24"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="exact"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>'
     frame_section = section().replace('<w:sectPr>', '<w:sectPr><w:footerReference w:type="default" r:id="rStory"/>')

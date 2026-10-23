@@ -354,7 +354,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 269)
+        self.assertEqual(len(common.validate_registry()['cases']), 271)
 
     def test_agreement_font_variant_changes_only_the_declared_family(self):
         from zipfile import ZipFile
@@ -792,6 +792,24 @@ class RegistryContract(unittest.TestCase):
                              {'AlderTitle01', 'AlderTitle02', 'AlderTitle03', 'AlderTitle04', '3', '12', '27', '140'})
             self.assertEqual(case['pdfTextNormalization'], 'isolated-dot-leaders-v1')
         self.assertEqual(indent['tokens'], control['tokens'])
+
+    def test_overhanging_tail_pair_changes_only_the_suffix_text(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        ids = ['tabs-right-stop-long-tail', 'tabs-right-stop-short-tail-control']
+        w = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
+        with ZipFile(common.ROOT / records[ids[0]]['input']) as long, ZipFile(common.ROOT / records[ids[1]]['input']) as short:
+            self.assertEqual(long.namelist(), short.namelist())
+            for name in long.namelist():
+                if name != 'word/document.xml':
+                    self.assertEqual(long.read(name), short.read(name))
+            first = ET.fromstring(long.read('word/document.xml'))
+            second = ET.fromstring(short.read('word/document.xml'))
+            tail = list(first.iter(w + 't'))[-1]
+            self.assertEqual(len(tail.text.split()), 24)
+            tail.text = list(second.iter(w + 't'))[-1].text
+            self.assertEqual(ET.tostring(first), ET.tostring(second))
 
     def test_leader_line_gap_reproducers_differ_from_their_controls_only_in_the_trigger(self):
         import xml.etree.ElementTree as ET
