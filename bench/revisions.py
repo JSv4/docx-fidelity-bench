@@ -52,6 +52,20 @@ CELL_REMOVED = {'accept': w('cellDel'), 'reject': w('cellIns')}
 # Story parts whose content the engine resolves, by relationship type from the main document.
 STORY_TYPES = ('header', 'footer', 'footnotes', 'endnotes', 'comments')
 MARK_REMOVED = '{urn:docx-fidelity-bench}markRemoved'
+# ISO/IEC 29500 Strict packages spell the same names under purl.oclc.org URIs. The engine reads them
+# under the Transitional names it matches, so either conformance class is resolved and viewed alike.
+# The extendedProperties type precedes the relationships prefix it starts with: Transitional
+# hyphenates that one name.
+STRICT_URIS = ((b'http://purl.oclc.org/ooxml/officeDocument/relationships/extendedProperties', (REL + 'extended-properties').encode()),
+               (b'http://purl.oclc.org/ooxml/wordprocessingml/main', W.encode()),
+               (b'http://purl.oclc.org/ooxml/officeDocument/relationships', REL.rstrip('/').encode()),
+               (b'http://purl.oclc.org/ooxml/officeDocument/math', M.encode()))
+
+
+def _transitional(data):
+    for strict, transitional in STRICT_URIS:
+        data = data.replace(strict, transitional)
+    return data
 
 
 class Package:
@@ -63,6 +77,8 @@ class Package:
         else:
             with zipfile.ZipFile(source) as archive:
                 self.members = {name: archive.read(name) for name in archive.namelist()}
+        self.members = {name: _transitional(data) if name.endswith(('.xml', '.rels')) else data
+                        for name, data in self.members.items()}
         root_rels = self.relationships('')
         mains = [target for kind, target in root_rels.values() if kind == 'officeDocument']
         if len(mains) != 1 or mains[0] not in self.members:
