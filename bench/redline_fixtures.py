@@ -19,11 +19,16 @@ ROOT = Path(__file__).resolve().parents[1]
 W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
 W15 = 'http://schemas.microsoft.com/office/word/2012/wordml'
 R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
+M = 'http://schemas.openxmlformats.org/officeDocument/2006/math'
+# ISO/IEC 29500 Strict spells the same three namespaces (and every relationship type under R) differently.
+STRICT_URIS = ((W, 'http://purl.oclc.org/ooxml/wordprocessingml/main'),
+               (R, 'http://purl.oclc.org/ooxml/officeDocument/relationships'),
+               (M, 'http://purl.oclc.org/ooxml/officeDocument/math'))
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v9', 'version': 9}
-NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
+SUITE = {'id': 'redline-v10', 'version': 10}
+NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="{M}" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
 SECTION = '<w:sectPr>{refs}<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr>'
@@ -115,8 +120,11 @@ def zip_write(path, parts):
             archive.writestr(item, payload.encode() if isinstance(payload, str) else payload)
 
 
-def package(path, body, styles=None, header=None, comments=None, footnotes=None, settings_extra='', comments_extended=None):
-    """One minimal, valid WordprocessingML package. Optional story parts take literal XML."""
+def package(path, body, styles=None, header=None, comments=None, footnotes=None, settings_extra='', comments_extended=None, strict=False):
+    """One minimal, valid WordprocessingML package. Optional story parts take literal XML.
+
+    `strict` writes the same package in the Strict conformance class: identical markup whose
+    WordprocessingML, relationship and math namespace URIs are the purl.oclc.org spellings."""
     relations = [('rStyles', 'styles', 'styles.xml'), ('rSettings', 'settings', 'settings.xml')]
     overrides = [('/word/document.xml', 'document.main'), ('/word/styles.xml', 'styles'), ('/word/settings.xml', 'settings')]
     refs = ''
@@ -154,6 +162,9 @@ def package(path, body, styles=None, header=None, comments=None, footnotes=None,
                                     '<Default Extension="xml" ContentType="application/xml"/>'
                                     + ''.join(f'<Override PartName="{n}" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.{k}+xml"/>' for n, k in overrides)
                                     + '</Types>')
+    if strict:
+        for transitional, strict_uri in STRICT_URIS:
+            parts = {name: payload.replace(transitional, strict_uri) for name, payload in parts.items()}
     zip_write(path, parts)
 
 
@@ -262,6 +273,7 @@ def generate():
     reviewer_bookmarks(corpus)
     bookmark_conflicts(corpus)
     reply_parents(corpus)
+    strict_rejects(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -964,3 +976,25 @@ def reply_parents(corpus):
                        [untracked('Register opening paragraph.', 'The seller delivers the goods.', CLOSING),
                         {'type': 'comment-threads', 'version': 1, 'scope': 'redline', 'threads': [[reply_text, root_text]]},
                         {'type': 'para-ids-valid', 'version': 1, 'scope': 'redline'}])
+
+
+# ---------------------------------------------------------------------------------------------
+# Docxodus #1268: rejecting revisions in a Strict-conformance package
+# ---------------------------------------------------------------------------------------------
+
+def strict_rejects(corpus):
+    """The same tracked replacement in a Strict package and, as the control, a Transitional one.
+
+    The two inputs differ only in namespace and relationship-type URIs; both expect the Transitional
+    original, and the scorer reads an output of either conformance class."""
+    def body(tracked, rev=None):
+        middle = rev.dele(t('Amber prism')) + rev.ins(t('Indigo prism')) if tracked else t('Amber prism')
+        return p(t('Ledger ') + middle + t(' closes.')) + p(t(CLOSING))
+    for strict in (True, False):
+        name = 'redline-reject-strict' + ('' if strict else '-control')
+        original = corpus.file(name, 'original', body=body(False))
+        tracked = corpus.file(name, 'tracked', body=body(True, Revisions()), strict=strict)
+        corpus.add(name, 'revisions', 'reproducer' if strict else 'control', 'JSv4/Docxodus#1268',
+                   'Rejecting one deletion and one insertion in a ' + ('Strict' if strict else 'Transitional') + '-conformance package',
+                   'reject', [dict(tracked, role='input')], {'output': original}, original,
+                   [{'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0}])
