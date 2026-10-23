@@ -1,6 +1,6 @@
 # Table placement against Word
 
-`core-v52` adds thirteen Times New Roman table-placement cases for [Docxodus #1219](https://github.com/JSv4/Docxodus/issues/1219) (where a table's first cell text starts across the line) and [Docxodus #1244](https://github.com/JSv4/Docxodus/issues/1244) (the gap between a paragraph and the table after it). Each exact input was captured in Word for the web. All thirteen captures pass their own mandatory checks and register as eligible Word references. Times New Roman keeps the declared family: Word for the web substitutes it for Liberation Serif, which would make a Liberation Serif capture ineligible.
+`core-v52` adds nineteen Times New Roman table-placement cases for [Docxodus #1219](https://github.com/JSv4/Docxodus/issues/1219) (where a table's first cell text starts across the line) and [Docxodus #1244](https://github.com/JSv4/Docxodus/issues/1244) (the gap between a paragraph and the table after it). Thirteen of them were captured in Word for the web from their exact inputs; all thirteen captures pass their own mandatory checks and register as eligible Word references. The other six are described [below](#six-further-legacy-placement-probes-word-references-pending). Times New Roman keeps the declared family: Word for the web substitutes it for Liberation Serif, which would make a Liberation Serif capture ineligible.
 
 ## Capture and eligibility
 
@@ -77,6 +77,39 @@ The two zero-height fixtures show something the suite does not yet encode. Word 
 
 Those cases only assert reference-relative positions, so no assertion changes here. A Word-track reference for them would expect the rows to show.
 
+## Six further legacy-placement probes (Word references pending)
+
+`core-v52` also adds six Times New Roman `tables-legacy-*` cases for Docxodus #1219's review. They cover a centred table, a nested table, a named style that states neither an indent nor cell margins (modes 14 and 15), a first row that starts with `w:gridBefore`, and a 100%-wide table.
+
+Word for the web captured them the same day, but from inputs authored outside `bench/fixtures.py`. The document, styles and settings parts are identical to the registered inputs except for the root element's namespace declarations. The package wrapper differs, so the input digests do not match and the captures cannot be registered. Their references stay pending until the exact inputs are captured.
+
+Measured first-cell text start, in points from each case's own `*Before` paragraph. Each cell gives Word, then LibreOffice:
+
+| Case | Word / LibreOffice |
+| --- | --- |
+| `tables-legacy-centred-default-style` | Alpha +0.0 / +4.9, Bravo (centred) +114.6 / +114.4 |
+| `tables-legacy-nested-default-style` | Alpha +0.0 / +4.9, Bravo (outer) +0.0 / +4.9, Charlie (nested) +6.0 / +10.8 |
+| `tables-legacy-named-style-no-margins-mode-14` | Alpha +0.5 / +4.9 |
+| `tables-legacy-named-style-no-margins-mode-15` | Alpha +1.0 / +5.9 |
+| `tables-legacy-grid-before-default-style` | Alpha +0.0 / +4.9, Bravo (`gridBefore` 1000 twips) +0.0 / +55.4 |
+| `tables-legacy-pct-100-default-style` | Alpha +0.0 / +4.9, Bravo (100%) +0.0 / +4.9 |
+
+What Word does in these cases:
+- It does not pull a centred table or a nested table out by its cell margin. A pulled centred table's text would sit at about +109.
+- It still pulls a table whose first row starts with `w:gridBefore`, and a 100%-wide table.
+- A named style that states neither an indent nor cell margins gives zero margins in both modes. In mode 14 it does not pull the table.
+
+LibreOffice disagrees with Word on all six.
+
+| Case | Captured input SHA-256 (not registered) | Word PDF SHA-256 | Registered input SHA-256 |
+| --- | --- | --- | --- |
+| `tables-legacy-centred-default-style` | `c7a77ecce1cf0a55f4fdcfa488c42c6de2c48ff38bb15a1a4be62a9d85ea09fa` | `a409e2d4ba3a539b2aa6e071d1b3a3d407a619e3afbc754cb65ba43c23a235f5` | `4d980bdf3d6ac2da0f3ab5447b7c06fcb90c787fd3d6a2c164ce1f60523ccc00` |
+| `tables-legacy-nested-default-style` | `2e5cb40ad052461cf871c9f59233216cec52c8fd0d283717468fb6b938828951` | `2f1b02117435027e8b10c41c696923828e57a21792892b454e6645f211bd6c78` | `18fe06ca08a0e78669966590016130dbbdb6ecff4966e98cda9b1e28a536d216` |
+| `tables-legacy-named-style-no-margins-mode-14` | `dbdc5f6d1ddb5b2a8ea303c795066b4d85834746ac252ee4e973f63c08dd0be6` | `e3bd2b89025de8fb7a03615df9ec3558eddbdb821036dccefa13f465f6e28ea8` | `6afc0121fd3fc652f54d7370ef49c9ef1c0af3b79725df6c307028021e080954` |
+| `tables-legacy-named-style-no-margins-mode-15` | `b0f536151d8e6c3195a251a47d4c8d21c4efc0e5b58365012eeda199224c8a03` | `a93c9586e578d31cf2f72078a2c3414d823603fdd2bfc2555d40f407a9a605a7` | `b981fbb075d0d83d7c6254bbefdac21138167d35423af744149a2eb85c46d230` |
+| `tables-legacy-grid-before-default-style` | `0d20da2c7f933063c58f54e82feebdf1af4d20a474f871c598bc61f60205892c` | `c83ccd911e866c8c8963c2aef772d10dc00c8165051d676ae3f60b5325e904b0` | `b4765609ed60b8c0add96148abaaf419583e33416e7f3acc00b233408326ae48` |
+| `tables-legacy-pct-100-default-style` | `626bc71881f0212954e6124e0de001261a2ca1eecd0c626f46a1cff8041bcb01` | `e31b58195a19f5468338cd0ae3d5458fe7937cb10dd863f953d6dd7ac68c2db1` | `1bee4b16163120eea879853c8b2f8e60634068df1a0b74534daa34ae23db6ef6` |
+
 ## What stays red at the suite's 0.5pt tolerance
 
 The cases assert reference-relative marker positions within 0.5pt. Measured against these Word captures, with both Docxodus fixes applied, some markers still fall outside that:
@@ -89,7 +122,7 @@ Their markers' horizontal positions, and the 7.5pt gap the cases were written to
 
 ## Screenshots
 
-Each sheet stacks the same crop from Word, LibreOffice, Docxodus v14.0.0 and the Docxodus branch that fixes the case, at 144 DPI. The red line marks the body text edge at 72pt.
+Each sheet stacks the same crop from Word, LibreOffice, Docxodus v14.0.0 and the Docxodus branch that fixes the case, at 144 DPI; the six `tables-legacy-*` sheets show Word (from the content-identical input) and LibreOffice. The red line marks the body text edge at 72pt.
 
 ### `tables-boundary-adjacent`
 
@@ -143,3 +176,26 @@ Each sheet stacks the same crop from Word, LibreOffice, Docxodus v14.0.0 and the
 
 ![tables-indent-mode-15-stated](table-placement/tables-indent-mode-15-stated.png)
 
+### `tables-legacy-centred-default-style`
+
+![tables-legacy-centred-default-style](table-placement/tables-legacy-centred-default-style.png)
+
+### `tables-legacy-nested-default-style`
+
+![tables-legacy-nested-default-style](table-placement/tables-legacy-nested-default-style.png)
+
+### `tables-legacy-named-style-no-margins-mode-14`
+
+![tables-legacy-named-style-no-margins-mode-14](table-placement/tables-legacy-named-style-no-margins-mode-14.png)
+
+### `tables-legacy-named-style-no-margins-mode-15`
+
+![tables-legacy-named-style-no-margins-mode-15](table-placement/tables-legacy-named-style-no-margins-mode-15.png)
+
+### `tables-legacy-grid-before-default-style`
+
+![tables-legacy-grid-before-default-style](table-placement/tables-legacy-grid-before-default-style.png)
+
+### `tables-legacy-pct-100-default-style`
+
+![tables-legacy-pct-100-default-style](table-placement/tables-legacy-pct-100-default-style.png)

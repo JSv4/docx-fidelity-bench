@@ -5,6 +5,7 @@ No input documents, templates, images or generation helpers are imported.
 from __future__ import annotations
 
 import hashlib
+import re
 import json
 import struct
 import zlib
@@ -1572,6 +1573,52 @@ def generate():
     placement('tables-boundary-adjacent-times-new-roman', 'Two tables with no paragraph between them',
               before, [(['FirstLeft Ledger cell.', 'FirstRight Entry cell.'], '', False, True),
                        (['SecondLeft Ledger cell.', 'SecondRight Entry cell.'], '', True, True)])
+    # core-v52: six further table-placement probes for Docxodus #1219, captured in Word for the web from
+    # content-identical inputs (same document, styles and settings parts; see the results doc).
+    def probe_para(t):
+        return f'<w:p><w:pPr><w:spacing w:after="0"/></w:pPr><w:r><w:t xml:space="preserve">{t}</w:t></w:r></w:p>'
+    probe_borders = '<w:tblBorders>' + ''.join(f'<w:{side} w:val="single" w:sz="8" w:color="000000"/>' for side in ('top', 'left', 'bottom', 'right', 'insideH', 'insideV')) + '</w:tblBorders>'
+    probe_margins = '<w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="108" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:right w:w="108" w:type="dxa"/></w:tblCellMar>'
+    def probe_table(cells, props='', width='<w:tblW w:w="5000" w:type="dxa"/>', grid=None, before=None):
+        grid = grid or [5000 // len(cells)] * len(cells)
+        gb = f'<w:gridBefore w:val="1"/><w:wBefore w:w="{before}" w:type="dxa"/>' if before else ''
+        cols = ([before] if before else []) + grid
+        tcs = ''.join(f'<w:tc><w:tcPr><w:tcW w:w="{w}" w:type="dxa"/></w:tcPr>{c}</w:tc>' for c, w in zip(cells, grid))
+        head = (props + width) if props.startswith('<w:tblStyle') else (width + props)
+        return (f'<w:tbl><w:tblPr>{head}{probe_borders}<w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>'
+                + ''.join(f'<w:gridCol w:w="{x}"/>' for x in cols) + f'</w:tblGrid><w:tr><w:trPr>{gb}<w:trHeight w:val="360" w:hRule="atLeast"/></w:trPr>{tcs}</w:tr></w:tbl>')
+    def probe_styles(default=True, extra=''):
+        out = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{tnr}" w:hAnsi="{tnr}" w:cs="{tnr}"/><w:sz w:val="22"/></w:rPr></w:rPrDefault>'
+               '<w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/></w:pPr></w:pPrDefault></w:docDefaults>'
+               '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style>')
+        if default:
+            out += f'<w:style w:type="table" w:default="1" w:styleId="TableNormal"><w:name w:val="Normal Table"/><w:tblPr><w:tblInd w:w="0" w:type="dxa"/>{probe_margins}</w:tblPr></w:style>'
+        return out + extra + '</w:styles>'
+    probe_sect = '<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr>'
+    probe_control = lambda label: probe_para(label + 'Before control paragraph.') + probe_table([probe_para(label + 'Cell control table.')])
+    probe_grid = '<w:style w:type="table" w:styleId="Grid"><w:name w:val="Grid"/><w:tblPr>' + probe_borders + '</w:tblPr></w:style>'
+    probes = [
+        ('centred-default-style', 'Mode 14: a centred table beside a left-aligned control, both inheriting the default table style', '14',
+         probe_control('Alpha') + probe_para('BravoBefore centred table.') + probe_table([probe_para('BravoCell centred table.')], props='<w:jc w:val="center"/>'), probe_styles()),
+        ('nested-default-style', 'Mode 14: a table nested in a cell of a table inheriting the default table style', '14',
+         probe_control('Alpha') + probe_para('BravoBefore outer table.') + probe_table([probe_para('BravoCell outer cell.') + probe_table([probe_para('CharlieCell nested table.')], width='<w:tblW w:w="3000" w:type="dxa"/>') + probe_para('')]), probe_styles()),
+        ('named-style-no-margins-mode-14', 'Mode 14: a table naming a style that states neither an indent nor cell margins', '14',
+         probe_para('AlphaBefore named style without cell margins.') + probe_table([probe_para('AlphaCell named style.')], props='<w:tblStyle w:val="Grid"/>'), probe_styles(False, probe_grid)),
+        ('named-style-no-margins-mode-15', 'Mode 15: a table naming a style that states neither an indent nor cell margins', '15',
+         probe_para('AlphaBefore named style without cell margins.') + probe_table([probe_para('AlphaCell named style.')], props='<w:tblStyle w:val="Grid"/>'), probe_styles(False, probe_grid)),
+        ('grid-before-default-style', 'Mode 14: a first row that starts one grid column in (w:gridBefore)', '14',
+         probe_control('Alpha') + probe_para('BravoBefore first row starts one column in.') + probe_table([probe_para('BravoCell after gridBefore.')], grid=[4000], before=1000), probe_styles()),
+        ('pct-100-default-style', 'Mode 14: a table 100% of the text width', '14',
+         probe_control('Alpha') + probe_para('BravoBefore full-width table.') + probe_table([probe_para('BravoCell full width.')], width='<w:tblW w:w="5000" w:type="pct"/>'), probe_styles()),
+    ]
+    for name, description, mode, body, styles_xml in probes:
+        texts = [t for t in re.findall(r'<w:t xml:space="preserve">([^<]*)</w:t>', body + probe_para('ProbeAfter end of document.')) if t]
+        markers = [t.split()[0] for t in texts]
+        settings = f'<w:settings xmlns:w="{W}"><w:compat><w:compatSetting w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="{mode}"/></w:compat></w:settings>'
+        add(f'tables-legacy-{name}-times-new-roman', 'tables', description + ' (Docxodus #1219)', texts,
+            body + probe_para('ProbeAfter end of document.'), sect=probe_sect, styles_xml=styles_xml, font=tnr,
+            extra_parts={'word/settings.xml': settings},
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': m, 'tolerancePt': 0.5} for m in markers])
     registry = {'schema': 1, 'suite': {'id': 'core-v52', 'version': 52, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
