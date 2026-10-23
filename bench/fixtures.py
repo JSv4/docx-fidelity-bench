@@ -506,6 +506,29 @@ def generate():
             texts.append(text)
             body += para(runs=(drawing(wrap) if i == 0 else '') + run(text))
         add('images-' + wrap, 'images', wrap.title() + ' wrapping around an authored diamond', texts, body, image=True)
+    # Docxodus #1314: a one-inch picture anchored 264pt from the page's left edge, square-wrapped on
+    # both sides, in an A4 section whose pending property change (w:sectPrChange) stored earlier
+    # Letter properties. Its centre (300pt) is right of the A4 page centre (297.6pt) but left of the
+    # Letter centre (306pt), so a renderer that lays the last section out on the stored Letter page
+    # moves the picture to the other side of the text. Either way the paragraph's first word must
+    # start at the left margin, beside the picture. The paragraph carries its own properties, which
+    # is what exposed the defect: the converter then saw the stored copy before the paragraph's runs.
+    # Shown in markup, where the change is pending. The control has no pending change.
+    float_text = 'FloatLead Alder survey notes run beside the anchored picture and continue across the column.'
+    float_picture = drawing('square').replace(
+        '<wp:positionH relativeFrom="column"><wp:posOffset>0</wp:posOffset>',
+        '<wp:positionH relativeFrom="page"><wp:posOffset>3352800</wp:posOffset>').replace('1371600', '914400')
+    float_margins = '<w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720"/><w:cols w:num="1" w:space="480"/>'
+    float_letter = ('<w:sectPrChange w:id="42" w:author="Rowan Reviewer" w:date="2026-09-12T10:00:00Z"><w:sectPr>'
+                    '<w:pgSz w:w="12240" w:h="15840"/>' + float_margins + '</w:sectPr></w:sectPrChange>')
+    for case_id, pending in [('images-float-side-section-change', True), ('images-float-side-section-change-control', False)]:
+        float_sect = '<w:sectPr><w:pgSz w:w="11906" w:h="16838"/>' + float_margins + (float_letter if pending else '') + '</w:sectPr>'
+        add(case_id, 'images',
+            'Page-anchored picture in an A4 section ' + ('whose pending property change stored earlier Letter properties, shown in markup (Docxodus #1314)'
+                                                         if pending else 'with no pending property change, shown in markup (control)'),
+            [float_text], para(props='<w:jc w:val="left"/>', runs=float_picture + run(float_text)), float_sect, image=True,
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'FloatLead', 'occurrence': 1, 'page': 1, 'rect': [66, 60, 150, 200]}])
+        cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
     # Independent textbox pair for Docxodus #1076. No renderer fixture/helper is imported.
     # The body and following line remain away from the page-positioned textbox.
     texts = ['Drawing register begins.', 'TextboxLabel Cedar sample tray.',

@@ -354,7 +354,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 248)
+        self.assertEqual(len(common.validate_registry()['cases']), 250)
 
     def test_agreement_font_variant_changes_only_the_declared_family(self):
         from zipfile import ZipFile
@@ -554,11 +554,13 @@ class RegistryContract(unittest.TestCase):
         self.assertEqual(pair[0]['tokens']['1.'], 1)
         self.assertEqual({a['marker'] for a in pair[0]['assertions']}, {'CedarHeading.', 'CedarBody'})
 
-    def test_endnote_section_change_pair_changes_only_the_pending_change(self):
+    def _section_change_pair(self, reproducer, control):
+        """The pair's inputs differ only by the w:sectPrChange on the final section; returns that
+        change (removed from the reproducer's tree) and the reproducer's package."""
         import xml.etree.ElementTree as ET
         from zipfile import ZipFile
         records = {c['id']: c for c in common.validate_registry()['cases']}
-        pair = [records[c] for c in ('notes-endnote-format-section-change', 'notes-endnote-format-section-change-control')]
+        pair = [records[reproducer], records[control]]
         w = '{' + fixtures.W + '}'
         with ZipFile(common.ROOT / pair[0]['input']) as pending, ZipFile(common.ROOT / pair[1]['input']) as plain:
             self.assertEqual(pending.namelist(), plain.namelist())
@@ -569,18 +571,33 @@ class RegistryContract(unittest.TestCase):
             final = first.find(w + 'body/' + w + 'sectPr')
             change = final[-1]
             self.assertEqual(change.tag, w + 'sectPrChange')
-            self.assertIsNone(final.find(w + 'endnotePr'))
-            self.assertEqual(change.find(w + 'sectPr/' + w + 'endnotePr/' + w + 'numFmt').get(w + 'val'), 'decimal')
             final.remove(change)
             self.assertEqual(ET.tostring(first), ET.tostring(second))
             settings = ET.fromstring(pending.read('word/settings.xml'))
-            self.assertEqual(settings.find(w + 'endnotePr/' + w + 'numFmt').get(w + 'val'), 'lowerRoman')
         for case in pair:
             self.assertEqual(case['profile'], {'review': 'markup', 'comments': 'hidden'})
-            self.assertEqual(case['tokens']['i'], 2)
-            self.assertNotIn('1', case['tokens'])
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
+        return change, final, settings, pair
+
+    def test_endnote_section_change_pair_changes_only_the_pending_change(self):
+        w = '{' + fixtures.W + '}'
+        change, final, settings, pair = self._section_change_pair(
+            'notes-endnote-format-section-change', 'notes-endnote-format-section-change-control')
+        self.assertIsNone(final.find(w + 'endnotePr'))
+        self.assertEqual(change.find(w + 'sectPr/' + w + 'endnotePr/' + w + 'numFmt').get(w + 'val'), 'decimal')
+        self.assertEqual(settings.find(w + 'endnotePr/' + w + 'numFmt').get(w + 'val'), 'lowerRoman')
+        self.assertEqual(pair[0]['tokens']['i'], 2)
+        self.assertNotIn('1', pair[0]['tokens'])
+
+    def test_float_side_section_change_pair_changes_only_the_pending_change(self):
+        w = '{' + fixtures.W + '}'
+        change, final, _, pair = self._section_change_pair(
+            'images-float-side-section-change', 'images-float-side-section-change-control')
+        size = lambda sect: (sect.find(w + 'pgSz').get(w + 'w'), sect.find(w + 'pgSz').get(w + 'h'))
+        self.assertEqual(size(final), ('11906', '16838'))
+        self.assertEqual(size(change.find(w + 'sectPr')), ('12240', '15840'))
+        self.assertEqual([a['marker'] for a in pair[0]['assertions']], ['FloatLead'])
 
     def test_footer_frame_pair_changes_only_frame_properties(self):
         import xml.etree.ElementTree as ET
