@@ -1198,17 +1198,19 @@ def generate():
     # separate in PDF text extraction when a 12-twip stop leaves almost no gap.
     interval_runs = run('TabLead observatory inventory ') + '<w:r><w:tab/></w:r>' + run('TabNorth ') + '<w:r><w:tab/></w:r>' + run('TabEast ') + '<w:r><w:tab/></w:r>' + run('TabSouth ') + run('Copper lens.')
     interval_texts = ['TabLead observatory inventory', 'TabNorth', 'TabEast', 'TabSouth', 'Copper lens.']
-    # Each word must start past where it would sit if its tab had no width (after the preceding word
-    # and its space). The spec leaves a zero interval undefined and Word was not measured:
-    # LibreOffice falls back to its 1.25cm default, the spec's omitted-element default is 0.5in, and
-    # both grids satisfy the zero case. At 12 twips each word must also end before it would on the
-    # half-inch grid, so a half-inch fallback fails; where on the fine grid it lands depends on the
-    # renderer's text measurement, which the raster score measures. The control follows the reference.
+    # The spec leaves a zero interval undefined and Word was not measured: LibreOffice falls back to
+    # its 1.25cm default, the spec's omitted-element default is 0.5in. The zero case requires each word
+    # to start past where it would sit if its tab had no width, which both grids satisfy. A correct
+    # 12-twip tab advances under 0.6pt, so position cannot tell it from a dropped one; that case
+    # catches a conversion failure and a half-inch fallback: each word must end before it would on the
+    # half-inch grid, and start no more than 3pt left of the reference. Where on the fine grid it
+    # lands depends on the renderer's text measurement, which the raster score measures. The control
+    # follows the reference.
     def interval_assertions(interval):
         if interval == 720:
             return [{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5}
                     for marker in ('TabNorth', 'TabEast', 'TabSouth')]
-        bounds = [('TabNorth', 226, 297), ('TabEast', 276, 362), ('TabSouth', 318, 441)] if interval else \
+        bounds = [('TabNorth', 223, 297), ('TabEast', 273, 362), ('TabSouth', 316, 441)] if interval else \
                  [('TabNorth', 240, 540), ('TabEast', 310, 540), ('TabSouth', 380, 540)]
         return [{'type': 'marker-region', 'version': 2, 'marker': marker, 'occurrence': 1, 'page': 1, 'rect': [left, 60, right, 100]}
                 for marker, left, right in bounds]
