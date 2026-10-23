@@ -1350,6 +1350,45 @@ def generate():
             para(props='<w:spacing w:after="0" w:line="240" w:lineRule="exact"/>', runs=interval_runs), styles_xml=tab_styles,
             extra_parts={'word/settings.xml': f'<w:settings xmlns:w="{W}"><w:defaultTabStop w:val="{interval}"/>{SETTINGS_BODY}</w:settings>'},
             assertions=interval_assertions(interval))
+    # #1275: leader lines whose right stop lies inside the right indent, and leader lines whose
+    # entries carry inert markup (empty bookmark, non-breaking hyphen, underlined or struck tab
+    # runs). Both share one plain control with neither.
+    lead_entries = [('2.1.', 'AlderTitle01 Quarry access roads', '3'),
+                    ('2.2.', 'AlderTitle02 Spillway', '12'),
+                    ('2.3.', 'AlderTitle03 Culvert inspection and annual load ratings', '27'),
+                    ('2.4.', 'AlderTitle04 Riprap', '140')]
+    for case_id, kind in [('tabs-right-stop-in-right-indent', 'indent'),
+                          ('tabs-right-stop-inline-markup', 'markup'),
+                          ('tabs-right-stop-plain-control', 'control')]:
+        texts, body, markers = [], '', []
+        for i, (label, title, page) in enumerate(lead_entries):
+            right = ' w:right="864"' if kind == 'indent' else ''
+            props = ('<w:tabs><w:tab w:val="left" w:pos="1296"/><w:tab w:val="right" w:leader="dot" w:pos="9360"/></w:tabs>'
+                     '<w:spacing w:after="0" w:line="240" w:lineRule="exact"/>'
+                     f'<w:ind w:left="1296"{right} w:hanging="648"/>')
+            tab_props = ''
+            content = run(label)
+            if kind == 'markup':
+                tab_props = {2: '<w:u w:val="single"/>', 3: '<w:strike/>'}.get(i, '')
+                if i == 0:
+                    content = f'<w:bookmarkStart w:id="{i}" w:name="_AlderEntry{i}"/><w:bookmarkEnd w:id="{i}"/>' + content
+            tab = f'<w:r><w:rPr>{tab_props}</w:rPr><w:tab/></w:r>'
+            content += tab + run(title)
+            if kind == 'markup' and i == 1:
+                content += '<w:r><w:noBreakHyphen/></w:r>' + run('West')
+                title += '-West'
+            content += run(' ') + tab + run(' ' + page)
+            body += para(props=props, runs=content)
+            texts += [label, title, page]
+            markers += [title.split()[0], page]
+        add(case_id, 'paragraphs', {
+            'indent': 'Four leader lines whose right page-number stop lies inside an 864-twip right indent (Docxodus #1275)',
+            'markup': 'Four leader lines with an empty bookmark, a non-breaking hyphen, an underlined and a struck tab run (Docxodus #1275)',
+            'control': 'Four plain leader lines with no right indent and no inline markup (control)'}[kind],
+            texts, body, styles_xml=tab_styles,
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker,
+                         'tolerancePt': 0.5} for marker in markers])
+        cases[-1]['pdfTextNormalization'] = 'isolated-dot-leaders-v1'
     # Original page-anchored footer frame and otherwise identical ordinary-flow control.
     frame_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="24"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="exact"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>'
     frame_section = section().replace('<w:sectPr>', '<w:sectPr><w:footerReference w:type="default" r:id="rStory"/>')
@@ -1642,7 +1681,7 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v56', 'version': 56, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v57', 'version': 57, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
