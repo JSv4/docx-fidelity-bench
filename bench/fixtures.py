@@ -889,6 +889,33 @@ def generate():
         story=('header', para(runs=folio_header, props='<w:spacing w:after="0"/>')),
         assertions=[{'type': 'marker-region', 'version': 2, 'marker': str(index + 1), 'occurrence': 1,
                      'page': index + 1, 'rect': [72, 30, 540, 65]} for index in range(2)])
+    # Docxodus #1272: complex PAGE and NUMPAGES fields in a footer line that is wholly a tracked
+    # deletion, so both instructions are w:delInstrText. Markup view still shows the struck line,
+    # "Sheet N of 3", on every page. Both cached results are 1, so the inventory (one 1, one 2,
+    # four 3s) fails a cached PAGE or NUMPAGES. The control is the same footer left undeleted.
+    sheet_texts = [f'Rowan{index:02d} tally ledger audited.' for index in range(1, 4)]
+    sheet_body = ''.join(para(text, '<w:pageBreakBefore/>' if index else '') for index, text in enumerate(sheet_texts))
+    sheet_sect = section().replace('<w:sectPr>', '<w:sectPr><w:footerReference w:type="default" r:id="rStory"/>')
+    for case_id, deleted in [('paragraphs-page-number-deleted-field', True), ('paragraphs-page-number-deleted-field-control', False)]:
+        text_tag, instruction_tag = ('delText', 'delInstrText') if deleted else ('t', 'instrText')
+        sheet_run = '<w:r><w:rPr><w:i/><w:sz w:val="24"/></w:rPr>{}</w:r>'
+        def sheet_text(content, tag=text_tag):
+            return sheet_run.format(f'<w:{tag} xml:space="preserve">{content}</w:{tag}>')
+        def sheet_field(instruction):
+            return (sheet_run.format('<w:fldChar w:fldCharType="begin"/>') + sheet_text(instruction, instruction_tag)
+                    + sheet_run.format('<w:fldChar w:fldCharType="separate"/>') + sheet_text('1')
+                    + sheet_run.format('<w:fldChar w:fldCharType="end"/>'))
+        sheet_footer = sheet_text('Sheet ') + sheet_field(' PAGE ') + sheet_text(' of ') + sheet_field(' NUMPAGES ')
+        if deleted:
+            sheet_footer = '<w:del w:id="31" w:author="Rowan Reviewer" w:date="2026-09-12T10:00:00Z">' + sheet_footer + '</w:del>'
+        add(case_id, 'paragraphs',
+            'Three-page running story whose footer PAGE and NUMPAGES fields ' + ('sit inside a tracked deletion, shown in markup (Docxodus #1272)'
+                                                                                 if deleted else 'are not deleted, shown in markup (control)'),
+            sheet_texts + [f'Sheet {index} of 3' for index in range(1, 4)], sheet_body, sect=sheet_sect, styles_xml=ledger_styles,
+            story=('footer', para(runs=sheet_footer, props='<w:spacing w:after="0"/>')),
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': str(index + 1), 'occurrence': 1,
+                         'page': index + 1, 'rect': [72, 720, 540, 780]} for index in range(2)])
+        cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
     # Regression coverage for Docxodus #1126: horizontal border spacing on indented, hanging and
     # adjacent grouped paragraphs. Text keeps its indentation; borders sit outside it.
     spacing_texts = ['SpacingPlain Juniper card keeps its text at the margin.',
@@ -1559,7 +1586,7 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v52', 'version': 52, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v54', 'version': 54, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
