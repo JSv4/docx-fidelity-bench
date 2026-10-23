@@ -354,7 +354,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 250)
+        self.assertEqual(len(common.validate_registry()['cases']), 252)
 
     def test_agreement_font_variant_changes_only_the_declared_family(self):
         from zipfile import ZipFile
@@ -529,7 +529,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v52')
+        self.assertEqual(registry['suite']['id'], 'core-v54')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
@@ -598,6 +598,34 @@ class RegistryContract(unittest.TestCase):
         self.assertEqual(size(final), ('11906', '16838'))
         self.assertEqual(size(change.find(w + 'sectPr')), ('12240', '15840'))
         self.assertEqual([a['marker'] for a in pair[0]['assertions']], ['FloatLead'])
+
+    def test_deleted_page_field_pair_changes_only_the_deletion(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records[c] for c in ('paragraphs-page-number-deleted-field', 'paragraphs-page-number-deleted-field-control')]
+        w = '{' + fixtures.W + '}'
+        with ZipFile(common.ROOT / pair[0]['input']) as deleted, ZipFile(common.ROOT / pair[1]['input']) as kept:
+            self.assertEqual(deleted.namelist(), kept.namelist())
+            for name in deleted.namelist():
+                if name != 'word/footer1.xml':
+                    self.assertEqual(deleted.read(name), kept.read(name))
+            first, second = [ET.fromstring(z.read('word/footer1.xml')) for z in (deleted, kept)]
+            paragraph = first.find(w + 'p')
+            wrapper = paragraph.find(w + 'del')
+            self.assertEqual([e.text for e in wrapper.iter(w + 'delInstrText')], [' PAGE ', ' NUMPAGES '])
+            index = list(paragraph).index(wrapper)
+            paragraph.remove(wrapper)
+            for offset, child in enumerate(wrapper):
+                paragraph.insert(index + offset, child)
+            for element in first.iter():
+                element.tag = {w + 'delText': w + 't', w + 'delInstrText': w + 'instrText'}.get(element.tag, element.tag)
+            self.assertEqual(ET.tostring(first), ET.tostring(second))
+        for case in pair:
+            self.assertEqual(case['profile'], {'review': 'markup', 'comments': 'hidden'})
+            self.assertEqual({k: case['tokens'][k] for k in '123'}, {'1': 1, '2': 1, '3': 4})
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
 
     def test_footer_frame_pair_changes_only_frame_properties(self):
         import xml.etree.ElementTree as ET
