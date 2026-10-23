@@ -1516,7 +1516,63 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v51', 'version': 51, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # core-v52: table placement measured in Word for the web (Docxodus #1219, #1244). Times New
+    # Roman throughout, so a Word capture keeps the declared family and is eligible as a reference.
+    tnr = 'Times New Roman'
+    tnr_styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{tnr}" w:hAnsi="{tnr}" w:cs="{tnr}"/>'
+                  '<w:sz w:val="22"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/>'
+                  '</w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
+    placement_sect = section().replace('w:footer="720"', 'w:footer="720" w:gutter="0"')
+    def placement_table(texts, props='', borders=True, margins=True):
+        edge = ('<w:tblBorders>' + ''.join(f'<w:{side} w:val="single" w:sz="8" w:color="000000"/>' for side in ('top', 'left', 'bottom', 'right', 'insideV')) + '</w:tblBorders>') if borders else ''
+        mar = '<w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="108" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:right w:w="108" w:type="dxa"/></w:tblCellMar>' if margins else ''
+        cells = ''.join(f'<w:tc><w:tcPr><w:tcW w:w="2500" w:type="dxa"/></w:tcPr>{para(t)}</w:tc>' for t in texts)
+        return (f'<w:tbl><w:tblPr><w:tblW w:w="5000" w:type="dxa"/>{props}{edge}<w:tblLayout w:type="fixed"/>{mar}</w:tblPr>'
+                '<w:tblGrid><w:gridCol w:w="2500"/><w:gridCol w:w="2500"/></w:tblGrid>'
+                f'<w:tr><w:trPr><w:trHeight w:val="360" w:hRule="atLeast"/></w:trPr>{cells}</w:tr></w:tbl>')
+    # Word's own "Normal Table" shape: the document's default table style states a zero indent and
+    # 108-twip side margins, and applies to every table that names no style.
+    tnr_default_table_styles = tnr_styles.replace('</w:styles>',
+        '<w:style w:type="table" w:default="1" w:styleId="TableNormal"><w:name w:val="Normal Table"/><w:uiPriority w:val="99"/>'
+        '<w:semiHidden/><w:unhideWhenUsed/><w:tblPr><w:tblInd w:w="0" w:type="dxa"/><w:tblCellMar><w:top w:w="0" w:type="dxa"/>'
+        '<w:left w:w="108" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:right w:w="108" w:type="dxa"/></w:tblCellMar></w:tblPr></w:style></w:styles>')
+    def placement(case_id, description, before, tables, compat='15', before_props='', styles=None):
+        texts = [before] + [t for row in tables for t in row[0]] + ['PlacementAfter The register continues below.']
+        body = para(before, before_props) + ''.join(placement_table(*row) for row in tables) + para(texts[-1])
+        markers = [t.split()[0] for t in texts]
+        settings = f'<w:settings xmlns:w="{W}">' + SETTINGS_BODY.replace('w:val="15"', f'w:val="{compat}"') + '</w:settings>'
+        add(case_id, 'tables', description + ' (Docxodus #1219, #1244)', texts, body, sect=placement_sect,
+            styles_xml=styles or tnr_styles, font=tnr, extra_parts={'word/settings.xml': settings},
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': m, 'tolerancePt': 0.5} for m in markers])
+    before = 'PlacementBefore The register opens above the table.'
+    # #1219: with no w:tblCellMar and no table style the left cell margin is zero; the control states 108.
+    placement('tables-cell-margin-absent-times-new-roman', 'Bordered table with no cell margins declared anywhere',
+              before, [(['MarginLeft Ledger cell.', 'MarginRight Entry cell.'], '', True, False)])
+    placement('tables-cell-margin-explicit-times-new-roman', 'Control: the same table declaring 108-twip left and right cell margins',
+              before, [(['MarginLeft Ledger cell.', 'MarginRight Entry cell.'], '', True, True)])
+    # #1219: before compatibility mode 15 a stated w:tblInd places the first cell's text at the indent.
+    for mode in ('14', '15'):
+        for indent in ('stated', 'absent'):
+            props = '<w:tblInd w:w="0" w:type="dxa"/>' if indent == 'stated' else ''
+            placement(f'tables-indent-mode-{mode}-{indent}-times-new-roman',
+                      f'Compatibility mode {mode}; table indent {"stated as zero" if indent == "stated" else "absent"}',
+                      before, [(['IndentLeft Ledger cell.', 'IndentRight Entry cell.'], props, True, True)], compat=mode)
+    for mode in ('14', '15'):
+        placement(f'tables-indent-mode-{mode}-default-style-times-new-roman',
+                  f'Compatibility mode {mode}; the table names no style and inherits the default table style',
+                  before, [(['IndentLeft Ledger cell.', 'IndentRight Entry cell.'], '', True, False)], compat=mode,
+                  styles=tnr_default_table_styles)
+    # #1244: Word adds no space between a paragraph and a following table beyond the paragraph's own spacing.
+    for after in ('0', '240'):
+        for borders in (False, True):
+            placement(f'tables-boundary-after-{after}-{"bordered" if borders else "borderless"}-times-new-roman',
+                      f'Paragraph with {after}-twip after-spacing followed by a {"bordered" if borders else "borderless"} table',
+                      before, [(['BoundaryLeft Ledger cell.', 'BoundaryRight Entry cell.'], '', borders, True)],
+                      before_props=f'<w:spacing w:after="{after}"/>')
+    placement('tables-boundary-adjacent-times-new-roman', 'Two tables with no paragraph between them',
+              before, [(['FirstLeft Ledger cell.', 'FirstRight Entry cell.'], '', False, True),
+                       (['SecondLeft Ledger cell.', 'SecondRight Entry cell.'], '', True, True)])
+    registry = {'schema': 1, 'suite': {'id': 'core-v52', 'version': 52, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
