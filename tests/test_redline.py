@@ -46,10 +46,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v7')
-        self.assertEqual(len(registry['cases']), 80)
+        self.assertEqual(registry['suite']['id'], 'redline-v9')
+        self.assertEqual(len(registry['cases']), 83)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -265,6 +265,27 @@ class GamingIsRejected(unittest.TestCase):
         parts['word/document.xml'] = ET.tostring(document)
         problems = sorted(f['problem'] for f in revisions.para_id_findings(revisions.Package(parts)))
         self.assertEqual(problems, ['duplicate of word/comments.xml', 'out of range'])
+
+
+    def test_comment_thread_findings(self):
+        record = case('redline-comment-reply-id-less-root')
+        threads = [['Friday is confirmed.', 'Check the delivery date.']]
+        self.assertEqual(revisions.comment_thread_findings(load(record['authored']), threads), [])
+        # Docxodus #1312 before its fix: the root keeps the original's missing paraId and has no entry.
+        parts = members(record['authored'])
+        comments = ET.fromstring(parts['word/comments.xml'])
+        del comments.find(W + 'comment').find(W + 'p').attrib['{' + revisions.W14 + '}paraId']
+        parts['word/comments.xml'] = ET.tostring(comments)
+        extended = ET.fromstring(parts['word/commentsExtended.xml'])
+        extended.remove(extended[0])
+        parts['word/commentsExtended.xml'] = ET.tostring(extended)
+        problems = [f['problem'] for f in revisions.comment_thread_findings(revisions.Package(parts), threads)]
+        self.assertEqual(problems, ['parent is not a comment with its own entry', 'not threaded under its parent'])
+        # A reply threaded under the wrong comment fails even when every link resolves.
+        self.assertEqual([f['problem'] for f in revisions.comment_thread_findings(load(record['authored']), [threads[0][::-1]])],
+                         ['not threaded under its parent'])
+        self.assertEqual([f['problem'] for f in revisions.comment_thread_findings(load(record['authored']), [['Absent.', 'Check the delivery date.']])],
+                         ['0 comments carry this text'])
 
 
 def fragment(body, extra=''):

@@ -24,7 +24,7 @@ from .common import ROOT, contained, digest, execute, identity, read_json, write
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
 OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}}
+ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity'}
 SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}}
 CONTRACT = {'version': 1, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
@@ -83,7 +83,9 @@ def validate_registry(registry=None):
             valid = {'untracked-text': lambda a: a.get('story') in ('body', 'headers') and a.get('texts') and all(isinstance(x, str) and x for x in a['texts']),
                      'paragraph-count': lambda a: a.get('story') == 'body' and isinstance(a.get('count'), int) and a['count'] >= 0,
                      'revision-count': lambda a: isinstance(a.get('max'), int) and a['max'] >= 0,
-                     'para-ids-valid': lambda a: True, 'style-ids-unique': lambda a: True}[kind]
+                     'para-ids-valid': lambda a: True, 'style-ids-unique': lambda a: True,
+                     'comment-threads': lambda a: a['scope'] == 'redline' and isinstance(a.get('threads'), list) and all(
+                         isinstance(x, list) and len(x) == 2 and all(isinstance(y, str) and y for y in x) for x in a['threads'])}[kind]
             if not valid(assertion):
                 raise ValueError('Invalid assertion declaration: ' + case['id'] + ' ' + kind)
         if operation == 'reject' and {'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0} not in case['assertions']:
@@ -213,6 +215,9 @@ def _assertion(assertion, package, resolved):
         check.update(passed=not findings, findings=findings)
     elif kind == 'style-ids-unique':
         findings = revisions.style_id_findings(package)
+        check.update(passed=not findings, findings=findings)
+    elif kind == 'comment-threads':
+        findings = revisions.comment_thread_findings(package, assertion['threads'])
         check.update(passed=not findings, findings=findings)
     elif kind == 'revision-count':
         count = revisions.revision_count(parts if parts is not None else package.story_parts())
