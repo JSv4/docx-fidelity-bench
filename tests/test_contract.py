@@ -354,7 +354,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 262)
+        self.assertEqual(len(common.validate_registry()['cases']), 269)
 
     def test_agreement_font_variant_changes_only_the_declared_family(self):
         from zipfile import ZipFile
@@ -553,7 +553,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v57')
+        self.assertEqual(registry['suite']['id'], 'core-v58')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
@@ -792,6 +792,46 @@ class RegistryContract(unittest.TestCase):
                              {'AlderTitle01', 'AlderTitle02', 'AlderTitle03', 'AlderTitle04', '3', '12', '27', '140'})
             self.assertEqual(case['pdfTextNormalization'], 'isolated-dot-leaders-v1')
         self.assertEqual(indent['tokens'], control['tokens'])
+
+    def test_leader_line_gap_reproducers_differ_from_their_controls_only_in_the_trigger(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        def document(case_id):
+            with ZipFile(common.ROOT / records[case_id]['input']) as archive:
+                return ET.fromstring(archive.read('word/document.xml'))
+        def without(xml, drop):
+            for parent in list(xml.iter()):
+                for child in list(parent):
+                    if drop(child): parent.remove(child)
+            return ET.tostring(xml)
+        # Field numbers: removing the field's begin, instruction, separator and end runs leaves the control.
+        field_runs = lambda e: e.tag == w + 'r' and (e.find(w + 'fldChar') is not None or e.find(w + 'instrText') is not None)
+        field = document('tabs-right-stop-pageref-field')
+        self.assertEqual([t.text for t in field.iter(w + 'instrText')], [f' PAGEREF _Birch{i} \\h ' for i in range(4)])
+        self.assertEqual(without(field, field_runs), ET.tostring(document('tabs-right-stop-pageref-control')))
+        # A bookmark inside each link is the linked case's only addition.
+        bookmarks = lambda e: e.tag in (w + 'bookmarkStart', w + 'bookmarkEnd')
+        linked = document('tabs-right-stop-linked-bookmark')
+        self.assertEqual(len([h for h in linked.iter(w + 'hyperlink') if h.find(w + 'bookmarkStart') is not None]), 4)
+        self.assertEqual(without(linked, bookmarks), ET.tostring(document('tabs-right-stop-linked-control')))
+        # The second-stop pair differs only in where its two right-hand stops sit.
+        def stops(case_id):
+            xml = document(case_id)
+            positions = [[t.get(w + 'pos') for t in p.iter(w + 'tab') if t.get(w + 'pos')] for p in xml.iter(w + 'p')]
+            for t in xml.iter(w + 'tab'): t.attrib.pop(w + 'pos', None)
+            return positions, ET.tostring(xml)
+        (indent, rest), (control, control_rest) = stops('tabs-right-stop-second-stop-in-indent'), stops('tabs-right-stop-second-stop-control')
+        self.assertEqual(rest, control_rest)
+        self.assertEqual(indent, [['1296', '8800', '9360']] * 2 + [['1296', '8800', '8900']] * 2)
+        self.assertEqual(control, [['1296', '8000', '8400']] * 2 + [['1296', '8000', '8100']] * 2)
+        for case_id in ('tabs-right-stop-pageref-field', 'tabs-right-stop-pageref-control', 'tabs-right-stop-wrapped-title',
+                        'tabs-right-stop-second-stop-in-indent', 'tabs-right-stop-second-stop-control',
+                        'tabs-right-stop-linked-bookmark', 'tabs-right-stop-linked-control'):
+            self.assertEqual({i.get(w + 'right') for i in document(case_id).iter(w + 'ind')}, {'864'})
+            self.assertEqual(records[case_id]['pdfTextNormalization'], 'isolated-dot-leaders-v1')
+        self.assertEqual(records['tabs-right-stop-linked-bookmark']['tokens'], records['tabs-right-stop-linked-control']['tokens'])
 
     def test_legacy_header_pairs_preserve_everything_except_number_representation(self):
         import xml.etree.ElementTree as ET
