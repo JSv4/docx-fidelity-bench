@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "suite": {
-    "id": "core-v51",
-    "version": 51,
+    "id": "core-v52",
+    "version": 52,
     "cases": [
       "columns-continuous",
       "columns-balanced",
@@ -13,10 +13,14 @@
       "paragraph-keep",
       "notes-footnote",
       "notes-endnote",
+      "notes-endnote-format-section-change",
+      "notes-endnote-format-section-change-control",
       "tables-nested",
       "tables-margins",
       "images-square",
       "images-tight",
+      "images-float-side-section-change",
+      "images-float-side-section-change-control",
       "drawings-textbox-absolute",
       "drawings-textbox-empty-host",
       "drawings-textbox-zero-relative",
@@ -330,7 +334,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -432,7 +436,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -526,7 +530,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -609,7 +613,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -692,7 +696,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -766,7 +770,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -868,7 +872,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -946,7 +950,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -1016,7 +1020,139 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
+      }
+    },
+    {
+      "id": "notes-endnote-format-section-change",
+      "version": 1,
+      "category": "notes",
+      "description": "Endnote markers under a section whose pending property change stored an earlier decimal format, shown in markup (Docxodus #1314)",
+      "input": "fixtures/notes-endnote-format-section-change.docx",
+      "sha256": "ca989d2b27e3aac7e99773ecea96b99c40c352a5b8013a1cb82544cd4f5583b2",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "markup",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "ChangeAnchor": 1,
+        "ChangeNote": 1,
+        "Ledger": 1,
+        "The": 4,
+        "and": 1,
+        "at": 2,
+        "before": 1,
+        "check.": 1,
+        "closes": 1,
+        "compares": 1,
+        "crew": 1,
+        "depot.": 1,
+        "each": 1,
+        "eastern": 1,
+        "endnote": 1,
+        "evening": 1,
+        "for": 1,
+        "format": 1,
+        "gate": 1,
+        "gate.": 1,
+        "height": 1,
+        "i": 2,
+        "is": 1,
+        "keeps": 1,
+        "kept": 1,
+        "log": 1,
+        "morning": 1,
+        "next": 1,
+        "notes": 1,
+        "of": 1,
+        "open": 1,
+        "records": 1,
+        "route": 1,
+        "survey": 2,
+        "team": 1,
+        "the": 7,
+        "tower": 1,
+        "visit.": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
+      }
+    },
+    {
+      "id": "notes-endnote-format-section-change-control",
+      "version": 1,
+      "category": "notes",
+      "description": "Endnote markers under a section with no pending property change, shown in markup (control)",
+      "input": "fixtures/notes-endnote-format-section-change-control.docx",
+      "sha256": "484181278c40d3538ddd844bda23ed3e03d2f7bd44b3743c061103af89ab4f56",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "markup",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "ChangeAnchor": 1,
+        "ChangeNote": 1,
+        "Ledger": 1,
+        "The": 4,
+        "and": 1,
+        "at": 2,
+        "before": 1,
+        "check.": 1,
+        "closes": 1,
+        "compares": 1,
+        "crew": 1,
+        "depot.": 1,
+        "each": 1,
+        "eastern": 1,
+        "endnote": 1,
+        "evening": 1,
+        "for": 1,
+        "format": 1,
+        "gate": 1,
+        "gate.": 1,
+        "height": 1,
+        "i": 2,
+        "is": 1,
+        "keeps": 1,
+        "kept": 1,
+        "log": 1,
+        "morning": 1,
+        "next": 1,
+        "notes": 1,
+        "of": 1,
+        "open": 1,
+        "records": 1,
+        "route": 1,
+        "survey": 2,
+        "team": 1,
+        "the": 7,
+        "tower": 1,
+        "visit.": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -1052,7 +1188,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -1088,7 +1224,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -1150,7 +1286,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -1212,7 +1348,119 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
+      }
+    },
+    {
+      "id": "images-float-side-section-change",
+      "version": 2,
+      "category": "images",
+      "description": "Page-anchored picture in an A4 section whose pending property change stored earlier Letter properties, shown in markup (Docxodus #1314)",
+      "input": "fixtures/images-float-side-section-change.docx",
+      "sha256": "60f219bbf7e51bbac6adb7aaabd416330cbaee96cb776d57d68d257e1c80cb86",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "markup",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Alder": 1,
+        "FloatLead": 1,
+        "across": 1,
+        "anchored": 1,
+        "and": 1,
+        "beside": 1,
+        "column.": 1,
+        "continue": 1,
+        "notes": 1,
+        "picture": 1,
+        "run": 1,
+        "survey": 1,
+        "the": 2
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "FloatLead",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            66,
+            60,
+            150,
+            200
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
+      }
+    },
+    {
+      "id": "images-float-side-section-change-control",
+      "version": 2,
+      "category": "images",
+      "description": "Page-anchored picture in an A4 section with no pending property change, shown in markup (control)",
+      "input": "fixtures/images-float-side-section-change-control.docx",
+      "sha256": "eb2f7aa6b9a3a51ed313a4548633e24378926cdbee88189af8d5ff243501772f",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "markup",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "Alder": 1,
+        "FloatLead": 1,
+        "across": 1,
+        "anchored": 1,
+        "and": 1,
+        "beside": 1,
+        "column.": 1,
+        "continue": 1,
+        "notes": 1,
+        "picture": 1,
+        "run": 1,
+        "survey": 1,
+        "the": 2
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "FloatLead",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            66,
+            60,
+            150,
+            200
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -1275,7 +1523,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -1335,7 +1583,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -1398,7 +1646,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -1451,7 +1699,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -1504,7 +1752,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -1548,7 +1796,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -1592,7 +1840,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -1647,7 +1895,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -1733,7 +1981,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -1827,7 +2075,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -1912,7 +2160,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -2006,7 +2254,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -2156,7 +2404,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -2306,7 +2554,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -2456,7 +2704,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -2606,7 +2854,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -2653,7 +2901,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -2700,7 +2948,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -2747,7 +2995,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -2794,7 +3042,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -2874,7 +3122,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -2954,7 +3202,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -3034,7 +3282,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -3114,7 +3362,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -3194,7 +3442,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -3274,7 +3522,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -3443,7 +3691,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -3612,7 +3860,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -3781,7 +4029,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -3950,7 +4198,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -3997,7 +4245,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -4044,7 +4292,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -4091,7 +4339,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -4138,7 +4386,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -4185,7 +4433,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -4232,7 +4480,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -4339,7 +4587,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -4446,7 +4694,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -4553,7 +4801,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -4660,7 +4908,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -4767,7 +5015,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -4874,7 +5122,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -4981,7 +5229,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -5088,7 +5336,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -5195,7 +5443,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -5302,7 +5550,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -5409,7 +5657,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -5545,7 +5793,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -5681,7 +5929,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -5817,7 +6065,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -5953,7 +6201,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -6089,7 +6337,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -6225,7 +6473,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -6361,7 +6609,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -6533,7 +6781,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -6705,7 +6953,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -6747,7 +6995,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -6789,7 +7037,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -6864,7 +7112,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -6939,7 +7187,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -7014,7 +7262,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -7089,7 +7337,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -7164,7 +7412,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -7239,7 +7487,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -7314,7 +7562,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -7389,7 +7637,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -7464,7 +7712,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -7593,7 +7841,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -7722,7 +7970,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -7797,7 +8045,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -7872,7 +8120,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -7928,7 +8176,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -7984,7 +8232,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -8040,7 +8288,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -8096,7 +8344,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -8190,7 +8438,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -8240,7 +8488,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -8308,7 +8556,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -8394,7 +8642,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -8519,7 +8767,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -8590,7 +8838,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -8661,7 +8909,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -8732,7 +8980,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -8803,7 +9051,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -8861,7 +9109,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -8919,7 +9167,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -8978,7 +9226,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -9023,7 +9271,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -9199,7 +9447,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -9375,7 +9623,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -9427,7 +9675,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -9479,7 +9727,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -9587,7 +9835,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -9695,7 +9943,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -9861,7 +10109,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -10037,7 +10285,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -10194,7 +10442,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -10317,7 +10565,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -10517,7 +10765,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -10692,7 +10940,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -10814,7 +11062,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -10939,7 +11187,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -10980,7 +11228,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -11021,7 +11269,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -11062,7 +11310,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -11103,7 +11351,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -11144,7 +11392,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -11185,7 +11433,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -11226,7 +11474,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -11267,7 +11515,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -11303,7 +11551,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -11339,7 +11587,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -11373,7 +11621,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "htmlAssertions": [
         {
@@ -11416,7 +11664,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "htmlAssertions": [
         {
@@ -11475,7 +11723,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -11525,7 +11773,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -11639,7 +11887,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -11753,7 +12001,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -11833,7 +12081,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "pdfTextNormalization": "isolated-dot-leaders-v1"
     },
@@ -11873,7 +12121,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -11952,7 +12200,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -12034,7 +12282,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -12089,7 +12337,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -12148,7 +12396,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -12207,7 +12455,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -12243,7 +12491,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "htmlProfile": {
         "review": "final",
@@ -12532,7 +12780,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "htmlProfile": {
         "review": "final",
@@ -12589,7 +12837,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "htmlProfile": {
         "review": "final",
@@ -12652,7 +12900,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "htmlProfile": {
         "review": "final",
@@ -12714,7 +12962,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "htmlProfile": {
         "review": "final",
@@ -12762,7 +13010,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "htmlProfile": {
         "review": "final",
@@ -12809,7 +13057,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "htmlProfile": {
         "review": "final",
@@ -12856,7 +13104,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "htmlProfile": {
         "review": "final",
@@ -12903,7 +13151,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "htmlProfile": {
         "review": "final",
@@ -12960,7 +13208,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "htmlProfile": {
         "review": "final",
@@ -13016,7 +13264,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "htmlProfile": {
         "review": "final",
@@ -13070,7 +13318,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "htmlProfile": {
         "review": "final",
@@ -13117,7 +13365,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "htmlProfile": {
         "review": "final",
@@ -13165,7 +13413,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "htmlProfile": {
         "review": "final",
@@ -13222,7 +13470,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "build",
@@ -13278,7 +13526,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "build",
@@ -13343,7 +13591,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -13395,7 +13643,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -13447,7 +13695,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -13499,7 +13747,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -13531,7 +13779,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -13576,7 +13824,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -13621,7 +13869,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -13666,7 +13914,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -13715,7 +13963,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -13764,7 +14012,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -13814,7 +14062,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -13867,7 +14115,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -13922,7 +14170,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -13975,7 +14223,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -14027,7 +14275,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -14075,7 +14323,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -14123,7 +14371,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -14171,7 +14419,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -14219,7 +14467,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -14267,7 +14515,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -14313,7 +14561,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -14362,7 +14610,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -14412,7 +14660,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -14461,7 +14709,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -14513,7 +14761,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -14560,7 +14808,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -14608,7 +14856,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -14655,7 +14903,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -14703,7 +14951,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -14750,7 +14998,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -14798,7 +15046,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -14845,7 +15093,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -14891,7 +15139,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -14940,7 +15188,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -14989,7 +15237,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -15038,7 +15286,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -15088,7 +15336,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -15137,7 +15385,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -15187,7 +15435,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -15236,7 +15484,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -15285,7 +15533,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -15329,7 +15577,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -15374,7 +15622,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -15418,7 +15666,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -15463,7 +15711,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -15507,7 +15755,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -15551,7 +15799,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -15598,7 +15846,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -15646,7 +15894,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -15693,7 +15941,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -15741,7 +15989,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -15788,7 +16036,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -15838,7 +16086,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -15884,7 +16132,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -15931,7 +16179,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -15977,7 +16225,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -16023,7 +16271,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -16068,7 +16316,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -16113,7 +16361,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -16158,7 +16406,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "compare",
@@ -16217,7 +16465,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -16274,7 +16522,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -16337,7 +16585,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -16394,7 +16642,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -16443,7 +16691,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -16492,7 +16740,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -16542,7 +16790,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -16591,7 +16839,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -16640,7 +16888,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -16689,7 +16937,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -16739,7 +16987,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -16788,7 +17036,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -16839,7 +17087,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -16890,7 +17138,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -16942,7 +17190,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -16993,7 +17241,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -17043,7 +17291,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -17093,7 +17341,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -17143,7 +17391,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -17193,7 +17441,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -17244,7 +17492,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -17294,7 +17542,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -17345,7 +17593,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -17395,7 +17643,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -17446,7 +17694,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -17496,7 +17744,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -17547,7 +17795,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -17597,7 +17845,7 @@
       "assertions": [],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "preparation": {
         "operation": "consolidate",
@@ -17719,7 +17967,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -17824,7 +18072,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       }
     },
     {
@@ -17865,7 +18113,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "clippedTokens": {
         "HdrBirch": 1,
@@ -17910,7 +18158,7 @@
       ],
       "generator": {
         "path": "bench/fixtures.py",
-        "sha256": "284163f0b5b83ff9841918ae3a3effdeba1735513f66405f525fe0113e3e5083"
+        "sha256": "8247ab222476536b7428c253ff7c7778fedc171e41ac1ee11e106ec5e30c29c4"
       },
       "clippedTokens": {
         "HdrBirch": 1,
