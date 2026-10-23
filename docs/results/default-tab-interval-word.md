@@ -34,3 +34,19 @@ The table gives each word's glyph left edge in points (left margin 72pt). `inven
 `tabs-default-interval-0` declares Word-adjudicated regions. Each of `TabNorth`, `TabEast` and `TabSouth` must start no more than 3pt left of where a zero-width tab puts it (after the preceding word and its space), and at least 4pt before LibreOffice's 1.25cm stop. A half-inch fallback lies further right still. As the [scoring contract](../SCORING.md) describes, these assertions bind candidates and Word references but not LibreOffice captures, so the LibreOffice reference stays eligible. A candidate that follows Word on this case is compared with LibreOffice pages whose words sit on a 1.25cm grid, which caps its raster score there.
 
 `tabs-default-interval-12` is not adjudicated: Word and LibreOffice agree there, and its regions bind every capture. The control, `tabs-default-interval-720-control`, follows the reference.
+
+## Screenshots
+
+Each image shows the paragraph's line from page 1, cropped at 144 DPI with no alignment or resizing. The rows come from three sources:
+- LibreOffice 25.8.7.3 PDF export;
+- Docxodus `@docxodus/export` built from main `49a3ae10`, which fails both reproducers with `NoMatch`, so those rows are placeholders;
+- the #1269 fix `bd024b16`.
+
+The issue-input images add Word for the web as their first row. Word was not run on the bench fixtures.
+
+![tabs-default-interval-12](default-tab-interval/tabs-default-interval-12.png)
+![tabs-default-interval-0](default-tab-interval/tabs-default-interval-0.png)
+![tabs-default-interval-720-control](default-tab-interval/tabs-default-interval-720-control.png)
+![issue tabs-12](default-tab-interval/issue-tabs-12.png)
+![issue tabs-0](default-tab-interval/issue-tabs-0.png)
+![issue tabs-720](default-tab-interval/issue-tabs-720.png)
