@@ -570,6 +570,45 @@ def generate():
                 assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'TextboxLabel', 'occurrence': 1,
                              'page': 1, 'rect': [144, 144, 360, 216]},
                             {'type': 'same-page', 'version': 1, 'markers': ['TextboxLabel', 'FollowingMarker']}])
+    # Original inline-drawing set for Docxodus #1270: a 144 by 72pt teal rectangle that is a plain
+    # DrawingML shape (not a text box), the same rectangle as the only child of a group, each also
+    # inside a tracked deletion viewed in markup, and an inline teal picture of the same extent as
+    # the control. The rectangle is the only ink between two text paragraphs; the following
+    # paragraph's position records the extent it occupies.
+    teal_shape = ('<wps:wsp><wps:cNvSpPr/><wps:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="1828800" cy="914400"/></a:xfrm>'
+                  '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:solidFill><a:srgbClr val="19647E"/></a:solidFill>'
+                  '</wps:spPr><wps:bodyPr/></wps:wsp>')
+    teal_picture = ('<pic:pic><pic:nvPicPr><pic:cNvPr id="1" name="teal.png"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill>'
+                    '<a:blip r:embed="rImage"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm>'
+                    '<a:off x="0" y="0"/><a:ext cx="1828800" cy="914400"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/>'
+                    '</a:prstGeom></pic:spPr></pic:pic>')
+    drawing_uris = {'shape': 'http://schemas.microsoft.com/office/word/2010/wordprocessingShape',
+                    'group': 'http://schemas.microsoft.com/office/word/2010/wordprocessingGroup',
+                    'picture': 'http://schemas.openxmlformats.org/drawingml/2006/picture'}
+    drawing_payloads = {'shape': teal_shape, 'picture': teal_picture,
+                        'group': ('<wpg:wgp><wpg:cNvGrpSpPr/><wpg:grpSpPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="1828800" cy="914400"/>'
+                                  '<a:chOff x="0" y="0"/><a:chExt cx="1828800" cy="914400"/></a:xfrm></wpg:grpSpPr>'
+                                  + teal_shape + '</wpg:wgp>')}
+    for kind, deleted in [('shape', False), ('shape', True), ('group', False), ('group', True), ('picture', False)]:
+        texts = ['PanelBefore Optical panel.', 'PanelAfter End of inspection.']
+        inline = (f'<w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0"><wp:extent cx="1828800" cy="914400"/>'
+                  f'<wp:docPr id="7" name="Teal inspection panel"/><a:graphic><a:graphicData uri="{drawing_uris[kind]}">'
+                  f'{drawing_payloads[kind]}</a:graphicData></a:graphic></wp:inline></w:drawing></w:r>')
+        if deleted:
+            inline = '<w:del w:id="31" w:author="Review Example" w:date="2026-09-12T10:00:00Z">' + inline + '</w:del>'
+        cid = 'drawings-inline-' + kind + ('-deleted' if deleted else '') + ('-control' if kind == 'picture' else '')
+        description = ('Inline teal picture control for the shape and group cases' if kind == 'picture' else
+                       'Inline teal ' + ('rectangle shape' if kind == 'shape' else 'rectangle as the only child of a group')
+                       + (' inside a tracked deletion' if deleted else '') + ' (Docxodus #1270)')
+        add(cid, 'images', description, texts, para(texts[0]) + para(runs=inline) + para(texts[1]),
+            image=kind == 'picture',
+            # The picture control reuses the package's one image relationship with a teal raster.
+            extra_parts={'word/media/diamond.png': png(192, 96, lambda x, y: (0x19, 0x64, 0x7E))} if kind == 'picture' else None,
+            namespaces_extra=' xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup"',
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'PanelAfter', 'occurrence': 1,
+                         'page': 1, 'rect': [72, 150, 540, 210]}])
+        if deleted:
+            cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
     # Independent hidden-header pair for Docxodus #1077. The empty first paragraph
     # is the passing control; the visible second line exposes paragraph-mark flow.
     header_styles = f'''<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>
@@ -1603,7 +1642,7 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v55', 'version': 55, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v56', 'version': 56, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

@@ -354,7 +354,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 254)
+        self.assertEqual(len(common.validate_registry()['cases']), 259)
 
     def test_agreement_font_variant_changes_only_the_declared_family(self):
         from zipfile import ZipFile
@@ -505,6 +505,30 @@ class RegistryContract(unittest.TestCase):
             first.find(w + 'comment').set(w + 'author', second.find(w + 'comment').get(w + 'author'))
             self.assertEqual(ET.tostring(first), ET.tostring(second))
 
+    def test_inline_drawing_set_differs_only_in_the_drawing_and_its_deletion(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        ids = ['drawings-inline-shape', 'drawings-inline-shape-deleted', 'drawings-inline-group',
+               'drawings-inline-group-deleted', 'drawings-inline-picture-control']
+        w = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
+        wp = '{http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing}'
+        bodies = []
+        for case_id in ids:
+            case = records[case_id]
+            self.assertEqual(case['tokens'], records[ids[0]]['tokens'])
+            self.assertEqual(case['assertions'], records[ids[0]]['assertions'])
+            self.assertEqual(case['profile']['review'], 'markup' if case_id.endswith('-deleted') else 'final')
+            with ZipFile(common.ROOT / case['input']) as package:
+                body = ET.fromstring(package.read('word/document.xml')).find(w + 'body')
+                paragraphs = body.findall(w + 'p')
+                self.assertEqual(len(paragraphs), 3)
+                drawing = paragraphs[1].find('.//' + w + 'drawing')
+                self.assertEqual(drawing.find(wp + 'inline/' + wp + 'extent').attrib, {'cx': '1828800', 'cy': '914400'})
+                self.assertEqual(paragraphs[1].find(w + 'del') is not None, case_id.endswith('-deleted'))
+                bodies.append(b''.join(ET.tostring(p) for p in (paragraphs[0], paragraphs[2])))
+        self.assertEqual(len(set(bodies)), 1)
+
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
         from zipfile import ZipFile
@@ -529,7 +553,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v55')
+        self.assertEqual(registry['suite']['id'], 'core-v56')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
