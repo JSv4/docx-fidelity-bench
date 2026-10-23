@@ -1198,16 +1198,20 @@ def generate():
     # separate in PDF text extraction when a 12-twip stop leaves almost no gap.
     interval_runs = run('TabLead observatory inventory ') + '<w:r><w:tab/></w:r>' + run('TabNorth ') + '<w:r><w:tab/></w:r>' + run('TabEast ') + '<w:r><w:tab/></w:r>' + run('TabSouth ') + run('Copper lens.')
     interval_texts = ['TabLead observatory inventory', 'TabNorth', 'TabEast', 'TabSouth', 'Copper lens.']
-    # The spec leaves a zero interval undefined and Word was not measured: LibreOffice falls back to
-    # its 1.25cm default, the spec's omitted-element default is 0.5in. The zero case therefore only
-    # requires each word to start past where it would sit if its tab had no width (226.3pt, about
-    # 299pt and about 366pt), which both grids satisfy; the other two follow the reference.
+    # Each word must start past where it would sit if its tab had no width (after the preceding word
+    # and its space). The spec leaves a zero interval undefined and Word was not measured:
+    # LibreOffice falls back to its 1.25cm default, the spec's omitted-element default is 0.5in, and
+    # both grids satisfy the zero case. At 12 twips each word must also end before it would on the
+    # half-inch grid, so a half-inch fallback fails; where on the fine grid it lands depends on the
+    # renderer's text measurement, which the raster score measures. The control follows the reference.
     def interval_assertions(interval):
-        if interval == 0:
-            return [{'type': 'marker-region', 'version': 2, 'marker': marker, 'occurrence': 1, 'page': 1, 'rect': [left, 60, 540, 100]}
-                    for marker, left in [('TabNorth', 240), ('TabEast', 310), ('TabSouth', 380)]]
-        return [{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5}
-                for marker in ('TabNorth', 'TabEast', 'TabSouth')]
+        if interval == 720:
+            return [{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5}
+                    for marker in ('TabNorth', 'TabEast', 'TabSouth')]
+        bounds = [('TabNorth', 226, 297), ('TabEast', 276, 362), ('TabSouth', 318, 441)] if interval else \
+                 [('TabNorth', 240, 540), ('TabEast', 310, 540), ('TabSouth', 380, 540)]
+        return [{'type': 'marker-region', 'version': 2, 'marker': marker, 'occurrence': 1, 'page': 1, 'rect': [left, 60, right, 100]}
+                for marker, left, right in bounds]
     for case_id, interval, description in [
             ('tabs-default-interval-12', 12, 'Three tabs on automatic stops with a 12-twip default tab interval (Docxodus #1269)'),
             ('tabs-default-interval-0', 0, 'Three tabs on automatic stops with a zero default tab interval (Docxodus #1269)'),

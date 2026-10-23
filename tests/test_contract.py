@@ -599,8 +599,13 @@ class RegistryContract(unittest.TestCase):
         finally:
             for archive in archives: archive.close()
         self.assertEqual(len({json.dumps(records[i]['tokens'], sort_keys=True) for i in ids}), 1)
-        self.assertEqual(records[ids[0]]['assertions'], records[ids[2]]['assertions'])
-        self.assertEqual({a['type'] for a in records[ids[1]]['assertions']}, {'marker-region'})
+        self.assertEqual({a['type'] for i in ids[:2] for a in records[i]['assertions']}, {'marker-region'})
+        self.assertEqual({a['type'] for a in records[ids[2]]['assertions']}, {'marker-reference-position'})
+        # A half-inch fallback puts the 12-twip case's words where the control's are: outside its regions.
+        control = {a['marker']: a for a in records[ids[2]]['assertions']}
+        for region in records[ids[0]]['assertions']:
+            self.assertIn(region['marker'], control)
+            self.assertLess(region['rect'][2], {'TabNorth': 298.7, 'TabEast': 363.3, 'TabSouth': 442.7}[region['marker']])
 
     def test_manual_tab_reproducer_and_narrow_left_control(self):
         import xml.etree.ElementTree as ET
