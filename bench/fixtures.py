@@ -1203,6 +1203,23 @@ def generate():
             [text], para(runs=run(text, current + revision)), styles_xml=format_styles)
         cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
         cases[-1]['htmlAssertions'] = [{'type': 'marker-attribute', 'version': 1, 'marker': 'FormatLabel', 'attribute': 'title', 'equals': 'Bold added'}]
+    # Docxodus #1271: one 10pt footnote line whose only run carries a pending formatting revision,
+    # measured in markup view, and a control without the w:rPrChange. Docxodus underlines the
+    # revised run with a border that hung below the note band, and its export refused the
+    # document as clipped. Both notes must appear in full in the footnote area of page 1.
+    note_run_props = f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="20"/>'
+    for case_id, revised in [('notes-format-revision-markup', True), ('notes-format-revision-markup-control', False)]:
+        cite_text, note_text = 'NoteCite Receiver maintenance', 'NoteQuartz A spare quartz plate remains in the cabinet.'
+        revision = '<w:rPrChange w:id="31" w:author="Cedar Reviewer" w:date="2026-09-12T10:00:00Z"><w:rPr><w:i/></w:rPr></w:rPrChange>' if revised else ''
+        note_xml = para(props='<w:spacing w:after="0" w:line="240" w:lineRule="auto"/>',
+                        runs=f'<w:r><w:rPr>{note_run_props}<w:vertAlign w:val="superscript"/></w:rPr><w:footnoteRef/></w:r>' + run(' ' + note_text, note_run_props + revision))
+        body = para(runs=run(cite_text) + '<w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr><w:footnoteReference w:id="1"/></w:r>')
+        add(case_id, 'notes', ('One-line footnote whose run carries a formatting revision, in markup view (Docxodus #1271)' if revised else
+                               'Control: the same one-line footnote without the formatting revision, in markup view'),
+            [cite_text, '1', '1', note_text], body, notes=('footnote', note_text), notes_xml=note_xml,
+            assertions=[{'type': 'marker-region', 'version': 1, 'marker': 'NoteQuartz', 'occurrence': 1, 'page': 1, 'rect': [60, 650, 552, 750]},
+                        {'type': 'same-page', 'version': 1, 'markers': ['NoteCite', 'NoteQuartz']}])
+        cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
     # Original numbered heading with a hidden paragraph mark, and visible-mark control.
     mark_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="24"/></w:rPr></w:rPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style><w:style w:type="paragraph" w:styleId="Heading2"><w:name w:val="heading 2"/><w:basedOn w:val="Normal"/><w:pPr><w:outlineLvl w:val="1"/></w:pPr><w:rPr><w:b/></w:rPr></w:style></w:styles>'
     mark_numbering = f'<w:numbering xmlns:w="{W}"><w:abstractNum w:abstractNumId="1"><w:multiLevelType w:val="singleLevel"/><w:lvl w:ilvl="0"><w:start w:val="1"/><w:numFmt w:val="decimal"/><w:suff w:val="space"/><w:lvlText w:val="%1."/></w:lvl></w:abstractNum><w:num w:numId="1"><w:abstractNumId w:val="1"/></w:num></w:numbering>'
@@ -1586,7 +1603,7 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v54', 'version': 54, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v55', 'version': 55, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

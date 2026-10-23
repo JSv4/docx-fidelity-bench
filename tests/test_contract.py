@@ -354,7 +354,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 252)
+        self.assertEqual(len(common.validate_registry()['cases']), 254)
 
     def test_agreement_font_variant_changes_only_the_declared_family(self):
         from zipfile import ZipFile
@@ -529,7 +529,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v54')
+        self.assertEqual(registry['suite']['id'], 'core-v55')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
@@ -553,6 +553,30 @@ class RegistryContract(unittest.TestCase):
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['tokens']['1.'], 1)
         self.assertEqual({a['marker'] for a in pair[0]['assertions']}, {'CedarHeading.', 'CedarBody'})
+
+    def test_note_format_revision_pair_changes_only_the_run_revision(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records['notes-format-revision-markup'], records['notes-format-revision-markup-control']]
+        w = '{' + fixtures.W + '}'
+        with ZipFile(common.ROOT / pair[0]['input']) as revised, ZipFile(common.ROOT / pair[1]['input']) as plain:
+            self.assertEqual(revised.namelist(), plain.namelist())
+            for name in revised.namelist():
+                if name != 'word/footnotes.xml':
+                    self.assertEqual(revised.read(name), plain.read(name))
+            first, second = [ET.fromstring(z.read('word/footnotes.xml')) for z in (revised, plain)]
+            changes = list(first.iter(w + 'rPrChange'))
+            self.assertEqual(len(changes), 1)
+            properties = next(p for p in first.iter(w + 'rPr') if changes[0] in list(p))
+            self.assertEqual(properties.find(w + 'sz').get(w + 'val'), '20')
+            properties.remove(changes[0])
+            self.assertEqual(ET.tostring(first), ET.tostring(second))
+        for case in pair:
+            self.assertEqual(case['profile'], {'review': 'markup', 'comments': 'hidden'})
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
+        self.assertEqual({a['marker'] for a in pair[0]['assertions'] if 'marker' in a}, {'NoteQuartz'})
 
     def _section_change_pair(self, reproducer, control):
         """The pair's inputs differ only by the w:sectPrChange on the final section; returns that
