@@ -4,11 +4,14 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
+using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using Docxodus;
+using Docxodus.Verification;
 
 namespace DocxBenchRedline;
 
@@ -40,6 +43,31 @@ internal static class Program
                 documents.Add((new WmlDocument(Path.GetFileName(path), bytes), (string?)item?["author"]));
             }
             phase = "operation";
+            if (settings["semanticPreflight"] is not null)
+            {
+                if (operation != "compare" || documents.Count != 2 ||
+                    settings["semanticPreflight"] is not JsonObject guard || guard.Count != 3 ||
+                    (int?)guard["version"] != 1 || (string?)guard["limits"] != "raw-boundaries" ||
+                    (int?)guard["changeCount"] != 0 ||
+                    Hash(documents[0].Document.DocumentByteArray) != Hash(documents[1].Document.DocumentByteArray))
+                    throw new InvalidDataException("Unsupported semantic preflight declaration");
+                using var stream = new MemoryStream(documents[0].Document.DocumentByteArray);
+                using var zip = new ZipArchive(stream, ZipArchiveMode.Read);
+                var entries = zip.Entries.ToArray();
+                var limits = new PackageManifestOptions
+                {
+                    MaxXmlPartBytes = entries.Max(e => e.Length),
+                    MaxEntryUncompressedBytes = entries.Max(e => e.Length),
+                    MaxTotalUncompressedBytes = entries.Sum(e => e.Length),
+                    MaxCompressionRatio = entries.Max(e => (double)e.Length / e.CompressedLength),
+                };
+                var counts = new JsonObject();
+                foreach (var include in new[] { true, false })
+                    counts[include ? "withPackageChanges" : "withoutPackageChanges"] = SemanticDiff.Compare(
+                        documents[0].Document.DocumentByteArray, documents[1].Document.DocumentByteArray,
+                        new SemanticDiffOptions { IncludePackageChanges = include, PackageOptions = limits }).ChangeCount;
+                response["semanticPreflight"] = counts;
+            }
             WmlDocument result;
             var diff = new DocxDiffSettings { AuthorForRevisions = author, DateTimeForRevisions = date };
             switch (operation)

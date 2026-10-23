@@ -22,7 +22,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v9', 'version': 9}
+SUITE = {'id': 'redline-v10', 'version': 10}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -115,7 +115,7 @@ def zip_write(path, parts):
             archive.writestr(item, payload.encode() if isinstance(payload, str) else payload)
 
 
-def package(path, body, styles=None, header=None, comments=None, footnotes=None, settings_extra='', comments_extended=None):
+def package(path, body, styles=None, header=None, comments=None, footnotes=None, settings_extra='', comments_extended=None, strict=False):
     """One minimal, valid WordprocessingML package. Optional story parts take literal XML."""
     relations = [('rStyles', 'styles', 'styles.xml'), ('rSettings', 'settings', 'settings.xml')]
     overrides = [('/word/document.xml', 'document.main'), ('/word/styles.xml', 'styles'), ('/word/settings.xml', 'settings')]
@@ -154,6 +154,10 @@ def package(path, body, styles=None, header=None, comments=None, footnotes=None,
                                     '<Default Extension="xml" ContentType="application/xml"/>'
                                     + ''.join(f'<Override PartName="{n}" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.{k}+xml"/>' for n, k in overrides)
                                     + '</Types>')
+    if strict:
+        parts = {name: xml.replace(W, 'http://purl.oclc.org/ooxml/wordprocessingml/main')
+                 .replace(R, 'http://purl.oclc.org/ooxml/officeDocument/relationships')
+                 for name, xml in parts.items()}
     zip_write(path, parts)
 
 
@@ -262,11 +266,28 @@ def generate():
     reviewer_bookmarks(corpus)
     bookmark_conflicts(corpus)
     reply_parents(corpus)
+    semantic_limits(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(registry, indent=2) + '\n')
     return registry
+
+
+def semantic_limits(corpus):
+    body = p(t('Marsh station agreement.')) + p(t(' '.join(['Each survey crew records the water level.'] * 24))) + p(t(CLOSING))
+    for strict, kind, suffix in [(True, 'reproducer', 'strict'), (False, 'control', 'transitional-control')]:
+        case_id = 'redline-semantic-raw-limits-' + suffix
+        left = corpus.file(case_id, 'left', body=body, strict=strict)
+        right = corpus.file(case_id, 'right', body=body, strict=strict)
+        expected = corpus.file(case_id, 'expected', body=body)
+        authored = corpus.file(case_id, 'authored-redline', body=body)
+        corpus.add(case_id, 'identity', kind, 'JSv4/Docxodus#1352',
+                   'Identical ' + ('Strict' if strict else 'Transitional') + ' inputs remain comparable at their raw package limits',
+                   'compare', [dict(left, role='left'), dict(right, role='right')],
+                   {'accepted': expected, 'rejected': expected}, authored,
+                   [untracked('Marsh station agreement.', CLOSING), paragraph_count(3)])
+        corpus.cases[-1]['semanticPreflight'] = {'version': 1, 'limits': 'raw-boundaries', 'changeCount': 0}
 
 
 # ---------------------------------------------------------------------------------------------

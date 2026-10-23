@@ -27,11 +27,12 @@ OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1}
 ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity'}
 SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}}
-CONTRACT = {'version': 1, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+CONTRACT = {'version': 2, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
-            'validity': 'no OpenXmlValidator finding (id, part, description) occurs more often than in any input'}
+            'validity': 'no OpenXmlValidator finding (id, part, description) occurs more often than in any input',
+            'semanticPreflight': 'declared identity cases must report zero changes at raw limits with and without the package supplement'}
 HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'bench/redline_build.py']
 
 
@@ -74,6 +75,11 @@ def validate_registry(registry=None):
             raise ValueError('Stale redline generator digest: ' + case['id'])
         if case['category'] not in CATEGORIES:
             raise ValueError('Unknown redline category: ' + case['id'])
+        if 'semanticPreflight' in case:
+            if (operation != 'compare' or case['category'] != 'identity'
+                    or case['semanticPreflight'] != {'version': 1, 'limits': 'raw-boundaries', 'changeCount': 0}
+                    or case['inputs'][0]['sha256'] != case['inputs'][1]['sha256']):
+                raise ValueError('Invalid semantic preflight declaration: ' + case['id'])
         if operation == 'consolidate' and any(i['role'] == 'reviewer' and not i.get('author') for i in case['inputs']):
             raise ValueError('A consolidation reviewer needs an author: ' + case['id'])
         for assertion in case['assertions']:
@@ -174,6 +180,8 @@ def run_candidate(adapter, build, case, output, candidate, timeout=300):
     inputs = [{'path': str(contained(ROOT, i['path'])), 'sha256': i['sha256'], 'author': i.get('author')} for i in case['inputs']]
     request = {'protocol': 1, 'operation': case['operation'], 'inputs': inputs, 'output': str(output),
                'settings': {'author': 'Bench', 'date': '2026-01-01T00:00:00Z'}}
+    if 'semanticPreflight' in case:
+        request['settings']['semanticPreflight'] = case['semanticPreflight']
     response = json.loads(execute([_dotnet(), str(Path(build).resolve() / 'bin' / 'DocxBenchRedline.dll')], input=json.dumps(request), timeout=timeout))
     if response.get('protocol') != 1 or response.get('status') not in ('ok', 'failed', 'unmeasured'):
         raise ValueError('Invalid redline adapter response')
@@ -299,6 +307,13 @@ def score_case(case, folder, adapter, build, candidate, env, validator):
             outcome['checks'].append({'name': 'no-new-validation-errors', 'passed': None, 'reason': 'validator not provisioned'})
         for assertion in case['assertions']:
             outcome['checks'].append(_assertion(assertion, package, resolved))
+        if 'semanticPreflight' in case:
+            expected_counts = {'withPackageChanges': 0, 'withoutPackageChanges': 0}
+            # The authored calibration's identity is established independently by both round trips.
+            observed = expected_counts if adapter == 'authored' else response.get('semanticPreflight')
+            outcome['checks'].append({'name': 'semantic-preflight',
+                                      'passed': observed == expected_counts and all(type(v) is int for v in observed.values()),
+                                      'expected': expected_counts, 'observed': observed})
         if any(c['passed'] is None and not c.get('ineligible') for c in outcome['checks']):
             raise ValueError('A required measurement is unavailable: ' + ', '.join(c['name'] for c in outcome['checks'] if c['passed'] is None and not c.get('ineligible')))
         return _finish(outcome, 'measured')

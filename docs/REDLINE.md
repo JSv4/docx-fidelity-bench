@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v9`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v10`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -115,3 +115,22 @@ The #1211 body pair checks a removed comment reference in an edited paragraph an
 The #1212 note-insertion pair checks reference-to-definition identity in all resolved reviewer views. Authored redlines use sequential IDs in body order: LibreOffice misloads the valid nonsequential ordering. The prefix case leaves an empty first paragraph on LibreOffice reject, so only that comparison is ineligible; the suffix control and other comparisons calibrate. Full markup and schema checks remain mandatory.
 
 The #1312 cases add a threaded reply to an unchanged comment. In the reproducers the original gives that comment no paragraph id and no commentsExtended part, or a different paragraph id from the revision's; the control gives it the same paragraph id in both. A correct redline keeps the original's comment and re-points the reply at that comment's own paragraph id (the authored redlines keep the revision's id where the original has none). `comment-threads` checks the link; LibreOffice exposes no revision for a reply whose markers are the only change and keeps the reply on reject, so all six of its comparisons are declared ineligible. LibreOffice renders of the Docxodus redlines before and after the fix are in [`docs/results/comment-reply-parent/`](results/comment-reply-parent/).
+
+## Semantic preflight at raw limits
+
+An identity comparison may declare `semanticPreflight` v1 with `limits: "raw-boundaries"` and
+`changeCount: 0`. Both input digests must match. The source-bound adapter derives the maximum
+entry/XML size, aggregate uncompressed size and compression ratio directly from that input's
+ZIP directory, then calls the public byte-based `SemanticDiff.Compare` both with and without
+the package supplement. It reports both observed counts before producing the ordinary redline.
+A missing count, a non-integer count or a nonzero count fails the case. An exception scores zero.
+The existing round trips, full semantic views, declared assertions and schema checks also apply.
+The authored calibration establishes the identity through independently authored expected
+documents; it does not claim to execute a candidate's semantic API. Metric contract version 2
+records this extra mandatory check.
+
+`redline-semantic-raw-limits-strict` and `redline-semantic-raw-limits-transitional-control`
+contain the same original Marsh station agreement in different OOXML conformance classes.
+Their expected documents and authored redlines are Transitional. The Strict reproducer fails
+on Docxodus main before #1355; the control passes. See the labelled screenshots and capture
+record under `docs/results/strict-semantic-limits/`.

@@ -46,10 +46,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v9')
-        self.assertEqual(len(registry['cases']), 83)
+        self.assertEqual(registry['suite']['id'], 'redline-v10')
+        self.assertEqual(len(registry['cases']), 85)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1352)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -139,7 +139,7 @@ class AuthoredCalibration(unittest.TestCase):
 
     def test_reproducers_and_controls_differ_from_their_original(self):
         for record in cases(operation='compare'):
-            if record['kind'] == 'identity':
+            if record['kind'] == 'identity' or 'semanticPreflight' in record:
                 continue
             self.assertNotEqual(revisions.view(load(record['expected']['accepted'])), revisions.view(load(record['expected']['rejected'])), record['id'])
 
@@ -160,7 +160,7 @@ class GamingIsRejected(unittest.TestCase):
 
     def test_copying_either_input_fails_a_round_trip(self):
         for record in cases(operation='compare'):
-            if record['kind'] == 'identity':
+            if record['kind'] == 'identity' or 'semanticPreflight' in record:
                 continue
             left, right = load(record['expected']['rejected']), load(record['expected']['accepted'])
             for candidate in (left, right):
@@ -424,6 +424,33 @@ class EngineSemantics(unittest.TestCase):
 
 
 class ScoringContract(unittest.TestCase):
+    def test_missing_or_wrong_semantic_measurements_cannot_pass_an_identity_case(self):
+        import shutil
+        record = case('redline-semantic-raw-limits-transitional-control')
+        def candidate(_adapter, _build, _case, output, _candidate):
+            shutil.copyfile(common.ROOT / record['authored']['path'], output)
+            return dict(response, status='ok')
+        for counts, expected_score in [(None, 0), ({'withPackageChanges': 0}, 0),
+                                       ({'withPackageChanges': 1, 'withoutPackageChanges': 0}, 0),
+                                       ({'withPackageChanges': False, 'withoutPackageChanges': False}, 0),
+                                       ({'withPackageChanges': 0, 'withoutPackageChanges': 0}, 100)]:
+            response = {} if counts is None else {'semanticPreflight': counts}
+            with self.subTest(counts=counts), tempfile.TemporaryDirectory() as temp, \
+                    patch.object(redline, 'run_candidate', side_effect=candidate), \
+                    patch.object(redline, '_libreoffice_checks', return_value=[]), \
+                    patch.object(redline, 'validate_packages', side_effect=lambda _v, paths: {str(p): [] for p in paths}):
+                outcome = redline.score_case(record, Path(temp), 'docxodus', 'build', 'commit', {}, 'validator')
+                self.assertEqual(outcome['status'], 'measured')
+                self.assertEqual(outcome['score'], expected_score)
+
+    def test_semantic_preflight_is_only_a_declared_identity_comparison(self):
+        for key, value in [('version', 2), ('limits', 'unbounded'), ('changeCount', 1)]:
+            registry = common.read_json(redline.MANIFEST)
+            target = next(c for c in registry['cases'] if 'semanticPreflight' in c)
+            target['semanticPreflight'][key] = value
+            with self.assertRaisesRegex(ValueError, 'semantic preflight'):
+                redline.validate_registry(registry)
+
     def test_validator_counts_findings_as_a_multiset_over_inputs(self):
         finding = {'id': 'Sem_UniqueAttributeValue', 'part': '/word/styles.xml', 'description': 'dup', 'path': '/a'}
         moved = dict(finding, path='/b')
