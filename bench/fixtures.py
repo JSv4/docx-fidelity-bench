@@ -1604,6 +1604,9 @@ def generate():
                                                         rg_row([rg_cell(card_paras(['Willow01']), 5400)]), rg_row([rg_cell(card_paras(['Willow02']), 5400)])],
                                                        [5400], True, no_margins) + para('MapleAfter', exact(300)))
     rg_add('tables-header-row-taller-than-page-times-new-roman', 'An exact 400pt header row above two body rows on a 300 x 160pt card (Docxodus #1202)', texts, body, sect=rg_card)
+    # Word puts MapleAfter at the top of a fourth page, below a third that holds only the two body rows;
+    # one unexplained capture does not establish a rule, so its position is left unasserted.
+    cases[-1]['assertions'] = [a for a in cases[-1]['assertions'] if a['marker'] != 'MapleAfter']
     words = card_lines('Inner', 8)
     texts = ['OuterBefore', 'OuterHead'] + words + ['OuterTail', 'OuterAfter']
     inner = rg_table([rg_row([rg_cell(card_paras(words), 5000)], 8000)], [5000], True, no_margins)
@@ -1619,6 +1622,31 @@ def generate():
     body = para('LarchBefore', exact(300)) + ''.join(para(w, box + exact(300)) for w in words) + para('LarchAfter', exact(300))
     rg_add('paragraphs-border-group-taller-than-page-times-new-roman', 'Twenty-eight paragraphs sharing one border, taller than a 300 x 160pt card (Docxodus #1202)',
            ['LarchBefore'] + words + ['LarchAfter'], body, sect=rg_card)
+    # Word for the web glyph boxes [page, x0, y0, x1, y1] (pdftotext -bbox) of the markers whose
+    # LibreOffice 25.8.7.3 position differs from Word by more than 0.5pt; see docs/results/table-row-geometry-word.md.
+    rg_word = {
+        'paragraphs-border-group-taller-than-page-times-new-roman': {'Larch09': [2, 10.0, 12.2, 47.01, 24.4], 'Larch10': [2, 10.0, 27.23, 47.01, 39.43], 'Larch11': [2, 10.0, 42.25, 47.01, 54.45], 'Larch12': [2, 10.0, 57.28, 47.01, 69.48], 'Larch13': [2, 10.0, 72.3, 47.01, 84.51], 'Larch14': [2, 10.0, 87.33, 47.01, 99.53], 'Larch15': [2, 10.0, 102.35, 47.01, 114.56], 'Larch16': [2, 10.0, 117.38, 47.01, 129.58], 'Larch17': [2, 10.0, 132.4, 47.01, 144.61], 'Larch18': [3, 10.0, 12.2, 47.01, 24.4], 'Larch19': [3, 10.0, 27.23, 47.01, 39.43], 'Larch20': [3, 10.0, 42.25, 47.01, 54.45], 'Larch21': [3, 10.0, 57.28, 47.01, 69.48], 'Larch22': [3, 10.0, 72.3, 47.01, 84.51], 'Larch23': [3, 10.0, 87.33, 47.01, 99.53], 'Larch24': [3, 10.0, 102.35, 47.01, 114.56], 'Larch25': [3, 10.0, 117.38, 47.01, 129.58], 'Larch26': [3, 10.0, 132.4, 47.01, 144.61], 'Larch27': [4, 10.0, 12.2, 47.01, 24.4], 'Larch28': [4, 10.0, 27.23, 47.01, 39.43], 'LarchAfter': [4, 10.0, 43.25, 58.87, 55.45]},
+        'paragraphs-border-taller-than-page-times-new-roman': {'Hazel09': [2, 10.0, 12.2, 46.76, 24.4], 'Hazel10': [2, 10.0, 27.23, 46.76, 39.43], 'Hazel11': [2, 10.0, 42.25, 46.76, 54.45], 'Hazel12': [2, 10.0, 57.28, 46.76, 69.48], 'Hazel13': [2, 10.0, 72.3, 46.76, 84.51], 'Hazel14': [2, 10.0, 87.33, 46.76, 99.53], 'Hazel15': [2, 10.0, 102.35, 46.76, 114.56], 'Hazel16': [2, 10.0, 117.38, 46.76, 129.58], 'Hazel17': [2, 10.0, 132.4, 46.76, 144.61], 'Hazel18': [3, 10.0, 12.2, 46.76, 24.4], 'Hazel19': [3, 10.0, 27.23, 46.76, 39.43], 'Hazel20': [3, 10.0, 42.25, 46.76, 54.45], 'Hazel21': [3, 10.0, 57.28, 46.76, 69.48], 'Hazel22': [3, 10.0, 72.3, 46.76, 84.51], 'Hazel23': [3, 10.0, 87.33, 46.76, 99.53], 'Hazel24': [3, 10.0, 102.35, 46.76, 114.56], 'Hazel25': [3, 10.0, 117.38, 46.76, 129.58], 'Hazel26': [3, 10.0, 132.4, 46.76, 144.61], 'Hazel27': [4, 10.0, 12.2, 46.76, 24.4], 'Hazel28': [4, 10.0, 27.23, 46.76, 39.43], 'HazelAfter': [4, 10.0, 43.25, 58.88, 55.45]},
+        'tables-nested-row-taller-than-page-times-new-roman': {'Inner01': [2, 12.0, 14.23, 46.24, 26.43], 'Inner02': [2, 12.0, 29.23, 46.24, 41.43], 'Inner03': [2, 12.0, 44.25, 46.24, 56.45], 'Inner04': [2, 12.0, 59.28, 46.24, 71.48], 'Inner05': [2, 12.0, 74.3, 46.24, 86.51], 'Inner06': [2, 12.0, 89.33, 46.24, 101.53], 'Inner07': [2, 12.0, 104.35, 46.24, 116.56], 'Inner08': [2, 12.0, 119.38, 46.24, 131.58], 'OuterAfter': [3, 10.0, 29.23, 58.37, 41.43], 'OuterTail': [3, 11.0, 13.2, 54.03, 25.4]},
+        'tables-row-height-exact-zero-content-times-new-roman': {'AlphaAfter': [1, 72.03, 143.0, 122.15, 155.18], 'AlphaBot1L': [1, 77.53, 125.0, 132.48, 137.18], 'AlphaBot1R': [1, 277.63, 125.0, 333.2, 137.18], 'AlphaMid1L': [1, 77.53, 109.0, 134.98, 121.18], 'AlphaMid1R': [1, 277.63, 109.0, 335.7, 121.18], 'BravoAfter': [1, 72.03, 231.03, 122.15, 243.21], 'BravoBefore': [1, 72.03, 159.0, 128.87, 171.18], 'BravoBot1L': [1, 78.03, 212.03, 132.98, 224.21], 'BravoBot1R': [1, 278.13, 212.03, 333.7, 224.21], 'BravoMid1L': [1, 78.03, 195.03, 135.48, 207.21], 'BravoMid1R': [1, 278.13, 195.03, 336.2, 207.21], 'BravoTop1L': [1, 78.03, 176.0, 134.95, 188.18], 'BravoTop1R': [1, 278.13, 176.0, 335.67, 188.18], 'CharlieAfter': [1, 72.03, 347.07, 127.65, 359.25], 'CharlieBefore': [1, 72.03, 247.03, 134.37, 259.21], 'CharlieBot1L': [1, 77.53, 329.05, 137.98, 341.23], 'CharlieBot1R': [1, 277.63, 329.05, 338.7, 341.23], 'CharlieMid1L': [1, 77.53, 281.05, 140.48, 293.23], 'CharlieMid1R': [1, 277.63, 281.05, 341.2, 293.23], 'CharlieMid2L': [1, 77.53, 297.05, 140.48, 309.23], 'CharlieMid2R': [1, 277.63, 297.05, 341.2, 309.23], 'CharlieMid3L': [1, 77.53, 313.05, 140.48, 325.23], 'CharlieMid3R': [1, 277.63, 313.05, 341.2, 325.23], 'CharlieTop1L': [1, 77.53, 263.03, 139.95, 275.21], 'CharlieTop1R': [1, 277.63, 263.03, 340.67, 275.21], 'KiloAfter': [1, 72.03, 435.1, 114.9, 447.28], 'KiloBefore': [1, 72.03, 363.07, 121.62, 375.25], 'KiloBot1L': [1, 78.03, 416.07, 125.49, 428.25], 'KiloBot1R': [1, 278.13, 416.07, 326.21, 428.25], 'KiloMid1L': [1, 78.03, 399.07, 127.99, 411.25], 'KiloMid1R': [1, 278.13, 399.07, 328.71, 411.25], 'KiloTop1L': [1, 78.03, 380.07, 127.46, 392.25], 'KiloTop1R': [1, 278.13, 380.07, 328.18, 392.25]},
+        'tables-zero-width-column-times-new-roman': {'AlderWide': [1, 73.03, 90.98, 121.88, 103.16], 'BirchWide': [1, 73.03, 141.0, 121.39, 153.18], 'DogwoodWide': [1, 75.03, 192.03, 142.38, 204.21]},
+        'tables-row-height-exact-zero-borderless': {'Zero03': [1, 72.53, 119.75, 104.5, 131.93], 'ZeroAfter': [1, 72.03, 137.75, 116.16, 149.93]},
+        'tables-row-height-exact-zero-only': {'ZeroAfter': [1, 72.03, 131.0, 116.16, 143.18]},
+    }
+    for case in cases:
+        boxes = rg_word.get(case['id'])
+        if not boxes:
+            continue
+        # The two core-v18 Liberation Serif cases were captured in Times New Roman, whose metrics match but
+        # whose cell margin differs from Docxodus #1219's subject, so they bound the vertical position only.
+        wide = not case['id'].endswith('times-new-roman')
+        case['assertions'] = [a if a.get('marker') not in boxes else
+                              {'type': 'marker-region', 'version': 2, 'marker': a['marker'], 'occurrence': 1, 'page': boxes[a['marker']][0],
+                               'rect': [60, boxes[a['marker']][2] - 1, 552, boxes[a['marker']][4] + 1] if wide else
+                               [boxes[a['marker']][1] - 1, boxes[a['marker']][2] - 1, boxes[a['marker']][3] + 1, boxes[a['marker']][4] + 1],
+                               'tolerancePt': 0.0001, 'adjudicated': 'word'}
+                              for a in case['assertions']]
+        case['version'] = 2
     registry = {'schema': 1, 'suite': {'id': 'core-v53', 'version': 53, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
