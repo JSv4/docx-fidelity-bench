@@ -1,0 +1,204 @@
+{
+  "schema": 1,
+  "suite": "core-v58",
+  "capturedAt": "2026-10-23T22:22:58.797275+00:00",
+  "reference": {
+    "renderer": "LibreOffice",
+    "version": "25.8.7.3"
+  },
+  "candidate": {
+    "repository": "JSv4/Docxodus",
+    "commit": "466ee317d15fd37e016b848c9f96aeea6338a90b",
+    "api": "renderDocxArtifacts",
+    "injectedBrowser": true,
+    "chromiumSandbox": false,
+    "review": "final",
+    "comments": "hidden"
+  },
+  "scope": "Focused public-export checks; no registered full-suite score",
+  "screenshots": {
+    "page": 1,
+    "dpi": 96,
+    "cropPixels": {
+      "x": 0,
+      "y": 48,
+      "width": 816,
+      "height": 320
+    },
+    "composition": "Unscaled reference left, candidate right; HTML labels above each raster"
+  },
+  "limitations": [
+    "The long-tail fallback preserves every word but retains a different placement of the preceding number from LibreOffice.",
+    "Original linked fixtures have missing fragment targets; their existing export warnings are retained.",
+    "The local browser font environment is unverified; declared-family PDF checks pass."
+  ],
+  "cases": {
+    "tabs-right-stop-pageref-field": {
+      "input": "fixtures/tabs-right-stop-pageref-field.docx",
+      "sha256": "17accae2e3ff8f9be47ebe9c29e800c656bf7fdb72ecfec6dc120bb2b7f44d81",
+      "pages": 5,
+      "referenceFailed": [],
+      "failed": [],
+      "checkCount": 21,
+      "warnings": [
+        {
+          "code": "font_environment_unverified",
+          "phase": "font_loading"
+        }
+      ],
+      "image": "tabs-right-stop-pageref-field.png"
+    },
+    "tabs-right-stop-pageref-control": {
+      "input": "fixtures/tabs-right-stop-pageref-control.docx",
+      "sha256": "e68edcc5b2c3e3b0e50af374360982c82db88f29e028957f96509db9b2a2f489",
+      "pages": 5,
+      "referenceFailed": [],
+      "failed": [],
+      "checkCount": 21,
+      "warnings": [
+        {
+          "code": "font_environment_unverified",
+          "phase": "font_loading"
+        }
+      ],
+      "image": "tabs-right-stop-pageref-control.png"
+    },
+    "tabs-right-stop-wrapped-title": {
+      "input": "fixtures/tabs-right-stop-wrapped-title.docx",
+      "sha256": "846b2091c57b3daab49cd99f763e74dfbba1af44d6b14282cffa24aa19c3348f",
+      "pages": 1,
+      "referenceFailed": [],
+      "failed": [],
+      "checkCount": 17,
+      "warnings": [
+        {
+          "code": "font_environment_unverified",
+          "phase": "font_loading"
+        }
+      ],
+      "image": "tabs-right-stop-wrapped-title.png"
+    },
+    "tabs-right-stop-second-stop-in-indent": {
+      "input": "fixtures/tabs-right-stop-second-stop-in-indent.docx",
+      "sha256": "ae98a92ff4ded67fad22e5426295259b6556aaf12f8325c4db832983493eed70",
+      "pages": 1,
+      "referenceFailed": [],
+      "failed": [],
+      "checkCount": 21,
+      "warnings": [
+        {
+          "code": "font_environment_unverified",
+          "phase": "font_loading"
+        }
+      ],
+      "image": "tabs-right-stop-second-stop-in-indent.png"
+    },
+    "tabs-right-stop-second-stop-control": {
+      "input": "fixtures/tabs-right-stop-second-stop-control.docx",
+      "sha256": "9ad2c9cd712f4ccc373e35d0d5716e843b6fb22b37c8c0b4f5749c54990e8faa",
+      "pages": 1,
+      "referenceFailed": [],
+      "failed": [],
+      "checkCount": 21,
+      "warnings": [
+        {
+          "code": "font_environment_unverified",
+          "phase": "font_loading"
+        }
+      ],
+      "image": "tabs-right-stop-second-stop-control.png"
+    },
+    "tabs-right-stop-linked-bookmark": {
+      "input": "fixtures/tabs-right-stop-linked-bookmark.docx",
+      "sha256": "1dd42c7c5c6b441263ad5ffffc4f8b04804d4d5f73d7c772fcd0dae33497606a",
+      "pages": 1,
+      "referenceFailed": [],
+      "failed": [],
+      "checkCount": 17,
+      "warnings": [
+        {
+          "code": "font_environment_unverified",
+          "phase": "font_loading"
+        },
+        {
+          "code": "fragment_target_unavailable",
+          "phase": "running_story_placement"
+        },
+        {
+          "code": "fragment_target_unavailable",
+          "phase": "running_story_placement"
+        },
+        {
+          "code": "fragment_target_unavailable",
+          "phase": "running_story_placement"
+        },
+        {
+          "code": "fragment_target_unavailable",
+          "phase": "running_story_placement"
+        }
+      ],
+      "image": "tabs-right-stop-linked-bookmark.png"
+    },
+    "tabs-right-stop-linked-control": {
+      "input": "fixtures/tabs-right-stop-linked-control.docx",
+      "sha256": "56a24ef6d53a2b9c488304e4b2981b3d22170dd002a9c7682d9b1295503d508a",
+      "pages": 1,
+      "referenceFailed": [],
+      "failed": [],
+      "checkCount": 17,
+      "warnings": [
+        {
+          "code": "font_environment_unverified",
+          "phase": "font_loading"
+        },
+        {
+          "code": "fragment_target_unavailable",
+          "phase": "running_story_placement"
+        },
+        {
+          "code": "fragment_target_unavailable",
+          "phase": "running_story_placement"
+        },
+        {
+          "code": "fragment_target_unavailable",
+          "phase": "running_story_placement"
+        },
+        {
+          "code": "fragment_target_unavailable",
+          "phase": "running_story_placement"
+        }
+      ],
+      "image": "tabs-right-stop-linked-control.png"
+    },
+    "tabs-right-stop-long-tail": {
+      "input": "fixtures/tabs-right-stop-long-tail.docx",
+      "sha256": "cd87453d98db15bb5f8f18d98a69402dea7b7866100c1404027d154a2562361f",
+      "pages": 1,
+      "referenceFailed": [],
+      "failed": [],
+      "checkCount": 5,
+      "warnings": [
+        {
+          "code": "font_environment_unverified",
+          "phase": "font_loading"
+        }
+      ],
+      "image": "tabs-right-stop-long-tail.png"
+    },
+    "tabs-right-stop-short-tail-control": {
+      "input": "fixtures/tabs-right-stop-short-tail-control.docx",
+      "sha256": "4bb1a179dd9ca6028581bfe3e154f0aea9fd41fa5b2b55e7a652ff3810528abc",
+      "pages": 1,
+      "referenceFailed": [],
+      "failed": [],
+      "checkCount": 5,
+      "warnings": [
+        {
+          "code": "font_environment_unverified",
+          "phase": "font_loading"
+        }
+      ],
+      "image": "tabs-right-stop-short-tail-control.png"
+    }
+  }
+}
