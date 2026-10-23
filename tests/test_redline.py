@@ -286,6 +286,13 @@ class GamingIsRejected(unittest.TestCase):
                          ['not threaded under its parent'])
         self.assertEqual([f['problem'] for f in revisions.comment_thread_findings(load(record['authored']), [['Absent.', 'Check the delivery date.']])],
                          ['0 comments carry this text'])
+        # An entry keyed to a paraId no comment holds.
+        parts = members(record['authored'])
+        extended = ET.fromstring(parts['word/commentsExtended.xml'])
+        extended.append(ET.fromstring(f'<w15:commentEx xmlns:w15="{revisions.W15}" w15:paraId="0000ABCD" w15:done="0"/>'))
+        parts['word/commentsExtended.xml'] = ET.tostring(extended)
+        self.assertEqual([f['problem'] for f in revisions.comment_thread_findings(revisions.Package(parts), threads)],
+                         ['entry names no comment'])
 
 
 def fragment(body, extra=''):

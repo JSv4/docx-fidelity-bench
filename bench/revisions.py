@@ -651,8 +651,8 @@ def comment_thread_findings(package, threads):
     """Reply links that do not resolve, and declared [reply, parent] pairs the package does not thread.
 
     A comment is keyed by its last paragraph's w14:paraId, as commentsExtended entries name it, and
-    identified by its text (every w:t it holds). Every w15:paraIdParent must name a comment that has
-    its own entry; each declared reply must be the only comment with its text and name the parent
+    identified by its text (every w:t it holds). Every entry must name a comment, and every
+    w15:paraIdParent must name a comment that has its own entry; each declared reply must be the only comment with its text and name the parent
     comment's paraId."""
     def part(kind):
         targets = [t for k, t in package.main_rels.values() if k == kind and t in package.members]
@@ -671,6 +671,8 @@ def comment_thread_findings(package, threads):
         parents[entry.get('{' + W15 + '}paraId', '').upper()] = (entry.get('{' + W15 + '}paraIdParent') or '').upper() or None
     findings = []
     for para_id, parent in sorted(parents.items()):
+        if para_id not in by_para_id:
+            findings.append({'paraId': para_id, 'problem': 'entry names no comment'})
         if parent is not None and (parent not in by_para_id or parent not in parents):
             findings.append({'paraId': para_id, 'paraIdParent': parent, 'problem': 'parent is not a comment with its own entry'})
     for reply, parent in threads:
