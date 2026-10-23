@@ -601,6 +601,9 @@ class RegistryContract(unittest.TestCase):
         self.assertEqual(len({json.dumps(records[i]['tokens'], sort_keys=True) for i in ids}), 1)
         self.assertEqual({a['type'] for i in ids[:2] for a in records[i]['assertions']}, {'marker-region'})
         self.assertEqual({a['type'] for a in records[ids[2]]['assertions']}, {'marker-reference-position'})
+        # Word gives a zero interval's tabs no width; LibreOffice does not, so only that case is adjudicated.
+        self.assertEqual([a.get('adjudicated') for a in records[ids[1]]['assertions']], ['word'] * 3)
+        self.assertTrue(all('adjudicated' not in a for i in (ids[0], ids[2]) for a in records[i]['assertions']))
         # A half-inch fallback puts the 12-twip case's words where the control's are: outside its regions.
         control = {a['marker']: a for a in records[ids[2]]['assertions']}
         for region in records[ids[0]]['assertions']:
