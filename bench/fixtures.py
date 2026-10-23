@@ -467,6 +467,26 @@ def generate():
         add('notes-' + kind, 'notes', kind.title() + ' body and automatic marker', texts, body, notes=(kind, note), assertions=[assertion])
         if kind == 'endnote':
             cases[-1]['version'] = 2
+    # Docxodus #1314: a tracked section-property change (w:sectPrChange) stores the section's
+    # earlier properties as a nested w:sectPr. Here those earlier properties numbered endnotes in
+    # decimal and the current section declares no endnote format, so settings' lowerRoman applies
+    # and both the citation and the note read "i". A renderer that reads the stored earlier copy as
+    # the section's own format prints "1" instead. Shown in markup, where the change is pending.
+    # The control is the same section with no pending change.
+    change_texts = ['Ledger endnote format', 'ChangeAnchor The survey closes at the eastern gate.', 'i', 'i',
+                    'ChangeNote The gate log is kept at the depot.', prose]
+    change_body = (para(change_texts[0], '<w:pStyle w:val="Title"/>')
+                   + para(runs=run(change_texts[1] + ' ') + '<w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr><w:endnoteReference w:id="1"/></w:r>')
+                   + para(prose))
+    earlier_format = ('<w:sectPrChange w:id="41" w:author="Rowan Reviewer" w:date="2026-09-12T10:00:00Z"><w:sectPr>'
+                      '<w:endnotePr><w:numFmt w:val="decimal"/></w:endnotePr></w:sectPr></w:sectPrChange>')
+    for case_id, pending in [('notes-endnote-format-section-change', True), ('notes-endnote-format-section-change-control', False)]:
+        change_sect = section().replace('</w:sectPr>', earlier_format + '</w:sectPr>') if pending else section()
+        add(case_id, 'notes',
+            'Endnote markers under a section ' + ('whose pending property change stored an earlier decimal format, shown in markup (Docxodus #1314)'
+                                                   if pending else 'with no pending property change, shown in markup (control)'),
+            change_texts, change_body, change_sect, notes=('endnote', change_texts[4]))
+        cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
     title = 'Nested table spacing'
     texts = [title, 'OuterLeft', 'OuterRight', 'InnerLeft', 'InnerRight', 'AfterTable']
     inner = table([[cell(texts[3]), cell(texts[4])]], width=4200)
@@ -1516,7 +1536,7 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v51', 'version': 51, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v52', 'version': 52, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

@@ -354,7 +354,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 246)
+        self.assertEqual(len(common.validate_registry()['cases']), 248)
 
     def test_agreement_font_variant_changes_only_the_declared_family(self):
         from zipfile import ZipFile
@@ -529,7 +529,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v51')
+        self.assertEqual(registry['suite']['id'], 'core-v52')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
@@ -553,6 +553,34 @@ class RegistryContract(unittest.TestCase):
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['tokens']['1.'], 1)
         self.assertEqual({a['marker'] for a in pair[0]['assertions']}, {'CedarHeading.', 'CedarBody'})
+
+    def test_endnote_section_change_pair_changes_only_the_pending_change(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records[c] for c in ('notes-endnote-format-section-change', 'notes-endnote-format-section-change-control')]
+        w = '{' + fixtures.W + '}'
+        with ZipFile(common.ROOT / pair[0]['input']) as pending, ZipFile(common.ROOT / pair[1]['input']) as plain:
+            self.assertEqual(pending.namelist(), plain.namelist())
+            for name in pending.namelist():
+                if name != 'word/document.xml':
+                    self.assertEqual(pending.read(name), plain.read(name))
+            first, second = [ET.fromstring(z.read('word/document.xml')) for z in (pending, plain)]
+            final = first.find(w + 'body/' + w + 'sectPr')
+            change = final[-1]
+            self.assertEqual(change.tag, w + 'sectPrChange')
+            self.assertIsNone(final.find(w + 'endnotePr'))
+            self.assertEqual(change.find(w + 'sectPr/' + w + 'endnotePr/' + w + 'numFmt').get(w + 'val'), 'decimal')
+            final.remove(change)
+            self.assertEqual(ET.tostring(first), ET.tostring(second))
+            settings = ET.fromstring(pending.read('word/settings.xml'))
+            self.assertEqual(settings.find(w + 'endnotePr/' + w + 'numFmt').get(w + 'val'), 'lowerRoman')
+        for case in pair:
+            self.assertEqual(case['profile'], {'review': 'markup', 'comments': 'hidden'})
+            self.assertEqual(case['tokens']['i'], 2)
+            self.assertNotIn('1', case['tokens'])
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
 
     def test_footer_frame_pair_changes_only_frame_properties(self):
         import xml.etree.ElementTree as ET
