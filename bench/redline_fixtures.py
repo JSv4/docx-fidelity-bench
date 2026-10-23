@@ -22,7 +22,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v10', 'version': 10}
+SUITE = {'id': 'redline-v11', 'version': 11}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -165,6 +165,9 @@ def package(path, body, styles=None, header=None, comments=None, footnotes=None,
 # declared-ineligible comparison is not applied; the run fails as unmeasured if the calibration
 # disagrees with this table in either direction.
 LIBREOFFICE_INELIGIBLE = {
+    **{'redline-table-column-widths-' + shape: (('accepted', 'rejected'),
+       'LibreOffice 25.8.7.3 exposes zero revisions in the schema-valid authored table-property-only width edit; independent resolved widths, registry count and schema checks remain mandatory')
+       for shape in ('full', 'partial')},
     **{'redline-reviewer-bookmark-' + kind: (('accepted', 'rejected'),
        'LibreOffice exposes zero revisions for the authored bookmark-only removal/movement; semantic, reviewer and schema checks remain mandatory')
        for kind in ('move-and-remove', 'single-remove-control')},
@@ -267,6 +270,7 @@ def generate():
     bookmark_conflicts(corpus)
     reply_parents(corpus)
     semantic_limits(corpus)
+    column_widths(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -288,6 +292,54 @@ def semantic_limits(corpus):
                    {'accepted': expected, 'rejected': expected}, authored,
                    [untracked('Marsh station agreement.', CLOSING), paragraph_count(3)])
         corpus.cases[-1]['semanticPreflight'] = {'version': 1, 'limits': 'raw-boundaries', 'changeCount': 0}
+
+
+def column_widths(corpus):
+    original = [2400, 3200]
+
+    def document(widths, tracked=False):
+        revisions = Revisions()
+        def properties(values):
+            return f'<w:tblW w:w="{sum(values)}" w:type="dxa"/><w:tblLayout w:type="fixed"/>'
+        def grid(values):
+            return '<w:tblGrid>' + ''.join(f'<w:gridCol w:w="{v}"/>' for v in values) + '</w:tblGrid>'
+        pr = properties(widths)
+        if tracked and sum(widths) != sum(original):
+            pr += f'<w:tblPrChange {revisions.attrs(AUTHOR)}><w:tblPr>{properties(original)}</w:tblPr></w:tblPrChange>'
+        columns = grid(widths)
+        if tracked:
+            identifier = revisions.next
+            revisions.next += 1
+            columns = columns.replace('</w:tblGrid>', f'<w:tblGridChange w:id="{identifier}">{grid(original)}</w:tblGridChange></w:tblGrid>', 1)
+        rows = ''
+        for labels in [('North gauge', 'East gauge'), ('South gauge', 'West gauge')]:
+            cells = ''
+            for index, label in enumerate(labels):
+                cell_pr = f'<w:tcW w:w="{widths[index]}" w:type="dxa"/>'
+                if tracked and widths[index] != original[index]:
+                    cell_pr += f'<w:tcPrChange {revisions.attrs(AUTHOR)}><w:tcPr><w:tcW w:w="{original[index]}" w:type="dxa"/></w:tcPr></w:tcPrChange>'
+                cells += f'<w:tc><w:tcPr>{cell_pr}</w:tcPr>{p(t(label))}</w:tc>'
+            rows += '<w:tr>' + cells + '</w:tr>'
+        return {'body': p(t('Gauge register column widths.')) + f'<w:tbl><w:tblPr>{pr}</w:tblPr>{columns}{rows}</w:tbl>' + p(t(CLOSING))}
+
+    def assertion(values, scope):
+        return {'type': 'table-widths', 'version': 1, 'scope': scope, 'grid': values,
+                'cells': [values, values], 'table': sum(values)}
+
+    for suffix, values in [('full', [2600, 3000]), ('partial', [2400, 3000])]:
+        for tracked, kind, tail in [(True, 'reproducer', ''), (False, 'control', '-untracked-control')]:
+            case_id = 'redline-table-column-widths-' + suffix + tail
+            source = corpus.file(case_id, 'source', **document(original))
+            updated = corpus.file(case_id, 'updated', **document(values))
+            authored = corpus.file(case_id, 'authored-redline', **document(values, tracked))
+            corpus.add(case_id, 'tables', kind, 'JSv4/Docxodus#1322',
+                       ('Tracked' if tracked else 'Untracked') + ' column widths change ' + ('both columns' if suffix == 'full' else 'only the second column'),
+                       'table-widths', [dict(source, role='source')],
+                       {'accepted': updated, 'rejected': source if tracked else updated}, authored,
+                       [untracked('Gauge register column widths.', 'North gauge', 'East gauge', 'South gauge', 'West gauge', CLOSING),
+                        assertion(values, 'accepted'), assertion(original if tracked else values, 'rejected')])
+            corpus.cases[-1]['tableWidths'] = {'version': 1, 'widths': values, 'tracked': tracked}
+            corpus.cases[-1]['revisionRegistry'] = {'version': 1, 'count': 1 if tracked else 0}
 
 
 # ---------------------------------------------------------------------------------------------
