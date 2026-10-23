@@ -354,7 +354,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 243)
+        self.assertEqual(len(common.validate_registry()['cases']), 246)
 
     def test_agreement_font_variant_changes_only_the_declared_family(self):
         from zipfile import ZipFile
@@ -529,7 +529,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v50')
+        self.assertEqual(registry['suite']['id'], 'core-v51')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
@@ -574,6 +574,41 @@ class RegistryContract(unittest.TestCase):
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
         self.assertEqual({a['marker'] for a in pair[0]['assertions']}, {'CedarFrameBody', 'CedarFrame01', 'CedarSheet01'})
+
+    def test_default_tab_interval_cases_differ_only_in_the_interval(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        ids = ['tabs-default-interval-12', 'tabs-default-interval-0', 'tabs-default-interval-720-control']
+        w = '{' + fixtures.W + '}'
+        archives = [ZipFile(common.ROOT / records[i]['input']) for i in ids]
+        try:
+            names = archives[0].namelist()
+            for archive, interval in zip(archives, ('12', '0', '720')):
+                self.assertEqual(archive.namelist(), names)
+                for name in names:
+                    if name != 'word/settings.xml': self.assertEqual(archive.read(name), archives[0].read(name))
+                settings = ET.fromstring(archive.read('word/settings.xml'))
+                self.assertEqual(settings[0].tag, w + 'defaultTabStop')
+                self.assertEqual(settings[0].get(w + 'val'), interval)
+                settings.remove(settings[0])
+                self.assertEqual(ET.tostring(settings, encoding='unicode').count('defaultTabStop'), 0)
+            paragraph = ET.fromstring(archives[0].read('word/document.xml')).find('.//' + w + 'body/' + w + 'p')
+            self.assertIsNone(paragraph.find(w + 'pPr/' + w + 'tabs'))
+            self.assertEqual(len(paragraph.findall(w + 'r/' + w + 'tab')), 3)
+        finally:
+            for archive in archives: archive.close()
+        self.assertEqual(len({json.dumps(records[i]['tokens'], sort_keys=True) for i in ids}), 1)
+        self.assertEqual({a['type'] for i in ids[:2] for a in records[i]['assertions']}, {'marker-region'})
+        self.assertEqual({a['type'] for a in records[ids[2]]['assertions']}, {'marker-reference-position'})
+        # Word gives a zero interval's tabs no width; LibreOffice does not, so only that case is adjudicated.
+        self.assertEqual([a.get('adjudicated') for a in records[ids[1]]['assertions']], ['word'] * 3)
+        self.assertTrue(all('adjudicated' not in a for i in (ids[0], ids[2]) for a in records[i]['assertions']))
+        # A half-inch fallback puts the 12-twip case's words where the control's are: outside its regions.
+        control = {a['marker']: a for a in records[ids[2]]['assertions']}
+        for region in records[ids[0]]['assertions']:
+            self.assertIn(region['marker'], control)
+            self.assertLess(region['rect'][2], {'TabNorth': 298.7, 'TabEast': 363.3, 'TabSouth': 442.7}[region['marker']])
 
     def test_manual_tab_reproducer_and_narrow_left_control(self):
         import xml.etree.ElementTree as ET

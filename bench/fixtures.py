@@ -340,6 +340,9 @@ def zip_write(path, parts):
             archive.writestr(item, payload.encode() if isinstance(payload, str) else payload)
 
 
+# The settings every package carries; a case that needs one more setting prepends it (schema order).
+SETTINGS_BODY = '<w:footnotePr><w:numFmt w:val="decimal"/></w:footnotePr><w:endnotePr><w:numFmt w:val="lowerRoman"/></w:endnotePr><w:compat><w:compatSetting w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="15"/></w:compat>'
+
 def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT):
     namespaces = f'xmlns:w="{W}" xmlns:r="{R}" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"'
     namespaces += namespaces_extra
@@ -348,7 +351,7 @@ def package(path, body, final_section=None, notes=None, image=False, namespaces_
         styles = styles_xml
     relations = [('rStyles', 'styles', 'styles.xml'), ('rSettings', 'settings', 'settings.xml')]
     overrides = [('document', 'document.main'), ('styles', 'styles'), ('settings', 'settings')]
-    parts = {'word/document.xml': f'<w:document {namespaces}><w:body>{body}{final_section or section()}</w:body></w:document>', 'word/styles.xml': styles, 'word/settings.xml': f'<w:settings xmlns:w="{W}"><w:footnotePr><w:numFmt w:val="decimal"/></w:footnotePr><w:endnotePr><w:numFmt w:val="lowerRoman"/></w:endnotePr><w:compat><w:compatSetting w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="15"/></w:compat></w:settings>'}
+    parts = {'word/document.xml': f'<w:document {namespaces}><w:body>{body}{final_section or section()}</w:body></w:document>', 'word/styles.xml': styles, 'word/settings.xml': f'<w:settings xmlns:w="{W}">{SETTINGS_BODY}</w:settings>'}
     for index, (kind, content) in enumerate(([story] if story else []) + (stories or [])):
         root = 'hdr' if kind == 'header' else 'ftr'
         parts[f'word/{kind}1.xml'] = f'<w:{root} xmlns:w="{W}">{content}</w:{root}>'
@@ -1189,6 +1192,38 @@ def generate():
             assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker,
                          'tolerancePt': 0.5} for marker in markers])
         if not control: cases[-1]['pdfTextNormalization'] = 'isolated-dot-leaders-v1'
+    # Docxodus #1269: one paragraph whose three tabs fall on automatic stops, under a 12-twip or a
+    # zero w:defaultTabStop, and a 720-twip control; the cases differ only in that value. The lead text
+    # runs past 1,200 twips, the hundredth 12-twip stop. A space before each tab keeps the words
+    # separate in PDF text extraction when a 12-twip stop leaves almost no gap.
+    interval_runs = run('TabLead observatory inventory ') + '<w:r><w:tab/></w:r>' + run('TabNorth ') + '<w:r><w:tab/></w:r>' + run('TabEast ') + '<w:r><w:tab/></w:r>' + run('TabSouth ') + run('Copper lens.')
+    interval_texts = ['TabLead observatory inventory', 'TabNorth', 'TabEast', 'TabSouth', 'Copper lens.']
+    # A correct 12-twip tab advances under 0.6pt, so position cannot tell it from a dropped one; that
+    # case catches a conversion failure and a half-inch fallback: each word must end before it would
+    # on the half-inch grid, and start no more than 3pt left of the reference. A zero interval has no
+    # automatic stops: Word for the web gives each tab no width (docs/results/default-tab-interval-word.md),
+    # while LibreOffice uses its 1.25cm default. The Word-adjudicated zero case requires each word to
+    # start no more than 3pt left of its zero-width position and at least 4pt before LibreOffice's
+    # 1.25cm stop (half-inch stops lie further right). Where on the fine grid, or how close to the
+    # preceding word, a word lands depends on the renderer's text measurement, which the raster score
+    # measures. The control follows the reference.
+    def interval_assertions(interval):
+        if interval == 720:
+            return [{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5}
+                    for marker in ('TabNorth', 'TabEast', 'TabSouth')]
+        if interval == 12:
+            return [{'type': 'marker-region', 'version': 2, 'marker': marker, 'occurrence': 1, 'page': 1, 'rect': [left, 60, right, 100]}
+                    for marker, left, right in [('TabNorth', 223, 297), ('TabEast', 273, 362), ('TabSouth', 316, 441)]]
+        return [{'type': 'marker-region', 'version': 2, 'marker': marker, 'occurrence': 1, 'page': 1, 'rect': [left, 60, right, 100], 'adjudicated': 'word'}
+                for marker, left, right in [('TabNorth', 223, 292), ('TabEast', 273, 355), ('TabSouth', 316, 433)]]
+    for case_id, interval, description in [
+            ('tabs-default-interval-12', 12, 'Three tabs on automatic stops with a 12-twip default tab interval (Docxodus #1269)'),
+            ('tabs-default-interval-0', 0, 'Three tabs on automatic stops with a zero default tab interval (Docxodus #1269)'),
+            ('tabs-default-interval-720-control', 720, 'Three tabs on automatic stops with the half-inch default tab interval (control)')]:
+        add(case_id, 'paragraphs', description, interval_texts,
+            para(props='<w:spacing w:after="0" w:line="240" w:lineRule="exact"/>', runs=interval_runs), styles_xml=tab_styles,
+            extra_parts={'word/settings.xml': f'<w:settings xmlns:w="{W}"><w:defaultTabStop w:val="{interval}"/>{SETTINGS_BODY}</w:settings>'},
+            assertions=interval_assertions(interval))
     # Original page-anchored footer frame and otherwise identical ordinary-flow control.
     frame_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="24"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="exact"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>'
     frame_section = section().replace('<w:sectPr>', '<w:sectPr><w:footerReference w:type="default" r:id="rStory"/>')
@@ -1481,7 +1516,7 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v50', 'version': 50, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v51', 'version': 51, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
