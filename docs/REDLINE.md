@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v12`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v13`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -189,3 +189,27 @@ These resolved outputs contain no revisions, so LibreOffice compares their loade
 against the authored calibration and expected output. Earlier declarations for property-only
 redlines are unchanged. The page rasters under `docs/results/pending-grid-columns/` are local
 diagnostics accompanying source-bound focused runs, not a full-suite score.
+
+## Refusing block insertion beside cells
+
+The `block-insert` operation calls the public session insertion API for a paragraph, horizontal
+rule or one-cell table. Its `blockInsert` declaration v1 names the operation, the first body
+anchor's kind (`p` or `tc`), before/after position and paragraph markdown. It saves the output
+before probing public undo availability. The mandatory `editOutcome` declares exact, typed
+success, error code, version delta and undo availability. Metric contract version 5 records
+this operation and observation; missing values and boolean/integer substitutions fail.
+
+Three original reproducer/control pairs cover cell anchors that cannot have block siblings
+and valid body-paragraph anchors. Refusal requires `AnchorWrongKind`, version delta zero, no
+undo entry, unchanged exact table geometry, zero revisions and matching document content.
+Controls require success, version delta one and an undo entry. The table control includes
+the API's documented separating paragraph between adjacent tables. The native adapter also
+leaves every source file untouched, checked by the existing package digest guards.
+
+Authored calibration validates independent expected packages and assertions; it does not
+claim to execute the candidate API. All six LibreOffice loaded-text comparisons apply.
+The labelled before/after page rasters and source-bound focused results are under
+`docs/results/block-insertion/`. LibreOffice may repair invalid input when displaying it;
+the schema and native outcome checks remain mandatory. These diagnostics do not report a
+full-suite score or a Word reference. All prior DOCX bytes and eligibility declarations remain
+unchanged; the PDF suite stays `core-v58`.

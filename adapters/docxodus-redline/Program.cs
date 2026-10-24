@@ -72,6 +72,32 @@ internal static class Program
             var diff = new DocxDiffSettings { AuthorForRevisions = author, DateTimeForRevisions = date };
             switch (operation)
             {
+                case "block-insert" when documents.Count == 1:
+                {
+                    var spec = settings["blockInsert"] as JsonObject ?? throw new InvalidDataException("Missing block insertion");
+                    if ((int?)spec["version"] != 1) throw new InvalidDataException("Unknown block insertion version");
+                    using var session = new DocxSession(documents[0].Document.DocumentByteArray);
+                    var kind = (string?)spec["anchorKind"];
+                    var anchor = session.Project().AnchorIndex.Values.First(a => a.Anchor.Scope == "body" && a.Anchor.Kind == kind).Anchor.Id;
+                    var position = (string?)spec["position"] == "before" ? Position.Before : Position.After;
+                    var version = session.Version;
+                    var edit = (string?)spec["operation"] switch
+                    {
+                        "paragraph" => session.InsertParagraph(anchor, position, (string?)spec["markdown"] ?? ""),
+                        "rule" => session.InsertHorizontalRule(anchor, position),
+                        "table" => session.InsertTable(anchor, position, 1, 1),
+                        _ => throw new InvalidDataException("Unknown block insertion operation"),
+                    };
+                    result = new WmlDocument("block-insert.docx", session.Save());
+                    response["blockInsertion"] = new JsonObject
+                    {
+                        ["success"] = edit.Success,
+                        ["errorCode"] = edit.Error?.Code.ToString(),
+                        ["versionDelta"] = session.Version - version,
+                        ["undoAvailable"] = session.Undo(),
+                    };
+                    break;
+                }
                 case "column-edit" when documents.Count == 1:
                 {
                     var spec = settings["columnEdit"] as JsonObject ?? throw new InvalidDataException("Missing column edit");

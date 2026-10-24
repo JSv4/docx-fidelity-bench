@@ -46,10 +46,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v12')
-        self.assertEqual(len(registry['cases']), 109)
+        self.assertEqual(registry['suite']['id'], 'redline-v13')
+        self.assertEqual(len(registry['cases']), 115)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1322, 1342, 1352)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1322, 1331, 1342, 1352)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -120,9 +120,9 @@ class AuthoredCalibration(unittest.TestCase):
     def test_authored_redlines_round_trip(self):
         for record in cases():
             package = load(record['authored'])
-            if record['operation'] in {'reject', 'column-edit'}:
+            if record['operation'] in {'reject', 'column-edit', 'block-insert'}:
                 self.assertEqual(revisions.view(package), revisions.view(load(record['expected']['output'])), record['id'])
-                if record['operation'] == 'column-edit':
+                if record['operation'] in {'column-edit', 'block-insert'}:
                     continue
                 tracked = load(record['inputs'][0])
                 rejected = revisions.resolve(tracked.story_parts(), 'reject')
@@ -463,6 +463,34 @@ class EngineSemantics(unittest.TestCase):
 
 
 class ScoringContract(unittest.TestCase):
+    def test_block_insertion_outcomes_are_mandatory_and_typed(self):
+        import shutil
+        record = case('redline-block-insert-paragraph')
+        def candidate(_adapter, _build, _case, output, _candidate):
+            shutil.copyfile(common.ROOT / record['authored']['path'], output)
+            return dict(response, status='ok')
+        expected = record['editOutcome']
+        mutants = [None, dict(expected, success=0), dict(expected, versionDelta=False),
+                   dict(expected, undoAvailable=0), dict(expected, errorCode=None),
+                   dict(expected, success=True, versionDelta=1, undoAvailable=True), expected]
+        for observed in mutants:
+            response = {} if observed is None else {'blockInsertion': observed}
+            with self.subTest(observed=observed), tempfile.TemporaryDirectory() as temp, \
+                    patch.object(redline, 'run_candidate', side_effect=candidate), \
+                    patch.object(redline, '_libreoffice_checks', return_value=[]), \
+                    patch.object(redline, 'validate_packages', side_effect=lambda _v, paths: {str(p): [] for p in paths}):
+                outcome = redline.score_case(record, Path(temp), 'docxodus', 'build', 'commit', {}, 'validator')
+                self.assertEqual(outcome['status'], 'measured')
+                self.assertEqual(outcome['score'], 100 if observed is expected else 0)
+
+    def test_block_insertion_declarations_reject_incompatible_results(self):
+        for key, value in [('success', 0), ('versionDelta', False), ('undoAvailable', 0), ('errorCode', None)]:
+            registry = common.read_json(redline.MANIFEST)
+            target = next(c for c in registry['cases'] if c['operation'] == 'block-insert')
+            target['editOutcome'][key] = value
+            with self.assertRaisesRegex(ValueError, 'block insertion'):
+                redline.validate_registry(registry)
+
     def test_resolved_column_operations_require_an_empty_public_registry(self):
         import shutil
         record = case('redline-pending-grid-plain-insert')
