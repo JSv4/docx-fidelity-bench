@@ -22,7 +22,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v15', 'version': 15}
+SUITE = {'id': 'redline-v16', 'version': 16}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -115,12 +115,16 @@ def zip_write(path, parts):
             archive.writestr(item, payload.encode() if isinstance(payload, str) else payload)
 
 
-def package(path, body, styles=None, header=None, comments=None, footnotes=None, settings_extra='', comments_extended=None, strict=False):
+def package(path, body, styles=None, header=None, comments=None, footnotes=None, settings_extra='', comments_extended=None, strict=False, people=None):
     """One minimal, valid WordprocessingML package. Optional story parts take literal XML."""
     relations = [('rStyles', 'styles', 'styles.xml'), ('rSettings', 'settings', 'settings.xml')]
     overrides = [('/word/document.xml', 'document.main'), ('/word/styles.xml', 'styles'), ('/word/settings.xml', 'settings')]
     refs = ''
     parts = {}
+    if people is not None:
+        parts['word/people.xml'] = f'<w15:people xmlns:w15="{W15}">{people}</w15:people>'
+        relations.append(('rPeople', 'http://schemas.microsoft.com/office/2011/relationships/people', 'people.xml'))
+        overrides.append(('/word/people.xml', 'people'))
     if header is not None:
         parts['word/header1.xml'] = f'<w:hdr {NAMESPACES}>{header}</w:hdr>'
         relations.append(('rHeader', 'header', 'header1.xml'))
@@ -165,6 +169,9 @@ def package(path, body, styles=None, header=None, comments=None, footnotes=None,
 # declared-ineligible comparison is not applied; the run fails as unmeasured if the calibration
 # disagrees with this table in either direction.
 LIBREOFFICE_INELIGIBLE = {
+    **{'redline-revision-owner-' + name: (('accepted', 'rejected'),
+       'LibreOffice 25.8.7.3 does not resolve the schema-valid authored insertion containing a deletion: accept retains and joins the proposal to the closing paragraph, and reject retains the proposal; raw insertion/deletion, people, schema and benchmark-markup round trips remain mandatory')
+       for name in ('namesake-account', 'unattributed-name')},
     **{'redline-table-column-widths-' + shape: (('accepted', 'rejected'),
        'LibreOffice 25.8.7.3 exposes zero revisions in the schema-valid authored table-property-only width edit; independent resolved widths, registry count and schema checks remain mandatory')
        for shape in ('full', 'partial')},
@@ -275,11 +282,95 @@ def generate():
     block_insertions(corpus)
     mixed_run_edits(corpus)
     tracked_column_gaps(corpus)
+    revision_ownership(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(registry, indent=2) + '\n')
     return registry
+
+
+def revision_ownership(corpus):
+    actor = 'Taylor'
+    account = 'S::taylor@summit.example::55555555-5555-5555-5555-555555555555'
+    other = 'S::taylor@valley.example::66666666-6666-6666-6666-666666666666'
+    identity = {'providerId': 'AD', 'userId': account}
+    before, proposal, after = 'Summit opening.', 'Summit proposed clause.', 'Summit closing.'
+
+    def people(author, user):
+        return (f'<w15:person w15:author={quoteattr(author)}><w15:presenceInfo w15:providerId="AD" '
+                f'w15:userId={quoteattr(user)}/></w15:person>') if user is not None else None
+
+    def body(content=None, mark=''):
+        return p(t(before)) + (p(content, mark=mark) if content is not None else '') + p(t(after))
+
+    for suffix, author, user, own, configure in [
+            ('namesake-account', actor, other, False, 'open'),
+            ('unattributed-name', actor, None, False, 'operation'),
+            ('upn-alias', 'Word Taylor', 'S::TAYLOR@SUMMIT.EXAMPLE::77777777-7777-7777-7777-777777777777', True, 'open'),
+            ('object-id-alias', 'Word Taylor', 'S::old@summit.example::55555555-5555-5555-5555-555555555555', True, 'operation'),
+            ('legacy-name-control', actor, other, True, 'open')]:
+        case_id = 'redline-revision-owner-' + suffix
+        rev = Revisions()
+        source_doc = dict(body=body(rev.ins(t(proposal), author), rev.mark('ins', author)), people=people(author, user))
+        source = corpus.file(case_id, 'source', **source_doc)
+        red = Revisions()
+        recorded = body() if own else body(red.ins(red.dele(t(proposal), actor), author), red.mark('ins', author) + red.mark('del', actor))
+        authored = corpus.file(case_id, 'authored-redline', body=recorded, people=people(author, user))
+        expected = corpus.file(case_id, 'resolved', body=body(), people=people(author, user))
+        assertions = [untracked(before, after), paragraph_count(2 if own else 3),
+                      {'type': 'people-identity', 'version': 1, 'scope': 'redline', 'author': author,
+                       'identities': [] if user is None else [{'providerId': 'AD', 'userId': user}]}]
+        if own:
+            assertions.append({'type': 'revision-count', 'version': 1, 'scope': 'redline', 'max': 0})
+        else:
+            assertions.append({'type': 'pending-insertion-deletion', 'version': 1, 'scope': 'redline',
+                               'author': author, 'deletedBy': actor, 'text': proposal})
+        legacy = suffix == 'legacy-name-control'
+        corpus.add(case_id, 'identity', 'control' if legacy else 'reproducer', 'JSv4/Docxodus#1317',
+                   'Delete a pending paragraph: ' + suffix.replace('-', ' '), 'revision-ownership',
+                   [dict(source, role='source')], {'accepted': expected, 'rejected': expected}, authored, assertions)
+        corpus.cases[-1]['revisionOwnership'] = {'version': 1, 'author': actor, 'identities': None if legacy else [identity],
+            'configure': configure, 'action': 'delete-block', 'paragraphIndex': 1, 'text': '', 'queryAuthor': None if legacy else author}
+        if not legacy:
+            corpus.cases[-1]['authorNameStatus'] = {'version': 1, 'before': 'own' if own else 'taken', 'after': 'own' if own else 'taken'}
+
+    # A free name is registered only by the first attributed revision or comment. Expected
+    # documents and markup are literal declarations, never copied from a candidate's output.
+    comment_styles = styles_part(
+        '<w:style w:type="paragraph" w:styleId="CommentText"><w:name w:val="annotation text"/><w:basedOn w:val="Normal"/></w:style>'
+        '<w:style w:type="character" w:styleId="CommentReference"><w:name w:val="annotation reference"/></w:style>')
+    for action, suffix in [('replace-text', 'first-revision'), ('add-comment', 'first-comment')]:
+        case_id = 'redline-revision-owner-' + suffix
+        plain = p(t(before)) + p(t(proposal)) + p(t(after))
+        source = corpus.file(case_id, 'source', body=plain, styles=comment_styles)
+        metadata = people(actor, account)
+        if action == 'replace-text':
+            rev = Revisions()
+            recorded = p(rev.dele(t(before), actor) + rev.ins(t('Summit revised opening.'), actor)) + p(t(proposal)) + p(t(after))
+            accepted_doc = dict(body=p(t('Summit revised opening.')) + p(t(proposal)) + p(t(after)))
+            rejected_doc = dict(body=plain)
+            authored_doc = dict(body=recorded)
+            text = 'Summit revised opening.'
+        else:
+            text = 'Summit account note.'
+            reference = '<w:r><w:rPr><w:rStyle w:val="CommentReference"/></w:rPr><w:commentReference w:id="1"/></w:r>'
+            marked = p(comment_marks('rangeStart', 1) + t(before) + comment_marks('rangeEnd', 1) + reference) + p(t(proposal)) + p(t(after))
+            note = (f'<w:comment w:id="1" w:author="{actor}" w:date="{DATE}">'
+                    + p('<w:r><w:rPr><w:rStyle w:val="CommentReference"/></w:rPr><w:annotationRef/></w:r>' + t(text),
+                        props='<w:pStyle w:val="CommentText"/>') + '</w:comment>')
+            accepted_doc = rejected_doc = authored_doc = dict(body=marked, comments=note)
+        accepted = corpus.file(case_id, 'accepted', **accepted_doc, styles=comment_styles, people=metadata)
+        rejected = corpus.file(case_id, 'rejected', **rejected_doc, styles=comment_styles, people=metadata)
+        authored = corpus.file(case_id, 'authored-redline', **authored_doc, styles=comment_styles, people=metadata)
+        corpus.add(case_id, 'identity', 'reproducer', 'JSv4/Docxodus#1317',
+                   'Register a free reviewer name on its ' + suffix.replace('-', ' '), 'revision-ownership',
+                   [dict(source, role='source')], {'accepted': accepted, 'rejected': rejected}, authored,
+                   [paragraph_count(3), {'type': 'people-identity', 'version': 1, 'scope': 'redline', 'author': actor, 'identities': [identity]}])
+        corpus.cases[-1]['revisionOwnership'] = {'version': 1, 'author': actor, 'identities': [identity],
+            'configure': 'operation' if action == 'add-comment' else 'open', 'action': action,
+            'paragraphIndex': 0, 'text': text, 'queryAuthor': actor}
+        corpus.cases[-1]['authorNameStatus'] = {'version': 1, 'before': 'free', 'after': 'own'}
 
 
 def semantic_limits(corpus):

@@ -72,6 +72,60 @@ internal static class Program
             var diff = new DocxDiffSettings { AuthorForRevisions = author, DateTimeForRevisions = date };
             switch (operation)
             {
+                case "revision-ownership" when documents.Count == 1:
+                {
+                    var spec = settings["revisionOwnership"] as JsonObject ?? throw new InvalidDataException("Missing ownership edit");
+                    if ((int?)spec["version"] != 1) throw new InvalidDataException("Unknown ownership version");
+                    var actor = (string?)spec["author"] ?? throw new InvalidDataException("Missing reviewer name");
+                    var sessionSettings = new DocxSessionSettings { RevisionAuthor = actor, TrackedChanges = TrackedChangeMode.RenderInline };
+                    // Reflection binds only the new public account DTO/API. It keeps this adapter
+                    // compilable against pre-feature candidates; missing support is a measured
+                    // operation failure, never a build failure or name-based emulation.
+                    Array? identities = null;
+                    if (spec["identities"] is JsonArray records)
+                    {
+                        var property = typeof(DocxSessionSettings).GetProperty("RevisionIdentities")
+                            ?? throw new NotSupportedException("Candidate has no revision identity setting");
+                        var itemType = property.PropertyType.GetGenericArguments().Single();
+                        identities = Array.CreateInstance(itemType, records.Count);
+                        for (var i = 0; i < records.Count; i++)
+                            identities.SetValue(Activator.CreateInstance(itemType,
+                                (string?)records[i]?["providerId"], (string?)records[i]?["userId"]), i);
+                        if ((string?)spec["configure"] == "open") property.SetValue(sessionSettings, identities);
+                    }
+                    using var session = new DocxSession(documents[0].Document.DocumentByteArray, sessionSettings);
+                    if ((string?)spec["configure"] == "operation")
+                    {
+                        var setter = typeof(DocxSession).GetMethod("SetRevisionIdentities")
+                            ?? throw new NotSupportedException("Candidate has no revision identity configuration operation");
+                        setter.Invoke(session, new object?[] { identities });
+                    }
+                    var queryAuthor = (string?)spec["queryAuthor"];
+                    JsonObject QueryName()
+                    {
+                        var query = typeof(DocxSession).GetMethod("GetRevisionAuthorNameStatus")
+                            ?? throw new NotSupportedException("Candidate has no reviewer name status query");
+                        return new JsonObject { ["author"] = queryAuthor,
+                            ["status"] = query.Invoke(session, new object?[] { queryAuthor })?.ToString()?.ToLowerInvariant() };
+                    }
+                    var before = queryAuthor is null ? null : QueryName();
+                    var paragraphs = session.Project().AnchorIndex.Values.Where(a => a.Anchor.Scope == "body" && a.Anchor.Kind == "p").ToArray();
+                    var index = (int?)spec["paragraphIndex"] ?? throw new InvalidDataException("Missing paragraph index");
+                    var anchor = paragraphs[index].Anchor.Id;
+                    var text = (string?)spec["text"] ?? "";
+                    var edit = (string?)spec["action"] switch
+                    {
+                        "delete-block" => session.DeleteBlock(anchor),
+                        "replace-text" => session.ReplaceText(anchor, text),
+                        "add-comment" => session.AddComment(anchor, null, actor, text, date: DateTime.Parse(date, null, System.Globalization.DateTimeStyles.AdjustToUniversal)),
+                        _ => throw new InvalidDataException("Unknown ownership edit action"),
+                    };
+                    if (!edit.Success) throw new InvalidOperationException(edit.Error?.Message ?? "Ownership edit failed");
+                    if (queryAuthor is not null)
+                        response["revisionAuthorNameStatus"] = new JsonObject { ["before"] = before, ["after"] = QueryName() };
+                    result = new WmlDocument("revision-ownership.docx", session.Save());
+                    break;
+                }
                 case "replace-span" when documents.Count == 1:
                 {
                     var spec = settings["spanEdit"] as JsonObject ?? throw new InvalidDataException("Missing span edit");

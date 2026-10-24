@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v15`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v16`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -270,3 +270,39 @@ native outcome and before/after registry counts. LibreOffice exports that saved 
 it is not performing the native review. Hashes, exact sources and focused run contracts are
 recorded alongside the sheets. These diagnostics do not claim a full-suite score or Word reference.
 All previous DOCX bytes are unchanged and the PDF suite remains `core-v58`.
+
+### Reviewer accounts and namesakes (Docxodus #1317)
+
+`redline-v16` adds seven original Summit cases: another account with the same display name,
+that name already used without an account, AD principal-name and object-id aliases under a
+different name, the legacy name-only control, and a free name's first tracked edit or comment.
+The PDF suite is unchanged at `core-v62`. All earlier DOCX bytes remain unchanged.
+
+The `revision-ownership` operation takes one source and a version-1 `revisionOwnership`
+declaration: reviewer `author`, nullable `identities` (`providerId`/`userId` records),
+`configure` (`open` or `operation`), `action` (`delete-block`, `replace-text` or `add-comment`),
+zero-based `paragraphIndex`, literal `text` and nullable `queryAuthor`. A non-null query author
+requires version-1 `authorNameStatus` expectations for `before` and `after`, each `free`, `own`
+or `taken`. The adapter must return the actual public query envelopes for both checkpoints.
+The legacy control opts out of accounts and of the new query, so it remains executable on an
+older candidate.
+
+Metric contract version 8 adds `people-identity` and `pending-insertion-deletion` assertions,
+both version 1 and scoped to the raw redline. The first follows the main part's people
+relationship and checks every account recorded for the declared name exactly, including
+absence, duplicates and ambiguous presence records. The second requires exactly one matching
+tracked deletion, with the declared author and text, inside the original author's insertion.
+All ordinary paragraph, untracked text, schema and independent accept/reject checks still apply.
+
+Both accepting and rejecting **all** revisions remove an originally pending inserted paragraph
+that has subsequently been deleted. These round trips alone cannot prove that the counterparty's
+proposal survived as reviewable markup. The retained-insertion assertion is therefore mandatory
+on the two foreign-name cases; a negative test demonstrates that erasing the paragraph can pass
+both round trips while failing that assertion. The people assertion independently detects a
+missing identity claim even though semantic view version 1 does not include reviewer metadata.
+
+The native adapter uses public reflection only to bind the new account DTO, setting and methods,
+so the same adapter compiles against pre-feature candidates. Missing requested account support
+is an operation failure (measured score zero), rather than a build failure or emulation by name.
+No Word behavior is inferred from these explicit feature contracts. Screenshots are review
+evidence; only recorded independent round-trip and schema measurements support redline scores.

@@ -18,16 +18,16 @@ import signal
 import subprocess
 from pathlib import Path
 
-from . import revisions
+from . import revisions, revision_ownership
 from .redline_build import dotnet as _dotnet, validate_packages, verify_docxodus, verify_validator
 from .common import ROOT, contained, digest, execute, identity, read_json, write_json
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
-OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}}
+OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'revision-ownership': 1}
+ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables'}
-SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}}
-CONTRACT = {'version': 7, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}}
+CONTRACT = {'version': 8, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -36,8 +36,9 @@ CONTRACT = {'version': 7, 'view': revisions.VIEW_VERSION, 'engines': ['bench-mar
             'revisionRegistry': 'declared table operations must report the public registry count and match independent resolved table assertions',
             'blockInsertion': 'declared insertion outcomes require typed success, error, version change and undo availability',
             'spanEditing': 'public span editing must preserve text and inline-marker order through both independent revision resolvers',
-            'columnReview': 'v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry'}
-HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'bench/redline_build.py']
+            'columnReview': 'v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry',
+            'revisionOwnership': 'account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips'}
+HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'bench/redline_build.py', 'bench/revision_ownership.py']
 
 
 # ---------------------------------------------------------------------------------------------
@@ -63,7 +64,7 @@ def validate_registry(registry=None):
         operation = case['operation']
         if operation not in OPERATIONS or (OPERATIONS[operation] and len(case['inputs']) != OPERATIONS[operation]) or (operation == 'consolidate' and len(case['inputs']) < 3):
             raise ValueError('Invalid operation or input count: ' + case['id'])
-        expected = {'compare': {'accepted', 'rejected'}, 'consolidate': {'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'accepted', 'rejected'}}[operation]
+        expected = {'compare': {'accepted', 'rejected'}, 'consolidate': {'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'accepted', 'rejected'}, 'revision-ownership': {'accepted', 'rejected'}}[operation]
         if set(case['expected']) != expected or case['kind'] not in ('reproducer', 'control', 'identity'):
             raise ValueError('Invalid expectation or kind: ' + case['id'])
         declared = case.get('libreoffice', {})
@@ -129,6 +130,9 @@ def validate_registry(registry=None):
                     or type(spec['length']) is not int or spec['length'] <= 0
                     or not isinstance(spec['replacement'], str)):
                 raise ValueError('Invalid span edit declaration: ' + case['id'])
+        elif operation == 'revision-ownership':
+            if not revision_ownership.valid_spec(case.get('revisionOwnership'), case.get('authorNameStatus')):
+                raise ValueError('Invalid revision ownership declaration: ' + case['id'])
         elif 'tableWidths' in case or 'revisionRegistry' in case or 'columnEdit' in case:
 
             raise ValueError('Unexpected table width operation data: ' + case['id'])
@@ -138,6 +142,8 @@ def validate_registry(registry=None):
             raise ValueError('Unexpected span edit data: ' + case['id'])
         if operation != 'block-insert' and ('blockInsert' in case or 'editOutcome' in case):
             raise ValueError('Unexpected block insertion data: ' + case['id'])
+        if operation != 'revision-ownership' and ('revisionOwnership' in case or 'authorNameStatus' in case):
+            raise ValueError('Unexpected revision ownership data: ' + case['id'])
         if 'semanticPreflight' in case:
             if (operation != 'compare' or case['category'] != 'identity'
                     or case['semanticPreflight'] != {'version': 1, 'limits': 'raw-boundaries', 'changeCount': 0}
@@ -159,6 +165,9 @@ def validate_registry(registry=None):
                              and all(type(v) is int and v > 0 for v in row) for row in a['cells'])
                          and type(a.get('table')) is int and a['table'] > 0,
                      'table-state': lambda a: a['scope'] == 'output' and valid_table_state(a.get('state')),
+                     'people-identity': lambda a: a['scope'] == 'redline' and isinstance(a.get('author'), str) and bool(a['author'])
+                         and revision_ownership.valid_identities(a.get('identities')),
+                     'pending-insertion-deletion': lambda a: a['scope'] == 'redline' and all(isinstance(a.get(k), str) and bool(a[k]) for k in ('author', 'deletedBy', 'text')),
                      'comment-threads': lambda a: a['scope'] == 'redline' and isinstance(a.get('threads'), list) and all(
                          isinstance(x, list) and len(x) == 2 and all(isinstance(y, str) and y for y in x) for x in a['threads'])}[kind]
             if not valid(assertion):
@@ -286,6 +295,8 @@ def run_candidate(adapter, build, case, output, candidate, timeout=300):
         request['settings']['blockInsert'] = case['blockInsert']
     if 'spanEdit' in case:
         request['settings']['spanEdit'] = case['spanEdit']
+    if 'revisionOwnership' in case:
+        request['settings']['revisionOwnership'] = case['revisionOwnership']
     response = json.loads(execute([_dotnet(), str(Path(build).resolve() / 'bin' / 'DocxBenchRedline.dll')], input=json.dumps(request), timeout=timeout))
     if response.get('protocol') != 1 or response.get('status') not in ('ok', 'failed', 'unmeasured'):
         raise ValueError('Invalid redline adapter response')
@@ -315,7 +326,12 @@ def _assertion(assertion, package, resolved):
     kind, scope = assertion['type'], assertion['scope']
     parts = resolved.get(scope)
     check = {'name': 'assertion-' + kind, 'declaration': assertion}
-    if kind == 'table-state':
+    if kind == 'people-identity':
+        observed = revision_ownership.people_identities(package, assertion['author'])
+        check.update(passed=observed == assertion['identities'], observed=observed)
+    elif kind == 'pending-insertion-deletion':
+        check.update(passed=revision_ownership.retained_deletion(package, assertion['author'], assertion['deletedBy'], assertion['text']))
+    elif kind == 'table-state':
         roots = parts if parts is not None else package.story_parts()
         tables = list(roots[package.main].iter(revisions.w('tbl')))
         def number(element, attribute, default=None):
@@ -466,6 +482,10 @@ def score_case(case, folder, adapter, build, candidate, env, validator):
             outcome['checks'].append({'name': 'semantic-preflight',
                                       'passed': observed == expected_counts and all(type(v) is int for v in observed.values()),
                                       'expected': expected_counts, 'observed': observed})
+        if 'authorNameStatus' in case:
+            observed = (revision_ownership.name_status_check(case, None)['expected'] if adapter == 'authored'
+                        else response.get('revisionAuthorNameStatus'))
+            outcome['checks'].append(revision_ownership.name_status_check(case, observed))
         if 'editOutcome' in case:
             expected_outcome = case['editOutcome']
             observed = expected_outcome if adapter == 'authored' else response.get('blockInsertion')
