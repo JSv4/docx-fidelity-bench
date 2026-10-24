@@ -73,3 +73,8 @@ by `bench/redline_fixtures.py`. Survey marker labels, grid histories, shading, r
 expected resolved documents are generated here. No product fixtures or third-party document
 content are imported. The labelled sheets under `docs/results/pending-grid-columns/` show
 LibreOffice 25.8.7.3 PDF rasters of candidate outputs from these original cases.
+
+The block-insertion cases for Docxodus #1331 are original literal-text OOXML authored by
+`bench/redline_fixtures.py`. Harbor labels, the shaded table and independent expected outputs
+are generated here. No product fixture or third-party content is imported. The labelled sheets
+under `docs/results/block-insertion/` are LibreOffice 25.8.7.3 PDF rasters of candidate outputs.

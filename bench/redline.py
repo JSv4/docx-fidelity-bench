@@ -23,17 +23,18 @@ from .redline_build import dotnet as _dotnet, validate_packages, verify_docxodus
 from .common import ROOT, contained, digest, execute, identity, read_json, write_json
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
-OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1}
+OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1}
 ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables'}
-SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}}
-CONTRACT = {'version': 4, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}}
+CONTRACT = {'version': 5, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
             'validity': 'no OpenXmlValidator finding (id, part, description) occurs more often than in any input',
             'semanticPreflight': 'declared identity cases must report zero changes at raw limits with and without the package supplement',
-            'revisionRegistry': 'declared table operations must report the public registry count and match independent resolved table assertions'}
+            'revisionRegistry': 'declared table operations must report the public registry count and match independent resolved table assertions',
+            'blockInsertion': 'declared insertion outcomes require typed success, error, version change and undo availability'}
 HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'bench/redline_build.py']
 
 
@@ -60,7 +61,7 @@ def validate_registry(registry=None):
         operation = case['operation']
         if operation not in OPERATIONS or (OPERATIONS[operation] and len(case['inputs']) != OPERATIONS[operation]) or (operation == 'consolidate' and len(case['inputs']) < 3):
             raise ValueError('Invalid operation or input count: ' + case['id'])
-        expected = {'compare': {'accepted', 'rejected'}, 'consolidate': {'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'accepted', 'rejected'}, 'column-edit': {'output'}}[operation]
+        expected = {'compare': {'accepted', 'rejected'}, 'consolidate': {'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}}[operation]
         if set(case['expected']) != expected or case['kind'] not in ('reproducer', 'control', 'identity'):
             raise ValueError('Invalid expectation or kind: ' + case['id'])
         declared = case.get('libreoffice', {})
@@ -94,8 +95,23 @@ def validate_registry(registry=None):
                     or case.get('revisionRegistry') != {'version': 1, 'count': 0}
                     or type(case['revisionRegistry']['count']) is not int):
                 raise ValueError('Invalid column edit declaration: ' + case['id'])
+        elif operation == 'block-insert':
+            spec = case.get('blockInsert', {})
+            observed = case.get('editOutcome', {})
+            success = observed.get('success')
+            if (set(spec) != {'version', 'operation', 'anchorKind', 'position', 'markdown'} or spec['version'] != 1
+                    or spec['operation'] not in {'paragraph', 'rule', 'table'} or spec['anchorKind'] not in {'p', 'tc'}
+                    or spec['position'] not in {'before', 'after'} or not isinstance(spec['markdown'], str)
+                    or type(success) is not bool
+                    or observed != {'success': success, 'errorCode': None if success else 'AnchorWrongKind',
+                                    'versionDelta': 1 if success else 0, 'undoAvailable': success}
+                    or type(observed.get('versionDelta')) is not int or type(observed.get('undoAvailable')) is not bool):
+                raise ValueError('Invalid block insertion declaration: ' + case['id'])
         elif 'tableWidths' in case or 'revisionRegistry' in case or 'columnEdit' in case:
+
             raise ValueError('Unexpected table width operation data: ' + case['id'])
+        if operation != 'block-insert' and ('blockInsert' in case or 'editOutcome' in case):
+            raise ValueError('Unexpected block insertion data: ' + case['id'])
         if 'semanticPreflight' in case:
             if (operation != 'compare' or case['category'] != 'identity'
                     or case['semanticPreflight'] != {'version': 1, 'limits': 'raw-boundaries', 'changeCount': 0}
@@ -121,7 +137,7 @@ def validate_registry(registry=None):
                          isinstance(x, list) and len(x) == 2 and all(isinstance(y, str) and y for y in x) for x in a['threads'])}[kind]
             if not valid(assertion):
                 raise ValueError('Invalid assertion declaration: ' + case['id'] + ' ' + kind)
-        if operation in {'reject', 'column-edit'} and {'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0} not in case['assertions']:
+        if operation in {'reject', 'column-edit', 'block-insert'} and {'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0} not in case['assertions']:
             raise ValueError('A reject case must require an output without revisions: ' + case['id'])
     return registry
 
@@ -240,6 +256,8 @@ def run_candidate(adapter, build, case, output, candidate, timeout=300):
         request['settings']['tableWidths'] = case['tableWidths']
     if 'columnEdit' in case:
         request['settings']['columnEdit'] = case['columnEdit']
+    if 'blockInsert' in case:
+        request['settings']['blockInsert'] = case['blockInsert']
     response = json.loads(execute([_dotnet(), str(Path(build).resolve() / 'bin' / 'DocxBenchRedline.dll')], input=json.dumps(request), timeout=timeout))
     if response.get('protocol') != 1 or response.get('status') not in ('ok', 'failed', 'unmeasured'):
         raise ValueError('Invalid redline adapter response')
@@ -359,7 +377,7 @@ def score_case(case, folder, adapter, build, candidate, env, validator):
     outcome = {'id': case['id'], 'category': case['category'], 'kind': case['kind'], 'issue': case['issue'],
                'operation': case['operation'], 'status': 'unmeasured', 'checks': []}
     inputs = [contained(ROOT, i['path']) for i in case['inputs']]
-    output = folder / ('candidate-output.docx' if case['operation'] in {'reject', 'column-edit'} else 'candidate-redline.docx')
+    output = folder / ('candidate-output.docx' if case['operation'] in {'reject', 'column-edit', 'block-insert'} else 'candidate-redline.docx')
     try:
         try:
             response = run_candidate(adapter, build, case, output, candidate)
@@ -387,7 +405,7 @@ def score_case(case, folder, adapter, build, candidate, env, validator):
             if digest(path) != record['sha256']:
                 raise ValueError('Benchmark fixture changed during the run: ' + record['path'])
         resolved = {'redline': None, 'output': None}
-        if case['operation'] in {'reject', 'column-edit'}:
+        if case['operation'] in {'reject', 'column-edit', 'block-insert'}:
             outcome['checks'].append(_comparison('markup-output', revisions.view(revisions.Package(str(expected['output']))), revisions.view(package)))
         else:
             for mode, key in (('accept', 'accepted'), ('reject', 'rejected')):
@@ -420,6 +438,13 @@ def score_case(case, folder, adapter, build, candidate, env, validator):
             outcome['checks'].append({'name': 'semantic-preflight',
                                       'passed': observed == expected_counts and all(type(v) is int for v in observed.values()),
                                       'expected': expected_counts, 'observed': observed})
+        if 'editOutcome' in case:
+            expected_outcome = case['editOutcome']
+            observed = expected_outcome if adapter == 'authored' else response.get('blockInsertion')
+            typed = (isinstance(observed, dict) and type(observed.get('success')) is bool
+                     and type(observed.get('versionDelta')) is int and type(observed.get('undoAvailable')) is bool)
+            outcome['checks'].append({'name': 'block-insertion-outcome', 'passed': typed and observed == expected_outcome,
+                                      'expected': expected_outcome, 'observed': observed})
         if 'revisionRegistry' in case:
             expected_count = case['revisionRegistry']['count']
             observed_count = expected_count if adapter == 'authored' else response.get('revisionRegistryCount')
@@ -452,7 +477,7 @@ def _libreoffice_checks(case, folder, env, output, authored, expected):
         names[key] = len(items)
         items.append({'key': key, 'input': str(source), 'operation': operation, 'output': str(target)})
         return target
-    if case['operation'] in {'reject', 'column-edit'}:
+    if case['operation'] in {'reject', 'column-edit', 'block-insert'}:
         pairs = [('output', item('expected-output', expected['output'], 'load'), item('authored-output', authored, 'load'), item('candidate-output', output, 'load'), None)]
     else:
         pairs = []

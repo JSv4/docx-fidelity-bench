@@ -22,7 +22,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v12', 'version': 12}
+SUITE = {'id': 'redline-v13', 'version': 13}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -272,6 +272,7 @@ def generate():
     semantic_limits(corpus)
     column_widths(corpus)
     pending_grid_columns(corpus)
+    block_insertions(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -341,6 +342,36 @@ def column_widths(corpus):
                         assertion(values, 'accepted'), assertion(original if tracked else values, 'rejected')])
             corpus.cases[-1]['tableWidths'] = {'version': 1, 'widths': values, 'tracked': tracked}
             corpus.cases[-1]['revisionRegistry'] = {'version': 1, 'count': 1 if tracked else 0}
+
+
+def block_insertions(corpus):
+    def table(text):
+        return ('<w:tbl><w:tblPr/><w:tblGrid><w:gridCol w:w="2000"/></w:tblGrid><w:tr><w:tc>'
+                '<w:tcPr><w:tcW w:w="2000" w:type="dxa"/><w:shd w:val="clear" w:fill="D9EAD3"/></w:tcPr>'
+                + p(t(text)) + '</w:tc></w:tr></w:tbl>')
+    opening, original, closing = p(t('Harbor opening.')), table('Harbor cell.'), p(t('Harbor closing.'))
+    state = {'grid': [2000], 'rows': [{'before': 0, 'after': 0, 'height': None,
+             'cells': [{'span': 1, 'width': 2000, 'type': 'dxa', 'fill': 'D9EAD3'}]}]}
+    for operation in ('paragraph', 'rule', 'table'):
+        for success, kind, suffix in [(False, 'reproducer', ''), (True, 'control', '-control')]:
+            case_id = 'redline-block-insert-' + operation + suffix
+            source = corpus.file(case_id, 'source', body=opening + original + closing)
+            # The controls insert after the first body paragraph, before the existing table.
+            extra = p(t('Harbor register note.')) if operation == 'paragraph' else p('') if operation == 'rule' else table('') + p('')
+            body = opening + (extra if success else '') + original + closing
+            expected = corpus.file(case_id, 'expected', body=body)
+            authored = corpus.file(case_id, 'authored-output', body=body)
+            assertions = [{'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0},
+                          {'type': 'paragraph-count', 'version': 1, 'scope': 'output', 'story': 'body', 'count': (5 if operation == 'table' else 4) if success else 3}]
+            if not success:
+                assertions.append({'type': 'table-state', 'version': 1, 'scope': 'output', 'state': state})
+            corpus.add(case_id, 'tables', kind, 'JSv4/Docxodus#1331',
+                       'Insert a ' + operation + ' beside ' + ('a valid body paragraph' if success else 'a cell anchor without block siblings'),
+                       'block-insert', [dict(source, role='source')], {'output': expected}, authored, assertions)
+            corpus.cases[-1]['blockInsert'] = {'version': 1, 'operation': operation,
+                'anchorKind': 'p' if success else 'tc', 'position': 'after', 'markdown': 'Harbor register note.'}
+            corpus.cases[-1]['editOutcome'] = {'success': success, 'errorCode': None if success else 'AnchorWrongKind',
+                                             'versionDelta': 1 if success else 0, 'undoAvailable': success}
 
 
 def pending_grid_columns(corpus):
