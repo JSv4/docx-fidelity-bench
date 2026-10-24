@@ -1061,9 +1061,8 @@ def generate():
                              'rect': [60, 60, 540, 790]},
                             {'type': 'marker-reference-position', 'version': 1, 'marker': 'Geometry01', 'tolerancePt': 0.5},
                             {'type': 'marker-reference-position', 'version': 1, 'marker': 'Geometry12', 'tolerancePt': 0.5}])
-    # Docxodus #1168: exact-height rows that hide a whole paragraph or have zero height. Hidden
-    # content carries no visible tokens, so the inventory does not depend on how a provider writes
-    # clipped glyphs into the PDF text layer.
+    # Positive exact heights keep #1168's clipping. The unchanged exact-zero inputs below use
+    # Word's content-height behavior (#1339); their marker positions are checked against references.
     exact_borders = '<w:tblBorders>' + ''.join(f'<w:{side} w:val="single" w:sz="6" w:color="444444"/>' for side in ('top', 'left', 'bottom', 'right', 'insideH', 'insideV')) + '</w:tblBorders>'
     def exact_table(rows, borders=exact_borders):
         return ('<w:tbl><w:tblPr><w:tblW w:w="7200" w:type="dxa"/>' + borders + '<w:tblLayout w:type="fixed"/></w:tblPr>'
@@ -1102,6 +1101,62 @@ def generate():
             texts, body, sect=section().replace('w:footer="720"', 'w:footer="720" w:gutter="0"'), styles_xml=row_styles,
             assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': 'ZeroAfter', 'tolerancePt': 0.5}]
             + ([] if only else [{'type': 'marker-reference-position', 'version': 1, 'marker': 'Zero03', 'tolerancePt': 0.5}]))
+    # Docxodus #1339: reuse the original Word-adjudicated row fixtures from 7851026. Times
+    # New Roman throughout, so a Word capture keeps the declared family and can be eligible.
+    rg_font = 'Times New Roman'
+    rg_styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{rg_font}" w:hAnsi="{rg_font}" w:cs="{rg_font}"/>'
+                 '<w:sz w:val="22"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl w:val="0"/><w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/>'
+                 '</w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
+    rg_sect = section().replace('w:footer="720"', 'w:footer="720" w:gutter="0"')
+    def rg_borders(on):
+        sides = ('top', 'left', 'bottom', 'right', 'insideH', 'insideV')
+        if on:
+            return '<w:tblBorders>' + ''.join(f'<w:{s} w:val="single" w:sz="8" w:space="0" w:color="000000"/>' for s in sides) + '</w:tblBorders>'
+        return '<w:tblBorders>' + ''.join(f'<w:{s} w:val="nil"/>' for s in sides) + '</w:tblBorders>'
+    def rg_cell(body, width):
+        return f'<w:tc><w:tcPr><w:tcW w:w="{width}" w:type="dxa"/></w:tcPr>{body}</w:tc>'
+    def rg_row(cells, height=None, rule='exact', header=False):
+        props = '' if height is None else (f'<w:trHeight w:hRule="{rule}"/>' if height == 'absent' else f'<w:trHeight w:val="{height}" w:hRule="{rule}"/>')
+        props += '<w:tblHeader/>' if header else ''
+        return '<w:tr>' + ('<w:trPr>' + props + '</w:trPr>' if props else '') + ''.join(cells) + '</w:tr>'
+    def rg_table(rows, widths, bordered, margins):
+        return (f'<w:tbl><w:tblPr><w:tblW w:w="{sum(widths)}" w:type="dxa"/>{rg_borders(bordered)}<w:tblLayout w:type="fixed"/>'
+                '<w:tblCellMar>' + ''.join(f'<w:{s} w:w="{m}" w:type="dxa"/>' for s, m in zip(('top', 'left', 'bottom', 'right'), margins)) + '</w:tblCellMar>'
+                '</w:tblPr><w:tblGrid>' + ''.join(f'<w:gridCol w:w="{w}"/>' for w in widths) + '</w:tblGrid>' + ''.join(rows) + '</w:tbl>')
+    side_margins, no_margins = ('0', '108', '0', '108'), ('0', '0', '0', '0')
+    def rg_add(case_id, description, texts, body, sect=rg_sect, clipped=None):
+        markers = [t.split()[0] for t in texts]
+        add(case_id, 'tables', description, texts, body, sect=sect, styles_xml=rg_styles, font=rg_font,
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': m, 'tolerancePt': 0.5} for m in markers])
+        if clipped:
+            cases[-1]['clippedTokens'] = clipped
+    # #1339: an exact row of height 0 (or with no height stated) is laid out at its content height;
+    # the control's positive exact heights, down to one twip, still clip.
+    def zero_case(case_id, description, variants):
+        texts, body, clipped = [], '', {}
+        for label, height, bordered, lines, hidden in variants:
+            def two(prefix, count, line=None):
+                cells = []
+                for side in ('L', 'R'):
+                    words = [f'{label}{prefix}{i}{side}' for i in range(1, count + 1)]
+                    content = ''.join(para(w, exact(line)) if line else para(w) for w in words) if count else para(runs=run(' '))
+                    cells.append(rg_cell(content, 4000))
+                    texts.extend(words[:1] if hidden else words)
+                    if hidden:
+                        clipped.update({w: 1 for w in words[1:]})
+                return cells
+            texts.append(f'{label}Before')
+            rows = [rg_row(two('Top', 1), 360, 'atLeast'), rg_row(two('Mid', lines, 320 if hidden else None), height),
+                    rg_row(two('Bot', 1), 360, 'atLeast')]
+            texts.append(f'{label}After')
+            body += para(f'{label}Before') + rg_table(rows, [4000, 4000], bordered, side_margins) + para(f'{label}After')
+        rg_add(case_id, description, texts, body, clipped=clipped or None)
+    zero_case('tables-row-height-exact-zero-content-times-new-roman',
+              'Exact rows of height 0 or with no height, one and three lines, borderless and bordered, between atLeast rows (Docxodus #1339)',
+              [('Alpha', 0, False, 1, False), ('Bravo', 0, True, 1, False), ('Charlie', 0, False, 3, False), ('Kilo', 'absent', True, 1, False)])
+    zero_case('tables-row-height-exact-tiny-control-times-new-roman',
+              'Control: exact rows of one twip (empty) and eight points (three lines, two hidden) clip to their height (Docxodus #1339)',
+              [('Echo', 1, False, 0, False), ('Foxtrot', 1, True, 0, False), ('Lima', 160, True, 3, True)])
     # Docxodus #1171: a repeated header row with exact and atLeast rules, and a bordered paragraph
     # inside an exact row. Header text repeats once per page, so it is counted, not used as a marker.
     for rule in ('exact', 'atLeast'):
@@ -1920,7 +1975,7 @@ def generate():
                                        'tokens': ['Check', 'OakStoryNote']}]
         if mixed: cases[-1]['htmlAssertions'].append({'type': 'marker-readable', 'version': 1, 'marker': 'OakBodyPoint',
                                                     'tokens': ['Review', 'OakBodyPoint']})
-    registry = {'schema': 1, 'suite': {'id': 'core-v62', 'version': 62, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v63', 'version': 63, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
