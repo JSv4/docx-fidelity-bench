@@ -78,3 +78,9 @@ The block-insertion cases for Docxodus #1331 are original literal-text OOXML aut
 `bench/redline_fixtures.py`. Harbor labels, the shaded table and independent expected outputs
 are generated here. No product fixture or third-party content is imported. The labelled sheets
 under `docs/results/block-insertion/` are LibreOffice 25.8.7.3 PDF rasters of candidate outputs.
+
+The mixed-run text-edit cases for Docxodus #1337 are original OOXML authored by
+`bench/redline_fixtures.py`. Marina labels, split words, marker positions and independent
+expected redlines are generated here. No product fixtures or third-party document content
+are imported. The sheets under `docs/results/mixed-run-edits/` rasterize the candidate
+outputs after LibreOffice 25.8.7.3 rejection, followed by its PDF export.

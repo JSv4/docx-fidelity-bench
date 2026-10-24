@@ -22,7 +22,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v13', 'version': 13}
+SUITE = {'id': 'redline-v14', 'version': 14}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -273,6 +273,7 @@ def generate():
     column_widths(corpus)
     pending_grid_columns(corpus)
     block_insertions(corpus)
+    mixed_run_edits(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -342,6 +343,45 @@ def column_widths(corpus):
                         assertion(values, 'accepted'), assertion(original if tracked else values, 'rejected')])
             corpus.cases[-1]['tableWidths'] = {'version': 1, 'widths': values, 'tracked': tracked}
             corpus.cases[-1]['revisionRegistry'] = {'version': 1, 'count': 1 if tracked else 0}
+
+
+def mixed_run_edits(corpus):
+    def document(content):
+        return p(t('Marina register.')) + p(content) + p(t('Survey complete.'))
+    for marker in ('tab', 'br'):
+        mark = f'<w:r><w:{marker}/></w:r>'
+        for tracked in (False, True):
+            for cut in ('before', 'across'):
+                for reproducer, kind, suffix in [(True, 'reproducer', ''), (False, 'control', '-control')]:
+                    mode = 'tracked' if tracked else 'direct'
+                    case_id = f'redline-mixed-run-{marker}-{mode}-{cut}{suffix}'
+                    length = 1 if cut == 'before' else 2
+                    replacement = ('' if tracked else 'o') if cut == 'before' else 'ur'
+                    source_content = ('<w:r><w:t>ca</w:t>' + f'<w:{marker}/>' + '<w:t>ve</w:t></w:r>') if reproducer else t('cave') + mark
+                    if reproducer:
+                        accepted_content = t('c' + replacement) + mark + t('ve' if cut == 'before' else 'e')
+                    else:
+                        accepted_content = t('c' + replacement + ('ve' if cut == 'before' else 'e')) + mark
+                    rev = Revisions()
+                    if tracked:
+                        if reproducer:
+                            recorded = t('c') + rev.dele(t('a')) + (rev.ins(t(replacement)) if replacement else '') + mark
+                            recorded += (t('ve') if cut == 'before' else rev.dele(t('v')) + t('e'))
+                        else:
+                            recorded = t('c') + rev.dele(t('a' if cut == 'before' else 'av'))
+                            recorded += (rev.ins(t(replacement)) if replacement else '') + t('ve' if cut == 'before' else 'e') + mark
+                    else:
+                        recorded = accepted_content
+                    source = corpus.file(case_id, 'source', body=document(source_content))
+                    accepted = corpus.file(case_id, 'accepted', body=document(accepted_content))
+                    rejected = corpus.file(case_id, 'rejected', body=document(source_content if tracked else accepted_content))
+                    authored = corpus.file(case_id, 'authored-redline', body=document(recorded))
+                    corpus.add(case_id, 'revisions', kind, 'JSv4/Docxodus#1337',
+                        f'{mode} text edit {cut} a {marker}, ' + ('between two text nodes in one run' if reproducer else 'after the selected text'),
+                        'replace-span', [dict(source, role='source')], {'accepted': accepted, 'rejected': rejected}, authored,
+                        [{'type': 'paragraph-count', 'version': 1, 'scope': scope, 'story': 'body', 'count': 3} for scope in ('accepted', 'rejected')])
+                    corpus.cases[-1]['spanEdit'] = {'version': 1, 'tracked': tracked, 'paragraphIndex': 1,
+                        'start': 1, 'length': length, 'replacement': replacement}
 
 
 def block_insertions(corpus):
