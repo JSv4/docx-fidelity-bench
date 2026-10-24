@@ -119,3 +119,8 @@ negative controls are original work. No renderer fixture, external document, fon
 third-party text is imported.
 
 The seven review sheets under `docs/results/revision-ownership/` show these original Summit packages through Docxodus's public review renderer, together with independently read metadata and original labels. Their source/output hashes and method are recorded in `capture.json`; no third-party document content is included.
+
+The six move-range rejection cases for Docxodus #1340 use original literal-text OOXML authored in
+`bench/redline_fixtures.py`. Their expected paragraphs follow independently observed native Word
+results on the corresponding original core probes. No native Word package, renderer fixture,
+external document content, image or embedded font is imported into this corpus.

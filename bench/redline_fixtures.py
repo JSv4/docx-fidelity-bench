@@ -22,7 +22,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v16', 'version': 16}
+SUITE = {'id': 'redline-v17', 'version': 17}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -283,11 +283,55 @@ def generate():
     mixed_run_edits(corpus)
     tracked_column_gaps(corpus)
     revision_ownership(corpus)
+    move_range_membership(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(registry, indent=2) + '\n')
     return registry
+
+
+
+def move_range_membership(corpus):
+    """Ordinary runs inside named move ranges survive rejection, as native Word does."""
+    def mark(tag, identifier, content='', name=None):
+        attrs = f'w:id="{identifier}"' + (f' w:name="{name}"' if name else '')
+        if tag in {'moveFrom', 'moveTo', 'moveFromRangeStart', 'moveToRangeStart'}:
+            attrs += f' w:author="Alex" w:date="2026-05-01T09:00:00Z"'
+        return f'<w:{tag} {attrs}>{content}</w:{tag}>' if content else f'<w:{tag} {attrs}/>'
+
+    source = p(t('Old: ') + mark('moveFromRangeStart', 1, name='move1')
+               + mark('moveFrom', 2, '<w:r><w:delText>amount</w:delText></w:r>')
+               + mark('moveFromRangeEnd', 1) + t(' end'))
+    for shape in ('unsplit-control', 'plain-tail-inside', 'plain-between-move-elements',
+                  'split-destination', 'plain-outside-control', 'cross-paragraph-split'):
+        start = mark('moveToRangeStart', 3, name='move1')
+        end = mark('moveToRangeEnd', 3)
+        if shape == 'unsplit-control':
+            destination = p(t('Fee ') + start + mark('moveTo', 4, t('amount')) + end + t(' due'))
+        elif shape == 'plain-tail-inside':
+            destination = p(t('Fee ') + start + mark('moveTo', 4, t('amount')) + t('XY') + end + t(' due'))
+        elif shape == 'plain-between-move-elements':
+            destination = p(t('Fee ') + start + mark('moveTo', 4, t('amo')) + t('XY')
+                            + mark('moveTo', 6, t('unt')) + end + t(' due'))
+        elif shape == 'plain-outside-control':
+            destination = p(t('Fee ') + start + mark('moveTo', 4, t('amount')) + end + t('XY due'))
+        else:
+            split = (mark('moveTo', 4, t('amo')) + end + t('XY')
+                     + mark('moveToRangeStart', 5, name='move1') + mark('moveTo', 6, t('unt'))
+                     + mark('moveToRangeEnd', 5) + t(' due'))
+            destination = (p(t('Fee ') + start + split) if shape == 'split-destination'
+                           else p(t('Fee ') + start) + p(split))
+        case_id = 'redline-move-range-' + shape
+        tracked = corpus.file(case_id, 'input', body=source + destination)
+        # Authored explicitly from Word's observed endpoints, never from a candidate result.
+        tails = (['Fee ', 'XY due'] if shape == 'cross-paragraph-split'
+                 else ['Fee  due'] if shape == 'unsplit-control' else ['Fee XY due'])
+        expected = corpus.file(case_id, 'expected', body=p(t('Old: amount end')) + ''.join(p(t(text)) for text in tails))
+        corpus.add(case_id, 'revisions', 'control' if shape.endswith('control') else 'reproducer',
+                   'JSv4/Docxodus#1340', 'Reject a named move: ' + shape.replace('-', ' '), 'reject',
+                   [dict(tracked, role='input')], {'output': expected}, expected,
+                   [{'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0}])
 
 
 def revision_ownership(corpus):
