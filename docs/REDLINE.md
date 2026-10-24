@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v16`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v17`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -273,7 +273,7 @@ All previous DOCX bytes are unchanged and the PDF suite remains `core-v58`.
 
 ### Reviewer accounts and namesakes (Docxodus #1317)
 
-`redline-v16` adds seven original Summit cases: another account with the same display name,
+`redline-v17` adds seven original Summit cases: another account with the same display name,
 that name already used without an account, AD principal-name and object-id aliases under a
 different name, the legacy name-only control, and a free name's first tracked edit or comment.
 The PDF suite is unchanged at `core-v62`. All earlier DOCX bytes remain unchanged.
@@ -306,3 +306,19 @@ so the same adapter compiles against pre-feature candidates. Missing requested a
 is an operation failure (measured score zero), rather than a build failure or emulation by name.
 No Word behavior is inferred from these explicit feature contracts. Screenshots are review
 evidence; only recorded independent round-trip and schema measurements support redline scores.
+
+
+## Move range membership
+
+The six #1340 reject cases distinguish moved wrappers from their named range containers. Plain
+`XY` after or between moved wrappers survives, as does text between two same-named disjoint
+destination ranges, including a range spanning paragraphs. The unsplit move and text outside the
+range are controls. Expected paragraph lists were independently observed using native Word for the
+web accept/reject on 2026-10-24; the core repository pins the exact original source bytes and endpoint
+hashes in `TestFiles/RP/MoveRangeMembership/word-endpoints.json`. These benchmark packages are
+new literal OOXML with the benchmark's own styles and section defaults, so their source bytes differ;
+no native Word PDF is registered as a scoring reference here. The existing corpus is byte-identical.
+
+The benchmark invokes stateless rejection. The core tests also require the session registry to list
+disjoint same-named ranges as one supported move and check bulk/selective acceptance and rejection
+against Word. This track does not score session enumeration or selective resolution.
