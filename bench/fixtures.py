@@ -609,6 +609,57 @@ def generate():
                          'page': 1, 'rect': [72, 150, 540, 210]}])
         if deleted:
             cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
+    # Original floating-shape set for Docxodus #1346. Reuse the authored primitive above;
+    # positioning, wrapping and paint order are explicit, rather than taken from a template.
+    floating_styles = f'''<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>
+      <w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="22"/></w:rPr></w:rPrDefault>
+      <w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="atLeast"/>
+      </w:pPr></w:pPrDefault></w:docDefaults></w:styles>'''
+    def floating_panel(kind='shape', wrap='top-bottom', order=10, behind=False, identifier=7, fill='19647E', unsupported=False):
+        payload = drawing_payloads[kind].replace('19647E', fill)
+        if unsupported:
+            payload = payload.replace('prst="rect"', 'prst="hexagon"')
+        polygon = ('<wp:wrapPolygon edited="0"><wp:start x="0" y="0"/><wp:lineTo x="21600" y="10800"/>'
+                   '<wp:lineTo x="0" y="21600"/><wp:lineTo x="0" y="0"/></wp:wrapPolygon>')
+        wrapping = ('<wp:wrapTopAndBottom/>' if wrap == 'top-bottom' else '<wp:wrapNone/>' if wrap == 'none'
+                    else '<wp:wrapSquare wrapText="bothSides"/>' if wrap == 'square'
+                    else f'<wp:wrap{wrap.title()} wrapText="bothSides">{polygon}</wp:wrap{wrap.title()}>')
+        return (f'<w:r><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" '
+                f'relativeHeight="{order}" behindDoc="{int(behind)}" locked="0" layoutInCell="1" allowOverlap="1">'
+                '<wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="column"><wp:posOffset>0</wp:posOffset></wp:positionH>'
+                '<wp:positionV relativeFrom="paragraph"><wp:posOffset>0</wp:posOffset></wp:positionV>'
+                f'<wp:extent cx="1828800" cy="914400"/>{wrapping}<wp:docPr id="{identifier}" name="Harbor panel {identifier}"/>'
+                f'<a:graphic><a:graphicData uri="{drawing_uris[kind]}">{payload}</a:graphicData></a:graphic></wp:anchor></w:drawing></w:r>')
+    floating_cases = [
+        ('shape-top-bottom', floating_panel(), False, True, 'Floating rectangle reserves top/bottom clearance'),
+        ('group-top-bottom', floating_panel('group'), False, True, 'Floating group reserves top/bottom clearance'),
+        ('shape-mixed-top-bottom', floating_panel(), True, True, 'Floating rectangle clears text in its own paragraph'),
+        ('shape-no-wrap-control', floating_panel(wrap='none'), False, False, 'No-wrap rectangle leaves body line spacing intact'),
+        ('shape-behind-text', floating_panel(wrap='none', behind=True), True, False, 'Background rectangle remains behind body text'),
+        ('shape-relative-height', floating_panel(wrap='none', order=4294967295)
+         + floating_panel(wrap='none', order=2147483648, identifier=8, fill='FF9900'), False, False,
+         'Relative height orders overlapping rectangles independently of source order'),
+        *[(f'shape-{wrap}', floating_panel(wrap=wrap), False, False,
+           f'Column-edge rectangle with {wrap} text wrapping') for wrap in ('square', 'tight', 'through')],
+        ('shape-unsupported', floating_panel(unsupported=True), False, True, 'Previously undrawn floating hexagon keeps its six-sided geometry'),
+        ('vml-plain', '<w:r><w:pict><v:rect style="width:144pt;height:72pt" fillcolor="#19647E"/></w:pict></w:r>',
+         False, True, 'Plain VML rectangle keeps its fill and outline'),
+    ]
+    for suffix, panel_xml, mixed, clears, description in floating_cases:
+        texts = ['HarborBefore The inspection begins.', 'HarborAfter The inspection ends.']
+        if mixed:
+            texts.insert(1, 'HarborAnchor')
+        after_region = ([72, 160, 540, 220] if clears else
+                        [216, 100, 540, 140] if suffix == 'shape-square' else
+                        [180, 100, 540, 140] if suffix in ('shape-tight', 'shape-through') else
+                        [72, 100, 540, 140])
+        add('drawings-floating-' + suffix, 'images', description + ' (Docxodus #1346)', texts,
+            para(texts[0]) + para(runs=panel_xml + (run('HarborAnchor') if mixed else '')) + para(texts[-1]),
+            styles_xml=floating_styles,
+            namespaces_extra=' xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:v="urn:schemas-microsoft-com:vml"',
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'HarborAfter', 'occurrence': 1,
+                         'page': 1, 'rect': after_region}])
+
     # Independent hidden-header pair for Docxodus #1077. The empty first paragraph
     # is the passing control; the visible second line exposes paragraph-mark flow.
     header_styles = f'''<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>
@@ -1869,7 +1920,7 @@ def generate():
                                        'tokens': ['Check', 'OakStoryNote']}]
         if mixed: cases[-1]['htmlAssertions'].append({'type': 'marker-readable', 'version': 1, 'marker': 'OakBodyPoint',
                                                     'tokens': ['Review', 'OakBodyPoint']})
-    registry = {'schema': 1, 'suite': {'id': 'core-v61', 'version': 61, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v62', 'version': 62, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
