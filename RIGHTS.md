@@ -124,3 +124,9 @@ The six move-range rejection cases for Docxodus #1340 use original literal-text 
 `bench/redline_fixtures.py`. Their expected paragraphs follow independently observed native Word
 results on the corresponding original core probes. No native Word package, renderer fixture,
 external document content, image or embedded font is imported into this corpus.
+
+The #1339 Times New Roman exact-zero and positive-height row fixtures reuse the original literal-text
+OOXML authored in commit 7851026 of this repository. Their bytes exactly match the source packages
+used for the native Word captures. There are no imported document contents, images or embedded font
+files. Native PDF font subsets remain governed by the separately provisioned font license and the
+recorded reference font contract; no font binaries are redistributed.
