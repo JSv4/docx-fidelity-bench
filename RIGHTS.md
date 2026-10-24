@@ -97,3 +97,8 @@ The adjacent-table property cases for Docxodus #1341 are original literal OOXML 
 are generated here. No product fixtures or third-party content are imported. Capture sheets under
 `docs/results/adjacent-table-properties/` compare actual production PDFs with LibreOffice PDFs;
 they do not claim to be Word references.
+
+The literal-text tab cases for Docxodus #1353 are original OOXML authored by `bench/fixtures.py`.
+Estuary labels, run formatting, tab stops, running stories and controls are generated here. No product
+fixtures or third-party documents are imported. Capture sheets under `docs/results/literal-text-tabs/`
+show the authored LibreOffice reference and labelled Docxodus diagnostic PDFs; no font files are embedded.
