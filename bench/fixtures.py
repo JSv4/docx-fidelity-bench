@@ -1835,7 +1835,41 @@ def generate():
                         {'type': 'same-page', 'version': 1, 'markers': ['EstuaryMark', 'EstuaryEnd']}])
         cases[-1]['profile']['review'] = 'markup'
         cases[-1]['pdfTextNormalization'] = 'isolated-dot-leaders-v1'
-    registry = {'schema': 1, 'suite': {'id': 'core-v60', 'version': 60, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # A comment anchored in a footer or a footnote must render like a body comment (Docxodus #1310).
+    # The three cases share one document; only the story holding the commented words differs, and
+    # the body control holds it in the body. PDFs hide comments, as everywhere in this suite; the
+    # margin-profile HTML companion requires the note itself to be readable. The comment is a range
+    # with no w:commentReference run: LibreOffice 25.8.7.3 refuses to open a package whose footer or
+    # footnote holds one ("source file could not be loaded"), which would leave the reference
+    # track without a PDF. The range alone still selects the note in every story.
+    story_styles = comment_styles
+    story_section = section().replace('<w:sectPr>', '<w:sectPr><w:footerReference w:type="default" r:id="rStory"/>')
+    def story_commented(text, commented):
+        return ('<w:commentRangeStart w:id="5"/>' + run(text) + '<w:commentRangeEnd w:id="5"/>') if commented else run(text)
+    story_text = ['OakBodyLine The survey crew checks the oak ledger.', 'OakFooterLine Ledger copy.',
+                  'OakNoteLine Counted twice.']
+    for case_id, story, description, mixed in [
+            ('comments-footer-story-margin', 'footer', 'A comment anchored in footer text (Docxodus #1310)', False),
+            ('comments-footnote-story-margin', 'footnote', 'A comment anchored in footnote text (Docxodus #1310)', False),
+            ('comments-body-story-control', 'body', 'The same document with the comment anchored in the body', False),
+            ('comments-footer-story-mixed-reference', 'footer', 'A footer range beside a real body comment reference', True),
+            ('comments-body-story-mixed-reference-control', 'body', 'Body references control for the mixed footer range', True)]:
+        body = para(runs=story_commented(story_text[0], story == 'body') + '<w:r><w:footnoteReference w:id="1"/></w:r>'
+                    + (comment_view_mark('Reference', 5) if mixed and story == 'body' else '')
+                    + (comment_view_mark('Reference', 6) if mixed else ''))
+        footer = para(runs=story_commented(story_text[1], story == 'footer'))
+        note = para(runs='<w:r><w:footnoteRef/></w:r>' + run(' ') + story_commented(story_text[2], story == 'footnote'))
+        comment = '<w:comment w:id="5" w:author="Oak Reviewer" w:date="2026-10-01T12:00:00Z">' + para('Check OakStoryNote') + '</w:comment>'
+        if mixed: comment += comment_view_note(6, 'Review OakBodyPoint')
+        add(case_id, 'paragraphs', description, story_text + ['1', '1'], body, sect=story_section,
+            notes=('footnote', ''), notes_xml=note, styles_xml=story_styles, story=('footer', footer),
+            comments_xml=comment)
+        cases[-1]['htmlProfile'] = {'review': 'final', 'comments': 'margin'}
+        cases[-1]['htmlAssertions'] = [{'type': 'marker-readable', 'version': 1, 'marker': 'OakStoryNote',
+                                       'tokens': ['Check', 'OakStoryNote']}]
+        if mixed: cases[-1]['htmlAssertions'].append({'type': 'marker-readable', 'version': 1, 'marker': 'OakBodyPoint',
+                                                    'tokens': ['Review', 'OakBodyPoint']})
+    registry = {'schema': 1, 'suite': {'id': 'core-v61', 'version': 61, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

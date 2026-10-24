@@ -355,7 +355,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 286)
+        self.assertEqual(len(common.validate_registry()['cases']), 291)
 
     def test_adjacent_table_property_pairs_keep_independent_table_declarations(self):
         import xml.etree.ElementTree as ET
@@ -636,7 +636,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v60')
+        self.assertEqual(registry['suite']['id'], 'core-v61')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
@@ -684,6 +684,38 @@ class RegistryContract(unittest.TestCase):
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
         self.assertEqual({a['marker'] for a in pair[0]['assertions'] if 'marker' in a}, {'NoteQuartz'})
+
+    def test_story_comment_cases_differ_only_in_the_commented_story(self):
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        stories = {'comments-footer-story-margin': 'word/footer1.xml',
+                   'comments-footnote-story-margin': 'word/footnotes.xml',
+                   'comments-body-story-control': 'word/document.xml'}
+        cases = [records[c] for c in stories]
+        parts = ('word/document.xml', 'word/footer1.xml', 'word/footnotes.xml')
+        for case, commented in zip(cases, stories.values()):
+            with ZipFile(common.ROOT / case['input']) as package:
+                for part in parts:
+                    xml = package.read(part).decode()
+                    self.assertEqual('w:commentRangeStart w:id="5"' in xml, part == commented, (case['id'], part))
+                    self.assertNotIn('w:commentReference', xml)
+                self.assertIn(b'OakStoryNote', package.read('word/comments.xml'))
+            self.assertEqual(case['profile'], {'review': 'final', 'comments': 'hidden'})
+            self.assertEqual(case['htmlProfile'], {'review': 'final', 'comments': 'margin'})
+            self.assertEqual(case['htmlAssertions'], cases[0]['htmlAssertions'])
+            self.assertEqual(case['tokens'], cases[0]['tokens'])
+
+    def test_mixed_story_comments_keep_a_body_point_reference_and_a_ranged_note(self):
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        for cid in ('comments-footer-story-mixed-reference', 'comments-body-story-mixed-reference-control'):
+            case = records[cid]
+            with ZipFile(common.ROOT / case['input']) as package:
+                body = package.read('word/document.xml').decode()
+                self.assertIn('w:commentReference w:id="6"', body)
+                self.assertEqual('w:commentReference w:id="5"' in body, cid.endswith('-control'))
+                self.assertIn('OakBodyPoint', package.read('word/comments.xml').decode())
+            self.assertEqual([a['marker'] for a in case['htmlAssertions']], ['OakStoryNote', 'OakBodyPoint'])
 
     def _section_change_pair(self, reproducer, control):
         """The pair's inputs differ only by the w:sectPrChange on the final section; returns that
