@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v13`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v14`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -213,3 +213,31 @@ The labelled before/after page rasters and source-bound focused results are unde
 the schema and native outcome checks remain mandatory. These diagnostics do not report a
 full-suite score or a Word reference. All prior DOCX bytes and eligibility declarations remain
 unchanged; the PDF suite stays `core-v58`.
+
+## Text edits within mixed runs
+
+The `replace-span` operation calls public `DocxSession.ReplaceTextAtSpan` on one input, with
+its `spanEdit` v1 declaration specifying tracking, physical body-paragraph index, start,
+positive length and replacement. It returns the saved package. Like comparison and table-width
+operations, the harness resolves that output independently through its markup engine and
+LibreOffice, comparing both accepted and rejected views with authored expectations. A public
+API refusal is a failed conversion. Metric contract version 6 records the new operation.
+
+Sixteen original cases pair each mixed-run reproducer with a nearby control whose marker
+follows all edited text. Tabs and line breaks cover both direct and tracked editing, with
+selections before and across each marker. Direct single-letter replacements and tracked
+single-letter deletions preserve its position; cross-marker replacements begin at the first
+selected text node. Tracked rejection restores the original text on both sides of the marker.
+Direct edits are permanent, so both resolved views match the revised document.
+
+All expected packages and calibration redlines are independently written here. Their inline
+views include tab/break tokens, so an output with the right letters and a displaced marker
+fails. Paragraph-count assertions also require three paragraphs in each resolved view. The
+markup resolver produces internal view trees and may retain restored `delText` node names;
+these are not serialized candidate packages or a claim about residual native revisions.
+
+The labelled sheets under `docs/results/mixed-run-edits/` show actual candidate packages after
+LibreOffice rejects their revisions, then renders them as PDF. A direct-edit case has no revisions
+to reject. Hashes, exact source identities and focused run contracts are recorded alongside them.
+These diagnostics do not claim a full-suite score or a Word reference. All previous DOCX bytes
+and LibreOffice eligibility declarations remain unchanged; the PDF suite stays `core-v58`.

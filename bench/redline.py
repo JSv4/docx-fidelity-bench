@@ -23,18 +23,19 @@ from .redline_build import dotnet as _dotnet, validate_packages, verify_docxodus
 from .common import ROOT, contained, digest, execute, identity, read_json, write_json
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
-OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1}
+OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1}
 ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables'}
-SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}}
-CONTRACT = {'version': 5, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}}
+CONTRACT = {'version': 6, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
             'validity': 'no OpenXmlValidator finding (id, part, description) occurs more often than in any input',
             'semanticPreflight': 'declared identity cases must report zero changes at raw limits with and without the package supplement',
             'revisionRegistry': 'declared table operations must report the public registry count and match independent resolved table assertions',
-            'blockInsertion': 'declared insertion outcomes require typed success, error, version change and undo availability'}
+            'blockInsertion': 'declared insertion outcomes require typed success, error, version change and undo availability',
+            'spanEditing': 'public span editing must preserve text and inline-marker order through both independent revision resolvers'}
 HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'bench/redline_build.py']
 
 
@@ -61,7 +62,7 @@ def validate_registry(registry=None):
         operation = case['operation']
         if operation not in OPERATIONS or (OPERATIONS[operation] and len(case['inputs']) != OPERATIONS[operation]) or (operation == 'consolidate' and len(case['inputs']) < 3):
             raise ValueError('Invalid operation or input count: ' + case['id'])
-        expected = {'compare': {'accepted', 'rejected'}, 'consolidate': {'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}}[operation]
+        expected = {'compare': {'accepted', 'rejected'}, 'consolidate': {'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'accepted', 'rejected'}}[operation]
         if set(case['expected']) != expected or case['kind'] not in ('reproducer', 'control', 'identity'):
             raise ValueError('Invalid expectation or kind: ' + case['id'])
         declared = case.get('libreoffice', {})
@@ -107,9 +108,19 @@ def validate_registry(registry=None):
                                     'versionDelta': 1 if success else 0, 'undoAvailable': success}
                     or type(observed.get('versionDelta')) is not int or type(observed.get('undoAvailable')) is not bool):
                 raise ValueError('Invalid block insertion declaration: ' + case['id'])
+        elif operation == 'replace-span':
+            spec = case.get('spanEdit', {})
+            if (set(spec) != {'version', 'tracked', 'paragraphIndex', 'start', 'length', 'replacement'}
+                    or spec['version'] != 1 or type(spec['tracked']) is not bool
+                    or any(type(spec[key]) is not int or spec[key] < 0 for key in ('paragraphIndex', 'start'))
+                    or type(spec['length']) is not int or spec['length'] <= 0
+                    or not isinstance(spec['replacement'], str)):
+                raise ValueError('Invalid span edit declaration: ' + case['id'])
         elif 'tableWidths' in case or 'revisionRegistry' in case or 'columnEdit' in case:
 
             raise ValueError('Unexpected table width operation data: ' + case['id'])
+        if operation != 'replace-span' and 'spanEdit' in case:
+            raise ValueError('Unexpected span edit data: ' + case['id'])
         if operation != 'block-insert' and ('blockInsert' in case or 'editOutcome' in case):
             raise ValueError('Unexpected block insertion data: ' + case['id'])
         if 'semanticPreflight' in case:
@@ -258,6 +269,8 @@ def run_candidate(adapter, build, case, output, candidate, timeout=300):
         request['settings']['columnEdit'] = case['columnEdit']
     if 'blockInsert' in case:
         request['settings']['blockInsert'] = case['blockInsert']
+    if 'spanEdit' in case:
+        request['settings']['spanEdit'] = case['spanEdit']
     response = json.loads(execute([_dotnet(), str(Path(build).resolve() / 'bin' / 'DocxBenchRedline.dll')], input=json.dumps(request), timeout=timeout))
     if response.get('protocol') != 1 or response.get('status') not in ('ok', 'failed', 'unmeasured'):
         raise ValueError('Invalid redline adapter response')

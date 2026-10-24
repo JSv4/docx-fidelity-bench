@@ -46,10 +46,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v13')
-        self.assertEqual(len(registry['cases']), 115)
+        self.assertEqual(registry['suite']['id'], 'redline-v14')
+        self.assertEqual(len(registry['cases']), 131)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1322, 1331, 1342, 1352)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1322, 1331, 1337, 1342, 1352)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -150,6 +150,19 @@ class AuthoredCalibration(unittest.TestCase):
 
 
 class GamingIsRejected(unittest.TestCase):
+    def test_mixed_run_marker_order_is_not_hidden_by_unchanged_letters(self):
+        for marker in ('tab', 'br'):
+            record = case('redline-mixed-run-' + marker + '-direct-before')
+            package = load(record['expected']['accepted'])
+            parts = package.story_parts()
+            paragraph = list(parts[package.main].iter(revisions.w('p')))[1]
+            carrier = next(run for run in paragraph if run.find(revisions.w(marker)) is not None)
+            paragraph.remove(carrier)
+            paragraph.insert(0, carrier)
+            letters = lambda root: ''.join(e.text or '' for e in root.iter(revisions.w('t')))
+            self.assertEqual(letters(package.story_parts()[package.main]), letters(parts[package.main]))
+            self.assertNotEqual(revisions.view(package), revisions.view(package, parts))
+
     def test_resolved_column_state_catches_changes_the_text_view_ignores(self):
         record = case('redline-pending-grid-merged-insert')
         package = load(record['authored'])
@@ -463,6 +476,14 @@ class EngineSemantics(unittest.TestCase):
 
 
 class ScoringContract(unittest.TestCase):
+    def test_span_edit_declarations_require_typed_nonempty_ranges(self):
+        for key, value in [('tracked', 1), ('start', True), ('paragraphIndex', -1), ('length', 0), ('replacement', None)]:
+            registry = common.read_json(redline.MANIFEST)
+            target = next(c for c in registry['cases'] if c['operation'] == 'replace-span')
+            target['spanEdit'][key] = value
+            with self.assertRaisesRegex(ValueError, 'span edit'):
+                redline.validate_registry(registry)
+
     def test_block_insertion_outcomes_are_mandatory_and_typed(self):
         import shutil
         record = case('redline-block-insert-paragraph')

@@ -72,6 +72,26 @@ internal static class Program
             var diff = new DocxDiffSettings { AuthorForRevisions = author, DateTimeForRevisions = date };
             switch (operation)
             {
+                case "replace-span" when documents.Count == 1:
+                {
+                    var spec = settings["spanEdit"] as JsonObject ?? throw new InvalidDataException("Missing span edit");
+                    if ((int?)spec["version"] != 1) throw new InvalidDataException("Unknown span edit version");
+                    using var session = new DocxSession(documents[0].Document.DocumentByteArray, new DocxSessionSettings
+                    {
+                        RevisionAuthor = author,
+                        TrackedChanges = (bool?)spec["tracked"] == true ? TrackedChangeMode.RenderInline : TrackedChangeMode.Accept,
+                    });
+                    var paragraphs = session.Project().AnchorIndex.Values
+                        .Where(a => a.Anchor.Scope == "body" && a.Anchor.Kind == "p").ToArray();
+                    var index = (int?)spec["paragraphIndex"] ?? throw new InvalidDataException("Missing paragraph index");
+                    var edit = session.ReplaceTextAtSpan(paragraphs[index].Anchor.Id,
+                        (int?)spec["start"] ?? throw new InvalidDataException("Missing span start"),
+                        (int?)spec["length"] ?? throw new InvalidDataException("Missing span length"),
+                        (string?)spec["replacement"] ?? throw new InvalidDataException("Missing replacement"));
+                    if (!edit.Success) throw new InvalidOperationException(edit.Error?.Message ?? "Span replacement failed");
+                    result = new WmlDocument("span-edit.docx", session.Save());
+                    break;
+                }
                 case "block-insert" when documents.Count == 1:
                 {
                     var spec = settings["blockInsert"] as JsonObject ?? throw new InvalidDataException("Missing block insertion");
