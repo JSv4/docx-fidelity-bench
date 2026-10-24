@@ -121,8 +121,15 @@ internal static class Program
                 case "column-edit" when documents.Count == 1:
                 {
                     var spec = settings["columnEdit"] as JsonObject ?? throw new InvalidDataException("Missing column edit");
-                    if ((int?)spec["version"] != 1) throw new InvalidDataException("Unknown column edit version");
-                    using var session = new DocxSession(documents[0].Document.DocumentByteArray);
+                    var version = (int?)spec["version"];
+                    if (version is not (1 or 2)) throw new InvalidDataException("Unknown column edit version");
+                    using var session = version == 2
+                        ? new DocxSession(documents[0].Document.DocumentByteArray, new DocxSessionSettings
+                        {
+                            RevisionAuthor = author,
+                            TrackedChanges = (bool?)spec["tracked"] == true ? TrackedChangeMode.RenderInline : TrackedChangeMode.Accept,
+                        })
+                        : new DocxSession(documents[0].Document.DocumentByteArray);
                     var index = (int?)spec["cellIndex"] ?? throw new InvalidDataException("Missing cell index");
                     var cells = session.Project().AnchorIndex.Values.Where(a => a.Anchor.Scope == "body" && a.Anchor.Kind == "tc").ToArray();
                     var action = (string?)spec["action"];
@@ -131,6 +138,13 @@ internal static class Program
                         : action == "delete" ? session.DeleteTableColumn(cells[index].Anchor.Id)
                         : throw new InvalidDataException("Unknown column action");
                     if (!edit.Success) throw new InvalidOperationException(edit.Error?.Message ?? "Column edit failed");
+                    var before = session.ListRevisions();
+                    var review = new JsonObject
+                    {
+                        ["beforeCount"] = before.Count,
+                        ["supported"] = before.All(revision => revision.ResolutionStatus == RevisionResolutionStatus.Supported),
+                    };
+                    bool resolutionSuccess = true;
                     if ((string?)spec["resolution"] == "reject-each")
                     {
                         var attempts = 0;
@@ -138,7 +152,12 @@ internal static class Program
                         {
                             if (++attempts > 1000) throw new InvalidOperationException("Revision resolution did not finish");
                             var resolved = session.RejectRevision(revision.Id);
-                            if (!resolved.Success) throw new InvalidOperationException(resolved.Error?.Message ?? "Reject failed");
+                            if (!resolved.Success)
+                            {
+                                if (version == 1) throw new InvalidOperationException(resolved.Error?.Message ?? "Reject failed");
+                                resolutionSuccess = false;
+                                break;
+                            }
                         }
                     }
                     else
@@ -149,7 +168,13 @@ internal static class Program
                             "accept-all" => session.AcceptAllRevisions(),
                             _ => throw new InvalidDataException("Unknown column resolution"),
                         };
-                        if (!resolved.Success) throw new InvalidOperationException(resolved.Error?.Message ?? "Resolution failed");
+                        resolutionSuccess = resolved.Success;
+                        if (version == 1 && !resolved.Success) throw new InvalidOperationException(resolved.Error?.Message ?? "Resolution failed");
+                    }
+                    if (version == 2)
+                    {
+                        review["resolutionSuccess"] = resolutionSuccess;
+                        response["columnReview"] = review;
                     }
                     response["revisionRegistryCount"] = session.ListRevisions().Count;
                     result = new WmlDocument("column-edit.docx", session.Save());

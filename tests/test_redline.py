@@ -46,10 +46,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v14')
-        self.assertEqual(len(registry['cases']), 131)
+        self.assertEqual(registry['suite']['id'], 'redline-v15')
+        self.assertEqual(len(registry['cases']), 139)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1322, 1331, 1337, 1342, 1352)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1322, 1330, 1331, 1337, 1342, 1352)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -476,6 +476,34 @@ class EngineSemantics(unittest.TestCase):
 
 
 class ScoringContract(unittest.TestCase):
+    def test_column_review_observations_are_mandatory_typed_and_successful(self):
+        import shutil
+        record = case('redline-column-gap-leading')
+        def candidate(_adapter, _build, _case, output, _candidate):
+            shutil.copyfile(common.ROOT / record['authored']['path'], output)
+            return dict(response, status='ok', revisionRegistryCount=0)
+        expected = {'beforeCount': 1, 'supported': True, 'resolutionSuccess': True}
+        mutants = [None, dict(expected, beforeCount=True), dict(expected, beforeCount=2),
+                   dict(expected, supported=1), dict(expected, supported=False),
+                   dict(expected, resolutionSuccess=1), dict(expected, resolutionSuccess=False), expected]
+        for observed in mutants:
+            response = {} if observed is None else {'columnReview': observed}
+            with self.subTest(observed=observed), tempfile.TemporaryDirectory() as temp, \
+                    patch.object(redline, 'run_candidate', side_effect=candidate), \
+                    patch.object(redline, '_libreoffice_checks', return_value=[]), \
+                    patch.object(redline, 'validate_packages', side_effect=lambda _v, paths: {str(p): [] for p in paths}):
+                outcome = redline.score_case(record, Path(temp), 'docxodus', 'build', 'commit', {}, 'validator')
+                self.assertEqual(outcome['status'], 'measured')
+                self.assertEqual(outcome['score'], 100 if observed is expected else 0)
+
+    def test_v2_column_declarations_require_a_consistent_review_contract(self):
+        for key, value in [('beforeCount', True), ('beforeCount', 2), ('supported', 1), ('resolutionSuccess', False)]:
+            registry = common.read_json(redline.MANIFEST)
+            target = next(c for c in registry['cases'] if 'columnReview' in c)
+            target['columnReview'][key] = value
+            with self.assertRaisesRegex(ValueError, 'column review'):
+                redline.validate_registry(registry)
+
     def test_span_edit_declarations_require_typed_nonempty_ranges(self):
         for key, value in [('tracked', 1), ('start', True), ('paragraphIndex', -1), ('length', 0), ('replacement', None)]:
             registry = common.read_json(redline.MANIFEST)

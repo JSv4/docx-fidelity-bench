@@ -2,7 +2,9 @@
 
 An independent MIT benchmark of delivered PDF rendering and of document comparison. The harness and every input document are authored in this repository. It measures layout, visible content, physical pages, fonts, and declared feature assertions. It produces portable HTML evidence and JSON measurements.
 
-The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v58`, with report-only renderer CI. A separate comparison track, `redline-v14`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
+The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v58`, with report-only renderer CI. A separate comparison track, `redline-v15`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
+
+`redline-v15` adds eight original column-review cases for Docxodus #1330: leading/trailing omissions and mixed merged/omitted rows, with direct-edit controls. A tracked insertion must list one supported revision and resolve through the public bulk or selective API. Typed native outcomes, exact resolved table state and an empty registry/markup revision inventory are mandatory. All prior DOCX bytes remain unchanged; the PDF suite stays `core-v58`.
 
 `redline-v14` adds sixteen original text-span cases for Docxodus #1337: tabs and line breaks between text nodes in one run, direct and tracked edits, and selections before or across the marker. Each reproducer has a control whose marker follows the edited text. Public span replacement must retain exact marker order through accept/reject. All prior DOCX bytes remain unchanged; the PDF suite stays `core-v58`.
 
