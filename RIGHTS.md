@@ -102,3 +102,8 @@ The literal-text tab cases for Docxodus #1353 are original OOXML authored by `be
 Estuary labels, run formatting, tab stops, running stories and controls are generated here. No product
 fixtures or third-party documents are imported. Capture sheets under `docs/results/literal-text-tabs/`
 show the authored LibreOffice reference and labelled Docxodus diagnostic PDFs; no font files are embedded.
+
+The story-comment cases for Docxodus #1310 reuse original literal-text OOXML from branch
+`fixtures/story-comments` (8bbf090): the ledger text, reviewer metadata and comment are authored
+in this repository. No product fixtures or third-party document content are imported. New labelled
+captures under `docs/results/story-comments/` rasterize these original inputs.
