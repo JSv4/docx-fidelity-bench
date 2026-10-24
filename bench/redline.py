@@ -27,7 +27,7 @@ OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1,
 ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables'}
 SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}}
-CONTRACT = {'version': 6, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+CONTRACT = {'version': 7, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -35,7 +35,8 @@ CONTRACT = {'version': 6, 'view': revisions.VIEW_VERSION, 'engines': ['bench-mar
             'semanticPreflight': 'declared identity cases must report zero changes at raw limits with and without the package supplement',
             'revisionRegistry': 'declared table operations must report the public registry count and match independent resolved table assertions',
             'blockInsertion': 'declared insertion outcomes require typed success, error, version change and undo availability',
-            'spanEditing': 'public span editing must preserve text and inline-marker order through both independent revision resolvers'}
+            'spanEditing': 'public span editing must preserve text and inline-marker order through both independent revision resolvers',
+            'columnReview': 'v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry'}
 HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'bench/redline_build.py']
 
 
@@ -89,13 +90,25 @@ def validate_registry(registry=None):
                 raise ValueError('Invalid table widths declaration: ' + case['id'])
         elif operation == 'column-edit':
             spec = case.get('columnEdit', {})
-            if (set(spec) != {'version', 'action', 'position', 'cellIndex', 'resolution'} or spec['version'] != 1
-                    or spec['action'] not in {'insert', 'delete'} or spec['position'] not in {'before', 'after'}
+            version = spec.get('version')
+            keys = {'version', 'action', 'position', 'cellIndex', 'resolution'} | ({'tracked'} if version == 2 else set())
+            if (set(spec) != keys or version not in {1, 2}
+                    or spec['action'] not in ({'insert'} if version == 2 else {'insert', 'delete'}) or spec['position'] not in {'before', 'after'}
                     or type(spec['cellIndex']) is not int or spec['cellIndex'] < 0
                     or spec['resolution'] not in {'reject-all', 'reject-each', 'accept-all'}
                     or case.get('revisionRegistry') != {'version': 1, 'count': 0}
                     or type(case['revisionRegistry']['count']) is not int):
                 raise ValueError('Invalid column edit declaration: ' + case['id'])
+            if version == 2:
+                review = case.get('columnReview', {})
+                if (type(spec['tracked']) is not bool
+                        or review != {'version': 1, 'beforeCount': 1 if spec['tracked'] else 0,
+                                      'supported': True, 'resolutionSuccess': True}
+                        or type(review.get('beforeCount')) is not int
+                        or type(review.get('supported')) is not bool or type(review.get('resolutionSuccess')) is not bool):
+                    raise ValueError('Invalid column review declaration: ' + case['id'])
+            elif 'columnReview' in case:
+                raise ValueError('Unexpected column review declaration: ' + case['id'])
         elif operation == 'block-insert':
             spec = case.get('blockInsert', {})
             observed = case.get('editOutcome', {})
@@ -119,6 +132,8 @@ def validate_registry(registry=None):
         elif 'tableWidths' in case or 'revisionRegistry' in case or 'columnEdit' in case:
 
             raise ValueError('Unexpected table width operation data: ' + case['id'])
+        if operation != 'column-edit' and 'columnReview' in case:
+            raise ValueError('Unexpected column review data: ' + case['id'])
         if operation != 'replace-span' and 'spanEdit' in case:
             raise ValueError('Unexpected span edit data: ' + case['id'])
         if operation != 'block-insert' and ('blockInsert' in case or 'editOutcome' in case):
@@ -458,6 +473,13 @@ def score_case(case, folder, adapter, build, candidate, env, validator):
                      and type(observed.get('versionDelta')) is int and type(observed.get('undoAvailable')) is bool)
             outcome['checks'].append({'name': 'block-insertion-outcome', 'passed': typed and observed == expected_outcome,
                                       'expected': expected_outcome, 'observed': observed})
+        if 'columnReview' in case:
+            expected_review = {key: value for key, value in case['columnReview'].items() if key != 'version'}
+            observed = expected_review if adapter == 'authored' else response.get('columnReview')
+            typed = (isinstance(observed, dict) and type(observed.get('beforeCount')) is int
+                     and type(observed.get('supported')) is bool and type(observed.get('resolutionSuccess')) is bool)
+            outcome['checks'].append({'name': 'column-revision-resolution', 'passed': typed and observed == expected_review,
+                                      'expected': expected_review, 'observed': observed})
         if 'revisionRegistry' in case:
             expected_count = case['revisionRegistry']['count']
             observed_count = expected_count if adapter == 'authored' else response.get('revisionRegistryCount')

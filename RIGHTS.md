@@ -84,3 +84,10 @@ The mixed-run text-edit cases for Docxodus #1337 are original OOXML authored by
 expected redlines are generated here. No product fixtures or third-party document content
 are imported. The sheets under `docs/results/mixed-run-edits/` rasterize the candidate
 outputs after LibreOffice 25.8.7.3 rejection, followed by its PDF export.
+
+The tracked-column gap cases for Docxodus #1330 are original literal-text OOXML authored by
+`bench/redline_fixtures.py`. Waterway marker labels, nonuniform widths, omitted/merged rows
+and expected resolved packages are generated here. No product fixtures or third-party content
+are imported. The sheets under `docs/results/tracked-column-gaps/` are LibreOffice 25.8.7.3 PDF
+rasters of actual saved candidates after the declared native review attempt, including its
+unresolved output when that review fails.

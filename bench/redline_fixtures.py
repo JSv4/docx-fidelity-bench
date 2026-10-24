@@ -22,7 +22,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v14', 'version': 14}
+SUITE = {'id': 'redline-v15', 'version': 15}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -274,6 +274,7 @@ def generate():
     pending_grid_columns(corpus)
     block_insertions(corpus)
     mixed_run_edits(corpus)
+    tracked_column_gaps(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -343,6 +344,68 @@ def column_widths(corpus):
                         assertion(values, 'accepted'), assertion(original if tracked else values, 'rejected')])
             corpus.cases[-1]['tableWidths'] = {'version': 1, 'widths': values, 'tracked': tracked}
             corpus.cases[-1]['revisionRegistry'] = {'version': 1, 'count': 1 if tracked else 0}
+
+
+def tracked_column_gaps(corpus):
+    def cell(text, width, span=1, fill=None):
+        return {'text': text, 'span': span, 'width': width, 'type': 'dxa', 'fill': fill}
+    def row(cells, before=0, after=0):
+        return {'before': before, 'after': after, 'height': None, 'cells': cells}
+    def document(grid, rows):
+        body = '<w:tbl><w:tblPr/><w:tblGrid>' + ''.join(f'<w:gridCol w:w="{w}"/>' for w in grid) + '</w:tblGrid>'
+        for r in rows:
+            properties = ''.join(f'<w:{name} w:val="{r[key]}"/>' for name, key in [('gridBefore', 'before'), ('gridAfter', 'after')] if r[key])
+            body += '<w:tr>' + (f'<w:trPr>{properties}</w:trPr>' if properties else '')
+            for c in r['cells']:
+                cp = f'<w:tcW w:w="{c["width"]}" w:type="dxa"/>'
+                if c['span'] > 1: cp += f'<w:gridSpan w:val="{c["span"]}"/>'
+                if c['fill'] is not None: cp += f'<w:shd w:val="clear" w:fill="{c["fill"]}"/>'
+                body += '<w:tc><w:tcPr>' + cp + '</w:tcPr>' + p(t(c['text'])) + '</w:tc>'
+            body += '</w:tr>'
+        return p(t('Waterway inspection.')) + body + '</w:tbl>' + p(t('Inspection complete.'))
+    for scenario, resolution in [('leading', 'reject-all'), ('trailing', 'accept-all'),
+                                 ('merged-reject', 'reject-each'), ('merged-accept', 'accept-all')]:
+        mixed = scenario.startswith('merged')
+        if mixed:
+            grid, expanded_grid = [2100, 1300, 2600], [2100, 2100, 1300, 2600]
+            north, center, south = [cell(name, width) for name, width in [('North buoy', 2100), ('Central buoy', 1300), ('South buoy', 2600)]]
+            rows = [row([north, center, south]), row([cell('Bridge reach', 6000, 3, 'D9EAD3')]),
+                    row([south], before=2), row([north, center, south])]
+            expanded = [row([north, cell('', 2100), center, south]), row([cell('Bridge reach', 8100, 4, 'D9EAD3')]),
+                        row([south], before=3), row([north, cell('', 2100), center, south])]
+            index, position = 0, 'after'
+        else:
+            a, b, c, d, e = [cell(name, width) for name, width in [('East marker', 2400), ('West marker', 1600),
+                ('Center marker', 1600 if scenario == 'leading' else 2400), ('Upper marker', 2400), ('Lower marker', 1600)]]
+            grid = [2400, 1600]
+            if scenario == 'leading':
+                rows = [row([a, b]), row([c], before=1), row([d, e])]
+                expanded_grid = [2400, 2400, 1600]
+                expanded = [row([cell('', 2400), a, b]), row([c], before=2), row([cell('', 2400), d, e])]
+                index, position = 0, 'before'
+            else:
+                rows = [row([a, b]), row([c], after=1), row([d, e])]
+                expanded_grid = [2400, 1600, 1600]
+                expanded = [row([a, b, cell('', 1600)]), row([c], after=2), row([d, e, cell('', 1600)])]
+                index, position = 1, 'after'
+        for tracked, kind, suffix in [(True, 'reproducer', ''), (False, 'control', '-control')]:
+            case_id = 'redline-column-gap-' + scenario + suffix
+            source = corpus.file(case_id, 'source', body=document(grid, rows))
+            accepted = not tracked or resolution == 'accept-all'
+            resolved_grid, resolved_rows = (expanded_grid, expanded) if accepted else (grid, rows)
+            expected = corpus.file(case_id, 'expected', body=document(resolved_grid, resolved_rows))
+            authored = corpus.file(case_id, 'authored-output', body=document(resolved_grid, resolved_rows))
+            state = {'grid': resolved_grid, 'rows': [dict(r, cells=[{k: v for k, v in c.items() if k != 'text'} for c in r['cells']]) for r in resolved_rows]}
+            corpus.add(case_id, 'tables', kind, 'JSv4/Docxodus#1330',
+                       f'{scenario} column insertion followed by {resolution}, ' + ('tracked' if tracked else 'direct control'),
+                       'column-edit', [dict(source, role='source')], {'output': expected}, authored,
+                       [{'type': 'table-state', 'version': 1, 'scope': 'output', 'state': state},
+                        {'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0}])
+            corpus.cases[-1]['columnEdit'] = {'version': 2, 'tracked': tracked, 'action': 'insert',
+                                             'cellIndex': index, 'position': position, 'resolution': resolution}
+            corpus.cases[-1]['columnReview'] = {'version': 1, 'beforeCount': 1 if tracked else 0,
+                                               'supported': True, 'resolutionSuccess': True}
+            corpus.cases[-1]['revisionRegistry'] = {'version': 1, 'count': 0}
 
 
 def mixed_run_edits(corpus):

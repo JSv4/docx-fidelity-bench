@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v14`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v15`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -241,3 +241,32 @@ LibreOffice rejects their revisions, then renders them as PDF. A direct-edit cas
 to reject. Hashes, exact source identities and focused run contracts are recorded alongside them.
 These diagnostics do not claim a full-suite score or a Word reference. All previous DOCX bytes
 and LibreOffice eligibility declarations remain unchanged; the PDF suite stays `core-v58`.
+
+## Reviewing a tracked column across omitted and merged rows
+
+`column-edit` declaration v2 extends v1 with a required `tracked` boolean and supports insertion
+followed by the existing bulk/selective resolution choices. Version 1 inputs and measurements
+retain their untracked behavior. The v2 adapter records the public registry before resolution,
+attempts the declared native resolver, then saves its actual result even if resolution fails.
+This exposes the failed workflow without substituting an expected document.
+
+A mandatory `columnReview` declaration v1 requires the exact integer `beforeCount` (one tracked,
+zero direct), boolean `supported` true for every listed revision, and boolean `resolutionSuccess`
+true. Missing or mistyped observations fail. The existing final registry assertion requires
+integer zero, while independent markup requires no revisions and exact table-state checks cover
+grid widths, row omissions, cell spans, widths/types and fill. Metric contract version 7 records
+the new observation. Authored calibration validates the independently authored packages and
+assertions; it does not claim to execute a candidate API or measure its registry.
+
+Eight original cases cover a leading omission with bulk reject, a trailing omission with bulk
+accept, and a table combining a widened merged row and an omitted row with selective reject or
+bulk accept. Each has a direct-edit control; its structural edit remains permanent when reject
+is requested. Nonuniform grid widths make the expected column and widened cell explicit.
+All eight LibreOffice loaded-text comparisons apply. Prior eligibility declarations are unchanged.
+
+The labelled sheets under `docs/results/tracked-column-gaps/` render actual candidates after the
+native review attempt. A failed attempt can leave unresolved markup, so the captions state its
+native outcome and before/after registry counts. LibreOffice exports that saved package as PDF;
+it is not performing the native review. Hashes, exact sources and focused run contracts are
+recorded alongside the sheets. These diagnostics do not claim a full-suite score or Word reference.
+All previous DOCX bytes are unchanged and the PDF suite remains `core-v58`.
