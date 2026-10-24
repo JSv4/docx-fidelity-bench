@@ -350,11 +350,32 @@ class RegistryContract(unittest.TestCase):
                          {'BodyWillow': 1}, {'HdrAlder': 1}]:
             with self.subTest(optional=optional):
                 edited = copy.deepcopy(registry)
-                edited['cases'][-1]['clippedTokens'] = optional
+                target = next(c for c in edited['cases'] if c['id'] == 'tables-exact-row-header-wide-control')
+                target['clippedTokens'] = optional
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 271)
+        self.assertEqual(len(common.validate_registry()['cases']), 275)
+
+    def test_adjacent_table_property_pairs_keep_independent_table_declarations(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        w = {'w': fixtures.W}
+        cases = [c for c in common.validate_registry()['cases'] if c['id'].startswith('tables-adjacent-properties-')]
+        self.assertEqual(len(cases), 4)
+        self.assertEqual({c['profile']['review'] for c in cases}, {'final', 'original'})
+        for case in cases:
+            with ZipFile(common.ROOT / case['input']) as package:
+                body = ET.fromstring(package.read('word/document.xml')).find('w:body', w)
+            tables = body.findall('w:tbl', w)
+            self.assertEqual(len(tables), 2)
+            self.assertEqual([t.find('w:tblPr/w:tblW', w).get('{%s}w' % fixtures.W) for t in tables], ['4800', '6000'])
+            self.assertIsNone(tables[0].find('w:tblPr/w:tblBorders', w))
+            self.assertEqual(len(tables[1].find('w:tblPr/w:tblBorders', w)), 4)
+            self.assertEqual(tables[1].find('w:tblPr/w:tblCellMar/w:left', w).get('{%s}w' % fixtures.W), '720')
+            children = list(body)
+            self.assertEqual(children.index(tables[1]) - children.index(tables[0]),
+                             2 if case['id'].endswith('-control') else 1)
 
     def test_agreement_font_variant_changes_only_the_declared_family(self):
         from zipfile import ZipFile
@@ -553,7 +574,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v58')
+        self.assertEqual(registry['suite']['id'], 'core-v59')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET

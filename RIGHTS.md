@@ -91,3 +91,9 @@ and expected resolved packages are generated here. No product fixtures or third-
 are imported. The sheets under `docs/results/tracked-column-gaps/` are LibreOffice 25.8.7.3 PDF
 rasters of actual saved candidates after the declared native review attempt, including its
 unresolved output when that review fails.
+
+The adjacent-table property cases for Docxodus #1341 are original literal OOXML authored by
+`bench/fixtures.py`. Estuary and pier labels, nonuniform widths, colored borders and cell margins
+are generated here. No product fixtures or third-party content are imported. Capture sheets under
+`docs/results/adjacent-table-properties/` compare actual production PDFs with LibreOffice PDFs;
+they do not claim to be Word references.
