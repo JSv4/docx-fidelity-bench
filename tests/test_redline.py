@@ -46,10 +46,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v11')
-        self.assertEqual(len(registry['cases']), 89)
+        self.assertEqual(registry['suite']['id'], 'redline-v12')
+        self.assertEqual(len(registry['cases']), 109)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1322, 1352)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1322, 1342, 1352)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -120,8 +120,10 @@ class AuthoredCalibration(unittest.TestCase):
     def test_authored_redlines_round_trip(self):
         for record in cases():
             package = load(record['authored'])
-            if record['operation'] == 'reject':
+            if record['operation'] in {'reject', 'column-edit'}:
                 self.assertEqual(revisions.view(package), revisions.view(load(record['expected']['output'])), record['id'])
+                if record['operation'] == 'column-edit':
+                    continue
                 tracked = load(record['inputs'][0])
                 rejected = revisions.resolve(tracked.story_parts(), 'reject')
                 self.assertEqual(revisions.view(tracked, rejected), revisions.view(load(record['expected']['output'])), record['id'])
@@ -148,6 +150,28 @@ class AuthoredCalibration(unittest.TestCase):
 
 
 class GamingIsRejected(unittest.TestCase):
+    def test_resolved_column_state_catches_changes_the_text_view_ignores(self):
+        record = case('redline-pending-grid-merged-insert')
+        package = load(record['authored'])
+        declaration = next(a for a in record['assertions'] if a['type'] == 'table-state')
+        for target, attribute, value in [('tblGrid/gridCol', 'w', '9999'), ('tr/tc/tcPr/gridSpan', 'val', '2'),
+                                         ('tr/tc/tcPr/tcW', 'w', '9999'), ('tr/tc/tcPr/shd', 'fill', '000000')]:
+            parts = package.story_parts()
+            table = next(parts[package.main].iter(revisions.w('tbl')))
+            path = '/'.join(revisions.w(name) for name in target.split('/'))
+            table.find(path).set(revisions.w(attribute), value)
+            self.assertEqual(revisions.view(package, parts), revisions.view(load(record['expected']['output'])))
+            self.assertFalse(redline._assertion(declaration, package, {'output': parts})['passed'], target)
+        record = case('redline-pending-grid-omitted-insert')
+        package = load(record['authored'])
+        declaration = next(a for a in record['assertions'] if a['type'] == 'table-state')
+        for name, value in [('gridBefore', '1'), ('trHeight', '480')]:
+            parts = package.story_parts()
+            row = next(parts[package.main].iter(revisions.w('tr')))
+            row.find(revisions.w('trPr') + '/' + revisions.w(name)).set(revisions.w('val'), value)
+            self.assertEqual(revisions.view(package, parts), revisions.view(load(record['expected']['output'])))
+            self.assertFalse(redline._assertion(declaration, package, {'output': parts})['passed'], name)
+
     def test_table_width_changes_cannot_hide_behind_unchanged_text(self):
         record = case('redline-table-column-widths-full')
         declaration = next(a for a in record['assertions'] if a['type'] == 'table-widths' and a['scope'] == 'accepted')
@@ -439,6 +463,35 @@ class EngineSemantics(unittest.TestCase):
 
 
 class ScoringContract(unittest.TestCase):
+    def test_resolved_column_operations_require_an_empty_public_registry(self):
+        import shutil
+        record = case('redline-pending-grid-plain-insert')
+        def candidate(_adapter, _build, _case, output, _candidate):
+            shutil.copyfile(common.ROOT / record['authored']['path'], output)
+            return dict(response, status='ok')
+        for count, expected_score in [(None, 0), (False, 0), (1, 0), (0, 100)]:
+            response = {} if count is None else {'revisionRegistryCount': count}
+            with self.subTest(count=count), tempfile.TemporaryDirectory() as temp, \
+                    patch.object(redline, 'run_candidate', side_effect=candidate), \
+                    patch.object(redline, '_libreoffice_checks', return_value=[]), \
+                    patch.object(redline, 'validate_packages', side_effect=lambda _v, paths: {str(p): [] for p in paths}):
+                outcome = redline.score_case(record, Path(temp), 'docxodus', 'build', 'commit', {}, 'validator')
+                self.assertEqual(outcome['status'], 'measured')
+                self.assertEqual(outcome['score'], expected_score)
+
+    def test_column_operation_and_table_state_declarations_are_validated(self):
+        for key, value in [('action', 'move'), ('cellIndex', True), ('resolution', 'ignore')]:
+            registry = common.read_json(redline.MANIFEST)
+            target = next(c for c in registry['cases'] if c['operation'] == 'column-edit')
+            target['columnEdit'][key] = value
+            with self.assertRaisesRegex(ValueError, 'column edit'):
+                redline.validate_registry(registry)
+        record = case('redline-pending-grid-merged-insert')
+        state = copy.deepcopy(next(a['state'] for a in record['assertions'] if a['type'] == 'table-state'))
+        self.assertTrue(redline.valid_table_state(state))
+        state['rows'][0]['cells'][0]['span'] = 2
+        self.assertFalse(redline.valid_table_state(state))
+
     def test_public_registry_count_is_mandatory_and_typed_for_width_operations(self):
         import shutil
         record = case('redline-table-column-widths-full')

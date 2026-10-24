@@ -67,3 +67,9 @@ The column-width revision quartet for Docxodus #1322 is original literal-text OO
 are generated here. No renderer fixtures or third-party content are imported. The labelled
 screenshot sheets under `docs/results/column-width-revisions/` are LibreOffice 25.8.7.3 page
 rasters of Docxodus outputs from these original inputs, with recorded schema and registry outcomes.
+
+The pending-grid column-edit cases for Docxodus #1342 are original literal-text OOXML authored
+by `bench/redline_fixtures.py`. Survey marker labels, grid histories, shading, row heights and
+expected resolved documents are generated here. No product fixtures or third-party document
+content are imported. The labelled sheets under `docs/results/pending-grid-columns/` show
+LibreOffice 25.8.7.3 PDF rasters of candidate outputs from these original cases.

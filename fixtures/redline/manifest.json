@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "suite": {
-    "id": "redline-v11",
-    "version": 11,
+    "id": "redline-v12",
+    "version": 12,
     "cases": [
       "redline-field-result-beside-edit",
       "redline-field-result-end-control",
@@ -92,7 +92,27 @@
       "redline-table-column-widths-full",
       "redline-table-column-widths-full-untracked-control",
       "redline-table-column-widths-partial",
-      "redline-table-column-widths-partial-untracked-control"
+      "redline-table-column-widths-partial-untracked-control",
+      "redline-pending-grid-plain-insert",
+      "redline-pending-grid-plain-insert-control",
+      "redline-pending-grid-plain-delete",
+      "redline-pending-grid-plain-delete-control",
+      "redline-pending-grid-no-op-insert",
+      "redline-pending-grid-no-op-insert-control",
+      "redline-pending-grid-no-op-delete",
+      "redline-pending-grid-no-op-delete-control",
+      "redline-pending-grid-merged-insert",
+      "redline-pending-grid-merged-insert-control",
+      "redline-pending-grid-merged-delete",
+      "redline-pending-grid-merged-delete-control",
+      "redline-pending-grid-omitted-insert",
+      "redline-pending-grid-omitted-insert-control",
+      "redline-pending-grid-omitted-delete",
+      "redline-pending-grid-omitted-delete-control",
+      "redline-pending-grid-merged-before-insert",
+      "redline-pending-grid-merged-before-insert-control",
+      "redline-pending-grid-merged-after-insert",
+      "redline-pending-grid-merged-after-insert-control"
     ]
   },
   "cases": [
@@ -156,7 +176,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -219,7 +239,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -282,7 +302,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -344,7 +364,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -406,7 +426,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -468,7 +488,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -529,7 +549,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -590,7 +610,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -651,7 +671,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -714,7 +734,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -777,7 +797,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -840,7 +860,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -902,7 +922,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -963,7 +983,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -1025,7 +1045,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -1086,7 +1106,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -1153,7 +1173,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -1220,7 +1240,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -1287,7 +1307,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -1349,7 +1369,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -1411,7 +1431,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -1473,7 +1493,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -1535,7 +1555,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -1593,7 +1613,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -1651,7 +1671,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -1709,7 +1729,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -1767,7 +1787,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -1834,7 +1854,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -1901,7 +1921,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -1948,7 +1968,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -1995,7 +2015,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -2042,7 +2062,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -2089,7 +2109,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -2158,7 +2178,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -2227,7 +2247,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -2290,7 +2310,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -2353,7 +2373,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -2415,7 +2435,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -2484,7 +2504,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -2553,7 +2573,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -2622,7 +2642,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -2690,7 +2710,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -2758,7 +2778,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -2820,7 +2840,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -2882,7 +2902,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -2933,7 +2953,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -2984,7 +3004,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -3034,7 +3054,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -3092,7 +3112,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -3149,7 +3169,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -3200,7 +3220,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -3251,7 +3271,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -3302,7 +3322,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -3353,7 +3373,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -3421,7 +3441,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -3489,7 +3509,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -3557,7 +3577,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -3625,7 +3645,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -3676,7 +3696,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -3727,7 +3747,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -3778,7 +3798,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -3836,7 +3856,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -3894,7 +3914,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -3952,7 +3972,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -4003,7 +4023,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -4054,7 +4074,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -4112,7 +4132,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -4169,7 +4189,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -4226,7 +4246,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -4283,7 +4303,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -4340,7 +4360,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -4397,7 +4417,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -4454,7 +4474,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -4511,7 +4531,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -4569,7 +4589,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -4627,7 +4647,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -4684,7 +4704,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       },
       "reviewerExpected": {
         "Reviewer1": {
@@ -4751,7 +4771,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       },
       "reviewerExpected": {
         "Reviewer1": {
@@ -4818,7 +4838,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       },
       "reviewerExpected": {
         "Reviewer1": {
@@ -4885,7 +4905,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       },
       "reviewerExpected": {
         "Reviewer1": {
@@ -4974,7 +4994,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -5053,7 +5073,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -5132,7 +5152,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       }
     },
     {
@@ -5200,7 +5220,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       },
       "semanticPreflight": {
         "version": 1,
@@ -5273,7 +5293,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       },
       "semanticPreflight": {
         "version": 1,
@@ -5379,7 +5399,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       },
       "tableWidths": {
         "version": 1,
@@ -5491,7 +5511,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       },
       "tableWidths": {
         "version": 1,
@@ -5604,7 +5624,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       },
       "tableWidths": {
         "version": 1,
@@ -5716,7 +5736,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "8b69607c202d6885536b069f08e8fa1e5d4d63d84fd7c36833161c39e97ed43c"
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
       },
       "tableWidths": {
         "version": 1,
@@ -5725,6 +5745,2218 @@
           3000
         ],
         "tracked": false
+      },
+      "revisionRegistry": {
+        "version": 1,
+        "count": 0
+      }
+    },
+    {
+      "id": "redline-pending-grid-plain-insert",
+      "version": 1,
+      "category": "tables",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1342",
+      "description": "Untracked column insert, plain rows, followed by resolving pending formatting",
+      "operation": "column-edit",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-pending-grid-plain-insert/source.docx",
+          "sha256": "eba236d63ec0d89f2594fa0b7cae5c1f22ee73375c90dadfbc47f0d1c65ea5b2",
+          "role": "source"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-pending-grid-plain-insert/expected.docx",
+          "sha256": "c4f1ed223a872f1a0715f1824d690f017f1f0464c9205cb878f70f058c5642c3"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-pending-grid-plain-insert/authored-output.docx",
+        "sha256": "c4f1ed223a872f1a0715f1824d690f017f1f0464c9205cb878f70f058c5642c3"
+      },
+      "assertions": [
+        {
+          "type": "table-state",
+          "version": 1,
+          "scope": "output",
+          "state": {
+            "grid": [
+              3000,
+              3000,
+              1000
+            ],
+            "rows": [
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              },
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
+      },
+      "columnEdit": {
+        "version": 1,
+        "action": "insert",
+        "position": "after",
+        "cellIndex": 0,
+        "resolution": "reject-all"
+      },
+      "revisionRegistry": {
+        "version": 1,
+        "count": 0
+      }
+    },
+    {
+      "id": "redline-pending-grid-plain-insert-control",
+      "version": 1,
+      "category": "tables",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1342",
+      "description": "Untracked column insert, plain rows, followed by resolving a revision-free control",
+      "operation": "column-edit",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-pending-grid-plain-insert-control/source.docx",
+          "sha256": "f71aee2d2c96a193c34b539c3694251cc24f374bab19289a8d8570a2c626af00",
+          "role": "source"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-pending-grid-plain-insert-control/expected.docx",
+          "sha256": "d4cb0369d7a3711d97ce85a045de9bb05ba70b4a676489aaf8c88d2faa93e3be"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-pending-grid-plain-insert-control/authored-output.docx",
+        "sha256": "d4cb0369d7a3711d97ce85a045de9bb05ba70b4a676489aaf8c88d2faa93e3be"
+      },
+      "assertions": [
+        {
+          "type": "table-state",
+          "version": 1,
+          "scope": "output",
+          "state": {
+            "grid": [
+              2000,
+              2000,
+              2000
+            ],
+            "rows": [
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              },
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
+      },
+      "columnEdit": {
+        "version": 1,
+        "action": "insert",
+        "position": "after",
+        "cellIndex": 0,
+        "resolution": "reject-all"
+      },
+      "revisionRegistry": {
+        "version": 1,
+        "count": 0
+      }
+    },
+    {
+      "id": "redline-pending-grid-plain-delete",
+      "version": 1,
+      "category": "tables",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1342",
+      "description": "Untracked column delete, plain rows, followed by resolving pending formatting",
+      "operation": "column-edit",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-pending-grid-plain-delete/source.docx",
+          "sha256": "eba236d63ec0d89f2594fa0b7cae5c1f22ee73375c90dadfbc47f0d1c65ea5b2",
+          "role": "source"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-pending-grid-plain-delete/expected.docx",
+          "sha256": "f11c4622c0367abda26a3a35b24066c0934c90879c05de1985587c9a52778a11"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-pending-grid-plain-delete/authored-output.docx",
+        "sha256": "f11c4622c0367abda26a3a35b24066c0934c90879c05de1985587c9a52778a11"
+      },
+      "assertions": [
+        {
+          "type": "table-state",
+          "version": 1,
+          "scope": "output",
+          "state": {
+            "grid": [
+              1000
+            ],
+            "rows": [
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              },
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
+      },
+      "columnEdit": {
+        "version": 1,
+        "action": "delete",
+        "position": "after",
+        "cellIndex": 0,
+        "resolution": "reject-each"
+      },
+      "revisionRegistry": {
+        "version": 1,
+        "count": 0
+      }
+    },
+    {
+      "id": "redline-pending-grid-plain-delete-control",
+      "version": 1,
+      "category": "tables",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1342",
+      "description": "Untracked column delete, plain rows, followed by resolving a revision-free control",
+      "operation": "column-edit",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-pending-grid-plain-delete-control/source.docx",
+          "sha256": "f71aee2d2c96a193c34b539c3694251cc24f374bab19289a8d8570a2c626af00",
+          "role": "source"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-pending-grid-plain-delete-control/expected.docx",
+          "sha256": "974d5d4dd5eac95e1120a940e1acdf4f48aad1c49c301b02bbacc4dc1eb79319"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-pending-grid-plain-delete-control/authored-output.docx",
+        "sha256": "974d5d4dd5eac95e1120a940e1acdf4f48aad1c49c301b02bbacc4dc1eb79319"
+      },
+      "assertions": [
+        {
+          "type": "table-state",
+          "version": 1,
+          "scope": "output",
+          "state": {
+            "grid": [
+              2000
+            ],
+            "rows": [
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              },
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
+      },
+      "columnEdit": {
+        "version": 1,
+        "action": "delete",
+        "position": "after",
+        "cellIndex": 0,
+        "resolution": "reject-each"
+      },
+      "revisionRegistry": {
+        "version": 1,
+        "count": 0
+      }
+    },
+    {
+      "id": "redline-pending-grid-no-op-insert",
+      "version": 1,
+      "category": "tables",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1342",
+      "description": "Untracked column insert, no-op rows, followed by resolving pending formatting",
+      "operation": "column-edit",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-pending-grid-no-op-insert/source.docx",
+          "sha256": "75f335f7c4cb80d6dfb23b8edb435547a0ef3e0a9e7a986272f283d2809b60aa",
+          "role": "source"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-pending-grid-no-op-insert/expected.docx",
+          "sha256": "d4cb0369d7a3711d97ce85a045de9bb05ba70b4a676489aaf8c88d2faa93e3be"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-pending-grid-no-op-insert/authored-output.docx",
+        "sha256": "d4cb0369d7a3711d97ce85a045de9bb05ba70b4a676489aaf8c88d2faa93e3be"
+      },
+      "assertions": [
+        {
+          "type": "table-state",
+          "version": 1,
+          "scope": "output",
+          "state": {
+            "grid": [
+              2000,
+              2000,
+              2000
+            ],
+            "rows": [
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              },
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
+      },
+      "columnEdit": {
+        "version": 1,
+        "action": "insert",
+        "position": "after",
+        "cellIndex": 0,
+        "resolution": "reject-all"
+      },
+      "revisionRegistry": {
+        "version": 1,
+        "count": 0
+      }
+    },
+    {
+      "id": "redline-pending-grid-no-op-insert-control",
+      "version": 1,
+      "category": "tables",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1342",
+      "description": "Untracked column insert, no-op rows, followed by resolving a revision-free control",
+      "operation": "column-edit",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-pending-grid-no-op-insert-control/source.docx",
+          "sha256": "f71aee2d2c96a193c34b539c3694251cc24f374bab19289a8d8570a2c626af00",
+          "role": "source"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-pending-grid-no-op-insert-control/expected.docx",
+          "sha256": "d4cb0369d7a3711d97ce85a045de9bb05ba70b4a676489aaf8c88d2faa93e3be"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-pending-grid-no-op-insert-control/authored-output.docx",
+        "sha256": "d4cb0369d7a3711d97ce85a045de9bb05ba70b4a676489aaf8c88d2faa93e3be"
+      },
+      "assertions": [
+        {
+          "type": "table-state",
+          "version": 1,
+          "scope": "output",
+          "state": {
+            "grid": [
+              2000,
+              2000,
+              2000
+            ],
+            "rows": [
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              },
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
+      },
+      "columnEdit": {
+        "version": 1,
+        "action": "insert",
+        "position": "after",
+        "cellIndex": 0,
+        "resolution": "reject-all"
+      },
+      "revisionRegistry": {
+        "version": 1,
+        "count": 0
+      }
+    },
+    {
+      "id": "redline-pending-grid-no-op-delete",
+      "version": 1,
+      "category": "tables",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1342",
+      "description": "Untracked column delete, no-op rows, followed by resolving pending formatting",
+      "operation": "column-edit",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-pending-grid-no-op-delete/source.docx",
+          "sha256": "75f335f7c4cb80d6dfb23b8edb435547a0ef3e0a9e7a986272f283d2809b60aa",
+          "role": "source"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-pending-grid-no-op-delete/expected.docx",
+          "sha256": "974d5d4dd5eac95e1120a940e1acdf4f48aad1c49c301b02bbacc4dc1eb79319"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-pending-grid-no-op-delete/authored-output.docx",
+        "sha256": "974d5d4dd5eac95e1120a940e1acdf4f48aad1c49c301b02bbacc4dc1eb79319"
+      },
+      "assertions": [
+        {
+          "type": "table-state",
+          "version": 1,
+          "scope": "output",
+          "state": {
+            "grid": [
+              2000
+            ],
+            "rows": [
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              },
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
+      },
+      "columnEdit": {
+        "version": 1,
+        "action": "delete",
+        "position": "after",
+        "cellIndex": 0,
+        "resolution": "reject-each"
+      },
+      "revisionRegistry": {
+        "version": 1,
+        "count": 0
+      }
+    },
+    {
+      "id": "redline-pending-grid-no-op-delete-control",
+      "version": 1,
+      "category": "tables",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1342",
+      "description": "Untracked column delete, no-op rows, followed by resolving a revision-free control",
+      "operation": "column-edit",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-pending-grid-no-op-delete-control/source.docx",
+          "sha256": "f71aee2d2c96a193c34b539c3694251cc24f374bab19289a8d8570a2c626af00",
+          "role": "source"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-pending-grid-no-op-delete-control/expected.docx",
+          "sha256": "974d5d4dd5eac95e1120a940e1acdf4f48aad1c49c301b02bbacc4dc1eb79319"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-pending-grid-no-op-delete-control/authored-output.docx",
+        "sha256": "974d5d4dd5eac95e1120a940e1acdf4f48aad1c49c301b02bbacc4dc1eb79319"
+      },
+      "assertions": [
+        {
+          "type": "table-state",
+          "version": 1,
+          "scope": "output",
+          "state": {
+            "grid": [
+              2000
+            ],
+            "rows": [
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              },
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
+      },
+      "columnEdit": {
+        "version": 1,
+        "action": "delete",
+        "position": "after",
+        "cellIndex": 0,
+        "resolution": "reject-each"
+      },
+      "revisionRegistry": {
+        "version": 1,
+        "count": 0
+      }
+    },
+    {
+      "id": "redline-pending-grid-merged-insert",
+      "version": 1,
+      "category": "tables",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1342",
+      "description": "Untracked column insert, merged rows, followed by resolving pending formatting",
+      "operation": "column-edit",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-pending-grid-merged-insert/source.docx",
+          "sha256": "53493d6ce15cde338dada372d2767190e1d28bafc0ea1adb7ba84cd273ffdb50",
+          "role": "source"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-pending-grid-merged-insert/expected.docx",
+          "sha256": "f846ee65ff2ebc7fc961bb3168aa8f7cc32cb2ea7df66a6e9eecd08a51f0a5c0"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-pending-grid-merged-insert/authored-output.docx",
+        "sha256": "f846ee65ff2ebc7fc961bb3168aa8f7cc32cb2ea7df66a6e9eecd08a51f0a5c0"
+      },
+      "assertions": [
+        {
+          "type": "table-state",
+          "version": 1,
+          "scope": "output",
+          "state": {
+            "grid": [
+              3000,
+              3000,
+              1000
+            ],
+            "rows": [
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 7000,
+                    "span": 3,
+                    "type": "dxa",
+                    "fill": "FFF2CC"
+                  }
+                ]
+              },
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
+      },
+      "columnEdit": {
+        "version": 1,
+        "action": "insert",
+        "position": "after",
+        "cellIndex": 1,
+        "resolution": "reject-each"
+      },
+      "revisionRegistry": {
+        "version": 1,
+        "count": 0
+      }
+    },
+    {
+      "id": "redline-pending-grid-merged-insert-control",
+      "version": 1,
+      "category": "tables",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1342",
+      "description": "Untracked column insert, merged rows, followed by resolving a revision-free control",
+      "operation": "column-edit",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-pending-grid-merged-insert-control/source.docx",
+          "sha256": "e344f176bb37e6dd077cf28bad8b3a070f0423ce8a5bf31a408f12049fa8494b",
+          "role": "source"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-pending-grid-merged-insert-control/expected.docx",
+          "sha256": "bba1a7cb3590000d581dc822854d77b5fc90d54973ccfc5913df708ebb8ce362"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-pending-grid-merged-insert-control/authored-output.docx",
+        "sha256": "bba1a7cb3590000d581dc822854d77b5fc90d54973ccfc5913df708ebb8ce362"
+      },
+      "assertions": [
+        {
+          "type": "table-state",
+          "version": 1,
+          "scope": "output",
+          "state": {
+            "grid": [
+              2000,
+              2000,
+              2000
+            ],
+            "rows": [
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 6000,
+                    "span": 3,
+                    "type": "dxa",
+                    "fill": "D9EAD3"
+                  }
+                ]
+              },
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
+      },
+      "columnEdit": {
+        "version": 1,
+        "action": "insert",
+        "position": "after",
+        "cellIndex": 1,
+        "resolution": "reject-each"
+      },
+      "revisionRegistry": {
+        "version": 1,
+        "count": 0
+      }
+    },
+    {
+      "id": "redline-pending-grid-merged-delete",
+      "version": 1,
+      "category": "tables",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1342",
+      "description": "Untracked column delete, merged rows, followed by resolving pending formatting",
+      "operation": "column-edit",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-pending-grid-merged-delete/source.docx",
+          "sha256": "53493d6ce15cde338dada372d2767190e1d28bafc0ea1adb7ba84cd273ffdb50",
+          "role": "source"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-pending-grid-merged-delete/expected.docx",
+          "sha256": "8ca1e109c4e79e89fd82557f53b84607b5c73789d669316bd249a0ba898f223f"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-pending-grid-merged-delete/authored-output.docx",
+        "sha256": "8ca1e109c4e79e89fd82557f53b84607b5c73789d669316bd249a0ba898f223f"
+      },
+      "assertions": [
+        {
+          "type": "table-state",
+          "version": 1,
+          "scope": "output",
+          "state": {
+            "grid": [
+              1000
+            ],
+            "rows": [
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 1000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": "FFF2CC"
+                  }
+                ]
+              },
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
+      },
+      "columnEdit": {
+        "version": 1,
+        "action": "delete",
+        "position": "after",
+        "cellIndex": 1,
+        "resolution": "reject-all"
+      },
+      "revisionRegistry": {
+        "version": 1,
+        "count": 0
+      }
+    },
+    {
+      "id": "redline-pending-grid-merged-delete-control",
+      "version": 1,
+      "category": "tables",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1342",
+      "description": "Untracked column delete, merged rows, followed by resolving a revision-free control",
+      "operation": "column-edit",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-pending-grid-merged-delete-control/source.docx",
+          "sha256": "e344f176bb37e6dd077cf28bad8b3a070f0423ce8a5bf31a408f12049fa8494b",
+          "role": "source"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-pending-grid-merged-delete-control/expected.docx",
+          "sha256": "384bfa8f080826fc19edf630cc38013bffb72e4ba03a2db1f1678704656474e9"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-pending-grid-merged-delete-control/authored-output.docx",
+        "sha256": "384bfa8f080826fc19edf630cc38013bffb72e4ba03a2db1f1678704656474e9"
+      },
+      "assertions": [
+        {
+          "type": "table-state",
+          "version": 1,
+          "scope": "output",
+          "state": {
+            "grid": [
+              2000
+            ],
+            "rows": [
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": "D9EAD3"
+                  }
+                ]
+              },
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
+      },
+      "columnEdit": {
+        "version": 1,
+        "action": "delete",
+        "position": "after",
+        "cellIndex": 1,
+        "resolution": "reject-all"
+      },
+      "revisionRegistry": {
+        "version": 1,
+        "count": 0
+      }
+    },
+    {
+      "id": "redline-pending-grid-omitted-insert",
+      "version": 1,
+      "category": "tables",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1342",
+      "description": "Untracked column insert, omitted rows, followed by resolving pending formatting",
+      "operation": "column-edit",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-pending-grid-omitted-insert/source.docx",
+          "sha256": "839f12cafd87e5eed3bac0b75fad8c75a10e1f0bb6ce2f7c91652d5b541fa5c8",
+          "role": "source"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-pending-grid-omitted-insert/expected.docx",
+          "sha256": "c1f07d78c7cff8330be9031429f3a44909a6e1e6a6c58714cb62cbb57c5cebac"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-pending-grid-omitted-insert/authored-output.docx",
+        "sha256": "c1f07d78c7cff8330be9031429f3a44909a6e1e6a6c58714cb62cbb57c5cebac"
+      },
+      "assertions": [
+        {
+          "type": "table-state",
+          "version": 1,
+          "scope": "output",
+          "state": {
+            "grid": [
+              3000,
+              3000,
+              1000,
+              2000
+            ],
+            "rows": [
+              {
+                "before": 2,
+                "after": 0,
+                "height": 240,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              },
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
+      },
+      "columnEdit": {
+        "version": 1,
+        "action": "insert",
+        "position": "before",
+        "cellIndex": 2,
+        "resolution": "reject-all"
+      },
+      "revisionRegistry": {
+        "version": 1,
+        "count": 0
+      }
+    },
+    {
+      "id": "redline-pending-grid-omitted-insert-control",
+      "version": 1,
+      "category": "tables",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1342",
+      "description": "Untracked column insert, omitted rows, followed by resolving a revision-free control",
+      "operation": "column-edit",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-pending-grid-omitted-insert-control/source.docx",
+          "sha256": "b8d7c6a4edd0c568029621085f678ba1a91678bc4d7c81c3da66cb7eb29a8f59",
+          "role": "source"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-pending-grid-omitted-insert-control/expected.docx",
+          "sha256": "5bc4606f52039310818a3cb63f0735ab2f4ba923420a1048f576cdfb42007ba9"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-pending-grid-omitted-insert-control/authored-output.docx",
+        "sha256": "5bc4606f52039310818a3cb63f0735ab2f4ba923420a1048f576cdfb42007ba9"
+      },
+      "assertions": [
+        {
+          "type": "table-state",
+          "version": 1,
+          "scope": "output",
+          "state": {
+            "grid": [
+              2000,
+              2000,
+              2000,
+              2000
+            ],
+            "rows": [
+              {
+                "before": 2,
+                "after": 0,
+                "height": 480,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              },
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
+      },
+      "columnEdit": {
+        "version": 1,
+        "action": "insert",
+        "position": "before",
+        "cellIndex": 2,
+        "resolution": "reject-all"
+      },
+      "revisionRegistry": {
+        "version": 1,
+        "count": 0
+      }
+    },
+    {
+      "id": "redline-pending-grid-omitted-delete",
+      "version": 1,
+      "category": "tables",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1342",
+      "description": "Untracked column delete, omitted rows, followed by resolving pending formatting",
+      "operation": "column-edit",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-pending-grid-omitted-delete/source.docx",
+          "sha256": "839f12cafd87e5eed3bac0b75fad8c75a10e1f0bb6ce2f7c91652d5b541fa5c8",
+          "role": "source"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-pending-grid-omitted-delete/expected.docx",
+          "sha256": "0686413cf26707a656f8f3f6473872d8b3441b6f3f3be3c246fab5b3b71bcca3"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-pending-grid-omitted-delete/authored-output.docx",
+        "sha256": "0686413cf26707a656f8f3f6473872d8b3441b6f3f3be3c246fab5b3b71bcca3"
+      },
+      "assertions": [
+        {
+          "type": "table-state",
+          "version": 1,
+          "scope": "output",
+          "state": {
+            "grid": [
+              1000,
+              2000
+            ],
+            "rows": [
+              {
+                "before": 0,
+                "after": 0,
+                "height": 240,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              },
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
+      },
+      "columnEdit": {
+        "version": 1,
+        "action": "delete",
+        "position": "before",
+        "cellIndex": 2,
+        "resolution": "reject-each"
+      },
+      "revisionRegistry": {
+        "version": 1,
+        "count": 0
+      }
+    },
+    {
+      "id": "redline-pending-grid-omitted-delete-control",
+      "version": 1,
+      "category": "tables",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1342",
+      "description": "Untracked column delete, omitted rows, followed by resolving a revision-free control",
+      "operation": "column-edit",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-pending-grid-omitted-delete-control/source.docx",
+          "sha256": "b8d7c6a4edd0c568029621085f678ba1a91678bc4d7c81c3da66cb7eb29a8f59",
+          "role": "source"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-pending-grid-omitted-delete-control/expected.docx",
+          "sha256": "fd9fead9d9b285bb3c25c891d5bf76ee21ff907af81e8228500744be68b7acb5"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-pending-grid-omitted-delete-control/authored-output.docx",
+        "sha256": "fd9fead9d9b285bb3c25c891d5bf76ee21ff907af81e8228500744be68b7acb5"
+      },
+      "assertions": [
+        {
+          "type": "table-state",
+          "version": 1,
+          "scope": "output",
+          "state": {
+            "grid": [
+              2000,
+              2000
+            ],
+            "rows": [
+              {
+                "before": 0,
+                "after": 0,
+                "height": 480,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              },
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
+      },
+      "columnEdit": {
+        "version": 1,
+        "action": "delete",
+        "position": "before",
+        "cellIndex": 2,
+        "resolution": "reject-each"
+      },
+      "revisionRegistry": {
+        "version": 1,
+        "count": 0
+      }
+    },
+    {
+      "id": "redline-pending-grid-merged-before-insert",
+      "version": 1,
+      "category": "tables",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1342",
+      "description": "Untracked column insert, merged-before rows, followed by resolving pending formatting",
+      "operation": "column-edit",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-pending-grid-merged-before-insert/source.docx",
+          "sha256": "53493d6ce15cde338dada372d2767190e1d28bafc0ea1adb7ba84cd273ffdb50",
+          "role": "source"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-pending-grid-merged-before-insert/expected.docx",
+          "sha256": "beaade2f9dc88ff7047c7c770fd8dc7ff606a73becefdff139d5e362398deaf4"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-pending-grid-merged-before-insert/authored-output.docx",
+        "sha256": "beaade2f9dc88ff7047c7c770fd8dc7ff606a73becefdff139d5e362398deaf4"
+      },
+      "assertions": [
+        {
+          "type": "table-state",
+          "version": 1,
+          "scope": "output",
+          "state": {
+            "grid": [
+              3000,
+              3000,
+              1000
+            ],
+            "rows": [
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 3000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": "FFF2CC"
+                  },
+                  {
+                    "width": 4000,
+                    "span": 2,
+                    "type": "dxa",
+                    "fill": "FFF2CC"
+                  }
+                ]
+              },
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
+      },
+      "columnEdit": {
+        "version": 1,
+        "action": "insert",
+        "position": "before",
+        "cellIndex": 0,
+        "resolution": "reject-all"
+      },
+      "revisionRegistry": {
+        "version": 1,
+        "count": 0
+      }
+    },
+    {
+      "id": "redline-pending-grid-merged-before-insert-control",
+      "version": 1,
+      "category": "tables",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1342",
+      "description": "Untracked column insert, merged-before rows, followed by resolving a revision-free control",
+      "operation": "column-edit",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-pending-grid-merged-before-insert-control/source.docx",
+          "sha256": "e344f176bb37e6dd077cf28bad8b3a070f0423ce8a5bf31a408f12049fa8494b",
+          "role": "source"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-pending-grid-merged-before-insert-control/expected.docx",
+          "sha256": "bbdf9624fa0c8a3d4d746ef72c3ce14b6de3fdcac4422ae76e4f8fc3fc6f2379"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-pending-grid-merged-before-insert-control/authored-output.docx",
+        "sha256": "bbdf9624fa0c8a3d4d746ef72c3ce14b6de3fdcac4422ae76e4f8fc3fc6f2379"
+      },
+      "assertions": [
+        {
+          "type": "table-state",
+          "version": 1,
+          "scope": "output",
+          "state": {
+            "grid": [
+              2000,
+              2000,
+              2000
+            ],
+            "rows": [
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": "D9EAD3"
+                  },
+                  {
+                    "width": 4000,
+                    "span": 2,
+                    "type": "dxa",
+                    "fill": "D9EAD3"
+                  }
+                ]
+              },
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
+      },
+      "columnEdit": {
+        "version": 1,
+        "action": "insert",
+        "position": "before",
+        "cellIndex": 0,
+        "resolution": "reject-all"
+      },
+      "revisionRegistry": {
+        "version": 1,
+        "count": 0
+      }
+    },
+    {
+      "id": "redline-pending-grid-merged-after-insert",
+      "version": 1,
+      "category": "tables",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1342",
+      "description": "Untracked column insert, merged-after rows, followed by resolving pending formatting",
+      "operation": "column-edit",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-pending-grid-merged-after-insert/source.docx",
+          "sha256": "53493d6ce15cde338dada372d2767190e1d28bafc0ea1adb7ba84cd273ffdb50",
+          "role": "source"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-pending-grid-merged-after-insert/expected.docx",
+          "sha256": "ae4e7108555210853ae3f2c6abfff966a9693ae582b6dcbb7855d3b39791f2d6"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-pending-grid-merged-after-insert/authored-output.docx",
+        "sha256": "ae4e7108555210853ae3f2c6abfff966a9693ae582b6dcbb7855d3b39791f2d6"
+      },
+      "assertions": [
+        {
+          "type": "table-state",
+          "version": 1,
+          "scope": "output",
+          "state": {
+            "grid": [
+              3000,
+              1000,
+              1000
+            ],
+            "rows": [
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 4000,
+                    "span": 2,
+                    "type": "dxa",
+                    "fill": "FFF2CC"
+                  },
+                  {
+                    "width": 1000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": "FFF2CC"
+                  }
+                ]
+              },
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
+      },
+      "columnEdit": {
+        "version": 1,
+        "action": "insert",
+        "position": "after",
+        "cellIndex": 0,
+        "resolution": "reject-all"
+      },
+      "revisionRegistry": {
+        "version": 1,
+        "count": 0
+      }
+    },
+    {
+      "id": "redline-pending-grid-merged-after-insert-control",
+      "version": 1,
+      "category": "tables",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1342",
+      "description": "Untracked column insert, merged-after rows, followed by resolving a revision-free control",
+      "operation": "column-edit",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-pending-grid-merged-after-insert-control/source.docx",
+          "sha256": "e344f176bb37e6dd077cf28bad8b3a070f0423ce8a5bf31a408f12049fa8494b",
+          "role": "source"
+        }
+      ],
+      "expected": {
+        "output": {
+          "path": "fixtures/redline/redline-pending-grid-merged-after-insert-control/expected.docx",
+          "sha256": "2b18f3d0c1e57abeb52d1c96575282f8cdaa637fe11b102a5167ac92924f0d78"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-pending-grid-merged-after-insert-control/authored-output.docx",
+        "sha256": "2b18f3d0c1e57abeb52d1c96575282f8cdaa637fe11b102a5167ac92924f0d78"
+      },
+      "assertions": [
+        {
+          "type": "table-state",
+          "version": 1,
+          "scope": "output",
+          "state": {
+            "grid": [
+              2000,
+              2000,
+              2000
+            ],
+            "rows": [
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 4000,
+                    "span": 2,
+                    "type": "dxa",
+                    "fill": "D9EAD3"
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": "D9EAD3"
+                  }
+                ]
+              },
+              {
+                "before": 0,
+                "after": 0,
+                "height": null,
+                "cells": [
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  },
+                  {
+                    "width": 2000,
+                    "span": 1,
+                    "type": "dxa",
+                    "fill": null
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "revision-count",
+          "version": 1,
+          "scope": "output",
+          "max": 0
+        }
+      ],
+      "libreoffice": {
+        "output": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "8b3a26848f99e2a8c021f980738b3cfc9d896190473e3bdfd901aa8d913effeb"
+      },
+      "columnEdit": {
+        "version": 1,
+        "action": "insert",
+        "position": "after",
+        "cellIndex": 0,
+        "resolution": "reject-all"
       },
       "revisionRegistry": {
         "version": 1,

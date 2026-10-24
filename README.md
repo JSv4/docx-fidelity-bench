@@ -2,7 +2,9 @@
 
 An independent MIT benchmark of delivered PDF rendering and of document comparison. The harness and every input document are authored in this repository. It measures layout, visible content, physical pages, fonts, and declared feature assertions. It produces portable HTML evidence and JSON measurements.
 
-The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v58`, with report-only renderer CI. A separate comparison track, `redline-v11`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
+The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v58`, with report-only renderer CI. A separate comparison track, `redline-v12`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
+
+`redline-v12` adds 20 original column-edit cases for Docxodus #1342: pending real/no-op grids, merged cells with pending shading, rows with pending height and omitted leading columns, and unit cells copied from merged references. Each reproducer has a revision-free control. Native insertion/deletion followed by bulk or selective revision resolution must match independently authored exact table states. All prior DOCX bytes remain unchanged; the PDF suite stays `core-v58`.
 
 `redline-v11` adds full and partial tracked column-width edits for Docxodus #1322, each with an untracked control. The public session API must report one tracked revision (zero untracked), and independent assertions check grid, cell and table widths after accept/reject. All prior DOCX bytes remain unchanged. The PDF suite stays `core-v58`.
 

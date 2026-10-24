@@ -23,17 +23,17 @@ from .redline_build import dotnet as _dotnet, validate_packages, verify_docxodus
 from .common import ROOT, contained, digest, execute, identity, read_json, write_json
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
-OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}}
+OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1}
+ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables'}
-SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}}
-CONTRACT = {'version': 3, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}}
+CONTRACT = {'version': 4, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
             'validity': 'no OpenXmlValidator finding (id, part, description) occurs more often than in any input',
             'semanticPreflight': 'declared identity cases must report zero changes at raw limits with and without the package supplement',
-            'revisionRegistry': 'table width operations must report the declared public registry count and match independent resolved width assertions'}
+            'revisionRegistry': 'declared table operations must report the public registry count and match independent resolved table assertions'}
 HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'bench/redline_build.py']
 
 
@@ -60,7 +60,7 @@ def validate_registry(registry=None):
         operation = case['operation']
         if operation not in OPERATIONS or (OPERATIONS[operation] and len(case['inputs']) != OPERATIONS[operation]) or (operation == 'consolidate' and len(case['inputs']) < 3):
             raise ValueError('Invalid operation or input count: ' + case['id'])
-        expected = {'compare': {'accepted', 'rejected'}, 'consolidate': {'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'accepted', 'rejected'}}[operation]
+        expected = {'compare': {'accepted', 'rejected'}, 'consolidate': {'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'accepted', 'rejected'}, 'column-edit': {'output'}}[operation]
         if set(case['expected']) != expected or case['kind'] not in ('reproducer', 'control', 'identity'):
             raise ValueError('Invalid expectation or kind: ' + case['id'])
         declared = case.get('libreoffice', {})
@@ -85,7 +85,16 @@ def validate_registry(registry=None):
                     or registry_count != {'version': 1, 'count': 1 if spec['tracked'] else 0}
                     or type(registry_count.get('count')) is not int):
                 raise ValueError('Invalid table widths declaration: ' + case['id'])
-        elif 'tableWidths' in case or 'revisionRegistry' in case:
+        elif operation == 'column-edit':
+            spec = case.get('columnEdit', {})
+            if (set(spec) != {'version', 'action', 'position', 'cellIndex', 'resolution'} or spec['version'] != 1
+                    or spec['action'] not in {'insert', 'delete'} or spec['position'] not in {'before', 'after'}
+                    or type(spec['cellIndex']) is not int or spec['cellIndex'] < 0
+                    or spec['resolution'] not in {'reject-all', 'reject-each', 'accept-all'}
+                    or case.get('revisionRegistry') != {'version': 1, 'count': 0}
+                    or type(case['revisionRegistry']['count']) is not int):
+                raise ValueError('Invalid column edit declaration: ' + case['id'])
+        elif 'tableWidths' in case or 'revisionRegistry' in case or 'columnEdit' in case:
             raise ValueError('Unexpected table width operation data: ' + case['id'])
         if 'semanticPreflight' in case:
             if (operation != 'compare' or case['category'] != 'identity'
@@ -107,13 +116,41 @@ def validate_registry(registry=None):
                          and isinstance(a.get('cells'), list) and a['cells'] and all(isinstance(row, list) and row
                              and all(type(v) is int and v > 0 for v in row) for row in a['cells'])
                          and type(a.get('table')) is int and a['table'] > 0,
+                     'table-state': lambda a: a['scope'] == 'output' and valid_table_state(a.get('state')),
                      'comment-threads': lambda a: a['scope'] == 'redline' and isinstance(a.get('threads'), list) and all(
                          isinstance(x, list) and len(x) == 2 and all(isinstance(y, str) and y for y in x) for x in a['threads'])}[kind]
             if not valid(assertion):
                 raise ValueError('Invalid assertion declaration: ' + case['id'] + ' ' + kind)
-        if operation == 'reject' and {'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0} not in case['assertions']:
+        if operation in {'reject', 'column-edit'} and {'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0} not in case['assertions']:
             raise ValueError('A reject case must require an output without revisions: ' + case['id'])
     return registry
+
+
+def valid_table_state(state):
+    if not isinstance(state, dict) or set(state) != {'grid', 'rows'}:
+        return False
+    if not isinstance(state['grid'], list) or not state['grid'] or any(type(w) is not int or w < 0 for w in state['grid']):
+        return False
+    if not isinstance(state['rows'], list) or not state['rows']:
+        return False
+    for row in state['rows']:
+        if not isinstance(row, dict) or set(row) != {'before', 'after', 'height', 'cells'}:
+            return False
+        if any(type(row[key]) is not int or row[key] < 0 for key in ('before', 'after')):
+            return False
+        if row['height'] is not None and (type(row['height']) is not int or row['height'] < 0):
+            return False
+        if not isinstance(row['cells'], list) or not row['cells']:
+            return False
+        for cell in row['cells']:
+            if (not isinstance(cell, dict) or set(cell) != {'span', 'width', 'type', 'fill'}
+                    or type(cell['span']) is not int or cell['span'] <= 0
+                    or type(cell['width']) is not int or cell['width'] < 0 or cell['type'] != 'dxa'
+                    or (cell['fill'] is not None and not isinstance(cell['fill'], str))):
+                return False
+        if row['before'] + row['after'] + sum(c['span'] for c in row['cells']) != len(state['grid']):
+            return False
+    return True
 
 
 # ---------------------------------------------------------------------------------------------
@@ -201,6 +238,8 @@ def run_candidate(adapter, build, case, output, candidate, timeout=300):
         request['settings']['semanticPreflight'] = case['semanticPreflight']
     if 'tableWidths' in case:
         request['settings']['tableWidths'] = case['tableWidths']
+    if 'columnEdit' in case:
+        request['settings']['columnEdit'] = case['columnEdit']
     response = json.loads(execute([_dotnet(), str(Path(build).resolve() / 'bin' / 'DocxBenchRedline.dll')], input=json.dumps(request), timeout=timeout))
     if response.get('protocol') != 1 or response.get('status') not in ('ok', 'failed', 'unmeasured'):
         raise ValueError('Invalid redline adapter response')
@@ -230,7 +269,35 @@ def _assertion(assertion, package, resolved):
     kind, scope = assertion['type'], assertion['scope']
     parts = resolved.get(scope)
     check = {'name': 'assertion-' + kind, 'declaration': assertion}
-    if kind == 'table-widths':
+    if kind == 'table-state':
+        roots = parts if parts is not None else package.story_parts()
+        tables = list(roots[package.main].iter(revisions.w('tbl')))
+        def number(element, attribute, default=None):
+            value = None if element is None else element.get(revisions.w(attribute))
+            return int(value) if value is not None and value.isdecimal() else default if value is None else value
+        observed = None
+        if len(tables) == 1:
+            table = tables[0]
+            grid = table.find(revisions.w('tblGrid'))
+            rows = []
+            for row in table.findall(revisions.w('tr')):
+                row_pr = row.find(revisions.w('trPr'))
+                row_property = lambda name: None if row_pr is None else row_pr.find(revisions.w(name))
+                cells = []
+                for cell in row.findall(revisions.w('tc')):
+                    pr = cell.find(revisions.w('tcPr'))
+                    property_of = lambda name: None if pr is None else pr.find(revisions.w(name))
+                    width = property_of('tcW')
+                    fill = property_of('shd')
+                    cells.append({'span': number(property_of('gridSpan'), 'val', 1), 'width': number(width, 'w'),
+                                  'type': None if width is None else width.get(revisions.w('type')),
+                                  'fill': None if fill is None else fill.get(revisions.w('fill'))})
+                rows.append({'before': number(row_property('gridBefore'), 'val', 0),
+                             'after': number(row_property('gridAfter'), 'val', 0),
+                             'height': number(row_property('trHeight'), 'val'), 'cells': cells})
+            observed = {'grid': [] if grid is None else [number(c, 'w') for c in grid.findall(revisions.w('gridCol'))], 'rows': rows}
+        check.update(passed=observed == assertion['state'], observed=observed)
+    elif kind == 'table-widths':
         roots = parts if parts is not None else package.story_parts()
         tables = list(roots[package.main].iter(revisions.w('tbl')))
         def width(element):
@@ -292,7 +359,7 @@ def score_case(case, folder, adapter, build, candidate, env, validator):
     outcome = {'id': case['id'], 'category': case['category'], 'kind': case['kind'], 'issue': case['issue'],
                'operation': case['operation'], 'status': 'unmeasured', 'checks': []}
     inputs = [contained(ROOT, i['path']) for i in case['inputs']]
-    output = folder / ('candidate-redline.docx' if case['operation'] != 'reject' else 'candidate-output.docx')
+    output = folder / ('candidate-output.docx' if case['operation'] in {'reject', 'column-edit'} else 'candidate-redline.docx')
     try:
         try:
             response = run_candidate(adapter, build, case, output, candidate)
@@ -320,7 +387,7 @@ def score_case(case, folder, adapter, build, candidate, env, validator):
             if digest(path) != record['sha256']:
                 raise ValueError('Benchmark fixture changed during the run: ' + record['path'])
         resolved = {'redline': None, 'output': None}
-        if case['operation'] == 'reject':
+        if case['operation'] in {'reject', 'column-edit'}:
             outcome['checks'].append(_comparison('markup-output', revisions.view(revisions.Package(str(expected['output']))), revisions.view(package)))
         else:
             for mode, key in (('accept', 'accepted'), ('reject', 'rejected')):
@@ -385,7 +452,7 @@ def _libreoffice_checks(case, folder, env, output, authored, expected):
         names[key] = len(items)
         items.append({'key': key, 'input': str(source), 'operation': operation, 'output': str(target)})
         return target
-    if case['operation'] == 'reject':
+    if case['operation'] in {'reject', 'column-edit'}:
         pairs = [('output', item('expected-output', expected['output'], 'load'), item('authored-output', authored, 'load'), item('candidate-output', output, 'load'), None)]
     else:
         pairs = []
