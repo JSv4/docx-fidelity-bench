@@ -1756,7 +1756,34 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    registry = {'schema': 1, 'suite': {'id': 'core-v58', 'version': 58, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Original adjacent-table property cases for Docxodus #1341. The separator controls
+    # carry the same table declarations; only a real paragraph makes them nonadjacent.
+    def harbor_table(text, second):
+        width = 6000 if second else 4800
+        border = ('<w:tblBorders>' + ''.join('<w:' + side + ' w:val="single" w:sz="8" w:color="246B7D"/>'
+                  for side in ('top', 'left', 'bottom', 'right')) + '</w:tblBorders>') if second else ''
+        return ('<w:tbl><w:tblPr><w:tblW w:w="' + str(width) + '" w:type="dxa"/>' + border
+                + '<w:tblLayout w:type="fixed"/><w:tblCellMar><w:left w:w="' + ('720' if second else '0')
+                + '" w:type="dxa"/><w:right w:w="180" w:type="dxa"/></w:tblCellMar></w:tblPr>'
+                + '<w:tblGrid><w:gridCol w:w="' + str(width) + '"/></w:tblGrid><w:tr><w:tc><w:tcPr>'
+                + '<w:tcW w:w="' + str(width) + '" w:type="dxa"/></w:tcPr>' + para(text) + '</w:tc></w:tr></w:tbl>')
+    harbor_styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+                     f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="22"/></w:rPr></w:rPrDefault>'
+                     '<w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/>'
+                     '</w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal">'
+                     '<w:name w:val="Normal"/></w:style></w:styles>')
+    for review in ('final', 'original'):
+        for control in (False, True):
+            body = (para('EstuaryEntry') + harbor_table('CanalPier', False) + (para('') if control else '')
+                    + harbor_table('InlandPier', True) + para('EstuaryExit'))
+            add('tables-adjacent-properties-' + review + ('-control' if control else ''), 'tables',
+                'Independent borders, widths and margins of ' + ('separated control' if control else 'adjacent')
+                + ' tables under the ' + review + ' review profile (Docxodus #1341)',
+                ['EstuaryEntry', 'CanalPier', 'InlandPier', 'EstuaryExit'], body, styles_xml=harbor_styles,
+                assertions=[{'type': 'same-page', 'version': 1,
+                             'markers': ['EstuaryEntry', 'CanalPier', 'InlandPier', 'EstuaryExit']}])
+            cases[-1]['profile']['review'] = review
+    registry = {'schema': 1, 'suite': {'id': 'core-v59', 'version': 59, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
