@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v11`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v12`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -162,3 +162,30 @@ if the observed eligibility ever differs. This follows the existing policy used 
 revision kinds LibreOffice cannot expose. The exact width, registry and schema checks remain
 mandatory. Labelled page rasters and diagnostic source-bound results are under
 `docs/results/column-width-revisions/`; these are focused runs, not a full-suite score.
+
+## Column edits across pending formatting
+
+The `column-edit` operation calls the public untracked `InsertTableColumn` or `DeleteTableColumn`,
+then the declared public bulk or selective revision resolver. It writes the resolved document.
+Its `columnEdit` declaration v1 names the action, before/after position, physical cell index and
+resolution (`reject-all`, `reject-each`, or `accept-all`). The observed public registry count
+must be the declared integer zero, and independent markup inspection also requires no revisions.
+
+The `table-state` assertion v1 independently checks exact grid widths and every row's leading
+and trailing omissions, height, cell spans, preferred widths/types and shading. Declared rows
+must fill the declared grid. The general text view omits these properties; deliberately changed
+widths, spans, omissions, shading or height can preserve its text and must fail this assertion.
+Metric contract version 4 records the new resolved-output operation and mandatory checks.
+
+The twenty `redline-pending-grid-*` cases pair each pending-history reproducer with a
+revision-free control. Real and no-op old grids cover insertion and deletion. Merged-cell
+cases retain an older shading baseline; omitted-column cases retain older row height; two
+edge insertions clone a merged reference into a new unit cell. Exact expected documents
+retain the permanent structural edit while resolving only the earlier formatting. Every
+expected output and authored calibration is original OOXML written independently of a
+candidate. Calibration does not claim to execute the candidate API.
+
+These resolved outputs contain no revisions, so LibreOffice compares their loaded text directly
+against the authored calibration and expected output. Earlier declarations for property-only
+redlines are unchanged. The page rasters under `docs/results/pending-grid-columns/` are local
+diagnostics accompanying source-bound focused runs, not a full-suite score.

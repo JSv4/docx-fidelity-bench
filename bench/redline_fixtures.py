@@ -22,7 +22,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v11', 'version': 11}
+SUITE = {'id': 'redline-v12', 'version': 12}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -271,6 +271,7 @@ def generate():
     reply_parents(corpus)
     semantic_limits(corpus)
     column_widths(corpus)
+    pending_grid_columns(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -340,6 +341,120 @@ def column_widths(corpus):
                         assertion(values, 'accepted'), assertion(original if tracked else values, 'rejected')])
             corpus.cases[-1]['tableWidths'] = {'version': 1, 'widths': values, 'tracked': tracked}
             corpus.cases[-1]['revisionRegistry'] = {'version': 1, 'count': 1 if tracked else 0}
+
+
+def pending_grid_columns(corpus):
+    import copy
+
+    def cell(text, width=2000, span=1, fill=None):
+        return {'text': text, 'width': width, 'span': span, 'type': 'dxa', 'fill': fill}
+
+    def row(cells, before=0, height=None):
+        return {'before': before, 'after': 0, 'height': height, 'cells': cells}
+
+    def document(grid, rows, previous_grid=None):
+        rev = Revisions()
+        def cell_properties(c):
+            result = f'<w:tcW w:w="{c["width"]}" w:type="dxa"/>'
+            if c['span'] > 1:
+                result += f'<w:gridSpan w:val="{c["span"]}"/>'
+            if c['fill'] is not None:
+                result += f'<w:shd w:val="clear" w:fill="{c["fill"]}"/>'
+            return result
+        def row_properties(r):
+            result = ''.join(f'<w:{name} w:val="{r[key]}"/>' for name, key in [('gridBefore', 'before'), ('gridAfter', 'after')] if r[key])
+            return result + (f'<w:trHeight w:val="{r["height"]}"/>' if r['height'] is not None else '')
+        def columns(values):
+            return ''.join(f'<w:gridCol w:w="{v}"/>' for v in values)
+        grid_xml = columns(grid)
+        if previous_grid is not None:
+            identifier = rev.next
+            rev.next += 1
+            grid_xml += f'<w:tblGridChange w:id="{identifier}"><w:tblGrid>{columns(previous_grid)}</w:tblGrid></w:tblGridChange>'
+        row_xml = ''
+        for r in rows:
+            properties = row_properties(r)
+            if 'previous' in r:
+                properties += f'<w:trPrChange {rev.attrs("Prior Survey Reviewer")}><w:trPr>{row_properties(r["previous"])}</w:trPr></w:trPrChange>'
+            cells = ''
+            for c in r['cells']:
+                cp = cell_properties(c)
+                if 'previous' in c:
+                    cp += f'<w:tcPrChange {rev.attrs("Prior Survey Reviewer")}><w:tcPr>{cell_properties(c["previous"])}</w:tcPr></w:tcPrChange>'
+                cells += f'<w:tc><w:tcPr>{cp}</w:tcPr>{p(t(c["text"]))}</w:tc>'
+            row_xml += '<w:tr>' + (f'<w:trPr>{properties}</w:trPr>' if properties else '') + cells + '</w:tr>'
+        return {'body': p(t('Survey channel register.')) + f'<w:tbl><w:tblPr/><w:tblGrid>{grid_xml}</w:tblGrid>{row_xml}</w:tbl>' + p(t('Register closing remains.'))}
+
+    for shape in ('plain', 'no-op', 'merged', 'omitted', 'merged-before', 'merged-after'):
+        for action in (('insert',) if shape in {'merged-before', 'merged-after'} else ('insert', 'delete')):
+            for pending, kind, suffix in [(True, 'reproducer', ''), (False, 'control', '-control')]:
+                grid = [2000, 2000, 2000] if shape == 'omitted' else [2000, 2000]
+                prior = grid if shape == 'no-op' else ([3000, 1000, 2000] if shape == 'omitted' else [3000, 1000])
+                a, b, c, d, e = [cell(label) for label in ('Canal marker', 'Quay marker', 'Ridge marker', 'Jetty marker', 'Marsh marker')]
+                rows = [row([a, b]), row([c, d])]
+                index, position = 0, 'after'
+                if shape.startswith('merged'):
+                    merged = cell('Long reach marker', 4000, 2, 'D9EAD3')
+                    if pending:
+                        merged['previous'] = cell('Long reach marker', 4000, 2, 'FFF2CC')
+                    rows = [row([merged]), row([a, b])]
+                    index = 1 if shape == 'merged' else 0
+                    position = 'before' if shape == 'merged-before' else 'after'
+                elif shape == 'omitted':
+                    rows = [row([a, b], 1, 480), row([c, d, e])]
+                    if pending:
+                        rows[0]['previous'] = row([], 1, 240)
+                    index, position = 2, 'before'
+
+                source = document(grid, copy.deepcopy(rows), prior if pending else None)
+                expected_grid = prior if pending else grid
+                if shape in {'plain', 'no-op'}:
+                    if action == 'insert':
+                        expected_grid = [expected_grid[0], expected_grid[0], expected_grid[1]]
+                        expected_rows = [row([a, cell(''), b]), row([c, cell(''), d])]
+                    else:
+                        expected_grid = [expected_grid[1]]
+                        expected_rows = [row([b]), row([d])]
+                elif shape.startswith('merged'):
+                    fill = 'FFF2CC' if pending else 'D9EAD3'
+                    if action == 'insert':
+                        if shape == 'merged-after':
+                            previous_width = expected_grid[1]
+                            expected_grid = [expected_grid[0], expected_grid[1], expected_grid[1]]
+                            expected_rows = [row([cell('Long reach marker', 4000, 2, fill), cell('', previous_width, 1, fill)]), row([a, b, cell('')])]
+                        elif shape == 'merged-before':
+                            previous_width = expected_grid[0]
+                            expected_grid = [expected_grid[0], expected_grid[0], expected_grid[1]]
+                            expected_rows = [row([cell('', previous_width, 1, fill), cell('Long reach marker', 4000, 2, fill)]), row([cell(''), a, b])]
+                        else:
+                            expected_grid = [expected_grid[0], expected_grid[0], expected_grid[1]]
+                            expected_rows = [row([cell('Long reach marker', 7000 if pending else 6000, 3, fill)]), row([a, cell(''), b])]
+                    else:
+                        expected_grid = [expected_grid[1]]
+                        expected_rows = [row([cell('Long reach marker', 1000 if pending else 2000, 1, fill)]), row([b])]
+                else:
+                    height = 240 if pending else 480
+                    if action == 'insert':
+                        expected_grid = [expected_grid[0], expected_grid[0], expected_grid[1], expected_grid[2]]
+                        expected_rows = [row([a, b], 2, height), row([cell(''), c, d, e])]
+                    else:
+                        expected_grid = expected_grid[1:]
+                        expected_rows = [row([a, b], 0, height), row([d, e])]
+
+                case_id = f'redline-pending-grid-{shape}-{action}{suffix}'
+                input_record = corpus.file(case_id, 'source', **source)
+                expected = corpus.file(case_id, 'expected', **document(expected_grid, expected_rows))
+                authored = corpus.file(case_id, 'authored-output', **document(expected_grid, expected_rows))
+                state = {'grid': expected_grid, 'rows': [dict(r, cells=[{k: value for k, value in item.items() if k != 'text'} for item in r['cells']]) for r in expected_rows]}
+                corpus.add(case_id, 'tables', kind, 'JSv4/Docxodus#1342',
+                           f'Untracked column {action}, {shape} rows, followed by resolving ' + ('pending formatting' if pending else 'a revision-free control'),
+                           'column-edit', [dict(input_record, role='source')], {'output': expected}, authored,
+                           [{'type': 'table-state', 'version': 1, 'scope': 'output', 'state': state},
+                            {'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0}])
+                resolution = 'reject-each' if (action == 'delete') != (shape == 'merged') else 'reject-all'
+                corpus.cases[-1]['columnEdit'] = {'version': 1, 'action': action, 'position': position,
+                                                  'cellIndex': index, 'resolution': resolution}
+                corpus.cases[-1]['revisionRegistry'] = {'version': 1, 'count': 0}
 
 
 # ---------------------------------------------------------------------------------------------

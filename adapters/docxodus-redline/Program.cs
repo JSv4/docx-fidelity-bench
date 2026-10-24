@@ -72,6 +72,43 @@ internal static class Program
             var diff = new DocxDiffSettings { AuthorForRevisions = author, DateTimeForRevisions = date };
             switch (operation)
             {
+                case "column-edit" when documents.Count == 1:
+                {
+                    var spec = settings["columnEdit"] as JsonObject ?? throw new InvalidDataException("Missing column edit");
+                    if ((int?)spec["version"] != 1) throw new InvalidDataException("Unknown column edit version");
+                    using var session = new DocxSession(documents[0].Document.DocumentByteArray);
+                    var index = (int?)spec["cellIndex"] ?? throw new InvalidDataException("Missing cell index");
+                    var cells = session.Project().AnchorIndex.Values.Where(a => a.Anchor.Scope == "body" && a.Anchor.Kind == "tc").ToArray();
+                    var action = (string?)spec["action"];
+                    var edit = action == "insert" ? session.InsertTableColumn(cells[index].Anchor.Id,
+                        (string?)spec["position"] == "before" ? Position.Before : Position.After)
+                        : action == "delete" ? session.DeleteTableColumn(cells[index].Anchor.Id)
+                        : throw new InvalidDataException("Unknown column action");
+                    if (!edit.Success) throw new InvalidOperationException(edit.Error?.Message ?? "Column edit failed");
+                    if ((string?)spec["resolution"] == "reject-each")
+                    {
+                        var attempts = 0;
+                        while (session.ListRevisions().FirstOrDefault() is { } revision)
+                        {
+                            if (++attempts > 1000) throw new InvalidOperationException("Revision resolution did not finish");
+                            var resolved = session.RejectRevision(revision.Id);
+                            if (!resolved.Success) throw new InvalidOperationException(resolved.Error?.Message ?? "Reject failed");
+                        }
+                    }
+                    else
+                    {
+                        var resolved = (string?)spec["resolution"] switch
+                        {
+                            "reject-all" => session.RejectAllRevisions(),
+                            "accept-all" => session.AcceptAllRevisions(),
+                            _ => throw new InvalidDataException("Unknown column resolution"),
+                        };
+                        if (!resolved.Success) throw new InvalidOperationException(resolved.Error?.Message ?? "Resolution failed");
+                    }
+                    response["revisionRegistryCount"] = session.ListRevisions().Count;
+                    result = new WmlDocument("column-edit.docx", session.Save());
+                    break;
+                }
                 case "table-widths" when documents.Count == 1:
                 {
                     var spec = settings["tableWidths"] as JsonObject ?? throw new InvalidDataException("Missing table widths");
