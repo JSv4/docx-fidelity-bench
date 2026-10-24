@@ -355,7 +355,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 275)
+        self.assertEqual(len(common.validate_registry()['cases']), 286)
 
     def test_adjacent_table_property_pairs_keep_independent_table_declarations(self):
         import xml.etree.ElementTree as ET
@@ -376,6 +376,68 @@ class RegistryContract(unittest.TestCase):
             children = list(body)
             self.assertEqual(children.index(tables[1]) - children.index(tables[0]),
                              2 if case['id'].endswith('-control') else 1)
+
+    def test_literal_tab_pairs_differ_only_in_the_text_tab_representation(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        for kind in ('body', 'header', 'footer', 'multiple'):
+            cid = 'tabs-literal-text-' + kind
+            actual, control = records[cid], records[cid + '-control']
+            self.assertEqual(actual['tokens'], control['tokens'])
+            self.assertEqual(actual['assertions'], control['assertions'])
+            with ZipFile(common.ROOT / actual['input']) as left, ZipFile(common.ROOT / control['input']) as right:
+                for part in left.namelist():
+                    if not part.endswith('.xml') or not part.startswith('word/'):
+                        self.assertEqual(left.read(part), right.read(part)); continue
+                    a, b = ET.fromstring(left.read(part)), ET.fromstring(right.read(part))
+                    for parent in a.iter():
+                        for child in list(parent):
+                            if child.tag != w + 't' or '\t' not in (child.text or ''): continue
+                            at = list(parent).index(child); parent.remove(child)
+                            for index, segment in enumerate(child.text.split('\t')):
+                                if index:
+                                    parent.insert(at, ET.Element(w + 'tab')); at += 1
+                                if segment:
+                                    node = ET.Element(w + 't'); node.text = segment; parent.insert(at, node); at += 1
+                    for root in (a, b):
+                        for text in root.iter(w + 't'): text.attrib.pop('{http://www.w3.org/XML/1998/namespace}space', None)
+                    self.assertEqual(ET.tostring(a), ET.tostring(b))
+
+    def test_deleted_tab_cases_cover_both_representations_and_an_untracked_control(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = {'w': fixtures.W}
+        for suffix in ('', '-explicit', '-control'):
+            case = records['tabs-literal-text-deleted' + suffix]
+            self.assertEqual(case['profile']['review'], 'markup')
+            self.assertEqual(case['tokens'], {'EstuaryEnd': 1, 'EstuaryMark': 1, 'North': 1})
+            with ZipFile(common.ROOT / case['input']) as package:
+                root = ET.fromstring(package.read('word/document.xml'))
+            self.assertEqual(len(root.findall('.//w:del', w)), 0 if suffix == '-control' else 1)
+            tabs = root.findall('.//w:r/w:tab', w)
+            literal = [n for n in root.iter() if '\t' in (n.text or '')]
+            self.assertEqual(len(tabs), 0 if suffix == '' else 1)
+            self.assertEqual(len(literal), 1 if suffix == '' else 0)
+
+    def test_dot_leader_source_policy_recognizes_only_rendered_tab_characters(self):
+        stop = '<w:pPr><w:tabs><w:tab w:val="right" w:leader="dot" w:pos="9360"/></w:tabs></w:pPr>'
+        inputs = [('<w:r><w:t>&#9;</w:t></w:r>', True),
+                  ('<w:del w:id="1" w:author="A"><w:r><w:delText>&#9;</w:delText></w:r></w:del>', True),
+                  ('<w:r><w:tab/></w:r>', True),
+                  ('<w:r><w:instrText>&#9;</w:instrText></w:r>', False),
+                  ('<w:r><w:t>Marker</w:t></w:r>', False),
+                  ('<w:r><w:t>...</w:t><w:tab/></w:r>', False)]
+        for content, allowed in inputs:
+            with self.subTest(content=content), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                fixtures.package(root / 'policy.docx', '<w:p>' + stop + content + '</w:p>')
+                record = {'input': 'policy.docx', 'pdfTextNormalization': 'isolated-dot-leaders-v1'}
+                if allowed: common.validate_pdf_text_policy(record, root)
+                else:
+                    with self.assertRaises(ValueError): common.validate_pdf_text_policy(record, root)
 
     def test_agreement_font_variant_changes_only_the_declared_family(self):
         from zipfile import ZipFile
@@ -574,7 +636,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v59')
+        self.assertEqual(registry['suite']['id'], 'core-v60')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET

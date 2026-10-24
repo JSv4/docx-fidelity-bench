@@ -1783,7 +1783,59 @@ def generate():
                 assertions=[{'type': 'same-page', 'version': 1,
                              'markers': ['EstuaryEntry', 'CanalPier', 'InlandPier', 'EstuaryExit']}])
             cases[-1]['profile']['review'] = review
-    registry = {'schema': 1, 'suite': {'id': 'core-v59', 'version': 59, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Original literal-text tabs and explicit-tab controls for Docxodus #1353.
+    estuary_styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+                     f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="22"/></w:rPr></w:rPrDefault>'
+                     '<w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/>'
+                     '</w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal">'
+                     '<w:name w:val="Normal"/></w:style></w:styles>')
+    for kind in ('body', 'header', 'footer', 'multiple'):
+        for literal in (True, False):
+            props = '<w:rPr><w:b/><w:color w:val="225588"/></w:rPr>'
+            if kind == 'multiple':
+                content = ('<w:r>' + props + ('<w:t xml:space="preserve">North&#9;&#9; EstuaryMark</w:t>' if literal else
+                           '<w:t>North</w:t><w:tab/><w:tab/><w:t xml:space="preserve"> EstuaryMark</w:t>') + '</w:r>')
+            else:
+                content = ('<w:r><w:t/></w:r><w:r>' + props +
+                           ('<w:t xml:space="preserve">&#9;</w:t>' if literal else '<w:tab/>') +
+                           '</w:r><w:r>' + props + '<w:t xml:space="preserve"> EstuaryMark</w:t></w:r>')
+            stops = ('<w:tab w:val="left" w:pos="2400"/>' if kind == 'multiple' else '')
+            tab_paragraph = ('<w:p><w:pPr><w:tabs>' + stops + '<w:tab w:val="right" w:pos="9360" w:leader="dot"/>'
+                             '</w:tabs></w:pPr>' + content + '</w:p>')
+            story = kind if kind in ('header', 'footer') else None
+            sect = section()
+            if story:
+                sect = sect.replace('<w:sectPr>', '<w:sectPr><w:' + story + 'Reference w:type="default" r:id="rStory"/>')
+            body = para('EstuaryBody') if story else tab_paragraph + para('EstuaryEnd')
+            texts = ['EstuaryBody', 'EstuaryMark'] if story else (['North'] if kind == 'multiple' else []) + ['EstuaryMark', 'EstuaryEnd']
+            add('tabs-literal-text-' + kind + ('' if literal else '-control'), 'paragraphs',
+                ('Literal text tab' if literal else 'Explicit tab control') + ' in ' + kind + ' content (Docxodus #1353)',
+                texts, body, sect=sect, story=(story, tab_paragraph) if story else None, styles_xml=estuary_styles,
+                assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'EstuaryMark', 'occurrence': 1,
+                             'page': 1, 'rect': [400, 20, 552, 780]},
+                            {'type': 'same-page', 'version': 1, 'markers': ['EstuaryMark', 'EstuaryBody' if story else 'EstuaryEnd']}])
+            cases[-1]['pdfTextNormalization'] = 'isolated-dot-leaders-v1'
+    for variant in ('literal', 'explicit', 'control'):
+        tag = 't' if variant == 'control' else 'delText'
+        def marked_text(value):
+            return '<w:' + tag + ' xml:space="preserve">' + value + '</w:' + tag + '>'
+        content = ('<w:r><w:rPr><w:b/><w:color w:val="225588"/></w:rPr>' +
+                   (marked_text('North &#9; EstuaryMark') if variant == 'literal' else
+                    marked_text('North ') + '<w:tab/>' + marked_text(' EstuaryMark')) + '</w:r>')
+        if variant != 'control':
+            content = '<w:del w:id="7" w:author="Estuary reviewer" w:date="2026-01-01T00:00:00Z">' + content + '</w:del>'
+        body = ('<w:p><w:pPr><w:tabs><w:tab w:val="right" w:pos="9360" w:leader="dot"/></w:tabs></w:pPr>'
+                + content + '</w:p>' + para('EstuaryEnd'))
+        add('tabs-literal-text-deleted' + ('' if variant == 'literal' else '-' + variant), 'paragraphs',
+            {'literal': 'Literal tab in visible deleted text', 'explicit': 'Explicit tab in visible deleted text',
+             'control': 'Untracked explicit-tab control for visible deletion layout'}[variant] + ' (Docxodus #1353)',
+            ['North', 'EstuaryMark', 'EstuaryEnd'], body, styles_xml=estuary_styles,
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'EstuaryMark', 'occurrence': 1,
+                         'page': 1, 'rect': [400, 20, 552, 780]},
+                        {'type': 'same-page', 'version': 1, 'markers': ['EstuaryMark', 'EstuaryEnd']}])
+        cases[-1]['profile']['review'] = 'markup'
+        cases[-1]['pdfTextNormalization'] = 'isolated-dot-leaders-v1'
+    registry = {'schema': 1, 'suite': {'id': 'core-v60', 'version': 60, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
