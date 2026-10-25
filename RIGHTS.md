@@ -159,3 +159,11 @@ here without imported documents or templates. Comparison PNGs and PDF inspection
 `docs/results/kept-note-flow/` show only these authored fixtures. No authentication data or
 standalone font binaries are included; the separately provisioned native PDF font subsets retain
 the recorded font contract.
+
+The fourteen #1217 kept-note paragraph cases in `core-v69` reproduce original literal OOXML and
+font declarations for separately retained native Word captures. The long variants use authored
+unbreakable body/note labels and explicit note breaks, so the unchanged complete-token contract
+can adjudicate them without merging legal native wraps. All source packages regenerate exactly.
+Comparison PNGs and PDF inspections under `docs/results/kept-note-paragraphs/` contain only these
+authored fixtures. No external documents, authentication data or standalone font binaries are
+included; native PDF font subsets retain the separately provisioned font contract.

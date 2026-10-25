@@ -401,6 +401,21 @@ def package(path, body, final_section=None, notes=None, image=False, namespaces_
     zip_write(path, parts)
 
 
+def kept_note_parts(body, notes):
+    pkg = 'http://schemas.openxmlformats.org/package/2006/relationships'
+    content_types = ''.join(
+        f'<Override PartName="/word/{part}.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.{kind}+xml"/>'
+        for part, kind in [('document', 'document.main'), ('styles', 'styles'), ('footnotes', 'footnotes')])
+    return {
+        '[Content_Types].xml': f'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/>{content_types}</Types>',
+        '_rels/.rels': f'<Relationships xmlns="{pkg}"><Relationship Id="rId1" Type="{R}/officeDocument" Target="word/document.xml"/></Relationships>',
+        'word/_rels/document.xml.rels': f'<Relationships xmlns="{pkg}"><Relationship Id="rId1" Type="{R}/styles" Target="styles.xml"/><Relationship Id="rId2" Type="{R}/footnotes" Target="footnotes.xml"/></Relationships>',
+        'word/styles.xml': f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/><w:sz w:val="22"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0" w:line="300" w:lineRule="exact"/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>',
+        'word/footnotes.xml': f'<w:footnotes xmlns:w="{W}">{notes}</w:footnotes>',
+        'word/document.xml': f'<w:document xmlns:w="{W}"><w:body>{body}<w:sectPr><w:pgSz w:w="8000" w:h="6400"/><w:pgMar w:top="200" w:right="200" w:bottom="200" w:left="200" w:header="0" w:footer="0" w:gutter="0"/></w:sectPr></w:body></w:document>',
+    }
+
+
 def kept_note_flow_cases():
     """Reproduce the original #1217 Word inputs, including omitted package defaults.
 
@@ -426,19 +441,6 @@ def kept_note_flow_cases():
             paragraph(f'WillowNote{note_id:02d}Part{part:02d}', pitch=pitch, definition=part == 1)
             for part in range(1, 4)) + '</w:footnote>'
 
-    def parts(body, notes):
-        pkg = 'http://schemas.openxmlformats.org/package/2006/relationships'
-        content_types = ''.join(
-            f'<Override PartName="/word/{part}.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.{kind}+xml"/>'
-            for part, kind in [('document', 'document.main'), ('styles', 'styles'), ('footnotes', 'footnotes')])
-        return {
-            '[Content_Types].xml': f'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/>{content_types}</Types>',
-            '_rels/.rels': f'<Relationships xmlns="{pkg}"><Relationship Id="rId1" Type="{R}/officeDocument" Target="word/document.xml"/></Relationships>',
-            'word/_rels/document.xml.rels': f'<Relationships xmlns="{pkg}"><Relationship Id="rId1" Type="{R}/styles" Target="styles.xml"/><Relationship Id="rId2" Type="{R}/footnotes" Target="footnotes.xml"/></Relationships>',
-            'word/styles.xml': f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/><w:sz w:val="22"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0" w:line="300" w:lineRule="exact"/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>',
-            'word/footnotes.xml': f'<w:footnotes xmlns:w="{W}">{notes}</w:footnotes>',
-            'word/document.xml': f'<w:document xmlns:w="{W}"><w:body>{body}<w:sectPr><w:pgSz w:w="8000" w:h="6400"/><w:pgMar w:top="200" w:right="200" w:bottom="200" w:left="200" w:header="0" w:footer="0" w:gutter="0"/></w:sectPr></w:body></w:document>',
-        }
 
     # pitch, keepNext, variant, heading page, all 17 citation-line pages, three note pages, tail.
     heading_layouts = [
@@ -477,7 +479,7 @@ def kept_note_flow_cases():
                else f'heading-note-{pitch}pt-keep-{str(kept).lower()}') + '-times-new-roman'
         yield cid, (f'300pt band; six lead paragraphs; heading keepNext={kept}; '
                     f'17-line citing paragraph; three {pitch}pt note paragraphs'
-                    + (f'; {variant} control' if variant else '') + ' (Docxodus #1217)'), parts(body, notes), pages, ['1']
+                    + (f'; {variant} control' if variant else '') + ' (Docxodus #1217)'), kept_note_parts(body, notes), pages, ['1']
 
     # pitch: eight heading pages, eight citing pages, all 24 note-paragraph pages, tail.
     dense_layouts = {
@@ -509,7 +511,64 @@ def kept_note_flow_cases():
         pages['WillowTail01'] = tail_page
         yield f'dense-chain-note-{pitch}pt-times-new-roman', (
             f'300pt band; eight 30pt kept heading/citation pairs; each cites three {pitch}pt note paragraphs '
-            '(Docxodus #1217)'), parts(body, ''.join(note(i, pitch) for i in range(1, 9))), pages, [str(i) for i in range(1, 9)]
+            '(Docxodus #1217)'), kept_note_parts(body, ''.join(note(i, pitch) for i in range(1, 9))), pages, [str(i) for i in range(1, 9)]
+
+
+def kept_note_paragraph_inputs():
+    """Original literal mode/widow controls and long notes with unbreakable line labels.
+
+    The source shapes preserve the separately captured Word input hashes. In particular,
+    settings are omitted in the legacy controls and modes 14/15 differ only in settings.
+    """
+    spacing = '<w:spacing w:before="0" w:after="0" w:line="300" w:lineRule="exact"/>'
+    body = (f'<w:p><w:pPr>{spacing}</w:pPr><w:r><w:t>SpruceCite01</w:t></w:r>'
+            '<w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr><w:footnoteReference w:id="1"/></w:r></w:p>'
+            f'<w:p><w:pPr>{spacing}</w:pPr><w:r><w:t>SpruceTail01</w:t></w:r></w:p>')
+    variants = [(20, 'widow-default', None), (20, 'widow-off', None), (20, 'widow-on', None),
+                (18, 'fitting', None), (19, 'deferred', None), (21, 'widow-default', None),
+                (19, 'widow-off', None), (19, 'widow-on', None),
+                (21, 'widow-default', 14), (21, 'widow-default', 15)]
+    settings = lambda mode: (f'<w:settings xmlns:w="{W}"><w:compat><w:compatSetting '
+                            'w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" '
+                            f'w:val="{mode}"/></w:compat></w:settings>')
+    for count, variant, mode in variants:
+        widow = '<w:widowControl w:val="0"/>' if variant == 'widow-off' else '<w:widowControl/>' if variant == 'widow-on' else ''
+        content = '<w:r><w:footnoteRef/></w:r>' + '<w:r><w:br/></w:r>'.join(
+            f'<w:r><w:t>SpruceNoteLine{i:02d}</w:t></w:r>' for i in range(1, count + 1))
+        note = f'<w:footnote w:id="1"><w:p><w:pPr><w:keepLines/>{widow}{spacing}</w:pPr>{content}</w:p></w:footnote>'
+        parts = kept_note_parts(body, note)
+        if mode is not None:
+            parts['word/settings.xml'] = settings(mode)
+            parts['word/_rels/document.xml.rels'] = parts['word/_rels/document.xml.rels'].replace('</Relationships>',
+                f'<Relationship Id="rIdFixtureSettings" Type="{R}/settings" Target="settings.xml"/></Relationships>')
+            parts['[Content_Types].xml'] = parts['[Content_Types].xml'].replace('</Types>',
+                '<Override PartName="/word/settings.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml"/></Types>')
+        cid = (f'kept-note-mechanism-normal-mode{mode}-opc-default-ns-times-new-roman' if mode is not None
+               else f'kept-note-{count}-lines-{variant}-times-new-roman')
+        yield cid, f'One kept {count}-line note; widow {variant}; compatibility {mode or "omitted"} (Docxodus #1217)', parts, 'short', count, variant, mode
+
+    # These static package declarations/styles are literal source, not a loaded template.
+    long_parts = {'[Content_Types].xml': '<?xml version="1.0" encoding="utf-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">\n  <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>\n  <Default Extension="xml" ContentType="application/xml"/>\n  <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>\n  <Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>\n  <Override PartName="/word/footnotes.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footnotes+xml"/>\n<Override PartName="/word/settings.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml"/></Types>', '_rels/.rels': '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">\n  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>\n</Relationships>', 'word/_rels/document.xml.rels': '<?xml version="1.0" encoding="utf-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">\n  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>\n  <Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footnotes" Target="footnotes.xml"/>\n<Relationship Id="rFixtureSettings" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings" Target="settings.xml"/></Relationships>', 'word/styles.xml': '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">\n  <w:docDefaults><w:rPrDefault><w:rPr>\n    <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/>\n    <w:sz w:val="24"/><w:szCs w:val="24"/>\n  </w:rPr></w:rPrDefault></w:docDefaults>\n  <w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style>\n  <w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="footnote text"/>\n    <w:basedOn w:val="Normal"/>\n    <w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/></w:pPr>\n    <w:rPr><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr>\n  </w:style>\n  <w:style w:type="character" w:styleId="FootnoteReference"><w:name w:val="footnote reference"/>\n    <w:rPr><w:vertAlign w:val="superscript"/></w:rPr>\n  </w:style>\n</w:styles>'}
+    for cite, mode in [(1, 15), (1, 14), (16, 15), (16, 14)]:
+        body = ''.join(
+            '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/></w:pPr>'
+            f'<w:r><w:t xml:space="preserve">SpruceBody{i:02d}</w:t></w:r>'
+            + ('<w:r><w:rPr><w:rStyle w:val="FootnoteReference"/></w:rPr><w:footnoteReference w:id="1"/></w:r>' if i == cite else '')
+            + '</w:p>' for i in range(1, 31))
+        content = '<w:t xml:space="preserve"> SpruceLongNote001</w:t>' + ''.join(
+            f'<w:br/><w:t>SpruceLongNote{i:03d}</w:t>' for i in range(2, 121))
+        parts = dict(long_parts)
+        parts['word/document.xml'] = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><w:body>\n  ' + body + '\n  <w:sectPr>\n    <w:pgSz w:w="12240" w:h="15840"/>\n    <w:pgMar w:top="1440" w:right="1440"\n      w:bottom="1440" w:left="1440"\n      w:header="720" w:footer="720" w:gutter="0"/>\n    <w:cols w:space="720"/>\n  </w:sectPr>\n</w:body></w:document>'
+        parts['word/footnotes.xml'] = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<w:footnotes xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">\n  <w:footnote w:type="separator" w:id="-1"><w:p><w:r><w:separator/></w:r></w:p></w:footnote>\n  <w:footnote w:type="continuationSeparator" w:id="0"><w:p><w:r><w:continuationSeparator/></w:r></w:p></w:footnote>\n  <w:footnote w:id="1"><w:p><w:pPr><w:pStyle w:val="FootnoteText"/><w:keepLines/></w:pPr><w:r><w:rPr><w:rStyle w:val="FootnoteReference"/></w:rPr><w:footnoteRef/></w:r><w:r>' + content + '</w:r></w:p></w:footnote>\n</w:footnotes>'
+        if cite == 16:
+            parts['word/document.xml'] = parts['word/document.xml'].replace(
+                '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n',
+                '<?xml version="1.0" encoding="utf-8"?>').replace(
+                '<w:pgMar w:top="1440" w:right="1440"\n      w:bottom="1440" w:left="1440"\n      w:header="720" w:footer="720" w:gutter="0"/>',
+                '<w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/>')
+        parts['word/settings.xml'] = settings(mode)
+        cid = f'kept-note-120-lines-citation-{cite}-mode-{mode}-times-new-roman'
+        yield cid, f'120 explicit note lines; body citation {cite}; compatibility {mode} (Docxodus #1217)', parts, 'long', 120, cite, mode
 
 
 def generate():
@@ -2349,7 +2408,37 @@ def generate():
             assertions=[{'type': 'marker-region', 'version': 2, 'marker': marker,
                          'occurrence': 1, 'page': page, 'rect': [0, 0, 400, 320],
                          'adjudicated': 'word'} for marker, page in pages.items()])
-    registry = {'schema': 1, 'suite': {'id': 'core-v68', 'version': 68, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    for cid, description, parts, shape, count, variant, mode in kept_note_paragraph_inputs():
+        if shape == 'short':
+            first = (17 if count == 19 and variant != 'widow-off' else 18)
+            if mode == 15:
+                pages = {'SpruceCite01': 1, 'SpruceTail01': 1}
+                note_pages = [2] * 19 + [3] * 2
+            else:
+                pages = {'SpruceCite01': 1, 'SpruceTail01': 2}
+                note_pages = [1] * first + [2] * (count - first)
+            pages.update({('1' if i == 1 else '') + f'SpruceNoteLine{i:02d}': page
+                          for i, page in enumerate(note_pages, 1)})
+            text = list(pages) + ['1']
+            paper = [0, 0, 400, 320]
+        else:
+            cite = variant
+            citation_page = 1 if cite == 1 else 2
+            if mode == 15:
+                body_pages = [1] * (cite - 1) + [citation_page] * (31 - cite)
+                note_pages = [citation_page + 1] * 55 + [citation_page + 2] * 55 + [citation_page + 3] * 10
+            else:
+                body_pages = [1] * (cite - 1) + [citation_page] + [citation_page + 2] * (30 - cite)
+                note_pages = [citation_page] * 53 + [citation_page + 1] * 55 + [citation_page + 2] * 12
+            pages = {f'SpruceBody{i:02d}': page for i, page in enumerate(body_pages, 1)}
+            pages.update({f'SpruceLongNote{i:03d}': page for i, page in enumerate(note_pages, 1)})
+            text = list(pages) + ['1', '1']
+            paper = [0, 0, 612, 792]
+        add(cid, 'notes', description, text, '', font='Times New Roman', literal_parts=parts,
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': marker,
+                         'occurrence': 1, 'page': page, 'rect': paper, 'adjudicated': 'word'}
+                        for marker, page in pages.items()])
+    registry = {'schema': 1, 'suite': {'id': 'core-v69', 'version': 69, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
