@@ -2,9 +2,11 @@
 
 An independent MIT benchmark of delivered PDF rendering and of document comparison. The harness and every input document are authored in this repository. It measures layout, visible content, physical pages, fonts, and declared feature assertions. It produces portable HTML evidence and JSON measurements.
 
-The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v66`, with report-only renderer CI. A separate comparison track, `redline-v17`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
+The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v67`, with report-only renderer CI. A separate comparison track, `redline-v17`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
 
 `redline-v16` added seven original reviewer-account cases for Docxodus #1317: namesakes with a different or absent account, principal-name and object-id aliases, a legacy control, and the first revision/comment under a free name. Public name-status queries, exact reviewer metadata and retained insertion/deletion markup supplement independent round trips and schema checks. All prior DOCX bytes remain unchanged; the PDF suite stayed `core-v62`.
+
+`core-v67` adds eight font-aligned note-table flow cases for Docxodus #1217, reusing the existing author's nested/ordinary, long-row and wrapped two-cell construction. Native Word input hashes, page assertions and all-page comparison sheets are retained in [the evidence](docs/results/note-table-flow/README.md). All 1,024 prior DOCX inputs, `redline-v17` and the historical 12-case CI inputs remain unchanged. Local candidate comparisons are unscored; remaining #1217 items are explicit.
 
 `core-v66` adds 13 independently generated Times New Roman oversized-block cases for Docxodus #1202. They cover exact rows, header and nested tables, bordered paragraph continuations, physical paper clipping, footer overlap, and required blank final pages. All 1,012 earlier DOCX files remain byte-identical; `redline-v17` and the historical 12-case `core-ci-v2` inputs are unchanged. Native Word captures and labelled before/after diagnostic sheets are recorded in [the evidence](docs/results/oversized-page-blocks/README.md).
 
@@ -190,7 +192,7 @@ python3 -m bench redline run --adapter docxodus --candidate FULL_COMMIT_SHA \
 
 Read [the redline scoring contract](docs/REDLINE.md) for the checks, the view, LibreOffice's limits and the eligibility rule.
 
-The registered `core-ci-v2` selection preserves the 12 exact input hashes from the original rendering CI oracle. Its declarations include the Word-adjudicated nested-table margin checks. The full 338-case corpus remains the default; unknown selections and missing or changed historical inputs are rejected. Use the same selection for reference creation and every compared run:
+The registered `core-ci-v2` selection preserves the 12 exact input hashes from the original rendering CI oracle. Its declarations include the Word-adjudicated nested-table margin checks. The full 346-case corpus remains the default; unknown selections and missing or changed historical inputs are rejected. Use the same selection for reference creation and every compared run:
 
 ```bash
 python3 -m bench reference libreoffice --suite core-ci-v2 --out references/ci
