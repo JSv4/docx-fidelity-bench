@@ -1,5 +1,7 @@
 # DOCX fidelity bench
 
+`core-v70` adds two independently captured Word justification controls for Docxodus #1124, covering 45 held-out paragraphs at 11pt and 12pt. See [all native/candidate pages and measurement qualifications](docs/results/justification-lines/README.md). The 379 prior PDF inputs and historical CI suite are preserved.
+
 An independent MIT benchmark of delivered PDF rendering and of document comparison. The harness and every input document are authored in this repository. It measures layout, visible content, physical pages, fonts, and declared feature assertions. It produces portable HTML evidence and JSON measurements.
 
 The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v69`, with report-only renderer CI. A separate comparison track, `redline-v17`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.

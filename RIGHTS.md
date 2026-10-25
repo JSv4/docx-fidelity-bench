@@ -167,3 +167,6 @@ can adjudicate them without merging legal native wraps. All source packages rege
 Comparison PNGs and PDF inspections under `docs/results/kept-note-paragraphs/` contain only these
 authored fixtures. No external documents, authentication data or standalone font binaries are
 included; native PDF font subsets retain the separately provisioned font contract.
+
+
+The two #1124 justification-line cases in `core-v70` reproduce original literal OOXML and prose authored for independently captured native Word controls. Integer twip widths preserve all 45 held-out paragraphs without importing a font library or template. Both inputs regenerate byte for byte. Native/candidate PNGs and raw PDF inspections under `docs/results/justification-lines/` contain only this original text. No standalone font binary, external document or authentication data is included; native PDF font subsets retain the separately provisioned font contract.

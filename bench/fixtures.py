@@ -571,6 +571,110 @@ def kept_note_paragraph_inputs():
         yield cid, f'120 explicit note lines; body citation {cite}; compatibility {mode} (Docxodus #1217)', parts, 'long', 120, cite, mode
 
 
+def justification_line_inputs():
+    # Original literal OOXML/text, captured independently in Word before the fix.
+    # Static twip widths preserve the held-out boundary probes without font dependencies.
+    texts = ['Maple01 Auditors examine each record before the morning meeting and explain the findings to all '
+     'participants. A second reviewer checks the dates and quantities while the secretary prepares a clear '
+     'account for the next committee meeting.',
+     'Maple01  Auditors  examine  each  record  before  the  morning  meeting  and  explain  the  '
+     'findings  to  all  participants.  A  second  reviewer  checks  the  dates  and  quantities  while  '
+     'the  secretary  prepares  a  clear  account  for  the  next  committee  meeting.',
+     'WWWW WWWW WWWW WWWW WWWW WWWW WWWW WWWW WWWW',
+     'schedule  to  the  project  office.  Each  report  includes  the  measured  quantity  and  the  '
+     'name  of  the  person  responsible  for  the  next  review.']
+    parts = {'[Content_Types].xml': '<Types '
+                            'xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default '
+                            'Extension="rels" '
+                            'ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default '
+                            'Extension="xml" ContentType="application/xml"/><Override '
+                            'PartName="/word/document.xml" '
+                            'ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override '
+                            'PartName="/word/styles.xml" '
+                            'ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/><Override '
+                            'PartName="/word/settings.xml" '
+                            'ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml"/></Types>',
+     '_rels/.rels': '<Relationships '
+                    'xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship '
+                    'Id="main" '
+                    'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" '
+                    'Target="word/document.xml"/></Relationships>',
+     'word/_rels/document.xml.rels': '<Relationships '
+                                     'xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship '
+                                     'Id="styles" '
+                                     'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" '
+                                     'Target="styles.xml"/><Relationship Id="settings" '
+                                     'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings" '
+                                     'Target="settings.xml"/></Relationships>',
+     'word/settings.xml': '<w:settings '
+                          'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:compat><w:compatSetting '
+                          'w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" '
+                          'w:val="15"/></w:compat></w:settings>',
+     'word/styles.xml': '<w:styles '
+                        'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts '
+                        'w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" '
+                        'w:cs="Times New Roman"/><w:color w:val="000000"/><w:sz '
+                        'w:val="22"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl '
+                        'w:val="0"/><w:spacing w:after="120" w:line="276" '
+                        'w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults><w:style '
+                        'w:type="paragraph" w:default="1" w:styleId="Normal"><w:name '
+                        'w:val="Normal"/></w:style></w:styles>'}
+    rows = {11: [(0, 2559, 0),
+          (0, 2551, 0),
+          (0, 2547, 0),
+          (0, 2539, 0),
+          (1, 2670, 0),
+          (1, 2662, 0),
+          (1, 2658, 0),
+          (1, 2650, 0),
+          (0, 3301, 360),
+          (0, 3293, 360),
+          (0, 3289, 360),
+          (0, 3281, 360),
+          (1, 1274, 240),
+          (1, 1266, 240),
+          (1, 1262, 240),
+          (1, 1254, 240),
+          (2, 1556, 0),
+          (2, 1554, 0)],
+     12: [(3, -16, 0),
+          (3, -20, 0),
+          (3, -22, 0),
+          (3, -24, 0),
+          (3, -25, 0),
+          (3, -26, 0),
+          (3, -28, 0),
+          (3, -30, 0),
+          (3, -32, 0),
+          (0, 1940, 0),
+          (0, 1932, 0),
+          (0, 1928, 0),
+          (0, 1920, 0),
+          (1, 2060, 0),
+          (1, 2052, 0),
+          (1, 2048, 0),
+          (1, 2040, 0),
+          (0, 2782, 360),
+          (0, 2774, 360),
+          (0, 2770, 360),
+          (0, 2762, 360),
+          (1, 560, 240),
+          (1, 552, 240),
+          (1, 548, 240),
+          (1, 540, 240),
+          (2, 846, 0),
+          (2, 844, 0)]}
+    for size, paragraphs in rows.items():
+        current = dict(parts)
+        current['word/styles.xml'] = current['word/styles.xml'].replace('w:val="22"', f'w:val="{size * 2}"')
+        body = ''.join(
+            f'<w:p><w:pPr><w:ind w:right="{right}" w:firstLine="{indent}"/>'
+            '<w:jc w:val="both"/></w:pPr><w:r><w:t xml:space="preserve">'
+            + escape(texts[text]) + '</w:t></w:r></w:p>' for text, right, indent in paragraphs)
+        current['word/document.xml'] = '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>' + body + '<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr></w:body></w:document>'
+        yield f'justify-gap-choice-heldout-mode-15-size-{size}', size, current, [texts[t] for t, _, _ in paragraphs]
+
+
 def generate():
     cases = []
     def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT, literal_parts=None):
@@ -2438,7 +2542,11 @@ def generate():
             assertions=[{'type': 'marker-region', 'version': 2, 'marker': marker,
                          'occurrence': 1, 'page': page, 'rect': paper, 'adjudicated': 'word'}
                         for marker, page in pages.items()])
-    registry = {'schema': 1, 'suite': {'id': 'core-v69', 'version': 69, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    for cid, size, parts, text in justification_line_inputs():
+        add(cid, 'paragraphs',
+            f'Word held-out justified prose at {size}pt with repeated spaces, indents and final-line boundaries (Docxodus #1124)',
+            text, '', font='Times New Roman', literal_parts=parts)
+    registry = {'schema': 1, 'suite': {'id': 'core-v70', 'version': 70, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
