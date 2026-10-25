@@ -1,0 +1,180 @@
+{
+  "scored": false,
+  "kind": "Raw physical-raster diagnostics; no formal benchmark score",
+  "qualification": "Strict benchmark preflight unavailable on this host. Unchanged96DPI metricv3, physical CropBox rasters, no alignment, pixel retouching, font change or tolerance change. Original92.0731paired evidence retained. Native font aliases were independently checked against actual embedded font outlines/metrics, not normalized in the benchmark.",
+  "candidateBuildProof": "pr-evidence/1124-native-baselines/candidate-build-current.json",
+  "metricContract": {
+    "version": 3,
+    "clippedText": "declared exact-row tokens may be absent or whole up to their authored count",
+    "dpi": 96,
+    "inkThreshold": 24,
+    "inkRadius": 1,
+    "ssimWindow": 8,
+    "ssimC1": 6.5025,
+    "ssimC2": 58.5225,
+    "alignment": "none",
+    "pageScore": "100 * min(ssim, inkF1)",
+    "caseScore": "worst page; zero on mandatory failure",
+    "visibleText": "excludes UAX #9 bidi formatting controls",
+    "canvas": "rasters within 1 pixel per axis share a white union canvas at the CropBox top-left origin; larger differences fail"
+  },
+  "pdfs": {
+    "wordEmbeddedLiberation": {
+      "path": "/home/jman/Code/tmp/Docxodus/.goal-work/word-fixtures/issue-1124/embedded-font-control/issue-1124/word/paragraph-contract-liberation-plain-ttf/original.pdf",
+      "sha256": "9a9dfed857ae67c50f830ba9437d4e86fc231b669e362134e71aa51f27b8e69e"
+    },
+    "historicalLibreOffice": {
+      "path": "/home/jman/Code/tmp/Docxodus/.goal-work/pr-evidence/1375/original-92.0731/runs/candidate/paragraph-contract/reference.pdf",
+      "sha256": "9480b2e49f3f07230cd3b6cb39a0c7c7da90115b42f67a0d4fe622a053ba4ca4"
+    },
+    "docxodusMain9b03": {
+      "path": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1124-embedded-public/paragraph-contract-liberation-plain-ttf.pdf",
+      "sha256": "6677da68318d155d7de1605cd5a42b9526d1fc449290e2fd1137445eeb67334d"
+    },
+    "docxodusCombined": {
+      "path": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1124-combined-public/paragraph-contract-liberation-plain-ttf.pdf",
+      "sha256": "6e24d3f30420b1ab9fc7c53de4cb5a3945f2550adf97a5da62cd16d39ba33ac2"
+    }
+  },
+  "comparisons": [
+    {
+      "reference": "wordEmbeddedLiberation",
+      "candidate": "docxodusMain9b03",
+      "pages": [
+        {
+          "page": 1,
+          "precision": 0.9400730923341112,
+          "recall": 0.935472532622545,
+          "inkF1": 0.9377671700803566,
+          "referenceInk": 68281,
+          "candidateInk": 68133,
+          "ssimRaw": 0.8413656900100557,
+          "ssim": 0.8413656900100557,
+          "pixelMismatch": 0.11413770053475936,
+          "score": 84.13656900100557,
+          "close": false
+        },
+        {
+          "page": 2,
+          "precision": 0.9560886053090953,
+          "recall": 0.9521063302545618,
+          "inkF1": 0.9540933124111391,
+          "referenceInk": 66585,
+          "candidateInk": 66452,
+          "ssimRaw": 0.8648549242642218,
+          "ssim": 0.8648549242642218,
+          "pixelMismatch": 0.10636929961378491,
+          "score": 86.48549242642218,
+          "close": false
+        }
+      ],
+      "worstRawPageDiagnostic": 84.13656900100557
+    },
+    {
+      "reference": "wordEmbeddedLiberation",
+      "candidate": "docxodusCombined",
+      "pages": [
+        {
+          "page": 1,
+          "precision": 0.9999853193769543,
+          "recall": 0.9995020576734377,
+          "inkF1": 0.9997436301247589,
+          "referenceInk": 68281,
+          "candidateInk": 68117,
+          "ssimRaw": 0.9568475210051897,
+          "ssim": 0.9568475210051897,
+          "pixelMismatch": 0.0753131034610814,
+          "score": 95.68475210051896,
+          "close": false
+        },
+        {
+          "page": 2,
+          "precision": 0.9999698976520168,
+          "recall": 0.9995043928812796,
+          "inkF1": 0.9997370910787319,
+          "referenceInk": 66585,
+          "candidateInk": 66440,
+          "ssimRaw": 0.9661807854623328,
+          "ssim": 0.9661807854623328,
+          "pixelMismatch": 0.07269849227569816,
+          "score": 96.61807854623328,
+          "close": false
+        }
+      ],
+      "worstRawPageDiagnostic": 95.68475210051896
+    },
+    {
+      "reference": "historicalLibreOffice",
+      "candidate": "docxodusMain9b03",
+      "pages": [
+        {
+          "page": 1,
+          "precision": 0.9954207212364052,
+          "recall": 0.9945543974704298,
+          "inkF1": 0.9949873707789825,
+          "referenceInk": 68312,
+          "candidateInk": 68133,
+          "ssimRaw": 0.9207308779416475,
+          "ssim": 0.9207308779416475,
+          "pixelMismatch": 0.09058531082887701,
+          "score": 92.07308779416475,
+          "close": false
+        },
+        {
+          "page": 2,
+          "precision": 0.9953048817191357,
+          "recall": 0.9944181021547326,
+          "inkF1": 0.9948612943270151,
+          "referenceInk": 66644,
+          "candidateInk": 66452,
+          "ssimRaw": 0.9207576811400415,
+          "ssim": 0.9207576811400415,
+          "pixelMismatch": 0.09022439468211527,
+          "score": 92.07576811400415,
+          "close": false
+        }
+      ],
+      "worstRawPageDiagnostic": 92.07308779416475
+    },
+    {
+      "reference": "historicalLibreOffice",
+      "candidate": "docxodusCombined",
+      "pages": [
+        {
+          "page": 1,
+          "precision": 0.9491463217698959,
+          "recall": 0.9497892024827264,
+          "inkF1": 0.94946765330334,
+          "referenceInk": 68312,
+          "candidateInk": 68117,
+          "ssimRaw": 0.8174141449410414,
+          "ssim": 0.8174141449410414,
+          "pixelMismatch": 0.11999243352644087,
+          "score": 81.74141449410413,
+          "close": false
+        },
+        {
+          "page": 2,
+          "precision": 0.9607766405779651,
+          "recall": 0.961376868135166,
+          "inkF1": 0.9610766606405541,
+          "referenceInk": 66644,
+          "candidateInk": 66440,
+          "ssimRaw": 0.83142036430314,
+          "ssim": 0.83142036430314,
+          "pixelMismatch": 0.11484444630124777,
+          "score": 83.14203643031401,
+          "close": false
+        }
+      ],
+      "worstRawPageDiagnostic": 81.74141449410413
+    }
+  ],
+  "sourceCommit": "7954e593614574a094bd0c0104c332d24377f444",
+  "coreSourceBinding": {
+    "commit": "7954e593614574a094bd0c0104c332d24377f444",
+    "parent": "0ef03ea3a4f8697633f17adc9fa42686c60b45b4",
+    "sourceFilesVerified": 14,
+    "qualification": "Local rendering preceded the commit. Runtime source, fixtures and artifact bytes are unchanged; the later extra regression test is separately validated. CI exact-commit build remains required."
+  }
+}
