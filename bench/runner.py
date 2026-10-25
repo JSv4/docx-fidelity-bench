@@ -7,10 +7,11 @@ from pathlib import Path
 from . import adapters, metrics, pdf, report, reference_controls, html_artifacts
 from .common import WORD_TRACKS, ROOT, contained, digest, identity, read_json, validate_registry, write_json
 from .environment import environment
+from .suites import select_suite
 
 
-def reference_bundle(output):
-    registry = validate_registry()
+def reference_bundle(output, suite=None):
+    registry = select_suite(validate_registry(), suite)
     env = environment([f for c in registry['cases'] for f in c['fonts']])
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=False)
@@ -102,8 +103,8 @@ def equivalent_reference_bundle(output, reference):
     return bundle
 
 
-def run(output, reference, adapter, candidate):
-    registry = validate_registry()
+def run(output, reference, adapter, candidate, suite=None):
+    registry = select_suite(validate_registry(), suite)
     env = environment([f for c in registry['cases'] for f in c['fonts']])
     ref_root = Path(reference).resolve().parent
     bundle = read_json(reference)

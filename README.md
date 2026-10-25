@@ -2,9 +2,11 @@
 
 An independent MIT benchmark of delivered PDF rendering and of document comparison. The harness and every input document are authored in this repository. It measures layout, visible content, physical pages, fonts, and declared feature assertions. It produces portable HTML evidence and JSON measurements.
 
-The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v64`, with report-only renderer CI. A separate comparison track, `redline-v17`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
+The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v65`, with report-only renderer CI. A separate comparison track, `redline-v17`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
 
 `redline-v16` added seven original reviewer-account cases for Docxodus #1317: namesakes with a different or absent account, principal-name and object-id aliases, a legacy control, and the first revision/comment under a free name. Public name-status queries, exact reviewer metadata and retained insertion/deletion markup supplement independent round trips and schema checks. All prior DOCX bytes remain unchanged; the PDF suite stayed `core-v62`.
+
+`core-v65` adds 19 original Times New Roman table-placement cases for Docxodus #1219 and #1244: eight margin/indent cases, five paragraph/table boundary controls, and six legacy layout controls. All 992 earlier DOCX files are byte-identical; `redline-v17` is unchanged. Native Word captures, renderer qualifications, unchanged residual differences, and screenshots are retained in [the evidence](docs/results/table-horizontal-placement/README.md). The original nested-table case now requires the two left-cell origins observed in Word, without changing its input.
 
 `core-v64` adds the original Word-adjudicated Times New Roman zero-width column and 24pt control for Docxodus #1201. Both cover exact and at-least rows, borderless and bordered. All 990 prior DOCX files are byte-identical, and the `redline-v17` corpus is unchanged. Native Word references and unscored sandboxed export diagnostics are documented with the case evidence.
 
@@ -34,7 +36,7 @@ The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word r
 
 `core-v55` adds an original pair for Docxodus #1271, measured in markup view: a one-line 10pt footnote whose only run carries a pending formatting revision (`w:rPrChange`, italic removed), and a control without the revision; the inputs differ only in that element. Docxodus's default markup presentation underlines a revised run with a border, which hung below the note band, and its export refused the whole document as a clipped footnote. Each case requires the note's first word, `NoteQuartz`, in the footnote area of page 1 and on the citing line's page; the complete token inventory requires the whole note. LibreOffice 25.8.7.3 renders both notes in full on page 1. Word adjudication is pending: Word reference PDFs of the exact inputs have not been captured. Earlier DOCX bytes are unchanged. The redline suite remains `redline-v9`.
 
-`core-v54` adds an original deleted-field pair for Docxodus #1272: a three-page running story whose footer line, "Sheet N of 3", is built from complex PAGE and NUMPAGES fields inside a tracked deletion (so their instructions are `w:delInstrText`), and a control with the same footer left undeleted. Both are measured in markup view, where the struck footer stays visible. Both fields cache the result 1, so the inventory (one 1, one 2, four 3s) and the page-1 and page-2 number placements fail a renderer that prints a cached result instead of the page's own number. LibreOffice 25.8.7.3 shows the deletion and advances both fields, and its direct captures of both cases are eligible. Word adjudication is pending: Word reference PDFs of the exact inputs have not been captured. Earlier DOCX bytes are unchanged. The redline suite remains `redline-v9`. (Open PR #82 still claims an older suite version and will be renumbered at merge.)
+`core-v54` adds an original deleted-field pair for Docxodus #1272: a three-page running story whose footer line, "Sheet N of 3", is built from complex PAGE and NUMPAGES fields inside a tracked deletion (so their instructions are `w:delInstrText`), and a control with the same footer left undeleted. Both are measured in markup view, where the struck footer stays visible. Both fields cache the result 1, so the inventory (one 1, one 2, four 3s) and the page-1 and page-2 number placements fail a renderer that prints a cached result instead of the page's own number. LibreOffice 25.8.7.3 shows the deletion and advances both fields, and its direct captures of both cases are eligible. Word adjudication is pending: Word reference PDFs of the exact inputs have not been captured. Earlier DOCX bytes are unchanged. The redline suite remains `redline-v9`.
 
 `redline-v9` adds an original reply-parent trio for Docxodus #1312: the revision adds a threaded reply to an unchanged comment, and the original gives that comment no paragraph id and no commentsExtended part, or a different paragraph id from the revision's; the control gives the comment the same paragraph id in both. A new `comment-threads` assertion requires the redline's reply to name its parent comment's paragraph id and every parent to have its own commentsExtended entry; neither round-trip view reads comment threading. LibreOffice 25.8.7.3 shows no revision for a reply whose markers are the only change and keeps it on reject, so its comparisons are declared ineligible for all three. Earlier DOCX inputs are byte-identical. (`redline-v8` is claimed by open bench PR #79; whichever merges second is renumbered at merge.)
 
@@ -185,6 +187,13 @@ python3 -m bench redline run --adapter docxodus --candidate FULL_COMMIT_SHA \
 ```
 
 Read [the redline scoring contract](docs/REDLINE.md) for the checks, the view, LibreOffice's limits and the eligibility rule.
+
+The registered `core-ci-v2` selection preserves the 12 exact input hashes from the original rendering CI oracle. Its declarations include the Word-adjudicated nested-table margin checks. The full 325-case corpus remains the default; unknown selections and missing or changed historical inputs are rejected. Use the same selection for reference creation and every compared run:
+
+```bash
+python3 -m bench reference libreoffice --suite core-ci-v2 --out references/ci
+python3 -m bench run --suite core-ci-v2 --reference references/ci/bundle.json --adapter libreoffice --candidate reference-calibration --out runs/ci-calibration --gate close
+```
 
 ## Word capture later
 
