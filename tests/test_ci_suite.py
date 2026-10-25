@@ -15,7 +15,7 @@ class HistoricalCiSuite(unittest.TestCase):
 
     def test_default_keeps_the_complete_corpus(self):
         self.assertIs(select_suite(self.registry), self.registry)
-        self.assertEqual(len(self.registry['cases']), 325)
+        self.assertEqual(len(self.registry['cases']), 338)
 
     def test_historical_twelve_inputs_are_preserved(self):
         selected = select_suite(self.registry, 'core-ci-v2')

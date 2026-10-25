@@ -2092,7 +2092,99 @@ def generate():
                                        'tokens': ['Check', 'OakStoryNote']}]
         if mixed: cases[-1]['htmlAssertions'].append({'type': 'marker-readable', 'version': 1, 'marker': 'OakBodyPoint',
                                                     'tokens': ['Review', 'OakBodyPoint']})
-    registry = {'schema': 1, 'suite': {'id': 'core-v65', 'version': 65, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # core-v66: reuse the original row-geometry helpers and unpublished #1202 cases.
+    # A 300 x 160pt card with 10pt margins: a 140pt body band that a short table row overfills.
+    rg_card = ('<w:sectPr><w:pgSz w:w="6000" w:h="3200"/><w:pgMar w:top="200" w:right="200" w:bottom="200" w:left="200" '
+               'w:header="0" w:footer="0" w:gutter="0"/></w:sectPr>')
+    # #1202: rows and bordered paragraphs taller than the 140pt body band of a 160pt card.
+    def card_lines(prefix, count):
+        return [f'{prefix}{i:02d}' for i in range(1, count + 1)]
+    def card_paras(words):
+        return ''.join(para(w, exact(300)) for w in words)
+    for case_id, height, description in [('tables-row-exact-taller-than-page-times-new-roman', 8000, 'An exact 400pt row taller than the page'),
+                                         ('tables-row-exact-taller-than-page-control-times-new-roman', 2000, 'Control: an exact 100pt row that fits the page')]:
+        words = card_lines('Cedar', 8)
+        # The 100pt control row hides its eighth line; the 400pt row shows all eight.
+        hidden = {'Cedar08': 1} if height < 2400 else None
+        texts = ['CedarBefore'] + [w for w in words if not hidden or w not in hidden] + ['CedarAfter']
+        body = para('CedarBefore', exact(300)) + rg_table([rg_row([rg_cell(card_paras(words), 5400)], height)], [5400], True, no_margins) + para('CedarAfter', exact(300))
+        rg_add(case_id, description + ' after a paragraph on a 300 x 160pt card (Docxodus #1202)', texts, body, sect=rg_card, clipped=hidden)
+    words = card_lines('Maple', 8)
+    texts = ['MapleBefore'] + words + ['Willow01', 'Willow02', 'MapleAfter']
+    body = (para('MapleBefore', exact(300)) + rg_table([rg_row([rg_cell(card_paras(words), 5400)], 8000, header=True),
+                                                        rg_row([rg_cell(card_paras(['Willow01']), 5400)]), rg_row([rg_cell(card_paras(['Willow02']), 5400)])],
+                                                       [5400], True, no_margins) + para('MapleAfter', exact(300)))
+    rg_add('tables-header-row-taller-than-page-times-new-roman', 'An exact 400pt header row above two body rows on a 300 x 160pt card (Docxodus #1202)', texts, body, sect=rg_card)
+    words = card_lines('Inner', 8)
+    texts = ['OuterBefore', 'OuterHead'] + words + ['OuterTail', 'OuterAfter']
+    inner = rg_table([rg_row([rg_cell(card_paras(words), 5000)], 8000)], [5000], True, no_margins)
+    body = (para('OuterBefore', exact(300)) + rg_table([rg_row([rg_cell(para('OuterHead', exact(300)) + inner + para('OuterTail', exact(300)), 5400)])],
+                                                       [5400], True, no_margins) + para('OuterAfter', exact(300)))
+    rg_add('tables-nested-row-taller-than-page-times-new-roman', 'A nested table whose exact 400pt row is taller than a 300 x 160pt card (Docxodus #1202)', texts, body, sect=rg_card)
+    box = '<w:pBdr>' + ''.join(f'<w:{s} w:val="single" w:sz="8" w:space="0" w:color="000000"/>' for s in ('top', 'left', 'bottom', 'right')) + '</w:pBdr>'
+    words = card_lines('Hazel', 28)
+    body = (para('HazelBefore', exact(300)) + para(props=exact(300).replace('<w:spacing', box + '<w:spacing'), runs='<w:r><w:br/></w:r>'.join(run(w) for w in words)) + para('HazelAfter', exact(300)))
+    rg_add('paragraphs-border-taller-than-page-times-new-roman', 'A bordered 28-line paragraph taller than a 300 x 160pt card (Docxodus #1202)',
+           ['HazelBefore'] + words + ['HazelAfter'], body, sect=rg_card)
+    words = card_lines('Larch', 28)
+    body = para('LarchBefore', exact(300)) + ''.join(para(w, exact(300).replace('<w:spacing', box + '<w:spacing')) for w in words) + para('LarchAfter', exact(300))
+    rg_add('paragraphs-border-group-taller-than-page-times-new-roman', 'Twenty-eight paragraphs sharing one border, taller than a 300 x 160pt card (Docxodus #1202)',
+           ['LarchBefore'] + words + ['LarchAfter'], body, sect=rg_card)
+    # New paper-edge probes use strict visible inventories: Cedar11/12 are not optional tokens.
+    def rg_page_case(case_id, description, body, page_words, story=None):
+        totals = Counter(w for words in page_words for w in words)
+        assertions = []
+        for page, words in enumerate(page_words, 1):
+            for word in words:
+                # Region markers must be unique; repeated footer words stay in the complete inventory.
+                if totals[word] != 1: continue
+                assertions.append({'type': 'marker-region', 'version': 2, 'marker': word,
+                    'occurrence': 1, 'page': page, 'rect': [0, 0, 300, 161], 'adjudicated': 'word'})
+        add(case_id, 'tables', description + ' (Docxodus #1202)', [w for words in page_words for w in words],
+            body, sect=rg_card.replace('<w:sectPr>', '<w:sectPr><w:footerReference w:type="default" r:id="rStory"/>') if story else rg_card,
+            styles_xml=rg_styles, font=rg_font, story=story, assertions=assertions)
+    for suffix, footer, wrapped in [('lines', False, False), ('footer', True, False), ('soft-wrap', False, True)]:
+        words = card_lines('Cedar', 12)
+        width = 900 if wrapped else 5400
+        content = para(' '.join(words), exact(300)) if wrapped else card_paras(words)
+        body = (para('CedarBefore', exact(300)) + rg_table([rg_row([rg_cell(content, width)], 8000)],
+                [width], True, no_margins) + para('CedarAfter', exact(300)))
+        pages = [['CedarBefore'], words[:10], ['CedarAfter']]
+        if footer: pages = [p + ['FooterProbe'] for p in pages]
+        rg_page_case('tables-row-exact-paper-edge-' + suffix + '-times-new-roman',
+            'An exact 400pt row with twelve ' + ('soft-wrapped words' if wrapped else 'paragraphs')
+            + (' and a footer' if footer else ''), body, pages,
+            ('footer', para('FooterProbe', exact(300))) if footer else None)
+    for suffix, height, header in [('two-hundred', 4000, True), ('no-header', 8000, False)]:
+        words = card_lines('Maple', 8)
+        body = (para('MapleBefore', exact(300)) + rg_table([rg_row([rg_cell(card_paras(words), 5400)], height, header=header),
+                rg_row([rg_cell(para('Willow01', exact(300)), 5400)]), rg_row([rg_cell(para('Willow02', exact(300)), 5400)])],
+                [5400], True, no_margins) + para('MapleAfter', exact(300)))
+        pages = [['MapleBefore'], words, ['Willow01', 'Willow02']]
+        if header: pages.append(['MapleAfter'])
+        else: pages[-1].append('MapleAfter')
+        rg_page_case('tables-row-oversized-' + suffix + '-times-new-roman',
+            'An oversized ' + ('200pt exact header' if header else '400pt first row without a header')
+            + ' followed by two body rows', body, pages)
+    # A missing serialized final paragraph still consumes a normal line in native Word.
+    for suffix, header in [('exact-row', False), ('header-row', True)]:
+        rows = [rg_row([rg_cell(para('AlderEnd', exact(300)), 5400)], 8000, header=header)]
+        if header: rows.append(rg_row([rg_cell(para('BirchEnd', exact(300)), 5400)]))
+        rg_page_case('tables-final-' + suffix + '-blank-page-times-new-roman',
+            'A table-ending exact 400pt ' + ('header' if header else 'row') + ' with Word required final paragraph',
+            rg_table(rows, [5400], True, no_margins),
+            [['AlderEnd'], ['BirchEnd'], []] if header else [['AlderEnd'], []])
+    rg_word = {'paragraphs-border-group-taller-than-page-times-new-roman': {'Larch09': [2, 10.0, 12.2, 47.01, 24.4], 'Larch10': [2, 10.0, 27.23, 47.01, 39.43], 'Larch11': [2, 10.0, 42.25, 47.01, 54.45], 'Larch12': [2, 10.0, 57.28, 47.01, 69.48], 'Larch13': [2, 10.0, 72.3, 47.01, 84.51], 'Larch14': [2, 10.0, 87.33, 47.01, 99.53], 'Larch15': [2, 10.0, 102.35, 47.01, 114.56], 'Larch16': [2, 10.0, 117.38, 47.01, 129.58], 'Larch17': [2, 10.0, 132.4, 47.01, 144.61], 'Larch18': [3, 10.0, 12.2, 47.01, 24.4], 'Larch19': [3, 10.0, 27.23, 47.01, 39.43], 'Larch20': [3, 10.0, 42.25, 47.01, 54.45], 'Larch21': [3, 10.0, 57.28, 47.01, 69.48], 'Larch22': [3, 10.0, 72.3, 47.01, 84.51], 'Larch23': [3, 10.0, 87.33, 47.01, 99.53], 'Larch24': [3, 10.0, 102.35, 47.01, 114.56], 'Larch25': [3, 10.0, 117.38, 47.01, 129.58], 'Larch26': [3, 10.0, 132.4, 47.01, 144.61], 'Larch27': [4, 10.0, 12.2, 47.01, 24.4], 'Larch28': [4, 10.0, 27.23, 47.01, 39.43], 'LarchAfter': [4, 10.0, 43.25, 58.87, 55.45]}, 'paragraphs-border-taller-than-page-times-new-roman': {'Hazel09': [2, 10.0, 12.2, 46.76, 24.4], 'Hazel10': [2, 10.0, 27.23, 46.76, 39.43], 'Hazel11': [2, 10.0, 42.25, 46.76, 54.45], 'Hazel12': [2, 10.0, 57.28, 46.76, 69.48], 'Hazel13': [2, 10.0, 72.3, 46.76, 84.51], 'Hazel14': [2, 10.0, 87.33, 46.76, 99.53], 'Hazel15': [2, 10.0, 102.35, 46.76, 114.56], 'Hazel16': [2, 10.0, 117.38, 46.76, 129.58], 'Hazel17': [2, 10.0, 132.4, 46.76, 144.61], 'Hazel18': [3, 10.0, 12.2, 46.76, 24.4], 'Hazel19': [3, 10.0, 27.23, 46.76, 39.43], 'Hazel20': [3, 10.0, 42.25, 46.76, 54.45], 'Hazel21': [3, 10.0, 57.28, 46.76, 69.48], 'Hazel22': [3, 10.0, 72.3, 46.76, 84.51], 'Hazel23': [3, 10.0, 87.33, 46.76, 99.53], 'Hazel24': [3, 10.0, 102.35, 46.76, 114.56], 'Hazel25': [3, 10.0, 117.38, 46.76, 129.58], 'Hazel26': [3, 10.0, 132.4, 46.76, 144.61], 'Hazel27': [4, 10.0, 12.2, 46.76, 24.4], 'Hazel28': [4, 10.0, 27.23, 46.76, 39.43], 'HazelAfter': [4, 10.0, 43.25, 58.88, 55.45]}, 'tables-nested-row-taller-than-page-times-new-roman': {'Inner01': [2, 12.0, 14.23, 46.24, 26.43], 'Inner02': [2, 12.0, 29.23, 46.24, 41.43], 'Inner03': [2, 12.0, 44.25, 46.24, 56.45], 'Inner04': [2, 12.0, 59.28, 46.24, 71.48], 'Inner05': [2, 12.0, 74.3, 46.24, 86.51], 'Inner06': [2, 12.0, 89.33, 46.24, 101.53], 'Inner07': [2, 12.0, 104.35, 46.24, 116.56], 'Inner08': [2, 12.0, 119.38, 46.24, 131.58], 'OuterAfter': [3, 10.0, 29.23, 58.37, 41.43], 'OuterTail': [3, 11.0, 13.2, 54.03, 25.4]}, 'tables-header-row-taller-than-page-times-new-roman': {'MapleAfter': [4, 10.0, 12.196725, 61.387525, 24.4014]}}
+    for case in cases:
+        boxes = rg_word.get(case['id'])
+        if boxes:
+            case['assertions'] = [a if a.get('marker') not in boxes else
+                {'type': 'marker-region', 'version': 2, 'marker': a['marker'], 'occurrence': 1,
+                 'page': boxes[a['marker']][0], 'rect': [boxes[a['marker']][1]-1, boxes[a['marker']][2]-1,
+                 boxes[a['marker']][3]+1, boxes[a['marker']][4]+1], 'tolerancePt': 0.0001, 'adjudicated': 'word'}
+                for a in case['assertions']]
+            case['version'] = 2
+    registry = {'schema': 1, 'suite': {'id': 'core-v66', 'version': 66, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

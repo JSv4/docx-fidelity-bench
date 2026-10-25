@@ -139,3 +139,10 @@ OOXML authored in the row-geometry branch. The package bytes match the separatel
 Word inputs. No external document content, images, or font binaries are imported. Rendered evidence
 contains original fixture text and separately licensed font subsets; the font contract and native
 capture hashes are retained with the unmodified local Word references.
+
+The thirteen #1202 oversized-block cases reuse six original row-geometry cases and add seven
+original literal-text OOXML probes in `bench/fixtures.py`. They contain no renderer fixtures,
+external document content, images, or embedded font binaries. The labelled evidence sheets in
+`docs/results/oversized-page-blocks/` show these authored inputs and separately authored core probes
+in native Word and public Docxodus exports. Native font subsets retain the recorded font contract;
+no font binaries are redistributed.
