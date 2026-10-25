@@ -675,6 +675,85 @@ def justification_line_inputs():
         yield f'justify-gap-choice-heldout-mode-15-size-{size}', size, current, [texts[t] for t, _, _ in paragraphs]
 
 
+def native_precision_inputs():
+    # Original literal OOXML/text captured in Word before the precision change.
+    # Keep the input bytes independent of font measurement and output coordinates.
+    parts = {'[Content_Types].xml': '<Types '
+                            'xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default '
+                            'Extension="rels" '
+                            'ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default '
+                            'Extension="xml" ContentType="application/xml"/><Override '
+                            'PartName="/word/document.xml" '
+                            'ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override '
+                            'PartName="/word/styles.xml" '
+                            'ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/><Override '
+                            'PartName="/word/settings.xml" '
+                            'ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml"/></Types>',
+     '_rels/.rels': '<Relationships '
+                    'xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship '
+                    'Id="main" '
+                    'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" '
+                    'Target="word/document.xml"/></Relationships>',
+     'word/_rels/document.xml.rels': '<Relationships '
+                                     'xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship '
+                                     'Id="styles" '
+                                     'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" '
+                                     'Target="styles.xml"/><Relationship Id="settings" '
+                                     'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings" '
+                                     'Target="settings.xml"/></Relationships>',
+     'word/settings.xml': '<w:settings '
+                          'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:compat><w:compatSetting '
+                          'w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" '
+                          'w:val="15"/></w:compat></w:settings>',
+     'word/styles.xml': '<w:styles '
+                        'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts '
+                        'w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" '
+                        'w:cs="Times New Roman"/><w:color w:val="000000"/><w:sz '
+                        'w:val="24"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl '
+                        'w:val="0"/><w:spacing w:after="120" w:line="276" '
+                        'w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults><w:style '
+                        'w:type="paragraph" w:default="1" w:styleId="Normal"><w:name '
+                        'w:val="Normal"/></w:style></w:styles>'}
+    prefix = '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>'
+    suffix = '<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr></w:body></w:document>'
+    prose = 'The parties will inspect the sample, record the agreed date, and send the written schedule to the project office.'
+    paragraphs = [(char * count, 'left', 468) for char, count in
+                  [('C', 48), ('a', 60), ('l', 80), ('p', 60), ('s', 70), ('w', 48), ('i', 80)]]
+    paragraphs += [(pair * 30, 'left', 468) for pair in ['pa', 'ie']]
+    paragraphs += [(' '.join(['pa'] * 28), 'left', 468),
+                   (' '.join(['pa'] * 28), 'both', 468),
+                   (' '.join(['pa'] * 50), 'both', 468),
+                   ('  '.join(['pa'] * 45), 'both', 468),
+                   (prose, 'left', 250), (prose, 'both', 250),
+                   ('AVATAR To WA ffi office AVATAR To WA ffi office', 'left', 468)]
+    body = ''.join('<w:p><w:pPr>' +
+                   (f'<w:ind w:right="{(468 - width) * 20}"/>' if width != 468 else '') +
+                   f'<w:jc w:val="{align}"/></w:pPr><w:r><w:t xml:space="preserve">' +
+                   escape(text) + '</w:t></w:r></w:p>' for text, align, width in paragraphs)
+    for size in [12, 11]:
+        actual = dict(parts)
+        actual['word/document.xml'] = prefix + body + suffix
+        actual['word/styles.xml'] = parts['word/styles.xml'].replace('<w:sz w:val="24"/>', f'<w:sz w:val="{size * 2}"/>')
+        yield (f'glyph-advances-mode-15-size-{size}',
+               f'Native Word {size}pt glyph and word advances, repeated spaces and wrapping (Docxodus #1124)',
+               actual, [p[0] for p in paragraphs], ['Times New Roman'])
+    text = ' '.join(['Ag test word'] * 24)
+    variants = [(font, size, 276) for font in ['Times New Roman', 'Arial'] for size in [10, 13, 16]]
+    variants += [('Times New Roman', 12, 240), ('Times New Roman', 12, 360)]
+    body = ''
+    for font, size, line in variants:
+        properties = (f'<w:rPr><w:rFonts w:ascii="{font}" w:hAnsi="{font}" w:eastAsia="{font}" w:cs="{font}"/>'
+                      f'<w:sz w:val="{size * 2}"/></w:rPr>')
+        body += (f'<w:p><w:pPr><w:spacing w:after="60" w:line="{line}" w:lineRule="auto"/>'
+                 '<w:ind w:right="6480"/><w:jc w:val="left"/>' + properties + '</w:pPr><w:r>' + properties +
+                 '<w:t xml:space="preserve">' + text + '</w:t></w:r></w:p>')
+    actual = dict(parts)
+    actual['word/document.xml'] = prefix + body + suffix
+    yield ('baseline-rounding-font-size-holdouts-mode-15',
+           'Native Word long-paragraph auto-spacing across two fonts and new sizes, with single/1.5 controls (Docxodus #1124)',
+           actual, [text] * len(variants), ['Times New Roman', 'Arial'])
+
+
 def generate():
     cases = []
     def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT, literal_parts=None):
@@ -2546,7 +2625,10 @@ def generate():
         add(cid, 'paragraphs',
             f'Word held-out justified prose at {size}pt with repeated spaces, indents and final-line boundaries (Docxodus #1124)',
             text, '', font='Times New Roman', literal_parts=parts)
-    registry = {'schema': 1, 'suite': {'id': 'core-v70', 'version': 70, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    for cid, description, parts, text, fonts in native_precision_inputs():
+        add(cid, 'paragraphs', description, text, '', font=fonts[0], literal_parts=parts)
+        cases[-1]['fonts'] = fonts
+    registry = {'schema': 1, 'suite': {'id': 'core-v71', 'version': 71, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

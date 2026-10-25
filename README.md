@@ -1,5 +1,7 @@
 # DOCX fidelity bench
 
+`core-v71` adds three independently captured Word baseline and word-advance controls for Docxodus #1124: 40 paragraphs covering two fonts, new sizes, spacing multiples and ordinary-space alignment. See [native/candidate evidence and provider qualifications](docs/results/native-text-precision/README.md). All 381 prior PDF inputs and the historical CI suite are unchanged.
+
 `core-v70` adds two independently captured Word justification controls for Docxodus #1124, covering 45 held-out paragraphs at 11pt and 12pt. See [all native/candidate pages and measurement qualifications](docs/results/justification-lines/README.md). The 379 prior PDF inputs and historical CI suite are preserved.
 
 An independent MIT benchmark of delivered PDF rendering and of document comparison. The harness and every input document are authored in this repository. It measures layout, visible content, physical pages, fonts, and declared feature assertions. It produces portable HTML evidence and JSON measurements.
@@ -132,7 +134,7 @@ The score is layout similarity, not a percentage of document correctness. Report
 
 ## Run
 
-Python 3.11 or newer is sufficient for the harness and tests; there are no Python package dependencies. Provision LibreOffice, Poppler (`pdftoppm`, `pdftotext`, `pdffonts`), qpdf 11 or newer, fontconfig, Liberation Serif, and Times New Roman separately. Times New Roman is required by the agreement variant; on Ubuntu the rendering workflow provisions it through `ttf-mscorefonts-installer` under the font package's own license (see [RIGHTS.md](RIGHTS.md)). Docxodus requires font directories without symlinks: CI removes the installer's filename aliases, while local runs can use regular-file copies of the declared fonts and point fontconfig at that directory. Font hashes must still match the reference contract. To run Docxodus, also provision Node.js 22.13 or newer, .NET 10, its `wasm-tools` workload, and Chromium's sandbox host prerequisites.
+Python 3.11 or newer is sufficient for the harness and tests; there are no Python package dependencies. Provision LibreOffice, Poppler (`pdftoppm`, `pdftotext`, `pdffonts`), qpdf 11 or newer, fontconfig, Liberation Serif, Times New Roman, and Arial separately. Times New Roman is required by the agreement variant, and Arial by the native baseline controls; on Ubuntu the rendering workflow provisions it through `ttf-mscorefonts-installer` under the font package's own license (see [RIGHTS.md](RIGHTS.md)). Docxodus requires font directories without symlinks: CI removes the installer's filename aliases, while local runs can use regular-file copies of the declared fonts and point fontconfig at that directory. Font hashes must still match the reference contract. To run Docxodus, also provision Node.js 22.13 or newer, .NET 10, its `wasm-tools` workload, and Chromium's sandbox host prerequisites.
 
 ```sh
 python3 -m unittest discover -s tests -v

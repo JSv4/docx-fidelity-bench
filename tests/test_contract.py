@@ -355,7 +355,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 381)
+        self.assertEqual(len(common.validate_registry()['cases']), 384)
 
     def test_adjacent_table_property_pairs_keep_independent_table_declarations(self):
         import xml.etree.ElementTree as ET
@@ -636,7 +636,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v70')
+        self.assertEqual(registry['suite']['id'], 'core-v71')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
