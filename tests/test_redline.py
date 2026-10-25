@@ -46,10 +46,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v7')
-        self.assertEqual(len(registry['cases']), 80)
+        self.assertEqual(registry['suite']['id'], 'redline-v17')
+        self.assertEqual(len(registry['cases']), 152)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -120,8 +120,10 @@ class AuthoredCalibration(unittest.TestCase):
     def test_authored_redlines_round_trip(self):
         for record in cases():
             package = load(record['authored'])
-            if record['operation'] == 'reject':
+            if record['operation'] in {'reject', 'column-edit', 'block-insert'}:
                 self.assertEqual(revisions.view(package), revisions.view(load(record['expected']['output'])), record['id'])
+                if record['operation'] in {'column-edit', 'block-insert'}:
+                    continue
                 tracked = load(record['inputs'][0])
                 rejected = revisions.resolve(tracked.story_parts(), 'reject')
                 self.assertEqual(revisions.view(tracked, rejected), revisions.view(load(record['expected']['output'])), record['id'])
@@ -134,17 +136,67 @@ class AuthoredCalibration(unittest.TestCase):
         for record in cases():
             package = load(record['authored'])
             resolved = {'redline': None, 'output': None}
+            if record['operation'] != 'reject':
+                resolved.update(accepted=revisions.resolve(package.story_parts(), 'accept'),
+                                rejected=revisions.resolve(package.story_parts(), 'reject'))
             for assertion in record['assertions']:
                 self.assertTrue(redline._assertion(assertion, package, resolved)['passed'], record['id'] + ' ' + assertion['type'])
 
     def test_reproducers_and_controls_differ_from_their_original(self):
         for record in cases(operation='compare'):
-            if record['kind'] == 'identity':
+            if record['kind'] == 'identity' or 'semanticPreflight' in record:
                 continue
             self.assertNotEqual(revisions.view(load(record['expected']['accepted'])), revisions.view(load(record['expected']['rejected'])), record['id'])
 
 
 class GamingIsRejected(unittest.TestCase):
+    def test_mixed_run_marker_order_is_not_hidden_by_unchanged_letters(self):
+        for marker in ('tab', 'br'):
+            record = case('redline-mixed-run-' + marker + '-direct-before')
+            package = load(record['expected']['accepted'])
+            parts = package.story_parts()
+            paragraph = list(parts[package.main].iter(revisions.w('p')))[1]
+            carrier = next(run for run in paragraph if run.find(revisions.w(marker)) is not None)
+            paragraph.remove(carrier)
+            paragraph.insert(0, carrier)
+            letters = lambda root: ''.join(e.text or '' for e in root.iter(revisions.w('t')))
+            self.assertEqual(letters(package.story_parts()[package.main]), letters(parts[package.main]))
+            self.assertNotEqual(revisions.view(package), revisions.view(package, parts))
+
+    def test_resolved_column_state_catches_changes_the_text_view_ignores(self):
+        record = case('redline-pending-grid-merged-insert')
+        package = load(record['authored'])
+        declaration = next(a for a in record['assertions'] if a['type'] == 'table-state')
+        for target, attribute, value in [('tblGrid/gridCol', 'w', '9999'), ('tr/tc/tcPr/gridSpan', 'val', '2'),
+                                         ('tr/tc/tcPr/tcW', 'w', '9999'), ('tr/tc/tcPr/shd', 'fill', '000000')]:
+            parts = package.story_parts()
+            table = next(parts[package.main].iter(revisions.w('tbl')))
+            path = '/'.join(revisions.w(name) for name in target.split('/'))
+            table.find(path).set(revisions.w(attribute), value)
+            self.assertEqual(revisions.view(package, parts), revisions.view(load(record['expected']['output'])))
+            self.assertFalse(redline._assertion(declaration, package, {'output': parts})['passed'], target)
+        record = case('redline-pending-grid-omitted-insert')
+        package = load(record['authored'])
+        declaration = next(a for a in record['assertions'] if a['type'] == 'table-state')
+        for name, value in [('gridBefore', '1'), ('trHeight', '480')]:
+            parts = package.story_parts()
+            row = next(parts[package.main].iter(revisions.w('tr')))
+            row.find(revisions.w('trPr') + '/' + revisions.w(name)).set(revisions.w('val'), value)
+            self.assertEqual(revisions.view(package, parts), revisions.view(load(record['expected']['output'])))
+            self.assertFalse(redline._assertion(declaration, package, {'output': parts})['passed'], name)
+
+    def test_table_width_changes_cannot_hide_behind_unchanged_text(self):
+        record = case('redline-table-column-widths-full')
+        declaration = next(a for a in record['assertions'] if a['type'] == 'table-widths' and a['scope'] == 'accepted')
+        package = load(record['authored'])
+        for target in ('tblGrid/gridCol', 'tr/tc/tcPr/tcW', 'tblPr/tblW'):
+            parts = revisions.resolve(package.story_parts(), 'accept')
+            table = next(parts[package.main].iter(revisions.w('tbl')))
+            path = '/'.join(revisions.w(name) for name in target.split('/'))
+            table.find(path).set(revisions.w('w'), '9999')
+            self.assertEqual(revisions.view(package, parts), revisions.view(load(record['expected']['accepted'])))
+            self.assertFalse(redline._assertion(declaration, package, {'accepted': parts})['passed'], target)
+
     def test_moving_a_table_boundary_bookmark_changes_the_semantic_view(self):
         for level in ('tbl', 'tr'):
             with self.subTest(level=level):
@@ -160,7 +212,7 @@ class GamingIsRejected(unittest.TestCase):
 
     def test_copying_either_input_fails_a_round_trip(self):
         for record in cases(operation='compare'):
-            if record['kind'] == 'identity':
+            if record['kind'] == 'identity' or 'semanticPreflight' in record:
                 continue
             left, right = load(record['expected']['rejected']), load(record['expected']['accepted'])
             for candidate in (left, right):
@@ -265,6 +317,34 @@ class GamingIsRejected(unittest.TestCase):
         parts['word/document.xml'] = ET.tostring(document)
         problems = sorted(f['problem'] for f in revisions.para_id_findings(revisions.Package(parts)))
         self.assertEqual(problems, ['duplicate of word/comments.xml', 'out of range'])
+
+
+    def test_comment_thread_findings(self):
+        record = case('redline-comment-reply-id-less-root')
+        threads = [['Friday is confirmed.', 'Check the delivery date.']]
+        self.assertEqual(revisions.comment_thread_findings(load(record['authored']), threads), [])
+        # Docxodus #1312 before its fix: the root keeps the original's missing paraId and has no entry.
+        parts = members(record['authored'])
+        comments = ET.fromstring(parts['word/comments.xml'])
+        del comments.find(W + 'comment').find(W + 'p').attrib['{' + revisions.W14 + '}paraId']
+        parts['word/comments.xml'] = ET.tostring(comments)
+        extended = ET.fromstring(parts['word/commentsExtended.xml'])
+        extended.remove(extended[0])
+        parts['word/commentsExtended.xml'] = ET.tostring(extended)
+        problems = [f['problem'] for f in revisions.comment_thread_findings(revisions.Package(parts), threads)]
+        self.assertEqual(problems, ['parent is not a comment with its own entry', 'not threaded under its parent'])
+        # A reply threaded under the wrong comment fails even when every link resolves.
+        self.assertEqual([f['problem'] for f in revisions.comment_thread_findings(load(record['authored']), [threads[0][::-1]])],
+                         ['not threaded under its parent'])
+        self.assertEqual([f['problem'] for f in revisions.comment_thread_findings(load(record['authored']), [['Absent.', 'Check the delivery date.']])],
+                         ['0 comments carry this text'])
+        # An entry keyed to a paraId no comment holds.
+        parts = members(record['authored'])
+        extended = ET.fromstring(parts['word/commentsExtended.xml'])
+        extended.append(ET.fromstring(f'<w15:commentEx xmlns:w15="{revisions.W15}" w15:paraId="0000ABCD" w15:done="0"/>'))
+        parts['word/commentsExtended.xml'] = ET.tostring(extended)
+        self.assertEqual([f['problem'] for f in revisions.comment_thread_findings(revisions.Package(parts), threads)],
+                         ['entry names no comment'])
 
 
 def fragment(body, extra=''):
@@ -396,6 +476,142 @@ class EngineSemantics(unittest.TestCase):
 
 
 class ScoringContract(unittest.TestCase):
+    def test_column_review_observations_are_mandatory_typed_and_successful(self):
+        import shutil
+        record = case('redline-column-gap-leading')
+        def candidate(_adapter, _build, _case, output, _candidate):
+            shutil.copyfile(common.ROOT / record['authored']['path'], output)
+            return dict(response, status='ok', revisionRegistryCount=0)
+        expected = {'beforeCount': 1, 'supported': True, 'resolutionSuccess': True}
+        mutants = [None, dict(expected, beforeCount=True), dict(expected, beforeCount=2),
+                   dict(expected, supported=1), dict(expected, supported=False),
+                   dict(expected, resolutionSuccess=1), dict(expected, resolutionSuccess=False), expected]
+        for observed in mutants:
+            response = {} if observed is None else {'columnReview': observed}
+            with self.subTest(observed=observed), tempfile.TemporaryDirectory() as temp, \
+                    patch.object(redline, 'run_candidate', side_effect=candidate), \
+                    patch.object(redline, '_libreoffice_checks', return_value=[]), \
+                    patch.object(redline, 'validate_packages', side_effect=lambda _v, paths: {str(p): [] for p in paths}):
+                outcome = redline.score_case(record, Path(temp), 'docxodus', 'build', 'commit', {}, 'validator')
+                self.assertEqual(outcome['status'], 'measured')
+                self.assertEqual(outcome['score'], 100 if observed is expected else 0)
+
+    def test_v2_column_declarations_require_a_consistent_review_contract(self):
+        for key, value in [('beforeCount', True), ('beforeCount', 2), ('supported', 1), ('resolutionSuccess', False)]:
+            registry = common.read_json(redline.MANIFEST)
+            target = next(c for c in registry['cases'] if 'columnReview' in c)
+            target['columnReview'][key] = value
+            with self.assertRaisesRegex(ValueError, 'column review'):
+                redline.validate_registry(registry)
+
+    def test_span_edit_declarations_require_typed_nonempty_ranges(self):
+        for key, value in [('tracked', 1), ('start', True), ('paragraphIndex', -1), ('length', 0), ('replacement', None)]:
+            registry = common.read_json(redline.MANIFEST)
+            target = next(c for c in registry['cases'] if c['operation'] == 'replace-span')
+            target['spanEdit'][key] = value
+            with self.assertRaisesRegex(ValueError, 'span edit'):
+                redline.validate_registry(registry)
+
+    def test_block_insertion_outcomes_are_mandatory_and_typed(self):
+        import shutil
+        record = case('redline-block-insert-paragraph')
+        def candidate(_adapter, _build, _case, output, _candidate):
+            shutil.copyfile(common.ROOT / record['authored']['path'], output)
+            return dict(response, status='ok')
+        expected = record['editOutcome']
+        mutants = [None, dict(expected, success=0), dict(expected, versionDelta=False),
+                   dict(expected, undoAvailable=0), dict(expected, errorCode=None),
+                   dict(expected, success=True, versionDelta=1, undoAvailable=True), expected]
+        for observed in mutants:
+            response = {} if observed is None else {'blockInsertion': observed}
+            with self.subTest(observed=observed), tempfile.TemporaryDirectory() as temp, \
+                    patch.object(redline, 'run_candidate', side_effect=candidate), \
+                    patch.object(redline, '_libreoffice_checks', return_value=[]), \
+                    patch.object(redline, 'validate_packages', side_effect=lambda _v, paths: {str(p): [] for p in paths}):
+                outcome = redline.score_case(record, Path(temp), 'docxodus', 'build', 'commit', {}, 'validator')
+                self.assertEqual(outcome['status'], 'measured')
+                self.assertEqual(outcome['score'], 100 if observed is expected else 0)
+
+    def test_block_insertion_declarations_reject_incompatible_results(self):
+        for key, value in [('success', 0), ('versionDelta', False), ('undoAvailable', 0), ('errorCode', None)]:
+            registry = common.read_json(redline.MANIFEST)
+            target = next(c for c in registry['cases'] if c['operation'] == 'block-insert')
+            target['editOutcome'][key] = value
+            with self.assertRaisesRegex(ValueError, 'block insertion'):
+                redline.validate_registry(registry)
+
+    def test_resolved_column_operations_require_an_empty_public_registry(self):
+        import shutil
+        record = case('redline-pending-grid-plain-insert')
+        def candidate(_adapter, _build, _case, output, _candidate):
+            shutil.copyfile(common.ROOT / record['authored']['path'], output)
+            return dict(response, status='ok')
+        for count, expected_score in [(None, 0), (False, 0), (1, 0), (0, 100)]:
+            response = {} if count is None else {'revisionRegistryCount': count}
+            with self.subTest(count=count), tempfile.TemporaryDirectory() as temp, \
+                    patch.object(redline, 'run_candidate', side_effect=candidate), \
+                    patch.object(redline, '_libreoffice_checks', return_value=[]), \
+                    patch.object(redline, 'validate_packages', side_effect=lambda _v, paths: {str(p): [] for p in paths}):
+                outcome = redline.score_case(record, Path(temp), 'docxodus', 'build', 'commit', {}, 'validator')
+                self.assertEqual(outcome['status'], 'measured')
+                self.assertEqual(outcome['score'], expected_score)
+
+    def test_column_operation_and_table_state_declarations_are_validated(self):
+        for key, value in [('action', 'move'), ('cellIndex', True), ('resolution', 'ignore')]:
+            registry = common.read_json(redline.MANIFEST)
+            target = next(c for c in registry['cases'] if c['operation'] == 'column-edit')
+            target['columnEdit'][key] = value
+            with self.assertRaisesRegex(ValueError, 'column edit'):
+                redline.validate_registry(registry)
+        record = case('redline-pending-grid-merged-insert')
+        state = copy.deepcopy(next(a['state'] for a in record['assertions'] if a['type'] == 'table-state'))
+        self.assertTrue(redline.valid_table_state(state))
+        state['rows'][0]['cells'][0]['span'] = 2
+        self.assertFalse(redline.valid_table_state(state))
+
+    def test_public_registry_count_is_mandatory_and_typed_for_width_operations(self):
+        import shutil
+        record = case('redline-table-column-widths-full')
+        def candidate(_adapter, _build, _case, output, _candidate):
+            shutil.copyfile(common.ROOT / record['authored']['path'], output)
+            return dict(response, status='ok')
+        for count, expected_score in [(None, 0), (True, 0), (3, 0), (1, 100)]:
+            response = {} if count is None else {'revisionRegistryCount': count}
+            with self.subTest(count=count), tempfile.TemporaryDirectory() as temp, \
+                    patch.object(redline, 'run_candidate', side_effect=candidate), \
+                    patch.object(redline, '_libreoffice_checks', return_value=[]), \
+                    patch.object(redline, 'validate_packages', side_effect=lambda _v, paths: {str(p): [] for p in paths}):
+                outcome = redline.score_case(record, Path(temp), 'docxodus', 'build', 'commit', {}, 'validator')
+                self.assertEqual(outcome['status'], 'measured')
+                self.assertEqual(outcome['score'], expected_score)
+
+    def test_missing_or_wrong_semantic_measurements_cannot_pass_an_identity_case(self):
+        import shutil
+        record = case('redline-semantic-raw-limits-transitional-control')
+        def candidate(_adapter, _build, _case, output, _candidate):
+            shutil.copyfile(common.ROOT / record['authored']['path'], output)
+            return dict(response, status='ok')
+        for counts, expected_score in [(None, 0), ({'withPackageChanges': 0}, 0),
+                                       ({'withPackageChanges': 1, 'withoutPackageChanges': 0}, 0),
+                                       ({'withPackageChanges': False, 'withoutPackageChanges': False}, 0),
+                                       ({'withPackageChanges': 0, 'withoutPackageChanges': 0}, 100)]:
+            response = {} if counts is None else {'semanticPreflight': counts}
+            with self.subTest(counts=counts), tempfile.TemporaryDirectory() as temp, \
+                    patch.object(redline, 'run_candidate', side_effect=candidate), \
+                    patch.object(redline, '_libreoffice_checks', return_value=[]), \
+                    patch.object(redline, 'validate_packages', side_effect=lambda _v, paths: {str(p): [] for p in paths}):
+                outcome = redline.score_case(record, Path(temp), 'docxodus', 'build', 'commit', {}, 'validator')
+                self.assertEqual(outcome['status'], 'measured')
+                self.assertEqual(outcome['score'], expected_score)
+
+    def test_semantic_preflight_is_only_a_declared_identity_comparison(self):
+        for key, value in [('version', 2), ('limits', 'unbounded'), ('changeCount', 1)]:
+            registry = common.read_json(redline.MANIFEST)
+            target = next(c for c in registry['cases'] if 'semanticPreflight' in c)
+            target['semanticPreflight'][key] = value
+            with self.assertRaisesRegex(ValueError, 'semantic preflight'):
+                redline.validate_registry(registry)
+
     def test_validator_counts_findings_as_a_multiset_over_inputs(self):
         finding = {'id': 'Sem_UniqueAttributeValue', 'part': '/word/styles.xml', 'description': 'dup', 'path': '/a'}
         moved = dict(finding, path='/b')

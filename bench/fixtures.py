@@ -5,6 +5,7 @@ No input documents, templates, images or generation helpers are imported.
 from __future__ import annotations
 
 import hashlib
+import re
 import json
 import struct
 import zlib
@@ -467,11 +468,35 @@ def generate():
         add('notes-' + kind, 'notes', kind.title() + ' body and automatic marker', texts, body, notes=(kind, note), assertions=[assertion])
         if kind == 'endnote':
             cases[-1]['version'] = 2
+    # Docxodus #1314: a tracked section-property change (w:sectPrChange) stores the section's
+    # earlier properties as a nested w:sectPr. Here those earlier properties numbered endnotes in
+    # decimal and the current section declares no endnote format, so settings' lowerRoman applies
+    # and both the citation and the note read "i". A renderer that reads the stored earlier copy as
+    # the section's own format prints "1" instead. Shown in markup, where the change is pending.
+    # The control is the same section with no pending change.
+    change_texts = ['Ledger endnote format', 'ChangeAnchor The survey closes at the eastern gate.', 'i', 'i',
+                    'ChangeNote The gate log is kept at the depot.', prose]
+    change_body = (para(change_texts[0], '<w:pStyle w:val="Title"/>')
+                   + para(runs=run(change_texts[1] + ' ') + '<w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr><w:endnoteReference w:id="1"/></w:r>')
+                   + para(prose))
+    earlier_format = ('<w:sectPrChange w:id="41" w:author="Rowan Reviewer" w:date="2026-09-12T10:00:00Z"><w:sectPr>'
+                      '<w:endnotePr><w:numFmt w:val="decimal"/></w:endnotePr></w:sectPr></w:sectPrChange>')
+    for case_id, pending in [('notes-endnote-format-section-change', True), ('notes-endnote-format-section-change-control', False)]:
+        change_sect = section().replace('</w:sectPr>', earlier_format + '</w:sectPr>') if pending else section()
+        add(case_id, 'notes',
+            'Endnote markers under a section ' + ('whose pending property change stored an earlier decimal format, shown in markup (Docxodus #1314)'
+                                                   if pending else 'with no pending property change, shown in markup (control)'),
+            change_texts, change_body, change_sect, notes=('endnote', change_texts[4]))
+        cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
     title = 'Nested table spacing'
     texts = [title, 'OuterLeft', 'OuterRight', 'InnerLeft', 'InnerRight', 'AfterTable']
     inner = table([[cell(texts[3]), cell(texts[4])]], width=4200)
     body = para(title, '<w:pStyle w:val="Title"/>') + table([[cell(texts[1], nested=inner), cell(texts[2])]]) + para(texts[-1])
-    add('tables-nested', 'tables', 'Nested table with visible outer and inner cells', texts, body)
+    # Native Word margins for Docxodus #1219; LibreOffice retains implicit 5.4pt padding.
+    # Raw Word boxes and font/schema qualifications are retained with the case evidence.
+    add('tables-nested', 'tables', 'Nested table with visible outer and inner cells', texts, body,
+        assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'OuterLeft', 'occurrence': 1, 'page': 1, 'rect': [72.525, 105.999, 117.041, 119.176], 'adjudicated': 'word'}, {'type': 'marker-region', 'version': 2, 'marker': 'InnerLeft', 'occurrence': 1, 'page': 1, 'rect': [73.275, 127.249, 116.042, 140.426], 'adjudicated': 'word'}])
+    cases[-1]['version'] = 2
     title = 'Inherited cell margins'
     texts = [title, 'CellLeft', 'CellRight', 'SecondLeft', 'SecondRight', 'AfterMargins']
     margins = '<w:tblCellMar>' + ''.join(f'<w:{s} w:w="240" w:type="dxa"/>' for s in ('top', 'left', 'bottom', 'right')) + '</w:tblCellMar>'
@@ -486,6 +511,29 @@ def generate():
             texts.append(text)
             body += para(runs=(drawing(wrap) if i == 0 else '') + run(text))
         add('images-' + wrap, 'images', wrap.title() + ' wrapping around an authored diamond', texts, body, image=True)
+    # Docxodus #1314: a one-inch picture anchored 264pt from the page's left edge, square-wrapped on
+    # both sides, in an A4 section whose pending property change (w:sectPrChange) stored earlier
+    # Letter properties. Its centre (300pt) is right of the A4 page centre (297.6pt) but left of the
+    # Letter centre (306pt), so a renderer that lays the last section out on the stored Letter page
+    # moves the picture to the other side of the text. Either way the paragraph's first word must
+    # start at the left margin, beside the picture. The paragraph carries its own properties, which
+    # is what exposed the defect: the converter then saw the stored copy before the paragraph's runs.
+    # Shown in markup, where the change is pending. The control has no pending change.
+    float_text = 'FloatLead Alder survey notes run beside the anchored picture and continue across the column.'
+    float_picture = drawing('square').replace(
+        '<wp:positionH relativeFrom="column"><wp:posOffset>0</wp:posOffset>',
+        '<wp:positionH relativeFrom="page"><wp:posOffset>3352800</wp:posOffset>').replace('1371600', '914400')
+    float_margins = '<w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720"/><w:cols w:num="1" w:space="480"/>'
+    float_letter = ('<w:sectPrChange w:id="42" w:author="Rowan Reviewer" w:date="2026-09-12T10:00:00Z"><w:sectPr>'
+                    '<w:pgSz w:w="12240" w:h="15840"/>' + float_margins + '</w:sectPr></w:sectPrChange>')
+    for case_id, pending in [('images-float-side-section-change', True), ('images-float-side-section-change-control', False)]:
+        float_sect = '<w:sectPr><w:pgSz w:w="11906" w:h="16838"/>' + float_margins + (float_letter if pending else '') + '</w:sectPr>'
+        add(case_id, 'images',
+            'Page-anchored picture in an A4 section ' + ('whose pending property change stored earlier Letter properties, shown in markup (Docxodus #1314)'
+                                                         if pending else 'with no pending property change, shown in markup (control)'),
+            [float_text], para(props='<w:jc w:val="left"/>', runs=float_picture + run(float_text)), float_sect, image=True,
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'FloatLead', 'occurrence': 1, 'page': 1, 'rect': [66, 60, 150, 200]}])
+        cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
     # Independent textbox pair for Docxodus #1076. No renderer fixture/helper is imported.
     # The body and following line remain away from the page-positioned textbox.
     texts = ['Drawing register begins.', 'TextboxLabel Cedar sample tray.',
@@ -527,6 +575,96 @@ def generate():
                 assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'TextboxLabel', 'occurrence': 1,
                              'page': 1, 'rect': [144, 144, 360, 216]},
                             {'type': 'same-page', 'version': 1, 'markers': ['TextboxLabel', 'FollowingMarker']}])
+    # Original inline-drawing set for Docxodus #1270: a 144 by 72pt teal rectangle that is a plain
+    # DrawingML shape (not a text box), the same rectangle as the only child of a group, each also
+    # inside a tracked deletion viewed in markup, and an inline teal picture of the same extent as
+    # the control. The rectangle is the only ink between two text paragraphs; the following
+    # paragraph's position records the extent it occupies.
+    teal_shape = ('<wps:wsp><wps:cNvSpPr/><wps:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="1828800" cy="914400"/></a:xfrm>'
+                  '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:solidFill><a:srgbClr val="19647E"/></a:solidFill>'
+                  '</wps:spPr><wps:bodyPr/></wps:wsp>')
+    teal_picture = ('<pic:pic><pic:nvPicPr><pic:cNvPr id="1" name="teal.png"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill>'
+                    '<a:blip r:embed="rImage"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm>'
+                    '<a:off x="0" y="0"/><a:ext cx="1828800" cy="914400"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/>'
+                    '</a:prstGeom></pic:spPr></pic:pic>')
+    drawing_uris = {'shape': 'http://schemas.microsoft.com/office/word/2010/wordprocessingShape',
+                    'group': 'http://schemas.microsoft.com/office/word/2010/wordprocessingGroup',
+                    'picture': 'http://schemas.openxmlformats.org/drawingml/2006/picture'}
+    drawing_payloads = {'shape': teal_shape, 'picture': teal_picture,
+                        'group': ('<wpg:wgp><wpg:cNvGrpSpPr/><wpg:grpSpPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="1828800" cy="914400"/>'
+                                  '<a:chOff x="0" y="0"/><a:chExt cx="1828800" cy="914400"/></a:xfrm></wpg:grpSpPr>'
+                                  + teal_shape + '</wpg:wgp>')}
+    for kind, deleted in [('shape', False), ('shape', True), ('group', False), ('group', True), ('picture', False)]:
+        texts = ['PanelBefore Optical panel.', 'PanelAfter End of inspection.']
+        inline = (f'<w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0"><wp:extent cx="1828800" cy="914400"/>'
+                  f'<wp:docPr id="7" name="Teal inspection panel"/><a:graphic><a:graphicData uri="{drawing_uris[kind]}">'
+                  f'{drawing_payloads[kind]}</a:graphicData></a:graphic></wp:inline></w:drawing></w:r>')
+        if deleted:
+            inline = '<w:del w:id="31" w:author="Review Example" w:date="2026-09-12T10:00:00Z">' + inline + '</w:del>'
+        cid = 'drawings-inline-' + kind + ('-deleted' if deleted else '') + ('-control' if kind == 'picture' else '')
+        description = ('Inline teal picture control for the shape and group cases' if kind == 'picture' else
+                       'Inline teal ' + ('rectangle shape' if kind == 'shape' else 'rectangle as the only child of a group')
+                       + (' inside a tracked deletion' if deleted else '') + ' (Docxodus #1270)')
+        add(cid, 'images', description, texts, para(texts[0]) + para(runs=inline) + para(texts[1]),
+            image=kind == 'picture',
+            # The picture control reuses the package's one image relationship with a teal raster.
+            extra_parts={'word/media/diamond.png': png(192, 96, lambda x, y: (0x19, 0x64, 0x7E))} if kind == 'picture' else None,
+            namespaces_extra=' xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup"',
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'PanelAfter', 'occurrence': 1,
+                         'page': 1, 'rect': [72, 150, 540, 210]}])
+        if deleted:
+            cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
+    # Original floating-shape set for Docxodus #1346. Reuse the authored primitive above;
+    # positioning, wrapping and paint order are explicit, rather than taken from a template.
+    floating_styles = f'''<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>
+      <w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="22"/></w:rPr></w:rPrDefault>
+      <w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="atLeast"/>
+      </w:pPr></w:pPrDefault></w:docDefaults></w:styles>'''
+    def floating_panel(kind='shape', wrap='top-bottom', order=10, behind=False, identifier=7, fill='19647E', unsupported=False):
+        payload = drawing_payloads[kind].replace('19647E', fill)
+        if unsupported:
+            payload = payload.replace('prst="rect"', 'prst="hexagon"')
+        polygon = ('<wp:wrapPolygon edited="0"><wp:start x="0" y="0"/><wp:lineTo x="21600" y="10800"/>'
+                   '<wp:lineTo x="0" y="21600"/><wp:lineTo x="0" y="0"/></wp:wrapPolygon>')
+        wrapping = ('<wp:wrapTopAndBottom/>' if wrap == 'top-bottom' else '<wp:wrapNone/>' if wrap == 'none'
+                    else '<wp:wrapSquare wrapText="bothSides"/>' if wrap == 'square'
+                    else f'<wp:wrap{wrap.title()} wrapText="bothSides">{polygon}</wp:wrap{wrap.title()}>')
+        return (f'<w:r><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" '
+                f'relativeHeight="{order}" behindDoc="{int(behind)}" locked="0" layoutInCell="1" allowOverlap="1">'
+                '<wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="column"><wp:posOffset>0</wp:posOffset></wp:positionH>'
+                '<wp:positionV relativeFrom="paragraph"><wp:posOffset>0</wp:posOffset></wp:positionV>'
+                f'<wp:extent cx="1828800" cy="914400"/>{wrapping}<wp:docPr id="{identifier}" name="Harbor panel {identifier}"/>'
+                f'<a:graphic><a:graphicData uri="{drawing_uris[kind]}">{payload}</a:graphicData></a:graphic></wp:anchor></w:drawing></w:r>')
+    floating_cases = [
+        ('shape-top-bottom', floating_panel(), False, True, 'Floating rectangle reserves top/bottom clearance'),
+        ('group-top-bottom', floating_panel('group'), False, True, 'Floating group reserves top/bottom clearance'),
+        ('shape-mixed-top-bottom', floating_panel(), True, True, 'Floating rectangle clears text in its own paragraph'),
+        ('shape-no-wrap-control', floating_panel(wrap='none'), False, False, 'No-wrap rectangle leaves body line spacing intact'),
+        ('shape-behind-text', floating_panel(wrap='none', behind=True), True, False, 'Background rectangle remains behind body text'),
+        ('shape-relative-height', floating_panel(wrap='none', order=4294967295)
+         + floating_panel(wrap='none', order=2147483648, identifier=8, fill='FF9900'), False, False,
+         'Relative height orders overlapping rectangles independently of source order'),
+        *[(f'shape-{wrap}', floating_panel(wrap=wrap), False, False,
+           f'Column-edge rectangle with {wrap} text wrapping') for wrap in ('square', 'tight', 'through')],
+        ('shape-unsupported', floating_panel(unsupported=True), False, True, 'Previously undrawn floating hexagon keeps its six-sided geometry'),
+        ('vml-plain', '<w:r><w:pict><v:rect style="width:144pt;height:72pt" fillcolor="#19647E"/></w:pict></w:r>',
+         False, True, 'Plain VML rectangle keeps its fill and outline'),
+    ]
+    for suffix, panel_xml, mixed, clears, description in floating_cases:
+        texts = ['HarborBefore The inspection begins.', 'HarborAfter The inspection ends.']
+        if mixed:
+            texts.insert(1, 'HarborAnchor')
+        after_region = ([72, 160, 540, 220] if clears else
+                        [216, 100, 540, 140] if suffix == 'shape-square' else
+                        [180, 100, 540, 140] if suffix in ('shape-tight', 'shape-through') else
+                        [72, 100, 540, 140])
+        add('drawings-floating-' + suffix, 'images', description + ' (Docxodus #1346)', texts,
+            para(texts[0]) + para(runs=panel_xml + (run('HarborAnchor') if mixed else '')) + para(texts[-1]),
+            styles_xml=floating_styles,
+            namespaces_extra=' xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:v="urn:schemas-microsoft-com:vml"',
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'HarborAfter', 'occurrence': 1,
+                         'page': 1, 'rect': after_region}])
+
     # Independent hidden-header pair for Docxodus #1077. The empty first paragraph
     # is the passing control; the visible second line exposes paragraph-mark flow.
     header_styles = f'''<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>
@@ -846,6 +984,33 @@ def generate():
         story=('header', para(runs=folio_header, props='<w:spacing w:after="0"/>')),
         assertions=[{'type': 'marker-region', 'version': 2, 'marker': str(index + 1), 'occurrence': 1,
                      'page': index + 1, 'rect': [72, 30, 540, 65]} for index in range(2)])
+    # Docxodus #1272: complex PAGE and NUMPAGES fields in a footer line that is wholly a tracked
+    # deletion, so both instructions are w:delInstrText. Markup view still shows the struck line,
+    # "Sheet N of 3", on every page. Both cached results are 1, so the inventory (one 1, one 2,
+    # four 3s) fails a cached PAGE or NUMPAGES. The control is the same footer left undeleted.
+    sheet_texts = [f'Rowan{index:02d} tally ledger audited.' for index in range(1, 4)]
+    sheet_body = ''.join(para(text, '<w:pageBreakBefore/>' if index else '') for index, text in enumerate(sheet_texts))
+    sheet_sect = section().replace('<w:sectPr>', '<w:sectPr><w:footerReference w:type="default" r:id="rStory"/>')
+    for case_id, deleted in [('paragraphs-page-number-deleted-field', True), ('paragraphs-page-number-deleted-field-control', False)]:
+        text_tag, instruction_tag = ('delText', 'delInstrText') if deleted else ('t', 'instrText')
+        sheet_run = '<w:r><w:rPr><w:i/><w:sz w:val="24"/></w:rPr>{}</w:r>'
+        def sheet_text(content, tag=text_tag):
+            return sheet_run.format(f'<w:{tag} xml:space="preserve">{content}</w:{tag}>')
+        def sheet_field(instruction):
+            return (sheet_run.format('<w:fldChar w:fldCharType="begin"/>') + sheet_text(instruction, instruction_tag)
+                    + sheet_run.format('<w:fldChar w:fldCharType="separate"/>') + sheet_text('1')
+                    + sheet_run.format('<w:fldChar w:fldCharType="end"/>'))
+        sheet_footer = sheet_text('Sheet ') + sheet_field(' PAGE ') + sheet_text(' of ') + sheet_field(' NUMPAGES ')
+        if deleted:
+            sheet_footer = '<w:del w:id="31" w:author="Rowan Reviewer" w:date="2026-09-12T10:00:00Z">' + sheet_footer + '</w:del>'
+        add(case_id, 'paragraphs',
+            'Three-page running story whose footer PAGE and NUMPAGES fields ' + ('sit inside a tracked deletion, shown in markup (Docxodus #1272)'
+                                                                                 if deleted else 'are not deleted, shown in markup (control)'),
+            sheet_texts + [f'Sheet {index} of 3' for index in range(1, 4)], sheet_body, sect=sheet_sect, styles_xml=ledger_styles,
+            story=('footer', para(runs=sheet_footer, props='<w:spacing w:after="0"/>')),
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': str(index + 1), 'occurrence': 1,
+                         'page': index + 1, 'rect': [72, 720, 540, 780]} for index in range(2)])
+        cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
     # Regression coverage for Docxodus #1126: horizontal border spacing on indented, hanging and
     # adjacent grouped paragraphs. Text keeps its indentation; borders sit outside it.
     spacing_texts = ['SpacingPlain Juniper card keeps its text at the margin.',
@@ -901,9 +1066,8 @@ def generate():
                              'rect': [60, 60, 540, 790]},
                             {'type': 'marker-reference-position', 'version': 1, 'marker': 'Geometry01', 'tolerancePt': 0.5},
                             {'type': 'marker-reference-position', 'version': 1, 'marker': 'Geometry12', 'tolerancePt': 0.5}])
-    # Docxodus #1168: exact-height rows that hide a whole paragraph or have zero height. Hidden
-    # content carries no visible tokens, so the inventory does not depend on how a provider writes
-    # clipped glyphs into the PDF text layer.
+    # Positive exact heights keep #1168's clipping. The unchanged exact-zero inputs below use
+    # Word's content-height behavior (#1339); their marker positions are checked against references.
     exact_borders = '<w:tblBorders>' + ''.join(f'<w:{side} w:val="single" w:sz="6" w:color="444444"/>' for side in ('top', 'left', 'bottom', 'right', 'insideH', 'insideV')) + '</w:tblBorders>'
     def exact_table(rows, borders=exact_borders):
         return ('<w:tbl><w:tblPr><w:tblW w:w="7200" w:type="dxa"/>' + borders + '<w:tblLayout w:type="fixed"/></w:tblPr>'
@@ -942,6 +1106,72 @@ def generate():
             texts, body, sect=section().replace('w:footer="720"', 'w:footer="720" w:gutter="0"'), styles_xml=row_styles,
             assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': 'ZeroAfter', 'tolerancePt': 0.5}]
             + ([] if only else [{'type': 'marker-reference-position', 'version': 1, 'marker': 'Zero03', 'tolerancePt': 0.5}]))
+    # Docxodus #1339: reuse the original Word-adjudicated row fixtures from 7851026. Times
+    # New Roman throughout, so a Word capture keeps the declared family and can be eligible.
+    rg_font = 'Times New Roman'
+    rg_styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{rg_font}" w:hAnsi="{rg_font}" w:cs="{rg_font}"/>'
+                 '<w:sz w:val="22"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl w:val="0"/><w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/>'
+                 '</w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
+    rg_sect = section().replace('w:footer="720"', 'w:footer="720" w:gutter="0"')
+    def rg_borders(on):
+        sides = ('top', 'left', 'bottom', 'right', 'insideH', 'insideV')
+        if on:
+            return '<w:tblBorders>' + ''.join(f'<w:{s} w:val="single" w:sz="8" w:space="0" w:color="000000"/>' for s in sides) + '</w:tblBorders>'
+        return '<w:tblBorders>' + ''.join(f'<w:{s} w:val="nil"/>' for s in sides) + '</w:tblBorders>'
+    def rg_cell(body, width):
+        return f'<w:tc><w:tcPr><w:tcW w:w="{width}" w:type="dxa"/></w:tcPr>{body}</w:tc>'
+    def rg_row(cells, height=None, rule='exact', header=False):
+        props = '' if height is None else (f'<w:trHeight w:hRule="{rule}"/>' if height == 'absent' else f'<w:trHeight w:val="{height}" w:hRule="{rule}"/>')
+        props += '<w:tblHeader/>' if header else ''
+        return '<w:tr>' + ('<w:trPr>' + props + '</w:trPr>' if props else '') + ''.join(cells) + '</w:tr>'
+    def rg_table(rows, widths, bordered, margins):
+        return (f'<w:tbl><w:tblPr><w:tblW w:w="{sum(widths)}" w:type="dxa"/>{rg_borders(bordered)}<w:tblLayout w:type="fixed"/>'
+                '<w:tblCellMar>' + ''.join(f'<w:{s} w:w="{m}" w:type="dxa"/>' for s, m in zip(('top', 'left', 'bottom', 'right'), margins)) + '</w:tblCellMar>'
+                '</w:tblPr><w:tblGrid>' + ''.join(f'<w:gridCol w:w="{w}"/>' for w in widths) + '</w:tblGrid>' + ''.join(rows) + '</w:tbl>')
+    side_margins, no_margins = ('0', '108', '0', '108'), ('0', '0', '0', '0')
+    def rg_add(case_id, description, texts, body, sect=rg_sect, clipped=None):
+        markers = [t.split()[0] for t in texts]
+        add(case_id, 'tables', description, texts, body, sect=sect, styles_xml=rg_styles, font=rg_font,
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': m, 'tolerancePt': 0.5} for m in markers])
+        if clipped:
+            cases[-1]['clippedTokens'] = clipped
+    # #1339: an exact row of height 0 (or with no height stated) is laid out at its content height;
+    # the control's positive exact heights, down to one twip, still clip.
+    def zero_case(case_id, description, variants):
+        texts, body, clipped = [], '', {}
+        for label, height, bordered, lines, hidden in variants:
+            def two(prefix, count, line=None):
+                cells = []
+                for side in ('L', 'R'):
+                    words = [f'{label}{prefix}{i}{side}' for i in range(1, count + 1)]
+                    content = ''.join(para(w, exact(line)) if line else para(w) for w in words) if count else para(runs=run(' '))
+                    cells.append(rg_cell(content, 4000))
+                    texts.extend(words[:1] if hidden else words)
+                    if hidden:
+                        clipped.update({w: 1 for w in words[1:]})
+                return cells
+            texts.append(f'{label}Before')
+            rows = [rg_row(two('Top', 1), 360, 'atLeast'), rg_row(two('Mid', lines, 320 if hidden else None), height),
+                    rg_row(two('Bot', 1), 360, 'atLeast')]
+            texts.append(f'{label}After')
+            body += para(f'{label}Before') + rg_table(rows, [4000, 4000], bordered, side_margins) + para(f'{label}After')
+        rg_add(case_id, description, texts, body, clipped=clipped or None)
+    zero_case('tables-row-height-exact-zero-content-times-new-roman',
+              'Exact rows of height 0 or with no height, one and three lines, borderless and bordered, between atLeast rows (Docxodus #1339)',
+              [('Alpha', 0, False, 1, False), ('Bravo', 0, True, 1, False), ('Charlie', 0, False, 3, False), ('Kilo', 'absent', True, 1, False)])
+    zero_case('tables-row-height-exact-tiny-control-times-new-roman',
+              'Control: exact rows of one twip (empty) and eight points (three lines, two hidden) clip to their height (Docxodus #1339)',
+              [('Echo', 1, False, 0, False), ('Foxtrot', 1, True, 0, False), ('Lima', 160, True, 3, True)])
+    # #1201: a zero-width first grid column (zero tcW, zero cell margins, fixed layout). Its cells
+    # hold empty paragraphs, so the case asserts the layout and the export, not clipped glyphs.
+    for case_id, width, description in [('tables-zero-width-column-times-new-roman', 0, 'A zero-width first column'),
+                                        ('tables-zero-width-column-control-times-new-roman', 480, 'Control: a 24pt first column')]:
+        texts, body = [], ''
+        for label, height, rule, bordered in [('Alder', 360, 'exact', False), ('Birch', 360, 'atLeast', False), ('Dogwood', 360, 'exact', True)]:
+            texts += [f'{label}Before table.', f'{label}Wide cell.', f'{label}After table.']
+            body += para(texts[-3]) + rg_table([rg_row([rg_cell(para(runs=''), width), rg_cell(para(texts[-2]), 5400 - width)], height, rule)],
+                                               [width, 5400 - width], bordered, no_margins) + para(texts[-1])
+        rg_add(case_id, description + ' in exact and atLeast 18pt rows, borderless and bordered (Docxodus #1201)', texts, body)
     # Docxodus #1171: a repeated header row with exact and atLeast rules, and a bordered paragraph
     # inside an exact row. Header text repeats once per page, so it is counted, not used as a marker.
     for rule in ('exact', 'atLeast'):
@@ -1133,6 +1363,23 @@ def generate():
             [text], para(runs=run(text, current + revision)), styles_xml=format_styles)
         cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
         cases[-1]['htmlAssertions'] = [{'type': 'marker-attribute', 'version': 1, 'marker': 'FormatLabel', 'attribute': 'title', 'equals': 'Bold added'}]
+    # Docxodus #1271: one 10pt footnote line whose only run carries a pending formatting revision,
+    # measured in markup view, and a control without the w:rPrChange. Docxodus underlines the
+    # revised run with a border that hung below the note band, and its export refused the
+    # document as clipped. Both notes must appear in full in the footnote area of page 1.
+    note_run_props = f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="20"/>'
+    for case_id, revised in [('notes-format-revision-markup', True), ('notes-format-revision-markup-control', False)]:
+        cite_text, note_text = 'NoteCite Receiver maintenance', 'NoteQuartz A spare quartz plate remains in the cabinet.'
+        revision = '<w:rPrChange w:id="31" w:author="Cedar Reviewer" w:date="2026-09-12T10:00:00Z"><w:rPr><w:i/></w:rPr></w:rPrChange>' if revised else ''
+        note_xml = para(props='<w:spacing w:after="0" w:line="240" w:lineRule="auto"/>',
+                        runs=f'<w:r><w:rPr>{note_run_props}<w:vertAlign w:val="superscript"/></w:rPr><w:footnoteRef/></w:r>' + run(' ' + note_text, note_run_props + revision))
+        body = para(runs=run(cite_text) + '<w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr><w:footnoteReference w:id="1"/></w:r>')
+        add(case_id, 'notes', ('One-line footnote whose run carries a formatting revision, in markup view (Docxodus #1271)' if revised else
+                               'Control: the same one-line footnote without the formatting revision, in markup view'),
+            [cite_text, '1', '1', note_text], body, notes=('footnote', note_text), notes_xml=note_xml,
+            assertions=[{'type': 'marker-region', 'version': 1, 'marker': 'NoteQuartz', 'occurrence': 1, 'page': 1, 'rect': [60, 650, 552, 750]},
+                        {'type': 'same-page', 'version': 1, 'markers': ['NoteCite', 'NoteQuartz']}])
+        cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
     # Original numbered heading with a hidden paragraph mark, and visible-mark control.
     mark_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="24"/></w:rPr></w:rPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style><w:style w:type="paragraph" w:styleId="Heading2"><w:name w:val="heading 2"/><w:basedOn w:val="Normal"/><w:pPr><w:outlineLvl w:val="1"/></w:pPr><w:rPr><w:b/></w:rPr></w:style></w:styles>'
     mark_numbering = f'<w:numbering xmlns:w="{W}"><w:abstractNum w:abstractNumId="1"><w:multiLevelType w:val="singleLevel"/><w:lvl w:ilvl="0"><w:start w:val="1"/><w:numFmt w:val="decimal"/><w:suff w:val="space"/><w:lvlText w:val="%1."/></w:lvl></w:abstractNum><w:num w:numId="1"><w:abstractNumId w:val="1"/></w:num></w:numbering>'
@@ -1224,6 +1471,120 @@ def generate():
             para(props='<w:spacing w:after="0" w:line="240" w:lineRule="exact"/>', runs=interval_runs), styles_xml=tab_styles,
             extra_parts={'word/settings.xml': f'<w:settings xmlns:w="{W}"><w:defaultTabStop w:val="{interval}"/>{SETTINGS_BODY}</w:settings>'},
             assertions=interval_assertions(interval))
+    # #1275: leader lines whose right stop lies inside the right indent, and leader lines whose
+    # entries carry inert markup (empty bookmark, non-breaking hyphen, underlined or struck tab
+    # runs). Both share one plain control with neither.
+    lead_entries = [('2.1.', 'AlderTitle01 Quarry access roads', '3'),
+                    ('2.2.', 'AlderTitle02 Spillway', '12'),
+                    ('2.3.', 'AlderTitle03 Culvert inspection and annual load ratings', '27'),
+                    ('2.4.', 'AlderTitle04 Riprap', '140')]
+    for case_id, kind in [('tabs-right-stop-in-right-indent', 'indent'),
+                          ('tabs-right-stop-inline-markup', 'markup'),
+                          ('tabs-right-stop-plain-control', 'control')]:
+        texts, body, markers = [], '', []
+        for i, (label, title, page) in enumerate(lead_entries):
+            right = ' w:right="864"' if kind == 'indent' else ''
+            props = ('<w:tabs><w:tab w:val="left" w:pos="1296"/><w:tab w:val="right" w:leader="dot" w:pos="9360"/></w:tabs>'
+                     '<w:spacing w:after="0" w:line="240" w:lineRule="exact"/>'
+                     f'<w:ind w:left="1296"{right} w:hanging="648"/>')
+            tab_props = ''
+            content = run(label)
+            if kind == 'markup':
+                tab_props = {2: '<w:u w:val="single"/>', 3: '<w:strike/>'}.get(i, '')
+                if i == 0:
+                    content = f'<w:bookmarkStart w:id="{i}" w:name="_AlderEntry{i}"/><w:bookmarkEnd w:id="{i}"/>' + content
+            tab = f'<w:r><w:rPr>{tab_props}</w:rPr><w:tab/></w:r>'
+            content += tab + run(title)
+            if kind == 'markup' and i == 1:
+                content += '<w:r><w:noBreakHyphen/></w:r>' + run('West')
+                title += '-West'
+            content += run(' ') + tab + run(' ' + page)
+            body += para(props=props, runs=content)
+            texts += [label, title, page]
+            markers += [title.split()[0], page]
+        add(case_id, 'paragraphs', {
+            'indent': 'Four leader lines whose right page-number stop lies inside an 864-twip right indent (Docxodus #1275)',
+            'markup': 'Four leader lines with an empty bookmark, a non-breaking hyphen, an underlined and a struck tab run (Docxodus #1275)',
+            'control': 'Four plain leader lines with no right indent and no inline markup (control)'}[kind],
+            texts, body, styles_xml=tab_styles,
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker,
+                         'tolerancePt': 0.5} for marker in markers])
+        cases[-1]['pdfTextNormalization'] = 'isolated-dot-leaders-v1'
+    # #1285: four more leader-line shapes, each with an 864-twip right indent as above. Every
+    # reproducer has a control that differs from it only in the trigger, except the wrapped titles,
+    # whose control is tabs-right-stop-in-right-indent (the same entries with titles that fit).
+    def leader_case(case_id, description, entries, stops, number_runs=None, wrap=None, target_pages=False):
+        texts, body, markers = [], '', []
+        for i, (label, title, page, second) in enumerate(entries):
+            props = (f'<w:tabs>{stops(i)}</w:tabs><w:spacing w:after="0" w:line="240" w:lineRule="exact"/>'
+                     '<w:ind w:left="1296" w:right="864" w:hanging="648"/>')
+            content = run(label) + '<w:r><w:tab/></w:r>' + run(title + ' ') + '<w:r><w:tab/></w:r>'
+            content += number_runs(i, page) if number_runs else run(' ' + page)
+            if second: content += '<w:r><w:tab/></w:r>' + run(second)
+            body += para(props=props, runs=wrap(i, content) if wrap else content)
+            texts += [label, title, page] + ([second] if second else [])
+            markers += [title.split()[0], title.split()[-1], page] + ([second] if second else [])
+        for i in range(len(entries) if target_pages else 0):
+            target = f'BirchTarget{i + 1:02d}'
+            body += para(props='<w:pageBreakBefore/>', runs=f'<w:bookmarkStart w:id="{20 + i}" w:name="_Birch{i}"/>' + run(target) + f'<w:bookmarkEnd w:id="{20 + i}"/>')
+            texts.append(target)
+        add(case_id, 'paragraphs', description, texts, body, styles_xml=tab_styles,
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker,
+                         'tolerancePt': 0.5} for marker in dict.fromkeys(markers)])
+        cases[-1]['pdfTextNormalization'] = 'isolated-dot-leaders-v1'
+    leader_stops = lambda i: '<w:tab w:val="left" w:pos="1296"/><w:tab w:val="right" w:leader="dot" w:pos="9360"/>'
+    birch = [('2.1.', 'BirchTitle01 Quarry access roads', '2', None), ('2.2.', 'BirchTitle02 Spillway', '3', None),
+             ('2.3.', 'BirchTitle03 Culvert inspection and annual load ratings', '4', None), ('2.4.', 'BirchTitle04 Riprap', '5', None)]
+    # LibreOffice recomputes the field's result, so the space before it is a run of its own.
+    pageref = lambda i, page: run(' ') + ('<w:r><w:fldChar w:fldCharType="begin"/></w:r>'
+                               f'<w:r><w:instrText xml:space="preserve"> PAGEREF _Birch{i} \\h </w:instrText></w:r>'
+                               '<w:r><w:fldChar w:fldCharType="separate"/></w:r>' + run(page) +
+                               '<w:r><w:fldChar w:fldCharType="end"/></w:r>')
+    leader_case('tabs-right-stop-pageref-field', 'Four leader lines whose page numbers are PAGEREF complex fields to bookmarks on pages 2-5 (Docxodus #1285)',
+                birch, leader_stops, number_runs=pageref, target_pages=True)
+    leader_case('tabs-right-stop-pageref-control', 'The same four leader lines with plain-text page numbers (control)',
+                birch, leader_stops, number_runs=lambda i, page: run(' ') + run(page), target_pages=True)
+    leader_case('tabs-right-stop-wrapped-title', 'Four leader lines whose titles wrap past the right indent, the last to three lines (Docxodus #1285)',
+                [('2.1.', 'CedarTitle01 Culvert inspection, annual load ratings and scour monitoring for the northern spillway approach', '27', None),
+                 ('2.2.', 'CedarTitle02 Quarry access roads, haul route maintenance and dust suppression along the eastern boundary', '31', None),
+                 ('2.3.', 'CedarTitle03 Riprap placement, toe protection and settlement surveys at the downstream face of the main embankment and the auxiliary outlet', '140', None),
+                 ('2.4.', 'CedarTitle04 Spillway gates', '152', None)], leader_stops)
+    # The first right stop (8800) lies inside the right indent; the next is a right stop at the
+    # column edge or a left stop at 8900. The control moves both before the line end (8496).
+    elm = [('2.1.', 'ElmTitle01 Spillway', '12', '34'), ('2.2.', 'ElmTitle02 Riprap', '56', '78'),
+           ('2.3.', 'ElmTitle03 Culverts', '90', 'Ra'), ('2.4.', 'ElmTitle04 Outlets', '91', 'Rb')]
+    def second_stops(first, right_second, left_second):
+        return lambda i: (f'<w:tab w:val="left" w:pos="1296"/><w:tab w:val="right" w:leader="dot" w:pos="{first}"/>' +
+                          (f'<w:tab w:val="right" w:pos="{right_second}"/>' if i < 2 else f'<w:tab w:val="left" w:pos="{left_second}"/>'))
+    leader_case('tabs-right-stop-second-stop-in-indent', 'Four leader lines with a second stop after a right stop inside the right indent (Docxodus #1285)',
+                elm, second_stops(8800, 9360, 8900))
+    leader_case('tabs-right-stop-second-stop-control', 'The same four leader lines with both stops before the line end (control)',
+                elm, second_stops(8000, 8400, 8100))
+    fir = [('2.1.', 'FirTitle01 Quarry access roads', '3', None), ('2.2.', 'FirTitle02 Spillway', '12', None),
+           ('2.3.', 'FirTitle03 Culvert inspection and annual load ratings', '27', None), ('2.4.', 'FirTitle04 Riprap', '140', None)]
+    linked = lambda bookmark: lambda i, content: (
+        f'<w:hyperlink w:anchor="_FirTarget{i}">' +
+        (f'<w:bookmarkStart w:id="{30 + i}" w:name="_FirEntry{i}"/><w:bookmarkEnd w:id="{30 + i}"/>' if bookmark else '') +
+        content + '</w:hyperlink>')
+    leader_case('tabs-right-stop-linked-bookmark', 'Four linked leader lines, each with its bookmark inside the link (Docxodus #1285)',
+                fir, leader_stops, wrap=linked(True))
+    leader_case('tabs-right-stop-linked-control', 'The same four linked leader lines without bookmarks (control)',
+                fir, leader_stops, wrap=linked(False))
+    # Completion review: a short suffix can remain beside the overhanging stop, but a long one
+    # must wrap into the column instead of being forced past the page in one no-wrap box.
+    for long_tail in (False, True):
+        suffix = ' '.join(f'TailWord{i:02}' for i in range(24)) if long_tail else 'Oak'
+        props = ('<w:tabs><w:tab w:val="left" w:pos="1296"/><w:tab w:val="right" w:pos="8800"/>'
+                 '<w:tab w:val="left" w:pos="8900"/></w:tabs><w:spacing w:after="0" w:line="240" w:lineRule="exact"/>'
+                 '<w:ind w:left="1296" w:right="864" w:hanging="648"/>')
+        content = (run('2.1.') + '<w:r><w:tab/></w:r>' + run('Spillway ') + '<w:r><w:tab/></w:r>'
+                   + run(' 12 ') + '<w:r><w:tab/></w:r>' + run(suffix))
+        add('tabs-right-stop-' + ('long-tail' if long_tail else 'short-tail-control'), 'paragraphs',
+            'Long text after an overhanging right stop and a final left tab stays inside the column (Docxodus #1285)' if long_tail else
+            'A short suffix after the same stops stays beside them (control)',
+            ['2.1.', 'Spillway', '12', suffix], para(props=props, runs=content), styles_xml=tab_styles,
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'TailWord23' if long_tail else 'Oak',
+                         'occurrence': 1, 'page': 1, 'rect': [72, 72, 540, 200] if long_tail else [515, 70, 540, 85]}])
     # Original page-anchored footer frame and otherwise identical ordinary-flow control.
     frame_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="24"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="exact"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>'
     frame_section = section().replace('<w:sectPr>', '<w:sectPr><w:footerReference w:type="default" r:id="rStory"/>')
@@ -1516,75 +1877,225 @@ def generate():
             para('BodyWillow', exact(300)), sect=sect, story=('header', header_table + para('', exact(300))),
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['HdrAlder', 'HdrValue', 'BodyWillow']}])
         cases[-1]['clippedTokens'] = {'HdrBirch': 1, 'HdrCedar': 1}
-    # core-v53: table-row geometry measured in Word for the web (Docxodus #1339, #1201, #1202). Times
-    # New Roman throughout, so a Word capture keeps the declared family and can be eligible.
-    rg_font = 'Times New Roman'
-    rg_styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{rg_font}" w:hAnsi="{rg_font}" w:cs="{rg_font}"/>'
-                 '<w:sz w:val="22"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl w:val="0"/><w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/>'
-                 '</w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
-    rg_sect = section().replace('w:footer="720"', 'w:footer="720" w:gutter="0"')
+    # core-v52: table placement measured in Word for the web (Docxodus #1219, #1244). Times New
+    # Roman throughout, so a Word capture keeps the declared family and is eligible as a reference.
+    tnr = 'Times New Roman'
+    tnr_styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{tnr}" w:hAnsi="{tnr}" w:cs="{tnr}"/>'
+                  '<w:sz w:val="22"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/>'
+                  '</w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
+    placement_sect = section().replace('w:footer="720"', 'w:footer="720" w:gutter="0"')
+    def placement_table(texts, props='', borders=True, margins=True):
+        edge = ('<w:tblBorders>' + ''.join(f'<w:{side} w:val="single" w:sz="8" w:color="000000"/>' for side in ('top', 'left', 'bottom', 'right', 'insideV')) + '</w:tblBorders>') if borders else ''
+        mar = '<w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="108" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:right w:w="108" w:type="dxa"/></w:tblCellMar>' if margins else ''
+        cells = ''.join(f'<w:tc><w:tcPr><w:tcW w:w="2500" w:type="dxa"/></w:tcPr>{para(t)}</w:tc>' for t in texts)
+        return (f'<w:tbl><w:tblPr><w:tblW w:w="5000" w:type="dxa"/>{props}{edge}<w:tblLayout w:type="fixed"/>{mar}</w:tblPr>'
+                '<w:tblGrid><w:gridCol w:w="2500"/><w:gridCol w:w="2500"/></w:tblGrid>'
+                f'<w:tr><w:trPr><w:trHeight w:val="360" w:hRule="atLeast"/></w:trPr>{cells}</w:tr></w:tbl>')
+    # Word's own "Normal Table" shape: the document's default table style states a zero indent and
+    # 108-twip side margins, and applies to every table that names no style.
+    tnr_default_table_styles = tnr_styles.replace('</w:styles>',
+        '<w:style w:type="table" w:default="1" w:styleId="TableNormal"><w:name w:val="Normal Table"/><w:uiPriority w:val="99"/>'
+        '<w:semiHidden/><w:unhideWhenUsed/><w:tblPr><w:tblInd w:w="0" w:type="dxa"/><w:tblCellMar><w:top w:w="0" w:type="dxa"/>'
+        '<w:left w:w="108" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:right w:w="108" w:type="dxa"/></w:tblCellMar></w:tblPr></w:style></w:styles>')
+    def placement(case_id, description, before, tables, compat='15', before_props='', styles=None):
+        texts = [before] + [t for row in tables for t in row[0]] + ['PlacementAfter The register continues below.']
+        body = para(before, before_props) + ''.join(placement_table(*row) for row in tables) + para(texts[-1])
+        markers = [t.split()[0] for t in texts]
+        settings = f'<w:settings xmlns:w="{W}">' + SETTINGS_BODY.replace('w:val="15"', f'w:val="{compat}"') + '</w:settings>'
+        add(case_id, 'tables', description + ' (Docxodus #1219, #1244)', texts, body, sect=placement_sect,
+            styles_xml=styles or tnr_styles, font=tnr, extra_parts={'word/settings.xml': settings},
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': m, 'tolerancePt': 0.5} for m in markers])
+    before = 'PlacementBefore The register opens above the table.'
+    # #1219: with no w:tblCellMar and no table style the left cell margin is zero; the control states 108.
+    placement('tables-cell-margin-absent-times-new-roman', 'Bordered table with no cell margins declared anywhere',
+              before, [(['MarginLeft Ledger cell.', 'MarginRight Entry cell.'], '', True, False)])
+    placement('tables-cell-margin-explicit-times-new-roman', 'Control: the same table declaring 108-twip left and right cell margins',
+              before, [(['MarginLeft Ledger cell.', 'MarginRight Entry cell.'], '', True, True)])
+    # #1219: before compatibility mode 15 a stated w:tblInd places the first cell's text at the indent.
+    for mode in ('14', '15'):
+        for indent in ('stated', 'absent'):
+            props = '<w:tblInd w:w="0" w:type="dxa"/>' if indent == 'stated' else ''
+            placement(f'tables-indent-mode-{mode}-{indent}-times-new-roman',
+                      f'Compatibility mode {mode}; table indent {"stated as zero" if indent == "stated" else "absent"}',
+                      before, [(['IndentLeft Ledger cell.', 'IndentRight Entry cell.'], props, True, True)], compat=mode)
+    for mode in ('14', '15'):
+        placement(f'tables-indent-mode-{mode}-default-style-times-new-roman',
+                  f'Compatibility mode {mode}; the table names no style and inherits the default table style',
+                  before, [(['IndentLeft Ledger cell.', 'IndentRight Entry cell.'], '', True, False)], compat=mode,
+                  styles=tnr_default_table_styles)
+    # #1244: Word adds no space between a paragraph and a following table beyond the paragraph's own spacing.
+    for after in ('0', '240'):
+        for borders in (False, True):
+            placement(f'tables-boundary-after-{after}-{"bordered" if borders else "borderless"}-times-new-roman',
+                      f'Paragraph with {after}-twip after-spacing followed by a {"bordered" if borders else "borderless"} table',
+                      before, [(['BoundaryLeft Ledger cell.', 'BoundaryRight Entry cell.'], '', borders, True)],
+                      before_props=f'<w:spacing w:after="{after}"/>')
+    placement('tables-boundary-adjacent-times-new-roman', 'Two tables with no paragraph between them',
+              before, [(['FirstLeft Ledger cell.', 'FirstRight Entry cell.'], '', False, True),
+                       (['SecondLeft Ledger cell.', 'SecondRight Entry cell.'], '', True, True)])
+    # core-v52: six further table-placement probes for Docxodus #1219, captured in Word for the web from
+    # content-identical inputs (same document, styles and settings parts; see the results doc).
+    def probe_para(t):
+        return f'<w:p><w:pPr><w:spacing w:after="0"/></w:pPr><w:r><w:t xml:space="preserve">{t}</w:t></w:r></w:p>'
+    probe_borders = '<w:tblBorders>' + ''.join(f'<w:{side} w:val="single" w:sz="8" w:color="000000"/>' for side in ('top', 'left', 'bottom', 'right', 'insideH', 'insideV')) + '</w:tblBorders>'
+    probe_margins = '<w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="108" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:right w:w="108" w:type="dxa"/></w:tblCellMar>'
+    def probe_table(cells, props='', width='<w:tblW w:w="5000" w:type="dxa"/>', grid=None, before=None):
+        grid = grid or [5000 // len(cells)] * len(cells)
+        gb = f'<w:gridBefore w:val="1"/><w:wBefore w:w="{before}" w:type="dxa"/>' if before else ''
+        cols = ([before] if before else []) + grid
+        tcs = ''.join(f'<w:tc><w:tcPr><w:tcW w:w="{w}" w:type="dxa"/></w:tcPr>{c}</w:tc>' for c, w in zip(cells, grid))
+        head = (props + width) if props.startswith('<w:tblStyle') else (width + props)
+        return (f'<w:tbl><w:tblPr>{head}{probe_borders}<w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>'
+                + ''.join(f'<w:gridCol w:w="{x}"/>' for x in cols) + f'</w:tblGrid><w:tr><w:trPr>{gb}<w:trHeight w:val="360" w:hRule="atLeast"/></w:trPr>{tcs}</w:tr></w:tbl>')
+    def probe_styles(default=True, extra=''):
+        out = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{tnr}" w:hAnsi="{tnr}" w:cs="{tnr}"/><w:sz w:val="22"/></w:rPr></w:rPrDefault>'
+               '<w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/></w:pPr></w:pPrDefault></w:docDefaults>'
+               '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style>')
+        if default:
+            out += f'<w:style w:type="table" w:default="1" w:styleId="TableNormal"><w:name w:val="Normal Table"/><w:tblPr><w:tblInd w:w="0" w:type="dxa"/>{probe_margins}</w:tblPr></w:style>'
+        return out + extra + '</w:styles>'
+    probe_sect = '<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr>'
+    probe_control = lambda label: probe_para(label + 'Before control paragraph.') + probe_table([probe_para(label + 'Cell control table.')])
+    probe_grid = '<w:style w:type="table" w:styleId="Grid"><w:name w:val="Grid"/><w:tblPr>' + probe_borders + '</w:tblPr></w:style>'
+    probes = [
+        ('centred-default-style', 'Mode 14: a centred table beside a left-aligned control, both inheriting the default table style', '14',
+         probe_control('Alpha') + probe_para('BravoBefore centred table.') + probe_table([probe_para('BravoCell centred table.')], props='<w:jc w:val="center"/>'), probe_styles()),
+        ('nested-default-style', 'Mode 14: a table nested in a cell of a table inheriting the default table style', '14',
+         probe_control('Alpha') + probe_para('BravoBefore outer table.') + probe_table([probe_para('BravoCell outer cell.') + probe_table([probe_para('CharlieCell nested table.')], width='<w:tblW w:w="3000" w:type="dxa"/>') + probe_para('')]), probe_styles()),
+        ('named-style-no-margins-mode-14', 'Mode 14: a table naming a style that states neither an indent nor cell margins', '14',
+         probe_para('AlphaBefore named style without cell margins.') + probe_table([probe_para('AlphaCell named style.')], props='<w:tblStyle w:val="Grid"/>'), probe_styles(False, probe_grid)),
+        ('named-style-no-margins-mode-15', 'Mode 15: a table naming a style that states neither an indent nor cell margins', '15',
+         probe_para('AlphaBefore named style without cell margins.') + probe_table([probe_para('AlphaCell named style.')], props='<w:tblStyle w:val="Grid"/>'), probe_styles(False, probe_grid)),
+        ('grid-before-default-style', 'Mode 14: a first row that starts one grid column in (w:gridBefore)', '14',
+         probe_control('Alpha') + probe_para('BravoBefore first row starts one column in.') + probe_table([probe_para('BravoCell after gridBefore.')], grid=[4000], before=1000), probe_styles()),
+        ('pct-100-default-style', 'Mode 14: a table 100% of the text width', '14',
+         probe_control('Alpha') + probe_para('BravoBefore full-width table.') + probe_table([probe_para('BravoCell full width.')], width='<w:tblW w:w="5000" w:type="pct"/>'), probe_styles()),
+    ]
+    for name, description, mode, body, styles_xml in probes:
+        texts = [t for t in re.findall(r'<w:t xml:space="preserve">([^<]*)</w:t>', body + probe_para('ProbeAfter end of document.')) if t]
+        markers = [t.split()[0] for t in texts]
+        settings = f'<w:settings xmlns:w="{W}"><w:compat><w:compatSetting w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="{mode}"/></w:compat></w:settings>'
+        add(f'tables-legacy-{name}-times-new-roman', 'tables', description + ' (Docxodus #1219)', texts,
+            body + probe_para('ProbeAfter end of document.'), sect=probe_sect, styles_xml=styles_xml, font=tnr,
+            extra_parts={'word/settings.xml': settings},
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': m, 'tolerancePt': 0.5} for m in markers])
+    # Original adjacent-table property cases for Docxodus #1341. The separator controls
+    # carry the same table declarations; only a real paragraph makes them nonadjacent.
+    def harbor_table(text, second):
+        width = 6000 if second else 4800
+        border = ('<w:tblBorders>' + ''.join('<w:' + side + ' w:val="single" w:sz="8" w:color="246B7D"/>'
+                  for side in ('top', 'left', 'bottom', 'right')) + '</w:tblBorders>') if second else ''
+        return ('<w:tbl><w:tblPr><w:tblW w:w="' + str(width) + '" w:type="dxa"/>' + border
+                + '<w:tblLayout w:type="fixed"/><w:tblCellMar><w:left w:w="' + ('720' if second else '0')
+                + '" w:type="dxa"/><w:right w:w="180" w:type="dxa"/></w:tblCellMar></w:tblPr>'
+                + '<w:tblGrid><w:gridCol w:w="' + str(width) + '"/></w:tblGrid><w:tr><w:tc><w:tcPr>'
+                + '<w:tcW w:w="' + str(width) + '" w:type="dxa"/></w:tcPr>' + para(text) + '</w:tc></w:tr></w:tbl>')
+    harbor_styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+                     f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="22"/></w:rPr></w:rPrDefault>'
+                     '<w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/>'
+                     '</w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal">'
+                     '<w:name w:val="Normal"/></w:style></w:styles>')
+    for review in ('final', 'original'):
+        for control in (False, True):
+            body = (para('EstuaryEntry') + harbor_table('CanalPier', False) + (para('') if control else '')
+                    + harbor_table('InlandPier', True) + para('EstuaryExit'))
+            add('tables-adjacent-properties-' + review + ('-control' if control else ''), 'tables',
+                'Independent borders, widths and margins of ' + ('separated control' if control else 'adjacent')
+                + ' tables under the ' + review + ' review profile (Docxodus #1341)',
+                ['EstuaryEntry', 'CanalPier', 'InlandPier', 'EstuaryExit'], body, styles_xml=harbor_styles,
+                assertions=[{'type': 'same-page', 'version': 1,
+                             'markers': ['EstuaryEntry', 'CanalPier', 'InlandPier', 'EstuaryExit']}])
+            cases[-1]['profile']['review'] = review
+    # Original literal-text tabs and explicit-tab controls for Docxodus #1353.
+    estuary_styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+                     f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="22"/></w:rPr></w:rPrDefault>'
+                     '<w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/>'
+                     '</w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal">'
+                     '<w:name w:val="Normal"/></w:style></w:styles>')
+    for kind in ('body', 'header', 'footer', 'multiple'):
+        for literal in (True, False):
+            props = '<w:rPr><w:b/><w:color w:val="225588"/></w:rPr>'
+            if kind == 'multiple':
+                content = ('<w:r>' + props + ('<w:t xml:space="preserve">North&#9;&#9; EstuaryMark</w:t>' if literal else
+                           '<w:t>North</w:t><w:tab/><w:tab/><w:t xml:space="preserve"> EstuaryMark</w:t>') + '</w:r>')
+            else:
+                content = ('<w:r><w:t/></w:r><w:r>' + props +
+                           ('<w:t xml:space="preserve">&#9;</w:t>' if literal else '<w:tab/>') +
+                           '</w:r><w:r>' + props + '<w:t xml:space="preserve"> EstuaryMark</w:t></w:r>')
+            stops = ('<w:tab w:val="left" w:pos="2400"/>' if kind == 'multiple' else '')
+            tab_paragraph = ('<w:p><w:pPr><w:tabs>' + stops + '<w:tab w:val="right" w:pos="9360" w:leader="dot"/>'
+                             '</w:tabs></w:pPr>' + content + '</w:p>')
+            story = kind if kind in ('header', 'footer') else None
+            sect = section()
+            if story:
+                sect = sect.replace('<w:sectPr>', '<w:sectPr><w:' + story + 'Reference w:type="default" r:id="rStory"/>')
+            body = para('EstuaryBody') if story else tab_paragraph + para('EstuaryEnd')
+            texts = ['EstuaryBody', 'EstuaryMark'] if story else (['North'] if kind == 'multiple' else []) + ['EstuaryMark', 'EstuaryEnd']
+            add('tabs-literal-text-' + kind + ('' if literal else '-control'), 'paragraphs',
+                ('Literal text tab' if literal else 'Explicit tab control') + ' in ' + kind + ' content (Docxodus #1353)',
+                texts, body, sect=sect, story=(story, tab_paragraph) if story else None, styles_xml=estuary_styles,
+                assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'EstuaryMark', 'occurrence': 1,
+                             'page': 1, 'rect': [400, 20, 552, 780]},
+                            {'type': 'same-page', 'version': 1, 'markers': ['EstuaryMark', 'EstuaryBody' if story else 'EstuaryEnd']}])
+            cases[-1]['pdfTextNormalization'] = 'isolated-dot-leaders-v1'
+    for variant in ('literal', 'explicit', 'control'):
+        tag = 't' if variant == 'control' else 'delText'
+        def marked_text(value):
+            return '<w:' + tag + ' xml:space="preserve">' + value + '</w:' + tag + '>'
+        content = ('<w:r><w:rPr><w:b/><w:color w:val="225588"/></w:rPr>' +
+                   (marked_text('North &#9; EstuaryMark') if variant == 'literal' else
+                    marked_text('North ') + '<w:tab/>' + marked_text(' EstuaryMark')) + '</w:r>')
+        if variant != 'control':
+            content = '<w:del w:id="7" w:author="Estuary reviewer" w:date="2026-01-01T00:00:00Z">' + content + '</w:del>'
+        body = ('<w:p><w:pPr><w:tabs><w:tab w:val="right" w:pos="9360" w:leader="dot"/></w:tabs></w:pPr>'
+                + content + '</w:p>' + para('EstuaryEnd'))
+        add('tabs-literal-text-deleted' + ('' if variant == 'literal' else '-' + variant), 'paragraphs',
+            {'literal': 'Literal tab in visible deleted text', 'explicit': 'Explicit tab in visible deleted text',
+             'control': 'Untracked explicit-tab control for visible deletion layout'}[variant] + ' (Docxodus #1353)',
+            ['North', 'EstuaryMark', 'EstuaryEnd'], body, styles_xml=estuary_styles,
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'EstuaryMark', 'occurrence': 1,
+                         'page': 1, 'rect': [400, 20, 552, 780]},
+                        {'type': 'same-page', 'version': 1, 'markers': ['EstuaryMark', 'EstuaryEnd']}])
+        cases[-1]['profile']['review'] = 'markup'
+        cases[-1]['pdfTextNormalization'] = 'isolated-dot-leaders-v1'
+    # A comment anchored in a footer or a footnote must render like a body comment (Docxodus #1310).
+    # The three cases share one document; only the story holding the commented words differs, and
+    # the body control holds it in the body. PDFs hide comments, as everywhere in this suite; the
+    # margin-profile HTML companion requires the note itself to be readable. The comment is a range
+    # with no w:commentReference run: LibreOffice 25.8.7.3 refuses to open a package whose footer or
+    # footnote holds one ("source file could not be loaded"), which would leave the reference
+    # track without a PDF. The range alone still selects the note in every story.
+    story_styles = comment_styles
+    story_section = section().replace('<w:sectPr>', '<w:sectPr><w:footerReference w:type="default" r:id="rStory"/>')
+    def story_commented(text, commented):
+        return ('<w:commentRangeStart w:id="5"/>' + run(text) + '<w:commentRangeEnd w:id="5"/>') if commented else run(text)
+    story_text = ['OakBodyLine The survey crew checks the oak ledger.', 'OakFooterLine Ledger copy.',
+                  'OakNoteLine Counted twice.']
+    for case_id, story, description, mixed in [
+            ('comments-footer-story-margin', 'footer', 'A comment anchored in footer text (Docxodus #1310)', False),
+            ('comments-footnote-story-margin', 'footnote', 'A comment anchored in footnote text (Docxodus #1310)', False),
+            ('comments-body-story-control', 'body', 'The same document with the comment anchored in the body', False),
+            ('comments-footer-story-mixed-reference', 'footer', 'A footer range beside a real body comment reference', True),
+            ('comments-body-story-mixed-reference-control', 'body', 'Body references control for the mixed footer range', True)]:
+        body = para(runs=story_commented(story_text[0], story == 'body') + '<w:r><w:footnoteReference w:id="1"/></w:r>'
+                    + (comment_view_mark('Reference', 5) if mixed and story == 'body' else '')
+                    + (comment_view_mark('Reference', 6) if mixed else ''))
+        footer = para(runs=story_commented(story_text[1], story == 'footer'))
+        note = para(runs='<w:r><w:footnoteRef/></w:r>' + run(' ') + story_commented(story_text[2], story == 'footnote'))
+        comment = '<w:comment w:id="5" w:author="Oak Reviewer" w:date="2026-10-01T12:00:00Z">' + para('Check OakStoryNote') + '</w:comment>'
+        if mixed: comment += comment_view_note(6, 'Review OakBodyPoint')
+        add(case_id, 'paragraphs', description, story_text + ['1', '1'], body, sect=story_section,
+            notes=('footnote', ''), notes_xml=note, styles_xml=story_styles, story=('footer', footer),
+            comments_xml=comment)
+        cases[-1]['htmlProfile'] = {'review': 'final', 'comments': 'margin'}
+        cases[-1]['htmlAssertions'] = [{'type': 'marker-readable', 'version': 1, 'marker': 'OakStoryNote',
+                                       'tokens': ['Check', 'OakStoryNote']}]
+        if mixed: cases[-1]['htmlAssertions'].append({'type': 'marker-readable', 'version': 1, 'marker': 'OakBodyPoint',
+                                                    'tokens': ['Review', 'OakBodyPoint']})
+    # core-v66: reuse the original row-geometry helpers and unpublished #1202 cases.
     # A 300 x 160pt card with 10pt margins: a 140pt body band that a short table row overfills.
     rg_card = ('<w:sectPr><w:pgSz w:w="6000" w:h="3200"/><w:pgMar w:top="200" w:right="200" w:bottom="200" w:left="200" '
                'w:header="0" w:footer="0" w:gutter="0"/></w:sectPr>')
-    def rg_borders(on):
-        sides = ('top', 'left', 'bottom', 'right', 'insideH', 'insideV')
-        if on:
-            return '<w:tblBorders>' + ''.join(f'<w:{s} w:val="single" w:sz="8" w:space="0" w:color="000000"/>' for s in sides) + '</w:tblBorders>'
-        return '<w:tblBorders>' + ''.join(f'<w:{s} w:val="nil"/>' for s in sides) + '</w:tblBorders>'
-    def rg_cell(body, width):
-        return f'<w:tc><w:tcPr><w:tcW w:w="{width}" w:type="dxa"/></w:tcPr>{body}</w:tc>'
-    def rg_row(cells, height=None, rule='exact', header=False):
-        props = '' if height is None else (f'<w:trHeight w:hRule="{rule}"/>' if height == 'absent' else f'<w:trHeight w:val="{height}" w:hRule="{rule}"/>')
-        props += '<w:tblHeader/>' if header else ''
-        return '<w:tr>' + ('<w:trPr>' + props + '</w:trPr>' if props else '') + ''.join(cells) + '</w:tr>'
-    def rg_table(rows, widths, bordered, margins):
-        return (f'<w:tbl><w:tblPr><w:tblW w:w="{sum(widths)}" w:type="dxa"/>{rg_borders(bordered)}<w:tblLayout w:type="fixed"/>'
-                '<w:tblCellMar>' + ''.join(f'<w:{s} w:w="{m}" w:type="dxa"/>' for s, m in zip(('top', 'left', 'bottom', 'right'), margins)) + '</w:tblCellMar>'
-                '</w:tblPr><w:tblGrid>' + ''.join(f'<w:gridCol w:w="{w}"/>' for w in widths) + '</w:tblGrid>' + ''.join(rows) + '</w:tbl>')
-    side_margins, no_margins = ('0', '108', '0', '108'), ('0', '0', '0', '0')
-    def rg_add(case_id, description, texts, body, sect=rg_sect, clipped=None):
-        markers = [t.split()[0] for t in texts]
-        add(case_id, 'tables', description, texts, body, sect=sect, styles_xml=rg_styles, font=rg_font,
-            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': m, 'tolerancePt': 0.5} for m in markers])
-        if clipped:
-            cases[-1]['clippedTokens'] = clipped
-    # #1339: an exact row of height 0 (or with no height stated) is laid out at its content height;
-    # the control's positive exact heights, down to one twip, still clip.
-    def zero_case(case_id, description, variants):
-        texts, body, clipped = [], '', {}
-        for label, height, bordered, lines, hidden in variants:
-            def two(prefix, count, line=None):
-                cells = []
-                for side in ('L', 'R'):
-                    words = [f'{label}{prefix}{i}{side}' for i in range(1, count + 1)]
-                    content = ''.join(para(w, exact(line)) if line else para(w) for w in words) if count else para(runs=run(' '))
-                    cells.append(rg_cell(content, 4000))
-                    texts.extend(words[:1] if hidden else words)
-                    if hidden:
-                        clipped.update({w: 1 for w in words[1:]})
-                return cells
-            texts.append(f'{label}Before')
-            rows = [rg_row(two('Top', 1), 360, 'atLeast'), rg_row(two('Mid', lines, 320 if hidden else None), height),
-                    rg_row(two('Bot', 1), 360, 'atLeast')]
-            texts.append(f'{label}After')
-            body += para(f'{label}Before') + rg_table(rows, [4000, 4000], bordered, side_margins) + para(f'{label}After')
-        rg_add(case_id, description, texts, body, clipped=clipped or None)
-    zero_case('tables-row-height-exact-zero-content-times-new-roman',
-              'Exact rows of height 0 or with no height, one and three lines, borderless and bordered, between atLeast rows (Docxodus #1339)',
-              [('Alpha', 0, False, 1, False), ('Bravo', 0, True, 1, False), ('Charlie', 0, False, 3, False), ('Kilo', 'absent', True, 1, False)])
-    zero_case('tables-row-height-exact-tiny-control-times-new-roman',
-              'Control: exact rows of one twip (empty) and eight points (three lines, two hidden) clip to their height (Docxodus #1339)',
-              [('Echo', 1, False, 0, False), ('Foxtrot', 1, True, 0, False), ('Lima', 160, True, 3, True)])
-    # #1201: a zero-width first grid column (zero tcW, zero cell margins, fixed layout). Its cells
-    # hold empty paragraphs, so the case asserts the layout and the export, not clipped glyphs.
-    for case_id, width, description in [('tables-zero-width-column-times-new-roman', 0, 'A zero-width first column'),
-                                        ('tables-zero-width-column-control-times-new-roman', 480, 'Control: a 24pt first column')]:
-        texts, body = [], ''
-        for label, height, rule, bordered in [('Alder', 360, 'exact', False), ('Birch', 360, 'atLeast', False), ('Dogwood', 360, 'exact', True)]:
-            texts += [f'{label}Before table.', f'{label}Wide cell.', f'{label}After table.']
-            body += para(texts[-3]) + rg_table([rg_row([rg_cell(para(runs=''), width), rg_cell(para(texts[-2]), 5400 - width)], height, rule)],
-                                               [width, 5400 - width], bordered, no_margins) + para(texts[-1])
-        rg_add(case_id, description + ' in exact and atLeast 18pt rows, borderless and bordered (Docxodus #1201)', texts, body)
     # #1202: rows and bordered paragraphs taller than the 140pt body band of a 160pt card.
     def card_lines(prefix, count):
         return [f'{prefix}{i:02d}' for i in range(1, count + 1)]
@@ -1604,9 +2115,6 @@ def generate():
                                                         rg_row([rg_cell(card_paras(['Willow01']), 5400)]), rg_row([rg_cell(card_paras(['Willow02']), 5400)])],
                                                        [5400], True, no_margins) + para('MapleAfter', exact(300)))
     rg_add('tables-header-row-taller-than-page-times-new-roman', 'An exact 400pt header row above two body rows on a 300 x 160pt card (Docxodus #1202)', texts, body, sect=rg_card)
-    # Word puts MapleAfter at the top of a fourth page, below a third that holds only the two body rows;
-    # one unexplained capture does not establish a rule, so its position is left unasserted.
-    cases[-1]['assertions'] = [a for a in cases[-1]['assertions'] if a['marker'] != 'MapleAfter']
     words = card_lines('Inner', 8)
     texts = ['OuterBefore', 'OuterHead'] + words + ['OuterTail', 'OuterAfter']
     inner = rg_table([rg_row([rg_cell(card_paras(words), 5000)], 8000)], [5000], True, no_margins)
@@ -1615,39 +2123,68 @@ def generate():
     rg_add('tables-nested-row-taller-than-page-times-new-roman', 'A nested table whose exact 400pt row is taller than a 300 x 160pt card (Docxodus #1202)', texts, body, sect=rg_card)
     box = '<w:pBdr>' + ''.join(f'<w:{s} w:val="single" w:sz="8" w:space="0" w:color="000000"/>' for s in ('top', 'left', 'bottom', 'right')) + '</w:pBdr>'
     words = card_lines('Hazel', 28)
-    body = (para('HazelBefore', exact(300)) + para(props=box + exact(300), runs='<w:r><w:br/></w:r>'.join(run(w) for w in words)) + para('HazelAfter', exact(300)))
+    body = (para('HazelBefore', exact(300)) + para(props=exact(300).replace('<w:spacing', box + '<w:spacing'), runs='<w:r><w:br/></w:r>'.join(run(w) for w in words)) + para('HazelAfter', exact(300)))
     rg_add('paragraphs-border-taller-than-page-times-new-roman', 'A bordered 28-line paragraph taller than a 300 x 160pt card (Docxodus #1202)',
            ['HazelBefore'] + words + ['HazelAfter'], body, sect=rg_card)
     words = card_lines('Larch', 28)
-    body = para('LarchBefore', exact(300)) + ''.join(para(w, box + exact(300)) for w in words) + para('LarchAfter', exact(300))
+    body = para('LarchBefore', exact(300)) + ''.join(para(w, exact(300).replace('<w:spacing', box + '<w:spacing')) for w in words) + para('LarchAfter', exact(300))
     rg_add('paragraphs-border-group-taller-than-page-times-new-roman', 'Twenty-eight paragraphs sharing one border, taller than a 300 x 160pt card (Docxodus #1202)',
            ['LarchBefore'] + words + ['LarchAfter'], body, sect=rg_card)
-    # Word for the web glyph boxes [page, x0, y0, x1, y1] (pdftotext -bbox) of the markers whose
-    # LibreOffice 25.8.7.3 position differs from Word by more than 0.5pt; see docs/results/table-row-geometry-word.md.
-    rg_word = {
-        'paragraphs-border-group-taller-than-page-times-new-roman': {'Larch09': [2, 10.0, 12.2, 47.01, 24.4], 'Larch10': [2, 10.0, 27.23, 47.01, 39.43], 'Larch11': [2, 10.0, 42.25, 47.01, 54.45], 'Larch12': [2, 10.0, 57.28, 47.01, 69.48], 'Larch13': [2, 10.0, 72.3, 47.01, 84.51], 'Larch14': [2, 10.0, 87.33, 47.01, 99.53], 'Larch15': [2, 10.0, 102.35, 47.01, 114.56], 'Larch16': [2, 10.0, 117.38, 47.01, 129.58], 'Larch17': [2, 10.0, 132.4, 47.01, 144.61], 'Larch18': [3, 10.0, 12.2, 47.01, 24.4], 'Larch19': [3, 10.0, 27.23, 47.01, 39.43], 'Larch20': [3, 10.0, 42.25, 47.01, 54.45], 'Larch21': [3, 10.0, 57.28, 47.01, 69.48], 'Larch22': [3, 10.0, 72.3, 47.01, 84.51], 'Larch23': [3, 10.0, 87.33, 47.01, 99.53], 'Larch24': [3, 10.0, 102.35, 47.01, 114.56], 'Larch25': [3, 10.0, 117.38, 47.01, 129.58], 'Larch26': [3, 10.0, 132.4, 47.01, 144.61], 'Larch27': [4, 10.0, 12.2, 47.01, 24.4], 'Larch28': [4, 10.0, 27.23, 47.01, 39.43], 'LarchAfter': [4, 10.0, 43.25, 58.87, 55.45]},
-        'paragraphs-border-taller-than-page-times-new-roman': {'Hazel09': [2, 10.0, 12.2, 46.76, 24.4], 'Hazel10': [2, 10.0, 27.23, 46.76, 39.43], 'Hazel11': [2, 10.0, 42.25, 46.76, 54.45], 'Hazel12': [2, 10.0, 57.28, 46.76, 69.48], 'Hazel13': [2, 10.0, 72.3, 46.76, 84.51], 'Hazel14': [2, 10.0, 87.33, 46.76, 99.53], 'Hazel15': [2, 10.0, 102.35, 46.76, 114.56], 'Hazel16': [2, 10.0, 117.38, 46.76, 129.58], 'Hazel17': [2, 10.0, 132.4, 46.76, 144.61], 'Hazel18': [3, 10.0, 12.2, 46.76, 24.4], 'Hazel19': [3, 10.0, 27.23, 46.76, 39.43], 'Hazel20': [3, 10.0, 42.25, 46.76, 54.45], 'Hazel21': [3, 10.0, 57.28, 46.76, 69.48], 'Hazel22': [3, 10.0, 72.3, 46.76, 84.51], 'Hazel23': [3, 10.0, 87.33, 46.76, 99.53], 'Hazel24': [3, 10.0, 102.35, 46.76, 114.56], 'Hazel25': [3, 10.0, 117.38, 46.76, 129.58], 'Hazel26': [3, 10.0, 132.4, 46.76, 144.61], 'Hazel27': [4, 10.0, 12.2, 46.76, 24.4], 'Hazel28': [4, 10.0, 27.23, 46.76, 39.43], 'HazelAfter': [4, 10.0, 43.25, 58.88, 55.45]},
-        'tables-nested-row-taller-than-page-times-new-roman': {'Inner01': [2, 12.0, 14.23, 46.24, 26.43], 'Inner02': [2, 12.0, 29.23, 46.24, 41.43], 'Inner03': [2, 12.0, 44.25, 46.24, 56.45], 'Inner04': [2, 12.0, 59.28, 46.24, 71.48], 'Inner05': [2, 12.0, 74.3, 46.24, 86.51], 'Inner06': [2, 12.0, 89.33, 46.24, 101.53], 'Inner07': [2, 12.0, 104.35, 46.24, 116.56], 'Inner08': [2, 12.0, 119.38, 46.24, 131.58], 'OuterAfter': [3, 10.0, 29.23, 58.37, 41.43], 'OuterTail': [3, 11.0, 13.2, 54.03, 25.4]},
-        'tables-row-height-exact-zero-content-times-new-roman': {'AlphaAfter': [1, 72.03, 143.0, 122.15, 155.18], 'AlphaBot1L': [1, 77.53, 125.0, 132.48, 137.18], 'AlphaBot1R': [1, 277.63, 125.0, 333.2, 137.18], 'AlphaMid1L': [1, 77.53, 109.0, 134.98, 121.18], 'AlphaMid1R': [1, 277.63, 109.0, 335.7, 121.18], 'BravoAfter': [1, 72.03, 231.03, 122.15, 243.21], 'BravoBefore': [1, 72.03, 159.0, 128.87, 171.18], 'BravoBot1L': [1, 78.03, 212.03, 132.98, 224.21], 'BravoBot1R': [1, 278.13, 212.03, 333.7, 224.21], 'BravoMid1L': [1, 78.03, 195.03, 135.48, 207.21], 'BravoMid1R': [1, 278.13, 195.03, 336.2, 207.21], 'BravoTop1L': [1, 78.03, 176.0, 134.95, 188.18], 'BravoTop1R': [1, 278.13, 176.0, 335.67, 188.18], 'CharlieAfter': [1, 72.03, 347.07, 127.65, 359.25], 'CharlieBefore': [1, 72.03, 247.03, 134.37, 259.21], 'CharlieBot1L': [1, 77.53, 329.05, 137.98, 341.23], 'CharlieBot1R': [1, 277.63, 329.05, 338.7, 341.23], 'CharlieMid1L': [1, 77.53, 281.05, 140.48, 293.23], 'CharlieMid1R': [1, 277.63, 281.05, 341.2, 293.23], 'CharlieMid2L': [1, 77.53, 297.05, 140.48, 309.23], 'CharlieMid2R': [1, 277.63, 297.05, 341.2, 309.23], 'CharlieMid3L': [1, 77.53, 313.05, 140.48, 325.23], 'CharlieMid3R': [1, 277.63, 313.05, 341.2, 325.23], 'CharlieTop1L': [1, 77.53, 263.03, 139.95, 275.21], 'CharlieTop1R': [1, 277.63, 263.03, 340.67, 275.21], 'KiloAfter': [1, 72.03, 435.1, 114.9, 447.28], 'KiloBefore': [1, 72.03, 363.07, 121.62, 375.25], 'KiloBot1L': [1, 78.03, 416.07, 125.49, 428.25], 'KiloBot1R': [1, 278.13, 416.07, 326.21, 428.25], 'KiloMid1L': [1, 78.03, 399.07, 127.99, 411.25], 'KiloMid1R': [1, 278.13, 399.07, 328.71, 411.25], 'KiloTop1L': [1, 78.03, 380.07, 127.46, 392.25], 'KiloTop1R': [1, 278.13, 380.07, 328.18, 392.25]},
-        'tables-zero-width-column-times-new-roman': {'AlderWide': [1, 73.03, 90.98, 121.88, 103.16], 'BirchWide': [1, 73.03, 141.0, 121.39, 153.18], 'DogwoodWide': [1, 75.03, 192.03, 142.38, 204.21]},
-        'tables-row-height-exact-zero-borderless': {'Zero03': [1, 72.53, 119.75, 104.5, 131.93], 'ZeroAfter': [1, 72.03, 137.75, 116.16, 149.93]},
-        'tables-row-height-exact-zero-only': {'ZeroAfter': [1, 72.03, 131.0, 116.16, 143.18]},
-    }
+    # New paper-edge probes use strict visible inventories: Cedar11/12 are not optional tokens.
+    def rg_page_case(case_id, description, body, page_words, story=None):
+        totals = Counter(w for words in page_words for w in words)
+        assertions = []
+        for page, words in enumerate(page_words, 1):
+            for word in words:
+                # Region markers must be unique; repeated footer words stay in the complete inventory.
+                if totals[word] != 1: continue
+                assertions.append({'type': 'marker-region', 'version': 2, 'marker': word,
+                    'occurrence': 1, 'page': page, 'rect': [0, 0, 300, 161], 'adjudicated': 'word'})
+        add(case_id, 'tables', description + ' (Docxodus #1202)', [w for words in page_words for w in words],
+            body, sect=rg_card.replace('<w:sectPr>', '<w:sectPr><w:footerReference w:type="default" r:id="rStory"/>') if story else rg_card,
+            styles_xml=rg_styles, font=rg_font, story=story, assertions=assertions)
+    for suffix, footer, wrapped in [('lines', False, False), ('footer', True, False), ('soft-wrap', False, True)]:
+        words = card_lines('Cedar', 12)
+        width = 900 if wrapped else 5400
+        content = para(' '.join(words), exact(300)) if wrapped else card_paras(words)
+        body = (para('CedarBefore', exact(300)) + rg_table([rg_row([rg_cell(content, width)], 8000)],
+                [width], True, no_margins) + para('CedarAfter', exact(300)))
+        pages = [['CedarBefore'], words[:10], ['CedarAfter']]
+        if footer: pages = [p + ['FooterProbe'] for p in pages]
+        rg_page_case('tables-row-exact-paper-edge-' + suffix + '-times-new-roman',
+            'An exact 400pt row with twelve ' + ('soft-wrapped words' if wrapped else 'paragraphs')
+            + (' and a footer' if footer else ''), body, pages,
+            ('footer', para('FooterProbe', exact(300))) if footer else None)
+    for suffix, height, header in [('two-hundred', 4000, True), ('no-header', 8000, False)]:
+        words = card_lines('Maple', 8)
+        body = (para('MapleBefore', exact(300)) + rg_table([rg_row([rg_cell(card_paras(words), 5400)], height, header=header),
+                rg_row([rg_cell(para('Willow01', exact(300)), 5400)]), rg_row([rg_cell(para('Willow02', exact(300)), 5400)])],
+                [5400], True, no_margins) + para('MapleAfter', exact(300)))
+        pages = [['MapleBefore'], words, ['Willow01', 'Willow02']]
+        if header: pages.append(['MapleAfter'])
+        else: pages[-1].append('MapleAfter')
+        rg_page_case('tables-row-oversized-' + suffix + '-times-new-roman',
+            'An oversized ' + ('200pt exact header' if header else '400pt first row without a header')
+            + ' followed by two body rows', body, pages)
+    # A missing serialized final paragraph still consumes a normal line in native Word.
+    for suffix, header in [('exact-row', False), ('header-row', True)]:
+        rows = [rg_row([rg_cell(para('AlderEnd', exact(300)), 5400)], 8000, header=header)]
+        if header: rows.append(rg_row([rg_cell(para('BirchEnd', exact(300)), 5400)]))
+        rg_page_case('tables-final-' + suffix + '-blank-page-times-new-roman',
+            'A table-ending exact 400pt ' + ('header' if header else 'row') + ' with Word required final paragraph',
+            rg_table(rows, [5400], True, no_margins),
+            [['AlderEnd'], ['BirchEnd'], []] if header else [['AlderEnd'], []])
+    rg_word = {'paragraphs-border-group-taller-than-page-times-new-roman': {'Larch09': [2, 10.0, 12.2, 47.01, 24.4], 'Larch10': [2, 10.0, 27.23, 47.01, 39.43], 'Larch11': [2, 10.0, 42.25, 47.01, 54.45], 'Larch12': [2, 10.0, 57.28, 47.01, 69.48], 'Larch13': [2, 10.0, 72.3, 47.01, 84.51], 'Larch14': [2, 10.0, 87.33, 47.01, 99.53], 'Larch15': [2, 10.0, 102.35, 47.01, 114.56], 'Larch16': [2, 10.0, 117.38, 47.01, 129.58], 'Larch17': [2, 10.0, 132.4, 47.01, 144.61], 'Larch18': [3, 10.0, 12.2, 47.01, 24.4], 'Larch19': [3, 10.0, 27.23, 47.01, 39.43], 'Larch20': [3, 10.0, 42.25, 47.01, 54.45], 'Larch21': [3, 10.0, 57.28, 47.01, 69.48], 'Larch22': [3, 10.0, 72.3, 47.01, 84.51], 'Larch23': [3, 10.0, 87.33, 47.01, 99.53], 'Larch24': [3, 10.0, 102.35, 47.01, 114.56], 'Larch25': [3, 10.0, 117.38, 47.01, 129.58], 'Larch26': [3, 10.0, 132.4, 47.01, 144.61], 'Larch27': [4, 10.0, 12.2, 47.01, 24.4], 'Larch28': [4, 10.0, 27.23, 47.01, 39.43], 'LarchAfter': [4, 10.0, 43.25, 58.87, 55.45]}, 'paragraphs-border-taller-than-page-times-new-roman': {'Hazel09': [2, 10.0, 12.2, 46.76, 24.4], 'Hazel10': [2, 10.0, 27.23, 46.76, 39.43], 'Hazel11': [2, 10.0, 42.25, 46.76, 54.45], 'Hazel12': [2, 10.0, 57.28, 46.76, 69.48], 'Hazel13': [2, 10.0, 72.3, 46.76, 84.51], 'Hazel14': [2, 10.0, 87.33, 46.76, 99.53], 'Hazel15': [2, 10.0, 102.35, 46.76, 114.56], 'Hazel16': [2, 10.0, 117.38, 46.76, 129.58], 'Hazel17': [2, 10.0, 132.4, 46.76, 144.61], 'Hazel18': [3, 10.0, 12.2, 46.76, 24.4], 'Hazel19': [3, 10.0, 27.23, 46.76, 39.43], 'Hazel20': [3, 10.0, 42.25, 46.76, 54.45], 'Hazel21': [3, 10.0, 57.28, 46.76, 69.48], 'Hazel22': [3, 10.0, 72.3, 46.76, 84.51], 'Hazel23': [3, 10.0, 87.33, 46.76, 99.53], 'Hazel24': [3, 10.0, 102.35, 46.76, 114.56], 'Hazel25': [3, 10.0, 117.38, 46.76, 129.58], 'Hazel26': [3, 10.0, 132.4, 46.76, 144.61], 'Hazel27': [4, 10.0, 12.2, 46.76, 24.4], 'Hazel28': [4, 10.0, 27.23, 46.76, 39.43], 'HazelAfter': [4, 10.0, 43.25, 58.88, 55.45]}, 'tables-nested-row-taller-than-page-times-new-roman': {'Inner01': [2, 12.0, 14.23, 46.24, 26.43], 'Inner02': [2, 12.0, 29.23, 46.24, 41.43], 'Inner03': [2, 12.0, 44.25, 46.24, 56.45], 'Inner04': [2, 12.0, 59.28, 46.24, 71.48], 'Inner05': [2, 12.0, 74.3, 46.24, 86.51], 'Inner06': [2, 12.0, 89.33, 46.24, 101.53], 'Inner07': [2, 12.0, 104.35, 46.24, 116.56], 'Inner08': [2, 12.0, 119.38, 46.24, 131.58], 'OuterAfter': [3, 10.0, 29.23, 58.37, 41.43], 'OuterTail': [3, 11.0, 13.2, 54.03, 25.4]}, 'tables-header-row-taller-than-page-times-new-roman': {'MapleAfter': [4, 10.0, 12.196725, 61.387525, 24.4014]}}
     for case in cases:
         boxes = rg_word.get(case['id'])
-        if not boxes:
-            continue
-        # The two core-v18 Liberation Serif cases were captured in Times New Roman, whose metrics match but
-        # whose cell margin differs from Docxodus #1219's subject, so they bound the vertical position only.
-        wide = not case['id'].endswith('times-new-roman')
-        case['assertions'] = [a if a.get('marker') not in boxes else
-                              {'type': 'marker-region', 'version': 2, 'marker': a['marker'], 'occurrence': 1, 'page': boxes[a['marker']][0],
-                               'rect': [60, boxes[a['marker']][2] - 1, 552, boxes[a['marker']][4] + 1] if wide else
-                               [boxes[a['marker']][1] - 1, boxes[a['marker']][2] - 1, boxes[a['marker']][3] + 1, boxes[a['marker']][4] + 1],
-                               'tolerancePt': 0.0001, 'adjudicated': 'word'}
-                              for a in case['assertions']]
-        case['version'] = 2
-    registry = {'schema': 1, 'suite': {'id': 'core-v53', 'version': 53, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+        if boxes:
+            case['assertions'] = [a if a.get('marker') not in boxes else
+                {'type': 'marker-region', 'version': 2, 'marker': a['marker'], 'occurrence': 1,
+                 'page': boxes[a['marker']][0], 'rect': [boxes[a['marker']][1]-1, boxes[a['marker']][2]-1,
+                 boxes[a['marker']][3]+1, boxes[a['marker']][4]+1], 'tolerancePt': 0.0001, 'adjudicated': 'word'}
+                for a in case['assertions']]
+            case['version'] = 2
+    registry = {'schema': 1, 'suite': {'id': 'core-v66', 'version': 66, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

@@ -350,11 +350,94 @@ class RegistryContract(unittest.TestCase):
                          {'BodyWillow': 1}, {'HdrAlder': 1}]:
             with self.subTest(optional=optional):
                 edited = copy.deepcopy(registry)
-                edited['cases'][-1]['clippedTokens'] = optional
+                target = next(c for c in edited['cases'] if c['id'] == 'tables-exact-row-header-wide-control')
+                target['clippedTokens'] = optional
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 246)
+        self.assertEqual(len(common.validate_registry()['cases']), 338)
+
+    def test_adjacent_table_property_pairs_keep_independent_table_declarations(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        w = {'w': fixtures.W}
+        cases = [c for c in common.validate_registry()['cases'] if c['id'].startswith('tables-adjacent-properties-')]
+        self.assertEqual(len(cases), 4)
+        self.assertEqual({c['profile']['review'] for c in cases}, {'final', 'original'})
+        for case in cases:
+            with ZipFile(common.ROOT / case['input']) as package:
+                body = ET.fromstring(package.read('word/document.xml')).find('w:body', w)
+            tables = body.findall('w:tbl', w)
+            self.assertEqual(len(tables), 2)
+            self.assertEqual([t.find('w:tblPr/w:tblW', w).get('{%s}w' % fixtures.W) for t in tables], ['4800', '6000'])
+            self.assertIsNone(tables[0].find('w:tblPr/w:tblBorders', w))
+            self.assertEqual(len(tables[1].find('w:tblPr/w:tblBorders', w)), 4)
+            self.assertEqual(tables[1].find('w:tblPr/w:tblCellMar/w:left', w).get('{%s}w' % fixtures.W), '720')
+            children = list(body)
+            self.assertEqual(children.index(tables[1]) - children.index(tables[0]),
+                             2 if case['id'].endswith('-control') else 1)
+
+    def test_literal_tab_pairs_differ_only_in_the_text_tab_representation(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        for kind in ('body', 'header', 'footer', 'multiple'):
+            cid = 'tabs-literal-text-' + kind
+            actual, control = records[cid], records[cid + '-control']
+            self.assertEqual(actual['tokens'], control['tokens'])
+            self.assertEqual(actual['assertions'], control['assertions'])
+            with ZipFile(common.ROOT / actual['input']) as left, ZipFile(common.ROOT / control['input']) as right:
+                for part in left.namelist():
+                    if not part.endswith('.xml') or not part.startswith('word/'):
+                        self.assertEqual(left.read(part), right.read(part)); continue
+                    a, b = ET.fromstring(left.read(part)), ET.fromstring(right.read(part))
+                    for parent in a.iter():
+                        for child in list(parent):
+                            if child.tag != w + 't' or '\t' not in (child.text or ''): continue
+                            at = list(parent).index(child); parent.remove(child)
+                            for index, segment in enumerate(child.text.split('\t')):
+                                if index:
+                                    parent.insert(at, ET.Element(w + 'tab')); at += 1
+                                if segment:
+                                    node = ET.Element(w + 't'); node.text = segment; parent.insert(at, node); at += 1
+                    for root in (a, b):
+                        for text in root.iter(w + 't'): text.attrib.pop('{http://www.w3.org/XML/1998/namespace}space', None)
+                    self.assertEqual(ET.tostring(a), ET.tostring(b))
+
+    def test_deleted_tab_cases_cover_both_representations_and_an_untracked_control(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = {'w': fixtures.W}
+        for suffix in ('', '-explicit', '-control'):
+            case = records['tabs-literal-text-deleted' + suffix]
+            self.assertEqual(case['profile']['review'], 'markup')
+            self.assertEqual(case['tokens'], {'EstuaryEnd': 1, 'EstuaryMark': 1, 'North': 1})
+            with ZipFile(common.ROOT / case['input']) as package:
+                root = ET.fromstring(package.read('word/document.xml'))
+            self.assertEqual(len(root.findall('.//w:del', w)), 0 if suffix == '-control' else 1)
+            tabs = root.findall('.//w:r/w:tab', w)
+            literal = [n for n in root.iter() if '\t' in (n.text or '')]
+            self.assertEqual(len(tabs), 0 if suffix == '' else 1)
+            self.assertEqual(len(literal), 1 if suffix == '' else 0)
+
+    def test_dot_leader_source_policy_recognizes_only_rendered_tab_characters(self):
+        stop = '<w:pPr><w:tabs><w:tab w:val="right" w:leader="dot" w:pos="9360"/></w:tabs></w:pPr>'
+        inputs = [('<w:r><w:t>&#9;</w:t></w:r>', True),
+                  ('<w:del w:id="1" w:author="A"><w:r><w:delText>&#9;</w:delText></w:r></w:del>', True),
+                  ('<w:r><w:tab/></w:r>', True),
+                  ('<w:r><w:instrText>&#9;</w:instrText></w:r>', False),
+                  ('<w:r><w:t>Marker</w:t></w:r>', False),
+                  ('<w:r><w:t>...</w:t><w:tab/></w:r>', False)]
+        for content, allowed in inputs:
+            with self.subTest(content=content), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                fixtures.package(root / 'policy.docx', '<w:p>' + stop + content + '</w:p>')
+                record = {'input': 'policy.docx', 'pdfTextNormalization': 'isolated-dot-leaders-v1'}
+                if allowed: common.validate_pdf_text_policy(record, root)
+                else:
+                    with self.assertRaises(ValueError): common.validate_pdf_text_policy(record, root)
 
     def test_agreement_font_variant_changes_only_the_declared_family(self):
         from zipfile import ZipFile
@@ -505,6 +588,30 @@ class RegistryContract(unittest.TestCase):
             first.find(w + 'comment').set(w + 'author', second.find(w + 'comment').get(w + 'author'))
             self.assertEqual(ET.tostring(first), ET.tostring(second))
 
+    def test_inline_drawing_set_differs_only_in_the_drawing_and_its_deletion(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        ids = ['drawings-inline-shape', 'drawings-inline-shape-deleted', 'drawings-inline-group',
+               'drawings-inline-group-deleted', 'drawings-inline-picture-control']
+        w = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
+        wp = '{http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing}'
+        bodies = []
+        for case_id in ids:
+            case = records[case_id]
+            self.assertEqual(case['tokens'], records[ids[0]]['tokens'])
+            self.assertEqual(case['assertions'], records[ids[0]]['assertions'])
+            self.assertEqual(case['profile']['review'], 'markup' if case_id.endswith('-deleted') else 'final')
+            with ZipFile(common.ROOT / case['input']) as package:
+                body = ET.fromstring(package.read('word/document.xml')).find(w + 'body')
+                paragraphs = body.findall(w + 'p')
+                self.assertEqual(len(paragraphs), 3)
+                drawing = paragraphs[1].find('.//' + w + 'drawing')
+                self.assertEqual(drawing.find(wp + 'inline/' + wp + 'extent').attrib, {'cx': '1828800', 'cy': '914400'})
+                self.assertEqual(paragraphs[1].find(w + 'del') is not None, case_id.endswith('-deleted'))
+                bodies.append(b''.join(ET.tostring(p) for p in (paragraphs[0], paragraphs[2])))
+        self.assertEqual(len(set(bodies)), 1)
+
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
         from zipfile import ZipFile
@@ -529,7 +636,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v51')
+        self.assertEqual(registry['suite']['id'], 'core-v66')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
@@ -553,6 +660,135 @@ class RegistryContract(unittest.TestCase):
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['tokens']['1.'], 1)
         self.assertEqual({a['marker'] for a in pair[0]['assertions']}, {'CedarHeading.', 'CedarBody'})
+
+    def test_note_format_revision_pair_changes_only_the_run_revision(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records['notes-format-revision-markup'], records['notes-format-revision-markup-control']]
+        w = '{' + fixtures.W + '}'
+        with ZipFile(common.ROOT / pair[0]['input']) as revised, ZipFile(common.ROOT / pair[1]['input']) as plain:
+            self.assertEqual(revised.namelist(), plain.namelist())
+            for name in revised.namelist():
+                if name != 'word/footnotes.xml':
+                    self.assertEqual(revised.read(name), plain.read(name))
+            first, second = [ET.fromstring(z.read('word/footnotes.xml')) for z in (revised, plain)]
+            changes = list(first.iter(w + 'rPrChange'))
+            self.assertEqual(len(changes), 1)
+            properties = next(p for p in first.iter(w + 'rPr') if changes[0] in list(p))
+            self.assertEqual(properties.find(w + 'sz').get(w + 'val'), '20')
+            properties.remove(changes[0])
+            self.assertEqual(ET.tostring(first), ET.tostring(second))
+        for case in pair:
+            self.assertEqual(case['profile'], {'review': 'markup', 'comments': 'hidden'})
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
+        self.assertEqual({a['marker'] for a in pair[0]['assertions'] if 'marker' in a}, {'NoteQuartz'})
+
+    def test_story_comment_cases_differ_only_in_the_commented_story(self):
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        stories = {'comments-footer-story-margin': 'word/footer1.xml',
+                   'comments-footnote-story-margin': 'word/footnotes.xml',
+                   'comments-body-story-control': 'word/document.xml'}
+        cases = [records[c] for c in stories]
+        parts = ('word/document.xml', 'word/footer1.xml', 'word/footnotes.xml')
+        for case, commented in zip(cases, stories.values()):
+            with ZipFile(common.ROOT / case['input']) as package:
+                for part in parts:
+                    xml = package.read(part).decode()
+                    self.assertEqual('w:commentRangeStart w:id="5"' in xml, part == commented, (case['id'], part))
+                    self.assertNotIn('w:commentReference', xml)
+                self.assertIn(b'OakStoryNote', package.read('word/comments.xml'))
+            self.assertEqual(case['profile'], {'review': 'final', 'comments': 'hidden'})
+            self.assertEqual(case['htmlProfile'], {'review': 'final', 'comments': 'margin'})
+            self.assertEqual(case['htmlAssertions'], cases[0]['htmlAssertions'])
+            self.assertEqual(case['tokens'], cases[0]['tokens'])
+
+    def test_mixed_story_comments_keep_a_body_point_reference_and_a_ranged_note(self):
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        for cid in ('comments-footer-story-mixed-reference', 'comments-body-story-mixed-reference-control'):
+            case = records[cid]
+            with ZipFile(common.ROOT / case['input']) as package:
+                body = package.read('word/document.xml').decode()
+                self.assertIn('w:commentReference w:id="6"', body)
+                self.assertEqual('w:commentReference w:id="5"' in body, cid.endswith('-control'))
+                self.assertIn('OakBodyPoint', package.read('word/comments.xml').decode())
+            self.assertEqual([a['marker'] for a in case['htmlAssertions']], ['OakStoryNote', 'OakBodyPoint'])
+
+    def _section_change_pair(self, reproducer, control):
+        """The pair's inputs differ only by the w:sectPrChange on the final section; returns that
+        change (removed from the reproducer's tree) and the reproducer's package."""
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records[reproducer], records[control]]
+        w = '{' + fixtures.W + '}'
+        with ZipFile(common.ROOT / pair[0]['input']) as pending, ZipFile(common.ROOT / pair[1]['input']) as plain:
+            self.assertEqual(pending.namelist(), plain.namelist())
+            for name in pending.namelist():
+                if name != 'word/document.xml':
+                    self.assertEqual(pending.read(name), plain.read(name))
+            first, second = [ET.fromstring(z.read('word/document.xml')) for z in (pending, plain)]
+            final = first.find(w + 'body/' + w + 'sectPr')
+            change = final[-1]
+            self.assertEqual(change.tag, w + 'sectPrChange')
+            final.remove(change)
+            self.assertEqual(ET.tostring(first), ET.tostring(second))
+            settings = ET.fromstring(pending.read('word/settings.xml'))
+        for case in pair:
+            self.assertEqual(case['profile'], {'review': 'markup', 'comments': 'hidden'})
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
+        return change, final, settings, pair
+
+    def test_endnote_section_change_pair_changes_only_the_pending_change(self):
+        w = '{' + fixtures.W + '}'
+        change, final, settings, pair = self._section_change_pair(
+            'notes-endnote-format-section-change', 'notes-endnote-format-section-change-control')
+        self.assertIsNone(final.find(w + 'endnotePr'))
+        self.assertEqual(change.find(w + 'sectPr/' + w + 'endnotePr/' + w + 'numFmt').get(w + 'val'), 'decimal')
+        self.assertEqual(settings.find(w + 'endnotePr/' + w + 'numFmt').get(w + 'val'), 'lowerRoman')
+        self.assertEqual(pair[0]['tokens']['i'], 2)
+        self.assertNotIn('1', pair[0]['tokens'])
+
+    def test_float_side_section_change_pair_changes_only_the_pending_change(self):
+        w = '{' + fixtures.W + '}'
+        change, final, _, pair = self._section_change_pair(
+            'images-float-side-section-change', 'images-float-side-section-change-control')
+        size = lambda sect: (sect.find(w + 'pgSz').get(w + 'w'), sect.find(w + 'pgSz').get(w + 'h'))
+        self.assertEqual(size(final), ('11906', '16838'))
+        self.assertEqual(size(change.find(w + 'sectPr')), ('12240', '15840'))
+        self.assertEqual([a['marker'] for a in pair[0]['assertions']], ['FloatLead'])
+
+    def test_deleted_page_field_pair_changes_only_the_deletion(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records[c] for c in ('paragraphs-page-number-deleted-field', 'paragraphs-page-number-deleted-field-control')]
+        w = '{' + fixtures.W + '}'
+        with ZipFile(common.ROOT / pair[0]['input']) as deleted, ZipFile(common.ROOT / pair[1]['input']) as kept:
+            self.assertEqual(deleted.namelist(), kept.namelist())
+            for name in deleted.namelist():
+                if name != 'word/footer1.xml':
+                    self.assertEqual(deleted.read(name), kept.read(name))
+            first, second = [ET.fromstring(z.read('word/footer1.xml')) for z in (deleted, kept)]
+            paragraph = first.find(w + 'p')
+            wrapper = paragraph.find(w + 'del')
+            self.assertEqual([e.text for e in wrapper.iter(w + 'delInstrText')], [' PAGE ', ' NUMPAGES '])
+            index = list(paragraph).index(wrapper)
+            paragraph.remove(wrapper)
+            for offset, child in enumerate(wrapper):
+                paragraph.insert(index + offset, child)
+            for element in first.iter():
+                element.tag = {w + 'delText': w + 't', w + 'delInstrText': w + 'instrText'}.get(element.tag, element.tag)
+            self.assertEqual(ET.tostring(first), ET.tostring(second))
+        for case in pair:
+            self.assertEqual(case['profile'], {'review': 'markup', 'comments': 'hidden'})
+            self.assertEqual({k: case['tokens'][k] for k in '123'}, {'1': 1, '2': 1, '3': 4})
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
 
     def test_footer_frame_pair_changes_only_frame_properties(self):
         import xml.etree.ElementTree as ET
@@ -636,6 +872,99 @@ class RegistryContract(unittest.TestCase):
             self.assertNotIn(number, control['tokens'])
         self.assertEqual(len(repro['assertions']), 6)
         self.assertEqual(control['assertions'][0]['marker'], 'CedarTitle01')
+
+    def test_right_stop_reproducers_differ_from_their_control_only_in_the_trigger(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        indent, markup, control = [records['tabs-right-stop-' + c] for c in ('in-right-indent', 'inline-markup', 'plain-control')]
+        w = '{' + fixtures.W + '}'
+        def document(case):
+            with ZipFile(common.ROOT / case['input']) as archive:
+                return ET.fromstring(archive.read('word/document.xml'))
+        def strip_indent(xml):
+            for ind in xml.iter(w + 'ind'): ind.attrib.pop(w + 'right', None)
+            return ET.tostring(xml)
+        plain, indented, marked = document(control), document(indent), document(markup)
+        # The indent reproducer is the control plus an 864-twip right indent on every entry.
+        self.assertEqual([i.get(w + 'right') for i in indented.iter(w + 'ind')], ['864'] * 4)
+        self.assertEqual(strip_indent(indented), ET.tostring(plain))
+        for paragraph in plain.iter(w + 'p'):
+            stops = paragraph.findall(w + 'pPr/' + w + 'tabs/' + w + 'tab')
+            self.assertEqual([(t.get(w + 'val'), t.get(w + 'pos'), t.get(w + 'leader')) for t in stops],
+                             [('left', '1296', None), ('right', '9360', 'dot')])
+            self.assertIsNone(paragraph.find(w + 'pPr/' + w + 'ind').get(w + 'right'))
+        # The markup reproducer adds one inert item per entry and nothing else.
+        self.assertEqual(len(list(marked.iter(w + 'bookmarkStart'))), 1)
+        self.assertEqual(len(list(marked.iter(w + 'noBreakHyphen'))), 1)
+        self.assertEqual(len(list(marked.iter(w + 'u'))), 2)
+        self.assertEqual(len(list(marked.iter(w + 'strike'))), 2)
+        self.assertEqual(len(list(plain.iter(w + 'tab'))), len(list(marked.iter(w + 'tab'))))
+        self.assertEqual(markup['tokens'].get('AlderTitle02'), 1)
+        self.assertEqual(markup['tokens'].get('Spillway-West'), 1)
+        for case in (indent, markup, control):
+            self.assertEqual({a['marker'] for a in case['assertions']},
+                             {'AlderTitle01', 'AlderTitle02', 'AlderTitle03', 'AlderTitle04', '3', '12', '27', '140'})
+            self.assertEqual(case['pdfTextNormalization'], 'isolated-dot-leaders-v1')
+        self.assertEqual(indent['tokens'], control['tokens'])
+
+    def test_overhanging_tail_pair_changes_only_the_suffix_text(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        ids = ['tabs-right-stop-long-tail', 'tabs-right-stop-short-tail-control']
+        w = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
+        with ZipFile(common.ROOT / records[ids[0]]['input']) as long, ZipFile(common.ROOT / records[ids[1]]['input']) as short:
+            self.assertEqual(long.namelist(), short.namelist())
+            for name in long.namelist():
+                if name != 'word/document.xml':
+                    self.assertEqual(long.read(name), short.read(name))
+            first = ET.fromstring(long.read('word/document.xml'))
+            second = ET.fromstring(short.read('word/document.xml'))
+            tail = list(first.iter(w + 't'))[-1]
+            self.assertEqual(len(tail.text.split()), 24)
+            tail.text = list(second.iter(w + 't'))[-1].text
+            self.assertEqual(ET.tostring(first), ET.tostring(second))
+
+    def test_leader_line_gap_reproducers_differ_from_their_controls_only_in_the_trigger(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        def document(case_id):
+            with ZipFile(common.ROOT / records[case_id]['input']) as archive:
+                return ET.fromstring(archive.read('word/document.xml'))
+        def without(xml, drop):
+            for parent in list(xml.iter()):
+                for child in list(parent):
+                    if drop(child): parent.remove(child)
+            return ET.tostring(xml)
+        # Field numbers: removing the field's begin, instruction, separator and end runs leaves the control.
+        field_runs = lambda e: e.tag == w + 'r' and (e.find(w + 'fldChar') is not None or e.find(w + 'instrText') is not None)
+        field = document('tabs-right-stop-pageref-field')
+        self.assertEqual([t.text for t in field.iter(w + 'instrText')], [f' PAGEREF _Birch{i} \\h ' for i in range(4)])
+        self.assertEqual(without(field, field_runs), ET.tostring(document('tabs-right-stop-pageref-control')))
+        # A bookmark inside each link is the linked case's only addition.
+        bookmarks = lambda e: e.tag in (w + 'bookmarkStart', w + 'bookmarkEnd')
+        linked = document('tabs-right-stop-linked-bookmark')
+        self.assertEqual(len([h for h in linked.iter(w + 'hyperlink') if h.find(w + 'bookmarkStart') is not None]), 4)
+        self.assertEqual(without(linked, bookmarks), ET.tostring(document('tabs-right-stop-linked-control')))
+        # The second-stop pair differs only in where its two right-hand stops sit.
+        def stops(case_id):
+            xml = document(case_id)
+            positions = [[t.get(w + 'pos') for t in p.iter(w + 'tab') if t.get(w + 'pos')] for p in xml.iter(w + 'p')]
+            for t in xml.iter(w + 'tab'): t.attrib.pop(w + 'pos', None)
+            return positions, ET.tostring(xml)
+        (indent, rest), (control, control_rest) = stops('tabs-right-stop-second-stop-in-indent'), stops('tabs-right-stop-second-stop-control')
+        self.assertEqual(rest, control_rest)
+        self.assertEqual(indent, [['1296', '8800', '9360']] * 2 + [['1296', '8800', '8900']] * 2)
+        self.assertEqual(control, [['1296', '8000', '8400']] * 2 + [['1296', '8000', '8100']] * 2)
+        for case_id in ('tabs-right-stop-pageref-field', 'tabs-right-stop-pageref-control', 'tabs-right-stop-wrapped-title',
+                        'tabs-right-stop-second-stop-in-indent', 'tabs-right-stop-second-stop-control',
+                        'tabs-right-stop-linked-bookmark', 'tabs-right-stop-linked-control'):
+            self.assertEqual({i.get(w + 'right') for i in document(case_id).iter(w + 'ind')}, {'864'})
+            self.assertEqual(records[case_id]['pdfTextNormalization'], 'isolated-dot-leaders-v1')
+        self.assertEqual(records['tabs-right-stop-linked-bookmark']['tokens'], records['tabs-right-stop-linked-control']['tokens'])
 
     def test_legacy_header_pairs_preserve_everything_except_number_representation(self):
         import xml.etree.ElementTree as ET

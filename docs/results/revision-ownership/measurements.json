@@ -1,0 +1,1815 @@
+{
+  "schema": 1,
+  "scope": "Seven new cases only; not a complete redline suite run or suite score.",
+  "suite": "redline-v16",
+  "metricVersion": 8,
+  "cases": [
+    {
+      "id": "redline-revision-owner-namesake-account",
+      "authored": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "ineligible": true,
+            "name": "libreoffice-accepted",
+            "passed": null,
+            "reason": "LibreOffice 25.8.7.3 does not resolve the schema-valid authored insertion containing a deletion: accept retains and joins the proposal to the closing paragraph, and reject retains the proposal; raw insertion/deletion, people, schema and benchmark-markup round trips remain mandatory"
+          },
+          {
+            "ineligible": true,
+            "name": "libreoffice-rejected",
+            "passed": null,
+            "reason": "LibreOffice 25.8.7.3 does not resolve the schema-valid authored insertion containing a deletion: accept retains and joins the proposal to the closing paragraph, and reject retains the proposal; raw insertion/deletion, people, schema and benchmark-markup round trips remain mandatory"
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Summit opening.",
+                "Summit closing."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "redline",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "author": "Taylor",
+              "identities": [
+                {
+                  "providerId": "AD",
+                  "userId": "S::taylor@valley.example::66666666-6666-6666-6666-666666666666"
+                }
+              ],
+              "scope": "redline",
+              "type": "people-identity",
+              "version": 1
+            },
+            "name": "assertion-people-identity",
+            "observed": [
+              {
+                "providerId": "AD",
+                "userId": "S::taylor@valley.example::66666666-6666-6666-6666-666666666666"
+              }
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "author": "Taylor",
+              "deletedBy": "Taylor",
+              "scope": "redline",
+              "text": "Summit proposed clause.",
+              "type": "pending-insertion-deletion",
+              "version": 1
+            },
+            "name": "assertion-pending-insertion-deletion",
+            "passed": true
+          },
+          {
+            "expected": {
+              "after": {
+                "author": "Taylor",
+                "status": "taken"
+              },
+              "before": {
+                "author": "Taylor",
+                "status": "taken"
+              }
+            },
+            "name": "revision-author-name-status",
+            "observed": {
+              "after": {
+                "author": "Taylor",
+                "status": "taken"
+              },
+              "before": {
+                "author": "Taylor",
+                "status": "taken"
+              }
+            },
+            "passed": true
+          }
+        ]
+      },
+      "before": {
+        "status": "measured",
+        "score": 0.0,
+        "checks": [
+          {
+            "error": {
+              "message": "Candidate has no revision identity setting",
+              "phase": "operation",
+              "type": "System.NotSupportedException"
+            },
+            "name": "conversion",
+            "passed": false
+          }
+        ]
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "ineligible": true,
+            "name": "libreoffice-accepted",
+            "passed": null,
+            "reason": "LibreOffice 25.8.7.3 does not resolve the schema-valid authored insertion containing a deletion: accept retains and joins the proposal to the closing paragraph, and reject retains the proposal; raw insertion/deletion, people, schema and benchmark-markup round trips remain mandatory"
+          },
+          {
+            "ineligible": true,
+            "name": "libreoffice-rejected",
+            "passed": null,
+            "reason": "LibreOffice 25.8.7.3 does not resolve the schema-valid authored insertion containing a deletion: accept retains and joins the proposal to the closing paragraph, and reject retains the proposal; raw insertion/deletion, people, schema and benchmark-markup round trips remain mandatory"
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Summit opening.",
+                "Summit closing."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "redline",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "author": "Taylor",
+              "identities": [
+                {
+                  "providerId": "AD",
+                  "userId": "S::taylor@valley.example::66666666-6666-6666-6666-666666666666"
+                }
+              ],
+              "scope": "redline",
+              "type": "people-identity",
+              "version": 1
+            },
+            "name": "assertion-people-identity",
+            "observed": [
+              {
+                "providerId": "AD",
+                "userId": "S::taylor@valley.example::66666666-6666-6666-6666-666666666666"
+              }
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "author": "Taylor",
+              "deletedBy": "Taylor",
+              "scope": "redline",
+              "text": "Summit proposed clause.",
+              "type": "pending-insertion-deletion",
+              "version": 1
+            },
+            "name": "assertion-pending-insertion-deletion",
+            "passed": true
+          },
+          {
+            "expected": {
+              "after": {
+                "author": "Taylor",
+                "status": "taken"
+              },
+              "before": {
+                "author": "Taylor",
+                "status": "taken"
+              }
+            },
+            "name": "revision-author-name-status",
+            "observed": {
+              "after": {
+                "author": "Taylor",
+                "status": "taken"
+              },
+              "before": {
+                "author": "Taylor",
+                "status": "taken"
+              }
+            },
+            "passed": true
+          }
+        ]
+      },
+      "initialLibreOfficeCalibration": [
+        {
+          "calibration": {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -4,2 +4,2 @@",
+              " p|body",
+              "-t|Summit closing.",
+              "+t|Summit proposed clause.Summit closing."
+            ],
+            "similarity": 0.8
+          },
+          "name": "libreoffice-accepted",
+          "passed": null,
+          "reason": "LibreOffice calibration does not match the declared eligibility"
+        },
+        {
+          "calibration": {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -4,2 +4,4 @@",
+              " p|body",
+              "+t|Summit proposed clause.",
+              "+p|body",
+              " t|Summit closing."
+            ],
+            "similarity": 0.8333333333333334
+          },
+          "name": "libreoffice-rejected",
+          "passed": null,
+          "reason": "LibreOffice calibration does not match the declared eligibility"
+        }
+      ]
+    },
+    {
+      "id": "redline-revision-owner-unattributed-name",
+      "authored": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "ineligible": true,
+            "name": "libreoffice-accepted",
+            "passed": null,
+            "reason": "LibreOffice 25.8.7.3 does not resolve the schema-valid authored insertion containing a deletion: accept retains and joins the proposal to the closing paragraph, and reject retains the proposal; raw insertion/deletion, people, schema and benchmark-markup round trips remain mandatory"
+          },
+          {
+            "ineligible": true,
+            "name": "libreoffice-rejected",
+            "passed": null,
+            "reason": "LibreOffice 25.8.7.3 does not resolve the schema-valid authored insertion containing a deletion: accept retains and joins the proposal to the closing paragraph, and reject retains the proposal; raw insertion/deletion, people, schema and benchmark-markup round trips remain mandatory"
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Summit opening.",
+                "Summit closing."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "redline",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "author": "Taylor",
+              "identities": [],
+              "scope": "redline",
+              "type": "people-identity",
+              "version": 1
+            },
+            "name": "assertion-people-identity",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "author": "Taylor",
+              "deletedBy": "Taylor",
+              "scope": "redline",
+              "text": "Summit proposed clause.",
+              "type": "pending-insertion-deletion",
+              "version": 1
+            },
+            "name": "assertion-pending-insertion-deletion",
+            "passed": true
+          },
+          {
+            "expected": {
+              "after": {
+                "author": "Taylor",
+                "status": "taken"
+              },
+              "before": {
+                "author": "Taylor",
+                "status": "taken"
+              }
+            },
+            "name": "revision-author-name-status",
+            "observed": {
+              "after": {
+                "author": "Taylor",
+                "status": "taken"
+              },
+              "before": {
+                "author": "Taylor",
+                "status": "taken"
+              }
+            },
+            "passed": true
+          }
+        ]
+      },
+      "before": {
+        "status": "measured",
+        "score": 0.0,
+        "checks": [
+          {
+            "error": {
+              "message": "Candidate has no revision identity setting",
+              "phase": "operation",
+              "type": "System.NotSupportedException"
+            },
+            "name": "conversion",
+            "passed": false
+          }
+        ]
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "ineligible": true,
+            "name": "libreoffice-accepted",
+            "passed": null,
+            "reason": "LibreOffice 25.8.7.3 does not resolve the schema-valid authored insertion containing a deletion: accept retains and joins the proposal to the closing paragraph, and reject retains the proposal; raw insertion/deletion, people, schema and benchmark-markup round trips remain mandatory"
+          },
+          {
+            "ineligible": true,
+            "name": "libreoffice-rejected",
+            "passed": null,
+            "reason": "LibreOffice 25.8.7.3 does not resolve the schema-valid authored insertion containing a deletion: accept retains and joins the proposal to the closing paragraph, and reject retains the proposal; raw insertion/deletion, people, schema and benchmark-markup round trips remain mandatory"
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Summit opening.",
+                "Summit closing."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "redline",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "author": "Taylor",
+              "identities": [],
+              "scope": "redline",
+              "type": "people-identity",
+              "version": 1
+            },
+            "name": "assertion-people-identity",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "author": "Taylor",
+              "deletedBy": "Taylor",
+              "scope": "redline",
+              "text": "Summit proposed clause.",
+              "type": "pending-insertion-deletion",
+              "version": 1
+            },
+            "name": "assertion-pending-insertion-deletion",
+            "passed": true
+          },
+          {
+            "expected": {
+              "after": {
+                "author": "Taylor",
+                "status": "taken"
+              },
+              "before": {
+                "author": "Taylor",
+                "status": "taken"
+              }
+            },
+            "name": "revision-author-name-status",
+            "observed": {
+              "after": {
+                "author": "Taylor",
+                "status": "taken"
+              },
+              "before": {
+                "author": "Taylor",
+                "status": "taken"
+              }
+            },
+            "passed": true
+          }
+        ]
+      },
+      "initialLibreOfficeCalibration": [
+        {
+          "calibration": {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -4,2 +4,2 @@",
+              " p|body",
+              "-t|Summit closing.",
+              "+t|Summit proposed clause.Summit closing."
+            ],
+            "similarity": 0.8
+          },
+          "name": "libreoffice-accepted",
+          "passed": null,
+          "reason": "LibreOffice calibration does not match the declared eligibility"
+        },
+        {
+          "calibration": {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -4,2 +4,4 @@",
+              " p|body",
+              "+t|Summit proposed clause.",
+              "+p|body",
+              " t|Summit closing."
+            ],
+            "similarity": 0.8333333333333334
+          },
+          "name": "libreoffice-rejected",
+          "passed": null,
+          "reason": "LibreOffice calibration does not match the declared eligibility"
+        }
+      ]
+    },
+    {
+      "id": "redline-revision-owner-upn-alias",
+      "authored": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Summit opening.",
+                "Summit closing."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 2,
+              "scope": "redline",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 2,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "author": "Word Taylor",
+              "identities": [
+                {
+                  "providerId": "AD",
+                  "userId": "S::TAYLOR@SUMMIT.EXAMPLE::77777777-7777-7777-7777-777777777777"
+                }
+              ],
+              "scope": "redline",
+              "type": "people-identity",
+              "version": 1
+            },
+            "name": "assertion-people-identity",
+            "observed": [
+              {
+                "providerId": "AD",
+                "userId": "S::TAYLOR@SUMMIT.EXAMPLE::77777777-7777-7777-7777-777777777777"
+              }
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          },
+          {
+            "expected": {
+              "after": {
+                "author": "Word Taylor",
+                "status": "own"
+              },
+              "before": {
+                "author": "Word Taylor",
+                "status": "own"
+              }
+            },
+            "name": "revision-author-name-status",
+            "observed": {
+              "after": {
+                "author": "Word Taylor",
+                "status": "own"
+              },
+              "before": {
+                "author": "Word Taylor",
+                "status": "own"
+              }
+            },
+            "passed": true
+          }
+        ]
+      },
+      "before": {
+        "status": "measured",
+        "score": 0.0,
+        "checks": [
+          {
+            "error": {
+              "message": "Candidate has no revision identity setting",
+              "phase": "operation",
+              "type": "System.NotSupportedException"
+            },
+            "name": "conversion",
+            "passed": false
+          }
+        ]
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Summit opening.",
+                "Summit closing."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 2,
+              "scope": "redline",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 2,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "author": "Word Taylor",
+              "identities": [
+                {
+                  "providerId": "AD",
+                  "userId": "S::TAYLOR@SUMMIT.EXAMPLE::77777777-7777-7777-7777-777777777777"
+                }
+              ],
+              "scope": "redline",
+              "type": "people-identity",
+              "version": 1
+            },
+            "name": "assertion-people-identity",
+            "observed": [
+              {
+                "providerId": "AD",
+                "userId": "S::TAYLOR@SUMMIT.EXAMPLE::77777777-7777-7777-7777-777777777777"
+              }
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          },
+          {
+            "expected": {
+              "after": {
+                "author": "Word Taylor",
+                "status": "own"
+              },
+              "before": {
+                "author": "Word Taylor",
+                "status": "own"
+              }
+            },
+            "name": "revision-author-name-status",
+            "observed": {
+              "after": {
+                "author": "Word Taylor",
+                "status": "own"
+              },
+              "before": {
+                "author": "Word Taylor",
+                "status": "own"
+              }
+            },
+            "passed": true
+          }
+        ]
+      },
+      "initialLibreOfficeCalibration": []
+    },
+    {
+      "id": "redline-revision-owner-object-id-alias",
+      "authored": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Summit opening.",
+                "Summit closing."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 2,
+              "scope": "redline",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 2,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "author": "Word Taylor",
+              "identities": [
+                {
+                  "providerId": "AD",
+                  "userId": "S::old@summit.example::55555555-5555-5555-5555-555555555555"
+                }
+              ],
+              "scope": "redline",
+              "type": "people-identity",
+              "version": 1
+            },
+            "name": "assertion-people-identity",
+            "observed": [
+              {
+                "providerId": "AD",
+                "userId": "S::old@summit.example::55555555-5555-5555-5555-555555555555"
+              }
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          },
+          {
+            "expected": {
+              "after": {
+                "author": "Word Taylor",
+                "status": "own"
+              },
+              "before": {
+                "author": "Word Taylor",
+                "status": "own"
+              }
+            },
+            "name": "revision-author-name-status",
+            "observed": {
+              "after": {
+                "author": "Word Taylor",
+                "status": "own"
+              },
+              "before": {
+                "author": "Word Taylor",
+                "status": "own"
+              }
+            },
+            "passed": true
+          }
+        ]
+      },
+      "before": {
+        "status": "measured",
+        "score": 0.0,
+        "checks": [
+          {
+            "error": {
+              "message": "Candidate has no revision identity setting",
+              "phase": "operation",
+              "type": "System.NotSupportedException"
+            },
+            "name": "conversion",
+            "passed": false
+          }
+        ]
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Summit opening.",
+                "Summit closing."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 2,
+              "scope": "redline",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 2,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "author": "Word Taylor",
+              "identities": [
+                {
+                  "providerId": "AD",
+                  "userId": "S::old@summit.example::55555555-5555-5555-5555-555555555555"
+                }
+              ],
+              "scope": "redline",
+              "type": "people-identity",
+              "version": 1
+            },
+            "name": "assertion-people-identity",
+            "observed": [
+              {
+                "providerId": "AD",
+                "userId": "S::old@summit.example::55555555-5555-5555-5555-555555555555"
+              }
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          },
+          {
+            "expected": {
+              "after": {
+                "author": "Word Taylor",
+                "status": "own"
+              },
+              "before": {
+                "author": "Word Taylor",
+                "status": "own"
+              }
+            },
+            "name": "revision-author-name-status",
+            "observed": {
+              "after": {
+                "author": "Word Taylor",
+                "status": "own"
+              },
+              "before": {
+                "author": "Word Taylor",
+                "status": "own"
+              }
+            },
+            "passed": true
+          }
+        ]
+      },
+      "initialLibreOfficeCalibration": []
+    },
+    {
+      "id": "redline-revision-owner-legacy-name-control",
+      "authored": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Summit opening.",
+                "Summit closing."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 2,
+              "scope": "redline",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 2,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "author": "Taylor",
+              "identities": [
+                {
+                  "providerId": "AD",
+                  "userId": "S::taylor@valley.example::66666666-6666-6666-6666-666666666666"
+                }
+              ],
+              "scope": "redline",
+              "type": "people-identity",
+              "version": 1
+            },
+            "name": "assertion-people-identity",
+            "observed": [
+              {
+                "providerId": "AD",
+                "userId": "S::taylor@valley.example::66666666-6666-6666-6666-666666666666"
+              }
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ]
+      },
+      "before": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Summit opening.",
+                "Summit closing."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 2,
+              "scope": "redline",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 2,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "author": "Taylor",
+              "identities": [
+                {
+                  "providerId": "AD",
+                  "userId": "S::taylor@valley.example::66666666-6666-6666-6666-666666666666"
+                }
+              ],
+              "scope": "redline",
+              "type": "people-identity",
+              "version": 1
+            },
+            "name": "assertion-people-identity",
+            "observed": [
+              {
+                "providerId": "AD",
+                "userId": "S::taylor@valley.example::66666666-6666-6666-6666-666666666666"
+              }
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ]
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Summit opening.",
+                "Summit closing."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 2,
+              "scope": "redline",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 2,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "author": "Taylor",
+              "identities": [
+                {
+                  "providerId": "AD",
+                  "userId": "S::taylor@valley.example::66666666-6666-6666-6666-666666666666"
+                }
+              ],
+              "scope": "redline",
+              "type": "people-identity",
+              "version": 1
+            },
+            "name": "assertion-people-identity",
+            "observed": [
+              {
+                "providerId": "AD",
+                "userId": "S::taylor@valley.example::66666666-6666-6666-6666-666666666666"
+              }
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ]
+      },
+      "initialLibreOfficeCalibration": []
+    },
+    {
+      "id": "redline-revision-owner-first-revision",
+      "authored": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "redline",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "author": "Taylor",
+              "identities": [
+                {
+                  "providerId": "AD",
+                  "userId": "S::taylor@summit.example::55555555-5555-5555-5555-555555555555"
+                }
+              ],
+              "scope": "redline",
+              "type": "people-identity",
+              "version": 1
+            },
+            "name": "assertion-people-identity",
+            "observed": [
+              {
+                "providerId": "AD",
+                "userId": "S::taylor@summit.example::55555555-5555-5555-5555-555555555555"
+              }
+            ],
+            "passed": true
+          },
+          {
+            "expected": {
+              "after": {
+                "author": "Taylor",
+                "status": "own"
+              },
+              "before": {
+                "author": "Taylor",
+                "status": "free"
+              }
+            },
+            "name": "revision-author-name-status",
+            "observed": {
+              "after": {
+                "author": "Taylor",
+                "status": "own"
+              },
+              "before": {
+                "author": "Taylor",
+                "status": "free"
+              }
+            },
+            "passed": true
+          }
+        ]
+      },
+      "before": {
+        "status": "measured",
+        "score": 0.0,
+        "checks": [
+          {
+            "error": {
+              "message": "Candidate has no revision identity setting",
+              "phase": "operation",
+              "type": "System.NotSupportedException"
+            },
+            "name": "conversion",
+            "passed": false
+          }
+        ]
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "redline",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "author": "Taylor",
+              "identities": [
+                {
+                  "providerId": "AD",
+                  "userId": "S::taylor@summit.example::55555555-5555-5555-5555-555555555555"
+                }
+              ],
+              "scope": "redline",
+              "type": "people-identity",
+              "version": 1
+            },
+            "name": "assertion-people-identity",
+            "observed": [
+              {
+                "providerId": "AD",
+                "userId": "S::taylor@summit.example::55555555-5555-5555-5555-555555555555"
+              }
+            ],
+            "passed": true
+          },
+          {
+            "expected": {
+              "after": {
+                "author": "Taylor",
+                "status": "own"
+              },
+              "before": {
+                "author": "Taylor",
+                "status": "free"
+              }
+            },
+            "name": "revision-author-name-status",
+            "observed": {
+              "after": {
+                "author": "Taylor",
+                "status": "own"
+              },
+              "before": {
+                "author": "Taylor",
+                "status": "free"
+              }
+            },
+            "passed": true
+          }
+        ]
+      },
+      "initialLibreOfficeCalibration": []
+    },
+    {
+      "id": "redline-revision-owner-first-comment",
+      "authored": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "redline",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "author": "Taylor",
+              "identities": [
+                {
+                  "providerId": "AD",
+                  "userId": "S::taylor@summit.example::55555555-5555-5555-5555-555555555555"
+                }
+              ],
+              "scope": "redline",
+              "type": "people-identity",
+              "version": 1
+            },
+            "name": "assertion-people-identity",
+            "observed": [
+              {
+                "providerId": "AD",
+                "userId": "S::taylor@summit.example::55555555-5555-5555-5555-555555555555"
+              }
+            ],
+            "passed": true
+          },
+          {
+            "expected": {
+              "after": {
+                "author": "Taylor",
+                "status": "own"
+              },
+              "before": {
+                "author": "Taylor",
+                "status": "free"
+              }
+            },
+            "name": "revision-author-name-status",
+            "observed": {
+              "after": {
+                "author": "Taylor",
+                "status": "own"
+              },
+              "before": {
+                "author": "Taylor",
+                "status": "free"
+              }
+            },
+            "passed": true
+          }
+        ]
+      },
+      "before": {
+        "status": "measured",
+        "score": 0.0,
+        "checks": [
+          {
+            "error": {
+              "message": "Candidate has no revision identity setting",
+              "phase": "operation",
+              "type": "System.NotSupportedException"
+            },
+            "name": "conversion",
+            "passed": false
+          }
+        ]
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "redline",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "author": "Taylor",
+              "identities": [
+                {
+                  "providerId": "AD",
+                  "userId": "S::taylor@summit.example::55555555-5555-5555-5555-555555555555"
+                }
+              ],
+              "scope": "redline",
+              "type": "people-identity",
+              "version": 1
+            },
+            "name": "assertion-people-identity",
+            "observed": [
+              {
+                "providerId": "AD",
+                "userId": "S::taylor@summit.example::55555555-5555-5555-5555-555555555555"
+              }
+            ],
+            "passed": true
+          },
+          {
+            "expected": {
+              "after": {
+                "author": "Taylor",
+                "status": "own"
+              },
+              "before": {
+                "author": "Taylor",
+                "status": "free"
+              }
+            },
+            "name": "revision-author-name-status",
+            "observed": {
+              "after": {
+                "author": "Taylor",
+                "status": "own"
+              },
+              "before": {
+                "author": "Taylor",
+                "status": "free"
+              }
+            },
+            "passed": true
+          }
+        ]
+      },
+      "initialLibreOfficeCalibration": []
+    }
+  ],
+  "authoredFixtures": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "packages": 23,
+    "findings": 0
+  },
+  "producedDiagnostics": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "packages": 14,
+    "findings": 0
+  }
+}

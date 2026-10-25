@@ -1,0 +1,3216 @@
+{
+  "schema": 1,
+  "capturedAt": "2026-10-23T23:29:50.449274+00:00",
+  "purpose": "Focused redline evidence; no full-suite score is claimed",
+  "beforeCommit": "11effdaef154e8ecb8b7c5590f71e0b34350cc99",
+  "afterCommit": "2b39093086779ee62e947464c441aaa62a2134eb",
+  "screenshotMethod": "LibreOffice 25.8.7.3 PDF exports of saved candidate outputs, rasterized at 96 dpi; x=0,y=48,width=816,height=420; unscaled page bands composed in Chromium with observed schema/registry captions",
+  "limits": [
+    "LibreOffice exposes zero revisions for the schema-valid authored property-only edits; those four tracked accept/reject text comparisons are ineligible. Four control comparisons apply.",
+    "The page rasters show LibreOffice interpretation of pending properties; exact OOXML widths are judged independently after accept/reject. These are diagnostic images, not registered Word layout references."
+  ],
+  "screenshots": {
+    "full": {
+      "file": "full.png",
+      "sha256": "8b89f47f917dfb07fab9b60a321a32765612292dc21167abcbef4803ff0c3b63",
+      "pdfSha256": {
+        "before": "0a72d57a66f3980f9a3c50fbb20261479b78a0e87d90fe1e64d63348a358cb4f",
+        "after": "e9c72208edc04e18e3aefdda635a438478f9826fc0a5e6837576b7f6d9c1dd76"
+      }
+    },
+    "full-untracked-control": {
+      "file": "full-untracked-control.png",
+      "sha256": "8e36dbfea1e1ce5dcec5fc3b44033f5fcde9ac26869e9ae67f26dde14a87a78e",
+      "pdfSha256": {
+        "before": "f58e6e698e2c32af4bc09736ad9c45a3fcc5624ca0e0751f43025a0ca955fb8f",
+        "after": "5d6b9b2855993acd55896c2946965f1d3288ed87d4ad84d5f876b8e2d8057386"
+      }
+    },
+    "partial": {
+      "file": "partial.png",
+      "sha256": "40f3d6a282f5c650625f3df6234e3e575befd9135d8263845f38ede465cadc4e",
+      "pdfSha256": {
+        "before": "4454df630733d95fe198feffa69a6eac0235c7c68d3b9e63c14931a41c915ece",
+        "after": "457fc3eec40325caaaf5a42e255d1ef42767b5e8db1555feb40e394db15a4be3"
+      }
+    },
+    "partial-untracked-control": {
+      "file": "partial-untracked-control.png",
+      "sha256": "6edf0165bf0654afa98dc79c6c36ffd80b008f8057e74aea789e4473cf9baf98",
+      "pdfSha256": {
+        "before": "d15414e3e8b09e62cb94cd3ba6303e1fa26e3d75e7b33f9648a4fa44199dd396",
+        "after": "cfb204a2b23b3b1e499cf9d671d694704a5d45935dc341fcb8bd6d2870181fb9"
+      }
+    }
+  },
+  "runs": {
+    "before": {
+      "suite": {
+        "cases": [
+          "redline-field-result-beside-edit",
+          "redline-field-result-end-control",
+          "redline-field-result-tab-control",
+          "redline-field-toc-page-numbers",
+          "redline-field-toc-entry-retitled-control",
+          "redline-field-toc-page-number-control",
+          "redline-field-shared-end-append",
+          "redline-field-shared-end-trim",
+          "redline-field-shared-end-control",
+          "redline-field-close-open-sdt",
+          "redline-field-close-open-body",
+          "redline-field-close-open-sdt-control",
+          "redline-comment-straddles-sdt",
+          "redline-comment-straddles-sdt-control",
+          "redline-comment-straddles-customxml",
+          "redline-comment-straddles-customxml-control",
+          "redline-comment-para-id-collision",
+          "redline-wrapper-para-id-copies",
+          "redline-comment-para-id-control",
+          "redline-header-bookmark-only",
+          "redline-body-bookmark-only-control",
+          "redline-bookmark-end-after-replaced-word",
+          "redline-bookmark-end-after-replaced-word-control",
+          "redline-bookmark-between-blocks-fold-text",
+          "redline-bookmark-between-blocks-fold-text-control",
+          "redline-bookmark-between-blocks-fold-table",
+          "redline-bookmark-between-blocks-fold-table-control",
+          "redline-style-id-cross-type",
+          "redline-style-id-same-type-control",
+          "redline-reject-customxml",
+          "redline-reject-math",
+          "redline-reject-ruby",
+          "redline-reject-direct-control",
+          "redline-consolidate-cell-bookmark",
+          "redline-consolidate-cell-text-control",
+          "redline-boundary-bookmark-compare-tbl",
+          "redline-boundary-bookmark-compare-tr",
+          "redline-boundary-bookmark-compare-paragraph-control",
+          "redline-boundary-bookmark-consolidate-tbl",
+          "redline-boundary-bookmark-consolidate-tr",
+          "redline-boundary-bookmark-consolidate-paragraph-control",
+          "redline-identity-bytes",
+          "redline-identity-reserialized",
+          "redline-inline-customxml",
+          "redline-inline-hyperlink-control",
+          "redline-comment-add-customxml",
+          "redline-comment-remove-sdt",
+          "redline-comment-wrapper-control",
+          "redline-reviewer-added-comment",
+          "redline-reviewer-comment-control",
+          "redline-duplicate-comment-sdt",
+          "redline-duplicate-comment-sdt-control",
+          "redline-duplicate-comment-customxml",
+          "redline-duplicate-comment-customxml-control",
+          "redline-consolidated-field-result-edit",
+          "redline-consolidated-field-prefix-delete",
+          "redline-consolidated-field-bookmark-added",
+          "redline-consolidated-field-plain-control",
+          "redline-comment-identity-reused-id",
+          "redline-comment-identity-replaced-id",
+          "redline-comment-identity-distinct-control",
+          "redline-comment-identity-reviewer-collision",
+          "redline-comment-identity-reviewer-identical",
+          "redline-comment-identity-reviewer-control",
+          "redline-removed-comment-body-edited",
+          "redline-removed-comment-body-unchanged-control",
+          "redline-consolidated-note-prefix",
+          "redline-consolidated-note-suffix-control",
+          "redline-reviewer-bookmark-paragraph-edited",
+          "redline-reviewer-bookmark-paragraph-outside-control",
+          "redline-reviewer-bookmark-sdt-edited",
+          "redline-reviewer-bookmark-sdt-outside-control",
+          "redline-reviewer-bookmark-cell-edited",
+          "redline-reviewer-bookmark-cell-outside-control",
+          "redline-reviewer-bookmark-move-and-remove",
+          "redline-reviewer-bookmark-single-remove-control",
+          "redline-bookmark-name-block-position",
+          "redline-bookmark-name-mixed-position",
+          "redline-bookmark-name-inline-extent",
+          "redline-bookmark-name-consensus-control",
+          "redline-comment-reply-id-less-root",
+          "redline-comment-reply-renumbered-root",
+          "redline-comment-reply-root-para-id-control",
+          "redline-semantic-raw-limits-strict",
+          "redline-semantic-raw-limits-transitional-control",
+          "redline-table-column-widths-full",
+          "redline-table-column-widths-full-untracked-control",
+          "redline-table-column-widths-partial",
+          "redline-table-column-widths-partial-untracked-control"
+        ],
+        "id": "redline-v11",
+        "version": 11
+      },
+      "contract": {
+        "adapter": {
+          "build": {
+            "adapterSources": {
+              "adapters/docxodus-redline/DocxBenchRedline.csproj": "83843da954515292212f473d501fb539b0627513b972e3a95f7a4ab06674902a",
+              "adapters/docxodus-redline/Program.cs": "f82fdb32d376ec5bb26719f42ee4cb97514ce8bc5cbda8b614e92df24fe89832"
+            },
+            "command": [
+              "/home/jman/.dotnet/dotnet",
+              "build",
+              "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-adapter-before/src/DocxBenchRedline.csproj",
+              "-c",
+              "Release",
+              "-o",
+              "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-adapter-before/bin",
+              "-nologo",
+              "-v",
+              "q",
+              "-p:DocxodusRoot=/home/jman/Code/tmp/Docxodus/.goal-work/issue-1352-completion"
+            ],
+            "commit": "11effdaef154e8ecb8b7c5590f71e0b34350cc99",
+            "dotnet": "10.0.301",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/DocxBenchRedline.dll": "f71d2de5d949944f0484041f79c55cd1db073729cbe10f223687963840ce636d",
+              "bin/Docxodus.dll": "7f3146692e3dd12159d4d34f188c82699fecd9fe94fe1fe4378435f384e683d9",
+              "bin/SkiaSharp.dll": "2c9bbbe1a3d0e9407894c319821b5cdcade1f302466a950a2e5d6024aee32422",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "recipeSha256": "254236d2708f52eec51388459c5ed4a4457f3d08c42a354be2a292af5855786a",
+            "schema": 1,
+            "source": "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1352-completion",
+            "tree": "aeb45e5a7ad0c8b27e77128992193195fab3538e"
+          },
+          "name": "docxodus"
+        },
+        "environment": {
+          "harness": {
+            "bench/lo_revisions.py": "a526eddb8c5022f7eb8f8feb8fbab9071b3781c87d3feae81cfc5712d1690482",
+            "bench/redline.py": "9d9e7bf02582e4d3a4e92dd9ad487588c0c66cfb2a06faec3f365b67321a0c4e",
+            "bench/redline_build.py": "254236d2708f52eec51388459c5ed4a4457f3d08c42a354be2a292af5855786a",
+            "bench/revisions.py": "504047053c333c88f8b0bd86d645bdf3794d2f0224f24a5bde19ffed7098abfc"
+          },
+          "libreoffice": {
+            "sha256": "adf468b45764b2abce53a7d91bbf3056b33f2734c5d5f628c075753e73903c43",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "libreofficePython": {
+            "sha256": "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e",
+            "version": "3.13.7"
+          },
+          "validator": {
+            "dotnet": "10.0.301",
+            "fileFormat": "Microsoft365",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/OoxmlValidator.dll": "f9e00c50ed1d3f0a80c35fa58fa415939c0b4aece4fe8dc402977d38e026f9a2",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "package": "DocumentFormat.OpenXml 3.5.1"
+          }
+        },
+        "metric": {
+          "caseScore": "100 when every applicable mandatory check passes, otherwise 0",
+          "engines": [
+            "bench-markup",
+            "libreoffice-text"
+          ],
+          "libreofficeEligibility": "a LibreOffice comparison applies only when the authored redline passes it",
+          "revisionRegistry": "table width operations must report the declared public registry count and match independent resolved width assertions",
+          "semanticPreflight": "declared identity cases must report zero changes at raw limits with and without the package supplement",
+          "suiteScore": "mean of category means over every required case",
+          "validity": "no OpenXmlValidator finding (id, part, description) occurs more often than in any input",
+          "version": 3,
+          "view": 1
+        },
+        "suiteDigest": "4b0226461e5d50b33b787a298516bd473f38f0df389c91080a6d3d16361f1e97"
+      },
+      "summary": {
+        "byKind": {
+          "control": {
+            "measured": 2,
+            "passed": 2
+          },
+          "reproducer": {
+            "measured": 2,
+            "passed": 0
+          }
+        },
+        "categoryMeans": {
+          "tables": 50.0
+        },
+        "complete": false,
+        "libreofficeComparisons": {
+          "applicable": 4,
+          "total": 8
+        },
+        "measured": 4,
+        "passRate": 0.02247191011235955,
+        "required": 89,
+        "score": null
+      },
+      "cases": [
+        {
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+11effdaef154e8ecb8b7c5590f71e0b34350cc99",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "261ab632f3561e4340dfad18df1229a288ca7bdfd95507a535b7ee0fd85df4c5",
+            "protocol": 1,
+            "revisionRegistryCount": 1,
+            "status": "ok"
+          },
+          "category": "tables",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-before-calibrated/redline-table-column-widths-full/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full/updated.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 exposes zero revisions in the schema-valid authored table-property-only width edit; independent resolved widths, registry count and schema checks remain mandatory"
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-before-calibrated/redline-table-column-widths-full/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full/source.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 exposes zero revisions in the schema-valid authored table-property-only width edit; independent resolved widths, registry count and schema checks remain mandatory"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [
+                {
+                  "allowed": 0,
+                  "count": 1,
+                  "description": "The 'http://schemas.openxmlformats.org/wordprocessingml/2006/main:author' attribute is not declared.",
+                  "id": "Sch_UndeclaredAttribute",
+                  "part": "/word/document.xml"
+                },
+                {
+                  "allowed": 0,
+                  "count": 1,
+                  "description": "The 'http://schemas.openxmlformats.org/wordprocessingml/2006/main:date' attribute is not declared.",
+                  "id": "Sch_UndeclaredAttribute",
+                  "part": "/word/document.xml"
+                }
+              ],
+              "passed": false
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Gauge register column widths.",
+                  "North gauge",
+                  "East gauge",
+                  "South gauge",
+                  "West gauge",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2600,
+                    3000
+                  ],
+                  [
+                    2600,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2600,
+                  3000
+                ],
+                "scope": "accepted",
+                "table": 5600,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2600,
+                    3000
+                  ],
+                  [
+                    2600,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2600,
+                  3000
+                ],
+                "table": 5600
+              },
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2400,
+                    3200
+                  ],
+                  [
+                    2400,
+                    3200
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3200
+                ],
+                "scope": "rejected",
+                "table": 5600,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2400,
+                    3200
+                  ],
+                  [
+                    2400,
+                    3200
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3200
+                ],
+                "table": 5600
+              },
+              "passed": true
+            },
+            {
+              "expected": 1,
+              "name": "revision-registry-count",
+              "observed": 1,
+              "passed": true
+            }
+          ],
+          "id": "redline-table-column-widths-full",
+          "issue": "JSv4/Docxodus#1322",
+          "kind": "reproducer",
+          "operation": "table-widths",
+          "score": 0.0,
+          "status": "measured"
+        },
+        {
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+11effdaef154e8ecb8b7c5590f71e0b34350cc99",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "857ff6369299515e39ae5331de9a0f1b50ffdd985fe9632f5fb3f01a7bde4716",
+            "protocol": 1,
+            "revisionRegistryCount": 0,
+            "status": "ok"
+          },
+          "category": "tables",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full-untracked-control/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-before-calibrated/redline-table-column-widths-full-untracked-control/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full-untracked-control/updated.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full-untracked-control/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-before-calibrated/redline-table-column-widths-full-untracked-control/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full-untracked-control/updated.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Gauge register column widths.",
+                  "North gauge",
+                  "East gauge",
+                  "South gauge",
+                  "West gauge",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2600,
+                    3000
+                  ],
+                  [
+                    2600,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2600,
+                  3000
+                ],
+                "scope": "accepted",
+                "table": 5600,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2600,
+                    3000
+                  ],
+                  [
+                    2600,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2600,
+                  3000
+                ],
+                "table": 5600
+              },
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2600,
+                    3000
+                  ],
+                  [
+                    2600,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2600,
+                  3000
+                ],
+                "scope": "rejected",
+                "table": 5600,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2600,
+                    3000
+                  ],
+                  [
+                    2600,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2600,
+                  3000
+                ],
+                "table": 5600
+              },
+              "passed": true
+            },
+            {
+              "expected": 0,
+              "name": "revision-registry-count",
+              "observed": 0,
+              "passed": true
+            }
+          ],
+          "id": "redline-table-column-widths-full-untracked-control",
+          "issue": "JSv4/Docxodus#1322",
+          "kind": "control",
+          "operation": "table-widths",
+          "score": 100.0,
+          "status": "measured"
+        },
+        {
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+11effdaef154e8ecb8b7c5590f71e0b34350cc99",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "b794db9dfc253e109c9e8a1d1461857d3dd0c84d2c7c7c2c39fefa72f1bcc73e",
+            "protocol": 1,
+            "revisionRegistryCount": 3,
+            "status": "ok"
+          },
+          "category": "tables",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-before-calibrated/redline-table-column-widths-partial/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial/updated.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 exposes zero revisions in the schema-valid authored table-property-only width edit; independent resolved widths, registry count and schema checks remain mandatory"
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-before-calibrated/redline-table-column-widths-partial/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial/source.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 exposes zero revisions in the schema-valid authored table-property-only width edit; independent resolved widths, registry count and schema checks remain mandatory"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [
+                {
+                  "allowed": 0,
+                  "count": 1,
+                  "description": "The 'http://schemas.openxmlformats.org/wordprocessingml/2006/main:author' attribute is not declared.",
+                  "id": "Sch_UndeclaredAttribute",
+                  "part": "/word/document.xml"
+                },
+                {
+                  "allowed": 0,
+                  "count": 1,
+                  "description": "The 'http://schemas.openxmlformats.org/wordprocessingml/2006/main:date' attribute is not declared.",
+                  "id": "Sch_UndeclaredAttribute",
+                  "part": "/word/document.xml"
+                }
+              ],
+              "passed": false
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Gauge register column widths.",
+                  "North gauge",
+                  "East gauge",
+                  "South gauge",
+                  "West gauge",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2400,
+                    3000
+                  ],
+                  [
+                    2400,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3000
+                ],
+                "scope": "accepted",
+                "table": 5400,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2400,
+                    3000
+                  ],
+                  [
+                    2400,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3000
+                ],
+                "table": 5400
+              },
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2400,
+                    3200
+                  ],
+                  [
+                    2400,
+                    3200
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3200
+                ],
+                "scope": "rejected",
+                "table": 5600,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2400,
+                    3200
+                  ],
+                  [
+                    2400,
+                    3200
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3200
+                ],
+                "table": 5600
+              },
+              "passed": true
+            },
+            {
+              "expected": 1,
+              "name": "revision-registry-count",
+              "observed": 3,
+              "passed": false
+            }
+          ],
+          "id": "redline-table-column-widths-partial",
+          "issue": "JSv4/Docxodus#1322",
+          "kind": "reproducer",
+          "operation": "table-widths",
+          "score": 0.0,
+          "status": "measured"
+        },
+        {
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+11effdaef154e8ecb8b7c5590f71e0b34350cc99",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "f2b486e56e21ef1de0b1b62d6b9919a1c4fd64c41913bfe76ff9da0eae1d75de",
+            "protocol": 1,
+            "revisionRegistryCount": 0,
+            "status": "ok"
+          },
+          "category": "tables",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial-untracked-control/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-before-calibrated/redline-table-column-widths-partial-untracked-control/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial-untracked-control/updated.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial-untracked-control/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-before-calibrated/redline-table-column-widths-partial-untracked-control/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial-untracked-control/updated.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Gauge register column widths.",
+                  "North gauge",
+                  "East gauge",
+                  "South gauge",
+                  "West gauge",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2400,
+                    3000
+                  ],
+                  [
+                    2400,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3000
+                ],
+                "scope": "accepted",
+                "table": 5400,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2400,
+                    3000
+                  ],
+                  [
+                    2400,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3000
+                ],
+                "table": 5400
+              },
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2400,
+                    3000
+                  ],
+                  [
+                    2400,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3000
+                ],
+                "scope": "rejected",
+                "table": 5400,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2400,
+                    3000
+                  ],
+                  [
+                    2400,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3000
+                ],
+                "table": 5400
+              },
+              "passed": true
+            },
+            {
+              "expected": 0,
+              "name": "revision-registry-count",
+              "observed": 0,
+              "passed": true
+            }
+          ],
+          "id": "redline-table-column-widths-partial-untracked-control",
+          "issue": "JSv4/Docxodus#1322",
+          "kind": "control",
+          "operation": "table-widths",
+          "score": 100.0,
+          "status": "measured"
+        }
+      ]
+    },
+    "after": {
+      "suite": {
+        "cases": [
+          "redline-field-result-beside-edit",
+          "redline-field-result-end-control",
+          "redline-field-result-tab-control",
+          "redline-field-toc-page-numbers",
+          "redline-field-toc-entry-retitled-control",
+          "redline-field-toc-page-number-control",
+          "redline-field-shared-end-append",
+          "redline-field-shared-end-trim",
+          "redline-field-shared-end-control",
+          "redline-field-close-open-sdt",
+          "redline-field-close-open-body",
+          "redline-field-close-open-sdt-control",
+          "redline-comment-straddles-sdt",
+          "redline-comment-straddles-sdt-control",
+          "redline-comment-straddles-customxml",
+          "redline-comment-straddles-customxml-control",
+          "redline-comment-para-id-collision",
+          "redline-wrapper-para-id-copies",
+          "redline-comment-para-id-control",
+          "redline-header-bookmark-only",
+          "redline-body-bookmark-only-control",
+          "redline-bookmark-end-after-replaced-word",
+          "redline-bookmark-end-after-replaced-word-control",
+          "redline-bookmark-between-blocks-fold-text",
+          "redline-bookmark-between-blocks-fold-text-control",
+          "redline-bookmark-between-blocks-fold-table",
+          "redline-bookmark-between-blocks-fold-table-control",
+          "redline-style-id-cross-type",
+          "redline-style-id-same-type-control",
+          "redline-reject-customxml",
+          "redline-reject-math",
+          "redline-reject-ruby",
+          "redline-reject-direct-control",
+          "redline-consolidate-cell-bookmark",
+          "redline-consolidate-cell-text-control",
+          "redline-boundary-bookmark-compare-tbl",
+          "redline-boundary-bookmark-compare-tr",
+          "redline-boundary-bookmark-compare-paragraph-control",
+          "redline-boundary-bookmark-consolidate-tbl",
+          "redline-boundary-bookmark-consolidate-tr",
+          "redline-boundary-bookmark-consolidate-paragraph-control",
+          "redline-identity-bytes",
+          "redline-identity-reserialized",
+          "redline-inline-customxml",
+          "redline-inline-hyperlink-control",
+          "redline-comment-add-customxml",
+          "redline-comment-remove-sdt",
+          "redline-comment-wrapper-control",
+          "redline-reviewer-added-comment",
+          "redline-reviewer-comment-control",
+          "redline-duplicate-comment-sdt",
+          "redline-duplicate-comment-sdt-control",
+          "redline-duplicate-comment-customxml",
+          "redline-duplicate-comment-customxml-control",
+          "redline-consolidated-field-result-edit",
+          "redline-consolidated-field-prefix-delete",
+          "redline-consolidated-field-bookmark-added",
+          "redline-consolidated-field-plain-control",
+          "redline-comment-identity-reused-id",
+          "redline-comment-identity-replaced-id",
+          "redline-comment-identity-distinct-control",
+          "redline-comment-identity-reviewer-collision",
+          "redline-comment-identity-reviewer-identical",
+          "redline-comment-identity-reviewer-control",
+          "redline-removed-comment-body-edited",
+          "redline-removed-comment-body-unchanged-control",
+          "redline-consolidated-note-prefix",
+          "redline-consolidated-note-suffix-control",
+          "redline-reviewer-bookmark-paragraph-edited",
+          "redline-reviewer-bookmark-paragraph-outside-control",
+          "redline-reviewer-bookmark-sdt-edited",
+          "redline-reviewer-bookmark-sdt-outside-control",
+          "redline-reviewer-bookmark-cell-edited",
+          "redline-reviewer-bookmark-cell-outside-control",
+          "redline-reviewer-bookmark-move-and-remove",
+          "redline-reviewer-bookmark-single-remove-control",
+          "redline-bookmark-name-block-position",
+          "redline-bookmark-name-mixed-position",
+          "redline-bookmark-name-inline-extent",
+          "redline-bookmark-name-consensus-control",
+          "redline-comment-reply-id-less-root",
+          "redline-comment-reply-renumbered-root",
+          "redline-comment-reply-root-para-id-control",
+          "redline-semantic-raw-limits-strict",
+          "redline-semantic-raw-limits-transitional-control",
+          "redline-table-column-widths-full",
+          "redline-table-column-widths-full-untracked-control",
+          "redline-table-column-widths-partial",
+          "redline-table-column-widths-partial-untracked-control"
+        ],
+        "id": "redline-v11",
+        "version": 11
+      },
+      "contract": {
+        "adapter": {
+          "build": {
+            "adapterSources": {
+              "adapters/docxodus-redline/DocxBenchRedline.csproj": "83843da954515292212f473d501fb539b0627513b972e3a95f7a4ab06674902a",
+              "adapters/docxodus-redline/Program.cs": "f82fdb32d376ec5bb26719f42ee4cb97514ce8bc5cbda8b614e92df24fe89832"
+            },
+            "command": [
+              "/home/jman/.dotnet/dotnet",
+              "build",
+              "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-adapter-after/src/DocxBenchRedline.csproj",
+              "-c",
+              "Release",
+              "-o",
+              "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-adapter-after/bin",
+              "-nologo",
+              "-v",
+              "q",
+              "-p:DocxodusRoot=/home/jman/Code/tmp/Docxodus/.goal-work/issue-1322-completion"
+            ],
+            "commit": "2b39093086779ee62e947464c441aaa62a2134eb",
+            "dotnet": "10.0.301",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/DocxBenchRedline.dll": "c2ed741c838a9f8c8db97a896fa6ab59b3427c2e4adf2df0bb4000799474b9a9",
+              "bin/Docxodus.dll": "103308e797b218374d6f834b574f108a71b8506215fd6cb66af6c3a23efaea0d",
+              "bin/SkiaSharp.dll": "2c9bbbe1a3d0e9407894c319821b5cdcade1f302466a950a2e5d6024aee32422",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "recipeSha256": "254236d2708f52eec51388459c5ed4a4457f3d08c42a354be2a292af5855786a",
+            "schema": 1,
+            "source": "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1322-completion",
+            "tree": "3562b2458569227152e9221cc490381c924f37cc"
+          },
+          "name": "docxodus"
+        },
+        "environment": {
+          "harness": {
+            "bench/lo_revisions.py": "a526eddb8c5022f7eb8f8feb8fbab9071b3781c87d3feae81cfc5712d1690482",
+            "bench/redline.py": "9d9e7bf02582e4d3a4e92dd9ad487588c0c66cfb2a06faec3f365b67321a0c4e",
+            "bench/redline_build.py": "254236d2708f52eec51388459c5ed4a4457f3d08c42a354be2a292af5855786a",
+            "bench/revisions.py": "504047053c333c88f8b0bd86d645bdf3794d2f0224f24a5bde19ffed7098abfc"
+          },
+          "libreoffice": {
+            "sha256": "adf468b45764b2abce53a7d91bbf3056b33f2734c5d5f628c075753e73903c43",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "libreofficePython": {
+            "sha256": "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e",
+            "version": "3.13.7"
+          },
+          "validator": {
+            "dotnet": "10.0.301",
+            "fileFormat": "Microsoft365",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/OoxmlValidator.dll": "f9e00c50ed1d3f0a80c35fa58fa415939c0b4aece4fe8dc402977d38e026f9a2",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "package": "DocumentFormat.OpenXml 3.5.1"
+          }
+        },
+        "metric": {
+          "caseScore": "100 when every applicable mandatory check passes, otherwise 0",
+          "engines": [
+            "bench-markup",
+            "libreoffice-text"
+          ],
+          "libreofficeEligibility": "a LibreOffice comparison applies only when the authored redline passes it",
+          "revisionRegistry": "table width operations must report the declared public registry count and match independent resolved width assertions",
+          "semanticPreflight": "declared identity cases must report zero changes at raw limits with and without the package supplement",
+          "suiteScore": "mean of category means over every required case",
+          "validity": "no OpenXmlValidator finding (id, part, description) occurs more often than in any input",
+          "version": 3,
+          "view": 1
+        },
+        "suiteDigest": "4b0226461e5d50b33b787a298516bd473f38f0df389c91080a6d3d16361f1e97"
+      },
+      "summary": {
+        "byKind": {
+          "control": {
+            "measured": 2,
+            "passed": 2
+          },
+          "reproducer": {
+            "measured": 2,
+            "passed": 2
+          }
+        },
+        "categoryMeans": {
+          "tables": 100.0
+        },
+        "complete": false,
+        "libreofficeComparisons": {
+          "applicable": 4,
+          "total": 8
+        },
+        "measured": 4,
+        "passRate": 0.0449438202247191,
+        "required": 89,
+        "score": null
+      },
+      "cases": [
+        {
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+2b39093086779ee62e947464c441aaa62a2134eb",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "e1056fb645eab3a9b456f5cf619e15507c04fd735e11b7031a5e628623c46748",
+            "protocol": 1,
+            "revisionRegistryCount": 1,
+            "status": "ok"
+          },
+          "category": "tables",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-after-calibrated/redline-table-column-widths-full/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full/updated.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 exposes zero revisions in the schema-valid authored table-property-only width edit; independent resolved widths, registry count and schema checks remain mandatory"
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-after-calibrated/redline-table-column-widths-full/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full/source.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 exposes zero revisions in the schema-valid authored table-property-only width edit; independent resolved widths, registry count and schema checks remain mandatory"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Gauge register column widths.",
+                  "North gauge",
+                  "East gauge",
+                  "South gauge",
+                  "West gauge",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2600,
+                    3000
+                  ],
+                  [
+                    2600,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2600,
+                  3000
+                ],
+                "scope": "accepted",
+                "table": 5600,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2600,
+                    3000
+                  ],
+                  [
+                    2600,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2600,
+                  3000
+                ],
+                "table": 5600
+              },
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2400,
+                    3200
+                  ],
+                  [
+                    2400,
+                    3200
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3200
+                ],
+                "scope": "rejected",
+                "table": 5600,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2400,
+                    3200
+                  ],
+                  [
+                    2400,
+                    3200
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3200
+                ],
+                "table": 5600
+              },
+              "passed": true
+            },
+            {
+              "expected": 1,
+              "name": "revision-registry-count",
+              "observed": 1,
+              "passed": true
+            }
+          ],
+          "id": "redline-table-column-widths-full",
+          "issue": "JSv4/Docxodus#1322",
+          "kind": "reproducer",
+          "operation": "table-widths",
+          "score": 100.0,
+          "status": "measured"
+        },
+        {
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+2b39093086779ee62e947464c441aaa62a2134eb",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "857ff6369299515e39ae5331de9a0f1b50ffdd985fe9632f5fb3f01a7bde4716",
+            "protocol": 1,
+            "revisionRegistryCount": 0,
+            "status": "ok"
+          },
+          "category": "tables",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full-untracked-control/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-after-calibrated/redline-table-column-widths-full-untracked-control/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full-untracked-control/updated.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full-untracked-control/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-after-calibrated/redline-table-column-widths-full-untracked-control/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full-untracked-control/updated.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Gauge register column widths.",
+                  "North gauge",
+                  "East gauge",
+                  "South gauge",
+                  "West gauge",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2600,
+                    3000
+                  ],
+                  [
+                    2600,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2600,
+                  3000
+                ],
+                "scope": "accepted",
+                "table": 5600,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2600,
+                    3000
+                  ],
+                  [
+                    2600,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2600,
+                  3000
+                ],
+                "table": 5600
+              },
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2600,
+                    3000
+                  ],
+                  [
+                    2600,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2600,
+                  3000
+                ],
+                "scope": "rejected",
+                "table": 5600,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2600,
+                    3000
+                  ],
+                  [
+                    2600,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2600,
+                  3000
+                ],
+                "table": 5600
+              },
+              "passed": true
+            },
+            {
+              "expected": 0,
+              "name": "revision-registry-count",
+              "observed": 0,
+              "passed": true
+            }
+          ],
+          "id": "redline-table-column-widths-full-untracked-control",
+          "issue": "JSv4/Docxodus#1322",
+          "kind": "control",
+          "operation": "table-widths",
+          "score": 100.0,
+          "status": "measured"
+        },
+        {
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+2b39093086779ee62e947464c441aaa62a2134eb",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "aa135d257a313c065139a490426ed8b432c821f38e1bde6bd0ce56fa867ac1ef",
+            "protocol": 1,
+            "revisionRegistryCount": 1,
+            "status": "ok"
+          },
+          "category": "tables",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-after-calibrated/redline-table-column-widths-partial/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial/updated.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 exposes zero revisions in the schema-valid authored table-property-only width edit; independent resolved widths, registry count and schema checks remain mandatory"
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-after-calibrated/redline-table-column-widths-partial/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial/source.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 exposes zero revisions in the schema-valid authored table-property-only width edit; independent resolved widths, registry count and schema checks remain mandatory"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Gauge register column widths.",
+                  "North gauge",
+                  "East gauge",
+                  "South gauge",
+                  "West gauge",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2400,
+                    3000
+                  ],
+                  [
+                    2400,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3000
+                ],
+                "scope": "accepted",
+                "table": 5400,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2400,
+                    3000
+                  ],
+                  [
+                    2400,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3000
+                ],
+                "table": 5400
+              },
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2400,
+                    3200
+                  ],
+                  [
+                    2400,
+                    3200
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3200
+                ],
+                "scope": "rejected",
+                "table": 5600,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2400,
+                    3200
+                  ],
+                  [
+                    2400,
+                    3200
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3200
+                ],
+                "table": 5600
+              },
+              "passed": true
+            },
+            {
+              "expected": 1,
+              "name": "revision-registry-count",
+              "observed": 1,
+              "passed": true
+            }
+          ],
+          "id": "redline-table-column-widths-partial",
+          "issue": "JSv4/Docxodus#1322",
+          "kind": "reproducer",
+          "operation": "table-widths",
+          "score": 100.0,
+          "status": "measured"
+        },
+        {
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+2b39093086779ee62e947464c441aaa62a2134eb",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "f2b486e56e21ef1de0b1b62d6b9919a1c4fd64c41913bfe76ff9da0eae1d75de",
+            "protocol": 1,
+            "revisionRegistryCount": 0,
+            "status": "ok"
+          },
+          "category": "tables",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial-untracked-control/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-after-calibrated/redline-table-column-widths-partial-untracked-control/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial-untracked-control/updated.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial-untracked-control/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-after-calibrated/redline-table-column-widths-partial-untracked-control/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial-untracked-control/updated.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Gauge register column widths.",
+                  "North gauge",
+                  "East gauge",
+                  "South gauge",
+                  "West gauge",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2400,
+                    3000
+                  ],
+                  [
+                    2400,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3000
+                ],
+                "scope": "accepted",
+                "table": 5400,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2400,
+                    3000
+                  ],
+                  [
+                    2400,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3000
+                ],
+                "table": 5400
+              },
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2400,
+                    3000
+                  ],
+                  [
+                    2400,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3000
+                ],
+                "scope": "rejected",
+                "table": 5400,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2400,
+                    3000
+                  ],
+                  [
+                    2400,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3000
+                ],
+                "table": 5400
+              },
+              "passed": true
+            },
+            {
+              "expected": 0,
+              "name": "revision-registry-count",
+              "observed": 0,
+              "passed": true
+            }
+          ],
+          "id": "redline-table-column-widths-partial-untracked-control",
+          "issue": "JSv4/Docxodus#1322",
+          "kind": "control",
+          "operation": "table-widths",
+          "score": 100.0,
+          "status": "measured"
+        }
+      ]
+    },
+    "calibration": {
+      "suite": {
+        "cases": [
+          "redline-field-result-beside-edit",
+          "redline-field-result-end-control",
+          "redline-field-result-tab-control",
+          "redline-field-toc-page-numbers",
+          "redline-field-toc-entry-retitled-control",
+          "redline-field-toc-page-number-control",
+          "redline-field-shared-end-append",
+          "redline-field-shared-end-trim",
+          "redline-field-shared-end-control",
+          "redline-field-close-open-sdt",
+          "redline-field-close-open-body",
+          "redline-field-close-open-sdt-control",
+          "redline-comment-straddles-sdt",
+          "redline-comment-straddles-sdt-control",
+          "redline-comment-straddles-customxml",
+          "redline-comment-straddles-customxml-control",
+          "redline-comment-para-id-collision",
+          "redline-wrapper-para-id-copies",
+          "redline-comment-para-id-control",
+          "redline-header-bookmark-only",
+          "redline-body-bookmark-only-control",
+          "redline-bookmark-end-after-replaced-word",
+          "redline-bookmark-end-after-replaced-word-control",
+          "redline-bookmark-between-blocks-fold-text",
+          "redline-bookmark-between-blocks-fold-text-control",
+          "redline-bookmark-between-blocks-fold-table",
+          "redline-bookmark-between-blocks-fold-table-control",
+          "redline-style-id-cross-type",
+          "redline-style-id-same-type-control",
+          "redline-reject-customxml",
+          "redline-reject-math",
+          "redline-reject-ruby",
+          "redline-reject-direct-control",
+          "redline-consolidate-cell-bookmark",
+          "redline-consolidate-cell-text-control",
+          "redline-boundary-bookmark-compare-tbl",
+          "redline-boundary-bookmark-compare-tr",
+          "redline-boundary-bookmark-compare-paragraph-control",
+          "redline-boundary-bookmark-consolidate-tbl",
+          "redline-boundary-bookmark-consolidate-tr",
+          "redline-boundary-bookmark-consolidate-paragraph-control",
+          "redline-identity-bytes",
+          "redline-identity-reserialized",
+          "redline-inline-customxml",
+          "redline-inline-hyperlink-control",
+          "redline-comment-add-customxml",
+          "redline-comment-remove-sdt",
+          "redline-comment-wrapper-control",
+          "redline-reviewer-added-comment",
+          "redline-reviewer-comment-control",
+          "redline-duplicate-comment-sdt",
+          "redline-duplicate-comment-sdt-control",
+          "redline-duplicate-comment-customxml",
+          "redline-duplicate-comment-customxml-control",
+          "redline-consolidated-field-result-edit",
+          "redline-consolidated-field-prefix-delete",
+          "redline-consolidated-field-bookmark-added",
+          "redline-consolidated-field-plain-control",
+          "redline-comment-identity-reused-id",
+          "redline-comment-identity-replaced-id",
+          "redline-comment-identity-distinct-control",
+          "redline-comment-identity-reviewer-collision",
+          "redline-comment-identity-reviewer-identical",
+          "redline-comment-identity-reviewer-control",
+          "redline-removed-comment-body-edited",
+          "redline-removed-comment-body-unchanged-control",
+          "redline-consolidated-note-prefix",
+          "redline-consolidated-note-suffix-control",
+          "redline-reviewer-bookmark-paragraph-edited",
+          "redline-reviewer-bookmark-paragraph-outside-control",
+          "redline-reviewer-bookmark-sdt-edited",
+          "redline-reviewer-bookmark-sdt-outside-control",
+          "redline-reviewer-bookmark-cell-edited",
+          "redline-reviewer-bookmark-cell-outside-control",
+          "redline-reviewer-bookmark-move-and-remove",
+          "redline-reviewer-bookmark-single-remove-control",
+          "redline-bookmark-name-block-position",
+          "redline-bookmark-name-mixed-position",
+          "redline-bookmark-name-inline-extent",
+          "redline-bookmark-name-consensus-control",
+          "redline-comment-reply-id-less-root",
+          "redline-comment-reply-renumbered-root",
+          "redline-comment-reply-root-para-id-control",
+          "redline-semantic-raw-limits-strict",
+          "redline-semantic-raw-limits-transitional-control",
+          "redline-table-column-widths-full",
+          "redline-table-column-widths-full-untracked-control",
+          "redline-table-column-widths-partial",
+          "redline-table-column-widths-partial-untracked-control"
+        ],
+        "id": "redline-v11",
+        "version": 11
+      },
+      "contract": {
+        "adapter": {
+          "name": "authored"
+        },
+        "environment": {
+          "harness": {
+            "bench/lo_revisions.py": "a526eddb8c5022f7eb8f8feb8fbab9071b3781c87d3feae81cfc5712d1690482",
+            "bench/redline.py": "9d9e7bf02582e4d3a4e92dd9ad487588c0c66cfb2a06faec3f365b67321a0c4e",
+            "bench/redline_build.py": "254236d2708f52eec51388459c5ed4a4457f3d08c42a354be2a292af5855786a",
+            "bench/revisions.py": "504047053c333c88f8b0bd86d645bdf3794d2f0224f24a5bde19ffed7098abfc"
+          },
+          "libreoffice": {
+            "sha256": "adf468b45764b2abce53a7d91bbf3056b33f2734c5d5f628c075753e73903c43",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "libreofficePython": {
+            "sha256": "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e",
+            "version": "3.13.7"
+          },
+          "validator": {
+            "dotnet": "10.0.301",
+            "fileFormat": "Microsoft365",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/OoxmlValidator.dll": "f9e00c50ed1d3f0a80c35fa58fa415939c0b4aece4fe8dc402977d38e026f9a2",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "package": "DocumentFormat.OpenXml 3.5.1"
+          }
+        },
+        "metric": {
+          "caseScore": "100 when every applicable mandatory check passes, otherwise 0",
+          "engines": [
+            "bench-markup",
+            "libreoffice-text"
+          ],
+          "libreofficeEligibility": "a LibreOffice comparison applies only when the authored redline passes it",
+          "revisionRegistry": "table width operations must report the declared public registry count and match independent resolved width assertions",
+          "semanticPreflight": "declared identity cases must report zero changes at raw limits with and without the package supplement",
+          "suiteScore": "mean of category means over every required case",
+          "validity": "no OpenXmlValidator finding (id, part, description) occurs more often than in any input",
+          "version": 3,
+          "view": 1
+        },
+        "suiteDigest": "4b0226461e5d50b33b787a298516bd473f38f0df389c91080a6d3d16361f1e97"
+      },
+      "summary": {
+        "byKind": {
+          "control": {
+            "measured": 2,
+            "passed": 2
+          },
+          "reproducer": {
+            "measured": 2,
+            "passed": 2
+          }
+        },
+        "categoryMeans": {
+          "tables": 100.0
+        },
+        "complete": false,
+        "libreofficeComparisons": {
+          "applicable": 4,
+          "total": 8
+        },
+        "measured": 4,
+        "passRate": 0.0449438202247191,
+        "required": 89,
+        "score": null
+      },
+      "cases": [
+        {
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "80ebf9949e24a4cacbcaaabd5e000b2d5f3f432a74a59d9105d1f2b515b8b302",
+            "status": "ok"
+          },
+          "category": "tables",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-calibration/redline-table-column-widths-full/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full/updated.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 exposes zero revisions in the schema-valid authored table-property-only width edit; independent resolved widths, registry count and schema checks remain mandatory"
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-calibration/redline-table-column-widths-full/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full/source.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 exposes zero revisions in the schema-valid authored table-property-only width edit; independent resolved widths, registry count and schema checks remain mandatory"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Gauge register column widths.",
+                  "North gauge",
+                  "East gauge",
+                  "South gauge",
+                  "West gauge",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2600,
+                    3000
+                  ],
+                  [
+                    2600,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2600,
+                  3000
+                ],
+                "scope": "accepted",
+                "table": 5600,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2600,
+                    3000
+                  ],
+                  [
+                    2600,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2600,
+                  3000
+                ],
+                "table": 5600
+              },
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2400,
+                    3200
+                  ],
+                  [
+                    2400,
+                    3200
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3200
+                ],
+                "scope": "rejected",
+                "table": 5600,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2400,
+                    3200
+                  ],
+                  [
+                    2400,
+                    3200
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3200
+                ],
+                "table": 5600
+              },
+              "passed": true
+            },
+            {
+              "expected": 1,
+              "name": "revision-registry-count",
+              "observed": 1,
+              "passed": true
+            }
+          ],
+          "id": "redline-table-column-widths-full",
+          "issue": "JSv4/Docxodus#1322",
+          "kind": "reproducer",
+          "operation": "table-widths",
+          "score": 100.0,
+          "status": "measured"
+        },
+        {
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "887f2bf42def4cffff64aad88ac9fa6ce7dc66ce6d2b9fee75d5d820ac6a2318",
+            "status": "ok"
+          },
+          "category": "tables",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full-untracked-control/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-calibration/redline-table-column-widths-full-untracked-control/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full-untracked-control/updated.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full-untracked-control/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-calibration/redline-table-column-widths-full-untracked-control/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full-untracked-control/updated.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Gauge register column widths.",
+                  "North gauge",
+                  "East gauge",
+                  "South gauge",
+                  "West gauge",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2600,
+                    3000
+                  ],
+                  [
+                    2600,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2600,
+                  3000
+                ],
+                "scope": "accepted",
+                "table": 5600,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2600,
+                    3000
+                  ],
+                  [
+                    2600,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2600,
+                  3000
+                ],
+                "table": 5600
+              },
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2600,
+                    3000
+                  ],
+                  [
+                    2600,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2600,
+                  3000
+                ],
+                "scope": "rejected",
+                "table": 5600,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2600,
+                    3000
+                  ],
+                  [
+                    2600,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2600,
+                  3000
+                ],
+                "table": 5600
+              },
+              "passed": true
+            },
+            {
+              "expected": 0,
+              "name": "revision-registry-count",
+              "observed": 0,
+              "passed": true
+            }
+          ],
+          "id": "redline-table-column-widths-full-untracked-control",
+          "issue": "JSv4/Docxodus#1322",
+          "kind": "control",
+          "operation": "table-widths",
+          "score": 100.0,
+          "status": "measured"
+        },
+        {
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "5ab4b22ce148a3992986447b120e437c55347342bfe8f7aa80923caea86969c4",
+            "status": "ok"
+          },
+          "category": "tables",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-calibration/redline-table-column-widths-partial/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial/updated.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 exposes zero revisions in the schema-valid authored table-property-only width edit; independent resolved widths, registry count and schema checks remain mandatory"
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-calibration/redline-table-column-widths-partial/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial/source.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 exposes zero revisions in the schema-valid authored table-property-only width edit; independent resolved widths, registry count and schema checks remain mandatory"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Gauge register column widths.",
+                  "North gauge",
+                  "East gauge",
+                  "South gauge",
+                  "West gauge",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2400,
+                    3000
+                  ],
+                  [
+                    2400,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3000
+                ],
+                "scope": "accepted",
+                "table": 5400,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2400,
+                    3000
+                  ],
+                  [
+                    2400,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3000
+                ],
+                "table": 5400
+              },
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2400,
+                    3200
+                  ],
+                  [
+                    2400,
+                    3200
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3200
+                ],
+                "scope": "rejected",
+                "table": 5600,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2400,
+                    3200
+                  ],
+                  [
+                    2400,
+                    3200
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3200
+                ],
+                "table": 5600
+              },
+              "passed": true
+            },
+            {
+              "expected": 1,
+              "name": "revision-registry-count",
+              "observed": 1,
+              "passed": true
+            }
+          ],
+          "id": "redline-table-column-widths-partial",
+          "issue": "JSv4/Docxodus#1322",
+          "kind": "reproducer",
+          "operation": "table-widths",
+          "score": 100.0,
+          "status": "measured"
+        },
+        {
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "82c83a5516fbc144f1c977b96210e2a810ee24ce835036492a6c112b4ae57a8e",
+            "status": "ok"
+          },
+          "category": "tables",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial-untracked-control/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-calibration/redline-table-column-widths-partial-untracked-control/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial-untracked-control/updated.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial-untracked-control/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-calibration/redline-table-column-widths-partial-untracked-control/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial-untracked-control/updated.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Gauge register column widths.",
+                  "North gauge",
+                  "East gauge",
+                  "South gauge",
+                  "West gauge",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2400,
+                    3000
+                  ],
+                  [
+                    2400,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3000
+                ],
+                "scope": "accepted",
+                "table": 5400,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2400,
+                    3000
+                  ],
+                  [
+                    2400,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3000
+                ],
+                "table": 5400
+              },
+              "passed": true
+            },
+            {
+              "declaration": {
+                "cells": [
+                  [
+                    2400,
+                    3000
+                  ],
+                  [
+                    2400,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3000
+                ],
+                "scope": "rejected",
+                "table": 5400,
+                "type": "table-widths",
+                "version": 1
+              },
+              "name": "assertion-table-widths",
+              "observed": {
+                "cells": [
+                  [
+                    2400,
+                    3000
+                  ],
+                  [
+                    2400,
+                    3000
+                  ]
+                ],
+                "grid": [
+                  2400,
+                  3000
+                ],
+                "table": 5400
+              },
+              "passed": true
+            },
+            {
+              "expected": 0,
+              "name": "revision-registry-count",
+              "observed": 0,
+              "passed": true
+            }
+          ],
+          "id": "redline-table-column-widths-partial-untracked-control",
+          "issue": "JSv4/Docxodus#1322",
+          "kind": "control",
+          "operation": "table-widths",
+          "score": 100.0,
+          "status": "measured"
+        }
+      ]
+    }
+  },
+  "sdkFindings": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "documents": {
+      "fixtures/redline/redline-table-column-widths-full-untracked-control/authored-redline.docx": [],
+      "fixtures/redline/redline-table-column-widths-full-untracked-control/source.docx": [],
+      "fixtures/redline/redline-table-column-widths-full-untracked-control/updated.docx": [],
+      "fixtures/redline/redline-table-column-widths-full/authored-redline.docx": [],
+      "fixtures/redline/redline-table-column-widths-full/source.docx": [],
+      "fixtures/redline/redline-table-column-widths-full/updated.docx": [],
+      "fixtures/redline/redline-table-column-widths-partial-untracked-control/authored-redline.docx": [],
+      "fixtures/redline/redline-table-column-widths-partial-untracked-control/source.docx": [],
+      "fixtures/redline/redline-table-column-widths-partial-untracked-control/updated.docx": [],
+      "fixtures/redline/redline-table-column-widths-partial/authored-redline.docx": [],
+      "fixtures/redline/redline-table-column-widths-partial/source.docx": [],
+      "fixtures/redline/redline-table-column-widths-partial/updated.docx": []
+    }
+  },
+  "initialEligibilityProbe": {
+    "redline-table-column-widths-full": [
+      {
+        "calibration": {
+          "diff": [],
+          "similarity": 1.0
+        },
+        "engine": {
+          "authored": {
+            "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full/authored-redline.docx",
+            "operation": "accept",
+            "redlinesAfter": 0,
+            "redlinesBefore": 0
+          },
+          "candidate": {
+            "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-before/redline-table-column-widths-full/candidate-redline.docx",
+            "operation": "accept",
+            "redlinesAfter": 0,
+            "redlinesBefore": 0
+          },
+          "expected": {
+            "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full/updated.docx",
+            "operation": "load",
+            "redlinesAfter": 0,
+            "redlinesBefore": 0
+          }
+        },
+        "name": "libreoffice-accepted",
+        "passed": null,
+        "reason": "LibreOffice calibration does not match the declared eligibility"
+      },
+      {
+        "calibration": {
+          "diff": [],
+          "similarity": 1.0
+        },
+        "engine": {
+          "authored": {
+            "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full/authored-redline.docx",
+            "operation": "reject",
+            "redlinesAfter": 0,
+            "redlinesBefore": 0
+          },
+          "candidate": {
+            "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-before/redline-table-column-widths-full/candidate-redline.docx",
+            "operation": "reject",
+            "redlinesAfter": 0,
+            "redlinesBefore": 0
+          },
+          "expected": {
+            "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-full/source.docx",
+            "operation": "load",
+            "redlinesAfter": 0,
+            "redlinesBefore": 0
+          }
+        },
+        "name": "libreoffice-rejected",
+        "passed": null,
+        "reason": "LibreOffice calibration does not match the declared eligibility"
+      }
+    ],
+    "redline-table-column-widths-partial": [
+      {
+        "calibration": {
+          "diff": [],
+          "similarity": 1.0
+        },
+        "engine": {
+          "authored": {
+            "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial/authored-redline.docx",
+            "operation": "accept",
+            "redlinesAfter": 0,
+            "redlinesBefore": 0
+          },
+          "candidate": {
+            "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-before/redline-table-column-widths-partial/candidate-redline.docx",
+            "operation": "accept",
+            "redlinesAfter": 0,
+            "redlinesBefore": 0
+          },
+          "expected": {
+            "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial/updated.docx",
+            "operation": "load",
+            "redlinesAfter": 0,
+            "redlinesBefore": 0
+          }
+        },
+        "name": "libreoffice-accepted",
+        "passed": null,
+        "reason": "LibreOffice calibration does not match the declared eligibility"
+      },
+      {
+        "calibration": {
+          "diff": [],
+          "similarity": 1.0
+        },
+        "engine": {
+          "authored": {
+            "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial/authored-redline.docx",
+            "operation": "reject",
+            "redlinesAfter": 0,
+            "redlinesBefore": 0
+          },
+          "candidate": {
+            "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1322-bench-before/redline-table-column-widths-partial/candidate-redline.docx",
+            "operation": "reject",
+            "redlinesAfter": 0,
+            "redlinesBefore": 0
+          },
+          "expected": {
+            "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1322-completion/fixtures/redline/redline-table-column-widths-partial/source.docx",
+            "operation": "load",
+            "redlinesAfter": 0,
+            "redlinesBefore": 0
+          }
+        },
+        "name": "libreoffice-rejected",
+        "passed": null,
+        "reason": "LibreOffice calibration does not match the declared eligibility"
+      }
+    ]
+  },
+  "inputs": {
+    "redline-table-column-widths-full": [
+      {
+        "path": "fixtures/redline/redline-table-column-widths-full/source.docx",
+        "sha256": "8d1e36c21d98f5eb46c5f0e7e2ac2dc60029ffbaea448b9b394dc936e838dbef",
+        "role": "source"
+      }
+    ],
+    "redline-table-column-widths-full-untracked-control": [
+      {
+        "path": "fixtures/redline/redline-table-column-widths-full-untracked-control/source.docx",
+        "sha256": "8d1e36c21d98f5eb46c5f0e7e2ac2dc60029ffbaea448b9b394dc936e838dbef",
+        "role": "source"
+      }
+    ],
+    "redline-table-column-widths-partial": [
+      {
+        "path": "fixtures/redline/redline-table-column-widths-partial/source.docx",
+        "sha256": "8d1e36c21d98f5eb46c5f0e7e2ac2dc60029ffbaea448b9b394dc936e838dbef",
+        "role": "source"
+      }
+    ],
+    "redline-table-column-widths-partial-untracked-control": [
+      {
+        "path": "fixtures/redline/redline-table-column-widths-partial-untracked-control/source.docx",
+        "sha256": "8d1e36c21d98f5eb46c5f0e7e2ac2dc60029ffbaea448b9b394dc936e838dbef",
+        "role": "source"
+      }
+    ]
+  }
+}

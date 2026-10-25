@@ -19,6 +19,7 @@ def main():
     refs = ref.add_subparsers(dest='operation', required=True)
     create = refs.add_parser('libreoffice')
     create.add_argument('--out', required=True)
+    create.add_argument('--suite', help='Registered suite; defaults to the complete corpus')
     controls = refs.add_parser('equivalent-controls')
     controls.add_argument('--reference', required=True, help='Immutable direct LibreOffice bundle')
     controls.add_argument('--out', required=True)
@@ -31,6 +32,7 @@ def main():
     run.add_argument('--adapter', choices=['docxodus', 'libreoffice', 'libreoffice-reference'], required=True)
     run.add_argument('--candidate', required=True, help='Exact source commit for Docxodus; explicit identity for other adapters')
     run.add_argument('--out', required=True)
+    run.add_argument('--suite', help='Registered suite; defaults to the complete corpus')
     run.add_argument('--gate', choices=['report', 'mandatory', 'close'], default='report')
     compare = sub.add_parser('compare')
     compare.add_argument('previous')
@@ -68,14 +70,14 @@ def main():
     elif args.command == 'build-docxodus':
         docxodus(args.source, args.commit)
     elif args.command == 'reference' and args.operation == 'libreoffice':
-        runner.reference_bundle(args.out)
+        runner.reference_bundle(args.out, suite=args.suite)
     elif args.command == 'reference' and args.operation == 'equivalent-controls':
         runner.equivalent_reference_bundle(args.out, args.reference)
     elif args.command == 'reference':
         import_reference(registry, args)
     elif args.command == 'run':
         adapter = args.adapter if args.adapter != 'docxodus' else ['node', str(ROOT / 'adapters/docxodus.mjs')]
-        result = runner.run(args.out, args.reference, adapter, args.candidate)
+        result = runner.run(args.out, args.reference, adapter, args.candidate, suite=args.suite)
         print(result['summary'])
         if 'htmlSummary' in result:
             print('Delivered HTML:', result['htmlSummary'])

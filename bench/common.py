@@ -69,7 +69,9 @@ def validate_pdf_text_policy(case, root=None):
             if any('...' in (node.text or '') for node in xml.iter()):
                 raise ValueError('Decorative dot policy cannot suppress authored ellipses')
             has_dot_tab |= any(node.get(w + 'leader') == 'dot' for node in xml.iter(w + 'tab'))
-            has_tab_character |= any(run.find(w + 'tab') is not None for run in xml.iter(w + 'r'))
+            has_tab_character |= any(run.find(w + 'tab') is not None or any(
+                node.tag in {w + 't', w + 'delText'} and '\t' in (node.text or '') for node in run)
+                for run in xml.iter(w + 'r'))
     if not has_dot_tab or not has_tab_character:
         raise ValueError('Decorative dot policy requires an authored dot-leader tab')
 

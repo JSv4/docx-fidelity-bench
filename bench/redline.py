@@ -18,21 +18,27 @@ import signal
 import subprocess
 from pathlib import Path
 
-from . import revisions
+from . import revisions, revision_ownership
 from .redline_build import dotnet as _dotnet, validate_packages, verify_docxodus, verify_validator
 from .common import ROOT, contained, digest, execute, identity, read_json, write_json
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
-OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}}
-CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity'}
-SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}}
-CONTRACT = {'version': 1, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'revision-ownership': 1}
+ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}}
+CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables'}
+SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}}
+CONTRACT = {'version': 8, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
-            'validity': 'no OpenXmlValidator finding (id, part, description) occurs more often than in any input'}
-HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'bench/redline_build.py']
+            'validity': 'no OpenXmlValidator finding (id, part, description) occurs more often than in any input',
+            'semanticPreflight': 'declared identity cases must report zero changes at raw limits with and without the package supplement',
+            'revisionRegistry': 'declared table operations must report the public registry count and match independent resolved table assertions',
+            'blockInsertion': 'declared insertion outcomes require typed success, error, version change and undo availability',
+            'spanEditing': 'public span editing must preserve text and inline-marker order through both independent revision resolvers',
+            'columnReview': 'v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry',
+            'revisionOwnership': 'account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips'}
+HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'bench/redline_build.py', 'bench/revision_ownership.py']
 
 
 # ---------------------------------------------------------------------------------------------
@@ -58,7 +64,7 @@ def validate_registry(registry=None):
         operation = case['operation']
         if operation not in OPERATIONS or (OPERATIONS[operation] and len(case['inputs']) != OPERATIONS[operation]) or (operation == 'consolidate' and len(case['inputs']) < 3):
             raise ValueError('Invalid operation or input count: ' + case['id'])
-        expected = {'compare': {'accepted', 'rejected'}, 'consolidate': {'accepted', 'rejected'}, 'reject': {'output'}}[operation]
+        expected = {'compare': {'accepted', 'rejected'}, 'consolidate': {'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'accepted', 'rejected'}, 'revision-ownership': {'accepted', 'rejected'}}[operation]
         if set(case['expected']) != expected or case['kind'] not in ('reproducer', 'control', 'identity'):
             raise ValueError('Invalid expectation or kind: ' + case['id'])
         declared = case.get('libreoffice', {})
@@ -74,6 +80,75 @@ def validate_registry(registry=None):
             raise ValueError('Stale redline generator digest: ' + case['id'])
         if case['category'] not in CATEGORIES:
             raise ValueError('Unknown redline category: ' + case['id'])
+        if operation == 'table-widths':
+            spec = case.get('tableWidths', {})
+            registry_count = case.get('revisionRegistry', {})
+            if (set(spec) != {'version', 'widths', 'tracked'} or spec['version'] != 1
+                    or type(spec['tracked']) is not bool or not isinstance(spec['widths'], list)
+                    or not spec['widths'] or any(type(w) is not int or w <= 0 for w in spec['widths'])
+                    or registry_count != {'version': 1, 'count': 1 if spec['tracked'] else 0}
+                    or type(registry_count.get('count')) is not int):
+                raise ValueError('Invalid table widths declaration: ' + case['id'])
+        elif operation == 'column-edit':
+            spec = case.get('columnEdit', {})
+            version = spec.get('version')
+            keys = {'version', 'action', 'position', 'cellIndex', 'resolution'} | ({'tracked'} if version == 2 else set())
+            if (set(spec) != keys or version not in {1, 2}
+                    or spec['action'] not in ({'insert'} if version == 2 else {'insert', 'delete'}) or spec['position'] not in {'before', 'after'}
+                    or type(spec['cellIndex']) is not int or spec['cellIndex'] < 0
+                    or spec['resolution'] not in {'reject-all', 'reject-each', 'accept-all'}
+                    or case.get('revisionRegistry') != {'version': 1, 'count': 0}
+                    or type(case['revisionRegistry']['count']) is not int):
+                raise ValueError('Invalid column edit declaration: ' + case['id'])
+            if version == 2:
+                review = case.get('columnReview', {})
+                if (type(spec['tracked']) is not bool
+                        or review != {'version': 1, 'beforeCount': 1 if spec['tracked'] else 0,
+                                      'supported': True, 'resolutionSuccess': True}
+                        or type(review.get('beforeCount')) is not int
+                        or type(review.get('supported')) is not bool or type(review.get('resolutionSuccess')) is not bool):
+                    raise ValueError('Invalid column review declaration: ' + case['id'])
+            elif 'columnReview' in case:
+                raise ValueError('Unexpected column review declaration: ' + case['id'])
+        elif operation == 'block-insert':
+            spec = case.get('blockInsert', {})
+            observed = case.get('editOutcome', {})
+            success = observed.get('success')
+            if (set(spec) != {'version', 'operation', 'anchorKind', 'position', 'markdown'} or spec['version'] != 1
+                    or spec['operation'] not in {'paragraph', 'rule', 'table'} or spec['anchorKind'] not in {'p', 'tc'}
+                    or spec['position'] not in {'before', 'after'} or not isinstance(spec['markdown'], str)
+                    or type(success) is not bool
+                    or observed != {'success': success, 'errorCode': None if success else 'AnchorWrongKind',
+                                    'versionDelta': 1 if success else 0, 'undoAvailable': success}
+                    or type(observed.get('versionDelta')) is not int or type(observed.get('undoAvailable')) is not bool):
+                raise ValueError('Invalid block insertion declaration: ' + case['id'])
+        elif operation == 'replace-span':
+            spec = case.get('spanEdit', {})
+            if (set(spec) != {'version', 'tracked', 'paragraphIndex', 'start', 'length', 'replacement'}
+                    or spec['version'] != 1 or type(spec['tracked']) is not bool
+                    or any(type(spec[key]) is not int or spec[key] < 0 for key in ('paragraphIndex', 'start'))
+                    or type(spec['length']) is not int or spec['length'] <= 0
+                    or not isinstance(spec['replacement'], str)):
+                raise ValueError('Invalid span edit declaration: ' + case['id'])
+        elif operation == 'revision-ownership':
+            if not revision_ownership.valid_spec(case.get('revisionOwnership'), case.get('authorNameStatus')):
+                raise ValueError('Invalid revision ownership declaration: ' + case['id'])
+        elif 'tableWidths' in case or 'revisionRegistry' in case or 'columnEdit' in case:
+
+            raise ValueError('Unexpected table width operation data: ' + case['id'])
+        if operation != 'column-edit' and 'columnReview' in case:
+            raise ValueError('Unexpected column review data: ' + case['id'])
+        if operation != 'replace-span' and 'spanEdit' in case:
+            raise ValueError('Unexpected span edit data: ' + case['id'])
+        if operation != 'block-insert' and ('blockInsert' in case or 'editOutcome' in case):
+            raise ValueError('Unexpected block insertion data: ' + case['id'])
+        if operation != 'revision-ownership' and ('revisionOwnership' in case or 'authorNameStatus' in case):
+            raise ValueError('Unexpected revision ownership data: ' + case['id'])
+        if 'semanticPreflight' in case:
+            if (operation != 'compare' or case['category'] != 'identity'
+                    or case['semanticPreflight'] != {'version': 1, 'limits': 'raw-boundaries', 'changeCount': 0}
+                    or case['inputs'][0]['sha256'] != case['inputs'][1]['sha256']):
+                raise ValueError('Invalid semantic preflight declaration: ' + case['id'])
         if operation == 'consolidate' and any(i['role'] == 'reviewer' and not i.get('author') for i in case['inputs']):
             raise ValueError('A consolidation reviewer needs an author: ' + case['id'])
         for assertion in case['assertions']:
@@ -83,12 +158,50 @@ def validate_registry(registry=None):
             valid = {'untracked-text': lambda a: a.get('story') in ('body', 'headers') and a.get('texts') and all(isinstance(x, str) and x for x in a['texts']),
                      'paragraph-count': lambda a: a.get('story') == 'body' and isinstance(a.get('count'), int) and a['count'] >= 0,
                      'revision-count': lambda a: isinstance(a.get('max'), int) and a['max'] >= 0,
-                     'para-ids-valid': lambda a: True, 'style-ids-unique': lambda a: True}[kind]
+                     'para-ids-valid': lambda a: True, 'style-ids-unique': lambda a: True,
+                     'table-widths': lambda a: a['scope'] in {'accepted', 'rejected'} and isinstance(a.get('grid'), list)
+                         and a['grid'] and all(type(v) is int and v > 0 for v in a['grid'])
+                         and isinstance(a.get('cells'), list) and a['cells'] and all(isinstance(row, list) and row
+                             and all(type(v) is int and v > 0 for v in row) for row in a['cells'])
+                         and type(a.get('table')) is int and a['table'] > 0,
+                     'table-state': lambda a: a['scope'] == 'output' and valid_table_state(a.get('state')),
+                     'people-identity': lambda a: a['scope'] == 'redline' and isinstance(a.get('author'), str) and bool(a['author'])
+                         and revision_ownership.valid_identities(a.get('identities')),
+                     'pending-insertion-deletion': lambda a: a['scope'] == 'redline' and all(isinstance(a.get(k), str) and bool(a[k]) for k in ('author', 'deletedBy', 'text')),
+                     'comment-threads': lambda a: a['scope'] == 'redline' and isinstance(a.get('threads'), list) and all(
+                         isinstance(x, list) and len(x) == 2 and all(isinstance(y, str) and y for y in x) for x in a['threads'])}[kind]
             if not valid(assertion):
                 raise ValueError('Invalid assertion declaration: ' + case['id'] + ' ' + kind)
-        if operation == 'reject' and {'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0} not in case['assertions']:
+        if operation in {'reject', 'column-edit', 'block-insert'} and {'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0} not in case['assertions']:
             raise ValueError('A reject case must require an output without revisions: ' + case['id'])
     return registry
+
+
+def valid_table_state(state):
+    if not isinstance(state, dict) or set(state) != {'grid', 'rows'}:
+        return False
+    if not isinstance(state['grid'], list) or not state['grid'] or any(type(w) is not int or w < 0 for w in state['grid']):
+        return False
+    if not isinstance(state['rows'], list) or not state['rows']:
+        return False
+    for row in state['rows']:
+        if not isinstance(row, dict) or set(row) != {'before', 'after', 'height', 'cells'}:
+            return False
+        if any(type(row[key]) is not int or row[key] < 0 for key in ('before', 'after')):
+            return False
+        if row['height'] is not None and (type(row['height']) is not int or row['height'] < 0):
+            return False
+        if not isinstance(row['cells'], list) or not row['cells']:
+            return False
+        for cell in row['cells']:
+            if (not isinstance(cell, dict) or set(cell) != {'span', 'width', 'type', 'fill'}
+                    or type(cell['span']) is not int or cell['span'] <= 0
+                    or type(cell['width']) is not int or cell['width'] < 0 or cell['type'] != 'dxa'
+                    or (cell['fill'] is not None and not isinstance(cell['fill'], str))):
+                return False
+        if row['before'] + row['after'] + sum(c['span'] for c in row['cells']) != len(state['grid']):
+            return False
+    return True
 
 
 # ---------------------------------------------------------------------------------------------
@@ -172,6 +285,18 @@ def run_candidate(adapter, build, case, output, candidate, timeout=300):
     inputs = [{'path': str(contained(ROOT, i['path'])), 'sha256': i['sha256'], 'author': i.get('author')} for i in case['inputs']]
     request = {'protocol': 1, 'operation': case['operation'], 'inputs': inputs, 'output': str(output),
                'settings': {'author': 'Bench', 'date': '2026-01-01T00:00:00Z'}}
+    if 'semanticPreflight' in case:
+        request['settings']['semanticPreflight'] = case['semanticPreflight']
+    if 'tableWidths' in case:
+        request['settings']['tableWidths'] = case['tableWidths']
+    if 'columnEdit' in case:
+        request['settings']['columnEdit'] = case['columnEdit']
+    if 'blockInsert' in case:
+        request['settings']['blockInsert'] = case['blockInsert']
+    if 'spanEdit' in case:
+        request['settings']['spanEdit'] = case['spanEdit']
+    if 'revisionOwnership' in case:
+        request['settings']['revisionOwnership'] = case['revisionOwnership']
     response = json.loads(execute([_dotnet(), str(Path(build).resolve() / 'bin' / 'DocxBenchRedline.dll')], input=json.dumps(request), timeout=timeout))
     if response.get('protocol') != 1 or response.get('status') not in ('ok', 'failed', 'unmeasured'):
         raise ValueError('Invalid redline adapter response')
@@ -201,7 +326,60 @@ def _assertion(assertion, package, resolved):
     kind, scope = assertion['type'], assertion['scope']
     parts = resolved.get(scope)
     check = {'name': 'assertion-' + kind, 'declaration': assertion}
-    if kind == 'untracked-text':
+    if kind == 'people-identity':
+        observed = revision_ownership.people_identities(package, assertion['author'])
+        check.update(passed=observed == assertion['identities'], observed=observed)
+    elif kind == 'pending-insertion-deletion':
+        check.update(passed=revision_ownership.retained_deletion(package, assertion['author'], assertion['deletedBy'], assertion['text']))
+    elif kind == 'table-state':
+        roots = parts if parts is not None else package.story_parts()
+        tables = list(roots[package.main].iter(revisions.w('tbl')))
+        def number(element, attribute, default=None):
+            value = None if element is None else element.get(revisions.w(attribute))
+            return int(value) if value is not None and value.isdecimal() else default if value is None else value
+        observed = None
+        if len(tables) == 1:
+            table = tables[0]
+            grid = table.find(revisions.w('tblGrid'))
+            rows = []
+            for row in table.findall(revisions.w('tr')):
+                row_pr = row.find(revisions.w('trPr'))
+                row_property = lambda name: None if row_pr is None else row_pr.find(revisions.w(name))
+                cells = []
+                for cell in row.findall(revisions.w('tc')):
+                    pr = cell.find(revisions.w('tcPr'))
+                    property_of = lambda name: None if pr is None else pr.find(revisions.w(name))
+                    width = property_of('tcW')
+                    fill = property_of('shd')
+                    cells.append({'span': number(property_of('gridSpan'), 'val', 1), 'width': number(width, 'w'),
+                                  'type': None if width is None else width.get(revisions.w('type')),
+                                  'fill': None if fill is None else fill.get(revisions.w('fill'))})
+                rows.append({'before': number(row_property('gridBefore'), 'val', 0),
+                             'after': number(row_property('gridAfter'), 'val', 0),
+                             'height': number(row_property('trHeight'), 'val'), 'cells': cells})
+            observed = {'grid': [] if grid is None else [number(c, 'w') for c in grid.findall(revisions.w('gridCol'))], 'rows': rows}
+        check.update(passed=observed == assertion['state'], observed=observed)
+    elif kind == 'table-widths':
+        roots = parts if parts is not None else package.story_parts()
+        tables = list(roots[package.main].iter(revisions.w('tbl')))
+        def width(element):
+            value = None if element is None else element.get(revisions.w('w'))
+            return int(value) if value is not None and value.isdecimal() else value
+        observed = None
+        if len(tables) == 1:
+            table = tables[0]
+            columns = table.find(revisions.w('tblGrid'))
+            cells = [[cell.find(revisions.w('tcPr') + '/' + revisions.w('tcW')) for cell in row.findall(revisions.w('tc'))]
+                     for row in table.findall(revisions.w('tr'))]
+            table_width = table.find(revisions.w('tblPr') + '/' + revisions.w('tblW'))
+            observed = {'grid': [] if columns is None else [width(col) for col in columns.findall(revisions.w('gridCol'))],
+                        'cells': [[width(cell) for cell in row] for row in cells], 'table': width(table_width)}
+            types_ok = all(cell is not None and cell.get(revisions.w('type')) == 'dxa' for row in cells for cell in row)
+            types_ok = types_ok and table_width is not None and table_width.get(revisions.w('type')) == 'dxa'
+        else:
+            types_ok = False
+        check.update(passed=types_ok and observed == {k: assertion[k] for k in ('grid', 'cells', 'table')}, observed=observed)
+    elif kind == 'untracked-text':
         texts = revisions.untracked_text(package, assertion['story'])
         missing = [x for x in assertion['texts'] if not any(x in text for text in texts)]
         check.update(passed=not missing, missing=missing)
@@ -213,6 +391,9 @@ def _assertion(assertion, package, resolved):
         check.update(passed=not findings, findings=findings)
     elif kind == 'style-ids-unique':
         findings = revisions.style_id_findings(package)
+        check.update(passed=not findings, findings=findings)
+    elif kind == 'comment-threads':
+        findings = revisions.comment_thread_findings(package, assertion['threads'])
         check.update(passed=not findings, findings=findings)
     elif kind == 'revision-count':
         count = revisions.revision_count(parts if parts is not None else package.story_parts())
@@ -240,7 +421,7 @@ def score_case(case, folder, adapter, build, candidate, env, validator):
     outcome = {'id': case['id'], 'category': case['category'], 'kind': case['kind'], 'issue': case['issue'],
                'operation': case['operation'], 'status': 'unmeasured', 'checks': []}
     inputs = [contained(ROOT, i['path']) for i in case['inputs']]
-    output = folder / ('candidate-redline.docx' if case['operation'] != 'reject' else 'candidate-output.docx')
+    output = folder / ('candidate-output.docx' if case['operation'] in {'reject', 'column-edit', 'block-insert'} else 'candidate-redline.docx')
     try:
         try:
             response = run_candidate(adapter, build, case, output, candidate)
@@ -268,7 +449,7 @@ def score_case(case, folder, adapter, build, candidate, env, validator):
             if digest(path) != record['sha256']:
                 raise ValueError('Benchmark fixture changed during the run: ' + record['path'])
         resolved = {'redline': None, 'output': None}
-        if case['operation'] == 'reject':
+        if case['operation'] in {'reject', 'column-edit', 'block-insert'}:
             outcome['checks'].append(_comparison('markup-output', revisions.view(revisions.Package(str(expected['output']))), revisions.view(package)))
         else:
             for mode, key in (('accept', 'accepted'), ('reject', 'rejected')):
@@ -294,6 +475,37 @@ def score_case(case, folder, adapter, build, candidate, env, validator):
             outcome['checks'].append({'name': 'no-new-validation-errors', 'passed': None, 'reason': 'validator not provisioned'})
         for assertion in case['assertions']:
             outcome['checks'].append(_assertion(assertion, package, resolved))
+        if 'semanticPreflight' in case:
+            expected_counts = {'withPackageChanges': 0, 'withoutPackageChanges': 0}
+            # The authored calibration's identity is established independently by both round trips.
+            observed = expected_counts if adapter == 'authored' else response.get('semanticPreflight')
+            outcome['checks'].append({'name': 'semantic-preflight',
+                                      'passed': observed == expected_counts and all(type(v) is int for v in observed.values()),
+                                      'expected': expected_counts, 'observed': observed})
+        if 'authorNameStatus' in case:
+            observed = (revision_ownership.name_status_check(case, None)['expected'] if adapter == 'authored'
+                        else response.get('revisionAuthorNameStatus'))
+            outcome['checks'].append(revision_ownership.name_status_check(case, observed))
+        if 'editOutcome' in case:
+            expected_outcome = case['editOutcome']
+            observed = expected_outcome if adapter == 'authored' else response.get('blockInsertion')
+            typed = (isinstance(observed, dict) and type(observed.get('success')) is bool
+                     and type(observed.get('versionDelta')) is int and type(observed.get('undoAvailable')) is bool)
+            outcome['checks'].append({'name': 'block-insertion-outcome', 'passed': typed and observed == expected_outcome,
+                                      'expected': expected_outcome, 'observed': observed})
+        if 'columnReview' in case:
+            expected_review = {key: value for key, value in case['columnReview'].items() if key != 'version'}
+            observed = expected_review if adapter == 'authored' else response.get('columnReview')
+            typed = (isinstance(observed, dict) and type(observed.get('beforeCount')) is int
+                     and type(observed.get('supported')) is bool and type(observed.get('resolutionSuccess')) is bool)
+            outcome['checks'].append({'name': 'column-revision-resolution', 'passed': typed and observed == expected_review,
+                                      'expected': expected_review, 'observed': observed})
+        if 'revisionRegistry' in case:
+            expected_count = case['revisionRegistry']['count']
+            observed_count = expected_count if adapter == 'authored' else response.get('revisionRegistryCount')
+            outcome['checks'].append({'name': 'revision-registry-count',
+                                      'passed': type(observed_count) is int and observed_count == expected_count,
+                                      'expected': expected_count, 'observed': observed_count})
         if any(c['passed'] is None and not c.get('ineligible') for c in outcome['checks']):
             raise ValueError('A required measurement is unavailable: ' + ', '.join(c['name'] for c in outcome['checks'] if c['passed'] is None and not c.get('ineligible')))
         return _finish(outcome, 'measured')
@@ -320,7 +532,7 @@ def _libreoffice_checks(case, folder, env, output, authored, expected):
         names[key] = len(items)
         items.append({'key': key, 'input': str(source), 'operation': operation, 'output': str(target)})
         return target
-    if case['operation'] == 'reject':
+    if case['operation'] in {'reject', 'column-edit', 'block-insert'}:
         pairs = [('output', item('expected-output', expected['output'], 'load'), item('authored-output', authored, 'load'), item('candidate-output', output, 'load'), None)]
     else:
         pairs = []

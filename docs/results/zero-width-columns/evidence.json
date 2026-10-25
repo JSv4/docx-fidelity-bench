@@ -1,0 +1,1535 @@
+{
+  "issue": 1201,
+  "suite": "core-v64",
+  "requiredPdfCases": 306,
+  "formalRuns": {
+    "before": {
+      "categoryMeans": {},
+      "closeMatchRate": 0.0,
+      "complete": false,
+      "mandatoryPassRate": 0.0,
+      "measured": 0,
+      "required": 306,
+      "score": null
+    },
+    "after": {
+      "categoryMeans": {},
+      "closeMatchRate": 0.0,
+      "complete": false,
+      "mandatoryPassRate": 0.0,
+      "measured": 0,
+      "required": 306,
+      "score": null
+    }
+  },
+  "eligibility": "Formal runs are unmeasured because the required unprivileged user namespaces are unavailable. Separate public-export diagnostics use a source-bound build and caller-provided sandboxed pinned Chromium with an existing root-owned helper. No suite or fidelity score is claimed.",
+  "before": {
+    "sourceCommit": "2fa69d6ff584344535ba81c4bae8984b949ec3b8",
+    "sourceTree": "c88bddf0daf8e43205515836fbc005903130f207",
+    "scored": false,
+    "eligibility": "unmeasured: strict benchmark preflight requires unprivileged user namespaces; this diagnostic uses a caller-provided sandboxed pinned browser with the installed root-owned helper",
+    "browserVersion": "143.0.7499.4",
+    "chromiumSandbox": true,
+    "helper": "/opt/google/chrome/chrome-sandbox",
+    "cases": [
+      {
+        "id": "zero-exact",
+        "inputSha256": "0d871ac9eec82b68fd4183511d4184ce35c0b0a860c83aad9f85124ff65e34a0",
+        "error": "DocxodusExportError: source anchor tc:body:7e5725c56b3c6a509d2e7f94eb039700 has no measurable fragment in the paginated layout"
+      },
+      {
+        "id": "zero-atleast",
+        "inputSha256": "fc3f6d147502f8c2c7ae33e95cd3a02352631478ad1c8c5bbc50e471eaf0158b",
+        "pdfSha256": "992490c431610297ff17d2ec29c6818ecf3ba777d387b70732db0f7d952ea764",
+        "htmlSha256": "e2ae54b9a1c31972eb5672160ff545f13cb2dd9329b958e4f1056bcef6d585c1",
+        "pages": 1,
+        "renderEnvironment": {
+          "rendererFingerprint": "d9932c67f49427ca2088f681aec39b791a6f8c5b5d82a749aabe57c48d868ea8",
+          "verification": "browserObserved",
+          "fidelityTier": "unbaselined",
+          "observed": {
+            "runtimeKind": "nodeChromium",
+            "locale": "en-US",
+            "timezone": "UTC",
+            "viewport": [
+              1600,
+              1200
+            ],
+            "deviceScaleFactor": 1,
+            "media": {
+              "colorScheme": "light",
+              "reducedMotion": "reduce",
+              "forcedColors": "none",
+              "printMedia": true
+            },
+            "networkIsolation": "contextRestricted",
+            "playwrightVersion": "1.57.0",
+            "browserProduct": "Chromium",
+            "browserBuild": "143.0.7499.4",
+            "launchFlags": [],
+            "operatingSystem": "linux",
+            "architecture": "x64"
+          }
+        }
+      },
+      {
+        "id": "width-control",
+        "inputSha256": "4ce00b7687daa55994dfb5e6fa65db40bf9365669b59366477805014bd2e2341",
+        "pdfSha256": "8fa0af7486e89c258afda5993ccc83806dc5184eeb5e086e311d3a2caec5d3ca",
+        "htmlSha256": "7df5b0439f90c5a4cc3a51c41b32fe1a61b91e0b5cc77cc4361712997789388c",
+        "pages": 1,
+        "renderEnvironment": {
+          "rendererFingerprint": "d9932c67f49427ca2088f681aec39b791a6f8c5b5d82a749aabe57c48d868ea8",
+          "verification": "browserObserved",
+          "fidelityTier": "unbaselined",
+          "observed": {
+            "runtimeKind": "nodeChromium",
+            "locale": "en-US",
+            "timezone": "UTC",
+            "viewport": [
+              1600,
+              1200
+            ],
+            "deviceScaleFactor": 1,
+            "media": {
+              "colorScheme": "light",
+              "reducedMotion": "reduce",
+              "forcedColors": "none",
+              "printMedia": true
+            },
+            "networkIsolation": "contextRestricted",
+            "playwrightVersion": "1.57.0",
+            "browserProduct": "Chromium",
+            "browserBuild": "143.0.7499.4",
+            "launchFlags": [],
+            "operatingSystem": "linux",
+            "architecture": "x64"
+          }
+        }
+      },
+      {
+        "id": "tables-zero-width-column-times-new-roman",
+        "inputSha256": "7acfe8ad04f6bd7e27659ead85751684eb2777583f792a41c817665f046e1bc1",
+        "error": "DocxodusExportError: source anchor tc:body:7e5725c56b3c6a509d2e7f94eb039700 has no measurable fragment in the paginated layout"
+      },
+      {
+        "id": "tables-zero-width-column-control-times-new-roman",
+        "inputSha256": "2e30565cff03c8c0eb3132be6dbc149ea71970ca7744f36eb462b47c35366183",
+        "pdfSha256": "021bd0060920470cac88864da41680f52033e417795754101e2ddcce6cb094e1",
+        "htmlSha256": "7cfed905f513a4141f23b52233c16690c4023533f1886090ec1bb76813f0bb82",
+        "pages": 1,
+        "renderEnvironment": {
+          "rendererFingerprint": "37138d882a3ce4547b25960f2b455abc0b05057d5d1c6b3bc48808a13b617093",
+          "verification": "browserObserved",
+          "fidelityTier": "unbaselined",
+          "observed": {
+            "runtimeKind": "nodeChromium",
+            "locale": "en-US",
+            "timezone": "UTC",
+            "viewport": [
+              1600,
+              1200
+            ],
+            "deviceScaleFactor": 1,
+            "media": {
+              "colorScheme": "light",
+              "reducedMotion": "reduce",
+              "forcedColors": "none",
+              "printMedia": true
+            },
+            "networkIsolation": "contextRestricted",
+            "playwrightVersion": "1.57.0",
+            "browserProduct": "Chromium",
+            "browserBuild": "143.0.7499.4",
+            "launchFlags": [],
+            "operatingSystem": "linux",
+            "architecture": "x64"
+          }
+        }
+      },
+      {
+        "id": "zero-default-margins",
+        "inputSha256": "67950c5bae11be43846921bbb937cff9b868ad8a6ce0716616ce18e2a319b09a",
+        "error": "DocxodusExportError: source anchor p:body:b59e2a77581722f2b3f5f998242f5f0c has no measurable fragment in the paginated layout"
+      },
+      {
+        "id": "zero-explicit-margins",
+        "inputSha256": "21d0cbebcea77f4cef3fdce6842b0fc371baca500ed931cb9d05197a3ee8b947",
+        "error": "DocxodusExportError: source anchor p:body:b59e2a77581722f2b3f5f998242f5f0c has no measurable fragment in the paginated layout"
+      },
+      {
+        "id": "zero-spanned-columns",
+        "inputSha256": "ea30cf41144e90fc772bef88c4c791b95c9ab5a8ee51b5fa29b9c17a562bf1a0",
+        "error": "DocxodusExportError: source anchor tc:body:7e5725c56b3c6a509d2e7f94eb039700 has no measurable fragment in the paginated layout"
+      },
+      {
+        "id": "zero-separate-columns",
+        "inputSha256": "31dcf2e3e18063ec011cb246bc426b6b1478e80873288a60663b28f897646def",
+        "error": "DocxodusExportError: source anchor tc:body:7e5725c56b3c6a509d2e7f94eb039700 has no measurable fragment in the paginated layout"
+      }
+    ]
+  },
+  "after": {
+    "sourceCommit": "1a8739283c07d28228a79af83d3b4919b3feb595",
+    "sourceTree": "b79686f1282ba9307bb0233bdc5509d1cfccfc7e",
+    "scored": false,
+    "eligibility": "unmeasured: strict benchmark preflight requires unprivileged user namespaces; this diagnostic uses a caller-provided sandboxed pinned browser with the installed root-owned helper",
+    "browserVersion": "143.0.7499.4",
+    "chromiumSandbox": true,
+    "helper": "/opt/google/chrome/chrome-sandbox",
+    "cases": [
+      {
+        "id": "zero-exact",
+        "inputSha256": "0d871ac9eec82b68fd4183511d4184ce35c0b0a860c83aad9f85124ff65e34a0",
+        "pdfSha256": "df11b55bdb4b2383196c73e365a24625b2111038284023d6f9ab02242258d2d2",
+        "htmlSha256": "e8502c9933cac03c784666f4a484662651fa6151aabe3331efe649f59a3c97cc",
+        "pages": 1,
+        "renderEnvironment": {
+          "rendererFingerprint": "3d676d3ff30748838bdcabd78e123f84a424a3d7992f16f73e4f6887858620ab",
+          "verification": "browserObserved",
+          "fidelityTier": "unbaselined",
+          "observed": {
+            "runtimeKind": "nodeChromium",
+            "locale": "en-US",
+            "timezone": "UTC",
+            "viewport": [
+              1600,
+              1200
+            ],
+            "deviceScaleFactor": 1,
+            "media": {
+              "colorScheme": "light",
+              "reducedMotion": "reduce",
+              "forcedColors": "none",
+              "printMedia": true
+            },
+            "networkIsolation": "contextRestricted",
+            "playwrightVersion": "1.57.0",
+            "browserProduct": "Chromium",
+            "browserBuild": "143.0.7499.4",
+            "launchFlags": [],
+            "operatingSystem": "linux",
+            "architecture": "x64"
+          }
+        }
+      },
+      {
+        "id": "zero-atleast",
+        "inputSha256": "fc3f6d147502f8c2c7ae33e95cd3a02352631478ad1c8c5bbc50e471eaf0158b",
+        "pdfSha256": "37692cc305c08f20d3aea9cd4f188316bf3aa9f1b0129fc1325f5f38dc836121",
+        "htmlSha256": "c51d429359b8c565ceb7d0d84f408a1be62b503bcdeb63cede488d6c0dc72f96",
+        "pages": 1,
+        "renderEnvironment": {
+          "rendererFingerprint": "3d676d3ff30748838bdcabd78e123f84a424a3d7992f16f73e4f6887858620ab",
+          "verification": "browserObserved",
+          "fidelityTier": "unbaselined",
+          "observed": {
+            "runtimeKind": "nodeChromium",
+            "locale": "en-US",
+            "timezone": "UTC",
+            "viewport": [
+              1600,
+              1200
+            ],
+            "deviceScaleFactor": 1,
+            "media": {
+              "colorScheme": "light",
+              "reducedMotion": "reduce",
+              "forcedColors": "none",
+              "printMedia": true
+            },
+            "networkIsolation": "contextRestricted",
+            "playwrightVersion": "1.57.0",
+            "browserProduct": "Chromium",
+            "browserBuild": "143.0.7499.4",
+            "launchFlags": [],
+            "operatingSystem": "linux",
+            "architecture": "x64"
+          }
+        }
+      },
+      {
+        "id": "width-control",
+        "inputSha256": "4ce00b7687daa55994dfb5e6fa65db40bf9365669b59366477805014bd2e2341",
+        "pdfSha256": "e366b3b68a6538422462a9dc8e1b0928578c804721252bacc61429a10f94489e",
+        "htmlSha256": "7df5b0439f90c5a4cc3a51c41b32fe1a61b91e0b5cc77cc4361712997789388c",
+        "pages": 1,
+        "renderEnvironment": {
+          "rendererFingerprint": "3d676d3ff30748838bdcabd78e123f84a424a3d7992f16f73e4f6887858620ab",
+          "verification": "browserObserved",
+          "fidelityTier": "unbaselined",
+          "observed": {
+            "runtimeKind": "nodeChromium",
+            "locale": "en-US",
+            "timezone": "UTC",
+            "viewport": [
+              1600,
+              1200
+            ],
+            "deviceScaleFactor": 1,
+            "media": {
+              "colorScheme": "light",
+              "reducedMotion": "reduce",
+              "forcedColors": "none",
+              "printMedia": true
+            },
+            "networkIsolation": "contextRestricted",
+            "playwrightVersion": "1.57.0",
+            "browserProduct": "Chromium",
+            "browserBuild": "143.0.7499.4",
+            "launchFlags": [],
+            "operatingSystem": "linux",
+            "architecture": "x64"
+          }
+        }
+      },
+      {
+        "id": "tables-zero-width-column-times-new-roman",
+        "inputSha256": "7acfe8ad04f6bd7e27659ead85751684eb2777583f792a41c817665f046e1bc1",
+        "pdfSha256": "30e468bd3523499878dd32e39b9fb4a65ca9dff8dc7476104585dea2fe549243",
+        "htmlSha256": "d3c0c671944957725496ce37f6e367870e265afd997927d4b7e5864c25f2f4fd",
+        "pages": 1,
+        "renderEnvironment": {
+          "rendererFingerprint": "8113e2a90a7115153ca68b4c8e49aa4a353a3e280fb5275a3e5856d9595c3165",
+          "verification": "browserObserved",
+          "fidelityTier": "unbaselined",
+          "observed": {
+            "runtimeKind": "nodeChromium",
+            "locale": "en-US",
+            "timezone": "UTC",
+            "viewport": [
+              1600,
+              1200
+            ],
+            "deviceScaleFactor": 1,
+            "media": {
+              "colorScheme": "light",
+              "reducedMotion": "reduce",
+              "forcedColors": "none",
+              "printMedia": true
+            },
+            "networkIsolation": "contextRestricted",
+            "playwrightVersion": "1.57.0",
+            "browserProduct": "Chromium",
+            "browserBuild": "143.0.7499.4",
+            "launchFlags": [],
+            "operatingSystem": "linux",
+            "architecture": "x64"
+          }
+        }
+      },
+      {
+        "id": "tables-zero-width-column-control-times-new-roman",
+        "inputSha256": "2e30565cff03c8c0eb3132be6dbc149ea71970ca7744f36eb462b47c35366183",
+        "pdfSha256": "bfcaba0f301cf3fee9e2fc0f05dabe2c7338d78be51e0b7b3875c84354294ecd",
+        "htmlSha256": "7cfed905f513a4141f23b52233c16690c4023533f1886090ec1bb76813f0bb82",
+        "pages": 1,
+        "renderEnvironment": {
+          "rendererFingerprint": "8113e2a90a7115153ca68b4c8e49aa4a353a3e280fb5275a3e5856d9595c3165",
+          "verification": "browserObserved",
+          "fidelityTier": "unbaselined",
+          "observed": {
+            "runtimeKind": "nodeChromium",
+            "locale": "en-US",
+            "timezone": "UTC",
+            "viewport": [
+              1600,
+              1200
+            ],
+            "deviceScaleFactor": 1,
+            "media": {
+              "colorScheme": "light",
+              "reducedMotion": "reduce",
+              "forcedColors": "none",
+              "printMedia": true
+            },
+            "networkIsolation": "contextRestricted",
+            "playwrightVersion": "1.57.0",
+            "browserProduct": "Chromium",
+            "browserBuild": "143.0.7499.4",
+            "launchFlags": [],
+            "operatingSystem": "linux",
+            "architecture": "x64"
+          }
+        }
+      },
+      {
+        "id": "zero-default-margins",
+        "inputSha256": "67950c5bae11be43846921bbb937cff9b868ad8a6ce0716616ce18e2a319b09a",
+        "pdfSha256": "b580c575971bf5730fad4781aa74fd7ca64a68f6386ae59fe2581883445d07de",
+        "htmlSha256": "bbcaf63c0dd5d508535677f869eec45e24e285b49e28b6dc017f228d6027b6cf",
+        "pages": 1,
+        "renderEnvironment": {
+          "rendererFingerprint": "8113e2a90a7115153ca68b4c8e49aa4a353a3e280fb5275a3e5856d9595c3165",
+          "verification": "browserObserved",
+          "fidelityTier": "unbaselined",
+          "observed": {
+            "runtimeKind": "nodeChromium",
+            "locale": "en-US",
+            "timezone": "UTC",
+            "viewport": [
+              1600,
+              1200
+            ],
+            "deviceScaleFactor": 1,
+            "media": {
+              "colorScheme": "light",
+              "reducedMotion": "reduce",
+              "forcedColors": "none",
+              "printMedia": true
+            },
+            "networkIsolation": "contextRestricted",
+            "playwrightVersion": "1.57.0",
+            "browserProduct": "Chromium",
+            "browserBuild": "143.0.7499.4",
+            "launchFlags": [],
+            "operatingSystem": "linux",
+            "architecture": "x64"
+          }
+        }
+      },
+      {
+        "id": "zero-explicit-margins",
+        "inputSha256": "21d0cbebcea77f4cef3fdce6842b0fc371baca500ed931cb9d05197a3ee8b947",
+        "pdfSha256": "1a65653ef14bf46eb7f211d6218c67849d4dbc08e153f838fbb7ef825d899eb0",
+        "htmlSha256": "85950dd240b110888ebf32765e6633125c633dfdc8131ef70ec706d884b30975",
+        "pages": 1,
+        "renderEnvironment": {
+          "rendererFingerprint": "8113e2a90a7115153ca68b4c8e49aa4a353a3e280fb5275a3e5856d9595c3165",
+          "verification": "browserObserved",
+          "fidelityTier": "unbaselined",
+          "observed": {
+            "runtimeKind": "nodeChromium",
+            "locale": "en-US",
+            "timezone": "UTC",
+            "viewport": [
+              1600,
+              1200
+            ],
+            "deviceScaleFactor": 1,
+            "media": {
+              "colorScheme": "light",
+              "reducedMotion": "reduce",
+              "forcedColors": "none",
+              "printMedia": true
+            },
+            "networkIsolation": "contextRestricted",
+            "playwrightVersion": "1.57.0",
+            "browserProduct": "Chromium",
+            "browserBuild": "143.0.7499.4",
+            "launchFlags": [],
+            "operatingSystem": "linux",
+            "architecture": "x64"
+          }
+        }
+      },
+      {
+        "id": "zero-spanned-columns",
+        "inputSha256": "ea30cf41144e90fc772bef88c4c791b95c9ab5a8ee51b5fa29b9c17a562bf1a0",
+        "pdfSha256": "4c41c3c713f134095eb76bc3d089a4afefba06b3121e346b3ea935640170f276",
+        "htmlSha256": "df37fc319b2cf413fa27dffd480091a80cfab935cf273ca5c4eca79fd5f3d20c",
+        "pages": 1,
+        "renderEnvironment": {
+          "rendererFingerprint": "8113e2a90a7115153ca68b4c8e49aa4a353a3e280fb5275a3e5856d9595c3165",
+          "verification": "browserObserved",
+          "fidelityTier": "unbaselined",
+          "observed": {
+            "runtimeKind": "nodeChromium",
+            "locale": "en-US",
+            "timezone": "UTC",
+            "viewport": [
+              1600,
+              1200
+            ],
+            "deviceScaleFactor": 1,
+            "media": {
+              "colorScheme": "light",
+              "reducedMotion": "reduce",
+              "forcedColors": "none",
+              "printMedia": true
+            },
+            "networkIsolation": "contextRestricted",
+            "playwrightVersion": "1.57.0",
+            "browserProduct": "Chromium",
+            "browserBuild": "143.0.7499.4",
+            "launchFlags": [],
+            "operatingSystem": "linux",
+            "architecture": "x64"
+          }
+        }
+      },
+      {
+        "id": "zero-separate-columns",
+        "inputSha256": "31dcf2e3e18063ec011cb246bc426b6b1478e80873288a60663b28f897646def",
+        "pdfSha256": "603f4065845f647718ea2849f9c034f70303abd24f458cf92b4c0afbdfddc83a",
+        "htmlSha256": "3ef47a5d7ed4bf7678868394365dcf9818d2d2c2561d073b0e9283092134c9aa",
+        "pages": 1,
+        "renderEnvironment": {
+          "rendererFingerprint": "8113e2a90a7115153ca68b4c8e49aa4a353a3e280fb5275a3e5856d9595c3165",
+          "verification": "browserObserved",
+          "fidelityTier": "unbaselined",
+          "observed": {
+            "runtimeKind": "nodeChromium",
+            "locale": "en-US",
+            "timezone": "UTC",
+            "viewport": [
+              1600,
+              1200
+            ],
+            "deviceScaleFactor": 1,
+            "media": {
+              "colorScheme": "light",
+              "reducedMotion": "reduce",
+              "forcedColors": "none",
+              "printMedia": true
+            },
+            "networkIsolation": "contextRestricted",
+            "playwrightVersion": "1.57.0",
+            "browserProduct": "Chromium",
+            "browserBuild": "143.0.7499.4",
+            "launchFlags": [],
+            "operatingSystem": "linux",
+            "architecture": "x64"
+          }
+        }
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "tables-zero-width-column-times-new-roman",
+      "inputSha256": "7acfe8ad04f6bd7e27659ead85751684eb2777583f792a41c817665f046e1bc1",
+      "wordReferenceEligible": true,
+      "files": [
+        {
+          "label": "Native Word for the web",
+          "pdfSha256": "698af075be381ca1d0c62bfdb6d920cdf84fc7835c5118a131895756f4f5ba04",
+          "fonts": [
+            "TimesNewRomanPSMT"
+          ],
+          "pages": 1
+        },
+        {
+          "label": "Before: main-equivalent 2fa69d6f",
+          "error": "DocxodusExportError: source anchor tc:body:7e5725c56b3c6a509d2e7f94eb039700 has no measurable fragment in the paginated layout"
+        },
+        {
+          "label": "After: 1a873928",
+          "pdfSha256": "30e468bd3523499878dd32e39b9fb4a65ca9dff8dc7476104585dea2fe549243",
+          "fonts": [
+            "TimesNewRomanPSMT"
+          ],
+          "pages": 1
+        }
+      ],
+      "rawWordGeometry": [
+        {
+          "marker": "AlderBefore",
+          "word": {
+            "text": "AlderBefore",
+            "page": 1,
+            "rect": [
+              72.025,
+              74.979,
+              127.102,
+              87.156
+            ]
+          },
+          "after": {
+            "text": "AlderBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              74.952206,
+              126.935344,
+              87.128309
+            ]
+          },
+          "afterDeltaPt": [
+            -0.025003,
+            -0.026794
+          ]
+        },
+        {
+          "marker": "AlderWide",
+          "word": {
+            "text": "AlderWide",
+            "page": 1,
+            "rect": [
+              73.025,
+              90.979,
+              121.876,
+              103.156
+            ]
+          },
+          "after": {
+            "text": "AlderWide",
+            "page": 1,
+            "rect": [
+              72.996091,
+              90.702206,
+              121.38861,
+              102.878309
+            ]
+          },
+          "afterDeltaPt": [
+            -0.028909,
+            -0.276794
+          ]
+        },
+        {
+          "marker": "AlderAfter",
+          "word": {
+            "text": "AlderAfter",
+            "page": 1,
+            "rect": [
+              72.025,
+              108.999,
+              120.381,
+              121.176
+            ]
+          },
+          "after": {
+            "text": "AlderAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              108.702205,
+              120.220567,
+              120.878308
+            ]
+          },
+          "afterDeltaPt": [
+            -0.025003,
+            -0.296795
+          ]
+        },
+        {
+          "marker": "BirchBefore",
+          "word": {
+            "text": "BirchBefore",
+            "page": 1,
+            "rect": [
+              72.025,
+              124.999,
+              126.376,
+              137.176
+            ]
+          },
+          "after": {
+            "text": "BirchBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              125.202204,
+              126.328842,
+              137.378307
+            ]
+          },
+          "afterDeltaPt": [
+            -0.025003,
+            0.203204
+          ]
+        },
+        {
+          "marker": "BirchWide",
+          "word": {
+            "text": "BirchWide",
+            "page": 1,
+            "rect": [
+              73.025,
+              140.999,
+              121.392,
+              153.176
+            ]
+          },
+          "after": {
+            "text": "BirchWide",
+            "page": 1,
+            "rect": [
+              72.996091,
+              140.952204,
+              120.782108,
+              153.128307
+            ]
+          },
+          "afterDeltaPt": [
+            -0.028909,
+            -0.046796
+          ]
+        },
+        {
+          "marker": "BirchAfter",
+          "word": {
+            "text": "BirchAfter",
+            "page": 1,
+            "rect": [
+              72.025,
+              158.999,
+              119.897,
+              171.176
+            ]
+          },
+          "after": {
+            "text": "BirchAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              158.952203,
+              119.614064,
+              171.128306
+            ]
+          },
+          "afterDeltaPt": [
+            -0.025003,
+            -0.046797
+          ]
+        },
+        {
+          "marker": "DogwoodBefore",
+          "word": {
+            "text": "DogwoodBefore",
+            "page": 1,
+            "rect": [
+              72.025,
+              174.999,
+              145.362,
+              187.176
+            ]
+          },
+          "after": {
+            "text": "DogwoodBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              174.702202,
+              145.264601,
+              186.878305
+            ]
+          },
+          "afterDeltaPt": [
+            -0.025003,
+            -0.296798
+          ]
+        },
+        {
+          "marker": "DogwoodWide",
+          "word": {
+            "text": "DogwoodWide",
+            "page": 1,
+            "rect": [
+              75.025,
+              192.029,
+              142.378,
+              204.206
+            ]
+          },
+          "after": {
+            "text": "DogwoodWide",
+            "page": 1,
+            "rect": [
+              74.496091,
+              191.952202,
+              141.217868,
+              204.128304
+            ]
+          },
+          "afterDeltaPt": [
+            -0.528909,
+            -0.076798
+          ]
+        },
+        {
+          "marker": "DogwoodAfter",
+          "word": {
+            "text": "DogwoodAfter",
+            "page": 1,
+            "rect": [
+              72.025,
+              210.029,
+              138.641,
+              222.206
+            ]
+          },
+          "after": {
+            "text": "DogwoodAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              209.952201,
+              138.549824,
+              222.128304
+            ]
+          },
+          "afterDeltaPt": [
+            -0.025003,
+            -0.076799
+          ]
+        }
+      ],
+      "diagnosticChecksWithoutEnvironmentEligibility": {
+        "after": [
+          {
+            "name": "page-count",
+            "passed": true
+          },
+          {
+            "name": "expected-visible-tokens",
+            "passed": true,
+            "missing": {},
+            "extra": {},
+            "normalizedRaw": {}
+          },
+          {
+            "name": "declared-font-families",
+            "passed": true,
+            "observed": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          {
+            "name": "physical-geometry-page-1",
+            "passed": true
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlderBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlderWide",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlderAfter",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BirchBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BirchWide",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BirchAfter",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "DogwoodBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "DogwoodWide",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "DogwoodAfter",
+              "tolerancePt": 0.5
+            }
+          }
+        ]
+      },
+      "screenshot": "docs/results/zero-width-columns/tables-zero-width-column-times-new-roman.png",
+      "screenshotSha256": "508befdcc234d069dbf8771ed324a2ee1498a5ea23f74d4fba984ce7d79829cd",
+      "viewed": true
+    },
+    {
+      "id": "tables-zero-width-column-control-times-new-roman",
+      "inputSha256": "2e30565cff03c8c0eb3132be6dbc149ea71970ca7744f36eb462b47c35366183",
+      "wordReferenceEligible": true,
+      "files": [
+        {
+          "label": "Native Word for the web",
+          "pdfSha256": "405f48abaabafbf6729bf921a7e4162424b238a9cabb701a2af42f2380494669",
+          "fonts": [
+            "TimesNewRomanPSMT"
+          ],
+          "pages": 1
+        },
+        {
+          "label": "Before: main-equivalent 2fa69d6f",
+          "pdfSha256": "021bd0060920470cac88864da41680f52033e417795754101e2ddcce6cb094e1",
+          "fonts": [
+            "TimesNewRomanPSMT"
+          ],
+          "pages": 1
+        },
+        {
+          "label": "After: 1a873928",
+          "pdfSha256": "bfcaba0f301cf3fee9e2fc0f05dabe2c7338d78be51e0b7b3875c84354294ecd",
+          "fonts": [
+            "TimesNewRomanPSMT"
+          ],
+          "pages": 1
+        }
+      ],
+      "rawWordGeometry": [
+        {
+          "marker": "AlderBefore",
+          "word": {
+            "text": "AlderBefore",
+            "page": 1,
+            "rect": [
+              72.025,
+              74.979,
+              127.102,
+              87.156
+            ]
+          },
+          "before": {
+            "text": "AlderBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              74.952206,
+              126.935344,
+              87.128309
+            ]
+          },
+          "after": {
+            "text": "AlderBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              74.952206,
+              126.935344,
+              87.128309
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            -0.026794
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            -0.026794
+          ]
+        },
+        {
+          "marker": "AlderWide",
+          "word": {
+            "text": "AlderWide",
+            "page": 1,
+            "rect": [
+              96.05,
+              90.979,
+              144.901,
+              103.156
+            ]
+          },
+          "before": {
+            "text": "AlderWide",
+            "page": 1,
+            "rect": [
+              95.999996,
+              90.702206,
+              144.392516,
+              102.878309
+            ]
+          },
+          "after": {
+            "text": "AlderWide",
+            "page": 1,
+            "rect": [
+              95.999996,
+              90.702206,
+              144.392516,
+              102.878309
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.050004,
+            -0.276794
+          ],
+          "afterDeltaPt": [
+            -0.050004,
+            -0.276794
+          ]
+        },
+        {
+          "marker": "AlderAfter",
+          "word": {
+            "text": "AlderAfter",
+            "page": 1,
+            "rect": [
+              72.025,
+              108.999,
+              120.381,
+              121.176
+            ]
+          },
+          "before": {
+            "text": "AlderAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              108.702205,
+              120.220567,
+              120.878308
+            ]
+          },
+          "after": {
+            "text": "AlderAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              108.702205,
+              120.220567,
+              120.878308
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            -0.296795
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            -0.296795
+          ]
+        },
+        {
+          "marker": "BirchBefore",
+          "word": {
+            "text": "BirchBefore",
+            "page": 1,
+            "rect": [
+              72.025,
+              124.999,
+              126.376,
+              137.176
+            ]
+          },
+          "before": {
+            "text": "BirchBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              125.202204,
+              126.328842,
+              137.378307
+            ]
+          },
+          "after": {
+            "text": "BirchBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              125.202204,
+              126.328842,
+              137.378307
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            0.203204
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            0.203204
+          ]
+        },
+        {
+          "marker": "BirchWide",
+          "word": {
+            "text": "BirchWide",
+            "page": 1,
+            "rect": [
+              96.05,
+              140.999,
+              144.417,
+              153.176
+            ]
+          },
+          "before": {
+            "text": "BirchWide",
+            "page": 1,
+            "rect": [
+              95.999996,
+              140.952204,
+              143.786013,
+              153.128307
+            ]
+          },
+          "after": {
+            "text": "BirchWide",
+            "page": 1,
+            "rect": [
+              95.999996,
+              140.952204,
+              143.786013,
+              153.128307
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.050004,
+            -0.046796
+          ],
+          "afterDeltaPt": [
+            -0.050004,
+            -0.046796
+          ]
+        },
+        {
+          "marker": "BirchAfter",
+          "word": {
+            "text": "BirchAfter",
+            "page": 1,
+            "rect": [
+              72.025,
+              158.999,
+              119.897,
+              171.176
+            ]
+          },
+          "before": {
+            "text": "BirchAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              158.952203,
+              119.614064,
+              171.128306
+            ]
+          },
+          "after": {
+            "text": "BirchAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              158.952203,
+              119.614064,
+              171.128306
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            -0.046797
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            -0.046797
+          ]
+        },
+        {
+          "marker": "DogwoodBefore",
+          "word": {
+            "text": "DogwoodBefore",
+            "page": 1,
+            "rect": [
+              72.025,
+              174.999,
+              145.362,
+              187.176
+            ]
+          },
+          "before": {
+            "text": "DogwoodBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              174.702202,
+              145.264601,
+              186.878305
+            ]
+          },
+          "after": {
+            "text": "DogwoodBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              174.702202,
+              145.264601,
+              186.878305
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            -0.296798
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            -0.296798
+          ]
+        },
+        {
+          "marker": "DogwoodWide",
+          "word": {
+            "text": "DogwoodWide",
+            "page": 1,
+            "rect": [
+              97.05,
+              192.029,
+              164.403,
+              204.206
+            ]
+          },
+          "before": {
+            "text": "DogwoodWide",
+            "page": 1,
+            "rect": [
+              96.749996,
+              191.952202,
+              163.471773,
+              204.128304
+            ]
+          },
+          "after": {
+            "text": "DogwoodWide",
+            "page": 1,
+            "rect": [
+              96.749996,
+              191.952202,
+              163.471773,
+              204.128304
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.300004,
+            -0.076798
+          ],
+          "afterDeltaPt": [
+            -0.300004,
+            -0.076798
+          ]
+        },
+        {
+          "marker": "DogwoodAfter",
+          "word": {
+            "text": "DogwoodAfter",
+            "page": 1,
+            "rect": [
+              72.025,
+              210.029,
+              138.641,
+              222.206
+            ]
+          },
+          "before": {
+            "text": "DogwoodAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              209.952201,
+              138.549824,
+              222.128304
+            ]
+          },
+          "after": {
+            "text": "DogwoodAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              209.952201,
+              138.549824,
+              222.128304
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            -0.076799
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            -0.076799
+          ]
+        }
+      ],
+      "diagnosticChecksWithoutEnvironmentEligibility": {
+        "before": [
+          {
+            "name": "page-count",
+            "passed": true
+          },
+          {
+            "name": "expected-visible-tokens",
+            "passed": true,
+            "missing": {},
+            "extra": {},
+            "normalizedRaw": {}
+          },
+          {
+            "name": "declared-font-families",
+            "passed": true,
+            "observed": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          {
+            "name": "physical-geometry-page-1",
+            "passed": true
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlderBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlderWide",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlderAfter",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BirchBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BirchWide",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BirchAfter",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "DogwoodBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "DogwoodWide",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "DogwoodAfter",
+              "tolerancePt": 0.5
+            }
+          }
+        ],
+        "after": [
+          {
+            "name": "page-count",
+            "passed": true
+          },
+          {
+            "name": "expected-visible-tokens",
+            "passed": true,
+            "missing": {},
+            "extra": {},
+            "normalizedRaw": {}
+          },
+          {
+            "name": "declared-font-families",
+            "passed": true,
+            "observed": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          {
+            "name": "physical-geometry-page-1",
+            "passed": true
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlderBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlderWide",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlderAfter",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BirchBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BirchWide",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BirchAfter",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "DogwoodBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "DogwoodWide",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "DogwoodAfter",
+              "tolerancePt": 0.5
+            }
+          }
+        ]
+      },
+      "screenshot": "docs/results/zero-width-columns/tables-zero-width-column-control-times-new-roman.png",
+      "screenshotSha256": "8b06bd1ce7a12580d0ec4e3f5ffb6d99786be52a22e9d8576f6d7a69cd845667",
+      "viewed": true
+    }
+  ],
+  "validation": {
+    "affectedCoreTestsPassed": 992,
+    "sandboxedBrowserTestsPassed": 28,
+    "sourceInputsSdkZero": 11,
+    "benchPythonPassed": 264,
+    "benchNodePassed": 4,
+    "priorDocxUnchanged": 990,
+    "adversarialReview": "Completed before PR creation; source-identity, main-failure, fixture/control scope and unchanged thresholds checked."
+  }
+}
