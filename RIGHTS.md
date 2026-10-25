@@ -172,3 +172,17 @@ included; native PDF font subsets retain the separately provisioned font contrac
 The two #1124 justification-line cases in `core-v70` reproduce original literal OOXML and prose authored for independently captured native Word controls. Integer twip widths preserve all 45 held-out paragraphs without importing a font library or template. Both inputs regenerate byte for byte. Native/candidate PNGs and raw PDF inspections under `docs/results/justification-lines/` contain only this original text. No standalone font binary, external document or authentication data is included; native PDF font subsets retain the separately provisioned font contract.
 
 The three #1124 native text precision inputs in `core-v71` reproduce original literal OOXML and text authored for Word capture. Their glyph, word-gap and eight long-paragraph controls regenerate byte for byte without a font library, template or imported document. Native/candidate PNGs and PDF coordinate inspections under `docs/results/native-text-precision/` contain only this original text. No standalone font binary or authentication data is included. Times New Roman and Arial are separately provisioned; native font subsets retain the recorded family contract and do not establish identical font versions or rasterization.
+
+The optional Word font-binding inspector and its synthetic contract tests are original
+standard-library code. External operator-captured reference packs may contain separately
+licensed embedded fonts only with reviewed rights, source/program hashes and retained
+license notices; those packs remain outside this repository's source inventory. A reviewed
+glyph-identity attestation qualifies an exact captured font program, not a font-name alias
+or an arbitrary replacement family. This change vendors no font binary or third-party
+source document and does not alter the authored corpus or its fixture generation.
+
+The full-page raster comparisons under `docs/results/word-reference-tracks/` show
+only this repository's original authored text and diamond. They contain no font
+program binaries, authentication material or external document content. Native
+PDFs and source font parts remain in the separately licensed external capture
+pack; its OFL notices and exact source/program audit bindings are retained there.

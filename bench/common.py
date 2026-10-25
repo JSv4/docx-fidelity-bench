@@ -95,7 +95,7 @@ def validate_render_profile(profile, *, allow_additional_css=False):
 
 
 def validate_registry(registry=None):
-    registry = registry or read_json(ROOT / 'fixtures/manifest.json')
+    registry = read_json(ROOT / 'fixtures/manifest.json') if registry is None else registry
     if registry.get('schema') != 1 or not isinstance(registry['suite'].get('version'), int) or registry['suite']['version'] < 1:
         raise ValueError('Unknown registry or suite version')
     ids = [c['id'] for c in registry['cases']]

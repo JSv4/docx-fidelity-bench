@@ -35,6 +35,22 @@ def validate_bundle(bundle, root, registry, env):
         raise ValueError('Unknown reference track or bundle version')
     if bundle['suiteDigest'] != identity(registry) or bundle['environment'] != env['contract']:
         raise ValueError('Reference suite or measurement/font environment changed')
+    font_bindings = bundle.get('capture', {}).get('fontIdentityBindings', {})
+    if (not isinstance(font_bindings, dict) or
+            not set(font_bindings).issubset(bundle['cases'])):
+        raise ValueError('Word font bindings must address exact registered capture cases')
+    if font_bindings:
+        from . import word_fonts
+        capture = bundle['capture']
+        if (bundle['track'] not in WORD_TRACKS or capture.get('track') != bundle['track'] or
+                capture.get('rightsApproved') is not True or
+                capture.get('profile') != {'review': 'final', 'comments': 'hidden'} or
+                capture.get('fontContract') != env['contract']['fonts'] or
+                bundle.get('fontIdentityInspectorVersion') != word_fonts.VERSION or
+                bundle.get('fontIdentityInspectorSha256') != digest(Path(word_fonts.__file__))):
+            raise ValueError('Word font identity binding verifier changed or is unverified')
+    elif any(key in bundle for key in ('fontIdentityInspectorVersion', 'fontIdentityInspectorSha256')):
+        raise ValueError('Word font identity evidence lacks its capture bindings')
     source_bundle = None
     if bundle['track'] == reference_controls.TRACK:
         if bundle.get('sourceBundle') != 'direct/bundle.json' or bundle.get('controlPolicy') != reference_controls.policy():
@@ -52,6 +68,11 @@ def validate_bundle(bundle, root, registry, env):
         case = next((c for c in registry['cases'] if c['id'] == cid), None)
         if not case or case['sha256'] != entry['inputSha256'] or digest(contained(root, entry['pdf'])) != entry['pdfSha256']:
             raise ValueError('Stale or unknown reference: ' + cid)
+        if cid in font_bindings:
+            captured = bundle['capture'].get('cases', {}).get(cid, {})
+            if (captured.get('inputSha256') != entry['inputSha256'] or
+                    captured.get('pdfSha256') != entry['pdfSha256']):
+                raise ValueError('Word font binding capture digests changed: ' + cid)
         if case.get('pdfTextNormalization') and entry.get('inspection', {}).get('pdfTextNormalization') != case['pdfTextNormalization']:
             raise ValueError('Reference PDF text normalization evidence is missing or changed')
         if source_bundle is not None:
@@ -103,8 +124,8 @@ def equivalent_reference_bundle(output, reference):
     return bundle
 
 
-def run(output, reference, adapter, candidate, suite=None):
-    registry = select_suite(validate_registry(), suite)
+def run(output, reference, adapter, candidate, suite=None, registry=None):
+    registry = select_suite(validate_registry(registry), suite)
     env = environment([f for c in registry['cases'] for f in c['fonts']])
     ref_root = Path(reference).resolve().parent
     bundle = read_json(reference)
@@ -113,6 +134,9 @@ def run(output, reference, adapter, candidate, suite=None):
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=False)
     contract = {'metric': metrics.CONTRACT, 'suiteDigest': identity(registry), 'referenceDigest': identity(bundle), 'environment': env['contract'], 'adapter': adapter if isinstance(adapter, str) else {'argv': adapter, 'sourceSha256': digest(ROOT / 'adapters/docxodus.mjs')}}
+    # There is one renderer layout mode today. Keep the identity explicit so a
+    # future mode cannot silently reuse another mode's accepted measurements.
+    contract['layoutProfile'] = 'default'
     if any(c.get('preparation') for c in registry['cases']):
         contract['preparationSources'] = {name: digest(ROOT / name) for name in
             ['bench/adapters.py', 'bench/redline.py', 'bench/redline_build.py', 'bench/revisions.py',
@@ -150,7 +174,11 @@ def run(output, reference, adapter, candidate, suite=None):
                     direct_capture = direct_bundle['cases'][case['id']]
                     direct_root = contained(ref_root, bundle['sourceBundle']).parent
                     shutil.copyfile(contained(direct_root, direct_capture['pdf']), folder / 'direct-reference.pdf')
-            reference_info = pdf.inspect_case_pdf(reference_path, case)
+            bindings = bundle.get('capture', {}).get('fontIdentityBindings', {}).get(case['id'])
+            if bindings is not None and bundle['track'] not in WORD_TRACKS:
+                raise ValueError('Font identity bindings require an explicit Word capture track')
+            reference_info = pdf.inspect_case_pdf(reference_path, case, word_font_bindings=bindings,
+                                                 font_contract=env['contract']['fonts']) if bindings is not None else pdf.inspect_case_pdf(reference_path, case)
             failures = pdf.reference_failures(case, reference_info, bundle['track'])
             if failures:
                 raise ValueError('Reference fails its own mandatory checks: ' + ', '.join(failures))
@@ -237,13 +265,21 @@ def run(output, reference, adapter, candidate, suite=None):
 def compare(previous, current, tolerance):
     validate_result(previous)
     validate_result(current)
+    if previous.get('track') != current.get('track'):
+        raise ValueError('Reference provider track changed')
+    if previous['contract'].get('layoutProfile', 'default') != current['contract'].get('layoutProfile', 'default'):
+        raise ValueError('Renderer layout profile changed')
     if not math_valid_tolerance(tolerance):
         raise ValueError('Regression tolerance must be finite and nonnegative')
     if not previous['summary']['complete'] or not current['summary']['complete']:
         raise ValueError('Cannot gate or refresh an incomplete run')
     if any(not r.get('htmlSummary', {'complete': True})['complete'] for r in (previous, current)):
         raise ValueError('Cannot gate unmeasured delivered HTML checks')
-    if previous['contractDigest'] != current['contractDigest'] or identity(previous['contract']) != previous['contractDigest'] or identity(current['contract']) != current['contractDigest']:
+    # Older records had only the implicit default layout mode. Normalize that
+    # identity for comparison without rewriting either stored result or digest.
+    prior_contract = dict(previous['contract'], layoutProfile=previous['contract'].get('layoutProfile', 'default'))
+    current_contract = dict(current['contract'], layoutProfile=current['contract'].get('layoutProfile', 'default'))
+    if prior_contract != current_contract or identity(previous['contract']) != previous['contractDigest'] or identity(current['contract']) != current['contractDigest']:
         raise ValueError('Measurement contract changed or is corrupt')
     findings = []
     before = {c['id']: c for c in previous['cases']}
@@ -270,6 +306,9 @@ def math_valid_tolerance(value):
 def validate_result(result):
     if result['schema'] != 1 or result['contract']['metric'] != metrics.CONTRACT or identity(result['contract']) != result['contractDigest']:
         raise ValueError('Invalid result measurement contract')
+    layout = result['contract'].get('layoutProfile', 'default')
+    if not isinstance(layout, str) or not re.fullmatch('[a-z][a-z0-9-]{0,63}', layout):
+        raise ValueError('Invalid renderer layout profile identity')
     pdf_policies = result['contract'].get('pdfTextNormalizations', {})
     if 'pdfTextNormalizations' in result['contract'] and (not isinstance(pdf_policies, dict) or
             any(not isinstance(policy, str) or policy not in pdf.PDF_TEXT_POLICIES for policy in pdf_policies.values()) or
