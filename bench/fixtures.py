@@ -1157,6 +1157,16 @@ def generate():
     zero_case('tables-row-height-exact-tiny-control-times-new-roman',
               'Control: exact rows of one twip (empty) and eight points (three lines, two hidden) clip to their height (Docxodus #1339)',
               [('Echo', 1, False, 0, False), ('Foxtrot', 1, True, 0, False), ('Lima', 160, True, 3, True)])
+    # #1201: a zero-width first grid column (zero tcW, zero cell margins, fixed layout). Its cells
+    # hold empty paragraphs, so the case asserts the layout and the export, not clipped glyphs.
+    for case_id, width, description in [('tables-zero-width-column-times-new-roman', 0, 'A zero-width first column'),
+                                        ('tables-zero-width-column-control-times-new-roman', 480, 'Control: a 24pt first column')]:
+        texts, body = [], ''
+        for label, height, rule, bordered in [('Alder', 360, 'exact', False), ('Birch', 360, 'atLeast', False), ('Dogwood', 360, 'exact', True)]:
+            texts += [f'{label}Before table.', f'{label}Wide cell.', f'{label}After table.']
+            body += para(texts[-3]) + rg_table([rg_row([rg_cell(para(runs=''), width), rg_cell(para(texts[-2]), 5400 - width)], height, rule)],
+                                               [width, 5400 - width], bordered, no_margins) + para(texts[-1])
+        rg_add(case_id, description + ' in exact and atLeast 18pt rows, borderless and bordered (Docxodus #1201)', texts, body)
     # Docxodus #1171: a repeated header row with exact and atLeast rules, and a bordered paragraph
     # inside an exact row. Header text repeats once per page, so it is counted, not used as a marker.
     for rule in ('exact', 'atLeast'):
@@ -1975,7 +1985,7 @@ def generate():
                                        'tokens': ['Check', 'OakStoryNote']}]
         if mixed: cases[-1]['htmlAssertions'].append({'type': 'marker-readable', 'version': 1, 'marker': 'OakBodyPoint',
                                                     'tokens': ['Review', 'OakBodyPoint']})
-    registry = {'schema': 1, 'suite': {'id': 'core-v63', 'version': 63, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v64', 'version': 64, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
