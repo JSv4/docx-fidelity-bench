@@ -401,15 +401,129 @@ def package(path, body, final_section=None, notes=None, image=False, namespaces_
     zip_write(path, parts)
 
 
+def kept_note_flow_cases():
+    """Reproduce the original #1217 Word inputs, including omitted package defaults.
+
+    These literal six-part packages deliberately carry no settings part. Their original
+    run/paragraph spelling and implicit separators must survive deterministic regeneration.
+    Page arrays are native Word observations, not renderer-derived expectations.
+    """
+    def paragraph(text, pitch=15, keep_next=False, keep_lines=False, note_id=None,
+                  lines=1, definition=False, widow=None):
+        props = ('<w:keepNext/>' if keep_next else '') + ('<w:keepLines/>' if keep_lines else '')
+        if widow is not None:
+            props += '<w:widowControl/>' if widow else '<w:widowControl w:val="0"/>'
+        props += f'<w:spacing w:before="0" w:after="0" w:line="{pitch * 20}" w:lineRule="exact"/>'
+        content = '<w:r><w:footnoteRef/></w:r>' if definition else ''
+        content += '<w:r><w:br/></w:r>'.join(
+            f'<w:r><w:t>{text}{i:02d}</w:t></w:r>' for i in range(1, lines + 1))
+        if note_id is not None:
+            content += f'<w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr><w:footnoteReference w:id="{note_id}"/></w:r>'
+        return f'<w:p><w:pPr>{props}</w:pPr>{content}</w:p>'
+
+    def note(note_id, pitch):
+        return f'<w:footnote w:id="{note_id}">' + ''.join(
+            paragraph(f'WillowNote{note_id:02d}Part{part:02d}', pitch=pitch, definition=part == 1)
+            for part in range(1, 4)) + '</w:footnote>'
+
+    def parts(body, notes):
+        pkg = 'http://schemas.openxmlformats.org/package/2006/relationships'
+        content_types = ''.join(
+            f'<Override PartName="/word/{part}.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.{kind}+xml"/>'
+            for part, kind in [('document', 'document.main'), ('styles', 'styles'), ('footnotes', 'footnotes')])
+        return {
+            '[Content_Types].xml': f'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/>{content_types}</Types>',
+            '_rels/.rels': f'<Relationships xmlns="{pkg}"><Relationship Id="rId1" Type="{R}/officeDocument" Target="word/document.xml"/></Relationships>',
+            'word/_rels/document.xml.rels': f'<Relationships xmlns="{pkg}"><Relationship Id="rId1" Type="{R}/styles" Target="styles.xml"/><Relationship Id="rId2" Type="{R}/footnotes" Target="footnotes.xml"/></Relationships>',
+            'word/styles.xml': f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/><w:sz w:val="22"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0" w:line="300" w:lineRule="exact"/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>',
+            'word/footnotes.xml': f'<w:footnotes xmlns:w="{W}">{notes}</w:footnotes>',
+            'word/document.xml': f'<w:document xmlns:w="{W}"><w:body>{body}<w:sectPr><w:pgSz w:w="8000" w:h="6400"/><w:pgMar w:top="200" w:right="200" w:bottom="200" w:left="200" w:header="0" w:footer="0" w:gutter="0"/></w:sectPr></w:body></w:document>',
+        }
+
+    # pitch, keepNext, variant, heading page, all 17 citation-line pages, three note pages, tail.
+    heading_layouts = [
+        (20, False, '', 1, [2] * 17, [2, 3, 3], 3),
+        (20, True, '', 2, [3] * 17, [3, 4, 4], 4),
+        (40, False, '', 1, [2] * 15 + [3, 3], [3, 3, 3], 3),
+        (40, True, '', 2, [3] * 15 + [4, 4], [4, 4, 4], 4),
+        (20, True, 'no-keep-lines', 1, [1] * 13 + [2] * 4, [2, 2, 2], 2),
+        (20, True, 'separator-15pt', 2, [3] * 17, [3, 4, 4], 4),
+        (20, True, 'separator-one-twip', 2, [3] * 17, [3, 4, 4], 4),
+        (40, True, 'no-keep-lines', 1, [1] * 13 + [2] * 4, [2, 2, 2], 2),
+        (40, True, 'separator-15pt', 2, [3] * 15 + [4, 4], [4, 4, 4], 4),
+        (40, True, 'separator-one-twip', 2, [3] * 15 + [4, 4], [4, 4, 4], 4),
+        (40, True, 'widow-off', 2, [3] * 16 + [4], [4, 4, 4], 4),
+        (40, True, 'widow-on', 2, [3] * 15 + [4, 4], [4, 4, 4], 4),
+    ]
+    for pitch, kept, variant, heading_page, cite_pages, note_pages, tail_page in heading_layouts:
+        body = ''.join(paragraph(f'WillowLead{i:02d}') for i in range(1, 7))
+        body += paragraph('WillowHeading', keep_next=kept)
+        body += paragraph('WillowCite', keep_lines=variant != 'no-keep-lines', note_id=1, lines=17,
+                          widow=(variant == 'widow-on') if variant.startswith('widow-') else None)
+        body += paragraph('WillowTail')
+        notes = note(1, pitch)
+        if variant.startswith('separator-'):
+            line = 300 if variant == 'separator-15pt' else 1
+            notes = ''.join(
+                f'<w:footnote w:type="{kind}" w:id="{i}"><w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="{line}" w:lineRule="exact"/></w:pPr><w:r><w:{mark}/></w:r></w:p></w:footnote>'
+                for kind, i, mark in [('separator', -1, 'separator'), ('continuationSeparator', 0, 'continuationSeparator')]) + notes
+        pages = {f'WillowLead{i:02d}01': 1 for i in range(1, 7)}
+        pages['WillowHeading01'] = heading_page
+        pages.update({f'WillowCite{i:02d}': p for i, p in enumerate(cite_pages, 1)})
+        pages['WillowTail01'] = tail_page
+        pages.update({('1' if i == 1 else '') + f'WillowNote01Part{i:02d}01': p
+                      for i, p in enumerate(note_pages, 1)})
+        cid = (f'heading-policy-note-{pitch}pt-{variant}' if variant
+               else f'heading-note-{pitch}pt-keep-{str(kept).lower()}') + '-times-new-roman'
+        yield cid, (f'300pt band; six lead paragraphs; heading keepNext={kept}; '
+                    f'17-line citing paragraph; three {pitch}pt note paragraphs'
+                    + (f'; {variant} control' if variant else '') + ' (Docxodus #1217)'), parts(body, notes), pages, ['1']
+
+    # pitch: eight heading pages, eight citing pages, all 24 note-paragraph pages, tail.
+    dense_layouts = {
+        20: ([1, 1, 1, 2, 2, 2, 3, 3], [1, 1, 1, 2, 2, 2, 3, 3],
+             [1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3], 3),
+        39: ([1, 1, 2, 2, 3, 3, 4, 5], [1, 1, 2, 2, 3, 3, 4, 5],
+             [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5], 5),
+        40: ([1, 1, 2, 2, 3, 3, 4, 5], [1, 1, 2, 2, 3, 3, 4, 5],
+             [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5], 5),
+        41: ([1, 1, 2, 2, 3, 3, 4, 5], [1, 1, 2, 2, 3, 3, 4, 5],
+             [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5], 5),
+        89: ([1, 2, 3, 5, 6, 7, 9, 10], [1, 2, 4, 5, 6, 8, 9, 10],
+             [1, 1, 2, 2, 3, 3, 4, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 8, 9, 9, 10, 10, 11, 11], 11),
+        90: ([1, 2, 3, 5, 6, 7, 9, 10], [1, 2, 4, 5, 6, 8, 9, 10],
+             [1, 1, 2, 2, 3, 3, 4, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 8, 9, 9, 10, 10, 11, 11], 11),
+        91: ([1, 2, 3, 5, 6, 8, 9, 11], [1, 2, 4, 5, 7, 8, 10, 11],
+             [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12], 12),
+    }
+    for pitch, (heading_pages, cite_pages, note_pages, tail_page) in dense_layouts.items():
+        body = ''.join(paragraph(f'WillowHeading{i:02d}', keep_next=True)
+                       + paragraph(f'WillowCite{i:02d}', keep_lines=True, note_id=i) for i in range(1, 9))
+        body += paragraph('WillowTail')
+        pages = {}
+        for i in range(1, 9):
+            pages[f'WillowHeading{i:02d}01'] = heading_pages[i - 1]
+            pages[f'WillowCite{i:02d}01'] = cite_pages[i - 1]
+            for part in range(1, 4):
+                pages[(str(i) if part == 1 else '') + f'WillowNote{i:02d}Part{part:02d}01'] = note_pages[(i - 1) * 3 + part - 1]
+        pages['WillowTail01'] = tail_page
+        yield f'dense-chain-note-{pitch}pt-times-new-roman', (
+            f'300pt band; eight 30pt kept heading/citation pairs; each cites three {pitch}pt note paragraphs '
+            '(Docxodus #1217)'), parts(body, ''.join(note(i, pitch) for i in range(1, 9))), pages, [str(i) for i in range(1, 9)]
+
+
 def generate():
     cases = []
-    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT):
+    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT, literal_parts=None):
         assertions = assertions or []
         for assertion in assertions:
             if assertion['type'] == 'marker-region':
                 assertion.update(version=2, tolerancePt=0.0001)
         path = ROOT / 'fixtures' / (case_id + '.docx')
-        package(path, body, sect, notes, image, namespaces_extra, styles_xml, story, notes_xml, stories, extra_parts, footnote_list, numbering_xml, comments_xml, comments_extended_xml, comments_ids_xml, comments_extensible_xml, font=font)
+        if literal_parts is None:
+            package(path, body, sect, notes, image, namespaces_extra, styles_xml, story, notes_xml, stories, extra_parts, footnote_list, numbering_xml, comments_xml, comments_extended_xml, comments_ids_xml, comments_extensible_xml, font=font)
+        else:
+            zip_write(path, literal_parts)
         inventory = dict(sorted(Counter(' '.join(text).split()).items()))
         cases.append({'id': case_id, 'version': 2 if any(a['type'] == 'marker-region' for a in assertions) else 1, 'category': category, 'description': description, 'input': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'rights': {'author': 'John Scrudato IV', 'license': 'MIT', 'origin': 'Authored by bench/fixtures.py in this repository', 'assets': 'All text and graphics are generated here; no embedded font files'}, 'profile': {'review': 'final', 'comments': 'hidden'}, 'fonts': [font], 'tokens': inventory, 'assertions': assertions, 'generator': {'path': 'bench/fixtures.py', 'sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}})
     prose = 'The survey team records the height of each tower before the evening check. The next crew compares the notes and keeps the route open for the morning visit.'
@@ -2225,7 +2339,17 @@ def generate():
                  boxes[a['marker']][3]+1, boxes[a['marker']][4]+1], 'tolerancePt': 0.0001, 'adjudicated': 'word'}
                 for a in case['assertions']]
             case['version'] = 2
-    registry = {'schema': 1, 'suite': {'id': 'core-v67', 'version': 67, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    for cid, description, parts, pages, references in kept_note_flow_cases():
+        # Literal text plus the semantic note number supplies the complete inventory.
+        # The number touches its note's first word; body reference numbers are separate.
+        # These assert page membership within the source paper, not exact baselines or
+        # margin-edge rounding. Unaligned coordinates and rasters remain measured as usual.
+        add(cid, 'notes', description, list(pages) + references, '',
+            font='Times New Roman', literal_parts=parts,
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': marker,
+                         'occurrence': 1, 'page': page, 'rect': [0, 0, 400, 320],
+                         'adjudicated': 'word'} for marker, page in pages.items()])
+    registry = {'schema': 1, 'suite': {'id': 'core-v68', 'version': 68, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
