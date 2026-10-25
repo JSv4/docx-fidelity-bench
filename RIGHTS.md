@@ -146,3 +146,9 @@ external document content, images, or embedded font binaries. The labelled evide
 `docs/results/oversized-page-blocks/` show these authored inputs and separately authored core probes
 in native Word and public Docxodus exports. Native font subsets retain the recorded font contract;
 no font binaries are redistributed.
+
+The eight #1217 note-table flow cases reuse original literal-text OOXML from the author's
+`80ac8d7` prototype, with Times New Roman declared for the preserved Word captures. Their exact
+input bytes are reproducible by this repository's generator. Native/candidate comparison PNGs
+and PDF inspections show only these authored fixtures. No external document, template or standalone
+font binary is imported; native PDF font subsets retain the separately provisioned font license.
