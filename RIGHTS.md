@@ -152,3 +152,10 @@ The eight #1217 note-table flow cases reuse original literal-text OOXML from the
 input bytes are reproducible by this repository's generator. Native/candidate comparison PNGs
 and PDF inspections show only these authored fixtures. No external document, template or standalone
 font binary is imported; native PDF font subsets retain the separately provisioned font license.
+
+The nineteen #1217 kept-citation and dense-chain cases reproduce original literal OOXML authored
+for the issue and the original keep/widow/separator controls. The six-part packages are generated
+here without imported documents or templates. Comparison PNGs and PDF inspections in
+`docs/results/kept-note-flow/` show only these authored fixtures. No authentication data or
+standalone font binaries are included; the separately provisioned native PDF font subsets retain
+the recorded font contract.
