@@ -130,3 +130,10 @@ OOXML authored in commit 7851026 of this repository. Their bytes exactly match t
 used for the native Word captures. There are no imported document contents, images or embedded font
 files. Native PDF font subsets remain governed by the separately provisioned font license and the
 recorded reference font contract; no font binaries are redistributed.
+
+
+The #1201 Times New Roman zero-width column fixture and 24pt control reuse original literal-text
+OOXML authored in the row-geometry branch. The package bytes match the separately retained native
+Word inputs. No external document content, images, or font binaries are imported. Rendered evidence
+contains original fixture text and separately licensed font subsets; the font contract and native
+capture hashes are retained with the unmodified local Word references.
