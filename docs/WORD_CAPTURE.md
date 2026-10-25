@@ -32,3 +32,54 @@ Import runs each capture through its case's own mandatory checks: the visible to
 For `paragraph-contract-times-new-roman` (core-v34), capture the separately registered Times New Roman input, not a renamed PDF from `paragraph-contract`. The local font contract includes both families and all eight style files. The original Liberation Serif capture remains ineligible if Word substitutes Times New Roman, even when the new variant passes. Word is needed only for capture; registration, measurement and tests run offline.
 
 Record any observed font-version difference with the capture evidence. Family eligibility is not proof of identical font binaries: the October 18, 2026 Word Online agreement capture embeds Times New Roman 7.11, while the local Core Fonts files are 2.82. The compared embedded glyph advances agree, but that does not establish identical outlines, kerning or rasterization. See the [agreement comparison](results/paragraph-contract-word.md).
+
+## Word's embedded-font aliases
+
+Word can emit an embedded TrueType font under an internal PDF name such as
+`___WRD_EMBED_SUB_1434`. The name alone remains ineligible. An operator may qualify
+that exact capture with `fontIdentityBindings` only after reviewing its used glyph
+outlines, advances, bearings and instructions against the exact embedded source font.
+Retain the audit and its digest with the capture. This is an operator attestation;
+the harness verifies the cryptographic binding and does not repeat the outline audit.
+
+Each case's binding list records `pdfFontName` (the unprefixed raw alias), `family`,
+`sourceFontPart`, `sourceFontSha256`, `embeddedProgramSha256`, `glyphAuditSha256`, and
+`reviewedGlyphIdentity: true`. Import checks that the family is declared by the case,
+the source font table embeds that family through that part, the part's bytes match the
+local font contract, and qpdf extracts exactly the audited native font-program bytes.
+Duplicate, unknown, missing, substituted or unreviewed bindings fail. PDF font names,
+coordinates and raster pixels are never renamed or normalized. Other unqualified fonts
+remain ineligible. Every run repeats the source/program binding checks, and the reference
+bundle binds the verifier's version and source hash.
+
+An independently captured pack can supply an explicit manifest without changing the
+existing authored corpus:
+
+```sh
+python3 -m bench reference import --manifest references/PACK/registry.json \
+  --metadata references/PACK/metadata.json --pdf-dir references/PACK/native \
+  --out references/PACK/registered
+python3 -m bench run --manifest references/PACK/registry.json \
+  --reference references/PACK/registered/bundle.json --adapter docxodus \
+  --candidate FULL_SOURCE_SHA --out runs/word-candidate --gate mandatory
+```
+
+Pack inputs and generator hashes receive the same registry validation. Captured PDFs,
+source inputs, separately licensed font parts, audits and registered bundles stay outside
+the source inventory in ignored reference directories or pinned evidence assets. Their
+publication rights and provenance must be explicit; the source repository does not acquire
+font binaries by accepting an external manifest.
+
+## Provider tracks and renderer profiles
+
+Keep Word and LibreOffice bundles and accepted measurements separate. Run the previous
+accepted renderer and the candidate against the same immutable bundle and compare within
+that provider track. Scores from different tracks are not aggregated or compared as a
+regression series. Case-specific Word adjudication must retain the LibreOffice findings
+and link the verified Word evidence; it does not rewrite the LibreOffice reference.
+
+Results now record `layoutProfile: "default"` in their measurement contract and display it
+next to the reference track. This names the one existing renderer mode; it adds no public
+layout option. Older records without that field retain the implicit default identity.
+Comparison rejects different provider tracks or layout profiles, so future Word and
+LibreOffice renderer modes must each establish and protect their own accepted results.

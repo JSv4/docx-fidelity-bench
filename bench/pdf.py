@@ -86,8 +86,14 @@ def normalize_text(info, policy):
     return dict(info, tokens=tokens, decorativeWords=decorative, pdfTextNormalization=policy)
 
 
-def inspect_case_pdf(path, case):
-    return normalize_text(inspect_pdf(path), case.get('pdfTextNormalization'))
+def inspect_case_pdf(path, case, *, word_font_bindings=None, font_contract=None):
+    info = normalize_text(inspect_pdf(path), case.get('pdfTextNormalization'))
+    if word_font_bindings is not None:
+        from .word_fonts import qualify
+        from .common import ROOT, contained
+        info = qualify(path, contained(ROOT, case['input']), info, word_font_bindings,
+                       font_contract, case['fonts'])
+    return info
 
 
 def inspect_pdf(path):
@@ -124,7 +130,11 @@ def rasterize(pdf, folder):
 
 def font_check(info, families):
     allowed = [family.replace(' ', '').lower() for family in families]
-    return bool(info['fonts']) and all(any(font.replace('-', '').lower().startswith(family) for family in allowed) for font in info['fonts'])
+    bindings = info.get('verifiedWordFontBindings', {})
+    return bool(info['fonts']) and all(
+        any(font.replace('-', '').lower().startswith(family) for family in allowed) or
+        bindings.get(font, {}).get('family', '').replace(' ', '').lower() in allowed
+        for font in info['fonts'])
 
 
 def inventory_check(info, case):

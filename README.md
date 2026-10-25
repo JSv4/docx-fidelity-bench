@@ -218,6 +218,8 @@ python3 -m bench reference import --metadata capture.json \
 
 The metadata format is documented in [Word capture](docs/WORD_CAPTURE.md). Each Word track, including the provider-neutral `word` track, remains distinct from the LibreOffice tracks and from the others. A missing or ineligible capture blocks a complete Word suite score.
 
+An immutable external capture pack can supply its own `--manifest` to both `reference import` and `run`; the authored default corpus stays unchanged. Reviewed Word font aliases require exact source and PDF font-program bindings, as described in [Word capture](docs/WORD_CAPTURE.md). Results record the reference provider separately from the renderer's current `default` layout profile, and comparisons across either identity are rejected. This records the one existing layout mode; it does not add renderer profile options.
+
 `core-v33` adds grouped paragraph borders in headers, footers, footnotes and endnotes,
 with matching unbordered controls for [Docxodus #1203](https://github.com/JSv4/Docxodus/issues/1203).
 Each card includes two adjacent bordered paragraphs and an unbordered paragraph. The body card
