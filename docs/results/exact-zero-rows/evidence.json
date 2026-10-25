@@ -1,0 +1,4248 @@
+{
+  "issue": 1339,
+  "suite": "core-v63",
+  "requiredPdfCases": 304,
+  "formalRuns": {
+    "before": {
+      "categoryMeans": {},
+      "closeMatchRate": 0.0,
+      "complete": false,
+      "mandatoryPassRate": 0.0,
+      "measured": 0,
+      "required": 304,
+      "score": null
+    },
+    "after": {
+      "categoryMeans": {},
+      "closeMatchRate": 0.0,
+      "complete": false,
+      "mandatoryPassRate": 0.0,
+      "measured": 0,
+      "required": 304,
+      "score": null
+    }
+  },
+  "eligibility": "Formal candidate runs unmeasured: benchmark requires unprivileged user namespaces. Separate diagnostics use a source-bound build, pinned sandboxed caller-provided Chromium, the installed root-owned helper, and regular font files matching the recorded font hashes. No suite or fidelity score is claimed.",
+  "before": {
+    "sourceCommit": "71524a5fe4141a4bc6f05126dc9ed95974d73ff1",
+    "sourceTree": "d7cad24bee5b3df7706e90e530f011236ab0962e",
+    "scored": false,
+    "eligibility": "unmeasured: strict benchmark preflight requires unprivileged user namespaces; this diagnostic uses a caller-provided sandboxed pinned browser with the installed root-owned helper",
+    "browserVersion": "143.0.7499.4",
+    "chromiumSandbox": true,
+    "helper": "/opt/google/chrome/chrome-sandbox",
+    "cases": [
+      {
+        "id": "tables-row-height-exact-zero-borderless",
+        "inputSha256": "fdea64816a0fde9919356b940b7213a1b1527bc2ab63488027ce312805eb32e8",
+        "pdfSha256": "9697f4514d2beb2d86b809872d939ae9134857670c570d367df6c6cfe545ce5d",
+        "htmlSha256": "f4ed89f87f645d998b452e6c8cd5f76f1c421bb3b91e9d358a5aac973385b3ba",
+        "pages": 1,
+        "renderEnvironment": {
+          "rendererFingerprint": "f8b283b125e79dfde6da6fe9d783063bda6a4c571ec5c0d3afa6aa8afe60f296",
+          "verification": "browserObserved",
+          "fidelityTier": "unbaselined",
+          "observed": {
+            "runtimeKind": "nodeChromium",
+            "locale": "en-US",
+            "timezone": "UTC",
+            "viewport": [
+              1600,
+              1200
+            ],
+            "deviceScaleFactor": 1,
+            "media": {
+              "colorScheme": "light",
+              "reducedMotion": "reduce",
+              "forcedColors": "none",
+              "printMedia": true
+            },
+            "networkIsolation": "contextRestricted",
+            "playwrightVersion": "1.57.0",
+            "browserProduct": "Chromium",
+            "browserBuild": "143.0.7499.4",
+            "launchFlags": [],
+            "operatingSystem": "linux",
+            "architecture": "x64"
+          }
+        }
+      },
+      {
+        "id": "tables-row-height-exact-zero-only",
+        "inputSha256": "4dbf9026f3314bc4505a3a1f65c8487c5d5fe74c18756cdcc46f1fe963bff2ca",
+        "pdfSha256": "f5d523b59e5758c08bbc313df6aa373d1112626592e1893ae541dd4c6cb821ae",
+        "htmlSha256": "d0bc39ffc0c699ae1241dd15dd6a473fdc743ae1e6392dedfa88ddd0c53173dc",
+        "pages": 1,
+        "renderEnvironment": {
+          "rendererFingerprint": "d4802338027214fcd3ad567bdd02b7c4fd66c4e5ddaa8b7a8c43880f75b5530c",
+          "verification": "browserObserved",
+          "fidelityTier": "unbaselined",
+          "observed": {
+            "runtimeKind": "nodeChromium",
+            "locale": "en-US",
+            "timezone": "UTC",
+            "viewport": [
+              1600,
+              1200
+            ],
+            "deviceScaleFactor": 1,
+            "media": {
+              "colorScheme": "light",
+              "reducedMotion": "reduce",
+              "forcedColors": "none",
+              "printMedia": true
+            },
+            "networkIsolation": "contextRestricted",
+            "playwrightVersion": "1.57.0",
+            "browserProduct": "Chromium",
+            "browserBuild": "143.0.7499.4",
+            "launchFlags": [],
+            "operatingSystem": "linux",
+            "architecture": "x64"
+          }
+        }
+      },
+      {
+        "id": "tables-row-height-exact-zero-content-times-new-roman",
+        "inputSha256": "9096f52f52caa2c454112db95ba49ffb2364610b49eab59978b924068c54b0d5",
+        "pdfSha256": "d4cab797598f5f7abd8695253e800406e5b0d73af66fec6bbbe43211f483cac1",
+        "htmlSha256": "cfbec93c4c2ba8b206d15de1218b7b4de671e760bd8dd4edba8ffeaae7ab10aa",
+        "pages": 1,
+        "renderEnvironment": {
+          "rendererFingerprint": "8a456853d054d495535c659213ee1ceeb27c83ce91e88e3c83e24a4159f5484d",
+          "verification": "browserObserved",
+          "fidelityTier": "unbaselined",
+          "observed": {
+            "runtimeKind": "nodeChromium",
+            "locale": "en-US",
+            "timezone": "UTC",
+            "viewport": [
+              1600,
+              1200
+            ],
+            "deviceScaleFactor": 1,
+            "media": {
+              "colorScheme": "light",
+              "reducedMotion": "reduce",
+              "forcedColors": "none",
+              "printMedia": true
+            },
+            "networkIsolation": "contextRestricted",
+            "playwrightVersion": "1.57.0",
+            "browserProduct": "Chromium",
+            "browserBuild": "143.0.7499.4",
+            "launchFlags": [],
+            "operatingSystem": "linux",
+            "architecture": "x64"
+          }
+        }
+      },
+      {
+        "id": "tables-row-height-exact-tiny-control-times-new-roman",
+        "inputSha256": "816ab93a2b643ef6ef96fcf6813ccfbb5e6e9fa54b985d3b3e819cf7204ef856",
+        "pdfSha256": "09732f31039543b709f1c4ebbfb9d83df45f917883e89be397df2d5d0e49a8fb",
+        "htmlSha256": "5075ecb8ef16b5eac1b5c139c5cb37b030a54b7d855e5568f439273f8f7be1c7",
+        "pages": 1,
+        "renderEnvironment": {
+          "rendererFingerprint": "cfa8a0d011b011e71ebc9d37229cd1ff1d6f4ace6f88f64173eaece29d1d5f64",
+          "verification": "browserObserved",
+          "fidelityTier": "unbaselined",
+          "observed": {
+            "runtimeKind": "nodeChromium",
+            "locale": "en-US",
+            "timezone": "UTC",
+            "viewport": [
+              1600,
+              1200
+            ],
+            "deviceScaleFactor": 1,
+            "media": {
+              "colorScheme": "light",
+              "reducedMotion": "reduce",
+              "forcedColors": "none",
+              "printMedia": true
+            },
+            "networkIsolation": "contextRestricted",
+            "playwrightVersion": "1.57.0",
+            "browserProduct": "Chromium",
+            "browserBuild": "143.0.7499.4",
+            "launchFlags": [],
+            "operatingSystem": "linux",
+            "architecture": "x64"
+          }
+        }
+      }
+    ]
+  },
+  "after": {
+    "sourceCommit": "2fa69d6ff584344535ba81c4bae8984b949ec3b8",
+    "sourceTree": "c88bddf0daf8e43205515836fbc005903130f207",
+    "scored": false,
+    "eligibility": "unmeasured: strict benchmark preflight requires unprivileged user namespaces; this diagnostic uses a caller-provided sandboxed pinned browser with the installed root-owned helper",
+    "browserVersion": "143.0.7499.4",
+    "chromiumSandbox": true,
+    "helper": "/opt/google/chrome/chrome-sandbox",
+    "cases": [
+      {
+        "id": "tables-row-height-exact-zero-borderless",
+        "inputSha256": "fdea64816a0fde9919356b940b7213a1b1527bc2ab63488027ce312805eb32e8",
+        "pdfSha256": "5daf7be73789ee4d81fdd924698cb2ccc5091ac35a4a42fa83935e6992a51733",
+        "htmlSha256": "4a68f11f968dd55eb1175a9b69432f98c13e161108da65cc92132ec4360edefa",
+        "pages": 1,
+        "renderEnvironment": {
+          "rendererFingerprint": "f1ea76a4943fb563fa0aada19cf025178f5a0bc4555b26f7eeff46c66fe84719",
+          "verification": "browserObserved",
+          "fidelityTier": "unbaselined",
+          "observed": {
+            "runtimeKind": "nodeChromium",
+            "locale": "en-US",
+            "timezone": "UTC",
+            "viewport": [
+              1600,
+              1200
+            ],
+            "deviceScaleFactor": 1,
+            "media": {
+              "colorScheme": "light",
+              "reducedMotion": "reduce",
+              "forcedColors": "none",
+              "printMedia": true
+            },
+            "networkIsolation": "contextRestricted",
+            "playwrightVersion": "1.57.0",
+            "browserProduct": "Chromium",
+            "browserBuild": "143.0.7499.4",
+            "launchFlags": [],
+            "operatingSystem": "linux",
+            "architecture": "x64"
+          }
+        }
+      },
+      {
+        "id": "tables-row-height-exact-zero-only",
+        "inputSha256": "4dbf9026f3314bc4505a3a1f65c8487c5d5fe74c18756cdcc46f1fe963bff2ca",
+        "pdfSha256": "d0731a213ccc229b979582f6a5adf9430f1f1db302f6c3c9ff267e8561800bbf",
+        "htmlSha256": "b8dc735a1d650bf1eb2673cd20e8aecbc42139b886c92f051d6a743a6244cb57",
+        "pages": 1,
+        "renderEnvironment": {
+          "rendererFingerprint": "cda7df3ddc635570990baaf86638a000bb36a73ba0eac3761464950539208023",
+          "verification": "browserObserved",
+          "fidelityTier": "unbaselined",
+          "observed": {
+            "runtimeKind": "nodeChromium",
+            "locale": "en-US",
+            "timezone": "UTC",
+            "viewport": [
+              1600,
+              1200
+            ],
+            "deviceScaleFactor": 1,
+            "media": {
+              "colorScheme": "light",
+              "reducedMotion": "reduce",
+              "forcedColors": "none",
+              "printMedia": true
+            },
+            "networkIsolation": "contextRestricted",
+            "playwrightVersion": "1.57.0",
+            "browserProduct": "Chromium",
+            "browserBuild": "143.0.7499.4",
+            "launchFlags": [],
+            "operatingSystem": "linux",
+            "architecture": "x64"
+          }
+        }
+      },
+      {
+        "id": "tables-row-height-exact-zero-content-times-new-roman",
+        "inputSha256": "9096f52f52caa2c454112db95ba49ffb2364610b49eab59978b924068c54b0d5",
+        "pdfSha256": "e637d4e465b5b8aae22ae616f12b3c57a637575951d21c48f4dd83abbdc611e7",
+        "htmlSha256": "71f10a6163cb583df6882249f4585feff213a9d18e57e98fdcaac19ae07b4d6c",
+        "pages": 1,
+        "renderEnvironment": {
+          "rendererFingerprint": "1a99cf67c120d59ff9c8bf3640bd466d1de2e3459525b79398dbca560ab8569a",
+          "verification": "browserObserved",
+          "fidelityTier": "unbaselined",
+          "observed": {
+            "runtimeKind": "nodeChromium",
+            "locale": "en-US",
+            "timezone": "UTC",
+            "viewport": [
+              1600,
+              1200
+            ],
+            "deviceScaleFactor": 1,
+            "media": {
+              "colorScheme": "light",
+              "reducedMotion": "reduce",
+              "forcedColors": "none",
+              "printMedia": true
+            },
+            "networkIsolation": "contextRestricted",
+            "playwrightVersion": "1.57.0",
+            "browserProduct": "Chromium",
+            "browserBuild": "143.0.7499.4",
+            "launchFlags": [],
+            "operatingSystem": "linux",
+            "architecture": "x64"
+          }
+        }
+      },
+      {
+        "id": "tables-row-height-exact-tiny-control-times-new-roman",
+        "inputSha256": "816ab93a2b643ef6ef96fcf6813ccfbb5e6e9fa54b985d3b3e819cf7204ef856",
+        "pdfSha256": "9c6ab8ae8cd94df477d6d25376b9d8e63ba7823f0392494171ab9ffbf3a97ad2",
+        "htmlSha256": "5075ecb8ef16b5eac1b5c139c5cb37b030a54b7d855e5568f439273f8f7be1c7",
+        "pages": 1,
+        "renderEnvironment": {
+          "rendererFingerprint": "55a005ebd37a75c07fe2edf215a8756013f38d1608170fc420068e605c053bfc",
+          "verification": "browserObserved",
+          "fidelityTier": "unbaselined",
+          "observed": {
+            "runtimeKind": "nodeChromium",
+            "locale": "en-US",
+            "timezone": "UTC",
+            "viewport": [
+              1600,
+              1200
+            ],
+            "deviceScaleFactor": 1,
+            "media": {
+              "colorScheme": "light",
+              "reducedMotion": "reduce",
+              "forcedColors": "none",
+              "printMedia": true
+            },
+            "networkIsolation": "contextRestricted",
+            "playwrightVersion": "1.57.0",
+            "browserProduct": "Chromium",
+            "browserBuild": "143.0.7499.4",
+            "launchFlags": [],
+            "operatingSystem": "linux",
+            "architecture": "x64"
+          }
+        }
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "tables-row-height-exact-zero-borderless",
+      "inputSha256": "fdea64816a0fde9919356b940b7213a1b1527bc2ab63488027ce312805eb32e8",
+      "wordReferenceEligible": false,
+      "wordReferenceIneligibleChecks": [
+        "declared-font-families"
+      ],
+      "files": [
+        {
+          "label": "Word for the web",
+          "pdfSha256": "402480fd41ed61092934d2dd5ee4ea8c1b76934fe02376dc503afa7322c757a9",
+          "fonts": [
+            "TimesNewRomanPSMT"
+          ],
+          "pages": 1
+        },
+        {
+          "label": "Before: 71524a5f",
+          "pdfSha256": "9697f4514d2beb2d86b809872d939ae9134857670c570d367df6c6cfe545ce5d",
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "pages": 1
+        },
+        {
+          "label": "After: 2fa69d6f",
+          "pdfSha256": "5daf7be73789ee4d81fdd924698cb2ccc5091ac35a4a42fa83935e6992a51733",
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "pages": 1
+        }
+      ],
+      "rawWordGeometry": [
+        {
+          "marker": "ZeroAfter",
+          "word": {
+            "text": "ZeroAfter",
+            "page": 1,
+            "rect": [
+              72.025,
+              137.749,
+              116.157,
+              149.926
+            ]
+          },
+          "before": {
+            "text": "ZeroAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              121.452205,
+              115.942845,
+              133.628307
+            ]
+          },
+          "after": {
+            "text": "ZeroAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              133.452204,
+              115.942845,
+              145.628307
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            -16.296795
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            -4.296796
+          ]
+        },
+        {
+          "marker": "Zero03",
+          "word": {
+            "text": "Zero03",
+            "page": 1,
+            "rect": [
+              72.525,
+              119.749,
+              104.502,
+              131.926
+            ]
+          },
+          "before": {
+            "text": "Zero03",
+            "page": 1,
+            "rect": [
+              77.390622,
+              103.452205,
+              109.134115,
+              115.628308
+            ]
+          },
+          "after": {
+            "text": "Zero03",
+            "page": 1,
+            "rect": [
+              77.390622,
+              115.452205,
+              109.134115,
+              127.628308
+            ]
+          },
+          "beforeDeltaPt": [
+            4.865622,
+            -16.296795
+          ],
+          "afterDeltaPt": [
+            4.865622,
+            -4.296795
+          ]
+        }
+      ],
+      "missingRequiredTokens": {
+        "word": [],
+        "before": [],
+        "after": []
+      },
+      "diagnosticChecksWithoutEnvironmentEligibility": {
+        "before": [
+          {
+            "name": "page-count",
+            "passed": true
+          },
+          {
+            "name": "expected-visible-tokens",
+            "passed": true,
+            "missing": {},
+            "extra": {},
+            "normalizedRaw": {}
+          },
+          {
+            "name": "declared-font-families",
+            "passed": true,
+            "observed": [
+              "LiberationSerif"
+            ]
+          },
+          {
+            "name": "physical-geometry-page-1",
+            "passed": true
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "ZeroAfter",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "Zero03",
+              "tolerancePt": 0.5
+            }
+          }
+        ],
+        "after": [
+          {
+            "name": "page-count",
+            "passed": true
+          },
+          {
+            "name": "expected-visible-tokens",
+            "passed": true,
+            "missing": {},
+            "extra": {},
+            "normalizedRaw": {}
+          },
+          {
+            "name": "declared-font-families",
+            "passed": true,
+            "observed": [
+              "LiberationSerif"
+            ]
+          },
+          {
+            "name": "physical-geometry-page-1",
+            "passed": true
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "ZeroAfter",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "Zero03",
+              "tolerancePt": 0.5
+            }
+          }
+        ]
+      },
+      "screenshot": "docs/results/exact-zero-rows/tables-row-height-exact-zero-borderless.png",
+      "screenshotSha256": "f9d87bb3db0d616607d10753e4b3496d56d2254ef8b3e8372fcd13c6f35adda8",
+      "viewed": true,
+      "viewedAtUtc": "2026-10-24T23:46:52.826557+00:00",
+      "visualObservation": "Zero-row content height restored; font-substituted Word reference remains diagnostic"
+    },
+    {
+      "id": "tables-row-height-exact-zero-only",
+      "inputSha256": "4dbf9026f3314bc4505a3a1f65c8487c5d5fe74c18756cdcc46f1fe963bff2ca",
+      "wordReferenceEligible": false,
+      "wordReferenceIneligibleChecks": [
+        "declared-font-families"
+      ],
+      "files": [
+        {
+          "label": "Word for the web",
+          "pdfSha256": "ac64fa7630be894dc49531ceb17f0b7fd56b21070af17720ac3efaed5b1aafc7",
+          "fonts": [
+            "TimesNewRomanPSMT"
+          ],
+          "pages": 1
+        },
+        {
+          "label": "Before: 71524a5f",
+          "pdfSha256": "f5d523b59e5758c08bbc313df6aa373d1112626592e1893ae541dd4c6cb821ae",
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "pages": 1
+        },
+        {
+          "label": "After: 2fa69d6f",
+          "pdfSha256": "d0731a213ccc229b979582f6a5adf9430f1f1db302f6c3c9ff267e8561800bbf",
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "pages": 1
+        }
+      ],
+      "rawWordGeometry": [
+        {
+          "marker": "ZeroAfter",
+          "word": {
+            "text": "ZeroAfter",
+            "page": 1,
+            "rect": [
+              72.025,
+              130.999,
+              116.157,
+              143.176
+            ]
+          },
+          "before": {
+            "text": "ZeroAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              85.452206,
+              115.942845,
+              97.628309
+            ]
+          },
+          "after": {
+            "text": "ZeroAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              122.952204,
+              115.942845,
+              135.128307
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            -45.546794
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            -8.046796
+          ]
+        }
+      ],
+      "missingRequiredTokens": {
+        "word": [],
+        "before": [],
+        "after": []
+      },
+      "diagnosticChecksWithoutEnvironmentEligibility": {
+        "before": [
+          {
+            "name": "page-count",
+            "passed": true
+          },
+          {
+            "name": "expected-visible-tokens",
+            "passed": true,
+            "missing": {},
+            "extra": {},
+            "normalizedRaw": {}
+          },
+          {
+            "name": "declared-font-families",
+            "passed": true,
+            "observed": [
+              "LiberationSerif"
+            ]
+          },
+          {
+            "name": "physical-geometry-page-1",
+            "passed": true
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "ZeroAfter",
+              "tolerancePt": 0.5
+            }
+          }
+        ],
+        "after": [
+          {
+            "name": "page-count",
+            "passed": true
+          },
+          {
+            "name": "expected-visible-tokens",
+            "passed": true,
+            "missing": {},
+            "extra": {},
+            "normalizedRaw": {}
+          },
+          {
+            "name": "declared-font-families",
+            "passed": true,
+            "observed": [
+              "LiberationSerif"
+            ]
+          },
+          {
+            "name": "physical-geometry-page-1",
+            "passed": true
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "ZeroAfter",
+              "tolerancePt": 0.5
+            }
+          }
+        ]
+      },
+      "screenshot": "docs/results/exact-zero-rows/tables-row-height-exact-zero-only.png",
+      "screenshotSha256": "22b54cfbfa14e921a75cccd99cc729a79657310eefb9ddb32713edcd4888d0c0",
+      "viewed": true,
+      "viewedAtUtc": "2026-10-24T23:46:52.826557+00:00",
+      "visualObservation": "Zero-row content height restored; font-substituted Word reference remains diagnostic"
+    },
+    {
+      "id": "tables-row-height-exact-zero-content-times-new-roman",
+      "inputSha256": "9096f52f52caa2c454112db95ba49ffb2364610b49eab59978b924068c54b0d5",
+      "wordReferenceEligible": true,
+      "wordReferenceIneligibleChecks": [],
+      "files": [
+        {
+          "label": "Word for the web",
+          "pdfSha256": "354cde3a68e2512e7b9139f4e703413b435107eb9ff280389e42630ad6a58eb4",
+          "fonts": [
+            "TimesNewRomanPSMT"
+          ],
+          "pages": 1
+        },
+        {
+          "label": "Before: 71524a5f",
+          "pdfSha256": "d4cab797598f5f7abd8695253e800406e5b0d73af66fec6bbbe43211f483cac1",
+          "fonts": [
+            "TimesNewRomanPSMT"
+          ],
+          "pages": 1
+        },
+        {
+          "label": "After: 2fa69d6f",
+          "pdfSha256": "e637d4e465b5b8aae22ae616f12b3c57a637575951d21c48f4dd83abbdc611e7",
+          "fonts": [
+            "TimesNewRomanPSMT"
+          ],
+          "pages": 1
+        }
+      ],
+      "rawWordGeometry": [
+        {
+          "marker": "AlphaBefore",
+          "word": {
+            "text": "AlphaBefore",
+            "page": 1,
+            "rect": [
+              72.025,
+              74.979,
+              128.873,
+              87.156
+            ]
+          },
+          "before": {
+            "text": "AlphaBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              74.952206,
+              128.770953,
+              87.128309
+            ]
+          },
+          "after": {
+            "text": "AlphaBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              74.952206,
+              128.770953,
+              87.128309
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            -0.026794
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            -0.026794
+          ]
+        },
+        {
+          "marker": "AlphaTop1L",
+          "word": {
+            "text": "AlphaTop1L",
+            "page": 1,
+            "rect": [
+              77.525,
+              90.979,
+              134.45,
+              103.156
+            ]
+          },
+          "before": {
+            "text": "AlphaTop1L",
+            "page": 1,
+            "rect": [
+              77.390622,
+              90.702206,
+              133.405067,
+              102.878309
+            ]
+          },
+          "after": {
+            "text": "AlphaTop1L",
+            "page": 1,
+            "rect": [
+              77.390622,
+              90.702206,
+              133.405067,
+              102.878309
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.134378,
+            -0.276794
+          ],
+          "afterDeltaPt": [
+            -0.134378,
+            -0.276794
+          ]
+        },
+        {
+          "marker": "AlphaTop1R",
+          "word": {
+            "text": "AlphaTop1R",
+            "page": 1,
+            "rect": [
+              277.63,
+              90.979,
+              335.171,
+              103.156
+            ]
+          },
+          "before": {
+            "text": "AlphaTop1R",
+            "page": 1,
+            "rect": [
+              277.382801,
+              90.702206,
+              334.014641,
+              102.878309
+            ]
+          },
+          "after": {
+            "text": "AlphaTop1R",
+            "page": 1,
+            "rect": [
+              277.382801,
+              90.702206,
+              334.014641,
+              102.878309
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.247199,
+            -0.276794
+          ],
+          "afterDeltaPt": [
+            -0.247199,
+            -0.276794
+          ]
+        },
+        {
+          "marker": "AlphaMid1L",
+          "word": {
+            "text": "AlphaMid1L",
+            "page": 1,
+            "rect": [
+              77.525,
+              108.999,
+              134.978,
+              121.176
+            ]
+          },
+          "before": null,
+          "after": {
+            "text": "AlphaMid1L",
+            "page": 1,
+            "rect": [
+              77.390622,
+              108.702205,
+              134.790019,
+              120.878308
+            ]
+          },
+          "afterDeltaPt": [
+            -0.134378,
+            -0.296795
+          ]
+        },
+        {
+          "marker": "AlphaMid1R",
+          "word": {
+            "text": "AlphaMid1R",
+            "page": 1,
+            "rect": [
+              277.63,
+              108.999,
+              335.699,
+              121.176
+            ]
+          },
+          "before": null,
+          "after": {
+            "text": "AlphaMid1R",
+            "page": 1,
+            "rect": [
+              277.382801,
+              108.702205,
+              335.399594,
+              120.878308
+            ]
+          },
+          "afterDeltaPt": [
+            -0.247199,
+            -0.296795
+          ]
+        },
+        {
+          "marker": "AlphaBot1L",
+          "word": {
+            "text": "AlphaBot1L",
+            "page": 1,
+            "rect": [
+              77.525,
+              124.999,
+              132.481,
+              137.176
+            ]
+          },
+          "before": {
+            "text": "AlphaBot1L",
+            "page": 1,
+            "rect": [
+              77.390622,
+              108.702205,
+              132.347908,
+              120.878308
+            ]
+          },
+          "after": {
+            "text": "AlphaBot1L",
+            "page": 1,
+            "rect": [
+              77.390622,
+              125.202204,
+              132.347908,
+              137.378307
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.134378,
+            -16.296795
+          ],
+          "afterDeltaPt": [
+            -0.134378,
+            0.203204
+          ]
+        },
+        {
+          "marker": "AlphaBot1R",
+          "word": {
+            "text": "AlphaBot1R",
+            "page": 1,
+            "rect": [
+              277.63,
+              124.999,
+              333.202,
+              137.176
+            ]
+          },
+          "before": {
+            "text": "AlphaBot1R",
+            "page": 1,
+            "rect": [
+              277.382801,
+              108.702205,
+              332.957482,
+              120.878308
+            ]
+          },
+          "after": {
+            "text": "AlphaBot1R",
+            "page": 1,
+            "rect": [
+              277.382801,
+              125.202204,
+              332.957482,
+              137.378307
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.247199,
+            -16.296795
+          ],
+          "afterDeltaPt": [
+            -0.247199,
+            0.203204
+          ]
+        },
+        {
+          "marker": "AlphaAfter",
+          "word": {
+            "text": "AlphaAfter",
+            "page": 1,
+            "rect": [
+              72.025,
+              142.999,
+              122.152,
+              155.176
+            ]
+          },
+          "before": {
+            "text": "AlphaAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              126.702204,
+              122.056176,
+              138.878307
+            ]
+          },
+          "after": {
+            "text": "AlphaAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              143.202204,
+              122.056176,
+              155.378306
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            -16.296796
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            0.203204
+          ]
+        },
+        {
+          "marker": "BravoBefore",
+          "word": {
+            "text": "BravoBefore",
+            "page": 1,
+            "rect": [
+              72.025,
+              158.999,
+              128.873,
+              171.176
+            ]
+          },
+          "before": {
+            "text": "BravoBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              143.202204,
+              128.770953,
+              155.378306
+            ]
+          },
+          "after": {
+            "text": "BravoBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              158.952203,
+              128.770953,
+              171.128306
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            -15.796796
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            -0.046797
+          ]
+        },
+        {
+          "marker": "BravoTop1L",
+          "word": {
+            "text": "BravoTop1L",
+            "page": 1,
+            "rect": [
+              78.025,
+              175.999,
+              134.95,
+              188.176
+            ]
+          },
+          "before": {
+            "text": "BravoTop1L",
+            "page": 1,
+            "rect": [
+              78.140622,
+              159.702203,
+              134.155067,
+              171.878306
+            ]
+          },
+          "after": {
+            "text": "BravoTop1L",
+            "page": 1,
+            "rect": [
+              78.140622,
+              175.452202,
+              134.155067,
+              187.628305
+            ]
+          },
+          "beforeDeltaPt": [
+            0.115622,
+            -16.296797
+          ],
+          "afterDeltaPt": [
+            0.115622,
+            -0.546798
+          ]
+        },
+        {
+          "marker": "BravoTop1R",
+          "word": {
+            "text": "BravoTop1R",
+            "page": 1,
+            "rect": [
+              278.13,
+              175.999,
+              335.671,
+              188.176
+            ]
+          },
+          "before": {
+            "text": "BravoTop1R",
+            "page": 1,
+            "rect": [
+              278.132801,
+              159.702203,
+              334.764641,
+              171.878306
+            ]
+          },
+          "after": {
+            "text": "BravoTop1R",
+            "page": 1,
+            "rect": [
+              278.132801,
+              175.452202,
+              334.764641,
+              187.628305
+            ]
+          },
+          "beforeDeltaPt": [
+            0.002801,
+            -16.296797
+          ],
+          "afterDeltaPt": [
+            0.002801,
+            -0.546798
+          ]
+        },
+        {
+          "marker": "BravoMid1L",
+          "word": {
+            "text": "BravoMid1L",
+            "page": 1,
+            "rect": [
+              78.025,
+              195.029,
+              135.478,
+              207.206
+            ]
+          },
+          "before": null,
+          "after": {
+            "text": "BravoMid1L",
+            "page": 1,
+            "rect": [
+              78.140622,
+              194.952201,
+              135.540019,
+              207.128304
+            ]
+          },
+          "afterDeltaPt": [
+            0.115622,
+            -0.076799
+          ]
+        },
+        {
+          "marker": "BravoMid1R",
+          "word": {
+            "text": "BravoMid1R",
+            "page": 1,
+            "rect": [
+              278.13,
+              195.029,
+              336.199,
+              207.206
+            ]
+          },
+          "before": null,
+          "after": {
+            "text": "BravoMid1R",
+            "page": 1,
+            "rect": [
+              278.132801,
+              194.952201,
+              336.149594,
+              207.128304
+            ]
+          },
+          "afterDeltaPt": [
+            0.002801,
+            -0.076799
+          ]
+        },
+        {
+          "marker": "BravoBot1L",
+          "word": {
+            "text": "BravoBot1L",
+            "page": 1,
+            "rect": [
+              78.025,
+              212.029,
+              132.981,
+              224.206
+            ]
+          },
+          "before": {
+            "text": "BravoBot1L",
+            "page": 1,
+            "rect": [
+              78.140622,
+              179.202202,
+              133.097907,
+              191.378305
+            ]
+          },
+          "after": {
+            "text": "BravoBot1L",
+            "page": 1,
+            "rect": [
+              78.140622,
+              211.452201,
+              133.097907,
+              223.628304
+            ]
+          },
+          "beforeDeltaPt": [
+            0.115622,
+            -32.826798
+          ],
+          "afterDeltaPt": [
+            0.115622,
+            -0.576799
+          ]
+        },
+        {
+          "marker": "BravoBot1R",
+          "word": {
+            "text": "BravoBot1R",
+            "page": 1,
+            "rect": [
+              278.13,
+              212.029,
+              333.702,
+              224.206
+            ]
+          },
+          "before": {
+            "text": "BravoBot1R",
+            "page": 1,
+            "rect": [
+              278.132801,
+              179.202202,
+              333.707482,
+              191.378305
+            ]
+          },
+          "after": {
+            "text": "BravoBot1R",
+            "page": 1,
+            "rect": [
+              278.132801,
+              211.452201,
+              333.707482,
+              223.628304
+            ]
+          },
+          "beforeDeltaPt": [
+            0.002801,
+            -32.826798
+          ],
+          "afterDeltaPt": [
+            0.002801,
+            -0.576799
+          ]
+        },
+        {
+          "marker": "BravoAfter",
+          "word": {
+            "text": "BravoAfter",
+            "page": 1,
+            "rect": [
+              72.025,
+              231.029,
+              122.152,
+              243.206
+            ]
+          },
+          "before": {
+            "text": "BravoAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              198.702201,
+              122.056176,
+              210.878304
+            ]
+          },
+          "after": {
+            "text": "BravoAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              230.2022,
+              122.056176,
+              242.378303
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            -32.326799
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            -0.8268
+          ]
+        },
+        {
+          "marker": "CharlieBefore",
+          "word": {
+            "text": "CharlieBefore",
+            "page": 1,
+            "rect": [
+              72.025,
+              247.029,
+              134.373,
+              259.206
+            ]
+          },
+          "before": {
+            "text": "CharlieBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              214.452201,
+              134.26168,
+              226.628303
+            ]
+          },
+          "after": {
+            "text": "CharlieBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              246.702199,
+              134.26168,
+              258.878302
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            -32.576799
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            -0.326801
+          ]
+        },
+        {
+          "marker": "CharlieTop1L",
+          "word": {
+            "text": "CharlieTop1L",
+            "page": 1,
+            "rect": [
+              77.525,
+              263.029,
+              139.95,
+              275.206
+            ]
+          },
+          "before": {
+            "text": "CharlieTop1L",
+            "page": 1,
+            "rect": [
+              77.390622,
+              230.2022,
+              138.895793,
+              242.378303
+            ]
+          },
+          "after": {
+            "text": "CharlieTop1L",
+            "page": 1,
+            "rect": [
+              77.390622,
+              262.452199,
+              138.895793,
+              274.628301
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.134378,
+            -32.8268
+          ],
+          "afterDeltaPt": [
+            -0.134378,
+            -0.576801
+          ]
+        },
+        {
+          "marker": "CharlieTop1R",
+          "word": {
+            "text": "CharlieTop1R",
+            "page": 1,
+            "rect": [
+              277.63,
+              263.029,
+              340.671,
+              275.206
+            ]
+          },
+          "before": {
+            "text": "CharlieTop1R",
+            "page": 1,
+            "rect": [
+              277.382801,
+              230.2022,
+              339.505367,
+              242.378303
+            ]
+          },
+          "after": {
+            "text": "CharlieTop1R",
+            "page": 1,
+            "rect": [
+              277.382801,
+              262.452199,
+              339.505367,
+              274.628301
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.247199,
+            -32.8268
+          ],
+          "afterDeltaPt": [
+            -0.247199,
+            -0.576801
+          ]
+        },
+        {
+          "marker": "CharlieMid1L",
+          "word": {
+            "text": "CharlieMid1L",
+            "page": 1,
+            "rect": [
+              77.525,
+              281.049,
+              140.478,
+              293.226
+            ]
+          },
+          "before": null,
+          "after": {
+            "text": "CharlieMid1L",
+            "page": 1,
+            "rect": [
+              77.390622,
+              280.452198,
+              140.280746,
+              292.628301
+            ]
+          },
+          "afterDeltaPt": [
+            -0.134378,
+            -0.596802
+          ]
+        },
+        {
+          "marker": "CharlieMid2L",
+          "word": {
+            "text": "CharlieMid2L",
+            "page": 1,
+            "rect": [
+              77.525,
+              297.049,
+              140.478,
+              309.226
+            ]
+          },
+          "before": null,
+          "after": {
+            "text": "CharlieMid2L",
+            "page": 1,
+            "rect": [
+              77.390622,
+              296.202197,
+              140.280746,
+              308.3783
+            ]
+          },
+          "afterDeltaPt": [
+            -0.134378,
+            -0.846803
+          ]
+        },
+        {
+          "marker": "CharlieMid3L",
+          "word": {
+            "text": "CharlieMid3L",
+            "page": 1,
+            "rect": [
+              77.525,
+              313.049,
+              140.478,
+              325.226
+            ]
+          },
+          "before": null,
+          "after": {
+            "text": "CharlieMid3L",
+            "page": 1,
+            "rect": [
+              77.390622,
+              312.702197,
+              140.280746,
+              324.878299
+            ]
+          },
+          "afterDeltaPt": [
+            -0.134378,
+            -0.346803
+          ]
+        },
+        {
+          "marker": "CharlieMid1R",
+          "word": {
+            "text": "CharlieMid1R",
+            "page": 1,
+            "rect": [
+              277.63,
+              281.049,
+              341.199,
+              293.226
+            ]
+          },
+          "before": null,
+          "after": {
+            "text": "CharlieMid1R",
+            "page": 1,
+            "rect": [
+              277.382801,
+              280.452198,
+              340.89032,
+              292.628301
+            ]
+          },
+          "afterDeltaPt": [
+            -0.247199,
+            -0.596802
+          ]
+        },
+        {
+          "marker": "CharlieMid2R",
+          "word": {
+            "text": "CharlieMid2R",
+            "page": 1,
+            "rect": [
+              277.63,
+              297.049,
+              341.199,
+              309.226
+            ]
+          },
+          "before": null,
+          "after": {
+            "text": "CharlieMid2R",
+            "page": 1,
+            "rect": [
+              277.382801,
+              296.202197,
+              340.89032,
+              308.3783
+            ]
+          },
+          "afterDeltaPt": [
+            -0.247199,
+            -0.846803
+          ]
+        },
+        {
+          "marker": "CharlieMid3R",
+          "word": {
+            "text": "CharlieMid3R",
+            "page": 1,
+            "rect": [
+              277.63,
+              313.049,
+              341.199,
+              325.226
+            ]
+          },
+          "before": null,
+          "after": {
+            "text": "CharlieMid3R",
+            "page": 1,
+            "rect": [
+              277.382801,
+              312.702197,
+              340.89032,
+              324.878299
+            ]
+          },
+          "afterDeltaPt": [
+            -0.247199,
+            -0.346803
+          ]
+        },
+        {
+          "marker": "CharlieBot1L",
+          "word": {
+            "text": "CharlieBot1L",
+            "page": 1,
+            "rect": [
+              77.525,
+              329.049,
+              137.981,
+              341.226
+            ]
+          },
+          "before": {
+            "text": "CharlieBot1L",
+            "page": 1,
+            "rect": [
+              77.390622,
+              248.202199,
+              137.838634,
+              260.378302
+            ]
+          },
+          "after": {
+            "text": "CharlieBot1L",
+            "page": 1,
+            "rect": [
+              77.390622,
+              328.452196,
+              137.838634,
+              340.628299
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.134378,
+            -80.846801
+          ],
+          "afterDeltaPt": [
+            -0.134378,
+            -0.596804
+          ]
+        },
+        {
+          "marker": "CharlieBot1R",
+          "word": {
+            "text": "CharlieBot1R",
+            "page": 1,
+            "rect": [
+              277.63,
+              329.049,
+              338.702,
+              341.226
+            ]
+          },
+          "before": {
+            "text": "CharlieBot1R",
+            "page": 1,
+            "rect": [
+              277.382801,
+              248.202199,
+              338.448208,
+              260.378302
+            ]
+          },
+          "after": {
+            "text": "CharlieBot1R",
+            "page": 1,
+            "rect": [
+              277.382801,
+              328.452196,
+              338.448208,
+              340.628299
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.247199,
+            -80.846801
+          ],
+          "afterDeltaPt": [
+            -0.247199,
+            -0.596804
+          ]
+        },
+        {
+          "marker": "CharlieAfter",
+          "word": {
+            "text": "CharlieAfter",
+            "page": 1,
+            "rect": [
+              72.025,
+              347.069,
+              127.652,
+              359.246
+            ]
+          },
+          "before": {
+            "text": "CharlieAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              266.202199,
+              127.546902,
+              278.378301
+            ]
+          },
+          "after": {
+            "text": "CharlieAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              346.452195,
+              127.546902,
+              358.628298
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            -80.866801
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            -0.616805
+          ]
+        },
+        {
+          "marker": "KiloBefore",
+          "word": {
+            "text": "KiloBefore",
+            "page": 1,
+            "rect": [
+              72.025,
+              363.069,
+              121.624,
+              375.246
+            ]
+          },
+          "before": {
+            "text": "KiloBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              282.702198,
+              121.449985,
+              294.878301
+            ]
+          },
+          "after": {
+            "text": "KiloBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              362.202195,
+              121.449985,
+              374.378297
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            -80.366802
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            -0.866805
+          ]
+        },
+        {
+          "marker": "KiloTop1L",
+          "word": {
+            "text": "KiloTop1L",
+            "page": 1,
+            "rect": [
+              78.025,
+              380.069,
+              127.459,
+              392.246
+            ]
+          },
+          "before": {
+            "text": "KiloTop1L",
+            "page": 1,
+            "rect": [
+              78.140622,
+              299.202197,
+              126.834099,
+              311.3783
+            ]
+          },
+          "after": {
+            "text": "KiloTop1L",
+            "page": 1,
+            "rect": [
+              78.140622,
+              379.452194,
+              126.834099,
+              391.628297
+            ]
+          },
+          "beforeDeltaPt": [
+            0.115622,
+            -80.866803
+          ],
+          "afterDeltaPt": [
+            0.115622,
+            -0.616806
+          ]
+        },
+        {
+          "marker": "KiloTop1R",
+          "word": {
+            "text": "KiloTop1R",
+            "page": 1,
+            "rect": [
+              278.13,
+              380.069,
+              328.18,
+              392.246
+            ]
+          },
+          "before": {
+            "text": "KiloTop1R",
+            "page": 1,
+            "rect": [
+              278.132801,
+              299.202197,
+              327.443673,
+              311.3783
+            ]
+          },
+          "after": {
+            "text": "KiloTop1R",
+            "page": 1,
+            "rect": [
+              278.132801,
+              379.452194,
+              327.443673,
+              391.628297
+            ]
+          },
+          "beforeDeltaPt": [
+            0.002801,
+            -80.866803
+          ],
+          "afterDeltaPt": [
+            0.002801,
+            -0.616806
+          ]
+        },
+        {
+          "marker": "KiloMid1L",
+          "word": {
+            "text": "KiloMid1L",
+            "page": 1,
+            "rect": [
+              78.025,
+              399.069,
+              127.987,
+              411.246
+            ]
+          },
+          "before": {
+            "text": "KiloMid1L",
+            "page": 1,
+            "rect": [
+              78.140622,
+              317.952196,
+              128.219051,
+              330.128299
+            ]
+          },
+          "after": {
+            "text": "KiloMid1L",
+            "page": 1,
+            "rect": [
+              78.140622,
+              398.202193,
+              128.219051,
+              410.378296
+            ]
+          },
+          "beforeDeltaPt": [
+            0.115622,
+            -81.116804
+          ],
+          "afterDeltaPt": [
+            0.115622,
+            -0.866807
+          ]
+        },
+        {
+          "marker": "KiloMid1R",
+          "word": {
+            "text": "KiloMid1R",
+            "page": 1,
+            "rect": [
+              278.13,
+              399.069,
+              328.708,
+              411.246
+            ]
+          },
+          "before": {
+            "text": "KiloMid1R",
+            "page": 1,
+            "rect": [
+              278.132801,
+              317.952196,
+              328.828625,
+              330.128299
+            ]
+          },
+          "after": {
+            "text": "KiloMid1R",
+            "page": 1,
+            "rect": [
+              278.132801,
+              398.202193,
+              328.828625,
+              410.378296
+            ]
+          },
+          "beforeDeltaPt": [
+            0.002801,
+            -81.116804
+          ],
+          "afterDeltaPt": [
+            0.002801,
+            -0.866807
+          ]
+        },
+        {
+          "marker": "KiloBot1L",
+          "word": {
+            "text": "KiloBot1L",
+            "page": 1,
+            "rect": [
+              78.025,
+              416.069,
+              125.49,
+              428.246
+            ]
+          },
+          "before": {
+            "text": "KiloBot1L",
+            "page": 1,
+            "rect": [
+              78.140622,
+              335.202196,
+              125.776939,
+              347.378298
+            ]
+          },
+          "after": {
+            "text": "KiloBot1L",
+            "page": 1,
+            "rect": [
+              78.140622,
+              414.702192,
+              125.776939,
+              426.878295
+            ]
+          },
+          "beforeDeltaPt": [
+            0.115622,
+            -80.866804
+          ],
+          "afterDeltaPt": [
+            0.115622,
+            -1.366808
+          ]
+        },
+        {
+          "marker": "KiloBot1R",
+          "word": {
+            "text": "KiloBot1R",
+            "page": 1,
+            "rect": [
+              278.13,
+              416.069,
+              326.211,
+              428.246
+            ]
+          },
+          "before": {
+            "text": "KiloBot1R",
+            "page": 1,
+            "rect": [
+              278.132801,
+              335.202196,
+              326.386513,
+              347.378298
+            ]
+          },
+          "after": {
+            "text": "KiloBot1R",
+            "page": 1,
+            "rect": [
+              278.132801,
+              414.702192,
+              326.386513,
+              426.878295
+            ]
+          },
+          "beforeDeltaPt": [
+            0.002801,
+            -80.866804
+          ],
+          "afterDeltaPt": [
+            0.002801,
+            -1.366808
+          ]
+        },
+        {
+          "marker": "KiloAfter",
+          "word": {
+            "text": "KiloAfter",
+            "page": 1,
+            "rect": [
+              72.025,
+              435.099,
+              114.903,
+              447.276
+            ]
+          },
+          "before": {
+            "text": "KiloAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              353.952195,
+              114.735208,
+              366.128298
+            ]
+          },
+          "after": {
+            "text": "KiloAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              434.202192,
+              114.735208,
+              446.378294
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            -81.146805
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            -0.896808
+          ]
+        }
+      ],
+      "missingRequiredTokens": {
+        "word": [],
+        "before": [
+          "AlphaMid1L",
+          "AlphaMid1R",
+          "BravoMid1L",
+          "BravoMid1R",
+          "CharlieMid1L",
+          "CharlieMid1R",
+          "CharlieMid2L",
+          "CharlieMid2R",
+          "CharlieMid3L",
+          "CharlieMid3R"
+        ],
+        "after": []
+      },
+      "diagnosticChecksWithoutEnvironmentEligibility": {
+        "before": [
+          {
+            "name": "page-count",
+            "passed": true
+          },
+          {
+            "name": "expected-visible-tokens",
+            "passed": false,
+            "missing": {
+              "AlphaMid1L": 1,
+              "AlphaMid1R": 1,
+              "BravoMid1L": 1,
+              "BravoMid1R": 1,
+              "CharlieMid1L": 1,
+              "CharlieMid1R": 1,
+              "CharlieMid2L": 1,
+              "CharlieMid2R": 1,
+              "CharlieMid3L": 1,
+              "CharlieMid3R": 1
+            },
+            "extra": {},
+            "normalizedRaw": {}
+          },
+          {
+            "name": "declared-font-families",
+            "passed": true,
+            "observed": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          {
+            "name": "physical-geometry-page-1",
+            "passed": true
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlphaBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlphaTop1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlphaTop1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "error": "Marker 'AlphaMid1L' must occur exactly once, found 0",
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlphaMid1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "error": "Marker 'AlphaMid1R' must occur exactly once, found 0",
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlphaMid1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlphaBot1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlphaBot1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlphaAfter",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BravoBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BravoTop1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BravoTop1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "error": "Marker 'BravoMid1L' must occur exactly once, found 0",
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BravoMid1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "error": "Marker 'BravoMid1R' must occur exactly once, found 0",
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BravoMid1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BravoBot1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BravoBot1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BravoAfter",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieTop1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieTop1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "error": "Marker 'CharlieMid1L' must occur exactly once, found 0",
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieMid1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "error": "Marker 'CharlieMid2L' must occur exactly once, found 0",
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieMid2L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "error": "Marker 'CharlieMid3L' must occur exactly once, found 0",
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieMid3L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "error": "Marker 'CharlieMid1R' must occur exactly once, found 0",
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieMid1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "error": "Marker 'CharlieMid2R' must occur exactly once, found 0",
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieMid2R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "error": "Marker 'CharlieMid3R' must occur exactly once, found 0",
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieMid3R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieBot1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieBot1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieAfter",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "KiloBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "KiloTop1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "KiloTop1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "KiloMid1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "KiloMid1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "KiloBot1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "KiloBot1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "KiloAfter",
+              "tolerancePt": 0.5
+            }
+          }
+        ],
+        "after": [
+          {
+            "name": "page-count",
+            "passed": true
+          },
+          {
+            "name": "expected-visible-tokens",
+            "passed": true,
+            "missing": {},
+            "extra": {},
+            "normalizedRaw": {}
+          },
+          {
+            "name": "declared-font-families",
+            "passed": true,
+            "observed": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          {
+            "name": "physical-geometry-page-1",
+            "passed": true
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlphaBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlphaTop1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlphaTop1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlphaMid1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlphaMid1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlphaBot1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlphaBot1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "AlphaAfter",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BravoBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BravoTop1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BravoTop1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BravoMid1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BravoMid1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BravoBot1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BravoBot1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "BravoAfter",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieTop1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieTop1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieMid1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieMid2L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieMid3L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieMid1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieMid2R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieMid3R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieBot1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieBot1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "CharlieAfter",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "KiloBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "KiloTop1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "KiloTop1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "KiloMid1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "KiloMid1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "KiloBot1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "KiloBot1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "KiloAfter",
+              "tolerancePt": 0.5
+            }
+          }
+        ]
+      },
+      "screenshot": "docs/results/exact-zero-rows/tables-row-height-exact-zero-content-times-new-roman.png",
+      "screenshotSha256": "d9cc1b250abe68ca673e97432bfd51a1c5eb2d8ff21dbcb4f8f3e522c02df950",
+      "viewed": true,
+      "viewedAtUtc": "2026-10-24T23:46:52.826557+00:00",
+      "visualObservation": "Ten zero-row labels restored; Word and fixed layout show the same row content"
+    },
+    {
+      "id": "tables-row-height-exact-tiny-control-times-new-roman",
+      "inputSha256": "816ab93a2b643ef6ef96fcf6813ccfbb5e6e9fa54b985d3b3e819cf7204ef856",
+      "wordReferenceEligible": true,
+      "wordReferenceIneligibleChecks": [],
+      "files": [
+        {
+          "label": "Word for the web",
+          "pdfSha256": "14e5ccac247ae546975bb9fe50766e0809af75f9910a8f75d113ba0def622529",
+          "fonts": [
+            "TimesNewRomanPSMT"
+          ],
+          "pages": 1
+        },
+        {
+          "label": "Before: 71524a5f",
+          "pdfSha256": "09732f31039543b709f1c4ebbfb9d83df45f917883e89be397df2d5d0e49a8fb",
+          "fonts": [
+            "TimesNewRomanPSMT"
+          ],
+          "pages": 1
+        },
+        {
+          "label": "After: 2fa69d6f",
+          "pdfSha256": "9c6ab8ae8cd94df477d6d25376b9d8e63ba7823f0392494171ab9ffbf3a97ad2",
+          "fonts": [
+            "TimesNewRomanPSMT"
+          ],
+          "pages": 1
+        }
+      ],
+      "rawWordGeometry": [
+        {
+          "marker": "EchoBefore",
+          "word": {
+            "text": "EchoBefore",
+            "page": 1,
+            "rect": [
+              72.025,
+              74.979,
+              124.627,
+              87.156
+            ]
+          },
+          "before": {
+            "text": "EchoBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              74.952206,
+              124.493232,
+              87.128309
+            ]
+          },
+          "after": {
+            "text": "EchoBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              74.952206,
+              124.493232,
+              87.128309
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            -0.026794
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            -0.026794
+          ]
+        },
+        {
+          "marker": "EchoTop1L",
+          "word": {
+            "text": "EchoTop1L",
+            "page": 1,
+            "rect": [
+              77.525,
+              90.979,
+              130.204,
+              103.156
+            ]
+          },
+          "before": {
+            "text": "EchoTop1L",
+            "page": 1,
+            "rect": [
+              77.390622,
+              90.702206,
+              129.127346,
+              102.878309
+            ]
+          },
+          "after": {
+            "text": "EchoTop1L",
+            "page": 1,
+            "rect": [
+              77.390622,
+              90.702206,
+              129.127346,
+              102.878309
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.134378,
+            -0.276794
+          ],
+          "afterDeltaPt": [
+            -0.134378,
+            -0.276794
+          ]
+        },
+        {
+          "marker": "EchoTop1R",
+          "word": {
+            "text": "EchoTop1R",
+            "page": 1,
+            "rect": [
+              277.63,
+              90.979,
+              330.925,
+              103.156
+            ]
+          },
+          "before": {
+            "text": "EchoTop1R",
+            "page": 1,
+            "rect": [
+              277.382801,
+              90.702206,
+              329.73692,
+              102.878309
+            ]
+          },
+          "after": {
+            "text": "EchoTop1R",
+            "page": 1,
+            "rect": [
+              277.382801,
+              90.702206,
+              329.73692,
+              102.878309
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.247199,
+            -0.276794
+          ],
+          "afterDeltaPt": [
+            -0.247199,
+            -0.276794
+          ]
+        },
+        {
+          "marker": "EchoBot1L",
+          "word": {
+            "text": "EchoBot1L",
+            "page": 1,
+            "rect": [
+              77.525,
+              108.999,
+              128.235,
+              121.176
+            ]
+          },
+          "before": {
+            "text": "EchoBot1L",
+            "page": 1,
+            "rect": [
+              77.390622,
+              108.702205,
+              128.070186,
+              120.878308
+            ]
+          },
+          "after": {
+            "text": "EchoBot1L",
+            "page": 1,
+            "rect": [
+              77.390622,
+              108.702205,
+              128.070186,
+              120.878308
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.134378,
+            -0.296795
+          ],
+          "afterDeltaPt": [
+            -0.134378,
+            -0.296795
+          ]
+        },
+        {
+          "marker": "EchoBot1R",
+          "word": {
+            "text": "EchoBot1R",
+            "page": 1,
+            "rect": [
+              277.63,
+              108.999,
+              328.956,
+              121.176
+            ]
+          },
+          "before": {
+            "text": "EchoBot1R",
+            "page": 1,
+            "rect": [
+              277.382801,
+              108.702205,
+              328.679761,
+              120.878308
+            ]
+          },
+          "after": {
+            "text": "EchoBot1R",
+            "page": 1,
+            "rect": [
+              277.382801,
+              108.702205,
+              328.679761,
+              120.878308
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.247199,
+            -0.296795
+          ],
+          "afterDeltaPt": [
+            -0.247199,
+            -0.296795
+          ]
+        },
+        {
+          "marker": "EchoAfter",
+          "word": {
+            "text": "EchoAfter",
+            "page": 1,
+            "rect": [
+              72.025,
+              126.999,
+              117.906,
+              139.176
+            ]
+          },
+          "before": {
+            "text": "EchoAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              126.702204,
+              117.778455,
+              138.878307
+            ]
+          },
+          "after": {
+            "text": "EchoAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              126.702204,
+              117.778455,
+              138.878307
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            -0.296796
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            -0.296796
+          ]
+        },
+        {
+          "marker": "FoxtrotBefore",
+          "word": {
+            "text": "FoxtrotBefore",
+            "page": 1,
+            "rect": [
+              72.025,
+              142.999,
+              134.373,
+              155.176
+            ]
+          },
+          "before": {
+            "text": "FoxtrotBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              143.202204,
+              134.277782,
+              155.378306
+            ]
+          },
+          "after": {
+            "text": "FoxtrotBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              143.202204,
+              134.277782,
+              155.378306
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            0.203204
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            0.203204
+          ]
+        },
+        {
+          "marker": "FoxtrotTop1L",
+          "word": {
+            "text": "FoxtrotTop1L",
+            "page": 1,
+            "rect": [
+              78.025,
+              159.999,
+              140.208,
+              172.176
+            ]
+          },
+          "before": {
+            "text": "FoxtrotTop1L",
+            "page": 1,
+            "rect": [
+              78.140622,
+              159.702203,
+              139.661895,
+              171.878306
+            ]
+          },
+          "after": {
+            "text": "FoxtrotTop1L",
+            "page": 1,
+            "rect": [
+              78.140622,
+              159.702203,
+              139.661895,
+              171.878306
+            ]
+          },
+          "beforeDeltaPt": [
+            0.115622,
+            -0.296797
+          ],
+          "afterDeltaPt": [
+            0.115622,
+            -0.296797
+          ]
+        },
+        {
+          "marker": "FoxtrotTop1R",
+          "word": {
+            "text": "FoxtrotTop1R",
+            "page": 1,
+            "rect": [
+              278.13,
+              159.999,
+              340.929,
+              172.176
+            ]
+          },
+          "before": {
+            "text": "FoxtrotTop1R",
+            "page": 1,
+            "rect": [
+              278.132801,
+              159.702203,
+              340.271469,
+              171.878306
+            ]
+          },
+          "after": {
+            "text": "FoxtrotTop1R",
+            "page": 1,
+            "rect": [
+              278.132801,
+              159.702203,
+              340.271469,
+              171.878306
+            ]
+          },
+          "beforeDeltaPt": [
+            0.002801,
+            -0.296797
+          ],
+          "afterDeltaPt": [
+            0.002801,
+            -0.296797
+          ]
+        },
+        {
+          "marker": "FoxtrotBot1L",
+          "word": {
+            "text": "FoxtrotBot1L",
+            "page": 1,
+            "rect": [
+              78.025,
+              178.999,
+              138.239,
+              191.176
+            ]
+          },
+          "before": {
+            "text": "FoxtrotBot1L",
+            "page": 1,
+            "rect": [
+              78.140622,
+              179.202202,
+              138.604736,
+              191.378305
+            ]
+          },
+          "after": {
+            "text": "FoxtrotBot1L",
+            "page": 1,
+            "rect": [
+              78.140622,
+              179.202202,
+              138.604736,
+              191.378305
+            ]
+          },
+          "beforeDeltaPt": [
+            0.115622,
+            0.203202
+          ],
+          "afterDeltaPt": [
+            0.115622,
+            0.203202
+          ]
+        },
+        {
+          "marker": "FoxtrotBot1R",
+          "word": {
+            "text": "FoxtrotBot1R",
+            "page": 1,
+            "rect": [
+              278.13,
+              178.999,
+              338.96,
+              191.176
+            ]
+          },
+          "before": {
+            "text": "FoxtrotBot1R",
+            "page": 1,
+            "rect": [
+              278.132801,
+              179.202202,
+              339.21431,
+              191.378305
+            ]
+          },
+          "after": {
+            "text": "FoxtrotBot1R",
+            "page": 1,
+            "rect": [
+              278.132801,
+              179.202202,
+              339.21431,
+              191.378305
+            ]
+          },
+          "beforeDeltaPt": [
+            0.002801,
+            0.203202
+          ],
+          "afterDeltaPt": [
+            0.002801,
+            0.203202
+          ]
+        },
+        {
+          "marker": "FoxtrotAfter",
+          "word": {
+            "text": "FoxtrotAfter",
+            "page": 1,
+            "rect": [
+              72.025,
+              198.029,
+              127.652,
+              210.206
+            ]
+          },
+          "before": {
+            "text": "FoxtrotAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              198.702201,
+              127.563004,
+              210.878304
+            ]
+          },
+          "after": {
+            "text": "FoxtrotAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              198.702201,
+              127.563004,
+              210.878304
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            0.673201
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            0.673201
+          ]
+        },
+        {
+          "marker": "LimaBefore",
+          "word": {
+            "text": "LimaBefore",
+            "page": 1,
+            "rect": [
+              72.025,
+              214.029,
+              125.375,
+              226.206
+            ]
+          },
+          "before": {
+            "text": "LimaBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              214.452201,
+              125.105102,
+              226.628303
+            ]
+          },
+          "after": {
+            "text": "LimaBefore",
+            "page": 1,
+            "rect": [
+              71.999997,
+              214.452201,
+              125.105102,
+              226.628303
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            0.423201
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            0.423201
+          ]
+        },
+        {
+          "marker": "LimaTop1L",
+          "word": {
+            "text": "LimaTop1L",
+            "page": 1,
+            "rect": [
+              78.025,
+              231.029,
+              131.21,
+              243.206
+            ]
+          },
+          "before": {
+            "text": "LimaTop1L",
+            "page": 1,
+            "rect": [
+              78.140622,
+              230.9522,
+              130.489216,
+              243.128303
+            ]
+          },
+          "after": {
+            "text": "LimaTop1L",
+            "page": 1,
+            "rect": [
+              78.140622,
+              230.9522,
+              130.489216,
+              243.128303
+            ]
+          },
+          "beforeDeltaPt": [
+            0.115622,
+            -0.0768
+          ],
+          "afterDeltaPt": [
+            0.115622,
+            -0.0768
+          ]
+        },
+        {
+          "marker": "LimaTop1R",
+          "word": {
+            "text": "LimaTop1R",
+            "page": 1,
+            "rect": [
+              278.13,
+              231.029,
+              331.931,
+              243.206
+            ]
+          },
+          "before": {
+            "text": "LimaTop1R",
+            "page": 1,
+            "rect": [
+              278.132801,
+              230.9522,
+              331.09879,
+              243.128303
+            ]
+          },
+          "after": {
+            "text": "LimaTop1R",
+            "page": 1,
+            "rect": [
+              278.132801,
+              230.9522,
+              331.09879,
+              243.128303
+            ]
+          },
+          "beforeDeltaPt": [
+            0.002801,
+            -0.0768
+          ],
+          "afterDeltaPt": [
+            0.002801,
+            -0.0768
+          ]
+        },
+        {
+          "marker": "LimaMid1L",
+          "word": {
+            "text": "LimaMid1L",
+            "page": 1,
+            "rect": [
+              78.025,
+              250.019,
+              131.738,
+              262.196
+            ]
+          },
+          "before": {
+            "text": "LimaMid1L",
+            "page": 1,
+            "rect": [
+              78.140622,
+              250.452199,
+              131.874168,
+              262.628302
+            ]
+          },
+          "after": {
+            "text": "LimaMid1L",
+            "page": 1,
+            "rect": [
+              78.140622,
+              250.452199,
+              131.874168,
+              262.628302
+            ]
+          },
+          "beforeDeltaPt": [
+            0.115622,
+            0.433199
+          ],
+          "afterDeltaPt": [
+            0.115622,
+            0.433199
+          ]
+        },
+        {
+          "marker": "LimaMid1R",
+          "word": {
+            "text": "LimaMid1R",
+            "page": 1,
+            "rect": [
+              278.13,
+              250.019,
+              332.459,
+              262.196
+            ]
+          },
+          "before": {
+            "text": "LimaMid1R",
+            "page": 1,
+            "rect": [
+              278.132801,
+              250.452199,
+              332.483742,
+              262.628302
+            ]
+          },
+          "after": {
+            "text": "LimaMid1R",
+            "page": 1,
+            "rect": [
+              278.132801,
+              250.452199,
+              332.483742,
+              262.628302
+            ]
+          },
+          "beforeDeltaPt": [
+            0.002801,
+            0.433199
+          ],
+          "afterDeltaPt": [
+            0.002801,
+            0.433199
+          ]
+        },
+        {
+          "marker": "LimaBot1L",
+          "word": {
+            "text": "LimaBot1L",
+            "page": 1,
+            "rect": [
+              78.025,
+              258.029,
+              129.241,
+              270.206
+            ]
+          },
+          "before": {
+            "text": "LimaBot1L",
+            "page": 1,
+            "rect": [
+              78.140622,
+              257.952199,
+              129.432056,
+              270.128302
+            ]
+          },
+          "after": {
+            "text": "LimaBot1L",
+            "page": 1,
+            "rect": [
+              78.140622,
+              257.952199,
+              129.432056,
+              270.128302
+            ]
+          },
+          "beforeDeltaPt": [
+            0.115622,
+            -0.076801
+          ],
+          "afterDeltaPt": [
+            0.115622,
+            -0.076801
+          ]
+        },
+        {
+          "marker": "LimaBot1R",
+          "word": {
+            "text": "LimaBot1R",
+            "page": 1,
+            "rect": [
+              278.13,
+              258.029,
+              329.962,
+              270.206
+            ]
+          },
+          "before": {
+            "text": "LimaBot1R",
+            "page": 1,
+            "rect": [
+              278.132801,
+              257.952199,
+              330.04163,
+              270.128302
+            ]
+          },
+          "after": {
+            "text": "LimaBot1R",
+            "page": 1,
+            "rect": [
+              278.132801,
+              257.952199,
+              330.04163,
+              270.128302
+            ]
+          },
+          "beforeDeltaPt": [
+            0.002801,
+            -0.076801
+          ],
+          "afterDeltaPt": [
+            0.002801,
+            -0.076801
+          ]
+        },
+        {
+          "marker": "LimaAfter",
+          "word": {
+            "text": "LimaAfter",
+            "page": 1,
+            "rect": [
+              72.025,
+              277.049,
+              118.654,
+              289.226
+            ]
+          },
+          "before": {
+            "text": "LimaAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              277.452198,
+              118.390324,
+              289.628301
+            ]
+          },
+          "after": {
+            "text": "LimaAfter",
+            "page": 1,
+            "rect": [
+              71.999997,
+              277.452198,
+              118.390324,
+              289.628301
+            ]
+          },
+          "beforeDeltaPt": [
+            -0.025003,
+            0.403198
+          ],
+          "afterDeltaPt": [
+            -0.025003,
+            0.403198
+          ]
+        }
+      ],
+      "missingRequiredTokens": {
+        "word": [],
+        "before": [],
+        "after": []
+      },
+      "diagnosticChecksWithoutEnvironmentEligibility": {
+        "before": [
+          {
+            "name": "page-count",
+            "passed": true
+          },
+          {
+            "name": "expected-visible-tokens",
+            "passed": true,
+            "missing": {},
+            "extra": {},
+            "normalizedRaw": {},
+            "clippedTokens": {
+              "LimaMid2L": 1,
+              "LimaMid3L": 1,
+              "LimaMid2R": 1,
+              "LimaMid3R": 1
+            },
+            "observedClippedTokens": {
+              "LimaMid2L": 1,
+              "LimaMid3L": 1,
+              "LimaMid2R": 1,
+              "LimaMid3R": 1
+            }
+          },
+          {
+            "name": "declared-font-families",
+            "passed": true,
+            "observed": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          {
+            "name": "physical-geometry-page-1",
+            "passed": true
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "EchoBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "EchoTop1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "EchoTop1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "EchoBot1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "EchoBot1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "EchoAfter",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "FoxtrotBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "FoxtrotTop1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "FoxtrotTop1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "FoxtrotBot1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "FoxtrotBot1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "FoxtrotAfter",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "LimaBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "LimaTop1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "LimaTop1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "LimaMid1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "LimaMid1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "LimaBot1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "LimaBot1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "LimaAfter",
+              "tolerancePt": 0.5
+            }
+          }
+        ],
+        "after": [
+          {
+            "name": "page-count",
+            "passed": true
+          },
+          {
+            "name": "expected-visible-tokens",
+            "passed": true,
+            "missing": {},
+            "extra": {},
+            "normalizedRaw": {},
+            "clippedTokens": {
+              "LimaMid2L": 1,
+              "LimaMid3L": 1,
+              "LimaMid2R": 1,
+              "LimaMid3R": 1
+            },
+            "observedClippedTokens": {
+              "LimaMid2L": 1,
+              "LimaMid3L": 1,
+              "LimaMid2R": 1,
+              "LimaMid3R": 1
+            }
+          },
+          {
+            "name": "declared-font-families",
+            "passed": true,
+            "observed": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          {
+            "name": "physical-geometry-page-1",
+            "passed": true
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "EchoBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "EchoTop1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "EchoTop1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "EchoBot1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "EchoBot1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "EchoAfter",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "FoxtrotBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "FoxtrotTop1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "FoxtrotTop1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "FoxtrotBot1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "FoxtrotBot1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": false,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "FoxtrotAfter",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "LimaBefore",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "LimaTop1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "LimaTop1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "LimaMid1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "LimaMid1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "LimaBot1L",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "LimaBot1R",
+              "tolerancePt": 0.5
+            }
+          },
+          {
+            "name": "assertion-marker-reference-position",
+            "passed": true,
+            "declaration": {
+              "type": "marker-reference-position",
+              "version": 1,
+              "marker": "LimaAfter",
+              "tolerancePt": 0.5
+            }
+          }
+        ]
+      },
+      "screenshot": "docs/results/exact-zero-rows/tables-row-height-exact-tiny-control-times-new-roman.png",
+      "screenshotSha256": "be128a41433581ce187f61f7665f26462a0289fd99ba3b9ece46acc5879a7b4e",
+      "viewed": true,
+      "viewedAtUtc": "2026-10-24T23:46:52.826557+00:00",
+      "visualObservation": "Positive exact-row clipping matches the before result"
+    }
+  ],
+  "visualReview": {
+    "count": 4,
+    "reviewedAtUtc": "2026-10-24T23:46:52.826557+00:00",
+    "method": "All four full-page PNG comparisons opened and visually inspected at original resolution"
+  },
+  "priorDocxUnchanged": 988,
+  "benchmarkTestsPassed": 264,
+  "coreRowHeightTestsPassed": 39,
+  "sandboxedExportAndPageMapTestsPassed": 16,
+  "newInputSdkMicrosoft365Findings": {
+    "fixtures/tables-row-height-exact-zero-content-times-new-roman.docx": [],
+    "fixtures/tables-row-height-exact-tiny-control-times-new-roman.docx": []
+  }
+}

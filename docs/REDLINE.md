@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v7`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v17`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -38,6 +38,7 @@ A case scores **100** when every applicable check passes and **0** otherwise. Th
    - `paragraph-count` v1: the number of `w:p` in the body of the raw redline (scope `redline`). This is a minimality requirement, not reversibility: the #1183 cases use it to require that the revised document's paragraph folds into the deleted one, as Word's compare does;
    - `para-ids-valid` v1: every `w14:paraId` in every XML part is eight hexadecimal digits, below `0x80000000`, and unique across the package;
    - `style-ids-unique` v1: no two `w:style` elements share a `w:styleId`, whatever their types;
+   - `comment-threads` v1 (scope `redline`): in the comments and commentsExtended parts, every entry is keyed to a comment's last-paragraph `w14:paraId`, every `w15:paraIdParent` names the last-paragraph `w14:paraId` of a comment that has its own entry, and for each declared `[reply, parent]` pair exactly one comment holds the reply's text and its entry names the comment holding the parent's text. Comment threading is not part of the semantic view, so neither round trip sees a reply detached from its parent;
    - `revision-count` v1: at most `max` revision records in the redline or output (scope `redline` or `output`); a `w:delText` or `w:delInstrText` outside any deletion also counts. Every `reject` case requires zero.
 
 Unknown assertion types, versions or scopes are rejected when the registry is loaded.
@@ -112,3 +113,212 @@ The #1206 consolidation cases combine a field-result edit, a prefix deletion or 
 The #1211 body pair checks a removed comment reference in an edited paragraph and an unchanged-paragraph control. LibreOffice retains the comment after accepting the edited case and sees no revisions in the marker-only control; those three comparisons are declared ineligible from authored calibration. Independent markup and schema checks remain mandatory.
 
 The #1212 note-insertion pair checks reference-to-definition identity in all resolved reviewer views. Authored redlines use sequential IDs in body order: LibreOffice misloads the valid nonsequential ordering. The prefix case leaves an empty first paragraph on LibreOffice reject, so only that comparison is ineligible; the suffix control and other comparisons calibrate. Full markup and schema checks remain mandatory.
+
+The #1312 cases add a threaded reply to an unchanged comment. In the reproducers the original gives that comment no paragraph id and no commentsExtended part, or a different paragraph id from the revision's; the control gives it the same paragraph id in both. A correct redline keeps the original's comment and re-points the reply at that comment's own paragraph id (the authored redlines keep the revision's id where the original has none). `comment-threads` checks the link; LibreOffice exposes no revision for a reply whose markers are the only change and keeps the reply on reject, so all six of its comparisons are declared ineligible. LibreOffice renders of the Docxodus redlines before and after the fix are in [`docs/results/comment-reply-parent/`](results/comment-reply-parent/).
+
+## Semantic preflight at raw limits
+
+An identity comparison may declare `semanticPreflight` v1 with `limits: "raw-boundaries"` and
+`changeCount: 0`. Both input digests must match. The source-bound adapter derives the maximum
+entry/XML size, aggregate uncompressed size and compression ratio directly from that input's
+ZIP directory, then calls the public byte-based `SemanticDiff.Compare` both with and without
+the package supplement. It reports both observed counts before producing the ordinary redline.
+A missing count, a non-integer count or a nonzero count fails the case. An exception scores zero.
+The existing round trips, full semantic views, declared assertions and schema checks also apply.
+The authored calibration establishes the identity through independently authored expected
+documents; it does not claim to execute a candidate's semantic API. Metric contract version 2
+records this extra mandatory check.
+
+`redline-semantic-raw-limits-strict` and `redline-semantic-raw-limits-transitional-control`
+contain the same original Marsh station agreement in different OOXML conformance classes.
+Their expected documents and authored redlines are Transitional. The Strict reproducer fails
+on Docxodus main before #1355; the control passes. See the labelled screenshots and capture
+record under `docs/results/strict-semantic-limits/`.
+
+## Session column widths
+
+The `table-widths` operation opens one original package through the public `DocxSession` API,
+changes its first table's column widths, records `ListRevisions().Count` and saves the result.
+The versioned `tableWidths` declaration supplies the positive twip widths and tracking mode;
+`revisionRegistry` requires one entry for tracked edits and zero for untracked controls. Missing,
+wrongly typed or incorrect counts fail the case. Authored calibration uses its declared count,
+not a claim to have executed the candidate API. Metric contract version 3 records this requirement.
+
+The `table-widths` assertion v1 checks exact grid, cell and table widths in the accepted and
+rejected views, including `dxa` types. The general text view intentionally ignores these
+formatting properties, so it cannot replace these assertions. A width-only mutant still passes
+the text view and fails the new assertions. Independent property resolution and schema checks
+remain mandatory.
+
+The four `redline-table-column-widths-*` cases start with two rows and columns of 2400/3200
+twips. The full edit changes both columns to 2600/3000; the partial edit keeps 2400 and changes
+only the second column to 3000. Each has an untracked control. Tracked reject restores the
+original widths; either resolution of the revision-free control keeps the new widths.
+
+LibreOffice 25.8.7.3 exposes zero revisions for both schema-valid authored property-only
+redlines, for accept and reject alike. Those four text comparisons are explicitly ineligible;
+the four control comparisons remain eligible. The harness recalibrates and fails as unmeasured
+if the observed eligibility ever differs. This follows the existing policy used for other
+revision kinds LibreOffice cannot expose. The exact width, registry and schema checks remain
+mandatory. Labelled page rasters and diagnostic source-bound results are under
+`docs/results/column-width-revisions/`; these are focused runs, not a full-suite score.
+
+## Column edits across pending formatting
+
+The `column-edit` operation calls the public untracked `InsertTableColumn` or `DeleteTableColumn`,
+then the declared public bulk or selective revision resolver. It writes the resolved document.
+Its `columnEdit` declaration v1 names the action, before/after position, physical cell index and
+resolution (`reject-all`, `reject-each`, or `accept-all`). The observed public registry count
+must be the declared integer zero, and independent markup inspection also requires no revisions.
+
+The `table-state` assertion v1 independently checks exact grid widths and every row's leading
+and trailing omissions, height, cell spans, preferred widths/types and shading. Declared rows
+must fill the declared grid. The general text view omits these properties; deliberately changed
+widths, spans, omissions, shading or height can preserve its text and must fail this assertion.
+Metric contract version 4 records the new resolved-output operation and mandatory checks.
+
+The twenty `redline-pending-grid-*` cases pair each pending-history reproducer with a
+revision-free control. Real and no-op old grids cover insertion and deletion. Merged-cell
+cases retain an older shading baseline; omitted-column cases retain older row height; two
+edge insertions clone a merged reference into a new unit cell. Exact expected documents
+retain the permanent structural edit while resolving only the earlier formatting. Every
+expected output and authored calibration is original OOXML written independently of a
+candidate. Calibration does not claim to execute the candidate API.
+
+These resolved outputs contain no revisions, so LibreOffice compares their loaded text directly
+against the authored calibration and expected output. Earlier declarations for property-only
+redlines are unchanged. The page rasters under `docs/results/pending-grid-columns/` are local
+diagnostics accompanying source-bound focused runs, not a full-suite score.
+
+## Refusing block insertion beside cells
+
+The `block-insert` operation calls the public session insertion API for a paragraph, horizontal
+rule or one-cell table. Its `blockInsert` declaration v1 names the operation, the first body
+anchor's kind (`p` or `tc`), before/after position and paragraph markdown. It saves the output
+before probing public undo availability. The mandatory `editOutcome` declares exact, typed
+success, error code, version delta and undo availability. Metric contract version 5 records
+this operation and observation; missing values and boolean/integer substitutions fail.
+
+Three original reproducer/control pairs cover cell anchors that cannot have block siblings
+and valid body-paragraph anchors. Refusal requires `AnchorWrongKind`, version delta zero, no
+undo entry, unchanged exact table geometry, zero revisions and matching document content.
+Controls require success, version delta one and an undo entry. The table control includes
+the API's documented separating paragraph between adjacent tables. The native adapter also
+leaves every source file untouched, checked by the existing package digest guards.
+
+Authored calibration validates independent expected packages and assertions; it does not
+claim to execute the candidate API. All six LibreOffice loaded-text comparisons apply.
+The labelled before/after page rasters and source-bound focused results are under
+`docs/results/block-insertion/`. LibreOffice may repair invalid input when displaying it;
+the schema and native outcome checks remain mandatory. These diagnostics do not report a
+full-suite score or a Word reference. All prior DOCX bytes and eligibility declarations remain
+unchanged; the PDF suite stays `core-v58`.
+
+## Text edits within mixed runs
+
+The `replace-span` operation calls public `DocxSession.ReplaceTextAtSpan` on one input, with
+its `spanEdit` v1 declaration specifying tracking, physical body-paragraph index, start,
+positive length and replacement. It returns the saved package. Like comparison and table-width
+operations, the harness resolves that output independently through its markup engine and
+LibreOffice, comparing both accepted and rejected views with authored expectations. A public
+API refusal is a failed conversion. Metric contract version 6 records the new operation.
+
+Sixteen original cases pair each mixed-run reproducer with a nearby control whose marker
+follows all edited text. Tabs and line breaks cover both direct and tracked editing, with
+selections before and across each marker. Direct single-letter replacements and tracked
+single-letter deletions preserve its position; cross-marker replacements begin at the first
+selected text node. Tracked rejection restores the original text on both sides of the marker.
+Direct edits are permanent, so both resolved views match the revised document.
+
+All expected packages and calibration redlines are independently written here. Their inline
+views include tab/break tokens, so an output with the right letters and a displaced marker
+fails. Paragraph-count assertions also require three paragraphs in each resolved view. The
+markup resolver produces internal view trees and may retain restored `delText` node names;
+these are not serialized candidate packages or a claim about residual native revisions.
+
+The labelled sheets under `docs/results/mixed-run-edits/` show actual candidate packages after
+LibreOffice rejects their revisions, then renders them as PDF. A direct-edit case has no revisions
+to reject. Hashes, exact source identities and focused run contracts are recorded alongside them.
+These diagnostics do not claim a full-suite score or a Word reference. All previous DOCX bytes
+and LibreOffice eligibility declarations remain unchanged; the PDF suite stays `core-v58`.
+
+## Reviewing a tracked column across omitted and merged rows
+
+`column-edit` declaration v2 extends v1 with a required `tracked` boolean and supports insertion
+followed by the existing bulk/selective resolution choices. Version 1 inputs and measurements
+retain their untracked behavior. The v2 adapter records the public registry before resolution,
+attempts the declared native resolver, then saves its actual result even if resolution fails.
+This exposes the failed workflow without substituting an expected document.
+
+A mandatory `columnReview` declaration v1 requires the exact integer `beforeCount` (one tracked,
+zero direct), boolean `supported` true for every listed revision, and boolean `resolutionSuccess`
+true. Missing or mistyped observations fail. The existing final registry assertion requires
+integer zero, while independent markup requires no revisions and exact table-state checks cover
+grid widths, row omissions, cell spans, widths/types and fill. Metric contract version 7 records
+the new observation. Authored calibration validates the independently authored packages and
+assertions; it does not claim to execute a candidate API or measure its registry.
+
+Eight original cases cover a leading omission with bulk reject, a trailing omission with bulk
+accept, and a table combining a widened merged row and an omitted row with selective reject or
+bulk accept. Each has a direct-edit control; its structural edit remains permanent when reject
+is requested. Nonuniform grid widths make the expected column and widened cell explicit.
+All eight LibreOffice loaded-text comparisons apply. Prior eligibility declarations are unchanged.
+
+The labelled sheets under `docs/results/tracked-column-gaps/` render actual candidates after the
+native review attempt. A failed attempt can leave unresolved markup, so the captions state its
+native outcome and before/after registry counts. LibreOffice exports that saved package as PDF;
+it is not performing the native review. Hashes, exact sources and focused run contracts are
+recorded alongside the sheets. These diagnostics do not claim a full-suite score or Word reference.
+All previous DOCX bytes are unchanged and the PDF suite remains `core-v58`.
+
+### Reviewer accounts and namesakes (Docxodus #1317)
+
+`redline-v17` adds seven original Summit cases: another account with the same display name,
+that name already used without an account, AD principal-name and object-id aliases under a
+different name, the legacy name-only control, and a free name's first tracked edit or comment.
+The PDF suite is unchanged at `core-v62`. All earlier DOCX bytes remain unchanged.
+
+The `revision-ownership` operation takes one source and a version-1 `revisionOwnership`
+declaration: reviewer `author`, nullable `identities` (`providerId`/`userId` records),
+`configure` (`open` or `operation`), `action` (`delete-block`, `replace-text` or `add-comment`),
+zero-based `paragraphIndex`, literal `text` and nullable `queryAuthor`. A non-null query author
+requires version-1 `authorNameStatus` expectations for `before` and `after`, each `free`, `own`
+or `taken`. The adapter must return the actual public query envelopes for both checkpoints.
+The legacy control opts out of accounts and of the new query, so it remains executable on an
+older candidate.
+
+Metric contract version 8 adds `people-identity` and `pending-insertion-deletion` assertions,
+both version 1 and scoped to the raw redline. The first follows the main part's people
+relationship and checks every account recorded for the declared name exactly, including
+absence, duplicates and ambiguous presence records. The second requires exactly one matching
+tracked deletion, with the declared author and text, inside the original author's insertion.
+All ordinary paragraph, untracked text, schema and independent accept/reject checks still apply.
+
+Both accepting and rejecting **all** revisions remove an originally pending inserted paragraph
+that has subsequently been deleted. These round trips alone cannot prove that the counterparty's
+proposal survived as reviewable markup. The retained-insertion assertion is therefore mandatory
+on the two foreign-name cases; a negative test demonstrates that erasing the paragraph can pass
+both round trips while failing that assertion. The people assertion independently detects a
+missing identity claim even though semantic view version 1 does not include reviewer metadata.
+
+The native adapter uses public reflection only to bind the new account DTO, setting and methods,
+so the same adapter compiles against pre-feature candidates. Missing requested account support
+is an operation failure (measured score zero), rather than a build failure or emulation by name.
+No Word behavior is inferred from these explicit feature contracts. Screenshots are review
+evidence; only recorded independent round-trip and schema measurements support redline scores.
+
+
+## Move range membership
+
+The six #1340 reject cases distinguish moved wrappers from their named range containers. Plain
+`XY` after or between moved wrappers survives, as does text between two same-named disjoint
+destination ranges, including a range spanning paragraphs. The unsplit move and text outside the
+range are controls. Expected paragraph lists were independently observed using native Word for the
+web accept/reject on 2026-10-24; the core repository pins the exact original source bytes and endpoint
+hashes in `TestFiles/RP/MoveRangeMembership/word-endpoints.json`. These benchmark packages are
+new literal OOXML with the benchmark's own styles and section defaults, so their source bytes differ;
+no native Word PDF is registered as a scoring reference here. The existing corpus is byte-identical.
+
+The benchmark invokes stateless rejection. The core tests also require the session registry to list
+disjoint same-named ranges as one supported move and check bulk/selective acceptance and rejection
+against Word. This track does not score session enumeration or selective resolution.
