@@ -1,4 +1,5 @@
 import copy
+import json
 import tempfile
 import unittest
 import xml.etree.ElementTree as ET
@@ -6,7 +7,7 @@ import zipfile
 from pathlib import Path
 from unittest.mock import patch
 
-from bench import common, redline, redline_fixtures, revisions
+from bench import common, redline, redline_build, redline_fixtures, revisions
 
 W = '{' + revisions.W + '}'
 
@@ -619,6 +620,26 @@ class ScoringContract(unittest.TestCase):
         self.assertTrue(redline._validity(documents, ['l', 'r'], 'o')['passed'])
         documents['o'] = [finding, moved]
         self.assertFalse(redline._validity(documents, ['l', 'r'], 'o')['passed'])
+
+    def test_a_validator_only_sees_copies_and_one_that_rewrites_them_is_refused(self):
+        # Opening a package by path, the SDK writes its rewrite of an unparseable link target back
+        # into the file; the harness hands the validator copies and refuses a run that changes one.
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / 'input.docx'
+            path.write_bytes(b'original')
+            seen = []
+            def rewriting(argv, **_kwargs):
+                seen.extend(argv[2:])
+                for name in argv[2:]:
+                    Path(name).write_bytes(b'rewritten')
+                return json.dumps({'documents': {name: [] for name in argv[2:]}})
+            with patch.object(redline_build, 'execute', side_effect=rewriting), self.assertRaisesRegex(ValueError, 'modified'):
+                redline_build.validate_packages(temp, [path])
+            self.assertEqual(path.read_bytes(), b'original')
+            self.assertNotIn(str(path), seen)
+            finding = {'id': 'x', 'part': None, 'path': None, 'description': 'd'}
+            with patch.object(redline_build, 'execute', side_effect=lambda argv, **_k: json.dumps({'documents': {argv[2]: [finding]}})):
+                self.assertEqual(redline_build.validate_packages(temp, [path]), {str(path): [finding]})
 
     def test_any_failed_check_zeroes_the_case_and_not_applicable_is_ignored(self):
         outcome = {'checks': [{'name': 'a', 'passed': True}, {'name': 'b', 'passed': None, 'ineligible': True}]}
