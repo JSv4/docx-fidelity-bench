@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v17')
-        self.assertEqual(len(registry['cases']), 152)
+        self.assertEqual(registry['suite']['id'], 'redline-v18')
+        self.assertEqual(len(registry['cases']), 160)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1388)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -85,11 +85,26 @@ class RedlineRegistry(unittest.TestCase):
             redline.validate_registry(broken)
 
     def test_inputs_carry_no_embedded_fonts_or_custom_xml_parts(self):
+        # Checked here independently of bench/audit.py: no custom XML parts, every font relationship
+        # comes from the font table and reaches the declared placeholder (not a font program), and
+        # the only font-named entries are the font table, its relationships and those targets.
         for record in cases():
             for item in redline.artifact_records(record):
-                for name in members(item):
-                    self.assertNotIn('font', name.lower())
+                parts = members(item)
+                placeholders = set()
+                for name, payload in parts.items():
+                    if not name.endswith('.rels'):
+                        continue
+                    for relationship in ET.fromstring(payload):
+                        if relationship.get('Type', '').endswith('/font'):
+                            self.assertEqual(name, 'word/_rels/fontTable.xml.rels')
+                            target = 'word/' + relationship.get('Target')
+                            self.assertEqual(parts.get(target), common.PLACEHOLDER_FONT_BYTES, item['path'])
+                            placeholders.add(target)
+                for name in parts:
                     self.assertFalse(name.startswith('customXml/'))
+                    if 'font' in name.lower():
+                        self.assertIn(name, {'word/fontTable.xml', 'word/_rels/fontTable.xml.rels'} | placeholders)
 
     def test_reviewer_expectations_require_all_authors_and_valid_digests(self):
         registry = common.read_json(redline.MANIFEST)
@@ -450,6 +465,17 @@ class EngineSemantics(unittest.TestCase):
         accepted = revisions.view(package, revisions.resolve(package.story_parts(), 'accept'))['stories']['body']
         self.assertEqual(accepted, [{'path': 'body', 'style': '', 'content': [['t', 'body']]}])
 
+    def test_hyperlink_emptied_by_resolution_is_removed(self):
+        package = fragment('<w:p><w:r><w:t>a</w:t></w:r><w:hyperlink w:anchor="x"><w:ins w:id="1"><w:r><w:t>new</w:t></w:r></w:ins></w:hyperlink>'
+                           '<w:hyperlink w:anchor="y"><w:del w:id="2"><w:r><w:delText>old</w:delText></w:r></w:del></w:hyperlink>'
+                           '<w:hyperlink w:anchor="z"/></w:p>')
+        def content(mode):
+            return revisions.view(package, revisions.resolve(package.story_parts(), mode))['stories']['body'][0]['content']
+        # The hyperlink the source wrote empty survives either way; only one the resolution emptied goes.
+        kept = [['m', 'hyperlink-begin'], ['m', 'hyperlink-end']]
+        self.assertEqual(content('accept'), [['t', 'a'], ['m', 'hyperlink-begin'], ['t', 'new'], ['m', 'hyperlink-end']] + kept)
+        self.assertEqual(content('reject'), [['t', 'a'], ['m', 'hyperlink-begin'], ['t', 'old'], ['m', 'hyperlink-end']] + kept)
+
     def test_bookmarks_between_blocks_are_their_own_view_records(self):
         package = fragment('<w:p><w:r><w:t>a</w:t></w:r></w:p><w:bookmarkStart w:id="0" w:name="M"/><w:p><w:r><w:t>b</w:t></w:r></w:p><w:bookmarkEnd w:id="0"/>')
         self.assertEqual(body_texts(package), ['a', 'bookmark-start:M', 'b', 'bookmark-end:M'])
@@ -640,6 +666,50 @@ class ScoringContract(unittest.TestCase):
             finding = {'id': 'x', 'part': None, 'path': None, 'description': 'd'}
             with patch.object(redline_build, 'execute', side_effect=lambda argv, **_k: json.dumps({'documents': {argv[2]: [finding]}})):
                 self.assertEqual(redline_build.validate_packages(temp, [path]), {str(path): [finding]})
+
+    def test_hyperlink_targets_must_resolve_to_the_declared_external_targets(self):
+        record = case('redline-hyperlink-mailto-recipients')
+        target = 'mailto:first@example.com;second@example.com'
+        self.assertEqual(revisions.hyperlink_target_findings(load(record['authored']), [target]), [])
+        # A second link to the same relationship is not a different target.
+        twice = members(record['authored'])
+        twice['word/document.xml'] = twice['word/document.xml'].replace(b'</w:hyperlink>', b'</w:hyperlink><w:hyperlink r:id="rLink"><w:r><w:t>again</w:t></w:r></w:hyperlink>', 1)
+        self.assertEqual(revisions.hyperlink_target_findings(revisions.Package(twice), [target]), [])
+        def relationships(change):
+            parts = members(record['authored'])
+            rels = ET.fromstring(parts['word/_rels/document.xml.rels'])
+            change(rels)
+            parts['word/_rels/document.xml.rels'] = ET.tostring(rels)
+            return revisions.Package(parts)
+        def link(rels):
+            return next(r for r in rels if r.get('Id') == 'rLink')
+        # The SDK's stream-open workaround, written back out: both round trips would still pass.
+        rewritten = relationships(lambda rels: link(rels).set('Target', 'rewritten://87561fa0-50f4-491e-863e-39ceab24833f'))
+        self.assertEqual([f['problem'] for f in revisions.hyperlink_target_findings(rewritten, [target])], ['targets differ'])
+        # A target "repaired" by dropping a recipient is not the target the document wrote.
+        trimmed = relationships(lambda rels: link(rels).set('Target', 'mailto:first@example.com'))
+        self.assertEqual([f['problem'] for f in revisions.hyperlink_target_findings(trimmed, [target])], ['targets differ'])
+        # A dropped relationship, and a hyperlink left on an id another relationship also holds.
+        dropped = relationships(lambda rels: rels.remove(link(rels)))
+        self.assertEqual([f['problem'] for f in revisions.hyperlink_target_findings(dropped, [target])],
+                         ['resolves to 0 relationships, not one external hyperlink', 'targets differ'])
+        shared = relationships(lambda rels: link(rels).set('Id', 'rStyles'))
+        shared = revisions.Package({**shared.members, 'word/document.xml': shared.members['word/document.xml'].replace(b'r:id="rLink"', b'r:id="rStyles"')})
+        self.assertEqual([f['problem'] for f in revisions.hyperlink_target_findings(shared, [target])],
+                         ['resolves to 2 relationships, not one external hyperlink', 'targets differ'])
+        # The link pointed at the styles relationship instead of its own.
+        misdirected = revisions.Package({**members(record['authored']), 'word/document.xml': members(record['authored'])['word/document.xml'].replace(b'r:id="rLink"', b'r:id="rStyles"')})
+        self.assertEqual([f['problem'] for f in revisions.hyperlink_target_findings(misdirected, [target])],
+                         ['resolves to 1 relationships, not one external hyperlink', 'targets differ'])
+
+    def test_an_output_that_fails_to_open_is_never_licensed_by_its_inputs(self):
+        # Inputs the SDK refuses at open carry one Package_Open finding and no schema findings; an
+        # output keeping that defect would otherwise pass validity without ever being validated.
+        failed = {'id': 'Package_Open', 'part': None, 'description': 'OpenXmlPackageException: invalid part', 'path': None}
+        documents = {'l': [failed], 'r': [failed], 'o': [failed]}
+        self.assertFalse(redline._validity(documents, ['l', 'r'], 'o')['passed'])
+        documents['o'] = []
+        self.assertTrue(redline._validity(documents, ['l', 'r'], 'o')['passed'])
 
     def test_any_failed_check_zeroes_the_case_and_not_applicable_is_ignored(self):
         outcome = {'checks': [{'name': 'a', 'passed': True}, {'name': 'b', 'passed': None, 'ineligible': True}]}

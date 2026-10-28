@@ -43,6 +43,47 @@ def custom_xml_link(content, wrapped):
     return '<w:hyperlink w:anchor="BirchTarget">' + content + '</w:hyperlink>'
 
 
+# Docxodus #1384: package shapes the Open XML SDK refuses at open. Each reproducer breaks exactly one
+# of the control's three well-formed features: a typed embedded-font part, a glossary document with
+# its own content type, and an external hyperlink under its own relationship id.
+PACKAGE_SHAPES = ('typed-parts-control', 'untyped-font', 'generic-glossary', 'shared-relationship-id')
+PACKAGE_LINK_TARGET = 'https://example.com/terms'
+# An invented font key; the embedded part holds placeholder bytes, not a font program.
+PACKAGE_FONT_KEY = '{5D0C8A31-7B42-4E96-A1F3-2C6B9E4D7A10}'
+
+
+def package_shape(shape):
+    """Extra parts, relationships and content types for one #1384 package shape.
+
+    Returns the literal parts, the main document's added relationships as (id, type, target[, mode])
+    and the [Content_Types].xml elements to add. The hyperlink relationship id is `rSettings`, the
+    settings part's own id, for the shared-id reproducer, and `rLink` otherwise."""
+    from .common import PLACEHOLDER_FONT_BYTES
+    if shape not in PACKAGE_SHAPES:
+        raise ValueError('Unknown package shape: ' + shape)
+    wml = 'application/vnd.openxmlformats-officedocument.wordprocessingml.'
+    parts = {
+        'word/fontTable.xml': (f'<w:fonts xmlns:w="{W}" xmlns:r="{R}"><w:font w:name="ExampleSans">'
+                               f'<w:embedRegular w:fontKey="{PACKAGE_FONT_KEY}" r:id="rIdEmb1"/></w:font></w:fonts>'),
+        'word/_rels/fontTable.xml.rels': ('<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+                                          f'<Relationship Id="rIdEmb1" Type="{R}/font" Target="fonts/ExampleSans-regular.ttf"/></Relationships>'),
+        'word/fonts/ExampleSans-regular.ttf': PLACEHOLDER_FONT_BYTES,
+        'word/glossary/document.xml': (f'<w:glossaryDocument xmlns:w="{W}"><w:docParts><w:docPart><w:docPartPr>'
+                                       '<w:name w:val="ExampleBlock"/><w:category><w:name w:val="General"/><w:gallery w:val="placeholder"/></w:category>'
+                                       '<w:guid w:val="{8E2F4B6A-1C3D-4A5E-9F70-B1D2C3E4F5A6}"/></w:docPartPr>'
+                                       '<w:docPartBody><w:p/></w:docPartBody></w:docPart></w:docParts></w:glossaryDocument>'),
+    }
+    link = 'rSettings' if shape == 'shared-relationship-id' else 'rLink'
+    relations = [('rFontTable', 'fontTable', 'fontTable.xml'), ('rGlossary', 'glossaryDocument', 'glossary/document.xml'),
+                 (link, 'hyperlink', PACKAGE_LINK_TARGET, 'External')]
+    content_types = f'<Override PartName="/word/fontTable.xml" ContentType="{wml}fontTable+xml"/>'
+    if shape != 'untyped-font':
+        content_types += '<Default Extension="ttf" ContentType="application/x-font-ttf"/>'
+    if shape != 'generic-glossary':
+        content_types += f'<Override PartName="/word/glossary/document.xml" ContentType="{wml}document.glossary+xml"/>'
+    return {'parts': parts, 'relations': relations, 'content_types': content_types, 'link': link}
+
+
 
 def comment_view_note(identifier=11, text='Review the cedar clause.'):
     return (f'<w:comment w:id="{identifier}" w:author="Cedar" w:initials="C" w:date="2026-01-01T00:00:00Z">'
@@ -344,7 +385,7 @@ def zip_write(path, parts):
 # The settings every package carries; a case that needs one more setting prepends it (schema order).
 SETTINGS_BODY = '<w:footnotePr><w:numFmt w:val="decimal"/></w:footnotePr><w:endnotePr><w:numFmt w:val="lowerRoman"/></w:endnotePr><w:compat><w:compatSetting w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="15"/></w:compat>'
 
-def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT):
+def package(path, body, final_section=None, notes=None, image=False, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT, relations_extra=(), content_types_extra=''):
     namespaces = f'xmlns:w="{W}" xmlns:r="{R}" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"'
     namespaces += namespaces_extra
     styles = f'''<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{font}" w:hAnsi="{font}" w:eastAsia="{font}" w:cs="{font}"/><w:sz w:val="22"/><w:color w:val="000000"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="120" w:line="276" w:lineRule="auto"/><w:widowControl/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style><w:style w:type="paragraph" w:styleId="Title"><w:name w:val="Title"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:after="240"/></w:pPr><w:rPr><w:b/><w:sz w:val="32"/></w:rPr></w:style></w:styles>'''
@@ -393,9 +434,10 @@ def package(path, body, final_section=None, notes=None, image=False, namespaces_
     if image:
         parts['word/media/diamond.png'] = png(160, 160, lambda x, y: (0, 0, 0, 255) if abs(x - 79.5) + abs(y - 79.5) < 75 else (255, 255, 255, 0), alpha=True)
         relations.append(('rImage', 'image', 'media/diamond.png'))
-    parts['word/_rels/document.xml.rels'] = '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' + ''.join(f'<Relationship Id="{i}" Type="{kind if kind.startswith("http") else R + "/" + kind}" Target="{target}"/>' for i, kind, target in relations) + '</Relationships>'
+    relations.extend(relations_extra)
+    parts['word/_rels/document.xml.rels'] = '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' + ''.join(f'<Relationship Id="{i}" Type="{kind if kind.startswith("http") else R + "/" + kind}" Target="{target}"' + ''.join(f' TargetMode="{m}"' for m in mode) + '/>' for i, kind, target, *mode in relations) + '</Relationships>'
     parts['_rels/.rels'] = f'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rDocument" Type="{R}/officeDocument" Target="word/document.xml"/></Relationships>'
-    parts['[Content_Types].xml'] = '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Default Extension="png" ContentType="image/png"/>' + ''.join(f'<Override PartName="/word/{name}.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.{kind}+xml"/>' for name, kind in overrides) + '</Types>'
+    parts['[Content_Types].xml'] = '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Default Extension="png" ContentType="image/png"/>' + content_types_extra + ''.join(f'<Override PartName="/word/{name}.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.{kind}+xml"/>' for name, kind in overrides) + '</Types>'
     if extra_parts:
         parts.update(extra_parts)
     zip_write(path, parts)
@@ -756,14 +798,15 @@ def native_precision_inputs():
 
 def generate():
     cases = []
-    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT, literal_parts=None):
+    def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT, literal_parts=None, relations_extra=(), content_types_extra=''):
         assertions = assertions or []
         for assertion in assertions:
             if assertion['type'] == 'marker-region':
                 assertion.update(version=2, tolerancePt=0.0001)
         path = ROOT / 'fixtures' / (case_id + '.docx')
         if literal_parts is None:
-            package(path, body, sect, notes, image, namespaces_extra, styles_xml, story, notes_xml, stories, extra_parts, footnote_list, numbering_xml, comments_xml, comments_extended_xml, comments_ids_xml, comments_extensible_xml, font=font)
+            package(path, body, sect, notes, image, namespaces_extra, styles_xml, story, notes_xml, stories, extra_parts, footnote_list, numbering_xml, comments_xml, comments_extended_xml, comments_ids_xml, comments_extensible_xml, font=font,
+                    relations_extra=relations_extra, content_types_extra=content_types_extra)
         else:
             zip_write(path, literal_parts)
         inventory = dict(sorted(Counter(' '.join(text).split()).items()))
@@ -2628,7 +2671,23 @@ def generate():
     for cid, description, parts, text, fonts in native_precision_inputs():
         add(cid, 'paragraphs', description, text, '', font=fonts[0], literal_parts=parts)
         cases[-1]['fonts'] = fonts
-    registry = {'schema': 1, 'suite': {'id': 'core-v71', 'version': 71, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Docxodus #1384: packages the Open XML SDK refuses at open, which the render entry must still read.
+    # A plain paragraph names the shape; the hyperlink text is ordinary black text, as LibreOffice draws it.
+    for shape in PACKAGE_SHAPES:
+        extras = package_shape(shape)
+        texts = ['PackageShape intro: the notice terms below apply to every order.',
+                 'Send notices to the notice desk.', 'Closing line remains unchanged.']
+        body = (para(texts[0]) + para(runs=run('Send notices to ') + f'<w:hyperlink r:id="{extras["link"]}" w:history="1">'
+                + run('the notice desk') + '</w:hyperlink>' + run('.')) + para(texts[2]))
+        add('package-' + shape, 'paragraphs',
+            {'typed-parts-control': 'Control: a ttf-typed embedded-font part, a glossary with its own Override and a hyperlink under its own id (Docxodus #1384)',
+             'untyped-font': 'An embedded-font part no Default or Override types, which the Open XML SDK refuses at open (Docxodus #1384)',
+             'generic-glossary': 'A glossary document typed only as application/xml, which the Open XML SDK refuses at open (Docxodus #1384)',
+             'shared-relationship-id': "An external hyperlink reusing the settings relationship's id, which the Open XML SDK refuses at open (Docxodus #1384)"}[shape],
+            texts, body, extra_parts=extras['parts'], relations_extra=extras['relations'], content_types_extra=extras['content_types'])
+        cases[-1]['rights']['assets'] = ('All text is generated here; no images. word/fonts/ExampleSans-regular.ttf holds the '
+                                         'placeholder bytes declared in bench/common.py, which are not a font program')
+    registry = {'schema': 1, 'suite': {'id': 'core-v72', 'version': 72, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

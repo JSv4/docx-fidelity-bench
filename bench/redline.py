@@ -24,20 +24,21 @@ from .common import ROOT, contained, digest, execute, identity, read_json, write
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
 OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'revision-ownership': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}}
-CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables'}
+ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}}
+CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
 SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}}
-CONTRACT = {'version': 8, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+CONTRACT = {'version': 9, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
-            'validity': 'no OpenXmlValidator finding (id, part, description) occurs more often than in any input',
+            'validity': 'no OpenXmlValidator finding (id, part, description) occurs more often than in any input, and the output opens: a Package_Open finding in the output always fails, whatever the inputs did',
             'semanticPreflight': 'declared identity cases must report zero changes at raw limits with and without the package supplement',
             'revisionRegistry': 'declared table operations must report the public registry count and match independent resolved table assertions',
             'blockInsertion': 'declared insertion outcomes require typed success, error, version change and undo availability',
             'spanEditing': 'public span editing must preserve text and inline-marker order through both independent revision resolvers',
             'columnReview': 'v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry',
-            'revisionOwnership': 'account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips'}
+            'revisionOwnership': 'account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips',
+            'hyperlinkTargets': 'declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written'}
 HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'bench/redline_build.py', 'bench/revision_ownership.py']
 
 
@@ -167,6 +168,7 @@ def validate_registry(registry=None):
                      'table-state': lambda a: a['scope'] == 'output' and valid_table_state(a.get('state')),
                      'people-identity': lambda a: a['scope'] == 'redline' and isinstance(a.get('author'), str) and bool(a['author'])
                          and revision_ownership.valid_identities(a.get('identities')),
+                     'hyperlink-targets': lambda a: a['scope'] == 'redline' and isinstance(a.get('targets'), list) and all(isinstance(x, str) and x for x in a['targets']),
                      'pending-insertion-deletion': lambda a: a['scope'] == 'redline' and all(isinstance(a.get(k), str) and bool(a[k]) for k in ('author', 'deletedBy', 'text')),
                      'comment-threads': lambda a: a['scope'] == 'redline' and isinstance(a.get('threads'), list) and all(
                          isinstance(x, list) and len(x) == 2 and all(isinstance(y, str) and y for y in x) for x in a['threads'])}[kind]
@@ -392,6 +394,9 @@ def _assertion(assertion, package, resolved):
     elif kind == 'style-ids-unique':
         findings = revisions.style_id_findings(package)
         check.update(passed=not findings, findings=findings)
+    elif kind == 'hyperlink-targets':
+        findings = revisions.hyperlink_target_findings(package, assertion['targets'])
+        check.update(passed=not findings, findings=findings)
     elif kind == 'comment-threads':
         findings = revisions.comment_thread_findings(package, assertion['threads'])
         check.update(passed=not findings, findings=findings)
@@ -412,6 +417,10 @@ def _validity(documents, inputs, output):
     for path in inputs:
         for key, value in counts(documents[str(path)]).items():
             allowed[key] = max(allowed.get(key, 0), value)
+    # An input the SDK cannot open reports no schema findings at all, so its Package_Open finding
+    # can never license the output's: an output that fails to open would go unvalidated.
+    for key in [k for k in allowed if k[0] == 'Package_Open']:
+        allowed[key] = 0
     new = [{'id': k[0], 'part': k[1], 'description': k[2], 'count': v, 'allowed': allowed.get(k, 0)}
            for k, v in sorted(counts(documents[str(output)]).items(), key=lambda item: str(item[0])) if v > allowed.get(k, 0)]
     return {'name': 'no-new-validation-errors', 'passed': not new, 'new': new}
