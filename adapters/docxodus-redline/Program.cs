@@ -126,6 +126,20 @@ internal static class Program
                     result = new WmlDocument("revision-ownership.docx", session.Save());
                     break;
                 }
+                case "replace-text" when documents.Count == 1:
+                {
+                    var spec = settings["paragraphRewrite"] as JsonObject ?? throw new InvalidDataException("Missing paragraph rewrite");
+                    if ((int?)spec["version"] != 1) throw new InvalidDataException("Unknown paragraph rewrite version");
+                    using var session = new DocxSession(documents[0].Document.DocumentByteArray);
+                    var paragraphs = session.Project().AnchorIndex.Values
+                        .Where(a => a.Anchor.Scope == "body" && a.Anchor.Kind == "p").ToArray();
+                    var index = (int?)spec["paragraphIndex"] ?? throw new InvalidDataException("Missing paragraph index");
+                    var edit = session.ReplaceText(paragraphs[index].Anchor.Id,
+                        (string?)spec["markdown"] ?? throw new InvalidDataException("Missing markdown"));
+                    if (!edit.Success) throw new InvalidOperationException(edit.Error?.Message ?? "Paragraph rewrite failed");
+                    result = new WmlDocument("paragraph-rewrite.docx", session.Save());
+                    break;
+                }
                 case "replace-span" when documents.Count == 1:
                 {
                     var spec = settings["spanEdit"] as JsonObject ?? throw new InvalidDataException("Missing span edit");

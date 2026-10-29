@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v19`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v20`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -376,3 +376,23 @@ The optional `run-atoms` v1 assertion checks the ordered direct run children in 
 Three newly authored views have narrow LibreOffice 25.8.7.3 qualifications, reproduced in separate fresh profiles before and after the candidate. Source, accepted, rejected and calibration packages for all three have actual zero SDK findings. Accepting the page/column-break calibration resolves its revisions but retains the deleted break and splits the paragraph; rejecting remains eligible. In the symbol case, LibreOffice imports the source's trailing `Birch` as five Symbol-font `w:sym` carriers, whereas authored rejection retains `w:t`; its text-only view omits those symbol tokens. Symbol acceptance remains eligible. All independent markup, exact-atom and schema checks remain mandatory on these cases. No existing eligibility is changed.
 
 The [twenty labeled native previews](results/visible-atoms/README.md) are review artifacts, not Word references or PDF scores. Focused before/after measurements bind exact sources; a subset run has no full-suite headline score. Earlier numeric-offset cases remain unchanged and can expose intentional incompatibility with the new offset contract.
+
+## Whole-paragraph control preservation
+
+`redline-v20` adds fourteen original cases for Docxodus #1406. Eight use public untracked
+`replace-text` to echo a paragraph or change text on both sides of a bound or citation control.
+Six cover multiline strike/code/link controls and single-line controls, pinning hard-break marker
+consumption inside these inline spans. Every reproducer has an ordinary-text control.
+`paragraphRewrite` v1 declares an exact zero-based body
+paragraph index and markdown payload. It calls `DocxSession.ReplaceText` directly, with no
+candidate-specific repair or native XML write in the adapter.
+
+`content-controls` v1 compares the complete ordered native control subtrees against authored XML
+in each accepted/rejected view: element names, attributes, text, fields and nested markup.
+Only Docxodus's addressing attributes in `http://powertools.codeplex.com/2011` are ignored;
+serialization indentation and namespace prefixes carry no meaning. Binding paths/store ids and
+citation instructions are mandatory even when visible text is unchanged. Zero revisions in the
+raw candidate are mandatory for this untracked operation. Existing complete semantic, schema
+and both LibreOffice checks remain required, with no new exclusions. Metric contract version 11
+records this observer. These cases do not cover control fill APIs, query/patch observations,
+tracked whole-paragraph edits or browser interaction.

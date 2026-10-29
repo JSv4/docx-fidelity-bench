@@ -88,3 +88,9 @@ core serializer; do not attribute an unknown-option failure to CSS rendering.
 PDF preparation also accepts `compare` with exactly two inputs and `consolidate` with a base followed
 by reviewer inputs. The native adapter assigns omitted reviewer names as `Reviewer1`, `Reviewer2`, etc.
 Both use the same source-bound operation build and immutable input checks as `build`.
+
+The redline adapter also accepts `replace-text` with one source input and
+`settings.paragraphRewrite = {"version":1,"paragraphIndex":0,"markdown":"..."}`.
+It invokes public untracked `DocxSession.ReplaceText` and saves its actual output. A failed edit
+is a measured operation failure; the adapter does not copy or synthesize control metadata.
+The benchmark independently requires no pending revisions and the declared native control trees.
