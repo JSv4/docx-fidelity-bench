@@ -204,4 +204,4 @@ The six nested-inline cases for Docxodus #1410 are literal OOXML and Cedar text 
 `bench/fixtures.py`. Hyperlink anchors, constant QUOTE instructions, control ids and custom-XML
 element names are invented here. No renderer fixture/helper, template, external content,
 image, data store or embedded font program is imported. Any review captures under
-`docs/results/nested-inline/` show only these original inputs and their public renderer outputs.
+`docs/results/nested-inline-render/` show only these original inputs and their public renderer outputs.

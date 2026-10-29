@@ -6,6 +6,9 @@ They retain the existing 120-second conversion deadline and all PDF checks. All 
 schema-clean; all prior DOCX bytes and the `redline-v20` corpus remain unchanged. Focused CI
 measurements use a distinct diagnostic suite identity; default measurement still covers both
 complete tracks.
+[Measured before/after results and all six labeled previews](docs/results/nested-inline-render/README.md)
+record three baseline readiness failures and six candidate PDFs with all mandatory checks passing.
+The focused score is 49.99744 → 98.58696; the mixed case remains 91.72840.
 
 `redline-v20` adds fourteen original paragraph-rewrite cases for Docxodus #1406: unchanged echoes
 and outside edits around bound/citation controls, plus formatted multiline echoes. Each has an
