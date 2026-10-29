@@ -94,3 +94,12 @@ The redline adapter also accepts `replace-text` with one source input and
 It invokes public untracked `DocxSession.ReplaceText` and saves its actual output. A failed edit
 is a measured operation failure; the adapter does not copy or synthesize control metadata.
 The benchmark independently requires no pending revisions and the declared native control trees.
+
+The `reference libreoffice` and `reference equivalent-controls` commands accept `--manifest`,
+using the same complete input/rights/digest validation as `run --manifest`. The rendering workflow
+keeps both complete tracks by default; `track=pdf` or `track=redline` selects one. Its optional
+`cases` input is a JSON array of PDF case ids. The entire registry is validated before selection;
+unknown, duplicate, empty and malformed selections are rejected. Selected cases retain their
+full declarations and get a distinct diagnostic identity. Reference reuse still requires exact
+suite, input, font/environment and calibration equivalence. No score threshold or conversion
+deadline changes with a selection.

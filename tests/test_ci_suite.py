@@ -3,7 +3,7 @@ import json
 import unittest
 from pathlib import Path
 from bench import common, pdf
-from bench.suites import select_suite
+from bench.suites import select_cases, select_suite
 
 
 class HistoricalCiSuite(unittest.TestCase):
@@ -15,7 +15,28 @@ class HistoricalCiSuite(unittest.TestCase):
 
     def test_default_keeps_the_complete_corpus(self):
         self.assertIs(select_suite(self.registry), self.registry)
-        self.assertEqual(len(self.registry['cases']), 388)
+        self.assertEqual(len(self.registry['cases']), 394)
+
+    def test_explicit_cases_have_a_diagnostic_identity_and_canonical_order(self):
+        ids = self.registry['suite']['cases'][:2]
+        selected = select_cases(self.registry, ids[::-1])
+        self.assertTrue(selected['suite']['id'].startswith('diagnostic-'))
+        self.assertEqual(selected['suite']['cases'], ids)
+        self.assertEqual(len(selected['cases']), 2)
+        selected['cases'][0]['assertions'].append({'untrusted': True})
+        self.assertNotEqual(selected['cases'][0], self.registry['cases'][0])
+
+    def test_malformed_diagnostic_selections_are_rejected(self):
+        cid = self.registry['suite']['cases'][0]
+        for ids in (None, cid, [], [None], [[]], [{}], [cid, cid], ['unknown']):
+            with self.subTest(ids=ids), self.assertRaises(ValueError):
+                select_cases(self.registry, ids)
+
+    def test_diagnostics_cannot_hide_a_changed_unselected_input(self):
+        changed = copy.deepcopy(self.registry)
+        changed['cases'][-1]['sha256'] = '0' * 64
+        with self.assertRaises(ValueError):
+            select_cases(changed, [changed['cases'][0]['id']])
 
     def test_historical_twelve_inputs_are_preserved(self):
         selected = select_suite(self.registry, 'core-ci-v2')

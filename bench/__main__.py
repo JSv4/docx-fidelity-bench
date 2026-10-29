@@ -20,9 +20,11 @@ def main():
     create = refs.add_parser('libreoffice')
     create.add_argument('--out', required=True)
     create.add_argument('--suite', help='Registered suite; defaults to the complete corpus')
+    create.add_argument('--manifest', help='Explicit validated manifest, as supported by run')
     controls = refs.add_parser('equivalent-controls')
     controls.add_argument('--reference', required=True, help='Immutable direct LibreOffice bundle')
     controls.add_argument('--out', required=True)
+    controls.add_argument('--manifest', help='Explicit validated manifest, as supported by run')
     capture = refs.add_parser('import')
     capture.add_argument('--metadata', required=True)
     capture.add_argument('--pdf-dir', required=True)
@@ -72,9 +74,9 @@ def main():
     elif args.command == 'build-docxodus':
         docxodus(args.source, args.commit)
     elif args.command == 'reference' and args.operation == 'libreoffice':
-        runner.reference_bundle(args.out, suite=args.suite)
+        runner.reference_bundle(args.out, suite=args.suite, registry=registry)
     elif args.command == 'reference' and args.operation == 'equivalent-controls':
-        runner.equivalent_reference_bundle(args.out, args.reference)
+        runner.equivalent_reference_bundle(args.out, args.reference, registry=registry)
     elif args.command == 'reference':
         import_reference(registry, args)
     elif args.command == 'run':

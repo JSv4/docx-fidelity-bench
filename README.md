@@ -1,5 +1,12 @@
 # DOCX fidelity bench
 
+`core-v73` adds six original nested-inline rendering cases for Docxodus #1410: 64 hyperlinks,
+simple fields, or mixed hyperlink/control/custom-XML wrappers, each with a flat-text control.
+They retain the existing 120-second conversion deadline and all PDF checks. All six inputs are
+schema-clean; all prior DOCX bytes and the `redline-v20` corpus remain unchanged. Focused CI
+measurements use a distinct diagnostic suite identity; default measurement still covers both
+complete tracks.
+
 `redline-v20` adds fourteen original paragraph-rewrite cases for Docxodus #1406: unchanged echoes
 and outside edits around bound/citation controls, plus formatted multiline echoes. Each has an
 ordinary-text control. Native control subtrees, including binding paths/store ids and field instructions, are checked exactly;
