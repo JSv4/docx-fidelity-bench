@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v18`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v19`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -365,3 +365,14 @@ after [PR #1400](https://github.com/JSv4/Docxodus/pull/1400) (#1388) and
 sixteen LibreOffice comparisons applied. Labelled before/after sheets and their capture record are under
 [`docs/results/package-shapes/`](results/package-shapes/); these are focused diagnostics, not a
 full-suite score.
+
+
+## Visible run atoms and inline XML
+
+`redline-v19` adds twenty original cases for Docxodus #1387/#1409. Each tracked span replacement selects one native atom (tab, line/carriage break, page/column break, positional tab, special hyphen or symbol), with an ordinary-text control. Another pair selects text in inline custom XML versus ordinary runs. Offsets follow the corrected visible-character contract; older engines that omit atoms fail the reproducer. These are public `replace-span` operations, not comparisons.
+
+The optional `run-atoms` v1 assertion checks the ordered direct run children in the accepted/rejected body, including element spelling and every Word-namespace attribute. Tab-stop definitions do not count. It distinguishes `cr` from `br`, native elements from equivalent literal text, and exact positional-tab alignment/relative origin/leader, symbol font/code and break type/clear state. Existing complete semantic views, schema checks and all applicable LibreOffice comparisons stay mandatory. Metric contract version 10 records the assertion. This does not add a query, markdown-patch or editor observer.
+
+Three newly authored views have narrow LibreOffice 25.8.7.3 qualifications, reproduced in separate fresh profiles before and after the candidate. Source, accepted, rejected and calibration packages for all three have actual zero SDK findings. Accepting the page/column-break calibration resolves its revisions but retains the deleted break and splits the paragraph; rejecting remains eligible. In the symbol case, LibreOffice imports the source's trailing `Birch` as five Symbol-font `w:sym` carriers, whereas authored rejection retains `w:t`; its text-only view omits those symbol tokens. Symbol acceptance remains eligible. All independent markup, exact-atom and schema checks remain mandatory on these cases. No existing eligibility is changed.
+
+The [twenty labeled native previews](results/visible-atoms/README.md) are review artifacts, not Word references or PDF scores. Focused before/after measurements bind exact sources; a subset run has no full-suite headline score. Earlier numeric-offset cases remain unchanged and can expose intentional incompatibility with the new offset contract.

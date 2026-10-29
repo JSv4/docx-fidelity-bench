@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v18')
-        self.assertEqual(len(registry['cases']), 160)
+        self.assertEqual(registry['suite']['id'], 'redline-v19')
+        self.assertEqual(len(registry['cases']), 180)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1388)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1409)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -157,6 +157,34 @@ class AuthoredCalibration(unittest.TestCase):
                                 rejected=revisions.resolve(package.story_parts(), 'reject'))
             for assertion in record['assertions']:
                 self.assertTrue(redline._assertion(assertion, package, resolved)['passed'], record['id'] + ' ' + assertion['type'])
+
+    def test_run_atom_assertion_rejects_changed_attributes_and_equivalent_carriers(self):
+        for name, attribute in [('ptab', 'alignment'), ('symbol', 'font'), ('page', 'clear'), ('cr', None)]:
+            record = case('redline-visible-atom-' + name)
+            assertion = next(a for a in record['assertions'] if a['scope'] == 'rejected')
+            original = load(record['expected']['rejected'])
+            self.assertTrue(redline._assertion(assertion, original, {'rejected': None})['passed'])
+            def change(root):
+                atom = next(e for run in root.iter(W + 'r') for e in run if e.tag == W + assertion['atoms'][0]['name'])
+                if attribute:
+                    atom.set(W + attribute, 'changed')
+                else:
+                    atom.tag = W + 'br'
+            altered = rewrite(record['expected']['rejected'], change)
+            self.assertFalse(redline._assertion(assertion, altered, {'rejected': None})['passed'], name)
+
+    def test_malformed_run_atom_declarations_are_rejected(self):
+        for atoms in ([{}], [None], [{'name': [], 'attributes': {}}], [{'name': {}, 'attributes': {}}],
+                      [{'name': 'unknown', 'attributes': {}}], [{'name': 'br', 'attributes': []}],
+                      [{'name': 'br', 'attributes': {'type': None}}], [{'name': 'br', 'attributes': {}, 'extra': 1}]):
+            registry = common.read_json(redline.MANIFEST)
+            registry['cases'][0]['assertions'].append(dict(type='run-atoms', version=1, scope='rejected', atoms=atoms))
+            with self.subTest(atoms=atoms), self.assertRaises(ValueError):
+                redline.validate_registry(registry)
+        registry = common.read_json(redline.MANIFEST)
+        registry['cases'][0]['assertions'].append(dict(type='run-atoms', version=1, scope='redline', atoms=[]))
+        with self.assertRaises(ValueError):
+            redline.validate_registry(registry)
 
     def test_reproducers_and_controls_differ_from_their_original(self):
         for record in cases(operation='compare'):

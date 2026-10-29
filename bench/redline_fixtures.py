@@ -22,7 +22,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v18', 'version': 18}
+SUITE = {'id': 'redline-v19', 'version': 19}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -177,6 +177,11 @@ def package(path, body, styles=None, header=None, comments=None, footnotes=None,
 # declared-ineligible comparison is not applied; the run fails as unmeasured if the calibration
 # disagrees with this table in either direction.
 LIBREOFFICE_INELIGIBLE = {
+    **{'redline-visible-atom-' + kind: (('accepted',),
+       'LibreOffice 25.8.7.3 resolves the schema-valid authored page/column-break deletion but keeps the break and splits the paragraph; independent markup, exact native atoms, schema and LibreOffice rejection remain mandatory')
+       for kind in ('page', 'column')},
+    'redline-visible-atom-symbol': (('rejected',),
+        'LibreOffice 25.8.7.3 imports trailing Birch text under the source Symbol font as five w:sym carriers, while authored rejection keeps w:t; its text-only view omits those symbols. Independent markup, exact native atom/font/char, schema and LibreOffice acceptance remain mandatory'),
     **{'redline-revision-owner-' + name: (('accepted', 'rejected'),
        'LibreOffice 25.8.7.3 does not resolve the schema-valid authored insertion containing a deletion: accept retains and joins the proposal to the closing paragraph, and reject retains the proposal; raw insertion/deletion, people, schema and benchmark-markup round trips remain mandatory')
        for name in ('namesake-account', 'unattributed-name')},
@@ -294,11 +299,65 @@ def generate():
     move_range_membership(corpus)
     external_links(corpus)
     package_shapes(corpus)
+    visible_atom_edits(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(registry, indent=2) + '\n')
     return registry
+
+
+def visible_atom_edits(corpus):
+    """One visible character is replaced, including native atoms and an inline XML envelope."""
+    atoms = [
+        ('tab', '<w:tab/>', '\t', {}),
+        ('br', '<w:br/>', '\n', {}),
+        ('cr', '<w:cr/>', '\n', {}),
+        ('page', '<w:br w:type="page" w:clear="all"/>', '\n', {'type': 'page', 'clear': 'all'}),
+        ('column', '<w:br w:type="column"/>', '\n', {'type': 'column'}),
+        ('ptab', '<w:ptab w:alignment="right" w:relativeTo="margin" w:leader="dot"/>', '\t',
+         {'alignment': 'right', 'relativeTo': 'margin', 'leader': 'dot'}),
+        ('nonbreaking-hyphen', '<w:noBreakHyphen/>', '‑', {}),
+        ('soft-hyphen', '<w:softHyphen/>', '­', {}),
+        ('symbol', '<w:sym w:font="Symbol" w:char="03A9"/>', 'Ω', {'font': 'Symbol', 'char': '03A9'}),
+    ]
+    def document(content):
+        return p(t('Willow register.')) + p(content) + p(t('Willow complete.'))
+    for name, atom, literal, attributes in atoms:
+        for control in (False, True):
+            control_text = {'\t': '_', '\n': '|'}.get(literal, literal)
+            case_id = 'redline-visible-atom-' + name + ('-control' if control else '')
+            original = t('Aster' + control_text + 'Birch') if control else '<w:r><w:t>Aster</w:t>' + atom + '<w:t>Birch</w:t></w:r>'
+            rev = Revisions()
+            selected = t(control_text) if control else '<w:r>' + atom + '</w:r>'
+            recorded = t('Aster') + rev.dele(selected) + rev.ins(t(':')) + t('Birch')
+            source = corpus.file(case_id, 'source', body=document(original))
+            accepted = corpus.file(case_id, 'accepted', body=document(t('Aster:Birch')))
+            rejected = corpus.file(case_id, 'rejected', body=document(original))
+            authored = corpus.file(case_id, 'authored-redline', body=document(recorded))
+            carrier_name = atom.split()[0].split(':')[1].rstrip('/>')
+            assertions = [dict(type='run-atoms', version=1, scope='accepted', atoms=[]),
+                          dict(type='run-atoms', version=1, scope='rejected',
+                               atoms=[] if control else [dict(name=carrier_name, attributes=attributes)])]
+            corpus.add(case_id, 'revisions', 'control' if control else 'reproducer',
+                       'JSv4/Docxodus#1387' if name == 'tab' else 'JSv4/Docxodus#1409',
+                       'Tracked replacement of one ' + name + (' ordinary-text control' if control else ' native run atom'),
+                       'replace-span', [dict(source, role='source')],
+                       {'accepted': accepted, 'rejected': rejected}, authored, assertions)
+            corpus.cases[-1]['spanEdit'] = dict(version=1, tracked=True, paragraphIndex=1, start=5, length=1, replacement=':')
+    for control in (False, True):
+        case_id = 'redline-visible-inline-xml' + ('-control' if control else '')
+        def envelope(content):
+            return content if control else '<w:customXml w:uri="urn:willow" w:element="clause">' + content + '</w:customXml>'
+        rev = Revisions()
+        source = corpus.file(case_id, 'source', body=document(envelope(t('Willow value'))))
+        accepted = corpus.file(case_id, 'accepted', body=document(envelope(t('Willow term'))))
+        authored = corpus.file(case_id, 'authored-redline', body=document(envelope(
+            t('Willow ') + rev.dele(t('value')) + rev.ins(t('term')))))
+        corpus.add(case_id, 'revisions', 'control' if control else 'reproducer', 'JSv4/Docxodus#1409',
+                   'Replace visible text inside ' + ('ordinary runs' if control else 'inline custom XML'),
+                   'replace-span', [dict(source, role='source')], {'accepted': accepted, 'rejected': source}, authored)
+        corpus.cases[-1]['spanEdit'] = dict(version=1, tracked=True, paragraphIndex=1, start=7, length=5, replacement='term')
 
 
 
