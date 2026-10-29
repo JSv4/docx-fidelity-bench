@@ -22,7 +22,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v19', 'version': 19}
+SUITE = {'id': 'redline-v20', 'version': 20}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -300,11 +300,66 @@ def generate():
     external_links(corpus)
     package_shapes(corpus)
     visible_atom_edits(corpus)
+    inline_control_rewrites(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(registry, indent=2) + '\n')
     return registry
+
+
+def inline_control_rewrites(corpus):
+    """Keep native metadata when only the surrounding paragraph text is rewritten."""
+    for kind in ('binding', 'citation'):
+        props = ('<w:dataBinding w:xpath="/ledger[1]/edition[1]" '
+                 'w:storeItemID="{00000000-0000-0000-0000-000000000021}"/><w:text/>'
+                 if kind == 'binding' else '<w:citation/>')
+        content = (t('7.2') if kind == 'binding' else
+                   '<w:r><w:fldChar w:fldCharType="begin"/></w:r>'
+                   '<w:r><w:instrText xml:space="preserve"> CITATION Pine </w:instrText></w:r>'
+                   '<w:r><w:fldChar w:fldCharType="separate"/></w:r>' + t('7.2') +
+                   '<w:r><w:fldChar w:fldCharType="end"/></w:r>')
+        envelope = '<w:sdt><w:sdtPr><w:id w:val="21"/>' + props + '</w:sdtPr><w:sdtContent>' + content + '</w:sdtContent></w:sdt>'
+        for outside in (False, True):
+            for control in (False, True):
+                case_id = 'redline-control-rewrite-' + kind + ('-outside' if outside else '-echo') + ('-control' if control else '')
+                middle = t('7.2') if control else envelope
+                source = corpus.file(case_id, 'source', body=p(t('Edition ') + middle + t(' registered.')))
+                prefix, suffix = ('Revised edition ', ' registered today.') if outside else ('Edition ', ' registered.')
+                expected = corpus.file(case_id, 'expected', body=p(t(prefix) + middle + t(suffix)))
+                controls = [] if control else [envelope.replace('<w:sdt>', f'<w:sdt xmlns:w="{W}">', 1)]
+                assertions = [dict(type='content-controls', version=1, scope=scope, controls=controls)
+                              for scope in ('accepted', 'rejected')]
+                assertions.append(dict(type='revision-count', version=1, scope='redline', max=0))
+                corpus.add(case_id, 'fields', 'control' if control else 'reproducer', 'JSv4/Docxodus#1406',
+                           ('Outside edit' if outside else 'Unchanged echo') + ' beside ' + kind + (' ordinary-text control' if control else ' native control'),
+                           'replace-text', [dict(source, role='source')],
+                           {'accepted': expected, 'rejected': expected}, expected, assertions)
+                corpus.cases[-1]['paragraphRewrite'] = dict(version=1, paragraphIndex=0, markdown=prefix + '7.2' + suffix)
+
+
+    # Opaque inline spans must consume the projector's hard-break marker too.
+    for kind in ('strike', 'code', 'link'):
+        for control in (False, True):
+            case_id = 'redline-control-rewrite-' + kind + '-break' + ('-control' if control else '')
+            props = '<w:strike/>' if kind == 'strike' else '<w:rStyle w:val="Code"/>' if kind == 'code' else ''
+            value = 'A B' if control else 'A  \nB'
+            run = t('A B', props) if control else '<w:r>' + ('<w:rPr>' + props + '</w:rPr>' if props else '') + '<w:t>A</w:t><w:br/><w:t>B</w:t></w:r>'
+            relations = [('rLink', 'hyperlink', 'https://example.com/document', 'External')] if kind == 'link' else []
+            content = '<w:hyperlink r:id="rLink">' + run + '</w:hyperlink>' if kind == 'link' else run
+            envelope = '<w:sdt><w:sdtPr><w:id w:val="22"/></w:sdtPr><w:sdtContent>' + content + '</w:sdtContent></w:sdt>'
+            middle = content if control else envelope
+            styles = styles_part('<w:style w:type="character" w:styleId="Code"><w:name w:val="Code"/></w:style>') if kind == 'code' else None
+            source = corpus.file(case_id, 'source', body=p(t('Edition ') + middle + t(' registered.')), relations_extra=relations, styles=styles)
+            controls = [] if control else [envelope.replace('<w:sdt>', f'<w:sdt xmlns:w="{W}" xmlns:r="{R}">', 1)]
+            assertions = [dict(type='content-controls', version=1, scope=scope, controls=controls) for scope in ('accepted', 'rejected')]
+            assertions.append(dict(type='revision-count', version=1, scope='redline', max=0))
+            payload = ('~~' + value + '~~' if kind == 'strike' else '`' + value + '`' if kind == 'code'
+                       else '[' + value + '](https://example.com/document)')
+            corpus.add(case_id, 'fields', 'control' if control else 'reproducer', 'JSv4/Docxodus#1406',
+                       'Echo a ' + kind + (' single-line ordinary-text control' if control else ' multiline native control'),
+                       'replace-text', [dict(source, role='source')], {'accepted': source, 'rejected': source}, source, assertions)
+            corpus.cases[-1]['paragraphRewrite'] = dict(version=1, paragraphIndex=0, markdown='Edition ' + payload + ' registered.')
 
 
 def visible_atom_edits(corpus):

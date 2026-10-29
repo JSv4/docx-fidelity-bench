@@ -16,6 +16,7 @@ import re
 import shutil
 import signal
 import subprocess
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 from . import revisions, revision_ownership
@@ -23,12 +24,12 @@ from .redline_build import dotnet as _dotnet, validate_packages, verify_docxodus
 from .common import ROOT, contained, digest, execute, identity, read_json, write_json
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
-OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'revision-ownership': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}}
+OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'replace-text': 1, 'revision-ownership': 1}
+ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}}
 RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
-SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}}
-CONTRACT = {'version': 10, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}}
+CONTRACT = {'version': 11, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -37,6 +38,7 @@ CONTRACT = {'version': 10, 'view': revisions.VIEW_VERSION, 'engines': ['bench-ma
             'revisionRegistry': 'declared table operations must report the public registry count and match independent resolved table assertions',
             'blockInsertion': 'declared insertion outcomes require typed success, error, version change and undo availability',
             'spanEditing': 'public span editing must preserve text and inline-marker order through both independent revision resolvers',
+            'paragraphRewrite': 'public untracked whole-paragraph rewrites must preserve exact declared native content-control subtrees as well as independent semantic views',
             'columnReview': 'v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry',
             'revisionOwnership': 'account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips',
             'hyperlinkTargets': 'declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written'}
@@ -46,6 +48,23 @@ HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'b
 # ---------------------------------------------------------------------------------------------
 # Registry
 # ---------------------------------------------------------------------------------------------
+
+def control_tree(element):
+    # The candidate adds addressing attributes; they are not native Word control metadata.
+    attributes = {k: v for k, v in element.attrib.items()
+                  if not k.startswith('{http://powertools.codeplex.com/2011}')}
+    text = element.text if element.text and (element.text.strip() or not len(element)) else None
+    return [element.tag, attributes, text, [control_tree(e) for e in element]]
+
+
+def valid_control_trees(values):
+    if not isinstance(values, list) or not all(isinstance(value, str) for value in values):
+        return False
+    try:
+        return all(ET.fromstring(value).tag == revisions.w('sdt') for value in values)
+    except ET.ParseError:
+        return False
+
 
 def artifact_records(case):
     return case['inputs'] + list(case['expected'].values()) + [case['authored']] + list(case.get('reviewerExpected', {}).values())
@@ -66,7 +85,7 @@ def validate_registry(registry=None):
         operation = case['operation']
         if operation not in OPERATIONS or (OPERATIONS[operation] and len(case['inputs']) != OPERATIONS[operation]) or (operation == 'consolidate' and len(case['inputs']) < 3):
             raise ValueError('Invalid operation or input count: ' + case['id'])
-        expected = {'compare': {'accepted', 'rejected'}, 'consolidate': {'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'accepted', 'rejected'}, 'revision-ownership': {'accepted', 'rejected'}}[operation]
+        expected = {'compare': {'accepted', 'rejected'}, 'consolidate': {'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'accepted', 'rejected'}, 'replace-text': {'accepted', 'rejected'}, 'revision-ownership': {'accepted', 'rejected'}}[operation]
         if set(case['expected']) != expected or case['kind'] not in ('reproducer', 'control', 'identity'):
             raise ValueError('Invalid expectation or kind: ' + case['id'])
         declared = case.get('libreoffice', {})
@@ -124,6 +143,12 @@ def validate_registry(registry=None):
                                     'versionDelta': 1 if success else 0, 'undoAvailable': success}
                     or type(observed.get('versionDelta')) is not int or type(observed.get('undoAvailable')) is not bool):
                 raise ValueError('Invalid block insertion declaration: ' + case['id'])
+        elif operation == 'replace-text':
+            spec = case.get('paragraphRewrite', {})
+            if (not isinstance(spec, dict) or set(spec) != {'version', 'paragraphIndex', 'markdown'} or type(spec['version']) is not int or spec['version'] != 1
+                    or type(spec['paragraphIndex']) is not int or spec['paragraphIndex'] < 0
+                    or not isinstance(spec['markdown'], str)):
+                raise ValueError('Invalid paragraph rewrite declaration: ' + case['id'])
         elif operation == 'replace-span':
             spec = case.get('spanEdit', {})
             if (set(spec) != {'version', 'tracked', 'paragraphIndex', 'start', 'length', 'replacement'}
@@ -140,6 +165,8 @@ def validate_registry(registry=None):
             raise ValueError('Unexpected table width operation data: ' + case['id'])
         if operation != 'column-edit' and 'columnReview' in case:
             raise ValueError('Unexpected column review data: ' + case['id'])
+        if operation != 'replace-text' and 'paragraphRewrite' in case:
+            raise ValueError('Unexpected paragraph rewrite data: ' + case['id'])
         if operation != 'replace-span' and 'spanEdit' in case:
             raise ValueError('Unexpected span edit data: ' + case['id'])
         if operation != 'block-insert' and ('blockInsert' in case or 'editOutcome' in case):
@@ -169,6 +196,7 @@ def validate_registry(registry=None):
                      'table-state': lambda a: a['scope'] == 'output' and valid_table_state(a.get('state')),
                      'people-identity': lambda a: a['scope'] == 'redline' and isinstance(a.get('author'), str) and bool(a['author'])
                          and revision_ownership.valid_identities(a.get('identities')),
+                     'content-controls': lambda a: a['scope'] in {'accepted', 'rejected'} and valid_control_trees(a.get('controls')),
                      'run-atoms': lambda a: a['scope'] in {'accepted', 'rejected'} and isinstance(a.get('atoms'), list)
                          and all(isinstance(x, dict) and set(x) == {'name', 'attributes'}
                              and isinstance(x['name'], str) and x['name'] in RUN_ATOMS
@@ -180,6 +208,8 @@ def validate_registry(registry=None):
                          isinstance(x, list) and len(x) == 2 and all(isinstance(y, str) and y for y in x) for x in a['threads'])}[kind]
             if not valid(assertion):
                 raise ValueError('Invalid assertion declaration: ' + case['id'] + ' ' + kind)
+        if operation == 'replace-text' and {'type': 'revision-count', 'version': 1, 'scope': 'redline', 'max': 0} not in case['assertions']:
+            raise ValueError('An untracked rewrite must require a redline without revisions: ' + case['id'])
         if operation in {'reject', 'column-edit', 'block-insert'} and {'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0} not in case['assertions']:
             raise ValueError('A reject case must require an output without revisions: ' + case['id'])
     return registry
@@ -301,6 +331,8 @@ def run_candidate(adapter, build, case, output, candidate, timeout=300):
         request['settings']['columnEdit'] = case['columnEdit']
     if 'blockInsert' in case:
         request['settings']['blockInsert'] = case['blockInsert']
+    if 'paragraphRewrite' in case:
+        request['settings']['paragraphRewrite'] = case['paragraphRewrite']
     if 'spanEdit' in case:
         request['settings']['spanEdit'] = case['spanEdit']
     if 'revisionOwnership' in case:
@@ -400,6 +432,11 @@ def _assertion(assertion, package, resolved):
     elif kind == 'style-ids-unique':
         findings = revisions.style_id_findings(package)
         check.update(passed=not findings, findings=findings)
+    elif kind == 'content-controls':
+        root = parts[package.main] if parts is not None else package.xml(package.main)
+        observed = [control_tree(e) for e in root.find(revisions.w('body')).iter(revisions.w('sdt'))]
+        expected = [control_tree(ET.fromstring(xml)) for xml in assertion['controls']]
+        check.update(passed=observed == expected, observed=observed)
     elif kind == 'run-atoms':
         root = parts[package.main] if parts is not None else package.xml(package.main)
         observed = [dict(name=e.tag.split('}', 1)[-1],

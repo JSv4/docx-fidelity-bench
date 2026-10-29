@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v19')
-        self.assertEqual(len(registry['cases']), 180)
+        self.assertEqual(registry['suite']['id'], 'redline-v20')
+        self.assertEqual(len(registry['cases']), 194)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1409)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -185,6 +185,66 @@ class AuthoredCalibration(unittest.TestCase):
         registry['cases'][0]['assertions'].append(dict(type='run-atoms', version=1, scope='redline', atoms=[]))
         with self.assertRaises(ValueError):
             redline.validate_registry(registry)
+
+    def test_native_control_metadata_is_mandatory_even_when_visible_text_matches(self):
+        for kind, mutation in [('binding', 'xpath'), ('binding', 'storeItemID'),
+                               ('binding', 'remove'), ('citation', 'instruction'), ('citation', 'remove')]:
+            record = case('redline-control-rewrite-' + kind + '-echo')
+            assertion = record['assertions'][0]
+            def change(root):
+                control = next(root.iter(W + 'sdt'))
+                if mutation == 'remove':
+                    parent = next(e for e in root.iter() if control in list(e))
+                    at = list(parent).index(control)
+                    for child in list(control.find(W + 'sdtContent')):
+                        parent.insert(at, child); at += 1
+                    parent.remove(control)
+                elif mutation == 'instruction':
+                    next(control.iter(W + 'instrText')).text = ' CITATION Elm '
+                else:
+                    control.find(W + 'sdtPr/' + W + 'dataBinding').set(W + mutation, 'changed')
+            altered = rewrite(record['expected']['accepted'], change)
+            # The existing semantic view detects wrappers, but omits binding properties.
+            if kind == 'binding' and mutation != 'remove':
+                self.assertEqual(revisions.view(altered), revisions.view(load(record['expected']['accepted'])))
+            self.assertFalse(redline._assertion(assertion, altered, {'accepted': None})['passed'], (kind, mutation))
+
+    def test_untracked_rewrite_cannot_hide_pending_revisions_in_resolved_views(self):
+        record = case('redline-control-rewrite-binding-echo')
+        def change(root):
+            paragraph = next(root.iter(W + 'p'))
+            paragraph.append(ET.Element(W + 'ins', {W + 'id': '99', W + 'author': 'Other',
+                                                    W + 'date': '2026-01-01T00:00:00Z'}))
+        altered = rewrite(record['expected']['accepted'], change)
+        resolved = dict(redline=None, accepted=revisions.resolve(altered.story_parts(), 'accept'),
+                        rejected=revisions.resolve(altered.story_parts(), 'reject'))
+        self.assertEqual(views(altered), views(load(record['expected']['accepted'])))
+        checks = [redline._assertion(a, altered, resolved)['passed'] for a in record['assertions']]
+        self.assertEqual(checks, [True, True, False])
+
+    def test_malformed_control_and_paragraph_rewrite_declarations_are_rejected(self):
+        for controls in (None, {}, [None], ['<broken'], ['<w:r xmlns:w="' + W[1:-1] + '"/>']):
+            registry = common.read_json(redline.MANIFEST)
+            target = next(c for c in registry['cases'] if c['operation'] == 'replace-text')
+            target['assertions'][0]['controls'] = controls
+            with self.subTest(controls=controls), self.assertRaises(ValueError):
+                redline.validate_registry(registry)
+        for spec in (None, [], 'invalid'):
+            registry = common.read_json(redline.MANIFEST)
+            next(c for c in registry['cases'] if c['operation'] == 'replace-text')['paragraphRewrite'] = spec
+            with self.subTest(spec=spec), self.assertRaisesRegex(ValueError, 'paragraph rewrite'):
+                redline.validate_registry(registry)
+        registry = common.read_json(redline.MANIFEST)
+        target = next(c for c in registry['cases'] if c['operation'] == 'replace-text')
+        target['assertions'] = [a for a in target['assertions'] if a['type'] != 'revision-count']
+        with self.assertRaisesRegex(ValueError, 'without revisions'):
+            redline.validate_registry(registry)
+        for key, value in [('version', True), ('paragraphIndex', True), ('paragraphIndex', -1), ('markdown', None)]:
+            registry = common.read_json(redline.MANIFEST)
+            target = next(c for c in registry['cases'] if c['operation'] == 'replace-text')
+            target['paragraphRewrite'][key] = value
+            with self.subTest(key=key, value=value), self.assertRaisesRegex(ValueError, 'paragraph rewrite'):
+                redline.validate_registry(registry)
 
     def test_reproducers_and_controls_differ_from_their_original(self):
         for record in cases(operation='compare'):
