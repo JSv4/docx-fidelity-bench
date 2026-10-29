@@ -1,0 +1,995 @@
+{
+  "schema": 1,
+  "scope": "Exact browser observations; no weighted PDF/redline fidelity score",
+  "suite": "editor-ui-v1",
+  "before": {
+    "buildSha256": "9179e8acda06b701e458a0360a9cd73dfb3d001b57d572ab624b4117aad088dc",
+    "cases": [
+      {
+        "checks": [
+          {
+            "actual": "Cedar clause",
+            "expected": "Cedar clause",
+            "name": "text",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "tabs",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "insertions",
+            "passed": true
+          },
+          {
+            "actual": 4,
+            "expected": 4,
+            "name": "rangeMarkers",
+            "passed": true
+          },
+          {
+            "findings": [],
+            "name": "schema",
+            "passed": true
+          },
+          {
+            "actual": "2 changes",
+            "expected": "No tracked changes",
+            "name": "ribbon-badge",
+            "passed": false
+          },
+          {
+            "name": "browser-errors",
+            "passed": true
+          }
+        ],
+        "control": false,
+        "id": "review-count",
+        "passed": false,
+        "status": "observed"
+      },
+      {
+        "checks": [
+          {
+            "actual": "New Cedar clause",
+            "expected": "New Cedar clause",
+            "name": "text",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "tabs",
+            "passed": true
+          },
+          {
+            "actual": 1,
+            "expected": 1,
+            "name": "insertions",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "rangeMarkers",
+            "passed": true
+          },
+          {
+            "findings": [],
+            "name": "schema",
+            "passed": true
+          },
+          {
+            "actual": "1 change",
+            "expected": "1 change",
+            "name": "ribbon-badge",
+            "passed": true
+          },
+          {
+            "name": "browser-errors",
+            "passed": true
+          }
+        ],
+        "control": true,
+        "id": "review-count-control",
+        "passed": true,
+        "status": "observed"
+      },
+      {
+        "checks": [
+          {
+            "actual": "New Cedar clause",
+            "expected": "New Cedar clause",
+            "name": "text",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "tabs",
+            "passed": true
+          },
+          {
+            "actual": 1,
+            "expected": 0,
+            "name": "insertions",
+            "passed": false
+          },
+          {
+            "actual": 2,
+            "expected": 4,
+            "name": "rangeMarkers",
+            "passed": false
+          },
+          {
+            "findings": [],
+            "name": "schema",
+            "passed": true
+          },
+          {
+            "name": "browser-errors",
+            "passed": false
+          }
+        ],
+        "control": false,
+        "id": "revision-target",
+        "passed": false,
+        "status": "observed"
+      },
+      {
+        "checks": [
+          {
+            "actual": "New Cedar clause",
+            "expected": "New Cedar clause",
+            "name": "text",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "tabs",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "insertions",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "rangeMarkers",
+            "passed": true
+          },
+          {
+            "findings": [],
+            "name": "schema",
+            "passed": true
+          },
+          {
+            "name": "browser-errors",
+            "passed": true
+          }
+        ],
+        "control": true,
+        "id": "revision-target-control",
+        "passed": true,
+        "status": "observed"
+      },
+      {
+        "checks": [
+          {
+            "actual": "1.2X\tCedar",
+            "expected": "1.2\tXCedar",
+            "name": "text",
+            "passed": false
+          },
+          {
+            "actual": 1,
+            "expected": 1,
+            "name": "tabs",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "insertions",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "rangeMarkers",
+            "passed": true
+          },
+          {
+            "findings": [],
+            "name": "schema",
+            "passed": true
+          },
+          {
+            "name": "browser-errors",
+            "passed": true
+          }
+        ],
+        "control": false,
+        "id": "caret",
+        "passed": false,
+        "status": "observed"
+      },
+      {
+        "checks": [
+          {
+            "actual": "1.2 XCedar",
+            "expected": "1.2 XCedar",
+            "name": "text",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "tabs",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "insertions",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "rangeMarkers",
+            "passed": true
+          },
+          {
+            "findings": [],
+            "name": "schema",
+            "passed": true
+          },
+          {
+            "name": "browser-errors",
+            "passed": true
+          }
+        ],
+        "control": true,
+        "id": "caret-control",
+        "passed": true,
+        "status": "observed"
+      },
+      {
+        "checks": [
+          {
+            "actual": "1.2\tCedar",
+            "expected": "1.2\tCedar",
+            "name": "text",
+            "passed": true
+          },
+          {
+            "actual": 1,
+            "expected": 1,
+            "name": "tabs",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "insertions",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "rangeMarkers",
+            "passed": true
+          },
+          {
+            "findings": [],
+            "name": "schema",
+            "passed": true
+          },
+          {
+            "actual": "1.2\nCedar",
+            "expected": "1.2\tCedar",
+            "name": "native-plain-paste",
+            "passed": false
+          },
+          {
+            "actual": "1.2Cedar",
+            "expected": "1.2\tCedar",
+            "name": "native-rich-text",
+            "passed": false
+          },
+          {
+            "name": "browser-errors",
+            "passed": true
+          }
+        ],
+        "control": false,
+        "id": "copy",
+        "passed": false,
+        "status": "observed"
+      },
+      {
+        "checks": [
+          {
+            "actual": "1.2 Cedar",
+            "expected": "1.2 Cedar",
+            "name": "text",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "tabs",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "insertions",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "rangeMarkers",
+            "passed": true
+          },
+          {
+            "findings": [],
+            "name": "schema",
+            "passed": true
+          },
+          {
+            "actual": "1.2 Cedar",
+            "expected": "1.2 Cedar",
+            "name": "native-plain-paste",
+            "passed": true
+          },
+          {
+            "actual": "1.2 Cedar",
+            "expected": "1.2 Cedar",
+            "name": "native-rich-text",
+            "passed": true
+          },
+          {
+            "name": "browser-errors",
+            "passed": true
+          }
+        ],
+        "control": true,
+        "id": "copy-control",
+        "passed": true,
+        "status": "observed"
+      },
+      {
+        "checks": [
+          {
+            "actual": "1.2\tCedar",
+            "expected": "1.2\tCedar",
+            "name": "text",
+            "passed": true
+          },
+          {
+            "actual": 1,
+            "expected": 1,
+            "name": "tabs",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "insertions",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "rangeMarkers",
+            "passed": true
+          },
+          {
+            "findings": [],
+            "name": "schema",
+            "passed": true
+          },
+          {
+            "actual": "1.2\nCedar",
+            "expected": "1.2\tCedar",
+            "name": "native-plain-paste",
+            "passed": false
+          },
+          {
+            "actual": "1.2Cedar",
+            "expected": "1.2\tCedar",
+            "name": "native-rich-text",
+            "passed": false
+          },
+          {
+            "name": "native-rich-paste",
+            "passed": true
+          },
+          {
+            "name": "browser-errors",
+            "passed": true
+          }
+        ],
+        "control": false,
+        "id": "copy-classes",
+        "passed": false,
+        "status": "observed"
+      },
+      {
+        "checks": [
+          {
+            "actual": "1.2 Cedar",
+            "expected": "1.2 Cedar",
+            "name": "text",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "tabs",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "insertions",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "rangeMarkers",
+            "passed": true
+          },
+          {
+            "findings": [],
+            "name": "schema",
+            "passed": true
+          },
+          {
+            "actual": "1.2 Cedar",
+            "expected": "1.2 Cedar",
+            "name": "native-plain-paste",
+            "passed": true
+          },
+          {
+            "actual": "1.2 Cedar",
+            "expected": "1.2 Cedar",
+            "name": "native-rich-text",
+            "passed": true
+          },
+          {
+            "name": "native-rich-paste",
+            "passed": true
+          },
+          {
+            "name": "browser-errors",
+            "passed": true
+          }
+        ],
+        "control": true,
+        "id": "copy-classes-control",
+        "passed": true,
+        "status": "observed"
+      }
+    ],
+    "commit": "3b6f7f02af37a459dc88e0ec469f64f82b56afdd",
+    "observationsSha256": "0bda971ac0221019ce6991efd017b32cbc360495f5eb5f483235bd1876e926f9",
+    "schema": 1,
+    "scope": "Exact browser observations; no weighted PDF/redline fidelity score",
+    "suite": "editor-ui-v1",
+    "summary": {
+      "complete": true,
+      "controlsPassed": true,
+      "observed": 10,
+      "passed": 5,
+      "required": 10
+    }
+  },
+  "after": {
+    "buildSha256": "887fd7e43403fc20d3fdd6f3722623f57907422ada85997867ac6151374314f3",
+    "cases": [
+      {
+        "checks": [
+          {
+            "actual": "Cedar clause",
+            "expected": "Cedar clause",
+            "name": "text",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "tabs",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "insertions",
+            "passed": true
+          },
+          {
+            "actual": 4,
+            "expected": 4,
+            "name": "rangeMarkers",
+            "passed": true
+          },
+          {
+            "findings": [],
+            "name": "schema",
+            "passed": true
+          },
+          {
+            "actual": "No tracked changes",
+            "expected": "No tracked changes",
+            "name": "ribbon-badge",
+            "passed": true
+          },
+          {
+            "name": "browser-errors",
+            "passed": true
+          }
+        ],
+        "control": false,
+        "id": "review-count",
+        "passed": true,
+        "status": "observed"
+      },
+      {
+        "checks": [
+          {
+            "actual": "New Cedar clause",
+            "expected": "New Cedar clause",
+            "name": "text",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "tabs",
+            "passed": true
+          },
+          {
+            "actual": 1,
+            "expected": 1,
+            "name": "insertions",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "rangeMarkers",
+            "passed": true
+          },
+          {
+            "findings": [],
+            "name": "schema",
+            "passed": true
+          },
+          {
+            "actual": "1 change",
+            "expected": "1 change",
+            "name": "ribbon-badge",
+            "passed": true
+          },
+          {
+            "name": "browser-errors",
+            "passed": true
+          }
+        ],
+        "control": true,
+        "id": "review-count-control",
+        "passed": true,
+        "status": "observed"
+      },
+      {
+        "checks": [
+          {
+            "actual": "New Cedar clause",
+            "expected": "New Cedar clause",
+            "name": "text",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "tabs",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "insertions",
+            "passed": true
+          },
+          {
+            "actual": 4,
+            "expected": 4,
+            "name": "rangeMarkers",
+            "passed": true
+          },
+          {
+            "findings": [],
+            "name": "schema",
+            "passed": true
+          },
+          {
+            "name": "browser-errors",
+            "passed": true
+          }
+        ],
+        "control": false,
+        "id": "revision-target",
+        "passed": true,
+        "status": "observed"
+      },
+      {
+        "checks": [
+          {
+            "actual": "New Cedar clause",
+            "expected": "New Cedar clause",
+            "name": "text",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "tabs",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "insertions",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "rangeMarkers",
+            "passed": true
+          },
+          {
+            "findings": [],
+            "name": "schema",
+            "passed": true
+          },
+          {
+            "name": "browser-errors",
+            "passed": true
+          }
+        ],
+        "control": true,
+        "id": "revision-target-control",
+        "passed": true,
+        "status": "observed"
+      },
+      {
+        "checks": [
+          {
+            "actual": "1.2\tXCedar",
+            "expected": "1.2\tXCedar",
+            "name": "text",
+            "passed": true
+          },
+          {
+            "actual": 1,
+            "expected": 1,
+            "name": "tabs",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "insertions",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "rangeMarkers",
+            "passed": true
+          },
+          {
+            "findings": [],
+            "name": "schema",
+            "passed": true
+          },
+          {
+            "name": "browser-errors",
+            "passed": true
+          }
+        ],
+        "control": false,
+        "id": "caret",
+        "passed": true,
+        "status": "observed"
+      },
+      {
+        "checks": [
+          {
+            "actual": "1.2 XCedar",
+            "expected": "1.2 XCedar",
+            "name": "text",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "tabs",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "insertions",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "rangeMarkers",
+            "passed": true
+          },
+          {
+            "findings": [],
+            "name": "schema",
+            "passed": true
+          },
+          {
+            "name": "browser-errors",
+            "passed": true
+          }
+        ],
+        "control": true,
+        "id": "caret-control",
+        "passed": true,
+        "status": "observed"
+      },
+      {
+        "checks": [
+          {
+            "actual": "1.2\tCedar",
+            "expected": "1.2\tCedar",
+            "name": "text",
+            "passed": true
+          },
+          {
+            "actual": 1,
+            "expected": 1,
+            "name": "tabs",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "insertions",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "rangeMarkers",
+            "passed": true
+          },
+          {
+            "findings": [],
+            "name": "schema",
+            "passed": true
+          },
+          {
+            "actual": "1.2\tCedar",
+            "expected": "1.2\tCedar",
+            "name": "native-plain-paste",
+            "passed": true
+          },
+          {
+            "actual": "1.2\tCedar",
+            "expected": "1.2\tCedar",
+            "name": "native-rich-text",
+            "passed": true
+          },
+          {
+            "name": "browser-errors",
+            "passed": true
+          }
+        ],
+        "control": false,
+        "id": "copy",
+        "passed": true,
+        "status": "observed"
+      },
+      {
+        "checks": [
+          {
+            "actual": "1.2 Cedar",
+            "expected": "1.2 Cedar",
+            "name": "text",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "tabs",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "insertions",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "rangeMarkers",
+            "passed": true
+          },
+          {
+            "findings": [],
+            "name": "schema",
+            "passed": true
+          },
+          {
+            "actual": "1.2 Cedar",
+            "expected": "1.2 Cedar",
+            "name": "native-plain-paste",
+            "passed": true
+          },
+          {
+            "actual": "1.2 Cedar",
+            "expected": "1.2 Cedar",
+            "name": "native-rich-text",
+            "passed": true
+          },
+          {
+            "name": "browser-errors",
+            "passed": true
+          }
+        ],
+        "control": true,
+        "id": "copy-control",
+        "passed": true,
+        "status": "observed"
+      },
+      {
+        "checks": [
+          {
+            "actual": "1.2\tCedar",
+            "expected": "1.2\tCedar",
+            "name": "text",
+            "passed": true
+          },
+          {
+            "actual": 1,
+            "expected": 1,
+            "name": "tabs",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "insertions",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "rangeMarkers",
+            "passed": true
+          },
+          {
+            "findings": [],
+            "name": "schema",
+            "passed": true
+          },
+          {
+            "actual": "1.2\tCedar",
+            "expected": "1.2\tCedar",
+            "name": "native-plain-paste",
+            "passed": true
+          },
+          {
+            "actual": "1.2\tCedar",
+            "expected": "1.2\tCedar",
+            "name": "native-rich-text",
+            "passed": true
+          },
+          {
+            "name": "native-rich-paste",
+            "passed": true
+          },
+          {
+            "name": "browser-errors",
+            "passed": true
+          }
+        ],
+        "control": false,
+        "id": "copy-classes",
+        "passed": true,
+        "status": "observed"
+      },
+      {
+        "checks": [
+          {
+            "actual": "1.2 Cedar",
+            "expected": "1.2 Cedar",
+            "name": "text",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "tabs",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "insertions",
+            "passed": true
+          },
+          {
+            "actual": 0,
+            "expected": 0,
+            "name": "rangeMarkers",
+            "passed": true
+          },
+          {
+            "findings": [],
+            "name": "schema",
+            "passed": true
+          },
+          {
+            "actual": "1.2 Cedar",
+            "expected": "1.2 Cedar",
+            "name": "native-plain-paste",
+            "passed": true
+          },
+          {
+            "actual": "1.2 Cedar",
+            "expected": "1.2 Cedar",
+            "name": "native-rich-text",
+            "passed": true
+          },
+          {
+            "name": "native-rich-paste",
+            "passed": true
+          },
+          {
+            "name": "browser-errors",
+            "passed": true
+          }
+        ],
+        "control": true,
+        "id": "copy-classes-control",
+        "passed": true,
+        "status": "observed"
+      }
+    ],
+    "commit": "ce7f8f141e14130eaf8451cd15617630d28cd26f",
+    "observationsSha256": "59e9e68c923db892743ef731dee416d14062c2e3c41b9943a83fb2ea6d55fa8c",
+    "schema": 1,
+    "scope": "Exact browser observations; no weighted PDF/redline fidelity score",
+    "suite": "editor-ui-v1",
+    "summary": {
+      "complete": true,
+      "controlsPassed": true,
+      "observed": 10,
+      "passed": 10,
+      "required": 10
+    }
+  }
+}

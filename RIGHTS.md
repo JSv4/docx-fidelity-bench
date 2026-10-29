@@ -205,3 +205,10 @@ The six nested-inline cases for Docxodus #1410 are literal OOXML and Cedar text 
 element names are invented here. No renderer fixture/helper, template, external content,
 image, data store or embedded font program is imported. Any review captures under
 `docs/results/nested-inline-render/` show only these original inputs and their public renderer outputs.
+
+The ten inputs under `fixtures/editor/` are literal OOXML, Cedar text and invented revision
+identities authored in `bench/editor_fixtures.py`. They import no product fixture, test harness,
+document template, image, font program or external resource. The original host and action
+runner load separately provisioned public renderer bundles. Labeled screenshots under
+`docs/results/editor-review-tabs/` show only these original inputs, actual shipped UI,
+clipboard destinations and saved native-output observations.
