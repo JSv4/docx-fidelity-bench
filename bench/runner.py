@@ -10,8 +10,8 @@ from .environment import environment
 from .suites import select_suite
 
 
-def reference_bundle(output, suite=None):
-    registry = select_suite(validate_registry(), suite)
+def reference_bundle(output, suite=None, registry=None):
+    registry = select_suite(validate_registry(registry), suite)
     env = environment([f for c in registry['cases'] for f in c['fonts']])
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=False)
@@ -85,8 +85,8 @@ def validate_bundle(bundle, root, registry, env):
                     raise ValueError('Equivalent-control capture evidence changed: ' + cid)
 
 
-def equivalent_reference_bundle(output, reference):
-    registry = validate_registry()
+def equivalent_reference_bundle(output, reference, registry=None):
+    registry = validate_registry(registry)
     env = environment([f for c in registry['cases'] for f in c['fonts']])
     source_root = Path(reference).resolve().parent
     original = read_json(reference)

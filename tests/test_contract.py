@@ -355,7 +355,34 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 388)
+        self.assertEqual(len(common.validate_registry()['cases']), 394)
+
+    def test_explicit_reference_manifest_rejects_changed_input_before_rendering(self):
+        registry = common.read_json(common.ROOT / 'fixtures/manifest.json')
+        registry['cases'][0]['sha256'] = '0' * 64
+        with tempfile.TemporaryDirectory() as temp, patch.object(runner, 'environment') as environment:
+            with self.assertRaises(ValueError):
+                runner.reference_bundle(Path(temp) / 'reference', registry=registry)
+            environment.assert_not_called()
+
+    def test_nested_inline_reproducers_have_flat_controls_and_complete_text(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        for shape in ('hyperlink', 'field', 'mixed'):
+            source, control = [records['nested-inline-' + shape + suffix] for suffix in ('', '-control')]
+            self.assertEqual(source['tokens'], control['tokens'])
+            self.assertEqual(source['fonts'], control['fonts'])
+            self.assertEqual(source['profile'], control['profile'])
+            texts = []
+            for record in (source, control):
+                with ZipFile(common.ROOT / record['input']) as package:
+                    root = ET.fromstring(package.read('word/document.xml'))
+                texts.append(''.join(e.text or '' for e in root.iter(w + 't')))
+                wrappers = [e for e in root.iter() if e.tag in {w + n for n in ('hyperlink', 'fldSimple', 'customXml', 'sdt')}]
+                self.assertEqual(len(wrappers), 64 if record is source else 0)
+            self.assertEqual(texts[0], texts[1])
 
     def test_adjacent_table_property_pairs_keep_independent_table_declarations(self):
         import xml.etree.ElementTree as ET
@@ -636,7 +663,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v72')
+        self.assertEqual(registry['suite']['id'], 'core-v73')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET

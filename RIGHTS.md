@@ -199,3 +199,9 @@ ledger paths, invented store identifiers and Pine citation instructions authored
 imported. Any review previews under `docs/results/control-rewrite/` show only these original
 inputs and native public-API outputs; no data store, font program or authentication data is
 included. The binding metadata is intentionally authored without an external/custom-XML store.
+
+The six nested-inline cases for Docxodus #1410 are literal OOXML and Cedar text authored in
+`bench/fixtures.py`. Hyperlink anchors, constant QUOTE instructions, control ids and custom-XML
+element names are invented here. No renderer fixture/helper, template, external content,
+image, data store or embedded font program is imported. Any review captures under
+`docs/results/nested-inline-render/` show only these original inputs and their public renderer outputs.

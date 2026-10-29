@@ -1,0 +1,151 @@
+{
+  "schema": 1,
+  "beforeCommit": "3b6f7f02af37a459dc88e0ec469f64f82b56afdd",
+  "afterCommit": "3f6f68214ceae1691dbdadaebe8de22dad58d441",
+  "beforeRun": 40925979882,
+  "afterRun": 40928532433,
+  "beforeResultSha256": "6d4ca843f0b259bed1a8b2afaf1dfa0aae67736e2d61b55df5e077e9e357cfff",
+  "afterResultSha256": "7df95b34cbd886c2936560245d4bbc0055cedc7296b6bc5fe012abb5a199c612",
+  "selectedManifestSha256": "b0ce68660cf85946775f5406119530073c51fc931a335bd1a2d9a7703e672176",
+  "scripts": {
+    "Capture.py": "007830814f987fd30c444bd880ed915b887aa95ddf4fc631509c11e6c25055b8",
+    "Capture.mjs": "cbceb972f79fd55cae7567ef89787f5e7582f3b3bf2a5a7a0dab7924d3f1d834"
+  },
+  "cases": [
+    {
+      "id": "nested-inline-hyperlink",
+      "inputSha256": "43d6446ee733ae71dd182cbb019e8907929b3ba03ca1adf53fae4e4db95b2f02",
+      "before": {
+        "status": "measured",
+        "score": 0
+      },
+      "after": {
+        "status": "measured",
+        "score": 99.81307435169397
+      },
+      "htmlSha256": "e7fb9d0e6712550229cb86d0189d037dab4aa8f4e4a0e8a7917ddd6296cfcba9",
+      "referenceRaster": "b4e8b619d03b46bb03921f55469b171c9f589e9bdafe441fca7de3e0e434852f",
+      "beforeEvidence": "fafaa2aa427109b29f7022a383521d30bb4887af476ecdcc75b8af65376add99",
+      "afterEvidence": "f5b8451f81c737478cd660bc583ac2f51041435b9eeb76fd09eb5c88316264da",
+      "beforeError": {
+        "code": "readiness_timeout",
+        "message": "Export timed out during wasm_initialization.",
+        "phase": "conversion"
+      },
+      "afterPdf": "0622511373ef6b058f7cd60d2a4c7e4e2a78c2898d977b3071f3992930d76941",
+      "afterRaster": "90091e5a7e01401f59d297b10f6dcebcf35e7c75917edca182cf31ba394c38f2",
+      "pngSha256": "e3368ee6abc10d2753d7d866805f63ce06a0bc05845ac056075290db2725eda7"
+    },
+    {
+      "id": "nested-inline-hyperlink-control",
+      "inputSha256": "56f4a190e4306fa556298dbeeff90bc1c835544495bc6a97fadfbe08baab77e6",
+      "before": {
+        "status": "measured",
+        "score": 99.99489582755847
+      },
+      "after": {
+        "status": "measured",
+        "score": 99.99489582755847
+      },
+      "htmlSha256": "d6f791219c8a1d56e0c0b938cd2dd841ee44bf7417896dde6f886d9bb42c5352",
+      "referenceRaster": "b4e8b619d03b46bb03921f55469b171c9f589e9bdafe441fca7de3e0e434852f",
+      "beforeEvidence": "7b8c77563cf37c2d7fa87ab19a2b35aa9fb0295f15cda620ee2d9a926b1082ea",
+      "afterEvidence": "80e825046b4286e2d30468bda76ca9188549b6d3dbdbb81c17a12346bf2fb33f",
+      "beforePdf": "a610123aa5b913700e880885af630cdf9f69a9132626c8cf238229a89f45805a",
+      "beforeRaster": "34f2345e4b7044693d8cfc1fb9bb8fa06b072ac15c9db17bc57221664af52fd3",
+      "afterPdf": "602bb97f32de28de11e1c23d8f9a706ff5d56328dcc861bc2b7a5c25b76ef02d",
+      "afterRaster": "34f2345e4b7044693d8cfc1fb9bb8fa06b072ac15c9db17bc57221664af52fd3",
+      "pngSha256": "5ea061a625b0fcc8a4d5e5b53b2d46d8f0df41959b8d711aedcd1129b7132fcd"
+    },
+    {
+      "id": "nested-inline-field",
+      "inputSha256": "f4cdcd82e87583db66ac4e6dfafcb266a76fec1fd493392184855ac5c4ecfbd2",
+      "before": {
+        "status": "measured",
+        "score": 0
+      },
+      "after": {
+        "status": "measured",
+        "score": 99.99570001855163
+      },
+      "htmlSha256": "a78abb2525befc2687fc36af8808e54d4eb2321473be101eb8f27904892380ad",
+      "referenceRaster": "6ed37ce3c34781c81d225559b3a2b1383e4c6a91a402a64dd351de073315df73",
+      "beforeEvidence": "aab16939bbbd61e794771802596fbc7f438433b3148e21906b6d9f8ca211a524",
+      "afterEvidence": "ba3c53b8cc8764faa5e476dc0ce84392725bb5e2294a44cb6763847d2217b9a2",
+      "beforeError": {
+        "code": "readiness_timeout",
+        "message": "Export timed out during wasm_initialization.",
+        "phase": "conversion"
+      },
+      "afterPdf": "eb8748a3e1949bac4262981d7b9feb931d2e49f0d405f653c652856620019969",
+      "afterRaster": "96293d4b0e11f7296cd44265935a2c930ee1e08fc82248fbee9ff1c4de567d38",
+      "pngSha256": "c2d3c815c5e3e34735d63ec538bda7b6785162e47c7f6dceb76f09867d4670fb"
+    },
+    {
+      "id": "nested-inline-field-control",
+      "inputSha256": "1dd92da88301c1642e12309bbd02af463c503a356f177a590171eab5c5a4f2a6",
+      "before": {
+        "status": "measured",
+        "score": 99.99570001855163
+      },
+      "after": {
+        "status": "measured",
+        "score": 99.99570001855163
+      },
+      "htmlSha256": "d8c71fc8eec90b0fb2e623322d9e021e03bcb84ab65d06b73c1c4bfc9cb34325",
+      "referenceRaster": "6ed37ce3c34781c81d225559b3a2b1383e4c6a91a402a64dd351de073315df73",
+      "beforeEvidence": "34b5267f5a3983ae8e483c51f32d10172dd09db595de145a1a23646a237f022d",
+      "afterEvidence": "8044c89216d0d065a865b5f54c4f8ad86c4ceef5f82318495b89485c0c02e058",
+      "beforePdf": "2eb00184b22153e6c3a7cbb1c0215554b36955abf071da32a49d893c2d85597c",
+      "beforeRaster": "96293d4b0e11f7296cd44265935a2c930ee1e08fc82248fbee9ff1c4de567d38",
+      "afterPdf": "26c3a01b86cae3b36527136d4f5882e3a5abdd9177b4d9c281436e3b02ddf0c0",
+      "afterRaster": "96293d4b0e11f7296cd44265935a2c930ee1e08fc82248fbee9ff1c4de567d38",
+      "pngSha256": "97dab24865f96f0ff231f292c220bce84753d0a6d4107941924c60171c4d5a55"
+    },
+    {
+      "id": "nested-inline-mixed",
+      "inputSha256": "8580d8e49696edc98f7242731e3b40c0b5a5bcf947a0b15dd85f36db37f26e93",
+      "before": {
+        "status": "measured",
+        "score": 0
+      },
+      "after": {
+        "status": "measured",
+        "score": 91.72839506172839
+      },
+      "htmlSha256": "2243c5404e743dc83b5e194235a3366483fd3df343a86b332a0365a7910bbcb0",
+      "referenceRaster": "c6eacf6e86e6c3bdf2da6afdf737613187ef695766e1716ebc47e253b604abf6",
+      "beforeEvidence": "19489ef5bed56591c9482da376cad6a349a58da4f2f0635c5a7b58ab60a44e5f",
+      "afterEvidence": "68d9cba0799020a507e2aef12735a6505522195e91bf432a4ac1b22350e1d212",
+      "beforeError": {
+        "code": "readiness_timeout",
+        "message": "Export timed out during wasm_initialization.",
+        "phase": "conversion"
+      },
+      "afterPdf": "3664abdbda0752aec861d0e10a458e0d475bc8636bcacf1a0303afb1ca844ee3",
+      "afterRaster": "53827030d30a72663c763c7491cdc55edaa4736ca28a95c475cb9f55f18b13e6",
+      "pngSha256": "d2074c13f238482956f054e8f14d79e4360b7c21c1adc925713d46ebbe4d71f0"
+    },
+    {
+      "id": "nested-inline-mixed-control",
+      "inputSha256": "4a24e64ea5c553ba5d45e7e3556728ff37564f3398b9aaa07c27655eb722ff33",
+      "before": {
+        "status": "measured",
+        "score": 99.99402372421112
+      },
+      "after": {
+        "status": "measured",
+        "score": 99.99402372421112
+      },
+      "htmlSha256": "cbf13690f805eac3131a73eec5a72df250a6384e7a28668a98fc8316fd7c8fdd",
+      "referenceRaster": "030b099d48770a321023c3e468953f69bd1d3824c8f909c2f4fd78c7610a8bf2",
+      "beforeEvidence": "aa11c75b4696df7eed5a6459521f34ebf3afa38584f446082e0f3129b6654164",
+      "afterEvidence": "829a9d2c0315480becae81b3a18a3ad992967fef163a02b9a3bd4758e72111e2",
+      "beforePdf": "ce052ebddbfdf948accaac01b7d8fad40583b0efbfea80958d95054c94d14823",
+      "beforeRaster": "e8ea603b11c7b2e5743c174657bbe62ef49a57ad6c072694992cc18884fbc11f",
+      "afterPdf": "6cf6f4e3bbfe7fa11ebbae14688160b28c42203ca26cdbe61411a3c1c904d260",
+      "afterRaster": "e8ea603b11c7b2e5743c174657bbe62ef49a57ad6c072694992cc18884fbc11f",
+      "pngSha256": "f1b39e01e9a17067f012cf0df96b07ce8e0d717917a3e0033015c85a9d4307c9"
+    }
+  ]
+}

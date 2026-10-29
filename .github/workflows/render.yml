@@ -12,15 +12,28 @@ on:
         required: false
         default: ''
         type: string
+      track:
+        description: Track to measure; both preserves the default full-corpus behavior
+        required: false
+        default: both
+        type: choice
+        options: [both, pdf, redline]
+      cases:
+        description: Optional JSON array of PDF case ids; records a distinct diagnostic suite
+        required: false
+        default: ''
+        type: string
 permissions:
   contents: read
   actions: read
 jobs:
   measure:
+    if: ${{ inputs.track != 'redline' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     env:
       BENCH_LIBREOFFICE: /opt/libreoffice25.8/program/soffice
+      BENCH_MANIFEST: fixtures/manifest.json
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Audit original inputs
@@ -30,6 +43,21 @@ jobs:
           node --test tests/test-adapter.mjs
           mkdir -p runs
           echo '<!doctype html><title>Rendering evidence</title><p>Setup is pending or failed.</p><p><a href="candidate/index.html">Candidate report if available</a></p>' > runs/index.html
+      - name: Select explicit diagnostic cases
+        if: ${{ inputs.cases != '' }}
+        env:
+          CASE_SELECTION: ${{ inputs.cases }}
+        run: |
+          python3 - <<'PYCODE'
+          import json, os
+          from bench.common import validate_registry, write_json
+          from bench.suites import select_cases
+          registry = select_cases(validate_registry(), json.loads(os.environ['CASE_SELECTION']))
+          write_json('runs/selected-manifest.json', registry)
+          with open(os.environ['GITHUB_ENV'], 'a') as output:
+              output.write('BENCH_MANIFEST=runs/selected-manifest.json\n')
+          print('Diagnostic selection:', registry['suite'])
+          PYCODE
       - name: Checkout pinned renderer production source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
@@ -98,8 +126,8 @@ jobs:
       - name: Register immutable LibreOffice reference bundles
         if: ${{ inputs.reference_run == '' }}
         run: |
-          python3 -m bench reference libreoffice --out references/lo-direct
-          python3 -m bench reference equivalent-controls --reference references/lo-direct/bundle.json --out references/lo
+          python3 -m bench reference libreoffice --manifest "$BENCH_MANIFEST" --out references/lo-direct
+          python3 -m bench reference equivalent-controls --manifest "$BENCH_MANIFEST" --reference references/lo-direct/bundle.json --out references/lo
       - name: Reuse the registered reference bundle and its calibration
         if: ${{ inputs.reference_run != '' }}
         env:
@@ -112,10 +140,11 @@ jobs:
           cp -a recovered/runs/calibration runs/calibration
           cp recovered/runs/candidate/result.json runs/baseline-result.json
           python3 - <<'PYCODE'
+          import os
           from bench.common import read_json, identity, validate_registry
           from bench.environment import environment
           from bench import runner
-          registry = validate_registry()
+          registry = validate_registry(read_json(os.environ['BENCH_MANIFEST']))
           env = environment([f for c in registry['cases'] for f in c['fonts']])
           bundle = read_json('references/lo/bundle.json')
           runner.validate_bundle(bundle, __import__('pathlib').Path('references/lo').resolve(), registry, env)
@@ -129,7 +158,7 @@ jobs:
       - name: Verify reference-provider calibration
         if: ${{ inputs.reference_run == '' }}
         run: |
-          python3 -m bench run --reference references/lo/bundle.json --adapter libreoffice-reference --candidate reference-calibration --out runs/calibration --gate close
+          python3 -m bench run --manifest "$BENCH_MANIFEST" --reference references/lo/bundle.json --adapter libreoffice-reference --candidate reference-calibration --out runs/calibration --gate close
           python3 -c 'import json; r=json.load(open("runs/calibration/result.json")); assert r["summary"]["score"] == 100, r["summary"]'
       - name: Measure delivered candidate PDFs
         env:
@@ -138,7 +167,7 @@ jobs:
           export DOCXODUS_SOURCE_ROOT="$PWD/renderer"
           export DOCXODUS_EXPORT_MODULE="$PWD/renderer/npm-export/dist/index.js"
           export DOCXODUS_OPERATION_BUILD="$RUNNER_TEMP/pdf-operations"
-          python3 -m bench run --reference references/lo/bundle.json --adapter docxodus --candidate "$CANDIDATE_COMMIT" --out runs/candidate --gate report
+          python3 -m bench run --manifest "$BENCH_MANIFEST" --reference references/lo/bundle.json --adapter docxodus --candidate "$CANDIDATE_COMMIT" --out runs/candidate --gate report
       - name: Compare with the reused run's candidate
         if: ${{ inputs.reference_run != '' }}
         run: |
@@ -158,6 +187,7 @@ jobs:
           retention-days: 30
           if-no-files-found: error
   redline:
+    if: ${{ inputs.track != 'pdf' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     env:

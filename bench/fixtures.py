@@ -2687,7 +2687,33 @@ def generate():
             texts, body, extra_parts=extras['parts'], relations_extra=extras['relations'], content_types_extra=extras['content_types'])
         cases[-1]['rights']['assets'] = ('All text is generated here; no images. word/fonts/ExampleSans-regular.ttf holds the '
                                          'placeholder bytes declared in bench/common.py, which are not a font program')
-    registry = {'schema': 1, 'suite': {'id': 'core-v72', 'version': 72, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Docxodus #1410: all inputs are small and schema-valid; nested native containers made
+    # the renderer's old recursive coalescing exceed its existing conversion deadline.
+    inline_styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+                     f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/>'
+                     '<w:color w:val="000000"/><w:sz w:val="22"/></w:rPr></w:rPrDefault>'
+                     '<w:pPrDefault><w:pPr><w:widowControl/><w:spacing w:after="120" w:line="276" w:lineRule="auto"/>'
+                     '</w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal">'
+                     '<w:name w:val="Normal"/></w:style></w:styles>')
+    for shape in ('hyperlink', 'field', 'mixed'):
+        text = 'Cedar ' + shape + ' wrapper proof.'
+        for control in (False, True):
+            content = run(text)
+            for i in range(0 if control else 64):
+                kind = ('hyperlink', 'customXml', 'sdt')[i % 3] if shape == 'mixed' else shape
+                if kind == 'hyperlink':
+                    content = '<w:hyperlink w:anchor="CedarTarget">' + content + '</w:hyperlink>'
+                elif kind == 'field':
+                    content = '<w:fldSimple w:instr=" QUOTE &quot;' + text + '&quot; ">' + content + '</w:fldSimple>'
+                elif kind == 'customXml':
+                    content = '<w:customXml w:element="clause">' + content + '</w:customXml>'
+                else:
+                    content = '<w:sdt><w:sdtPr><w:id w:val="' + str(i + 1) + '"/></w:sdtPr><w:sdtContent>' + content + '</w:sdtContent></w:sdt>'
+            add('nested-inline-' + shape + ('-control' if control else ''), 'paragraphs',
+                ('Flat text control for ' if control else 'Sixty-four nested ') + shape +
+                ' inline wrappers; public render must finish under the existing conversion deadline (Docxodus #1410)',
+                [text], para(runs=content), styles_xml=inline_styles)
+    registry = {'schema': 1, 'suite': {'id': 'core-v73', 'version': 73, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
