@@ -24,10 +24,11 @@ from .common import ROOT, contained, digest, execute, identity, read_json, write
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
 OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'revision-ownership': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}}
+ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}}
+RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
 SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}}
-CONTRACT = {'version': 9, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+CONTRACT = {'version': 10, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -168,6 +169,11 @@ def validate_registry(registry=None):
                      'table-state': lambda a: a['scope'] == 'output' and valid_table_state(a.get('state')),
                      'people-identity': lambda a: a['scope'] == 'redline' and isinstance(a.get('author'), str) and bool(a['author'])
                          and revision_ownership.valid_identities(a.get('identities')),
+                     'run-atoms': lambda a: a['scope'] in {'accepted', 'rejected'} and isinstance(a.get('atoms'), list)
+                         and all(isinstance(x, dict) and set(x) == {'name', 'attributes'}
+                             and isinstance(x['name'], str) and x['name'] in RUN_ATOMS
+                             and isinstance(x['attributes'], dict) and all(isinstance(k, str) and isinstance(v, str)
+                                 for k, v in x['attributes'].items()) for x in a['atoms']),
                      'hyperlink-targets': lambda a: a['scope'] == 'redline' and isinstance(a.get('targets'), list) and all(isinstance(x, str) and x for x in a['targets']),
                      'pending-insertion-deletion': lambda a: a['scope'] == 'redline' and all(isinstance(a.get(k), str) and bool(a[k]) for k in ('author', 'deletedBy', 'text')),
                      'comment-threads': lambda a: a['scope'] == 'redline' and isinstance(a.get('threads'), list) and all(
@@ -394,6 +400,13 @@ def _assertion(assertion, package, resolved):
     elif kind == 'style-ids-unique':
         findings = revisions.style_id_findings(package)
         check.update(passed=not findings, findings=findings)
+    elif kind == 'run-atoms':
+        root = parts[package.main] if parts is not None else package.xml(package.main)
+        observed = [dict(name=e.tag.split('}', 1)[-1],
+                         attributes={k.split('}', 1)[-1]: v for k, v in e.attrib.items() if k.startswith(revisions.w(''))})
+                    for run in root.find(revisions.w('body')).iter(revisions.w('r')) for e in run
+                    if e.tag in {revisions.w(name) for name in RUN_ATOMS}]
+        check.update(passed=observed == assertion['atoms'], observed=observed)
     elif kind == 'hyperlink-targets':
         findings = revisions.hyperlink_target_findings(package, assertion['targets'])
         check.update(passed=not findings, findings=findings)
