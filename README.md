@@ -1,5 +1,11 @@
 # DOCX fidelity bench
 
+An additional [unweighted editor browser diagnostic](docs/editor/README.md) covers review
+counts/targets, tab caret movement and native plain/rich clipboard actions with ten original
+reproducer/control inputs. [Labeled before/after evidence](docs/results/editor-review-tabs/README.md)
+records five baseline failures, five passing controls and ten candidate passes. The PDF and
+redline suites and their metrics are unchanged.
+
 `core-v73` adds six original nested-inline rendering cases for Docxodus #1410: 64 hyperlinks,
 simple fields, or mixed hyperlink/control/custom-XML wrappers, each with a flat-text control.
 They retain the existing 120-second conversion deadline and all PDF checks. All six inputs are
