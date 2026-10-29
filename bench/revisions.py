@@ -52,6 +52,8 @@ CELL_REMOVED = {'accept': w('cellDel'), 'reject': w('cellIns')}
 # Story parts whose content the engine resolves, by relationship type from the main document.
 STORY_TYPES = ('header', 'footer', 'footnotes', 'endnotes', 'comments')
 MARK_REMOVED = '{urn:docx-fidelity-bench}markRemoved'
+# Set on each hyperlink that has content before resolution, so only one the resolution empties is removed.
+HAD_CONTENT = '{urn:docx-fidelity-bench}hadContent'
 
 
 class Package:
@@ -264,6 +266,10 @@ def _prune(element):
                 continue
         if block and child.tag == w('customXml') and not any(c.tag != w('customXmlPr') for c in child):
             continue
+        # A hyperlink has no tracked-change form of its own: resolving away all its runs removes it.
+        # A hyperlink that was already empty is kept, as the source wrote it.
+        if child.tag == w('hyperlink') and not len(child) and child.get(HAD_CONTENT):
+            continue
         if child.tag == w('tbl') and child.find(w('tr')) is None:
             continue
         if child.tag == w('tr') and child.find(w('tc')) is None:
@@ -284,11 +290,16 @@ def resolve(parts, mode, author=None):
     resolved = {}
     for name, root in parts.items():
         tree = copy.deepcopy(root)
+        for link in tree.iter(w('hyperlink')):
+            if len(link):
+                link.set(HAD_CONTENT, '1')
         _resolve_content(tree, policy, _removed_custom_xml(tree, policy))
         _resolve_properties(tree, policy)
         body = tree.find(w('body'))
         _merge_paragraphs(tree, tree, body)
         _prune(tree)
+        for link in tree.iter(w('hyperlink')):
+            link.attrib.pop(HAD_CONTENT, None)
         resolved[name] = tree
     return resolved
 
@@ -683,6 +694,35 @@ def comment_thread_findings(package, threads):
         actual = parents.get(matches[0]) if matches[0] else None
         if by_para_id.get(actual) != parent:
             findings.append({'reply': reply, 'parent': parent, 'observed': by_para_id.get(actual), 'problem': 'not threaded under its parent'})
+    return findings
+
+
+def hyperlink_target_findings(package, targets):
+    """Main-document hyperlinks whose relationship is not one external hyperlink, or whose targets differ.
+
+    Each w:hyperlink with an r:id must resolve to exactly one relationship of the main part, of the
+    hyperlink type with TargetMode External. The set of their Target values, compared as written
+    (after XML parsing, with no URI normalization), must equal the declared targets; two links to one
+    target are not a difference. The semantic view
+    records only a hyperlink's boundaries, so neither round trip sees a rewritten or dropped target."""
+    folder, name = posixpath.split(package.main)
+    path = posixpath.join(folder, '_rels', name + '.rels')
+    by_id = {}
+    for item in (ET.fromstring(package.members[path]) if path in package.members else []):
+        by_id.setdefault(item.get('Id'), []).append(item)
+    findings, observed = [], []
+    for link in package.xml(package.main).iter(w('hyperlink')):
+        rid = link.get('{' + REL[:-1] + '}id')
+        if rid is None:
+            continue
+        matches = by_id.get(rid, [])
+        if len(matches) != 1 or matches[0].get('TargetMode') != 'External' or matches[0].get('Type') != REL + 'hyperlink':
+            findings.append({'id': rid, 'problem': f'resolves to {len(matches)} relationships, not one external hyperlink',
+                             'targets': [m.get('Target') for m in matches]})
+        else:
+            observed.append(matches[0].get('Target'))
+    if set(observed) != set(targets):
+        findings.append({'problem': 'targets differ', 'observed': sorted(set(observed)), 'expected': sorted(set(targets))})
     return findings
 
 

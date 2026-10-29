@@ -12,6 +12,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 # Word reference tracks. `word` is the provider-neutral track; a capture that names no specific route uses it.
 WORD_TRACKS = frozenset({'word', 'word-online', 'word-onedrive', 'word-desktop'})
+# The only bytes an authored package may hold at an embedded-font relationship's target: a
+# placeholder that is visibly not a font program, for cases about the package shape itself.
+PLACEHOLDER_FONT_BYTES = b'Placeholder bytes for an embedded-font package part; this is not a font program.\n'
 
 
 def digest(path):

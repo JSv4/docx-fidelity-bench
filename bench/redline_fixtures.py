@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
-from .fixtures import custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases, consolidated_field_cases, comment_identity_cases, removed_comment_cases, note_insertion_cases, bookmark_reviewer_cases, bookmark_review_container, bookmark_conflict_cases, complex_field as field
+from .fixtures import PACKAGE_LINK_TARGET, PACKAGE_SHAPES, package_shape, custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases, consolidated_field_cases, comment_identity_cases, removed_comment_cases, note_insertion_cases, bookmark_reviewer_cases, bookmark_review_container, bookmark_conflict_cases, complex_field as field
 
 ROOT = Path(__file__).resolve().parents[1]
 W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
@@ -22,7 +22,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v17', 'version': 17}
+SUITE = {'id': 'redline-v18', 'version': 18}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -115,8 +115,13 @@ def zip_write(path, parts):
             archive.writestr(item, payload.encode() if isinstance(payload, str) else payload)
 
 
-def package(path, body, styles=None, header=None, comments=None, footnotes=None, settings_extra='', comments_extended=None, strict=False, people=None):
-    """One minimal, valid WordprocessingML package. Optional story parts take literal XML."""
+def package(path, body, styles=None, header=None, comments=None, footnotes=None, settings_extra='', comments_extended=None, strict=False, people=None,
+            relations_extra=(), content_types_extra='', extra_parts=None):
+    """One minimal, valid WordprocessingML package. Optional story parts take literal XML.
+
+    `relations_extra` appends main-document relationships as (id, type, target) or
+    (id, type, target, 'External'); `content_types_extra` adds literal Default/Override elements;
+    `extra_parts` adds literal parts. Package-shape cases use them to write deliberate defects."""
     relations = [('rStyles', 'styles', 'styles.xml'), ('rSettings', 'settings', 'settings.xml')]
     overrides = [('/word/document.xml', 'document.main'), ('/word/styles.xml', 'styles'), ('/word/settings.xml', 'settings')]
     refs = ''
@@ -144,18 +149,21 @@ def package(path, body, styles=None, header=None, comments=None, footnotes=None,
         parts['word/footnotes.xml'] = f'<w:footnotes {NAMESPACES}>{separators}{footnotes}</w:footnotes>'
         relations.append(('rFootnotes', 'footnotes', 'footnotes.xml'))
         overrides.append(('/word/footnotes.xml', 'footnotes'))
+    relations.extend(relations_extra)
+    parts.update(extra_parts or {})
     parts['word/document.xml'] = f'<w:document {NAMESPACES}><w:body>{body}{SECTION.format(refs=refs)}</w:body></w:document>'
     parts['word/styles.xml'] = styles if styles is not None else styles_part()
     parts['word/settings.xml'] = (f'<w:settings xmlns:w="{W}">{settings_extra}<w:compat><w:compatSetting w:name="compatibilityMode" '
                                   'w:uri="http://schemas.microsoft.com/office/word" w:val="15"/></w:compat></w:settings>')
     parts['word/_rels/document.xml.rels'] = ('<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
-                                             + ''.join(f'<Relationship Id="{i}" Type="{k if "://" in k else R + "/" + k}" Target="{target}"/>' for i, k, target in relations)
+                                             + ''.join(f'<Relationship Id="{i}" Type="{k if "://" in k else R + "/" + k}" Target={quoteattr(target)}'
+                                                       + ''.join(f' TargetMode="{m}"' for m in mode) + '/>' for i, k, target, *mode in relations)
                                              + '</Relationships>')
     parts['_rels/.rels'] = ('<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
                             f'<Relationship Id="rDocument" Type="{R}/officeDocument" Target="word/document.xml"/></Relationships>')
     parts['[Content_Types].xml'] = ('<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
                                     '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
-                                    '<Default Extension="xml" ContentType="application/xml"/>'
+                                    '<Default Extension="xml" ContentType="application/xml"/>' + content_types_extra
                                     + ''.join(f'<Override PartName="{n}" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.{k}+xml"/>' for n, k in overrides)
                                     + '</Types>')
     if strict:
@@ -223,7 +231,7 @@ class Corpus:
         package(path, **document)
         return {'path': str(path.relative_to(self.root)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
 
-    def add(self, case_id, category, kind, issue, description, operation, inputs, expected, authored, assertions=()):
+    def add(self, case_id, category, kind, issue, description, operation, inputs, expected, authored, assertions=(), assets=None):
         ineligible, reason = LIBREOFFICE_INELIGIBLE.get(case_id, ((), None))
         libreoffice = {key: key not in ineligible for key in expected}
         if reason:
@@ -233,16 +241,16 @@ class Corpus:
             'description': description, 'operation': operation, 'inputs': inputs, 'expected': expected,
             'authored': authored, 'assertions': list(assertions), 'libreoffice': libreoffice,
             'rights': {'author': 'John Scrudato IV', 'license': 'MIT', 'origin': 'Authored by bench/redline_fixtures.py in this repository',
-                       'assets': 'All text is generated here; no images or embedded font files'},
+                       'assets': assets or 'All text is generated here; no images or embedded font files'},
             'generator': self.generator})
 
-    def compare(self, case_id, category, kind, issue, description, left, right, redline, assertions=()):
+    def compare(self, case_id, category, kind, issue, description, left, right, redline, assertions=(), assets=None):
         """A two-way case: accept-all of a correct redline equals right, reject-all equals left."""
         a = self.file(case_id, 'left', **left)
         b = self.file(case_id, 'right', **right)
         c = self.file(case_id, 'authored-redline', **redline)
         self.add(case_id, category, kind, issue, description, 'compare',
-                 [dict(a, role='left'), dict(b, role='right')], {'accepted': b, 'rejected': a}, c, assertions)
+                 [dict(a, role='left'), dict(b, role='right')], {'accepted': b, 'rejected': a}, c, assertions, assets)
 
 
 def untracked(*texts, story='body'):
@@ -284,6 +292,8 @@ def generate():
     tracked_column_gaps(corpus)
     revision_ownership(corpus)
     move_range_membership(corpus)
+    external_links(corpus)
+    package_shapes(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -1421,3 +1431,80 @@ def reply_parents(corpus):
                        [untracked('Register opening paragraph.', 'The seller delivers the goods.', CLOSING),
                         {'type': 'comment-threads', 'version': 1, 'scope': 'redline', 'threads': [[reply_text, root_text]]},
                         {'type': 'para-ids-valid', 'version': 1, 'scope': 'redline'}])
+
+
+
+# ---------------------------------------------------------------------------------------------
+# Package shapes: external targets System.Uri rejects (#1388) and parts the SDK refuses (#1384)
+# ---------------------------------------------------------------------------------------------
+
+INTRO = 'Intro: the notice terms below apply to every order.'
+ADDED = 'Added paragraph: the revised draft keeps this new line.'
+
+
+def link(rid, content):
+    return f'<w:hyperlink r:id="{rid}" w:history="1">{content}</w:hyperlink>'
+
+
+def link_paragraph(rid, rev=None):
+    if rev is None:
+        return p(t('Send notices to ') + link(rid, t('the notice desk')) + t('.'))
+    return p(rev.ins(t('Send notices to ')) + link(rid, rev.ins(t('the notice desk'))) + rev.ins(t('.')), mark=rev.mark('ins'))
+
+
+def hyperlink_targets(*targets):
+    return {'type': 'hyperlink-targets', 'version': 1, 'scope': 'redline', 'targets': list(targets)}
+
+
+def external_links(corpus):
+    """A mailto target naming several recipients, which System.Uri cannot parse, on one or both sides."""
+    for recipients, target in (('recipients', 'mailto:first@example.com;second@example.com'),
+                               ('single', 'mailto:solo@example.com')):
+        control = recipients == 'single'
+        relation = [('rLink', 'hyperlink', target, 'External')]
+        for inserted in (False, True):
+            case_id = 'redline-hyperlink-mailto-' + recipients + ('-inserted' if inserted else '') + ('-control' if control else '')
+            rev = Revisions()
+            if inserted:
+                left = dict(body=p(t(INTRO)) + p(t(CLOSING)))
+                right = dict(body=p(t(INTRO)) + link_paragraph('rLink') + p(t(CLOSING)), relations_extra=relation)
+                redline = dict(body=p(t(INTRO)) + link_paragraph('rLink', rev) + p(t(CLOSING)), relations_extra=relation)
+                texts = (INTRO, CLOSING)
+                change = 'a paragraph holding the link is inserted'
+            else:
+                shared = p(t(INTRO)) + link_paragraph('rLink')
+                left = dict(body=shared + p(t(CLOSING)), relations_extra=relation)
+                right = dict(body=shared + p(t(ADDED)) + p(t(CLOSING)), relations_extra=relation)
+                redline = dict(body=shared + p(rev.ins(t(ADDED)), mark=rev.mark('ins')) + p(t(CLOSING)), relations_extra=relation)
+                texts = (INTRO, 'Send notices to ', CLOSING)
+                change = 'an unrelated paragraph is added beside the link'
+            description = (('An external hyperlink to ' + ('one mailto recipient' if control else 'a mailto target naming two recipients, which System.Uri rejects'))
+                           + '; ' + change + '. The redline keeps the target exactly as written.')
+            corpus.compare(case_id, 'packages', 'control' if control else 'reproducer', 'JSv4/Docxodus#1388', description,
+                           left, right, redline, [untracked(*texts), hyperlink_targets(target)])
+
+
+def package_shapes(corpus):
+    """Packages the Open XML SDK refuses at open; one unrelated paragraph is added."""
+    descriptions = {
+        'typed-parts-control': 'An embedded-font part typed by a ttf Default, a glossary document with its own Override and a hyperlink under its own relationship id',
+        'untyped-font': 'The font table embeds a part that no Default or Override gives a content type',
+        'generic-glossary': 'The glossary document is typed only by the generic application/xml Default',
+        'shared-relationship-id': "An external hyperlink relationship reuses the settings relationship's id",
+    }
+    repaired = package_shape('typed-parts-control')
+    for shape in PACKAGE_SHAPES:
+        extras = package_shape(shape)
+        def document(body, form=extras):
+            return dict(body=body, relations_extra=form['relations'], content_types_extra=form['content_types'], extra_parts=form['parts'])
+        shared = p(t(INTRO)) + link_paragraph(extras['link'])
+        rev = Revisions()
+        # The authored redline writes the repaired (control) package form; the expected documents are the inputs.
+        redline = document(p(t(INTRO)) + link_paragraph(repaired['link']) + p(rev.ins(t(ADDED)), mark=rev.mark('ins')) + p(t(CLOSING)), repaired)
+        control = shape == 'typed-parts-control'
+        corpus.compare('redline-package-' + shape, 'packages', 'control' if control else 'reproducer', 'JSv4/Docxodus#1384',
+                       descriptions[shape] + '; an unrelated paragraph is added.',
+                       document(shared + p(t(CLOSING))), document(shared + p(t(ADDED)) + p(t(CLOSING))), redline,
+                       [untracked(INTRO, 'Send notices to ', CLOSING), hyperlink_targets(PACKAGE_LINK_TARGET)],
+                       assets=('All text is generated here; no images. word/fonts/ExampleSans-regular.ttf holds the '
+                               'placeholder bytes declared in bench/common.py, which are not a font program'))

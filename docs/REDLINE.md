@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v17`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v18`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -29,16 +29,17 @@ A case scores **100** when every applicable check passes and **0** otherwise. Th
    - row markers (`w:trPr/w:ins|del`), cell markers (`w:cellIns`/`w:cellDel`) and revision markers in a math run's properties are resolved; move range markers are dropped;
    - custom-XML insertion, deletion and move ranges resolve the enclosing tags independently of their content. One enclosing range or two ranges crossing the opening and closing tags can remove an envelope; untracked content and unrelated empty inline envelopes survive. Partial removal of only one tag is reported as unsupported rather than treated as a successful resolution (see [custom-XML range semantics](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.wordprocessing.customxmlinsrangestart));
    - property-change records (`w:rPrChange`, `w:pPrChange`, `w:sectPrChange`, `w:tblPrChange`, `w:trPrChange`, `w:tcPrChange`, `w:tblGridChange`, `w:tblPrExChange`, `w:numberingChange`) are dropped on accept and restore the prior properties on reject;
-   - a block content control or custom-XML element left with no content is removed, as is a table left with no rows.
+   - a block content control or custom-XML element left with no content is removed, as is a table left with no rows, and a hyperlink that had content before resolution and has none after it (a hyperlink has no tracked-change form of its own, so rejecting an inserted link leaves an empty `w:hyperlink`). A hyperlink the source wrote empty is kept.
    - For `consolidate`, attribution is checked too: accepting only one reviewer's revisions (by `w:author`) and rejecting every other revision must reproduce that reviewer's document, or the explicitly declared `reviewerExpected` projection. The bookmark-name cases declare the default base-wins policy: competing new ranges are absent, independent text edits survive, and a consensus range is credited to the first reviewer. These expectations are authored independently of candidate output and included in digest and regeneration audits.
 3. **Round trip through LibreOffice.** `bench/lo_revisions.py` runs LibreOffice's own accept-all and reject-all (`.uno:AcceptAllTrackedChanges`, `.uno:RejectAllTrackedChanges`) through headless UNO, in a private profile and process, and saves the result with LibreOffice's Word filter. The expected document takes the same path, loaded and saved without an operation, so LibreOffice's import and export normalization applies equally to both sides. The two are compared on the text view. CI pins LibreOffice 25.8.7.3.
-4. **Validity.** The pinned Open XML SDK validator (`tools/ooxml-validator`, DocumentFormat.OpenXml 3.5.1, file format `Microsoft365`) checks the candidate's package and every input. A finding counts by its error id, part and description; the package fails when any finding occurs more often than in every input. An XPath alone never distinguishes findings, so a moved error is not new and a duplicated one is. A run without the validator has no suite score.
+4. **Validity.** The pinned Open XML SDK validator (`tools/ooxml-validator`, DocumentFormat.OpenXml 3.5.1, file format `Microsoft365`) checks the candidate's package and every input. A finding counts by its error id, part and description; the package fails when any finding occurs more often than in every input. A package the SDK cannot open reports one `Package_Open` finding with the exception's description and no schema findings, so an output's `Package_Open` finding always fails, even when every input has the same one: otherwise an output keeping an input's open-time defect would never be validated. Conversely, an input the SDK cannot open reports no schema findings, so it licenses none of the output's: a repaired output is held to the full schema. The validator reads each package into memory before opening it, because the SDK, opening a file whose relationship target `System.Uri` rejects, writes its rewrite of that target back into the file even when opened read-only; the harness also gives the validator only temporary copies, so no validator can rewrite a fixture or an output, and refuses a run that changes a copy. An XPath alone never distinguishes findings, so a moved error is not new and a duplicated one is. A run without the validator has no suite score.
 5. **Declared assertions**, each versioned:
    - `untracked-text` v1 (scope `redline`): each listed text occurs in a paragraph of the declared `story` (`body`, or `headers` for every referenced header and footer) outside every `w:ins`, `w:del`, `w:moveFrom` and `w:moveTo`. A tracked span breaks the paragraph's untracked text, so text cannot be assembled across it, and text placed in a part the view does not read (an unreferenced comment, note or header) does not count. Cases list only text a correct redline leaves unchanged, so deleting and reinserting a whole document, which would otherwise pass both round trips, fails;
    - `paragraph-count` v1: the number of `w:p` in the body of the raw redline (scope `redline`). This is a minimality requirement, not reversibility: the #1183 cases use it to require that the revised document's paragraph folds into the deleted one, as Word's compare does;
    - `para-ids-valid` v1: every `w14:paraId` in every XML part is eight hexadecimal digits, below `0x80000000`, and unique across the package;
    - `style-ids-unique` v1: no two `w:style` elements share a `w:styleId`, whatever their types;
    - `comment-threads` v1 (scope `redline`): in the comments and commentsExtended parts, every entry is keyed to a comment's last-paragraph `w14:paraId`, every `w15:paraIdParent` names the last-paragraph `w14:paraId` of a comment that has its own entry, and for each declared `[reply, parent]` pair exactly one comment holds the reply's text and its entry names the comment holding the parent's text. Comment threading is not part of the semantic view, so neither round trip sees a reply detached from its parent;
+   - `hyperlink-targets` v1 (scope `redline`): every `w:hyperlink` in the main document with an `r:id` resolves to exactly one relationship of the main part, of the hyperlink type with `TargetMode="External"`, and the set of their `Target` values equals the declared `targets`, compared as written after XML parsing, with no URI normalization. The semantic view records only a hyperlink's boundaries, so neither round trip sees a target rewritten (for example to the SDK's `rewritten://` placeholder), trimmed or dropped, or a link left on a relationship id another relationship also holds;
    - `revision-count` v1: at most `max` revision records in the redline or output (scope `redline` or `output`); a `w:delText` or `w:delInstrText` outside any deletion also counts. Every `reject` case requires zero.
 
 Unknown assertion types, versions or scopes are rejected when the registry is loaded.
@@ -322,3 +323,45 @@ no native Word PDF is registered as a scoring reference here. The existing corpu
 The benchmark invokes stateless rejection. The core tests also require the session registry to list
 disjoint same-named ranges as one supported move and check bulk/selective acceptance and rejection
 against Word. This track does not score session enumeration or selective resolution.
+
+## Package shapes and external link targets (Docxodus #1384, #1388)
+
+`redline-v18` adds eight original cases in a new `packages` category, which the suite score
+weights like every other category. Each pair adds one unrelated paragraph to a document whose
+package, not its text, is the trigger. The PDF suite moves to `core-v72` with four matching inputs.
+
+The four #1388 cases hold an external hyperlink to `mailto:first@example.com;second@example.com`,
+a multi-recipient target that `System.Uri` rejects ("Invalid URI: The hostname could not be
+parsed"), and the same shapes with `mailto:solo@example.com` as controls. In one pair the link is
+on both sides beside the added paragraph; in the other it is inserted with its paragraph, so the
+original has no hyperlink relationship. `hyperlink-targets` requires the redline to keep the target
+exactly as written: the Open XML SDK's own workaround for such targets substitutes a random
+`rewritten://` address that both round trips would accept.
+
+Metric contract version 9 records three changes: this assertion, the rule that an output which
+fails to open always fails validity, and the markup engine's removal of a hyperlink that
+resolution leaves empty (needed by the inserted-link pair, whose authored redline otherwise
+leaves an empty `w:hyperlink` behind on reject).
+
+The four #1384 cases share one shape: a font table that embeds a part, a glossary document and an
+external hyperlink to `https://example.com/terms`. The control types the embedded part by a `ttf`
+Default, gives the glossary its own Override and the hyperlink its own relationship id. Each
+reproducer breaks exactly one of these, in a form the Open XML SDK refuses at open: the embedded
+part has no content type, the glossary is typed only by the generic `application/xml` Default, or
+the hyperlink relationship reuses the settings relationship's id. The expected documents are the
+inputs themselves; the authored redlines write the control's well-formed package. The inputs'
+`Package_Open` findings license nothing: a redline that keeps the input's defect fails validity. The embedded part holds the
+placeholder bytes declared in `bench/common.py`, not a font program (see [RIGHTS.md](../RIGHTS.md)).
+A variant with the embedded part absent from the zip is not in the corpus: LibreOffice refuses to
+load it, so its comparisons could not be calibrated.
+
+All sixteen LibreOffice comparisons apply. Authored calibration scores 100 on all eight. On
+Docxodus 3e4335d8 the five reproducers score 0 and the three controls 100: four comparisons throw
+(`Invalid URI: The hostname could not be parsed.`, the glossary content-type refusal and the
+`rSettings` id conflict), and the untyped-font comparison returns a redline that drops the font
+table's relationships, so the SDK cannot open it (`Package_Open`). On Docxodus main 3a29e133,
+after [PR #1400](https://github.com/JSv4/Docxodus/pull/1400) (#1388) and
+[PR #1401](https://github.com/JSv4/Docxodus/pull/1401) (#1384) merged, all eight score 100 with all
+sixteen LibreOffice comparisons applied. Labelled before/after sheets and their capture record are under
+[`docs/results/package-shapes/`](results/package-shapes/); these are focused diagnostics, not a
+full-suite score.
