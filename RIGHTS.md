@@ -273,3 +273,5 @@ literal OOXML in `bench/projection_fixtures.py`. They import no product fixture,
 image or font program. The labeled screenshots under `docs/results/markdown-shapes/` show only
 these inputs' public Markdown output in Chromium, with anchor IDs shortened for readability;
 they are not native Word references. No authentication material or external content is included.
+
+The Juniper textbox pair for #1425 is original literal text and VML/WordprocessingML authored in `bench/redline_fixtures.py`, without imported documents, images, or font programs. Its labeled LibreOffice previews in `docs/results/textbox-geometry/` render those authored packages and the recorded comparison output.

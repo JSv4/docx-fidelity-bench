@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v22')
-        self.assertEqual(len(registry['cases']), 208)
+        self.assertEqual(registry['suite']['id'], 'redline-v23')
+        self.assertEqual(len(registry['cases']), 210)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -177,6 +177,22 @@ class AuthoredCalibration(unittest.TestCase):
                 mode = 'accept' if assertion['scope'] == 'accepted' else 'reject'
                 resolved = {assertion['scope']: revisions.resolve(package.story_parts(), mode)}
                 self.assertFalse(redline._assertion(assertion, package, resolved)['passed'])
+
+    def test_vml_textbox_assertion_rejects_geometry_and_body_loss(self):
+        record = case('redline-textbox-geometry')
+        for attribute in ('style', 'body'):
+            def change(root):
+                if attribute == 'style':
+                    for shape in root.iter('{urn:schemas-microsoft-com:vml}shape'):
+                        shape.set('style', shape.get('style').replace('width:120pt', 'width:80pt'))
+                else:
+                    for box in root.iter(W + 'txbxContent'):
+                        for text in box.iter():
+                            if text.tag in {W + 't', W + 'delText'}: text.text = 'Missing body'
+            wrong = rewrite(record['authored'], change)
+            assertion = next(a for a in record['assertions'] if a['type'] == 'inline-trees' and a['scope'] == 'accepted')
+            self.assertFalse(redline._assertion(assertion, wrong,
+                {'accepted': revisions.resolve(wrong.story_parts(), 'accept')})['passed'])
 
     def test_inline_trees_allow_equivalent_math_run_splits(self):
         record = case('redline-tab-equation')
@@ -428,7 +444,12 @@ class AuthoredCalibration(unittest.TestCase):
         for record in cases(operation='compare'):
             if record['kind'] == 'identity' or 'semanticPreflight' in record:
                 continue
-            self.assertNotEqual(revisions.view(load(record['expected']['accepted'])), revisions.view(load(record['expected']['rejected'])), record['id'])
+            accepted, rejected = load(record['expected']['accepted']), load(record['expected']['rejected'])
+            wrong_resolutions = {scope: revisions.resolve(accepted.story_parts(), mode)
+                                 for scope, mode in (('accepted', 'accept'), ('rejected', 'reject'))}
+            structural_difference = any(not redline._assertion(a, accepted, wrong_resolutions)['passed']
+                                        for a in record['assertions'] if a['scope'] in {'accepted', 'rejected'})
+            self.assertTrue(revisions.view(accepted) != revisions.view(rejected) or structural_difference, record['id'])
 
 
 class GamingIsRejected(unittest.TestCase):
@@ -499,7 +520,11 @@ class GamingIsRejected(unittest.TestCase):
             left, right = load(record['expected']['rejected']), load(record['expected']['accepted'])
             for candidate in (left, right):
                 accepted, rejected = views(candidate)
-                self.assertFalse(accepted == revisions.view(right) and rejected == revisions.view(left), record['id'])
+                resolved = {'redline': None, 'output': None,
+                            'accepted': revisions.resolve(candidate.story_parts(), 'accept'),
+                            'rejected': revisions.resolve(candidate.story_parts(), 'reject')}
+                assertions_pass = all(redline._assertion(a, candidate, resolved)['passed'] for a in record['assertions'])
+                self.assertFalse(accepted == revisions.view(right) and rejected == revisions.view(left) and assertions_pass, record['id'])
 
     def test_whole_document_churn_round_trips_but_fails_preservation(self):
         record = case('redline-field-shared-end-append')
