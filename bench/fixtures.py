@@ -1120,6 +1120,247 @@ def export_reliability_cases(add):
          assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'CobaltVmlBody', 'occurrence': 1, 'page': 1, 'rect': [35, 35, 345, 80]}])
 
 
+def export_inline_context_cases(add, cases):
+    """Original Flint probes for continuation through inline layout contexts."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:cs="{FONT}"/><w:sz w:val="22"/>'
+              '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0"/>'
+              '<w:widowControl w:val="0"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    paper = ('<w:sectPr><w:pgSz w:w="6800" w:h="9200"/><w:pgMar w:top="800" w:right="1000" '
+             'w:bottom="800" w:left="1000" w:header="200" w:footer="200"/></w:sectPr>')
+
+    def case(name, category, description, texts, body, **kwargs):
+        add('export-inline-context-' + name, category, description, texts, body,
+            sect=paper, styles_xml=styles, **kwargs)
+
+    # Single naturally wrapping paragraph; only the spacing mode changes in its control.
+    sentences = [f'FlintPulse{i:02d} follows a copper ribbon around the quiet gallery.' for i in range(1, 58)]
+    for mode in ('automatic', 'automatic-note', 'exact-control'):
+        content = ''
+        for index, text in enumerate(sentences):
+            content += run(text + ' ', '<w:b/>' if index % 7 == 0 else '')
+            if mode == 'automatic-note' and index == 22:
+                content += '<w:r><w:footnoteReference w:id="1"/></w:r>'
+        spacing = '<w:spacing w:line="280" w:lineRule="exact"/>' if mode == 'exact-control' else '<w:spacing w:line="300" w:lineRule="auto"/>'
+        texts = sentences + ['FlintReceipt']
+        note = {}
+        if mode == 'automatic-note':
+            texts += ['1', '1', 'FlintMarginNote']
+            note = {'notes': ('footnote', 'FlintMarginNote'),
+                    'assertions': [{'type': 'same-page', 'version': 1, 'markers': ['FlintPulse23', 'FlintMarginNote']}]}
+        case('paragraph-' + mode, 'paragraphs',
+             'Long styled paragraph crosses pages with automatic baseline spacing; exact-line and citation controls (Docxodus #1451)',
+             texts, para(props=spacing, runs=content) + para('FlintReceipt'), **note)
+
+    for control in (False, True):
+        pieces = [run(text + ' ') for text in sentences]
+        if not control:
+            pieces.insert(25, '<w:r><w:tab/></w:r>' + run(' '))
+        props = '<w:spacing w:line="280" w:lineRule="exact"/><w:tabs><w:tab w:val="left" w:leader="dot" w:pos="2400"/></w:tabs>'
+        case('empty-tab' + ('-control' if control else ''), 'paragraphs',
+             'Tab after naturally wrapping prose creates an empty dotted inline advance; no-tab control (Docxodus #1455)',
+             sentences + ['FlintTabReceipt'], para(props=props, runs=''.join(pieces)) + para('FlintTabReceipt'))
+        if not control:
+            cases[-1]['pdfTextNormalization'] = 'isolated-dot-leaders-v1'
+
+    for control in (False, True):
+        texts, rows = [], []
+        for index in range(1, 48):
+            labels = [f'FlintWest{index:02d}', f'FlintEast{index:02d}']
+            texts += labels
+            rows.append('<w:tr>' + ''.join('<w:tc><w:tcPr><w:tcW w:w="2400" w:type="dxa"/></w:tcPr>'
+                        + para(label, '<w:spacing w:line="300" w:lineRule="exact"/>') + '</w:tc>' for label in labels) + '</w:tr>')
+        start = '' if control else '<w:bookmarkStart w:id="31" w:name="FlintTable"/>'
+        end = '' if control else '<w:bookmarkEnd w:id="31"/>'
+        body = ('<w:tbl><w:tblPr><w:tblW w:w="4800" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr>'
+                '<w:tblGrid><w:gridCol w:w="2400"/><w:gridCol w:w="2400"/></w:tblGrid>' + start + ''.join(rows) + end + '</w:tbl>'
+                + para('FlintTableReceipt'))
+        case('table-bookmark' + ('-control' if control else ''), 'tables',
+             'Table-level empty bookmark precedes many ordinary rows; unbookmarked control (Docxodus #1456)',
+             texts + ['FlintTableReceipt'], body)
+
+    for mode in ('tall', 'fitting-control', 'unmerged-control'):
+        count = 5 if mode == 'fitting-control' else 37
+        bridge_start = 3 if mode == 'fitting-control' else 15
+        merged = mode != 'unmerged-control'
+        rows, texts = [], []
+        for index in range(1, count + 1):
+            left = 'FlintN' if index == 1 else ''
+            middle = 'FlintMergeBridge' if index == bridge_start else (f'FlintBridge{index:02d}' if index < bridge_start else '')
+            right = f'FlintGrid{index:02d}'
+            cells = []
+            for column, width, content in [(0, 800, left), (1, 2400, middle), (3, 1600, right)]:
+                props = f'<w:tcW w:w="{width}" w:type="dxa"/>' + ('<w:gridSpan w:val="2"/>' if column == 1 else '')
+                if merged and (column == 0 or column == 1 and index >= bridge_start):
+                    props += '<w:vMerge w:val="restart"/>' if index == (1 if column == 0 else bridge_start) else '<w:vMerge/>'
+                cells.append('<w:tc><w:tcPr>' + props + '</w:tcPr>' + para(content, '<w:spacing w:line="300" w:lineRule="exact"/>') + '</w:tc>')
+                if content:
+                    texts.append(content)
+            rows.append('<w:tr>' + ''.join(cells) + '</w:tr>')
+        body = ('<w:tbl><w:tblPr><w:tblW w:w="4800" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr>'
+                '<w:tblGrid><w:gridCol w:w="800"/><w:gridCol w:w="1200"/><w:gridCol w:w="1200"/><w:gridCol w:w="1600"/></w:tblGrid>'
+                + ''.join(rows) + '</w:tbl>' + para('FlintGridReceipt'))
+        case('merged-grid-' + mode, 'tables',
+             'Overlapping vertical merges and a horizontal span exceed a fresh page; fitting and unmerged controls (Docxodus #1458)',
+             texts + ['FlintGridReceipt'], body)
+
+    for mode in ('empty', 'wrap-only', 'ordinary-control'):
+        frame = '' if mode == 'ordinary-control' else ('<w:framePr/>' if mode == 'empty' else '<w:framePr w:wrap="auto"/>')
+        inherited = styles.replace('</w:styles>', '<w:style w:type="paragraph" w:styleId="FlintFlow"><w:name w:val="Flint Flow"/>'
+                                  '<w:pPr>' + frame + '<w:spacing w:line="280" w:lineRule="exact"/></w:pPr></w:style></w:styles>')
+        labels = [f'FlintFrame{index:02d} orchard cart.' for index in range(1, 48)]
+        add('export-inline-context-style-frame-' + mode, 'paragraphs',
+            'Inherited empty or wrap-only frame properties retain ordinary multi-page flow; style without frame control',
+            labels + ['FlintFrameReceipt'], ''.join(para(label, '<w:pStyle w:val="FlintFlow"/>') for label in labels) + para('FlintFrameReceipt'),
+            sect=paper, styles_xml=inherited)
+
+    case('positioned-frame-control', 'paragraphs',
+         'A directly positioned fitting frame retains its authored page position',
+         ['FlintPositioned', 'FlintFrameBody'],
+         para('FlintPositioned', '<w:framePr w:w="2800" w:hAnchor="page" w:vAnchor="page" w:x="1200" w:y="1800" w:wrap="notBeside"/>') + para('FlintFrameBody'),
+         assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'FlintPositioned', 'occurrence': 1, 'page': 1, 'rect': [55, 85, 205, 115]}])
+
+    for mode in ('encoded-anchor', 'encoded-wrap', 'signed-control', 'positive-control'):
+        distance = '4294964756' if mode.startswith('encoded') else ('-2540' if mode == 'signed-control' else '25400')
+        anchor_distance = '0' if mode == 'encoded-wrap' else distance
+        wrap_distance = f' distT="{distance}" distB="{distance}"' if mode == 'encoded-wrap' else ''
+        rule = ('<w:r><w:drawing><wp:anchor distT="' + anchor_distance + '" distB="' + anchor_distance + '" distL="0" distR="0" '
+                'simplePos="0" relativeHeight="4" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1">'
+                '<wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="column"><wp:posOffset>50800</wp:posOffset></wp:positionH>'
+                '<wp:positionV relativeFrom="paragraph"><wp:posOffset>177800</wp:posOffset></wp:positionV>'
+                '<wp:extent cx="1219200" cy="0"/><wp:wrapTopAndBottom' + wrap_distance + '/>'
+                '<wp:docPr id="21" name="Flint separator rule"/><a:graphic>'
+                '<a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+                '<wps:wsp><wps:cNvSpPr/><wps:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="1219200" cy="0"/></a:xfrm>'
+                '<a:prstGeom prst="line"><a:avLst/></a:prstGeom><a:noFill/><a:ln w="12700">'
+                '<a:solidFill><a:srgbClr val="6D3790"/></a:solidFill></a:ln></wps:spPr><wps:bodyPr/></wps:wsp>'
+                '</a:graphicData></a:graphic></wp:anchor></w:drawing></w:r>')
+        case('wrap-clearance-' + mode, 'images',
+             'Negative top/bottom wrap clearance encoded as uint32 retains its signed size; direct-signed and positive controls',
+             ['FlintRuleBefore', 'FlintRuleAfter'], para('FlintRuleBefore') + para(runs=rule) + para('FlintRuleAfter'),
+             namespaces_extra=' xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"')
+
+    for control in (False, True):
+        label = 'decodable-control' if control else 'undecodable'
+        header = ('<w:p xmlns:r="' + R + '" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" '
+                  'xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">'
+                  '<w:r><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" relativeHeight="1" '
+                  'behindDoc="1" locked="0" layoutInCell="1" allowOverlap="1"><wp:simplePos x="0" y="0"/>'
+                  '<wp:positionH relativeFrom="page"><wp:posOffset>203200</wp:posOffset></wp:positionH>'
+                  '<wp:positionV relativeFrom="page"><wp:posOffset>152400</wp:posOffset></wp:positionV>'
+                  '<wp:extent cx="609600" cy="609600"/><wp:wrapNone/><wp:docPr id="27" name="FI"/>'
+                  '<a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic>'
+                  '<pic:nvPicPr><pic:cNvPr id="27" name="FI"/><pic:cNvPicPr/></pic:nvPicPr>'
+                  '<pic:blipFill><a:blip r:embed="rFlintCorner"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill>'
+                  '<pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="609600" cy="609600"/></a:xfrm>'
+                  '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic>'
+                  '</wp:anchor></w:drawing></w:r></w:p>')
+        payload = png(48, 48, lambda x, y: (105, 65, 155) if y % 12 < 3 else (248, 203, 97)) if control else b'Flint original undecodable raster placeholder.\n'
+        extras = {'word/media/flint-corner.png': payload,
+                  'word/_rels/header1.xml.rels': '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+                  f'<Relationship Id="rFlintCorner" Type="{R}/image" Target="media/flint-corner.png"/></Relationships>'}
+        add('export-inline-context-header-image-' + label, 'images',
+            'Repeated anchored header image retains warning identity when deliberately undecodable; generated PNG control',
+            ['FlintLeafOne', 'FlintLeafTwo'] + ([] if control else ['FI', 'FI']), para('FlintLeafOne') + para('FlintLeafTwo', '<w:pageBreakBefore/>'),
+            sect=paper.replace('<w:sectPr>', '<w:sectPr><w:headerReference w:type="default" r:id="rStory"/>'),
+            styles_xml=styles, story=('header', header), extra_parts=extras,
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': text, 'occurrence': 1, 'page': index,
+                         'rect': [45, 35, 295, 115]} for index, text in enumerate(['FlintLeafOne', 'FlintLeafTwo'], 1)])
+
+    for mode in ('oversized-kept', 'fitting-kept-control', 'oversized-unkept-control'):
+        kept = mode != 'oversized-unkept-control'
+        count = 8 if mode == 'fitting-kept-control' else 43
+        labels = [f'FlintCell{index:02d} amber tray.' for index in range(1, count + 1)]
+        properties = '<w:spacing w:line="280" w:lineRule="exact"/>' + ('<w:keepLines/><w:keepNext/><w:widowControl/>' if kept else '<w:widowControl w:val="0"/>')
+        paragraph = para(props=properties, runs='<w:r><w:br/></w:r>'.join(run(label) for label in labels))
+        body = ('<w:tbl><w:tblPr><w:tblW w:w="4800" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr>'
+                '<w:tblGrid><w:gridCol w:w="4800"/></w:tblGrid><w:tr><w:trPr>' + ('<w:cantSplit/>' if kept else '')
+                + '</w:trPr><w:tc><w:tcPr><w:tcW w:w="4800" w:type="dxa"/></w:tcPr>' + paragraph
+                + '</w:tc></w:tr></w:tbl>' + para('FlintCellReceipt'))
+        case('cell-' + mode, 'tables',
+             'Terminal cell paragraph carries row/line/next/widow keeps beyond a fresh body; fitting-kept and long-unkept composition controls',
+             labels + ['FlintCellReceipt'], body)
+
+    tile = png(48, 48, lambda x, y: (115, 55, 145) if x == y or x + y == 47 or x % 12 < 3 else (245, 192, 87))
+    for wrap in ('square', 'tight'):
+        for control in (False, True):
+            height, width = (190 if control else 510), 130
+            cx, cy = width * 12700, height * 12700
+            contour = ('<wp:wrapPolygon edited="0"><wp:start x="0" y="0"/><wp:lineTo x="21600" y="0"/>'
+                       '<wp:lineTo x="21600" y="21600"/><wp:lineTo x="0" y="21600"/><wp:lineTo x="0" y="0"/></wp:wrapPolygon>')
+            wrap_xml = '<wp:wrapSquare wrapText="bothSides"/>' if wrap == 'square' else '<wp:wrapTight wrapText="bothSides">' + contour + '</wp:wrapTight>'
+            anchor = ('<w:r><w:drawing><wp:anchor distT="38100" distB="38100" distL="38100" distR="38100" simplePos="0" '
+                      'relativeHeight="3" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1"><wp:simplePos x="0" y="0"/>'
+                      '<wp:positionH relativeFrom="column"><wp:align>right</wp:align></wp:positionH>'
+                      '<wp:positionV relativeFrom="paragraph"><wp:posOffset>0</wp:posOffset></wp:positionV>'
+                      f'<wp:extent cx="{cx}" cy="{cy}"/>' + wrap_xml + '<wp:docPr id="16" name="Flint woven tile"/>'
+                      '<wp:cNvGraphicFramePr/><a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">'
+                      '<pic:pic><pic:nvPicPr><pic:cNvPr id="16" name="Flint woven tile"/><pic:cNvPicPr/></pic:nvPicPr>'
+                      '<pic:blipFill><a:blip r:embed="rFlintTile"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill>'
+                      f'<pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="{cx}" cy="{cy}"/></a:xfrm>'
+                      '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic>'
+                      '</wp:anchor></w:drawing></w:r>')
+            case('float-' + wrap + ('-control' if control else ''), 'images',
+                 'Floating picture taller than a fresh body fits proportionally; ordinary-size same-wrap control (Docxodus #1450)',
+                 ['FlintFloatStart', 'FlintFloatEnd'], para(runs=run('FlintFloatStart') + anchor) + para('FlintFloatEnd'),
+                 extra_parts={'word/media/flint-weave.png': tile}, relations_extra=[('rFlintTile', 'image', 'media/flint-weave.png')])
+
+    for mode in ('long', 'fitting-control', 'ordinary-control'):
+        lines = [f'FlintSegment{index:02d} linen shelf.' for index in range(1, 11 if mode == 'fitting-control' else 42)]
+        marked = mode != 'ordinary-control'
+        prefix = run('F7: ') + '<w:r><w:tab/></w:r>' if marked else ''
+        content = prefix + '<w:r><w:br/></w:r>'.join(run(' ' + label) for label in lines)
+        properties = ('<w:spacing w:line="300" w:lineRule="exact"/><w:keepLines w:val="0"/><w:widowControl w:val="0"/>'
+                      '<w:tabs><w:tab w:val="left" w:leader="dot" w:pos="800"/></w:tabs>')
+        case('tab-segment-' + mode, 'paragraphs',
+             'Manual prefix and left tab form a nonempty inline-flex segment in a long paragraph; fitting and ordinary controls',
+             (['F7:'] if marked else []) + lines + ['FlintSegmentReceipt'], para(props=properties, runs=content) + para('FlintSegmentReceipt'))
+        if marked:
+            cases[-1]['pdfTextNormalization'] = 'isolated-dot-leaders-v1'
+
+    for control in (False, True):
+        count, shape_height, image_width, image_height = (1, 50, 170, 240) if control else (4, 90, 210, 320)
+        placeholders = ''.join('<w:r><w:pict><v:oval id="FlintOval' + str(index) + '" alt="[SHAPE]" '
+                               'style="width:48pt;height:' + str(shape_height) + 'pt"/></w:pict></w:r>' for index in range(count))
+        cx, cy = image_width * 12700, image_height * 12700
+        bitmap = ('<w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0">'
+                  f'<wp:extent cx="{cx}" cy="{cy}"/><wp:docPr id="24" name="Flint atom picture"/>'
+                  '<a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic>'
+                  '<pic:nvPicPr><pic:cNvPr id="24" name="Flint atom picture"/><pic:cNvPicPr/></pic:nvPicPr>'
+                  '<pic:blipFill><a:blip r:embed="rFlintTile"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill>'
+                  f'<pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="{cx}" cy="{cy}"/></a:xfrm>'
+                  '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic>'
+                  '</wp:inline></w:drawing></w:r>')
+        case('shape-atoms' + ('-control' if control else ''), 'images',
+             'Unsupported inline VML ovals retain their authored fallback labels beside a complete bitmap; fitting composition control, not oval-rendering parity',
+             ['[SHAPE]'] * count + ['FlintShapeReceipt'],
+             para(props='<w:keepLines w:val="0"/><w:widowControl w:val="0"/>', runs=placeholders + bitmap) + para('FlintShapeReceipt'),
+             namespaces_extra=' xmlns:v="urn:schemas-microsoft-com:vml"',
+             extra_parts={'word/media/flint-weave.png': tile}, relations_extra=[('rFlintTile', 'image', 'media/flint-weave.png')])
+
+    for dialect in ('drawingml', 'vml'):
+        for inner in ('natural', 'exact'):
+            for multiple in (1, 3):
+                labels = [f'FlintBoxLine{index}' for index in range(1, 5)]
+                box_body = ''.join(para(label, '<w:spacing w:line="280" w:lineRule="exact"/>' if inner == 'exact' else '') for label in labels)
+                if dialect == 'vml':
+                    drawing_xml = ('<w:r><w:pict><v:shape style="width:176pt;height:68pt" stroked="f" filled="f">'
+                                   '<v:textbox inset="0,0,0,0"><w:txbxContent>' + box_body + '</w:txbxContent></v:textbox></v:shape></w:pict></w:r>')
+                else:
+                    drawing_xml = ('<w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0">'
+                                   '<wp:extent cx="2235200" cy="863600"/><wp:docPr id="18" name="Flint inset panel"/>'
+                                   '<a:graphic><a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+                                   '<wps:wsp><wps:cNvSpPr txBox="1"/><wps:spPr><a:xfrm><a:off x="0" y="0"/>'
+                                   '<a:ext cx="2235200" cy="863600"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom>'
+                                   '<a:noFill/><a:ln><a:noFill/></a:ln></wps:spPr><wps:txbx><w:txbxContent>' + box_body
+                                   + '</w:txbxContent></wps:txbx><wps:bodyPr lIns="0" tIns="0" rIns="0" bIns="0">'
+                                   '<a:noAutofit/></wps:bodyPr></wps:wsp></a:graphicData></a:graphic></wp:inline></w:drawing></w:r>')
+                case(f'textbox-{dialect}-{inner}-host{multiple}', 'paragraphs',
+                     'Inline textbox uses its own line heights and stays outside host glyph-baseline lifting; single/triple host-spacing pair (Docxodus #1457)',
+                     labels + ['FlintBoxReceipt'], para(props=f'<w:spacing w:line="{multiple * 240}" w:lineRule="auto"/>', runs=drawing_xml) + para('FlintBoxReceipt'),
+                     namespaces_extra=' xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"')
+
+
 def generate():
     cases = []
     def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT, literal_parts=None, relations_extra=(), content_types_extra=''):
@@ -3038,7 +3279,8 @@ def generate():
                 ' inline wrappers; public render must finish under the existing conversion deadline (Docxodus #1410)',
                 [text], para(runs=content), styles_xml=inline_styles)
     export_reliability_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v75', 'version': 75, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    export_inline_context_cases(add, cases)
+    registry = {'schema': 1, 'suite': {'id': 'core-v76', 'version': 76, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

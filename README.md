@@ -11,6 +11,14 @@ reproducer/control inputs. [Labeled before/after evidence](docs/results/editor-r
 records five baseline failures, five passing controls and ten candidate passes. The PDF and
 redline suites and their metrics are unchanged.
 
+`core-v76` adds 40 independently authored paragraph, table, textbox and inline-object cases.
+They cover automatic spacing, both tab carriers, bookmarked and merged tables, impossible
+cell keeps, inherited frame defaults, signed wrap clearances, floating pictures, and stable
+warning identities for deliberately undecodable repeated header images. All 456 prior input
+bytes and assertions are preserved; only shared generator hashes change.
+[Focused diagnostic evidence](docs/results/export-inline-contexts/README.md) records exact
+renderer revisions and explicit placeholder/reference limitations without a fidelity score.
+
 `core-v75` adds 28 independently authored continuation and geometry cases, with an unchanged
 DrawingML background control reused in the focused set. Cases cover border-style reopening,
 inline and floating pictures, off-paper shapes and blank boxes, zero-font marks, promoted frames,

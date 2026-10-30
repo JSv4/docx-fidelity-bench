@@ -239,3 +239,16 @@ The labeled screenshots under `docs/results/export-reliability-continuations/` c
 original inputs and public-renderer outputs. Optional Pillow adds labels around unchanged
 96-DPI page rasters; Poppler bitmap records contain dimensions and hashes only. No external
 document content or font program is distributed in this evidence.
+
+The forty inline-context cases in `core-v76` are original Flint text, literal OOXML,
+generated purple/gold pixels, and vector rules authored in `bench/fixtures.py`. Their paragraph,
+table, frame, textbox and wrapping structures import no product fixture or helper. One image
+part deliberately holds an original UTF-8 placeholder declared as image/png to exercise
+undecodable-resource diagnostics; its short alternate label is included in the full token
+inventory. A generated decodable PNG supplies the paired control. No external asset, document
+content or font program is imported. Labeled screenshots under `docs/results/export-inline-contexts/`
+show only these authored inputs and separately provisioned renderers. Optional Pillow composes
+unchanged 96-DPI rasters with labels; Poppler inspections record actual PDF content and geometry.
+The unsupported VML-oval cases author their `[SHAPE]` alternate labels explicitly; the
+Docxodus placeholder contract is distinguished from LibreOffice oval painting and does not
+claim vector-rendering parity.
