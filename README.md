@@ -11,6 +11,12 @@ reproducer/control inputs. [Labeled before/after evidence](docs/results/editor-r
 records five baseline failures, five passing controls and ten candidate passes. The PDF and
 redline suites and their metrics are unchanged.
 
+`core-v74` adds 34 independently authored export-reliability cases and controls: running-story
+spacing and margin cells, unpainted source carriers, fixed-textbox blank lines, oversized paragraphs
+and cells, citing tables, unused XML, fractional twips, table width, and header background pictures. All 394 previous DOCX
+inputs remain byte-identical. [Focused evidence and qualifications](docs/results/export-reliability/README.md)
+distinguish public-API availability checks from registered references and fidelity scores.
+
 `core-v73` adds six original nested-inline rendering cases for Docxodus #1410: 64 hyperlinks,
 simple fields, or mixed hyperlink/control/custom-XML wrappers, each with a flat-text control.
 They retain the existing 120-second conversion deadline and all PDF checks. All six inputs are
@@ -38,7 +44,7 @@ bytes and eligibility declarations remain unchanged; the PDF suite stays `core-v
 
 An independent MIT benchmark of delivered PDF rendering and of document comparison. The harness and every input document are authored in this repository. It measures layout, visible content, physical pages, fonts, and declared feature assertions. It produces portable HTML evidence and JSON measurements.
 
-The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v72`, with report-only renderer CI. A separate comparison track, `redline-v18`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
+The initial reference track is **LibreOffice**, pinned in CI to 25.8.7.3. Word reference PDFs can be registered as separate tracks. The current PDF suite is `core-v74`, with report-only renderer CI. A separate comparison track, `redline-v18`, scores redlines on accept/reject round trips; see [Redline track](#redline-track). Close-match thresholds have not been calibrated as release gates.
 
 `redline-v16` added seven original reviewer-account cases for Docxodus #1317: namesakes with a different or absent account, principal-name and object-id aliases, a legacy control, and the first revision/comment under a free name. Public name-status queries, exact reviewer metadata and retained insertion/deletion markup supplement independent round trips and schema checks. All prior DOCX bytes remain unchanged; the PDF suite stayed `core-v62`.
 

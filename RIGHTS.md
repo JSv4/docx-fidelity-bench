@@ -220,3 +220,12 @@ same moved-paragraph case before and after the proposed change.
 
 The atomic-source cases for Docxodus #1421 contain original literal-text equations, field scaffolding, and drawing XML authored by `bench/redline_fixtures.py`. Their 8 by 8 solid-color PNG is generated here; no external document content, images, or embedded fonts are included.
 The labeled previews in `docs/results/atomic-source/` are LibreOffice PDF rasters of those original inputs compared by the exact recorded Docxodus candidate, with generated case/renderer labels. They contain no third-party document content, font programs or authentication data.
+
+The thirty-four export-reliability cases in `core-v74` are literal OOXML and Larch labels
+independently authored in `bench/fixtures.py`. Running stories, hidden marks, empty tables,
+fixed text boxes, line/cell continuations, citations, unused package text, fractional measures,
+and over-wide grids contain no imported product fixture, document content, graphic, or font.
+The pale page grid is generated from original pixel rules in the same generator.
+The labeled screenshots under `docs/results/export-reliability/` rasterize these exact authored
+inputs and public-renderer outputs. The optional Pillow composition helper adds only renderer
+labels around unchanged page rasters. They contain no font programs or external document content.

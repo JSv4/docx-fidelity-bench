@@ -796,6 +796,181 @@ def native_precision_inputs():
            actual, [text] * len(variants), ['Times New Roman', 'Arial'])
 
 
+
+def export_reliability_cases(add):
+    """Original compact packages isolating availability and content-preservation mechanisms."""
+    pitch = '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="exact"/>'
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:cs="{FONT}"/><w:sz w:val="20"/>'
+              '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>' + pitch + '<w:widowControl w:val="0"/>'
+              '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+
+    def paper(height=8800, refs='', margin=800):
+        return (f'<w:sectPr>{refs}<w:pgSz w:w="7600" w:h="{height}"/>'
+                f'<w:pgMar w:top="{margin}" w:right="800" w:bottom="{margin}" w:left="800" '
+                'w:header="200" w:footer="200"/></w:sectPr>')
+
+    def table(contents, widths=(6000,), indent=0):
+        return ('<w:tbl><w:tblPr><w:tblW w:w="' + str(sum(widths)) + '" w:type="dxa"/>'
+                '<w:tblLayout w:type="fixed"/><w:tblInd w:w="' + str(indent) + '" w:type="dxa"/>'
+                '<w:tblCellMar><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/>'
+                '</w:tblCellMar></w:tblPr><w:tblGrid>' + ''.join(f'<w:gridCol w:w="{w}"/>' for w in widths)
+                + '</w:tblGrid><w:tr>' + ''.join(f'<w:tc><w:tcPr><w:tcW w:w="{w}" w:type="dxa"/>'
+                    '</w:tcPr>' + body + '</w:tc>' for w, body in zip(widths, contents)) + '</w:tr></w:tbl>')
+
+    def case(name, category, description, texts, body, **kwargs):
+        add('export-reliability-' + name, category, description, texts, body,
+            sect=kwargs.pop('sect', paper()), styles_xml=styles, **kwargs)
+
+    # Adjacent running-story paragraph margins are additive in the final flex band.
+    for story in ('header', 'footer'):
+        labels = [f'Larch{story.title()}{letter}' for letter in 'ABCD']
+        for control in (False, True):
+            gap = 0 if control else 400
+            content = ''.join(para(t, f'<w:spacing w:before="{gap}" w:after="{gap}" w:line="240" w:lineRule="exact"/>') for t in labels)
+            ref = f'<w:{story}Reference w:type="default" r:id="rStory"/>'
+            case(story + '-spacing' + ('-control' if control else ''), 'paragraphs',
+                 f'{story.title()} with four adjacent {gap / 20:g}pt paragraph margins; full story text required (Docxodus #1432)',
+                 ['LarchBody'] + labels, para('LarchBody'), sect=paper(refs=ref), story=(story, content))
+
+    # Both edge cells remain inside the paper but outside the body-width story band.
+    for story in ('header', 'footer'):
+        labels = ['HL', 'LarchHeaderCore', 'HR'] if story == 'header' else ['FL', 'LarchFooterCore', 'FR']
+        for control in (False, True):
+            widths = (360, 5280 if control else 6000, 360)
+            content = table([para(t) for t in labels], widths, 0 if control else -360)
+            ref = f'<w:{story}Reference w:type="default" r:id="rStory"/>'
+            case(story + '-margin-cells' + ('-control' if control else ''), 'tables',
+                 f'{story.title()} table with edge cells ' + ('inside the text width (control)' if control else 'in both side margins') + '; paper contains every label',
+                 ['LarchBody'] + labels, para('LarchBody'), sect=paper(refs=ref), story=(story, content),
+                 assertions=[{'type': 'marker-region', 'version': 2, 'marker': label, 'occurrence': 1,
+                              'page': 1, 'rect': [x - 2, 8 if story == 'header' else 415, x + 18, 25 if story == 'header' else 434]}
+                             for label, x in [(labels[0], 40 if control else 22), (labels[2], 322 if control else 340)]])
+
+    for control in (False, True):
+        empty_table = '' if control else '<w:tbl><w:tblPr/><w:tblGrid/></w:tbl>'
+        case('rowless-table' + ('-control' if control else ''), 'tables',
+             'An empty table retains source identity without painted rows; ordinary paragraph control',
+             ['LarchLedger'], empty_table + para('LarchLedger'))
+        hidden = para(props='<w:rPr><w:vanish/></w:rPr>',
+                      runs=run('PrivateLarchToken', '<w:vanish/>') + run(''))
+        joined = (para('LarchLead ', '<w:rPr><w:specVanish/></w:rPr>') + hidden + para(' LarchTail'))
+        case('hidden-joined-source' + ('-control' if control else ''), 'paragraphs',
+             'Hidden paragraph mark and hidden text with an empty visible run; ordinary joined-text control',
+             ['LarchLead', 'LarchTail'], para('LarchLead LarchTail') if control else joined)
+        ending = para() if control else para(props='<w:rPr><w:vanish/></w:rPr>')
+        case('hidden-final-mark' + ('-control' if control else ''), 'paragraphs',
+             'Final hidden paragraph mark owns the section boundary; visible blank-line control',
+             ['LarchBoundary'], para('LarchBoundary') + ending)
+
+    for control in (False, True):
+        content = para('LarchBox') + ('' if control else para())
+        drawing = ('<w:r><w:pict><v:shape style="width:126pt;height:12pt" stroked="f" filled="f">'
+                   '<v:textbox inset="0,0,0,0"><w:txbxContent>' + content + '</w:txbxContent>'
+                   '</v:textbox></v:shape></w:pict></w:r>')
+        case('textbox-blank-tail' + ('-control' if control else ''), 'images',
+             'Fixed-height text box with a wholly clipped blank final line; no-tail control',
+             ['LarchBox', 'LarchAfterBox'], para(runs=drawing) + para('LarchAfterBox'),
+             namespaces_extra=' xmlns:v="urn:schemas-microsoft-com:vml"')
+
+    labels = [f'LarchKeep{i:02d}' for i in range(1, 35)]
+    lines = '<w:r><w:br/></w:r>'.join(run(t) for t in labels)
+    for control in (False, True):
+        case('oversized-kept-paragraph' + ('-control' if control else ''), 'paragraphs',
+             'Thirty-four lines exceed a fresh page with keepLines; unkept control (Docxodus #1430)',
+             labels + ['LarchKeepEnd'], para(props=pitch + ('' if control else '<w:keepLines/>'), runs=lines) + para('LarchKeepEnd'),
+             sect=paper(height=4000, margin=400))
+
+    labels = [f'LarchCell{i:02d}' for i in range(1, 35)]
+    lines = '<w:r><w:br/></w:r>'.join(run(t) for t in labels)
+    for shape in ('paragraph', 'nested', 'control'):
+        if shape == 'paragraph':
+            body = table([para(runs=lines), para('SideCell')], (4800, 1200))
+        elif shape == 'nested':
+            rows = ''.join('<w:tr><w:tc>' + para(t) + '</w:tc></w:tr>' for t in labels)
+            inner = '<w:tbl><w:tblPr/><w:tblGrid><w:gridCol w:w="4800"/></w:tblGrid>' + rows + '</w:tbl>' + para()
+            body = table([inner, para('SideCell')], (4800, 1200))
+        else:
+            body = ''.join(para(t) for t in labels) + para('SideCell')
+        case('body-cell-' + shape, 'tables',
+             'Oversized body cell holding ' + shape + '; every numbered line and neighbour required (Docxodus #1433)',
+             labels + ['SideCell'], body, sect=paper(height=4000, margin=400))
+
+    for control in (False, True):
+        labels = [f'LarchCitation{i:02d}' for i in range(1, 5 if control else 27)]
+        rows = ''
+        for i, text in enumerate(labels):
+            reference = '<w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr><w:footnoteReference w:id="1"/></w:r>' if i == 1 else ''
+            rows += '<w:tr><w:tc>' + para(runs=run(text) + reference) + '</w:tc></w:tr>'
+        body = '<w:tbl><w:tblPr/><w:tblGrid><w:gridCol w:w="6000"/></w:tblGrid>' + rows + '</w:tbl>'
+        case('oversized-citing-table' + ('-control' if control else ''), 'notes',
+             'Table exceeds a fresh page and owns a footnote citation; four-row fitting control (Docxodus #1435)',
+             labels + ['1', '1', 'LarchNote'], body, sect=paper(height=4000, margin=400), notes=('footnote', 'LarchNote'),
+             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['LarchCitation02', 'LarchNote']}])
+
+    for control in (False, True):
+        case('unused-xml' + ('-control' if control else ''), 'paragraphs',
+             'Malformed unreferenced XML remains warning-only; well-formed unused-part control (Docxodus #1434)',
+             ['LarchUnusedPart'], para('LarchUnusedPart'),
+             extra_parts={'word/larch-unused.xml': '<larch/>' if control else '<larch>'})
+
+    for control in (False, True):
+        labels = ['LarchWest', 'LarchMiddle', 'LarchEast']
+        width = 2000 if control else 3600
+        case('body-table-width' + ('-control' if control else ''), 'tables',
+             'Fixed table is wider than the paper; proportional fitting preserves every cell; fitting-width control',
+             labels, table([para(t) for t in labels], (width, width, width)))
+
+    # A generated pale page wash makes body labels readable over the floating background.
+    for shape in ('page-absolute', 'page-relative', 'inline-control'):
+        inline = shape == 'inline-control'
+        cx, cy = (914400, 228600) if inline else ((2540000, 1270000) if shape == 'page-relative' else (4826000, 5588000))
+        payload = ('<pic:pic><pic:nvPicPr><pic:cNvPr id="4" name="Larch pale grid"/><pic:cNvPicPr/></pic:nvPicPr>'
+                   '<pic:blipFill><a:blip r:embed="rLarchImage"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill>'
+                   f'<pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="{cx}" cy="{cy}"/></a:xfrm>'
+                   '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic>')
+        start = '<wp:inline distT="0" distB="0" distL="0" distR="0">' if inline else (
+            '<wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" relativeHeight="1" '
+            'behindDoc="1" locked="0" layoutInCell="1" allowOverlap="1"><wp:simplePos x="0" y="0"/>'
+            '<wp:positionH relativeFrom="page"><wp:posOffset>0</wp:posOffset></wp:positionH>'
+            '<wp:positionV relativeFrom="page"><wp:posOffset>0</wp:posOffset></wp:positionV>')
+        relative = ('<wp14:sizeRelH relativeFrom="page"><wp14:pctWidth>100000</wp14:pctWidth></wp14:sizeRelH>'
+                    '<wp14:sizeRelV relativeFrom="page"><wp14:pctHeight>100000</wp14:pctHeight></wp14:sizeRelV>') if shape == 'page-relative' else ''
+        picture = ('<w:r><w:drawing>' + start + f'<wp:extent cx="{cx}" cy="{cy}"/>'
+                   + ('' if inline else '<wp:wrapNone/>') + '<wp:docPr id="4" name="Larch page wash"/>'
+                   '<wp:cNvGraphicFramePr/><a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">'
+                   + payload + '</a:graphicData></a:graphic>' + relative + ('</wp:inline>' if inline else '</wp:anchor>')
+                   + '</w:drawing></w:r>')
+        content = ('<w:p xmlns:r="' + R + '" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" '
+                   'xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
+                   'xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture" '
+                   'xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing">'
+                   '<w:pPr>' + pitch + '</w:pPr>' + picture + '</w:p>')
+        extras = {'word/media/larch-grid.png': png(64, 64, lambda x, y: (218, 232, 246) if x % 16 == 0 or y % 16 == 0 else (244, 248, 252)),
+                  'word/_rels/header1.xml.rels': '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+                    f'<Relationship Id="rLarchImage" Type="{R}/image" Target="media/larch-grid.png"/></Relationships>'}
+        case('header-picture-' + shape, 'images',
+             'Original pale header picture: ' + shape + '; page-relative variants sit at the paper origin behind body text',
+             ['LarchPaperMark'], para('LarchPaperMark'),
+             sect=paper(refs='<w:headerReference w:type="default" r:id="rStory"/>'), story=('header', content), extra_parts=extras,
+             assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'LarchPaperMark', 'occurrence': 1,
+                          'page': 1, 'rect': [35, 35, 345, 80]}])
+
+    for control in (False, True):
+        height = '23.075pt' if control else '461.5'
+        row = ('<w:tbl><w:tblPr/><w:tblGrid><w:gridCol w:w="6000"/></w:tblGrid><w:tr><w:trPr>'
+               f'<w:trHeight w:val="{height}" w:hRule="atLeast"/></w:trPr><w:tc>' + para('LarchFractionalRow')
+               + '</w:tc></w:tr></w:tbl>')
+        case('fractional-row' + ('-control' if control else ''), 'tables',
+             'Bare fractional twip row height; equivalent point-valued control (Docxodus #1436)',
+             ['LarchFractionalRow'], row)
+        position = '84.075pt' if control else '1681.5'
+        content = run('LarchTabLeft') + '<w:r><w:tab/></w:r>' + run('LarchTabRight')
+        case('fractional-tab' + ('-control' if control else ''), 'paragraphs',
+             'Bare fractional twip tab position; equivalent point-valued control (Docxodus #1436)',
+             ['LarchTabLeft', 'LarchTabRight'], para(props=f'<w:tabs><w:tab w:val="left" w:pos="{position}"/></w:tabs>', runs=content))
+
+
 def generate():
     cases = []
     def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT, literal_parts=None, relations_extra=(), content_types_extra=''):
@@ -2713,7 +2888,8 @@ def generate():
                 ('Flat text control for ' if control else 'Sixty-four nested ') + shape +
                 ' inline wrappers; public render must finish under the existing conversion deadline (Docxodus #1410)',
                 [text], para(runs=content), styles_xml=inline_styles)
-    registry = {'schema': 1, 'suite': {'id': 'core-v73', 'version': 73, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    export_reliability_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v74', 'version': 74, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
