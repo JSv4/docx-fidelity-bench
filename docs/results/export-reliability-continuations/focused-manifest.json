@@ -1,0 +1,1080 @@
+{
+  "schema": 1,
+  "suite": {
+    "id": "export-reliability-followup-focused",
+    "version": 1,
+    "cases": [
+      "export-reliability-header-picture-page-absolute",
+      "export-reliability-header-wide-table",
+      "export-reliability-header-wide-table-control",
+      "export-reliability-footer-wide-table",
+      "export-reliability-footer-wide-table-control",
+      "export-reliability-textbox-contextual-same-style",
+      "export-reliability-textbox-contextual-ordinary-control",
+      "export-reliability-textbox-contextual-different-style-control",
+      "export-reliability-zero-font-blank",
+      "export-reliability-zero-font-visible-control",
+      "export-reliability-zero-font-border-control",
+      "export-reliability-frame-cell",
+      "export-reliability-frame-cell-control",
+      "export-reliability-border-reopen-single",
+      "export-reliability-border-reopen-dashed",
+      "export-reliability-border-reopen-integral-control",
+      "export-reliability-inline-picture-lines",
+      "export-reliability-inline-picture-lines-control",
+      "export-reliability-inline-picture-oversized",
+      "export-reliability-inline-picture-fitting-control",
+      "export-reliability-inline-picture-fitting-pair",
+      "export-reliability-off-paper-blank-box",
+      "export-reliability-off-paper-blank-box-control",
+      "export-reliability-drawing-off-paper",
+      "export-reliability-drawing-visible-control",
+      "export-reliability-drawing-edge-control",
+      "export-reliability-floating-picture-height",
+      "export-reliability-floating-picture-height-control",
+      "export-reliability-header-vml-background"
+    ]
+  },
+  "cases": [
+    {
+      "id": "export-reliability-header-picture-page-absolute",
+      "version": 2,
+      "category": "images",
+      "description": "Original pale header picture: page-absolute; page-relative variants sit at the paper origin behind body text",
+      "input": "fixtures/export-reliability-header-picture-page-absolute.docx",
+      "sha256": "ddc1448c1d4f1f1fa5d096298bb9389219910e8f3cb58faf902bf22907d73278",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchPaperMark": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "LarchPaperMark",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            35,
+            35,
+            345,
+            80
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-header-wide-table",
+      "version": 1,
+      "category": "tables",
+      "description": "Running-story table wider than the paper retains every proportionally fitted column; body-width control",
+      "input": "fixtures/export-reliability-header-wide-table.docx",
+      "sha256": "13283cb0ff8c432b1fc224d94568b94d3110863e66a028cad00ecc987c6a6bcd",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltHeaderEast": 1,
+        "CobaltHeaderMiddle": 1,
+        "CobaltHeaderWest": 1,
+        "CobaltStoryBody": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-header-wide-table-control",
+      "version": 1,
+      "category": "tables",
+      "description": "Running-story table wider than the paper retains every proportionally fitted column; body-width control",
+      "input": "fixtures/export-reliability-header-wide-table-control.docx",
+      "sha256": "4899f23676cf9c5d1c9a7d17daf327fe49041acf2f92ad31d7506696a9733bc8",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltHeaderEast": 1,
+        "CobaltHeaderMiddle": 1,
+        "CobaltHeaderWest": 1,
+        "CobaltStoryBody": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-footer-wide-table",
+      "version": 1,
+      "category": "tables",
+      "description": "Running-story table wider than the paper retains every proportionally fitted column; body-width control",
+      "input": "fixtures/export-reliability-footer-wide-table.docx",
+      "sha256": "5c0ff0773eff8e4f0cc59e8a06aa26d5eb63a5773420467f10336eca753b4327",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltFooterEast": 1,
+        "CobaltFooterMiddle": 1,
+        "CobaltFooterWest": 1,
+        "CobaltStoryBody": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-footer-wide-table-control",
+      "version": 1,
+      "category": "tables",
+      "description": "Running-story table wider than the paper retains every proportionally fitted column; body-width control",
+      "input": "fixtures/export-reliability-footer-wide-table-control.docx",
+      "sha256": "2a79b0e7fb124112a52ee2a65ba5782a5ad0af917cbd4bb1f6523c97e015823b",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltFooterEast": 1,
+        "CobaltFooterMiddle": 1,
+        "CobaltFooterWest": 1,
+        "CobaltStoryBody": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-textbox-contextual-same-style",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Five textbox paragraphs share the resolved default style; contextual spacing groups them while disabled and distinct-style controls keep margins",
+      "input": "fixtures/export-reliability-textbox-contextual-same-style.docx",
+      "sha256": "5edc6d26c3150967f3c82d5a7d87921157be3e62dc77e87af28efb80ff374d1c",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltBoxDone": 1,
+        "CobaltBoxLine1": 1,
+        "CobaltBoxLine2": 1,
+        "CobaltBoxLine3": 1,
+        "CobaltBoxLine4": 1,
+        "CobaltBoxLine5": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-textbox-contextual-ordinary-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Five textbox paragraphs share the resolved default style; contextual spacing groups them while disabled and distinct-style controls keep margins",
+      "input": "fixtures/export-reliability-textbox-contextual-ordinary-control.docx",
+      "sha256": "a1f940e38b4318c331765bc19078beedf0be86636b7abd921990618c8436fa2c",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltBoxDone": 1,
+        "CobaltBoxLine1": 1,
+        "CobaltBoxLine2": 1,
+        "CobaltBoxLine3": 1,
+        "CobaltBoxLine4": 1,
+        "CobaltBoxLine5": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-textbox-contextual-different-style-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Five textbox paragraphs share the resolved default style; contextual spacing groups them while disabled and distinct-style controls keep margins",
+      "input": "fixtures/export-reliability-textbox-contextual-different-style-control.docx",
+      "sha256": "f0ca17c23bfe0c7be45d0d4de638f251256e0d3135bd9dc1b3b4da31834ffe9f",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltBoxDone": 1,
+        "CobaltBoxLine1": 1,
+        "CobaltBoxLine2": 1,
+        "CobaltBoxLine3": 1,
+        "CobaltBoxLine4": 1,
+        "CobaltBoxLine5": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-zero-font-blank",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Zero-font blank mark under automatic spacing; positive text and painted-border controls",
+      "input": "fixtures/export-reliability-zero-font-blank.docx",
+      "sha256": "ee804c3da89f069655123858a9bbb2350c3f10fb1c95b97974cb29bf7d2621da",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltAfter": 1,
+        "CobaltBefore": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-zero-font-visible-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Zero-font blank mark under automatic spacing; positive text and painted-border controls",
+      "input": "fixtures/export-reliability-zero-font-visible-control.docx",
+      "sha256": "7ad69933c47b0a84bd381fa25858069ab3912e13e32ca40ae661ad7242d99926",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltAfter": 1,
+        "CobaltBefore": 1,
+        "CobaltVisible": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-zero-font-border-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Zero-font blank mark under automatic spacing; positive text and painted-border controls",
+      "input": "fixtures/export-reliability-zero-font-border-control.docx",
+      "sha256": "bd4c613f964bba0074e57a199d507f11520f741d2398c25995fd5b6a33514b30",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltAfter": 1,
+        "CobaltBefore": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-frame-cell",
+      "version": 1,
+      "category": "tables",
+      "description": "Cell text promoted into a legacy paragraph frame retains table and cell source ownership; ordinary cell control",
+      "input": "fixtures/export-reliability-frame-cell.docx",
+      "sha256": "9e7d437c8eac43897fa5ef06977fa87df511f18c292a8592f8dddcc407fbcec3",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltEnd": 1,
+        "CobaltFrame": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-frame-cell-control",
+      "version": 1,
+      "category": "tables",
+      "description": "Cell text promoted into a legacy paragraph frame retains table and cell source ownership; ordinary cell control",
+      "input": "fixtures/export-reliability-frame-cell-control.docx",
+      "sha256": "e07e40825f5e1ad195a69ff2dc7d9fc654274432b47ad41356421e88d4520b07",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltEnd": 1,
+        "CobaltFrame": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-border-reopen-single",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Twenty-two separate paragraph borders accumulate serialized-style rounding; integral-pixel border control (Docxodus #1439)",
+      "input": "fixtures/export-reliability-border-reopen-single.docx",
+      "sha256": "0e5a7f788f8bca02eddba895c8ad8b0de119eb39b1a746cea4a5ca3cfbae6c7e",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltPanel01": 1,
+        "CobaltPanel02": 1,
+        "CobaltPanel03": 1,
+        "CobaltPanel04": 1,
+        "CobaltPanel05": 1,
+        "CobaltPanel06": 1,
+        "CobaltPanel07": 1,
+        "CobaltPanel08": 1,
+        "CobaltPanel09": 1,
+        "CobaltPanel10": 1,
+        "CobaltPanel11": 1,
+        "CobaltPanel12": 1,
+        "CobaltPanel13": 1,
+        "CobaltPanel14": 1,
+        "CobaltPanel15": 1,
+        "CobaltPanel16": 1,
+        "CobaltPanel17": 1,
+        "CobaltPanel18": 1,
+        "CobaltPanel19": 1,
+        "CobaltPanel20": 1,
+        "CobaltPanel21": 1,
+        "CobaltPanel22": 1,
+        "CobaltPanelEnd": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-border-reopen-dashed",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Twenty-two separate paragraph borders accumulate serialized-style rounding; integral-pixel border control (Docxodus #1439)",
+      "input": "fixtures/export-reliability-border-reopen-dashed.docx",
+      "sha256": "38238b50b4195a39de324a7d4d7645be54ca305f07626e9883fb75c87e665916",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltPanel01": 1,
+        "CobaltPanel02": 1,
+        "CobaltPanel03": 1,
+        "CobaltPanel04": 1,
+        "CobaltPanel05": 1,
+        "CobaltPanel06": 1,
+        "CobaltPanel07": 1,
+        "CobaltPanel08": 1,
+        "CobaltPanel09": 1,
+        "CobaltPanel10": 1,
+        "CobaltPanel11": 1,
+        "CobaltPanel12": 1,
+        "CobaltPanel13": 1,
+        "CobaltPanel14": 1,
+        "CobaltPanel15": 1,
+        "CobaltPanel16": 1,
+        "CobaltPanel17": 1,
+        "CobaltPanel18": 1,
+        "CobaltPanel19": 1,
+        "CobaltPanel20": 1,
+        "CobaltPanel21": 1,
+        "CobaltPanel22": 1,
+        "CobaltPanelEnd": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-border-reopen-integral-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Twenty-two separate paragraph borders accumulate serialized-style rounding; integral-pixel border control (Docxodus #1439)",
+      "input": "fixtures/export-reliability-border-reopen-integral-control.docx",
+      "sha256": "27d6d642fc8b54a3083441e688671bed9bcbbe4cca10bda619ca2aa32d0e6d8f",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltPanel01": 1,
+        "CobaltPanel02": 1,
+        "CobaltPanel03": 1,
+        "CobaltPanel04": 1,
+        "CobaltPanel05": 1,
+        "CobaltPanel06": 1,
+        "CobaltPanel07": 1,
+        "CobaltPanel08": 1,
+        "CobaltPanel09": 1,
+        "CobaltPanel10": 1,
+        "CobaltPanel11": 1,
+        "CobaltPanel12": 1,
+        "CobaltPanel13": 1,
+        "CobaltPanel14": 1,
+        "CobaltPanel15": 1,
+        "CobaltPanel16": 1,
+        "CobaltPanel17": 1,
+        "CobaltPanel18": 1,
+        "CobaltPanel19": 1,
+        "CobaltPanel20": 1,
+        "CobaltPanel21": 1,
+        "CobaltPanel22": 1,
+        "CobaltPanelEnd": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-inline-picture-lines",
+      "version": 1,
+      "category": "images",
+      "description": "Three complete inline pictures share one paragraph across pages; separate-paragraph control (Docxodus #1440)",
+      "input": "fixtures/export-reliability-inline-picture-lines.docx",
+      "sha256": "0095ea3049a810735df51a1c13bd60fa5c3904359485488331ebc40416aa88ae",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltTile1": 1,
+        "CobaltTile2": 1,
+        "CobaltTile3": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-inline-picture-lines-control",
+      "version": 1,
+      "category": "images",
+      "description": "Three complete inline pictures share one paragraph across pages; separate-paragraph control (Docxodus #1440)",
+      "input": "fixtures/export-reliability-inline-picture-lines-control.docx",
+      "sha256": "a4172daa76b864e3a10afb1f281fb073f20b89d2d95b58560690a5ef2e344e60",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltTile1": 1,
+        "CobaltTile2": 1,
+        "CobaltTile3": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-inline-picture-oversized",
+      "version": 1,
+      "category": "images",
+      "description": "Truly oversized picture fits proportionally; individually fitting pictures retain original dimensions (Docxodus #1446)",
+      "input": "fixtures/export-reliability-inline-picture-oversized.docx",
+      "sha256": "aa8f1f951473ad330a344b6b28847529f0fa34fb7ee0a2c8a9bfbfd264d28267",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltTall1": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-inline-picture-fitting-control",
+      "version": 1,
+      "category": "images",
+      "description": "Truly oversized picture fits proportionally; individually fitting pictures retain original dimensions (Docxodus #1446)",
+      "input": "fixtures/export-reliability-inline-picture-fitting-control.docx",
+      "sha256": "1247069231b7d115afa69da838755f9061cd9400fd06422fd9f4f8f0e8faf9dd",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltTall1": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-inline-picture-fitting-pair",
+      "version": 1,
+      "category": "images",
+      "description": "Truly oversized picture fits proportionally; individually fitting pictures retain original dimensions (Docxodus #1446)",
+      "input": "fixtures/export-reliability-inline-picture-fitting-pair.docx",
+      "sha256": "923816b556285e4fa0466a244f4ea93497119205c10d5252da8c9a08f93aa962",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltTall1": 1,
+        "CobaltTall2": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-off-paper-blank-box",
+      "version": 1,
+      "category": "images",
+      "description": "Wholly off-paper fixed text box contains only a blank line; visible on-paper textbox control",
+      "input": "fixtures/export-reliability-off-paper-blank-box.docx",
+      "sha256": "5f98a20dcb8aa2ae67820cbcc1b0b47a8a1666c35755f08c4b77f340b67fd94a",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltBlankBoxBody": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-off-paper-blank-box-control",
+      "version": 1,
+      "category": "images",
+      "description": "Wholly off-paper fixed text box contains only a blank line; visible on-paper textbox control",
+      "input": "fixtures/export-reliability-off-paper-blank-box-control.docx",
+      "sha256": "6caffef7e526c90824db798324bbf5eff20c899bdfb953bf46471c1ef5e64a02",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltBlankBoxBody": 1,
+        "CobaltBoxInk": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-drawing-off-paper",
+      "version": 1,
+      "category": "images",
+      "description": "Page-positioned shape is clipped at its paper boundary without appending blank pages; visible and crossing-edge controls (Docxodus #1443)",
+      "input": "fixtures/export-reliability-drawing-off-paper.docx",
+      "sha256": "7b53a6065e349223533de7be201dd388f88c1eca7e3e6379b80d0a24499492cd",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltPaper": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-drawing-visible-control",
+      "version": 1,
+      "category": "images",
+      "description": "Page-positioned shape is clipped at its paper boundary without appending blank pages; visible and crossing-edge controls (Docxodus #1443)",
+      "input": "fixtures/export-reliability-drawing-visible-control.docx",
+      "sha256": "56313270a982170d576747977700f684ce634f5d3b959c6b70f94d591187031a",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltPaper": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-drawing-edge-control",
+      "version": 1,
+      "category": "images",
+      "description": "Page-positioned shape is clipped at its paper boundary without appending blank pages; visible and crossing-edge controls (Docxodus #1443)",
+      "input": "fixtures/export-reliability-drawing-edge-control.docx",
+      "sha256": "9959ba217b6c12d4c80c240dfa9392741011a7f6bbc4d38b7b8129265a2587da",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltPaper": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-floating-picture-height",
+      "version": 1,
+      "category": "images",
+      "description": "Wrapped picture extends beyond its ordinary line box after preceding flow; shorter fitting control (Docxodus #1448)",
+      "input": "fixtures/export-reliability-floating-picture-height.docx",
+      "sha256": "bb283b8acbeb8375ae2ea410002a3c123df8a65d67c7f5d3adfe23645406ecde",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltFloat": 1,
+        "CobaltFloatDone": 1,
+        "CobaltFlow01": 1,
+        "CobaltFlow02": 1,
+        "CobaltFlow03": 1,
+        "CobaltFlow04": 1,
+        "CobaltFlow05": 1,
+        "CobaltFlow06": 1,
+        "CobaltFlow07": 1,
+        "CobaltFlow08": 1,
+        "CobaltFlow09": 1,
+        "CobaltFlow10": 1,
+        "CobaltFlow11": 1,
+        "CobaltFlow12": 1,
+        "CobaltFlow13": 1,
+        "CobaltFlow14": 1,
+        "CobaltFlow15": 1,
+        "CobaltFlow16": 1,
+        "CobaltFlow17": 1,
+        "CobaltFlow18": 1,
+        "CobaltFlow19": 1,
+        "CobaltFlow20": 1,
+        "CobaltFlow21": 1,
+        "CobaltFlow22": 1,
+        "CobaltFlow23": 1,
+        "CobaltFlow24": 1,
+        "CobaltFlow25": 1,
+        "CobaltFlow26": 1,
+        "CobaltFlow27": 1,
+        "CobaltFlow28": 1,
+        "CobaltFlow29": 1,
+        "CobaltFlow30": 1,
+        "CobaltFlow31": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-floating-picture-height-control",
+      "version": 1,
+      "category": "images",
+      "description": "Wrapped picture extends beyond its ordinary line box after preceding flow; shorter fitting control (Docxodus #1448)",
+      "input": "fixtures/export-reliability-floating-picture-height-control.docx",
+      "sha256": "9704ecaa1cf65001563b38671f720badfe56db6f67868975f95ac37820733387",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltFloat": 1,
+        "CobaltFloatDone": 1,
+        "CobaltFlow01": 1,
+        "CobaltFlow02": 1,
+        "CobaltFlow03": 1,
+        "CobaltFlow04": 1,
+        "CobaltFlow05": 1,
+        "CobaltFlow06": 1,
+        "CobaltFlow07": 1,
+        "CobaltFlow08": 1,
+        "CobaltFlow09": 1,
+        "CobaltFlow10": 1,
+        "CobaltFlow11": 1,
+        "CobaltFlow12": 1,
+        "CobaltFlow13": 1,
+        "CobaltFlow14": 1,
+        "CobaltFlow15": 1,
+        "CobaltFlow16": 1,
+        "CobaltFlow17": 1,
+        "CobaltFlow18": 1,
+        "CobaltFlow19": 1,
+        "CobaltFlow20": 1,
+        "CobaltFlow21": 1,
+        "CobaltFlow22": 1,
+        "CobaltFlow23": 1,
+        "CobaltFlow24": 1,
+        "CobaltFlow25": 1,
+        "CobaltFlow26": 1,
+        "CobaltFlow27": 1,
+        "CobaltFlow28": 1,
+        "CobaltFlow29": 1,
+        "CobaltFlow30": 1,
+        "CobaltFlow31": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    },
+    {
+      "id": "export-reliability-header-vml-background",
+      "version": 2,
+      "category": "images",
+      "description": "Original page-sized VML background stays behind body text; existing page-absolute DrawingML case supplies the control (Docxodus #1447)",
+      "input": "fixtures/export-reliability-header-vml-background.docx",
+      "sha256": "f7ed49ea6465b8fca9ee0004e753e003b75d6d763369f0dce9997800d0c6fe00",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "CobaltVmlBody": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "CobaltVmlBody",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            35,
+            35,
+            345,
+            80
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "cdf1ab9867e83ca7ae14837fcbb8fdc241190e2950180509fbb6726a1607f5b8"
+      }
+    }
+  ]
+}

@@ -820,7 +820,7 @@ def export_reliability_cases(add):
 
     def case(name, category, description, texts, body, **kwargs):
         add('export-reliability-' + name, category, description, texts, body,
-            sect=kwargs.pop('sect', paper()), styles_xml=styles, **kwargs)
+            sect=kwargs.pop('sect', paper()), styles_xml=kwargs.pop('styles_xml', styles), **kwargs)
 
     # Adjacent running-story paragraph margins are additive in the final flex band.
     for story in ('header', 'footer'):
@@ -969,6 +969,155 @@ def export_reliability_cases(add):
         case('fractional-tab' + ('-control' if control else ''), 'paragraphs',
              'Bare fractional twip tab position; equivalent point-valued control (Docxodus #1436)',
              ['LarchTabLeft', 'LarchTabRight'], para(props=f'<w:tabs><w:tab w:val="left" w:pos="{position}"/></w:tabs>', runs=content))
+
+    # Original Cobalt cases for later export-layout mechanisms; previous inputs stay byte-identical.
+    for story in ('header', 'footer'):
+        for control in (False, True):
+            labels = [f'Cobalt{story.title()}{side}' for side in ('West', 'Middle', 'East')]
+            widths = (2000, 2000, 2000) if control else (3400, 3400, 3400)
+            content = table([para(label) for label in labels], widths)
+            case(story + '-wide-table' + ('-control' if control else ''), 'tables',
+                 'Running-story table wider than the paper retains every proportionally fitted column; body-width control',
+                 ['CobaltStoryBody'] + labels, para('CobaltStoryBody'),
+                 sect=paper(refs=f'<w:{story}Reference w:type="default" r:id="rStory"/>'), story=(story, content))
+
+    # Default and explicit style ids resolve to one contextual-spacing group inside a box.
+    contextual_styles = styles.replace('</w:styles>',
+        '<w:style w:type="paragraph" w:default="1" w:styleId="CobaltBase"><w:name w:val="Cobalt Base"/></w:style>'
+        '<w:style w:type="paragraph" w:styleId="CobaltOther"><w:name w:val="Cobalt Other"/><w:basedOn w:val="CobaltBase"/></w:style></w:styles>')
+    for mode in ('same-style', 'ordinary-control', 'different-style-control'):
+        labels = [f'CobaltBoxLine{i}' for i in range(1, 6)]
+        box_content = ''
+        for i, label in enumerate(labels):
+            style_id = 'CobaltOther' if mode == 'different-style-control' and i % 2 else 'CobaltBase'
+            style_prop = f'<w:pStyle w:val="{style_id}"/>' if i % 2 or mode == 'different-style-control' else ''
+            properties = (style_prop + '<w:spacing w:before="160" w:after="100" w:line="220" w:lineRule="exact"/>'
+                          + '<w:contextualSpacing w:val="' + ('0' if mode == 'ordinary-control' else '1') + '"/>')
+            box_content += para(label, properties)
+        height = 76 if mode == 'same-style' else 130
+        box = ('<w:r><w:pict><v:shape style="width:180pt;height:' + str(height) + 'pt" stroked="f" filled="f">'
+               '<v:textbox inset="0,0,0,0"><w:txbxContent>' + box_content + '</w:txbxContent></v:textbox></v:shape></w:pict></w:r>')
+        case('textbox-contextual-' + mode, 'paragraphs',
+             'Five textbox paragraphs share the resolved default style; contextual spacing groups them while disabled and distinct-style controls keep margins',
+             labels + ['CobaltBoxDone'], para(runs=box) + para('CobaltBoxDone'), styles_xml=contextual_styles,
+             namespaces_extra=' xmlns:v="urn:schemas-microsoft-com:vml"')
+
+    for mode in ('blank', 'visible-control', 'border-control'):
+        props = ('<w:rPr><w:sz w:val="0"/><w:szCs w:val="0"/></w:rPr>'
+                 + ('<w:spacing w:line="280" w:lineRule="exact"/><w:pBdr><w:bottom w:val="single" w:sz="8" w:space="2" w:color="294E70"/></w:pBdr>'
+                    if mode == 'border-control' else '<w:spacing w:line="276" w:lineRule="auto"/>'))
+        visible = mode == 'visible-control'
+        blank = para(props=props, runs=run('CobaltVisible' if visible else ' ', '<w:sz w:val="20"/>' if visible else '<w:sz w:val="0"/>'))
+        texts = ['CobaltBefore', 'CobaltAfter'] + (['CobaltVisible'] if visible else [])
+        case('zero-font-' + mode, 'paragraphs',
+             'Zero-font blank mark under automatic spacing; positive text and painted-border controls',
+             texts, para('CobaltBefore') + blank + para('CobaltAfter'))
+
+    for control in (False, True):
+        frame = '' if control else '<w:framePr w:w="2400" w:hAnchor="page" w:vAnchor="page" w:x="1200" w:y="2000" w:wrap="notBeside"/>'
+        contents = table([para('CobaltFrame', frame)], (4000,))
+        case('frame-cell' + ('-control' if control else ''), 'tables',
+             'Cell text promoted into a legacy paragraph frame retains table and cell source ownership; ordinary cell control',
+             ['CobaltFrame', 'CobaltEnd'], contents + para('CobaltEnd'))
+
+    for mode in ('single', 'dashed', 'integral-control'):
+        border_size, border_space = (16, 3) if mode == 'integral-control' else (10, 1)
+        labels = [f'CobaltPanel{i:02d}' for i in range(1, 23)]
+        body = ''
+        for i, label in enumerate(labels):
+            color = '225577' if i % 2 else '775522'
+            borders = ''.join(f'<w:{side} w:val="{mode if mode != "integral-control" else "single"}" w:sz="{border_size}" w:space="{border_space}" w:color="{color}"/>' for side in ('top', 'left', 'bottom', 'right'))
+            body += para(label, '<w:pBdr>' + borders + '</w:pBdr>' + pitch)
+        case('border-reopen-' + mode, 'paragraphs',
+             'Twenty-two separate paragraph borders accumulate serialized-style rounding; integral-pixel border control (Docxodus #1439)',
+             labels + ['CobaltPanelEnd'], body + para('CobaltPanelEnd'), sect=paper(height=14400))
+
+    def cobalt_picture(width, height, number=1, *, y=None, floating=False):
+        cx, cy = round(width * 12700), round(height * 12700)
+        if y is None and not floating:
+            opening, closing, placement = '<wp:inline distT="0" distB="0" distL="0" distR="0">', '</wp:inline>', ''
+        else:
+            opening = '<wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" relativeHeight="2" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1">'
+            closing = '</wp:anchor>'
+            placement = ('<wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="' + ('column' if floating else 'page')
+                         + '">' + ('<wp:align>right</wp:align>' if floating else '<wp:posOffset>762000</wp:posOffset>') + '</wp:positionH>'
+                         '<wp:positionV relativeFrom="' + ('paragraph' if floating else 'page') + '"><wp:posOffset>'
+                         + str(round((y or 0) * 12700)) + '</wp:posOffset></wp:positionV>')
+        wrap = '' if y is None and not floating else ('<wp:wrapSquare wrapText="bothSides"/>' if floating else '<wp:wrapNone/>')
+        return ('<w:r><w:drawing>' + opening + placement + f'<wp:extent cx="{cx}" cy="{cy}"/>' + wrap
+                + f'<wp:docPr id="{number}" name="Cobalt tile {number}"/><wp:cNvGraphicFramePr/>'
+                '<a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic>'
+                f'<pic:nvPicPr><pic:cNvPr id="{number}" name="Cobalt tile"/><pic:cNvPicPr/></pic:nvPicPr>'
+                '<pic:blipFill><a:blip r:embed="rCobalt"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill>'
+                f'<pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="{cx}" cy="{cy}"/></a:xfrm>'
+                '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic>'
+                + closing + '</w:drawing></w:r>')
+
+    picture_parts = {'word/media/cobalt-tile.png': png(64, 64, lambda x, y: (35, 90, 145) if (x // 8 + y // 8) % 2 else (238, 192, 76))}
+    picture_relations = [('rCobalt', 'image', 'media/cobalt-tile.png')]
+    picture_pitch = '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>'
+    for control in (False, True):
+        units = [cobalt_picture(72, 100, i + 1) + run(f' CobaltTile{i + 1}') for i in range(3)]
+        body = ''.join(para(props=picture_pitch, runs=unit) for unit in units) if control else para(props=picture_pitch, runs='<w:r><w:br/></w:r>'.join(units))
+        case('inline-picture-lines' + ('-control' if control else ''), 'images',
+             'Three complete inline pictures share one paragraph across pages; separate-paragraph control (Docxodus #1440)',
+             ['CobaltTile1', 'CobaltTile2', 'CobaltTile3'], body, sect=paper(height=4800, margin=400),
+             extra_parts=picture_parts, relations_extra=picture_relations)
+
+    for mode in ('oversized', 'fitting-control', 'fitting-pair'):
+        height = 470 if mode == 'oversized' else 160
+        count = 2 if mode == 'fitting-pair' else 1
+        units = [cobalt_picture(60, height, i + 1) + run(f' CobaltTall{i + 1}') for i in range(count)]
+        case('inline-picture-' + mode, 'images',
+             'Truly oversized picture fits proportionally; individually fitting pictures retain original dimensions (Docxodus #1446)',
+             [f'CobaltTall{i + 1}' for i in range(count)], para(props=picture_pitch, runs='<w:r><w:br/></w:r>'.join(units)),
+             sect=paper(height=4800, margin=400), extra_parts=picture_parts, relations_extra=picture_relations)
+
+    def cobalt_shape(top):
+        anchored = cobalt_picture(90, 60, y=top)
+        graphic = ('<a:graphic><a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+                   '<wps:wsp xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"><wps:cNvSpPr/>'
+                   '<wps:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="1143000" cy="762000"/></a:xfrm>'
+                   '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:solidFill><a:srgbClr val="3573A6"/></a:solidFill>'
+                   '<a:ln><a:noFill/></a:ln></wps:spPr><wps:bodyPr/></wps:wsp></a:graphicData></a:graphic>')
+        return anchored[:anchored.index('<a:graphic>')] + graphic + anchored[anchored.index('</a:graphic>') + len('</a:graphic>'):]
+
+    for control in (False, True):
+        box_text = para('CobaltBoxInk') if control else para()
+        body_pr = ('<wps:txbx><w:txbxContent>' + box_text + '</w:txbxContent></wps:txbx>'
+                   '<wps:bodyPr lIns="0" tIns="0" rIns="0" bIns="0"><a:noAutofit/></wps:bodyPr>')
+        box = cobalt_shape(110 if control else 540).replace('<a:solidFill><a:srgbClr val="3573A6"/></a:solidFill>', '<a:noFill/>').replace('<wps:bodyPr/>', body_pr)
+        case('off-paper-blank-box' + ('-control' if control else ''), 'images',
+             'Wholly off-paper fixed text box contains only a blank line; visible on-paper textbox control',
+             ['CobaltBlankBoxBody'] + (['CobaltBoxInk'] if control else []), para(runs=box + run('CobaltBlankBoxBody')))
+
+    for mode, top in [('off-paper', 530), ('visible-control', 90), ('edge-control', 410)]:
+        case('drawing-' + mode, 'images',
+             'Page-positioned shape is clipped at its paper boundary without appending blank pages; visible and crossing-edge controls (Docxodus #1443)',
+             ['CobaltPaper'], para(runs=cobalt_shape(top) + run('CobaltPaper')),
+             extra_parts=picture_parts, relations_extra=picture_relations)
+
+    for control in (False, True):
+        labels = [f'CobaltFlow{i:02d}' for i in range(1, 32)]
+        body = para(props='<w:spacing w:before="0" w:after="0" w:line="300" w:lineRule="exact"/>', runs='<w:r><w:br/></w:r>'.join(run(t) for t in labels)) + para(runs=run('CobaltFloat') + cobalt_picture(220, 130 if control else 220, floating=True)) + para('CobaltFloatDone')
+        case('floating-picture-height' + ('-control' if control else ''), 'images',
+             'Wrapped picture extends beyond its ordinary line box after preceding flow; shorter fitting control (Docxodus #1448)',
+             labels + ['CobaltFloat', 'CobaltFloatDone'], body, sect=paper(height=16000, margin=1400),
+             styles_xml=styles.replace('<w:pPrDefault><w:pPr>' + pitch + '<w:widowControl w:val="0"/></w:pPr></w:pPrDefault>', ''),
+             extra_parts=picture_parts, relations_extra=picture_relations)
+
+    vml = ('<w:p xmlns:v="urn:schemas-microsoft-com:vml" xmlns:r="' + R + '"><w:r><w:pict>'
+           '<v:shape style="position:absolute;margin-left:0pt;margin-top:0pt;width:380pt;height:440pt;'
+           'mso-position-horizontal-relative:page;mso-position-vertical-relative:page;z-index:-2" stroked="f">'
+           '<v:imagedata r:id="rCobalt"/></v:shape></w:pict></w:r></w:p>')
+    extras = {'word/media/cobalt-tile.png': png(64, 64, lambda x, y: (220, 234, 248) if x % 8 == 0 or y % 8 == 0 else (246, 250, 253))}
+    extras['word/_rels/header1.xml.rels'] = ('<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+        f'<Relationship Id="rCobalt" Type="{R}/image" Target="media/cobalt-tile.png"/></Relationships>')
+    case('header-vml-background', 'images',
+         'Original page-sized VML background stays behind body text; existing page-absolute DrawingML case supplies the control (Docxodus #1447)',
+         ['CobaltVmlBody'], para('CobaltVmlBody'),
+         sect=paper(refs='<w:headerReference w:type="default" r:id="rStory"/>'), story=('header', vml), extra_parts=extras,
+         assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'CobaltVmlBody', 'occurrence': 1, 'page': 1, 'rect': [35, 35, 345, 80]}])
 
 
 def generate():
@@ -2889,7 +3038,7 @@ def generate():
                 ' inline wrappers; public render must finish under the existing conversion deadline (Docxodus #1410)',
                 [text], para(runs=content), styles_xml=inline_styles)
     export_reliability_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v74', 'version': 74, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v75', 'version': 75, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

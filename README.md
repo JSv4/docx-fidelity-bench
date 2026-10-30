@@ -11,6 +11,15 @@ reproducer/control inputs. [Labeled before/after evidence](docs/results/editor-r
 records five baseline failures, five passing controls and ten candidate passes. The PDF and
 redline suites and their metrics are unchanged.
 
+`core-v75` adds 28 independently authored continuation and geometry cases, with an unchanged
+DrawingML background control reused in the focused set. Cases cover border-style reopening,
+inline and floating pictures, off-paper shapes and blank boxes, zero-font marks, promoted frames,
+text-box contextual spacing, and over-wide running-story tables. All 428 previous DOCX inputs
+and case assertions remain unchanged; shared generator hashes are refreshed.
+[Focused review evidence](docs/results/export-reliability-continuations/README.md) records exact
+source identities, public-API checks, bitmap inventories, and reference limitations without
+claiming a full-suite fidelity score.
+
 `core-v74` adds 34 independently authored export-reliability cases and controls: running-story
 spacing and margin cells, unpainted source carriers, fixed-textbox blank lines, oversized paragraphs
 and cells, citing tables, unused XML, fractional twips, table width, and header background pictures. All 394 previous DOCX
