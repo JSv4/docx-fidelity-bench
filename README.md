@@ -1,5 +1,10 @@
 # DOCX fidelity bench
 
+`redline-v21` adds Compare and Consolidate moved-paragraph reproducers for Docxodus #1420 and
+ordinary replacement controls. A structural assertion checks moved and deleted text carriers;
+accept/reject and schema checks remain mandatory. [LibreOffice and Word Online previews](docs/results/move-from-text/README.md)
+show the local outputs; Word Online opens both baseline and fixed output.
+
 An additional [unweighted editor browser diagnostic](docs/editor/README.md) covers review
 counts/targets, tab caret movement and native plain/rich clipboard actions with ten original
 reproducer/control inputs. [Labeled before/after evidence](docs/results/editor-review-tabs/README.md)

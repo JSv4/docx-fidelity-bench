@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v20')
-        self.assertEqual(len(registry['cases']), 194)
+        self.assertEqual(registry['suite']['id'], 'redline-v21')
+        self.assertEqual(len(registry['cases']), 198)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -157,6 +157,95 @@ class AuthoredCalibration(unittest.TestCase):
                                 rejected=revisions.resolve(package.story_parts(), 'reject'))
             for assertion in record['assertions']:
                 self.assertTrue(redline._assertion(assertion, package, resolved)['passed'], record['id'] + ' ' + assertion['type'])
+
+    def test_move_from_text_rejects_deletion_carriers_and_missing_moves(self):
+        record = case('redline-moved-from-text')
+        assertion = next(a for a in record['assertions'] if a['type'] == 'revision-text')
+        self.assertTrue(redline._assertion(assertion, load(record['authored']), {'redline': None})['passed'])
+        for mutation in ('deleted-text', 'deleted-instruction', 'missing-move'):
+            def change(root):
+                move = next(e for e in root.iter(W + 'moveFrom') if list(e.iter(W + 't')))
+                if mutation == 'deleted-text':
+                    next(move.iter(W + 't')).tag = W + 'delText'
+                elif mutation == 'deleted-instruction':
+                    next(move.iter(W + 'r')).append(ET.Element(W + 'delInstrText'))
+                else:
+                    move.tag = W + 'del'
+            altered = rewrite(record['authored'], change)
+            self.assertFalse(redline._assertion(assertion, altered, {'redline': None})['passed'], mutation)
+
+    def test_revision_text_rejects_wrong_deletion_carrier(self):
+        record = case('redline-moved-from-text-control')
+        assertion = next(a for a in record['assertions'] if a['type'] == 'revision-text')
+        self.assertTrue(redline._assertion(assertion, load(record['authored']), {'redline': None})['passed'])
+        def change(root):
+            next(root.iter(W + 'delText')).tag = W + 't'
+        self.assertFalse(redline._assertion(assertion, rewrite(record['authored'], change), {'redline': None})['passed'])
+
+    def test_split_deletion_may_cross_proofing_marks_but_not_content(self):
+        record = case('redline-moved-from-text-control')
+        assertion = next(a for a in record['assertions'] if a['type'] == 'revision-text')
+        def split(root, marker):
+            deletion = next(e for e in root.iter(W + 'del') if list(e.iter(W + 'delText')))
+            parent = next(e for e in root.iter() if deletion in list(e))
+            first = next(deletion.iter(W + 'delText'))
+            second = copy.deepcopy(deletion); second.set(W + 'id', '999')
+            tail = next(second.iter(W + 'delText'))
+            first.text, tail.text = first.text[:3], first.text[3:]
+            parent.insert(list(parent).index(deletion) + 1, marker)
+            parent.insert(list(parent).index(marker) + 1, second)
+        proof = ET.Element(W + 'proofErr', {W + 'type': 'spellStart'})
+        with_proof = rewrite(record['authored'], lambda root: split(root, proof))
+        self.assertTrue(redline._assertion(assertion, with_proof, {'redline': None})['passed'])
+        intervening = ET.Element(W + 'r'); ET.SubElement(intervening, W + 't').text = 'intervening'
+        with_content = rewrite(record['authored'], lambda root: split(root, intervening))
+        self.assertFalse(redline._assertion(assertion, with_content, {'redline': None})['passed'])
+
+    def test_move_text_joins_only_wrappers_in_the_same_body_range(self):
+        record = case('redline-moved-from-text')
+        assertion = next(a for a in record['assertions'] if a['type'] == 'revision-text')
+        def split(root):
+            move = next(e for e in root.iter(W + 'moveFrom') if list(e.iter(W + 't')))
+            parent = next(e for e in root.iter() if move in list(e))
+            text = next(move.iter(W + 't'))
+            second = copy.deepcopy(move)
+            second.set(W + 'id', '999')
+            second_text = next(second.iter(W + 't'))
+            text.text, second_text.text = text.text[:20], text.text[20:]
+            parent.insert(list(parent).index(move) + 1, second)
+        self.assertTrue(redline._assertion(assertion, rewrite(record['authored'], split), {'redline': None})['passed'])
+
+        def other_range(root):
+            split(root)
+            parent = next(e for e in root.iter(W + 'p') if len(list(e.iter(W + 'moveFrom'))) == 2)
+            second = list(parent.iter(W + 'moveFrom'))[1]
+            before = ET.Element(W + 'moveFromRangeEnd', {W + 'id': '101'})
+            after = ET.Element(W + 'moveFromRangeStart', {W + 'id': '998', W + 'name': 'other'})
+            parent.insert(list(parent).index(second), before)
+            parent.insert(list(parent).index(second), after)
+            next(e for e in parent if e.tag == W + 'moveFromRangeEnd' and e.get(W + 'id') == '101' and e is not before).set(W + 'id', '998')
+        self.assertFalse(redline._assertion(assertion, rewrite(record['authored'], other_range), {'redline': None})['passed'])
+
+        parts = members(record['authored'])
+        root = ET.fromstring(parts['word/document.xml'])
+        move = next(e for e in root.iter(W + 'moveFrom') if list(e.iter(W + 't')))
+        header = ET.Element(W + 'hdr'); paragraph = ET.SubElement(header, W + 'p'); paragraph.append(copy.deepcopy(move))
+        move.tag = W + 'del'
+        parts['word/document.xml'] = ET.tostring(root)
+        parts['word/header1.xml'] = ET.tostring(header)
+        rels = ET.fromstring(parts['word/_rels/document.xml.rels'])
+        ET.SubElement(rels, '{http://schemas.openxmlformats.org/package/2006/relationships}Relationship',
+                      Id='rTestHeader', Type='http://schemas.openxmlformats.org/officeDocument/2006/relationships/header', Target='header1.xml')
+        parts['word/_rels/document.xml.rels'] = ET.tostring(rels)
+        self.assertFalse(redline._assertion(assertion, revisions.Package(parts), {'redline': None})['passed'])
+
+    def test_malformed_revision_text_declarations_are_rejected(self):
+        for scope, kind, text in [('redline', 'moveFrom', ''), ('redline', 'del', None),
+                                  ('accepted', 'del', 'text'), ('redline', [], 'text')]:
+            registry = common.read_json(redline.MANIFEST)
+            registry['cases'][0]['assertions'].append(dict(type='revision-text', version=1, scope=scope, kind=kind, text=text))
+            with self.subTest(scope=scope, kind=kind, text=text), self.assertRaises(ValueError):
+                redline.validate_registry(registry)
 
     def test_run_atom_assertion_rejects_changed_attributes_and_equivalent_carriers(self):
         for name, attribute in [('ptab', 'alignment'), ('symbol', 'font'), ('page', 'clear'), ('cr', None)]:
