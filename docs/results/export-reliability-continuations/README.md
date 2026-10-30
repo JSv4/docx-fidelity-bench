@@ -58,7 +58,7 @@ both Docxodus builds. None of these differences is reported as a reference geome
 | Cell text promoted into a frame / ordinary cell text | [#1452](https://github.com/JSv4/Docxodus/pull/1452) |
 | Same resolved style contextual spacing / ordinary and different-style spacing | [#1453](https://github.com/JSv4/Docxodus/pull/1453) |
 | Blank fixed textbox below paper / visible on-paper textbox | [#1454](https://github.com/JSv4/Docxodus/pull/1454) |
-| Over-wide header/footer tables / fitting grids | [Running-story fitting commit](https://github.com/JSv4/Docxodus/commit/eba93b2eb37c2e35f82d8e551c6b38bc512ab444) |
+| Over-wide header/footer tables / fitting grids | [#1464](https://github.com/JSv4/Docxodus/pull/1464) ([captured source](https://github.com/JSv4/Docxodus/commit/eba93b2eb37c2e35f82d8e551c6b38bc512ab444)) |
 
 The border inputs trigger the product's own standalone-HTML reopen verification inside public
 PDF export. The screenshots themselves are delivered PDFs, not separate browser screenshots
