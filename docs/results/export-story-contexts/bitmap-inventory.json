@@ -1,0 +1,130 @@
+{
+  "schema": 1,
+  "status": "unscored-bitmap-diagnostic",
+  "tool": {
+    "sha256": "0e511f7429710d6b663682ff973dd41cfb3a3aca8dbb8c739dd7a035f7b2311d",
+    "version": "pdfimages version 25.03.0"
+  },
+  "note": "Counts are Poppler bitmap entries, excluding masks. Integer PPI is retained as reported; no precise physical-size or fidelity score is inferred.",
+  "sources": {
+    "baseline": "a72aac79858321ed64cdc850c2e66f4b4de59153",
+    "candidate": "a5ae28c88617f5c405ce575d5f8b10f828d8b6c9"
+  },
+  "cases": [
+    {
+      "id": "export-story-context-picture-square-front",
+      "renderer": "baseline",
+      "inputSha256": "f29a2f8f03e25b0f7ac8a0fbadd4be04a91fcb25855dbc8770670eb5bfcba4bc",
+      "expectedBitmapEntries": 1,
+      "status": "delivered",
+      "pdfSha256": "8bc1ca518cc39cc1c92e24c470301da6646ff0cc7d501a9f6bd0105a6355804c",
+      "bitmapEntries": [
+        {
+          "page": 1,
+          "index": 0,
+          "widthPixels": 40,
+          "heightPixels": 40,
+          "xPpi": 33.0,
+          "yPpi": 42.0
+        }
+      ],
+      "countMatches": true
+    },
+    {
+      "id": "export-story-context-picture-square-behind",
+      "renderer": "baseline",
+      "inputSha256": "9c106db8c68dc484b344ee04b244a5485423223445de61c582790a377f6251d3",
+      "expectedBitmapEntries": 1,
+      "status": "delivered",
+      "pdfSha256": "e43b1a9e22414d881da218f49807ae93407cceeaf03dab7aac42808360a35408",
+      "bitmapEntries": [
+        {
+          "page": 1,
+          "index": 0,
+          "widthPixels": 40,
+          "heightPixels": 40,
+          "xPpi": 33.0,
+          "yPpi": 42.0
+        }
+      ],
+      "countMatches": true
+    },
+    {
+      "id": "export-story-context-picture-none-behind-control",
+      "renderer": "baseline",
+      "inputSha256": "63873a4847a35a1805c7796cd192b26d53766cc967cc0e9084180115340962fa",
+      "expectedBitmapEntries": 1,
+      "status": "delivered",
+      "pdfSha256": "a284b4e2178cb7f15c21346a17749c20260714d3627578e646b9e7076deedbd2",
+      "bitmapEntries": [
+        {
+          "page": 1,
+          "index": 0,
+          "widthPixels": 40,
+          "heightPixels": 40,
+          "xPpi": 33.0,
+          "yPpi": 42.0
+        }
+      ],
+      "countMatches": true
+    },
+    {
+      "id": "export-story-context-picture-square-front",
+      "renderer": "candidate",
+      "inputSha256": "f29a2f8f03e25b0f7ac8a0fbadd4be04a91fcb25855dbc8770670eb5bfcba4bc",
+      "expectedBitmapEntries": 1,
+      "status": "delivered",
+      "pdfSha256": "6012c33f0cdb7816eeb05f5ba256a7432fdaca5c1c84c3a042c7381fd6e4d306",
+      "bitmapEntries": [
+        {
+          "page": 1,
+          "index": 0,
+          "widthPixels": 40,
+          "heightPixels": 40,
+          "xPpi": 33.0,
+          "yPpi": 42.0
+        }
+      ],
+      "countMatches": true
+    },
+    {
+      "id": "export-story-context-picture-square-behind",
+      "renderer": "candidate",
+      "inputSha256": "9c106db8c68dc484b344ee04b244a5485423223445de61c582790a377f6251d3",
+      "expectedBitmapEntries": 1,
+      "status": "delivered",
+      "pdfSha256": "8f318e2b4665e4d9f4930c42de1a56a8704b94e92e6ba7b84af4e604528f6ded",
+      "bitmapEntries": [
+        {
+          "page": 1,
+          "index": 0,
+          "widthPixels": 40,
+          "heightPixels": 40,
+          "xPpi": 33.0,
+          "yPpi": 42.0
+        }
+      ],
+      "countMatches": true
+    },
+    {
+      "id": "export-story-context-picture-none-behind-control",
+      "renderer": "candidate",
+      "inputSha256": "63873a4847a35a1805c7796cd192b26d53766cc967cc0e9084180115340962fa",
+      "expectedBitmapEntries": 1,
+      "status": "delivered",
+      "pdfSha256": "de764690fca1970c7d89bc2f93777574072d2a88551aea4956a3f41192260098",
+      "bitmapEntries": [
+        {
+          "page": 1,
+          "index": 0,
+          "widthPixels": 40,
+          "heightPixels": 40,
+          "xPpi": 33.0,
+          "yPpi": 42.0
+        }
+      ],
+      "countMatches": true
+    }
+  ],
+  "captureToolSha256": "e419d48de24491a390a0c2539745e256f6809fc973000e4d9bb17c526f4eb443"
+}

@@ -1,0 +1,1900 @@
+{
+  "schema": 1,
+  "suite": {
+    "id": "export-story-contexts-final-v2",
+    "version": 2,
+    "cases": [
+      "export-story-context-mixed-tabs-drawingml-isolated-control",
+      "export-story-context-mixed-tabs-drawingml-mixed",
+      "export-story-context-mixed-tabs-drawingml-single",
+      "export-story-context-mixed-tabs-vml-isolated-control",
+      "export-story-context-mixed-tabs-vml-mixed",
+      "export-story-context-mixed-tabs-vml-single",
+      "export-story-context-vml-panels-page",
+      "export-story-context-vml-panels-margin",
+      "export-story-context-vml-panels-inline-control",
+      "export-story-context-linked-textboxes-continued",
+      "export-story-context-linked-textboxes-fitting-control",
+      "export-story-context-linked-textboxes-unlinked-control",
+      "export-story-context-source-clip-drawingml-visible-control",
+      "export-story-context-source-clip-drawingml-clipped",
+      "export-story-context-source-clip-vml-visible-control",
+      "export-story-context-source-clip-vml-clipped",
+      "export-story-context-raised-inline-box-unraised-control",
+      "export-story-context-raised-inline-box-raised",
+      "export-story-context-offpaper-margin-paragraph-visible-control",
+      "export-story-context-offpaper-margin-paragraph-outside",
+      "export-story-context-textbox-tab-width-drawingml-wrapping-prefix",
+      "export-story-context-textbox-tab-width-drawingml-short-prefix-control",
+      "export-story-context-textbox-tab-width-drawingml-inset-control",
+      "export-story-context-textbox-tab-width-vml-wrapping-prefix",
+      "export-story-context-textbox-tab-width-vml-short-prefix-control",
+      "export-story-context-textbox-tab-width-vml-inset-control",
+      "export-story-context-vml-leaf-oval-inline-control",
+      "export-story-context-vml-leaf-oval-positioned",
+      "export-story-context-vml-leaf-rect-inline-control",
+      "export-story-context-vml-leaf-rect-positioned",
+      "export-story-context-shape-clearance-front-fitting-control",
+      "export-story-context-shape-clearance-front-oversized",
+      "export-story-context-shape-clearance-behind-fitting-control",
+      "export-story-context-shape-clearance-behind-oversized",
+      "export-story-context-picture-square-front",
+      "export-story-context-picture-square-behind",
+      "export-story-context-picture-none-behind-control"
+    ]
+  },
+  "cases": [
+    {
+      "id": "export-story-context-mixed-tabs-drawingml-isolated-control",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "Nested textbox tab/text run partitions retain the same three authored columns; isolated-run control (Docxodus #1465)",
+      "input": "fixtures/export-story-context-mixed-tabs-drawingml-isolated-control.docx",
+      "sha256": "77d489af0176d724144684777dcee1535a1fbd0ab233cfa9a7f3ac918489a326",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperA01": 1,
+        "JasperA02": 1,
+        "JasperA03": 1,
+        "JasperA04": 1,
+        "JasperA05": 1,
+        "JasperB01": 1,
+        "JasperB02": 1,
+        "JasperB03": 1,
+        "JasperB04": 1,
+        "JasperB05": 1,
+        "JasperC01": 1,
+        "JasperC02": 1,
+        "JasperC03": 1,
+        "JasperC04": 1,
+        "JasperC05": 1,
+        "JasperColumnsReceipt": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperB01",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            146,
+            35,
+            230,
+            65
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperC01",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            256,
+            35,
+            340,
+            65
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-mixed-tabs-drawingml-mixed",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "Nested textbox tab/text run partitions retain the same three authored columns; isolated-run control (Docxodus #1465)",
+      "input": "fixtures/export-story-context-mixed-tabs-drawingml-mixed.docx",
+      "sha256": "0d08da457ef6b8f794e10ab288041a8ff6bc115d664d54be31fb5e7957b8e1a7",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperA01": 1,
+        "JasperA02": 1,
+        "JasperA03": 1,
+        "JasperA04": 1,
+        "JasperA05": 1,
+        "JasperB01": 1,
+        "JasperB02": 1,
+        "JasperB03": 1,
+        "JasperB04": 1,
+        "JasperB05": 1,
+        "JasperC01": 1,
+        "JasperC02": 1,
+        "JasperC03": 1,
+        "JasperC04": 1,
+        "JasperC05": 1,
+        "JasperColumnsReceipt": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperB01",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            146,
+            35,
+            230,
+            65
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperC01",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            256,
+            35,
+            340,
+            65
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-mixed-tabs-drawingml-single",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "Nested textbox tab/text run partitions retain the same three authored columns; isolated-run control (Docxodus #1465)",
+      "input": "fixtures/export-story-context-mixed-tabs-drawingml-single.docx",
+      "sha256": "e16c23b475bbb01d79fd35a0e49a0c2493e0d56c7e55b5d05c54247b1b1d7c65",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperA01": 1,
+        "JasperA02": 1,
+        "JasperA03": 1,
+        "JasperA04": 1,
+        "JasperA05": 1,
+        "JasperB01": 1,
+        "JasperB02": 1,
+        "JasperB03": 1,
+        "JasperB04": 1,
+        "JasperB05": 1,
+        "JasperC01": 1,
+        "JasperC02": 1,
+        "JasperC03": 1,
+        "JasperC04": 1,
+        "JasperC05": 1,
+        "JasperColumnsReceipt": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperB01",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            146,
+            35,
+            230,
+            65
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperC01",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            256,
+            35,
+            340,
+            65
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-mixed-tabs-vml-isolated-control",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "Nested textbox tab/text run partitions retain the same three authored columns; isolated-run control (Docxodus #1465)",
+      "input": "fixtures/export-story-context-mixed-tabs-vml-isolated-control.docx",
+      "sha256": "3d2645c35e038591cff13c523082f62ca5d0620994e45c9294db1c3936cd2c2d",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperA01": 1,
+        "JasperA02": 1,
+        "JasperA03": 1,
+        "JasperA04": 1,
+        "JasperA05": 1,
+        "JasperB01": 1,
+        "JasperB02": 1,
+        "JasperB03": 1,
+        "JasperB04": 1,
+        "JasperB05": 1,
+        "JasperC01": 1,
+        "JasperC02": 1,
+        "JasperC03": 1,
+        "JasperC04": 1,
+        "JasperC05": 1,
+        "JasperColumnsReceipt": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperB01",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            146,
+            35,
+            230,
+            65
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperC01",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            256,
+            35,
+            340,
+            65
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-mixed-tabs-vml-mixed",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "Nested textbox tab/text run partitions retain the same three authored columns; isolated-run control (Docxodus #1465)",
+      "input": "fixtures/export-story-context-mixed-tabs-vml-mixed.docx",
+      "sha256": "762216741259f091356e9251c1c39c38dcccf3e57958fe6ff973798d18c75e0a",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperA01": 1,
+        "JasperA02": 1,
+        "JasperA03": 1,
+        "JasperA04": 1,
+        "JasperA05": 1,
+        "JasperB01": 1,
+        "JasperB02": 1,
+        "JasperB03": 1,
+        "JasperB04": 1,
+        "JasperB05": 1,
+        "JasperC01": 1,
+        "JasperC02": 1,
+        "JasperC03": 1,
+        "JasperC04": 1,
+        "JasperC05": 1,
+        "JasperColumnsReceipt": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperB01",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            146,
+            35,
+            230,
+            65
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperC01",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            256,
+            35,
+            340,
+            65
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-mixed-tabs-vml-single",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "Nested textbox tab/text run partitions retain the same three authored columns; isolated-run control (Docxodus #1465)",
+      "input": "fixtures/export-story-context-mixed-tabs-vml-single.docx",
+      "sha256": "9c0f8e9dbda0f0c867c18e9182118faa0ed2778762de7b5c0411f743aa417aec",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperA01": 1,
+        "JasperA02": 1,
+        "JasperA03": 1,
+        "JasperA04": 1,
+        "JasperA05": 1,
+        "JasperB01": 1,
+        "JasperB02": 1,
+        "JasperB03": 1,
+        "JasperB04": 1,
+        "JasperB05": 1,
+        "JasperC01": 1,
+        "JasperC02": 1,
+        "JasperC03": 1,
+        "JasperC04": 1,
+        "JasperC05": 1,
+        "JasperColumnsReceipt": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperB01",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            146,
+            35,
+            230,
+            65
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperC01",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            256,
+            35,
+            340,
+            65
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-vml-panels-page",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "Four explicitly positioned VML panels exceed body height if stacked inline; page/margin and fitting inline controls (Docxodus #1462)",
+      "input": "fixtures/export-story-context-vml-panels-page.docx",
+      "sha256": "521275b3d7c572ad6d728c56860b4d00a8856f80cce777a4fd6bd9f20925a6f4",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperPanel1A": 1,
+        "JasperPanel1B": 1,
+        "JasperPanel1C": 1,
+        "JasperPanel2A": 1,
+        "JasperPanel2B": 1,
+        "JasperPanel2C": 1,
+        "JasperPanel3A": 1,
+        "JasperPanel3B": 1,
+        "JasperPanel3C": 1,
+        "JasperPanel4A": 1,
+        "JasperPanel4B": 1,
+        "JasperPanel4C": 1,
+        "JasperPanelsReceipt": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperPanel1A",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            22,
+            67,
+            200,
+            95
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperPanel2A",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            247,
+            67,
+            425,
+            95
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperPanel3A",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            22,
+            252,
+            200,
+            280
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperPanel4A",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            247,
+            252,
+            425,
+            280
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-vml-panels-margin",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "Four explicitly positioned VML panels exceed body height if stacked inline; page/margin and fitting inline controls (Docxodus #1462)",
+      "input": "fixtures/export-story-context-vml-panels-margin.docx",
+      "sha256": "7e2fa95ff7a14fafb1806c0d408515f08f63796fe8b51a82f0376ef4e884f2a6",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperPanel1A": 1,
+        "JasperPanel1B": 1,
+        "JasperPanel1C": 1,
+        "JasperPanel2A": 1,
+        "JasperPanel2B": 1,
+        "JasperPanel2C": 1,
+        "JasperPanel3A": 1,
+        "JasperPanel3B": 1,
+        "JasperPanel3C": 1,
+        "JasperPanel4A": 1,
+        "JasperPanel4B": 1,
+        "JasperPanel4C": 1,
+        "JasperPanelsReceipt": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperPanel1A",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            22,
+            67,
+            200,
+            95
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperPanel2A",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            247,
+            67,
+            425,
+            95
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperPanel3A",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            22,
+            252,
+            200,
+            280
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperPanel4A",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            247,
+            252,
+            425,
+            280
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-vml-panels-inline-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Four explicitly positioned VML panels exceed body height if stacked inline; page/margin and fitting inline controls (Docxodus #1462)",
+      "input": "fixtures/export-story-context-vml-panels-inline-control.docx",
+      "sha256": "61acea8868cbf3e8b5ebb8a9ace633139cfa8758e6abdd307a8b8a2658617c6f",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperPanel1A": 1,
+        "JasperPanel1B": 1,
+        "JasperPanel1C": 1,
+        "JasperPanelsReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-linked-textboxes-continued",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "One ordinary story continues through unequal fixed WPS boxes; fitting linked and taller unlinked controls",
+      "input": "fixtures/export-story-context-linked-textboxes-continued.docx",
+      "sha256": "c11d4598065a856fbd5825d615cde5b2520deb295bbc51aaebc5a70ae1d2394e",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperFlow01": 1,
+        "JasperFlow02": 1,
+        "JasperFlow03": 1,
+        "JasperFlow04": 1,
+        "JasperFlow05": 1,
+        "JasperFlow06": 1,
+        "JasperFlow07": 1,
+        "JasperFlow08": 1,
+        "JasperFlow09": 1,
+        "JasperFlow10": 1,
+        "JasperFlow11": 1,
+        "JasperFlow12": 1,
+        "JasperFlow13": 1,
+        "JasperFlow14": 1,
+        "JasperFlow15": 1,
+        "JasperFlow16": 1,
+        "JasperFlow17": 1,
+        "JasperFlow18": 1,
+        "JasperFlow19": 1,
+        "JasperFlow20": 1,
+        "JasperFlow21": 1,
+        "JasperFlow22": 1,
+        "JasperFlow23": 1,
+        "JasperFlow24": 1,
+        "JasperFlow25": 1,
+        "JasperFlow26": 1,
+        "JasperFlow27": 1,
+        "JasperFlow28": 1,
+        "JasperFlow29": 1,
+        "JasperFlow30": 1,
+        "JasperFlow31": 1,
+        "JasperFlow32": 1,
+        "JasperFlow33": 1,
+        "JasperFlow34": 1,
+        "JasperFlow35": 1,
+        "JasperFlow36": 1,
+        "JasperFlow37": 1,
+        "JasperFlow38": 1,
+        "JasperFlow39": 1,
+        "JasperFlow40": 1,
+        "JasperFlow41": 1,
+        "JasperFlow42": 1,
+        "JasperLinkedReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-linked-textboxes-fitting-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "One ordinary story continues through unequal fixed WPS boxes; fitting linked and taller unlinked controls",
+      "input": "fixtures/export-story-context-linked-textboxes-fitting-control.docx",
+      "sha256": "4512df0890c3700757124e3179029219e41145ae680d7acdc9118f351cb0bcc5",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperFlow01": 1,
+        "JasperFlow02": 1,
+        "JasperFlow03": 1,
+        "JasperFlow04": 1,
+        "JasperFlow05": 1,
+        "JasperFlow06": 1,
+        "JasperFlow07": 1,
+        "JasperFlow08": 1,
+        "JasperLinkedReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-linked-textboxes-unlinked-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "One ordinary story continues through unequal fixed WPS boxes; fitting linked and taller unlinked controls",
+      "input": "fixtures/export-story-context-linked-textboxes-unlinked-control.docx",
+      "sha256": "4a2d6d62226a491a15d8b111932d8ed190c8563872aa7827cbefe5f90519f680",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperFlow01": 1,
+        "JasperFlow02": 1,
+        "JasperFlow03": 1,
+        "JasperFlow04": 1,
+        "JasperFlow05": 1,
+        "JasperFlow06": 1,
+        "JasperFlow07": 1,
+        "JasperFlow08": 1,
+        "JasperFlow09": 1,
+        "JasperFlow10": 1,
+        "JasperFlow11": 1,
+        "JasperFlow12": 1,
+        "JasperFlow13": 1,
+        "JasperFlow14": 1,
+        "JasperFlow15": 1,
+        "JasperFlow16": 1,
+        "JasperFlow17": 1,
+        "JasperFlow18": 1,
+        "JasperFlow19": 1,
+        "JasperFlow20": 1,
+        "JasperFlow21": 1,
+        "JasperFlow22": 1,
+        "JasperFlow23": 1,
+        "JasperFlow24": 1,
+        "JasperFlow25": 1,
+        "JasperFlow26": 1,
+        "JasperFlow27": 1,
+        "JasperFlow28": 1,
+        "JasperFlow29": 1,
+        "JasperFlow30": 1,
+        "JasperFlow31": 1,
+        "JasperFlow32": 1,
+        "JasperFlow33": 1,
+        "JasperFlow34": 1,
+        "JasperFlow35": 1,
+        "JasperFlow36": 1,
+        "JasperFlow37": 1,
+        "JasperFlow38": 1,
+        "JasperFlow39": 1,
+        "JasperFlow40": 1,
+        "JasperFlow41": 1,
+        "JasperFlow42": 1,
+        "JasperLinkedReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-source-clip-drawingml-visible-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Two blank exact lines separate the final paragraph from a fixed zero-inset clip by more than two font ems; taller visible control",
+      "input": "fixtures/export-story-context-source-clip-drawingml-visible-control.docx",
+      "sha256": "4878e7a70ebd94dca1bb7f1ec1283911670ab904fc3f42cd655b263456df1808",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperClipA": 1,
+        "JasperClipB": 1,
+        "JasperClipC": 1,
+        "JasperClipReceipt": 1,
+        "JasperClipTail": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-source-clip-drawingml-clipped",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Two blank exact lines separate the final paragraph from a fixed zero-inset clip by more than two font ems; taller visible control",
+      "input": "fixtures/export-story-context-source-clip-drawingml-clipped.docx",
+      "sha256": "3f7234a852a64c4bb8cd838030a2d45ee4e61226d1e26bded04aa6db802843a5",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperClipA": 1,
+        "JasperClipB": 1,
+        "JasperClipC": 1,
+        "JasperClipReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      },
+      "clippedTokens": {
+        "JasperClipTail": 1
+      }
+    },
+    {
+      "id": "export-story-context-source-clip-vml-visible-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Two blank exact lines separate the final paragraph from a fixed zero-inset clip by more than two font ems; taller visible control",
+      "input": "fixtures/export-story-context-source-clip-vml-visible-control.docx",
+      "sha256": "6ad84a1d93f01ac684459de1e1c15d1e5b57e6d7131e40547191b7c0864ac226",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperClipA": 1,
+        "JasperClipB": 1,
+        "JasperClipC": 1,
+        "JasperClipReceipt": 1,
+        "JasperClipTail": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-source-clip-vml-clipped",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Two blank exact lines separate the final paragraph from a fixed zero-inset clip by more than two font ems; taller visible control",
+      "input": "fixtures/export-story-context-source-clip-vml-clipped.docx",
+      "sha256": "bf8fb61a42cbf56d6384f0e7776f75438e53cd6c900177cbfe092f9d2d3aa13d",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperClipA": 1,
+        "JasperClipB": 1,
+        "JasperClipC": 1,
+        "JasperClipReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      },
+      "clippedTokens": {
+        "JasperClipTail": 1
+      }
+    },
+    {
+      "id": "export-story-context-raised-inline-box-unraised-control",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "An explicit positive run position raises an inline textbox into the paper margin while preserving ordinary body flow; unraised control",
+      "input": "fixtures/export-story-context-raised-inline-box-unraised-control.docx",
+      "sha256": "ef2b6da7e3059f6bc2be22c95d30a7d32743f04071dad0a83828cfb93d8a7c3d",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperLiftLabel": 1,
+        "JasperLiftReceipt": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperLiftLabel",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            45,
+            35,
+            220,
+            70
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-raised-inline-box-raised",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "An explicit positive run position raises an inline textbox into the paper margin while preserving ordinary body flow; unraised control",
+      "input": "fixtures/export-story-context-raised-inline-box-raised.docx",
+      "sha256": "dc7969c278ad9eb3fac72d6968c962de6280b51217df72f21cd0efcfdabcf035",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperLiftLabel": 1,
+        "JasperLiftReceipt": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperLiftLabel",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            45,
+            5,
+            220,
+            38
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-offpaper-margin-paragraph-visible-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "A fixed zero-inset margin/paragraph textbox lies wholly beyond paper under a conservative horizontal bound; same on-paper control",
+      "input": "fixtures/export-story-context-offpaper-margin-paragraph-visible-control.docx",
+      "sha256": "1e0d102f0d23290861de28d6db299f7efbf1612df2e6105dea42840faf27adc8",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperOffA": 1,
+        "JasperOffB": 1,
+        "JasperOffReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-offpaper-margin-paragraph-outside",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "A fixed zero-inset margin/paragraph textbox lies wholly beyond paper under a conservative horizontal bound; same on-paper control",
+      "input": "fixtures/export-story-context-offpaper-margin-paragraph-outside.docx",
+      "sha256": "f388372e53dbbe00d0dfbba4ccb4d8ae157902411c8c1d53868791df100518f7",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperOffReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      },
+      "clippedTokens": {
+        "JasperOffA": 1,
+        "JasperOffB": 1
+      }
+    },
+    {
+      "id": "export-story-context-textbox-tab-width-drawingml-wrapping-prefix",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Known fixed textbox content width permits a long prefix to wrap before an isolated tab; short-prefix and equivalent inset controls",
+      "input": "fixtures/export-story-context-textbox-tab-width-drawingml-wrapping-prefix.docx",
+      "sha256": "cd4dc45fa474ecc2df392cd4bf9b4a9dc8661da26a2208f8323b2a787d27d62c",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperTab01": 1,
+        "JasperTab02": 1,
+        "JasperTab03": 1,
+        "JasperTab04": 1,
+        "JasperTab05": 1,
+        "JasperTab06": 1,
+        "JasperTab07": 1,
+        "JasperTab08": 1,
+        "JasperTab09": 1,
+        "JasperTab10": 1,
+        "JasperTab11": 1,
+        "JasperTab12": 1,
+        "JasperTab13": 1,
+        "JasperTab14": 1,
+        "JasperTab15": 1,
+        "JasperTab16": 1,
+        "JasperTab17": 1,
+        "JasperTab18": 1,
+        "JasperTab19": 1,
+        "JasperTab20": 1,
+        "JasperTab21": 1,
+        "JasperTab22": 1,
+        "JasperTab23": 1,
+        "JasperTab24": 1,
+        "JasperTab25": 1,
+        "JasperTab26": 1,
+        "JasperTab27": 1,
+        "JasperTab28": 1,
+        "JasperTab29": 1,
+        "JasperTab30": 1,
+        "JasperTab31": 1,
+        "JasperTab32": 1,
+        "JasperTab33": 1,
+        "JasperTab34": 1,
+        "JasperTab35": 1,
+        "JasperTab36": 1,
+        "JasperTab37": 1,
+        "JasperTab38": 1,
+        "JasperTabStop": 1,
+        "JasperTabWidthReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-textbox-tab-width-drawingml-short-prefix-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Known fixed textbox content width permits a long prefix to wrap before an isolated tab; short-prefix and equivalent inset controls",
+      "input": "fixtures/export-story-context-textbox-tab-width-drawingml-short-prefix-control.docx",
+      "sha256": "6d0040ba35a6cac9993a02094f797a8ebbd18a7bed209f00647f6ee5e6995229",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperTab01": 1,
+        "JasperTab02": 1,
+        "JasperTab03": 1,
+        "JasperTabStop": 1,
+        "JasperTabWidthReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-textbox-tab-width-drawingml-inset-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Known fixed textbox content width permits a long prefix to wrap before an isolated tab; short-prefix and equivalent inset controls",
+      "input": "fixtures/export-story-context-textbox-tab-width-drawingml-inset-control.docx",
+      "sha256": "b3790a66032072f5012fc2a4b550307bc36df6ed69e11508f7075e2f8a88e9df",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperTab01": 1,
+        "JasperTab02": 1,
+        "JasperTab03": 1,
+        "JasperTab04": 1,
+        "JasperTab05": 1,
+        "JasperTab06": 1,
+        "JasperTab07": 1,
+        "JasperTab08": 1,
+        "JasperTab09": 1,
+        "JasperTab10": 1,
+        "JasperTab11": 1,
+        "JasperTab12": 1,
+        "JasperTab13": 1,
+        "JasperTab14": 1,
+        "JasperTab15": 1,
+        "JasperTab16": 1,
+        "JasperTab17": 1,
+        "JasperTab18": 1,
+        "JasperTab19": 1,
+        "JasperTab20": 1,
+        "JasperTab21": 1,
+        "JasperTab22": 1,
+        "JasperTab23": 1,
+        "JasperTab24": 1,
+        "JasperTab25": 1,
+        "JasperTab26": 1,
+        "JasperTab27": 1,
+        "JasperTab28": 1,
+        "JasperTab29": 1,
+        "JasperTab30": 1,
+        "JasperTab31": 1,
+        "JasperTab32": 1,
+        "JasperTab33": 1,
+        "JasperTab34": 1,
+        "JasperTab35": 1,
+        "JasperTab36": 1,
+        "JasperTab37": 1,
+        "JasperTab38": 1,
+        "JasperTabStop": 1,
+        "JasperTabWidthReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-textbox-tab-width-vml-wrapping-prefix",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Known fixed textbox content width permits a long prefix to wrap before an isolated tab; short-prefix and equivalent inset controls",
+      "input": "fixtures/export-story-context-textbox-tab-width-vml-wrapping-prefix.docx",
+      "sha256": "36ea1cdd276f359877da6ae404162510dcc9d1abc45bf18950d31de83cec9f04",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperTab01": 1,
+        "JasperTab02": 1,
+        "JasperTab03": 1,
+        "JasperTab04": 1,
+        "JasperTab05": 1,
+        "JasperTab06": 1,
+        "JasperTab07": 1,
+        "JasperTab08": 1,
+        "JasperTab09": 1,
+        "JasperTab10": 1,
+        "JasperTab11": 1,
+        "JasperTab12": 1,
+        "JasperTab13": 1,
+        "JasperTab14": 1,
+        "JasperTab15": 1,
+        "JasperTab16": 1,
+        "JasperTab17": 1,
+        "JasperTab18": 1,
+        "JasperTab19": 1,
+        "JasperTab20": 1,
+        "JasperTab21": 1,
+        "JasperTab22": 1,
+        "JasperTab23": 1,
+        "JasperTab24": 1,
+        "JasperTab25": 1,
+        "JasperTab26": 1,
+        "JasperTab27": 1,
+        "JasperTab28": 1,
+        "JasperTab29": 1,
+        "JasperTab30": 1,
+        "JasperTab31": 1,
+        "JasperTab32": 1,
+        "JasperTab33": 1,
+        "JasperTab34": 1,
+        "JasperTab35": 1,
+        "JasperTab36": 1,
+        "JasperTab37": 1,
+        "JasperTab38": 1,
+        "JasperTabStop": 1,
+        "JasperTabWidthReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-textbox-tab-width-vml-short-prefix-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Known fixed textbox content width permits a long prefix to wrap before an isolated tab; short-prefix and equivalent inset controls",
+      "input": "fixtures/export-story-context-textbox-tab-width-vml-short-prefix-control.docx",
+      "sha256": "cba87baec0bd55fe44677115e566a0c1d0e6024517722ccbee83ebd421b1a0a6",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperTab01": 1,
+        "JasperTab02": 1,
+        "JasperTab03": 1,
+        "JasperTabStop": 1,
+        "JasperTabWidthReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-textbox-tab-width-vml-inset-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Known fixed textbox content width permits a long prefix to wrap before an isolated tab; short-prefix and equivalent inset controls",
+      "input": "fixtures/export-story-context-textbox-tab-width-vml-inset-control.docx",
+      "sha256": "4c516c7849165560c3fe3eb5e0062c18327d1181351106f7e215e90a26301153",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperTab01": 1,
+        "JasperTab02": 1,
+        "JasperTab03": 1,
+        "JasperTab04": 1,
+        "JasperTab05": 1,
+        "JasperTab06": 1,
+        "JasperTab07": 1,
+        "JasperTab08": 1,
+        "JasperTab09": 1,
+        "JasperTab10": 1,
+        "JasperTab11": 1,
+        "JasperTab12": 1,
+        "JasperTab13": 1,
+        "JasperTab14": 1,
+        "JasperTab15": 1,
+        "JasperTab16": 1,
+        "JasperTab17": 1,
+        "JasperTab18": 1,
+        "JasperTab19": 1,
+        "JasperTab20": 1,
+        "JasperTab21": 1,
+        "JasperTab22": 1,
+        "JasperTab23": 1,
+        "JasperTab24": 1,
+        "JasperTab25": 1,
+        "JasperTab26": 1,
+        "JasperTab27": 1,
+        "JasperTab28": 1,
+        "JasperTab29": 1,
+        "JasperTab30": 1,
+        "JasperTab31": 1,
+        "JasperTab32": 1,
+        "JasperTab33": 1,
+        "JasperTab34": 1,
+        "JasperTab35": 1,
+        "JasperTab36": 1,
+        "JasperTab37": 1,
+        "JasperTab38": 1,
+        "JasperTabStop": 1,
+        "JasperTabWidthReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-vml-leaf-oval-inline-control",
+      "version": 1,
+      "category": "images",
+      "description": "Page-positioned legacy leaf keeps its authored fallback outside body flow; fitting inline control, not oval/rectangle fidelity",
+      "input": "fixtures/export-story-context-vml-leaf-oval-inline-control.docx",
+      "sha256": "3d65a0dac611e0ccf47f0b2a2cee632b9880deaba257dee7238b9d38b08e84da",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperLeafAfter": 1,
+        "JasperLeafBefore": 1,
+        "[SHAPE]": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-vml-leaf-oval-positioned",
+      "version": 1,
+      "category": "images",
+      "description": "Page-positioned legacy leaf keeps its authored fallback outside body flow; fitting inline control, not oval/rectangle fidelity",
+      "input": "fixtures/export-story-context-vml-leaf-oval-positioned.docx",
+      "sha256": "5702562b9b9c281a30f2e4746adb9d974a9c595397ac70bc4c37a9a0bcc870b8",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperLeafAfter": 1,
+        "JasperLeafBefore": 1,
+        "[SHAPE]": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-vml-leaf-rect-inline-control",
+      "version": 1,
+      "category": "images",
+      "description": "Page-positioned legacy leaf keeps its authored fallback outside body flow; fitting inline control, not oval/rectangle fidelity",
+      "input": "fixtures/export-story-context-vml-leaf-rect-inline-control.docx",
+      "sha256": "6fa937cb5d5d4ac3d8063d3a283eb1bbe786bd4dc1da120155bf5c106010f398",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperLeafAfter": 1,
+        "JasperLeafBefore": 1,
+        "[SHAPE]": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-vml-leaf-rect-positioned",
+      "version": 1,
+      "category": "images",
+      "description": "Page-positioned legacy leaf keeps its authored fallback outside body flow; fitting inline control, not oval/rectangle fidelity",
+      "input": "fixtures/export-story-context-vml-leaf-rect-positioned.docx",
+      "sha256": "bc82e596ebf6247fa16da694d2b85fc3ef70cddf8151fad766209ae6cac15b37",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperLeafAfter": 1,
+        "JasperLeafBefore": 1,
+        "[SHAPE]": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-shape-clearance-front-fitting-control",
+      "version": 1,
+      "category": "images",
+      "description": "Top/bottom text clearance larger than the body has an explicit warned fallback; fitting and stacking-order controls",
+      "input": "fixtures/export-story-context-shape-clearance-front-fitting-control.docx",
+      "sha256": "f2e95c8c8daca0b5193c5ac9b1a00e9d5548a2ff6191b70a75c42de78aebd307",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperClearanceEnd": 1,
+        "JasperClearanceStart": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-shape-clearance-front-oversized",
+      "version": 1,
+      "category": "images",
+      "description": "Top/bottom text clearance larger than the body has an explicit warned fallback; fitting and stacking-order controls",
+      "input": "fixtures/export-story-context-shape-clearance-front-oversized.docx",
+      "sha256": "3057705b9fe46558bebc655772d32c7d08b9685200154c80b55f8b967b57d4a3",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperClearanceEnd": 1,
+        "JasperClearanceStart": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-shape-clearance-behind-fitting-control",
+      "version": 1,
+      "category": "images",
+      "description": "Top/bottom text clearance larger than the body has an explicit warned fallback; fitting and stacking-order controls",
+      "input": "fixtures/export-story-context-shape-clearance-behind-fitting-control.docx",
+      "sha256": "9560fd516bf377fd0542992b33b83008223f6e6b9866643664b8c922ffe202ed",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperClearanceEnd": 1,
+        "JasperClearanceStart": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-shape-clearance-behind-oversized",
+      "version": 1,
+      "category": "images",
+      "description": "Top/bottom text clearance larger than the body has an explicit warned fallback; fitting and stacking-order controls",
+      "input": "fixtures/export-story-context-shape-clearance-behind-oversized.docx",
+      "sha256": "67001ef204d3c0463ff9ab37ec01dab9a2234bb48334557306b5b11eeac930cc",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperClearanceEnd": 1,
+        "JasperClearanceStart": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-picture-square-front",
+      "version": 2,
+      "category": "images",
+      "description": "Explicit square wrapping remains active independently of behind-text stacking; nonwrapping behind-text control",
+      "input": "fixtures/export-story-context-picture-square-front.docx",
+      "sha256": "f29a2f8f03e25b0f7ac8a0fbadd4be04a91fcb25855dbc8770670eb5bfcba4bc",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperWrapMarker": 1,
+        "JasperWrapReceipt": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperWrapMarker",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            138,
+            35,
+            400,
+            85
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-picture-square-behind",
+      "version": 2,
+      "category": "images",
+      "description": "Explicit square wrapping remains active independently of behind-text stacking; nonwrapping behind-text control",
+      "input": "fixtures/export-story-context-picture-square-behind.docx",
+      "sha256": "9c106db8c68dc484b344ee04b244a5485423223445de61c582790a377f6251d3",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperWrapMarker": 1,
+        "JasperWrapReceipt": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperWrapMarker",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            138,
+            35,
+            400,
+            85
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    },
+    {
+      "id": "export-story-context-picture-none-behind-control",
+      "version": 2,
+      "category": "images",
+      "description": "Explicit square wrapping remains active independently of behind-text stacking; nonwrapping behind-text control",
+      "input": "fixtures/export-story-context-picture-none-behind-control.docx",
+      "sha256": "63873a4847a35a1805c7796cd192b26d53766cc967cc0e9084180115340962fa",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "JasperWrapMarker": 1,
+        "JasperWrapReceipt": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "JasperWrapMarker",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            45,
+            35,
+            170,
+            85
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "9a3f3300986514611e7a96a5a41256ce7c422fed0879896c339349c796c77f3c"
+      }
+    }
+  ]
+}

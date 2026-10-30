@@ -1,0 +1,176 @@
+{
+  "schema": 1,
+  "status": "unscored-warning-and-strict-policy-diagnostics",
+  "candidate": "a5ae28c88617f5c405ce575d5f8b10f828d8b6c9",
+  "sourceTree": "eab4aa9cd1d154bdd708dc42abf3fa879a789c90",
+  "buildIdentitySha256": "12f73c17b3a84c254a3fb6ddaf07e75fdb7f2c3f652c3444d99b4be73c3c6a8e",
+  "manifestSha256": "4674c0672a5cffb3021b1147c945524f6f8c3aa5302ba366ad20d77f47e09be6",
+  "rulesSha256": "0db582de93586d32a415d7e321c20d24152939f75c8ed3407ee5a30af7826a1d",
+  "browserVersion": "155.0.8059.84",
+  "executableSha256": "cb19b59995072b86cc7f887b3b1c7ab1f63518a7f2ed9f0d33249e1a040e2c76",
+  "sandbox": true,
+  "fontContract": {
+    "LiberationSerif-Regular.ttf": {
+      "family": "Liberation Serif",
+      "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+    },
+    "LiberationSerif-Bold.ttf": {
+      "family": "Liberation Serif",
+      "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+    },
+    "LiberationSerif-Italic.ttf": {
+      "family": "Liberation Serif",
+      "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+    },
+    "LiberationSerif-BoldItalic.ttf": {
+      "family": "Liberation Serif",
+      "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+    }
+  },
+  "verifiedFontFiles": [
+    {
+      "name": "LiberationSerif-Regular.ttf",
+      "family": "Liberation Serif",
+      "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+    },
+    {
+      "name": "LiberationSerif-Bold.ttf",
+      "family": "Liberation Serif",
+      "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+    },
+    {
+      "name": "LiberationSerif-Italic.ttf",
+      "family": "Liberation Serif",
+      "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+    },
+    {
+      "name": "LiberationSerif-BoldItalic.ttf",
+      "family": "Liberation Serif",
+      "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+    }
+  ],
+  "captureToolSha256": "af7cb74bc8bbb2b31f6350922ad14a7025f9476cfc76268ad2102304a4e629a1",
+  "note": "Default PDF content is checked separately. These assertions inspect declared warning counts and strict-policy outcomes; they produce no fidelity score.",
+  "cases": [
+    {
+      "id": "export-story-context-shape-clearance-front-fitting-control",
+      "inputSha256": "05d24ac77e2cc6467cfbc9566ddfe8c78dd062adf7514c83c9ec905ee507083f",
+      "expectedWarning": "drawing_clearance_relaxed",
+      "expectedWarningCount": 0,
+      "expectedStrict": "delivered",
+      "defaultStatus": "delivered",
+      "defaultRenderReportSha256": "fa6e3327b52f53f405a29045733271c093494a342a3df8e073a1e2b239c19e37",
+      "defaultVerifiedFonts": [
+        {
+          "resolvedFamily": "Liberation Serif",
+          "resolvedFace": "LiberationSerif",
+          "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        }
+      ],
+      "warningCodes": [],
+      "warningCheckPassed": true,
+      "strictResult": {
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "1aa1d6b973ef9f1eafaf1b9bf8d44c94524023a674b3fb81176b21146ffe6e35",
+        "verifiedFonts": [
+          {
+            "resolvedFamily": "Liberation Serif",
+            "resolvedFace": "LiberationSerif",
+            "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+          }
+        ]
+      },
+      "strictCheckPassed": true,
+      "passed": true
+    },
+    {
+      "id": "export-story-context-shape-clearance-front-oversized",
+      "inputSha256": "d3c302a3dfd02ae1e5d59f7030cb4276105620c32a940791513573894ba506c5",
+      "expectedWarning": "drawing_clearance_relaxed",
+      "expectedWarningCount": 1,
+      "expectedStrict": "rejected",
+      "defaultStatus": "delivered",
+      "defaultRenderReportSha256": "9941d5fbda2fe1e4e4aa36b46e5a857fb1d016425807afd355470b703a2a2fbd",
+      "defaultVerifiedFonts": [
+        {
+          "resolvedFamily": "Liberation Serif",
+          "resolvedFace": "LiberationSerif",
+          "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        }
+      ],
+      "warningCodes": [
+        "drawing_clearance_relaxed"
+      ],
+      "warningCheckPassed": true,
+      "strictResult": {
+        "status": "rejected",
+        "code": "resource_policy_failure",
+        "phase": "output_verification",
+        "message": "A drawing's top/bottom text clearance cannot fit a page and was relaxed; its authored size and placement are retained."
+      },
+      "strictCheckPassed": true,
+      "passed": true
+    },
+    {
+      "id": "export-story-context-shape-clearance-behind-fitting-control",
+      "inputSha256": "d4ad0af47c74bc6d144b2ebb9fb45501d0dd07ac2783f90756609115eb2dc3b4",
+      "expectedWarning": "drawing_clearance_relaxed",
+      "expectedWarningCount": 0,
+      "expectedStrict": "delivered",
+      "defaultStatus": "delivered",
+      "defaultRenderReportSha256": "7771330a22dcfc39578f499aaad6999184fb40aebe66a76c5e8a3ca56330f724",
+      "defaultVerifiedFonts": [
+        {
+          "resolvedFamily": "Liberation Serif",
+          "resolvedFace": "LiberationSerif",
+          "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        }
+      ],
+      "warningCodes": [],
+      "warningCheckPassed": true,
+      "strictResult": {
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "cf8a637801885bf990ddc7e460ebe7e1f39acc0ffba8decad6717a6f762a6744",
+        "verifiedFonts": [
+          {
+            "resolvedFamily": "Liberation Serif",
+            "resolvedFace": "LiberationSerif",
+            "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+          }
+        ]
+      },
+      "strictCheckPassed": true,
+      "passed": true
+    },
+    {
+      "id": "export-story-context-shape-clearance-behind-oversized",
+      "inputSha256": "cc85bfda602a4f37059e93ccd5b5b31bd88bf44eb18eb1c018f32b8dbf5b2b5e",
+      "expectedWarning": "drawing_clearance_relaxed",
+      "expectedWarningCount": 1,
+      "expectedStrict": "rejected",
+      "defaultStatus": "delivered",
+      "defaultRenderReportSha256": "e8f6a31b35aa78dfd11b74d95c06c26f7592981cf798b6b69899badaa5577c36",
+      "defaultVerifiedFonts": [
+        {
+          "resolvedFamily": "Liberation Serif",
+          "resolvedFace": "LiberationSerif",
+          "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        }
+      ],
+      "warningCodes": [
+        "drawing_clearance_relaxed"
+      ],
+      "warningCheckPassed": true,
+      "strictResult": {
+        "status": "rejected",
+        "code": "resource_policy_failure",
+        "phase": "output_verification",
+        "message": "A drawing's top/bottom text clearance cannot fit a page and was relaxed; its authored size and placement are retained."
+      },
+      "strictCheckPassed": true,
+      "passed": true
+    }
+  ]
+}
