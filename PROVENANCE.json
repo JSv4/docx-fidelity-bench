@@ -34,7 +34,7 @@
       "author": "John Scrudato IV",
       "license": "MIT",
       "origin": "Authored for this repository",
-      "sha256": "5793358e40e2ddb8adc3a49bb4109c24248c812331c7dacc5d935527601d75dd"
+      "sha256": "417f3bff6ce2a2844ddd57e41d83432a7d987b469e5bdd3f279f43a2a3b6b917"
     },
     "RESULTS.md": {
       "author": "John Scrudato IV",
@@ -46,7 +46,19 @@
       "author": "John Scrudato IV",
       "license": "MIT",
       "origin": "Authored for this repository",
-      "sha256": "7cd013bdcceafc63eaa1b7cda6bba80e6805361f907632c180fd83ad981085e8"
+      "sha256": "ca23892945c842558694329d4caa2675eca6c1cfd24cf2b14b3f5ce7fb8b4fb6"
+    },
+    "adapters/docxodus-projection/DocxBenchProjection.csproj": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "480e342d3bb0fdf7faaf41738c59a34b6323980f24a45eb0823110ddfa54e6da"
+    },
+    "adapters/docxodus-projection/Program.cs": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "a030d7864372211bb8af99b3488ff778891a26c06c6ddb1ebff2545b3d95a793"
     },
     "adapters/docxodus-redline/DocxBenchRedline.csproj": {
       "author": "John Scrudato IV",
@@ -94,7 +106,7 @@
       "author": "John Scrudato IV",
       "license": "MIT",
       "origin": "Authored for this repository",
-      "sha256": "aa6ff9702d8a3fd5d61d121ad507cddce8c7960fcb58d774b62099fd09b6ff85"
+      "sha256": "bbb5b35f7acc66fca544badde05038835c2b220704fbba5cc824f1e8519097e4"
     },
     "bench/build.py": {
       "author": "John Scrudato IV",
@@ -167,6 +179,18 @@
       "license": "MIT",
       "origin": "Authored for this repository",
       "sha256": "0e417163f8423963047013e27c2d33dae547c97191f045ec942096c151ddc551"
+    },
+    "bench/projection.py": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "06c24a36c2ffb04acd80b46e802bc3b62d9e1c2022b53ec376438b508e6add70"
+    },
+    "bench/projection_fixtures.py": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "696d760f374c7935722c16eaa13e128d4e117e2488aeef83de6effc92f8da105"
     },
     "bench/redline.py": {
       "author": "John Scrudato IV",
@@ -2519,6 +2543,108 @@
       "license": "MIT",
       "origin": "Authored for this repository",
       "sha256": "fea06a8d72f603a7c6d884bac1498d91c946626c5577a6f1650a3b2596f872c2"
+    },
+    "docs/results/markdown-shapes/README.md": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "8dc3fa6598605d8fc56a24cb5976e066ad94feb148605b8cc1dacd375634dbf3"
+    },
+    "docs/results/markdown-shapes/baseline.json": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "2b35a7148279e1c8716c62d4ff2f3ebde918f21bc22ef25560ec4bd40d1f6a6d"
+    },
+    "docs/results/markdown-shapes/candidate.json": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "e590dd761c5ba4e65c258dbbe3837c000e02b08d51f224962ce727337d2532c2"
+    },
+    "docs/results/markdown-shapes/cell-sdt-control.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "a4e575689b27bb7d0bac12aa68d2a2a8e8eb1e818b744d095a62f55592fbcc63"
+    },
+    "docs/results/markdown-shapes/cell-sdt.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "ef8e07c9e784550883b78c4d5b5aac15d6421f426bd20acad301c66e5988e1a0"
+    },
+    "docs/results/markdown-shapes/choice-control.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "a8666d2b510adce375ec78c10c11e93d52d3f9291779087f24d75a1feea06ce5"
+    },
+    "docs/results/markdown-shapes/choice.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "18da744542d3c74251c1a621880bb65eb10d64425deacf1a82497e107b5f5fdc"
+    },
+    "docs/results/markdown-shapes/fallback-control.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "baf93a16e48db9f5cb533c358864e4898e35d42be4387b503b9a16db3391467b"
+    },
+    "docs/results/markdown-shapes/fallback.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "611d6eea32b4e906aa4869c69bd5c1ca2bfb424055a04418a5820482c911ab28"
+    },
+    "docs/results/markdown-shapes/group-sdt-control.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "bb500b1dec3c26d232500bd4489b7c6e93a5a98c0efd2f1bf56748b483166f9e"
+    },
+    "docs/results/markdown-shapes/group-sdt.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "630aeed26ea31dfd0eb65f30b410bbcbe6bbc94905941c1323b20c46fc0146f7"
+    },
+    "docs/results/markdown-shapes/row-sdt-control.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "6d73f9ca9f045c1fbcfc21a1b409d72d291a3ee04aeb81da76f7bd3568599fdb"
+    },
+    "docs/results/markdown-shapes/row-sdt.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "65eb9c1bae85d5833883e444bf92cba9095438a5ad1e5fc0e003434e0f9563d0"
+    },
+    "docs/results/markdown-shapes/table-in-box-control.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "05cc41ebf671fbbc08c73fed419c57b6ecc0010ddcb324bc0e4dab82be6403d6"
+    },
+    "docs/results/markdown-shapes/table-in-box.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "39c2aaa587f1a3c4aeb0f54473526b096b586233d5234f22e24a9fa5818fb231"
+    },
+    "docs/results/markdown-shapes/vml-control.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "7032c2f912e2f4b127b695e91050eea02f7bbe06bc92af2eeeb626ba07cb7773"
+    },
+    "docs/results/markdown-shapes/vml.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "cb40befab2600a9971c3d1882e17cf8a8684eb69c81453d26b0d8b1add341ffe"
     },
     "docs/results/mixed-run-edits/capture.json": {
       "author": "John Scrudato IV",
@@ -7427,6 +7553,96 @@
       "license": "MIT",
       "origin": "Generated by bench/fixtures.py",
       "sha256": "a6ae58e444365d1aa7cd4f2b325adcd276d094441f4bb830f566fd1a30a81e42"
+    },
+    "fixtures/projection/cell-sdt-control.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/projection_fixtures.py",
+      "sha256": "e9356cd29b91d49f4f2ba4f785dc87a8989fd55063bc8cc5337a78de69674cb4"
+    },
+    "fixtures/projection/cell-sdt.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/projection_fixtures.py",
+      "sha256": "fdf81446ee28fb537e5355b0936b891699a6bcabc703f53856ed2a1fe083e288"
+    },
+    "fixtures/projection/choice-control.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/projection_fixtures.py",
+      "sha256": "d44e37f2ceaae9d96d7f6e3c6ec1b93425c5eca7d340fd31f97123ff220cbcbb"
+    },
+    "fixtures/projection/choice.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/projection_fixtures.py",
+      "sha256": "9c94d742947fb31222e2e679bb2018f53138cc2f7254cb856a033b3b5284f1d4"
+    },
+    "fixtures/projection/fallback-control.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/projection_fixtures.py",
+      "sha256": "d44e37f2ceaae9d96d7f6e3c6ec1b93425c5eca7d340fd31f97123ff220cbcbb"
+    },
+    "fixtures/projection/fallback.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/projection_fixtures.py",
+      "sha256": "363e0f49f50a841adb48ad9a5c97df615c235c2e6471ff456586ba8cf12daa78"
+    },
+    "fixtures/projection/group-sdt-control.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/projection_fixtures.py",
+      "sha256": "d44e37f2ceaae9d96d7f6e3c6ec1b93425c5eca7d340fd31f97123ff220cbcbb"
+    },
+    "fixtures/projection/group-sdt.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/projection_fixtures.py",
+      "sha256": "df47c63ae310364c772cccf0fa6869cfaf68f58e783027d24e400d55dc7a69f6"
+    },
+    "fixtures/projection/manifest.json": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/projection_fixtures.py",
+      "sha256": "b62a10c6941886fa70fd2acf8d80ee0df79012a7b2b5145adeedb5077aaeb6f1"
+    },
+    "fixtures/projection/row-sdt-control.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/projection_fixtures.py",
+      "sha256": "e9356cd29b91d49f4f2ba4f785dc87a8989fd55063bc8cc5337a78de69674cb4"
+    },
+    "fixtures/projection/row-sdt.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/projection_fixtures.py",
+      "sha256": "028a2f43add39d4352d0e4a5cf38796e65bb0f61c3b24b6e4c5ac746066d4cc2"
+    },
+    "fixtures/projection/table-in-box-control.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/projection_fixtures.py",
+      "sha256": "e9356cd29b91d49f4f2ba4f785dc87a8989fd55063bc8cc5337a78de69674cb4"
+    },
+    "fixtures/projection/table-in-box.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/projection_fixtures.py",
+      "sha256": "c2cd4aab679dcda30f769bd59ca9c49405b09b6192457fbd0fb4389c7917414f"
+    },
+    "fixtures/projection/vml-control.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/projection_fixtures.py",
+      "sha256": "d44e37f2ceaae9d96d7f6e3c6ec1b93425c5eca7d340fd31f97123ff220cbcbb"
+    },
+    "fixtures/projection/vml.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/projection_fixtures.py",
+      "sha256": "9606738de612ae2eeb0015fff9111a32228f712c50100ab24e5efcd7a8d0990b"
     },
     "fixtures/redline/manifest.json": {
       "author": "John Scrudato IV",
@@ -12761,6 +12977,12 @@
       "license": "MIT",
       "origin": "Authored for this repository",
       "sha256": "709f1a0a0663245a257689e82a774a400d56b4994050cfd704ddc2261547748a"
+    },
+    "tests/test_projection.py": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "9a51ecf5c6d9cd97d741d22978d467a145cd8b65a60e8a36938bfcb07dea5cbe"
     },
     "tests/test_redline.py": {
       "author": "John Scrudato IV",

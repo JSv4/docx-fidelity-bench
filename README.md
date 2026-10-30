@@ -176,6 +176,10 @@ reproduces the defect on unmodified main. New references and full-suite scoring 
 
 `core-v41` adds eight final/original PDF views and four independent complex-field consolidation cases for #1206. The redline track checks field characters, cached results, bookmarks and reviewer attribution. PDF references recalculate body PAGE fields; Docxodus intentionally preserves their cached body text, so the two final views with an edited cache report a visible-token mismatch (7 versus 1). This difference remains measured, with no token exclusion or relaxed assertion. The other six views compare retained text and layout directly.
 
+The [Markdown projection diagnostic](docs/results/markdown-shapes/README.md) checks exact public
+`Project`/`ProjectAnchor` output for textboxes and content-control-wrapped table rows/cells.
+Its fourteen original inputs and before/after screenshots are unweighted and separate from PDF/redline scores.
+
 ## What is included
 
 | Category | Cases |

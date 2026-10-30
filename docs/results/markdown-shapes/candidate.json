@@ -1,0 +1,544 @@
+{
+  "build": {
+    "adapterSources": {
+      "adapters/docxodus-projection/DocxBenchProjection.csproj": "480e342d3bb0fdf7faaf41738c59a34b6323980f24a45eb0823110ddfa54e6da",
+      "adapters/docxodus-projection/Program.cs": "a030d7864372211bb8af99b3488ff778891a26c06c6ddb1ebff2545b3d95a793"
+    },
+    "command": [
+      "/home/jman/.dotnet/dotnet",
+      "build",
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/projection-final/src/DocxBenchProjection.csproj",
+      "-c",
+      "Release",
+      "-o",
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/projection-final/bin",
+      "-nologo",
+      "-v",
+      "q",
+      "-p:DocxodusRoot=/home/jman/Code/Docxodus/.local-closeout/issue-1445"
+    ],
+    "commit": "13c6c2f9bfa308911227ae26f4b5a0c06d1fe79f",
+    "dotnet": "10.0.301",
+    "files": {
+      "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+      "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+      "bin/DocxBenchProjection.dll": "e11affd3dafc1c0c9dd71063ff245214c6ca9e6612bbd00333f01318dad195bb",
+      "bin/Docxodus.dll": "9f5f48260e61b674b9e944977e16659b80d160a72bdde456f9241a43b817418b",
+      "bin/SkiaSharp.dll": "2c9bbbe1a3d0e9407894c319821b5cdcade1f302466a950a2e5d6024aee32422",
+      "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+    },
+    "recipeSha256": "06c24a36c2ffb04acd80b46e802bc3b62d9e1c2022b53ec376438b508e6add70",
+    "schema": 1,
+    "source": "/home/jman/Code/Docxodus/.local-closeout/issue-1445",
+    "tree": "1c5bfd98b9a3df4a8e96a18134648071e1fa60b3"
+  },
+  "cases": [
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "vml",
+      "inputSha256": "9606738de612ae2eeb0015fff9111a32228f712c50100ab24e5efcd7a8d0990b",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost\n\n{#p:body:0cb94e7e5132e54d459948d96e7995e2} AshInside\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:a5ea3cab122e06ddb0fe999125397ec9",
+            "markdown": "{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost",
+            "text": "AshHostAshInside"
+          },
+          {
+            "id": "p:body:0cb94e7e5132e54d459948d96e7995e2",
+            "markdown": "{#p:body:0cb94e7e5132e54d459948d96e7995e2} AshInside",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/projection/vml.docx"
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "vml-control",
+      "inputSha256": "d44e37f2ceaae9d96d7f6e3c6ec1b93425c5eca7d340fd31f97123ff220cbcbb",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\n\n{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:d78ac2b96bb4f08cdedd208c3faa704b",
+            "markdown": "{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/projection/vml-control.docx"
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "choice",
+      "inputSha256": "9c94d742947fb31222e2e679bb2018f53138cc2f7254cb856a033b3b5284f1d4",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost\n\n{#p:body:81f4d054c60618b2088343fb43231126} AshInside\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:a5ea3cab122e06ddb0fe999125397ec9",
+            "markdown": "{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost",
+            "text": "AshHostAshInsideInactiveFallback"
+          },
+          {
+            "id": "p:body:81f4d054c60618b2088343fb43231126",
+            "markdown": "{#p:body:81f4d054c60618b2088343fb43231126} AshInside",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:31cf5162da428e1ab7afbdfdc669948e",
+            "markdown": "",
+            "text": "InactiveFallback"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/projection/choice.docx"
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "choice-control",
+      "inputSha256": "d44e37f2ceaae9d96d7f6e3c6ec1b93425c5eca7d340fd31f97123ff220cbcbb",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\n\n{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:d78ac2b96bb4f08cdedd208c3faa704b",
+            "markdown": "{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/projection/choice-control.docx"
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "fallback",
+      "inputSha256": "363e0f49f50a841adb48ad9a5c97df615c235c2e6471ff456586ba8cf12daa78",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost\n\n{#p:body:31531543be2a33f15de71635c22539a9} AshInside\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:a5ea3cab122e06ddb0fe999125397ec9",
+            "markdown": "{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost",
+            "text": "AshHostInactiveChoiceAshInside"
+          },
+          {
+            "id": "p:body:6c4c04ce36fec6a85510455e34d8e7ef",
+            "markdown": "",
+            "text": "InactiveChoice"
+          },
+          {
+            "id": "p:body:31531543be2a33f15de71635c22539a9",
+            "markdown": "{#p:body:31531543be2a33f15de71635c22539a9} AshInside",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/projection/fallback.docx"
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "fallback-control",
+      "inputSha256": "d44e37f2ceaae9d96d7f6e3c6ec1b93425c5eca7d340fd31f97123ff220cbcbb",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\n\n{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:d78ac2b96bb4f08cdedd208c3faa704b",
+            "markdown": "{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/projection/fallback-control.docx"
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "group-sdt",
+      "inputSha256": "df47c63ae310364c772cccf0fa6869cfaf68f58e783027d24e400d55dc7a69f6",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost\n\n{#p:body:a65782770eadd9ac1c096f9d0a51dbca} AshInside\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:a5ea3cab122e06ddb0fe999125397ec9",
+            "markdown": "{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost",
+            "text": "AshHostAshInside"
+          },
+          {
+            "id": "p:body:a65782770eadd9ac1c096f9d0a51dbca",
+            "markdown": "{#p:body:a65782770eadd9ac1c096f9d0a51dbca} AshInside",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/projection/group-sdt.docx"
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "group-sdt-control",
+      "inputSha256": "d44e37f2ceaae9d96d7f6e3c6ec1b93425c5eca7d340fd31f97123ff220cbcbb",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\n\n{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:d78ac2b96bb4f08cdedd208c3faa704b",
+            "markdown": "{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/projection/group-sdt-control.docx"
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "row-sdt",
+      "inputSha256": "028a2f43add39d4352d0e4a5cf38796e65bb0f61c3b24b6e4c5ac746066d4cc2",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n| AshLeft | AshRight |\n| --- | --- |\n\n{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:e45e718ea29d19bb9ee92b9a51966310",
+            "markdown": "",
+            "text": "AshLeft"
+          },
+          {
+            "id": "p:body:91ef3a8cb9a3effc09d1abaf9286b7e0",
+            "markdown": "",
+            "text": "AshRight"
+          },
+          {
+            "id": "p:body:85539f966de15e2870f0e7d21e1839c5",
+            "markdown": "{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail",
+            "text": "AshTail"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/projection/row-sdt.docx"
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "row-sdt-control",
+      "inputSha256": "e9356cd29b91d49f4f2ba4f785dc87a8989fd55063bc8cc5337a78de69674cb4",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n| AshLeft | AshRight |\n| --- | --- |\n\n{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:2ba0b4acf1ff0cc0104b19fb995b7489",
+            "markdown": "",
+            "text": "AshLeft"
+          },
+          {
+            "id": "p:body:443a2c8deb115ef415b13cf147b40d4b",
+            "markdown": "",
+            "text": "AshRight"
+          },
+          {
+            "id": "p:body:85539f966de15e2870f0e7d21e1839c5",
+            "markdown": "{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail",
+            "text": "AshTail"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/projection/row-sdt-control.docx"
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "cell-sdt",
+      "inputSha256": "fdf81446ee28fb537e5355b0936b891699a6bcabc703f53856ed2a1fe083e288",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n| AshLeft | AshRight |\n| --- | --- |\n\n{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:2ba0b4acf1ff0cc0104b19fb995b7489",
+            "markdown": "",
+            "text": "AshLeft"
+          },
+          {
+            "id": "p:body:e0131561cc2bc89ba70e0ab5f9564aef",
+            "markdown": "",
+            "text": "AshRight"
+          },
+          {
+            "id": "p:body:85539f966de15e2870f0e7d21e1839c5",
+            "markdown": "{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail",
+            "text": "AshTail"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/projection/cell-sdt.docx"
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "cell-sdt-control",
+      "inputSha256": "e9356cd29b91d49f4f2ba4f785dc87a8989fd55063bc8cc5337a78de69674cb4",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n| AshLeft | AshRight |\n| --- | --- |\n\n{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:2ba0b4acf1ff0cc0104b19fb995b7489",
+            "markdown": "",
+            "text": "AshLeft"
+          },
+          {
+            "id": "p:body:443a2c8deb115ef415b13cf147b40d4b",
+            "markdown": "",
+            "text": "AshRight"
+          },
+          {
+            "id": "p:body:85539f966de15e2870f0e7d21e1839c5",
+            "markdown": "{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail",
+            "text": "AshTail"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/projection/cell-sdt-control.docx"
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "table-in-box",
+      "inputSha256": "c2cd4aab679dcda30f769bd59ca9c49405b09b6192457fbd0fb4389c7917414f",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost\n\n{#tbl:body:b838405a453835eeaec5bdc175910481}\n| AshLeft | AshRight |\n| --- | --- |\n\n{#p:body:411923fd832ee5b27a9b2ec41a7c9a2b} AshTail\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:a5ea3cab122e06ddb0fe999125397ec9",
+            "markdown": "{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost",
+            "text": "AshHostAshLeftAshRightAshTail"
+          },
+          {
+            "id": "p:body:089e8f7da0001a8c3c8ba89939aa2aee",
+            "markdown": "",
+            "text": "AshLeft"
+          },
+          {
+            "id": "p:body:d1514611c3c88a9c51f50308c1decbd2",
+            "markdown": "",
+            "text": "AshRight"
+          },
+          {
+            "id": "p:body:411923fd832ee5b27a9b2ec41a7c9a2b",
+            "markdown": "{#p:body:411923fd832ee5b27a9b2ec41a7c9a2b} AshTail",
+            "text": "AshTail"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/projection/table-in-box.docx"
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "table-in-box-control",
+      "inputSha256": "e9356cd29b91d49f4f2ba4f785dc87a8989fd55063bc8cc5337a78de69674cb4",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n| AshLeft | AshRight |\n| --- | --- |\n\n{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:2ba0b4acf1ff0cc0104b19fb995b7489",
+            "markdown": "",
+            "text": "AshLeft"
+          },
+          {
+            "id": "p:body:443a2c8deb115ef415b13cf147b40d4b",
+            "markdown": "",
+            "text": "AshRight"
+          },
+          {
+            "id": "p:body:85539f966de15e2870f0e7d21e1839c5",
+            "markdown": "{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail",
+            "text": "AshTail"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/projection/table-in-box-control.docx"
+      }
+    }
+  ],
+  "manifestSha256": "b62a10c6941886fa70fd2acf8d80ee0df79012a7b2b5145adeedb5077aaeb6f1",
+  "scope": "Unweighted exact Markdown and anchor checks; no PDF/redline score",
+  "suite": "projection-v1"
+}

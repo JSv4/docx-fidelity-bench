@@ -263,3 +263,9 @@ links, conditional alternatives and unsupported ancestry; rendered-candidate ass
 words optional. Screenshots in `docs/results/export-story-contexts/` contain only these original inputs
 and separately provisioned renderer outputs, with labels around unchanged page rasters. No font
 program is distributed.
+
+The fourteen Markdown projection inputs for Docxodus #1445 contain original Ash labels and
+literal OOXML in `bench/projection_fixtures.py`. They import no product fixture, external document,
+image or font program. The labeled screenshots under `docs/results/markdown-shapes/` show only
+these inputs' public Markdown output in Chromium, with anchor IDs shortened for readability;
+they are not native Word references. No authentication material or external content is included.
