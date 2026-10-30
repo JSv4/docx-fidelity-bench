@@ -1,5 +1,10 @@
 # DOCX fidelity bench
 
+`core-v78` adds an authored natural-line-height reproducer and exact-height control for
+[Firefox page-view overlap](docs/results/firefox-line-height/README.md) (Docxodus #1424).
+The fixtures are in the PDF track; a separate browser diagnostic checks their glyph overlap
+and complete text in Firefox and Chromium. Existing input bytes and assertions are unchanged.
+
 `redline-v21` adds Compare and Consolidate moved-paragraph reproducers for Docxodus #1420 and
 ordinary replacement controls. A structural assertion checks moved and deleted text carriers;
 accept/reject and schema checks remain mandatory. [LibreOffice and Word Online previews](docs/results/move-from-text/README.md)

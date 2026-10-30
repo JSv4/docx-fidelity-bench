@@ -1,5 +1,9 @@
 # Authorship and artifact rights
 
+The Firefox line-height pair for Docxodus #1424 is original Pine text and literal OOXML
+authored in `bench/fixtures.py`. It imports no document content, images, or font programs.
+Browser screenshots use separately installed Liberation Serif and record its file hash.
+
 John Scrudato IV owns the original harness, adapter, documentation, fixture generator, text, and diamond graphic authored for this repository. The MIT license covers these files and the generated DOCX fixtures. No document templates, input documents, corpus downloads, embedded font files, or vendored libraries are included.
 
 `bench/fixtures.py` is the complete source of every PDF-track fixture, and `bench/redline_fixtures.py` of every redline-track input, expected document and authored redline under `fixtures/redline/`. It constructs OOXML packages from literal text and generates the diamond image from pixel coordinates. `fixtures/manifest.json` records each document hash, generator hash, author, license, origin, asset statement, expected text, and assertions. CI regenerates every package and compares the bytes.
