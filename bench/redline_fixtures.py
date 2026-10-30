@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v24', 'version': 24}
+SUITE = {'id': 'redline-v25', 'version': 25}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -238,6 +238,8 @@ for _case in ('redline-tab-equation', 'redline-tab-equation-control',
         'LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject')
 LIBREOFFICE_INELIGIBLE['redline-captured-field-source'] = (('rejected',),
     'LibreOffice 25.8.7.3 drops the tab from the authored unfinished instruction-only field on reject')
+LIBREOFFICE_INELIGIBLE['redline-textbox-marker-gap'] = (('accepted', 'rejected'),
+    'LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the independently authored whole textbox-carrier replacement')
 LIBREOFFICE_INELIGIBLE['redline-shared-drawing-source'] = (('accepted', 'rejected'),
     'LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole drawing-carrier replacement')
 
@@ -322,11 +324,47 @@ def generate():
     atomic_source_positions(corpus)
     textbox_geometry(corpus)
     composed_bookmark_deltas(corpus)
+    regrouped_textbox_markers(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(registry, indent=2) + '\n')
     return registry
+
+
+def regrouped_textbox_markers(corpus):
+    """A removed point between unchanged shapes, with and without carrier regrouping."""
+    def shape(text, offset):
+        return ('<v:shape xmlns:v="urn:schemas-microsoft-com:vml" '
+                f'style="position:absolute;margin-left:{offset}pt;margin-top:18pt;width:90pt;height:40pt" '
+                'coordsize="21600,21600" path="m,l,21600r21600,l21600,xe" strokecolor="#226688" fillcolor="#eef6f8">'
+                '<v:textbox><w:txbxContent>' + p(t(text)) + '</w:txbxContent></v:textbox></v:shape>')
+    def pict(shapes):
+        return '<w:r><w:pict>' + shapes + '</w:pict></w:r>'
+    first, second = shape('Spruce first.', 0), shape('Spruce second.', 120)
+    start, end = bookmark(True, 29, 'SpruceGap'), bookmark(False, 29)
+    spacing = '<w:spacing w:after="1200"/>'
+    for control in (False, True):
+        case_id = 'redline-textbox-marker-gap' + ('-control' if control else '')
+        old = pict(first) + start + end + pict(second) + t(' Spruce old ledger.')
+        new = (pict(first) + pict(second) if control else pict(first + second)) + t(' Spruce new ledger.')
+        rev = Revisions()
+        if control:
+            tracked = p(pict(first) + rev.dele(start) + rev.dele(end) + pict(second) + t(' Spruce ')
+                        + rev.dele(t('old')) + rev.ins(t('new')) + t(' ledger.'), props=spacing)
+        else:
+            tracked = p(rev.dele(old), props=spacing, mark=rev.mark('del')) + p(rev.ins(new), props=spacing, mark=rev.mark('ins'))
+        assertions = [untracked(CLOSING)]
+        for scope, content in (('rejected', old), ('accepted', new)):
+            root = ET.fromstring(f'<root {NAMESPACES}>' + content + '</root>')
+            assertions.append({'type': 'inline-trees', 'version': 1, 'scope': scope, 'name': 'pict',
+                               'trees': [ET.tostring(e, encoding='unicode') for e in root.iter('{' + W + '}pict')], 'images': {}})
+        corpus.compare(case_id, 'bookmarks', 'control' if control else 'reproducer', 'JSv4/Docxodus#1428',
+                       'Remove the point bookmark between two unchanged textboxes and edit the tail; ' +
+                       ('keep the two separate carriers' if control else 'regroup both shapes into one indivisible carrier'),
+                       {'body': p(old, props=spacing) + p(t(CLOSING))},
+                       {'body': p(new, props=spacing) + p(t(CLOSING))},
+                       {'body': tracked + p(t(CLOSING))}, assertions)
 
 
 def composed_bookmark_deltas(corpus):
