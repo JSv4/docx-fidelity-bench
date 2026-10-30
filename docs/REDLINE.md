@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v20`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v21`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -41,6 +41,7 @@ A case scores **100** when every applicable check passes and **0** otherwise. Th
    - `comment-threads` v1 (scope `redline`): in the comments and commentsExtended parts, every entry is keyed to a comment's last-paragraph `w14:paraId`, every `w15:paraIdParent` names the last-paragraph `w14:paraId` of a comment that has its own entry, and for each declared `[reply, parent]` pair exactly one comment holds the reply's text and its entry names the comment holding the parent's text. Comment threading is not part of the semantic view, so neither round trip sees a reply detached from its parent;
    - `hyperlink-targets` v1 (scope `redline`): every `w:hyperlink` in the main document with an `r:id` resolves to exactly one relationship of the main part, of the hyperlink type with `TargetMode="External"`, and the set of their `Target` values equals the declared `targets`, compared as written after XML parsing, with no URI normalization. The semantic view records only a hyperlink's boundaries, so neither round trip sees a target rewritten (for example to the SDK's `rewritten://` placeholder), trimmed or dropped, or a link left on a relationship id another relationship also holds;
    - `revision-count` v1: at most `max` revision records in the redline or output (scope `redline` or `output`); a `w:delText` or `w:delInstrText` outside any deletion also counts. Every `reject` case requires zero.
+   - `revision-text` v1 (scope `redline`): the declared body text occurs in a named move-source range as `w:t`, or in adjacent ordinary deletion wrappers as `w:delText`. It forbids deletion-only carriers in move sources and ordinary carriers in deletions. Metric contract version 12 records this check, which catches #1420 even when accept/reject and schema checks pass.
 
 Unknown assertion types, versions or scopes are rejected when the registry is loaded.
 

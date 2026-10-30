@@ -25,11 +25,11 @@ from .common import ROOT, contained, digest, execute, identity, read_json, write
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
 OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'replace-text': 1, 'revision-ownership': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}}
+ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}}
 RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
 SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}}
-CONTRACT = {'version': 11, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+CONTRACT = {'version': 12, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -41,6 +41,7 @@ CONTRACT = {'version': 11, 'view': revisions.VIEW_VERSION, 'engines': ['bench-ma
             'paragraphRewrite': 'public untracked whole-paragraph rewrites must preserve exact declared native content-control subtrees as well as independent semantic views',
             'columnReview': 'v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry',
             'revisionOwnership': 'account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips',
+            'revisionText': 'declared move sources and ordinary deletions must retain their appropriate text carrier',
             'hyperlinkTargets': 'declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written'}
 HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'bench/redline_build.py', 'bench/revision_ownership.py']
 
@@ -188,6 +189,8 @@ def validate_registry(registry=None):
                      'paragraph-count': lambda a: a.get('story') == 'body' and isinstance(a.get('count'), int) and a['count'] >= 0,
                      'revision-count': lambda a: isinstance(a.get('max'), int) and a['max'] >= 0,
                      'para-ids-valid': lambda a: True, 'style-ids-unique': lambda a: True,
+                     'revision-text': lambda a: a['scope'] == 'redline' and isinstance(a.get('kind'), str) and a['kind'] in {'moveFrom', 'del'}
+                         and isinstance(a.get('text'), str) and bool(a['text']),
                      'table-widths': lambda a: a['scope'] in {'accepted', 'rejected'} and isinstance(a.get('grid'), list)
                          and a['grid'] and all(type(v) is int and v > 0 for v in a['grid'])
                          and isinstance(a.get('cells'), list) and a['cells'] and all(isinstance(row, list) and row
@@ -423,6 +426,40 @@ def _assertion(assertion, package, resolved):
         texts = revisions.untracked_text(package, assertion['story'])
         missing = [x for x in assertion['texts'] if not any(x in text for text in texts)]
         check.update(passed=not missing, missing=missing)
+    elif kind == 'revision-text':
+        root = package.xml(package.main).find(revisions.w('body'))
+        wrappers = list(root.iter(revisions.w(assertion['kind'])))
+        is_move = assertion['kind'] == 'moveFrom'
+        def text_of(wrapper):
+            return ''.join(t.text or '' for t in wrapper.iter(revisions.w('t' if is_move else 'delText')))
+        texts = []
+        if is_move:
+            active = {}
+            for element in root.iter():
+                if element.tag == revisions.w('moveFromRangeStart'):
+                    active[element.get(revisions.w('id'))] = []
+                elif element.tag == revisions.w('moveFrom'):
+                    for group in active.values(): group.append(text_of(element))
+                elif element.tag == revisions.w('moveFromRangeEnd'):
+                    group = active.pop(element.get(revisions.w('id')), None)
+                    if group is not None: texts.append(''.join(group))
+        else:
+            for parent in root.iter():
+                group = []
+                for child in parent:
+                    if child.tag == revisions.w('del'):
+                        group.append(text_of(child))
+                    elif child.tag in {revisions.w('proofErr'), revisions.w('bookmarkStart'), revisions.w('bookmarkEnd'),
+                                       revisions.w('commentRangeStart'), revisions.w('commentRangeEnd'),
+                                       revisions.w('permStart'), revisions.w('permEnd'), revisions.w('lastRenderedPageBreak')}:
+                        continue
+                    elif group:
+                        texts.append(''.join(group)); group = []
+                if group: texts.append(''.join(group))
+        invalid = sum(1 for wrapper in wrappers for e in wrapper.iter()
+                      if e.tag in {revisions.w('delText' if is_move else 't'),
+                                   revisions.w('delInstrText' if is_move else 'instrText')})
+        check.update(passed=any(assertion['text'] in text for text in texts) and invalid == 0, observed=texts, invalid=invalid)
     elif kind == 'paragraph-count':
         count = revisions.body_paragraph_count(package, parts)
         check.update(passed=count == assertion['count'], observed=count)

@@ -22,7 +22,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v20', 'version': 20}
+SUITE = {'id': 'redline-v21', 'version': 21}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -301,11 +301,54 @@ def generate():
     package_shapes(corpus)
     visible_atom_edits(corpus)
     inline_control_rewrites(corpus)
+    moved_from_text(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(registry, indent=2) + '\n')
     return registry
+
+
+def moved_from_text(corpus):
+    """A paragraph moves; a same-position edit controls ordinary revision text."""
+    first = 'Alder introduction stays in place.'
+    moved = 'Birch paragraph moves after the final paragraph in this revision.'
+    last = 'Cedar conclusion stays in place.'
+    rev = Revisions()
+    def half(kind, content):
+        end = rev.next + 1
+        begin = f'<w:{kind}RangeStart {rev.attrs(AUTHOR)} w:name="move1"/>'
+        wrapper = f'<w:{kind} {rev.attrs(AUTHOR)}>{t(content)}</w:{kind}>'
+        return begin + wrapper + f'<w:{kind}RangeEnd w:id="{end}"/>'
+    left = p(t(first)) + p(t(moved)) + p(t(last))
+    right = p(t(first)) + p(t(last)) + p(t(moved))
+    recorded = (p(t(first)) + p(half('moveFrom', moved), mark=rev.mark('del')) + p(t(last))
+                + p(half('moveTo', moved), mark=rev.mark('ins')))
+    corpus.compare('redline-moved-from-text', 'revisions', 'reproducer', 'JSv4/Docxodus#1420',
+                   'A moved paragraph keeps ordinary text in its source move',
+                   {'body': left}, {'body': right}, {'body': recorded},
+                   [untracked(first, last), {'type': 'revision-text', 'version': 1, 'scope': 'redline', 'kind': 'moveFrom', 'text': moved}])
+    rev = Revisions()
+    prefix = moved.removesuffix('revision.')
+    control_right = p(t(first)) + p(t(prefix + 'agreement.')) + p(t(last))
+    control_redline = p(t(first)) + p(t(prefix) + rev.dele(t('revision')) + rev.ins(t('agreement')) + t('.')) + p(t(last))
+    control_assertions = [untracked(first, last), {'type': 'revision-text', 'version': 1, 'scope': 'redline', 'kind': 'del', 'text': 'revision'}]
+    corpus.compare('redline-moved-from-text-control', 'revisions', 'control', 'JSv4/Docxodus#1420',
+                   'An ordinary replacement leaves the paragraph in place',
+                   {'body': left}, {'body': control_right}, {'body': control_redline}, control_assertions)
+    for control, revised, redline in ((False, right, recorded), (True, control_right, control_redline)):
+        case_id = 'redline-moved-from-text-consolidate' + ('-control' if control else '')
+        base = corpus.file(case_id, 'base', body=left)
+        reviewer = corpus.file(case_id, 'reviewer', body=revised)
+        unchanged = corpus.file(case_id, 'unchanged-reviewer', body=left)
+        authored = corpus.file(case_id, 'authored-redline', body=redline)
+        assertions = control_assertions if control else [
+            untracked(first, last), {'type': 'revision-text', 'version': 1, 'scope': 'redline', 'kind': 'moveFrom', 'text': moved}]
+        corpus.add(case_id, 'consolidate', 'control' if control else 'reproducer', 'JSv4/Docxodus#1420',
+                   'A reviewer ' + ('replaces text in place' if control else 'moves a paragraph'), 'consolidate',
+                   [dict(base, role='base'), dict(reviewer, role='reviewer', author=AUTHOR),
+                    dict(unchanged, role='reviewer', author='Other')],
+                   {'accepted': reviewer, 'rejected': base}, authored, assertions)
 
 
 def inline_control_rewrites(corpus):
