@@ -260,7 +260,7 @@ registration and full-suite scoring are pending.
 
 ## Redline track
 
-The comparison track asks whether a redline is exactly reversible. Each of its 210 authored cases gives a candidate a document pair (or a base and two reviewers, or one document carrying tracked changes) and declares what accept-all and reject-all must produce. The benchmark accepts and rejects the candidate's output with its own revision engine, compared on a semantic view of text, field characters, bookmark and comment markers, note references and paragraph styles, and with LibreOffice's accept-all/reject-all through headless UNO, compared on text. It also checks that the package adds no Open XML SDK validation errors and satisfies declared structural assertions, such as unique style ids, valid paragraph ids, untouched unchanged text and a folded paragraph count. A case scores 100 only when everything holds. Every reproducer, for Docxodus issues #1165, #1166, #1167, #1170, #1174, #1175, #1176, #1183 and #1184 and for one bookmark-placement defect found while authoring the suite, has a control without the trigger, and an authored-redline calibration must score 100.
+The comparison track asks whether a redline is exactly reversible. Each of its 214 authored cases gives a candidate a document pair (or a base and two reviewers, or one document carrying tracked changes) and declares what accept-all and reject-all must produce. The benchmark accepts and rejects the candidate's output with its own revision engine, compared on a semantic view of text, field characters, bookmark and comment markers, note references and paragraph styles, and with LibreOffice's accept-all/reject-all through headless UNO, compared on text. It also checks that the package adds no Open XML SDK validation errors and satisfies declared structural assertions, such as unique style ids, valid paragraph ids, untouched unchanged text and a folded paragraph count. A case scores 100 only when everything holds. Every reproducer, for Docxodus issues #1165, #1166, #1167, #1170, #1174, #1175, #1176, #1183 and #1184 and for one bookmark-placement defect found while authoring the suite, has a control without the trigger, and an authored-redline calibration must score 100.
 
 ```sh
 python3 -m bench redline build-validator --out /path/to/validator
@@ -270,6 +270,8 @@ python3 -m bench redline run --adapter docxodus --candidate FULL_COMMIT_SHA \
 ```
 
 Read [the redline scoring contract](docs/REDLINE.md) for the checks, the view, LibreOffice's limits and the eligibility rule.
+
+`redline-v24` adds bookmark addition/removal and unchanged-bookmark controls for [Docxodus #1426](https://github.com/JSv4/Docxodus/issues/1426). Both reviewers edit one paragraph beside an unchanged tab and equation. Ordered markers and selective reviewer resolution must agree with independently authored documents. The previous 210 cases and their package bytes remain unchanged.
 
 `redline-v23` adds an original shared VML textbox geometry reproducer and a body-edit control for [Docxodus #1425](https://github.com/JSv4/Docxodus/issues/1425). Metric contract 14 extends exact resolved subtree checks to `w:pict`, so a text-only match cannot hide changed widths or lost textbox bodies. [Focused evidence and previews](docs/results/textbox-geometry/README.md) record the independent main/candidate measurements. All 208 previous cases and their package bytes remain unchanged; no full-suite score is claimed.
 

@@ -275,3 +275,5 @@ these inputs' public Markdown output in Chromium, with anchor IDs shortened for 
 they are not native Word references. No authentication material or external content is included.
 
 The Juniper textbox pair for #1425 is original literal text and VML/WordprocessingML authored in `bench/redline_fixtures.py`, without imported documents, images, or font programs. Its labeled LibreOffice previews in `docs/results/textbox-geometry/` render those authored packages and the recorded comparison output.
+
+The composed inline-bookmark cases for Docxodus #1426 use original Maple/Cedar text and literal OOXML authored in `bench/redline_fixtures.py`, including their reviewers and expected redlines. No renderer fixtures, images or font programs are imported.

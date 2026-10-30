@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v23', 'version': 23}
+SUITE = {'id': 'redline-v24', 'version': 24}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -321,11 +321,48 @@ def generate():
     moved_from_text(corpus)
     atomic_source_positions(corpus)
     textbox_geometry(corpus)
+    composed_bookmark_deltas(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(registry, indent=2) + '\n')
     return registry
+
+
+def composed_bookmark_deltas(corpus):
+    """Authored reviewer deltas on unchanged inline content, independent of product fixtures."""
+    tab = '<w:r><w:tab/></w:r>'
+    equation = '<m:oMath><m:r><m:t>x</m:t></m:r></m:oMath>'
+    for addition in (False, True):
+        for control in (False, True):
+            case_id = 'redline-composed-bookmark-' + ('add' if addition else 'remove') + ('-control' if control else '')
+            before = not addition
+            after = before if control else addition
+            def body(marked, prefix, tail):
+                content = (bookmark(True, 17, 'MapleTab') if marked else '') + tab + (bookmark(False, 17) if marked else '')
+                return p(t(prefix) + content + equation + t(' survey ' + tail + '.')) + p(t(CLOSING))
+            documents = [('base', body(before, 'Maple', 'archive')),
+                         ('alice', body(after, 'Cedar', 'archive')),
+                         ('bob', body(before, 'Maple', 'register')),
+                         ('accepted', body(after, 'Cedar', 'register'))]
+            files = {role: corpus.file(case_id, role, body=content) for role, content in documents}
+            rev = Revisions()
+            def endpoint(start):
+                marker = bookmark(start, 17, 'MapleTab' if start else None)
+                if control: return marker if before else ''
+                return (rev.ins if addition else rev.dele)(marker, 'Alice')
+            content = rev.dele(t('Maple'), 'Alice') + rev.ins(t('Cedar'), 'Alice')
+            content += endpoint(True) + tab + endpoint(False) + equation + t(' survey ')
+            content += rev.dele(t('archive'), 'Bob') + rev.ins(t('register'), 'Bob') + t('.')
+            authored = corpus.file(case_id, 'authored-redline', body=p(content) + p(t(CLOSING)))
+            corpus.add(case_id, 'consolidate', 'control' if control else 'reproducer', 'JSv4/Docxodus#1426',
+                       'Alice edits the prefix and ' + ('keeps' if control else 'adds' if addition else 'removes') +
+                       ' a bookmark around an unchanged tab; Bob edits the suffix beside an unchanged equation',
+                       'consolidate', [dict(files['base'], role='base'), dict(files['alice'], role='reviewer', author='Alice'),
+                                       dict(files['bob'], role='reviewer', author='Bob')],
+                       {'accepted': files['accepted'], 'rejected': files['base']}, authored,
+                       [untracked(CLOSING, ' survey ')])
+            corpus.cases[-1]['reviewerExpected'] = {'Alice': files['alice'], 'Bob': files['bob']}
 
 
 def textbox_geometry(corpus):
