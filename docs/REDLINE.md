@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v22`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v23`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -43,7 +43,7 @@ A case scores **100** when every applicable check passes and **0** otherwise. Th
    - `revision-count` v1: at most `max` revision records in the redline or output (scope `redline` or `output`); a `w:delText` or `w:delInstrText` outside any deletion also counts. Every `reject` case requires zero.
    - `revision-text` v1 (scope `redline`): the declared body text occurs in a named move-source range as `w:t`, or in adjacent ordinary deletion wrappers as `w:delText`. It forbids deletion-only carriers in move sources and ordinary carriers in deletions. Metric contract version 12 records this check, which catches #1420 even when accept/reject and schema checks pass.
 
-   - `inline-trees` v1 (scope `accepted` or `rejected`): the complete ordered `m:oMath` or `w:drawing` subtrees in the resolved body match declared XML. It retains operators, properties, geometry and textbox content; image references resolve to the SHA-256 of their actual package bytes. Only engine addressing attributes and remappable `wp:docPr/@id` values are ignored. Surviving deleted text carriers normalize to ordinary text, empty run properties are discarded, and adjacent plain text runs with identical attributes and properties coalesce. Metric contract version 13 records this observer.
+   - `inline-trees` v1 (scope `accepted` or `rejected`): the complete ordered `m:oMath`, `w:drawing`, or `w:pict` subtrees in the resolved body match declared XML. It retains operators, properties, geometry and textbox content; image references resolve to the SHA-256 of their actual package bytes. Only engine addressing attributes and remappable `wp:docPr/@id` values are ignored. Surviving deleted text carriers normalize to ordinary text, empty run properties are discarded, and adjacent plain text runs with identical attributes and properties coalesce. Metric contract version 14 additionally includes VML pict carriers.
 
 Unknown assertion types, versions or scopes are rejected when the registry is loaded.
 
@@ -408,3 +408,10 @@ tracked whole-paragraph edits or browser interaction.
 The equation/drawing assertions inspect the native content that a text-only observer cannot distinguish. Negative examples change a summation operator, image bytes or textbox text; positive examples allow equivalent math run splits. Untracked-text assertions keep the unchanged suffix and closing paragraph outside revisions where the source can be safely split.
 
 The authored LibreOffice 25.8.7.3 calibration has 15 unsupported views: 12 whole-equation resolutions retain both alternatives, unfinished-field rejection loses its tab, and two whole-drawing resolutions retain an extra empty paragraph. These declarations affect only the corresponding new cases; the other five views remain eligible. Independent complete semantic views, selective reviewer results, exact subtree assertions and SDK checks remain mandatory. [The ten labeled screenshots and source-bound measurements](results/atomic-source/README.md) record the observed limitations and the focused before/after results. No desktop Word behavior or complete suite score is inferred.
+
+
+## Pure textbox geometry
+
+`redline-v23` adds two original cases for Docxodus #1425. Two textboxes share one VML carrier. The reproducer changes only the first width from 80pt to 120pt; the control changes only its body text. Exact accepted/rejected `w:pict` assertions retain both shapes, all geometry attributes, and both bodies. Mutation tests reject a restored old width and missing textbox text, while input-copy checks include structural assertions when the text-only semantic views are equal.
+
+Both authored whole-paragraph redlines retain an extra empty paragraph in LibreOffice 25.8.7.3 after acceptance or rejection. These four measured calibration limitations are declared ineligible; independent markup, exact geometry/body assertions, and SDK checks remain mandatory. [Focused results and labeled previews](results/textbox-geometry/README.md) disclose the limitation without inferring Word behavior or a full-suite score.

@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v22', 'version': 22}
+SUITE = {'id': 'redline-v23', 'version': 23}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -178,6 +178,9 @@ def package(path, body, styles=None, header=None, comments=None, footnotes=None,
 # declared-ineligible comparison is not applied; the run fails as unmeasured if the calibration
 # disagrees with this table in either direction.
 LIBREOFFICE_INELIGIBLE = {
+    **{'redline-textbox-geometry' + suffix: (('accepted', 'rejected'),
+       'LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole textbox-carrier replacement; independent markup, exact VML geometry/text and SDK checks remain mandatory')
+       for suffix in ('', '-control')},
     **{'redline-visible-atom-' + kind: (('accepted',),
        'LibreOffice 25.8.7.3 resolves the schema-valid authored page/column-break deletion but keeps the break and splits the paragraph; independent markup, exact native atoms, schema and LibreOffice rejection remain mandatory')
        for kind in ('page', 'column')},
@@ -317,11 +320,40 @@ def generate():
     inline_control_rewrites(corpus)
     moved_from_text(corpus)
     atomic_source_positions(corpus)
+    textbox_geometry(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(registry, indent=2) + '\n')
     return registry
+
+
+def textbox_geometry(corpus):
+    """Pure VML geometry versus a body-only edit, independently authored for #1425."""
+    def shapes(width, words):
+        def shape(size, offset, text):
+            return ('<v:shape xmlns:v="urn:schemas-microsoft-com:vml" '
+                    f'style="position:absolute;margin-left:{offset}pt;margin-top:18pt;width:{size}pt;height:40pt" '
+                    'coordsize="21600,21600" path="m,l,21600r21600,l21600,xe" strokecolor="#226688" fillcolor="#eef6f8"><v:textbox><w:txbxContent>' +
+                    p(t(text)) + '</w:txbxContent></v:textbox></v:shape>')
+        return '<w:r><w:pict>' + shape(width, 0, words) + shape(100, 150, 'Juniper second.') + '</w:pict></w:r>'
+    for control in (False, True):
+        before = shapes(80, 'Juniper first.')
+        after = shapes(80 if control else 120, 'Juniper edited.' if control else 'Juniper first.')
+        left, right = t('Juniper carrier ') + before + t(' remains here.'), t('Juniper carrier ') + after + t(' remains here.')
+        rev = Revisions()
+        spacing = '<w:spacing w:after="1200"/>'
+        tracked = p(rev.dele(left), props=spacing, mark=rev.mark('del')) + p(rev.ins(right), props=spacing, mark=rev.mark('ins'))
+        assertions = [untracked(CLOSING)]
+        for scope, content in (('rejected', before), ('accepted', after)):
+            root = ET.fromstring(f'<root {NAMESPACES}>' + content + '</root>')
+            assertions.append({'type': 'inline-trees', 'version': 1, 'scope': scope, 'name': 'pict',
+                               'trees': [ET.tostring(e, encoding='unicode') for e in root.iter('{' + W + '}pict')], 'images': {}})
+        corpus.compare('redline-textbox-geometry' + ('-control' if control else ''), 'revisions',
+                       'control' if control else 'reproducer', 'JSv4/Docxodus#1425',
+                       'Two textboxes share a VML carrier; ' + ('only the first body changes' if control else 'only the first width changes'),
+                       {'body': p(left, props=spacing) + p(t(CLOSING))}, {'body': p(right, props=spacing) + p(t(CLOSING))},
+                       {'body': tracked + p(t(CLOSING))}, assertions)
 
 
 def atomic_source_positions(corpus):
