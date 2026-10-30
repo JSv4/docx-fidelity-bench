@@ -229,3 +229,13 @@ The pale page grid is generated from original pixel rules in the same generator.
 The labeled screenshots under `docs/results/export-reliability/` rasterize these exact authored
 inputs and public-renderer outputs. The optional Pillow composition helper adds only renderer
 labels around unchanged page rasters. They contain no font programs or external document content.
+
+The twenty-eight export-reliability follow-up inputs in `core-v75` are original Cobalt text,
+literal OOXML, solid vector geometry, and generated blue/gold or pale-grid pixels in
+`bench/fixtures.py`. No renderer fixture, helper, template, external document, image, or font
+program is imported. The unchanged prior DrawingML page-background case provides a shared
+control for the new VML case. Capture previews show only these independently authored inputs.
+The labeled screenshots under `docs/results/export-reliability-continuations/` contain these
+original inputs and public-renderer outputs. Optional Pillow adds labels around unchanged
+96-DPI page rasters; Poppler bitmap records contain dimensions and hashes only. No external
+document content or font program is distributed in this evidence.

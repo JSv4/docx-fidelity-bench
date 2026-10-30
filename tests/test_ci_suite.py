@@ -15,7 +15,7 @@ class HistoricalCiSuite(unittest.TestCase):
 
     def test_default_keeps_the_complete_corpus(self):
         self.assertIs(select_suite(self.registry), self.registry)
-        self.assertEqual(len(self.registry['cases']), 428)
+        self.assertEqual(len(self.registry['cases']), 456)
 
     def test_explicit_cases_have_a_diagnostic_identity_and_canonical_order(self):
         ids = self.registry['suite']['cases'][:2]
