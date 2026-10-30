@@ -7,7 +7,7 @@ import zipfile
 from pathlib import Path
 from unittest.mock import patch
 
-from bench import common, redline, redline_build, redline_fixtures, revisions
+from bench import common, fixtures, redline, redline_build, redline_fixtures, revisions
 
 W = '{' + revisions.W + '}'
 
@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v21')
-        self.assertEqual(len(registry['cases']), 198)
+        self.assertEqual(registry['suite']['id'], 'redline-v22')
+        self.assertEqual(len(registry['cases']), 208)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -157,6 +157,95 @@ class AuthoredCalibration(unittest.TestCase):
                                 rejected=revisions.resolve(package.story_parts(), 'reject'))
             for assertion in record['assertions']:
                 self.assertTrue(redline._assertion(assertion, package, resolved)['passed'], record['id'] + ' ' + assertion['type'])
+
+    def test_inline_trees_calibrate_and_reject_operator_changes(self):
+        for record in cases():
+            for assertion in record['assertions']:
+                if assertion['type'] != 'inline-trees':
+                    continue
+                package = load(record['authored'])
+                resolved = {scope: revisions.resolve(package.story_parts(), mode)
+                            for scope, mode in (('accepted', 'accept'), ('rejected', 'reject'))}
+                self.assertTrue(redline._assertion(assertion, package, resolved)['passed'], record['id'])
+        record = case('redline-tab-equation')
+        def change(root):
+            for operator in root.iter(revisions.m('chr')):
+                operator.set(revisions.m('val'), '∏')
+        package = rewrite(record['authored'], change)
+        for assertion in record['assertions']:
+            if assertion['type'] == 'inline-trees':
+                mode = 'accept' if assertion['scope'] == 'accepted' else 'reject'
+                resolved = {assertion['scope']: revisions.resolve(package.story_parts(), mode)}
+                self.assertFalse(redline._assertion(assertion, package, resolved)['passed'])
+
+    def test_inline_trees_allow_equivalent_math_run_splits(self):
+        record = case('redline-tab-equation')
+        def split(root):
+            for parent in root.iter():
+                for run in list(parent):
+                    text = run.find(revisions.m('t'))
+                    if run.tag != revisions.m('r') or text is None or text.text != 'i=1':
+                        continue
+                    at = list(parent).index(run)
+                    first, second = copy.deepcopy(run), copy.deepcopy(run)
+                    first.find(revisions.m('t')).text = 'i='
+                    second.find(revisions.m('t')).text = '1'
+                    parent.remove(run)
+                    parent.insert(at, second)
+                    parent.insert(at, first)
+        package = rewrite(record['authored'], split)
+        for assertion in record['assertions']:
+            if assertion['type'] == 'inline-trees':
+                mode = 'accept' if assertion['scope'] == 'accepted' else 'reject'
+                resolved = {assertion['scope']: revisions.resolve(package.story_parts(), mode)}
+                self.assertTrue(redline._assertion(assertion, package, resolved)['passed'])
+
+    def test_drawing_assertion_rejects_lost_fill_text_and_image_bytes(self):
+        record = case('redline-shared-drawing-source')
+        assertion = next(a for a in record['assertions'] if a['type'] == 'inline-trees' and a['scope'] == 'accepted')
+        wrong = load(case('redline-shared-drawing-source-control')['authored'])
+        self.assertFalse(redline._assertion(assertion, wrong,
+            {'accepted': revisions.resolve(wrong.story_parts(), 'accept')})['passed'])
+        def change_text(root):
+            for box in root.iter(W + 'txbxContent'):
+                for text in box.iter():
+                    if text.tag in {W + 't', W + 'delText'}: text.text = 'Lost text'
+        wrong = rewrite(record['authored'], change_text)
+        self.assertFalse(redline._assertion(assertion, wrong,
+            {'accepted': revisions.resolve(wrong.story_parts(), 'accept')})['passed'])
+        assertion = next(a for a in record['assertions'] if a['type'] == 'inline-trees' and a['scope'] == 'rejected')
+        parts = members(record['authored'])
+        parts['word/media/fill.png'] = fixtures.png(8, 8, lambda x, y: (0x88, 0x22, 0x66))
+        wrong = revisions.Package(parts)
+        self.assertFalse(redline._assertion(assertion, wrong,
+            {'rejected': revisions.resolve(wrong.story_parts(), 'reject')})['passed'])
+
+    def test_inline_tree_declarations_reject_invalid_values(self):
+        for key, value in [('name', []), ('name', 'p'), ('trees', ['<broken']),
+                           ('trees', ['<other/>']), ('trees', None), ('images', []),
+                           ('images', {'rFill': 'not-a-digest'}), ('scope', 'redline')]:
+            registry = common.read_json(redline.MANIFEST)
+            record = next(c for c in registry['cases'] if c['id'] == 'redline-shared-drawing-source')
+            assertion = next(a for a in record['assertions'] if a['type'] == 'inline-trees')
+            assertion[key] = value
+            with self.subTest(key=key, value=value), self.assertRaises(ValueError):
+                redline.validate_registry(registry)
+
+    def test_equation_suffix_must_remain_untracked(self):
+        record = case('redline-tab-equation')
+        def churn(root):
+            paragraph = root.find(W + 'body/' + W + 'p')
+            run = next(e for e in paragraph if e.tag == W + 'r' and ''.join(e.itertext()) == ' Survey ledger.')
+            at = list(paragraph).index(run)
+            paragraph.remove(run)
+            for offset, (kind, text_name) in enumerate((('del', 'delText'), ('ins', 't'))):
+                wrapper = ET.Element(W + kind, {W + 'id': str(900 + offset), W + 'author': 'Bench'})
+                text = ET.SubElement(ET.SubElement(wrapper, W + 'r'), W + text_name)
+                text.text = ' Survey ledger.'
+                paragraph.insert(at + offset, wrapper)
+        wrong = rewrite(record['authored'], churn)
+        assertion = next(a for a in record['assertions'] if a['type'] == 'untracked-text')
+        self.assertFalse(redline._assertion(assertion, wrong, {'redline': None})['passed'])
 
     def test_move_from_text_rejects_deletion_carriers_and_missing_moves(self):
         record = case('redline-moved-from-text')

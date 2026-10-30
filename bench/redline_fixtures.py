@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
@@ -22,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v21', 'version': 21}
+SUITE = {'id': 'redline-v22', 'version': 22}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -225,6 +226,19 @@ LIBREOFFICE_INELIGIBLE = {
 }
 
 
+# Authored 1421 calibration: LibreOffice keeps both whole-equation alternatives after either resolution.
+# Keep independent OOXML/source-order and SDK checks mandatory; this is not a candidate-specific exemption.
+for _case in ('redline-tab-equation', 'redline-tab-equation-control',
+              'redline-tab-equation-consolidate', 'redline-tab-equation-consolidate-control',
+              'redline-field-source-text', 'redline-field-source-text-control'):
+    LIBREOFFICE_INELIGIBLE[_case] = (('accepted', 'rejected'),
+        'LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject')
+LIBREOFFICE_INELIGIBLE['redline-captured-field-source'] = (('rejected',),
+    'LibreOffice 25.8.7.3 drops the tab from the authored unfinished instruction-only field on reject')
+LIBREOFFICE_INELIGIBLE['redline-shared-drawing-source'] = (('accepted', 'rejected'),
+    'LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole drawing-carrier replacement')
+
+
 class Corpus:
     def __init__(self, root):
         self.root = root
@@ -302,11 +316,122 @@ def generate():
     visible_atom_edits(corpus)
     inline_control_rewrites(corpus)
     moved_from_text(corpus)
+    atomic_source_positions(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(registry, indent=2) + '\n')
     return registry
+
+
+def atomic_source_positions(corpus):
+    """Source ownership beside atoms, field normalization, and indivisible drawings."""
+    issue = 'JSv4/Docxodus#1421'
+    tab = '<w:r><w:tab/></w:r>'
+    def equation(limit):
+        return ('<m:oMath><m:nary><m:naryPr><m:chr m:val="∑"/><m:limLoc m:val="undOvr"/></m:naryPr>'
+                '<m:sub><m:r><m:t>i=1</m:t></m:r></m:sub><m:sup><m:r><m:t>' + limit + '</m:t></m:r></m:sup>'
+                '<m:e><m:r><m:t>x</m:t></m:r></m:e></m:nary></m:oMath>')
+    def close(body):
+        return body + p(t(CLOSING))
+    def trees(name, before, after, images=None):
+        namespace = 'http://schemas.openxmlformats.org/officeDocument/2006/math' if name == 'oMath' else W
+        result = []
+        for scope, content in (('rejected', before), ('accepted', after)):
+            root = ET.fromstring(f'<root {NAMESPACES}>' + content + '</root>')
+            result.append({'type': 'inline-trees', 'version': 1, 'scope': scope, 'name': name,
+                           'trees': [ET.tostring(e, encoding='unicode') for e in root.iter('{' + namespace + '}' + name)],
+                           'images': images or {}})
+        return result
+    for control in (False, True):
+        lead = t('III.') + (t(' ') if control else tab)
+        def body(limit, tail):
+            return close(p(lead + equation(limit) + t(' Survey ' + tail + '.')))
+        left, right = body('n', 'ledger'), body('k', 'ledger')
+        rev = Revisions()
+        tracked = close(p(lead + rev.dele(equation('n')) + rev.ins(equation('k')) + t(' Survey ledger.')))
+        suffix = '-control' if control else ''
+        case_id = 'redline-tab-equation' + suffix
+        corpus.compare(case_id, 'revisions', 'control' if control else 'reproducer', issue,
+                       'An equation edit after ' + ('a space' if control else 'a retained tab'),
+                       {'body': left}, {'body': right}, {'body': tracked},
+                       [untracked('III.', ' Survey ledger.', CLOSING)] + trees('oMath', equation('n'), equation('k')))
+        case_id = 'redline-tab-equation-consolidate' + suffix
+        base = corpus.file(case_id, 'base', body=left)
+        alice = corpus.file(case_id, 'equation-reviewer', body=right)
+        bob = corpus.file(case_id, 'text-reviewer', body=body('n', 'schedule'))
+        accepted = corpus.file(case_id, 'accepted', body=body('k', 'schedule'))
+        rev = Revisions()
+        authored = corpus.file(case_id, 'authored-redline', body=close(p(lead +
+            rev.dele(equation('n')) + rev.ins(equation('k')) + t(' Survey ') +
+            rev.dele(t('ledger'), 'Other') + rev.ins(t('schedule'), 'Other') + t('.'))))
+        corpus.add(case_id, 'consolidate', 'control' if control else 'reproducer', issue,
+                   'Two reviewers edit an equation and following text after ' + ('a space' if control else 'a tab'),
+                   'consolidate', [dict(base, role='base'), dict(alice, role='reviewer', author=AUTHOR),
+                                   dict(bob, role='reviewer', author='Other')],
+                   {'accepted': accepted, 'rejected': base}, authored,
+                   [untracked('III.', ' Survey ', CLOSING)] + trees('oMath', equation('n'), equation('k')))
+
+    for control in (False, True):
+        # Word's field reader omits instruction-phase w:t from the visible result; it remains source content.
+        prefix = ('<w:r><w:fldChar w:fldCharType="begin"/>' + ('' if control else '<w:t>code note</w:t>') +
+                  '<w:instrText xml:space="preserve"> PAGE </w:instrText><w:fldChar w:fldCharType="separate"/>'
+                  '<w:t>1</w:t><w:fldChar w:fldCharType="end"/></w:r>' + t(' '))
+        rev = Revisions()
+        corpus.compare('redline-field-source-text' + ('-control' if control else ''), 'fields',
+                       'control' if control else 'reproducer', issue,
+                       'Equation following a field ' + ('without' if control else 'with') + ' instruction-phase text',
+                       {'body': close(p(prefix + equation('n')))}, {'body': close(p(prefix + equation('k')))},
+                       {'body': close(p(prefix + rev.dele(equation('n')) + rev.ins(equation('k'))))},
+                       [untracked(CLOSING)] + trees('oMath', equation('n'), equation('k')))
+
+    for control in (False, True):
+        prefix = ('<w:r><w:fldChar w:fldCharType="begin"/>' +
+                  ('<w:instrText> PAGE </w:instrText><w:fldChar w:fldCharType="separate"/><w:t>1</w:t><w:fldChar w:fldCharType="end"/>' if control else '') +
+                  '</w:r><w:hyperlink w:anchor="reference">' + tab + '</w:hyperlink>')
+        suffix = ''
+        left, right = prefix + t('Alder') + suffix, prefix + t('Birch') + suffix
+        rev = Revisions()
+        tracked = (p(prefix + rev.dele(t('Alder')) + rev.ins(t('Birch')) + suffix) if control else
+                   p(rev.dele('<w:r><w:fldChar w:fldCharType="begin"/></w:r>') +
+                     '<w:hyperlink w:anchor="reference">' + rev.dele(tab) + '</w:hyperlink>' + rev.dele(t('Alder')), mark=rev.mark('del')) +
+                   p(rev.ins('<w:r><w:fldChar w:fldCharType="begin"/></w:r>') +
+                     '<w:hyperlink w:anchor="reference">' + rev.ins(tab) + '</w:hyperlink>' + rev.ins(t('Birch')), mark=rev.mark('ins')))
+        corpus.compare('redline-captured-field-source' + ('-control' if control else ''), 'fields',
+                       'control' if control else 'reproducer', issue,
+                       ('Text following a closed field' if control else 'Unfinished instruction-only field') + ' with a hyperlink and edited text',
+                       {'body': close(p(left))}, {'body': close(p(right))}, {'body': close(tracked)}, [untracked(CLOSING)])
+
+    from .fixtures import png
+    image = png(8, 8, lambda x, y: (0x22, 0x66, 0x88))
+    assets = 'Original 8 by 8 solid-color PNG generated here; literal text and OOXML; no embedded fonts'
+    image_parts = {'relations_extra': [('rFill', 'image', 'media/fill.png')],
+                   'content_types_extra': '<Default Extension="png" ContentType="image/png"/>',
+                   'extra_parts': {'word/media/fill.png': image}}
+    def drawing(image_fill, text):
+        fill = ('<a:blipFill><a:blip r:embed="rFill"/><a:stretch><a:fillRect/></a:stretch></a:blipFill>' if image_fill else
+                '<a:solidFill><a:srgbClr val="226688"/></a:solidFill>')
+        return ('<w:r><w:drawing xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
+                'xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" '
+                'xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+                '<wp:inline><wp:extent cx="1828800" cy="457200"/><wp:docPr id="1" name="Survey box"/>'
+                '<a:graphic><a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+                '<wps:wsp><wps:cNvSpPr txBox="1"/><wps:spPr><a:xfrm><a:off x="0" y="0"/>'
+                '<a:ext cx="1828800" cy="457200"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom>' + fill +
+                '</wps:spPr><wps:txbx><w:txbxContent>' + p(text) + '</w:txbxContent></wps:txbx><wps:bodyPr/>'
+                '</wps:wsp></a:graphicData></a:graphic></wp:inline></w:drawing></w:r>')
+    for control in (False, True):
+        rev = Revisions()
+        left = t('Card Alder ') + drawing(True, t('Survey box'))
+        right = t('Card Birch ') + drawing(control, t('Survey box'))
+        tracked = (p(t('Card ') + rev.dele(t('Alder')) + rev.ins(t('Birch')) + t(' ') + drawing(True, t('Survey box'))) if control else
+                   p(rev.dele(left), mark=rev.mark('del')) + p(rev.ins(right.replace('docPr id="1"', 'docPr id="2"')), mark=rev.mark('ins')))
+        corpus.compare('redline-shared-drawing-source' + ('-control' if control else ''), 'revisions',
+                       'control' if control else 'reproducer', issue,
+                       'Image-filled textbox ' + ('beside an ordinary text edit' if control else 'changes to solid fill beside a text edit'),
+                       dict(image_parts, body=close(p(left))), dict(image_parts, body=close(p(right))),
+                       dict(image_parts, body=close(tracked)), [untracked(CLOSING)] +
+                       trees('drawing', left, right, {'rFill': hashlib.sha256(image).hexdigest()}), assets=assets)
 
 
 def moved_from_text(corpus):
