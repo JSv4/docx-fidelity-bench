@@ -3490,7 +3490,25 @@ def generate():
     export_reliability_cases(add)
     export_inline_context_cases(add, cases)
     export_story_context_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v77', 'version': 77, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Docxodus #1424: Firefox clamps oversized font probes, collapsing natural line heights.
+    # Explicit line heights are the control; all words and layout are authored here.
+    for control in (False, True):
+        texts = ['Pine heading first', 'Pine heading second', 'Pine body first', 'Pine body second',
+                 'Pine table first', 'Pine table second', 'Pine closing line']
+        def pine_line(words, size):
+            spacing = f'w:line="{size * 30}" w:lineRule="exact"' if control else 'w:line="240" w:lineRule="auto"'
+            content = '<w:r><w:br/></w:r>'.join(run(word, f'<w:sz w:val="{size * 2}"/>') for word in words)
+            return para(props=f'<w:spacing w:after="0" {spacing}/>', runs=content)
+        body = pine_line(texts[:2], 34) + pine_line(texts[2:4], 14)
+        body += ('<w:tbl><w:tblPr><w:tblW w:w="6000" w:type="dxa"/></w:tblPr>'
+                 '<w:tblGrid><w:gridCol w:w="6000"/></w:tblGrid><w:tr><w:tc>'
+                 '<w:tcPr><w:tcW w:w="6000" w:type="dxa"/></w:tcPr>'
+                 + pine_line(texts[4:6], 14) + '</w:tc></w:tr></w:tbl>')
+        body += pine_line(texts[6:], 14)
+        add('paragraph-firefox-' + ('exact-lines-control' if control else 'natural-lines'), 'paragraphs',
+            ('Explicit-height control' if control else 'Natural-height heading, body and table lines') +
+            ' for Firefox paginated overlap (Docxodus #1424)', texts, body, styles_xml=inline_styles)
+    registry = {'schema': 1, 'suite': {'id': 'core-v78', 'version': 78, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
