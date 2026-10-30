@@ -20,14 +20,37 @@ The page score is `100 × min(SSIM, ink F1)`. Keep full precision in JSON and ro
 
 A case uses its lowest page score. One bad page cannot be averaged away. Any mandatory failure makes the case score zero, even if most pixels match. Extra and missing pages remain in the union of page indices and score zero. Known conversion failures are measured candidate failures with zero scores. Missing references, invalid reference content/fonts, or broken measurement infrastructure are unmeasured.
 
-Metric version 3 permits a case to declare `clippedTokens`: words wholly below an exact-height row,
+Metric version 3 permits a case to declare `clippedTokens`: words wholly outside a source-proven clip,
 with maximum authored counts. Such words may be absent from the PDF text layer or present whole.
 A fragment, duplicate beyond its authored count, or any missing mandatory visible word fails.
-Source validation requires every occurrence to lie after enough explicitly exact-spaced paragraphs
-to exceed the row height; mandatory and clipped inventories cannot overlap. The complete visible
+The original source proof requires every occurrence to lie after enough explicitly exact-spaced paragraphs
+to exceed an exact row height; mandatory and clipped inventories cannot overlap. The complete visible
 inventory, optional counts, observed counts and raw PDF words remain evidence. This does not remove
 ink from raster scoring or exempt ordinary body text. The declaration binds the suite digest; no
 historical score is relabeled under the new contract.
+
+Starting with `core-v77`, `bench/source_clipping.py` also proves two narrow fixed-textbox cases.
+The box must have explicit positive geometry, zero insets, no rotation/effects, and fixed sizing:
+DrawingML `noAutofit`, or a VML box with only numeric point width and height. Linked stories,
+incoming VML links, conditional alternatives, relative sizing, explicit overflow, inherited raised
+or hidden text and unsupported ancestry are rejected. Every paragraph has explicit zero margins
+and exact line spacing; all runs request the pinned Liberation Serif family, use printable ASCII,
+and have positive explicit font sizes no larger than the exact line. For a vertical clip, the
+paragraph's minimum source offset must exceed the box height by **more than two font ems**.
+Equality and partially exposed lines have no exemption. The four pinned font faces have global
+glyph tops below 1.01 em; the larger separation is deliberately conservative. Font metrics and
+independent boundary probes are recorded in the focused evidence, without copying font programs.
+
+The second textbox proof admits an entire box far outside paper horizontally. It requires one
+explicit, valid page section, a body-hosted nonwrapping anchor, horizontal margin and vertical
+paragraph offsets, and the same fixed-box/story restrictions. A box is optional only if its
+right edge plus the entire paper width is negative, or its left offset exceeds the entire paper
+width. This bounds any valid margin origin without estimating paragraph height or placement.
+Closer off-paper boxes, straddling boxes and unknown coordinate bases remain unsupported.
+Every claimed word must occur only in the proven source region with its exact authored count.
+Neither proof uses candidate geometry, warnings or success to decide what may be omitted.
+The PDF token rules and unmodified full-page raster measurements remain the same; the new suite,
+generator and inspector digests distinguish these source declarations from historical results.
 
 Mandatory checks cover conversion, artifact digests, page count, physical MediaBox and CropBox coordinates within 0.25 PDF points, rotation, raster dimensions, the full visible token inventory including duplicate counts (visible text excludes the invisible Unicode bidirectional formatting controls U+061C, U+200E, U+200F and U+202A–U+202E, U+2066–U+2069; every other character, including letters, punctuation, soft hyphens and zero-width spaces, still counts unless the explicit decorative-leader policy below applies, and each normalized word keeps its raw extraction as evidence), declared font families, and each case's assertions. Physical box coordinates include UserUnit. Marker matching uses the same visible text and must be unique; ambiguity fails. Region assertion version 2 allows a declared 0.0001-point boundary tolerance for PDF coordinate serialization, about 0.000133 pixels at 96 DPI; version 1 retains exact boundaries. This does not shift or align rasters. Current assertions check named regions/page membership, markers sharing a page, and marker origins relative to the captured reference. The endnote origin uses 0.5-point tolerance and the reference page, so reference providers can use distinct endnote page layouts. An assertion marked `adjudicated: word` records layout measured in Word reference PDFs that LibreOffice does not follow. It binds every candidate and every Word reference. It does not bind a LibreOffice capture, either when deciding a LibreOffice reference's eligibility or when LibreOffice is measured against a LibreOffice track as calibration, so that track stays complete and its calibration stays at 100 while other candidates are held to Word's layout. On such a case, a candidate that follows Word is compared with LibreOffice pages that hold different lines, which caps its raster score there. Future link, reading order, precise baseline, and perceptual color assertions need explicit implementations and tests; they are not implied by this score.
 

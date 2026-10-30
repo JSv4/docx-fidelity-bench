@@ -1361,6 +1361,215 @@ def export_inline_context_cases(add, cases):
                      namespaces_extra=' xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"')
 
 
+def export_story_context_cases(add, cases):
+    """Original Jasper probes for positioned stories and explicit wrapping rules."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:cs="{FONT}"/><w:sz w:val="24"/>'
+              '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0"/>'
+              '<w:widowControl w:val="0"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    paper = ('<w:sectPr><w:pgSz w:w="9200" w:h="9600"/><w:pgMar w:top="800" w:right="1000" '
+             'w:bottom="800" w:left="1000" w:header="200" w:footer="200"/></w:sectPr>')
+
+    def case(name, category, description, texts, body, **kwargs):
+        add('export-story-context-' + name, category, description, texts, body,
+            sect=paper, styles_xml=styles, **kwargs)
+
+    namespaces = ' xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"'
+
+    def fixed_box(dialect, content, width, height, placement=''):
+        if dialect == 'vml':
+            return ('<w:r><w:pict><v:shape style="' + placement + f'width:{width}pt;height:{height}pt" '
+                    'filled="f" stroked="f"><v:textbox inset="0,0,0,0"><w:txbxContent>' + content
+                    + '</w:txbxContent></v:textbox></v:shape></w:pict></w:r>')
+        cx, cy = width * 12700, height * 12700
+        return ('<w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0">'
+                f'<wp:extent cx="{cx}" cy="{cy}"/><wp:docPr id="63" name="Jasper column card"/>'
+                '<a:graphic><a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+                '<wps:wsp><wps:cNvSpPr txBox="1"/><wps:spPr><a:xfrm><a:off x="0" y="0"/>'
+                f'<a:ext cx="{cx}" cy="{cy}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom>'
+                '<a:noFill/><a:ln><a:noFill/></a:ln></wps:spPr><wps:txbx><w:txbxContent>' + content
+                + '</w:txbxContent></wps:txbx><wps:bodyPr lIns="0" tIns="0" rIns="0" bIns="0">'
+                '<a:noAutofit/></wps:bodyPr></wps:wsp></a:graphicData></a:graphic></wp:inline></w:drawing></w:r>')
+
+    for dialect in ('drawingml', 'vml'):
+        for mode in ('isolated-control', 'mixed', 'single'):
+            paragraphs, labels = [], []
+            for index in range(1, 6):
+                row = [f'Jasper{column}{index:02d}' for column in ('A', 'B', 'C')]
+                labels += row
+                elements = [f'<w:t>{row[0]}</w:t>', '<w:tab/>', f'<w:t>{row[1]}</w:t>', '<w:tab/>', f'<w:t>{row[2]}</w:t>']
+                groups = elements if mode == 'isolated-control' else ([elements[0], ''.join(elements[1:])] if mode == 'mixed' else [''.join(elements)])
+                content = ''.join('<w:r><w:rPr><w:i/><w:color w:val="4A286F"/></w:rPr>' + group + '</w:r>' for group in groups)
+                properties = ('<w:spacing w:line="300" w:lineRule="exact"/><w:tabs><w:tab w:val="left" w:pos="2000"/>'
+                              '<w:tab w:val="left" w:pos="4200"/></w:tabs>')
+                paragraphs.append(para(props=properties, runs=content))
+            case(f'mixed-tabs-{dialect}-{mode}', 'paragraphs',
+                 'Nested textbox tab/text run partitions retain the same three authored columns; isolated-run control (Docxodus #1465)',
+                 labels + ['JasperColumnsReceipt'], para(runs=fixed_box(dialect, ''.join(paragraphs), 300, 90)) + para('JasperColumnsReceipt'),
+                 namespaces_extra=namespaces,
+                 assertions=[{'type': 'marker-region', 'version': 2, 'marker': marker, 'occurrence': 1, 'page': 1,
+                              'rect': [x - 4, 35, x + 80, 65]} for marker, x in [('JasperB01', 150), ('JasperC01', 260)]])
+
+    for basis in ('page', 'margin', 'inline-control'):
+        labels, boxes, assertions = [], [], []
+        count = 1 if basis == 'inline-control' else 4
+        for index in range(count):
+            lines = [f'JasperPanel{index + 1}{letter}' for letter in ('A', 'B', 'C')]
+            labels += lines
+            content = ''.join(para(line, '<w:spacing w:line="300" w:lineRule="exact"/>') for line in lines)
+            placement = ''
+            if basis != 'inline-control':
+                x, y = 25 + (index % 2) * 225, 70 + (index // 2) * 185
+                left, top = (x - 50, y - 40) if basis == 'margin' else (x, y)
+                placement = (f'position:absolute;margin-left:{left}pt;margin-top:{top}pt;'
+                             f'mso-position-horizontal-relative:{basis};mso-position-vertical-relative:{basis};'
+                             f'z-index:{-7 if index % 2 else 7};')
+                assertions.append({'type': 'marker-region', 'version': 2, 'marker': lines[0], 'occurrence': 1,
+                                   'page': 1, 'rect': [x - 3, y - 3, x + 175, y + 25]})
+            boxes.append(fixed_box('vml', content, 185, 115, placement))
+        case('vml-panels-' + basis, 'paragraphs',
+             'Four explicitly positioned VML panels exceed body height if stacked inline; page/margin and fitting inline controls (Docxodus #1462)',
+             labels + ['JasperPanelsReceipt'], para(runs=''.join(boxes)) + para('JasperPanelsReceipt'),
+             namespaces_extra=namespaces, assertions=assertions)
+
+    for mode in ('continued', 'fitting-control', 'unlinked-control'):
+        labels = [f'JasperFlow{index:02d}' for index in range(1, 9 if mode == 'fitting-control' else 43)]
+        content = para(props='<w:spacing w:before="0" w:after="0" w:line="260" w:lineRule="exact"/>',
+                       runs=run(' '.join(labels), '<w:sz w:val="20"/>'))
+        boxes = []
+        dimensions = [(160, 310)] if mode == 'unlinked-control' else [(160, 75), (190, 150)]
+        for index, (width, height) in enumerate(dimensions):
+            cx, cy = width * 12700, height * 12700
+            story = ('<wps:txbx' + ('' if mode == 'unlinked-control' else ' id="69"') + '><w:txbxContent>'
+                     + content + '</w:txbxContent></wps:txbx>') if index == 0 else '<wps:linkedTxbx id="69" seq="1"/>'
+            boxes.append('<w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0">'
+                         f'<wp:extent cx="{cx}" cy="{cy}"/><wp:docPr id="{70 + index}" name="Jasper linked tray {index + 1}"/>'
+                         '<a:graphic><a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+                         '<wps:wsp><wps:cNvSpPr txBox="1"/><wps:spPr><a:xfrm><a:off x="0" y="0"/>'
+                         f'<a:ext cx="{cx}" cy="{cy}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom>'
+                         '<a:noFill/><a:ln w="6350"><a:solidFill><a:srgbClr val="705345"/></a:solidFill></a:ln></wps:spPr>'
+                         + story + '<wps:bodyPr lIns="0" tIns="0" rIns="0" bIns="0"><a:noAutofit/></wps:bodyPr>'
+                         '</wps:wsp></a:graphicData></a:graphic></wp:inline></w:drawing></w:r>')
+        case('linked-textboxes-' + mode, 'paragraphs',
+             'One ordinary story continues through unequal fixed WPS boxes; fitting linked and taller unlinked controls',
+             labels + ['JasperLinkedReceipt'], para(runs=''.join(boxes)) + para('JasperLinkedReceipt'), namespaces_extra=namespaces)
+
+    for dialect in ('drawingml', 'vml'):
+        for clipped in (False, True):
+            labels = ['JasperClipA', 'JasperClipB', 'JasperClipC', 'JasperClipTail']
+            run_properties = f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="20"/>'
+            content = ''.join(para(props='<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="exact"/>',
+                                   runs=run(label, run_properties)) for label in labels[:3] + [' ', ' '] + labels[3:])
+            case('source-clip-' + dialect + ('-clipped' if clipped else '-visible-control'), 'paragraphs',
+                 'Two blank exact lines separate the final paragraph from a fixed zero-inset clip by more than two font ems; taller visible control',
+                 labels[:3 if clipped else 4] + ['JasperClipReceipt'],
+                 para(runs=fixed_box(dialect, content, 170, 36 if clipped else 84)) + para('JasperClipReceipt'),
+                 namespaces_extra=namespaces)
+            if clipped:
+                cases[-1]['clippedTokens'] = {'JasperClipTail': 1}
+
+    for raised in (False, True):
+        content = para(props='<w:spacing w:before="0" w:after="0" w:line="280" w:lineRule="exact"/>',
+                       runs=run('JasperLiftLabel', '<w:sz w:val="22"/>'))
+        box = fixed_box('drawingml', content, 170, 32)
+        box = box.replace('<w:r>', '<w:r><w:rPr><w:position w:val="' + ('36' if raised else '0') + '"/></w:rPr>', 1)
+        case('raised-inline-box' + ('-raised' if raised else '-unraised-control'), 'paragraphs',
+             'An explicit positive run position raises an inline textbox into the paper margin while preserving ordinary body flow; unraised control',
+             ['JasperLiftLabel', 'JasperLiftReceipt'], para(runs=box) + para('JasperLiftReceipt'), namespaces_extra=namespaces,
+             assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'JasperLiftLabel', 'occurrence': 1,
+                          'page': 1, 'rect': [45, 5 if raised else 35, 220, 38 if raised else 70]}])
+
+    for outside in (False, True):
+        labels = ['JasperOffA', 'JasperOffB']
+        content = ''.join(para(props='<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="exact"/>',
+                               runs=run(label, f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="20"/>'))
+                          for label in labels)
+        box = fixed_box('drawingml', content, 140, 30)
+        opening = ('<wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" relativeHeight="0" '
+                   'behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1"><wp:simplePos x="0" y="0"/>'
+                   '<wp:positionH relativeFrom="margin"><wp:posOffset>' + ('-10160000' if outside else '0')
+                   + '</wp:posOffset></wp:positionH><wp:positionV relativeFrom="paragraph"><wp:posOffset>0</wp:posOffset></wp:positionV>')
+        box = box.replace('<wp:inline distT="0" distB="0" distL="0" distR="0">', opening)
+        box = box.replace('<wp:docPr', '<wp:wrapNone/><wp:docPr').replace('</wp:inline>', '</wp:anchor>')
+        case('offpaper-margin-paragraph-' + ('outside' if outside else 'visible-control'), 'paragraphs',
+             'A fixed zero-inset margin/paragraph textbox lies wholly beyond paper under a conservative horizontal bound; same on-paper control',
+             ([] if outside else labels) + ['JasperOffReceipt'],
+             para(runs=box) + para('JasperOffReceipt', '<w:spacing w:before="800" w:after="0"/>'), namespaces_extra=namespaces)
+        if outside:
+            cases[-1]['clippedTokens'] = dict(Counter(labels))
+
+    for dialect in ('drawingml', 'vml'):
+        for mode in ('wrapping-prefix', 'short-prefix-control', 'inset-control'):
+            labels = [f'JasperTab{index:02d}' for index in range(1, 4 if mode == 'short-prefix-control' else 39)]
+            content = para(props='<w:spacing w:before="0" w:after="0" w:line="260" w:lineRule="exact"/>'
+                                 '<w:tabs><w:tab w:val="left" w:pos="1800"/></w:tabs>',
+                           runs=run(' '.join(labels) + ' ', '<w:sz w:val="20"/>') + '<w:r><w:tab/></w:r>'
+                           + run('JasperTabStop', '<w:sz w:val="20"/>'))
+            box = fixed_box(dialect, content, 280 if mode == 'inset-control' else 260, 180)
+            if mode == 'inset-control':
+                box = (box.replace('inset="0,0,0,0"', 'inset="10pt,0,10pt,0"') if dialect == 'vml'
+                       else box.replace('lIns="0" tIns="0" rIns="0" bIns="0"', 'lIns="127000" tIns="0" rIns="127000" bIns="0"'))
+            case(f'textbox-tab-width-{dialect}-{mode}', 'paragraphs',
+                 'Known fixed textbox content width permits a long prefix to wrap before an isolated tab; short-prefix and equivalent inset controls',
+                 labels + ['JasperTabStop', 'JasperTabWidthReceipt'], para(runs=box) + para('JasperTabWidthReceipt'),
+                 namespaces_extra=namespaces)
+
+    for kind in ('oval', 'rect'):
+        for positioned in (False, True):
+            placement = ('position:absolute;margin-left:8pt;margin-top:12pt;mso-position-horizontal-relative:page;'
+                         'mso-position-vertical-relative:page;' if positioned else '')
+            shape = ('<w:r><w:pict><v:' + kind + ' alt="[SHAPE]" style="' + placement
+                     + f'width:160pt;height:{450 if positioned else 60}pt;z-index:-9"><v:fill color="#DCE9D2"/>'
+                     + '</v:' + kind + '></w:pict></w:r>')
+            case('vml-leaf-' + kind + ('-positioned' if positioned else '-inline-control'), 'images',
+                 'Page-positioned legacy leaf keeps its authored fallback outside body flow; fitting inline control, not oval/rectangle fidelity',
+                 ['[SHAPE]', 'JasperLeafBefore', 'JasperLeafAfter'], para(runs=shape + run('JasperLeafBefore')) + para('JasperLeafAfter'),
+                 namespaces_extra=namespaces)
+
+    for behind in (False, True):
+        for tall in (False, True):
+            height, width = (430 if tall else 64), 135
+            cx, cy = width * 12700, height * 12700
+            drawing_xml = ('<w:r><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" '
+                           f'relativeHeight="6" behindDoc="{int(behind)}" locked="0" layoutInCell="1" allowOverlap="1">'
+                           '<wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="column"><wp:posOffset>25400</wp:posOffset></wp:positionH>'
+                           '<wp:positionV relativeFrom="paragraph"><wp:posOffset>0</wp:posOffset></wp:positionV>'
+                           f'<wp:extent cx="{cx}" cy="{cy}"/><wp:wrapTopAndBottom/><wp:docPr id="67" name="Jasper pale column"/>'
+                           '<a:graphic><a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+                           '<wps:wsp><wps:cNvSpPr/><wps:spPr><a:xfrm><a:off x="0" y="0"/>'
+                           f'<a:ext cx="{cx}" cy="{cy}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom>'
+                           '<a:solidFill><a:srgbClr val="DCE9D2"/></a:solidFill><a:ln w="12700">'
+                           '<a:solidFill><a:srgbClr val="4A6A3A"/></a:solidFill></a:ln></wps:spPr><wps:bodyPr/>'
+                           '</wps:wsp></a:graphicData></a:graphic></wp:anchor></w:drawing></w:r>')
+            case('shape-clearance-' + ('behind' if behind else 'front') + ('-oversized' if tall else '-fitting-control'), 'images',
+                 'Top/bottom text clearance larger than the body has an explicit warned fallback; fitting and stacking-order controls',
+                 ['JasperClearanceStart', 'JasperClearanceEnd'], para(runs=drawing_xml + run('JasperClearanceStart')) + para('JasperClearanceEnd'),
+                 namespaces_extra=namespaces)
+
+    tile = png(40, 40, lambda x, y: (75, 125, 90) if (x // 5 + y // 5) % 2 else (220, 238, 205))
+    for mode in ('square-front', 'square-behind', 'none-behind-control'):
+        behind = mode != 'square-front'
+        square = mode != 'none-behind-control'
+        wrap = '<wp:wrapSquare wrapText="right"/>' if square else '<wp:wrapNone/>'
+        drawing_xml = ('<w:r><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="50800" simplePos="0" '
+                       f'relativeHeight="5" behindDoc="{int(behind)}" locked="0" layoutInCell="1" allowOverlap="1">'
+                       '<wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="column"><wp:posOffset>0</wp:posOffset></wp:positionH>'
+                       '<wp:positionV relativeFrom="paragraph"><wp:posOffset>0</wp:posOffset></wp:positionV>'
+                       '<wp:extent cx="1117600" cy="863600"/>' + wrap + '<wp:docPr id="61" name="Jasper checker panel"/>'
+                       '<a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic>'
+                       '<pic:nvPicPr><pic:cNvPr id="61" name="Jasper checker panel"/><pic:cNvPicPr/></pic:nvPicPr>'
+                       '<pic:blipFill><a:blip r:embed="rJasperCheck"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill>'
+                       '<pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="1117600" cy="863600"/></a:xfrm>'
+                       '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic>'
+                       '</wp:anchor></w:drawing></w:r>')
+        case('picture-' + mode, 'images',
+             'Explicit square wrapping remains active independently of behind-text stacking; nonwrapping behind-text control',
+             ['JasperWrapMarker', 'JasperWrapReceipt'], para(runs=drawing_xml + run('JasperWrapMarker')) + para('JasperWrapReceipt'),
+             extra_parts={'word/media/jasper-check.png': tile}, relations_extra=[('rJasperCheck', 'image', 'media/jasper-check.png')],
+             assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'JasperWrapMarker', 'occurrence': 1,
+                          'page': 1, 'rect': [138 if square else 45, 35, 400 if square else 170, 85]}])
+
+
 def generate():
     cases = []
     def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT, literal_parts=None, relations_extra=(), content_types_extra=''):
@@ -3280,7 +3489,8 @@ def generate():
                 [text], para(runs=content), styles_xml=inline_styles)
     export_reliability_cases(add)
     export_inline_context_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v76', 'version': 76, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    export_story_context_cases(add, cases)
+    registry = {'schema': 1, 'suite': {'id': 'core-v77', 'version': 77, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

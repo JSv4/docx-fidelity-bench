@@ -11,6 +11,13 @@ reproducer/control inputs. [Labeled before/after evidence](docs/results/editor-r
 records five baseline failures, five passing controls and ten candidate passes. The PDF and
 redline suites and their metrics are unchanged.
 
+`core-v77` adds 37 independently authored positioned-story, tab, textbox and wrapping cases.
+The new fixed-box clipping contract derives optional words only from conservative source geometry
+and exact paragraph lines; candidate-reported clipping never grants an exemption. All 496 previous
+inputs and case assertions remain unchanged apart from shared generator hashes.
+[Focused evidence](docs/results/export-story-contexts/README.md) separates original failures,
+composition regressions, explicit warning/strict-policy outcomes and reference limitations.
+
 `core-v76` adds 40 independently authored paragraph, table, textbox and inline-object cases.
 They cover automatic spacing, both tab carriers, bookmarked and merged tables, impossible
 cell keeps, inherited frame defaults, signed wrap clearances, floating pictures, and stable

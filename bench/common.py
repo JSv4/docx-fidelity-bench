@@ -132,6 +132,8 @@ def validate_registry(registry=None):
             w = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
             all_words, row_words = Counter(), Counter()
             with ZipFile(contained(ROOT, case['input'])) as archive:
+                from .source_clipping import textbox_clipped_words
+                row_words.update(textbox_clipped_words(archive))
                 for name in archive.namelist():
                     if not name.startswith('word/') or not name.endswith('.xml'): continue
                     xml = ET.fromstring(archive.read(name))
@@ -151,7 +153,7 @@ def validate_registry(registry=None):
                                         row_words.update(' '.join(t.text or '' for t in paragraph.iter(w + 't')).split())
                                     offset += int(spacing.get(w + 'line'))
             if any(all_words[word] != count or row_words[word] != count for word, count in optional.items()):
-                raise ValueError('Clipped tokens must occur only below an exact row height, with authored exact line spacing and counts')
+                raise ValueError('Clipped tokens must occur only outside a proven exact row or fixed textbox clip, with authored exact line spacing and counts')
         validate_render_profile(case['profile'])
         validate_pdf_text_policy(case)
         if not isinstance(case.get('htmlAssertions', []), list):

@@ -252,3 +252,14 @@ unchanged 96-DPI rasters with labels; Poppler inspections record actual PDF cont
 The unsupported VML-oval cases author their `[SHAPE]` alternate labels explicitly; the
 Docxodus placeholder contract is distinguished from LibreOffice oval painting and does not
 claim vector-rendering parity.
+
+The thirty-seven positioned-story cases in `core-v77` contain original Jasper text, literal OOXML,
+a generated green checker bitmap and plain vector geometry from `bench/fixtures.py`. No renderer
+fixture, helper, diagnostic document or third-party content is imported. Legacy leaf shapes explicitly
+author their `[SHAPE]` fallback labels, so the placeholder contract does not claim oval/rectangle parity.
+The independent source-clipping proof and its Quartz mutation tests are original benchmark code.
+They inspect only tightly constrained fixed geometry and exact lines in authored packages. Vertical exclusions require printable ASCII in the pinned Liberation Serif family and a gap greater than two font ems. Original Quartz boundary probes and a standard-library reader record the separately installed font metrics without redistributing font bytes. The proof rejects
+links, conditional alternatives and unsupported ancestry; rendered-candidate assertions cannot make
+words optional. Screenshots in `docs/results/export-story-contexts/` contain only these original inputs
+and separately provisioned renderer outputs, with labels around unchanged page rasters. No font
+program is distributed.

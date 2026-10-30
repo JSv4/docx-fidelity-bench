@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "status": "evidence-composition-tamper-checks",
+  "cases": [
+    {
+      "mutation": "changed-unmodified-case",
+      "expectedRejection": "Changed case fields outside correction",
+      "passed": true
+    },
+    {
+      "mutation": "changed-source",
+      "expectedRejection": "Correction used different source/runtime/fonts",
+      "passed": true
+    },
+    {
+      "mutation": "changed-pdf-digest",
+      "expectedRejection": "Changed captured artifact",
+      "passed": true
+    },
+    {
+      "mutation": "changed-generator-path",
+      "expectedRejection": "Changed case fields outside correction",
+      "passed": true
+    },
+    {
+      "mutation": "missing-strict-pdf",
+      "expectedRejection": "Changed or missing strict PDF",
+      "passed": true
+    },
+    {
+      "mutation": "changed-strict-pdf",
+      "expectedRejection": "Changed or missing strict PDF",
+      "passed": true
+    }
+  ],
+  "toolSha256": "13de5929d2e2b765eea5f5857c5481d8f5000cd285339be7abaabf4243948f40"
+}
