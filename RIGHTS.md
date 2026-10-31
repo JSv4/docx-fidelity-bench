@@ -369,3 +369,5 @@ document, image or font program. Labeled review screenshots under `docs/results/
 show only these authored inputs rendered by separately provisioned LibreOffice and Docxodus.
 The production sheets show the same original inputs from CI runs 41180966026 and 41180964319;
 no authentication data, external document content or standalone font program is included.
+
+The production bordered-footnote sheets show the same original Ash inputs from CI runs41221180196 and41221181974, with labels around unchanged page rasters. They contain no external content, font programs or authentication material.
