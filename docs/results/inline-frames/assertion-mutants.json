@@ -1,0 +1,946 @@
+{
+  "method": "Actual local PDF edits; re-extracted by pinned qpdf/Poppler checks. Not reference renders.",
+  "mutants": [
+    {
+      "case": "frames-inline-body-around",
+      "checks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "extra": {},
+          "missing": {},
+          "name": "expected-visible-tokens",
+          "normalizedRaw": {},
+          "passed": true
+        },
+        {
+          "name": "declared-font-families",
+          "observed": [
+            "LiberationSerif",
+            "LiberationSerif"
+          ],
+          "passed": true
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "declaration": {
+            "marker": "AsterFrame1",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              71,
+              71,
+              541,
+              121
+            ],
+            "tolerancePt": 0.0001,
+            "type": "marker-region",
+            "version": 2
+          },
+          "name": "assertion-marker-region",
+          "passed": true
+        },
+        {
+          "declaration": {
+            "marker": "AsterFrame2",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              71,
+              71,
+              541,
+              121
+            ],
+            "tolerancePt": 0.0001,
+            "type": "marker-region",
+            "version": 2
+          },
+          "name": "assertion-marker-region",
+          "passed": true
+        },
+        {
+          "declaration": {
+            "marker": "AsterAfter",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              71,
+              71,
+              541,
+              121
+            ],
+            "tolerancePt": 0.0001,
+            "type": "marker-region",
+            "version": 2
+          },
+          "name": "assertion-marker-region",
+          "passed": true
+        },
+        {
+          "declaration": {
+            "markers": [
+              "AsterFrame1",
+              "AsterAfter"
+            ],
+            "tolerancePt": 0.5,
+            "type": "non-overlapping-markers",
+            "version": 1
+          },
+          "name": "assertion-non-overlapping-markers",
+          "passed": false
+        },
+        {
+          "declaration": {
+            "markers": [
+              "AsterFrame2",
+              "AsterAfter"
+            ],
+            "tolerancePt": 0.5,
+            "type": "non-overlapping-markers",
+            "version": 1
+          },
+          "name": "assertion-non-overlapping-markers",
+          "passed": true
+        }
+      ],
+      "inspection": {
+        "fonts": [
+          "LiberationSerif",
+          "LiberationSerif"
+        ],
+        "geometry": [
+          {
+            "crop": [
+              0,
+              0,
+              612,
+              792
+            ],
+            "media": [
+              0,
+              0,
+              612,
+              792
+            ],
+            "rotation": 0,
+            "userUnit": 1
+          }
+        ],
+        "tokens": {
+          "AsterAfter": 1,
+          "AsterBefore": 1,
+          "AsterFrame1": 1,
+          "AsterFrame2": 1
+        },
+        "words": [
+          {
+            "page": 1,
+            "rect": [
+              72.0,
+              71.952209,
+              127.880105,
+              84.128313
+            ],
+            "text": "AsterBefore"
+          },
+          {
+            "page": 1,
+            "rect": [
+              90.0,
+              95.952209,
+              149.4975,
+              108.128313
+            ],
+            "text": "AsterFrame2"
+          },
+          {
+            "page": 1,
+            "rect": [
+              270.0,
+              83.952209,
+              318.661421,
+              96.128313
+            ],
+            "text": "AsterAfter"
+          },
+          {
+            "page": 1,
+            "rect": [
+              270.0,
+              84.1512,
+              327.376,
+              96.3282
+            ],
+            "text": "AsterFrame1"
+          }
+        ]
+      },
+      "movedLabel": "AsterFrame1",
+      "mutantPdfSha256": "055d2dce5f6b228e42d2ecc77a152c914609c581b46b3e622fc47c1a1ad5fe9b",
+      "name": "first-line-overprint",
+      "sourcePdfSha256": "cb14563780c520a207724387e39631e59324f96691ea455764904e245e6ea854",
+      "target": "overprint"
+    },
+    {
+      "case": "frames-inline-body-around",
+      "checks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "extra": {},
+          "missing": {},
+          "name": "expected-visible-tokens",
+          "normalizedRaw": {},
+          "passed": true
+        },
+        {
+          "name": "declared-font-families",
+          "observed": [
+            "LiberationSerif",
+            "LiberationSerif"
+          ],
+          "passed": true
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "declaration": {
+            "marker": "AsterFrame1",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              71,
+              71,
+              541,
+              121
+            ],
+            "tolerancePt": 0.0001,
+            "type": "marker-region",
+            "version": 2
+          },
+          "name": "assertion-marker-region",
+          "passed": true
+        },
+        {
+          "declaration": {
+            "marker": "AsterFrame2",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              71,
+              71,
+              541,
+              121
+            ],
+            "tolerancePt": 0.0001,
+            "type": "marker-region",
+            "version": 2
+          },
+          "name": "assertion-marker-region",
+          "passed": true
+        },
+        {
+          "declaration": {
+            "marker": "AsterAfter",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              71,
+              71,
+              541,
+              121
+            ],
+            "tolerancePt": 0.0001,
+            "type": "marker-region",
+            "version": 2
+          },
+          "name": "assertion-marker-region",
+          "passed": true
+        },
+        {
+          "declaration": {
+            "markers": [
+              "AsterFrame1",
+              "AsterAfter"
+            ],
+            "tolerancePt": 0.5,
+            "type": "non-overlapping-markers",
+            "version": 1
+          },
+          "name": "assertion-non-overlapping-markers",
+          "passed": true
+        },
+        {
+          "declaration": {
+            "markers": [
+              "AsterFrame2",
+              "AsterAfter"
+            ],
+            "tolerancePt": 0.5,
+            "type": "non-overlapping-markers",
+            "version": 1
+          },
+          "name": "assertion-non-overlapping-markers",
+          "passed": false
+        }
+      ],
+      "inspection": {
+        "fonts": [
+          "LiberationSerif",
+          "LiberationSerif"
+        ],
+        "geometry": [
+          {
+            "crop": [
+              0,
+              0,
+              612,
+              792
+            ],
+            "media": [
+              0,
+              0,
+              612,
+              792
+            ],
+            "rotation": 0,
+            "userUnit": 1
+          }
+        ],
+        "tokens": {
+          "AsterAfter": 1,
+          "AsterBefore": 1,
+          "AsterFrame1": 1,
+          "AsterFrame2": 1
+        },
+        "words": [
+          {
+            "page": 1,
+            "rect": [
+              72.0,
+              71.952209,
+              127.880105,
+              84.128313
+            ],
+            "text": "AsterBefore"
+          },
+          {
+            "page": 1,
+            "rect": [
+              90.0,
+              83.952209,
+              149.4975,
+              96.128313
+            ],
+            "text": "AsterFrame1"
+          },
+          {
+            "page": 1,
+            "rect": [
+              270.0,
+              83.952209,
+              318.661421,
+              96.128313
+            ],
+            "text": "AsterAfter"
+          },
+          {
+            "page": 1,
+            "rect": [
+              270.0,
+              84.1512,
+              327.376,
+              96.3282
+            ],
+            "text": "AsterFrame2"
+          }
+        ]
+      },
+      "movedLabel": "AsterFrame2",
+      "mutantPdfSha256": "16f22431bed2b9bc0277b5e90343a219da6bf0ea474ef3551247144cdadeff28",
+      "name": "last-line-overprint",
+      "sourcePdfSha256": "cb14563780c520a207724387e39631e59324f96691ea455764904e245e6ea854",
+      "target": "overprint"
+    },
+    {
+      "case": "frames-inline-body-below",
+      "checks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "extra": {},
+          "missing": {},
+          "name": "expected-visible-tokens",
+          "normalizedRaw": {},
+          "passed": true
+        },
+        {
+          "name": "declared-font-families",
+          "observed": [
+            "LiberationSerif",
+            "LiberationSerif"
+          ],
+          "passed": true
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "declaration": {
+            "marker": "AsterFrame1",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              71,
+              71,
+              541,
+              121
+            ],
+            "tolerancePt": 0.0001,
+            "type": "marker-region",
+            "version": 2
+          },
+          "name": "assertion-marker-region",
+          "passed": true
+        },
+        {
+          "declaration": {
+            "marker": "AsterFrame2",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              71,
+              71,
+              541,
+              121
+            ],
+            "tolerancePt": 0.0001,
+            "type": "marker-region",
+            "version": 2
+          },
+          "name": "assertion-marker-region",
+          "passed": true
+        },
+        {
+          "declaration": {
+            "marker": "AsterAfter",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              71,
+              107,
+              180,
+              121
+            ],
+            "tolerancePt": 0.0001,
+            "type": "marker-region",
+            "version": 2
+          },
+          "name": "assertion-marker-region",
+          "passed": false
+        },
+        {
+          "declaration": {
+            "markers": [
+              "AsterFrame1",
+              "AsterAfter"
+            ],
+            "tolerancePt": 0.5,
+            "type": "non-overlapping-markers",
+            "version": 1
+          },
+          "name": "assertion-non-overlapping-markers",
+          "passed": true
+        },
+        {
+          "declaration": {
+            "markers": [
+              "AsterFrame2",
+              "AsterAfter"
+            ],
+            "tolerancePt": 0.5,
+            "type": "non-overlapping-markers",
+            "version": 1
+          },
+          "name": "assertion-non-overlapping-markers",
+          "passed": true
+        }
+      ],
+      "inspection": {
+        "fonts": [
+          "LiberationSerif",
+          "LiberationSerif"
+        ],
+        "geometry": [
+          {
+            "crop": [
+              0,
+              0,
+              612,
+              792
+            ],
+            "media": [
+              0,
+              0,
+              612,
+              792
+            ],
+            "rotation": 0,
+            "userUnit": 1
+          }
+        ],
+        "tokens": {
+          "AsterAfter": 1,
+          "AsterBefore": 1,
+          "AsterFrame1": 1,
+          "AsterFrame2": 1
+        },
+        "words": [
+          {
+            "page": 1,
+            "rect": [
+              72.0,
+              71.952209,
+              127.880105,
+              84.128313
+            ],
+            "text": "AsterBefore"
+          },
+          {
+            "page": 1,
+            "rect": [
+              90.0,
+              83.952209,
+              149.4975,
+              96.128313
+            ],
+            "text": "AsterFrame1"
+          },
+          {
+            "page": 1,
+            "rect": [
+              90.0,
+              95.952209,
+              149.4975,
+              108.128313
+            ],
+            "text": "AsterFrame2"
+          },
+          {
+            "page": 1,
+            "rect": [
+              300.0,
+              108.1512,
+              346.992,
+              120.3282
+            ],
+            "text": "AsterAfter"
+          }
+        ]
+      },
+      "movedLabel": "AsterAfter",
+      "mutantPdfSha256": "a32ef092864c27ff6be669d3fab6092b54a2892889809534573fb17ff12c5b68",
+      "name": "after-sideways",
+      "sourcePdfSha256": "d087f2034a138ebdd22202963758696431676e75e8d580616b01a081c45b1a7b",
+      "target": "sideways"
+    },
+    {
+      "case": "frames-inline-body-below",
+      "checks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "extra": {},
+          "missing": {
+            "AsterAfter": 1
+          },
+          "name": "expected-visible-tokens",
+          "normalizedRaw": {},
+          "passed": false
+        },
+        {
+          "name": "declared-font-families",
+          "observed": [
+            "LiberationSerif",
+            "LiberationSerif"
+          ],
+          "passed": true
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "declaration": {
+            "marker": "AsterFrame1",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              71,
+              71,
+              541,
+              121
+            ],
+            "tolerancePt": 0.0001,
+            "type": "marker-region",
+            "version": 2
+          },
+          "name": "assertion-marker-region",
+          "passed": true
+        },
+        {
+          "declaration": {
+            "marker": "AsterFrame2",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              71,
+              71,
+              541,
+              121
+            ],
+            "tolerancePt": 0.0001,
+            "type": "marker-region",
+            "version": 2
+          },
+          "name": "assertion-marker-region",
+          "passed": true
+        },
+        {
+          "declaration": {
+            "marker": "AsterAfter",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              71,
+              107,
+              180,
+              121
+            ],
+            "tolerancePt": 0.0001,
+            "type": "marker-region",
+            "version": 2
+          },
+          "error": "Marker 'AsterAfter' must occur exactly once, found 0",
+          "name": "assertion-marker-region",
+          "passed": false
+        },
+        {
+          "declaration": {
+            "markers": [
+              "AsterFrame1",
+              "AsterAfter"
+            ],
+            "tolerancePt": 0.5,
+            "type": "non-overlapping-markers",
+            "version": 1
+          },
+          "error": "Marker 'AsterAfter' must occur exactly once, found 0",
+          "name": "assertion-non-overlapping-markers",
+          "passed": false
+        },
+        {
+          "declaration": {
+            "markers": [
+              "AsterFrame2",
+              "AsterAfter"
+            ],
+            "tolerancePt": 0.5,
+            "type": "non-overlapping-markers",
+            "version": 1
+          },
+          "error": "Marker 'AsterAfter' must occur exactly once, found 0",
+          "name": "assertion-non-overlapping-markers",
+          "passed": false
+        }
+      ],
+      "inspection": {
+        "fonts": [
+          "LiberationSerif",
+          "LiberationSerif"
+        ],
+        "geometry": [
+          {
+            "crop": [
+              0,
+              0,
+              612,
+              792
+            ],
+            "media": [
+              0,
+              0,
+              612,
+              792
+            ],
+            "rotation": 0,
+            "userUnit": 1
+          }
+        ],
+        "tokens": {
+          "AsterBefore": 1,
+          "AsterFrame1": 1,
+          "AsterFrame2": 1
+        },
+        "words": [
+          {
+            "page": 1,
+            "rect": [
+              72.0,
+              71.952209,
+              127.880105,
+              84.128313
+            ],
+            "text": "AsterBefore"
+          },
+          {
+            "page": 1,
+            "rect": [
+              90.0,
+              83.952209,
+              149.4975,
+              96.128313
+            ],
+            "text": "AsterFrame1"
+          },
+          {
+            "page": 1,
+            "rect": [
+              90.0,
+              95.952209,
+              149.4975,
+              108.128313
+            ],
+            "text": "AsterFrame2"
+          }
+        ]
+      },
+      "movedLabel": "AsterAfter",
+      "mutantPdfSha256": "d97e4e5ca28c2dbb4d6daaa7be71500e054cc7441446fd3f1df6b64a67823735",
+      "name": "after-off-paper",
+      "sourcePdfSha256": "d087f2034a138ebdd22202963758696431676e75e8d580616b01a081c45b1a7b",
+      "target": "off-paper"
+    },
+    {
+      "case": "frames-inline-body-below",
+      "checks": [
+        {
+          "name": "page-count",
+          "passed": false
+        },
+        {
+          "extra": {},
+          "missing": {},
+          "name": "expected-visible-tokens",
+          "normalizedRaw": {},
+          "passed": true
+        },
+        {
+          "name": "declared-font-families",
+          "observed": [
+            "LiberationSerif",
+            "LiberationSerif"
+          ],
+          "passed": true
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "physical-geometry-page-2",
+          "passed": false
+        },
+        {
+          "declaration": {
+            "marker": "AsterFrame1",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              71,
+              71,
+              541,
+              121
+            ],
+            "tolerancePt": 0.0001,
+            "type": "marker-region",
+            "version": 2
+          },
+          "name": "assertion-marker-region",
+          "passed": true
+        },
+        {
+          "declaration": {
+            "marker": "AsterFrame2",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              71,
+              71,
+              541,
+              121
+            ],
+            "tolerancePt": 0.0001,
+            "type": "marker-region",
+            "version": 2
+          },
+          "name": "assertion-marker-region",
+          "passed": true
+        },
+        {
+          "declaration": {
+            "marker": "AsterAfter",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              71,
+              107,
+              180,
+              121
+            ],
+            "tolerancePt": 0.0001,
+            "type": "marker-region",
+            "version": 2
+          },
+          "name": "assertion-marker-region",
+          "passed": false
+        },
+        {
+          "declaration": {
+            "markers": [
+              "AsterFrame1",
+              "AsterAfter"
+            ],
+            "tolerancePt": 0.5,
+            "type": "non-overlapping-markers",
+            "version": 1
+          },
+          "name": "assertion-non-overlapping-markers",
+          "passed": true
+        },
+        {
+          "declaration": {
+            "markers": [
+              "AsterFrame2",
+              "AsterAfter"
+            ],
+            "tolerancePt": 0.5,
+            "type": "non-overlapping-markers",
+            "version": 1
+          },
+          "name": "assertion-non-overlapping-markers",
+          "passed": true
+        }
+      ],
+      "inspection": {
+        "fonts": [
+          "LiberationSerif",
+          "LiberationSerif"
+        ],
+        "geometry": [
+          {
+            "crop": [
+              0,
+              0,
+              612,
+              792
+            ],
+            "media": [
+              0,
+              0,
+              612,
+              792
+            ],
+            "rotation": 0,
+            "userUnit": 1
+          },
+          {
+            "crop": [
+              0,
+              0,
+              612,
+              792
+            ],
+            "media": [
+              0,
+              0,
+              612,
+              792
+            ],
+            "rotation": 0,
+            "userUnit": 1
+          }
+        ],
+        "tokens": {
+          "AsterAfter": 1,
+          "AsterBefore": 1,
+          "AsterFrame1": 1,
+          "AsterFrame2": 1
+        },
+        "words": [
+          {
+            "page": 1,
+            "rect": [
+              72.0,
+              71.952209,
+              127.880105,
+              84.128313
+            ],
+            "text": "AsterBefore"
+          },
+          {
+            "page": 1,
+            "rect": [
+              90.0,
+              83.952209,
+              149.4975,
+              96.128313
+            ],
+            "text": "AsterFrame1"
+          },
+          {
+            "page": 1,
+            "rect": [
+              90.0,
+              95.952209,
+              149.4975,
+              108.128313
+            ],
+            "text": "AsterFrame2"
+          },
+          {
+            "page": 2,
+            "rect": [
+              72.0,
+              72.199,
+              118.992,
+              84.376
+            ],
+            "text": "AsterAfter"
+          }
+        ]
+      },
+      "movedLabel": "AsterAfter",
+      "mutantPdfSha256": "fc1f8a373e63cd73c0c65436e04e07a81a4fa0e2c93b47726b92ba53ca0118c3",
+      "name": "after-extra-page",
+      "sourcePdfSha256": "d087f2034a138ebdd22202963758696431676e75e8d580616b01a081c45b1a7b",
+      "target": "extra-page"
+    }
+  ],
+  "pymupdf": "1.28.0",
+  "scriptSha256": "8bfbe063464f3fd74f8ff0d9ec6109f0f50dcadf74e2ca9390ea9701fb6ef769"
+}

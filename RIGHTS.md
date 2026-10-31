@@ -1,5 +1,14 @@
 # Authorship and artifact rights
 
+The 28 inline-frame cases for Docxodus #1487 contain original Aster labels and literal
+WordprocessingML authored in `bench/fixtures.py`. They import no renderer fixture, helper,
+document, template, image or font program. Liberation Serif is separately provisioned.
+The marker-separation assertion reads extracted PDF word rectangles; it introduces no asset
+or font redistribution and does not modify the captured pages. The 28 labeled comparison
+sheets show only these original inputs rendered by separately provisioned tools. Local PDF
+mutation reports contain hashes and extracted Aster geometry; no PDF, font program, external
+document content or authentication data is included.
+
 The twelve textbox-fit cases for Docxodus #1492 contain original Linden text and literal
 OOXML authored in `bench/fixtures.py`, including their theme defaults. They import no document,
 template, image or font program. Liberation Serif is separately provisioned. The labeled

@@ -1,5 +1,13 @@
 # DOCX fidelity bench
 
+`core-v93` adds 28 original inline-frame cases for Docxodus #1487, with body, header,
+footer, cell, page-end, separate-carrier and header-overhang controls. The versioned
+`non-overlapping-markers` check detects overprinted labels while allowing native Word's
+beside-frame layout and LibreOffice's ordinary paragraph flow. Complete inventories,
+page/position bounds and raster comparisons still apply. All 645 prior inputs and case
+declarations are preserved apart from their shared generator hash. Capture evidence is
+being prepared; these cases do not claim exact Word raster parity.
+
 `core-v92` adds twelve original textbox-fit cases for Docxodus #1492, covering omitted fit,
 theme defaults, local precedence and running stories. [All twelve cases and labeled previews](docs/results/textbox-fit/README.md)
 retain complete token inventories and independent visible-label bounds. All native references
@@ -265,7 +273,7 @@ Regression comparison refuses changed references, fonts, measurement tools, suit
 
 ## Add a case or adapter
 
-Author a focused DOCX with original text and graphics, add a generator and rights record, declare all visible token counts and versioned assertions, and add its ID and primary category to a versioned suite. The runner discovers manifest records; no scoring change is needed to add a case. The current check registry supports `marker-region`, `same-page`, and `marker-reference-position`; unknown types and versions are rejected. Region version 2 declares a 0.0001-point boundary tolerance for PDF coordinate serialization; version 1 retains exact boundaries. Reference-position checks compare a unique marker's page and top-left PDF position with its reference, within the declared tolerance in points. New check implementations need positive and negative examples. The corpus generator is intentionally transparent and deterministic.
+Author a focused DOCX with original text and graphics, add a generator and rights record, declare all visible token counts and versioned assertions, and add its ID and primary category to a versioned suite. The runner discovers manifest records; no scoring change is needed to add a case. The current check registry supports `marker-region`, `same-page`, `non-overlapping-markers`, `marker-reference-position`, `color-geometry` and `color-reference-geometry`; unknown types and versions are rejected. Region version 2 declares a 0.0001-point boundary tolerance for PDF coordinate serialization; version 1 retains exact boundaries. Reference-position checks compare a unique marker's page and top-left PDF position with its reference, within the declared tolerance in points. `non-overlapping-markers` version 1 names exactly two unique source tokens. Their extracted PDF word rectangles must have finite positive bounds on real pages, and must either occupy different pages or overlap by no more than the declared tolerance on at least one axis. The tolerance is limited to 0–0.5 pt to accommodate bounding-box rounding and adjacent-line font metrics. This checks selected word boxes, not full frame clearance or exact native wrapping; independent marker regions pin their pages and allowed positions. Missing or duplicated labels fail. New check implementations need positive and negative examples. The corpus generator is intentionally transparent and deterministic.
 
 Adding or changing cases requires a new suite version and a like-for-like rerun of the prior suite for historical comparisons. New references are explicitly pending until registered. No case is dropped because a renderer fails it.
 
