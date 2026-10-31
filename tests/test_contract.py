@@ -355,7 +355,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 544)
+        self.assertEqual(len(common.validate_registry()['cases']), 546)
 
     def test_explicit_reference_manifest_rejects_changed_input_before_rendering(self):
         registry = common.read_json(common.ROOT / 'fixtures/manifest.json')
@@ -663,7 +663,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v80')
+        self.assertEqual(registry['suite']['id'], 'core-v81')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
@@ -769,6 +769,22 @@ class RegistryContract(unittest.TestCase):
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
         return change, final, settings, pair
+
+    def test_endnote_font_pair_changes_only_the_default_size(self):
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records['notes-endnote-font-' + suffix] for suffix in ('11pt', '12pt-control')]
+        with ZipFile(common.ROOT / pair[0]['input']) as note, ZipFile(common.ROOT / pair[1]['input']) as control:
+            self.assertEqual(note.namelist(), control.namelist())
+            for name in note.namelist():
+                content = note.read(name)
+                if name == 'word/styles.xml':
+                    self.assertIn(b'<w:sz w:val="22"/>', content)
+                    content = content.replace(b'<w:sz w:val="22"/>', b'<w:sz w:val="24"/>')
+                self.assertEqual(content, control.read(name))
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        self.assertEqual(pair[0]['assertions'][0]['tolerancePt'], 0.5)
+        self.assertEqual(pair[1]['assertions'][0]['rect'], [78, 121, 125, 135.5])
 
     def test_reserved_endnotes_have_positive_ids_but_no_visible_tokens(self):
         import xml.etree.ElementTree as ET

@@ -1,5 +1,8 @@
 # Authorship and artifact rights
 
+The endnote-font reproduction and section-sized control are original Willow text and literal
+OOXML authored in `bench/fixtures.py`, with no imported document content or embedded fonts.
+
 The Firefox line-height pair for Docxodus #1424 is original Pine text and literal OOXML
 authored in `bench/fixtures.py`. It imports no document content, images, or font programs.
 Browser screenshots use separately installed Liberation Serif and record its file hash.
