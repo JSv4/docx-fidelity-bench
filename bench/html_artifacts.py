@@ -6,6 +6,8 @@ from html.parser import HTMLParser
 import re
 import json
 import math
+import base64
+import hashlib
 from pathlib import Path
 from .common import digest
 
@@ -39,6 +41,12 @@ def validate_declaration(declaration):
                 declaration.get('property') != 'font-size' or not isinstance(declaration.get('equals'), str) or
                 re.fullmatch(r'(?:0|[1-9][0-9]*)(?:\.[0-9]+)?px', declaration['equals']) is None):
             raise ValueError('Unknown or invalid computed HTML style assertion')
+    elif declaration.get('type') == 'named-checkbox':
+        if (set(declaration) != {'type', 'version', 'marker', 'checked', 'sizePt', 'caption'} or
+                type(declaration.get('checked')) is not bool or
+                type(declaration.get('sizePt')) not in (int, float) or not 4 <= declaration['sizePt'] <= 72 or
+                not isinstance(declaration.get('caption'), str) or not declaration['caption']):
+            raise ValueError('Unknown or invalid checkbox HTML assertion')
     else:
         raise ValueError('Unknown or invalid delivered HTML assertion')
 
@@ -87,6 +95,74 @@ def readable_pass(declaration, observation, index):
     if not isinstance(observation.get('blockText'), str):
         raise ValueError('Missing readable paragraph text')
     return passed and observation['blockText'] == ' '.join(declaration['tokens'])
+
+
+def checkbox_pass(declaration, observation, index):
+    passed = marker_geometry_pass(declaration, observation, index)
+    if observation['matches'] != 1: return False
+    if (type(observation.get('visible')) is not bool or 'checked' not in observation or
+            observation['checked'] is not None and type(observation['checked']) is not bool):
+        raise ValueError('Malformed checkbox HTML observation')
+    return (passed and observation['visible'] and observation['checked'] is declaration['checked'] and
+            checkbox_ink_pass(declaration, observation))
+
+
+def checkbox_ink_pass(declaration, observation):
+    """Replay a black-on-light checkbox's pixels, without depending on its DOM drawing method.
+
+    The authored controls have square borders and an X for checked. Require all four sides,
+    both diagonals for checked, an empty center for unchecked, declared size, and caption
+    alignment. The one-pixel bands tolerate antialiasing, not missing paint or opposite state.
+    """
+    raster = observation.get('raster')
+    if raster is None: return False
+    if (not isinstance(raster, dict) or any(type(raster.get(k)) is not int for k in ('x', 'y', 'width', 'height')) or
+            not all(0 < raster[k] <= 256 for k in ('width', 'height')) or
+            not isinstance(raster.get('rgba'), str)):
+        raise ValueError('Malformed checkbox raster')
+    try: pixels = base64.b64decode(raster['rgba'], validate=True)
+    except ValueError as error: raise ValueError('Malformed checkbox pixels') from error
+    width, height = raster['width'], raster['height']
+    if len(pixels) != width * height * 4 or hashlib.sha256(pixels).hexdigest() != raster.get('sha256'):
+        raise ValueError('Checkbox raster digest or size differs')
+    bounds = observation['after']
+    expected = [math.floor(bounds[0]) - 2, math.floor(bounds[1]) - 2, math.ceil(bounds[2]) + 2, math.ceil(bounds[3]) + 2]
+    if [raster['x'], raster['y'], raster['x'] + width, raster['y'] + height] != expected:
+        raise ValueError('Checkbox raster is not the observed control crop')
+    # The source contract is black ink on a light background, including a clear 2px crop border.
+    corners = [(0, 0), (width - 1, 0), (0, height - 1), (width - 1, height - 1)]
+    if any(min(pixels[(y * width + x) * 4:(y * width + x) * 4 + 3]) < 230 for x, y in corners): return False
+    ink = {(x, y) for y in range(height) for x in range(width)
+           if max(pixels[(y * width + x) * 4:(y * width + x) * 4 + 3]) < 180}
+    if not ink: return False
+    left, right = min(x for x, _ in ink), max(x for x, _ in ink)
+    top, bottom = min(y for _, y in ink), max(y for _, y in ink)
+    size = declaration['sizePt'] / 0.75
+    if any(abs(measured - size) > 1.5 for measured in (right - left + 1, bottom - top + 1)): return False
+    if not valid_rectangle(observation.get('caption')): return False
+    caption = observation['caption']
+    if abs(raster['y'] + (top + bottom + 1) / 2 - (caption[1] + caption[3]) / 2) > 4: return False
+    if not 0 <= raster['x'] + left - caption[2] <= 8: return False
+    # A dark fill cannot impersonate a square outline; inspect its interior separately.
+    sides = [[any((x, y) in ink for y in (top, top + 1)) for x in range(left, right + 1)],
+             [any((x, y) in ink for y in (bottom - 1, bottom)) for x in range(left, right + 1)],
+             [any((x, y) in ink for x in (left, left + 1)) for y in range(top, bottom + 1)],
+             [any((x, y) in ink for x in (right - 1, right)) for y in range(top, bottom + 1)]]
+    if any(sum(side) / len(side) < 0.75 for side in sides): return False
+    inset = max(2, round(size * 0.2))
+    interior = {(x, y) for y in range(top + inset, bottom - inset + 1)
+                for x in range(left + inset, right - inset + 1)}
+    painted = ink & interior
+    if not declaration['checked']: return not painted
+    if not interior or not 0.1 <= len(painted) / len(interior) <= 0.7: return False
+    for reverse in (False, True):
+        samples = []
+        for x in range(left + inset, right - inset + 1):
+            t = (x - left) / (right - left)
+            y = round(bottom - t * (bottom - top) if reverse else top + t * (bottom - top))
+            samples.append(any((x, y + offset) in ink for offset in (-1, 0, 1)))
+        if not samples or sum(samples) / len(samples) < 0.7: return False
+    return True
 
 
 def computed_style_pass(declaration, observation, index):
@@ -207,6 +283,10 @@ def inspect(folder, response, declarations, profile=None):
                     checks.append({'name': f'html-readable-{index + 1}', 'marker': declaration['marker'],
                                    'tokens': declaration['tokens'], 'observation': observation,
                                    'passed': readable_pass(declaration, observation, index)})
+                elif declaration['type'] == 'named-checkbox':
+                    checks.append({'name': f'html-checkbox-{index + 1}', 'marker': declaration['marker'],
+                                   'checked': declaration['checked'], 'observation': observation,
+                                   'passed': checkbox_pass(declaration, observation, index)})
                 else:
                     checks.append({'name': f'html-style-{index + 1}', 'marker': declaration['marker'],
                                    'property': declaration['property'], 'expected': declaration['equals'],
@@ -249,6 +329,9 @@ def aggregate(cases, declarations, browser_sha=None, profiles=None):
                 elif declaration['type'] == 'marker-readable':
                     valid = (item.get('name') == f'html-readable-{index + 1}' and item.get('tokens') == declaration['tokens'] and
                              item['passed'] == readable_pass(declaration, item.get('observation'), index))
+                elif declaration['type'] == 'named-checkbox':
+                    valid = (item.get('name') == f'html-checkbox-{index + 1}' and item.get('checked') is declaration['checked'] and
+                             item['passed'] == checkbox_pass(declaration, item.get('observation'), index))
                 else:
                     valid = (item.get('name') == f'html-style-{index + 1}' and item.get('property') == declaration['property'] and
                              item.get('expected') == declaration['equals'] and
