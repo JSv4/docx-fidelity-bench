@@ -4132,16 +4132,17 @@ def generate():
                     f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="22"/>'
                     '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:before="0" '
                     'w:after="0" w:line="240" w:lineRule="exact"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
-    def aster_case(name, story_kind='body', mode='notBeside', filler=0, separate=False, overhang=False, body_table=False):
+    def aster_case(name, story_kind='body', mode='notBeside', filler=0, separate=False, overhang=False, body_table=False, edge_distance=False):
         normal, floating = mode == 'normal', mode == 'floating'
         count = 6 if overhang else 2
         labels = [f'AsterFrame{i + 1}' for i in range(count)]
         before = [f'AsterRow{i:03d}' for i in range(filler)] if filler else ['AsterBefore']
         compact = overhang
-        width, offset = (1920, 0) if compact else (3600, 360)
+        width, offset = (1920, 0) if compact else (3600, 0 if edge_distance else 360)
         frame = '' if normal else (f'<w:framePr w:w="{width}" w:x="{offset}" w:hAnchor="text" w:vAnchor="text" '
             + ('w:y="0" w:wrap="none"' if floating else f'w:yAlign="inline" w:wrap="{mode}"')
-            + (' w:h="800" w:hRule="exact"' if separate else '') + '/>')
+            + (' w:h="800" w:hRule="exact"' if separate else '')
+            + (' w:hSpace="120"' if edge_distance else '') + '/>')
         content = ''.join(para(text) for text in before) + para(labels[0], frame)
         if separate:
             content += para('AsterBetween')
@@ -4214,6 +4215,7 @@ def generate():
             aster_case(story_kind + '-' + ('below' if mode == 'notBeside' else mode)
                        + ('-control' if mode in ('normal', 'floating') else ''), story_kind, mode)
     for normal in (False, True):
+        aster_case('body-edge-distance' + ('-normal-control' if normal else ''), mode='normal' if normal else 'around', edge_distance=True)
         aster_case('page-end' + ('-normal-control' if normal else ''), mode='normal' if normal else 'notBeside', filler=52)
         for story_kind in ('body', 'header', 'footer'):
             aster_case(story_kind + '-separated' + ('-normal-control' if normal else ''), story_kind,

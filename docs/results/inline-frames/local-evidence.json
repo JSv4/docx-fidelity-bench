@@ -4,20 +4,23 @@
   "candidateSnapshot": {
     "base": "97c304f7af8f07247eba5c042f0be9f07f8b133b",
     "branch": "fix/1487-inline-frames-final",
+    "commit": "135504e1091c9b6be925231b7991e5e3dda1e428",
     "files": {
-      "CHANGELOG.md": "8cd847994a0a4ec6d003765d3e2a490ec612c107ff9de99d90e3e92e096ca204",
-      "Docxodus.Tests/ParagraphFrameTests.cs": "76f370a18f75727a129a114660e7007a1fa91a0c103179621992fca9df27b786",
-      "Docxodus/WmlToHtmlConverter.cs": "db9e16637d1e240b8e8dcdb962bc3d6a2928e90aa60f2d184b747fc2cf04be97",
-      "docs/architecture/docx_converter.md": "19b2c2a4e24b3e198a94f428920fd2db2ad4ee6fea8603d281c7a003a8f1795c",
-      "docs/architecture/wml_to_html_converter_gaps.md": "0e272c9b6ccd92dc6cc0c120cf7aacd3789e716aae46294879149f5cff0765c2",
-      "docs/ooxml_corner_cases.md": "ef7a11af83dbadf50fd43e39c44ef193697ed7b2cbfd83487215ab3da2441dce",
-      "npm/src/pagination.ts": "736140f969d1b1bc768c9aa2ea8e3ae5f5724321c2e6c85460654f81e7ed3643",
-      "npm/tests/docx-inline-frame-fixture.ts": "00e1ebf5a9663fe72d4732b8c31e4da997b9c7b28c0abe063955dfac9dec11f9",
-      "npm/tests/export-inline-frames.spec.ts": "81b54ff1e334ff7b48a685d844c0957f341115460addda4a2bb836cbab1f3c27",
+      "CHANGELOG.md": "43988f5fc5594b2186947026b62fb0b65b9a5ead690d0240b38d7f76fc4ecf8b",
+      "Docxodus.Tests/ParagraphFrameTests.cs": "3fd60d5b13c657dc0268a247585e48946eb4e6434cfac35a0ba7570d4fea199a",
+      "Docxodus/WmlToHtmlConverter.Shapes.cs": "22df62a2ee359fc672a1e65be3c1018088671a7f41946c68698dd36aa043e370",
+      "Docxodus/WmlToHtmlConverter.cs": "c5c1c3de583dbf75c1a02bee168b782b506ad88c1fba218d42aaa54c6c51a7c1",
+      "docs/architecture/docx_converter.md": "4906543e9f26e05af2b76d3cd680fd4ebbc4d5cec2d741f442dcbb95429d47c4",
+      "docs/architecture/wml_to_html_converter_gaps.md": "ccdc6dabeef6acd8b4c232c1b953f955ed453c08c7d527b0c84b3d153582fea9",
+      "docs/ooxml_corner_cases.md": "3da85f2dbb7f03330e7175c1ad18c2046c508ce99247ea39ddb1ffd688960050",
+      "npm/scripts/check-bundle-sizes.mjs": "ce20e252518944d84f352a2103270d5a041ddd0fbdb23139b8661d2992cf4322",
+      "npm/src/pagination.ts": "ab5a54b0f5e007cda4d1244ddd7c7e55324afc92ff95e6a48e54c4087e472cd8",
+      "npm/tests/docx-inline-frame-fixture.ts": "d00edbd193d9994d7815a38f237b56c0afd101c5365d96db127385fb700b402f",
+      "npm/tests/export-inline-frames.spec.ts": "de988af19325f1fd1c70a1939f5be52fc86a7aaba255af9251efc0b87001d92d",
       "npm/tests/pagination-inline-frames.spec.ts": "7f919b4b6d637f3c9d35c2a84dfd75d64a41a00f0ef12ad147efb44cae320da3"
     },
-    "runtimeManifestSha256": "99b2677b3a4f099b14e45af5c644e6533b72562e8a327ff5ffca21c7b9ec4ecd",
-    "tests": "44native frame/style/normal-flow testsPASS; nativeRelease0warnings; WASMRelease5866KB/5888KB;40directPASS;43publicHTML/PDFPASS;257broaderPASS;source/testTypeScriptPASS;6neworiginalseparatedfixturesSDK3.5.1valid. PackageboundaryPASS(247runtime/licensefiles);11lanecontractchecksPASS."
+    "runtimeManifestSha256": "e5ccbfb48242bdf445c8335471810e65d57047c24cc73ce5c5f16f454432fd81",
+    "tests": "51 native PASS; 40 direct PASS; 53 public cases validated (52+one assertion recheck); 257 broader PASS; WASM and native Release PASS; package boundary247files and all7bundle gates PASS"
   },
   "captures": {
     "baseline": {
@@ -135,6 +138,13 @@
           "status": "complete"
         },
         {
+          "id": "frames-inline-body-edge-distance",
+          "inputSha256": "e2a119d470075267e0779be8dc5f369f26d10205106d4fbad47ab13d6643f09a",
+          "pages": 1,
+          "pdfSha256": "b5af22837461b5b355372eff8bce425a132e6b83c40702e8f75f4141c8619d97",
+          "status": "complete"
+        },
+        {
           "id": "frames-inline-page-end",
           "inputSha256": "73cf6571b73ad4a1b45e859a60ec8f90eba4343fd9fdfcf620fbeb65b646525b",
           "pages": 1,
@@ -177,45 +187,10 @@
           "status": "complete"
         },
         {
-          "id": "frames-inline-page-end-normal-control",
-          "inputSha256": "5b98239ce9dbc476a1a08c0845aa6a4d26a0f37cb4081d0c6210621e5b978a3a",
-          "pages": 2,
-          "pdfSha256": "4c4bd1c697d49762f9b29c098b936c5c860a0ee3c9689ebd1c53bd758ed049f3",
-          "status": "complete"
-        },
-        {
-          "id": "frames-inline-body-separated-normal-control",
-          "inputSha256": "3629732a3d7121394875508d0bfa2654d4d37cb642a64e607706e60bae08a244",
+          "id": "frames-inline-body-edge-distance-normal-control",
+          "inputSha256": "b9da0e9ab07eaf9798ff1e94791ee6de1a16426cd4b96894d2605907ba76a79d",
           "pages": 1,
-          "pdfSha256": "d4d4f01272c115db55592999b529b0093bb6ba1b84a80e456552006caa48be4e",
-          "status": "complete"
-        },
-        {
-          "id": "frames-inline-header-separated-normal-control",
-          "inputSha256": "dab8580ae7eb9a3374b1cf94dac7bb8104add136662b7af8d5ce6689c5ed43f7",
-          "pages": 1,
-          "pdfSha256": "eccc279b588e4b467c57d5e56ebddf1f6f8a67a0b15548c4f14a7ca18cd4db22",
-          "status": "complete"
-        },
-        {
-          "id": "frames-inline-footer-separated-normal-control",
-          "inputSha256": "b4cb913a2ab9aa89bf4c72a8a76dd222762592544908ba73b05e5b6e15060f17",
-          "pages": 1,
-          "pdfSha256": "997e42dadec582b40b158d7ad6a2e8923de40e10e6103d9ffbc0aa1bb7705aa6",
-          "status": "complete"
-        },
-        {
-          "id": "frames-inline-header-overhang-normal-control",
-          "inputSha256": "82545453905c255e8b963b3094b18e71fbbb434288945310aa7250e9279f886d",
-          "pages": 1,
-          "pdfSha256": "4595b95bb35f9ec14f8d9bf73cde57e9811d93b67c13beedf125022cbd0aca1b",
-          "status": "complete"
-        },
-        {
-          "id": "frames-inline-header-table-clearance-normal-control",
-          "inputSha256": "53aee331dfbd96957730a61af2954fb2e7217adf2fc886ca6ec818a6cf43ed37",
-          "pages": 2,
-          "pdfSha256": "67db7b44807face4fac5d36529545f343424748add889ece737352e8092c9c44",
+          "pdfSha256": "82c68a25dd13f303ee3d1f9c788170e88790886cf737c65e9b1f3a5f02a5db81",
           "status": "complete"
         }
       ],
@@ -229,201 +204,215 @@
           "id": "frames-inline-body-below",
           "inputSha256": "5f9982f525ff290634ba984095888bf2deaaeefc558277d338243539945bd686",
           "pages": 1,
-          "pdfSha256": "d087f2034a138ebdd22202963758696431676e75e8d580616b01a081c45b1a7b",
+          "pdfSha256": "8fc31605c5c07c54991f91a203b0de28d9b48ef4c439f14f9e8188ceca6f6f2c",
           "status": "complete"
         },
         {
           "id": "frames-inline-body-around",
           "inputSha256": "7051a6a54219b07b5f550970922db3b8106131a282ef9efdc8b7877c3c07c8b8",
           "pages": 1,
-          "pdfSha256": "cb14563780c520a207724387e39631e59324f96691ea455764904e245e6ea854",
+          "pdfSha256": "7debfe86c2e13b7128500786cc19185fef63ee684ddba7a2a5b1957f8314b42d",
           "status": "complete"
         },
         {
           "id": "frames-inline-body-normal-control",
           "inputSha256": "b9da0e9ab07eaf9798ff1e94791ee6de1a16426cd4b96894d2605907ba76a79d",
           "pages": 1,
-          "pdfSha256": "b648855017355833523f3031ca096a2dc258f73fc2e2d864bfbe4e6ce9418cec",
+          "pdfSha256": "124966f3926217df392b9f3c75103d55eaa565ab03f4a6533aa7e453274484ff",
           "status": "complete"
         },
         {
           "id": "frames-inline-body-floating-control",
           "inputSha256": "7bfe9337176123018bd30a114b29089f51ddeede757a74cb971c2e32131a04da",
           "pages": 1,
-          "pdfSha256": "4af5ca15a65af56a3ae5b459a52d5c51c728a54561c03d46c3ae56b098f77827",
+          "pdfSha256": "5cb3cbf448397b5b54af131e6305a3107642692f6ac1f07a177191f4069c6af3",
           "status": "complete"
         },
         {
           "id": "frames-inline-header-below",
           "inputSha256": "417fc978a0e88da2e4977d8890d14c3361f15b6e7cd659a8f1d1f92f08707a7d",
           "pages": 1,
-          "pdfSha256": "54df031f616862052a5efc83e4e5a2345621753d6c7134b13fd02c4b0284ca90",
+          "pdfSha256": "b44fa94702b4cfefd36b8305701ccecca8bdc14044ea111fce0992ded0e82b75",
           "status": "complete"
         },
         {
           "id": "frames-inline-header-around",
           "inputSha256": "105416b67a8da95a713bb0b6e655b829c0206755a01507e88f859d10b8c4a394",
           "pages": 1,
-          "pdfSha256": "e8fb0e0b6dc74ecc26a6b3c5149f50370181830fd1b05270840dc0ba8c318a08",
+          "pdfSha256": "2d0d5fc71f307567f96e9c87894d1cfc7b2df593f6b4726a96dfb2b785faf0ce",
           "status": "complete"
         },
         {
           "id": "frames-inline-header-normal-control",
           "inputSha256": "cbb080a771e907e6aaf647a5cdea0073ab0934ede6943f61bf125e6c19f327d5",
           "pages": 1,
-          "pdfSha256": "b6e7e2e02311ae82d43e4eef742d8b8cac34fb3b3959ff78c39674519971336b",
+          "pdfSha256": "61b27a4397923a7aa1531349cf1c34e2520bba453a13a60dec2b05dcf30cbe5e",
           "status": "complete"
         },
         {
           "id": "frames-inline-header-floating-control",
           "inputSha256": "4ad3be9ac52d3cb4780f90e703dad3f5a5dabe2e17b10c4b92610d0fd1d1821b",
           "pages": 1,
-          "pdfSha256": "e2248e19c5e55b23edd456ab75df18e0192cc16031a8cc1d233c8f271d6cab96",
+          "pdfSha256": "70202af5047c28a4ddd70285ff9217d51c3119b490dd0364890b780e661f7aaf",
           "status": "complete"
         },
         {
           "id": "frames-inline-footer-below",
           "inputSha256": "52f87f1211bacd08f7496bb11f0d3ec71f955a6e04ab146aac3ef520e90df443",
           "pages": 1,
-          "pdfSha256": "c0e1256602e695975c66a559c560b38dfd1f6a2cbd281527144232cab93adb21",
+          "pdfSha256": "5e1e53c5c4fb82c2fb9a48e95c5fb204ea1fdc2594f1e6c9a2ee02b17e3e86b9",
           "status": "complete"
         },
         {
           "id": "frames-inline-footer-around",
           "inputSha256": "f7ff0fc8c679b2632e040993fd161b008986aa4ae0f0fe1ea9575030d0c71a8a",
           "pages": 1,
-          "pdfSha256": "16f313cd2ccf51cbe880f39ff83266cdc71af9d47350f54e2ce9950322febed3",
+          "pdfSha256": "4bcc5c6f9baa30f3c6675da61fb32542b65c192e2f9a21e8317b47389819ac74",
           "status": "complete"
         },
         {
           "id": "frames-inline-footer-normal-control",
           "inputSha256": "5585a27812e6301cfd97ae3764835d9ba77cff2c900d2c27bedb9cd3a507e5ac",
           "pages": 1,
-          "pdfSha256": "d2b1c1cea9863066097e2a86784ec8b5c778460bff82dbbc04b80aac2262284a",
+          "pdfSha256": "48d82827cc33f127d42f39088efb5229754a70916865642454144b46b24a1e82",
           "status": "complete"
         },
         {
           "id": "frames-inline-footer-floating-control",
           "inputSha256": "99ef6af2cc7f85618f21fc72cb20a79aa2a9e3335ebc35719188f8cf1ea0c049",
           "pages": 1,
-          "pdfSha256": "ee005047c832c8fddc68fc9fb4814bb1cd578078fedc99b4e097fb101610ed83",
+          "pdfSha256": "45c3ef34523ab99bd347047adc2e442df982be1e7bfed6719da3dfb00671b0f2",
           "status": "complete"
         },
         {
           "id": "frames-inline-cell-below",
           "inputSha256": "08c314a901a23f31222e09023cc12f9220724634f53cf9e02694017d3a51f357",
           "pages": 1,
-          "pdfSha256": "8f15b7c9824546533eaa9830322485d29f2d63fe401832185bfadb4b01e42c1b",
+          "pdfSha256": "cad379d309196e468d995cd43d8758ef8646cc5286a4985c408a8d99d159338f",
           "status": "complete"
         },
         {
           "id": "frames-inline-cell-around",
           "inputSha256": "009d1eacf4f8f78fc373bdc0ca41c0c940e2bc18abfb73982fa9ccad82d9241c",
           "pages": 1,
-          "pdfSha256": "723287da572525b3f242a95f7bffd6894ec962eb3f4dc1153450cdd258b941ce",
+          "pdfSha256": "701d6efadcdb3aafca85de239f2ce822a929f65d62c2ca24ad942600fd0ce8d0",
           "status": "complete"
         },
         {
           "id": "frames-inline-cell-normal-control",
           "inputSha256": "6e90178fb4b9526ded51593cd27db8d474a3612e64e3add717ae4281818dd2b0",
           "pages": 1,
-          "pdfSha256": "18f45e8655858ddcd2a7d0ca05b46f4c1fb8e1456f47f3d9d93e0d0f4bbc57ae",
+          "pdfSha256": "5c3adb889f7973d32fd019bbc0f2f0d80e503bb86c7e0aa4afbadcd223198fd3",
           "status": "complete"
         },
         {
           "id": "frames-inline-cell-floating-control",
           "inputSha256": "e51417dfe832bea0dea8298123da0bbbf8b2e7cdf12728c762310e0040bf4fcf",
           "pages": 1,
-          "pdfSha256": "6eb350cb742448e677b6616bbae4b035af8f387e09d31bafe36708ea16bb9635",
+          "pdfSha256": "085f6de32edbe4803276fcd464bf6aab2fd01a16f1553fb27a391f525e6e8de6",
+          "status": "complete"
+        },
+        {
+          "id": "frames-inline-body-edge-distance",
+          "inputSha256": "e2a119d470075267e0779be8dc5f369f26d10205106d4fbad47ab13d6643f09a",
+          "pages": 1,
+          "pdfSha256": "c94c2fc94c838ee4fc6a120397cab3e4ce1f837059123a06f4a0ad3dfb86134c",
           "status": "complete"
         },
         {
           "id": "frames-inline-page-end",
           "inputSha256": "73cf6571b73ad4a1b45e859a60ec8f90eba4343fd9fdfcf620fbeb65b646525b",
           "pages": 2,
-          "pdfSha256": "6944cbd295a79a1552e1db0e9df8e721f210838f436dad193591d244ebee2bc9",
+          "pdfSha256": "01dfcc8c8bcd4e34d3e41418bd6ac61d1dd1e84a1c9c9b347a92590161b0b6b4",
           "status": "complete"
         },
         {
           "id": "frames-inline-body-separated",
           "inputSha256": "fce834af6317c95388e0b6c2f702f90d9a564071078cdb8fc4fd743be6aaa58b",
           "pages": 1,
-          "pdfSha256": "7412c647a5d39fc8daa41a965b60b307949b44b4c58a0f95c7f1ef477f5bba9c",
+          "pdfSha256": "138c5c5a594863a15270755766afc857e27b6c5445126784fcb1e90eee24bbc4",
           "status": "complete"
         },
         {
           "id": "frames-inline-header-separated",
           "inputSha256": "94eb424bf2702f0cfaaeba9e15fbbfbaafeed4c191d368daa1cfae6bcef991c1",
           "pages": 1,
-          "pdfSha256": "350c3d801706467d1d7befdb2798be4d789cc9289faa7210da2f8bc338c6b8e5",
+          "pdfSha256": "c15ea2ed1c12cef3860d51dd09c14eeb6496060660989d3a3da85701de108527",
           "status": "complete"
         },
         {
           "id": "frames-inline-footer-separated",
           "inputSha256": "4810baa1961fadb84dc2b9443cbedad7b51cf02754d561bfd2aa53ea16a79da2",
           "pages": 1,
-          "pdfSha256": "54633e7456c39735a327f5cff886b7a313e57ee4eb04ffe1217f61d682f82a04",
+          "pdfSha256": "13712d53b7accc3d04612fea26fecc4f4dedd50bc5a977e349ec4e822e67153e",
           "status": "complete"
         },
         {
           "id": "frames-inline-header-overhang",
           "inputSha256": "d2b51c707fa8d34249c972ae9f64fc3119bcb61458ef70141d779484a4685991",
           "pages": 1,
-          "pdfSha256": "cc44bd16ae345b46c0bcf794f3b0f0910fddaf6173f1e455445957687ea3735d",
+          "pdfSha256": "97bf8129ada46a7357480b9294d7dc0cfb15473e56536d3d3a67fe49072f0fdd",
           "status": "complete"
         },
         {
           "id": "frames-inline-header-table-clearance",
           "inputSha256": "427b565e3e3f2cbcca1e763e168f41eeb703916ec45b805f2cf3d75d702f43ae",
           "pages": 2,
-          "pdfSha256": "c73d8024d35db543e41fb4d6f03b62386a84f60529918053561175c55947b17d",
+          "pdfSha256": "a4b2a902ef9146b8406a202e6f636f507a8db38a98971eca26831fafd20c432a",
+          "status": "complete"
+        },
+        {
+          "id": "frames-inline-body-edge-distance-normal-control",
+          "inputSha256": "b9da0e9ab07eaf9798ff1e94791ee6de1a16426cd4b96894d2605907ba76a79d",
+          "pages": 1,
+          "pdfSha256": "efc96bd374cefabc7ebd94f0cbe8f6efb0c2dbedec870695665ab8d9e762a97b",
           "status": "complete"
         },
         {
           "id": "frames-inline-page-end-normal-control",
           "inputSha256": "5b98239ce9dbc476a1a08c0845aa6a4d26a0f37cb4081d0c6210621e5b978a3a",
           "pages": 2,
-          "pdfSha256": "38a4d74e3676ccacfca07e755bb4c89bedfd8da7c260a99db4adcf285ef02ea3",
+          "pdfSha256": "269ef5064b185e20ebd2ffcf0177626cbfc0e5c247030eb7e7d2ad4f1d43b7dd",
           "status": "complete"
         },
         {
           "id": "frames-inline-body-separated-normal-control",
           "inputSha256": "3629732a3d7121394875508d0bfa2654d4d37cb642a64e607706e60bae08a244",
           "pages": 1,
-          "pdfSha256": "adf90884a6695db2ca50abdc4d540ace42b3d16d58a08af5ee897511d4ac4831",
+          "pdfSha256": "8b837b0b921578b5d643e226be7c59df9ad10b05f518508a7dd179c98b052907",
           "status": "complete"
         },
         {
           "id": "frames-inline-header-separated-normal-control",
           "inputSha256": "dab8580ae7eb9a3374b1cf94dac7bb8104add136662b7af8d5ce6689c5ed43f7",
           "pages": 1,
-          "pdfSha256": "c473e180aec4a9b3bb05af6a79e705098a2585adbc9192e1b7074e7bf80a0eb0",
+          "pdfSha256": "e0687f88d921948d350a2f11f0d7e07661bc6e61b85250e2b1df962a9760eb46",
           "status": "complete"
         },
         {
           "id": "frames-inline-footer-separated-normal-control",
           "inputSha256": "b4cb913a2ab9aa89bf4c72a8a76dd222762592544908ba73b05e5b6e15060f17",
           "pages": 1,
-          "pdfSha256": "48ccb0fcb893b560f3b059d67c01a3502bc65e47b170a616742a0a0e71604931",
+          "pdfSha256": "66474069d84801671567168acc30ca778721d657b36c5d528b3443a3f8828537",
           "status": "complete"
         },
         {
           "id": "frames-inline-header-overhang-normal-control",
           "inputSha256": "82545453905c255e8b963b3094b18e71fbbb434288945310aa7250e9279f886d",
           "pages": 1,
-          "pdfSha256": "f2cc57ff47f730d967ff98be797cf87b06863522521d5f06b35b43385f7db697",
+          "pdfSha256": "d43f12a2a14b2dcaec50c753d15ff9a235e133488f5c7c3f09da3a7a04af1dd2",
           "status": "complete"
         },
         {
           "id": "frames-inline-header-table-clearance-normal-control",
           "inputSha256": "53aee331dfbd96957730a61af2954fb2e7217adf2fc886ca6ec818a6cf43ed37",
           "pages": 2,
-          "pdfSha256": "3ad26f83e4592934115629c28a79074a1152379d3ee513d8a4a15c19d19c1210",
+          "pdfSha256": "9a4e8b98b896b757d5e221dfaf85d2fb8ec830865e66a9a4108d212677ae9ccf",
           "status": "complete"
         }
       ],
       "provider": "candidate",
-      "runtimeManifestSha256": "99b2677b3a4f099b14e45af5c644e6533b72562e8a327ff5ffca21c7b9ec4ecd",
+      "runtimeManifestSha256": "e5ccbfb48242bdf445c8335471810e65d57047c24cc73ce5c5f16f454432fd81",
       "runtimeRoot": "/tmp/docxodus-closeout-1487"
     }
   },
@@ -867,7 +856,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "cb14563780c520a207724387e39631e59324f96691ea455764904e245e6ea854",
+          "pdfSha256": "7debfe86c2e13b7128500786cc19185fef63ee684ddba7a2a5b1957f8314b42d",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -906,7 +895,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -919,7 +908,7 @@
               ]
             }
           ],
-          "renderReportSha256": "0f30faf6a44fc9545dfa695c3efb00ed93bee4dffb1da03b759975acb7068e60",
+          "renderReportSha256": "65065dd9af735e1b376b190bb5c488574729e869d69fb0d049cff5fe3bbdabe9",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -945,7 +934,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "a9ebf4a0d53f7e6b220eafc1e4285e042f1012d3865417f9781602c9aa479766",
+            "rendererFingerprint": "764cc03790bfea825d793613f6f69b7c66a1928cf590867149aa479b66085d38",
             "verification": "browserObserved"
           }
         },
@@ -1579,7 +1568,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "d087f2034a138ebdd22202963758696431676e75e8d580616b01a081c45b1a7b",
+          "pdfSha256": "8fc31605c5c07c54991f91a203b0de28d9b48ef4c439f14f9e8188ceca6f6f2c",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -1618,7 +1607,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -1631,7 +1620,7 @@
               ]
             }
           ],
-          "renderReportSha256": "590a2e275ed04fbdd843d343df764dbed0d8c44c13a4acde8801adf781721411",
+          "renderReportSha256": "ac97f0d3643076b424634a43227805fe7f3c8d57aae7f7471e79fdd681796951",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -1657,7 +1646,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "a9ebf4a0d53f7e6b220eafc1e4285e042f1012d3865417f9781602c9aa479766",
+            "rendererFingerprint": "764cc03790bfea825d793613f6f69b7c66a1928cf590867149aa479b66085d38",
             "verification": "browserObserved"
           }
         },
@@ -1842,6 +1831,1431 @@
           "rasters": [
             {
               "path": "rasters/libreoffice/frames-inline-body-below/page-1.png",
+              "sha256": "a8213f1cf174c3bd394eb878fabadee07c323a7ce0dff991add61464fc7cccd2",
+              "size": [
+                816,
+                1056
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "frames-inline-body-edge-distance": {
+      "inputSha256": "e2a119d470075267e0779be8dc5f369f26d10205106d4fbad47ab13d6643f09a",
+      "providers": {
+        "baseline": {
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "AsterFrame1",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  71,
+                  541,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "AsterFrame2",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  71,
+                  541,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "AsterAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  71,
+                  541,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "AsterFrame1",
+                  "AsterAfter"
+                ],
+                "tolerancePt": 0.5,
+                "type": "non-overlapping-markers",
+                "version": 1
+              },
+              "name": "assertion-non-overlapping-markers",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "AsterFrame2",
+                  "AsterAfter"
+                ],
+                "tolerancePt": 0.5,
+                "type": "non-overlapping-markers",
+                "version": 1
+              },
+              "name": "assertion-non-overlapping-markers",
+              "passed": true
+            }
+          ],
+          "inspection": {
+            "fonts": [
+              "LiberationSerif"
+            ],
+            "geometry": [
+              {
+                "crop": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "media": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "rotation": 0,
+                "userUnit": 1
+              }
+            ],
+            "tokens": {
+              "AsterAfter": 1,
+              "AsterBefore": 1,
+              "AsterFrame1": 1,
+              "AsterFrame2": 1
+            },
+            "words": [
+              {
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  71.952207,
+                  127.8801,
+                  84.128309
+                ],
+                "text": "AsterBefore"
+              },
+              {
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  83.952206,
+                  131.497494,
+                  96.128309
+                ],
+                "text": "AsterFrame1"
+              },
+              {
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  83.952206,
+                  120.661416,
+                  96.128309
+                ],
+                "text": "AsterAfter"
+              },
+              {
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  95.952206,
+                  131.497494,
+                  108.128308
+                ],
+                "text": "AsterFrame2"
+              }
+            ]
+          },
+          "passed": false,
+          "pdfSha256": "b5af22837461b5b355372eff8bce425a132e6b83c40702e8f75f4141c8619d97",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "1685155b7a830746998fef2398a79fec849e48680bf389d58de7d6199ac754e5",
+            "title": ""
+          },
+          "rasters": [
+            {
+              "path": "rasters/baseline/frames-inline-body-edge-distance/page-1.png",
+              "sha256": "bd3429ef2e302faf700f7e37768bec51184b4ebef712e01a58099ce9223f5805",
+              "size": [
+                816,
+                1056
+              ]
+            }
+          ],
+          "renderReportSha256": "b4be9e36f9bc05e8c3d1c7c8e24d60b3fe7de5ac146ceb5e991a0d7156aa0b86",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "f76ce29ec5b1cd9936015386fb6ac6835e88c1d8bd6bc11e41f258cfb363ea4a",
+            "verification": "browserObserved"
+          }
+        },
+        "candidate": {
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "AsterFrame1",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  71,
+                  541,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "AsterFrame2",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  71,
+                  541,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "AsterAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  71,
+                  541,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "AsterFrame1",
+                  "AsterAfter"
+                ],
+                "tolerancePt": 0.5,
+                "type": "non-overlapping-markers",
+                "version": 1
+              },
+              "name": "assertion-non-overlapping-markers",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "AsterFrame2",
+                  "AsterAfter"
+                ],
+                "tolerancePt": 0.5,
+                "type": "non-overlapping-markers",
+                "version": 1
+              },
+              "name": "assertion-non-overlapping-markers",
+              "passed": true
+            }
+          ],
+          "inspection": {
+            "fonts": [
+              "LiberationSerif"
+            ],
+            "geometry": [
+              {
+                "crop": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "media": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "rotation": 0,
+                "userUnit": 1
+              }
+            ],
+            "tokens": {
+              "AsterAfter": 1,
+              "AsterBefore": 1,
+              "AsterFrame1": 1,
+              "AsterFrame2": 1
+            },
+            "words": [
+              {
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  71.952207,
+                  127.8801,
+                  84.128309
+                ],
+                "text": "AsterBefore"
+              },
+              {
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  83.952206,
+                  131.497494,
+                  96.128309
+                ],
+                "text": "AsterFrame1"
+              },
+              {
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  95.952206,
+                  131.497494,
+                  108.128308
+                ],
+                "text": "AsterFrame2"
+              },
+              {
+                "page": 1,
+                "rect": [
+                  257.999989,
+                  83.952206,
+                  306.661408,
+                  96.128309
+                ],
+                "text": "AsterAfter"
+              }
+            ]
+          },
+          "passed": true,
+          "pdfSha256": "c94c2fc94c838ee4fc6a120397cab3e4ce1f837059123a06f4a0ad3dfb86134c",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
+            "title": ""
+          },
+          "rasters": [
+            {
+              "path": "rasters/candidate/frames-inline-body-edge-distance/page-1.png",
+              "sha256": "d7ff89c15f1bfb1fb5668c332a5982461aa26433e9557a868f91d05eb7ce777a",
+              "size": [
+                816,
+                1056
+              ]
+            }
+          ],
+          "renderReportSha256": "65b41cbbaa36d417419f1ebc324c0d0f65aa1dc3b72b3537ec7af84a3b4e03fd",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "764cc03790bfea825d793613f6f69b7c66a1928cf590867149aa479b66085d38",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "AsterFrame1",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  71,
+                  541,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "AsterFrame2",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  71,
+                  541,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "AsterAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  71,
+                  541,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "AsterFrame1",
+                  "AsterAfter"
+                ],
+                "tolerancePt": 0.5,
+                "type": "non-overlapping-markers",
+                "version": 1
+              },
+              "name": "assertion-non-overlapping-markers",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "AsterFrame2",
+                  "AsterAfter"
+                ],
+                "tolerancePt": 0.5,
+                "type": "non-overlapping-markers",
+                "version": 1
+              },
+              "name": "assertion-non-overlapping-markers",
+              "passed": true
+            }
+          ],
+          "inspection": {
+            "fonts": [
+              "LiberationSerif"
+            ],
+            "geometry": [
+              {
+                "crop": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "media": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "rotation": 0,
+                "userUnit": 1
+              }
+            ],
+            "tokens": {
+              "AsterAfter": 1,
+              "AsterBefore": 1,
+              "AsterFrame1": 1,
+              "AsterFrame2": 1
+            },
+            "words": [
+              {
+                "page": 1,
+                "rect": [
+                  72.1,
+                  71.799,
+                  125.769,
+                  83.976
+                ],
+                "text": "AsterBefore"
+              },
+              {
+                "page": 1,
+                "rect": [
+                  72.1,
+                  83.799,
+                  129.443,
+                  95.976
+                ],
+                "text": "AsterFrame1"
+              },
+              {
+                "page": 1,
+                "rect": [
+                  72.1,
+                  95.799,
+                  129.443,
+                  107.976
+                ],
+                "text": "AsterFrame2"
+              },
+              {
+                "page": 1,
+                "rect": [
+                  72.1,
+                  107.799,
+                  119.059,
+                  119.976
+                ],
+                "text": "AsterAfter"
+              }
+            ]
+          },
+          "passed": true,
+          "pdfSha256": "47ca23cd006c8bc51c4cfaed7d5c4e77d997c4493391d16fadbe355616ab6f19",
+          "rasters": [
+            {
+              "path": "rasters/libreoffice/frames-inline-body-edge-distance/page-1.png",
+              "sha256": "a8213f1cf174c3bd394eb878fabadee07c323a7ce0dff991add61464fc7cccd2",
+              "size": [
+                816,
+                1056
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "frames-inline-body-edge-distance-normal-control": {
+      "controlPagePngByteIdentical": true,
+      "inputSha256": "b9da0e9ab07eaf9798ff1e94791ee6de1a16426cd4b96894d2605907ba76a79d",
+      "providers": {
+        "baseline": {
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "AsterFrame1",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  71,
+                  541,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "AsterFrame2",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  71,
+                  541,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "AsterAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  107,
+                  180,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "AsterFrame1",
+                  "AsterAfter"
+                ],
+                "tolerancePt": 0.5,
+                "type": "non-overlapping-markers",
+                "version": 1
+              },
+              "name": "assertion-non-overlapping-markers",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "AsterFrame2",
+                  "AsterAfter"
+                ],
+                "tolerancePt": 0.5,
+                "type": "non-overlapping-markers",
+                "version": 1
+              },
+              "name": "assertion-non-overlapping-markers",
+              "passed": true
+            }
+          ],
+          "inspection": {
+            "fonts": [
+              "LiberationSerif"
+            ],
+            "geometry": [
+              {
+                "crop": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "media": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "rotation": 0,
+                "userUnit": 1
+              }
+            ],
+            "tokens": {
+              "AsterAfter": 1,
+              "AsterBefore": 1,
+              "AsterFrame1": 1,
+              "AsterFrame2": 1
+            },
+            "words": [
+              {
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  71.952207,
+                  127.8801,
+                  84.128309
+                ],
+                "text": "AsterBefore"
+              },
+              {
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  83.952206,
+                  131.497494,
+                  96.128309
+                ],
+                "text": "AsterFrame1"
+              },
+              {
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  95.952206,
+                  131.497494,
+                  108.128308
+                ],
+                "text": "AsterFrame2"
+              },
+              {
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  107.952205,
+                  120.661416,
+                  120.128308
+                ],
+                "text": "AsterAfter"
+              }
+            ]
+          },
+          "passed": true,
+          "pdfSha256": "82c68a25dd13f303ee3d1f9c788170e88790886cf737c65e9b1f3a5f02a5db81",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "1685155b7a830746998fef2398a79fec849e48680bf389d58de7d6199ac754e5",
+            "title": ""
+          },
+          "rasters": [
+            {
+              "path": "rasters/baseline/frames-inline-body-edge-distance-normal-control/page-1.png",
+              "sha256": "b5006997dff5dd9e2d98b1f34f4b9a0395532f54c8820f3a61671e9d403214dd",
+              "size": [
+                816,
+                1056
+              ]
+            }
+          ],
+          "renderReportSha256": "35923b80d7e7533761d2a817e03439f62b19d7ad8ba0d4e33ee38b856ce70c60",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "f76ce29ec5b1cd9936015386fb6ac6835e88c1d8bd6bc11e41f258cfb363ea4a",
+            "verification": "browserObserved"
+          }
+        },
+        "candidate": {
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "AsterFrame1",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  71,
+                  541,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "AsterFrame2",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  71,
+                  541,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "AsterAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  107,
+                  180,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "AsterFrame1",
+                  "AsterAfter"
+                ],
+                "tolerancePt": 0.5,
+                "type": "non-overlapping-markers",
+                "version": 1
+              },
+              "name": "assertion-non-overlapping-markers",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "AsterFrame2",
+                  "AsterAfter"
+                ],
+                "tolerancePt": 0.5,
+                "type": "non-overlapping-markers",
+                "version": 1
+              },
+              "name": "assertion-non-overlapping-markers",
+              "passed": true
+            }
+          ],
+          "inspection": {
+            "fonts": [
+              "LiberationSerif"
+            ],
+            "geometry": [
+              {
+                "crop": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "media": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "rotation": 0,
+                "userUnit": 1
+              }
+            ],
+            "tokens": {
+              "AsterAfter": 1,
+              "AsterBefore": 1,
+              "AsterFrame1": 1,
+              "AsterFrame2": 1
+            },
+            "words": [
+              {
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  71.952207,
+                  127.8801,
+                  84.128309
+                ],
+                "text": "AsterBefore"
+              },
+              {
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  83.952206,
+                  131.497494,
+                  96.128309
+                ],
+                "text": "AsterFrame1"
+              },
+              {
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  95.952206,
+                  131.497494,
+                  108.128308
+                ],
+                "text": "AsterFrame2"
+              },
+              {
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  107.952205,
+                  120.661416,
+                  120.128308
+                ],
+                "text": "AsterAfter"
+              }
+            ]
+          },
+          "passed": true,
+          "pdfSha256": "efc96bd374cefabc7ebd94f0cbe8f6efb0c2dbedec870695665ab8d9e762a97b",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
+            "title": ""
+          },
+          "rasters": [
+            {
+              "path": "rasters/candidate/frames-inline-body-edge-distance-normal-control/page-1.png",
+              "sha256": "b5006997dff5dd9e2d98b1f34f4b9a0395532f54c8820f3a61671e9d403214dd",
+              "size": [
+                816,
+                1056
+              ]
+            }
+          ],
+          "renderReportSha256": "dcddc17c1812397042788b185c0503386e637e95bc1133acaddbb17b4f2f1226",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "764cc03790bfea825d793613f6f69b7c66a1928cf590867149aa479b66085d38",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "AsterFrame1",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  71,
+                  541,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "AsterFrame2",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  71,
+                  541,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "AsterAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  107,
+                  180,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "AsterFrame1",
+                  "AsterAfter"
+                ],
+                "tolerancePt": 0.5,
+                "type": "non-overlapping-markers",
+                "version": 1
+              },
+              "name": "assertion-non-overlapping-markers",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "AsterFrame2",
+                  "AsterAfter"
+                ],
+                "tolerancePt": 0.5,
+                "type": "non-overlapping-markers",
+                "version": 1
+              },
+              "name": "assertion-non-overlapping-markers",
+              "passed": true
+            }
+          ],
+          "inspection": {
+            "fonts": [
+              "LiberationSerif"
+            ],
+            "geometry": [
+              {
+                "crop": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "media": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "rotation": 0,
+                "userUnit": 1
+              }
+            ],
+            "tokens": {
+              "AsterAfter": 1,
+              "AsterBefore": 1,
+              "AsterFrame1": 1,
+              "AsterFrame2": 1
+            },
+            "words": [
+              {
+                "page": 1,
+                "rect": [
+                  72.1,
+                  71.799,
+                  125.769,
+                  83.976
+                ],
+                "text": "AsterBefore"
+              },
+              {
+                "page": 1,
+                "rect": [
+                  72.1,
+                  83.799,
+                  129.443,
+                  95.976
+                ],
+                "text": "AsterFrame1"
+              },
+              {
+                "page": 1,
+                "rect": [
+                  72.1,
+                  95.799,
+                  129.443,
+                  107.976
+                ],
+                "text": "AsterFrame2"
+              },
+              {
+                "page": 1,
+                "rect": [
+                  72.1,
+                  107.799,
+                  119.059,
+                  119.976
+                ],
+                "text": "AsterAfter"
+              }
+            ]
+          },
+          "passed": true,
+          "pdfSha256": "61f8a773d6922e2d6a3def0e08fbb7d8ba46f1a1c090c13cc58df806cac684b7",
+          "rasters": [
+            {
+              "path": "rasters/libreoffice/frames-inline-body-edge-distance-normal-control/page-1.png",
               "sha256": "a8213f1cf174c3bd394eb878fabadee07c323a7ce0dff991add61464fc7cccd2",
               "size": [
                 816,
@@ -2240,7 +3654,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "4af5ca15a65af56a3ae5b459a52d5c51c728a54561c03d46c3ae56b098f77827",
+          "pdfSha256": "5cb3cbf448397b5b54af131e6305a3107642692f6ac1f07a177191f4069c6af3",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -2279,7 +3693,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -2292,7 +3706,7 @@
               ]
             }
           ],
-          "renderReportSha256": "bd7733ab787f41667ed59c776e53548256c446ffae69b4be6acd655b6c917cea",
+          "renderReportSha256": "29deaaab0fb7f6af2973c2f47f2de759279c0896b27bca1d80fec694cabaa74b",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -2318,7 +3732,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "a9ebf4a0d53f7e6b220eafc1e4285e042f1012d3865417f9781602c9aa479766",
+            "rendererFingerprint": "764cc03790bfea825d793613f6f69b7c66a1928cf590867149aa479b66085d38",
             "verification": "browserObserved"
           }
         },
@@ -2927,7 +4341,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "b648855017355833523f3031ca096a2dc258f73fc2e2d864bfbe4e6ce9418cec",
+          "pdfSha256": "124966f3926217df392b9f3c75103d55eaa565ab03f4a6533aa7e453274484ff",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -2966,7 +4380,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -2979,7 +4393,7 @@
               ]
             }
           ],
-          "renderReportSha256": "f749fa8f44c3d1eaecc333d4e487408c2b188f771e26d5bdde8e03c88093512c",
+          "renderReportSha256": "ce6389779b39812b67b0814318999af9565448ddbfa407d5ace2d8c5fe83d71d",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -3005,7 +4419,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "a9ebf4a0d53f7e6b220eafc1e4285e042f1012d3865417f9781602c9aa479766",
+            "rendererFingerprint": "764cc03790bfea825d793613f6f69b7c66a1928cf590867149aa479b66085d38",
             "verification": "browserObserved"
           }
         },
@@ -3749,7 +5163,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "7412c647a5d39fc8daa41a965b60b307949b44b4c58a0f95c7f1ef477f5bba9c",
+          "pdfSha256": "138c5c5a594863a15270755766afc857e27b6c5445126784fcb1e90eee24bbc4",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -3788,7 +5202,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -3801,7 +5215,7 @@
               ]
             }
           ],
-          "renderReportSha256": "76d17c9ca340bbdcd5a28090a2f94e97eb6e8527b19be57e442fbd7f4dda79c4",
+          "renderReportSha256": "4d91604850a8ffb94a25af0a17f3ba0bd0210b43f4edafeb85fbf1df0fa8409e",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -3827,7 +5241,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "b9773b14c2c82b414bde381892b6fc14acdc1e9af4b73a1028bf46f1844aac5d",
+            "rendererFingerprint": "2eda6964c4f4cda8321400f4c85f5753635d124e3f72bc1df3c71e54b79ca948",
             "verification": "browserObserved"
           }
         },
@@ -4627,7 +6041,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "adf90884a6695db2ca50abdc4d540ace42b3d16d58a08af5ee897511d4ac4831",
+          "pdfSha256": "8b837b0b921578b5d643e226be7c59df9ad10b05f518508a7dd179c98b052907",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -4666,7 +6080,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -4679,7 +6093,7 @@
               ]
             }
           ],
-          "renderReportSha256": "81cd39c8712fe2656450f2963a48f5858c8b0303a2610ddae8d0fcd630eb9711",
+          "renderReportSha256": "bd1ed2adeced03b62198e517718683fccde01b4c803f3f30a22368c4a9f181fd",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -4705,7 +6119,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "b9773b14c2c82b414bde381892b6fc14acdc1e9af4b73a1028bf46f1844aac5d",
+            "rendererFingerprint": "2eda6964c4f4cda8321400f4c85f5753635d124e3f72bc1df3c71e54b79ca948",
             "verification": "browserObserved"
           }
         },
@@ -5394,7 +6808,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "723287da572525b3f242a95f7bffd6894ec962eb3f4dc1153450cdd258b941ce",
+          "pdfSha256": "701d6efadcdb3aafca85de239f2ce822a929f65d62c2ca24ad942600fd0ce8d0",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -5433,7 +6847,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -5446,7 +6860,7 @@
               ]
             }
           ],
-          "renderReportSha256": "5fe0b3591f4c208dacceab4e9b7ee086f0a7813af351102e4b6735c9b5fb18f9",
+          "renderReportSha256": "0e55a54c4ad28b33f4a98ea79484431718cf6ca8955561cd868a64c4db5ddb38",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -5472,7 +6886,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "11ce165e7675445037e3fcd62bf8a189fa3f3249b191cc788c46b3949c75c076",
+            "rendererFingerprint": "0588e6bf4055383a899a3872b9401bb21b9074a6c41a071749ee2f65a3ff4194",
             "verification": "browserObserved"
           }
         },
@@ -6106,7 +7520,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "8f15b7c9824546533eaa9830322485d29f2d63fe401832185bfadb4b01e42c1b",
+          "pdfSha256": "cad379d309196e468d995cd43d8758ef8646cc5286a4985c408a8d99d159338f",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -6145,7 +7559,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -6158,7 +7572,7 @@
               ]
             }
           ],
-          "renderReportSha256": "b9150b8960cbbdb94a43d9e5978f4ac3e91bbbc1d2e8ef978d51e75f481c4ee9",
+          "renderReportSha256": "3b3adca4b56029ef379ff54b43681d0657e90ff72b9a4d31aead6dacf642c8e3",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -6184,7 +7598,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "11ce165e7675445037e3fcd62bf8a189fa3f3249b191cc788c46b3949c75c076",
+            "rendererFingerprint": "0588e6bf4055383a899a3872b9401bb21b9074a6c41a071749ee2f65a3ff4194",
             "verification": "browserObserved"
           }
         },
@@ -6767,7 +8181,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "6eb350cb742448e677b6616bbae4b035af8f387e09d31bafe36708ea16bb9635",
+          "pdfSha256": "085f6de32edbe4803276fcd464bf6aab2fd01a16f1553fb27a391f525e6e8de6",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -6806,7 +8220,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -6819,7 +8233,7 @@
               ]
             }
           ],
-          "renderReportSha256": "98e9b4693dd293ad8ffb9ccf5add2b9ce8c043f0ad2aea0964dfef8f200b40bd",
+          "renderReportSha256": "65dc4fe846e60d2adcacbf3c7dc8fb7e7ad7945c4d888b6f2576e0dd3ee1976b",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -6845,7 +8259,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "11ce165e7675445037e3fcd62bf8a189fa3f3249b191cc788c46b3949c75c076",
+            "rendererFingerprint": "0588e6bf4055383a899a3872b9401bb21b9074a6c41a071749ee2f65a3ff4194",
             "verification": "browserObserved"
           }
         },
@@ -7454,7 +8868,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "18f45e8655858ddcd2a7d0ca05b46f4c1fb8e1456f47f3d9d93e0d0f4bbc57ae",
+          "pdfSha256": "5c3adb889f7973d32fd019bbc0f2f0d80e503bb86c7e0aa4afbadcd223198fd3",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -7493,7 +8907,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -7506,7 +8920,7 @@
               ]
             }
           ],
-          "renderReportSha256": "fa2d8cd9992ab71bc18010e174bb497af9ff82aef51616bf0486f7ff55eecf84",
+          "renderReportSha256": "2c3e51eb2db0c14dc7a7d04e0afc34193b3f42ad89a682f4ea7f3a70dc45c33d",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -7532,7 +8946,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "11ce165e7675445037e3fcd62bf8a189fa3f3249b191cc788c46b3949c75c076",
+            "rendererFingerprint": "0588e6bf4055383a899a3872b9401bb21b9074a6c41a071749ee2f65a3ff4194",
             "verification": "browserObserved"
           }
         },
@@ -8228,7 +9642,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "16f313cd2ccf51cbe880f39ff83266cdc71af9d47350f54e2ce9950322febed3",
+          "pdfSha256": "4bcc5c6f9baa30f3c6675da61fb32542b65c192e2f9a21e8317b47389819ac74",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -8267,7 +9681,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -8280,7 +9694,7 @@
               ]
             }
           ],
-          "renderReportSha256": "42de2ae967c8611c5139c82925288f7b62c2203d71306886f851d8df3f2988c7",
+          "renderReportSha256": "979981e0ebbc5cabe41a4e14135ce04fc1ef3120556fb145fdc3880c7ba14d21",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -8306,7 +9720,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "c7f2c0e0175a6a5a8ff7e6bfedbd78ae492d49010df799e8974f97330b49f192",
+            "rendererFingerprint": "bb928d28e4444c162bc8b240d7249eabe993529998ec3f8eb200f087d90dc4f6",
             "verification": "browserObserved"
           }
         },
@@ -9031,7 +10445,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "c0e1256602e695975c66a559c560b38dfd1f6a2cbd281527144232cab93adb21",
+          "pdfSha256": "5e1e53c5c4fb82c2fb9a48e95c5fb204ea1fdc2594f1e6c9a2ee02b17e3e86b9",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -9070,7 +10484,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -9083,7 +10497,7 @@
               ]
             }
           ],
-          "renderReportSha256": "3e7fbb094fbc3daea909f39732d9581f8bb8c6daf3c11b95e171a6212f140fd2",
+          "renderReportSha256": "02765f8d9e5cc106443fcc3b9321a1077d9ad64c7dc3b89bc7121cb2f232c30a",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -9109,7 +10523,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "c7f2c0e0175a6a5a8ff7e6bfedbd78ae492d49010df799e8974f97330b49f192",
+            "rendererFingerprint": "bb928d28e4444c162bc8b240d7249eabe993529998ec3f8eb200f087d90dc4f6",
             "verification": "browserObserved"
           }
         },
@@ -9783,7 +11197,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "ee005047c832c8fddc68fc9fb4814bb1cd578078fedc99b4e097fb101610ed83",
+          "pdfSha256": "45c3ef34523ab99bd347047adc2e442df982be1e7bfed6719da3dfb00671b0f2",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -9822,7 +11236,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -9835,7 +11249,7 @@
               ]
             }
           ],
-          "renderReportSha256": "fd528cfbbd47367fcb1edb429abdb72d78435749ec8ccb3d28999e32bac4ded5",
+          "renderReportSha256": "5b390e88de4eb5bead1baed2bbdbf66af9aba39ec246ba289b36d9ab37c9b621",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -9861,7 +11275,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "c7f2c0e0175a6a5a8ff7e6bfedbd78ae492d49010df799e8974f97330b49f192",
+            "rendererFingerprint": "bb928d28e4444c162bc8b240d7249eabe993529998ec3f8eb200f087d90dc4f6",
             "verification": "browserObserved"
           }
         },
@@ -10561,7 +11975,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "d2b1c1cea9863066097e2a86784ec8b5c778460bff82dbbc04b80aac2262284a",
+          "pdfSha256": "48d82827cc33f127d42f39088efb5229754a70916865642454144b46b24a1e82",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -10600,7 +12014,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -10613,7 +12027,7 @@
               ]
             }
           ],
-          "renderReportSha256": "e5967ed731859150cb69e8e75c852b633001604243331a12904f7cfb28827777",
+          "renderReportSha256": "895d76879b9937da303925421a11a87033d9e518685b90be5d280bfdad6077d5",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -10639,7 +12053,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "c7f2c0e0175a6a5a8ff7e6bfedbd78ae492d49010df799e8974f97330b49f192",
+            "rendererFingerprint": "bb928d28e4444c162bc8b240d7249eabe993529998ec3f8eb200f087d90dc4f6",
             "verification": "browserObserved"
           }
         },
@@ -11474,7 +12888,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "54633e7456c39735a327f5cff886b7a313e57ee4eb04ffe1217f61d682f82a04",
+          "pdfSha256": "13712d53b7accc3d04612fea26fecc4f4dedd50bc5a977e349ec4e822e67153e",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -11513,7 +12927,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -11526,7 +12940,7 @@
               ]
             }
           ],
-          "renderReportSha256": "699a3db02db70e9439ce4336ee603cf138d31fe1cb4174a2bf2fa12d6db2c35d",
+          "renderReportSha256": "28e2f06820b42e7093d813a8e2d3158da6b59929219861e66648b3be038c883c",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -11552,7 +12966,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "c7f2c0e0175a6a5a8ff7e6bfedbd78ae492d49010df799e8974f97330b49f192",
+            "rendererFingerprint": "bb928d28e4444c162bc8b240d7249eabe993529998ec3f8eb200f087d90dc4f6",
             "verification": "browserObserved"
           }
         },
@@ -12443,7 +13857,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "48ccb0fcb893b560f3b059d67c01a3502bc65e47b170a616742a0a0e71604931",
+          "pdfSha256": "66474069d84801671567168acc30ca778721d657b36c5d528b3443a3f8828537",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -12482,7 +13896,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -12495,7 +13909,7 @@
               ]
             }
           ],
-          "renderReportSha256": "4534612cfe3e539d7bdc2dbbc62b1058c9af1ab620e12f5ada4d3a47e61a64b1",
+          "renderReportSha256": "4d33bcf7f789c770df05910645a2130210ab66e6940a3d85acbd5af27988f832",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -12521,7 +13935,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "c7f2c0e0175a6a5a8ff7e6bfedbd78ae492d49010df799e8974f97330b49f192",
+            "rendererFingerprint": "bb928d28e4444c162bc8b240d7249eabe993529998ec3f8eb200f087d90dc4f6",
             "verification": "browserObserved"
           }
         },
@@ -13301,7 +14715,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "e8fb0e0b6dc74ecc26a6b3c5149f50370181830fd1b05270840dc0ba8c318a08",
+          "pdfSha256": "2d0d5fc71f307567f96e9c87894d1cfc7b2df593f6b4726a96dfb2b785faf0ce",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -13340,7 +14754,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -13353,7 +14767,7 @@
               ]
             }
           ],
-          "renderReportSha256": "cbfe36dfdef4387b9b3800e23e6235d01b124b08b70e53b5c4bd6f0b36a85e0b",
+          "renderReportSha256": "1d953a1ab5a5fa2e286cb1e3a47be2b52da10e482d5dc17e6edce5e5e05d459b",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -13379,7 +14793,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "c7f2c0e0175a6a5a8ff7e6bfedbd78ae492d49010df799e8974f97330b49f192",
+            "rendererFingerprint": "bb928d28e4444c162bc8b240d7249eabe993529998ec3f8eb200f087d90dc4f6",
             "verification": "browserObserved"
           }
         },
@@ -14104,7 +15518,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "54df031f616862052a5efc83e4e5a2345621753d6c7134b13fd02c4b0284ca90",
+          "pdfSha256": "b44fa94702b4cfefd36b8305701ccecca8bdc14044ea111fce0992ded0e82b75",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -14143,7 +15557,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -14156,7 +15570,7 @@
               ]
             }
           ],
-          "renderReportSha256": "e96367823c028a1b2c4ea41a333ebb293e5d621b5971aa89110a1168c71ac1f2",
+          "renderReportSha256": "807eef7c9927187bdb7ee38ba953d4a781613ac9ffea5273f33752e33df08b16",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -14182,7 +15596,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "c7f2c0e0175a6a5a8ff7e6bfedbd78ae492d49010df799e8974f97330b49f192",
+            "rendererFingerprint": "bb928d28e4444c162bc8b240d7249eabe993529998ec3f8eb200f087d90dc4f6",
             "verification": "browserObserved"
           }
         },
@@ -14856,7 +16270,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "e2248e19c5e55b23edd456ab75df18e0192cc16031a8cc1d233c8f271d6cab96",
+          "pdfSha256": "70202af5047c28a4ddd70285ff9217d51c3119b490dd0364890b780e661f7aaf",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -14895,7 +16309,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -14908,7 +16322,7 @@
               ]
             }
           ],
-          "renderReportSha256": "545522c045f4db4cbb0cc108e56697f5dec4831985f8e7940028c220fda16189",
+          "renderReportSha256": "d7598f1011607a5f85fe8d3a9c812e2efe9a02d8224400579c2321ec8f55aa42",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -14934,7 +16348,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "c7f2c0e0175a6a5a8ff7e6bfedbd78ae492d49010df799e8974f97330b49f192",
+            "rendererFingerprint": "bb928d28e4444c162bc8b240d7249eabe993529998ec3f8eb200f087d90dc4f6",
             "verification": "browserObserved"
           }
         },
@@ -15634,7 +17048,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "b6e7e2e02311ae82d43e4eef742d8b8cac34fb3b3959ff78c39674519971336b",
+          "pdfSha256": "61b27a4397923a7aa1531349cf1c34e2520bba453a13a60dec2b05dcf30cbe5e",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -15673,7 +17087,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -15686,7 +17100,7 @@
               ]
             }
           ],
-          "renderReportSha256": "ed636c01c159d90c8edec884ff73fedc1ca570b39823123280019f11bbe223cb",
+          "renderReportSha256": "4fef4ceda8be438258c8f900f10d3cfd9c72567291aef52b80a89a4d88187285",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -15712,7 +17126,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "c7f2c0e0175a6a5a8ff7e6bfedbd78ae492d49010df799e8974f97330b49f192",
+            "rendererFingerprint": "bb928d28e4444c162bc8b240d7249eabe993529998ec3f8eb200f087d90dc4f6",
             "verification": "browserObserved"
           }
         },
@@ -16929,7 +18343,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "cc44bd16ae345b46c0bcf794f3b0f0910fddaf6173f1e455445957687ea3735d",
+          "pdfSha256": "97bf8129ada46a7357480b9294d7dc0cfb15473e56536d3d3a67fe49072f0fdd",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -16968,7 +18382,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -16981,7 +18395,7 @@
               ]
             }
           ],
-          "renderReportSha256": "861876c85f256b72ba42947f0cc0d81b1510ffae7b892cc252661870e7b584c2",
+          "renderReportSha256": "8366b974f2b7af9f863d6653a5b5efe448193212864117a799cda2ad5d401a0d",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -17007,7 +18421,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "c7f2c0e0175a6a5a8ff7e6bfedbd78ae492d49010df799e8974f97330b49f192",
+            "rendererFingerprint": "bb928d28e4444c162bc8b240d7249eabe993529998ec3f8eb200f087d90dc4f6",
             "verification": "browserObserved"
           }
         },
@@ -18471,7 +19885,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "f2cc57ff47f730d967ff98be797cf87b06863522521d5f06b35b43385f7db697",
+          "pdfSha256": "d43f12a2a14b2dcaec50c753d15ff9a235e133488f5c7c3f09da3a7a04af1dd2",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -18510,7 +19924,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -18523,7 +19937,7 @@
               ]
             }
           ],
-          "renderReportSha256": "6ecca33e3026c9d95ab96e1e354d43cd09d5dab9af1839c709c8b873287e8204",
+          "renderReportSha256": "aa6a2ee8f69b5b445ab79975370280bc5103da76593bc4f7c29ace7e26cde92b",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -18549,7 +19963,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "c7f2c0e0175a6a5a8ff7e6bfedbd78ae492d49010df799e8974f97330b49f192",
+            "rendererFingerprint": "bb928d28e4444c162bc8b240d7249eabe993529998ec3f8eb200f087d90dc4f6",
             "verification": "browserObserved"
           }
         },
@@ -19630,7 +21044,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "350c3d801706467d1d7befdb2798be4d789cc9289faa7210da2f8bc338c6b8e5",
+          "pdfSha256": "c15ea2ed1c12cef3860d51dd09c14eeb6496060660989d3a3da85701de108527",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -19669,7 +21083,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -19682,7 +21096,7 @@
               ]
             }
           ],
-          "renderReportSha256": "b9e03dd6f8fb8865f17f513e5a7d52558539add201ed969de343cba161af620c",
+          "renderReportSha256": "a35b09974a43fa47f7178d8e6cf3e96a29392cfac6de21a9bdd3422aab0a191c",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -19708,7 +21122,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "c7f2c0e0175a6a5a8ff7e6bfedbd78ae492d49010df799e8974f97330b49f192",
+            "rendererFingerprint": "bb928d28e4444c162bc8b240d7249eabe993529998ec3f8eb200f087d90dc4f6",
             "verification": "browserObserved"
           }
         },
@@ -20599,7 +22013,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "c473e180aec4a9b3bb05af6a79e705098a2585adbc9192e1b7074e7bf80a0eb0",
+          "pdfSha256": "e0687f88d921948d350a2f11f0d7e07661bc6e61b85250e2b1df962a9760eb46",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -20638,7 +22052,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -20651,7 +22065,7 @@
               ]
             }
           ],
-          "renderReportSha256": "e732df1051450d24e28876356dd5e1581590f70525c6fc9a4f2c8a006fe2e9ff",
+          "renderReportSha256": "e03a02b29ff79fbd3931b8f27a21dc970ce0a02d8a7ffe36ac910d33a167ba91",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -20677,7 +22091,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "c7f2c0e0175a6a5a8ff7e6bfedbd78ae492d49010df799e8974f97330b49f192",
+            "rendererFingerprint": "bb928d28e4444c162bc8b240d7249eabe993529998ec3f8eb200f087d90dc4f6",
             "verification": "browserObserved"
           }
         },
@@ -21614,7 +23028,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "c73d8024d35db543e41fb4d6f03b62386a84f60529918053561175c55947b17d",
+          "pdfSha256": "a4b2a902ef9146b8406a202e6f636f507a8db38a98971eca26831fafd20c432a",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -21653,7 +23067,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -21674,7 +23088,7 @@
               ]
             }
           ],
-          "renderReportSha256": "31aba3375569084aab339235168c51199909e40def64cdd17e305d67f6897693",
+          "renderReportSha256": "0e81f1cea1033e0acc1002a932e6fa8411010dec18c06e8cda77b5eb002fb889",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -21700,7 +23114,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "d7468c195e91455605e5f36502943b271005601092cc70ceeae9f66a39bed874",
+            "rendererFingerprint": "4ade9b74287a3b903ff3f10c64e03e74f464edf1f028ac6eb3cdcef1bef8aaa8",
             "verification": "browserObserved"
           }
         },
@@ -22808,7 +24222,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "3ad26f83e4592934115629c28a79074a1152379d3ee513d8a4a15c19d19c1210",
+          "pdfSha256": "9a4e8b98b896b757d5e221dfaf85d2fb8ec830865e66a9a4108d212677ae9ccf",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -22847,7 +24261,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -22868,7 +24282,7 @@
               ]
             }
           ],
-          "renderReportSha256": "40e052f2e5bb0e02cd8d74efbd643a3b5491f2c266e5c5af3409e4b586dca8fe",
+          "renderReportSha256": "2a6d600c825b435176b9a6d267e2d2d1132e0494a18c8b0b9b161eb4e0bdc244",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -22894,7 +24308,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "d7468c195e91455605e5f36502943b271005601092cc70ceeae9f66a39bed874",
+            "rendererFingerprint": "4ade9b74287a3b903ff3f10c64e03e74f464edf1f028ac6eb3cdcef1bef8aaa8",
             "verification": "browserObserved"
           }
         },
@@ -24833,7 +26247,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "6944cbd295a79a1552e1db0e9df8e721f210838f436dad193591d244ebee2bc9",
+          "pdfSha256": "01dfcc8c8bcd4e34d3e41418bd6ac61d1dd1e84a1c9c9b347a92590161b0b6b4",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -24872,7 +26286,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -24893,7 +26307,7 @@
               ]
             }
           ],
-          "renderReportSha256": "47c7440297d5a2f0b4ce4cbe2fe93bda5d99c652adbfda87ae1f91c81ebda576",
+          "renderReportSha256": "47ed40a0c9b12f07eee8e029c21d21d7dff674bc78fe2c4f796ce0a28e134b93",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -24919,7 +26333,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "411a34897e292f04baee3b04441656d5ce70d2e7e1fff976fe2c2573af2cfae4",
+            "rendererFingerprint": "88c5c13c94b964f641548abac82596454cd3513adb78ec33a91600430cf2e772",
             "verification": "browserObserved"
           }
         },
@@ -27313,7 +28727,7 @@
             ]
           },
           "passed": true,
-          "pdfSha256": "38a4d74e3676ccacfca07e755bb4c89bedfd8da7c260a99db4adcf285ef02ea3",
+          "pdfSha256": "269ef5064b185e20ebd2ffcf0177626cbfc0e5c247030eb7e7d2ad4f1d43b7dd",
           "profile": {
             "commentProfile": "hidden",
             "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
@@ -27352,7 +28766,7 @@
             },
             "reviewProfile": "final",
             "reviewProfileAlreadyApplied": false,
-            "runtimePolicyDigest": "177e239e881edb8715cd189e77bb525bfa3117eb114b0a5fec7d2028b20dcc68",
+            "runtimePolicyDigest": "520f7acf5a03cc695f57aaa737fbf5f4831d3e83a8c7a1349b08ada8fe4a2284",
             "title": ""
           },
           "rasters": [
@@ -27373,7 +28787,7 @@
               ]
             }
           ],
-          "renderReportSha256": "6704db9226fc297ce2be135cac1db8602e1fb7a7181f3c87cdc709573c75bdb0",
+          "renderReportSha256": "52ec0baedf13207ae6f47c72bcc6a32ed3fd59c3619c90bbe9bb20459d83f60f",
           "runtime": {
             "fidelityTier": "unbaselined",
             "observed": {
@@ -27399,7 +28813,7 @@
                 1200
               ]
             },
-            "rendererFingerprint": "411a34897e292f04baee3b04441656d5ce70d2e7e1fff976fe2c2573af2cfae4",
+            "rendererFingerprint": "88c5c13c94b964f641548abac82596454cd3513adb78ec33a91600430cf2e772",
             "verification": "browserObserved"
           }
         },
@@ -28184,7 +29598,7 @@
       }
     }
   },
-  "kind": "Local public-export diagnostics; production CI comparison and native Word spacing work remain pending.",
+  "kind": "Local public-export diagnostics; production CI comparison remains pending; native Word probes establish separately documented capability limits.",
   "native": "LibreOffice 25.8.7.3",
   "schema": 1,
   "screenshots": {
@@ -28283,6 +29697,102 @@
         }
       ],
       "sha256": "201fe43706fbcdf013f116b431dba5923ff6ac2b51f02216e26e9443aa5daec4"
+    },
+    "frames-inline-body-edge-distance": {
+      "file": "frames-inline-body-edge-distance.png",
+      "panels": [
+        {
+          "origin": [
+            16,
+            74
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/frames-inline-body-edge-distance/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "a8213f1cf174c3bd394eb878fabadee07c323a7ce0dff991add61464fc7cccd2",
+          "size": [
+            816,
+            1056
+          ]
+        },
+        {
+          "origin": [
+            848,
+            74
+          ],
+          "page": 1,
+          "path": "rasters/baseline/frames-inline-body-edge-distance/page-1.png",
+          "provider": "baseline",
+          "sha256": "bd3429ef2e302faf700f7e37768bec51184b4ebef712e01a58099ce9223f5805",
+          "size": [
+            816,
+            1056
+          ]
+        },
+        {
+          "origin": [
+            1680,
+            74
+          ],
+          "page": 1,
+          "path": "rasters/candidate/frames-inline-body-edge-distance/page-1.png",
+          "provider": "candidate",
+          "sha256": "d7ff89c15f1bfb1fb5668c332a5982461aa26433e9557a868f91d05eb7ce777a",
+          "size": [
+            816,
+            1056
+          ]
+        }
+      ],
+      "sha256": "e76ab050017982901db04eca79cd4c469c8b612b689884782db692191b5c0f96"
+    },
+    "frames-inline-body-edge-distance-normal-control": {
+      "file": "frames-inline-body-edge-distance-normal-control.png",
+      "panels": [
+        {
+          "origin": [
+            16,
+            74
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/frames-inline-body-edge-distance-normal-control/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "a8213f1cf174c3bd394eb878fabadee07c323a7ce0dff991add61464fc7cccd2",
+          "size": [
+            816,
+            1056
+          ]
+        },
+        {
+          "origin": [
+            848,
+            74
+          ],
+          "page": 1,
+          "path": "rasters/baseline/frames-inline-body-edge-distance-normal-control/page-1.png",
+          "provider": "baseline",
+          "sha256": "b5006997dff5dd9e2d98b1f34f4b9a0395532f54c8820f3a61671e9d403214dd",
+          "size": [
+            816,
+            1056
+          ]
+        },
+        {
+          "origin": [
+            1680,
+            74
+          ],
+          "page": 1,
+          "path": "rasters/candidate/frames-inline-body-edge-distance-normal-control/page-1.png",
+          "provider": "candidate",
+          "sha256": "b5006997dff5dd9e2d98b1f34f4b9a0395532f54c8820f3a61671e9d403214dd",
+          "size": [
+            816,
+            1056
+          ]
+        }
+      ],
+      "sha256": "008b22271494fc4656a4756f66eeff0a49707093a9a09ea5ba3eed2113a0260e"
     },
     "frames-inline-body-floating-control": {
       "file": "frames-inline-body-floating-control.png",
@@ -29691,5 +31201,5 @@
       "sha256": "5ec712ed9a5a840ff27eb351c2fab113121c8d2ca8f77b88cf312dde5b4bb64c"
     }
   },
-  "scriptSha256": "fb3f1e3dc6277ad129975f6203d7e0feb6a405589cd5730882912deeb197df4a"
+  "scriptSha256": "c4b7d25b864f3d699432d16ab31e6b1ad7c4421fe55fe92901ef6e8975f452ea"
 }

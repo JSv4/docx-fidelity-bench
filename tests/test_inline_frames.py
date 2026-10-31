@@ -27,7 +27,7 @@ class InlineFrames(unittest.TestCase):
 
     def test_grouped_and_separated_sources_retain_every_original_label(self):
         cases = [c for c in common.validate_registry()['cases'] if c['id'].startswith('frames-inline-')]
-        self.assertEqual(len(cases), 28)
+        self.assertEqual(len(cases), 30)
         w = '{' + fixtures.W + '}'
         for case in cases:
             with self.subTest(case=case['id']), ZipFile(common.ROOT / case['input']) as package:

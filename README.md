@@ -1,12 +1,12 @@
 # DOCX fidelity bench
 
-`core-v93` adds 28 original inline-frame cases for Docxodus #1487, with body, header,
-footer, cell, page-end, separate-carrier and header-overhang controls. The versioned
+`core-v93` adds 30 original inline-frame cases for Docxodus #1487, with body, header,
+footer, cell, page-end, separate-carrier, edge-distance and header-overhang controls. The versioned
 `non-overlapping-markers` check detects overprinted labels while allowing native Word's
 beside-frame layout and LibreOffice's ordinary paragraph flow. Complete inventories,
 page/position bounds and raster comparisons still apply. All 645 prior inputs and case
-declarations are preserved apart from their shared generator hash. Capture evidence is
-being prepared; these cases do not claim exact Word raster parity.
+declarations are preserved apart from their shared generator hash. [All 30 cases and labeled local comparisons](docs/results/inline-frames/README.md)
+are recorded; production comparison is pending. These cases do not claim exact Word raster parity.
 
 `core-v92` adds twelve original textbox-fit cases for Docxodus #1492, covering omitted fit,
 theme defaults, local precedence and running stories. [All twelve cases and labeled previews](docs/results/textbox-fit/README.md)
