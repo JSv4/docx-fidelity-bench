@@ -4069,7 +4069,64 @@ def generate():
         add('notes-bordered-flow-' + name, 'notes',
             f'{count} original Ash footnote lines with {border or "no"} border and ' + ('separate paragraphs' if paragraphs else 'hard breaks') + (f', {flow} flow' if flow else '') + ' (Docxodus #1491)',
             [ash_body, '1', '1'] + lines, body, styles_xml=ash_styles, footnote_list=[(1, note)])
-    registry = {'schema': 1, 'suite': {'id': 'core-v91', 'version': 91, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # #1492: the box remains partly on paper; only its empty deleted mark is beyond the edge.
+    linden_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="20"/></w:rPr></w:rPrDefault></w:docDefaults></w:styles>'
+    drawing_ns = ('xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" '
+                  'xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
+                  'xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"')
+    def linden_theme(default, fit):
+        color = '<a:srgbClr val="304050"/>'
+        fill = '<a:solidFill>' + color + '</a:solidFill>'
+        font = f'<a:latin typeface="{FONT}"/><a:ea typeface=""/><a:cs typeface=""/>'
+        return ('<a:theme xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" name="Linden">'
+                '<a:themeElements><a:clrScheme name="Linden">' + ''.join(f'<a:{n}>{color}</a:{n}>' for n in
+                ['dk1', 'lt1', 'dk2', 'lt2', 'accent1', 'accent2', 'accent3', 'accent4', 'accent5', 'accent6', 'hlink', 'folHlink']) +
+                f'</a:clrScheme><a:fontScheme name="Linden"><a:majorFont>{font}</a:majorFont><a:minorFont>{font}</a:minorFont></a:fontScheme>'
+                f'<a:fmtScheme name="Linden"><a:fillStyleLst>{fill * 3}</a:fillStyleLst><a:lnStyleLst>' +
+                ('<a:ln>' + fill + '</a:ln>') * 3 + '</a:lnStyleLst><a:effectStyleLst>' +
+                '<a:effectStyle><a:effectLst/></a:effectStyle>' * 3 + f'</a:effectStyleLst><a:bgFillStyleLst>{fill * 3}</a:bgFillStyleLst>'
+                '</a:fmtScheme></a:themeElements><a:objectDefaults>' +
+                (f'<a:{default}><a:spPr/><a:bodyPr>{fit}</a:bodyPr><a:lstStyle/></a:{default}>' if default else '') +
+                '</a:objectDefaults></a:theme>')
+    for name, local, default, inherited, top, story_kind in [
+            ('edge-default', '', None, '', 748, None),
+            ('edge-explicit-control', '<a:noAutofit/>', None, '', 748, None),
+            ('onpage-default-control', '', None, '', 60, None),
+            ('edge-text-default', '', 'txDef', '<a:noAutofit/>', 748, None),
+            ('edge-line-default', '', 'lnDef', '<a:noAutofit/>', 748, None),
+            ('edge-shape-default', '', 'spDef', '<a:noAutofit/>', 748, None),
+            ('edge-empty-theme', '', '', '', 748, None),
+            ('edge-local-over-theme-control', '<a:noAutofit/>', 'txDef', '<a:spAutoFit/>', 748, None),
+            ('header-edge-default', '', None, '', 748, 'header'),
+            ('footer-edge-text-default', '', 'txDef', '<a:noAutofit/>', 748, 'footer'),
+            ('onpage-text-auto-control', '', 'txDef', '<a:spAutoFit/>', 60, None),
+            ('onpage-text-shrink-control', '', 'txDef', '<a:normAutofit/>', 60, None)]:
+        labels = ['LindenA', 'LindenB', 'LindenC']
+        content = ''.join(para(t, '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="exact"/>') for t in labels)
+        deleted_mark = '<w:rPr><w:del w:id="31" w:author="Linden Reviewer" w:date="2026-10-31T12:00:00Z"/></w:rPr>' if top > 700 else ''
+        content += f'<w:p><w:pPr><w:spacing w:before="280" w:after="0" w:line="240" w:lineRule="exact"/>{deleted_mark}</w:pPr></w:p>'
+        fit_drawing = (f'<w:drawing {drawing_ns}><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" relativeHeight="2" behindDoc="0" locked="0" layoutInCell="0" allowOverlap="1">'
+                   '<wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="page"><wp:posOffset>1066800</wp:posOffset></wp:positionH>'
+                   f'<wp:positionV relativeFrom="page"><wp:posOffset>{top * 12700}</wp:posOffset></wp:positionV>'
+                   '<wp:extent cx="2286000" cy="1219200"/><wp:wrapNone/><wp:docPr id="17" name="Linden window"/>'
+                   '<a:graphic><a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"><wps:wsp><wps:cNvSpPr txBox="1"/>'
+                   '<wps:spPr><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></wps:spPr>'
+                   f'<wps:txbx><w:txbxContent>{content}</w:txbxContent></wps:txbx><wps:bodyPr>{local}</wps:bodyPr>'
+                   '</wps:wsp></a:graphicData></a:graphic></wp:anchor></w:drawing>')
+        host_text = 'LindenHost The register is complete.'
+        host = para(runs=run(host_text) + '<w:r>' + fit_drawing + '</w:r>')
+        theme = {} if default is None else {'word/theme.xml': linden_theme(default, inherited)}
+        section_xml = section().replace('<w:sectPr>', f'<w:sectPr><w:{story_kind}Reference w:type="default" r:id="rStory"/>') if story_kind else section()
+        body_text = 'LindenBody The running record is complete.'
+        add('textbox-fit-' + name, 'paragraphs', 'Effective fixed textbox fit with ' + name.replace('-', ' ') + ' (Docxodus #1492)',
+            ([body_text] if story_kind else []) + [host_text] + labels, para(body_text) if story_kind else host, section_xml,
+            styles_xml=linden_styles, story=(story_kind, host) if story_kind else None, extra_parts=theme,
+            relations_extra=[('rTheme', 'theme', 'theme.xml')] if theme else [],
+            content_types_extra='<Override PartName="/word/theme.xml" ContentType="application/vnd.openxmlformats-officedocument.theme+xml"/>' if theme else '',
+            assertions=[{'type': 'marker-region', 'marker': t, 'occurrence': 1, 'page': 1,
+                         'rect': [78, top - 6, 210, min(791.9, top + 65)]} for t in labels])
+        cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
+    registry = {'schema': 1, 'suite': {'id': 'core-v92', 'version': 92, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

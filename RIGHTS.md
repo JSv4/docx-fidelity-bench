@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The twelve textbox-fit cases for Docxodus #1492 contain original Linden text and literal
+OOXML authored in `bench/fixtures.py`, including their theme defaults. They import no document,
+template, image or font program. Liberation Serif is separately provisioned. The labeled
+review screenshots show only these original inputs rendered by separately provisioned tools.
+
 The thirteen bordered-footnote cases for Docxodus #1491 contain original Ash inventory text
 and literal WordprocessingML authored in `bench/fixtures.py`. They import no external document,
 template, image or font program. Liberation Serif is separately provisioned. Review screenshots

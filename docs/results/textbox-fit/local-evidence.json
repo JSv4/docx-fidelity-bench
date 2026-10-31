@@ -1,0 +1,4498 @@
+{
+  "baselineCore": "72319002a6286d09d68eb5b555434f35fc435945",
+  "baselineRuntimeSource": "0875eab87ecaf0af716af7c585f9745d159c4a95",
+  "candidateCore": "5fe5cbcd644a925799db0e9eb474860b0039122d",
+  "cases": {
+    "textbox-fit-edge-default": {
+      "inputSha256": "53ed41319c7bef5a6aa827395245c36262917fdefbe502dcf7551ec849f2250a",
+      "providers": {
+        "baseline": {
+          "error": {
+            "assetsSha256": "eef30c62d507830610beddacd951b6af605e070a99672756065c0ed7c2ef34c9",
+            "code": "output_verification_failure",
+            "id": "textbox-fit-edge-default",
+            "inputSha256": "53ed41319c7bef5a6aa827395245c36262917fdefbe502dcf7551ec849f2250a",
+            "message": "source anchor p:body:90828cf9295496be349787c0db2686a1 has no measurable fragment in the paginated layout",
+            "mode": "baseline",
+            "status": "failed"
+          },
+          "pages": 0
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/textbox-fit-edge-default/page-1.png",
+              "sha256": "45982b2251a01a4c7576b8a41c4b2b2e47db03e1226fed430de95fc07b06b7e6"
+            }
+          ],
+          "pdfSha256": "56d893cd0e57651a56b4bf37589a3ba783027116abc4d3f0b050d9811a2de165",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "a3107f6ce28c0715957c7f5f059da8b8220cb57b6340fd377b80b48b73aefa7e",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "markup",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "6e92c25fb908bd5794ccde2a4534741d5fb0adc62f3777d89dea732af9846e3b",
+            "title": ""
+          },
+          "reportSha256": "f348ada079433320e4ac7c590856904c326d3e787eb9c186254be2da9055e747",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "8fad61ddc59ab5982f6248a77de537ab74c09078e956319303260f2805d0d58c",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/textbox-fit-edge-default/page-1.png",
+              "sha256": "5609c3f97fa074cc6ecd0914e5d643a0df99cd99e3c587cb48a778456ef1fbe9"
+            }
+          ],
+          "pdfSha256": "21a25eb17c02efb33333c828b6a7cb6a9687512b352fc8ac9824c694322e8042"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    },
+    "textbox-fit-edge-empty-theme": {
+      "inputSha256": "99a676c70758401664e3d5d664aa73a3699228fa091121afc0cd79ceaea1a757",
+      "providers": {
+        "baseline": {
+          "error": {
+            "assetsSha256": "eef30c62d507830610beddacd951b6af605e070a99672756065c0ed7c2ef34c9",
+            "code": "output_verification_failure",
+            "id": "textbox-fit-edge-empty-theme",
+            "inputSha256": "99a676c70758401664e3d5d664aa73a3699228fa091121afc0cd79ceaea1a757",
+            "message": "source anchor p:body:90828cf9295496be349787c0db2686a1 has no measurable fragment in the paginated layout",
+            "mode": "baseline",
+            "status": "failed"
+          },
+          "pages": 0
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/textbox-fit-edge-empty-theme/page-1.png",
+              "sha256": "45982b2251a01a4c7576b8a41c4b2b2e47db03e1226fed430de95fc07b06b7e6"
+            }
+          ],
+          "pdfSha256": "4883bbfb8381e3d3dae5c2c63b0f60dc77eaa2fa0bc739e3be570d52bc767b40",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "a3107f6ce28c0715957c7f5f059da8b8220cb57b6340fd377b80b48b73aefa7e",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "markup",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "6e92c25fb908bd5794ccde2a4534741d5fb0adc62f3777d89dea732af9846e3b",
+            "title": ""
+          },
+          "reportSha256": "7d8c19658612412a1a04c17a8afec4b1b82c19496d916a96a36030a1c5401b65",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "8fad61ddc59ab5982f6248a77de537ab74c09078e956319303260f2805d0d58c",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/textbox-fit-edge-empty-theme/page-1.png",
+              "sha256": "5609c3f97fa074cc6ecd0914e5d643a0df99cd99e3c587cb48a778456ef1fbe9"
+            }
+          ],
+          "pdfSha256": "1047d85b956e413237d8b5883936286d4da6ad3f265491ce1780efc4f9ebecb6"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    },
+    "textbox-fit-edge-explicit-control": {
+      "controlPagePngByteIdentical": true,
+      "inputSha256": "275553d791482f77950232b2021942ead72a955366d88ae9fb2739ddfdb2d22e",
+      "providers": {
+        "baseline": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/baseline/textbox-fit-edge-explicit-control/page-1.png",
+              "sha256": "45982b2251a01a4c7576b8a41c4b2b2e47db03e1226fed430de95fc07b06b7e6"
+            }
+          ],
+          "pdfSha256": "56d893cd0e57651a56b4bf37589a3ba783027116abc4d3f0b050d9811a2de165",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "a3107f6ce28c0715957c7f5f059da8b8220cb57b6340fd377b80b48b73aefa7e",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "markup",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "96437e1a27a17b4a51fec9110950651b01bc0b1f19c8fa82d94dceed485c3165",
+            "title": ""
+          },
+          "reportSha256": "914713a5298502da6dc44c1c0c18f40d8abd61dbe6400f4c478109717312932e",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "ec7231fa832934a7518434f70e33a3660bc7cd5372e641dcfcaf10be2f7a45f6",
+            "verification": "browserObserved"
+          }
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/textbox-fit-edge-explicit-control/page-1.png",
+              "sha256": "45982b2251a01a4c7576b8a41c4b2b2e47db03e1226fed430de95fc07b06b7e6"
+            }
+          ],
+          "pdfSha256": "43c469c87be24510eb42e485d8efc054a897bf3806890496d794435a3e935870",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "a3107f6ce28c0715957c7f5f059da8b8220cb57b6340fd377b80b48b73aefa7e",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "markup",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "6e92c25fb908bd5794ccde2a4534741d5fb0adc62f3777d89dea732af9846e3b",
+            "title": ""
+          },
+          "reportSha256": "e8e8fb03e03ef190c76331a3ae565c1bdbe6a1899a20aedc35388c68d23ccb25",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "8fad61ddc59ab5982f6248a77de537ab74c09078e956319303260f2805d0d58c",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/textbox-fit-edge-explicit-control/page-1.png",
+              "sha256": "5609c3f97fa074cc6ecd0914e5d643a0df99cd99e3c587cb48a778456ef1fbe9"
+            }
+          ],
+          "pdfSha256": "e2f9a396bce299c544ff19a4258dc9f03d8a8e92e586620fdbe8829f7d1a3075"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    },
+    "textbox-fit-edge-line-default": {
+      "inputSha256": "f9b62665a6dd82a8a1caeb9e9200ee22c0f189d2972522269dc93ead214ef686",
+      "providers": {
+        "baseline": {
+          "error": {
+            "assetsSha256": "eef30c62d507830610beddacd951b6af605e070a99672756065c0ed7c2ef34c9",
+            "code": "output_verification_failure",
+            "id": "textbox-fit-edge-line-default",
+            "inputSha256": "f9b62665a6dd82a8a1caeb9e9200ee22c0f189d2972522269dc93ead214ef686",
+            "message": "source anchor p:body:90828cf9295496be349787c0db2686a1 has no measurable fragment in the paginated layout",
+            "mode": "baseline",
+            "status": "failed"
+          },
+          "pages": 0
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/textbox-fit-edge-line-default/page-1.png",
+              "sha256": "45982b2251a01a4c7576b8a41c4b2b2e47db03e1226fed430de95fc07b06b7e6"
+            }
+          ],
+          "pdfSha256": "64a4ba22cc939db64903cd5e95d2dbc921deca9c9ed809d75b352717bd5d8853",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "a3107f6ce28c0715957c7f5f059da8b8220cb57b6340fd377b80b48b73aefa7e",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "markup",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "6e92c25fb908bd5794ccde2a4534741d5fb0adc62f3777d89dea732af9846e3b",
+            "title": ""
+          },
+          "reportSha256": "0914917a31ee4eb356c8f9c88027b77f7e2d6e68dbf1d53b947d40b9e007edbd",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "8fad61ddc59ab5982f6248a77de537ab74c09078e956319303260f2805d0d58c",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/textbox-fit-edge-line-default/page-1.png",
+              "sha256": "5609c3f97fa074cc6ecd0914e5d643a0df99cd99e3c587cb48a778456ef1fbe9"
+            }
+          ],
+          "pdfSha256": "af7cbf7f97574ce83383235fe3033f4e981970f271d3b345d2687be33ec90a45"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    },
+    "textbox-fit-edge-local-over-theme-control": {
+      "controlPagePngByteIdentical": true,
+      "inputSha256": "3489c093d5c20bd1ceff0cda17e244b73545f3d00d28d5e1395b253eb4bac85a",
+      "providers": {
+        "baseline": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/baseline/textbox-fit-edge-local-over-theme-control/page-1.png",
+              "sha256": "45982b2251a01a4c7576b8a41c4b2b2e47db03e1226fed430de95fc07b06b7e6"
+            }
+          ],
+          "pdfSha256": "e17fd06da45d66d4f28bd7cd9d6191cbf8cc6504bedeea155571f1df74cc7571",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "a3107f6ce28c0715957c7f5f059da8b8220cb57b6340fd377b80b48b73aefa7e",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "markup",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "96437e1a27a17b4a51fec9110950651b01bc0b1f19c8fa82d94dceed485c3165",
+            "title": ""
+          },
+          "reportSha256": "29049c6f1cff5acce77912488540e2b6102ab3e1c97d7ae0bc76286a092e8a22",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "ec7231fa832934a7518434f70e33a3660bc7cd5372e641dcfcaf10be2f7a45f6",
+            "verification": "browserObserved"
+          }
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/textbox-fit-edge-local-over-theme-control/page-1.png",
+              "sha256": "45982b2251a01a4c7576b8a41c4b2b2e47db03e1226fed430de95fc07b06b7e6"
+            }
+          ],
+          "pdfSha256": "298cee1a6c88c536150f3cdcf758637af07da8bac2ca8985874f90238fc9c2fd",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "a3107f6ce28c0715957c7f5f059da8b8220cb57b6340fd377b80b48b73aefa7e",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "markup",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "6e92c25fb908bd5794ccde2a4534741d5fb0adc62f3777d89dea732af9846e3b",
+            "title": ""
+          },
+          "reportSha256": "4934bc44a8fcf66e0cdc85a01ab039c7036e99bd215a9387c9d1d5bf21ad162f",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "8fad61ddc59ab5982f6248a77de537ab74c09078e956319303260f2805d0d58c",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/textbox-fit-edge-local-over-theme-control/page-1.png",
+              "sha256": "5609c3f97fa074cc6ecd0914e5d643a0df99cd99e3c587cb48a778456ef1fbe9"
+            }
+          ],
+          "pdfSha256": "6267cc82ef08618d67b5cb64201b5f75b9e9e4bafb85afb85d3434b084ef80af"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    },
+    "textbox-fit-edge-shape-default": {
+      "inputSha256": "3f7cf805fc46ed04a732baa3c0a91086677f018a369d12aeeb2f3b0da296e598",
+      "providers": {
+        "baseline": {
+          "error": {
+            "assetsSha256": "eef30c62d507830610beddacd951b6af605e070a99672756065c0ed7c2ef34c9",
+            "code": "output_verification_failure",
+            "id": "textbox-fit-edge-shape-default",
+            "inputSha256": "3f7cf805fc46ed04a732baa3c0a91086677f018a369d12aeeb2f3b0da296e598",
+            "message": "source anchor p:body:90828cf9295496be349787c0db2686a1 has no measurable fragment in the paginated layout",
+            "mode": "baseline",
+            "status": "failed"
+          },
+          "pages": 0
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/textbox-fit-edge-shape-default/page-1.png",
+              "sha256": "45982b2251a01a4c7576b8a41c4b2b2e47db03e1226fed430de95fc07b06b7e6"
+            }
+          ],
+          "pdfSha256": "31599febf60b13bbe2afea20440dc63da9d65c7b50fd9c9ea8146da9ecd610fb",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "a3107f6ce28c0715957c7f5f059da8b8220cb57b6340fd377b80b48b73aefa7e",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "markup",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "6e92c25fb908bd5794ccde2a4534741d5fb0adc62f3777d89dea732af9846e3b",
+            "title": ""
+          },
+          "reportSha256": "b59e45966e1f9ee0cd1b5fcb7dc45f909fe148ee8f21df2b3b250608f10dbc28",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "8fad61ddc59ab5982f6248a77de537ab74c09078e956319303260f2805d0d58c",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/textbox-fit-edge-shape-default/page-1.png",
+              "sha256": "5609c3f97fa074cc6ecd0914e5d643a0df99cd99e3c587cb48a778456ef1fbe9"
+            }
+          ],
+          "pdfSha256": "ed21de1c69d8c6b4a77c6ae969cf22ff7a6b32fd65bfc43731f7a5eefc8d2c4c"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    },
+    "textbox-fit-edge-text-default": {
+      "inputSha256": "8f4abbad7a5c48023431f96c25ffeb82ee53b7e4d732d461f66c295cb193305a",
+      "providers": {
+        "baseline": {
+          "error": {
+            "assetsSha256": "eef30c62d507830610beddacd951b6af605e070a99672756065c0ed7c2ef34c9",
+            "code": "output_verification_failure",
+            "id": "textbox-fit-edge-text-default",
+            "inputSha256": "8f4abbad7a5c48023431f96c25ffeb82ee53b7e4d732d461f66c295cb193305a",
+            "message": "source anchor p:body:90828cf9295496be349787c0db2686a1 has no measurable fragment in the paginated layout",
+            "mode": "baseline",
+            "status": "failed"
+          },
+          "pages": 0
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/textbox-fit-edge-text-default/page-1.png",
+              "sha256": "45982b2251a01a4c7576b8a41c4b2b2e47db03e1226fed430de95fc07b06b7e6"
+            }
+          ],
+          "pdfSha256": "5c229c8e38124127f65a40d5ca76a8183a5c2127a163b7e3d73bafd9d023899f",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "a3107f6ce28c0715957c7f5f059da8b8220cb57b6340fd377b80b48b73aefa7e",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "markup",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "6e92c25fb908bd5794ccde2a4534741d5fb0adc62f3777d89dea732af9846e3b",
+            "title": ""
+          },
+          "reportSha256": "073a2dbf9d4a1754b8b77dc0b9c340c5d794c7a7b02aa082f9dd504d8e7e6c16",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "8fad61ddc59ab5982f6248a77de537ab74c09078e956319303260f2805d0d58c",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/textbox-fit-edge-text-default/page-1.png",
+              "sha256": "5609c3f97fa074cc6ecd0914e5d643a0df99cd99e3c587cb48a778456ef1fbe9"
+            }
+          ],
+          "pdfSha256": "5484d7dbdadb5398999d6b2214854cf1163a467bcf3d02d8eb120aefc978c41d"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    },
+    "textbox-fit-footer-edge-text-default": {
+      "inputSha256": "808cb0348e1fac1f113f6659aa91998e07a554122e663f573c2fbbaefb277dd1",
+      "providers": {
+        "baseline": {
+          "error": {
+            "assetsSha256": "eef30c62d507830610beddacd951b6af605e070a99672756065c0ed7c2ef34c9",
+            "code": "output_verification_failure",
+            "id": "textbox-fit-footer-edge-text-default",
+            "inputSha256": "808cb0348e1fac1f113f6659aa91998e07a554122e663f573c2fbbaefb277dd1",
+            "message": "source anchor p:ftr1:2318f197f066d60dad95da45d1f99088 has no measurable fragment in the paginated layout",
+            "mode": "baseline",
+            "status": "failed"
+          },
+          "pages": 0
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/textbox-fit-footer-edge-text-default/page-1.png",
+              "sha256": "2c01428b70307355f4aabbb7940263679df2d5a2254d6c6941254a8abbb29705"
+            }
+          ],
+          "pdfSha256": "76b221a890ae9f5357e868b502c5bdf677a49175659d5b6ba0a505a7bd2b531b",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "a3107f6ce28c0715957c7f5f059da8b8220cb57b6340fd377b80b48b73aefa7e",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "markup",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "6e92c25fb908bd5794ccde2a4534741d5fb0adc62f3777d89dea732af9846e3b",
+            "title": ""
+          },
+          "reportSha256": "546bf56a4beca9eec3aefab47665d2187bd30bac4a067579394e89dd43082c10",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "574bb17629161fdf60bd30b7dcae868ad541a968e118bf4b5d8d30b3ecf4c90a",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/textbox-fit-footer-edge-text-default/page-1.png",
+              "sha256": "5926a5fec0eb7287bb495b06cf979b255a19f59f04c9dc1326dd47fe3788d7af"
+            }
+          ],
+          "pdfSha256": "e5cb82b3b7bbde59cb8d48558a1c3600c3360a5c00b3d3b18c2b0c2a8ae087dd"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    },
+    "textbox-fit-header-edge-default": {
+      "inputSha256": "f1305c1a4202bc88a760216664fd953a45b03b008848bbd513fa4efb16092e09",
+      "providers": {
+        "baseline": {
+          "error": {
+            "assetsSha256": "eef30c62d507830610beddacd951b6af605e070a99672756065c0ed7c2ef34c9",
+            "code": "output_verification_failure",
+            "id": "textbox-fit-header-edge-default",
+            "inputSha256": "f1305c1a4202bc88a760216664fd953a45b03b008848bbd513fa4efb16092e09",
+            "message": "source anchor p:hdr1:5976987d7e421243342798f50dbd7c76 has no measurable fragment in the paginated layout",
+            "mode": "baseline",
+            "status": "failed"
+          },
+          "pages": 0
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/textbox-fit-header-edge-default/page-1.png",
+              "sha256": "26a94e352aa7239047affe14e7becb1ed6c1d5ea7cd21edf820c2e7ef1a72e6a"
+            }
+          ],
+          "pdfSha256": "bc97c104a368a4307bcc049c99e20bf9b47ee600dc129f80bbac8c1bed911be0",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "a3107f6ce28c0715957c7f5f059da8b8220cb57b6340fd377b80b48b73aefa7e",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "markup",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "6e92c25fb908bd5794ccde2a4534741d5fb0adc62f3777d89dea732af9846e3b",
+            "title": ""
+          },
+          "reportSha256": "84bd07a1cdadfb8ce29ddf82f5d7175c48de2628fb42b0b3586a2d99cbf08d0e",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "574bb17629161fdf60bd30b7dcae868ad541a968e118bf4b5d8d30b3ecf4c90a",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/textbox-fit-header-edge-default/page-1.png",
+              "sha256": "a2bba18dba32a9e15bac011a559c95a5aff0835c26bd680733d59c73d973b3ea"
+            }
+          ],
+          "pdfSha256": "e266c3d6318d2dbbba417908a65c420efaa92ef46914f4e56c13095ccaa43c1d"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    },
+    "textbox-fit-onpage-default-control": {
+      "controlPagePngByteIdentical": true,
+      "inputSha256": "afd34aeb6a7c2ff4d346776d3d7c0dc995d892f36b2cf00a814e3d82596bae7a",
+      "providers": {
+        "baseline": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/baseline/textbox-fit-onpage-default-control/page-1.png",
+              "sha256": "0f968b9aeac36224e226b659b8c4ef0c111c708756bcf7bd806c423bd9af7604"
+            }
+          ],
+          "pdfSha256": "c680b64a7b6ac80b24360e08b90e3c632b8c18d89c493a5095d4c898b2ef75cc",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "a3107f6ce28c0715957c7f5f059da8b8220cb57b6340fd377b80b48b73aefa7e",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "markup",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "96437e1a27a17b4a51fec9110950651b01bc0b1f19c8fa82d94dceed485c3165",
+            "title": ""
+          },
+          "reportSha256": "16fadb6e2ef30181ad301af1d5c9e5048881327ce09a503271646ce8fe24face",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "7f794abe766b3b4eee921afb623600a01646f1658a8c094f6c0990922aa408b7",
+            "verification": "browserObserved"
+          }
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/textbox-fit-onpage-default-control/page-1.png",
+              "sha256": "0f968b9aeac36224e226b659b8c4ef0c111c708756bcf7bd806c423bd9af7604"
+            }
+          ],
+          "pdfSha256": "6d7068a855bea42a87f042b7c7510b5a5c6cf2dd5e07f298209d98af61a663a8",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "a3107f6ce28c0715957c7f5f059da8b8220cb57b6340fd377b80b48b73aefa7e",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "markup",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "6e92c25fb908bd5794ccde2a4534741d5fb0adc62f3777d89dea732af9846e3b",
+            "title": ""
+          },
+          "reportSha256": "764fd9b4a4073f0c35014853b143af90ab0aa62c2026e64169b25d4fca894a0e",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "5d386264e27385dc780dbe7981b91b547fe164288d158a346bf2bf8a9655e369",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/textbox-fit-onpage-default-control/page-1.png",
+              "sha256": "63035bae5a8bf10230064ba02f3f2af138ad407e11fa6e35a195b7ce54e121e6"
+            }
+          ],
+          "pdfSha256": "8bf5a276569fa4d917b55843725ee361470d4c5e863f553878f9ffbebdd82909"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    },
+    "textbox-fit-onpage-text-auto-control": {
+      "controlPagePngByteIdentical": true,
+      "inputSha256": "c719ce7a48ac81394700e58d0a805dcf8b548eddfda88285bf037a6f20e3b377",
+      "providers": {
+        "baseline": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/baseline/textbox-fit-onpage-text-auto-control/page-1.png",
+              "sha256": "0f968b9aeac36224e226b659b8c4ef0c111c708756bcf7bd806c423bd9af7604"
+            }
+          ],
+          "pdfSha256": "3cd76f0171971c08cde4ea33d0162a74ad8eb24a8907372505b58ed5b43301e1",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "a3107f6ce28c0715957c7f5f059da8b8220cb57b6340fd377b80b48b73aefa7e",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "markup",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "96437e1a27a17b4a51fec9110950651b01bc0b1f19c8fa82d94dceed485c3165",
+            "title": ""
+          },
+          "reportSha256": "9f460cb1c522ee56d04283c875293cf36a74fbdd57699798fdec11cfcf1a562d",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "7f794abe766b3b4eee921afb623600a01646f1658a8c094f6c0990922aa408b7",
+            "verification": "browserObserved"
+          }
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/textbox-fit-onpage-text-auto-control/page-1.png",
+              "sha256": "0f968b9aeac36224e226b659b8c4ef0c111c708756bcf7bd806c423bd9af7604"
+            }
+          ],
+          "pdfSha256": "4c631db3c0a3bb815d75b54d8a65b0ac3f1f0265215284e7bb15d27e1bb8e371",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "a3107f6ce28c0715957c7f5f059da8b8220cb57b6340fd377b80b48b73aefa7e",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "markup",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "6e92c25fb908bd5794ccde2a4534741d5fb0adc62f3777d89dea732af9846e3b",
+            "title": ""
+          },
+          "reportSha256": "09488f277880a18f2dbda5c0db4d40230eeaada91d3c8c5dfaf42621b6b3573d",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "5d386264e27385dc780dbe7981b91b547fe164288d158a346bf2bf8a9655e369",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/textbox-fit-onpage-text-auto-control/page-1.png",
+              "sha256": "63035bae5a8bf10230064ba02f3f2af138ad407e11fa6e35a195b7ce54e121e6"
+            }
+          ],
+          "pdfSha256": "b94c08be3797782dda840cb1a7f4e73074709cb929eea28e12879f75a4191233"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    },
+    "textbox-fit-onpage-text-shrink-control": {
+      "controlPagePngByteIdentical": true,
+      "inputSha256": "de21aa880ed41e9580317ef30660f53dbbae7d74f2a4872fd8c14e84ee5b026d",
+      "providers": {
+        "baseline": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/baseline/textbox-fit-onpage-text-shrink-control/page-1.png",
+              "sha256": "0f968b9aeac36224e226b659b8c4ef0c111c708756bcf7bd806c423bd9af7604"
+            }
+          ],
+          "pdfSha256": "ec6b5c1e4294b7264c974c4e2d3e618c4f9b947a54aa403b64e295041980bee7",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "a3107f6ce28c0715957c7f5f059da8b8220cb57b6340fd377b80b48b73aefa7e",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "markup",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "96437e1a27a17b4a51fec9110950651b01bc0b1f19c8fa82d94dceed485c3165",
+            "title": ""
+          },
+          "reportSha256": "3d5be508a95f2791cc9276964f739ca0e734ea789eb6fc4be3feabe1530950f2",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "7f794abe766b3b4eee921afb623600a01646f1658a8c094f6c0990922aa408b7",
+            "verification": "browserObserved"
+          }
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/textbox-fit-onpage-text-shrink-control/page-1.png",
+              "sha256": "0f968b9aeac36224e226b659b8c4ef0c111c708756bcf7bd806c423bd9af7604"
+            }
+          ],
+          "pdfSha256": "3cd76f0171971c08cde4ea33d0162a74ad8eb24a8907372505b58ed5b43301e1",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "a3107f6ce28c0715957c7f5f059da8b8220cb57b6340fd377b80b48b73aefa7e",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "markup",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "6e92c25fb908bd5794ccde2a4534741d5fb0adc62f3777d89dea732af9846e3b",
+            "title": ""
+          },
+          "reportSha256": "3ce0de53d0575bbc41258ab964580093c5b490ab2e567f7b640553d182cd7d4b",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "5d386264e27385dc780dbe7981b91b547fe164288d158a346bf2bf8a9655e369",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/textbox-fit-onpage-text-shrink-control/page-1.png",
+              "sha256": "63035bae5a8bf10230064ba02f3f2af138ad407e11fa6e35a195b7ce54e121e6"
+            }
+          ],
+          "pdfSha256": "a7a82e3a0d4bd314207385a96149a66cf702f03092941a748c127c102a1312db"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    }
+  },
+  "kind": "Local strict-font caller-owned sandboxed Chromium diagnostics; production CI is separate.",
+  "productionSelection": [
+    "textbox-fit-edge-default",
+    "textbox-fit-edge-explicit-control",
+    "textbox-fit-onpage-default-control",
+    "textbox-fit-edge-text-default",
+    "textbox-fit-edge-line-default",
+    "textbox-fit-edge-shape-default",
+    "textbox-fit-edge-empty-theme",
+    "textbox-fit-edge-local-over-theme-control",
+    "textbox-fit-header-edge-default",
+    "textbox-fit-footer-edge-text-default",
+    "textbox-fit-onpage-text-auto-control",
+    "textbox-fit-onpage-text-shrink-control"
+  ],
+  "schema": 1,
+  "screenshots": {
+    "textbox-fit-edge-default": {
+      "file": "textbox-fit-edge-default.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/textbox-fit-edge-default/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "5609c3f97fa074cc6ecd0914e5d643a0df99cd99e3c587cb48a778456ef1fbe9"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 1,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/textbox-fit-edge-default/page-1.png",
+          "provider": "candidate",
+          "sha256": "45982b2251a01a4c7576b8a41c4b2b2e47db03e1226fed430de95fc07b06b7e6"
+        }
+      ],
+      "sha256": "3b41ccde41fd80b99f60b20ccbe013f09a80faf513b6e40aeb8d83bb8f60be89"
+    },
+    "textbox-fit-edge-empty-theme": {
+      "file": "textbox-fit-edge-empty-theme.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/textbox-fit-edge-empty-theme/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "5609c3f97fa074cc6ecd0914e5d643a0df99cd99e3c587cb48a778456ef1fbe9"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 1,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/textbox-fit-edge-empty-theme/page-1.png",
+          "provider": "candidate",
+          "sha256": "45982b2251a01a4c7576b8a41c4b2b2e47db03e1226fed430de95fc07b06b7e6"
+        }
+      ],
+      "sha256": "3974465f47444cd2381396c7f00975baaa47fe19c1b09c11b26ccb6007b1538d"
+    },
+    "textbox-fit-edge-explicit-control": {
+      "file": "textbox-fit-edge-explicit-control.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/textbox-fit-edge-explicit-control/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "5609c3f97fa074cc6ecd0914e5d643a0df99cd99e3c587cb48a778456ef1fbe9"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/baseline/textbox-fit-edge-explicit-control/page-1.png",
+          "provider": "baseline",
+          "sha256": "45982b2251a01a4c7576b8a41c4b2b2e47db03e1226fed430de95fc07b06b7e6"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/textbox-fit-edge-explicit-control/page-1.png",
+          "provider": "candidate",
+          "sha256": "45982b2251a01a4c7576b8a41c4b2b2e47db03e1226fed430de95fc07b06b7e6"
+        }
+      ],
+      "sha256": "0c17a90b246482020f0e0ac07125a5e34d7f6455352f27e0446af992aebb3c0e"
+    },
+    "textbox-fit-edge-line-default": {
+      "file": "textbox-fit-edge-line-default.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/textbox-fit-edge-line-default/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "5609c3f97fa074cc6ecd0914e5d643a0df99cd99e3c587cb48a778456ef1fbe9"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 1,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/textbox-fit-edge-line-default/page-1.png",
+          "provider": "candidate",
+          "sha256": "45982b2251a01a4c7576b8a41c4b2b2e47db03e1226fed430de95fc07b06b7e6"
+        }
+      ],
+      "sha256": "807f34c02366a331d3c9fbff73f40c683cc2ed007d3abac346790d8c43ec1db5"
+    },
+    "textbox-fit-edge-local-over-theme-control": {
+      "file": "textbox-fit-edge-local-over-theme-control.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/textbox-fit-edge-local-over-theme-control/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "5609c3f97fa074cc6ecd0914e5d643a0df99cd99e3c587cb48a778456ef1fbe9"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/baseline/textbox-fit-edge-local-over-theme-control/page-1.png",
+          "provider": "baseline",
+          "sha256": "45982b2251a01a4c7576b8a41c4b2b2e47db03e1226fed430de95fc07b06b7e6"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/textbox-fit-edge-local-over-theme-control/page-1.png",
+          "provider": "candidate",
+          "sha256": "45982b2251a01a4c7576b8a41c4b2b2e47db03e1226fed430de95fc07b06b7e6"
+        }
+      ],
+      "sha256": "254bfe053320224845f451c4fbd0975944e25bd8b8eb513d81d3177bfc8ee1c4"
+    },
+    "textbox-fit-edge-shape-default": {
+      "file": "textbox-fit-edge-shape-default.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/textbox-fit-edge-shape-default/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "5609c3f97fa074cc6ecd0914e5d643a0df99cd99e3c587cb48a778456ef1fbe9"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 1,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/textbox-fit-edge-shape-default/page-1.png",
+          "provider": "candidate",
+          "sha256": "45982b2251a01a4c7576b8a41c4b2b2e47db03e1226fed430de95fc07b06b7e6"
+        }
+      ],
+      "sha256": "01ed3abff29bcab7bb92039b4bce4639396b7ae456369572d8fe363f9ac5861f"
+    },
+    "textbox-fit-edge-text-default": {
+      "file": "textbox-fit-edge-text-default.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/textbox-fit-edge-text-default/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "5609c3f97fa074cc6ecd0914e5d643a0df99cd99e3c587cb48a778456ef1fbe9"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 1,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/textbox-fit-edge-text-default/page-1.png",
+          "provider": "candidate",
+          "sha256": "45982b2251a01a4c7576b8a41c4b2b2e47db03e1226fed430de95fc07b06b7e6"
+        }
+      ],
+      "sha256": "26bf4fdfc4033e062fa2342c93a7e5051e464a27c20ebfbabb89115bfba51b43"
+    },
+    "textbox-fit-footer-edge-text-default": {
+      "file": "textbox-fit-footer-edge-text-default.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/textbox-fit-footer-edge-text-default/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "5926a5fec0eb7287bb495b06cf979b255a19f59f04c9dc1326dd47fe3788d7af"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 1,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/textbox-fit-footer-edge-text-default/page-1.png",
+          "provider": "candidate",
+          "sha256": "2c01428b70307355f4aabbb7940263679df2d5a2254d6c6941254a8abbb29705"
+        }
+      ],
+      "sha256": "822ff457516cf0991e8412ce31d435d7c54239de036fdc2d42f4097c2fdb8d2e"
+    },
+    "textbox-fit-header-edge-default": {
+      "file": "textbox-fit-header-edge-default.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/textbox-fit-header-edge-default/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "a2bba18dba32a9e15bac011a559c95a5aff0835c26bd680733d59c73d973b3ea"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 1,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/textbox-fit-header-edge-default/page-1.png",
+          "provider": "candidate",
+          "sha256": "26a94e352aa7239047affe14e7becb1ed6c1d5ea7cd21edf820c2e7ef1a72e6a"
+        }
+      ],
+      "sha256": "9ad53ec5f74422b7b63f869ee5e21d9ad405291ceff1921bd1de318119aa56ec"
+    },
+    "textbox-fit-onpage-default-control": {
+      "file": "textbox-fit-onpage-default-control.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/textbox-fit-onpage-default-control/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "63035bae5a8bf10230064ba02f3f2af138ad407e11fa6e35a195b7ce54e121e6"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/baseline/textbox-fit-onpage-default-control/page-1.png",
+          "provider": "baseline",
+          "sha256": "0f968b9aeac36224e226b659b8c4ef0c111c708756bcf7bd806c423bd9af7604"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/textbox-fit-onpage-default-control/page-1.png",
+          "provider": "candidate",
+          "sha256": "0f968b9aeac36224e226b659b8c4ef0c111c708756bcf7bd806c423bd9af7604"
+        }
+      ],
+      "sha256": "1b22764bde813519230a1c3fda28fe6122d8852a0a741314458072ee1d0382e9"
+    },
+    "textbox-fit-onpage-text-auto-control": {
+      "file": "textbox-fit-onpage-text-auto-control.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/textbox-fit-onpage-text-auto-control/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "63035bae5a8bf10230064ba02f3f2af138ad407e11fa6e35a195b7ce54e121e6"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/baseline/textbox-fit-onpage-text-auto-control/page-1.png",
+          "provider": "baseline",
+          "sha256": "0f968b9aeac36224e226b659b8c4ef0c111c708756bcf7bd806c423bd9af7604"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/textbox-fit-onpage-text-auto-control/page-1.png",
+          "provider": "candidate",
+          "sha256": "0f968b9aeac36224e226b659b8c4ef0c111c708756bcf7bd806c423bd9af7604"
+        }
+      ],
+      "sha256": "b14bf53aa974596e4e34250e1127f40215bd124a695bd7eacbc210ed954775f4"
+    },
+    "textbox-fit-onpage-text-shrink-control": {
+      "file": "textbox-fit-onpage-text-shrink-control.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/textbox-fit-onpage-text-shrink-control/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "63035bae5a8bf10230064ba02f3f2af138ad407e11fa6e35a195b7ce54e121e6"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/baseline/textbox-fit-onpage-text-shrink-control/page-1.png",
+          "provider": "baseline",
+          "sha256": "0f968b9aeac36224e226b659b8c4ef0c111c708756bcf7bd806c423bd9af7604"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/textbox-fit-onpage-text-shrink-control/page-1.png",
+          "provider": "candidate",
+          "sha256": "0f968b9aeac36224e226b659b8c4ef0c111c708756bcf7bd806c423bd9af7604"
+        }
+      ],
+      "sha256": "025f392d690e687d19d7655a3fa4b2f9425ab383b6fc4b84d89a0495ca6a7110"
+    }
+  },
+  "scriptSha256": "3f89c3f1084451926cd153f6996c98b7a223bdba95650272798f96293cb01815"
+}

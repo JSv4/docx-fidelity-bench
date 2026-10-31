@@ -1,10 +1,15 @@
 # DOCX fidelity bench
 
+`core-v92` adds twelve original textbox-fit cases for Docxodus #1492, covering omitted fit,
+theme defaults, local precedence and running stories. [All twelve cases and labeled previews](docs/results/textbox-fit/README.md)
+retain complete token inventories and independent visible-label bounds. All native references
+are eligible; production measurements are pending.
+
 `core-v91` adds thirteen original bordered-footnote cases for Docxodus #1491, covering two- and
 three-page notes, box and bottom borders, kept paragraphs, headings, table cells and controls. Complete
 source-token inventories remain mandatory. [All thirteen cases and labeled previews](docs/results/bordered-footnotes/README.md)
 distinguish eleven eligible LibreOffice references from two incomplete table references that
-remain unscored. Production measurements of the eleven eligible cases are pending.
+remain unscored. Production measurements of the eleven eligible cases are complete and linked there.
 
 `core-v90` adds seven original complete-comment PDF cases for Docxodus #1490. A separate
 print profile checks source text, paint, bounds and paper geometry while the primary hidden-comment
