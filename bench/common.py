@@ -187,9 +187,17 @@ def validate_registry(registry=None):
             if not case.get('htmlAssertions'):
                 raise ValueError('An HTML profile override requires declared HTML checks')
         for assertion in case['assertions']:
-            versions = {'marker-region': {1, 2}, 'same-page': {1}, 'marker-reference-position': {1}, 'color-reference-geometry': {1}, 'color-geometry': {1}}
+            versions = {'marker-region': {1, 2}, 'same-page': {1}, 'non-overlapping-markers': {1}, 'marker-reference-position': {1}, 'color-reference-geometry': {1}, 'color-geometry': {1}}
             if assertion.get('version') not in versions.get(assertion.get('type'), set()):
                 raise ValueError('Unknown assertion type or version')
+            if assertion['type'] == 'non-overlapping-markers':
+                labels, tolerance = assertion.get('markers'), assertion.get('tolerancePt')
+                if (set(assertion) != {'type', 'version', 'markers', 'tolerancePt'} or
+                        not isinstance(labels, list) or len(labels) != 2 or
+                        any(not isinstance(label, str) or len(label.split()) != 1 or case['tokens'].get(label) != 1 for label in labels) or
+                        labels[0] == labels[1] or type(tolerance) not in (int, float) or
+                        not math.isfinite(tolerance) or not 0 <= tolerance <= 0.5):
+                    raise ValueError('Marker separation requires two unique source labels and a tolerance from 0 to 0.5 pt')
             if assertion['type'] in ('color-reference-geometry', 'color-geometry'):
                 absolute = assertion['type'] == 'color-geometry'
                 keys = {'type', 'version', 'page', 'rgb', 'tolerancePt', 'coverageTolerance'}

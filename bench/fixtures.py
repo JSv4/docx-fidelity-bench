@@ -4126,7 +4126,103 @@ def generate():
             assertions=[{'type': 'marker-region', 'marker': t, 'occurrence': 1, 'page': 1,
                          'rect': [78, top - 6, 210, min(791.9, top + 65)]} for t in labels])
         cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
-    registry = {'schema': 1, 'suite': {'id': 'core-v92', 'version': 92, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # #1487: Word wraps beside inline frames where LibreOffice uses ordinary paragraph flow.
+    # Both valid layouts must preserve every label without overprinting following text.
+    aster_styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+                    f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="22"/>'
+                    '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:before="0" '
+                    'w:after="0" w:line="240" w:lineRule="exact"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    def aster_case(name, story_kind='body', mode='notBeside', filler=0, separate=False, overhang=False, body_table=False, edge_distance=False):
+        normal, floating = mode == 'normal', mode == 'floating'
+        count = 6 if overhang else 2
+        labels = [f'AsterFrame{i + 1}' for i in range(count)]
+        before = [f'AsterRow{i:03d}' for i in range(filler)] if filler else ['AsterBefore']
+        compact = overhang
+        width, offset = (1920, 0) if compact else (3600, 0 if edge_distance else 360)
+        frame = '' if normal else (f'<w:framePr w:w="{width}" w:x="{offset}" w:hAnchor="text" w:vAnchor="text" '
+            + ('w:y="0" w:wrap="none"' if floating else f'w:yAlign="inline" w:wrap="{mode}"')
+            + (' w:h="800" w:hRule="exact"' if separate else '')
+            + (' w:hSpace="120"' if edge_distance else '') + '/>')
+        content = ''.join(para(text) for text in before) + para(labels[0], frame)
+        if separate:
+            content += para('AsterBetween')
+        content += ''.join(para(label, frame) for label in labels[1:]) + para('AsterAfter')
+        story_text = before + labels + (['AsterBetween'] if separate else []) + ['AsterAfter']
+        running = story_kind in ('header', 'footer')
+        body_text = [f'AsterBody{i}' for i in range(3)] if body_table else ['AsterBody']
+        section_xml = section()
+        if compact:
+            section_xml = ('<w:sectPr><w:pgSz w:w="4800" w:h="3600"/><w:pgMar w:top="480" w:right="480" '
+                           'w:bottom="480" w:left="480" w:header="100" w:footer="100"/></w:sectPr>')
+        if running:
+            section_xml = section_xml.replace('<w:sectPr>', f'<w:sectPr><w:{story_kind}Reference w:type="default" r:id="rStory"/>')
+            if body_table:
+                body = ('<w:tbl><w:tblPr><w:tblW w:w="3840" w:type="dxa"/><w:tblLayout w:type="fixed"/>'
+                        '<w:tblCellMar>' + ''.join(f'<w:{side} w:w="0" w:type="dxa"/>' for side in ['top', 'left', 'bottom', 'right'])
+                        + '</w:tblCellMar></w:tblPr><w:tblGrid><w:gridCol w:w="3840"/></w:tblGrid>'
+                        + ''.join('<w:tr><w:trPr><w:trHeight w:val="480" w:hRule="exact"/></w:trPr><w:tc><w:tcPr>'
+                            '<w:tcW w:w="3840" w:type="dxa"/></w:tcPr>' + para(text) + '</w:tc></w:tr>' for text in body_text)
+                        + '</w:tbl>')
+            else:
+                body = para(body_text[0])
+        elif story_kind == 'cell':
+            body = ('<w:tbl><w:tblPr><w:tblW w:w="9360" w:type="dxa"/><w:tblCellMar>'
+                    + ''.join(f'<w:{side} w:w="0" w:type="dxa"/>' for side in ['top', 'left', 'bottom', 'right'])
+                    + '</w:tblCellMar></w:tblPr><w:tblGrid><w:gridCol w:w="9360"/></w:tblGrid><w:tr><w:tc>'
+                    '<w:tcPr><w:tcW w:w="9360" w:type="dxa"/></w:tcPr>' + content + '</w:tc></w:tr></w:tbl>')
+        else:
+            body = content
+        assertions = []
+        # Repeated header labels are covered by the full count inventory; each body row is
+        # unique and bounded to paper. The single-page counterpart checks every header label.
+        if not body_table:
+            targets = labels + ['AsterAfter'] + (['AsterBetween'] if separate else []) + (body_text if running else [])
+            for label in targets:
+                page = 2 if filler and label == 'AsterAfter' else 1
+                low = 35 if story_kind == 'header' else (695 if separate else 707) if story_kind == 'footer' else 695 if filler else 71
+                high = 781 if story_kind == 'footer' else 721 if filler else (97 if separate else 85) if story_kind == 'header' else 133 if separate else 121
+                region = [23, 4, 217, 116] if compact else [71, low, 541, high]
+                if label in body_text:
+                    region = [23, 28, 217, 116] if compact else [71, 71, 541, 109 if separate else 97]
+                if separate:
+                    # The 180pt frame begins at x90; neither frame may pack beside the
+                    # other. Following labels may use ordinary flow or start at x270.
+                    region[2] = 151 if label in labels else 337
+                if label == 'AsterAfter' and not floating and (normal or mode == 'notBeside' or story_kind == 'cell'):
+                    y = 88 if compact else 71 if filler or story_kind == 'header' else 743 if story_kind == 'footer' else 107
+                    if separate and story_kind != 'footer':
+                        y += 12
+                    region = [23 if compact else 71, y, 150 if compact else 180, y + 14]
+                assertions.append({'type': 'marker-region', 'marker': label, 'occurrence': 1, 'page': page, 'rect': region})
+            if not floating:
+                pairs = [(label, 'AsterAfter') for label in labels]
+                if separate:
+                    pairs.extend((label, 'AsterBetween') for label in labels)
+                if overhang:
+                    pairs.extend((label, body_text[0]) for label in labels)
+                assertions.extend({'type': 'non-overlapping-markers', 'version': 1, 'markers': list(pair), 'tolerancePt': 0.5} for pair in pairs)
+        else:
+            assertions = [{'type': 'marker-region', 'marker': label, 'occurrence': 1, 'page': 'reference',
+                           # Six 12pt header lines require clearance before the table;
+                           # ordinary-flow After adds one more line in LibreOffice.
+                           'rect': [23, 112 if i == 1 else 88, 82, 138 if i == 1 else 114]}
+                          for i, label in enumerate(body_text)]
+        add('frames-inline-' + name, 'paragraphs', 'Inline paragraph frame ' + name.replace('-', ' ') + ' (Docxodus #1487)',
+            (story_text * (2 if body_table else 1) + body_text) if running else story_text, body, section_xml,
+            styles_xml=aster_styles, story=(story_kind, content) if running else None, assertions=assertions)
+    for story_kind in ('body', 'header', 'footer', 'cell'):
+        for mode in ('notBeside', 'around', 'normal', 'floating'):
+            aster_case(story_kind + '-' + ('below' if mode == 'notBeside' else mode)
+                       + ('-control' if mode in ('normal', 'floating') else ''), story_kind, mode)
+    for normal in (False, True):
+        aster_case('body-edge-distance' + ('-normal-control' if normal else ''), mode='normal' if normal else 'around', edge_distance=True)
+        aster_case('page-end' + ('-normal-control' if normal else ''), mode='normal' if normal else 'notBeside', filler=52)
+        for story_kind in ('body', 'header', 'footer'):
+            aster_case(story_kind + '-separated' + ('-normal-control' if normal else ''), story_kind,
+                       'normal' if normal else 'around', separate=True)
+        aster_case('header-overhang' + ('-normal-control' if normal else ''), 'header', 'normal' if normal else 'around', overhang=True)
+        aster_case('header-table-clearance' + ('-normal-control' if normal else ''), 'header', 'normal' if normal else 'around', overhang=True, body_table=True)
+    registry = {'schema': 1, 'suite': {'id': 'core-v93', 'version': 93, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

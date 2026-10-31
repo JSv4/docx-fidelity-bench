@@ -295,6 +295,18 @@ def correctness(case, reference, candidate):
             elif assertion['type'] == 'same-page':
                 anchors = [marker(candidate, m) for m in assertion['markers']]
                 passed = len({a['page'] for a in anchors}) == 1
+            elif assertion['type'] == 'non-overlapping-markers':
+                first, second = [marker(candidate, label) for label in assertion['markers']]
+                for word in (first, second):
+                    rect = word['rect']
+                    if (not isinstance(rect, list) or len(rect) != 4 or
+                            any(type(n) not in (int, float) or not math.isfinite(n) for n in rect) or
+                            rect[2] <= rect[0] or rect[3] <= rect[1] or type(word['page']) is not int or
+                            not 1 <= word['page'] <= len(candidate['geometry'])):
+                        raise ValueError('Marker separation requires finite positive bounds on a physical page')
+                passed = first['page'] != second['page'] or any(
+                    min(first['rect'][axis + 2], second['rect'][axis + 2]) -
+                    max(first['rect'][axis], second['rect'][axis]) <= assertion['tolerancePt'] for axis in (0, 1))
             elif assertion['type'] == 'marker-reference-position':
                 a = marker(candidate, assertion['marker'])
                 expected = marker(reference, assertion['marker'])
