@@ -29,13 +29,45 @@ starts at 360.1 pt, Docxodus at 396 pt. The absolute region protects nonoverlap 
 both. It does not claim native tab parity.
 
 [Local evidence](local-evidence.json) binds exact inputs, core source, baseline revision,
-pagination bundle, HTML, PDFs and full-page rasters. These previews use the native .NET library
-and Chromium pagination, not a production WASM export. Production baseline/candidate scoring
-is pending. The baseline is main `1240cc5`; the candidate is `1f7dc8dd`, stacked on the preceding fixes.
+pagination bundle, HTML, PDFs and full-page rasters. These local previews use the native .NET library
+and Chromium pagination. The baseline is main `1240cc5`; the candidate is `1f7dc8dd`, stacked on the preceding fixes.
 The pagination bundle includes the independently reviewed font-preservation repair at `d38ca66b`;
 its TypeScript source is unchanged at the candidate revision. Both controls are unchanged. All candidate
 PDF mandatory checks and four checkbox pixel checks pass. Background-free and forced-colors
 Chromium prints have identical decoded page pixels to ordinary printing.
+
+The separate production WASM exports are complete: [baseline run 41171278328](https://github.com/JSv4/docx-fidelity-bench/actions/runs/41171278328)
+and [candidate run 41171275372](https://github.com/JSv4/docx-fidelity-bench/actions/runs/41171275372),
+both using bench `b24e2568`. [Production evidence](production-evidence.json) records the exact
+core revisions, artifact ZIP hashes, reference/input contracts, runtime identities, file hashes
+and check outcomes. All candidate PDF mandatory checks and all four painted-checkbox checks pass.
+Independent review replayed the checks, PDF/raster bindings and actual printed checkbox pixels.
+
+| Case | Main score | Candidate score | Production result |
+|---|---:|---:|---|
+| Checkbox states | 76.1861 | 90.0406 | Main has no matching controls; candidate passes all four state, paint, size and placement checks |
+| Cached text control | 99.8600 | 99.8600 | Full-page PNG byte-identical |
+| Dropdown metadata | 0 | 93.8481 | Missing text and RouteTail region fail on main; candidate passes |
+| Cached dropdown control | 93.8481 | 93.8481 | Full-page PNG byte-identical |
+
+These scores retain the provider differences described above; passing mandatory checks does not
+mean full visual parity. Production captures retain delivered HTML only for checkbox states.
+Control HTML identity is therefore established by the local diagnostics, while production
+establishes identical control page pixels and scores. PDF bytes and PageMap digests differ;
+PageMap includes the changed renderer fingerprint, and its payload was not retained to compare
+geometry independently. No PageMap identity claim is made.
+
+The following sheets display the recorded production page rasters, with labels and uniform scaling.
+
+![Production checkbox states: LibreOffice, main, candidate](fields-legacy-checkbox-states-production.png)
+
+![Production cached text control: LibreOffice, main, candidate](fields-legacy-checkbox-text-control-production.png)
+
+![Production dropdown metadata: LibreOffice, main, candidate](fields-legacy-dropdown-metadata-production.png)
+
+![Production cached dropdown control: LibreOffice, main, candidate](fields-legacy-dropdown-cached-control-production.png)
+
+The earlier local diagnostic sheets are retained below.
 
 ![Checkbox states: LibreOffice, main, candidate](fields-legacy-checkbox-states.png)
 
