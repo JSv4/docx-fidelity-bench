@@ -3912,7 +3912,39 @@ def generate():
             'Hemlock continuous section margins: ' + change + (' across three pages' if spill else ' short flow')
             + ' (Docxodus #1486)', ['HemlockOpening', *labels], body, margin_section(True),
             styles_xml=margin_styles, assertions=assertions)
-    registry = {'schema': 1, 'suite': {'id': 'core-v87', 'version': 87, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Docxodus #1493: a zero-line-height source marker inherits a font revision.
+    # Fractional separator heights used to make nested decoration look like clipped text.
+    for name, size, revised, source_marker in [
+            ('11pt', 22, True, True), ('11pt5', 23, True, True),
+            ('12pt-control', 24, True, True), ('12pt5', 25, True, True),
+            ('plain-control', 22, False, True), ('generated-control', 22, True, False)]:
+        revision = ('<w:rPrChange w:id="41" w:author="Fir Reviewer" w:date="2026-10-30T10:00:00Z">'
+                    '<w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial"/></w:rPr></w:rPrChange>') if revised else ''
+        styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+                  '<w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/>'
+                  '</w:rPr></w:rPrDefault></w:docDefaults><w:style w:type="paragraph" w:styleId="FirNote">'
+                  '<w:name w:val="Fir Note"/><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/>'
+                  '<w:sz w:val="20"/>' + revision + '</w:rPr></w:style></w:styles>')
+        separator_font = f'<w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial"/><w:sz w:val="{size}"/></w:rPr>'
+        marker = '<w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr><w:footnoteRef/></w:r>' if source_marker else ''
+        note_text, cite_text = 'FirNote The eastern shelf holds the spare slate.', 'FirCite The inventory cites one note.'
+        note = para(props='<w:pStyle w:val="FirNote"/><w:spacing w:after="0" w:line="240" w:lineRule="auto"/>',
+                    runs=marker + run(' ' + note_text))
+        notes = (f'<w:footnotes xmlns:w="{W}"><w:footnote w:type="separator" w:id="-1">'
+                 '<w:p><w:pPr>' + separator_font + '</w:pPr><w:r>' + separator_font + '<w:separator/></w:r></w:p></w:footnote>'
+                 '<w:footnote w:type="continuationSeparator" w:id="0"><w:p><w:r><w:continuationSeparator/></w:r></w:p></w:footnote>'
+                 '<w:footnote w:id="1">' + note + '</w:footnote></w:footnotes>')
+        body = para(runs=run(cite_text) + '<w:r><w:footnoteReference w:id="1"/></w:r>')
+        add('notes-marker-decoration-' + name, 'notes',
+            'Inherited font revision on a source note marker with ' + name + ' separator (Docxodus #1493)',
+            [cite_text, '1', '1', note_text], body, notes=('footnote', note_text),
+            styles_xml=styles, extra_parts={'word/footnotes.xml': notes}, font='Times New Roman',
+            assertions=[{'type': 'marker-region', 'marker': 'FirNote', 'occurrence': 1, 'page': 1,
+                         'rect': [72, 700, 130, 724]},
+                        {'type': 'same-page', 'version': 1, 'markers': ['FirCite', 'FirNote']}])
+        cases[-1]['fonts'] = ['Times New Roman', 'Arial']
+        cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
+    registry = {'schema': 1, 'suite': {'id': 'core-v88', 'version': 88, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

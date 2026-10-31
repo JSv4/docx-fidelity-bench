@@ -1,5 +1,11 @@
 # Authorship and artifact rights
 
+The six note-marker cases for Docxodus #1493 contain original Fir labels and literal OOXML
+authored in `bench/fixtures.py`. They import no renderer fixture, document content, image or
+font program. Times New Roman and Arial are separately provisioned under the existing font
+contract. Review sheets show only these original inputs rendered by separately provisioned
+tools; no native Word reference or font program is included.
+
 The twelve section-margin cases for Docxodus #1486 contain original Hemlock labels and
 literal section properties authored in `bench/fixtures.py`. They import no renderer fixtures,
 external document content, images or font programs. Their fixed 12 pt lines isolate page
