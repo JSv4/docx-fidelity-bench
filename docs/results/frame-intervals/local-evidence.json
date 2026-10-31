@@ -1,0 +1,3447 @@
+{
+  "candidateSource": {
+    "baseHead": "d1154a88533d5d0e409daad3b256ccedc6d6dfb1",
+    "kind": "uncommitted working-tree capture",
+    "productionDiffSha256": "ac29f89d60f3ad5f19d1caa6681dfe84754dff53c4586b2b071f382e0a94479b",
+    "productionSources": {
+      "Docxodus/WmlToHtmlConverter.cs": "bf7ebfd77a805f3635242c136592105eec06765817e4d2f58792d845aa62eb33",
+      "npm/src/export-browser.ts": "c4954cae0eda6ce117864b7667d0bf1bc48de280e5e7dde0be2f846925451b6e",
+      "npm/src/pagination.ts": "fa77b22e7c6ee9b2cf425dac08eb3a152aeab974a2d60532e75fa14ff0c9c19a"
+    }
+  },
+  "cases": {
+    "frames-intervals-below-control": {
+      "identicalControlRasters": true,
+      "inputSha256": "53993d18dd0d7d6ea7865f94ceface3f31ce23f1af54a58dbc8ac41a1475fae6",
+      "providers": {
+        "baseline": {
+          "allChecksPass": true,
+          "assetsSha256": "607e40a309a8d3d47b4ef5868405a4189fd262680ed2e59f1eb51309dc0b72ea",
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelBefore",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  70,
+                  162,
+                  85
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameOne",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  82,
+                  306,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameTwo",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  94,
+                  306,
+                  109
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail000",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  106,
+                  162,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 19,
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "id": "frames-intervals-below-control",
+          "inputSha256": "53993d18dd0d7d6ea7865f94ceface3f31ce23f1af54a58dbc8ac41a1475fae6",
+          "labels": 19,
+          "missing": [],
+          "pages": 1,
+          "pdfSha256": "3bc2963b44c7c5013cdd69efd4eacebb87e1664884214aa97d6065e5820a1421",
+          "provider": "baseline",
+          "rasters": [
+            {
+              "path": "rasters/baseline/frames-intervals-below-control/page-1.png",
+              "sha256": "1eab2e4360fea6ed75c5d33e59f6cc6f06d045a0b789534527f9007730952520"
+            }
+          ],
+          "sourceHead": "bf76d0daad004d8ac66e39be04a7aa3a44fbb253",
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "assetsSha256": "ed534e83c319571158e3b5377665186937be46239f00e25bfe24ee2977897525",
+          "baseHead": "d1154a88533d5d0e409daad3b256ccedc6d6dfb1",
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelBefore",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  70,
+                  162,
+                  85
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameOne",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  82,
+                  306,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameTwo",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  94,
+                  306,
+                  109
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail000",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  106,
+                  162,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 19,
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "id": "frames-intervals-below-control",
+          "inputSha256": "53993d18dd0d7d6ea7865f94ceface3f31ce23f1af54a58dbc8ac41a1475fae6",
+          "labels": 19,
+          "missing": [],
+          "pages": 1,
+          "pdfSha256": "e77acf02b5e57959bc4c31f3eede70d307551b392e89526db91116b48f942664",
+          "provider": "candidate",
+          "rasters": [
+            {
+              "path": "rasters/candidate/frames-intervals-below-control/page-1.png",
+              "sha256": "1eab2e4360fea6ed75c5d33e59f6cc6f06d045a0b789534527f9007730952520"
+            }
+          ],
+          "sourceState": "uncommitted working tree; see candidateSource binding",
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        },
+        "native": {
+          "allChecksPass": false,
+          "capturedAt": "2026-10-31T21:51:09.901Z",
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "TimesNewRomanPSMT"
+              ],
+              "passed": false
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelBefore",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  70,
+                  162,
+                  85
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameOne",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  82,
+                  306,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameTwo",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  94,
+                  306,
+                  109
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail000",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  106,
+                  162,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "fonts": [
+            "TimesNewRomanPSMT"
+          ],
+          "ineligibility": "Word substituted Times New Roman for Liberation Serif",
+          "input": "frames-intervals-below-control.docx",
+          "pdf": "frames-intervals-below-control.word.pdf",
+          "pdfSha256": "9c0a0ba1f1ed6b9169c00e45d076bf3e8375617a7682bc5bed241fa9b125c7e2",
+          "rasters": [
+            {
+              "path": "rasters/native/frames-intervals-below-control/page-1.png",
+              "sha256": "e8d1d7e48ea720213bd1323ae5a77da5b53b65a590948ad70fde7fd826144e61"
+            }
+          ],
+          "referenceEligible": false,
+          "sha256": "53993d18dd0d7d6ea7865f94ceface3f31ce23f1af54a58dbc8ac41a1475fae6"
+        }
+      }
+    },
+    "frames-intervals-center": {
+      "identicalControlRasters": false,
+      "inputSha256": "4427ccfaca16db569b5f54b119aa03380878b302a8b927a63eeefe8dc0fd31e7",
+      "providers": {
+        "baseline": {
+          "allChecksPass": false,
+          "assetsSha256": "607e40a309a8d3d47b4ef5868405a4189fd262680ed2e59f1eb51309dc0b72ea",
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelBefore",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  70,
+                  162,
+                  85
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameOne",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  82,
+                  306,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameTwo",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  94,
+                  306,
+                  109
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail000",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  82,
+                  162,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail002",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  395,
+                  82,
+                  486,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 19,
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "id": "frames-intervals-center",
+          "inputSha256": "4427ccfaca16db569b5f54b119aa03380878b302a8b927a63eeefe8dc0fd31e7",
+          "labels": 19,
+          "missing": [],
+          "pages": 1,
+          "pdfSha256": "8782bdf7fcc1bfb4ed5a8519b51e9619173a47edd12b3d3ca85d32dc2a7f773b",
+          "provider": "baseline",
+          "rasters": [
+            {
+              "path": "rasters/baseline/frames-intervals-center/page-1.png",
+              "sha256": "1eab2e4360fea6ed75c5d33e59f6cc6f06d045a0b789534527f9007730952520"
+            }
+          ],
+          "sourceHead": "bf76d0daad004d8ac66e39be04a7aa3a44fbb253",
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "message": "Other is represented by a visible placeholder.",
+              "phase": "docx_conversion",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "severity": "warning"
+            },
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "assetsSha256": "ed534e83c319571158e3b5377665186937be46239f00e25bfe24ee2977897525",
+          "baseHead": "d1154a88533d5d0e409daad3b256ccedc6d6dfb1",
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelBefore",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  70,
+                  162,
+                  85
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameOne",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  82,
+                  306,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameTwo",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  94,
+                  306,
+                  109
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail000",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  82,
+                  162,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail002",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  395,
+                  82,
+                  486,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 19,
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "id": "frames-intervals-center",
+          "inputSha256": "4427ccfaca16db569b5f54b119aa03380878b302a8b927a63eeefe8dc0fd31e7",
+          "labels": 19,
+          "missing": [],
+          "pages": 1,
+          "pdfSha256": "c53e6493157de0c1d37f3c0bf0a7391c1802bd9a9928709ee8f7d53f5eae4b53",
+          "provider": "candidate",
+          "rasters": [
+            {
+              "path": "rasters/candidate/frames-intervals-center/page-1.png",
+              "sha256": "6e10b99b3d0d11808ce6cac1853f551824350b06e7a82ad3ec2bdc3fe676c87f"
+            }
+          ],
+          "sourceState": "uncommitted working tree; see candidateSource binding",
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        },
+        "native": {
+          "allChecksPass": false,
+          "capturedAt": "2026-10-31T21:51:22.081Z",
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "TimesNewRomanPSMT"
+              ],
+              "passed": false
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelBefore",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  70,
+                  162,
+                  85
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameOne",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  82,
+                  306,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameTwo",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  94,
+                  306,
+                  109
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail000",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  82,
+                  162,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail002",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  395,
+                  82,
+                  486,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "fonts": [
+            "TimesNewRomanPSMT"
+          ],
+          "ineligibility": "Word substituted Times New Roman for Liberation Serif",
+          "input": "frames-intervals-center.docx",
+          "pdf": "frames-intervals-center.word.pdf",
+          "pdfSha256": "0f3fb2fc0ff71cdd4ef1e072700be20352b2135d8a13edb6e0c764248ac4376b",
+          "rasters": [
+            {
+              "path": "rasters/native/frames-intervals-center/page-1.png",
+              "sha256": "589260cc90c6f16f45e7dedc276a2aea14b8b78a90fd45dea30037e318f0e9ee"
+            }
+          ],
+          "referenceEligible": false,
+          "sha256": "4427ccfaca16db569b5f54b119aa03380878b302a8b927a63eeefe8dc0fd31e7"
+        }
+      }
+    },
+    "frames-intervals-interior": {
+      "identicalControlRasters": false,
+      "inputSha256": "1d85b6a1b6f75cf80e90b71361dccad60c41c2ca045afd500a678ad6bdc5a484",
+      "providers": {
+        "baseline": {
+          "allChecksPass": false,
+          "assetsSha256": "607e40a309a8d3d47b4ef5868405a4189fd262680ed2e59f1eb51309dc0b72ea",
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelBefore",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  70,
+                  162,
+                  85
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameOne",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  82,
+                  306,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameTwo",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  94,
+                  306,
+                  109
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail000",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  82,
+                  162,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail002",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  395,
+                  82,
+                  486,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 19,
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "id": "frames-intervals-interior",
+          "inputSha256": "1d85b6a1b6f75cf80e90b71361dccad60c41c2ca045afd500a678ad6bdc5a484",
+          "labels": 19,
+          "missing": [],
+          "pages": 1,
+          "pdfSha256": "545d734f8dbd0d96652827b511166bb7aa08821f34c6fc0ea68ef20c0bf2b6bb",
+          "provider": "baseline",
+          "rasters": [
+            {
+              "path": "rasters/baseline/frames-intervals-interior/page-1.png",
+              "sha256": "8807aa9d7f43ba20aaa20d7cbac0f066444fcd4b0eb527de15bcf00bec6934c0"
+            }
+          ],
+          "sourceHead": "bf76d0daad004d8ac66e39be04a7aa3a44fbb253",
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "message": "Other is represented by a visible placeholder.",
+              "phase": "docx_conversion",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "severity": "warning"
+            },
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "assetsSha256": "ed534e83c319571158e3b5377665186937be46239f00e25bfe24ee2977897525",
+          "baseHead": "d1154a88533d5d0e409daad3b256ccedc6d6dfb1",
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelBefore",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  70,
+                  162,
+                  85
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameOne",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  82,
+                  306,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameTwo",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  94,
+                  306,
+                  109
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail000",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  82,
+                  162,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail002",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  395,
+                  82,
+                  486,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 19,
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "id": "frames-intervals-interior",
+          "inputSha256": "1d85b6a1b6f75cf80e90b71361dccad60c41c2ca045afd500a678ad6bdc5a484",
+          "labels": 19,
+          "missing": [],
+          "pages": 1,
+          "pdfSha256": "1d3c2444bd4278e07a02626c17dfcf0ff36d6750a08bf415419a04b0dd4d2cf9",
+          "provider": "candidate",
+          "rasters": [
+            {
+              "path": "rasters/candidate/frames-intervals-interior/page-1.png",
+              "sha256": "6e10b99b3d0d11808ce6cac1853f551824350b06e7a82ad3ec2bdc3fe676c87f"
+            }
+          ],
+          "sourceState": "uncommitted working tree; see candidateSource binding",
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        },
+        "native": {
+          "allChecksPass": false,
+          "capturedAt": "2026-10-31T21:51:31.265Z",
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "TimesNewRomanPSMT"
+              ],
+              "passed": false
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelBefore",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  70,
+                  162,
+                  85
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameOne",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  82,
+                  306,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameTwo",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  94,
+                  306,
+                  109
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail000",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  82,
+                  162,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail002",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  395,
+                  82,
+                  486,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "fonts": [
+            "TimesNewRomanPSMT"
+          ],
+          "ineligibility": "Word substituted Times New Roman for Liberation Serif",
+          "input": "frames-intervals-interior.docx",
+          "pdf": "frames-intervals-interior.word.pdf",
+          "pdfSha256": "9a97682ccbd19ffa43182a310c432c6f783896d923122c62c7b550edd4dbf273",
+          "rasters": [
+            {
+              "path": "rasters/native/frames-intervals-interior/page-1.png",
+              "sha256": "589260cc90c6f16f45e7dedc276a2aea14b8b78a90fd45dea30037e318f0e9ee"
+            }
+          ],
+          "referenceEligible": false,
+          "sha256": "1d85b6a1b6f75cf80e90b71361dccad60c41c2ca045afd500a678ad6bdc5a484"
+        }
+      }
+    },
+    "frames-intervals-none-control": {
+      "identicalControlRasters": true,
+      "inputSha256": "591c8dc5d5d06400635f67fb074ff71f1738d30986b108fc4c34b194c6875a30",
+      "providers": {
+        "baseline": {
+          "allChecksPass": true,
+          "assetsSha256": "607e40a309a8d3d47b4ef5868405a4189fd262680ed2e59f1eb51309dc0b72ea",
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelBefore",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  70,
+                  162,
+                  85
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameOne",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  82,
+                  306,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameTwo",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  94,
+                  306,
+                  109
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail000",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  82,
+                  162,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 19,
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "id": "frames-intervals-none-control",
+          "inputSha256": "591c8dc5d5d06400635f67fb074ff71f1738d30986b108fc4c34b194c6875a30",
+          "labels": 19,
+          "missing": [],
+          "pages": 1,
+          "pdfSha256": "aa771e900cba5e26311151c3b7515ab713201fc50df4da731944bd84e2591974",
+          "provider": "baseline",
+          "rasters": [
+            {
+              "path": "rasters/baseline/frames-intervals-none-control/page-1.png",
+              "sha256": "9f2ab64dec7d17b53774c91553841647dfcf2cf0a1395dceb3b2dcc92350cf59"
+            }
+          ],
+          "sourceHead": "bf76d0daad004d8ac66e39be04a7aa3a44fbb253",
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "assetsSha256": "ed534e83c319571158e3b5377665186937be46239f00e25bfe24ee2977897525",
+          "baseHead": "d1154a88533d5d0e409daad3b256ccedc6d6dfb1",
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelBefore",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  70,
+                  162,
+                  85
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameOne",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  82,
+                  306,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameTwo",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  94,
+                  306,
+                  109
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail000",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  82,
+                  162,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 19,
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "id": "frames-intervals-none-control",
+          "inputSha256": "591c8dc5d5d06400635f67fb074ff71f1738d30986b108fc4c34b194c6875a30",
+          "labels": 19,
+          "missing": [],
+          "pages": 1,
+          "pdfSha256": "7dd5082dd28ab8e2992f8b6ec596baf6fd90f7350d5cb4520a2dc5cee66e3a36",
+          "provider": "candidate",
+          "rasters": [
+            {
+              "path": "rasters/candidate/frames-intervals-none-control/page-1.png",
+              "sha256": "9f2ab64dec7d17b53774c91553841647dfcf2cf0a1395dceb3b2dcc92350cf59"
+            }
+          ],
+          "sourceState": "uncommitted working tree; see candidateSource binding",
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        },
+        "native": {
+          "allChecksPass": false,
+          "capturedAt": "2026-10-31T21:51:39.331Z",
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "TimesNewRomanPSMT"
+              ],
+              "passed": false
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelBefore",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  70,
+                  162,
+                  85
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameOne",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  82,
+                  306,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameTwo",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  215,
+                  94,
+                  306,
+                  109
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail000",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  82,
+                  162,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "fonts": [
+            "TimesNewRomanPSMT"
+          ],
+          "ineligibility": "Word substituted Times New Roman for Liberation Serif",
+          "input": "frames-intervals-none-control.docx",
+          "pdf": "frames-intervals-none-control.word.pdf",
+          "pdfSha256": "6c94a425b704968f1b4817df9964e81c263f8efb2e9f42e42a8ad3fd99a356d0",
+          "rasters": [
+            {
+              "path": "rasters/native/frames-intervals-none-control/page-1.png",
+              "sha256": "9a59b56c51a0b30fc3892f84ac53c4a8a12d7efae1092cf3fa1dc32729c3cb6a"
+            }
+          ],
+          "referenceEligible": false,
+          "sha256": "591c8dc5d5d06400635f67fb074ff71f1738d30986b108fc4c34b194c6875a30"
+        }
+      }
+    },
+    "frames-intervals-normal-control": {
+      "identicalControlRasters": true,
+      "inputSha256": "a4f20a6e9bdc028d7e04d6dbf26fb26e2e54b7a84808b5fb08e557ac509e798f",
+      "providers": {
+        "baseline": {
+          "allChecksPass": true,
+          "assetsSha256": "607e40a309a8d3d47b4ef5868405a4189fd262680ed2e59f1eb51309dc0b72ea",
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelBefore",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  70,
+                  162,
+                  85
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameOne",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  82,
+                  162,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameTwo",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  94,
+                  162,
+                  109
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail000",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  106,
+                  162,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 19,
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "id": "frames-intervals-normal-control",
+          "inputSha256": "a4f20a6e9bdc028d7e04d6dbf26fb26e2e54b7a84808b5fb08e557ac509e798f",
+          "labels": 19,
+          "missing": [],
+          "pages": 1,
+          "pdfSha256": "2c37b39723ea222a5b544108d2c0a769b2ad4951f3225fcddab44e4479d28cee",
+          "provider": "baseline",
+          "rasters": [
+            {
+              "path": "rasters/baseline/frames-intervals-normal-control/page-1.png",
+              "sha256": "3c9092341bfc0300706c62d7b8c008c8e42648b5dabeb723ba09b927dfc8c7b7"
+            }
+          ],
+          "sourceHead": "bf76d0daad004d8ac66e39be04a7aa3a44fbb253",
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "assetsSha256": "ed534e83c319571158e3b5377665186937be46239f00e25bfe24ee2977897525",
+          "baseHead": "d1154a88533d5d0e409daad3b256ccedc6d6dfb1",
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelBefore",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  70,
+                  162,
+                  85
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameOne",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  82,
+                  162,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameTwo",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  94,
+                  162,
+                  109
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail000",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  106,
+                  162,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 19,
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "id": "frames-intervals-normal-control",
+          "inputSha256": "a4f20a6e9bdc028d7e04d6dbf26fb26e2e54b7a84808b5fb08e557ac509e798f",
+          "labels": 19,
+          "missing": [],
+          "pages": 1,
+          "pdfSha256": "1e3eb7036b7cf3302c80f66504108756b3e2a781db8de4844721fbbd32659b9b",
+          "provider": "candidate",
+          "rasters": [
+            {
+              "path": "rasters/candidate/frames-intervals-normal-control/page-1.png",
+              "sha256": "3c9092341bfc0300706c62d7b8c008c8e42648b5dabeb723ba09b927dfc8c7b7"
+            }
+          ],
+          "sourceState": "uncommitted working tree; see candidateSource binding",
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        },
+        "native": {
+          "allChecksPass": false,
+          "capturedAt": "2026-10-31T21:51:47.795Z",
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "TimesNewRomanPSMT"
+              ],
+              "passed": false
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelBefore",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  70,
+                  162,
+                  85
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameOne",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  82,
+                  162,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameTwo",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  94,
+                  162,
+                  109
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail000",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  106,
+                  162,
+                  121
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "fonts": [
+            "TimesNewRomanPSMT"
+          ],
+          "ineligibility": "Word substituted Times New Roman for Liberation Serif",
+          "input": "frames-intervals-normal-control.docx",
+          "pdf": "frames-intervals-normal-control.word.pdf",
+          "pdfSha256": "30da7ebab938896131de76761d979b29e4c6b4f2864aa301cc74a3261b6d3f72",
+          "rasters": [
+            {
+              "path": "rasters/native/frames-intervals-normal-control/page-1.png",
+              "sha256": "ef12f58d66147af65a71359c4032bcb876d9d97ec1ebda198e23ac8cfad90c63"
+            }
+          ],
+          "referenceEligible": false,
+          "sha256": "a4f20a6e9bdc028d7e04d6dbf26fb26e2e54b7a84808b5fb08e557ac509e798f"
+        }
+      }
+    },
+    "frames-intervals-page": {
+      "identicalControlRasters": false,
+      "inputSha256": "6d7c7eca87681fa28924afb9844c0a859d49f4870612c61a796561af9fab5c5e",
+      "providers": {
+        "baseline": {
+          "allChecksPass": false,
+          "assetsSha256": "607e40a309a8d3d47b4ef5868405a4189fd262680ed2e59f1eb51309dc0b72ea",
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelBefore",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  70,
+                  162,
+                  85
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameOne",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  11,
+                  82,
+                  102,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameTwo",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  11,
+                  94,
+                  102,
+                  109
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail000",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  191,
+                  82,
+                  282,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 19,
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "id": "frames-intervals-page",
+          "inputSha256": "6d7c7eca87681fa28924afb9844c0a859d49f4870612c61a796561af9fab5c5e",
+          "labels": 19,
+          "missing": [],
+          "pages": 1,
+          "pdfSha256": "16954e93de300107becd59a60dcfbcde690b941d944c6b566cc2ff97610eadab",
+          "provider": "baseline",
+          "rasters": [
+            {
+              "path": "rasters/baseline/frames-intervals-page/page-1.png",
+              "sha256": "edec10066e586a06d03484c687c18c0e319d3f452cff16ddc2e175dea7f64aa2"
+            }
+          ],
+          "sourceHead": "bf76d0daad004d8ac66e39be04a7aa3a44fbb253",
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "message": "Other is represented by a visible placeholder.",
+              "phase": "docx_conversion",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "severity": "warning"
+            },
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "assetsSha256": "ed534e83c319571158e3b5377665186937be46239f00e25bfe24ee2977897525",
+          "baseHead": "d1154a88533d5d0e409daad3b256ccedc6d6dfb1",
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelBefore",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  70,
+                  162,
+                  85
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameOne",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  11,
+                  82,
+                  102,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameTwo",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  11,
+                  94,
+                  102,
+                  109
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail000",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  191,
+                  82,
+                  282,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 19,
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "id": "frames-intervals-page",
+          "inputSha256": "6d7c7eca87681fa28924afb9844c0a859d49f4870612c61a796561af9fab5c5e",
+          "labels": 19,
+          "missing": [],
+          "pages": 1,
+          "pdfSha256": "50c50acf96fb5e3c06f915c8e3856392d09e254f3627bb3be8e335df35cccb82",
+          "provider": "candidate",
+          "rasters": [
+            {
+              "path": "rasters/candidate/frames-intervals-page/page-1.png",
+              "sha256": "617055bf8a7bf7db6a10003f360f9fc158231587739d329289282d503f093cad"
+            }
+          ],
+          "sourceState": "uncommitted working tree; see candidateSource binding",
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        },
+        "native": {
+          "allChecksPass": false,
+          "capturedAt": "2026-10-31T21:51:56.364Z",
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "TimesNewRomanPSMT"
+              ],
+              "passed": false
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelBefore",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  70,
+                  162,
+                  85
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameOne",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  11,
+                  82,
+                  102,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameTwo",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  11,
+                  94,
+                  102,
+                  109
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail000",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  191,
+                  82,
+                  282,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "fonts": [
+            "TimesNewRomanPSMT"
+          ],
+          "ineligibility": "Word substituted Times New Roman for Liberation Serif",
+          "input": "frames-intervals-page.docx",
+          "pdf": "frames-intervals-page.word.pdf",
+          "pdfSha256": "c7d2b120ec40774bc21926f0328e17a998c18dbdff874bcc85640a98ce06c761",
+          "rasters": [
+            {
+              "path": "rasters/native/frames-intervals-page/page-1.png",
+              "sha256": "03b53bcfbcdd83fef1bd0adad14bc62ede0db632b6feefa231e5f5fe165f465c"
+            }
+          ],
+          "referenceEligible": false,
+          "sha256": "6d7c7eca87681fa28924afb9844c0a859d49f4870612c61a796561af9fab5c5e"
+        }
+      }
+    },
+    "frames-intervals-right": {
+      "identicalControlRasters": false,
+      "inputSha256": "90bc3d1d6e411c9e5b39a4f99bd03968a2f50aadbc71a6e62cd6d7885ede7f9f",
+      "providers": {
+        "baseline": {
+          "allChecksPass": false,
+          "assetsSha256": "607e40a309a8d3d47b4ef5868405a4189fd262680ed2e59f1eb51309dc0b72ea",
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelBefore",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  70,
+                  162,
+                  85
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameOne",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  359,
+                  82,
+                  450,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameTwo",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  359,
+                  94,
+                  450,
+                  109
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail000",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  82,
+                  162,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 19,
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "id": "frames-intervals-right",
+          "inputSha256": "90bc3d1d6e411c9e5b39a4f99bd03968a2f50aadbc71a6e62cd6d7885ede7f9f",
+          "labels": 19,
+          "missing": [],
+          "pages": 1,
+          "pdfSha256": "e75241eeb1e6ddd5777ec16e2258b808d1898fd473e43f8dbdb20883fcd049fb",
+          "provider": "baseline",
+          "rasters": [
+            {
+              "path": "rasters/baseline/frames-intervals-right/page-1.png",
+              "sha256": "12164c26b068da11de0eae2ec52fd46169146b65a20a11d1b55c3931fef29d17"
+            }
+          ],
+          "sourceHead": "bf76d0daad004d8ac66e39be04a7aa3a44fbb253",
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "message": "Other is represented by a visible placeholder.",
+              "phase": "docx_conversion",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "severity": "warning"
+            },
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "assetsSha256": "ed534e83c319571158e3b5377665186937be46239f00e25bfe24ee2977897525",
+          "baseHead": "d1154a88533d5d0e409daad3b256ccedc6d6dfb1",
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelBefore",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  70,
+                  162,
+                  85
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameOne",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  359,
+                  82,
+                  450,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameTwo",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  359,
+                  94,
+                  450,
+                  109
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail000",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  82,
+                  162,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 19,
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "id": "frames-intervals-right",
+          "inputSha256": "90bc3d1d6e411c9e5b39a4f99bd03968a2f50aadbc71a6e62cd6d7885ede7f9f",
+          "labels": 19,
+          "missing": [],
+          "pages": 1,
+          "pdfSha256": "47cc06b877fc9ad1258ebd58a844dc706fca7ec952287333ac99c141063ba779",
+          "provider": "candidate",
+          "rasters": [
+            {
+              "path": "rasters/candidate/frames-intervals-right/page-1.png",
+              "sha256": "320645fca57e0f03e96f6003dc1b617f761ff9f9871e6d8e7937f9d9481a2870"
+            }
+          ],
+          "sourceState": "uncommitted working tree; see candidateSource binding",
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        },
+        "native": {
+          "allChecksPass": false,
+          "capturedAt": "2026-10-31T21:52:04.253Z",
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "TimesNewRomanPSMT"
+              ],
+              "passed": false
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelBefore",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  70,
+                  162,
+                  85
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameOne",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  359,
+                  82,
+                  450,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelFrameTwo",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  359,
+                  94,
+                  450,
+                  109
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "marker": "SorrelTail000",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  71,
+                  82,
+                  162,
+                  97
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "fonts": [
+            "TimesNewRomanPSMT"
+          ],
+          "ineligibility": "Word substituted Times New Roman for Liberation Serif",
+          "input": "frames-intervals-right.docx",
+          "pdf": "frames-intervals-right.word.pdf",
+          "pdfSha256": "12e792dc2f5a8fdfbae3e54ae0c7578c35ed2b9956a23fc83225f97d888d15ac",
+          "rasters": [
+            {
+              "path": "rasters/native/frames-intervals-right/page-1.png",
+              "sha256": "4a03fe8eca9c6094208b87251a8a7b6d910020046e4e91106074a97b99c930c8"
+            }
+          ],
+          "referenceEligible": false,
+          "sha256": "90bc3d1d6e411c9e5b39a4f99bd03968a2f50aadbc71a6e62cd6d7885ede7f9f"
+        }
+      }
+    }
+  },
+  "kind": "Native Word behavioral regions; substituted native font is not a raster reference"
+}
