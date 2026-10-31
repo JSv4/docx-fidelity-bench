@@ -1,5 +1,9 @@
 # Authorship and artifact rights
 
+The eight frame-clearance cases for Docxodus #1510 contain original Sage labels and
+literal WordprocessingML authored in `bench/fixtures.py`. They import no document, helper,
+template, image or font program. Liberation Serif is separately provisioned.
+
 The seven frame-interval cases for Docxodus #1509 contain original Sorrel labels and
 literal WordprocessingML authored in `bench/fixtures.py`. They import no document, helper,
 template, image or font program. Liberation Serif is separately provisioned.
