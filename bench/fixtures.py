@@ -3588,7 +3588,60 @@ def generate():
             + ' for endnote baseline fidelity', [first, 'i', last, 'i', note], body,
             notes=('endnote', note), styles_xml=styles,
             assertions=[assertion])
-    registry = {'schema': 1, 'suite': {'id': 'core-v81', 'version': 81, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Docxodus #1480: legacy form metadata supplies visible state without a cached result.
+    def legacy_field(name, instruction, properties, cached=''):
+        return ('<w:r><w:fldChar w:fldCharType="begin"><w:ffData>'
+                f'<w:name w:val="{name}"/>{properties}</w:ffData></w:fldChar></w:r>'
+                f'<w:r><w:instrText xml:space="preserve"> {instruction} </w:instrText></w:r>'
+                '<w:r><w:fldChar w:fldCharType="separate"/></w:r>' + run(cached)
+                + '<w:r><w:fldChar w:fldCharType="end"/></w:r>')
+    for control in (False, True):
+        texts, body, checks = [], '', []
+        for letter, default, selected, size in [('A', '0', None, None), ('B', '1', None, None),
+                                                ('C', '1', '0', 20), ('D', '0', '1', 28)]:
+            checked = (selected if selected is not None else default) == '1'
+            label = 'Checked' if checked else 'Unchecked'
+            if control:
+                field = legacy_field('ElmCheck' + letter, 'FORMTEXT',
+                                     f'<w:textInput><w:default w:val="{label}"/></w:textInput>', label)
+            else:
+                properties = '<w:sizeAuto/>' if size is None else f'<w:size w:val="{size}"/>'
+                properties += f'<w:default w:val="{default}"/>'
+                if selected is not None: properties += f'<w:checked w:val="{selected}"/>'
+                field = legacy_field('ElmCheck' + letter, 'FORMCHECKBOX', '<w:checkBox>' + properties + '</w:checkBox>')
+                checks.append({'type': 'named-checkbox', 'version': 1, 'marker': 'ElmCheck' + letter, 'checked': checked,
+                               'sizePt': size / 2 if size else 11, 'caption': 'Latch' + letter})
+            texts += ['Latch' + letter, 'End' + letter] + ([label] if control else [])
+            body += para(props='<w:spacing w:before="0" w:after="120" w:line="480" w:lineRule="exact"/>',
+                         runs=run('Latch' + letter + ' ') + field + run(' End' + letter))
+        add('fields-legacy-checkbox-' + ('text-control' if control else 'states'), 'paragraphs',
+            ('Cached text-field state captions control' if control else 'Four checkbox states with explicit overrides and fixed/automatic sizes')
+            + ' (Docxodus #1480)', texts, body, styles_xml=inline_styles)
+        if checks: cases[-1]['htmlAssertions'] = checks
+    for control in (False, True):
+        long_value = ' '.join(['Copper bin'] * 5)
+        def dropdown(name, selected, default, long=False):
+            choices = ['Amber rack', long_value if long else 'Copper bin']
+            value = choices[int(selected if selected is not None else default)]
+            properties = ('' if selected is None else f'<w:result w:val="{selected}"/>')
+            properties += f'<w:default w:val="{default}"/>'
+            properties += ''.join(f'<w:listEntry w:val="{choice}"/>' for choice in choices)
+            return legacy_field(name, 'FORMDROPDOWN', '<w:ddList>' + properties + '</w:ddList>', value if control else '')
+        body = para(props='<w:tabs><w:tab w:val="left" w:pos="2880"/></w:tabs>',
+                    runs=run('Route ') + dropdown('ElmRoute', '1', '0', True) + '<w:r><w:tab/></w:r>' + run('RouteTail'))
+        body += para('Elm closing record.')
+        header = para(runs=run('HeaderRack ') + dropdown('ElmHeader', None, '0'))
+        footer = para(runs=run('FooterRack ') + dropdown('ElmFooter', '1', '0'))
+        sect = section().replace('<w:sectPr>', '<w:sectPr><w:headerReference w:type="default" r:id="rStory"/>'
+                                '<w:footerReference w:type="default" r:id="rStory1"/>')
+        add('fields-legacy-dropdown-' + ('cached-control' if control else 'metadata'), 'paragraphs',
+            ('Matching cached values control' if control else 'Metadata-only selection before a tab, plus header default and footer selection')
+            + ' (Docxodus #1480)', ['Route', long_value, 'RouteTail', 'Elm closing record.',
+                                  'HeaderRack Amber rack', 'FooterRack Copper bin'], body, sect,
+            stories=[('header', header), ('footer', footer)], styles_xml=inline_styles,
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'RouteTail', 'occurrence': 1,
+                         'page': 1, 'rect': [350, 71, 446, 87]}])
+    registry = {'schema': 1, 'suite': {'id': 'core-v82', 'version': 82, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
