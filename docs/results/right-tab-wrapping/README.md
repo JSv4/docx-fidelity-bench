@@ -36,3 +36,22 @@ equivalence to LibreOffice.
 The seven controls are `left-control`, `center-control`, `long-prefix-control`,
 `long-both-control`, `short-control`, `vml-rect-short-control`, and
 `wrapped-short-control`. The other ten cases reproduce missing or rejected output on main.
+
+## Production confirmation
+
+The pinned production runs use benchmark commit
+`46e4672d9802d5e6b2b2ac9da5d3556c31d4f0dc` and rebuild both exact renderer commits:
+[main b3d6de06](https://github.com/JSv4/docx-fidelity-bench/actions/runs/41211298822)
+and [fix 5aaab582](https://github.com/JSv4/docx-fidelity-bench/actions/runs/41211297080).
+Both LibreOffice reference calibrations pass at 100. The fixed export passes all
+17 mandatory cases; main passes 7, loses required content in 8, and refuses 2.
+The aggregate diagnostic score rises from 35.6871 to 77.6089. None of the cases
+meets the full visual close-match threshold. All seven control page PNGs and scores
+are unchanged; PDF bytes and PageMap digests differ between renderer builds.
+
+`production-evidence.json` binds the verified artifact ZIPs, exact source commits,
+inputs, PDF outputs, PageMaps, references, calibrations and scores by SHA-256.
+`production-screenshots.json` binds every panel in the seventeen
+`production-*.png` comparison sheets to its artifact. Each sheet displays all
+pages at 96 DPI and 100%, including the two-page case; missing outputs have labeled
+panels. The linked Actions artifacts retain the underlying production results.

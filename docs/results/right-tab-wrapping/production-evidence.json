@@ -1,0 +1,3849 @@
+{
+  "schema": 1,
+  "benchCommit": "46e4672d9802d5e6b2b2ac9da5d3556c31d4f0dc",
+  "scope": "Production public WASM export and pinned Chromium PDF; raw artifacts are retained in the linked Actions runs.",
+  "limitations": [
+    "No fresh Word reference is claimed.",
+    "Controls prove full page-raster identity, not PDF-byte or HTML/PageMap payload identity.",
+    "Line wrapping and tab placement can differ from LibreOffice; mandatory output completeness does not imply exact visual equivalence."
+  ],
+  "runs": {
+    "candidate": {
+      "runUrl": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/41211297080",
+      "artifactId": 13046726371,
+      "artifactZipSha256": "b209c30e9317f186935f5e40965d617f7ac4f33ca7f613ea6fe64cf91c2ea298",
+      "coreCommit": "5aaab5820523f689147f86da75a916bcfb26dfaf",
+      "resultSha256": "abf82ef7715eddb23051fdae3dfbc0ec0688d90cec314254d3a06afb65b74a3c",
+      "selectedManifestSha256": "d687a9ac45011f02189bce39a83a4369ab570db87c44a4e6dd104f412929ba13",
+      "contractDigest": "99efe24b65681a70a36b581d0e99ee0dd53ed292963113fc98b7bf4a28adce43",
+      "referenceBundleSha256": "7c0d1a76b10b43fa390d146dae98c74ad5e09faab3c5ee8ae8d5a69dbdc9eb24",
+      "calibrationResultSha256": "f81fc77d9666851bef04dd491c8e745b0ff3181130d0a6a5b64dbbd1fb8b76ff",
+      "calibrationSummary": {
+        "categoryMeans": {
+          "paragraphs": 100.0
+        },
+        "closeMatchRate": 1.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 17,
+        "required": 17,
+        "score": 100.0
+      },
+      "summary": {
+        "categoryMeans": {
+          "paragraphs": 77.60892409897731
+        },
+        "closeMatchRate": 0.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 17,
+        "required": 17,
+        "score": 77.60892409897731
+      },
+      "cases": {
+        "tabs-wrapping-tail-right-long": {
+          "score": 82.9803603450662,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "COMPLETE",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 40637,
+              "close": false,
+              "inkF1": 0.829803603450662,
+              "pixelMismatch": 0.07879693070409982,
+              "precision": 0.8281369195560696,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "4f9ef6d23674d40873cf3762774ec5483b4aecf65c655bcd373d84aba5146ebd",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "3771cb554bf06fe3244fc631d5f314056bd9906cb90b4e77042cfe2c9410e000",
+                "width": 816
+              },
+              "recall": 0.8314770095116061,
+              "referenceInk": 40582,
+              "score": 82.9803603450662,
+              "ssim": 0.8531371375381721,
+              "ssimRaw": 0.8531371375381721
+            }
+          ],
+          "coreTree": "9af1a6ee8401719e6342a987667bee98220826d8",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "24e3fc3797e6c4be1ede31a3ca8e537aa7ad85cd88995150c39e35e3664169fa",
+          "pageMapDigest": "4f1f5945ceb7ae7a3a4246917a8c59f60595ae05cf45559369f50fb9ef704289",
+          "files": {
+            "1-candidate.png": "e377b71b5422c57ab4b2dd10c2128c5d0b05b3f276e7a09eb17e79c2188cab9f",
+            "1-overlay.png": "13128089df3d7511f1d0998a8fc50c9e5c1cc740afd07fa580d7cdf2e69d4868",
+            "1-reference.png": "afc4513d6a70c2eaaaffeae928b62dcd43cdc208f20ab1fbecb54b847d1b3e5c",
+            "candidate.pdf": "67cd6d3edd4c66581c63457b6fe317e3e6666a2263e7cc7376f0ec635a73eb13",
+            "evidence.json": "9c5be0b904dea76f8498f1fde7f13290d8235a4453f63c49a31bddeb143b9348",
+            "production.json": "84a7db2327e9749ea4e921d4933872c0eecd1be9e19feeaf4310e14fd67bc166",
+            "reference.pdf": "cc81c2fef44154e924d46565d92fbd0b06e8991810e66886e7599198943bae87"
+          }
+        },
+        "tabs-wrapping-tail-right-mixed": {
+          "score": 82.6871413821906,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "COMPLETE",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 40637,
+              "close": false,
+              "inkF1": 0.8268714138219061,
+              "pixelMismatch": 0.07880969622697565,
+              "precision": 0.824740999581662,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "4f9ef6d23674d40873cf3762774ec5483b4aecf65c655bcd373d84aba5146ebd",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "2d61d5bd96ebede0f2b421851ba4921ba9849d8c55fe1a15f867be79fc165914",
+                "width": 816
+              },
+              "recall": 0.8290128628455966,
+              "referenceInk": 40582,
+              "score": 82.6871413821906,
+              "ssim": 0.8533027480627943,
+              "ssimRaw": 0.8533027480627943
+            }
+          ],
+          "coreTree": "9af1a6ee8401719e6342a987667bee98220826d8",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "8c50faf9b03b3286da7f641a9558dd2e16cdd4288c51746e4b1e24d2fc341507",
+          "pageMapDigest": "9436cd98de0509946e8891f5d2a179b8c1a4c6c0fd063bcb3bc7c588eea300c9",
+          "files": {
+            "1-candidate.png": "e377b71b5422c57ab4b2dd10c2128c5d0b05b3f276e7a09eb17e79c2188cab9f",
+            "1-overlay.png": "e8eea7d88ac854729b1ead05a90bbf07a7ddee7aeb49eefa2a1aa61d411d7683",
+            "1-reference.png": "fd5d08dd202e0669e49939761c58e55d9ab7f2f2e8187a13fce5a66788d15c01",
+            "candidate.pdf": "35a515a2d9da4365358b90656c32c66d2a6319f732c08ae37bb44f82830a8be7",
+            "evidence.json": "cb442451db8d139270546bb32660659a2a6c432b5d9ef2b0a589dac9c973bc78",
+            "production.json": "9f134ffb559ce8c547ac3ea7e5fcb198cb70c62fdfc53bc39ddd968e852bf329",
+            "reference.pdf": "aedc6660fb465a6a56efef65c16a17fe10910e1810eb3dcfa0bd77f065b38a48"
+          }
+        },
+        "tabs-wrapping-tail-left-control": {
+          "score": 86.14299412598416,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "COMPLETE",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 40620,
+              "close": false,
+              "inkF1": 0.8619493641892856,
+              "pixelMismatch": 0.07814356803327392,
+              "precision": 0.8602166420482521,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "23face1cc167f01ee15296df4843097e319fb482199169c191931bcbc918c152",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "241993e86a4507ead32df0064b6256231881e59ae839cfbb85f4b7f329482cef",
+                "width": 816
+              },
+              "recall": 0.8636890808143122,
+              "referenceInk": 40525,
+              "score": 86.14299412598416,
+              "ssim": 0.8614299412598416,
+              "ssimRaw": 0.8614299412598416
+            }
+          ],
+          "coreTree": "9af1a6ee8401719e6342a987667bee98220826d8",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "e4c5ab1727d1bd410ecad3fc54aa89be95bdad8323b099ebf9bccbe0439cbb27",
+          "pageMapDigest": "5a759dda6139831311613ddac86d8bd8aa6b5d10da4e07a87ba783c7ebc97688",
+          "files": {
+            "1-candidate.png": "3e1f554f96a1e4e68f135c7a73ca38e0dd35fa3a825838265cfc22af5ec2ab0d",
+            "1-overlay.png": "c13cd7c0536eaa47d1c375e6d8a2d5d1fa5e0bcad6fa14130d3dc11e999a280a",
+            "1-reference.png": "6a74d0fdeb5335f18d914b166cd1c63a1dd2c0d0ef1b0c65d5bbbfb8652ec968",
+            "candidate.pdf": "e660919673d141bd9b92d5b894da6ab9671af624744640289787d0ab57fd968c",
+            "evidence.json": "e6b0f717f3118adcb54ab63285ac1df9787cf259e2dbf65583eea2bd6d2c6225",
+            "production.json": "1f6cb53d1cdcaaed96dce8218564b3e4c0c71bffca497c98d0dc0d7eb65b5af4",
+            "reference.pdf": "f9ce08103f72cab82cf319ebc9ca7c11afb89f04a1144948fe7824ef64d2e900"
+          }
+        },
+        "tabs-wrapping-tail-center-control": {
+          "score": 91.9542295441374,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FINISH",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 931,
+              "close": false,
+              "inkF1": 0.919542295441374,
+              "pixelMismatch": 0.0015898878490790255,
+              "precision": 0.9237379162191193,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "8f57c36e8df83c84919de8049d3af3a7f5c4214ab0af90f0693a3e5252602b0b",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "575c67859c660ee3ebbd909d1b8cdcdb03cb9eaa03c4e571830f39bd3a6989d4",
+                "width": 816
+              },
+              "recall": 0.9153846153846154,
+              "referenceInk": 910,
+              "score": 91.9542295441374,
+              "ssim": 0.9971352488418659,
+              "ssimRaw": 0.9971352488418659
+            }
+          ],
+          "coreTree": "9af1a6ee8401719e6342a987667bee98220826d8",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "8729993a8578e4234b717a21b2d0a091cdac4a2ce2f757e8f036f4ddfd761976",
+          "pageMapDigest": "a28c390996bb8676791e4f0fcdd993531b06a2c4e8bda395040c2c63c7fe8340",
+          "files": {
+            "1-candidate.png": "6cbb4663e4af82ebc47a4882869d81258686906dccd124029d1cfa41c63c1a7e",
+            "1-overlay.png": "a6192f9967eee82a4c8c0d64f1ae3aef7d539296316251690c0b24ed674baa43",
+            "1-reference.png": "0da4128a20124124a4ffde53b2b068778fbbf9ec38ae8463e149950db3bfa8c4",
+            "candidate.pdf": "e01c458d660d5e22fd9fb6386337e560a0e18b4812de730e364988ee19e96560",
+            "evidence.json": "ff671074c3ad2b985bfc9787c229e043848f54a207e974bbd4619be776e45cc6",
+            "production.json": "9e39e1a002127f23d840e6b4e42c8fc8f4d5c946642174fcd5d9678d5f025591",
+            "reference.pdf": "cc787929ae47873be47066227746df22800f9d069bdead16ac03da5eec263521"
+          }
+        },
+        "tabs-wrapping-tail-long-prefix-control": {
+          "score": 85.59914993706897,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "decorativeWords": [],
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "declared-pdf-text-normalization",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FINISH",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 40742,
+              "close": false,
+              "inkF1": 0.8559914993706897,
+              "pixelMismatch": 0.07614170194592988,
+              "precision": 0.8587452751460409,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "2548c84378ebeb010e67f7d3586082e41a6a26ef119ed7a0c2c890798c8927e8",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "c0226c37590cfae3d863754e80d9dcd09b3313f98d0afe09bd7c0c610dde470c",
+                "width": 816
+              },
+              "recall": 0.8532553284458901,
+              "referenceInk": 41194,
+              "score": 85.59914993706897,
+              "ssim": 0.8579532623054148,
+              "ssimRaw": 0.8579532623054148
+            }
+          ],
+          "coreTree": "9af1a6ee8401719e6342a987667bee98220826d8",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "b680ccba125241a4e3502bdf6a4f5df19ff3be47b4f820d63d0b44a0ac8f5dde",
+          "pageMapDigest": "b71253b3bb29f86c2808e704fa931ec218a3c4ce7cc95dda6a1d07eb5a658b41",
+          "files": {
+            "1-candidate.png": "7e60bbce285ed8d3e0547dc71483e70877716b8ad5770997791088fa356f2f7d",
+            "1-overlay.png": "804b91fb1a6cc52f4bcf4d347a0a289c751bf60ed6212d77b34975c2a1bfd248",
+            "1-reference.png": "d37efa3c40956c70abc368f64c81a7e0f9a61de2e66d722d9260a4c79273b6c1",
+            "candidate.pdf": "9dd85dd0af7c853cd0fa859c7e70861655e4af22f1f9ebb198ce17a968a29a96",
+            "evidence.json": "b27c6192b3b7bac7e64f1bb09b3eb88ed4000c1d9b5d38b21db648824c00c3d3",
+            "production.json": "5d96c08056e56fcf38eb728ba4acded7044a7a0dc1b497d8a81f537a6652b68c",
+            "reference.pdf": "5c72419c7232b8d6da008afc43f7f4b6955f541db8b15c378db7d057034f3c89"
+          }
+        },
+        "tabs-wrapping-tail-long-both-control": {
+          "score": 71.39914035086979,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LASTTAIL",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 80840,
+              "close": false,
+              "inkF1": 0.8440969256756158,
+              "pixelMismatch": 0.15578115715983362,
+              "precision": 0.8415017318159327,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "1372887cd3b11cd97edc559be7a1bec4c50603e1f6b1cbfd70f324973ef17f75",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "bbe2ac81190139cad7e2632737fd4a72631cd3d20375d9f10c4751e480726211",
+                "width": 816
+              },
+              "recall": 0.8467081762254416,
+              "referenceInk": 80624,
+              "score": 71.39914035086979,
+              "ssim": 0.7139914035086978,
+              "ssimRaw": 0.7139914035086978
+            }
+          ],
+          "coreTree": "9af1a6ee8401719e6342a987667bee98220826d8",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "39e1135939401eea71c972fffaf8e022d4ddcc53d1054e28b905c32cbe3637d7",
+          "pageMapDigest": "71e3d43dfe8ff1f1552bb30c96d70dd7995c4ad60637c0576e50852205b42b4d",
+          "files": {
+            "1-candidate.png": "d2318e22fe132f2c82e9ddb8c78b6d08d9a26395c68938883e3237a3bf997c09",
+            "1-overlay.png": "ed40b363e4ddcef6912afbc1f470b96fb5adebc99e8e2ab8ba1f738fecb9f110",
+            "1-reference.png": "120259a8556811943c024160f024e5b49a36bcaa538c27dddeedcdadcd0a6da2",
+            "candidate.pdf": "591ff40a5900b6f2ea5c545e09c0dd0b98f4c5a0963a9a9356daf00bb5bfa120",
+            "evidence.json": "3c5071652dec9cd8dd55bc3722a7933838b97467833c3ab7aea113780328f32f",
+            "production.json": "4d4664e8185c92a2fd087a107ea804b87492f9e5990de53556f150e593389452",
+            "reference.pdf": "b35da25e1317a9568d0e03abd4f9c064e676e9a40b4804e93d61d0b15b0655ec"
+          }
+        },
+        "tabs-wrapping-tail-short-control": {
+          "score": 92.20002036123802,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "decorativeWords": [],
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "declared-pdf-text-normalization",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FINISH",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FINISH",
+                "tolerancePt": 1.25,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1177,
+              "close": false,
+              "inkF1": 0.9220002036123802,
+              "pixelMismatch": 0.002679599301841949,
+              "precision": 0.9413763806287171,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "25385301eb6d22eda7e7243b85cd3fd0a251eefb6b596338f77b867fa4653f1f",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "75fe0fb203e3009ad1e15fe51ee47cba0a36559126b1580351d1422151b7f556",
+                "width": 816
+              },
+              "recall": 0.903405572755418,
+              "referenceInk": 1615,
+              "score": 92.20002036123802,
+              "ssim": 0.9901556385466133,
+              "ssimRaw": 0.9901556385466133
+            }
+          ],
+          "coreTree": "9af1a6ee8401719e6342a987667bee98220826d8",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "5d1235cb0e3b449c6c2785d04c6f392e491b43c6544ccf557b1a0fbb21b8c934",
+          "pageMapDigest": "a28c390996bb8676791e4f0fcdd993531b06a2c4e8bda395040c2c63c7fe8340",
+          "files": {
+            "1-candidate.png": "37b2a4ab793b41a7f5c368a298650422f2b30b29506bd8b9685219ff4bb7c438",
+            "1-overlay.png": "70d6bdbace7fc967f6d7e34889aa128ee6ef026ebffd0fdabdf616e67caad715",
+            "1-reference.png": "4e3732910dc3408fe287e8f5c2b3936339ca41c1145c3f4fccedaedd508b7814",
+            "candidate.pdf": "6058a54cc4f721b2770d3c64265ed50d6c805a7233f96a3c3485f27e03655631",
+            "evidence.json": "c91e7f7382b6529ab3cf63dc4d52b3563f74538099e2b397da11bd74cc1edd18",
+            "production.json": "3bbb998b6d77a6291d2b6aff71f4dd7eee00a4e2c3e554e878ab01a23ea000cc",
+            "reference.pdf": "7f89f151c84d17dd15fcb4dc50a104f8d18acc9910ee4f1da7853d3a93f2ec01"
+          }
+        },
+        "tabs-wrapping-tail-large-font": {
+          "score": 84.29838048543387,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "COMPLETE",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 13025,
+              "close": false,
+              "inkF1": 0.8429838048543387,
+              "pixelMismatch": 0.016104287358882946,
+              "precision": 0.8426871401151631,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "bbda62b04cf5eaeb7137b57f0a12b9452fa61c623de411fde1da648445cedbf9",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "c5a2f70a2cb8b8790862af95d5e0f7987c76d5568b38aaa75acc79825418e85c",
+                "width": 816
+              },
+              "recall": 0.8432806785464166,
+              "referenceInk": 12851,
+              "score": 84.29838048543387,
+              "ssim": 0.9743817969610624,
+              "ssimRaw": 0.9743817969610624
+            }
+          ],
+          "coreTree": "9af1a6ee8401719e6342a987667bee98220826d8",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "a5d4e33d91e84110c5c6a7b684ecdf0901b256ba1a6dc2a561d8f4df5a383807",
+          "pageMapDigest": "cd51e9c570df7eb2879ec92f14afdf0df0400505ce712aa8ec176206233ab9cf",
+          "files": {
+            "1-candidate.png": "758c55959ec1db7a316aedf9558820b637d06074f64513e1d94aa1977ba129c2",
+            "1-overlay.png": "0b38912d35438b4ba392c17d8011e0249f773e1a7c4a2a172bbd993c241077a3",
+            "1-reference.png": "05e5884eb4d168c963081c763172990e07e0b3083a2861daf4788e9593d5aa3e",
+            "candidate.pdf": "a5658246850a390a0d1540a39a36f5ff948679bb746ec8cf5d844348b960d42a",
+            "evidence.json": "fa51af2baeba456fc82e50df573021047fbea64363490c4953c58e5f4f543f78",
+            "production.json": "8d0bdace3726fedd99a6bd29bb3258d0d8784568b4a8ed3ae8fe9a85ce550f84",
+            "reference.pdf": "9484d1b77fcd7bb411d4692513e159efe40489e5dedfd03baca2e0cb361cae20"
+          }
+        },
+        "tabs-wrapping-tail-expanded-spacing": {
+          "score": 85.84433639604292,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Z",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 2079,
+              "close": false,
+              "inkF1": 0.8584433639604292,
+              "pixelMismatch": 0.004050152257872846,
+              "precision": 0.86002886002886,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "b5520ed6fb52e32b8c786ac50643e3b65a15b981c18be558607c100216043692",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "5df967f7491606a073ce35f7e0989c6e6c1f6c76e666889211ff6210c968ae6e",
+                "width": 816
+              },
+              "recall": 0.8568637029799707,
+              "referenceInk": 2047,
+              "score": 85.84433639604292,
+              "ssim": 0.9885176939748654,
+              "ssimRaw": 0.9885176939748654
+            }
+          ],
+          "coreTree": "9af1a6ee8401719e6342a987667bee98220826d8",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "52dce5664780f1700e6d15f0689cf197c93b64f4f17ac209df2e9f4e9e46652e",
+          "pageMapDigest": "71457bf27eee828b55a22e2475324ff8c719e41eb28f57fa91eb6c0c694e5106",
+          "files": {
+            "1-candidate.png": "23bb47fd10b292c8a5b76a11c221c7b2a39d47d1bfbd9da4739a6493394681a6",
+            "1-overlay.png": "0e32cd124c7f6f86a14fc850694f9a19ba6fbb749448ea7d15805f0f662fa2ae",
+            "1-reference.png": "e25e7f48524e3be8d15c9a10f6be110db998603a2a5dcdd918b0b7061a1661c2",
+            "candidate.pdf": "df4972410d4a3963cdd0328ef4c604b35012d37bdf0778758eedbecff6e6c97c",
+            "evidence.json": "d8c09afc91cbc63abd95d76698ca8ac7e05a5423baee20d32fae390bdc11ef50",
+            "production.json": "4040283f4dd3c8c582a52867c72984015aa07efc9ee8b5ca38c7eb4dc496ec77",
+            "reference.pdf": "5926fa355085a880569c0165003e618c5a5ead303f41a74a8f4e317388f12701"
+          }
+        },
+        "tabs-wrapping-tail-wide-glyphs": {
+          "score": 72.37946852794346,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "COMPLETE",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 3984,
+              "close": false,
+              "inkF1": 0.7237946852794346,
+              "pixelMismatch": 0.00832544191919192,
+              "precision": 0.7276606425702812,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "c5cfea5efca414dc4caa19460a4a26007df2fd0c272ffafd96cbf16bf2911ec3",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "24fa22fceece080adc0e1274031d081c1c25ffe3f69729607368781e43e181c0",
+                "width": 816
+              },
+              "recall": 0.7199695894576786,
+              "referenceInk": 3946,
+              "score": 72.37946852794346,
+              "ssim": 0.9803889822285513,
+              "ssimRaw": 0.9803889822285513
+            }
+          ],
+          "coreTree": "9af1a6ee8401719e6342a987667bee98220826d8",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "f398681d9207f2c42960af5fce30e6d0fc6d4904f99a7e3ae1b57071c7d60834",
+          "pageMapDigest": "ae4635bd748edb16038bc70c9d7c22d1d163b3d50a65121c4da4d7db35fa31d5",
+          "files": {
+            "1-candidate.png": "a73a45081672887931ea03c882dd21473f684582bae82c3739c7db710e7f45ce",
+            "1-overlay.png": "dfba8fcd9bbddbb21f851ddf02eb6ed5742a0e308ec7ecb691b1923e03ad4a96",
+            "1-reference.png": "6928dd68a6a740e6cb21a3153963e953529dd377f9238a05cd55b064ad1d322b",
+            "candidate.pdf": "b6198feb88ac660cb1bc05d4320961abdfc8d32fafadbb186c10ab703353283d",
+            "evidence.json": "eb8679bee9befe22e43bee8860fbe1c256fa0a80e11316640dfec4a051254b57",
+            "production.json": "470ca6e54f6d4ad0046a8a07643a1d78d919932469f20f5af8704142ebf8912b",
+            "reference.pdf": "15119204c4cf9db7e78f821e224110403bff8981d15d8cfa79e9cbf9120dcba1"
+          }
+        },
+        "tabs-wrapping-tail-multiple-pages": {
+          "score": 52.76962972994723,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LASTTAIL",
+                "occurrence": 1,
+                "page": "reference",
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 2,
+          "pages": [
+            {
+              "candidateInk": 131341,
+              "close": false,
+              "inkF1": 0.8339988306012632,
+              "pixelMismatch": 0.2574910409239453,
+              "precision": 0.8173228466358563,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "8e8dc661a3dde1573b9bfa2d43ff723d70d5ac922b7d1632b51315ade8e2294f",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "9a0e382043dd188dced2512e074edc4f12cf964306a397185b358caccf73df7e",
+                "width": 816
+              },
+              "recall": 0.8513694739831498,
+              "referenceInk": 126764,
+              "score": 52.76962972994723,
+              "ssim": 0.5276962972994723,
+              "ssimRaw": 0.5276962972994723
+            },
+            {
+              "candidateInk": 29629,
+              "close": false,
+              "inkF1": 0.7745553940890749,
+              "pixelMismatch": 0.06481404114676173,
+              "precision": 0.8304026460562287,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "bcafac4af8cca336204fba1996b7a01fab163b5fc6aad5839b50068eafd99d4c",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "407f6368fc603e8e792da72da191244ec76094b67cf1724a6ec59d8226b7c814",
+                "width": 816
+              },
+              "recall": 0.7257465983389292,
+              "referenceInk": 33954,
+              "score": 77.4555394089075,
+              "ssim": 0.8757010144638591,
+              "ssimRaw": 0.8757010144638591
+            }
+          ],
+          "coreTree": "9af1a6ee8401719e6342a987667bee98220826d8",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "ad4883f621e7afe07707f2358607281eb23a05e896a738c5e7008c4515c8bded",
+          "pageMapDigest": "2fba6fadf1cc5ca1396ba3622d076cab3b824daa065f99bcbf87380dd8455086",
+          "files": {
+            "1-candidate.png": "9e8de2fe0b76a30a680961bf33c48d98a3d727b625b863f653de4ff1bb5bfa9e",
+            "1-overlay.png": "d920821ce26f5acceff9dba75bce5dcc663825aa4486f65cec8b5344ef0574dd",
+            "1-reference.png": "5cc5e1b26598955d3aaa98af6260786536a023e9849511bf5186d9ecc36914b3",
+            "2-candidate.png": "8ada306518e0608be6e272680b6a834ebcc732308bb4e34cd0f2064726095aa1",
+            "2-overlay.png": "e09802f4cc5f1b242e14d2a3cf77d61be437bb17e4419ba65db960ce0448133b",
+            "2-reference.png": "2b0ef6d95a11915fd44432ec0b031778690686dfbc628c5f5f98198a5455b01b",
+            "candidate.pdf": "240450994a93713fa0d9ef5dd9590365dec6ed25832e4568f583643417372c47",
+            "evidence.json": "fa11690a92e97f3c8437821e170218e25a0cdc84f687bfb4a2d0d45e5c854b1f",
+            "production.json": "c7ab91daa500a1b12abfd9fa52c4519ac3e971dea820c2f5024aaff868780749",
+            "reference.pdf": "aecb0089ae780b99beadf9e44ff2e3fef3a6f179484ba9d859f65f8cdf3c8580"
+          }
+        },
+        "tabs-wrapping-tail-vml-shape": {
+          "score": 31.98101286111592,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "COMPLETE",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  100,
+                  540,
+                  600
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 40637,
+              "close": false,
+              "inkF1": 0.3198101286111592,
+              "pixelMismatch": 0.10167274769756388,
+              "precision": 0.3091763663656274,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "f7b860e65c39e155e069d864e60346bbd4cdccb1def827325dc80d5a5093c26f",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "c5fb0d8df746e01ed92ed0d1bf5ebfa37bf51b3479206bab9641f4307af24900",
+                "width": 816
+              },
+              "recall": 0.33120141690445737,
+              "referenceInk": 40652,
+              "score": 31.98101286111592,
+              "ssim": 0.7932330794132555,
+              "ssimRaw": 0.7932330794132555
+            }
+          ],
+          "coreTree": "9af1a6ee8401719e6342a987667bee98220826d8",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "b125a1b7131bcc7a2444bff8398813d72661dec2978ce3aa7289973eddb52513",
+          "pageMapDigest": "53678323fe19a4a97fbc76817bc6bd8d70bbcd098f5186e5cd92f12e3a22d4c4",
+          "files": {
+            "1-candidate.png": "0d779f3d9b80a4a3d3c8c7404468478faade17776bf2fd0b64e026b14a08ba84",
+            "1-overlay.png": "ce588b41def1c2b15d58561f861f0870177d180f5f629b7c30ad9bcad2488cbb",
+            "1-reference.png": "607ad645275a85f6e12516faa0ece25ec95b46bc0e694accce7eec190e568aea",
+            "candidate.pdf": "57f77af0bd88ad3e89baacc6599cfbc8af54e75c7b06dbf544c52c16ed515c69",
+            "evidence.json": "6eebda70594f29a090a931c362b2134b4ef0e81a4b78902c73d8595e8a54f03d",
+            "production.json": "cf5f6ba2bc64a52736956a164be35e752c0cdd210ddfe1122354aa473dab8210",
+            "reference.pdf": "ffd32ade575cbe7f0e7cf3b27100a42fb48550b7fd31ca5eb34c1b1ee22de5fc"
+          }
+        },
+        "tabs-wrapping-tail-vml-rect": {
+          "score": 78.64844100268394,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "COMPLETE",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  100,
+                  540,
+                  600
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 40637,
+              "close": false,
+              "inkF1": 0.7864844100268393,
+              "pixelMismatch": 0.08493598670528818,
+              "precision": 0.7823904323645938,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "f7b860e65c39e155e069d864e60346bbd4cdccb1def827325dc80d5a5093c26f",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "bfe758c1bec2874201fcae2b8dc45e91ef5a74e4ba692059631195f8edfbeeab",
+                "width": 816
+              },
+              "recall": 0.7906214577891676,
+              "referenceInk": 40582,
+              "score": 78.64844100268394,
+              "ssim": 0.8378732769350944,
+              "ssimRaw": 0.8378732769350944
+            }
+          ],
+          "coreTree": "9af1a6ee8401719e6342a987667bee98220826d8",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "12b44e2b710e4144f00c0d14732b722961f577c01746ad34e6fdc56368a96193",
+          "pageMapDigest": "44262c413951acadbedb05b1f7ed2d4d2e66f32eb92208e12c936b9764b1c9dd",
+          "files": {
+            "1-candidate.png": "0d779f3d9b80a4a3d3c8c7404468478faade17776bf2fd0b64e026b14a08ba84",
+            "1-overlay.png": "d017d37d993407a838de4c083ea94d547e01adfa455d5c9f19cdd43f059dc7f0",
+            "1-reference.png": "b6102e33b7e156bd0f9e645cdd7ac753ea389e3753477c7f92999920d8dea7b0",
+            "candidate.pdf": "e3fc7bba6f34fde7b1020bf35e175f6e8424c6ef04ba260a1c92129040679478",
+            "evidence.json": "92f4644c5c4f8abb94c109bf2f0cd6a082359acdc0f7ff6c8368d7699e163e8b",
+            "production.json": "6bee55d97a141357db2dac2c1dcaef4f26d430033c3fadfa4e829c8958e3de18",
+            "reference.pdf": "b4e797f1f85566c89e224eae9d4d5ebe9117fce187708a3440c43ad4ac84945c"
+          }
+        },
+        "tabs-wrapping-tail-vml-rect-short-control": {
+          "score": 93.39705493696998,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FINISH",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  100,
+                  540,
+                  600
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 933,
+              "close": false,
+              "inkF1": 0.9339705493696998,
+              "pixelMismatch": 0.001627023915626857,
+              "precision": 0.9281886387995713,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "532c0c7d5536eedd361014a3a1cc5a0b66458912e717ccd00748d220fa1f660d",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "5d7ce0a0e6435d5c59b0bf4682e01aa49e9fca56caecfb2e343e999f84fdbef7",
+                "width": 816
+              },
+              "recall": 0.9398249452954048,
+              "referenceInk": 914,
+              "score": 93.39705493696998,
+              "ssim": 0.9979675729752152,
+              "ssimRaw": 0.9979675729752152
+            }
+          ],
+          "coreTree": "9af1a6ee8401719e6342a987667bee98220826d8",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "c5986f591585a5330af93ae867ad82fa8c77b61694bc860e19bb08201772d2a2",
+          "pageMapDigest": "42ca5c2b6ada0b4008a30de348ad88b72133186b7cf730e781e687d1da085c18",
+          "files": {
+            "1-candidate.png": "0bdca630845bf55b18af19929cc002949b0c6c95fefaa0ad3478110c3646f167",
+            "1-overlay.png": "226b452e77d36cd9b45d67c4639597ddcb43a74e175c642b32f15b205a414b36",
+            "1-reference.png": "0d0a84b33b2ed97c58465742f40feaae2cf8da24e80b143bb96fe0e641a6ab18",
+            "candidate.pdf": "d8e441831d93c1a1fd4a2cca1d87405a5b2dca1edbb89fae20f839dd1fc90527",
+            "evidence.json": "13c8856732a77c79b23a098098d4a6f0809f1a38c8632d2ced2e042a764613ca",
+            "production.json": "3a18d8e469c3f0a59acb0c050ff977f611d2557bb4c8c5a4069dc9f449457257",
+            "reference.pdf": "1049a4f9de3115ea7504a0937c16693f86d14d99df63fc88809788eefb303215"
+          }
+        },
+        "tabs-wrapping-tail-wrapped-near": {
+          "score": 70.45635034401464,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "COMPLETE",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 7912,
+              "close": false,
+              "inkF1": 0.7045635034401464,
+              "pixelMismatch": 0.01494958778966132,
+              "precision": 0.7154954499494439,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "5d41d5a643a46f5eb7daa82c00c010f7693efd1d7734bf6b7ce96f6749abe380",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "c152907638961830d0bddea06a6e3e46af9b7aa6eecf90ae68c4f98d1a9e8779",
+                "width": 816
+              },
+              "recall": 0.6939605848696758,
+              "referenceInk": 7865,
+              "score": 70.45635034401464,
+              "ssim": 0.9697730927142882,
+              "ssimRaw": 0.9697730927142882
+            }
+          ],
+          "coreTree": "9af1a6ee8401719e6342a987667bee98220826d8",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "695d732fa83f2686dd843d34e3c1346bf1c62b87c622b040085a68edc501dfd0",
+          "pageMapDigest": "ea60f132fe37a884dabe6da03b033be7a46fc263f6b49dae5ae7abae3158c048",
+          "files": {
+            "1-candidate.png": "9dcc55996eaf95b9ad601760daef2a2e1e1ed775407f7bd7805e6a9ef1cc39fb",
+            "1-overlay.png": "b90508862384071c695de2d8f3a2835f7da7853d4400811793bc4d3cce080d3e",
+            "1-reference.png": "0a41ac05b23591a3fa1b651a9a91a66b978148ec88afde2866de49f71bfb1606",
+            "candidate.pdf": "232ee207988da803cb0325dc54f0800a8c7f62857fdfc838a31ddae30af8a1a7",
+            "evidence.json": "08ff3c7970b97c12584634f17d1535a479ade96f3f98d4d94a4c5cc4bd960173",
+            "production.json": "e24d6c17822da39c7877379b14d7f7cdb2619cffebb62e9635a8d549401c28ba",
+            "reference.pdf": "771b957344ae108190533c1a1db87ee6dcd45e882073413965fefa7e314520c9"
+          }
+        },
+        "tabs-wrapping-tail-wrapped-prefix-23": {
+          "score": 70.62505333999829,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "COMPLETE",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 8534,
+              "close": false,
+              "inkF1": 0.7062505333999829,
+              "pixelMismatch": 0.016313177733214498,
+              "precision": 0.7192406843215374,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "744a4252c4ebec8934e4b5ac76a6d3120aaf0f8ea66d6df806f29d323683b01b",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "73de280e11e38602bf7455927e91eb52a75b4eefe5c390ee7f56fca0e80ec162",
+                "width": 816
+              },
+              "recall": 0.6937212863705973,
+              "referenceInk": 8489,
+              "score": 70.62505333999829,
+              "ssim": 0.9674608557883758,
+              "ssimRaw": 0.9674608557883758
+            }
+          ],
+          "coreTree": "9af1a6ee8401719e6342a987667bee98220826d8",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "8433859d76649eaa9e408614a576816a45e66c8fcd7862179ecee236a239e7d1",
+          "pageMapDigest": "f8727706ba2f7ca050bbfc721aa361e60b66f0c2a1c0b513e5b0acbb6c021e30",
+          "files": {
+            "1-candidate.png": "3c721279d71f62fa69183f2427b0b9077b318e31963cb46dd397326a69107eb8",
+            "1-overlay.png": "cc79fccd28e931b5270b4742c52ed19b6224d95989c24a4f4d6f65db77ad116b",
+            "1-reference.png": "1580cf3f7fe56a0064778c88e2baaec928bcdd78f0c24415d3a527abc95875b3",
+            "candidate.pdf": "de41a503462135bb5cc6fc579b575d3b6ef49fca8af406583545bd0ae97e3e8e",
+            "evidence.json": "2fbf4d349b104050ae4194e0a79323133f9c4c8ab7f4cfdc90677fcefc7b05ac",
+            "production.json": "74671b17fbd67828bca99db81a5e4f3dcc94884463ef5206adeb3b8bb118fa19",
+            "reference.pdf": "4acb7981564719273b36c5a63ec1e1dbebb1b25039b98862e190c06135e5a640"
+          }
+        },
+        "tabs-wrapping-tail-wrapped-short-control": {
+          "score": 85.98894601190888,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "END",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "END",
+                "tolerancePt": 1.25,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 5373,
+              "close": false,
+              "inkF1": 0.8598894601190888,
+              "pixelMismatch": 0.008623690953654188,
+              "precision": 0.8719523543644147,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "82ac7589cade0aeb3f2a922db11dcee5d55f00fa059df1b1e08567ee875e470c",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "385f99c290bb6d62fc91bdfc92f59c82200774ccea74a9e804d88fe0d4c77b93",
+                "width": 816
+              },
+              "recall": 0.8481557760718966,
+              "referenceInk": 5341,
+              "score": 85.98894601190888,
+              "ssim": 0.9843028238662668,
+              "ssimRaw": 0.9843028238662668
+            }
+          ],
+          "coreTree": "9af1a6ee8401719e6342a987667bee98220826d8",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "5e62f494c13dd1007571079da83bf0757e789e61ecd3209170214e7b26390bce",
+          "pageMapDigest": "81acbd535cefbf9090c114b2734ca99a92c89ab35f42ca122b8c45bf217ebb68",
+          "files": {
+            "1-candidate.png": "ff274772a8b2e547ec79c1cfff00dfe109437943faac3ee51f3d3ca6c08ef902",
+            "1-overlay.png": "b29e7ef66790291959cfd1650dd646ee0d67fd323475735044f3a526589cad5f",
+            "1-reference.png": "fdfafe1e726644dacaec2237a0f7ea56869d13ea1de52c2d78cb14ad4d2f8c00",
+            "candidate.pdf": "3423d5a1886127dab4b41bb53269e375ce0b8754cbb62f0731a26324818080cd",
+            "evidence.json": "58e23424765ac145eddd9cd3e1a3ccad7dfa986e597de9eb598bf820bb15c118",
+            "production.json": "4b162d6c0783f26d934043e8f6013219cad454ad440c910fc198f9625b9b806d",
+            "reference.pdf": "3d02783a3508d34a3d2152c0e249bbcfcfa123296c105c92ec43e3c049d4f417"
+          }
+        }
+      }
+    },
+    "baseline": {
+      "runUrl": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/41211298822",
+      "artifactId": 13046966405,
+      "artifactZipSha256": "bc41929fac036960b6f5976bba72e6c1eb4d882ed98a81a0768f01c0ff68dc74",
+      "coreCommit": "b3d6de066e0813a04777a179c05252b922196355",
+      "resultSha256": "2df16dc9afaeedca57baeca37c7f47beee3d023111ba9253f26c4bdff93acf6e",
+      "selectedManifestSha256": "d687a9ac45011f02189bce39a83a4369ab570db87c44a4e6dd104f412929ba13",
+      "contractDigest": "991839a3fdd46691251d9c8545fbd530cce430b26d91a56473ddf4ea5585686b",
+      "referenceBundleSha256": "006fbc49bc15145800a88e7f1a9b4574f4c29be717d3a2a55fe7647cad7861a3",
+      "calibrationResultSha256": "4195ebe9d70dcb8e29cff8b25096c3d725d93dbc0640b72cb520645f8abbe42d",
+      "calibrationSummary": {
+        "categoryMeans": {
+          "paragraphs": 100.0
+        },
+        "closeMatchRate": 1.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 17,
+        "required": 17,
+        "score": 100.0
+      },
+      "summary": {
+        "categoryMeans": {
+          "paragraphs": 35.68714913342219
+        },
+        "closeMatchRate": 0.0,
+        "complete": true,
+        "mandatoryPassRate": 0.4117647058823529,
+        "measured": 17,
+        "required": 17,
+        "score": 35.68714913342219
+      },
+      "cases": {
+        "tabs-wrapping-tail-right-long": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {
+                "COMPLETE": 1,
+                "TAIL": 1,
+                "The": 18,
+                "Wren01": 1,
+                "Wren02": 1,
+                "Wren03": 1,
+                "Wren04": 1,
+                "Wren05": 1,
+                "Wren06": 1,
+                "Wren07": 1,
+                "Wren08": 1,
+                "Wren09": 1,
+                "Wren10": 1,
+                "Wren11": 1,
+                "Wren12": 1,
+                "Wren13": 1,
+                "Wren14": 1,
+                "Wren15": 1,
+                "Wren16": 1,
+                "Wren17": 1,
+                "Wren18": 1,
+                "beside": 18,
+                "copper": 18,
+                "eastern": 18,
+                "every": 18,
+                "keeps": 18,
+                "store": 18,
+                "the": 18,
+                "token": 18,
+                "window.": 18
+              },
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": false
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "COMPLETE",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'COMPLETE' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 650,
+              "close": false,
+              "inkF1": 0.029363801407196976,
+              "pixelMismatch": 0.055512616978609625,
+              "precision": 0.9676923076923077,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "4d3bb552b8309caad8ebf48fdfba70af9b7a089edf5853a84fa513ce163e3dbe",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "3771cb554bf06fe3244fc631d5f314056bd9906cb90b4e77042cfe2c9410e000",
+                "width": 816
+              },
+              "recall": 0.014908087329357844,
+              "referenceInk": 40582,
+              "score": 2.9363801407196974,
+              "ssim": 0.839940712211477,
+              "ssimRaw": 0.839940712211477
+            }
+          ],
+          "coreTree": "e500aaa5f179e164494ea7a76e70686e79a1288a",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "24e3fc3797e6c4be1ede31a3ca8e537aa7ad85cd88995150c39e35e3664169fa",
+          "pageMapDigest": "09acb5235a4aa751c804c8fc4a8d292c0fd04e64b066aaa77964f198aaab0c66",
+          "files": {
+            "1-candidate.png": "e181933b73884576aab4736c9edcc62cc691ed9940eb30867f98ce43f85b2baa",
+            "1-overlay.png": "92e6322443fed2915818bc97bb4c55b8ae4d4c137226a5dbce9483cb9c97ef9b",
+            "1-reference.png": "afc4513d6a70c2eaaaffeae928b62dcd43cdc208f20ab1fbecb54b847d1b3e5c",
+            "candidate.pdf": "d655c8e52d8aee94e1a88115f10370fdf67ed5667623959c19a70d1b81a7a5ac",
+            "evidence.json": "ab0ccca203fe51566eb24c2fd01d9648327cbd3d993f1d9ed29bd290326143d0",
+            "production.json": "05fdc327ce5b86e5f3b4635fdde1c47420a41e05c3a2643592744cec2d7683c5",
+            "reference.pdf": "9fa3ed8285f6a5073eaa9a413aa8ff18aa8aceada9f19234824cd6985decfa57"
+          }
+        },
+        "tabs-wrapping-tail-right-mixed": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {
+                "COMPLETE": 1,
+                "TAIL": 1,
+                "The": 18,
+                "Wren01": 1,
+                "Wren02": 1,
+                "Wren03": 1,
+                "Wren04": 1,
+                "Wren05": 1,
+                "Wren06": 1,
+                "Wren07": 1,
+                "Wren08": 1,
+                "Wren09": 1,
+                "Wren10": 1,
+                "Wren11": 1,
+                "Wren12": 1,
+                "Wren13": 1,
+                "Wren14": 1,
+                "Wren15": 1,
+                "Wren16": 1,
+                "Wren17": 1,
+                "Wren18": 1,
+                "beside": 18,
+                "copper": 18,
+                "eastern": 18,
+                "every": 18,
+                "keeps": 18,
+                "store": 18,
+                "the": 18,
+                "token": 18,
+                "window.": 18
+              },
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": false
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "COMPLETE",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'COMPLETE' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 650,
+              "close": false,
+              "inkF1": 0.029363801407196976,
+              "pixelMismatch": 0.055512616978609625,
+              "precision": 0.9676923076923077,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "4d3bb552b8309caad8ebf48fdfba70af9b7a089edf5853a84fa513ce163e3dbe",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "2d61d5bd96ebede0f2b421851ba4921ba9849d8c55fe1a15f867be79fc165914",
+                "width": 816
+              },
+              "recall": 0.014908087329357844,
+              "referenceInk": 40582,
+              "score": 2.9363801407196974,
+              "ssim": 0.8399584548696118,
+              "ssimRaw": 0.8399584548696118
+            }
+          ],
+          "coreTree": "e500aaa5f179e164494ea7a76e70686e79a1288a",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "8c50faf9b03b3286da7f641a9558dd2e16cdd4288c51746e4b1e24d2fc341507",
+          "pageMapDigest": "9e14da2a7beb4068fee69b5ae6652fddc2befa131cf650eab0303e8165b5996c",
+          "files": {
+            "1-candidate.png": "e181933b73884576aab4736c9edcc62cc691ed9940eb30867f98ce43f85b2baa",
+            "1-overlay.png": "32dd0f3ea4fb2dfc15572a2bc4e9389fb419a894ed86c81f7f7dad2708dd7731",
+            "1-reference.png": "fd5d08dd202e0669e49939761c58e55d9ab7f2f2e8187a13fce5a66788d15c01",
+            "candidate.pdf": "601a554bd3c76f84749ea83009494ce8655cc315deae08382a5b9c6f4cea06ba",
+            "evidence.json": "81f2049dda8f0652f4faa6a4ecfc5d9351096bf4cbe2df8b5898c06ec2f5eefc",
+            "production.json": "c6502dc590b3db76d60b128b0d8efbec48cb54266a4a10cd89222fb97dbb5ac2",
+            "reference.pdf": "2434d9013f61ba22bbebc899033cfe8013d173779373f49f8dab6af0a1d8df54"
+          }
+        },
+        "tabs-wrapping-tail-left-control": {
+          "score": 86.14299412598416,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "COMPLETE",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 40620,
+              "close": false,
+              "inkF1": 0.8619493641892856,
+              "pixelMismatch": 0.07814356803327392,
+              "precision": 0.8602166420482521,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "23face1cc167f01ee15296df4843097e319fb482199169c191931bcbc918c152",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "241993e86a4507ead32df0064b6256231881e59ae839cfbb85f4b7f329482cef",
+                "width": 816
+              },
+              "recall": 0.8636890808143122,
+              "referenceInk": 40525,
+              "score": 86.14299412598416,
+              "ssim": 0.8614299412598416,
+              "ssimRaw": 0.8614299412598416
+            }
+          ],
+          "coreTree": "e500aaa5f179e164494ea7a76e70686e79a1288a",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "e4c5ab1727d1bd410ecad3fc54aa89be95bdad8323b099ebf9bccbe0439cbb27",
+          "pageMapDigest": "083822b4f29389639fff1352c6f2ece4ea92ed13923fb81a6c9b619a51125775",
+          "files": {
+            "1-candidate.png": "3e1f554f96a1e4e68f135c7a73ca38e0dd35fa3a825838265cfc22af5ec2ab0d",
+            "1-overlay.png": "c13cd7c0536eaa47d1c375e6d8a2d5d1fa5e0bcad6fa14130d3dc11e999a280a",
+            "1-reference.png": "6a74d0fdeb5335f18d914b166cd1c63a1dd2c0d0ef1b0c65d5bbbfb8652ec968",
+            "candidate.pdf": "9a3d87ac9255c4a207f9064422882da1f5bf4f4f569b608a6d2113beb7dccf2a",
+            "evidence.json": "1a7f026501a0f83b1534e2180efe502fef910bb7f90795318a16c369129b7ee7",
+            "production.json": "4261e28c155f577a4e34b21942f654f1bd587e1f54a232d6571ebc1087b06fa7",
+            "reference.pdf": "13df95829c35bc70c7c30a44411d8fb8db58d34d53a460b4a1bb6871d01639f6"
+          }
+        },
+        "tabs-wrapping-tail-center-control": {
+          "score": 91.9542295441374,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FINISH",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 931,
+              "close": false,
+              "inkF1": 0.919542295441374,
+              "pixelMismatch": 0.0015898878490790255,
+              "precision": 0.9237379162191193,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "8f57c36e8df83c84919de8049d3af3a7f5c4214ab0af90f0693a3e5252602b0b",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "575c67859c660ee3ebbd909d1b8cdcdb03cb9eaa03c4e571830f39bd3a6989d4",
+                "width": 816
+              },
+              "recall": 0.9153846153846154,
+              "referenceInk": 910,
+              "score": 91.9542295441374,
+              "ssim": 0.9971352488418659,
+              "ssimRaw": 0.9971352488418659
+            }
+          ],
+          "coreTree": "e500aaa5f179e164494ea7a76e70686e79a1288a",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "8729993a8578e4234b717a21b2d0a091cdac4a2ce2f757e8f036f4ddfd761976",
+          "pageMapDigest": "f357ea32695ee7c7d106f707194e9f1438eaf6e8d4c4915f5ed3be7ea72cfa41",
+          "files": {
+            "1-candidate.png": "6cbb4663e4af82ebc47a4882869d81258686906dccd124029d1cfa41c63c1a7e",
+            "1-overlay.png": "a6192f9967eee82a4c8c0d64f1ae3aef7d539296316251690c0b24ed674baa43",
+            "1-reference.png": "0da4128a20124124a4ffde53b2b068778fbbf9ec38ae8463e149950db3bfa8c4",
+            "candidate.pdf": "daa6e50ff5e03953e9b0b222ecb55757f57250d5e802eae9c21b9101b984e8ce",
+            "evidence.json": "a3af85fc17d39ff0c4746d3c64d253045ab45bea1a159a51162da4ddda30cd72",
+            "production.json": "93f232d9a638d2a035e86bce9d10c80dd59d2687acc3f393f48252a7d4a1bb20",
+            "reference.pdf": "0348fcb5e385aebb25d21db57a501708044e1ec8d143755b98c287608109ea19"
+          }
+        },
+        "tabs-wrapping-tail-long-prefix-control": {
+          "score": 85.59914993706897,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "decorativeWords": [],
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "declared-pdf-text-normalization",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FINISH",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 40742,
+              "close": false,
+              "inkF1": 0.8559914993706897,
+              "pixelMismatch": 0.07614170194592988,
+              "precision": 0.8587452751460409,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "2548c84378ebeb010e67f7d3586082e41a6a26ef119ed7a0c2c890798c8927e8",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "c0226c37590cfae3d863754e80d9dcd09b3313f98d0afe09bd7c0c610dde470c",
+                "width": 816
+              },
+              "recall": 0.8532553284458901,
+              "referenceInk": 41194,
+              "score": 85.59914993706897,
+              "ssim": 0.8579532623054148,
+              "ssimRaw": 0.8579532623054148
+            }
+          ],
+          "coreTree": "e500aaa5f179e164494ea7a76e70686e79a1288a",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "b680ccba125241a4e3502bdf6a4f5df19ff3be47b4f820d63d0b44a0ac8f5dde",
+          "pageMapDigest": "d6d6fcf4d265e01d0d8ad478b003a7aaf5d55651cd831e5372389326aa74c8ee",
+          "files": {
+            "1-candidate.png": "7e60bbce285ed8d3e0547dc71483e70877716b8ad5770997791088fa356f2f7d",
+            "1-overlay.png": "804b91fb1a6cc52f4bcf4d347a0a289c751bf60ed6212d77b34975c2a1bfd248",
+            "1-reference.png": "d37efa3c40956c70abc368f64c81a7e0f9a61de2e66d722d9260a4c79273b6c1",
+            "candidate.pdf": "99f50af9722606c6b93fde69fdf2af2e02a5bf2467f0a5ca21ada78ad12e0c9a",
+            "evidence.json": "51659d6a186ac86bd85defbd8aa9ef1e2d613cf57db80598d4da33d6b7deeec3",
+            "production.json": "8a4a453fa981f62a731a01f3f93b83e09c57b99fee73d471a81e7b7a50d6aac2",
+            "reference.pdf": "652fd108e2c19eb3741269b97f84c09acdc2230d1004b15b388d944e7e26a82f"
+          }
+        },
+        "tabs-wrapping-tail-long-both-control": {
+          "score": 71.39914035086979,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LASTTAIL",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 80840,
+              "close": false,
+              "inkF1": 0.8440969256756158,
+              "pixelMismatch": 0.15578115715983362,
+              "precision": 0.8415017318159327,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "1372887cd3b11cd97edc559be7a1bec4c50603e1f6b1cbfd70f324973ef17f75",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "bbe2ac81190139cad7e2632737fd4a72631cd3d20375d9f10c4751e480726211",
+                "width": 816
+              },
+              "recall": 0.8467081762254416,
+              "referenceInk": 80624,
+              "score": 71.39914035086979,
+              "ssim": 0.7139914035086978,
+              "ssimRaw": 0.7139914035086978
+            }
+          ],
+          "coreTree": "e500aaa5f179e164494ea7a76e70686e79a1288a",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "39e1135939401eea71c972fffaf8e022d4ddcc53d1054e28b905c32cbe3637d7",
+          "pageMapDigest": "c9ec7f9a931ea79bad14189f5b05047e5c38e5119a49d1f64de6621b14eb641a",
+          "files": {
+            "1-candidate.png": "d2318e22fe132f2c82e9ddb8c78b6d08d9a26395c68938883e3237a3bf997c09",
+            "1-overlay.png": "ed40b363e4ddcef6912afbc1f470b96fb5adebc99e8e2ab8ba1f738fecb9f110",
+            "1-reference.png": "120259a8556811943c024160f024e5b49a36bcaa538c27dddeedcdadcd0a6da2",
+            "candidate.pdf": "c8c47866198ffc3764b2b64bea7d697884ba4211a2d08baa072fd7c8fa3e84a2",
+            "evidence.json": "49db63b78a9e9f08b17971058c10b36d587e7075fc4d74619169e18189c0257f",
+            "production.json": "196462cae22df8bc1b79354e43918aa01125b5fa6a1c11eda0bc1a0461a3f1cd",
+            "reference.pdf": "b7d2b776b684a3e90e8661070a97e3c186761319e2e1f76de7af68b5477c630a"
+          }
+        },
+        "tabs-wrapping-tail-short-control": {
+          "score": 92.20002036123802,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "decorativeWords": [],
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "declared-pdf-text-normalization",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FINISH",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FINISH",
+                "tolerancePt": 1.25,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1177,
+              "close": false,
+              "inkF1": 0.9220002036123802,
+              "pixelMismatch": 0.002679599301841949,
+              "precision": 0.9413763806287171,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "25385301eb6d22eda7e7243b85cd3fd0a251eefb6b596338f77b867fa4653f1f",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "75fe0fb203e3009ad1e15fe51ee47cba0a36559126b1580351d1422151b7f556",
+                "width": 816
+              },
+              "recall": 0.903405572755418,
+              "referenceInk": 1615,
+              "score": 92.20002036123802,
+              "ssim": 0.9901556385466133,
+              "ssimRaw": 0.9901556385466133
+            }
+          ],
+          "coreTree": "e500aaa5f179e164494ea7a76e70686e79a1288a",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "5d1235cb0e3b449c6c2785d04c6f392e491b43c6544ccf557b1a0fbb21b8c934",
+          "pageMapDigest": "f357ea32695ee7c7d106f707194e9f1438eaf6e8d4c4915f5ed3be7ea72cfa41",
+          "files": {
+            "1-candidate.png": "37b2a4ab793b41a7f5c368a298650422f2b30b29506bd8b9685219ff4bb7c438",
+            "1-overlay.png": "70d6bdbace7fc967f6d7e34889aa128ee6ef026ebffd0fdabdf616e67caad715",
+            "1-reference.png": "4e3732910dc3408fe287e8f5c2b3936339ca41c1145c3f4fccedaedd508b7814",
+            "candidate.pdf": "a5635fdd948df4798eaebe4e52e7b17e878459b1375e127e737d86d6d4cf707f",
+            "evidence.json": "146613b05140b0bbc0a2de3658095550abae9415107caad8993208bcb8334caf",
+            "production.json": "49ecda13258459cf245da459e67edfa063b57319b40934851e88f08ae70b0559",
+            "reference.pdf": "500dd06753e5fc82bbcb085bb7044a0c2fac589b3c9a071e6bd3eab58b7d6d2c"
+          }
+        },
+        "tabs-wrapping-tail-large-font": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {
+                "th": 1
+              },
+              "missing": {
+                "COMPLETE": 1,
+                "TAIL": 1,
+                "through": 1
+              },
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": false
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "COMPLETE",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'COMPLETE' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 7563,
+              "close": false,
+              "inkF1": 0.3006143239972069,
+              "pixelMismatch": 0.022778334818775996,
+              "precision": 0.4057913526378421,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "f60aa5bbb6435d719b3171cc54dc49cbb8f242183b310cf4d98cd76671564fab",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "c5a2f70a2cb8b8790862af95d5e0f7987c76d5568b38aaa75acc79825418e85c",
+                "width": 816
+              },
+              "recall": 0.23873628511399891,
+              "referenceInk": 12851,
+              "score": 30.06143239972069,
+              "ssim": 0.9483507387734657,
+              "ssimRaw": 0.9483507387734657
+            }
+          ],
+          "coreTree": "e500aaa5f179e164494ea7a76e70686e79a1288a",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "a5d4e33d91e84110c5c6a7b684ecdf0901b256ba1a6dc2a561d8f4df5a383807",
+          "pageMapDigest": "3089b5a0f569cdde4153b886150230cecb4932a5a7e58c86603305944d4b204b",
+          "files": {
+            "1-candidate.png": "3542f87e1b2deb4516d23dabff015c1c74a51dbea734935bd20deac100457574",
+            "1-overlay.png": "4bf4762bd485c17fbce93b31594f5fc5f649bf431885fd2bb8ec8c9300945b9b",
+            "1-reference.png": "05e5884eb4d168c963081c763172990e07e0b3083a2861daf4788e9593d5aa3e",
+            "candidate.pdf": "d56f24efaf7b32f7552c050f567fe743dce463f83d6d3644f72760fe7e47c71b",
+            "evidence.json": "7681b4b99731d8c596cf96ad239c2f3ae080bb3bf3c80d71790972b0c4da3589",
+            "production.json": "884275755a52735a5bf5b9e683daa31ef487ebd4ff284a9daac2741016e81202",
+            "reference.pdf": "371fc22bb682ded9524bd5fa0276ecc47a36b4d7c5e963c747b329eada84ac43"
+          }
+        },
+        "tabs-wrapping-tail-expanded-spacing": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {
+                "X": 1,
+                "Y": 1,
+                "Z": 1
+              },
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": false
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Z",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'Z' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1899,
+              "close": false,
+              "inkF1": 0.7395245593639405,
+              "pixelMismatch": 0.003965435606060606,
+              "precision": 0.7735650342285414,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "e6c4414260df30e664e2f53888e58ff838f8327579930dcc8f25529f7f0e25b3",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "5df967f7491606a073ce35f7e0989c6e6c1f6c76e666889211ff6210c968ae6e",
+                "width": 816
+              },
+              "recall": 0.7083536883243772,
+              "referenceInk": 2047,
+              "score": 73.95245593639405,
+              "ssim": 0.9887566467074674,
+              "ssimRaw": 0.9887566467074674
+            }
+          ],
+          "coreTree": "e500aaa5f179e164494ea7a76e70686e79a1288a",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "52dce5664780f1700e6d15f0689cf197c93b64f4f17ac209df2e9f4e9e46652e",
+          "pageMapDigest": "ed9c72cd3b01edff3fd470f85115b7cef8165014cec00cd49d894da04667433b",
+          "files": {
+            "1-candidate.png": "edbddd1a147bb1bfde198cd3c0042bd75b57f0e79c4004e31c70cc13571c55ad",
+            "1-overlay.png": "dc6359390ca3a0a91e510e9f0453bb4987085bbf8d5fafe69d274941400f3f4d",
+            "1-reference.png": "e25e7f48524e3be8d15c9a10f6be110db998603a2a5dcdd918b0b7061a1661c2",
+            "candidate.pdf": "682d7bdae69580741115e8ed888255c40b9aced2f5f18b9aba5e7b50fdc908a7",
+            "evidence.json": "9f834f15d33976c2fc52eebb3b21a2a5ec3aa3185fbd27a7a16e6655391fa333",
+            "production.json": "8496609f84a08c74f3aadf6dec93df1de23962b7972d4a2135f68696838a9c95",
+            "reference.pdf": "fa6622c40cdadf2e026dc3c3fb5691f26ba518fdd097bf9e0b5374f8bdf50ed1"
+          }
+        },
+        "tabs-wrapping-tail-wide-glyphs": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {
+                "COMPLET": 1
+              },
+              "missing": {
+                "COMPLETE": 1
+              },
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": false
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "COMPLETE",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'COMPLETE' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 3901,
+              "close": false,
+              "inkF1": 0.6977186909918425,
+              "pixelMismatch": 0.008291787358882948,
+              "precision": 0.7095616508587541,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "51bf73260d8b6235775626c89a4c6a0a19e44fe8eb1e45a977f346036f3486d6",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "24fa22fceece080adc0e1274031d081c1c25ffe3f69729607368781e43e181c0",
+                "width": 816
+              },
+              "recall": 0.6862645717181957,
+              "referenceInk": 3946,
+              "score": 69.77186909918424,
+              "ssim": 0.9806759006797994,
+              "ssimRaw": 0.9806759006797994
+            }
+          ],
+          "coreTree": "e500aaa5f179e164494ea7a76e70686e79a1288a",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "f398681d9207f2c42960af5fce30e6d0fc6d4904f99a7e3ae1b57071c7d60834",
+          "pageMapDigest": "b874d9dff303835f655beaabccf9adb6d4d2a9943c8edf3acf50a11dc547209c",
+          "files": {
+            "1-candidate.png": "864d28e7e48dfead7bca87543edfd2bf38f6064e08b7525bc07d52fcabfa197a",
+            "1-overlay.png": "62e30395a2b66d2a4aa90085d1806d384343235c4b38b1a28c872c475fe25e9f",
+            "1-reference.png": "6928dd68a6a740e6cb21a3153963e953529dd377f9238a05cd55b064ad1d322b",
+            "candidate.pdf": "c0a6a1b18e090867a84bdfa8bb9a833f6590fac4e29be4b4a5bd1e9c32d22b86",
+            "evidence.json": "41a281b0d4d9063fcd919b6de92e404356dfcc2079a123ddb52eda4cae912c0f",
+            "production.json": "8a8c5a26a672805d0f9542bbd9e99cff7c2f4d15706dee16a416d6cc862443c7",
+            "reference.pdf": "9948f03f4a6576a5f9a0ddf06a9c74a0d99ed43991832fb94160337c3121d566"
+          }
+        },
+        "tabs-wrapping-tail-multiple-pages": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": false
+            },
+            {
+              "extra": {},
+              "missing": {
+                "COMPLETE": 4,
+                "LASTTAIL": 1,
+                "TAIL": 4,
+                "The": 72,
+                "Wren01": 4,
+                "Wren02": 4,
+                "Wren03": 4,
+                "Wren04": 4,
+                "Wren05": 4,
+                "Wren06": 4,
+                "Wren07": 4,
+                "Wren08": 4,
+                "Wren09": 4,
+                "Wren10": 4,
+                "Wren11": 4,
+                "Wren12": 4,
+                "Wren13": 4,
+                "Wren14": 4,
+                "Wren15": 4,
+                "Wren16": 4,
+                "Wren17": 4,
+                "Wren18": 4,
+                "beside": 72,
+                "copper": 72,
+                "eastern": 72,
+                "every": 72,
+                "keeps": 72,
+                "store": 72,
+                "the": 72,
+                "token": 72,
+                "window.": 72
+              },
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": false
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "LASTTAIL",
+                "occurrence": 1,
+                "page": "reference",
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'LASTTAIL' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 650,
+              "close": false,
+              "inkF1": 0.009498450512921818,
+              "pixelMismatch": 0.17305290961081402,
+              "precision": 0.9676923076923077,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "4d3bb552b8309caad8ebf48fdfba70af9b7a089edf5853a84fa513ce163e3dbe",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "9a0e382043dd188dced2512e074edc4f12cf964306a397185b358caccf73df7e",
+                "width": 816
+              },
+              "recall": 0.004772648385977091,
+              "referenceInk": 126764,
+              "score": 0.9498450512921818,
+              "ssim": 0.500429774264087,
+              "ssimRaw": 0.500429774264087
+            },
+            {
+              "score": 0.0,
+              "unmatched": "reference"
+            }
+          ],
+          "coreTree": "e500aaa5f179e164494ea7a76e70686e79a1288a",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "ad4883f621e7afe07707f2358607281eb23a05e896a738c5e7008c4515c8bded",
+          "pageMapDigest": "096fb524d19f582f3822501902819842e8151620352a71811d3c20b44039ee5d",
+          "files": {
+            "1-candidate.png": "e181933b73884576aab4736c9edcc62cc691ed9940eb30867f98ce43f85b2baa",
+            "1-overlay.png": "74fd3177ddd9ed4f45197f73bb798963a570f6f3c1abd3cd0600e2e3d3c5f10a",
+            "1-reference.png": "5cc5e1b26598955d3aaa98af6260786536a023e9849511bf5186d9ecc36914b3",
+            "candidate.pdf": "d75ee2e446975bf19b71277921bd233e984b8564c9d870d579809ca12327f550",
+            "evidence.json": "d1941486db546955d1dd08ac4c48f6177b00a5a8c09626966b1e56b805ec43fa",
+            "production.json": "2b4dfe6e238a8eab2df2c0b262539528c05064e0f7c7fa9aeb1b0a7ed73923aa",
+            "reference.pdf": "b0f3ee4bcc9365a59ca5e8497a42c0fee9546c98205d77c5ca9d9b94cb23f6b2"
+          }
+        },
+        "tabs-wrapping-tail-vml-shape": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {
+                "COMPLETE": 1,
+                "TAIL": 1,
+                "The": 18,
+                "Wren01": 1,
+                "Wren02": 1,
+                "Wren03": 1,
+                "Wren04": 1,
+                "Wren05": 1,
+                "Wren06": 1,
+                "Wren07": 1,
+                "Wren08": 1,
+                "Wren09": 1,
+                "Wren10": 1,
+                "Wren11": 1,
+                "Wren12": 1,
+                "Wren13": 1,
+                "Wren14": 1,
+                "Wren15": 1,
+                "Wren16": 1,
+                "Wren17": 1,
+                "Wren18": 1,
+                "beside": 18,
+                "copper": 18,
+                "eastern": 18,
+                "every": 18,
+                "keeps": 18,
+                "store": 18,
+                "the": 18,
+                "token": 18,
+                "window.": 18
+              },
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": false
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "COMPLETE",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  100,
+                  540,
+                  600
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'COMPLETE' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 650,
+              "close": false,
+              "inkF1": 0.010148390988977069,
+              "pixelMismatch": 0.05618106617647059,
+              "precision": 0.28615384615384615,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "222acef3c3b39b4d750d1f9cc49cd8d0abe44b0b875a4b1e698a2e37bb29fee2",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "c5fb0d8df746e01ed92ed0d1bf5ebfa37bf51b3479206bab9641f4307af24900",
+                "width": 816
+              },
+              "recall": 0.005165797500737971,
+              "referenceInk": 40652,
+              "score": 1.014839098897707,
+              "ssim": 0.8379105208876654,
+              "ssimRaw": 0.8379105208876654
+            }
+          ],
+          "coreTree": "e500aaa5f179e164494ea7a76e70686e79a1288a",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "b125a1b7131bcc7a2444bff8398813d72661dec2978ce3aa7289973eddb52513",
+          "pageMapDigest": "3e4a85e0b9f95ec6fa5a235ed275b08d2c2009b0a1d52e733b0e211a9793683a",
+          "files": {
+            "1-candidate.png": "6e35a21d031aa4b3b8f4dbbfb71c599101bd090be3542c16d2ee9530ed62881f",
+            "1-overlay.png": "8e99fd5d8c508a2d079e2e49b8b2c5de300a197092d385f9a55464991f03454f",
+            "1-reference.png": "607ad645275a85f6e12516faa0ece25ec95b46bc0e694accce7eec190e568aea",
+            "candidate.pdf": "ae92b957a23a41c6dc9423b168882ef9b03c45501648aa8534b314bfce0b8349",
+            "evidence.json": "369c7afe9325a91ecd02bc167f38d25bb53464f908276254945e78605f28ed84",
+            "production.json": "38ccb6ec5b8c757bd2292e33f5637de13be2353bfe12ac5835970c36333815a9",
+            "reference.pdf": "ba18a44a654a7d21ceb7af5791370363d27d89395ed63597dd0b427f5359853d"
+          }
+        },
+        "tabs-wrapping-tail-vml-rect": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {
+                "COMPLETE": 1,
+                "TAIL": 1,
+                "The": 18,
+                "Wren01": 1,
+                "Wren02": 1,
+                "Wren03": 1,
+                "Wren04": 1,
+                "Wren05": 1,
+                "Wren06": 1,
+                "Wren07": 1,
+                "Wren08": 1,
+                "Wren09": 1,
+                "Wren10": 1,
+                "Wren11": 1,
+                "Wren12": 1,
+                "Wren13": 1,
+                "Wren14": 1,
+                "Wren15": 1,
+                "Wren16": 1,
+                "Wren17": 1,
+                "Wren18": 1,
+                "beside": 18,
+                "copper": 18,
+                "eastern": 18,
+                "every": 18,
+                "keeps": 18,
+                "store": 18,
+                "the": 18,
+                "token": 18,
+                "window.": 18
+              },
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": false
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "COMPLETE",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  100,
+                  540,
+                  600
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'COMPLETE' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 650,
+              "close": false,
+              "inkF1": 0.02784922991064648,
+              "pixelMismatch": 0.05567508726975639,
+              "precision": 0.8969230769230769,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "222acef3c3b39b4d750d1f9cc49cd8d0abe44b0b875a4b1e698a2e37bb29fee2",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "bfe758c1bec2874201fcae2b8dc45e91ef5a74e4ba692059631195f8edfbeeab",
+                "width": 816
+              },
+              "recall": 0.01414420186289488,
+              "referenceInk": 40582,
+              "score": 2.784922991064648,
+              "ssim": 0.8410238761247024,
+              "ssimRaw": 0.8410238761247024
+            }
+          ],
+          "coreTree": "e500aaa5f179e164494ea7a76e70686e79a1288a",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "12b44e2b710e4144f00c0d14732b722961f577c01746ad34e6fdc56368a96193",
+          "pageMapDigest": "457db601fafffab5180d0059817674757b3622678b725eeb37511164643cf145",
+          "files": {
+            "1-candidate.png": "6e35a21d031aa4b3b8f4dbbfb71c599101bd090be3542c16d2ee9530ed62881f",
+            "1-overlay.png": "063b5f5b096c02ff665604514847d22713d24f865910b05dfb55a8e09dabc68b",
+            "1-reference.png": "b6102e33b7e156bd0f9e645cdd7ac753ea389e3753477c7f92999920d8dea7b0",
+            "candidate.pdf": "1a53579024b14709e97993287781a9c1223b50eb7456c16c0ff02da22307d5b1",
+            "evidence.json": "595760408e7a543c11a7c6aedf637af63037ec6f593dbc267cbf8236046f4a70",
+            "production.json": "9ad7460d0b59e62dc2900bafeb616a623d18477050a81dd245963c090768b40b",
+            "reference.pdf": "3e52f513b14b070c0fe4cd8ec1dd29f3d7fb809d50c12ca011a8b3674a307479"
+          }
+        },
+        "tabs-wrapping-tail-vml-rect-short-control": {
+          "score": 93.39705493696998,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FINISH",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  100,
+                  540,
+                  600
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 933,
+              "close": false,
+              "inkF1": 0.9339705493696998,
+              "pixelMismatch": 0.001627023915626857,
+              "precision": 0.9281886387995713,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "532c0c7d5536eedd361014a3a1cc5a0b66458912e717ccd00748d220fa1f660d",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "5d7ce0a0e6435d5c59b0bf4682e01aa49e9fca56caecfb2e343e999f84fdbef7",
+                "width": 816
+              },
+              "recall": 0.9398249452954048,
+              "referenceInk": 914,
+              "score": 93.39705493696998,
+              "ssim": 0.9979675729752152,
+              "ssimRaw": 0.9979675729752152
+            }
+          ],
+          "coreTree": "e500aaa5f179e164494ea7a76e70686e79a1288a",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "c5986f591585a5330af93ae867ad82fa8c77b61694bc860e19bb08201772d2a2",
+          "pageMapDigest": "0230f15faa36fefd7d0c5abd2a18caf4c24be9f77d60a655d2bd15bc9055127e",
+          "files": {
+            "1-candidate.png": "0bdca630845bf55b18af19929cc002949b0c6c95fefaa0ad3478110c3646f167",
+            "1-overlay.png": "226b452e77d36cd9b45d67c4639597ddcb43a74e175c642b32f15b205a414b36",
+            "1-reference.png": "0d0a84b33b2ed97c58465742f40feaae2cf8da24e80b143bb96fe0e641a6ab18",
+            "candidate.pdf": "9c262638decc5176a21576ecd788971359c9d9d146bc0e850196afe019a528d7",
+            "evidence.json": "6b0748e5b036c0bbda57485c038506697e078f662292bcaa4030217e69dfc8f6",
+            "production.json": "67d911de62754578dfe2794e3a24100cd5804dc5551e7144d7d6a485b1c3d493",
+            "reference.pdf": "73a908725796dca405da3141647f59f4b9d9f20b1f0eedd715e9f834e6292d15"
+          }
+        },
+        "tabs-wrapping-tail-wrapped-near": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "pagination_failure",
+                "message": "Page 2 body content is clipped (2133px scroll height in a 864px band; span.docx-000004 (+1269.3px), span.docx-000003 (+1269.3px), span.docx-000007 (+1269.3px)).",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "Page 2 body content is clipped (2133px scroll height in a 864px band; span.docx-000004 (+1269.3px), span.docx-000003 (+1269.3px), span.docx-000007 (+1269.3px)).",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "c75c7933691161c215e5c2df39a9c2367359e20d3bb198826e18c90623a32906",
+            "reference.pdf": "fd23b410a8cf9a239f52eab91feb207e1fa2c8bf813d8a1ab5635dc96ee03ed5"
+          }
+        },
+        "tabs-wrapping-tail-wrapped-prefix-23": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "pagination_failure",
+                "message": "Page 2 body content is clipped (2133px scroll height in a 864px band; span.docx-000004 (+1269.3px), span.docx-000003 (+1269.3px), span.docx-000007 (+1269.3px)).",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "Page 2 body content is clipped (2133px scroll height in a 864px band; span.docx-000004 (+1269.3px), span.docx-000003 (+1269.3px), span.docx-000007 (+1269.3px)).",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "26fa7e692f3f4af320fc0a8e441d59c4a1369a9fe46cf314225376ed989e5127",
+            "reference.pdf": "0a8dbc99f284d9db1557543ba987f665ec2e306a25543080a636b400b1b4b6f1"
+          }
+        },
+        "tabs-wrapping-tail-wrapped-short-control": {
+          "score": 85.98894601190888,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "END",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  72,
+                  540,
+                  720
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "END",
+                "tolerancePt": 1.25,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 5373,
+              "close": false,
+              "inkF1": 0.8598894601190888,
+              "pixelMismatch": 0.008623690953654188,
+              "precision": 0.8719523543644147,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "82ac7589cade0aeb3f2a922db11dcee5d55f00fa059df1b1e08567ee875e470c",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "385f99c290bb6d62fc91bdfc92f59c82200774ccea74a9e804d88fe0d4c77b93",
+                "width": 816
+              },
+              "recall": 0.8481557760718966,
+              "referenceInk": 5341,
+              "score": 85.98894601190888,
+              "ssim": 0.9843028238662668,
+              "ssimRaw": 0.9843028238662668
+            }
+          ],
+          "coreTree": "e500aaa5f179e164494ea7a76e70686e79a1288a",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "5e62f494c13dd1007571079da83bf0757e789e61ecd3209170214e7b26390bce",
+          "pageMapDigest": "b8a39a8c42c63d1a019a4912388e7f05cac2bb10442e3f534bf89654de8e5b4e",
+          "files": {
+            "1-candidate.png": "ff274772a8b2e547ec79c1cfff00dfe109437943faac3ee51f3d3ca6c08ef902",
+            "1-overlay.png": "b29e7ef66790291959cfd1650dd646ee0d67fd323475735044f3a526589cad5f",
+            "1-reference.png": "fdfafe1e726644dacaec2237a0f7ea56869d13ea1de52c2d78cb14ad4d2f8c00",
+            "candidate.pdf": "03eab224ea1aeae5f01b4a3ae0b6bc9ce7af7df4fbea2be95c493559981d3484",
+            "evidence.json": "89c11cff6faed5c01fc1b5dfa7934bfcf93ad2eebf163ac22e24c40893760bd7",
+            "production.json": "40e18c464d62b83ee6815227ee59de0e4bd3d73bf8f8a827ed850434076abffa",
+            "reference.pdf": "17991226dd2db3e6c27a4b161cd24c6db98049daf8b538f51352f2ad77608c65"
+          }
+        }
+      }
+    }
+  },
+  "controls": {
+    "tabs-wrapping-tail-left-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "tabs-wrapping-tail-center-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "tabs-wrapping-tail-long-prefix-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "tabs-wrapping-tail-long-both-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "tabs-wrapping-tail-short-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "tabs-wrapping-tail-vml-rect-short-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "tabs-wrapping-tail-wrapped-short-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    }
+  }
+}

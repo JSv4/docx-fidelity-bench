@@ -7,6 +7,8 @@ existing font contract.
 The labeled comparison sheets under `docs/results/right-tab-wrapping/` show only
 these original inputs rendered by separately provisioned tools. No document from an
 external party, authentication data, native Word reference or font program is included.
+The production sheets show these same original inputs from CI runs 41211297080 and
+41211298822, including labeled panels where main produced no PDF or no second page.
 
 The six note-marker cases for Docxodus #1493 contain original Fir labels and literal OOXML
 authored in `bench/fixtures.py`. They import no renderer fixture, document content, image or
