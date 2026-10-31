@@ -9,7 +9,7 @@ The local native-facade/Chromium diagnostic passes all ten candidate cases. Main
 `1240cc5dc0586293cb937c59c973550027c31fda` fails all eight TIFF/WMF cases. Both PNG controls have
 identical complete page rasters and scores before and after. Candidate source is
 `0cb9566acf63ccaf1c0ebf16fea81b84a63342f4`; its native binary was built from the same correction
-before commit. Production public WASM exports are pending and will be recorded separately.
+before commit. Production public WASM exports are recorded separately below.
 
 Each image has independently colored blue rectangle and purple ellipse checks. The PNG/TIFF
 bounds and paint coverage compare with LibreOffice; WMF checks use absolute geometry derived
@@ -45,7 +45,7 @@ image sizing. The Word-adjudicated assertions bind every candidate; the existing
 rule excludes them only from LibreOffice reference eligibility/calibration. Raw declared
 checks are also retained for LibreOffice so its disagreement stays inspectable.
 
-Every local visual score is below the close-match threshold (77.90–90.82). LibreOffice paints
+Every candidate local visual score is below the close-match threshold (77.90–90.82). LibreOffice paints
 a default black VML frame absent from both main and candidate; the PNG controls retain this
 existing discrepancy. Word/LibreOffice outline differences and small text-position differences
 also remain. The results establish restored image content and the stated geometry contract,
@@ -56,3 +56,35 @@ The ten labeled sheets show the top-left 270 by 330pt of each original page, at 
 `local-evidence.json` binds inputs, PDF/HTML/bitmap hashes, checks, tools, fonts and sheets.
 No PDF-byte or HTML-byte equivalence is claimed for controls. No external document content,
 font programs or authentication material is included.
+
+## Production export verification
+
+[Candidate run 41192815098](https://github.com/JSv4/docx-fidelity-bench/actions/runs/41192815098)
+builds the public WASM/export packages from `0cb9566acf63ccaf1c0ebf16fea81b84a63342f4`.
+[Main run 41192867714](https://github.com/JSv4/docx-fidelity-bench/actions/runs/41192867714)
+builds `1240cc5dc0586293cb937c59c973550027c31fda`. Both use benchmark source
+`744582556b41e8574d6c3d91b643c2d88a67162b`, pinned Chromium 143 and the declared Liberation
+Serif fonts. Both LibreOffice calibrations score 100 with all mandatory checks passing.
+
+All ten candidate exports pass every mandatory check. Main fails all eight TIFF/WMF cases:
+four produce PDFs with missing colored figures; four fail strict export with no PDF. Both
+PNG controls retain identical complete page PNGs and identical scores. Their PDF bytes and
+PageMap digests differ, so those forms of identity are not claimed.
+
+| Production case | Candidate score | Main result |
+|---|---:|---|
+| Body PNG / TIFF | 90.8200 / 90.8200 | PNG unchanged; TIFF missing figures |
+| Header PNG / TIFF | 90.8609 / 90.8609 | PNG unchanged; TIFF missing figures |
+| Body WMF | 89.9146 | Export failed |
+| Header WMF | 89.9597 | Missing figures |
+| Wide / grouped WMF | 84.8445 / 84.8445 | Wide export failed; group missing figures |
+| Tall WMF | 86.7403 | Export failed |
+| Anisotropic WMF | 82.3175 | Export failed |
+
+Every production score remains below the close-match threshold. The restored image geometry
+does not remove the previously described LibreOffice frame and outline differences. The
+`*-production.png` sheets show complete pages at 75% of their unmodified 96-DPI rasters, with
+generated labels and explicit failure panels where main produced no PDF. All ten sheets are
+attached to the paired PR. `production-evidence.json` binds run/artifact IDs, ZIP digests,
+renderer commits, inputs, fonts/runtime metadata, PDF/raster/inspection hashes, checks, scores
+and screenshot hashes. The exact raw artifacts remain downloadable from the linked runs.

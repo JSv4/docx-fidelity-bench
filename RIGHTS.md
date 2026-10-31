@@ -9,6 +9,9 @@ No renderer fixture, external image, document content or font program is importe
 The labeled sheets under `docs/results/static-images/` show only these original inputs and
 separately provisioned renderers. Word diagnostics remain outside the source inventory;
 their hashes and image-semantics observations include no native PDF or font program.
+The production sheets show these same original inputs from CI runs 41192815098 and
+41192867714, including generated failure panels where main produced no PDF. They contain
+no authentication data, external document content or standalone font program.
 
 The five ruby-guide cases for Docxodus #1483 are original Larch nursery text and literal OOXML
 authored in `bench/fixtures.py`. They contain no imported documents, images, or embedded fonts.
