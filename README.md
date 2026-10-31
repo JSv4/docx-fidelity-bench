@@ -1,5 +1,10 @@
 # DOCX fidelity bench
 
+`core-v96` adds eight original frame-clearance cases for Docxodus #1510: four native
+preceding-text/page-end reproducers and four matched zero-distance controls. Complete token
+inventories and Word-adjudicated marker regions preserve fixed frame paint and page ownership.
+[All eight labeled comparisons](docs/results/frame-clearance/README.md) record native font substitution.
+
 `core-v95` adds seven original inline-frame interval cases for Docxodus #1509: centered,
 interior, right and page-relative wrapping with below-frame, unwrapped and ordinary-flow
 controls. Complete token inventories and Word-adjudicated position checks preserve both

@@ -4255,7 +4255,29 @@ def generate():
                        'rect': [x - 1, y - 1, x + 90, y + 14], 'adjudicated': 'word'} for label, x, y in regions]
         add('frames-intervals-' + name, 'paragraphs', 'Inline frame line intervals: ' + name + ' (Docxodus #1509)',
             labels + words, body, styles_xml=aster_styles, assertions=assertions)
-    registry = {'schema': 1, 'suite': {'id': 'core-v95', 'version': 95, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # #1510: vSpace can reflow already placed text while the frame keeps its source paint.
+    for mode in ('around', 'below', 'long', 'page-end'):
+        for clearance in (4, 0):
+            name = mode + ('' if clearance else '-zero-control')
+            before = [f'SageBefore{i:02d}' for i in range(60)] if mode == 'long' else ['SageBefore']
+            fillers = [f'SageFiller{i:03d}' for i in range(50)] if mode == 'page-end' else []
+            labels = ['SageFrameFirst', 'SageFrameLast', 'SageAfter']
+            frame = (f'<w:framePr w:w="3600" w:x="240" w:hAnchor="text" w:vAnchor="text" '
+                     f'w:yAlign="inline" w:wrap="{"around" if mode == "around" else "notBeside"}" w:vSpace="{clearance * 20}"/>')
+            body = ''.join(para(label) for label in fillers) + para(' '.join(before))
+            body += ''.join(para(label, frame) for label in labels[:2]) + para(labels[2])
+            frame_page = 2 if mode == 'page-end' and clearance else 1
+            frame_y = 71 if frame_page == 2 else 683 if mode == 'page-end' else 179 if mode == 'long' else 83
+            before_y = 671 if mode == 'page-end' else frame_y + 28 if clearance and mode != 'around' else frame_y - 12
+            before_x = 264 if clearance and mode == 'around' else 267 if mode == 'long' else 72
+            after_y = frame_y + (0 if mode == 'around' else 28 if frame_page == 2 else 40 if clearance else 24)
+            regions = [(before[-1], 1, before_x, before_y), (labels[0], frame_page, 84, frame_y),
+                       (labels[1], frame_page, 84, frame_y + 12), (labels[2], frame_page, 264 if mode == 'around' else 72, after_y)]
+            assertions = [{'type': 'marker-region', 'marker': label, 'occurrence': 1, 'page': page,
+                           'rect': [x - 1, y - 1, x + 90, y + 14], 'adjudicated': 'word'} for label, page, x, y in regions]
+            add('frames-clearance-' + name, 'paragraphs', 'Inline frame vertical clearance: ' + name + ' (Docxodus #1510)',
+                fillers + before + labels, body, styles_xml=aster_styles, assertions=assertions)
+    registry = {'schema': 1, 'suite': {'id': 'core-v96', 'version': 96, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
