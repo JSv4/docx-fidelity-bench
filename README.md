@@ -1,5 +1,10 @@
 # DOCX fidelity bench
 
+`core-v95` adds seven original inline-frame interval cases for Docxodus #1509: centered,
+interior, right and page-relative wrapping with below-frame, unwrapped and ordinary-flow
+controls. Complete token inventories and Word-adjudicated position checks preserve both
+available intervals.
+
 `core-v94` adds five endnote-comment export cases for Docxodus #1505: long single
 paragraphs, multiple paragraphs, nested replies, and short controls. They reuse the
 original Maple inputs and require every body and comment word in the printed companion.

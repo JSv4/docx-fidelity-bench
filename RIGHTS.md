@@ -1,5 +1,9 @@
 # Authorship and artifact rights
 
+The seven frame-interval cases for Docxodus #1509 contain original Sorrel labels and
+literal WordprocessingML authored in `bench/fixtures.py`. They import no document, helper,
+template, image or font program. Liberation Serif is separately provisioned.
+
 The five endnote-comment cases for Docxodus #1505 reuse the original Maple inputs
 authored here for #1490. Only their export profile changes. They import no document,
 font program, image or external content. Labeled comparison sheets show only these

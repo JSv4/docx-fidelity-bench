@@ -4228,7 +4228,34 @@ def generate():
                        'normal' if normal else 'around', separate=True)
         aster_case('header-overhang' + ('-normal-control' if normal else ''), 'header', 'normal' if normal else 'around', overhang=True)
         aster_case('header-table-clearance' + ('-normal-control' if normal else ''), 'header', 'normal' if normal else 'around', overhang=True, body_table=True)
-    registry = {'schema': 1, 'suite': {'id': 'core-v94', 'version': 94, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # #1509: native Word uses both free intervals beside an interior inline frame.
+    # These absolute regions bind candidates; LibreOffice's ordinary flow is not an oracle.
+    for name, placement, mode in [
+        ('center', 'w:hAnchor="text" w:xAlign="center"', 'around'),
+        ('interior', 'w:hAnchor="text" w:x="2880"', 'around'),
+        ('right', 'w:hAnchor="text" w:xAlign="right"', 'around'),
+        ('page', 'w:hAnchor="page" w:x="240"', 'around'),
+        ('below-control', 'w:hAnchor="text" w:xAlign="center"', 'notBeside'),
+        ('none-control', 'w:hAnchor="text" w:xAlign="center"', 'none'),
+        ('normal-control', '', 'normal'),
+    ]:
+        words = [f'SorrelTail{i:03d}' for i in range(16)]
+        labels = ['SorrelBefore', 'SorrelFrameOne', 'SorrelFrameTwo']
+        frame = '' if mode == 'normal' else (f'<w:framePr w:w="3600" {placement} '
+            f'w:vAnchor="text" w:yAlign="inline" w:wrap="{mode}"/>')
+        body = para(labels[0]) + ''.join(para(label, frame) for label in labels[1:]) + para(' '.join(words))
+        left = 12 if name == 'page' else 360 if name == 'right' else 72 if mode == 'normal' else 216
+        tail_left = 192 if name == 'page' else 72
+        tail_top = 107 if mode in ('normal', 'notBeside') else 83
+        regions = [(labels[0], 72, 71), (labels[1], left, 83), (labels[2], left, 95),
+                   (words[0], tail_left, tail_top)]
+        if name in ('center', 'interior'):
+            regions.append((words[2], 396, 83))
+        assertions = [{'type': 'marker-region', 'marker': label, 'occurrence': 1, 'page': 1,
+                       'rect': [x - 1, y - 1, x + 90, y + 14], 'adjudicated': 'word'} for label, x, y in regions]
+        add('frames-intervals-' + name, 'paragraphs', 'Inline frame line intervals: ' + name + ' (Docxodus #1509)',
+            labels + words, body, styles_xml=aster_styles, assertions=assertions)
+    registry = {'schema': 1, 'suite': {'id': 'core-v95', 'version': 95, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
