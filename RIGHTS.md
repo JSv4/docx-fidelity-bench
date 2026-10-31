@@ -301,3 +301,8 @@ and literal OOXML authored in `bench/fixtures.py`. They import no renderer fixtu
 image or font program. Review screenshots show only these authored inputs and their separately
 provisioned native LibreOffice and Docxodus renderings, including production exports from CI
 runs 41177656533 and 41177630479. No fresh Word reference is claimed.
+
+The six grouped-VML-textbox cases for Docxodus #1482 contain original Maple labels and literal
+VML/WordprocessingML authored in `bench/fixtures.py`. They import no renderer fixture, external
+document, image or font program. Labeled review screenshots under `docs/results/vml-group-textboxes/`
+show only these authored inputs rendered by separately provisioned LibreOffice and Docxodus.

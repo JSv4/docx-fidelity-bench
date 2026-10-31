@@ -3722,7 +3722,42 @@ def generate():
                 {'type': 'marker-region', 'marker': 'Running2:JUNIPER', 'occurrence': 1, 'page': 2, 'rect': [20, 2, 210, 75]},
                 {'type': 'marker-region', 'marker': 'Running3:JUNIPER', 'occurrence': 1, 'page': 3, 'rect': [20, 2, 210, 75]},
                 {'type': 'marker-region', 'marker': 'JuniperWrapTail', 'occurrence': 1, 'page': 3, 'rect': [20, 60, 210, 150]}])
-    registry = {'schema': 1, 'suite': {'id': 'core-v83', 'version': 83, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Docxodus #1482: independent original Maple labels in body/header VML groups.
+    placement = 'position:absolute;z-index:1;mso-position-horizontal-relative:page;mso-position-vertical-relative:page;'
+    def maple_box(label, frame):
+        return (f'<v:shape id="{label}" style="{frame}" stroked="f"><v:textbox inset="0,0,0,0">'
+                '<w:txbxContent>' + para(label) + '</w:txbxContent></v:textbox></v:shape>')
+    for header in (False, True):
+        for kind in ('group', 'nested', 'separate-control'):
+            if kind == 'separate-control':
+                maple_drawing = ''.join('<w:pict xmlns:v="urn:schemas-microsoft-com:vml">'
+                    + maple_box(label, placement + f'margin-left:{x}pt;margin-top:{y}pt;width:120pt;height:28.8pt')
+                    + '</w:pict>' for label, x, y in [('MapleNorthLabel', 84, 132), ('MapleSouthLabel', 228, 180)])
+            else:
+                north = maple_box('MapleNorthLabel', 'position:absolute;left:20;top:40;width:250;height:60')
+                south = maple_box('MapleSouthLabel', 'position:absolute;left:320;top:140;width:250;height:60')
+                if kind == 'nested':
+                    south = ('<v:group style="position:absolute;left:320;top:140;width:250;height:120" '
+                             'coordorigin="10,20" coordsize="250,120">'
+                             + maple_box('MapleSouthLabel', 'position:absolute;left:10;top:20;width:250;height:60') + '</v:group>')
+                maple_drawing = ('<w:pict xmlns:v="urn:schemas-microsoft-com:vml"><v:group id="MaplePair" style="'
+                           + placement + 'margin-left:84pt;margin-top:132pt;width:288pt;height:144pt" '
+                           'coordorigin="20,40" coordsize="600,300">' + north + south + '</v:group></w:pict>')
+            carrier = para(runs='<w:r>' + maple_drawing + '</w:r>')
+            sect = section().replace('<w:sectPr>', '<w:sectPr><w:headerReference w:type="default" r:id="rStory"/>') if header else section()
+            add('textboxes-vml-' + ('header-' if header else 'body-') + kind, 'paragraphs',
+                ('Separate page-anchored textbox control' if kind == 'separate-control' else 'Independent sibling textboxes in a ' + kind + ' VML coordinate space')
+                + (' in the header' if header else ' in the body') + ' (Docxodus #1482)',
+                ['MapleRegisterReceipt', 'MapleNorthLabel', 'MapleSouthLabel'],
+                para('MapleRegisterReceipt') + ('' if header else carrier), sect,
+                story=('header', carrier) if header else None, styles_xml=field_styles,
+                assertions=[{'type': 'marker-region', 'marker': label, 'occurrence': 1, 'page': 1,
+                             'rect': [x - 1, y - 1, x + 125, y + 26]}
+                            for label, x, y in [('MapleNorthLabel', 84, 132), ('MapleSouthLabel', 228, 180)]]
+                    + ([] if kind == 'separate-control' else [
+                        {'type': 'marker-reference-position', 'version': 1, 'marker': label, 'tolerancePt': 0.75}
+                        for label in ['MapleNorthLabel', 'MapleSouthLabel']]))
+    registry = {'schema': 1, 'suite': {'id': 'core-v84', 'version': 84, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
