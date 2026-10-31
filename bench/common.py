@@ -166,9 +166,28 @@ def validate_registry(registry=None):
             if not case.get('htmlAssertions'):
                 raise ValueError('An HTML profile override requires declared HTML checks')
         for assertion in case['assertions']:
-            versions = {'marker-region': {1, 2}, 'same-page': {1}, 'marker-reference-position': {1}}
+            versions = {'marker-region': {1, 2}, 'same-page': {1}, 'marker-reference-position': {1}, 'color-reference-geometry': {1}, 'color-geometry': {1}}
             if assertion.get('version') not in versions.get(assertion.get('type'), set()):
                 raise ValueError('Unknown assertion type or version')
+            if assertion['type'] in ('color-reference-geometry', 'color-geometry'):
+                absolute = assertion['type'] == 'color-geometry'
+                keys = {'type', 'version', 'page', 'rgb', 'tolerancePt', 'coverageTolerance'}
+                if absolute: keys |= {'boundsPt', 'coverage', 'adjudicated'}
+                if (set(assertion) != keys or
+                        type(assertion['page']) is not int or assertion['page'] < 1 or
+                        not isinstance(assertion['rgb'], list) or len(assertion['rgb']) != 3 or
+                        any(type(c) is not int or not 0 <= c < 255 for c in assertion['rgb']) or
+                        len(set(assertion['rgb'])) < 2 or
+                        any(type(assertion[k]) not in (int, float) or not math.isfinite(assertion[k]) for k in ('tolerancePt', 'coverageTolerance')) or
+                        not 0 <= assertion['tolerancePt'] <= 2 or not 0 <= assertion['coverageTolerance'] <= 0.1):
+                    raise ValueError('Invalid color geometry declaration')
+                if absolute:
+                    bounds, coverage = assertion['boundsPt'], assertion['coverage']
+                    if (not isinstance(bounds, list) or len(bounds) != 4 or
+                            any(type(v) not in (int, float) or not math.isfinite(v) for v in bounds) or
+                            bounds[0] < 0 or bounds[1] < 0 or bounds[2] <= bounds[0] or bounds[3] <= bounds[1] or
+                            type(coverage) not in (int, float) or not math.isfinite(coverage) or coverage <= 0):
+                        raise ValueError('Invalid absolute color geometry')
             if assertion.get('adjudicated', 'word') != 'word':
                 raise ValueError('Unknown assertion adjudication')
             if 'adjudicated' in assertion and (assertion['type'] == 'marker-reference-position' or assertion.get('page') == 'reference'):

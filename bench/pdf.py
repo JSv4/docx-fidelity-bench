@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import math
 import re
+import tempfile
 import xml.etree.ElementTree as ET
 from collections import Counter
 from pathlib import Path
@@ -88,12 +89,55 @@ def normalize_text(info, policy):
 
 def inspect_case_pdf(path, case, *, word_font_bindings=None, font_contract=None):
     info = normalize_text(inspect_pdf(path), case.get('pdfTextNormalization'))
+    declarations = [a for a in case.get('assertions', []) if a['type'] in ('color-reference-geometry', 'color-geometry')]
+    if declarations:
+        from .metrics import read_ppm
+        with tempfile.TemporaryDirectory(prefix='bench-color-') as folder:
+            pages = rasterize(path, folder)
+            info['colorRegions'] = []
+            for declaration in declarations:
+                page = declaration['page']
+                observed = {'page': page, 'rgb': declaration['rgb'], 'boundsPt': None, 'coverage': 0}
+                if page <= len(pages):
+                    observed.update(color_region(*read_ppm(pages[page - 1]), declaration['rgb']))
+                info['colorRegions'].append(observed)
     if word_font_bindings is not None:
         from .word_fonts import qualify
         from .common import ROOT, contained
         info = qualify(path, contained(ROOT, case['input']), info, word_font_bindings,
                        font_contract, case['fonts'])
     return info
+
+
+def color_region(width, height, pixels, rgb):
+    """Measure only the declared ink blended over white, including antialias coverage.
+
+    Channel agreement rejects black text and unrelated colors. Bounds stay in the unshifted
+    96-DPI CropBox coordinate system; no candidate diagnostics or image-resource counts are used.
+    """
+    xs, ys, coverage = [], [], 0.0
+    for index in range(width * height):
+        sample = pixels[index * 3:index * 3 + 3]
+        if sample[0] == sample[1] == sample[2]: continue
+        alpha = [(255 - sample[c]) / (255 - rgb[c]) for c in range(3)]
+        amount = sum(alpha) / 3
+        if amount < 0.05 or max(alpha) - min(alpha) > 0.015 or amount > 1.015:
+            continue
+        xs.append(index % width); ys.append(index // width); coverage += min(1, amount)
+    return {'boundsPt': [min(xs) * .75, min(ys) * .75, (max(xs) + 1) * .75, (max(ys) + 1) * .75] if xs else None,
+            'coverage': coverage}
+
+
+def color_geometry_pass(declaration, reference, candidate):
+    def observation(info):
+        matches = [r for r in info.get('colorRegions', []) if r['page'] == declaration['page'] and r['rgb'] == declaration['rgb']]
+        return matches[0] if len(matches) == 1 else None
+    r = declaration if declaration['type'] == 'color-geometry' else observation(reference)
+    c = observation(candidate)
+    if not r or not c or not r['boundsPt'] or not c['boundsPt'] or r['coverage'] <= 0 or c['coverage'] <= 0:
+        return False
+    return (all(abs(a - b) <= declaration['tolerancePt'] for a, b in zip(r['boundsPt'], c['boundsPt'])) and
+            abs(c['coverage'] / r['coverage'] - 1) <= declaration['coverageTolerance'])
 
 
 def inspect_pdf(path):
@@ -195,7 +239,9 @@ def correctness(case, reference, candidate):
         checks.append({'name': f'physical-geometry-page-{i+1}', 'passed': passed})
     for assertion in case['assertions']:
         try:
-            if assertion['type'] == 'same-page':
+            if assertion['type'] in ('color-reference-geometry', 'color-geometry'):
+                passed = color_geometry_pass(assertion, reference, candidate)
+            elif assertion['type'] == 'same-page':
                 anchors = [marker(candidate, m) for m in assertion['markers']]
                 passed = len({a['page'] for a in anchors}) == 1
             elif assertion['type'] == 'marker-reference-position':

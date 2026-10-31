@@ -1,5 +1,18 @@
 # Authorship and artifact rights
 
+The ten static-image cases for Docxodus #1484 contain original Poplar text, independently drawn
+pixels and literal WMF records authored in `bench/fixtures.py`. PNG and TIFF encode the same
+128 by 96 RGB image; WMF authors separate rectangle/ellipse records. The rectangle is blue
+and the ellipse purple so independent mandatory bounds and paint-coverage checks locate both. The package audit admits
+only the exact generated TIFF/WMF bytes, without accepting other binary resources by signature.
+No renderer fixture, external image, document content or font program is imported.
+The labeled sheets under `docs/results/static-images/` show only these original inputs and
+separately provisioned renderers. Word diagnostics remain outside the source inventory;
+their hashes and image-semantics observations include no native PDF or font program.
+The production sheets show these same original inputs from CI runs 41192815098 and
+41192867714, including generated failure panels where main produced no PDF. They contain
+no authentication data, external document content or standalone font program.
+
 The five ruby-guide cases for Docxodus #1483 are original Larch nursery text and literal OOXML
 authored in `bench/fixtures.py`. They contain no imported documents, images, or embedded fonts.
 The production sheets under `docs/results/ruby-annotations/` show these original inputs from
@@ -17,7 +30,7 @@ John Scrudato IV owns the original harness, adapter, documentation, fixture gene
 
 `bench/fixtures.py` is the complete source of every PDF-track fixture, and `bench/redline_fixtures.py` of every redline-track input, expected document and authored redline under `fixtures/redline/`. It constructs OOXML packages from literal text and generates the diamond image from pixel coordinates. `fixtures/manifest.json` records each document hash, generator hash, author, license, origin, asset statement, expected text, and assertions. CI regenerates every package and compares the bytes.
 
-Authored packages hold no external resources and no embedded font programs; `bench/audit.py` (`check_package`) enforces this on every regenerated package. Two narrowly declared shapes are permitted, because cases about the package itself need them. An external hyperlink relationship from the main document may name a target on the reserved `example.com` domain (a `mailto:` listing lower-case `@example.com` addresses, or a plain `https://example.com/` path, with no query, port or percent-encoding): such a target is a navigation address that no renderer or harness loads, and it names no real party. The font table may carry an embedded-font relationship whose target part holds exactly `PLACEHOLDER_FONT_BYTES` from `bench/common.py`, a one-line ASCII string stating that it is not a font program. Every font relationship must come from the font table and reach those bytes, whatever its target is named, and every part a font-program content type (by Default extension or Override, parameters ignored) types must hold them too; part names, relationship types and content types are compared case-insensitively. Independently of all metadata, every entry's bytes must be text (UTF-8 with no NUL byte, which covers XML), a complete PNG, or the placeholder: a font program, obfuscated or compressed, always has NUL bytes in its table directory, so an orphan one is refused whatever it is called. Any other external relationship, font relationship, font-typed or font-named entry, or binary entry is still refused.
+Authored packages hold no external resources and no embedded font programs; `bench/audit.py` (`check_package`) enforces this on every regenerated package. Two narrowly declared shapes are permitted, because cases about the package itself need them. An external hyperlink relationship from the main document may name a target on the reserved `example.com` domain (a `mailto:` listing lower-case `@example.com` addresses, or a plain `https://example.com/` path, with no query, port or percent-encoding): such a target is a navigation address that no renderer or harness loads, and it names no real party. The font table may carry an embedded-font relationship whose target part holds exactly `PLACEHOLDER_FONT_BYTES` from `bench/common.py`, a one-line ASCII string stating that it is not a font program. Every font relationship must come from the font table and reach those bytes, whatever its target is named, and every part a font-program content type (by Default extension or Override, parameters ignored) types must hold them too; part names, relationship types and content types are compared case-insensitively. Independently of all metadata, every entry's bytes must be text (UTF-8 with no NUL byte, which covers XML), a complete PNG, the exact original TIFF/WMF bytes emitted by `static_image_assets()`, or the placeholder: a font program, obfuscated or compressed, always has NUL bytes in its table directory, so an orphan one is refused whatever it is called. No generic TIFF/WMF signature exemption is granted: truncated, appended or changed binaries are refused. Any other external relationship, font relationship, font-typed or font-named entry, or binary entry is still refused.
 
 Contributions must include an author and rights record. Adding an asset requires a generator or an individually reviewed origin and redistribution grant. Git tracking alone is insufficient. Inputs are never fetched from a corpus service. Fixtures are immutable during rendering.
 

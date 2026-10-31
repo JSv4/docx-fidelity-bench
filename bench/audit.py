@@ -13,6 +13,7 @@ FONT_TABLE_PARTS = {'word/fonttable.xml', 'word/_rels/fonttable.xml.rels'}
 PNG_START, PNG_END = b'\x89PNG\r\n\x1a\n', b'IEND\xaeB`\x82'
 FONT_TYPES = ('application/vnd.openxmlformats-officedocument.obfuscatedfont', 'application/vnd.ms-opentype',
               'application/vnd.ms-fontobject')
+AUTHORED_LEGACY_IMAGES = frozenset(payload for kind, payload in fixtures.static_image_assets().items() if kind != 'png')
 
 
 ADDRESS = r'[a-z0-9._-]+@example\.com'
@@ -37,11 +38,11 @@ def font_program_type(content_type):
 
 
 def permitted_bytes(payload):
-    """Text (XML or otherwise, UTF-8 with no NUL), a complete PNG, or the font placeholder.
+    """Text, a complete PNG, exact authored legacy-image bytes, or the font placeholder.
 
     Every font program, obfuscated or compressed, has NUL bytes in its table directory, so this
     refuses one whatever its name, content type or relationship."""
-    if payload == PLACEHOLDER_FONT_BYTES or (payload.startswith(PNG_START) and payload.endswith(PNG_END)):
+    if payload == PLACEHOLDER_FONT_BYTES or payload in AUTHORED_LEGACY_IMAGES or (payload.startswith(PNG_START) and payload.endswith(PNG_END)):
         return True
     if b'\0' in payload:
         return False
@@ -61,7 +62,7 @@ def check_package(archive):
     relationship, wherever its target and whatever the target's name, must come from the font table
     and reach the placeholder; so must every part a font content type types. Part names,
     relationship types and content types are compared case-insensitively, and every entry's bytes
-    must be text, a complete PNG or the placeholder.
+    must be text, a complete PNG, one exact authored TIFF/WMF, or the placeholder.
     """
     names = archive.namelist()
     by_lower = {}

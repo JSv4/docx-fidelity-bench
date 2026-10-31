@@ -7,6 +7,7 @@ from __future__ import annotations
 import hashlib
 import re
 import json
+import math
 import struct
 import zlib
 from collections import Counter
@@ -25,6 +26,34 @@ def png(width, height, rgb, alpha=False):
         return struct.pack('>I', len(value)) + kind + value + struct.pack('>I', zlib.crc32(kind + value) & 0xffffffff)
     rows = b''.join(b'\0' + b''.join(bytes(rgb(x, y)) for x in range(width)) for y in range(height))
     return b'\x89PNG\r\n\x1a\n' + chunk(b'IHDR', struct.pack('>IIBBBBB', width, height, 8, 6 if alpha else 2, 0, 0, 0)) + chunk(b'IDAT', zlib.compress(rows, 9)) + chunk(b'IEND', b'')
+
+
+def static_image_assets():
+    """Original Poplar outlines; only these exact TIFF/WMF bytes are admitted by the audit."""
+    def pixel(x, y):
+        x, y = x + 0.5, y + 0.5
+        rectangle = 8 <= x <= 56 and 10 <= y <= 86 and not (12 < x < 52 and 14 < y < 82)
+        radius = ((x - 95) ** 2 + (y - 43) ** 2) ** 0.5
+        return (48, 96, 160) if rectangle else (160, 64, 96) if 21 <= radius <= 25 else (255, 255, 255)
+    pixels = b''.join(bytes(pixel(x, y)) for y in range(96) for x in range(128))
+    fields = [(256, 4, 1, 128), (257, 4, 1, 96), (258, 3, 3, 134), (259, 3, 1, 1),
+              (262, 3, 1, 2), (273, 4, 1, 140), (277, 3, 1, 3), (278, 4, 1, 96),
+              (279, 4, 1, len(pixels)), (284, 3, 1, 1)]
+    tiff = b'II' + struct.pack('<HIH', 42, 8, len(fields))
+    tiff += b''.join(struct.pack('<HHII', *field) for field in fields) + struct.pack('<IHHH', 0, 8, 8, 8) + pixels
+    def wmf(window_width):
+        def record(function, *words):
+            return struct.pack('<IH' + 'h' * len(words), 3 + len(words), function, *words)
+        records = [record(0x0103, 8), record(0x020b, 0, 0), record(0x020c, 96, window_width),
+                   record(0x02fa, 0, 4, 0, 0x6030, 0x00a0), record(0x012d, 0),
+                   record(0x02fc, 1, 0, 0, 0), record(0x012d, 1), record(0x041b, 84, 54, 12, 10),
+                   record(0x02fa, 0, 4, 0, 0x40a0, 0x0060), record(0x012d, 2), record(0x0418, 66, 118, 20, 72), record(0)]
+        placeable = struct.pack('<IHhhhhHI', 0x9ac6cdd7, 0, 0, 0, 128, 96, 96, 0)
+        checksum = 0
+        for word in struct.unpack('<10H', placeable): checksum ^= word
+        return placeable + struct.pack('<HHHHIHIH', checksum, 1, 9, 0x300,
+            9 + sum(len(r) // 2 for r in records), 3, max(len(r) // 2 for r in records), 0) + b''.join(records)
+    return {'png': png(128, 96, pixel), 'tiff': tiff, 'wmf': wmf(128), 'anisotropic-wmf': wmf(256)}
 
 
 def run(text, props=''):
@@ -3785,7 +3814,55 @@ def generate():
                                    'page': 1, 'rect': [94, 29, 126, 38]})
         add('ruby-' + shape, 'paragraphs', 'Phonetic guide retains its base and reading: ' + shape + ' (Docxodus #1483)',
             [before, 'LARCH', 'needle', after, 'LarchReceipt'], content, ruby_section, styles_xml=ruby_styles, assertions=assertions)
-    registry = {'schema': 1, 'suite': {'id': 'core-v85', 'version': 85, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Docxodus #1484: independent Poplar graphics and source pixels, without renderer fixtures.
+    assets = static_image_assets()
+    for kind, header in [(kind, header) for kind in ('png', 'tiff', 'wmf') for header in (False, True)] + [
+            (kind, False) for kind in ('wide-wmf', 'tall-wmf', 'group-wmf', 'anisotropic-wmf')]:
+        extension = kind.split('-')[-1]
+        width, height = (192 if kind in ('wide-wmf', 'group-wmf') else 96), (144 if kind == 'tall-wmf' else 72)
+        x, y = 36, 18 if header else 108
+        namespace = f'xmlns:v="urn:schemas-microsoft-com:vml" xmlns:r="{R}"'
+        placement = f'position:absolute;margin-left:{x}pt;margin-top:{y}pt;mso-position-horizontal-relative:page;mso-position-vertical-relative:page;'
+        if kind == 'group-wmf':
+            image = (f'<v:group {namespace} id="PoplarGroup" style="{placement}width:{width}pt;height:{height}pt" coordsize="128,96">'
+                     '<v:shape id="PoplarImage" style="left:0;top:0;width:128;height:96"><v:imagedata r:id="rPoplar"/></v:shape></v:group>')
+        else:
+            image = (f'<v:shape {namespace} id="PoplarImage" style="{placement}width:{width}pt;height:{height}pt">'
+                     '<v:imagedata r:id="rPoplar"/></v:shape>')
+        carrier = para(runs='<w:r><w:pict>' + image + '</w:pict></w:r>')
+        extras = {'word/media/poplar.' + extension: assets.get(kind, assets[extension])}
+        relation = ('rPoplar', 'image', 'media/poplar.' + extension)
+        if header:
+            extras['word/_rels/header1.xml.rels'] = ('<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+                f'<Relationship Id="rPoplar" Type="{R}/image" Target="{relation[2]}"/></Relationships>')
+        sect = ('<w:sectPr>' + ('<w:headerReference w:type="default" r:id="rStory"/>' if header else '')
+                + '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="2160" w:right="720" w:bottom="720" '
+                'w:left="720" w:header="360" w:footer="360"/></w:sectPr>')
+        assertions = [{'type': 'color-reference-geometry', 'version': 1, 'page': 1, 'rgb': rgb,
+                       'tolerancePt': 1.5, 'coverageTolerance': 0.08} for rgb in ([48, 96, 160], [160, 64, 96])]
+        if extension == 'wmf':
+            # Native Word diagnostics establish endpoint exclusion and whole-paint scaling.
+            # Derive expectations from this original artwork and its authored placement;
+            # no renderer output supplies these bounds or paint areas.
+            window_width = 256 if kind == 'anisotropic-wmf' else 128
+            dx, dy = window_width // 128, 1
+            sx, sy = width / window_width, height / 96
+            rx, ry = (46 - dx) / 2, (46 - dy) / 2
+            ellipse_perimeter = math.pi * (3 * (rx + ry) - math.sqrt((3 * rx + ry) * (rx + 3 * ry)))
+            for declaration, bounds, area in zip(assertions,
+                    ([8, 10, 56 - dx, 86 - dy], [70, 18, 120 - dx, 68 - dy]),
+                    (8 * (44 - dx + 72 - dy), 4 * ellipse_perimeter)):
+                declaration.update(type='color-geometry', adjudicated='word',
+                    boundsPt=[x + bounds[0] * sx, y + bounds[1] * sy, x + bounds[2] * sx, y + bounds[3] * sy],
+                    coverage=area * sx * sy / (.75 * .75))
+        add('images-static-' + ('header-' if header else 'body-') + kind, 'images',
+            'Original Poplar image retains paint and mapped outlines: ' + kind + (' in header' if header else ' in body') + ' (Docxodus #1484)',
+            ['PoplarReceipt'], ('' if header else carrier) + para('PoplarReceipt', '<w:spacing w:before="3120"/>'), sect,
+            story=('header', carrier) if header else None, extra_parts=extras, styles_xml=inline_styles,
+            relations_extra=[] if header else [relation], content_types_extra='' if extension == 'png' else
+                f'<Default Extension="{extension}" ContentType="image/{"x-wmf" if extension == "wmf" else extension}"/>',
+            assertions=assertions)
+    registry = {'schema': 1, 'suite': {'id': 'core-v86', 'version': 86, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
