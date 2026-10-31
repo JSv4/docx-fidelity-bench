@@ -36,14 +36,14 @@ Local candidate means across each case's pages range from 11.1127 to 99.9934. Si
 do not meet the close-match criteria: both short horizontal changes and all four changed-margin
 spills. The left spill has the lowest score because LibreOffice retains x72 while Word and
 the candidate use x144. The controls and the short top/bottom cases meet those criteria.
-These local means are diagnostic; production scoring is reported separately below when ready.
+These local means are diagnostic; production scoring is reported separately below.
 
 The final local native-facade/Chromium diagnostic passes all twelve candidate cases. Main
 `1240cc5dc0586293cb937c59c973550027c31fda` fails all eight margin reproducers and passes four
 controls. All eight control pages have identical main/candidate rasters and scores. The
 candidate TypeScript is `763314857e5fa0ede6efac41630fa941de835058`; its unchanged native converter
-is the validated parent `0cb9566acf63ccaf1c0ebf16fea81b84a63342f4`. Public production exports are
-pending and will be recorded separately.
+is the validated parent `0cb9566acf63ccaf1c0ebf16fea81b84a63342f4`. The local sheets retain their
+capture-time label; production exports are now recorded separately below.
 
 An independent adversarial reviewer found two false passes in the initial assertions: broad
 regions allowed a 24 pt shift, and left-edge-only content did not observe an incorrect column
@@ -57,3 +57,45 @@ labels outside the page area. Blank cells indicate that renderer has no correspo
 The metadata binds the inputs, PDFs, HTML, rasters, screenshots, tools, fonts and Word captures.
 No PDF-byte or HTML-byte equivalence is claimed for controls. Native PDFs remain outside the
 source inventory; no external document content, font program or authentication data is included.
+
+## Production exports
+
+[Candidate run 41198047111](https://github.com/JSv4/docx-fidelity-bench/actions/runs/41198047111)
+builds exact core commit `763314857e5fa0ede6efac41630fa941de835058` through the public WASM
+export path and pinned Chromium. [Main run 41198049187](https://github.com/JSv4/docx-fidelity-bench/actions/runs/41198049187)
+builds `1240cc5dc0586293cb937c59c973550027c31fda`. Both use the same input and contract source,
+benchmark commit `a4311abab1ce5b3659e3682152475c6f30ce5118`.
+
+All twelve candidate cases pass their mandatory checks. Main fails the eight margin
+reproducers and passes the four controls. Every page PNG and score for those controls is
+identical between main and candidate. Both LibreOffice reference calibrations score 100
+and pass all applicable checks.
+
+| Case | Candidate score | Close match |
+|---|---:|---|
+| Same-margin short control | 99.9850 | Yes |
+| Explicit next-page control | 99.9882 | Yes |
+| Changed-paper next-page control | 99.9900 | Yes |
+| Left margin, short | 67.8615 | No |
+| Right margin, short | 69.3493 | No |
+| Top margin, short | 99.9850 | Yes |
+| Bottom margin, short | 99.9850 | Yes |
+| Same-margin spill control | 99.7600 | Yes |
+| Left margin, spill | 8.4236 | No |
+| Right margin, spill | 92.3343 | No |
+| Top margin, spill | 42.8028 | No |
+| Bottom margin, spill | 67.7168 | No |
+
+These are the benchmark's production case scores, not the local per-page diagnostic means.
+The six non-close results preserve the visible Word/LibreOffice disagreement; passing mandatory
+geometry checks does not imply full-page equivalence. In particular, the left spill's low score
+reflects the different text-column position already observed in the native captures.
+
+The twelve `*-production.png` sheets show complete production pages at 50% of 96 DPI, with
+labels outside page areas and blank cells when a renderer has no corresponding page.
+`production-evidence.json` binds the exact inputs, renderer builds, artifact ZIPs, delivered
+PDFs and production reports, page rasters, measurements, calibrations and screenshots.
+The sheets independently rasterize every actual PDF page and verify the page count; this
+includes main's extra trailing pages, which the benchmark's paired-page images omit. An
+independent reviewer caught that omission in the first sheets. Paired images remain pixel
+identical to their artifact versions. No delivered HTML payload is included in these artifacts.

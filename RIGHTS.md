@@ -7,6 +7,9 @@ geometry from differences in word wrapping between renderers.
 The labeled sheets under `docs/results/continuous-margins/` show only those original
 inputs rendered by separately provisioned tools. Native Word PDFs and font programs remain
 outside the source inventory; metadata records their hashes and geometry observations.
+The production sheets show the same original inputs from CI runs 41198047111 and
+41198049187. They contain no external document content, authentication data or standalone
+font program.
 
 The ten static-image cases for Docxodus #1484 contain original Poplar text, independently drawn
 pixels and literal WMF records authored in `bench/fixtures.py`. PNG and TIFF encode the same
