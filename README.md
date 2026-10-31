@@ -3,7 +3,7 @@
 `core-v90` adds seven original complete-comment PDF cases for Docxodus #1490. A separate
 print profile checks source text, paint, bounds and paper geometry while the primary hidden-comment
 PDF retains its native layout comparison. [All seven cases and labeled previews](docs/results/complete-margin-comments/README.md)
-separate local diagnostics from the pending production-runtime measurements.
+separate local diagnostics from completed production-runtime measurements.
 
 `core-v86` adds ten original TIFF/WMF image cases and PNG controls for Docxodus #1484.
 Independent per-color bounds and paint coverage checks cover both figures, image sizing,

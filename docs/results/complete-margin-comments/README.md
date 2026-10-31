@@ -13,7 +13,7 @@ layout parity score is claimed. Mandatory companion failures make the case score
 when its primary layout metrics are unchanged.
 
 Local strict-font captures use Chromium 143.0.7499.4 with explicit Liberation Serif files and
-a caller-owned sandboxed browser. Their reports say `browserObserved`; production CI will
+a caller-owned sandboxed browser. Their reports say `browserObserved`; the production runs below
 separately verify the owned-process runtime. Main is `784c03358775efcb8b53f9ec813bc93de30acc8d`,
 using the byte-identical reviewed tree/runtime from `5aaab5820523f689147f86da75a916bcfb26dfaf`.
 The fix is `cd446c19bf6b13aab0726451f50412c4c84d55c4`.
@@ -42,6 +42,32 @@ remain unchanged except the shared generator hash. `core-v90` contains 620 cases
 [unchanged primary controls](primary-control-comparison.json), and [SDK validation](source-sdk-validation.json)
 record the inputs and artifacts. Screenshots show every produced page at 96 DPI and 100%,
 without cropping or resampling; missing pages and refusals have labeled panels.
+
+Production runs [candidate](https://github.com/JSv4/docx-fidelity-bench/actions/runs/41217522515)
+and [main](https://github.com/JSv4/docx-fidelity-bench/actions/runs/41217524429), both on benchmark
+`9839ac1c948779cc17a126cf3e344dff18b000a0`, reproduce the same result: seven of seven mandatory
+cases pass with the fix, versus two on main. Both provider calibrations score 100. All seven
+primary page rasters and both companion control rasters are byte-identical across versions.
+The aggregate score rises from 28.5698 to 99.9944 because companion completeness is mandatory;
+the primary hidden-comment layout comparison is unchanged.
+[Production artifact bindings and all-page screenshot inventory](production-evidence.json)
+record exact source commits, input/report/PDF hashes, verified runtimes and every check.
+The production sheets below use actual companion PDF pages at 96 DPI and 100%, with no
+cropping or resampling. Local native LibreOffice diagnostics follow separately.
+
+![Production single 30](comments-complete-single-30-production.png)
+
+![Production single 900](comments-complete-single-900-production.png)
+
+![Production paragraphs](comments-complete-paragraphs-30-production.png)
+
+![Production many notes](comments-complete-many-notes-production.png)
+
+![Production nested replies](comments-complete-nested-replies-production.png)
+
+![Production short control](comments-complete-short-control-production.png)
+
+![Production hidden control](comments-complete-hidden-control-production.png)
 
 ![comments-complete-single-30](comments-complete-single-30.png)
 
