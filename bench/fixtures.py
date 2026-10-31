@@ -3521,7 +3521,50 @@ def generate():
             ('Cited ordinary endnote control' if cited else 'Uncited ' + kind + ' with positive id')
             + ' (Docxodus #1485)', [text] + (['i', 'i', note] if cited else []), body,
             notes=('endnote', note), styles_xml=textbox_styles, extra_parts={'word/endnotes.xml': notes})
-    registry = {'schema': 1, 'suite': {'id': 'core-v79', 'version': 79, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Docxodus #1489: the merged interval is unchanged when the preceding physical cells differ.
+    for shape in ('aligned-control', 'shifted', 'grid-before', 'starter-grid-before', 'multi-column'):
+        span = 2 if shape == 'multi-column' else 1
+        def grid_cell(text, width=1, merge=None):
+            props = f'<w:tcW w:w="{1800 * width}" w:type="dxa"/>'
+            if width > 1:
+                props += f'<w:gridSpan w:val="{width}"/>'
+            if merge:
+                props += '<w:vMerge' + (' w:val="restart"' if merge == 'restart' else '') + '/>'
+            return cell(text, props + '<w:vAlign w:val="center"/>')
+        first = ('' if shape == 'starter-grid-before' else
+                 grid_cell('TopLeft') + grid_cell('TopRight') if shape == 'aligned-control'
+                 else grid_cell('TopLeft TopRight', 2)) + grid_cell('MergedLabel', span, 'restart')
+        second = ('' if shape == 'grid-before' else grid_cell('BottomLeft') + grid_cell('BottomRight'))
+        second += grid_cell('', span, 'continue')
+        omitted_prefix = '<w:trPr><w:gridBefore w:val="2"/></w:trPr>'
+        first_props = omitted_prefix if shape == 'starter-grid-before' else ''
+        second_props = omitted_prefix if shape == 'grid-before' else ''
+        borders = '<w:tblBorders>' + ''.join(f'<w:{side} w:val="single" w:sz="8" w:color="000000"/>'
+                   for side in ('top', 'left', 'bottom', 'right', 'insideH', 'insideV')) + '</w:tblBorders>'
+        body = ('<w:tbl><w:tblPr><w:tblW w:w="' + str(1800 * (2 + span)) + '" w:type="dxa"/>'
+                + borders + '<w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>'
+                + '<w:gridCol w:w="1800"/>' * (2 + span) + '</w:tblGrid><w:tr>' + first_props + first
+                + '</w:tr><w:tr>' + second_props + second + '</w:tr></w:tbl>' + para('AfterTable'))
+        texts = ['MergedLabel AfterTable']
+        if shape != 'starter-grid-before':
+            texts.append('TopLeft TopRight')
+        if shape != 'grid-before':
+            texts.append('BottomLeft BottomRight')
+        assertions = [{'type': 'marker-region', 'version': 2, 'marker': 'MergedLabel',
+                       'occurrence': 1, 'page': 1, 'rect': [245, 60, 440, 150]}]
+        if shape in ('grid-before', 'starter-grid-before'):
+            assertions[0]['rect'] = [245, 80, 440, 102]
+            assertions.append({'type': 'marker-region', 'version': 2, 'marker': 'AfterTable',
+                               'occurrence': 1, 'page': 1, 'rect': [65, 110, 160, 135]})
+        if shape == 'starter-grid-before':
+            assertions.append({'type': 'marker-region', 'version': 2, 'marker': 'BottomLeft',
+                               'occurrence': 1, 'page': 1, 'rect': [65, 90, 160, 112]})
+        add('tables-merge-grid-' + shape, 'tables',
+            'Vertical merge follows the same logical grid interval: ' + shape + ' (Docxodus #1489)',
+            texts, body, styles_xml=textbox_styles, assertions=assertions)
+        cases[-1]['htmlAssertions'] = [{'type': 'marker-attribute', 'version': 1,
+            'marker': 'MergedLabel', 'attribute': 'rowspan', 'equals': '2'}]
+    registry = {'schema': 1, 'suite': {'id': 'core-v80', 'version': 80, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
