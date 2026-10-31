@@ -1,5 +1,11 @@
 # DOCX fidelity bench
 
+`core-v91` adds thirteen original bordered-footnote cases for Docxodus #1491, covering two- and
+three-page notes, box and bottom borders, kept paragraphs, headings, table cells and controls. Complete
+source-token inventories remain mandatory. [All thirteen cases and labeled previews](docs/results/bordered-footnotes/README.md)
+distinguish eleven eligible LibreOffice references from two incomplete table references that
+remain unscored. Production measurements of the eleven eligible cases are pending.
+
 `core-v90` adds seven original complete-comment PDF cases for Docxodus #1490. A separate
 print profile checks source text, paint, bounds and paper geometry while the primary hidden-comment
 PDF retains its native layout comparison. [All seven cases and labeled previews](docs/results/complete-margin-comments/README.md)
