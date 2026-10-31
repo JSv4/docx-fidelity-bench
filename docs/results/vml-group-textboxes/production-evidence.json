@@ -1,0 +1,1780 @@
+{
+  "schema": 1,
+  "benchCommit": "e68bb0ca3c70e596ae114322fbcf02f887b75725",
+  "scope": "Production public WASM export and pinned Chromium PDF; raw artifacts are retained in the linked Actions runs.",
+  "limitations": [
+    "Word was not captured.",
+    "Controls prove full page-raster identity, not PDF-byte or HTML/PageMap payload identity.",
+    "LibreOffice applies an existing text inset to separate boxes despite zero-inset markup; grouped label positions are verified within0.75pt."
+  ],
+  "runs": {
+    "baseline": {
+      "runUrl": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/41180966026",
+      "artifactId": 13035516085,
+      "artifactZipSha256": "c182ec6a052435cffb38293a5485b9f2151224ec5f16cc7cdfa7ab2495d17056",
+      "coreCommit": "1240cc5dc0586293cb937c59c973550027c31fda",
+      "resultSha256": "101192d5ea1a5126396c4d1b2121ca82d191968ee5d2840c0464f15323cdcd24",
+      "selectedManifestSha256": "cc1d4e9f8e00b82af352733c4c8e0be57842b490e18d0e0d748bacf5ad7fcd79",
+      "contractDigest": "d37f23ff731d1ddb54d532f0a4b04485ab8f3f0a147d4e6fd12d08f4c340ab17",
+      "referenceBundleSha256": "b86324d869a74e38940428e52126abffd008ec1a970fa7616f2e1e856ee7d5cf",
+      "calibrationResultSha256": "8d7266a5efb054033b9f7c4e689ee02e30a9164c0d57b74ac5b2a9041da01450",
+      "calibrationSummary": {
+        "categoryMeans": {
+          "paragraphs": 100.0
+        },
+        "closeMatchRate": 1.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 6,
+        "required": 6,
+        "score": 100.0
+      },
+      "summary": {
+        "categoryMeans": {
+          "paragraphs": 19.250624639170564
+        },
+        "closeMatchRate": 0.0,
+        "complete": true,
+        "mandatoryPassRate": 0.3333333333333333,
+        "measured": 6,
+        "required": 6,
+        "score": 19.250624639170564
+      },
+      "cases": {
+        "textboxes-vml-body-group": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {
+                "MapleSouthLabel": 1
+              },
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": false
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'MapleSouthLabel' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "MapleNorthLabel",
+                "tolerancePt": 0.75,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "MapleSouthLabel",
+                "tolerancePt": 0.75,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "error": "Marker 'MapleSouthLabel' must occur exactly once, found 0",
+              "name": "assertion-marker-reference-position",
+              "passed": false
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1207,
+              "close": false,
+              "inkF1": 0.4573960463531016,
+              "pixelMismatch": 0.0025171290106951873,
+              "precision": 0.555923777961889,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "5bfa81b6c0a567b9fba1a1e1ed1efb426f3cadd0e6c7daf30a8ab78533599b1f",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "ca742c328cf571acc123454ccbbdec8d1c296e7da20f649cdd4bd8b2b3686653",
+                "width": 816
+              },
+              "recall": 0.3885350318471338,
+              "referenceInk": 1727,
+              "score": 45.73960463531016,
+              "ssim": 0.9939246316719395,
+              "ssimRaw": 0.9939246316719395
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "77a80ef87b812440471370b84e7e442726f7812dc38fd7d730873d23572df1e9",
+          "pageMapDigest": "c75ac7c3a58214d07323c58638a7ff183a0c7460374667c85e98b819f1fc7121",
+          "files": {
+            "1-candidate.png": "24df538cfbf2602fac394f1b9f0395625c484985dc22ea6bb2e894df9f697947",
+            "1-overlay.png": "92ae708afa791cf7b5967ec58befa3528cd89dcbd8837883b940369f12e0ebbf",
+            "1-reference.png": "873348877cb90610f20a18e5894216a85cfcaea466f944321d93eb48ee879f36",
+            "candidate.pdf": "5fae9e9b947d857cbb2f8ac2bc78cd15cd4b402dfdb622d25b0326920c186e2a",
+            "evidence.json": "46abd2e0f94d02466e37a70e16d5e72df75012ea6b89ed7cfd1e5b3680d3b2ac",
+            "production.json": "f983756b6fd3627b0b230dcea38f08f74b07bb2eec3dc6c3087d77d511a340f9",
+            "reference.pdf": "eb8440252a378268391c7e5429616af60fcd84c10721dd62138bf27ea0dcf26a"
+          }
+        },
+        "textboxes-vml-body-nested": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {
+                "MapleSouthLabel": 1
+              },
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": false
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'MapleSouthLabel' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "MapleNorthLabel",
+                "tolerancePt": 0.75,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "MapleSouthLabel",
+                "tolerancePt": 0.75,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "error": "Marker 'MapleSouthLabel' must occur exactly once, found 0",
+              "name": "assertion-marker-reference-position",
+              "passed": false
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1207,
+              "close": false,
+              "inkF1": 0.4573960463531016,
+              "pixelMismatch": 0.0025171290106951873,
+              "precision": 0.555923777961889,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "5bfa81b6c0a567b9fba1a1e1ed1efb426f3cadd0e6c7daf30a8ab78533599b1f",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "ca742c328cf571acc123454ccbbdec8d1c296e7da20f649cdd4bd8b2b3686653",
+                "width": 816
+              },
+              "recall": 0.3885350318471338,
+              "referenceInk": 1727,
+              "score": 45.73960463531016,
+              "ssim": 0.9939246316719395,
+              "ssimRaw": 0.9939246316719395
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "ddd2047e909fe0abf07af836c89fa68103f2b740dfa2a2364df52a3438d7ecda",
+          "pageMapDigest": "c75ac7c3a58214d07323c58638a7ff183a0c7460374667c85e98b819f1fc7121",
+          "files": {
+            "1-candidate.png": "24df538cfbf2602fac394f1b9f0395625c484985dc22ea6bb2e894df9f697947",
+            "1-overlay.png": "92ae708afa791cf7b5967ec58befa3528cd89dcbd8837883b940369f12e0ebbf",
+            "1-reference.png": "873348877cb90610f20a18e5894216a85cfcaea466f944321d93eb48ee879f36",
+            "candidate.pdf": "868c19be7b2d93735361da20c63638d34311fee17eb47b0ec98dbe47d86bd35c",
+            "evidence.json": "d30957d1715f6705a3d5e4c0a04a79f48cece637205442839c89d9ee7f1eb3c8",
+            "production.json": "1b6566d2711fe418551289ca1fbf4343a0b5fda014a59131bd5b72d3bd9ecd26",
+            "reference.pdf": "8a858dc03749265c33c8c888b469c4d0638eeafd0925284e49756f2aa01f626c"
+          }
+        },
+        "textboxes-vml-body-separate-control": {
+          "score": 57.751873917511695,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1735,
+              "close": false,
+              "inkF1": 0.577518739175117,
+              "pixelMismatch": 0.003096219548425431,
+              "precision": 0.590778097982709,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "33097143303a231da0120c44a1623b0dea5a2778972ea1dc4b11144c291fb527",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "bc8d977cecc122c3a2e37cb22fc451cbe37eacfd1815bc87c73a9e29ff820b2c",
+                "width": 816
+              },
+              "recall": 0.5648414985590778,
+              "referenceInk": 1735,
+              "score": 57.751873917511695,
+              "ssim": 0.9934752734549407,
+              "ssimRaw": 0.9934752734549407
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "8b55931c515861b18f627337d72b1ecb73975bfe8bd60528742b67433ef4ee51",
+          "pageMapDigest": "1a454bd9977338ad8eab0b4efe01f08cd362eff09cb0c3c92007e371d1eff9aa",
+          "files": {
+            "1-candidate.png": "a3716ed1554575f9910f12763b11dad9824fb975affdd3750924f98b50e158a4",
+            "1-overlay.png": "4097939a5ecdb114980d90cd3215e9232460cf339765f3a2ed29416a4e198248",
+            "1-reference.png": "80712cef24802531426a76af63613240c64b420499f4fa3201e848c07764c3ce",
+            "candidate.pdf": "54d0ea598f1fb54ad0e99ee17e856d5bf1cf9fa033456c56c8512dee1e0a706e",
+            "evidence.json": "c61ecc9d673930b7e17fbb596fd9b4c42876d6bfe7f8f9ad2f6ed3aa581fb2f9",
+            "production.json": "5a27510ba142de891e01da90eec801ccdc355d8bb5f65871dabef946f402a5da",
+            "reference.pdf": "f0aa1d8db5661019b5fe8e2e16b911c43458725d3d346835552fdcbf394c142a"
+          }
+        },
+        "textboxes-vml-header-group": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {
+                "MapleSouthLabel": 1
+              },
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": false
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'MapleSouthLabel' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "MapleNorthLabel",
+                "tolerancePt": 0.75,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "MapleSouthLabel",
+                "tolerancePt": 0.75,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "error": "Marker 'MapleSouthLabel' must occur exactly once, found 0",
+              "name": "assertion-marker-reference-position",
+              "passed": false
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1207,
+              "close": false,
+              "inkF1": 0.4573960463531016,
+              "pixelMismatch": 0.0025171290106951873,
+              "precision": 0.555923777961889,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "3606f01362fbf37f63083e0c75c3e2fe1103bf192ad09869f0c95fe21729368a",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "ca742c328cf571acc123454ccbbdec8d1c296e7da20f649cdd4bd8b2b3686653",
+                "width": 816
+              },
+              "recall": 0.3885350318471338,
+              "referenceInk": 1727,
+              "score": 45.73960463531016,
+              "ssim": 0.9940535724281254,
+              "ssimRaw": 0.9940535724281254
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "0d1de2a5f6726ba4db7944804b41c2a4653dd51ce82b760987bb5b5f470387bf",
+          "pageMapDigest": "94e17e66dec29f13f61ee570b9b7913a36be20972d73fef2d5565fe9680d76de",
+          "files": {
+            "1-candidate.png": "a4774b5e404d91bacb365e8f613bbc02d44c325f5ee5dbbcf87ba4e55acb2e29",
+            "1-overlay.png": "70d89715b264d42dbdf77886ab372f727e0e8df520be5e52982bf7a667a5ddb9",
+            "1-reference.png": "873348877cb90610f20a18e5894216a85cfcaea466f944321d93eb48ee879f36",
+            "candidate.pdf": "64c6128cfed60c7e190b12c3da7ffc0f3f178a92a56652be72bdd4d9e1063cc8",
+            "evidence.json": "3ae4c54ab4493b831589db148d7e15d605e04ef1b414594468e7037459aee749",
+            "production.json": "9ba3067bba313dc9acefd35d6925e14f8be310c58eaa839e0f7252aed8118da2",
+            "reference.pdf": "de4da3bd2bd834d9a19b59848ba97b966b34c002bf3abd3188d88a03b6cefcd8"
+          }
+        },
+        "textboxes-vml-header-nested": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {
+                "MapleSouthLabel": 1
+              },
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": false
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'MapleSouthLabel' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "MapleNorthLabel",
+                "tolerancePt": 0.75,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "MapleSouthLabel",
+                "tolerancePt": 0.75,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "error": "Marker 'MapleSouthLabel' must occur exactly once, found 0",
+              "name": "assertion-marker-reference-position",
+              "passed": false
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1207,
+              "close": false,
+              "inkF1": 0.4573960463531016,
+              "pixelMismatch": 0.0025171290106951873,
+              "precision": 0.555923777961889,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "3606f01362fbf37f63083e0c75c3e2fe1103bf192ad09869f0c95fe21729368a",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "ca742c328cf571acc123454ccbbdec8d1c296e7da20f649cdd4bd8b2b3686653",
+                "width": 816
+              },
+              "recall": 0.3885350318471338,
+              "referenceInk": 1727,
+              "score": 45.73960463531016,
+              "ssim": 0.9940535724281254,
+              "ssimRaw": 0.9940535724281254
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "da7e234d702599e6582c05f95e0c339f473dde71b0056f4f6e3d2108bab81392",
+          "pageMapDigest": "94e17e66dec29f13f61ee570b9b7913a36be20972d73fef2d5565fe9680d76de",
+          "files": {
+            "1-candidate.png": "a4774b5e404d91bacb365e8f613bbc02d44c325f5ee5dbbcf87ba4e55acb2e29",
+            "1-overlay.png": "70d89715b264d42dbdf77886ab372f727e0e8df520be5e52982bf7a667a5ddb9",
+            "1-reference.png": "873348877cb90610f20a18e5894216a85cfcaea466f944321d93eb48ee879f36",
+            "candidate.pdf": "e6760c4581202375d400d02a6687d23d9c3c531b5e9e90f8437689a944e2a4f9",
+            "evidence.json": "030330c536f7e114b0f67c7ab96d909c467b3abc37561a149acbb4247f5c303d",
+            "production.json": "83395732c623c7dd343af361f7f0bf971df6c301d7750b1904e885a873697f2b",
+            "reference.pdf": "ecd69d29ab1c6155497e3cd7869e467f8caf7a345d0d9bb87b4bda01a48a6247"
+          }
+        },
+        "textboxes-vml-header-separate-control": {
+          "score": 57.751873917511695,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1735,
+              "close": false,
+              "inkF1": 0.577518739175117,
+              "pixelMismatch": 0.003096219548425431,
+              "precision": 0.590778097982709,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "33097143303a231da0120c44a1623b0dea5a2778972ea1dc4b11144c291fb527",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "bc8d977cecc122c3a2e37cb22fc451cbe37eacfd1815bc87c73a9e29ff820b2c",
+                "width": 816
+              },
+              "recall": 0.5648414985590778,
+              "referenceInk": 1735,
+              "score": 57.751873917511695,
+              "ssim": 0.9934752734549407,
+              "ssimRaw": 0.9934752734549407
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "93de9f78d07397e7f5ce640610a5dfcd6998885baf6787cd68b02b5db7e7d1f0",
+          "pageMapDigest": "bdb57c0cdcdf51e37be2553cd5512665d1f4ec50047f862b9cf39b84edc38f87",
+          "files": {
+            "1-candidate.png": "a3716ed1554575f9910f12763b11dad9824fb975affdd3750924f98b50e158a4",
+            "1-overlay.png": "4097939a5ecdb114980d90cd3215e9232460cf339765f3a2ed29416a4e198248",
+            "1-reference.png": "80712cef24802531426a76af63613240c64b420499f4fa3201e848c07764c3ce",
+            "candidate.pdf": "f7e6ec1467e19c2b5102e13847f8de6cc19957455886e646cfee4498627aab51",
+            "evidence.json": "ca62c2178cf256e509593f4c2990271ff1d738a50f90f74878e31041cfd94a4c",
+            "production.json": "a62641ae5b53cd877c5ec421623490adda2e1db9349229937baafb367f76128b",
+            "reference.pdf": "4476cbf0a9af6de22072f81da41a1970bd5a9f93abe118d42e21b22f260cc361"
+          }
+        }
+      }
+    },
+    "candidate": {
+      "runUrl": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/41180964319",
+      "artifactId": 13035062486,
+      "artifactZipSha256": "ad8632f8cb07ab40b4153f628a88642af8826b6ab13440f19350c07cd7505f6f",
+      "coreCommit": "0d5655f328d22c043b1aa6db6ea7471271ff1909",
+      "resultSha256": "e9e32eb24e178de955a17953f94dd52015b3461309cf1ecd438502be547f5cb3",
+      "selectedManifestSha256": "cc1d4e9f8e00b82af352733c4c8e0be57842b490e18d0e0d748bacf5ad7fcd79",
+      "contractDigest": "41d8aa49f1a4f78375681da896ab543c72f0e8913f59e25aa1bb3a188e8aa980",
+      "referenceBundleSha256": "853f11fa854258738f52770979bb3ac8320737b2097f818e7efbe4ba97f9590e",
+      "calibrationResultSha256": "3ae3e773cc1d4405edf663f52bfb294be4f537efb90a680f64b9f7c0208e6d9f",
+      "calibrationSummary": {
+        "categoryMeans": {
+          "paragraphs": 100.0
+        },
+        "closeMatchRate": 1.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 6,
+        "required": 6,
+        "score": 100.0
+      },
+      "summary": {
+        "categoryMeans": {
+          "paragraphs": 85.9100861192498
+        },
+        "closeMatchRate": 0.6666666666666666,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 6,
+        "required": 6,
+        "score": 85.9100861192498
+      },
+      "cases": {
+        "textboxes-vml-body-group": {
+          "score": 99.98919222011884,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleNorthLabel",
+                "tolerancePt": 0.75,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleSouthLabel",
+                "tolerancePt": 0.75,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1735,
+              "close": true,
+              "inkF1": 1.0,
+              "pixelMismatch": 0.000883142082590612,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "33097143303a231da0120c44a1623b0dea5a2778972ea1dc4b11144c291fb527",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "ca742c328cf571acc123454ccbbdec8d1c296e7da20f649cdd4bd8b2b3686653",
+                "width": 816
+              },
+              "recall": 1.0,
+              "referenceInk": 1727,
+              "score": 99.98919222011884,
+              "ssim": 0.9998919222011884,
+              "ssimRaw": 0.9998919222011884
+            }
+          ],
+          "coreTree": "690e9e3b7bb30e62617351cbdb3287abe8fe5324",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "77a80ef87b812440471370b84e7e442726f7812dc38fd7d730873d23572df1e9",
+          "pageMapDigest": "2848c0466a964af52bb06a30d371367478f98dceb2b1b367b2dcad6ff9fa5924",
+          "files": {
+            "1-candidate.png": "a3716ed1554575f9910f12763b11dad9824fb975affdd3750924f98b50e158a4",
+            "1-overlay.png": "d2953966a51622888069a5d6132f60ab408025f0e733e754655a4ebc1391a97a",
+            "1-reference.png": "873348877cb90610f20a18e5894216a85cfcaea466f944321d93eb48ee879f36",
+            "candidate.pdf": "ab5b995ffb07e7301e6527580a1bbcd1590124d6971ed3f6832ef5849ca577c6",
+            "evidence.json": "340c151fbc72ded5cd4f835b3ea84cb736fc7a9fdb1f5e0caaa4e564c1937186",
+            "production.json": "d95095af2aa1ad1735185d25d61f510009ac9c7c1b571ef0abc40733d88bb8fb",
+            "reference.pdf": "2c1bff557aa956ba2d689492105369520ec91f74de8c401633a64b81757b304f"
+          }
+        },
+        "textboxes-vml-body-nested": {
+          "score": 99.98919222011884,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleNorthLabel",
+                "tolerancePt": 0.75,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleSouthLabel",
+                "tolerancePt": 0.75,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1735,
+              "close": true,
+              "inkF1": 1.0,
+              "pixelMismatch": 0.000883142082590612,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "33097143303a231da0120c44a1623b0dea5a2778972ea1dc4b11144c291fb527",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "ca742c328cf571acc123454ccbbdec8d1c296e7da20f649cdd4bd8b2b3686653",
+                "width": 816
+              },
+              "recall": 1.0,
+              "referenceInk": 1727,
+              "score": 99.98919222011884,
+              "ssim": 0.9998919222011884,
+              "ssimRaw": 0.9998919222011884
+            }
+          ],
+          "coreTree": "690e9e3b7bb30e62617351cbdb3287abe8fe5324",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "ddd2047e909fe0abf07af836c89fa68103f2b740dfa2a2364df52a3438d7ecda",
+          "pageMapDigest": "b784afa9ffce4d1713353ebbafe99911e9e7838594016f5267f0cd528e1b09b8",
+          "files": {
+            "1-candidate.png": "a3716ed1554575f9910f12763b11dad9824fb975affdd3750924f98b50e158a4",
+            "1-overlay.png": "d2953966a51622888069a5d6132f60ab408025f0e733e754655a4ebc1391a97a",
+            "1-reference.png": "873348877cb90610f20a18e5894216a85cfcaea466f944321d93eb48ee879f36",
+            "candidate.pdf": "ec22ba02c64035d5798fc701164c923bb9c93fd4e5bde6abd85af06ed90dcbd7",
+            "evidence.json": "6d9f08a6541fe88ba467b0c48b2a1ecdda76e2a831de8c7bb68ce662cfa092bc",
+            "production.json": "02b1897001431d0b694fdc55fa5f395a49390c51dc268301082333a6eb633fb5",
+            "reference.pdf": "3c1625746f7695a98f5a400d1fb4af2bc6d1dbd4b2d46e5cc8a9ba01bee469b0"
+          }
+        },
+        "textboxes-vml-body-separate-control": {
+          "score": 57.751873917511695,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1735,
+              "close": false,
+              "inkF1": 0.577518739175117,
+              "pixelMismatch": 0.003096219548425431,
+              "precision": 0.590778097982709,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "33097143303a231da0120c44a1623b0dea5a2778972ea1dc4b11144c291fb527",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "bc8d977cecc122c3a2e37cb22fc451cbe37eacfd1815bc87c73a9e29ff820b2c",
+                "width": 816
+              },
+              "recall": 0.5648414985590778,
+              "referenceInk": 1735,
+              "score": 57.751873917511695,
+              "ssim": 0.9934752734549407,
+              "ssimRaw": 0.9934752734549407
+            }
+          ],
+          "coreTree": "690e9e3b7bb30e62617351cbdb3287abe8fe5324",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "8b55931c515861b18f627337d72b1ecb73975bfe8bd60528742b67433ef4ee51",
+          "pageMapDigest": "3d43f3abfe148c55babe40348f2106dc04671730a0aea8960a694844ee8b2607",
+          "files": {
+            "1-candidate.png": "a3716ed1554575f9910f12763b11dad9824fb975affdd3750924f98b50e158a4",
+            "1-overlay.png": "4097939a5ecdb114980d90cd3215e9232460cf339765f3a2ed29416a4e198248",
+            "1-reference.png": "80712cef24802531426a76af63613240c64b420499f4fa3201e848c07764c3ce",
+            "candidate.pdf": "9b9aaef7f984c883a268cdacc87ead3062d18e5c21878c6b394e08e962253205",
+            "evidence.json": "030b95ab3106f32c72fea86b6c4f2b1d0f64e0b5b6e86d9aa5525f4d58aa8332",
+            "production.json": "7042ea2d492c58c64808e55ad8cb742f9a22d68f30a9c471970ab3b7487b22c4",
+            "reference.pdf": "388d67faa7bc12857165226334a1fd0e57476aac46ecd36f9ce3e9f879af5659"
+          }
+        },
+        "textboxes-vml-header-group": {
+          "score": 99.98919222011884,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleNorthLabel",
+                "tolerancePt": 0.75,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleSouthLabel",
+                "tolerancePt": 0.75,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1735,
+              "close": true,
+              "inkF1": 1.0,
+              "pixelMismatch": 0.000883142082590612,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "33097143303a231da0120c44a1623b0dea5a2778972ea1dc4b11144c291fb527",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "ca742c328cf571acc123454ccbbdec8d1c296e7da20f649cdd4bd8b2b3686653",
+                "width": 816
+              },
+              "recall": 1.0,
+              "referenceInk": 1727,
+              "score": 99.98919222011884,
+              "ssim": 0.9998919222011884,
+              "ssimRaw": 0.9998919222011884
+            }
+          ],
+          "coreTree": "690e9e3b7bb30e62617351cbdb3287abe8fe5324",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "0d1de2a5f6726ba4db7944804b41c2a4653dd51ce82b760987bb5b5f470387bf",
+          "pageMapDigest": "4d876509017cd8b49f40dc97c76fc62d4a3e855b2120e89b6e6c21797df79ecb",
+          "files": {
+            "1-candidate.png": "a3716ed1554575f9910f12763b11dad9824fb975affdd3750924f98b50e158a4",
+            "1-overlay.png": "d2953966a51622888069a5d6132f60ab408025f0e733e754655a4ebc1391a97a",
+            "1-reference.png": "873348877cb90610f20a18e5894216a85cfcaea466f944321d93eb48ee879f36",
+            "candidate.pdf": "bfaa9727f6dae10a9c254d76d3eaa3338cf82893a99cbdfe93766a1bf83332b2",
+            "evidence.json": "81fa3ae34cf78e59a742b9a24601d6ef2eda6c05868a3a5c5b237c52f25b6022",
+            "production.json": "6097292bfaa11722a4b7292d5ad12b4a553e1d46ce8341bcc6ae9786a5f13bcd",
+            "reference.pdf": "27dc3820c3457aa67549b97bd5642dd0894a41b8cf4eaba99f8291838d6ef811"
+          }
+        },
+        "textboxes-vml-header-nested": {
+          "score": 99.98919222011884,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleNorthLabel",
+                "tolerancePt": 0.75,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleSouthLabel",
+                "tolerancePt": 0.75,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1735,
+              "close": true,
+              "inkF1": 1.0,
+              "pixelMismatch": 0.000883142082590612,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "33097143303a231da0120c44a1623b0dea5a2778972ea1dc4b11144c291fb527",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "ca742c328cf571acc123454ccbbdec8d1c296e7da20f649cdd4bd8b2b3686653",
+                "width": 816
+              },
+              "recall": 1.0,
+              "referenceInk": 1727,
+              "score": 99.98919222011884,
+              "ssim": 0.9998919222011884,
+              "ssimRaw": 0.9998919222011884
+            }
+          ],
+          "coreTree": "690e9e3b7bb30e62617351cbdb3287abe8fe5324",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "da7e234d702599e6582c05f95e0c339f473dde71b0056f4f6e3d2108bab81392",
+          "pageMapDigest": "b5577bc0deaed74e60cf518b620e4c1edf199e5fcf298605881bcff9f8480ce7",
+          "files": {
+            "1-candidate.png": "a3716ed1554575f9910f12763b11dad9824fb975affdd3750924f98b50e158a4",
+            "1-overlay.png": "d2953966a51622888069a5d6132f60ab408025f0e733e754655a4ebc1391a97a",
+            "1-reference.png": "873348877cb90610f20a18e5894216a85cfcaea466f944321d93eb48ee879f36",
+            "candidate.pdf": "c2ab5cd760d6ae8911fc58afa7d619f5090564d9dab9f20dda7a707f7e9e039c",
+            "evidence.json": "e782e796b25aa29dc359e039972507e5a1ad6715ccdb73dca4711ac69dbb6097",
+            "production.json": "707b288f76791fa33e0b20d38c6ff3641cd0e17140a151750533515c3f9c3b14",
+            "reference.pdf": "d8b0f020ca519c5eb5e81b2457722773c44c3975afe84875e3ce78f2e4dc1b03"
+          }
+        },
+        "textboxes-vml-header-separate-control": {
+          "score": 57.751873917511695,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1735,
+              "close": false,
+              "inkF1": 0.577518739175117,
+              "pixelMismatch": 0.003096219548425431,
+              "precision": 0.590778097982709,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "33097143303a231da0120c44a1623b0dea5a2778972ea1dc4b11144c291fb527",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "bc8d977cecc122c3a2e37cb22fc451cbe37eacfd1815bc87c73a9e29ff820b2c",
+                "width": 816
+              },
+              "recall": 0.5648414985590778,
+              "referenceInk": 1735,
+              "score": 57.751873917511695,
+              "ssim": 0.9934752734549407,
+              "ssimRaw": 0.9934752734549407
+            }
+          ],
+          "coreTree": "690e9e3b7bb30e62617351cbdb3287abe8fe5324",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "93de9f78d07397e7f5ce640610a5dfcd6998885baf6787cd68b02b5db7e7d1f0",
+          "pageMapDigest": "9516d282cb0136bd1dc922abb5dcf65b77e92737d891565469b7e4aa9a747648",
+          "files": {
+            "1-candidate.png": "a3716ed1554575f9910f12763b11dad9824fb975affdd3750924f98b50e158a4",
+            "1-overlay.png": "4097939a5ecdb114980d90cd3215e9232460cf339765f3a2ed29416a4e198248",
+            "1-reference.png": "80712cef24802531426a76af63613240c64b420499f4fa3201e848c07764c3ce",
+            "candidate.pdf": "74c2ac437fb2fc9d3550ec68ff68bc056315117307b98b6da0272c156d71e433",
+            "evidence.json": "6643262d6ae06d7027c9cdaddbf48ed61c5da418f21889ec837d4d872ed04257",
+            "production.json": "339778307ef8faea9ce9c93252e4ca6bb78c243f3bc858fc55a173f6e8243c9d",
+            "reference.pdf": "a68d9982fd4c683fc0fd3bae7766ea425b53b21c3bc63f970c464483b9ff2ed5"
+          }
+        }
+      }
+    }
+  },
+  "controls": {
+    "textboxes-vml-body-separate-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "textboxes-vml-header-separate-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    }
+  },
+  "screenshots": {
+    "textboxes-vml-body-group-production.png": "0635bb5e5102b4acbfbf4b8bc482dc3a995b7dcbb88efeaf878a6503a909b912",
+    "textboxes-vml-body-nested-production.png": "7c3de3bf66b95c0f023acc5f4a228ea0c4ffc16ab483235a006e5b2b5a6b30c9",
+    "textboxes-vml-body-separate-control-production.png": "12ab208ca49d80d8cb9311a0df3933934228137d2f6f211ba6fbc405dc381243",
+    "textboxes-vml-header-group-production.png": "dd0bd9a986edb9ef71112fa30781b8a4f6e0ba0eb76450da339d36241caa869f",
+    "textboxes-vml-header-nested-production.png": "aa3a19043416f3272a1b93d2a5851e8241509e7b25e4dfdb5ba4e06123fff1a3",
+    "textboxes-vml-header-separate-control-production.png": "e866e07912db2e1792346b110dcf398a15ea0a7e591d07ff7dc97f74a6b60008"
+  },
+  "screenshotMethod": "Complete96-DPI production page rasters, displayed at75% with generated labels; no crop or content editing.",
+  "scripts": {
+    "record-production.py": "619e7fbe49065081bf99531cfe2b3fe1b9a8fd66882587b851d0255d0cc5b2a4",
+    "production-sheets.cjs": "d9a9cd33d77e515280b47ef57e0e9043c80a33b16d7393ecf502b56d63658c05",
+    "finalize-production.py": "51abb2d867130cf8b339544427882b718bbe97f1a8533bee4bbed20ba8c63014"
+  }
+}

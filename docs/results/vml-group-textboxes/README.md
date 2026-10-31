@@ -10,21 +10,31 @@ label's position fails even though its token counts match. Independent review al
 the broad regions accepted an ignored nested origin; the added native-position checks reject
 that actual browser mutation, including either axis independently.
 
-Local diagnostics use native converter assemblies and fresh pagination bundles at main
-`1240cc5dc0586293cb937c59c973550027c31fda` and candidate
-`0d5655f328d22c043b1aa6db6ea7471271ff1909`, plus LibreOffice 25.8.7.3.
-These captures are not production standalone exports. Production measurements are pending;
-no fresh Word reference is claimed. [The report](local-evidence.json) binds inputs, libraries,
-bundles, PDFs, raster pages, checks, schema findings, scripts, installed fonts and screenshots.
+Production public WASM exports at main `1240cc5dc0586293cb937c59c973550027c31fda` and
+candidate `0d5655f328d22c043b1aa6db6ea7471271ff1909` are complete:
+[main run](https://github.com/JSv4/docx-fidelity-bench/actions/runs/41180966026),
+[candidate run](https://github.com/JSv4/docx-fidelity-bench/actions/runs/41180964319).
+Both native calibrations score 100. All six candidate cases pass every mandatory check;
+main fails all four group reproducers. Grouped/nested candidate scores are 99.98919222011884.
+Both separate-box controls retain byte-identical complete page rasters and the same
+57.751873917511695 score before and after; their existing native inset difference is described below.
+No fresh Word reference is claimed. No PDF-byte or HTML/PageMap-payload identity is claimed.
+[Production evidence](production-evidence.json) binds the exact sources, artifacts, PDFs, checks,
+metrics, PageMap digests, runtime builds and screenshots.
+
+Local native-facade/browser diagnostics at the same commits independently reproduced the behavior.
+[The local report](local-evidence.json) records all inputs, libraries, bundles, PDFs, raster pages,
+checks, schema findings, scripts, installed fonts and screenshots. These local captures are
+separate from the production standalone exports above.
 
 | Case | Main | Candidate and LibreOffice |
 |---|---|---|
-| [textboxes-vml-body-group](textboxes-vml-body-group.png) | Second label absent; first label misplaced | All mandatory checks pass |
-| [textboxes-vml-body-nested](textboxes-vml-body-nested.png) | Second label absent; first label misplaced | All mandatory checks pass |
-| [textboxes-vml-body-separate-control](textboxes-vml-body-separate-control.png) | Pass; complete raster unchanged | All mandatory checks pass |
-| [textboxes-vml-header-group](textboxes-vml-header-group.png) | Second label absent; first label misplaced | All mandatory checks pass |
-| [textboxes-vml-header-nested](textboxes-vml-header-nested.png) | Second label absent; first label misplaced | All mandatory checks pass |
-| [textboxes-vml-header-separate-control](textboxes-vml-header-separate-control.png) | Pass; complete raster unchanged | All mandatory checks pass |
+| [textboxes-vml-body-group](textboxes-vml-body-group-production.png) | Second label absent; first label misplaced | All mandatory checks pass |
+| [textboxes-vml-body-nested](textboxes-vml-body-nested-production.png) | Second label absent; first label misplaced | All mandatory checks pass |
+| [textboxes-vml-body-separate-control](textboxes-vml-body-separate-control-production.png) | Pass; complete raster unchanged | All mandatory checks pass |
+| [textboxes-vml-header-group](textboxes-vml-header-group-production.png) | Second label absent; first label misplaced | All mandatory checks pass |
+| [textboxes-vml-header-nested](textboxes-vml-header-nested-production.png) | Second label absent; first label misplaced | All mandatory checks pass |
+| [textboxes-vml-header-separate-control](textboxes-vml-header-separate-control-production.png) | Pass; complete raster unchanged | All mandatory checks pass |
 
 The two separate-box controls retain byte-identical complete main/candidate page rasters.
 LibreOffice applies a roughly 4.4 pt text inset to separate boxes despite their zero-inset

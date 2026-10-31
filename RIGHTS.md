@@ -306,3 +306,5 @@ The six grouped-VML-textbox cases for Docxodus #1482 contain original Maple labe
 VML/WordprocessingML authored in `bench/fixtures.py`. They import no renderer fixture, external
 document, image or font program. Labeled review screenshots under `docs/results/vml-group-textboxes/`
 show only these authored inputs rendered by separately provisioned LibreOffice and Docxodus.
+The production sheets show the same original inputs from CI runs 41180966026 and 41180964319;
+no authentication data, external document content or standalone font program is included.
