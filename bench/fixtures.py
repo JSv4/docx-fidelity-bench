@@ -3862,7 +3862,57 @@ def generate():
             relations_extra=[] if header else [relation], content_types_extra='' if extension == 'png' else
                 f'<Default Extension="{extension}" ContentType="image/{"x-wmf" if extension == "wmf" else extension}"/>',
             assertions=assertions)
-    registry = {'schema': 1, 'suite': {'id': 'core-v86', 'version': 86, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Docxodus #1486: independent Hemlock labels on exact 12 pt lines. Fixed line
+    # lengths isolate section geometry from native engines' different word wrapping.
+    margin_styles = ruby_styles.replace('w:lineRule="auto"', 'w:lineRule="exact"')
+    for change, spill in [(kind, False) for kind in ('same', 'next', 'paper-next', 'left', 'right', 'top', 'bottom')] + [
+            (kind, True) for kind in ('same', 'left', 'right', 'top', 'bottom')]:
+        def margin_section(second):
+            kind = 'nextPage' if not second or change in ('next', 'paper-next') else 'continuous'
+            paper = 14400 if second and change == 'paper-next' else 12240
+            margins = ' '.join(f'w:{side}="{2880 if second and change == side else 1440}"'
+                               for side in ('top', 'right', 'bottom', 'left'))
+            return (f'<w:sectPr><w:type w:val="{kind}"/><w:pgSz w:w="{paper}" w:h="15840"/>'
+                    f'<w:pgMar {margins} w:header="720" w:footer="720"/></w:sectPr>')
+        labels = [f'HemlockLine{i:03d}' for i in range(120)] if spill else ['HemlockArrival', 'HemlockEdge']
+        edges = (1, 54, 108) if spill else (1,)
+        body = para('HemlockOpening', margin_section(False))
+        body += ''.join(para(label, '<w:jc w:val="right"/>' if index in edges else '')
+                        for index, label in enumerate(labels))
+        left = 144 if change == 'left' else 72
+        right = 468 if change == 'right' else 648 if change == 'paper-next' else 540
+        def marker(label, page, top, first=False, edge=False):
+            # Independent Liberation Serif hmtx advances, 2048 units/em at 11 pt.
+            # The 0.75 pt bounds admit native rounding, not a displaced text column.
+            advance = {'HemlockOpening': 14560, 'HemlockArrival': 13421,
+                       'HemlockEdge': 11715}.get(label, 14332) * 11 / 2048
+            start = right - advance if edge else 72 if first else left
+            assertion = {'type': 'marker-region', 'marker': label, 'occurrence': 1,
+                         'page': page, 'rect': [start - .75, top - 2, start + advance + .75, top + 14]}
+            if change in ('left', 'right', 'top', 'bottom'):
+                # Native Word establishes immediate horizontal geometry and delayed
+                # vertical geometry. LO is retained as a scored visual comparison.
+                assertion['adjudicated'] = 'word'
+            return assertion
+        assertions = [marker('HemlockOpening', 1, 72, True)]
+        if spill:
+            next_top = 144 if change == 'top' else 72
+            next_count = 48 if change in ('top', 'bottom') else 54
+            assertions += [marker(labels[0], 1, 84), marker(labels[52], 1, 708),
+                           marker(labels[53], 2, next_top), marker(labels[100], 2, next_top + 47 * 12),
+                           marker(labels[53 + next_count], 3, next_top), marker(labels[1], 1, 96, edge=True),
+                           marker(labels[54], 2, next_top + 12, edge=True),
+                           marker(labels[108], 3, next_top + (55 - next_count) * 12, edge=True)]
+        else:
+            separate = change in ('next', 'paper-next')
+            assertions.append(marker(labels[0], 2 if separate else 1, 72 if separate else 84))
+            assertions.append(marker(labels[1], 2 if separate else 1, 84 if separate else 96, edge=True))
+        control = '-control' if change in ('same', 'next', 'paper-next') else ''
+        add('sections-margins-' + change + ('-spill' if spill else '') + control, 'sections',
+            'Hemlock continuous section margins: ' + change + (' across three pages' if spill else ' short flow')
+            + ' (Docxodus #1486)', ['HemlockOpening', *labels], body, margin_section(True),
+            styles_xml=margin_styles, assertions=assertions)
+    registry = {'schema': 1, 'suite': {'id': 'core-v87', 'version': 87, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

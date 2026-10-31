@@ -355,7 +355,35 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 578)
+        self.assertEqual(len(common.validate_registry()['cases']), 590)
+
+    def test_continuous_margin_pairs_isolate_geometry_and_keep_complete_labels(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        for spill in ('', '-spill'):
+            control = records['sections-margins-same' + spill + '-control']
+            with ZipFile(common.ROOT / control['input']) as package:
+                original = ET.fromstring(package.read('word/document.xml'))
+                styles = package.read('word/styles.xml')
+            self.assertEqual(len(control['tokens']), 121 if spill else 3)
+            for side in ('left', 'right', 'top', 'bottom'):
+                changed = records['sections-margins-' + side + spill]
+                self.assertEqual(changed['tokens'], control['tokens'])
+                with ZipFile(common.ROOT / changed['input']) as package:
+                    actual = ET.fromstring(package.read('word/document.xml'))
+                    self.assertEqual(package.read('word/styles.xml'), styles)
+                sections = actual.findall('.//' + w + 'sectPr')
+                self.assertEqual(len(sections), 2)
+                margins = sections[1].find(w + 'pgMar')
+                self.assertEqual(margins.get(w + side), '2880')
+                margins.set(w + side, '1440')
+                self.assertEqual(ET.tostring(actual), ET.tostring(original))
+                markers = changed['assertions']
+                self.assertEqual(len(markers), 9 if spill else 3)
+                self.assertEqual({m['page'] for m in markers}, {1, 2, 3} if spill else {1})
+                self.assertTrue(all(m.get('adjudicated') == 'word' for m in markers))
 
     def test_explicit_reference_manifest_rejects_changed_input_before_rendering(self):
         registry = common.read_json(common.ROOT / 'fixtures/manifest.json')
@@ -663,7 +691,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v86')
+        self.assertEqual(registry['suite']['id'], 'core-v87')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
