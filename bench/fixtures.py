@@ -4010,8 +4010,8 @@ def generate():
                                             'marker': marker, 'tolerancePt': 1.25})
         if leader:
             cases[-1]['pdfTextNormalization'] = 'isolated-dot-leaders-v1'
-    # Docxodus #1490: primary PDFs compare unchanged body layout; independently printed
-    # margin-profile companions must retain every source word, including off-viewport tails.
+    # Primary PDFs compare unchanged body layout. Margin (#1490) and endnote (#1505)
+    # companions must print every source word, including long paragraphs and replies.
     for name, count, notes, paragraphs, hidden in [
             ('single-30', 30, 1, False, False), ('single-900', 900, 1, False, False),
             ('paragraphs-30', 30, 1, True, False), ('many-notes', 2, 40, False, False),
@@ -4033,13 +4033,19 @@ def generate():
             topology = '<w15:commentsEx xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml">' + ''.join(
                 f'<w15:commentEx w15:paraId="{pid}"' + (f' w15:paraIdParent="{ids[i - 1]}"' if i else '') + '/>'
                 for i, pid in enumerate(ids)) + '</w15:commentsEx>'
-        add('comments-complete-' + name, 'paragraphs',
-            'Complete physical-margin PDF comments: ' + name.replace('-', ' ') + ' (Docxodus #1490)',
-            [body_text], body, styles_xml=comment_styles, comments_xml=''.join(comments), comments_extended_xml=topology)
-        cases[-1]['pdfCompanion'] = {'profile': {'review': 'final', 'comments': 'hidden' if hidden else 'margin'},
-                                     'pageSizePt': [612, 792],
-                                     'requiredTokens': dict(sorted(Counter(body_text.split() if hidden else source_words).items()))}
-        if hidden: cases[-1]['pdfCompanion']['exactInventory'] = True
+        profiles = ['hidden' if hidden else 'margin']
+        if name in ('single-30', 'single-900', 'paragraphs-30', 'nested-replies', 'short-control'):
+            profiles.append('endnotes')
+        for profile in profiles:
+            suffix = '-endnotes' if profile == 'endnotes' else ''
+            issue = 1505 if suffix else 1490
+            add('comments-complete-' + name + suffix, 'paragraphs',
+                f'Complete {profile} PDF comments: ' + name.replace('-', ' ') + f' (Docxodus #{issue})',
+                [body_text], body, styles_xml=comment_styles, comments_xml=''.join(comments), comments_extended_xml=topology)
+            cases[-1]['pdfCompanion'] = {'profile': {'review': 'final', 'comments': profile},
+                                         'pageSizePt': [612, 792],
+                                         'requiredTokens': dict(sorted(Counter(body_text.split() if hidden else source_words).items()))}
+            if hidden: cases[-1]['pdfCompanion']['exactInventory'] = True
     # #1491: a border wrapper must continue both beside the citation and on later pages.
     ash_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="20"/></w:rPr></w:rPrDefault></w:docDefaults></w:styles>'
     ash_body = 'AshBody The archive has one note.'
@@ -4222,7 +4228,7 @@ def generate():
                        'normal' if normal else 'around', separate=True)
         aster_case('header-overhang' + ('-normal-control' if normal else ''), 'header', 'normal' if normal else 'around', overhang=True)
         aster_case('header-table-clearance' + ('-normal-control' if normal else ''), 'header', 'normal' if normal else 'around', overhang=True, body_table=True)
-    registry = {'schema': 1, 'suite': {'id': 'core-v93', 'version': 93, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v94', 'version': 94, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

@@ -82,7 +82,7 @@ class PdfCompanionTests(unittest.TestCase):
 
     def test_fixtures_require_every_authored_body_and_comment_word(self):
         cases = {c['id']: c for c in common.validate_registry()['cases'] if c['id'].startswith('comments-complete-')}
-        self.assertEqual(len(cases), 7)
+        self.assertEqual(len(cases), 12)
         w = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
         for case in cases.values():
             with ZipFile(common.ROOT / case['input']) as archive:
@@ -90,6 +90,12 @@ class PdfCompanionTests(unittest.TestCase):
                 words = Counter(' '.join(t.text or '' for name in parts for t in ET.fromstring(archive.read(name)).iter(w + 't')).split())
                 self.assertEqual(case['pdfCompanion']['requiredTokens'], words)
         self.assertEqual(cases['comments-complete-single-900']['sha256'], cases['comments-complete-hidden-control']['sha256'])
+        endnotes = [c for c in cases.values() if c['pdfCompanion']['profile']['comments'] == 'endnotes']
+        self.assertEqual(len(endnotes), 5)
+        for case in endnotes:
+            original = cases[case['id'].removesuffix('-endnotes')]
+            self.assertEqual(case['sha256'], original['sha256'])
+            self.assertEqual(case['pdfCompanion']['requiredTokens'], original['pdfCompanion']['requiredTokens'])
 
     @unittest.skipUnless(all(shutil.which(name) for name in ('qpdf', 'pdftotext', 'pdffonts', 'pdftoppm')), 'Requires qpdf and Poppler')
     def test_real_pdf_requires_paint_and_rejects_extra_hidden_comment_text(self):
