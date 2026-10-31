@@ -3552,8 +3552,11 @@ def generate():
             texts.append('BottomLeft BottomRight')
         assertions = [{'type': 'marker-region', 'version': 2, 'marker': 'MergedLabel',
                        'occurrence': 1, 'page': 1, 'rect': [245, 60, 440, 150]}]
-        if shape == 'starter-grid-before':
+        if shape in ('grid-before', 'starter-grid-before'):
             assertions[0]['rect'] = [245, 80, 440, 102]
+            assertions.append({'type': 'marker-region', 'version': 2, 'marker': 'AfterTable',
+                               'occurrence': 1, 'page': 1, 'rect': [65, 110, 160, 135]})
+        if shape == 'starter-grid-before':
             assertions.append({'type': 'marker-region', 'version': 2, 'marker': 'BottomLeft',
                                'occurrence': 1, 'page': 1, 'rect': [65, 90, 160, 112]})
         add('tables-merge-grid-' + shape, 'tables',
