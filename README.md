@@ -1,5 +1,10 @@
 # DOCX fidelity bench
 
+`core-v86` adds ten original TIFF/WMF image cases and PNG controls for Docxodus #1484.
+Independent per-color bounds and paint coverage checks cover both figures, image sizing,
+headers and VML groups. [Native diagnostic evidence and all ten previews](docs/results/static-images/README.md)
+record Word/LibreOffice differences and the pending production-export measurements.
+
 `core-v78` adds an authored natural-line-height reproducer and exact-height control for
 [Firefox page-view overlap](docs/results/firefox-line-height/README.md) (Docxodus #1424).
 The fixtures are in the PDF track; a separate browser diagnostic checks their glyph overlap

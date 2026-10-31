@@ -54,6 +54,33 @@ generator and inspector digests distinguish these source declarations from histo
 
 Mandatory checks cover conversion, artifact digests, page count, physical MediaBox and CropBox coordinates within 0.25 PDF points, rotation, raster dimensions, the full visible token inventory including duplicate counts (visible text excludes the invisible Unicode bidirectional formatting controls U+061C, U+200E, U+200F and U+202A–U+202E, U+2066–U+2069; every other character, including letters, punctuation, soft hyphens and zero-width spaces, still counts unless the explicit decorative-leader policy below applies, and each normalized word keeps its raw extraction as evidence), declared font families, and each case's assertions. Physical box coordinates include UserUnit. Marker matching uses the same visible text and must be unique; ambiguity fails. Region assertion version 2 allows a declared 0.0001-point boundary tolerance for PDF coordinate serialization, about 0.000133 pixels at 96 DPI; version 1 retains exact boundaries. This does not shift or align rasters. Current assertions check named regions/page membership, markers sharing a page, and marker origins relative to the captured reference. The endnote origin uses 0.5-point tolerance and the reference page, so reference providers can use distinct endnote page layouts. An assertion marked `adjudicated: word` records layout measured in Word reference PDFs that LibreOffice does not follow. It binds every candidate and every Word reference. It does not bind a LibreOffice capture, either when deciding a LibreOffice reference's eligibility or when LibreOffice is measured against a LibreOffice track as calibration, so that track stays complete and its calibration stays at 100 while other candidates are held to Word's layout. On such a case, a candidate that follows Word is compared with LibreOffice pages that hold different lines, which caps its raster score there. Future link, reading order, precise baseline, and perceptual color assertions need explicit implementations and tests; they are not implied by this score.
 
+An authored image case may add a version-1 `color-reference-geometry` or `color-geometry` assertion. It declares
+one page and a non-gray RGB ink color on white. An independent 96-DPI Poppler raster scan
+collects that ink's unshifted bounds in points and fractional pixel coverage, including
+antialiasing. The three color channels must agree within 0.015 on the implied white-background
+blend; coverage below 0.05 is ignored to exclude negligible fringes. Grayscale pixels are excluded before matching, so black text and its antialias fringe
+do not qualify even for a nearly black declared ink. Unrelated colors are rejected. Both reference and candidate must have positive paint, their bounds
+must agree within the declared point tolerance, and their coverage ratio must agree within
+the declared fraction. The static-image cases use 1.5pt bounds tolerance (two raster pixels)
+and 8% coverage tolerance; both are additional mandatory checks, with hard schema maxima of
+2pt and 10%. They detect missing graphics, shifted/resized bounds and material pen-width loss.
+They do not prove pixel-for-pixel shape identity: unchanged full-page raster scores still
+measure all colors and contour differences. Source and inspector hashes bind this opt-in
+contract; cases without it keep their existing checks.
+
+The absolute `color-geometry` form declares positive `boundsPt` and `coverage` instead of
+following the reference's paint. It is explicitly Word-adjudicated and uses the existing
+provider rule above: candidates must satisfy it even when LibreOffice disagrees. The WMF
+expectations come from the original shape coordinates, pen width and authored picture
+placement. Native Word diagnostics establish device-pixel endpoint exclusion and scaling of
+the complete outline; the exact original WMF bytes were also captured in a DrawingML carrier.
+Rectangle stroke area is its centerline perimeter times pen width; ellipse perimeter uses
+Ramanujan's approximation (exact for the circular cases and negligible error for the near-circle
+anisotropic-window case), then scales to 96-DPI pixel coverage. Neither candidate output nor
+LibreOffice geometry supplies these constants. The Word VML carrier failed to paint, so these
+diagnostics adjudicate image semantics, not a registered whole-page Word reference. The 1.5pt
+and 8% limits are unchanged. LibreOffice differences remain visible in full-page raster scores.
+
 An authored case may opt into `pdfTextNormalization: "isolated-dot-leaders-v1"`. Source validation
 requires dot-leader tab definitions and actual tab characters (`w:tab` or U+0009 in `w:t`/`w:delText`),
 and rejects literal ASCII ellipses in Word-part XML text. Tabs in field instructions do not qualify. Only isolated extracted PDF words consisting of three or more
