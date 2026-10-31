@@ -355,7 +355,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 539)
+        self.assertEqual(len(common.validate_registry()['cases']), 544)
 
     def test_explicit_reference_manifest_rejects_changed_input_before_rendering(self):
         registry = common.read_json(common.ROOT / 'fixtures/manifest.json')
@@ -663,7 +663,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v79')
+        self.assertEqual(registry['suite']['id'], 'core-v80')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
@@ -785,6 +785,32 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(len(body.findall('.//' + w + 'endnoteReference')), int(kind == 'normal'))
             self.assertNotIn('RESERVED', record['tokens'])
             self.assertEqual(record['tokens'].get('i', 0), 2 if kind == 'normal' else 0)
+
+    def test_vertical_merge_cases_keep_the_same_logical_interval(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = [c for c in common.validate_registry()['cases']
+                   if c['id'].startswith('tables-merge-grid-')]
+        self.assertEqual(len(records), 5)
+        w = '{' + fixtures.W + '}'
+        for record in records:
+            with ZipFile(common.ROOT / record['input']) as archive:
+                table = ET.fromstring(archive.read('word/document.xml')).find('.//' + w + 'tbl')
+            intervals = []
+            for row in table.findall(w + 'tr'):
+                before = row.find(w + 'trPr/' + w + 'gridBefore')
+                column = int(before.get(w + 'val')) if before is not None else 0
+                for cell in row.findall(w + 'tc'):
+                    span = cell.find(w + 'tcPr/' + w + 'gridSpan')
+                    width = int(span.get(w + 'val')) if span is not None else 1
+                    if cell.find(w + 'tcPr/' + w + 'vMerge') is not None:
+                        intervals.append((column, width))
+                    column += width
+            self.assertEqual(intervals, [(2, 2 if record['id'].endswith('multi-column') else 1)] * 2)
+            self.assertEqual(record['htmlAssertions'][0]['equals'], '2')
+            self.assertEqual(record['assertions'][0]['marker'], 'MergedLabel')
+            self.assertEqual(record['tokens'].get('TopLeft', 0),
+                             0 if record['id'].endswith('starter-grid-before') else 1)
 
     def test_endnote_section_change_pair_changes_only_the_pending_change(self):
         w = '{' + fixtures.W + '}'
