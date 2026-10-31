@@ -31,8 +31,9 @@ both. It does not claim native tab parity.
 [Local evidence](local-evidence.json) binds exact inputs, core source, baseline revision,
 pagination bundle, HTML, PDFs and full-page rasters. These previews use the native .NET library
 and Chromium pagination, not a production WASM export. Production baseline/candidate scoring
-is pending. The source is based on main `1240cc5`; the pagination bundle includes the independently
-reviewed font-preservation repair at `d38ca66b`. Both controls are unchanged. All candidate
+is pending. The baseline is main `1240cc5`; the candidate is `1f7dc8dd`, stacked on the preceding fixes.
+The pagination bundle includes the independently reviewed font-preservation repair at `d38ca66b`;
+its TypeScript source is unchanged at the candidate revision. Both controls are unchanged. All candidate
 PDF mandatory checks and four checkbox pixel checks pass. Background-free and forced-colors
 Chromium prints have identical decoded page pixels to ordinary printing.
 
