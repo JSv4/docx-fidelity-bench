@@ -355,7 +355,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 550)
+        self.assertEqual(len(common.validate_registry()['cases']), 557)
 
     def test_explicit_reference_manifest_rejects_changed_input_before_rendering(self):
         registry = common.read_json(common.ROOT / 'fixtures/manifest.json')
@@ -663,7 +663,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v82')
+        self.assertEqual(registry['suite']['id'], 'core-v83')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET

@@ -3641,7 +3641,88 @@ def generate():
             stories=[('header', header), ('footer', footer)], styles_xml=inline_styles,
             assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'RouteTail', 'occurrence': 1,
                          'page': 1, 'rect': [350, 71, 446, 87]}])
-    registry = {'schema': 1, 'suite': {'id': 'core-v82', 'version': 82, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Docxodus #1481: deterministic properties and page-owned running headings.
+    def document_field(instruction, cached='', simple=False):
+        if simple:
+            attribute = escape(instruction, {'"': '&quot;'})
+            return f'<w:fldSimple w:instr="{attribute}">' + run(cached) + '</w:fldSimple>'
+        return ('<w:r><w:fldChar w:fldCharType="begin"/></w:r>'
+                f'<w:r><w:instrText xml:space="preserve"> {escape(instruction)} </w:instrText></w:r>'
+                '<w:r><w:fldChar w:fldCharType="separate"/></w:r>' + run(cached)
+                + '<w:r><w:fldChar w:fldCharType="end"/></w:r>')
+    field_styles = inline_styles.replace('<w:spacing w:after="120" w:line="276" w:lineRule="auto"/>',
+        '<w:spacing w:before="0" w:after="0" w:line="280" w:lineRule="exact"/>')
+    field_section = section().replace('<w:sectPr>', '<w:sectPr><w:headerReference w:type="default" r:id="rStory"/>'
+                                     '<w:footerReference w:type="default" r:id="rStory1"/>')
+    property_title = 'Juniper equipment register'
+    core_parts = {
+        'docProps/core.xml': '<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" '
+                            'xmlns:dc="http://purl.org/dc/elements/1.1/"><dc:title>' + property_title + '</dc:title></cp:coreProperties>',
+        '_rels/.rels': '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+                      f'<Relationship Id="rDocument" Type="{R}/officeDocument" Target="word/document.xml"/>'
+                      '<Relationship Id="rCore" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" '
+                      'Target="docProps/core.xml"/></Relationships>',
+    }
+    for control in (False, True):
+        cached = property_title if control else ''
+        def property_story(label, simple_title):
+            return (para(runs=run(label + 'Title:') + document_field('TITLE', cached, simple_title))
+                    + para(runs=run(label + 'Property:') + document_field('DOCPROPERTY Title', cached, not simple_title)))
+        texts = [label + kind + ':' + property_title for label in ('Body', 'Header', 'Footer') for kind in ('Title', 'Property')]
+        add('fields-property-' + ('cached-control' if control else 'uncached'), 'paragraphs',
+            ('Matching property caches control' if control else 'Uncached TITLE and DOCPROPERTY Title in simple/complex body and running stories')
+            + ' (Docxodus #1481)', texts, property_story('Body', True), field_section,
+            styles_xml=field_styles, stories=[('header', property_story('Header', False)), ('footer', property_story('Footer', True))],
+            extra_parts=core_parts, content_types_extra='<Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>',
+            assertions=[{'type': 'marker-region', 'marker': label + 'Title:Juniper', 'occurrence': 1, 'page': 1,
+                         'rect': [60, top, 540, bottom]} for label, top, bottom in [('Header', 25, 70), ('Body', 70, 115), ('Footer', 720, 770)]])
+    heading_styles = field_styles.replace('</w:styles>',
+        '<w:style w:type="paragraph" w:customStyle="1" w:styleId="JuniperChapter"><w:name w:val="Juniper Chapter"/>'
+        '<w:basedOn w:val="Normal"/><w:pPr><w:keepNext/></w:pPr><w:rPr><w:b/><w:sz w:val="28"/></w:rPr></w:style></w:styles>')
+    for shape in ('uncached', 'stale-cache', 'constant-control'):
+        second = 'ALDER SECTION' if shape == 'constant-control' else 'BIRCH SECTION'
+        cached = '' if shape == 'uncached' else 'ALDER SECTION'
+        body = para('ALDER SECTION', '<w:pStyle w:val="JuniperChapter"/>') + para('JuniperFirstBody')
+        body += para(second, '<w:pStyle w:val="JuniperChapter"/><w:pageBreakBefore/>') + para('JuniperSecondBody')
+        stories = [(kind, para(runs=run(label) + document_field('PAGE', '1', True) + run(':')
+                                  + document_field('STYLEREF "Juniper Chapter"', cached, simple)))
+                   for kind, label, simple in [('header', 'Running', False), ('footer', 'Closing', True)]]
+        texts = ['ALDER SECTION', 'JuniperFirstBody', second, 'JuniperSecondBody',
+                 'Running1:ALDER SECTION', 'Closing1:ALDER SECTION', 'Running2:' + second, 'Closing2:' + second]
+        # PAGE makes each printed field copy uniquely addressable without ambiguous repeated markers.
+        assertions = []
+        for page, marker, body_marker in [(1, 'ALDER', 'JuniperFirstBody'), (2, second.split()[0], 'JuniperSecondBody')]:
+            assertions.extend({'type': 'marker-region', 'marker': f'{label}{page}:{marker}', 'occurrence': 1, 'page': page,
+                               'rect': [60, top, 540, bottom]} for label, top, bottom in [('Running', 25, 60), ('Closing', 730, 770)])
+            assertions.append({'type': 'marker-region', 'marker': body_marker, 'occurrence': 1, 'page': page,
+                               'rect': [60, 80, 540, 120]})
+        add('fields-styleref-' + shape, 'paragraphs', 'Two-page paragraph-style running heading: ' + shape + ' (Docxodus #1481)',
+            texts, body, field_section, styles_xml=heading_styles, stories=stories, assertions=assertions)
+    long_heading = 'JUNIPER calibration record contains the detailed equipment inspection schedule for the northern laboratory and storage room'
+    small_section = ('<w:sectPr><w:headerReference w:type="default" r:id="rStory"/>'
+                     '<w:footerReference w:type="default" r:id="rStory1"/>'
+                     '<w:pgSz w:w="4560" w:h="4800"/><w:pgMar w:top="480" w:right="480" w:bottom="480" '
+                     'w:left="480" w:header="100" w:footer="100" w:gutter="0"/></w:sectPr>')
+    for control in (False, True):
+        first = long_heading if control else 'ALDER SECTION'
+        body = para(first, '<w:pStyle w:val="JuniperChapter"/>') + para('JuniperWrapFirst')
+        body += para(long_heading, '<w:pStyle w:val="JuniperChapter"/><w:pageBreakBefore/>')
+        rows = [f'JuniperWrapRow{i}' for i in range(1, 8)]
+        body += ''.join(para(row) for row in rows) + para('JuniperWrapTail')
+        header = para(runs=run('Running') + document_field('PAGE', '1', True) + run(':')
+                      + document_field('STYLEREF "Juniper Chapter"', first))
+        footer = para(runs=run('Closing') + document_field('PAGE', '1', True))
+        texts = [first, 'JuniperWrapFirst', long_heading, *rows, 'JuniperWrapTail',
+                 'Running1:' + first, 'Running2:' + long_heading, 'Running3:' + long_heading,
+                 'Closing1', 'Closing2', 'Closing3']
+        add('fields-styleref-wrapping' + ('-control' if control else ''), 'paragraphs',
+            ('Constant long-heading cache control' if control else 'Long page-two heading expands its running band and carries the body tail to page three')
+            + ' (Docxodus #1481)', texts, body, small_section, styles_xml=heading_styles,
+            stories=[('header', header), ('footer', footer)], assertions=[
+                {'type': 'marker-region', 'marker': 'Running2:JUNIPER', 'occurrence': 1, 'page': 2, 'rect': [20, 2, 210, 75]},
+                {'type': 'marker-region', 'marker': 'Running3:JUNIPER', 'occurrence': 1, 'page': 3, 'rect': [20, 2, 210, 75]},
+                {'type': 'marker-region', 'marker': 'JuniperWrapTail', 'occurrence': 1, 'page': 3, 'rect': [20, 60, 210, 150]}])
+    registry = {'schema': 1, 'suite': {'id': 'core-v83', 'version': 83, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

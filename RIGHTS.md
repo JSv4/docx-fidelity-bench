@@ -295,3 +295,8 @@ only these authored inputs and their native LibreOffice/local Docxodus renders, 
 Docxodus exports from CI runs 41171278328 and 41171275372. The HTML
 checkbox inspector retains small RGBA crops of these original controls, with hashes; no
 authentication material, external document content or standalone font program is included.
+
+The seven property/running-style cases for Docxodus #1481 use original Juniper text, metadata,
+and literal OOXML authored in `bench/fixtures.py`. They import no renderer fixture, document,
+image or font program. Review screenshots show only these authored inputs and their separately
+provisioned native LibreOffice and Docxodus renderings. No fresh Word reference is claimed.
