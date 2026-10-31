@@ -4,7 +4,9 @@ The six note-marker cases for Docxodus #1493 contain original Fir labels and lit
 authored in `bench/fixtures.py`. They import no renderer fixture, document content, image or
 font program. Times New Roman and Arial are separately provisioned under the existing font
 contract. Review sheets show only these original inputs rendered by separately provisioned
-tools; no native Word reference or font program is included.
+tools; no native Word reference or font program is included. The production sheets contain
+these same original inputs from CI runs 41206727404 and 41206728862, with generated refusal
+panels where no PDF was produced. They contain no authentication data or external document text.
 
 The twelve section-margin cases for Docxodus #1486 contain original Hemlock labels and
 literal section properties authored in `bench/fixtures.py`. They import no renderer fixtures,

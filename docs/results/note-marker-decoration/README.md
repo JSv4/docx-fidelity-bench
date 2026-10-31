@@ -39,3 +39,34 @@ Each sheet shows every page at 96 DPI and 100% scale; failure panels are labeled
 ![plain-control](notes-marker-decoration-plain-control.png)
 
 ![generated-control](notes-marker-decoration-generated-control.png)
+
+
+## Production comparison
+
+[Candidate run 41206727404](https://github.com/JSv4/docx-fidelity-bench/actions/runs/41206727404)
+measured exact core commit `ac4e6a329a2204d40cb00d3b753f1e35b8ddb528`.
+[Main run 41206728862](https://github.com/JSv4/docx-fidelity-bench/actions/runs/41206728862)
+measured `889d713e50a335d62eb50667b9fb0e09b12025b4`. Both use benchmark source
+`d6748c567d9a3c581a3a0060c98fb69e8d25d215` and independently calibrated LibreOffice
+references scoring 100. The candidate passes every mandatory check in all six cases;
+main refuses the three separator reproducers. All three control page PNGs and scores remain
+identical. All cases score below close-match thresholds: 82.632 for the five source-marker
+cases and 87.489 for the generated-marker control. Separator paint and superscript placement
+remain visibly different from LibreOffice; this fix restores complete export.
+
+`production-evidence.json` binds both immutable artifact ZIPs, exact source/runtime identities,
+inputs, PDF/raster hashes, complete checks and scores. `production-screenshots.json` binds each
+panel below to its actual CI artifact image or export refusal. Every PDF has one page and the
+sheets show it completely. No fresh Word reference is claimed.
+
+![Production 11pt](production-notes-marker-decoration-11pt.png)
+
+![Production 11pt5](production-notes-marker-decoration-11pt5.png)
+
+![Production 12pt-control](production-notes-marker-decoration-12pt-control.png)
+
+![Production 12pt5](production-notes-marker-decoration-12pt5.png)
+
+![Production plain-control](production-notes-marker-decoration-plain-control.png)
+
+![Production generated-control](production-notes-marker-decoration-generated-control.png)
