@@ -1,0 +1,1265 @@
+{
+  "kind": "local native facade and browser diagnostic; production export pending",
+  "baselineCommit": "1240cc5dc0586293cb937c59c973550027c31fda",
+  "candidateCommit": "b713506aa61efc26f03c58b4adb33d2c86fc1406",
+  "dpi": 96,
+  "cases": {
+    "ruby-center": {
+      "inputSha256": "956fa4e8fad192da13a56f0a6546eefe8e6836779e52b06c72da0f7dc1601324",
+      "renders": {
+        "libreoffice": {
+          "pdfSha256": "0b3ba0ccffb6f29685724fa1baf1c573346b552570bd2b2e75901f117c03567f",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ]
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "LARCH",
+                "tolerancePt": 1.25
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "needle",
+                "tolerancePt": 1.25
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "66f83818d24c393dad557ad3011e7603774a3076204a448cc28941cb86be31b1",
+              "pngSha256": "decf43398b30b29c0dac5804d1eb548ac2b3dc7fdc7ca0977ed4867d4d12c7d0",
+              "width": 400,
+              "height": 321
+            }
+          ]
+        },
+        "baseline": {
+          "pdfSha256": "5cd7abf612e5903cf430b0ec5f4a3d69679f6a2998a76dcbc741c92916c4c9bc",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": false,
+              "missing": {
+                "needle": 1
+              },
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": false,
+              "observed": [
+                "LiberationSerif",
+                "DejaVuSansMono"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": false,
+              "error": "Marker 'needle' must occur exactly once, found 0",
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ]
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": false,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "LARCH",
+                "tolerancePt": 1.25
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": false,
+              "error": "Marker 'needle' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "needle",
+                "tolerancePt": 1.25
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "b7b9c84dbfa1da07745f38ed5ec1e873fbdede6d7f78dcedc2c5b59b46b9edd2",
+              "pngSha256": "5140d51d5509dd4e6afaad45a70107e0d37df5e1abf72345e820280edbb4075e",
+              "width": 400,
+              "height": 320
+            }
+          ],
+          "htmlSha256": "10ade46d825728305a589cc12b96e649dada44d51a3b7d3e080d8f1c36c3ec03"
+        },
+        "candidate": {
+          "pdfSha256": "fd779b59b9d339945b8062f6e63054a427739909b6fc6b4559a0d9c84ec2c29d",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ]
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "LARCH",
+                "tolerancePt": 1.25
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "needle",
+                "tolerancePt": 1.25
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "982ab4d82ca6cca574cc47fbf42254639587e79e8e62715e7b17148e66284644",
+              "pngSha256": "680afb1259a78f79c51c37fb01b1b69343938de5ee75b98496520f941d720646",
+              "width": 400,
+              "height": 320
+            }
+          ],
+          "htmlSha256": "393fbba5a6520e4c436fd614c140ea4b57deaedf3b44dd31c77387b6ab561c90"
+        }
+      },
+      "controlRasterEqual": null
+    },
+    "ruby-multiple-base": {
+      "inputSha256": "daa4d6483756c68ada828616ed0deb00e45d6b49c416145251776af1f5f23dd8",
+      "renders": {
+        "libreoffice": {
+          "pdfSha256": "c1687bd5e9c4e57e50b2df2f0f33e169f9e5b8f31371dcdf2b3497c55a3ecbdd",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ]
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "LARCH",
+                "tolerancePt": 1.25
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "needle",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  94,
+                  29,
+                  126,
+                  38
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "f1d458af13f071d444db4544e3681452b4d76226e24cbf845460db868bb929e8",
+              "pngSha256": "0374f9cc4aaa8e357eccf8e587aa244eb94510b06687cd657e52ae0af4e94cc0",
+              "width": 400,
+              "height": 321
+            }
+          ]
+        },
+        "baseline": {
+          "pdfSha256": "5cd7abf612e5903cf430b0ec5f4a3d69679f6a2998a76dcbc741c92916c4c9bc",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": false,
+              "missing": {
+                "needle": 1
+              },
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": false,
+              "observed": [
+                "LiberationSerif",
+                "DejaVuSansMono"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": false,
+              "error": "Marker 'needle' must occur exactly once, found 0",
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ]
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": false,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "LARCH",
+                "tolerancePt": 1.25
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "error": "Marker 'needle' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-region",
+                "marker": "needle",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  94,
+                  29,
+                  126,
+                  38
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "b7b9c84dbfa1da07745f38ed5ec1e873fbdede6d7f78dcedc2c5b59b46b9edd2",
+              "pngSha256": "5140d51d5509dd4e6afaad45a70107e0d37df5e1abf72345e820280edbb4075e",
+              "width": 400,
+              "height": 320
+            }
+          ],
+          "htmlSha256": "63851074cc3516f59afca7cea3cc7bd8e9ff3ac2567a4ea2937501acfadfb575"
+        },
+        "candidate": {
+          "pdfSha256": "8a2b11a922e8b6acd236a9a1095f04139a33cff1a8c49a109638434d05f525cd",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ]
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "LARCH",
+                "tolerancePt": 1.25
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "needle",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  94,
+                  29,
+                  126,
+                  38
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "421d0a3e4d890c1cb408fee42dac9b912e8fb9dc874d20ec9155b65295365bcc",
+              "pngSha256": "28cee0a196039aa2b8ed16cd44e87fd91fdc05b77154d52a7424c857ffbaabb7",
+              "width": 400,
+              "height": 320
+            }
+          ],
+          "htmlSha256": "3ed92b33feb95bae08e6fec360924140ac0a0f08c58fef626bd2a0ec158ef53d"
+        }
+      },
+      "controlRasterEqual": null
+    },
+    "ruby-long": {
+      "inputSha256": "6c193dd05e15aa774c4d1451f15591d36b846f9575d53afadc0db947b056d0a7",
+      "renders": {
+        "libreoffice": {
+          "pdfSha256": "ab304b257807f59890ca519974e834e092ebae36b15a196809bdfd5c89996750",
+          "pageCount": 3,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ]
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "LARCH",
+                "tolerancePt": 1.25
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "needle",
+                "tolerancePt": 1.25
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "08ae0e3c3eff086d1e1e268b12d8cbdebbe7de0a3064e420f863f667fc87fdb5",
+              "pngSha256": "b878378a7e9b329bf7f316554107ddcda7047d842c3662109412f211cd053024",
+              "width": 400,
+              "height": 321
+            },
+            {
+              "ppmSha256": "4f65b6359df02c7ea20f32dacbc1b67b105465a72ae5c00562c453961681ba9a",
+              "pngSha256": "156d4f67fa824a6644d156c24bc2ebb311be3d2268e79a72c7725d6512e5406a",
+              "width": 400,
+              "height": 321
+            },
+            {
+              "ppmSha256": "de1216dd5ed1fc073632c6a583e111b5b2ebaf58101182f97bcd293fbe4cc27d",
+              "pngSha256": "8536ab7c85e33bf4d571eeb2529db351277f9738bac5c6855ecd779a6e75b1cc",
+              "width": 400,
+              "height": 321
+            }
+          ]
+        },
+        "baseline": {
+          "pdfSha256": "405350b9a2c773badb050406ca8dd3d25293dbaba49cfdfb3df132f5a6ffeef3",
+          "pageCount": 2,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": false
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": false,
+              "missing": {
+                "Nursery055": 1,
+                "Nursery056": 1,
+                "Nursery057": 1,
+                "Nursery058": 1,
+                "Nursery059": 1,
+                "Nursery060": 1,
+                "Nursery061": 1,
+                "Nursery062": 1,
+                "Nursery063": 1,
+                "Nursery064": 1,
+                "Nursery065": 1,
+                "Nursery066": 1,
+                "Nursery067": 1,
+                "Nursery068": 1,
+                "Nursery069": 1,
+                "Nursery070": 1,
+                "Nursery071": 1,
+                "Nursery072": 1,
+                "Nursery073": 1,
+                "Nursery074": 1,
+                "Nursery075": 1,
+                "Nursery076": 1,
+                "Nursery077": 1,
+                "Nursery078": 1,
+                "Nursery079": 1,
+                "Nursery080": 1,
+                "Nursery081": 1,
+                "Nursery082": 1,
+                "Nursery083": 1,
+                "Nursery084": 1,
+                "Nursery085": 1,
+                "Nursery086": 1,
+                "Nursery087": 1,
+                "Nursery088": 1,
+                "Nursery089": 1,
+                "Nursery090": 1,
+                "Nursery091": 1,
+                "Nursery092": 1,
+                "Nursery093": 1,
+                "Nursery094": 1,
+                "Nursery095": 1,
+                "Nursery096": 1,
+                "Nursery097": 1,
+                "Nursery098": 1,
+                "Nursery099": 1,
+                "Nursery100": 1,
+                "Nursery101": 1,
+                "Nursery102": 1,
+                "Nursery103": 1,
+                "Nursery104": 1,
+                "Nursery105": 1,
+                "Nursery106": 1,
+                "Nursery107": 1,
+                "Nursery108": 1,
+                "Nursery109": 1,
+                "Nursery110": 1,
+                "Nursery111": 1,
+                "Nursery112": 1,
+                "Nursery113": 1,
+                "Nursery114": 1,
+                "Nursery115": 1,
+                "Nursery116": 1,
+                "Nursery117": 1,
+                "Nursery118": 1,
+                "Nursery119": 1,
+                "Nursery120": 1,
+                "Nursery121": 1,
+                "Nursery122": 1,
+                "Nursery123": 1,
+                "Nursery124": 1,
+                "Nursery125": 1,
+                "Nursery126": 1,
+                "Nursery127": 1,
+                "Nursery128": 1,
+                "Nursery129": 1,
+                "Nursery130": 1,
+                "Nursery131": 1,
+                "Nursery132": 1,
+                "Nursery133": 1,
+                "Nursery134": 1,
+                "Nursery135": 1,
+                "Nursery136": 1,
+                "Nursery137": 1,
+                "Nursery138": 1,
+                "Nursery139": 1,
+                "Nursery140": 1,
+                "Nursery141": 1,
+                "Nursery142": 1,
+                "Nursery143": 1,
+                "Nursery144": 1,
+                "Nursery145": 1,
+                "Nursery146": 1,
+                "Nursery147": 1,
+                "Nursery148": 1,
+                "Nursery149": 1,
+                "needle": 1
+              },
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": false,
+              "observed": [
+                "LiberationSerif",
+                "DejaVuSansMono"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": false
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": false,
+              "error": "Marker 'needle' must occur exactly once, found 0",
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ]
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": false,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "LARCH",
+                "tolerancePt": 1.25
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": false,
+              "error": "Marker 'needle' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "needle",
+                "tolerancePt": 1.25
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "ae0a20dbc71a2d5ff4a72e7d88e6bcf8f82525751ef032808a1d97faeebde5de",
+              "pngSha256": "ead020011ba69c78e5b765dcffe3397a179ab5b9ec0529e88447b5579664f43b",
+              "width": 400,
+              "height": 320
+            },
+            {
+              "ppmSha256": "a9786f56b55b4bdfef04958b897072c6497f64a6ac2c316e9a674eb3d033ba40",
+              "pngSha256": "dcccefc96bd61893f28125e972b9ed34bbf0c6f3a5bafc43552feb843bb0e334",
+              "width": 400,
+              "height": 320
+            }
+          ],
+          "htmlSha256": "fbb728e61ebf12b23c162342eb5888a790afa90cae33b8fbe131053a3d753c4f"
+        },
+        "candidate": {
+          "pdfSha256": "ae46ccc18ac878b06eff1025c88f3c047ecee81f7bef374455b5fae9497554b9",
+          "pageCount": 3,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ]
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "LARCH",
+                "tolerancePt": 1.25
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "needle",
+                "tolerancePt": 1.25
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "a3d582f89faacf4dbed8989bc23414d761d5bf94a8a13be3cd57f6ebf81dcec4",
+              "pngSha256": "6a12c2e45e42cd8add4f480dfe8a2d92eba1bb9eae3000311e70db41957b58e9",
+              "width": 400,
+              "height": 320
+            },
+            {
+              "ppmSha256": "fe461f747f2e06df4c4392b16d8f93550a18301aed1b72c854188a01194f8d0b",
+              "pngSha256": "ec3a0ca4784918a610775cdd145971b6423d86c1a84f9a35de50a64911d6e093",
+              "width": 400,
+              "height": 320
+            },
+            {
+              "ppmSha256": "0af2dbd551e972146b57f7431544628c1abb6c3a479ac24db35963026c3eea98",
+              "pngSha256": "f5df8ecd17bd25835360cb945ee7af9c3a1e0d3c5072185d187da667c44741e0",
+              "width": 400,
+              "height": 320
+            }
+          ],
+          "htmlSha256": "fb575fe396452c2fda2e4f56246220d3886380422f5cec817a1552ae003d984b"
+        }
+      },
+      "controlRasterEqual": null
+    },
+    "ruby-plain-control": {
+      "inputSha256": "995a3a8b903e9a70bef0ad6002630b992a8f45b71eb3a21c272ebc126c2fbf40",
+      "renders": {
+        "libreoffice": {
+          "pdfSha256": "49f8ea731ce75b4ad70a99b858d88f759997e6c95a77e41d41a36b0562bec389",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ]
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "ba8b5241a17bafcfc39d14f5396877e649605773e664da215039e432ad5f4a3b",
+              "pngSha256": "9b89293ae9569f97e7c4de2898928d2eae351b6527c8a16e1aa1f771a3db127b",
+              "width": 400,
+              "height": 321
+            }
+          ]
+        },
+        "baseline": {
+          "pdfSha256": "cf888f4ee06f5e3ee3d50216174a6689162187d8c28ffb7ddcc6d8dc9b5eb105",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ]
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "7195de260593a47b43d239b7977076b33902a2b596d78746c68a9eee9e39b69f",
+              "pngSha256": "800962eda07c9c1f8007bd7f29a310b4d757eac11b0221936990be436f3c0e3d",
+              "width": 400,
+              "height": 320
+            }
+          ],
+          "htmlSha256": "dd06cf186d6344f1bbbdcf5c414181834135e03fe23ddfc2b3a111ae53ff23b0"
+        },
+        "candidate": {
+          "pdfSha256": "3c2f9cc4991f409f901d8b6f0b0f618976a658d20951a9167496bbc8ef202a74",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ]
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "7195de260593a47b43d239b7977076b33902a2b596d78746c68a9eee9e39b69f",
+              "pngSha256": "800962eda07c9c1f8007bd7f29a310b4d757eac11b0221936990be436f3c0e3d",
+              "width": 400,
+              "height": 320
+            }
+          ],
+          "htmlSha256": "dd06cf186d6344f1bbbdcf5c414181834135e03fe23ddfc2b3a111ae53ff23b0"
+        }
+      },
+      "controlRasterEqual": true
+    },
+    "ruby-long-plain-control": {
+      "inputSha256": "324f12432928e03d4fecbd44ba6304ed9e3448c77bef51bacacf5220c18cdf33",
+      "renders": {
+        "libreoffice": {
+          "pdfSha256": "0cf3f273a4b029b6d1d4e76fea977ed31e5ef232c29022c2305816ab87556699",
+          "pageCount": 3,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ]
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "4c5ddd22a3fad633721181253292e6ced5abef430c258fa4d33f847d06a961b4",
+              "pngSha256": "549fff8d7abd83739385996ad438f72c3e0de0c65649fcc20502d331ad42de5a",
+              "width": 400,
+              "height": 321
+            },
+            {
+              "ppmSha256": "02dbca7616f4448432aed8623f96a44b39c315cfdfe255c975aa43635c6dfae2",
+              "pngSha256": "8101682bddbcb346a9627bfc4395971d49ae164a2feede0d39f6e8fd8438c612",
+              "width": 400,
+              "height": 321
+            },
+            {
+              "ppmSha256": "c7128514d42806728de25eaaa5a379ec3679e5da27f7af5e5bc954e450098c39",
+              "pngSha256": "130e124828d1b2f9d8488476d838d38a70204788574dba4fd34816c7adda639b",
+              "width": 400,
+              "height": 321
+            }
+          ]
+        },
+        "baseline": {
+          "pdfSha256": "cd6399df61a23582bb27f580495f25a2d3b70d6d7e9f95ebe24d2d27ec9393aa",
+          "pageCount": 3,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ]
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "477455c6433ca6e4b4634eb7c541f5fe9dba92fdc034d7df10a6993e6355271b",
+              "pngSha256": "010115667ed0cc8793839d0a62dde90e6bf89cee175d6ecc2c4afca66b0cffd7",
+              "width": 400,
+              "height": 320
+            },
+            {
+              "ppmSha256": "fc702378cb7bfcb678996d604e62d164ea541a301ad39dbf43b5088f0828c9fd",
+              "pngSha256": "3fc7ab931372602f76a5a0bb36034028ac451b33d2daa41126cb57410a3e7bfb",
+              "width": 400,
+              "height": 320
+            },
+            {
+              "ppmSha256": "d984955a73485f61f2a174081ce5228de729f061d4696d72abffe93da722da76",
+              "pngSha256": "c895285db0fee0b77daca61520306da300788d86873822b963c769362281a55f",
+              "width": 400,
+              "height": 320
+            }
+          ],
+          "htmlSha256": "fba4ffe4d914d2b37b8d2007e76cd38af5923b2845e598cf20a65632b39d6adc"
+        },
+        "candidate": {
+          "pdfSha256": "f841ad718bb49a7e3d97d6ba112cdf690c547a914e76c5bbc3d7146d70c4422f",
+          "pageCount": 3,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ]
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "477455c6433ca6e4b4634eb7c541f5fe9dba92fdc034d7df10a6993e6355271b",
+              "pngSha256": "010115667ed0cc8793839d0a62dde90e6bf89cee175d6ecc2c4afca66b0cffd7",
+              "width": 400,
+              "height": 320
+            },
+            {
+              "ppmSha256": "fc702378cb7bfcb678996d604e62d164ea541a301ad39dbf43b5088f0828c9fd",
+              "pngSha256": "3fc7ab931372602f76a5a0bb36034028ac451b33d2daa41126cb57410a3e7bfb",
+              "width": 400,
+              "height": 320
+            },
+            {
+              "ppmSha256": "d984955a73485f61f2a174081ce5228de729f061d4696d72abffe93da722da76",
+              "pngSha256": "c895285db0fee0b77daca61520306da300788d86873822b963c769362281a55f",
+              "width": 400,
+              "height": 320
+            }
+          ],
+          "htmlSha256": "fba4ffe4d914d2b37b8d2007e76cd38af5923b2845e598cf20a65632b39d6adc"
+        }
+      },
+      "controlRasterEqual": true
+    }
+  },
+  "candidateWorkingTreeDirty": false,
+  "bindings": {
+    ".local-closeout/1480-evidence/baseline-bin/Docxodus.dll": "f54a04ae3349455229d4d785e69696ad97dd779af1cf0bffa6412d53cd90c432",
+    ".local-closeout/issue-1483/Docxodus.Tests/bin/Debug/net10.0/Docxodus.dll": "a413914de8ca2bf6388ed043ec44b79701b6c2b62438555e3cd509041154bda3",
+    ".local-closeout/1481-evidence/main-pagination.js": "0d9e4ec4481d0628032945778449c6c2ba4b1576f80e338c811ff28cb305186d",
+    ".local-closeout/issue-1483/npm/dist/pagination.bundle.js": "99df28c9d4b6f7b96cb2c8f542d71a6a73715a02b6897445a619650c754c4003"
+  },
+  "screenshots": {
+    "ruby-center.png": {
+      "sha256": "e7115e5fa13b147fa9f430ef6186a375f44e924d793c229222004d84bbfa1101",
+      "method": "All pages,75%of96DPI,HTMLlabels; bench-sheets.cjs"
+    },
+    "ruby-long-plain-control.png": {
+      "sha256": "ce7e90e26b6fd5f2efd44ac7ed7183680d76dce72686b23a63397bb719b9c642",
+      "method": "All pages,75%of96DPI,HTMLlabels; bench-sheets.cjs"
+    },
+    "ruby-long.png": {
+      "sha256": "0503984885254e764a67327cff5af38bde867e5fc719e6c9cc177adc1ae397ab",
+      "method": "All pages,75%of96DPI,HTMLlabels; bench-sheets.cjs"
+    },
+    "ruby-multiple-base.png": {
+      "sha256": "02d77f0033fa75e52339e6ee8d2e15974c3611ebaf03a756517c7901d235e9b2",
+      "method": "All pages,75%of96DPI,HTMLlabels; bench-sheets.cjs"
+    },
+    "ruby-plain-control.png": {
+      "sha256": "c4c84d58d944f6ddb83870eb7a283c7c9aa4c4e15cd8f0d00ab805ea906a4314",
+      "method": "All pages,75%of96DPI,HTMLlabels; bench-sheets.cjs"
+    }
+  },
+  "captureScripts": {
+    "bench-convert.py": "773d573e30f174c2e8bf080a4bacbe4a52d8033f8be22b3db635f59f8fa774ec",
+    "bench-render.cjs": "f1c218b0ab3e55e9453af3ca06d97db6946fc97471bb692c1334e877cf373b13",
+    "bench-measure.py": "2b0fd3726a35fe97331d41484ee5ab0bcf62dddb0f803d3a7e11681699e1784d",
+    "bench-sheets.cjs": "73e4ea6f8cb043142a28e41b25e9ae3fe2cf42b83684e3da20a384e9c701a3b7"
+  },
+  "wordBehaviorDiagnostic": {
+    "input": "../bench-1483/fixtures/ruby-multiple-base.docx",
+    "inputSha256": "daa4d6483756c68ada828616ed0deb00e45d6b49c416145251776af1f5f23dd8",
+    "pdf": "ruby-multiple-base.word.pdf",
+    "pdfSha256": "f01b6ac23ac944eb859274176c12eabae3fc86c53f8423fbea94e8ecd2a1eff2",
+    "capturedAtUtc": "2026-10-31T08:22:03.474793+00:00",
+    "guideCenterPt": 115.297,
+    "baseCenterPt": 115.1835,
+    "baseBaselinePt": 46.55,
+    "annotationBaselinePt": 35.52,
+    "fontLimitation": "Times New Roman substituted for requested Liberation Serif; behavioral diagnostic only",
+    "result": "Word centers the guide across the complete multi-run base; LibreOffice places it at the first run left edge."
+  },
+  "sdkValidation": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "documents": {
+      ".local-closeout/1483-evidence/core-fixtures/long-plain.docx": [],
+      ".local-closeout/1483-evidence/core-fixtures/long.docx": [],
+      ".local-closeout/1483-evidence/core-fixtures/multiple.docx": [],
+      ".local-closeout/1483-evidence/core-fixtures/plain.docx": [],
+      ".local-closeout/1483-evidence/core-fixtures/simple.docx": [],
+      ".local-closeout/1483-evidence/core-fixtures/tab.docx": [],
+      ".local-closeout/1483-evidence/core-fixtures/vertical.docx": [],
+      ".local-closeout/1483-evidence/core-fixtures/zero-raise.docx": [],
+      ".local-closeout/bench-1483/fixtures/ruby-center.docx": [],
+      ".local-closeout/bench-1483/fixtures/ruby-long-plain-control.docx": [],
+      ".local-closeout/bench-1483/fixtures/ruby-long.docx": [],
+      ".local-closeout/bench-1483/fixtures/ruby-multiple-base.docx": [],
+      ".local-closeout/bench-1483/fixtures/ruby-plain-control.docx": []
+    }
+  }
+}

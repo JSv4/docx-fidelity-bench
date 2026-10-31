@@ -1,5 +1,11 @@
 # Authorship and artifact rights
 
+The five ruby-guide cases for Docxodus #1483 are original Larch nursery text and literal OOXML
+authored in `bench/fixtures.py`. They contain no imported documents, images, or embedded fonts.
+The production sheets under `docs/results/ruby-annotations/` show these original inputs from
+CI runs 41184866924 and 41184896314, with generated failure panels where main produced no PDF.
+No external document content, authentication material or standalone font program is included.
+
 The endnote-font reproduction and section-sized control are original Willow text and literal
 OOXML authored in `bench/fixtures.py`, with no imported document content or embedded fonts.
 

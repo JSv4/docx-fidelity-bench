@@ -3757,7 +3757,35 @@ def generate():
                     + ([] if kind == 'separate-control' else [
                         {'type': 'marker-reference-position', 'version': 1, 'marker': label, 'tolerancePt': 0.75}
                         for label in ['MapleNorthLabel', 'MapleSouthLabel']]))
-    registry = {'schema': 1, 'suite': {'id': 'core-v84', 'version': 84, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Docxodus #1483: original Larch nursery labels, authored independently of renderer tests.
+    ruby_styles = inline_styles.replace('<w:spacing w:after="120" w:line="276" w:lineRule="auto"/>',
+        '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>').replace('w:sz w:val="24"', 'w:sz w:val="22"')
+    ruby_section = ('<w:sectPr><w:pgSz w:w="6000" w:h="4800"/><w:pgMar w:top="600" w:right="600" '
+                    'w:bottom="600" w:left="600" w:header="300" w:footer="300" w:gutter="0"/></w:sectPr>')
+    for shape in ('center', 'multiple-base', 'long', 'plain-control', 'long-plain-control'):
+        control, long = 'control' in shape, shape.startswith('long')
+        base = run('LA', '<w:b/>') + run('RCH') if shape == 'multiple-base' else run('LARCH')
+        # LibreOffice ignores hps without a matching run size and drops all but the last rt
+        # run. Keep this reference-compatible guide explicit; core export tests cover both.
+        guide = run('needle', '<w:sz w:val="12"/><w:szCs w:val="12"/>')
+        pair = run('LARCH needle') if control else ('<w:r><w:ruby><w:rubyPr><w:rubyAlign w:val="center"/>'
+            '<w:hps w:val="12"/><w:hpsRaise w:val="22"/><w:hpsBaseText w:val="22"/><w:lid w:val="en-US"/>'
+            '</w:rubyPr><w:rt>' + guide + '</w:rt><w:rubyBase>' + base + '</w:rubyBase></w:ruby></w:r>')
+        labels = [f'Nursery{i:03d}' for i in range(150)]
+        before, after = (' '.join(labels[:40]), ' '.join(labels[40:])) if long else ('LarchOpening', 'LarchClosing')
+        content = para(runs=run(before + ' ') + pair + run(' ' + after)) + para('LarchReceipt')
+        assertions = [{'type': 'same-page', 'version': 1, 'markers': ['LARCH', 'needle']}]
+        if not control:
+            # Word centers the guide over the complete multi-run base; LibreOffice places it
+            # at the first run's left edge. Its guide x-position is diagnostic for that case.
+            assertions += [{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 1.25}
+                           for marker in (('LARCH',) if shape == 'multiple-base' else ('LARCH', 'needle'))]
+            if shape == 'multiple-base':
+                assertions.append({'type': 'marker-region', 'marker': 'needle', 'occurrence': 1,
+                                   'page': 1, 'rect': [94, 29, 126, 38]})
+        add('ruby-' + shape, 'paragraphs', 'Phonetic guide retains its base and reading: ' + shape + ' (Docxodus #1483)',
+            [before, 'LARCH', 'needle', after, 'LarchReceipt'], content, ruby_section, styles_xml=ruby_styles, assertions=assertions)
+    registry = {'schema': 1, 'suite': {'id': 'core-v85', 'version': 85, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
