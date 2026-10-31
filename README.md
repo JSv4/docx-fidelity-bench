@@ -6,7 +6,7 @@ footer, cell, page-end, separate-carrier, edge-distance and header-overhang cont
 beside-frame layout and LibreOffice's ordinary paragraph flow. Complete inventories,
 page/position bounds and raster comparisons still apply. All 645 prior inputs and case
 declarations are preserved apart from their shared generator hash. [All 30 cases and labeled local comparisons](docs/results/inline-frames/README.md)
-are recorded; production comparison is pending. These cases do not claim exact Word raster parity.
+include completed production comparisons: candidate 30/30 versus main 15/30 mandatory checks, with 15 unchanged controls. These cases do not claim exact Word raster parity.
 
 `core-v92` adds twelve original textbox-fit cases for Docxodus #1492, covering omitted fit,
 theme defaults, local precedence and running stories. [All twelve cases and labeled previews](docs/results/textbox-fit/README.md)

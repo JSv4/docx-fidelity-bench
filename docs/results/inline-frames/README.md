@@ -14,7 +14,18 @@ All 30 packages have zero Open XML SDK 3.5.1 Microsoft365 findings. Inputs use o
 
 These are local public-export diagnostics, not production CI scores. Main used the tree-identical `8ba4e112` runtime; the candidate uses the twelve-file source snapshot and runtime asset hashes recorded in [local-evidence.json](local-evidence.json). Both invoke the public standalone HTML/PDF exporter with strict fonts, final review view, hidden comments and sandboxed Chromium. Exact inputs, PDFs, render reports, physical page geometry, extracted text and screenshot panels are hash-bound in that report.
 
-LibreOffice lays these inline frame paragraphs out as ordinary text. Native Word probes elsewhere in the product investigation show wrapping beside `around` frames and following text below `notBeside` frames. The benchmark therefore checks both valid arrangements without claiming identical pixels or a font-matched Word reference. These exact Aster inputs have no registered Word capture. Native spacing and placement probes and independent source review are complete; production CI remains pending. Positive interior offsets use diagnosed conservative one-sided wrapping; other unsupported anchors and vertical clearance use diagnosed ordinary-flow clearance. Strict unsupported-content policy refuses those approximations. Exact two-sided wrapping and preceding-line vertical reflow remain tracked in [Docxodus #1509](https://github.com/JSv4/Docxodus/issues/1509) and [#1510](https://github.com/JSv4/Docxodus/issues/1510). These cases test the disclosed output contract, not exact Word parity.
+LibreOffice lays these inline frame paragraphs out as ordinary text. Native Word probes elsewhere in the product investigation show wrapping beside `around` frames and following text below `notBeside` frames. The benchmark therefore checks both valid arrangements without claiming identical pixels or a font-matched Word reference. These exact Aster inputs have no registered Word capture. Native spacing and placement probes and independent source review are complete; production CI comparisons are complete (below). Positive interior offsets use diagnosed conservative one-sided wrapping; other unsupported anchors and vertical clearance use diagnosed ordinary-flow clearance. Strict unsupported-content policy refuses those approximations. Exact two-sided wrapping and preceding-line vertical reflow remain tracked in [Docxodus #1509](https://github.com/JSv4/Docxodus/issues/1509) and [#1510](https://github.com/JSv4/Docxodus/issues/1510). These cases test the disclosed output contract, not exact Word parity.
+
+## Production comparison
+
+Pinned production builds measured all 30 cases at [candidate run 41236923512](https://github.com/JSv4/docx-fidelity-bench/actions/runs/41236923512) and [main run 41236925335](https://github.com/JSv4/docx-fidelity-bench/actions/runs/41236925335). Both used benchmark commit `a326b908`, whose suite and assertions are unchanged by later evidence corrections. All references are eligible and both calibrations score 100.
+
+| Renderer | Mandatory checks | Score | Close matches |
+|---|---:|---:|---:|
+| Main `97c304f7` | 15 / 30 | 48.9663 | 14 / 30 |
+| Candidate `135504e1` | 30 / 30 | 85.2742 | 17 / 30 |
+
+All 15 control page-image sets and scores are identical. The independently captured reference bundles have different identities, but fresh full-page rasters of every reference PDF are byte-identical across runs. The harness omits comparison PNGs beyond a candidate's page count; this separate equality check renders every reference page. [Production evidence](production-evidence.json) binds exact inputs, commits, artifacts, PDF/render-report hashes, checks, calibration, and all 100 page panels. This is a measured improvement against LibreOffice, not exact native Word parity.
 
 ## What the checks prove
 
@@ -30,35 +41,35 @@ The assertions check selected word boxes rather than every glyph, full frame pai
 
 Each linked sheet includes every physical page at 96 DPI and 100% scale. Panels are neither cropped nor resampled; absent pages are labeled explicitly. The columns are LibreOffice, main and candidate.
 
-| Case / complete screenshot | Main | Candidate |
-|---|---|---|
-| [frames-inline-body-around](frames-inline-body-around.png) | Fail | Pass |
-| [frames-inline-body-below](frames-inline-body-below.png) | Fail | Pass |
-| [frames-inline-body-edge-distance](frames-inline-body-edge-distance.png) | Fail | Pass |
-| [frames-inline-body-edge-distance-normal-control](frames-inline-body-edge-distance-normal-control.png) | Pass | Pass |
-| [frames-inline-body-floating-control](frames-inline-body-floating-control.png) | Pass | Pass |
-| [frames-inline-body-normal-control](frames-inline-body-normal-control.png) | Pass | Pass |
-| [frames-inline-body-separated](frames-inline-body-separated.png) | Fail | Pass |
-| [frames-inline-body-separated-normal-control](frames-inline-body-separated-normal-control.png) | Pass | Pass |
-| [frames-inline-cell-around](frames-inline-cell-around.png) | Fail | Pass |
-| [frames-inline-cell-below](frames-inline-cell-below.png) | Fail | Pass |
-| [frames-inline-cell-floating-control](frames-inline-cell-floating-control.png) | Pass | Pass |
-| [frames-inline-cell-normal-control](frames-inline-cell-normal-control.png) | Pass | Pass |
-| [frames-inline-footer-around](frames-inline-footer-around.png) | Fail | Pass |
-| [frames-inline-footer-below](frames-inline-footer-below.png) | Fail | Pass |
-| [frames-inline-footer-floating-control](frames-inline-footer-floating-control.png) | Pass | Pass |
-| [frames-inline-footer-normal-control](frames-inline-footer-normal-control.png) | Pass | Pass |
-| [frames-inline-footer-separated](frames-inline-footer-separated.png) | Fail | Pass |
-| [frames-inline-footer-separated-normal-control](frames-inline-footer-separated-normal-control.png) | Pass | Pass |
-| [frames-inline-header-around](frames-inline-header-around.png) | Fail | Pass |
-| [frames-inline-header-below](frames-inline-header-below.png) | Fail | Pass |
-| [frames-inline-header-floating-control](frames-inline-header-floating-control.png) | Pass | Pass |
-| [frames-inline-header-normal-control](frames-inline-header-normal-control.png) | Pass | Pass |
-| [frames-inline-header-overhang](frames-inline-header-overhang.png) | Fail | Pass |
-| [frames-inline-header-overhang-normal-control](frames-inline-header-overhang-normal-control.png) | Pass | Pass |
-| [frames-inline-header-separated](frames-inline-header-separated.png) | Fail | Pass |
-| [frames-inline-header-separated-normal-control](frames-inline-header-separated-normal-control.png) | Pass | Pass |
-| [frames-inline-header-table-clearance](frames-inline-header-table-clearance.png) | Fail | Pass |
-| [frames-inline-header-table-clearance-normal-control](frames-inline-header-table-clearance-normal-control.png) | Pass | Pass |
-| [frames-inline-page-end](frames-inline-page-end.png) | Fail | Pass |
-| [frames-inline-page-end-normal-control](frames-inline-page-end-normal-control.png) | Pass | Pass |
+| Case / local screenshot | Production screenshot | Main | Candidate |
+|---|---|---|---|
+| [frames-inline-body-around](frames-inline-body-around.png) | [Complete pages](production-frames-inline-body-around.png) | Fail | Pass |
+| [frames-inline-body-below](frames-inline-body-below.png) | [Complete pages](production-frames-inline-body-below.png) | Fail | Pass |
+| [frames-inline-body-edge-distance](frames-inline-body-edge-distance.png) | [Complete pages](production-frames-inline-body-edge-distance.png) | Fail | Pass |
+| [frames-inline-body-edge-distance-normal-control](frames-inline-body-edge-distance-normal-control.png) | [Complete pages](production-frames-inline-body-edge-distance-normal-control.png) | Pass | Pass |
+| [frames-inline-body-floating-control](frames-inline-body-floating-control.png) | [Complete pages](production-frames-inline-body-floating-control.png) | Pass | Pass |
+| [frames-inline-body-normal-control](frames-inline-body-normal-control.png) | [Complete pages](production-frames-inline-body-normal-control.png) | Pass | Pass |
+| [frames-inline-body-separated](frames-inline-body-separated.png) | [Complete pages](production-frames-inline-body-separated.png) | Fail | Pass |
+| [frames-inline-body-separated-normal-control](frames-inline-body-separated-normal-control.png) | [Complete pages](production-frames-inline-body-separated-normal-control.png) | Pass | Pass |
+| [frames-inline-cell-around](frames-inline-cell-around.png) | [Complete pages](production-frames-inline-cell-around.png) | Fail | Pass |
+| [frames-inline-cell-below](frames-inline-cell-below.png) | [Complete pages](production-frames-inline-cell-below.png) | Fail | Pass |
+| [frames-inline-cell-floating-control](frames-inline-cell-floating-control.png) | [Complete pages](production-frames-inline-cell-floating-control.png) | Pass | Pass |
+| [frames-inline-cell-normal-control](frames-inline-cell-normal-control.png) | [Complete pages](production-frames-inline-cell-normal-control.png) | Pass | Pass |
+| [frames-inline-footer-around](frames-inline-footer-around.png) | [Complete pages](production-frames-inline-footer-around.png) | Fail | Pass |
+| [frames-inline-footer-below](frames-inline-footer-below.png) | [Complete pages](production-frames-inline-footer-below.png) | Fail | Pass |
+| [frames-inline-footer-floating-control](frames-inline-footer-floating-control.png) | [Complete pages](production-frames-inline-footer-floating-control.png) | Pass | Pass |
+| [frames-inline-footer-normal-control](frames-inline-footer-normal-control.png) | [Complete pages](production-frames-inline-footer-normal-control.png) | Pass | Pass |
+| [frames-inline-footer-separated](frames-inline-footer-separated.png) | [Complete pages](production-frames-inline-footer-separated.png) | Fail | Pass |
+| [frames-inline-footer-separated-normal-control](frames-inline-footer-separated-normal-control.png) | [Complete pages](production-frames-inline-footer-separated-normal-control.png) | Pass | Pass |
+| [frames-inline-header-around](frames-inline-header-around.png) | [Complete pages](production-frames-inline-header-around.png) | Fail | Pass |
+| [frames-inline-header-below](frames-inline-header-below.png) | [Complete pages](production-frames-inline-header-below.png) | Fail | Pass |
+| [frames-inline-header-floating-control](frames-inline-header-floating-control.png) | [Complete pages](production-frames-inline-header-floating-control.png) | Pass | Pass |
+| [frames-inline-header-normal-control](frames-inline-header-normal-control.png) | [Complete pages](production-frames-inline-header-normal-control.png) | Pass | Pass |
+| [frames-inline-header-overhang](frames-inline-header-overhang.png) | [Complete pages](production-frames-inline-header-overhang.png) | Fail | Pass |
+| [frames-inline-header-overhang-normal-control](frames-inline-header-overhang-normal-control.png) | [Complete pages](production-frames-inline-header-overhang-normal-control.png) | Pass | Pass |
+| [frames-inline-header-separated](frames-inline-header-separated.png) | [Complete pages](production-frames-inline-header-separated.png) | Fail | Pass |
+| [frames-inline-header-separated-normal-control](frames-inline-header-separated-normal-control.png) | [Complete pages](production-frames-inline-header-separated-normal-control.png) | Pass | Pass |
+| [frames-inline-header-table-clearance](frames-inline-header-table-clearance.png) | [Complete pages](production-frames-inline-header-table-clearance.png) | Fail | Pass |
+| [frames-inline-header-table-clearance-normal-control](frames-inline-header-table-clearance-normal-control.png) | [Complete pages](production-frames-inline-header-table-clearance-normal-control.png) | Pass | Pass |
+| [frames-inline-page-end](frames-inline-page-end.png) | [Complete pages](production-frames-inline-page-end.png) | Fail | Pass |
+| [frames-inline-page-end-normal-control](frames-inline-page-end-normal-control.png) | [Complete pages](production-frames-inline-page-end-normal-control.png) | Pass | Pass |

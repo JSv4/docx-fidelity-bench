@@ -5,7 +5,7 @@ WordprocessingML authored in `bench/fixtures.py`. They import no renderer fixtur
 document, template, image or font program. Liberation Serif is separately provisioned.
 The marker-separation assertion reads extracted PDF word rectangles; it introduces no asset
 or font redistribution and does not modify the captured pages. The 30 labeled comparison
-sheets show only these original inputs rendered by separately provisioned tools. Local PDF
+sheets and 30 production sheets show only these original inputs rendered by separately provisioned tools; production runs are 41236923512 and 41236925335. Local PDF
 mutation reports contain hashes and extracted Aster geometry; no PDF, font program, external
 document content or authentication data is included.
 
