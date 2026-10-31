@@ -3564,7 +3564,31 @@ def generate():
             texts, body, styles_xml=textbox_styles, assertions=assertions)
         cases[-1]['htmlAssertions'] = [{'type': 'marker-attribute', 'version': 1,
             'marker': 'MergedLabel', 'attribute': 'rowspan', 'equals': '2'}]
-    registry = {'schema': 1, 'suite': {'id': 'core-v80', 'version': 80, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Flattened endnotes must keep their paragraph font instead of the HTML section's 12pt default.
+    for control in (False, True):
+        size = 24 if control else 22
+        styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+                  f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="{size}"/>'
+                  '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+                  '<w:spacing w:after="120" w:line="276" w:lineRule="auto"/>'
+                  '</w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal">'
+                  '<w:name w:val="Normal"/></w:style></w:styles>')
+        first, last = 'Willow citation records the note.', 'Willow route remains open.'
+        note = 'FontNote Willow ledger keeps the original paragraph size.'
+        body = (para(runs=run(first + ' ') + '<w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr>'
+                     '<w:endnoteReference w:id="1"/></w:r>') + para(last))
+        # The 12pt control is unchanged by the repair; its existing 0.65pt provider
+        # difference uses an absolute region. The 11pt reproducer retains the
+        # historical endnote oracle's strict half-point reference comparison.
+        assertion = ({'type': 'marker-region', 'version': 2, 'marker': 'FontNote', 'occurrence': 1,
+                      'page': 1, 'rect': [78, 121, 125, 135.5]} if control else
+                     {'type': 'marker-reference-position', 'version': 1, 'marker': 'FontNote', 'tolerancePt': 0.5})
+        add('notes-endnote-font-' + ('12pt-control' if control else '11pt'), 'notes',
+            ('Section-sized paragraph control' if control else 'Class-defined 11pt paragraph flattened from endnote ancestors')
+            + ' for endnote baseline fidelity', [first, 'i', last, 'i', note], body,
+            notes=('endnote', note), styles_xml=styles,
+            assertions=[assertion])
+    registry = {'schema': 1, 'suite': {'id': 'core-v81', 'version': 81, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
