@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The five endnote-comment cases for Docxodus #1505 reuse the original Maple inputs
+authored here for #1490. Only their export profile changes. They import no document,
+font program, image or external content. Labeled comparison sheets show only these
+original inputs; they include every produced PDF page and label baseline refusals.
+
 The 30 inline-frame cases for Docxodus #1487 contain original Aster labels and literal
 WordprocessingML authored in `bench/fixtures.py`. They import no renderer fixture, helper,
 document, template, image or font program. Liberation Serif is separately provisioned.

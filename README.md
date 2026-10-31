@@ -1,5 +1,9 @@
 # DOCX fidelity bench
 
+`core-v94` adds five endnote-comment export cases for Docxodus #1505: long single
+paragraphs, multiple paragraphs, nested replies, and short controls. They reuse the
+original Maple inputs and require every body and comment word in the printed companion.
+
 `core-v93` adds 30 original inline-frame cases for Docxodus #1487, with body, header,
 footer, cell, page-end, separate-carrier, edge-distance and header-overhang controls. The versioned
 `non-overlapping-markers` check detects overprinted labels while allowing native Word's
