@@ -3508,7 +3508,20 @@ def generate():
         add('paragraph-firefox-' + ('exact-lines-control' if control else 'natural-lines'), 'paragraphs',
             ('Explicit-height control' if control else 'Natural-height heading, body and table lines') +
             ' for Firefox paginated overlap (Docxodus #1424)', texts, body, styles_xml=inline_styles)
-    registry = {'schema': 1, 'suite': {'id': 'core-v78', 'version': 78, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Docxodus #1485: reserved endnote definitions with positive ids are not numbered notes.
+    for kind in ('continuationNotice', 'separator', 'continuationSeparator', 'normal'):
+        cited = kind == 'normal'
+        text = 'Cedar register has one body paragraph.'
+        note = 'Cedar cited note.' if cited else 'RESERVED NOTICE MUST STAY HIDDEN'
+        body = para(runs=run(text) + ('<w:r><w:endnoteReference w:id="2"/></w:r>' if cited else ''))
+        content = para(runs=('<w:r><w:endnoteRef/></w:r>' if cited else '') + run(' ' + note))
+        notes = (f'<w:endnotes xmlns:w="{W}"><w:endnote w:type="{kind}" w:id="2">'
+                 + content + '</w:endnote></w:endnotes>')
+        add('notes-reserved-' + kind.lower(), 'notes',
+            ('Cited ordinary endnote control' if cited else 'Uncited ' + kind + ' with positive id')
+            + ' (Docxodus #1485)', [text] + (['i', 'i', note] if cited else []), body,
+            notes=('endnote', note), styles_xml=textbox_styles, extra_parts={'word/endnotes.xml': notes})
+    registry = {'schema': 1, 'suite': {'id': 'core-v79', 'version': 79, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
