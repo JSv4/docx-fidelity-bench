@@ -279,3 +279,5 @@ The Juniper textbox pair for #1425 is original literal text and VML/Wordprocessi
 The composed inline-bookmark cases for Docxodus #1426 use original Maple/Cedar text and literal OOXML authored in `bench/redline_fixtures.py`, including their reviewers and expected redlines. No renderer fixtures, images or font programs are imported.
 
 The textbox marker-gap cases for Docxodus #1428 are original Spruce text and literal VML/OOXML authored in `bench/redline_fixtures.py`. They import no renderer fixtures, document templates, images, or font programs.
+
+The four reserved-endnote cases for Docxodus #1485 use original Cedar text and literal OOXML authored in `bench/fixtures.py`. No external documents, images or font programs are included. Review screenshots show only these original inputs.

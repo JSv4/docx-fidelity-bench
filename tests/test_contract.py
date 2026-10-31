@@ -355,7 +355,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 535)
+        self.assertEqual(len(common.validate_registry()['cases']), 539)
 
     def test_explicit_reference_manifest_rejects_changed_input_before_rendering(self):
         registry = common.read_json(common.ROOT / 'fixtures/manifest.json')
@@ -663,7 +663,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v78')
+        self.assertEqual(registry['suite']['id'], 'core-v79')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
@@ -769,6 +769,22 @@ class RegistryContract(unittest.TestCase):
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
         return change, final, settings, pair
+
+    def test_reserved_endnotes_have_positive_ids_but_no_visible_tokens(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        for kind in ('continuationNotice', 'separator', 'continuationSeparator', 'normal'):
+            record = records['notes-reserved-' + kind.lower()]
+            with ZipFile(common.ROOT / record['input']) as archive:
+                note = ET.fromstring(archive.read('word/endnotes.xml')).find(w + 'endnote')
+                body = ET.fromstring(archive.read('word/document.xml'))
+            self.assertEqual(note.get(w + 'id'), '2')
+            self.assertEqual(note.get(w + 'type'), kind)
+            self.assertEqual(len(body.findall('.//' + w + 'endnoteReference')), int(kind == 'normal'))
+            self.assertNotIn('RESERVED', record['tokens'])
+            self.assertEqual(record['tokens'].get('i', 0), 2 if kind == 'normal' else 0)
 
     def test_endnote_section_change_pair_changes_only_the_pending_change(self):
         w = '{' + fixtures.W + '}'
