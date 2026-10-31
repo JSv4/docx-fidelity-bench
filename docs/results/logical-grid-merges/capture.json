@@ -2,32 +2,584 @@
   "reference": "LibreOffice 25.8.7.3 580(Build:3)",
   "method": "Direct headless PDF export; Poppler pdftoppm 96 DPI. Original fixture text only.",
   "wordReference": false,
-  "candidate": "Production candidate evidence pending.",
+  "candidate": "294fd2b848299b32f27d48176fcf36e0f01288b5",
   "cases": [
     {
       "case": "tables-merge-grid-aligned-control",
       "inputSha256": "7da898c36fc713c5c3eb4beeb2efd763ede727a440cea09e294fb3e65a65c221",
-      "referencePdfSha256": "bfe50f37315ba5cd9305095bbb70005775fdf37e90ba842785b9e0522e915701"
+      "referencePdfSha256": "bfe50f37315ba5cd9305095bbb70005775fdf37e90ba842785b9e0522e915701",
+      "production": {
+        "candidate": {
+          "score": 87.91873454998502,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MergedLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  245,
+                  60,
+                  440,
+                  150
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "candidate.pdfSha256": "44b89624589bbd635a487f0b666c68ea333ad1784b4b1650dba5daf401553c7b",
+          "candidate.htmlSha256": "ff1e48e01e449e06eedba96e1eda40fdd1c45331f7dcd056ff0d56a44f623bd1",
+          "1-candidate.pngSha256": "bce2ea7919d72c9f906ad4302c728171a8781c8e18966815a9f6ab0482350cdc"
+        },
+        "baseline": {
+          "score": 87.91873454998502,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MergedLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  245,
+                  60,
+                  440,
+                  150
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "candidate.pdfSha256": "a4a66f203b2967ef2b3cbe1d8f3848b967d3e3d12ab0a8d90aa2d63862c4e163",
+          "candidate.htmlSha256": "ff1e48e01e449e06eedba96e1eda40fdd1c45331f7dcd056ff0d56a44f623bd1",
+          "1-candidate.pngSha256": "bce2ea7919d72c9f906ad4302c728171a8781c8e18966815a9f6ab0482350cdc"
+        }
+      }
     },
     {
       "case": "tables-merge-grid-grid-before",
       "inputSha256": "05e4240e269feaa0f87206214f16e3d5472db74cf66dfd1e2cbd94ca2857d8a8",
-      "referencePdfSha256": "6e81cee6244fc058eb1565bdae267b51d333033887e524e5a895ffd6948b3a1b"
+      "referencePdfSha256": "6e81cee6244fc058eb1565bdae267b51d333033887e524e5a895ffd6948b3a1b",
+      "production": {
+        "candidate": {
+          "score": 85.08469840061046,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MergedLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  245,
+                  80,
+                  440,
+                  102
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "AfterTable",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  65,
+                  110,
+                  160,
+                  135
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "candidate.pdfSha256": "09826215e1d7f2b596751578ebd902171bf11a2eb65eadb04d94c4261f5f834a",
+          "candidate.htmlSha256": "927a2e37c5639d8c0f899aaa367fefd940984fc7b995e69b9817b7580cecd518",
+          "1-candidate.pngSha256": "8bae07409650730925cd42c4af8e4ff2286d24f86275de86f9015fbac2d216c2"
+        },
+        "baseline": {
+          "score": 0.0,
+          "checks": [
+            {
+              "error": {
+                "code": "output_verification_failure",
+                "message": "source anchor tr:body:0ccf61cd16ddae9157a69e40b104eac2 has no measurable fragment in the paginated layout",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ]
+        }
+      }
     },
     {
       "case": "tables-merge-grid-multi-column",
       "inputSha256": "ea4bb55acdce1478d33b7f489dd44f6e5bf46a9a67d75d7c41a5ab9e672d123a",
-      "referencePdfSha256": "2538f1c052ad763dcdafc782efc6f19569c3b240ad198ed5d8ceb93b0200fae6"
+      "referencePdfSha256": "2538f1c052ad763dcdafc782efc6f19569c3b240ad198ed5d8ceb93b0200fae6",
+      "production": {
+        "candidate": {
+          "score": 88.92883049948314,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MergedLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  245,
+                  60,
+                  440,
+                  150
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "candidate.pdfSha256": "8321b4cb4e413139ae5dde186b521672a0c4d34661898c59692505ca1ae2ad95",
+          "candidate.htmlSha256": "15a3690f616b42087c348ee9f79aec17bde6726a9f97bc287224a5f389142f3c",
+          "1-candidate.pngSha256": "8dac8487874eeaf8164dff745accf197eb6aea36bfaa43cba8dddd658aae23dd"
+        },
+        "baseline": {
+          "score": 72.26960486723328,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MergedLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  245,
+                  60,
+                  440,
+                  150
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "candidate.pdfSha256": "e43b6b149296183f6ba535eb7a09c6e9ed45c6b0e89f4cbe3ea6da83b7519bda",
+          "candidate.htmlSha256": "0bef64eb6bd8846762ddddcdba3f9d2e2d1c77b9503c0ef0b0889ceab4ec32f5",
+          "1-candidate.pngSha256": "99806bc69976ad18a3f91da6b52e4775aa8481f542729ccec046e4dd7c69a60b"
+        }
+      }
     },
     {
       "case": "tables-merge-grid-shifted",
       "inputSha256": "de49bb63e13cbfe1ad10c1eb4413fcc3573e58ecca838de04f8446617721297b",
-      "referencePdfSha256": "ed86cf85a098814b463894b1442eb23e6b1ef2da9ee90fca9daeb94094d36f0b"
+      "referencePdfSha256": "ed86cf85a098814b463894b1442eb23e6b1ef2da9ee90fca9daeb94094d36f0b",
+      "production": {
+        "candidate": {
+          "score": 87.94100362415568,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MergedLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  245,
+                  60,
+                  440,
+                  150
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "candidate.pdfSha256": "666589ebd5ccbe3cf07379c866c67e796e8d8602c30406a7b1e2049ff085e512",
+          "candidate.htmlSha256": "faab6168ce9381da8921ff5252d3abfcb902ad3977ddcd049716d0de4070197c",
+          "1-candidate.pngSha256": "e7e0008f8695411c479a6f9d0e74717940438e5d967583968c40ff4894082028"
+        },
+        "baseline": {
+          "score": 75.17341040462428,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MergedLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  245,
+                  60,
+                  440,
+                  150
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "candidate.pdfSha256": "20c323c803f37b55445ff2df72460dc129dd1526cd63a583bbac388d12b434ed",
+          "candidate.htmlSha256": "45e6fc9ccf153e64946312ae23c6f5aaadc89304475ca5c0b08635003d016e43",
+          "1-candidate.pngSha256": "de615e64b627c21c9dded2ce98b13d7ce2f1515f98a690506d0c6988d9bf7db2"
+        }
+      }
     },
     {
       "case": "tables-merge-grid-starter-grid-before",
       "inputSha256": "46abf7c36ca75666d7453ae6319279093be5c4ef2b38eda193811dea8557a7ff",
-      "referencePdfSha256": "9bfc182689a86852b7c07042c2be2c6554ad6d4c604f76fcd3f5ec2018f6db55"
+      "referencePdfSha256": "9bfc182689a86852b7c07042c2be2c6554ad6d4c604f76fcd3f5ec2018f6db55",
+      "production": {
+        "candidate": {
+          "score": 83.76393816644327,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MergedLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  245,
+                  80,
+                  440,
+                  102
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "AfterTable",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  65,
+                  110,
+                  160,
+                  135
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "BottomLeft",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  65,
+                  90,
+                  160,
+                  112
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "candidate.pdfSha256": "c385815148028f894db49a83a408c651a9cfca6eeb5b2473051717e8c352e279",
+          "candidate.htmlSha256": "62f8f2543ef2dda300b19cb96ed06729c7569707900b1d45ba1a01592c4e7885",
+          "1-candidate.pngSha256": "9811cdfb98249a99bedc56305873f7fa8470415d6219d9c21e8ac133d8ed1fcf"
+        },
+        "baseline": {
+          "score": 0.0,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "MergedLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  245,
+                  80,
+                  440,
+                  102
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "AfterTable",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  65,
+                  110,
+                  160,
+                  135
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "BottomLeft",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  65,
+                  90,
+                  160,
+                  112
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "candidate.pdfSha256": "fcd1831525165fe364c4c282537e74805a69471d9453a53c096fd45e103c5dad",
+          "candidate.htmlSha256": "816f77bbac1064562837f2023356adddb34c18732fec9d393013ad95872da683",
+          "1-candidate.pngSha256": "6023848109c2f96662283991b356ba73f607fd9450b728e7b71a66cdbd737649"
+        }
+      }
     }
-  ]
+  ],
+  "baseline": "1240cc5dc0586293cb937c59c973550027c31fda",
+  "productionRuns": {
+    "candidate": 41164103636,
+    "baseline": 41164106629
+  },
+  "productionMethod": "Public production PDF and HTML export; immutable CI artifacts independently reviewed. PNGs copied byte-for-byte."
 }
