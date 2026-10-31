@@ -3944,7 +3944,73 @@ def generate():
                         {'type': 'same-page', 'version': 1, 'markers': ['FirCite', 'FirNote']}])
         cases[-1]['fonts'] = ['Times New Roman', 'Arial']
         cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
-    registry = {'schema': 1, 'suite': {'id': 'core-v88', 'version': 88, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Docxodus #1488: a long right-tab tail must wrap instead of becoming one atomic row.
+    tab_styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+                  f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="24"/>'
+                  '</w:rPr></w:rPrDefault></w:docDefaults></w:styles>')
+    long_tail = ' '.join(f'Wren{i:02d} The eastern store keeps every copper token beside the window.'
+                         for i in range(1, 19)) + ' TAIL COMPLETE'
+    for name, alignment, long_prefix, long_following, mixed, size in [
+            ('right-long', 'right', False, True, False, 24),
+            ('right-mixed', 'right', False, True, True, 24),
+            ('left-control', 'left', False, True, False, 24),
+            ('center-control', 'center', False, False, False, 24),
+            ('long-prefix-control', 'right', True, False, False, 24),
+            ('long-both-control', 'right', True, True, False, 24),
+            ('short-control', 'right', False, False, False, 24),
+            ('large-font', 'right', False, False, False, 72),
+            ('expanded-spacing', 'right', False, False, False, 24),
+            ('wide-glyphs', 'right', False, False, False, 24),
+            ('multiple-pages', 'right', False, True, False, 24),
+            ('vml-shape', 'right', False, True, False, 24),
+            ('vml-rect', 'right', False, True, False, 24),
+            ('vml-rect-short-control', 'right', False, False, False, 24),
+            ('wrapped-near', 'right', False, False, False, 24),
+            ('wrapped-prefix-23', 'right', False, False, False, 24),
+            ('wrapped-short-control', 'right', False, False, False, 24)]:
+        before = (long_tail if long_prefix else 'Item') + ' '
+        after = ('Sizing words must remain visible through TAIL COMPLETE' if size == 72 else
+                 long_tail if long_following else 'FINISH')
+        # Single-letter inventory labels keep the raw PDF word contract unambiguous
+        # when six-point tracking deliberately separates every glyph.
+        after = {'expanded-spacing': ' '.join('ABCDEFGHIJKLMNOPQRSTUVWXYZ'),
+                 'wide-glyphs': 'WWWW ' * 9 + 'TAIL COMPLETE',
+                 'multiple-pages': ' '.join([long_tail] * 4)}.get(name, after)
+        if name in ('long-both-control', 'multiple-pages'):
+            after += ' LASTTAIL'
+        if name.startswith('wrapped-'):
+            before = ' '.join(['alpha'] * 23) + ' '
+            after = ('END' if name == 'wrapped-short-control' else
+                     'WWWW ' * (7 if name == 'wrapped-near' else 9) + 'TAIL COMPLETE')
+        after = ' ' + after
+        spacing = '<w:spacing w:val="120"/>' if name == 'expanded-spacing' else ''
+        content = run(before) + '<w:r><w:tab/>'
+        content += ('<w:t>' + after + '</w:t></w:r>' if mixed else
+                    '</w:r>' + run(after, spacing + f'<w:sz w:val="{size}"/>'))
+        leader = ' w:leader="dot"' if name in ('short-control', 'long-prefix-control') else ''
+        body = para('Wren inventory') + para(
+            props=f'<w:tabs><w:tab w:val="{alignment}" w:pos="8640"{leader}/></w:tabs>', runs=content)
+        if name.startswith('vml-'):
+            shape = 'shape' if name == 'vml-shape' else 'rect'
+            body = ('<w:p><w:r><w:pict><v:' + shape + ' xmlns:v="urn:schemas-microsoft-com:vml" id="WrenBox" '
+                    'stroked="f" style="position:absolute;z-index:1;mso-position-horizontal-relative:page;'
+                    'mso-position-vertical-relative:page;margin-left:72pt;margin-top:100pt;width:468pt;height:500pt">'
+                    '<v:textbox inset="0,0,0,0"><w:txbxContent>' + body + '</w:txbxContent></v:textbox></v:'
+                    + shape + '></w:pict></w:r></w:p>')
+        marker = after.split()[-1]
+        add('tabs-wrapping-tail-' + name, 'paragraphs',
+            'Right-tab following-text wrapping: ' + name + ' (Docxodus #1488)',
+            ['Wren inventory', before, after], body, styles_xml=tab_styles,
+            assertions=[{'type': 'marker-region', 'marker': marker,
+                         'occurrence': 1,
+                         'page': 'reference' if name == 'multiple-pages' else 1,
+                         'rect': [72, 100, 540, 600] if name.startswith('vml-') else [72, 72, 540, 720]}])
+        if name in ('short-control', 'wrapped-short-control'):
+            cases[-1]['assertions'].append({'type': 'marker-reference-position', 'version': 1,
+                                            'marker': marker, 'tolerancePt': 1.25})
+        if leader:
+            cases[-1]['pdfTextNormalization'] = 'isolated-dot-leaders-v1'
+    registry = {'schema': 1, 'suite': {'id': 'core-v89', 'version': 89, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

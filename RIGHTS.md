@@ -1,5 +1,13 @@
 # Authorship and artifact rights
 
+The seventeen following-tab cases for Docxodus #1488 contain original Wren inventory text and
+literal OOXML authored in `bench/fixtures.py`. They import no renderer fixture, document
+content, image or font program. Liberation Serif is separately provisioned under the
+existing font contract.
+The labeled comparison sheets under `docs/results/right-tab-wrapping/` show only
+these original inputs rendered by separately provisioned tools. No document from an
+external party, authentication data, native Word reference or font program is included.
+
 The six note-marker cases for Docxodus #1493 contain original Fir labels and literal OOXML
 authored in `bench/fixtures.py`. They import no renderer fixture, document content, image or
 font program. Times New Roman and Arial are separately provisioned under the existing font
