@@ -1,0 +1,4629 @@
+{
+  "baselineCore": "06921d9505fdb8c0541d4f8c93ed8939296c521e",
+  "baselineRuntimeSource": "cd446c19bf6b13aab0726451f50412c4c84d55c4",
+  "candidateCore": "0875eab87ecaf0af716af7c585f9745d159c4a95",
+  "cases": {
+    "notes-bordered-flow-bottom-100": {
+      "inputSha256": "8b3f243dcc91eaf14da204972ad4924a75a698ff86653b6acba60a21db16c3d6",
+      "providers": {
+        "baseline": {
+          "error": {
+            "assetsSha256": "9d5604395ae941c073c8daa4571f8ede6c15c028902bdc0e4d38fb0c7ba08d52",
+            "code": "pagination_failure",
+            "id": "notes-bordered-flow-bottom-100",
+            "inputSha256": "8b3f243dcc91eaf14da204972ad4924a75a698ff86653b6acba60a21db16c3d6",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "mode": "baseline",
+            "status": "failed"
+          },
+          "pages": 0
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 3,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/notes-bordered-flow-bottom-100/page-1.png",
+              "sha256": "b20b3b7a9a9c5f63482c4fe96ceb3da33837c33dbc70cdc8b2e19bed85763219"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-bottom-100/page-2.png",
+              "sha256": "06bd67abfd03e5771ad44543701d968979e61abe1bd9c12cd53289a974083635"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-bottom-100/page-3.png",
+              "sha256": "7cfbf739a382e8ddbe6f18e12906e1b71d10c62396ad6f5e7bfb891ba28b3b16"
+            }
+          ],
+          "pdfSha256": "971fa6a1021a627b5316d0e395084a2f91fa286c37872a2f91cb9ec0ff366ec6",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "96437e1a27a17b4a51fec9110950651b01bc0b1f19c8fa82d94dceed485c3165",
+            "title": ""
+          },
+          "reportSha256": "e0078e59895133a9260a6bf122175601ffe84d0a2cee584d63a62c536ecc43ad",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "e83a79524c80e8f84f04cbe4c90c565c2f78abc8d3bff544ff70b6ef7acaf89a",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 3,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-bottom-100/page-1.png",
+              "sha256": "363a547248f0ecf4a5c06b925e3262e9c404de01d4cd07f09a20c2310baf9199"
+            },
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-bottom-100/page-2.png",
+              "sha256": "7a8252b4ee75219bc5a7bd69d1c4dfcef1250dc757b771a5ad3985afa3dfe899"
+            },
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-bottom-100/page-3.png",
+              "sha256": "dd39c1e030608ff26e847ba8d2078c758482ff68f6184c4656b601f246f41728"
+            }
+          ],
+          "pdfSha256": "27a8bfe405f19a58f86cfb90f5195a415f02f365caf1e0cc1e7689e505996a1e"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    },
+    "notes-bordered-flow-bottom-70": {
+      "inputSha256": "1adfaaa97f954b742d1406b30ec355a8522f0f5a35720fd8dd21ad7ea3591a5b",
+      "providers": {
+        "baseline": {
+          "error": {
+            "assetsSha256": "9d5604395ae941c073c8daa4571f8ede6c15c028902bdc0e4d38fb0c7ba08d52",
+            "code": "pagination_failure",
+            "id": "notes-bordered-flow-bottom-70",
+            "inputSha256": "1adfaaa97f954b742d1406b30ec355a8522f0f5a35720fd8dd21ad7ea3591a5b",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "mode": "baseline",
+            "status": "failed"
+          },
+          "pages": 0
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 2,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/notes-bordered-flow-bottom-70/page-1.png",
+              "sha256": "b20b3b7a9a9c5f63482c4fe96ceb3da33837c33dbc70cdc8b2e19bed85763219"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-bottom-70/page-2.png",
+              "sha256": "cc857fd7603050125d499ce2c24acbbce305662c5bb209a5e9401aa1f6eb152c"
+            }
+          ],
+          "pdfSha256": "6519eef4b81f27ad7b147903248dd231ca6a0f829cc235d05bbfeaa5a8f8e739",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "96437e1a27a17b4a51fec9110950651b01bc0b1f19c8fa82d94dceed485c3165",
+            "title": ""
+          },
+          "reportSha256": "6cf5b92006329b281c3a6eca4019c9b3bcb69fe0f636ef046ffa114262f6d00e",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "e83a79524c80e8f84f04cbe4c90c565c2f78abc8d3bff544ff70b6ef7acaf89a",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 2,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-bottom-70/page-1.png",
+              "sha256": "363a547248f0ecf4a5c06b925e3262e9c404de01d4cd07f09a20c2310baf9199"
+            },
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-bottom-70/page-2.png",
+              "sha256": "acce798f1447d55c4cf8f331fed051a938a0348b743670a76627ffa25973e8b7"
+            }
+          ],
+          "pdfSha256": "5efd8cb8603a8b5eaf4be2548c81a6c2bbebb9f593c76d77d7ab91b4c2b3ae8b"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    },
+    "notes-bordered-flow-box-100": {
+      "inputSha256": "bbda1f9b59602e4ca359631790fa486ea15106aab6cb27eb201ae3c050f21ad5",
+      "providers": {
+        "baseline": {
+          "error": {
+            "assetsSha256": "9d5604395ae941c073c8daa4571f8ede6c15c028902bdc0e4d38fb0c7ba08d52",
+            "code": "pagination_failure",
+            "id": "notes-bordered-flow-box-100",
+            "inputSha256": "bbda1f9b59602e4ca359631790fa486ea15106aab6cb27eb201ae3c050f21ad5",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "mode": "baseline",
+            "status": "failed"
+          },
+          "pages": 0
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 3,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/notes-bordered-flow-box-100/page-1.png",
+              "sha256": "e5d5e68d980573f9dabcaaa3a7ad49442360d2e2b2f1dfe93e8d1674123eb0cf"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-box-100/page-2.png",
+              "sha256": "466f3816ee5e6b811a3afc67f9f6c8ea7005d7c7603a85cd04df1a3dd5ecde25"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-box-100/page-3.png",
+              "sha256": "1251708f6dbb424b5ec3056059fc44efa3c7df8505dba3038caca5933abd2bd8"
+            }
+          ],
+          "pdfSha256": "b48f23e7f89e1bd1e8a6338e4af7e9055933e414659bfb00e5d4488641798233",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "96437e1a27a17b4a51fec9110950651b01bc0b1f19c8fa82d94dceed485c3165",
+            "title": ""
+          },
+          "reportSha256": "7cc72c1b3f5e1e26ba00d578bab63fe17ad8b7aa7456c2a26e6eb39b9f3ceaff",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "e83a79524c80e8f84f04cbe4c90c565c2f78abc8d3bff544ff70b6ef7acaf89a",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 3,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-box-100/page-1.png",
+              "sha256": "ed52748e95322032f7ea66bd693387029c86be9041987e5f40ed231343a36cc9"
+            },
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-box-100/page-2.png",
+              "sha256": "4c20a050c9061ddf79614d81e27f507e43fb3917d772bb81cb95bb5e738b3673"
+            },
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-box-100/page-3.png",
+              "sha256": "ccee51e208ee757c0e2289c1207bdec231b09dc905520cc487887a262ad6e492"
+            }
+          ],
+          "pdfSha256": "ef7bac2395438b61b6e0ed9629febac0d71d45f03243c404f66ff71a53b5fe92"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    },
+    "notes-bordered-flow-box-70": {
+      "inputSha256": "09d4d4e9dbf4c39657b7ecd9d3761c89cdae2cb69dcd91bd17c30399ef0a90b4",
+      "providers": {
+        "baseline": {
+          "error": {
+            "assetsSha256": "9d5604395ae941c073c8daa4571f8ede6c15c028902bdc0e4d38fb0c7ba08d52",
+            "code": "pagination_failure",
+            "id": "notes-bordered-flow-box-70",
+            "inputSha256": "09d4d4e9dbf4c39657b7ecd9d3761c89cdae2cb69dcd91bd17c30399ef0a90b4",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "mode": "baseline",
+            "status": "failed"
+          },
+          "pages": 0
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 2,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/notes-bordered-flow-box-70/page-1.png",
+              "sha256": "e5d5e68d980573f9dabcaaa3a7ad49442360d2e2b2f1dfe93e8d1674123eb0cf"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-box-70/page-2.png",
+              "sha256": "72fa5c0ae70f6b16d609e853c70628bcdfce65b66c2636ebc10f9eb216d09a7e"
+            }
+          ],
+          "pdfSha256": "e9691326abfcb3d3c435f309de5d804996fb9c802b76fa983a822346ce1d3882",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "96437e1a27a17b4a51fec9110950651b01bc0b1f19c8fa82d94dceed485c3165",
+            "title": ""
+          },
+          "reportSha256": "81d3d2dbe27626abcda1c849d700fff234b4de5507ac94dd498f0e58f816709d",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "e83a79524c80e8f84f04cbe4c90c565c2f78abc8d3bff544ff70b6ef7acaf89a",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 2,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-box-70/page-1.png",
+              "sha256": "ed52748e95322032f7ea66bd693387029c86be9041987e5f40ed231343a36cc9"
+            },
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-box-70/page-2.png",
+              "sha256": "f9e65e21953617841c7f0bc010afb2d69317d86b4317aa3604c2f7f1d0b8ed23"
+            }
+          ],
+          "pdfSha256": "8d0e3719fa21f6be8d4b3838c9caf4207102bb1d35e3a3daee9ba7bbe90f56e2"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    },
+    "notes-bordered-flow-box-heading": {
+      "inputSha256": "ccebc4e107e4e2b7739729c6df293c318cc318109709af7ff1a47e09f6e3f70a",
+      "providers": {
+        "baseline": {
+          "error": {
+            "assetsSha256": "9d5604395ae941c073c8daa4571f8ede6c15c028902bdc0e4d38fb0c7ba08d52",
+            "code": "pagination_failure",
+            "id": "notes-bordered-flow-box-heading",
+            "inputSha256": "ccebc4e107e4e2b7739729c6df293c318cc318109709af7ff1a47e09f6e3f70a",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "mode": "baseline",
+            "status": "failed"
+          },
+          "pages": 0
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 3,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/notes-bordered-flow-box-heading/page-1.png",
+              "sha256": "0376a9d96fc8fc992a6a892141e7fe6f4c953f467b8a3f97fc16a052b89e5ca0"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-box-heading/page-2.png",
+              "sha256": "bb2a24a07ae5e6fe67de520f9aedf212eaf204f2a21b5ed20cca89746f95897f"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-box-heading/page-3.png",
+              "sha256": "7bb83c11bc1a31bc4e5eba81b2a24430b1d896a5243f98dba9e85d5392dec185"
+            }
+          ],
+          "pdfSha256": "90f3579a9a15fe7af8bbb3b3028076c61e223270a465c56c481d0609fc662942",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "96437e1a27a17b4a51fec9110950651b01bc0b1f19c8fa82d94dceed485c3165",
+            "title": ""
+          },
+          "reportSha256": "bb2797988bab6029964ada7adb6525251871fdae88e1fe1a83dad54d6121f053",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "e83a79524c80e8f84f04cbe4c90c565c2f78abc8d3bff544ff70b6ef7acaf89a",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 3,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-box-heading/page-1.png",
+              "sha256": "13a9ed494271161ebf1e65dde17166d389d154836d45a64fc2c8c488a6a211b0"
+            },
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-box-heading/page-2.png",
+              "sha256": "0d97ce067693e7812f4ac05d3b17e79d87347f85357ce7d1b9f0d6937790c69e"
+            },
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-box-heading/page-3.png",
+              "sha256": "96d5e60e28db6e228634097025effcf752f443695f2c23c9e005615f66c298e6"
+            }
+          ],
+          "pdfSha256": "8d5d442ac1e07a911def8821d3dc87cb22c1fdc748ca2cb042040af14dee5937"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    },
+    "notes-bordered-flow-box-kept": {
+      "inputSha256": "3cc8680458117f51b3c84694d92496638edf4fdd3d9e77ac0d6ac2940a60dcbb",
+      "providers": {
+        "baseline": {
+          "error": {
+            "assetsSha256": "9d5604395ae941c073c8daa4571f8ede6c15c028902bdc0e4d38fb0c7ba08d52",
+            "code": "pagination_failure",
+            "id": "notes-bordered-flow-box-kept",
+            "inputSha256": "3cc8680458117f51b3c84694d92496638edf4fdd3d9e77ac0d6ac2940a60dcbb",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "mode": "baseline",
+            "status": "failed"
+          },
+          "pages": 0
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-4",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 4,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/notes-bordered-flow-box-kept/page-1.png",
+              "sha256": "700141607137d299de5045987f1554428363699e3cb5923616662424dbb8190f"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-box-kept/page-2.png",
+              "sha256": "39ea7c46298bb4fa80bf2cd1dea16a4c4d0e276eb9200c6c4dd1a3c3a3ccd34b"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-box-kept/page-3.png",
+              "sha256": "64cb9540c59eaf8e70714fd937b7551dddc6dabce25ca3e39f24134986fe57a3"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-box-kept/page-4.png",
+              "sha256": "4b716a27cdc68b0bfa8495dc5b1e955fa190430287ee198ce37fd516a5183c46"
+            }
+          ],
+          "pdfSha256": "57f1557a03b362e16f0ffe7daf3569e4d9fc94dc3991ce1d13cc08e84ded0398",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "96437e1a27a17b4a51fec9110950651b01bc0b1f19c8fa82d94dceed485c3165",
+            "title": ""
+          },
+          "reportSha256": "bc2ee7278ffa61e6e132da6d5abe5aefb46ac57f8f77ff0edf486e6a70877af8",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "e83a79524c80e8f84f04cbe4c90c565c2f78abc8d3bff544ff70b6ef7acaf89a",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-4",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 4,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-box-kept/page-1.png",
+              "sha256": "acecbed26b0e25e49cabd7ffb4117755fa86f754e296c99b77568c922feb031a"
+            },
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-box-kept/page-2.png",
+              "sha256": "f2feb2c92369b67d812e41db7d257ad1636e6ba215ffb92b5bad48c8836c1481"
+            },
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-box-kept/page-3.png",
+              "sha256": "4c20a050c9061ddf79614d81e27f507e43fb3917d772bb81cb95bb5e738b3673"
+            },
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-box-kept/page-4.png",
+              "sha256": "ccee51e208ee757c0e2289c1207bdec231b09dc905520cc487887a262ad6e492"
+            }
+          ],
+          "pdfSha256": "33b1839164895667ca7a8257e645eb4489db2b7828092d68c57a9e9e0931dda4"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    },
+    "notes-bordered-flow-box-table": {
+      "inputSha256": "8bd484c07469af9a7073fdf8acbc17891578f5b2e6358edb54eac44f46321b63",
+      "providers": {
+        "baseline": {
+          "error": {
+            "assetsSha256": "9d5604395ae941c073c8daa4571f8ede6c15c028902bdc0e4d38fb0c7ba08d52",
+            "code": "pagination_failure",
+            "id": "notes-bordered-flow-box-table",
+            "inputSha256": "8bd484c07469af9a7073fdf8acbc17891578f5b2e6358edb54eac44f46321b63",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "mode": "baseline",
+            "status": "failed"
+          },
+          "pages": 0
+        },
+        "candidate": {
+          "allChecksPass": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": false
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": false
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": false
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 3,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/notes-bordered-flow-box-table/page-1.png",
+              "sha256": "0ba2373a24c544d5e476dd51215a64e773292921f783bfe1c12c399e6674b784"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-box-table/page-2.png",
+              "sha256": "2a96a16b5968d21e94b8f7b215239e46002ea7af3f0fb27c82fd6a05120a4e09"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-box-table/page-3.png",
+              "sha256": "f69221e13f928f4ccf3554feb9e67db9d9f6ca8c7aaa2ad401cf7002eff8ebcc"
+            }
+          ],
+          "pdfSha256": "d365e4c08d791a0f18a63804616184459eefdd4416cceadb51d50c9047ba32a8",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "96437e1a27a17b4a51fec9110950651b01bc0b1f19c8fa82d94dceed485c3165",
+            "title": ""
+          },
+          "reportSha256": "84fb3461f089b5dc6e771083c238b453c86973c746a6909d02762c6f9f3d06fe",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "e83a79524c80e8f84f04cbe4c90c565c2f78abc8d3bff544ff70b6ef7acaf89a",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {
+                "Ash001": 1,
+                "Ash002": 1,
+                "Ash003": 1,
+                "Ash004": 1,
+                "Ash005": 1,
+                "Ash006": 1,
+                "Ash007": 1,
+                "Ash008": 1,
+                "Ash009": 1,
+                "Ash010": 1,
+                "Ash011": 1,
+                "Ash012": 1,
+                "Ash013": 1,
+                "Ash014": 1,
+                "Ash015": 1,
+                "Ash016": 1,
+                "Ash017": 1,
+                "Ash018": 1,
+                "Ash019": 1,
+                "Ash020": 1,
+                "Ash021": 1,
+                "Ash022": 1,
+                "Ash023": 1,
+                "Ash024": 1,
+                "Ash025": 1,
+                "Ash026": 1,
+                "Ash027": 1,
+                "Ash028": 1,
+                "Ash029": 1,
+                "Ash030": 1,
+                "Ash031": 1,
+                "Ash032": 1,
+                "Ash033": 1,
+                "Ash034": 1,
+                "Ash035": 1,
+                "Ash036": 1,
+                "Ash037": 1,
+                "Ash038": 1,
+                "Ash039": 1,
+                "Ash040": 1,
+                "Ash041": 1,
+                "Ash042": 1,
+                "Ash043": 1,
+                "Ash044": 1,
+                "Ash045": 1,
+                "Ash046": 1,
+                "Ash047": 1,
+                "Ash048": 1,
+                "Ash049": 1,
+                "Ash050": 1,
+                "Ash051": 1,
+                "Ash052": 1,
+                "Ash053": 1,
+                "Ash054": 1,
+                "Ash055": 1,
+                "Ash056": 1,
+                "Ash057": 1,
+                "Ash058": 1,
+                "Ash059": 1,
+                "Ash060": 1,
+                "Ash061": 1,
+                "Ash062": 1,
+                "Ash063": 1,
+                "Ash064": 1,
+                "Ash065": 1,
+                "Ash066": 1,
+                "Ash067": 1,
+                "Ash068": 1,
+                "Ash069": 1,
+                "Ash070": 1,
+                "Ash071": 1,
+                "Ash072": 1,
+                "Ash073": 1,
+                "Ash074": 1,
+                "Ash075": 1,
+                "Ash076": 1,
+                "Ash077": 1,
+                "Ash078": 1,
+                "Ash079": 1,
+                "Ash080": 1,
+                "Ash081": 1,
+                "Ash082": 1,
+                "Ash083": 1,
+                "Ash084": 1,
+                "Ash085": 1,
+                "Ash086": 1,
+                "Ash087": 1,
+                "Ash088": 1,
+                "Ash089": 1,
+                "Ash090": 1,
+                "Ash091": 1,
+                "Ash092": 1,
+                "Ash093": 1,
+                "Ash094": 1,
+                "Ash095": 1,
+                "Ash096": 1,
+                "Ash097": 1,
+                "Ash098": 1,
+                "Ash099": 1,
+                "The": 99,
+                "archive": 99,
+                "complete.": 99,
+                "entry": 99,
+                "is": 99
+              },
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": false
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": false,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-box-table/page-1.png",
+              "sha256": "3126f836039778f6bf03d0ef76d899f1160cbab3ad96626c8f2d8bdcd358a2d6"
+            }
+          ],
+          "pdfSha256": "4b597a350628c5318f3f5976d8450e11710a9af7da1da366fd16aa7f24f9b7e4"
+        }
+      },
+      "referenceFailures": [
+        "expected-visible-tokens"
+      ],
+      "scoringStatus": "reference-ineligible; unscored pending a valid native reference"
+    },
+    "notes-bordered-flow-paragraphs-control": {
+      "controlPagePngByteIdentical": true,
+      "inputSha256": "dd0c9b20dac08a76491e5e1240661dc22a3e1444d6abfedf2874f5d59df1d047",
+      "providers": {
+        "baseline": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 2,
+          "pagesPng": [
+            {
+              "path": "rasters/baseline/notes-bordered-flow-paragraphs-control/page-1.png",
+              "sha256": "b20b3b7a9a9c5f63482c4fe96ceb3da33837c33dbc70cdc8b2e19bed85763219"
+            },
+            {
+              "path": "rasters/baseline/notes-bordered-flow-paragraphs-control/page-2.png",
+              "sha256": "b67b66b5d5df57f060f340f0e7a62722c038a4214c65b6fcf91a96ea2aadbe0e"
+            }
+          ],
+          "pdfSha256": "c7a9d4961fe088bc23dd4c51d6ad2db80e7e2af61c6a6c2832d763a26ccc29a6",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "7d2ebdd6d50f4aa6bf97d465cd8ed41fa1c10af99b9148ab9d266479195ef4fe",
+            "title": ""
+          },
+          "reportSha256": "38fbc6cb90b417d4735a6191eaf12a03f9b94b007809f6a802e41ffb8b5b3e20",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "bfc609ac4baa1f3d28f4ad1421799cf1e63cf5d7f42eb0e912a04ed2f60e0f2b",
+            "verification": "browserObserved"
+          }
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 2,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/notes-bordered-flow-paragraphs-control/page-1.png",
+              "sha256": "b20b3b7a9a9c5f63482c4fe96ceb3da33837c33dbc70cdc8b2e19bed85763219"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-paragraphs-control/page-2.png",
+              "sha256": "b67b66b5d5df57f060f340f0e7a62722c038a4214c65b6fcf91a96ea2aadbe0e"
+            }
+          ],
+          "pdfSha256": "7d150d02018c7e3a0a40bc347ddf1d904fb4b6df7852e542eb50e85821e57475",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "96437e1a27a17b4a51fec9110950651b01bc0b1f19c8fa82d94dceed485c3165",
+            "title": ""
+          },
+          "reportSha256": "e9a69127507691a0df467846d212ccf5be88d6fdb336c44e80c71c2ad5d00b66",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "e83a79524c80e8f84f04cbe4c90c565c2f78abc8d3bff544ff70b6ef7acaf89a",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 2,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-paragraphs-control/page-1.png",
+              "sha256": "2464b18d96e088ed76eeb5ca0df5cf6b651b042b7a6b89bb551fb9ca57b8080f"
+            },
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-paragraphs-control/page-2.png",
+              "sha256": "e9a410f8d6dee6bd2fa0deb0916d4142acc902e6c28d2fb0a013d3d59e8b636d"
+            }
+          ],
+          "pdfSha256": "e56672c7af95339b8e11c80f4fa882636bcf312e7c425e3cd5a6dea15659ef42"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    },
+    "notes-bordered-flow-plain-control": {
+      "controlPagePngByteIdentical": true,
+      "inputSha256": "23509ae20c28a6b7e87b998eba99a4ffe0c03439a772a68b0ddea0ee91239a0a",
+      "providers": {
+        "baseline": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 2,
+          "pagesPng": [
+            {
+              "path": "rasters/baseline/notes-bordered-flow-plain-control/page-1.png",
+              "sha256": "b20b3b7a9a9c5f63482c4fe96ceb3da33837c33dbc70cdc8b2e19bed85763219"
+            },
+            {
+              "path": "rasters/baseline/notes-bordered-flow-plain-control/page-2.png",
+              "sha256": "b67b66b5d5df57f060f340f0e7a62722c038a4214c65b6fcf91a96ea2aadbe0e"
+            }
+          ],
+          "pdfSha256": "4ac0d90cec9a3bd2bb1fc1da5abb0e87a82328ca995b50e52abe26835047b4b9",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "7d2ebdd6d50f4aa6bf97d465cd8ed41fa1c10af99b9148ab9d266479195ef4fe",
+            "title": ""
+          },
+          "reportSha256": "1c28bdd0324d0a6034b8fcdbc4120c2d9246bee7fbd8168b850d7e3930647cd2",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "bfc609ac4baa1f3d28f4ad1421799cf1e63cf5d7f42eb0e912a04ed2f60e0f2b",
+            "verification": "browserObserved"
+          }
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 2,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/notes-bordered-flow-plain-control/page-1.png",
+              "sha256": "b20b3b7a9a9c5f63482c4fe96ceb3da33837c33dbc70cdc8b2e19bed85763219"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-plain-control/page-2.png",
+              "sha256": "b67b66b5d5df57f060f340f0e7a62722c038a4214c65b6fcf91a96ea2aadbe0e"
+            }
+          ],
+          "pdfSha256": "df19c967346d51b2c1539c71bc45588a8aa8734ba28dbf482468e1a69d5fdbce",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "96437e1a27a17b4a51fec9110950651b01bc0b1f19c8fa82d94dceed485c3165",
+            "title": ""
+          },
+          "reportSha256": "35ed18781bd32c33bff25d621e82e6da6a56bd65a180a0db2a2d6f4b242855cc",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "e83a79524c80e8f84f04cbe4c90c565c2f78abc8d3bff544ff70b6ef7acaf89a",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 2,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-plain-control/page-1.png",
+              "sha256": "2464b18d96e088ed76eeb5ca0df5cf6b651b042b7a6b89bb551fb9ca57b8080f"
+            },
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-plain-control/page-2.png",
+              "sha256": "e9a410f8d6dee6bd2fa0deb0916d4142acc902e6c28d2fb0a013d3d59e8b636d"
+            }
+          ],
+          "pdfSha256": "0ff20fdb24c96de4a356e78b7392d006b198c119c125f4f5573006625e4bfcd2"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    },
+    "notes-bordered-flow-plain-heading-control": {
+      "controlPagePngByteIdentical": true,
+      "inputSha256": "3977e142700f2770f51ad23c78d047a35bdbc5619b41dde2054323a5d446fa82",
+      "providers": {
+        "baseline": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 3,
+          "pagesPng": [
+            {
+              "path": "rasters/baseline/notes-bordered-flow-plain-heading-control/page-1.png",
+              "sha256": "874e75f55d79f8fa49ef38cfd82ba9721a96da6a72f31c49a663691dbc02258d"
+            },
+            {
+              "path": "rasters/baseline/notes-bordered-flow-plain-heading-control/page-2.png",
+              "sha256": "b751443ef3ed71e37280249682c29de386a3083e4c5f599e8c3ec6ba0bea2bf4"
+            },
+            {
+              "path": "rasters/baseline/notes-bordered-flow-plain-heading-control/page-3.png",
+              "sha256": "a83d627616c3751098052122ecbe2c6d08499cfb289623f8ac0745b3f126fa83"
+            }
+          ],
+          "pdfSha256": "09e458bd8039ba1643fb17f6f38bf7282e3deaa9dbbaf140dae9ef49183b5198",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "7d2ebdd6d50f4aa6bf97d465cd8ed41fa1c10af99b9148ab9d266479195ef4fe",
+            "title": ""
+          },
+          "reportSha256": "5e8dc224cb50b76a52f903e99041a14a4303806ba4ca1c6025d82f481670228d",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "bfc609ac4baa1f3d28f4ad1421799cf1e63cf5d7f42eb0e912a04ed2f60e0f2b",
+            "verification": "browserObserved"
+          }
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 3,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/notes-bordered-flow-plain-heading-control/page-1.png",
+              "sha256": "874e75f55d79f8fa49ef38cfd82ba9721a96da6a72f31c49a663691dbc02258d"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-plain-heading-control/page-2.png",
+              "sha256": "b751443ef3ed71e37280249682c29de386a3083e4c5f599e8c3ec6ba0bea2bf4"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-plain-heading-control/page-3.png",
+              "sha256": "a83d627616c3751098052122ecbe2c6d08499cfb289623f8ac0745b3f126fa83"
+            }
+          ],
+          "pdfSha256": "270f69120c5cd79dddce731f378f4c9cceb942fcb77b5d986d4bcfcbcab698b0",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "96437e1a27a17b4a51fec9110950651b01bc0b1f19c8fa82d94dceed485c3165",
+            "title": ""
+          },
+          "reportSha256": "aa1d2218911a40ba96c231ff36c3eecf5286a0e83f7f4c170a4af6a20cf4639d",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "e83a79524c80e8f84f04cbe4c90c565c2f78abc8d3bff544ff70b6ef7acaf89a",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 3,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-plain-heading-control/page-1.png",
+              "sha256": "53a70738d4a1fd5fb8d8aa061ea7ea4b823092951953d20e92991dcf563e9d4c"
+            },
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-plain-heading-control/page-2.png",
+              "sha256": "11cc5cb155f252d3b0c17308a793f7e7d25cc042ecb04c681c5145540d5d9463"
+            },
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-plain-heading-control/page-3.png",
+              "sha256": "217eb4bd394a752bb18191bc7c8c4fdd38f03ed5d0e7fbecafa7a1929661b795"
+            }
+          ],
+          "pdfSha256": "8f57a436d96b16202baa2fb3d2e387000b338e3a58f2ebeb5c890c9214102f47"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    },
+    "notes-bordered-flow-plain-kept-control": {
+      "controlPagePngByteIdentical": true,
+      "inputSha256": "67993a75028312682d2df3b9a1c6133baa80e7270ae3cb0fee4afd5feffd8906",
+      "providers": {
+        "baseline": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-4",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 4,
+          "pagesPng": [
+            {
+              "path": "rasters/baseline/notes-bordered-flow-plain-kept-control/page-1.png",
+              "sha256": "700141607137d299de5045987f1554428363699e3cb5923616662424dbb8190f"
+            },
+            {
+              "path": "rasters/baseline/notes-bordered-flow-plain-kept-control/page-2.png",
+              "sha256": "48d95551be3b3536ba973f1e06d74f217f6319602723c67501c0e18d05b463f3"
+            },
+            {
+              "path": "rasters/baseline/notes-bordered-flow-plain-kept-control/page-3.png",
+              "sha256": "06bd67abfd03e5771ad44543701d968979e61abe1bd9c12cd53289a974083635"
+            },
+            {
+              "path": "rasters/baseline/notes-bordered-flow-plain-kept-control/page-4.png",
+              "sha256": "d40c951ff868344283d70f2a5878dcb4c7ebf08b69129c98fe29837927cd7d8b"
+            }
+          ],
+          "pdfSha256": "4be5aaecb56795da5c2f1363ecee579a97248cab70eda523c2e593e50caf45e0",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "7d2ebdd6d50f4aa6bf97d465cd8ed41fa1c10af99b9148ab9d266479195ef4fe",
+            "title": ""
+          },
+          "reportSha256": "9082bdfbad73c4b8292037a8d2b0fc231e862219dd59ece30eeb569b033a4063",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "bfc609ac4baa1f3d28f4ad1421799cf1e63cf5d7f42eb0e912a04ed2f60e0f2b",
+            "verification": "browserObserved"
+          }
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-4",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 4,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/notes-bordered-flow-plain-kept-control/page-1.png",
+              "sha256": "700141607137d299de5045987f1554428363699e3cb5923616662424dbb8190f"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-plain-kept-control/page-2.png",
+              "sha256": "48d95551be3b3536ba973f1e06d74f217f6319602723c67501c0e18d05b463f3"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-plain-kept-control/page-3.png",
+              "sha256": "06bd67abfd03e5771ad44543701d968979e61abe1bd9c12cd53289a974083635"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-plain-kept-control/page-4.png",
+              "sha256": "d40c951ff868344283d70f2a5878dcb4c7ebf08b69129c98fe29837927cd7d8b"
+            }
+          ],
+          "pdfSha256": "c9569f2a5fcababd5e779a30a7170ce07a246479f1d4307ddfa2b2e7fd581909",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "96437e1a27a17b4a51fec9110950651b01bc0b1f19c8fa82d94dceed485c3165",
+            "title": ""
+          },
+          "reportSha256": "19019a2322ac5449ac0542b883368baae4f90a28c7a4478f013c846fefab1f50",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "e83a79524c80e8f84f04cbe4c90c565c2f78abc8d3bff544ff70b6ef7acaf89a",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-4",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 4,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-plain-kept-control/page-1.png",
+              "sha256": "acecbed26b0e25e49cabd7ffb4117755fa86f754e296c99b77568c922feb031a"
+            },
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-plain-kept-control/page-2.png",
+              "sha256": "ffba0b0503eaf6f65f636e226a00bfa169bd110bf1a566f508711ec8c293b00c"
+            },
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-plain-kept-control/page-3.png",
+              "sha256": "a5cc07b6c6c63889ef63168eed3ee31a345e241ebf4fcff241d5458f8a1cc6da"
+            },
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-plain-kept-control/page-4.png",
+              "sha256": "9700066fb3121280aeb19007c51572a182380194090cf3b8cb1fb046bab85773"
+            }
+          ],
+          "pdfSha256": "37e3ab8b71557c267997dae84d2b76edd0c23d08819a177ed23177d43d9b715a"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    },
+    "notes-bordered-flow-plain-table-control": {
+      "controlPagePngByteIdentical": true,
+      "inputSha256": "d18701f9e7308b4e97679be936f5ccc4e3feed8026498d88fe06fafa9e0cf0f1",
+      "providers": {
+        "baseline": {
+          "allChecksPass": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": false
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": false
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": false
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 3,
+          "pagesPng": [
+            {
+              "path": "rasters/baseline/notes-bordered-flow-plain-table-control/page-1.png",
+              "sha256": "85257cd55c01f1d3d473641ecba4ba333a5c9cc9ce31268dba2e04eb278a5abb"
+            },
+            {
+              "path": "rasters/baseline/notes-bordered-flow-plain-table-control/page-2.png",
+              "sha256": "b751443ef3ed71e37280249682c29de386a3083e4c5f599e8c3ec6ba0bea2bf4"
+            },
+            {
+              "path": "rasters/baseline/notes-bordered-flow-plain-table-control/page-3.png",
+              "sha256": "4974c86ff56db4966a3d2e75927db3fb8b746610c78db872a85de905e170ded4"
+            }
+          ],
+          "pdfSha256": "bd182ccd2b7795d1faa3cd4daad48f1f6b7f2e727561fa84de67daf8e3a30c33",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "7d2ebdd6d50f4aa6bf97d465cd8ed41fa1c10af99b9148ab9d266479195ef4fe",
+            "title": ""
+          },
+          "reportSha256": "7d621fec9211e6f681e1b2b568dbbf942fd5bdada79f91b03ec25cee3f4d43bb",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "bfc609ac4baa1f3d28f4ad1421799cf1e63cf5d7f42eb0e912a04ed2f60e0f2b",
+            "verification": "browserObserved"
+          }
+        },
+        "candidate": {
+          "allChecksPass": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": false
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": false
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": false
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 3,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/notes-bordered-flow-plain-table-control/page-1.png",
+              "sha256": "85257cd55c01f1d3d473641ecba4ba333a5c9cc9ce31268dba2e04eb278a5abb"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-plain-table-control/page-2.png",
+              "sha256": "b751443ef3ed71e37280249682c29de386a3083e4c5f599e8c3ec6ba0bea2bf4"
+            },
+            {
+              "path": "rasters/candidate/notes-bordered-flow-plain-table-control/page-3.png",
+              "sha256": "4974c86ff56db4966a3d2e75927db3fb8b746610c78db872a85de905e170ded4"
+            }
+          ],
+          "pdfSha256": "b848584e71a7d7bff471e0aaf6c1a7eccdfb3dca93cd93ad7c33c3ce360c8eb2",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "96437e1a27a17b4a51fec9110950651b01bc0b1f19c8fa82d94dceed485c3165",
+            "title": ""
+          },
+          "reportSha256": "dc29232b0e85d0204097848df90cd931ca2dd4067b143e7e1a17cf365a1dee1e",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "e83a79524c80e8f84f04cbe4c90c565c2f78abc8d3bff544ff70b6ef7acaf89a",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {
+                "Ash001": 1,
+                "Ash002": 1,
+                "Ash003": 1,
+                "Ash004": 1,
+                "Ash005": 1,
+                "Ash006": 1,
+                "Ash007": 1,
+                "Ash008": 1,
+                "Ash009": 1,
+                "Ash010": 1,
+                "Ash011": 1,
+                "Ash012": 1,
+                "Ash013": 1,
+                "Ash014": 1,
+                "Ash015": 1,
+                "Ash016": 1,
+                "Ash017": 1,
+                "Ash018": 1,
+                "Ash019": 1,
+                "Ash020": 1,
+                "Ash021": 1,
+                "Ash022": 1,
+                "Ash023": 1,
+                "Ash024": 1,
+                "Ash025": 1,
+                "Ash026": 1,
+                "Ash027": 1,
+                "Ash028": 1,
+                "Ash029": 1,
+                "Ash030": 1,
+                "Ash031": 1,
+                "Ash032": 1,
+                "Ash033": 1,
+                "Ash034": 1,
+                "Ash035": 1,
+                "Ash036": 1,
+                "Ash037": 1,
+                "Ash038": 1,
+                "Ash039": 1,
+                "Ash040": 1,
+                "Ash041": 1,
+                "Ash042": 1,
+                "Ash043": 1,
+                "Ash044": 1,
+                "Ash045": 1,
+                "Ash046": 1,
+                "Ash047": 1,
+                "Ash048": 1,
+                "Ash049": 1,
+                "Ash050": 1,
+                "Ash051": 1,
+                "Ash052": 1,
+                "Ash053": 1,
+                "Ash054": 1,
+                "Ash055": 1,
+                "Ash056": 1,
+                "Ash057": 1,
+                "Ash058": 1,
+                "Ash059": 1,
+                "Ash060": 1,
+                "Ash061": 1,
+                "Ash062": 1,
+                "Ash063": 1,
+                "Ash064": 1,
+                "Ash065": 1,
+                "Ash066": 1,
+                "Ash067": 1,
+                "Ash068": 1,
+                "Ash069": 1,
+                "Ash070": 1,
+                "Ash071": 1,
+                "Ash072": 1,
+                "Ash073": 1,
+                "Ash074": 1,
+                "Ash075": 1,
+                "Ash076": 1,
+                "Ash077": 1,
+                "Ash078": 1,
+                "Ash079": 1,
+                "Ash080": 1,
+                "Ash081": 1,
+                "Ash082": 1,
+                "Ash083": 1,
+                "Ash084": 1,
+                "Ash085": 1,
+                "Ash086": 1,
+                "Ash087": 1,
+                "Ash088": 1,
+                "Ash089": 1,
+                "Ash090": 1,
+                "Ash091": 1,
+                "Ash092": 1,
+                "Ash093": 1,
+                "Ash094": 1,
+                "Ash095": 1,
+                "Ash096": 1,
+                "Ash097": 1,
+                "Ash098": 1,
+                "Ash099": 1,
+                "The": 99,
+                "archive": 99,
+                "complete.": 99,
+                "entry": 99,
+                "is": 99
+              },
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": false
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": false,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-plain-table-control/page-1.png",
+              "sha256": "054c69eeee746304d87de313dbc25fdbd6b7b19125d1b9f5d9dcf66cf278dff7"
+            }
+          ],
+          "pdfSha256": "68368ca50c1dd9554e5c8e448570df2902db0361a199d34670c19c2ba2761779"
+        }
+      },
+      "referenceFailures": [
+        "expected-visible-tokens"
+      ],
+      "scoringStatus": "reference-ineligible; unscored pending a valid native reference"
+    },
+    "notes-bordered-flow-short-control": {
+      "controlPagePngByteIdentical": true,
+      "inputSha256": "d3befff68e0211d99e67857385aa0fb09e0d7549641c9a81e4b34d1c5f1ebdf7",
+      "providers": {
+        "baseline": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/baseline/notes-bordered-flow-short-control/page-1.png",
+              "sha256": "44977ddd6a0a47e3e44db0a2a067abfe1da7c9831c6408dd508269b34ad79c18"
+            }
+          ],
+          "pdfSha256": "d159b0121cdeef500e8ed795537aa718d0f94ea8165bfb8a042aca34c47c343b",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "7d2ebdd6d50f4aa6bf97d465cd8ed41fa1c10af99b9148ab9d266479195ef4fe",
+            "title": ""
+          },
+          "reportSha256": "0177e8787fe8bf461b613964023d35774ca6be9e64c2a6a941602f042b98ca3e",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "bfc609ac4baa1f3d28f4ad1421799cf1e63cf5d7f42eb0e912a04ed2f60e0f2b",
+            "verification": "browserObserved"
+          }
+        },
+        "candidate": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/candidate/notes-bordered-flow-short-control/page-1.png",
+              "sha256": "44977ddd6a0a47e3e44db0a2a067abfe1da7c9831c6408dd508269b34ad79c18"
+            }
+          ],
+          "pdfSha256": "68318a6e3299cddcae96828f690fbd811518fe78d60cc9ea5c632cdd9f9fc1bb",
+          "profile": {
+            "commentProfile": "hidden",
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "outputs": [
+              "html",
+              "pdf"
+            ],
+            "policy": {
+              "limits": {
+                "automaticResourceBytes": 268435456,
+                "automaticResources": 10000,
+                "compressedDocxBytes": 104857600,
+                "domNodes": 1000000,
+                "expandedOpcBytes": 1073741824,
+                "finalPages": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFileBytes": 33554432,
+                "fontFiles": 1000,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536,
+                "fontTotalBytes": 134217728,
+                "htmlOutputBytes": 268435456,
+                "opcCompressionRatio": 1000,
+                "opcEntries": 10000,
+                "opcUriCharacters": 2048,
+                "pageMapOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "renderDiagnostics": 10000,
+                "renderReportOutputBytes": 268435456,
+                "xmlPartBytes": 33554432
+              },
+              "strictFonts": true,
+              "timeoutMs": 120000,
+              "unsupportedContent": "warn"
+            },
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "runtimePolicyDigest": "96437e1a27a17b4a51fec9110950651b01bc0b1f19c8fa82d94dceed485c3165",
+            "title": ""
+          },
+          "reportSha256": "2af8c84f72c89b0b29f797842ef5a0f5de0534e8da8aae68b1fdc124cea1026b",
+          "runtime": {
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "architecture": "x64",
+              "browserBuild": "143.0.7499.4",
+              "browserProduct": "Chromium",
+              "deviceScaleFactor": 1,
+              "launchFlags": [],
+              "locale": "en-US",
+              "media": {
+                "colorScheme": "light",
+                "forcedColors": "none",
+                "printMedia": true,
+                "reducedMotion": "reduce"
+              },
+              "networkIsolation": "contextRestricted",
+              "operatingSystem": "linux",
+              "playwrightVersion": "1.57.0",
+              "runtimeKind": "nodeChromium",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ]
+            },
+            "rendererFingerprint": "e83a79524c80e8f84f04cbe4c90c565c2f78abc8d3bff544ff70b6ef7acaf89a",
+            "verification": "browserObserved"
+          }
+        },
+        "libreoffice": {
+          "allChecksPass": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            }
+          ],
+          "completeSourceInventory": true,
+          "pages": 1,
+          "pagesPng": [
+            {
+              "path": "rasters/libreoffice/notes-bordered-flow-short-control/page-1.png",
+              "sha256": "86d0933c1a006c5063185b9064f17436cd0b54f07bb11a28abdd8ad17d85ba60"
+            }
+          ],
+          "pdfSha256": "d4ec6d575a048caf62019d6c4884bf7bcc9463047986fc0b8acf8256e3afe4ea"
+        }
+      },
+      "referenceFailures": [],
+      "scoringStatus": "eligible for production comparison; local diagnostic only"
+    }
+  },
+  "kind": "Local strict-font caller-owned sandboxed Chromium diagnostics; production CI is separate.",
+  "productionSelection": [
+    "notes-bordered-flow-box-70",
+    "notes-bordered-flow-bottom-70",
+    "notes-bordered-flow-box-100",
+    "notes-bordered-flow-bottom-100",
+    "notes-bordered-flow-plain-control",
+    "notes-bordered-flow-paragraphs-control",
+    "notes-bordered-flow-short-control",
+    "notes-bordered-flow-box-kept",
+    "notes-bordered-flow-plain-kept-control",
+    "notes-bordered-flow-box-heading",
+    "notes-bordered-flow-plain-heading-control"
+  ],
+  "schema": 1,
+  "screenshots": {
+    "notes-bordered-flow-bottom-100": {
+      "file": "notes-bordered-flow-bottom-100.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/notes-bordered-flow-bottom-100/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "363a547248f0ecf4a5c06b925e3262e9c404de01d4cd07f09a20c2310baf9199"
+        },
+        {
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/libreoffice/notes-bordered-flow-bottom-100/page-2.png",
+          "provider": "libreoffice",
+          "sha256": "7a8252b4ee75219bc5a7bd69d1c4dfcef1250dc757b771a5ad3985afa3dfe899"
+        },
+        {
+          "bounds": [
+            16,
+            2186,
+            816,
+            1056
+          ],
+          "page": 3,
+          "path": "rasters/libreoffice/notes-bordered-flow-bottom-100/page-3.png",
+          "provider": "libreoffice",
+          "sha256": "dd39c1e030608ff26e847ba8d2078c758482ff68f6184c4656b601f246f41728"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 1,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 2,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            848,
+            2186,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 3,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/notes-bordered-flow-bottom-100/page-1.png",
+          "provider": "candidate",
+          "sha256": "b20b3b7a9a9c5f63482c4fe96ceb3da33837c33dbc70cdc8b2e19bed85763219"
+        },
+        {
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/candidate/notes-bordered-flow-bottom-100/page-2.png",
+          "provider": "candidate",
+          "sha256": "06bd67abfd03e5771ad44543701d968979e61abe1bd9c12cd53289a974083635"
+        },
+        {
+          "bounds": [
+            1680,
+            2186,
+            816,
+            1056
+          ],
+          "page": 3,
+          "path": "rasters/candidate/notes-bordered-flow-bottom-100/page-3.png",
+          "provider": "candidate",
+          "sha256": "7cfbf739a382e8ddbe6f18e12906e1b71d10c62396ad6f5e7bfb891ba28b3b16"
+        }
+      ],
+      "sha256": "6907ce785c9c55b4c0db9609c8f8e1f2954a4aab4d6312fb51e2fdfc91144b36"
+    },
+    "notes-bordered-flow-bottom-70": {
+      "file": "notes-bordered-flow-bottom-70.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/notes-bordered-flow-bottom-70/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "363a547248f0ecf4a5c06b925e3262e9c404de01d4cd07f09a20c2310baf9199"
+        },
+        {
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/libreoffice/notes-bordered-flow-bottom-70/page-2.png",
+          "provider": "libreoffice",
+          "sha256": "acce798f1447d55c4cf8f331fed051a938a0348b743670a76627ffa25973e8b7"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 1,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 2,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/notes-bordered-flow-bottom-70/page-1.png",
+          "provider": "candidate",
+          "sha256": "b20b3b7a9a9c5f63482c4fe96ceb3da33837c33dbc70cdc8b2e19bed85763219"
+        },
+        {
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/candidate/notes-bordered-flow-bottom-70/page-2.png",
+          "provider": "candidate",
+          "sha256": "cc857fd7603050125d499ce2c24acbbce305662c5bb209a5e9401aa1f6eb152c"
+        }
+      ],
+      "sha256": "1a88839ca0e89865170fd79ca1c68c220e85a38dcb323f0e740324fbf1069c51"
+    },
+    "notes-bordered-flow-box-100": {
+      "file": "notes-bordered-flow-box-100.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/notes-bordered-flow-box-100/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "ed52748e95322032f7ea66bd693387029c86be9041987e5f40ed231343a36cc9"
+        },
+        {
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/libreoffice/notes-bordered-flow-box-100/page-2.png",
+          "provider": "libreoffice",
+          "sha256": "4c20a050c9061ddf79614d81e27f507e43fb3917d772bb81cb95bb5e738b3673"
+        },
+        {
+          "bounds": [
+            16,
+            2186,
+            816,
+            1056
+          ],
+          "page": 3,
+          "path": "rasters/libreoffice/notes-bordered-flow-box-100/page-3.png",
+          "provider": "libreoffice",
+          "sha256": "ccee51e208ee757c0e2289c1207bdec231b09dc905520cc487887a262ad6e492"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 1,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 2,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            848,
+            2186,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 3,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/notes-bordered-flow-box-100/page-1.png",
+          "provider": "candidate",
+          "sha256": "e5d5e68d980573f9dabcaaa3a7ad49442360d2e2b2f1dfe93e8d1674123eb0cf"
+        },
+        {
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/candidate/notes-bordered-flow-box-100/page-2.png",
+          "provider": "candidate",
+          "sha256": "466f3816ee5e6b811a3afc67f9f6c8ea7005d7c7603a85cd04df1a3dd5ecde25"
+        },
+        {
+          "bounds": [
+            1680,
+            2186,
+            816,
+            1056
+          ],
+          "page": 3,
+          "path": "rasters/candidate/notes-bordered-flow-box-100/page-3.png",
+          "provider": "candidate",
+          "sha256": "1251708f6dbb424b5ec3056059fc44efa3c7df8505dba3038caca5933abd2bd8"
+        }
+      ],
+      "sha256": "88b79dc84aa019c8c0cecbb7a4ab59470a876abcb5ef761dcecc3b809258a49b"
+    },
+    "notes-bordered-flow-box-70": {
+      "file": "notes-bordered-flow-box-70.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/notes-bordered-flow-box-70/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "ed52748e95322032f7ea66bd693387029c86be9041987e5f40ed231343a36cc9"
+        },
+        {
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/libreoffice/notes-bordered-flow-box-70/page-2.png",
+          "provider": "libreoffice",
+          "sha256": "f9e65e21953617841c7f0bc010afb2d69317d86b4317aa3604c2f7f1d0b8ed23"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 1,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 2,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/notes-bordered-flow-box-70/page-1.png",
+          "provider": "candidate",
+          "sha256": "e5d5e68d980573f9dabcaaa3a7ad49442360d2e2b2f1dfe93e8d1674123eb0cf"
+        },
+        {
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/candidate/notes-bordered-flow-box-70/page-2.png",
+          "provider": "candidate",
+          "sha256": "72fa5c0ae70f6b16d609e853c70628bcdfce65b66c2636ebc10f9eb216d09a7e"
+        }
+      ],
+      "sha256": "c8ccf93d9036015b043fffbc3b59a9867d9d14e1f5305ff1290aef1fee7aa828"
+    },
+    "notes-bordered-flow-box-heading": {
+      "file": "notes-bordered-flow-box-heading.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/notes-bordered-flow-box-heading/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "13a9ed494271161ebf1e65dde17166d389d154836d45a64fc2c8c488a6a211b0"
+        },
+        {
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/libreoffice/notes-bordered-flow-box-heading/page-2.png",
+          "provider": "libreoffice",
+          "sha256": "0d97ce067693e7812f4ac05d3b17e79d87347f85357ce7d1b9f0d6937790c69e"
+        },
+        {
+          "bounds": [
+            16,
+            2186,
+            816,
+            1056
+          ],
+          "page": 3,
+          "path": "rasters/libreoffice/notes-bordered-flow-box-heading/page-3.png",
+          "provider": "libreoffice",
+          "sha256": "96d5e60e28db6e228634097025effcf752f443695f2c23c9e005615f66c298e6"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 1,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 2,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            848,
+            2186,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 3,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/notes-bordered-flow-box-heading/page-1.png",
+          "provider": "candidate",
+          "sha256": "0376a9d96fc8fc992a6a892141e7fe6f4c953f467b8a3f97fc16a052b89e5ca0"
+        },
+        {
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/candidate/notes-bordered-flow-box-heading/page-2.png",
+          "provider": "candidate",
+          "sha256": "bb2a24a07ae5e6fe67de520f9aedf212eaf204f2a21b5ed20cca89746f95897f"
+        },
+        {
+          "bounds": [
+            1680,
+            2186,
+            816,
+            1056
+          ],
+          "page": 3,
+          "path": "rasters/candidate/notes-bordered-flow-box-heading/page-3.png",
+          "provider": "candidate",
+          "sha256": "7bb83c11bc1a31bc4e5eba81b2a24430b1d896a5243f98dba9e85d5392dec185"
+        }
+      ],
+      "sha256": "09293455513d3041372228b9f9049cc00c21fe526dd04631d451274eb7a37833"
+    },
+    "notes-bordered-flow-box-kept": {
+      "file": "notes-bordered-flow-box-kept.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/notes-bordered-flow-box-kept/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "acecbed26b0e25e49cabd7ffb4117755fa86f754e296c99b77568c922feb031a"
+        },
+        {
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/libreoffice/notes-bordered-flow-box-kept/page-2.png",
+          "provider": "libreoffice",
+          "sha256": "f2feb2c92369b67d812e41db7d257ad1636e6ba215ffb92b5bad48c8836c1481"
+        },
+        {
+          "bounds": [
+            16,
+            2186,
+            816,
+            1056
+          ],
+          "page": 3,
+          "path": "rasters/libreoffice/notes-bordered-flow-box-kept/page-3.png",
+          "provider": "libreoffice",
+          "sha256": "4c20a050c9061ddf79614d81e27f507e43fb3917d772bb81cb95bb5e738b3673"
+        },
+        {
+          "bounds": [
+            16,
+            3242,
+            816,
+            1056
+          ],
+          "page": 4,
+          "path": "rasters/libreoffice/notes-bordered-flow-box-kept/page-4.png",
+          "provider": "libreoffice",
+          "sha256": "ccee51e208ee757c0e2289c1207bdec231b09dc905520cc487887a262ad6e492"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 1,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 2,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            848,
+            2186,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 3,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            848,
+            3242,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 4,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/notes-bordered-flow-box-kept/page-1.png",
+          "provider": "candidate",
+          "sha256": "700141607137d299de5045987f1554428363699e3cb5923616662424dbb8190f"
+        },
+        {
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/candidate/notes-bordered-flow-box-kept/page-2.png",
+          "provider": "candidate",
+          "sha256": "39ea7c46298bb4fa80bf2cd1dea16a4c4d0e276eb9200c6c4dd1a3c3a3ccd34b"
+        },
+        {
+          "bounds": [
+            1680,
+            2186,
+            816,
+            1056
+          ],
+          "page": 3,
+          "path": "rasters/candidate/notes-bordered-flow-box-kept/page-3.png",
+          "provider": "candidate",
+          "sha256": "64cb9540c59eaf8e70714fd937b7551dddc6dabce25ca3e39f24134986fe57a3"
+        },
+        {
+          "bounds": [
+            1680,
+            3242,
+            816,
+            1056
+          ],
+          "page": 4,
+          "path": "rasters/candidate/notes-bordered-flow-box-kept/page-4.png",
+          "provider": "candidate",
+          "sha256": "4b716a27cdc68b0bfa8495dc5b1e955fa190430287ee198ce37fd516a5183c46"
+        }
+      ],
+      "sha256": "7b25da0a25ebc7bee78fdf10a92be948e20e20e3178e1b03cd50663308a3647f"
+    },
+    "notes-bordered-flow-box-table": {
+      "file": "notes-bordered-flow-box-table.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/notes-bordered-flow-box-table/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "3126f836039778f6bf03d0ef76d899f1160cbab3ad96626c8f2d8bdcd358a2d6"
+        },
+        {
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 2,
+          "provider": "libreoffice"
+        },
+        {
+          "bounds": [
+            16,
+            2186,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 3,
+          "provider": "libreoffice"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 1,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 2,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            848,
+            2186,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 3,
+          "provider": "baseline"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/notes-bordered-flow-box-table/page-1.png",
+          "provider": "candidate",
+          "sha256": "0ba2373a24c544d5e476dd51215a64e773292921f783bfe1c12c399e6674b784"
+        },
+        {
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/candidate/notes-bordered-flow-box-table/page-2.png",
+          "provider": "candidate",
+          "sha256": "2a96a16b5968d21e94b8f7b215239e46002ea7af3f0fb27c82fd6a05120a4e09"
+        },
+        {
+          "bounds": [
+            1680,
+            2186,
+            816,
+            1056
+          ],
+          "page": 3,
+          "path": "rasters/candidate/notes-bordered-flow-box-table/page-3.png",
+          "provider": "candidate",
+          "sha256": "f69221e13f928f4ccf3554feb9e67db9d9f6ca8c7aaa2ad401cf7002eff8ebcc"
+        }
+      ],
+      "sha256": "d4ae3d21dfab46aa483bc1706fbb8162218949a4a5dd397c53359c69e5e2c0f2"
+    },
+    "notes-bordered-flow-paragraphs-control": {
+      "file": "notes-bordered-flow-paragraphs-control.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/notes-bordered-flow-paragraphs-control/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "2464b18d96e088ed76eeb5ca0df5cf6b651b042b7a6b89bb551fb9ca57b8080f"
+        },
+        {
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/libreoffice/notes-bordered-flow-paragraphs-control/page-2.png",
+          "provider": "libreoffice",
+          "sha256": "e9a410f8d6dee6bd2fa0deb0916d4142acc902e6c28d2fb0a013d3d59e8b636d"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/baseline/notes-bordered-flow-paragraphs-control/page-1.png",
+          "provider": "baseline",
+          "sha256": "b20b3b7a9a9c5f63482c4fe96ceb3da33837c33dbc70cdc8b2e19bed85763219"
+        },
+        {
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/baseline/notes-bordered-flow-paragraphs-control/page-2.png",
+          "provider": "baseline",
+          "sha256": "b67b66b5d5df57f060f340f0e7a62722c038a4214c65b6fcf91a96ea2aadbe0e"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/notes-bordered-flow-paragraphs-control/page-1.png",
+          "provider": "candidate",
+          "sha256": "b20b3b7a9a9c5f63482c4fe96ceb3da33837c33dbc70cdc8b2e19bed85763219"
+        },
+        {
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/candidate/notes-bordered-flow-paragraphs-control/page-2.png",
+          "provider": "candidate",
+          "sha256": "b67b66b5d5df57f060f340f0e7a62722c038a4214c65b6fcf91a96ea2aadbe0e"
+        }
+      ],
+      "sha256": "012339422bf49e49df1d007e4fb02dfcbda2eb67671296fb2c045fccbd878075"
+    },
+    "notes-bordered-flow-plain-control": {
+      "file": "notes-bordered-flow-plain-control.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/notes-bordered-flow-plain-control/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "2464b18d96e088ed76eeb5ca0df5cf6b651b042b7a6b89bb551fb9ca57b8080f"
+        },
+        {
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/libreoffice/notes-bordered-flow-plain-control/page-2.png",
+          "provider": "libreoffice",
+          "sha256": "e9a410f8d6dee6bd2fa0deb0916d4142acc902e6c28d2fb0a013d3d59e8b636d"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/baseline/notes-bordered-flow-plain-control/page-1.png",
+          "provider": "baseline",
+          "sha256": "b20b3b7a9a9c5f63482c4fe96ceb3da33837c33dbc70cdc8b2e19bed85763219"
+        },
+        {
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/baseline/notes-bordered-flow-plain-control/page-2.png",
+          "provider": "baseline",
+          "sha256": "b67b66b5d5df57f060f340f0e7a62722c038a4214c65b6fcf91a96ea2aadbe0e"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/notes-bordered-flow-plain-control/page-1.png",
+          "provider": "candidate",
+          "sha256": "b20b3b7a9a9c5f63482c4fe96ceb3da33837c33dbc70cdc8b2e19bed85763219"
+        },
+        {
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/candidate/notes-bordered-flow-plain-control/page-2.png",
+          "provider": "candidate",
+          "sha256": "b67b66b5d5df57f060f340f0e7a62722c038a4214c65b6fcf91a96ea2aadbe0e"
+        }
+      ],
+      "sha256": "ccf406ae1a467cdf90533283e71f15ae60908e7ed79c9e05f130eb42165ee87d"
+    },
+    "notes-bordered-flow-plain-heading-control": {
+      "file": "notes-bordered-flow-plain-heading-control.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/notes-bordered-flow-plain-heading-control/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "53a70738d4a1fd5fb8d8aa061ea7ea4b823092951953d20e92991dcf563e9d4c"
+        },
+        {
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/libreoffice/notes-bordered-flow-plain-heading-control/page-2.png",
+          "provider": "libreoffice",
+          "sha256": "11cc5cb155f252d3b0c17308a793f7e7d25cc042ecb04c681c5145540d5d9463"
+        },
+        {
+          "bounds": [
+            16,
+            2186,
+            816,
+            1056
+          ],
+          "page": 3,
+          "path": "rasters/libreoffice/notes-bordered-flow-plain-heading-control/page-3.png",
+          "provider": "libreoffice",
+          "sha256": "217eb4bd394a752bb18191bc7c8c4fdd38f03ed5d0e7fbecafa7a1929661b795"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/baseline/notes-bordered-flow-plain-heading-control/page-1.png",
+          "provider": "baseline",
+          "sha256": "874e75f55d79f8fa49ef38cfd82ba9721a96da6a72f31c49a663691dbc02258d"
+        },
+        {
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/baseline/notes-bordered-flow-plain-heading-control/page-2.png",
+          "provider": "baseline",
+          "sha256": "b751443ef3ed71e37280249682c29de386a3083e4c5f599e8c3ec6ba0bea2bf4"
+        },
+        {
+          "bounds": [
+            848,
+            2186,
+            816,
+            1056
+          ],
+          "page": 3,
+          "path": "rasters/baseline/notes-bordered-flow-plain-heading-control/page-3.png",
+          "provider": "baseline",
+          "sha256": "a83d627616c3751098052122ecbe2c6d08499cfb289623f8ac0745b3f126fa83"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/notes-bordered-flow-plain-heading-control/page-1.png",
+          "provider": "candidate",
+          "sha256": "874e75f55d79f8fa49ef38cfd82ba9721a96da6a72f31c49a663691dbc02258d"
+        },
+        {
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/candidate/notes-bordered-flow-plain-heading-control/page-2.png",
+          "provider": "candidate",
+          "sha256": "b751443ef3ed71e37280249682c29de386a3083e4c5f599e8c3ec6ba0bea2bf4"
+        },
+        {
+          "bounds": [
+            1680,
+            2186,
+            816,
+            1056
+          ],
+          "page": 3,
+          "path": "rasters/candidate/notes-bordered-flow-plain-heading-control/page-3.png",
+          "provider": "candidate",
+          "sha256": "a83d627616c3751098052122ecbe2c6d08499cfb289623f8ac0745b3f126fa83"
+        }
+      ],
+      "sha256": "a4ccb5f9e698fd6e5fecc5e2aaeb7abf6b4a5cb6ab349019c3ac8d214bc5043d"
+    },
+    "notes-bordered-flow-plain-kept-control": {
+      "file": "notes-bordered-flow-plain-kept-control.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/notes-bordered-flow-plain-kept-control/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "acecbed26b0e25e49cabd7ffb4117755fa86f754e296c99b77568c922feb031a"
+        },
+        {
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/libreoffice/notes-bordered-flow-plain-kept-control/page-2.png",
+          "provider": "libreoffice",
+          "sha256": "ffba0b0503eaf6f65f636e226a00bfa169bd110bf1a566f508711ec8c293b00c"
+        },
+        {
+          "bounds": [
+            16,
+            2186,
+            816,
+            1056
+          ],
+          "page": 3,
+          "path": "rasters/libreoffice/notes-bordered-flow-plain-kept-control/page-3.png",
+          "provider": "libreoffice",
+          "sha256": "a5cc07b6c6c63889ef63168eed3ee31a345e241ebf4fcff241d5458f8a1cc6da"
+        },
+        {
+          "bounds": [
+            16,
+            3242,
+            816,
+            1056
+          ],
+          "page": 4,
+          "path": "rasters/libreoffice/notes-bordered-flow-plain-kept-control/page-4.png",
+          "provider": "libreoffice",
+          "sha256": "9700066fb3121280aeb19007c51572a182380194090cf3b8cb1fb046bab85773"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/baseline/notes-bordered-flow-plain-kept-control/page-1.png",
+          "provider": "baseline",
+          "sha256": "700141607137d299de5045987f1554428363699e3cb5923616662424dbb8190f"
+        },
+        {
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/baseline/notes-bordered-flow-plain-kept-control/page-2.png",
+          "provider": "baseline",
+          "sha256": "48d95551be3b3536ba973f1e06d74f217f6319602723c67501c0e18d05b463f3"
+        },
+        {
+          "bounds": [
+            848,
+            2186,
+            816,
+            1056
+          ],
+          "page": 3,
+          "path": "rasters/baseline/notes-bordered-flow-plain-kept-control/page-3.png",
+          "provider": "baseline",
+          "sha256": "06bd67abfd03e5771ad44543701d968979e61abe1bd9c12cd53289a974083635"
+        },
+        {
+          "bounds": [
+            848,
+            3242,
+            816,
+            1056
+          ],
+          "page": 4,
+          "path": "rasters/baseline/notes-bordered-flow-plain-kept-control/page-4.png",
+          "provider": "baseline",
+          "sha256": "d40c951ff868344283d70f2a5878dcb4c7ebf08b69129c98fe29837927cd7d8b"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/notes-bordered-flow-plain-kept-control/page-1.png",
+          "provider": "candidate",
+          "sha256": "700141607137d299de5045987f1554428363699e3cb5923616662424dbb8190f"
+        },
+        {
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/candidate/notes-bordered-flow-plain-kept-control/page-2.png",
+          "provider": "candidate",
+          "sha256": "48d95551be3b3536ba973f1e06d74f217f6319602723c67501c0e18d05b463f3"
+        },
+        {
+          "bounds": [
+            1680,
+            2186,
+            816,
+            1056
+          ],
+          "page": 3,
+          "path": "rasters/candidate/notes-bordered-flow-plain-kept-control/page-3.png",
+          "provider": "candidate",
+          "sha256": "06bd67abfd03e5771ad44543701d968979e61abe1bd9c12cd53289a974083635"
+        },
+        {
+          "bounds": [
+            1680,
+            3242,
+            816,
+            1056
+          ],
+          "page": 4,
+          "path": "rasters/candidate/notes-bordered-flow-plain-kept-control/page-4.png",
+          "provider": "candidate",
+          "sha256": "d40c951ff868344283d70f2a5878dcb4c7ebf08b69129c98fe29837927cd7d8b"
+        }
+      ],
+      "sha256": "a290cbd11a24320ced108aa813549e9cbe00db9cd54868eac4b8a36cd5387b75"
+    },
+    "notes-bordered-flow-plain-table-control": {
+      "file": "notes-bordered-flow-plain-table-control.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/notes-bordered-flow-plain-table-control/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "054c69eeee746304d87de313dbc25fdbd6b7b19125d1b9f5d9dcf66cf278dff7"
+        },
+        {
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 2,
+          "provider": "libreoffice"
+        },
+        {
+          "bounds": [
+            16,
+            2186,
+            816,
+            1056
+          ],
+          "missingPage": true,
+          "page": 3,
+          "provider": "libreoffice"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/baseline/notes-bordered-flow-plain-table-control/page-1.png",
+          "provider": "baseline",
+          "sha256": "85257cd55c01f1d3d473641ecba4ba333a5c9cc9ce31268dba2e04eb278a5abb"
+        },
+        {
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/baseline/notes-bordered-flow-plain-table-control/page-2.png",
+          "provider": "baseline",
+          "sha256": "b751443ef3ed71e37280249682c29de386a3083e4c5f599e8c3ec6ba0bea2bf4"
+        },
+        {
+          "bounds": [
+            848,
+            2186,
+            816,
+            1056
+          ],
+          "page": 3,
+          "path": "rasters/baseline/notes-bordered-flow-plain-table-control/page-3.png",
+          "provider": "baseline",
+          "sha256": "4974c86ff56db4966a3d2e75927db3fb8b746610c78db872a85de905e170ded4"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/notes-bordered-flow-plain-table-control/page-1.png",
+          "provider": "candidate",
+          "sha256": "85257cd55c01f1d3d473641ecba4ba333a5c9cc9ce31268dba2e04eb278a5abb"
+        },
+        {
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "page": 2,
+          "path": "rasters/candidate/notes-bordered-flow-plain-table-control/page-2.png",
+          "provider": "candidate",
+          "sha256": "b751443ef3ed71e37280249682c29de386a3083e4c5f599e8c3ec6ba0bea2bf4"
+        },
+        {
+          "bounds": [
+            1680,
+            2186,
+            816,
+            1056
+          ],
+          "page": 3,
+          "path": "rasters/candidate/notes-bordered-flow-plain-table-control/page-3.png",
+          "provider": "candidate",
+          "sha256": "4974c86ff56db4966a3d2e75927db3fb8b746610c78db872a85de905e170ded4"
+        }
+      ],
+      "sha256": "a929580131198bce24ff88b5612612fbf6fec7f5b7741242af7737581deba643"
+    },
+    "notes-bordered-flow-short-control": {
+      "file": "notes-bordered-flow-short-control.png",
+      "panels": [
+        {
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/libreoffice/notes-bordered-flow-short-control/page-1.png",
+          "provider": "libreoffice",
+          "sha256": "86d0933c1a006c5063185b9064f17436cd0b54f07bb11a28abdd8ad17d85ba60"
+        },
+        {
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/baseline/notes-bordered-flow-short-control/page-1.png",
+          "provider": "baseline",
+          "sha256": "44977ddd6a0a47e3e44db0a2a067abfe1da7c9831c6408dd508269b34ad79c18"
+        },
+        {
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "page": 1,
+          "path": "rasters/candidate/notes-bordered-flow-short-control/page-1.png",
+          "provider": "candidate",
+          "sha256": "44977ddd6a0a47e3e44db0a2a067abfe1da7c9831c6408dd508269b34ad79c18"
+        }
+      ],
+      "sha256": "637e8423db210fe07e4eba6f6bf0447b7b7a184f10847c46eb4092582835b3bb"
+    }
+  },
+  "scriptSha256": "26f0b1f62d5b3ebd9e1ca52f70d76b3bc33453ec8cea3234fbdaaaa3f632d20d",
+  "candidateRuntimeSource": "82d1a379e41385954044337b6ac1e38f73af73b6",
+  "runtimeSourceNote": "Final source differs from the captured runtime source only by documentation."
+}

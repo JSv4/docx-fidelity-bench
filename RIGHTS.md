@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The thirteen bordered-footnote cases for Docxodus #1491 contain original Ash inventory text
+and literal WordprocessingML authored in `bench/fixtures.py`. They import no external document,
+template, image or font program. Liberation Serif is separately provisioned. Review screenshots
+show only these original inputs rendered by separately provisioned tools.
+
 The seven complete-comment cases for Docxodus #1490 contain original Maple inventory text
 and literal OOXML authored in `bench/fixtures.py`. No external document, template, image
 or font program is imported. Liberation Serif is separately provisioned. The labeled screenshots

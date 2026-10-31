@@ -4040,7 +4040,36 @@ def generate():
                                      'pageSizePt': [612, 792],
                                      'requiredTokens': dict(sorted(Counter(body_text.split() if hidden else source_words).items()))}
         if hidden: cases[-1]['pdfCompanion']['exactInventory'] = True
-    registry = {'schema': 1, 'suite': {'id': 'core-v90', 'version': 90, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # #1491: a border wrapper must continue both beside the citation and on later pages.
+    ash_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="20"/></w:rPr></w:rPrDefault></w:docDefaults></w:styles>'
+    ash_body = 'AshBody The archive has one note.'
+    ash_marker = '<w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr><w:footnoteRef/></w:r>' + run(' ')
+    for name, count, border, paragraphs, flow in [
+            ('box-70', 70, 'box', False, ''), ('bottom-70', 70, 'bottom', False, ''),
+            ('box-100', 100, 'box', False, ''), ('bottom-100', 100, 'bottom', False, ''),
+            ('plain-control', 70, '', False, ''), ('paragraphs-control', 70, '', True, ''),
+            ('short-control', 3, 'box', False, ''),
+            ('box-kept', 100, 'box', False, 'kept'), ('plain-kept-control', 100, '', False, 'kept'),
+            ('box-heading', 100, 'box', False, 'heading'), ('plain-heading-control', 100, '', False, 'heading'),
+            ('box-table', 100, 'box', False, 'table'), ('plain-table-control', 100, '', False, 'table')]:
+        lines = [f'Ash{i:03d} The archive entry is complete.' for i in range(1, count + 1)]
+        border_xml = ('<w:pBdr>' + ''.join(f'<w:{side} w:val="single" w:sz="8" w:space="2" w:color="2060A0"/>'
+                      for side in (['top', 'left', 'bottom', 'right'] if border == 'box' else ['bottom'])) + '</w:pBdr>') if border else ''
+        props = ('<w:keepLines/>' if flow == 'kept' else '') + '<w:widowControl w:val="0"/>' + border_xml + '<w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/>'
+        note = ''.join(para(props=props, runs=(ash_marker if i == 0 else '') + run(line)) for i, line in enumerate(lines)) if paragraphs else (
+            para(props=props, runs=ash_marker + '<w:r><w:br/></w:r>'.join(run(line) for line in lines)))
+        if flow == 'heading':
+            note = para(props='<w:keepNext/>' + props, runs=ash_marker + run('KeepTitle')) + note.replace(ash_marker, '', 1)
+            lines = ['KeepTitle'] + lines
+        if flow == 'table':
+            lead = 'AshLead Table entries follow.'
+            note = para(props=props.replace(border_xml, '') if border_xml else props, runs=ash_marker + run(lead)) + '<w:tbl><w:tblPr><w:tblW w:w="8640" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid><w:gridCol w:w="8640"/></w:tblGrid><w:tr><w:tc><w:tcPr><w:tcW w:w="8640" w:type="dxa"/></w:tcPr>' + note.replace(ash_marker, '', 1) + '</w:tc></w:tr></w:tbl><w:p/>'
+            lines = [lead] + lines
+        body = para(runs=run(ash_body) + '<w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr><w:footnoteReference w:id="1"/></w:r>')
+        add('notes-bordered-flow-' + name, 'notes',
+            f'{count} original Ash footnote lines with {border or "no"} border and ' + ('separate paragraphs' if paragraphs else 'hard breaks') + (f', {flow} flow' if flow else '') + ' (Docxodus #1491)',
+            [ash_body, '1', '1'] + lines, body, styles_xml=ash_styles, footnote_list=[(1, note)])
+    registry = {'schema': 1, 'suite': {'id': 'core-v91', 'version': 91, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
