@@ -299,4 +299,5 @@ authentication material, external document content or standalone font program is
 The seven property/running-style cases for Docxodus #1481 use original Juniper text, metadata,
 and literal OOXML authored in `bench/fixtures.py`. They import no renderer fixture, document,
 image or font program. Review screenshots show only these authored inputs and their separately
-provisioned native LibreOffice and Docxodus renderings. No fresh Word reference is claimed.
+provisioned native LibreOffice and Docxodus renderings, including production exports from CI
+runs 41177656533 and 41177630479. No fresh Word reference is claimed.
