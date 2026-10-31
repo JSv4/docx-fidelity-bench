@@ -124,6 +124,44 @@ def equivalent_reference_bundle(output, reference, registry=None):
     return bundle
 
 
+def render_companion(adapter, request, declaration, folder, primary):
+    """Print and inspect a second profile; a primary PDF cannot stand in for this output."""
+    evidence = {'profile': declaration['profile']}
+    try:
+        companion_request = {k: v for k, v in request.items() if not k.startswith('html')}
+        companion_request.update(profile=declaration['profile'], output=str(folder / 'companion.pdf'),
+                                 report=str(folder / 'companion-production.json'))
+        response = adapters.render(adapter, companion_request)
+        evidence['adapter'] = response
+        if response['status'] != 'ok':
+            raise ValueError('Companion conversion failed: ' + str(response.get('error')))
+        production = read_json(folder / 'companion-production.json')
+        original = read_json(request['report'])
+        profile = production.get('options', {})
+        expected = declaration['profile']
+        pdf_sha = digest(folder / 'companion.pdf')
+        environment = production.get('environment', {})
+        original_environment = original.get('environment', {})
+        # rendererFingerprint includes the view profile; the observed process/runtime does not.
+        if (response.get('renderer') != primary.get('renderer') or
+                production.get('status') != 'complete' or production.get('source') != original.get('source') or
+                production.get('source', {}).get('rawPackageBytesDigest') != request['inputSha256'] or
+                environment.get('verification') != 'nodeVerified' or environment.get('fidelityTier') != 'releaseBaselined' or
+                any(environment.get(key) != original_environment.get(key) for key in ('verification', 'fidelityTier', 'observed')) or
+                any(environment.get('observed', {}).get(key) != value for key, value in primary['renderer']['runtime'].items()) or
+                profile.get('reviewProfile') != expected['review'] or profile.get('commentProfile') != expected['comments'] or
+                profile.get('markupPresentation', 'html') != expected.get('markupPresentation', 'html') or
+                profile.get('commentColumnPlacement', 'margin') != 'margin' or
+                production.get('bindings', {}).get('pdfDigest') != pdf_sha or response.get('pdfSha256') != pdf_sha):
+            raise ValueError('Companion source, profile, runtime or PDF binding differs')
+        evidence.update(productionSha256=digest(folder / 'companion-production.json'), pdfSha256=pdf_sha,
+                        sourceSha256=request['inputSha256'], inspection=pdf.inspect_companion_pdf(folder / 'companion.pdf', declaration))
+        evidence['checks'] = pdf.companion_checks(declaration, evidence['inspection'])
+    except Exception as error:
+        evidence['checks'] = [{'name': 'companion-pdf-artifact', 'passed': False, 'error': str(error)}]
+    return evidence
+
+
 def run(output, reference, adapter, candidate, suite=None, registry=None):
     registry = select_suite(validate_registry(registry), suite)
     env = environment([f for c in registry['cases'] for f in c['fonts']])
@@ -146,9 +184,14 @@ def run(output, reference, adapter, candidate, suite=None, registry=None):
         contract.update(pdfTextNormalizations=pdf_policies, pdfTextInspectorVersion=pdf.PDF_TEXT_POLICY_VERSION,
                         pdfTextInspectorSha256=digest(Path(pdf.__file__)))
     html_declarations = {c['id']: c['htmlAssertions'] for c in registry['cases'] if c.get('htmlAssertions')}
+    companions = {c['id']: c['pdfCompanion'] for c in registry['cases'] if c.get('pdfCompanion')}
     # A reference-engine calibration measures PDFs; it cannot attest another artifact's metadata.
     if adapter in ('libreoffice', 'libreoffice-reference'):
         html_declarations = {}
+        companions = {}
+    if companions:
+        contract.update(pdfCompanions=companions, pdfCompanionInspectorVersion=1,
+                        pdfCompanionInspectorSha256=digest(Path(pdf.__file__)))
     if html_declarations:
         contract.update(htmlAssertions=html_declarations, htmlInspectorVersion=html_artifacts.VERSION,
                         htmlInspectorSha256=digest(Path(html_artifacts.__file__)))
@@ -212,6 +255,10 @@ def run(output, reference, adapter, candidate, suite=None, registry=None):
                     # LibreOffice measured against a LibreOffice track is a calibration of the reference engine.
                     calibration = adapter in ('libreoffice', 'libreoffice-reference')
                     outcome['checks'] = pdf.correctness(pdf.binding_case(case, bundle['track'], calibration), reference_info, candidate_info)
+                    if case['id'] in companions:
+                        companion = render_companion(adapter, request, companions[case['id']], folder, response)
+                        outcome['companionPdf'] = companion
+                        outcome['checks'].extend(companion['checks'])
                     with tempfile.TemporaryDirectory(dir=folder) as tmp:
                         rpages = pdf.rasterize(reference_path, Path(tmp) / 'r')
                         cpages = pdf.rasterize(candidate_path, Path(tmp) / 'c')
@@ -309,6 +356,14 @@ def validate_result(result):
     layout = result['contract'].get('layoutProfile', 'default')
     if not isinstance(layout, str) or not re.fullmatch('[a-z][a-z0-9-]{0,63}', layout):
         raise ValueError('Invalid renderer layout profile identity')
+    companions = result['contract'].get('pdfCompanions', {})
+    if (not isinstance(companions, dict) or not set(companions).issubset(result['suite']['cases']) or
+            (companions and (type(result['contract'].get('pdfCompanionInspectorVersion')) is not int or
+             result['contract']['pdfCompanionInspectorVersion'] != 1 or
+             not re.fullmatch('[a-f0-9]{64}', str(result['contract'].get('pdfCompanionInspectorSha256', '')))))):
+        raise ValueError('Invalid companion PDF measurement contract')
+    from .common import validate_pdf_companion
+    for declaration in companions.values(): validate_pdf_companion(declaration)
     pdf_policies = result['contract'].get('pdfTextNormalizations', {})
     if 'pdfTextNormalizations' in result['contract'] and (not isinstance(pdf_policies, dict) or
             any(not isinstance(policy, str) or policy not in pdf.PDF_TEXT_POLICIES for policy in pdf_policies.values()) or
@@ -345,6 +400,19 @@ def validate_result(result):
     if expected != result['summary']:
         raise ValueError('Invalid coverage or aggregation summary')
     for case in result['cases']:
+        if case['id'] in companions and case['status'] == 'measured' and not any(
+                c['name'] in ('conversion', 'valid-pdf') and c['passed'] is False for c in case['checks']):
+            companion = case.get('companionPdf', {})
+            response = companion.get('adapter', {})
+            if companion.get('profile') != companions[case['id']]['profile']:
+                raise ValueError('Invalid companion PDF profile')
+            checks = [c for c in case['checks'] if c['name'].startswith('companion-pdf-')]
+            recorded = companion.get('checks', [])
+            failed = len(recorded) == 1 and recorded[0].get('name') == 'companion-pdf-artifact' and recorded[0].get('passed') is False
+            if checks != recorded or (not failed and (response.get('status') != 'ok' or
+                    response.get('renderer') != case['adapter'].get('renderer') or
+                    recorded != pdf.companion_checks(companions[case['id']], companion['inspection']))):
+                raise ValueError('Missing or changed companion PDF checks')
         if case['id'] in pdf_policies and case['status'] == 'measured':
             failed_conversion = any(c['name'] in ('conversion', 'valid-pdf') and c['passed'] is False
                                     for c in case['checks'])

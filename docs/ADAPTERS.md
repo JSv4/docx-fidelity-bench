@@ -103,3 +103,29 @@ unknown, duplicate, empty and malformed selections are rejected. Selected cases 
 full declarations and get a distinct diagnostic identity. Reference reuse still requires exact
 suite, input, font/environment and calibration equivalence. No score threshold or conversion
 deadline changes with a selection.
+
+## Companion PDF completeness
+
+A PDF-track case may declare `pdfCompanion: {profile, requiredTokens, pageSizePt}`. The runner invokes
+the same production adapter again with that profile, writing `companion.pdf` and
+`companion-production.json`. This uses the existing request protocol and verifies the
+same renderer identity, source digest, actual report profile, runtime and output digest. It does not reuse the first PDF or infer
+printed content from HTML.
+
+Poppler extracts the companion through its CropBox. Each declared source word must
+appear exactly its authored number of times and have positive bounds wholly within
+the page. The same PDF is rasterized at 96 DPI; each source-word rectangle must contain
+dark foreground paint (every RGB channel below 160), so pale comment/highlight
+backgrounds cannot substitute for the authored black/gray source text. This detects blank, invisible and
+white- or yellow-covered text; it is a bounded paint-presence check, not OCR or glyph-shape matching.
+`exactInventory: true` also rejects any extra token; the hidden-comment control uses it. Every page must retain the declared paper geometry, which registry validation checks against every authored section. Extra renderer-generated author, date and navigation labels are allowed.
+A refusal or missing/duplicated/off-page source word fails mandatory checks and makes
+the case score zero. Conversion, missing-artifact, inspection and binding failures also fail these mandatory checks.
+The declaration and inspector identity are bound into the measurement contract.
+
+The primary PDF still supplies the visual comparison and its complete token inventory.
+For the complete-comment cases that primary profile hides comments, while the companion
+prints them in the margin (except the explicit hidden-profile control). This tests static
+PDF completeness without claiming Word or LibreOffice comment-layout parity. Native
+reference-engine calibrations omit the companion checks, as they omit delivered HTML
+checks, and cannot attest candidate-specific print profiles.

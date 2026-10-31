@@ -1,5 +1,11 @@
 # Authorship and artifact rights
 
+The seven complete-comment cases for Docxodus #1490 contain original Maple inventory text
+and literal OOXML authored in `bench/fixtures.py`. No external document, template, image
+or font program is imported. Liberation Serif is separately provisioned. The labeled screenshots
+under `docs/results/complete-margin-comments/` show only these original inputs rendered by
+separately provisioned tools; they contain no external document text or authentication data.
+
 The seventeen following-tab cases for Docxodus #1488 contain original Wren inventory text and
 literal OOXML authored in `bench/fixtures.py`. They import no renderer fixture, document
 content, image or font program. Liberation Serif is separately provisioned under the

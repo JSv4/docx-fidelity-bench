@@ -1,5 +1,10 @@
 # DOCX fidelity bench
 
+`core-v90` adds seven original complete-comment PDF cases for Docxodus #1490. A separate
+print profile checks source text, paint, bounds and paper geometry while the primary hidden-comment
+PDF retains its native layout comparison. [All seven cases and labeled previews](docs/results/complete-margin-comments/README.md)
+separate local diagnostics from the pending production-runtime measurements.
+
 `core-v86` adds ten original TIFF/WMF image cases and PNG controls for Docxodus #1484.
 Independent per-color bounds and paint coverage checks cover both figures, image sizing,
 headers and VML groups. [Native diagnostic evidence and all ten previews](docs/results/static-images/README.md)
