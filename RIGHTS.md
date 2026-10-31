@@ -1,5 +1,16 @@
 # Authorship and artifact rights
 
+The twelve section-margin cases for Docxodus #1486 contain original Hemlock labels and
+literal section properties authored in `bench/fixtures.py`. They import no renderer fixtures,
+external document content, images or font programs. Their fixed 12 pt lines isolate page
+geometry from differences in word wrapping between renderers.
+The labeled sheets under `docs/results/continuous-margins/` show only those original
+inputs rendered by separately provisioned tools. Native Word PDFs and font programs remain
+outside the source inventory; metadata records their hashes and geometry observations.
+The production sheets show the same original inputs from CI runs 41198047111 and
+41198049187. They contain no external document content, authentication data or standalone
+font program.
+
 The ten static-image cases for Docxodus #1484 contain original Poplar text, independently drawn
 pixels and literal WMF records authored in `bench/fixtures.py`. PNG and TIFF encode the same
 128 by 96 RGB image; WMF authors separate rectangle/ellipse records. The rectangle is blue
