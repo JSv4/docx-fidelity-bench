@@ -3,7 +3,7 @@
 `core-v92` adds twelve original textbox-fit cases for Docxodus #1492, covering omitted fit,
 theme defaults, local precedence and running stories. [All twelve cases and labeled previews](docs/results/textbox-fit/README.md)
 retain complete token inventories and independent visible-label bounds. All native references
-are eligible; production measurements are pending.
+are eligible; completed production measurements and their full-page previews are linked there.
 
 `core-v91` adds thirteen original bordered-footnote cases for Docxodus #1491, covering two- and
 three-page notes, box and bottom borders, kept paragraphs, headings, table cells and controls. Complete
