@@ -55,6 +55,19 @@ def contained(root, relative):
     return path
 
 
+def validate_pdf_companion(declaration):
+    if (not isinstance(declaration, dict) or set(declaration) - {'profile', 'requiredTokens', 'pageSizePt', 'exactInventory'} or
+            not {'profile', 'requiredTokens', 'pageSizePt'}.issubset(declaration) or
+            ('exactInventory' in declaration and declaration['exactInventory'] is not True) or
+            not isinstance(declaration['pageSizePt'], list) or len(declaration['pageSizePt']) != 2 or
+            any(type(n) not in (int, float) or not math.isfinite(n) or n <= 0 for n in declaration['pageSizePt']) or
+            not isinstance(declaration['requiredTokens'], dict) or not declaration['requiredTokens'] or
+            any(not isinstance(word, str) or len(word.split()) != 1 or word.strip() != word or
+                type(count) is not int or count < 1 for word, count in declaration['requiredTokens'].items())):
+        raise ValueError('Invalid companion PDF declaration')
+    validate_render_profile(declaration['profile'])
+
+
 def validate_pdf_text_policy(case, root=None):
     root = ROOT if root is None else root
     if 'pdfTextNormalization' not in case:
@@ -155,6 +168,14 @@ def validate_registry(registry=None):
             if any(all_words[word] != count or row_words[word] != count for word, count in optional.items()):
                 raise ValueError('Clipped tokens must occur only outside a proven exact row or fixed textbox clip, with authored exact line spacing and counts')
         validate_render_profile(case['profile'])
+        if 'pdfCompanion' in case:
+            validate_pdf_companion(case['pdfCompanion'])
+            with ZipFile(contained(ROOT, case['input'])) as archive:
+                w = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
+                sizes = [p.find(w + 'pgSz') for p in ET.fromstring(archive.read('word/document.xml')).iter(w + 'sectPr')]
+                if not sizes or any(p is None or [int(p.get(w + key, '0')) / 20 for key in ('w', 'h')] !=
+                                    case['pdfCompanion']['pageSizePt'] for p in sizes):
+                    raise ValueError('Companion paper dimensions must match every authored section')
         validate_pdf_text_policy(case)
         if not isinstance(case.get('htmlAssertions', []), list):
             raise ValueError('Delivered HTML assertions must be a list')

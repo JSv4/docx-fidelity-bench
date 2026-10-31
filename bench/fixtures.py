@@ -4010,7 +4010,37 @@ def generate():
                                             'marker': marker, 'tolerancePt': 1.25})
         if leader:
             cases[-1]['pdfTextNormalization'] = 'isolated-dot-leaders-v1'
-    registry = {'schema': 1, 'suite': {'id': 'core-v89', 'version': 89, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # Docxodus #1490: primary PDFs compare unchanged body layout; independently printed
+    # margin-profile companions must retain every source word, including off-viewport tails.
+    for name, count, notes, paragraphs, hidden in [
+            ('single-30', 30, 1, False, False), ('single-900', 900, 1, False, False),
+            ('paragraphs-30', 30, 1, True, False), ('many-notes', 2, 40, False, False),
+            ('nested-replies', 120, 3, False, False), ('short-control', 3, 1, False, False),
+            ('hidden-control', 900, 1, False, True)]:
+        body_text = 'MapleBody Archive ledger.'
+        body = para(runs='<w:commentRangeStart w:id="0"/>' + run(body_text) + '<w:commentRangeEnd w:id="0"/>'
+                    + ''.join(f'<w:r><w:commentReference w:id="{i}"/></w:r>' for i in range(notes)))
+        comments, source_words, topology = [], body_text.split(), None
+        ids = [f'{i + 1:08X}' for i in range(notes)]
+        for i in range(notes):
+            lines = [f'M{i:02d}{j:03d} The cabinet keeps one blue folder for each route.' for j in range(count)]
+            source_words.extend(' '.join(lines).split())
+            content = ''.join(para(line) for line in lines) if paragraphs else para(' '.join(lines))
+            content = content.replace('<w:p>', f'<w:p w14:paraId="{ids[i]}">', 1)
+            comments.append(f'<w:comment xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
+                            f'w:id="{i}" w:author="Maple Reviewer" w:date="2026-10-31T12:00:00Z">{content}</w:comment>')
+        if name == 'nested-replies':
+            topology = '<w15:commentsEx xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml">' + ''.join(
+                f'<w15:commentEx w15:paraId="{pid}"' + (f' w15:paraIdParent="{ids[i - 1]}"' if i else '') + '/>'
+                for i, pid in enumerate(ids)) + '</w15:commentsEx>'
+        add('comments-complete-' + name, 'paragraphs',
+            'Complete physical-margin PDF comments: ' + name.replace('-', ' ') + ' (Docxodus #1490)',
+            [body_text], body, styles_xml=comment_styles, comments_xml=''.join(comments), comments_extended_xml=topology)
+        cases[-1]['pdfCompanion'] = {'profile': {'review': 'final', 'comments': 'hidden' if hidden else 'margin'},
+                                     'pageSizePt': [612, 792],
+                                     'requiredTokens': dict(sorted(Counter(body_text.split() if hidden else source_words).items()))}
+        if hidden: cases[-1]['pdfCompanion']['exactInventory'] = True
+    registry = {'schema': 1, 'suite': {'id': 'core-v90', 'version': 90, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

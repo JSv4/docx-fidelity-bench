@@ -140,10 +140,10 @@ def color_geometry_pass(declaration, reference, candidate):
             abs(c['coverage'] / r['coverage'] - 1) <= declaration['coverageTolerance'])
 
 
-def inspect_pdf(path):
+def inspect_pdf(path, crop_box=False):
     structure = json.loads(execute(['qpdf', '--json=2', '--json-key=pages', '--json-key=qpdf', path]))
     geometry = geometries(structure)
-    words = bbox_words(execute(['pdftotext', '-bbox-layout', '-enc', 'UTF-8', path, '-']))
+    words = bbox_words(execute(['pdftotext', *(['-cropbox'] if crop_box else []), '-bbox-layout', '-enc', 'UTF-8', path, '-']))
     fonts_output = execute(['pdffonts', path])
     font_lines = fonts_output.splitlines()[2:]
     fonts = [line.split()[0].split('+')[-1] for line in font_lines if line.strip()]
@@ -219,6 +219,57 @@ def reference_failures(case, info, track='libreoffice'):
     """
     case = binding_case(case, track, reproduces_reference=True)
     return [check['name'] for check in correctness(case, info, info) if not check['passed']]
+
+
+def inspect_companion_pdf(path, declaration):
+    """Bind dark source-word extraction to paint in the same physical-page raster."""
+    from . import metrics
+    info = inspect_pdf(path, crop_box=True)
+    with tempfile.TemporaryDirectory(dir=Path(path).parent) as folder:
+        rasters = rasterize(path, folder)
+        if len(rasters) != len(info['geometry']):
+            raise ValueError('Companion PDF raster page coverage differs')
+        for page, raster in enumerate(rasters, 1):
+            width, height, pixels = metrics.read_ppm(raster)
+            # These declarations require dark source text. A pale note/highlight fill is
+            # nonwhite but cannot stand in for a printed glyph; require all RGB channels dark.
+            ink = bytearray(int(max(pixels[i:i+3]) < 160) for i in range(0, len(pixels), 3))
+            for word in info['words']:
+                if word['page'] != page or word['text'] not in declaration['requiredTokens']: continue
+                x0, y0, x1, y1 = [n * 96 / 72 for n in word['rect']]
+                word['inkPixels'] = sum(ink[y * width + x] for y in range(max(0, math.floor(y0)), min(height, math.ceil(y1)))
+                                        for x in range(max(0, math.floor(x0)), min(width, math.ceil(x1))))
+    return info
+
+
+def companion_checks(declaration, info):
+    """Check authored source text in a second print profile, without a layout reference.
+
+    Renderer-generated labels may differ; every declared source token must occur exactly as
+    often as authored and have positive bounds wholly within its physical PDF CropBox.
+    """
+    required = declaration['requiredTokens']
+    words = [w for w in info['words'] if w['text'] in required]
+    observed = Counter(w['text'] for w in (info['words'] if declaration.get('exactInventory') else words))
+    outside = []
+    for word in words:
+        geometry = info['geometry'][word['page'] - 1]
+        page = geometry['crop']
+        x0, y0, x1, y1 = word['rect']
+        width, height = page[2] - page[0], page[3] - page[1]
+        if geometry.get('rotation', 0) % 180: width, height = height, width
+        if not (0 <= x0 < x1 <= width + .25 and 0 <= y0 < y1 <= height + .25):
+            outside.append(word)
+    box = [0, 0, *declaration['pageSizePt']]
+    paper_matches = bool(info['geometry']) and all(g.get('rotation', 0) == 0 and all(
+        len(g[k]) == 4 and all(abs(a - b) <= .25 for a, b in zip(g[k], box)) for k in ('media', 'crop'))
+        for g in info['geometry'])
+    return [{'name': 'companion-pdf-paper-geometry', 'passed': paper_matches, 'expected': box},
+            {'name': 'companion-pdf-source-tokens', 'passed': observed == required,
+             'missing': dict(Counter(required) - observed), 'extra': dict(observed - Counter(required))},
+            {'name': 'companion-pdf-source-bounds', 'passed': not outside, 'outside': outside},
+            {'name': 'companion-pdf-source-paint', 'passed': bool(words) and all(w.get('inkPixels', 0) > 0 for w in words),
+             'unpainted': [w for w in words if w.get('inkPixels', 0) <= 0]}]
 
 
 def correctness(case, reference, candidate):
