@@ -25,6 +25,25 @@ def result(cases):
 
 
 class MetricContract(unittest.TestCase):
+    def test_colored_rule_inspector_contract_is_required_and_hash_bound(self):
+        measured = result([case('rules', 'tables')])
+        measured['cases'][0]['checks'] = [{'name': 'assertion-colored-rule-widths', 'passed': True}]
+        with self.assertRaisesRegex(ValueError, 'Missing colored-rule'):
+            runner.validate_result(measured)
+        measured['contract']['coloredRuleInspector'] = {'version': 1, 'sources': {
+            'bench/pdf.py': 'a' * 64, 'bench/vector_rules.py': 'b' * 64}}
+        measured['contractDigest'] = common.identity(measured['contract'])
+        runner.validate_result(measured)
+        changed = copy.deepcopy(measured)
+        changed['contract']['coloredRuleInspector']['sources']['bench/vector_rules.py'] = 'c' * 64
+        changed['contractDigest'] = common.identity(changed['contract'])
+        with self.assertRaisesRegex(ValueError, 'Measurement contract changed'):
+            runner.compare(measured, changed, 0)
+        measured['contract']['coloredRuleInspector']['sources']['bench/vector_rules.py'] = 'invalid'
+        measured['contractDigest'] = common.identity(measured['contract'])
+        with self.assertRaisesRegex(ValueError, 'Invalid colored-rule'):
+            runner.validate_result(measured)
+
     def test_identical_ink_is_100(self):
         image = raster(positions=[(5, 5), (6, 5), (5, 6)])
         self.assertEqual(metrics.page_metrics(image, image, 16, 16)['score'], 100)
@@ -355,7 +374,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 715)
+        self.assertEqual(len(common.validate_registry()['cases']), 724)
 
     def test_continuous_margin_pairs_isolate_geometry_and_keep_complete_labels(self):
         import xml.etree.ElementTree as ET
@@ -691,7 +710,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v99')
+        self.assertEqual(registry['suite']['id'], 'core-v100')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET

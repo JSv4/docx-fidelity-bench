@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The nine fractional-table-border cases for Docxodus #1522 contain original Alder labels
+and literal OOXML authored in `bench/fixtures.py`. They import no renderer fixture,
+helper, document, template, image or font program. Liberation Sans is separately provisioned.
+The labeled comparison sheets show only these original inputs and their unchanged page/table rasters.
+
 The eight DrawingML-group cases for Docxodus #1527 contain original Willow labels,
 literal OOXML and a small solid-color PNG authored in `bench/fixtures.py`. They import
 no document, helper, template, external image or font program. Their labeled comparison

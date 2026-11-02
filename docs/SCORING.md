@@ -68,6 +68,18 @@ They do not prove pixel-for-pixel shape identity: unchanged full-page raster sco
 measure all colors and contour differences. Source and inspector hashes bind this opt-in
 contract; cases without it keep their existing checks.
 
+Version-1 `colored-rule-widths` declarations identify a page, non-gray RGB color,
+positive `widthsPt` set and a tolerance of at most 0.02pt. Poppler's `pdftocairo -svg`
+exposes vector paths independently of the renderer. The inspector accepts straight
+stroked paths and filled orthogonal rectangles, composes their transforms, and measures
+physical perpendicular widths. Every observed width must match a declared value, and
+every declared value must occur. Missing paint, extra widths or unsupported colored
+geometry fail. This is an opt-in width check, not a proof of shape identity or clipping:
+colored bounds/coverage, text inventory and unchanged full-page raster scoring still apply.
+The table fixtures allow 0.01pt for vector serialization. They reject the old 0.75pt output
+for declared 0.25/0.5/1pt rules even when the 96-DPI raster paints the same minimum pixel.
+The Poppler executable hash and version are included in the environment contract.
+
 The absolute `color-geometry` form declares positive `boundsPt` and `coverage` instead of
 following the reference's paint. It is explicitly Word-adjudicated and uses the existing
 provider rule above: candidates must satisfy it even when LibreOffice disagrees. The WMF

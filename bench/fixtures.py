@@ -4403,7 +4403,49 @@ def generate():
             assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': label, 'tolerancePt': 0.75} for label in labels]
                 + ([{'type': 'color-reference-geometry', 'version': 1, 'page': 1, 'rgb': [20, 90, 150],
                      'tolerancePt': 1, 'coverageTolerance': 0.08}] if kind in ('mixed-picture', 'mixed-shape') else []))
-    registry = {'schema': 1, 'suite': {'id': 'core-v99', 'version': 99, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # #1522: original Alder cards distinguish declared subpixel rules and content widths.
+    alder_font = 'Liberation Sans'
+    alder_styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+        f'<w:rFonts w:ascii="{alder_font}" w:hAnsi="{alder_font}"/><w:sz w:val="24"/></w:rPr></w:rPrDefault>'
+        '<w:pPrDefault><w:pPr><w:widowControl w:val="0"/><w:spacing w:before="0" w:after="0" w:line="300" w:lineRule="exact"/>'
+        '</w:pPr></w:pPrDefault></w:docDefaults>{}</w:styles>')
+    def alder_edges(size, tag='tcBorders'):
+        sides = ['top', 'left', 'bottom', 'right'] + (['insideH', 'insideV'] if tag == 'tblBorders' else [])
+        return f'<w:{tag}>' + ''.join(f'<w:{side} w:val="single" w:sz="{size}" w:color="205080"/>'
+                                     for side in sides) + f'</w:{tag}>'
+    for kind, size in [('quarter', 2), ('half', 4), ('one', 8), ('style-quarter', 2),
+                       ('merged-segments', 2), ('wrap-quarter', 2), ('wrap-one', 8),
+                       ('no-border-control', 0), ('three-point-control', 24)]:
+        style_border = kind == 'style-quarter'
+        wrapping = kind.startswith('wrap-')
+        labels = ['MMMMMMMMMM iii' if wrapping else 'AlderNorth', 'AlderSouth']
+        def alder_cell(label, border_size=size, span=1):
+            return ('<w:tc><w:tcPr>' + f'<w:tcW w:w="{2400 * span}" w:type="dxa"/>'
+                + ('<w:gridSpan w:val="2"/>' if span == 2 else '')
+                + (alder_edges(border_size) if border_size and not style_border else '')
+                + '<w:tcMar>' + ''.join(f'<w:{side} w:w="90" w:type="dxa"/>' for side in ('top', 'left', 'bottom', 'right'))
+                + '</w:tcMar></w:tcPr>' + para(runs=run(label, '<w:spacing w:val="-1"/>' if wrapping else '')) + '</w:tc>')
+        rows = '<w:tr>' + alder_cell(labels[0]) + alder_cell(labels[1], 8 if kind == 'merged-segments' else size) + '</w:tr>'
+        if kind == 'merged-segments':
+            rows = '<w:tr>' + alder_cell('AlderMerged', span=2) + '</w:tr>' + rows
+            labels.insert(0, 'AlderMerged')
+        body = ('<w:tbl><w:tblPr>' + ('<w:tblStyle w:val="AlderGrid"/>' if style_border else '')
+            + '<w:tblW w:w="4800" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr>'
+            '<w:tblGrid><w:gridCol w:w="2400"/><w:gridCol w:w="2400"/></w:tblGrid>' + rows + '</w:tbl>' + para('AlderReceipt'))
+        extra_style = ('<w:style w:type="table" w:styleId="AlderGrid"><w:name w:val="Alder grid"/><w:tblPr>'
+                       + alder_edges(size, 'tblBorders') + '</w:tblPr></w:style>') if style_border else ''
+        assertions = ([{'type': 'color-reference-geometry', 'version': 1, 'page': 1, 'rgb': [32, 80, 128],
+                        'tolerancePt': 1.5, 'coverageTolerance': .08}] if size else [])
+        if size:
+            assertions.append({'type': 'colored-rule-widths', 'version': 1, 'page': 1, 'rgb': [32, 80, 128],
+                               'widthsPt': [.25, 1] if kind == 'merged-segments' else [size/8], 'tolerancePt': .01})
+        if wrapping:
+            # The final short word belongs on the first line, paired with the other cell's marker.
+            assertions.append({'type': 'marker-region', 'marker': 'iii', 'occurrence': 1,
+                               'page': 1, 'rect': [72, 72, 192, 72 + 4.5 + size/8 + 15]})
+        add('tables-fractional-border-' + kind, 'tables', 'Declared table border widths and content bounds: ' + kind + ' (Docxodus #1522)',
+            labels + ['AlderReceipt'], body, styles_xml=alder_styles.format(extra_style), font=alder_font, assertions=assertions)
+    registry = {'schema': 1, 'suite': {'id': 'core-v100', 'version': 100, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

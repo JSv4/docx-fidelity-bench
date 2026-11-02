@@ -7,7 +7,7 @@ from .common import digest, execute, identity
 
 def environment(families):
     tools = {}
-    for name, argument in [('qpdf', '--version'), ('pdftoppm', '-v'), ('pdftotext', '-v'), ('pdffonts', '-v')]:
+    for name, argument in [('qpdf', '--version'), ('pdftoppm', '-v'), ('pdftocairo', '-v'), ('pdftotext', '-v'), ('pdffonts', '-v')]:
         path = shutil.which(name)
         if not path:
             raise RuntimeError('Required external executable is missing: ' + name)

@@ -101,6 +101,26 @@ def inspect_case_pdf(path, case, *, word_font_bindings=None, font_contract=None)
                 if page <= len(pages):
                     observed.update(color_region(*read_ppm(pages[page - 1]), declaration['rgb']))
                 info['colorRegions'].append(observed)
+    rules = [a for a in case.get('assertions', []) if a['type'] == 'colored-rule-widths']
+    if rules:
+        from . import vector_rules
+        info['coloredRuleWidths'] = []
+        with tempfile.TemporaryDirectory(prefix='bench-rules-') as folder:
+            for declaration in rules:
+                page = declaration['page']
+                observed = {'page': page, 'rgb': declaration['rgb'], 'widthsPt': []}
+                try:
+                    if page > len(info['geometry']): raise ValueError('Declared rule page is missing')
+                    target = Path(folder) / f'page-{page}.svg'
+                    execute(['pdftocairo', '-f', str(page), '-l', str(page), '-svg', path, target], timeout=180)
+                    geometry = info['geometry'][page-1]
+                    box = geometry['crop']
+                    dimensions = [box[2]-box[0], box[3]-box[1]]
+                    if geometry['rotation'] % 180: dimensions.reverse()
+                    observed['widthsPt'] = vector_rules.widths(target.read_text(), declaration['rgb'], dimensions)
+                except ValueError as error:
+                    observed['error'] = str(error)
+                info['coloredRuleWidths'].append(observed)
     if word_font_bindings is not None:
         from .word_fonts import qualify
         from .common import ROOT, contained
@@ -290,7 +310,11 @@ def correctness(case, reference, candidate):
         checks.append({'name': f'physical-geometry-page-{i+1}', 'passed': passed})
     for assertion in case['assertions']:
         try:
-            if assertion['type'] in ('color-reference-geometry', 'color-geometry'):
+            if assertion['type'] == 'colored-rule-widths':
+                from . import vector_rules
+                records = [r for r in candidate.get('coloredRuleWidths', []) if r['page'] == assertion['page'] and r['rgb'] == assertion['rgb']]
+                passed = len(records) == 1 and vector_rules.matches(assertion, records[0])
+            elif assertion['type'] in ('color-reference-geometry', 'color-geometry'):
                 passed = color_geometry_pass(assertion, reference, candidate)
             elif assertion['type'] == 'same-page':
                 anchors = [marker(candidate, m) for m in assertion['markers']]
