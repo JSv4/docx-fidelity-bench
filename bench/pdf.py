@@ -289,7 +289,11 @@ def companion_checks(declaration, info):
              'missing': dict(Counter(required) - observed), 'extra': dict(observed - Counter(required))},
             {'name': 'companion-pdf-source-bounds', 'passed': not outside, 'outside': outside},
             {'name': 'companion-pdf-source-paint', 'passed': bool(words) and all(w.get('inkPixels', 0) > 0 for w in words),
-             'unpainted': [w for w in words if w.get('inkPixels', 0) <= 0]}]
+             'unpainted': [w for w in words if w.get('inkPixels', 0) <= 0]}] + ([{
+                 'name': 'companion-pdf-forbidden-tokens',
+                 'passed': not any(w['text'] in declaration['forbiddenTokens'] for w in info['words']),
+                 'observed': [w for w in info['words'] if w['text'] in declaration['forbiddenTokens']],
+             }] if 'forbiddenTokens' in declaration else [])
 
 
 def correctness(case, reference, candidate):

@@ -41,7 +41,7 @@ export function collectReadableFacts(declarations) {
   for (let index = 0; index < declarations.length; index++) {
     const declaration = declarations[index];
     if (declaration.type === 'marker-attribute') continue;
-    if (!['marker-readable', 'marker-computed-style', 'named-checkbox'].includes(declaration.type)) throw new Error('Unknown browser HTML assertion');
+    if (!['marker-readable', 'marker-computed-style', 'named-checkbox', 'review-display'].includes(declaration.type)) throw new Error('Unknown browser HTML assertion');
     if (declaration.type === 'named-checkbox') {
       const controls = [...document.querySelectorAll('[role="checkbox"],input[type="checkbox"]')]
         .filter(element => element.getAttribute('aria-label') === declaration.marker);
@@ -86,6 +86,17 @@ export function collectReadableFacts(declarations) {
     const first = segments.find(s => s.start <= start && s.end > start);
     const last = segments.find(s => s.start < end && s.end >= end);
     if (!first || !last) throw new Error('Marker offsets do not map to delivered text nodes');
+    if (declaration.type === 'review-display') {
+      const labels = [...document.querySelectorAll('.page-balloon b')].map(element => element.textContent);
+      facts.reviewCounts = {
+        formatBalloons: labels.filter(label => label.startsWith('Formatted')).length,
+        commentBalloons: labels.filter(label => label.startsWith('Commented')).length,
+        insertions: document.querySelectorAll('ins').length,
+        deletions: document.querySelectorAll('del').length,
+        areas: document.querySelectorAll('.page-markup-area').length,
+        layers: document.querySelectorAll('.page-markup-layer').length,
+      };
+    }
     if (declaration.type === 'marker-computed-style') {
       if (declaration.property !== 'font-size') throw new Error('Unknown computed HTML style property');
       facts.computedStyle = { [declaration.property]: segments.filter(s => s.start < end && s.end > start)

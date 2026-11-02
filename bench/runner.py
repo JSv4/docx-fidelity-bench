@@ -151,7 +151,8 @@ def render_companion(adapter, request, declaration, folder, primary):
                 any(environment.get('observed', {}).get(key) != value for key, value in primary['renderer']['runtime'].items()) or
                 profile.get('reviewProfile') != expected['review'] or profile.get('commentProfile') != expected['comments'] or
                 profile.get('markupPresentation', 'html') != expected.get('markupPresentation', 'html') or
-                profile.get('commentColumnPlacement', 'margin') != 'margin' or
+                profile.get('commentColumnPlacement', 'margin') != expected.get('commentColumnPlacement', 'margin') or
+                profile.get('markupVisibility', {}) != {key: False for key, value in expected.get('markupVisibility', {}).items() if value is False} or
                 production.get('bindings', {}).get('pdfDigest') != pdf_sha or response.get('pdfSha256') != pdf_sha):
             raise ValueError('Companion source, profile, runtime or PDF binding differs')
         evidence.update(productionSha256=digest(folder / 'companion-production.json'), pdfSha256=pdf_sha,
