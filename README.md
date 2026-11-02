@@ -73,6 +73,10 @@ ordinary replacement controls. A structural assertion checks moved and deleted t
 accept/reject and schema checks remain mandatory. [LibreOffice and Word Online previews](docs/results/move-from-text/README.md)
 show the local outputs; Word Online opens both baseline and fixed output.
 
+An [unweighted font diagnostic](docs/FONT_DIAGNOSTICS.md) covers actual fallback-face
+observations, unused declarations and per-page request attribution. It independently reads
+font names from produced PDFs and keeps missing-font warnings and verification status intact.
+
 An additional [unweighted editor browser diagnostic](docs/editor/README.md) covers review
 counts/targets, tab caret movement and native plain/rich clipboard actions with ten original
 reproducer/control inputs. [Labeled before/after evidence](docs/results/editor-review-tabs/README.md)

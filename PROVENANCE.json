@@ -4,7 +4,7 @@
       "author": "John Scrudato IV",
       "license": "MIT",
       "origin": "Authored for this repository",
-      "sha256": "70be14c7810a994cbb1f999183ee616c8a5e604a157db01184769c85a211f618"
+      "sha256": "efe815442f5cacf1e056240e32ccc06e5fb99f17668a3e6f0ac80e7c30afb757"
     },
     ".github/workflows/validate.yml": {
       "author": "John Scrudato IV",
@@ -34,7 +34,7 @@
       "author": "John Scrudato IV",
       "license": "MIT",
       "origin": "Authored for this repository",
-      "sha256": "1aee5d50f99f9208aeb9272ad8c1a72051348da355c874947aa53d1481a47b90"
+      "sha256": "4c62bbab5e98cf5e0ae8470f22c876aa90fd8251bf50ce56e4f4ef7656eedc4c"
     },
     "RESULTS.md": {
       "author": "John Scrudato IV",
@@ -46,7 +46,7 @@
       "author": "John Scrudato IV",
       "license": "MIT",
       "origin": "Authored for this repository",
-      "sha256": "446656171ad99662b2e1c412288ec87d94e8556b69016d6bb1d59fe49d6ed857"
+      "sha256": "6e01dce304be9f0aa82d24b080813dcc1926ad2373c7bbafb470c30a630c8686"
     },
     "adapters/docxodus-projection/DocxBenchProjection.csproj": {
       "author": "John Scrudato IV",
@@ -84,6 +84,12 @@
       "origin": "Authored for this repository",
       "sha256": "a31ef0e9cfa2efe4d878104063d17ea5c7b02e7d9d9ff0dc684dab8120c19b44"
     },
+    "adapters/font-diagnostic.mjs": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "a025f567cba7b0f44234d0a60343f930d38ff2a4afac1de77958f5f2556f078e"
+    },
     "bench/__init__.py": {
       "author": "John Scrudato IV",
       "license": "MIT",
@@ -106,7 +112,7 @@
       "author": "John Scrudato IV",
       "license": "MIT",
       "origin": "Authored for this repository",
-      "sha256": "1801437b813bb211d515ccd43ed399d17e3896bcdf52d3c15fe3fac321373fd6"
+      "sha256": "eddbf68d2c67bd827f532e1e4a95fe73ddd0cdcf052895f2c4fb5fe989382564"
     },
     "bench/build.py": {
       "author": "John Scrudato IV",
@@ -149,6 +155,18 @@
       "license": "MIT",
       "origin": "Authored for this repository",
       "sha256": "5cd50beffb2da1ace1f41ef9917a944af6f728afa6b085c87c35ba7bac471bab"
+    },
+    "bench/font_fixtures.py": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "dd9d666369ab350e7adeeb28aad563eb262f2161aeac142e6d8c60675db38584"
+    },
+    "bench/fonts.py": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "317b0608f5bd2f593c19043142790018e17afb97953441027ab8d82a292c7413"
     },
     "bench/html_artifacts.py": {
       "author": "John Scrudato IV",
@@ -269,6 +287,12 @@
       "license": "MIT",
       "origin": "Authored for this repository",
       "sha256": "2d63b96a6609c678e7a3bb8743a2a735430f059c1e6c8a679016d1d7b582acf3"
+    },
+    "docs/FONT_DIAGNOSTICS.md": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "923a5f82d0afbc454452469f18b8c0fadb9d49329b26b631622833af7f743027"
     },
     "docs/REDLINE.md": {
       "author": "John Scrudato IV",
@@ -2963,6 +2987,60 @@
       "license": "MIT",
       "origin": "Authored for this repository",
       "sha256": "03cf213f54a5364bd9b082f39ff1d27b623e537ba264ffca4dfe758c8a12e8e5"
+    },
+    "docs/results/font-observation/README.md": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "4859f2a9e4d3234915bb3bfff3d1fa02ef6e4fdebe142a2b6ac5ab5ca8d5a44c"
+    },
+    "docs/results/font-observation/configured-control.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "8d9f6fa14f29796dba25a3de1858517021d0c12880853baa8c63d6daba82994e"
+    },
+    "docs/results/font-observation/local-evidence.json": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "03cd131f54eebb3258e91be6bbe827d7557d6bb50a27e2d18bd7bf7a22542ccc"
+    },
+    "docs/results/font-observation/missing-separate.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "9c892f24b6aa6c654c04b8b52050f99c25dd10880977d803bbe2ff92ec64d2dc"
+    },
+    "docs/results/font-observation/mixed-glyphs.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "cdac6a867812f5fd8b30763a48044bbd5d99c0be702fe81c47899a990a61692c"
+    },
+    "docs/results/font-observation/separate-requests.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "a08bedc3644f4058559eec83350fc48d118324e7d49575c2edee602cd529e103"
+    },
+    "docs/results/font-observation/unused-style-control.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "6a1d1e1b8170edb333db1dffc2103719c1542cc2f4312ca2923abb43913ae857"
+    },
+    "docs/results/font-observation/unused-table-control.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "43ba56103473f77be32ffc998040a23f5d1fac7232bc1f5f904a5642f63eb90e"
+    },
+    "docs/results/font-observation/used-missing.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "42c641880abf52e811674435bff275fd2ffcb77b2bcd067286a5c78783e76047"
     },
     "docs/results/fractional-table-borders/README.md": {
       "author": "John Scrudato IV",
@@ -9653,6 +9731,54 @@
       "license": "MIT",
       "origin": "Generated by bench/fixtures.py",
       "sha256": "185f53759407f88ca4d85603f579fc59aa38b9b59b83d137f724b64f8a9ae3d0"
+    },
+    "fixtures/fonts/configured-control.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/font_fixtures.py",
+      "sha256": "a8ee5e5a1d425053e63237e83f8d7c1212fe276058ba3762f8a7f8592b36cd94"
+    },
+    "fixtures/fonts/manifest.json": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/font_fixtures.py",
+      "sha256": "2781653008e34ce7acd345539027227695bbc7d6ba8556396649dd8614dd13c8"
+    },
+    "fixtures/fonts/missing-separate.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/font_fixtures.py",
+      "sha256": "fe700b33cf7be669bc6410d18f6393d56aa88dbca221fac474819bddb6ba359f"
+    },
+    "fixtures/fonts/mixed-glyphs.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/font_fixtures.py",
+      "sha256": "06f44ff71c9ca8d152e6ec30d9c461fecaec1088116d7899c9621f5413beeb90"
+    },
+    "fixtures/fonts/separate-requests.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/font_fixtures.py",
+      "sha256": "aad4496a5e5b84d8400bdec5db456406d318af8c59cf4bed44991d8d72e7fbec"
+    },
+    "fixtures/fonts/unused-style-control.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/font_fixtures.py",
+      "sha256": "be74ae233bd8a827659f926c5a7f13212be617bf2a990c90d693406b25e3c37b"
+    },
+    "fixtures/fonts/unused-table-control.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/font_fixtures.py",
+      "sha256": "53ffd87d40d2f1ab8d9ea83426146fdf4bc0d36f94448dec7d658ea4441f11a5"
+    },
+    "fixtures/fonts/used-missing.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/font_fixtures.py",
+      "sha256": "5c2328a720a4c6e9e0e0e1c81af5e1e51e4693ff7898bf710983f634b734669e"
     },
     "fixtures/footer-paragraph-flow-control.docx": {
       "author": "John Scrudato IV",
@@ -17447,6 +17573,12 @@
       "license": "MIT",
       "origin": "Authored for this repository",
       "sha256": "162960ac9bafdc74f94bbc0d69b5974c78fe11ba7d02d168ea183a004908ef63"
+    },
+    "tests/test_fonts.py": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "e66475ebdd312c81dd2bb1bf50b5133ea02a12301e70786e0c1f2569c212d624"
     },
     "tests/test_fractional_table_borders.py": {
       "author": "John Scrudato IV",

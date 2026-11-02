@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The seven font-observation diagnostics for Docxodus #1525 contain original Birch text and
+literal OOXML authored in `bench/font_fixtures.py`. They import no renderer fixture, helper,
+document, template, image or font program. Liberation and Noto fonts are separately provisioned;
+the repository stores only source packages, measurement metadata and authored-document screenshots.
+
 The 14 review-visibility cases for Docxodus #1523 contain original Hazel labels and
 literal OOXML authored in `bench/fixtures.py`. They import no renderer fixture, helper,
 document, template, image or font program. Liberation Sans is separately provisioned.
