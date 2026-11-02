@@ -7,7 +7,7 @@ a borderless control and a three-point control. All use two 120pt grid columns,
 
 The local baseline is the existing 15.0.0 build at
 `4bb8386be06ded02dd41564fcf2d18742dd04cbe`. It fails seven cases; both controls pass.
-The candidate at `c314e0470aeddd19f22bf6cc8eb0ab62c53d3e21`
+The candidate at `2b0a5164f989f334a83e9dfa21db8500308345f1`
 ([Docxodus PR #1537](https://github.com/JSv4/Docxodus/pull/1537)) and all nine LibreOffice
 references pass every declared mandatory check. These are focused local diagnostics,
 not a full-suite score or a fresh Word capture.
