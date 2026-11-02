@@ -4,6 +4,8 @@ Eight original Willow fixtures cover JSv4/Docxodus#1527: three independent heade
 stories, nested child coordinates, a nonuniformly scaled group with a 2pt inset,
 a picture sibling, an ellipse sibling, a body group, and single/separate controls.
 Complete token inventories and independent label positions apply to every case.
+The two mixed cases also require the blue member’s bounds and paint coverage;
+substituting the ordinary header PDF fails that check.
 
 The screenshots show the complete page from LibreOffice, the existing local 15.0.0
 build (`4bb8386be06ded02dd41564fcf2d18742dd04cbe`), and the fixed local build.

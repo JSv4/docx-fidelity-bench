@@ -4400,7 +4400,9 @@ def generate():
         add('textboxes-drawingml-group-' + kind, 'images', 'Independent DrawingML textbox stories: ' + kind + ' (Docxodus #1527)',
             ['WillowReceipt'] + labels, para('WillowReceipt') + ('' if header else carrier), paper,
             story=('header', carrier) if header else None, styles_xml=willow_styles, extra_parts=extra,
-            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': label, 'tolerancePt': 0.75} for label in labels])
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': label, 'tolerancePt': 0.75} for label in labels]
+                + ([{'type': 'color-reference-geometry', 'version': 1, 'page': 1, 'rgb': [20, 90, 150],
+                     'tolerancePt': 1, 'coverageTolerance': 0.08}] if kind in ('mixed-picture', 'mixed-shape') else []))
     registry = {'schema': 1, 'suite': {'id': 'core-v99', 'version': 99, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
