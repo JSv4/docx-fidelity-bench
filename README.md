@@ -1,5 +1,10 @@
 # DOCX fidelity bench
 
+`core-v99` adds eight original DrawingML-group cases for Docxodus #1527: independent
+header/body stories, nested and scaled coordinates, mixed picture/shape members, and
+single/separate controls. [All eight labeled comparisons](docs/results/drawingml-group-stories/README.md)
+include complete token inventories and explicit baseline refusal panels.
+
 `core-v96` adds eight original frame-clearance cases for Docxodus #1510: four native
 preceding-text/page-end reproducers and four matched zero-distance controls. Complete token
 inventories and Word-adjudicated marker regions preserve fixed frame paint and page ownership.

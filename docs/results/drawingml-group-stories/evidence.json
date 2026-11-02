@@ -1,0 +1,3600 @@
+{
+  "kind": "local unscored diagnostics",
+  "renderers": [
+    "LibreOffice",
+    "existing15.0.0build4bb8386b",
+    "freshcandidatebuild"
+  ],
+  "cases": {
+    "textboxes-drawingml-group-header": {
+      "inputSha256": "3d3325a7cdc6228e5462fdfb9ab77f1c7d815790f449d85b02db41ebfb149bd2",
+      "pdfSha256": [
+        "258d8f4529dd770ebee97ffdffb1699bfaa03fb942f52b9f751e7de5e9b81a7d",
+        null,
+        "5e6683feea0dfa15b7fe8f321fff0b61e587e3d9cdc4697f77fcd930c13329d6"
+      ],
+      "libreOfficeChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSerif"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowNorthPanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowMiddlePanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowEastPanel",
+            "tolerancePt": 0.75
+          }
+        }
+      ],
+      "baselineChecks": null,
+      "candidateChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSerif",
+            "LiberationSerif"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowNorthPanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowMiddlePanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowEastPanel",
+            "tolerancePt": 0.75
+          }
+        }
+      ],
+      "baselineRefusal": {
+        "name": "DocxodusExportError",
+        "code": "output_verification_failure",
+        "severity": "error",
+        "phase": "output_verification",
+        "message": "source anchor p:hdr1:c72cb1f4878931d01d0f0958b3b04e27 has no measurable fragment in the paginated layout",
+        "remediation": "Inspect the render report and source document, then retry with supported content.",
+        "report": {
+          "schema": "https://docxodus.dev/schemas/render/render-report/v2",
+          "schemaVersion": 2,
+          "source": {
+            "rawPackageBytesDigest": "3d3325a7cdc6228e5462fdfb9ab77f1c7d815790f449d85b02db41ebfb149bd2",
+            "byteLength": 2751,
+            "documentVersion": 0
+          },
+          "derivedProfileSource": {
+            "rawPackageBytesDigest": "811a1d5e300ed392456f9ef325074bcf95ade78ab270a0f6a900e74031f0ac32",
+            "byteLength": 2846
+          },
+          "options": {
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "commentProfile": "hidden",
+            "title": "",
+            "outputs": [
+              "html"
+            ],
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "runtimePolicyDigest": "64d4ab1c951bbf2c6528a8c737977b05672a973da1463387915b8d24579bbe13",
+            "policy": {
+              "unsupportedContent": "warn",
+              "strictFonts": false,
+              "timeoutMs": 120000,
+              "limits": {
+                "compressedDocxBytes": 104857600,
+                "opcEntries": 10000,
+                "expandedOpcBytes": 1073741824,
+                "xmlPartBytes": 33554432,
+                "opcUriCharacters": 2048,
+                "opcCompressionRatio": 1000,
+                "htmlOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pageMapOutputBytes": 268435456,
+                "renderReportOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "finalPages": 10000,
+                "domNodes": 1000000,
+                "automaticResources": 10000,
+                "automaticResourceBytes": 268435456,
+                "renderDiagnostics": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFiles": 1000,
+                "fontFileBytes": 33554432,
+                "fontTotalBytes": 134217728,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536
+              }
+            }
+          },
+          "readiness": [
+            {
+              "phase": "input_validation",
+              "status": "complete",
+              "elapsedMs": 0,
+              "pending": []
+            },
+            {
+              "phase": "wasm_initialization",
+              "status": "complete",
+              "elapsedMs": 69.39999997615814,
+              "pending": []
+            },
+            {
+              "phase": "wasm_initialization",
+              "status": "complete",
+              "elapsedMs": 908,
+              "pending": []
+            },
+            {
+              "phase": "wasm_initialization",
+              "status": "complete",
+              "elapsedMs": 134.70000004768372,
+              "pending": []
+            },
+            {
+              "phase": "package_preflight",
+              "status": "complete",
+              "elapsedMs": 342.39999997615814,
+              "pending": []
+            },
+            {
+              "phase": "package_preflight",
+              "status": "complete",
+              "elapsedMs": 109.70000004768372,
+              "pending": []
+            },
+            {
+              "phase": "package_preflight",
+              "status": "complete",
+              "elapsedMs": 21.299999952316284,
+              "pending": []
+            },
+            {
+              "phase": "docx_conversion",
+              "status": "complete",
+              "elapsedMs": 285,
+              "pending": []
+            },
+            {
+              "phase": "browser_launch",
+              "status": "complete",
+              "elapsedMs": 33.199999928474426,
+              "pending": []
+            },
+            {
+              "phase": "font_loading",
+              "status": "complete",
+              "elapsedMs": 60.89999997615814,
+              "pending": []
+            },
+            {
+              "phase": "image_decoding",
+              "status": "complete",
+              "elapsedMs": 0,
+              "pending": []
+            },
+            {
+              "phase": "chart_svg_materialization",
+              "status": "complete",
+              "elapsedMs": 0,
+              "pending": []
+            },
+            {
+              "phase": "pagination",
+              "status": "complete",
+              "elapsedMs": 3.5,
+              "pending": []
+            },
+            {
+              "phase": "running_story_placement",
+              "status": "complete",
+              "elapsedMs": 1,
+              "pending": []
+            },
+            {
+              "phase": "page_tree_stability",
+              "status": "complete",
+              "elapsedMs": 107.70000004768372,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 0.3999999761581421,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 0.10000002384185791,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 0.09999990463256836,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 0.6000000238418579,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "failed",
+              "elapsedMs": 0.8000000715255737,
+              "pending": [
+                "PageMap geometry"
+              ]
+            }
+          ],
+          "fonts": [
+            {
+              "requestId": "font-0001",
+              "requestedFamily": "Liberation Serif",
+              "requestedFamilies": [
+                "Liberation Serif",
+                "serif"
+              ],
+              "requestedFamilyKinds": [
+                "named",
+                "generic"
+              ],
+              "requestedStyle": "normal",
+              "requestedWeight": 400,
+              "requestedStretch": 100,
+              "sampleCodePointCount": 10,
+              "sampleDigest": "085e14d92d4ce70b87e90d36468c9b5e18b9783787c152cea7bd0e6f7b73fc42",
+              "resolvedFamily": "Liberation Serif",
+              "resolvedFace": "LiberationSerif",
+              "status": "resolved",
+              "source": "configured",
+              "format": "ttf",
+              "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65",
+              "version": "Version 2.1.5",
+              "licenseEvidence": {
+                "kind": "installable",
+                "identity": "d890364ece7ac0d51b95c8e31a0dda42cd03c9b9e022b8120381b6177efefbb5",
+                "noSubsetting": false
+              },
+              "faceMatch": "exact",
+              "metricCompatible": true,
+              "glyphCoverage": "complete",
+              "verified": true
+            }
+          ],
+          "resources": [],
+          "unsupportedContent": [
+            {
+              "contentType": "Other",
+              "elementName": "anchor",
+              "anchorId": "p:hdr1:bffdd522bfb7b34fb08f315ac7d42ca0",
+              "action": "placeholder"
+            }
+          ],
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:hdr1:bffdd522bfb7b34fb08f315ac7d42ca0",
+              "severity": "warning"
+            }
+          ],
+          "fontIdentity": {
+            "resolverContract": "https://docxodus.dev/contracts/font-resolver/v1",
+            "substitutionContractVersion": 1,
+            "substitutionContractDigest": "2dfdd1841ba5d1f2d6064f798922421564ace117cdb999b2156cbc7891dd4548",
+            "resolutionDigest": "a6fa2fffbbe1774d202cbe58823c0044ffa2d7fec13c8b071a93a69d70a70c43",
+            "resolverDigest": "5ee58beacc4df7b00e62d975ee3b218de4d33ec9e75efaa205120d1bcef4615a"
+          },
+          "status": "failed",
+          "failure": {
+            "code": "output_verification_failure",
+            "severity": "error",
+            "phase": "output_verification",
+            "message": "source anchor p:hdr1:c72cb1f4878931d01d0f0958b3b04e27 has no measurable fragment in the paginated layout",
+            "remediation": "Inspect the render report and source document, then retry with supported content."
+          },
+          "environment": {
+            "rendererFingerprint": "994883972506f627635793f0d1d6cbcd2f3a9c7a982ba005d9ec4639fee09e34",
+            "verification": "browserObserved",
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "runtimeKind": "browser",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "contextRestricted"
+            }
+          },
+          "unavailable": [
+            {
+              "field": "bindings.pageMapDigest",
+              "reasonCode": "notReached",
+              "detail": "PageMap materialization was not reached."
+            },
+            {
+              "field": "bindings.htmlDigest",
+              "reasonCode": "notReached",
+              "detail": "Standalone HTML materialization was not reached."
+            },
+            {
+              "field": "bindings.pdfDigest",
+              "reasonCode": "notRequested",
+              "detail": "PDF output was not selected by the browser materializer."
+            }
+          ]
+        }
+      },
+      "markers": [
+        {
+          "WillowEastPanel": {
+            "text": "WillowEastPanel",
+            "page": 1,
+            "rect": [
+              312.15,
+              38.199,
+              388.435,
+              50.376
+            ]
+          },
+          "WillowMiddlePanel": {
+            "text": "WillowMiddlePanel",
+            "page": 1,
+            "rect": [
+              192.1,
+              38.199,
+              281.222,
+              50.376
+            ]
+          },
+          "WillowNorthPanel": {
+            "text": "WillowNorthPanel",
+            "page": 1,
+            "rect": [
+              72.1,
+              38.199,
+              155.095,
+              50.376
+            ]
+          },
+          "WillowReceipt": {
+            "text": "WillowReceipt",
+            "page": 1,
+            "rect": [
+              72.1,
+              74.199,
+              138.584,
+              86.376
+            ]
+          }
+        },
+        null,
+        {
+          "WillowEastPanel": {
+            "text": "WillowEastPanel",
+            "page": 1,
+            "rect": [
+              311.999987,
+              37.452208,
+              387.877875,
+              49.628311
+            ]
+          },
+          "WillowMiddlePanel": {
+            "text": "WillowMiddlePanel",
+            "page": 1,
+            "rect": [
+              191.999992,
+              37.452208,
+              280.705676,
+              49.628311
+            ]
+          },
+          "WillowNorthPanel": {
+            "text": "WillowNorthPanel",
+            "page": 1,
+            "rect": [
+              71.999997,
+              37.452208,
+              154.597718,
+              49.628311
+            ]
+          },
+          "WillowReceipt": {
+            "text": "WillowReceipt",
+            "page": 1,
+            "rect": [
+              71.999997,
+              74.202207,
+              138.10407,
+              86.378309
+            ]
+          }
+        }
+      ],
+      "screenshotSha256": "dc5e60c472f8fb4e748aa85f30905b99eb3cc6913333d883fde0ceaf53fd861d"
+    },
+    "textboxes-drawingml-group-nested": {
+      "inputSha256": "7077d106aaa7447d2dbc09ac1f394f495851ef0fdee64bde49607fcfb6d4ccb1",
+      "pdfSha256": [
+        "756ba2e41ae1f39a0aa03c3811652435e9179a402f28be4323a26bb4d1b0d644",
+        null,
+        "c843eeca0d556b56e41bd4d98268d87e3640e2f5d9b82b73ca0e547cadc436d2"
+      ],
+      "libreOfficeChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSerif"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowNorthPanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowMiddlePanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowEastPanel",
+            "tolerancePt": 0.75
+          }
+        }
+      ],
+      "baselineChecks": null,
+      "candidateChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSerif",
+            "LiberationSerif"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowNorthPanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowMiddlePanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowEastPanel",
+            "tolerancePt": 0.75
+          }
+        }
+      ],
+      "baselineRefusal": {
+        "name": "DocxodusExportError",
+        "code": "output_verification_failure",
+        "severity": "error",
+        "phase": "output_verification",
+        "message": "source anchor p:hdr1:15c38e5e3f03ea06f1bcf68b6e9f0d2e has no measurable fragment in the paginated layout",
+        "remediation": "Inspect the render report and source document, then retry with supported content.",
+        "report": {
+          "schema": "https://docxodus.dev/schemas/render/render-report/v2",
+          "schemaVersion": 2,
+          "source": {
+            "rawPackageBytesDigest": "7077d106aaa7447d2dbc09ac1f394f495851ef0fdee64bde49607fcfb6d4ccb1",
+            "byteLength": 2792,
+            "documentVersion": 0
+          },
+          "derivedProfileSource": {
+            "rawPackageBytesDigest": "cb45c313b16dd6d6447413501bc232609dd1ba1baf70a9ec835fa63484b9c465",
+            "byteLength": 2883
+          },
+          "options": {
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "commentProfile": "hidden",
+            "title": "",
+            "outputs": [
+              "html"
+            ],
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "runtimePolicyDigest": "64d4ab1c951bbf2c6528a8c737977b05672a973da1463387915b8d24579bbe13",
+            "policy": {
+              "unsupportedContent": "warn",
+              "strictFonts": false,
+              "timeoutMs": 120000,
+              "limits": {
+                "compressedDocxBytes": 104857600,
+                "opcEntries": 10000,
+                "expandedOpcBytes": 1073741824,
+                "xmlPartBytes": 33554432,
+                "opcUriCharacters": 2048,
+                "opcCompressionRatio": 1000,
+                "htmlOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pageMapOutputBytes": 268435456,
+                "renderReportOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "finalPages": 10000,
+                "domNodes": 1000000,
+                "automaticResources": 10000,
+                "automaticResourceBytes": 268435456,
+                "renderDiagnostics": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFiles": 1000,
+                "fontFileBytes": 33554432,
+                "fontTotalBytes": 134217728,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536
+              }
+            }
+          },
+          "readiness": [
+            {
+              "phase": "input_validation",
+              "status": "complete",
+              "elapsedMs": 0.10000002384185791,
+              "pending": []
+            },
+            {
+              "phase": "wasm_initialization",
+              "status": "complete",
+              "elapsedMs": 30.600000023841858,
+              "pending": []
+            },
+            {
+              "phase": "wasm_initialization",
+              "status": "complete",
+              "elapsedMs": 1068.6999999284744,
+              "pending": []
+            },
+            {
+              "phase": "wasm_initialization",
+              "status": "complete",
+              "elapsedMs": 176.5,
+              "pending": []
+            },
+            {
+              "phase": "package_preflight",
+              "status": "complete",
+              "elapsedMs": 289,
+              "pending": []
+            },
+            {
+              "phase": "package_preflight",
+              "status": "complete",
+              "elapsedMs": 122.30000007152557,
+              "pending": []
+            },
+            {
+              "phase": "package_preflight",
+              "status": "complete",
+              "elapsedMs": 20,
+              "pending": []
+            },
+            {
+              "phase": "docx_conversion",
+              "status": "complete",
+              "elapsedMs": 182.89999997615814,
+              "pending": []
+            },
+            {
+              "phase": "browser_launch",
+              "status": "complete",
+              "elapsedMs": 37.5,
+              "pending": []
+            },
+            {
+              "phase": "font_loading",
+              "status": "complete",
+              "elapsedMs": 104.5,
+              "pending": []
+            },
+            {
+              "phase": "image_decoding",
+              "status": "complete",
+              "elapsedMs": 0,
+              "pending": []
+            },
+            {
+              "phase": "chart_svg_materialization",
+              "status": "complete",
+              "elapsedMs": 0,
+              "pending": []
+            },
+            {
+              "phase": "pagination",
+              "status": "complete",
+              "elapsedMs": 6.100000023841858,
+              "pending": []
+            },
+            {
+              "phase": "running_story_placement",
+              "status": "complete",
+              "elapsedMs": 5.299999952316284,
+              "pending": []
+            },
+            {
+              "phase": "page_tree_stability",
+              "status": "complete",
+              "elapsedMs": 108.19999992847443,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 0.40000009536743164,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 1.3000000715255737,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 0.10000002384185791,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 1.0999999046325684,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "failed",
+              "elapsedMs": 1.5,
+              "pending": [
+                "PageMap geometry"
+              ]
+            }
+          ],
+          "fonts": [
+            {
+              "requestId": "font-0001",
+              "requestedFamily": "Liberation Serif",
+              "requestedFamilies": [
+                "Liberation Serif",
+                "serif"
+              ],
+              "requestedFamilyKinds": [
+                "named",
+                "generic"
+              ],
+              "requestedStyle": "normal",
+              "requestedWeight": 400,
+              "requestedStretch": 100,
+              "sampleCodePointCount": 10,
+              "sampleDigest": "085e14d92d4ce70b87e90d36468c9b5e18b9783787c152cea7bd0e6f7b73fc42",
+              "resolvedFamily": "Liberation Serif",
+              "resolvedFace": "LiberationSerif",
+              "status": "resolved",
+              "source": "configured",
+              "format": "ttf",
+              "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65",
+              "version": "Version 2.1.5",
+              "licenseEvidence": {
+                "kind": "installable",
+                "identity": "d890364ece7ac0d51b95c8e31a0dda42cd03c9b9e022b8120381b6177efefbb5",
+                "noSubsetting": false
+              },
+              "faceMatch": "exact",
+              "metricCompatible": true,
+              "glyphCoverage": "complete",
+              "verified": true
+            }
+          ],
+          "resources": [],
+          "unsupportedContent": [
+            {
+              "contentType": "Other",
+              "elementName": "anchor",
+              "anchorId": "p:hdr1:bffdd522bfb7b34fb08f315ac7d42ca0",
+              "action": "placeholder"
+            }
+          ],
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:hdr1:bffdd522bfb7b34fb08f315ac7d42ca0",
+              "severity": "warning"
+            }
+          ],
+          "fontIdentity": {
+            "resolverContract": "https://docxodus.dev/contracts/font-resolver/v1",
+            "substitutionContractVersion": 1,
+            "substitutionContractDigest": "2dfdd1841ba5d1f2d6064f798922421564ace117cdb999b2156cbc7891dd4548",
+            "resolutionDigest": "a6fa2fffbbe1774d202cbe58823c0044ffa2d7fec13c8b071a93a69d70a70c43",
+            "resolverDigest": "5ee58beacc4df7b00e62d975ee3b218de4d33ec9e75efaa205120d1bcef4615a"
+          },
+          "status": "failed",
+          "failure": {
+            "code": "output_verification_failure",
+            "severity": "error",
+            "phase": "output_verification",
+            "message": "source anchor p:hdr1:15c38e5e3f03ea06f1bcf68b6e9f0d2e has no measurable fragment in the paginated layout",
+            "remediation": "Inspect the render report and source document, then retry with supported content."
+          },
+          "environment": {
+            "rendererFingerprint": "994883972506f627635793f0d1d6cbcd2f3a9c7a982ba005d9ec4639fee09e34",
+            "verification": "browserObserved",
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "runtimeKind": "browser",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "contextRestricted"
+            }
+          },
+          "unavailable": [
+            {
+              "field": "bindings.pageMapDigest",
+              "reasonCode": "notReached",
+              "detail": "PageMap materialization was not reached."
+            },
+            {
+              "field": "bindings.htmlDigest",
+              "reasonCode": "notReached",
+              "detail": "Standalone HTML materialization was not reached."
+            },
+            {
+              "field": "bindings.pdfDigest",
+              "reasonCode": "notRequested",
+              "detail": "PDF output was not selected by the browser materializer."
+            }
+          ]
+        }
+      },
+      "markers": [
+        {
+          "WillowEastPanel": {
+            "text": "WillowEastPanel",
+            "page": 1,
+            "rect": [
+              312.15,
+              38.199,
+              388.435,
+              50.376
+            ]
+          },
+          "WillowMiddlePanel": {
+            "text": "WillowMiddlePanel",
+            "page": 1,
+            "rect": [
+              192.1,
+              38.199,
+              281.222,
+              50.376
+            ]
+          },
+          "WillowNorthPanel": {
+            "text": "WillowNorthPanel",
+            "page": 1,
+            "rect": [
+              72.1,
+              38.199,
+              155.095,
+              50.376
+            ]
+          },
+          "WillowReceipt": {
+            "text": "WillowReceipt",
+            "page": 1,
+            "rect": [
+              72.1,
+              74.199,
+              138.584,
+              86.376
+            ]
+          }
+        },
+        null,
+        {
+          "WillowEastPanel": {
+            "text": "WillowEastPanel",
+            "page": 1,
+            "rect": [
+              311.999987,
+              37.452208,
+              387.877875,
+              49.628311
+            ]
+          },
+          "WillowMiddlePanel": {
+            "text": "WillowMiddlePanel",
+            "page": 1,
+            "rect": [
+              191.999992,
+              37.452208,
+              280.705676,
+              49.628311
+            ]
+          },
+          "WillowNorthPanel": {
+            "text": "WillowNorthPanel",
+            "page": 1,
+            "rect": [
+              71.999997,
+              37.452208,
+              154.597718,
+              49.628311
+            ]
+          },
+          "WillowReceipt": {
+            "text": "WillowReceipt",
+            "page": 1,
+            "rect": [
+              71.999997,
+              74.202207,
+              138.10407,
+              86.378309
+            ]
+          }
+        }
+      ],
+      "screenshotSha256": "406cdd6ba5e610e575af0fc7c3d3cced7b8fd88e228174016095085adb428fc9"
+    },
+    "textboxes-drawingml-group-scaled-inset": {
+      "inputSha256": "2aa1a76de7e350446ae2fb64ee9617de952f3178aa9a575e73d46a74a133f0bf",
+      "pdfSha256": [
+        "fa08a74d36b834429a4986d8ce81af7b7ce80c68196fae7fd568e434f092df2a",
+        null,
+        "52cda55a3e1c6472930eeff26897af65fb6486c11186719161ce954fe1397532"
+      ],
+      "libreOfficeChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSerif"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowNorthPanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowMiddlePanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowEastPanel",
+            "tolerancePt": 0.75
+          }
+        }
+      ],
+      "baselineChecks": null,
+      "candidateChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSerif",
+            "LiberationSerif"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowNorthPanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowMiddlePanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowEastPanel",
+            "tolerancePt": 0.75
+          }
+        }
+      ],
+      "baselineRefusal": {
+        "name": "DocxodusExportError",
+        "code": "output_verification_failure",
+        "severity": "error",
+        "phase": "output_verification",
+        "message": "source anchor p:hdr1:c72cb1f4878931d01d0f0958b3b04e27 has no measurable fragment in the paginated layout",
+        "remediation": "Inspect the render report and source document, then retry with supported content.",
+        "report": {
+          "schema": "https://docxodus.dev/schemas/render/render-report/v2",
+          "schemaVersion": 2,
+          "source": {
+            "rawPackageBytesDigest": "2aa1a76de7e350446ae2fb64ee9617de952f3178aa9a575e73d46a74a133f0bf",
+            "byteLength": 2770,
+            "documentVersion": 0
+          },
+          "derivedProfileSource": {
+            "rawPackageBytesDigest": "17b33dd9e0ef795018c797be3d5a6c6901276a03a95401d64313fe40636b2cb0",
+            "byteLength": 2865
+          },
+          "options": {
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "commentProfile": "hidden",
+            "title": "",
+            "outputs": [
+              "html"
+            ],
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "runtimePolicyDigest": "64d4ab1c951bbf2c6528a8c737977b05672a973da1463387915b8d24579bbe13",
+            "policy": {
+              "unsupportedContent": "warn",
+              "strictFonts": false,
+              "timeoutMs": 120000,
+              "limits": {
+                "compressedDocxBytes": 104857600,
+                "opcEntries": 10000,
+                "expandedOpcBytes": 1073741824,
+                "xmlPartBytes": 33554432,
+                "opcUriCharacters": 2048,
+                "opcCompressionRatio": 1000,
+                "htmlOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pageMapOutputBytes": 268435456,
+                "renderReportOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "finalPages": 10000,
+                "domNodes": 1000000,
+                "automaticResources": 10000,
+                "automaticResourceBytes": 268435456,
+                "renderDiagnostics": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFiles": 1000,
+                "fontFileBytes": 33554432,
+                "fontTotalBytes": 134217728,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536
+              }
+            }
+          },
+          "readiness": [
+            {
+              "phase": "input_validation",
+              "status": "complete",
+              "elapsedMs": 0.19999992847442627,
+              "pending": []
+            },
+            {
+              "phase": "wasm_initialization",
+              "status": "complete",
+              "elapsedMs": 51.5,
+              "pending": []
+            },
+            {
+              "phase": "wasm_initialization",
+              "status": "complete",
+              "elapsedMs": 836,
+              "pending": []
+            },
+            {
+              "phase": "wasm_initialization",
+              "status": "complete",
+              "elapsedMs": 129.5,
+              "pending": []
+            },
+            {
+              "phase": "package_preflight",
+              "status": "complete",
+              "elapsedMs": 270.8000000715256,
+              "pending": []
+            },
+            {
+              "phase": "package_preflight",
+              "status": "complete",
+              "elapsedMs": 99.29999995231628,
+              "pending": []
+            },
+            {
+              "phase": "package_preflight",
+              "status": "complete",
+              "elapsedMs": 20.899999976158142,
+              "pending": []
+            },
+            {
+              "phase": "docx_conversion",
+              "status": "complete",
+              "elapsedMs": 182.89999997615814,
+              "pending": []
+            },
+            {
+              "phase": "browser_launch",
+              "status": "complete",
+              "elapsedMs": 39.40000009536743,
+              "pending": []
+            },
+            {
+              "phase": "font_loading",
+              "status": "complete",
+              "elapsedMs": 51.799999952316284,
+              "pending": []
+            },
+            {
+              "phase": "image_decoding",
+              "status": "complete",
+              "elapsedMs": 0,
+              "pending": []
+            },
+            {
+              "phase": "chart_svg_materialization",
+              "status": "complete",
+              "elapsedMs": 0,
+              "pending": []
+            },
+            {
+              "phase": "pagination",
+              "status": "complete",
+              "elapsedMs": 4,
+              "pending": []
+            },
+            {
+              "phase": "running_story_placement",
+              "status": "complete",
+              "elapsedMs": 1.2999999523162842,
+              "pending": []
+            },
+            {
+              "phase": "page_tree_stability",
+              "status": "complete",
+              "elapsedMs": 102.60000002384186,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 0.20000004768371582,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 0.19999992847442627,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 0,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 0.6000000238418579,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "failed",
+              "elapsedMs": 0.7000000476837158,
+              "pending": [
+                "PageMap geometry"
+              ]
+            }
+          ],
+          "fonts": [
+            {
+              "requestId": "font-0001",
+              "requestedFamily": "Liberation Serif",
+              "requestedFamilies": [
+                "Liberation Serif",
+                "serif"
+              ],
+              "requestedFamilyKinds": [
+                "named",
+                "generic"
+              ],
+              "requestedStyle": "normal",
+              "requestedWeight": 400,
+              "requestedStretch": 100,
+              "sampleCodePointCount": 10,
+              "sampleDigest": "085e14d92d4ce70b87e90d36468c9b5e18b9783787c152cea7bd0e6f7b73fc42",
+              "resolvedFamily": "Liberation Serif",
+              "resolvedFace": "LiberationSerif",
+              "status": "resolved",
+              "source": "configured",
+              "format": "ttf",
+              "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65",
+              "version": "Version 2.1.5",
+              "licenseEvidence": {
+                "kind": "installable",
+                "identity": "d890364ece7ac0d51b95c8e31a0dda42cd03c9b9e022b8120381b6177efefbb5",
+                "noSubsetting": false
+              },
+              "faceMatch": "exact",
+              "metricCompatible": true,
+              "glyphCoverage": "complete",
+              "verified": true
+            }
+          ],
+          "resources": [],
+          "unsupportedContent": [
+            {
+              "contentType": "Other",
+              "elementName": "anchor",
+              "anchorId": "p:hdr1:bffdd522bfb7b34fb08f315ac7d42ca0",
+              "action": "placeholder"
+            }
+          ],
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:hdr1:bffdd522bfb7b34fb08f315ac7d42ca0",
+              "severity": "warning"
+            }
+          ],
+          "fontIdentity": {
+            "resolverContract": "https://docxodus.dev/contracts/font-resolver/v1",
+            "substitutionContractVersion": 1,
+            "substitutionContractDigest": "2dfdd1841ba5d1f2d6064f798922421564ace117cdb999b2156cbc7891dd4548",
+            "resolutionDigest": "a6fa2fffbbe1774d202cbe58823c0044ffa2d7fec13c8b071a93a69d70a70c43",
+            "resolverDigest": "5ee58beacc4df7b00e62d975ee3b218de4d33ec9e75efaa205120d1bcef4615a"
+          },
+          "status": "failed",
+          "failure": {
+            "code": "output_verification_failure",
+            "severity": "error",
+            "phase": "output_verification",
+            "message": "source anchor p:hdr1:c72cb1f4878931d01d0f0958b3b04e27 has no measurable fragment in the paginated layout",
+            "remediation": "Inspect the render report and source document, then retry with supported content."
+          },
+          "environment": {
+            "rendererFingerprint": "994883972506f627635793f0d1d6cbcd2f3a9c7a982ba005d9ec4639fee09e34",
+            "verification": "browserObserved",
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "runtimeKind": "browser",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "contextRestricted"
+            }
+          },
+          "unavailable": [
+            {
+              "field": "bindings.pageMapDigest",
+              "reasonCode": "notReached",
+              "detail": "PageMap materialization was not reached."
+            },
+            {
+              "field": "bindings.htmlDigest",
+              "reasonCode": "notReached",
+              "detail": "Standalone HTML materialization was not reached."
+            },
+            {
+              "field": "bindings.pdfDigest",
+              "reasonCode": "notRequested",
+              "detail": "PDF output was not selected by the browser materializer."
+            }
+          ]
+        }
+      },
+      "markers": [
+        {
+          "WillowEastPanel": {
+            "text": "WillowEastPanel",
+            "page": 1,
+            "rect": [
+              314.15,
+              38.199,
+              390.435,
+              50.376
+            ]
+          },
+          "WillowMiddlePanel": {
+            "text": "WillowMiddlePanel",
+            "page": 1,
+            "rect": [
+              194.1,
+              38.199,
+              283.222,
+              50.376
+            ]
+          },
+          "WillowNorthPanel": {
+            "text": "WillowNorthPanel",
+            "page": 1,
+            "rect": [
+              74.1,
+              38.199,
+              157.095,
+              50.376
+            ]
+          },
+          "WillowReceipt": {
+            "text": "WillowReceipt",
+            "page": 1,
+            "rect": [
+              72.1,
+              74.199,
+              138.584,
+              86.376
+            ]
+          }
+        },
+        null,
+        {
+          "WillowEastPanel": {
+            "text": "WillowEastPanel",
+            "page": 1,
+            "rect": [
+              313.992174,
+              37.452208,
+              389.870062,
+              49.628311
+            ]
+          },
+          "WillowMiddlePanel": {
+            "text": "WillowMiddlePanel",
+            "page": 1,
+            "rect": [
+              193.992179,
+              37.452208,
+              282.697863,
+              49.628311
+            ]
+          },
+          "WillowNorthPanel": {
+            "text": "WillowNorthPanel",
+            "page": 1,
+            "rect": [
+              73.992184,
+              37.452208,
+              156.589905,
+              49.628311
+            ]
+          },
+          "WillowReceipt": {
+            "text": "WillowReceipt",
+            "page": 1,
+            "rect": [
+              71.999997,
+              74.202207,
+              138.10407,
+              86.378309
+            ]
+          }
+        }
+      ],
+      "screenshotSha256": "9b428a3b3f1ff20ac2e7602c3a0cb3bd50aead1171798002ca5bb8abcf4fc43d"
+    },
+    "textboxes-drawingml-group-mixed-picture": {
+      "inputSha256": "77c95c86c259aea9e92c8904acaaf6d497c3930fbf6e0685a8f38d9df0141a64",
+      "pdfSha256": [
+        "d05e1a0b2ce39ca05a160ae4fe929e8f40411d531417a23ab068e639cae5a877",
+        null,
+        "528612123c91921aec0f5118788db00dff8c0aae87e60e7aa49ba0a04e861c56"
+      ],
+      "libreOfficeChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSerif"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowNorthPanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowMiddlePanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowEastPanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              20,
+              90,
+              150
+            ],
+            "tolerancePt": 1,
+            "coverageTolerance": 0.08
+          }
+        }
+      ],
+      "baselineChecks": null,
+      "candidateChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSerif",
+            "LiberationSerif"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowNorthPanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowMiddlePanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowEastPanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              20,
+              90,
+              150
+            ],
+            "tolerancePt": 1,
+            "coverageTolerance": 0.08
+          }
+        }
+      ],
+      "baselineRefusal": {
+        "name": "DocxodusExportError",
+        "code": "output_verification_failure",
+        "severity": "error",
+        "phase": "output_verification",
+        "message": "source anchor p:hdr1:c72cb1f4878931d01d0f0958b3b04e27 has no measurable fragment in the paginated layout",
+        "remediation": "Inspect the render report and source document, then retry with supported content.",
+        "report": {
+          "schema": "https://docxodus.dev/schemas/render/render-report/v2",
+          "schemaVersion": 2,
+          "source": {
+            "rawPackageBytesDigest": "77c95c86c259aea9e92c8904acaaf6d497c3930fbf6e0685a8f38d9df0141a64",
+            "byteLength": 3312,
+            "documentVersion": 0
+          },
+          "derivedProfileSource": {
+            "rawPackageBytesDigest": "52da623541c71d95aa1372e03b65dcd5aba46e1d3c3d7611ee11407c011833f8",
+            "byteLength": 3408
+          },
+          "options": {
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "commentProfile": "hidden",
+            "title": "",
+            "outputs": [
+              "html"
+            ],
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "runtimePolicyDigest": "64d4ab1c951bbf2c6528a8c737977b05672a973da1463387915b8d24579bbe13",
+            "policy": {
+              "unsupportedContent": "warn",
+              "strictFonts": false,
+              "timeoutMs": 120000,
+              "limits": {
+                "compressedDocxBytes": 104857600,
+                "opcEntries": 10000,
+                "expandedOpcBytes": 1073741824,
+                "xmlPartBytes": 33554432,
+                "opcUriCharacters": 2048,
+                "opcCompressionRatio": 1000,
+                "htmlOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pageMapOutputBytes": 268435456,
+                "renderReportOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "finalPages": 10000,
+                "domNodes": 1000000,
+                "automaticResources": 10000,
+                "automaticResourceBytes": 268435456,
+                "renderDiagnostics": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFiles": 1000,
+                "fontFileBytes": 33554432,
+                "fontTotalBytes": 134217728,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536
+              }
+            }
+          },
+          "readiness": [
+            {
+              "phase": "input_validation",
+              "status": "complete",
+              "elapsedMs": 0.10000002384185791,
+              "pending": []
+            },
+            {
+              "phase": "wasm_initialization",
+              "status": "complete",
+              "elapsedMs": 21.5,
+              "pending": []
+            },
+            {
+              "phase": "wasm_initialization",
+              "status": "complete",
+              "elapsedMs": 656.8999999761581,
+              "pending": []
+            },
+            {
+              "phase": "wasm_initialization",
+              "status": "complete",
+              "elapsedMs": 108.70000004768372,
+              "pending": []
+            },
+            {
+              "phase": "package_preflight",
+              "status": "complete",
+              "elapsedMs": 253.09999990463257,
+              "pending": []
+            },
+            {
+              "phase": "package_preflight",
+              "status": "complete",
+              "elapsedMs": 103.89999997615814,
+              "pending": []
+            },
+            {
+              "phase": "package_preflight",
+              "status": "complete",
+              "elapsedMs": 19.40000009536743,
+              "pending": []
+            },
+            {
+              "phase": "docx_conversion",
+              "status": "complete",
+              "elapsedMs": 174.19999992847443,
+              "pending": []
+            },
+            {
+              "phase": "browser_launch",
+              "status": "complete",
+              "elapsedMs": 15.599999904632568,
+              "pending": []
+            },
+            {
+              "phase": "font_loading",
+              "status": "complete",
+              "elapsedMs": 49.800000071525574,
+              "pending": []
+            },
+            {
+              "phase": "image_decoding",
+              "status": "complete",
+              "elapsedMs": 0.09999990463256836,
+              "pending": []
+            },
+            {
+              "phase": "chart_svg_materialization",
+              "status": "complete",
+              "elapsedMs": 0,
+              "pending": []
+            },
+            {
+              "phase": "pagination",
+              "status": "complete",
+              "elapsedMs": 2.5,
+              "pending": []
+            },
+            {
+              "phase": "running_story_placement",
+              "status": "complete",
+              "elapsedMs": 1.2000000476837158,
+              "pending": []
+            },
+            {
+              "phase": "page_tree_stability",
+              "status": "complete",
+              "elapsedMs": 114.19999992847443,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 0.6000000238418579,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 0.3999999761581421,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 0.10000002384185791,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 6.700000047683716,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "failed",
+              "elapsedMs": 0.8999999761581421,
+              "pending": [
+                "PageMap geometry"
+              ]
+            }
+          ],
+          "fonts": [
+            {
+              "requestId": "font-0001",
+              "requestedFamily": "Liberation Serif",
+              "requestedFamilies": [
+                "Liberation Serif",
+                "serif"
+              ],
+              "requestedFamilyKinds": [
+                "named",
+                "generic"
+              ],
+              "requestedStyle": "normal",
+              "requestedWeight": 400,
+              "requestedStretch": 100,
+              "sampleCodePointCount": 10,
+              "sampleDigest": "085e14d92d4ce70b87e90d36468c9b5e18b9783787c152cea7bd0e6f7b73fc42",
+              "resolvedFamily": "Liberation Serif",
+              "resolvedFace": "LiberationSerif",
+              "status": "resolved",
+              "source": "configured",
+              "format": "ttf",
+              "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65",
+              "version": "Version 2.1.5",
+              "licenseEvidence": {
+                "kind": "installable",
+                "identity": "d890364ece7ac0d51b95c8e31a0dda42cd03c9b9e022b8120381b6177efefbb5",
+                "noSubsetting": false
+              },
+              "faceMatch": "exact",
+              "metricCompatible": true,
+              "glyphCoverage": "complete",
+              "verified": true
+            }
+          ],
+          "resources": [],
+          "unsupportedContent": [
+            {
+              "contentType": "Other",
+              "elementName": "anchor",
+              "anchorId": "p:hdr1:bffdd522bfb7b34fb08f315ac7d42ca0",
+              "action": "placeholder"
+            }
+          ],
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:hdr1:bffdd522bfb7b34fb08f315ac7d42ca0",
+              "severity": "warning"
+            }
+          ],
+          "fontIdentity": {
+            "resolverContract": "https://docxodus.dev/contracts/font-resolver/v1",
+            "substitutionContractVersion": 1,
+            "substitutionContractDigest": "2dfdd1841ba5d1f2d6064f798922421564ace117cdb999b2156cbc7891dd4548",
+            "resolutionDigest": "a6fa2fffbbe1774d202cbe58823c0044ffa2d7fec13c8b071a93a69d70a70c43",
+            "resolverDigest": "5ee58beacc4df7b00e62d975ee3b218de4d33ec9e75efaa205120d1bcef4615a"
+          },
+          "status": "failed",
+          "failure": {
+            "code": "output_verification_failure",
+            "severity": "error",
+            "phase": "output_verification",
+            "message": "source anchor p:hdr1:c72cb1f4878931d01d0f0958b3b04e27 has no measurable fragment in the paginated layout",
+            "remediation": "Inspect the render report and source document, then retry with supported content."
+          },
+          "environment": {
+            "rendererFingerprint": "994883972506f627635793f0d1d6cbcd2f3a9c7a982ba005d9ec4639fee09e34",
+            "verification": "browserObserved",
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "runtimeKind": "browser",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "contextRestricted"
+            }
+          },
+          "unavailable": [
+            {
+              "field": "bindings.pageMapDigest",
+              "reasonCode": "notReached",
+              "detail": "PageMap materialization was not reached."
+            },
+            {
+              "field": "bindings.htmlDigest",
+              "reasonCode": "notReached",
+              "detail": "Standalone HTML materialization was not reached."
+            },
+            {
+              "field": "bindings.pdfDigest",
+              "reasonCode": "notRequested",
+              "detail": "PDF output was not selected by the browser materializer."
+            }
+          ]
+        }
+      },
+      "markers": [
+        {
+          "WillowEastPanel": {
+            "text": "WillowEastPanel",
+            "page": 1,
+            "rect": [
+              312.15,
+              38.199,
+              388.435,
+              50.376
+            ]
+          },
+          "WillowMiddlePanel": {
+            "text": "WillowMiddlePanel",
+            "page": 1,
+            "rect": [
+              192.1,
+              38.199,
+              281.222,
+              50.376
+            ]
+          },
+          "WillowNorthPanel": {
+            "text": "WillowNorthPanel",
+            "page": 1,
+            "rect": [
+              72.1,
+              38.199,
+              155.095,
+              50.376
+            ]
+          },
+          "WillowReceipt": {
+            "text": "WillowReceipt",
+            "page": 1,
+            "rect": [
+              72.1,
+              74.199,
+              138.584,
+              86.376
+            ]
+          }
+        },
+        null,
+        {
+          "WillowEastPanel": {
+            "text": "WillowEastPanel",
+            "page": 1,
+            "rect": [
+              311.999987,
+              37.452208,
+              387.877875,
+              49.628311
+            ]
+          },
+          "WillowMiddlePanel": {
+            "text": "WillowMiddlePanel",
+            "page": 1,
+            "rect": [
+              191.999992,
+              37.452208,
+              280.705676,
+              49.628311
+            ]
+          },
+          "WillowNorthPanel": {
+            "text": "WillowNorthPanel",
+            "page": 1,
+            "rect": [
+              71.999997,
+              37.452208,
+              154.597718,
+              49.628311
+            ]
+          },
+          "WillowReceipt": {
+            "text": "WillowReceipt",
+            "page": 1,
+            "rect": [
+              71.999997,
+              74.202207,
+              138.10407,
+              86.378309
+            ]
+          }
+        }
+      ],
+      "screenshotSha256": "88ff1fa2f3605945463d1058f6e3ff997fcbe56a8ac9620a49aff24759fcec24"
+    },
+    "textboxes-drawingml-group-mixed-shape": {
+      "inputSha256": "b7c1af19b98da6b6d75732890846b430b5050c3e8596d7600421ffa5d8821474",
+      "pdfSha256": [
+        "c4cf3c12e5af3310c233384022d76ea6161019600489ef85999a28271bd34a2c",
+        null,
+        "eb58ed8bf2e19eac31605e8158795756ff225b255d56b05f6879e308cc78b8dd"
+      ],
+      "libreOfficeChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSerif"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowNorthPanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowMiddlePanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowEastPanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              20,
+              90,
+              150
+            ],
+            "tolerancePt": 1,
+            "coverageTolerance": 0.08
+          }
+        }
+      ],
+      "baselineChecks": null,
+      "candidateChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSerif",
+            "LiberationSerif"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowNorthPanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowMiddlePanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowEastPanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              20,
+              90,
+              150
+            ],
+            "tolerancePt": 1,
+            "coverageTolerance": 0.08
+          }
+        }
+      ],
+      "baselineRefusal": {
+        "name": "DocxodusExportError",
+        "code": "output_verification_failure",
+        "severity": "error",
+        "phase": "output_verification",
+        "message": "source anchor p:hdr1:c72cb1f4878931d01d0f0958b3b04e27 has no measurable fragment in the paginated layout",
+        "remediation": "Inspect the render report and source document, then retry with supported content.",
+        "report": {
+          "schema": "https://docxodus.dev/schemas/render/render-report/v2",
+          "schemaVersion": 2,
+          "source": {
+            "rawPackageBytesDigest": "b7c1af19b98da6b6d75732890846b430b5050c3e8596d7600421ffa5d8821474",
+            "byteLength": 2819,
+            "documentVersion": 0
+          },
+          "derivedProfileSource": {
+            "rawPackageBytesDigest": "114f7a3b8bf915e883bbc4d0c4fefc4fee39860e6757c9a5c01ce6aa9911ce45",
+            "byteLength": 2914
+          },
+          "options": {
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "commentProfile": "hidden",
+            "title": "",
+            "outputs": [
+              "html"
+            ],
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "runtimePolicyDigest": "64d4ab1c951bbf2c6528a8c737977b05672a973da1463387915b8d24579bbe13",
+            "policy": {
+              "unsupportedContent": "warn",
+              "strictFonts": false,
+              "timeoutMs": 120000,
+              "limits": {
+                "compressedDocxBytes": 104857600,
+                "opcEntries": 10000,
+                "expandedOpcBytes": 1073741824,
+                "xmlPartBytes": 33554432,
+                "opcUriCharacters": 2048,
+                "opcCompressionRatio": 1000,
+                "htmlOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pageMapOutputBytes": 268435456,
+                "renderReportOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "finalPages": 10000,
+                "domNodes": 1000000,
+                "automaticResources": 10000,
+                "automaticResourceBytes": 268435456,
+                "renderDiagnostics": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFiles": 1000,
+                "fontFileBytes": 33554432,
+                "fontTotalBytes": 134217728,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536
+              }
+            }
+          },
+          "readiness": [
+            {
+              "phase": "input_validation",
+              "status": "complete",
+              "elapsedMs": 0.10000002384185791,
+              "pending": []
+            },
+            {
+              "phase": "wasm_initialization",
+              "status": "complete",
+              "elapsedMs": 27.300000071525574,
+              "pending": []
+            },
+            {
+              "phase": "wasm_initialization",
+              "status": "complete",
+              "elapsedMs": 733.2999999523163,
+              "pending": []
+            },
+            {
+              "phase": "wasm_initialization",
+              "status": "complete",
+              "elapsedMs": 81.70000004768372,
+              "pending": []
+            },
+            {
+              "phase": "package_preflight",
+              "status": "complete",
+              "elapsedMs": 328.2000000476837,
+              "pending": []
+            },
+            {
+              "phase": "package_preflight",
+              "status": "complete",
+              "elapsedMs": 231.79999995231628,
+              "pending": []
+            },
+            {
+              "phase": "package_preflight",
+              "status": "complete",
+              "elapsedMs": 13.5,
+              "pending": []
+            },
+            {
+              "phase": "docx_conversion",
+              "status": "complete",
+              "elapsedMs": 172.70000004768372,
+              "pending": []
+            },
+            {
+              "phase": "browser_launch",
+              "status": "complete",
+              "elapsedMs": 13.700000047683716,
+              "pending": []
+            },
+            {
+              "phase": "font_loading",
+              "status": "complete",
+              "elapsedMs": 65.10000002384186,
+              "pending": []
+            },
+            {
+              "phase": "image_decoding",
+              "status": "complete",
+              "elapsedMs": 0.10000002384185791,
+              "pending": []
+            },
+            {
+              "phase": "chart_svg_materialization",
+              "status": "complete",
+              "elapsedMs": 0.09999990463256836,
+              "pending": []
+            },
+            {
+              "phase": "pagination",
+              "status": "complete",
+              "elapsedMs": 2.899999976158142,
+              "pending": []
+            },
+            {
+              "phase": "running_story_placement",
+              "status": "complete",
+              "elapsedMs": 1.2999999523162842,
+              "pending": []
+            },
+            {
+              "phase": "page_tree_stability",
+              "status": "complete",
+              "elapsedMs": 108.69999992847443,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 0.6000000238418579,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 0.5,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 0.09999990463256836,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 0.7000000476837158,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "failed",
+              "elapsedMs": 0.8999999761581421,
+              "pending": [
+                "PageMap geometry"
+              ]
+            }
+          ],
+          "fonts": [
+            {
+              "requestId": "font-0001",
+              "requestedFamily": "Liberation Serif",
+              "requestedFamilies": [
+                "Liberation Serif",
+                "serif"
+              ],
+              "requestedFamilyKinds": [
+                "named",
+                "generic"
+              ],
+              "requestedStyle": "normal",
+              "requestedWeight": 400,
+              "requestedStretch": 100,
+              "sampleCodePointCount": 10,
+              "sampleDigest": "085e14d92d4ce70b87e90d36468c9b5e18b9783787c152cea7bd0e6f7b73fc42",
+              "resolvedFamily": "Liberation Serif",
+              "resolvedFace": "LiberationSerif",
+              "status": "resolved",
+              "source": "configured",
+              "format": "ttf",
+              "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65",
+              "version": "Version 2.1.5",
+              "licenseEvidence": {
+                "kind": "installable",
+                "identity": "d890364ece7ac0d51b95c8e31a0dda42cd03c9b9e022b8120381b6177efefbb5",
+                "noSubsetting": false
+              },
+              "faceMatch": "exact",
+              "metricCompatible": true,
+              "glyphCoverage": "complete",
+              "verified": true
+            }
+          ],
+          "resources": [],
+          "unsupportedContent": [
+            {
+              "contentType": "Other",
+              "elementName": "anchor",
+              "anchorId": "p:hdr1:bffdd522bfb7b34fb08f315ac7d42ca0",
+              "action": "placeholder"
+            }
+          ],
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:hdr1:bffdd522bfb7b34fb08f315ac7d42ca0",
+              "severity": "warning"
+            }
+          ],
+          "fontIdentity": {
+            "resolverContract": "https://docxodus.dev/contracts/font-resolver/v1",
+            "substitutionContractVersion": 1,
+            "substitutionContractDigest": "2dfdd1841ba5d1f2d6064f798922421564ace117cdb999b2156cbc7891dd4548",
+            "resolutionDigest": "a6fa2fffbbe1774d202cbe58823c0044ffa2d7fec13c8b071a93a69d70a70c43",
+            "resolverDigest": "5ee58beacc4df7b00e62d975ee3b218de4d33ec9e75efaa205120d1bcef4615a"
+          },
+          "status": "failed",
+          "failure": {
+            "code": "output_verification_failure",
+            "severity": "error",
+            "phase": "output_verification",
+            "message": "source anchor p:hdr1:c72cb1f4878931d01d0f0958b3b04e27 has no measurable fragment in the paginated layout",
+            "remediation": "Inspect the render report and source document, then retry with supported content."
+          },
+          "environment": {
+            "rendererFingerprint": "994883972506f627635793f0d1d6cbcd2f3a9c7a982ba005d9ec4639fee09e34",
+            "verification": "browserObserved",
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "runtimeKind": "browser",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "contextRestricted"
+            }
+          },
+          "unavailable": [
+            {
+              "field": "bindings.pageMapDigest",
+              "reasonCode": "notReached",
+              "detail": "PageMap materialization was not reached."
+            },
+            {
+              "field": "bindings.htmlDigest",
+              "reasonCode": "notReached",
+              "detail": "Standalone HTML materialization was not reached."
+            },
+            {
+              "field": "bindings.pdfDigest",
+              "reasonCode": "notRequested",
+              "detail": "PDF output was not selected by the browser materializer."
+            }
+          ]
+        }
+      },
+      "markers": [
+        {
+          "WillowEastPanel": {
+            "text": "WillowEastPanel",
+            "page": 1,
+            "rect": [
+              312.15,
+              38.199,
+              388.435,
+              50.376
+            ]
+          },
+          "WillowMiddlePanel": {
+            "text": "WillowMiddlePanel",
+            "page": 1,
+            "rect": [
+              192.1,
+              38.199,
+              281.222,
+              50.376
+            ]
+          },
+          "WillowNorthPanel": {
+            "text": "WillowNorthPanel",
+            "page": 1,
+            "rect": [
+              72.1,
+              38.199,
+              155.095,
+              50.376
+            ]
+          },
+          "WillowReceipt": {
+            "text": "WillowReceipt",
+            "page": 1,
+            "rect": [
+              72.1,
+              74.199,
+              138.584,
+              86.376
+            ]
+          }
+        },
+        null,
+        {
+          "WillowEastPanel": {
+            "text": "WillowEastPanel",
+            "page": 1,
+            "rect": [
+              311.999987,
+              37.452208,
+              387.877875,
+              49.628311
+            ]
+          },
+          "WillowMiddlePanel": {
+            "text": "WillowMiddlePanel",
+            "page": 1,
+            "rect": [
+              191.999992,
+              37.452208,
+              280.705676,
+              49.628311
+            ]
+          },
+          "WillowNorthPanel": {
+            "text": "WillowNorthPanel",
+            "page": 1,
+            "rect": [
+              71.999997,
+              37.452208,
+              154.597718,
+              49.628311
+            ]
+          },
+          "WillowReceipt": {
+            "text": "WillowReceipt",
+            "page": 1,
+            "rect": [
+              71.999997,
+              74.202207,
+              138.10407,
+              86.378309
+            ]
+          }
+        }
+      ],
+      "screenshotSha256": "d321af2982340576d405b87db5a7450442cd3b145e2eb2d84e0906dcca054469"
+    },
+    "textboxes-drawingml-group-body": {
+      "inputSha256": "9d302903c0c8627a383e3cadc20a30fa8832cb9bc778a581d386878646420ccc",
+      "pdfSha256": [
+        "5f5413411dafead90a0aa632db6f2e20fd7f0b4b4ce155a71b70485ad7799dd1",
+        null,
+        "d20f360e0cf8a9a3c4315fd364d4de4d23ad268c9b2c15359ee1c088a89386f3"
+      ],
+      "libreOfficeChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSerif"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowNorthPanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowMiddlePanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowEastPanel",
+            "tolerancePt": 0.75
+          }
+        }
+      ],
+      "baselineChecks": null,
+      "candidateChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSerif"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowNorthPanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowMiddlePanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowEastPanel",
+            "tolerancePt": 0.75
+          }
+        }
+      ],
+      "baselineRefusal": {
+        "name": "DocxodusExportError",
+        "code": "output_verification_failure",
+        "severity": "error",
+        "phase": "output_verification",
+        "message": "source anchor p:body:3fe1406bad773f5a5b13701d3f0c6088 has no measurable fragment in the paginated layout",
+        "remediation": "Inspect the render report and source document, then retry with supported content.",
+        "report": {
+          "schema": "https://docxodus.dev/schemas/render/render-report/v2",
+          "schemaVersion": 2,
+          "source": {
+            "rawPackageBytesDigest": "9d302903c0c8627a383e3cadc20a30fa8832cb9bc778a581d386878646420ccc",
+            "byteLength": 2405,
+            "documentVersion": 0
+          },
+          "derivedProfileSource": {
+            "rawPackageBytesDigest": "d13d01031fb8614cbe511e11debe37ccdd5f8b063030f284ab25bc1e0c6ae4ad",
+            "byteLength": 2478
+          },
+          "options": {
+            "reviewProfile": "final",
+            "reviewProfileAlreadyApplied": false,
+            "commentProfile": "hidden",
+            "title": "",
+            "outputs": [
+              "html"
+            ],
+            "layoutDigest": "df1f75b5acaf148d0ab93e59aac7bbdc6a3278f2e09b657304265d63a361248d",
+            "runtimePolicyDigest": "64d4ab1c951bbf2c6528a8c737977b05672a973da1463387915b8d24579bbe13",
+            "policy": {
+              "unsupportedContent": "warn",
+              "strictFonts": false,
+              "timeoutMs": 120000,
+              "limits": {
+                "compressedDocxBytes": 104857600,
+                "opcEntries": 10000,
+                "expandedOpcBytes": 1073741824,
+                "xmlPartBytes": 33554432,
+                "opcUriCharacters": 2048,
+                "opcCompressionRatio": 1000,
+                "htmlOutputBytes": 268435456,
+                "pdfOutputBytes": 268435456,
+                "pageMapOutputBytes": 268435456,
+                "renderReportOutputBytes": 268435456,
+                "pdfParserExpandedBytes": 1073741824,
+                "finalPages": 10000,
+                "domNodes": 1000000,
+                "automaticResources": 10000,
+                "automaticResourceBytes": 268435456,
+                "renderDiagnostics": 10000,
+                "fontDirectoryEntries": 10000,
+                "fontFiles": 1000,
+                "fontFileBytes": 33554432,
+                "fontTotalBytes": 134217728,
+                "fontRequests": 4096,
+                "fontSampleCodePoints": 65536
+              }
+            }
+          },
+          "readiness": [
+            {
+              "phase": "input_validation",
+              "status": "complete",
+              "elapsedMs": 0.30000007152557373,
+              "pending": []
+            },
+            {
+              "phase": "wasm_initialization",
+              "status": "complete",
+              "elapsedMs": 24.799999952316284,
+              "pending": []
+            },
+            {
+              "phase": "wasm_initialization",
+              "status": "complete",
+              "elapsedMs": 752.8999999761581,
+              "pending": []
+            },
+            {
+              "phase": "wasm_initialization",
+              "status": "complete",
+              "elapsedMs": 65.80000007152557,
+              "pending": []
+            },
+            {
+              "phase": "package_preflight",
+              "status": "complete",
+              "elapsedMs": 209.79999995231628,
+              "pending": []
+            },
+            {
+              "phase": "package_preflight",
+              "status": "complete",
+              "elapsedMs": 103.10000002384186,
+              "pending": []
+            },
+            {
+              "phase": "package_preflight",
+              "status": "complete",
+              "elapsedMs": 17.600000023841858,
+              "pending": []
+            },
+            {
+              "phase": "docx_conversion",
+              "status": "complete",
+              "elapsedMs": 150.39999997615814,
+              "pending": []
+            },
+            {
+              "phase": "browser_launch",
+              "status": "complete",
+              "elapsedMs": 10.700000047683716,
+              "pending": []
+            },
+            {
+              "phase": "font_loading",
+              "status": "complete",
+              "elapsedMs": 66,
+              "pending": []
+            },
+            {
+              "phase": "image_decoding",
+              "status": "complete",
+              "elapsedMs": 0.09999990463256836,
+              "pending": []
+            },
+            {
+              "phase": "chart_svg_materialization",
+              "status": "complete",
+              "elapsedMs": 0,
+              "pending": []
+            },
+            {
+              "phase": "pagination",
+              "status": "complete",
+              "elapsedMs": 4.100000023841858,
+              "pending": []
+            },
+            {
+              "phase": "running_story_placement",
+              "status": "complete",
+              "elapsedMs": 3.100000023841858,
+              "pending": []
+            },
+            {
+              "phase": "page_tree_stability",
+              "status": "complete",
+              "elapsedMs": 104.89999997615814,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 0.5,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 0.3999999761581421,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 0,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "complete",
+              "elapsedMs": 1,
+              "pending": []
+            },
+            {
+              "phase": "output_verification",
+              "status": "failed",
+              "elapsedMs": 1.399999976158142,
+              "pending": [
+                "PageMap geometry"
+              ]
+            }
+          ],
+          "fonts": [
+            {
+              "requestId": "font-0001",
+              "requestedFamily": "Liberation Serif",
+              "requestedFamilies": [
+                "Liberation Serif",
+                "serif"
+              ],
+              "requestedFamilyKinds": [
+                "named",
+                "generic"
+              ],
+              "requestedStyle": "normal",
+              "requestedWeight": 400,
+              "requestedStretch": 100,
+              "sampleCodePointCount": 17,
+              "sampleDigest": "c4d686925038522cd865089b8886a3f5aa3b26c71118bcac3572f61013b77d5f",
+              "resolvedFamily": "Liberation Serif",
+              "resolvedFace": "LiberationSerif",
+              "status": "resolved",
+              "source": "configured",
+              "format": "ttf",
+              "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65",
+              "version": "Version 2.1.5",
+              "licenseEvidence": {
+                "kind": "installable",
+                "identity": "d890364ece7ac0d51b95c8e31a0dda42cd03c9b9e022b8120381b6177efefbb5",
+                "noSubsetting": false
+              },
+              "faceMatch": "exact",
+              "metricCompatible": true,
+              "glyphCoverage": "complete",
+              "verified": true
+            }
+          ],
+          "resources": [],
+          "unsupportedContent": [
+            {
+              "contentType": "Other",
+              "elementName": "anchor",
+              "anchorId": "p:body:a5ea3cab122e06ddb0fe999125397ec9",
+              "action": "placeholder"
+            }
+          ],
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:body:a5ea3cab122e06ddb0fe999125397ec9",
+              "severity": "warning"
+            }
+          ],
+          "fontIdentity": {
+            "resolverContract": "https://docxodus.dev/contracts/font-resolver/v1",
+            "substitutionContractVersion": 1,
+            "substitutionContractDigest": "2dfdd1841ba5d1f2d6064f798922421564ace117cdb999b2156cbc7891dd4548",
+            "resolutionDigest": "83f796d72b5e33c93e320060484066c95111b77da37c0569a8d1c17b763e4c0f",
+            "resolverDigest": "ac036d7e1be190768143c91241f8da1cc64014c7720cf7f94bc00b4247f3e198"
+          },
+          "status": "failed",
+          "failure": {
+            "code": "output_verification_failure",
+            "severity": "error",
+            "phase": "output_verification",
+            "message": "source anchor p:body:3fe1406bad773f5a5b13701d3f0c6088 has no measurable fragment in the paginated layout",
+            "remediation": "Inspect the render report and source document, then retry with supported content."
+          },
+          "environment": {
+            "rendererFingerprint": "9ad5200f097db7a85c00828fa438c37f777f6888fef077312c6f0bc7c22f2e58",
+            "verification": "browserObserved",
+            "fidelityTier": "unbaselined",
+            "observed": {
+              "runtimeKind": "browser",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "contextRestricted"
+            }
+          },
+          "unavailable": [
+            {
+              "field": "bindings.pageMapDigest",
+              "reasonCode": "notReached",
+              "detail": "PageMap materialization was not reached."
+            },
+            {
+              "field": "bindings.htmlDigest",
+              "reasonCode": "notReached",
+              "detail": "Standalone HTML materialization was not reached."
+            },
+            {
+              "field": "bindings.pdfDigest",
+              "reasonCode": "notRequested",
+              "detail": "PDF output was not selected by the browser materializer."
+            }
+          ]
+        }
+      },
+      "markers": [
+        {
+          "WillowEastPanel": {
+            "text": "WillowEastPanel",
+            "page": 1,
+            "rect": [
+              360.15,
+              202.199,
+              436.435,
+              214.376
+            ]
+          },
+          "WillowMiddlePanel": {
+            "text": "WillowMiddlePanel",
+            "page": 1,
+            "rect": [
+              240.1,
+              202.199,
+              329.222,
+              214.376
+            ]
+          },
+          "WillowNorthPanel": {
+            "text": "WillowNorthPanel",
+            "page": 1,
+            "rect": [
+              120.1,
+              202.199,
+              203.095,
+              214.376
+            ]
+          },
+          "WillowReceipt": {
+            "text": "WillowReceipt",
+            "page": 1,
+            "rect": [
+              72.1,
+              74.199,
+              138.584,
+              86.376
+            ]
+          }
+        },
+        null,
+        {
+          "WillowEastPanel": {
+            "text": "WillowEastPanel",
+            "page": 1,
+            "rect": [
+              359.999985,
+              201.702201,
+              435.877873,
+              213.878304
+            ]
+          },
+          "WillowMiddlePanel": {
+            "text": "WillowMiddlePanel",
+            "page": 1,
+            "rect": [
+              239.99999,
+              201.702201,
+              328.705674,
+              213.878304
+            ]
+          },
+          "WillowNorthPanel": {
+            "text": "WillowNorthPanel",
+            "page": 1,
+            "rect": [
+              119.999995,
+              201.702201,
+              202.597716,
+              213.878304
+            ]
+          },
+          "WillowReceipt": {
+            "text": "WillowReceipt",
+            "page": 1,
+            "rect": [
+              71.999997,
+              74.202207,
+              138.10407,
+              86.378309
+            ]
+          }
+        }
+      ],
+      "screenshotSha256": "edd2ab8eaf28f388115440c8dadb533729a67ffa643ef7b249f163435d9f5965"
+    },
+    "textboxes-drawingml-group-single-control": {
+      "inputSha256": "5312d29eb2af34e91c3316405f6f9fa8d561e08b6cb79a5cb51c52bbc46ca90b",
+      "pdfSha256": [
+        "4c1eca0cf6e0eb1a9ad0e8217e968aedba77388373be58c280c9475a37140e75",
+        "f4fc6f81efcf23f7d508e8f07dce21ddb9ac401bfe478ee66ba843eb9a36de0b",
+        "6d04bf006395963166206b9b709f1906b79264b0013ea9555deaa7e0383b6e52"
+      ],
+      "libreOfficeChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSerif"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowNorthPanel",
+            "tolerancePt": 0.75
+          }
+        }
+      ],
+      "baselineChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSerif",
+            "LiberationSerif"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowNorthPanel",
+            "tolerancePt": 0.75
+          }
+        }
+      ],
+      "candidateChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSerif",
+            "LiberationSerif"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowNorthPanel",
+            "tolerancePt": 0.75
+          }
+        }
+      ],
+      "baselineRefusal": null,
+      "markers": [
+        {
+          "WillowNorthPanel": {
+            "text": "WillowNorthPanel",
+            "page": 1,
+            "rect": [
+              72.1,
+              38.199,
+              155.095,
+              50.376
+            ]
+          },
+          "WillowReceipt": {
+            "text": "WillowReceipt",
+            "page": 1,
+            "rect": [
+              72.1,
+              74.199,
+              138.584,
+              86.376
+            ]
+          }
+        },
+        {
+          "WillowNorthPanel": {
+            "text": "WillowNorthPanel",
+            "page": 1,
+            "rect": [
+              71.999997,
+              37.452208,
+              154.597718,
+              49.628311
+            ]
+          },
+          "WillowReceipt": {
+            "text": "WillowReceipt",
+            "page": 1,
+            "rect": [
+              71.999997,
+              74.202207,
+              138.10407,
+              86.378309
+            ]
+          }
+        },
+        {
+          "WillowNorthPanel": {
+            "text": "WillowNorthPanel",
+            "page": 1,
+            "rect": [
+              71.999997,
+              37.452208,
+              154.597718,
+              49.628311
+            ]
+          },
+          "WillowReceipt": {
+            "text": "WillowReceipt",
+            "page": 1,
+            "rect": [
+              71.999997,
+              74.202207,
+              138.10407,
+              86.378309
+            ]
+          }
+        }
+      ],
+      "screenshotSha256": "9d93fd5bd1741cddbb130ed53c22a32d5399ef79b8b96288196681269f3fc258"
+    },
+    "textboxes-drawingml-group-separate-control": {
+      "inputSha256": "e880ef873bae0b0f12e595e1fdbac63fc656a3d4869e694ae6b503cad236f0fb",
+      "pdfSha256": [
+        "897d694a6333747949e73f4a65023aa5ef05cbc1d232f5625c8d464df40cce75",
+        "9398da1f1120918f9a29dd09c401fbd963100dd47e506aa3230b3c9d99a43b2f",
+        "dbcacc24059f42ef6c5623c72d30edec5d60247f9e8a464e5d3e3f210cf74a91"
+      ],
+      "libreOfficeChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSerif"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowNorthPanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowMiddlePanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowEastPanel",
+            "tolerancePt": 0.75
+          }
+        }
+      ],
+      "baselineChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSerif",
+            "LiberationSerif"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowNorthPanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowMiddlePanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowEastPanel",
+            "tolerancePt": 0.75
+          }
+        }
+      ],
+      "candidateChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSerif",
+            "LiberationSerif"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowNorthPanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowMiddlePanel",
+            "tolerancePt": 0.75
+          }
+        },
+        {
+          "name": "assertion-marker-reference-position",
+          "passed": true,
+          "declaration": {
+            "type": "marker-reference-position",
+            "version": 1,
+            "marker": "WillowEastPanel",
+            "tolerancePt": 0.75
+          }
+        }
+      ],
+      "baselineRefusal": null,
+      "markers": [
+        {
+          "WillowEastPanel": {
+            "text": "WillowEastPanel",
+            "page": 1,
+            "rect": [
+              312.1,
+              38.199,
+              388.385,
+              50.376
+            ]
+          },
+          "WillowMiddlePanel": {
+            "text": "WillowMiddlePanel",
+            "page": 1,
+            "rect": [
+              192.1,
+              38.199,
+              281.222,
+              50.376
+            ]
+          },
+          "WillowNorthPanel": {
+            "text": "WillowNorthPanel",
+            "page": 1,
+            "rect": [
+              72.1,
+              38.199,
+              155.095,
+              50.376
+            ]
+          },
+          "WillowReceipt": {
+            "text": "WillowReceipt",
+            "page": 1,
+            "rect": [
+              72.1,
+              74.199,
+              138.584,
+              86.376
+            ]
+          }
+        },
+        {
+          "WillowEastPanel": {
+            "text": "WillowEastPanel",
+            "page": 1,
+            "rect": [
+              311.999987,
+              37.452208,
+              387.877875,
+              49.628311
+            ]
+          },
+          "WillowMiddlePanel": {
+            "text": "WillowMiddlePanel",
+            "page": 1,
+            "rect": [
+              191.999992,
+              37.452208,
+              280.705676,
+              49.628311
+            ]
+          },
+          "WillowNorthPanel": {
+            "text": "WillowNorthPanel",
+            "page": 1,
+            "rect": [
+              71.999997,
+              37.452208,
+              154.597718,
+              49.628311
+            ]
+          },
+          "WillowReceipt": {
+            "text": "WillowReceipt",
+            "page": 1,
+            "rect": [
+              71.999997,
+              74.202207,
+              138.10407,
+              86.378309
+            ]
+          }
+        },
+        {
+          "WillowEastPanel": {
+            "text": "WillowEastPanel",
+            "page": 1,
+            "rect": [
+              311.999987,
+              37.452208,
+              387.877875,
+              49.628311
+            ]
+          },
+          "WillowMiddlePanel": {
+            "text": "WillowMiddlePanel",
+            "page": 1,
+            "rect": [
+              191.999992,
+              37.452208,
+              280.705676,
+              49.628311
+            ]
+          },
+          "WillowNorthPanel": {
+            "text": "WillowNorthPanel",
+            "page": 1,
+            "rect": [
+              71.999997,
+              37.452208,
+              154.597718,
+              49.628311
+            ]
+          },
+          "WillowReceipt": {
+            "text": "WillowReceipt",
+            "page": 1,
+            "rect": [
+              71.999997,
+              74.202207,
+              138.10407,
+              86.378309
+            ]
+          }
+        }
+      ],
+      "screenshotSha256": "e67c05911ee0c5634c46fbbd6088f34f5101201020cdcbe5680e7e973ccc9cea"
+    }
+  },
+  "candidateSource": {
+    "commit": "57b2fb0ddc405961b39fc34a24a6d5ccead456c1",
+    "tree": "901a149bf389ad0f11647a5d3dc0f67b427c8c4f",
+    "files": {
+      "Docxodus/WmlToHtmlConverter.DrawingGroups.cs": "e25d2c1ac58a99f89850510f9c01c8cea637f046259e58a0b838952d00c3efd4",
+      "Docxodus/WmlToHtmlConverter.cs": "2d8988de1dad7ab263e588db07eac6296f434c9c1d97e1abe28fc1c30ad48705",
+      "Docxodus/WmlToHtmlConverter.Shapes.cs": "ebaff657dd22a371468d892ebd6dd072a642f2270a10ba48b1bd6dc2601cc31b",
+      "npm/src/pagination.ts": "7116205b54691d3c74ccbb76d22a3b82c92b1b1f25464e1c9a6391cffec55f32",
+      "npm/dist/export-assets.json": "2fdeb1c7e70c6cc6e6cf9d9a89924f9db9b7b9724b69ed0a43d38b326982abdb"
+    }
+  },
+  "missingMemberControls": {
+    "textboxes-drawingml-group-mixed-picture": [
+      {
+        "name": "assertion-color-reference-geometry",
+        "passed": false,
+        "declaration": {
+          "type": "color-reference-geometry",
+          "version": 1,
+          "page": 1,
+          "rgb": [
+            20,
+            90,
+            150
+          ],
+          "tolerancePt": 1,
+          "coverageTolerance": 0.08
+        }
+      }
+    ],
+    "textboxes-drawingml-group-mixed-shape": [
+      {
+        "name": "assertion-color-reference-geometry",
+        "passed": false,
+        "declaration": {
+          "type": "color-reference-geometry",
+          "version": 1,
+          "page": 1,
+          "rgb": [
+            20,
+            90,
+            150
+          ],
+          "tolerancePt": 1,
+          "coverageTolerance": 0.08
+        }
+      }
+    ]
+  }
+}
