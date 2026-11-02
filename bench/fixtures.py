@@ -4329,7 +4329,79 @@ def generate():
             assertions=[{'type': 'marker-region', 'marker': label, 'occurrence': 1,
                          'page': page, 'rect': [36, 60, 270, 336]}
                         for label, page in zip(lead + labels, pages)])
-    registry = {'schema': 1, 'suite': {'id': 'core-v98', 'version': 98, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # #1527: independent Willow sign panels exercise every member of a DrawingML group.
+    willow_ns = (' xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"'
+                 ' xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup"')
+    def willow_transform(x, y, width, height, children=''):
+        return (f'<a:xfrm rot="0"><a:off x="{x * 12700}" y="{y * 12700}"/>'
+                f'<a:ext cx="{width * 12700}" cy="{height * 12700}"/>{children}</a:xfrm>')
+    def willow_box(text, x=0, y=0, width=100, height=30, inset=0):
+        return ('<wps:wsp><wps:cNvSpPr txBox="1"/><wps:spPr>' + willow_transform(x, y, width, height)
+                + '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:noFill/><a:ln><a:noFill/></a:ln>'
+                '</wps:spPr><wps:txbx><w:txbxContent>' + para(text) + '</w:txbxContent></wps:txbx>'
+                f'<wps:bodyPr lIns="{inset * 12700}" tIns="0" rIns="0" bIns="0"><a:noAutofit/></wps:bodyPr></wps:wsp>')
+    def willow_group(members, nested=False, x=0, y=0, width=340, height=30,
+                     child_x=0, child_y=0, child_width=340, child_height=30):
+        tag = 'grpSp' if nested else 'wgp'
+        coordinates = (f'<a:chOff x="{child_x * 12700}" y="{child_y * 12700}"/>'
+                       f'<a:chExt cx="{child_width * 12700}" cy="{child_height * 12700}"/>')
+        return (f'<wpg:{tag}><wpg:cNvGrpSpPr/><wpg:grpSpPr>'
+                + willow_transform(x, y, width, height, coordinates)
+                + f'</wpg:grpSpPr>{members}</wpg:{tag}>')
+    def willow_drawing(payload, grouped=True, x=0, page=False, number=1):
+        base = 'page' if page else 'column'
+        vertical = 'page' if page else 'paragraph'
+        uri = 'wordprocessingGroup' if grouped else 'wordprocessingShape'
+        return ('<w:r><w:drawing xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"'
+                ' xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"'
+                ' xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"'
+                f' xmlns:r="{R}"{willow_ns}><wp:anchor distT="0" distB="0" distL="0" distR="0"'
+                ' simplePos="0" relativeHeight="0" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1">'
+                f'<wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="{base}"><wp:posOffset>{x * 12700}</wp:posOffset></wp:positionH>'
+                f'<wp:positionV relativeFrom="{vertical}"><wp:posOffset>{200 * 12700 if page else 0}</wp:posOffset></wp:positionV>'
+                f'<wp:extent cx="{(340 if grouped else 100) * 12700}" cy="{30 * 12700}"/>'
+                f'<wp:wrapNone/><wp:docPr id="{number}" name="Willow sign panel"/>'
+                f'<a:graphic><a:graphicData uri="http://schemas.microsoft.com/office/word/2010/{uri}">{payload}'
+                '</a:graphicData></a:graphic></wp:anchor></w:drawing></w:r>')
+    willow_styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+        f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="22"/></w:rPr></w:rPrDefault>'
+        '<w:pPrDefault><w:pPr><w:widowControl w:val="0"/><w:spacing w:before="0" w:after="0" w:line="300" w:lineRule="exact"/>'
+        '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    for kind in ('header', 'nested', 'scaled-inset', 'mixed-picture', 'mixed-shape', 'body',
+                 'single-control', 'separate-control'):
+        labels = ['WillowNorthPanel', 'WillowMiddlePanel', 'WillowEastPanel']
+        if kind == 'single-control': labels = labels[:1]
+        members = [willow_box(label, i * 120) for i, label in enumerate(labels)]
+        if kind == 'nested':
+            members[1] = willow_group(willow_box(labels[1], 10, 20, 200, 60), True,
+                120, 0, 100, 30, 10, 20, 200, 60)
+        if kind == 'scaled-inset':
+            members = [willow_box(label, 20 + i * 240, 30, 200, 90, inset=2) for i, label in enumerate(labels)]
+        extra = None
+        if kind == 'mixed-picture':
+            members.insert(1, '<pic:pic><pic:nvPicPr><pic:cNvPr id="9" name="Willow signal"/><pic:cNvPicPr/></pic:nvPicPr>'
+                '<pic:blipFill><a:blip r:embed="rSignal"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr>'
+                + willow_transform(105, 16, 10, 10) + '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic>')
+            extra = {'word/_rels/header1.xml.rels': '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+                f'<Relationship Id="rSignal" Type="{R}/image" Target="media/willow.png"/></Relationships>',
+                'word/media/willow.png': png(12, 12, lambda x, y: (20, 90, 150))}
+        if kind == 'mixed-shape':
+            members.insert(1, '<wps:wsp><wps:cNvSpPr/><wps:spPr>' + willow_transform(105, 16, 10, 10)
+                + '<a:prstGeom prst="ellipse"><a:avLst/></a:prstGeom><a:solidFill><a:srgbClr val="145A96"/></a:solidFill>'
+                '</wps:spPr><wps:bodyPr/></wps:wsp>')
+        if kind.endswith('control'):
+            willow_markup = ''.join(willow_drawing(willow_box(label), False, i * 120, number=i + 1) for i, label in enumerate(labels))
+        else:
+            group = willow_group(''.join(members), child_x=20, child_y=30, child_width=680, child_height=90) if kind == 'scaled-inset' else willow_group(''.join(members))
+            willow_markup = willow_drawing(group, x=120 if kind == 'body' else 0, page=kind == 'body')
+        header = kind != 'body'
+        carrier = para(runs=willow_markup)
+        paper = section().replace('<w:sectPr>', '<w:sectPr><w:headerReference w:type="default" r:id="rStory"/>') if header else section()
+        add('textboxes-drawingml-group-' + kind, 'images', 'Independent DrawingML textbox stories: ' + kind + ' (Docxodus #1527)',
+            ['WillowReceipt'] + labels, para('WillowReceipt') + ('' if header else carrier), paper,
+            story=('header', carrier) if header else None, styles_xml=willow_styles, extra_parts=extra,
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': label, 'tolerancePt': 0.75} for label in labels])
+    registry = {'schema': 1, 'suite': {'id': 'core-v99', 'version': 99, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

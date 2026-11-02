@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The eight DrawingML-group cases for Docxodus #1527 contain original Willow labels,
+literal OOXML and a small solid-color PNG authored in `bench/fixtures.py`. They import
+no document, helper, template, external image or font program. Their labeled comparison
+sheets show only these authored inputs and explicit panels where export produced no PDF.
+
 The six widow-minimum cases for Docxodus #1520 contain original Rosemary labels
 and literal WordprocessingML authored in `bench/fixtures.py`. They import no
 document, helper, template, image or font program. Labeled comparison sheets
