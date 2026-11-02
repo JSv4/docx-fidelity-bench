@@ -4304,7 +4304,32 @@ def generate():
                 texts, body, styles_xml=aster_styles,
                 assertions=[{'type': 'marker-reference-position', 'version': 1,
                              'marker': text, 'tolerancePt': 0.5} for text in texts])
-    registry = {'schema': 1, 'suite': {'id': 'core-v97', 'version': 97, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # #1520: widow/orphan minima are independent of an entire-paragraph keep.
+    widow_styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+        f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="24"/></w:rPr></w:rPrDefault>'
+        '<w:pPrDefault><w:pPr><w:widowControl w:val="0"/><w:spacing w:before="0" w:after="0" '
+        'w:line="320" w:lineRule="exact"/></w:pPr></w:pPrDefault></w:docDefaults>'
+        '<w:style w:type="paragraph" w:styleId="Stock"><w:name w:val="Stock"/>'
+        '<w:pPr><w:widowControl/></w:pPr></w:style></w:styles>')
+    widow_paper = ('<w:sectPr><w:pgSz w:w="6120" w:h="8000"/><w:pgMar w:top="1440" '
+                   'w:right="720" w:bottom="1440" w:left="720" w:header="360" w:footer="360"/></w:sectPr>')
+    for name, lead_count, first_count in [('direct', 10, 6), ('inherited', 10, 6),
+            ('avoid-widow', 8, 7), ('off-control', 8, 8), ('keep-control', 10, 0), ('orphan-control', 15, 0)]:
+        lead = [f'RosemaryLead{i:02d}' for i in range(1, lead_count + 1)]
+        labels = [f'RosemaryStock{i:02d}' for i in range(1, 10)]
+        props = '<w:pStyle w:val="Stock"/>' if name == 'inherited' else (
+            ('<w:keepLines/>' if name == 'keep-control' else '')
+            + f'<w:widowControl w:val="{0 if name == "off-control" else 1}"/>')
+        body = para(runs='<w:r><w:br/></w:r>'.join(run(label) for label in lead))
+        body += para(props=props, runs='<w:r><w:br/></w:r>'.join(run(label) for label in labels))
+        pages = [1] * len(lead) + [1] * first_count + [2] * (9 - first_count)
+        add('paragraphs-widow-minimum-' + name, 'paragraphs',
+            'Widow line minimum: ' + name + ' (Docxodus #1520)', lead + labels, body,
+            sect=widow_paper, styles_xml=widow_styles,
+            assertions=[{'type': 'marker-region', 'marker': label, 'occurrence': 1,
+                         'page': page, 'rect': [36, 60, 270, 336]}
+                        for label, page in zip(lead + labels, pages)])
+    registry = {'schema': 1, 'suite': {'id': 'core-v98', 'version': 98, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

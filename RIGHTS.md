@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The six widow-minimum cases for Docxodus #1520 contain original Rosemary labels
+and literal WordprocessingML authored in `bench/fixtures.py`. They import no
+document, helper, template, image or font program. Labeled comparison sheets
+show only these authored inputs rendered by separately provisioned tools.
+
 The six signed-leading-indent cases for Docxodus #1519 contain original Laurel labels
 and literal WordprocessingML authored in `bench/fixtures.py`. They import no document,
 template, helper, image or font program. Liberation Serif is separately provisioned.
