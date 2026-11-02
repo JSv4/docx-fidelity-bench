@@ -4277,7 +4277,34 @@ def generate():
                            'rect': [x - 1, y - 1, x + 90, y + 14], 'adjudicated': 'word'} for label, page, x, y in regions]
             add('frames-clearance-' + name, 'paragraphs', 'Inline frame vertical clearance: ' + name + ' (Docxodus #1510)',
                 fillers + before + labels, body, styles_xml=aster_styles, assertions=assertions)
-    registry = {'schema': 1, 'suite': {'id': 'core-v96', 'version': 96, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # #1519: the same signed leading offsets in ordinary, bordered and cell paragraphs.
+    for direction in ('ltr', 'rtl'):
+        for name, indent in [('negative', -540), ('zero-control', 0), ('positive-control', 540)]:
+            texts = ['LaurelPlain', 'LaurelLogical', 'LaurelFirst', 'LaurelHanging', 'LaurelBorder', 'LaurelCell']
+            bidi = '<w:bidi/>' if direction == 'rtl' else ''
+            base = bidi + f'<w:ind w:left="{indent}"/>'
+            props = [base, bidi + f'<w:ind w:start="{indent}"/>',
+                     bidi + f'<w:ind w:left="{indent}" w:firstLine="180"/>',
+                     bidi + f'<w:ind w:left="{indent}" w:hanging="180"/>',
+                     '<w:pBdr><w:top w:val="single" w:sz="8"/></w:pBdr>' + base]
+            body = ''.join(para(text, prop) for text, prop in zip(texts, props))
+            body += ('<w:tbl><w:tblPr><w:tblW w:w="9360" w:type="dxa"/>'
+                     '<w:tblLayout w:type="fixed"/><w:tblCellMar><w:left w:w="0" w:type="dxa"/>'
+                     '<w:right w:w="0" w:type="dxa"/></w:tblCellMar></w:tblPr>'
+                     '<w:tblGrid><w:gridCol w:w="9360"/></w:tblGrid><w:tr><w:tc>'
+                     '<w:tcPr><w:tcW w:w="9360" w:type="dxa"/></w:tcPr>'
+                     + para(texts[-1], base) + '</w:tc></w:tr></w:tbl>')
+            texts.append('LaurelImplicit')
+            texts.append('LaurelContinuation')
+            body += para(props='<w:pBdr><w:top w:val="single" w:sz="8"/></w:pBdr>'
+                         + bidi + '<w:ind w:hanging="180"/>',
+                         runs=run(texts[-2]) + '<w:r><w:br/></w:r>' + run(texts[-1]))
+            add('paragraphs-signed-leading-' + direction + '-' + name, 'paragraphs',
+                'Signed leading indent: ' + direction + ' ' + name + ' (Docxodus #1519)',
+                texts, body, styles_xml=aster_styles,
+                assertions=[{'type': 'marker-reference-position', 'version': 1,
+                             'marker': text, 'tolerancePt': 0.5} for text in texts])
+    registry = {'schema': 1, 'suite': {'id': 'core-v97', 'version': 97, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
