@@ -23,8 +23,17 @@ and forbidden tokens; mutations now catch empty/hidden comment text and comments
 as plain paragraphs independently of the companion PDF.
 
 [Local evidence and source identity](local-evidence.json) and [schema findings](schema.json)
-record the observed artifacts. Pinned production benchmark runs are pending; these local
-checks do not constitute a full-corpus fidelity score.
+record the local artifacts at their original source revision.
+
+The pinned production [baseline run](https://github.com/JSv4/docx-fidelity-bench/actions/runs/41512262047)
+and [candidate run](https://github.com/JSv4/docx-fidelity-bench/actions/runs/41513743927)
+use the same contract, native reference bundle and calibration (100). The baseline passes
+the four default controls and fails the ten new-policy PDF companions; those ten HTML
+exports reject the unsupported option. Candidate `915d6fc1` passes all 14 PDF mandatory
+checks and all 14 HTML cases. The focused mean changes from 27.3432 to 91.3802. All 14
+primary page rasters are byte-identical to baseline, as are all four default HTML outputs.
+[Pinned evidence](pinned-evidence.json) records source revisions, result hashes and checks.
+These are focused diagnostic results, not a full-corpus fidelity score.
 
 ## review-visibility-format-only-default-control
 
