@@ -24,7 +24,9 @@ promoted verification, fabricated file evidence, removed text/paint and changed 
 
 The input packages contain no font programs. Provision Liberation Sans/Serif separately and
 Noto CJK/emoji as system fallback fonts. `BENCH_FONT_DIRECTORY` selects the Liberation directory;
-the default is `/usr/share/fonts/truetype/liberation2`. `DOCXODUS_CHROMIUM_PATH` optionally selects
+the default is `/usr/share/fonts/truetype/liberation2`. CI resolves the installed Liberation Sans
+file through fontconfig and verifies its family before selecting its directory, because package
+versions can use different installation paths. `DOCXODUS_CHROMIUM_PATH` optionally selects
 a sandboxed Chromium executable. The run records configured font hashes, system font catalog,
 browser executable hash, measurement tool identities, production source/build and fixture hashes.
 

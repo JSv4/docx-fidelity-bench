@@ -229,6 +229,16 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y poppler-utils qpdf fontconfig fonts-liberation2 fonts-noto-cjk fonts-noto-color-emoji
           sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+          python3 - <<'PYCODE'
+          import os, subprocess
+          from pathlib import Path
+          family, path = subprocess.check_output(['fc-match', '-f', '%{family}\n%{file}', 'Liberation Sans'], text=True).splitlines()
+          assert 'Liberation Sans' in family.split(','), family
+          directory = Path(path).resolve().parent
+          assert directory.is_dir()
+          with open(os.environ['GITHUB_ENV'], 'a') as output:
+              output.write('BENCH_FONT_DIRECTORY=' + str(directory) + '\n')
+          PYCODE
           dotnet workload install wasm-tools
           python3 -m bench redline build-validator --out "$RUNNER_TEMP/font-validator"
       - name: Build and observe exact baseline and candidate
