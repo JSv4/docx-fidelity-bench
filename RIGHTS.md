@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The ten paragraph-replacement cases for Docxodus #1526 contain original harbor text
+and literal WordprocessingML authored in `bench/redline_fixtures.py`. They import no
+document, helper, template, image or font program. Their labeled review screenshots
+show only these authored inputs rendered by separately provisioned tools.
+
 The eight frame-clearance cases for Docxodus #1510 contain original Sage labels and
 literal WordprocessingML authored in `bench/fixtures.py`. They import no document, helper,
 template, image or font program. Liberation Serif is separately provisioned.

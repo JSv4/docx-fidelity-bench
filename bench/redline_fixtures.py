@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v25', 'version': 25}
+SUITE = {'id': 'redline-v26', 'version': 26}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -325,11 +325,72 @@ def generate():
     textbox_geometry(corpus)
     composed_bookmark_deltas(corpus)
     regrouped_textbox_markers(corpus)
+    weak_replacement_anchors(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(registry, indent=2) + '\n')
     return registry
+
+
+def weak_replacement_anchors(corpus):
+    """An unrelated leading rewrite must not acquire correspondence from function words."""
+    old = 'Daylight guides polish the copper compass before closing the cabin.'
+    new = 'Evening porters arrange the willow baskets before opening the depot.'
+    middle_old = 'The steward records a quiet inspection beside the western gate.'
+    middle_new = 'The clerk records a red ledger beside the eastern quay.'
+    last_old = 'At dusk the ropes cover the crates and the cart returns inland.'
+    last_new = 'At dawn the cranes carry the barrels and the barge leaves seaward.'
+    variants = [(interior, crossing, '') for interior in (False, True) for crossing in (False, True)]
+    variants += [(False, False, 'left'), (False, False, 'right')]
+    for interior, crossing, compound in variants:
+        name = 'redline-weak-replacement-' + ('interior' if interior else 'final') + ('-crossing' if crossing else '') + ('-compound-' + compound if compound else '')
+        left = [old, middle_old + (' Saffron cargo' if crossing else ''), last_old]
+        right = [new, middle_new, ('Saffron cargo ' if crossing else '') + last_new]
+        if compound:
+            left[0] = left[0].replace('before closing', 'before-closing')
+            if compound == 'right':
+                left, right = right, left
+        rev = Revisions()
+        tracked = p(rev.ins(t(right[0])), mark=rev.mark('ins')) + p(rev.dele(t(left[0])), mark=rev.mark('del'))
+        tracked += ''.join(p(rev.ins(t(b)) + rev.dele(t(a))) for a, b in zip(left[1:], right[1:]))
+        if interior:
+            left.append(CLOSING); right.append(CLOSING); tracked += p(t(CLOSING))
+        corpus.compare(name, 'revisions', 'reproducer', 'JSv4/Docxodus#1526',
+                       'A weakly related leading rewrite stays in complete revision spans beside an edited paragraph'
+                       + (' and a real later paragraph crossing' if crossing else ''),
+                       {'body': ''.join(p(t(x)) for x in left)}, {'body': ''.join(p(t(x)) for x in right)},
+                       {'body': tracked},
+                       [{'type': 'revision-text', 'version': 1, 'scope': 'redline', 'kind': 'del', 'text': left[0]},
+                        paragraph_count(len(left), 'accepted'), paragraph_count(len(left), 'rejected')])
+
+    retained = 'Copper instruments remain under the watch of the harbor steward. '
+    rev = Revisions()
+    corpus.compare('redline-weak-replacement-retained-control', 'revisions', 'control', 'JSv4/Docxodus#1526',
+                   'A strong retained sentence still supports a fine-grained paragraph edit',
+                   {'body': p(t(retained + 'Cabin shutters close.')) + p(t(CLOSING))},
+                   {'body': p(t(retained + 'Depot shutters close.')) + p(t(CLOSING))},
+                   {'body': p(t(retained) + rev.dele(t('Cabin')) + rev.ins(t('Depot')) + t(' shutters close.')) + p(t(CLOSING))},
+                   [untracked(retained, CLOSING), paragraph_count(2)])
+    rev = Revisions()
+    corpus.compare('redline-weak-replacement-unrelated-control', 'revisions', 'control', 'JSv4/Docxodus#1526',
+                   'Completely unrelated interior paragraphs remain whole insertions and deletions',
+                   {'body': p(t('Copper compass.')) + p(t(CLOSING))},
+                   {'body': p(t('Willow baskets.')) + p(t(CLOSING))},
+                   {'body': p(rev.ins(t('Willow baskets.')), mark=rev.mark('ins'))
+                            + p(rev.dele(t('Copper compass.')), mark=rev.mark('del')) + p(t(CLOSING))},
+                   [untracked(CLOSING), paragraph_count(3)])
+    for merge in (False, True):
+        rev = Revisions()
+        first, second = 'Copper instruments', ' remain beside the quay.'
+        joined = p(t(first + second)) + p(t(CLOSING))
+        split = p(t(first)) + p(t(second)) + p(t(CLOSING))
+        corpus.compare('redline-weak-replacement-' + ('merge' if merge else 'split') + '-control',
+                       'revisions', 'control', 'JSv4/Docxodus#1526', 'An intentional paragraph boundary edit preserves retained text',
+                       {'body': split if merge else joined}, {'body': joined if merge else split},
+                       {'body': p(t(first), mark=rev.mark('del' if merge else 'ins')) + p(t(second)) + p(t(CLOSING))},
+                       [untracked(first, second, CLOSING), paragraph_count(2 if merge else 3, 'accepted'),
+                        paragraph_count(3 if merge else 2, 'rejected')])
 
 
 def regrouped_textbox_markers(corpus):
