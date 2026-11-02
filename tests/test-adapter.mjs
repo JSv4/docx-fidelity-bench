@@ -98,7 +98,7 @@ test('public profiles and optional delivered HTML retain verified artifact ident
       files: { 'npm-export/dist/index.js': hash(module) },
     }));
     const input = join(root, 'input.docx'); writeFileSync(input, 'protocol input');
-    for (const [name, markupPresentation, comments, htmlStatus, htmlProfile, observe] of [
+    for (const [name, markupPresentation, comments, htmlStatus, htmlProfile, observe, extraProfile] of [
       ['default', undefined, 'hidden', undefined], ['word', 'word', 'hidden', 'ok'],
       ['html-failure', 'word', 'inline', 'unmeasured'], ['html-unverified', 'word', 'margin', 'unmeasured'],
       ['shared-budget', 'word', 'endnotes', 'ok'],
@@ -107,8 +107,10 @@ test('public profiles and optional delivered HTML retain verified artifact ident
       ['reader', 'word', 'hidden', 'ok', undefined, 'observe'],
       ['style-reader', 'word', 'hidden', 'ok', undefined, 'style'],
       ['reader-no-path', 'word', 'hidden', 'unmeasured', undefined, 'missing'],
+      ['visibility', 'word', 'hidden', 'ok', undefined, undefined,
+        { commentColumnPlacement: 'balloons', markupVisibility: { formatting: false, comments: false } }],
     ]) {
-      const profile = { review: 'markup', comments, ...(markupPresentation ? { markupPresentation } : {}) };
+      const profile = { review: 'markup', comments, ...(markupPresentation ? { markupPresentation } : {}), ...extraProfile };
       const output = join(root, `output-${name}.pdf`);
       const result = request({ protocol: 1, candidate, input, inputSha256: hash('protocol input'), output,
         report: output + '.json', profile, ...(htmlProfile ? { htmlProfile } : {}),
@@ -123,6 +125,8 @@ test('public profiles and optional delivered HTML retain verified artifact ident
       assert.equal(options.markupPresentation, markupPresentation);
       assert.equal(Object.hasOwn(options, 'markupPresentation'), markupPresentation !== undefined);
       assert.equal(options.commentProfile, comments);
+      assert.equal(options.commentColumnPlacement, profile.commentColumnPlacement);
+      assert.deepEqual(options.markupVisibility, profile.markupVisibility);
       assert.equal(options.additionalCss, undefined);
       if (htmlStatus) {
         assert.equal(result.htmlArtifact.status, htmlStatus);
@@ -136,6 +140,8 @@ test('public profiles and optional delivered HTML retain verified artifact ident
           assert.equal(htmlOptions.markupPresentation, htmlProfile ? undefined : profile.markupPresentation);
           assert.deepEqual(result.htmlArtifact.profile, htmlProfile ?? profile);
           assert.equal(htmlOptions.additionalCss, htmlProfile?.additionalCss);
+          assert.equal(htmlOptions.commentColumnPlacement, (htmlProfile ?? profile).commentColumnPlacement);
+          assert.deepEqual(htmlOptions.markupVisibility, (htmlProfile ?? profile).markupVisibility);
           if (['observe', 'style'].includes(observe)) {
             const facts = JSON.parse(readFileSync(output + '.observations.json'));
             assert.equal(result.htmlArtifact.browserFactsSha256, hash(readFileSync(output + '.observations.json')));

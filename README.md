@@ -1,5 +1,13 @@
 # DOCX fidelity bench
 
+`core-v101` adds 14 original review-visibility cases for Docxodus #1523. Formatting-only,
+comment-only and combined controls accompany all eight combinations of formatting,
+text-revision and comment visibility. Native PDFs with comments hidden retain the layout comparison;
+independent delivered-HTML observations and printed companions check the requested policy.
+All 724 prior document inputs are unchanged.
+[All 14 labeled comparisons](docs/results/review-visibility/README.md) show the native primary
+profile and the default/requested candidate review display.
+
 `core-v100` adds nine original fractional-table-border cases for Docxodus #1522:
 quarter-, half-, one- and three-point rules, inherited styles, merged shared segments,
 wrapping boundaries and a borderless control. The opt-in `colored-rule-widths` check

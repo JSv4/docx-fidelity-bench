@@ -56,7 +56,7 @@ def contained(root, relative):
 
 
 def validate_pdf_companion(declaration):
-    if (not isinstance(declaration, dict) or set(declaration) - {'profile', 'requiredTokens', 'pageSizePt', 'exactInventory'} or
+    if (not isinstance(declaration, dict) or set(declaration) - {'profile', 'requiredTokens', 'pageSizePt', 'exactInventory', 'forbiddenTokens'} or
             not {'profile', 'requiredTokens', 'pageSizePt'}.issubset(declaration) or
             ('exactInventory' in declaration and declaration['exactInventory'] is not True) or
             not isinstance(declaration['pageSizePt'], list) or len(declaration['pageSizePt']) != 2 or
@@ -65,6 +65,12 @@ def validate_pdf_companion(declaration):
             any(not isinstance(word, str) or len(word.split()) != 1 or word.strip() != word or
                 type(count) is not int or count < 1 for word, count in declaration['requiredTokens'].items())):
         raise ValueError('Invalid companion PDF declaration')
+    if 'forbiddenTokens' in declaration:
+        forbidden = declaration['forbiddenTokens']
+        if (not isinstance(forbidden, list) or not forbidden or
+                any(not isinstance(word, str) or len(word.split()) != 1 or word.strip() != word for word in forbidden) or
+                len(set(forbidden)) != len(forbidden) or set(forbidden) & set(declaration['requiredTokens'])):
+            raise ValueError('Invalid forbidden companion PDF tokens')
     validate_render_profile(declaration['profile'])
 
 
@@ -93,7 +99,7 @@ def validate_pdf_text_policy(case, root=None):
 
 
 def validate_render_profile(profile, *, allow_additional_css=False):
-    allowed = {'review', 'comments', 'markupPresentation'}
+    allowed = {'review', 'comments', 'markupPresentation', 'commentColumnPlacement', 'markupVisibility'}
     if allow_additional_css: allowed.add('additionalCss')
     if (not isinstance(profile, dict) or not {'review', 'comments'}.issubset(profile) or
             set(profile) - allowed or
@@ -101,6 +107,13 @@ def validate_render_profile(profile, *, allow_additional_css=False):
             not isinstance(profile.get('comments'), str) or profile['comments'] not in {'hidden', 'inline', 'margin', 'endnotes'} or
             ('markupPresentation' in profile and (not isinstance(profile['markupPresentation'], str) or profile['markupPresentation'] not in {'html', 'word'}))):
         raise ValueError('Invalid declared artifact profile')
+    if 'commentColumnPlacement' in profile and profile['commentColumnPlacement'] not in ('margin', 'balloons'):
+        raise ValueError('Invalid comment column placement')
+    if 'markupVisibility' in profile:
+        visibility = profile['markupVisibility']
+        if (not isinstance(visibility, dict) or set(visibility) - {'formatting', 'insertionsAndDeletions', 'comments'} or
+                any(type(value) is not bool for value in visibility.values())):
+            raise ValueError('Invalid markup visibility policy')
     if 'additionalCss' in profile:
         css = profile['additionalCss']
         if not isinstance(css, str) or not css:

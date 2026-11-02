@@ -4445,7 +4445,56 @@ def generate():
                                'page': 1, 'rect': [72, 72, 192, 72 + 4.5 + size/8 + 15]})
         add('tables-fractional-border-' + kind, 'tables', 'Declared table border widths and content bounds: ' + kind + ' (Docxodus #1522)',
             labels + ['AlderReceipt'], body, styles_xml=alder_styles.format(extra_style), font=alder_font, assertions=assertions)
-    registry = {'schema': 1, 'suite': {'id': 'core-v100', 'version': 100, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # #1523: original literal OOXML isolates the three requested display families. The
+    # primary hidden-comment PDF retains a native layout control; independently inspected
+    # HTML and PDF companions exercise the selected review policy without a Word claim.
+    hazel_revision = 'w:author="Hazel Reviewer" w:date="2026-01-02T09:00:00Z"'
+    hazel_styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+        '<w:rFonts w:ascii="Liberation Sans" w:hAnsi="Liberation Sans"/><w:sz w:val="24"/>'
+        '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0" w:line="300" w:lineRule="exact"/>'
+        '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    def hazel_case(kind, formatting=True, text=True, comments=True, default=False):
+        has_format, has_comment, has_text = kind != 'comment-only', kind != 'format-only', kind == 'mixed'
+        bold = run('HazelBold ', '<w:b/><w:color w:val="000000"/>'
+            f'<w:rPrChange w:id="1" {hazel_revision}><w:rPr><w:color w:val="000000"/></w:rPr></w:rPrChange>')
+        anchor = '<w:commentRangeStart w:id="0"/>' + run('HazelAnchor', '<w:color w:val="000000"/>')
+        anchor += '<w:commentRangeEnd w:id="0"/><w:r><w:commentReference w:id="0"/></w:r>'
+        note = f'<w:comment w:id="0" {hazel_revision} w:initials="HR">' + para('HazelNote') + '</w:comment>'
+        old = f'<w:del w:id="2" {hazel_revision}><w:r><w:rPr><w:color w:val="000000"/></w:rPr><w:delText xml:space="preserve">HazelOld </w:delText></w:r></w:del>'
+        new = f'<w:ins w:id="3" {hazel_revision}>' + run('HazelNew ', '<w:color w:val="000000"/>') + '</w:ins>'
+        body = para(runs=(bold if has_format else '') + (old + new if has_text else '') + (anchor if has_comment else ''))
+        primary_words = (['HazelBold'] if has_format else []) + (['HazelOld', 'HazelNew'] if has_text else []) + (['HazelAnchor'] if has_comment else [])
+        suffix = 'default-control' if default else ('hide-formatting' if kind != 'mixed' else f'{int(formatting)}{int(text)}{int(comments)}')
+        add('review-visibility-' + kind + '-' + suffix, 'paragraphs',
+            f'Independent review display: {kind}, {suffix} (Docxodus #1523)', primary_words, body,
+            styles_xml=hazel_styles, comments_xml=note if has_comment else None, font='Liberation Sans')
+        profile = dict(review='markup', comments='margin', markupPresentation='word', commentColumnPlacement='balloons')
+        if not default:
+            profile['markupVisibility'] = dict(formatting=formatting, insertionsAndDeletions=text, comments=comments)
+        shown = (['HazelBold'] if has_format else []) + (['HazelOld'] if has_text and text else [])
+        shown += (['HazelNew'] if has_text else []) + (['HazelAnchor'] if has_comment else [])
+        printed = shown + (['HazelNote'] if has_comment and comments else [])
+        if has_format and formatting: printed += ['Formatted:']
+        forbidden = (['HazelOld'] if has_text and not text else []) + (['HazelNote'] if has_comment and not comments else [])
+        if has_format and not formatting: forbidden += ['Formatted:']
+        case = cases[-1]
+        if has_text: case['profile']['review'] = 'markup'
+        case['pdfCompanion'] = dict(profile=profile, pageSizePt=[612, 792], requiredTokens=dict(Counter(printed)))
+        if forbidden: case['pdfCompanion']['forbiddenTokens'] = forbidden
+        case['htmlProfile'] = profile
+        area = int(has_format and formatting or has_comment and comments)
+        case['htmlAssertions'] = [dict(type='review-display', version=1, marker=shown[-1], expected=dict(
+            formatBalloons=int(has_format and formatting), commentBalloons=int(has_comment and comments),
+            insertions=int(has_text and text), deletions=int(has_text and text), areas=area, layers=area)),
+            dict(type='marker-readable', version=1, marker=shown[-1], tokens=shown)]
+    for kind in ('format-only', 'comment-format', 'comment-only'):
+        hazel_case(kind, default=True)
+        hazel_case(kind, formatting=False)
+    for formatting in (False, True):
+        for text in (False, True):
+            for comments in (False, True):
+                hazel_case('mixed', formatting, text, comments, default=formatting and text and comments)
+    registry = {'schema': 1, 'suite': {'id': 'core-v101', 'version': 101, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

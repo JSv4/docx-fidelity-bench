@@ -17,6 +17,7 @@ BROWSER_VERSION = 1
 BROWSER_SOURCE = Path(__file__).with_name('html_browser.mjs')
 BROWSER_POLICY = {'viewport': {'width': 1280, 'height': 1024}, 'javaScriptEnabled': False,
                   'offline': True, 'media': 'screen'}
+REVIEW_COUNTS = {'formatBalloons', 'commentBalloons', 'insertions', 'deletions', 'areas', 'layers'}
 
 
 def needs_browser(declarations):
@@ -41,6 +42,11 @@ def validate_declaration(declaration):
                 declaration.get('property') != 'font-size' or not isinstance(declaration.get('equals'), str) or
                 re.fullmatch(r'(?:0|[1-9][0-9]*)(?:\.[0-9]+)?px', declaration['equals']) is None):
             raise ValueError('Unknown or invalid computed HTML style assertion')
+    elif declaration.get('type') == 'review-display':
+        expected = declaration.get('expected')
+        if (set(declaration) != {'type', 'version', 'marker', 'expected'} or not isinstance(expected, dict) or
+                set(expected) != REVIEW_COUNTS or any(type(value) is not int or value < 0 for value in expected.values())):
+            raise ValueError('Unknown or invalid review display assertion')
     elif declaration.get('type') == 'named-checkbox':
         if (set(declaration) != {'type', 'version', 'marker', 'checked', 'sizePt', 'caption'} or
                 type(declaration.get('checked')) is not bool or
@@ -175,6 +181,16 @@ def computed_style_pass(declaration, observation, index):
     return passed and all(v == declaration['equals'] for v in values)
 
 
+def review_display_pass(declaration, observation, index):
+    passed = marker_geometry_pass(declaration, observation, index)
+    if observation['matches'] != 1: return False
+    counts = observation.get('reviewCounts')
+    if (not isinstance(counts, dict) or set(counts) != REVIEW_COUNTS or
+            any(type(value) is not int or value < 0 for value in counts.values())):
+        raise ValueError('Malformed review display observation')
+    return passed and counts == declaration['expected']
+
+
 def browser_metadata_valid(value, html_sha, inspector_sha, runtime):
     return (isinstance(value, dict) and isinstance(runtime, dict) and
             isinstance(html_sha, str) and re.fullmatch('[a-f0-9]{64}', html_sha) is not None and
@@ -283,6 +299,10 @@ def inspect(folder, response, declarations, profile=None):
                     checks.append({'name': f'html-readable-{index + 1}', 'marker': declaration['marker'],
                                    'tokens': declaration['tokens'], 'observation': observation,
                                    'passed': readable_pass(declaration, observation, index)})
+                elif declaration['type'] == 'review-display':
+                    checks.append({'name': f'html-review-{index + 1}', 'marker': declaration['marker'],
+                                   'expected': declaration['expected'], 'observation': observation,
+                                   'passed': review_display_pass(declaration, observation, index)})
                 elif declaration['type'] == 'named-checkbox':
                     checks.append({'name': f'html-checkbox-{index + 1}', 'marker': declaration['marker'],
                                    'checked': declaration['checked'], 'observation': observation,
@@ -329,6 +349,9 @@ def aggregate(cases, declarations, browser_sha=None, profiles=None):
                 elif declaration['type'] == 'marker-readable':
                     valid = (item.get('name') == f'html-readable-{index + 1}' and item.get('tokens') == declaration['tokens'] and
                              item['passed'] == readable_pass(declaration, item.get('observation'), index))
+                elif declaration['type'] == 'review-display':
+                    valid = (item.get('name') == f'html-review-{index + 1}' and item.get('expected') == declaration['expected'] and
+                             item['passed'] == review_display_pass(declaration, item.get('observation'), index))
                 elif declaration['type'] == 'named-checkbox':
                     valid = (item.get('name') == f'html-checkbox-{index + 1}' and item.get('checked') is declaration['checked'] and
                              item['passed'] == checkbox_pass(declaration, item.get('observation'), index))

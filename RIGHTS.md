@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The 14 review-visibility cases for Docxodus #1523 contain original Hazel labels and
+literal OOXML authored in `bench/fixtures.py`. They import no renderer fixture, helper,
+document, template, image or font program. Liberation Sans is separately provisioned.
+Review screenshots show only these original inputs rendered by separately provisioned tools.
+
 The nine fractional-table-border cases for Docxodus #1522 contain original Alder labels
 and literal OOXML authored in `bench/fixtures.py`. They import no renderer fixture,
 helper, document, template, image or font program. Liberation Sans is separately provisioned.

@@ -2,7 +2,7 @@
 
 Protocol version 1 uses one JSON request on stdin and one JSON response on stdout. The runner invokes an explicit command vector without a shell. Fixture records cannot select executable commands. Add adapter selection in `bench/__main__.py`; metrics and fixture IDs stay unchanged.
 
-The request contains `protocol`, absolute `input` and `output` paths, `inputSha256`, a production `report` destination, an explicit `profile` (`review`, `comments`, optional `markupPresentation`), `fontDirectories`, exact `candidate` identity, and `timeoutMs`. `markupPresentation: "word"` selects Word-style tracked-change appearance for a markup review profile; omitting it retains the renderer default. The input is immutable. Output paths are new and must not be overwritten. The renderer must use the declared fonts and view.
+The request contains `protocol`, absolute `input` and `output` paths, `inputSha256`, a production `report` destination, an explicit `profile` (`review`, `comments`, optional `markupPresentation`, `commentColumnPlacement` and `markupVisibility`), `fontDirectories`, exact `candidate` identity, and `timeoutMs`. `markupPresentation: "word"` selects Word-style tracked-change appearance for a markup review profile; omitting it retains the renderer default. `commentColumnPlacement` accepts `margin` or `balloons`. `markupVisibility` is a closed object with optional boolean `formatting`, `insertionsAndDeletions` and `comments` fields; omitted values retain the renderer defaults. The production report must record the same placement and canonical false-only visibility policy. The input is immutable. Output paths are new and must not be overwritten. The renderer must use the declared fonts and view.
 
 An `ok` response contains `protocol: 1`, `status: "ok"`, `pdfSha256`, and `renderer` identity. Candidate PDF bytes must exist at the requested path and match the digest. Include candidate source/build identity and runtime identity. The Docxodus adapter retains a complete production report and source-bound build record.
 
@@ -69,6 +69,14 @@ is unmeasured. This checks the declared paragraph and tail access; it is not a g
 paint-occlusion or interactive-application fidelity test.
 
 
+Version 1 `review-display` declares a unique `marker` and exact nonnegative counts in
+`expected` for `formatBalloons`, `commentBalloons`, `insertions`, `deletions`, `areas` and
+`layers`. The independent browser observer counts delivered balloon labels, revision
+elements and markup containers. Python replays the counts and requires the marker to
+remain accessible under the same clipping rules. These are structural observations;
+paired companion-PDF token/paint checks verify printed source content. They do not claim
+Word balloon geometry or general paint-occlusion coverage.
+
 Version 1 `marker-computed-style` declares a unique `marker`, `property: "font-size"` and an exact
 pixel value in `equals`, such as `"13.6px"`. Other properties and malformed values are rejected.
 The same independent browser observer records `computedStyle`, mapping the property to the computed
@@ -112,13 +120,15 @@ the same production adapter again with that profile, writing `companion.pdf` and
 same renderer identity, source digest, actual report profile, runtime and output digest. It does not reuse the first PDF or infer
 printed content from HTML.
 
-Poppler extracts the companion through its CropBox. Each declared source word must
+Poppler extracts the companion through its CropBox. Each declared token (authored source text or an explicitly expected review label) must
 appear exactly its authored number of times and have positive bounds wholly within
 the page. The same PDF is rasterized at 96 DPI; each source-word rectangle must contain
 dark foreground paint (every RGB channel below 160), so pale comment/highlight
 backgrounds cannot substitute for the authored black/gray source text. This detects blank, invisible and
 white- or yellow-covered text; it is a bounded paint-presence check, not OCR or glyph-shape matching.
-`exactInventory: true` also rejects any extra token; the hidden-comment control uses it. Every page must retain the declared paper geometry, which registry validation checks against every authored section. Extra renderer-generated author, date and navigation labels are allowed.
+`forbiddenTokens` optionally lists unique source tokens that must be absent, disjoint from
+`requiredTokens`. This prevents hidden deletions or comments from passing as permitted extra
+renderer labels. `exactInventory: true` also rejects any extra token; the hidden-comment control uses it. Every page must retain the declared paper geometry, which registry validation checks against every authored section. Extra renderer-generated author, date and navigation labels are allowed.
 A refusal or missing/duplicated/off-page source word fails mandatory checks and makes
 the case score zero. Conversion, missing-artifact, inspection and binding failures also fail these mandatory checks.
 The declaration and inspector identity are bound into the measurement contract.
