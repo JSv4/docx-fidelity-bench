@@ -183,6 +183,9 @@ def run(output, reference, adapter, candidate, suite=None, registry=None):
     if pdf_policies:
         contract.update(pdfTextNormalizations=pdf_policies, pdfTextInspectorVersion=pdf.PDF_TEXT_POLICY_VERSION,
                         pdfTextInspectorSha256=digest(Path(pdf.__file__)))
+    if any(a['type'] == 'colored-rule-widths' for c in registry['cases'] for a in c['assertions']):
+        contract['coloredRuleInspector'] = {'version': 1, 'sources': {
+            name: digest(ROOT / name) for name in ('bench/pdf.py', 'bench/vector_rules.py')}}
     html_declarations = {c['id']: c['htmlAssertions'] for c in registry['cases'] if c.get('htmlAssertions')}
     companions = {c['id']: c['pdfCompanion'] for c in registry['cases'] if c.get('pdfCompanion')}
     # A reference-engine calibration measures PDFs; it cannot attest another artifact's metadata.
@@ -365,6 +368,15 @@ def validate_result(result):
     from .common import validate_pdf_companion
     for declaration in companions.values(): validate_pdf_companion(declaration)
     pdf_policies = result['contract'].get('pdfTextNormalizations', {})
+    rules = result['contract'].get('coloredRuleInspector')
+    if rules is not None and (not isinstance(rules, dict) or set(rules) != {'version', 'sources'} or
+            type(rules['version']) is not int or rules['version'] != 1 or
+            not isinstance(rules['sources'], dict) or set(rules['sources']) != {'bench/pdf.py', 'bench/vector_rules.py'} or
+            any(not isinstance(value, str) or not re.fullmatch('[a-f0-9]{64}', value) for value in rules['sources'].values())):
+        raise ValueError('Invalid colored-rule inspector contract')
+    if rules is None and any(check.get('name') == 'assertion-colored-rule-widths'
+                             for case in result['cases'] for check in case.get('checks', [])):
+        raise ValueError('Missing colored-rule inspector contract')
     if 'pdfTextNormalizations' in result['contract'] and (not isinstance(pdf_policies, dict) or
             any(not isinstance(policy, str) or policy not in pdf.PDF_TEXT_POLICIES for policy in pdf_policies.values()) or
             not set(pdf_policies).issubset(result['suite']['cases']) or

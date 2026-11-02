@@ -1,5 +1,12 @@
 # DOCX fidelity bench
 
+`core-v100` adds nine original fractional-table-border cases for Docxodus #1522:
+quarter-, half-, one- and three-point rules, inherited styles, merged shared segments,
+wrapping boundaries and a borderless control. The opt-in `colored-rule-widths` check
+reads physical vector widths independently of the 96-DPI raster, whose pixel grid can
+hide subpixel differences. Existing raster scoring and all 715 prior inputs are unchanged.
+[All nine labeled comparisons](docs/results/fractional-table-borders/README.md) include full pages and table crops.
+
 `core-v99` adds eight original DrawingML-group cases for Docxodus #1527: independent
 header/body stories, nested and scaled coordinates, mixed picture/shape members, and
 single/separate controls. [All eight labeled comparisons](docs/results/drawingml-group-stories/README.md)
@@ -292,7 +299,7 @@ Regression comparison refuses changed references, fonts, measurement tools, suit
 
 ## Add a case or adapter
 
-Author a focused DOCX with original text and graphics, add a generator and rights record, declare all visible token counts and versioned assertions, and add its ID and primary category to a versioned suite. The runner discovers manifest records; no scoring change is needed to add a case. The current check registry supports `marker-region`, `same-page`, `non-overlapping-markers`, `marker-reference-position`, `color-geometry` and `color-reference-geometry`; unknown types and versions are rejected. Region version 2 declares a 0.0001-point boundary tolerance for PDF coordinate serialization; version 1 retains exact boundaries. Reference-position checks compare a unique marker's page and top-left PDF position with its reference, within the declared tolerance in points. `non-overlapping-markers` version 1 names exactly two unique source tokens. Their extracted PDF word rectangles must have finite positive bounds on real pages, and must either occupy different pages or overlap by no more than the declared tolerance on at least one axis. The tolerance is limited to 0–0.5 pt to accommodate bounding-box rounding and adjacent-line font metrics. This checks selected word boxes, not full frame clearance or exact native wrapping; independent marker regions pin their pages and allowed positions. Missing or duplicated labels fail. New check implementations need positive and negative examples. The corpus generator is intentionally transparent and deterministic.
+Author a focused DOCX with original text and graphics, add a generator and rights record, declare all visible token counts and versioned assertions, and add its ID and primary category to a versioned suite. The runner discovers manifest records; no scoring change is needed to add a case. The current check registry supports `marker-region`, `same-page`, `non-overlapping-markers`, `marker-reference-position`, `color-geometry`, `color-reference-geometry` and `colored-rule-widths`; unknown types and versions are rejected. Region version 2 declares a 0.0001-point boundary tolerance for PDF coordinate serialization; version 1 retains exact boundaries. Reference-position checks compare a unique marker's page and top-left PDF position with its reference, within the declared tolerance in points. `non-overlapping-markers` version 1 names exactly two unique source tokens. Their extracted PDF word rectangles must have finite positive bounds on real pages, and must either occupy different pages or overlap by no more than the declared tolerance on at least one axis. The tolerance is limited to 0–0.5 pt to accommodate bounding-box rounding and adjacent-line font metrics. This checks selected word boxes, not full frame clearance or exact native wrapping; independent marker regions pin their pages and allowed positions. Missing or duplicated labels fail. New check implementations need positive and negative examples. The corpus generator is intentionally transparent and deterministic.
 
 Adding or changing cases requires a new suite version and a like-for-like rerun of the prior suite for historical comparisons. New references are explicitly pending until registered. No case is dropped because a renderer fails it.
 

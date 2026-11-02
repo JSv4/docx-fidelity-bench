@@ -187,9 +187,19 @@ def validate_registry(registry=None):
             if not case.get('htmlAssertions'):
                 raise ValueError('An HTML profile override requires declared HTML checks')
         for assertion in case['assertions']:
-            versions = {'marker-region': {1, 2}, 'same-page': {1}, 'non-overlapping-markers': {1}, 'marker-reference-position': {1}, 'color-reference-geometry': {1}, 'color-geometry': {1}}
+            versions = {'marker-region': {1, 2}, 'same-page': {1}, 'non-overlapping-markers': {1}, 'marker-reference-position': {1}, 'color-reference-geometry': {1}, 'color-geometry': {1}, 'colored-rule-widths': {1}}
             if assertion.get('version') not in versions.get(assertion.get('type'), set()):
                 raise ValueError('Unknown assertion type or version')
+            if assertion['type'] == 'colored-rule-widths':
+                if (set(assertion) != {'type', 'version', 'page', 'rgb', 'widthsPt', 'tolerancePt'} or
+                        type(assertion['page']) is not int or assertion['page'] < 1 or
+                        not isinstance(assertion['rgb'], list) or len(assertion['rgb']) != 3 or
+                        any(type(c) is not int or not 0 <= c < 255 for c in assertion['rgb']) or len(set(assertion['rgb'])) < 2 or
+                        not isinstance(assertion['widthsPt'], list) or not assertion['widthsPt'] or
+                        any(type(w) not in (int, float) or not math.isfinite(w) or not 0 < w <= 12 for w in assertion['widthsPt']) or
+                        type(assertion['tolerancePt']) not in (int, float) or not math.isfinite(assertion['tolerancePt']) or
+                        not 0 <= assertion['tolerancePt'] <= .02):
+                    raise ValueError('Invalid colored-rule width declaration')
             if assertion['type'] == 'non-overlapping-markers':
                 labels, tolerance = assertion.get('markers'), assertion.get('tolerancePt')
                 if (set(assertion) != {'type', 'version', 'markers', 'tolerancePt'} or
