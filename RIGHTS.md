@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The six signed-leading-indent cases for Docxodus #1519 contain original Laurel labels
+and literal WordprocessingML authored in `bench/fixtures.py`. They import no document,
+template, helper, image or font program. Liberation Serif is separately provisioned.
+The labeled comparison sheets show only these authored inputs.
+
 The ten paragraph-replacement cases for Docxodus #1526 contain original harbor text
 and literal WordprocessingML authored in `bench/redline_fixtures.py`. They import no
 document, helper, template, image or font program. Their labeled review screenshots
