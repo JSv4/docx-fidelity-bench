@@ -15,7 +15,7 @@ The screenshots show both complete pages from LibreOffice, an existing local 15.
 build (`4bb8386be06ded02dd41564fcf2d18742dd04cbe`), and a fresh local candidate build.
 The earlier build's relevant paginator matches the issue's main baseline. These are
 local diagnostics, not a full-suite calibrated score or native Word captures.
-`evidence.json` binds candidate commit `39c1ae01d4d6bd970ec76adeb53af79e0d7dce76`,
+`evidence.json` binds candidate commit `561a9b3c77e0536f2534122d5754493c8dfbc9f9`,
 paginator/converter source, runtime asset manifest, input/PDF and screenshot hashes,
 marker positions and all declared checks;
 `schema.json` records zero Open XML SDK 3.5.1 findings on all six inputs.
