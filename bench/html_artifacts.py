@@ -3,6 +3,7 @@
 These feature checks accompany PDF evidence; they do not change the PDF raster score.
 """
 from html.parser import HTMLParser
+from collections import Counter
 import re
 import json
 import math
@@ -44,8 +45,14 @@ def validate_declaration(declaration):
             raise ValueError('Unknown or invalid computed HTML style assertion')
     elif declaration.get('type') == 'review-display':
         expected = declaration.get('expected')
-        if (set(declaration) != {'type', 'version', 'marker', 'expected'} or not isinstance(expected, dict) or
-                set(expected) != REVIEW_COUNTS or any(type(value) is not int or value < 0 for value in expected.values())):
+        required, forbidden = declaration.get('requiredTokens'), declaration.get('forbiddenTokens')
+        if (set(declaration) != {'type', 'version', 'marker', 'expected', 'requiredTokens', 'forbiddenTokens'} or not isinstance(expected, dict) or
+                set(expected) != REVIEW_COUNTS or any(type(value) is not int or value < 0 for value in expected.values()) or
+                not isinstance(required, dict) or not required or
+                any(not isinstance(word, str) or len(word.split()) != 1 or word.strip() != word or
+                    type(count) is not int or count < 1 for word, count in required.items()) or
+                not isinstance(forbidden, list) or any(not isinstance(word, str) or len(word.split()) != 1 or word.strip() != word for word in forbidden) or
+                len(set(forbidden)) != len(forbidden) or set(forbidden) & set(required)):
             raise ValueError('Unknown or invalid review display assertion')
     elif declaration.get('type') == 'named-checkbox':
         if (set(declaration) != {'type', 'version', 'marker', 'checked', 'sizePt', 'caption'} or
@@ -188,7 +195,10 @@ def review_display_pass(declaration, observation, index):
     if (not isinstance(counts, dict) or set(counts) != REVIEW_COUNTS or
             any(type(value) is not int or value < 0 for value in counts.values())):
         raise ValueError('Malformed review display observation')
-    return passed and counts == declaration['expected']
+    tokens = Counter(observation['text'].split())
+    return (passed and counts == declaration['expected'] and
+            all(tokens[word] == count for word, count in declaration['requiredTokens'].items()) and
+            not any(tokens[word] for word in declaration['forbiddenTokens']))
 
 
 def browser_metadata_valid(value, html_sha, inspector_sha, runtime):

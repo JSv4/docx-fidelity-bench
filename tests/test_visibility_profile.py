@@ -8,11 +8,14 @@ from bench import html_artifacts
 class VisibilityPolicy(unittest.TestCase):
     def test_review_display_observation_detects_each_wrong_family_and_empty_area(self):
         expected = dict(formatBalloons=0, commentBalloons=0, insertions=1, deletions=1, areas=0, layers=0)
-        declaration = dict(type='review-display', version=1, marker='HazelCurrent', expected=expected)
+        declaration = dict(type='review-display', version=1, marker='HazelCurrent', expected=expected,
+                           requiredTokens={'HazelCurrent': 1, 'HazelNote': 1}, forbiddenTokens=['HazelDeleted'])
         html_artifacts.validate_declaration(declaration)
-        facts = dict(index=0, marker='HazelCurrent', matches=1, text='HazelCurrent', ports=[],
+        facts = dict(index=0, marker='HazelCurrent', matches=1, text='HazelCurrent HazelNote', ports=[],
                      before=[10, 10, 90, 30], after=[10, 10, 90, 30], viewport=[0, 0, 1280, 1024], reviewCounts=expected.copy())
         self.assertTrue(html_artifacts.review_display_pass(declaration, facts, 0))
+        for text in ('HazelCurrent', 'HazelCurrent HazelNote HazelDeleted', 'HazelCurrent HazelNote HazelNote'):
+            self.assertFalse(html_artifacts.review_display_pass(declaration, dict(facts, text=text), 0))
         for key in expected:
             wrong = copy.deepcopy(facts)
             wrong['reviewCounts'][key] = 1 - expected[key]

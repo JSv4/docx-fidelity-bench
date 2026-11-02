@@ -4483,7 +4483,8 @@ def generate():
         if forbidden: case['pdfCompanion']['forbiddenTokens'] = forbidden
         case['htmlProfile'] = profile
         area = int(has_format and formatting or has_comment and comments)
-        case['htmlAssertions'] = [dict(type='review-display', version=1, marker=shown[-1], expected=dict(
+        case['htmlAssertions'] = [dict(type='review-display', version=1, marker=shown[-1],
+            requiredTokens=dict(Counter(printed)), forbiddenTokens=forbidden, expected=dict(
             formatBalloons=int(has_format and formatting), commentBalloons=int(has_comment and comments),
             insertions=int(has_text and text), deletions=int(has_text and text), areas=area, layers=area)),
             dict(type='marker-readable', version=1, marker=shown[-1], tokens=shown)]

@@ -71,7 +71,10 @@ paint-occlusion or interactive-application fidelity test.
 
 Version 1 `review-display` declares a unique `marker` and exact nonnegative counts in
 `expected` for `formatBalloons`, `commentBalloons`, `insertions`, `deletions`, `areas` and
-`layers`. The independent browser observer counts delivered balloon labels, revision
+`layers`, a nonempty `requiredTokens` count map, and a `forbiddenTokens` list (which may
+be empty). The latter are checked against the observer’s visible document text, so missing
+comment text and plain-text leaks cannot pass through correct element counts alone.
+The independent browser observer counts delivered balloon labels, revision
 elements and markup containers. Python replays the counts and requires the marker to
 remain accessible under the same clipping rules. These are structural observations;
 paired companion-PDF token/paint checks verify printed source content. They do not claim

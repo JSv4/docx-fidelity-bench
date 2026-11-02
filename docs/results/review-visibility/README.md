@@ -18,7 +18,9 @@ derived source package. Positive formatting cases also require the printed `Form
 label. The same-file comment-only control preserves its display when formatting is hidden.
 All 14 fixtures pass Open XML SDK 3.5.1 validation. The independent browser observer is
 mutation-tested for missing and duplicated families, retained empty containers and hidden
-source markers.
+source markers. Final adversarial review added complete visible HTML token inventories
+and forbidden tokens; mutations now catch empty/hidden comment text and comments leaked
+as plain paragraphs independently of the companion PDF.
 
 [Local evidence and source identity](local-evidence.json) and [schema findings](schema.json)
 record the observed artifacts. Pinned production benchmark runs are pending; these local
