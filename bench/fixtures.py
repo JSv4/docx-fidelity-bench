@@ -4495,7 +4495,33 @@ def generate():
         for text in (False, True):
             for comments in (False, True):
                 hazel_case('mixed', formatting, text, comments, default=formatting and text and comments)
-    registry = {'schema': 1, 'suite': {'id': 'core-v101', 'version': 101, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # #1521: complete hard-break inventories distinguish paragraph fragmentation from clipping.
+    copper_styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+        '<w:rFonts w:ascii="Liberation Sans" w:hAnsi="Liberation Sans"/><w:sz w:val="24"/>'
+        '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl w:val="0"/>'
+        '<w:spacing w:before="0" w:after="0" w:line="300" w:lineRule="exact"/>'
+        '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    copper_section = ('<w:sectPr><w:pgSz w:w="12240" w:h="9000"/>'
+        '<w:pgMar w:top="1080" w:right="1080" w:bottom="1080" w:left="1080" w:header="480" w:footer="480"/></w:sectPr>')
+    for tracked, anchored, count in [(False, False, 42), (False, True, 42), (True, False, 42),
+                                     (True, True, 42), (False, False, 84), (True, True, 84)]:
+        lines = [f'CopperRow{i:02d} carries a workshop token.' for i in range(1, count + 1)]
+        content = willow_drawing(willow_box('CopperNote'), False, 378) if anchored else ''
+        content += '<w:r><w:br/></w:r>'.join(run(line) for line in lines)
+        if tracked:
+            content = '<w:ins w:id="7" w:author="Copper Reviewer" w:date="2026-02-03T10:00:00Z">' + content + '</w:ins>'
+        assertions = [dict(type='marker-region', marker=f'CopperRow{i + 1:02d}', occurrence=1,
+                           page=i // 22 + 1, rect=[54, 54 + i % 22 * 15, 558, 69 + i % 22 * 15])
+                      for i in range(count)]
+        if anchored:
+            assertions.append(dict(type='marker-region', marker='CopperNote', occurrence=1, page=1, rect=[432, 54, 532, 84]))
+        add(f'paragraph-fragmentation-{count}-tracked-{int(tracked)}-anchor-{int(anchored)}', 'paragraphs',
+            f'Complete {count}-line paragraph with tracked={tracked}, leading non-wrapping textbox={anchored} (Docxodus #1521)',
+            lines + (['CopperNote'] if anchored else []), para(runs=content), copper_section,
+            styles_xml=copper_styles, font='Liberation Sans', assertions=assertions,
+            namespaces_extra=' xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"')
+        cases[-1]['profile'].update(review='markup', markupPresentation='word')
+    registry = {'schema': 1, 'suite': {'id': 'core-v102', 'version': 102, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

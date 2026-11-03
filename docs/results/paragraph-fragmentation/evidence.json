@@ -1,0 +1,6470 @@
+{
+  "schema": 1,
+  "baseCommit": "105311833190668780d12f66ecd524986474261f",
+  "candidateCommit": "7fad3ec6b31f2e3938c38d50a3e47c3d33932456",
+  "scope": "six-case diagnostics; no Docxodus suite score",
+  "calibration": {
+    "categoryMeans": {
+      "paragraphs": 100.0
+    },
+    "closeMatchRate": 1.0,
+    "complete": true,
+    "mandatoryPassRate": 1.0,
+    "measured": 6,
+    "required": 6,
+    "score": 100.0
+  },
+  "candidateEnvironment": {
+    "ok": false,
+    "findings": [
+      {
+        "code": "user_namespaces_unavailable",
+        "severity": "fatal",
+        "message": "This host denies unprivileged user namespaces, which Chromium's process sandbox requires.",
+        "remediation": "Permit unprivileged user namespaces on the render host \u2014 for example kernel.apparmor_restrict_unprivileged_userns=0 on Ubuntu 23.10 and later; in containers, use a seccomp profile that permits clone with CLONE_NEWUSER and do not drop the capabilities the namespace path needs."
+      }
+    ]
+  },
+  "baseBuildLimitation": "Benchmark WASM build exceeded the wire-size budget by 2 KB; JS/export builds completed separately for this diagnostic only",
+  "cases": [
+    {
+      "id": "paragraph-fragmentation-42-tracked-0-anchor-0",
+      "inputSha256": "cf79072cd5285e6c37297f135ce561a1011ec48ad67b97acd5a97f9b12e06921",
+      "reference": {
+        "pdfSha256": "54e9f9cc76c2671627a2904a5532a85521c0bffc2ec11121f269f01942a8bf08",
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        },
+        "eligible": true
+      },
+      "base": {
+        "status": "exported"
+      },
+      "candidate": {
+        "id": "paragraph-fragmentation-42-tracked-0-anchor-0",
+        "inputSha256": "cf79072cd5285e6c37297f135ce561a1011ec48ad67b97acd5a97f9b12e06921",
+        "status": "exported",
+        "pages": 2,
+        "pdfSha256": "34e0dfcfb4100c965a06b829fcd83226a1d100c30b2f4006cff9eb20c53849f9"
+      },
+      "checks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "physical-geometry-page-2",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow01",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              54,
+              558,
+              69
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow02",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              69,
+              558,
+              84
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow03",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              84,
+              558,
+              99
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow04",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              99,
+              558,
+              114
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow05",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              114,
+              558,
+              129
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow06",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              129,
+              558,
+              144
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow07",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              144,
+              558,
+              159
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow08",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              159,
+              558,
+              174
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow09",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              174,
+              558,
+              189
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow10",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              189,
+              558,
+              204
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow11",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              204,
+              558,
+              219
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow12",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              219,
+              558,
+              234
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow13",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              234,
+              558,
+              249
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow14",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              249,
+              558,
+              264
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow15",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              264,
+              558,
+              279
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow16",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              279,
+              558,
+              294
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow17",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              294,
+              558,
+              309
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow18",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              309,
+              558,
+              324
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow19",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              324,
+              558,
+              339
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow20",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              339,
+              558,
+              354
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow21",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              354,
+              558,
+              369
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow22",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              369,
+              558,
+              384
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow23",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              54,
+              558,
+              69
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow24",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              69,
+              558,
+              84
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow25",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              84,
+              558,
+              99
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow26",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              99,
+              558,
+              114
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow27",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              114,
+              558,
+              129
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow28",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              129,
+              558,
+              144
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow29",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              144,
+              558,
+              159
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow30",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              159,
+              558,
+              174
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow31",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              174,
+              558,
+              189
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow32",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              189,
+              558,
+              204
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow33",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              204,
+              558,
+              219
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow34",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              219,
+              558,
+              234
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow35",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              234,
+              558,
+              249
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow36",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              249,
+              558,
+              264
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow37",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              264,
+              558,
+              279
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow38",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              279,
+              558,
+              294
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow39",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              294,
+              558,
+              309
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow40",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              309,
+              558,
+              324
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow41",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              324,
+              558,
+              339
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow42",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              339,
+              558,
+              354
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        }
+      ]
+    },
+    {
+      "id": "paragraph-fragmentation-42-tracked-0-anchor-1",
+      "inputSha256": "079c7899b11ff95a9e0fc14b393f917037e8c5d6bf55afa3c66fdb3662e36485",
+      "reference": {
+        "pdfSha256": "79dd297dcb6d2a36d5156d04aa067e322a8f51bdd893df481a4fc26b0d6a4c72",
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        },
+        "eligible": true
+      },
+      "base": {
+        "status": "failed",
+        "failure": {
+          "code": "pagination_failure",
+          "phase": "running_story_placement",
+          "message": "Page 1 body content is clipped (840px scroll height in a 456px band; p.docx-000000 (+384.0px), span.docx-000001 (+383.0px), span.docx-000001 (+363.0px))."
+        }
+      },
+      "candidate": {
+        "id": "paragraph-fragmentation-42-tracked-0-anchor-1",
+        "inputSha256": "079c7899b11ff95a9e0fc14b393f917037e8c5d6bf55afa3c66fdb3662e36485",
+        "status": "exported",
+        "pages": 2,
+        "pdfSha256": "cea45fc526a5f645bca8393cfc3278c7c046b991e8a497089f5d4c64910414c2"
+      },
+      "checks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "physical-geometry-page-2",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow01",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              54,
+              558,
+              69
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow02",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              69,
+              558,
+              84
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow03",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              84,
+              558,
+              99
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow04",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              99,
+              558,
+              114
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow05",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              114,
+              558,
+              129
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow06",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              129,
+              558,
+              144
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow07",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              144,
+              558,
+              159
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow08",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              159,
+              558,
+              174
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow09",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              174,
+              558,
+              189
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow10",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              189,
+              558,
+              204
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow11",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              204,
+              558,
+              219
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow12",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              219,
+              558,
+              234
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow13",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              234,
+              558,
+              249
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow14",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              249,
+              558,
+              264
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow15",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              264,
+              558,
+              279
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow16",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              279,
+              558,
+              294
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow17",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              294,
+              558,
+              309
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow18",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              309,
+              558,
+              324
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow19",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              324,
+              558,
+              339
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow20",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              339,
+              558,
+              354
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow21",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              354,
+              558,
+              369
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow22",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              369,
+              558,
+              384
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow23",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              54,
+              558,
+              69
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow24",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              69,
+              558,
+              84
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow25",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              84,
+              558,
+              99
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow26",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              99,
+              558,
+              114
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow27",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              114,
+              558,
+              129
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow28",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              129,
+              558,
+              144
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow29",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              144,
+              558,
+              159
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow30",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              159,
+              558,
+              174
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow31",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              174,
+              558,
+              189
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow32",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              189,
+              558,
+              204
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow33",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              204,
+              558,
+              219
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow34",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              219,
+              558,
+              234
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow35",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              234,
+              558,
+              249
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow36",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              249,
+              558,
+              264
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow37",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              264,
+              558,
+              279
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow38",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              279,
+              558,
+              294
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow39",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              294,
+              558,
+              309
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow40",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              309,
+              558,
+              324
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow41",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              324,
+              558,
+              339
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow42",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              339,
+              558,
+              354
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperNote",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              432,
+              54,
+              532,
+              84
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        }
+      ]
+    },
+    {
+      "id": "paragraph-fragmentation-42-tracked-1-anchor-0",
+      "inputSha256": "551afea0bead5aa9376b948ed439e3b05eb2d9094332e3a6674654472b97d3cd",
+      "reference": {
+        "pdfSha256": "9eebb796f5c351e18475ae956dc5a80dd38fb3931799c0bcddaa3f13ad118a3c",
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        },
+        "eligible": true
+      },
+      "base": {
+        "status": "failed",
+        "failure": {
+          "code": "pagination_failure",
+          "phase": "running_story_placement",
+          "message": "Page 1 body content is clipped (840px scroll height in a 456px band; p.rev-changed-line.docx-000000 (+384.0px), span.docx-000001 (+383.0px), ins.rev-ins.rev-author-0 (+383.0px))."
+        }
+      },
+      "candidate": {
+        "id": "paragraph-fragmentation-42-tracked-1-anchor-0",
+        "inputSha256": "551afea0bead5aa9376b948ed439e3b05eb2d9094332e3a6674654472b97d3cd",
+        "status": "exported",
+        "pages": 2,
+        "pdfSha256": "77b9f0c645ddbc0448fb71d8f03a4afc944e9c960c1838986b0c68921520ea56"
+      },
+      "checks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "physical-geometry-page-2",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow01",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              54,
+              558,
+              69
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow02",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              69,
+              558,
+              84
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow03",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              84,
+              558,
+              99
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow04",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              99,
+              558,
+              114
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow05",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              114,
+              558,
+              129
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow06",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              129,
+              558,
+              144
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow07",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              144,
+              558,
+              159
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow08",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              159,
+              558,
+              174
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow09",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              174,
+              558,
+              189
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow10",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              189,
+              558,
+              204
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow11",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              204,
+              558,
+              219
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow12",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              219,
+              558,
+              234
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow13",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              234,
+              558,
+              249
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow14",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              249,
+              558,
+              264
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow15",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              264,
+              558,
+              279
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow16",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              279,
+              558,
+              294
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow17",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              294,
+              558,
+              309
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow18",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              309,
+              558,
+              324
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow19",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              324,
+              558,
+              339
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow20",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              339,
+              558,
+              354
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow21",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              354,
+              558,
+              369
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow22",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              369,
+              558,
+              384
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow23",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              54,
+              558,
+              69
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow24",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              69,
+              558,
+              84
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow25",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              84,
+              558,
+              99
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow26",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              99,
+              558,
+              114
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow27",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              114,
+              558,
+              129
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow28",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              129,
+              558,
+              144
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow29",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              144,
+              558,
+              159
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow30",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              159,
+              558,
+              174
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow31",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              174,
+              558,
+              189
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow32",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              189,
+              558,
+              204
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow33",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              204,
+              558,
+              219
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow34",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              219,
+              558,
+              234
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow35",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              234,
+              558,
+              249
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow36",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              249,
+              558,
+              264
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow37",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              264,
+              558,
+              279
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow38",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              279,
+              558,
+              294
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow39",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              294,
+              558,
+              309
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow40",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              309,
+              558,
+              324
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow41",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              324,
+              558,
+              339
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow42",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              339,
+              558,
+              354
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        }
+      ]
+    },
+    {
+      "id": "paragraph-fragmentation-42-tracked-1-anchor-1",
+      "inputSha256": "adc1e599a6a3c7d0916dfed43060372e118ff8926ae72230ffb8327f3e7019da",
+      "reference": {
+        "pdfSha256": "12961fd98fd968997a925ca13d74aa119c35dce69bcff5d288f8301fafea728e",
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        },
+        "eligible": true
+      },
+      "base": {
+        "status": "failed",
+        "failure": {
+          "code": "pagination_failure",
+          "phase": "running_story_placement",
+          "message": "Page 1 body content is clipped (840px scroll height in a 456px band; p.rev-changed-line.docx-000000 (+384.0px), span.docx-000001 (+383.0px), ins.rev-ins.rev-author-0 (+383.0px))."
+        }
+      },
+      "candidate": {
+        "id": "paragraph-fragmentation-42-tracked-1-anchor-1",
+        "inputSha256": "adc1e599a6a3c7d0916dfed43060372e118ff8926ae72230ffb8327f3e7019da",
+        "status": "exported",
+        "pages": 2,
+        "pdfSha256": "2746ad72eca14662a90af384cdd0d6a6e56361470cc13424bcb08e691f8750dc"
+      },
+      "checks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "physical-geometry-page-2",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow01",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              54,
+              558,
+              69
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow02",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              69,
+              558,
+              84
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow03",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              84,
+              558,
+              99
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow04",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              99,
+              558,
+              114
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow05",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              114,
+              558,
+              129
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow06",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              129,
+              558,
+              144
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow07",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              144,
+              558,
+              159
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow08",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              159,
+              558,
+              174
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow09",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              174,
+              558,
+              189
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow10",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              189,
+              558,
+              204
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow11",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              204,
+              558,
+              219
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow12",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              219,
+              558,
+              234
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow13",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              234,
+              558,
+              249
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow14",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              249,
+              558,
+              264
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow15",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              264,
+              558,
+              279
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow16",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              279,
+              558,
+              294
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow17",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              294,
+              558,
+              309
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow18",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              309,
+              558,
+              324
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow19",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              324,
+              558,
+              339
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow20",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              339,
+              558,
+              354
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow21",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              354,
+              558,
+              369
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow22",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              369,
+              558,
+              384
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow23",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              54,
+              558,
+              69
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow24",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              69,
+              558,
+              84
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow25",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              84,
+              558,
+              99
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow26",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              99,
+              558,
+              114
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow27",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              114,
+              558,
+              129
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow28",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              129,
+              558,
+              144
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow29",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              144,
+              558,
+              159
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow30",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              159,
+              558,
+              174
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow31",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              174,
+              558,
+              189
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow32",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              189,
+              558,
+              204
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow33",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              204,
+              558,
+              219
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow34",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              219,
+              558,
+              234
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow35",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              234,
+              558,
+              249
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow36",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              249,
+              558,
+              264
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow37",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              264,
+              558,
+              279
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow38",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              279,
+              558,
+              294
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow39",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              294,
+              558,
+              309
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow40",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              309,
+              558,
+              324
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow41",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              324,
+              558,
+              339
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow42",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              339,
+              558,
+              354
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperNote",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              432,
+              54,
+              532,
+              84
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        }
+      ]
+    },
+    {
+      "id": "paragraph-fragmentation-84-tracked-0-anchor-0",
+      "inputSha256": "9e4cd9a8ae15eba3a25f9b50c7e0213479e3b13c1fe3ef2e6e2a38da7a3b5ac7",
+      "reference": {
+        "pdfSha256": "f00befeab25277d94a094933479e0c15c9f71c708a6722a911c35017da553b38",
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        },
+        "eligible": true
+      },
+      "base": {
+        "status": "exported"
+      },
+      "candidate": {
+        "id": "paragraph-fragmentation-84-tracked-0-anchor-0",
+        "inputSha256": "9e4cd9a8ae15eba3a25f9b50c7e0213479e3b13c1fe3ef2e6e2a38da7a3b5ac7",
+        "status": "exported",
+        "pages": 4,
+        "pdfSha256": "fb39db08f7ba52166ada2c7a920b78a098d3d88e697f50ef17172e70c980d735"
+      },
+      "checks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "physical-geometry-page-2",
+          "passed": true
+        },
+        {
+          "name": "physical-geometry-page-3",
+          "passed": true
+        },
+        {
+          "name": "physical-geometry-page-4",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow01",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              54,
+              558,
+              69
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow02",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              69,
+              558,
+              84
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow03",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              84,
+              558,
+              99
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow04",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              99,
+              558,
+              114
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow05",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              114,
+              558,
+              129
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow06",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              129,
+              558,
+              144
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow07",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              144,
+              558,
+              159
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow08",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              159,
+              558,
+              174
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow09",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              174,
+              558,
+              189
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow10",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              189,
+              558,
+              204
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow11",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              204,
+              558,
+              219
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow12",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              219,
+              558,
+              234
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow13",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              234,
+              558,
+              249
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow14",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              249,
+              558,
+              264
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow15",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              264,
+              558,
+              279
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow16",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              279,
+              558,
+              294
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow17",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              294,
+              558,
+              309
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow18",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              309,
+              558,
+              324
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow19",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              324,
+              558,
+              339
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow20",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              339,
+              558,
+              354
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow21",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              354,
+              558,
+              369
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow22",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              369,
+              558,
+              384
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow23",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              54,
+              558,
+              69
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow24",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              69,
+              558,
+              84
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow25",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              84,
+              558,
+              99
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow26",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              99,
+              558,
+              114
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow27",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              114,
+              558,
+              129
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow28",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              129,
+              558,
+              144
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow29",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              144,
+              558,
+              159
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow30",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              159,
+              558,
+              174
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow31",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              174,
+              558,
+              189
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow32",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              189,
+              558,
+              204
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow33",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              204,
+              558,
+              219
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow34",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              219,
+              558,
+              234
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow35",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              234,
+              558,
+              249
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow36",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              249,
+              558,
+              264
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow37",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              264,
+              558,
+              279
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow38",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              279,
+              558,
+              294
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow39",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              294,
+              558,
+              309
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow40",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              309,
+              558,
+              324
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow41",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              324,
+              558,
+              339
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow42",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              339,
+              558,
+              354
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow43",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              354,
+              558,
+              369
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow44",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              369,
+              558,
+              384
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow45",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              54,
+              558,
+              69
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow46",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              69,
+              558,
+              84
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow47",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              84,
+              558,
+              99
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow48",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              99,
+              558,
+              114
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow49",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              114,
+              558,
+              129
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow50",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              129,
+              558,
+              144
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow51",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              144,
+              558,
+              159
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow52",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              159,
+              558,
+              174
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow53",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              174,
+              558,
+              189
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow54",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              189,
+              558,
+              204
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow55",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              204,
+              558,
+              219
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow56",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              219,
+              558,
+              234
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow57",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              234,
+              558,
+              249
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow58",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              249,
+              558,
+              264
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow59",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              264,
+              558,
+              279
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow60",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              279,
+              558,
+              294
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow61",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              294,
+              558,
+              309
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow62",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              309,
+              558,
+              324
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow63",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              324,
+              558,
+              339
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow64",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              339,
+              558,
+              354
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow65",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              354,
+              558,
+              369
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow66",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              369,
+              558,
+              384
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow67",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              54,
+              558,
+              69
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow68",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              69,
+              558,
+              84
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow69",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              84,
+              558,
+              99
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow70",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              99,
+              558,
+              114
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow71",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              114,
+              558,
+              129
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow72",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              129,
+              558,
+              144
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow73",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              144,
+              558,
+              159
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow74",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              159,
+              558,
+              174
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow75",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              174,
+              558,
+              189
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow76",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              189,
+              558,
+              204
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow77",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              204,
+              558,
+              219
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow78",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              219,
+              558,
+              234
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow79",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              234,
+              558,
+              249
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow80",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              249,
+              558,
+              264
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow81",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              264,
+              558,
+              279
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow82",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              279,
+              558,
+              294
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow83",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              294,
+              558,
+              309
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow84",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              309,
+              558,
+              324
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        }
+      ]
+    },
+    {
+      "id": "paragraph-fragmentation-84-tracked-1-anchor-1",
+      "inputSha256": "962f88469034babd2385bdf95c68154b5d4e8370476c6e995e324eaf09e83613",
+      "reference": {
+        "pdfSha256": "dff8948925027b04e8f78aedd6fb2a96e80838983a04ec848f61c812ccf3b4cf",
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        },
+        "eligible": true
+      },
+      "base": {
+        "status": "failed",
+        "failure": {
+          "code": "pagination_failure",
+          "phase": "running_story_placement",
+          "message": "Page 1 body content is clipped (1680px scroll height in a 456px band; p.rev-changed-line.docx-000000 (+1224.0px), span.docx-000001 (+1223.0px), ins.rev-ins.rev-author-0 (+1223.0px))."
+        }
+      },
+      "candidate": {
+        "id": "paragraph-fragmentation-84-tracked-1-anchor-1",
+        "inputSha256": "962f88469034babd2385bdf95c68154b5d4e8370476c6e995e324eaf09e83613",
+        "status": "exported",
+        "pages": 4,
+        "pdfSha256": "4c5cbc57719735d0b5136603cc9b04cbebbddf812d38697e999a6ac4f5db370a"
+      },
+      "checks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "physical-geometry-page-2",
+          "passed": true
+        },
+        {
+          "name": "physical-geometry-page-3",
+          "passed": true
+        },
+        {
+          "name": "physical-geometry-page-4",
+          "passed": true
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow01",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              54,
+              558,
+              69
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow02",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              69,
+              558,
+              84
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow03",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              84,
+              558,
+              99
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow04",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              99,
+              558,
+              114
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow05",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              114,
+              558,
+              129
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow06",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              129,
+              558,
+              144
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow07",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              144,
+              558,
+              159
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow08",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              159,
+              558,
+              174
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow09",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              174,
+              558,
+              189
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow10",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              189,
+              558,
+              204
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow11",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              204,
+              558,
+              219
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow12",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              219,
+              558,
+              234
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow13",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              234,
+              558,
+              249
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow14",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              249,
+              558,
+              264
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow15",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              264,
+              558,
+              279
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow16",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              279,
+              558,
+              294
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow17",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              294,
+              558,
+              309
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow18",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              309,
+              558,
+              324
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow19",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              324,
+              558,
+              339
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow20",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              339,
+              558,
+              354
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow21",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              354,
+              558,
+              369
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow22",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              54,
+              369,
+              558,
+              384
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow23",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              54,
+              558,
+              69
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow24",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              69,
+              558,
+              84
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow25",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              84,
+              558,
+              99
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow26",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              99,
+              558,
+              114
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow27",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              114,
+              558,
+              129
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow28",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              129,
+              558,
+              144
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow29",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              144,
+              558,
+              159
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow30",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              159,
+              558,
+              174
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow31",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              174,
+              558,
+              189
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow32",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              189,
+              558,
+              204
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow33",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              204,
+              558,
+              219
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow34",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              219,
+              558,
+              234
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow35",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              234,
+              558,
+              249
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow36",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              249,
+              558,
+              264
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow37",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              264,
+              558,
+              279
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow38",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              279,
+              558,
+              294
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow39",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              294,
+              558,
+              309
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow40",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              309,
+              558,
+              324
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow41",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              324,
+              558,
+              339
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow42",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              339,
+              558,
+              354
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow43",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              354,
+              558,
+              369
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow44",
+            "occurrence": 1,
+            "page": 2,
+            "rect": [
+              54,
+              369,
+              558,
+              384
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow45",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              54,
+              558,
+              69
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow46",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              69,
+              558,
+              84
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow47",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              84,
+              558,
+              99
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow48",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              99,
+              558,
+              114
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow49",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              114,
+              558,
+              129
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow50",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              129,
+              558,
+              144
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow51",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              144,
+              558,
+              159
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow52",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              159,
+              558,
+              174
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow53",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              174,
+              558,
+              189
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow54",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              189,
+              558,
+              204
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow55",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              204,
+              558,
+              219
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow56",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              219,
+              558,
+              234
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow57",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              234,
+              558,
+              249
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow58",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              249,
+              558,
+              264
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow59",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              264,
+              558,
+              279
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow60",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              279,
+              558,
+              294
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow61",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              294,
+              558,
+              309
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow62",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              309,
+              558,
+              324
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow63",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              324,
+              558,
+              339
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow64",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              339,
+              558,
+              354
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow65",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              354,
+              558,
+              369
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow66",
+            "occurrence": 1,
+            "page": 3,
+            "rect": [
+              54,
+              369,
+              558,
+              384
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow67",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              54,
+              558,
+              69
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow68",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              69,
+              558,
+              84
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow69",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              84,
+              558,
+              99
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow70",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              99,
+              558,
+              114
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow71",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              114,
+              558,
+              129
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow72",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              129,
+              558,
+              144
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow73",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              144,
+              558,
+              159
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow74",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              159,
+              558,
+              174
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow75",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              174,
+              558,
+              189
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow76",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              189,
+              558,
+              204
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow77",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              204,
+              558,
+              219
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow78",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              219,
+              558,
+              234
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow79",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              234,
+              558,
+              249
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow80",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              249,
+              558,
+              264
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow81",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              264,
+              558,
+              279
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow82",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              279,
+              558,
+              294
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow83",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              294,
+              558,
+              309
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperRow84",
+            "occurrence": 1,
+            "page": 4,
+            "rect": [
+              54,
+              309,
+              558,
+              324
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "CopperNote",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              432,
+              54,
+              532,
+              84
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        }
+      ]
+    }
+  ],
+  "unchangedPreviousCases": 738
+}

@@ -1,5 +1,9 @@
 # DOCX fidelity bench
 
+`core-v102` adds six original paragraph-fragmentation cases for Docxodus #1521. The tracked/textbox
+matrix and four-page controls pin every line's page and region. All 738 previous inputs are unchanged.
+See [all six labeled comparisons and diagnostic limits](docs/results/paragraph-fragmentation/README.md).
+
 `redline-v29` adds empty running stories in inserted opening sections and a stable-section
 control. See [evidence](docs/results/inserted-section-stories/README.md).
 
