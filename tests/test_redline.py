@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v26')
-        self.assertEqual(len(registry['cases']), 226)
+        self.assertEqual(registry['suite']['id'], 'redline-v27')
+        self.assertEqual(len(registry['cases']), 229)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -157,6 +157,102 @@ class AuthoredCalibration(unittest.TestCase):
                                 rejected=revisions.resolve(package.story_parts(), 'reject'))
             for assertion in record['assertions']:
                 self.assertTrue(redline._assertion(assertion, package, resolved)['passed'], record['id'] + ' ' + assertion['type'])
+
+    def test_paragraph_spacing_checks_style_revisions_and_direct_precedence(self):
+        record = case('redline-field-default-spacing-simple')
+        package = load(record['authored'])
+        for assertion in record['assertions']:
+            if assertion['type'] != 'paragraph-spacing':
+                continue
+            scope = assertion['scope']
+            mode = 'accept' if scope == 'accepted' else 'reject'
+            resolved = {scope: revisions.resolve(package.story_parts(), mode)}
+            self.assertTrue(redline._assertion(assertion, package, resolved)['passed'])
+            # Lost style history is text-equivalent but cannot restore the original spacing.
+            parts = dict(package.members)
+            styles = ET.fromstring(parts['word/styles.xml'])
+            normal = styles.find(W + 'style')
+            if scope == 'accepted':
+                normal.remove(normal.find(W + 'pPr'))
+            else:
+                props = normal.find(W + 'pPr')
+                props.remove(props.find(W + 'pPrChange'))
+            parts['word/styles.xml'] = ET.tostring(styles)
+            mutant = revisions.Package(parts)
+            self.assertFalse(redline._assertion(assertion, mutant, resolved)['passed'])
+            # A direct per-attribute override wins, while the other attributes still inherit.
+            paragraph = resolved[scope][package.main].find(W + 'body').find(W + 'p')
+            props = paragraph.find(W + 'pPr')
+            if props is None:
+                props = ET.Element(W + 'pPr')
+                paragraph.insert(0, props)
+            ET.SubElement(props, W + 'spacing', {W + 'after': '999'})
+            observed = redline.paragraph_spacing(package, resolved[scope], scope)
+            self.assertEqual(observed[0], dict(assertion['values'][0], after='999'))
+            self.assertFalse(redline._assertion(assertion, package, resolved)['passed'])
+
+    def test_paragraph_spacing_rejects_unmeasured_override_modes(self):
+        record = case('redline-field-default-spacing-simple')
+        package = load(record['authored'])
+        assertion = next(a for a in record['assertions'] if a['type'] == 'paragraph-spacing' and a['scope'] == 'accepted')
+        resolved = {'accepted': revisions.resolve(package.story_parts(), 'accept')}
+        for attribute in ('beforeAutospacing', 'afterAutospacing', 'beforeLines', 'afterLines'):
+            with self.subTest(attribute=attribute):
+                parts = dict(package.members)
+                styles = ET.fromstring(parts['word/styles.xml'])
+                spacing = styles.find(W + 'style/' + W + 'pPr/' + W + 'spacing')
+                spacing.set(W + attribute, '1' if attribute.endswith('Autospacing') else '999')
+                parts['word/styles.xml'] = ET.tostring(styles)
+                self.assertFalse(redline._assertion(assertion, revisions.Package(parts), resolved)['passed'])
+
+    def test_paragraph_spacing_resolves_based_on_and_direct_attributes(self):
+        package = load(case('redline-field-default-spacing-simple')['authored'])
+        parts = dict(package.members)
+        styles = ET.fromstring(parts['word/styles.xml'])
+        normal = styles.find(W + 'style')
+        normal.insert(1, ET.Element(W + 'basedOn', {W + 'val': 'Base'}))
+        styles.append(ET.fromstring(f'<w:style xmlns:w="{revisions.W}" w:type="paragraph" w:styleId="Base">'
+            '<w:name w:val="Base"/><w:pPr><w:spacing w:before="111" w:after="222" w:line="333" w:lineRule="exact"/></w:pPr></w:style>'))
+        styles.append(ET.fromstring(f'<w:style xmlns:w="{revisions.W}" w:type="paragraph" w:styleId="Derived">'
+            '<w:name w:val="Derived"/><w:basedOn w:val="Normal"/><w:pPr><w:spacing w:after="444"/></w:pPr></w:style>'))
+        parts['word/styles.xml'] = ET.tostring(styles)
+        package = revisions.Package(parts)
+        for scope, mode, count, after, line in [('accepted', 'accept', 4, '280', '380'), ('rejected', 'reject', 2, '80', '260')]:
+            resolved = revisions.resolve(package.story_parts(), mode)
+            paragraph = resolved[package.main].find(W + 'body/' + W + 'p')
+            properties = paragraph.find(W + 'pPr')
+            if properties is None:
+                properties = ET.Element(W + 'pPr')
+                paragraph.insert(0, properties)
+            properties.insert(0, ET.Element(W + 'pStyle', {W + 'val': 'Derived'}))
+            ET.SubElement(properties, W + 'spacing', {W + 'line': '555'})
+            expected = [dict(before='111', after=after, line=line, lineRule='auto') for _ in range(count)]
+            expected[0].update(after='444', line='555')
+            self.assertEqual(redline.paragraph_spacing(package, resolved, scope), expected)
+
+    def test_field_spacing_cases_reject_field_loss_despite_equal_text_and_spacing(self):
+        for shape in ('simple', 'complex'):
+            with self.subTest(shape=shape):
+                record = case('redline-field-default-spacing-' + shape)
+                package = load(record['authored'])
+                def flatten(root):
+                    root.set('xmlns:w14', revisions.W14)
+                    for parent in root.iter():
+                        for child in list(parent):
+                            if child.tag == W + 'fldSimple':
+                                offset = list(parent).index(child)
+                                parent.remove(child)
+                                for index, run in enumerate(list(child)):
+                                    parent.insert(offset + index, run)
+                            elif child.tag == W + 'r' and any(e.tag in (W + 'fldChar', W + 'instrText') for e in child):
+                                parent.remove(child)
+                mutant = rewrite(record['authored'], flatten)
+                for scope, mode in [('accepted', 'accept'), ('rejected', 'reject')]:
+                    resolved = {scope: revisions.resolve(mutant.story_parts(), mode)}
+                    assertion = next(a for a in record['assertions'] if a['type'] == 'paragraph-spacing' and a['scope'] == scope)
+                    self.assertTrue(redline._assertion(assertion, mutant, resolved)['passed'])
+                    self.assertNotEqual(revisions.view(package, revisions.resolve(package.story_parts(), mode)),
+                                        revisions.view(mutant, resolved[scope]))
 
     def test_inline_trees_calibrate_and_reject_operator_changes(self):
         for record in cases():

@@ -1,5 +1,11 @@
 # DOCX fidelity bench
 
+`redline-v27` adds two unchanged-field/default-spacing reproductions and a literal-text
+control for [Docxodus #1533](https://github.com/JSv4/Docxodus/issues/1533). Effective spacing
+is checked after independent acceptance and rejection; text alone cannot pass these cases.
+See [the review evidence](docs/results/field-default-spacing/README.md). Existing fixture
+bytes and the PDF track are unchanged.
+
 `core-v101` adds 14 original review-visibility cases for Docxodus #1523. Formatting-only,
 comment-only and combined controls accompany all eight combinations of formatting,
 text-revision and comment visibility. Native PDFs with comments hidden retain the layout comparison;

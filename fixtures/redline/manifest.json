@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "suite": {
-    "id": "redline-v26",
-    "version": 26,
+    "id": "redline-v27",
+    "version": 27,
     "cases": [
       "redline-field-result-beside-edit",
       "redline-field-result-end-control",
@@ -229,7 +229,10 @@
       "redline-weak-replacement-retained-control",
       "redline-weak-replacement-unrelated-control",
       "redline-weak-replacement-split-control",
-      "redline-weak-replacement-merge-control"
+      "redline-weak-replacement-merge-control",
+      "redline-field-default-spacing-simple",
+      "redline-field-default-spacing-complex",
+      "redline-field-default-spacing-literal-control"
     ]
   },
   "cases": [
@@ -293,7 +296,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -356,7 +359,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -419,7 +422,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -481,7 +484,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -543,7 +546,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -605,7 +608,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -666,7 +669,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -727,7 +730,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -788,7 +791,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -851,7 +854,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -914,7 +917,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -977,7 +980,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -1039,7 +1042,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -1100,7 +1103,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -1162,7 +1165,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -1223,7 +1226,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -1290,7 +1293,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -1357,7 +1360,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -1424,7 +1427,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -1486,7 +1489,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -1548,7 +1551,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -1610,7 +1613,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -1672,7 +1675,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -1730,7 +1733,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -1788,7 +1791,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -1846,7 +1849,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -1904,7 +1907,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -1971,7 +1974,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -2038,7 +2041,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -2085,7 +2088,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -2132,7 +2135,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -2179,7 +2182,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -2226,7 +2229,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -2295,7 +2298,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -2364,7 +2367,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -2427,7 +2430,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -2490,7 +2493,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -2552,7 +2555,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -2621,7 +2624,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -2690,7 +2693,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -2759,7 +2762,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -2827,7 +2830,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -2895,7 +2898,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -2957,7 +2960,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -3019,7 +3022,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -3070,7 +3073,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -3121,7 +3124,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -3171,7 +3174,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -3229,7 +3232,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -3286,7 +3289,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -3337,7 +3340,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -3388,7 +3391,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -3439,7 +3442,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -3490,7 +3493,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -3558,7 +3561,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -3626,7 +3629,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -3694,7 +3697,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -3762,7 +3765,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -3813,7 +3816,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -3864,7 +3867,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -3915,7 +3918,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -3973,7 +3976,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -4031,7 +4034,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -4089,7 +4092,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -4140,7 +4143,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -4191,7 +4194,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -4249,7 +4252,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -4306,7 +4309,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -4363,7 +4366,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -4420,7 +4423,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -4477,7 +4480,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -4534,7 +4537,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -4591,7 +4594,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -4648,7 +4651,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -4706,7 +4709,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -4764,7 +4767,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -4821,7 +4824,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "reviewerExpected": {
         "Reviewer1": {
@@ -4888,7 +4891,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "reviewerExpected": {
         "Reviewer1": {
@@ -4955,7 +4958,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "reviewerExpected": {
         "Reviewer1": {
@@ -5022,7 +5025,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "reviewerExpected": {
         "Reviewer1": {
@@ -5111,7 +5114,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -5190,7 +5193,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -5269,7 +5272,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -5337,7 +5340,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "semanticPreflight": {
         "version": 1,
@@ -5410,7 +5413,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "semanticPreflight": {
         "version": 1,
@@ -5516,7 +5519,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "tableWidths": {
         "version": 1,
@@ -5628,7 +5631,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "tableWidths": {
         "version": 1,
@@ -5741,7 +5744,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "tableWidths": {
         "version": 1,
@@ -5853,7 +5856,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "tableWidths": {
         "version": 1,
@@ -5976,7 +5979,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 1,
@@ -6098,7 +6101,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 1,
@@ -6194,7 +6197,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 1,
@@ -6290,7 +6293,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 1,
@@ -6412,7 +6415,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 1,
@@ -6534,7 +6537,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 1,
@@ -6630,7 +6633,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 1,
@@ -6726,7 +6729,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 1,
@@ -6836,7 +6839,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 1,
@@ -6946,7 +6949,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 1,
@@ -7042,7 +7045,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 1,
@@ -7138,7 +7141,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 1,
@@ -7261,7 +7264,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 1,
@@ -7384,7 +7387,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 1,
@@ -7493,7 +7496,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 1,
@@ -7602,7 +7605,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 1,
@@ -7718,7 +7721,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 1,
@@ -7834,7 +7837,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 1,
@@ -7950,7 +7953,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 1,
@@ -8066,7 +8069,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 1,
@@ -8156,7 +8159,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "blockInsert": {
         "version": 1,
@@ -8223,7 +8226,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "blockInsert": {
         "version": 1,
@@ -8315,7 +8318,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "blockInsert": {
         "version": 1,
@@ -8382,7 +8385,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "blockInsert": {
         "version": 1,
@@ -8474,7 +8477,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "blockInsert": {
         "version": 1,
@@ -8541,7 +8544,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "blockInsert": {
         "version": 1,
@@ -8614,7 +8617,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -8682,7 +8685,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -8750,7 +8753,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -8818,7 +8821,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -8886,7 +8889,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -8954,7 +8957,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -9022,7 +9025,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -9090,7 +9093,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -9158,7 +9161,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -9226,7 +9229,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -9294,7 +9297,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -9362,7 +9365,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -9430,7 +9433,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -9498,7 +9501,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -9566,7 +9569,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -9634,7 +9637,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -9753,7 +9756,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 2,
@@ -9895,7 +9898,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 2,
@@ -10037,7 +10040,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 2,
@@ -10179,7 +10182,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 2,
@@ -10334,7 +10337,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 2,
@@ -10502,7 +10505,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 2,
@@ -10670,7 +10673,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 2,
@@ -10838,7 +10841,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "columnEdit": {
         "version": 2,
@@ -10940,7 +10943,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "revisionOwnership": {
         "version": 1,
@@ -11039,7 +11042,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "revisionOwnership": {
         "version": 1,
@@ -11140,7 +11143,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "revisionOwnership": {
         "version": 1,
@@ -11241,7 +11244,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "revisionOwnership": {
         "version": 1,
@@ -11342,7 +11345,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "revisionOwnership": {
         "version": 1,
@@ -11417,7 +11420,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "revisionOwnership": {
         "version": 1,
@@ -11502,7 +11505,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "revisionOwnership": {
         "version": 1,
@@ -11569,7 +11572,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -11616,7 +11619,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -11663,7 +11666,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -11710,7 +11713,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -11757,7 +11760,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -11804,7 +11807,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -11874,7 +11877,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -11943,7 +11946,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -12013,7 +12016,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -12082,7 +12085,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -12152,7 +12155,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -12222,7 +12225,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -12292,7 +12295,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -12362,7 +12365,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -12425,7 +12428,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -12491,7 +12494,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -12562,7 +12565,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -12628,7 +12631,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -12699,7 +12702,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -12765,7 +12768,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -12840,7 +12843,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -12906,7 +12909,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -12980,7 +12983,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -13046,7 +13049,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -13121,7 +13124,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -13187,7 +13190,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -13258,7 +13261,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -13324,7 +13327,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -13395,7 +13398,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -13461,7 +13464,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -13536,7 +13539,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -13602,7 +13605,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -13655,7 +13658,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -13708,7 +13711,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "spanEdit": {
         "version": 1,
@@ -13784,7 +13787,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "paragraphRewrite": {
         "version": 1,
@@ -13853,7 +13856,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "paragraphRewrite": {
         "version": 1,
@@ -13926,7 +13929,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "paragraphRewrite": {
         "version": 1,
@@ -13995,7 +13998,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "paragraphRewrite": {
         "version": 1,
@@ -14068,7 +14071,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "paragraphRewrite": {
         "version": 1,
@@ -14137,7 +14140,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "paragraphRewrite": {
         "version": 1,
@@ -14210,7 +14213,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "paragraphRewrite": {
         "version": 1,
@@ -14279,7 +14282,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "paragraphRewrite": {
         "version": 1,
@@ -14352,7 +14355,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "paragraphRewrite": {
         "version": 1,
@@ -14421,7 +14424,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "paragraphRewrite": {
         "version": 1,
@@ -14494,7 +14497,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "paragraphRewrite": {
         "version": 1,
@@ -14563,7 +14566,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "paragraphRewrite": {
         "version": 1,
@@ -14636,7 +14639,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "paragraphRewrite": {
         "version": 1,
@@ -14705,7 +14708,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "paragraphRewrite": {
         "version": 1,
@@ -14778,7 +14781,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -14846,7 +14849,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -14921,7 +14924,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -14996,7 +14999,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -15079,7 +15082,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -15169,7 +15172,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -15252,7 +15255,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -15342,7 +15345,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -15423,7 +15426,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -15504,7 +15507,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -15565,7 +15568,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -15625,7 +15628,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -15710,7 +15713,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -15794,7 +15797,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -15875,7 +15878,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -15956,7 +15959,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -16024,7 +16027,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "reviewerExpected": {
         "Alice": {
@@ -16102,7 +16105,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "reviewerExpected": {
         "Alice": {
@@ -16180,7 +16183,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "reviewerExpected": {
         "Alice": {
@@ -16258,7 +16261,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       },
       "reviewerExpected": {
         "Alice": {
@@ -16350,7 +16353,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -16432,7 +16435,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -16504,7 +16507,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -16576,7 +16579,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -16648,7 +16651,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -16720,7 +16723,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -16792,7 +16795,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -16864,7 +16867,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -16932,7 +16935,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -16999,7 +17002,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -17075,7 +17078,7 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     },
     {
@@ -17151,7 +17154,340 @@
       },
       "generator": {
         "path": "bench/redline_fixtures.py",
-        "sha256": "e4cb383fbdbbda91d4e77292adb142f3169b9f1ddf810e302a5726f8db651751"
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
+      }
+    },
+    {
+      "id": "redline-field-default-spacing-simple",
+      "version": 1,
+      "category": "styles",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1533",
+      "description": "Unchanged simple PAGE result beside two added paragraphs and changed document-default spacing",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-field-default-spacing-simple/left.docx",
+          "sha256": "cfdf8aa10776257e9e3a5c2c465e2ebb3df1f91a83f0efca908fe3f63515c8aa",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-field-default-spacing-simple/right.docx",
+          "sha256": "c9871e29fb74e127174e2044446bef23358303634f37d32325bd7538d5953324",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-field-default-spacing-simple/right.docx",
+          "sha256": "c9871e29fb74e127174e2044446bef23358303634f37d32325bd7538d5953324"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-field-default-spacing-simple/left.docx",
+          "sha256": "cfdf8aa10776257e9e3a5c2c465e2ebb3df1f91a83f0efca908fe3f63515c8aa"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-field-default-spacing-simple/authored-redline.docx",
+        "sha256": "20e6ab43c54b8c64f961340125a07f2596e0f826ba1f35ee5e1500bc443d0bb9"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Cedar station registers the blue parcel.",
+            "Place the copper token beside the door."
+          ]
+        },
+        {
+          "type": "paragraph-spacing",
+          "version": 1,
+          "scope": "accepted",
+          "values": [
+            {
+              "before": "0",
+              "after": "280",
+              "line": "380",
+              "lineRule": "auto"
+            },
+            {
+              "before": "0",
+              "after": "280",
+              "line": "380",
+              "lineRule": "auto"
+            },
+            {
+              "before": "0",
+              "after": "280",
+              "line": "380",
+              "lineRule": "auto"
+            },
+            {
+              "before": "0",
+              "after": "280",
+              "line": "380",
+              "lineRule": "auto"
+            }
+          ]
+        },
+        {
+          "type": "paragraph-spacing",
+          "version": 1,
+          "scope": "rejected",
+          "values": [
+            {
+              "before": "0",
+              "after": "80",
+              "line": "260",
+              "lineRule": "auto"
+            },
+            {
+              "before": "0",
+              "after": "80",
+              "line": "260",
+              "lineRule": "auto"
+            }
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
+      }
+    },
+    {
+      "id": "redline-field-default-spacing-complex",
+      "version": 1,
+      "category": "styles",
+      "kind": "reproducer",
+      "issue": "JSv4/Docxodus#1533",
+      "description": "Unchanged complex PAGE result beside two added paragraphs and changed document-default spacing",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-field-default-spacing-complex/left.docx",
+          "sha256": "e69e7f6898014888a1e3b192481582339d1f9c79e69a0438d26dd4abe7afd702",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-field-default-spacing-complex/right.docx",
+          "sha256": "f7371e36570f168680ca2b0081baa24addc35dc2db185688c763e2a61dd35980",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-field-default-spacing-complex/right.docx",
+          "sha256": "f7371e36570f168680ca2b0081baa24addc35dc2db185688c763e2a61dd35980"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-field-default-spacing-complex/left.docx",
+          "sha256": "e69e7f6898014888a1e3b192481582339d1f9c79e69a0438d26dd4abe7afd702"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-field-default-spacing-complex/authored-redline.docx",
+        "sha256": "8c757f11441676ea4a0050d1a0e4c3d85b618689837f49afc537fbc762685bf1"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Cedar station registers the blue parcel.",
+            "Place the copper token beside the door."
+          ]
+        },
+        {
+          "type": "paragraph-spacing",
+          "version": 1,
+          "scope": "accepted",
+          "values": [
+            {
+              "before": "0",
+              "after": "280",
+              "line": "380",
+              "lineRule": "auto"
+            },
+            {
+              "before": "0",
+              "after": "280",
+              "line": "380",
+              "lineRule": "auto"
+            },
+            {
+              "before": "0",
+              "after": "280",
+              "line": "380",
+              "lineRule": "auto"
+            },
+            {
+              "before": "0",
+              "after": "280",
+              "line": "380",
+              "lineRule": "auto"
+            }
+          ]
+        },
+        {
+          "type": "paragraph-spacing",
+          "version": 1,
+          "scope": "rejected",
+          "values": [
+            {
+              "before": "0",
+              "after": "80",
+              "line": "260",
+              "lineRule": "auto"
+            },
+            {
+              "before": "0",
+              "after": "80",
+              "line": "260",
+              "lineRule": "auto"
+            }
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
+      }
+    },
+    {
+      "id": "redline-field-default-spacing-literal-control",
+      "version": 1,
+      "category": "styles",
+      "kind": "control",
+      "issue": "JSv4/Docxodus#1533",
+      "description": "Unchanged literal-control PAGE result beside two added paragraphs and changed document-default spacing",
+      "operation": "compare",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-field-default-spacing-literal-control/left.docx",
+          "sha256": "3318274a0af28712bf546e1adc831efd9c4aeb23dd6633a6b8239fa810ce0c84",
+          "role": "left"
+        },
+        {
+          "path": "fixtures/redline/redline-field-default-spacing-literal-control/right.docx",
+          "sha256": "06b90eff9dc3a06aa26960b07c611f8b464a812e4b188f22fc2a824cdce11ade",
+          "role": "right"
+        }
+      ],
+      "expected": {
+        "accepted": {
+          "path": "fixtures/redline/redline-field-default-spacing-literal-control/right.docx",
+          "sha256": "06b90eff9dc3a06aa26960b07c611f8b464a812e4b188f22fc2a824cdce11ade"
+        },
+        "rejected": {
+          "path": "fixtures/redline/redline-field-default-spacing-literal-control/left.docx",
+          "sha256": "3318274a0af28712bf546e1adc831efd9c4aeb23dd6633a6b8239fa810ce0c84"
+        }
+      },
+      "authored": {
+        "path": "fixtures/redline/redline-field-default-spacing-literal-control/authored-redline.docx",
+        "sha256": "7212518a373dad225afbcb6438861342db76b593705fc07e74533c0c6105bc7e"
+      },
+      "assertions": [
+        {
+          "type": "untracked-text",
+          "version": 1,
+          "scope": "redline",
+          "story": "body",
+          "texts": [
+            "Cedar station registers the blue parcel.",
+            "Place the copper token beside the door."
+          ]
+        },
+        {
+          "type": "paragraph-spacing",
+          "version": 1,
+          "scope": "accepted",
+          "values": [
+            {
+              "before": "0",
+              "after": "280",
+              "line": "380",
+              "lineRule": "auto"
+            },
+            {
+              "before": "0",
+              "after": "280",
+              "line": "380",
+              "lineRule": "auto"
+            },
+            {
+              "before": "0",
+              "after": "280",
+              "line": "380",
+              "lineRule": "auto"
+            },
+            {
+              "before": "0",
+              "after": "280",
+              "line": "380",
+              "lineRule": "auto"
+            }
+          ]
+        },
+        {
+          "type": "paragraph-spacing",
+          "version": 1,
+          "scope": "rejected",
+          "values": [
+            {
+              "before": "0",
+              "after": "80",
+              "line": "260",
+              "lineRule": "auto"
+            },
+            {
+              "before": "0",
+              "after": "80",
+              "line": "260",
+              "lineRule": "auto"
+            }
+          ]
+        }
+      ],
+      "libreoffice": {
+        "accepted": true,
+        "rejected": true
+      },
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/redline_fixtures.py in this repository",
+        "assets": "All text is generated here; no images or embedded font files"
+      },
+      "generator": {
+        "path": "bench/redline_fixtures.py",
+        "sha256": "932213f7ca7c5e901289bec56b0ed786e2a8e85ad02c9f64661080ed14fae559"
       }
     }
   ]

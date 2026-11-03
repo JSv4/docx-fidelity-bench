@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v26', 'version': 26}
+SUITE = {'id': 'redline-v27', 'version': 27}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -326,6 +326,7 @@ def generate():
     composed_bookmark_deltas(corpus)
     regrouped_textbox_markers(corpus)
     weak_replacement_anchors(corpus)
+    field_default_spacing(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -1958,3 +1959,36 @@ def package_shapes(corpus):
                        [untracked(INTRO, 'Send notices to ', CLOSING), hyperlink_targets(PACKAGE_LINK_TARGET)],
                        assets=('All text is generated here; no images. word/fonts/ExampleSans-regular.ttf holds the '
                                'placeholder bytes declared in bench/common.py, which are not a font program'))
+
+
+
+def field_default_spacing(corpus):
+    """An unchanged field must not suppress document-default paragraph spacing."""
+    original = ('Cedar station registers the blue parcel.', 'Place the copper token beside the door.')
+    added = ('Store the empty basket under the workbench.', 'Leave the orange ticket on the tray.')
+    def styles(after, line, normal=STYLE_NORMAL):
+        return (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+                f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="24"/>'
+                '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+                f'<w:spacing w:after="{after}" w:line="{line}" w:lineRule="auto"/>'
+                f'</w:pPr></w:pPrDefault></w:docDefaults>{normal}</w:styles>')
+    for shape in ('simple', 'complex', 'literal-control'):
+        result = (f'<w:fldSimple w:instr=" PAGE ">{t("1")}</w:fldSimple>' if shape == 'simple'
+                  else field(' PAGE ', t('1')) if shape == 'complex' else t('1'))
+        body = p(t(original[0]) + result) + p(t(original[1]))
+        rev = Revisions()
+        current = '<w:spacing w:after="280" w:line="380" w:lineRule="auto"/>'
+        previous = '<w:spacing w:after="80" w:line="260" w:lineRule="auto"/>'
+        normal = STYLE_NORMAL.replace('</w:style>', '<w:pPr>' + current
+                    + f'<w:pPrChange {rev.attrs(AUTHOR)}><w:pPr>{previous}</w:pPr></w:pPrChange></w:pPr></w:style>')
+        assertions = [untracked(*original)]
+        for scope, count, after, line in [('accepted', 4, '280', '380'), ('rejected', 2, '80', '260')]:
+            assertions.append({'type': 'paragraph-spacing', 'version': 1, 'scope': scope,
+                               'values': [dict(before='0', after=after, line=line, lineRule='auto')] * count})
+        corpus.compare('redline-field-default-spacing-' + shape, 'styles',
+                       'control' if shape == 'literal-control' else 'reproducer', 'JSv4/Docxodus#1533',
+                       'Unchanged ' + shape + ' PAGE result beside two added paragraphs and changed document-default spacing',
+                       dict(body=body, styles=styles(80, 260)),
+                       dict(body=body + ''.join(p(t(text)) for text in added), styles=styles(280, 380)),
+                       dict(body=body + ''.join(p(rev.ins(t(text)), mark=rev.mark('ins')) for text in added),
+                            styles=styles(80, 260, normal)), assertions)
