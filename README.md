@@ -1,5 +1,8 @@
 # DOCX fidelity bench
 
+`redline-v29` adds empty running stories in inserted opening sections and a stable-section
+control. See [evidence](docs/results/inserted-section-stories/README.md).
+
 `redline-v28` adds complete-rewrite diagnostics for articles, list numbers and linked
 articles, plus a distinct-word control. See [evidence](docs/results/complete-rewrites/README.md).
 

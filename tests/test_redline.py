@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v28')
-        self.assertEqual(len(registry['cases']), 233)
+        self.assertEqual(registry['suite']['id'], 'redline-v29')
+        self.assertEqual(len(registry['cases']), 236)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1535)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -157,6 +157,74 @@ class AuthoredCalibration(unittest.TestCase):
                                 rejected=revisions.resolve(package.story_parts(), 'reject'))
             for assertion in record['assertions']:
                 self.assertTrue(redline._assertion(assertion, package, resolved)['passed'], record['id'] + ' ' + assertion['type'])
+
+    def test_section_stories_reject_phantom_deletion_and_missing_target(self):
+        for story in ('header', 'footer'):
+            record = case('redline-inserted-section-' + story)
+            assertion = next(a for a in record['assertions'] if a['type'] == 'section-stories')
+            package = load(record['authored'])
+            endpoints = views(package)
+            blank = 'word/' + story + '2.xml'
+            root = package.xml(blank)
+            root.set('xmlns:w14', revisions.W14)
+            paragraph = root.find(W + 'p')
+            deletion = ET.SubElement(paragraph, W + 'del', {W + 'id': '90', W + 'author': 'Bench'})
+            ET.SubElement(ET.SubElement(deletion, W + 'r'), W + 'delText').text = 'CEDAR REFERENCE'
+            package.members[blank] = ET.tostring(root)
+            self.assertEqual(views(package), endpoints)
+            self.assertFalse(redline._assertion(assertion, package, {})['passed'])
+            del package.members[blank]
+            self.assertFalse(redline._assertion(assertion, package, {})['passed'])
+
+    def test_section_stories_follow_inheritance_and_ignore_property_history(self):
+        record = case('redline-inserted-section-footer')
+        assertion = {'type': 'section-stories', 'version': 1, 'scope': 'redline', 'story': 'footer',
+                     'kind': 'default', 'values': ['', 'CEDAR REFERENCE', 'CEDAR REFERENCE']}
+        def inherited(root):
+            root.set('xmlns:w14', revisions.W14)
+            body = root.find(W + 'body')
+            final = body.find(W + 'sectPr')
+            paragraph = ET.Element(W + 'p')
+            ET.SubElement(paragraph, W + 'pPr').append(copy.deepcopy(final))
+            body.insert(len(body) - 1, paragraph)
+            final.remove(final.find(W + 'footerReference'))
+            history = ET.SubElement(final, W + 'sectPrChange', {W + 'id': '99', W + 'author': 'Bench'})
+            history.append(ET.Element(W + 'sectPr'))
+        package = rewrite(record['authored'], inherited)
+        self.assertTrue(redline._assertion(assertion, package, {})['passed'])
+
+    def test_section_stories_reject_ambiguous_references_with_unchanged_endpoints(self):
+        for story in ('header', 'footer'):
+            with self.subTest(story=story):
+                record = case('redline-inserted-section-' + story)
+                assertion = next(a for a in record['assertions'] if a['type'] == 'section-stories')
+                def duplicate(root):
+                    root.set('xmlns:w14', revisions.W14)
+                    section = root.find('.//' + W + 'sectPr')
+                    reference = copy.deepcopy(section.find(W + story + 'Reference'))
+                    reference.set('{' + revisions.REL[:-1] + '}id', 'rStory')
+                    section.insert(0, reference)
+                mutant = rewrite(record['authored'], duplicate)
+                self.assertEqual(views(mutant), views(load(record['authored'])))
+                self.assertFalse(redline._assertion(assertion, mutant, {})['passed'])
+
+    def test_section_stories_distinguish_kinds_and_relationship_types(self):
+        record = case('redline-inserted-section-footer')
+        original = next(a for a in record['assertions'] if a['type'] == 'section-stories')
+        for kind in ('first', 'even'):
+            def change_kind(root):
+                root.set('xmlns:w14', revisions.W14)
+                for reference in root.iter(W + 'footerReference'):
+                    reference.set(W + 'type', kind)
+            package = rewrite(record['authored'], change_kind)
+            assertion = dict(original, kind=kind)
+            self.assertTrue(redline._assertion(assertion, package, {})['passed'])
+            self.assertFalse(redline._assertion(original, package, {})['passed'])
+            # A same-text target of another relationship type is not a footer.
+            relationships = package.xml('word/_rels/document.xml.rels')
+            next(r for r in relationships if r.get('Id') == 'rStory').set('Type', revisions.REL + 'header')
+            package.members['word/_rels/document.xml.rels'] = ET.tostring(relationships)
+            self.assertFalse(redline._assertion(assertion, revisions.Package(package.members), {})['passed'])
 
     def test_revision_blocks_detects_interleaving_without_changing_endpoints(self):
         for shape in ('articles', 'numbered', 'linked', 'distinct-control'):
