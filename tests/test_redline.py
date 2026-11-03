@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v27')
-        self.assertEqual(len(registry['cases']), 229)
+        self.assertEqual(registry['suite']['id'], 'redline-v28')
+        self.assertEqual(len(registry['cases']), 233)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1535)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -157,6 +157,61 @@ class AuthoredCalibration(unittest.TestCase):
                                 rejected=revisions.resolve(package.story_parts(), 'reject'))
             for assertion in record['assertions']:
                 self.assertTrue(redline._assertion(assertion, package, resolved)['passed'], record['id'] + ' ' + assertion['type'])
+
+    def test_revision_blocks_detects_interleaving_without_changing_endpoints(self):
+        for shape in ('articles', 'numbered', 'linked', 'distinct-control'):
+            record = case('redline-complete-rewrite-' + shape)
+            assertion = record['assertions'][0]
+            original = views(load(record['authored']))
+            for index in (1, 3):
+                def interleave(root):
+                    root.set('xmlns:w14', revisions.W14)
+                    body = root.find(W + 'body')
+                    paragraphs = body.findall(W + 'p')
+                    body.remove(paragraphs[4])
+                    body.insert(index, paragraphs[4])
+                broken = rewrite(record['authored'], interleave)
+                self.assertEqual(views(broken), original)
+                self.assertFalse(redline._assertion(assertion, broken, {})['passed'])
+            def untrack(root):
+                root.set('xmlns:w14', revisions.W14)
+                for deletion in root.iter(W + 'delText'):
+                    deletion.text = ''
+            self.assertFalse(redline._assertion(assertion, rewrite(record['authored'], untrack), {})['passed'])
+
+    def test_revision_blocks_accepts_shared_boundary_paragraph(self):
+        record = case('redline-complete-rewrite-articles')
+        def join_boundary(root):
+            root.set('xmlns:w14', revisions.W14)
+            body = root.find(W + 'body')
+            paragraphs = body.findall(W + 'p')
+            # The common boundary remains in both resolved views.
+            paragraphs[3].remove(paragraphs[3].find(W + 'pPr'))
+            for child in list(paragraphs[4]):
+                if child.tag != W + 'pPr':
+                    paragraphs[3].append(child)
+            body.remove(paragraphs[4])
+        package = rewrite(record['authored'], join_boundary)
+        self.assertEqual(views(package), views(load(record['authored'])))
+        self.assertTrue(redline._assertion(record['assertions'][0], package, {})['passed'])
+
+    def test_revision_blocks_rejects_interleaved_words_at_shared_boundary(self):
+        record = case('redline-complete-rewrite-linked')
+        def interleave(root):
+            root.set('xmlns:w14', revisions.W14)
+            body = root.find(W + 'body')
+            paragraphs = body.findall(W + 'p')
+            boundary = paragraphs[3]
+            deleted = [c for c in boundary if c.tag != W + 'pPr']
+            inserted = [c for c in paragraphs[4] if c.tag != W + 'pPr']
+            boundary[:] = []
+            for i in range(max(len(deleted), len(inserted))):
+                if i < len(deleted): boundary.append(deleted[i])
+                if i < len(inserted): boundary.append(inserted[i])
+            body.remove(paragraphs[4])
+        package = rewrite(record['authored'], interleave)
+        self.assertEqual(views(package), views(load(record['authored'])))
+        self.assertFalse(redline._assertion(record['assertions'][0], package, {})['passed'])
 
     def test_paragraph_spacing_checks_style_revisions_and_direct_precedence(self):
         record = case('redline-field-default-spacing-simple')

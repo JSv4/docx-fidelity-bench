@@ -1,5 +1,8 @@
 # DOCX fidelity bench
 
+`redline-v28` adds complete-rewrite diagnostics for articles, list numbers and linked
+articles, plus a distinct-word control. See [evidence](docs/results/complete-rewrites/README.md).
+
 `redline-v27` adds two unchanged-field/default-spacing reproductions and a literal-text
 control for [Docxodus #1533](https://github.com/JSv4/Docxodus/issues/1533). Effective spacing
 is checked after independent acceptance and rejection; text alone cannot pass these cases.

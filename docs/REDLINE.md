@@ -433,3 +433,11 @@ paragraph layout, and automatic/line-based spacing are outside this assertion: e
 spacing attributes remain in the observed values and fail a four-axis literal declaration.
 Semantic text and field checks still detect lost content. Mutation tests cover lost
 formatting history, direct overrides, inheritance and unsupported spacing modes.
+
+
+`redline-v28` adds four complete-rewrite cases for #1535: articles, literal ordinals,
+linked articles, and a distinct-word control. Metric contract 16 adds `revision-blocks`
+v1, which requires nonempty inserted and deleted text to form exactly two consecutive
+runs in body paragraph order. A shared boundary paragraph is allowed, but alternating
+inserted/deleted words within it fail. Endpoint equivalence and schema checks
+remain mandatory; the assertion measures arrangement, not Word Compare parity.
