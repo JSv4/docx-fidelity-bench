@@ -441,3 +441,16 @@ v1, which requires nonempty inserted and deleted text to form exactly two consec
 runs in body paragraph order. A shared boundary paragraph is allowed, but alternating
 inserted/deleted words within it fail. Endpoint equivalence and schema checks
 remain mandatory; the assertion measures arrangement, not Word Compare parity.
+
+
+`redline-v29` adds inserted opening sections with explicitly empty headers/footers and
+a stable-section control. Metric contract 17 adds `section-stories` v1: in current
+section order, it follows the declared running-story kind and inheritance, requiring
+exact raw text including deleted text. Missing or wrong-kind relationships fail. Section
+property history and textboxes do not create extra sections for this assertion.
+
+For the two inserted-section reproductions, LibreOffice 25.8.7.3 cannot calibrate rejection:
+it keeps the inserted empty section and extra paragraph/running-story bindings. That one
+provider check is explicitly ineligible; acceptance, independent exact markup endpoints,
+review-story assertions and SDK validity remain mandatory. The stable-section control
+calibrates both LibreOffice resolutions.

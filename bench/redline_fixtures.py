@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v28', 'version': 28}
+SUITE = {'id': 'redline-v29', 'version': 29}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -117,7 +117,7 @@ def zip_write(path, parts):
 
 
 def package(path, body, styles=None, header=None, comments=None, footnotes=None, settings_extra='', comments_extended=None, strict=False, people=None,
-            relations_extra=(), content_types_extra='', extra_parts=None):
+            relations_extra=(), content_types_extra='', extra_parts=None, section=None):
     """One minimal, valid WordprocessingML package. Optional story parts take literal XML.
 
     `relations_extra` appends main-document relationships as (id, type, target) or
@@ -152,7 +152,7 @@ def package(path, body, styles=None, header=None, comments=None, footnotes=None,
         overrides.append(('/word/footnotes.xml', 'footnotes'))
     relations.extend(relations_extra)
     parts.update(extra_parts or {})
-    parts['word/document.xml'] = f'<w:document {NAMESPACES}><w:body>{body}{SECTION.format(refs=refs)}</w:body></w:document>'
+    parts['word/document.xml'] = f'<w:document {NAMESPACES}><w:body>{body}{section if section is not None else SECTION.format(refs=refs)}</w:body></w:document>'
     parts['word/styles.xml'] = styles if styles is not None else styles_part()
     parts['word/settings.xml'] = (f'<w:settings xmlns:w="{W}">{settings_extra}<w:compat><w:compatSetting w:name="compatibilityMode" '
                                   'w:uri="http://schemas.microsoft.com/office/word" w:val="15"/></w:compat></w:settings>')
@@ -178,6 +178,9 @@ def package(path, body, styles=None, header=None, comments=None, footnotes=None,
 # declared-ineligible comparison is not applied; the run fails as unmeasured if the calibration
 # disagrees with this table in either direction.
 LIBREOFFICE_INELIGIBLE = {
+    **{'redline-inserted-section-' + story: (('rejected',),
+       'LibreOffice 25.8.7.3 retains the inserted empty section after rejecting its authored paragraph revisions, including an empty paragraph and running-story bindings; independent markup endpoints, exact review-story text and SDK checks remain mandatory')
+       for story in ('header', 'footer')},
     **{'redline-textbox-geometry' + suffix: (('accepted', 'rejected'),
        'LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole textbox-carrier replacement; independent markup, exact VML geometry/text and SDK checks remain mandatory')
        for suffix in ('', '-control')},
@@ -328,6 +331,7 @@ def generate():
     weak_replacement_anchors(corpus)
     field_default_spacing(corpus)
     complete_rewrites(corpus)
+    inserted_section_stories(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -2026,3 +2030,39 @@ def complete_rewrites(corpus):
                        dict(body=paragraphs(old)), dict(body=paragraphs(new)),
                        dict(body=paragraphs(old, rev, 'del') + paragraphs(new, rev, 'ins')),
                        [{'type': 'revision-blocks', 'version': 1, 'scope': 'redline'}])
+
+
+def inserted_section_stories(corpus):
+    """A wholly inserted opening section owns its empty running story."""
+    retained = p(t('Cedar archive retains the inventory ledger.')) + p(t('The custodian stores the register beside the window.'))
+    for story, control in (('footer', False), ('header', False), ('footer', True)):
+        name = 'redline-inserted-section-' + story + ('-stable-control' if control else '')
+        def section(rid):
+            return SECTION.format(refs=f'<w:{story}Reference w:type="default" r:id="{rid}"/>')
+        kind = 'hdr' if story == 'header' else 'ftr'
+        extras = dict(section=section('rStory'),
+                      relations_extra=[('rStory', story, story + '1.xml'), ('rBlank', story, story + '2.xml')],
+                      content_types_extra=''.join(f'<Override PartName="/word/{story}{n}.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.{story}+xml"/>' for n in (1, 2)),
+                      extra_parts={f'word/{story}1.xml': f'<w:{kind} {NAMESPACES}>' + p(t('CEDAR REFERENCE')) + f'</w:{kind}>',
+                                   f'word/{story}2.xml': f'<w:{kind} {NAMESPACES}>' + p() + f'</w:{kind}>'})
+        rev = Revisions()
+        def opening(tracked=False, extra=False):
+            def paragraph(text, boundary=False, inserted=False):
+                props = (f'<w:rPr>{rev.mark("ins")}</w:rPr>' if inserted else '') + (section('rBlank') if boundary else '')
+                return p(rev.ins(t(text)) if inserted else t(text), props=props)
+            return (paragraph('Arrange the visitor cards near the entrance.', inserted=tracked)
+                    + (paragraph('Place the spare labels in the drawer.', inserted=tracked or control) if extra else '')
+                    + paragraph('Close the preparation checklist.', boundary=True, inserted=tracked))
+        left = (opening() if control else '') + retained
+        # The expected revised input is untracked, including the control's added paragraph.
+        right = opening() + retained if not control else (p(t('Arrange the visitor cards near the entrance.'))
+                + p(t('Place the spare labels in the drawer.'))
+                + p(t('Close the preparation checklist.'), props=section('rBlank')) + retained)
+        authored = opening(tracked=not control, extra=control) + retained
+        corpus.compare(name, 'revisions', 'control' if control else 'reproducer', 'JSv4/Docxodus#1534',
+                       ('Stable section topology with a body insertion' if control else 'An inserted opening section with an empty ' + story)
+                       + '; the retained section keeps its unchanged running story',
+                       dict(body=left, **extras), dict(body=right, **extras), dict(body=authored, **extras),
+                       [untracked('CEDAR REFERENCE', story='headers'),
+                        {'type': 'section-stories', 'version': 1, 'scope': 'redline', 'story': story,
+                         'kind': 'default', 'values': ['', 'CEDAR REFERENCE']}])

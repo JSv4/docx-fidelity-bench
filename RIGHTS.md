@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The three inserted-section cases for Docxodus #1534 contain original Cedar archive
+text and literal OOXML authored in `bench/redline_fixtures.py`. No renderer fixture,
+helper, template, image or font program is imported. Review sheets show only these
+authored documents rendered by separately provisioned applications.
+
 The four complete-rewrite cases for Docxodus #1535 contain original Cedar prose and
 literal OOXML authored in `bench/redline_fixtures.py`. No renderer fixture, helper,
 template, image or font program is imported. Review sheets show only these authored

@@ -26,11 +26,11 @@ from .common import ROOT, contained, digest, execute, identity, read_json, write
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
 OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'replace-text': 1, 'revision-ownership': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1}, 'paragraph-spacing': {1}, 'revision-blocks': {1}}
+ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'section-stories': {1}}
 RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
 SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}}
-CONTRACT = {'version': 16, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+CONTRACT = {'version': 17, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -244,6 +244,9 @@ def validate_registry(registry=None):
                      'paragraph-count': lambda a: a.get('story') == 'body' and isinstance(a.get('count'), int) and a['count'] >= 0,
                      'revision-count': lambda a: isinstance(a.get('max'), int) and a['max'] >= 0,
                      'para-ids-valid': lambda a: True, 'style-ids-unique': lambda a: True,
+                     'section-stories': lambda a: a['scope'] == 'redline' and a.get('story') in {'header', 'footer'}
+                         and a.get('kind') in {'default', 'first', 'even'} and isinstance(a.get('values'), list)
+                         and bool(a['values']) and all(isinstance(v, str) for v in a['values']),
                      'revision-blocks': lambda a: a['scope'] == 'redline',
                      'revision-text': lambda a: a['scope'] == 'redline' and isinstance(a.get('kind'), str) and a['kind'] in {'moveFrom', 'del'}
                          and isinstance(a.get('text'), str) and bool(a['text']),
@@ -530,6 +533,31 @@ def _assertion(assertion, package, resolved):
         texts = revisions.untracked_text(package, assertion['story'])
         missing = [x for x in assertion['texts'] if not any(x in text for text in texts)]
         check.update(passed=not missing, missing=missing)
+    elif kind == 'section-stories':
+        body = package.xml(package.main).find(revisions.w('body'))
+        observed, target = [], None
+        def sections(element):
+            if element.tag in {revisions.w('sectPrChange'), revisions.w('txbxContent')}:
+                return
+            for child in element:
+                if child.tag == revisions.w('sectPr') and element.tag in {revisions.w('body'), revisions.w('pPr')}:
+                    yield child
+                else:
+                    yield from sections(child)
+        for section in sections(body):
+            references = [ref for ref in section.findall(revisions.w(assertion['story'] + 'Reference'))
+                          if ref.get(revisions.w('type'), 'default') == assertion['kind']]
+            if len(references) > 1:
+                target = False
+            elif references:
+                relationship = package.main_rels.get(references[0].get('{' + revisions.REL[:-1] + '}id'))
+                target = relationship[1] if relationship and relationship[0] == assertion['story'] else False
+            if target is False or target is not None and target not in package.members:
+                observed.append(None)
+            else:
+                observed.append('' if target is None else ''.join(t.text or '' for t in package.xml(target).iter()
+                    if t.tag in {revisions.w('t'), revisions.w('delText')}))
+        check.update(passed=observed == assertion['values'], observed=observed)
     elif kind == 'revision-blocks':
         body = package.xml(package.main).find(revisions.w('body'))
         inserted, deleted, order = [], [], []
