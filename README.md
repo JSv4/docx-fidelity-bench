@@ -1,3 +1,7 @@
+`core-v103` adds four exact-spacing justification cases for Docxodus #1524. Native Word confirms
+that mode 15 justified text can fit a bounded compressed line while legacy and left-aligned
+controls retain natural wrapping. See [native comparisons and diagnostic limits](docs/results/exact-justification/README.md).
+
 # DOCX fidelity bench
 
 `core-v102` adds six original paragraph-fragmentation cases for Docxodus #1521. The tracked/textbox
