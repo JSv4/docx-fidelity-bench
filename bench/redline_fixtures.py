@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v27', 'version': 27}
+SUITE = {'id': 'redline-v28', 'version': 28}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -327,6 +327,7 @@ def generate():
     regrouped_textbox_markers(corpus)
     weak_replacement_anchors(corpus)
     field_default_spacing(corpus)
+    complete_rewrites(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -1992,3 +1993,36 @@ def field_default_spacing(corpus):
                        dict(body=body + ''.join(p(t(text)) for text in added), styles=styles(280, 380)),
                        dict(body=body + ''.join(p(rev.ins(t(text)), mark=rev.mark('ins')) for text in added),
                             styles=styles(80, 260, normal)), assertions)
+
+
+def complete_rewrites(corpus):
+    """Whole replacements sharing only articles, including literal ordinals and linked articles."""
+    old = ('A cedar ladder reaches the copper balcony.', 'The green satchel hangs beside a marble pillar.',
+           'Two violet ribbons surround the lantern.', 'A curved handle supports the wicker hamper.')
+    new = ('The ivory banner spans a quiet orchard.', 'A bronze chariot passes the distant fountain.',
+           'The golden latch secures a square cupboard.', 'Three crimson buttons decorate the velvet jacket.')
+    for shape in ('articles', 'numbered', 'linked', 'distinct-control'):
+        def paragraphs(texts, rev=None, kind=None):
+            result = ''
+            for i, text in enumerate(texts):
+                if shape == 'distinct-control':
+                    text = ' '.join(word for word in text.split() if word.lower() not in {'a', 'the'})
+                if shape == 'numbered':
+                    text = f'{i + 1}. ' + text
+                content = ''
+                for j, word in enumerate(text.split()):
+                    run = t((' ' if j else '') + word)
+                    if rev:
+                        run = (rev.dele if kind == 'del' else rev.ins)(run)
+                    if shape == 'linked' and word.lower() in {'a', 'the'}:
+                        run = '<w:hyperlink w:anchor="CedarReview">' + run + '</w:hyperlink>'
+                    content += run
+                result += p(content, mark=rev.mark(kind) if rev else '')
+            return result
+        rev = Revisions()
+        corpus.compare('redline-complete-rewrite-' + shape, 'revisions',
+                       'control' if shape == 'distinct-control' else 'reproducer', 'JSv4/Docxodus#1535',
+                       'Four unrelated replacement paragraphs stay in coherent removed and inserted blocks: ' + shape,
+                       dict(body=paragraphs(old)), dict(body=paragraphs(new)),
+                       dict(body=paragraphs(old, rev, 'del') + paragraphs(new, rev, 'ins')),
+                       [{'type': 'revision-blocks', 'version': 1, 'scope': 'redline'}])

@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The four complete-rewrite cases for Docxodus #1535 contain original Cedar prose and
+literal OOXML authored in `bench/redline_fixtures.py`. No renderer fixture, helper,
+template, image or font program is imported. Review sheets show only these authored
+inputs rendered by separately provisioned applications.
+
 The three field-default-spacing cases for Docxodus #1533 contain original Cedar station
 text and literal OOXML authored in `bench/redline_fixtures.py`. No renderer fixture,
 helper, template, image or font program is imported. Labeled review sheets show these

@@ -26,11 +26,11 @@ from .common import ROOT, contained, digest, execute, identity, read_json, write
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
 OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'replace-text': 1, 'revision-ownership': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1}, 'paragraph-spacing': {1}}
+ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1}, 'paragraph-spacing': {1}, 'revision-blocks': {1}}
 RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
 SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}}
-CONTRACT = {'version': 15, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+CONTRACT = {'version': 16, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -244,6 +244,7 @@ def validate_registry(registry=None):
                      'paragraph-count': lambda a: a.get('story') == 'body' and isinstance(a.get('count'), int) and a['count'] >= 0,
                      'revision-count': lambda a: isinstance(a.get('max'), int) and a['max'] >= 0,
                      'para-ids-valid': lambda a: True, 'style-ids-unique': lambda a: True,
+                     'revision-blocks': lambda a: a['scope'] == 'redline',
                      'revision-text': lambda a: a['scope'] == 'redline' and isinstance(a.get('kind'), str) and a['kind'] in {'moveFrom', 'del'}
                          and isinstance(a.get('text'), str) and bool(a['text']),
                      'table-widths': lambda a: a['scope'] in {'accepted', 'rejected'} and isinstance(a.get('grid'), list)
@@ -529,6 +530,24 @@ def _assertion(assertion, package, resolved):
         texts = revisions.untracked_text(package, assertion['story'])
         missing = [x for x in assertion['texts'] if not any(x in text for text in texts)]
         check.update(passed=not missing, missing=missing)
+    elif kind == 'revision-blocks':
+        body = package.xml(package.main).find(revisions.w('body'))
+        inserted, deleted, order = [], [], []
+        def visit(element, paragraph, in_insertion=False):
+            in_insertion = in_insertion or element.tag == revisions.w('ins')
+            side = ('deleted' if element.tag == revisions.w('delText') else
+                    'inserted' if element.tag == revisions.w('t') and in_insertion else None)
+            if side and (element.text or '').strip():
+                (inserted if side == 'inserted' else deleted).append(paragraph)
+                if not order or order[-1] != side:
+                    order.append(side)
+            for child in element:
+                visit(child, paragraph, in_insertion)
+        for i, paragraph in enumerate(body.findall(revisions.w('p'))):
+            visit(paragraph, i)
+        # Two text-side runs permit a shared boundary paragraph, but never interleaved words.
+        check.update(passed=bool(inserted and deleted) and len(order) == 2,
+                     observed={'inserted': sorted(set(inserted)), 'deleted': sorted(set(deleted)), 'order': order})
     elif kind == 'revision-text':
         root = package.xml(package.main).find(revisions.w('body'))
         wrappers = list(root.iter(revisions.w(assertion['kind'])))
