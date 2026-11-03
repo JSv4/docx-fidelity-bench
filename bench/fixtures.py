@@ -4521,7 +4521,27 @@ def generate():
             styles_xml=copper_styles, font='Liberation Sans', assertions=assertions,
             namespaces_extra=' xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"')
         cases[-1]['profile'].update(review='markup', markupPresentation='word')
-    registry = {'schema': 1, 'suite': {'id': 'core-v102', 'version': 102, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    # #1524: exact spacing shares the modern bounded-space policy; legacy/left controls do not.
+    text = 'Soft amber lamps guide seven quiet boats toward shore. The dock stays open until dawn.'
+    exact_styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+        '<w:rFonts w:ascii="Arial" w:hAnsi="Arial"/><w:sz w:val="24"/>'
+        '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl w:val="0"/>'
+        '<w:spacing w:before="0" w:after="0" w:line="300" w:lineRule="exact"/>'
+        '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    exact_section = ('<w:sectPr><w:pgSz w:w="7760" w:h="15840"/>'
+        '<w:pgMar w:top="900" w:right="900" w:bottom="900" w:left="900" w:header="480" w:footer="480"/></w:sectPr>')
+    for mode in (14, 15):
+        for align in ('both', 'left'):
+            add(f'exact-justification-mode-{mode}-{align}', 'paragraphs',
+                f'298pt exact-spaced paragraph with compatibility mode {mode} and {align} alignment (Docxodus #1524)',
+                [text], para(text, props=f'<w:jc w:val="{align}"/>'), exact_section,
+                font='Arial', styles_xml=exact_styles,
+                assertions=[dict(type='marker-region', version=2, marker='shore.', occurrence=1,
+                    page=1, rect=[0, 45 if mode == 15 and align == 'both' else 60, 388,
+                                 60 if mode == 15 and align == 'both' else 75], adjudicated='word')],
+                extra_parts={'word/settings.xml': f'<w:settings xmlns:w="{W}"><w:compat><w:compatSetting '
+                    f'w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="{mode}"/></w:compat></w:settings>'})
+    registry = {'schema': 1, 'suite': {'id': 'core-v103', 'version': 103, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
