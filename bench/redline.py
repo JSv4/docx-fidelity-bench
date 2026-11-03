@@ -26,11 +26,11 @@ from .common import ROOT, contained, digest, execute, identity, read_json, write
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
 OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'replace-text': 1, 'revision-ownership': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1}}
+ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1}, 'paragraph-spacing': {1}}
 RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
 SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}}
-CONTRACT = {'version': 14, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+CONTRACT = {'version': 15, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -238,6 +238,9 @@ def validate_registry(registry=None):
                 raise ValueError('Unknown assertion type, version or scope: ' + case['id'])
             kind = assertion['type']
             valid = {'untracked-text': lambda a: a.get('story') in ('body', 'headers') and a.get('texts') and all(isinstance(x, str) and x for x in a['texts']),
+                     'paragraph-spacing': lambda a: a['scope'] in {'accepted', 'rejected'} and isinstance(a.get('values'), list)
+                         and bool(a['values']) and all(isinstance(v, dict) and set(v) == {'before', 'after', 'line', 'lineRule'}
+                             and all(isinstance(x, str) and x for x in v.values()) for v in a['values']),
                      'paragraph-count': lambda a: a.get('story') == 'body' and isinstance(a.get('count'), int) and a['count'] >= 0,
                      'revision-count': lambda a: isinstance(a.get('max'), int) and a['max'] >= 0,
                      'para-ids-valid': lambda a: True, 'style-ids-unique': lambda a: True,
@@ -418,6 +421,50 @@ def _comparison(name, expected, actual):
     return check
 
 
+
+def paragraph_spacing(package, parts, scope):
+    """Literal spacing on text-bearing top-level body paragraphs: defaults, basedOn chain, direct properties.
+
+    Resolve style revisions independently too; styles are not story parts. This intentionally
+    does not claim to measure table conditional properties, automatic spacing or pagination.
+    """
+    w = revisions.w
+    style_path = next((path for kind, path in package.main_rels.values() if kind == 'styles'), None)
+    styles = ET.Element(w('styles')) if style_path is None else revisions.resolve(
+        {style_path: package.xml(style_path)}, 'accept' if scope == 'accepted' else 'reject')[style_path]
+    definitions = {s.get(w('styleId')): s for s in styles.findall(w('style')) if s.get(w('type')) == 'paragraph'}
+    default = next((key for key, s in definitions.items() if s.get(w('default')) in ('1', 'true', 'on')), None)
+    def overlay(values, properties):
+        spacing = properties.find(w('spacing')) if properties is not None else None
+        if spacing is not None:
+            # Preserve unsupported modes too: an automatic/line-based override must fail
+            # the literal four-axis assertion, not silently look equivalent.
+            values.update({key.removeprefix(w('')): value for key, value in spacing.attrib.items()})
+    output = []
+    for paragraph in parts[package.main].find(w('body')).findall(w('p')):
+        if not any(t.text for t in paragraph.iter(w('t'))):
+            continue
+        values = dict(before='0', after='0', line='240', lineRule='auto')
+        overlay(values, styles.find(w('docDefaults') + '/' + w('pPrDefault') + '/' + w('pPr')))
+        properties = paragraph.find(w('pPr'))
+        reference = properties.find(w('pStyle')) if properties is not None else None
+        identifier = reference.get(w('val')) if reference is not None else default
+        chain, seen = [], set()
+        while identifier in definitions:
+            if identifier in seen:
+                raise ValueError('Cyclic paragraph style inheritance')
+            seen.add(identifier)
+            style = definitions[identifier]
+            chain.append(style)
+            parent = style.find(w('basedOn'))
+            identifier = parent.get(w('val')) if parent is not None else None
+        for style in reversed(chain):
+            overlay(values, style.find(w('pPr')))
+        overlay(values, properties)
+        output.append(values)
+    return output
+
+
 def _assertion(assertion, package, resolved):
     kind, scope = assertion['type'], assertion['scope']
     parts = resolved.get(scope)
@@ -427,6 +474,9 @@ def _assertion(assertion, package, resolved):
         check.update(passed=observed == assertion['identities'], observed=observed)
     elif kind == 'pending-insertion-deletion':
         check.update(passed=revision_ownership.retained_deletion(package, assertion['author'], assertion['deletedBy'], assertion['text']))
+    elif kind == 'paragraph-spacing':
+        observed = paragraph_spacing(package, parts, scope)
+        check.update(passed=observed == assertion['values'], observed=observed)
     elif kind == 'table-state':
         roots = parts if parts is not None else package.story_parts()
         tables = list(roots[package.main].iter(revisions.w('tbl')))

@@ -415,3 +415,21 @@ The authored LibreOffice 25.8.7.3 calibration has 15 unsupported views: 12 whole
 `redline-v23` adds two original cases for Docxodus #1425. Two textboxes share one VML carrier. The reproducer changes only the first width from 80pt to 120pt; the control changes only its body text. Exact accepted/rejected `w:pict` assertions retain both shapes, all geometry attributes, and both bodies. Mutation tests reject a restored old width and missing textbox text, while input-copy checks include structural assertions when the text-only semantic views are equal.
 
 Both authored whole-paragraph redlines retain an extra empty paragraph in LibreOffice 25.8.7.3 after acceptance or rejection. These four measured calibration limitations are declared ineligible; independent markup, exact geometry/body assertions, and SDK checks remain mandatory. [Focused results and labeled previews](results/textbox-geometry/README.md) disclose the limitation without inferring Word behavior or a full-suite score.
+
+
+## Field defaults and paragraph spacing
+
+`redline-v27` adds simple and complex unchanged PAGE fields beside two inserted paragraphs
+and a literal-text control for Docxodus #1533. The defaults change after-spacing from 80
+to 280 twips and automatic line spacing from 260 to 380. All three cases require exact
+text/field round trips, schema validity, and effective paragraph spacing.
+
+Metric contract 15 adds `paragraph-spacing` v1 for accepted/rejected views. It resolves
+style property revisions independently, then overlays literal document defaults, the
+default or named paragraph style's basedOn chain, and direct paragraph properties per
+attribute. It checks every text-bearing top-level body paragraph, so a revision engine's
+empty terminal paragraph does not change the count. Table conditional formatting, empty
+paragraph layout, and automatic/line-based spacing are outside this assertion: extra
+spacing attributes remain in the observed values and fail a four-axis literal declaration.
+Semantic text and field checks still detect lost content. Mutation tests cover lost
+formatting history, direct overrides, inheritance and unsupported spacing modes.

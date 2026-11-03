@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The three field-default-spacing cases for Docxodus #1533 contain original Cedar station
+text and literal OOXML authored in `bench/redline_fixtures.py`. No renderer fixture,
+helper, template, image or font program is imported. Labeled review sheets show these
+authored documents rendered by separately provisioned applications.
+
 The seven font-observation diagnostics for Docxodus #1525 contain original Birch text and
 literal OOXML authored in `bench/font_fixtures.py`. They import no renderer fixture, helper,
 document, template, image or font program. Liberation and Noto fonts are separately provisioned;
