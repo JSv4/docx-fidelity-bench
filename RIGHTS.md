@@ -460,3 +460,5 @@ The four exact-justification cases for Docxodus #1524 use original issue prose a
 authored in `bench/fixtures.py`. No renderer fixture, template, font program or external document
 is imported. Arial is separately provisioned. The labeled Word/Docxodus PNGs show only these
 original inputs; retained inspections and hashes contain no authentication material.
+
+The tracked-header-group cases for Docxodus #1045 use original Juniper labels and the repository's literal DrawingML generator. Their document bytes, geometry, and review metadata contain no imported content or assets.
