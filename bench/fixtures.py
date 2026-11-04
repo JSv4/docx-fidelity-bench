@@ -4403,6 +4403,26 @@ def generate():
             assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': label, 'tolerancePt': 0.75} for label in labels]
                 + ([{'type': 'color-reference-geometry', 'version': 1, 'page': 1, 'rgb': [20, 90, 150],
                      'tolerancePt': 1, 'coverageTolerance': 0.08}] if kind in ('mixed-picture', 'mixed-shape') else []))
+    # #1045: native revision wrappers trigger LibreOffice's header-group import failure.
+    for kind in ('inserted', 'deleted', 'plain-control', 'single-control'):
+        labels = ['JuniperWest', 'JuniperCenter', 'JuniperEast']
+        grouped = kind != 'single-control'
+        if not grouped:
+            labels = labels[:1]
+        members = ''.join(willow_box(label, i * 120) for i, label in enumerate(labels))
+        juniper_markup = willow_drawing(willow_group(members) if grouped else members, grouped=grouped)
+        revision = 'del' if kind == 'deleted' else 'ins'
+        if kind != 'plain-control':
+            juniper_markup = (f'<w:{revision} w:id="7" w:author="Juniper Reviewer" w:date="2026-02-03T10:00:00Z">'
+                       + juniper_markup + f'</w:{revision}>')
+        paper = section().replace('<w:sectPr>', '<w:sectPr><w:headerReference w:type="default" r:id="rStory"/>')
+        add('tracked-header-group-' + kind, 'images',
+            'Native tracked header DrawingML import: ' + kind + ' (Docxodus #1045)',
+            ['JuniperReceipt'] + labels, para('JuniperReceipt'), paper,
+            story=('header', para(runs=juniper_markup)), styles_xml=willow_styles,
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': label, 'tolerancePt': 0.75}
+                        for label in labels])
+        cases[-1]['profile'].update(review='markup', markupPresentation='word')
     # #1522: original Alder cards distinguish declared subpixel rules and content widths.
     alder_font = 'Liberation Sans'
     alder_styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
@@ -4541,7 +4561,7 @@ def generate():
                                  60 if mode == 15 and align == 'both' else 75], adjudicated='word')],
                 extra_parts={'word/settings.xml': f'<w:settings xmlns:w="{W}"><w:compat><w:compatSetting '
                     f'w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="{mode}"/></w:compat></w:settings>'})
-    registry = {'schema': 1, 'suite': {'id': 'core-v103', 'version': 103, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v104', 'version': 104, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
