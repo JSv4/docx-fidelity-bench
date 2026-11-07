@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The eight plain-equation cases for Docxodus #1554 contain original Maple text and literal
+OMML authored in `bench/fixtures.py`. No renderer fixture, helper, template, document,
+image or font program is imported. DejaVu Serif and Liberation Serif are separately
+provisioned. Labeled review sheets show only these authored inputs and their local renders.
+
 The eleven custom-path cases for Docxodus #1554 contain original Willow labels and
 literal geometry authored in `bench/fixtures.py`. No renderer fixture, helper, template,
 external document, image or font program is imported. Review sheets show these authored inputs.

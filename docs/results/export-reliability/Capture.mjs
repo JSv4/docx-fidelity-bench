@@ -8,10 +8,11 @@ import { spawnSync } from 'node:child_process';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-const [sourceArg, manifestArg, outputArg, environmentArg, fontOption] = process.argv.slice(2);
+const [sourceArg, manifestArg, outputArg, environmentArg, ...options] = process.argv.slice(2);
 if (!sourceArg || !manifestArg || !outputArg || !environmentArg) throw new Error('Usage: Capture.mjs SOURCE MANIFEST OUTPUT ENVIRONMENT');
-if (fontOption !== undefined && fontOption !== '--allow-unverified-fonts') throw new Error('Unknown font policy option');
-const strictFonts = fontOption !== '--allow-unverified-fonts';
+if (options.some(option => !['--allow-unverified-fonts', '--html'].includes(option))) throw new Error('Unknown capture option');
+const strictFonts = !options.includes('--allow-unverified-fonts'), includeHtml = options.includes('--html');
+const inspector = new URL('../../../bench/html_browser.mjs', import.meta.url);
 const source = resolve(sourceArg), output = resolve(outputArg);
 const git = (...args) => {
   const result = spawnSync('git', ['-C', source, ...args], { encoding: 'utf8' });
@@ -39,6 +40,7 @@ const record = {
   executableSha256: hash(await readFile(browserPath)), sandbox: true, fontContract: environment.contract.fonts,
   fontPolicy: strictFonts ? 'strict' : 'permissive-diagnostic',
   note: 'Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.', cases: [],
+  ...(includeHtml ? { htmlInspectorSha256: hash(await readFile(inspector)) } : {}),
 };
 await mkdir(output, { recursive: true });
 await writeFile(resolve(output, 'manifest.json'), await readFile(manifestArg));
@@ -51,7 +53,7 @@ try {
     const result = { id: entry.id, inputSha256: entry.sha256 };
     try {
       const delivered = await renderDocxArtifacts(new Uint8Array(bytes), {
-        browser, outputs: ['pdf'], reviewProfile: entry.profile.review, commentProfile: entry.profile.comments,
+        browser, outputs: includeHtml ? ['html', 'pdf'] : ['pdf'], reviewProfile: entry.profile.review, commentProfile: entry.profile.comments,
         ...Object.fromEntries(['markupPresentation', 'commentColumnPlacement', 'markupVisibility']
           .filter(key => entry.profile[key] !== undefined).map(key => [key, entry.profile[key]])),
         timeoutMs: 120000, strictFonts, fontDirectories: environment.fontDirectories,
@@ -61,6 +63,14 @@ try {
       await writeFile(resolve(folder, 'production.json'), report);
       Object.assign(result, { status: 'delivered', pages: delivered.pageCount, pdfSha256: hash(delivered.pdf),
         renderReportSha256: hash(report) });
+      if (includeHtml) {
+        const { inspectReadableHtml } = await import(inspector);
+        const facts = await inspectReadableHtml(browser, delivered.html, entry.htmlAssertions ?? [], 30000);
+        const json = JSON.stringify(facts, null, 2) + '\n';
+        await writeFile(resolve(folder, 'candidate.html'), delivered.html);
+        await writeFile(resolve(folder, 'html-browser.json'), json);
+        Object.assign(result, { htmlSha256: hash(delivered.html), htmlFactsSha256: hash(json) });
+      }
     } catch (error) {
       Object.assign(result, { status: 'failed', code: error.code, phase: error.phase, message: error.message });
     }

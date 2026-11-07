@@ -2121,6 +2121,43 @@ def vml_line_cases(add):
             labels, para('HazelBefore') + para(runs=middle) + para('HazelAfter'), sect=paper, styles_xml=styles,
             namespaces_extra=' xmlns:v="urn:schemas-microsoft-com:vml"', assertions=assertions)
 
+def plain_math_cases(add, cases):
+    """Original Maple operands; source topology is independent of native font substitution."""
+    m = 'http://schemas.openxmlformats.org/officeDocument/2006/math'
+    term = lambda text: '<m:r><m:t>' + text + '</m:t></m:r>'
+    formulas = {
+        'fraction': ('<m:f><m:num>' + term('27.5') + '</m:num><m:den>' + term('9') + '</m:den></m:f>',
+                     ['27.5', '9'], ['mfrac', ['mn', '27.5'], ['mn', '9']]),
+        'root': ('<m:rad><m:radPr><m:degHide m:val="1"/></m:radPr><m:deg/><m:e>' + term('64') + '</m:e></m:rad>',
+                 ['√64'], ['msqrt', ['mn', '64']]),
+        'indexed': ('<m:rad><m:deg>' + term('3') + '</m:deg><m:e>' + term('125') + '</m:e></m:rad>',
+                    ['3', '√125'], ['mroot', ['mn', '125'], ['mn', '3']]),
+    }
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="24"/>'
+              '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0" '
+              'w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    settings = (f'<w:settings xmlns:w="{W}" xmlns:m="{m}"><m:mathPr>'
+                '<m:mathFont m:val="DejaVu Serif"/></m:mathPr></w:settings>')
+    for kind, (formula, operands, tree) in formulas.items():
+        for display in (False, True):
+            expression = '<m:oMath>' + formula + '</m:oMath>'
+            if display: expression = '<m:oMathPara>' + expression + '</m:oMathPara>'
+            add('plain-math-' + kind + ('-display' if display else '-inline'), 'paragraphs',
+                'Maple ' + kind + ' operands and equation structure (part of Docxodus #1554)',
+                ['MapleBegin', *operands, 'MapleEnd'], para('MapleBegin') + para(runs=expression) + para('MapleEnd'),
+                styles_xml=styles, namespaces_extra=f' xmlns:m="{m}"', extra_parts={'word/settings.xml': settings},
+                assertions=[{'type': 'same-page', 'version': 1, 'markers': ['MapleBegin', *operands, 'MapleEnd']},
+                            {'type': 'required-font-family', 'version': 1, 'family': 'DejaVu Serif'}])
+            cases[-1]['fonts'].append('DejaVu Serif')
+            cases[-1]['htmlAssertions'] = [{'type': 'math-expression', 'version': 1, 'marker': 'MapleFormula',
+                                           'display': 'block' if display else 'inline', 'tree': tree}]
+    for kind, text in [('fraction', 'MaplePlain 27.5 / 9'), ('root', 'MaplePlain root 64 index 3')]:
+        add('plain-math-' + kind + '-prose-control', 'paragraphs', 'Ordinary Maple prose without an equation',
+            ['MapleBegin', text, 'MapleEnd'], para('MapleBegin') + para(text) + para('MapleEnd'), styles_xml=styles,
+            assertions=[{'type': 'same-page', 'version': 1, 'markers': ['MapleBegin', 'MaplePlain', 'MapleEnd']}])
+
+
 def generate():
     cases = []
     def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT, literal_parts=None, relations_extra=(), content_types_extra=''):
@@ -5161,7 +5198,8 @@ def generate():
     oversized_keep_next_cases(add)
     markup_paper_clip_cases(add, cases)
     custom_path_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v117', 'version': 117, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    plain_math_cases(add, cases)
+    registry = {'schema': 1, 'suite': {'id': 'core-v118', 'version': 118, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

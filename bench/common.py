@@ -200,9 +200,13 @@ def validate_registry(registry=None):
             if not case.get('htmlAssertions'):
                 raise ValueError('An HTML profile override requires declared HTML checks')
         for assertion in case['assertions']:
-            versions = {'marker-region': {1, 2}, 'same-page': {1}, 'non-overlapping-markers': {1}, 'marker-reference-position': {1}, 'color-reference-geometry': {1}, 'color-geometry': {1}, 'colored-rule-widths': {1}}
+            versions = {'marker-region': {1, 2}, 'same-page': {1}, 'non-overlapping-markers': {1}, 'marker-reference-position': {1}, 'color-reference-geometry': {1}, 'color-geometry': {1}, 'colored-rule-widths': {1}, 'required-font-family': {1}}
             if assertion.get('version') not in versions.get(assertion.get('type'), set()):
                 raise ValueError('Unknown assertion type or version')
+            if assertion['type'] == 'required-font-family':
+                if (set(assertion) != {'type', 'version', 'family'} or not isinstance(assertion.get('family'), str) or
+                        assertion['family'] not in case['fonts']):
+                    raise ValueError('Required font must name a declared family')
             if assertion['type'] == 'colored-rule-widths':
                 if (set(assertion) != {'type', 'version', 'page', 'rgb', 'widthsPt', 'tolerancePt'} or
                         type(assertion['page']) is not int or assertion['page'] < 1 or

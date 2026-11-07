@@ -33,6 +33,10 @@ def validate_declaration(declaration):
         if set(declaration) != {'type', 'version', 'marker', 'attribute', 'equals'} or any(
                 not isinstance(declaration[k], str) or not declaration[k] for k in ('attribute', 'equals')):
             raise ValueError('Unknown or invalid delivered HTML assertion')
+    elif declaration.get('type') == 'math-expression':
+        if (set(declaration) != {'type', 'version', 'marker', 'display', 'tree'} or
+                declaration.get('display') not in {'inline', 'block'} or not valid_math_tree(declaration.get('tree'))):
+            raise ValueError('Unknown or invalid MathML assertion')
     elif declaration.get('type') == 'marker-readable':
         tokens = declaration.get('tokens')
         if (set(declaration) != {'type', 'version', 'marker', 'tokens'} or not isinstance(tokens, list) or not tokens or
@@ -67,6 +71,34 @@ def validate_declaration(declaration):
 def valid_rectangle(value):
     return isinstance(value, list) and len(value) == 4 and all(
         type(n) in (int, float) and math.isfinite(n) for n in value) and value[2] >= value[0] and value[3] >= value[1]
+
+
+def valid_math_tree(tree, depth=0):
+    if not isinstance(tree, list) or len(tree) < 2 or not isinstance(tree[0], str) or depth > 8:
+        return False
+    if tree[0] in {'mi', 'mn', 'mo'}:
+        return len(tree) == 2 and isinstance(tree[1], str) and bool(tree[1]) and not re.search(r'\s', tree[1])
+    arity = {'mfrac': 2, 'msqrt': 1, 'mroot': 2}.get(tree[0])
+    return ((arity == len(tree) - 1 or tree[0] == 'mrow' and 2 <= len(tree) - 1 <= 16) and
+            all(valid_math_tree(child, depth + 1) for child in tree[1:]))
+
+
+def math_expression_pass(declaration, observation, index):
+    if (not isinstance(observation, dict) or type(observation.get('index')) is not int or observation['index'] != index or
+            observation.get('marker') != declaration['marker'] or type(observation.get('matches')) is not int):
+        raise ValueError('Malformed MathML observation')
+    if observation['matches'] != 1: return False
+    rectangle = observation.get('rectangle')
+    if (not valid_rectangle(rectangle) or type(observation.get('visible')) is not bool or
+            not isinstance(observation.get('computedDisplay'), str) or not isinstance(observation.get('fractionBars'), list)):
+        raise ValueError('Malformed MathML geometry')
+    def fractions(tree):
+        return int(tree[0] == 'mfrac') + sum(fractions(child) for child in tree[1:] if isinstance(child, list))
+    return (observation['visible'] and rectangle[2] > rectangle[0] and rectangle[3] > rectangle[1] and
+            observation.get('namespace') == 'http://www.w3.org/1998/Math/MathML' and
+            observation['computedDisplay'] == ('math' if declaration['display'] == 'inline' else 'block math') and
+            observation['fractionBars'] == [None] * fractions(declaration['tree']) and
+            observation.get('display') == declaration['display'] and observation.get('tree') == declaration['tree'])
 
 
 def within(rectangle, clip, axis):
@@ -305,7 +337,11 @@ def inspect(folder, response, declarations, profile=None):
             result['browser'] = {k: v for k, v in browser.items() if k != 'observations'}
             for index, observation in zip(indexes, observations):
                 declaration = declarations[index]
-                if declaration['type'] == 'marker-readable':
+                if declaration['type'] == 'math-expression':
+                    checks.append({'name': f'html-math-{index + 1}', 'marker': declaration['marker'],
+                                   'observation': observation,
+                                   'passed': math_expression_pass(declaration, observation, index)})
+                elif declaration['type'] == 'marker-readable':
                     checks.append({'name': f'html-readable-{index + 1}', 'marker': declaration['marker'],
                                    'tokens': declaration['tokens'], 'observation': observation,
                                    'passed': readable_pass(declaration, observation, index)})
@@ -356,6 +392,9 @@ def aggregate(cases, declarations, browser_sha=None, profiles=None):
                 if declaration['type'] == 'marker-attribute':
                     valid = (item.get('name') == f'html-attribute-{index + 1}' and item.get('attribute') == declaration['attribute'] and
                              item.get('expected') == declaration['equals'] and item['passed'] == (item.get('actual') == declaration['equals']))
+                elif declaration['type'] == 'math-expression':
+                    valid = (item.get('name') == f'html-math-{index + 1}' and
+                             item['passed'] == math_expression_pass(declaration, item.get('observation'), index))
                 elif declaration['type'] == 'marker-readable':
                     valid = (item.get('name') == f'html-readable-{index + 1}' and item.get('tokens') == declaration['tokens'] and
                              item['passed'] == readable_pass(declaration, item.get('observation'), index))
