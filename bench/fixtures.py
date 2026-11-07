@@ -1989,6 +1989,85 @@ def contextual_own_spacing_cases(add, cases):
                                         pageSizePt=[612, 792], requiredTokens=dict(Counter(labels)), exactInventory=True)
 
 
+def grouped_paper_placement_cases(add, cases):
+    """Original Sedge stories: literal group coordinates, independent of native normalization."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="22"/>'
+              '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+              '<w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/>'
+              '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    paper = ('<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1200" '
+             'w:right="1200" w:bottom="1200" w:left="1200" w:header="240" w:footer="240"/></w:sectPr>')
+    word = 'http://schemas.microsoft.com/office/word/2010/'
+
+    def transform(x, y, width, height, children=''):
+        return (f'<a:xfrm><a:off x="{x * 12700}" y="{y * 12700}"/>'
+                f'<a:ext cx="{width * 12700}" cy="{height * 12700}"/>{children}</a:xfrm>')
+
+    def box(label, x, y, width=120, height=40):
+        return ('<wps:wsp><wps:cNvSpPr txBox="1"/><wps:spPr>' + transform(x, y, width, height)
+                + '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:noFill/><a:ln><a:noFill/></a:ln>'
+                '</wps:spPr><wps:txbx><w:txbxContent>' + para(label) + '</w:txbxContent></wps:txbx>'
+                '<wps:bodyPr lIns="0" tIns="0" rIns="0" bIns="0"><a:noAutofit/></wps:bodyPr></wps:wsp>')
+
+    variants = [('group', 'right'), ('group', 'visible-control'), ('nested', 'right'),
+                ('nested', 'visible-control'), ('canvas', 'bottom'), ('canvas', 'visible-control'),
+                ('canvas-nested', 'right'), ('group', 'right-balloons'), ('paragraph-group', 'right')]
+    for kind, edge in variants:
+        nested, canvas, paragraph = 'nested' in kind, 'canvas' in kind, kind == 'paragraph-group'
+        visible, markup = edge == 'visible-control', edge == 'right-balloons'
+        far_x, far_y = (160, 20) if visible else (160, 850) if edge == 'bottom' else (700, 20)
+        distant = box('SedgeFar', far_x, far_y)
+        if nested:
+            # The member frame scales child coordinates by 1/2, after removing chOff.
+            distant = box('SedgeFar', 2 * (far_x - 100) + 10, 2 * far_y + 20, 240, 80)
+            mapping = '<a:chOff x="127000" y="254000"/><a:chExt cx="2540000" cy="1270000"/>'
+            tag = 'wgp' if canvas else 'grpSp'
+            distant = (f'<wpg:{tag}><wpg:cNvGrpSpPr/><wpg:grpSpPr>' + transform(100, 0, 100, 50, mapping)
+                       + f'</wpg:grpSpPr>{distant}</wpg:{tag}>')
+        members = box('SedgeNear', 20, 20) + distant
+        if canvas:
+            payload, uri = f'<wpc:wpc>{members}</wpc:wpc>', word + 'wordprocessingCanvas'
+        else:
+            mapping = '<a:chOff x="0" y="0"/><a:chExt cx="3810000" cy="1270000"/>'
+            payload = ('<wpg:wgp><wpg:cNvGrpSpPr/><wpg:grpSpPr>' + transform(0, 0, 300, 100, mapping)
+                       + f'</wpg:grpSpPr>{members}</wpg:wgp>')
+            uri = word + 'wordprocessingGroup'
+        drawing = ('<w:r><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" '
+                   'relativeHeight="2" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1">'
+                   '<wp:simplePos x="0" y="0"/>'
+                   f'<wp:positionH relativeFrom="{"column" if paragraph else "page"}"><wp:posOffset>{0 if paragraph else 762000}</wp:posOffset></wp:positionH>'
+                   f'<wp:positionV relativeFrom="{"paragraph" if paragraph else "page"}"><wp:posOffset>{0 if paragraph else 2286000}</wp:posOffset></wp:positionV>'
+                   '<wp:extent cx="3810000" cy="1270000"/><wp:wrapNone/><wp:docPr id="41" name="Sedge windows"/>'
+                   f'<a:graphic><a:graphicData uri="{uri}">{payload}</a:graphicData></a:graphic></wp:anchor></w:drawing></w:r>')
+        props = ('<w:jc w:val="center"/><w:pPrChange w:id="19" w:author="Sedge Editor" w:date="2026-09-21T08:00:00Z">'
+                 '<w:pPr><w:jc w:val="left"/></w:pPr></w:pPrChange>') if markup else ''
+        tokens = ['SedgeOpen', 'SedgeHost', 'SedgeClose', 'SedgeNear'] + (['SedgeFar'] if visible else [])
+        body = para('SedgeOpen') + para(runs=run('SedgeHost') + drawing) + para('SedgeClose', props)
+        assertions = [dict(type='same-page', version=1, markers=tokens)]
+        frames = [('SedgeNear', 80, 96 if paragraph else 200)]
+        if visible:
+            frames.append(('SedgeFar', 60 + far_x, 180 + far_y))
+        assertions += [dict(type='marker-region', marker=label, occurrence=1, page=1,
+                            rect=[x, y, x + 120, y + 40]) for label, x, y in frames]
+        add('group-paper-' + kind + '-' + edge, 'paragraphs',
+            'Sedge authored group placement: ' + kind + ', ' + edge + ' (part of Docxodus #1558)', tokens, body,
+            sect=paper, styles_xml=styles, assertions=assertions,
+            namespaces_extra=f' xmlns:wps="{word}wordprocessingShape" xmlns:wpg="{word}wordprocessingGroup" xmlns:wpc="{word}wordprocessingCanvas"')
+        for assertion in cases[-1]['assertions']:
+            if assertion['type'] == 'marker-region':
+                # Apply after add() supplies its stricter default to every region.
+                assertion['tolerancePt'] = 0.1
+        if markup:
+            cases[-1]['profile']['review'] = 'markup'
+        profile = dict(review='markup' if markup else 'final', comments='margin' if markup else 'hidden')
+        if markup:
+            profile.update(markupPresentation='word', commentColumnPlacement='balloons')
+        cases[-1]['pdfCompanion'] = dict(profile=profile, pageSizePt=[612, 792],
+            requiredTokens=dict(Counter(tokens + (['Formatted:', 'Centered'] if markup else []))), exactInventory=True,
+            **({} if visible else dict(forbiddenTokens=['SedgeFar'])))
+
+
 def resizing_offpaper_cases(add, cases):
     """Original Fir labels: resizing does not relocate a page-offset text box."""
     styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
@@ -5470,9 +5549,10 @@ def generate():
     automatic_body_spacing_cases(add, cases)
     single_line_grid_cases(add, cases)
     paragraph_text_independence_cases(add, cases)
+    grouped_paper_placement_cases(add, cases)
     custom_path_cases(add)
     plain_math_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v123', 'version': 123, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v124', 'version': 124, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
