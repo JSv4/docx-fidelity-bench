@@ -4351,7 +4351,7 @@ def generate():
     def willow_drawing(payload, grouped=True, x=0, page=False, number=1):
         base = 'page' if page else 'column'
         vertical = 'page' if page else 'paragraph'
-        uri = 'wordprocessingGroup' if grouped else 'wordprocessingShape'
+        uri = 'wordprocessingCanvas' if payload.startswith('<wpc:') else 'wordprocessingGroup' if grouped else 'wordprocessingShape'
         return ('<w:r><w:drawing xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"'
                 ' xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"'
                 ' xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"'
@@ -4403,6 +4403,24 @@ def generate():
             assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': label, 'tolerancePt': 0.75} for label in labels]
                 + ([{'type': 'color-reference-geometry', 'version': 1, 'page': 1, 'rgb': [20, 90, 150],
                      'tolerancePt': 1, 'coverageTolerance': 0.08}] if kind in ('mixed-picture', 'mixed-shape') else []))
+    # #1561: a canvas owns every textbox, including groups in its coordinate space.
+    for kind in ('siblings', 'nested', 'single-control'):
+        labels = ['WillowNorthPanel', 'WillowMiddlePanel', 'WillowEastPanel']
+        if kind == 'single-control':
+            labels = labels[:1]
+        members = [willow_box(label, i * 120) for i, label in enumerate(labels)]
+        if kind == 'nested':
+            members[1] = willow_group(willow_box(labels[1], 10, 20, 200, 60),
+                x=120, width=100, height=30, child_x=10, child_y=20, child_width=200, child_height=60)
+        canvas = ('<wpc:wpc xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas">'
+                  + ''.join(members) + '</wpc:wpc>')
+        add('textboxes-drawingml-canvas-' + kind, 'images',
+            'Drawing canvas textbox ownership: ' + kind + ' (Docxodus #1561)',
+            ['WillowReceipt'] + labels, para('WillowReceipt') + para(runs=willow_drawing(canvas, x=72, page=True)),
+            section(), styles_xml=willow_styles,
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': label, 'occurrence': 1,
+                         'page': 1, 'rect': [72 + i * 120, 200, 172 + i * 120, 230]}
+                        for i, label in enumerate(labels)])
     # #1045: native revision wrappers trigger LibreOffice's header-group import failure.
     for kind in ('inserted', 'deleted', 'plain-control', 'single-control'):
         labels = ['JuniperWest', 'JuniperCenter', 'JuniperEast']
@@ -4561,7 +4579,7 @@ def generate():
                                  60 if mode == 15 and align == 'both' else 75], adjudicated='word')],
                 extra_parts={'word/settings.xml': f'<w:settings xmlns:w="{W}"><w:compat><w:compatSetting '
                     f'w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="{mode}"/></w:compat></w:settings>'})
-    registry = {'schema': 1, 'suite': {'id': 'core-v104', 'version': 104, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v105', 'version': 105, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

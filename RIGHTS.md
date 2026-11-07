@@ -462,3 +462,5 @@ is imported. Arial is separately provisioned. The labeled Word/Docxodus PNGs sho
 original inputs; retained inspections and hashes contain no authentication material.
 
 The tracked-header-group cases for Docxodus #1045 use original Juniper labels and the repository's literal DrawingML generator. Their document bytes, geometry, and review metadata contain no imported content or assets.
+
+The drawing-canvas cases for Docxodus #1561 reuse the original Willow text and OOXML helpers in `bench/fixtures.py`. Their screenshots are local renders of these authored inputs; no external document content or assets are imported.
