@@ -1,5 +1,9 @@
 # Authorship and artifact rights
 
+The five table-page-remainder cases for Docxodus #1569 contain original Alder ledger labels and
+literal OOXML authored in `bench/fixtures.py`. No renderer fixture, external document, image or
+font program is imported. Review screenshots show only these authored inputs and local renders.
+
 The two header-textbox redline cases and two unscored boundary diagnostics for Docxodus #1557 contain original Cedar register
 labels and literal OOXML authored in `bench/redline_fixtures.py`. No renderer fixture,
 helper, template, image or font program is imported. Review sheets show only these
