@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The two font-observation ledger cases for Docxodus #1558 contain original Spruce labels
+and literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template,
+external document, image or font program is imported. Review sheets show only these
+authored inputs rendered by separately provisioned applications.
+
 The eight literal-line-ending cases for Docxodus #1564 contain original Aspen labels and
 literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template,
 external document, image or font program is imported. Review sheets show only these

@@ -4653,8 +4653,23 @@ def generate():
                 'occurrence': 1, 'page': 1, 'rect': [492, top, 541, top + 16], 'tolerancePt': 0.0001})
         if kind == 'deleted-lf':
             cases[-1]['profile']['review'] = 'markup'
+    # Original Spruce ledgers cross the default observation budget after layout succeeds.
+    spruce_styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+        '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="22"/>'
+        '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl w:val="0"/>'
+        '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="exact"/>'
+        '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    for count in (3000, 6000):
+        labels = [f'SpruceEntry{i:04d}' for i in range(1, count + 1)]
+        add(f'font-observation-ledger-{count}', 'paragraphs',
+            f'Complete {count}-paragraph ledger across the font-observation budget (part of Docxodus #1558)',
+            labels, ''.join(para(label) for label in labels), styles_xml=spruce_styles,
+            assertions=[dict(type='marker-region', version=2, marker=labels[0], occurrence=1,
+                             page=1, rect=[0, 0, 612, 792]),
+                        dict(type='marker-region', version=2, marker=labels[-1], occurrence=1,
+                             page=(count - 1) // 54 + 1, rect=[0, 0, 612, 792])])
     table_remainder_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v107', 'version': 107, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v108', 'version': 108, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
