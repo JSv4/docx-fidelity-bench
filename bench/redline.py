@@ -26,11 +26,11 @@ from .common import ROOT, contained, digest, execute, identity, read_json, write
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
 OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'replace-text': 1, 'revision-ownership': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'section-stories': {1}, 'section-boundaries': {1}, 'section-flags': {1}}
+ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'positional-rewrites': {1}, 'section-stories': {1}, 'section-boundaries': {1}, 'section-flags': {1}}
 RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
 SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}}
-CONTRACT = {'version': 21, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+CONTRACT = {'version': 22, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -273,6 +273,10 @@ def validate_registry(registry=None):
                          and a.get('kind') in {'default', 'first', 'even'} and isinstance(a.get('values'), list)
                          and bool(a['values']) and all(isinstance(v, str) for v in a['values']),
                      'revision-blocks': lambda a: a['scope'] == 'redline',
+                     'positional-rewrites': lambda a: a['scope'] == 'redline'
+                         and all(isinstance(a.get(side), list) and len(a[side]) >= 2
+                             and all(isinstance(text, str) and text.strip() for text in a[side])
+                             for side in ('before', 'after')) and len(a['before']) == len(a['after']),
                      'revision-text': lambda a: a['scope'] == 'redline' and isinstance(a.get('kind'), str) and a['kind'] in {'moveFrom', 'del'}
                          and isinstance(a.get('text'), str) and bool(a['text']),
                      'table-widths': lambda a: a['scope'] in {'accepted', 'rejected'} and isinstance(a.get('grid'), list)
@@ -594,24 +598,43 @@ def _assertion(assertion, package, resolved):
                 observed.append('' if target is None else ''.join(t.text or '' for t in package.xml(target).iter()
                     if t.tag in {revisions.w('t'), revisions.w('delText')}))
         check.update(passed=observed == assertion['values'], observed=observed)
-    elif kind == 'revision-blocks':
+    elif kind in {'revision-blocks', 'positional-rewrites'}:
         body = package.xml(package.main).find(revisions.w('body'))
         inserted, deleted, order = [], [], []
+        paragraphs = []
         def visit(element, paragraph, in_insertion=False):
             in_insertion = in_insertion or element.tag == revisions.w('ins')
             side = ('deleted' if element.tag == revisions.w('delText') else
                     'inserted' if element.tag == revisions.w('t') and in_insertion else None)
+            if side:
+                paragraphs[paragraph][side] += element.text or ''
+            elif element.tag == revisions.w('t'):
+                paragraphs[paragraph]['retained'] += element.text or ''
             if side and (element.text or '').strip():
                 (inserted if side == 'inserted' else deleted).append(paragraph)
                 if not order or order[-1] != side:
                     order.append(side)
+                local_order = paragraphs[paragraph]['order']
+                if not local_order or local_order[-1] != side:
+                    local_order.append(side)
             for child in element:
                 visit(child, paragraph, in_insertion)
         for i, paragraph in enumerate(body.findall(revisions.w('p'))):
+            paragraphs.append({'inserted': '', 'deleted': '', 'retained': '', 'order': []})
             visit(paragraph, i)
         # Two text-side runs permit a shared boundary paragraph, but never interleaved words.
-        check.update(passed=bool(inserted and deleted) and len(order) == 2,
-                     observed={'inserted': sorted(set(inserted)), 'deleted': sorted(set(deleted)), 'order': order})
+        if kind == 'revision-blocks':
+            check.update(passed=bool(inserted and deleted) and len(order) == 2,
+                         observed={'inserted': sorted(set(inserted)), 'deleted': sorted(set(deleted)), 'order': order})
+        else:
+            old = [(i, paragraph['deleted']) for i, paragraph in enumerate(paragraphs) if paragraph['deleted']]
+            new = [(i, paragraph['inserted']) for i, paragraph in enumerate(paragraphs) if paragraph['inserted']]
+            complete = [text for _, text in old] == assertion['before'] and [text for _, text in new] == assertion['after']
+            pairs = [(a[0], b[0]) for a, b in zip(old, new)]
+            adjacent = all(abs(a - b) <= 1 for a, b in pairs)
+            ordered = all(max(a) < min(b) for a, b in zip(pairs, pairs[1:]))
+            coherent = all(len(p['order']) <= 2 and not p['retained'].strip() for p in paragraphs)
+            check.update(passed=complete and adjacent and ordered and coherent, observed=paragraphs)
     elif kind == 'revision-text':
         root = package.xml(package.main).find(revisions.w('body'))
         wrappers = list(root.iter(revisions.w(assertion['kind'])))

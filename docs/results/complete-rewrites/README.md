@@ -1,5 +1,10 @@
 # Complete paragraph rewrites
 
+This is historical evidence for the #1535 coherent-block policy. The explicitly requested
+#1556 policy now pairs these short rewrites by position; see [short rewrites](../short-rewrites/README.md).
+These screenshots and measurements remain unchanged. Long-rewrite controls retain the original
+coherent-block assertion.
+
 Four original Cedar-prose cases exercise articles, literal list numbers, linked articles,
 and a distinct-word control. Baseline `5bae7386` scores 0 on the three reproductions and
 100 on the control; candidate `45fde3aa` scores 100 on all four. Authored calibration also

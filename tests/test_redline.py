@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v33')
-        self.assertEqual(len(registry['cases']), 250)
+        self.assertEqual(registry['suite']['id'], 'redline-v34')
+        self.assertEqual(len(registry['cases']), 258)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1557, 1560)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -282,7 +282,7 @@ class AuthoredCalibration(unittest.TestCase):
 
     def test_revision_blocks_detects_interleaving_without_changing_endpoints(self):
         for shape in ('articles', 'numbered', 'linked', 'distinct-control'):
-            record = case('redline-complete-rewrite-' + shape)
+            record = case('redline-complete-rewrite-long-' + shape)
             assertion = record['assertions'][0]
             original = views(load(record['authored']))
             for index in (1, 3):
@@ -302,7 +302,7 @@ class AuthoredCalibration(unittest.TestCase):
             self.assertFalse(redline._assertion(assertion, rewrite(record['authored'], untrack), {})['passed'])
 
     def test_revision_blocks_accepts_shared_boundary_paragraph(self):
-        record = case('redline-complete-rewrite-articles')
+        record = case('redline-complete-rewrite-long-articles')
         def join_boundary(root):
             root.set('xmlns:w14', revisions.W14)
             body = root.find(W + 'body')
@@ -318,7 +318,7 @@ class AuthoredCalibration(unittest.TestCase):
         self.assertTrue(redline._assertion(record['assertions'][0], package, {})['passed'])
 
     def test_revision_blocks_rejects_interleaved_words_at_shared_boundary(self):
-        record = case('redline-complete-rewrite-linked')
+        record = case('redline-complete-rewrite-long-linked')
         def interleave(root):
             root.set('xmlns:w14', revisions.W14)
             body = root.find(W + 'body')
@@ -334,6 +334,39 @@ class AuthoredCalibration(unittest.TestCase):
         package = rewrite(record['authored'], interleave)
         self.assertEqual(views(package), views(load(record['authored'])))
         self.assertFalse(redline._assertion(record['assertions'][0], package, {})['passed'])
+
+    def test_positional_rewrites_reject_endpoint_preserving_wrong_arrangements(self):
+        record = case('redline-complete-rewrite-linked')
+        assertion = record['assertions'][0]
+        expected = views(load(record['authored']))
+        for mutation in ('side-blocks', 'wrong-partner', 'interleaved-words', 'shared-paragraph'):
+            def change(root):
+                root.set('xmlns:w14', revisions.W14)
+                body = root.find(W + 'body')
+                paragraphs = body.findall(W + 'p')
+                other = [e for e in body if e.tag != W + 'p']
+                if mutation == 'side-blocks':
+                    body[:] = paragraphs[::2] + paragraphs[1::2] + other
+                elif mutation == 'wrong-partner':
+                    # New paragraph zero precedes old zero/new one. Old one supplies the
+                    # retained boundary after that mixed paragraph, preserving both endpoints.
+                    for child in list(paragraphs[3]):
+                        if child.tag != W + 'pPr': paragraphs[0].append(child)
+                    paragraphs[2].remove(paragraphs[2].find(W + 'pPr'))
+                    body[:] = [paragraphs[1], paragraphs[0], paragraphs[2]] + paragraphs[4:] + other
+                else:
+                    deleted = [e for e in paragraphs[0] if e.tag != W + 'pPr']
+                    inserted = [e for e in paragraphs[1] if e.tag != W + 'pPr']
+                    if mutation == 'interleaved-words':
+                        paragraphs[0][:] = [e for pair in zip(deleted, inserted) for e in pair]
+                        paragraphs[0].extend(deleted[len(inserted):] + inserted[len(deleted):])
+                    else:
+                        paragraphs[0][:] = deleted + inserted
+                    body.remove(paragraphs[1])
+            package = rewrite(record['authored'], change)
+            self.assertEqual(views(package), expected, mutation)
+            self.assertEqual(redline._assertion(assertion, package, {})['passed'],
+                             mutation == 'shared-paragraph', mutation)
 
     def test_paragraph_spacing_checks_style_revisions_and_direct_precedence(self):
         record = case('redline-field-default-spacing-simple')
