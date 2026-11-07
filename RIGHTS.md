@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The five revised-section-story cases for Docxodus #1555 contain original Juniper workshop
+and coastal survey prose and literal OOXML authored in `bench/redline_fixtures.py`. No renderer
+fixture, helper, template, external document, image or font file is imported. Review sheets
+show only these authored inputs rendered by separately provisioned applications.
+
 The five table-page-remainder cases for Docxodus #1569 contain original Alder ledger labels and
 literal OOXML authored in `bench/fixtures.py`. No renderer fixture, external document, image or
 font program is imported. Review screenshots show only these authored inputs and local renders.

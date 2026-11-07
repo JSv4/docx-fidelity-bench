@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v32')
-        self.assertEqual(len(registry['cases']), 245)
+        self.assertEqual(registry['suite']['id'], 'redline-v33')
+        self.assertEqual(len(registry['cases']), 250)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1557, 1560)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1557, 1560)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -157,6 +157,23 @@ class AuthoredCalibration(unittest.TestCase):
                                 rejected=revisions.resolve(package.story_parts(), 'reject'))
             for assertion in record['assertions']:
                 self.assertTrue(redline._assertion(assertion, package, resolved)['passed'], record['id'] + ' ' + assertion['type'])
+
+    def test_section_flags_check_review_and_resolved_views_excluding_history(self):
+        package = load(case('redline-revised-stories-first-page')['authored'])
+        for scope, expected in [('redline', [True, True]), ('accepted', [True]), ('rejected', [False, False])]:
+            assertion = dict(type='section-flags', version=1, scope=scope, titlePg=expected)
+            parts = package.story_parts() if scope == 'redline' else revisions.resolve(package.story_parts(),
+                'accept' if scope == 'accepted' else 'reject')
+            self.assertTrue(redline._assertion(assertion, package, {scope: parts})['passed'])
+            # Story text does not expose the visibility flag; the independent assertion must.
+            before = revisions.view(package, parts)
+            section = next(redline.body_sections(parts[package.main].find(W + 'body')))
+            flag = section.find(W + 'titlePg')
+            if flag is None:
+                flag = ET.SubElement(section, W + 'titlePg')
+            flag.set(W + 'val', '0' if expected[0] else '1')
+            self.assertEqual(before, revisions.view(package, parts))
+            self.assertFalse(redline._assertion(assertion, package, {scope: parts})['passed'])
 
     def test_section_boundaries_reject_wrong_carrier_with_equal_semantic_views(self):
         for shape in ('add', 'remove', 'stable-control'):
