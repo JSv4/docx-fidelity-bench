@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v30')
-        self.assertEqual(len(registry['cases']), 239)
+        self.assertEqual(registry['suite']['id'], 'redline-v31')
+        self.assertEqual(len(registry['cases']), 243)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1560)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -1077,6 +1077,27 @@ class ScoringContract(unittest.TestCase):
             target['columnReview'][key] = value
             with self.assertRaisesRegex(ValueError, 'column review'):
                 redline.validate_registry(registry)
+
+    def test_match_edit_declarations_require_a_typed_pattern(self):
+        for key, value in [('version', True), ('version', 3), ('tracked', 1),
+                           ('pattern', ''), ('pattern', None), ('pattern', 4), ('replacement', None), ('start', 0)]:
+            registry = common.read_json(redline.MANIFEST)
+            target = next(c for c in registry['cases'] if c['id'] == 'redline-alternate-textbox-match')
+            target['spanEdit'][key] = value
+            with self.subTest(key=key, value=value), self.assertRaisesRegex(ValueError, 'span edit'):
+                redline.validate_registry(registry)
+
+    def test_alternate_textbox_assertions_reject_a_stale_hidden_copy(self):
+        for operation in ('span', 'match'):
+            record = case('redline-alternate-textbox-' + operation)
+            package = load(record['authored'])
+            parts = revisions.resolve(package.story_parts(), 'accept')
+            assertion = next(a for a in record['assertions'] if a['name'] == 'pict' and a['scope'] == 'accepted')
+            self.assertTrue(redline._assertion(assertion, package, {'accepted': parts})['passed'])
+            fallback = parts[package.main].find('.//{http://schemas.openxmlformats.org/markup-compatibility/2006}Fallback')
+            replacement = next(e for e in fallback.iter(W + 't') if e.text == 'Bob')
+            replacement.text = 'Alice'
+            self.assertFalse(redline._assertion(assertion, package, {'accepted': parts})['passed'])
 
     def test_span_edit_declarations_require_typed_nonempty_ranges(self):
         for key, value in [('tracked', 1), ('start', True), ('paragraphIndex', -1), ('length', 0), ('replacement', None)]:

@@ -30,7 +30,7 @@ ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {
 RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
 SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}}
-CONTRACT = {'version': 18, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+CONTRACT = {'version': 19, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -38,7 +38,7 @@ CONTRACT = {'version': 18, 'view': revisions.VIEW_VERSION, 'engines': ['bench-ma
             'semanticPreflight': 'declared identity cases must report zero changes at raw limits with and without the package supplement',
             'revisionRegistry': 'declared table operations must report the public registry count and match independent resolved table assertions',
             'blockInsertion': 'declared insertion outcomes require typed success, error, version change and undo availability',
-            'spanEditing': 'public span editing must preserve text and inline-marker order through both independent revision resolvers',
+            'spanEditing': 'public span editing must preserve text and inline-marker order through both independent revision resolvers; v2 requires exactly one visible regex match before ReplaceMatch',
             'paragraphRewrite': 'public untracked whole-paragraph rewrites must preserve exact declared native content-control subtrees as well as independent semantic views',
             'columnReview': 'v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry',
             'revisionOwnership': 'account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips',
@@ -205,11 +205,14 @@ def validate_registry(registry=None):
                 raise ValueError('Invalid paragraph rewrite declaration: ' + case['id'])
         elif operation == 'replace-span':
             spec = case.get('spanEdit', {})
-            if (set(spec) != {'version', 'tracked', 'paragraphIndex', 'start', 'length', 'replacement'}
-                    or spec['version'] != 1 or type(spec['tracked']) is not bool
-                    or any(type(spec[key]) is not int or spec[key] < 0 for key in ('paragraphIndex', 'start'))
-                    or type(spec['length']) is not int or spec['length'] <= 0
-                    or not isinstance(spec['replacement'], str)):
+            version = spec.get('version')
+            keys = {'version', 'tracked', 'replacement'}
+            keys |= {'paragraphIndex', 'start', 'length'} if version == 1 else {'pattern'}
+            if (set(spec) != keys or type(version) is not int or version not in {1, 2}
+                    or type(spec['tracked']) is not bool or not isinstance(spec['replacement'], str)
+                    or (version == 1 and (any(type(spec[key]) is not int or spec[key] < 0 for key in ('paragraphIndex', 'start'))
+                        or type(spec['length']) is not int or spec['length'] <= 0))
+                    or (version == 2 and (not isinstance(spec['pattern'], str) or not spec['pattern']))):
                 raise ValueError('Invalid span edit declaration: ' + case['id'])
         elif operation == 'revision-ownership':
             if not revision_ownership.valid_spec(case.get('revisionOwnership'), case.get('authorNameStatus')):

@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v30', 'version': 30}
+SUITE = {'id': 'redline-v31', 'version': 31}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -336,6 +336,7 @@ def generate():
     complete_rewrites(corpus)
     inserted_section_stories(corpus)
     retained_section_boundaries(corpus)
+    alternate_textbox_edits(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -2109,3 +2110,49 @@ def inserted_section_stories(corpus):
                        [untracked('CEDAR REFERENCE', story='headers'),
                         {'type': 'section-stories', 'version': 1, 'scope': 'redline', 'story': story,
                          'kind': 'default', 'values': ['', 'CEDAR REFERENCE']}])
+
+
+def alternate_textbox_edits(corpus):
+    """Visible query and synchronized edits of original DrawingML/VML textbox alternatives."""
+    ns = ('xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" '
+          'xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
+          'xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" '
+          'xmlns:v="urn:schemas-microsoft-com:vml"')
+    def textbox(content):
+        return '<w:txbxContent>' + p(content) + '</w:txbxContent>'
+    def drawing(content):
+        return ('<w:drawing><wp:inline><wp:extent cx="2540000" cy="635000"/>'
+                '<wp:docPr id="1" name="Cedar approval"/><a:graphic>'
+                '<a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+                '<wps:wsp><wps:cNvSpPr txBox="1"/><wps:spPr/><wps:txbx>' + textbox(content) +
+                '</wps:txbx><wps:bodyPr/></wps:wsp></a:graphicData></a:graphic></wp:inline></w:drawing>')
+    def vml(content):
+        return ('<w:pict><v:shape id="CedarApproval" style="width:200pt;height:50pt">'
+                '<v:textbox>' + textbox(content) + '</v:textbox></v:shape></w:pict>')
+    for match in (False, True):
+        for control in (False, True):
+            name = 'redline-alternate-textbox-' + ('match' if match else 'span') + ('-vml-control' if control else '')
+            def document(recorded=False, changed=False):
+                rev = Revisions()
+                def content():
+                    return (t('Cedar approval: ') + rev.dele(t('Alice')) + rev.ins(t('Bob')) + t(' approved.')
+                            if recorded else t('Cedar approval: ' + ('Bob' if changed else 'Alice') + ' approved.'))
+                shape = vml(content()) if control else ('<mc:AlternateContent><mc:Choice Requires="wps">' +
+                    drawing(content()) + '</mc:Choice><mc:Fallback>' + vml(content()) + '</mc:Fallback></mc:AlternateContent>')
+                return p(t('Cedar register.')) + p('<w:r ' + ns + '>' + shape + '</w:r>') + p(t('Cedar complete.'))
+            before, after = document(), document(changed=True)
+            source = corpus.file(name, 'source', body=before)
+            accepted = corpus.file(name, 'accepted', body=after)
+            authored = corpus.file(name, 'authored-redline', body=document(recorded=True))
+            assertions = []
+            for scope, body in (('accepted', after), ('rejected', before)):
+                root = ET.fromstring('<root ' + NAMESPACES + '>' + body + '</root>')
+                for carrier in ('drawing', 'pict'):
+                    assertions.append(dict(type='inline-trees', version=1, scope=scope, name=carrier,
+                        trees=[ET.tostring(e, encoding='unicode') for e in root.iter('{' + W + '}' + carrier)], images={}))
+            corpus.add(name, 'revisions', 'control' if control else 'reproducer', 'JSv4/Docxodus#1560',
+                ('Unique visible search and ReplaceMatch' if match else 'Exact span replacement') +
+                (' in one VML textbox' if control else ' in DrawingML/VML textbox alternatives'),
+                'replace-span', [dict(source, role='source')], {'accepted': accepted, 'rejected': source}, authored, assertions)
+            corpus.cases[-1]['spanEdit'] = (dict(version=2, tracked=True, pattern='Alice', replacement='Bob') if match else
+                dict(version=1, tracked=True, paragraphIndex=2, start=16, length=5, replacement='Bob'))
