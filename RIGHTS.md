@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The eight authored-table-width cases for Docxodus #1563 contain original Ash inventory labels,
+orchard prose and literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper,
+template, external document, image or font program is imported. Review sheets show only these
+inputs rendered by separately provisioned applications.
+
 The six column-fragmentation cases for Docxodus #1558 contain original Larch labels
 and literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template,
 external document, image or font program is imported. Review sheets show only these

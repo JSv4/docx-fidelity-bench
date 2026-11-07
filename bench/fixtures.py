@@ -1722,6 +1722,57 @@ def page_break_paragraph_cases(add):
             f'Yew dispatch page break with {kind} paragraph content (Docxodus #1570)', labels, body,
             sect=paper, styles_xml=styles, extra_parts={'word/settings.xml': settings}, assertions=assertions)
 
+def authored_table_width_cases(add):
+    """Original Ash inventory: fixed widths and explicit layout/placement controls."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="22"/>'
+              '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+              '<w:spacing w:before="0" w:after="0" w:line="300" w:lineRule="exact"/>'
+              '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    paper = ('<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" '
+             'w:right="1440" w:bottom="1440" w:left="1440" w:header="0" w:footer="0"/></w:sectPr>')
+    settings = (f'<w:settings xmlns:w="{W}"><w:compat><w:compatSetting w:name="compatibilityMode" '
+                'w:uri="http://schemas.microsoft.com/office/word" w:val="15"/></w:compat></w:settings>')
+    for kind in ('center', 'center-continuation', 'center-inferred', 'left-control',
+                 'negative-control', 'percentage-control', 'border-overhang', 'text-clipping'):
+        centered = kind.startswith('center')
+        width = 580 if kind in ('border-overhang', 'text-clipping') else 510
+        count = 24 if kind == 'center-continuation' else 1
+        percentage = kind == 'percentage-control'
+        indent = -40 if kind == 'negative-control' else 0
+        widths = [round(width * 20 / 3), width * 20 - round(width * 20 / 3)]
+        labels, rows = [], []
+        for row in range(count):
+            cells = []
+            for column, cell_width in enumerate(widths):
+                text = f'Ash{row + 1:02d}{"AB"[column]}'
+                if kind == 'text-clipping':
+                    text += ' The orchard workers inspect every wooden ladder before returning the baskets to the southern shed.'
+                labels.append(text)
+                cells.append(f'<w:tc><w:tcPr><w:tcW w:type="dxa" w:w="{cell_width}"/></w:tcPr>' + para(text) + '</w:tc>')
+            rows.append('<w:tr><w:trPr><w:trHeight w:val="640" w:hRule="atLeast"/></w:trPr>' + ''.join(cells) + '</w:tr>')
+        table = ('<w:tbl><w:tblPr>' + f'<w:tblW w:type="{"pct" if percentage else "dxa"}" w:w="{5000 if percentage else width * 20}"/>'
+                 + f'<w:jc w:val="{"center" if centered else "left"}"/><w:tblInd w:type="dxa" w:w="{indent * 20}"/>'
+                 + '<w:tblBorders>' + ''.join(f'<w:{side} w:val="single" w:sz="8" w:color="234567"/>'
+                   for side in ('top', 'left', 'bottom', 'right', 'insideH', 'insideV')) + '</w:tblBorders>'
+                 + ('' if percentage or kind == 'center-inferred' else '<w:tblLayout w:type="fixed"/>')
+                 + '<w:tblCellMar><w:left w:type="dxa" w:w="0"/><w:right w:type="dxa" w:w="0"/></w:tblCellMar></w:tblPr>'
+                 + '<w:tblGrid>' + ''.join(f'<w:gridCol w:w="{w}"/>' for w in widths) + '</w:tblGrid>' + ''.join(rows) + '</w:tbl>')
+        left = (612 - width) / 2 if centered else 72 + indent
+        resolved = 468 if percentage else width
+        assertions = [] if kind == 'text-clipping' else [
+            dict(type='marker-region', marker='Ash01A', occurrence=1, page=1, rect=[left, 72, left + 40, 90]),
+            dict(type='marker-region', marker='Ash01B', occurrence=1, page=1, rect=[left + resolved / 3, 72, left + resolved / 3 + 40, 90])]
+        if kind == 'center-continuation':
+            assertions.extend([
+                dict(type='marker-region', marker='Ash24A', occurrence=1, page=2, rect=[left, 72, left + 40, 720]),
+                dict(type='marker-region', marker='Ash24B', occurrence=1, page=2, rect=[left + resolved / 3, 72, left + resolved / 3 + 40, 720])])
+        add(f'authored-table-width-{kind}', 'tables',
+            f'Ash inventory {kind} with authored {width}pt grid (Docxodus #1563)', labels + ['AshComplete'],
+            table + para('AshComplete'), sect=paper, styles_xml=styles,
+            extra_parts={'word/settings.xml': settings}, assertions=assertions)
+
+
 def generate():
     cases = []
     def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT, literal_parts=None, relations_extra=(), content_types_extra=''):
@@ -4755,7 +4806,8 @@ def generate():
     table_remainder_cases(add)
     column_fragmentation_cases(add)
     page_break_paragraph_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v110', 'version': 110, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    authored_table_width_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v111', 'version': 111, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
