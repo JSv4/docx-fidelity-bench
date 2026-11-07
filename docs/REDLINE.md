@@ -455,3 +455,13 @@ it keeps the inserted empty section and extra paragraph/running-story bindings. 
 provider check is explicitly ineligible; acceptance, independent exact markup endpoints,
 review-story assertions and SDK validity remain mandatory. The stable-section control
 calibrates both LibreOffice resolutions.
+
+### Alternate textbox search and edits
+
+`redline-v31` adds four cases for Docxodus #1560: an exact-span edit and a unique visible-search
+edit of a DrawingML/VML textbox, each paired with a VML-only control. `spanEdit` version 2 requires
+exactly one public `Grep` match and edits it through `ReplaceMatch`; version 1 retains its numeric
+paragraph/span contract. Both paths use tracked edits. Metric contract 19 includes the unique-query
+requirement. Exact resolved drawing and VML trees check both compatibility representations,
+including their text and geometry; independent round trips and SDK validation remain mandatory.
+All 239 preceding cases and document bytes are unchanged.

@@ -143,19 +143,31 @@ internal static class Program
                 case "replace-span" when documents.Count == 1:
                 {
                     var spec = settings["spanEdit"] as JsonObject ?? throw new InvalidDataException("Missing span edit");
-                    if ((int?)spec["version"] != 1) throw new InvalidDataException("Unknown span edit version");
+                    if ((int?)spec["version"] is not (1 or 2)) throw new InvalidDataException("Unknown span edit version");
                     using var session = new DocxSession(documents[0].Document.DocumentByteArray, new DocxSessionSettings
                     {
                         RevisionAuthor = author,
                         TrackedChanges = (bool?)spec["tracked"] == true ? TrackedChangeMode.RenderInline : TrackedChangeMode.Accept,
                     });
-                    var paragraphs = session.Project().AnchorIndex.Values
-                        .Where(a => a.Anchor.Scope == "body" && a.Anchor.Kind == "p").ToArray();
-                    var index = (int?)spec["paragraphIndex"] ?? throw new InvalidDataException("Missing paragraph index");
-                    var edit = session.ReplaceTextAtSpan(paragraphs[index].Anchor.Id,
-                        (int?)spec["start"] ?? throw new InvalidDataException("Missing span start"),
-                        (int?)spec["length"] ?? throw new InvalidDataException("Missing span length"),
-                        (string?)spec["replacement"] ?? throw new InvalidDataException("Missing replacement"));
+                    EditResult edit;
+                    if ((int?)spec["version"] == 2)
+                    {
+                        var matches = session.Grep((string?)spec["pattern"] ?? throw new InvalidDataException("Missing match pattern"));
+                        if (matches.Count != 1)
+                            throw new InvalidOperationException($"Expected one visible match; got {matches.Count}");
+                        edit = session.ReplaceMatch(matches[0],
+                            (string?)spec["replacement"] ?? throw new InvalidDataException("Missing replacement"));
+                    }
+                    else
+                    {
+                        var paragraphs = session.Project().AnchorIndex.Values
+                            .Where(a => a.Anchor.Scope == "body" && a.Anchor.Kind == "p").ToArray();
+                        var index = (int?)spec["paragraphIndex"] ?? throw new InvalidDataException("Missing paragraph index");
+                        edit = session.ReplaceTextAtSpan(paragraphs[index].Anchor.Id,
+                            (int?)spec["start"] ?? throw new InvalidDataException("Missing span start"),
+                            (int?)spec["length"] ?? throw new InvalidDataException("Missing span length"),
+                            (string?)spec["replacement"] ?? throw new InvalidDataException("Missing replacement"));
+                    }
                     if (!edit.Success) throw new InvalidOperationException(edit.Error?.Message ?? "Span replacement failed");
                     result = new WmlDocument("span-edit.docx", session.Save());
                     break;

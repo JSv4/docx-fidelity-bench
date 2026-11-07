@@ -469,3 +469,7 @@ original inputs; retained inspections and hashes contain no authentication mater
 The tracked-header-group cases for Docxodus #1045 use original Juniper labels and the repository's literal DrawingML generator. Their document bytes, geometry, and review metadata contain no imported content or assets.
 
 The drawing-canvas cases for Docxodus #1561 reuse the original Willow text and OOXML helpers in `bench/fixtures.py`. Their screenshots are local renders of these authored inputs; no external document content or assets are imported.
+
+The four alternate-textbox editing cases for Docxodus #1560 use original Cedar labels and literal
+DrawingML/VML authored in `bench/redline_fixtures.py`. No product fixture, external document,
+image or embedded font is imported. Review previews show only these original inputs and outputs.
