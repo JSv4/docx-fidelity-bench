@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v31')
-        self.assertEqual(len(registry['cases']), 243)
+        self.assertEqual(registry['suite']['id'], 'redline-v32')
+        self.assertEqual(len(registry['cases']), 245)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1560)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1557, 1560)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -1098,6 +1098,75 @@ class ScoringContract(unittest.TestCase):
             replacement = next(e for e in fallback.iter(W + 't') if e.text == 'Bob')
             replacement.text = 'Alice'
             self.assertFalse(redline._assertion(assertion, package, {'accepted': parts})['passed'])
+
+    def test_header_drawing_assertions_reject_lost_text_geometry_and_carriers(self):
+        record = case('redline-header-textbox-label')
+        package = load(record['authored'])
+        assertion = next(a for a in record['assertions'] if a['type'] == 'inline-trees' and a['scope'] == 'accepted')
+        for mutation in ('text', 'geometry', 'drawing'):
+            parts = revisions.resolve(package.story_parts(), 'accept')
+            self.assertTrue(redline._assertion(assertion, package, {'accepted': parts})['passed'])
+            header = parts['word/header1.xml']
+            if mutation == 'text':
+                next(e for e in header.iter(W + 't') if e.text == 'Oak').text = 'Cedar'
+            elif mutation == 'geometry':
+                next(header.iter('{http://schemas.openxmlformats.org/drawingml/2006/main}ext')).set('cx', '1')
+            else:
+                parent = next(e for e in header.iter() if e.find(W + 'drawing') is not None)
+                parent.remove(parent.find(W + 'drawing'))
+            self.assertFalse(redline._assertion(assertion, package, {'accepted': parts})['passed'], mutation)
+
+    def test_header_drawing_assertions_require_the_running_story_scope(self):
+        for story in (None, 'body', [], 1):
+            registry = common.read_json(redline.MANIFEST)
+            record = next(c for c in registry['cases'] if c['id'] == 'redline-header-textbox-label')
+            next(a for a in record['assertions'] if a['type'] == 'inline-trees')['story'] = story
+            with self.subTest(story=story), self.assertRaises(ValueError):
+                redline.validate_registry(registry)
+
+    def test_running_story_trees_normalize_only_effective_text_spaces(self):
+        whole = ET.fromstring('<w:p xmlns:w="' + revisions.W + '"><w:r><w:t xml:space="preserve">Oak bulletin</w:t></w:r></w:p>')
+        split = ET.fromstring('<w:p xmlns:w="' + revisions.W + '"><w:r><w:t>Oak</w:t></w:r><w:r><w:t xml:space="preserve"> bulletin</w:t></w:r></w:p>')
+        self.assertNotEqual(redline.inline_tree(whole, {}), redline.inline_tree(split, {}))
+        self.assertEqual(redline.inline_tree(whole, {}, version=2), redline.inline_tree(split, {}, version=2))
+        split.findall('.//' + W + 't')[1].attrib.clear()
+        self.assertNotEqual(redline.inline_tree(whole, {}, version=2), redline.inline_tree(split, {}, version=2))
+        split.set('{http://www.w3.org/XML/1998/namespace}space', 'preserve')
+        expected = copy.deepcopy(whole)
+        expected.set('{http://www.w3.org/XML/1998/namespace}space', 'preserve')
+        self.assertEqual(redline.inline_tree(expected, {}, version=2), redline.inline_tree(split, {}, version=2))
+
+    def test_running_story_vml_images_compare_bytes_and_require_a_target(self):
+        image = ET.fromstring('<v:imagedata xmlns:v="urn:schemas-microsoft-com:vml" xmlns:r="' + revisions.REL[:-1] + '" r:id="rImg"/>')
+        old = redline.inline_tree(image, {'rImg': 'a' * 64}, version=2)
+        self.assertNotEqual(old, redline.inline_tree(image, {'rImg': 'b' * 64}, version=2))
+        self.assertNotEqual(old, redline.inline_tree(image, {}, version=2))
+        renamed = copy.deepcopy(image)
+        renamed.set('{' + revisions.REL[:-1] + '}id', 'renamed')
+        self.assertEqual(old, redline.inline_tree(renamed, {'renamed': 'a' * 64}, version=2))
+
+    def test_candidate_crash_does_not_poison_fixture_calibration(self):
+        import shutil
+        record = case('redline-header-textbox-label')
+        expected = {key: common.ROOT / value['path'] for key, value in record['expected'].items()}
+        def crashing_session(_env, _folder, items):
+            crashed = False
+            results = []
+            for item in items:
+                if item['key'].startswith('candidate-'):
+                    crashed = True
+                if crashed:
+                    results.append({'error': 'bridge disposed'})
+                else:
+                    mode = item['key'].split('-', 1)[1]
+                    shutil.copyfile(expected[mode], item['output'])
+                    results.append({'redlinesBefore': 1 if item['key'].startswith('authored-') else 0, 'redlinesAfter': 0})
+            return results
+        with tempfile.TemporaryDirectory() as temp, patch.object(redline, 'libreoffice_batch', side_effect=crashing_session):
+            checks = redline._libreoffice_checks(record, Path(temp), {}, Path(temp) / 'candidate.docx',
+                common.ROOT / record['authored']['path'], expected)
+        self.assertEqual([False, False], [check['passed'] for check in checks])
+        self.assertTrue(all('candidate output' in check['reason'] for check in checks))
 
     def test_span_edit_declarations_require_typed_nonempty_ranges(self):
         for key, value in [('tracked', 1), ('start', True), ('paragraphIndex', -1), ('length', 0), ('replacement', None)]:

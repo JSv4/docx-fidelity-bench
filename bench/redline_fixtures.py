@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v31', 'version': 31}
+SUITE = {'id': 'redline-v32', 'version': 32}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -250,6 +250,8 @@ LIBREOFFICE_INELIGIBLE['redline-shared-drawing-source'] = (('accepted', 'rejecte
     'LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole drawing-carrier replacement')
 
 
+
+
 class Corpus:
     def __init__(self, root):
         self.root = root
@@ -337,6 +339,7 @@ def generate():
     inserted_section_stories(corpus)
     retained_section_boundaries(corpus)
     alternate_textbox_edits(corpus)
+    header_textbox_redlines(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -2156,3 +2159,56 @@ def alternate_textbox_edits(corpus):
                 'replace-span', [dict(source, role='source')], {'accepted': accepted, 'rejected': source}, authored, assertions)
             corpus.cases[-1]['spanEdit'] = (dict(version=2, tracked=True, pattern='Alice', replacement='Bob') if match else
                 dict(version=1, tracked=True, paragraphIndex=2, start=16, length=5, replacement='Bob'))
+
+def header_textbox_redlines(corpus, boundary_controls=False):
+    """Original two-label masthead: interior edit, retained control, and whole-group boundaries."""
+    ns = ('xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" '
+          'xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
+          'xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" '
+          'xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"')
+    def shape(index, content):
+        return (f'<wps:wsp><wps:cNvSpPr txBox="1"/><wps:spPr><a:xfrm><a:off x="{index * 1900000}" y="0"/>'
+                '<a:ext cx="1800000" cy="450000"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom>'
+                '</wps:spPr><wps:txbx><w:txbxContent>' + p(content) + '</w:txbxContent></wps:txbx><wps:bodyPr/></wps:wsp>')
+    def drawing(first):
+        return ('<w:r ' + ns + '><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" '
+                'relativeHeight="1" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1">'
+                '<wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="column"><wp:posOffset>0</wp:posOffset></wp:positionH>'
+                '<wp:positionV relativeFrom="paragraph"><wp:posOffset>0</wp:posOffset></wp:positionV>'
+                '<wp:extent cx="3700000" cy="450000"/><wp:wrapNone/><wp:docPr id="1" name="Cedar register masthead"/>'
+                '<a:graphic><a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup">'
+                '<wpg:wgp><wpg:cNvGrpSpPr/><wpg:grpSpPr><a:xfrm><a:off x="0" y="0"/>'
+                '<a:ext cx="3700000" cy="450000"/><a:chOff x="0" y="0"/><a:chExt cx="3700000" cy="450000"/>'
+                '</a:xfrm></wpg:grpSpPr>' + shape(0, first) + shape(1, t('Archive desk')) +
+                '</wpg:wgp></a:graphicData></a:graphic></wp:anchor></w:drawing></w:r>')
+    for kind in (('label', 'body-control', 'add', 'remove') if boundary_controls else ('label', 'body-control')):
+        rev = Revisions()
+        before = dict(body=p(t('Morning register remains available.')), header=p(drawing(t('Cedar bulletin'))))
+        after = dict(before)
+        authored = dict(before)
+        assertions = []
+        if kind == 'label':
+            after['header'] = p(drawing(t('Oak bulletin')))
+            authored['header'] = p(drawing(rev.dele(t('Cedar')) + rev.ins(t('Oak')) + t(' bulletin')))
+            assertions = [untracked('Archive desk', story='headers')]
+        elif kind == 'body-control':
+            after['body'] = p(t('Evening register remains available.'))
+            authored['body'] = p(rev.dele(t('Morning')) + rev.ins(t('Evening')) + t(' register remains available.'))
+            assertions = [untracked('Cedar bulletin', 'Archive desk', story='headers')]
+        elif kind == 'add':
+            before['header'] = p()
+            authored['header'] = p(rev.ins(drawing(t('Cedar bulletin'))))
+        else:
+            after['header'] = p()
+            authored['header'] = p(rev.dele(drawing(t('Cedar bulletin'))))
+        for scope, document in (('accepted', after), ('rejected', before)):
+            root = ET.fromstring('<root ' + NAMESPACES + '>' + document['header'] + '</root>')
+            assertions.append(dict(type='inline-trees', version=2, scope=scope, story='headers', name='drawing',
+                trees=[ET.tostring(e, encoding='unicode') for e in root.iter('{' + W + '}' + 'drawing')], images={}))
+        corpus.compare('redline-header-textbox-' + kind, 'revisions',
+            'reproducer' if kind == 'label' else 'control', 'JSv4/Docxodus#1557',
+            {'label': 'One label changes inside an anchored header group; its sibling stays untracked',
+             'body-control': 'A body edit retains an unchanged anchored header group',
+             'add': 'A whole header group insertion preserves both native endpoints; markup preview fallback control',
+             'remove': 'A whole header group deletion preserves both native endpoints; markup preview fallback control'}[kind],
+            before, after, authored, assertions)
