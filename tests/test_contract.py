@@ -374,7 +374,60 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 901)
+        self.assertEqual(len(common.validate_registry()['cases']), 910)
+
+    def test_group_paper_exclusions_follow_literal_source_coordinates(self):
+        import runpy
+        import tempfile
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        proof = runpy.run_path(str(common.ROOT / 'docs/results/group-paper-placement/SourceCoordinates.py'))
+        cases = [c for c in common.validate_registry()['cases'] if c['id'].startswith('group-paper-')]
+        self.assertEqual(len(cases), 9)
+        self.assertTrue(all(a['tolerancePt'] == 0.1 for c in cases for a in c['assertions'] if a['type'] == 'marker-region'))
+        self.assertEqual(sum(proof['verify'](common.ROOT / c['input'], c)['outsideFarMember'] for c in cases), 6)
+        case = next(c for c in cases if c['id'] == 'group-paper-group-right')
+        with ZipFile(common.ROOT / case['input']) as package:
+            parts = {name: package.read(name) for name in package.namelist()}
+        for mutation in ('visible', 'rotation', 'zero-map', 'negative-indent', 'paper', 'margin', 'extent'):
+            with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as directory:
+                root = ET.fromstring(parts['word/document.xml'])
+                a, w, wps = proof['A'], proof['W'], proof['WPS']
+                shape = next(s for s in root.iter(wps + 'wsp') if next(s.iter(w + 't')).text == 'SedgeFar')
+                transform = shape.find(wps + 'spPr/' + a + 'xfrm')
+                if mutation == 'visible': transform.find(a + 'off').set('x', '0')
+                elif mutation == 'rotation': transform.set('rot', '5400000')
+                elif mutation == 'zero-map': next(root.iter(a + 'chExt')).set('cx', '0')
+                elif mutation == 'negative-indent': ET.SubElement(next(shape.iter(w + 'pPr')), w + 'ind', {w + 'left': '-20000'})
+                elif mutation == 'paper': next(root.iter(w + 'pgSz')).set(w + 'w', '20000')
+                elif mutation == 'margin': next(root.iter(w + 'pgMar')).set(w + 'left', '1400')
+                else: next(root.iter(proof['WP'] + 'extent')).set('cx', '5000000')
+                target = Path(directory) / 'changed.docx'
+                with ZipFile(target, 'w') as package:
+                    for name, data in parts.items():
+                        package.writestr(name, ET.tostring(root) if name == 'word/document.xml' else data)
+                with self.assertRaises(AssertionError): proof['verify'](target, case)
+        control = next(c for c in cases if c['id'] == 'group-paper-nested-visible-control')
+        source = proof['verify'](common.ROOT / control['input'], control)
+        words = [{'text': label, 'page': 1, 'rect': [x, y + 2, x + 60, y + 14]}
+                 for label, (x, y, width, height) in source['framesPt'].items()]
+        self.assertTrue(all(c['passed'] for c in proof['output_checks'](source, words)))
+        x, y, width, height = source['framesPt'][words[0]['text']]
+        for edge, boundary, direction in [(0, x, -1), (1, y, -1), (2, x + width, 1), (3, y + height, 1)]:
+            for rounding, expected in [(0.099, True), (0.101, False)]:
+                rounded = copy.deepcopy(words)
+                rounded[0]['rect'][edge] = boundary + direction * rounding
+                self.assertEqual(all(c['passed'] for c in proof['output_checks'](source, rounded)), expected)
+        wrong_page = copy.deepcopy(words)
+        wrong_page[0]['page'] = 2
+        for invalid in (words[1:], words + words[:1], wrong_page):
+            self.assertFalse(all(c['passed'] for c in proof['output_checks'](source, invalid)))
+        for word in words:
+            moved = copy.deepcopy(words)
+            target = next(w for w in moved if w['text'] == word['text'])
+            target['rect'][0] += 100
+            target['rect'][2] += 100
+            self.assertFalse(all(c['passed'] for c in proof['output_checks'](source, moved)))
 
     def test_continuous_margin_pairs_isolate_geometry_and_keep_complete_labels(self):
         import xml.etree.ElementTree as ET
@@ -710,7 +763,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v123')
+        self.assertEqual(registry['suite']['id'], 'core-v124')
 
     def test_paragraph_text_rejects_wrong_lines_and_missing_words(self):
         import gzip

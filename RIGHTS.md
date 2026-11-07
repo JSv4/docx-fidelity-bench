@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The nine grouped-paper-placement cases for Docxodus #1558 contain original Sedge labels
+and literal DrawingML authored in `bench/fixtures.py`. No product fixture, helper,
+document, image or font program is imported. Review sheets contain only these original
+inputs rendered by separately provisioned applications.
+
 The eight single-line grid cases for Docxodus #1551 contain original Beech labels and
 literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template,
 external document, image or font program is imported.
