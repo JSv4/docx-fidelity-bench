@@ -1,0 +1,1492 @@
+{
+  "baseline-v18": "5b733a20d08684d79ac0952d5337a4eb1bc6d69c",
+  "candidate": "90fd0e9791da33b301d984b807ea106609183729",
+  "scope": "Three diagnostic cases; not a complete suite score or Word parity claim",
+  "screenshots": "Independent benchmark rejection rendered by LibreOffice; all pages shown in full",
+  "cases": [
+    {
+      "id": "redline-retained-section-add",
+      "runs": {
+        "baseline-v18": {
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+5b733a20d08684d79ac0952d5337a4eb1bc6d69c",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "39367fb01e73abcea9829d6f3f9293ef3e19b08e51b0b18acdf4563641e7f950",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "category": "revisions",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "diff": [
+                "--- expected",
+                "+++ actual",
+                "@@ -8 +8,4 @@",
+                " t|CEDAR REFERENCE",
+                "+story|section1:footer:default",
+                "+p|footer|",
+                "+t|CEDAR REFERENCE"
+              ],
+              "name": "markup-rejected",
+              "passed": false,
+              "similarity": 0.8421052631578947
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-add/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/runs/sections/baseline-v18/redline-retained-section-add/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-add/right.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-add/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/runs/sections/baseline-v18/redline-retained-section-add/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-add/left.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 retains an empty paragraph and its section/footer binding when resolving the independently authored whole-paragraph boundary replacement; independent markup endpoints and SDK checks remain mandatory"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "The custodian closes the shutters before dusk."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "headers",
+                "texts": [
+                  "CEDAR REFERENCE"
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "afterParagraphs": [
+                  0
+                ],
+                "scope": "accepted",
+                "type": "section-boundaries",
+                "version": 1
+              },
+              "name": "assertion-section-boundaries",
+              "observed": [
+                0
+              ],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "afterParagraphs": [],
+                "scope": "rejected",
+                "type": "section-boundaries",
+                "version": 1
+              },
+              "name": "assertion-section-boundaries",
+              "observed": [
+                0
+              ],
+              "passed": false
+            }
+          ],
+          "id": "redline-retained-section-add",
+          "issue": "JSv4/Docxodus#1545",
+          "kind": "reproducer",
+          "operation": "compare",
+          "score": 0.0,
+          "status": "measured"
+        },
+        "fixed-v18": {
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+90fd0e9791da33b301d984b807ea106609183729",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "61494d88c0eec7f68dc638ebc337fd9c715fc4c0797fc5f23bff5232a8006ec3",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "category": "revisions",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-add/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/runs/sections/fixed-v18/redline-retained-section-add/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 3
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-add/right.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-add/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/runs/sections/fixed-v18/redline-retained-section-add/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 3
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-add/left.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 retains an empty paragraph and its section/footer binding when resolving the independently authored whole-paragraph boundary replacement; independent markup endpoints and SDK checks remain mandatory"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "The custodian closes the shutters before dusk."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "headers",
+                "texts": [
+                  "CEDAR REFERENCE"
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "afterParagraphs": [
+                  0
+                ],
+                "scope": "accepted",
+                "type": "section-boundaries",
+                "version": 1
+              },
+              "name": "assertion-section-boundaries",
+              "observed": [
+                0
+              ],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "afterParagraphs": [],
+                "scope": "rejected",
+                "type": "section-boundaries",
+                "version": 1
+              },
+              "name": "assertion-section-boundaries",
+              "observed": [],
+              "passed": true
+            }
+          ],
+          "id": "redline-retained-section-add",
+          "issue": "JSv4/Docxodus#1545",
+          "kind": "reproducer",
+          "operation": "compare",
+          "score": 100.0,
+          "status": "measured"
+        },
+        "authored-v18": {
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "bdb39fc7846026cdf701f6d684039795d92374326765896ed2092746e301e2ec",
+            "status": "ok"
+          },
+          "category": "revisions",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-add/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/runs/sections/authored-v18/redline-retained-section-add/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-add/right.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-add/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/runs/sections/authored-v18/redline-retained-section-add/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-add/left.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 retains an empty paragraph and its section/footer binding when resolving the independently authored whole-paragraph boundary replacement; independent markup endpoints and SDK checks remain mandatory"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "The custodian closes the shutters before dusk."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "headers",
+                "texts": [
+                  "CEDAR REFERENCE"
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "afterParagraphs": [
+                  0
+                ],
+                "scope": "accepted",
+                "type": "section-boundaries",
+                "version": 1
+              },
+              "name": "assertion-section-boundaries",
+              "observed": [
+                0
+              ],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "afterParagraphs": [],
+                "scope": "rejected",
+                "type": "section-boundaries",
+                "version": 1
+              },
+              "name": "assertion-section-boundaries",
+              "observed": [],
+              "passed": true
+            }
+          ],
+          "id": "redline-retained-section-add",
+          "issue": "JSv4/Docxodus#1545",
+          "kind": "reproducer",
+          "operation": "compare",
+          "score": 100.0,
+          "status": "measured"
+        }
+      },
+      "panels": [
+        {
+          "lane": "expected",
+          "sourceSha256": "13345aff4a70d729d9fab19c43205141234090d5ed1eadb952901d3b9650c0dc",
+          "resolvedSha256": "13345aff4a70d729d9fab19c43205141234090d5ed1eadb952901d3b9650c0dc",
+          "pdfSha256": "12068d08a8b2f29db9f6b8437c09bc1af9f6d5ae82855845c04dba57dcbbf976",
+          "pages": 1
+        },
+        {
+          "lane": "baseline-v18",
+          "sourceSha256": "39367fb01e73abcea9829d6f3f9293ef3e19b08e51b0b18acdf4563641e7f950",
+          "resolvedSha256": "c0ef1ca6e42f8c1104bcf931f05f59778cee90109400b51daffb94a31caac4a1",
+          "pdfSha256": "e1df34e1858d3487dec8e330534ec3010c60db6708fc8a50c7c9bebf1581bcbd",
+          "pages": 2
+        },
+        {
+          "lane": "fixed-v18",
+          "sourceSha256": "61494d88c0eec7f68dc638ebc337fd9c715fc4c0797fc5f23bff5232a8006ec3",
+          "resolvedSha256": "cb9c2694e5e2f56af18518deeb4ca8f69c78e2d2559af9304b0e9c471d825988",
+          "pdfSha256": "3a2f836d5096dbce1528c5e99d5f0f9df6dc024d9c1c0430e954daaf8b17c6bf",
+          "pages": 1
+        }
+      ],
+      "screenshotSha256": "bbb85dba9ab10c6ecfaf70cef8ffc28cc929dcaefc08a22ee9a2caeba7a845fe"
+    },
+    {
+      "id": "redline-retained-section-remove",
+      "runs": {
+        "baseline-v18": {
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+5b733a20d08684d79ac0952d5337a4eb1bc6d69c",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "6c37af34590587ec5b4fe084ee48320bc88b8ce89106ca4b9622bc529e3e7c54",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "category": "revisions",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "diff": [
+                "--- expected",
+                "+++ actual",
+                "@@ -7,4 +7 @@",
+                " p|footer|",
+                "-story|section1:footer:default",
+                "-p|footer|",
+                "-t|CEDAR REFERENCE"
+              ],
+              "name": "markup-rejected",
+              "passed": false,
+              "similarity": 0.8235294117647058
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-remove/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 3
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/runs/sections/baseline-v18/redline-retained-section-remove/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-remove/right.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 retains an empty paragraph and its section/footer binding when resolving the independently authored whole-paragraph boundary replacement; independent markup endpoints and SDK checks remain mandatory"
+            },
+            {
+              "diff": [
+                "--- expected",
+                "+++ actual",
+                "@@ -14,10 +14 @@",
+                " t|",
+                "-story|section1:footer:even",
+                "-p|footer",
+                "-t|",
+                "-story|section1:footer:default",
+                "-p|footer",
+                "-t|CEDAR REFERENCE",
+                "-story|section1:footer:first",
+                "-p|footer",
+                "-t|CEDAR REFERENCE"
+              ],
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-remove/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 3
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/runs/sections/baseline-v18/redline-retained-section-remove/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-remove/left.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": false,
+              "similarity": 0.7567567567567568
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "The custodian closes the shutters before dusk."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "headers",
+                "texts": [
+                  "CEDAR REFERENCE"
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [
+                "CEDAR REFERENCE"
+              ],
+              "name": "assertion-untracked-text",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "afterParagraphs": [],
+                "scope": "accepted",
+                "type": "section-boundaries",
+                "version": 1
+              },
+              "name": "assertion-section-boundaries",
+              "observed": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "afterParagraphs": [
+                  0
+                ],
+                "scope": "rejected",
+                "type": "section-boundaries",
+                "version": 1
+              },
+              "name": "assertion-section-boundaries",
+              "observed": [],
+              "passed": false
+            }
+          ],
+          "id": "redline-retained-section-remove",
+          "issue": "JSv4/Docxodus#1545",
+          "kind": "reproducer",
+          "operation": "compare",
+          "score": 0.0,
+          "status": "measured"
+        },
+        "fixed-v18": {
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+90fd0e9791da33b301d984b807ea106609183729",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "d7f601e9e3e194dac82a88d451ccd32903fe86d6b44e659c25b114eca25f9b6e",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "category": "revisions",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-remove/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 3
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/runs/sections/fixed-v18/redline-retained-section-remove/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 4
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-remove/right.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 retains an empty paragraph and its section/footer binding when resolving the independently authored whole-paragraph boundary replacement; independent markup endpoints and SDK checks remain mandatory"
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-remove/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 3
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/runs/sections/fixed-v18/redline-retained-section-remove/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 4
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-remove/left.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "The custodian closes the shutters before dusk."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "headers",
+                "texts": [
+                  "CEDAR REFERENCE"
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "afterParagraphs": [],
+                "scope": "accepted",
+                "type": "section-boundaries",
+                "version": 1
+              },
+              "name": "assertion-section-boundaries",
+              "observed": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "afterParagraphs": [
+                  0
+                ],
+                "scope": "rejected",
+                "type": "section-boundaries",
+                "version": 1
+              },
+              "name": "assertion-section-boundaries",
+              "observed": [
+                0
+              ],
+              "passed": true
+            }
+          ],
+          "id": "redline-retained-section-remove",
+          "issue": "JSv4/Docxodus#1545",
+          "kind": "reproducer",
+          "operation": "compare",
+          "score": 100.0,
+          "status": "measured"
+        },
+        "authored-v18": {
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "08424befa44d067fbbd2f6708e9bf8c4d1773bd46c2ebcdfd13fbc6666de6abf",
+            "status": "ok"
+          },
+          "category": "revisions",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-remove/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 3
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/runs/sections/authored-v18/redline-retained-section-remove/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 3
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-remove/right.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 retains an empty paragraph and its section/footer binding when resolving the independently authored whole-paragraph boundary replacement; independent markup endpoints and SDK checks remain mandatory"
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-remove/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 3
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/runs/sections/authored-v18/redline-retained-section-remove/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 3
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-remove/left.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "The custodian closes the shutters before dusk."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "headers",
+                "texts": [
+                  "CEDAR REFERENCE"
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "afterParagraphs": [],
+                "scope": "accepted",
+                "type": "section-boundaries",
+                "version": 1
+              },
+              "name": "assertion-section-boundaries",
+              "observed": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "afterParagraphs": [
+                  0
+                ],
+                "scope": "rejected",
+                "type": "section-boundaries",
+                "version": 1
+              },
+              "name": "assertion-section-boundaries",
+              "observed": [
+                0
+              ],
+              "passed": true
+            }
+          ],
+          "id": "redline-retained-section-remove",
+          "issue": "JSv4/Docxodus#1545",
+          "kind": "reproducer",
+          "operation": "compare",
+          "score": 100.0,
+          "status": "measured"
+        }
+      },
+      "panels": [
+        {
+          "lane": "expected",
+          "sourceSha256": "450b304269a0e1c0b47c32ff55394a5768407c5f66fb261a148e837f5f2a68d9",
+          "resolvedSha256": "450b304269a0e1c0b47c32ff55394a5768407c5f66fb261a148e837f5f2a68d9",
+          "pdfSha256": "ec062d46ae65f0450294b60b1449082854fe070b0faa4674bffacdf3c45ab94c",
+          "pages": 2
+        },
+        {
+          "lane": "baseline-v18",
+          "sourceSha256": "6c37af34590587ec5b4fe084ee48320bc88b8ce89106ca4b9622bc529e3e7c54",
+          "resolvedSha256": "2402974663b3026e2bd6b17a6c80b8698e89a59b334b7aab9fbe798a32b786d3",
+          "pdfSha256": "29297b91635d18c04dda4de3b0bfce5ca9890eef271a1f5b67bea4b928a1c89d",
+          "pages": 1
+        },
+        {
+          "lane": "fixed-v18",
+          "sourceSha256": "d7f601e9e3e194dac82a88d451ccd32903fe86d6b44e659c25b114eca25f9b6e",
+          "resolvedSha256": "cd2a1fa23da5c44d7ce195940fb995320ba8bfa7612266b351c77ef4a8b8643b",
+          "pdfSha256": "4b3dbcd5db3111a4b08418bcd156c0f212ec25dde5605dba423865bcee43311c",
+          "pages": 2
+        }
+      ],
+      "screenshotSha256": "1b081402240b32c02153956803726803fd0cb6c2910becfa08fec6119279d804"
+    },
+    {
+      "id": "redline-retained-section-stable-control",
+      "runs": {
+        "baseline-v18": {
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+5b733a20d08684d79ac0952d5337a4eb1bc6d69c",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "fb4c32fbb74a0e68e3b076d12d5c39e26c53e7409c7213381dfc3852a88f1219",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "category": "revisions",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-stable-control/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/runs/sections/baseline-v18/redline-retained-section-stable-control/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-stable-control/right.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-stable-control/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/runs/sections/baseline-v18/redline-retained-section-stable-control/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-stable-control/left.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "The custodian closes the shutters before dusk."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "headers",
+                "texts": [
+                  "CEDAR REFERENCE"
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "afterParagraphs": [
+                  0
+                ],
+                "scope": "accepted",
+                "type": "section-boundaries",
+                "version": 1
+              },
+              "name": "assertion-section-boundaries",
+              "observed": [
+                0
+              ],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "afterParagraphs": [
+                  0
+                ],
+                "scope": "rejected",
+                "type": "section-boundaries",
+                "version": 1
+              },
+              "name": "assertion-section-boundaries",
+              "observed": [
+                0
+              ],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Cedar archive "
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            }
+          ],
+          "id": "redline-retained-section-stable-control",
+          "issue": "JSv4/Docxodus#1545",
+          "kind": "control",
+          "operation": "compare",
+          "score": 100.0,
+          "status": "measured"
+        },
+        "fixed-v18": {
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+90fd0e9791da33b301d984b807ea106609183729",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "fb4c32fbb74a0e68e3b076d12d5c39e26c53e7409c7213381dfc3852a88f1219",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "category": "revisions",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-stable-control/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/runs/sections/fixed-v18/redline-retained-section-stable-control/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-stable-control/right.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-stable-control/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/runs/sections/fixed-v18/redline-retained-section-stable-control/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-stable-control/left.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "The custodian closes the shutters before dusk."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "headers",
+                "texts": [
+                  "CEDAR REFERENCE"
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "afterParagraphs": [
+                  0
+                ],
+                "scope": "accepted",
+                "type": "section-boundaries",
+                "version": 1
+              },
+              "name": "assertion-section-boundaries",
+              "observed": [
+                0
+              ],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "afterParagraphs": [
+                  0
+                ],
+                "scope": "rejected",
+                "type": "section-boundaries",
+                "version": 1
+              },
+              "name": "assertion-section-boundaries",
+              "observed": [
+                0
+              ],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Cedar archive "
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            }
+          ],
+          "id": "redline-retained-section-stable-control",
+          "issue": "JSv4/Docxodus#1545",
+          "kind": "control",
+          "operation": "compare",
+          "score": 100.0,
+          "status": "measured"
+        },
+        "authored-v18": {
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "e0536fe896b5f8728c53af456e15ccc017401f45c762b52737da6d0b45601bd9",
+            "status": "ok"
+          },
+          "category": "revisions",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-stable-control/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/runs/sections/authored-v18/redline-retained-section-stable-control/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-stable-control/right.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-stable-control/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/runs/sections/authored-v18/redline-retained-section-stable-control/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1545/fixtures/redline/redline-retained-section-stable-control/left.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "The custodian closes the shutters before dusk."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "headers",
+                "texts": [
+                  "CEDAR REFERENCE"
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "afterParagraphs": [
+                  0
+                ],
+                "scope": "accepted",
+                "type": "section-boundaries",
+                "version": 1
+              },
+              "name": "assertion-section-boundaries",
+              "observed": [
+                0
+              ],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "afterParagraphs": [
+                  0
+                ],
+                "scope": "rejected",
+                "type": "section-boundaries",
+                "version": 1
+              },
+              "name": "assertion-section-boundaries",
+              "observed": [
+                0
+              ],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Cedar archive "
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            }
+          ],
+          "id": "redline-retained-section-stable-control",
+          "issue": "JSv4/Docxodus#1545",
+          "kind": "control",
+          "operation": "compare",
+          "score": 100.0,
+          "status": "measured"
+        }
+      },
+      "panels": [
+        {
+          "lane": "expected",
+          "sourceSha256": "450b304269a0e1c0b47c32ff55394a5768407c5f66fb261a148e837f5f2a68d9",
+          "resolvedSha256": "450b304269a0e1c0b47c32ff55394a5768407c5f66fb261a148e837f5f2a68d9",
+          "pdfSha256": "34bfa18d1858e7387aeac880bbf0348991e3d3b29c30e077a34b554430668468",
+          "pages": 2
+        },
+        {
+          "lane": "baseline-v18",
+          "sourceSha256": "fb4c32fbb74a0e68e3b076d12d5c39e26c53e7409c7213381dfc3852a88f1219",
+          "resolvedSha256": "e64a053866f8d860e87393fc1116e032bd2899c12634aa2a38a725f2241760a8",
+          "pdfSha256": "a924fdd0ca0841da797b396c42c7dc3e115f4aa6f5ed1606b42e6766693600cd",
+          "pages": 2
+        },
+        {
+          "lane": "fixed-v18",
+          "sourceSha256": "fb4c32fbb74a0e68e3b076d12d5c39e26c53e7409c7213381dfc3852a88f1219",
+          "resolvedSha256": "8bbfa2ed4b01ad61154ebac4833bc5a95e54c848e2c4001d29213fe3535b240a",
+          "pdfSha256": "eaa254d8d75b83ee428b0287566bb58d4de055913b65532ec4b6f70cedb2cc93",
+          "pages": 2
+        }
+      ],
+      "screenshotSha256": "ffb9097d976146d790eb4fe03d776c890e53d2ea1abd3e27262428fabc2d90a4"
+    }
+  ]
+}

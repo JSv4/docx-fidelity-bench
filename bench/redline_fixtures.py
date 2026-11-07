@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v29', 'version': 29}
+SUITE = {'id': 'redline-v30', 'version': 30}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -178,6 +178,9 @@ def package(path, body, styles=None, header=None, comments=None, footnotes=None,
 # declared-ineligible comparison is not applied; the run fails as unmeasured if the calibration
 # disagrees with this table in either direction.
 LIBREOFFICE_INELIGIBLE = {
+    **{'redline-retained-section-' + shape: ((endpoint,),
+       'LibreOffice 25.8.7.3 retains an empty paragraph and its section/footer binding when resolving the independently authored whole-paragraph boundary replacement; independent markup endpoints and SDK checks remain mandatory')
+       for shape, endpoint in (('add', 'rejected'), ('remove', 'accepted'))},
     **{'redline-inserted-section-' + story: (('rejected',),
        'LibreOffice 25.8.7.3 retains the inserted empty section after rejecting its authored paragraph revisions, including an empty paragraph and running-story bindings; independent markup endpoints, exact review-story text and SDK checks remain mandatory')
        for story in ('header', 'footer')},
@@ -332,6 +335,7 @@ def generate():
     field_default_spacing(corpus)
     complete_rewrites(corpus)
     inserted_section_stories(corpus)
+    retained_section_boundaries(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -2030,6 +2034,45 @@ def complete_rewrites(corpus):
                        dict(body=paragraphs(old)), dict(body=paragraphs(new)),
                        dict(body=paragraphs(old, rev, 'del') + paragraphs(new, rev, 'ins')),
                        [{'type': 'revision-blocks', 'version': 1, 'scope': 'redline'}])
+
+
+def retained_section_boundaries(corpus):
+    """The same body paragraphs gain or lose an inline section boundary."""
+    first = 'Cedar archive keeps the copper inventory ledger.'
+    last = 'The custodian closes the shutters before dusk.'
+    def section(rid):
+        return SECTION.format(refs=f'<w:footerReference w:type="default" r:id="{rid}"/>')
+    extras = dict(section=section('rStory'),
+                  relations_extra=[('rStory', 'footer', 'footer1.xml'), ('rBlank', 'footer', 'footer2.xml')],
+                  content_types_extra=''.join(f'<Override PartName="/word/footer{n}.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/>' for n in (1, 2)),
+                  extra_parts={'word/footer1.xml': f'<w:ftr {NAMESPACES}>' + p(t('CEDAR REFERENCE')) + '</w:ftr>',
+                               'word/footer2.xml': f'<w:ftr {NAMESPACES}>' + p() + '</w:ftr>'})
+    for shape in ('add', 'remove', 'stable-control'):
+        rev = Revisions()
+        control = shape == 'stable-control'
+        old_props = section('rBlank') if shape != 'add' else ''
+        new_props = section('rBlank') if shape != 'remove' else ''
+        right_text = first.replace('keeps', 'stores') if control else first
+        if control:
+            authored = p(t('Cedar archive ') + rev.dele(t('keeps')) + rev.ins(t('stores'))
+                         + t(' the copper inventory ledger.'), props=new_props)
+        else:
+            # rPr precedes sectPr in CT_PPr; each paragraph mark owns its complete old/new boundary.
+            authored = (p(rev.dele(t(first)), props='<w:rPr>' + rev.mark('del') + '</w:rPr>' + old_props)
+                        + p(rev.ins(t(right_text)), props='<w:rPr>' + rev.mark('ins') + '</w:rPr>' + new_props))
+        assertions = [untracked(last), untracked('CEDAR REFERENCE', story='headers')]
+        for scope, props in (('accepted', new_props), ('rejected', old_props)):
+            assertions.append({'type': 'section-boundaries', 'version': 1, 'scope': scope,
+                               'afterParagraphs': [0] if props else []})
+        if control:
+            assertions.append(untracked('Cedar archive '))
+        corpus.compare('redline-retained-section-' + shape, 'revisions',
+                       'control' if control else 'reproducer', 'JSv4/Docxodus#1545',
+                       'A retained paragraph ' + ('keeps its boundary during a word edit' if control else shape + 's a section boundary')
+                       + '; accept and reject restore section counts and footer ownership',
+                       dict(body=p(t(first), props=old_props) + p(t(last)), **extras),
+                       dict(body=p(t(right_text), props=new_props) + p(t(last)), **extras),
+                       dict(body=authored + p(t(last)), **extras), assertions)
 
 
 def inserted_section_stories(corpus):
