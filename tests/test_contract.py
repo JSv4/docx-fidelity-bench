@@ -374,7 +374,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 826)
+        self.assertEqual(len(common.validate_registry()['cases']), 833)
 
     def test_continuous_margin_pairs_isolate_geometry_and_keep_complete_labels(self):
         import xml.etree.ElementTree as ET
@@ -710,7 +710,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v115')
+        self.assertEqual(registry['suite']['id'], 'core-v116')
 
     def test_authored_table_continuation_rejects_a_second_page_only_shift(self):
         import gzip
@@ -805,6 +805,38 @@ class RegistryContract(unittest.TestCase):
             after['rect'][3] += 3
             failures = [c['name'] for c in pdf.correctness(case, native, shifted) if not c['passed']]
             self.assertEqual(failures, ['assertion-marker-reference-position'])
+
+    def test_markup_paper_companions_detect_missing_revealed_unpainted_and_off_sheet_text(self):
+        import gzip
+        folder = common.ROOT / 'docs/results/markup-paper-clips'
+        for case in common.validate_registry()['cases']:
+            if not case['id'].startswith('markup-paper-clip-'):
+                continue
+            with gzip.open(folder / (case['id'] + '-candidate-inspection.json.gz'), 'rt') as stream:
+                info = json.load(stream)
+            declaration = case['pdfCompanion']
+            self.assertEqual(case['profile']['review'], 'markup' if 'Formatted:' in declaration['requiredTokens'] else 'final')
+            self.assertTrue(all(c['passed'] for c in pdf.companion_checks(declaration, info)))
+            mutations = [('missing', 'source-tokens'), ('outside', 'source-bounds'), ('unpainted', 'source-paint')]
+            if declaration.get('forbiddenTokens'):
+                mutations.append(('revealed', 'forbidden-tokens'))
+            if 'Formatted:' in declaration['requiredTokens']:
+                mutations.append(('balloon', 'source-tokens'))
+            for kind, failure in mutations:
+                mutant = copy.deepcopy(info)
+                marker = 'Formatted:' if kind == 'balloon' else 'ElmClosing'
+                word = next(w for w in mutant['words'] if w['text'] == marker)
+                if kind in ('missing', 'balloon'):
+                    mutant['words'].remove(word)
+                elif kind == 'outside':
+                    word['rect'][0] += 612
+                    word['rect'][2] += 612
+                elif kind == 'unpainted':
+                    word['inkPixels'] = 0
+                else:
+                    mutant['words'].append(dict(word, text=declaration['forbiddenTokens'][0]))
+                failures = [c['name'] for c in pdf.companion_checks(declaration, mutant) if not c['passed']]
+                self.assertIn('companion-pdf-' + failure, failures, (case['id'], kind))
 
     def test_oversized_keep_next_inventory_detects_missing_shifted_and_moved_lines(self):
         import gzip

@@ -1,5 +1,9 @@
 # Authorship and artifact rights
 
+The seven markup-paper-clip cases for Docxodus #1558 contain original Elm labels and
+literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template,
+external document, image or font program is imported. Review sheets show these authored inputs.
+
 The seven oversized keep-next cases for Docxodus #1558 contain original Rowan labels
 and literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template,
 external document, image or font program is imported. Review sheets show these authored inputs.
