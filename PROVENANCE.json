@@ -46,7 +46,7 @@
       "author": "John Scrudato IV",
       "license": "MIT",
       "origin": "Authored for this repository",
-      "sha256": "a4c4d2fc34d62d574dff18280d3512df6af75f279c453ef61c78c601e27dad7f"
+      "sha256": "fb1c0b69ca71def7be2201d944b6958f858af110eba25ba9efd41bc45e1fab8d"
     },
     "adapters/docxodus-projection/DocxBenchProjection.csproj": {
       "author": "John Scrudato IV",
@@ -154,7 +154,7 @@
       "author": "John Scrudato IV",
       "license": "MIT",
       "origin": "Authored for this repository",
-      "sha256": "630aa439c1766e55453f5fff8f8cc7ea46cd4d7c910e10969eae720f4613c9f4"
+      "sha256": "60dda1b89aed69728dde4b99e79480592e4b2ed843247861b6736fb138bd7a97"
     },
     "bench/font_fixtures.py": {
       "author": "John Scrudato IV",
@@ -5381,6 +5381,792 @@
       "license": "MIT",
       "origin": "Authored for this repository",
       "sha256": "f9d2e1eb211a708eb83bfd2365ddc133d1f733b40b5e66d3c362c73973afeceb"
+    },
+    "docs/results/floating-paragraphs/Checks.py": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "54ad300004b79e404956aefb3c8735927820768822491b718cb69a1d028139fb"
+    },
+    "docs/results/floating-paragraphs/Compose.py": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "7d960e406793744b23978d1f753f26c3a8bd2276f3d95b38b498b657809f428b"
+    },
+    "docs/results/floating-paragraphs/Geometry.mjs": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "4d336c9831c1fe79d29d70dbe32b3e08bf1df009161e052be91b5391fd86204e"
+    },
+    "docs/results/floating-paragraphs/Mutations.py": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "a4079ca5bbaddd0f565de5cad999af178ac3444bf71158e7853eb19b4c8f7035"
+    },
+    "docs/results/floating-paragraphs/README.md": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "7bf0f0bccf7c7a46469b777227c00a6353e4e05b2a37faa339c01da598c549f4"
+    },
+    "docs/results/floating-paragraphs/calibration-manifest.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "f0975d6f40ec5ed9fc9132e1be450d84d41283878992dda9230978e52746202c"
+    },
+    "docs/results/floating-paragraphs/calibration-reference-bundle.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "777d17bfcd5f7125e612b113c37fcf73885cb1c36f94900f216bb1cf037b3cab"
+    },
+    "docs/results/floating-paragraphs/calibration.json": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "a6fd1d1d9fef5991904b4dc7d9c3d0616ef8b8676c74399b635c5e8d910576b1"
+    },
+    "docs/results/floating-paragraphs/evidence.json": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "29a1eec7debc3268dc4f6ffb18b24922a7c2e74af5c838b40c7d00d3235c256b"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-multiple-candidate-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "d0234d610d696280bdf75ba579b42494094ee7c50ad0177b92951a4f781727db"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-multiple-candidate-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "3d5dbb2fe4fa6465bf25a8c0f84be1b1dadce674e317079b3e30eec5ae471df8"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-multiple-candidate-pictures.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "ab7593d9f22549db803d0b8244d8a2168ba08a1298b0bca6ffb6d5cf294a778c"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-multiple-candidate-report.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "46f1c37beb933a56c9689756e85b2f6bebb9dfdccd5f8bedfb81100b9592cbb9"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-multiple-reference-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "59fdb27bb01604d1a757cf93543d860dd27ed51c2a833e4ebab709cfebacc348"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-multiple-reference-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "df9e7515822e9542725c2fd4a541542cbb597372b87bf871a8ecced2159e447a"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-multiple.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "4463d2cf6389bc5946ae47a0351e5b83a70807cd64044e248c79c1dadbdb9190"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-0-baseline-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "6d33a116dfbd67b5624881884c8e9b6b13b50d73fb2fc8a9f75f63adc3821d8d"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-0-baseline-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "3d5dbb2fe4fa6465bf25a8c0f84be1b1dadce674e317079b3e30eec5ae471df8"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-0-baseline-pictures.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "4af03f40af4f53a3eaa7c5bd4c98729eebac674f66bcb963091c8a0f18590e82"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-0-baseline-report.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "dd8a44391a5ec47419be2b571d9439e6992df1d9fc0276659e70a59af5a90c29"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-0-candidate-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "6d33a116dfbd67b5624881884c8e9b6b13b50d73fb2fc8a9f75f63adc3821d8d"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-0-candidate-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "3d5dbb2fe4fa6465bf25a8c0f84be1b1dadce674e317079b3e30eec5ae471df8"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-0-candidate-pictures.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "4af03f40af4f53a3eaa7c5bd4c98729eebac674f66bcb963091c8a0f18590e82"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-0-candidate-report.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "0849ae2d2f17a9afdf77110612c3f62d4b3fbb7031dc999cdfb27238e4b6874a"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-0-reference-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "6ffe9319b9c34201267bd4ea62e9443be54ee98ca12b56896f8821e46e140eab"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-0-reference-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "df9e7515822e9542725c2fd4a541542cbb597372b87bf871a8ecced2159e447a"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-0.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "eee396e14762cff9762b65610dc315c2a1319cd232f15540c5e3f96101f2a95b"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-1-candidate-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "6d33a116dfbd67b5624881884c8e9b6b13b50d73fb2fc8a9f75f63adc3821d8d"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-1-candidate-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "3d5dbb2fe4fa6465bf25a8c0f84be1b1dadce674e317079b3e30eec5ae471df8"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-1-candidate-pictures.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "89f7112db0097d469f72bbc1889c4695cc6c646127cee93ff9ed80f4654f7262"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-1-candidate-report.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "d7990e4458228f623bc261b78bb28a8fb42fff6e48db139fd4bd16d4955f3667"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-1-reference-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "6ffe9319b9c34201267bd4ea62e9443be54ee98ca12b56896f8821e46e140eab"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-1-reference-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "df9e7515822e9542725c2fd4a541542cbb597372b87bf871a8ecced2159e447a"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-1.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "c5bffd80252f77d0d0482ce6e5666a598b958511e1c53ba706bfaf15ac0d215c"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-28-candidate-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "6d33a116dfbd67b5624881884c8e9b6b13b50d73fb2fc8a9f75f63adc3821d8d"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-28-candidate-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "3d5dbb2fe4fa6465bf25a8c0f84be1b1dadce674e317079b3e30eec5ae471df8"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-28-candidate-pictures.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "45ecfe0dd094f00ee08f6ac112d0ee8f4cfc60cc524e3cfd0510bd771c3f50af"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-28-candidate-report.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "abd7e2a67395b65f74166f07849cf73837e37817f036845e561f7ebf54cd4c03"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-28-reference-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "6ffe9319b9c34201267bd4ea62e9443be54ee98ca12b56896f8821e46e140eab"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-28-reference-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "df9e7515822e9542725c2fd4a541542cbb597372b87bf871a8ecced2159e447a"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-28.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "aba88a0ddfe89fc46ea9726e00546b7d6200707c78caa3c6414a3270b665738a"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-29-candidate-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "de5473bc5c0612d12cbe22e12117888e216fdb85f3ea3286ee930b92597c9e57"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-29-candidate-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "3d5dbb2fe4fa6465bf25a8c0f84be1b1dadce674e317079b3e30eec5ae471df8"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-29-candidate-pictures.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "fb22ec2eda980a1934710aaf37f7fe5e1469f33d2d0f51b36427b386a9b52e8f"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-29-candidate-report.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "2f7a672f81bac875c0df53288453cfd23beb3a475bfc2d7afd0ef50a440f501e"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-29-reference-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "0b4f292e1e6e0775dcd7291e3a7fa41d94a73374f3045b40274a79adbdf40fda"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-29-reference-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "df9e7515822e9542725c2fd4a541542cbb597372b87bf871a8ecced2159e447a"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-29.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "2362b96244e4a2a2cc9bf9c70ecdc9e1fcd9b5b26cf2e944ab914acdb7da853e"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-30-candidate-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "de5473bc5c0612d12cbe22e12117888e216fdb85f3ea3286ee930b92597c9e57"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-30-candidate-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "3d5dbb2fe4fa6465bf25a8c0f84be1b1dadce674e317079b3e30eec5ae471df8"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-30-candidate-pictures.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "9efb55969969f06b67d0e1e9c6e5c4644e6b0504b28b5e18cc61c00bf08bbf5d"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-30-candidate-report.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "c9c03923d954f5d2d8de3309431ad6fd19522c99cc29160776da609f3d22cbc8"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-30-reference-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "0b4f292e1e6e0775dcd7291e3a7fa41d94a73374f3045b40274a79adbdf40fda"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-30-reference-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "df9e7515822e9542725c2fd4a541542cbb597372b87bf871a8ecced2159e447a"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-30.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "a296c809c6d6508436b6d0491d0c6dffb5a4928b18e657c082139ef6e2b5fef5"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-78-candidate-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "7ed634c0ce16b8ba6897ea8dfa3d8149081a99b56e43972ba85b8496ddd53a81"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-78-candidate-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "3d5dbb2fe4fa6465bf25a8c0f84be1b1dadce674e317079b3e30eec5ae471df8"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-78-candidate-pictures.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "4e85047e893c4318a6eaa611d61b86019fe8c119d2ff8d164f8ca14126fb1ad4"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-78-candidate-report.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "321332f93e157f6f53bc168872dee7caebac88c6821e2ff81f8028a1aae22360"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-78-reference-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "1aea7075380eed9320c3609d1469606e270c4d49e9fcd11dceb45e7fb332e77e"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-78-reference-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "df9e7515822e9542725c2fd4a541542cbb597372b87bf871a8ecced2159e447a"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-none-after-78.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "8e44239545af549bcd6359e29048793aa7453b10cb7ea941a2ed46346325a31a"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-plain-control-baseline-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "f7e0f24e4ba020495650acf60e66b810f192f9168d9c4bec966896f5c0143b64"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-plain-control-baseline-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "3d5dbb2fe4fa6465bf25a8c0f84be1b1dadce674e317079b3e30eec5ae471df8"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-plain-control-baseline-pictures.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "cb3841c51adeaff3e5d1e9d72b3e1716b4fd1da2991a30753000e3f8a62b9116"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-plain-control-baseline-report.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "a678857e9e1914fed9c9747045a512cb1ed77ec5f8dc6a6ec732790d79fd9ea3"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-plain-control-candidate-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "f7e0f24e4ba020495650acf60e66b810f192f9168d9c4bec966896f5c0143b64"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-plain-control-candidate-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "3d5dbb2fe4fa6465bf25a8c0f84be1b1dadce674e317079b3e30eec5ae471df8"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-plain-control-candidate-pictures.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "cb3841c51adeaff3e5d1e9d72b3e1716b4fd1da2991a30753000e3f8a62b9116"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-plain-control-candidate-report.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "10255098f0d71ff8f3222e8b06bf58a505f5b6873cc1d63a36413d5aebb3b3c5"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-plain-control-reference-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "027fe6f535dd39c3c1ce9c2eec57146fd374fc31bc89d1b894978e4b48c4f232"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-plain-control-reference-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "df9e7515822e9542725c2fd4a541542cbb597372b87bf871a8ecced2159e447a"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-plain-control.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "16495e24896d8c5e7e4675961deded48c48e703c155745b0e99085ed9483f636"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-square-leading-candidate-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "c337e9feb8041554b75e197086a693445415616403af074e90153ad1a31fc380"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-square-leading-candidate-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "85afede4bb73a156fe3c15e53dabfd79fb5e19bdb0a990d0410e21e7a29448be"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-square-leading-candidate-pictures.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "5b44bab1df1e3ba34ced766c3effe174d8cef9dd1a7e462647a4b4d6b9da0d6c"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-square-leading-candidate-report.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "ac4d32b7f8c0c874eab368cdb366de50568d4b0aa455c694d57ed4532b738336"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-square-leading-reference-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "6e9c47709fd152ebdb737e1858b9bfd72f7033820538c31df9311e3957c75379"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-square-leading-reference-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "03436a7c7f11309585e964f7c36a1929fd3143c008ceebf81cdf8dc91c05f63c"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-square-leading.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "92287196c33cc730cab42513e8e0f4984e077e88185d50168aefe0c4584d85cc"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-square-prefix-candidate-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "b07b4e93a16aac129ea5e5873818f72f22c9fa6512c855fd4e7e49ee01f01f60"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-square-prefix-candidate-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "cb87439c29cdce559c0a14092e2db3256d4d0fab3d9b8c3eb3d6c7ac3a8e0f65"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-square-prefix-candidate-pictures.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "0bb0b4a08b3deca0da56d631a47afb829745cf68a1d648b72d284d6dcb705e3b"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-square-prefix-candidate-report.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "0065ca709f884edc8ecfe04a4f40ee5ace9748c5594d9bb7c8203298c22f77ec"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-square-prefix-reference-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "1cb8fbbf5a94aa91bdea8c6d2569a9caad55f64e575ece5566f3a022987fd07a"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-square-prefix-reference-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "63727885b5550be5ad93286696fdbd561c7e0b8651526cf1bfb623e693c33471"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-square-prefix.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "e34bbe5ba20177131f48b98dcefcc53235680fcf3d429999ccf99adb56f35908"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-tight-leading-candidate-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "c337e9feb8041554b75e197086a693445415616403af074e90153ad1a31fc380"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-tight-leading-candidate-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "85afede4bb73a156fe3c15e53dabfd79fb5e19bdb0a990d0410e21e7a29448be"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-tight-leading-candidate-pictures.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "267242bc049100ae3c616175067f0633b4916c6432f205b9048939d05da6c8af"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-tight-leading-candidate-report.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "0bfe5ca38a180dd41a23c368c2e27de7aff006fb7c54a89256d277ba5d43c146"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-tight-leading-reference-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "8bbf481a0dff06680d5969531f0d5e0814ba52065443ab2d0c12d9393ff5575f"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-tight-leading-reference-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "b06961e629dfd7939ac9026327b062fd68f86def4dc39c1039ebc495301d20fe"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-tight-leading.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "4ff9461da8411f876b8f60a8fe4d14abef7fe6cb6a41919d79f9988749777246"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-tight-prefix-candidate-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "b07b4e93a16aac129ea5e5873818f72f22c9fa6512c855fd4e7e49ee01f01f60"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-tight-prefix-candidate-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "cb87439c29cdce559c0a14092e2db3256d4d0fab3d9b8c3eb3d6c7ac3a8e0f65"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-tight-prefix-candidate-pictures.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "02bb721d097966fbe47ccdd1aff850022eff4815fae2c2776f509f6321a3ade2"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-tight-prefix-candidate-report.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "fbc057797a78c45a0f5eaf3431ad2d1bd6c8f85421eed1d4aeecfecf0ed25627"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-tight-prefix-reference-inspection.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "0ec3f6bf33b19d9d49fcdd0f3316dcd248928a922e97542b2a130272cc4fa6d7"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-tight-prefix-reference-painted.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "4e108b658390b8ec1ec19a8d7eca70802e69b2705aa86ed97ef4e314da7d1149"
+    },
+    "docs/results/floating-paragraphs/floating-paragraph-tight-prefix.png": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "73d547b11f968a82c2868a3d932a59285e8b229da1c5dafee60e2fe32fad133d"
+    },
+    "docs/results/floating-paragraphs/manifest.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "8d246615a8c7f159667c383cffaae3046a2cbc17bfa594eaa255c1ff8463b7f6"
+    },
+    "docs/results/floating-paragraphs/mutations.json": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "840c2cb3a704bdd4173bb9256fc0b153c5f31b1aa71c6d69d35a219e3e970c78"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-multiple-candidate.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "da72470df3fcb0634404acc0f33f4a2b9c48ff939533942902483ca5252c77d3"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-multiple-reference.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "e273fa6dab0951fad8865bb7abbb8b79ceaa08e8830d71b365f6a9454fe08c3b"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-none-after-0-baseline.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "8b9029262e0009fd81dfa9ef6d5dfbab05a6c4d4d371f25abb98a39f46236fcc"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-none-after-0-candidate.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "c0ac5d21fd3af2799cdd865e45528929885088618e33500371831f830ba08e62"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-none-after-0-reference.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "1f5fcf96565880fd60b19fadee68d50522ec8d924ea9ea4309dbd3049af7ef0f"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-none-after-1-candidate.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "5c6e810cf1678d9f75421d636b4196370df951f43a5f72a07e434e5c03c31969"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-none-after-1-reference.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "1d8917ccb2c7146fbc6b75bf2eeacdbfcded13bfdc76586988bc0431f0f78418"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-none-after-28-candidate.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "19dcd0704a595505f05b07f49afd88fde65d64ca76821e1d2fcd4ee5a9e4a443"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-none-after-28-reference.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "fb676666383974f9316c39c8e3d287359627310f6b47840b3421f355696382f7"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-none-after-29-candidate.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "08f08a3a4b90aedfae282ce6328ef092e3e12cbbc97ace828f15a871bd71ec9c"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-none-after-29-reference.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "0079859de56c10aa0b18ab87e060fdb8f5ec69939f84f61d72f51996a2b659f1"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-none-after-30-candidate.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "686b44a74549515d40a62e51ecbc1150f253c56b231e5dcb73225f313a5cacd1"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-none-after-30-reference.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "406d5850cfa6061b429475ec5b2fc91a1a4cff8808878c4e35c7dec4a0adbb22"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-none-after-78-candidate.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "8eeb8df643aba58dd17b78ff17d3e798a0a51ad5fefcb46f5d3c6efdd737becd"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-none-after-78-reference.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "4efb4d994592ef8b8cbb8401b8fec819e167704cb9c709b0d91861dc6bce843a"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-plain-control-baseline.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "813bb5c30ed4b9a1e4f4abd958ae901e5d91d0210fabf271e610ff7de75b692c"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-plain-control-candidate.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "b90ff22df423b8610715d60bcc5915545e148c21e3388c41c8749f3b12f8c7f6"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-plain-control-reference.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "3a191365e4234211e6752733a129f4c0ee6c9d6f5dbca84f5356458239bf6eeb"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-square-leading-candidate.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "46146a9252047faa5d92ed276f997123e4ceec89e4b9bc6ac9bdcc792055e43d"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-square-leading-reference.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "7d788547e9db1e3f621127d6f3d21ab2612c545056583d60660f2277f0eb3010"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-square-prefix-candidate.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "f670b851b785c48a865fe7b30ed83cc8d2e84c96ce97b93c93532cc816a53f97"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-square-prefix-reference.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "52a248a6a3302cc7813972afc01f2eb81f384ce4c8965b5d0a37d9854c24f910"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-tight-leading-candidate.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "d96d4f3e5dc284abba49689e511f0c999f94df66adf668d8ec3c8c0b89d1e8dd"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-tight-leading-reference.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "ed707534d82ba2dc6e30ae8c6fe99e1b704f7b270266e19390e1a8226192c96b"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-tight-prefix-candidate.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "772cfd7a1cd658670182e7862a2fd951d20fdb61b3810b850ceebbfb6051f209"
+    },
+    "docs/results/floating-paragraphs/pdf/floating-paragraph-tight-prefix-reference.pdf": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "f05eb5ba5e643f4fb4d4f22c2053cf5b8dead62c9ccd013adc1786c68812db4e"
+    },
+    "docs/results/floating-paragraphs/reference-bundle.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "0d0c33bbe83ab0a1ae53763327a3178ae3bd1c1cd26842ca471d8ba052778197"
+    },
+    "docs/results/floating-paragraphs/source-frames.json.gz": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "eada4a82d02378db2ac20e71ecc52487168f9d82d66458d6b0fd0ee914e69f85"
     },
     "docs/results/floating-shapes/README.md": {
       "author": "John Scrudato IV",
@@ -17454,6 +18240,78 @@
       "origin": "Generated by bench/fixtures.py",
       "sha256": "185f53759407f88ca4d85603f579fc59aa38b9b59b83d137f724b64f8a9ae3d0"
     },
+    "fixtures/floating-paragraph-multiple.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/fixtures.py",
+      "sha256": "5d2dd959ff307e8fb7341012f8f55f6a7c8e392c1a8c4d3eac9d3d952c0a2b6c"
+    },
+    "fixtures/floating-paragraph-none-after-0.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/fixtures.py",
+      "sha256": "1cfd86169871becfe7b9f1c7c5b84a1bc424cbe912c7772d0289f57ae931486f"
+    },
+    "fixtures/floating-paragraph-none-after-1.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/fixtures.py",
+      "sha256": "0d2c596cacfa0802b1439f277661cdfb8bf3ebc9b668f71cc29c2cdb1651d824"
+    },
+    "fixtures/floating-paragraph-none-after-28.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/fixtures.py",
+      "sha256": "8f8fa4aad607f207ddee100cc91e54f9d76804fe8fa9fe168a36da55b0f979e1"
+    },
+    "fixtures/floating-paragraph-none-after-29.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/fixtures.py",
+      "sha256": "10f16d31bca7d08062b689ac6052b09ad4a667e0c098ce958b5deb54eed11044"
+    },
+    "fixtures/floating-paragraph-none-after-30.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/fixtures.py",
+      "sha256": "870cca47485bbc82e30d9c90cd7fa71aa569e6c7886f9cbdd40d8622e6a1e3c8"
+    },
+    "fixtures/floating-paragraph-none-after-78.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/fixtures.py",
+      "sha256": "87fa03e5e73fccbc4fefc52fc67d5118498e49a436ca00254de5aa42bb73033d"
+    },
+    "fixtures/floating-paragraph-plain-control.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/fixtures.py",
+      "sha256": "a4c1c52e29d6a50a7a3a20e9b28f06599981533fde29aa52e7b205bd67e51d58"
+    },
+    "fixtures/floating-paragraph-square-leading.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/fixtures.py",
+      "sha256": "0574af5744c0fb900a536c4a0286a2b081acd26e9fa3b1e8a82b8b95e60cf1b2"
+    },
+    "fixtures/floating-paragraph-square-prefix.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/fixtures.py",
+      "sha256": "c9add545365d744ccc7a3a399f667f4d04ee43ff3e4c5e0da5f5bb15b0a3feb8"
+    },
+    "fixtures/floating-paragraph-tight-leading.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/fixtures.py",
+      "sha256": "c4a5f0fd1aab7027580981f4408f2386d786b9cf93e3b08fe438e2c838e552fe"
+    },
+    "fixtures/floating-paragraph-tight-prefix.docx": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Generated by bench/fixtures.py",
+      "sha256": "602f404922137f4b6c4896ef7e2c1284452f22efaa3a95bbb19922d9505d12c7"
+    },
     "fixtures/font-observation-ledger-3000.docx": {
       "author": "John Scrudato IV",
       "license": "MIT",
@@ -18130,7 +18988,7 @@
       "author": "John Scrudato IV",
       "license": "MIT",
       "origin": "Generated by bench/fixtures.py",
-      "sha256": "bd41914ff720c39bf2ea4c24fd769da37cd341c504f9b8812ca3cdddfa8d5ccd"
+      "sha256": "bba96f88e2c53990277908745033098974951b7ad7ecb905d240dd681628448f"
     },
     "fixtures/markup-paper-clip-left.docx": {
       "author": "John Scrudato IV",
@@ -26554,13 +27412,13 @@
       "author": "John Scrudato IV",
       "license": "MIT",
       "origin": "Authored for this repository",
-      "sha256": "eccafeb5cc28235d416fbdaef2cf09afa0fcacd116eca85c370c620467df5a07"
+      "sha256": "f37409d8ddc51899f94d5681c1108c16ca30b242802536798e6b94255c1980a4"
     },
     "tests/test_contract.py": {
       "author": "John Scrudato IV",
       "license": "MIT",
       "origin": "Authored for this repository",
-      "sha256": "bc42977508fa10a54402ad615b83243049e3b20c3a6433d260f253885ad10369"
+      "sha256": "1872ee9708246112c4faadf98505b928c97ad77d5f4e6a1c55b23c51fc8268e4"
     },
     "tests/test_css_profile.py": {
       "author": "John Scrudato IV",
@@ -26579,6 +27437,12 @@
       "license": "MIT",
       "origin": "Authored for this repository",
       "sha256": "162960ac9bafdc74f94bbc0d69b5974c78fe11ba7d02d168ea183a004908ef63"
+    },
+    "tests/test_floating_paragraphs.py": {
+      "author": "John Scrudato IV",
+      "license": "MIT",
+      "origin": "Authored for this repository",
+      "sha256": "e2cc3cf9f267a954b83e795a8726b77d2a865afbf186f0bcc5a048feef1f29d7"
     },
     "tests/test_fonts.py": {
       "author": "John Scrudato IV",

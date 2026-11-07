@@ -1989,6 +1989,66 @@ def contextual_own_spacing_cases(add, cases):
                                         pageSizePt=[612, 792], requiredTokens=dict(Counter(labels)), exactInventory=True)
 
 
+def floating_paragraph_cases(add, cases):
+    """Original Chive lines isolate source ownership of small pictures across page cuts."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+        '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="22"/>'
+        '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:keepLines w:val="0"/><w:widowControl w:val="0"/>'
+        '<w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="exact"/>'
+        '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    paper = ('<w:sectPr><w:pgSz w:w="8640" w:h="11880"/><w:pgMar w:top="720" '
+        'w:right="720" w:bottom="720" w:left="720"/></w:sectPr>')
+    variants = [(f'none-after-{n}', 'none', [n], 0) for n in (0, 1, 28, 29, 30, 78)]
+    variants += [('multiple', 'none', [0, 1, 30, 78], 0), ('plain-control', 'none', [], 0)]
+    variants += [(wrap + ('-prefix' if prefix else '-leading'), wrap, [0], prefix)
+                 for wrap in ('square', 'tight') for prefix in (0, 24)]
+    for kind, wrap, positions, prefix in variants:
+        def drawing(number):
+            wrapping = ('<wp:wrapNone/>' if wrap == 'none' else '<wp:wrapSquare wrapText="bothSides"/>'
+                if wrap == 'square' else '<wp:wrapTight wrapText="bothSides"><wp:wrapPolygon edited="0">'
+                '<wp:start x="0" y="0"/><wp:lineTo x="21600" y="0"/><wp:lineTo x="21600" y="21600"/>'
+                '<wp:lineTo x="0" y="21600"/><wp:lineTo x="0" y="0"/></wp:wrapPolygon></wp:wrapTight>')
+            return ('<w:r><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" '
+                'relativeHeight="1" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1">'
+                '<wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="column"><wp:posOffset>'
+                + str((180 if kind == 'multiple' and number == 2 else 240) * 12700 if wrap == 'none' else 0) + '</wp:posOffset></wp:positionH>'
+                '<wp:positionV relativeFrom="paragraph"><wp:posOffset>0</wp:posOffset></wp:positionV>'
+                '<wp:extent cx="609600" cy="609600"/>' + wrapping + f'<wp:docPr id="{number}" name="Chive tile {number}"/>'
+                '<a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">'
+                '<pic:pic><pic:nvPicPr><pic:cNvPr id="0" name="Chive tile"/><pic:cNvPicPr/></pic:nvPicPr>'
+                '<pic:blipFill><a:blip r:embed="rChive"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill>'
+                '<pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="609600" cy="609600"/></a:xfrm>'
+                '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic>'
+                '</a:graphicData></a:graphic></wp:anchor></w:drawing></w:r>')
+        labels = [f'Chive{n:03d}' for n in range(1, 79)]
+        lead = [f'ChiveLead{n:03d}' for n in range(1, prefix + 1)]
+        runs = ''
+        for index, label in enumerate(labels):
+            if index: runs += '<w:r><w:br/></w:r>'
+            if index in positions: runs += drawing(positions.index(index) + 1)
+            runs += run(label + ' recorded.')
+        if 78 in positions: runs += drawing(positions.index(78) + 1)
+        body = ''.join(para(label) for label in lead) + para(runs=runs) + para('ChiveComplete')
+        assertions = []
+        for index, label in enumerate(lead + labels + ['ChiveComplete']):
+            line = index - prefix
+            left = 84 if wrap != 'none' and 0 <= line < 3 else 36
+            right = 83 if wrap != 'none' and line == 3 else 384
+            assertions.append(dict(type='marker-region', marker=label, occurrence=1, page=index // 29 + 1,
+                rect=[left, 36 + index % 29 * 18, right, 54 + index % 29 * 18]))
+        image_pages = [min(3, n // 29 + 1) for n in positions]
+        assertions += [dict(type='color-reference-geometry', version=1, page=page, rgb=[38, 102, 144],
+            tolerancePt=1, coverageTolerance=0.04) for page in sorted(set(image_pages))]
+        add('floating-paragraph-' + kind, 'images',
+            'Chive floating picture source ownership: ' + kind + ' (part of Docxodus #1558)',
+            lead + [label + ' recorded.' for label in labels] + ['ChiveComplete'], body,
+            sect=paper, styles_xml=styles, assertions=assertions,
+            extra_parts={'word/media/chive.png': png(8, 8, lambda x, y: (38, 102, 144))},
+            relations_extra=[('rChive', 'image', 'media/chive.png')])
+        cases[-1]['pdfCompanion'] = dict(profile=dict(review='final', comments='hidden'),
+            pageSizePt=[432, 594], requiredTokens=cases[-1]['tokens'], exactInventory=True)
+
+
 def grouped_paper_placement_cases(add, cases):
     """Original Sedge stories: literal group coordinates, independent of native normalization."""
     styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
@@ -5550,9 +5610,10 @@ def generate():
     single_line_grid_cases(add, cases)
     paragraph_text_independence_cases(add, cases)
     grouped_paper_placement_cases(add, cases)
+    floating_paragraph_cases(add, cases)
     custom_path_cases(add)
     plain_math_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v124', 'version': 124, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v125', 'version': 125, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
