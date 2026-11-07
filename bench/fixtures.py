@@ -4618,8 +4618,43 @@ def generate():
                                  60 if mode == 15 and align == 'both' else 75], adjudicated='word')],
                 extra_parts={'word/settings.xml': f'<w:settings xmlns:w="{W}"><w:compat><w:compatSetting '
                     f'w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="{mode}"/></w:compat></w:settings>'})
+    # Original Aspen inputs isolate literal text line endings from explicit break elements.
+    for kind, ending in [('body-lf', '\n'), ('header-cr', '\r'), ('footer-crlf', '\r\n'),
+                         ('deleted-lf', '&#10;'), ('spaces-control', ' '), ('break-control', '<w:br/>'),
+                         ('encoded-cr-control', '&#13;'), ('encoded-crlf-control', '&#13;&#10;')]:
+        tag = 'delText' if kind == 'deleted-lf' else 't'
+        def aspen_text(value):
+            return f'<w:{tag} xml:space="preserve">{value}</w:{tag}>'
+        explicit = kind == 'break-control'
+        has_break = explicit or kind.startswith('encoded-cr')
+        content = ('<w:r>' + aspen_text('AspenLeading') + (ending if explicit else '')
+                   + aspen_text(('' if explicit else ending) + ' AspenFollowing')
+                   + (aspen_text(' AspenTail') if has_break else '<w:tab/>' + aspen_text('AspenTail')) + '</w:r>')
+        if kind == 'deleted-lf':
+            content = '<w:del w:id="11" w:author="Aspen reader" w:date="2026-01-01T00:00:00Z">' + content + '</w:del>'
+        paragraph = para(props='<w:tabs><w:tab w:val="right" w:pos="9360"/></w:tabs>', runs=content)
+        story = 'header' if kind.startswith('header') else 'footer' if kind.startswith('footer') else None
+        sect = section()
+        if story:
+            sect = sect.replace('<w:sectPr>', f'<w:sectPr><w:{story}Reference w:type="default" r:id="rStory"/>')
+        # A line is 16pt high. Encoded CRLF retains two leading 2.75pt spaces after the break.
+        top = 88 if has_break else 36 if story == 'header' else 740 if story == 'footer' else 72
+        left = 77 if kind == 'encoded-crlf-control' else 72 if has_break else 120
+        add('text-line-endings-' + kind, 'paragraphs',
+            'Literal line-ending normalization in ' + kind + ' (part of Docxodus #1564)',
+            ['AspenLeading AspenFollowing AspenTail', 'AspenBody' if story else 'AspenEnd'],
+            para('AspenBody') if story else paragraph + para('AspenEnd'), sect=sect,
+            story=(story, paragraph) if story else None, styles_xml=estuary_styles,
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': 'AspenFollowing', 'occurrence': 1,
+                         'page': 1, 'rect': [left, top, 160 if has_break else 540, top + 16]},
+                        {'type': 'same-page', 'version': 1, 'markers': ['AspenLeading', 'AspenFollowing', 'AspenTail']}])
+        if not has_break:
+            cases[-1]['assertions'].append({'type': 'marker-region', 'version': 2, 'marker': 'AspenTail',
+                'occurrence': 1, 'page': 1, 'rect': [492, top, 541, top + 16], 'tolerancePt': 0.0001})
+        if kind == 'deleted-lf':
+            cases[-1]['profile']['review'] = 'markup'
     table_remainder_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v106', 'version': 106, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v107', 'version': 107, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

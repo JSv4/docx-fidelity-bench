@@ -8,8 +8,10 @@ import { spawnSync } from 'node:child_process';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-const [sourceArg, manifestArg, outputArg, environmentArg] = process.argv.slice(2);
+const [sourceArg, manifestArg, outputArg, environmentArg, fontOption] = process.argv.slice(2);
 if (!sourceArg || !manifestArg || !outputArg || !environmentArg) throw new Error('Usage: Capture.mjs SOURCE MANIFEST OUTPUT ENVIRONMENT');
+if (fontOption !== undefined && fontOption !== '--allow-unverified-fonts') throw new Error('Unknown font policy option');
+const strictFonts = fontOption !== '--allow-unverified-fonts';
 const source = resolve(sourceArg), output = resolve(outputArg);
 const git = (...args) => {
   const result = spawnSync('git', ['-C', source, ...args], { encoding: 'utf8' });
@@ -35,6 +37,7 @@ const record = {
   sourceTree: build.tree, buildIdentitySha256: hash(await readFile(resolve(source, '.docx-bench-build.json'))),
   manifestSha256: hash(await readFile(manifestArg)), browserVersion: browser.version(),
   executableSha256: hash(await readFile(browserPath)), sandbox: true, fontContract: environment.contract.fonts,
+  fontPolicy: strictFonts ? 'strict' : 'permissive-diagnostic',
   note: 'Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.', cases: [],
 };
 await mkdir(output, { recursive: true });
@@ -49,11 +52,13 @@ try {
     try {
       const delivered = await renderDocxArtifacts(new Uint8Array(bytes), {
         browser, outputs: ['pdf'], reviewProfile: entry.profile.review, commentProfile: entry.profile.comments,
-        timeoutMs: 120000, strictFonts: true, fontDirectories: environment.fontDirectories,
+        timeoutMs: 120000, strictFonts, fontDirectories: environment.fontDirectories,
       });
       await writeFile(resolve(folder, 'candidate.pdf'), delivered.pdf);
-      await writeFile(resolve(folder, 'production.json'), JSON.stringify(delivered.renderReport, null, 2) + '\n');
-      Object.assign(result, { status: 'delivered', pages: delivered.pageCount, pdfSha256: hash(delivered.pdf) });
+      const report = JSON.stringify(delivered.renderReport, null, 2) + '\n';
+      await writeFile(resolve(folder, 'production.json'), report);
+      Object.assign(result, { status: 'delivered', pages: delivered.pageCount, pdfSha256: hash(delivered.pdf),
+        renderReportSha256: hash(report) });
     } catch (error) {
       Object.assign(result, { status: 'failed', code: error.code, phase: error.phase, message: error.message });
     }
