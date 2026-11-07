@@ -1638,6 +1638,49 @@ def table_remainder_cases(add):
                         for marker, page in positions])
 
 
+def column_fragmentation_cases(add):
+    """Independent Larch register: one child spans several page-column bands."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="22"/>'
+              '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:keepNext w:val="0"/>'
+              '<w:keepLines w:val="0"/><w:widowControl w:val="0"/>'
+              '<w:spacing w:before="0" w:after="0" w:line="300" w:lineRule="exact"/>'
+              '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    settings = (f'<w:settings xmlns:w="{W}"><w:compat><w:compatSetting w:name="compatibilityMode" '
+                'w:uri="http://schemas.microsoft.com/office/word" w:val="15"/></w:compat></w:settings>')
+    for shape in ('paragraph', 'table'):
+        for flow in ('one-column-control', 'balanced', 'sequential'):
+            columns = 1 if flow == 'one-column-control' else 2
+            labels = [f'Larch{i:03d}' for i in range(1, 54)]
+            if shape == 'paragraph':
+                body = para(runs='<w:r><w:br/></w:r>'.join(run(label) for label in labels))
+            else:
+                rows, labels = [], []
+                for index in range(1, 54):
+                    pair = [f'Larch{side}{index:03d}' for side in ('A', 'B')]
+                    labels.extend(pair)
+                    rows.append('<w:tr>' + ''.join('<w:tc><w:tcPr><w:tcW w:w="1440" w:type="dxa"/>'
+                        '</w:tcPr>' + para(label) + '</w:tc>' for label in pair) + '</w:tr>')
+                body = ('<w:tbl><w:tblPr><w:tblW w:w="2880" w:type="dxa"/><w:tblLayout w:type="fixed"/>'
+                        '<w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/>'
+                        '<w:bottom w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar>'
+                        '</w:tblPr><w:tblGrid><w:gridCol w:w="1440"/><w:gridCol w:w="1440"/></w:tblGrid>'
+                        + ''.join(rows) + '</w:tbl>')
+            paper = ('<w:sectPr>' + ('<w:type w:val="continuous"/>' if flow == 'sequential' else '')
+                     + '<w:pgSz w:w="7680" w:h="5280"/><w:pgMar w:top="720" w:right="720" '
+                     'w:bottom="720" w:left="720" w:header="0" w:footer="0"/>'
+                     f'<w:cols w:num="{columns}" w:space="480"/></w:sectPr>')
+            # 53 source lines/rows plus the receipt: 12 lines per 192pt column, with 12pt spare.
+            pages = 5 if columns == 1 else 3
+            add(f'column-fragments-{shape}-{flow}', 'tables' if shape == 'table' else 'paragraphs',
+                f'One tall Larch {shape} and its receipt in {flow} flow (part of Docxodus #1558)',
+                labels + ['LarchReceipt'], body + para('LarchReceipt'), sect=paper, styles_xml=styles,
+                extra_parts={'word/settings.xml': settings},
+                assertions=[dict(type='marker-region', marker=labels[0], occurrence=1, page=1, rect=[0, 0, 384, 264]),
+                            dict(type='marker-region', marker=labels[-1], occurrence=1, page=pages, rect=[0, 0, 384, 264]),
+                            dict(type='same-page', version=1, markers=[labels[-1], 'LarchReceipt'])])
+
+
 def generate():
     cases = []
     def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT, literal_parts=None, relations_extra=(), content_types_extra=''):
@@ -4669,7 +4712,8 @@ def generate():
                         dict(type='marker-region', version=2, marker=labels[-1], occurrence=1,
                              page=(count - 1) // 54 + 1, rect=[0, 0, 612, 792])])
     table_remainder_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v108', 'version': 108, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    column_fragmentation_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v109', 'version': 109, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
