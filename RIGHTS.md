@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The twelve floating-paragraph cases for Docxodus #1558 contain original Chive labels,
+literal OOXML and a small solid bitmap authored in `bench/fixtures.py`. No product
+fixture, helper, document, image or font program is imported. Review sheets show only
+these original inputs rendered by separately provisioned applications.
+
 The nine grouped-paper-placement cases for Docxodus #1558 contain original Sedge labels
 and literal DrawingML authored in `bench/fixtures.py`. No product fixture, helper,
 document, image or font program is imported. Review sheets contain only these original
