@@ -374,7 +374,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 833)
+        self.assertEqual(len(common.validate_registry()['cases']), 844)
 
     def test_continuous_margin_pairs_isolate_geometry_and_keep_complete_labels(self):
         import xml.etree.ElementTree as ET
@@ -710,7 +710,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v116')
+        self.assertEqual(registry['suite']['id'], 'core-v117')
 
     def test_authored_table_continuation_rejects_a_second_page_only_shift(self):
         import gzip
@@ -779,6 +779,34 @@ class RegistryContract(unittest.TestCase):
                     mutant = json.load(stream)
                 self.assertEqual(mutant['words'], native['words'])
                 self.assertTrue(all(c['passed'] for c in pdf.correctness(case, native, mutant)))
+
+    def test_custom_path_evidence_detects_missing_paint_and_wrong_curve(self):
+        import gzip
+        folder = common.ROOT / 'docs/results/custom-paths'
+        evidence = json.loads((folder / 'evidence.json').read_text())
+        cases = [c for c in common.validate_registry()['cases'] if c['id'].startswith('custom-path-')]
+        self.assertEqual(len(cases), 11)
+        for case in cases:
+            self.assertEqual(case['profile'], {'review': 'final', 'comments': 'hidden'})
+            with gzip.open(folder / (case['id'] + '-reference-inspection.json.gz'), 'rt') as stream:
+                native = json.load(stream)
+            self.assertEqual(pdf.reference_failures(case, native, 'libreoffice'), [])
+            removed = dict(native, colorRegions=[])
+            failures = [c['name'] for c in pdf.correctness(case, native, removed) if not c['passed']]
+            self.assertEqual(failures, ['assertion-color-reference-geometry'] * len(case['assertions']))
+            panel = next(e for e in evidence['cases'] if e['id'] == case['id'])
+            for renderer in ('reference', 'candidate'):
+                observed = next(p for p in panel['panels'] if p['renderer'] == renderer)
+                probes = observed['supplementaryPaintProbes']
+                self.assertTrue(probes and all(p['passed'] for p in probes))
+                self.assertEqual(len(observed['sourcePaint']), 3)
+                self.assertTrue(all(w['inkPixels'] > 0 for w in observed['sourcePaint']))
+            if case['id'] == 'custom-path-quadratic':
+                with gzip.open(folder / 'wrong-curve-inspection.json.gz', 'rt') as stream:
+                    mutant = json.load(stream)
+                self.assertEqual(mutant['words'], native['words'])
+                self.assertTrue(all(c['passed'] for c in pdf.correctness(case, native, mutant)))
+        self.assertEqual(sum(not p['passed'] for p in evidence['wrongCurveControl']['supplementaryPaintProbes']), 2)
 
     def test_vml_line_declarations_detect_missing_paint_wrong_pen_and_shifted_text(self):
         import gzip
