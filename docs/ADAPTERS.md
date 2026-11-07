@@ -89,6 +89,15 @@ A missing observation is unmeasured; an observed size mismatch or clipped marker
 failure. This does not claim to inspect every character's font across the whole document or to measure
 paint occlusion. The source-bound observer, browser policy and artifact identities are unchanged.
 
+Version 1 `math-expression` declares one formula's `display` (`inline` or `block`) and ordered
+`tree`, such as `["mfrac", ["mn", "27.5"], ["mn", "9"]]`. Its `marker` labels the observation;
+the observer counts every `math` element and requires exactly one. The offline browser checks
+MathML namespaces recursively and records structure, computed display, subtree visibility and a positive box.
+Single-child `mrow` grouping is transparent; token strings and operand order are exact.
+These source-default fractions require an absent `linethickness` attribute; a suppressed bar cannot pass.
+Swapped fraction/root operands, flattened structures, unknown elements and duplicate formulas fail.
+These are structural checks, not native typography or general paint-occlusion measurements.
+
 An HTML profile may additionally declare nonempty, well-formed Unicode `additionalCss`.
 The Docxodus adapter forwards it only for the HTML conversion; it never alters the PDF profile.
 The full stylesheet is bound through the declared HTML profile and artifact identity. Export

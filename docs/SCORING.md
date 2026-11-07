@@ -137,6 +137,18 @@ PDF artifacts and does not claim to validate another renderer's HTML metadata.
 
 HTML feature checks assert the fixture's explicit delivery contract. They are not a Word PDF-fidelity score.
 
+Version 1 `math-expression` requires the declared MathML operand tree, display mode, namespace,
+one formula and visible positive geometry. It replays independent browser facts and tolerates only
+single-child `mrow` grouping. PDF inventories separately require the radical notation (`√64`, or
+`3` and `√125`) as selectable words; no token normalization joins native LibreOffice's separate
+radical and radicand words. Those native outputs remain ineligible.
+
+Version 1 PDF `required-font-family` requires a named member of the case's declared `fonts`
+to occur in the PDF font inventory, using the existing family normalization. This complements
+the allowed-family gate for both candidates and references. It establishes family presence,
+not a particular glyph's font-file identity. In the equation fixtures, body-only Liberation Serif
+cannot satisfy the required DejaVu Serif math face; such a reference cannot be scored.
+
 Version 1 `marker-readable` requires the complete authored paragraph in order and its unique final token to be visible after user-accessible scrolling. Actual range rectangles, clipping ancestors and overflow modes come from a separate offline browser context with scripts disabled; the inspector recomputes pass/fail and verifies the HTML, observer and browser executable hashes. A distinct full `htmlProfile`, when declared, is bound separately from the PDF profile. These checks make no claim that a static PDF prints all scrollable comment text, or that every word has been compared as pixels.
 
 Version 1 `marker-computed-style` adds exact computed `font-size` checks for unique HTML markers.

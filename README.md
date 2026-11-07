@@ -434,3 +434,10 @@ page for the reproducer, on the next page for the control, and retain every line
 `core-v108` adds two original 3,000/6,000-entry ledgers for the font-observation budget in [Docxodus #1558](https://github.com/JSv4/Docxodus/issues/1558). The larger baseline export fails after layout; the fixed production export delivers all 6,000 entries across 112 pages with strict font checks and one explicit observation warning. The smaller control stays at 56 pages. All labels are checked on every page, with complete reports and labeled previews in [the diagnostic evidence](docs/results/font-observation-budget/README.md). Column failures remain open.
 
 `core-v110` adds eight original page-break/paragraph-line cases for [Docxodus #1570](https://github.com/JSv4/Docxodus/issues/1570), including three unchanged controls and explicit paragraph-mark flag settings. See the [native references and exact-production diagnostics](docs/results/page-break-paragraphs/README.md). The previous 776 inputs remain unchanged; no metric or tolerance changes.
+
+`core-v118` adds six plain OMML equation cases and two prose controls for [Docxodus #1554](https://github.com/JSv4/Docxodus/issues/1554).
+Exact MathML structure, selectable PDF notation, whole-formula page membership and required-font presence
+are independent source obligations. Strict public delivery improves from 2/8 to 8/8; native equation
+references remain ineligible because LibreOffice substitutes the requested math face. The 844 prior
+inputs remain unchanged. See [labeled screenshots and retained evidence](docs/results/plain-math/README.md);
+no Word typography or full-suite score is claimed.

@@ -41,7 +41,38 @@ export function collectReadableFacts(declarations) {
   for (let index = 0; index < declarations.length; index++) {
     const declaration = declarations[index];
     if (declaration.type === 'marker-attribute') continue;
-    if (!['marker-readable', 'marker-computed-style', 'named-checkbox', 'review-display'].includes(declaration.type)) throw new Error('Unknown browser HTML assertion');
+    if (!['marker-readable', 'marker-computed-style', 'named-checkbox', 'review-display', 'math-expression'].includes(declaration.type)) throw new Error('Unknown browser HTML assertion');
+    if (declaration.type === 'math-expression') {
+      const formulas = [...document.querySelectorAll('math')];
+      const facts = { index, marker: declaration.marker, matches: formulas.length };
+      if (formulas.length === 1) {
+        const math = formulas[0];
+        const tree = (element, depth = 0) => {
+          if (depth > 16 || element.namespaceURI !== 'http://www.w3.org/1998/Math/MathML') return null;
+          const tag = element.localName, children = [...element.children];
+          if (['mi', 'mn', 'mo'].includes(tag)) return children.length ? null : [tag, element.textContent];
+          if ([...element.childNodes].some(node => node.nodeType === 3 && node.textContent.trim())) return null;
+          if (!['math', 'mrow', 'mfrac', 'msqrt', 'mroot'].includes(tag)) return null;
+          const parts = children.map(child => tree(child, depth + 1));
+          if (parts.some(part => part === null)) return null;
+          return tag === 'math' || tag === 'mrow'
+            ? parts.length === 1 ? parts[0] : ['mrow', ...parts] : [tag, ...parts];
+        };
+        Object.assign(facts, { namespace: math.namespaceURI, display: math.getAttribute('display') ?? 'inline',
+          computedDisplay: getComputedStyle(math).display, tree: tree(math),
+          fractionBars: [...math.querySelectorAll('mfrac')].map(fraction => fraction.getAttribute('linethickness')),
+          rectangle: rectangle(math.getBoundingClientRect()), visible: true });
+        const elements = [math, ...math.querySelectorAll('*')];
+        for (let parent = math.parentElement; parent; parent = parent.parentElement) elements.push(parent);
+        for (const element of elements) {
+          const style = getComputedStyle(element);
+          if (element.matches('[hidden]') || style.display === 'none' || parseFloat(style.fontSize) === 0 ||
+              ['hidden', 'collapse'].includes(style.visibility) || Number(style.opacity) === 0) facts.visible = false;
+        }
+      }
+      observations.push(facts);
+      continue;
+    }
     if (declaration.type === 'named-checkbox') {
       const controls = [...document.querySelectorAll('[role="checkbox"],input[type="checkbox"]')]
         .filter(element => element.getAttribute('aria-label') === declaration.marker);

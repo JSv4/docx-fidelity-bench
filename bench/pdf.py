@@ -314,7 +314,9 @@ def correctness(case, reference, candidate):
         checks.append({'name': f'physical-geometry-page-{i+1}', 'passed': passed})
     for assertion in case['assertions']:
         try:
-            if assertion['type'] == 'colored-rule-widths':
+            if assertion['type'] == 'required-font-family':
+                passed = any(font_check(dict(candidate, fonts=[font]), [assertion['family']]) for font in candidate['fonts'])
+            elif assertion['type'] == 'colored-rule-widths':
                 from . import vector_rules
                 records = [r for r in candidate.get('coloredRuleWidths', []) if r['page'] == assertion['page'] and r['rgb'] == assertion['rgb']]
                 passed = len(records) == 1 and vector_rules.matches(assertion, records[0])
