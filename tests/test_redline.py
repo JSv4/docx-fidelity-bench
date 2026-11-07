@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v29')
-        self.assertEqual(len(registry['cases']), 236)
+        self.assertEqual(registry['suite']['id'], 'redline-v30')
+        self.assertEqual(len(registry['cases']), 239)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -157,6 +157,43 @@ class AuthoredCalibration(unittest.TestCase):
                                 rejected=revisions.resolve(package.story_parts(), 'reject'))
             for assertion in record['assertions']:
                 self.assertTrue(redline._assertion(assertion, package, resolved)['passed'], record['id'] + ' ' + assertion['type'])
+
+    def test_section_boundaries_reject_wrong_carrier_with_equal_semantic_views(self):
+        for shape in ('add', 'remove', 'stable-control'):
+            record = case('redline-retained-section-' + shape)
+            package = load(record['authored'])
+            for assertion in record['assertions']:
+                if assertion['type'] != 'section-boundaries':
+                    continue
+                scope = assertion['scope']
+                parts = revisions.resolve(package.story_parts(), 'accept' if scope == 'accepted' else 'reject')
+                self.assertTrue(redline._assertion(assertion, package, {scope: parts})['passed'])
+                if not assertion['afterParagraphs']:
+                    continue
+                before = revisions.view(package, parts)
+                body = parts[package.main].find(W + 'body')
+                first, second = body.findall(W + 'p')
+                props = first.find(W + 'pPr')
+                boundary = props.find(W + 'sectPr')
+                props.remove(boundary)
+                new_props = second.find(W + 'pPr')
+                if new_props is None:
+                    new_props = ET.Element(W + 'pPr')
+                    second.insert(0, new_props)
+                new_props.append(boundary)
+                # A final empty paragraph leaves both sections nonempty but is normalized out of the view.
+                body.insert(len(body) - 1, ET.Element(W + 'p'))
+                self.assertEqual(before, revisions.view(package, parts))
+                self.assertFalse(redline._assertion(assertion, package, {scope: parts})['passed'])
+
+    def test_section_boundary_declarations_reject_ambiguous_indices(self):
+        original = common.read_json(redline.MANIFEST)
+        for indices in (None, [True], [-1], [0, 0], [1, 0], ['0'], [{}]):
+            registry = copy.deepcopy(original)
+            registry['cases'][-1]['assertions'].append({
+                'type': 'section-boundaries', 'version': 1, 'scope': 'accepted', 'afterParagraphs': indices})
+            with self.subTest(indices=indices), self.assertRaises(ValueError):
+                redline.validate_registry(registry)
 
     def test_section_stories_reject_phantom_deletion_and_missing_target(self):
         for story in ('header', 'footer'):
