@@ -1774,6 +1774,55 @@ def authored_table_width_cases(add):
 
 
 
+def automatic_body_spacing_cases(add, cases):
+    """Original Birch boundaries separate automatic gaps from the exact line box."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+        '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="22"/>'
+        '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+        '<w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/>'
+        '</w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" '
+        'w:styleId="Birch"><w:name w:val="Birch"/></w:style></w:styles>')
+    numbering = (f'<w:numbering xmlns:w="{W}"><w:abstractNum w:abstractNumId="7">'
+        '<w:multiLevelType w:val="singleLevel"/><w:lvl w:ilvl="0"><w:start w:val="1"/>'
+        '<w:numFmt w:val="decimal"/><w:suff w:val="space"/><w:lvlText w:val="%1."/>'
+        '<w:lvlJc w:val="left"/><w:pPr><w:ind w:left="720" w:hanging="360"/></w:pPr>'
+        '</w:lvl></w:abstractNum>' + ''.join(f'<w:num w:numId="{n}"><w:abstractNumId w:val="7"/>'
+        + ('<w:lvlOverride w:ilvl="0"><w:startOverride w:val="1"/></w:lvlOverride>' if n == 8 else '')
+        + '</w:num>' for n in (3, 8)) + '</w:numbering>')
+    paper = ('<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1200" '
+        'w:right="1200" w:bottom="1200" w:left="1200"/></w:sectPr>')
+    for kind, ids, gap in [
+        ('plain-explicit', (0, 0), 14), ('plain-implicit', (0, 0), 14),
+        ('enter-list', (0, 3), 14), ('leave-list', (3, 0), 14),
+        ('same-list', (3, 3), 0), ('separate-lists', (3, 8), 14),
+        ('disabled-control', (3, 3), 5), ('neighbor-control', (3, 3), 30),
+    ]:
+        enabled = kind != 'disabled-control'
+        edge = 14 if enabled else 5
+        labels = ['BirchOpening', 'BirchFirst', 'BirchSecond', 'BirchClosing']
+        content = para(labels[0])
+        counters, rendered_numbers = Counter(), []
+        for index, (label, number) in enumerate(zip(labels[1:3], ids)):
+            props = ''
+            if number:
+                props += f'<w:numPr><w:ilvl w:val="0"/><w:numId w:val="{number}"/></w:numPr>'
+                counters[number] += 1
+                rendered_numbers.append(str(counters[number]) + '.')
+            values = '' if kind == 'plain-implicit' else f' w:before="{600 if kind == "neighbor-control" and index == 1 else 100}" w:after="100"'
+            before = enabled and not (kind == 'neighbor-control' and index == 1)
+            props += f'<w:spacing{values} w:beforeAutospacing="{int(before)}" w:afterAutospacing="{int(enabled)}"/>'
+            content += para(label, props)
+        content += para(labels[3])
+        positions = [60, 76 + edge, 92 + edge + gap, 108 + 2 * edge + gap]
+        tokens = labels + rendered_numbers
+        add('automatic-body-' + kind, 'paragraphs', 'Birch automatic body spacing: ' + kind + ' (Docxodus #1553)',
+            tokens, content, sect=paper, styles_xml=styles, numbering_xml=numbering,
+            assertions=[dict(type='marker-region', marker=label, occurrence=1, page=1, rect=[60, y, 400, y + 16])
+                        for label, y in zip(labels, positions)])
+        cases[-1]['pdfCompanion'] = dict(profile=dict(review='final', comments='hidden'),
+            pageSizePt=[612, 792], requiredTokens=dict(Counter(tokens)), exactInventory=True)
+
+
 def contextual_own_spacing_cases(add, cases):
     """Original Oak paragraphs isolate each paragraph's own contextual spacing."""
     paper = ('<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1200" '
@@ -5312,9 +5361,10 @@ def generate():
     markup_paper_clip_cases(add, cases)
     resizing_offpaper_cases(add, cases)
     contextual_own_spacing_cases(add, cases)
+    automatic_body_spacing_cases(add, cases)
     custom_path_cases(add)
     plain_math_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v120', 'version': 120, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v121', 'version': 121, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
