@@ -26,11 +26,11 @@ from .common import ROOT, contained, digest, execute, identity, read_json, write
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
 OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'replace-text': 1, 'revision-ownership': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'section-stories': {1}, 'section-boundaries': {1}}
+ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'section-stories': {1}, 'section-boundaries': {1}}
 RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
 SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}}
-CONTRACT = {'version': 19, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+CONTRACT = {'version': 20, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -42,7 +42,7 @@ CONTRACT = {'version': 19, 'view': revisions.VIEW_VERSION, 'engines': ['bench-ma
             'paragraphRewrite': 'public untracked whole-paragraph rewrites must preserve exact declared native content-control subtrees as well as independent semantic views',
             'columnReview': 'v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry',
             'revisionOwnership': 'account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips',
-            'inlineTrees': 'declared math and drawing subtrees retain structure, properties, textbox content and image bytes in both independently resolved views',
+            'inlineTrees': 'declared math and drawing subtrees retain structure, properties, textbox content and image bytes in both independently resolved views; v2 checks referenced running stories with part-local image relationships',
             'sectionBoundaries': 'declared inline section breaks occur after the exact zero-based body paragraph indices in each independently resolved endpoint',
             'revisionText': 'declared move sources and ordinary deletions must retain their appropriate text carrier',
             'hyperlinkTargets': 'declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written'}
@@ -73,7 +73,7 @@ def valid_control_trees(values):
 INLINE_TREES = {'oMath': revisions.m('oMath'), 'drawing': revisions.w('drawing'), 'pict': revisions.w('pict')}
 
 
-def inline_tree(element, images):
+def inline_tree(element, images, version=1, preserve_space=False):
     # Compare native structure and content. Only remappable drawing ids and engine addressing are ignored.
     attributes = {k: v for k, v in element.attrib.items()
                   if not k.startswith('{http://powertools.codeplex.com/2011}')
@@ -81,8 +81,19 @@ def inline_tree(element, images):
     embed = '{http://schemas.openxmlformats.org/officeDocument/2006/relationships}embed'
     if embed in attributes:
         attributes[embed] = images.get(attributes[embed], 'unresolved:' + attributes[embed])
+    if version == 2 and element.tag == '{urn:schemas-microsoft-com:vml}imagedata':
+        image_id = '{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id'
+        if image_id in attributes:
+            attributes[image_id] = images.get(attributes[image_id], 'unresolved:' + attributes[image_id])
     text = element.text if element.text and (element.text.strip() or not len(element)) else None
-    children = [inline_tree(e, images) for e in element]
+    if version == 2:
+        space = '{http://www.w3.org/XML/1998/namespace}space'
+        preserve_space = attributes.get(space, 'preserve' if preserve_space else 'default') == 'preserve'
+        if element.tag in {revisions.w('t'), revisions.w('delText')}:
+            if text is not None and not preserve_space:
+                text = text.strip(' \t\r\n')
+            attributes.pop(space, None)
+    children = [inline_tree(e, images, version, preserve_space) for e in element]
     children = [child for child in children if not (child[0] in {revisions.w('rPr'), revisions.m('rPr')}
                 and not child[1] and child[2] is None and not child[3])]
     def text_run(node):
@@ -106,6 +117,8 @@ def inline_tree(element, images):
 
 
 def valid_inline_trees(assertion):
+    if assertion.get('version') == 2 and assertion.get('story') != 'headers':
+        return False
     if not isinstance(assertion.get('name'), str) or assertion['name'] not in INLINE_TREES:
         return False
     trees, images = assertion.get('trees'), assertion.get('images')
@@ -634,11 +647,22 @@ def _assertion(assertion, package, resolved):
         check.update(passed=not findings, findings=findings)
     elif kind == 'inline-trees':
         root = parts[package.main] if parts is not None else package.xml(package.main)
-        images = {identifier: hashlib.sha256(package.members[target]).hexdigest()
-                  for identifier, (relationship_type, target) in package.main_rels.items()
-                  if relationship_type == 'image' and target in package.members}
-        observed = [inline_tree(e, images) for e in root.find(revisions.w('body')).iter(INLINE_TREES[assertion['name']])]
-        expected = [inline_tree(ET.fromstring(xml), assertion['images']) for xml in assertion['trees']]
+        roots = [(package.main, root.find(revisions.w('body')))]
+        if assertion['version'] == 2:
+            roots = []
+            for reference in root.iter():
+                if reference.tag not in {revisions.w('headerReference'), revisions.w('footerReference')}:
+                    continue
+                target = package.main_rels.get(reference.get('{' + revisions.REL[:-1] + '}id'), (None, None))[1]
+                if target in package.members and not any(name == target for name, _ in roots):
+                    roots.append((target, parts[target] if parts is not None else package.xml(target)))
+        observed = []
+        for part, tree in roots:
+            images = {identifier: hashlib.sha256(package.members[target]).hexdigest()
+                      for identifier, (relationship_type, target) in package.relationships(part).items()
+                      if relationship_type == 'image' and target in package.members}
+            observed.extend(inline_tree(e, images, version=assertion['version']) for e in tree.iter(INLINE_TREES[assertion['name']]))
+        expected = [inline_tree(ET.fromstring(xml), assertion['images'], version=assertion['version']) for xml in assertion['trees']]
         check.update(passed=observed == expected, observed=observed)
     elif kind == 'content-controls':
         root = parts[package.main] if parts is not None else package.xml(package.main)
@@ -806,6 +830,9 @@ def _libreoffice_checks(case, folder, env, output, authored, expected):
         for mode, key in (('accept', 'accepted'), ('reject', 'rejected')):
             pairs.append((key, item('expected-' + key, expected[key], 'load'), item('authored-' + key, authored, mode),
                           item('candidate-' + key, output, mode), mode))
+    # Calibrate every fixture before candidate loading can crash the shared UNO bridge.
+    items.sort(key=lambda entry: entry['key'].startswith('candidate-'))
+    names = {entry['key']: i for i, entry in enumerate(items)}
     results = libreoffice_batch(env, lo, items)
     authored_revisions = revisions.revision_count(revisions.Package(str(authored)).story_parts())
     checks = []
