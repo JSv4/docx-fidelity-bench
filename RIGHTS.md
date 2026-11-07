@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The eight resizing off-paper cases for Docxodus #1558 contain original Fir labels and
+literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template,
+external document, image or font program is imported. Review sheets show only these
+authored inputs and separately provisioned renderers.
+
 The eight plain-equation cases for Docxodus #1554 contain original Maple text and literal
 OMML authored in `bench/fixtures.py`. No renderer fixture, helper, template, document,
 image or font program is imported. DejaVu Serif and Liberation Serif are separately
