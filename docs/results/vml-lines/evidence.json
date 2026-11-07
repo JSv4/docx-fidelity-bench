@@ -1,0 +1,1818 @@
+{
+  "scope": "Unscored strict-font public export diagnostics; no Word or full-suite parity claim",
+  "manifestSha256": "b7d89bee520cdd98cf009a468d08e4d82788898d67d2f3b54b8c7e8a66686470",
+  "builds": {
+    "baseline": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "bd48a63923accd6f2ac582ce65c2f7e5e3613c29",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "5c4c4b4d5075dffb4e06b8687c75a41df96473d27aa3158d36f991c49798b50f",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+      "schema": 1,
+      "tree": "449330c23b59c51345ea5f6986025272aed4628b"
+    },
+    "candidate": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-vml/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-vml/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-vml/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-vml/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-vml/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-vml/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-vml/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-vml/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-vml/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "643357cda97027b16260b3ba20ff85ef59eb7406",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "cfd1b91cc953f1f8a68a35bac90a803225c73372382e0f7a8617c3e5cbcc7be5",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+      "schema": 1,
+      "tree": "2b07bc8c947f7a85146025e02b4469b1d64d5150"
+    }
+  },
+  "rendererAssets": {
+    "baseline": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 618308,
+          "sha256": "20081901d6c081946d1b3beaf4d17663af607334e990e585796fb89bb09ce762"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 169642,
+          "sha256": "7fc9001be8f9145c443ff4aa6c854b0acb12aed7cb0330f7e2777d2110ce5926"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46484,
+          "sha256": "a604dbff16d3be0f0d24cf48753404b42fe25f70fbd1393dde4934871446a420"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5443353,
+          "sha256": "11566c414b58c7e725d911cf796f3404f65769e37962e1958486872debda0410"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "dd047e88a27a04b76b6506c5a70662b2795493038fa6e527fb56bcb9f38ad28b"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "5e08586a10f0b0c9e4354438734b392459cd64282ababf7029a48246f6da6d47"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1674517,
+          "sha256": "2ebf53d9fe8ce4f58c19af1ce4995f1b7c950330ef0a20180269c6f9c2371aac"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "dd3aacaff7471d3b85a6b9a497f2e971b8af9ecceea79ad89cdbf41662f5e9db"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10547844,
+          "sha256": "2421564bd1400fc53a2d65e2d2d155c603eb751498a17aaca0786dc0681804fc"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    },
+    "candidate": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 618308,
+          "sha256": "20081901d6c081946d1b3beaf4d17663af607334e990e585796fb89bb09ce762"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 169642,
+          "sha256": "7fc9001be8f9145c443ff4aa6c854b0acb12aed7cb0330f7e2777d2110ce5926"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46484,
+          "sha256": "a604dbff16d3be0f0d24cf48753404b42fe25f70fbd1393dde4934871446a420"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5445913,
+          "sha256": "01a2819b87ffdf1d7ed294df0f3364a3e534d720f46ac78d5faa5e039de5327f"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "704b96b7cffc7b589e23c89bd3b35860904ed8f0a69dd0ddd465db7a84bcb1fc"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "5e08586a10f0b0c9e4354438734b392459cd64282ababf7029a48246f6da6d47"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1674517,
+          "sha256": "2ebf53d9fe8ce4f58c19af1ce4995f1b7c950330ef0a20180269c6f9c2371aac"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "57e3f9c6b4277c8662ca30b1379f9d269cb7f01b3dbdd1fbc1b7e4bfdbc0d8aa"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10547948,
+          "sha256": "ade497ffc1d484908545c5c67a065cf5b2b36d2b80f8cccc44108edfec8eb218"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    }
+  },
+  "captures": {
+    "baseline": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "bd48a63923accd6f2ac582ce65c2f7e5e3613c29",
+      "sourceTree": "449330c23b59c51345ea5f6986025272aed4628b",
+      "buildIdentitySha256": "87a45fbaecc6c09afe8869f1eaa66dba78cab02279d7f0a175c37f8fc58a6ef5",
+      "manifestSha256": "b7d89bee520cdd98cf009a468d08e4d82788898d67d2f3b54b8c7e8a66686470",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "vml-line-horizontal",
+          "inputSha256": "29d5353f05641b8ff07736c48c20f9cff227854441258e2ce1b630dd4f25961c",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "27f65e641ade525f99c0c7e3a6b5c7db94375a4714a4801cd89d76ed54414f97",
+          "renderReportSha256": "74a6645b694caa3c49c1c1abeaa49a5b9bc561404bf5755448173053bfecc31c"
+        },
+        {
+          "id": "vml-line-horizontal-alone",
+          "inputSha256": "46dc089aba99d9a20ed5aac00211b2b671e8ea276103510f2b1a635c0d924581",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "3fda182e46648fb46f75d535f2bdd13dc5ee3159aa89cb03646d5ccd70667fcc",
+          "renderReportSha256": "523776167e1aae19b45f5a51df2f904c91e8e8641502684a47027ce428b8ed1c"
+        },
+        {
+          "id": "vml-line-vertical",
+          "inputSha256": "8ca7c4f7e3ee142b93cf7d6ec9f93b0ea27e7fa5b10ecef839e8a5063fc51675",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "01063bfa3fbb93d0bdbbe0f9c3e7f61fd672892620e8917487a5943f23d31875",
+          "renderReportSha256": "2ebdc804818333adf87d6fedc60bd84873e1c0938857fd0f935c3732d3b27699"
+        },
+        {
+          "id": "vml-line-vertical-alone",
+          "inputSha256": "fa28dd4d6b639ee920f344b3b5e6e462592d79bae1d8ea91b9c596dc82690037",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "01f6268b8de41e852da186001c00a14e008bb91881a50d55087b326bbfb33608",
+          "renderReportSha256": "d6f38378a900bb92d3f5d11366cd1edf05a07546c60fcd4e5dba554f382beac9"
+        },
+        {
+          "id": "vml-line-diagonal",
+          "inputSha256": "de0d45cdea2dc36929e135ee53b7862da512913cbff8ba58c5c9a8bb99b155d5",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "58f86fb83b0f79b805c3a9e2fa4879df9ffa941700e7211eac35e8aeebd00c80",
+          "renderReportSha256": "8e186c039fa5fb58dcf9f0eeaca95152314d5f6dc0cf9d15f2f67e5a75c5ebe8"
+        },
+        {
+          "id": "vml-line-positive-origin",
+          "inputSha256": "7d53dbdb917f4464c00e615dd3e3ae89be482e570fe623d62c3f6107d298676e",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "01124e98c09cee350420b2e12bccce6fad79aae0bf47d12032de270d991c8c1d",
+          "renderReportSha256": "5e5998801deac60471aaa899d58cf1bba90a90f3f9d955fdd79ecdaa5007d16d"
+        },
+        {
+          "id": "vml-line-unitless",
+          "inputSha256": "d839ef89ce33b17e84651aaadaaaba5a053cfb1ed6200f3ce6b73dc94fddb67c",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "feb55eb70d1729cea90701b974b142cc3834637734abf81e0e7980c2dd0ce338",
+          "renderReportSha256": "698b05d54febc96a1eb72b8253b8484bdb41fc6736add8dd5b3d27e50ee95620"
+        },
+        {
+          "id": "vml-line-hidden-stroke",
+          "inputSha256": "97b3fe99492681e7f90667fb33073a9e7e5233d9631e2868effece710e706ee2",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "88ee9e539f301d339972637ef73bb8db6fef32d53f76b89a86dc00898e762b0b",
+          "renderReportSha256": "0f2913d75bd78c6a9e90af6769943f74941a30be1cc4d54e8e31b75c61ea9e42"
+        },
+        {
+          "id": "vml-line-text-control",
+          "inputSha256": "c561466fa79b885edec083ccc96eb856e7abe9f53a689ac586dc11b7358a98e7",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "ad9955c18e0bad227a1297266a931b292bba413eb20425a88a30ceced31c9550",
+          "renderReportSha256": "47c4b895a9ad07362475a4c995a61a40fd92e640c5426784215a3cc964a18dc5"
+        }
+      ]
+    },
+    "candidate": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "643357cda97027b16260b3ba20ff85ef59eb7406",
+      "sourceTree": "2b07bc8c947f7a85146025e02b4469b1d64d5150",
+      "buildIdentitySha256": "fb2f34057ee8e9a5d38aaa8a151dc0687fb27ffafe589c280ab7eb61d0ec7a65",
+      "manifestSha256": "b7d89bee520cdd98cf009a468d08e4d82788898d67d2f3b54b8c7e8a66686470",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "vml-line-horizontal",
+          "inputSha256": "29d5353f05641b8ff07736c48c20f9cff227854441258e2ce1b630dd4f25961c",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "a001220ccc40e2660cee2f644cfaaf5db9008143fcbbdaf995635f40068c0e2f",
+          "renderReportSha256": "219252a3c28e0e5d09bbc87b65477ed53b9e435d342876dd02238db3387d4f95"
+        },
+        {
+          "id": "vml-line-horizontal-alone",
+          "inputSha256": "46dc089aba99d9a20ed5aac00211b2b671e8ea276103510f2b1a635c0d924581",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "1571db19751997389fa5729aa9825cc8633fdf8eac3665c7e076ca68aeb2bc6c",
+          "renderReportSha256": "06fc051cc3e42b602b93ab0f8c6331a21708e32f7e4c1e78541fb5f6788c0458"
+        },
+        {
+          "id": "vml-line-vertical",
+          "inputSha256": "8ca7c4f7e3ee142b93cf7d6ec9f93b0ea27e7fa5b10ecef839e8a5063fc51675",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "836b971275505f884339f5c2a1c6e66ce3d8853f380cb05b44191df4d28b8ad6",
+          "renderReportSha256": "35d04a0eab84cabc19a2306e5c913199a67976c111b17647c20a5f71dfc52290"
+        },
+        {
+          "id": "vml-line-vertical-alone",
+          "inputSha256": "fa28dd4d6b639ee920f344b3b5e6e462592d79bae1d8ea91b9c596dc82690037",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "481cc55153d013d5087b9398e07a3d8b8c7b152541406a137fc12bf890022ebd",
+          "renderReportSha256": "8c61536a054e2ab1acf1cbf6648606d02179f259630b8b4d723a1a74b0127303"
+        },
+        {
+          "id": "vml-line-diagonal",
+          "inputSha256": "de0d45cdea2dc36929e135ee53b7862da512913cbff8ba58c5c9a8bb99b155d5",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "c56cf75488067f52469ca586e8fa923b3f2d934fd8417e82d018c73ce3fd0374",
+          "renderReportSha256": "d0f740774dc78519acc828b4c3b98e180be9403840415e2d6fa8e2e7aecffc6a"
+        },
+        {
+          "id": "vml-line-positive-origin",
+          "inputSha256": "7d53dbdb917f4464c00e615dd3e3ae89be482e570fe623d62c3f6107d298676e",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "f82f0f36966594f7cf2fb7acf9d477742815b7e36088bc8d13446ad0ede88711",
+          "renderReportSha256": "bf700ea966c766b7dd411fadc49f53cd04ea5a65c832e2da7e358d2a5adb02ea"
+        },
+        {
+          "id": "vml-line-unitless",
+          "inputSha256": "d839ef89ce33b17e84651aaadaaaba5a053cfb1ed6200f3ce6b73dc94fddb67c",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "0b37176cea47d17423ad8480826d3a8a12e6996ffab79036ff70874ced850302",
+          "renderReportSha256": "9420443b002b87762e52dcf1434ba578809ca407ecdd346c631bb79c99ab4113"
+        },
+        {
+          "id": "vml-line-hidden-stroke",
+          "inputSha256": "97b3fe99492681e7f90667fb33073a9e7e5233d9631e2868effece710e706ee2",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "eba9d522a8c8027d76b4e582a87011a995f6300a4709a3f6cce3b887d0b03fa8",
+          "renderReportSha256": "fa753f654cad78eb82587b3c1d2d8e91e41e08a3b9637dee1c97fc3442aa66e3"
+        },
+        {
+          "id": "vml-line-text-control",
+          "inputSha256": "c561466fa79b885edec083ccc96eb856e7abe9f53a689ac586dc11b7358a98e7",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "c15610f17b0655f07d89aeb351f5146c5bade19c0b7504a948edd76a7977cbd9",
+          "renderReportSha256": "e95147a7ac3fb6ef78bdd70162f06f232899b31e73204291c7c12de06599c639"
+        }
+      ]
+    }
+  },
+  "referenceBundleSha256": "63695a5e467716875320f3343ad9d289e42129ac688a6b739a0b67c77a55345d",
+  "referenceBundle": {
+    "file": "reference-bundle.json.gz",
+    "sha256": "686fcf8fac99e8111b8486badf29ea83be400b9b14ec00ca325dda9d89380676",
+    "jsonSha256": "63695a5e467716875320f3343ad9d289e42129ac688a6b739a0b67c77a55345d"
+  },
+  "referenceEnvironment": {
+    "fonts": {
+      "LiberationSerif-Bold.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+      },
+      "LiberationSerif-BoldItalic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+      },
+      "LiberationSerif-Italic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+      },
+      "LiberationSerif-Regular.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+      }
+    },
+    "tools": {
+      "pdffonts": {
+        "sha256": "de0a6d649710c2ebc226656b08c70814019a93f58889f79bf1dac726a131beda",
+        "version": "pdffonts version 25.03.0"
+      },
+      "pdftocairo": {
+        "sha256": "6f56c7c8c5b015354ebed053d4b52e14b43611c9c86236562bfd112827108dc5",
+        "version": "pdftocairo version 25.03.0"
+      },
+      "pdftoppm": {
+        "sha256": "6c315e59db2a0829ecdfb6c791ad3f56bc9bd508266d20adc22238df447a74a3",
+        "version": "pdftoppm version 25.03.0"
+      },
+      "pdftotext": {
+        "sha256": "451784e28a4593637573e534d9be4c4487a3cccffae22a71e93162faa84de23c",
+        "version": "pdftotext version 25.03.0"
+      },
+      "qpdf": {
+        "sha256": "0d0462ea848601a652b666e83a07a095bb0c4d69d831beb6f94ea8e6e008f34c",
+        "version": "qpdf version 12.2.0"
+      }
+    }
+  },
+  "schema": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "documents": {
+      "fixtures/vml-line-diagonal.docx": [],
+      "fixtures/vml-line-hidden-stroke.docx": [],
+      "fixtures/vml-line-horizontal-alone.docx": [],
+      "fixtures/vml-line-horizontal.docx": [],
+      "fixtures/vml-line-positive-origin.docx": [],
+      "fixtures/vml-line-text-control.docx": [],
+      "fixtures/vml-line-unitless.docx": [],
+      "fixtures/vml-line-vertical-alone.docx": [],
+      "fixtures/vml-line-vertical.docx": []
+    }
+  },
+  "cases": [
+    {
+      "id": "vml-line-horizontal",
+      "inputSha256": "29d5353f05641b8ff07736c48c20f9cff227854441258e2ce1b630dd4f25961c",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:body:484390458ed2797e19883817c573b88f",
+              "severity": "warning"
+            }
+          ],
+          "report": {
+            "file": "vml-line-horizontal-baseline-report.json.gz",
+            "sha256": "a9e8cfa0023463d67c4bb61ba4baaf917b08743d5215ba8a2d3175c21f3fba57",
+            "jsonSha256": "74a6645b694caa3c49c1c1abeaa49a5b9bc561404bf5755448173053bfecc31c"
+          },
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "assertion-marker-reference-position",
+            "assertion-marker-reference-position",
+            "assertion-color-reference-geometry",
+            "assertion-colored-rule-widths"
+          ],
+          "pdfSha256": "27f65e641ade525f99c0c7e3a6b5c7db94375a4714a4801cd89d76ed54414f97",
+          "pages": 1,
+          "checkedLabels": 5,
+          "inspection": {
+            "file": "vml-line-horizontal-baseline-inspection.json.gz",
+            "sha256": "14c91b1c5a2a3561ed858d47344efa99b812e522b64b052223e1153533897130",
+            "jsonSha256": "40eb013435c84895cd9ce72eae24312b022ca98c15b7cef4e7ab062b8d14f311"
+          },
+          "pageRasterSha256": [
+            "af69a3544a1c2541517782e7b5378bd25b2d4649b2205a77a75978db8a5e7db8"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "mandatoryFailures": [],
+          "pdfSha256": "1d7618e20b859dee32a0b499da66a4df90622d1c0d18bea5d86467c4a7dafc02",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "vml-line-horizontal-reference-inspection.json.gz",
+            "sha256": "f5710381479917b1fcfafb2614dee442abafb62cced30c16de5aab9a6285e8c1",
+            "jsonSha256": "644567f5b4706415a3214ce4b824335c6c99bfe9db228ab3f616580c21080d9a"
+          },
+          "pageRasterSha256": [
+            "cdc7d7b4a16fd2f6e67015871ed64a92c635daff36bd981653a17317ed51f049"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "warnings": [],
+          "report": {
+            "file": "vml-line-horizontal-candidate-report.json.gz",
+            "sha256": "cf379b619d65346b136c5c59e955fd8e6469ea4bf35822fea3831e942a9839f6",
+            "jsonSha256": "219252a3c28e0e5d09bbc87b65477ed53b9e435d342876dd02238db3387d4f95"
+          },
+          "mandatoryFailures": [],
+          "pdfSha256": "a001220ccc40e2660cee2f644cfaaf5db9008143fcbbdaf995635f40068c0e2f",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "vml-line-horizontal-candidate-inspection.json.gz",
+            "sha256": "2ac81a4d1debaf3d177162c3b64ff1edf83a8e01a19c4e02ced180a428477b84",
+            "jsonSha256": "5a0436fedecdf2cf5de5998b943fd412d933a4a4a8ff5884c4396fb7db49c25a"
+          },
+          "pageRasterSha256": [
+            "f218d81fe74647a52eebbbc84282b965d9e550a64e1cac53629d00c5c0ef4719"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "vml-line-horizontal.png",
+        "sha256": "c0ce8e2b97a4a26d3daf3696b45a5e38b9800810a3c1d436fb7a3646a41c9dc5"
+      }
+    },
+    {
+      "id": "vml-line-horizontal-alone",
+      "inputSha256": "46dc089aba99d9a20ed5aac00211b2b671e8ea276103510f2b1a635c0d924581",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:body:0c54ca9c424e60ac1e1cdb738fb79c41",
+              "severity": "warning"
+            }
+          ],
+          "report": {
+            "file": "vml-line-horizontal-alone-baseline-report.json.gz",
+            "sha256": "7e2e0792b8cd8138cd966b10da5d15d636cfce7f8dd4b06a3eb7f9265f8bf9fc",
+            "jsonSha256": "523776167e1aae19b45f5a51df2f904c91e8e8641502684a47027ce428b8ed1c"
+          },
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "assertion-marker-reference-position",
+            "assertion-color-reference-geometry",
+            "assertion-colored-rule-widths"
+          ],
+          "pdfSha256": "3fda182e46648fb46f75d535f2bdd13dc5ee3159aa89cb03646d5ccd70667fcc",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "vml-line-horizontal-alone-baseline-inspection.json.gz",
+            "sha256": "837415f5b72662283d7fafcf5593a07954f631b573d9d85d0c319b5eb0438f5a",
+            "jsonSha256": "786c740d3cfe6ac6536c81cd63a9d7dbf56357ecf5cd8ebb69e42fcf9099c45e"
+          },
+          "pageRasterSha256": [
+            "5e600b37160dd1cf43d13e505b6fee4b794a310fc6d9bde8cca44d575bce7c81"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "mandatoryFailures": [],
+          "pdfSha256": "2309beca633ca7b02b04566c5c62e7f374c49a6e6fab456fc7d1ff09443f14bc",
+          "pages": 1,
+          "checkedLabels": 2,
+          "inspection": {
+            "file": "vml-line-horizontal-alone-reference-inspection.json.gz",
+            "sha256": "d6fac89133f14158e56df8f7fc54f62fad3de60dc904ad849669cd400875afac",
+            "jsonSha256": "e6d27e7418e151aeeef6f8142f6756d2b40173e715bcad65f0ca07f2763b28ae"
+          },
+          "pageRasterSha256": [
+            "fde97443ac8284849c85f08435b99ca83542283b2b3aea160bfd6756e525a592"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "warnings": [],
+          "report": {
+            "file": "vml-line-horizontal-alone-candidate-report.json.gz",
+            "sha256": "cb2131f17c09155782b435ddd164498609d75916c756a09e28d69f8f196940f1",
+            "jsonSha256": "06fc051cc3e42b602b93ab0f8c6331a21708e32f7e4c1e78541fb5f6788c0458"
+          },
+          "mandatoryFailures": [],
+          "pdfSha256": "1571db19751997389fa5729aa9825cc8633fdf8eac3665c7e076ca68aeb2bc6c",
+          "pages": 1,
+          "checkedLabels": 2,
+          "inspection": {
+            "file": "vml-line-horizontal-alone-candidate-inspection.json.gz",
+            "sha256": "e4674925a6134c448f37a6034934a91bb5785d979a0af3c6e7dbe9577ad66c16",
+            "jsonSha256": "7cba3c7c056e8d1cae9e8077ce77ad0b25e6f449f37694670506c3ce1f69bf04"
+          },
+          "pageRasterSha256": [
+            "e2dc826e180ce03bc0f1f880fb85987a111b42124f3466c5b16f28bdfd2730b2"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "vml-line-horizontal-alone.png",
+        "sha256": "934124a4dee092e78d2e5bda417f225a51dd8ddb4644091fa7ebb361e8207084"
+      }
+    },
+    {
+      "id": "vml-line-vertical",
+      "inputSha256": "8ca7c4f7e3ee142b93cf7d6ec9f93b0ea27e7fa5b10ecef839e8a5063fc51675",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:body:484390458ed2797e19883817c573b88f",
+              "severity": "warning"
+            }
+          ],
+          "report": {
+            "file": "vml-line-vertical-baseline-report.json.gz",
+            "sha256": "eab1946fd1a5297d424b04c7a4538197a06eb0327740c4032b3c275aa0b049b8",
+            "jsonSha256": "2ebdc804818333adf87d6fedc60bd84873e1c0938857fd0f935c3732d3b27699"
+          },
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "assertion-marker-reference-position",
+            "assertion-marker-reference-position",
+            "assertion-marker-reference-position",
+            "assertion-color-reference-geometry",
+            "assertion-colored-rule-widths"
+          ],
+          "pdfSha256": "01063bfa3fbb93d0bdbbe0f9c3e7f61fd672892620e8917487a5943f23d31875",
+          "pages": 1,
+          "checkedLabels": 5,
+          "inspection": {
+            "file": "vml-line-vertical-baseline-inspection.json.gz",
+            "sha256": "14c91b1c5a2a3561ed858d47344efa99b812e522b64b052223e1153533897130",
+            "jsonSha256": "40eb013435c84895cd9ce72eae24312b022ca98c15b7cef4e7ab062b8d14f311"
+          },
+          "pageRasterSha256": [
+            "af69a3544a1c2541517782e7b5378bd25b2d4649b2205a77a75978db8a5e7db8"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "mandatoryFailures": [],
+          "pdfSha256": "21e6163c25ae6ff9d615fb7f42d1767bf2a85d57521edcec58ec480754567dc0",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "vml-line-vertical-reference-inspection.json.gz",
+            "sha256": "250f6e80b142c26d975d8fe4b09f2ab3df2263acec5c94348ef8573464b4aa74",
+            "jsonSha256": "189469de049de93f020267a7b503f2506135fe13c13217a0b1b269b2ac47dc25"
+          },
+          "pageRasterSha256": [
+            "edcf68a8bfbc781bb36511adb117b88e81e08437110d0be009d867e7ec18c05c"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "warnings": [],
+          "report": {
+            "file": "vml-line-vertical-candidate-report.json.gz",
+            "sha256": "ee08121126a8c84c40f5482b41dcb39d1e59946af64fda087e7917339fe5ac03",
+            "jsonSha256": "35d04a0eab84cabc19a2306e5c913199a67976c111b17647c20a5f71dfc52290"
+          },
+          "mandatoryFailures": [],
+          "pdfSha256": "836b971275505f884339f5c2a1c6e66ce3d8853f380cb05b44191df4d28b8ad6",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "vml-line-vertical-candidate-inspection.json.gz",
+            "sha256": "1d82fd272b23ad008c4391b69003a23b984e4d1e7649080c80eb8fb8f7dac513",
+            "jsonSha256": "8dd7c87add5c13a2da61e5a634b8abc3c4e42c7d7923e6aea2502ca59f6ed68d"
+          },
+          "pageRasterSha256": [
+            "b5200a7cf1e213b059bd463aed3592c7ba2689aa429003d99f2614fbf09a99a8"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "vml-line-vertical.png",
+        "sha256": "ea417491b0222d723ef8d9d1ad4b653a4ea6e66a9c887f7f84b76c33c21e6e59"
+      }
+    },
+    {
+      "id": "vml-line-vertical-alone",
+      "inputSha256": "fa28dd4d6b639ee920f344b3b5e6e462592d79bae1d8ea91b9c596dc82690037",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:body:0c54ca9c424e60ac1e1cdb738fb79c41",
+              "severity": "warning"
+            }
+          ],
+          "report": {
+            "file": "vml-line-vertical-alone-baseline-report.json.gz",
+            "sha256": "16679a2d63a2603b5046194b0ee6cff1b05e1f2458c49d26d6cbe9eeb2a4e461",
+            "jsonSha256": "d6f38378a900bb92d3f5d11366cd1edf05a07546c60fcd4e5dba554f382beac9"
+          },
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "assertion-marker-reference-position",
+            "assertion-color-reference-geometry",
+            "assertion-colored-rule-widths"
+          ],
+          "pdfSha256": "01f6268b8de41e852da186001c00a14e008bb91881a50d55087b326bbfb33608",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "vml-line-vertical-alone-baseline-inspection.json.gz",
+            "sha256": "837415f5b72662283d7fafcf5593a07954f631b573d9d85d0c319b5eb0438f5a",
+            "jsonSha256": "786c740d3cfe6ac6536c81cd63a9d7dbf56357ecf5cd8ebb69e42fcf9099c45e"
+          },
+          "pageRasterSha256": [
+            "5e600b37160dd1cf43d13e505b6fee4b794a310fc6d9bde8cca44d575bce7c81"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "mandatoryFailures": [],
+          "pdfSha256": "d316fe242d776f0c88713722f543ad5d0658cf902a91e5960c539ce186b473e4",
+          "pages": 1,
+          "checkedLabels": 2,
+          "inspection": {
+            "file": "vml-line-vertical-alone-reference-inspection.json.gz",
+            "sha256": "4ce226e65967b0d38fda82ce9fe33d5cc9bbee1d17313c6a6af94ac6a6422fe7",
+            "jsonSha256": "b9364e4b5e6e22b0cd40891e39b1ad77066ea1de52b56dca619ac9371b200cd9"
+          },
+          "pageRasterSha256": [
+            "c998acfba705e364a4f1dc83edcd59030c04bcfbe951149fbf4913be410ba27d"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "warnings": [],
+          "report": {
+            "file": "vml-line-vertical-alone-candidate-report.json.gz",
+            "sha256": "04464327a4c94d66dee065c3353978dde4b8114c24959100c6c8e11416647e3b",
+            "jsonSha256": "8c61536a054e2ab1acf1cbf6648606d02179f259630b8b4d723a1a74b0127303"
+          },
+          "mandatoryFailures": [],
+          "pdfSha256": "481cc55153d013d5087b9398e07a3d8b8c7b152541406a137fc12bf890022ebd",
+          "pages": 1,
+          "checkedLabels": 2,
+          "inspection": {
+            "file": "vml-line-vertical-alone-candidate-inspection.json.gz",
+            "sha256": "44abbda32b74f7bad2a142a67bd72d9736e979f496c6bde386a6b6852150bf6a",
+            "jsonSha256": "27cc266f597886d410b5f8a7743529781e0b14238765859ca7e18a44ff1d9c36"
+          },
+          "pageRasterSha256": [
+            "0ed2129fb4ddc531f13b649b3179ee8a07cee1e66e06d35aab7b68c22dceb97d"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "vml-line-vertical-alone.png",
+        "sha256": "6384c1afadbd59a789f0eaabbf35e9c790de0401c7ba4e9eb05f39d5821cc48f"
+      }
+    },
+    {
+      "id": "vml-line-diagonal",
+      "inputSha256": "de0d45cdea2dc36929e135ee53b7862da512913cbff8ba58c5c9a8bb99b155d5",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:body:484390458ed2797e19883817c573b88f",
+              "severity": "warning"
+            }
+          ],
+          "report": {
+            "file": "vml-line-diagonal-baseline-report.json.gz",
+            "sha256": "ec290f3e8ffefa3b8ae4bf636dbf2c820f3f282265b3eb49de404397af16b537",
+            "jsonSha256": "8e186c039fa5fb58dcf9f0eeaca95152314d5f6dc0cf9d15f2f67e5a75c5ebe8"
+          },
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "assertion-marker-reference-position",
+            "assertion-marker-reference-position",
+            "assertion-marker-reference-position",
+            "assertion-color-reference-geometry",
+            "assertion-colored-rule-widths"
+          ],
+          "pdfSha256": "58f86fb83b0f79b805c3a9e2fa4879df9ffa941700e7211eac35e8aeebd00c80",
+          "pages": 1,
+          "checkedLabels": 5,
+          "inspection": {
+            "file": "vml-line-diagonal-baseline-inspection.json.gz",
+            "sha256": "14c91b1c5a2a3561ed858d47344efa99b812e522b64b052223e1153533897130",
+            "jsonSha256": "40eb013435c84895cd9ce72eae24312b022ca98c15b7cef4e7ab062b8d14f311"
+          },
+          "pageRasterSha256": [
+            "af69a3544a1c2541517782e7b5378bd25b2d4649b2205a77a75978db8a5e7db8"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "mandatoryFailures": [],
+          "pdfSha256": "26549e5d397e988e04e12f0824a7aaa34753b03bd62a30cda6344755c2c30aae",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "vml-line-diagonal-reference-inspection.json.gz",
+            "sha256": "5c5717c9c84e3e4c5b72a1de374a45f48563cfe94cb901d9aee611408014ce8a",
+            "jsonSha256": "d476744329b1854eea8ce092725ceee0fa287115e943e45b27e85b7d420600cb"
+          },
+          "pageRasterSha256": [
+            "52132a8df4a67f1e4879806970e2615a206b227a217dca241a1a3394555371b4"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "warnings": [],
+          "report": {
+            "file": "vml-line-diagonal-candidate-report.json.gz",
+            "sha256": "4624ac2bcc584d05f466e02c9e188452303c79f97223e271e730d3f481d00024",
+            "jsonSha256": "d0f740774dc78519acc828b4c3b98e180be9403840415e2d6fa8e2e7aecffc6a"
+          },
+          "mandatoryFailures": [],
+          "pdfSha256": "c56cf75488067f52469ca586e8fa923b3f2d934fd8417e82d018c73ce3fd0374",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "vml-line-diagonal-candidate-inspection.json.gz",
+            "sha256": "e82789fd5d8aa87e569e0912d4a8497034690a380aeebfef06cec9f62d196b64",
+            "jsonSha256": "223263d4a4f846870b1a2be864ff1cca90a7643a052eda56f50ffee83d686167"
+          },
+          "pageRasterSha256": [
+            "ae7560e79f015eabaffee6b717bce6ad38aad9b01307735c5be3845398ebf887"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "vml-line-diagonal.png",
+        "sha256": "24a4c2ee7243349d66d64b5e13dfc1168008112a9e42bddc56db8fa160c0cc0d"
+      }
+    },
+    {
+      "id": "vml-line-positive-origin",
+      "inputSha256": "7d53dbdb917f4464c00e615dd3e3ae89be482e570fe623d62c3f6107d298676e",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:body:484390458ed2797e19883817c573b88f",
+              "severity": "warning"
+            }
+          ],
+          "report": {
+            "file": "vml-line-positive-origin-baseline-report.json.gz",
+            "sha256": "fdec4238c3f90e822309e63a9d3da525746a031d6edd67a1fbaf740e68da2f4d",
+            "jsonSha256": "5e5998801deac60471aaa899d58cf1bba90a90f3f9d955fdd79ecdaa5007d16d"
+          },
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "assertion-marker-reference-position",
+            "assertion-marker-reference-position",
+            "assertion-marker-reference-position",
+            "assertion-color-reference-geometry",
+            "assertion-colored-rule-widths"
+          ],
+          "pdfSha256": "01124e98c09cee350420b2e12bccce6fad79aae0bf47d12032de270d991c8c1d",
+          "pages": 1,
+          "checkedLabels": 5,
+          "inspection": {
+            "file": "vml-line-positive-origin-baseline-inspection.json.gz",
+            "sha256": "14c91b1c5a2a3561ed858d47344efa99b812e522b64b052223e1153533897130",
+            "jsonSha256": "40eb013435c84895cd9ce72eae24312b022ca98c15b7cef4e7ab062b8d14f311"
+          },
+          "pageRasterSha256": [
+            "af69a3544a1c2541517782e7b5378bd25b2d4649b2205a77a75978db8a5e7db8"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "mandatoryFailures": [],
+          "pdfSha256": "699753656e326907172d2baf89d3bd7728b9b9afb58646e3a08dc3ecb3ee4173",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "vml-line-positive-origin-reference-inspection.json.gz",
+            "sha256": "5c5717c9c84e3e4c5b72a1de374a45f48563cfe94cb901d9aee611408014ce8a",
+            "jsonSha256": "d476744329b1854eea8ce092725ceee0fa287115e943e45b27e85b7d420600cb"
+          },
+          "pageRasterSha256": [
+            "52132a8df4a67f1e4879806970e2615a206b227a217dca241a1a3394555371b4"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "warnings": [],
+          "report": {
+            "file": "vml-line-positive-origin-candidate-report.json.gz",
+            "sha256": "98dadc9e80edaacb2fbba44fe6256245ecab350a5bf8c9869a6ef835b6682809",
+            "jsonSha256": "bf700ea966c766b7dd411fadc49f53cd04ea5a65c832e2da7e358d2a5adb02ea"
+          },
+          "mandatoryFailures": [],
+          "pdfSha256": "f82f0f36966594f7cf2fb7acf9d477742815b7e36088bc8d13446ad0ede88711",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "vml-line-positive-origin-candidate-inspection.json.gz",
+            "sha256": "e82789fd5d8aa87e569e0912d4a8497034690a380aeebfef06cec9f62d196b64",
+            "jsonSha256": "223263d4a4f846870b1a2be864ff1cca90a7643a052eda56f50ffee83d686167"
+          },
+          "pageRasterSha256": [
+            "ae7560e79f015eabaffee6b717bce6ad38aad9b01307735c5be3845398ebf887"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "vml-line-positive-origin.png",
+        "sha256": "05eb8198c2b470171027ae2c309981ac294caf25fa9055efe4201128d553b7dc"
+      }
+    },
+    {
+      "id": "vml-line-unitless",
+      "inputSha256": "d839ef89ce33b17e84651aaadaaaba5a053cfb1ed6200f3ce6b73dc94fddb67c",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:body:484390458ed2797e19883817c573b88f",
+              "severity": "warning"
+            }
+          ],
+          "report": {
+            "file": "vml-line-unitless-baseline-report.json.gz",
+            "sha256": "266b96464e4cbb709a7f37bb339a3d17bcd989ead47514b98c0019ea4824f0a2",
+            "jsonSha256": "698b05d54febc96a1eb72b8253b8484bdb41fc6736add8dd5b3d27e50ee95620"
+          },
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "assertion-marker-reference-position",
+            "assertion-marker-reference-position",
+            "assertion-marker-reference-position",
+            "assertion-color-reference-geometry",
+            "assertion-colored-rule-widths"
+          ],
+          "pdfSha256": "feb55eb70d1729cea90701b974b142cc3834637734abf81e0e7980c2dd0ce338",
+          "pages": 1,
+          "checkedLabels": 5,
+          "inspection": {
+            "file": "vml-line-unitless-baseline-inspection.json.gz",
+            "sha256": "14c91b1c5a2a3561ed858d47344efa99b812e522b64b052223e1153533897130",
+            "jsonSha256": "40eb013435c84895cd9ce72eae24312b022ca98c15b7cef4e7ab062b8d14f311"
+          },
+          "pageRasterSha256": [
+            "af69a3544a1c2541517782e7b5378bd25b2d4649b2205a77a75978db8a5e7db8"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "mandatoryFailures": [],
+          "pdfSha256": "0e1c357fd6f68048d8e88b31bb58538200711d0413180218fc0d9c99740bd6c7",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "vml-line-unitless-reference-inspection.json.gz",
+            "sha256": "6888fcc45f43190de087a03ead623c762d309579b94b6a01100da9eb6a17965f",
+            "jsonSha256": "ca71671553f753ef7bffc12ee5018aac2b51c0aed01ab600d9cc501f738fc969"
+          },
+          "pageRasterSha256": [
+            "a2e267626ae9231c6617d8e9a9abe1d1a1cffe7e2961f16c7959865ba686ba2f"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "warnings": [],
+          "report": {
+            "file": "vml-line-unitless-candidate-report.json.gz",
+            "sha256": "c71967694307d3ebe794c7b9d82cd890b17db3131bca7898d68be09744108a6f",
+            "jsonSha256": "9420443b002b87762e52dcf1434ba578809ca407ecdd346c631bb79c99ab4113"
+          },
+          "mandatoryFailures": [],
+          "pdfSha256": "0b37176cea47d17423ad8480826d3a8a12e6996ffab79036ff70874ced850302",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "vml-line-unitless-candidate-inspection.json.gz",
+            "sha256": "31f53214d542fe33be483522a7a940cc6531d8b5ed88667920726fd5ca219c5f",
+            "jsonSha256": "c9779ea7c89365ae5eb20fef8341d9193dcf25f56b8d15a677f20acb8d157a14"
+          },
+          "pageRasterSha256": [
+            "7fed1911777a5eeb73376addc62004cc1e3196ddce8d430f4e52a6c817c966dd"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "vml-line-unitless.png",
+        "sha256": "ab0b00a9da8d9c8517c66c272705381c8edb4383e302961207a77a13294ddfbc"
+      }
+    },
+    {
+      "id": "vml-line-hidden-stroke",
+      "inputSha256": "97b3fe99492681e7f90667fb33073a9e7e5233d9631e2868effece710e706ee2",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:body:484390458ed2797e19883817c573b88f",
+              "severity": "warning"
+            }
+          ],
+          "report": {
+            "file": "vml-line-hidden-stroke-baseline-report.json.gz",
+            "sha256": "a74dbce44e3b1816f9dafd175de0e11aa533739e87431c369f8b7c81b61968dc",
+            "jsonSha256": "0f2913d75bd78c6a9e90af6769943f74941a30be1cc4d54e8e31b75c61ea9e42"
+          },
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "assertion-marker-reference-position",
+            "assertion-marker-reference-position",
+            "assertion-marker-reference-position"
+          ],
+          "supplementaryAbsentPaint": {
+            "page": 1,
+            "rgb": [
+              38,
+              124,
+              113
+            ],
+            "boundsPt": null,
+            "coverage": 0.0
+          },
+          "pdfSha256": "88ee9e539f301d339972637ef73bb8db6fef32d53f76b89a86dc00898e762b0b",
+          "pages": 1,
+          "checkedLabels": 5,
+          "inspection": {
+            "file": "vml-line-hidden-stroke-baseline-inspection.json.gz",
+            "sha256": "56d95dc4238089b4e51077d7838241e9a6e3f175fe446504784ae67d2d74f83e",
+            "jsonSha256": "f6943e7af0376c71e13e7f3bd35b8177119f54ece16d5c5b04a3ef98f9064afc"
+          },
+          "pageRasterSha256": [
+            "af69a3544a1c2541517782e7b5378bd25b2d4649b2205a77a75978db8a5e7db8"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "mandatoryFailures": [],
+          "supplementaryAbsentPaint": {
+            "page": 1,
+            "rgb": [
+              38,
+              124,
+              113
+            ],
+            "boundsPt": null,
+            "coverage": 0.0
+          },
+          "pdfSha256": "3bd10d496508473ac0a02151adaf120bdb4e127ae4a34d4e2ba1f9154f01e7d0",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "vml-line-hidden-stroke-reference-inspection.json.gz",
+            "sha256": "e4acffc7483b364f2e547e4658d58e4177149324eb78cdbad847c49e2fb8308f",
+            "jsonSha256": "7429bb7c64bc5c145c67245b74754ff8bc3b950502c8a451685e637d5eed09b7"
+          },
+          "pageRasterSha256": [
+            "f9a0ce69a0792f910cf094cd520d73d080c1b2853b874fa82d843efbd83ece6d"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "warnings": [],
+          "report": {
+            "file": "vml-line-hidden-stroke-candidate-report.json.gz",
+            "sha256": "e886b5bfb891800502892ab8454d5bcffd33bae8809133dff85a88b4f86e449e",
+            "jsonSha256": "fa753f654cad78eb82587b3c1d2d8e91e41e08a3b9637dee1c97fc3442aa66e3"
+          },
+          "mandatoryFailures": [],
+          "supplementaryAbsentPaint": {
+            "page": 1,
+            "rgb": [
+              38,
+              124,
+              113
+            ],
+            "boundsPt": null,
+            "coverage": 0.0
+          },
+          "pdfSha256": "eba9d522a8c8027d76b4e582a87011a995f6300a4709a3f6cce3b887d0b03fa8",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "vml-line-hidden-stroke-candidate-inspection.json.gz",
+            "sha256": "fb00f77cec985e001f8ce1b5e12f7fea16c4559d3602c306a76532caac020bbd",
+            "jsonSha256": "dda96fd475090a3ca6fcfed75872ad23405ea54e10c75f1ddbdf309d41fa2a95"
+          },
+          "pageRasterSha256": [
+            "e3b0ad7efcfff53dce62e97dbf0f2ecbecd23187992b20e232822a6029785042"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "vml-line-hidden-stroke.png",
+        "sha256": "0d1021d1f8333d7c11424594eba572f70d428a28b4a76dcd3aa5bea19d4618d8"
+      }
+    },
+    {
+      "id": "vml-line-text-control",
+      "inputSha256": "c561466fa79b885edec083ccc96eb856e7abe9f53a689ac586dc11b7358a98e7",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "warnings": [],
+          "report": {
+            "file": "vml-line-text-control-baseline-report.json.gz",
+            "sha256": "a95bfdac8649450bbdc6910efa8753f5bc5e3378a5f2203f08acd6e95352091e",
+            "jsonSha256": "47c4b895a9ad07362475a4c995a61a40fd92e640c5426784215a3cc964a18dc5"
+          },
+          "mandatoryFailures": [],
+          "supplementaryAbsentPaint": {
+            "page": 1,
+            "rgb": [
+              38,
+              124,
+              113
+            ],
+            "boundsPt": null,
+            "coverage": 0.0
+          },
+          "pdfSha256": "ad9955c18e0bad227a1297266a931b292bba413eb20425a88a30ceced31c9550",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "vml-line-text-control-baseline-inspection.json.gz",
+            "sha256": "d03fe398264666115344ace64a85df7c28f9bdf0a956aae8c3e5380236e843c6",
+            "jsonSha256": "2059b75a879f50d8f4080cc6fa9cdfbf36948fe6299147559613a837775d1767"
+          },
+          "pageRasterSha256": [
+            "1f76db04e206aaf3eefb054857e8d989919b9005298bf1a4a9729f9abd4c2222"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "mandatoryFailures": [],
+          "supplementaryAbsentPaint": {
+            "page": 1,
+            "rgb": [
+              38,
+              124,
+              113
+            ],
+            "boundsPt": null,
+            "coverage": 0.0
+          },
+          "pdfSha256": "5e59de38eb39a117e03870fdf9972dcdce4feb34dc05d45bb9c834340fda0b8b",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "vml-line-text-control-reference-inspection.json.gz",
+            "sha256": "cee599cede9912a53d544a75f18b5be883cd990bffbc7fb3dea53f6ebc5d450e",
+            "jsonSha256": "810d765c2c1843d51a26945503a4ec05e4aad7814b4a81a4ecd0b7c0a641384c"
+          },
+          "pageRasterSha256": [
+            "2263cdcf7e4d7c56c10fc7084b4c32de67f7621c8f75580984fcb2954d4ed326"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "warnings": [],
+          "report": {
+            "file": "vml-line-text-control-candidate-report.json.gz",
+            "sha256": "df9dd7cf6ef5febf1fc70194b4da5dee42af0307992ae1d030d734ddb0cfacbf",
+            "jsonSha256": "e95147a7ac3fb6ef78bdd70162f06f232899b31e73204291c7c12de06599c639"
+          },
+          "mandatoryFailures": [],
+          "supplementaryAbsentPaint": {
+            "page": 1,
+            "rgb": [
+              38,
+              124,
+              113
+            ],
+            "boundsPt": null,
+            "coverage": 0.0
+          },
+          "pdfSha256": "c15610f17b0655f07d89aeb351f5146c5bade19c0b7504a948edd76a7977cbd9",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "vml-line-text-control-candidate-inspection.json.gz",
+            "sha256": "d03fe398264666115344ace64a85df7c28f9bdf0a956aae8c3e5380236e843c6",
+            "jsonSha256": "2059b75a879f50d8f4080cc6fa9cdfbf36948fe6299147559613a837775d1767"
+          },
+          "pageRasterSha256": [
+            "1f76db04e206aaf3eefb054857e8d989919b9005298bf1a4a9729f9abd4c2222"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "vml-line-text-control.png",
+        "sha256": "e9d95cebf0c71e21a63db56acc8037e68eba218609d1e01c921da736e32bc95e"
+      }
+    }
+  ],
+  "tools": {
+    "docs/results/vml-lines/Compose.py": "746ce4c3006828628fe77450d0458426a56a6b517d99cfee1b6cb47a53d7140e",
+    "docs/results/export-reliability/Capture.mjs": "913af2a6c436b757a32d31fed85cae0db4ed24044e51a6c4b783024e7dfb82dc"
+  }
+}

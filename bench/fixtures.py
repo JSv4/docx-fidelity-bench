@@ -1905,6 +1905,41 @@ def preset_polygon_cases(add):
                              tolerancePt=1.5, coverageTolerance=.08) for rgb in colors])
 
 
+
+def vml_line_cases(add):
+    """Original Hazel labels and independently chosen endpoint dimensions."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="22"/>'
+              '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0" '
+              'w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    paper = ('<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" '
+             'w:right="1440" w:bottom="1440" w:left="1440"/></w:sectPr>')
+    for key, start, end, mixed, paint in [
+            ('horizontal', '0,0', '83pt,0', True, True),
+            ('horizontal-alone', '0,0', '83pt,0', False, True),
+            ('vertical', '0,0', '0,47pt', True, True),
+            ('vertical-alone', '0,0', '0,47pt', False, True),
+            ('diagonal', '0,0', '83pt,29pt', True, True),
+            ('positive-origin', '7pt,11pt', '90pt,40pt', True, True),
+            ('unitless', '0,0', '76,40', True, True),
+            ('hidden-stroke', '0,0', '83pt,29pt', True, False),
+            ('text-control', None, None, True, False)]:
+        drawing = '' if start is None else ('<w:r><w:pict>'
+            f'<v:line from="{start}" to="{end}" strokecolor="#267C71" strokeweight="1.5pt" '
+            f'stroked="{"t" if paint else "f"}"/></w:pict></w:r>')
+        labels = ['HazelBefore'] + (['HazelAnchor', 'HazelTail'] if mixed else []) + ['HazelAfter']
+        middle = run('HazelAnchor ' if start is None else 'HazelAnchor') + drawing + run('HazelTail') if mixed else drawing
+        assertions = [dict(type='marker-reference-position', version=1, marker=label, tolerancePt=1.5)
+                      for label in labels]
+        if paint:
+            assertions.append(dict(type='color-reference-geometry', version=1, page=1, rgb=[38, 124, 113],
+                                   tolerancePt=1.5, coverageTolerance=.08))
+            assertions.append(dict(type='colored-rule-widths', version=1, page=1, rgb=[38, 124, 113],
+                                   widthsPt=[1.5], tolerancePt=.01))
+        add('vml-line-' + key, 'images', 'Hazel ' + key + ' inline VML line (part of Docxodus #1554)',
+            labels, para('HazelBefore') + para(runs=middle) + para('HazelAfter'), sect=paper, styles_xml=styles,
+            namespaces_extra=' xmlns:v="urn:schemas-microsoft-com:vml"', assertions=assertions)
+
 def generate():
     cases = []
     def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT, literal_parts=None, relations_extra=(), content_types_extra=''):
@@ -4941,7 +4976,8 @@ def generate():
     authored_table_width_cases(add)
     block_content_height_cases(add)
     preset_polygon_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v113', 'version': 113, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    vml_line_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v114', 'version': 114, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

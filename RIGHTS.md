@@ -1,5 +1,9 @@
 # Authorship and artifact rights
 
+The nine VML-line cases for Docxodus #1554 contain original Hazel labels and literal
+OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template, external
+document, image or font program is imported. Review sheets show these authored inputs.
+
 The nine block-content-height cases for Docxodus #1568 contain original Fern labels,
 literal OOXML and a small bitmap authored in `bench/fixtures.py`. No renderer fixture,
 helper, template, external document, image or font program is imported.
