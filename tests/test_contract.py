@@ -374,7 +374,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 810)
+        self.assertEqual(len(common.validate_registry()['cases']), 819)
 
     def test_continuous_margin_pairs_isolate_geometry_and_keep_complete_labels(self):
         import xml.etree.ElementTree as ET
@@ -710,7 +710,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v113')
+        self.assertEqual(registry['suite']['id'], 'core-v114')
 
     def test_authored_table_continuation_rejects_a_second_page_only_shift(self):
         import gzip
@@ -779,6 +779,32 @@ class RegistryContract(unittest.TestCase):
                     mutant = json.load(stream)
                 self.assertEqual(mutant['words'], native['words'])
                 self.assertTrue(all(c['passed'] for c in pdf.correctness(case, native, mutant)))
+
+    def test_vml_line_declarations_detect_missing_paint_wrong_pen_and_shifted_text(self):
+        import gzip
+        from copy import deepcopy
+        folder = common.ROOT / 'docs/results/vml-lines'
+        for case in common.validate_registry()['cases']:
+            if not case['id'].startswith('vml-line-'):
+                continue
+            with gzip.open(folder / (case['id'] + '-reference-inspection.json.gz'), 'rt') as stream:
+                native = json.load(stream)
+            self.assertEqual(pdf.reference_failures(case, native, 'libreoffice'), [])
+            if any(a['type'] == 'colored-rule-widths' for a in case['assertions']):
+                removed = dict(native, colorRegions=[], coloredRuleWidths=[])
+                failures = [c['name'] for c in pdf.correctness(case, native, removed) if not c['passed']]
+                self.assertEqual(failures, ['assertion-color-reference-geometry', 'assertion-colored-rule-widths'])
+                wrong_pen = deepcopy(native)
+                for rule in wrong_pen['coloredRuleWidths']:
+                    rule['widthsPt'] = [.75]
+                failures = [c['name'] for c in pdf.correctness(case, native, wrong_pen) if not c['passed']]
+                self.assertEqual(failures, ['assertion-colored-rule-widths'])
+            shifted = deepcopy(native)
+            after = next(w for w in shifted['words'] if w['text'] == 'HazelAfter')
+            after['rect'][1] += 3
+            after['rect'][3] += 3
+            failures = [c['name'] for c in pdf.correctness(case, native, shifted) if not c['passed']]
+            self.assertEqual(failures, ['assertion-marker-reference-position'])
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
