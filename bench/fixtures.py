@@ -1774,6 +1774,43 @@ def authored_table_width_cases(add):
 
 
 
+def oversized_keep_next_cases(add):
+    """Original Rowan inventories exercise an impossible keep without sharing renderer fixtures."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="22"/>'
+              '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+              '<w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="exact"/>'
+              '</w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:styleId="RowanKeep">'
+              '<w:name w:val="Rowan Keep"/><w:pPr><w:keepNext/></w:pPr></w:style></w:styles>')
+    paper = ('<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" '
+             'w:right="1440" w:bottom="1440" w:left="1440"/></w:sectPr>')
+    for kind, count, opening, first_page, closing_page in [
+        ('direct', 65, 0, 1, 2), ('style', 65, 0, 1, 2), ('both', 65, 0, 1, 2),
+        ('after-opening', 65, 7, 2, 3), ('boundary', 72, 0, 1, 3),
+        ('fitting-control', 2, 34, 2, 2), ('no-keep-control', 2, 34, 1, 2),
+    ]:
+        labels = [f'RowanItem{i:03d}' for i in range(1, count + 1)]
+        prelude = [f'RowanOpening{i:02d}' for i in range(1, opening + 1)]
+        props = '<w:pStyle w:val="RowanKeep"/>' if kind == 'style' else (
+            '' if kind == 'no-keep-control' else '<w:keepNext/>' + ('<w:keepLines/>' if kind == 'both' else ''))
+        body = (para(runs='<w:r><w:br/></w:r>'.join(run(label) for label in prelude)) if opening else '')
+        body += para(props=props, runs='<w:r><w:br/></w:r>'.join(run(label) for label in labels))
+        body += para('RowanClosed')
+        offset = opening if kind == 'no-keep-control' else 0
+        assertions = [dict(type='marker-region', version=2, marker=label, occurrence=1,
+                          page=first_page + i // 36,
+                          rect=[72, 72 + (offset + i % 36) * 18, 540, 90 + (offset + i % 36) * 18])
+                      for i, label in enumerate(labels)]
+        assertions += [dict(type='marker-region', version=2, marker=label, occurrence=1,
+                           page=1, rect=[72, 72 + i * 18, 540, 90 + i * 18]) for i, label in enumerate(prelude)]
+        closing_row = 0 if kind in ('boundary', 'no-keep-control') else count % 36
+        assertions.append(dict(type='marker-region', version=2, marker='RowanClosed', occurrence=1,
+                               page=closing_page, rect=[72, 72 + closing_row * 18, 540, 90 + closing_row * 18]))
+        add(f'oversized-keep-next-{kind}', 'paragraphs',
+            f'Rowan {kind}: {count} exact-spaced lines after {opening} opening lines (part of Docxodus #1558)',
+            prelude + labels + ['RowanClosed'], body, sect=paper, styles_xml=styles, assertions=assertions)
+
+
 def block_content_height_cases(add):
     """Original Fern labels and bitmap; dimensions differ from the renderer's regression fixtures."""
     styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
@@ -4977,7 +5014,8 @@ def generate():
     block_content_height_cases(add)
     preset_polygon_cases(add)
     vml_line_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v114', 'version': 114, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    oversized_keep_next_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v115', 'version': 115, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
