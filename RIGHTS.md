@@ -1,5 +1,9 @@
 # Authorship and artifact rights
 
+The eight single-line grid cases for Docxodus #1551 contain original Beech labels and
+literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template,
+external document, image or font program is imported.
+
 The eight automatic body-spacing cases for Docxodus #1553 contain original Birch labels
 and literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template,
 external document, image or font program is imported. Review sheets show these original inputs.
