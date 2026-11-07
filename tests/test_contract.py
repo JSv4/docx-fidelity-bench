@@ -374,7 +374,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 869)
+        self.assertEqual(len(common.validate_registry()['cases']), 877)
 
     def test_continuous_margin_pairs_isolate_geometry_and_keep_complete_labels(self):
         import xml.etree.ElementTree as ET
@@ -710,7 +710,24 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v120')
+        self.assertEqual(registry['suite']['id'], 'core-v121')
+
+    def test_automatic_spacing_rejects_a_shifted_second_paragraph(self):
+        import gzip
+        cases = [c for c in common.validate_registry()['cases'] if c['id'].startswith('automatic-body-')]
+        self.assertEqual(len(cases), 8)
+        for case in cases:
+            with self.subTest(case=case['id']):
+                path = common.ROOT / 'docs/results/automatic-body-spacing' / (case['id'] + '-candidate-inspection.json.gz')
+                with gzip.open(path, 'rt') as stream:
+                    actual = json.load(stream)
+                self.assertEqual(pdf.reference_failures(case, actual, 'libreoffice'), [])
+                for delta in (-9, 5, 9):
+                    changed = copy.deepcopy(actual)
+                    second = next(w for w in changed['words'] if w['text'] == 'BirchSecond')
+                    second['rect'][1] += delta
+                    second['rect'][3] += delta
+                    self.assertIn('assertion-marker-region', pdf.reference_failures(case, changed, 'libreoffice'))
 
     def test_contextual_spacing_rejects_restoring_the_old_gap(self):
         import gzip
