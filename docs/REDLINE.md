@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v23`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v34`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -472,3 +472,21 @@ Metric contract 21 adds `section-flags` assertions for exact first-page visibili
 and independently resolved endpoints. Section property history and nested textbox stories are
 excluded from the physical section inventory; absent flags and explicit off values are false.
 The Juniper #1555 fixtures also require exact per-section header/footer text and boundary carriers.
+
+### Positional short rewrites
+
+`redline-v34` applies the explicitly requested #1556 review policy to the four short
+#1535 complete-rewrite cases: each whole old sentence stays beside its positional replacement.
+Their inputs and accepted/rejected endpoints are byte-identical; only the authored review order
+and arrangement assertion change. Four new long-rewrite controls retain `revision-blocks` v1.
+Four independent Myrtle cases cover a two-paragraph rewrite, interior and unequal-count controls,
+and identical-reviewer consensus. Consensus is credited once to the first reviewer, with exact
+selective-reviewer endpoints. This is a review arrangement policy, not a Word Compare oracle.
+
+Metric contract 22 adds `positional-rewrites` v1 (scope `redline`). Its nonempty `before` and
+`after` arrays declare the complete ordered sentences. Every sentence must occur intact on its
+revision side, each positional pair must share or occupy adjacent body paragraphs, and pair
+ranges must be ordered without overlap. A paragraph permits at most two revision-side runs and
+no untracked visible text. Wrong partners, whole-side blocks and word interleaving fail even if
+accept/reject endpoints match. All existing round-trip, attribution and SDK checks remain
+mandatory. `revision-blocks` v1 and historical evidence retain their original meaning.

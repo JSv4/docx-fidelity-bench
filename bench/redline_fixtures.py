@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v33', 'version': 33}
+SUITE = {'id': 'redline-v34', 'version': 34}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -2011,16 +2011,21 @@ def field_default_spacing(corpus):
                             styles=styles(80, 260, normal)), assertions)
 
 
+def positional_rewrites(before, after):
+    return {'type': 'positional-rewrites', 'version': 1, 'scope': 'redline',
+            'before': list(before), 'after': list(after)}
+
+
 def complete_rewrites(corpus):
-    """Whole replacements sharing only articles, including literal ordinals and linked articles."""
+    """Short rewrites pair whole sentences; long rewrites retain coherent side blocks."""
     old = ('A cedar ladder reaches the copper balcony.', 'The green satchel hangs beside a marble pillar.',
            'Two violet ribbons surround the lantern.', 'A curved handle supports the wicker hamper.')
     new = ('The ivory banner spans a quiet orchard.', 'A bronze chariot passes the distant fountain.',
            'The golden latch secures a square cupboard.', 'Three crimson buttons decorate the velvet jacket.')
     for shape in ('articles', 'numbered', 'linked', 'distinct-control'):
-        def paragraphs(texts, rev=None, kind=None):
+        def paragraphs(texts, rev=None, kind=None, start=0):
             result = ''
-            for i, text in enumerate(texts):
+            for i, text in enumerate(texts, start):
                 if shape == 'distinct-control':
                     text = ' '.join(word for word in text.split() if word.lower() not in {'a', 'the'})
                 if shape == 'numbered':
@@ -2035,13 +2040,61 @@ def complete_rewrites(corpus):
                     content += run
                 result += p(content, mark=rev.mark(kind) if rev else '')
             return result
+        for long in (False, True):
+            before = [' '.join([text] * 4) if long else text for text in old]
+            after = [' '.join([text] * 4) if long else text for text in new]
+            left, right = paragraphs(before), paragraphs(after)
+            rev = Revisions()
+            if long:
+                authored = paragraphs(before, rev, 'del') + paragraphs(after, rev, 'ins')
+                assertions = [{'type': 'revision-blocks', 'version': 1, 'scope': 'redline'}]
+            else:
+                authored = ''.join(paragraphs([a], rev, 'del', i) + paragraphs([b], rev, 'ins', i)
+                                   for i, (a, b) in enumerate(zip(before, after)))
+                def texts(body):
+                    root = ET.fromstring(f'<root xmlns:w="{W}">{body}</root>')
+                    return [''.join(e.text or '' for e in paragraph.iter('{' + W + '}t')) for paragraph in root]
+                assertions = [positional_rewrites(texts(left), texts(right))]
+            corpus.compare('redline-complete-rewrite-' + ('long-' if long else '') + shape, 'revisions',
+                           'control' if long or shape == 'distinct-control' else 'reproducer', 'JSv4/Docxodus#1535',
+                           ('Long rewrites retain coherent side blocks: ' if long else
+                            'Short whole-sentence replacements stay beside their positional partner under #1556: ') + shape,
+                           dict(body=left), dict(body=right), dict(body=authored), assertions)
+
+    before = ['Myrtle grove closes at dusk.', 'Copper bells signal supper.']
+    after = ['Indigo workshop opens before sunrise.', 'Silver ribbons adorn baskets.']
+    def body(texts):
+        return ''.join(p(t(text)) for text in texts)
+    for shape in ('pair', 'interior-control', 'unequal-control', 'consensus'):
+        revised = after + (['Violet lanterns illuminate paths.'] if shape == 'unequal-control' else [])
+        prefix = p(t('Unchanged opening.')) if shape == 'interior-control' else ''
+        suffix = p(t('Unchanged closing.')) if shape == 'interior-control' else ''
+        left, right = prefix + body(before) + suffix, prefix + body(revised) + suffix
         rev = Revisions()
-        corpus.compare('redline-complete-rewrite-' + shape, 'revisions',
-                       'control' if shape == 'distinct-control' else 'reproducer', 'JSv4/Docxodus#1535',
-                       'Four unrelated replacement paragraphs stay in coherent removed and inserted blocks: ' + shape,
-                       dict(body=paragraphs(old)), dict(body=paragraphs(new)),
-                       dict(body=paragraphs(old, rev, 'del') + paragraphs(new, rev, 'ins')),
-                       [{'type': 'revision-blocks', 'version': 1, 'scope': 'redline'}])
+        def marked(texts, kind):
+            wrap = rev.dele if kind == 'del' else rev.ins
+            author = 'First' if shape == 'consensus' else AUTHOR
+            return ''.join(p(wrap(t(text), author), mark=rev.mark(kind, author)) for text in texts)
+        paired = shape in {'pair', 'consensus'}
+        markup = (''.join(marked([a], 'del') + marked([b], 'ins') for a, b in zip(before, revised))
+                  if paired else marked(before, 'del') + marked(revised, 'ins'))
+        assertions = [positional_rewrites(before, revised)] if paired else [
+            {'type': 'revision-blocks', 'version': 1, 'scope': 'redline'}]
+        case_id = 'redline-short-rewrite-' + shape
+        description = 'Whole-document positional rewrites with ' + shape.replace('-', ' ')
+        if shape != 'consensus':
+            corpus.compare(case_id, 'revisions', 'reproducer' if paired else 'control', 'JSv4/Docxodus#1556',
+                           description, dict(body=left), dict(body=right), dict(body=prefix + markup + suffix), assertions)
+        else:
+            base = corpus.file(case_id, 'base', body=left)
+            reviewer = corpus.file(case_id, 'reviewer', body=right)
+            authored = corpus.file(case_id, 'authored-redline', body=markup)
+            corpus.add(case_id, 'consolidate', 'reproducer', 'JSv4/Docxodus#1556', description, 'consolidate',
+                       [dict(base, role='base'), dict(reviewer, role='reviewer', author='First'),
+                        dict(reviewer, role='reviewer', author='Second')],
+                       {'accepted': reviewer, 'rejected': base}, authored, assertions)
+            # The default consensus policy credits the shared edit to the first reviewer.
+            corpus.cases[-1]['reviewerExpected'] = {'First': reviewer, 'Second': base}
 
 
 def revised_stories_deleted_boundary(corpus):
