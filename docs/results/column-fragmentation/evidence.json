@@ -1,0 +1,1354 @@
+{
+  "scope": "Unscored strict-font public export diagnostics; no Word or full-suite parity claim",
+  "manifestSha256": "6f90b77ed2e7541b3116b2c08bd1408a761539b4d393ccf04d85000640afbc57",
+  "builds": {
+    "baseline": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1564-baseline/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1564-baseline/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1564-baseline/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1564-baseline/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1564-baseline/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1564-baseline/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1564-baseline/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1564-baseline/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1564-baseline/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "5c8329174f91692519e24217b2feacde2134e8b3",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "ae91c96b1ecf43dda46a01d5a5c922eafdca47114d58f7b2863ebb1c38d2dfa1",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "686c3d6140f31f5485e06dae046e91cba7eb5a5e39884b0846d754d520a58325",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "3943d816413d46b9c6850f06cd49f97b3eacabc6ce460bbd1a5133dba38d98a5",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+      "schema": 1,
+      "tree": "c46e339d89909b43ab92d25970783495ae863e4d"
+    },
+    "candidate": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-columns/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-columns/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-columns/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-columns/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-columns/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-columns/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-columns/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-columns/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-columns/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "8959a64eab3ac15f69eef806fd394b8fbf06ca43",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "fa73cb8e40fc74559a241ea8b7fde2fa28f8765cf3a7509ebba1811262c87cf9",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+      "schema": 1,
+      "tree": "b8885fe114bd7bec7fc3cc39e7eecb5b6a3c7fa1"
+    }
+  },
+  "rendererAssets": {
+    "baseline": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 610228,
+          "sha256": "ae8e54ced7434224c0a16b27a896a3c785d072937f8a69e6fd9fe576f5ad969f"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 165097,
+          "sha256": "26f6dbb6b293e12ed4b646e80ca889ba0bbe5dba2cba1352669e68529092b1bf"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46448,
+          "sha256": "90c4965cfc9d129cb74f6b5f30edb55fa3662c2c5350537ba7b014b8f781b1a5"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5434137,
+          "sha256": "d89747fe6fe7efbaea6c506d640b24bc79531e71403d6e19367eadb581007671"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "0b46375018b836cb8268024cbaea917b8a6c26821c7f692cf0a98b577cd3379e"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "ddf98ca8465eefaddded15d7fe054bfddd9e0c831c9d1f36de21b191b471f0f0"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1674517,
+          "sha256": "2ebf53d9fe8ce4f58c19af1ce4995f1b7c950330ef0a20180269c6f9c2371aac"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "b5edc523942e6dc6b4278ab2be8db65f2fac95971e3af55141f7a4ea003b4ce4"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10555218,
+          "sha256": "99ce75e60f0b2310e73874ac3d8add7262ffbdbd6cbb550dfe398d0b4d42a826"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    },
+    "candidate": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 613222,
+          "sha256": "4633945ec7f7a1b15cc064822128621632f78b0109ba51c326f31ab22742eefe"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 167124,
+          "sha256": "5d39d9b78fa131e4aaeb22358ec48d634a56b31d1281f450837cb5a828289d97"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46484,
+          "sha256": "a604dbff16d3be0f0d24cf48753404b42fe25f70fbd1393dde4934871446a420"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5437721,
+          "sha256": "1d89061666dd691a203ff3b6c5dd30d031bcd301ec380bdd7b9731640f2930bd"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "004cca77fc6b7e2b5c1a353a834f3043b621fdb7f9c98080993cdfe725063c86"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "ddf98ca8465eefaddded15d7fe054bfddd9e0c831c9d1f36de21b191b471f0f0"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1674517,
+          "sha256": "2ebf53d9fe8ce4f58c19af1ce4995f1b7c950330ef0a20180269c6f9c2371aac"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "f24b008648eb40188b54f4917e65e64040c499375dd38a289474129c39eb602d"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10549679,
+          "sha256": "5bd94879fc7c419383ce7767cbbe5da980b46129b11845ffb58cdb63e49fdbeb"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    }
+  },
+  "captures": {
+    "baseline": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "5c8329174f91692519e24217b2feacde2134e8b3",
+      "sourceTree": "c46e339d89909b43ab92d25970783495ae863e4d",
+      "buildIdentitySha256": "078d53e831c8297d507f68ab22a15d0f075afbfa3c1bd1c73c6d1ec389197f2a",
+      "manifestSha256": "6f90b77ed2e7541b3116b2c08bd1408a761539b4d393ccf04d85000640afbc57",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "column-fragments-paragraph-one-column-control",
+          "inputSha256": "41d51a181c2d69e099c1ae5f0df65b5fe6e4dc510e188fa64022c07e3ff4c53b",
+          "status": "delivered",
+          "pages": 5,
+          "pdfSha256": "5b380ab41112eb54514b743858b0e6f02f49e456ccca348649a2f840af8c4db8",
+          "renderReportSha256": "8b179387bef7e6caa866ae2ae17a38bf014785b38d127e0e3239c1af53d5e39e"
+        },
+        {
+          "id": "column-fragments-paragraph-balanced",
+          "inputSha256": "e266a6613a46683757d2cb5f0f2a2679425cc21c7e48ad6d00a3a1ffdf4aec3b",
+          "status": "failed",
+          "code": "pagination_failure",
+          "phase": "running_story_placement",
+          "message": "Page 1 body content is clipped (540px scroll height in a 256px band; p.docx-000000 (+284.0px), div (+284.0px), span.docx-000001 (+283.0px))."
+        },
+        {
+          "id": "column-fragments-paragraph-sequential",
+          "inputSha256": "98032a2b3d251b687fda860d1ad553d4df1e0c89e323570a4f625360a67e4730",
+          "status": "failed",
+          "code": "pagination_failure",
+          "phase": "running_story_placement",
+          "message": "Page 1 body content is clipped (540px scroll height in a 256px band; p.docx-000000 (+284.0px), div (+284.0px), span.docx-000001 (+283.0px))."
+        },
+        {
+          "id": "column-fragments-table-one-column-control",
+          "inputSha256": "75fe4e25740e7ce08f4c415c800a9828e3508f19214d6c65c91c1259964426e2",
+          "status": "delivered",
+          "pages": 5,
+          "pdfSha256": "5548586184b6287b5589a763273ac25c2526592b388c9c6d332e07f06c812170",
+          "renderReportSha256": "4d618f94e3f262993f0e90ed50144994036ea439e469662d2392fa3d4b7b9a84"
+        },
+        {
+          "id": "column-fragments-table-balanced",
+          "inputSha256": "356425816847ea6f9c843148f1cabb976f9d1632502a9f9a34c0af0e862c62c4",
+          "status": "failed",
+          "code": "pagination_failure",
+          "phase": "running_story_placement",
+          "message": "Page 1 body content is clipped (540px scroll height in a 256px band; col (+284.0px), col (+284.0px), colgroup (+284.0px))."
+        },
+        {
+          "id": "column-fragments-table-sequential",
+          "inputSha256": "553f908446aed560ccb4dd6bf2fc3e9df5249a72d07a0fb8dbe7f586aec9b305",
+          "status": "failed",
+          "code": "pagination_failure",
+          "phase": "running_story_placement",
+          "message": "Page 1 body content is clipped (540px scroll height in a 256px band; col (+284.0px), col (+284.0px), colgroup (+284.0px))."
+        }
+      ]
+    },
+    "candidate": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "8959a64eab3ac15f69eef806fd394b8fbf06ca43",
+      "sourceTree": "b8885fe114bd7bec7fc3cc39e7eecb5b6a3c7fa1",
+      "buildIdentitySha256": "a2693046c96ec8e10ae36ce7f82051eba66a1104504e38a88e299c5ee6eb1a7e",
+      "manifestSha256": "6f90b77ed2e7541b3116b2c08bd1408a761539b4d393ccf04d85000640afbc57",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "column-fragments-paragraph-one-column-control",
+          "inputSha256": "41d51a181c2d69e099c1ae5f0df65b5fe6e4dc510e188fa64022c07e3ff4c53b",
+          "status": "delivered",
+          "pages": 5,
+          "pdfSha256": "12d63649a40a9539caa27de561249b2a3de2fbc64e45c71aad90f5dac56b9d65",
+          "renderReportSha256": "75d7505a021ccdc4c3d18d154c155265af73f38be3d992a126ac12b49096c24e"
+        },
+        {
+          "id": "column-fragments-paragraph-balanced",
+          "inputSha256": "e266a6613a46683757d2cb5f0f2a2679425cc21c7e48ad6d00a3a1ffdf4aec3b",
+          "status": "delivered",
+          "pages": 3,
+          "pdfSha256": "8dc177eff9cfecd57a99acb1b4d34d587acf6f3756386de75fba851bad2f85e7",
+          "renderReportSha256": "54b5a408331d03c3c7f57510306f04c749f9a25efb1eba77afb1535d19d74d96"
+        },
+        {
+          "id": "column-fragments-paragraph-sequential",
+          "inputSha256": "98032a2b3d251b687fda860d1ad553d4df1e0c89e323570a4f625360a67e4730",
+          "status": "delivered",
+          "pages": 3,
+          "pdfSha256": "48da0641ae7c19e046d0c119bc1392b9f61d6389faf516d1213574143bde6670",
+          "renderReportSha256": "d294fd1852122ac03cd6ae6050d01ef52389d2c4374654c73978aa32ebefc885"
+        },
+        {
+          "id": "column-fragments-table-one-column-control",
+          "inputSha256": "75fe4e25740e7ce08f4c415c800a9828e3508f19214d6c65c91c1259964426e2",
+          "status": "delivered",
+          "pages": 5,
+          "pdfSha256": "88904330ebe1eb7c5ee810a9037816830eb1fe2cf2b08013e87ea6892fe79cc0",
+          "renderReportSha256": "5f06ed973b580d05ff277034a25f0a286934fe44817e6b5a390a5ed8e94a518e"
+        },
+        {
+          "id": "column-fragments-table-balanced",
+          "inputSha256": "356425816847ea6f9c843148f1cabb976f9d1632502a9f9a34c0af0e862c62c4",
+          "status": "delivered",
+          "pages": 3,
+          "pdfSha256": "c2abdd5db291ab7faf327a2140d298e03d109d0ef86cc041476c75f8218c2798",
+          "renderReportSha256": "616325c35b72c0e2adccd858372b2ab44467281a323e1776021323482702ba6f"
+        },
+        {
+          "id": "column-fragments-table-sequential",
+          "inputSha256": "553f908446aed560ccb4dd6bf2fc3e9df5249a72d07a0fb8dbe7f586aec9b305",
+          "status": "delivered",
+          "pages": 3,
+          "pdfSha256": "9e5f6f1cee4c6cefb3d68f7b61c2b1a5e23e32373f769b290a0dbb6f7f64f61f",
+          "renderReportSha256": "57a1cd885416388f8101b442b5b948349dda7782446333febac7912b4bc64c94"
+        }
+      ]
+    }
+  },
+  "referenceBundleSha256": "41cfe5c004b3e147e9718fd168acff2ce6b392098f46ee6b3edbe976ea051c92",
+  "referenceBundle": {
+    "file": "reference-bundle.json.gz",
+    "sha256": "c1ce337ff764651d6d1cc63b9b4e496cf65a8bb690760390d58c7ee691f83b9f",
+    "jsonSha256": "41cfe5c004b3e147e9718fd168acff2ce6b392098f46ee6b3edbe976ea051c92"
+  },
+  "referenceEnvironment": {
+    "fonts": {
+      "LiberationSerif-Bold.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+      },
+      "LiberationSerif-BoldItalic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+      },
+      "LiberationSerif-Italic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+      },
+      "LiberationSerif-Regular.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+      }
+    },
+    "tools": {
+      "pdffonts": {
+        "sha256": "de0a6d649710c2ebc226656b08c70814019a93f58889f79bf1dac726a131beda",
+        "version": "pdffonts version 25.03.0"
+      },
+      "pdftocairo": {
+        "sha256": "6f56c7c8c5b015354ebed053d4b52e14b43611c9c86236562bfd112827108dc5",
+        "version": "pdftocairo version 25.03.0"
+      },
+      "pdftoppm": {
+        "sha256": "6c315e59db2a0829ecdfb6c791ad3f56bc9bd508266d20adc22238df447a74a3",
+        "version": "pdftoppm version 25.03.0"
+      },
+      "pdftotext": {
+        "sha256": "451784e28a4593637573e534d9be4c4487a3cccffae22a71e93162faa84de23c",
+        "version": "pdftotext version 25.03.0"
+      },
+      "qpdf": {
+        "sha256": "0d0462ea848601a652b666e83a07a095bb0c4d69d831beb6f94ea8e6e008f34c",
+        "version": "qpdf version 12.2.0"
+      }
+    }
+  },
+  "schema": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "documents": {
+      "fixtures/column-fragments-paragraph-balanced.docx": [],
+      "fixtures/column-fragments-paragraph-one-column-control.docx": [],
+      "fixtures/column-fragments-paragraph-sequential.docx": [],
+      "fixtures/column-fragments-table-balanced.docx": [],
+      "fixtures/column-fragments-table-one-column-control.docx": [],
+      "fixtures/column-fragments-table-sequential.docx": []
+    }
+  },
+  "cases": [
+    {
+      "id": "column-fragments-paragraph-one-column-control",
+      "inputSha256": "41d51a181c2d69e099c1ae5f0df65b5fe6e4dc510e188fa64022c07e3ff4c53b",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "column-fragments-paragraph-one-column-control-baseline-report.json.gz",
+            "sha256": "f485488745027fedc1cd373f8223c5ae81ee61d88262835e719793b25a7d0112",
+            "jsonSha256": "8b179387bef7e6caa866ae2ae17a38bf014785b38d127e0e3239c1af53d5e39e"
+          },
+          "pdfSha256": "5b380ab41112eb54514b743858b0e6f02f49e456ccca348649a2f840af8c4db8",
+          "pages": 5,
+          "checkedLabels": 54,
+          "inspection": {
+            "file": "column-fragments-paragraph-one-column-control-baseline-inspection.json.gz",
+            "sha256": "4bea810388acc028a8e10bf88c8eea9d19755f6db1eb17893198e3a852683a0f",
+            "jsonSha256": "9dbc02900a8614e1796583ed622c10b6dc217941850381058bc489f23c4c4d9e"
+          },
+          "pageRasterSha256": [
+            "273baa53c49e46994aa5ed960cdfaebef6bea90bbeb545ae29f28b1470f7c83c",
+            "2d5293b1e12223cbe11abed4e305318d01c54839b4618169ac8892a43d3c0903",
+            "d0d5d65316830a98df3b0be9788a95f5b2d15e20f8d2000dbde8077e7f8c4f61",
+            "aff2a5b9ac20a7fa1847475f8331f6ea270393455b5e76bce1fcaaae221baf84",
+            "2de7e56efd3b7ae5d478cb8a4b03e2bbdc08428d697c3e799d4f48053c809488"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "pdfSha256": "007afc4f57b3963e981be4e2d231d2d6863bf073c690dab08c5edf6676ea50be",
+          "pages": 5,
+          "checkedLabels": 54,
+          "inspection": {
+            "file": "column-fragments-paragraph-one-column-control-reference-inspection.json.gz",
+            "sha256": "9fb5f3b5cdcf21f430fb0f6d81df691b0e452ddfa8b0193c8f8e97424b50a57b",
+            "jsonSha256": "f97cee1d8e5a677433bcbdc33f272aa3cf87c4897e42ab889b3dec58a1658d97"
+          },
+          "pageRasterSha256": [
+            "7c914280f88298ab490867eacd1c78d88fa4fbdbc410d9002983a2ec58f3102b",
+            "8ace04ca5dab71f4bccc2ab384e55e385ee6156e1c1f36ffb40f77292f707846",
+            "0df132da4be014d3e117afb43901cd3c7dcc7548827637dba9131eb6af90360a",
+            "a9a375958ac85a8ba03076b0fb7e453ce04e568436498d72e4196d943df47bd6",
+            "7d981eb41a32435775ac383522a7e8a1189ad401fb72dc08b06a875840719f13"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "column-fragments-paragraph-one-column-control-candidate-report.json.gz",
+            "sha256": "ab2b8dd14d4cb0ff3707decc7892958162d08201c744d19269621cff8b5a1c1f",
+            "jsonSha256": "75d7505a021ccdc4c3d18d154c155265af73f38be3d992a126ac12b49096c24e"
+          },
+          "pdfSha256": "12d63649a40a9539caa27de561249b2a3de2fbc64e45c71aad90f5dac56b9d65",
+          "pages": 5,
+          "checkedLabels": 54,
+          "inspection": {
+            "file": "column-fragments-paragraph-one-column-control-candidate-inspection.json.gz",
+            "sha256": "4bea810388acc028a8e10bf88c8eea9d19755f6db1eb17893198e3a852683a0f",
+            "jsonSha256": "9dbc02900a8614e1796583ed622c10b6dc217941850381058bc489f23c4c4d9e"
+          },
+          "pageRasterSha256": [
+            "273baa53c49e46994aa5ed960cdfaebef6bea90bbeb545ae29f28b1470f7c83c",
+            "2d5293b1e12223cbe11abed4e305318d01c54839b4618169ac8892a43d3c0903",
+            "d0d5d65316830a98df3b0be9788a95f5b2d15e20f8d2000dbde8077e7f8c4f61",
+            "aff2a5b9ac20a7fa1847475f8331f6ea270393455b5e76bce1fcaaae221baf84",
+            "2de7e56efd3b7ae5d478cb8a4b03e2bbdc08428d697c3e799d4f48053c809488"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "column-fragments-paragraph-one-column-control.png",
+        "sha256": "481f64b52f1cbe677befde30a095c6a25217d91443858362dd19d0a1e48680c1"
+      }
+    },
+    {
+      "id": "column-fragments-paragraph-balanced",
+      "inputSha256": "e266a6613a46683757d2cb5f0f2a2679425cc21c7e48ad6d00a3a1ffdf4aec3b",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "failure": {
+            "id": "column-fragments-paragraph-balanced",
+            "inputSha256": "e266a6613a46683757d2cb5f0f2a2679425cc21c7e48ad6d00a3a1ffdf4aec3b",
+            "status": "failed",
+            "code": "pagination_failure",
+            "phase": "running_story_placement",
+            "message": "Page 1 body content is clipped (540px scroll height in a 256px band; p.docx-000000 (+284.0px), div (+284.0px), span.docx-000001 (+283.0px))."
+          }
+        },
+        {
+          "renderer": "reference",
+          "pdfSha256": "1090054f491b09e0a2b7dd464a1817929bb7c6b30fcedbee24525c2f4875b870",
+          "pages": 3,
+          "checkedLabels": 54,
+          "inspection": {
+            "file": "column-fragments-paragraph-balanced-reference-inspection.json.gz",
+            "sha256": "6c64be05f7ed82014c498462f920de3555356dabf4b0d6778c07daabb693adc3",
+            "jsonSha256": "ee8e57b555f81edae70a768c987e604c311a930f2515c8cf1fb3853e007c132d"
+          },
+          "pageRasterSha256": [
+            "658dd9ccbd0793f427c230c103920a6453f4cca1528ff71f5d6e38bfe0640896",
+            "7ed32496ed25cfb78ade491101011148c3b49caefb79a57ac3d2823747da15d1",
+            "7d981eb41a32435775ac383522a7e8a1189ad401fb72dc08b06a875840719f13"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "column-fragments-paragraph-balanced-candidate-report.json.gz",
+            "sha256": "48584797817024ef7e016e2244a84dada0888ee03e04739294632f562c290550",
+            "jsonSha256": "54b5a408331d03c3c7f57510306f04c749f9a25efb1eba77afb1535d19d74d96"
+          },
+          "pdfSha256": "8dc177eff9cfecd57a99acb1b4d34d587acf6f3756386de75fba851bad2f85e7",
+          "pages": 3,
+          "checkedLabels": 54,
+          "inspection": {
+            "file": "column-fragments-paragraph-balanced-candidate-inspection.json.gz",
+            "sha256": "8f282e40fdd59a7b8215d18d883fbeebc1a246527bcb7d49f2e24ac2d552a714",
+            "jsonSha256": "f82984164b582097f0d1e339a7ebddfd84a77f55e95d3c77794d3f5563560adc"
+          },
+          "pageRasterSha256": [
+            "4b076c53458e6d616ecb323c4749e71c792b284d095473e2230cf37b5491cbad",
+            "150a6dcdfa879b2be57ec2eb2c6a3049777e47979cc53d3a436fc7014a0ca575",
+            "0258563b76299020821bada32ea5c5c3911cfc813313d8d230ce78e37d054b1b"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "column-fragments-paragraph-balanced.png",
+        "sha256": "5a3dbd861ac03995a9c8466296ac56d3e3ae609ad1d2d91a9d100eef95b9482d"
+      }
+    },
+    {
+      "id": "column-fragments-paragraph-sequential",
+      "inputSha256": "98032a2b3d251b687fda860d1ad553d4df1e0c89e323570a4f625360a67e4730",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "failure": {
+            "id": "column-fragments-paragraph-sequential",
+            "inputSha256": "98032a2b3d251b687fda860d1ad553d4df1e0c89e323570a4f625360a67e4730",
+            "status": "failed",
+            "code": "pagination_failure",
+            "phase": "running_story_placement",
+            "message": "Page 1 body content is clipped (540px scroll height in a 256px band; p.docx-000000 (+284.0px), div (+284.0px), span.docx-000001 (+283.0px))."
+          }
+        },
+        {
+          "renderer": "reference",
+          "pdfSha256": "aaf475887c205a6127e27adeac6409d0383ecfe8dc8dae17375b62acfcf32318",
+          "pages": 3,
+          "checkedLabels": 54,
+          "inspection": {
+            "file": "column-fragments-paragraph-sequential-reference-inspection.json.gz",
+            "sha256": "6c64be05f7ed82014c498462f920de3555356dabf4b0d6778c07daabb693adc3",
+            "jsonSha256": "ee8e57b555f81edae70a768c987e604c311a930f2515c8cf1fb3853e007c132d"
+          },
+          "pageRasterSha256": [
+            "658dd9ccbd0793f427c230c103920a6453f4cca1528ff71f5d6e38bfe0640896",
+            "7ed32496ed25cfb78ade491101011148c3b49caefb79a57ac3d2823747da15d1",
+            "7d981eb41a32435775ac383522a7e8a1189ad401fb72dc08b06a875840719f13"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "column-fragments-paragraph-sequential-candidate-report.json.gz",
+            "sha256": "4e1bbec19103c83c8d0f1fae328013ea2329c330403bca2a043ea25d71a52d62",
+            "jsonSha256": "d294fd1852122ac03cd6ae6050d01ef52389d2c4374654c73978aa32ebefc885"
+          },
+          "pdfSha256": "48da0641ae7c19e046d0c119bc1392b9f61d6389faf516d1213574143bde6670",
+          "pages": 3,
+          "checkedLabels": 54,
+          "inspection": {
+            "file": "column-fragments-paragraph-sequential-candidate-inspection.json.gz",
+            "sha256": "b0ba6435c48b53e91589e958d0b3e49fcc7283374e3b98d749208436ce5dd756",
+            "jsonSha256": "ce71f746dd59a25d26c6f4e8c056628dab35ae9d9cf5d94e81c95a80d6a00a4c"
+          },
+          "pageRasterSha256": [
+            "4b076c53458e6d616ecb323c4749e71c792b284d095473e2230cf37b5491cbad",
+            "150a6dcdfa879b2be57ec2eb2c6a3049777e47979cc53d3a436fc7014a0ca575",
+            "2de7e56efd3b7ae5d478cb8a4b03e2bbdc08428d697c3e799d4f48053c809488"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "column-fragments-paragraph-sequential.png",
+        "sha256": "f487a69f1d26dd98e172b3bfd28880a1e7a5702f8b8919872087bc68cac74bae"
+      }
+    },
+    {
+      "id": "column-fragments-table-one-column-control",
+      "inputSha256": "75fe4e25740e7ce08f4c415c800a9828e3508f19214d6c65c91c1259964426e2",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "column-fragments-table-one-column-control-baseline-report.json.gz",
+            "sha256": "2504e817c053aee2b4ca82a1895835108591cecf77afe0bd5c54177c68c305d5",
+            "jsonSha256": "4d618f94e3f262993f0e90ed50144994036ea439e469662d2392fa3d4b7b9a84"
+          },
+          "pdfSha256": "5548586184b6287b5589a763273ac25c2526592b388c9c6d332e07f06c812170",
+          "pages": 5,
+          "checkedLabels": 107,
+          "inspection": {
+            "file": "column-fragments-table-one-column-control-baseline-inspection.json.gz",
+            "sha256": "822988de1bab938589a6aaf713681080feb01e2d4b19f7c725503ba5fb295adf",
+            "jsonSha256": "e65442c02fc52ffefd182b8d91671e7f5fb221936be6141eeaa0e9be7e20e703"
+          },
+          "pageRasterSha256": [
+            "5413dd0669e2378ee9c0cee3d0ca91ffbfa1e4d9e84df26cdfdc857ff36977ed",
+            "972d59239444caaf65fb6d2bdca4d2655415674f2283bed1ae1541ae1f24db3d",
+            "914669d32cba7dc442855418ab3713ece451eb6bc5d3988b230e64e70754eec6",
+            "f1f688a7dc0a9bf166f3904a68f7049e8235f38c05abcf0ab9ba1a42b578de6d",
+            "d20ab44394809112f61fdac67bc293074619d3c6b51591f78749f971e21d8975"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "pdfSha256": "3da48f33e63fb361ac7dd9d07c679e9d1cf0289e95ffd7779469f28496049954",
+          "pages": 5,
+          "checkedLabels": 107,
+          "inspection": {
+            "file": "column-fragments-table-one-column-control-reference-inspection.json.gz",
+            "sha256": "130099f8e09748c439a8b50fe4dca04182781444a1da43324f8e281ee552418d",
+            "jsonSha256": "226669f18fe95926aa69995848d2684f68f87ea0affbc5d582e2917e19e4d0c7"
+          },
+          "pageRasterSha256": [
+            "89f93fb425ee329030ae96deff63e5dc4ad3832523dee392b8b78da9ac8b358d",
+            "434058b926220e1112c3767affbc6fc9b75c4f3cfcb58db095a4e8163b567349",
+            "a42404c8be6b265b66fb01b552972c615a43c0b36c293a2fe47db1c4751aa4e2",
+            "58cc97046f81ac97f0ea7a605e7d0364b949dbbb8018f7414469c857adbe48a0",
+            "3f6b35cdcf26341f036902fe8ed404e8411d5bca15e1039a6dda0742c11c9d3c"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "column-fragments-table-one-column-control-candidate-report.json.gz",
+            "sha256": "f11dd8066d2dd9f7c583b4df7f711cdb8b825b2d8809c487ae3ed49fac422b9b",
+            "jsonSha256": "5f06ed973b580d05ff277034a25f0a286934fe44817e6b5a390a5ed8e94a518e"
+          },
+          "pdfSha256": "88904330ebe1eb7c5ee810a9037816830eb1fe2cf2b08013e87ea6892fe79cc0",
+          "pages": 5,
+          "checkedLabels": 107,
+          "inspection": {
+            "file": "column-fragments-table-one-column-control-candidate-inspection.json.gz",
+            "sha256": "822988de1bab938589a6aaf713681080feb01e2d4b19f7c725503ba5fb295adf",
+            "jsonSha256": "e65442c02fc52ffefd182b8d91671e7f5fb221936be6141eeaa0e9be7e20e703"
+          },
+          "pageRasterSha256": [
+            "5413dd0669e2378ee9c0cee3d0ca91ffbfa1e4d9e84df26cdfdc857ff36977ed",
+            "972d59239444caaf65fb6d2bdca4d2655415674f2283bed1ae1541ae1f24db3d",
+            "914669d32cba7dc442855418ab3713ece451eb6bc5d3988b230e64e70754eec6",
+            "f1f688a7dc0a9bf166f3904a68f7049e8235f38c05abcf0ab9ba1a42b578de6d",
+            "d20ab44394809112f61fdac67bc293074619d3c6b51591f78749f971e21d8975"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "column-fragments-table-one-column-control.png",
+        "sha256": "ad250aa0a730f8f6eab32dc54b5f0b8b9c29cacddd8ac084b016cc03f4bb7bca"
+      }
+    },
+    {
+      "id": "column-fragments-table-balanced",
+      "inputSha256": "356425816847ea6f9c843148f1cabb976f9d1632502a9f9a34c0af0e862c62c4",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "failure": {
+            "id": "column-fragments-table-balanced",
+            "inputSha256": "356425816847ea6f9c843148f1cabb976f9d1632502a9f9a34c0af0e862c62c4",
+            "status": "failed",
+            "code": "pagination_failure",
+            "phase": "running_story_placement",
+            "message": "Page 1 body content is clipped (540px scroll height in a 256px band; col (+284.0px), col (+284.0px), colgroup (+284.0px))."
+          }
+        },
+        {
+          "renderer": "reference",
+          "pdfSha256": "7fb9c06c87d0714d879273f0db6b2106e3cc97d3a2d6ed97a1cdfc8cf9523548",
+          "pages": 3,
+          "checkedLabels": 107,
+          "inspection": {
+            "file": "column-fragments-table-balanced-reference-inspection.json.gz",
+            "sha256": "05d2f3519c9c394ccf53ff0ee220881462f2a566edacbf56a13a4a3e91ae83fe",
+            "jsonSha256": "11d4381d4b2829e0785b6a624d35a40485c2730510f9e013a36855b5409a8506"
+          },
+          "pageRasterSha256": [
+            "4718502928c86e8b35b6dd5e028caf0a33bbb3d2802486b212f029c53ceeebaf",
+            "2859b4453c58777db7ea5e3640af8cbe18feb68b530a230aaef7f6bdf545a501",
+            "3f6b35cdcf26341f036902fe8ed404e8411d5bca15e1039a6dda0742c11c9d3c"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "column-fragments-table-balanced-candidate-report.json.gz",
+            "sha256": "2ff1a7ceec5f82992d0799e8403dbaff43969e6acb12b116e1a776fdefb029ed",
+            "jsonSha256": "616325c35b72c0e2adccd858372b2ab44467281a323e1776021323482702ba6f"
+          },
+          "pdfSha256": "c2abdd5db291ab7faf327a2140d298e03d109d0ef86cc041476c75f8218c2798",
+          "pages": 3,
+          "checkedLabels": 107,
+          "inspection": {
+            "file": "column-fragments-table-balanced-candidate-inspection.json.gz",
+            "sha256": "13c01807d63fa07c9a0133ba574a594efe2dbb5c57506841144b2a9c668bb9cf",
+            "jsonSha256": "1770979f97fd7c0d2ce6719fc6d40d58207c0db77aad319d2e7f9bbc388c9016"
+          },
+          "pageRasterSha256": [
+            "534a5cba67dd7e428f95f3a1e9b9abcd604f88d1ba281c32a4f8de486cab6ec5",
+            "1d0e4e1698ff363491fbb2be7b366c4822829b2cf83613d0abf451e3a44f2477",
+            "e8bd57d2b8f65720ab28424ac8e2fe39d521decaf6d21042191553c934546bdb"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "column-fragments-table-balanced.png",
+        "sha256": "9d5e8dbc110ba89dbc9f42629184f79517977888728acf878f3048eedbf3b0ac"
+      }
+    },
+    {
+      "id": "column-fragments-table-sequential",
+      "inputSha256": "553f908446aed560ccb4dd6bf2fc3e9df5249a72d07a0fb8dbe7f586aec9b305",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "failure": {
+            "id": "column-fragments-table-sequential",
+            "inputSha256": "553f908446aed560ccb4dd6bf2fc3e9df5249a72d07a0fb8dbe7f586aec9b305",
+            "status": "failed",
+            "code": "pagination_failure",
+            "phase": "running_story_placement",
+            "message": "Page 1 body content is clipped (540px scroll height in a 256px band; col (+284.0px), col (+284.0px), colgroup (+284.0px))."
+          }
+        },
+        {
+          "renderer": "reference",
+          "pdfSha256": "24c5414806f93c11ae0d23417fc6fd7f34cd60fffe1ab8b139308dbead5bd0b4",
+          "pages": 3,
+          "checkedLabels": 107,
+          "inspection": {
+            "file": "column-fragments-table-sequential-reference-inspection.json.gz",
+            "sha256": "05d2f3519c9c394ccf53ff0ee220881462f2a566edacbf56a13a4a3e91ae83fe",
+            "jsonSha256": "11d4381d4b2829e0785b6a624d35a40485c2730510f9e013a36855b5409a8506"
+          },
+          "pageRasterSha256": [
+            "4718502928c86e8b35b6dd5e028caf0a33bbb3d2802486b212f029c53ceeebaf",
+            "2859b4453c58777db7ea5e3640af8cbe18feb68b530a230aaef7f6bdf545a501",
+            "3f6b35cdcf26341f036902fe8ed404e8411d5bca15e1039a6dda0742c11c9d3c"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "column-fragments-table-sequential-candidate-report.json.gz",
+            "sha256": "28ee08b0d8e5997bb57bf071f8a886b7b77294cc51b34df88775c1253ce494c7",
+            "jsonSha256": "57a1cd885416388f8101b442b5b948349dda7782446333febac7912b4bc64c94"
+          },
+          "pdfSha256": "9e5f6f1cee4c6cefb3d68f7b61c2b1a5e23e32373f769b290a0dbb6f7f64f61f",
+          "pages": 3,
+          "checkedLabels": 107,
+          "inspection": {
+            "file": "column-fragments-table-sequential-candidate-inspection.json.gz",
+            "sha256": "191509da8c3c50e82e433acea87f7efc67afa609517e133b2ad4e5c190e103d0",
+            "jsonSha256": "fbfbd6913ed8feb0f5613bffd557012aebf627beff0528ff30ab824817e95fab"
+          },
+          "pageRasterSha256": [
+            "534a5cba67dd7e428f95f3a1e9b9abcd604f88d1ba281c32a4f8de486cab6ec5",
+            "1d0e4e1698ff363491fbb2be7b366c4822829b2cf83613d0abf451e3a44f2477",
+            "d20ab44394809112f61fdac67bc293074619d3c6b51591f78749f971e21d8975"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "column-fragments-table-sequential.png",
+        "sha256": "aa60603acf4f322a06f662fb2ce3f5aa7d49de841028d605b95b811532b519d1"
+      }
+    }
+  ],
+  "tools": {
+    "docs/results/column-fragmentation/Compose.py": "a87826a881e857661ca8bb305cc5246b133010d71830ca55d92a969a6a0d4a2e",
+    "docs/results/export-reliability/Capture.mjs": "913af2a6c436b757a32d31fed85cae0db4ed24044e51a6c4b783024e7dfb82dc"
+  }
+}
