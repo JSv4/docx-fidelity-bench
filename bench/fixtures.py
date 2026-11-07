@@ -2002,6 +2002,91 @@ def preset_polygon_cases(add):
 
 
 
+def custom_path_cases(add):
+    """Original Willow geometry, distinct from renderer regressions in dimensions and coordinates."""
+    wps = 'http://schemas.microsoft.com/office/word/2010/wordprocessingShape'
+    wpg = 'http://schemas.microsoft.com/office/word/2010/wordprocessingGroup'
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="22"/>'
+              '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0" '
+              'w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    paper = ('<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" '
+             'w:right="1440" w:bottom="1440" w:left="1440"/></w:sectPr>')
+
+    def point(x, y):
+        return f'<a:pt x="{x}" y="{y}"/>'
+
+    def commands(name, *points):
+        return f'<a:{name}>' + ''.join(point(*p) for p in points) + f'</a:{name}>'
+
+    def contour(points):
+        return commands('moveTo', points[0]) + ''.join(commands('lnTo', p) for p in points[1:]) + '<a:close/>'
+
+    def path(value, attrs='stroke="0"', width=600, height=400):
+        return f'<a:path w="{width}" h="{height}" {attrs}>{value}</a:path>'
+
+    triangle = contour([(50, 350), (210, 30), (550, 350)])
+    quadratic = commands('moveTo', (50, 300)) + commands('quadBezTo', (300, -120), (550, 300))
+    quadratic += commands('lnTo', (550, 350)) + commands('lnTo', (50, 350)) + '<a:close/>'
+    cubic = commands('moveTo', (50, 320)) + commands('cubicBezTo', (75, 20), (490, 50), (550, 320))
+    cubic += commands('lnTo', (50, 320)) + '<a:close/>'
+    outer = contour([(40, 40), (560, 40), (560, 360), (40, 360)])
+    inner = [(180, 130), (180, 270), (420, 270), (420, 130)]
+    variants = {
+        'polygon': path(triangle), 'quadratic': path(quadratic), 'cubic': path(cubic),
+        'open-stroke': path(commands('moveTo', (50, 80)) + commands('lnTo', (550, 320)), 'fill="none"'),
+        'hole': path(outer + contour(inner)), 'same-winding-hole': path(outer + contour(list(reversed(inner)))),
+        'multiple': path(triangle) + path(commands('moveTo', (100, 400)) + commands('lnTo', (1100, 400)),
+                                        'fill="none"', 1200, 800),
+        'flipped': path(triangle), 'group': path(triangle),
+        'invisible-control': path(triangle, 'fill="none" stroke="false"'), 'rectangle-control': None,
+    }
+
+    def shape(paths, x=0, y=0, width=113, height=67, flip=False, color='306690'):
+        geometry = ('<a:prstGeom prst="rect"><a:avLst/></a:prstGeom>' if paths is None else
+                    '<a:custGeom><a:avLst/><a:gdLst/><a:ahLst/><a:cxnLst/>'
+                    '<a:rect l="0" t="0" r="r" b="b"/><a:pathLst>' + paths + '</a:pathLst></a:custGeom>')
+        return ('<wps:wsp><wps:cNvSpPr/><wps:spPr>'
+                f'<a:xfrm flipH="{int(flip)}" flipV="{int(flip)}"><a:off x="{x}" y="{y}"/>'
+                f'<a:ext cx="{width * 12700}" cy="{height * 12700}"/></a:xfrm>' + geometry
+                + (f'<a:solidFill><a:srgbClr val="{color}"/></a:solidFill>' if color else '<a:noFill/>')
+                + ('<a:ln w="19050"><a:solidFill><a:srgbClr val="BA603A"/></a:solidFill></a:ln>'
+                   if color and paths is not None else '<a:ln><a:noFill/></a:ln>')
+                + '</wps:spPr><wps:bodyPr/></wps:wsp>')
+
+    for key, paths in variants.items():
+        grouped = key == 'group'
+        width, height = (240, 100) if grouped else (113, 67)
+        content = shape(paths, flip=key == 'flipped')
+        if grouped:
+            # Translated, unequally scaled child coordinates. The transparent frame prevents
+            # native import from replacing the declared child space with occupied bounds.
+            children = shape(path(triangle), x=6000, y=8000, width=226, height=201)
+            children += shape(path(cubic), x=6000 + 250 * 12700, y=8000 + 90 * 12700,
+                              width=200, height=180, color='BA603A')
+            children += shape(None, x=6000, y=8000, width=480, height=300, color=None)
+            content = ('<wpg:wgp><wpg:cNvGrpSpPr/><wpg:grpSpPr><a:xfrm><a:off x="0" y="0"/>'
+                       f'<a:ext cx="{width * 12700}" cy="{height * 12700}"/><a:chOff x="6000" y="8000"/>'
+                       f'<a:chExt cx="{480 * 12700}" cy="{300 * 12700}"/></a:xfrm></wpg:grpSpPr>'
+                       + children + '</wpg:wgp>')
+        drawing = ('<w:r><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" '
+                   'relativeHeight="7" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1">'
+                   '<wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="page"><wp:posOffset>1346200</wp:posOffset></wp:positionH>'
+                   '<wp:positionV relativeFrom="page"><wp:posOffset>2133600</wp:posOffset></wp:positionV>'
+                   f'<wp:extent cx="{width * 12700}" cy="{height * 12700}"/><wp:wrapNone/><wp:docPr id="79" name="Willow paths"/>'
+                   f'<a:graphic><a:graphicData uri="{wpg if grouped else wps}">{content}</a:graphicData></a:graphic>'
+                   '</wp:anchor></w:drawing></w:r>')
+        colors = [] if key == 'invisible-control' else [[186, 96, 58]] if key == 'open-stroke' else [[48, 102, 144]]
+        if key in ('multiple', 'group'):
+            colors.append([186, 96, 58])
+        add('custom-path-' + key, 'images', 'Willow ' + key + ' literal custom path (part of Docxodus #1554)',
+            ['WillowBefore', 'WillowAnchor', 'WillowAfter'], para('WillowBefore')
+            + para(runs=run('WillowAnchor') + drawing) + para('WillowAfter'), sect=paper, styles_xml=styles,
+            namespaces_extra=f' xmlns:wps="{wps}" xmlns:wpg="{wpg}"',
+            assertions=[dict(type='color-reference-geometry', version=1, page=1, rgb=rgb,
+                             tolerancePt=1.5, coverageTolerance=.08) for rgb in colors])
+
+
 def vml_line_cases(add):
     """Original Hazel labels and independently chosen endpoint dimensions."""
     styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
@@ -5075,7 +5160,8 @@ def generate():
     vml_line_cases(add)
     oversized_keep_next_cases(add)
     markup_paper_clip_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v116', 'version': 116, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    custom_path_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v117', 'version': 117, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

@@ -1,0 +1,6009 @@
+{
+  "scope": "Unscored strict-font public export diagnostics; no Word or full-suite parity claim",
+  "manifestSha256": "1379afe7096092745f1012953689ebf76707d3a87c2dd66509ed71c5a8c8e09e",
+  "builds": {
+    "baseline": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-vml/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-vml/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-vml/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-vml/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-vml/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-vml/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-vml/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-vml/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-vml/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "643357cda97027b16260b3ba20ff85ef59eb7406",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "cfd1b91cc953f1f8a68a35bac90a803225c73372382e0f7a8617c3e5cbcc7be5",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+      "schema": 1,
+      "tree": "2b07bc8c947f7a85146025e02b4469b1d64d5150"
+    },
+    "candidate": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-custom/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-custom/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-custom/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-custom/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-custom/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-custom/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-custom/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-custom/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-custom/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "6a65f2cd8ec33d76008fec6abd0a843e2707094e",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "1432188fd02407aa227e189d71155eec79cb055517167391be42545b14b74e0a",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+      "schema": 1,
+      "tree": "71d2c5b424d357f5a71ecfe89226023159c82568"
+    }
+  },
+  "rendererAssets": {
+    "baseline": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 618308,
+          "sha256": "20081901d6c081946d1b3beaf4d17663af607334e990e585796fb89bb09ce762"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 169642,
+          "sha256": "7fc9001be8f9145c443ff4aa6c854b0acb12aed7cb0330f7e2777d2110ce5926"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46484,
+          "sha256": "a604dbff16d3be0f0d24cf48753404b42fe25f70fbd1393dde4934871446a420"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5445913,
+          "sha256": "01a2819b87ffdf1d7ed294df0f3364a3e534d720f46ac78d5faa5e039de5327f"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "704b96b7cffc7b589e23c89bd3b35860904ed8f0a69dd0ddd465db7a84bcb1fc"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "5e08586a10f0b0c9e4354438734b392459cd64282ababf7029a48246f6da6d47"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1674517,
+          "sha256": "2ebf53d9fe8ce4f58c19af1ce4995f1b7c950330ef0a20180269c6f9c2371aac"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "57e3f9c6b4277c8662ca30b1379f9d269cb7f01b3dbdd1fbc1b7e4bfdbc0d8aa"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10547948,
+          "sha256": "ade497ffc1d484908545c5c67a065cf5b2b36d2b80f8cccc44108edfec8eb218"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    },
+    "candidate": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 618308,
+          "sha256": "20081901d6c081946d1b3beaf4d17663af607334e990e585796fb89bb09ce762"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 169642,
+          "sha256": "7fc9001be8f9145c443ff4aa6c854b0acb12aed7cb0330f7e2777d2110ce5926"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46484,
+          "sha256": "a604dbff16d3be0f0d24cf48753404b42fe25f70fbd1393dde4934871446a420"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5449497,
+          "sha256": "c7ba2a5c58705df622e178aa8c26766a830d2a1283c4d58aad05b0113480944f"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "d2eb86968bd33aab58d95265d20d9bb618fc60de2b2f42b36a6c8403bc819e6a"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "5e08586a10f0b0c9e4354438734b392459cd64282ababf7029a48246f6da6d47"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1674517,
+          "sha256": "2ebf53d9fe8ce4f58c19af1ce4995f1b7c950330ef0a20180269c6f9c2371aac"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "0f29e823d6c4e1e48afd8bdcbb6f45bc25c81810c6b477204b4fb0860b086664"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10547948,
+          "sha256": "2e7def56e1bc7b66618a7eb37c83c3951af80b17f482ba4842245604e36367a2"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    }
+  },
+  "captures": {
+    "baseline": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "643357cda97027b16260b3ba20ff85ef59eb7406",
+      "sourceTree": "2b07bc8c947f7a85146025e02b4469b1d64d5150",
+      "buildIdentitySha256": "fb2f34057ee8e9a5d38aaa8a151dc0687fb27ffafe589c280ab7eb61d0ec7a65",
+      "manifestSha256": "1379afe7096092745f1012953689ebf76707d3a87c2dd66509ed71c5a8c8e09e",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "custom-path-polygon",
+          "inputSha256": "b274811ff9bf0237d32d5d899ecc960f228cb66793a56757c935662146bb091b",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "86ad06ceeb3b5d9aab762a6c0e1bb2c26c3372c89bda24636e67e3b7e74fec83",
+          "renderReportSha256": "53df207845ed0de3b32ac6c101fef05efd951d079ddbcf2d1f6f80576b41ac08"
+        },
+        {
+          "id": "custom-path-quadratic",
+          "inputSha256": "175e6bf6a516978a62768896790a639106697c39d20bd85ce8ec636f51cb1cce",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "03602946f6474730954bcccf439079ba6411cfb92ae514bcb669929c4404fbfb",
+          "renderReportSha256": "03f2d73f83ff61e0c42ab45af9996e7491107656df277b40330d9848f11a92af"
+        },
+        {
+          "id": "custom-path-cubic",
+          "inputSha256": "52136be96ee8dd9357cc9af12fef0500c992dee493f14e4f537d4dd32a0c173a",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "9748380e5587e8503d92706cd567d9f37f3ae3e7a24a0df9153ec794e43409c8",
+          "renderReportSha256": "bf195cc8d4d318dd6997341ed5b0df27b526f8ce038c6b3822da89125e939d68"
+        },
+        {
+          "id": "custom-path-open-stroke",
+          "inputSha256": "1ee254f3dd54102fd7a829bdca13ca80c11013677a9b1573aa0090fd24ca6627",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "24d73a9405de1ee909180b44eb47605c6ed5a77a0f0300fd7b27965a5e7dfc61",
+          "renderReportSha256": "02e82948d4b12f696c7e46e9d1db262a5208c82f4757883ca924dedf88c34514"
+        },
+        {
+          "id": "custom-path-hole",
+          "inputSha256": "c6f4997634292ed710b8fc2528e1ffb83108b97b00de11bd4d97deb7a92cac83",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "9398edd68df05d30c449e16cb3da540e33bc684322c54eeb6f5185ae2c51be8e",
+          "renderReportSha256": "a7940b2974634f2160b80fefbe7f4daa6eb9ccc6a50d91e838f2d0e580b02dcd"
+        },
+        {
+          "id": "custom-path-same-winding-hole",
+          "inputSha256": "39d6f2ee700d133e793101d9686b0698e289e54a21f2d757a21237786acff462",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "192c3749e955ba41002b38d2a21f7c4d34521555110452e28a736951180b814b",
+          "renderReportSha256": "c7bc519f75a45be972ce660b6dee3246b6a54e008f16de5c2090a3fe84d8339c"
+        },
+        {
+          "id": "custom-path-multiple",
+          "inputSha256": "e3f4134d982267db1c04d8c9671aeda6f86b18e7d4fddc0176a661033fd13ec2",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "d2ae200d13013c8d79add65d3c2b73c5f9993a290c6adbee7816072d8c2592b5",
+          "renderReportSha256": "d1f6385ca2a6b9ecb6314fa72fdc0a2f45147507a7ab996190527574b924f960"
+        },
+        {
+          "id": "custom-path-flipped",
+          "inputSha256": "dd1a3e6be507edb48c4ba2020430e53c74b93aeb3547b31edd6ae7bba30bb464",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "34e9d8e52f90676d51ffb6604868a65b93d47881d5f402f9f522671bb1fef543",
+          "renderReportSha256": "1e83304e8ff56df8ffb5875d658e0bc494eebde2ff74de35a4d395c68d11ae1c"
+        },
+        {
+          "id": "custom-path-group",
+          "inputSha256": "59c733ccce11fbce68d4a1978b739b32c27109d84b1b7b35314cf2e04b2f5c34",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "a1141e18dace0491a9aee3867dbe7bce012c77bcfea0abec30b7f55ca8969784",
+          "renderReportSha256": "1beefc4b0df95ca81292a96982d4cb73e66ea8e8281a30b23b3a023afd83f505"
+        },
+        {
+          "id": "custom-path-invisible-control",
+          "inputSha256": "3e228ecc0cd901cc4dd45bb2b73cbb621e3201b478a8d0257b1f51fbf3b601d6",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "ea6a99c0d741f2a61cc969096e70f3a4878df39dfa19f61eb545184e1f9b98d7",
+          "renderReportSha256": "50133811cb072f1a889cd384b518daf12f3343e2b3feae33d370a409eb7865c8"
+        },
+        {
+          "id": "custom-path-rectangle-control",
+          "inputSha256": "843ea1e879809117547fb4dfefb64450b636c5abb303405541672bb475e53794",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "f77df9f725e09bde3b422bee1f8203c63b6f82031d287dd07c815f459fabddaa",
+          "renderReportSha256": "fa6b4cad4d00711efac1d72e2828fbc610ab2dd3f30e5064e399d4c9f9457470"
+        }
+      ]
+    },
+    "candidate": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "6a65f2cd8ec33d76008fec6abd0a843e2707094e",
+      "sourceTree": "71d2c5b424d357f5a71ecfe89226023159c82568",
+      "buildIdentitySha256": "cf9b93c530403b6a018d5de66ca8db60dda99b34e2108da326de75010b8ef287",
+      "manifestSha256": "1379afe7096092745f1012953689ebf76707d3a87c2dd66509ed71c5a8c8e09e",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "custom-path-polygon",
+          "inputSha256": "b274811ff9bf0237d32d5d899ecc960f228cb66793a56757c935662146bb091b",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "a2fe81e1ab08039b68cc40a3d5b30496c33c7edcb161e880b53f96a4c6cb7dd4",
+          "renderReportSha256": "d24b8b60ceb399ca1055b6a8a1e740ace4c57fd74eb9e8f172dcb223371e6ee0"
+        },
+        {
+          "id": "custom-path-quadratic",
+          "inputSha256": "175e6bf6a516978a62768896790a639106697c39d20bd85ce8ec636f51cb1cce",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "8697861421adba46987c1421ee4b7c343ccc643b9a1c766a25c4c23998287d11",
+          "renderReportSha256": "b9c0d800fcc5482e75a1993a4990b9aedf601d404549445194102fea6da725ac"
+        },
+        {
+          "id": "custom-path-cubic",
+          "inputSha256": "52136be96ee8dd9357cc9af12fef0500c992dee493f14e4f537d4dd32a0c173a",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "f91e0d210327f611b6ad33656040c1b3446fa18098197428c6f44a065c9aecc6",
+          "renderReportSha256": "318f1cb8faf0989b13c2a6c916f48df5c6ee947c73e55656b48d5763d7b8601d"
+        },
+        {
+          "id": "custom-path-open-stroke",
+          "inputSha256": "1ee254f3dd54102fd7a829bdca13ca80c11013677a9b1573aa0090fd24ca6627",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "4139a8c3cc2d2b881260984159dbf3c1d916b335e1616d57c5ace9c1e7cf4c90",
+          "renderReportSha256": "936d0affe4f74a2bf15a03c56a233e55913b87aea3364b36cfd2cb0e28a77b3e"
+        },
+        {
+          "id": "custom-path-hole",
+          "inputSha256": "c6f4997634292ed710b8fc2528e1ffb83108b97b00de11bd4d97deb7a92cac83",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "6b923339df3254fbc643b96c1e44d62f49b4e92c500b1201c8a7714863bbe2c4",
+          "renderReportSha256": "1c2174206d90d3685a1160998abe1a3f4e9fb1ef18a4e6b30d91a533fd384a26"
+        },
+        {
+          "id": "custom-path-same-winding-hole",
+          "inputSha256": "39d6f2ee700d133e793101d9686b0698e289e54a21f2d757a21237786acff462",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "bfb37a75570f51b3a5bb7ac5fd22aa61ffe035764dd066e6f5df3d109c9c8a55",
+          "renderReportSha256": "b03a5a479564c8d5c976435778c138086ebf335c3666079405a3b0e761779bd0"
+        },
+        {
+          "id": "custom-path-multiple",
+          "inputSha256": "e3f4134d982267db1c04d8c9671aeda6f86b18e7d4fddc0176a661033fd13ec2",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "738c2b47b0def4b881a6e22ca26a2d92bcec9133adbddee537a41fac2a83e58f",
+          "renderReportSha256": "8264cdce33996797ad45c2e2292c46ef83346fff18b7cb00b4674ebabac8d9ec"
+        },
+        {
+          "id": "custom-path-flipped",
+          "inputSha256": "dd1a3e6be507edb48c4ba2020430e53c74b93aeb3547b31edd6ae7bba30bb464",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "f0ead2efb0187e43312aba0354531afba832042461faa70b655d3137746e41dd",
+          "renderReportSha256": "7e655a2a10eec04c99b75068a7a445a6fe7b5643a8b2ecde4cdffede96703b4a"
+        },
+        {
+          "id": "custom-path-group",
+          "inputSha256": "59c733ccce11fbce68d4a1978b739b32c27109d84b1b7b35314cf2e04b2f5c34",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "77335e092653d8da010499f1735b088ec83621448517456a51956b8f677d9d92",
+          "renderReportSha256": "c00d05aec511fe2197ecb09c3800495ce0cd162211a668b8b100ae58c5b19adc"
+        },
+        {
+          "id": "custom-path-invisible-control",
+          "inputSha256": "3e228ecc0cd901cc4dd45bb2b73cbb621e3201b478a8d0257b1f51fbf3b601d6",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "10ef84a2deea402a3204b142eb31fd278fda9b8191a4d45e366268ec1e3119ac",
+          "renderReportSha256": "25b25fc04aa7ad32d2da5d7028187f314886a70c3deed4e13da6af2607054c09"
+        },
+        {
+          "id": "custom-path-rectangle-control",
+          "inputSha256": "843ea1e879809117547fb4dfefb64450b636c5abb303405541672bb475e53794",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "53ac9c656c8dd6ec366840d953d7c5b18634fc807f77a68d541fecbb2cab28d0",
+          "renderReportSha256": "6630483e4eebe0ff197e595caf2b8b17e9ec4e63bf7e46b32f05c47ec4f81f29"
+        }
+      ]
+    }
+  },
+  "referenceBundleSha256": "c2c43df43c826351ca1a28ad493141f79b3e1aea57c22957ca910a3b368d1718",
+  "referenceBundle": {
+    "file": "reference-bundle.json.gz",
+    "sha256": "482565203c25a4a1499cd3c04e1908e57dbcdae68527c75b2e5b25c476bcc3a8",
+    "jsonSha256": "c2c43df43c826351ca1a28ad493141f79b3e1aea57c22957ca910a3b368d1718"
+  },
+  "referenceEnvironment": {
+    "fonts": {
+      "LiberationSerif-Bold.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+      },
+      "LiberationSerif-BoldItalic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+      },
+      "LiberationSerif-Italic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+      },
+      "LiberationSerif-Regular.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+      }
+    },
+    "tools": {
+      "pdffonts": {
+        "sha256": "de0a6d649710c2ebc226656b08c70814019a93f58889f79bf1dac726a131beda",
+        "version": "pdffonts version 25.03.0"
+      },
+      "pdftocairo": {
+        "sha256": "6f56c7c8c5b015354ebed053d4b52e14b43611c9c86236562bfd112827108dc5",
+        "version": "pdftocairo version 25.03.0"
+      },
+      "pdftoppm": {
+        "sha256": "6c315e59db2a0829ecdfb6c791ad3f56bc9bd508266d20adc22238df447a74a3",
+        "version": "pdftoppm version 25.03.0"
+      },
+      "pdftotext": {
+        "sha256": "451784e28a4593637573e534d9be4c4487a3cccffae22a71e93162faa84de23c",
+        "version": "pdftotext version 25.03.0"
+      },
+      "qpdf": {
+        "sha256": "0d0462ea848601a652b666e83a07a095bb0c4d69d831beb6f94ea8e6e008f34c",
+        "version": "qpdf version 12.2.0"
+      }
+    }
+  },
+  "schema": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "documents": {
+      "fixtures/custom-path-cubic.docx": [],
+      "fixtures/custom-path-flipped.docx": [],
+      "fixtures/custom-path-group.docx": [],
+      "fixtures/custom-path-hole.docx": [],
+      "fixtures/custom-path-invisible-control.docx": [],
+      "fixtures/custom-path-multiple.docx": [],
+      "fixtures/custom-path-open-stroke.docx": [],
+      "fixtures/custom-path-polygon.docx": [],
+      "fixtures/custom-path-quadratic.docx": [],
+      "fixtures/custom-path-rectangle-control.docx": [],
+      "fixtures/custom-path-same-winding-hole.docx": []
+    }
+  },
+  "cases": [
+    {
+      "id": "custom-path-polygon",
+      "inputSha256": "b274811ff9bf0237d32d5d899ecc960f228cb66793a56757c935662146bb091b",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:body:baaf692313afa4f89be3516adf46808f",
+              "severity": "warning"
+            }
+          ],
+          "report": {
+            "file": "custom-path-polygon-baseline-report.json.gz",
+            "sha256": "ee222e05dd1002877f0b7532d83df28ea0ea5f2973954e89bc0d7aa00d9fa5c6",
+            "jsonSha256": "53df207845ed0de3b32ac6c101fef05efd951d079ddbcf2d1f6f80576b41ac08"
+          },
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "assertion-color-reference-geometry"
+          ],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                145.55,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                194.51666666666665,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                122.95,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                202.05,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                162.5,
+                221.6
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            }
+          ],
+          "pdfSha256": "86ad06ceeb3b5d9aab762a6c0e1bb2c26c3372c89bda24636e67e3b7e74fec83",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "custom-path-polygon-baseline-inspection.json.gz",
+            "sha256": "7d1ea7ea185566bdf26e28997a9dd8b0392c937216ba8ee47228c2747b9e2e8b",
+            "jsonSha256": "21e17136672720a5dcfc10e2c9c1b1610327c52021283f15dfdabf9b0a52de15"
+          },
+          "pageRasterSha256": [
+            "c5808b49dd13b5c6a2986ff43e1bd50484aa4aaad5ae5acbb4c10a5df3cbbc49"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                72.1,
+                72.449,
+                134.932,
+                84.626
+              ],
+              "inkPixels": 281
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                72.1,
+                85.099,
+                138.023,
+                97.276
+              ],
+              "inkPixels": 298
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                72.1,
+                97.749,
+                128.222,
+                109.926
+              ],
+              "inkPixels": 255
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                145.55,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                194.51666666666665,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                122.95,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                202.05,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                221.6
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "26877b24c03ac848f453b5674c3769ee09be1341b316c0a42f8ef9d49f3fc744",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-polygon-reference-inspection.json.gz",
+            "sha256": "5cddf4be7d3f6cf0bb51bf6e4ba1ac2ed9c23e14710c600285d817a3c523606b",
+            "jsonSha256": "419b9417aa540ca253dc3df4eba1bde6399bbecb5efaaf777eded0584e55478d"
+          },
+          "pageRasterSha256": [
+            "be475f417a1a330d8a71f30fc078508fc245e3c60b7b349a848c55123ac60364"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "warnings": [],
+          "report": {
+            "file": "custom-path-polygon-candidate-report.json.gz",
+            "sha256": "93f7c2fff77230c5bda78e06bf2e3548387d78d85ac1ad6775b2ba12e67ec460",
+            "jsonSha256": "d24b8b60ceb399ca1055b6a8a1e740ace4c57fd74eb9e8f172dcb223371e6ee0"
+          },
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                145.55,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                194.51666666666665,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                122.95,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                202.05,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                221.6
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "a2fe81e1ab08039b68cc40a3d5b30496c33c7edcb161e880b53f96a4c6cb7dd4",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-polygon-candidate-inspection.json.gz",
+            "sha256": "0a925e11eccf8965a28543190a42c08a73d0f2fb24555a508672644e9037005f",
+            "jsonSha256": "dbccf15f6582f0ef18186bf77df1e8bbbe294ba0eafe8928fd377f0cc1cdd9c5"
+          },
+          "pageRasterSha256": [
+            "1cda2d32f23b888c3421be45aa08f8fdb045bfbb9d9b9d1644d7dd3a4aa61959"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "custom-path-polygon.png",
+        "sha256": "0a2d938860c061aeadfbc9c0d568f9b9d96e1b9fba1079bc8a99b5dc16bf0eeb"
+      }
+    },
+    {
+      "id": "custom-path-quadratic",
+      "inputSha256": "175e6bf6a516978a62768896790a639106697c39d20bd85ce8ec636f51cb1cce",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:body:6b6ba21eaf81133ef9b8989757b20398",
+              "severity": "warning"
+            }
+          ],
+          "report": {
+            "file": "custom-path-quadratic-baseline-report.json.gz",
+            "sha256": "d402558459c306d48cd789399b3f3a92cfd7702bf49b5ecaf70b032eb52cdd60",
+            "jsonSha256": "03f2d73f83ff61e0c42ab45af9996e7491107656df277b40330d9848f11a92af"
+          },
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "assertion-color-reference-geometry"
+          ],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                134.25,
+                198.15
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                190.75,
+                192.2875
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                162.5,
+                189.775
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                162.5,
+                179.725
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                162.5,
+                223.275
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            }
+          ],
+          "pdfSha256": "03602946f6474730954bcccf439079ba6411cfb92ae514bcb669929c4404fbfb",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "custom-path-quadratic-baseline-inspection.json.gz",
+            "sha256": "7d1ea7ea185566bdf26e28997a9dd8b0392c937216ba8ee47228c2747b9e2e8b",
+            "jsonSha256": "21e17136672720a5dcfc10e2c9c1b1610327c52021283f15dfdabf9b0a52de15"
+          },
+          "pageRasterSha256": [
+            "c5808b49dd13b5c6a2986ff43e1bd50484aa4aaad5ae5acbb4c10a5df3cbbc49"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                72.1,
+                72.449,
+                134.932,
+                84.626
+              ],
+              "inkPixels": 281
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                72.1,
+                85.099,
+                138.023,
+                97.276
+              ],
+              "inkPixels": 298
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                72.1,
+                97.749,
+                128.222,
+                109.926
+              ],
+              "inkPixels": 255
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                134.25,
+                198.15
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                190.75,
+                192.2875
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                189.775
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                179.725
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                223.275
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "784a8b74aba872c4614b8eda097dab46c4e91cfd514b9ada02320ff0637ea1f4",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-quadratic-reference-inspection.json.gz",
+            "sha256": "bbf9d2da669d5410076d844886e009e2b785af2adbf9dff747f6f3fe134a7c71",
+            "jsonSha256": "3f225553499e1fc2c1001035f53f6a5fe010e0d9b83b67a89b999bc2cc021db1"
+          },
+          "pageRasterSha256": [
+            "5c325b0dfb537b823e9a8f680eadf79d29a74e0f4ebeecef995e8c77401cf2fd"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "warnings": [],
+          "report": {
+            "file": "custom-path-quadratic-candidate-report.json.gz",
+            "sha256": "537d294d391f1300b7fc8407b2fb1313ede27501e4fcabe05123e5dec2291682",
+            "jsonSha256": "b9c0d800fcc5482e75a1993a4990b9aedf601d404549445194102fea6da725ac"
+          },
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                134.25,
+                198.15
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                190.75,
+                192.2875
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                189.775
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                179.725
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                223.275
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "8697861421adba46987c1421ee4b7c343ccc643b9a1c766a25c4c23998287d11",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-quadratic-candidate-inspection.json.gz",
+            "sha256": "ebcc25946f398f9fd383c9df91f89af9477abe1adf7467c40392f64c305f6ae3",
+            "jsonSha256": "020142859c1fd4036893db98d7b52809e8ae2c9e8032ebf4dde156990164ed4b"
+          },
+          "pageRasterSha256": [
+            "716c70f6f43502dd5bdd86130e2845533e794516088ac927f9af3a641272b473"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "custom-path-quadratic.png",
+        "sha256": "f245dee4f2e5adbea91f2007cb59f22b2e09570be3a6c93c905e56826b97664a"
+      }
+    },
+    {
+      "id": "custom-path-cubic",
+      "inputSha256": "52136be96ee8dd9357cc9af12fef0500c992dee493f14e4f537d4dd32a0c173a",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:body:ab494133b765c53124c1212315982054",
+              "severity": "warning"
+            }
+          ],
+          "report": {
+            "file": "custom-path-cubic-baseline-report.json.gz",
+            "sha256": "e3982eab830e0a47b5ca15126ee1bcf71af736a27680b8ca09e4d94f8916c736",
+            "jsonSha256": "bf195cc8d4d318dd6997341ed5b0df27b526f8ce038c6b3822da89125e939d68"
+          },
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "assertion-color-reference-geometry"
+          ],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                162.5,
+                206.525
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                162.5,
+                181.4
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                128.6,
+                214.9
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                200.16666666666669,
+                193.125
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                162.5,
+                226.625
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            }
+          ],
+          "pdfSha256": "9748380e5587e8503d92706cd567d9f37f3ae3e7a24a0df9153ec794e43409c8",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "custom-path-cubic-baseline-inspection.json.gz",
+            "sha256": "7d1ea7ea185566bdf26e28997a9dd8b0392c937216ba8ee47228c2747b9e2e8b",
+            "jsonSha256": "21e17136672720a5dcfc10e2c9c1b1610327c52021283f15dfdabf9b0a52de15"
+          },
+          "pageRasterSha256": [
+            "c5808b49dd13b5c6a2986ff43e1bd50484aa4aaad5ae5acbb4c10a5df3cbbc49"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                72.1,
+                72.449,
+                134.932,
+                84.626
+              ],
+              "inkPixels": 281
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                72.1,
+                85.099,
+                138.023,
+                97.276
+              ],
+              "inkPixels": 298
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                72.1,
+                97.749,
+                128.222,
+                109.926
+              ],
+              "inkPixels": 255
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                162.5,
+                206.525
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                181.4
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                128.6,
+                214.9
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                200.16666666666669,
+                193.125
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                226.625
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "f6a435831dd9fc9dbb7e3ff0915026751026d964aacd9b9b8ecf7f718fff7b83",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-cubic-reference-inspection.json.gz",
+            "sha256": "61144f00c3acb34c4235ab4a22e444287586429b6b22e0b7cbf97e41e844e280",
+            "jsonSha256": "d9c30018f6db6d8673a71267729054bb497a822b9d34a8d9a4dcbd6ecb804f07"
+          },
+          "pageRasterSha256": [
+            "236bb1761e36e99d6c01f6fe2b75559eff8d8c2ff16be94138218e91b7a92bca"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "warnings": [],
+          "report": {
+            "file": "custom-path-cubic-candidate-report.json.gz",
+            "sha256": "1f88fa89547772502232cb589fcfb67f33534c3189c7bfae628d9d8355558968",
+            "jsonSha256": "318f1cb8faf0989b13c2a6c916f48df5c6ee947c73e55656b48d5763d7b8601d"
+          },
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                162.5,
+                206.525
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                181.4
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                128.6,
+                214.9
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                200.16666666666669,
+                193.125
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                226.625
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "f91e0d210327f611b6ad33656040c1b3446fa18098197428c6f44a065c9aecc6",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-cubic-candidate-inspection.json.gz",
+            "sha256": "0b4977bf7e159f4af2f77a67e12c6a0de63ff28bf185c7fea93ccdd5bfd02245",
+            "jsonSha256": "90cf99179003017c535d0eeb7718187a854e60083dba1f8b7c9bc369455270d1"
+          },
+          "pageRasterSha256": [
+            "5cc0e9584a600b26284061ce310700492fdcf534662a1f7787aaf484649c2819"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "custom-path-cubic.png",
+        "sha256": "c834b6648a4229a36c56b5a7c655d3525f01d81f7fdaf06f507d00d9b1e938e2"
+      }
+    },
+    {
+      "id": "custom-path-open-stroke",
+      "inputSha256": "1ee254f3dd54102fd7a829bdca13ca80c11013677a9b1573aa0090fd24ca6627",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:body:af28524edf22529f442e3e9b7dfc5b0e",
+              "severity": "warning"
+            }
+          ],
+          "report": {
+            "file": "custom-path-open-stroke-baseline-report.json.gz",
+            "sha256": "c8e5316f184e4b406b6c92b760e8d87246bc708620be84e9f5f0609f890462d8",
+            "jsonSha256": "02e82948d4b12f696c7e46e9d1db262a5208c82f4757883ca924dedf88c34514"
+          },
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "assertion-color-reference-geometry"
+          ],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                124.83333333333333,
+                185.42000000000002
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                162.5,
+                201.5
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                200.16666666666669,
+                217.57999999999998
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                162.5,
+                208.2
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            }
+          ],
+          "pdfSha256": "24d73a9405de1ee909180b44eb47605c6ed5a77a0f0300fd7b27965a5e7dfc61",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "custom-path-open-stroke-baseline-inspection.json.gz",
+            "sha256": "52d5c14f031c0fc6b02e862a28cdc98deb8c3e73c92fd0b029db4d3659308da7",
+            "jsonSha256": "64a9ee7e1155f995ec9650b550f21699937a54b111569447648e322313fcd297"
+          },
+          "pageRasterSha256": [
+            "c5808b49dd13b5c6a2986ff43e1bd50484aa4aaad5ae5acbb4c10a5df3cbbc49"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                72.1,
+                72.449,
+                134.932,
+                84.626
+              ],
+              "inkPixels": 281
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                72.1,
+                85.099,
+                138.023,
+                97.276
+              ],
+              "inkPixels": 298
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                72.1,
+                97.749,
+                128.222,
+                109.926
+              ],
+              "inkPixels": 255
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                124.83333333333333,
+                185.42000000000002
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                201.5
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                200.16666666666669,
+                217.57999999999998
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                208.2
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "791cc65957b8df641f6faf27642d1c5bbc325592ba900392939d8c7e03b4ced8",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-open-stroke-reference-inspection.json.gz",
+            "sha256": "48b251cf9f7fa366fc23beda827627e172433990892da8b2ac718aac9a5ad1bf",
+            "jsonSha256": "12d9115e324ab0f361a987aca3e584237e515131d62847675947b58c78e7bfe0"
+          },
+          "pageRasterSha256": [
+            "cbf9f586a8d2812145c8c6eeea88492f115a095fafa7a3ed97327075f93ae849"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "warnings": [],
+          "report": {
+            "file": "custom-path-open-stroke-candidate-report.json.gz",
+            "sha256": "5d8d8486ee9f7f9711fd759a81681ff54097ca7d1e023e2f4828a62d2efc43d1",
+            "jsonSha256": "936d0affe4f74a2bf15a03c56a233e55913b87aea3364b36cfd2cb0e28a77b3e"
+          },
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                124.83333333333333,
+                185.42000000000002
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                201.5
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                200.16666666666669,
+                217.57999999999998
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                208.2
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "4139a8c3cc2d2b881260984159dbf3c1d916b335e1616d57c5ace9c1e7cf4c90",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-open-stroke-candidate-inspection.json.gz",
+            "sha256": "542cab96486b1538c1f4c3d278a889186f2abb7b6d7006c8581ba433af7217e6",
+            "jsonSha256": "01154125ee6f3b95bb30163797488296666c8d5837e620ebab7190b8bd26efac"
+          },
+          "pageRasterSha256": [
+            "38f85d5c7400349facccc379e7db9e15656fe5e747adfb8dd4054c00fc775409"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "custom-path-open-stroke.png",
+        "sha256": "4af6066516e6822c3ddc8b683e154601005b44d15cb113acf9b32c76cdb215f6"
+      }
+    },
+    {
+      "id": "custom-path-hole",
+      "inputSha256": "c6f4997634292ed710b8fc2528e1ffb83108b97b00de11bd4d97deb7a92cac83",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:body:6ab3037a3759ed77b7322dd649b04dda",
+              "severity": "warning"
+            }
+          ],
+          "report": {
+            "file": "custom-path-hole-baseline-report.json.gz",
+            "sha256": "f96c129d8d2f34f0b8f16e3497310663aeef434c7b1dd006dbe193976ca7e6a6",
+            "jsonSha256": "a7940b2974634f2160b80fefbe7f4daa6eb9ccc6a50d91e838f2d0e580b02dcd"
+          },
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "assertion-color-reference-geometry"
+          ],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                121.06666666666666,
+                201.5
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                162.5,
+                181.4
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                162.5,
+                201.5
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                200.16666666666669,
+                201.5
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                162.5,
+                223.275
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            }
+          ],
+          "pdfSha256": "9398edd68df05d30c449e16cb3da540e33bc684322c54eeb6f5185ae2c51be8e",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "custom-path-hole-baseline-inspection.json.gz",
+            "sha256": "7d1ea7ea185566bdf26e28997a9dd8b0392c937216ba8ee47228c2747b9e2e8b",
+            "jsonSha256": "21e17136672720a5dcfc10e2c9c1b1610327c52021283f15dfdabf9b0a52de15"
+          },
+          "pageRasterSha256": [
+            "c5808b49dd13b5c6a2986ff43e1bd50484aa4aaad5ae5acbb4c10a5df3cbbc49"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                72.1,
+                72.449,
+                134.932,
+                84.626
+              ],
+              "inkPixels": 281
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                72.1,
+                85.099,
+                138.023,
+                97.276
+              ],
+              "inkPixels": 298
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                72.1,
+                97.749,
+                128.222,
+                109.926
+              ],
+              "inkPixels": 255
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                121.06666666666666,
+                201.5
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                181.4
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                201.5
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                200.16666666666669,
+                201.5
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                223.275
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "8b183d005d377dfc2b3ca0d45fcd6aa5d02846a07905bd62cbef15134c5f2f64",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-hole-reference-inspection.json.gz",
+            "sha256": "ecde0dffbfc8cb24a4d1f81c782be885c731af2365490761511ac86ac8876a91",
+            "jsonSha256": "c05cf059f973ab308342983176a3a5c14fbd745f5a28eea29e8ba3f66adaca02"
+          },
+          "pageRasterSha256": [
+            "0badc9d3f7ac7f1ed3d680df9d33e714f183181e315cf1bf50ce281d25315ebd"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "warnings": [],
+          "report": {
+            "file": "custom-path-hole-candidate-report.json.gz",
+            "sha256": "c997bc0acf8830d4c95039780fde996cb9d6b8c2dc76873286e42f27babb7e05",
+            "jsonSha256": "1c2174206d90d3685a1160998abe1a3f4e9fb1ef18a4e6b30d91a533fd384a26"
+          },
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                121.06666666666666,
+                201.5
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                181.4
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                201.5
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                200.16666666666669,
+                201.5
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                223.275
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "6b923339df3254fbc643b96c1e44d62f49b4e92c500b1201c8a7714863bbe2c4",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-hole-candidate-inspection.json.gz",
+            "sha256": "ea7342e7ea1ccd6d78f270751b4ece465b694c00c8b45e1065945f433fe878bf",
+            "jsonSha256": "d9592c35c187bc5e0441ba7a1d45be9769acd5e0a5a145338ce91ec5efbb7548"
+          },
+          "pageRasterSha256": [
+            "c89901b2779bb1bb4f2439f76b60d9d4fe4760e1f6ef27fadec25239f1819b9b"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "custom-path-hole.png",
+        "sha256": "dc8821cdf84eedcd881fa2660b9bfb9ab62617626a82fa3483c19359c9fa82f0"
+      }
+    },
+    {
+      "id": "custom-path-same-winding-hole",
+      "inputSha256": "39d6f2ee700d133e793101d9686b0698e289e54a21f2d757a21237786acff462",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:body:6ab3037a3759ed77b7322dd649b04dda",
+              "severity": "warning"
+            }
+          ],
+          "report": {
+            "file": "custom-path-same-winding-hole-baseline-report.json.gz",
+            "sha256": "c7a973aa367e89b0122faf9fee24d85f28ade5afa3e5b98ea1cb7c71064c3863",
+            "jsonSha256": "c7bc519f75a45be972ce660b6dee3246b6a54e008f16de5c2090a3fe84d8339c"
+          },
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "assertion-color-reference-geometry"
+          ],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                121.06666666666666,
+                201.5
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                162.5,
+                181.4
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                162.5,
+                201.5
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                200.16666666666669,
+                201.5
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                162.5,
+                223.275
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            }
+          ],
+          "pdfSha256": "192c3749e955ba41002b38d2a21f7c4d34521555110452e28a736951180b814b",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "custom-path-same-winding-hole-baseline-inspection.json.gz",
+            "sha256": "7d1ea7ea185566bdf26e28997a9dd8b0392c937216ba8ee47228c2747b9e2e8b",
+            "jsonSha256": "21e17136672720a5dcfc10e2c9c1b1610327c52021283f15dfdabf9b0a52de15"
+          },
+          "pageRasterSha256": [
+            "c5808b49dd13b5c6a2986ff43e1bd50484aa4aaad5ae5acbb4c10a5df3cbbc49"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                72.1,
+                72.449,
+                134.932,
+                84.626
+              ],
+              "inkPixels": 281
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                72.1,
+                85.099,
+                138.023,
+                97.276
+              ],
+              "inkPixels": 298
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                72.1,
+                97.749,
+                128.222,
+                109.926
+              ],
+              "inkPixels": 255
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                121.06666666666666,
+                201.5
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                181.4
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                201.5
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                200.16666666666669,
+                201.5
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                223.275
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "182ddc2ae1599c3175b52fcf8360613e55feb1860a31537fb90d81b003d8576c",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-same-winding-hole-reference-inspection.json.gz",
+            "sha256": "ecde0dffbfc8cb24a4d1f81c782be885c731af2365490761511ac86ac8876a91",
+            "jsonSha256": "c05cf059f973ab308342983176a3a5c14fbd745f5a28eea29e8ba3f66adaca02"
+          },
+          "pageRasterSha256": [
+            "0badc9d3f7ac7f1ed3d680df9d33e714f183181e315cf1bf50ce281d25315ebd"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "warnings": [],
+          "report": {
+            "file": "custom-path-same-winding-hole-candidate-report.json.gz",
+            "sha256": "473d215301b7d7e9df781625b3ecfc10462590da8fc5c656338988ed350765b3",
+            "jsonSha256": "b03a5a479564c8d5c976435778c138086ebf335c3666079405a3b0e761779bd0"
+          },
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                121.06666666666666,
+                201.5
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                181.4
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                201.5
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                200.16666666666669,
+                201.5
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                223.275
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "bfb37a75570f51b3a5bb7ac5fd22aa61ffe035764dd066e6f5df3d109c9c8a55",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-same-winding-hole-candidate-inspection.json.gz",
+            "sha256": "ea7342e7ea1ccd6d78f270751b4ece465b694c00c8b45e1065945f433fe878bf",
+            "jsonSha256": "d9592c35c187bc5e0441ba7a1d45be9769acd5e0a5a145338ce91ec5efbb7548"
+          },
+          "pageRasterSha256": [
+            "c89901b2779bb1bb4f2439f76b60d9d4fe4760e1f6ef27fadec25239f1819b9b"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "custom-path-same-winding-hole.png",
+        "sha256": "c2704a72772d7a302c3d1959c2575111956216dd6a4185cdaa6c4204fef99da4"
+      }
+    },
+    {
+      "id": "custom-path-multiple",
+      "inputSha256": "e3f4134d982267db1c04d8c9671aeda6f86b18e7d4fddc0176a661033fd13ec2",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:body:2e8e7290c7fde0c1528b916729a192f6",
+              "severity": "warning"
+            }
+          ],
+          "report": {
+            "file": "custom-path-multiple-baseline-report.json.gz",
+            "sha256": "35f8050a13e3e20d1abb939ce4971a66e59bd5289a407503c9b615a3499555a7",
+            "jsonSha256": "d1f6385ca2a6b9ecb6314fa72fdc0a2f45147507a7ab996190527574b924f960"
+          },
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "assertion-color-reference-geometry",
+            "assertion-color-reference-geometry"
+          ],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                145.55,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                194.51666666666665,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                122.95,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                202.05,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                162.5,
+                221.6
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                162.5,
+                201.5
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            }
+          ],
+          "pdfSha256": "d2ae200d13013c8d79add65d3c2b73c5f9993a290c6adbee7816072d8c2592b5",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "custom-path-multiple-baseline-inspection.json.gz",
+            "sha256": "af3226589388824c96870220cbc924e48469f66ab0f6bba5743f8acf65488db8",
+            "jsonSha256": "4bbefb06a4b4931a15873d9c260f95dd8f2550f69d467a3af28dadf4fb4d01f1"
+          },
+          "pageRasterSha256": [
+            "c5808b49dd13b5c6a2986ff43e1bd50484aa4aaad5ae5acbb4c10a5df3cbbc49"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                72.1,
+                72.449,
+                134.932,
+                84.626
+              ],
+              "inkPixels": 281
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                72.1,
+                85.099,
+                138.023,
+                97.276
+              ],
+              "inkPixels": 298
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                72.1,
+                97.749,
+                128.222,
+                109.926
+              ],
+              "inkPixels": 255
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                145.55,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                194.51666666666665,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                122.95,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                202.05,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                221.6
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                201.5
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "eb250c6c009cdc3a94af620c0d7cc308a7862deb52f421d3290f83aae1b0b687",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-multiple-reference-inspection.json.gz",
+            "sha256": "c98a83884bf6ae26bdef8364cddd2c637638775ac4429cc4e67422d554a2e851",
+            "jsonSha256": "1c69c2606c1aad1979b977b7cc0f210526c74eb8cfdb2d68d55ebd58e6b423fd"
+          },
+          "pageRasterSha256": [
+            "a7fe73c55f36f7de3662385d76308217d9dc8d8a43c563c6a5f90cddd65b55f5"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "warnings": [],
+          "report": {
+            "file": "custom-path-multiple-candidate-report.json.gz",
+            "sha256": "ca126ffaabef3c0307650723c9531d4c891bb92ed3fd84d9ce71e1c900183d0e",
+            "jsonSha256": "8264cdce33996797ad45c2e2292c46ef83346fff18b7cb00b4674ebabac8d9ec"
+          },
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                145.55,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                194.51666666666665,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                122.95,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                202.05,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                221.6
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                201.5
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "738c2b47b0def4b881a6e22ca26a2d92bcec9133adbddee537a41fac2a83e58f",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-multiple-candidate-inspection.json.gz",
+            "sha256": "4980360bc84a04a18a5e7746df958bef0858785a14356704fb597af92c2b8c8b",
+            "jsonSha256": "c8879df9c3fb3d13c215f1218aab1cf497d7b2edfebd49f7aded2f077ed3ab8c"
+          },
+          "pageRasterSha256": [
+            "28c5b3846e4aa273ecf98d14a9fa9bcc8c1ffc8eeb1c8d5d3f8cf1846fcecbd4"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "custom-path-multiple.png",
+        "sha256": "604c2ecabdeb6dedac97f61449ff769bb73163a20db285c19309f61c55a4805b"
+      }
+    },
+    {
+      "id": "custom-path-flipped",
+      "inputSha256": "dd1a3e6be507edb48c4ba2020430e53c74b93aeb3547b31edd6ae7bba30bb464",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:body:baaf692313afa4f89be3516adf46808f",
+              "severity": "warning"
+            }
+          ],
+          "report": {
+            "file": "custom-path-flipped-baseline-report.json.gz",
+            "sha256": "844fbdcfe4e3b6187d1f271cd7443ba3687bbcbdea8425981ed56705f2049ffe",
+            "jsonSha256": "1e83304e8ff56df8ffb5875d658e0bc494eebde2ff74de35a4d395c68d11ae1c"
+          },
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "assertion-color-reference-geometry"
+          ],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                179.45,
+                219.925
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                130.48333333333335,
+                219.925
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                202.05,
+                184.75
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                122.95,
+                184.75
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                162.5,
+                181.4
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            }
+          ],
+          "pdfSha256": "34e9d8e52f90676d51ffb6604868a65b93d47881d5f402f9f522671bb1fef543",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "custom-path-flipped-baseline-inspection.json.gz",
+            "sha256": "7d1ea7ea185566bdf26e28997a9dd8b0392c937216ba8ee47228c2747b9e2e8b",
+            "jsonSha256": "21e17136672720a5dcfc10e2c9c1b1610327c52021283f15dfdabf9b0a52de15"
+          },
+          "pageRasterSha256": [
+            "c5808b49dd13b5c6a2986ff43e1bd50484aa4aaad5ae5acbb4c10a5df3cbbc49"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                72.1,
+                72.449,
+                134.932,
+                84.626
+              ],
+              "inkPixels": 281
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                72.1,
+                85.099,
+                138.023,
+                97.276
+              ],
+              "inkPixels": 298
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                72.1,
+                97.749,
+                128.222,
+                109.926
+              ],
+              "inkPixels": 255
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                179.45,
+                219.925
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                130.48333333333335,
+                219.925
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                202.05,
+                184.75
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                122.95,
+                184.75
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                181.4
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "fa42c4d34ac50e021a8648a827bbf6ebbd00c32561c2507d10172e3214f9f997",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-flipped-reference-inspection.json.gz",
+            "sha256": "ca49dd58f76c0cc0dc6fe654a1399fb244f0e621a196b83ed987cc43bc206624",
+            "jsonSha256": "f8f9c4de340f5cb191feca7848bc6c86dba703a78a28389dc107e8f5ad545839"
+          },
+          "pageRasterSha256": [
+            "5dece0a52f725096e402dc0f246cc2d3b42cb19f3d2cf62fc1b91f5414152676"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "warnings": [],
+          "report": {
+            "file": "custom-path-flipped-candidate-report.json.gz",
+            "sha256": "5b6ea40d61c9a5cb7b1f89dc5ffbca1d8862656b551612d2548b012fa838f6c8",
+            "jsonSha256": "7e655a2a10eec04c99b75068a7a445a6fe7b5643a8b2ecde4cdffede96703b4a"
+          },
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                179.45,
+                219.925
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                130.48333333333335,
+                219.925
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                202.05,
+                184.75
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                122.95,
+                184.75
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                181.4
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "f0ead2efb0187e43312aba0354531afba832042461faa70b655d3137746e41dd",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-flipped-candidate-inspection.json.gz",
+            "sha256": "878d13fdaa4bec8adec285ae27f1265c50e15c4786d90edacb841875c38110e6",
+            "jsonSha256": "d662ff0acf3f516068a23bf76a7f4314bb15ca26f7b89cf962477594169054bd"
+          },
+          "pageRasterSha256": [
+            "9b5cfff57f9e4f327f4361401f13e5d781684e7a5296b24ca73af2d97208b994"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "custom-path-flipped.png",
+        "sha256": "87e3fb51441e4f56100bcad23c1104f54a24c88dcfbbc970e71c85487e9fdb3e"
+      }
+    },
+    {
+      "id": "custom-path-group",
+      "inputSha256": "59c733ccce11fbce68d4a1978b739b32c27109d84b1b7b35314cf2e04b2f5c34",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:body:607fa8f6b856ae8193e7c65901b4b5e2",
+              "severity": "warning"
+            }
+          ],
+          "report": {
+            "file": "custom-path-group-baseline-report.json.gz",
+            "sha256": "8e878b2b9a8982c9e888a2b5b5178dd10d2076977264c4dd343e8abd522f18b5",
+            "jsonSha256": "1beefc4b0df95ca81292a96982d4cb73e66ea8e8281a30b23b3a023afd83f505"
+          },
+          "mandatoryFailures": [
+            "assertion-color-reference-geometry",
+            "assertion-color-reference-geometry"
+          ],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                145.55,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                194.51666666666665,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                122.95,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                202.05,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                221.6
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                281.0,
+                232.5
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                281.0,
+                210.0
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                251.0,
+                240.0
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": true,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                314.3333333333333,
+                220.5
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                281.0,
+                250.5
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "a1141e18dace0491a9aee3867dbe7bce012c77bcfea0abec30b7f55ca8969784",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-group-baseline-inspection.json.gz",
+            "sha256": "3bfaa2dbff323cbda8789a757f3a4dd38d10f070f11b80de1417d34710cef171",
+            "jsonSha256": "c97a8b171323a48226b2511a3301c2fa318ed9be9d306b572e9b20d223d460ca"
+          },
+          "pageRasterSha256": [
+            "c59526947a9ce6e35adcf6aae7619a8a532ee0f194bb75f0830c1eaff7c66490"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                72.1,
+                72.449,
+                134.932,
+                84.626
+              ],
+              "inkPixels": 281
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                72.1,
+                85.099,
+                138.023,
+                97.276
+              ],
+              "inkPixels": 298
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                72.1,
+                97.749,
+                128.222,
+                109.926
+              ],
+              "inkPixels": 255
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                145.55,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                194.51666666666665,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                122.95,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                202.05,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                221.6
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                281.0,
+                232.5
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                281.0,
+                210.0
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                251.0,
+                240.0
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                314.3333333333333,
+                220.5
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                281.0,
+                250.5
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "011efae6416e68c0f3c5451d7e7372840448823b3bf72aa32dfe7b1e3f36339f",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-group-reference-inspection.json.gz",
+            "sha256": "32b5da9e694bf36421643adad348496d16ac29c8c51217ca9119b359f55c24a3",
+            "jsonSha256": "e8f600bf16111704984d1bc6685cf7de21bdbdc0efff6a4f547c08c341e07c83"
+          },
+          "pageRasterSha256": [
+            "1006e9e0db1c79e5e33c508b579470d1b12d54bfd984afba22cd2b994edd9125"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "warnings": [],
+          "report": {
+            "file": "custom-path-group-candidate-report.json.gz",
+            "sha256": "43e65b847dc994b7832e4ef15dc42981902dcc8b73ac9314d67f2c2ca350cbda",
+            "jsonSha256": "c00d05aec511fe2197ecb09c3800495ce0cd162211a668b8b100ae58c5b19adc"
+          },
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                145.55,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                194.51666666666665,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                122.95,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                202.05,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                221.6
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                281.0,
+                232.5
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                281.0,
+                210.0
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                251.0,
+                240.0
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                314.3333333333333,
+                220.5
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                281.0,
+                250.5
+              ],
+              "rgb": [
+                186,
+                96,
+                58
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "77335e092653d8da010499f1735b088ec83621448517456a51956b8f677d9d92",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-group-candidate-inspection.json.gz",
+            "sha256": "bc32224a412ee8f7d7d76ca1d5121e3c5415b0893ee7ca40920757a716fbe542",
+            "jsonSha256": "8f34044f104ced8eb5407c2284561dec5b074e82e4fac6b59718444666bef8e2"
+          },
+          "pageRasterSha256": [
+            "de54fc3ca78ff91bf49f0c760acb34c0d3729dad82c6c69962d24f1a9a329293"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "custom-path-group.png",
+        "sha256": "7e3066fe84809f4faabb0d5555fa6d747d91757759b0328462ae9e574074c203"
+      }
+    },
+    {
+      "id": "custom-path-invisible-control",
+      "inputSha256": "3e228ecc0cd901cc4dd45bb2b73cbb621e3201b478a8d0257b1f51fbf3b601d6",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "warnings": [
+            {
+              "code": "unsupported_content_placeholder",
+              "phase": "docx_conversion",
+              "message": "Other is represented by a visible placeholder.",
+              "remediation": "Replace it with a supported static representation for faithful export.",
+              "anchorId": "p:body:baaf692313afa4f89be3516adf46808f",
+              "severity": "warning"
+            }
+          ],
+          "report": {
+            "file": "custom-path-invisible-control-baseline-report.json.gz",
+            "sha256": "3560a9a880c95b72dc7984c2561bc415c2672420c05403a7d43ed9489a6f5039",
+            "jsonSha256": "50133811cb072f1a889cd384b518daf12f3343e2b3feae33d370a409eb7865c8"
+          },
+          "mandatoryFailures": [
+            "expected-visible-tokens"
+          ],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                145.55,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                194.51666666666665,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                122.95,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                202.05,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "pointPt": [
+                162.5,
+                221.6
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 0,
+              "passed": false
+            },
+            {
+              "regionPt": [
+                106,
+                168,
+                219,
+                235
+              ],
+              "expectedFill": false,
+              "unexpectedPixels": 120630,
+              "passed": false
+            }
+          ],
+          "pdfSha256": "ea6a99c0d741f2a61cc969096e70f3a4878df39dfa19f61eb545184e1f9b98d7",
+          "pages": 1,
+          "checkedLabels": 4,
+          "inspection": {
+            "file": "custom-path-invisible-control-baseline-inspection.json.gz",
+            "sha256": "35b6e412f5debbc6c2ddbfeb3e1ec6faca1daa6f02850c9c4ab241dca5d120fb",
+            "jsonSha256": "3e29af639309a26bbefa5919f38af647977b943753534e77d30a48086d6795f5"
+          },
+          "pageRasterSha256": [
+            "c5808b49dd13b5c6a2986ff43e1bd50484aa4aaad5ae5acbb4c10a5df3cbbc49"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                72.1,
+                72.449,
+                134.932,
+                84.626
+              ],
+              "inkPixels": 281
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                72.1,
+                85.099,
+                138.023,
+                97.276
+              ],
+              "inkPixels": 298
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                72.1,
+                97.749,
+                128.222,
+                109.926
+              ],
+              "inkPixels": 255
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                145.55,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                194.51666666666665,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                122.95,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                202.05,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                221.6
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "regionPt": [
+                106,
+                168,
+                219,
+                235
+              ],
+              "expectedFill": false,
+              "unexpectedPixels": 0,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "6ef25409340abb003aaa8ca3494096f1267ef49f4c528645e42b0d9bcb534bdd",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-invisible-control-reference-inspection.json.gz",
+            "sha256": "1c6e516b31fe44b876f545aa0a641d897107e6ebd77cbfb80bfac7551348286a",
+            "jsonSha256": "ed88f1db44cba78236ced2e8475e48a3099bcdec5b57d853d8563edaf75e5952"
+          },
+          "pageRasterSha256": [
+            "8288a9f669961017354e42201306a86eca63f7037011db5e898d2e5daecb3bbd"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "warnings": [],
+          "report": {
+            "file": "custom-path-invisible-control-candidate-report.json.gz",
+            "sha256": "b0a4bf19458a400f1c3b31c2c2e22717c53d26cad5011afb9f2b625b68928629",
+            "jsonSha256": "25b25fc04aa7ad32d2da5d7028187f314886a70c3deed4e13da6af2607054c09"
+          },
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                145.55,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                194.51666666666665,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                122.95,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                202.05,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                221.6
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": false,
+              "coloredPixels": 0,
+              "whitePixels": 9,
+              "passed": true
+            },
+            {
+              "regionPt": [
+                106,
+                168,
+                219,
+                235
+              ],
+              "expectedFill": false,
+              "unexpectedPixels": 0,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "10ef84a2deea402a3204b142eb31fd278fda9b8191a4d45e366268ec1e3119ac",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-invisible-control-candidate-inspection.json.gz",
+            "sha256": "4d9be35b26c0f64a57377e667d8b5b2699b512d53b04d25e568bbd4dee1fc579",
+            "jsonSha256": "0b101aad3d7d0b9d01b9dba9bfb7cea8d1d119fbb14ced82b812cc15b8170149"
+          },
+          "pageRasterSha256": [
+            "c59526947a9ce6e35adcf6aae7619a8a532ee0f194bb75f0830c1eaff7c66490"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "custom-path-invisible-control.png",
+        "sha256": "8bded504d2d678549ba044bfba2b7b1a2985f9566fb2658a8bc6eb1717ba9b56"
+      }
+    },
+    {
+      "id": "custom-path-rectangle-control",
+      "inputSha256": "843ea1e879809117547fb4dfefb64450b636c5abb303405541672bb475e53794",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "warnings": [],
+          "report": {
+            "file": "custom-path-rectangle-control-baseline-report.json.gz",
+            "sha256": "0f67eb9bf6a79765baa5d601a02600911038466d1ccebba93fbe3f2e95d4e52c",
+            "jsonSha256": "fa6b4cad4d00711efac1d72e2828fbc610ab2dd3f30e5064e399d4c9f9457470"
+          },
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                145.55,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                194.51666666666665,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                122.95,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                202.05,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                221.6
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "f77df9f725e09bde3b422bee1f8203c63b6f82031d287dd07c815f459fabddaa",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-rectangle-control-baseline-inspection.json.gz",
+            "sha256": "f6b64b46d90d04585121c991e831af9b44b3cf4f52a7db52d7920232b7b48435",
+            "jsonSha256": "ed19ec1baf1977566205fc796fd86c40dcd8365de5aba17228caded6079859b8"
+          },
+          "pageRasterSha256": [
+            "16d6d8544130550ccbd57a70ac2d3e8a9d91ad080ec6cf0b2a97133d4e15c36c"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                72.1,
+                72.449,
+                134.932,
+                84.626
+              ],
+              "inkPixels": 281
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                72.1,
+                85.099,
+                138.023,
+                97.276
+              ],
+              "inkPixels": 298
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                72.1,
+                97.749,
+                128.222,
+                109.926
+              ],
+              "inkPixels": 255
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                145.55,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                194.51666666666665,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                122.95,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                202.05,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                221.6
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "5b1ef06f3b9eaecf99b62d6c6842f4100d517da5ce03f820fcd31de31eb11417",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-rectangle-control-reference-inspection.json.gz",
+            "sha256": "0fcae4d7c8538585b5aaa052c4e6e0ae4491c03319fc0c1144fa4964d828d42f",
+            "jsonSha256": "6285dee275d543333c78e9025f46f753b673e02c26d7e55e332d1de362d6bab3"
+          },
+          "pageRasterSha256": [
+            "91fe7f538cfabf8314d05c334c708fdf24c57a4819f67b3e1e3b62b9c36ccdda"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "warnings": [],
+          "report": {
+            "file": "custom-path-rectangle-control-candidate-report.json.gz",
+            "sha256": "3f8a594ecade0125237b53213b656e06cbf678869e73aeefce9c51f6fc3d4a44",
+            "jsonSha256": "6630483e4eebe0ff197e595caf2b8b17e9ec4e63bf7e46b32f05c47ec4f81f29"
+          },
+          "mandatoryFailures": [],
+          "sourcePaint": [
+            {
+              "text": "WillowBefore",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.702207,
+                134.438685,
+                84.878309
+              ],
+              "inkPixels": 278
+            },
+            {
+              "text": "WillowAnchor",
+              "page": 1,
+              "rect": [
+                71.999997,
+                85.452206,
+                137.497723,
+                97.628309
+              ],
+              "inkPixels": 275
+            },
+            {
+              "text": "WillowAfter",
+              "page": 1,
+              "rect": [
+                71.999997,
+                97.452206,
+                127.723908,
+                109.628308
+              ],
+              "inkPixels": 248
+            }
+          ],
+          "supplementaryPaintProbes": [
+            {
+              "pointPt": [
+                145.55,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                194.51666666666665,
+                183.075
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                122.95,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                202.05,
+                218.25
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            },
+            {
+              "pointPt": [
+                162.5,
+                221.6
+              ],
+              "rgb": [
+                48,
+                102,
+                144
+              ],
+              "expectedFill": true,
+              "coloredPixels": 9,
+              "whitePixels": 0,
+              "passed": true
+            }
+          ],
+          "pdfSha256": "53ac9c656c8dd6ec366840d953d7c5b18634fc807f77a68d541fecbb2cab28d0",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "custom-path-rectangle-control-candidate-inspection.json.gz",
+            "sha256": "f6b64b46d90d04585121c991e831af9b44b3cf4f52a7db52d7920232b7b48435",
+            "jsonSha256": "ed19ec1baf1977566205fc796fd86c40dcd8365de5aba17228caded6079859b8"
+          },
+          "pageRasterSha256": [
+            "16d6d8544130550ccbd57a70ac2d3e8a9d91ad080ec6cf0b2a97133d4e15c36c"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "custom-path-rectangle-control.png",
+        "sha256": "3d024ec61caabdab1a53e327f1871ee3972eeea32d9cc30310869b72bd7475f2"
+      }
+    }
+  ],
+  "tools": {
+    "docs/results/custom-paths/Compose.py": "e982fa55e2954618d8b860a591b4454bf781f3eb4324b62495d00c0860669eee",
+    "docs/results/custom-paths/PaintProbes.py": "0732c954812ef6c3f11943317464d88d2c5e89e45e6432a88ab83c218a062b21",
+    "docs/results/custom-paths/MutateCurve.py": "223d815a0c968582d4b3bd7a0a1b019cc67d40c2e475893d217e193d5814e7ac",
+    "docs/results/export-reliability/Capture.mjs": "659222805f876e020482d265e97ae5c9f39eed17935b97572e474ad661ef45dd"
+  },
+  "wrongCurveControl": {
+    "pdf": "wrong-curve.pdf",
+    "sha256": "ac8095b88f38539775fa55be514a847d0fa7141ad436998f0337e4934e228152",
+    "inspection": {
+      "file": "wrong-curve-inspection.json.gz",
+      "sha256": "156052a66925f2464096479d07c489e94ea114e265eddb37a30059f202a91931",
+      "jsonSha256": "c09036a12e40337e756e88d80e78ebc38414ba96e0be1d5bd6ca2825a0e6a341"
+    },
+    "mandatoryChecks": [
+      {
+        "name": "page-count",
+        "passed": true
+      },
+      {
+        "name": "expected-visible-tokens",
+        "passed": true,
+        "missing": {},
+        "extra": {},
+        "normalizedRaw": {}
+      },
+      {
+        "name": "declared-font-families",
+        "passed": true,
+        "observed": [
+          "LiberationSerif"
+        ]
+      },
+      {
+        "name": "physical-geometry-page-1",
+        "passed": true
+      },
+      {
+        "name": "assertion-color-reference-geometry",
+        "passed": true,
+        "declaration": {
+          "type": "color-reference-geometry",
+          "version": 1,
+          "page": 1,
+          "rgb": [
+            48,
+            102,
+            144
+          ],
+          "tolerancePt": 1.5,
+          "coverageTolerance": 0.08
+        }
+      }
+    ],
+    "supplementaryPaintProbes": [
+      {
+        "pointPt": [
+          134.25,
+          198.15
+        ],
+        "rgb": [
+          48,
+          102,
+          144
+        ],
+        "expectedFill": true,
+        "coloredPixels": 0,
+        "whitePixels": 9,
+        "passed": false
+      },
+      {
+        "pointPt": [
+          190.75,
+          192.2875
+        ],
+        "rgb": [
+          48,
+          102,
+          144
+        ],
+        "expectedFill": false,
+        "coloredPixels": 9,
+        "whitePixels": 0,
+        "passed": false
+      },
+      {
+        "pointPt": [
+          162.5,
+          189.775
+        ],
+        "rgb": [
+          48,
+          102,
+          144
+        ],
+        "expectedFill": true,
+        "coloredPixels": 9,
+        "whitePixels": 0,
+        "passed": true
+      },
+      {
+        "pointPt": [
+          162.5,
+          179.725
+        ],
+        "rgb": [
+          48,
+          102,
+          144
+        ],
+        "expectedFill": false,
+        "coloredPixels": 0,
+        "whitePixels": 9,
+        "passed": true
+      },
+      {
+        "pointPt": [
+          162.5,
+          223.275
+        ],
+        "rgb": [
+          48,
+          102,
+          144
+        ],
+        "expectedFill": true,
+        "coloredPixels": 9,
+        "whitePixels": 0,
+        "passed": true
+      }
+    ]
+  }
+}
