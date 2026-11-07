@@ -1774,6 +1774,50 @@ def authored_table_width_cases(add):
 
 
 
+def single_line_grid_cases(add, cases):
+    """Original Beech labels occupy declared whole grid slots, without fixing glyph baselines."""
+    for kind, grid, inherited_off, direct in [
+        ('eighteen', 18, False, None), ('twelve', 12, False, None),
+        ('snap-off-control', 18, False, False), ('inherited-off-control', 18, True, None),
+        ('direct-on', 18, True, True), ('no-grid-control', 0, False, None),
+        ('default-type-control', 18, False, None), ('unrelated-table', 18, False, None),
+    ]:
+        enabled = grid and kind != 'default-type-control' and (direct if direct is not None else not inherited_off)
+        step = (24 if grid == 12 else 18) if enabled else 2355 / 2048 * 12
+        per_page = math.floor(648 / step)
+        labels = [f'Beech{n:03d}' for n in range(1, 81)]
+        props = '' if direct is None else f'<w:snapToGrid w:val="{int(direct)}"/>'
+        content = ''.join(para(label, props) for label in labels)
+        tokens = list(labels)
+        if kind == 'unrelated-table':
+            content += ('<w:tbl><w:tblPr><w:tblW w:w="9360" w:type="dxa"/></w:tblPr>'
+                '<w:tblGrid><w:gridCol w:w="9360"/></w:tblGrid><w:tr><w:tc><w:tcPr>'
+                '<w:tcW w:w="9360" w:type="dxa"/></w:tcPr>' + para('BeechTable') + '</w:tc></w:tr></w:tbl>')
+            tokens.append('BeechTable')
+        styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+            '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="24"/>'
+            '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+            + ('<w:snapToGrid w:val="0"/>' if inherited_off else '')
+            + '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>'
+            '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+        paper = ('<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" '
+            'w:right="1440" w:bottom="1440" w:left="1440"/>'
+            + (f'<w:docGrid w:type="{"default" if kind == "default-type-control" else "lines"}" w:linePitch="{grid * 20}"/>' if grid else '')
+            + '</w:sectPr>')
+        assertions = [dict(type='marker-region', marker=label, occurrence=1,
+            page=index // per_page + 1, rect=[72, 72 + index % per_page * step, 540, 72 + (index % per_page + 1) * step])
+            for index, label in enumerate(labels)]
+        add('single-line-grid-' + kind, 'paragraphs', 'Beech single-line grid: ' + kind + ' (Docxodus #1551)',
+            tokens, content, sect=paper, styles_xml=styles, assertions=assertions)
+        if not enabled:
+            # Native calibration: LibreOffice rounds natural pitch to 13.8pt. These
+            # opt-out controls do not adjudicate that unrelated sub-twip difference.
+            for assertion in cases[-1]['assertions']:
+                assertion['tolerancePt'] = 0.1
+        cases[-1]['pdfCompanion'] = dict(profile=dict(review='final', comments='hidden'),
+            pageSizePt=[612, 792], requiredTokens=dict(Counter(tokens)), exactInventory=True)
+
+
 def automatic_body_spacing_cases(add, cases):
     """Original Birch boundaries separate automatic gaps from the exact line box."""
     styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
@@ -5362,9 +5406,10 @@ def generate():
     resizing_offpaper_cases(add, cases)
     contextual_own_spacing_cases(add, cases)
     automatic_body_spacing_cases(add, cases)
+    single_line_grid_cases(add, cases)
     custom_path_cases(add)
     plain_math_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v121', 'version': 121, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v122', 'version': 122, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

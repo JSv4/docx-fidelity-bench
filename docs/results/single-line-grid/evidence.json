@@ -1,0 +1,2739 @@
+{
+  "scope": "Unscored strict-font public exports. Eight eligible native references; page occupancy and whole-slot bounds only. No new Word or full-suite parity claim.",
+  "manifestSha256": "756fa1090bcf285f43599c42dd776508d226cb145fc5ead20f8a2b62cfcda12a",
+  "manifest": {
+    "file": "manifest.json.gz",
+    "sha256": "6c5197e625645dec88b852e237395f24cce0307ff022157fb4d047d87fbd56b1",
+    "jsonSha256": "756fa1090bcf285f43599c42dd776508d226cb145fc5ead20f8a2b62cfcda12a"
+  },
+  "calibration": {
+    "manifest": {
+      "file": "calibration-manifest.json.gz",
+      "sha256": "c8d135d4f158820fde0f65da9468a41dd2c5988f84e829272bcc92377e9cc8f5",
+      "jsonSha256": "6621f610cfd3ee806d965dfbc98020da5e6767c92b8744dd9bfe06ddadd034e3"
+    },
+    "reference": {
+      "file": "calibration-reference.json.gz",
+      "sha256": "0c9e81bad062ede5dacb5656aac3a540290104f70931decdd1921244b7f83464",
+      "jsonSha256": "d971a01f3f55ef9f9d8cba2aad732af6450f170227c6d3814884f4456637e5bb"
+    }
+  },
+  "builds": {
+    "baseline": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-auto-review/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-auto-review/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-auto-review/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-auto-review/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-auto-review/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-auto-review/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-auto-review/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-auto-review/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-auto-review/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "3904cfdd360c4193c1aabb37d1752bb4f41c979d",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "56554b3730bb44cd6384e3adc0bbfd501d6fd4c0efac587998db75bec47523f9",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+      "schema": 1,
+      "tree": "a0ea5820e7d56593527fbb45ece1e9bb598c0d29"
+    },
+    "candidate": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1551-grid/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1551-grid/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1551-grid/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1551-grid/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1551-grid/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1551-grid/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1551-grid/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1551-grid/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1551-grid/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "1d9f75c605dce3283caf843499fc126b1629af8d",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "71a05f210dcd3d1fbd09a0f04c4238a68baefc6a639211d419bb4714a18fc5ed",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+      "schema": 1,
+      "tree": "4dfd81b5e83cce2d42880c82808eb7d40623bbc8"
+    }
+  },
+  "rendererAssets": {
+    "baseline": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 623972,
+          "sha256": "2a80bd973a7dd8b4da0b6e484c57b011f1000bcda44fa39cc665e6739064f585"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 172301,
+          "sha256": "47c9262fb9b3e76e29403feeb0b21bced56a19063e4bf0c10463b4e506504e5d"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46484,
+          "sha256": "a604dbff16d3be0f0d24cf48753404b42fe25f70fbd1393dde4934871446a420"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5464345,
+          "sha256": "64c145541b0ed3665bc07dfb5c46003efb6d8d6cf12d9137f33816f3792cea39"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "2948f41d5e82ed135e1b0aa57c7d6a467559d5050f0aaaecd19241bf62ea23d1"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "5e08586a10f0b0c9e4354438734b392459cd64282ababf7029a48246f6da6d47"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1675029,
+          "sha256": "7216cb9019a8db40a177990f4ae6034cfe3d4f47aa598d221c4675df401082ce"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "3481b0181ec8025dbc39a822c4daf95fdc1564bd69aa1470e2bc3c14ec477bed"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10550362,
+          "sha256": "bbc815273b1665815b71180138cf880e3ad2f58598d486d2759a7f3972e2ca89"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    },
+    "candidate": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 626417,
+          "sha256": "dad01c874939b8a5d521368028f5cd463797f5d73eba0ab8cfa509e15ea2e969"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 173739,
+          "sha256": "8d2e6180ba6a34766ac12e0d109e348c6bd345c2d549cd7861c2a10b038740ea"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46484,
+          "sha256": "a604dbff16d3be0f0d24cf48753404b42fe25f70fbd1393dde4934871446a420"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5465881,
+          "sha256": "964dd3ba6d05cbabff18aef2f5bb18bc875d9e2350f538373f9263716446d523"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "c02c68782fd0dc6ce7774aa1e35722b7ee0af65841078c0876def154bb7f6c7a"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "5e08586a10f0b0c9e4354438734b392459cd64282ababf7029a48246f6da6d47"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1675029,
+          "sha256": "7216cb9019a8db40a177990f4ae6034cfe3d4f47aa598d221c4675df401082ce"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "03f2d61e73e99d25feeb0bc8503bbab51eab999bdfcee1c9d54173e909fbaa08"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10550817,
+          "sha256": "7caafc1094ff4e9dcc6b17c77a86a12f53dc914c2cfe24f744a66174863e1852"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    }
+  },
+  "captures": {
+    "baseline": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "3904cfdd360c4193c1aabb37d1752bb4f41c979d",
+      "sourceTree": "a0ea5820e7d56593527fbb45ece1e9bb598c0d29",
+      "buildIdentitySha256": "1a9dc1eaea3eb12822e0dbbd4192e37b7f77a727a77e053ae57b82b2de31dac8",
+      "manifestSha256": "756fa1090bcf285f43599c42dd776508d226cb145fc5ead20f8a2b62cfcda12a",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "single-line-grid-eighteen",
+          "inputSha256": "6f3d14555cf83362f964a98e0d3a2963ca4d4a8e7d094d04f00fa9df5e933d68",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "645204dfd701f363f4d5f3ff2919f9cefc28e72cb8d578a25d4c02b061d7b3ea",
+          "renderReportSha256": "e3d47d74d3a01fea3224c08082a76ff5ef0e0751f4b0cc7b64cd836a7fa3bfdd",
+          "htmlSha256": "8784da7ae0c98590d9eddfb1374fe013a76d592484758391aecaaf0331b83875",
+          "htmlFactsSha256": "920b3ad188a80e6d07e9826aafc9088bd86207f61de639e2a44ad2979bd0f67a"
+        },
+        {
+          "id": "single-line-grid-twelve",
+          "inputSha256": "fdc3465617bce30d437a6f77836c0286be023d4fc240db793929a08576f77ff9",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "e22989c74b73752ad119cab3260670cfd47d265c03085a5f076db945188b2cf6",
+          "renderReportSha256": "f41a8148db5a2cb4f83b462118f59633d8413842314bd0d8f742c11bbfeaf98a",
+          "htmlSha256": "8784da7ae0c98590d9eddfb1374fe013a76d592484758391aecaaf0331b83875",
+          "htmlFactsSha256": "920b3ad188a80e6d07e9826aafc9088bd86207f61de639e2a44ad2979bd0f67a"
+        },
+        {
+          "id": "single-line-grid-snap-off-control",
+          "inputSha256": "f16d16df01ed0a7c5766354fb338de25220c260630a00dfcaceeec7d67d2bee5",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "dedf16bd5cd143d40ee1606d00c227613ffe9add6a49e8d2307dd9f160a62b6e",
+          "renderReportSha256": "ca6c33335fe9902f4d262dee7eec0f48363e64f1e97a5014032eb3e9463fcb7c",
+          "htmlSha256": "498e7c0e8167c994fdc0738986e6d83e51c1bbd5df09133fc55b3e6398c00d1d",
+          "htmlFactsSha256": "6c197010f83133e90929f6722138cb24b8bb2f31094e231fed6440deb1b82054"
+        },
+        {
+          "id": "single-line-grid-inherited-off-control",
+          "inputSha256": "9d8cd07e37bc6a088d86888452a227e1e467efcde8eea123ff91589f91dc3ea5",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "3a7dd22911a530ee74e97997455bb852d624bffa6374218fb0982d7d54a0c1e6",
+          "renderReportSha256": "4fa893db05734562f084ae1bfc29d523473e3c4ec020f67fbf79a069301705fb",
+          "htmlSha256": "8784da7ae0c98590d9eddfb1374fe013a76d592484758391aecaaf0331b83875",
+          "htmlFactsSha256": "920b3ad188a80e6d07e9826aafc9088bd86207f61de639e2a44ad2979bd0f67a"
+        },
+        {
+          "id": "single-line-grid-direct-on",
+          "inputSha256": "5e899e9bb5be7d76a5d7cccbd7010246ee313d54999a4330a68afd460380bac3",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "18caaac7dca5bd5bd511bc39e4be2155054dfa388c0d602d7b3d14851777e8b2",
+          "renderReportSha256": "490055318d3a96f39b93d6d913f2ca043b8ff4af860556628c4e63339541fae4",
+          "htmlSha256": "498e7c0e8167c994fdc0738986e6d83e51c1bbd5df09133fc55b3e6398c00d1d",
+          "htmlFactsSha256": "6c197010f83133e90929f6722138cb24b8bb2f31094e231fed6440deb1b82054"
+        },
+        {
+          "id": "single-line-grid-no-grid-control",
+          "inputSha256": "fbacf74f51b1ac79817199d461ed28afda7080c685203fa99cbb6e3c8a001c04",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "78681a9fe0ebc9735c33ed8cc11ae984c11c1e07fdb5fe4b809997b02cd388d9",
+          "renderReportSha256": "75d6ef0b8e493396668e7c6cf38a3d402d82b58c08f1375f2d5959a6ac29704d",
+          "htmlSha256": "8784da7ae0c98590d9eddfb1374fe013a76d592484758391aecaaf0331b83875",
+          "htmlFactsSha256": "920b3ad188a80e6d07e9826aafc9088bd86207f61de639e2a44ad2979bd0f67a"
+        },
+        {
+          "id": "single-line-grid-default-type-control",
+          "inputSha256": "64465a1598a700483cf707c2027533e7617fd77cb3355c50ba4d662691c443d7",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "a0cb7a6a3c0e4a77378842027680587822aeab73317a26d7d7dbcc4c2cf9d4b3",
+          "renderReportSha256": "a08511ae9ef1b48cf62cb483298c413d3a324463eddfd9bab78894a8f37d66f8",
+          "htmlSha256": "8784da7ae0c98590d9eddfb1374fe013a76d592484758391aecaaf0331b83875",
+          "htmlFactsSha256": "920b3ad188a80e6d07e9826aafc9088bd86207f61de639e2a44ad2979bd0f67a"
+        },
+        {
+          "id": "single-line-grid-unrelated-table",
+          "inputSha256": "01621e2ee90be21404526b48a487f2b68140cc222497e60663ca7f69ab627d54",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "066b378e536cbb293cc4c2e67c5599f088c82929cc6e21b1839358efa140ca97",
+          "renderReportSha256": "0bda2d88a2256106adcecd84e409bd30af1da1bd82ff40ab56721762a2011748",
+          "htmlSha256": "0064088680d53356a730ed0910e3baafb28bd63a0f1b23397401dadbeb5f4912",
+          "htmlFactsSha256": "765b65b108cf7bc27cdd8744ef2d7e7898ea97ddf70ec7bfa5821104b94b142f"
+        }
+      ],
+      "htmlInspectorSha256": "87805e278400914cd87a2fe8e89c498748b7f45eecd5ca432b9c2be2d95b4cbb"
+    },
+    "candidate": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "1d9f75c605dce3283caf843499fc126b1629af8d",
+      "sourceTree": "4dfd81b5e83cce2d42880c82808eb7d40623bbc8",
+      "buildIdentitySha256": "f7433caf22800dfb27319ab6041356d4088ca99349792e4357342e80cb6e2a2d",
+      "manifestSha256": "756fa1090bcf285f43599c42dd776508d226cb145fc5ead20f8a2b62cfcda12a",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "single-line-grid-eighteen",
+          "inputSha256": "6f3d14555cf83362f964a98e0d3a2963ca4d4a8e7d094d04f00fa9df5e933d68",
+          "status": "delivered",
+          "pages": 3,
+          "pdfSha256": "e3a51a949374b7cd4ce2c3ac771216494ad4b9b1d2db60066a79575d36ceda01",
+          "renderReportSha256": "9d292481535ee9cf33ab17aac86fdd4708dcdd0daa66a99f95766e0c62eb583b",
+          "htmlSha256": "49cd7f0c6813bd7d57c8a606311f443970f42c31fe1d8f1507b96f9f4571bda8",
+          "htmlFactsSha256": "d27b292b15171270e44b606a882bb6a926034ece8545b3b688b9f24e46f47f14"
+        },
+        {
+          "id": "single-line-grid-twelve",
+          "inputSha256": "fdc3465617bce30d437a6f77836c0286be023d4fc240db793929a08576f77ff9",
+          "status": "delivered",
+          "pages": 3,
+          "pdfSha256": "a329a756c621729eaac18f241eb0df00338917189cd4223ae7269f7e8b33ab34",
+          "renderReportSha256": "527b87ddbbd73a756b5773d5a059b4df7061c0afa43b0f8e340cc0bedd2f3425",
+          "htmlSha256": "33493522f4914247ca3fb9fea6091bc3f9fabb11d5d5b5b22dd366ef5d6233fa",
+          "htmlFactsSha256": "75bec718ad53937da7f88d507edd75a9c327589821f44823790b2f7382dc2c71"
+        },
+        {
+          "id": "single-line-grid-snap-off-control",
+          "inputSha256": "f16d16df01ed0a7c5766354fb338de25220c260630a00dfcaceeec7d67d2bee5",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "99d8bd9eb8ce426fb166e21c9038ba4846aefb7f61bc5d5c8459d8f867f3344f",
+          "renderReportSha256": "af0b5c03ae17523a572beeb4b7a8fb3bf23cfcf5404d676d88548a020325e6e5",
+          "htmlSha256": "498e7c0e8167c994fdc0738986e6d83e51c1bbd5df09133fc55b3e6398c00d1d",
+          "htmlFactsSha256": "6c197010f83133e90929f6722138cb24b8bb2f31094e231fed6440deb1b82054"
+        },
+        {
+          "id": "single-line-grid-inherited-off-control",
+          "inputSha256": "9d8cd07e37bc6a088d86888452a227e1e467efcde8eea123ff91589f91dc3ea5",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "7dc9fce4bfc5166a21e6e61239ef3eb5a0fba38f82947f1b3a784d4e73aeb129",
+          "renderReportSha256": "47190ac68453ea6f29f31c642173e70f5f954d48f123318c53e189c5c3d12aa3",
+          "htmlSha256": "8784da7ae0c98590d9eddfb1374fe013a76d592484758391aecaaf0331b83875",
+          "htmlFactsSha256": "920b3ad188a80e6d07e9826aafc9088bd86207f61de639e2a44ad2979bd0f67a"
+        },
+        {
+          "id": "single-line-grid-direct-on",
+          "inputSha256": "5e899e9bb5be7d76a5d7cccbd7010246ee313d54999a4330a68afd460380bac3",
+          "status": "delivered",
+          "pages": 3,
+          "pdfSha256": "ffb84d3e7bf49619321048ba44157c6b2e38452889058e82bf828b66886fdfdd",
+          "renderReportSha256": "86012e5fb2f54c617e69fc2271a5bfe31ab29d476abafbcc90bc59afee4dbfe8",
+          "htmlSha256": "6a25103dd48e519564cc20abb38ea20403c680ceeb45232dac10514d870a5805",
+          "htmlFactsSha256": "c536e35058b034018a66a9d4dbadc041c908f7a8e5537d1e75e32d304c6c4655"
+        },
+        {
+          "id": "single-line-grid-no-grid-control",
+          "inputSha256": "fbacf74f51b1ac79817199d461ed28afda7080c685203fa99cbb6e3c8a001c04",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "ff84927e8951e6b712024816b544dde0eafca4b1218f7d0e1faefe2257abe823",
+          "renderReportSha256": "772c198f9c4a88968e40b3e7064ce14bbaf4712b67a38617a011cee4bf06fbb7",
+          "htmlSha256": "8784da7ae0c98590d9eddfb1374fe013a76d592484758391aecaaf0331b83875",
+          "htmlFactsSha256": "920b3ad188a80e6d07e9826aafc9088bd86207f61de639e2a44ad2979bd0f67a"
+        },
+        {
+          "id": "single-line-grid-default-type-control",
+          "inputSha256": "64465a1598a700483cf707c2027533e7617fd77cb3355c50ba4d662691c443d7",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "c55c9eadeaac369c7017208a5143284f1096be3b91b6d06236cdead18e923b84",
+          "renderReportSha256": "ca0c2a70a553975dc925d4cb9b86280ea68ff05330059d104998f52a0a840152",
+          "htmlSha256": "8784da7ae0c98590d9eddfb1374fe013a76d592484758391aecaaf0331b83875",
+          "htmlFactsSha256": "920b3ad188a80e6d07e9826aafc9088bd86207f61de639e2a44ad2979bd0f67a"
+        },
+        {
+          "id": "single-line-grid-unrelated-table",
+          "inputSha256": "01621e2ee90be21404526b48a487f2b68140cc222497e60663ca7f69ab627d54",
+          "status": "delivered",
+          "pages": 3,
+          "pdfSha256": "f3e8fe71188146e574cdacb54a7e25420953fa3d3e525c9d979a227d7a37b944",
+          "renderReportSha256": "e89fdb6caf49b70578bedb9dc2a7438edac67bf5152c7b41d066fe2f5252d825",
+          "htmlSha256": "d425d331f61a4950d2ce2b2fdab3095a5b3055e680dff79ae48dd9affd80cb55",
+          "htmlFactsSha256": "cd9ab7da3caeda5e1f50a4b193a125694ed0edb5fdea57e7d451f405f25f8c82"
+        }
+      ],
+      "htmlInspectorSha256": "87805e278400914cd87a2fe8e89c498748b7f45eecd5ca432b9c2be2d95b4cbb"
+    }
+  },
+  "referenceBundleSha256": "c5b37b5a2bd792d7d8ea661cb0aab7ad1461e2420f09327f705f19a7425a6b24",
+  "referenceBundle": {
+    "file": "reference-bundle.json.gz",
+    "sha256": "a2811d3936594f0b6f9272fb4ab4707c2266fd56650b0e28f525026e91566f44",
+    "jsonSha256": "c5b37b5a2bd792d7d8ea661cb0aab7ad1461e2420f09327f705f19a7425a6b24"
+  },
+  "referenceEnvironment": {
+    "fonts": {
+      "LiberationSerif-Bold.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+      },
+      "LiberationSerif-BoldItalic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+      },
+      "LiberationSerif-Italic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+      },
+      "LiberationSerif-Regular.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+      }
+    },
+    "tools": {
+      "pdffonts": {
+        "sha256": "de0a6d649710c2ebc226656b08c70814019a93f58889f79bf1dac726a131beda",
+        "version": "pdffonts version 25.03.0"
+      },
+      "pdftocairo": {
+        "sha256": "6f56c7c8c5b015354ebed053d4b52e14b43611c9c86236562bfd112827108dc5",
+        "version": "pdftocairo version 25.03.0"
+      },
+      "pdftoppm": {
+        "sha256": "6c315e59db2a0829ecdfb6c791ad3f56bc9bd508266d20adc22238df447a74a3",
+        "version": "pdftoppm version 25.03.0"
+      },
+      "pdftotext": {
+        "sha256": "451784e28a4593637573e534d9be4c4487a3cccffae22a71e93162faa84de23c",
+        "version": "pdftotext version 25.03.0"
+      },
+      "qpdf": {
+        "sha256": "0d0462ea848601a652b666e83a07a095bb0c4d69d831beb6f94ea8e6e008f34c",
+        "version": "qpdf version 12.2.0"
+      }
+    }
+  },
+  "schema": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "documents": {
+      "fixtures/single-line-grid-default-type-control.docx": [],
+      "fixtures/single-line-grid-direct-on.docx": [],
+      "fixtures/single-line-grid-eighteen.docx": [],
+      "fixtures/single-line-grid-inherited-off-control.docx": [],
+      "fixtures/single-line-grid-no-grid-control.docx": [],
+      "fixtures/single-line-grid-snap-off-control.docx": [],
+      "fixtures/single-line-grid-twelve.docx": [],
+      "fixtures/single-line-grid-unrelated-table.docx": []
+    }
+  },
+  "cases": [
+    {
+      "id": "single-line-grid-eighteen",
+      "inputSha256": "6f3d14555cf83362f964a98e0d3a2963ca4d4a8e7d094d04f00fa9df5e933d68",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "single-line-grid-eighteen-baseline-report.json.gz",
+            "sha256": "c56b6db811d7ff1b1b081f77004cf72ab37e1ba91e0d0d7583b88298da3bc392",
+            "jsonSha256": "e3d47d74d3a01fea3224c08082a76ff5ef0e0751f4b0cc7b64cd836a7fa3bfdd"
+          },
+          "htmlSha256": "8784da7ae0c98590d9eddfb1374fe013a76d592484758391aecaaf0331b83875",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            13.792967999999988,
+            13.804687000000001
+          ],
+          "pageCount": 2,
+          "firstPageLines": 46,
+          "pdf": "pdf/single-line-grid-eighteen-baseline.pdf",
+          "pdfSha256": "645204dfd701f363f4d5f3ff2919f9cefc28e72cb8d578a25d4c02b061d7b3ea",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "single-line-grid-eighteen-baseline-inspection.json.gz",
+            "sha256": "15e3e1eed35e273154c546995faba7fa62d64e3e5e04dfcaade3a5046d9ba6d7",
+            "jsonSha256": "54297ccb143ff2dd49c21a0011120ddb95b3fa7c6621605b4af6d3692af442df"
+          },
+          "pageRasterSha256": [
+            "1b40f574f08cee816acaed9e88d5e674d25170aa8088f17a67c88b0f1217b2c5",
+            "58d047676579d22f6ee78622b94c27f4414bd7499cac8eca81ea02d5e06c5cc9"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            18.0,
+            18.0
+          ],
+          "pageCount": 3,
+          "firstPageLines": 36,
+          "pdf": "pdf/single-line-grid-eighteen-reference.pdf",
+          "pdfSha256": "eb51735df8914e968cdd935312518e523eac7f02804e90592dc84a6dde5307a2",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "single-line-grid-eighteen-reference-inspection.json.gz",
+            "sha256": "51cfcd60f2a478778321b6c536416e22c81968c59cc0aa5646c2f2be948ac6ff",
+            "jsonSha256": "518824a46012372de4e34f7fbc80a641ac6d09621f2dc3b119dc252a6e5eeff4"
+          },
+          "pageRasterSha256": [
+            "b919584ac7daa1b3ffb7b70afefcbf4b0ec5165a11038cc6352fb4000b758cb7",
+            "819fa28955ce4c370561bd3d8c935ab9c2c9ec64ce7083bb7ddb948cfbd9dbc8",
+            "81bd0e5997baa71f404db7ee0f3bf70117740814942c3f4a746776148d7797d9"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "single-line-grid-eighteen-candidate-report.json.gz",
+            "sha256": "4a34dce14a41e076f3ba37966a054ac7670478249c3c74a540912f9a4c023155",
+            "jsonSha256": "9d292481535ee9cf33ab17aac86fdd4708dcdd0daa66a99f95766e0c62eb583b"
+          },
+          "htmlSha256": "49cd7f0c6813bd7d57c8a606311f443970f42c31fe1d8f1507b96f9f4571bda8",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            17.99999899999999,
+            17.999999000000003
+          ],
+          "pageCount": 3,
+          "firstPageLines": 36,
+          "pdf": "pdf/single-line-grid-eighteen-candidate.pdf",
+          "pdfSha256": "e3a51a949374b7cd4ce2c3ac771216494ad4b9b1d2db60066a79575d36ceda01",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "single-line-grid-eighteen-candidate-inspection.json.gz",
+            "sha256": "14bc556b7a0f162ea089461e95f23a79c46b385f7e01c0a96f689a7c5e1e3abb",
+            "jsonSha256": "e122f12a39230ae41492d85b64161218068cc1099e4526b4eb03ea00ccd0a9c1"
+          },
+          "pageRasterSha256": [
+            "9f3630f9956bdca3513a49bb28a9dec4cdd2ea8a5afcece4cc0ef190158ca9a2",
+            "07719e4c661b86847025c1281ca02facc01c390e090cdf5dcd5110e4886c040b",
+            "26c671cb469142f71ae6098a43edd56d58c317d5d16a30759adf734edf833ad0"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "single-line-grid-eighteen.png",
+        "sha256": "8e3787865b9bc6b56cbeedd2d04348b249f3c5d58ecc35a4ae44cddf526e54bd"
+      }
+    },
+    {
+      "id": "single-line-grid-twelve",
+      "inputSha256": "fdc3465617bce30d437a6f77836c0286be023d4fc240db793929a08576f77ff9",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "single-line-grid-twelve-baseline-report.json.gz",
+            "sha256": "9f1cfd83aff11f985637c5d349f288534c3ac63f8fd44093b63165d60d19377a",
+            "jsonSha256": "f41a8148db5a2cb4f83b462118f59633d8413842314bd0d8f742c11bbfeaf98a"
+          },
+          "htmlSha256": "8784da7ae0c98590d9eddfb1374fe013a76d592484758391aecaaf0331b83875",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            13.792967999999988,
+            13.804687000000001
+          ],
+          "pageCount": 2,
+          "firstPageLines": 46,
+          "pdf": "pdf/single-line-grid-twelve-baseline.pdf",
+          "pdfSha256": "e22989c74b73752ad119cab3260670cfd47d265c03085a5f076db945188b2cf6",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "single-line-grid-twelve-baseline-inspection.json.gz",
+            "sha256": "15e3e1eed35e273154c546995faba7fa62d64e3e5e04dfcaade3a5046d9ba6d7",
+            "jsonSha256": "54297ccb143ff2dd49c21a0011120ddb95b3fa7c6621605b4af6d3692af442df"
+          },
+          "pageRasterSha256": [
+            "1b40f574f08cee816acaed9e88d5e674d25170aa8088f17a67c88b0f1217b2c5",
+            "58d047676579d22f6ee78622b94c27f4414bd7499cac8eca81ea02d5e06c5cc9"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            24.0,
+            24.0
+          ],
+          "pageCount": 3,
+          "firstPageLines": 27,
+          "pdf": "pdf/single-line-grid-twelve-reference.pdf",
+          "pdfSha256": "f1fe8e401dc3a9155b42dc8b2db76f1872042f6ce4883e08743ec4787e112e41",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "single-line-grid-twelve-reference-inspection.json.gz",
+            "sha256": "054ea9507f2e1bc7c6b7262cef7c269e8d7a53de767109cd6f3632556b55d8fc",
+            "jsonSha256": "73fb21a2a0408f9cbc05455c785b167f8843c769e184b00faff8381e1b804af2"
+          },
+          "pageRasterSha256": [
+            "58057f9e2767a96c10488405065f8a3e3cf825599de711fa367023ad22b0987b",
+            "9e10d9fecc982b9762ae28fe5850a451827800616350027ae717f6eaf25785a3",
+            "e8f00d7c1ab184209d5c4f931c11fc66b2b5afb6f58c0d3edebf2aeacddfa137"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "single-line-grid-twelve-candidate-report.json.gz",
+            "sha256": "b83a1b40a65b3d85088d3fb0814a8f354ae5518d9230b4799cef87fe175f92e9",
+            "jsonSha256": "527b87ddbbd73a756b5773d5a059b4df7061c0afa43b0f8e340cc0bedd2f3425"
+          },
+          "htmlSha256": "33493522f4914247ca3fb9fea6091bc3f9fabb11d5d5b5b22dd366ef5d6233fa",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            23.99999899999999,
+            23.999999000000003
+          ],
+          "pageCount": 3,
+          "firstPageLines": 27,
+          "pdf": "pdf/single-line-grid-twelve-candidate.pdf",
+          "pdfSha256": "a329a756c621729eaac18f241eb0df00338917189cd4223ae7269f7e8b33ab34",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "single-line-grid-twelve-candidate-inspection.json.gz",
+            "sha256": "0246a8a9e3df40d74ac9997dee2d08f6930261dedc277558700373316576f728",
+            "jsonSha256": "8a8e4b1bec8213ec110f77433081dc615831a61f49d99799a638cd367dd28cd8"
+          },
+          "pageRasterSha256": [
+            "f7bc611ce0bede72e1a1f68c2e72338d51c61944727e68ffcbc847ecad86689a",
+            "56d9d535b73f2f40895faefb7a05ad9d463e4a85a001e05b9a897098d59c93dc",
+            "e18095bcb8ab50ab13db08057fe77759cf369012d571c4484975d3011c2fe64c"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "single-line-grid-twelve.png",
+        "sha256": "7d1d91b7b24358c09166794d8690f0cc57f23ea0303903db9f121d22db00e269"
+      }
+    },
+    {
+      "id": "single-line-grid-snap-off-control",
+      "inputSha256": "f16d16df01ed0a7c5766354fb338de25220c260630a00dfcaceeec7d67d2bee5",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "single-line-grid-snap-off-control-baseline-report.json.gz",
+            "sha256": "613b3b85e8faae238ab5cc21de6e9c92ea1f72e29dc4882d439317dcd2b0afda",
+            "jsonSha256": "ca6c33335fe9902f4d262dee7eec0f48363e64f1e97a5014032eb3e9463fcb7c"
+          },
+          "htmlSha256": "498e7c0e8167c994fdc0738986e6d83e51c1bbd5df09133fc55b3e6398c00d1d",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            13.792967999999988,
+            13.804687000000001
+          ],
+          "pageCount": 2,
+          "firstPageLines": 46,
+          "pdf": "pdf/single-line-grid-snap-off-control-baseline.pdf",
+          "pdfSha256": "dedf16bd5cd143d40ee1606d00c227613ffe9add6a49e8d2307dd9f160a62b6e",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "single-line-grid-snap-off-control-baseline-inspection.json.gz",
+            "sha256": "15e3e1eed35e273154c546995faba7fa62d64e3e5e04dfcaade3a5046d9ba6d7",
+            "jsonSha256": "54297ccb143ff2dd49c21a0011120ddb95b3fa7c6621605b4af6d3692af442df"
+          },
+          "pageRasterSha256": [
+            "1b40f574f08cee816acaed9e88d5e674d25170aa8088f17a67c88b0f1217b2c5",
+            "58d047676579d22f6ee78622b94c27f4414bd7499cac8eca81ea02d5e06c5cc9"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            13.800000000000011,
+            13.799999999999997
+          ],
+          "pageCount": 2,
+          "firstPageLines": 46,
+          "pdf": "pdf/single-line-grid-snap-off-control-reference.pdf",
+          "pdfSha256": "a5dec04c72a8afe2cd34c406186242cd942c8546a31cd99dab8ad09faa4acbfc",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "single-line-grid-snap-off-control-reference-inspection.json.gz",
+            "sha256": "1fe6159d60eca41987ac5875e57dff73debad64234a46bef8ed67633812dd753",
+            "jsonSha256": "5fcc8c49b5bc415d9fb25ff179fc951609ce3bee27d15c54105657b7dbb971e5"
+          },
+          "pageRasterSha256": [
+            "b67120a31938d477a9850fb8c93e5ce40cd358f302da0c8c3f7e2557a01b5c99",
+            "e4f43e535a1800c0b462209223539c9edd9e8ac545d0792f49994a4703a7806d"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "single-line-grid-snap-off-control-candidate-report.json.gz",
+            "sha256": "2af55fbf59d3b07be418f1c63bfcb10e33220357158005a7ac4a34d61b01363f",
+            "jsonSha256": "af0b5c03ae17523a572beeb4b7a8fb3bf23cfcf5404d676d88548a020325e6e5"
+          },
+          "htmlSha256": "498e7c0e8167c994fdc0738986e6d83e51c1bbd5df09133fc55b3e6398c00d1d",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            13.792967999999988,
+            13.804687000000001
+          ],
+          "pageCount": 2,
+          "firstPageLines": 46,
+          "pdf": "pdf/single-line-grid-snap-off-control-candidate.pdf",
+          "pdfSha256": "99d8bd9eb8ce426fb166e21c9038ba4846aefb7f61bc5d5c8459d8f867f3344f",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "single-line-grid-snap-off-control-candidate-inspection.json.gz",
+            "sha256": "15e3e1eed35e273154c546995faba7fa62d64e3e5e04dfcaade3a5046d9ba6d7",
+            "jsonSha256": "54297ccb143ff2dd49c21a0011120ddb95b3fa7c6621605b4af6d3692af442df"
+          },
+          "pageRasterSha256": [
+            "1b40f574f08cee816acaed9e88d5e674d25170aa8088f17a67c88b0f1217b2c5",
+            "58d047676579d22f6ee78622b94c27f4414bd7499cac8eca81ea02d5e06c5cc9"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "single-line-grid-snap-off-control.png",
+        "sha256": "af95d363dc49e8233318ca283285709549e07de6cb86f70c1c72c76bc17cc2b4"
+      }
+    },
+    {
+      "id": "single-line-grid-inherited-off-control",
+      "inputSha256": "9d8cd07e37bc6a088d86888452a227e1e467efcde8eea123ff91589f91dc3ea5",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "single-line-grid-inherited-off-control-baseline-report.json.gz",
+            "sha256": "a8a1c065a6fb0e1070ae4da61d3d4d56a4b8ef8a9187e4a9b4c9a1497f0d1eb5",
+            "jsonSha256": "4fa893db05734562f084ae1bfc29d523473e3c4ec020f67fbf79a069301705fb"
+          },
+          "htmlSha256": "8784da7ae0c98590d9eddfb1374fe013a76d592484758391aecaaf0331b83875",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            13.792967999999988,
+            13.804687000000001
+          ],
+          "pageCount": 2,
+          "firstPageLines": 46,
+          "pdf": "pdf/single-line-grid-inherited-off-control-baseline.pdf",
+          "pdfSha256": "3a7dd22911a530ee74e97997455bb852d624bffa6374218fb0982d7d54a0c1e6",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "single-line-grid-inherited-off-control-baseline-inspection.json.gz",
+            "sha256": "15e3e1eed35e273154c546995faba7fa62d64e3e5e04dfcaade3a5046d9ba6d7",
+            "jsonSha256": "54297ccb143ff2dd49c21a0011120ddb95b3fa7c6621605b4af6d3692af442df"
+          },
+          "pageRasterSha256": [
+            "1b40f574f08cee816acaed9e88d5e674d25170aa8088f17a67c88b0f1217b2c5",
+            "58d047676579d22f6ee78622b94c27f4414bd7499cac8eca81ea02d5e06c5cc9"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            13.800000000000011,
+            13.799999999999997
+          ],
+          "pageCount": 2,
+          "firstPageLines": 46,
+          "pdf": "pdf/single-line-grid-inherited-off-control-reference.pdf",
+          "pdfSha256": "7f511fe9e5adb6f416edbcd0756dab193371e53840e29f50e2fdd682b9ecbffb",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "single-line-grid-inherited-off-control-reference-inspection.json.gz",
+            "sha256": "1fe6159d60eca41987ac5875e57dff73debad64234a46bef8ed67633812dd753",
+            "jsonSha256": "5fcc8c49b5bc415d9fb25ff179fc951609ce3bee27d15c54105657b7dbb971e5"
+          },
+          "pageRasterSha256": [
+            "b67120a31938d477a9850fb8c93e5ce40cd358f302da0c8c3f7e2557a01b5c99",
+            "e4f43e535a1800c0b462209223539c9edd9e8ac545d0792f49994a4703a7806d"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "single-line-grid-inherited-off-control-candidate-report.json.gz",
+            "sha256": "a3ba6cf17b7ef4352e70b2b18fac611db92cc7e7ccb240414c6b0643c56d6632",
+            "jsonSha256": "47190ac68453ea6f29f31c642173e70f5f954d48f123318c53e189c5c3d12aa3"
+          },
+          "htmlSha256": "8784da7ae0c98590d9eddfb1374fe013a76d592484758391aecaaf0331b83875",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            13.792967999999988,
+            13.804687000000001
+          ],
+          "pageCount": 2,
+          "firstPageLines": 46,
+          "pdf": "pdf/single-line-grid-inherited-off-control-candidate.pdf",
+          "pdfSha256": "7dc9fce4bfc5166a21e6e61239ef3eb5a0fba38f82947f1b3a784d4e73aeb129",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "single-line-grid-inherited-off-control-candidate-inspection.json.gz",
+            "sha256": "15e3e1eed35e273154c546995faba7fa62d64e3e5e04dfcaade3a5046d9ba6d7",
+            "jsonSha256": "54297ccb143ff2dd49c21a0011120ddb95b3fa7c6621605b4af6d3692af442df"
+          },
+          "pageRasterSha256": [
+            "1b40f574f08cee816acaed9e88d5e674d25170aa8088f17a67c88b0f1217b2c5",
+            "58d047676579d22f6ee78622b94c27f4414bd7499cac8eca81ea02d5e06c5cc9"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "single-line-grid-inherited-off-control.png",
+        "sha256": "6b4df9f2a580cfe7f112ffda4580b3e54e9d02d11f283f5a0bd6b8f34d8562a1"
+      }
+    },
+    {
+      "id": "single-line-grid-direct-on",
+      "inputSha256": "5e899e9bb5be7d76a5d7cccbd7010246ee313d54999a4330a68afd460380bac3",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "single-line-grid-direct-on-baseline-report.json.gz",
+            "sha256": "7c0f9fd76572e99c13003f8433157fac7426797b3d2c8e5f64b72eed7690e496",
+            "jsonSha256": "490055318d3a96f39b93d6d913f2ca043b8ff4af860556628c4e63339541fae4"
+          },
+          "htmlSha256": "498e7c0e8167c994fdc0738986e6d83e51c1bbd5df09133fc55b3e6398c00d1d",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            13.792967999999988,
+            13.804687000000001
+          ],
+          "pageCount": 2,
+          "firstPageLines": 46,
+          "pdf": "pdf/single-line-grid-direct-on-baseline.pdf",
+          "pdfSha256": "18caaac7dca5bd5bd511bc39e4be2155054dfa388c0d602d7b3d14851777e8b2",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "single-line-grid-direct-on-baseline-inspection.json.gz",
+            "sha256": "15e3e1eed35e273154c546995faba7fa62d64e3e5e04dfcaade3a5046d9ba6d7",
+            "jsonSha256": "54297ccb143ff2dd49c21a0011120ddb95b3fa7c6621605b4af6d3692af442df"
+          },
+          "pageRasterSha256": [
+            "1b40f574f08cee816acaed9e88d5e674d25170aa8088f17a67c88b0f1217b2c5",
+            "58d047676579d22f6ee78622b94c27f4414bd7499cac8eca81ea02d5e06c5cc9"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            18.0,
+            18.0
+          ],
+          "pageCount": 3,
+          "firstPageLines": 36,
+          "pdf": "pdf/single-line-grid-direct-on-reference.pdf",
+          "pdfSha256": "196f3017bb0447f7c98f9694331a4ef51801b682f746aa568619a2a78e638763",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "single-line-grid-direct-on-reference-inspection.json.gz",
+            "sha256": "51cfcd60f2a478778321b6c536416e22c81968c59cc0aa5646c2f2be948ac6ff",
+            "jsonSha256": "518824a46012372de4e34f7fbc80a641ac6d09621f2dc3b119dc252a6e5eeff4"
+          },
+          "pageRasterSha256": [
+            "b919584ac7daa1b3ffb7b70afefcbf4b0ec5165a11038cc6352fb4000b758cb7",
+            "819fa28955ce4c370561bd3d8c935ab9c2c9ec64ce7083bb7ddb948cfbd9dbc8",
+            "81bd0e5997baa71f404db7ee0f3bf70117740814942c3f4a746776148d7797d9"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "single-line-grid-direct-on-candidate-report.json.gz",
+            "sha256": "fe91ec1b9b195e18bc5be01beea43f4ae0c665bf01b184ee68e9f5d281958d90",
+            "jsonSha256": "86012e5fb2f54c617e69fc2271a5bfe31ab29d476abafbcc90bc59afee4dbfe8"
+          },
+          "htmlSha256": "6a25103dd48e519564cc20abb38ea20403c680ceeb45232dac10514d870a5805",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            17.99999899999999,
+            17.999999000000003
+          ],
+          "pageCount": 3,
+          "firstPageLines": 36,
+          "pdf": "pdf/single-line-grid-direct-on-candidate.pdf",
+          "pdfSha256": "ffb84d3e7bf49619321048ba44157c6b2e38452889058e82bf828b66886fdfdd",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "single-line-grid-direct-on-candidate-inspection.json.gz",
+            "sha256": "14bc556b7a0f162ea089461e95f23a79c46b385f7e01c0a96f689a7c5e1e3abb",
+            "jsonSha256": "e122f12a39230ae41492d85b64161218068cc1099e4526b4eb03ea00ccd0a9c1"
+          },
+          "pageRasterSha256": [
+            "9f3630f9956bdca3513a49bb28a9dec4cdd2ea8a5afcece4cc0ef190158ca9a2",
+            "07719e4c661b86847025c1281ca02facc01c390e090cdf5dcd5110e4886c040b",
+            "26c671cb469142f71ae6098a43edd56d58c317d5d16a30759adf734edf833ad0"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "single-line-grid-direct-on.png",
+        "sha256": "6e7f5d690408a3a35861ee43143ed1e183cdead6d936f97091795b14dc2cbc95"
+      }
+    },
+    {
+      "id": "single-line-grid-no-grid-control",
+      "inputSha256": "fbacf74f51b1ac79817199d461ed28afda7080c685203fa99cbb6e3c8a001c04",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "single-line-grid-no-grid-control-baseline-report.json.gz",
+            "sha256": "5a8b338dbeba770095613a72df9f5a0bd7d061a1a89e2063f081d38f3a45ce2f",
+            "jsonSha256": "75d6ef0b8e493396668e7c6cf38a3d402d82b58c08f1375f2d5959a6ac29704d"
+          },
+          "htmlSha256": "8784da7ae0c98590d9eddfb1374fe013a76d592484758391aecaaf0331b83875",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            13.792967999999988,
+            13.804687000000001
+          ],
+          "pageCount": 2,
+          "firstPageLines": 46,
+          "pdf": "pdf/single-line-grid-no-grid-control-baseline.pdf",
+          "pdfSha256": "78681a9fe0ebc9735c33ed8cc11ae984c11c1e07fdb5fe4b809997b02cd388d9",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "single-line-grid-no-grid-control-baseline-inspection.json.gz",
+            "sha256": "15e3e1eed35e273154c546995faba7fa62d64e3e5e04dfcaade3a5046d9ba6d7",
+            "jsonSha256": "54297ccb143ff2dd49c21a0011120ddb95b3fa7c6621605b4af6d3692af442df"
+          },
+          "pageRasterSha256": [
+            "1b40f574f08cee816acaed9e88d5e674d25170aa8088f17a67c88b0f1217b2c5",
+            "58d047676579d22f6ee78622b94c27f4414bd7499cac8eca81ea02d5e06c5cc9"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            13.800000000000011,
+            13.799999999999997
+          ],
+          "pageCount": 2,
+          "firstPageLines": 46,
+          "pdf": "pdf/single-line-grid-no-grid-control-reference.pdf",
+          "pdfSha256": "85f86a0c71913bce3879db9722a080c022a36100519b311126a1467448660071",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "single-line-grid-no-grid-control-reference-inspection.json.gz",
+            "sha256": "1fe6159d60eca41987ac5875e57dff73debad64234a46bef8ed67633812dd753",
+            "jsonSha256": "5fcc8c49b5bc415d9fb25ff179fc951609ce3bee27d15c54105657b7dbb971e5"
+          },
+          "pageRasterSha256": [
+            "b67120a31938d477a9850fb8c93e5ce40cd358f302da0c8c3f7e2557a01b5c99",
+            "e4f43e535a1800c0b462209223539c9edd9e8ac545d0792f49994a4703a7806d"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "single-line-grid-no-grid-control-candidate-report.json.gz",
+            "sha256": "64e3450d8046ad8f44e3220ebee9a5cbe8e2093418be80c8d4ad051ffa84e413",
+            "jsonSha256": "772c198f9c4a88968e40b3e7064ce14bbaf4712b67a38617a011cee4bf06fbb7"
+          },
+          "htmlSha256": "8784da7ae0c98590d9eddfb1374fe013a76d592484758391aecaaf0331b83875",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            13.792967999999988,
+            13.804687000000001
+          ],
+          "pageCount": 2,
+          "firstPageLines": 46,
+          "pdf": "pdf/single-line-grid-no-grid-control-candidate.pdf",
+          "pdfSha256": "ff84927e8951e6b712024816b544dde0eafca4b1218f7d0e1faefe2257abe823",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "single-line-grid-no-grid-control-candidate-inspection.json.gz",
+            "sha256": "15e3e1eed35e273154c546995faba7fa62d64e3e5e04dfcaade3a5046d9ba6d7",
+            "jsonSha256": "54297ccb143ff2dd49c21a0011120ddb95b3fa7c6621605b4af6d3692af442df"
+          },
+          "pageRasterSha256": [
+            "1b40f574f08cee816acaed9e88d5e674d25170aa8088f17a67c88b0f1217b2c5",
+            "58d047676579d22f6ee78622b94c27f4414bd7499cac8eca81ea02d5e06c5cc9"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "single-line-grid-no-grid-control.png",
+        "sha256": "a8fd37c748c438bfefd4932fd9aa12edce1100df0ce3e987ab639d7517b95cd1"
+      }
+    },
+    {
+      "id": "single-line-grid-default-type-control",
+      "inputSha256": "64465a1598a700483cf707c2027533e7617fd77cb3355c50ba4d662691c443d7",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "single-line-grid-default-type-control-baseline-report.json.gz",
+            "sha256": "99b5cf06682388f64585edeeafaab016099bd8643d01a754bbee8920cdfa51c1",
+            "jsonSha256": "a08511ae9ef1b48cf62cb483298c413d3a324463eddfd9bab78894a8f37d66f8"
+          },
+          "htmlSha256": "8784da7ae0c98590d9eddfb1374fe013a76d592484758391aecaaf0331b83875",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            13.792967999999988,
+            13.804687000000001
+          ],
+          "pageCount": 2,
+          "firstPageLines": 46,
+          "pdf": "pdf/single-line-grid-default-type-control-baseline.pdf",
+          "pdfSha256": "a0cb7a6a3c0e4a77378842027680587822aeab73317a26d7d7dbcc4c2cf9d4b3",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "single-line-grid-default-type-control-baseline-inspection.json.gz",
+            "sha256": "15e3e1eed35e273154c546995faba7fa62d64e3e5e04dfcaade3a5046d9ba6d7",
+            "jsonSha256": "54297ccb143ff2dd49c21a0011120ddb95b3fa7c6621605b4af6d3692af442df"
+          },
+          "pageRasterSha256": [
+            "1b40f574f08cee816acaed9e88d5e674d25170aa8088f17a67c88b0f1217b2c5",
+            "58d047676579d22f6ee78622b94c27f4414bd7499cac8eca81ea02d5e06c5cc9"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            13.800000000000011,
+            13.799999999999997
+          ],
+          "pageCount": 2,
+          "firstPageLines": 46,
+          "pdf": "pdf/single-line-grid-default-type-control-reference.pdf",
+          "pdfSha256": "ea2acc60d432ab9e94f18aa57941f1387d92e10073dd29729a2a9daf4483c0b2",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "single-line-grid-default-type-control-reference-inspection.json.gz",
+            "sha256": "1fe6159d60eca41987ac5875e57dff73debad64234a46bef8ed67633812dd753",
+            "jsonSha256": "5fcc8c49b5bc415d9fb25ff179fc951609ce3bee27d15c54105657b7dbb971e5"
+          },
+          "pageRasterSha256": [
+            "b67120a31938d477a9850fb8c93e5ce40cd358f302da0c8c3f7e2557a01b5c99",
+            "e4f43e535a1800c0b462209223539c9edd9e8ac545d0792f49994a4703a7806d"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "single-line-grid-default-type-control-candidate-report.json.gz",
+            "sha256": "8585702e7636869b0b8152cb4f2c755dcb5af680b629c9ddaec564d41c59ca5b",
+            "jsonSha256": "ca0c2a70a553975dc925d4cb9b86280ea68ff05330059d104998f52a0a840152"
+          },
+          "htmlSha256": "8784da7ae0c98590d9eddfb1374fe013a76d592484758391aecaaf0331b83875",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            13.792967999999988,
+            13.804687000000001
+          ],
+          "pageCount": 2,
+          "firstPageLines": 46,
+          "pdf": "pdf/single-line-grid-default-type-control-candidate.pdf",
+          "pdfSha256": "c55c9eadeaac369c7017208a5143284f1096be3b91b6d06236cdead18e923b84",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "single-line-grid-default-type-control-candidate-inspection.json.gz",
+            "sha256": "15e3e1eed35e273154c546995faba7fa62d64e3e5e04dfcaade3a5046d9ba6d7",
+            "jsonSha256": "54297ccb143ff2dd49c21a0011120ddb95b3fa7c6621605b4af6d3692af442df"
+          },
+          "pageRasterSha256": [
+            "1b40f574f08cee816acaed9e88d5e674d25170aa8088f17a67c88b0f1217b2c5",
+            "58d047676579d22f6ee78622b94c27f4414bd7499cac8eca81ea02d5e06c5cc9"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "single-line-grid-default-type-control.png",
+        "sha256": "0752e62dfd3f0865cd5dd3ceb3951074f4446b02e3bb11ec24dc679040e6b457"
+      }
+    },
+    {
+      "id": "single-line-grid-unrelated-table",
+      "inputSha256": "01621e2ee90be21404526b48a487f2b68140cc222497e60663ca7f69ab627d54",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "single-line-grid-unrelated-table-baseline-report.json.gz",
+            "sha256": "78465cb7fdae4c3086caa923f63a996cb0710900dbbdc0b0d14ca49f863c5997",
+            "jsonSha256": "0bda2d88a2256106adcecd84e409bd30af1da1bd82ff40ab56721762a2011748"
+          },
+          "htmlSha256": "0064088680d53356a730ed0910e3baafb28bd63a0f1b23397401dadbeb5f4912",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            13.499998999999988,
+            14.249999000000003
+          ],
+          "pageCount": 2,
+          "firstPageLines": 46,
+          "pdf": "pdf/single-line-grid-unrelated-table-baseline.pdf",
+          "pdfSha256": "066b378e536cbb293cc4c2e67c5599f088c82929cc6e21b1839358efa140ca97",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "single-line-grid-unrelated-table-baseline-inspection.json.gz",
+            "sha256": "76febb554b6089d680d94e4a8b0ffb1f75c9c59b1ab4381bf325ec1867d61189",
+            "jsonSha256": "410c9a8a2baaa69be956142d39df91a9107e07a1f98b217b69a444aac5c6dcc2"
+          },
+          "pageRasterSha256": [
+            "af3eac65eea2f2de00859bd4c7ff45a6e4e536e9653183af8f608e51fef70f4b",
+            "bc51fd4f39484ea843d2aa16065f5c9e475551f00c8b95bc3f5e35df86908896"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            18.0,
+            18.0
+          ],
+          "pageCount": 3,
+          "firstPageLines": 36,
+          "pdf": "pdf/single-line-grid-unrelated-table-reference.pdf",
+          "pdfSha256": "a851e0a5105b6c809699e5924c9614bc7573144e5dde0c6a3d0d1bebd60516a7",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "single-line-grid-unrelated-table-reference-inspection.json.gz",
+            "sha256": "c8a845caead2ee7d4b4ca18b1d8a20174f7c863cdd8414ff8f7facdff3adcae4",
+            "jsonSha256": "042c41fc725064b7d811d6635e4a31503f94edcbf2362d54c9128592e807e5a8"
+          },
+          "pageRasterSha256": [
+            "b919584ac7daa1b3ffb7b70afefcbf4b0ec5165a11038cc6352fb4000b758cb7",
+            "819fa28955ce4c370561bd3d8c935ab9c2c9ec64ce7083bb7ddb948cfbd9dbc8",
+            "4a6599ab489c10e267a8ac36bfdf40ba5247cab7dd7c5d8d27fa3e90610c37df"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "single-line-grid-unrelated-table-candidate-report.json.gz",
+            "sha256": "12ab14f082b7e1baef0d7efaff7b03ff616c6e129de6d3b3d8484e3bc304a40d",
+            "jsonSha256": "e89fdb6caf49b70578bedb9dc2a7438edac67bf5152c7b41d066fe2f5252d825"
+          },
+          "htmlSha256": "d425d331f61a4950d2ce2b2fdab3095a5b3055e680dff79ae48dd9affd80cb55",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            17.99999899999999,
+            17.999999000000003
+          ],
+          "pageCount": 3,
+          "firstPageLines": 36,
+          "pdf": "pdf/single-line-grid-unrelated-table-candidate.pdf",
+          "pdfSha256": "f3e8fe71188146e574cdacb54a7e25420953fa3d3e525c9d979a227d7a37b944",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "single-line-grid-unrelated-table-candidate-inspection.json.gz",
+            "sha256": "09cd8b53e37c095f347a5cf2c2dd3544fde5141d6a9fafa88d28cc3ae34997f4",
+            "jsonSha256": "5583ce414b42755f0abcd87d0b3f9c4b00244c27882d8c7dfcd7334754731d5f"
+          },
+          "pageRasterSha256": [
+            "2277e21f8cb4eb0144913609d24fb6b681701fd7a9fd712ac86b8fed92d2f789",
+            "07719e4c661b86847025c1281ca02facc01c390e090cdf5dcd5110e4886c040b",
+            "a9c9d13c12c16d7295cf786a69f450732d5021492e6a413e24280673a6531393"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "single-line-grid-unrelated-table.png",
+        "sha256": "1644168b4f76d1912fae04e935af5def06d3e5562310e0fb409ebd99f16cef60"
+      }
+    }
+  ],
+  "tools": {
+    "docs/results/single-line-grid/Compose.py": "df3a04275c03b2fb8a6aff3329c5f247ba748028d8c1c66298a3b7bfc299a1b1",
+    "docs/results/export-reliability/Capture.mjs": "242ffcbd8716ba6238990621aee97482209e846c70ffbc4171c16b204f7e1631"
+  }
+}

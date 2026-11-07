@@ -374,7 +374,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 877)
+        self.assertEqual(len(common.validate_registry()['cases']), 885)
 
     def test_continuous_margin_pairs_isolate_geometry_and_keep_complete_labels(self):
         import xml.etree.ElementTree as ET
@@ -710,7 +710,28 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v121')
+        self.assertEqual(registry['suite']['id'], 'core-v122')
+
+    def test_single_line_grid_rejects_displaced_lines_and_wrong_pages(self):
+        import gzip
+        cases = [c for c in common.validate_registry()['cases'] if c['id'].startswith('single-line-grid-')]
+        self.assertEqual(len(cases), 8)
+        for case in cases:
+            with self.subTest(case=case['id']):
+                path = common.ROOT / 'docs/results/single-line-grid' / (case['id'] + '-candidate-inspection.json.gz')
+                with gzip.open(path, 'rt') as stream:
+                    actual = json.load(stream)
+                self.assertEqual(pdf.reference_failures(case, actual, 'libreoffice'), [])
+                slot = next(a for a in case['assertions'] if a['marker'] == 'Beech003')['rect']
+                for delta in (slot[1] - slot[3], slot[3] - slot[1]):
+                    changed = copy.deepcopy(actual)
+                    third = next(w for w in changed['words'] if w['text'] == 'Beech003')
+                    third['rect'][1] += delta
+                    third['rect'][3] += delta
+                    self.assertIn('assertion-marker-region', pdf.reference_failures(case, changed, 'libreoffice'))
+                changed = copy.deepcopy(actual)
+                next(w for w in changed['words'] if w['text'] == 'Beech010')['page'] = 2
+                self.assertIn('assertion-marker-region', pdf.reference_failures(case, changed, 'libreoffice'))
 
     def test_automatic_spacing_rejects_a_shifted_second_paragraph(self):
         import gzip
