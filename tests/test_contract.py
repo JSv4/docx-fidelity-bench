@@ -374,7 +374,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 784)
+        self.assertEqual(len(common.validate_registry()['cases']), 792)
 
     def test_continuous_margin_pairs_isolate_geometry_and_keep_complete_labels(self):
         import xml.etree.ElementTree as ET
@@ -710,7 +710,22 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v110')
+        self.assertEqual(registry['suite']['id'], 'core-v111')
+
+    def test_authored_table_continuation_rejects_a_second_page_only_shift(self):
+        import gzip
+        case = next(c for c in common.validate_registry()['cases']
+                    if c['id'] == 'authored-table-width-center-continuation')
+        path = common.ROOT / 'docs/results/authored-table-width/authored-table-width-center-continuation-reference-inspection.json.gz'
+        with gzip.open(path, 'rt') as stream:
+            native = json.load(stream)
+        self.assertEqual(pdf.reference_failures(case, native, 'libreoffice'), [])
+        shifted = copy.deepcopy(native)
+        for word in shifted['words']:
+            if word['page'] == 2:
+                word['rect'][0] += 21
+                word['rect'][2] += 21
+        self.assertIn('assertion-marker-region', pdf.reference_failures(case, shifted, 'libreoffice'))
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
