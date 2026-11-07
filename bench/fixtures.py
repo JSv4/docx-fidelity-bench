@@ -1844,6 +1844,67 @@ def block_content_height_cases(add):
             labels + ['FernComplete'], table + para('FernComplete'), sect=paper, styles_xml=styles,
             extra_parts={'word/settings.xml': settings}, assertions=assertions)
 
+def preset_polygon_cases(add):
+    """Original Elder drawings: page-positioned geometry with independent dimensions and labels."""
+    wps = 'http://schemas.microsoft.com/office/word/2010/wordprocessingShape'
+    wpg = 'http://schemas.microsoft.com/office/word/2010/wordprocessingGroup'
+    namespaces = f' xmlns:wps="{wps}" xmlns:wpg="{wpg}"'
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="22"/>'
+              '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0" '
+              'w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    paper = ('<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" '
+             'w:right="1440" w:bottom="1440" w:left="1440"/></w:sectPr>')
+
+    def shape(preset, guides=(), flip=False, x=0, y=0, width=73 * 12700, height=41 * 12700, color='2E7B73'):
+        adjustments = ''.join(f'<a:gd name="{name}" fmla="val {value}"/>' for name, value in guides)
+        return ('<wps:wsp><wps:cNvSpPr/><wps:spPr>'
+                f'<a:xfrm flipH="{int(flip)}"><a:off x="{x}" y="{y}"/><a:ext cx="{width}" cy="{height}"/></a:xfrm>'
+                f'<a:prstGeom prst="{preset}"><a:avLst>{adjustments}</a:avLst></a:prstGeom>'
+                + (f'<a:solidFill><a:srgbClr val="{color}"/></a:solidFill>' if color else '<a:noFill/>')
+                + '<a:ln><a:noFill/></a:ln></wps:spPr><wps:bodyPr/></wps:wsp>')
+
+    for key, preset, guides, flip in [
+            ('triangle', 'triangle', (), False), ('triangle-adjusted', 'triangle', (('adj', 30000),), False),
+            ('triangle-flipped', 'triangle', (('adj', 30000),), True), ('star', 'star5', (), False),
+            ('star-adjusted', 'star5', (('adj', 14500),), False),
+            ('star-factors', 'star5', (('adj', 19098), ('hf', 98000), ('vf', 107000)), False),
+            ('group', None, (), False), ('nested-group', None, (), False), ('rectangle-control', 'rect', (), False)]:
+        width, height = (180, 70) if preset is None else (73, 41)
+        if preset is None:
+            # Unequal 1/2 and 1/3 scales, with a translated child coordinate system.
+            ox, oy = (0, 0) if key == 'nested-group' else (7000, 9000)
+            children = shape('triangle', (('adj', 30000),), x=ox, y=oy, width=146 * 12700, height=123 * 12700)
+            children += shape('star5', x=ox + 180 * 12700, y=oy + 60 * 12700,
+                              width=146 * 12700, height=123 * 12700, color='B46A3E')
+            # Keep the authored group extents explicit; native import otherwise fits painted children.
+            children += shape('rect', x=ox, y=oy, width=360 * 12700, height=210 * 12700, color=None)
+            if key == 'nested-group':
+                children = ('<wpg:grpSp><wpg:cNvGrpSpPr/><wpg:grpSpPr><a:xfrm><a:off x="7000" y="9000"/>'
+                            f'<a:ext cx="{360 * 12700}" cy="{210 * 12700}"/><a:chOff x="0" y="0"/>'
+                            f'<a:chExt cx="{360 * 12700}" cy="{210 * 12700}"/></a:xfrm></wpg:grpSpPr>'
+                            + children + '</wpg:grpSp>')
+            content = ('<wpg:wgp><wpg:cNvGrpSpPr/><wpg:grpSpPr><a:xfrm><a:off x="0" y="0"/>'
+                       f'<a:ext cx="{width * 12700}" cy="{height * 12700}"/><a:chOff x="7000" y="9000"/>'
+                       f'<a:chExt cx="{360 * 12700}" cy="{210 * 12700}"/></a:xfrm></wpg:grpSpPr>'
+                       + children + '</wpg:wgp>')
+        else:
+            content = shape(preset, guides, flip)
+        drawing = ('<w:r><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" '
+                   'relativeHeight="3" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1">'
+                   '<wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="page"><wp:posOffset>1143000</wp:posOffset></wp:positionH>'
+                   '<wp:positionV relativeFrom="page"><wp:posOffset>1828800</wp:posOffset></wp:positionV>'
+                   f'<wp:extent cx="{width * 12700}" cy="{height * 12700}"/><wp:wrapNone/><wp:docPr id="63" name="Elder geometry"/>'
+                   f'<a:graphic><a:graphicData uri="{wpg if preset is None else wps}">{content}</a:graphicData></a:graphic>'
+                   '</wp:anchor></w:drawing></w:r>')
+        colors = [[46, 123, 115]] + ([[180, 106, 62]] if preset is None else [])
+        add('preset-polygon-' + key, 'images', 'Elder ' + key + ' geometry (part of Docxodus #1554)',
+            ['ElderBefore', 'ElderAnchor', 'ElderAfter'], para('ElderBefore') + para(runs=run('ElderAnchor') + drawing)
+            + para('ElderAfter'), sect=paper, styles_xml=styles, namespaces_extra=namespaces,
+            assertions=[dict(type='color-reference-geometry', version=1, page=1, rgb=rgb,
+                             tolerancePt=1.5, coverageTolerance=.08) for rgb in colors])
+
+
 def generate():
     cases = []
     def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT, literal_parts=None, relations_extra=(), content_types_extra=''):
@@ -4879,7 +4940,8 @@ def generate():
     page_break_paragraph_cases(add)
     authored_table_width_cases(add)
     block_content_height_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v112', 'version': 112, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    preset_polygon_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v113', 'version': 113, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

@@ -513,3 +513,5 @@ DrawingML/VML authored in `bench/redline_fixtures.py`. No product fixture, exter
 image or embedded font is imported. Review previews show only these original inputs and outputs.
 
 The eight page-break paragraph cases for Docxodus #1570 contain original Yew labels and literal OOXML authored in `bench/fixtures.py`. No product fixture, document, image or font program is imported. Labeled review sheets show only these authored inputs and their native/public renders.
+
+The nine preset-polygon cases for Docxodus #1554 contain original Elder labels and literal DrawingML authored in `bench/fixtures.py`. No product fixture, external document, image or font program is imported. Labeled review sheets and the wrong-apex PDF control show only these original inputs and locally generated derivatives.

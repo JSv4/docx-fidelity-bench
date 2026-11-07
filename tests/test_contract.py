@@ -374,7 +374,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 801)
+        self.assertEqual(len(common.validate_registry()['cases']), 810)
 
     def test_continuous_margin_pairs_isolate_geometry_and_keep_complete_labels(self):
         import xml.etree.ElementTree as ET
@@ -710,7 +710,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v112')
+        self.assertEqual(registry['suite']['id'], 'core-v113')
 
     def test_authored_table_continuation_rejects_a_second_page_only_shift(self):
         import gzip
@@ -761,6 +761,24 @@ class RegistryContract(unittest.TestCase):
             removed = dict(native, colorRegions=missing['colorRegions'])
             failures = [c['name'] for c in pdf.correctness(case, native, removed) if not c['passed']]
             self.assertEqual(failures, ['assertion-color-reference-geometry'] * 2)
+
+    def test_polygon_color_declarations_reject_missing_paint_but_not_an_equal_area_apex_change(self):
+        import gzip
+        folder = common.ROOT / 'docs/results/preset-polygons'
+        for case in common.validate_registry()['cases']:
+            if not case['id'].startswith('preset-polygon-'):
+                continue
+            with gzip.open(folder / (case['id'] + '-reference-inspection.json.gz'), 'rt') as stream:
+                native = json.load(stream)
+            self.assertEqual(pdf.reference_failures(case, native, 'libreoffice'), [])
+            removed = dict(native, colorRegions=[])
+            failures = [c['name'] for c in pdf.correctness(case, native, removed) if not c['passed']]
+            self.assertEqual(failures, ['assertion-color-reference-geometry'] * len(case['assertions']))
+            if case['id'] == 'preset-polygon-triangle-adjusted':
+                with gzip.open(folder / 'wrong-apex-inspection.json.gz', 'rt') as stream:
+                    mutant = json.load(stream)
+                self.assertEqual(mutant['words'], native['words'])
+                self.assertTrue(all(c['passed'] for c in pdf.correctness(case, native, mutant)))
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
