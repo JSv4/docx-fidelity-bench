@@ -9,7 +9,7 @@ paragraph spacing and a 288×216pt sheet with 24pt margins. No renderer fixture 
 The production baseline `8959a64eab3ac15f69eef806fd394b8fbf06ca43` passes the three controls.
 The own-paragraph and explicit-flag cases fail strict font policy because a synthetic placeholder
 requests a fallback face. End/middle breaks deliver PDFs but fail the declared line regions.
-Candidate `631725137ec24c88a3ca95a900669c3d400a70a3` passes all eight with strict fonts and no warnings. The retained evidence checks 45 labels across
+Candidate `dc973c457bdf16a90fbfac3301b3bd4907fdaa03` passes all eight with strict fonts and no warnings. The retained evidence checks 45 labels across
 21 delivered PDFs and 33 pages.
 LibreOffice 25.8.7.3 supplies eight eligible native references, including the explicit flag's
 intentional extra line. Every package validates with Open XML SDK 3.5.1 against Microsoft 365.
@@ -32,7 +32,7 @@ their bytes apart from the generator provenance hash.
 ```sh
 python3 -m bench reference libreoffice --manifest MANIFEST --out REFERENCE
 node docs/results/export-reliability/Capture.mjs SOURCE MANIFEST OUTPUT ENVIRONMENT
-python3 docs/results/page-break-paragraphs/Compose.py runs/page-breaks
+python3 docs/results/page-break-paragraphs/Compose.py runs/page-breaks-final
 ```
 
 The composer verifies all source/build bindings and label assertions before producing evidence.
