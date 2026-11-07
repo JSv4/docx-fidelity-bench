@@ -374,7 +374,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 819)
+        self.assertEqual(len(common.validate_registry()['cases']), 826)
 
     def test_continuous_margin_pairs_isolate_geometry_and_keep_complete_labels(self):
         import xml.etree.ElementTree as ET
@@ -710,7 +710,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v114')
+        self.assertEqual(registry['suite']['id'], 'core-v115')
 
     def test_authored_table_continuation_rejects_a_second_page_only_shift(self):
         import gzip
@@ -805,6 +805,30 @@ class RegistryContract(unittest.TestCase):
             after['rect'][3] += 3
             failures = [c['name'] for c in pdf.correctness(case, native, shifted) if not c['passed']]
             self.assertEqual(failures, ['assertion-marker-reference-position'])
+
+    def test_oversized_keep_next_inventory_detects_missing_shifted_and_moved_lines(self):
+        import gzip
+        folder = common.ROOT / 'docs/results/oversized-keep-next'
+        for case in common.validate_registry()['cases']:
+            if not case['id'].startswith('oversized-keep-next-'):
+                continue
+            with gzip.open(folder / (case['id'] + '-reference-inspection.json.gz'), 'rt') as stream:
+                native = json.load(stream)
+            self.assertEqual(pdf.reference_failures(case, native, 'libreoffice'), [])
+            for kind in ('missing', 'shifted', 'moved'):
+                mutant = copy.deepcopy(native)
+                word = next(w for w in mutant['words'] if w['text'] == 'RowanItem001')
+                if kind == 'missing':
+                    mutant['words'].remove(word)
+                    del mutant['tokens']['RowanItem001']
+                elif kind == 'shifted':
+                    word['rect'][1] += 18
+                    word['rect'][3] += 18
+                else:
+                    word['page'] += 1
+                failures = [c['name'] for c in pdf.correctness(case, native, mutant) if not c['passed']]
+                self.assertIn('assertion-marker-region', failures, (case['id'], kind))
+                self.assertEqual('expected-visible-tokens' in failures, kind == 'missing')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
