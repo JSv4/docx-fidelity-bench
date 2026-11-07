@@ -1773,6 +1773,77 @@ def authored_table_width_cases(add):
             extra_parts={'word/settings.xml': settings}, assertions=assertions)
 
 
+
+def block_content_height_cases(add):
+    """Original Fern labels and bitmap; dimensions differ from the renderer's regression fixtures."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="22"/>'
+              '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+              '<w:widowControl w:val="0"/><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>'
+              '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    paper = ('<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" '
+             'w:right="1440" w:bottom="1440" w:left="1440"/></w:sectPr>')
+    settings = (f'<w:settings xmlns:w="{W}"><w:compat><w:compatSetting w:name="compatibilityMode" '
+                'w:uri="http://schemas.microsoft.com/office/word" w:val="15"/></w:compat></w:settings>')
+    for multiple in (1, 1.15, 2):
+        extent = 85 * 12700
+        picture = ('<w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0">'
+                   f'<wp:extent cx="{extent}" cy="{extent}"/><wp:docPr id="51" name="Fern tile"/>'
+                   '<a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">'
+                   '<pic:pic><pic:nvPicPr><pic:cNvPr id="51" name="Fern tile"/><pic:cNvPicPr/></pic:nvPicPr>'
+                   '<pic:blipFill><a:blip r:embed="rFern"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill>'
+                   f'<pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="{extent}" cy="{extent}"/></a:xfrm>'
+                   '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic>'
+                   '</wp:inline></w:drawing></w:r>')
+        end_top = 72 + 85 + 12.65 * multiple
+        key = f'{multiple:g}'.replace('.', '-')
+        add(f'block-content-height-picture-{key}', 'images',
+            f'Fern picture-only paragraph at {multiple:g} natural-line spacing (Docxodus #1568)',
+            ['FernAbove', 'FernBelow'], para('FernAbove') + para(
+                props=f'<w:spacing w:before="0" w:after="0" w:line="{round(240 * multiple)}" w:lineRule="auto"/>',
+                runs=picture) + para('FernBelow'), sect=paper, styles_xml=styles,
+            extra_parts={'word/settings.xml': settings, 'word/media/fern.png': png(12, 12,
+                lambda x, y: (42, 112, 74) if (x + y) % 4 else (230, 196, 96))},
+            relations_extra=[('rFern', 'image', 'media/fern.png')],
+            assertions=[dict(type='marker-region', marker='FernBelow', occurrence=1, page=1,
+                             rect=[72, end_top - .7, 180, end_top + 13.5])] + [
+                dict(type='color-reference-geometry', version=1, page=1, rgb=rgb,
+                     tolerancePt=1.5, coverageTolerance=.08) for rgb in ([42, 112, 74], [230, 196, 96])])
+    for kind, top, bottom, border, count, lines in [
+            ('no-margin-control', 0, 0, 0, 5, 1), ('top-margin', 4, 0, 0, 5, 1),
+            ('both-margins', 4, 7, 0, 5, 1), ('border-margins', 4, 7, 1.5, 5, 1),
+            ('continuation', 4, 7, 1.5, 22, 1), ('tall-content-control', 4, 7, 0, 5, 3)]:
+        labels, rows = [], []
+        for row in range(count):
+            cells = []
+            for column in ('A', 'B'):
+                texts = [f'Fern{row + 1:02d}{column}{line + 1}' for line in range(lines)]
+                labels.extend(texts)
+                cells.append('<w:tc><w:tcPr><w:tcW w:type="dxa" w:w="3600"/></w:tcPr>'
+                             + ''.join(para(text) for text in texts) + '</w:tc>')
+            rows.append('<w:tr><w:trPr><w:trHeight w:val="560" w:hRule="atLeast"/></w:trPr>'
+                        + ''.join(cells) + '</w:tr>')
+        borders = ('<w:tblBorders>' + ''.join(f'<w:{side} w:val="single" w:sz="{round(border * 8)}" w:color="326446"/>'
+                   for side in ('top', 'left', 'bottom', 'right', 'insideH', 'insideV')) + '</w:tblBorders>') if border else ''
+        table = ('<w:tbl><w:tblPr><w:tblW w:type="dxa" w:w="7200"/>' + borders
+                 + '<w:tblLayout w:type="fixed"/><w:tblCellMar>'
+                 + f'<w:top w:type="dxa" w:w="{top * 20}"/><w:left w:type="dxa" w:w="80"/>'
+                 + f'<w:bottom w:type="dxa" w:w="{bottom * 20}"/><w:right w:type="dxa" w:w="80"/>'
+                 + '</w:tblCellMar></w:tblPr><w:tblGrid><w:gridCol w:w="3600"/><w:gridCol w:w="3600"/></w:tblGrid>'
+                 + ''.join(rows) + '</w:tbl>')
+        pitch = max(28, lines * 12.65) + top + bottom + border
+        third_top = 72 + top + border + 2 * pitch
+        assertions = [dict(type='marker-region', marker='Fern03A1', occurrence=1, page=1,
+                           rect=[72, third_top - .7, 180, third_top + 14])]
+        if kind == 'continuation':
+            # Sixteen rows do not fit the 648pt band once outer borders are included.
+            last_top = 72 + top + border + 6 * pitch
+            assertions.append(dict(type='marker-region', marker='Fern22A1', occurrence=1, page=2,
+                                   rect=[72, last_top - .7, 180, last_top + 14]))
+        add(f'block-content-height-row-{kind}', 'tables', f'Fern minimum row with {kind} (Docxodus #1568)',
+            labels + ['FernComplete'], table + para('FernComplete'), sect=paper, styles_xml=styles,
+            extra_parts={'word/settings.xml': settings}, assertions=assertions)
+
 def generate():
     cases = []
     def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT, literal_parts=None, relations_extra=(), content_types_extra=''):
@@ -4807,7 +4878,8 @@ def generate():
     column_fragmentation_cases(add)
     page_break_paragraph_cases(add)
     authored_table_width_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v111', 'version': 111, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    block_content_height_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v112', 'version': 112, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

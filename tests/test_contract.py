@@ -374,7 +374,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 792)
+        self.assertEqual(len(common.validate_registry()['cases']), 801)
 
     def test_continuous_margin_pairs_isolate_geometry_and_keep_complete_labels(self):
         import xml.etree.ElementTree as ET
@@ -710,7 +710,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v111')
+        self.assertEqual(registry['suite']['id'], 'core-v112')
 
     def test_authored_table_continuation_rejects_a_second_page_only_shift(self):
         import gzip
@@ -726,6 +726,41 @@ class RegistryContract(unittest.TestCase):
                 word['rect'][0] += 21
                 word['rect'][2] += 21
         self.assertIn('assertion-marker-region', pdf.reference_failures(case, shifted, 'libreoffice'))
+
+    def test_block_height_declarations_reject_vertical_drift_and_wrong_continuation(self):
+        import gzip
+        cases = {c['id']: c for c in common.validate_registry()['cases']}
+        for suffix, page, distance in [('picture-1', 1, 3), ('row-continuation', 2, 12)]:
+            cid = 'block-content-height-' + suffix
+            path = common.ROOT / 'docs/results/block-content-height' / (cid + '-reference-inspection.json.gz')
+            with gzip.open(path, 'rt') as stream:
+                native = json.load(stream)
+            self.assertEqual(pdf.reference_failures(cases[cid], native, 'libreoffice'), [])
+            for direction in (-1, 1):
+                shifted = copy.deepcopy(native)
+                for word in shifted['words']:
+                    if word['page'] == page and (suffix != 'picture-1' or word['text'] == 'FernBelow'):
+                        word['rect'][1] += direction * distance
+                        word['rect'][3] += direction * distance
+                self.assertIn('assertion-marker-region', pdf.reference_failures(cases[cid], shifted, 'libreoffice'))
+
+    def test_block_height_picture_declarations_reject_removed_bitmap(self):
+        import gzip
+        folder = common.ROOT / 'docs/results/block-content-height'
+        with gzip.open(folder / 'picture-missing-inspection.json.gz', 'rt') as stream:
+            missing = json.load(stream)
+        for case in common.validate_registry()['cases']:
+            if not case['id'].startswith('block-content-height-picture-'):
+                continue
+            with gzip.open(folder / (case['id'] + '-reference-inspection.json.gz'), 'rt') as stream:
+                native = json.load(stream)
+            self.assertEqual(pdf.reference_failures(case, native, 'libreoffice'), [])
+            if case['id'].endswith('picture-1'):
+                self.assertEqual(missing['words'], native['words'])
+                self.assertEqual(missing['tokens'], native['tokens'])
+            removed = dict(native, colorRegions=missing['colorRegions'])
+            failures = [c['name'] for c in pdf.correctness(case, native, removed) if not c['passed']]
+            self.assertEqual(failures, ['assertion-color-reference-geometry'] * 2)
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET

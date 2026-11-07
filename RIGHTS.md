@@ -1,5 +1,9 @@
 # Authorship and artifact rights
 
+The nine block-content-height cases for Docxodus #1568 contain original Fern labels,
+literal OOXML and a small bitmap authored in `bench/fixtures.py`. No renderer fixture,
+helper, template, external document, image or font program is imported.
+
 The eight authored-table-width cases for Docxodus #1563 contain original Ash inventory labels,
 orchard prose and literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper,
 template, external document, image or font program is imported. Review sheets show only these
