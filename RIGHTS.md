@@ -558,3 +558,5 @@ The short-rewrite cases for Docxodus #1556 contain original Myrtle prose and lit
 authored in `bench/redline_fixtures.py`. The long-rewrite controls reuse this repository's original
 Cedar prose. No product fixture, external document, image or font program is imported. Review
 sheets show only these independently authored inputs and local renders of their redlines.
+
+The sixteen paragraph-text independence cases for Docxodus #1550/#1562 contain original Hazel prose and literal OOXML authored in `bench/fixtures.py`. No renderer fixture, external document, image or font program is imported. Native and public-renderer review images show only these authored inputs.

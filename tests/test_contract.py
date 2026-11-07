@@ -374,7 +374,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 885)
+        self.assertEqual(len(common.validate_registry()['cases']), 901)
 
     def test_continuous_margin_pairs_isolate_geometry_and_keep_complete_labels(self):
         import xml.etree.ElementTree as ET
@@ -710,7 +710,28 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v122')
+        self.assertEqual(registry['suite']['id'], 'core-v123')
+
+    def test_paragraph_text_rejects_wrong_lines_and_missing_words(self):
+        import gzip
+        cases = [c for c in common.validate_registry()['cases'] if c['id'].startswith('paragraph-text-')]
+        self.assertEqual(len(cases), 16)
+        for case in cases:
+            with self.subTest(case=case['id']):
+                path = common.ROOT / 'docs/results/paragraph-text-independence' / (case['id'] + '-candidate-inspection.json.gz')
+                with gzip.open(path, 'rt') as stream:
+                    actual = json.load(stream)
+                self.assertEqual(pdf.reference_failures(case, actual, 'libreoffice'), [])
+                marker = 'landing' if '-justify-' in case['id'] else 'Water'
+                for delta in (-14, 14):
+                    changed = copy.deepcopy(actual)
+                    boundary = next(w for w in changed['words'] if w['text'] == marker)
+                    boundary['rect'][1] += delta
+                    boundary['rect'][3] += delta
+                    self.assertIn('assertion-marker-region', pdf.reference_failures(case, changed, 'libreoffice'))
+                changed = copy.deepcopy(actual)
+                changed['words'] = [w for w in changed['words'] if w['text'] != 'Hazel01']
+                self.assertIn('assertion-marker-region', pdf.reference_failures(case, changed, 'libreoffice'))
 
     def test_single_line_grid_rejects_displaced_lines_and_wrong_pages(self):
         import gzip

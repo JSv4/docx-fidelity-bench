@@ -1774,6 +1774,68 @@ def authored_table_width_cases(add):
 
 
 
+def paragraph_text_independence_cases(add, cases):
+    """Original Hazel prose: unrelated content must not change another paragraph's lines."""
+    prefixes = {
+        'justify': 'Hazel01 Our quiet harbor crew checks every lantern before an evening ferry reaches its northern landing',
+        'kern': 'Hazel01 We Visit A Quiet Valley Where Tall Willows Wave Beside Warm Water',
+    }
+    # Independently measured 12pt Liberation Serif advances: the justified prefix
+    # is 502.107421875pt; the kerning prefix is 395.173828125pt off / 384.685546875pt on.
+    variants = [(kind, neighbor, None, 0) for kind in prefixes for neighbor in ('plain', 'bold', 'table', 'list', 'link')]
+    variants += [('kern', 'bold', owner, size) for owner in ('run', 'defaults', 'style') for size in (16, 28)]
+    for kind, neighbor, owner, size in variants:
+        width = 501 if kind == 'justify' else 390
+        prefix = prefixes[kind]
+        text = prefix + (' while HazelTail waits beside a gate.' if kind == 'justify' else ' while HazelTail names every boat before nightfall.')
+        kern = f'<w:kern w:val="{size}"/>' if owner else ''
+        first_count = len(prefix.split()) - (kind == 'kern' and size != 16)
+        styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+            '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/>'
+            + (kern if owner == 'defaults' else '') + '<w:sz w:val="24"/></w:rPr></w:rPrDefault>'
+            '<w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>'
+            '</w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Hazel">'
+            '<w:name w:val="Hazel"/><w:rPr>' + (kern if owner == 'style' else '') + '</w:rPr></w:style></w:styles>')
+        closing = para('HazelNote keeps neat records.')
+        labels = [text, 'HazelNote keeps neat records.']
+        if neighbor == 'bold':
+            closing = para(runs=run('HazelNote keeps ') + run('neat', '<w:b/>') + run(' records.'))
+        elif neighbor == 'table':
+            closing = ('<w:tbl><w:tblPr><w:tblW w:w="2000" w:type="dxa"/></w:tblPr><w:tblGrid><w:gridCol w:w="2000"/>'
+                '</w:tblGrid><w:tr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr>'
+                + para('HazelCell') + '</w:tc></w:tr></w:tbl>')
+            labels[1] = 'HazelCell'
+        elif neighbor == 'list':
+            closing = para('HazelList', '<w:numPr><w:ilvl w:val="0"/><w:numId w:val="1"/></w:numPr>')
+            labels[1] = '1. HazelList'
+        elif neighbor == 'link':
+            closing = para(runs='<w:hyperlink r:id="rHazelLink">' + run('HazelLink') + '</w:hyperlink>')
+            labels[1] = 'HazelLink'
+        numbering = (f'<w:numbering xmlns:w="{W}"><w:abstractNum w:abstractNumId="0"><w:lvl w:ilvl="0"><w:start w:val="1"/>'
+            '<w:numFmt w:val="decimal"/><w:lvlText w:val="%1."/><w:lvlJc w:val="left"/>'
+            '<w:pPr><w:ind w:left="720" w:hanging="360"/></w:pPr></w:lvl></w:abstractNum>'
+            '<w:num w:numId="1"><w:abstractNumId w:val="0"/></w:num></w:numbering>')
+        words = text.split()
+        assert len(set(words)) == len(words), 'Line markers must be unique'
+        assertions = []
+        for index, word in enumerate(words):
+            top = 72 if index < first_count else 86
+            assertions.append(dict(type='marker-region', marker=word, occurrence=1, page=1,
+                rect=[0, top, 612, top + 14]))
+        suffix = f'-{owner}-{size}' if owner else ''
+        add(f'paragraph-text-{kind}-{neighbor}{suffix}', 'paragraphs',
+            f'Hazel {kind} beside {neighbor}, kerning {owner or "absent"} {size} (Docxodus #1550/#1562)', labels,
+            para(props='<w:jc w:val="' + ('both' if kind == 'justify' else 'left') + '"/>',
+                 runs=run(text, kern if owner == 'run' else '')) + closing,
+            sect=f'<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="{int((540 - width) * 20)}" w:bottom="1440" w:left="1440"/></w:sectPr>',
+            styles_xml=styles, numbering_xml=numbering if neighbor == 'list' else None,
+            relations_extra=[('rHazelLink', 'hyperlink', 'https://example.com/', 'External')] if neighbor == 'link' else [],
+            extra_parts={'word/settings.xml': f'<w:settings xmlns:w="{W}"><w:compat><w:compatSetting w:name="compatibilityMode" '
+                'w:uri="http://schemas.microsoft.com/office/word" w:val="15"/></w:compat></w:settings>'}, assertions=assertions)
+        cases[-1]['pdfCompanion'] = dict(profile=dict(review='final', comments='hidden'),
+            pageSizePt=[612, 792], requiredTokens=cases[-1]['tokens'], exactInventory=True)
+
+
 def single_line_grid_cases(add, cases):
     """Original Beech labels occupy declared whole grid slots, without fixing glyph baselines."""
     for kind, grid, inherited_off, direct in [
@@ -5407,9 +5469,10 @@ def generate():
     contextual_own_spacing_cases(add, cases)
     automatic_body_spacing_cases(add, cases)
     single_line_grid_cases(add, cases)
+    paragraph_text_independence_cases(add, cases)
     custom_path_cases(add)
     plain_math_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v122', 'version': 122, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v123', 'version': 123, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
