@@ -1774,6 +1774,59 @@ def authored_table_width_cases(add):
 
 
 
+def resizing_offpaper_cases(add, cases):
+    """Original Fir labels: resizing does not relocate a page-offset text box."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="22"/>'
+              '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+              '<w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/>'
+              '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    paper = ('<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1200" '
+             'w:right="1200" w:bottom="1200" w:left="1200" w:header="240" w:footer="240"/></w:sectPr>')
+    for fit in ('auto', 'percent'):
+        for edge in ('right', 'bottom', 'visible-control', 'right-balloons'):
+            x, y = (650, 160) if edge.startswith('right') else (60, 820 if edge == 'bottom' else 160)
+            labels = ['FirWindowOne', 'FirWindowTwo', 'FirWindowThree']
+            cx, cy = 160 * 12700, (16 if fit == 'auto' else 80) * 12700
+            drawing = ('<w:r><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" '
+                       'relativeHeight="3" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1">'
+                       '<wp:simplePos x="0" y="0"/>'
+                       f'<wp:positionH relativeFrom="page"><wp:posOffset>{x * 12700}</wp:posOffset></wp:positionH>'
+                       f'<wp:positionV relativeFrom="page"><wp:posOffset>{y * 12700}</wp:posOffset></wp:positionV>'
+                       f'<wp:extent cx="{cx}" cy="{cy}"/><wp:wrapNone/><wp:docPr id="31" name="Fir resizing window"/>'
+                       '<a:graphic><a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+                       '<wps:wsp><wps:cNvSpPr txBox="1"/><wps:spPr><a:xfrm><a:off x="0" y="0"/>'
+                       f'<a:ext cx="{cx}" cy="{cy}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom>'
+                       '<a:noFill/><a:ln><a:noFill/></a:ln></wps:spPr><wps:txbx><w:txbxContent>'
+                       + ''.join(para(label) for label in labels) + '</w:txbxContent></wps:txbx>'
+                       '<wps:bodyPr lIns="0" tIns="0" rIns="0" bIns="0">'
+                       + ('<a:spAutoFit/>' if fit == 'auto' else '')
+                       + '</wps:bodyPr></wps:wsp></a:graphicData></a:graphic>'
+                       + ('<wp14:sizeRelH relativeFrom="page"><wp14:pctWidth>20000</wp14:pctWidth></wp14:sizeRelH>' if fit == 'percent' else '')
+                       + '</wp:anchor></w:drawing></w:r>')
+            markup = edge == 'right-balloons'
+            props = ('<w:jc w:val="center"/><w:pPrChange w:id="8" w:author="Fir Editor" w:date="2026-09-18T08:00:00Z">'
+                     '<w:pPr><w:jc w:val="left"/></w:pPr></w:pPrChange>') if markup else ''
+            visible = labels if edge == 'visible-control' else []
+            tokens = ['FirOpening', 'FirHost', 'FirClosing'] + visible
+            body = para('FirOpening') + para(runs=run('FirHost') + drawing) + para('FirClosing', props)
+            assertions = [dict(type='same-page', version=1, markers=tokens)]
+            add('resizing-offpaper-' + fit + '-' + edge, 'paragraphs',
+                'Fir page-offset ' + fit + ' textbox: ' + edge + ' (part of Docxodus #1558)',
+                tokens, body, sect=paper, styles_xml=styles, assertions=assertions,
+                namespaces_extra=' xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing"')
+            if markup:
+                cases[-1]['profile']['review'] = 'markup'
+            companion = dict(profile=dict(review='markup' if markup else 'final', comments='margin' if markup else 'hidden'),
+                             pageSizePt=[612, 792], requiredTokens=dict(Counter(tokens + (['Formatted:', 'Centered'] if markup else []))),
+                             exactInventory=True)
+            if markup:
+                companion['profile'].update(markupPresentation='word', commentColumnPlacement='balloons')
+            if not visible:
+                companion['forbiddenTokens'] = labels
+            cases[-1]['pdfCompanion'] = companion
+
+
 def markup_paper_clip_cases(add, cases):
     """Original Elm labels distinguish source-paper clipping from balloon-sheet geometry."""
     styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
@@ -5197,9 +5250,10 @@ def generate():
     vml_line_cases(add)
     oversized_keep_next_cases(add)
     markup_paper_clip_cases(add, cases)
+    resizing_offpaper_cases(add, cases)
     custom_path_cases(add)
     plain_math_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v118', 'version': 118, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v119', 'version': 119, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

@@ -1,0 +1,2017 @@
+{
+  "scope": "Unscored strict-font public exports. Native references check source visibility; revised inputs retain native revision tint. No new Word typography or full-suite score.",
+  "manifestSha256": "bc90339c31cd29f1ac9802d3da315875ef5d84cc0a17ec2cd46de02d0cb34b70",
+  "companionManifestSha256": "eefaa3ec67d8fefb62a3990a0363967364b38953b404ee3ec60fab194585a19e",
+  "builds": {
+    "baseline": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-math/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-math/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-math/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-math/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-math/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-math/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-math/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-math/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-math/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "3ab1a4639da3d2b503911f33ec6fc168e34d35cb",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "67769f1cf931529aa1dd3c182fa96c18e5e9380c519dd36f301543e1a7ebde9b",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+      "schema": 1,
+      "tree": "56b21a8593e7cc4c2a62214ac9161ecb9567c370"
+    },
+    "candidate": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-offpaper/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-offpaper/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-offpaper/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-offpaper/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-offpaper/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-offpaper/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-offpaper/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-offpaper/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-offpaper/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "d59487425398a2f39b260f619b5d6044e75773bb",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "e22cf46e8c8e79cbfea009b126217fb0c6220a1927674f070c87b2a39ea8cdaf",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+      "schema": 1,
+      "tree": "911a88f9a86d25cc1f8881e788273462237990a3"
+    }
+  },
+  "rendererAssets": {
+    "baseline": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 622290,
+          "sha256": "ae9c644b3a0a9d072f76df0ec362f3ffde4f5e6945367a9d58c21933007a8cce"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 171174,
+          "sha256": "3bc799e35d593581dbdd5760a72e9d55e0c620a8cb84f699cd8c09747d4b40a1"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46484,
+          "sha256": "a604dbff16d3be0f0d24cf48753404b42fe25f70fbd1393dde4934871446a420"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5460761,
+          "sha256": "03b9c73d822cab9e972588d41fa8e6daca4d7606cbc53778902dbed00b6c5b6f"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "5de8dfe19a627b83dc30055f55cfd9b2638841d485e4eb71ec900e634e119a51"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "5e08586a10f0b0c9e4354438734b392459cd64282ababf7029a48246f6da6d47"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1675029,
+          "sha256": "7216cb9019a8db40a177990f4ae6034cfe3d4f47aa598d221c4675df401082ce"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "adfa7a7b5e4df2fc0700ec2b4de1ed8e04eda16c795996dfc2718be641cd6265"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10551530,
+          "sha256": "72b3d03eea6fbacb974d340b0a218a07660dae64f2447044b4be2544fe143f45"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    },
+    "candidate": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 623972,
+          "sha256": "2a80bd973a7dd8b4da0b6e484c57b011f1000bcda44fa39cc665e6739064f585"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 172301,
+          "sha256": "47c9262fb9b3e76e29403feeb0b21bced56a19063e4bf0c10463b4e506504e5d"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46484,
+          "sha256": "a604dbff16d3be0f0d24cf48753404b42fe25f70fbd1393dde4934871446a420"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5461785,
+          "sha256": "6ad37dbf908f14cc00726db312982c91e3974bd06bce6361e0eba031d6654f2e"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "ffa7b22516ccc91ece2c19f2ec97679562b4f02b86688c73146d3870439c350b"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "5e08586a10f0b0c9e4354438734b392459cd64282ababf7029a48246f6da6d47"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1675029,
+          "sha256": "7216cb9019a8db40a177990f4ae6034cfe3d4f47aa598d221c4675df401082ce"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "558cd7f62c666965b9fa5167f06b51f47afcec28db9ba17c253c46c9e65a308b"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10551514,
+          "sha256": "9b3b708d282e2be4d843be94871247888279e1f87701e436b6229bf82d370bcf"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    }
+  },
+  "captures": {
+    "baseline": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "3ab1a4639da3d2b503911f33ec6fc168e34d35cb",
+      "sourceTree": "56b21a8593e7cc4c2a62214ac9161ecb9567c370",
+      "buildIdentitySha256": "f02c7598bca664d8c8e7c51239e5d31270bbcb8e339e95dbab119e55716ca713",
+      "manifestSha256": "eefaa3ec67d8fefb62a3990a0363967364b38953b404ee3ec60fab194585a19e",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "resizing-offpaper-auto-right",
+          "inputSha256": "1406a388fcdad28bd8e38a3259c82000931b71f45739aa9dd708ce2c73fb9633",
+          "status": "failed",
+          "code": "output_verification_failure",
+          "phase": "output_verification",
+          "message": "source anchor p:body:0b1881b7319a11126d506a07b3859080 has no measurable fragment in the paginated layout"
+        },
+        {
+          "id": "resizing-offpaper-auto-bottom",
+          "inputSha256": "e31176b6758b16508f2e741c733625a545cbdd90cc9c0f452568efddc3968565",
+          "status": "failed",
+          "code": "output_verification_failure",
+          "phase": "output_verification",
+          "message": "source anchor p:body:0b1881b7319a11126d506a07b3859080 has no measurable fragment in the paginated layout"
+        },
+        {
+          "id": "resizing-offpaper-auto-visible-control",
+          "inputSha256": "fce801949571743922fd0422a77a87a85f5fdfd6dcceab512d43c7d8462f2477",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "37c4f20d1ac3a4027d86f8a60c72a049445ea015877c58807838d9e44fce8ce7",
+          "renderReportSha256": "378d6765c6b3a8b45234b10e319829951f9fa08c7712ed2af4442c0040265cc3",
+          "htmlSha256": "05f06401dc2c4c264287df2c31889b5f71b882dbef8aa9ab50eb96035bb89a70",
+          "htmlFactsSha256": "32406799ca968d9e708dbd2a243572783102c98e056af5467ef85fc46ef4cc97"
+        },
+        {
+          "id": "resizing-offpaper-auto-right-balloons",
+          "inputSha256": "bb5bc394dcdcba327905ab01dbb1f319c44e14e39915033b915e90c0adb50447",
+          "status": "failed",
+          "code": "output_verification_failure",
+          "phase": "output_verification",
+          "message": "source anchor p:body:5d5f7936c09a6de7480cb08719baec4f has no measurable fragment in the paginated layout"
+        },
+        {
+          "id": "resizing-offpaper-percent-right",
+          "inputSha256": "3b30299a095376635d2b6c945e9aa323d4bf57a4dd73bd8278161a92d6629dbf",
+          "status": "failed",
+          "code": "output_verification_failure",
+          "phase": "output_verification",
+          "message": "source anchor p:body:0b1881b7319a11126d506a07b3859080 has no measurable fragment in the paginated layout"
+        },
+        {
+          "id": "resizing-offpaper-percent-bottom",
+          "inputSha256": "186fee70c40f2731b4bb95f2e99c8af2efc463a5ac8f7b374cc1874a5488aef4",
+          "status": "failed",
+          "code": "output_verification_failure",
+          "phase": "output_verification",
+          "message": "source anchor p:body:0b1881b7319a11126d506a07b3859080 has no measurable fragment in the paginated layout"
+        },
+        {
+          "id": "resizing-offpaper-percent-visible-control",
+          "inputSha256": "4322f05435cefb8daa2555352ff0478c987a2d9dca27ead90d7727cb843c8b4b",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "a3661892c223e68b8ecf7a001ba091b0d80b0ec6bee06dc7d3dc9a3362f41d34",
+          "renderReportSha256": "1367577f5cfd79947b854221fb6840c855e6c24770103b22880dfdb83c75e6e1",
+          "htmlSha256": "07ed5e900a871337a4c22e5ef2097018aefa71a238653dc1566df21861954a1f",
+          "htmlFactsSha256": "0bb4daf2f57dc089dd378787a22c2afad62c86aa9fcf6b8bf560920721f82f5b"
+        },
+        {
+          "id": "resizing-offpaper-percent-right-balloons",
+          "inputSha256": "14de54561eb2057df4faee1ea71b195592a80375e5cf580ed964d712c85c6516",
+          "status": "failed",
+          "code": "output_verification_failure",
+          "phase": "output_verification",
+          "message": "source anchor p:body:5d5f7936c09a6de7480cb08719baec4f has no measurable fragment in the paginated layout"
+        }
+      ],
+      "htmlInspectorSha256": "87805e278400914cd87a2fe8e89c498748b7f45eecd5ca432b9c2be2d95b4cbb"
+    },
+    "candidate": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "d59487425398a2f39b260f619b5d6044e75773bb",
+      "sourceTree": "911a88f9a86d25cc1f8881e788273462237990a3",
+      "buildIdentitySha256": "3fc7d154193db0a154032e1d1f76f1f727c02e03afbd870899eb3c34ddb1c2da",
+      "manifestSha256": "eefaa3ec67d8fefb62a3990a0363967364b38953b404ee3ec60fab194585a19e",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "resizing-offpaper-auto-right",
+          "inputSha256": "1406a388fcdad28bd8e38a3259c82000931b71f45739aa9dd708ce2c73fb9633",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "d90de86689f3388bb5bf30270c9c928379d5215ff01214cd7c90dd10ad81d799",
+          "renderReportSha256": "302b741da40de4d3481bc6c2c4086c699253535dd3d0397dd3aabb039224ccbc",
+          "htmlSha256": "71b532c4bbd26580a8aecd09ab0a9601e53d0fe750d83fca04a1714b85eec7d9",
+          "htmlFactsSha256": "e72e73cd4ab7897cdaf13368207e67b0ba9806f370ceff5d1cf1c05bc64e3e21"
+        },
+        {
+          "id": "resizing-offpaper-auto-bottom",
+          "inputSha256": "e31176b6758b16508f2e741c733625a545cbdd90cc9c0f452568efddc3968565",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "b4a00c7dce25d1e94c5b129bcc575fa7ee78063fe12367c78b119964fd29ac67",
+          "renderReportSha256": "fa6fd87ceabb4f686748f2c64d8456842c96f6d33f970719afdc78929e39e389",
+          "htmlSha256": "dc258da4c537d00a2babf6f3450b038c21bd2c7c8ab842f1620883243ab91f64",
+          "htmlFactsSha256": "daf06b8f1c199c6833c310fb390d55ea61400d377736628579dcb0df0c62389c"
+        },
+        {
+          "id": "resizing-offpaper-auto-visible-control",
+          "inputSha256": "fce801949571743922fd0422a77a87a85f5fdfd6dcceab512d43c7d8462f2477",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "8a077517d151e6891c4aa5ed7e8d8ca3436cc7cb27f1285b1716998f5bedbe36",
+          "renderReportSha256": "6b86c0fa8561f6772cf0681553efbb60e85bc5bd27260e1f1d8f851862ff0546",
+          "htmlSha256": "1120cf248a7aab6d5fda7fce60b0a2363ccbd1adf077f41d6aaa72a1dd9f8437",
+          "htmlFactsSha256": "0a4c8c0301f488ca1f1d464742a606bc3fdb860ce08bc0a1470a545055f91b15"
+        },
+        {
+          "id": "resizing-offpaper-auto-right-balloons",
+          "inputSha256": "bb5bc394dcdcba327905ab01dbb1f319c44e14e39915033b915e90c0adb50447",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "4caf7621eb17eafb1e14543bacd643146694472c54bdeba8d3d5efafc127d230",
+          "renderReportSha256": "ed6900583c856bddf9b7bf1907a62d1e24090378c8e0c0e03b70ee8ec9079bab",
+          "htmlSha256": "2e96b90ebe81c99a304ed1eb086852d0a3133ac9fda53b33ee905efca2e73772",
+          "htmlFactsSha256": "a7da7cde56f975affdc9ba2b0dcd474c01f401b0c41a3b77bda0a53199d1d541"
+        },
+        {
+          "id": "resizing-offpaper-percent-right",
+          "inputSha256": "3b30299a095376635d2b6c945e9aa323d4bf57a4dd73bd8278161a92d6629dbf",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "eadf6ca735f4c40dedb6f61db791b6cfa503c60a8fc5c1a9e1ae82139ff476c7",
+          "renderReportSha256": "5442f7d5bf5dc748d500dfe8eff4e9b24d1dd15c6a241113dd81bb4a1b9734ac",
+          "htmlSha256": "d7d2368e2b0547da3f8dd2b2f6d2d7883de0293ec526d2a74933197d0877c8a2",
+          "htmlFactsSha256": "db6c460db2eff518581b27afee1b6ac4a4961cd48e183148df672c3c38758c13"
+        },
+        {
+          "id": "resizing-offpaper-percent-bottom",
+          "inputSha256": "186fee70c40f2731b4bb95f2e99c8af2efc463a5ac8f7b374cc1874a5488aef4",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "9871b197c6528d665685404f231e479c30f748ef29781f9c35fb294fbf35685b",
+          "renderReportSha256": "45d1242e6f5dd5a6bcacf621770f0f4ba3a492048c229ae4d386c78a12baa387",
+          "htmlSha256": "096a6639531ad44fea36fce53109df6dc5cfe6924adeb90cc3064ace2931ceac",
+          "htmlFactsSha256": "4c618a89da416bbe8ec1774e46c269575de364c306b1adb9dff5d076ae90f989"
+        },
+        {
+          "id": "resizing-offpaper-percent-visible-control",
+          "inputSha256": "4322f05435cefb8daa2555352ff0478c987a2d9dca27ead90d7727cb843c8b4b",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "12c5be98a411b41bd5c28b8f7fd6b557dad6af08b92dd5ccb70b088653065275",
+          "renderReportSha256": "06b5ac3892f6baf0a5ed23e0e77c6b298c797b686cfea70a82916f6327048c1e",
+          "htmlSha256": "6186114dd4f13d728e1181c4ce5767faf4606c6d30ca6bc045949cf89b7ad53a",
+          "htmlFactsSha256": "b3dbdd17bdc96468664925135acdd2ecf9e817ca5548f2096265cd66e15fd5c5"
+        },
+        {
+          "id": "resizing-offpaper-percent-right-balloons",
+          "inputSha256": "14de54561eb2057df4faee1ea71b195592a80375e5cf580ed964d712c85c6516",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "3bc6d9af0d61931b0c90e2afd9756e1044c0d4678710ebe0238f69abe2005773",
+          "renderReportSha256": "5232791a1da1997e6f90df677e4be2d6c664077f68330cdad8840143c180e077",
+          "htmlSha256": "1a17ec2cdb1f66c7ff145662166394ee57c1b83d58e94234d7074d01c6aa47dc",
+          "htmlFactsSha256": "067a6272c774d25ead284a2bedb9edc4119067209fc90ac1efd4a387f063ffc7"
+        }
+      ],
+      "htmlInspectorSha256": "87805e278400914cd87a2fe8e89c498748b7f45eecd5ca432b9c2be2d95b4cbb"
+    }
+  },
+  "referenceBundleSha256": "b42214e7deb9ceb725804d96b03351188d1e38fcac6eb96556e35cbaf3e802c3",
+  "referenceBundle": {
+    "file": "reference-bundle.json.gz",
+    "sha256": "ec1cd3d4fa7ac99754d962c23a57d670852db6058feef5a580925c112a05f1c4",
+    "jsonSha256": "b42214e7deb9ceb725804d96b03351188d1e38fcac6eb96556e35cbaf3e802c3"
+  },
+  "manifest": {
+    "file": "manifest.json.gz",
+    "sha256": "871a7c5f4e8bcf3077c5f662816ad3f27fe70f7b1a5b83b29726105a084b4a6c",
+    "jsonSha256": "bc90339c31cd29f1ac9802d3da315875ef5d84cc0a17ec2cd46de02d0cb34b70"
+  },
+  "companionManifest": {
+    "file": "companion-manifest.json.gz",
+    "sha256": "b4aa3cd40ed1ab8c63e4d28fa1f8f5e0eb74135ccb1ab9adad98dd41500f3e28",
+    "jsonSha256": "eefaa3ec67d8fefb62a3990a0363967364b38953b404ee3ec60fab194585a19e"
+  },
+  "referenceEnvironment": {
+    "fonts": {
+      "LiberationSerif-Bold.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+      },
+      "LiberationSerif-BoldItalic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+      },
+      "LiberationSerif-Italic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+      },
+      "LiberationSerif-Regular.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+      }
+    },
+    "tools": {
+      "pdffonts": {
+        "sha256": "de0a6d649710c2ebc226656b08c70814019a93f58889f79bf1dac726a131beda",
+        "version": "pdffonts version 25.03.0"
+      },
+      "pdftocairo": {
+        "sha256": "6f56c7c8c5b015354ebed053d4b52e14b43611c9c86236562bfd112827108dc5",
+        "version": "pdftocairo version 25.03.0"
+      },
+      "pdftoppm": {
+        "sha256": "6c315e59db2a0829ecdfb6c791ad3f56bc9bd508266d20adc22238df447a74a3",
+        "version": "pdftoppm version 25.03.0"
+      },
+      "pdftotext": {
+        "sha256": "451784e28a4593637573e534d9be4c4487a3cccffae22a71e93162faa84de23c",
+        "version": "pdftotext version 25.03.0"
+      },
+      "qpdf": {
+        "sha256": "0d0462ea848601a652b666e83a07a095bb0c4d69d831beb6f94ea8e6e008f34c",
+        "version": "qpdf version 12.2.0"
+      }
+    }
+  },
+  "schema": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "documents": {
+      "fixtures/resizing-offpaper-auto-bottom.docx": [],
+      "fixtures/resizing-offpaper-auto-right-balloons.docx": [],
+      "fixtures/resizing-offpaper-auto-right.docx": [],
+      "fixtures/resizing-offpaper-auto-visible-control.docx": [],
+      "fixtures/resizing-offpaper-percent-bottom.docx": [],
+      "fixtures/resizing-offpaper-percent-right-balloons.docx": [],
+      "fixtures/resizing-offpaper-percent-right.docx": [],
+      "fixtures/resizing-offpaper-percent-visible-control.docx": []
+    }
+  },
+  "cases": [
+    {
+      "id": "resizing-offpaper-auto-right",
+      "inputSha256": "1406a388fcdad28bd8e38a3259c82000931b71f45739aa9dd708ce2c73fb9633",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "profile": {
+            "comments": "hidden",
+            "review": "final"
+          },
+          "failure": {
+            "id": "resizing-offpaper-auto-right",
+            "inputSha256": "1406a388fcdad28bd8e38a3259c82000931b71f45739aa9dd708ce2c73fb9633",
+            "status": "failed",
+            "code": "output_verification_failure",
+            "phase": "output_verification",
+            "message": "source anchor p:body:0b1881b7319a11126d506a07b3859080 has no measurable fragment in the paginated layout"
+          }
+        },
+        {
+          "renderer": "reference",
+          "profile": "native-default-with-revision-tint",
+          "pdf": "pdf/resizing-offpaper-auto-right-reference.pdf",
+          "pdfSha256": "31680414066ac7bed0c09d8e07c13f9ea539396b7c82bc70034e8eff62bc4720",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "resizing-offpaper-auto-right-reference-inspection.json.gz",
+            "sha256": "8e5bf44f05caf809c27686b11866413b07d1bbac341efe98c39f77de13bcf5ce",
+            "jsonSha256": "d354008a555baba86ef17543f78f3d7bde8ae1a15719b67dfb01ce37632f6297"
+          },
+          "pageRasterSha256": [
+            "0f6fa3f830013d03ccea286369150395b949038407ca47612574b5175d4f3a25"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "profile": {
+            "comments": "hidden",
+            "review": "final"
+          },
+          "sourceTextAnchors": {
+            "FirWindowOne": [
+              "p:body:0b1881b7319a11126d506a07b3859080"
+            ],
+            "FirWindowTwo": [
+              "p:body:d8bab845316452b2a1be7641562446e5"
+            ],
+            "FirWindowThree": [
+              "p:body:dc409158b4bd01aed26fb0df91744672"
+            ]
+          },
+          "htmlSha256": "71b532c4bbd26580a8aecd09ab0a9601e53d0fe750d83fca04a1714b85eec7d9",
+          "report": {
+            "file": "resizing-offpaper-auto-right-candidate-report.json.gz",
+            "sha256": "2e4154cd00a50cec3bf859443dde3d57cd9b113a3eb0319ce58aac0a1d627884",
+            "jsonSha256": "302b741da40de4d3481bc6c2c4086c699253535dd3d0397dd3aabb039224ccbc"
+          },
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            },
+            {
+              "name": "companion-pdf-forbidden-tokens",
+              "passed": true,
+              "observed": []
+            }
+          ],
+          "pdf": "pdf/resizing-offpaper-auto-right-candidate.pdf",
+          "pdfSha256": "d90de86689f3388bb5bf30270c9c928379d5215ff01214cd7c90dd10ad81d799",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "resizing-offpaper-auto-right-candidate-inspection.json.gz",
+            "sha256": "a55cc90bf3e1dd5db2e5a778a07debd80a0e9292bf1c22118440491d67c8610a",
+            "jsonSha256": "70bd587036d82c3a8fe662b947bc7f3064dddc2057241ddbbd34dca3ad86883c"
+          },
+          "pageRasterSha256": [
+            "04b6989a78de0e968ab434a69cf2ce6beb97d6c7d7e0f3f217834d2966784028"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "resizing-offpaper-auto-right.png",
+        "sha256": "610b7537850981b7d676125c9de0967d249052075d7c309cc0a33111c562354e"
+      }
+    },
+    {
+      "id": "resizing-offpaper-auto-bottom",
+      "inputSha256": "e31176b6758b16508f2e741c733625a545cbdd90cc9c0f452568efddc3968565",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "profile": {
+            "comments": "hidden",
+            "review": "final"
+          },
+          "failure": {
+            "id": "resizing-offpaper-auto-bottom",
+            "inputSha256": "e31176b6758b16508f2e741c733625a545cbdd90cc9c0f452568efddc3968565",
+            "status": "failed",
+            "code": "output_verification_failure",
+            "phase": "output_verification",
+            "message": "source anchor p:body:0b1881b7319a11126d506a07b3859080 has no measurable fragment in the paginated layout"
+          }
+        },
+        {
+          "renderer": "reference",
+          "profile": "native-default-with-revision-tint",
+          "pdf": "pdf/resizing-offpaper-auto-bottom-reference.pdf",
+          "pdfSha256": "df7d0460389bab247f4c2c01dd36c3241d80274654c6e260f9027d1e884b04a1",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "resizing-offpaper-auto-bottom-reference-inspection.json.gz",
+            "sha256": "8e5bf44f05caf809c27686b11866413b07d1bbac341efe98c39f77de13bcf5ce",
+            "jsonSha256": "d354008a555baba86ef17543f78f3d7bde8ae1a15719b67dfb01ce37632f6297"
+          },
+          "pageRasterSha256": [
+            "0f6fa3f830013d03ccea286369150395b949038407ca47612574b5175d4f3a25"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "profile": {
+            "comments": "hidden",
+            "review": "final"
+          },
+          "sourceTextAnchors": {
+            "FirWindowOne": [
+              "p:body:0b1881b7319a11126d506a07b3859080"
+            ],
+            "FirWindowTwo": [
+              "p:body:d8bab845316452b2a1be7641562446e5"
+            ],
+            "FirWindowThree": [
+              "p:body:dc409158b4bd01aed26fb0df91744672"
+            ]
+          },
+          "htmlSha256": "dc258da4c537d00a2babf6f3450b038c21bd2c7c8ab842f1620883243ab91f64",
+          "report": {
+            "file": "resizing-offpaper-auto-bottom-candidate-report.json.gz",
+            "sha256": "4a621e0d5cfca8d518924dd7ffcd8d9994ca982e2d64d15b32154853e2c41c80",
+            "jsonSha256": "fa6fd87ceabb4f686748f2c64d8456842c96f6d33f970719afdc78929e39e389"
+          },
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            },
+            {
+              "name": "companion-pdf-forbidden-tokens",
+              "passed": true,
+              "observed": []
+            }
+          ],
+          "pdf": "pdf/resizing-offpaper-auto-bottom-candidate.pdf",
+          "pdfSha256": "b4a00c7dce25d1e94c5b129bcc575fa7ee78063fe12367c78b119964fd29ac67",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "resizing-offpaper-auto-bottom-candidate-inspection.json.gz",
+            "sha256": "a55cc90bf3e1dd5db2e5a778a07debd80a0e9292bf1c22118440491d67c8610a",
+            "jsonSha256": "70bd587036d82c3a8fe662b947bc7f3064dddc2057241ddbbd34dca3ad86883c"
+          },
+          "pageRasterSha256": [
+            "04b6989a78de0e968ab434a69cf2ce6beb97d6c7d7e0f3f217834d2966784028"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "resizing-offpaper-auto-bottom.png",
+        "sha256": "42d59d98257daf0f94e2a28ea947140827c1555ab9cd854cbc276ea55326d4b9"
+      }
+    },
+    {
+      "id": "resizing-offpaper-auto-visible-control",
+      "inputSha256": "fce801949571743922fd0422a77a87a85f5fdfd6dcceab512d43c7d8462f2477",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "profile": {
+            "comments": "hidden",
+            "review": "final"
+          },
+          "sourceTextAnchors": {
+            "FirWindowOne": [
+              "p:body:0b1881b7319a11126d506a07b3859080"
+            ],
+            "FirWindowTwo": [
+              "p:body:d8bab845316452b2a1be7641562446e5"
+            ],
+            "FirWindowThree": [
+              "p:body:dc409158b4bd01aed26fb0df91744672"
+            ]
+          },
+          "htmlSha256": "05f06401dc2c4c264287df2c31889b5f71b882dbef8aa9ab50eb96035bb89a70",
+          "report": {
+            "file": "resizing-offpaper-auto-visible-control-baseline-report.json.gz",
+            "sha256": "4193acb78a8065a49c5dbcbb538726f84f3cbb373cd2f7058851c0e32d810ac8",
+            "jsonSha256": "378d6765c6b3a8b45234b10e319829951f9fa08c7712ed2af4442c0040265cc3"
+          },
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pdf": "pdf/resizing-offpaper-auto-visible-control-baseline.pdf",
+          "pdfSha256": "37c4f20d1ac3a4027d86f8a60c72a049445ea015877c58807838d9e44fce8ce7",
+          "pages": 1,
+          "checkedLabels": 6,
+          "inspection": {
+            "file": "resizing-offpaper-auto-visible-control-baseline-inspection.json.gz",
+            "sha256": "b37118e2950b21a0d810edad63f5cfe440d655d27066703412619a0383a4daa3",
+            "jsonSha256": "e882a9a9ffae11e4f76bc551b9d5b1e6b13e4d1a8a6f66209b67abe235daca97"
+          },
+          "pageRasterSha256": [
+            "db82e0c9651a082fbf14e8544a059e37676a81111fbb619369810a8c2da76962"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "profile": "native-default-with-revision-tint",
+          "pdf": "pdf/resizing-offpaper-auto-visible-control-reference.pdf",
+          "pdfSha256": "6eb07bbb040911a1a37c17b68e453af2dc30f9da831abd30dbe99f411cd93966",
+          "pages": 1,
+          "checkedLabels": 6,
+          "inspection": {
+            "file": "resizing-offpaper-auto-visible-control-reference-inspection.json.gz",
+            "sha256": "87bf0c94ba206660b1457fd2b7ed0c47efb01b0f785e04dfad11255520b7906b",
+            "jsonSha256": "0a9ac90aadde7f68240a5326520985834a4a2a2787266393a553387099d4b93b"
+          },
+          "pageRasterSha256": [
+            "aa6bb3619303c7cb4d3dc0449fadcde12157c378ccf1a87a693bb4f704e0ccef"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "profile": {
+            "comments": "hidden",
+            "review": "final"
+          },
+          "sourceTextAnchors": {
+            "FirWindowOne": [
+              "p:body:0b1881b7319a11126d506a07b3859080"
+            ],
+            "FirWindowTwo": [
+              "p:body:d8bab845316452b2a1be7641562446e5"
+            ],
+            "FirWindowThree": [
+              "p:body:dc409158b4bd01aed26fb0df91744672"
+            ]
+          },
+          "htmlSha256": "1120cf248a7aab6d5fda7fce60b0a2363ccbd1adf077f41d6aaa72a1dd9f8437",
+          "report": {
+            "file": "resizing-offpaper-auto-visible-control-candidate-report.json.gz",
+            "sha256": "fb3375a1b04306ee93e3a05120d3a6a8eea64d6c5f2a0180d8baeb1178cbf167",
+            "jsonSha256": "6b86c0fa8561f6772cf0681553efbb60e85bc5bd27260e1f1d8f851862ff0546"
+          },
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pdf": "pdf/resizing-offpaper-auto-visible-control-candidate.pdf",
+          "pdfSha256": "8a077517d151e6891c4aa5ed7e8d8ca3436cc7cb27f1285b1716998f5bedbe36",
+          "pages": 1,
+          "checkedLabels": 6,
+          "inspection": {
+            "file": "resizing-offpaper-auto-visible-control-candidate-inspection.json.gz",
+            "sha256": "b37118e2950b21a0d810edad63f5cfe440d655d27066703412619a0383a4daa3",
+            "jsonSha256": "e882a9a9ffae11e4f76bc551b9d5b1e6b13e4d1a8a6f66209b67abe235daca97"
+          },
+          "pageRasterSha256": [
+            "db82e0c9651a082fbf14e8544a059e37676a81111fbb619369810a8c2da76962"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "resizing-offpaper-auto-visible-control.png",
+        "sha256": "ceb2e578fbb0df2b37982ed5fe16486764989dfab84ee78bceb7bc966e493717"
+      }
+    },
+    {
+      "id": "resizing-offpaper-auto-right-balloons",
+      "inputSha256": "bb5bc394dcdcba327905ab01dbb1f319c44e14e39915033b915e90c0adb50447",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "profile": {
+            "commentColumnPlacement": "balloons",
+            "comments": "margin",
+            "markupPresentation": "word",
+            "review": "markup"
+          },
+          "failure": {
+            "id": "resizing-offpaper-auto-right-balloons",
+            "inputSha256": "bb5bc394dcdcba327905ab01dbb1f319c44e14e39915033b915e90c0adb50447",
+            "status": "failed",
+            "code": "output_verification_failure",
+            "phase": "output_verification",
+            "message": "source anchor p:body:5d5f7936c09a6de7480cb08719baec4f has no measurable fragment in the paginated layout"
+          }
+        },
+        {
+          "renderer": "reference",
+          "profile": "native-default-with-revision-tint",
+          "pdf": "pdf/resizing-offpaper-auto-right-balloons-reference.pdf",
+          "pdfSha256": "65c8c58809eff8b86c0ae8aff2fafbc67ea28c3c6251d6cf3fb9f81f9f64dadb",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "resizing-offpaper-auto-right-balloons-reference-inspection.json.gz",
+            "sha256": "5b01e1737335a12e58e236818c2bab800d89285ce73b59d144ab42709dbf243a",
+            "jsonSha256": "83700bba3d3959fae7c5da24cd686c0fdf06124fb75e9262583370296c3dcaca"
+          },
+          "pageRasterSha256": [
+            "99a028a6b2247d24141853d52e4b1dd5f0c45e95b74a0e1a25d20b47ec2e9f31"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "profile": {
+            "commentColumnPlacement": "balloons",
+            "comments": "margin",
+            "markupPresentation": "word",
+            "review": "markup"
+          },
+          "sourceTextAnchors": {
+            "FirWindowOne": [
+              "p:body:5d5f7936c09a6de7480cb08719baec4f"
+            ],
+            "FirWindowTwo": [
+              "p:body:72ab3b634f37f695b636279d118d982b"
+            ],
+            "FirWindowThree": [
+              "p:body:2b7e5f4eae90dfa847303d1e1c28ba74"
+            ]
+          },
+          "htmlSha256": "2e96b90ebe81c99a304ed1eb086852d0a3133ac9fda53b33ee905efca2e73772",
+          "report": {
+            "file": "resizing-offpaper-auto-right-balloons-candidate-report.json.gz",
+            "sha256": "f4eccd3a71d385ab185136579f20c7583abae99435013dc223aa09f0a548af9d",
+            "jsonSha256": "ed6900583c856bddf9b7bf1907a62d1e24090378c8e0c0e03b70ee8ec9079bab"
+          },
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            },
+            {
+              "name": "companion-pdf-forbidden-tokens",
+              "passed": true,
+              "observed": []
+            }
+          ],
+          "pdf": "pdf/resizing-offpaper-auto-right-balloons-candidate.pdf",
+          "pdfSha256": "4caf7621eb17eafb1e14543bacd643146694472c54bdeba8d3d5efafc127d230",
+          "pages": 1,
+          "checkedLabels": 5,
+          "inspection": {
+            "file": "resizing-offpaper-auto-right-balloons-candidate-inspection.json.gz",
+            "sha256": "6ac6f359aa9c07ceb070c46f6ea690c98508289882521331046e99e8938f8156",
+            "jsonSha256": "4aca012e0d6d4f475d62a9395484155e616490706575451599a425fdbcd08dd6"
+          },
+          "pageRasterSha256": [
+            "8a15981ebd12d49e22609e1b7c038dd4731fe992d2eaeb8cc70ff3cf38584b0e"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "resizing-offpaper-auto-right-balloons.png",
+        "sha256": "8cad22f767e2a96e6f34b205b4378d152cbc09b4106c1446674cd3bc8c6e1ce2"
+      }
+    },
+    {
+      "id": "resizing-offpaper-percent-right",
+      "inputSha256": "3b30299a095376635d2b6c945e9aa323d4bf57a4dd73bd8278161a92d6629dbf",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "profile": {
+            "comments": "hidden",
+            "review": "final"
+          },
+          "failure": {
+            "id": "resizing-offpaper-percent-right",
+            "inputSha256": "3b30299a095376635d2b6c945e9aa323d4bf57a4dd73bd8278161a92d6629dbf",
+            "status": "failed",
+            "code": "output_verification_failure",
+            "phase": "output_verification",
+            "message": "source anchor p:body:0b1881b7319a11126d506a07b3859080 has no measurable fragment in the paginated layout"
+          }
+        },
+        {
+          "renderer": "reference",
+          "profile": "native-default-with-revision-tint",
+          "pdf": "pdf/resizing-offpaper-percent-right-reference.pdf",
+          "pdfSha256": "fb697b52efa1071f133cbd87fe922abf01a6dbef967229c6be617fbbf8422666",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "resizing-offpaper-percent-right-reference-inspection.json.gz",
+            "sha256": "8e5bf44f05caf809c27686b11866413b07d1bbac341efe98c39f77de13bcf5ce",
+            "jsonSha256": "d354008a555baba86ef17543f78f3d7bde8ae1a15719b67dfb01ce37632f6297"
+          },
+          "pageRasterSha256": [
+            "0f6fa3f830013d03ccea286369150395b949038407ca47612574b5175d4f3a25"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "profile": {
+            "comments": "hidden",
+            "review": "final"
+          },
+          "sourceTextAnchors": {
+            "FirWindowOne": [
+              "p:body:0b1881b7319a11126d506a07b3859080"
+            ],
+            "FirWindowTwo": [
+              "p:body:d8bab845316452b2a1be7641562446e5"
+            ],
+            "FirWindowThree": [
+              "p:body:dc409158b4bd01aed26fb0df91744672"
+            ]
+          },
+          "htmlSha256": "d7d2368e2b0547da3f8dd2b2f6d2d7883de0293ec526d2a74933197d0877c8a2",
+          "report": {
+            "file": "resizing-offpaper-percent-right-candidate-report.json.gz",
+            "sha256": "c2c3ca52115983419e5b94574279a98fad1dc50cc00ab42a6bd52f32e1cc624d",
+            "jsonSha256": "5442f7d5bf5dc748d500dfe8eff4e9b24d1dd15c6a241113dd81bb4a1b9734ac"
+          },
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            },
+            {
+              "name": "companion-pdf-forbidden-tokens",
+              "passed": true,
+              "observed": []
+            }
+          ],
+          "pdf": "pdf/resizing-offpaper-percent-right-candidate.pdf",
+          "pdfSha256": "eadf6ca735f4c40dedb6f61db791b6cfa503c60a8fc5c1a9e1ae82139ff476c7",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "resizing-offpaper-percent-right-candidate-inspection.json.gz",
+            "sha256": "a55cc90bf3e1dd5db2e5a778a07debd80a0e9292bf1c22118440491d67c8610a",
+            "jsonSha256": "70bd587036d82c3a8fe662b947bc7f3064dddc2057241ddbbd34dca3ad86883c"
+          },
+          "pageRasterSha256": [
+            "04b6989a78de0e968ab434a69cf2ce6beb97d6c7d7e0f3f217834d2966784028"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "resizing-offpaper-percent-right.png",
+        "sha256": "4d178ca7ca8feae256764a1a883b2d687ff0aec31ffb886cbbeaccb8d4275929"
+      }
+    },
+    {
+      "id": "resizing-offpaper-percent-bottom",
+      "inputSha256": "186fee70c40f2731b4bb95f2e99c8af2efc463a5ac8f7b374cc1874a5488aef4",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "profile": {
+            "comments": "hidden",
+            "review": "final"
+          },
+          "failure": {
+            "id": "resizing-offpaper-percent-bottom",
+            "inputSha256": "186fee70c40f2731b4bb95f2e99c8af2efc463a5ac8f7b374cc1874a5488aef4",
+            "status": "failed",
+            "code": "output_verification_failure",
+            "phase": "output_verification",
+            "message": "source anchor p:body:0b1881b7319a11126d506a07b3859080 has no measurable fragment in the paginated layout"
+          }
+        },
+        {
+          "renderer": "reference",
+          "profile": "native-default-with-revision-tint",
+          "pdf": "pdf/resizing-offpaper-percent-bottom-reference.pdf",
+          "pdfSha256": "5aad6c83a45f815bb8dc58879e07fdfe0cbeaf7563bbf929792595073966ffbc",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "resizing-offpaper-percent-bottom-reference-inspection.json.gz",
+            "sha256": "8e5bf44f05caf809c27686b11866413b07d1bbac341efe98c39f77de13bcf5ce",
+            "jsonSha256": "d354008a555baba86ef17543f78f3d7bde8ae1a15719b67dfb01ce37632f6297"
+          },
+          "pageRasterSha256": [
+            "0f6fa3f830013d03ccea286369150395b949038407ca47612574b5175d4f3a25"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "profile": {
+            "comments": "hidden",
+            "review": "final"
+          },
+          "sourceTextAnchors": {
+            "FirWindowOne": [
+              "p:body:0b1881b7319a11126d506a07b3859080"
+            ],
+            "FirWindowTwo": [
+              "p:body:d8bab845316452b2a1be7641562446e5"
+            ],
+            "FirWindowThree": [
+              "p:body:dc409158b4bd01aed26fb0df91744672"
+            ]
+          },
+          "htmlSha256": "096a6639531ad44fea36fce53109df6dc5cfe6924adeb90cc3064ace2931ceac",
+          "report": {
+            "file": "resizing-offpaper-percent-bottom-candidate-report.json.gz",
+            "sha256": "77adcca11aa919057b4ce4344a96fca4efcc435d29e1143c5c1eb55b6ce95b8e",
+            "jsonSha256": "45d1242e6f5dd5a6bcacf621770f0f4ba3a492048c229ae4d386c78a12baa387"
+          },
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            },
+            {
+              "name": "companion-pdf-forbidden-tokens",
+              "passed": true,
+              "observed": []
+            }
+          ],
+          "pdf": "pdf/resizing-offpaper-percent-bottom-candidate.pdf",
+          "pdfSha256": "9871b197c6528d665685404f231e479c30f748ef29781f9c35fb294fbf35685b",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "resizing-offpaper-percent-bottom-candidate-inspection.json.gz",
+            "sha256": "a55cc90bf3e1dd5db2e5a778a07debd80a0e9292bf1c22118440491d67c8610a",
+            "jsonSha256": "70bd587036d82c3a8fe662b947bc7f3064dddc2057241ddbbd34dca3ad86883c"
+          },
+          "pageRasterSha256": [
+            "04b6989a78de0e968ab434a69cf2ce6beb97d6c7d7e0f3f217834d2966784028"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "resizing-offpaper-percent-bottom.png",
+        "sha256": "296384df5459845350f6392db2dcb8150deaa54bedcf1c5f90c610527f95f19f"
+      }
+    },
+    {
+      "id": "resizing-offpaper-percent-visible-control",
+      "inputSha256": "4322f05435cefb8daa2555352ff0478c987a2d9dca27ead90d7727cb843c8b4b",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "profile": {
+            "comments": "hidden",
+            "review": "final"
+          },
+          "sourceTextAnchors": {
+            "FirWindowOne": [
+              "p:body:0b1881b7319a11126d506a07b3859080"
+            ],
+            "FirWindowTwo": [
+              "p:body:d8bab845316452b2a1be7641562446e5"
+            ],
+            "FirWindowThree": [
+              "p:body:dc409158b4bd01aed26fb0df91744672"
+            ]
+          },
+          "htmlSha256": "07ed5e900a871337a4c22e5ef2097018aefa71a238653dc1566df21861954a1f",
+          "report": {
+            "file": "resizing-offpaper-percent-visible-control-baseline-report.json.gz",
+            "sha256": "3a73290b7cc390b542c123dc1f415a23f68407952ff39d01d2db09f770a88a9d",
+            "jsonSha256": "1367577f5cfd79947b854221fb6840c855e6c24770103b22880dfdb83c75e6e1"
+          },
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pdf": "pdf/resizing-offpaper-percent-visible-control-baseline.pdf",
+          "pdfSha256": "a3661892c223e68b8ecf7a001ba091b0d80b0ec6bee06dc7d3dc9a3362f41d34",
+          "pages": 1,
+          "checkedLabels": 6,
+          "inspection": {
+            "file": "resizing-offpaper-percent-visible-control-baseline-inspection.json.gz",
+            "sha256": "b37118e2950b21a0d810edad63f5cfe440d655d27066703412619a0383a4daa3",
+            "jsonSha256": "e882a9a9ffae11e4f76bc551b9d5b1e6b13e4d1a8a6f66209b67abe235daca97"
+          },
+          "pageRasterSha256": [
+            "db82e0c9651a082fbf14e8544a059e37676a81111fbb619369810a8c2da76962"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "profile": "native-default-with-revision-tint",
+          "pdf": "pdf/resizing-offpaper-percent-visible-control-reference.pdf",
+          "pdfSha256": "b39efdec0f0b8ddc01fed11d1912c7d4ebaf256b7c79c2aaa069d09ba26142a5",
+          "pages": 1,
+          "checkedLabels": 6,
+          "inspection": {
+            "file": "resizing-offpaper-percent-visible-control-reference-inspection.json.gz",
+            "sha256": "87bf0c94ba206660b1457fd2b7ed0c47efb01b0f785e04dfad11255520b7906b",
+            "jsonSha256": "0a9ac90aadde7f68240a5326520985834a4a2a2787266393a553387099d4b93b"
+          },
+          "pageRasterSha256": [
+            "aa6bb3619303c7cb4d3dc0449fadcde12157c378ccf1a87a693bb4f704e0ccef"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "profile": {
+            "comments": "hidden",
+            "review": "final"
+          },
+          "sourceTextAnchors": {
+            "FirWindowOne": [
+              "p:body:0b1881b7319a11126d506a07b3859080"
+            ],
+            "FirWindowTwo": [
+              "p:body:d8bab845316452b2a1be7641562446e5"
+            ],
+            "FirWindowThree": [
+              "p:body:dc409158b4bd01aed26fb0df91744672"
+            ]
+          },
+          "htmlSha256": "6186114dd4f13d728e1181c4ce5767faf4606c6d30ca6bc045949cf89b7ad53a",
+          "report": {
+            "file": "resizing-offpaper-percent-visible-control-candidate-report.json.gz",
+            "sha256": "e5687987b1b5b7d2f33abeca7fa5bd4cefc067760c6d4454b2934f9f7a598db9",
+            "jsonSha256": "06b5ac3892f6baf0a5ed23e0e77c6b298c797b686cfea70a82916f6327048c1e"
+          },
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pdf": "pdf/resizing-offpaper-percent-visible-control-candidate.pdf",
+          "pdfSha256": "12c5be98a411b41bd5c28b8f7fd6b557dad6af08b92dd5ccb70b088653065275",
+          "pages": 1,
+          "checkedLabels": 6,
+          "inspection": {
+            "file": "resizing-offpaper-percent-visible-control-candidate-inspection.json.gz",
+            "sha256": "b37118e2950b21a0d810edad63f5cfe440d655d27066703412619a0383a4daa3",
+            "jsonSha256": "e882a9a9ffae11e4f76bc551b9d5b1e6b13e4d1a8a6f66209b67abe235daca97"
+          },
+          "pageRasterSha256": [
+            "db82e0c9651a082fbf14e8544a059e37676a81111fbb619369810a8c2da76962"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "resizing-offpaper-percent-visible-control.png",
+        "sha256": "1c2604670c6deccd2381caa5ebb91e83b0b05062919dad8aa2c768f30597f691"
+      }
+    },
+    {
+      "id": "resizing-offpaper-percent-right-balloons",
+      "inputSha256": "14de54561eb2057df4faee1ea71b195592a80375e5cf580ed964d712c85c6516",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "profile": {
+            "commentColumnPlacement": "balloons",
+            "comments": "margin",
+            "markupPresentation": "word",
+            "review": "markup"
+          },
+          "failure": {
+            "id": "resizing-offpaper-percent-right-balloons",
+            "inputSha256": "14de54561eb2057df4faee1ea71b195592a80375e5cf580ed964d712c85c6516",
+            "status": "failed",
+            "code": "output_verification_failure",
+            "phase": "output_verification",
+            "message": "source anchor p:body:5d5f7936c09a6de7480cb08719baec4f has no measurable fragment in the paginated layout"
+          }
+        },
+        {
+          "renderer": "reference",
+          "profile": "native-default-with-revision-tint",
+          "pdf": "pdf/resizing-offpaper-percent-right-balloons-reference.pdf",
+          "pdfSha256": "70979e7ff215155a70325752dbdd10865424148246d9276730168a48e9028671",
+          "pages": 1,
+          "checkedLabels": 3,
+          "inspection": {
+            "file": "resizing-offpaper-percent-right-balloons-reference-inspection.json.gz",
+            "sha256": "5b01e1737335a12e58e236818c2bab800d89285ce73b59d144ab42709dbf243a",
+            "jsonSha256": "83700bba3d3959fae7c5da24cd686c0fdf06124fb75e9262583370296c3dcaca"
+          },
+          "pageRasterSha256": [
+            "99a028a6b2247d24141853d52e4b1dd5f0c45e95b74a0e1a25d20b47ec2e9f31"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "profile": {
+            "commentColumnPlacement": "balloons",
+            "comments": "margin",
+            "markupPresentation": "word",
+            "review": "markup"
+          },
+          "sourceTextAnchors": {
+            "FirWindowOne": [
+              "p:body:5d5f7936c09a6de7480cb08719baec4f"
+            ],
+            "FirWindowTwo": [
+              "p:body:72ab3b634f37f695b636279d118d982b"
+            ],
+            "FirWindowThree": [
+              "p:body:2b7e5f4eae90dfa847303d1e1c28ba74"
+            ]
+          },
+          "htmlSha256": "1a17ec2cdb1f66c7ff145662166394ee57c1b83d58e94234d7074d01c6aa47dc",
+          "report": {
+            "file": "resizing-offpaper-percent-right-balloons-candidate-report.json.gz",
+            "sha256": "95b1df958dd4d6ae2be8f8db020b36b6a5872b9e3d2ec83bf7acf6eb372e02f3",
+            "jsonSha256": "5232791a1da1997e6f90df677e4be2d6c664077f68330cdad8840143c180e077"
+          },
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            },
+            {
+              "name": "companion-pdf-forbidden-tokens",
+              "passed": true,
+              "observed": []
+            }
+          ],
+          "pdf": "pdf/resizing-offpaper-percent-right-balloons-candidate.pdf",
+          "pdfSha256": "3bc6d9af0d61931b0c90e2afd9756e1044c0d4678710ebe0238f69abe2005773",
+          "pages": 1,
+          "checkedLabels": 5,
+          "inspection": {
+            "file": "resizing-offpaper-percent-right-balloons-candidate-inspection.json.gz",
+            "sha256": "6ac6f359aa9c07ceb070c46f6ea690c98508289882521331046e99e8938f8156",
+            "jsonSha256": "4aca012e0d6d4f475d62a9395484155e616490706575451599a425fdbcd08dd6"
+          },
+          "pageRasterSha256": [
+            "8a15981ebd12d49e22609e1b7c038dd4731fe992d2eaeb8cc70ff3cf38584b0e"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "resizing-offpaper-percent-right-balloons.png",
+        "sha256": "e56a48810010d01400373e0f2627ee1debbc42d84a9ecae2455759cdfc9925cb"
+      }
+    }
+  ],
+  "tools": {
+    "docs/results/resizing-offpaper/Compose.py": "44393db91359d8f247efc55571cd9c0835d26a3ad8e8c7a5297914e6d37d3174",
+    "docs/results/export-reliability/Capture.mjs": "242ffcbd8716ba6238990621aee97482209e846c70ffbc4171c16b204f7e1631"
+  }
+}
