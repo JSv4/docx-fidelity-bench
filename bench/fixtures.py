@@ -1681,6 +1681,47 @@ def column_fragmentation_cases(add):
                             dict(type='same-page', version=1, markers=[labels[-1], 'LarchReceipt'])])
 
 
+
+def page_break_paragraph_cases(add):
+    """Original Yew dispatch notes: page boundaries and intentional blank-line controls."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="22"/>'
+              '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+              '<w:spacing w:before="0" w:after="0" w:line="300" w:lineRule="exact"/>'
+              '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    paper = ('<w:sectPr><w:pgSz w:w="5760" w:h="4320"/><w:pgMar w:top="480" '
+             'w:right="480" w:bottom="480" w:left="480" w:header="0" w:footer="0"/></w:sectPr>')
+    boundary = '<w:r><w:br w:type="page"/></w:r>'
+    for kind in ('own', 'end', 'middle', 'no-break-control', 'blank-control', 'line-control', 'split-mark', 'split-mark-off'):
+        labels = ['YewDispatch', 'YewReceipt']
+        first, last = para(labels[0]), para(labels[1])
+        if kind in ('own', 'split-mark', 'split-mark-off'):
+            body = first + para(runs=boundary) + last
+        elif kind == 'end':
+            body = para(runs=run(labels[0]) + boundary) + last
+        elif kind == 'middle':
+            labels.insert(1, 'YewArrival')
+            body = para(runs=run(labels[0]) + boundary + run(labels[1])) + last
+        elif kind == 'no-break-control':
+            body = first + last
+        elif kind == 'blank-control':
+            body = first + para() + last
+        else:
+            body = para(runs=run(labels[0]) + '<w:r><w:br/></w:r>' + run(labels[1]))
+        flag = '<w:splitPgBreakAndParaMark/>' if kind == 'split-mark' else (
+            '<w:splitPgBreakAndParaMark w:val="0"/>' if kind == 'split-mark-off' else '')
+        settings = (f'<w:settings xmlns:w="{W}"><w:compat>{flag}<w:compatSetting w:name="compatibilityMode" '
+                    'w:uri="http://schemas.microsoft.com/office/word" w:val="15"/></w:compat></w:settings>')
+        page = 1 if kind.endswith('control') else 2
+        offset = 30 if kind == 'blank-control' else 15 if kind in ('middle', 'split-mark', 'no-break-control', 'line-control') else 0
+        assertions = [dict(type='marker-region', marker=labels[0], occurrence=1, page=1, rect=[24, 24, 264, 40]),
+                      dict(type='marker-region', marker=labels[-1], occurrence=1, page=page, rect=[24, 24 + offset, 264, 40 + offset])]
+        if kind == 'middle':
+            assertions.append(dict(type='marker-region', marker=labels[1], occurrence=1, page=2, rect=[24, 24, 264, 40]))
+        add(f'page-break-paragraph-{kind}', 'paragraphs',
+            f'Yew dispatch page break with {kind} paragraph content (Docxodus #1570)', labels, body,
+            sect=paper, styles_xml=styles, extra_parts={'word/settings.xml': settings}, assertions=assertions)
+
 def generate():
     cases = []
     def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT, literal_parts=None, relations_extra=(), content_types_extra=''):
@@ -4713,7 +4754,8 @@ def generate():
                              page=(count - 1) // 54 + 1, rect=[0, 0, 612, 792])])
     table_remainder_cases(add)
     column_fragmentation_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v109', 'version': 109, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    page_break_paragraph_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v110', 'version': 110, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
