@@ -1,5 +1,9 @@
 # Authorship and artifact rights
 
+The nine contextual own-spacing cases for Docxodus #1553 contain original Oak labels
+and literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template,
+external document, image or font program is imported. Review sheets show these original inputs.
+
 The eight resizing off-paper cases for Docxodus #1558 contain original Fir labels and
 literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template,
 external document, image or font program is imported. Review sheets show only these
