@@ -1,3 +1,6 @@
+`redline-v33` adds revised running stories before deleted section boundaries, first-page flags,
+and a retained-paragraph control for Docxodus #1555. See [evidence](docs/results/revised-section-stories/README.md).
+
 `core-v103` adds four exact-spacing justification cases for Docxodus #1524. Native Word confirms
 that mode 15 justified text can fit a bounded compressed line while legacy and left-aligned
 controls retain natural wrapping. See [native comparisons and diagnostic limits](docs/results/exact-justification/README.md).

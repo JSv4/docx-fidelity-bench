@@ -467,3 +467,8 @@ paragraph/span contract. Both paths use tracked edits. Metric contract 19 includ
 requirement. Exact resolved drawing and VML trees check both compatibility representations,
 including their text and geometry; independent round trips and SDK validation remain mandatory.
 All 239 preceding cases and document bytes are unchanged.
+
+Metric contract 21 adds `section-flags` assertions for exact first-page visibility in the review
+and independently resolved endpoints. Section property history and nested textbox stories are
+excluded from the physical section inventory; absent flags and explicit off values are false.
+The Juniper #1555 fixtures also require exact per-section header/footer text and boundary carriers.

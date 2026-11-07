@@ -1,0 +1,3455 @@
+{
+  "scope": "Five focused cases; native LibreOffice markup previews, no Word parity or full-suite score",
+  "manifestSha256": "3c1ddda7419719b6064db33b1d840bbe491493451530e754f672be193ee3685f",
+  "builds": {
+    "Baseline": {
+      "adapterSources": {
+        "adapters/docxodus-redline/DocxBenchRedline.csproj": "83843da954515292212f473d501fb539b0627513b972e3a95f7a4ab06674902a",
+        "adapters/docxodus-redline/Program.cs": "14e700e4d5819579374dc3f61ca6571c33558c010c009644a584b2a0c13ffb95"
+      },
+      "command": [
+        "/home/jman/.dotnet/dotnet",
+        "build",
+        "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/baseline-build/src/DocxBenchRedline.csproj",
+        "-c",
+        "Release",
+        "-o",
+        "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/baseline-build/bin",
+        "-nologo",
+        "-v",
+        "q",
+        "-p:DocxodusRoot=/home/jman/Code/Docxodus/.local-closeout/issue-1555-baseline"
+      ],
+      "commit": "2018b110bc7f11d19a1fa30cfe4a4bcfa535f8e8",
+      "dotnet": "10.0.301",
+      "files": {
+        "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+        "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+        "bin/DocxBenchRedline.dll": "2573068d3943b7da9615401986025466666acb7848d58d4e8146b6e1baeee4ed",
+        "bin/Docxodus.dll": "28334916233c16645d4732ca53734b1126117d3dc0fd4cbfb9d6ea735cf65163",
+        "bin/SkiaSharp.dll": "71274ef112eefdf5ca8a1517086787bc786c7103c30115abbb9dc424a09db43e",
+        "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+      },
+      "recipeSha256": "363879d820560519e8635fab08240100799cce2ba224e1169498eb209651c053",
+      "schema": 1,
+      "source": "/home/jman/Code/Docxodus/.local-closeout/issue-1555-baseline",
+      "tree": "3bbeec3eb632f57e828e7cd5dae334dbf7df442a"
+    },
+    "Candidate": {
+      "adapterSources": {
+        "adapters/docxodus-redline/DocxBenchRedline.csproj": "83843da954515292212f473d501fb539b0627513b972e3a95f7a4ab06674902a",
+        "adapters/docxodus-redline/Program.cs": "14e700e4d5819579374dc3f61ca6571c33558c010c009644a584b2a0c13ffb95"
+      },
+      "command": [
+        "/home/jman/.dotnet/dotnet",
+        "build",
+        "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/candidate-build/src/DocxBenchRedline.csproj",
+        "-c",
+        "Release",
+        "-o",
+        "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/candidate-build/bin",
+        "-nologo",
+        "-v",
+        "q",
+        "-p:DocxodusRoot=/home/jman/Code/Docxodus/.local-closeout/issue-1555"
+      ],
+      "commit": "1a894a4f2c3eda04dfb673be7d8e60a27dd076ad",
+      "dotnet": "10.0.301",
+      "files": {
+        "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+        "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+        "bin/DocxBenchRedline.dll": "36b9d14d5152cc81d2be37b6f38bc5617b020dfb65e946b75f82844de972e8a2",
+        "bin/Docxodus.dll": "457a3f6bab23f1f160f1e4610aaf8e1a0b2ab9d5c2ea29443c3bd2c7b86a7e39",
+        "bin/SkiaSharp.dll": "71274ef112eefdf5ca8a1517086787bc786c7103c30115abbb9dc424a09db43e",
+        "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+      },
+      "recipeSha256": "363879d820560519e8635fab08240100799cce2ba224e1169498eb209651c053",
+      "schema": 1,
+      "source": "/home/jman/Code/Docxodus/.local-closeout/issue-1555",
+      "tree": "ed8c651a3ea4d1f3dd91cde9a1d02ca8a17b138b"
+    }
+  },
+  "metric": {
+    "blockInsertion": "declared insertion outcomes require typed success, error, version change and undo availability",
+    "caseScore": "100 when every applicable mandatory check passes, otherwise 0",
+    "columnReview": "v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry",
+    "engines": [
+      "bench-markup",
+      "libreoffice-text"
+    ],
+    "hyperlinkTargets": "declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written",
+    "inlineTrees": "declared math and drawing subtrees retain structure, properties, textbox content and image bytes in both independently resolved views; v2 checks referenced running stories with part-local image relationships",
+    "libreofficeEligibility": "a LibreOffice comparison applies only when the authored redline passes it",
+    "paragraphRewrite": "public untracked whole-paragraph rewrites must preserve exact declared native content-control subtrees as well as independent semantic views",
+    "revisionOwnership": "account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips",
+    "revisionRegistry": "declared table operations must report the public registry count and match independent resolved table assertions",
+    "revisionText": "declared move sources and ordinary deletions must retain their appropriate text carrier",
+    "sectionBoundaries": "declared inline section breaks occur after the exact zero-based body paragraph indices in each independently resolved endpoint",
+    "sectionFlags": "declared first-page flags match every physical section in the review and independently resolved endpoints, excluding property history and textbox stories",
+    "semanticPreflight": "declared identity cases must report zero changes at raw limits with and without the package supplement",
+    "spanEditing": "public span editing must preserve text and inline-marker order through both independent revision resolvers; v2 requires exactly one visible regex match before ReplaceMatch",
+    "suiteScore": "mean of category means over every required case",
+    "validity": "no OpenXmlValidator finding (id, part, description) occurs more often than in any input, and the output opens: a Package_Open finding in the output always fails, whatever the inputs did",
+    "version": 21,
+    "view": 1
+  },
+  "environment": {
+    "harness": {
+      "bench/lo_revisions.py": "a526eddb8c5022f7eb8f8feb8fbab9071b3781c87d3feae81cfc5712d1690482",
+      "bench/redline.py": "eaab97b714bd31a30fd4aeb9feb40f6c909b7c0219311af8f2fbceb1ef06e89e",
+      "bench/redline_build.py": "363879d820560519e8635fab08240100799cce2ba224e1169498eb209651c053",
+      "bench/revision_ownership.py": "d927496ce7af9e8ee41b48b32d4513e35e5bfd77eeeda41970a42201dac175fb",
+      "bench/revisions.py": "b2d13e3c58885c95c4fe75269bcda6fe6420afeef51be7f43278ce7aac94e701"
+    },
+    "libreoffice": {
+      "sha256": "adf468b45764b2abce53a7d91bbf3056b33f2734c5d5f628c075753e73903c43",
+      "version": "LibreOffice 25.8.7.3 580(Build:3)"
+    },
+    "libreofficePython": {
+      "sha256": "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e",
+      "version": "3.13.7"
+    },
+    "validator": {
+      "dotnet": "10.0.301",
+      "fileFormat": "Microsoft365",
+      "files": {
+        "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+        "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+        "bin/OoxmlValidator.dll": "ff087794c3fddbcebe646c565fe57aa46ece5c878c6551dbdd04cc43b4a9a2c2",
+        "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+      },
+      "package": "DocumentFormat.OpenXml 3.5.1"
+    }
+  },
+  "cases": [
+    {
+      "id": "redline-revised-stories-rewrite",
+      "sources": {
+        "fixtures/redline/redline-revised-stories-rewrite/left.docx": "3139bbdd02320f6722587b3ce515a94e941ea9fc1aaaa899e700efe9e4579c32",
+        "fixtures/redline/redline-revised-stories-rewrite/right.docx": "3bfb0db1c44ffdfb74714c1e72584776065fe339d56b51ea8c9606ce5bc158ae",
+        "fixtures/redline/redline-revised-stories-rewrite/authored-redline.docx": "456e3ef7ae54a0bcd6518875423cc2d8aaaae5b4858b3237f3cd0a41ad0ffaf0"
+      },
+      "panels": [
+        {
+          "renderer": "Baseline",
+          "sourceSha256": "0764a6c5ad41610fdd6d4248a697524bc0edb9d8afa669bd84a3a1012d1c0dff",
+          "pdfSha256": "7f67059bfa46649de66639207b2eb1cad1e263eb269584acc218278bcd3b1910",
+          "pageRasterSha256": [
+            "104eac5e31934389ac14339de02c0b28228bdf84f857f37dc3e45516e1bc2236",
+            "fffb4d6231a5fe54c74fe28a7e8ecad89f1692e208d8f7b18fa6d97ac91b9a1b"
+          ],
+          "revisedTextAndStoriesOnFirstPage": false,
+          "checks": {
+            "adapter": {
+              "engine": {
+                "assembly": "Docxodus",
+                "informationalVersion": "1.0.0+2018b110bc7f11d19a1fa30cfe4a4bcfa535f8e8",
+                "name": "docxodus",
+                "runtime": "10.0.9"
+              },
+              "outputSha256": "0764a6c5ad41610fdd6d4248a697524bc0edb9d8afa669bd84a3a1012d1c0dff",
+              "protocol": 1,
+              "status": "ok"
+            },
+            "category": "revisions",
+            "checks": [
+              {
+                "name": "conversion",
+                "passed": true
+              },
+              {
+                "name": "readable-package",
+                "passed": true
+              },
+              {
+                "name": "markup-accepted",
+                "passed": true
+              },
+              {
+                "name": "markup-rejected",
+                "passed": true
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-rewrite/authored-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/baseline-final/redline-revised-stories-rewrite/candidate-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 5
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-rewrite/right.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "ineligible": true,
+                "name": "libreoffice-accepted",
+                "passed": null,
+                "reason": "LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory"
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-rewrite/authored-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/baseline-final/redline-revised-stories-rewrite/candidate-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 5
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-rewrite/left.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "name": "libreoffice-rejected",
+                "passed": true
+              },
+              {
+                "name": "no-new-validation-errors",
+                "new": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "default",
+                  "scope": "redline",
+                  "story": "header",
+                  "type": "section-stories",
+                  "values": [
+                    "JUNIPER SURVEY",
+                    "JUNIPER SURVEY"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "",
+                  "JUNIPER SURVEY"
+                ],
+                "passed": false
+              },
+              {
+                "declaration": {
+                  "kind": "default",
+                  "scope": "redline",
+                  "story": "footer",
+                  "type": "section-stories",
+                  "values": [
+                    "Coastal receipt",
+                    "Coastal receipt"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "",
+                  "Coastal receipt"
+                ],
+                "passed": false
+              },
+              {
+                "declaration": {
+                  "scope": "redline",
+                  "titlePg": [
+                    false,
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false,
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "accepted",
+                  "titlePg": [
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "rejected",
+                  "titlePg": [
+                    false,
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false,
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [],
+                  "scope": "accepted",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [
+                    2
+                  ],
+                  "scope": "rejected",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [
+                  2
+                ],
+                "passed": true
+              }
+            ],
+            "id": "redline-revised-stories-rewrite",
+            "issue": "JSv4/Docxodus#1555",
+            "kind": "reproducer",
+            "operation": "compare",
+            "score": 0.0,
+            "status": "measured"
+          }
+        },
+        {
+          "renderer": "Authored",
+          "sourceSha256": "456e3ef7ae54a0bcd6518875423cc2d8aaaae5b4858b3237f3cd0a41ad0ffaf0",
+          "pdfSha256": "504674b6587975370b24aca496c83e418d0fe2bb5ebf267db4991bfdfa4b6ff9",
+          "pageRasterSha256": [
+            "41cd13c775dd4a9077e4081a17f17aecb113ff8363fb6d09ba8420f2665d43a5",
+            "fffb4d6231a5fe54c74fe28a7e8ecad89f1692e208d8f7b18fa6d97ac91b9a1b"
+          ],
+          "revisedTextAndStoriesOnFirstPage": true,
+          "checks": {
+            "adapter": {
+              "engine": {
+                "name": "authored-redline"
+              },
+              "outputSha256": "456e3ef7ae54a0bcd6518875423cc2d8aaaae5b4858b3237f3cd0a41ad0ffaf0",
+              "status": "ok"
+            },
+            "category": "revisions",
+            "checks": [
+              {
+                "name": "conversion",
+                "passed": true
+              },
+              {
+                "name": "readable-package",
+                "passed": true
+              },
+              {
+                "name": "markup-accepted",
+                "passed": true
+              },
+              {
+                "name": "markup-rejected",
+                "passed": true
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-rewrite/authored-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/calibration/redline-revised-stories-rewrite/candidate-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-rewrite/right.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "ineligible": true,
+                "name": "libreoffice-accepted",
+                "passed": null,
+                "reason": "LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory"
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-rewrite/authored-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/calibration/redline-revised-stories-rewrite/candidate-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-rewrite/left.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "name": "libreoffice-rejected",
+                "passed": true
+              },
+              {
+                "name": "no-new-validation-errors",
+                "new": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "default",
+                  "scope": "redline",
+                  "story": "header",
+                  "type": "section-stories",
+                  "values": [
+                    "JUNIPER SURVEY",
+                    "JUNIPER SURVEY"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "JUNIPER SURVEY",
+                  "JUNIPER SURVEY"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "default",
+                  "scope": "redline",
+                  "story": "footer",
+                  "type": "section-stories",
+                  "values": [
+                    "Coastal receipt",
+                    "Coastal receipt"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "Coastal receipt",
+                  "Coastal receipt"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "redline",
+                  "titlePg": [
+                    false,
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false,
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "accepted",
+                  "titlePg": [
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "rejected",
+                  "titlePg": [
+                    false,
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false,
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [],
+                  "scope": "accepted",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [
+                    2
+                  ],
+                  "scope": "rejected",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [
+                  2
+                ],
+                "passed": true
+              }
+            ],
+            "id": "redline-revised-stories-rewrite",
+            "issue": "JSv4/Docxodus#1555",
+            "kind": "reproducer",
+            "operation": "compare",
+            "score": 100.0,
+            "status": "measured"
+          }
+        },
+        {
+          "renderer": "Candidate",
+          "sourceSha256": "90045acbcf95fa47a342a553561a1f5fb055137ad030e8d1c86211f800a9eeeb",
+          "pdfSha256": "bca34cde1cfe383d78245793b234126e637bd0f0c806efdb4bf0431e0eaf448d",
+          "pageRasterSha256": [
+            "e948b03f3b5205294186650e4228e47dd550dfb772388dbba9d9c3b29aa0824c",
+            "fffb4d6231a5fe54c74fe28a7e8ecad89f1692e208d8f7b18fa6d97ac91b9a1b"
+          ],
+          "revisedTextAndStoriesOnFirstPage": true,
+          "checks": {
+            "adapter": {
+              "engine": {
+                "assembly": "Docxodus",
+                "informationalVersion": "1.0.0+1a894a4f2c3eda04dfb673be7d8e60a27dd076ad",
+                "name": "docxodus",
+                "runtime": "10.0.9"
+              },
+              "outputSha256": "90045acbcf95fa47a342a553561a1f5fb055137ad030e8d1c86211f800a9eeeb",
+              "protocol": 1,
+              "status": "ok"
+            },
+            "category": "revisions",
+            "checks": [
+              {
+                "name": "conversion",
+                "passed": true
+              },
+              {
+                "name": "readable-package",
+                "passed": true
+              },
+              {
+                "name": "markup-accepted",
+                "passed": true
+              },
+              {
+                "name": "markup-rejected",
+                "passed": true
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-rewrite/authored-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/candidate/redline-revised-stories-rewrite/candidate-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-rewrite/right.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "ineligible": true,
+                "name": "libreoffice-accepted",
+                "passed": null,
+                "reason": "LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory"
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-rewrite/authored-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/candidate/redline-revised-stories-rewrite/candidate-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-rewrite/left.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "name": "libreoffice-rejected",
+                "passed": true
+              },
+              {
+                "name": "no-new-validation-errors",
+                "new": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "default",
+                  "scope": "redline",
+                  "story": "header",
+                  "type": "section-stories",
+                  "values": [
+                    "JUNIPER SURVEY",
+                    "JUNIPER SURVEY"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "JUNIPER SURVEY",
+                  "JUNIPER SURVEY"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "default",
+                  "scope": "redline",
+                  "story": "footer",
+                  "type": "section-stories",
+                  "values": [
+                    "Coastal receipt",
+                    "Coastal receipt"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "Coastal receipt",
+                  "Coastal receipt"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "redline",
+                  "titlePg": [
+                    false,
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false,
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "accepted",
+                  "titlePg": [
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "rejected",
+                  "titlePg": [
+                    false,
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false,
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [],
+                  "scope": "accepted",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [
+                    2
+                  ],
+                  "scope": "rejected",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [
+                  2
+                ],
+                "passed": true
+              }
+            ],
+            "id": "redline-revised-stories-rewrite",
+            "issue": "JSv4/Docxodus#1555",
+            "kind": "reproducer",
+            "operation": "compare",
+            "score": 100.0,
+            "status": "measured"
+          }
+        }
+      ],
+      "screenshot": "redline-revised-stories-rewrite.png",
+      "screenshotSha256": "473d7b8416bc455273a6e26253aa1e746f77923e143d1c5d8ab128687e6a22c5"
+    },
+    {
+      "id": "redline-revised-stories-first-page",
+      "sources": {
+        "fixtures/redline/redline-revised-stories-first-page/left.docx": "8a5d39ad42587acac833b81c49dc6726d1983f9fa47124d33e333cb462dcd05e",
+        "fixtures/redline/redline-revised-stories-first-page/right.docx": "1bfd2ea5dfb5f78052fc4d9ae55141c20016b8bbbf7505a5845fde7f10056507",
+        "fixtures/redline/redline-revised-stories-first-page/authored-redline.docx": "151ff9614a0fca68f199fdb229192b0f04f26e178a9b70438b021cbc5e2a3337"
+      },
+      "panels": [
+        {
+          "renderer": "Baseline",
+          "sourceSha256": "f464b60763b66ba6552efd8f37df9e07b01ee0a7fa979de9af975ad673acc696",
+          "pdfSha256": "df6b4f59f2f2390b1764c6dd2ca970a4fef60eaf797c9130ebde822dafb62e26",
+          "pageRasterSha256": [
+            "104eac5e31934389ac14339de02c0b28228bdf84f857f37dc3e45516e1bc2236",
+            "fffb4d6231a5fe54c74fe28a7e8ecad89f1692e208d8f7b18fa6d97ac91b9a1b"
+          ],
+          "revisedTextAndStoriesOnFirstPage": false,
+          "checks": {
+            "adapter": {
+              "engine": {
+                "assembly": "Docxodus",
+                "informationalVersion": "1.0.0+2018b110bc7f11d19a1fa30cfe4a4bcfa535f8e8",
+                "name": "docxodus",
+                "runtime": "10.0.9"
+              },
+              "outputSha256": "f464b60763b66ba6552efd8f37df9e07b01ee0a7fa979de9af975ad673acc696",
+              "protocol": 1,
+              "status": "ok"
+            },
+            "category": "revisions",
+            "checks": [
+              {
+                "name": "conversion",
+                "passed": true
+              },
+              {
+                "name": "readable-package",
+                "passed": true
+              },
+              {
+                "name": "markup-accepted",
+                "passed": true
+              },
+              {
+                "name": "markup-rejected",
+                "passed": true
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-first-page/authored-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/baseline-final/redline-revised-stories-first-page/candidate-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 5
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-first-page/right.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "ineligible": true,
+                "name": "libreoffice-accepted",
+                "passed": null,
+                "reason": "LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory"
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-first-page/authored-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/baseline-final/redline-revised-stories-first-page/candidate-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 5
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-first-page/left.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "ineligible": true,
+                "name": "libreoffice-rejected",
+                "passed": null,
+                "reason": "LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory"
+              },
+              {
+                "name": "no-new-validation-errors",
+                "new": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "first",
+                  "scope": "redline",
+                  "story": "header",
+                  "type": "section-stories",
+                  "values": [
+                    "JUNIPER SURVEY",
+                    "JUNIPER SURVEY"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "",
+                  "JUNIPER SURVEY"
+                ],
+                "passed": false
+              },
+              {
+                "declaration": {
+                  "kind": "first",
+                  "scope": "redline",
+                  "story": "footer",
+                  "type": "section-stories",
+                  "values": [
+                    "Coastal receipt",
+                    "Coastal receipt"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "",
+                  "Coastal receipt"
+                ],
+                "passed": false
+              },
+              {
+                "declaration": {
+                  "scope": "redline",
+                  "titlePg": [
+                    true,
+                    true
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false,
+                  true
+                ],
+                "passed": false
+              },
+              {
+                "declaration": {
+                  "scope": "accepted",
+                  "titlePg": [
+                    true
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  true
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "rejected",
+                  "titlePg": [
+                    false,
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false,
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [],
+                  "scope": "accepted",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [
+                    2
+                  ],
+                  "scope": "rejected",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [
+                  2
+                ],
+                "passed": true
+              }
+            ],
+            "id": "redline-revised-stories-first-page",
+            "issue": "JSv4/Docxodus#1555",
+            "kind": "reproducer",
+            "operation": "compare",
+            "score": 0.0,
+            "status": "measured"
+          }
+        },
+        {
+          "renderer": "Authored",
+          "sourceSha256": "151ff9614a0fca68f199fdb229192b0f04f26e178a9b70438b021cbc5e2a3337",
+          "pdfSha256": "b63a0a7683c4f7a5a877f1d6a0c1fc257410217b7f22a076b08ca5533f6f09a1",
+          "pageRasterSha256": [
+            "41cd13c775dd4a9077e4081a17f17aecb113ff8363fb6d09ba8420f2665d43a5",
+            "fffb4d6231a5fe54c74fe28a7e8ecad89f1692e208d8f7b18fa6d97ac91b9a1b"
+          ],
+          "revisedTextAndStoriesOnFirstPage": true,
+          "checks": {
+            "adapter": {
+              "engine": {
+                "name": "authored-redline"
+              },
+              "outputSha256": "151ff9614a0fca68f199fdb229192b0f04f26e178a9b70438b021cbc5e2a3337",
+              "status": "ok"
+            },
+            "category": "revisions",
+            "checks": [
+              {
+                "name": "conversion",
+                "passed": true
+              },
+              {
+                "name": "readable-package",
+                "passed": true
+              },
+              {
+                "name": "markup-accepted",
+                "passed": true
+              },
+              {
+                "name": "markup-rejected",
+                "passed": true
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-first-page/authored-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/calibration/redline-revised-stories-first-page/candidate-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-first-page/right.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "ineligible": true,
+                "name": "libreoffice-accepted",
+                "passed": null,
+                "reason": "LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory"
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-first-page/authored-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/calibration/redline-revised-stories-first-page/candidate-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-first-page/left.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "ineligible": true,
+                "name": "libreoffice-rejected",
+                "passed": null,
+                "reason": "LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory"
+              },
+              {
+                "name": "no-new-validation-errors",
+                "new": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "first",
+                  "scope": "redline",
+                  "story": "header",
+                  "type": "section-stories",
+                  "values": [
+                    "JUNIPER SURVEY",
+                    "JUNIPER SURVEY"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "JUNIPER SURVEY",
+                  "JUNIPER SURVEY"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "first",
+                  "scope": "redline",
+                  "story": "footer",
+                  "type": "section-stories",
+                  "values": [
+                    "Coastal receipt",
+                    "Coastal receipt"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "Coastal receipt",
+                  "Coastal receipt"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "redline",
+                  "titlePg": [
+                    true,
+                    true
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  true,
+                  true
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "accepted",
+                  "titlePg": [
+                    true
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  true
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "rejected",
+                  "titlePg": [
+                    false,
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false,
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [],
+                  "scope": "accepted",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [
+                    2
+                  ],
+                  "scope": "rejected",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [
+                  2
+                ],
+                "passed": true
+              }
+            ],
+            "id": "redline-revised-stories-first-page",
+            "issue": "JSv4/Docxodus#1555",
+            "kind": "reproducer",
+            "operation": "compare",
+            "score": 100.0,
+            "status": "measured"
+          }
+        },
+        {
+          "renderer": "Candidate",
+          "sourceSha256": "24e4baf663c20e4e3197b6c0f21411dc882cdfe5c281ce35d5ac75ecbf2a8768",
+          "pdfSha256": "7d9563d68b5828df43d42d4fbbf151f90b7b04f9b9bcc01f0fbb5e71c3c7af97",
+          "pageRasterSha256": [
+            "e948b03f3b5205294186650e4228e47dd550dfb772388dbba9d9c3b29aa0824c",
+            "fffb4d6231a5fe54c74fe28a7e8ecad89f1692e208d8f7b18fa6d97ac91b9a1b"
+          ],
+          "revisedTextAndStoriesOnFirstPage": true,
+          "checks": {
+            "adapter": {
+              "engine": {
+                "assembly": "Docxodus",
+                "informationalVersion": "1.0.0+1a894a4f2c3eda04dfb673be7d8e60a27dd076ad",
+                "name": "docxodus",
+                "runtime": "10.0.9"
+              },
+              "outputSha256": "24e4baf663c20e4e3197b6c0f21411dc882cdfe5c281ce35d5ac75ecbf2a8768",
+              "protocol": 1,
+              "status": "ok"
+            },
+            "category": "revisions",
+            "checks": [
+              {
+                "name": "conversion",
+                "passed": true
+              },
+              {
+                "name": "readable-package",
+                "passed": true
+              },
+              {
+                "name": "markup-accepted",
+                "passed": true
+              },
+              {
+                "name": "markup-rejected",
+                "passed": true
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-first-page/authored-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/candidate/redline-revised-stories-first-page/candidate-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-first-page/right.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "ineligible": true,
+                "name": "libreoffice-accepted",
+                "passed": null,
+                "reason": "LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory"
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-first-page/authored-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/candidate/redline-revised-stories-first-page/candidate-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-first-page/left.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "ineligible": true,
+                "name": "libreoffice-rejected",
+                "passed": null,
+                "reason": "LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory"
+              },
+              {
+                "name": "no-new-validation-errors",
+                "new": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "first",
+                  "scope": "redline",
+                  "story": "header",
+                  "type": "section-stories",
+                  "values": [
+                    "JUNIPER SURVEY",
+                    "JUNIPER SURVEY"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "JUNIPER SURVEY",
+                  "JUNIPER SURVEY"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "first",
+                  "scope": "redline",
+                  "story": "footer",
+                  "type": "section-stories",
+                  "values": [
+                    "Coastal receipt",
+                    "Coastal receipt"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "Coastal receipt",
+                  "Coastal receipt"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "redline",
+                  "titlePg": [
+                    true,
+                    true
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  true,
+                  true
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "accepted",
+                  "titlePg": [
+                    true
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  true
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "rejected",
+                  "titlePg": [
+                    false,
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false,
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [],
+                  "scope": "accepted",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [
+                    2
+                  ],
+                  "scope": "rejected",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [
+                  2
+                ],
+                "passed": true
+              }
+            ],
+            "id": "redline-revised-stories-first-page",
+            "issue": "JSv4/Docxodus#1555",
+            "kind": "reproducer",
+            "operation": "compare",
+            "score": 100.0,
+            "status": "measured"
+          }
+        }
+      ],
+      "screenshot": "redline-revised-stories-first-page.png",
+      "screenshotSha256": "da3dec249334e9a1b4ab29c56c7c92b0212e26914b83c78c10ce23ab9e3f3c13"
+    },
+    {
+      "id": "redline-revised-stories-latent-first-page",
+      "sources": {
+        "fixtures/redline/redline-revised-stories-latent-first-page/left.docx": "58c758dc86a022f46d222f5df274d3ccbcc8c50c12aae7ff00ce6b9b822688e4",
+        "fixtures/redline/redline-revised-stories-latent-first-page/right.docx": "1bfd2ea5dfb5f78052fc4d9ae55141c20016b8bbbf7505a5845fde7f10056507",
+        "fixtures/redline/redline-revised-stories-latent-first-page/authored-redline.docx": "2c548c6ace233bb401be3769802bd99d51b08c846b364e259d3fc0939942035a"
+      },
+      "panels": [
+        {
+          "renderer": "Baseline",
+          "sourceSha256": "98a6ea23f3b671821cb4994e422bb9135c3149dc938047f2822154a038f60ac2",
+          "pdfSha256": "00f9968a556b73f5d7c00aa202e5ec87164722c9dac610f19502a10b52009202",
+          "pageRasterSha256": [
+            "829c15ca735624f807be3f27e87ca1ed78e0a7387f8e563c5570e833b05557d3",
+            "2a8a5016b5b43a249e2674a371355376cbf0f7a566239b0b8be5e7f8dce44286"
+          ],
+          "revisedTextAndStoriesOnFirstPage": true,
+          "checks": {
+            "adapter": {
+              "engine": {
+                "assembly": "Docxodus",
+                "informationalVersion": "1.0.0+2018b110bc7f11d19a1fa30cfe4a4bcfa535f8e8",
+                "name": "docxodus",
+                "runtime": "10.0.9"
+              },
+              "outputSha256": "98a6ea23f3b671821cb4994e422bb9135c3149dc938047f2822154a038f60ac2",
+              "protocol": 1,
+              "status": "ok"
+            },
+            "category": "revisions",
+            "checks": [
+              {
+                "name": "conversion",
+                "passed": true
+              },
+              {
+                "name": "readable-package",
+                "passed": true
+              },
+              {
+                "name": "markup-accepted",
+                "passed": true
+              },
+              {
+                "name": "markup-rejected",
+                "passed": true
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-latent-first-page/authored-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 3
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/baseline-final/redline-revised-stories-latent-first-page/candidate-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 5
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-latent-first-page/right.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "ineligible": true,
+                "name": "libreoffice-accepted",
+                "passed": null,
+                "reason": "LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory"
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-latent-first-page/authored-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 3
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/baseline-final/redline-revised-stories-latent-first-page/candidate-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 5
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-latent-first-page/left.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "ineligible": true,
+                "name": "libreoffice-rejected",
+                "passed": null,
+                "reason": "LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory"
+              },
+              {
+                "name": "no-new-validation-errors",
+                "new": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "first",
+                  "scope": "redline",
+                  "story": "header",
+                  "type": "section-stories",
+                  "values": [
+                    "JUNIPER SURVEY",
+                    "JUNIPER SURVEY"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "JUNIPER SURVEY",
+                  "JUNIPER SURVEY"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "first",
+                  "scope": "redline",
+                  "story": "footer",
+                  "type": "section-stories",
+                  "values": [
+                    "Coastal receipt",
+                    "Coastal receipt"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "Coastal receipt",
+                  "Coastal receipt"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "redline",
+                  "titlePg": [
+                    true,
+                    true
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  true,
+                  true
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "accepted",
+                  "titlePg": [
+                    true
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  true
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "rejected",
+                  "titlePg": [
+                    false,
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  true,
+                  false
+                ],
+                "passed": false
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [],
+                  "scope": "accepted",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [
+                    2
+                  ],
+                  "scope": "rejected",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [
+                  2
+                ],
+                "passed": true
+              }
+            ],
+            "id": "redline-revised-stories-latent-first-page",
+            "issue": "JSv4/Docxodus#1555",
+            "kind": "reproducer",
+            "operation": "compare",
+            "score": 0.0,
+            "status": "measured"
+          }
+        },
+        {
+          "renderer": "Authored",
+          "sourceSha256": "2c548c6ace233bb401be3769802bd99d51b08c846b364e259d3fc0939942035a",
+          "pdfSha256": "071a5c6cdee20d9e4969e4653c3c4af430fe7ede809bba3e7e0e3a7093095c85",
+          "pageRasterSha256": [
+            "8bff78f6851d057b23e430713b24830cda4844892deac4668747b4628f154252",
+            "2a8a5016b5b43a249e2674a371355376cbf0f7a566239b0b8be5e7f8dce44286"
+          ],
+          "revisedTextAndStoriesOnFirstPage": true,
+          "checks": {
+            "adapter": {
+              "engine": {
+                "name": "authored-redline"
+              },
+              "outputSha256": "2c548c6ace233bb401be3769802bd99d51b08c846b364e259d3fc0939942035a",
+              "status": "ok"
+            },
+            "category": "revisions",
+            "checks": [
+              {
+                "name": "conversion",
+                "passed": true
+              },
+              {
+                "name": "readable-package",
+                "passed": true
+              },
+              {
+                "name": "markup-accepted",
+                "passed": true
+              },
+              {
+                "name": "markup-rejected",
+                "passed": true
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-latent-first-page/authored-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 3
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/calibration/redline-revised-stories-latent-first-page/candidate-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 3
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-latent-first-page/right.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "ineligible": true,
+                "name": "libreoffice-accepted",
+                "passed": null,
+                "reason": "LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory"
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-latent-first-page/authored-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 3
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/calibration/redline-revised-stories-latent-first-page/candidate-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 3
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-latent-first-page/left.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "ineligible": true,
+                "name": "libreoffice-rejected",
+                "passed": null,
+                "reason": "LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory"
+              },
+              {
+                "name": "no-new-validation-errors",
+                "new": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "first",
+                  "scope": "redline",
+                  "story": "header",
+                  "type": "section-stories",
+                  "values": [
+                    "JUNIPER SURVEY",
+                    "JUNIPER SURVEY"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "JUNIPER SURVEY",
+                  "JUNIPER SURVEY"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "first",
+                  "scope": "redline",
+                  "story": "footer",
+                  "type": "section-stories",
+                  "values": [
+                    "Coastal receipt",
+                    "Coastal receipt"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "Coastal receipt",
+                  "Coastal receipt"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "redline",
+                  "titlePg": [
+                    true,
+                    true
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  true,
+                  true
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "accepted",
+                  "titlePg": [
+                    true
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  true
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "rejected",
+                  "titlePg": [
+                    false,
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false,
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [],
+                  "scope": "accepted",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [
+                    2
+                  ],
+                  "scope": "rejected",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [
+                  2
+                ],
+                "passed": true
+              }
+            ],
+            "id": "redline-revised-stories-latent-first-page",
+            "issue": "JSv4/Docxodus#1555",
+            "kind": "reproducer",
+            "operation": "compare",
+            "score": 100.0,
+            "status": "measured"
+          }
+        },
+        {
+          "renderer": "Candidate",
+          "sourceSha256": "8d626091a985c4ab4c900bd74a7addc37bdd81954b2130d74ee47b993cde4c0d",
+          "pdfSha256": "794f4ad8d702f89a4fce10b3c9ed9928c32ad8b6929c31f97626b59827a6f27e",
+          "pageRasterSha256": [
+            "c0d931e39a1d00427ecd180dc939b56bd03298eb53d86dfc87aaf40a2492521b",
+            "2a8a5016b5b43a249e2674a371355376cbf0f7a566239b0b8be5e7f8dce44286"
+          ],
+          "revisedTextAndStoriesOnFirstPage": true,
+          "checks": {
+            "adapter": {
+              "engine": {
+                "assembly": "Docxodus",
+                "informationalVersion": "1.0.0+1a894a4f2c3eda04dfb673be7d8e60a27dd076ad",
+                "name": "docxodus",
+                "runtime": "10.0.9"
+              },
+              "outputSha256": "8d626091a985c4ab4c900bd74a7addc37bdd81954b2130d74ee47b993cde4c0d",
+              "protocol": 1,
+              "status": "ok"
+            },
+            "category": "revisions",
+            "checks": [
+              {
+                "name": "conversion",
+                "passed": true
+              },
+              {
+                "name": "readable-package",
+                "passed": true
+              },
+              {
+                "name": "markup-accepted",
+                "passed": true
+              },
+              {
+                "name": "markup-rejected",
+                "passed": true
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-latent-first-page/authored-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 3
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/candidate/redline-revised-stories-latent-first-page/candidate-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 3
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-latent-first-page/right.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "ineligible": true,
+                "name": "libreoffice-accepted",
+                "passed": null,
+                "reason": "LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory"
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-latent-first-page/authored-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 3
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/candidate/redline-revised-stories-latent-first-page/candidate-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 3
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-latent-first-page/left.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "ineligible": true,
+                "name": "libreoffice-rejected",
+                "passed": null,
+                "reason": "LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory"
+              },
+              {
+                "name": "no-new-validation-errors",
+                "new": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "first",
+                  "scope": "redline",
+                  "story": "header",
+                  "type": "section-stories",
+                  "values": [
+                    "JUNIPER SURVEY",
+                    "JUNIPER SURVEY"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "JUNIPER SURVEY",
+                  "JUNIPER SURVEY"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "first",
+                  "scope": "redline",
+                  "story": "footer",
+                  "type": "section-stories",
+                  "values": [
+                    "Coastal receipt",
+                    "Coastal receipt"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "Coastal receipt",
+                  "Coastal receipt"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "redline",
+                  "titlePg": [
+                    true,
+                    true
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  true,
+                  true
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "accepted",
+                  "titlePg": [
+                    true
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  true
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "rejected",
+                  "titlePg": [
+                    false,
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false,
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [],
+                  "scope": "accepted",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [
+                    2
+                  ],
+                  "scope": "rejected",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [
+                  2
+                ],
+                "passed": true
+              }
+            ],
+            "id": "redline-revised-stories-latent-first-page",
+            "issue": "JSv4/Docxodus#1555",
+            "kind": "reproducer",
+            "operation": "compare",
+            "score": 100.0,
+            "status": "measured"
+          }
+        }
+      ],
+      "screenshot": "redline-revised-stories-latent-first-page.png",
+      "screenshotSha256": "206df1408ebb16b06ae7cbd555a71c0e6ab4a21ef1f5b27e54c3624fb2eae9a4"
+    },
+    {
+      "id": "redline-revised-stories-default-after-first",
+      "sources": {
+        "fixtures/redline/redline-revised-stories-default-after-first/left.docx": "a4e1f1b1f78dd8dab020cc16f7baf1dfc5f205414388c6df772232044ac84d3d",
+        "fixtures/redline/redline-revised-stories-default-after-first/right.docx": "3bfb0db1c44ffdfb74714c1e72584776065fe339d56b51ea8c9606ce5bc158ae",
+        "fixtures/redline/redline-revised-stories-default-after-first/authored-redline.docx": "25abeb8f76916e0b909228f37241e7db067162905a057a5ed3f9beddce68d91d"
+      },
+      "panels": [
+        {
+          "renderer": "Baseline",
+          "sourceSha256": "793a8d825a428fda3ec73803c06de85647832c41c1a89d4cdb4d9d453e710371",
+          "pdfSha256": "67beb5dd32f34523a489ec2f5c4ce902eb1f66ca856daf0e97e4389d8387727f",
+          "pageRasterSha256": [
+            "104eac5e31934389ac14339de02c0b28228bdf84f857f37dc3e45516e1bc2236",
+            "fffb4d6231a5fe54c74fe28a7e8ecad89f1692e208d8f7b18fa6d97ac91b9a1b"
+          ],
+          "revisedTextAndStoriesOnFirstPage": false,
+          "checks": {
+            "adapter": {
+              "engine": {
+                "assembly": "Docxodus",
+                "informationalVersion": "1.0.0+2018b110bc7f11d19a1fa30cfe4a4bcfa535f8e8",
+                "name": "docxodus",
+                "runtime": "10.0.9"
+              },
+              "outputSha256": "793a8d825a428fda3ec73803c06de85647832c41c1a89d4cdb4d9d453e710371",
+              "protocol": 1,
+              "status": "ok"
+            },
+            "category": "revisions",
+            "checks": [
+              {
+                "name": "conversion",
+                "passed": true
+              },
+              {
+                "name": "readable-package",
+                "passed": true
+              },
+              {
+                "name": "markup-accepted",
+                "passed": true
+              },
+              {
+                "name": "markup-rejected",
+                "passed": true
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-default-after-first/authored-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/baseline-final/redline-revised-stories-default-after-first/candidate-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 5
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-default-after-first/right.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "ineligible": true,
+                "name": "libreoffice-accepted",
+                "passed": null,
+                "reason": "LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory"
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-default-after-first/authored-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/baseline-final/redline-revised-stories-default-after-first/candidate-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 5
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-default-after-first/left.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "name": "libreoffice-rejected",
+                "passed": true
+              },
+              {
+                "name": "no-new-validation-errors",
+                "new": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "default",
+                  "scope": "redline",
+                  "story": "header",
+                  "type": "section-stories",
+                  "values": [
+                    "JUNIPER SURVEY",
+                    "JUNIPER SURVEY"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "",
+                  "JUNIPER SURVEY"
+                ],
+                "passed": false
+              },
+              {
+                "declaration": {
+                  "kind": "default",
+                  "scope": "redline",
+                  "story": "footer",
+                  "type": "section-stories",
+                  "values": [
+                    "Coastal receipt",
+                    "Coastal receipt"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "",
+                  "Coastal receipt"
+                ],
+                "passed": false
+              },
+              {
+                "declaration": {
+                  "scope": "redline",
+                  "titlePg": [
+                    false,
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  true,
+                  false
+                ],
+                "passed": false
+              },
+              {
+                "declaration": {
+                  "scope": "accepted",
+                  "titlePg": [
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "rejected",
+                  "titlePg": [
+                    true,
+                    true
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  true,
+                  true
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [],
+                  "scope": "accepted",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [
+                    2
+                  ],
+                  "scope": "rejected",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [
+                  2
+                ],
+                "passed": true
+              }
+            ],
+            "id": "redline-revised-stories-default-after-first",
+            "issue": "JSv4/Docxodus#1555",
+            "kind": "reproducer",
+            "operation": "compare",
+            "score": 0.0,
+            "status": "measured"
+          }
+        },
+        {
+          "renderer": "Authored",
+          "sourceSha256": "25abeb8f76916e0b909228f37241e7db067162905a057a5ed3f9beddce68d91d",
+          "pdfSha256": "01c91a44c2caee5721195e9152f0f7f41cac5764968334650f23364d944f64bb",
+          "pageRasterSha256": [
+            "41cd13c775dd4a9077e4081a17f17aecb113ff8363fb6d09ba8420f2665d43a5",
+            "fffb4d6231a5fe54c74fe28a7e8ecad89f1692e208d8f7b18fa6d97ac91b9a1b"
+          ],
+          "revisedTextAndStoriesOnFirstPage": true,
+          "checks": {
+            "adapter": {
+              "engine": {
+                "name": "authored-redline"
+              },
+              "outputSha256": "25abeb8f76916e0b909228f37241e7db067162905a057a5ed3f9beddce68d91d",
+              "status": "ok"
+            },
+            "category": "revisions",
+            "checks": [
+              {
+                "name": "conversion",
+                "passed": true
+              },
+              {
+                "name": "readable-package",
+                "passed": true
+              },
+              {
+                "name": "markup-accepted",
+                "passed": true
+              },
+              {
+                "name": "markup-rejected",
+                "passed": true
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-default-after-first/authored-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/calibration/redline-revised-stories-default-after-first/candidate-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-default-after-first/right.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "ineligible": true,
+                "name": "libreoffice-accepted",
+                "passed": null,
+                "reason": "LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory"
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-default-after-first/authored-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/calibration/redline-revised-stories-default-after-first/candidate-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-default-after-first/left.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "name": "libreoffice-rejected",
+                "passed": true
+              },
+              {
+                "name": "no-new-validation-errors",
+                "new": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "default",
+                  "scope": "redline",
+                  "story": "header",
+                  "type": "section-stories",
+                  "values": [
+                    "JUNIPER SURVEY",
+                    "JUNIPER SURVEY"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "JUNIPER SURVEY",
+                  "JUNIPER SURVEY"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "default",
+                  "scope": "redline",
+                  "story": "footer",
+                  "type": "section-stories",
+                  "values": [
+                    "Coastal receipt",
+                    "Coastal receipt"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "Coastal receipt",
+                  "Coastal receipt"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "redline",
+                  "titlePg": [
+                    false,
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false,
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "accepted",
+                  "titlePg": [
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "rejected",
+                  "titlePg": [
+                    true,
+                    true
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  true,
+                  true
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [],
+                  "scope": "accepted",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [
+                    2
+                  ],
+                  "scope": "rejected",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [
+                  2
+                ],
+                "passed": true
+              }
+            ],
+            "id": "redline-revised-stories-default-after-first",
+            "issue": "JSv4/Docxodus#1555",
+            "kind": "reproducer",
+            "operation": "compare",
+            "score": 100.0,
+            "status": "measured"
+          }
+        },
+        {
+          "renderer": "Candidate",
+          "sourceSha256": "5a3368340d23254406afff2ae820f9a33acf2799d9ccd5ee73174d83687ba619",
+          "pdfSha256": "dfb1566d26247973cbbaec051edbf9e7319e817b2dbd1a059b50a8e47e63bea0",
+          "pageRasterSha256": [
+            "e948b03f3b5205294186650e4228e47dd550dfb772388dbba9d9c3b29aa0824c",
+            "fffb4d6231a5fe54c74fe28a7e8ecad89f1692e208d8f7b18fa6d97ac91b9a1b"
+          ],
+          "revisedTextAndStoriesOnFirstPage": true,
+          "checks": {
+            "adapter": {
+              "engine": {
+                "assembly": "Docxodus",
+                "informationalVersion": "1.0.0+1a894a4f2c3eda04dfb673be7d8e60a27dd076ad",
+                "name": "docxodus",
+                "runtime": "10.0.9"
+              },
+              "outputSha256": "5a3368340d23254406afff2ae820f9a33acf2799d9ccd5ee73174d83687ba619",
+              "protocol": 1,
+              "status": "ok"
+            },
+            "category": "revisions",
+            "checks": [
+              {
+                "name": "conversion",
+                "passed": true
+              },
+              {
+                "name": "readable-package",
+                "passed": true
+              },
+              {
+                "name": "markup-accepted",
+                "passed": true
+              },
+              {
+                "name": "markup-rejected",
+                "passed": true
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-default-after-first/authored-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/candidate/redline-revised-stories-default-after-first/candidate-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-default-after-first/right.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "ineligible": true,
+                "name": "libreoffice-accepted",
+                "passed": null,
+                "reason": "LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory"
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-default-after-first/authored-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/candidate/redline-revised-stories-default-after-first/candidate-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-default-after-first/left.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "name": "libreoffice-rejected",
+                "passed": true
+              },
+              {
+                "name": "no-new-validation-errors",
+                "new": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "default",
+                  "scope": "redline",
+                  "story": "header",
+                  "type": "section-stories",
+                  "values": [
+                    "JUNIPER SURVEY",
+                    "JUNIPER SURVEY"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "JUNIPER SURVEY",
+                  "JUNIPER SURVEY"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "default",
+                  "scope": "redline",
+                  "story": "footer",
+                  "type": "section-stories",
+                  "values": [
+                    "Coastal receipt",
+                    "Coastal receipt"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "Coastal receipt",
+                  "Coastal receipt"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "redline",
+                  "titlePg": [
+                    false,
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false,
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "accepted",
+                  "titlePg": [
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "rejected",
+                  "titlePg": [
+                    true,
+                    true
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  true,
+                  true
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [],
+                  "scope": "accepted",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [
+                    2
+                  ],
+                  "scope": "rejected",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [
+                  2
+                ],
+                "passed": true
+              }
+            ],
+            "id": "redline-revised-stories-default-after-first",
+            "issue": "JSv4/Docxodus#1555",
+            "kind": "reproducer",
+            "operation": "compare",
+            "score": 100.0,
+            "status": "measured"
+          }
+        }
+      ],
+      "screenshot": "redline-revised-stories-default-after-first.png",
+      "screenshotSha256": "850b05992e5cce920bf2b9cf3eb3ea697aaf3143f322c53472f770a0388f3905"
+    },
+    {
+      "id": "redline-revised-stories-retained-control",
+      "sources": {
+        "fixtures/redline/redline-revised-stories-retained-control/left.docx": "3139bbdd02320f6722587b3ce515a94e941ea9fc1aaaa899e700efe9e4579c32",
+        "fixtures/redline/redline-revised-stories-retained-control/right.docx": "74044b2254e551b1f52624640a5e1140d5a9b7f1fbf09ebbe698e8f472403569",
+        "fixtures/redline/redline-revised-stories-retained-control/authored-redline.docx": "42eaa31b75f9b4ecb9cc2c6e54e4fa71b4ef161cc7836a00fbdabb25baec70ed"
+      },
+      "panels": [
+        {
+          "renderer": "Baseline",
+          "sourceSha256": "406ee6f306ededb61f30ba9319074d8d0f98d3fb0adc90537b5d4b3ef7c4d3ad",
+          "pdfSha256": "6f496d4aa4044e2c795cf738e52949b8e837df746e6573505c690a99e22801e5",
+          "pageRasterSha256": [
+            "341370f6e56fc84f4be441af11236a03591fcd2319ffc8e99ba0d60de571a267",
+            "fffb4d6231a5fe54c74fe28a7e8ecad89f1692e208d8f7b18fa6d97ac91b9a1b"
+          ],
+          "revisedTextAndStoriesOnFirstPage": true,
+          "checks": {
+            "adapter": {
+              "engine": {
+                "assembly": "Docxodus",
+                "informationalVersion": "1.0.0+2018b110bc7f11d19a1fa30cfe4a4bcfa535f8e8",
+                "name": "docxodus",
+                "runtime": "10.0.9"
+              },
+              "outputSha256": "406ee6f306ededb61f30ba9319074d8d0f98d3fb0adc90537b5d4b3ef7c4d3ad",
+              "protocol": 1,
+              "status": "ok"
+            },
+            "category": "revisions",
+            "checks": [
+              {
+                "name": "conversion",
+                "passed": true
+              },
+              {
+                "name": "readable-package",
+                "passed": true
+              },
+              {
+                "name": "markup-accepted",
+                "passed": true
+              },
+              {
+                "name": "markup-rejected",
+                "passed": true
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-retained-control/authored-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/baseline-final/redline-revised-stories-retained-control/candidate-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-retained-control/right.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "ineligible": true,
+                "name": "libreoffice-accepted",
+                "passed": null,
+                "reason": "LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory"
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-retained-control/authored-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/baseline-final/redline-revised-stories-retained-control/candidate-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-retained-control/left.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "name": "libreoffice-rejected",
+                "passed": true
+              },
+              {
+                "name": "no-new-validation-errors",
+                "new": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "default",
+                  "scope": "redline",
+                  "story": "header",
+                  "type": "section-stories",
+                  "values": [
+                    "JUNIPER SURVEY",
+                    "JUNIPER SURVEY"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "JUNIPER SURVEY",
+                  "JUNIPER SURVEY"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "default",
+                  "scope": "redline",
+                  "story": "footer",
+                  "type": "section-stories",
+                  "values": [
+                    "Coastal receipt",
+                    "Coastal receipt"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "Coastal receipt",
+                  "Coastal receipt"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "redline",
+                  "titlePg": [
+                    false,
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false,
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "accepted",
+                  "titlePg": [
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "rejected",
+                  "titlePg": [
+                    false,
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false,
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [],
+                  "scope": "accepted",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [
+                    2
+                  ],
+                  "scope": "rejected",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [
+                  2
+                ],
+                "passed": true
+              }
+            ],
+            "id": "redline-revised-stories-retained-control",
+            "issue": "JSv4/Docxodus#1555",
+            "kind": "control",
+            "operation": "compare",
+            "score": 100.0,
+            "status": "measured"
+          }
+        },
+        {
+          "renderer": "Authored",
+          "sourceSha256": "42eaa31b75f9b4ecb9cc2c6e54e4fa71b4ef161cc7836a00fbdabb25baec70ed",
+          "pdfSha256": "97365458c37fbbbb027096ab5a28bc9e113d98aa9cc37f6ee15f8f84013ac6c6",
+          "pageRasterSha256": [
+            "d1dd0cfbfe473dc7a3d1b95f4c9cbe286885409f5290113081bd2fa4a7c21aba",
+            "fffb4d6231a5fe54c74fe28a7e8ecad89f1692e208d8f7b18fa6d97ac91b9a1b"
+          ],
+          "revisedTextAndStoriesOnFirstPage": true,
+          "checks": {
+            "adapter": {
+              "engine": {
+                "name": "authored-redline"
+              },
+              "outputSha256": "42eaa31b75f9b4ecb9cc2c6e54e4fa71b4ef161cc7836a00fbdabb25baec70ed",
+              "status": "ok"
+            },
+            "category": "revisions",
+            "checks": [
+              {
+                "name": "conversion",
+                "passed": true
+              },
+              {
+                "name": "readable-package",
+                "passed": true
+              },
+              {
+                "name": "markup-accepted",
+                "passed": true
+              },
+              {
+                "name": "markup-rejected",
+                "passed": true
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-retained-control/authored-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/calibration/redline-revised-stories-retained-control/candidate-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-retained-control/right.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "ineligible": true,
+                "name": "libreoffice-accepted",
+                "passed": null,
+                "reason": "LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory"
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-retained-control/authored-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/calibration/redline-revised-stories-retained-control/candidate-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-retained-control/left.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "name": "libreoffice-rejected",
+                "passed": true
+              },
+              {
+                "name": "no-new-validation-errors",
+                "new": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "default",
+                  "scope": "redline",
+                  "story": "header",
+                  "type": "section-stories",
+                  "values": [
+                    "JUNIPER SURVEY",
+                    "JUNIPER SURVEY"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "JUNIPER SURVEY",
+                  "JUNIPER SURVEY"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "default",
+                  "scope": "redline",
+                  "story": "footer",
+                  "type": "section-stories",
+                  "values": [
+                    "Coastal receipt",
+                    "Coastal receipt"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "Coastal receipt",
+                  "Coastal receipt"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "redline",
+                  "titlePg": [
+                    false,
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false,
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "accepted",
+                  "titlePg": [
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "rejected",
+                  "titlePg": [
+                    false,
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false,
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [],
+                  "scope": "accepted",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [
+                    2
+                  ],
+                  "scope": "rejected",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [
+                  2
+                ],
+                "passed": true
+              }
+            ],
+            "id": "redline-revised-stories-retained-control",
+            "issue": "JSv4/Docxodus#1555",
+            "kind": "control",
+            "operation": "compare",
+            "score": 100.0,
+            "status": "measured"
+          }
+        },
+        {
+          "renderer": "Candidate",
+          "sourceSha256": "406ee6f306ededb61f30ba9319074d8d0f98d3fb0adc90537b5d4b3ef7c4d3ad",
+          "pdfSha256": "c7447cee52b55e88a2a3415d853f5297675b8e6d8df9c974b74b34246fc1142a",
+          "pageRasterSha256": [
+            "341370f6e56fc84f4be441af11236a03591fcd2319ffc8e99ba0d60de571a267",
+            "fffb4d6231a5fe54c74fe28a7e8ecad89f1692e208d8f7b18fa6d97ac91b9a1b"
+          ],
+          "revisedTextAndStoriesOnFirstPage": true,
+          "checks": {
+            "adapter": {
+              "engine": {
+                "assembly": "Docxodus",
+                "informationalVersion": "1.0.0+1a894a4f2c3eda04dfb673be7d8e60a27dd076ad",
+                "name": "docxodus",
+                "runtime": "10.0.9"
+              },
+              "outputSha256": "406ee6f306ededb61f30ba9319074d8d0f98d3fb0adc90537b5d4b3ef7c4d3ad",
+              "protocol": 1,
+              "status": "ok"
+            },
+            "category": "revisions",
+            "checks": [
+              {
+                "name": "conversion",
+                "passed": true
+              },
+              {
+                "name": "readable-package",
+                "passed": true
+              },
+              {
+                "name": "markup-accepted",
+                "passed": true
+              },
+              {
+                "name": "markup-rejected",
+                "passed": true
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-retained-control/authored-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/candidate/redline-revised-stories-retained-control/candidate-redline.docx",
+                    "operation": "accept",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-retained-control/right.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "ineligible": true,
+                "name": "libreoffice-accepted",
+                "passed": null,
+                "reason": "LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory"
+              },
+              {
+                "engine": {
+                  "authored": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-retained-control/authored-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "candidate": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/candidate/redline-revised-stories-retained-control/candidate-redline.docx",
+                    "operation": "reject",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 7
+                  },
+                  "expected": {
+                    "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-retained-control/left.docx",
+                    "operation": "load",
+                    "redlinesAfter": 0,
+                    "redlinesBefore": 0
+                  }
+                },
+                "name": "libreoffice-rejected",
+                "passed": true
+              },
+              {
+                "name": "no-new-validation-errors",
+                "new": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "default",
+                  "scope": "redline",
+                  "story": "header",
+                  "type": "section-stories",
+                  "values": [
+                    "JUNIPER SURVEY",
+                    "JUNIPER SURVEY"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "JUNIPER SURVEY",
+                  "JUNIPER SURVEY"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "kind": "default",
+                  "scope": "redline",
+                  "story": "footer",
+                  "type": "section-stories",
+                  "values": [
+                    "Coastal receipt",
+                    "Coastal receipt"
+                  ],
+                  "version": 1
+                },
+                "name": "assertion-section-stories",
+                "observed": [
+                  "Coastal receipt",
+                  "Coastal receipt"
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "redline",
+                  "titlePg": [
+                    false,
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false,
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "accepted",
+                  "titlePg": [
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "scope": "rejected",
+                  "titlePg": [
+                    false,
+                    false
+                  ],
+                  "type": "section-flags",
+                  "version": 1
+                },
+                "name": "assertion-section-flags",
+                "observed": [
+                  false,
+                  false
+                ],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [],
+                  "scope": "accepted",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [],
+                "passed": true
+              },
+              {
+                "declaration": {
+                  "afterParagraphs": [
+                    2
+                  ],
+                  "scope": "rejected",
+                  "type": "section-boundaries",
+                  "version": 1
+                },
+                "name": "assertion-section-boundaries",
+                "observed": [
+                  2
+                ],
+                "passed": true
+              }
+            ],
+            "id": "redline-revised-stories-retained-control",
+            "issue": "JSv4/Docxodus#1555",
+            "kind": "control",
+            "operation": "compare",
+            "score": 100.0,
+            "status": "measured"
+          }
+        }
+      ],
+      "screenshot": "redline-revised-stories-retained-control.png",
+      "screenshotSha256": "476fc688ecc50eabec019abb59092029bdabc6d346a432d92d7c8155363812b9"
+    }
+  ],
+  "validation": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "documents": {
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-default-after-first/authored-redline.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-default-after-first/left.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-default-after-first/right.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-first-page/authored-redline.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-first-page/left.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-first-page/right.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-latent-first-page/authored-redline.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-latent-first-page/left.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-latent-first-page/right.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-retained-control/authored-redline.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-retained-control/left.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-retained-control/right.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-rewrite/authored-redline.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-rewrite/left.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/fixtures/redline/redline-revised-stories-rewrite/right.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/baseline-final/redline-revised-stories-default-after-first/candidate-redline.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/baseline-final/redline-revised-stories-first-page/candidate-redline.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/baseline-final/redline-revised-stories-latent-first-page/candidate-redline.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/baseline-final/redline-revised-stories-retained-control/candidate-redline.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/baseline-final/redline-revised-stories-rewrite/candidate-redline.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/calibration/redline-revised-stories-default-after-first/candidate-redline.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/calibration/redline-revised-stories-first-page/candidate-redline.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/calibration/redline-revised-stories-latent-first-page/candidate-redline.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/calibration/redline-revised-stories-retained-control/candidate-redline.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/calibration/redline-revised-stories-rewrite/candidate-redline.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/candidate/redline-revised-stories-default-after-first/candidate-redline.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/candidate/redline-revised-stories-first-page/candidate-redline.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/candidate/redline-revised-stories-latent-first-page/candidate-redline.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/candidate/redline-revised-stories-retained-control/candidate-redline.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/bench-1555/runs/revised-stories/candidate/redline-revised-stories-rewrite/candidate-redline.docx": []
+    }
+  },
+  "composeSha256": "636ec512daa4085656c9260270912aaebdf81bfe2408dc2f96a5fa726741d89b"
+}

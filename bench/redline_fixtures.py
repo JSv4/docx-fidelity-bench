@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v32', 'version': 32}
+SUITE = {'id': 'redline-v33', 'version': 33}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -178,6 +178,9 @@ def package(path, body, styles=None, header=None, comments=None, footnotes=None,
 # declared-ineligible comparison is not applied; the run fails as unmeasured if the calibration
 # disagrees with this table in either direction.
 LIBREOFFICE_INELIGIBLE = {
+    **{'redline-revised-stories-' + shape: (('accepted', 'rejected') if shape in {'first-page', 'latent-first-page'} else ('accepted',),
+       'LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory')
+       for shape in ('rewrite', 'first-page', 'latent-first-page', 'default-after-first', 'retained-control')},
     **{'redline-retained-section-' + shape: ((endpoint,),
        'LibreOffice 25.8.7.3 retains an empty paragraph and its section/footer binding when resolving the independently authored whole-paragraph boundary replacement; independent markup endpoints and SDK checks remain mandatory')
        for shape, endpoint in (('add', 'rejected'), ('remove', 'accepted'))},
@@ -338,6 +341,7 @@ def generate():
     complete_rewrites(corpus)
     inserted_section_stories(corpus)
     retained_section_boundaries(corpus)
+    revised_stories_deleted_boundary(corpus)
     alternate_textbox_edits(corpus)
     header_textbox_redlines(corpus)
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
@@ -2038,6 +2042,64 @@ def complete_rewrites(corpus):
                        dict(body=paragraphs(old)), dict(body=paragraphs(new)),
                        dict(body=paragraphs(old, rev, 'del') + paragraphs(new, rev, 'ins')),
                        [{'type': 'revision-blocks', 'version': 1, 'scope': 'redline'}])
+
+
+def revised_stories_deleted_boundary(corpus):
+    """Revised running stories belong to inserted content before an obsolete section break."""
+    old = [
+        'Juniper workshop stores brass handles in the north cabinet.',
+        'The porter checks each parcel against the morning inventory.',
+        'Copper hinges remain packed beneath the timber shelves.',
+        'Evening deliveries arrive through the covered eastern gate.',
+        'Spare canvas sheets protect the benches during winter.',
+        'A painted notice marks the locked machinery enclosure.',
+    ]
+    new = [
+        'Coastal survey bulletin records distant tides at sunrise.',
+        'Researchers compare rainfall totals across three islands.',
+        'Weather instruments require monthly checks by trained staff.',
+        'Seasonal forecasts accompany the published harbor reports.',
+    ]
+    empty_section = SECTION.format(refs='')
+    for shape in ('rewrite', 'first-page', 'latent-first-page', 'default-after-first', 'retained-control'):
+        control, first = shape == 'retained-control', shape in {'first-page', 'latent-first-page'}
+        latent = shape == 'latent-first-page'
+        old_first = shape == 'default-after-first'
+        before_section = empty_section.replace('</w:sectPr>', ('<w:titlePg/>' if old_first else '') + '</w:sectPr>')
+        kind = 'first' if first else 'default'
+        rev = Revisions()
+        refs = ''.join(f'<w:{story}Reference w:type="{kind}" r:id="r{story}"/>' for story in ('header', 'footer'))
+        revised_section = SECTION.format(refs=refs).replace('</w:sectPr>', ('<w:titlePg/>' if first else '') + '</w:sectPr>')
+        def review_section():
+            return revised_section if old_first == first else revised_section.replace('</w:sectPr>',
+                f'<w:sectPrChange {rev.attrs(AUTHOR)}>{before_section}</w:sectPrChange></w:sectPr>')
+        extras = dict(relations_extra=[('rheader', 'header', 'header1.xml'), ('rfooter', 'footer', 'footer1.xml')],
+            content_types_extra=''.join(f'<Override PartName="/word/{story}1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.{story}+xml"/>' for story in ('header', 'footer')))
+        labels = (('header', 'hdr', 'JUNIPER SURVEY'), ('footer', 'ftr', 'Coastal receipt'))
+        def stories(tracked, blank=False):
+            return {f'word/{story}1.xml': f'<w:{tag} {NAMESPACES}>' + p('' if blank else rev.ins(t(label)) if tracked else t(label)) + f'</w:{tag}>'
+                    for story, tag, label in labels}
+        left_section = SECTION.format(refs=refs).replace('</w:sectPr>', ('<w:titlePg/>' if old_first else '') + '</w:sectPr>')
+        left_body = ''.join(p(t(text), props=left_section if i == 2 else '') for i, text in enumerate(old))
+        right_texts = ([old[0]] if control else []) + new
+        authored = (p(t(old[0])) if control else '') + ''.join(p(rev.ins(t(text)), mark=rev.mark('ins')) for text in new)
+        for i, text in enumerate(old):
+            if control and i == 0:
+                continue
+            # Paragraph-mark properties precede the section carrier in CT_PPr.
+            authored += p(rev.dele(t(text)), props='<w:rPr>' + rev.mark('del') + '</w:rPr>' + (review_section() if i == 2 else ''))
+        assertions = [{'type': 'section-stories', 'version': 1, 'scope': 'redline', 'story': story,
+                       'kind': kind, 'values': [label, label]} for story, _, label in labels]
+        assertions += [{'type': 'section-flags', 'version': 1, 'scope': scope, 'titlePg': flags}
+                       for scope, flags in [('redline', [first, first]), ('accepted', [first]), ('rejected', [old_first, old_first])]]
+        assertions += [{'type': 'section-boundaries', 'version': 1, 'scope': scope, 'afterParagraphs': indices}
+                       for scope, indices in [('accepted', []), ('rejected', [2])]]
+        corpus.compare('redline-revised-stories-' + shape, 'revisions', 'control' if control else 'reproducer',
+            'JSv4/Docxodus#1555', 'A merged section with ' + ('one retained opening paragraph' if control else 'fully rewritten body text')
+            + ' shows its inserted running stories before the deleted boundary and restores original first-page flags on rejection',
+            dict(body=left_body, section=left_section, extra_parts=stories(False, blank=not latent), **extras),
+            dict(body=''.join(p(t(text)) for text in right_texts), section=revised_section, extra_parts=stories(False), **extras),
+            dict(body=authored, section=review_section(), extra_parts=stories(not latent), **extras), assertions)
 
 
 def retained_section_boundaries(corpus):

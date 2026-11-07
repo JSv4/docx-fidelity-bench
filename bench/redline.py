@@ -26,11 +26,11 @@ from .common import ROOT, contained, digest, execute, identity, read_json, write
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
 OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'replace-text': 1, 'revision-ownership': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'section-stories': {1}, 'section-boundaries': {1}}
+ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'section-stories': {1}, 'section-boundaries': {1}, 'section-flags': {1}}
 RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
 SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}}
-CONTRACT = {'version': 20, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+CONTRACT = {'version': 21, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -43,6 +43,7 @@ CONTRACT = {'version': 20, 'view': revisions.VIEW_VERSION, 'engines': ['bench-ma
             'columnReview': 'v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry',
             'revisionOwnership': 'account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips',
             'inlineTrees': 'declared math and drawing subtrees retain structure, properties, textbox content and image bytes in both independently resolved views; v2 checks referenced running stories with part-local image relationships',
+            'sectionFlags': 'declared first-page flags match every physical section in the review and independently resolved endpoints, excluding property history and textbox stories',
             'sectionBoundaries': 'declared inline section breaks occur after the exact zero-based body paragraph indices in each independently resolved endpoint',
             'revisionText': 'declared move sources and ordinary deletions must retain their appropriate text carrier',
             'hyperlinkTargets': 'declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written'}
@@ -265,6 +266,9 @@ def validate_registry(registry=None):
                          and isinstance(a.get('afterParagraphs'), list)
                          and all(type(i) is int and i >= 0 for i in a['afterParagraphs'])
                          and a['afterParagraphs'] == sorted(set(a['afterParagraphs'])),
+                     'section-flags': lambda a: a['scope'] in {'redline', 'accepted', 'rejected'}
+                         and isinstance(a.get('titlePg'), list) and bool(a['titlePg'])
+                         and all(type(v) is bool for v in a['titlePg']),
                      'section-stories': lambda a: a['scope'] == 'redline' and a.get('story') in {'header', 'footer'}
                          and a.get('kind') in {'default', 'first', 'even'} and isinstance(a.get('values'), list)
                          and bool(a['values']) and all(isinstance(v, str) for v in a['values']),
@@ -490,6 +494,15 @@ def paragraph_spacing(package, parts, scope):
     return output
 
 
+def body_sections(element):
+    if element.tag in {revisions.w('sectPrChange'), revisions.w('txbxContent')}:
+        return
+    for child in element:
+        if child.tag == revisions.w('sectPr') and element.tag in {revisions.w('body'), revisions.w('pPr')}:
+            yield child
+        else:
+            yield from body_sections(child)
+
 def _assertion(assertion, package, resolved):
     kind, scope = assertion['type'], assertion['scope']
     parts = resolved.get(scope)
@@ -559,18 +572,15 @@ def _assertion(assertion, package, resolved):
         observed = [i for i, paragraph in enumerate(body.iter(revisions.w('p')))
                     if paragraph.find(revisions.w('pPr') + '/' + revisions.w('sectPr')) is not None]
         check.update(passed=observed == assertion['afterParagraphs'], observed=observed)
+    elif kind == 'section-flags':
+        body = (parts[package.main] if parts is not None else package.xml(package.main)).find(revisions.w('body'))
+        flags = [section.find(revisions.w('titlePg')) for section in body_sections(body)]
+        observed = [flag is not None and flag.get(revisions.w('val'), 'true') not in {'0', 'false', 'off'} for flag in flags]
+        check.update(passed=observed == assertion['titlePg'], observed=observed)
     elif kind == 'section-stories':
         body = package.xml(package.main).find(revisions.w('body'))
         observed, target = [], None
-        def sections(element):
-            if element.tag in {revisions.w('sectPrChange'), revisions.w('txbxContent')}:
-                return
-            for child in element:
-                if child.tag == revisions.w('sectPr') and element.tag in {revisions.w('body'), revisions.w('pPr')}:
-                    yield child
-                else:
-                    yield from sections(child)
-        for section in sections(body):
+        for section in body_sections(body):
             references = [ref for ref in section.findall(revisions.w(assertion['story'] + 'Reference'))
                           if ref.get(revisions.w('type'), 'default') == assertion['kind']]
             if len(references) > 1:
