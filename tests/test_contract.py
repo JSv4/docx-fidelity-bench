@@ -374,7 +374,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 860)
+        self.assertEqual(len(common.validate_registry()['cases']), 869)
 
     def test_continuous_margin_pairs_isolate_geometry_and_keep_complete_labels(self):
         import xml.etree.ElementTree as ET
@@ -710,7 +710,23 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v119')
+        self.assertEqual(registry['suite']['id'], 'core-v120')
+
+    def test_contextual_spacing_rejects_restoring_the_old_gap(self):
+        import gzip
+        cases = [c for c in common.validate_registry()['cases'] if c['id'].startswith('contextual-own-')]
+        self.assertEqual(len(cases), 9)
+        for case in cases:
+            with self.subTest(case=case['id']):
+                path = common.ROOT / 'docs/results/contextual-own-spacing' / (case['id'] + '-candidate-inspection.json.gz')
+                with gzip.open(path, 'rt') as stream:
+                    actual = json.load(stream)
+                self.assertEqual(pdf.reference_failures(case, actual, 'libreoffice'), [])
+                changed = copy.deepcopy(actual)
+                second = next(w for w in changed['words'] if w['text'] == 'OakSecond')
+                second['rect'][1] += 12
+                second['rect'][3] += 12
+                self.assertIn('assertion-marker-region', pdf.reference_failures(case, changed, 'libreoffice'))
 
     def test_authored_table_continuation_rejects_a_second_page_only_shift(self):
         import gzip

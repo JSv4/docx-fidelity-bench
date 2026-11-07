@@ -1774,6 +1774,66 @@ def authored_table_width_cases(add):
 
 
 
+def contextual_own_spacing_cases(add, cases):
+    """Original Oak paragraphs isolate each paragraph's own contextual spacing."""
+    paper = ('<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1200" '
+             'w:right="1200" w:bottom="1200" w:left="1200"/></w:sectPr>')
+    for kind, first, second, inherited, before, after, gap in [
+        ('after-first', True, False, False, 0, 12, 0),
+        ('after-both-control', True, True, False, 0, 12, 0),
+        ('after-neither-control', False, False, False, 0, 12, 12),
+        ('before-second', False, True, False, 12, 0, 0),
+        ('neighbor-wins-control', True, False, False, 6, 12, 6),
+        ('inherited-direct-off', False, None, True, 6, 12, 12),
+        ('different-style-control', True, False, False, 0, 12, 12),
+        ('drawing-first', True, False, False, 0, 12, 0),
+        ('vml-first', True, False, False, 0, 12, 0),
+    ]:
+        styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+                  '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="22"/>'
+                  '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+                  '<w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/>'
+                  '</w:pPr></w:pPrDefault></w:docDefaults>'
+                  '<w:style w:type="paragraph" w:default="1" w:styleId="Oak"><w:name w:val="Oak"/><w:pPr>'
+                  f'<w:spacing w:before="{before * 20}" w:after="{after * 20}"/>'
+                  + ('<w:contextualSpacing/>' if inherited else '') + '</w:pPr></w:style>'
+                  '<w:style w:type="paragraph" w:styleId="Other"><w:name w:val="Other"/><w:basedOn w:val="Oak"/></w:style>'
+                  '<w:style w:type="paragraph" w:styleId="End"><w:name w:val="End"/><w:pPr>'
+                  '<w:spacing w:before="0" w:after="0"/></w:pPr></w:style></w:styles>')
+        def flag(value):
+            return '' if value is None else f'<w:contextualSpacing w:val="{int(value)}"/>'
+        labels = ['OakFirst', 'OakSecond', 'OakEnd']
+        content = (para(labels[0], '<w:spacing w:before="0"/>' + flag(first))
+                   + para(labels[1], '<w:pStyle w:val="' + ('Other' if kind == 'different-style-control' else 'Oak') + '"/>' + flag(second))
+                   + para(labels[2], '<w:pStyle w:val="End"/>'))
+        box = kind in ('drawing-first', 'vml-first')
+        top = 100 if box else 60
+        if kind == 'vml-first':
+            content = para(runs='<w:r><w:pict><v:shape id="OakBox" stroked="f" filled="f" '
+                'style="position:absolute;margin-left:60pt;margin-top:100pt;width:200pt;height:140pt;'
+                'mso-position-horizontal-relative:page;mso-position-vertical-relative:page">'
+                '<v:textbox inset="0,0,0,0"><w:txbxContent>' + content + '</w:txbxContent></v:textbox></v:shape></w:pict></w:r>')
+        elif box:
+            content = para(runs='<w:r><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" '
+                'simplePos="0" relativeHeight="1" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1">'
+                '<wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="page"><wp:posOffset>762000</wp:posOffset></wp:positionH>'
+                '<wp:positionV relativeFrom="page"><wp:posOffset>1270000</wp:posOffset></wp:positionV>'
+                '<wp:extent cx="2540000" cy="1778000"/><wp:wrapNone/><wp:docPr id="1" name="Oak Box"/>'
+                '<a:graphic><a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+                '<wps:wsp><wps:cNvSpPr txBox="1"/><wps:spPr><a:prstGeom prst="rect"><a:avLst/></a:prstGeom>'
+                '<a:noFill/><a:ln><a:noFill/></a:ln></wps:spPr><wps:txbx><w:txbxContent>' + content +
+                '</w:txbxContent></wps:txbx><wps:bodyPr lIns="0" tIns="0" rIns="0" bIns="0">'
+                '<a:noAutofit/></wps:bodyPr></wps:wsp></a:graphicData></a:graphic></wp:anchor></w:drawing></w:r>')
+        positions = [top, top + 16 + gap, top + 32 + gap + after]
+        add('contextual-own-' + kind, 'paragraphs',
+            'Oak contextual spacing: ' + kind + ' (part of Docxodus #1553)', labels, content, sect=paper,
+            styles_xml=styles, namespaces_extra=' xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"',
+            assertions=[dict(type='marker-region', marker=label, occurrence=1, page=1, rect=[60, y, 260, y + 16])
+                        for label, y in zip(labels, positions)])
+        cases[-1]['pdfCompanion'] = dict(profile=dict(review='final', comments='hidden'),
+                                        pageSizePt=[612, 792], requiredTokens=dict(Counter(labels)), exactInventory=True)
+
+
 def resizing_offpaper_cases(add, cases):
     """Original Fir labels: resizing does not relocate a page-offset text box."""
     styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
@@ -5251,9 +5311,10 @@ def generate():
     oversized_keep_next_cases(add)
     markup_paper_clip_cases(add, cases)
     resizing_offpaper_cases(add, cases)
+    contextual_own_spacing_cases(add, cases)
     custom_path_cases(add)
     plain_math_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v119', 'version': 119, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v120', 'version': 120, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
