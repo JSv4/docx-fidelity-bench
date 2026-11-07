@@ -1599,6 +1599,45 @@ def export_story_context_cases(add, cases):
                           'page': 1, 'rect': [138 if square else 45, 35, 400 if square else 170, 85]}])
 
 
+def table_remainder_cases(add):
+    """Original Alder ledger: available space precedes splittable rows or cell paragraphs."""
+    pitch = '<w:keepLines w:val="0"/><w:widowControl w:val="0"/><w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/>'
+    paper = '<w:sectPr><w:pgSz w:w="7200" w:h="7440"/><w:pgMar w:top="720" w:right="720" w:bottom="720" w:left="720" w:header="360" w:footer="360"/></w:sectPr>'
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="22"/>'
+              '</w:rPr></w:rPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" '
+              'w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
+    for shape in ('rows', 'oversized', 'cell', 'kept-control', 'cell-cant-split-control'):
+        count = 30 if shape == 'oversized' else 12
+        lead = [f'AlderLead{i:02d}' for i in range(1, 11)]
+        labels = [f'AlderEntry{i:02d}' for i in range(1, count + 1)]
+        paragraphs = [para(label, ('<w:keepNext/>' if shape == 'kept-control' and i < count - 1 else '') + pitch)
+                      for i, label in enumerate(labels)]
+        def row(content):
+            keep = '<w:trPr><w:cantSplit/></w:trPr>' if shape == 'cell-cant-split-control' else ''
+            return '<w:tr>' + keep + '<w:tc><w:tcPr><w:tcW w:w="5760" w:type="dxa"/></w:tcPr>' + content + '</w:tc></w:tr>'
+        rows = row(''.join(paragraphs)) if shape.startswith('cell') else ''.join(map(row, paragraphs))
+        body = ''.join(para(label, pitch) for label in lead)
+        body += ('<w:tbl><w:tblPr><w:tblW w:w="5760" w:type="dxa"/><w:tblLayout w:type="fixed"/>'
+                 '<w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/>'
+                 '<w:bottom w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar>'
+                 '</w:tblPr><w:tblGrid><w:gridCol w:w="5760"/></w:tblGrid>' + rows + '</w:tbl>')
+        body += para('AlderComplete', pitch)
+        # Leave 12pt after eight rows, avoiding exact-fit rounding while requiring the
+        # full useful prefix. A fresh page holds eighteen rows with the same margin.
+        positions = [(labels[0], 2 if shape.endswith('control') else 1),
+                     (labels[-1], 3 if shape == 'oversized' else 2)]
+        if not shape.endswith('control'):
+            positions += [(labels[7], 1), (labels[8], 2)]
+        if shape == 'oversized':
+            positions += [(labels[25], 2), (labels[26], 3)]
+        add('table-page-remainder-' + shape, 'tables',
+            'Alder ledger ' + shape + ': split into the available page band; explicit keep controls move intact (Docxodus #1569)',
+            lead + labels + ['AlderComplete'], body, sect=paper, styles_xml=styles,
+            assertions=[dict(type='marker-region', marker=marker, occurrence=1, page=page, rect=[36, 36, 324, 336])
+                        for marker, page in positions])
+
+
 def generate():
     cases = []
     def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT, literal_parts=None, relations_extra=(), content_types_extra=''):
@@ -4579,7 +4618,8 @@ def generate():
                                  60 if mode == 15 and align == 'both' else 75], adjudicated='word')],
                 extra_parts={'word/settings.xml': f'<w:settings xmlns:w="{W}"><w:compat><w:compatSetting '
                     f'w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="{mode}"/></w:compat></w:settings>'})
-    registry = {'schema': 1, 'suite': {'id': 'core-v105', 'version': 105, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    table_remainder_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v106', 'version': 106, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
