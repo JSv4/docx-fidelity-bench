@@ -52,6 +52,8 @@ try {
     try {
       const delivered = await renderDocxArtifacts(new Uint8Array(bytes), {
         browser, outputs: ['pdf'], reviewProfile: entry.profile.review, commentProfile: entry.profile.comments,
+        ...Object.fromEntries(['markupPresentation', 'commentColumnPlacement', 'markupVisibility']
+          .filter(key => entry.profile[key] !== undefined).map(key => [key, entry.profile[key]])),
         timeoutMs: 120000, strictFonts, fontDirectories: environment.fontDirectories,
       });
       await writeFile(resolve(folder, 'candidate.pdf'), delivered.pdf);

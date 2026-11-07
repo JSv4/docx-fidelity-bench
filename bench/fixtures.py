@@ -1774,6 +1774,65 @@ def authored_table_width_cases(add):
 
 
 
+def markup_paper_clip_cases(add, cases):
+    """Original Elm labels distinguish source-paper clipping from balloon-sheet geometry."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="22"/>'
+              '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+              '<w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/>'
+              '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    paper = ('<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1200" '
+             'w:right="1200" w:bottom="1200" w:left="1200"/></w:sectPr>')
+    for kind, x, y, paragraph, formatting in [
+        ('right', 650, 120, False, True), ('left', -190, 120, False, True),
+        ('paragraph-foot', 0, 780, True, True), ('partial-foot', 60, 766, False, True),
+        ('visible-control', 60, 240, False, True), ('right-control', 650, 120, False, False),
+        ('paragraph-foot-control', 0, 780, True, False),
+    ]:
+        partial = kind == 'partial-foot'
+        labels = ['ElmWindowOne', 'ElmWindowTwo', 'ElmWindowThree']
+        box_text = ''.join(para(label, '<w:spacing w:before="320"/>' if partial and i == 1 else '')
+                           for i, label in enumerate(labels))
+        cx, cy = 150 * 12700, 80 * 12700
+        drawing = ('<w:r><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" '
+                   'simplePos="0" relativeHeight="2" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1">'
+                   '<wp:simplePos x="0" y="0"/>'
+                   f'<wp:positionH relativeFrom="{"column" if paragraph else "page"}"><wp:posOffset>{x * 12700}</wp:posOffset></wp:positionH>'
+                   f'<wp:positionV relativeFrom="{"paragraph" if paragraph else "page"}"><wp:posOffset>{y * 12700}</wp:posOffset></wp:positionV>'
+                   f'<wp:extent cx="{cx}" cy="{cy}"/><wp:wrapNone/><wp:docPr id="21" name="Elm window"/>'
+                   '<wp:cNvGraphicFramePr/><a:graphic><a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+                   '<wps:wsp xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"><wps:cNvSpPr txBox="1"/>'
+                   f'<wps:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="{cx}" cy="{cy}"/></a:xfrm>'
+                   '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:noFill/><a:ln><a:noFill/></a:ln></wps:spPr>'
+                   '<wps:txbx><w:txbxContent>' + box_text + '</w:txbxContent></wps:txbx>'
+                   '<wps:bodyPr lIns="0" tIns="0" rIns="0" bIns="0"/>'
+                   '</wps:wsp></a:graphicData></a:graphic></wp:anchor></w:drawing></w:r>')
+        props = '<w:jc w:val="center"/>'
+        if formatting:
+            props += ('<w:pPrChange w:id="7" w:author="Elm Editor" w:date="2026-09-17T08:00:00Z">'
+                      '<w:pPr><w:jc w:val="left"/></w:pPr></w:pPrChange>')
+        visible = labels if kind == 'visible-control' else labels[:1] if partial else []
+        tokens = ['ElmOpening', 'ElmHost', 'ElmClosing'] + visible
+        body = para('ElmOpening') + para(runs=run('ElmHost') + drawing) + para('ElmClosing', props)
+        assertions = [dict(type='marker-region', marker=label, occurrence=1, page=1,
+                           rect=[60, 60 + i * 16, 552, 76 + i * 16])
+                      for i, label in enumerate(tokens[:3])]
+        assertions += [dict(type='marker-region', marker=label, occurrence=1, page=1,
+                            rect=[60, y + i * 16, 210, y + (i + 1) * 16]) for i, label in enumerate(visible)]
+        add('markup-paper-clip-' + kind, 'paragraphs',
+            'Elm authored textbox paper boundary: ' + kind + ' (part of Docxodus #1558)',
+            tokens, body, sect=paper, styles_xml=styles, assertions=assertions)
+        if formatting:
+            cases[-1]['profile']['review'] = 'markup'
+        companion = dict(profile=dict(review='markup', comments='margin', markupPresentation='word',
+                                     commentColumnPlacement='balloons'), pageSizePt=[612, 792],
+                         requiredTokens=dict(Counter(tokens + (['Formatted:'] if formatting else []))))
+        hidden = [label for label in labels if label not in visible]
+        if hidden:
+            companion['forbiddenTokens'] = hidden
+        cases[-1]['pdfCompanion'] = companion
+
+
 def oversized_keep_next_cases(add):
     """Original Rowan inventories exercise an impossible keep without sharing renderer fixtures."""
     styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
@@ -5015,7 +5074,8 @@ def generate():
     preset_polygon_cases(add)
     vml_line_cases(add)
     oversized_keep_next_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v115', 'version': 115, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    markup_paper_clip_cases(add, cases)
+    registry = {'schema': 1, 'suite': {'id': 'core-v116', 'version': 116, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
