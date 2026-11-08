@@ -374,7 +374,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 960)
+        self.assertEqual(len(common.validate_registry()['cases']), 972)
 
     def test_group_paper_exclusions_follow_literal_source_coordinates(self):
         import runpy
@@ -763,7 +763,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v130')
+        self.assertEqual(registry['suite']['id'], 'core-v131')
 
     def test_paragraph_text_rejects_wrong_lines_and_missing_words(self):
         import gzip

@@ -593,3 +593,8 @@ Cedar prose. No product fixture, external document, image or font program is imp
 sheets show only these independently authored inputs and local renders of their redlines.
 
 The sixteen paragraph-text independence cases for Docxodus #1550/#1562 contain original Hazel prose and literal OOXML authored in `bench/fixtures.py`. No renderer fixture, external document, image or font program is imported. Native and public-renderer review images show only these authored inputs.
+
+The twelve minimum-owner cases for Docxodus #1566 contain original Rue labels and literal
+OOXML authored in `bench/fixtures.py`. No renderer fixture, external document, image or
+font program is imported. Labeled comparison sheets show unchanged page rasters from
+these authored inputs, with native and public-renderer outputs.

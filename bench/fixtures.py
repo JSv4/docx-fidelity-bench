@@ -1902,6 +1902,50 @@ def natural_minimum_line_cases(add, cases):
                 pageSizePt=[612, 792], requiredTokens=dict(Counter(labels)), exactInventory=True)
 
 
+def minimum_owner_cases(add, cases):
+    """Original Rue labels isolate natural minimums in cell and numbering owners."""
+    pitch = 2355 / 2048 * 20
+    per_page = math.floor(648 / pitch)
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+        '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="40"/>'
+        '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl w:val="0"/>'
+        '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    for owner in ('cell', 'list-tab', 'list-nothing'):
+        numbering = None if owner == 'cell' else (f'<w:numbering xmlns:w="{W}">'
+            '<w:abstractNum w:abstractNumId="0"><w:lvl w:ilvl="0"><w:start w:val="1"/>'
+            '<w:numFmt w:val="decimal"/><w:suff w:val="' + owner.removeprefix('list-') + '"/>'
+            '<w:lvlText w:val="%1."/><w:lvlJc w:val="left"/><w:pPr><w:ind w:left="720" w:hanging="360"/></w:pPr>'
+            '<w:rPr><w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="40"/></w:rPr>'
+            '</w:lvl></w:abstractNum><w:num w:numId="1"><w:abstractNumId w:val="0"/></w:num></w:numbering>')
+        for count in (18, 64):
+            labels = [f'Rue{i:03d}' for i in range(1, count + 1)]
+            for kind, rule, line in [('natural', 'auto', 240), ('minimum', 'atLeast', 320)]:
+                props = '' if owner == 'cell' else '<w:numPr><w:ilvl w:val="0"/><w:numId w:val="1"/></w:numPr>'
+                props += f'<w:spacing w:before="0" w:after="0" w:line="{line}" w:lineRule="{rule}"/>'
+                if owner != 'cell':
+                    props += '<w:ind w:right="6720"/>'
+                body = para(('' if owner == 'cell' else ' ') + ' '.join(labels), props)
+                if owner == 'cell':
+                    body = ('<w:tbl><w:tblPr><w:tblW w:w="1920" w:type="dxa"/><w:tblLayout w:type="fixed"/>'
+                        '<w:tblCellMar>' + ''.join(f'<w:{side} w:w="0" w:type="dxa"/>' for side in ('top', 'left', 'bottom', 'right'))
+                        + '</w:tblCellMar></w:tblPr><w:tblGrid><w:gridCol w:w="1920"/></w:tblGrid><w:tr><w:tc>'
+                        '<w:tcPr><w:tcW w:w="1920" w:type="dxa"/></w:tcPr>' + body + '</w:tc></w:tr></w:tbl>')
+                tokens = labels if owner == 'cell' else ['1.'] + labels
+                assertions = [dict(type='marker-region', marker=label, occurrence=1,
+                    page=index // per_page + 1, rect=[72, 72 + index % per_page * pitch,
+                        204, 72 + (index % per_page + 1) * pitch], tolerancePt=.5)
+                    for index, label in enumerate(labels)]
+                add(f'minimum-owner-{owner}-{count}-{kind}', 'paragraphs',
+                    f'Rue {count} lines in {owner} with {kind} spacing (Docxodus #1566)', tokens, body,
+                    styles_xml=styles, numbering_xml=numbering,
+                    sect='<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" '
+                        'w:right="1440" w:bottom="1440" w:left="1440"/></w:sectPr>', assertions=assertions)
+                for assertion in cases[-1]['assertions']:
+                    assertion['tolerancePt'] = .5
+                cases[-1]['pdfCompanion'] = dict(profile=dict(review='final', comments='hidden'),
+                    pageSizePt=[612, 792], requiredTokens=dict(Counter(tokens)), exactInventory=True)
+
+
 def space_run_line_cases(add, cases):
     """Original Clover text preserves line metrics while a larger space keeps its advance."""
     labels = [f'Clover{i:02d}' for i in range(1, 65)]
@@ -5762,13 +5806,14 @@ def generate():
     empty_run_line_cases(add, cases)
     space_run_line_cases(add, cases)
     natural_minimum_line_cases(add, cases)
+    minimum_owner_cases(add, cases)
     character_width_cases(add, cases)
     paragraph_text_independence_cases(add, cases)
     grouped_paper_placement_cases(add, cases)
     floating_paragraph_cases(add, cases)
     custom_path_cases(add)
     plain_math_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v130', 'version': 130, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v131', 'version': 131, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
