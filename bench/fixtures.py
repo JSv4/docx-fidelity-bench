@@ -1836,6 +1836,43 @@ def paragraph_text_independence_cases(add, cases):
             pageSizePt=[612, 792], requiredTokens=cases[-1]['tokens'], exactInventory=True)
 
 
+def empty_run_line_cases(add, cases):
+    """Original Mallow labels retain their line slots when an empty larger run is added."""
+    labels = [f'Mallow{i:02d}' for i in range(1, 17)]
+    for multiple in (1, 2):
+        for position in ('control', 'leading', 'middle', 'trailing'):
+            content = []
+            at = {'leading': 0, 'middle': 8, 'trailing': 16}.get(position)
+            for index in range(17):
+                if index == at:
+                    content.append(run('', '<w:sz w:val="28"/>'))
+                if index < 16:
+                    content.append(run(labels[index]))
+                    if index < 15:
+                        content.append('<w:r><w:br/></w:r>')
+            styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+                '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="24"/>'
+                '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl w:val="0"/>'
+                f'<w:spacing w:before="0" w:after="0" w:line="{240 * multiple}" w:lineRule="auto"/>'
+                '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+            step = 2355 / 2048 * 12 * multiple
+            assertions = [dict(type='marker-region', marker=label, occurrence=1, page=1,
+                rect=[72, 72 + index * step, 540, 72 + (index + 1) * step], tolerancePt=0.5)
+                for index, label in enumerate(labels)]
+            add(f'empty-run-{multiple}-{position}', 'paragraphs',
+                f'Mallow {multiple}x spacing with {position} empty run (Docxodus #1565)', labels,
+                para(runs=''.join(content)), styles_xml=styles,
+                sect='<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" '
+                    'w:right="1440" w:bottom="1440" w:left="1440"/></w:sectPr>', assertions=assertions)
+            # Chromium's explicit-break glyph origins round to 0.75pt; unchanged
+            # controls overrun a natural line slot by at most 0.352pt. Half a point
+            # covers that quantization and native sub-twip pitch rounding.
+            for assertion in cases[-1]['assertions']:
+                assertion['tolerancePt'] = 0.5
+            cases[-1]['pdfCompanion'] = dict(profile=dict(review='final', comments='hidden'),
+                pageSizePt=[612, 792], requiredTokens=dict(Counter(labels)), exactInventory=True)
+
+
 def single_line_grid_cases(add, cases):
     """Original Beech labels occupy declared whole grid slots, without fixing glyph baselines."""
     for kind, grid, inherited_off, direct in [
@@ -5608,12 +5645,13 @@ def generate():
     contextual_own_spacing_cases(add, cases)
     automatic_body_spacing_cases(add, cases)
     single_line_grid_cases(add, cases)
+    empty_run_line_cases(add, cases)
     paragraph_text_independence_cases(add, cases)
     grouped_paper_placement_cases(add, cases)
     floating_paragraph_cases(add, cases)
     custom_path_cases(add)
     plain_math_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v125', 'version': 125, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v126', 'version': 126, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
