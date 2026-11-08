@@ -7,6 +7,11 @@ controls retain natural wrapping. See [native comparisons and diagnostic limits]
 
 # DOCX fidelity bench
 
+`core-v136` adds six short/continued footnote percentage-width cases and two independent
+footer-rounding controls for Docxodus #1564. All 1004 prior inputs are unchanged.
+The long 100% note retains its existing pitch diagnostics; see
+[the labeled comparisons and limits](docs/results/footnote-character-width/README.md).
+
 `core-v102` adds six original paragraph-fragmentation cases for Docxodus #1521. The tracked/textbox
 matrix and four-page controls pin every line's page and region. All 738 previous inputs are unchanged.
 See [all six labeled comparisons and diagnostic limits](docs/results/paragraph-fragmentation/README.md).
