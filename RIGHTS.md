@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The eight late-wrapped-paragraph cases for Docxodus #1558 extend the original Chive
+OOXML generator with later source positions, a right-edge picture and a fitting prefix.
+No product fixture, helper, document, image or font program is imported. The retained
+comparison also includes the two unchanged leading-picture controls.
+
 The six character-width cases for Docxodus #1564 contain original Sorrel labels and
 literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, document,
 image or font program is imported. Liberation Mono is separately provisioned.
