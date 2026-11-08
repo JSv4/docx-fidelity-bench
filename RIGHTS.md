@@ -1,5 +1,9 @@
 # Authorship and artifact rights
 
+The six character-width cases for Docxodus #1564 contain original Sorrel labels and
+literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, document,
+image or font program is imported. Liberation Mono is separately provisioned.
+
 The eight natural-minimum cases for Docxodus #1566 contain original Oxlip labels and
 literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, document,
 image or font program is imported. Review sheets show these original inputs rendered
