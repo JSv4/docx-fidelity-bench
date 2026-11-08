@@ -1836,6 +1836,42 @@ def paragraph_text_independence_cases(add, cases):
             pageSizePt=[612, 792], requiredTokens=cases[-1]['tokens'], exactInventory=True)
 
 
+def character_width_cases(add, cases):
+    """Original Sorrel labels isolate percentage scaling at independent font-unit boundaries."""
+    advance = 1229 / 2048 * 12
+    pitch = 2320 / 2048 * 12
+    per_page = math.floor(648 / pitch)
+    for count in (12, 120):
+        labels = [f'Sorrel{i:03d}' for i in range(1, count + 1)]
+        for percent in (80, 100, 150):
+            scale = percent / 100
+            per_line = math.floor((180 + advance * scale) / (10 * advance * scale))
+            assertions = []
+            for index, label in enumerate(labels):
+                line = index // per_line
+                x = 72 + index % per_line * 10 * advance * scale
+                y = 72 + line % per_page * pitch
+                assertions.append(dict(type='marker-region', marker=label, occurrence=1,
+                    page=line // per_page + 1, rect=[x, y, x + 9 * advance * scale, y + pitch]))
+            styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+                '<w:rFonts w:ascii="Liberation Mono" w:hAnsi="Liberation Mono"/><w:sz w:val="24"/>'
+                '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl w:val="0"/>'
+                '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+            add(f'character-width-{count}-{percent}', 'paragraphs',
+                f'Sorrel {count} words at {percent}% character width (Docxodus #1564)', labels,
+                para(props='<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>'
+                    '<w:ind w:right="5760"/>', runs=run(' '.join(labels), f'<w:w w:val="{percent}"/>')),
+                styles_xml=styles, font='Liberation Mono',
+                sect='<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" '
+                    'w:right="1440" w:bottom="1440" w:left="1440"/></w:sectPr>', assertions=assertions)
+            # Shared physical tolerance for raster-origin quantization, frozen
+            # before either renderer is captured; horizontal errors are 13pt+.
+            for assertion in cases[-1]['assertions']:
+                assertion['tolerancePt'] = 0.5
+            cases[-1]['pdfCompanion'] = dict(profile=dict(review='final', comments='hidden'),
+                pageSizePt=[612, 792], requiredTokens=dict(Counter(labels)), exactInventory=True)
+
+
 def natural_minimum_line_cases(add, cases):
     """Original Oxlip words wrap one per line in a narrow, uniform body paragraph."""
     for count in (18, 64):
@@ -5677,12 +5713,13 @@ def generate():
     single_line_grid_cases(add, cases)
     empty_run_line_cases(add, cases)
     natural_minimum_line_cases(add, cases)
+    character_width_cases(add, cases)
     paragraph_text_independence_cases(add, cases)
     grouped_paper_placement_cases(add, cases)
     floating_paragraph_cases(add, cases)
     custom_path_cases(add)
     plain_math_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v127', 'version': 127, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v128', 'version': 128, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
