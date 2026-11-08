@@ -1902,6 +1902,45 @@ def natural_minimum_line_cases(add, cases):
                 pageSizePt=[612, 792], requiredTokens=dict(Counter(labels)), exactInventory=True)
 
 
+def space_run_line_cases(add, cases):
+    """Original Clover text preserves line metrics while a larger space keeps its advance."""
+    labels = [f'Clover{i:02d}' for i in range(1, 65)]
+    text_props = '<w:sz w:val="20"/>'
+    for multiple in (1, 2):
+        for position in ('control', 'leading', 'middle', 'trailing'):
+            content = []
+            at = {'leading': 0, 'middle': 31, 'trailing': 63}.get(position)
+            for index, label in enumerate(labels):
+                content.append(run(label, text_props))
+                content.append(run(' ', '<w:sz w:val="24"/>' if index == at else text_props))
+                content.append(run('settled.', text_props))
+                if index < len(labels) - 1:
+                    content.append('<w:r><w:rPr>' + text_props + '</w:rPr><w:br/></w:r>')
+            styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+                '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="24"/>'
+                '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl w:val="0"/>'
+                f'<w:spacing w:before="0" w:after="0" w:line="{240 * multiple}" w:lineRule="auto"/>'
+                '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+            step = 2355 / 2048 * 10 * multiple
+            per_page = math.floor(648 / step)
+            assertions = [dict(type='marker-region', marker=label, occurrence=1, page=index // per_page + 1,
+                rect=[72, 72 + index % per_page * step, 540, 72 + (index % per_page + 1) * step])
+                for index, label in enumerate(labels)]
+            tokens = labels + ['settled.'] * len(labels)
+            add(f'space-run-{multiple}-{position}', 'paragraphs',
+                f'Clover {multiple}x spacing with a larger space on the {position} line (Docxodus #1565)', tokens,
+                para(runs=''.join(content)), styles_xml=styles,
+                sect='<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" '
+                    'w:right="1440" w:bottom="1440" w:left="1440"/></w:sectPr>', assertions=assertions)
+            for assertion in cases[-1]['assertions']:
+                assertion['tolerancePt'] = 3.5
+            # Native10pt control advances11.55pt versus unrounded11.499pt.
+            # Retained calibration bounds the cumulative per-page slot difference;
+            # separate pitch, first-baseline and horizontal-advance checks stay strict.
+            cases[-1]['pdfCompanion'] = dict(profile=dict(review='final', comments='hidden'),
+                pageSizePt=[612, 792], requiredTokens=dict(Counter(tokens)), exactInventory=True)
+
+
 def empty_run_line_cases(add, cases):
     """Original Mallow labels retain their line slots when an empty larger run is added."""
     labels = [f'Mallow{i:02d}' for i in range(1, 17)]
@@ -5721,6 +5760,7 @@ def generate():
     automatic_body_spacing_cases(add, cases)
     single_line_grid_cases(add, cases)
     empty_run_line_cases(add, cases)
+    space_run_line_cases(add, cases)
     natural_minimum_line_cases(add, cases)
     character_width_cases(add, cases)
     paragraph_text_independence_cases(add, cases)
@@ -5728,7 +5768,7 @@ def generate():
     floating_paragraph_cases(add, cases)
     custom_path_cases(add)
     plain_math_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v129', 'version': 129, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v130', 'version': 130, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
