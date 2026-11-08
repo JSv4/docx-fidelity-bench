@@ -2105,7 +2105,12 @@ def floating_paragraph_cases(add, cases):
     variants += [('multiple', 'none', [0, 1, 30, 78], 0), ('plain-control', 'none', [], 0)]
     variants += [(wrap + ('-prefix' if prefix else '-leading'), wrap, [0], prefix)
                  for wrap in ('square', 'tight') for prefix in (0, 24)]
-    for kind, wrap, positions, prefix in variants:
+    late_variants = [(f'square-after-{n}', 'square', [n], 0) for n in (1, 28, 29, 30, 78)]
+    late_variants += [('tight-after-30', 'tight', [30], 0), ('square-right-after-30', 'square', [30], 0),
+                      ('square-after-1-prefix', 'square', [1], 24)]
+    for kind, wrap, positions, prefix in variants + late_variants:
+        late = (kind, wrap, positions, prefix) in late_variants
+        right_edge = 'right' in kind
         def drawing(number):
             wrapping = ('<wp:wrapNone/>' if wrap == 'none' else '<wp:wrapSquare wrapText="bothSides"/>'
                 if wrap == 'square' else '<wp:wrapTight wrapText="bothSides"><wp:wrapPolygon edited="0">'
@@ -2113,8 +2118,9 @@ def floating_paragraph_cases(add, cases):
                 '<wp:lineTo x="0" y="21600"/><wp:lineTo x="0" y="0"/></wp:wrapPolygon></wp:wrapTight>')
             return ('<w:r><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" '
                 'relativeHeight="1" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1">'
-                '<wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="column"><wp:posOffset>'
-                + str((180 if kind == 'multiple' and number == 2 else 240) * 12700 if wrap == 'none' else 0) + '</wp:posOffset></wp:positionH>'
+                '<wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="column">'
+                + ('<wp:align>right</wp:align>' if right_edge else '<wp:posOffset>'
+                   + str((180 if kind == 'multiple' and number == 2 else 240) * 12700 if wrap == 'none' else 0) + '</wp:posOffset>') + '</wp:positionH>'
                 '<wp:positionV relativeFrom="paragraph"><wp:posOffset>0</wp:posOffset></wp:positionV>'
                 '<wp:extent cx="609600" cy="609600"/>' + wrapping + f'<wp:docPr id="{number}" name="Chive tile {number}"/>'
                 '<a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">'
@@ -2135,14 +2141,17 @@ def floating_paragraph_cases(add, cases):
         assertions = []
         for index, label in enumerate(lead + labels + ['ChiveComplete']):
             line = index - prefix
-            left = 84 if wrap != 'none' and 0 <= line < 3 else 36
-            right = 83 if wrap != 'none' and line == 3 else 384
+            picture_page = (prefix + positions[0]) // 29 if positions else -1
+            wrap_line = index - max(prefix, picture_page * 29) if index // 29 == picture_page else -1
+            if not late: wrap_line = line
+            left = 84 if wrap != 'none' and not right_edge and 0 <= wrap_line < 3 else 36
+            right = 83 if wrap != 'none' and not right_edge and wrap_line == 3 else 384
             assertions.append(dict(type='marker-region', marker=label, occurrence=1, page=index // 29 + 1,
                 rect=[left, 36 + index % 29 * 18, right, 54 + index % 29 * 18]))
         image_pages = [min(3, n // 29 + 1) for n in positions]
         assertions += [dict(type='color-reference-geometry', version=1, page=page, rgb=[38, 102, 144],
             tolerancePt=1, coverageTolerance=0.04) for page in sorted(set(image_pages))]
-        add('floating-paragraph-' + kind, 'images',
+        add(('late-wrapped-paragraph-' if late else 'floating-paragraph-') + kind, 'images',
             'Chive floating picture source ownership: ' + kind + ' (part of Docxodus #1558)',
             lead + [label + ' recorded.' for label in labels] + ['ChiveComplete'], body,
             sect=paper, styles_xml=styles, assertions=assertions,
@@ -5719,7 +5728,7 @@ def generate():
     floating_paragraph_cases(add, cases)
     custom_path_cases(add)
     plain_math_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v128', 'version': 128, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v129', 'version': 129, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
