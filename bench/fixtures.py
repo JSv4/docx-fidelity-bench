@@ -1880,6 +1880,46 @@ def character_width_cases(add, cases, cell=False):
 
 
 
+
+def footnote_character_width_cases(add, cases):
+    """Original Sorrel note continuations and independent footer rounding controls."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+        '<w:rFonts w:ascii="Liberation Mono" w:hAnsi="Liberation Mono"/><w:sz w:val="24"/>'
+        '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl w:val="0"/>'
+        '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>'
+        '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    variants = [('footnote', count, percent, 0) for count in (12, 400) for percent in (80, 100, 150)]
+    variants += [('footer', 12, 80, count) for count in (0, 40)]
+    for owner, count, percent, body_count in variants:
+        labels = [f'Sorrel{i:03d}' for i in range(1, count + 1)]
+        paragraph = para(runs=run(' '.join(labels), f'<w:w w:val="{percent}"/>'))
+        if owner == 'footnote':
+            body = para(runs=run('HarborCitation') + '<w:r><w:footnoteReference w:id="1"/></w:r>')
+            tokens = ['HarborCitation', '1', '1'] + labels
+            options = dict(notes=('footnote', ''),
+                notes_xml=para(runs='<w:r><w:footnoteRef/></w:r>') + paragraph)
+            case_id = f'footnote-character-width-{count}-{percent}'
+            reference = ''
+        else:
+            body_labels = [f'Harbor{i:03d}' for i in range(body_count + 1)]
+            body = ''.join(para(runs=run(label,
+                '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/>')) for label in body_labels)
+            tokens = body_labels + labels
+            options = dict(story=('footer', paragraph))
+            case_id = f'story-drift-footer-{body_count}'
+            reference = '<w:footerReference w:type="default" r:id="rStory"/>'
+        add(case_id, 'notes' if owner == 'footnote' else 'paragraphs',
+            f'Sorrel {owner} {count} words at {percent}% with {body_count} preceding body lines (Docxodus #1564)',
+            tokens, body, styles_xml=styles, font='Liberation Mono',
+            sect='<w:sectPr>' + reference + '<w:pgSz w:w="12240" w:h="15840"/>'
+                '<w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" '
+                'w:header="720" w:footer="720"/></w:sectPr>', **options)
+        if owner == 'footer':
+            cases[-1]['fonts'].append('Liberation Serif')
+        cases[-1]['pdfCompanion'] = dict(profile=dict(review='final', comments='hidden'),
+            pageSizePt=[612, 792], requiredTokens=cases[-1]['tokens'], exactInventory=True)
+
+
 def running_character_width_cases(add, cases):
     """Unchanged Sorrel paragraphs repeat across inherited running stories and margin widths."""
     labels = [f'Sorrel{i:03d}' for i in range(1, 13)]
@@ -5898,12 +5938,13 @@ def generate():
     character_width_cases(add, cases)
     character_width_cases(add, cases, cell=True)
     running_character_width_cases(add, cases)
+    footnote_character_width_cases(add, cases)
     paragraph_text_independence_cases(add, cases)
     grouped_paper_placement_cases(add, cases)
     floating_paragraph_cases(add, cases)
     custom_path_cases(add)
     plain_math_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v135', 'version': 135, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v136', 'version': 136, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

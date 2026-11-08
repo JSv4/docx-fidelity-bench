@@ -1,3 +1,8 @@
+The eight footnote-width and footer-rounding cases extend this repository’s original
+Sorrel labels with literal OOXML and Harbor body labels in `bench/fixtures.py`. No
+product fixture, helper, document, image or font program is imported. Liberation
+Mono and Serif are separately provisioned. Review sheets show the original inputs.
+
 The four running-story picture cases extend the original Sorrel paragraphs with
 justification and the independently generated diamond from `bench/fixtures.py`.
 No renderer fixture, image, helper or font program is imported.
