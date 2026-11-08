@@ -598,3 +598,5 @@ The twelve minimum-owner cases for Docxodus #1566 contain original Rue labels an
 OOXML authored in `bench/fixtures.py`. No renderer fixture, external document, image or
 font program is imported. Labeled comparison sheets show unchanged page rasters from
 these authored inputs, with native and public-renderer outputs.
+
+The six fixed-cell character-width cases wrap the original Sorrel paragraphs in literal fixed-table OOXML authored in `bench/fixtures.py`. No product fixture, helper, external document, image or font program is imported. The labeled comparison sheets show unchanged page rasters from these authored inputs.
