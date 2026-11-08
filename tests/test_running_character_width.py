@@ -29,8 +29,28 @@ class RunningCharacterWidthContract(unittest.TestCase):
                     else:
                         self.assertEqual(changed.read(path), natural.read(path))
 
+    def test_unrelated_body_picture_is_the_only_control_difference(self):
+        w = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
+        cases = [c for c in validate_registry()['cases'] if c['id'].startswith('running-story-picture-')]
+        self.assertEqual(len(cases), 4)
+        for owner in ('header', 'footer'):
+            with ZipFile(ROOT / f'fixtures/running-story-picture-{owner}-image.docx') as image, ZipFile(ROOT / f'fixtures/running-story-picture-{owner}-control.docx') as control:
+                self.assertEqual(image.read(f'word/{owner}1.xml'), control.read(f'word/{owner}1.xml'))
+                self.assertEqual(image.read('word/styles.xml'), control.read('word/styles.xml'))
+                paragraph = ET.fromstring(image.read(f'word/{owner}1.xml')).find(w + 'p')
+                self.assertEqual(paragraph.find(f'{w}pPr/{w}jc').get(w + 'val'), 'both')
+                body = ET.fromstring(image.read('word/document.xml'))
+                children = body.find(w + 'body')
+                self.assertIsNotNone(children[-2].find(f'{w}r/{w}drawing'))
+                children.remove(children[-2])
+                self.assertEqual(ET.tostring(body), ET.tostring(ET.fromstring(control.read('word/document.xml'))))
+
     def test_retained_observations_reject_scale_position_and_ownership_damage(self):
-        folder = ROOT / 'docs/results/running-character-width'
+        self.verify_mutations('running-character-width', 96)
+        self.verify_mutations('running-story-picture', 68)
+
+    def verify_mutations(self, name, count):
+        folder = ROOT / 'docs/results' / name
         sys.path.insert(0, str(folder))
         previous = sys.modules.pop('WidthChecks', None)
         try:
@@ -38,7 +58,7 @@ class RunningCharacterWidthContract(unittest.TestCase):
             module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(module)
             records = module.verify()
-            self.assertEqual(len(records), 96)
+            self.assertEqual(len(records), count)
             self.assertTrue(all(r['rejected'] for r in records))
         finally:
             sys.path.remove(str(folder))

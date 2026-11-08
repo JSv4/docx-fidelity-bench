@@ -1896,13 +1896,19 @@ def running_character_width_cases(add, cases):
                 'w:header="720" w:footer="720"/></w:sectPr>')
         body = ''.join(para(label, ('<w:pageBreakBefore/>' if i % 2 else '') + (paper(True) if i == 1 else ''))
             for i, label in enumerate(body_labels))
-        for percent in (80, 100, 150):
+        for percent, picture in [(80, None), (100, None), (150, None), (80, False), (80, True)]:
             paragraph = para(props='<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>'
-                '<w:ind w:right="5760"/>', runs=run(' '.join(labels), f'<w:w w:val="{percent}"/>'))
+                '<w:ind w:right="5760"/>' + ('<w:jc w:val="both"/>' if picture is not None else ''),
+                runs=run(' '.join(labels), f'<w:w w:val="{percent}"/>'))
             tokens = labels * 4 + body_labels
-            add(f'running-character-width-{owner}-{percent}', 'paragraphs',
+            case_id = f'running-character-width-{owner}-{percent}' if picture is None else f'running-story-picture-{owner}-' + ('image' if picture else 'control')
+            # An independent body picture must not change the justified running story.
+            picture_run = re.sub(r'<wp:anchor.*?<wp:extent', '<wp:inline distT="0" distB="0" distL="0" distR="0"><wp:extent', drawing('square'), flags=re.S)
+            picture_run = picture_run.replace('<wp:wrapSquare wrapText="bothSides"/>', '').replace('</wp:anchor>', '</wp:inline>').replace('1371600', '152400')
+            add(case_id, 'paragraphs',
                 f'Sorrel {owner} at {percent}% across inherited sections (Docxodus #1564)', tokens,
-                body, sect=paper(False), story=(owner, paragraph), styles_xml=styles, font='Liberation Mono',
+                body + (para(runs=picture_run) if picture else ''), image=bool(picture),
+                sect=paper(False), story=(owner, paragraph), styles_xml=styles, font='Liberation Mono',
                 assertions=[dict(type='marker-region', marker=label, occurrence=1,
                     page=i + 1, rect=[72, 0, 612, 792]) for i, label in enumerate(body_labels)])
             cases[-1]['pdfCompanion'] = dict(profile=dict(review='final', comments='hidden'),
@@ -5897,7 +5903,7 @@ def generate():
     floating_paragraph_cases(add, cases)
     custom_path_cases(add)
     plain_math_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v134', 'version': 134, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v135', 'version': 135, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
