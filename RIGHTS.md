@@ -1,3 +1,7 @@
+The six manual text-width cases contain original Juniper, Ledger and Fern labels and
+literal OOXML authored in `bench/fixtures.py`. No product fixture, helper, document,
+image or font program is imported. Liberation Mono is separately provisioned.
+
 The eight footnote-width and footer-rounding cases extend this repository’s original
 Sorrel labels with literal OOXML and Harbor body labels in `bench/fixtures.py`. No
 product fixture, helper, document, image or font program is imported. Liberation

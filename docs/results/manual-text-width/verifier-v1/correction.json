@@ -1,0 +1,10 @@
+{
+  "reason": "Per-region glyph scaling and between-region placement are independent. The aggregate 200pt word bound conflated them. Original strict single-region and per-piece0.1pt widths stay unchanged; separate-ID placement uses the predeclared0.5pt position allowance.",
+  "observedPieceWidthsPt": [
+    99.95658874511719,
+    99.98381042480469
+  ],
+  "observedOriginDifferencePt": 99.74998474121094,
+  "independentControl": "Plain Chromium CSS inline blocks with100pt advances: untransformed second text origin171.99609375pt; scaleX(2) second text origin171.74998474pt. No Docxodus code or fitText involved.",
+  "review": "Reviewer independently confirmed PDF XObjects separate scale and translation. Original verifier and failing capture retained."
+}

@@ -7,6 +7,11 @@ controls retain natural wrapping. See [native comparisons and diagnostic limits]
 
 # DOCX fidelity bench
 
+`core-v137` adds six manual text-width cases for Docxodus #1564: expansion, compression,
+contiguous and separate IDs, paragraph continuation, and an unchanged ordinary-text control.
+All 1012 prior document inputs are unchanged. See the
+[labeled comparisons, exact glyph checks and diagnostic limits](docs/results/manual-text-width/README.md).
+
 `core-v136` adds six short/continued footnote percentage-width cases and two independent
 footer-rounding controls for Docxodus #1564. All 1004 prior inputs are unchanged.
 The long 100% note retains its existing pitch diagnostics; see

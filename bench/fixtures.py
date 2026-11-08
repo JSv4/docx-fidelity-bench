@@ -1881,6 +1881,54 @@ def character_width_cases(add, cases, cell=False):
 
 
 
+def manual_text_width_cases(add, cases):
+    """Original Juniper text fits an authored width; following Ledger keeps its own advance."""
+    advance = 1229 / 2048 * 12
+    pitch = 2320 / 2048 * 12
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+        '<w:rFonts w:ascii="Liberation Mono" w:hAnsi="Liberation Mono"/><w:sz w:val="24"/>'
+        '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl w:val="0"/>'
+        '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>'
+        '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    for variant in ('control', 'single-20', 'single-100', 'mixed-100', 'separate-100', 'continued-100'):
+        target = 20 if variant == 'single-20' else 100
+        fit = f'<w:fitText w:val="{target * 20}" w:id="11"/>'
+        if variant == 'control':
+            content = run('Juniper')
+        elif variant in ('mixed-100', 'separate-100'):
+            content = run('Jun', fit) + run('iper',
+                '<w:b/>' + fit if variant == 'mixed-100' else fit.replace('"11"', '"12"'))
+        else:
+            content = run('Juniper', fit)
+        labels = [f'Fern{i:03d}' for i in range(120)] if variant == 'continued-100' else []
+        tokens = labels[:100] + ['Juniper', 'Ledger'] + labels[100:]
+        content = (run(' '.join(labels[:100]) + ' ') if labels else '') + content + run(' Ledger'
+            + (' ' + ' '.join(labels[100:]) if labels else ''))
+        width = 7 * advance if variant == 'control' else 200 if variant == 'separate-100' else target
+        column = 144 if labels else 468
+        assertions, x, line = [], 0, 0
+        for token in tokens:
+            token_width = width if token == 'Juniper' else len(token) * advance
+            if x and x + token_width > column:
+                x = 0
+                line += 1
+            top = 72 + line % 47 * pitch
+            assertions.append(dict(type='marker-region', marker=token, occurrence=1, page=line // 47 + 1,
+                rect=[72 + x, top, 72 + x + token_width, top + pitch], tolerancePt=.5))
+            x += token_width + advance
+        add(f'manual-text-width-{variant}', 'paragraphs',
+            f'Juniper manual text width, {variant}, with ordinary Ledger following (Docxodus #1564)', tokens,
+            para(props='<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>'
+                + ('<w:ind w:right="6480"/>' if labels else ''), runs=content),
+            styles_xml=styles, font='Liberation Mono', assertions=assertions,
+            sect='<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" '
+                'w:right="1440" w:bottom="1440" w:left="1440"/></w:sectPr>')
+        for assertion in cases[-1]['assertions']:
+            assertion['tolerancePt'] = .5
+        cases[-1]['pdfCompanion'] = dict(profile=dict(review='final', comments='hidden'),
+            pageSizePt=[612, 792], requiredTokens=dict(Counter(tokens)), exactInventory=True)
+
+
 def footnote_character_width_cases(add, cases):
     """Original Sorrel note continuations and independent footer rounding controls."""
     styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
@@ -5939,12 +5987,13 @@ def generate():
     character_width_cases(add, cases, cell=True)
     running_character_width_cases(add, cases)
     footnote_character_width_cases(add, cases)
+    manual_text_width_cases(add, cases)
     paragraph_text_independence_cases(add, cases)
     grouped_paper_placement_cases(add, cases)
     floating_paragraph_cases(add, cases)
     custom_path_cases(add)
     plain_math_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v136', 'version': 136, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v137', 'version': 137, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
