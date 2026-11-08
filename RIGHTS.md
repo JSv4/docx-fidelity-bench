@@ -1,3 +1,7 @@
+The four small-minimum cases contain original Primrose labels and literal OOXML
+authored in bench/fixtures.py. Line slots use the authored minimum and independent
+Liberation Serif metrics. No renderer fixture, helper, document or font is imported.
+
 The four WordPerfect-justification cases contain original Tansy labels and literal
 OOXML authored in bench/fixtures.py. Expected positions use the published expanded
 line-width rule and independently provisioned Liberation Mono metrics. No renderer
