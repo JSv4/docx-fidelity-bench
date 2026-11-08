@@ -1909,6 +1909,50 @@ def natural_minimum_line_cases(add, cases):
                 pageSizePt=[612, 792], requiredTokens=dict(Counter(labels)), exactInventory=True)
 
 
+def minimum_story_cases(add, cases):
+    """Original Poppy text compares below-natural minima within each running/note owner."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+        '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="40"/>'
+        '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl w:val="0"/>'
+        '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>'
+        '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    for owner in ('header', 'footer', 'footnote', 'endnote'):
+        running = owner in ('header', 'footer')
+        for length in ('short', 'continued'):
+            count = 8 if length == 'short' else 18 if running else 64
+            pages = 3 if running and length == 'continued' else 1
+            labels = [f'Poppy{i:03d}' for i in range(1, count + 1)]
+            body_labels = [f'Garden{i:03d}' for i in range(1, pages + 1)]
+            marker = '1' if owner == 'footnote' else 'i'
+            body = ''.join(para(props='<w:pageBreakBefore/>' if i else '', runs=run(label + ' ')
+                + (f'<w:r><w:{owner}Reference w:id="1"/></w:r>' if not running else ''))
+                for i, label in enumerate(body_labels))
+            sect = '<w:sectPr>' + (f'<w:{owner}Reference w:type="default" r:id="rStory"/>' if running else '')
+            sect += ('<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" '
+                'w:bottom="1440" w:left="1440" w:header="720" w:footer="720"/></w:sectPr>')
+            for kind, rule, line in [('natural', 'auto', 240), ('minimum', 'atLeast', 320)]:
+                paragraph = para(' '.join(labels), '<w:widowControl w:val="0"/>'
+                    f'<w:spacing w:before="0" w:after="0" w:line="{line}" w:lineRule="{rule}"/>'
+                    '<w:ind w:right="7440"/>')
+                options = dict(story=(owner, paragraph)) if running else dict(notes=(owner, ''),
+                    notes_xml=para(runs=f'<w:r><w:{owner}Ref/></w:r>') + paragraph)
+                tokens = body_labels + labels * pages + ([] if running else [marker, marker])
+                # The shared marker assertion requires unique text; repeated story
+                # occurrences are checked per page by the retained story verifier.
+                assertions = [dict(type='marker-region', marker=label, occurrence=1,
+                    page=n + 1, rect=[72, 0, 540, 792]) for n, label in enumerate(body_labels)]
+                # Native/browser natural note controls paginate differently; these
+                # fixtures assert continuation within each renderer, not native slots.
+                if length == 'short':
+                    assertions += [dict(type='marker-region', marker=label, occurrence=1,
+                        page=1, rect=[72, 0, 540, 792]) for label in labels]
+                add(f'minimum-story-{owner}-{length}-{kind}', 'paragraphs',
+                    f'Poppy {owner} {length} story with {kind} spacing (Docxodus #1566)',
+                    tokens, body, sect=sect, styles_xml=styles, assertions=assertions, **options)
+                cases[-1]['pdfCompanion'] = dict(profile=dict(review='final', comments='hidden'),
+                    pageSizePt=[612, 792], requiredTokens=dict(Counter(tokens)), exactInventory=True)
+
+
 def minimum_owner_cases(add, cases):
     """Original Rue labels isolate natural minimums in cell and numbering owners."""
     pitch = 2355 / 2048 * 20
@@ -5814,6 +5858,7 @@ def generate():
     space_run_line_cases(add, cases)
     natural_minimum_line_cases(add, cases)
     minimum_owner_cases(add, cases)
+    minimum_story_cases(add, cases)
     character_width_cases(add, cases)
     character_width_cases(add, cases, cell=True)
     paragraph_text_independence_cases(add, cases)
@@ -5821,7 +5866,7 @@ def generate():
     floating_paragraph_cases(add, cases)
     custom_path_cases(add)
     plain_math_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v132', 'version': 132, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v133', 'version': 133, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

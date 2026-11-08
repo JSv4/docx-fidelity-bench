@@ -600,3 +600,8 @@ font program is imported. Labeled comparison sheets show unchanged page rasters 
 these authored inputs, with native and public-renderer outputs.
 
 The six fixed-cell character-width cases wrap the original Sorrel paragraphs in literal fixed-table OOXML authored in `bench/fixtures.py`. No product fixture, helper, external document, image or font program is imported. The labeled comparison sheets show unchanged page rasters from these authored inputs.
+
+The sixteen minimum-story cases for Docxodus #1566 contain original Poppy and Garden labels
+and literal OOXML authored in `bench/fixtures.py`. No product fixture, external document,
+image or font program is imported. Comparison sheets show every unchanged page raster
+from these authored inputs, with explicit panels for baseline export refusals.
