@@ -1879,6 +1879,36 @@ def character_width_cases(add, cases, cell=False):
                 pageSizePt=[612, 792], requiredTokens=dict(Counter(labels)), exactInventory=True)
 
 
+
+def running_character_width_cases(add, cases):
+    """Unchanged Sorrel paragraphs repeat across inherited running stories and margin widths."""
+    labels = [f'Sorrel{i:03d}' for i in range(1, 13)]
+    body_labels = [f'Ledger{i:03d}' for i in range(1, 5)]
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+        '<w:rFonts w:ascii="Liberation Mono" w:hAnsi="Liberation Mono"/><w:sz w:val="24"/>'
+        '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl w:val="0"/>'
+        '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    for owner in ('header', 'footer'):
+        def paper(reference):
+            return '<w:sectPr>' + (f'<w:{owner}Reference w:type="default" r:id="rStory"/>' if reference else '') + (
+                '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" '
+                f'w:right="{1440 if reference else 0}" w:bottom="1440" w:left="1440" '
+                'w:header="720" w:footer="720"/></w:sectPr>')
+        body = ''.join(para(label, ('<w:pageBreakBefore/>' if i % 2 else '') + (paper(True) if i == 1 else ''))
+            for i, label in enumerate(body_labels))
+        for percent in (80, 100, 150):
+            paragraph = para(props='<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>'
+                '<w:ind w:right="5760"/>', runs=run(' '.join(labels), f'<w:w w:val="{percent}"/>'))
+            tokens = labels * 4 + body_labels
+            add(f'running-character-width-{owner}-{percent}', 'paragraphs',
+                f'Sorrel {owner} at {percent}% across inherited sections (Docxodus #1564)', tokens,
+                body, sect=paper(False), story=(owner, paragraph), styles_xml=styles, font='Liberation Mono',
+                assertions=[dict(type='marker-region', marker=label, occurrence=1,
+                    page=i + 1, rect=[72, 0, 612, 792]) for i, label in enumerate(body_labels)])
+            cases[-1]['pdfCompanion'] = dict(profile=dict(review='final', comments='hidden'),
+                pageSizePt=[612, 792], requiredTokens=dict(Counter(tokens)), exactInventory=True)
+
+
 def natural_minimum_line_cases(add, cases):
     """Original Oxlip words wrap one per line in a narrow, uniform body paragraph."""
     for count in (18, 64):
@@ -5861,12 +5891,13 @@ def generate():
     minimum_story_cases(add, cases)
     character_width_cases(add, cases)
     character_width_cases(add, cases, cell=True)
+    running_character_width_cases(add, cases)
     paragraph_text_independence_cases(add, cases)
     grouped_paper_placement_cases(add, cases)
     floating_paragraph_cases(add, cases)
     custom_path_cases(add)
     plain_math_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v133', 'version': 133, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v134', 'version': 134, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
