@@ -1881,6 +1881,67 @@ def character_width_cases(add, cases, cell=False):
 
 
 
+def wordperfect_justification_cases(add, cases):
+    """Original Tansy labels, with line choices from the published expanded-width rule."""
+    advance, pitch = 1229 / 2048 * 12, 2320 / 2048 * 12
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+        '<w:rFonts w:ascii="Liberation Mono" w:hAnsi="Liberation Mono"/><w:sz w:val="24"/>'
+        '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl w:val="0"/>'
+        '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>'
+        '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    for variant, mode, enabled in [('control', 14, False), ('mode14', 14, True),
+                                    ('mode15', 15, True), ('continued', 14, True)]:
+        groups = []
+        if variant == 'continued':
+            groups.append(([f'Tansy{i:05d}' + ('X' if i % 6 == 0 else '') for i in range(1, 301)], 0))
+        else:
+            for tag, digits, extra, indent in [('A', 4, 'X', 0), ('B', 4, 'XXX', 0), ('C', 3, 'XX', 36)]:
+                labels = [f'Tansy{tag}{i:0{digits}d}' for i in range(1, 7)]
+                labels[-1] += extra
+                labels += [f'Tail{tag}0001', f'Tail{tag}0002']
+                groups.append((labels, indent))
+        body, tokens, assertions, line_index = '', [], [], 0
+        for labels, indent in groups:
+            tokens.extend(labels)
+            body += para(' '.join(labels), '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>'
+                + (f'<w:ind w:firstLine="{indent * 20}"/>' if indent else '') + '<w:jc w:val="both"/>')
+            offset = 0
+            while offset < len(labels):
+                left = indent if offset == 0 else 0
+                actual = 468 - left
+                effective = actual * (1 + 281 / 7200) if enabled else actual
+                end = offset + 1
+                while end < len(labels) and len(' '.join(labels[offset:end + 1])) * advance <= effective:
+                    end += 1
+                row = labels[offset:end]
+                natural = len(' '.join(row)) * advance
+                gap = advance
+                if len(row) > 1 and (end < len(labels) or natural > actual):
+                    gap += (actual - natural) / (len(row) - 1)
+                assert gap >= 0
+                x, top = 72 + left, 72 + line_index % 47 * pitch
+                for label in row:
+                    width = len(label) * advance
+                    assertions.append(dict(type='marker-region', marker=label, occurrence=1,
+                        page=line_index // 47 + 1, rect=[x, top, x + width, top + pitch], tolerancePt=.5))
+                    x += width + gap
+                offset, line_index = end, line_index + 1
+        settings = (f'<w:settings xmlns:w="{W}"><w:compat>'
+            + ('<w:wpJustification/>' if enabled else '<w:wpJustification w:val="0"/>')
+            + f'<w:compatSetting w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" '
+            f'w:val="{mode}"/></w:compat></w:settings>')
+        add(f'wordperfect-justification-{variant}', 'paragraphs',
+            f'Tansy expanded-width justification, {variant}, including bounds and indentation (Docxodus #1550)',
+            tokens, body, font='Liberation Mono', styles_xml=styles, assertions=assertions,
+            extra_parts={'word/settings.xml': settings},
+            sect='<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" '
+                'w:right="1440" w:bottom="1440" w:left="1440"/></w:sectPr>')
+        for assertion in cases[-1]['assertions']:
+            assertion['tolerancePt'] = .5
+        cases[-1]['pdfCompanion'] = dict(profile=dict(review='final', comments='hidden'),
+            pageSizePt=[612, 792], requiredTokens=dict(Counter(tokens)), exactInventory=True)
+
+
 def manual_text_width_cases(add, cases):
     """Original Juniper text fits an authored width; following Ledger keeps its own advance."""
     advance = 1229 / 2048 * 12
@@ -5988,12 +6049,13 @@ def generate():
     running_character_width_cases(add, cases)
     footnote_character_width_cases(add, cases)
     manual_text_width_cases(add, cases)
+    wordperfect_justification_cases(add, cases)
     paragraph_text_independence_cases(add, cases)
     grouped_paper_placement_cases(add, cases)
     floating_paragraph_cases(add, cases)
     custom_path_cases(add)
     plain_math_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v137', 'version': 137, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v138', 'version': 138, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

@@ -1,3 +1,8 @@
+The four WordPerfect-justification cases contain original Tansy labels and literal
+OOXML authored in bench/fixtures.py. Expected positions use the published expanded
+line-width rule and independently provisioned Liberation Mono metrics. No renderer
+fixture, helper, document, image or font program is imported.
+
 The six manual text-width cases contain original Juniper, Ledger and Fern labels and
 literal OOXML authored in `bench/fixtures.py`. No product fixture, helper, document,
 image or font program is imported. Liberation Mono is separately provisioned.
