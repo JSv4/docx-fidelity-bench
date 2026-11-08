@@ -1,5 +1,10 @@
 # Authorship and artifact rights
 
+The eight natural-minimum cases for Docxodus #1566 contain original Oxlip labels and
+literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, document,
+image or font program is imported. Review sheets show these original inputs rendered
+by separately provisioned applications.
+
 The eight empty-run cases for Docxodus #1565 contain original Mallow labels and literal
 OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, document, image or
 font program is imported. Review sheets show only these original inputs rendered by
