@@ -1,5 +1,9 @@
 # Authorship and artifact rights
 
+The eight space-run cases for Docxodus #1565 contain original Clover labels and literal
+OOXML authored in `bench/fixtures.py`. No product fixture, helper, document, image or
+font program is imported. Liberation Serif is separately provisioned.
+
 The eight late-wrapped-paragraph cases for Docxodus #1558 extend the original Chive
 OOXML generator with later source positions, a right-edge picture and a fitting prefix.
 No product fixture, helper, document, image or font program is imported. The retained
