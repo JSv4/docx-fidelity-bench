@@ -1,3 +1,7 @@
+The four running-story picture cases extend the original Sorrel paragraphs with
+justification and the independently generated diamond from `bench/fixtures.py`.
+No renderer fixture, image, helper or font program is imported.
+
 # Authorship and artifact rights
 
 The eight space-run cases for Docxodus #1565 contain original Clover labels and literal
