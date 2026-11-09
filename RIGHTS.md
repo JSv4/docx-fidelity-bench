@@ -631,3 +631,5 @@ The sixteen minimum-story cases for Docxodus #1566 contain original Poppy and Ga
 and literal OOXML authored in `bench/fixtures.py`. No product fixture, external document,
 image or font program is imported. Comparison sheets show every unchanged page raster
 from these authored inputs, with explicit panels for baseline export refusals.
+
+The four fixed-pitch boundary cases use original Alder and Birch labels and literal OOXML. No product fixtures, helpers or font programs are imported. Liberation Mono is provisioned independently.
