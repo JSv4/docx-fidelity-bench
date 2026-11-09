@@ -201,6 +201,43 @@ def font_table_class_cases(add):
                        for marker in ' '.join(labels).split()])
 
 
+def semantic_bullet_cases(add, cases):
+    """Original familiar glyphs, Unicode controls, and an unchanged checkbox in each input."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="22"/>'
+              '</w:rPr></w:rPrDefault></w:docDefaults><w:style w:type="paragraph" '
+              'w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
+    def definition(number, glyph, font):
+        return (f'<w:abstractNum w:abstractNumId="{number}"><w:lvl w:ilvl="0"><w:start w:val="1"/>'
+                f'<w:numFmt w:val="bullet"/><w:suff w:val="tab"/><w:lvlText w:val="{glyph}"/>'
+                '<w:lvlJc w:val="left"/><w:pPr><w:ind w:left="720" w:hanging="360"/></w:pPr>'
+                f'<w:rPr><w:rFonts w:ascii="{font}" w:hAnsi="{font}"/></w:rPr></w:lvl></w:abstractNum>')
+    for kind, glyph, font, unicode_glyph, control_font, native_font in (
+            ('symbol', '\uf0b7', 'Symbol', '•', FONT, 'Standard Symbols PS'),
+            ('courier', 'o', 'Courier New', '◦', 'OpenSymbol', 'Courier New')):
+        for control in (False, True):
+            marker, marker_font = (unicode_glyph, control_font) if control else (glyph, font)
+            numbering = (f'<w:numbering xmlns:w="{W}">' + definition(0, marker, marker_font)
+                         + definition(1, '☐', 'DejaVu Sans')
+                         + '<w:num w:numId="1"><w:abstractNumId w:val="0"/></w:num>'
+                         + '<w:num w:numId="2"><w:abstractNumId w:val="1"/></w:num></w:numbering>')
+            labels = ['CamassiaHarbor', 'CamassiaLedger', 'CamassiaConfirm']
+            body = ''.join(para(label, '<w:numPr><w:ilvl w:val="0"/>'
+                               f'<w:numId w:val="{1 if i < 2 else 2}"/></w:numPr>') for i, label in enumerate(labels))
+            visible = unicode_glyph if control or kind == 'symbol' else glyph
+            add('semantic-bullet-' + kind + ('-unicode-control' if control else '-font-glyph'),
+                'paragraphs', 'Familiar ' + kind + ' bullet and Unicode control retain a separate checkbox (Docxodus #1623)',
+                [visible, labels[0], visible, labels[1], '☐', labels[2]], body,
+                styles_xml=styles, numbering_xml=numbering,
+                assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': label, 'tolerancePt': 0.5}
+                            for label in labels])
+            # These independently provisioned physical faces define the native font policy.
+            physical = control_font if control else native_font
+            if physical != FONT:
+                cases[-1]['fonts'].append(physical)
+            cases[-1]['fonts'].append('DejaVu Sans')
+
+
 def para(text='', props='', runs=None):
     return f'<w:p><w:pPr>{props}</w:pPr>{run(text) if runs is None else runs}</w:p>'
 
@@ -6306,7 +6343,8 @@ def generate():
     adjacent_text_span_cases(add)
     flow_story_inheritance_cases(add)
     font_table_class_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v146', 'version': 146, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    semantic_bullet_cases(add, cases)
+    registry = {'schema': 1, 'suite': {'id': 'core-v147', 'version': 147, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
