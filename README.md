@@ -7,6 +7,10 @@ controls retain natural wrapping. See [native comparisons and diagnostic limits]
 
 # DOCX fidelity bench
 
+`core-v143` adds a split-run input and whole-run control for Docxodus #1624.
+These check preserved PDF content, formatting and placement; flow-HTML span coalescing
+is asserted by the product's DOM regressions. See [the labeled native previews and limits](docs/results/text-spans/README.md).
+
 `core-v137` adds six manual text-width cases for Docxodus #1564: expansion, compression,
 contiguous and separate IDs, paragraph continuation, and an unchanged ordinary-text control.
 All 1012 prior document inputs are unchanged. See the
