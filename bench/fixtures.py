@@ -2095,6 +2095,41 @@ def small_minimum_line_cases(add, cases):
             pageSizePt=[612, 792], requiredTokens=dict(Counter(labels)), exactInventory=True)
 
 
+def fixed_pitch_boundary_cases(add, cases):
+    """Original Alder labels distinguish an exact fixed-cell fit from real overflow."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+        '<w:rFonts w:ascii="Liberation Mono" w:hAnsi="Liberation Mono"/><w:sz w:val="24"/>'
+        '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl w:val="0"/>'
+        '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    for name, mode, alignment, indent, narrow in [
+            ('legacy-exact', 14, 'left', 0, 0), ('modern-exact', 15, 'both', 0, 0),
+            ('indented-exact', 14, 'left', 36, 0), ('narrow-control', 14, 'left', 0, 1)]:
+        first = [f'Alder{i:02d}' for i in range(1, 8)] + ['Elm8' if indent else 'Alder0809']
+        assert len(' '.join(first)) == (60 if indent else 65)
+        labels = first + ['Birch09', 'Birch10']
+        rows = [first[:-1], labels[-3:]] if narrow else [first, labels[-2:]]
+        assertions = []
+        for index, row in enumerate(rows):
+            x, y = 72 + (indent if index == 0 else 0), 72 + index * 2320 / 2048 * 12
+            for label in row:
+                assertions.append(dict(type='marker-region', marker=label, occurrence=1, page=1,
+                    rect=[x, y, x + len(label) * 1229 / 2048 * 12, y + 2320 / 2048 * 12], tolerancePt=.76))
+                x += (len(label) + 1) * 7.2
+        add(f'fixed-pitch-{name}', 'paragraphs',
+            f'Alder {name} fixed-pitch line boundary (Docxodus #1564)', labels,
+            para(' '.join(labels), '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>'
+                f'<w:ind w:firstLine="{indent * 20}" w:right="{narrow}"/><w:jc w:val="{alignment}"/>'),
+            styles_xml=styles, assertions=assertions, font='Liberation Mono',
+            sect='<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" '
+                'w:right="1440" w:bottom="1440" w:left="1440"/></w:sectPr>',
+            extra_parts={'word/settings.xml': f'<w:settings xmlns:w="{W}"><w:compat><w:compatSetting '
+                f'w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="{mode}"/></w:compat></w:settings>'})
+        for assertion in cases[-1]['assertions']:
+            assertion['tolerancePt'] = .76
+        cases[-1]['pdfCompanion'] = dict(profile=dict(review='final', comments='hidden'),
+            pageSizePt=[612, 792], requiredTokens=dict(Counter(labels)), exactInventory=True)
+
+
 def mixed_minimum_line_cases(add, cases):
     """One word per line gives independent mixed-line and page-boundary expectations."""
     styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
@@ -6120,12 +6155,13 @@ def generate():
     wordperfect_justification_cases(add, cases)
     small_minimum_line_cases(add, cases)
     mixed_minimum_line_cases(add, cases)
+    fixed_pitch_boundary_cases(add, cases)
     paragraph_text_independence_cases(add, cases)
     grouped_paper_placement_cases(add, cases)
     floating_paragraph_cases(add, cases)
     custom_path_cases(add)
     plain_math_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v140', 'version': 140, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v141', 'version': 141, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
