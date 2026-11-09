@@ -654,3 +654,8 @@ The eight font-table class cases use original Maranta labels and literal OOXML a
 in `bench/fixtures.py`. No product fixture, external document, image or font program is
 imported. The labeled screenshots show only these original inputs rendered by separately
 provisioned LibreOffice; Liberation and Noto fonts are independently installed.
+
+The four semantic-bullet cases use original Camassia labels and literal OOXML authored
+in `bench/fixtures.py`. No product fixture, external document, image or font program is
+imported. Review screenshots show only these authored inputs rendered by separately
+provisioned LibreOffice and fonts.
