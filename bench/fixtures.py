@@ -168,6 +168,39 @@ def flow_story_inheritance_cases(add):
                          ('GentianUnusedHeader', 3), ('GentianUnusedFooter', 3)]])
 
 
+def font_table_class_cases(add):
+    """Missing-font descriptors paired with an explicitly installed family of the same class."""
+    descriptors = [
+        ('sans', 'Maranta One', '<w:family w:val="swiss"/>', 'Liberation Sans'),
+        ('serif', 'Maranta Two', '<w:family w:val="roman"/>', 'Liberation Serif'),
+        ('mono', 'Maranta Three', '<w:family w:val="modern"/><w:pitch w:val="fixed"/>', 'Liberation Mono'),
+        ('panose-mono', 'Maranta Four', '<w:panose1 w:val="02070309020205020404"/>', 'Liberation Mono'),
+    ]
+    for kind, alias, properties, installed in descriptors:
+        for control in (False, True):
+            family = installed if control else alias
+            styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+                      f'<w:rFonts w:ascii="{family}" w:hAnsi="{family}"/><w:sz w:val="22"/>'
+                      '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="120"/>'
+                      '</w:pPr></w:pPrDefault></w:docDefaults>'
+                      '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
+            labels = ['MarantaHeading', 'MarantaLedger narrow letters keep their declared spacing', 'iiii After', 'MarantaFooter']
+            tabs = '<w:tabs><w:tab w:val="left" w:pos="360"/><w:tab w:val="left" w:pos="720"/></w:tabs>'
+            body = para(labels[1]) + para(props=tabs, runs=run('iiii') + '<w:r><w:tab/></w:r>' + run('After'))
+            sect = section().replace('<w:sectPr>', '<w:sectPr><w:headerReference w:type="default" r:id="rStory"/>'
+                                     '<w:footerReference w:type="default" r:id="rStory1"/>')
+            add('font-table-' + kind + ('-named-control' if control else '-declared'), 'paragraphs',
+                'Missing font uses ' + kind + ' metadata; ' + ('explicit installed-family control' if control else 'declared class')
+                + ' (Docxodus #1574)', labels, body, sect, styles_xml=styles, font=installed,
+                stories=[('header', para(labels[0])), ('footer', para(labels[3]))],
+                extra_parts={'word/fontTable.xml': f'<w:fonts xmlns:w="{W}"><w:font w:name="{alias}">{properties}</w:font></w:fonts>'},
+                relations_extra=[('rFonts', 'fontTable', 'fontTable.xml')],
+                content_types_extra='<Override PartName="/word/fontTable.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml"/>',
+                assertions=[{'type': 'required-font-family', 'version': 1, 'family': installed}]
+                    + [{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5}
+                       for marker in ' '.join(labels).split()])
+
+
 def para(text='', props='', runs=None):
     return f'<w:p><w:pPr>{props}</w:pPr>{run(text) if runs is None else runs}</w:p>'
 
@@ -6272,7 +6305,8 @@ def generate():
     emf_image_cases(add)
     adjacent_text_span_cases(add)
     flow_story_inheritance_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v145', 'version': 145, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    font_table_class_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v146', 'version': 146, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

@@ -649,3 +649,8 @@ The four fixed-pitch boundary cases use original Alder and Birch labels and lite
 The two empty-final-section cases reuse the original Gentian text and literal OOXML authored
 in `bench/fixtures.py`. No product fixture, third-party document or embedded font is imported.
 Labeled LibreOffice screenshots show these original documents.
+
+The eight font-table class cases use original Maranta labels and literal OOXML authored
+in `bench/fixtures.py`. No product fixture, external document, image or font program is
+imported. The labeled screenshots show only these original inputs rendered by separately
+provisioned LibreOffice; Liberation and Noto fonts are independently installed.
