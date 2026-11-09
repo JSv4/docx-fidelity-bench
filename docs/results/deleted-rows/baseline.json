@@ -7,30 +7,30 @@
     "command": [
       "/home/jman/.dotnet/dotnet",
       "build",
-      "/tmp/docx-bench-1625-1628/runs/rows-baseline/src/DocxBenchProjection.csproj",
+      "/tmp/docx-bench-1625-1628/runs/rows-final-baseline/src/DocxBenchProjection.csproj",
       "-c",
       "Release",
       "-o",
-      "/tmp/docx-bench-1625-1628/runs/rows-baseline/bin",
+      "/tmp/docx-bench-1625-1628/runs/rows-final-baseline/bin",
       "-nologo",
       "-v",
       "q",
-      "-p:DocxodusRoot=/home/jman/Code/Docxodus/.local-closeout/1625-1628"
+      "-p:DocxodusRoot=/tmp/docxodus-1625-baseline"
     ],
-    "commit": "90a0fbb862a43a2100213c1b0f001651bed13ed6",
+    "commit": "c3b7d0c400421c975be0da90066c417b7304cedf",
     "dotnet": "10.0.301",
     "files": {
       "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
       "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
-      "bin/DocxBenchProjection.dll": "264893f29e2a3521b5f80295e01a510021cd132a16ac03b3eca7bfcc30ac9dd9",
-      "bin/Docxodus.dll": "b53faee0d52b70502c3fcc0b95811989237d1795f67253c216f5f52b80c7182f",
+      "bin/DocxBenchProjection.dll": "6f6a69c6cd394c8cc344346d0f7ffd2e4539ace9fa14929de709c1e6bec6b144",
+      "bin/Docxodus.dll": "ea4a755aa9bcc9d452640cea563e142713945c1adc8d44d7df5a489158068d15",
       "bin/SkiaSharp.dll": "71274ef112eefdf5ca8a1517086787bc786c7103c30115abbb9dc424a09db43e",
       "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
     },
     "recipeSha256": "4ecd542379cb3d6bcb54b881e3cb3459a59edada4bd25a09111175291825653f",
     "schema": 1,
-    "source": "/home/jman/Code/Docxodus/.local-closeout/1625-1628",
-    "tree": "8cd16c7e924b5a86cbd587de1908f4e336df6f7d"
+    "source": "/tmp/docxodus-1625-baseline",
+    "tree": "0e6e9fdf4ac26a733d2c374d29f02616811f18ce"
   },
   "cases": [
     {
@@ -553,21 +553,21 @@
     },
     {
       "checks": {
-        "completeText": true,
+        "completeText": false,
         "paragraphAnchors": true,
-        "rawMutation": true,
+        "rawMutation": false,
         "schema": true
       },
       "id": "raw-replace-tracked",
       "inputSha256": "8216fedfc71ed3b740b16039c2210e8e5b0262887f753a56997f8fbd7f7bd163",
       "observation": {
         "errors": [],
-        "markdown": "# Document\n\n{#p:body:4f0550788f63cdb7140c978ae665db74} LarchOriginal\n\n{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail\n\n",
+        "markdown": "# Document\n\n{#p:body:4f0550788f63cdb7140c978ae665db74} LarchReplacement\n\n{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail\n\n",
         "paragraphs": [
           {
             "id": "p:body:4f0550788f63cdb7140c978ae665db74",
-            "markdown": "{#p:body:4f0550788f63cdb7140c978ae665db74} LarchOriginal",
-            "text": "LarchOriginal"
+            "markdown": "{#p:body:4f0550788f63cdb7140c978ae665db74} LarchReplacement",
+            "text": "LarchReplacement"
           },
           {
             "id": "p:body:ea8c9fc951d37499ed663254d774666e",
@@ -577,11 +577,11 @@
         ],
         "path": "/tmp/docx-bench-1625-1628/fixtures/projection/raw-replace-tracked.docx",
         "raw": {
-          "error": "TrackedOperationUnsupported",
+          "error": null,
           "revisionCount": 0,
-          "success": false,
-          "unchanged": true,
-          "undo": false
+          "success": true,
+          "unchanged": false,
+          "undo": true
         }
       }
     },
@@ -621,21 +621,26 @@
     },
     {
       "checks": {
-        "completeText": true,
+        "completeText": false,
         "paragraphAnchors": true,
-        "rawMutation": true,
+        "rawMutation": false,
         "schema": true
       },
       "id": "raw-insert-tracked",
       "inputSha256": "8216fedfc71ed3b740b16039c2210e8e5b0262887f753a56997f8fbd7f7bd163",
       "observation": {
         "errors": [],
-        "markdown": "# Document\n\n{#p:body:4f0550788f63cdb7140c978ae665db74} LarchOriginal\n\n{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail\n\n",
+        "markdown": "# Document\n\n{#p:body:4f0550788f63cdb7140c978ae665db74} LarchOriginal\n\n{#p:body:d04d77fffecd42cdba5f7ac1d4d8a083} LarchReplacement\n\n{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail\n\n",
         "paragraphs": [
           {
             "id": "p:body:4f0550788f63cdb7140c978ae665db74",
             "markdown": "{#p:body:4f0550788f63cdb7140c978ae665db74} LarchOriginal",
             "text": "LarchOriginal"
+          },
+          {
+            "id": "p:body:d04d77fffecd42cdba5f7ac1d4d8a083",
+            "markdown": "{#p:body:d04d77fffecd42cdba5f7ac1d4d8a083} LarchReplacement",
+            "text": "LarchReplacement"
           },
           {
             "id": "p:body:ea8c9fc951d37499ed663254d774666e",
@@ -645,11 +650,11 @@
         ],
         "path": "/tmp/docx-bench-1625-1628/fixtures/projection/raw-insert-tracked.docx",
         "raw": {
-          "error": "TrackedOperationUnsupported",
+          "error": null,
           "revisionCount": 0,
-          "success": false,
-          "unchanged": true,
-          "undo": false
+          "success": true,
+          "unchanged": false,
+          "undo": true
         }
       }
     },
@@ -664,7 +669,7 @@
       "inputSha256": "8216fedfc71ed3b740b16039c2210e8e5b0262887f753a56997f8fbd7f7bd163",
       "observation": {
         "errors": [],
-        "markdown": "# Document\n\n{#p:body:4f0550788f63cdb7140c978ae665db74} LarchOriginal\n\n{#p:body:95a331e497f64cc68f9ba63195476dc1} LarchReplacement\n\n{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail\n\n",
+        "markdown": "# Document\n\n{#p:body:4f0550788f63cdb7140c978ae665db74} LarchOriginal\n\n{#p:body:286227b2fba54ede970352a6e3558268} LarchReplacement\n\n{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail\n\n",
         "paragraphs": [
           {
             "id": "p:body:4f0550788f63cdb7140c978ae665db74",
@@ -672,8 +677,8 @@
             "text": "LarchOriginal"
           },
           {
-            "id": "p:body:95a331e497f64cc68f9ba63195476dc1",
-            "markdown": "{#p:body:95a331e497f64cc68f9ba63195476dc1} LarchReplacement",
+            "id": "p:body:286227b2fba54ede970352a6e3558268",
+            "markdown": "{#p:body:286227b2fba54ede970352a6e3558268} LarchReplacement",
             "text": "LarchReplacement"
           },
           {

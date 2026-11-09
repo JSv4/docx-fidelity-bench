@@ -5,8 +5,11 @@ The default accepted projection must omit rows with `w:trPr/w:del`: middle rows,
 a table's only row, a wrapped row, a merged row, and a row carrying a textbox. The seventh pair
 forces opaque tables and checks dimensions. Controls retain the same rows without deletion marks.
 
-The [baseline](baseline.json) passes 25/32 cases, failing all seven new reproducers; the
-[candidate](candidate.json) passes 32/32, including all eighteen unchanged earlier diagnostics.
+The [baseline](baseline.json) at `c3b7d0c4` passes 23/32 cases, failing all seven new reproducers;
+the [candidate](candidate.json) at `eb3f43a5` passes 30/32. All fourteen new row cases pass.
+Both builds still fail the two tracked raw-edit cases for separate issue #1625; its refusal
+PR #1644 was closed without merging. Those assertions remain unchanged, and the row fix
+is independent of that proposal. The other sixteen earlier diagnostics pass on both builds.
 Exact text and saved-output schema are checked, with full source/build/fixture identities retained.
 This is an unweighted projection diagnostic, not a Word rendering claim or PDF/redline score.
 The separate engine tests cover public tracked deletion, patch removal, undo/reject restoration,
