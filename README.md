@@ -7,6 +7,10 @@ controls retain natural wrapping. See [native comparisons and diagnostic limits]
 
 # DOCX fidelity bench
 
+`core-v144` adds a three-section default-story inheritance case and explicit-reference
+control for Docxodus #1619. PDF checks preserve the paginated story behavior while product
+tests assert flow selection. See [all-page native previews and limits](docs/results/flow-story-inheritance/README.md).
+
 `core-v143` adds a split-run input and whole-run control for Docxodus #1624.
 These check preserved PDF content, formatting and placement; flow-HTML span coalescing
 is asserted by the product's DOM regressions. See [the labeled native previews and limits](docs/results/text-spans/README.md).

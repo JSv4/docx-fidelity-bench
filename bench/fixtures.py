@@ -119,6 +119,34 @@ def adjacent_text_span_cases(add):
                          'tolerancePt': 0.5} for marker in ' '.join(labels).split()])
 
 
+def flow_story_inheritance_cases(add):
+    """Native collateral for final-section flow selection; PDF retains all three sections."""
+    parts, relations, overrides = {}, [], ''
+    for label in ('Opening', 'Body', 'Unused'):
+        for kind, tag in (('header', 'hdr'), ('footer', 'ftr')):
+            name = 'gentian' + label + kind
+            parts['word/' + name + '.xml'] = f'<w:{tag} xmlns:w="{W}">' + para('Gentian' + label + kind.title()) + f'</w:{tag}>'
+            relations.append(('r' + name, kind, name + '.xml'))
+            overrides += f'<Override PartName="/word/{name}.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.{kind}+xml"/>'
+    def refs(label, kind='default'):
+        return ''.join(f'<w:{story}Reference w:type="{kind}" r:id="rgentian{label}{story}"/>' for story in ('header', 'footer'))
+    def sect(references):
+        return section().replace('<w:sectPr>', '<w:sectPr>' + references)
+    body = para('GentianOpening', sect(refs('Opening'))) + para('GentianMiddle', sect(refs('Body'))) + para('GentianFinal')
+    text = ['GentianOpening GentianMiddle GentianFinal', 'GentianOpeningHeader GentianOpeningFooter',
+            'GentianBodyHeader GentianBodyFooter'] + ['GentianBodyHeader GentianBodyFooter']
+    for explicit in (False, True):
+        add('stories-final-default-' + ('explicit-control' if explicit else 'inherited'), 'paragraphs',
+            'Three sections with an unused first-page story and a final default ' + ('explicitly repeated' if explicit else 'inherited')
+            + ' (Docxodus #1619; flow selection is tested upstream)', text, body,
+            sect(refs('Unused', 'first') + (refs('Body') if explicit else '')),
+            extra_parts=parts, relations_extra=relations, content_types_extra=overrides,
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': marker, 'occurrence': occurrence,
+                         'page': page, 'rect': [0, 0, 612, 792]} for marker, occurrence, page in
+                        [('GentianOpening', 1, 1), ('GentianMiddle', 1, 2), ('GentianFinal', 1, 3),
+                         ('GentianOpeningHeader', 1, 1), ('GentianOpeningFooter', 1, 1)]])
+
+
 def para(text='', props='', runs=None):
     return f'<w:p><w:pPr>{props}</w:pPr>{run(text) if runs is None else runs}</w:p>'
 
@@ -6222,7 +6250,8 @@ def generate():
     plain_math_cases(add, cases)
     emf_image_cases(add)
     adjacent_text_span_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v143', 'version': 143, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    flow_story_inheritance_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v144', 'version': 144, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

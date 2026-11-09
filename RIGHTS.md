@@ -1,3 +1,7 @@
+The two flow-story cases contain original Gentian labels and literal OOXML authored
+in bench/fixtures.py. No product fixture, helper, document, image or font program is
+imported. Review screenshots show all authored content across three LibreOffice pages.
+
 The two text-span cases contain original Celandine labels and literal OOXML authored
 in bench/fixtures.py. No product fixture, helper, document, image or font program is
 imported. Review screenshots show these original inputs rendered by LibreOffice.
