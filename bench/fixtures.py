@@ -238,6 +238,26 @@ def semantic_bullet_cases(add, cases):
             cases[-1]['fonts'].append('DejaVu Sans')
 
 
+def collection_font_cases(add):
+    """Requested collection-only families beside equivalent standalone-font controls."""
+    from .collection_fonts import generate as generate_fonts
+    generate_fonts(ROOT)
+    for kind in ('ttc', 'otc'):
+        labels = ['LIATRIS' + kind.upper(), 'EAST WEST NORTH SOUTH', 'MAPLE OAK ASH', 'LIATRISEND']
+        for control in (False, True):
+            family = 'Liatris Plain' if control else 'Liatris ' + kind.upper()
+            styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+                      f'<w:rFonts w:ascii="{family}" w:hAnsi="{family}"/><w:sz w:val="24"/>'
+                      '</w:rPr></w:rPrDefault></w:docDefaults></w:styles>')
+            body = ''.join(para(label, '<w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="exact"/>') for label in labels)
+            add('font-collection-' + kind + ('-standalone-control' if control else '-requested'),
+                'paragraphs', 'Original collection-only face and standalone geometric-font control (Docxodus #1573)',
+                labels, body, styles_xml=styles, font=family,
+                assertions=[{'type': 'required-font-family', 'version': 1, 'family': family}]
+                    + [{'type': 'marker-reference-position', 'version': 1, 'marker': label, 'tolerancePt': 0.5}
+                       for label in (labels[0], labels[-1])])
+
+
 def para(text='', props='', runs=None):
     return f'<w:p><w:pPr>{props}</w:pPr>{run(text) if runs is None else runs}</w:p>'
 
@@ -6344,7 +6364,8 @@ def generate():
     flow_story_inheritance_cases(add)
     font_table_class_cases(add)
     semantic_bullet_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v147', 'version': 147, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    collection_font_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v148', 'version': 148, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

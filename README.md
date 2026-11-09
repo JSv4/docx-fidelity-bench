@@ -459,3 +459,11 @@ are independent source obligations. Strict public delivery improves from 2/8 to 
 references remain ineligible because LibreOffice substitutes the requested math face. The 844 prior
 inputs remain unchanged. See [labeled screenshots and retained evidence](docs/results/plain-math/README.md);
 no Word typography or full-suite score is claimed.
+
+`core-v148` adds four original collection-font inputs for [Docxodus #1573](https://github.com/JSv4/Docxodus/issues/1573):
+TTC/OTC-only families paired with standalone-font controls. Three tiny MIT font
+programs are authored from geometric chevrons using the Python standard library;
+no installed font is copied. Provision `fixtures/collection-fonts` through a scoped
+fontconfig configuration for reference and candidate runs. The prior 1,062 DOCX
+inputs are unchanged. [Capture notes and labeled sheets](docs/results/font-collections/README.md)
+retain exact font identities and separate collection support from the opt-in local index.
