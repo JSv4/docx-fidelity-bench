@@ -277,10 +277,234 @@
       },
       "sha256": "8216fedfc71ed3b740b16039c2210e8e5b0262887f753a56997f8fbd7f7bd163",
       "tracked": false
+    },
+    {
+      "anchored": [
+        "LarchAfter"
+      ],
+      "control": false,
+      "expected": "# Document | LarchHeader | | --- | | LarchTail | LarchAfter",
+      "id": "deleted-row-middle",
+      "input": "fixtures/projection/deleted-row-middle.docx",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch row labels; no imported assets"
+      },
+      "sha256": "2e14ab36129add58b8fd98bca6ec0769dcf460171210a8feb42e1f48eb1d080a",
+      "tableMode": "GfmWithOpaqueFallback"
+    },
+    {
+      "anchored": [
+        "LarchAfter"
+      ],
+      "control": true,
+      "expected": "# Document | LarchHeader | | --- | | LarchRemoved | | LarchTail | LarchAfter",
+      "id": "deleted-row-middle-control",
+      "input": "fixtures/projection/deleted-row-middle-control.docx",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch row labels; no imported assets"
+      },
+      "sha256": "6282f1c14ba0ca42b453b51d3f31841ea245ec3eccc8fbe442826e44cd5ea9dd",
+      "tableMode": "GfmWithOpaqueFallback"
+    },
+    {
+      "anchored": [
+        "LarchAfter"
+      ],
+      "control": false,
+      "expected": "# Document | LarchHeader | | --- | | LarchTail | LarchAfter",
+      "id": "deleted-row-first",
+      "input": "fixtures/projection/deleted-row-first.docx",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch row labels; no imported assets"
+      },
+      "sha256": "5e70bf940d9617fcfa8976989e12d4c5d558eb103395d11c0994fb5d73a05db3",
+      "tableMode": "GfmWithOpaqueFallback"
+    },
+    {
+      "anchored": [
+        "LarchAfter"
+      ],
+      "control": true,
+      "expected": "# Document | LarchRemoved | | --- | | LarchHeader | | LarchTail | LarchAfter",
+      "id": "deleted-row-first-control",
+      "input": "fixtures/projection/deleted-row-first-control.docx",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch row labels; no imported assets"
+      },
+      "sha256": "bd48f75db5d470b91f7888f2dc6b0ac387b5213c5250de3f954be407e773250e",
+      "tableMode": "GfmWithOpaqueFallback"
+    },
+    {
+      "anchored": [
+        "LarchAfter"
+      ],
+      "control": false,
+      "expected": "# Document LarchAfter",
+      "id": "deleted-row-only",
+      "input": "fixtures/projection/deleted-row-only.docx",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch row labels; no imported assets"
+      },
+      "sha256": "8536353a9eb564da8f56f9493ff08e9e9a08900847d1ce9ceb3d7cfbec47886f",
+      "tableMode": "GfmWithOpaqueFallback"
+    },
+    {
+      "anchored": [
+        "LarchAfter"
+      ],
+      "control": true,
+      "expected": "# Document | LarchRemoved | | --- | LarchAfter",
+      "id": "deleted-row-only-control",
+      "input": "fixtures/projection/deleted-row-only-control.docx",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch row labels; no imported assets"
+      },
+      "sha256": "48261b639d1a00c630caca144977ba622b0094a557c87c4317ed9da15ebab196",
+      "tableMode": "GfmWithOpaqueFallback"
+    },
+    {
+      "anchored": [
+        "LarchAfter"
+      ],
+      "control": false,
+      "expected": "# Document | LarchHeader | | --- | | LarchTail | LarchAfter",
+      "id": "deleted-row-wrapped",
+      "input": "fixtures/projection/deleted-row-wrapped.docx",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch row labels; no imported assets"
+      },
+      "sha256": "5cb6d42ccc7aa0334cff1e5703145cd41e4a83da398885d6e4a58579718dfbef",
+      "tableMode": "GfmWithOpaqueFallback"
+    },
+    {
+      "anchored": [
+        "LarchAfter"
+      ],
+      "control": true,
+      "expected": "# Document | LarchHeader | | --- | | LarchRemoved | | LarchTail | LarchAfter",
+      "id": "deleted-row-wrapped-control",
+      "input": "fixtures/projection/deleted-row-wrapped-control.docx",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch row labels; no imported assets"
+      },
+      "sha256": "bcb02169a1622445545503589cff57cfe1f12930aafb7f431fe226cebbb173f7",
+      "tableMode": "GfmWithOpaqueFallback"
+    },
+    {
+      "anchored": [
+        "LarchAfter"
+      ],
+      "control": false,
+      "expected": "# Document | LarchHeader0 | LarchHeader1 | | --- | --- | | LarchTail0 | LarchTail1 | LarchAfter",
+      "id": "deleted-row-merged",
+      "input": "fixtures/projection/deleted-row-merged.docx",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch row labels; no imported assets"
+      },
+      "sha256": "42f563d180694e7e496d8cf0c4e2f96c732cd5b60394e098893775af2a120bbf",
+      "tableMode": "GfmWithOpaqueFallback"
+    },
+    {
+      "anchored": [
+        "LarchAfter"
+      ],
+      "control": true,
+      "expected": "# Document ```table rows: 3 cols: 2 ``` LarchAfter",
+      "id": "deleted-row-merged-control",
+      "input": "fixtures/projection/deleted-row-merged-control.docx",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch row labels; no imported assets"
+      },
+      "sha256": "42aa03d188e897c88fcca001fdadb4f2bcc23082053798175c4df231c6cf0125",
+      "tableMode": "GfmWithOpaqueFallback"
+    },
+    {
+      "anchored": [
+        "LarchAfter"
+      ],
+      "control": false,
+      "expected": "# Document | LarchHeader | | --- | | LarchTail | LarchAfter",
+      "id": "deleted-row-textbox",
+      "input": "fixtures/projection/deleted-row-textbox.docx",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch row labels; no imported assets"
+      },
+      "sha256": "46e36f664d1253fea781362122b45c99d4c7ecb66760c8716ec82a909205196a",
+      "tableMode": "GfmWithOpaqueFallback"
+    },
+    {
+      "anchored": [
+        "LarchAfter"
+      ],
+      "control": true,
+      "expected": "# Document | LarchHeader | | --- | | LarchRemoved | | LarchTail | LarchBox LarchAfter",
+      "id": "deleted-row-textbox-control",
+      "input": "fixtures/projection/deleted-row-textbox-control.docx",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch row labels; no imported assets"
+      },
+      "sha256": "03f35cd2ad0f9b6a98964d1a7c8eb2cffb473b5177895a90162ed09e2ff99a99",
+      "tableMode": "GfmWithOpaqueFallback"
+    },
+    {
+      "anchored": [
+        "LarchAfter"
+      ],
+      "control": false,
+      "expected": "# Document ```table rows: 2 cols: 1 ``` LarchAfter",
+      "id": "deleted-row-opaque",
+      "input": "fixtures/projection/deleted-row-opaque.docx",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch row labels; no imported assets"
+      },
+      "sha256": "2e14ab36129add58b8fd98bca6ec0769dcf460171210a8feb42e1f48eb1d080a",
+      "tableMode": "AlwaysOpaque"
+    },
+    {
+      "anchored": [
+        "LarchAfter"
+      ],
+      "control": true,
+      "expected": "# Document ```table rows: 3 cols: 1 ``` LarchAfter",
+      "id": "deleted-row-opaque-control",
+      "input": "fixtures/projection/deleted-row-opaque-control.docx",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch row labels; no imported assets"
+      },
+      "sha256": "6282f1c14ba0ca42b453b51d3f31841ea245ec3eccc8fbe442826e44cd5ea9dd",
+      "tableMode": "AlwaysOpaque"
     }
   ],
-  "generatorSha256": "b144fec55c568e13ddb890c0c47e4bc483f85798e25fe64a220a7d73162d850a",
+  "generatorSha256": "60bac94002434c8bba2d9b84f98ea981c64fc30d151e0bf0242c1ebe90f6ebf0",
   "schema": 1,
-  "suite": "projection-v2",
-  "version": 2
+  "suite": "projection-v3",
+  "version": 3
 }

@@ -90,7 +90,45 @@ def generate(root=ROOT):
                           'expected': '# Document ' + middle + ' LarchTail', 'anchored': ['LarchTail'],
                           'rights': {'author': 'John Scrudato IV', 'license': 'MIT',
                           'origin': 'Original literal OOXML and Larch labels; no imported assets'}})
-    manifest = {'schema': 1, 'suite': 'projection-v2', 'version': 2,
+    for kind in ('middle', 'first', 'only', 'wrapped', 'merged', 'textbox', 'opaque'):
+        for is_control in (False, True):
+            cid = 'deleted-row-' + kind + ('-control' if is_control else '')
+            mark = 'w:id="1" w:author="Larch Reviewer"'
+            deleted = '' if is_control else '<w:trPr><w:del ' + mark + '/></w:trPr>'
+            text = run('LarchRemoved') if is_control else '<w:del w:id="2" w:author="Larch Reviewer"><w:r><w:delText>LarchRemoved</w:delText></w:r></w:del>'
+            cell_props = '<w:tcPr><w:gridSpan w:val="2"/></w:tcPr>' if kind == 'merged' else ''
+            box = '<w:r>' + vml(para('LarchBox')) + '</w:r>' if kind == 'textbox' else ''
+            removed = '<w:tr>' + deleted + '<w:tc>' + cell_props + para(runs=text + box) + '</w:tc></w:tr>'
+            if kind == 'wrapped':
+                removed = control(removed)
+            columns = 2 if kind == 'merged' else 1
+            def kept(label):
+                return '<w:tr>' + ''.join('<w:tc>' + para(label + (str(i) if columns > 1 else '')) + '</w:tc>' for i in range(columns)) + '</w:tr>'
+            rows = removed if kind == 'only' else (removed + kept('LarchHeader') if kind == 'first'
+                    else kept('LarchHeader') + removed) + kept('LarchTail')
+            body = '<w:tbl><w:tblPr/><w:tblGrid>' + '<w:gridCol w:w="2400"/>' * columns + '</w:tblGrid>' + rows + '</w:tbl>' + para('LarchAfter')
+            path = folder / (cid + '.docx')
+            package(path, body, namespaces_extra=NS, styles_xml=f'<w:styles xmlns:w="{W}"/>')
+            opaque = kind == 'opaque' or (kind == 'merged' and is_control)
+            if opaque:
+                middle = '```table rows: ' + ('3' if is_control else '2') + ' cols: ' + str(columns) + ' ```'
+            elif kind == 'only':
+                middle = '| LarchRemoved | | --- |' if is_control else ''
+            else:
+                labels = ['LarchHeader', 'LarchTail']
+                if is_control:
+                    labels.insert(0 if kind == 'first' else 1, 'LarchRemoved')
+                lines = ['| ' + ' | '.join(label + (str(i) if columns > 1 else '') for i in range(columns)) + ' |' for label in labels]
+                lines.insert(1, '|' + ' --- |' * columns)
+                middle = ' '.join(lines)
+            if kind == 'textbox' and is_control:
+                middle += ' LarchBox'
+            cases.append({'id': cid, 'input': str(path.relative_to(root)), 'sha256': digest(path),
+                          'control': is_control, 'tableMode': 'AlwaysOpaque' if kind == 'opaque' else 'GfmWithOpaqueFallback',
+                          'expected': ' '.join(('# Document ' + middle + ' LarchAfter').split()), 'anchored': ['LarchAfter'],
+                          'rights': {'author': 'John Scrudato IV', 'license': 'MIT',
+                          'origin': 'Original literal OOXML and Larch row labels; no imported assets'}})
+    manifest = {'schema': 1, 'suite': 'projection-v3', 'version': 3,
                 'generatorSha256': digest(Path(__file__)), 'cases': cases}
     write_json(folder / 'manifest.json', manifest)
     return manifest

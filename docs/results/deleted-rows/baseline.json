@@ -1,0 +1,1227 @@
+{
+  "build": {
+    "adapterSources": {
+      "adapters/docxodus-projection/DocxBenchProjection.csproj": "480e342d3bb0fdf7faaf41738c59a34b6323980f24a45eb0823110ddfa54e6da",
+      "adapters/docxodus-projection/Program.cs": "7e5fe32a92e051f879ed056748b2b1dcf6c74175a82f598175515102163205e8"
+    },
+    "command": [
+      "/home/jman/.dotnet/dotnet",
+      "build",
+      "/tmp/docx-bench-1625-1628/runs/rows-baseline/src/DocxBenchProjection.csproj",
+      "-c",
+      "Release",
+      "-o",
+      "/tmp/docx-bench-1625-1628/runs/rows-baseline/bin",
+      "-nologo",
+      "-v",
+      "q",
+      "-p:DocxodusRoot=/home/jman/Code/Docxodus/.local-closeout/1625-1628"
+    ],
+    "commit": "90a0fbb862a43a2100213c1b0f001651bed13ed6",
+    "dotnet": "10.0.301",
+    "files": {
+      "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+      "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+      "bin/DocxBenchProjection.dll": "264893f29e2a3521b5f80295e01a510021cd132a16ac03b3eca7bfcc30ac9dd9",
+      "bin/Docxodus.dll": "b53faee0d52b70502c3fcc0b95811989237d1795f67253c216f5f52b80c7182f",
+      "bin/SkiaSharp.dll": "71274ef112eefdf5ca8a1517086787bc786c7103c30115abbb9dc424a09db43e",
+      "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+    },
+    "recipeSha256": "4ecd542379cb3d6bcb54b881e3cb3459a59edada4bd25a09111175291825653f",
+    "schema": 1,
+    "source": "/home/jman/Code/Docxodus/.local-closeout/1625-1628",
+    "tree": "8cd16c7e924b5a86cbd587de1908f4e336df6f7d"
+  },
+  "cases": [
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "vml",
+      "inputSha256": "9606738de612ae2eeb0015fff9111a32228f712c50100ab24e5efcd7a8d0990b",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost\n\n{#p:body:0cb94e7e5132e54d459948d96e7995e2} AshInside\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:a5ea3cab122e06ddb0fe999125397ec9",
+            "markdown": "{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost",
+            "text": "AshHostAshInside"
+          },
+          {
+            "id": "p:body:0cb94e7e5132e54d459948d96e7995e2",
+            "markdown": "{#p:body:0cb94e7e5132e54d459948d96e7995e2} AshInside",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/vml.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "vml-control",
+      "inputSha256": "d44e37f2ceaae9d96d7f6e3c6ec1b93425c5eca7d340fd31f97123ff220cbcbb",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\n\n{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:d78ac2b96bb4f08cdedd208c3faa704b",
+            "markdown": "{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/vml-control.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "choice",
+      "inputSha256": "9c94d742947fb31222e2e679bb2018f53138cc2f7254cb856a033b3b5284f1d4",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost\n\n{#p:body:81f4d054c60618b2088343fb43231126} AshInside\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:a5ea3cab122e06ddb0fe999125397ec9",
+            "markdown": "{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost",
+            "text": "AshHostAshInsideInactiveFallback"
+          },
+          {
+            "id": "p:body:81f4d054c60618b2088343fb43231126",
+            "markdown": "{#p:body:81f4d054c60618b2088343fb43231126} AshInside",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:31cf5162da428e1ab7afbdfdc669948e",
+            "markdown": "",
+            "text": "InactiveFallback"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/choice.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "choice-control",
+      "inputSha256": "d44e37f2ceaae9d96d7f6e3c6ec1b93425c5eca7d340fd31f97123ff220cbcbb",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\n\n{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:d78ac2b96bb4f08cdedd208c3faa704b",
+            "markdown": "{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/choice-control.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "fallback",
+      "inputSha256": "363e0f49f50a841adb48ad9a5c97df615c235c2e6471ff456586ba8cf12daa78",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost\n\n{#p:body:31531543be2a33f15de71635c22539a9} AshInside\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:a5ea3cab122e06ddb0fe999125397ec9",
+            "markdown": "{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost",
+            "text": "AshHostInactiveChoiceAshInside"
+          },
+          {
+            "id": "p:body:6c4c04ce36fec6a85510455e34d8e7ef",
+            "markdown": "",
+            "text": "InactiveChoice"
+          },
+          {
+            "id": "p:body:31531543be2a33f15de71635c22539a9",
+            "markdown": "{#p:body:31531543be2a33f15de71635c22539a9} AshInside",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/fallback.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "fallback-control",
+      "inputSha256": "d44e37f2ceaae9d96d7f6e3c6ec1b93425c5eca7d340fd31f97123ff220cbcbb",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\n\n{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:d78ac2b96bb4f08cdedd208c3faa704b",
+            "markdown": "{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/fallback-control.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "group-sdt",
+      "inputSha256": "df47c63ae310364c772cccf0fa6869cfaf68f58e783027d24e400d55dc7a69f6",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost\n\n{#p:body:a65782770eadd9ac1c096f9d0a51dbca} AshInside\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:a5ea3cab122e06ddb0fe999125397ec9",
+            "markdown": "{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost",
+            "text": "AshHostAshInside"
+          },
+          {
+            "id": "p:body:a65782770eadd9ac1c096f9d0a51dbca",
+            "markdown": "{#p:body:a65782770eadd9ac1c096f9d0a51dbca} AshInside",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/group-sdt.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "group-sdt-control",
+      "inputSha256": "d44e37f2ceaae9d96d7f6e3c6ec1b93425c5eca7d340fd31f97123ff220cbcbb",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\n\n{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:d78ac2b96bb4f08cdedd208c3faa704b",
+            "markdown": "{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/group-sdt-control.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "row-sdt",
+      "inputSha256": "028a2f43add39d4352d0e4a5cf38796e65bb0f61c3b24b6e4c5ac746066d4cc2",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n| AshLeft | AshRight |\n| --- | --- |\n\n{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:e45e718ea29d19bb9ee92b9a51966310",
+            "markdown": "",
+            "text": "AshLeft"
+          },
+          {
+            "id": "p:body:91ef3a8cb9a3effc09d1abaf9286b7e0",
+            "markdown": "",
+            "text": "AshRight"
+          },
+          {
+            "id": "p:body:85539f966de15e2870f0e7d21e1839c5",
+            "markdown": "{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail",
+            "text": "AshTail"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/row-sdt.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "row-sdt-control",
+      "inputSha256": "e9356cd29b91d49f4f2ba4f785dc87a8989fd55063bc8cc5337a78de69674cb4",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n| AshLeft | AshRight |\n| --- | --- |\n\n{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:2ba0b4acf1ff0cc0104b19fb995b7489",
+            "markdown": "",
+            "text": "AshLeft"
+          },
+          {
+            "id": "p:body:443a2c8deb115ef415b13cf147b40d4b",
+            "markdown": "",
+            "text": "AshRight"
+          },
+          {
+            "id": "p:body:85539f966de15e2870f0e7d21e1839c5",
+            "markdown": "{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail",
+            "text": "AshTail"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/row-sdt-control.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "cell-sdt",
+      "inputSha256": "fdf81446ee28fb537e5355b0936b891699a6bcabc703f53856ed2a1fe083e288",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n| AshLeft | AshRight |\n| --- | --- |\n\n{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:2ba0b4acf1ff0cc0104b19fb995b7489",
+            "markdown": "",
+            "text": "AshLeft"
+          },
+          {
+            "id": "p:body:e0131561cc2bc89ba70e0ab5f9564aef",
+            "markdown": "",
+            "text": "AshRight"
+          },
+          {
+            "id": "p:body:85539f966de15e2870f0e7d21e1839c5",
+            "markdown": "{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail",
+            "text": "AshTail"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/cell-sdt.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "cell-sdt-control",
+      "inputSha256": "e9356cd29b91d49f4f2ba4f785dc87a8989fd55063bc8cc5337a78de69674cb4",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n| AshLeft | AshRight |\n| --- | --- |\n\n{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:2ba0b4acf1ff0cc0104b19fb995b7489",
+            "markdown": "",
+            "text": "AshLeft"
+          },
+          {
+            "id": "p:body:443a2c8deb115ef415b13cf147b40d4b",
+            "markdown": "",
+            "text": "AshRight"
+          },
+          {
+            "id": "p:body:85539f966de15e2870f0e7d21e1839c5",
+            "markdown": "{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail",
+            "text": "AshTail"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/cell-sdt-control.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "table-in-box",
+      "inputSha256": "c2cd4aab679dcda30f769bd59ca9c49405b09b6192457fbd0fb4389c7917414f",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost\n\n{#tbl:body:b838405a453835eeaec5bdc175910481}\n| AshLeft | AshRight |\n| --- | --- |\n\n{#p:body:411923fd832ee5b27a9b2ec41a7c9a2b} AshTail\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:a5ea3cab122e06ddb0fe999125397ec9",
+            "markdown": "{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost",
+            "text": "AshHostAshLeftAshRightAshTail"
+          },
+          {
+            "id": "p:body:089e8f7da0001a8c3c8ba89939aa2aee",
+            "markdown": "",
+            "text": "AshLeft"
+          },
+          {
+            "id": "p:body:d1514611c3c88a9c51f50308c1decbd2",
+            "markdown": "",
+            "text": "AshRight"
+          },
+          {
+            "id": "p:body:411923fd832ee5b27a9b2ec41a7c9a2b",
+            "markdown": "{#p:body:411923fd832ee5b27a9b2ec41a7c9a2b} AshTail",
+            "text": "AshTail"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/table-in-box.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "table-in-box-control",
+      "inputSha256": "e9356cd29b91d49f4f2ba4f785dc87a8989fd55063bc8cc5337a78de69674cb4",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n| AshLeft | AshRight |\n| --- | --- |\n\n{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail\n\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:2ba0b4acf1ff0cc0104b19fb995b7489",
+            "markdown": "",
+            "text": "AshLeft"
+          },
+          {
+            "id": "p:body:443a2c8deb115ef415b13cf147b40d4b",
+            "markdown": "",
+            "text": "AshRight"
+          },
+          {
+            "id": "p:body:85539f966de15e2870f0e7d21e1839c5",
+            "markdown": "{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail",
+            "text": "AshTail"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/table-in-box-control.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "rawMutation": true,
+        "schema": true
+      },
+      "id": "raw-replace-tracked",
+      "inputSha256": "8216fedfc71ed3b740b16039c2210e8e5b0262887f753a56997f8fbd7f7bd163",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:4f0550788f63cdb7140c978ae665db74} LarchOriginal\n\n{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:4f0550788f63cdb7140c978ae665db74",
+            "markdown": "{#p:body:4f0550788f63cdb7140c978ae665db74} LarchOriginal",
+            "text": "LarchOriginal"
+          },
+          {
+            "id": "p:body:ea8c9fc951d37499ed663254d774666e",
+            "markdown": "{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail",
+            "text": "LarchTail"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/raw-replace-tracked.docx",
+        "raw": {
+          "error": "TrackedOperationUnsupported",
+          "revisionCount": 0,
+          "success": false,
+          "unchanged": true,
+          "undo": false
+        }
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "rawMutation": true,
+        "schema": true
+      },
+      "id": "raw-replace-control",
+      "inputSha256": "8216fedfc71ed3b740b16039c2210e8e5b0262887f753a56997f8fbd7f7bd163",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:4f0550788f63cdb7140c978ae665db74} LarchReplacement\n\n{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:4f0550788f63cdb7140c978ae665db74",
+            "markdown": "{#p:body:4f0550788f63cdb7140c978ae665db74} LarchReplacement",
+            "text": "LarchReplacement"
+          },
+          {
+            "id": "p:body:ea8c9fc951d37499ed663254d774666e",
+            "markdown": "{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail",
+            "text": "LarchTail"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/raw-replace-control.docx",
+        "raw": {
+          "error": null,
+          "revisionCount": 0,
+          "success": true,
+          "unchanged": false,
+          "undo": true
+        }
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "rawMutation": true,
+        "schema": true
+      },
+      "id": "raw-insert-tracked",
+      "inputSha256": "8216fedfc71ed3b740b16039c2210e8e5b0262887f753a56997f8fbd7f7bd163",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:4f0550788f63cdb7140c978ae665db74} LarchOriginal\n\n{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:4f0550788f63cdb7140c978ae665db74",
+            "markdown": "{#p:body:4f0550788f63cdb7140c978ae665db74} LarchOriginal",
+            "text": "LarchOriginal"
+          },
+          {
+            "id": "p:body:ea8c9fc951d37499ed663254d774666e",
+            "markdown": "{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail",
+            "text": "LarchTail"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/raw-insert-tracked.docx",
+        "raw": {
+          "error": "TrackedOperationUnsupported",
+          "revisionCount": 0,
+          "success": false,
+          "unchanged": true,
+          "undo": false
+        }
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "rawMutation": true,
+        "schema": true
+      },
+      "id": "raw-insert-control",
+      "inputSha256": "8216fedfc71ed3b740b16039c2210e8e5b0262887f753a56997f8fbd7f7bd163",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#p:body:4f0550788f63cdb7140c978ae665db74} LarchOriginal\n\n{#p:body:95a331e497f64cc68f9ba63195476dc1} LarchReplacement\n\n{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:4f0550788f63cdb7140c978ae665db74",
+            "markdown": "{#p:body:4f0550788f63cdb7140c978ae665db74} LarchOriginal",
+            "text": "LarchOriginal"
+          },
+          {
+            "id": "p:body:95a331e497f64cc68f9ba63195476dc1",
+            "markdown": "{#p:body:95a331e497f64cc68f9ba63195476dc1} LarchReplacement",
+            "text": "LarchReplacement"
+          },
+          {
+            "id": "p:body:ea8c9fc951d37499ed663254d774666e",
+            "markdown": "{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail",
+            "text": "LarchTail"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/raw-insert-control.docx",
+        "raw": {
+          "error": null,
+          "revisionCount": 0,
+          "success": true,
+          "unchanged": false,
+          "undo": true
+        }
+      }
+    },
+    {
+      "checks": {
+        "completeText": false,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "deleted-row-middle",
+      "inputSha256": "2e14ab36129add58b8fd98bca6ec0769dcf460171210a8feb42e1f48eb1d080a",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n| LarchHeader |\n| --- |\n|   |\n| LarchTail |\n\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:8e7190fe7115788ebc42b88d0b7027e0",
+            "markdown": "",
+            "text": "LarchHeader"
+          },
+          {
+            "id": "p:body:e47dd00eb7b68b9fccd3c0d7c7406c63",
+            "markdown": "",
+            "text": ""
+          },
+          {
+            "id": "p:body:b398fed8cb79f7da5d04a4939da8567d",
+            "markdown": "",
+            "text": "LarchTail"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/deleted-row-middle.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "deleted-row-middle-control",
+      "inputSha256": "6282f1c14ba0ca42b453b51d3f31841ea245ec3eccc8fbe442826e44cd5ea9dd",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n| LarchHeader |\n| --- |\n| LarchRemoved |\n| LarchTail |\n\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:8e7190fe7115788ebc42b88d0b7027e0",
+            "markdown": "",
+            "text": "LarchHeader"
+          },
+          {
+            "id": "p:body:a95d497428f2f92c7ab3ca69e3c4871d",
+            "markdown": "",
+            "text": "LarchRemoved"
+          },
+          {
+            "id": "p:body:b398fed8cb79f7da5d04a4939da8567d",
+            "markdown": "",
+            "text": "LarchTail"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/deleted-row-middle-control.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": false,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "deleted-row-first",
+      "inputSha256": "5e70bf940d9617fcfa8976989e12d4c5d558eb103395d11c0994fb5d73a05db3",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n|   |\n| --- |\n| LarchHeader |\n| LarchTail |\n\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:13842df7eacbc008bbb31d515cf5972b",
+            "markdown": "",
+            "text": ""
+          },
+          {
+            "id": "p:body:3f1aed1570c3ee4f4b58df0c2d453a50",
+            "markdown": "",
+            "text": "LarchHeader"
+          },
+          {
+            "id": "p:body:b398fed8cb79f7da5d04a4939da8567d",
+            "markdown": "",
+            "text": "LarchTail"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/deleted-row-first.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "deleted-row-first-control",
+      "inputSha256": "bd48f75db5d470b91f7888f2dc6b0ac387b5213c5250de3f954be407e773250e",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n| LarchRemoved |\n| --- |\n| LarchHeader |\n| LarchTail |\n\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:c9e0319ec0ea8dfaa5c7e680e5933109",
+            "markdown": "",
+            "text": "LarchRemoved"
+          },
+          {
+            "id": "p:body:3f1aed1570c3ee4f4b58df0c2d453a50",
+            "markdown": "",
+            "text": "LarchHeader"
+          },
+          {
+            "id": "p:body:b398fed8cb79f7da5d04a4939da8567d",
+            "markdown": "",
+            "text": "LarchTail"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/deleted-row-first-control.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": false,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "deleted-row-only",
+      "inputSha256": "8536353a9eb564da8f56f9493ff08e9e9a08900847d1ce9ceb3d7cfbec47886f",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n|   |\n| --- |\n\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:13842df7eacbc008bbb31d515cf5972b",
+            "markdown": "",
+            "text": ""
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/deleted-row-only.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "deleted-row-only-control",
+      "inputSha256": "48261b639d1a00c630caca144977ba622b0094a557c87c4317ed9da15ebab196",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n| LarchRemoved |\n| --- |\n\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:c9e0319ec0ea8dfaa5c7e680e5933109",
+            "markdown": "",
+            "text": "LarchRemoved"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/deleted-row-only-control.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": false,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "deleted-row-wrapped",
+      "inputSha256": "5cb6d42ccc7aa0334cff1e5703145cd41e4a83da398885d6e4a58579718dfbef",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n| LarchHeader |\n| --- |\n|   |\n| LarchTail |\n\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:8e7190fe7115788ebc42b88d0b7027e0",
+            "markdown": "",
+            "text": "LarchHeader"
+          },
+          {
+            "id": "p:body:9111e3ea6c12d10321792a12f3b89448",
+            "markdown": "",
+            "text": ""
+          },
+          {
+            "id": "p:body:1ebd118b4b8af16201b23b9a02b7136c",
+            "markdown": "",
+            "text": "LarchTail"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/deleted-row-wrapped.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "deleted-row-wrapped-control",
+      "inputSha256": "bcb02169a1622445545503589cff57cfe1f12930aafb7f431fe226cebbb173f7",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n| LarchHeader |\n| --- |\n| LarchRemoved |\n| LarchTail |\n\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:8e7190fe7115788ebc42b88d0b7027e0",
+            "markdown": "",
+            "text": "LarchHeader"
+          },
+          {
+            "id": "p:body:98583573c66744e54d9ff52db1a4813c",
+            "markdown": "",
+            "text": "LarchRemoved"
+          },
+          {
+            "id": "p:body:1ebd118b4b8af16201b23b9a02b7136c",
+            "markdown": "",
+            "text": "LarchTail"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/deleted-row-wrapped-control.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": false,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "deleted-row-merged",
+      "inputSha256": "42f563d180694e7e496d8cf0c4e2f96c732cd5b60394e098893775af2a120bbf",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n```table\nrows: 3\ncols: 2\n```\n\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:4182e55921251e5d1e13cfe0e7a42ef6",
+            "markdown": "",
+            "text": "LarchHeader0"
+          },
+          {
+            "id": "p:body:beaf706ff8cfa1a1c2c7b705668d34f7",
+            "markdown": "",
+            "text": "LarchHeader1"
+          },
+          {
+            "id": "p:body:e47dd00eb7b68b9fccd3c0d7c7406c63",
+            "markdown": "",
+            "text": ""
+          },
+          {
+            "id": "p:body:d72829e3ed5ed639743032ee0b1e5c6f",
+            "markdown": "",
+            "text": "LarchTail0"
+          },
+          {
+            "id": "p:body:f1150a4fc6deb2398e6a2d5e07bc86a1",
+            "markdown": "",
+            "text": "LarchTail1"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/deleted-row-merged.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "deleted-row-merged-control",
+      "inputSha256": "42aa03d188e897c88fcca001fdadb4f2bcc23082053798175c4df231c6cf0125",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n```table\nrows: 3\ncols: 2\n```\n\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:4182e55921251e5d1e13cfe0e7a42ef6",
+            "markdown": "",
+            "text": "LarchHeader0"
+          },
+          {
+            "id": "p:body:beaf706ff8cfa1a1c2c7b705668d34f7",
+            "markdown": "",
+            "text": "LarchHeader1"
+          },
+          {
+            "id": "p:body:a95d497428f2f92c7ab3ca69e3c4871d",
+            "markdown": "",
+            "text": "LarchRemoved"
+          },
+          {
+            "id": "p:body:d72829e3ed5ed639743032ee0b1e5c6f",
+            "markdown": "",
+            "text": "LarchTail0"
+          },
+          {
+            "id": "p:body:f1150a4fc6deb2398e6a2d5e07bc86a1",
+            "markdown": "",
+            "text": "LarchTail1"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/deleted-row-merged-control.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": false,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "deleted-row-textbox",
+      "inputSha256": "46e36f664d1253fea781362122b45c99d4c7ecb66760c8716ec82a909205196a",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n| LarchHeader |\n| --- |\n|   |\n| LarchTail |\n\n{#p:body:df9b70616367554eca1eec2565717587} LarchBox\n\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:8e7190fe7115788ebc42b88d0b7027e0",
+            "markdown": "",
+            "text": "LarchHeader"
+          },
+          {
+            "id": "p:body:8258d1d40deb58de076bea8a9cc7a345",
+            "markdown": "",
+            "text": "LarchBox"
+          },
+          {
+            "id": "p:body:df9b70616367554eca1eec2565717587",
+            "markdown": "{#p:body:df9b70616367554eca1eec2565717587} LarchBox",
+            "text": "LarchBox"
+          },
+          {
+            "id": "p:body:b398fed8cb79f7da5d04a4939da8567d",
+            "markdown": "",
+            "text": "LarchTail"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/deleted-row-textbox.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "deleted-row-textbox-control",
+      "inputSha256": "03f35cd2ad0f9b6a98964d1a7c8eb2cffb473b5177895a90162ed09e2ff99a99",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n| LarchHeader |\n| --- |\n| LarchRemoved |\n| LarchTail |\n\n{#p:body:df9b70616367554eca1eec2565717587} LarchBox\n\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:8e7190fe7115788ebc42b88d0b7027e0",
+            "markdown": "",
+            "text": "LarchHeader"
+          },
+          {
+            "id": "p:body:8258d1d40deb58de076bea8a9cc7a345",
+            "markdown": "",
+            "text": "LarchRemovedLarchBox"
+          },
+          {
+            "id": "p:body:df9b70616367554eca1eec2565717587",
+            "markdown": "{#p:body:df9b70616367554eca1eec2565717587} LarchBox",
+            "text": "LarchBox"
+          },
+          {
+            "id": "p:body:b398fed8cb79f7da5d04a4939da8567d",
+            "markdown": "",
+            "text": "LarchTail"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/deleted-row-textbox-control.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": false,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "deleted-row-opaque",
+      "inputSha256": "2e14ab36129add58b8fd98bca6ec0769dcf460171210a8feb42e1f48eb1d080a",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n```table\nrows: 3\ncols: 1\n```\n\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:8e7190fe7115788ebc42b88d0b7027e0",
+            "markdown": "",
+            "text": "LarchHeader"
+          },
+          {
+            "id": "p:body:e47dd00eb7b68b9fccd3c0d7c7406c63",
+            "markdown": "",
+            "text": ""
+          },
+          {
+            "id": "p:body:b398fed8cb79f7da5d04a4939da8567d",
+            "markdown": "",
+            "text": "LarchTail"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/deleted-row-opaque.docx",
+        "raw": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": true,
+        "schema": true
+      },
+      "id": "deleted-row-opaque-control",
+      "inputSha256": "6282f1c14ba0ca42b453b51d3f31841ea245ec3eccc8fbe442826e44cd5ea9dd",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\n\n{#tbl:body:c8d7175430d2890a576660d37129f163}\n```table\nrows: 3\ncols: 1\n```\n\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\n\n",
+        "paragraphs": [
+          {
+            "id": "p:body:8e7190fe7115788ebc42b88d0b7027e0",
+            "markdown": "",
+            "text": "LarchHeader"
+          },
+          {
+            "id": "p:body:a95d497428f2f92c7ab3ca69e3c4871d",
+            "markdown": "",
+            "text": "LarchRemoved"
+          },
+          {
+            "id": "p:body:b398fed8cb79f7da5d04a4939da8567d",
+            "markdown": "",
+            "text": "LarchTail"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "/tmp/docx-bench-1625-1628/fixtures/projection/deleted-row-opaque-control.docx",
+        "raw": null
+      }
+    }
+  ],
+  "manifestSha256": "5cb963d8620e49652b4e4f8aefc57e81b25e1052ba8b49f260fe820986c283a9",
+  "scope": "Unweighted exact Markdown and anchor checks; no PDF/redline score",
+  "suite": "projection-v3"
+}
