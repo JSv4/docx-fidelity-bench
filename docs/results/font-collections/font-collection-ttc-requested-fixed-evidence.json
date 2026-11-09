@@ -1,0 +1,212 @@
+{
+  "adapter": {
+    "pdfSha256": "532dc5c3b95eb9eba2994c994a48188606ce66f24ca9076b6094f20df8be1372",
+    "productionReport": "/home/jman/Code/Docxodus/.local-closeout/bench-1573/runs/collection-fonts/fixed/font-collection-ttc-requested/production.json",
+    "protocol": 1,
+    "renderer": {
+      "build": {
+        "commands": [
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/1573/npm",
+            "ci"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/1573/npm",
+            "run",
+            "build:wasm"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/1573/npm",
+            "run",
+            "build:ts"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/1573/npm",
+            "run",
+            "build:pagination-bundle"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/1573/npm",
+            "run",
+            "build:worker-bundle"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/1573/npm",
+            "run",
+            "build:export-browser"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/1573/npm",
+            "run",
+            "build:export-assets"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/1573/npm-export",
+            "ci"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/1573/npm-export",
+            "run",
+            "build"
+          ]
+        ],
+        "commit": "323876893b5c461dda78b4c4470b31844522c0e4",
+        "files": {
+          "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+          "npm-export/dist/browser-session.js": "58ef9353572db7ecfc819d67b69a604753225f636c9ecd07a426d94158ff34e4",
+          "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+          "npm-export/dist/cli.js": "d47a322eca4d86403d6b5bd2c1c173cdf6f98667c0c9aa35d5ace301030d2385",
+          "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+          "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+          "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+          "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+          "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+          "npm-export/dist/fonts/discovery.js": "abccc2b7ea024875427d3c67c1f2ddd02beb352f8ab940ca0ac2d2807d2b4af9",
+          "npm-export/dist/fonts/doctor.js": "67f9b4730ac19f63c864a4c52745b4a8b644440bc2b14aaf0245ab2e58f980bd",
+          "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+          "npm-export/dist/fonts/local.js": "f44c167a7e4d0837275a955da3bb1b33e65e0998e72530d6d37dc7928f15bae6",
+          "npm-export/dist/fonts/resolver.js": "38c51c22b993fc733c37faf1e384a3a0f607fd37650f67b3acab00fe4d8ed0fc",
+          "npm-export/dist/fonts/sfnt.js": "626c3dce361d156e1f1a6cc6dbd142adae446fb67f461a563df6638cfa547540",
+          "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+          "npm-export/dist/index.js": "6c9dacb7696fdb006abe6fcafdf29d271c4611e479df18eb2e3ad607392d13a3",
+          "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+          "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+          "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+          "npm/dist/export-assets.json": "42313439bdb158ba81a0419e24a3be507e5db1f8dbd418ee563308fe273a993b",
+          "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+        },
+        "node": "v24.13.1",
+        "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+        "schema": 1,
+        "tree": "1c7fd067bbf4fd720269a4e4baa3ef538c0f189a"
+      },
+      "commit": "323876893b5c461dda78b4c4470b31844522c0e4",
+      "name": "docxodus",
+      "node": "v24.13.1",
+      "runtime": {
+        "architecture": "x64",
+        "browserBuild": "143.0.7499.4",
+        "browserProduct": "Chromium",
+        "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+        "launchFlags": [
+          "--disable-background-networking",
+          "--disable-component-update",
+          "--disable-default-apps",
+          "--disable-domain-reliability",
+          "--disable-sync",
+          "--host-resolver-rules=MAP * ~NOTFOUND",
+          "--metrics-recording-only",
+          "--no-default-browser-check",
+          "--no-first-run"
+        ],
+        "operatingSystem": "linux",
+        "playwrightVersion": "1.57.0"
+      }
+    },
+    "status": "ok"
+  },
+  "category": "paragraphs",
+  "checks": [
+    {
+      "name": "page-count",
+      "passed": true
+    },
+    {
+      "extra": {},
+      "missing": {},
+      "name": "expected-visible-tokens",
+      "normalizedRaw": {},
+      "passed": true
+    },
+    {
+      "name": "declared-font-families",
+      "observed": [
+        "LiatrisTTC-Regular"
+      ],
+      "passed": true
+    },
+    {
+      "name": "physical-geometry-page-1",
+      "passed": true
+    },
+    {
+      "declaration": {
+        "family": "Liatris TTC",
+        "type": "required-font-family",
+        "version": 1
+      },
+      "name": "assertion-required-font-family",
+      "passed": true
+    },
+    {
+      "declaration": {
+        "marker": "LIATRISTTC",
+        "tolerancePt": 0.5,
+        "type": "marker-reference-position",
+        "version": 1
+      },
+      "name": "assertion-marker-reference-position",
+      "passed": true
+    },
+    {
+      "declaration": {
+        "marker": "LIATRISEND",
+        "tolerancePt": 0.5,
+        "type": "marker-reference-position",
+        "version": 1
+      },
+      "name": "assertion-marker-reference-position",
+      "passed": true
+    }
+  ],
+  "close": true,
+  "id": "font-collection-ttc-requested",
+  "pages": [
+    {
+      "candidateInk": 2144,
+      "close": true,
+      "inkF1": 1.0,
+      "pixelMismatch": 0.002908218211527035,
+      "precision": 1.0,
+      "raster": {
+        "candidate": [
+          816,
+          1056
+        ],
+        "candidateSha256": "032f44b7676ec42e72ad9eb4eb4dd10eaf1ef014af7084c163e3373e38d637b3",
+        "height": 1056,
+        "reference": [
+          816,
+          1056
+        ],
+        "referenceSha256": "1c2d605a59faaf1ab7996c5ec2ecad580eae6ed1a5b8af102a4f78408bf1366a",
+        "width": 816
+      },
+      "recall": 1.0,
+      "referenceInk": 2145,
+      "score": 99.68492722485726,
+      "ssim": 0.9968492722485727,
+      "ssimRaw": 0.9968492722485727
+    }
+  ],
+  "score": 99.68492722485726,
+  "status": "measured"
+}
