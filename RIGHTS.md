@@ -1,3 +1,7 @@
+The six mixed-minimum cases extend original Primrose labels and literal OOXML authored
+in bench/fixtures.py. Independent font metrics define line and ink bounds. No product
+fixture, helper, document or font program is imported.
+
 The four small-minimum cases contain original Primrose labels and literal OOXML
 authored in bench/fixtures.py. Line slots use the authored minimum and independent
 Liberation Serif metrics. No renderer fixture, helper, document or font is imported.

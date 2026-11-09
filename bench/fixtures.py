@@ -2095,6 +2095,43 @@ def small_minimum_line_cases(add, cases):
             pageSizePt=[612, 792], requiredTokens=dict(Counter(labels)), exactInventory=True)
 
 
+def mixed_minimum_line_cases(add, cases):
+    """One word per line gives independent mixed-line and page-boundary expectations."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+        '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="20"/>'
+        '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl w:val="0"/>'
+        '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    for name, count, minimum, large in [('lead-13', 18, 13, 0), ('tail-13', 64, 13, 63),
+            ('lead-16', 64, 16, 0), ('tail-16', 18, 16, 17),
+            ('uniform-16-control', 18, 16, -1), ('natural-control', 18, 0, -1)]:
+        labels = [f'Primrose{i // 10}x{i % 10}' for i in range(1, count + 1)]
+        # Each 10pt label is51.108pt; its20pt counterpart fits103pt, but two
+        # small labels plus a space need104.717pt. No hard breaks force wrapping.
+        runs, assertions, page, top = [], [], 1, 72.0
+        for i, label in enumerate(labels):
+            size = 20 if i == large else 10
+            height = max(minimum, 2355 / 2048 * size)
+            if top + height > 720 + 1e-6:
+                page, top = page + 1, 72.0
+            # H-D baseline minus hhea ascent gives the text bounding-box top.
+            ink_top = top + height - 2268 / 2048 * size
+            assertions.append(dict(type='marker-region', marker=label, occurrence=1, page=page,
+                rect=[72, ink_top, 72 + 10467 / 2048 * size, top + height], tolerancePt=.76))
+            runs.append(run(label + (' ' if i + 1 < count else ''), f'<w:sz w:val="{size * 2}"/>'))
+            top += height
+        spacing = f'w:line="{minimum * 20}" w:lineRule="atLeast"' if minimum else 'w:line="240" w:lineRule="auto"'
+        add(f'mixed-minimum-{name}', 'paragraphs',
+            f'Primrose {name} mixed-line minimum and baseline (Docxodus #1566)', labels,
+            para(props=f'<w:spacing w:before="0" w:after="0" {spacing}/><w:ind w:right="7300"/>',
+                runs=''.join(runs)), styles_xml=styles, assertions=assertions,
+            sect='<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" '
+                'w:right="1440" w:bottom="1440" w:left="1440"/></w:sectPr>')
+        for assertion in cases[-1]['assertions']:
+            assertion['tolerancePt'] = .76
+        cases[-1]['pdfCompanion'] = dict(profile=dict(review='final', comments='hidden'),
+            pageSizePt=[612, 792], requiredTokens=dict(Counter(labels)), exactInventory=True)
+
+
 def natural_minimum_line_cases(add, cases):
     """Original Oxlip words wrap one per line in a narrow, uniform body paragraph."""
     for count in (18, 64):
@@ -6082,12 +6119,13 @@ def generate():
     manual_text_width_cases(add, cases)
     wordperfect_justification_cases(add, cases)
     small_minimum_line_cases(add, cases)
+    mixed_minimum_line_cases(add, cases)
     paragraph_text_independence_cases(add, cases)
     grouped_paper_placement_cases(add, cases)
     floating_paragraph_cases(add, cases)
     custom_path_cases(add)
     plain_math_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v139', 'version': 139, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v140', 'version': 140, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

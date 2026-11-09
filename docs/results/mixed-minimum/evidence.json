@@ -1,0 +1,542 @@
+{
+  "scope": "Unscored public-export diagnostic. Baseline is the previous unpublished development build, not released main. Authored line/ink bounds follow independent Liberation Serif metrics and the Word minimum-baseline observation documented in Docxodus TestFiles/LineSpacingWord. No Word capture of these benchmark inputs or new fidelity score is claimed.",
+  "builds": {
+    "baseline": {
+      "schema": 1,
+      "commit": "7d1026edf971338accbbeb3bff82953cd63e993c",
+      "tree": "06e99efb7c46b4ef6e4da031d320e655cd5f61e8",
+      "node": "v24.13.1",
+      "recipe": "Reused completed full npm production build; no source changes since build except docs, tests and measured bundle gate metadata. Export package built separately.",
+      "buildLogSha256": "7da98c8b9419fee36efe18e7af594a1d3baec2fa23283718547fdd2af4125dbb",
+      "files": {
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "92e2f3b5209c33f3a190ef552bd45de822891b806feffff883a2c6d869402ea8",
+        "npm/src/line-metrics.ts": "78663f65e268502eaf52da84ebd73c02190ef7b6354ac04be82b48deb74aedae",
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab"
+      }
+    },
+    "candidate": {
+      "schema": 1,
+      "commit": "01037c930349e9f4c52cc970e48f371b2974df80",
+      "tree": "e78f5093f82ffeddb360089b29a6083774ca3fb3",
+      "node": "v24.13.1",
+      "recipe": "Reused completed full npm production build; no source changes since build except docs, tests and measured bundle gate metadata. Export package built separately.",
+      "buildLogSha256": "8654ccb5508f975f196ec222dedf53b109f59d8f580b4e2a5d86866e6f690f28",
+      "files": {
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "61572e097728af38b6b01b5c7057fc71caa5fdb42fdd996af82c0d8b4aee2543",
+        "npm/src/line-metrics.ts": "9020240f72bb4449bbcd9720ebdd0f073ede7208aab77c65ac56c85a5f4b5da1",
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab"
+      }
+    }
+  },
+  "captures": {
+    "baseline": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "7d1026edf971338accbbeb3bff82953cd63e993c",
+      "sourceTree": "06e99efb7c46b4ef6e4da031d320e655cd5f61e8",
+      "buildIdentitySha256": "d25b964b503efea5a3157c81f6bddff25a5b696b3d554ac7f01ca7d07ff20681",
+      "manifestSha256": "cdca0463a2ccc5d7387f9b6239e0c30a6f7da521c51a7ee7faea8577b470ce2b",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "mixed-minimum-lead-13",
+          "inputSha256": "21febb51f347afe38ea524d4088c93fd7634028b3084c3c68d2e9a8bb278edb0",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "505ec3d124958312c6e24f0b444a04c753e0ebb07948a656b42bc32baa734037",
+          "renderReportSha256": "5f002c6bb4a80a9e25d6b0c01cbb9456b12d8d7aa7ecf6256b2c3d553b4bf3be",
+          "htmlSha256": "23c1bce68e61c5adfac3e59a5c38cfc9ee9e0a38ebf2f4706b4a24b1fce77f3a",
+          "htmlFactsSha256": "20890c518b8eebc17cc6a2eb4a531292aac02daf15ec053ff53c8af32cadfd4d"
+        },
+        {
+          "id": "mixed-minimum-tail-13",
+          "inputSha256": "d88914e98047a87e38e448b033c4948d6b94840fa4c66943dccc01666c6288d9",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "37e3de0badc5d4ec762248c544e651d33c26a4ba8c1b16e398fee9d0ffb05d8e",
+          "renderReportSha256": "e9494d5a12573c6876acc0e3934dbf0d82f4586ad952a15c4c3b953d76503149",
+          "htmlSha256": "296a03d641cbdbfb12fcb303bc6d87681952fc7ead4661c21ac10051a939515b",
+          "htmlFactsSha256": "bb1cbcd209fb45a1eddd9d8ce88f774721edaee8f0f94c258d851bb74f3ff487"
+        },
+        {
+          "id": "mixed-minimum-lead-16",
+          "inputSha256": "98e0a78e3910ea1718c475fcf95870a885ad1cf09b244e9819da6adbe25a57fd",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "06df2baf5e0256eef3a08f240b7a3f628d8ccea6df79bcedc5e1f09e176a4766",
+          "renderReportSha256": "913e5bda598e585f9b1da384375427f2af25b7fd1de8133a62c093950e7b8b91",
+          "htmlSha256": "73006484576504d3db9b290c971bc38998cf59de9f4c98ce38c373892a162496",
+          "htmlFactsSha256": "70bc5cbfa200758f8d0eb82e7e39ddca56f37286a57bb5a0238f8f42ba6392e2"
+        },
+        {
+          "id": "mixed-minimum-tail-16",
+          "inputSha256": "7058017c1e41f61360bf5220494bdcb9bc5f82e13c2af8a5481fc9e1cfa25976",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "7f89d0115084c800fb74fb8da46b968791b025461c7ec665fdc232746d3dbf77",
+          "renderReportSha256": "a67f0a650f7c75f9382a3d0284d5441a0ac9d179271ad986813ab8455bf33b7f",
+          "htmlSha256": "eedf0daf1a0eb26ea122704118d90cbe258978c4bd8124d0b4bdf62484b2c688",
+          "htmlFactsSha256": "83855c581cff451ccc40a64fd8cdba91532415f807fc62a76887223f0d8b3486"
+        },
+        {
+          "id": "mixed-minimum-uniform-16-control",
+          "inputSha256": "041ddbc40f88339d397c45c99ded1c144666f3b158ac8bb9fc5e728b97df8625",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "b1f7837333f5cfd6c8abdfeb0f911d2b0e9d73909ccfbcdd45679998ea34605d",
+          "renderReportSha256": "ba50ab9d0fe631bf4d8a94c274b7f70a7f6e8c12ef5a976bfecdc41af2d70aec",
+          "htmlSha256": "8c9b6ca2b7a6f687ec51229baccf13ad03b83a37f17689a9db3bc9e56ad6750c",
+          "htmlFactsSha256": "8991d65576081d45312cb24689c10d09fbe0d6db1bcb12116f588c1a459480dc"
+        },
+        {
+          "id": "mixed-minimum-natural-control",
+          "inputSha256": "193ef47c28a49f25cabd69573cbf9f5cb457376126cc884402645bea090ee790",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "9f9c6daed0c38d4dc0d0e9e9c1eb7ba9b72e3f0d16334a3566e1c6e282af60ee",
+          "renderReportSha256": "3426f80a569544ceeb25f7bcf9b15149079186ba88924945cdbcdd422e40d7ec",
+          "htmlSha256": "b7c0c0eb8dd80dc6fd793a12b9dd47714495c0aace7f72b0cad06395a720d02b",
+          "htmlFactsSha256": "120ac29352216c0d757ecd8f5e0b85a4e0f37656807dc7cd17412a21de7f60ba"
+        }
+      ],
+      "htmlInspectorSha256": "87805e278400914cd87a2fe8e89c498748b7f45eecd5ca432b9c2be2d95b4cbb"
+    },
+    "candidate": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "01037c930349e9f4c52cc970e48f371b2974df80",
+      "sourceTree": "e78f5093f82ffeddb360089b29a6083774ca3fb3",
+      "buildIdentitySha256": "ab1ceb82db297b3f9ffa580c2f6bfc55f42f255179c144f6374d0e2ef177d09b",
+      "manifestSha256": "cdca0463a2ccc5d7387f9b6239e0c30a6f7da521c51a7ee7faea8577b470ce2b",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "mixed-minimum-lead-13",
+          "inputSha256": "21febb51f347afe38ea524d4088c93fd7634028b3084c3c68d2e9a8bb278edb0",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "bbec11542e12c4464741dce52ea41452616507addb28dba05861c98f81d289e8",
+          "renderReportSha256": "c9178bfe63ae9d2f18d1cd5707e7b6d39fd69b08f42ec61de9515ef6853803e3",
+          "htmlSha256": "b8a00c404a3c037fb6b03ec5573bb60b3e07e92456da00b3484f5307539839b1",
+          "htmlFactsSha256": "b535202a33a5da5507cfc387aefc461aac163f4011499224050cd3c010f40b33"
+        },
+        {
+          "id": "mixed-minimum-tail-13",
+          "inputSha256": "d88914e98047a87e38e448b033c4948d6b94840fa4c66943dccc01666c6288d9",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "482a1c5b46ed1c5da9a1e0929ed32136802a485eb809897d9404db921c2919bf",
+          "renderReportSha256": "e0f76202c1966e230758086ddb909fefe9fb9653c594e96eaa6582fa605f51e4",
+          "htmlSha256": "d02e6de6d3fcbc2080518c007a1224b29283c14b3de222ebce251e7387b02597",
+          "htmlFactsSha256": "2de26c7d19df14511268042025021ae91f9dbb3d691bd49b67c6ab9671f2fa6e"
+        },
+        {
+          "id": "mixed-minimum-lead-16",
+          "inputSha256": "98e0a78e3910ea1718c475fcf95870a885ad1cf09b244e9819da6adbe25a57fd",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "f32cbdcbadd75b92de8193177ac05c9861be510b20f6e1fafaaa3c6c62610734",
+          "renderReportSha256": "dbb9485644f0f8e001eefe60cf3e7780d30f13cfde197e143ac7ace9a5901bd3",
+          "htmlSha256": "0aabe4c9f547e9684c2e47456afc11717fa5c712a88ffe6bbfc4a0bc917b9f3b",
+          "htmlFactsSha256": "c7e299b81f5c5c31453494744cb130028c3573aab13ce797fbf5bb174d3a800f"
+        },
+        {
+          "id": "mixed-minimum-tail-16",
+          "inputSha256": "7058017c1e41f61360bf5220494bdcb9bc5f82e13c2af8a5481fc9e1cfa25976",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "aab6faeed7c384791246593c34af4f65e8c0b311dd041aa1d6b66e6944980449",
+          "renderReportSha256": "b7f80de1327552f37a237b3840d51a50783f03e220a947b8a951902a578ab893",
+          "htmlSha256": "59678cfea0b69a9954e9de298502b5494b12c6c4fbeec0ecb85a869a045318cf",
+          "htmlFactsSha256": "d8801c14de7ff09b7f23e235ac03fab918c9a1f4c579a2dd2a273467fed24ddc"
+        },
+        {
+          "id": "mixed-minimum-uniform-16-control",
+          "inputSha256": "041ddbc40f88339d397c45c99ded1c144666f3b158ac8bb9fc5e728b97df8625",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "8dc77c293773122baff6a9f7b6fc46cbde511474a98c4221f5299d47bdbbbd4c",
+          "renderReportSha256": "4e14aa208c60f5af762cf573ff8d8e2bab53427f4fe17ef20fcf170eeaf9e5bc",
+          "htmlSha256": "feb11f18bb20606f7bbe14aaf27b4f2200bb6110ba80be33e52cf26712789d40",
+          "htmlFactsSha256": "19ede01aa0f41fba7db7ee326dd8b8992c57ecb5880f724a2d0b9e2222bdb571"
+        },
+        {
+          "id": "mixed-minimum-natural-control",
+          "inputSha256": "193ef47c28a49f25cabd69573cbf9f5cb457376126cc884402645bea090ee790",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "b3b0bfe921f1042b38808e474293107f707499fa6f35df85f855d33c9806fb7a",
+          "renderReportSha256": "6b2ae30b36c891ceeed8f47d1af18f8d0e93a983af925fc5abe731a4773a7284",
+          "htmlSha256": "135477028925864dcdd0d7cd57c2335f823a4047ad071a40fb38f380ac0c4899",
+          "htmlFactsSha256": "fcc0747eeb619a7b54eef0f847c1e0c78587e8be17dca858ade0ce11af59f97c"
+        }
+      ],
+      "htmlInspectorSha256": "87805e278400914cd87a2fe8e89c498748b7f45eecd5ca432b9c2be2d95b4cbb"
+    }
+  },
+  "manifestSha256": "cdca0463a2ccc5d7387f9b6239e0c30a6f7da521c51a7ee7faea8577b470ce2b",
+  "cases": [
+    {
+      "id": "mixed-minimum-lead-13",
+      "inputSha256": "21febb51f347afe38ea524d4088c93fd7634028b3084c3c68d2e9a8bb278edb0",
+      "renderers": {
+        "baseline": {
+          "pdf": "pdf/mixed-minimum-lead-13-baseline.pdf",
+          "sha256": "505ec3d124958312c6e24f0b444a04c753e0ebb07948a656b42bc32baa734037",
+          "facts": "mixed-minimum-lead-13-baseline.json.gz",
+          "factsSha256": "fec31254cf829973c7a31871ffd73db8f0ded1a8cfe9c78245358361b62cef3d",
+          "failures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ]
+        },
+        "candidate": {
+          "pdf": "pdf/mixed-minimum-lead-13-candidate.pdf",
+          "sha256": "bbec11542e12c4464741dce52ea41452616507addb28dba05861c98f81d289e8",
+          "facts": "mixed-minimum-lead-13-candidate.json.gz",
+          "factsSha256": "29c51a0e53930761207134534aaa52c76d1bc42b3c6b14137c3b3e2c3125c1db",
+          "failures": []
+        }
+      },
+      "screenshot": "mixed-minimum-lead-13.png"
+    },
+    {
+      "id": "mixed-minimum-tail-13",
+      "inputSha256": "d88914e98047a87e38e448b033c4948d6b94840fa4c66943dccc01666c6288d9",
+      "renderers": {
+        "baseline": {
+          "pdf": "pdf/mixed-minimum-tail-13-baseline.pdf",
+          "sha256": "37e3de0badc5d4ec762248c544e651d33c26a4ba8c1b16e398fee9d0ffb05d8e",
+          "facts": "mixed-minimum-tail-13-baseline.json.gz",
+          "factsSha256": "ef4376191657798956142a39472b9a6a19ee008d0c41a91f98b59a1fc843bd94",
+          "failures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ]
+        },
+        "candidate": {
+          "pdf": "pdf/mixed-minimum-tail-13-candidate.pdf",
+          "sha256": "482a1c5b46ed1c5da9a1e0929ed32136802a485eb809897d9404db921c2919bf",
+          "facts": "mixed-minimum-tail-13-candidate.json.gz",
+          "factsSha256": "dcf8b509be238151fba6e1e4a5e4e5f33bb5f760df79ea2efb420bb3d3fa2dd2",
+          "failures": []
+        }
+      },
+      "screenshot": "mixed-minimum-tail-13.png"
+    },
+    {
+      "id": "mixed-minimum-lead-16",
+      "inputSha256": "98e0a78e3910ea1718c475fcf95870a885ad1cf09b244e9819da6adbe25a57fd",
+      "renderers": {
+        "baseline": {
+          "pdf": "pdf/mixed-minimum-lead-16-baseline.pdf",
+          "sha256": "06df2baf5e0256eef3a08f240b7a3f628d8ccea6df79bcedc5e1f09e176a4766",
+          "facts": "mixed-minimum-lead-16-baseline.json.gz",
+          "factsSha256": "cad271d6e61fccade4f937cf659890d8c5e06544e46ead45da35b8413fb3959b",
+          "failures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ]
+        },
+        "candidate": {
+          "pdf": "pdf/mixed-minimum-lead-16-candidate.pdf",
+          "sha256": "f32cbdcbadd75b92de8193177ac05c9861be510b20f6e1fafaaa3c6c62610734",
+          "facts": "mixed-minimum-lead-16-candidate.json.gz",
+          "factsSha256": "3171b14b2591f507da561823d8929c0405fe940ac967f36e4e5265282c975563",
+          "failures": []
+        }
+      },
+      "screenshot": "mixed-minimum-lead-16.png"
+    },
+    {
+      "id": "mixed-minimum-tail-16",
+      "inputSha256": "7058017c1e41f61360bf5220494bdcb9bc5f82e13c2af8a5481fc9e1cfa25976",
+      "renderers": {
+        "baseline": {
+          "pdf": "pdf/mixed-minimum-tail-16-baseline.pdf",
+          "sha256": "7f89d0115084c800fb74fb8da46b968791b025461c7ec665fdc232746d3dbf77",
+          "facts": "mixed-minimum-tail-16-baseline.json.gz",
+          "factsSha256": "93a67862f214a249ff97ccec8d2fde405ff943a068b7af003af10e5b859df924",
+          "failures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ]
+        },
+        "candidate": {
+          "pdf": "pdf/mixed-minimum-tail-16-candidate.pdf",
+          "sha256": "aab6faeed7c384791246593c34af4f65e8c0b311dd041aa1d6b66e6944980449",
+          "facts": "mixed-minimum-tail-16-candidate.json.gz",
+          "factsSha256": "281a184f7646e77b504f1dd25f2935de6b3bc5a96cef6ef2763901eb61c45061",
+          "failures": []
+        }
+      },
+      "screenshot": "mixed-minimum-tail-16.png"
+    },
+    {
+      "id": "mixed-minimum-uniform-16-control",
+      "inputSha256": "041ddbc40f88339d397c45c99ded1c144666f3b158ac8bb9fc5e728b97df8625",
+      "renderers": {
+        "baseline": {
+          "pdf": "pdf/mixed-minimum-uniform-16-control-baseline.pdf",
+          "sha256": "b1f7837333f5cfd6c8abdfeb0f911d2b0e9d73909ccfbcdd45679998ea34605d",
+          "facts": "mixed-minimum-uniform-16-control-baseline.json.gz",
+          "factsSha256": "8a01243aa417a1fe44541c813e11832a72be9b6a095d28677579c96564161c02",
+          "failures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ]
+        },
+        "candidate": {
+          "pdf": "pdf/mixed-minimum-uniform-16-control-candidate.pdf",
+          "sha256": "8dc77c293773122baff6a9f7b6fc46cbde511474a98c4221f5299d47bdbbbd4c",
+          "facts": "mixed-minimum-uniform-16-control-candidate.json.gz",
+          "factsSha256": "60a4aa4f4b48e852f1e5e512895a2a072d677a99b33de59714b1c2e103d85445",
+          "failures": []
+        }
+      },
+      "screenshot": "mixed-minimum-uniform-16-control.png"
+    },
+    {
+      "id": "mixed-minimum-natural-control",
+      "inputSha256": "193ef47c28a49f25cabd69573cbf9f5cb457376126cc884402645bea090ee790",
+      "renderers": {
+        "baseline": {
+          "pdf": "pdf/mixed-minimum-natural-control-baseline.pdf",
+          "sha256": "9f9c6daed0c38d4dc0d0e9e9c1eb7ba9b72e3f0d16334a3566e1c6e282af60ee",
+          "facts": "mixed-minimum-natural-control-baseline.json.gz",
+          "factsSha256": "ea294ec10b5a49d7fec6eb9094361de9ffca74420ae10d3e49f4716284f8f495",
+          "failures": []
+        },
+        "candidate": {
+          "pdf": "pdf/mixed-minimum-natural-control-candidate.pdf",
+          "sha256": "b3b0bfe921f1042b38808e474293107f707499fa6f35df85f855d33c9806fb7a",
+          "facts": "mixed-minimum-natural-control-candidate.json.gz",
+          "factsSha256": "3ba48adedd5b503d6c8752acca8f1052867226b025dd4bfde8590408bedeff9c",
+          "failures": []
+        }
+      },
+      "naturalControlMaxCoordinateDeltaPt": 0.328125,
+      "screenshot": "mixed-minimum-natural-control.png"
+    }
+  ]
+}
