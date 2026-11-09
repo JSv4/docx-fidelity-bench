@@ -1,3 +1,7 @@
+The four raw-tracking diagnostics use original Larch labels and literal OOXML authored
+in `bench/projection_fixtures.py`. No product fixture, helper, document or asset is imported.
+Their screenshots show measured public API output, not Word page renders.
+
 The two flow-story cases contain original Gentian labels and literal OOXML authored
 in bench/fixtures.py. No product fixture, helper, document, image or font program is
 imported. Review screenshots show all authored content across three LibreOffice pages.

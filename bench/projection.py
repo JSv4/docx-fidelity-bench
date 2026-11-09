@@ -15,10 +15,16 @@ def normalize(markdown):
 
 
 def checks(case, observation):
-    return {'schema': observation['errors'] == [],
+    result = {'schema': observation['errors'] == [],
             'completeText': normalize(observation['markdown']) == case['expected'],
             'paragraphAnchors': all(any(p['text'] == text and normalize(p['markdown']) == text
                                        for p in observation['paragraphs']) for text in case['anchored'])}
+    if 'operation' in case:
+        tracked = case['tracked']
+        result['rawMutation'] = observation.get('raw') == {
+            'success': not tracked, 'error': 'TrackedOperationUnsupported' if tracked else None,
+            'revisionCount': 0, 'unchanged': tracked, 'undo': not tracked}
+    return result
 
 
 def build(source, commit, out):
@@ -44,7 +50,8 @@ def run(build_dir, output):
     _verify_files(folder, record)
     manifest = validate()
     observations = json.loads(execute([dotnet(), folder / 'bin/DocxBenchProjection.dll'] +
-                                     [ROOT / c['input'] for c in manifest['cases']], timeout=300))
+                                     [json.dumps({'path': str(ROOT / c['input']), 'operation': c.get('operation'),
+                                                  'tracked': c.get('tracked', False)}) for c in manifest['cases']], timeout=300))
     if len(observations) != len(manifest['cases']):
         raise ValueError('Missing projection observations')
     results = []

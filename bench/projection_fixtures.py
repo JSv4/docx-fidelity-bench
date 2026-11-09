@@ -77,7 +77,20 @@ def generate(root=ROOT):
                           'control': is_control, 'expected': '# Document AshHost ' + expected_middle + ' AshFollowing',
                           'anchored': anchored, 'rights': {'author': 'John Scrudato IV', 'license': 'MIT',
                           'origin': 'Original literal OOXML and Ash labels; no imported assets'}})
-    manifest = {'schema': 1, 'suite': 'projection-v1', 'version': 1,
+    for operation in ('raw-replace', 'raw-insert'):
+        for tracked in (True, False):
+            cid = operation + ('-tracked' if tracked else '-control')
+            path = folder / (cid + '.docx')
+            package(path, para('LarchOriginal') + para('LarchTail'),
+                    styles_xml=f'<w:styles xmlns:w="{W}"/>')
+            middle = 'LarchOriginal' if tracked else ('LarchOriginal LarchReplacement'
+                if operation == 'raw-insert' else 'LarchReplacement')
+            cases.append({'id': cid, 'input': str(path.relative_to(root)), 'sha256': digest(path),
+                          'control': not tracked, 'operation': operation, 'tracked': tracked,
+                          'expected': '# Document ' + middle + ' LarchTail', 'anchored': ['LarchTail'],
+                          'rights': {'author': 'John Scrudato IV', 'license': 'MIT',
+                          'origin': 'Original literal OOXML and Larch labels; no imported assets'}})
+    manifest = {'schema': 1, 'suite': 'projection-v2', 'version': 2,
                 'generatorSha256': digest(Path(__file__)), 'cases': cases}
     write_json(folder / 'manifest.json', manifest)
     return manifest
