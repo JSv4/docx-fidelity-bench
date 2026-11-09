@@ -103,6 +103,22 @@ def run(text, props=''):
     return f'<w:r><w:rPr>{props}</w:rPr><w:t xml:space="preserve">{escape(text)}</w:t></w:r>'
 
 
+def adjacent_text_span_cases(add):
+    """Collateral PDF preservation for flow-HTML span joining; DOM shape is tested upstream."""
+    labels = ['CelandineHarbor', 'CelandineLedger', 'CelandineBold CelandineItalic']
+    for fragmented in (True, False):
+        bold = (run('Celandine', '<w:b/>') + run('Harbor', '<w:b/>') if fragmented
+                else run(labels[0], '<w:b/>'))
+        inert = (run('Celandine', '<w:bCs/>') + run('Ledger') if fragmented else run(labels[1]))
+        distinct = run('CelandineBold ', '<w:b/>') + run('CelandineItalic', '<w:i/>')
+        add('text-span-' + ('fragmented' if fragmented else 'whole-control'), 'paragraphs',
+            'Preserved text and formatting across ' + ('split' if fragmented else 'whole')
+            + ' source runs (Docxodus #1624; PDF does not assert DOM coalescing)', labels,
+            para(runs=bold) + para(runs=inert) + para(runs=distinct),
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker,
+                         'tolerancePt': 0.5} for marker in ' '.join(labels).split()])
+
+
 def para(text='', props='', runs=None):
     return f'<w:p><w:pPr>{props}</w:pPr>{run(text) if runs is None else runs}</w:p>'
 
@@ -6205,7 +6221,8 @@ def generate():
     custom_path_cases(add)
     plain_math_cases(add, cases)
     emf_image_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v142', 'version': 142, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    adjacent_text_span_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v143', 'version': 143, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

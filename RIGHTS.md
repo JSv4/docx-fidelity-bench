@@ -1,3 +1,7 @@
+The two text-span cases contain original Celandine labels and literal OOXML authored
+in bench/fixtures.py. No product fixture, helper, document, image or font program is
+imported. Review screenshots show these original inputs rendered by LibreOffice.
+
 The eight EMF cases contain original Iris labels, literal OOXML and metafile records
 authored in bench/fixtures.py. Their PNG control is generated from a literal pixel
 function. No product fixture, helper, image, document or font program is imported.
