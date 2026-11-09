@@ -295,6 +295,9 @@ Its fourteen original inputs and before/after screenshots are unweighted and sep
 `projection-v2` adds four [raw-write tracking diagnostics](docs/results/raw-tracking/README.md)
 for Docxodus #1625: insert/replace while recording and their explicit untracked controls.
 Exact refusal results, complete package-part identity, history and saved-output schema are checked.
+`projection-v3` adds seven [deleted-row reproducer/control pairs](docs/results/deleted-rows/README.md)
+for Docxodus #1628, checking GFM headers/body, opaque dimensions, wrapped/merged rows,
+wholly deleted tables and row-carried textboxes.
 
 ## What is included
 

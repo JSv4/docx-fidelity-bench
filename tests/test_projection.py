@@ -7,8 +7,8 @@ from bench.projection_fixtures import validate
 class ProjectionTests(unittest.TestCase):
     def test_original_inputs_regenerate(self):
         manifest = validate()
-        self.assertEqual(18, len(manifest['cases']))
-        self.assertEqual(9, sum(c['control'] for c in manifest['cases']))
+        self.assertEqual(32, len(manifest['cases']))
+        self.assertEqual(16, sum(c['control'] for c in manifest['cases']))
 
     def test_complete_text_and_anchor_checks_reject_loss_duplication_and_wrong_anchor(self):
         case = {'expected': '# Document AshHost AshInside AshFollowing', 'anchored': ['AshInside']}

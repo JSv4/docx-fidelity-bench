@@ -1,3 +1,7 @@
+The fourteen deleted-row projection diagnostics use original Larch row labels and literal
+OOXML authored in `bench/projection_fixtures.py`. No product fixture, helper, document
+or asset is imported. Screenshots show measured API output, not Word page renders.
+
 The four raw-tracking diagnostics use original Larch labels and literal OOXML authored
 in `bench/projection_fixtures.py`. No product fixture, helper, document or asset is imported.
 Their screenshots show measured public API output, not Word page renders.

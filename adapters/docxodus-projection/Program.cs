@@ -12,7 +12,13 @@ var outputs = args.Select(argument =>
     var path = request.RootElement.GetProperty("path").GetString()!;
     var operation = request.RootElement.GetProperty("operation").GetString();
     var bytes = File.ReadAllBytes(path);
-    using var session = new DocxSession(bytes);
+    using var session = new DocxSession(bytes, new DocxSessionSettings
+    {
+        ProjectionSettings = new WmlToMarkdownConverterSettings
+        {
+            TableMode = Enum.Parse<TableRenderMode>(request.RootElement.GetProperty("tableMode").GetString()!),
+        },
+    });
     object? raw = null;
     if (operation is not null)
     {

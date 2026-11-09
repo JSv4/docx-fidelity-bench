@@ -51,7 +51,7 @@ def run(build_dir, output):
     manifest = validate()
     observations = json.loads(execute([dotnet(), folder / 'bin/DocxBenchProjection.dll'] +
                                      [json.dumps({'path': str(ROOT / c['input']), 'operation': c.get('operation'),
-                                                  'tracked': c.get('tracked', False)}) for c in manifest['cases']], timeout=300))
+                                                  'tracked': c.get('tracked', False), 'tableMode': c.get('tableMode', 'GfmWithOpaqueFallback')}) for c in manifest['cases']], timeout=300))
     if len(observations) != len(manifest['cases']):
         raise ValueError('Missing projection observations')
     results = []
