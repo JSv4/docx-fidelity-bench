@@ -13,7 +13,8 @@ FONT_TABLE_PARTS = {'word/fonttable.xml', 'word/_rels/fonttable.xml.rels'}
 PNG_START, PNG_END = b'\x89PNG\r\n\x1a\n', b'IEND\xaeB`\x82'
 FONT_TYPES = ('application/vnd.openxmlformats-officedocument.obfuscatedfont', 'application/vnd.ms-opentype',
               'application/vnd.ms-fontobject')
-AUTHORED_LEGACY_IMAGES = frozenset(payload for kind, payload in fixtures.static_image_assets().items() if kind != 'png')
+AUTHORED_LEGACY_IMAGES = (frozenset(payload for kind, payload in fixtures.static_image_assets().items() if kind != 'png')
+                          | frozenset(fixtures.emf_image_assets().values()))
 
 
 ADDRESS = r'[a-z0-9._-]+@example\.com'

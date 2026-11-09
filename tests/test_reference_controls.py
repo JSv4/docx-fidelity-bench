@@ -79,6 +79,34 @@ class EquivalentControlContract(unittest.TestCase):
             bundle = runner.equivalent_reference_bundle(root, source)
         return root, bundle
 
+    def test_emf_expansion_preserves_mapping_and_rejects_other_changes(self):
+        import struct
+        for form in ('stock', 'wide-stock'):
+            pair = ('images-emf-' + form, 'images-emf-expanded-' + form)
+            source = reference_controls.source(self.records[pair[0]], self.registry, common.ROOT)
+            self.assertEqual(source['caseId'], pair[1])
+            for part, change in [
+                ('word/document.xml', lambda b: b.replace(b'margin-left:72pt', b'margin-left:73pt')),
+                ('word/document.xml', lambda b: b.replace(b'height:90pt', b'height:91pt')),
+                ('word/media/iris.emf', lambda b: b[:80] + struct.pack('<I', 361) + b[84:]),
+                ('word/media/iris.emf', lambda b: b[:32] + struct.pack('<I', 3001) + b[36:]),
+                ('word/media/iris.emf', lambda b: b[:-24] + bytes([b[-24] ^ 1]) + b[-23:]),
+            ]:
+                with self.subTest(form=form, part=part):
+                    registry, case = self.changed_pair(pair[1], part, change, pair=pair)
+                    with self.assertRaisesRegex(ValueError, 'Equivalent control changes'):
+                        reference_controls.source(case, registry, self.root)
+
+    def test_emf_wrapping_crop_and_rotation_are_not_equivalent(self):
+        pair = ('images-emf-stock', 'images-emf-expanded-stock')
+        for before, after in [(b'type="none"', b'type="square"'),
+                              (b'r:id="rIris"', b'r:id="rIris" cropleft="1000f"'),
+                              (b'position:absolute;', b'position:absolute;rotation:90;')]:
+            registry, case = self.changed_pair(pair[0], 'word/document.xml',
+                lambda b: b.replace(before, after), pair=pair)
+            with self.assertRaisesRegex(ValueError, 'Expected'):
+                reference_controls.source(case, registry, self.root)
+
     def test_original_pr_pairs_prove_decimal_fields_in_both_numbering_modes(self):
         for variant in ('ordinary', 'restarted'):
             cid = 'paragraphs-page-number-' + variant + '-legacy'

@@ -1,3 +1,7 @@
+The eight EMF cases contain original Iris labels, literal OOXML and metafile records
+authored in bench/fixtures.py. Their PNG control is generated from a literal pixel
+function. No product fixture, helper, image, document or font program is imported.
+
 The six mixed-minimum cases extend original Primrose labels and literal OOXML authored
 in bench/fixtures.py. Independent font metrics define line and ink bounds. No product
 fixture, helper, document or font program is imported.
