@@ -645,3 +645,7 @@ image or font program is imported. Comparison sheets show every unchanged page r
 from these authored inputs, with explicit panels for baseline export refusals.
 
 The four fixed-pitch boundary cases use original Alder and Birch labels and literal OOXML. No product fixtures, helpers or font programs are imported. Liberation Mono is provisioned independently.
+
+The two empty-final-section cases reuse the original Gentian text and literal OOXML authored
+in `bench/fixtures.py`. No product fixture, third-party document or embedded font is imported.
+Labeled LibreOffice screenshots show these original documents.

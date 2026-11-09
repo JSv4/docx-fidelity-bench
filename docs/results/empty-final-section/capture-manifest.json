@@ -1,0 +1,311 @@
+{
+  "schema": 1,
+  "suite": {
+    "id": "core-v145-empty-final-diagnostic",
+    "version": 145,
+    "cases": [
+      "stories-empty-final",
+      "stories-empty-final-paragraph-control"
+    ]
+  },
+  "cases": [
+    {
+      "id": "stories-empty-final",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "Final section selects new default stories without a body paragraph (Docxodus #1619; source-section preservation)",
+      "input": "fixtures/stories-empty-final.docx",
+      "sha256": "788bc79ef504e08e7b0d6c19672cb16a31013026c0f4c6e7a158dbec7f2cc7be",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "GentianBodyFooter": 1,
+        "GentianBodyHeader": 1,
+        "GentianMiddle": 1,
+        "GentianOpening": 1,
+        "GentianOpeningFooter": 1,
+        "GentianOpeningHeader": 1,
+        "GentianUnusedFooter": 1,
+        "GentianUnusedHeader": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "GentianOpening",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            0,
+            0,
+            612,
+            792
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "GentianMiddle",
+          "occurrence": 1,
+          "page": 2,
+          "rect": [
+            0,
+            0,
+            612,
+            792
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "GentianOpeningHeader",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            0,
+            0,
+            612,
+            792
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "GentianOpeningFooter",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            0,
+            0,
+            612,
+            792
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "GentianBodyHeader",
+          "occurrence": 1,
+          "page": 2,
+          "rect": [
+            0,
+            0,
+            612,
+            792
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "GentianBodyFooter",
+          "occurrence": 1,
+          "page": 2,
+          "rect": [
+            0,
+            0,
+            612,
+            792
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "GentianUnusedHeader",
+          "occurrence": 1,
+          "page": 3,
+          "rect": [
+            0,
+            0,
+            612,
+            792
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "GentianUnusedFooter",
+          "occurrence": 1,
+          "page": 3,
+          "rect": [
+            0,
+            0,
+            612,
+            792
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "27ede81c3bb24765e7476ff433c2dc6b768a662595863cd063074955a7e19042"
+      }
+    },
+    {
+      "id": "stories-empty-final-paragraph-control",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "Final section selects new default stories with an empty paragraph (Docxodus #1619; source-section preservation)",
+      "input": "fixtures/stories-empty-final-paragraph-control.docx",
+      "sha256": "f718cc45cdf68a3b96a42950b9e8edefdfad7ee727eefdc1b158076b2ce091fa",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "GentianBodyFooter": 1,
+        "GentianBodyHeader": 1,
+        "GentianMiddle": 1,
+        "GentianOpening": 1,
+        "GentianOpeningFooter": 1,
+        "GentianOpeningHeader": 1,
+        "GentianUnusedFooter": 1,
+        "GentianUnusedHeader": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "GentianOpening",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            0,
+            0,
+            612,
+            792
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "GentianMiddle",
+          "occurrence": 1,
+          "page": 2,
+          "rect": [
+            0,
+            0,
+            612,
+            792
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "GentianOpeningHeader",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            0,
+            0,
+            612,
+            792
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "GentianOpeningFooter",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            0,
+            0,
+            612,
+            792
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "GentianBodyHeader",
+          "occurrence": 1,
+          "page": 2,
+          "rect": [
+            0,
+            0,
+            612,
+            792
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "GentianBodyFooter",
+          "occurrence": 1,
+          "page": 2,
+          "rect": [
+            0,
+            0,
+            612,
+            792
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "GentianUnusedHeader",
+          "occurrence": 1,
+          "page": 3,
+          "rect": [
+            0,
+            0,
+            612,
+            792
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "GentianUnusedFooter",
+          "occurrence": 1,
+          "page": 3,
+          "rect": [
+            0,
+            0,
+            612,
+            792
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "27ede81c3bb24765e7476ff433c2dc6b768a662595863cd063074955a7e19042"
+      }
+    }
+  ]
+}

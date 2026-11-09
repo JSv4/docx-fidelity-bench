@@ -145,6 +145,27 @@ def flow_story_inheritance_cases(add):
                          'page': page, 'rect': [0, 0, 612, 792]} for marker, occurrence, page in
                         [('GentianOpening', 1, 1), ('GentianMiddle', 1, 2), ('GentianFinal', 1, 3),
                          ('GentianOpeningHeader', 1, 1), ('GentianOpeningFooter', 1, 1)]])
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/>'
+              '<w:color w:val="000000"/><w:sz w:val="22"/></w:rPr></w:rPrDefault>'
+              '<w:pPrDefault><w:pPr><w:widowControl/><w:spacing w:after="120" w:line="276" w:lineRule="auto"/>'
+              '</w:pPr></w:pPrDefault></w:docDefaults>'
+              '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
+    for paragraph in (False, True):
+        add('stories-empty-final' + ('-paragraph-control' if paragraph else ''), 'paragraphs',
+            'Final section selects new default stories ' + ('with an empty paragraph' if paragraph else 'without a body paragraph')
+            + ' (Docxodus #1619; source-section preservation)',
+            ['GentianOpening GentianMiddle', 'GentianOpeningHeader GentianOpeningFooter',
+             'GentianBodyHeader GentianBodyFooter', 'GentianUnusedHeader GentianUnusedFooter'],
+            para('GentianOpening', sect(refs('Opening'))) + para('GentianMiddle', sect(refs('Body')))
+            + (para() if paragraph else ''), sect(refs('Unused')),
+            extra_parts=parts, relations_extra=relations, content_types_extra=overrides, styles_xml=styles,
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': marker, 'occurrence': 1,
+                         'page': page, 'rect': [0, 0, 612, 792]} for marker, page in
+                        [('GentianOpening', 1), ('GentianMiddle', 2),
+                         ('GentianOpeningHeader', 1), ('GentianOpeningFooter', 1),
+                         ('GentianBodyHeader', 2), ('GentianBodyFooter', 2),
+                         ('GentianUnusedHeader', 3), ('GentianUnusedFooter', 3)]])
 
 
 def para(text='', props='', runs=None):
@@ -6251,7 +6272,7 @@ def generate():
     emf_image_cases(add)
     adjacent_text_span_cases(add)
     flow_story_inheritance_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v144', 'version': 144, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v145', 'version': 145, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 
