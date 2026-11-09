@@ -209,10 +209,78 @@
         "origin": "Original literal OOXML and Ash labels; no imported assets"
       },
       "sha256": "e9356cd29b91d49f4f2ba4f785dc87a8989fd55063bc8cc5337a78de69674cb4"
+    },
+    {
+      "anchored": [
+        "LarchTail"
+      ],
+      "control": false,
+      "expected": "# Document LarchOriginal LarchTail",
+      "id": "raw-replace-tracked",
+      "input": "fixtures/projection/raw-replace-tracked.docx",
+      "operation": "raw-replace",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch labels; no imported assets"
+      },
+      "sha256": "8216fedfc71ed3b740b16039c2210e8e5b0262887f753a56997f8fbd7f7bd163",
+      "tracked": true
+    },
+    {
+      "anchored": [
+        "LarchTail"
+      ],
+      "control": true,
+      "expected": "# Document LarchReplacement LarchTail",
+      "id": "raw-replace-control",
+      "input": "fixtures/projection/raw-replace-control.docx",
+      "operation": "raw-replace",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch labels; no imported assets"
+      },
+      "sha256": "8216fedfc71ed3b740b16039c2210e8e5b0262887f753a56997f8fbd7f7bd163",
+      "tracked": false
+    },
+    {
+      "anchored": [
+        "LarchTail"
+      ],
+      "control": false,
+      "expected": "# Document LarchOriginal LarchTail",
+      "id": "raw-insert-tracked",
+      "input": "fixtures/projection/raw-insert-tracked.docx",
+      "operation": "raw-insert",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch labels; no imported assets"
+      },
+      "sha256": "8216fedfc71ed3b740b16039c2210e8e5b0262887f753a56997f8fbd7f7bd163",
+      "tracked": true
+    },
+    {
+      "anchored": [
+        "LarchTail"
+      ],
+      "control": true,
+      "expected": "# Document LarchOriginal LarchReplacement LarchTail",
+      "id": "raw-insert-control",
+      "input": "fixtures/projection/raw-insert-control.docx",
+      "operation": "raw-insert",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch labels; no imported assets"
+      },
+      "sha256": "8216fedfc71ed3b740b16039c2210e8e5b0262887f753a56997f8fbd7f7bd163",
+      "tracked": false
     }
   ],
-  "generatorSha256": "696d760f374c7935722c16eaa13e128d4e117e2488aeef83de6effc92f8da105",
+  "generatorSha256": "b144fec55c568e13ddb890c0c47e4bc483f85798e25fe64a220a7d73162d850a",
   "schema": 1,
-  "suite": "projection-v1",
-  "version": 1
+  "suite": "projection-v2",
+  "version": 2
 }

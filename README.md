@@ -292,6 +292,9 @@ reproduces the defect on unmodified main. New references and full-suite scoring 
 The [Markdown projection diagnostic](docs/results/markdown-shapes/README.md) checks exact public
 `Project`/`ProjectAnchor` output for textboxes and content-control-wrapped table rows/cells.
 Its fourteen original inputs and before/after screenshots are unweighted and separate from PDF/redline scores.
+`projection-v2` adds four [raw-write tracking diagnostics](docs/results/raw-tracking/README.md)
+for Docxodus #1625: insert/replace while recording and their explicit untracked controls.
+Exact refusal results, complete package-part identity, history and saved-output schema are checked.
 
 ## What is included
 
