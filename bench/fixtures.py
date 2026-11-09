@@ -56,6 +56,49 @@ def static_image_assets():
     return {'png': png(128, 96, pixel), 'tiff': tiff, 'wmf': wmf(128), 'anisotropic-wmf': wmf(256)}
 
 
+
+def emf_image_assets():
+    """Original Iris rectangles and ellipse, authored directly from MS-EMF records."""
+    def record(kind, *values):
+        return struct.pack('<II' + 'I' * len(values), kind, 8 + 4 * len(values), *values)
+    assets = {}
+    for kind in ('stock', 'consistent', 'geometric', 'ellipse'):
+        geometric = kind in ('geometric', 'ellipse')
+        records = ([record(38, 1, 0x10000, 2, 0, 0x00a06428), record(37, 1)] if geometric else [])
+        records += [record(39, 2, 1 if geometric else 0, 0x00a06428, 0), record(37, 2),
+                    record(42 if kind == 'ellipse' else 43, 12, 9, 92, 68), record(14, 0, 20, 20)]
+        header = struct.pack('<14IHH7I', 1, 88, 0, 0, 120, 90, 0, 0, 2400, 1800,
+            0x464d4520, 0x10000, 88 + sum(map(len, records)), len(records) + 1, 3, 0,
+            0, 0, 0, 1200, 900, 360 if kind == 'stock' else 240, 270 if kind == 'stock' else 180)
+        assets[kind] = header + b''.join(records)
+    assets['expanded-stock'] = assets['stock'][:32] + struct.pack('<II', 3000, 2250) + assets['stock'][40:]
+    assets['png-control'] = png(400, 300, lambda x, y: (40, 100, 160))
+    return assets
+
+
+def emf_image_cases(add):
+    assets = emf_image_assets()
+    for kind in ('stock', 'wide-stock', 'expanded-stock', 'expanded-wide-stock', 'consistent', 'geometric', 'ellipse', 'png-control'):
+        extension = 'png' if kind == 'png-control' else 'emf'
+        expanded = kind.startswith('expanded-')
+        width = (144 if 'wide' in kind else 96) * (5 if expanded else 4) // 4
+        height = 90 if expanded else 72
+        asset = 'expanded-stock' if expanded else 'stock' if kind == 'wide-stock' else kind
+        image = (f'<w:pict xmlns:v="urn:schemas-microsoft-com:vml" xmlns:r="{R}">'
+            f'<v:shape id="IrisVector" style="position:absolute;margin-left:72pt;margin-top:90pt;width:{width}pt;height:{height}pt;'
+            'mso-position-horizontal-relative:page;mso-position-vertical-relative:page;">'
+            '<v:imagedata r:id="rIris"/><w10:wrap xmlns:w10="urn:schemas-microsoft-com:office:word" type="none"/></v:shape></w:pict>')
+        carrier = para(runs='<w:r>' + image + '</w:r>')
+        add('images-emf-' + kind, 'images', 'Iris artwork preserves physical EMF mapping and paint: ' + kind + ' (Docxodus #1554)',
+            ['IrisVectorReceipt'], carrier + para('IrisVectorReceipt', '<w:spacing w:before="2880"/>'), section(),
+            extra_parts={'word/media/iris.' + extension: assets[asset]},
+            relations_extra=[('rIris', 'image', 'media/iris.' + extension)],
+            content_types_extra='' if extension == 'png' else '<Default Extension="emf" ContentType="image/x-emf"/>',
+            assertions=[{'type': 'color-reference-geometry', 'version': 1, 'page': 1, 'rgb': [40, 100, 160],
+                'tolerancePt': 1.5, 'coverageTolerance': 0.08},
+                {'type': 'marker-reference-position', 'version': 1, 'marker': 'IrisVectorReceipt', 'tolerancePt': 1.5}])
+
+
 def run(text, props=''):
     return f'<w:r><w:rPr>{props}</w:rPr><w:t xml:space="preserve">{escape(text)}</w:t></w:r>'
 
@@ -6161,7 +6204,8 @@ def generate():
     floating_paragraph_cases(add, cases)
     custom_path_cases(add)
     plain_math_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v141', 'version': 141, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    emf_image_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v142', 'version': 142, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
     return registry
 

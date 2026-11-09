@@ -1,0 +1,255 @@
+{
+  "scope": "Eight authored EMF/PNG inputs; seven EMF native main placeholders, eight production candidate PDFs. Geometry controls are not Word adjudication.",
+  "candidate": "61e3b623449d6d00dc2b9a99d126f84526d1c38e",
+  "baseline": {
+    "sourceCommit": "3cbf7fa7f2591cbb01191507e630140097bca2e6",
+    "scope": "Native public HTML conversion with unsupported placeholders enabled; not a PDF export",
+    "cases": [
+      {
+        "id": "images-emf-stock",
+        "inputSha256": "acdc18dd091515085c7e8fc0af176d80069eac45de90fb9021e228a15d8bb56c",
+        "htmlSha256": "cd375de80f283c388aa9912238d77553390d67e3b890fa16331a923addbb2e1d",
+        "emfPlaceholders": 1
+      },
+      {
+        "id": "images-emf-wide-stock",
+        "inputSha256": "7e669a7498bf7de1b7f211147b7a9969f33208c87977c770e5a0d1ce2b327ebf",
+        "htmlSha256": "cd375de80f283c388aa9912238d77553390d67e3b890fa16331a923addbb2e1d",
+        "emfPlaceholders": 1
+      },
+      {
+        "id": "images-emf-expanded-stock",
+        "inputSha256": "9be4d9f21701060b80808dad9fcc247a90222c046be1936439190474c50014b8",
+        "htmlSha256": "cd375de80f283c388aa9912238d77553390d67e3b890fa16331a923addbb2e1d",
+        "emfPlaceholders": 1
+      },
+      {
+        "id": "images-emf-expanded-wide-stock",
+        "inputSha256": "f6dd4f6b53525d477587c5e5f8e1cdedcccb92f74359b5e1b79dc9efe270c316",
+        "htmlSha256": "cd375de80f283c388aa9912238d77553390d67e3b890fa16331a923addbb2e1d",
+        "emfPlaceholders": 1
+      },
+      {
+        "id": "images-emf-consistent",
+        "inputSha256": "e840f848b6f2671f421424a81d8eba7e8340570625ba0ce1b6c1251e82cd2272",
+        "htmlSha256": "cd375de80f283c388aa9912238d77553390d67e3b890fa16331a923addbb2e1d",
+        "emfPlaceholders": 1
+      },
+      {
+        "id": "images-emf-geometric",
+        "inputSha256": "82c4bdbf12cf71866b9ec57b89afccd7ce64150c726e2c86110fb1b6db8572f6",
+        "htmlSha256": "cd375de80f283c388aa9912238d77553390d67e3b890fa16331a923addbb2e1d",
+        "emfPlaceholders": 1
+      },
+      {
+        "id": "images-emf-ellipse",
+        "inputSha256": "55a82efdc1d21342522aacde945d9ab3b21f0ce261d4251d11c80efb062ef44f",
+        "htmlSha256": "cd375de80f283c388aa9912238d77553390d67e3b890fa16331a923addbb2e1d",
+        "emfPlaceholders": 1
+      },
+      {
+        "id": "images-emf-png-control",
+        "inputSha256": "1b92d80834104a6b4778b472a5d0ef7b4d2ee7deeb27c0b9e01d567c783f100a",
+        "htmlSha256": "595f545cacee020a25f3ca5d68b9bb629fbd218bc0d9233faa3aa2fe66a62d1b",
+        "emfPlaceholders": 0
+      }
+    ]
+  },
+  "summary": {
+    "categoryMeans": {
+      "images": 94.0888258508968
+    },
+    "closeMatchRate": 0.75,
+    "complete": true,
+    "mandatoryPassRate": 1.0,
+    "measured": 8,
+    "required": 8,
+    "score": 94.0888258508968
+  },
+  "cases": [
+    {
+      "id": "images-emf-stock",
+      "inputSha256": "acdc18dd091515085c7e8fc0af176d80069eac45de90fb9021e228a15d8bb56c",
+      "score": 97.75538980123648,
+      "panels": [
+        {
+          "role": "direct",
+          "pdf": "pdf/images-emf-stock-direct.pdf",
+          "sha256": "03f8f70f2493f26df3f2d7119f2161c66b89d3651abb0b9fe7d83f712ea43d6d"
+        },
+        {
+          "role": "reference",
+          "pdf": "pdf/images-emf-stock-reference.pdf",
+          "sha256": "ad1a1a6a57463471a88d4d8dea32e4712dbe6b0aacfda7adeb104ac1c93394f4"
+        },
+        {
+          "role": "candidate",
+          "pdf": "pdf/images-emf-stock-candidate.pdf",
+          "sha256": "cacb5c8f537fed877317a6e751ec1dffe3029848153c58475857bef488b320d5"
+        }
+      ],
+      "screenshot": "images-emf-stock.png"
+    },
+    {
+      "id": "images-emf-wide-stock",
+      "inputSha256": "7e669a7498bf7de1b7f211147b7a9969f33208c87977c770e5a0d1ce2b327ebf",
+      "score": 98.06362797664035,
+      "panels": [
+        {
+          "role": "direct",
+          "pdf": "pdf/images-emf-wide-stock-direct.pdf",
+          "sha256": "1142d0e4cb528b3bdbfb3198b160e087352f143b97797c1bbf7cccef6f9fe73f"
+        },
+        {
+          "role": "reference",
+          "pdf": "pdf/images-emf-wide-stock-reference.pdf",
+          "sha256": "3b7b0c902d5b56f7e1355c451e79c9b25381f21ade9bff179f495cf25400abfe"
+        },
+        {
+          "role": "candidate",
+          "pdf": "pdf/images-emf-wide-stock-candidate.pdf",
+          "sha256": "04181c64f3b8220399f3726ac9cd187fb9dad1e3bc70d19bcc12c5674efc175e"
+        }
+      ],
+      "screenshot": "images-emf-wide-stock.png"
+    },
+    {
+      "id": "images-emf-expanded-stock",
+      "inputSha256": "9be4d9f21701060b80808dad9fcc247a90222c046be1936439190474c50014b8",
+      "score": 97.75538980123648,
+      "panels": [
+        {
+          "role": "direct",
+          "pdf": "pdf/images-emf-expanded-stock-direct.pdf",
+          "sha256": "ad1a1a6a57463471a88d4d8dea32e4712dbe6b0aacfda7adeb104ac1c93394f4"
+        },
+        {
+          "role": "reference",
+          "pdf": "pdf/images-emf-expanded-stock-reference.pdf",
+          "sha256": "ad1a1a6a57463471a88d4d8dea32e4712dbe6b0aacfda7adeb104ac1c93394f4"
+        },
+        {
+          "role": "candidate",
+          "pdf": "pdf/images-emf-expanded-stock-candidate.pdf",
+          "sha256": "d2d8c54bdd82240dac24dec46f48348063aade2154331dadc27096cdadbd7a4f"
+        }
+      ],
+      "screenshot": "images-emf-expanded-stock.png"
+    },
+    {
+      "id": "images-emf-expanded-wide-stock",
+      "inputSha256": "f6dd4f6b53525d477587c5e5f8e1cdedcccb92f74359b5e1b79dc9efe270c316",
+      "score": 98.06362797664035,
+      "panels": [
+        {
+          "role": "direct",
+          "pdf": "pdf/images-emf-expanded-wide-stock-direct.pdf",
+          "sha256": "3b7b0c902d5b56f7e1355c451e79c9b25381f21ade9bff179f495cf25400abfe"
+        },
+        {
+          "role": "reference",
+          "pdf": "pdf/images-emf-expanded-wide-stock-reference.pdf",
+          "sha256": "3b7b0c902d5b56f7e1355c451e79c9b25381f21ade9bff179f495cf25400abfe"
+        },
+        {
+          "role": "candidate",
+          "pdf": "pdf/images-emf-expanded-wide-stock-candidate.pdf",
+          "sha256": "7decf53379febe86813b19174f144274c80132055db953206a8c69ab27f6b5ee"
+        }
+      ],
+      "screenshot": "images-emf-expanded-wide-stock.png"
+    },
+    {
+      "id": "images-emf-consistent",
+      "inputSha256": "e840f848b6f2671f421424a81d8eba7e8340570625ba0ce1b6c1251e82cd2272",
+      "score": 96.0998210059833,
+      "panels": [
+        {
+          "role": "direct",
+          "pdf": "pdf/images-emf-consistent-direct.pdf",
+          "sha256": "137092076b6282a35da8d89a24b28b863da765c0e2cf84a4c46fa9bdad80d47b"
+        },
+        {
+          "role": "reference",
+          "pdf": "pdf/images-emf-consistent-reference.pdf",
+          "sha256": "137092076b6282a35da8d89a24b28b863da765c0e2cf84a4c46fa9bdad80d47b"
+        },
+        {
+          "role": "candidate",
+          "pdf": "pdf/images-emf-consistent-candidate.pdf",
+          "sha256": "4b275558acaa05e9e0b36bc6d317f1e9828d2848e2574156c48ac0e8e58b6a44"
+        }
+      ],
+      "screenshot": "images-emf-consistent.png"
+    },
+    {
+      "id": "images-emf-geometric",
+      "inputSha256": "82c4bdbf12cf71866b9ec57b89afccd7ce64150c726e2c86110fb1b6db8572f6",
+      "score": 82.68887406685309,
+      "panels": [
+        {
+          "role": "direct",
+          "pdf": "pdf/images-emf-geometric-direct.pdf",
+          "sha256": "8097c0168ee827940bf7f466c5147f2b5f0608b181ff2a5a19f4ba7cbaec777e"
+        },
+        {
+          "role": "reference",
+          "pdf": "pdf/images-emf-geometric-reference.pdf",
+          "sha256": "8097c0168ee827940bf7f466c5147f2b5f0608b181ff2a5a19f4ba7cbaec777e"
+        },
+        {
+          "role": "candidate",
+          "pdf": "pdf/images-emf-geometric-candidate.pdf",
+          "sha256": "bad9a16c9a639dc8aac6f4ff499a351dc601f9976aa4d7135187f8e0a7e642d1"
+        }
+      ],
+      "screenshot": "images-emf-geometric.png"
+    },
+    {
+      "id": "images-emf-ellipse",
+      "inputSha256": "55a82efdc1d21342522aacde945d9ab3b21f0ce261d4251d11c80efb062ef44f",
+      "score": 82.99712933509194,
+      "panels": [
+        {
+          "role": "direct",
+          "pdf": "pdf/images-emf-ellipse-direct.pdf",
+          "sha256": "c2b581e2a8c81c524dce44277b786c39389b9adcd9cc893e83658efa0bb2605b"
+        },
+        {
+          "role": "reference",
+          "pdf": "pdf/images-emf-ellipse-reference.pdf",
+          "sha256": "c2b581e2a8c81c524dce44277b786c39389b9adcd9cc893e83658efa0bb2605b"
+        },
+        {
+          "role": "candidate",
+          "pdf": "pdf/images-emf-ellipse-candidate.pdf",
+          "sha256": "791f0807f8918d11a6414fe26b391caca7366853e3df718f9bacb843ca2e6d15"
+        }
+      ],
+      "screenshot": "images-emf-ellipse.png"
+    },
+    {
+      "id": "images-emf-png-control",
+      "inputSha256": "1b92d80834104a6b4778b472a5d0ef7b4d2ee7deeb27c0b9e01d567c783f100a",
+      "score": 99.2867468434924,
+      "panels": [
+        {
+          "role": "direct",
+          "pdf": "pdf/images-emf-png-control-direct.pdf",
+          "sha256": "12d6dcef991a71126cfcdd1e3f508f76c928c103a3c1af30b29767da1f3e654e"
+        },
+        {
+          "role": "reference",
+          "pdf": "pdf/images-emf-png-control-reference.pdf",
+          "sha256": "12d6dcef991a71126cfcdd1e3f508f76c928c103a3c1af30b29767da1f3e654e"
+        },
+        {
+          "role": "candidate",
+          "pdf": "pdf/images-emf-png-control-candidate.pdf",
+          "sha256": "2008a8034bd782bbb892ff91fe460ad6cee02904de356240b6d12124c7ead1f6"
+        }
+      ],
+      "screenshot": "images-emf-png-control.png"
+    }
+  ]
+}
