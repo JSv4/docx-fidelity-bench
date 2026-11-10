@@ -2409,6 +2409,100 @@ def fixed_pitch_boundary_cases(add, cases):
             pageSizePt=[612, 792], requiredTokens=dict(Counter(labels)), exactInventory=True)
 
 
+def line_content_cases(add, cases):
+    """Original labels, one per visual line, whose slots follow each line's own fonts.
+
+    Native Word sizes a line by its text's largest ascent (line gap included) plus its largest
+    descent. A list marker adds only its ascent, a break sizes a line only when nothing else is on
+    it, and alignment changes nothing. The slots use independent Liberation metrics in 2048ths
+    of an em; a mapped Symbol bullet keeps Symbol's 2059 ascent (Docxodus #1565 and #1567).
+    """
+    serif = (1825 + 87, 443)
+    def ascent(size, metrics=serif):
+        return metrics[0] / 2048 * size
+    def descent(size, metrics=serif):
+        return metrics[1] / 2048 * size
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+        '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="24"/>'
+        '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl w:val="0"/>'
+        '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>'
+        '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    sect = ('<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" '
+        'w:right="1440" w:bottom="1440" w:left="1440"/></w:sectPr>')
+    size = lambda points: f'<w:sz w:val="{points * 2}"/>'
+    def brk(points):
+        return f'<w:r><w:rPr>{size(points)}</w:rPr><w:br/></w:r>'
+    def numbering(kind, glyph, props):
+        return (f'<w:numbering xmlns:w="{W}"><w:abstractNum w:abstractNumId="0"><w:lvl w:ilvl="0">'
+            f'<w:start w:val="1"/><w:numFmt w:val="{kind}"/><w:lvlText w:val="{glyph}"/><w:lvlJc w:val="left"/>'
+            f'<w:pPr><w:ind w:left="720" w:hanging="360"/></w:pPr><w:rPr>{props}</w:rPr></w:lvl></w:abstractNum>'
+            '<w:num w:numId="1"><w:abstractNumId w:val="0"/></w:num></w:numbering>')
+    numbered = '<w:numPr><w:ilvl w:val="0"/><w:numId w:val="1"/></w:numPr>'
+    def slots(lines):
+        """Marker-region assertions for (label, height) lines stacked from the top margin."""
+        top, out = 72.0, []
+        for label, height in lines:
+            if label:
+                out.append(dict(type='marker-region', marker=label, occurrence=1, page=1,
+                    rect=[72, top, 540, top + height]))
+            top += height
+        return out
+    variants = []
+    # Empty lines made by two breaks take the breaks' size; the control's breaks are 12pt.
+    for name, points in (('break-empty', 8), ('break-control', 12)):
+        labels = [f'Yarrow{i:02d}' for i in range(1, 13)]
+        runs, lines = '', []
+        for i, label in enumerate(labels):
+            runs += run(label)
+            lines.append((label, ascent(12) + descent(12)))
+            if i + 1 < len(labels):
+                runs += brk(points)
+                if i % 2:
+                    runs += brk(points)
+                    lines.append((None, ascent(points) + descent(points)))
+        variants.append((f'line-content-{name}', labels, para(runs=runs), None, lines,
+            f'Yarrow 12pt lines around empty {points}pt break lines'))
+    # An 18pt number lifts only its line's ascent; the control's numbers are 12pt.
+    for name, marker in (('number-large', 18), ('number-control', 12)):
+        labels, body, lines = [], '', []
+        for i in range(1, 11):
+            first, second = f'Aster{i:02d}a', f'Aster{i:02d}b'
+            labels += [f'{i}.', first, second]
+            body += para(props=numbered, runs=run(first) + brk(12) + run(second))
+            lines += [(first, max(ascent(marker), ascent(12)) + descent(12)), (second, ascent(12) + descent(12))]
+        variants.append((f'line-content-{name}', labels, body, numbering('decimal', '%1.', size(marker)), lines,
+            f'Aster items under a {marker}pt list number'))
+    # Centered lines: a 16pt lead label sizes only its own line; the control's lead is 9pt.
+    for name, lead in (('lead-center', 16), ('lead-center-control', 9)):
+        labels = [f'Larkspur{i:02d}' for i in range(15)]
+        runs = run(labels[0], size(lead))
+        lines = [(labels[0], ascent(lead) + descent(lead))]
+        for label in labels[1:]:
+            runs += brk(9) + run(label, size(9))
+            lines.append((label, ascent(9) + descent(9)))
+        variants.append((f'line-content-{name}', labels, para(props='<w:jc w:val="center"/>', runs=runs), None,
+            lines, f'Centered Larkspur lines after a {lead}pt lead label'))
+    # A mapped Symbol bullet keeps Symbol's ascent over the text's descent; the control has no list.
+    for name, bulleted in (('bullet-symbol', True), ('bullet-symbol-control', False)):
+        labels = [f'Primula{i:02d}' for i in range(1, 13)]
+        body = ''.join(para(label, numbered if bulleted else '') for label in labels)
+        height = (2059 / 2048 * 12 if bulleted else ascent(12)) + descent(12)
+        variants.append((f'line-content-{name}', (['\u2022'] if bulleted else []) * len(labels) + labels, body,
+            numbering('bullet', '\uf0b7', '<w:rFonts w:ascii="Symbol" w:hAnsi="Symbol" w:hint="default"/>')
+            if bulleted else None, [(label, height) for label in labels],
+            'Primula items ' + ('under a Symbol bullet' if bulleted else 'without a list')))
+    for case_id, labels, body, numbering_xml, lines, description in variants:
+        add(case_id, 'paragraphs', f'{description} (Docxodus #1565/#1567)', labels, body,
+            styles_xml=styles, numbering_xml=numbering_xml, sect=sect, assertions=slots(lines))
+        for assertion in cases[-1]['assertions']:
+            # Chromium rounds glyph origins to 0.75pt; native Word places lines on a 0.12pt grid.
+            assertion['tolerancePt'] = .76
+        if case_id == 'line-content-bullet-symbol':
+            cases[-1]['fonts'].append('Standard Symbols PS')
+        cases[-1]['pdfCompanion'] = dict(profile=dict(review='final', comments='hidden'),
+            pageSizePt=[612, 792], requiredTokens=dict(Counter(' '.join(labels).split())), exactInventory=True)
+
+
 def mixed_minimum_line_cases(add, cases):
     """One word per line gives independent mixed-line and page-boundary expectations."""
     styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
@@ -6434,6 +6528,7 @@ def generate():
     wordperfect_justification_cases(add, cases)
     small_minimum_line_cases(add, cases)
     mixed_minimum_line_cases(add, cases)
+    line_content_cases(add, cases)
     fixed_pitch_boundary_cases(add, cases)
     paragraph_text_independence_cases(add, cases)
     grouped_paper_placement_cases(add, cases)
@@ -6448,7 +6543,7 @@ def generate():
     collection_font_cases(add)
     fractional_measure_cases(add)
     embedded_font_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v150', 'version': 150, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v151', 'version': 151, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 

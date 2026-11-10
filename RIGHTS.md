@@ -1,3 +1,8 @@
+The eight line-content cases for Docxodus #1565 and #1567 contain original Yarrow, Aster,
+Larkspur and Primula labels and literal OOXML authored in `bench/fixtures.py`. No product
+fixture, helper, document or font program is imported. Native Word evidence was printed from
+separately authored Times New Roman/Arial copies and is retained as diagnostic only.
+
 The four tracked table-insertion diagnostics use original Larch labels and literal OOXML
 authored in `bench/projection_fixtures.py`. No product fixture, helper, document or asset is
 imported. Their screenshots show measured public API output, not Word page renders.

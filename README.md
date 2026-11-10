@@ -1,3 +1,7 @@
+`core-v151` adds eight line-content cases for Docxodus #1565 and #1567: empty break lines,
+an 18pt list number, a centered lead label and a mapped Symbol bullet, each with a control.
+Slots follow native Word's per-line rule. See [the Word evidence and labeled renders](docs/results/line-content-height/README.md).
+
 `redline-v35` adds a document-default spacing reproducer and a `Normal`-style control for
 Docxodus #1576, with a `style-run-history` check: Word's Reject All resets a style's run
 properties when its spacing revision has no `w:rPrChange`. See [evidence](docs/results/default-spacing-history/README.md).
