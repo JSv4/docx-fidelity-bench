@@ -6,6 +6,11 @@ The eight fractional-measure cases for Docxodus #1622 contain original Quillwort
 literal OOXML authored in bench/fixtures.py. No product fixture, helper, document, image or
 font program is imported, and no reporter attachment was opened or used.
 
+The two default-spacing redline cases for Docxodus #1576 contain original Quince labels and
+literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document or
+font program is imported. Their review images are measurement cards, not page renders: Word 2024
+measured copies whose Liberation Serif name is changed to its metric twin Times New Roman.
+
 The fourteen deleted-row projection diagnostics use original Larch row labels and literal
 OOXML authored in `bench/projection_fixtures.py`. No product fixture, helper, document
 or asset is imported. Screenshots show measured API output, not Word page renders.

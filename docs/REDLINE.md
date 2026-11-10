@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v34`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v35`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -38,6 +38,7 @@ A case scores **100** when every applicable check passes and **0** otherwise. Th
    - `paragraph-count` v1: the number of `w:p` in the body of the raw redline (scope `redline`). This is a minimality requirement, not reversibility: the #1183 cases use it to require that the revised document's paragraph folds into the deleted one, as Word's compare does;
    - `para-ids-valid` v1: every `w14:paraId` in every XML part is eight hexadecimal digits, below `0x80000000`, and unique across the package;
    - `style-ids-unique` v1: no two `w:style` elements share a `w:styleId`, whatever their types;
+   - `style-run-history` v1 (scope `redline`): every paragraph style whose `w:pPr` holds a `w:pPrChange` also has a `w:rPr` holding a `w:rPrChange`. Word 2024's Reject All restores a style from both markers and resets the run properties of a style without the second to its built-ins, so a spacing-only style revision rejects with 10 pt text; neither round trip sees this. The check is one-directional, because a run-only style revision was not measured. Metric contract 23 records this check;
    - `comment-threads` v1 (scope `redline`): in the comments and commentsExtended parts, every entry is keyed to a comment's last-paragraph `w14:paraId`, every `w15:paraIdParent` names the last-paragraph `w14:paraId` of a comment that has its own entry, and for each declared `[reply, parent]` pair exactly one comment holds the reply's text and its entry names the comment holding the parent's text. Comment threading is not part of the semantic view, so neither round trip sees a reply detached from its parent;
    - `hyperlink-targets` v1 (scope `redline`): every `w:hyperlink` in the main document with an `r:id` resolves to exactly one relationship of the main part, of the hyperlink type with `TargetMode="External"`, and the set of their `Target` values equals the declared `targets`, compared as written after XML parsing, with no URI normalization. The semantic view records only a hyperlink's boundaries, so neither round trip sees a target rewritten (for example to the SDK's `rewritten://` placeholder), trimmed or dropped, or a link left on a relationship id another relationship also holds;
    - `revision-count` v1: at most `max` revision records in the redline or output (scope `redline` or `output`); a `w:delText` or `w:delInstrText` outside any deletion also counts. Every `reject` case requires zero.
@@ -490,3 +491,15 @@ ranges must be ordered without overlap. A paragraph permits at most two revision
 no untracked visible text. Wrong partners, whole-side blocks and word interleaving fail even if
 accept/reject endpoints match. All existing round-trip, attribution and SDK checks remain
 mandatory. `revision-blocks` v1 and historical evidence retain their original meaning.
+
+### Style revisions that Word rejects whole
+
+`redline-v35` adds two original Quince cases for Docxodus #1576. Both change default paragraph
+spacing from 200/276 to 0/240 beside a one-word edit. The reproducer declares the spacing in the
+document defaults; the control declares it in the `Normal` style, so the style definitions
+differ. Each authored redline records the spacing on `Normal` with both a `w:pPrChange` and a
+`w:rPrChange`, as Word's own compare output does. Accept/reject round trips, exact
+`paragraph-spacing` on both endpoints and the new `style-run-history` v1 check are mandatory. The
+cases pin Word's Reject All behaviour, not its Compare output: for document-default differences
+Word's Compare adopts the revised defaults untracked, which cannot reject to the original. See
+[the evidence](results/default-spacing-history/README.md).

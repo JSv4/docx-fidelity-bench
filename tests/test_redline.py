@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v34')
-        self.assertEqual(len(registry['cases']), 258)
+        self.assertEqual(registry['suite']['id'], 'redline-v35')
+        self.assertEqual(len(registry['cases']), 260)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -439,6 +439,31 @@ class AuthoredCalibration(unittest.TestCase):
             expected = [dict(before='111', after=after, line=line, lineRule='auto') for _ in range(count)]
             expected[0].update(after='444', line='555')
             self.assertEqual(redline.paragraph_spacing(package, resolved, scope), expected)
+
+    def test_style_run_history_requires_an_rpr_change_beside_a_style_ppr_change(self):
+        for shape in ('document-defaults', 'normal-style-control'):
+            with self.subTest(shape=shape):
+                record = case('redline-default-spacing-' + shape)
+                package = load(record['authored'])
+                assertion = next(a for a in record['assertions'] if a['type'] == 'style-run-history')
+                self.assertTrue(redline._assertion(assertion, package, {})['passed'])
+                # The spacing still round-trips without the run history, so only this check sees the loss.
+                parts = dict(package.members)
+                styles = ET.fromstring(parts['word/styles.xml'])
+                run = styles.find(W + 'style/' + W + 'rPr')
+                run.remove(run.find(W + 'rPrChange'))
+                parts['word/styles.xml'] = ET.tostring(styles)
+                mutant = revisions.Package(parts)
+                self.assertEqual(redline._assertion(assertion, mutant, {})['observed'], ['Normal'])
+                for spacing in (a for a in record['assertions'] if a['type'] == 'paragraph-spacing'):
+                    mode = 'accept' if spacing['scope'] == 'accepted' else 'reject'
+                    resolved = {spacing['scope']: revisions.resolve(mutant.story_parts(), mode)}
+                    self.assertTrue(redline._assertion(spacing, mutant, resolved)['passed'])
+                # The check is one-directional: a run-only style revision is outside what was measured.
+                styles = ET.fromstring(package.members['word/styles.xml'])
+                styles.find(W + 'style/' + W + 'pPr').remove(styles.find(W + 'style/' + W + 'pPr/' + W + 'pPrChange'))
+                parts['word/styles.xml'] = ET.tostring(styles)
+                self.assertTrue(redline._assertion(assertion, revisions.Package(parts), {})['passed'])
 
     def test_field_spacing_cases_reject_field_loss_despite_equal_text_and_spacing(self):
         for shape in ('simple', 'complex'):
