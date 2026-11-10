@@ -20,7 +20,29 @@ var outputs = args.Select(argument =>
         },
     });
     object? raw = null;
-    if (operation is not null)
+    object? table = null;
+    if (operation == "table-insert")
+    {
+        session.SetTrackedChanges(request.RootElement.GetProperty("tracked").GetBoolean()
+            ? TrackedChangeMode.RenderInline : TrackedChangeMode.Accept);
+        var anchorText = request.RootElement.GetProperty("anchor").GetString();
+        var anchor = session.Project().AnchorIndex.Values.First(a => a.Anchor.Kind == "p" && a.TextPreview == anchorText).Anchor.Id;
+        var edit = session.InsertTable(anchor, Position.After, 1, 1, new TableInsertOptions { CellContents = new[] { "LarchNew" } });
+        var revisionCount = session.ListRevisions().Count;
+        var inserted = session.Save();
+        string Resolve(bool accept)
+        {
+            using var copy = new DocxSession(inserted);
+            var resolution = accept ? copy.AcceptAllRevisions() : copy.RejectAllRevisions();
+            if (!resolution.Success) throw new InvalidOperationException("Revision resolution failed");
+            return copy.Project().Markdown;
+        }
+        var undo = session.Undo();
+        if (undo && !session.Redo()) throw new InvalidOperationException("Redo failed");
+        table = new { success = edit.Success, error = edit.Error?.Code.ToString(), revisionCount,
+            accepted = Resolve(true), rejected = Resolve(false), undo };
+    }
+    else if (operation is not null)
     {
         session.SetTrackedChanges(request.RootElement.GetProperty("tracked").GetBoolean()
             ? TrackedChangeMode.RenderInline : TrackedChangeMode.Accept);
@@ -47,7 +69,7 @@ var outputs = args.Select(argument =>
     var projection = session.Project();
     return new
     {
-        path, errors, raw, markdown = projection.Markdown,
+        path, errors, raw, table, markdown = projection.Markdown,
         paragraphs = projection.AnchorIndex.Values.Where(a => a.Anchor.Kind == "p")
             .Select(a => new { id = a.Anchor.Id, text = a.TextPreview,
                 markdown = session.ProjectAnchor(a.Anchor.Id, ProjectionDepth.SelfOnly).Markdown }).ToArray(),

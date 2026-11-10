@@ -7,8 +7,8 @@ from bench.projection_fixtures import validate
 class ProjectionTests(unittest.TestCase):
     def test_original_inputs_regenerate(self):
         manifest = validate()
-        self.assertEqual(32, len(manifest['cases']))
-        self.assertEqual(16, sum(c['control'] for c in manifest['cases']))
+        self.assertEqual(36, len(manifest['cases']))
+        self.assertEqual(18, sum(c['control'] for c in manifest['cases']))
 
     def test_complete_text_and_anchor_checks_reject_loss_duplication_and_wrong_anchor(self):
         case = {'expected': '# Document AshHost AshInside AshFollowing', 'anchored': ['AshInside']}
@@ -39,6 +39,21 @@ class ProjectionTests(unittest.TestCase):
             self.assertFalse(checks(case, bad)['rawMutation'])
         del good['raw']
         self.assertFalse(checks(case, good)['rawMutation'])
+
+    def test_table_insert_checks_reject_refusal_revision_count_resolution_and_history(self):
+        case = {'operation': 'table-insert', 'tracked': True, 'expected': 'New', 'anchored': [],
+                'tableInsert': {'revisions': 1, 'accepted': 'New', 'rejected': 'Old'}}
+        good = {'errors': [], 'markdown': 'New', 'paragraphs': [],
+                'table': {'success': True, 'error': None, 'revisionCount': 1,
+                          'accepted': '{#p:body:a} New', 'rejected': 'Old', 'undo': True}}
+        self.assertTrue(all(checks(case, good).values()))
+        for key, value in [('success', False), ('error', 'TrackedOperationUnsupported'), ('revisionCount', 2),
+                           ('accepted', 'Old'), ('rejected', 'Old New'), ('undo', False)]:
+            bad = copy.deepcopy(good)
+            bad['table'][key] = value
+            self.assertFalse(checks(case, bad)['tableInsert'])
+        del good['table']
+        self.assertFalse(checks(case, good)['tableInsert'])
 
     def test_normalization_keeps_table_structure_and_duplicate_words(self):
         self.assertEqual('| Ash | Ash |', normalize('{#tbl:body:123}\n| Ash | Ash |'))

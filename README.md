@@ -298,6 +298,10 @@ Exact refusal results, complete package-part identity, history and saved-output 
 `projection-v3` adds seven [deleted-row reproducer/control pairs](docs/results/deleted-rows/README.md)
 for Docxodus #1628, checking GFM headers/body, opaque dimensions, wrapped/merged rows,
 wholly deleted tables and row-carried textboxes.
+`projection-v4` adds two [tracked table-insertion pairs](docs/results/table-insert/README.md)
+for Docxodus #1626: a table inserted while recording, before another table and at the end of
+the body, each with an untracked control. Success, the public revision count, accept-all and
+reject-all Markdown and history are checked.
 
 ## What is included
 
