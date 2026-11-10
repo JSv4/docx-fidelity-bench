@@ -15,6 +15,12 @@ controls retain natural wrapping. See [native comparisons and diagnostic limits]
 
 # DOCX fidelity bench
 
+`core-v153` adds six original Sorrel tall-row cases for Docxodus #1558: a row whose minimum height
+is taller than the page (exact-height control), a minimum-height row its 70 lines make taller than
+a page (no-height control), and a tall row with centered cells (top-aligned control). Word 2024
+adjudicates each marker's page and box. LibreOffice references are pending. See
+[the Word measurements and labeled renders](docs/results/tall-rows/README.md).
+
 `core-v152` adds eleven original Hazel text-placement cases for Docxodus #1550 and #1562: the
 justified Hazel prose with no stated spacing, a bold word, a hyperlinked word, a numbered item
 and a table cell, with left-aligned controls, plus kerning with a bold word, `w:kern` 0 and a

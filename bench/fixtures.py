@@ -3565,6 +3565,60 @@ def plain_math_cases(add, cases):
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['MapleBegin', 'MaplePlain', 'MapleEnd']}])
 
 
+# Word 2024 marker boxes (page, rect in points) for the tall-row cases, from its own PDF of each input.
+TALL_ROW_WORD = {
+    'aligned-tall-row-center': {'SorrelLine001': (1, [72.744, 84.263, 136.423, 96.485]), 'SorrelRight': (1, [306.77, 390.293, 358.183, 402.515]), 'SorrelLine070': (2, [72.744, 276.293, 136.423, 288.515]), 'SorrelClosing': (2, [72.024, 288.773, 133.208, 300.995])},
+    'aligned-tall-row-top-control': {'SorrelLine001': (1, [72.744, 84.263, 136.423, 96.485]), 'SorrelRight': (1, [306.77, 84.263, 358.183, 96.485]), 'SorrelLine070': (2, [72.744, 276.293, 136.423, 288.515]), 'SorrelClosing': (2, [72.024, 288.773, 133.208, 300.995])},
+    'minimum-row-content-auto-control': {'SorrelOpening': (1, [72.024, 71.783, 136.917, 84.005]), 'SorrelLine001': (2, [72.744, 72.263, 136.423, 84.485]), 'SorrelLine070': (3, [72.744, 264.293, 136.423, 276.515]), 'SorrelClosing': (3, [72.024, 276.773, 133.208, 288.995])},
+    'minimum-row-content': {'SorrelOpening': (1, [72.024, 71.783, 136.917, 84.005]), 'SorrelLine001': (2, [72.744, 72.263, 136.423, 84.485]), 'SorrelLine070': (3, [72.744, 264.293, 136.423, 276.515]), 'SorrelClosing': (4, [72.024, 71.783, 133.208, 84.005])},
+    'minimum-row-oversized-exact-control': {'SorrelOpening': (1, [72.024, 71.783, 136.917, 84.005]), 'SorrelLeft': (2, [72.744, 72.263, 118.019, 84.485]), 'SorrelRight': (2, [306.77, 72.263, 358.183, 84.485]), 'SorrelClosing': (3, [72.024, 71.783, 133.208, 84.005])},
+    'minimum-row-oversized': {'SorrelOpening': (1, [72.024, 71.783, 136.917, 84.005]), 'SorrelLeft': (2, [72.744, 72.263, 118.019, 84.485]), 'SorrelRight': (2, [306.77, 72.263, 358.183, 84.485]), 'SorrelClosing': (3, [72.024, 71.783, 133.208, 84.005])},
+}
+
+
+def tall_row_cases(add):
+    """Original Sorrel rows taller than a page; each reproducer has a one-difference control (Docxodus #1558)."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif" w:cs="Liberation Serif"/>'
+              '<w:sz w:val="22"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+              '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="exact"/>'
+              '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    paper = ('<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" '
+             'w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr>')
+    edges = ''.join(f'<w:{side} w:val="single" w:sz="4" w:color="205080"/>'
+                    for side in ('top', 'left', 'bottom', 'right', 'insideV'))
+
+    def table(cells, height=''):
+        grid = ''.join(f'<w:gridCol w:w="{9360 // len(cells)}"/>' for _ in cells)
+        return (f'<w:tbl><w:tblPr><w:tblW w:w="9360" w:type="dxa"/><w:tblBorders>{edges}</w:tblBorders>'
+                f'<w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>{grid}</w:tblGrid><w:tr><w:trPr>{height}</w:trPr>'
+                + ''.join(f'<w:tc><w:tcPr><w:tcW w:w="{9360 // len(cells)}" w:type="dxa"/>{props}</w:tcPr>{content}</w:tc>'
+                          for props, content in cells) + '</w:tr></w:tbl>')
+
+    lines = [f'SorrelLine{i:03d}' for i in range(1, 71)]
+    tall = para(runs='<w:r><w:br/></w:r>'.join(run(label) for label in lines))
+    cases = {
+        # A minimum taller than the page: Word ends the row at the body foot; exact runs to the paper edge.
+        'minimum-row-oversized': ('<w:trHeight w:val="16000"/>', [('', para('SorrelLeft')), ('', para('SorrelRight'))]),
+        'minimum-row-oversized-exact-control': ('<w:trHeight w:val="16000" w:hRule="exact"/>',
+                                                [('', para('SorrelLeft')), ('', para('SorrelRight'))]),
+        # Content taller than the page in a minimum-height row: each page's part keeps the capped minimum.
+        'minimum-row-content': ('<w:cantSplit/><w:trHeight w:val="15000"/>', [('', tall)]),
+        'minimum-row-content-auto-control': ('<w:cantSplit/>', [('', tall)]),
+        # A tall row whose cells are centered: the short cell centers in the row's first-page part.
+        'aligned-tall-row-center': ('', [('<w:vAlign w:val="center"/>', tall), ('<w:vAlign w:val="center"/>', para('SorrelRight'))]),
+        'aligned-tall-row-top-control': ('', [('<w:vAlign w:val="top"/>', tall), ('<w:vAlign w:val="top"/>', para('SorrelRight'))]),
+    }
+    for case_id, (height, cells) in cases.items():
+        labels = ['SorrelOpening'] + [label for _, content in cells for label in re.findall(r'Sorrel\w+', content)] + ['SorrelClosing']
+        body = para('SorrelOpening') + table(cells, height) + para('SorrelClosing')
+        assertions = [dict(type='marker-region', version=2, marker=marker, occurrence=1, page=page,
+                           rect=rect, tolerancePt=1.5, adjudicated='word')
+                      for marker, (page, rect) in TALL_ROW_WORD.get(case_id, {}).items()]
+        add(case_id, 'tables', f'Sorrel {case_id.replace("-", " ")} (Docxodus #1558)', labels, body,
+            sect=paper, styles_xml=styles, assertions=assertions)
+
+
 def generate():
     cases = []
     def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT, literal_parts=None, relations_extra=(), content_types_extra=''):
@@ -6638,7 +6692,8 @@ def generate():
     embedded_font_cases(add, cases)
     text_placement_cases(add, cases)
     last_line_leading_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v152', 'version': 152, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    tall_row_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v153', 'version': 153, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 
