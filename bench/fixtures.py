@@ -404,6 +404,36 @@ def para(text='', props='', runs=None):
     return f'<w:p><w:pPr>{props}</w:pPr>{run(text) if runs is None else runs}</w:p>'
 
 
+def section_mark_cases(add):
+    """Empty paragraphs that only carry a section break (Docxodus #1572). Word 2024 sets the mark on
+    the preceding paragraph's last line; each control carries the same break on that line itself."""
+    single = '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>'
+    spaced = '<w:spacing w:before="0" w:after="160" w:line="259" w:lineRule="auto"/>'
+    mark = lambda props: para(props=props + section(), runs='')
+    for name, props, kind in (('continuous', single, 'continuous'), ('spaced', spaced, 'continuous'),
+                              ('two-column', single, 'continuous')):
+        labels = ['HeronAbove', 'HeronBelow']
+        final = section(2 if name == 'two-column' else 1, kind)
+        for control in (False, True):
+            body = (para(labels[0], props + (section() if control else '')) + ('' if control else mark(props))
+                    + para(labels[1], props))
+            add('section-mark-' + name + ('-control' if control else ''), 'sections',
+                f'Empty paragraph carrying a section break before a {kind} {name} section; control carries the break '
+                'on the preceding line (Docxodus #1572)', labels, body, final,
+                assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': label, 'tolerancePt': 0.5}
+                            for label in labels])
+    brk = '<w:p><w:r><w:br w:type="page"/></w:r></w:p>'
+    labels = [f'Kestrel{n}{line}' for n in ('One', 'Two', 'Three') for line in ('Open', 'Close')]
+    for control in (False, True):
+        part = lambda n: para(labels[2 * n], single) + para(labels[2 * n + 1], single)
+        gap = mark(single) if control else brk + mark(single)
+        add('section-mark-after-page-break' + ('-control' if control else ''), 'sections',
+            'Page break before an empty next-page section mark adds no page; control has the mark alone (Docxodus #1572)',
+            labels, part(0) + gap + part(1) + gap + part(2), section(),
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': label, 'occurrence': 1,
+                         'page': index // 2 + 1, 'rect': [0, 0, 612, 792]} for index, label in enumerate(labels)])
+
+
 def custom_xml_link(content, wrapped):
     """Original inline carrier shared by the PDF and redline comparison cases."""
     if wrapped:
@@ -6797,7 +6827,8 @@ def generate():
     tall_row_cases(add)
     markup_sheet_cases(add, cases)
     automatic_spacing_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v155', 'version': 155, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    section_mark_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v156', 'version': 156, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 
