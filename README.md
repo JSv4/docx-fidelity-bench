@@ -15,6 +15,15 @@ controls retain natural wrapping. See [native comparisons and diagnostic limits]
 
 # DOCX fidelity bench
 
+`core-v152` adds eleven original Hazel text-placement cases for Docxodus #1550 and #1562: the
+justified Hazel prose with no stated spacing, a bold word, a hyperlinked word, a numbered item
+and a table cell, with left-aligned controls, plus kerning with a bold word, `w:kern` 0 and a
+`w:kern` minimum equal to the text size. Word 2024 confirms every expected line. See
+[the Word measurements and limits](docs/results/text-placement/README.md).
+It also adds two original Thistle cases for Docxodus #1571: 51 double-spaced lines in 23 full
+pitches plus 15pt, where the 24th line's text fits, and plus 13pt, where it does not. Word 2024
+puts 24 and 23 lines on page 1 ([evidence](docs/results/last-line-leading/README.md)).
+
 `core-v150` adds an embedded-font input and an unused-face control for Docxodus #1575. Both packages
 embed an original Liatris program, obfuscated with its `w:fontKey`; cases list such families in
 `embeddedFonts`, which the host never provisions. LibreOffice references are pending. See

@@ -2115,6 +2115,99 @@ def paragraph_text_independence_cases(add, cases):
             pageSizePt=[612, 792], requiredTokens=cases[-1]['tokens'], exactInventory=True)
 
 
+def text_placement_cases(add, cases):
+    """Original Hazel prose inside a paragraph's own structure: Word chooses justified lines and
+    kerning per paragraph and run, whatever runs, links, list numbers or cells carry the text."""
+    prefixes = {
+        'justify': 'Hazel01 Our quiet harbor crew checks every lantern before an evening ferry reaches its northern landing',
+        'kern': 'Hazel01 We Visit A Quiet Valley Where Tall Willows Wave Beside Warm Water',
+    }
+    tails = {'justify': ' while HazelTail waits beside a gate.', 'kern': ' while HazelTail names every boat before nightfall.'}
+    # Independently measured 12pt Liberation Serif advances, as in paragraph_text_independence_cases.
+    # The justified prefix is 502.107421875pt in a 501pt band; bold `northern` adds 5.34375pt and
+    # condensing still strains less than stretching the 463.11328125pt line without `landing`.
+    # The kerning prefix is 395.173828125pt off and 384.685546875pt on in a 390pt column.
+    variants = [('justify', 'both', placement) for placement in ('unspaced', 'bold', 'link', 'list', 'cell')]
+    variants += [('justify', 'left', placement) for placement in ('bold', 'list', 'cell')]
+    variants += [('kern', 'left', placement) for placement in ('bold', 'zero', 'at-size')]
+    numbering = (f'<w:numbering xmlns:w="{W}"><w:abstractNum w:abstractNumId="0"><w:lvl w:ilvl="0"><w:start w:val="1"/>'
+        '<w:numFmt w:val="decimal"/><w:lvlText w:val="%1."/><w:lvlJc w:val="left"/>'
+        '<w:pPr><w:ind w:left="720" w:hanging="360"/></w:pPr></w:lvl></w:abstractNum>'
+        '<w:num w:numId="1"><w:abstractNumId w:val="0"/></w:num></w:numbering>')
+    for kind, jc, placement in variants:
+        prefix, band = prefixes[kind], 501 if kind == 'justify' else 390
+        text = prefix + tails[kind]
+        kern = {'zero': '<w:kern w:val="0"/>', 'at-size': '<w:kern w:val="24"/>'}.get(placement, '')
+        marked = 'northern' if kind == 'justify' else 'HazelTail'
+        runs = run(text, kern)
+        if placement == 'bold':
+            at = text.index(marked)
+            runs = run(text[:at]) + run(marked, '<w:b/>') + run(text[at + len(marked):])
+        elif placement == 'link':
+            at = text.index('harbor')
+            runs = run(text[:at]) + '<w:hyperlink r:id="rHazelLink">' + run('harbor') + '</w:hyperlink>' + run(text[at + 6:])
+        props = '<w:jc w:val="' + jc + '"/>'
+        if placement == 'list':
+            props = '<w:numPr><w:ilvl w:val="0"/><w:numId w:val="1"/></w:numPr>' + props
+        body = para(props=props, runs=runs)
+        # The text band is `band` wide in every placement: a list item's 0.5in indent and a cell's
+        # default 0.075in margins widen the page column or the cell to keep it.
+        column = band + (36 if placement == 'list' else 0)
+        if placement == 'cell':
+            cell = int((band + 10.8) * 20)
+            body = ('<w:tbl><w:tblPr><w:tblW w:w="' + str(cell) + '" w:type="dxa"/><w:tblLayout w:type="fixed"/>'
+                '<w:tblCellMar><w:left w:w="108" w:type="dxa"/><w:right w:w="108" w:type="dxa"/></w:tblCellMar>'
+                '</w:tblPr><w:tblGrid><w:gridCol w:w="' + str(cell) + '"/></w:tblGrid><w:tr><w:tc><w:tcPr><w:tcW w:w="'
+                + str(cell) + '" w:type="dxa"/></w:tcPr>' + body + '</w:tc></w:tr></w:tbl>')
+            column = band + 10.8
+        closing = 'HazelNote keeps neat records.'
+        spacing = '' if placement == 'unspaced' else '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>'
+        styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+            '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="24"/></w:rPr></w:rPrDefault>'
+            f'<w:pPrDefault><w:pPr>{spacing}</w:pPr></w:pPrDefault></w:docDefaults>'
+            '<w:style w:type="paragraph" w:default="1" w:styleId="Hazel"><w:name w:val="Hazel"/></w:style></w:styles>')
+        words = text.split()
+        assert len(set(words)) == len(words), 'Line markers must be unique'
+        # Word condenses the justified line and kerns only the requested run at or above its size.
+        whole = (kind == 'justify' and jc == 'both') or placement == 'at-size'
+        first_count = len(prefix.split()) - (not whole)
+        assertions = []
+        for index, word in enumerate(words):
+            line_top = 72 if index < first_count else 86
+            assertions.append(dict(type='marker-region', marker=word, occurrence=1, page=1,
+                rect=[0, line_top, 612, line_top + 14]))
+        labels = [('1. ' if placement == 'list' else '') + text, closing]
+        add(f'text-placement-{kind}-{jc}-{placement}', 'paragraphs',
+            f'Hazel {kind} {jc} with {placement} placement (Docxodus #1550/#1562)', labels,
+            body + para(closing),
+            sect=f'<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="{round((540 - column) * 20)}" w:bottom="1440" w:left="1440"/></w:sectPr>',
+            styles_xml=styles, numbering_xml=numbering if placement == 'list' else None,
+            relations_extra=[('rHazelLink', 'hyperlink', 'https://example.com/', 'External')] if placement == 'link' else [],
+            extra_parts={'word/settings.xml': f'<w:settings xmlns:w="{W}"><w:compat><w:compatSetting w:name="compatibilityMode" '
+                'w:uri="http://schemas.microsoft.com/office/word" w:val="15"/></w:compat></w:settings>'}, assertions=assertions)
+        cases[-1]['pdfCompanion'] = dict(profile=dict(review='final', comments='hidden'),
+            pageSizePt=[612, 792], requiredTokens=cases[-1]['tokens'], exactInventory=True)
+
+
+def last_line_leading_cases(add):
+    """Original Thistle lines: a page's last double-spaced line needs only its text height (Docxodus #1571).
+    The text area is 23 full 12pt double-spaced pitches plus 15pt or 13pt; Liberation Serif's single
+    line is 2355/2048 x 12 = 13.7988pt, so only the 15pt remainder holds the 24th line's text."""
+    labels = [f'Thistle{index:02d} marks the dune path.' for index in range(1, 52)]
+    body = ''.join(para(label, '<w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="auto"/>') for label in labels)
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif" w:cs="Liberation Serif"/><w:sz w:val="24"/>'
+              '</w:rPr></w:rPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal">'
+              '<w:name w:val="Normal"/></w:style></w:styles>')
+    for spare, bottom, count in ((15, 1404, 24), (13, 1444, 23)):
+        assertions = [dict(type='marker-region', marker=f'Thistle{index:02d}', occurrence=1,
+                           page=1 if index <= count else 2, rect=[0, 0, 612, 792]) for index in (1, count, count + 1)]
+        add(f'last-line-leading-double-spare{spare}', 'paragraphs',
+            f'Thistle double-spaced lines with a {spare}pt remainder: {count} fit page 1 (Docxodus #1571)', labels, body,
+            sect=f'<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="{bottom}" '
+                 'w:left="1440" w:header="720" w:footer="720"/></w:sectPr>', styles_xml=styles, assertions=assertions)
+
+
 def character_width_cases(add, cases, cell=False):
     """Original Sorrel labels isolate percentage scaling at independent font-unit boundaries."""
     advance = 1229 / 2048 * 12
@@ -6543,7 +6636,9 @@ def generate():
     collection_font_cases(add)
     fractional_measure_cases(add)
     embedded_font_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v151', 'version': 151, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    text_placement_cases(add, cases)
+    last_line_leading_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v152', 'version': 152, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 
