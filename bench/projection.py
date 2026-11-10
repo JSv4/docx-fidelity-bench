@@ -19,7 +19,14 @@ def checks(case, observation):
             'completeText': normalize(observation['markdown']) == case['expected'],
             'paragraphAnchors': all(any(p['text'] == text and normalize(p['markdown']) == text
                                        for p in observation['paragraphs']) for text in case['anchored'])}
-    if 'operation' in case:
+    if case.get('operation') == 'table-insert':
+        spec, observed = case['tableInsert'], observation.get('table') or {}
+        result['tableInsert'] = (observed.get('success') is True and observed.get('error') is None
+                                 and observed.get('revisionCount') == spec['revisions']
+                                 and normalize(observed.get('accepted') or '') == spec['accepted']
+                                 and normalize(observed.get('rejected') or '') == spec['rejected']
+                                 and observed.get('undo') is True)
+    elif 'operation' in case:
         tracked = case['tracked']
         result['rawMutation'] = observation.get('raw') == {
             'success': not tracked, 'error': 'TrackedOperationUnsupported' if tracked else None,
@@ -51,7 +58,7 @@ def run(build_dir, output):
     manifest = validate()
     observations = json.loads(execute([dotnet(), folder / 'bin/DocxBenchProjection.dll'] +
                                      [json.dumps({'path': str(ROOT / c['input']), 'operation': c.get('operation'),
-                                                  'tracked': c.get('tracked', False), 'tableMode': c.get('tableMode', 'GfmWithOpaqueFallback')}) for c in manifest['cases']], timeout=300))
+                                                  'tracked': c.get('tracked', False), 'anchor': c.get('anchor'), 'tableMode': c.get('tableMode', 'GfmWithOpaqueFallback')}) for c in manifest['cases']], timeout=300))
     if len(observations) != len(manifest['cases']):
         raise ValueError('Missing projection observations')
     results = []

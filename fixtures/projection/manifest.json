@@ -279,6 +279,98 @@
       "tracked": false
     },
     {
+      "anchor": "LarchBravo",
+      "anchored": [
+        "LarchAlpha"
+      ],
+      "control": false,
+      "expected": "# Document LarchAlpha LarchBravo | LarchNew | | --- | | LarchCell | | --- | LarchCharlie",
+      "id": "table-insert-before-table-tracked",
+      "input": "fixtures/projection/table-insert-before-table-tracked.docx",
+      "operation": "table-insert",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch labels; no imported assets"
+      },
+      "sha256": "2cac2efefb658aab7a0bcbe2e19aec6443d3bb634a14a05d4e84cd65cc68e387",
+      "tableInsert": {
+        "accepted": "# Document LarchAlpha LarchBravo | LarchNew | | --- | | LarchCell | | --- | LarchCharlie",
+        "rejected": "# Document LarchAlpha LarchBravo | LarchCell | | --- | LarchCharlie",
+        "revisions": 1
+      },
+      "tracked": true
+    },
+    {
+      "anchor": "LarchBravo",
+      "anchored": [
+        "LarchAlpha"
+      ],
+      "control": true,
+      "expected": "# Document LarchAlpha LarchBravo | LarchNew | | --- | | LarchCell | | --- | LarchCharlie",
+      "id": "table-insert-before-table-control",
+      "input": "fixtures/projection/table-insert-before-table-control.docx",
+      "operation": "table-insert",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch labels; no imported assets"
+      },
+      "sha256": "2cac2efefb658aab7a0bcbe2e19aec6443d3bb634a14a05d4e84cd65cc68e387",
+      "tableInsert": {
+        "accepted": "# Document LarchAlpha LarchBravo | LarchNew | | --- | | LarchCell | | --- | LarchCharlie",
+        "rejected": "# Document LarchAlpha LarchBravo | LarchNew | | --- | | LarchCell | | --- | LarchCharlie",
+        "revisions": 0
+      },
+      "tracked": false
+    },
+    {
+      "anchor": "LarchCharlie",
+      "anchored": [
+        "LarchAlpha"
+      ],
+      "control": false,
+      "expected": "# Document LarchAlpha LarchBravo | LarchCell | | --- | LarchCharlie | LarchNew | | --- |",
+      "id": "table-insert-end-of-body-tracked",
+      "input": "fixtures/projection/table-insert-end-of-body-tracked.docx",
+      "operation": "table-insert",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch labels; no imported assets"
+      },
+      "sha256": "2cac2efefb658aab7a0bcbe2e19aec6443d3bb634a14a05d4e84cd65cc68e387",
+      "tableInsert": {
+        "accepted": "# Document LarchAlpha LarchBravo | LarchCell | | --- | LarchCharlie | LarchNew | | --- |",
+        "rejected": "# Document LarchAlpha LarchBravo | LarchCell | | --- | LarchCharlie",
+        "revisions": 1
+      },
+      "tracked": true
+    },
+    {
+      "anchor": "LarchCharlie",
+      "anchored": [
+        "LarchAlpha"
+      ],
+      "control": true,
+      "expected": "# Document LarchAlpha LarchBravo | LarchCell | | --- | LarchCharlie | LarchNew | | --- |",
+      "id": "table-insert-end-of-body-control",
+      "input": "fixtures/projection/table-insert-end-of-body-control.docx",
+      "operation": "table-insert",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Larch labels; no imported assets"
+      },
+      "sha256": "2cac2efefb658aab7a0bcbe2e19aec6443d3bb634a14a05d4e84cd65cc68e387",
+      "tableInsert": {
+        "accepted": "# Document LarchAlpha LarchBravo | LarchCell | | --- | LarchCharlie | LarchNew | | --- |",
+        "rejected": "# Document LarchAlpha LarchBravo | LarchCell | | --- | LarchCharlie | LarchNew | | --- |",
+        "revisions": 0
+      },
+      "tracked": false
+    },
+    {
       "anchored": [
         "LarchAfter"
       ],
@@ -503,8 +595,8 @@
       "tableMode": "AlwaysOpaque"
     }
   ],
-  "generatorSha256": "60bac94002434c8bba2d9b84f98ea981c64fc30d151e0bf0242c1ebe90f6ebf0",
+  "generatorSha256": "cca547aca5fb9b29dc73b6b0bed0c63c5666fbe8bceeaaea1593f5f5f4cfd639",
   "schema": 1,
-  "suite": "projection-v3",
-  "version": 3
+  "suite": "projection-v4",
+  "version": 4
 }

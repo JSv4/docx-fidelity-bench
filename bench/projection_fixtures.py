@@ -90,6 +90,26 @@ def generate(root=ROOT):
                           'expected': '# Document ' + middle + ' LarchTail', 'anchored': ['LarchTail'],
                           'rights': {'author': 'John Scrudato IV', 'license': 'MIT',
                           'origin': 'Original literal OOXML and Larch labels; no imported assets'}})
+    for placement in ('before-table', 'end-of-body'):
+        for tracked in (True, False):
+            cid = 'table-insert-' + placement + ('-tracked' if tracked else '-control')
+            path = folder / (cid + '.docx')
+            existing = ('<w:tbl><w:tblPr/><w:tblGrid><w:gridCol w:w="2400"/></w:tblGrid><w:tr><w:tc><w:tcPr/>'
+                        + para('LarchCell') + '</w:tc></w:tr></w:tbl>')
+            package(path, para('LarchAlpha') + para('LarchBravo') + existing + para('LarchCharlie'),
+                    styles_xml=f'<w:styles xmlns:w="{W}"/>')
+            original = '# Document LarchAlpha LarchBravo | LarchCell | | --- | LarchCharlie'
+            added = '| LarchNew | | --- |'
+            inserted = (original.replace('LarchBravo', 'LarchBravo ' + added) if placement == 'before-table'
+                        else original + ' ' + added)
+            cases.append({'id': cid, 'input': str(path.relative_to(root)), 'sha256': digest(path),
+                          'control': not tracked, 'operation': 'table-insert', 'tracked': tracked,
+                          'anchor': 'LarchBravo' if placement == 'before-table' else 'LarchCharlie',
+                          'expected': inserted, 'anchored': ['LarchAlpha'],
+                          'tableInsert': {'revisions': 1 if tracked else 0, 'accepted': inserted,
+                                          'rejected': original if tracked else inserted},
+                          'rights': {'author': 'John Scrudato IV', 'license': 'MIT',
+                          'origin': 'Original literal OOXML and Larch labels; no imported assets'}})
     for kind in ('middle', 'first', 'only', 'wrapped', 'merged', 'textbox', 'opaque'):
         for is_control in (False, True):
             cid = 'deleted-row-' + kind + ('-control' if is_control else '')
@@ -128,7 +148,7 @@ def generate(root=ROOT):
                           'expected': ' '.join(('# Document ' + middle + ' LarchAfter').split()), 'anchored': ['LarchAfter'],
                           'rights': {'author': 'John Scrudato IV', 'license': 'MIT',
                           'origin': 'Original literal OOXML and Larch row labels; no imported assets'}})
-    manifest = {'schema': 1, 'suite': 'projection-v3', 'version': 3,
+    manifest = {'schema': 1, 'suite': 'projection-v4', 'version': 4,
                 'generatorSha256': digest(Path(__file__)), 'cases': cases}
     write_json(folder / 'manifest.json', manifest)
     return manifest
