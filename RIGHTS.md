@@ -709,3 +709,9 @@ No installed font, product fixture, font-generation helper or external outline i
 copied. These fonts are external test inputs, never embedded in the source DOCX.
 Native screenshots and PDFs contain only the authored inputs and permitted font
 subsets. They do not claim Word rendering parity.
+
+The six tall-row cases for Docxodus #1558 contain original Sorrel labels and literal OOXML
+authored in `bench/fixtures.py`. No product fixture, helper, document, image or font program is
+imported, and no reporter attachment was opened or used. The review renders under
+`docs/results/tall-rows/` show only these authored inputs, rendered by Word 2024 (with Times New
+Roman substituted for Liberation Serif) and by Docxodus.
