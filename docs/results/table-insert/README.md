@@ -17,7 +17,9 @@ The [baseline](baseline.json) at `db505634` (main) fails both reproducers with
 Both runs were measured on Windows. There Docxodus's `ProjectAnchor` slices CRLF Markdown
 wrongly, so the `paragraphAnchors` check fails for all 36 cases on both builds. That check is
 not part of this issue, and the same environment fails Docxodus's own `ProjectAnchor` tests
-(DS310-DS312). Every other check is as stated above. This is an unweighted session diagnostic,
+(DS310-DS312). Every other check is as stated above. The Windows generator writes case inputs
+with backslashes; the committed manifest keeps CI's POSIX paths, so the recorded
+`manifestSha256` is that of the same cases with Windows separators. This is an unweighted session diagnostic,
 not a Word rendering claim or a PDF/redline score.
 
 All inputs are original literal OOXML and Larch labels. No product fixtures or helpers are copied.
