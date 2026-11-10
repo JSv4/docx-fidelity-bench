@@ -52,6 +52,12 @@ LibreOffice references are pending. See [the evidence and limits](docs/results/a
 Docxodus #1622: border `w:sz="4.5"` in paragraph, table and cell borders, and `w:gridCol w:w="4000.5"`.
 Word 2024 truncates each value. LibreOffice references are pending. See [the evidence and limits](docs/results/fractional-measures/README.md).
 
+`core-v157` adds two inputs and controls for Docxodus #1553: 14pt after and 14pt before under
+`w:doNotUseHTMLParagraphAutoSpacing`, which Word 2024 adds to 28pt (the control drops only the setting),
+and automatic spacing in a two-paragraph header, 14pt after its last paragraph included (the control
+drops only the flags). Regions are Word 2024's word boxes. LibreOffice references are pending. See
+[the evidence and limits](docs/results/automatic-spacing/README.md).
+
 `core-v156` adds four empty section-mark inputs and controls for Docxodus #1572: an empty
 paragraph that only carries a section break, before a continuous, a spaced and a two-column
 section, and after page breaks. Word 2024 sets the mark on the preceding line, so each control
