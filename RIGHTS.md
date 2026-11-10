@@ -1,3 +1,11 @@
+The two last-line-leading cases for Docxodus #1571 contain original Thistle labels and literal
+OOXML authored in `bench/fixtures.py`. No product fixture, helper, document, image or font
+program is imported. Liberation Serif is separately provisioned.
+
+The eleven text-placement cases for Docxodus #1550 and #1562 extend the original Hazel prose
+with literal OOXML authored in `bench/fixtures.py`. No product fixture, helper, document,
+image or font program is imported. Liberation Serif is separately provisioned.
+
 The eight line-content cases for Docxodus #1565 and #1567 contain original Yarrow, Aster,
 Larkspur and Primula labels and literal OOXML authored in `bench/fixtures.py`. No product
 fixture, helper, document or font program is imported. Native Word evidence was printed from
