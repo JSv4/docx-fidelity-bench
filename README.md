@@ -52,6 +52,12 @@ LibreOffice references are pending. See [the evidence and limits](docs/results/a
 Docxodus #1622: border `w:sz="4.5"` in paragraph, table and cell borders, and `w:gridCol w:w="4000.5"`.
 Word 2024 truncates each value. LibreOffice references are pending. See [the evidence and limits](docs/results/fractional-measures/README.md).
 
+`core-v158` adds two inputs and controls for Docxodus #1551: 15pt at-least lines on an 18pt line
+grid, which Word 2024 gives whole 18pt lines (36 a page), and one line before in a document with a
+tracked insertion, printed in markup, which Word counts as one 18pt pitch on the grid. Each control
+drops only the grid. Regions are each label's line slot and page, which hold Word 2024's word boxes.
+LibreOffice references are pending. See [the evidence and limits](docs/results/single-line-grid/README.md).
+
 `core-v157` adds two inputs and controls for Docxodus #1553: 14pt after and 14pt before under
 `w:doNotUseHTMLParagraphAutoSpacing`, which Word 2024 adds to 28pt (the control drops only the setting),
 and automatic spacing in a two-paragraph header, 14pt after its last paragraph included (the control

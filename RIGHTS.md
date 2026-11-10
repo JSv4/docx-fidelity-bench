@@ -32,6 +32,9 @@ reporter attachment or third-party outline is imported. The screenshots show Doc
 The four compatibility and header spacing cases for Docxodus #1553 (`compat-spacing-adds*`,
 `header-automatic-spacing*`) are authored the same way, with original Marram labels.
 
+The four line-grid cases for Docxodus #1551 (`grid-at-least-below-pitch*`,
+`grid-tracked-lines-before*`) are authored the same way, with original Tamarack labels.
+
 The eight automatic-spacing cases for Docxodus #1553 contain original Marram labels and literal
 OOXML authored in bench/fixtures.py. No product fixture, helper, document, image or font program
 is imported, and no reporter attachment was opened or used.
