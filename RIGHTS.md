@@ -2,6 +2,12 @@ The four tracked table-insertion diagnostics use original Larch labels and liter
 authored in `bench/projection_fixtures.py`. No product fixture, helper, document or asset is
 imported. Their screenshots show measured public API output, not Word page renders.
 
+The two embedded-font cases for Docxodus #1575 contain original Liatris labels and literal OOXML
+authored in `bench/fixtures.py`. Their one embedded font part is the original `Liatris Packaged`
+program generated from geometric chevrons by `bench/collection_fonts.py`, obfuscated with an
+invented key; the package audit admits exactly those bytes. No product fixture, installed font,
+reporter attachment or third-party outline is imported. The screenshots show Docxodus output.
+
 The eight fractional-measure cases for Docxodus #1622 contain original Quillwort labels and
 literal OOXML authored in bench/fixtures.py. No product fixture, helper, document, image or
 font program is imported, and no reporter attachment was opened or used.

@@ -11,6 +11,11 @@ controls retain natural wrapping. See [native comparisons and diagnostic limits]
 
 # DOCX fidelity bench
 
+`core-v150` adds an embedded-font input and an unused-face control for Docxodus #1575. Both packages
+embed an original Liatris program, obfuscated with its `w:fontKey`; cases list such families in
+`embeddedFonts`, which the host never provisions. LibreOffice references are pending. See
+[the evidence and limits](docs/results/embedded-fonts/README.md).
+
 `core-v149` adds four fractional whole-number measure inputs and whole-value controls for
 Docxodus #1622: border `w:sz="4.5"` in paragraph, table and cell borders, and `w:gridCol w:w="4000.5"`.
 Word 2024 truncates each value. LibreOffice references are pending. See [the evidence and limits](docs/results/fractional-measures/README.md).

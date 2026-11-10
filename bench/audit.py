@@ -15,6 +15,8 @@ FONT_TYPES = ('application/vnd.openxmlformats-officedocument.obfuscatedfont', 'a
               'application/vnd.ms-fontobject')
 AUTHORED_LEGACY_IMAGES = (frozenset(payload for kind, payload in fixtures.static_image_assets().items() if kind != 'png')
                           | frozenset(fixtures.emf_image_assets().values()))
+# The placeholder, or the exact bytes of an original bench/collection_fonts.py program as a package embeds it.
+AUTHORED_FONT_PARTS = frozenset({PLACEHOLDER_FONT_BYTES, *fixtures.embedded_font_parts().values()})
 
 
 ADDRESS = r'[a-z0-9._-]+@example\.com'
@@ -39,11 +41,11 @@ def font_program_type(content_type):
 
 
 def permitted_bytes(payload):
-    """Text, a complete PNG, exact authored legacy-image bytes, or the font placeholder.
+    """Text, a complete PNG, exact authored legacy-image bytes, or an authored font part.
 
     Every font program, obfuscated or compressed, has NUL bytes in its table directory, so this
     refuses one whatever its name, content type or relationship."""
-    if payload == PLACEHOLDER_FONT_BYTES or payload in AUTHORED_LEGACY_IMAGES or (payload.startswith(PNG_START) and payload.endswith(PNG_END)):
+    if payload in AUTHORED_FONT_PARTS or payload in AUTHORED_LEGACY_IMAGES or (payload.startswith(PNG_START) and payload.endswith(PNG_END)):
         return True
     if b'\0' in payload:
         return False
@@ -59,7 +61,7 @@ def check_package(archive):
 
     Two shapes are permitted because cases about the package itself need them: an external
     hyperlink from the main document to a reserved example.com target, and the font table with an
-    embedded-font relationship whose target holds exactly the placeholder bytes. Every font
+    embedded-font relationship whose target holds exactly the placeholder or an authored font part. Every font
     relationship, wherever its target and whatever the target's name, must come from the font table
     and reach the placeholder; so must every part a font content type types. Part names,
     relationship types and content types are compared case-insensitively, and every entry's bytes
@@ -71,7 +73,7 @@ def check_package(archive):
         by_lower.setdefault(name.lower(), []).append(name)
     def placeholder(part):
         entries = by_lower.get(part.lower(), [])
-        return bool(entries) and all(archive.read(n) == PLACEHOLDER_FONT_BYTES for n in entries)
+        return bool(entries) and all(archive.read(n) in AUTHORED_FONT_PARTS for n in entries)
     font_targets = set()
     for name in sorted(names):
         if not name.lower().endswith('.rels'):

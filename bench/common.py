@@ -146,6 +146,11 @@ def validate_registry(registry=None):
             for source in preparation['inputs']:
                 if not isinstance(source, dict) or set(source) != {'path', 'sha256'} or digest(contained(ROOT, source['path'])) != source['sha256']:
                     raise ValueError('Stale preparation source digest')
+        # Families the input itself embeds: a PDF may name them, but the host must not provision them.
+        embedded = case.get('embeddedFonts', [])
+        if ('embeddedFonts' in case and (not isinstance(embedded, list) or not embedded or len(set(embedded)) != len(embedded)
+                                         or not all(isinstance(f, str) and f for f in embedded) or set(embedded) & set(case['fonts']))):
+            raise ValueError('Embedded fonts must be distinct families the host does not provision')
         if not case['tokens'] or any(not isinstance(n, int) or n < 1 for n in case['tokens'].values()):
             raise ValueError('Invalid token inventory')
         if 'clippedTokens' in case:
@@ -205,7 +210,7 @@ def validate_registry(registry=None):
                 raise ValueError('Unknown assertion type or version')
             if assertion['type'] == 'required-font-family':
                 if (set(assertion) != {'type', 'version', 'family'} or not isinstance(assertion.get('family'), str) or
-                        assertion['family'] not in case['fonts']):
+                        assertion['family'] not in case['fonts'] + case.get('embeddedFonts', [])):
                     raise ValueError('Required font must name a declared family')
             if assertion['type'] == 'colored-rule-widths':
                 if (set(assertion) != {'type', 'version', 'page', 'rgb', 'widthsPt', 'tolerancePt'} or

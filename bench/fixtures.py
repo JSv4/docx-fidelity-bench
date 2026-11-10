@@ -157,6 +157,48 @@ def fractional_measure_cases(add):
                     'widthsPt': [width], 'tolerancePt': .01}])
 
 
+EMBEDDED_FONT_FAMILY = 'Liatris Packaged'
+# An invented key; the part is the original Liatris program obfuscated with it as Word stores fonts.
+EMBEDDED_FONT_KEY = '{3A7C5E21-9B4D-4F60-8E12-6D5C4B3A2F19}'
+
+
+def embedded_font_parts():
+    """The authored embedded-font part: the GUID's bytes, reversed, XOR the program's first 32 bytes."""
+    from .collection_fonts import font
+    key = bytes.fromhex(EMBEDDED_FONT_KEY.strip('{}').replace('-', ''))[::-1]
+    program = bytearray(font(EMBEDDED_FONT_FAMILY))
+    for index in range(32):
+        program[index] ^= key[index % 16]
+    return {'word/fonts/font1.odttf': bytes(program)}
+
+
+def embedded_font_cases(add, cases):
+    """A face only the package supplies, through w:embedRegular; the control's runs leave it unused (Docxodus #1575)."""
+    family, wml = EMBEDDED_FONT_FAMILY, 'application/vnd.openxmlformats-officedocument.'
+    parts = {'word/fontTable.xml': (f'<w:fonts xmlns:w="{W}" xmlns:r="{R}"><w:font w:name="{family}">'
+                                    f'<w:embedRegular r:id="rFont1" w:fontKey="{EMBEDDED_FONT_KEY}"/></w:font></w:fonts>'),
+             'word/_rels/fontTable.xml.rels': ('<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+                                               f'<Relationship Id="rFont1" Type="{R}/font" Target="fonts/font1.odttf"/></Relationships>'),
+             **embedded_font_parts()}
+    types = (f'<Override PartName="/word/fontTable.xml" ContentType="{wml}wordprocessingml.fontTable+xml"/>'
+             f'<Default Extension="odttf" ContentType="{wml}obfuscatedFont"/>')
+    labels = ['LIATRISSTART', 'EAST WEST NORTH SOUTH', 'MAPLE OAK ASH', 'LIATRISEND']
+    for control in (False, True):
+        props = '' if control else f'<w:rFonts w:ascii="{family}" w:hAnsi="{family}"/>'
+        body = ''.join(para(props='<w:spacing w:before="0" w:after="120" w:line="360" w:lineRule="exact"/>',
+                            runs=run(label, props)) for label in labels)
+        add('embedded-font-' + ('unused-control' if control else 'regular'), 'paragraphs',
+            'Original face embedded through w:embedRegular with its w:fontKey; '
+            + ('the runs use the provisioned default' if control else 'the runs request it') + ' (Docxodus #1575)',
+            labels, body, extra_parts=dict(parts), relations_extra=[('rFonts', 'fontTable', 'fontTable.xml')],
+            content_types_extra=types,
+            assertions=([] if control else [{'type': 'required-font-family', 'version': 1, 'family': family}])
+            + [{'type': 'marker-reference-position', 'version': 1, 'marker': marker, 'tolerancePt': 0.5}
+               for marker in ' '.join(labels).split()])
+        cases[-1]['embeddedFonts'] = [family]
+        cases[-1]['rights']['assets'] = 'One original bench/collection_fonts.py program, obfuscated as Word embeds fonts'
+
+
 def flow_story_inheritance_cases(add):
     """Native collateral for final-section flow selection; PDF retains all three sections."""
     parts, relations, overrides = {}, [], ''
@@ -6405,7 +6447,8 @@ def generate():
     semantic_bullet_cases(add, cases)
     collection_font_cases(add)
     fractional_measure_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v149', 'version': 149, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    embedded_font_cases(add, cases)
+    registry = {'schema': 1, 'suite': {'id': 'core-v150', 'version': 150, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 
