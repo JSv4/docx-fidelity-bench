@@ -24,7 +24,7 @@ def reference_bundle(output, suite=None, registry=None):
         info = pdf.inspect_case_pdf(path, case)
         failures = pdf.reference_failures(case, info, 'libreoffice')
         eligible = not failures
-        bundle['cases'][case['id']] = {'inputSha256': case['sha256'], 'pdf': str(path.relative_to(output)), 'pdfSha256': digest(path), 'renderer': response['renderer'], 'eligible': eligible, 'ineligibleChecks': failures, 'inspection': info}
+        bundle['cases'][case['id']] = {'inputSha256': case['sha256'], 'pdf': path.relative_to(output).as_posix(), 'pdfSha256': digest(path), 'renderer': response['renderer'], 'eligible': eligible, 'ineligibleChecks': failures, 'inspection': info}
         write_json(output / 'bundle.json', bundle)
         print(case['id'] + (': reference registered' if eligible else ': reference ineligible (' + ', '.join(failures) + ')'), flush=True)
     return bundle
@@ -115,7 +115,7 @@ def equivalent_reference_bundle(output, reference, registry=None):
         path = output / cid / 'reference.pdf'
         path.parent.mkdir()
         shutil.copyfile(contained(source_root, capture['pdf']), path)
-        entry = dict(capture, inputSha256=case['sha256'], pdf=str(path.relative_to(output)), referenceSource=source)
+        entry = dict(capture, inputSha256=case['sha256'], pdf=path.relative_to(output).as_posix(), referenceSource=source)
         bundle['cases'][cid] = entry
         print(cid + ': ' + source['kind'] + ' reference from ' + source['caseId'] +
               (' registered' if entry['eligible'] else ' ineligible'), flush=True)

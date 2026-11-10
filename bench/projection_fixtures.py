@@ -102,7 +102,7 @@ def generate(root=ROOT):
             added = '| LarchNew | | --- |'
             inserted = (original.replace('LarchBravo', 'LarchBravo ' + added) if placement == 'before-table'
                         else original + ' ' + added)
-            cases.append({'id': cid, 'input': str(path.relative_to(root)), 'sha256': digest(path),
+            cases.append({'id': cid, 'input': path.relative_to(root).as_posix(), 'sha256': digest(path),
                           'control': not tracked, 'operation': 'table-insert', 'tracked': tracked,
                           'anchor': 'LarchBravo' if placement == 'before-table' else 'LarchCharlie',
                           'expected': inserted, 'anchored': ['LarchAlpha'],
