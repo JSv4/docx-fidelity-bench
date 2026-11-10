@@ -1,3 +1,7 @@
+The three All Markup sheet cases for Docxodus #1559 and #1577 contain original Mariner labels and
+literal OOXML authored in `bench/fixtures.py`. No product fixture, helper, document, image or font
+program is imported. Liberation Serif is separately provisioned.
+
 The two last-line-leading cases for Docxodus #1571 contain original Thistle labels and literal
 OOXML authored in `bench/fixtures.py`. No product fixture, helper, document, image or font
 program is imported. Liberation Serif is separately provisioned.
