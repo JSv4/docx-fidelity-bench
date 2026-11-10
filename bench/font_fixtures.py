@@ -41,7 +41,7 @@ def generate(root=ROOT):
                      'content_types_extra': '<Override PartName="/word/fontTable.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml"/>'}
         path = folder / (cid + '.docx')
         package(path, body, styles_xml=styles, **extra)
-        cases.append({'id': cid, 'input': str(path.relative_to(root)), 'sha256': digest(path), 'control': control,
+        cases.append({'id': cid, 'input': path.relative_to(root).as_posix(), 'sha256': digest(path), 'control': control,
                       'pages': [{'family': family, 'text': text, 'missing': family == MISSING,
                                  'partial': cid == 'mixed-glyphs'} for family, text in pages],
                       'rights': {'author': 'John Scrudato IV', 'license': 'MIT',

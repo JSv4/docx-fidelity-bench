@@ -39,7 +39,7 @@ def generate(root=ROOT):
                 expected.update(text='1.2' + native + ('XCedar' if action == 'caret' else 'Cedar'), tabs=int(not control))
             path = folder / (cid + '.docx')
             package(path, para(runs=content), styles_xml=STYLES)
-            cases.append({'id': cid, 'input': str(path.relative_to(root)), 'sha256': digest(path),
+            cases.append({'id': cid, 'input': path.relative_to(root).as_posix(), 'sha256': digest(path),
                           'action': action, 'control': control, 'expected': expected,
                           'rights': {'author': 'John Scrudato IV', 'license': 'MIT',
                                      'origin': 'Original literal OOXML and Cedar text authored for this diagnostic',

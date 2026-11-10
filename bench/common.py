@@ -37,7 +37,7 @@ def read_json(path):
 
 
 def write_json(path, value):
-    Path(path).write_text(json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + '\n')
+    Path(path).write_text(json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + '\n', newline='\n')
 
 
 def execute(args, timeout=120, input=None):
