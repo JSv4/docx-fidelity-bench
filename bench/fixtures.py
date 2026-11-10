@@ -119,6 +119,44 @@ def adjacent_text_span_cases(add):
                          'tolerancePt': 0.5} for marker in ' '.join(labels).split()])
 
 
+def fractional_measure_cases(add):
+    """Bare fractional whole-number measures; controls hold the value Word 2024 truncates to."""
+    color = '205080'
+
+    def edges(tag, size, inside=False):
+        sides = ['top', 'left', 'bottom', 'right'] + (['insideH', 'insideV'] if inside else [])
+        return f'<w:{tag}>' + ''.join(f'<w:{side} w:val="single" w:sz="{size}" w:color="{color}"/>'
+                                     for side in sides) + f'</w:{tag}>'
+
+    def table(first='4000', table_borders='', cell_borders=''):
+        cells = ''.join('<w:tc><w:tcPr>' + cell_borders + '</w:tcPr>' + para(label) + '</w:tc>'
+                        for label in ('QuillwortWest', 'QuillwortEast'))
+        return ('<w:tbl><w:tblPr>' + table_borders + '<w:tblLayout w:type="fixed"/></w:tblPr>'
+                f'<w:tblGrid><w:gridCol w:w="{first}"/><w:gridCol w:w="3000"/></w:tblGrid>'
+                '<w:tr>' + cells + '</w:tr></w:tbl>' + para('QuillwortClose'))
+
+    carriers = {
+        'paragraph-border': lambda v: para('QuillwortLedger', edges('pBdr', v)) + para('QuillwortClose'),
+        'table-border': lambda v: table(table_borders=edges('tblBorders', v, inside=True)),
+        'cell-border': lambda v: table(cell_borders=edges('tcBorders', v)),
+        'grid-column': lambda v: table(first=v, cell_borders=edges('tcBorders', '8')),
+    }
+    values = {'paragraph-border': ('4.5', '4'), 'table-border': ('4.5', '4'),
+              'cell-border': ('4.5', '4'), 'grid-column': ('4000.5', '4000')}
+    for kind, body in carriers.items():
+        labels = (['QuillwortLedger'] if kind == 'paragraph-border' else ['QuillwortWest', 'QuillwortEast']) + ['QuillwortClose']
+        width = 1 if kind == 'grid-column' else .5
+        for control in (False, True):
+            value = values[kind][control]
+            add('fractional-measure-' + kind + ('-control' if control else ''), 'tables' if kind != 'paragraph-border' else 'paragraphs',
+                f'Bare fractional {kind.replace("-", " ")} measure {value}; Word 2024 truncates it (Docxodus #1622)',
+                labels, body(value),
+                assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': label, 'tolerancePt': 0.5}
+                            for label in labels]
+                + [{'type': 'colored-rule-widths', 'version': 1, 'page': 1, 'rgb': [32, 80, 128],
+                    'widthsPt': [width], 'tolerancePt': .01}])
+
+
 def flow_story_inheritance_cases(add):
     """Native collateral for final-section flow selection; PDF retains all three sections."""
     parts, relations, overrides = {}, [], ''
@@ -6366,7 +6404,8 @@ def generate():
     font_table_class_cases(add)
     semantic_bullet_cases(add, cases)
     collection_font_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v148', 'version': 148, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    fractional_measure_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v149', 'version': 149, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 

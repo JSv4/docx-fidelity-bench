@@ -7,6 +7,10 @@ controls retain natural wrapping. See [native comparisons and diagnostic limits]
 
 # DOCX fidelity bench
 
+`core-v149` adds four fractional whole-number measure inputs and whole-value controls for
+Docxodus #1622: border `w:sz="4.5"` in paragraph, table and cell borders, and `w:gridCol w:w="4000.5"`.
+Word 2024 truncates each value. LibreOffice references are pending. See [the evidence and limits](docs/results/fractional-measures/README.md).
+
 `core-v144` adds a three-section default-story inheritance case and explicit-reference
 control for Docxodus #1619. PDF checks preserve the paginated story behavior while product
 tests assert flow selection. See [all-page native previews and limits](docs/results/flow-story-inheritance/README.md).

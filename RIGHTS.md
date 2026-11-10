@@ -2,6 +2,10 @@ The four tracked table-insertion diagnostics use original Larch labels and liter
 authored in `bench/projection_fixtures.py`. No product fixture, helper, document or asset is
 imported. Their screenshots show measured public API output, not Word page renders.
 
+The eight fractional-measure cases for Docxodus #1622 contain original Quillwort labels and
+literal OOXML authored in bench/fixtures.py. No product fixture, helper, document, image or
+font program is imported, and no reporter attachment was opened or used.
+
 The fourteen deleted-row projection diagnostics use original Larch row labels and literal
 OOXML authored in `bench/projection_fixtures.py`. No product fixture, helper, document
 or asset is imported. Screenshots show measured API output, not Word page renders.
