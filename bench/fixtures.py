@@ -3617,6 +3617,46 @@ def tall_row_cases(add):
                       for marker, (page, rect) in TALL_ROW_WORD.get(case_id, {}).items()]
         add(case_id, 'tables', f'Sorrel {case_id.replace("-", " ")} (Docxodus #1558)', labels, body,
             sect=paper, styles_xml=styles, assertions=assertions)
+def markup_sheet_cases(add, cases):
+    """Original Mariner logbook: where Word's All Markup print puts the shrunken page (Docxodus #1559, #1577).
+
+    Word 2024's Save as PDF zooms the page and its 3.7in markup area by the 1/600 step nearest the
+    paper's width over theirs, and centres the shrunken page on the paper's height: on Letter with
+    1in margins the zoom is 455/600 and the band above the page 95.4pt; on A4, 452/600 and 103.7pt.
+    The commented first line and its balloon label must print inside those bands. A page whose
+    document has nothing for the balloons prints at full size, the control.
+    """
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="24"/>'
+              '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+              '<w:spacing w:before="0" w:after="0" w:line="276" w:lineRule="exact"/>'
+              '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    note = ('<w:comment w:id="0" w:author="Mariner Editor" w:initials="ME" w:date="2026-01-01T00:00:00Z">'
+            + para('MarinerNote checks the tide table.') + '</w:comment>')
+    opening = 'MarinerOpen leaves the east dock.'
+    lines = [f'Mariner{i:02d} logs the harbor watch.' for i in range(2, 12)]
+    balloon = ['Commented', '[ME1]:', 'MarinerNote checks the tide table.']
+    profile = dict(review='markup', comments='margin', markupPresentation='word', commentColumnPlacement='balloons')
+    for name, width, height, line_rect, label_rect, commented in [
+        ('letter', 12240, 15840, [50, 144, 300, 172], [430, 144, 520, 178], True),
+        ('a4', 11906, 16838, [48, 150, 300, 180], [415, 150, 505, 186], True),
+        ('nothing-to-show-control', 12240, 15840, [70, 70, 300, 92], None, False),
+    ]:
+        anchor = run(opening)
+        if commented:
+            anchor = ('<w:commentRangeStart w:id="0"/>' + anchor
+                      + '<w:commentRangeEnd w:id="0"/><w:r><w:commentReference w:id="0"/></w:r>')
+        body = para(runs=anchor) + ''.join(para(text) for text in lines)
+        sect = (f'<w:sectPr><w:pgSz w:w="{width}" w:h="{height}"/><w:pgMar w:top="1440" w:right="1440" '
+                'w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr>')
+        assertions = [dict(type='marker-region', marker='MarinerOpen', occurrence=1, page=1, rect=line_rect)]
+        if label_rect:
+            assertions.append(dict(type='marker-region', marker='Commented', occurrence=1, page=1, rect=label_rect))
+        add('markup-sheet-' + name, 'paragraphs',
+            'Mariner All Markup sheet position: ' + name + ' (Docxodus #1559, #1577)',
+            [opening] + lines + (balloon if commented else []), body, sect=sect, styles_xml=styles,
+            comments_xml=note if commented else None, assertions=assertions)
+        cases[-1]['profile'] = dict(profile)
 
 
 def generate():
@@ -6693,7 +6733,8 @@ def generate():
     text_placement_cases(add, cases)
     last_line_leading_cases(add)
     tall_row_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v153', 'version': 153, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    markup_sheet_cases(add, cases)
+    registry = {'schema': 1, 'suite': {'id': 'core-v154', 'version': 154, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 

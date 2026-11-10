@@ -21,6 +21,14 @@ a page (no-height control), and a tall row with centered cells (top-aligned cont
 adjudicates each marker's page and box. LibreOffice references are pending. See
 [the Word measurements and labeled renders](docs/results/tall-rows/README.md).
 
+`core-v154` adds three original Mariner cases for Docxodus #1559 and #1577, rendered with the All
+Markup balloon layout (`commentColumnPlacement: "balloons"`). One comment marks the first line of a
+Letter page and of an A4 page. Word 2024's Save as PDF zooms each page and its 3.7in markup area
+by the 1/600 step nearest the paper's width over theirs (455 and 452) and centres the shrunken page
+on the paper. `marker-region` assertions therefore hold the commented line and its `Commented`
+label in the bands Word prints. The control has nothing for the balloons and prints at full size.
+References and Word captures are pending.
+
 `core-v152` adds eleven original Hazel text-placement cases for Docxodus #1550 and #1562: the
 justified Hazel prose with no stated spacing, a bold word, a hyperlinked word, a numbered item
 and a table cell, with left-aligned controls, plus kerning with a bold word, `w:kern` 0 and a
