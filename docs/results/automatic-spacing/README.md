@@ -17,3 +17,18 @@ first paragraph's 5pt remains.
 LibreOffice reference captures and candidate scoring are pending. This machine has no pinned
 LibreOffice, so no reference bundle is included and no eligibility or fidelity score is claimed.
 All prior input hashes are unchanged.
+
+## Compatibility setting and header spacing (`core-v157`)
+
+Two more input/control pairs, printed from Word 2024 with Liberation Serif renamed to Times New Roman,
+12pt on exact 16pt lines. Each control changes one thing.
+
+| Case | What changes in the control | Word 2024 | Docxodus before |
+|---|---|---|---|
+| `compat-spacing-adds` | drops `w:doNotUseHTMLParagraphAutoSpacing` | 28pt between 14pt after and 14pt before (control 14pt) | 14pt |
+| `header-automatic-spacing` | drops both automatic flags (explicit 5pt kept) | header starts with no space before, 14pt between, 14pt after the last paragraph, body at 108.9pt (control 95.9pt) | explicit 5pt kept, header paragraphs 10pt apart |
+
+The regions are Word's PDF word boxes with a 1pt tolerance. A Docxodus export built from
+JSv4/Docxodus#1679 (which contains #1678) lands within 1pt of every box. LibreOffice references,
+scores and screenshots are pending a capture host, as for the earlier cases.
+

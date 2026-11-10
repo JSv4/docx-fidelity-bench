@@ -380,6 +380,52 @@ def automatic_spacing_cases(add):
                          'rect': [0, top, 612, bottom], 'tolerancePt': 1} for marker, (top, bottom) in markers.items()])
 
 
+# Word 2024 marker boxes (PDF points, top and bottom) for the second set of Docxodus #1553 cases.
+MARRAM_STORY_REGIONS = {
+    'compat-spacing-adds': {'MarramOpen': (74.2, 87.5), 'MarramFirst': (104.2, 117.5), 'MarramSecond': (148.2, 161.5), 'MarramClose': (178.2, 191.5)},
+    'compat-spacing-adds-control': {'MarramOpen': (74.2, 87.5), 'MarramFirst': (104.2, 117.5), 'MarramSecond': (134.2, 147.5), 'MarramClose': (164.2, 177.5)},
+    'header-automatic-spacing': {'MarramHeadFirst': (38.1, 51.4), 'MarramHeadLast': (68.2, 81.5), 'MarramBody': (98.2, 111.5)},
+    'header-automatic-spacing-control': {'MarramHeadFirst': (43.2, 56.5), 'MarramHeadLast': (64.2, 77.5), 'MarramBody': (85.2, 98.5)},
+}
+
+
+def compat_and_header_spacing_cases(add):
+    """Word 2024 adds space after to space before under doNotUseHTMLParagraphAutoSpacing, and applies
+    automatic spacing in a header, 14pt after its last paragraph included (Docxodus #1553)."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/>'
+              '<w:color w:val="000000"/><w:sz w:val="24"/></w:rPr></w:rPrDefault></w:docDefaults>'
+              '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
+    line = 'w:line="320" w:lineRule="exact"'
+
+    def spaced(text, value, flags=''):
+        return para(text, f'<w:spacing w:before="{value}" w:after="{value}"{flags} {line}/>')
+
+    def regions(case_id):
+        return [{'type': 'marker-region', 'version': 2, 'marker': marker, 'occurrence': 1, 'page': 1,
+                 'rect': [0, top, 612, bottom], 'tolerancePt': 1}
+                for marker, (top, bottom) in MARRAM_STORY_REGIONS[case_id].items()]
+
+    for control in (False, True):
+        case_id = 'compat-spacing-adds' + ('-control' if control else '')
+        compat = '' if control else '<w:doNotUseHTMLParagraphAutoSpacing/>'
+        settings = f'<w:settings xmlns:w="{W}">' + SETTINGS_BODY.replace('<w:compat>', '<w:compat>' + compat) + '</w:settings>'
+        add(case_id, 'paragraphs',
+            ('Without' if control else 'With') + ' doNotUseHTMLParagraphAutoSpacing, 14pt after then 14pt before '
+            '(Word 2024 measured, Docxodus #1553)', [' '.join(MARRAM_STORY_REGIONS[case_id])],
+            spaced('MarramOpen', 0) + spaced('MarramFirst', 280) + spaced('MarramSecond', 280) + spaced('MarramClose', 0),
+            styles_xml=styles, extra_parts={'word/settings.xml': settings}, assertions=regions(case_id))
+    for control in (False, True):
+        case_id = 'header-automatic-spacing' + ('-control' if control else '')
+        flags = '' if control else ' w:beforeAutospacing="1" w:afterAutospacing="1"'
+        add(case_id, 'paragraphs',
+            'Automatic paragraph spacing ' + ('off' if control else 'on') + ' in a two-paragraph header '
+            '(Word 2024 measured, Docxodus #1553)', [' '.join(MARRAM_STORY_REGIONS[case_id])], spaced('MarramBody', 0),
+            section().replace('<w:sectPr>', '<w:sectPr><w:headerReference w:type="default" r:id="rStory"/>'),
+            styles_xml=styles, stories=[('header', spaced('MarramHeadFirst', 100, flags) + spaced('MarramHeadLast', 100, flags))],
+            assertions=regions(case_id))
+
+
 def collection_font_cases(add):
     """Requested collection-only families beside equivalent standalone-font controls."""
     from .collection_fonts import generate as generate_fonts
@@ -6827,8 +6873,9 @@ def generate():
     tall_row_cases(add)
     markup_sheet_cases(add, cases)
     automatic_spacing_cases(add)
+    compat_and_header_spacing_cases(add)
     section_mark_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v156', 'version': 156, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v157', 'version': 157, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 
