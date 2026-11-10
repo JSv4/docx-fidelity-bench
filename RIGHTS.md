@@ -15,6 +15,10 @@ Larkspur and Primula labels and literal OOXML authored in `bench/fixtures.py`. N
 fixture, helper, document or font program is imported. Native Word evidence was printed from
 separately authored Times New Roman/Arial copies and is retained as diagnostic only.
 
+The eight section-mark cases for Docxodus #1572 contain original Heron and Kestrel labels and
+literal OOXML authored in bench/fixtures.py. No product fixture, helper, document, image or
+font program is imported, and no reporter attachment was opened or used.
+
 The four tracked table-insertion diagnostics use original Larch labels and literal OOXML
 authored in `bench/projection_fixtures.py`. No product fixture, helper, document or asset is
 imported. Their screenshots show measured public API output, not Word page renders.

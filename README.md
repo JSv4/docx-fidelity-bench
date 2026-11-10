@@ -52,6 +52,11 @@ LibreOffice references are pending. See [the evidence and limits](docs/results/a
 Docxodus #1622: border `w:sz="4.5"` in paragraph, table and cell borders, and `w:gridCol w:w="4000.5"`.
 Word 2024 truncates each value. LibreOffice references are pending. See [the evidence and limits](docs/results/fractional-measures/README.md).
 
+`core-v156` adds four empty section-mark inputs and controls for Docxodus #1572: an empty
+paragraph that only carries a section break, before a continuous, a spaced and a two-column
+section, and after page breaks. Word 2024 sets the mark on the preceding line, so each control
+carries the same break on that line. LibreOffice references are pending. See [the evidence and limits](docs/results/section-marks/README.md).
+
 `core-v144` adds a three-section default-story inheritance case and explicit-reference
 control for Docxodus #1619. PDF checks preserve the paginated story behavior while product
 tests assert flow selection. See [all-page native previews and limits](docs/results/flow-story-inheritance/README.md).
