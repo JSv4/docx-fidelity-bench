@@ -36,6 +36,23 @@ review sheets include every page at unchanged 96 DPI. Baseline authored checks p
 candidate checks pass 8/8. The exact candidate is `1d9f75c605dce3283caf843499fc126b1629af8d`,
 compared with baseline `3904cfdd360c4193c1aabb37d1752bb4f41c979d`.
 
+## At-least lines and tracked changes (`core-v158`)
+
+Four original Tamarack cases, single-spaced 12 pt Liberation Serif with zero paragraph spacing:
+
+- `grid-at-least-below-pitch`: 40 lines of `w:lineRule="atLeast"` 15 pt on an 18 pt `lines` grid.
+- `grid-tracked-lines-before`: 20 lines with `w:beforeLines="100"` on the same grid, the last a
+  tracked insertion, rendered with the markup review profile.
+
+Each control drops only the grid. Word 2024 printed these inputs, with the font renamed to Times
+New Roman: the at-least lines step 18 pt (36 on page 1, two pages; the control steps 15 pt), and
+the tracked lines step 36 pt, 18 pt before and an 18 pt line (18 on page 1, the control 25.8 pt),
+with no space before at the top of page 2. The regions are each label's line slot and page; Word's
+word boxes lie inside them, within 0.3 pt for the controls' natural lines. On equivalent 120-line
+inputs Docxodus `main` printed 15 pt and 25.8 pt steps on the grid. A build of JSv4/Docxodus#1681
+meets every region of these inputs. LibreOffice references,
+scores and screenshots are pending.
+
 ## Reproduction
 
 Generate `core-v122` with `python3 -m bench.fixtures`, select `single-line-grid-*` into a manifest,

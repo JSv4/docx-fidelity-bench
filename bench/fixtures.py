@@ -426,6 +426,51 @@ def compat_and_header_spacing_cases(add):
             assertions=regions(case_id))
 
 
+def at_least_and_tracked_grid_cases(add, cases):
+    """Word 2024 gives an at-least line below the pitch a whole 18pt grid line, and keeps a
+    document with tracked changes on its grid in markup, a line of beforeLines being the pitch
+    (Docxodus #1551). Each control drops only the grid. Regions are each label's line slot and
+    page: Word's word boxes lie inside them, within 0.3pt for the controls' natural lines, and Word
+    drops the space before at the top of a later page. Baseline placement is not tested."""
+    natural = 2355 / 2048 * 12
+    # kind: (line, space before, lines per page) with the grid, then without it.
+    slots = {'grid-at-least-below-pitch': ((18, 0, 36), (15, 0, 43)),
+             'grid-tracked-lines-before': ((18, 18, 18), (natural, 12, 25))}
+
+    def regions(labels, line, before, per_page):
+        rows = [divmod(index, per_page) for index in range(len(labels))]
+        return [{'type': 'marker-region', 'version': 2, 'marker': labels[index], 'occurrence': 1, 'page': page + 1,
+                 'rect': [0, 72 + row * (line + before) + (before if page == 0 else 0),
+                          612, 72 + row * (line + before) + (before if page == 0 else 0) + line]}
+                for index, (page, row) in enumerate(rows) if index in (0, 1, len(labels) - 1) or row == 0 or row == per_page - 1]
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/>'
+              '<w:color w:val="000000"/><w:sz w:val="24"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+              '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>'
+              '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
+    grid = '<w:docGrid w:type="lines" w:linePitch="360"/></w:sectPr>'
+    revision = '<w:ins w:id="1" w:author="Tamarack Reviewer" w:date="2026-11-10T12:00:00Z">'
+    for kind, count, props, markup in [
+        ('grid-at-least-below-pitch', 40, '<w:spacing w:line="300" w:lineRule="atLeast"/>', False),
+        ('grid-tracked-lines-before', 20, '<w:spacing w:beforeLines="100"/>', True),
+    ]:
+        labels = [f'Tamarack{n:02d}' for n in range(1, count + 1)]
+        body = ''.join(para(label, props) for label in labels[:-1])
+        body += para(props=props, runs=revision + run(labels[-1]) + '</w:ins>' if markup else run(labels[-1]))
+        for control in (False, True):
+            case_id = kind + ('-control' if control else '')
+            add(case_id, 'paragraphs',
+                ('At least 15pt' if not markup else 'One line before, a tracked insertion, in markup,')
+                + (' without a line grid (control)' if control else ' on an 18pt line grid')
+                + ' (Word 2024 measured, Docxodus #1551)', labels, body,
+                section() if control else section().replace('</w:sectPr>', grid), styles_xml=styles,
+                assertions=regions(labels, *slots[kind][control]))
+            for assertion in cases[-1]['assertions']:
+                assertion['tolerancePt'] = 0.5
+            if markup:
+                cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
+
+
 def collection_font_cases(add):
     """Requested collection-only families beside equivalent standalone-font controls."""
     from .collection_fonts import generate as generate_fonts
@@ -6875,7 +6920,8 @@ def generate():
     automatic_spacing_cases(add)
     compat_and_header_spacing_cases(add)
     section_mark_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v157', 'version': 157, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    at_least_and_tracked_grid_cases(add, cases)
+    registry = {'schema': 1, 'suite': {'id': 'core-v158', 'version': 158, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 
