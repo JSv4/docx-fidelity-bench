@@ -606,6 +606,7 @@ def zip_write(path, parts):
             item = ZipInfo(name, (2026, 1, 1, 0, 0, 0))
             item.compress_type = ZIP_DEFLATED
             item.external_attr = 0o100644 << 16
+            item.create_system = 3  # Unix, as on Linux CI; ZipInfo otherwise records the host OS
             archive.writestr(item, payload.encode() if isinstance(payload, str) else payload)
 
 
@@ -3311,7 +3312,7 @@ def generate():
         else:
             zip_write(path, literal_parts)
         inventory = dict(sorted(Counter(' '.join(text).split()).items()))
-        cases.append({'id': case_id, 'version': 2 if any(a['type'] == 'marker-region' for a in assertions) else 1, 'category': category, 'description': description, 'input': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'rights': {'author': 'John Scrudato IV', 'license': 'MIT', 'origin': 'Authored by bench/fixtures.py in this repository', 'assets': 'All text and graphics are generated here; no embedded font files'}, 'profile': {'review': 'final', 'comments': 'hidden'}, 'fonts': [font], 'tokens': inventory, 'assertions': assertions, 'generator': {'path': 'bench/fixtures.py', 'sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}})
+        cases.append({'id': case_id, 'version': 2 if any(a['type'] == 'marker-region' for a in assertions) else 1, 'category': category, 'description': description, 'input': path.relative_to(ROOT).as_posix(), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'rights': {'author': 'John Scrudato IV', 'license': 'MIT', 'origin': 'Authored by bench/fixtures.py in this repository', 'assets': 'All text and graphics are generated here; no embedded font files'}, 'profile': {'review': 'final', 'comments': 'hidden'}, 'fonts': [font], 'tokens': inventory, 'assertions': assertions, 'generator': {'path': 'bench/fixtures.py', 'sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}})
     prose = 'The survey team records the height of each tower before the evening check. The next crew compares the notes and keeps the route open for the morning visit.'
     for case_id, ending in [('columns-continuous', 'continuous'), ('columns-balanced', 'balanced ending'), ('columns-break', 'continuous')]:
         title = case_id.replace('-', ' ').title()
@@ -4682,7 +4683,7 @@ def generate():
         for suffix, body, styles in [('first', first, paragraph_style), ('second', second, character_style(incoming_id))]:
             path = ROOT / 'fixtures' / 'build' / (cid + '-' + suffix + '.docx')
             package(path, body, styles_xml=style_part(styles))
-            sources.append({'path': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()})
+            sources.append({'path': path.relative_to(ROOT).as_posix(), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()})
         expected_second = para(runs=run('BirchBuild The red source.', '<w:rStyle w:val="Separate"/>'))
         add(cid, 'paragraphs',
             'Build two sources whose paragraph and character styles share an ID (Docxodus #1186)' if collision else
@@ -4729,7 +4730,7 @@ def generate():
         for side, word in [('left', 'OakOpened'), ('right', 'OakClosed')]:
             path = ROOT / 'fixtures' / 'compare' / (cid + '-' + side + '.docx')
             package(path, compared_body(word))
-            sources.append({'path': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()})
+            sources.append({'path': path.relative_to(ROOT).as_posix(), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()})
         for review, word in [('final', 'OakClosed'), ('original', 'OakOpened')]:
             add(cid + '-' + review, 'paragraphs',
                 'Compare changed inline custom XML inside a hyperlink (Docxodus #1188)' if wrapped else
@@ -4758,7 +4759,7 @@ def generate():
         for index, (marked, edited) in enumerate(variants):
             path = ROOT / 'fixtures' / 'compare' / (cid + '-' + str(index) + '.docx')
             package(path, boundary_body(marked, edited))
-            sources.append({'path': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()})
+            sources.append({'path': path.relative_to(ROOT).as_posix(), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()})
         for review in ('final', 'original'):
             edited = review == 'final' and operation == 'consolidate'
             add(cid + '-' + review, 'tables',
@@ -4774,7 +4775,7 @@ def generate():
         for i, document in enumerate(case['sources']):
             path = ROOT / 'fixtures' / case.get('directory', 'comment-views') / (case['id'] + f'-{i}.docx')
             package(path, **document)
-            sources.append({'path': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()})
+            sources.append({'path': path.relative_to(ROOT).as_posix(), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()})
         for review, document in zip(('final', 'original'), case['expected']):
             import xml.etree.ElementTree as ET
             content = document['body'] + ''.join(xml for _, xml in document.get('footnote_list', []))
@@ -6366,7 +6367,7 @@ def generate():
     semantic_bullet_cases(add, cases)
     collection_font_cases(add)
     registry = {'schema': 1, 'suite': {'id': 'core-v148', 'version': 148, 'cases': [c['id'] for c in cases]}, 'cases': cases}
-    (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n')
+    (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 
 

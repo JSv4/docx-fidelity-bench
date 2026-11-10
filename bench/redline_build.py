@@ -41,7 +41,7 @@ def _build(sources, out, project, properties):
     command = [dotnet(), 'build', str(src / project), '-c', 'Release', '-o', str(out / 'bin'), '-nologo', '-v', 'q'] + [f'-p:{k}={v}' for k, v in properties.items()]
     print('Building: ' + ' '.join(command), flush=True)
     subprocess.run(command, check=True, timeout=1800)
-    files = {str(path.relative_to(out)): digest(path) for path in sorted((out / 'bin').glob('*.dll'))}
+    files = {path.relative_to(out).as_posix(): digest(path) for path in sorted((out / 'bin').glob('*.dll'))}
     return out, command, files
 
 

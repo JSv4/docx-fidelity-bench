@@ -113,6 +113,7 @@ def zip_write(path, parts):
             item = ZipInfo(name, (2026, 1, 1, 0, 0, 0))
             item.compress_type = ZIP_DEFLATED
             item.external_attr = 0o100644 << 16
+            item.create_system = 3  # Unix, as on Linux CI; ZipInfo otherwise records the host OS
             archive.writestr(item, payload.encode() if isinstance(payload, str) else payload)
 
 
@@ -264,7 +265,7 @@ class Corpus:
     def file(self, case_id, name, **document):
         path = self.root / 'fixtures' / 'redline' / case_id / (name + '.docx')
         package(path, **document)
-        return {'path': str(path.relative_to(self.root)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
+        return {'path': path.relative_to(self.root).as_posix(), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
 
     def add(self, case_id, category, kind, issue, description, operation, inputs, expected, authored, assertions=(), assets=None):
         ineligible, reason = LIBREOFFICE_INELIGIBLE.get(case_id, ((), None))
@@ -347,7 +348,7 @@ def generate():
     registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(json.dumps(registry, indent=2) + '\n')
+    target.write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 
 

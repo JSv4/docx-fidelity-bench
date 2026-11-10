@@ -73,7 +73,7 @@ def generate(root=ROOT):
             body += para('AshFollowing')
             path = folder / (cid + '.docx')
             package(path, body, namespaces_extra=NS, styles_xml=f'<w:styles xmlns:w="{W}"/>')
-            cases.append({'id': cid, 'input': str(path.relative_to(root)), 'sha256': digest(path),
+            cases.append({'id': cid, 'input': path.relative_to(root).as_posix(), 'sha256': digest(path),
                           'control': is_control, 'expected': '# Document AshHost ' + expected_middle + ' AshFollowing',
                           'anchored': anchored, 'rights': {'author': 'John Scrudato IV', 'license': 'MIT',
                           'origin': 'Original literal OOXML and Ash labels; no imported assets'}})
@@ -85,7 +85,7 @@ def generate(root=ROOT):
                     styles_xml=f'<w:styles xmlns:w="{W}"/>')
             middle = 'LarchOriginal' if tracked else ('LarchOriginal LarchReplacement'
                 if operation == 'raw-insert' else 'LarchReplacement')
-            cases.append({'id': cid, 'input': str(path.relative_to(root)), 'sha256': digest(path),
+            cases.append({'id': cid, 'input': path.relative_to(root).as_posix(), 'sha256': digest(path),
                           'control': not tracked, 'operation': operation, 'tracked': tracked,
                           'expected': '# Document ' + middle + ' LarchTail', 'anchored': ['LarchTail'],
                           'rights': {'author': 'John Scrudato IV', 'license': 'MIT',
@@ -102,7 +102,7 @@ def generate(root=ROOT):
             added = '| LarchNew | | --- |'
             inserted = (original.replace('LarchBravo', 'LarchBravo ' + added) if placement == 'before-table'
                         else original + ' ' + added)
-            cases.append({'id': cid, 'input': str(path.relative_to(root)), 'sha256': digest(path),
+            cases.append({'id': cid, 'input': path.relative_to(root).as_posix(), 'sha256': digest(path),
                           'control': not tracked, 'operation': 'table-insert', 'tracked': tracked,
                           'anchor': 'LarchBravo' if placement == 'before-table' else 'LarchCharlie',
                           'expected': inserted, 'anchored': ['LarchAlpha'],
@@ -143,7 +143,7 @@ def generate(root=ROOT):
                 middle = ' '.join(lines)
             if kind == 'textbox' and is_control:
                 middle += ' LarchBox'
-            cases.append({'id': cid, 'input': str(path.relative_to(root)), 'sha256': digest(path),
+            cases.append({'id': cid, 'input': path.relative_to(root).as_posix(), 'sha256': digest(path),
                           'control': is_control, 'tableMode': 'AlwaysOpaque' if kind == 'opaque' else 'GfmWithOpaqueFallback',
                           'expected': ' '.join(('# Document ' + middle + ' LarchAfter').split()), 'anchored': ['LarchAfter'],
                           'rights': {'author': 'John Scrudato IV', 'license': 'MIT',

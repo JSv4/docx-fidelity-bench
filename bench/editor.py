@@ -92,7 +92,7 @@ def run(source, commit, output, validator):
     command = ['npm', '--prefix', str(source / 'npm'), 'run', 'build:editor-bundle']
     subprocess.run(command, check=True, timeout=180)
     files = {'npm/dist/editor.bundle.js': digest(source / 'npm/dist/editor.bundle.js')}
-    files.update({str(path.relative_to(source)): digest(path)
+    files.update({path.relative_to(source).as_posix(): digest(path)
                   for path in sorted((source / 'npm/dist/wasm/_framework').rglob('*')) if path.is_file()})
     build = {'schema': 1, 'commit': commit, 'tree': production['tree'],
              'productionBuildSha256': digest(source / '.docx-bench-build.json'),
