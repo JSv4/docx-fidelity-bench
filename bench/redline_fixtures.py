@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v34', 'version': 34}
+SUITE = {'id': 'redline-v35', 'version': 35}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -345,7 +345,8 @@ def generate():
     revised_stories_deleted_boundary(corpus)
     alternate_textbox_edits(corpus)
     header_textbox_redlines(corpus)
-    registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
+    default_spacing_history(corpus)
+    registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
@@ -2010,6 +2011,43 @@ def field_default_spacing(corpus):
                        dict(body=body + ''.join(p(t(text)) for text in added), styles=styles(280, 380)),
                        dict(body=body + ''.join(p(rev.ins(t(text)), mark=rev.mark('ins')) for text in added),
                             styles=styles(80, 260, normal)), assertions)
+
+
+def default_spacing_history(corpus):
+    """A tracked style revision archives the style's run properties beside its spacing (Docxodus #1576).
+
+    Word 2024's Reject All restores a style from its pPrChange and rPrChange together; with no rPrChange
+    it resets the style's run properties to its built-ins, so the original returns at 10 pt.
+    """
+    original = ('Quince ferries leave the east dock at seven.', 'Quince tickets wait at the kiosk by the gate.',
+                'Quince bicycles ride free on the lower deck.')
+    wide = '<w:spacing w:after="200" w:line="276" w:lineRule="auto"/>'
+    tight = '<w:spacing w:after="0" w:line="240" w:lineRule="auto"/>'
+    run = f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:cs="{FONT}"/><w:sz w:val="24"/>'
+    def styles(defaults='', normal=''):
+        paragraph = f'<w:pPrDefault><w:pPr>{defaults}</w:pPr></w:pPrDefault>' if defaults else ''
+        return (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>{run}</w:rPr></w:rPrDefault>{paragraph}'
+                f'</w:docDefaults>{STYLE_NORMAL.replace("</w:style>", normal + "</w:style>")}</w:styles>')
+    for shape in ('document-defaults', 'normal-style-control'):
+        rev = Revisions()
+        history = (f'<w:pPr>{tight}<w:pPrChange {rev.attrs(AUTHOR)}><w:pPr>{wide}</w:pPr></w:pPrChange></w:pPr>'
+                   f'<w:rPr>{run}<w:rPrChange {rev.attrs(AUTHOR)}><w:rPr>{run}</w:rPr></w:rPrChange></w:rPr>')
+        if shape == 'document-defaults':
+            left, right, redline = styles(wide), styles(tight), styles(wide, history)
+        else:
+            left, right, redline = styles(normal=f'<w:pPr>{wide}</w:pPr>'), styles(normal=f'<w:pPr>{tight}</w:pPr>'), styles(normal=history)
+        edited = (t('Quince tickets wait at the ') + rev.dele(t('kiosk')) + rev.ins(t('booth')) + t(' by the gate.'))
+        assertions = [untracked(original[0], original[2]), {'type': 'style-run-history', 'version': 1, 'scope': 'redline'}]
+        for scope, after, line in [('accepted', '0', '240'), ('rejected', '200', '276')]:
+            assertions.append({'type': 'paragraph-spacing', 'version': 1, 'scope': scope,
+                               'values': [dict(before='0', after=after, line=line, lineRule='auto')] * 3})
+        corpus.compare('redline-default-spacing-' + shape, 'styles',
+                       'control' if shape.endswith('control') else 'reproducer', 'JSv4/Docxodus#1576',
+                       'Default paragraph spacing 200/276 becomes 0/240, declared in the '
+                       + ('document defaults' if shape == 'document-defaults' else 'Normal style') + ', beside a one-word edit',
+                       dict(body=''.join(p(t(text)) for text in original), styles=left),
+                       dict(body=p(t(original[0])) + p(t(original[1].replace('kiosk', 'booth'))) + p(t(original[2])), styles=right),
+                       dict(body=p(t(original[0])) + p(edited) + p(t(original[2])), styles=redline), assertions)
 
 
 def positional_rewrites(before, after):

@@ -1,3 +1,7 @@
+`redline-v35` adds a document-default spacing reproducer and a `Normal`-style control for
+Docxodus #1576, with a `style-run-history` check: Word's Reject All resets a style's run
+properties when its spacing revision has no `w:rPrChange`. See [evidence](docs/results/default-spacing-history/README.md).
+
 `redline-v33` adds revised running stories before deleted section boundaries, first-page flags,
 and a retained-paragraph control for Docxodus #1555. See [evidence](docs/results/revised-section-stories/README.md).
 
