@@ -318,6 +318,68 @@ def semantic_bullet_cases(add, cases):
             cases[-1]['fonts'].append('DejaVu Sans')
 
 
+# Word 2024 marker boxes (PDF points, top and bottom) for the Docxodus #1553 cases.
+MARRAM_REGIONS = {
+    'automatic-spacing-first-paragraph': {'MarramFirst': (74.2, 87.5), 'MarramSecond': (104.2, 117.5), 'MarramClose': (134.2, 147.5)},
+    'automatic-spacing-first-paragraph-control': {'MarramFirst': (79.2, 92.5), 'MarramSecond': (100.2, 113.5), 'MarramClose': (121.2, 134.5)},
+    'automatic-spacing-table-cell': {'MarramOpen': (74.2, 87.5), 'MarramFirst': (90.1, 103.4), 'MarramSecond': (120.1, 133.4), 'MarramThird': (150.1, 163.4), 'MarramClose': (166.2, 179.5)},
+    'automatic-spacing-table-cell-control': {'MarramOpen': (74.2, 87.5), 'MarramFirst': (95.2, 108.5), 'MarramSecond': (116.2, 129.5), 'MarramThird': (137.2, 150.5), 'MarramClose': (158.2, 171.5)},
+    'automatic-spacing-beside-table': {'MarramOpen': (74.2, 87.5), 'MarramFirst': (104.2, 117.5), 'MarramCell': (134.2, 147.5), 'MarramSecond': (164.2, 177.5), 'MarramClose': (194.2, 207.5)},
+    'automatic-spacing-beside-table-control': {'MarramOpen': (74.2, 87.5), 'MarramFirst': (95.2, 108.5), 'MarramCell': (116.2, 129.5), 'MarramSecond': (137.2, 150.5), 'MarramClose': (158.2, 171.5)},
+    'contextual-spacing-absorbs-before': {'MarramOpen': (74.2, 87.5), 'MarramFirst': (90.1, 103.4), 'MarramSecond': (115.1, 128.4), 'MarramClose': (131.2, 144.5)},
+    'contextual-spacing-absorbs-before-control': {'MarramOpen': (74.2, 87.5), 'MarramFirst': (90.1, 103.4), 'MarramSecond': (111.1, 124.4), 'MarramClose': (127.2, 140.5)},
+}
+
+
+def automatic_spacing_cases(add):
+    """Automatic and contextual paragraph spacing at the edges Word 2024 was printed at (Docxodus #1553)."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/>'
+              '<w:color w:val="000000"/><w:sz w:val="24"/></w:rPr></w:rPrDefault></w:docDefaults>'
+              '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
+    line = 'w:line="320" w:lineRule="exact"'
+
+    def plain(text, before=0, after=0, contextual=False):
+        return para(text, f'<w:spacing w:before="{before}" w:after="{after}" {line}/>'
+                    + ('<w:contextualSpacing/>' if contextual else ''))
+
+    def automatic(text, on):
+        flags = ' w:beforeAutospacing="1" w:afterAutospacing="1"' if on else ''
+        return para(text, f'<w:spacing w:before="100" w:after="100"{flags} {line}/>')
+
+    def table(content):
+        return ('<w:tbl><w:tblPr><w:tblW w:w="5000" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr>'
+                '<w:tblGrid><w:gridCol w:w="5000"/></w:tblGrid><w:tr><w:tc><w:tcPr><w:tcW w:w="5000" w:type="dxa"/>'
+                '</w:tcPr>' + content + '</w:tc></w:tr></w:tbl>')
+
+    bodies = {
+        'first-paragraph': lambda on: automatic('MarramFirst', on) + automatic('MarramSecond', on) + plain('MarramClose'),
+        'table-cell': lambda on: plain('MarramOpen') + table(automatic('MarramFirst', on) + automatic('MarramSecond', on)
+                                                              + automatic('MarramThird', on)) + plain('MarramClose'),
+        'beside-table': lambda on: plain('MarramOpen') + automatic('MarramFirst', on) + table(plain('MarramCell'))
+        + automatic('MarramSecond', on) + plain('MarramClose'),
+    }
+    for kind, body in bodies.items():
+        for control in (False, True):
+            case_id = 'automatic-spacing-' + kind + ('-control' if control else '')
+            markers = MARRAM_REGIONS[case_id]
+            add(case_id, 'paragraphs',
+                f'Automatic paragraph spacing {"off" if control else "on"} at a {kind.replace("-", " ")} '
+                '(Word 2024 measured, Docxodus #1553)', [' '.join(markers)], body(not control), styles_xml=styles,
+                assertions=[{'type': 'marker-region', 'version': 2, 'marker': marker, 'occurrence': 1, 'page': 1,
+                             'rect': [0, top, 612, bottom], 'tolerancePt': 1} for marker, (top, bottom) in markers.items()])
+    for second in (False, True):
+        case_id = 'contextual-spacing-absorbs-before' + ('-control' if second else '')
+        markers = MARRAM_REGIONS[case_id]
+        add(case_id, 'paragraphs',
+            'Contextual spacing on the ' + ('second' if second else 'first') + ' of two same-style paragraphs, 5pt after '
+            'then 14pt before (Word 2024 measured, Docxodus #1553)', [' '.join(markers)],
+            plain('MarramOpen') + plain('MarramFirst', after=100, contextual=not second)
+            + plain('MarramSecond', before=280, contextual=second) + plain('MarramClose'), styles_xml=styles,
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': marker, 'occurrence': 1, 'page': 1,
+                         'rect': [0, top, 612, bottom], 'tolerancePt': 1} for marker, (top, bottom) in markers.items()])
+
+
 def collection_font_cases(add):
     """Requested collection-only families beside equivalent standalone-font controls."""
     from .collection_fonts import generate as generate_fonts
@@ -6734,7 +6796,8 @@ def generate():
     last_line_leading_cases(add)
     tall_row_cases(add)
     markup_sheet_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v154', 'version': 154, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    automatic_spacing_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v155', 'version': 155, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 

@@ -43,6 +43,11 @@ embed an original Liatris program, obfuscated with its `w:fontKey`; cases list s
 `embeddedFonts`, which the host never provisions. LibreOffice references are pending. See
 [the evidence and limits](docs/results/embedded-fonts/README.md).
 
+`core-v155` adds three automatic paragraph spacing inputs with flag-free controls and a contextual
+spacing pair for Docxodus #1553: the document's first paragraph, a table cell, a paragraph beside a table,
+and contextual spacing on either side of a 5pt/14pt boundary. Regions are Word 2024's word boxes.
+LibreOffice references are pending. See [the evidence and limits](docs/results/automatic-spacing/README.md).
+
 `core-v149` adds four fractional whole-number measure inputs and whole-value controls for
 Docxodus #1622: border `w:sz="4.5"` in paragraph, table and cell borders, and `w:gridCol w:w="4000.5"`.
 Word 2024 truncates each value. LibreOffice references are pending. See [the evidence and limits](docs/results/fractional-measures/README.md).
