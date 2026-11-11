@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v37`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v38`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -594,3 +594,32 @@ The benchmark's own revision engine does not model cell-level content controls: 
 wrapped deletion it drops the whole row. It is not used to score these cases (they compare the
 candidate's output with the authored one), and the authored-calibration test that replays `accept`
 and `reject` inputs through it skips `redline-cell-processor-accept-wrapped` for that reason.
+
+### A deleted cell whose paragraph mark is deleted (Docxodus #1694)
+
+`redline-v38` adds eight original Orchard cases, four reproducers each followed by a control, on
+the same table as the #1404 and #1688 cases. The first row's first or middle cell carries
+`w:cellDel`, its run sits in `w:del`, and in the reproducers its paragraph mark is tracked as
+deleted too (`w:pPr/w:rPr/w:del`). That is the markup a comparison writes for a cell the revised
+document no longer has. Desktop Word 2024 (16.0.20326) accepts it by removing the cell and widening
+nothing: the row keeps two cells of 2400 and stops one column short of the grid. With only the run
+deleted, Word gives the column to a neighbour, as it does for a deleted cell with plain content.
+Word resolved each case's own source to the same laid-out table as its expected document.
+
+| Reproducer | Resolver | Deleted cell | Expected first row | Control (run deleted, mark not) |
+| --- | --- | --- | --- | --- |
+| `redline-cell-delete-struck-first-accept` | session | first | `Pear lot`, `Fig lot`, 2400 each | `Pear lot` spans two columns, 4800 wide |
+| `redline-cell-delete-struck-middle-accept` | session | middle | `Plum lot`, `Fig lot`, 2400 each | `Plum lot` spans two columns, 4800 wide |
+| `redline-cell-processor-accept-struck-first` | `RevisionProcessor` | first | `Pear lot`, `Fig lot`, 2400 each | `Pear lot` spans two columns, 4800 wide |
+| `redline-cell-processor-accept-struck-middle` | `RevisionProcessor` | middle | `Plum lot`, `Fig lot`, 2400 each | `Plum lot` spans two columns, 4800 wide |
+
+Before the fix both resolvers widened the neighbour in the reproducers as well, which the exact
+`table-state` spans and widths catch. A `table-state` declaration may now describe a row that
+covers fewer grid columns than the table grid, never more; metric contract version 26 records it.
+How an output is compared with a declaration is unchanged.
+
+A comparison of the two documents is not added as a case. The `compare` operation resolves the
+candidate's redline with the benchmark's own engine, which removes a deleted cell without widening
+in every case, and its view does not carry spans or widths, so it cannot see this defect; the
+resolvers that had it are measured directly above. All eight LibreOffice loaded-text comparisons
+are declared eligible. All previous DOCX bytes are unchanged.

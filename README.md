@@ -2,6 +2,11 @@
 an 18pt list number, a centered lead label and a mapped Symbol bullet, each with a control.
 Slots follow native Word's per-line rule. See [the Word evidence and labeled renders](docs/results/line-content-height/README.md).
 
+`redline-v38` adds eight cell-revision cases for Docxodus #1694: a deleted cell whose own paragraph
+mark is tracked as deleted, accepted through the session and through `RevisionProcessor`. Word
+leaves the row one cell short; each control deletes only the cell's run, where Word widens the
+neighbour. See [the redline notes](docs/REDLINE.md#a-deleted-cell-whose-paragraph-mark-is-deleted-docxodus-1694).
+
 `redline-v37` adds twenty cell-revision cases for Docxodus #1688: rejected cell insertions, rows and
 a table whose every cell leaves, and `RevisionProcessor` accepting a deleted first cell and a
 deleted cell inside a content control, each beside a control. A new `accept` operation mirrors
