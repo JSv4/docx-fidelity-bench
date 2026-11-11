@@ -519,6 +519,67 @@ def at_least_and_tracked_grid_cases(add, cases):
                 cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
 
 
+def break_indent_cases(add):
+    """Lines after `w:br` in a paragraph that also holds a tab (Docxodus #1654). Word 2024 starts the
+    text after a line break at the paragraph's left indent, whatever tab its first line holds: a list
+    number's own, a tab that reaches the hanging indent, or one after a first-line indent. Each
+    control drops only the tab: the list number goes with it, and a space takes its place after a
+    lead label. A region is the horizontal span Word gives a label, the height of the page: 1in
+    margins put the text edge at 72pt, the hanging indent's first line at 90pt, the left indent at
+    108pt, a 1417-twip first line at 142.85pt and the default tab stop after it at 144pt."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/>'
+              '<w:color w:val="000000"/><w:sz w:val="24"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+              '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>'
+              '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
+    numbering = (f'<w:numbering xmlns:w="{W}"><w:abstractNum w:abstractNumId="0"><w:lvl w:ilvl="0"><w:start w:val="1"/>'
+                 '<w:numFmt w:val="decimal"/><w:lvlText w:val="%1."/><w:lvlJc w:val="left"/>'
+                 '<w:pPr><w:ind w:left="720" w:hanging="360"/></w:pPr></w:lvl></w:abstractNum>'
+                 '<w:num w:numId="1"><w:abstractNumId w:val="0"/></w:num></w:numbering>')
+    hanging = '<w:ind w:left="720" w:hanging="360"/>'
+    first_line = '<w:ind w:firstLine="1417"/>'
+    tab, brk = '<w:r><w:tab/></w:r>', '<w:r><w:br/></w:r>'
+    # Each kind of label's 12pt advance (69.2pt, 70.6pt, 13.3pt and 9pt) and under 3pt more: a label
+    # one 18pt first-line start off leaves its region.
+    widths = {'Open': 72, 'Close': 73, 'Lead': 16, 'number': 12}
+    # A lead label and a space, by the font's advances (T 1251, a digit 1024, a space 512 of 2048).
+    spaced = 90 + (1251 + 1024 + 512) / 2048 * 12
+
+    def region(marker, left, kind):
+        return {'type': 'marker-region', 'version': 2, 'marker': marker, 'occurrence': 1, 'page': 1,
+                'rect': [left, 0, left + widths[kind], 792]}
+
+    # kind, description, then for the input and its control: paragraph properties, what precedes the
+    # first label, the words shown there, and the left edge of the lead, first-line and later labels.
+    for kind, description, shapes in [
+        ('numbered', 'in a numbered item',
+         (('<w:numPr><w:ilvl w:val="0"/><w:numId w:val="1"/></w:numPr>', lambda n: '', lambda n: f'{n}. ', (90, 108, 108)),
+          (hanging, lambda n: '', lambda n: '', (None, 90, 108)))),
+        ('hanging-tab', 'after a tab to a hanging indent',
+         ((hanging, lambda n: run(f'T{n}') + tab, lambda n: f'T{n} ', (90, 108, 108)),
+          (hanging, lambda n: run(f'T{n} '), lambda n: f'T{n} ', (90, spaced, 108)))),
+        ('first-line-tab', 'after a tab on an indented first line',
+         ((first_line, lambda n: tab, lambda n: '', (None, 144, 72)),
+          (first_line, lambda n: '', lambda n: '', (None, 1417 / 20 + 72, 72)))),
+    ]:
+        for control, (props, before, shown, (lead, first, later)) in enumerate(shapes):
+            texts, body, assertions = [], '', []
+            for n in range(1, 4):
+                opening, closing = f'Teasel{n:02d}Open', f'Teasel{n:02d}Close'
+                texts.append(shown(n) + opening + ' ' + closing)
+                body += para(props=props, runs=before(n) + run(opening) + brk + run(closing))
+                if lead is not None:
+                    assertions.append(region(shown(n).strip(), lead, 'number' if kind == 'numbered' else 'Lead'))
+                assertions += [region(opening, first, 'Open'), region(closing, later, 'Close')]
+            add('break-indent-' + kind + ('-control' if control else ''), 'paragraphs',
+                'Text after a line break ' + description + (' with no tab (control)' if control else '')
+                + ' starts at the left indent (Word 2024 measured, Docxodus #1654)', texts, body, section(),
+                styles_xml=styles, numbering_xml=numbering if kind == 'numbered' and not control else None,
+                assertions=assertions)
+            for assertion in assertions:
+                assertion['tolerancePt'] = 0.5
+
+
 def collection_font_cases(add):
     """Requested collection-only families beside equivalent standalone-font controls."""
     from .collection_fonts import generate as generate_fonts
@@ -6969,7 +7030,8 @@ def generate():
     compat_and_header_spacing_cases(add)
     section_mark_cases(add)
     at_least_and_tracked_grid_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v161', 'version': 161, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    break_indent_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v162', 'version': 162, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 

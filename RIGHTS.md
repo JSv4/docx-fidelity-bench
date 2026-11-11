@@ -38,6 +38,12 @@ The twenty line-grid cases for Docxodus #1551 (`grid-at-least-below-pitch*`,
 `grid-broken-at-least*`, `grid-larger-word-reduced*`) are authored the same way, with original
 Tamarack labels, the original deleted word Juniper and the original styled word Sedge.
 
+The six line-break indent cases for Docxodus #1654 (`break-indent-numbered*`,
+`break-indent-hanging-tab*`, `break-indent-first-line-tab*`) contain original Teasel labels and
+literal OOXML authored in bench/fixtures.py. No product fixture, helper, document, image or font
+program is imported, and no reporter attachment was opened or used. Their screenshots show Word
+2024 and Docxodus output for these inputs.
+
 The eight automatic-spacing cases for Docxodus #1553 contain original Marram labels and literal
 OOXML authored in bench/fixtures.py. No product fixture, helper, document, image or font program
 is imported, and no reporter attachment was opened or used.
