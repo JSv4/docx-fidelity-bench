@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v35')
-        self.assertEqual(len(registry['cases']), 260)
+        self.assertEqual(registry['suite']['id'], 'redline-v36')
+        self.assertEqual(len(registry['cases']), 263)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -136,13 +136,14 @@ class AuthoredCalibration(unittest.TestCase):
     def test_authored_redlines_round_trip(self):
         for record in cases():
             package = load(record['authored'])
-            if record['operation'] in {'reject', 'column-edit', 'block-insert'}:
+            if record['operation'] in redline.RESOLVED:
                 self.assertEqual(revisions.view(package), revisions.view(load(record['expected']['output'])), record['id'])
                 if record['operation'] in {'column-edit', 'block-insert'}:
                     continue
+                # `reject` and `accept` name the engine's own mode: it must reach the declared output too.
                 tracked = load(record['inputs'][0])
-                rejected = revisions.resolve(tracked.story_parts(), 'reject')
-                self.assertEqual(revisions.view(tracked, rejected), revisions.view(load(record['expected']['output'])), record['id'])
+                resolved = revisions.resolve(tracked.story_parts(), record['operation'])
+                self.assertEqual(revisions.view(tracked, resolved), revisions.view(load(record['expected']['output'])), record['id'])
                 continue
             accepted, rejected = views(package)
             self.assertEqual(accepted, revisions.view(load(record['expected']['accepted'])), record['id'])
@@ -152,7 +153,7 @@ class AuthoredCalibration(unittest.TestCase):
         for record in cases():
             package = load(record['authored'])
             resolved = {'redline': None, 'output': None}
-            if record['operation'] != 'reject':
+            if record['operation'] not in ('reject', 'accept'):
                 resolved.update(accepted=revisions.resolve(package.story_parts(), 'accept'),
                                 rejected=revisions.resolve(package.story_parts(), 'reject'))
             for assertion in record['assertions']:
@@ -1080,6 +1081,29 @@ class EngineSemantics(unittest.TestCase):
                            '<m:oMath><w:ins w:id="3"><m:r><m:t>c</m:t></m:r></w:ins><w:del w:id="4"><m:r><m:t>d</m:t></m:r></w:del></m:oMath></w:p>')
         self.assertEqual(body_texts(package, 'accept'), ['ac'])
         self.assertEqual(body_texts(package, 'reject'), ['bd'])
+
+    def test_math_object_follows_the_marks_on_its_control_character(self):
+        """Word 2024 removes or keeps the whole object by its m:ctrlPr mark, whatever its text carries (Docxodus #1189)."""
+        def math(control, numerator='<m:r><m:t>1</m:t></m:r>'):
+            return fragment('<w:p><m:oMath><m:r><m:t>A=</m:t></m:r><m:f><m:fPr><m:ctrlPr>' + control + '</m:ctrlPr></m:fPr>'
+                            '<m:num>' + numerator + '</m:num><m:den><m:r><m:t>2</m:t></m:r></m:den></m:f>'
+                            '<m:r><m:t>+B</m:t></m:r></m:oMath></w:p>')
+        for control, accepted, rejected in [
+                ('<w:del w:id="1"><w:rPr/></w:del>', 'A=+B', 'A=12+B'),
+                ('<w:ins w:id="1"><w:rPr/></w:ins>', 'A=12+B', 'A=+B'),
+                ('<w:ins w:id="1"><w:del w:id="2"><w:rPr/></w:del></w:ins>', 'A=+B', 'A=+B'),
+                ('<w:rPr/>', 'A=12+B', 'A=12+B')]:
+            with self.subTest(control=control):
+                self.assertEqual(body_texts(math(control), 'accept'), [accepted])
+                self.assertEqual(body_texts(math(control), 'reject'), [rejected])
+        # Marks on the text alone leave the object in place: only its numerator goes.
+        text_only = math('<w:rPr/>', '<w:del w:id="1"><m:r><m:t>1</m:t></m:r></w:del>')
+        self.assertEqual(body_texts(text_only, 'accept'), ['A=2+B'])
+        # One reviewer inserted the object and another deleted it: accepting only the first keeps it.
+        mixed = math('<w:ins w:id="1" w:author="A"><w:del w:id="2" w:author="B"><w:rPr/></w:del></w:ins>')
+        kept = revisions.view(mixed, revisions.resolve(mixed.story_parts(), 'accept', 'A'))
+        self.assertEqual(kept['stories']['body'][0]['content'][1], ['t', 'A=12+B'])
+        self.assertEqual(revisions.revision_count(revisions.resolve(mixed.story_parts(), 'accept', 'A')), 0)
 
     def test_emptied_block_wrapper_is_removed_and_trailing_empty_paragraphs_ignored(self):
         package = fragment('<w:sdt><w:sdtContent><w:p><w:pPr><w:rPr><w:del w:id="1"/></w:rPr></w:pPr><w:del w:id="2"><w:r><w:delText>old</w:delText></w:r></w:del></w:p></w:sdtContent></w:sdt>'

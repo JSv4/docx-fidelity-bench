@@ -1,7 +1,7 @@
 """Redline track: run a comparison candidate and score its accept/reject round trips.
 
 A candidate turns each case's inputs into one output package: a redline for `compare` and
-`consolidate`, a resolved document for `reject`. The output is then judged by two engines that
+`consolidate`, a resolved document for `reject` and `accept`. The output is then judged by two engines that
 share no code with any candidate: the benchmark's own revision engine (`bench/revisions.py`,
 compared on the full semantic view) and LibreOffice through headless UNO (compared on the text
 view, after both sides take the same LibreOffice load/save path). See docs/REDLINE.md.
@@ -25,12 +25,14 @@ from .redline_build import dotnet as _dotnet, validate_packages, verify_docxodus
 from .common import ROOT, contained, digest, execute, identity, read_json, write_json
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
-OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'replace-text': 1, 'revision-ownership': 1}
+OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'accept': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'replace-text': 1, 'revision-ownership': 1}
 ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'positional-rewrites': {1}, 'section-stories': {1}, 'section-boundaries': {1}, 'section-flags': {1}, 'style-run-history': {1}}
 RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
-SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}}
-CONTRACT = {'version': 23, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+# Operations whose candidate output is a resolved document, compared whole with `expected.output`.
+RESOLVED = {'reject', 'accept', 'column-edit', 'block-insert'}
+SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'accept': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}}
+CONTRACT = {'version': 24, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -46,6 +48,7 @@ CONTRACT = {'version': 23, 'view': revisions.VIEW_VERSION, 'engines': ['bench-ma
             'sectionFlags': 'declared first-page flags match every physical section in the review and independently resolved endpoints, excluding property history and textbox stories',
             'sectionBoundaries': 'declared inline section breaks occur after the exact zero-based body paragraph indices in each independently resolved endpoint',
             'revisionText': 'declared move sources and ordinary deletions must retain their appropriate text carrier',
+            'mathControls': 'a math object is removed whole when a mark on its control character (m:ctrlPr), or the deletion nested in an inserted one, removes it; accept is a resolved-output operation like reject',
             'hyperlinkTargets': 'declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written',
             'styleRunHistory': 'declared style-run-history assertions require every paragraph style holding a pPrChange in the raw redline to hold an rPrChange too, since Word resets an unarchived style run slice to its built-ins on Reject All'}
 HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'bench/redline_build.py', 'bench/revision_ownership.py']
@@ -154,7 +157,7 @@ def validate_registry(registry=None):
         operation = case['operation']
         if operation not in OPERATIONS or (OPERATIONS[operation] and len(case['inputs']) != OPERATIONS[operation]) or (operation == 'consolidate' and len(case['inputs']) < 3):
             raise ValueError('Invalid operation or input count: ' + case['id'])
-        expected = {'compare': {'accepted', 'rejected'}, 'consolidate': {'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'accepted', 'rejected'}, 'replace-text': {'accepted', 'rejected'}, 'revision-ownership': {'accepted', 'rejected'}}[operation]
+        expected = {'compare': {'accepted', 'rejected'}, 'consolidate': {'accepted', 'rejected'}, 'reject': {'output'}, 'accept': {'output'}, 'table-widths': {'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'accepted', 'rejected'}, 'replace-text': {'accepted', 'rejected'}, 'revision-ownership': {'accepted', 'rejected'}}[operation]
         if set(case['expected']) != expected or case['kind'] not in ('reproducer', 'control', 'identity'):
             raise ValueError('Invalid expectation or kind: ' + case['id'])
         declared = case.get('libreoffice', {})
@@ -304,8 +307,8 @@ def validate_registry(registry=None):
                 raise ValueError('Invalid assertion declaration: ' + case['id'] + ' ' + kind)
         if operation == 'replace-text' and {'type': 'revision-count', 'version': 1, 'scope': 'redline', 'max': 0} not in case['assertions']:
             raise ValueError('An untracked rewrite must require a redline without revisions: ' + case['id'])
-        if operation in {'reject', 'column-edit', 'block-insert'} and {'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0} not in case['assertions']:
-            raise ValueError('A reject case must require an output without revisions: ' + case['id'])
+        if operation in RESOLVED and {'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0} not in case['assertions']:
+            raise ValueError('A resolved-output case must require an output without revisions: ' + case['id'])
     return registry
 
 
@@ -765,7 +768,7 @@ def score_case(case, folder, adapter, build, candidate, env, validator):
     outcome = {'id': case['id'], 'category': case['category'], 'kind': case['kind'], 'issue': case['issue'],
                'operation': case['operation'], 'status': 'unmeasured', 'checks': []}
     inputs = [contained(ROOT, i['path']) for i in case['inputs']]
-    output = folder / ('candidate-output.docx' if case['operation'] in {'reject', 'column-edit', 'block-insert'} else 'candidate-redline.docx')
+    output = folder / ('candidate-output.docx' if case['operation'] in RESOLVED else 'candidate-redline.docx')
     try:
         try:
             response = run_candidate(adapter, build, case, output, candidate)
@@ -793,7 +796,7 @@ def score_case(case, folder, adapter, build, candidate, env, validator):
             if digest(path) != record['sha256']:
                 raise ValueError('Benchmark fixture changed during the run: ' + record['path'])
         resolved = {'redline': None, 'output': None}
-        if case['operation'] in {'reject', 'column-edit', 'block-insert'}:
+        if case['operation'] in RESOLVED:
             outcome['checks'].append(_comparison('markup-output', revisions.view(revisions.Package(str(expected['output']))), revisions.view(package)))
         else:
             for mode, key in (('accept', 'accepted'), ('reject', 'rejected')):
@@ -876,7 +879,7 @@ def _libreoffice_checks(case, folder, env, output, authored, expected):
         names[key] = len(items)
         items.append({'key': key, 'input': str(source), 'operation': operation, 'output': str(target)})
         return target
-    if case['operation'] in {'reject', 'column-edit', 'block-insert'}:
+    if case['operation'] in RESOLVED:
         pairs = [('output', item('expected-output', expected['output'], 'load'), item('authored-output', authored, 'load'), item('candidate-output', output, 'load'), None)]
     else:
         pairs = []
