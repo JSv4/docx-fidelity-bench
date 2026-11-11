@@ -589,3 +589,8 @@ Word merges the leaving cell into its neighbour; Docxodus widens after a rejecte
 when a row that kept its cells shows the table to be wider, so that rejecting a comparison's
 inserted cell in a row already short of the grid gives the original row back. All twenty
 LibreOffice loaded-text comparisons are declared eligible. All previous DOCX bytes are unchanged.
+
+The benchmark's own revision engine does not model cell-level content controls: accepting the
+wrapped deletion it drops the whole row. It is not used to score these cases (they compare the
+candidate's output with the authored one), and the authored-calibration test that replays `accept`
+and `reject` inputs through it skips `redline-cell-processor-accept-wrapped` for that reason.
