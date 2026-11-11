@@ -433,19 +433,26 @@ def at_least_and_tracked_grid_cases(add, cases):
     paragraph that shows a tracked deletion like one without it (Docxodus #1551). Each control drops
     only the grid. Regions are each label's line slot and page: Word's word boxes lie inside them,
     within 0.3pt for the controls' natural lines, and Word drops the space before at the top of a
-    later page. Baseline placement is not tested."""
+    later page. The first four kinds don't test baseline placement. A line whose runs differ in weight
+    or size takes the grid lines its tallest text needs, and Word centres a grid line's text in its
+    grid lines, where a multiple off the grid puts its surplus below the text: the last three kinds'
+    regions are the band each line's text occupies."""
     natural = 2355 / 2048 * 12
-    # kind: (line, space before, lines per page) with the grid, then without it.
+    # kind: (line, space before, lines per page[, text band offset and height]) with the grid, then without it.
     slots = {'grid-at-least-below-pitch': ((18, 0, 36), (15, 0, 43)),
              'grid-tracked-lines-before': ((18, 18, 18), (natural, 12, 25)),
              'grid-at-least-above-pitch': ((36, 0, 18), (30, 0, 21)),
-             'grid-revised-paragraphs': ((18, 0, 36), (natural, 0, 46))}
+             'grid-revised-paragraphs': ((18, 0, 36), (natural, 0, 46)),
+             'grid-bold-word': ((18, 0, 36, (18 - natural) / 2, natural), (natural, 0, 46)),
+             'grid-larger-word': ((36, 0, 18, 18 - natural, 2 * natural), (2 * natural, 0, 23)),
+             'grid-text-centred': ((27, 0, 24, (27 - natural) / 2, natural), (1.5 * natural, 0, 31, 0, natural))}
 
-    def regions(labels, line, before, per_page):
+    def regions(labels, line, before, per_page, offset=0, band=None):
         rows = [divmod(index, per_page) for index in range(len(labels))]
         return [{'type': 'marker-region', 'version': 2, 'marker': labels[index], 'occurrence': 1, 'page': page + 1,
-                 'rect': [0, 72 + row * (line + before) + (before if page == 0 else 0),
-                          612, 72 + row * (line + before) + (before if page == 0 else 0) + line]}
+                 'rect': [0, 72 + row * (line + before) + (before if page == 0 else 0) + offset,
+                          612, 72 + row * (line + before) + (before if page == 0 else 0) + offset
+                          + (line if band is None else band)]}
                 for index, (page, row) in enumerate(rows) if index in (0, 1, len(labels) - 1) or row == 0 or row == per_page - 1]
     styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
               f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/>'
@@ -457,8 +464,9 @@ def at_least_and_tracked_grid_cases(add, cases):
     deletion = ('<w:del w:id="{}" w:author="Tamarack Reviewer" w:date="2026-11-10T12:00:00Z"><w:r>'
                 '<w:delText xml:space="preserve"> Juniper</w:delText></w:r></w:del>')
     large = '<w:sz w:val="48"/>'
-    # kind, label count, paragraph properties, markup, description, each label's runs (n counts from 1).
-    for kind, count, props, markup, description, runs in [
+    # kind, label count, paragraph properties, markup, description, each label's runs (n counts from 1),
+    # and the words shown after each label.
+    for kind, count, props, markup, description, runs, *shown in [
         ('grid-at-least-below-pitch', 40, '<w:spacing w:line="300" w:lineRule="atLeast"/>', False, 'At least 15pt',
          lambda n, label: run(label)),
         ('grid-tracked-lines-before', 20, '<w:spacing w:beforeLines="100"/>', True,
@@ -467,12 +475,18 @@ def at_least_and_tracked_grid_cases(add, cases):
         ('grid-at-least-above-pitch', 24, f'<w:spacing w:line="600" w:lineRule="atLeast"/><w:rPr>{large}</w:rPr>', False,
          '24pt text at least 30pt', lambda n, label: run(label, large)),
         ('grid-revised-paragraphs', 50, '', True, 'A tracked deletion shown in each paragraph, in markup,',
-         lambda n, label: run(label) + deletion.format(n + 1)),
+         lambda n, label: run(label) + deletion.format(n + 1), ' Juniper'),
+        ('grid-bold-word', 50, '', False, 'A bold word after each label',
+         lambda n, label: run(label) + run(' Sedge', '<w:b/>'), ' Sedge'),
+        ('grid-larger-word', 24, '', False, 'A 24pt word after each 12pt label',
+         lambda n, label: run(label) + run(' Sedge', large), ' Sedge'),
+        ('grid-text-centred', 30, '<w:spacing w:line="360" w:lineRule="auto"/>', False, '1.5 lines',
+         lambda n, label: run(label)),
     ]:
         labels = [f'Tamarack{n:02d}' for n in range(1, count + 1)]
         body = ''.join(para(props=props, runs=runs(n, label)) for n, label in enumerate(labels, 1))
-        # Markup shows the deleted words after each label.
-        words = [label + ' Juniper' for label in labels] if kind == 'grid-revised-paragraphs' else labels
+        # Markup shows the deleted words after each label, as the other kinds show their styled words.
+        words = [label + ''.join(shown) for label in labels]
         for control in (False, True):
             case_id = kind + ('-control' if control else '')
             add(case_id, 'paragraphs', description
@@ -6936,7 +6950,7 @@ def generate():
     compat_and_header_spacing_cases(add)
     section_mark_cases(add)
     at_least_and_tracked_grid_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v159', 'version': 159, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v160', 'version': 160, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 
