@@ -52,6 +52,13 @@ LibreOffice references are pending. See [the evidence and limits](docs/results/a
 Docxodus #1622: border `w:sz="4.5"` in paragraph, table and cell borders, and `w:gridCol w:w="4000.5"`.
 Word 2024 truncates each value. LibreOffice references are pending. See [the evidence and limits](docs/results/fractional-measures/README.md).
 
+`core-v160` adds three inputs and controls for Docxodus #1551: a bold word after each label and a
+24pt word after each 12pt label on an 18pt line grid, which Word 2024 gives the grid lines their
+tallest text needs (18pt and 36pt), and 1.5-line spacing on the grid, where Word centres each
+line's text in its 27pt line. Each control drops only the grid. Regions are the band each line's
+text occupies, so they also test where the text sits, and they hold Word 2024's word boxes.
+LibreOffice references are pending. See [the evidence and limits](docs/results/single-line-grid/README.md).
+
 `core-v159` adds two inputs and controls for Docxodus #1551: 24pt text with 30pt at-least spacing
 on an 18pt line grid, which Word 2024 gives the two grid lines its text needs (36pt, 18 a page),
 and a tracked deletion shown in every paragraph, printed in markup, which Word keeps on its 18pt

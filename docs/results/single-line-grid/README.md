@@ -70,6 +70,27 @@ boxes lie inside every region. On equivalent 120-line inputs Docxodus `main` pri
 13.8 pt steps on the grid. A build of JSv4/Docxodus#1682 meets every region of these inputs.
 LibreOffice references, scores and screenshots are pending.
 
+## Runs that differ in weight or size, and where the text sits (`core-v160`)
+
+Six more original Tamarack cases, with the same styles and grid:
+
+- `grid-bold-word`: 50 single-spaced lines of 12 pt text, each label followed by the word Sedge
+  in bold.
+- `grid-larger-word`: 24 single-spaced lines of 12 pt text, each label followed by Sedge at 24 pt.
+- `grid-text-centred`: 30 lines of 12 pt text with 1.5-line (`w:line="360"`) spacing.
+
+Each control drops only the grid. Each region is the band a label's line puts its text in: on the
+grid, the text's natural height centred in its grid lines (2.1 pt below the top of an 18 pt line,
+4.2 pt for the 24 pt word's 27.6 pt line in 36 pt, 6.6 pt in a 27 pt line); without it, the top
+of the line, where 1.5-line spacing puts its surplus below the text. Word 2024 printed these
+inputs, with the font renamed to Times New Roman: the bold-word lines step 18 pt (36 on page 1;
+the control 13.8 pt, 46), the 24 pt-word lines 36 pt (18; the control 27.6 pt, 23) and the 1.5
+lines 27 pt (24; the control 20.7 pt, 31 a page). Word's word boxes lie inside every region. On
+equivalent 120-line inputs Docxodus `main` printed 13.8 pt and 27.6 pt steps for the styled words
+on the grid, and put every grid line's text at the top of its line, 2.1 pt and 6.6 pt above
+Word's. A build of JSv4/Docxodus#1683 meets every region of these inputs. LibreOffice references,
+scores and screenshots are pending.
+
 ## Reproduction
 
 Generate `core-v122` with `python3 -m bench.fixtures`, select `single-line-grid-*` into a manifest,
