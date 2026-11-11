@@ -1,3 +1,9 @@
+`core-v162` adds two inputs and two controls for Docxodus #1652: three one-line paragraphs under
+a styles part with no `w:pPrDefault` (with and without `w:docDefaults`), which Word 2024 prints at
+8pt after and 1.16 lines, beside an empty and an explicit single-spacing `w:pPrDefault`. Regions are
+Word 2024's word boxes. `redline-v36` adds the matching comparison reproducer and control.
+LibreOffice references are pending. See [the evidence and limits](docs/results/missing-paragraph-default/README.md).
+
 `core-v151` adds eight line-content cases for Docxodus #1565 and #1567: empty break lines,
 an 18pt list number, a centered lead label and a mapped Symbol bullet, each with a control.
 Slots follow native Word's per-line rule. See [the Word evidence and labeled renders](docs/results/line-content-height/README.md).

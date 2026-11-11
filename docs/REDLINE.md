@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v35`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v36`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -491,6 +491,15 @@ ranges must be ordered without overlap. A paragraph permits at most two revision
 no untracked visible text. Wrong partners, whole-side blocks and word interleaving fail even if
 accept/reject endpoints match. All existing round-trip, attribution and SDK checks remain
 mandatory. `revision-blocks` v1 and historical evidence retain their original meaning.
+
+### A revised document without `w:pPrDefault`
+
+`redline-v36` adds two original Teasel cases for Docxodus #1652. The original declares 200/276
+default paragraph spacing. The reproducer's revised document has `w:docDefaults` with no
+`w:pPrDefault`, which Word 2024 lays out at `w:after="160" w:line="278"`; the control's revised
+document states those values. Both must accept to 160/278 and reject to 200/276 under
+`paragraph-spacing`, with `style-run-history` on the recorded style revision. See
+[the evidence](results/missing-paragraph-default/README.md).
 
 ### Style revisions that Word rejects whole
 

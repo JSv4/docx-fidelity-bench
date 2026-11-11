@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v35')
-        self.assertEqual(len(registry['cases']), 260)
+        self.assertEqual(registry['suite']['id'], 'redline-v36')
+        self.assertEqual(len(registry['cases']), 262)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -464,6 +464,23 @@ class AuthoredCalibration(unittest.TestCase):
                 styles.find(W + 'style/' + W + 'pPr').remove(styles.find(W + 'style/' + W + 'pPr/' + W + 'pPrChange'))
                 parts['word/styles.xml'] = ET.tostring(styles)
                 self.assertTrue(redline._assertion(assertion, revisions.Package(parts), {})['passed'])
+
+    def test_missing_default_cases_reject_single_spacing_recorded_for_the_revised_side(self):
+        for shape in ('missing-default', 'stated-default-control'):
+            with self.subTest(shape=shape):
+                record = case('redline-default-spacing-' + shape)
+                package = load(record['authored'])
+                accepted = next(a for a in record['assertions'] if a['type'] == 'paragraph-spacing' and a['scope'] == 'accepted')
+                resolved = {'accepted': revisions.resolve(package.story_parts(), 'accept')}
+                self.assertTrue(redline._assertion(accepted, package, resolved)['passed'])
+                # What Docxodus recorded before #1652: the schema default for the revised side.
+                parts = dict(package.members)
+                styles = ET.fromstring(parts['word/styles.xml'])
+                styles.find(W + 'style/' + W + 'pPr/' + W + 'spacing').attrib.update({W + 'after': '0', W + 'line': '240'})
+                parts['word/styles.xml'] = ET.tostring(styles)
+                mutant = revisions.Package(parts)
+                resolved = {'accepted': revisions.resolve(mutant.story_parts(), 'accept')}
+                self.assertFalse(redline._assertion(accepted, mutant, resolved)['passed'])
 
     def test_field_spacing_cases_reject_field_loss_despite_equal_text_and_spacing(self):
         for shape in ('simple', 'complex'):

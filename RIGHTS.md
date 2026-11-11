@@ -32,6 +32,16 @@ reporter attachment or third-party outline is imported. The screenshots show Doc
 The four compatibility and header spacing cases for Docxodus #1553 (`compat-spacing-adds*`,
 `header-automatic-spacing*`) are authored the same way, with original Marram labels.
 
+The four missing-paragraph-default cases for Docxodus #1652 (`paragraph-default-missing`,
+`paragraph-default-no-defaults`, `paragraph-default-empty-control`,
+`paragraph-default-explicit-control`) are authored the same way, with original Teasel labels. The
+two matching redline cases (`redline-default-spacing-missing-default`,
+`redline-default-spacing-stated-default-control`) contain original Teasel sentences and literal
+OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document or font program
+is imported, and no reporter attachment was opened or used. Their review sheets show Times New
+Roman copies of these inputs as printed by Word 2024 and exported by Docxodus with separately
+installed fonts.
+
 The twenty line-grid cases for Docxodus #1551 (`grid-at-least-below-pitch*`,
 `grid-tracked-lines-before*`, `grid-at-least-above-pitch*`, `grid-revised-paragraphs*`,
 `grid-bold-word*`, `grid-larger-word*`, `grid-text-centred*`, `grid-broken-lines*`,
