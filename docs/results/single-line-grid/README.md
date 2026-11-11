@@ -91,6 +91,32 @@ on the grid, and put every grid line's text at the top of its line, 2.1 pt and 6
 Word's. A build of JSv4/Docxodus#1683 meets every region of these inputs. LibreOffice references,
 scores and screenshots are pending.
 
+## Lines split by breaks, and a multiple below one (`core-v161`)
+
+Six more original Tamarack cases, with the same styles and grid:
+
+- `grid-broken-lines`: 48 single-spaced labels of 12 pt text, three a paragraph, separated by
+  `w:br`.
+- `grid-broken-at-least`: 36 such labels with 20 pt at-least (`w:line="400"`) spacing.
+- `grid-larger-word-reduced`: 30 lines of 12 pt text at 0.8 lines (`w:line="192"`), each label
+  followed by Sedge at 24 pt.
+
+The first two controls drop only the grid. The third keeps the grid and drops the multiple, the
+one thing Word ignores there: without a grid, Word shortens a mixed line below single from above
+its text, a separate case. Each region is the band a label's line puts its text in: on the grid,
+the text centred in its grid lines (2.1 pt below the top of an 18 pt line; 4.2 pt for the 24 pt
+word's line in 36 pt), with a winning minimum's surplus above them (4.1 pt below the top of a
+20 pt line); without the grid, a single line's slot, and for 20 pt at least the text at the bottom
+of the line (6.2 pt below its top). Word 2024 printed these inputs, with the font renamed to Times
+New Roman: the broken lines step 18 pt (36 on page 1; the control 13.8 pt, 45, since Word never
+splits a three-line paragraph), the at-least lines 20 pt (30 on page 1, both), and the 24 pt-word
+lines 36 pt at 0.8 lines and single alike (18 on page 1). Word's word boxes lie inside every
+region. Docxodus `main` printed the broken lines 13.8 pt apart on the grid, put the at-least
+lines' text 1.5 pt and 3.6 pt above their regions on and off the grid, and printed the 0.8-line
+paragraphs 28.5 pt apart; its broken-lines and single-spaced controls pass. A build of
+JSv4/Docxodus#1684 meets every region of these inputs. LibreOffice references, scores and
+screenshots are pending.
+
 ## Reproduction
 
 Generate `core-v122` with `python3 -m bench.fixtures`, select `single-line-grid-*` into a manifest,

@@ -436,7 +436,10 @@ def at_least_and_tracked_grid_cases(add, cases):
     later page. The first four kinds don't test baseline placement. A line whose runs differ in weight
     or size takes the grid lines its tallest text needs, and Word centres a grid line's text in its
     grid lines, where a multiple off the grid puts its surplus below the text: the last three kinds'
-    regions are the band each line's text occupies."""
+    regions are the band each line's text occupies. So are the regions of the lines `w:br` splits,
+    which Word puts on the grid as it does wrapped ones, with an at-least minimum's surplus above the
+    grid lines (and above the text off the grid), and of a 24pt word at 0.8 lines, which Word lays out
+    on the grid as at single spacing: that kind's control keeps the grid and drops the multiple."""
     natural = 2355 / 2048 * 12
     # kind: (line, space before, lines per page[, text band offset and height]) with the grid, then without it.
     slots = {'grid-at-least-below-pitch': ((18, 0, 36), (15, 0, 43)),
@@ -445,7 +448,13 @@ def at_least_and_tracked_grid_cases(add, cases):
              'grid-revised-paragraphs': ((18, 0, 36), (natural, 0, 46)),
              'grid-bold-word': ((18, 0, 36, (18 - natural) / 2, natural), (natural, 0, 46)),
              'grid-larger-word': ((36, 0, 18, 18 - natural, 2 * natural), (2 * natural, 0, 23)),
-             'grid-text-centred': ((27, 0, 24, (27 - natural) / 2, natural), (1.5 * natural, 0, 31, 0, natural))}
+             'grid-text-centred': ((27, 0, 24, (27 - natural) / 2, natural), (1.5 * natural, 0, 31, 0, natural)),
+             # Word keeps each three-line paragraph on one page: 45 lines of 46 fit page 1 off the grid.
+             'grid-broken-lines': ((18, 0, 36, (18 - natural) / 2, natural), (natural, 0, 45, 0, natural)),
+             'grid-broken-at-least': ((20, 0, 30, 2 + (18 - natural) / 2, natural), (20, 0, 30, 20 - natural, natural)),
+             'grid-larger-word-reduced': ((36, 0, 18, 18 - natural, 2 * natural), (36, 0, 18, 18 - natural, 2 * natural))}
+    # Labels a paragraph, split by `w:br`.
+    split = {'grid-broken-lines': 3, 'grid-broken-at-least': 3}
 
     def regions(labels, line, before, per_page, offset=0, band=None):
         rows = [divmod(index, per_page) for index in range(len(labels))]
@@ -482,17 +491,27 @@ def at_least_and_tracked_grid_cases(add, cases):
          lambda n, label: run(label) + run(' Sedge', large), ' Sedge'),
         ('grid-text-centred', 30, '<w:spacing w:line="360" w:lineRule="auto"/>', False, '1.5 lines',
          lambda n, label: run(label)),
+        ('grid-broken-lines', 48, '', False, 'Three labels a paragraph split by line breaks', lambda n, label: run(label)),
+        ('grid-broken-at-least', 36, '<w:spacing w:line="400" w:lineRule="atLeast"/>', False,
+         'Three labels a paragraph split by line breaks, at least 20pt,', lambda n, label: run(label)),
+        ('grid-larger-word-reduced', 30, '<w:spacing w:line="192" w:lineRule="auto"/>', False,
+         'A 24pt word after each 12pt label, 0.8 lines,', lambda n, label: run(label) + run(' Sedge', large), ' Sedge'),
     ]:
         labels = [f'Tamarack{n:02d}' for n in range(1, count + 1)]
-        body = ''.join(para(props=props, runs=runs(n, label)) for n, label in enumerate(labels, 1))
+        size, numbered = split.get(kind, 1), list(enumerate(labels, 1))
         # Markup shows the deleted words after each label, as the other kinds show their styled words.
         words = [label + ''.join(shown) for label in labels]
         for control in (False, True):
             case_id = kind + ('-control' if control else '')
-            add(case_id, 'paragraphs', description
-                + (' without a line grid (control)' if control else ' on an 18pt line grid')
-                + ' (Word 2024 measured, Docxodus #1551)', words, body,
-                section() if control else section().replace('</w:sectPr>', grid), styles_xml=styles,
+            # This control drops the multiple, which is what Word ignores on the grid.
+            single = control and kind == 'grid-larger-word-reduced'
+            body = ''.join(para(props='' if single else props, runs='<w:r><w:br/></w:r>'.join(
+                runs(n, label) for n, label in numbered[start:start + size])) for start in range(0, count, size))
+            where = (' without a line grid (control)' if control and not single else ' on an 18pt line grid'
+                     + (' (control)' if single else ''))
+            add(case_id, 'paragraphs', (description.replace('0.8 lines', 'single spacing') if single else description)
+                + where + ' (Word 2024 measured, Docxodus #1551)', words, body,
+                section().replace('</w:sectPr>', grid) if single or not control else section(), styles_xml=styles,
                 assertions=regions(labels, *slots[kind][control]))
             for assertion in cases[-1]['assertions']:
                 assertion['tolerancePt'] = 0.5
@@ -6950,7 +6969,7 @@ def generate():
     compat_and_header_spacing_cases(add)
     section_mark_cases(add)
     at_least_and_tracked_grid_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v160', 'version': 160, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v161', 'version': 161, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 
