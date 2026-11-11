@@ -53,6 +53,23 @@ inputs Docxodus `main` printed 15 pt and 25.8 pt steps on the grid. A build of J
 meets every region of these inputs. LibreOffice references,
 scores and screenshots are pending.
 
+## At-least lines above the pitch and revised paragraphs (`core-v159`)
+
+Four more original Tamarack cases, with the same styles and grid:
+
+- `grid-at-least-above-pitch`: 24 lines of 24 pt text with `w:lineRule="atLeast"` 30 pt on an
+  18 pt `lines` grid.
+- `grid-revised-paragraphs`: 50 single-spaced lines of 12 pt text, each label followed by a
+  tracked deletion of the word Juniper, rendered with the markup review profile.
+
+Each control drops only the grid. Word 2024 printed these inputs, with the font renamed to Times
+New Roman, the revised ones in the inline markup view: the 24 pt lines step 36 pt, the two grid
+lines the text needs (18 on page 1; the control steps 30 pt, 21 on page 1), and the revised lines
+step 18 pt like unrevised ones (36 on page 1; the control steps 13.8 pt, 46 on page 1). Word's word
+boxes lie inside every region. On equivalent 120-line inputs Docxodus `main` printed 30 pt and
+13.8 pt steps on the grid. A build of JSv4/Docxodus#1682 meets every region of these inputs.
+LibreOffice references, scores and screenshots are pending.
+
 ## Reproduction
 
 Generate `core-v122` with `python3 -m bench.fixtures`, select `single-line-grid-*` into a manifest,
