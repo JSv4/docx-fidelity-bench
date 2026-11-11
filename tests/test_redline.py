@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v35')
-        self.assertEqual(len(registry['cases']), 260)
+        self.assertEqual(registry['suite']['id'], 'redline-v36')
+        self.assertEqual(len(registry['cases']), 272)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -136,9 +136,9 @@ class AuthoredCalibration(unittest.TestCase):
     def test_authored_redlines_round_trip(self):
         for record in cases():
             package = load(record['authored'])
-            if record['operation'] in {'reject', 'column-edit', 'block-insert'}:
+            if record['operation'] in redline.OUTPUT_OPERATIONS:
                 self.assertEqual(revisions.view(package), revisions.view(load(record['expected']['output'])), record['id'])
-                if record['operation'] in {'column-edit', 'block-insert'}:
+                if record['operation'] in {'column-edit', 'block-insert', 'revision-resolve'}:
                     continue
                 tracked = load(record['inputs'][0])
                 rejected = revisions.resolve(tracked.story_parts(), 'reject')
@@ -1492,6 +1492,90 @@ class ScoringContract(unittest.TestCase):
             paths = {k: common.ROOT / v['path'] for k, v in record['expected'].items()}
             checks = redline._libreoffice_checks(record, Path(temp), {}, common.ROOT / record['authored']['path'], common.ROOT / record['authored']['path'], paths)
             self.assertTrue(all(c['passed'] is None and c.get('ineligible') for c in checks))
+
+
+class RevisionResolution(unittest.TestCase):
+    """The revision-resolve operation and the table-state v2 view of cells in content controls (#1404)."""
+
+    def test_resolution_review_is_mandatory_typed_and_successful(self):
+        import shutil
+        record = case('redline-cell-delete-first-accept')
+        def candidate(_adapter, _build, _case, output, _candidate):
+            shutil.copyfile(common.ROOT / record['authored']['path'], output)
+            return dict(response, status='ok', revisionRegistryCount=0)
+        expected = {'beforeCount': 1, 'supported': True, 'resolutionSuccess': True}
+        mutants = [None, dict(expected, beforeCount=True), dict(expected, beforeCount=2), dict(expected, supported=False),
+                   dict(expected, resolutionSuccess=1), dict(expected, resolutionSuccess=False), expected]
+        for observed in mutants:
+            response = {} if observed is None else {'resolutionReview': observed}
+            with self.subTest(observed=observed), tempfile.TemporaryDirectory() as temp, \
+                    patch.object(redline, 'run_candidate', side_effect=candidate), \
+                    patch.object(redline, '_libreoffice_checks', return_value=[]), \
+                    patch.object(redline, 'validate_packages', side_effect=lambda _v, paths: {str(p): [] for p in paths}):
+                outcome = redline.score_case(record, Path(temp), 'docxodus', 'build', 'commit', {}, 'validator')
+                self.assertEqual(outcome['status'], 'measured')
+                self.assertEqual(outcome['score'], 100 if observed is expected else 0)
+
+    def test_an_unresolved_input_cannot_pass(self):
+        # A candidate that refuses and returns its input keeps the cell mark and the old geometry.
+        import shutil
+        for record in cases(kind='reproducer', operation='revision-resolve'):
+            def candidate(_adapter, _build, _case, output, _candidate, record=record):
+                shutil.copyfile(common.ROOT / record['inputs'][0]['path'], output)
+                return {'status': 'ok', 'revisionRegistryCount': 0,
+                        'resolutionReview': {'beforeCount': 1, 'supported': True, 'resolutionSuccess': True}}
+            with self.subTest(case=record['id']), tempfile.TemporaryDirectory() as temp, \
+                    patch.object(redline, 'run_candidate', side_effect=candidate), \
+                    patch.object(redline, '_libreoffice_checks', return_value=[]), \
+                    patch.object(redline, 'validate_packages', side_effect=lambda _v, paths: {str(p): [] for p in paths}):
+                outcome = redline.score_case(record, Path(temp), 'docxodus', 'build', 'commit', {}, 'validator')
+                self.assertEqual(outcome['score'], 0)
+                self.assertFalse(next(c for c in outcome['checks'] if c['name'] == 'assertion-revision-count')['passed'])
+
+    def test_declarations_are_validated(self):
+        for key, field, value in [('revisionResolve', 'resolution', 'reject-each'), ('revisionResolve', 'version', 2),
+                                  ('resolutionReview', 'beforeCount', 0), ('resolutionReview', 'beforeCount', True),
+                                  ('resolutionReview', 'supported', False), ('resolutionReview', 'resolutionSuccess', 1),
+                                  ('revisionRegistry', 'count', 1)]:
+            registry = common.read_json(redline.MANIFEST)
+            target = next(c for c in registry['cases'] if c['operation'] == 'revision-resolve')
+            target[key][field] = value
+            with self.subTest(key=key, field=field), self.assertRaisesRegex(ValueError, 'revision resolution'):
+                redline.validate_registry(registry)
+        registry = common.read_json(redline.MANIFEST)
+        next(c for c in registry['cases'] if c['operation'] == 'column-edit')['resolutionReview'] = {'version': 1}
+        with self.assertRaisesRegex(ValueError, 'revision resolution'):
+            redline.validate_registry(registry)
+
+    def test_table_state_v2_sees_cells_and_controls_the_text_view_ignores(self):
+        record = case('redline-cell-delete-wrapped-accept')
+        package = load(record['authored'])
+        declaration = next(a for a in record['assertions'] if a['type'] == 'table-state')
+        self.assertEqual(declaration['version'], 2)
+        self.assertTrue(redline._assertion(declaration, package, {'output': None})['passed'])
+        row_of = lambda parts: next(parts[package.main].iter(revisions.w('tr')))
+        def unwrap(parts):
+            row = row_of(parts)
+            control = row.find(revisions.w('sdt'))
+            row.insert(list(row).index(control), control.find(revisions.w('sdtContent') + '/' + revisions.w('tc')))
+            row.remove(control)
+        def narrow(parts):
+            row_of(parts).find('.//' + revisions.w('tcW')).set(revisions.w('w'), '2400')
+        def unspan(parts):
+            properties = row_of(parts).find('.//' + revisions.w('tcPr'))
+            properties.remove(properties.find(revisions.w('gridSpan')))
+        def empty_control(parts):
+            control = ET.SubElement(row_of(parts), revisions.w('sdt'))
+            ET.SubElement(control, revisions.w('sdtContent'))
+        for change in (unwrap, narrow, unspan, empty_control):
+            parts = package.story_parts()
+            change(parts)
+            self.assertFalse(redline._assertion(declaration, package, {'output': parts})['passed'], change.__name__)
+        # Version 1 keeps reading only a row's direct cells, so earlier measurements are unchanged.
+        legacy = dict(declaration, version=1)
+        self.assertFalse(redline._assertion(legacy, package, {'output': None})['passed'])
+        self.assertFalse(redline.valid_table_state(declaration['state']))
+        self.assertTrue(redline.valid_table_state(declaration['state'], controls=True))
 
 
 if __name__ == '__main__':
