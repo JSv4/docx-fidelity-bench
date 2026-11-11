@@ -38,6 +38,42 @@ line slots Word's word boxes lie in) dashed:
 | `border-spacing-compat` | ![compat](border-spacing-compat.png) |
 | `border-spacing-page-top` (page 2) | ![page top](border-spacing-page-top.png) |
 
+## The box itself (`core-v163`)
+
+Twelve original Whitebeam cases accompany [Docxodus #1692](https://github.com/JSv4/Docxodus/issues/1692),
+with the same text, lines and box, and an explicit `w:pPrDefault`. Each control drops only the
+property under test.
+
+| Case | Property | Word 2024 | Docxodus `main` at `ba7c8903` |
+|---|---|---|---|
+| `border-between` | `w:between` on the three paragraphs of a box | 14pt, 1pt `w:space`, the 0.5pt rule and 1pt again between the lines: a 32.5pt step (control 30pt) | no rule, 30pt |
+| `border-between-mixed` | the middle paragraph has no `w:between` | one box; below the first paragraph 14pt, its rule and 1pt (31.5pt step); below the second 14pt and 1pt, no rule (31pt) | three boxes, 33pt steps |
+| `border-contextual-edge` | `w:contextualSpacing` on a bordered paragraph and both neighbours | no spacing on either side of the box (control 14pt) | 14pt on both sides |
+| `border-page-start` | `w:pageBreakBefore` on the bordered paragraph | box at the top of page 2 (control one page) | one page |
+| `border-keep-next` | `w:keepNext` on a bordered paragraph whose next paragraph does not fit | both on page 2 (control: the box stays on page 1) | the box stays on page 1 |
+| `border-shading` | a border on a shaded paragraph | fill inside the border through its `w:space`, 472.9 by 18pt (control: the 16pt line, 1.4pt past the text on each side) | the line's fill at the text's width |
+
+Word 2024 (build 16.0.20326) printed these exact inputs with the font renamed to Times New Roman, and
+its word boxes lie inside every region. The shading pair declares Word's fill as `color-geometry`
+with a 2pt bound tolerance, which admits the unbordered fill a renderer stops at the text edge
+(1.4pt and 1.5pt in) and rejects one that stops at the text edge inside a box (2.4pt in, and 13% less
+paint). The `main` column is from equivalent inputs printed through its PDF export. A build of the
+Docxodus change for #1692 puts every label in its region and both fills within their bounds, by the
+same word boxes and fill rectangles read with PyMuPDF; the bench's own inspection was not run here.
+
+Not pinned: where the rules and borders themselves are drawn, the rule Word carries to the top of
+the next page when a box splits there, and shading that differs between the paragraphs of one box,
+which Docxodus still fills by line.
+
+| Pair | Docxodus with the #1692 change |
+|---|---|
+| `border-between` | ![between](border-between.png) |
+| `border-between-mixed` | ![mixed](border-between-mixed.png) |
+| `border-contextual-edge` | ![contextual](border-contextual-edge.png) |
+| `border-page-start` | ![page start](border-page-start.png) |
+| `border-keep-next` | ![keep](border-keep-next.png) |
+| `border-shading` | ![shading](border-shading.png) |
+
 LibreOffice reference captures and candidate scoring are pending. This machine has no pinned
 LibreOffice, so no reference bundle is included and no eligibility or fidelity score is claimed.
 All prior input hashes are unchanged.

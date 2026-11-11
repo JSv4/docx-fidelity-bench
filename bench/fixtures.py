@@ -594,6 +594,86 @@ def bordered_spacing_cases(add):
                             for label, (where, start) in tops.items() if label in (lead[0], lead[-1], *boxed, *after, *close)])
 
 
+def bordered_box_cases(add):
+    """What else Word 2024 does with the box around bordered paragraphs (Docxodus #1692): a paragraph's
+    w:between is a rule below it with w:space on both sides, also beside a paragraph of the same box
+    that has none; contextual spacing applies across the edge of the box; a page start or a keep on
+    a bordered paragraph is honoured; and shading fills the box to its border. Each control drops
+    only the property under test. Regions are each label's 16pt line slot and page, which hold
+    Word's word boxes; the shading pair also declares the fill Word paints."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/>'
+              '<w:color w:val="000000"/><w:sz w:val="24"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+              '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>'
+              '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
+    sides = ''.join(f'<w:{side} w:val="single" w:sz="4" w:space="1" w:color="000000"/>'
+                    for side in ('top', 'left', 'bottom', 'right'))
+    between = '<w:between w:val="single" w:sz="4" w:space="1" w:color="000000"/>'
+    box, ruled = f'<w:pBdr>{sides}</w:pBdr>', f'<w:pBdr>{sides}{between}</w:pBdr>'
+    contextual, page_start, keep = '<w:contextualSpacing/>', '<w:pageBreakBefore/>', '<w:keepNext/>'
+    fill = [176, 196, 222]
+    shading = '<w:shd w:val="clear" w:color="auto" w:fill="B0C4DE"/>'
+
+    def spaced(text, value=0, before='', after=''):
+        return para(text, f'{before}<w:spacing w:before="{value * 20}" w:after="{value * 20}" w:line="320" w:lineRule="exact"/>{after}')
+
+    def painted(left, top, right, bottom):
+        # Word's fill, in points; coverage is its area in the 96dpi pixels the inspection counts.
+        return {'type': 'color-geometry', 'version': 1, 'page': 1, 'rgb': fill, 'adjudicated': 'word', 'tolerancePt': 2,
+                'coverageTolerance': .1, 'boundsPt': [left, top, right, bottom], 'coverage': (right - left) * (bottom - top) / .75 ** 2}
+
+    lead = [f'Whitebeam{n:02d}' for n in range(1, 40)]
+    # kind: description, body, what the control drops, then each label's page and line top with and
+    # without it, and the fill Word paints with and without it.
+    for kind, description, body, dropped, tops, control_tops, fills in [
+            ('between', 'A rule between the three paragraphs of a box, 14pt before and after each',
+             spaced('WhitebeamOpen') + ''.join(spaced(label, 14, ruled) for label in ('WhitebeamOne', 'WhitebeamTwo', 'WhitebeamThree'))
+             + spaced('WhitebeamNext', 14) + spaced('WhitebeamClose'), between,
+             # 14pt, w:space, the 0.5pt rule and w:space again separate the members.
+             {'WhitebeamOpen': (1, 72), 'WhitebeamOne': (1, 103.5), 'WhitebeamTwo': (1, 136), 'WhitebeamThree': (1, 168.5),
+              'WhitebeamNext': (1, 200), 'WhitebeamClose': (1, 230)},
+             {'WhitebeamOpen': (1, 72), 'WhitebeamOne': (1, 103.5), 'WhitebeamTwo': (1, 133.5), 'WhitebeamThree': (1, 163.5),
+              'WhitebeamNext': (1, 195), 'WhitebeamClose': (1, 225)}, None),
+            ('between-mixed', 'A paragraph without w:between between two that have it, in one box',
+             spaced('WhitebeamOpen') + spaced('WhitebeamOne', 14, ruled) + spaced('WhitebeamTwo', 14, box)
+             + spaced('WhitebeamThree', 14, ruled) + spaced('WhitebeamClose'), between,
+             # Below the first: 14pt, its rule and the rule's w:space. Below the second: 14pt and the third's w:space.
+             {'WhitebeamOpen': (1, 72), 'WhitebeamOne': (1, 103.5), 'WhitebeamTwo': (1, 135), 'WhitebeamThree': (1, 166),
+              'WhitebeamClose': (1, 197.5)},
+             {'WhitebeamOpen': (1, 72), 'WhitebeamOne': (1, 103.5), 'WhitebeamTwo': (1, 133.5), 'WhitebeamThree': (1, 163.5),
+              'WhitebeamClose': (1, 195)}, None),
+            ('contextual-edge', 'Contextual spacing on a bordered paragraph and both neighbours of its style',
+             spaced('WhitebeamOpen', 0, '', contextual) + spaced('WhitebeamBoxed', 14, box, contextual)
+             + spaced('WhitebeamNext', 14, '', contextual) + spaced('WhitebeamClose'), contextual,
+             {'WhitebeamOpen': (1, 72), 'WhitebeamBoxed': (1, 89.5), 'WhitebeamNext': (1, 107), 'WhitebeamClose': (1, 123)},
+             {'WhitebeamOpen': (1, 72), 'WhitebeamBoxed': (1, 103.5), 'WhitebeamNext': (1, 135), 'WhitebeamClose': (1, 165)}, None),
+            ('page-start', 'A bordered paragraph with pageBreakBefore',
+             spaced('WhitebeamOpen') + spaced('WhitebeamBoxed', 14, page_start + box) + spaced('WhitebeamNext', 14), page_start,
+             {'WhitebeamOpen': (1, 72), 'WhitebeamBoxed': (2, 73.5), 'WhitebeamNext': (2, 105)},
+             {'WhitebeamOpen': (1, 72), 'WhitebeamBoxed': (1, 103.5), 'WhitebeamNext': (1, 135)}, None),
+            ('keep-next', 'A bordered paragraph kept with a next paragraph that does not fit the page',
+             ''.join(spaced(label) for label in lead) + spaced('WhitebeamKept', 0, keep + box) + spaced('WhitebeamNext'), keep,
+             {lead[0]: (1, 72), lead[-1]: (1, 680), 'WhitebeamKept': (2, 73.5), 'WhitebeamNext': (2, 91)},
+             {lead[0]: (1, 72), lead[-1]: (1, 680), 'WhitebeamKept': (1, 697.5), 'WhitebeamNext': (2, 72)}, None),
+            ('shading', 'A shaded bordered paragraph, 14pt before and after',
+             spaced('WhitebeamOpen') + spaced('WhitebeamBoxed', 14, box + shading) + spaced('WhitebeamClose'), box,
+             {'WhitebeamOpen': (1, 72), 'WhitebeamBoxed': (1, 103.5), 'WhitebeamClose': (1, 135)},
+             {'WhitebeamOpen': (1, 72), 'WhitebeamBoxed': (1, 102), 'WhitebeamClose': (1, 132)},
+             # Inside the border, through its w:space; without one, the line itself (Word runs 1.4pt past the text).
+             (painted(69.6, 102.5, 542.5, 120.5), painted(70.6, 102, 541.5, 118)))]:
+        for control in (False, True):
+            where = control_tops if control else tops
+            labels = re.findall(r'Whitebeam\w+', body)
+            add('border-' + kind + ('-control' if control else ''), 'paragraphs',
+                description + (', without ' + {between: 'the rule', contextual: 'contextual spacing', page_start: 'the page start',
+                                               keep: 'the keep', box: 'the border'}[dropped] if control else '')
+                + ' (Word 2024 measured, Docxodus #1692)', [' '.join(labels)],
+                body.replace(dropped, '') if control else body, styles_xml=styles,
+                assertions=[{'type': 'marker-region', 'version': 2, 'marker': label, 'occurrence': 1, 'page': page,
+                             'rect': [0, top, 612, top + 16]} for label, (page, top) in where.items()]
+                + ([fills[control]] if fills else []))
+
+
 def para(text='', props='', runs=None):
     return f'<w:p><w:pPr>{props}</w:pPr>{run(text) if runs is None else runs}</w:p>'
 
@@ -7025,7 +7105,8 @@ def generate():
     section_mark_cases(add)
     at_least_and_tracked_grid_cases(add, cases)
     bordered_spacing_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v162', 'version': 162, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    bordered_box_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v163', 'version': 163, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 
