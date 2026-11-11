@@ -32,6 +32,10 @@ reporter attachment or third-party outline is imported. The screenshots show Doc
 The four compatibility and header spacing cases for Docxodus #1553 (`compat-spacing-adds*`,
 `header-automatic-spacing*`) are authored the same way, with original Marram labels.
 
+The eight bordered-paragraph spacing cases for Docxodus #1677 (`border-spacing-*`) are authored
+the same way, with original Hornbeam labels. Their review images show Docxodus output in
+Liberation Serif with the measured regions outlined, not Word page renders.
+
 The twenty line-grid cases for Docxodus #1551 (`grid-at-least-below-pitch*`,
 `grid-tracked-lines-before*`, `grid-at-least-above-pitch*`, `grid-revised-paragraphs*`,
 `grid-bold-word*`, `grid-larger-word*`, `grid-text-centred*`, `grid-broken-lines*`,

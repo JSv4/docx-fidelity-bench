@@ -539,6 +539,61 @@ def collection_font_cases(add):
                        for label in (labels[0], labels[-1])])
 
 
+def bordered_spacing_cases(add):
+    """Word 2024 draws a paragraph border around the text and w:space only: the 14pt before and after
+    lie outside the box and meet the neighbours' spacing as an unbordered paragraph's do, collapsing
+    to 14pt, adding to 28pt under doNotUseHTMLParagraphAutoSpacing, and dropping at the top of a later
+    page. Paragraphs sharing a box keep the spacing between them (Docxodus #1677). Each control drops
+    only the border. Regions are each label's 16pt line slot and page, which hold Word's word boxes."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/>'
+              '<w:color w:val="000000"/><w:sz w:val="24"/></w:rPr></w:rPrDefault></w:docDefaults>'
+              '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
+    box = '<w:pBdr>' + ''.join(f'<w:{side} w:val="single" w:sz="4" w:space="1" w:color="000000"/>'
+                               for side in ('top', 'left', 'bottom', 'right')) + '</w:pBdr>'
+    line, space, edge = 16, 14, 1.5  # edge: the 0.5pt border and its 1pt w:space
+
+    def spaced(text, boxed=None):
+        value = 0 if boxed is None else space * 20
+        return para(text, (box if boxed else '') + f'<w:spacing w:before="{value}" w:after="{value}" w:line="320" w:lineRule="exact"/>')
+
+    fill = [f'Hornbeam{n:02d}' for n in range(1, 41)]
+    # kind: description, settings, plain lead labels, spaced labels in the box, spaced labels after it,
+    # and the space between a box and the spaced paragraph after it.
+    for kind, description, compat, lead, boxed, after, gap in [
+            ('outside', '14pt before and after a bordered paragraph', '', ['HornbeamOpen'], ['HornbeamBoxed'], ['HornbeamNext'], space),
+            ('group', '14pt before and after each of three paragraphs sharing one border', '', ['HornbeamOpen'],
+             ['HornbeamOne', 'HornbeamTwo', 'HornbeamThree'], ['HornbeamNext'], space),
+            ('compat', '14pt before and after a bordered paragraph under doNotUseHTMLParagraphAutoSpacing',
+             '<w:doNotUseHTMLParagraphAutoSpacing/>', ['HornbeamOpen'], ['HornbeamBoxed'], ['HornbeamNext'], 2 * space),
+            ('page-top', 'A bordered paragraph with 14pt before and after moved to the top of page 2', '', fill,
+             ['HornbeamBoxed'], ['HornbeamNext'], space)]:
+        for control in (False, True):
+            case_id = 'border-spacing-' + kind + ('-control' if control else '')
+            rim = 0 if control else edge
+            between = 2 * space if compat else space
+            # Each label's page and the top of its line.
+            tops = {label: (1, 72 + line * index) for index, label in enumerate(lead)}
+            page, top = (2, 72 - line) if kind == 'page-top' else (1, 72 + line * (len(lead) - 1))
+            for index, label in enumerate(boxed):
+                top += line + (rim if index == 0 else between) + (0 if index or page == 2 else space)
+                tops[label] = (page, top)
+            top += line + rim + gap
+            tops[after[0]] = (page, top)
+            close = [] if kind == 'page-top' else ['HornbeamClose']
+            if close:
+                tops[close[0]] = (page, top + line + space)
+            settings = f'<w:settings xmlns:w="{W}">' + SETTINGS_BODY.replace('<w:compat>', '<w:compat>' + compat) + '</w:settings>'
+            add(case_id, 'paragraphs', description + (', without the border' if control else '')
+                + ' (Word 2024 measured, Docxodus #1677)', [' '.join(lead + boxed + after + close)],
+                ''.join(spaced(label) for label in lead) + ''.join(spaced(label, not control) for label in boxed)
+                + ''.join(spaced(label, False) for label in after) + ''.join(spaced(label) for label in close),
+                styles_xml=styles, extra_parts={'word/settings.xml': settings},
+                assertions=[{'type': 'marker-region', 'version': 2, 'marker': label, 'occurrence': 1, 'page': where,
+                             'rect': [0, start, 612, start + line]}
+                            for label, (where, start) in tops.items() if label in (lead[0], lead[-1], *boxed, *after, *close)])
+
+
 def para(text='', props='', runs=None):
     return f'<w:p><w:pPr>{props}</w:pPr>{run(text) if runs is None else runs}</w:p>'
 
@@ -6969,7 +7024,8 @@ def generate():
     compat_and_header_spacing_cases(add)
     section_mark_cases(add)
     at_least_and_tracked_grid_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v161', 'version': 161, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    bordered_spacing_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v162', 'version': 162, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 
