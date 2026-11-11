@@ -674,6 +674,87 @@ def bordered_box_cases(add):
                 + ([fills[control]] if fills else []))
 
 
+def bordered_slab_cases(add):
+    """Inside a box each paragraph owns a slab, from the paragraph above (or the top border) to its
+    own last line and space after (or the bottom border), and Word 2024 fills that slab with the
+    paragraph's own shading and draws its w:between rule at the slab's foot; a box open on one side
+    is still filled from its top border to its bottom border; and w:keepNext on the last paragraph
+    of a box moves that paragraph alone, splitting the box (Docxodus #1692). Regions are each
+    label's 16pt line slot and page, which hold Word's word boxes; fills and the coloured rule are
+    declared as Word paints them."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/>'
+              '<w:color w:val="000000"/><w:sz w:val="24"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+              '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>'
+              '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
+
+    def border(sides=('top', 'left', 'bottom', 'right'), space=1, between=''):
+        return '<w:pBdr>' + ''.join(f'<w:{side} w:val="single" w:sz="4" w:space="{space}" w:color="000000"/>'
+                                    for side in sides) + between + '</w:pBdr>'
+
+    def shade(rgb):
+        return '<w:shd w:val="clear" w:color="auto" w:fill="%02X%02X%02X"/>' % tuple(rgb)
+
+    def spaced(text, before=0, after=0, props=''):
+        return para(text, f'{props}<w:spacing w:before="{before * 20}" w:after="{after * 20}" w:line="320" w:lineRule="exact"/>')
+
+    def painted(rgb, left, top, right, bottom):
+        # Word's paint, in points; coverage is its area in the 96dpi pixels the inspection counts.
+        return {'type': 'color-geometry', 'version': 1, 'page': 1, 'rgb': rgb, 'adjudicated': 'word', 'tolerancePt': 2,
+                'coverageTolerance': .1, 'boundsPt': [left, top, right, bottom], 'coverage': (right - left) * (bottom - top) / .75 ** 2}
+
+    blue, sand, ink = [176, 196, 222], [224, 176, 128], [0, 72, 120]
+    box, keep = border(), '<w:keepNext/>'
+    # A 3pt rule in its own colour, so that the raster scan can place it.
+    ruled = border(between='<w:between w:val="single" w:sz="24" w:space="1" w:color="%02X%02X%02X"/>' % tuple(ink))
+    lead = [f'Blackthorn{n:02d}' for n in range(1, 39)]
+    led = ''.join(spaced(label) for label in lead)
+
+    def pair(first, second):
+        return spaced('BlackthornOpen') + first + second + spaced('BlackthornClose')
+
+    # kind: description of the input and of its control, both bodies, each label's page and line top
+    # in both, and what Word paints in both.
+    for kind, description, control_description, body, control_body, tops, control_tops, paints, control_paints in [
+            ('keep-last', 'keepNext on the last of two paragraphs in one box, whose next paragraph does not fit the page',
+             'Two paragraphs in one box whose next paragraph does not fit the page, without the keep',
+             led + spaced('BlackthornOne', props=box) + spaced('BlackthornTwo', props=keep + box) + spaced('BlackthornNext'),
+             led + spaced('BlackthornOne', props=box) + spaced('BlackthornTwo', props=box) + spaced('BlackthornNext'),
+             {lead[0]: (1, 72), lead[-1]: (1, 664), 'BlackthornOne': (1, 681.5), 'BlackthornTwo': (2, 72), 'BlackthornNext': (2, 89.5)},
+             {lead[0]: (1, 72), lead[-1]: (1, 664), 'BlackthornOne': (1, 681.5), 'BlackthornTwo': (1, 697.5), 'BlackthornNext': (2, 72)},
+             [], []),
+            ('shading-mixed', 'Two paragraphs of one box with different shading, 5pt after the first and 20pt before the second',
+             'Two paragraphs of one box with the same shading, 5pt after the first and 20pt before the second',
+             pair(spaced('BlackthornOne', 14, 5, box + shade(blue)), spaced('BlackthornTwo', 20, 14, box + shade(sand))),
+             pair(spaced('BlackthornOne', 14, 5, box + shade(blue)), spaced('BlackthornTwo', 20, 14, box + shade(blue))),
+             {'BlackthornOpen': (1, 72), 'BlackthornOne': (1, 103.5), 'BlackthornTwo': (1, 139.5), 'BlackthornClose': (1, 171)},
+             {'BlackthornOpen': (1, 72), 'BlackthornOne': (1, 103.5), 'BlackthornTwo': (1, 139.5), 'BlackthornClose': (1, 171)},
+             [painted(blue, 69.6, 102.5, 542.5, 124.6), painted(sand, 69.6, 124.6, 542.5, 156.5)],
+             [painted(blue, 69.6, 102.5, 542.5, 156.5)]),
+            ('shading-open-side', 'A shaded paragraph with top, left and bottom borders and none on the right',
+             'A shaded paragraph with a border on all four sides',
+             pair(spaced('BlackthornOne', 14, 14, border(('top', 'left', 'bottom'), 4) + shade(blue)), ''),
+             pair(spaced('BlackthornOne', 14, 14, border(space=4) + shade(blue)), ''),
+             {'BlackthornOpen': (1, 72), 'BlackthornOne': (1, 106.5), 'BlackthornClose': (1, 141)},
+             {'BlackthornOpen': (1, 72), 'BlackthornOne': (1, 106.5), 'BlackthornClose': (1, 141)},
+             [painted(blue, 70.6, 102.5, 541.5, 126.5)], [painted(blue, 66.6, 102.5, 545.5, 126.5)]),
+            ('between-position', 'A rule between two paragraphs of a box, 5pt after the first and 20pt before the second',
+             'A rule between two paragraphs of a box, 20pt after the first and 5pt before the second',
+             pair(spaced('BlackthornOne', 14, 5, ruled), spaced('BlackthornTwo', 20, 14, ruled)),
+             pair(spaced('BlackthornOne', 14, 20, ruled), spaced('BlackthornTwo', 5, 14, ruled)),
+             {'BlackthornOpen': (1, 72), 'BlackthornOne': (1, 103.5), 'BlackthornTwo': (1, 144.5), 'BlackthornClose': (1, 176)},
+             {'BlackthornOpen': (1, 72), 'BlackthornOne': (1, 103.5), 'BlackthornTwo': (1, 144.5), 'BlackthornClose': (1, 176)},
+             [painted(ink, 69.6, 125.5, 542.5, 128.5)], [painted(ink, 69.6, 140.5, 542.5, 143.5)])]:
+        for control in (False, True):
+            content = control_body if control else body
+            add('border-' + kind + ('-control' if control else ''), 'paragraphs',
+                (control_description if control else description) + ' (Word 2024 measured, Docxodus #1692)',
+                [' '.join(re.findall(r'Blackthorn\w+', content))], content, styles_xml=styles,
+                assertions=[{'type': 'marker-region', 'version': 2, 'marker': label, 'occurrence': 1, 'page': page,
+                             'rect': [0, top, 612, top + 16]} for label, (page, top) in (control_tops if control else tops).items()]
+                + (control_paints if control else paints))
+
+
 def para(text='', props='', runs=None):
     return f'<w:p><w:pPr>{props}</w:pPr>{run(text) if runs is None else runs}</w:p>'
 
@@ -7106,7 +7187,8 @@ def generate():
     at_least_and_tracked_grid_cases(add, cases)
     bordered_spacing_cases(add)
     bordered_box_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v163', 'version': 163, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    bordered_slab_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v164', 'version': 164, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 
