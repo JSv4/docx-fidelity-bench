@@ -427,15 +427,19 @@ def compat_and_header_spacing_cases(add):
 
 
 def at_least_and_tracked_grid_cases(add, cases):
-    """Word 2024 gives an at-least line below the pitch a whole 18pt grid line, and keeps a
-    document with tracked changes on its grid in markup, a line of beforeLines being the pitch
-    (Docxodus #1551). Each control drops only the grid. Regions are each label's line slot and
-    page: Word's word boxes lie inside them, within 0.3pt for the controls' natural lines, and Word
-    drops the space before at the top of a later page. Baseline placement is not tested."""
+    """Word 2024 gives an at-least line max(whole 18pt grid lines, minimum): one grid line below
+    the pitch, and the two its text needs for 24pt text at least 30pt. It keeps a document with
+    tracked changes on its grid in markup, a line of beforeLines being the pitch, and lays out a
+    paragraph that shows a tracked deletion like one without it (Docxodus #1551). Each control drops
+    only the grid. Regions are each label's line slot and page: Word's word boxes lie inside them,
+    within 0.3pt for the controls' natural lines, and Word drops the space before at the top of a
+    later page. Baseline placement is not tested."""
     natural = 2355 / 2048 * 12
     # kind: (line, space before, lines per page) with the grid, then without it.
     slots = {'grid-at-least-below-pitch': ((18, 0, 36), (15, 0, 43)),
-             'grid-tracked-lines-before': ((18, 18, 18), (natural, 12, 25))}
+             'grid-tracked-lines-before': ((18, 18, 18), (natural, 12, 25)),
+             'grid-at-least-above-pitch': ((36, 0, 18), (30, 0, 21)),
+             'grid-revised-paragraphs': ((18, 0, 36), (natural, 0, 46))}
 
     def regions(labels, line, before, per_page):
         rows = [divmod(index, per_page) for index in range(len(labels))]
@@ -450,19 +454,30 @@ def at_least_and_tracked_grid_cases(add, cases):
               '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
     grid = '<w:docGrid w:type="lines" w:linePitch="360"/></w:sectPr>'
     revision = '<w:ins w:id="1" w:author="Tamarack Reviewer" w:date="2026-11-10T12:00:00Z">'
-    for kind, count, props, markup in [
-        ('grid-at-least-below-pitch', 40, '<w:spacing w:line="300" w:lineRule="atLeast"/>', False),
-        ('grid-tracked-lines-before', 20, '<w:spacing w:beforeLines="100"/>', True),
+    deletion = ('<w:del w:id="{}" w:author="Tamarack Reviewer" w:date="2026-11-10T12:00:00Z"><w:r>'
+                '<w:delText xml:space="preserve"> Juniper</w:delText></w:r></w:del>')
+    large = '<w:sz w:val="48"/>'
+    # kind, label count, paragraph properties, markup, description, each label's runs (n counts from 1).
+    for kind, count, props, markup, description, runs in [
+        ('grid-at-least-below-pitch', 40, '<w:spacing w:line="300" w:lineRule="atLeast"/>', False, 'At least 15pt',
+         lambda n, label: run(label)),
+        ('grid-tracked-lines-before', 20, '<w:spacing w:beforeLines="100"/>', True,
+         'One line before, a tracked insertion, in markup,',
+         lambda n, label: revision + run(label) + '</w:ins>' if n == 20 else run(label)),
+        ('grid-at-least-above-pitch', 24, f'<w:spacing w:line="600" w:lineRule="atLeast"/><w:rPr>{large}</w:rPr>', False,
+         '24pt text at least 30pt', lambda n, label: run(label, large)),
+        ('grid-revised-paragraphs', 50, '', True, 'A tracked deletion shown in each paragraph, in markup,',
+         lambda n, label: run(label) + deletion.format(n + 1)),
     ]:
         labels = [f'Tamarack{n:02d}' for n in range(1, count + 1)]
-        body = ''.join(para(label, props) for label in labels[:-1])
-        body += para(props=props, runs=revision + run(labels[-1]) + '</w:ins>' if markup else run(labels[-1]))
+        body = ''.join(para(props=props, runs=runs(n, label)) for n, label in enumerate(labels, 1))
+        # Markup shows the deleted words after each label.
+        words = [label + ' Juniper' for label in labels] if kind == 'grid-revised-paragraphs' else labels
         for control in (False, True):
             case_id = kind + ('-control' if control else '')
-            add(case_id, 'paragraphs',
-                ('At least 15pt' if not markup else 'One line before, a tracked insertion, in markup,')
+            add(case_id, 'paragraphs', description
                 + (' without a line grid (control)' if control else ' on an 18pt line grid')
-                + ' (Word 2024 measured, Docxodus #1551)', labels, body,
+                + ' (Word 2024 measured, Docxodus #1551)', words, body,
                 section() if control else section().replace('</w:sectPr>', grid), styles_xml=styles,
                 assertions=regions(labels, *slots[kind][control]))
             for assertion in cases[-1]['assertions']:
@@ -6921,7 +6936,7 @@ def generate():
     compat_and_header_spacing_cases(add)
     section_mark_cases(add)
     at_least_and_tracked_grid_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v158', 'version': 158, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v159', 'version': 159, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 
