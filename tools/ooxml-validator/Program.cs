@@ -2,6 +2,7 @@
 // SDK and prints one JSON object mapping each path to its findings.
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using DocumentFormat.OpenXml;
@@ -27,7 +28,13 @@ internal static class Program
             var findings = new JsonArray();
             try
             {
-                using var document = WordprocessingDocument.Open(path, false);
+                // Validate an in-memory copy: opening a file whose relationship target System.Uri
+                // rejects makes the SDK rewrite that target, and opened by path it writes the
+                // rewrite back into the file even when the package is opened read-only.
+                using var stream = new MemoryStream();
+                stream.Write(File.ReadAllBytes(path));
+                stream.Position = 0;
+                using var document = WordprocessingDocument.Open(stream, false);
                 foreach (var error in new OpenXmlValidator(Format).Validate(document))
                 {
                     findings.Add(new JsonObject

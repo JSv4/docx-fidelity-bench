@@ -1,0 +1,2419 @@
+{
+  "schema": 1,
+  "description": "Focused 2/216 diagnostics: historical main before carrier fix versus current main. All check declarations/outcomes and run contracts retained; repeated observed subtree trees omitted. Original full result hashes retained. No full-suite score.",
+  "runs": {
+    "baseline": {
+      "resultSha256": "84c211467af21cb3121af4a52099fc85f592046324cd00f04dca13ca09446781",
+      "candidate": "785656a43737ba954fcab9319c3db03a50bc10a9",
+      "cases": [
+        {
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+785656a43737ba954fcab9319c3db03a50bc10a9",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "33aa2c19f9010dea15d55fec0dfc599eef09937bd66c877d4b59007652de9819",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "category": "bookmarks",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "diff": [
+                "--- expected",
+                "+++ actual",
+                "@@ -5,3 +5,2 @@",
+                " m|bookmark-end:SpruceGap",
+                "-m|object:pict",
+                " t| Spruce old ledger."
+              ],
+              "name": "markup-rejected",
+              "passed": false,
+              "similarity": 0.9411764705882353
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 6
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/marker-gap-baseline/redline-textbox-marker-gap/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap/right.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the independently authored whole textbox-carrier replacement"
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 6
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/marker-gap-baseline/redline-textbox-marker-gap/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap/left.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the independently authored whole textbox-carrier replacement"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>",
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:120pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              },
+              "name": "assertion-inline-trees",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape><ns1:shape style=\"position:absolute;margin-left:120pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              },
+              "name": "assertion-inline-trees",
+              "passed": true
+            }
+          ],
+          "id": "redline-textbox-marker-gap",
+          "issue": "JSv4/Docxodus#1428",
+          "kind": "reproducer",
+          "operation": "compare",
+          "score": 0.0,
+          "status": "measured"
+        },
+        {
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+785656a43737ba954fcab9319c3db03a50bc10a9",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "981ee4381d5978b798e051e00ac626f633a6c84ac8b5540bb2a81d3862af7d15",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "category": "bookmarks",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap-control/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/marker-gap-baseline/redline-textbox-marker-gap-control/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap-control/right.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap-control/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/marker-gap-baseline/redline-textbox-marker-gap-control/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap-control/left.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>",
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:120pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              },
+              "name": "assertion-inline-trees",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>",
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:120pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              },
+              "name": "assertion-inline-trees",
+              "passed": true
+            }
+          ],
+          "id": "redline-textbox-marker-gap-control",
+          "issue": "JSv4/Docxodus#1428",
+          "kind": "control",
+          "operation": "compare",
+          "score": 100.0,
+          "status": "measured"
+        }
+      ],
+      "contract": {
+        "adapter": {
+          "build": {
+            "adapterSources": {
+              "adapters/docxodus-redline/DocxBenchRedline.csproj": "83843da954515292212f473d501fb539b0627513b972e3a95f7a4ab06674902a",
+              "adapters/docxodus-redline/Program.cs": "3fa3c5e1aea63c72f53365d6ea493b5350b737518fca7d983c0c31b6b21f4b01"
+            },
+            "command": [
+              "/home/jman/.dotnet/dotnet",
+              "build",
+              "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/textbox-main-build/src/DocxBenchRedline.csproj",
+              "-c",
+              "Release",
+              "-o",
+              "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/textbox-main-build/bin",
+              "-nologo",
+              "-v",
+              "q",
+              "-p:DocxodusRoot=/home/jman/Code/Docxodus/.local-closeout/baseline-fb831"
+            ],
+            "commit": "785656a43737ba954fcab9319c3db03a50bc10a9",
+            "dotnet": "10.0.301",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/DocxBenchRedline.dll": "f6d2bd2dfc6ee50d39e09fc823be82a24266148217fbbe486da5b7b43ee82b17",
+              "bin/Docxodus.dll": "1fed14e4c264b437e580c3539bf0a1ff8042f9d35851888fd2ff481ae69ba756",
+              "bin/SkiaSharp.dll": "2c9bbbe1a3d0e9407894c319821b5cdcade1f302466a950a2e5d6024aee32422",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "recipeSha256": "363879d820560519e8635fab08240100799cce2ba224e1169498eb209651c053",
+            "schema": 1,
+            "source": "/home/jman/Code/Docxodus/.local-closeout/baseline-fb831",
+            "tree": "50db834a58425481e3f60bd144cf02e4fc885910"
+          },
+          "name": "docxodus"
+        },
+        "environment": {
+          "harness": {
+            "bench/lo_revisions.py": "a526eddb8c5022f7eb8f8feb8fbab9071b3781c87d3feae81cfc5712d1690482",
+            "bench/redline.py": "700b2e6b7a96739a7f9e2fc2e259b3abad15d482c138798e407dceae99be4769",
+            "bench/redline_build.py": "363879d820560519e8635fab08240100799cce2ba224e1169498eb209651c053",
+            "bench/revision_ownership.py": "d927496ce7af9e8ee41b48b32d4513e35e5bfd77eeeda41970a42201dac175fb",
+            "bench/revisions.py": "b2d13e3c58885c95c4fe75269bcda6fe6420afeef51be7f43278ce7aac94e701"
+          },
+          "libreoffice": {
+            "sha256": "adf468b45764b2abce53a7d91bbf3056b33f2734c5d5f628c075753e73903c43",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "libreofficePython": {
+            "sha256": "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e",
+            "version": "3.13.7"
+          },
+          "validator": {
+            "dotnet": "10.0.301",
+            "fileFormat": "Microsoft365",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/OoxmlValidator.dll": "adad1592a55ce757313b038b41ec6987b589dc5f8836a2ecf4ba121d8c5ed35c",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "package": "DocumentFormat.OpenXml 3.5.1"
+          }
+        },
+        "metric": {
+          "blockInsertion": "declared insertion outcomes require typed success, error, version change and undo availability",
+          "caseScore": "100 when every applicable mandatory check passes, otherwise 0",
+          "columnReview": "v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry",
+          "engines": [
+            "bench-markup",
+            "libreoffice-text"
+          ],
+          "hyperlinkTargets": "declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written",
+          "inlineTrees": "declared math and drawing subtrees retain structure, properties, textbox content and image bytes in both independently resolved views",
+          "libreofficeEligibility": "a LibreOffice comparison applies only when the authored redline passes it",
+          "paragraphRewrite": "public untracked whole-paragraph rewrites must preserve exact declared native content-control subtrees as well as independent semantic views",
+          "revisionOwnership": "account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips",
+          "revisionRegistry": "declared table operations must report the public registry count and match independent resolved table assertions",
+          "revisionText": "declared move sources and ordinary deletions must retain their appropriate text carrier",
+          "semanticPreflight": "declared identity cases must report zero changes at raw limits with and without the package supplement",
+          "spanEditing": "public span editing must preserve text and inline-marker order through both independent revision resolvers",
+          "suiteScore": "mean of category means over every required case",
+          "validity": "no OpenXmlValidator finding (id, part, description) occurs more often than in any input, and the output opens: a Package_Open finding in the output always fails, whatever the inputs did",
+          "version": 14,
+          "view": 1
+        },
+        "suiteDigest": "e63e90bf367c1467bfe8ab7012eacb1f4f3ed3221089dcb839a2f4c080973b07"
+      },
+      "contractDigest": "9033c5723b0138f46fe671ff712af9af32c2170f5b8aac4254c044f1adf1abce",
+      "schema": 1,
+      "suite": {
+        "cases": [
+          "redline-field-result-beside-edit",
+          "redline-field-result-end-control",
+          "redline-field-result-tab-control",
+          "redline-field-toc-page-numbers",
+          "redline-field-toc-entry-retitled-control",
+          "redline-field-toc-page-number-control",
+          "redline-field-shared-end-append",
+          "redline-field-shared-end-trim",
+          "redline-field-shared-end-control",
+          "redline-field-close-open-sdt",
+          "redline-field-close-open-body",
+          "redline-field-close-open-sdt-control",
+          "redline-comment-straddles-sdt",
+          "redline-comment-straddles-sdt-control",
+          "redline-comment-straddles-customxml",
+          "redline-comment-straddles-customxml-control",
+          "redline-comment-para-id-collision",
+          "redline-wrapper-para-id-copies",
+          "redline-comment-para-id-control",
+          "redline-header-bookmark-only",
+          "redline-body-bookmark-only-control",
+          "redline-bookmark-end-after-replaced-word",
+          "redline-bookmark-end-after-replaced-word-control",
+          "redline-bookmark-between-blocks-fold-text",
+          "redline-bookmark-between-blocks-fold-text-control",
+          "redline-bookmark-between-blocks-fold-table",
+          "redline-bookmark-between-blocks-fold-table-control",
+          "redline-style-id-cross-type",
+          "redline-style-id-same-type-control",
+          "redline-reject-customxml",
+          "redline-reject-math",
+          "redline-reject-ruby",
+          "redline-reject-direct-control",
+          "redline-consolidate-cell-bookmark",
+          "redline-consolidate-cell-text-control",
+          "redline-boundary-bookmark-compare-tbl",
+          "redline-boundary-bookmark-compare-tr",
+          "redline-boundary-bookmark-compare-paragraph-control",
+          "redline-boundary-bookmark-consolidate-tbl",
+          "redline-boundary-bookmark-consolidate-tr",
+          "redline-boundary-bookmark-consolidate-paragraph-control",
+          "redline-identity-bytes",
+          "redline-identity-reserialized",
+          "redline-inline-customxml",
+          "redline-inline-hyperlink-control",
+          "redline-comment-add-customxml",
+          "redline-comment-remove-sdt",
+          "redline-comment-wrapper-control",
+          "redline-reviewer-added-comment",
+          "redline-reviewer-comment-control",
+          "redline-duplicate-comment-sdt",
+          "redline-duplicate-comment-sdt-control",
+          "redline-duplicate-comment-customxml",
+          "redline-duplicate-comment-customxml-control",
+          "redline-consolidated-field-result-edit",
+          "redline-consolidated-field-prefix-delete",
+          "redline-consolidated-field-bookmark-added",
+          "redline-consolidated-field-plain-control",
+          "redline-comment-identity-reused-id",
+          "redline-comment-identity-replaced-id",
+          "redline-comment-identity-distinct-control",
+          "redline-comment-identity-reviewer-collision",
+          "redline-comment-identity-reviewer-identical",
+          "redline-comment-identity-reviewer-control",
+          "redline-removed-comment-body-edited",
+          "redline-removed-comment-body-unchanged-control",
+          "redline-consolidated-note-prefix",
+          "redline-consolidated-note-suffix-control",
+          "redline-reviewer-bookmark-paragraph-edited",
+          "redline-reviewer-bookmark-paragraph-outside-control",
+          "redline-reviewer-bookmark-sdt-edited",
+          "redline-reviewer-bookmark-sdt-outside-control",
+          "redline-reviewer-bookmark-cell-edited",
+          "redline-reviewer-bookmark-cell-outside-control",
+          "redline-reviewer-bookmark-move-and-remove",
+          "redline-reviewer-bookmark-single-remove-control",
+          "redline-bookmark-name-block-position",
+          "redline-bookmark-name-mixed-position",
+          "redline-bookmark-name-inline-extent",
+          "redline-bookmark-name-consensus-control",
+          "redline-comment-reply-id-less-root",
+          "redline-comment-reply-renumbered-root",
+          "redline-comment-reply-root-para-id-control",
+          "redline-semantic-raw-limits-strict",
+          "redline-semantic-raw-limits-transitional-control",
+          "redline-table-column-widths-full",
+          "redline-table-column-widths-full-untracked-control",
+          "redline-table-column-widths-partial",
+          "redline-table-column-widths-partial-untracked-control",
+          "redline-pending-grid-plain-insert",
+          "redline-pending-grid-plain-insert-control",
+          "redline-pending-grid-plain-delete",
+          "redline-pending-grid-plain-delete-control",
+          "redline-pending-grid-no-op-insert",
+          "redline-pending-grid-no-op-insert-control",
+          "redline-pending-grid-no-op-delete",
+          "redline-pending-grid-no-op-delete-control",
+          "redline-pending-grid-merged-insert",
+          "redline-pending-grid-merged-insert-control",
+          "redline-pending-grid-merged-delete",
+          "redline-pending-grid-merged-delete-control",
+          "redline-pending-grid-omitted-insert",
+          "redline-pending-grid-omitted-insert-control",
+          "redline-pending-grid-omitted-delete",
+          "redline-pending-grid-omitted-delete-control",
+          "redline-pending-grid-merged-before-insert",
+          "redline-pending-grid-merged-before-insert-control",
+          "redline-pending-grid-merged-after-insert",
+          "redline-pending-grid-merged-after-insert-control",
+          "redline-block-insert-paragraph",
+          "redline-block-insert-paragraph-control",
+          "redline-block-insert-rule",
+          "redline-block-insert-rule-control",
+          "redline-block-insert-table",
+          "redline-block-insert-table-control",
+          "redline-mixed-run-tab-direct-before",
+          "redline-mixed-run-tab-direct-before-control",
+          "redline-mixed-run-tab-direct-across",
+          "redline-mixed-run-tab-direct-across-control",
+          "redline-mixed-run-tab-tracked-before",
+          "redline-mixed-run-tab-tracked-before-control",
+          "redline-mixed-run-tab-tracked-across",
+          "redline-mixed-run-tab-tracked-across-control",
+          "redline-mixed-run-br-direct-before",
+          "redline-mixed-run-br-direct-before-control",
+          "redline-mixed-run-br-direct-across",
+          "redline-mixed-run-br-direct-across-control",
+          "redline-mixed-run-br-tracked-before",
+          "redline-mixed-run-br-tracked-before-control",
+          "redline-mixed-run-br-tracked-across",
+          "redline-mixed-run-br-tracked-across-control",
+          "redline-column-gap-leading",
+          "redline-column-gap-leading-control",
+          "redline-column-gap-trailing",
+          "redline-column-gap-trailing-control",
+          "redline-column-gap-merged-reject",
+          "redline-column-gap-merged-reject-control",
+          "redline-column-gap-merged-accept",
+          "redline-column-gap-merged-accept-control",
+          "redline-revision-owner-namesake-account",
+          "redline-revision-owner-unattributed-name",
+          "redline-revision-owner-upn-alias",
+          "redline-revision-owner-object-id-alias",
+          "redline-revision-owner-legacy-name-control",
+          "redline-revision-owner-first-revision",
+          "redline-revision-owner-first-comment",
+          "redline-move-range-unsplit-control",
+          "redline-move-range-plain-tail-inside",
+          "redline-move-range-plain-between-move-elements",
+          "redline-move-range-split-destination",
+          "redline-move-range-plain-outside-control",
+          "redline-move-range-cross-paragraph-split",
+          "redline-hyperlink-mailto-recipients",
+          "redline-hyperlink-mailto-recipients-inserted",
+          "redline-hyperlink-mailto-single-control",
+          "redline-hyperlink-mailto-single-inserted-control",
+          "redline-package-typed-parts-control",
+          "redline-package-untyped-font",
+          "redline-package-generic-glossary",
+          "redline-package-shared-relationship-id",
+          "redline-visible-atom-tab",
+          "redline-visible-atom-tab-control",
+          "redline-visible-atom-br",
+          "redline-visible-atom-br-control",
+          "redline-visible-atom-cr",
+          "redline-visible-atom-cr-control",
+          "redline-visible-atom-page",
+          "redline-visible-atom-page-control",
+          "redline-visible-atom-column",
+          "redline-visible-atom-column-control",
+          "redline-visible-atom-ptab",
+          "redline-visible-atom-ptab-control",
+          "redline-visible-atom-nonbreaking-hyphen",
+          "redline-visible-atom-nonbreaking-hyphen-control",
+          "redline-visible-atom-soft-hyphen",
+          "redline-visible-atom-soft-hyphen-control",
+          "redline-visible-atom-symbol",
+          "redline-visible-atom-symbol-control",
+          "redline-visible-inline-xml",
+          "redline-visible-inline-xml-control",
+          "redline-control-rewrite-binding-echo",
+          "redline-control-rewrite-binding-echo-control",
+          "redline-control-rewrite-binding-outside",
+          "redline-control-rewrite-binding-outside-control",
+          "redline-control-rewrite-citation-echo",
+          "redline-control-rewrite-citation-echo-control",
+          "redline-control-rewrite-citation-outside",
+          "redline-control-rewrite-citation-outside-control",
+          "redline-control-rewrite-strike-break",
+          "redline-control-rewrite-strike-break-control",
+          "redline-control-rewrite-code-break",
+          "redline-control-rewrite-code-break-control",
+          "redline-control-rewrite-link-break",
+          "redline-control-rewrite-link-break-control",
+          "redline-moved-from-text",
+          "redline-moved-from-text-control",
+          "redline-moved-from-text-consolidate",
+          "redline-moved-from-text-consolidate-control",
+          "redline-tab-equation",
+          "redline-tab-equation-consolidate",
+          "redline-tab-equation-control",
+          "redline-tab-equation-consolidate-control",
+          "redline-field-source-text",
+          "redline-field-source-text-control",
+          "redline-captured-field-source",
+          "redline-captured-field-source-control",
+          "redline-shared-drawing-source",
+          "redline-shared-drawing-source-control",
+          "redline-textbox-geometry",
+          "redline-textbox-geometry-control",
+          "redline-composed-bookmark-remove",
+          "redline-composed-bookmark-remove-control",
+          "redline-composed-bookmark-add",
+          "redline-composed-bookmark-add-control",
+          "redline-textbox-marker-gap",
+          "redline-textbox-marker-gap-control"
+        ],
+        "id": "redline-v25",
+        "version": 25
+      },
+      "summary": {
+        "byKind": {
+          "control": {
+            "measured": 1,
+            "passed": 1
+          },
+          "reproducer": {
+            "measured": 1,
+            "passed": 0
+          }
+        },
+        "categoryMeans": {
+          "bookmarks": 50.0
+        },
+        "complete": false,
+        "libreofficeComparisons": {
+          "applicable": 2,
+          "total": 4
+        },
+        "measured": 2,
+        "passRate": 0.004629629629629629,
+        "required": 216,
+        "score": null
+      },
+      "track": "redline"
+    },
+    "currentMain": {
+      "resultSha256": "1758fc7e4b28241f46c7178cbe768613c623606e1067a8119f74e6bb01da7172",
+      "candidate": "9b230def8115dd0d0f187b6de2be0f90a4aac1d6",
+      "cases": [
+        {
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+9b230def8115dd0d0f187b6de2be0f90a4aac1d6",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "e100129320d52db9c4f3022ae9305beabc5e41814be40075c1d37683235c7bfd",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "category": "bookmarks",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 6
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/marker-gap-main/redline-textbox-marker-gap/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 6
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap/right.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the independently authored whole textbox-carrier replacement"
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 6
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/marker-gap-main/redline-textbox-marker-gap/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 6
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap/left.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the independently authored whole textbox-carrier replacement"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>",
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:120pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              },
+              "name": "assertion-inline-trees",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape><ns1:shape style=\"position:absolute;margin-left:120pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              },
+              "name": "assertion-inline-trees",
+              "passed": true
+            }
+          ],
+          "id": "redline-textbox-marker-gap",
+          "issue": "JSv4/Docxodus#1428",
+          "kind": "reproducer",
+          "operation": "compare",
+          "score": 100.0,
+          "status": "measured"
+        },
+        {
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+9b230def8115dd0d0f187b6de2be0f90a4aac1d6",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "981ee4381d5978b798e051e00ac626f633a6c84ac8b5540bb2a81d3862af7d15",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "category": "bookmarks",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap-control/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/marker-gap-main/redline-textbox-marker-gap-control/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap-control/right.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap-control/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/marker-gap-main/redline-textbox-marker-gap-control/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap-control/left.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>",
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:120pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              },
+              "name": "assertion-inline-trees",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>",
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:120pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              },
+              "name": "assertion-inline-trees",
+              "passed": true
+            }
+          ],
+          "id": "redline-textbox-marker-gap-control",
+          "issue": "JSv4/Docxodus#1428",
+          "kind": "control",
+          "operation": "compare",
+          "score": 100.0,
+          "status": "measured"
+        }
+      ],
+      "contract": {
+        "adapter": {
+          "build": {
+            "adapterSources": {
+              "adapters/docxodus-redline/DocxBenchRedline.csproj": "83843da954515292212f473d501fb539b0627513b972e3a95f7a4ab06674902a",
+              "adapters/docxodus-redline/Program.cs": "3fa3c5e1aea63c72f53365d6ea493b5350b737518fca7d983c0c31b6b21f4b01"
+            },
+            "command": [
+              "/home/jman/.dotnet/dotnet",
+              "build",
+              "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/bookmark-main-build/src/DocxBenchRedline.csproj",
+              "-c",
+              "Release",
+              "-o",
+              "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/bookmark-main-build/bin",
+              "-nologo",
+              "-v",
+              "q",
+              "-p:DocxodusRoot=/home/jman/Code/Docxodus/.local-closeout/baseline-9b230"
+            ],
+            "commit": "9b230def8115dd0d0f187b6de2be0f90a4aac1d6",
+            "dotnet": "10.0.301",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/DocxBenchRedline.dll": "9516dc0288e102f5bb0a86a79453b5b1108f7849821fff5dc1e3cead94ec61d3",
+              "bin/Docxodus.dll": "dbac1f3235c6e57d9cc50f87cae7bd0c2e6fae2f86608ee0ad616f4889601463",
+              "bin/SkiaSharp.dll": "2c9bbbe1a3d0e9407894c319821b5cdcade1f302466a950a2e5d6024aee32422",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "recipeSha256": "363879d820560519e8635fab08240100799cce2ba224e1169498eb209651c053",
+            "schema": 1,
+            "source": "/home/jman/Code/Docxodus/.local-closeout/baseline-9b230",
+            "tree": "8ff223a85b1a0b63e774c2b408bbdfc9826ccbda"
+          },
+          "name": "docxodus"
+        },
+        "environment": {
+          "harness": {
+            "bench/lo_revisions.py": "a526eddb8c5022f7eb8f8feb8fbab9071b3781c87d3feae81cfc5712d1690482",
+            "bench/redline.py": "700b2e6b7a96739a7f9e2fc2e259b3abad15d482c138798e407dceae99be4769",
+            "bench/redline_build.py": "363879d820560519e8635fab08240100799cce2ba224e1169498eb209651c053",
+            "bench/revision_ownership.py": "d927496ce7af9e8ee41b48b32d4513e35e5bfd77eeeda41970a42201dac175fb",
+            "bench/revisions.py": "b2d13e3c58885c95c4fe75269bcda6fe6420afeef51be7f43278ce7aac94e701"
+          },
+          "libreoffice": {
+            "sha256": "adf468b45764b2abce53a7d91bbf3056b33f2734c5d5f628c075753e73903c43",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "libreofficePython": {
+            "sha256": "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e",
+            "version": "3.13.7"
+          },
+          "validator": {
+            "dotnet": "10.0.301",
+            "fileFormat": "Microsoft365",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/OoxmlValidator.dll": "adad1592a55ce757313b038b41ec6987b589dc5f8836a2ecf4ba121d8c5ed35c",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "package": "DocumentFormat.OpenXml 3.5.1"
+          }
+        },
+        "metric": {
+          "blockInsertion": "declared insertion outcomes require typed success, error, version change and undo availability",
+          "caseScore": "100 when every applicable mandatory check passes, otherwise 0",
+          "columnReview": "v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry",
+          "engines": [
+            "bench-markup",
+            "libreoffice-text"
+          ],
+          "hyperlinkTargets": "declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written",
+          "inlineTrees": "declared math and drawing subtrees retain structure, properties, textbox content and image bytes in both independently resolved views",
+          "libreofficeEligibility": "a LibreOffice comparison applies only when the authored redline passes it",
+          "paragraphRewrite": "public untracked whole-paragraph rewrites must preserve exact declared native content-control subtrees as well as independent semantic views",
+          "revisionOwnership": "account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips",
+          "revisionRegistry": "declared table operations must report the public registry count and match independent resolved table assertions",
+          "revisionText": "declared move sources and ordinary deletions must retain their appropriate text carrier",
+          "semanticPreflight": "declared identity cases must report zero changes at raw limits with and without the package supplement",
+          "spanEditing": "public span editing must preserve text and inline-marker order through both independent revision resolvers",
+          "suiteScore": "mean of category means over every required case",
+          "validity": "no OpenXmlValidator finding (id, part, description) occurs more often than in any input, and the output opens: a Package_Open finding in the output always fails, whatever the inputs did",
+          "version": 14,
+          "view": 1
+        },
+        "suiteDigest": "e63e90bf367c1467bfe8ab7012eacb1f4f3ed3221089dcb839a2f4c080973b07"
+      },
+      "contractDigest": "c6f61beaa8fe301cba9c06e8587e36412d6d25b2058b8a4171767bfd59e70a11",
+      "schema": 1,
+      "suite": {
+        "cases": [
+          "redline-field-result-beside-edit",
+          "redline-field-result-end-control",
+          "redline-field-result-tab-control",
+          "redline-field-toc-page-numbers",
+          "redline-field-toc-entry-retitled-control",
+          "redline-field-toc-page-number-control",
+          "redline-field-shared-end-append",
+          "redline-field-shared-end-trim",
+          "redline-field-shared-end-control",
+          "redline-field-close-open-sdt",
+          "redline-field-close-open-body",
+          "redline-field-close-open-sdt-control",
+          "redline-comment-straddles-sdt",
+          "redline-comment-straddles-sdt-control",
+          "redline-comment-straddles-customxml",
+          "redline-comment-straddles-customxml-control",
+          "redline-comment-para-id-collision",
+          "redline-wrapper-para-id-copies",
+          "redline-comment-para-id-control",
+          "redline-header-bookmark-only",
+          "redline-body-bookmark-only-control",
+          "redline-bookmark-end-after-replaced-word",
+          "redline-bookmark-end-after-replaced-word-control",
+          "redline-bookmark-between-blocks-fold-text",
+          "redline-bookmark-between-blocks-fold-text-control",
+          "redline-bookmark-between-blocks-fold-table",
+          "redline-bookmark-between-blocks-fold-table-control",
+          "redline-style-id-cross-type",
+          "redline-style-id-same-type-control",
+          "redline-reject-customxml",
+          "redline-reject-math",
+          "redline-reject-ruby",
+          "redline-reject-direct-control",
+          "redline-consolidate-cell-bookmark",
+          "redline-consolidate-cell-text-control",
+          "redline-boundary-bookmark-compare-tbl",
+          "redline-boundary-bookmark-compare-tr",
+          "redline-boundary-bookmark-compare-paragraph-control",
+          "redline-boundary-bookmark-consolidate-tbl",
+          "redline-boundary-bookmark-consolidate-tr",
+          "redline-boundary-bookmark-consolidate-paragraph-control",
+          "redline-identity-bytes",
+          "redline-identity-reserialized",
+          "redline-inline-customxml",
+          "redline-inline-hyperlink-control",
+          "redline-comment-add-customxml",
+          "redline-comment-remove-sdt",
+          "redline-comment-wrapper-control",
+          "redline-reviewer-added-comment",
+          "redline-reviewer-comment-control",
+          "redline-duplicate-comment-sdt",
+          "redline-duplicate-comment-sdt-control",
+          "redline-duplicate-comment-customxml",
+          "redline-duplicate-comment-customxml-control",
+          "redline-consolidated-field-result-edit",
+          "redline-consolidated-field-prefix-delete",
+          "redline-consolidated-field-bookmark-added",
+          "redline-consolidated-field-plain-control",
+          "redline-comment-identity-reused-id",
+          "redline-comment-identity-replaced-id",
+          "redline-comment-identity-distinct-control",
+          "redline-comment-identity-reviewer-collision",
+          "redline-comment-identity-reviewer-identical",
+          "redline-comment-identity-reviewer-control",
+          "redline-removed-comment-body-edited",
+          "redline-removed-comment-body-unchanged-control",
+          "redline-consolidated-note-prefix",
+          "redline-consolidated-note-suffix-control",
+          "redline-reviewer-bookmark-paragraph-edited",
+          "redline-reviewer-bookmark-paragraph-outside-control",
+          "redline-reviewer-bookmark-sdt-edited",
+          "redline-reviewer-bookmark-sdt-outside-control",
+          "redline-reviewer-bookmark-cell-edited",
+          "redline-reviewer-bookmark-cell-outside-control",
+          "redline-reviewer-bookmark-move-and-remove",
+          "redline-reviewer-bookmark-single-remove-control",
+          "redline-bookmark-name-block-position",
+          "redline-bookmark-name-mixed-position",
+          "redline-bookmark-name-inline-extent",
+          "redline-bookmark-name-consensus-control",
+          "redline-comment-reply-id-less-root",
+          "redline-comment-reply-renumbered-root",
+          "redline-comment-reply-root-para-id-control",
+          "redline-semantic-raw-limits-strict",
+          "redline-semantic-raw-limits-transitional-control",
+          "redline-table-column-widths-full",
+          "redline-table-column-widths-full-untracked-control",
+          "redline-table-column-widths-partial",
+          "redline-table-column-widths-partial-untracked-control",
+          "redline-pending-grid-plain-insert",
+          "redline-pending-grid-plain-insert-control",
+          "redline-pending-grid-plain-delete",
+          "redline-pending-grid-plain-delete-control",
+          "redline-pending-grid-no-op-insert",
+          "redline-pending-grid-no-op-insert-control",
+          "redline-pending-grid-no-op-delete",
+          "redline-pending-grid-no-op-delete-control",
+          "redline-pending-grid-merged-insert",
+          "redline-pending-grid-merged-insert-control",
+          "redline-pending-grid-merged-delete",
+          "redline-pending-grid-merged-delete-control",
+          "redline-pending-grid-omitted-insert",
+          "redline-pending-grid-omitted-insert-control",
+          "redline-pending-grid-omitted-delete",
+          "redline-pending-grid-omitted-delete-control",
+          "redline-pending-grid-merged-before-insert",
+          "redline-pending-grid-merged-before-insert-control",
+          "redline-pending-grid-merged-after-insert",
+          "redline-pending-grid-merged-after-insert-control",
+          "redline-block-insert-paragraph",
+          "redline-block-insert-paragraph-control",
+          "redline-block-insert-rule",
+          "redline-block-insert-rule-control",
+          "redline-block-insert-table",
+          "redline-block-insert-table-control",
+          "redline-mixed-run-tab-direct-before",
+          "redline-mixed-run-tab-direct-before-control",
+          "redline-mixed-run-tab-direct-across",
+          "redline-mixed-run-tab-direct-across-control",
+          "redline-mixed-run-tab-tracked-before",
+          "redline-mixed-run-tab-tracked-before-control",
+          "redline-mixed-run-tab-tracked-across",
+          "redline-mixed-run-tab-tracked-across-control",
+          "redline-mixed-run-br-direct-before",
+          "redline-mixed-run-br-direct-before-control",
+          "redline-mixed-run-br-direct-across",
+          "redline-mixed-run-br-direct-across-control",
+          "redline-mixed-run-br-tracked-before",
+          "redline-mixed-run-br-tracked-before-control",
+          "redline-mixed-run-br-tracked-across",
+          "redline-mixed-run-br-tracked-across-control",
+          "redline-column-gap-leading",
+          "redline-column-gap-leading-control",
+          "redline-column-gap-trailing",
+          "redline-column-gap-trailing-control",
+          "redline-column-gap-merged-reject",
+          "redline-column-gap-merged-reject-control",
+          "redline-column-gap-merged-accept",
+          "redline-column-gap-merged-accept-control",
+          "redline-revision-owner-namesake-account",
+          "redline-revision-owner-unattributed-name",
+          "redline-revision-owner-upn-alias",
+          "redline-revision-owner-object-id-alias",
+          "redline-revision-owner-legacy-name-control",
+          "redline-revision-owner-first-revision",
+          "redline-revision-owner-first-comment",
+          "redline-move-range-unsplit-control",
+          "redline-move-range-plain-tail-inside",
+          "redline-move-range-plain-between-move-elements",
+          "redline-move-range-split-destination",
+          "redline-move-range-plain-outside-control",
+          "redline-move-range-cross-paragraph-split",
+          "redline-hyperlink-mailto-recipients",
+          "redline-hyperlink-mailto-recipients-inserted",
+          "redline-hyperlink-mailto-single-control",
+          "redline-hyperlink-mailto-single-inserted-control",
+          "redline-package-typed-parts-control",
+          "redline-package-untyped-font",
+          "redline-package-generic-glossary",
+          "redline-package-shared-relationship-id",
+          "redline-visible-atom-tab",
+          "redline-visible-atom-tab-control",
+          "redline-visible-atom-br",
+          "redline-visible-atom-br-control",
+          "redline-visible-atom-cr",
+          "redline-visible-atom-cr-control",
+          "redline-visible-atom-page",
+          "redline-visible-atom-page-control",
+          "redline-visible-atom-column",
+          "redline-visible-atom-column-control",
+          "redline-visible-atom-ptab",
+          "redline-visible-atom-ptab-control",
+          "redline-visible-atom-nonbreaking-hyphen",
+          "redline-visible-atom-nonbreaking-hyphen-control",
+          "redline-visible-atom-soft-hyphen",
+          "redline-visible-atom-soft-hyphen-control",
+          "redline-visible-atom-symbol",
+          "redline-visible-atom-symbol-control",
+          "redline-visible-inline-xml",
+          "redline-visible-inline-xml-control",
+          "redline-control-rewrite-binding-echo",
+          "redline-control-rewrite-binding-echo-control",
+          "redline-control-rewrite-binding-outside",
+          "redline-control-rewrite-binding-outside-control",
+          "redline-control-rewrite-citation-echo",
+          "redline-control-rewrite-citation-echo-control",
+          "redline-control-rewrite-citation-outside",
+          "redline-control-rewrite-citation-outside-control",
+          "redline-control-rewrite-strike-break",
+          "redline-control-rewrite-strike-break-control",
+          "redline-control-rewrite-code-break",
+          "redline-control-rewrite-code-break-control",
+          "redline-control-rewrite-link-break",
+          "redline-control-rewrite-link-break-control",
+          "redline-moved-from-text",
+          "redline-moved-from-text-control",
+          "redline-moved-from-text-consolidate",
+          "redline-moved-from-text-consolidate-control",
+          "redline-tab-equation",
+          "redline-tab-equation-consolidate",
+          "redline-tab-equation-control",
+          "redline-tab-equation-consolidate-control",
+          "redline-field-source-text",
+          "redline-field-source-text-control",
+          "redline-captured-field-source",
+          "redline-captured-field-source-control",
+          "redline-shared-drawing-source",
+          "redline-shared-drawing-source-control",
+          "redline-textbox-geometry",
+          "redline-textbox-geometry-control",
+          "redline-composed-bookmark-remove",
+          "redline-composed-bookmark-remove-control",
+          "redline-composed-bookmark-add",
+          "redline-composed-bookmark-add-control",
+          "redline-textbox-marker-gap",
+          "redline-textbox-marker-gap-control"
+        ],
+        "id": "redline-v25",
+        "version": 25
+      },
+      "summary": {
+        "byKind": {
+          "control": {
+            "measured": 1,
+            "passed": 1
+          },
+          "reproducer": {
+            "measured": 1,
+            "passed": 1
+          }
+        },
+        "categoryMeans": {
+          "bookmarks": 100.0
+        },
+        "complete": false,
+        "libreofficeComparisons": {
+          "applicable": 2,
+          "total": 4
+        },
+        "measured": 2,
+        "passRate": 0.009259259259259259,
+        "required": 216,
+        "score": null
+      },
+      "track": "redline"
+    },
+    "authored": {
+      "resultSha256": "4dfbc71137582b085f936421584ae743f92ee4b763b542b2f3ef6bc267f10829",
+      "candidate": "authored-1428",
+      "cases": [
+        {
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "d0badc716c5ae4142de147b57772a0ed288c5aef01d6b3df9e960481aa01d3f9",
+            "status": "ok"
+          },
+          "category": "bookmarks",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 6
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/marker-gap-authored/redline-textbox-marker-gap/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 6
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap/right.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the independently authored whole textbox-carrier replacement"
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 6
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/marker-gap-authored/redline-textbox-marker-gap/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 6
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap/left.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "ineligible": true,
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the independently authored whole textbox-carrier replacement"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>",
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:120pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              },
+              "name": "assertion-inline-trees",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape><ns1:shape style=\"position:absolute;margin-left:120pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              },
+              "name": "assertion-inline-trees",
+              "passed": true
+            }
+          ],
+          "id": "redline-textbox-marker-gap",
+          "issue": "JSv4/Docxodus#1428",
+          "kind": "reproducer",
+          "operation": "compare",
+          "score": 100.0,
+          "status": "measured"
+        },
+        {
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "f4804182ba0574cdfb39d7b32d0c685ed0f26baa300ae1c696f2b27edca304a6",
+            "status": "ok"
+          },
+          "category": "bookmarks",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap-control/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/marker-gap-authored/redline-textbox-marker-gap-control/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap-control/right.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap-control/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/marker-gap-authored/redline-textbox-marker-gap-control/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap-control/left.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>",
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:120pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              },
+              "name": "assertion-inline-trees",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>",
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:120pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              },
+              "name": "assertion-inline-trees",
+              "passed": true
+            }
+          ],
+          "id": "redline-textbox-marker-gap-control",
+          "issue": "JSv4/Docxodus#1428",
+          "kind": "control",
+          "operation": "compare",
+          "score": 100.0,
+          "status": "measured"
+        }
+      ],
+      "contract": {
+        "adapter": {
+          "name": "authored"
+        },
+        "environment": {
+          "harness": {
+            "bench/lo_revisions.py": "a526eddb8c5022f7eb8f8feb8fbab9071b3781c87d3feae81cfc5712d1690482",
+            "bench/redline.py": "700b2e6b7a96739a7f9e2fc2e259b3abad15d482c138798e407dceae99be4769",
+            "bench/redline_build.py": "363879d820560519e8635fab08240100799cce2ba224e1169498eb209651c053",
+            "bench/revision_ownership.py": "d927496ce7af9e8ee41b48b32d4513e35e5bfd77eeeda41970a42201dac175fb",
+            "bench/revisions.py": "b2d13e3c58885c95c4fe75269bcda6fe6420afeef51be7f43278ce7aac94e701"
+          },
+          "libreoffice": {
+            "sha256": "adf468b45764b2abce53a7d91bbf3056b33f2734c5d5f628c075753e73903c43",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "libreofficePython": {
+            "sha256": "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e",
+            "version": "3.13.7"
+          },
+          "validator": {
+            "dotnet": "10.0.301",
+            "fileFormat": "Microsoft365",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/OoxmlValidator.dll": "adad1592a55ce757313b038b41ec6987b589dc5f8836a2ecf4ba121d8c5ed35c",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "package": "DocumentFormat.OpenXml 3.5.1"
+          }
+        },
+        "metric": {
+          "blockInsertion": "declared insertion outcomes require typed success, error, version change and undo availability",
+          "caseScore": "100 when every applicable mandatory check passes, otherwise 0",
+          "columnReview": "v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry",
+          "engines": [
+            "bench-markup",
+            "libreoffice-text"
+          ],
+          "hyperlinkTargets": "declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written",
+          "inlineTrees": "declared math and drawing subtrees retain structure, properties, textbox content and image bytes in both independently resolved views",
+          "libreofficeEligibility": "a LibreOffice comparison applies only when the authored redline passes it",
+          "paragraphRewrite": "public untracked whole-paragraph rewrites must preserve exact declared native content-control subtrees as well as independent semantic views",
+          "revisionOwnership": "account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips",
+          "revisionRegistry": "declared table operations must report the public registry count and match independent resolved table assertions",
+          "revisionText": "declared move sources and ordinary deletions must retain their appropriate text carrier",
+          "semanticPreflight": "declared identity cases must report zero changes at raw limits with and without the package supplement",
+          "spanEditing": "public span editing must preserve text and inline-marker order through both independent revision resolvers",
+          "suiteScore": "mean of category means over every required case",
+          "validity": "no OpenXmlValidator finding (id, part, description) occurs more often than in any input, and the output opens: a Package_Open finding in the output always fails, whatever the inputs did",
+          "version": 14,
+          "view": 1
+        },
+        "suiteDigest": "e63e90bf367c1467bfe8ab7012eacb1f4f3ed3221089dcb839a2f4c080973b07"
+      },
+      "contractDigest": "6fe1ab49edb9a5eb65b759345e8cdf45d96574733b4ddd0c6dfacfa92c7474dc",
+      "schema": 1,
+      "suite": {
+        "cases": [
+          "redline-field-result-beside-edit",
+          "redline-field-result-end-control",
+          "redline-field-result-tab-control",
+          "redline-field-toc-page-numbers",
+          "redline-field-toc-entry-retitled-control",
+          "redline-field-toc-page-number-control",
+          "redline-field-shared-end-append",
+          "redline-field-shared-end-trim",
+          "redline-field-shared-end-control",
+          "redline-field-close-open-sdt",
+          "redline-field-close-open-body",
+          "redline-field-close-open-sdt-control",
+          "redline-comment-straddles-sdt",
+          "redline-comment-straddles-sdt-control",
+          "redline-comment-straddles-customxml",
+          "redline-comment-straddles-customxml-control",
+          "redline-comment-para-id-collision",
+          "redline-wrapper-para-id-copies",
+          "redline-comment-para-id-control",
+          "redline-header-bookmark-only",
+          "redline-body-bookmark-only-control",
+          "redline-bookmark-end-after-replaced-word",
+          "redline-bookmark-end-after-replaced-word-control",
+          "redline-bookmark-between-blocks-fold-text",
+          "redline-bookmark-between-blocks-fold-text-control",
+          "redline-bookmark-between-blocks-fold-table",
+          "redline-bookmark-between-blocks-fold-table-control",
+          "redline-style-id-cross-type",
+          "redline-style-id-same-type-control",
+          "redline-reject-customxml",
+          "redline-reject-math",
+          "redline-reject-ruby",
+          "redline-reject-direct-control",
+          "redline-consolidate-cell-bookmark",
+          "redline-consolidate-cell-text-control",
+          "redline-boundary-bookmark-compare-tbl",
+          "redline-boundary-bookmark-compare-tr",
+          "redline-boundary-bookmark-compare-paragraph-control",
+          "redline-boundary-bookmark-consolidate-tbl",
+          "redline-boundary-bookmark-consolidate-tr",
+          "redline-boundary-bookmark-consolidate-paragraph-control",
+          "redline-identity-bytes",
+          "redline-identity-reserialized",
+          "redline-inline-customxml",
+          "redline-inline-hyperlink-control",
+          "redline-comment-add-customxml",
+          "redline-comment-remove-sdt",
+          "redline-comment-wrapper-control",
+          "redline-reviewer-added-comment",
+          "redline-reviewer-comment-control",
+          "redline-duplicate-comment-sdt",
+          "redline-duplicate-comment-sdt-control",
+          "redline-duplicate-comment-customxml",
+          "redline-duplicate-comment-customxml-control",
+          "redline-consolidated-field-result-edit",
+          "redline-consolidated-field-prefix-delete",
+          "redline-consolidated-field-bookmark-added",
+          "redline-consolidated-field-plain-control",
+          "redline-comment-identity-reused-id",
+          "redline-comment-identity-replaced-id",
+          "redline-comment-identity-distinct-control",
+          "redline-comment-identity-reviewer-collision",
+          "redline-comment-identity-reviewer-identical",
+          "redline-comment-identity-reviewer-control",
+          "redline-removed-comment-body-edited",
+          "redline-removed-comment-body-unchanged-control",
+          "redline-consolidated-note-prefix",
+          "redline-consolidated-note-suffix-control",
+          "redline-reviewer-bookmark-paragraph-edited",
+          "redline-reviewer-bookmark-paragraph-outside-control",
+          "redline-reviewer-bookmark-sdt-edited",
+          "redline-reviewer-bookmark-sdt-outside-control",
+          "redline-reviewer-bookmark-cell-edited",
+          "redline-reviewer-bookmark-cell-outside-control",
+          "redline-reviewer-bookmark-move-and-remove",
+          "redline-reviewer-bookmark-single-remove-control",
+          "redline-bookmark-name-block-position",
+          "redline-bookmark-name-mixed-position",
+          "redline-bookmark-name-inline-extent",
+          "redline-bookmark-name-consensus-control",
+          "redline-comment-reply-id-less-root",
+          "redline-comment-reply-renumbered-root",
+          "redline-comment-reply-root-para-id-control",
+          "redline-semantic-raw-limits-strict",
+          "redline-semantic-raw-limits-transitional-control",
+          "redline-table-column-widths-full",
+          "redline-table-column-widths-full-untracked-control",
+          "redline-table-column-widths-partial",
+          "redline-table-column-widths-partial-untracked-control",
+          "redline-pending-grid-plain-insert",
+          "redline-pending-grid-plain-insert-control",
+          "redline-pending-grid-plain-delete",
+          "redline-pending-grid-plain-delete-control",
+          "redline-pending-grid-no-op-insert",
+          "redline-pending-grid-no-op-insert-control",
+          "redline-pending-grid-no-op-delete",
+          "redline-pending-grid-no-op-delete-control",
+          "redline-pending-grid-merged-insert",
+          "redline-pending-grid-merged-insert-control",
+          "redline-pending-grid-merged-delete",
+          "redline-pending-grid-merged-delete-control",
+          "redline-pending-grid-omitted-insert",
+          "redline-pending-grid-omitted-insert-control",
+          "redline-pending-grid-omitted-delete",
+          "redline-pending-grid-omitted-delete-control",
+          "redline-pending-grid-merged-before-insert",
+          "redline-pending-grid-merged-before-insert-control",
+          "redline-pending-grid-merged-after-insert",
+          "redline-pending-grid-merged-after-insert-control",
+          "redline-block-insert-paragraph",
+          "redline-block-insert-paragraph-control",
+          "redline-block-insert-rule",
+          "redline-block-insert-rule-control",
+          "redline-block-insert-table",
+          "redline-block-insert-table-control",
+          "redline-mixed-run-tab-direct-before",
+          "redline-mixed-run-tab-direct-before-control",
+          "redline-mixed-run-tab-direct-across",
+          "redline-mixed-run-tab-direct-across-control",
+          "redline-mixed-run-tab-tracked-before",
+          "redline-mixed-run-tab-tracked-before-control",
+          "redline-mixed-run-tab-tracked-across",
+          "redline-mixed-run-tab-tracked-across-control",
+          "redline-mixed-run-br-direct-before",
+          "redline-mixed-run-br-direct-before-control",
+          "redline-mixed-run-br-direct-across",
+          "redline-mixed-run-br-direct-across-control",
+          "redline-mixed-run-br-tracked-before",
+          "redline-mixed-run-br-tracked-before-control",
+          "redline-mixed-run-br-tracked-across",
+          "redline-mixed-run-br-tracked-across-control",
+          "redline-column-gap-leading",
+          "redline-column-gap-leading-control",
+          "redline-column-gap-trailing",
+          "redline-column-gap-trailing-control",
+          "redline-column-gap-merged-reject",
+          "redline-column-gap-merged-reject-control",
+          "redline-column-gap-merged-accept",
+          "redline-column-gap-merged-accept-control",
+          "redline-revision-owner-namesake-account",
+          "redline-revision-owner-unattributed-name",
+          "redline-revision-owner-upn-alias",
+          "redline-revision-owner-object-id-alias",
+          "redline-revision-owner-legacy-name-control",
+          "redline-revision-owner-first-revision",
+          "redline-revision-owner-first-comment",
+          "redline-move-range-unsplit-control",
+          "redline-move-range-plain-tail-inside",
+          "redline-move-range-plain-between-move-elements",
+          "redline-move-range-split-destination",
+          "redline-move-range-plain-outside-control",
+          "redline-move-range-cross-paragraph-split",
+          "redline-hyperlink-mailto-recipients",
+          "redline-hyperlink-mailto-recipients-inserted",
+          "redline-hyperlink-mailto-single-control",
+          "redline-hyperlink-mailto-single-inserted-control",
+          "redline-package-typed-parts-control",
+          "redline-package-untyped-font",
+          "redline-package-generic-glossary",
+          "redline-package-shared-relationship-id",
+          "redline-visible-atom-tab",
+          "redline-visible-atom-tab-control",
+          "redline-visible-atom-br",
+          "redline-visible-atom-br-control",
+          "redline-visible-atom-cr",
+          "redline-visible-atom-cr-control",
+          "redline-visible-atom-page",
+          "redline-visible-atom-page-control",
+          "redline-visible-atom-column",
+          "redline-visible-atom-column-control",
+          "redline-visible-atom-ptab",
+          "redline-visible-atom-ptab-control",
+          "redline-visible-atom-nonbreaking-hyphen",
+          "redline-visible-atom-nonbreaking-hyphen-control",
+          "redline-visible-atom-soft-hyphen",
+          "redline-visible-atom-soft-hyphen-control",
+          "redline-visible-atom-symbol",
+          "redline-visible-atom-symbol-control",
+          "redline-visible-inline-xml",
+          "redline-visible-inline-xml-control",
+          "redline-control-rewrite-binding-echo",
+          "redline-control-rewrite-binding-echo-control",
+          "redline-control-rewrite-binding-outside",
+          "redline-control-rewrite-binding-outside-control",
+          "redline-control-rewrite-citation-echo",
+          "redline-control-rewrite-citation-echo-control",
+          "redline-control-rewrite-citation-outside",
+          "redline-control-rewrite-citation-outside-control",
+          "redline-control-rewrite-strike-break",
+          "redline-control-rewrite-strike-break-control",
+          "redline-control-rewrite-code-break",
+          "redline-control-rewrite-code-break-control",
+          "redline-control-rewrite-link-break",
+          "redline-control-rewrite-link-break-control",
+          "redline-moved-from-text",
+          "redline-moved-from-text-control",
+          "redline-moved-from-text-consolidate",
+          "redline-moved-from-text-consolidate-control",
+          "redline-tab-equation",
+          "redline-tab-equation-consolidate",
+          "redline-tab-equation-control",
+          "redline-tab-equation-consolidate-control",
+          "redline-field-source-text",
+          "redline-field-source-text-control",
+          "redline-captured-field-source",
+          "redline-captured-field-source-control",
+          "redline-shared-drawing-source",
+          "redline-shared-drawing-source-control",
+          "redline-textbox-geometry",
+          "redline-textbox-geometry-control",
+          "redline-composed-bookmark-remove",
+          "redline-composed-bookmark-remove-control",
+          "redline-composed-bookmark-add",
+          "redline-composed-bookmark-add-control",
+          "redline-textbox-marker-gap",
+          "redline-textbox-marker-gap-control"
+        ],
+        "id": "redline-v25",
+        "version": 25
+      },
+      "summary": {
+        "byKind": {
+          "control": {
+            "measured": 1,
+            "passed": 1
+          },
+          "reproducer": {
+            "measured": 1,
+            "passed": 1
+          }
+        },
+        "categoryMeans": {
+          "bookmarks": 100.0
+        },
+        "complete": false,
+        "libreofficeComparisons": {
+          "applicable": 2,
+          "total": 4
+        },
+        "measured": 2,
+        "passRate": 0.009259259259259259,
+        "required": 216,
+        "score": null
+      },
+      "track": "redline"
+    },
+    "initialCalibration": {
+      "resultSha256": "9da0b9e15f00fc4023ab4c5842315f4f1ed06197c88b4feb03c6246bfdb48962",
+      "candidate": "authored-1428",
+      "cases": [
+        {
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "d0badc716c5ae4142de147b57772a0ed288c5aef01d6b3df9e960481aa01d3f9",
+            "status": "ok"
+          },
+          "category": "bookmarks",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "calibration": {
+                "diff": [
+                  "--- expected",
+                  "+++ actual",
+                  "@@ -1,2 +1,4 @@",
+                  " story|body",
+                  "+p|body",
+                  "+t|",
+                  " p|body"
+                ],
+                "similarity": 0.8333333333333334
+              },
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 6
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/marker-gap-authored-initial/redline-textbox-marker-gap/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 6
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap/right.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "reason": "LibreOffice calibration does not match the declared eligibility"
+            },
+            {
+              "calibration": {
+                "diff": [
+                  "--- expected",
+                  "+++ actual",
+                  "@@ -4,2 +4,4 @@",
+                  " p|body",
+                  "+t|",
+                  "+p|body",
+                  " t|Closing line remains unchanged."
+                ],
+                "similarity": 0.8333333333333334
+              },
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 6
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/marker-gap-authored-initial/redline-textbox-marker-gap/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 6
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap/left.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "reason": "LibreOffice calibration does not match the declared eligibility"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>",
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:120pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              },
+              "name": "assertion-inline-trees",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape><ns1:shape style=\"position:absolute;margin-left:120pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              },
+              "name": "assertion-inline-trees",
+              "passed": true
+            }
+          ],
+          "error": "ValueError: A required measurement is unavailable: libreoffice-accepted, libreoffice-rejected",
+          "id": "redline-textbox-marker-gap",
+          "issue": "JSv4/Docxodus#1428",
+          "kind": "reproducer",
+          "operation": "compare",
+          "status": "unmeasured"
+        },
+        {
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "f4804182ba0574cdfb39d7b32d0c685ed0f26baa300ae1c696f2b27edca304a6",
+            "status": "ok"
+          },
+          "category": "bookmarks",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap-control/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/marker-gap-authored-initial/redline-textbox-marker-gap-control/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap-control/right.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap-control/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/marker-gap-authored-initial/redline-textbox-marker-gap-control/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 2
+                },
+                "expected": {
+                  "input": "/home/jman/Code/Docxodus/.local-closeout/bench-1445/fixtures/redline/redline-textbox-marker-gap-control/left.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>",
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:120pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              },
+              "name": "assertion-inline-trees",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>",
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:120pt;margin-top:18pt;width:90pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Spruce second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              },
+              "name": "assertion-inline-trees",
+              "passed": true
+            }
+          ],
+          "id": "redline-textbox-marker-gap-control",
+          "issue": "JSv4/Docxodus#1428",
+          "kind": "control",
+          "operation": "compare",
+          "score": 100.0,
+          "status": "measured"
+        }
+      ],
+      "contract": {
+        "adapter": {
+          "name": "authored"
+        },
+        "environment": {
+          "harness": {
+            "bench/lo_revisions.py": "a526eddb8c5022f7eb8f8feb8fbab9071b3781c87d3feae81cfc5712d1690482",
+            "bench/redline.py": "700b2e6b7a96739a7f9e2fc2e259b3abad15d482c138798e407dceae99be4769",
+            "bench/redline_build.py": "363879d820560519e8635fab08240100799cce2ba224e1169498eb209651c053",
+            "bench/revision_ownership.py": "d927496ce7af9e8ee41b48b32d4513e35e5bfd77eeeda41970a42201dac175fb",
+            "bench/revisions.py": "b2d13e3c58885c95c4fe75269bcda6fe6420afeef51be7f43278ce7aac94e701"
+          },
+          "libreoffice": {
+            "sha256": "adf468b45764b2abce53a7d91bbf3056b33f2734c5d5f628c075753e73903c43",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "libreofficePython": {
+            "sha256": "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e",
+            "version": "3.13.7"
+          },
+          "validator": {
+            "dotnet": "10.0.301",
+            "fileFormat": "Microsoft365",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/OoxmlValidator.dll": "adad1592a55ce757313b038b41ec6987b589dc5f8836a2ecf4ba121d8c5ed35c",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "package": "DocumentFormat.OpenXml 3.5.1"
+          }
+        },
+        "metric": {
+          "blockInsertion": "declared insertion outcomes require typed success, error, version change and undo availability",
+          "caseScore": "100 when every applicable mandatory check passes, otherwise 0",
+          "columnReview": "v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry",
+          "engines": [
+            "bench-markup",
+            "libreoffice-text"
+          ],
+          "hyperlinkTargets": "declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written",
+          "inlineTrees": "declared math and drawing subtrees retain structure, properties, textbox content and image bytes in both independently resolved views",
+          "libreofficeEligibility": "a LibreOffice comparison applies only when the authored redline passes it",
+          "paragraphRewrite": "public untracked whole-paragraph rewrites must preserve exact declared native content-control subtrees as well as independent semantic views",
+          "revisionOwnership": "account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips",
+          "revisionRegistry": "declared table operations must report the public registry count and match independent resolved table assertions",
+          "revisionText": "declared move sources and ordinary deletions must retain their appropriate text carrier",
+          "semanticPreflight": "declared identity cases must report zero changes at raw limits with and without the package supplement",
+          "spanEditing": "public span editing must preserve text and inline-marker order through both independent revision resolvers",
+          "suiteScore": "mean of category means over every required case",
+          "validity": "no OpenXmlValidator finding (id, part, description) occurs more often than in any input, and the output opens: a Package_Open finding in the output always fails, whatever the inputs did",
+          "version": 14,
+          "view": 1
+        },
+        "suiteDigest": "3ef8a453d3e1ac2ca09bd95fb38782ab349f3a0ccd533bb9495b365e46db1bbc"
+      },
+      "contractDigest": "bd79461e2d90cf7c2f543d887f5b0513aac2489b961fbb204c91c974f8f33661",
+      "schema": 1,
+      "suite": {
+        "cases": [
+          "redline-field-result-beside-edit",
+          "redline-field-result-end-control",
+          "redline-field-result-tab-control",
+          "redline-field-toc-page-numbers",
+          "redline-field-toc-entry-retitled-control",
+          "redline-field-toc-page-number-control",
+          "redline-field-shared-end-append",
+          "redline-field-shared-end-trim",
+          "redline-field-shared-end-control",
+          "redline-field-close-open-sdt",
+          "redline-field-close-open-body",
+          "redline-field-close-open-sdt-control",
+          "redline-comment-straddles-sdt",
+          "redline-comment-straddles-sdt-control",
+          "redline-comment-straddles-customxml",
+          "redline-comment-straddles-customxml-control",
+          "redline-comment-para-id-collision",
+          "redline-wrapper-para-id-copies",
+          "redline-comment-para-id-control",
+          "redline-header-bookmark-only",
+          "redline-body-bookmark-only-control",
+          "redline-bookmark-end-after-replaced-word",
+          "redline-bookmark-end-after-replaced-word-control",
+          "redline-bookmark-between-blocks-fold-text",
+          "redline-bookmark-between-blocks-fold-text-control",
+          "redline-bookmark-between-blocks-fold-table",
+          "redline-bookmark-between-blocks-fold-table-control",
+          "redline-style-id-cross-type",
+          "redline-style-id-same-type-control",
+          "redline-reject-customxml",
+          "redline-reject-math",
+          "redline-reject-ruby",
+          "redline-reject-direct-control",
+          "redline-consolidate-cell-bookmark",
+          "redline-consolidate-cell-text-control",
+          "redline-boundary-bookmark-compare-tbl",
+          "redline-boundary-bookmark-compare-tr",
+          "redline-boundary-bookmark-compare-paragraph-control",
+          "redline-boundary-bookmark-consolidate-tbl",
+          "redline-boundary-bookmark-consolidate-tr",
+          "redline-boundary-bookmark-consolidate-paragraph-control",
+          "redline-identity-bytes",
+          "redline-identity-reserialized",
+          "redline-inline-customxml",
+          "redline-inline-hyperlink-control",
+          "redline-comment-add-customxml",
+          "redline-comment-remove-sdt",
+          "redline-comment-wrapper-control",
+          "redline-reviewer-added-comment",
+          "redline-reviewer-comment-control",
+          "redline-duplicate-comment-sdt",
+          "redline-duplicate-comment-sdt-control",
+          "redline-duplicate-comment-customxml",
+          "redline-duplicate-comment-customxml-control",
+          "redline-consolidated-field-result-edit",
+          "redline-consolidated-field-prefix-delete",
+          "redline-consolidated-field-bookmark-added",
+          "redline-consolidated-field-plain-control",
+          "redline-comment-identity-reused-id",
+          "redline-comment-identity-replaced-id",
+          "redline-comment-identity-distinct-control",
+          "redline-comment-identity-reviewer-collision",
+          "redline-comment-identity-reviewer-identical",
+          "redline-comment-identity-reviewer-control",
+          "redline-removed-comment-body-edited",
+          "redline-removed-comment-body-unchanged-control",
+          "redline-consolidated-note-prefix",
+          "redline-consolidated-note-suffix-control",
+          "redline-reviewer-bookmark-paragraph-edited",
+          "redline-reviewer-bookmark-paragraph-outside-control",
+          "redline-reviewer-bookmark-sdt-edited",
+          "redline-reviewer-bookmark-sdt-outside-control",
+          "redline-reviewer-bookmark-cell-edited",
+          "redline-reviewer-bookmark-cell-outside-control",
+          "redline-reviewer-bookmark-move-and-remove",
+          "redline-reviewer-bookmark-single-remove-control",
+          "redline-bookmark-name-block-position",
+          "redline-bookmark-name-mixed-position",
+          "redline-bookmark-name-inline-extent",
+          "redline-bookmark-name-consensus-control",
+          "redline-comment-reply-id-less-root",
+          "redline-comment-reply-renumbered-root",
+          "redline-comment-reply-root-para-id-control",
+          "redline-semantic-raw-limits-strict",
+          "redline-semantic-raw-limits-transitional-control",
+          "redline-table-column-widths-full",
+          "redline-table-column-widths-full-untracked-control",
+          "redline-table-column-widths-partial",
+          "redline-table-column-widths-partial-untracked-control",
+          "redline-pending-grid-plain-insert",
+          "redline-pending-grid-plain-insert-control",
+          "redline-pending-grid-plain-delete",
+          "redline-pending-grid-plain-delete-control",
+          "redline-pending-grid-no-op-insert",
+          "redline-pending-grid-no-op-insert-control",
+          "redline-pending-grid-no-op-delete",
+          "redline-pending-grid-no-op-delete-control",
+          "redline-pending-grid-merged-insert",
+          "redline-pending-grid-merged-insert-control",
+          "redline-pending-grid-merged-delete",
+          "redline-pending-grid-merged-delete-control",
+          "redline-pending-grid-omitted-insert",
+          "redline-pending-grid-omitted-insert-control",
+          "redline-pending-grid-omitted-delete",
+          "redline-pending-grid-omitted-delete-control",
+          "redline-pending-grid-merged-before-insert",
+          "redline-pending-grid-merged-before-insert-control",
+          "redline-pending-grid-merged-after-insert",
+          "redline-pending-grid-merged-after-insert-control",
+          "redline-block-insert-paragraph",
+          "redline-block-insert-paragraph-control",
+          "redline-block-insert-rule",
+          "redline-block-insert-rule-control",
+          "redline-block-insert-table",
+          "redline-block-insert-table-control",
+          "redline-mixed-run-tab-direct-before",
+          "redline-mixed-run-tab-direct-before-control",
+          "redline-mixed-run-tab-direct-across",
+          "redline-mixed-run-tab-direct-across-control",
+          "redline-mixed-run-tab-tracked-before",
+          "redline-mixed-run-tab-tracked-before-control",
+          "redline-mixed-run-tab-tracked-across",
+          "redline-mixed-run-tab-tracked-across-control",
+          "redline-mixed-run-br-direct-before",
+          "redline-mixed-run-br-direct-before-control",
+          "redline-mixed-run-br-direct-across",
+          "redline-mixed-run-br-direct-across-control",
+          "redline-mixed-run-br-tracked-before",
+          "redline-mixed-run-br-tracked-before-control",
+          "redline-mixed-run-br-tracked-across",
+          "redline-mixed-run-br-tracked-across-control",
+          "redline-column-gap-leading",
+          "redline-column-gap-leading-control",
+          "redline-column-gap-trailing",
+          "redline-column-gap-trailing-control",
+          "redline-column-gap-merged-reject",
+          "redline-column-gap-merged-reject-control",
+          "redline-column-gap-merged-accept",
+          "redline-column-gap-merged-accept-control",
+          "redline-revision-owner-namesake-account",
+          "redline-revision-owner-unattributed-name",
+          "redline-revision-owner-upn-alias",
+          "redline-revision-owner-object-id-alias",
+          "redline-revision-owner-legacy-name-control",
+          "redline-revision-owner-first-revision",
+          "redline-revision-owner-first-comment",
+          "redline-move-range-unsplit-control",
+          "redline-move-range-plain-tail-inside",
+          "redline-move-range-plain-between-move-elements",
+          "redline-move-range-split-destination",
+          "redline-move-range-plain-outside-control",
+          "redline-move-range-cross-paragraph-split",
+          "redline-hyperlink-mailto-recipients",
+          "redline-hyperlink-mailto-recipients-inserted",
+          "redline-hyperlink-mailto-single-control",
+          "redline-hyperlink-mailto-single-inserted-control",
+          "redline-package-typed-parts-control",
+          "redline-package-untyped-font",
+          "redline-package-generic-glossary",
+          "redline-package-shared-relationship-id",
+          "redline-visible-atom-tab",
+          "redline-visible-atom-tab-control",
+          "redline-visible-atom-br",
+          "redline-visible-atom-br-control",
+          "redline-visible-atom-cr",
+          "redline-visible-atom-cr-control",
+          "redline-visible-atom-page",
+          "redline-visible-atom-page-control",
+          "redline-visible-atom-column",
+          "redline-visible-atom-column-control",
+          "redline-visible-atom-ptab",
+          "redline-visible-atom-ptab-control",
+          "redline-visible-atom-nonbreaking-hyphen",
+          "redline-visible-atom-nonbreaking-hyphen-control",
+          "redline-visible-atom-soft-hyphen",
+          "redline-visible-atom-soft-hyphen-control",
+          "redline-visible-atom-symbol",
+          "redline-visible-atom-symbol-control",
+          "redline-visible-inline-xml",
+          "redline-visible-inline-xml-control",
+          "redline-control-rewrite-binding-echo",
+          "redline-control-rewrite-binding-echo-control",
+          "redline-control-rewrite-binding-outside",
+          "redline-control-rewrite-binding-outside-control",
+          "redline-control-rewrite-citation-echo",
+          "redline-control-rewrite-citation-echo-control",
+          "redline-control-rewrite-citation-outside",
+          "redline-control-rewrite-citation-outside-control",
+          "redline-control-rewrite-strike-break",
+          "redline-control-rewrite-strike-break-control",
+          "redline-control-rewrite-code-break",
+          "redline-control-rewrite-code-break-control",
+          "redline-control-rewrite-link-break",
+          "redline-control-rewrite-link-break-control",
+          "redline-moved-from-text",
+          "redline-moved-from-text-control",
+          "redline-moved-from-text-consolidate",
+          "redline-moved-from-text-consolidate-control",
+          "redline-tab-equation",
+          "redline-tab-equation-consolidate",
+          "redline-tab-equation-control",
+          "redline-tab-equation-consolidate-control",
+          "redline-field-source-text",
+          "redline-field-source-text-control",
+          "redline-captured-field-source",
+          "redline-captured-field-source-control",
+          "redline-shared-drawing-source",
+          "redline-shared-drawing-source-control",
+          "redline-textbox-geometry",
+          "redline-textbox-geometry-control",
+          "redline-composed-bookmark-remove",
+          "redline-composed-bookmark-remove-control",
+          "redline-composed-bookmark-add",
+          "redline-composed-bookmark-add-control",
+          "redline-textbox-marker-gap",
+          "redline-textbox-marker-gap-control"
+        ],
+        "id": "redline-v25",
+        "version": 25
+      },
+      "summary": {
+        "byKind": {
+          "control": {
+            "measured": 1,
+            "passed": 1
+          }
+        },
+        "categoryMeans": {
+          "bookmarks": 100.0
+        },
+        "complete": false,
+        "libreofficeComparisons": {
+          "applicable": 2,
+          "total": 2
+        },
+        "measured": 1,
+        "passRate": 0.004629629629629629,
+        "required": 216,
+        "score": null
+      },
+      "track": "redline"
+    }
+  }
+}

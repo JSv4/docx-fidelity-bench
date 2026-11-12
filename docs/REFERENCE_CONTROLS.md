@@ -70,6 +70,29 @@ How Word itself paginates this merge is not yet adjudicated. When a Word capture
 
 `paragraph-mark-hidden-run-in-keep-control` is the authored control: the same document with no keepNext or keepLines on the headings, where both readings agree. The **`run-in-heading-keep-removed-v1`** proof requires every hidden-mark paragraph in the original to carry plain keepNext and keepLines, and the control to differ only by their removal. Every other package part, the tokens, the assertions, the fonts and the profile must match. The reference therefore rests on the specified behaviour. Word adjudication is pending.
 
+## EMF frame overflow (Docxodus #1554)
+
+`images-emf-stock` and `images-emf-wide-stock` use original static EMF rectangles.
+Their MM_TEXT device mapping places the rectangle beyond the physical Frame. Frame
+establishes the mapping; the EMF records do not establish a clipping region. LibreOffice
+25.8.7.3 clips these drawings at the VML picture boundary. At the ordinary width, its
+blue fill stops at X=168pt and Y=162pt; the records place the rectangle's right and
+bottom edges at 182.4pt and 171.6pt. The direct captures are retained.
+
+The `expanded-stock` and `expanded-wide-stock` controls expand Frame from 2400×1800
+to 3000×2250 hundredths of a millimeter, and the anchored picture from 96×72pt to
+120×90pt (144×72pt to 180×90pt for the wide pair). Both dimensions increase by 5/4,
+so each coordinate retains exactly the same physical position. The larger viewport
+contains all paint. The `emf-frame-and-picture-expanded-v1` proof allows only these
+Frame fields and picture dimensions to change. It requires the fixed page origin,
+compares every remaining EMF byte, every other XML node and every package part,
+and preserves the tokens, assertions, fonts, category and profile.
+
+This reference checks record geometry and visible overflow. **Word adjudication is
+pending.** It does not claim Word's printer hairline thickness: Docxodus's browser
+playback uses a one-CSS-pixel cosmetic stroke. Color checks measure the blue interior;
+the black cosmetic outline is excluded.
+
 ## Register the paired captures
 
 First capture every original input with the existing command. Then derive a separately named reference track from that immutable bundle:

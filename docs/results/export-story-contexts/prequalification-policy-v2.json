@@ -1,0 +1,351 @@
+{
+  "schema": 1,
+  "status": "unscored-warning-and-strict-policy-diagnostics",
+  "candidate": "a5ae28c88617f5c405ce575d5f8b10f828d8b6c9",
+  "sourceTree": "eab4aa9cd1d154bdd708dc42abf3fa879a789c90",
+  "buildIdentitySha256": "12f73c17b3a84c254a3fb6ddaf07e75fdb7f2c3f652c3444d99b4be73c3c6a8e",
+  "manifestSha256": "6700abe207ffa19a35e0779d453e3d90cac0f2b7d97d4ac2e61ab7394da112b1",
+  "rulesSha256": "8ea3be25dc09fd3bd98151d0139abe0ba9837967ccb012293f39f1c67884c3d3",
+  "browserVersion": "155.0.8059.84",
+  "executableSha256": "cb19b59995072b86cc7f887b3b1c7ab1f63518a7f2ed9f0d33249e1a040e2c76",
+  "sandbox": true,
+  "fontContract": {
+    "LiberationSerif-Regular.ttf": {
+      "family": "Liberation Serif",
+      "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+    },
+    "LiberationSerif-Bold.ttf": {
+      "family": "Liberation Serif",
+      "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+    },
+    "LiberationSerif-Italic.ttf": {
+      "family": "Liberation Serif",
+      "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+    },
+    "LiberationSerif-BoldItalic.ttf": {
+      "family": "Liberation Serif",
+      "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+    }
+  },
+  "verifiedFontFiles": [
+    {
+      "name": "LiberationSerif-Regular.ttf",
+      "family": "Liberation Serif",
+      "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+    },
+    {
+      "name": "LiberationSerif-Bold.ttf",
+      "family": "Liberation Serif",
+      "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+    },
+    {
+      "name": "LiberationSerif-Italic.ttf",
+      "family": "Liberation Serif",
+      "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+    },
+    {
+      "name": "LiberationSerif-BoldItalic.ttf",
+      "family": "Liberation Serif",
+      "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+    }
+  ],
+  "captureToolSha256": "af7cb74bc8bbb2b31f6350922ad14a7025f9476cfc76268ad2102304a4e629a1",
+  "note": "Default PDF content is checked separately. These assertions inspect declared warning counts and strict-policy outcomes; they produce no fidelity score.",
+  "cases": [
+    {
+      "id": "export-story-context-shape-clearance-front-fitting-control",
+      "inputSha256": "f2e95c8c8daca0b5193c5ac9b1a00e9d5548a2ff6191b70a75c42de78aebd307",
+      "expectedWarning": "drawing_clearance_relaxed",
+      "expectedWarningCount": 0,
+      "expectedStrict": "delivered",
+      "defaultStatus": "delivered",
+      "defaultRenderReportSha256": "799a26cfdd2e7403837ebd9a226bf04d64e70541ac80de94fad5ade0daa1f493",
+      "defaultVerifiedFonts": [
+        {
+          "resolvedFamily": "Liberation Serif",
+          "resolvedFace": "LiberationSerif",
+          "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        }
+      ],
+      "warningCodes": [
+        "unsupported_content_placeholder"
+      ],
+      "warningCheckPassed": false,
+      "strictResult": {
+        "status": "rejected",
+        "code": "resource_policy_failure",
+        "phase": "docx_conversion",
+        "message": "Other is represented by a visible placeholder."
+      },
+      "strictCheckPassed": false,
+      "passed": false
+    },
+    {
+      "id": "export-story-context-shape-clearance-front-oversized",
+      "inputSha256": "3057705b9fe46558bebc655772d32c7d08b9685200154c80b55f8b967b57d4a3",
+      "expectedWarning": "drawing_clearance_relaxed",
+      "expectedWarningCount": 1,
+      "expectedStrict": "rejected",
+      "defaultStatus": "delivered",
+      "defaultRenderReportSha256": "6049e90114cb5096ee8408e6fa436bf1370f91f588d8cc4b73aaec3958e4e0dd",
+      "defaultVerifiedFonts": [
+        {
+          "resolvedFamily": "Liberation Serif",
+          "resolvedFace": "LiberationSerif",
+          "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        }
+      ],
+      "warningCodes": [
+        "unsupported_content_placeholder",
+        "drawing_clearance_relaxed"
+      ],
+      "warningCheckPassed": false,
+      "strictResult": {
+        "status": "rejected",
+        "code": "resource_policy_failure",
+        "phase": "docx_conversion",
+        "message": "Other is represented by a visible placeholder."
+      },
+      "strictCheckPassed": false,
+      "passed": false
+    },
+    {
+      "id": "export-story-context-shape-clearance-behind-fitting-control",
+      "inputSha256": "9560fd516bf377fd0542992b33b83008223f6e6b9866643664b8c922ffe202ed",
+      "expectedWarning": "drawing_clearance_relaxed",
+      "expectedWarningCount": 0,
+      "expectedStrict": "delivered",
+      "defaultStatus": "delivered",
+      "defaultRenderReportSha256": "cf10daa87ef1a02db12430cf6555608ad751e7939a05f8f0ba1a1b94fc843470",
+      "defaultVerifiedFonts": [
+        {
+          "resolvedFamily": "Liberation Serif",
+          "resolvedFace": "LiberationSerif",
+          "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        }
+      ],
+      "warningCodes": [
+        "unsupported_content_placeholder"
+      ],
+      "warningCheckPassed": false,
+      "strictResult": {
+        "status": "rejected",
+        "code": "resource_policy_failure",
+        "phase": "docx_conversion",
+        "message": "Other is represented by a visible placeholder."
+      },
+      "strictCheckPassed": false,
+      "passed": false
+    },
+    {
+      "id": "export-story-context-shape-clearance-behind-oversized",
+      "inputSha256": "67001ef204d3c0463ff9ab37ec01dab9a2234bb48334557306b5b11eeac930cc",
+      "expectedWarning": "drawing_clearance_relaxed",
+      "expectedWarningCount": 1,
+      "expectedStrict": "rejected",
+      "defaultStatus": "delivered",
+      "defaultRenderReportSha256": "a86a77a964726c18142259a362d967c42227a52f78a417c70b2afb9bb46125d3",
+      "defaultVerifiedFonts": [
+        {
+          "resolvedFamily": "Liberation Serif",
+          "resolvedFace": "LiberationSerif",
+          "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        }
+      ],
+      "warningCodes": [
+        "unsupported_content_placeholder",
+        "drawing_clearance_relaxed"
+      ],
+      "warningCheckPassed": false,
+      "strictResult": {
+        "status": "rejected",
+        "code": "resource_policy_failure",
+        "phase": "docx_conversion",
+        "message": "Other is represented by a visible placeholder."
+      },
+      "strictCheckPassed": false,
+      "passed": false
+    },
+    {
+      "id": "export-story-context-source-clip-drawingml-visible-control",
+      "inputSha256": "4878e7a70ebd94dca1bb7f1ec1283911670ab904fc3f42cd655b263456df1808",
+      "expectedWarning": "source_text_clipped",
+      "expectedWarningCount": 0,
+      "expectedStrict": "delivered",
+      "defaultStatus": "delivered",
+      "defaultRenderReportSha256": "42709a12e256b63d1b4f1eec459a4d8c4c15bd15d999e733e5e2133777c200de",
+      "defaultVerifiedFonts": [
+        {
+          "resolvedFamily": "Liberation Serif",
+          "resolvedFace": "LiberationSerif",
+          "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        }
+      ],
+      "warningCodes": [],
+      "warningCheckPassed": true,
+      "strictResult": {
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "dff96a271539f3e239a014b076607b154db0da3567aa605ab9499107f030ae4f",
+        "verifiedFonts": [
+          {
+            "resolvedFamily": "Liberation Serif",
+            "resolvedFace": "LiberationSerif",
+            "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+          }
+        ]
+      },
+      "strictCheckPassed": true,
+      "passed": true
+    },
+    {
+      "id": "export-story-context-source-clip-drawingml-clipped",
+      "inputSha256": "3f7234a852a64c4bb8cd838030a2d45ee4e61226d1e26bded04aa6db802843a5",
+      "expectedWarning": "source_text_clipped",
+      "expectedWarningCount": 1,
+      "expectedStrict": "rejected",
+      "defaultStatus": "delivered",
+      "defaultRenderReportSha256": "5d8c7c6638e79eee27faf1c76c4899805e02cc44760a076c81460b3ca4bfc3b9",
+      "defaultVerifiedFonts": [
+        {
+          "resolvedFamily": "Liberation Serif",
+          "resolvedFace": "LiberationSerif",
+          "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        }
+      ],
+      "warningCodes": [
+        "source_text_clipped"
+      ],
+      "warningCheckPassed": true,
+      "strictResult": {
+        "status": "rejected",
+        "code": "resource_policy_failure",
+        "phase": "output_verification",
+        "message": "A source paragraph is wholly outside its authored text-box clip or paper placement and is not painted."
+      },
+      "strictCheckPassed": true,
+      "passed": true
+    },
+    {
+      "id": "export-story-context-source-clip-vml-visible-control",
+      "inputSha256": "6ad84a1d93f01ac684459de1e1c15d1e5b57e6d7131e40547191b7c0864ac226",
+      "expectedWarning": "source_text_clipped",
+      "expectedWarningCount": 0,
+      "expectedStrict": "delivered",
+      "defaultStatus": "delivered",
+      "defaultRenderReportSha256": "70659362938731882fb88766350ac59d4d25da93985746a82129d9bb099cc06f",
+      "defaultVerifiedFonts": [
+        {
+          "resolvedFamily": "Liberation Serif",
+          "resolvedFace": "LiberationSerif",
+          "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        }
+      ],
+      "warningCodes": [],
+      "warningCheckPassed": true,
+      "strictResult": {
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "913bee6663312e09e1138a997b06857141a4a78cc4466767d1ecbe26f1b665a3",
+        "verifiedFonts": [
+          {
+            "resolvedFamily": "Liberation Serif",
+            "resolvedFace": "LiberationSerif",
+            "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+          }
+        ]
+      },
+      "strictCheckPassed": true,
+      "passed": true
+    },
+    {
+      "id": "export-story-context-source-clip-vml-clipped",
+      "inputSha256": "bf8fb61a42cbf56d6384f0e7776f75438e53cd6c900177cbfe092f9d2d3aa13d",
+      "expectedWarning": "source_text_clipped",
+      "expectedWarningCount": 1,
+      "expectedStrict": "rejected",
+      "defaultStatus": "delivered",
+      "defaultRenderReportSha256": "e2b11188cddedce38f6b8224333fbc5cbf7f519bdf74b81bb6766b7bd72bbe98",
+      "defaultVerifiedFonts": [
+        {
+          "resolvedFamily": "Liberation Serif",
+          "resolvedFace": "LiberationSerif",
+          "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        }
+      ],
+      "warningCodes": [
+        "source_text_clipped"
+      ],
+      "warningCheckPassed": true,
+      "strictResult": {
+        "status": "rejected",
+        "code": "resource_policy_failure",
+        "phase": "output_verification",
+        "message": "A source paragraph is wholly outside its authored text-box clip or paper placement and is not painted."
+      },
+      "strictCheckPassed": true,
+      "passed": true
+    },
+    {
+      "id": "export-story-context-offpaper-margin-paragraph-visible-control",
+      "inputSha256": "1e0d102f0d23290861de28d6db299f7efbf1612df2e6105dea42840faf27adc8",
+      "expectedWarning": "source_text_clipped",
+      "expectedWarningCount": 0,
+      "expectedStrict": "delivered",
+      "defaultStatus": "delivered",
+      "defaultRenderReportSha256": "13936257356799a813ad4cbf7e80d0ac8fc02dd5dfc72ced944bd40be6f317b8",
+      "defaultVerifiedFonts": [
+        {
+          "resolvedFamily": "Liberation Serif",
+          "resolvedFace": "LiberationSerif",
+          "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        }
+      ],
+      "warningCodes": [],
+      "warningCheckPassed": true,
+      "strictResult": {
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "1d7d18c2a0076757531c0bc36a823e3935b3ed588ba9a4e06c2630348c2319e5",
+        "verifiedFonts": [
+          {
+            "resolvedFamily": "Liberation Serif",
+            "resolvedFace": "LiberationSerif",
+            "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+          }
+        ]
+      },
+      "strictCheckPassed": true,
+      "passed": true
+    },
+    {
+      "id": "export-story-context-offpaper-margin-paragraph-outside",
+      "inputSha256": "f388372e53dbbe00d0dfbba4ccb4d8ae157902411c8c1d53868791df100518f7",
+      "expectedWarning": "source_text_clipped",
+      "expectedWarningCount": 2,
+      "expectedStrict": "rejected",
+      "defaultStatus": "delivered",
+      "defaultRenderReportSha256": "8624bf8521b97ff690f75052fcdbb04093088a9425f9dcf7877b1d3ec18576a8",
+      "defaultVerifiedFonts": [
+        {
+          "resolvedFamily": "Liberation Serif",
+          "resolvedFace": "LiberationSerif",
+          "fileSha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        }
+      ],
+      "warningCodes": [
+        "source_text_clipped",
+        "source_text_clipped"
+      ],
+      "warningCheckPassed": true,
+      "strictResult": {
+        "status": "rejected",
+        "code": "resource_policy_failure",
+        "phase": "output_verification",
+        "message": "A source paragraph is wholly outside its authored text-box clip or paper placement and is not painted."
+      },
+      "strictCheckPassed": true,
+      "passed": true
+    }
+  ]
+}

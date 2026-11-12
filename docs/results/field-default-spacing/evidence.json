@@ -1,0 +1,1225 @@
+{
+  "before": "5bae7386facce529293c21b5a1d4e5daee34650c",
+  "after": "3ff2e7a5a09f14b451b77092fcab04a14d9360bd",
+  "scope": "Three focused cases, not a complete suite score",
+  "cases": [
+    {
+      "id": "redline-field-default-spacing-simple",
+      "before": {
+        "score": 0.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-simple/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1533-before/redline-field-default-spacing-simple/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-simple/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-simple/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1533-before/redline-field-default-spacing-simple/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-simple/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Cedar station registers the blue parcel.",
+                "Place the copper token beside the door."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "accepted",
+              "type": "paragraph-spacing",
+              "values": [
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                }
+              ],
+              "version": 1
+            },
+            "name": "assertion-paragraph-spacing",
+            "observed": [
+              {
+                "after": "80",
+                "before": "0",
+                "line": "260",
+                "lineRule": "auto"
+              },
+              {
+                "after": "80",
+                "before": "0",
+                "line": "260",
+                "lineRule": "auto"
+              },
+              {
+                "after": "80",
+                "before": "0",
+                "line": "260",
+                "lineRule": "auto"
+              },
+              {
+                "after": "80",
+                "before": "0",
+                "line": "260",
+                "lineRule": "auto"
+              }
+            ],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "scope": "rejected",
+              "type": "paragraph-spacing",
+              "values": [
+                {
+                  "after": "80",
+                  "before": "0",
+                  "line": "260",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "80",
+                  "before": "0",
+                  "line": "260",
+                  "lineRule": "auto"
+                }
+              ],
+              "version": 1
+            },
+            "name": "assertion-paragraph-spacing",
+            "observed": [
+              {
+                "after": "80",
+                "before": "0",
+                "line": "260",
+                "lineRule": "auto"
+              },
+              {
+                "after": "80",
+                "before": "0",
+                "line": "260",
+                "lineRule": "auto"
+              }
+            ],
+            "passed": true
+          }
+        ]
+      },
+      "after": {
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-simple/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1533-after/redline-field-default-spacing-simple/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-simple/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-simple/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1533-after/redline-field-default-spacing-simple/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-simple/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Cedar station registers the blue parcel.",
+                "Place the copper token beside the door."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "accepted",
+              "type": "paragraph-spacing",
+              "values": [
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                }
+              ],
+              "version": 1
+            },
+            "name": "assertion-paragraph-spacing",
+            "observed": [
+              {
+                "after": "280",
+                "before": "0",
+                "line": "380",
+                "lineRule": "auto"
+              },
+              {
+                "after": "280",
+                "before": "0",
+                "line": "380",
+                "lineRule": "auto"
+              },
+              {
+                "after": "280",
+                "before": "0",
+                "line": "380",
+                "lineRule": "auto"
+              },
+              {
+                "after": "280",
+                "before": "0",
+                "line": "380",
+                "lineRule": "auto"
+              }
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "rejected",
+              "type": "paragraph-spacing",
+              "values": [
+                {
+                  "after": "80",
+                  "before": "0",
+                  "line": "260",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "80",
+                  "before": "0",
+                  "line": "260",
+                  "lineRule": "auto"
+                }
+              ],
+              "version": 1
+            },
+            "name": "assertion-paragraph-spacing",
+            "observed": [
+              {
+                "after": "80",
+                "before": "0",
+                "line": "260",
+                "lineRule": "auto"
+              },
+              {
+                "after": "80",
+                "before": "0",
+                "line": "260",
+                "lineRule": "auto"
+              }
+            ],
+            "passed": true
+          }
+        ]
+      },
+      "captures": [
+        {
+          "label": "Authored",
+          "sourceSha256": "20e6ab43c54b8c64f961340125a07f2596e0f826ba1f35ee5e1500bc443d0bb9",
+          "pdfSha256": "a2988645ee051506f4f091008ed88fd771913399c7c86fef6d79bf849c246afe",
+          "renderer": {
+            "name": "libreoffice",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          }
+        },
+        {
+          "label": "Before",
+          "sourceSha256": "5b37d3ab9b931e5001e5d98ae03f16a37210eeb0f3a52a0757b330cc912fac08",
+          "pdfSha256": "915920c2ba351e3c316cbab17a1ddf883692bf7d85cac4c9fb00c97152b9b90a",
+          "renderer": {
+            "name": "libreoffice",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          }
+        },
+        {
+          "label": "After",
+          "sourceSha256": "d074da73fb733b14379de11a90b05c8c642288c8defd0ceb494c71e662794e83",
+          "pdfSha256": "4b34c5e027da844abbdc713876d66608044484a2a0a7be327ff6421ef4f0f721",
+          "renderer": {
+            "name": "libreoffice",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "redline-field-default-spacing-complex",
+      "before": {
+        "score": 0.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-complex/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1533-before/redline-field-default-spacing-complex/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-complex/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-complex/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1533-before/redline-field-default-spacing-complex/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-complex/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Cedar station registers the blue parcel.",
+                "Place the copper token beside the door."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "accepted",
+              "type": "paragraph-spacing",
+              "values": [
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                }
+              ],
+              "version": 1
+            },
+            "name": "assertion-paragraph-spacing",
+            "observed": [
+              {
+                "after": "80",
+                "before": "0",
+                "line": "260",
+                "lineRule": "auto"
+              },
+              {
+                "after": "80",
+                "before": "0",
+                "line": "260",
+                "lineRule": "auto"
+              },
+              {
+                "after": "80",
+                "before": "0",
+                "line": "260",
+                "lineRule": "auto"
+              },
+              {
+                "after": "80",
+                "before": "0",
+                "line": "260",
+                "lineRule": "auto"
+              }
+            ],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "scope": "rejected",
+              "type": "paragraph-spacing",
+              "values": [
+                {
+                  "after": "80",
+                  "before": "0",
+                  "line": "260",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "80",
+                  "before": "0",
+                  "line": "260",
+                  "lineRule": "auto"
+                }
+              ],
+              "version": 1
+            },
+            "name": "assertion-paragraph-spacing",
+            "observed": [
+              {
+                "after": "80",
+                "before": "0",
+                "line": "260",
+                "lineRule": "auto"
+              },
+              {
+                "after": "80",
+                "before": "0",
+                "line": "260",
+                "lineRule": "auto"
+              }
+            ],
+            "passed": true
+          }
+        ]
+      },
+      "after": {
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-complex/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1533-after/redline-field-default-spacing-complex/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-complex/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-complex/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1533-after/redline-field-default-spacing-complex/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-complex/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Cedar station registers the blue parcel.",
+                "Place the copper token beside the door."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "accepted",
+              "type": "paragraph-spacing",
+              "values": [
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                }
+              ],
+              "version": 1
+            },
+            "name": "assertion-paragraph-spacing",
+            "observed": [
+              {
+                "after": "280",
+                "before": "0",
+                "line": "380",
+                "lineRule": "auto"
+              },
+              {
+                "after": "280",
+                "before": "0",
+                "line": "380",
+                "lineRule": "auto"
+              },
+              {
+                "after": "280",
+                "before": "0",
+                "line": "380",
+                "lineRule": "auto"
+              },
+              {
+                "after": "280",
+                "before": "0",
+                "line": "380",
+                "lineRule": "auto"
+              }
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "rejected",
+              "type": "paragraph-spacing",
+              "values": [
+                {
+                  "after": "80",
+                  "before": "0",
+                  "line": "260",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "80",
+                  "before": "0",
+                  "line": "260",
+                  "lineRule": "auto"
+                }
+              ],
+              "version": 1
+            },
+            "name": "assertion-paragraph-spacing",
+            "observed": [
+              {
+                "after": "80",
+                "before": "0",
+                "line": "260",
+                "lineRule": "auto"
+              },
+              {
+                "after": "80",
+                "before": "0",
+                "line": "260",
+                "lineRule": "auto"
+              }
+            ],
+            "passed": true
+          }
+        ]
+      },
+      "captures": [
+        {
+          "label": "Authored",
+          "sourceSha256": "8c757f11441676ea4a0050d1a0e4c3d85b618689837f49afc537fbc762685bf1",
+          "pdfSha256": "4c1826e3d99b65a1cace5a70578b203a1a94889c6a132417dac7dae6c7887cc4",
+          "renderer": {
+            "name": "libreoffice",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          }
+        },
+        {
+          "label": "Before",
+          "sourceSha256": "743354803a5e32a0b452813d3448768f4e9c0678a9df39bf3ede5bd2e115e49a",
+          "pdfSha256": "9d8ff1647729a428c29e4dcbbb0866a5635463fee7bdcafd88b576bd7e05eb2c",
+          "renderer": {
+            "name": "libreoffice",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          }
+        },
+        {
+          "label": "After",
+          "sourceSha256": "034aeaeeb3adb0cc2ab889861070867d4151507f5b8107f4663a5ec9e6f2de51",
+          "pdfSha256": "abba559c3eb2562f8d60417c5c73eea9dd80f0f7031c85172c15704fa650b6e7",
+          "renderer": {
+            "name": "libreoffice",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "redline-field-default-spacing-literal-control",
+      "before": {
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-literal-control/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1533-before/redline-field-default-spacing-literal-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-literal-control/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-literal-control/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1533-before/redline-field-default-spacing-literal-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-literal-control/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Cedar station registers the blue parcel.",
+                "Place the copper token beside the door."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "accepted",
+              "type": "paragraph-spacing",
+              "values": [
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                }
+              ],
+              "version": 1
+            },
+            "name": "assertion-paragraph-spacing",
+            "observed": [
+              {
+                "after": "280",
+                "before": "0",
+                "line": "380",
+                "lineRule": "auto"
+              },
+              {
+                "after": "280",
+                "before": "0",
+                "line": "380",
+                "lineRule": "auto"
+              },
+              {
+                "after": "280",
+                "before": "0",
+                "line": "380",
+                "lineRule": "auto"
+              },
+              {
+                "after": "280",
+                "before": "0",
+                "line": "380",
+                "lineRule": "auto"
+              }
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "rejected",
+              "type": "paragraph-spacing",
+              "values": [
+                {
+                  "after": "80",
+                  "before": "0",
+                  "line": "260",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "80",
+                  "before": "0",
+                  "line": "260",
+                  "lineRule": "auto"
+                }
+              ],
+              "version": 1
+            },
+            "name": "assertion-paragraph-spacing",
+            "observed": [
+              {
+                "after": "80",
+                "before": "0",
+                "line": "260",
+                "lineRule": "auto"
+              },
+              {
+                "after": "80",
+                "before": "0",
+                "line": "260",
+                "lineRule": "auto"
+              }
+            ],
+            "passed": true
+          }
+        ]
+      },
+      "after": {
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-literal-control/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1533-after/redline-field-default-spacing-literal-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-literal-control/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-literal-control/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1533-after/redline-field-default-spacing-literal-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-field-default-spacing-literal-control/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Cedar station registers the blue parcel.",
+                "Place the copper token beside the door."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "accepted",
+              "type": "paragraph-spacing",
+              "values": [
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "280",
+                  "before": "0",
+                  "line": "380",
+                  "lineRule": "auto"
+                }
+              ],
+              "version": 1
+            },
+            "name": "assertion-paragraph-spacing",
+            "observed": [
+              {
+                "after": "280",
+                "before": "0",
+                "line": "380",
+                "lineRule": "auto"
+              },
+              {
+                "after": "280",
+                "before": "0",
+                "line": "380",
+                "lineRule": "auto"
+              },
+              {
+                "after": "280",
+                "before": "0",
+                "line": "380",
+                "lineRule": "auto"
+              },
+              {
+                "after": "280",
+                "before": "0",
+                "line": "380",
+                "lineRule": "auto"
+              }
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "rejected",
+              "type": "paragraph-spacing",
+              "values": [
+                {
+                  "after": "80",
+                  "before": "0",
+                  "line": "260",
+                  "lineRule": "auto"
+                },
+                {
+                  "after": "80",
+                  "before": "0",
+                  "line": "260",
+                  "lineRule": "auto"
+                }
+              ],
+              "version": 1
+            },
+            "name": "assertion-paragraph-spacing",
+            "observed": [
+              {
+                "after": "80",
+                "before": "0",
+                "line": "260",
+                "lineRule": "auto"
+              },
+              {
+                "after": "80",
+                "before": "0",
+                "line": "260",
+                "lineRule": "auto"
+              }
+            ],
+            "passed": true
+          }
+        ]
+      },
+      "captures": [
+        {
+          "label": "Authored",
+          "sourceSha256": "7212518a373dad225afbcb6438861342db76b593705fc07e74533c0c6105bc7e",
+          "pdfSha256": "a615848152f5832d349220f546545a527f6ee813cfa186154d94a9ae5af28591",
+          "renderer": {
+            "name": "libreoffice",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          }
+        },
+        {
+          "label": "Before",
+          "sourceSha256": "742ef7804ba60d6fadf4893c8a8775cd55d8a55efd3b9dd01c01054c0e26cac3",
+          "pdfSha256": "25094401175f4ebc7b35c63f8fb28a42a0c41c2de298dc5e3b29aee6fc4a41b1",
+          "renderer": {
+            "name": "libreoffice",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          }
+        },
+        {
+          "label": "After",
+          "sourceSha256": "742ef7804ba60d6fadf4893c8a8775cd55d8a55efd3b9dd01c01054c0e26cac3",
+          "pdfSha256": "f091a4948e2182768879f5fac2b6be417342755117be56d5d331b8c76ce33764",
+          "renderer": {
+            "name": "libreoffice",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          }
+        }
+      ]
+    }
+  ]
+}

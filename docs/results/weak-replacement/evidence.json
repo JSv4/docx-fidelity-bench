@@ -1,0 +1,2366 @@
+{
+  "scope": "Focused ten-case diagnostic; no full-suite score claimed",
+  "before": "583a11c7f26fd2f4c6843c7d33198febd9127da4",
+  "after": "db40928ff104968d49ba078059a3811a1bcb0ba0",
+  "cases": [
+    {
+      "id": "redline-weak-replacement-final",
+      "before": {
+        "status": "measured",
+        "score": 0.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-before/redline-weak-replacement-final/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 22
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-before/redline-weak-replacement-final/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 22
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "kind": "del",
+              "scope": "redline",
+              "text": "Daylight guides polish the copper compass before closing the cabin.",
+              "type": "revision-text",
+              "version": 1
+            },
+            "invalid": 0,
+            "name": "assertion-revision-text",
+            "observed": [
+              "Daylight guides polish",
+              "copper compass",
+              "closing",
+              "cabin.",
+              "",
+              "steward",
+              "quiet inspection",
+              "western gate",
+              "dusk",
+              "ropes cover",
+              "crates",
+              "cart returns inland"
+            ],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "accepted",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "rejected",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          }
+        ]
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-after/redline-weak-replacement-final/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 10
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-after/redline-weak-replacement-final/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 10
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "kind": "del",
+              "scope": "redline",
+              "text": "Daylight guides polish the copper compass before closing the cabin.",
+              "type": "revision-text",
+              "version": 1
+            },
+            "invalid": 0,
+            "name": "assertion-revision-text",
+            "observed": [
+              "Daylight guides polish the copper compass before closing the cabin.",
+              "",
+              "steward",
+              "quiet inspection",
+              "western gate",
+              "At dusk the ropes cover the crates and the cart returns inland."
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "accepted",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "rejected",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "redline-weak-replacement-final-crossing",
+      "before": {
+        "status": "measured",
+        "score": 0.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-crossing/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-before/redline-weak-replacement-final-crossing/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 16
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-crossing/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-crossing/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-before/redline-weak-replacement-final-crossing/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 16
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-crossing/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "kind": "del",
+              "scope": "redline",
+              "text": "Daylight guides polish the copper compass before closing the cabin.",
+              "type": "revision-text",
+              "version": 1
+            },
+            "invalid": 0,
+            "name": "assertion-revision-text",
+            "observed": [
+              "Daylight guides polish",
+              "copper compass",
+              "closing",
+              "cabin.",
+              "",
+              "steward",
+              "quiet inspection",
+              "western gate. ",
+              "",
+              "At dusk the ropes cover the crates and the cart returns inland."
+            ],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "accepted",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "rejected",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          }
+        ]
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-crossing/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-after/redline-weak-replacement-final-crossing/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 10
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-crossing/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-crossing/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-after/redline-weak-replacement-final-crossing/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 10
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-crossing/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "kind": "del",
+              "scope": "redline",
+              "text": "Daylight guides polish the copper compass before closing the cabin.",
+              "type": "revision-text",
+              "version": 1
+            },
+            "invalid": 0,
+            "name": "assertion-revision-text",
+            "observed": [
+              "Daylight guides polish the copper compass before closing the cabin.",
+              "",
+              "steward",
+              "quiet inspection",
+              "western gate. ",
+              "",
+              "At dusk the ropes cover the crates and the cart returns inland."
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "accepted",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "rejected",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "redline-weak-replacement-interior",
+      "before": {
+        "status": "measured",
+        "score": 0.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-interior/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-before/redline-weak-replacement-interior/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 16
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-interior/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-interior/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-before/redline-weak-replacement-interior/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 16
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-interior/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "kind": "del",
+              "scope": "redline",
+              "text": "Daylight guides polish the copper compass before closing the cabin.",
+              "type": "revision-text",
+              "version": 1
+            },
+            "invalid": 0,
+            "name": "assertion-revision-text",
+            "observed": [
+              "Daylight guides polish",
+              "copper compass",
+              "closing",
+              "cabin.",
+              "",
+              "steward",
+              "quiet inspection",
+              "western gate",
+              "At dusk the ropes cover the crates and the cart returns inland.",
+              ""
+            ],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "count": 4,
+              "scope": "accepted",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 4,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 4,
+              "scope": "rejected",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 4,
+            "passed": true
+          }
+        ]
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-interior/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-after/redline-weak-replacement-interior/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 10
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-interior/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-interior/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-after/redline-weak-replacement-interior/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 10
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-interior/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "kind": "del",
+              "scope": "redline",
+              "text": "Daylight guides polish the copper compass before closing the cabin.",
+              "type": "revision-text",
+              "version": 1
+            },
+            "invalid": 0,
+            "name": "assertion-revision-text",
+            "observed": [
+              "Daylight guides polish the copper compass before closing the cabin.",
+              "",
+              "steward",
+              "quiet inspection",
+              "western gate",
+              "At dusk the ropes cover the crates and the cart returns inland.",
+              ""
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 4,
+              "scope": "accepted",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 4,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 4,
+              "scope": "rejected",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 4,
+            "passed": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "redline-weak-replacement-interior-crossing",
+      "before": {
+        "status": "measured",
+        "score": 0.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-interior-crossing/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-before/redline-weak-replacement-interior-crossing/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 16
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-interior-crossing/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-interior-crossing/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-before/redline-weak-replacement-interior-crossing/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 16
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-interior-crossing/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "kind": "del",
+              "scope": "redline",
+              "text": "Daylight guides polish the copper compass before closing the cabin.",
+              "type": "revision-text",
+              "version": 1
+            },
+            "invalid": 0,
+            "name": "assertion-revision-text",
+            "observed": [
+              "Daylight guides polish",
+              "copper compass",
+              "closing",
+              "cabin.",
+              "",
+              "steward",
+              "quiet inspection",
+              "western gate. ",
+              "",
+              "At dusk the ropes cover the crates and the cart returns inland.",
+              ""
+            ],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "count": 4,
+              "scope": "accepted",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 4,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 4,
+              "scope": "rejected",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 4,
+            "passed": true
+          }
+        ]
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-interior-crossing/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-after/redline-weak-replacement-interior-crossing/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 10
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-interior-crossing/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-interior-crossing/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-after/redline-weak-replacement-interior-crossing/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 10
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-interior-crossing/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "kind": "del",
+              "scope": "redline",
+              "text": "Daylight guides polish the copper compass before closing the cabin.",
+              "type": "revision-text",
+              "version": 1
+            },
+            "invalid": 0,
+            "name": "assertion-revision-text",
+            "observed": [
+              "Daylight guides polish the copper compass before closing the cabin.",
+              "",
+              "steward",
+              "quiet inspection",
+              "western gate. ",
+              "",
+              "At dusk the ropes cover the crates and the cart returns inland.",
+              ""
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 4,
+              "scope": "accepted",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 4,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 4,
+              "scope": "rejected",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 4,
+            "passed": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "redline-weak-replacement-final-compound-left",
+      "before": {
+        "status": "measured",
+        "score": 0.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-compound-left/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-before/redline-weak-replacement-final-compound-left/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 22
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-compound-left/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-compound-left/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-before/redline-weak-replacement-final-compound-left/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 22
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-compound-left/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "kind": "del",
+              "scope": "redline",
+              "text": "Daylight guides polish the copper compass before-closing the cabin.",
+              "type": "revision-text",
+              "version": 1
+            },
+            "invalid": 0,
+            "name": "assertion-revision-text",
+            "observed": [
+              "Daylight guides polish",
+              "copper compass",
+              "-closing",
+              "cabin.",
+              "",
+              "steward",
+              "quiet inspection",
+              "western gate",
+              "dusk",
+              "ropes cover",
+              "crates",
+              "cart returns inland"
+            ],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "accepted",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "rejected",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          }
+        ]
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-compound-left/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-after/redline-weak-replacement-final-compound-left/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 10
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-compound-left/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-compound-left/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-after/redline-weak-replacement-final-compound-left/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 10
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-compound-left/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "kind": "del",
+              "scope": "redline",
+              "text": "Daylight guides polish the copper compass before-closing the cabin.",
+              "type": "revision-text",
+              "version": 1
+            },
+            "invalid": 0,
+            "name": "assertion-revision-text",
+            "observed": [
+              "Daylight guides polish the copper compass before-closing the cabin.",
+              "",
+              "steward",
+              "quiet inspection",
+              "western gate",
+              "At dusk the ropes cover the crates and the cart returns inland."
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "accepted",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "rejected",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "redline-weak-replacement-final-compound-right",
+      "before": {
+        "status": "measured",
+        "score": 0.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-compound-right/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-before/redline-weak-replacement-final-compound-right/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 22
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-compound-right/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-compound-right/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-before/redline-weak-replacement-final-compound-right/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 22
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-compound-right/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "kind": "del",
+              "scope": "redline",
+              "text": "Evening porters arrange the willow baskets before opening the depot.",
+              "type": "revision-text",
+              "version": 1
+            },
+            "invalid": 0,
+            "name": "assertion-revision-text",
+            "observed": [
+              "Evening porters arrange",
+              "willow baskets",
+              " opening",
+              "depot.",
+              "",
+              "clerk",
+              "red ledger",
+              "eastern quay",
+              "dawn",
+              "cranes carry",
+              "barrels",
+              "barge leaves seaward"
+            ],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "accepted",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "rejected",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          }
+        ]
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-compound-right/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-after/redline-weak-replacement-final-compound-right/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 10
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-compound-right/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-compound-right/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 6
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-after/redline-weak-replacement-final-compound-right/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 10
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-final-compound-right/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "kind": "del",
+              "scope": "redline",
+              "text": "Evening porters arrange the willow baskets before opening the depot.",
+              "type": "revision-text",
+              "version": 1
+            },
+            "invalid": 0,
+            "name": "assertion-revision-text",
+            "observed": [
+              "Evening porters arrange the willow baskets before opening the depot.",
+              "",
+              "clerk",
+              "red ledger",
+              "eastern quay",
+              "At dawn the cranes carry the barrels and the barge leaves seaward."
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "accepted",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "rejected",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "redline-weak-replacement-retained-control",
+      "before": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-retained-control/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 2
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-before/redline-weak-replacement-retained-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 2
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-retained-control/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-retained-control/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 2
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-before/redline-weak-replacement-retained-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 2
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-retained-control/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Copper instruments remain under the watch of the harbor steward. ",
+                "Closing line remains unchanged."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 2,
+              "scope": "redline",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 2,
+            "passed": true
+          }
+        ]
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-retained-control/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 2
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-after/redline-weak-replacement-retained-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 2
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-retained-control/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-retained-control/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 2
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-after/redline-weak-replacement-retained-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 2
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-retained-control/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Copper instruments remain under the watch of the harbor steward. ",
+                "Closing line remains unchanged."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 2,
+              "scope": "redline",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 2,
+            "passed": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "redline-weak-replacement-unrelated-control",
+      "before": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-unrelated-control/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 2
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-before/redline-weak-replacement-unrelated-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 2
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-unrelated-control/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-unrelated-control/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 2
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-before/redline-weak-replacement-unrelated-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 2
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-unrelated-control/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Closing line remains unchanged."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "redline",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          }
+        ]
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-unrelated-control/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 2
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-after/redline-weak-replacement-unrelated-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 2
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-unrelated-control/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-unrelated-control/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 2
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-after/redline-weak-replacement-unrelated-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 2
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-unrelated-control/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Closing line remains unchanged."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "redline",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "redline-weak-replacement-split-control",
+      "before": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-split-control/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-before/redline-weak-replacement-split-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-split-control/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-split-control/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-before/redline-weak-replacement-split-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-split-control/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Copper instruments",
+                " remain beside the quay.",
+                "Closing line remains unchanged."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "accepted",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 2,
+              "scope": "rejected",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 2,
+            "passed": true
+          }
+        ]
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-split-control/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-after/redline-weak-replacement-split-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-split-control/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-split-control/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-after/redline-weak-replacement-split-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-split-control/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Copper instruments",
+                " remain beside the quay.",
+                "Closing line remains unchanged."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "accepted",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 2,
+              "scope": "rejected",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 2,
+            "passed": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "redline-weak-replacement-merge-control",
+      "before": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-merge-control/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-before/redline-weak-replacement-merge-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-merge-control/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-merge-control/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-before/redline-weak-replacement-merge-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-merge-control/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Copper instruments",
+                " remain beside the quay.",
+                "Closing line remains unchanged."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 2,
+              "scope": "accepted",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 2,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "rejected",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          }
+        ]
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-merge-control/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-after/redline-weak-replacement-merge-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-merge-control/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-merge-control/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/runs/1526-after/redline-weak-replacement-merge-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1526/fixtures/redline/redline-weak-replacement-merge-control/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "body",
+              "texts": [
+                "Copper instruments",
+                " remain beside the quay.",
+                "Closing line remains unchanged."
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 2,
+              "scope": "accepted",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 2,
+            "passed": true
+          },
+          {
+            "declaration": {
+              "count": 3,
+              "scope": "rejected",
+              "story": "body",
+              "type": "paragraph-count",
+              "version": 1
+            },
+            "name": "assertion-paragraph-count",
+            "observed": 3,
+            "passed": true
+          }
+        ]
+      }
+    }
+  ]
+}

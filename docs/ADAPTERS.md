@@ -2,7 +2,7 @@
 
 Protocol version 1 uses one JSON request on stdin and one JSON response on stdout. The runner invokes an explicit command vector without a shell. Fixture records cannot select executable commands. Add adapter selection in `bench/__main__.py`; metrics and fixture IDs stay unchanged.
 
-The request contains `protocol`, absolute `input` and `output` paths, `inputSha256`, a production `report` destination, an explicit `profile` (`review`, `comments`, optional `markupPresentation`), `fontDirectories`, exact `candidate` identity, and `timeoutMs`. `markupPresentation: "word"` selects Word-style tracked-change appearance for a markup review profile; omitting it retains the renderer default. The input is immutable. Output paths are new and must not be overwritten. The renderer must use the declared fonts and view.
+The request contains `protocol`, absolute `input` and `output` paths, `inputSha256`, a production `report` destination, an explicit `profile` (`review`, `comments`, optional `markupPresentation`, `commentColumnPlacement` and `markupVisibility`), `fontDirectories`, exact `candidate` identity, and `timeoutMs`. `markupPresentation: "word"` selects Word-style tracked-change appearance for a markup review profile; omitting it retains the renderer default. `commentColumnPlacement` accepts `margin` or `balloons`. `markupVisibility` is a closed object with optional boolean `formatting`, `insertionsAndDeletions` and `comments` fields; omitted values retain the renderer defaults. The production report must record the same placement and canonical false-only visibility policy. The input is immutable. Output paths are new and must not be overwritten. The renderer must use the declared fonts and view.
 
 An `ok` response contains `protocol: 1`, `status: "ok"`, `pdfSha256`, and `renderer` identity. Candidate PDF bytes must exist at the requested path and match the digest. Include candidate source/build identity and runtime identity. The Docxodus adapter retains a complete production report and source-bound build record.
 
@@ -29,7 +29,7 @@ the authored composite's PDF only; it does not attest the document-building oper
 Preparation source packages follow the same generation, rights, digest and external-resource
 checks as ordinary PDF inputs. Build identity and the produced package digest accompany each result.
 
-The redline track uses its own protocol version 1. The request carries `protocol`, `operation` (`compare`, `consolidate` or `reject`), `inputs` (absolute `path`, `sha256` and, for consolidation reviewers, `author`), a new `output` path and fixed `settings` (`author`, `date`). An `ok` response carries `status`, `outputSha256` and `engine` identity; `failed` and `unmeasured` carry a structured `error` with the phase that failed. The harness re-verifies the output digest and the unchanged inputs. `adapters/docxodus-redline` is the Docxodus implementation; it is compiled from a clean, exact-commit checkout by `bench redline build-docxodus`, and the harness checks that build record, not the adapter, before each case. See [the redline scoring contract](REDLINE.md).
+The redline track uses its own protocol version 1. The request carries `protocol`, `operation` (`compare`, `consolidate`, `reject` or `accept`), `inputs` (absolute `path`, `sha256` and, for consolidation reviewers, `author`), a new `output` path and fixed `settings` (`author`, `date`). An `ok` response carries `status`, `outputSha256` and `engine` identity; `failed` and `unmeasured` carry a structured `error` with the phase that failed. The harness re-verifies the output digest and the unchanged inputs. `adapters/docxodus-redline` is the Docxodus implementation; it is compiled from a clean, exact-commit checkout by `bench redline build-docxodus`, and the harness checks that build record, not the adapter, before each case. See [the redline scoring contract](REDLINE.md).
 
 ## Optional delivered HTML evidence
 
@@ -69,6 +69,17 @@ is unmeasured. This checks the declared paragraph and tail access; it is not a g
 paint-occlusion or interactive-application fidelity test.
 
 
+Version 1 `review-display` declares a unique `marker` and exact nonnegative counts in
+`expected` for `formatBalloons`, `commentBalloons`, `insertions`, `deletions`, `areas` and
+`layers`, a nonempty `requiredTokens` count map, and a `forbiddenTokens` list (which may
+be empty). The latter are checked against the observer’s visible document text, so missing
+comment text and plain-text leaks cannot pass through correct element counts alone.
+The independent browser observer counts delivered balloon labels, revision
+elements and markup containers. Python replays the counts and requires the marker to
+remain accessible under the same clipping rules. These are structural observations;
+paired companion-PDF token/paint checks verify printed source content. They do not claim
+Word balloon geometry or general paint-occlusion coverage.
+
 Version 1 `marker-computed-style` declares a unique `marker`, `property: "font-size"` and an exact
 pixel value in `equals`, such as `"13.6px"`. Other properties and malformed values are rejected.
 The same independent browser observer records `computedStyle`, mapping the property to the computed
@@ -77,6 +88,15 @@ match, in addition to a positive range fully contained in the final viewport and
 A missing observation is unmeasured; an observed size mismatch or clipped marker is a measured
 failure. This does not claim to inspect every character's font across the whole document or to measure
 paint occlusion. The source-bound observer, browser policy and artifact identities are unchanged.
+
+Version 1 `math-expression` declares one formula's `display` (`inline` or `block`) and ordered
+`tree`, such as `["mfrac", ["mn", "27.5"], ["mn", "9"]]`. Its `marker` labels the observation;
+the observer counts every `math` element and requires exactly one. The offline browser checks
+MathML namespaces recursively and records structure, computed display, subtree visibility and a positive box.
+Single-child `mrow` grouping is transparent; token strings and operand order are exact.
+These source-default fractions require an absent `linethickness` attribute; a suppressed bar cannot pass.
+Swapped fraction/root operands, flattened structures, unknown elements and duplicate formulas fail.
+These are structural checks, not native typography or general paint-occlusion measurements.
 
 An HTML profile may additionally declare nonempty, well-formed Unicode `additionalCss`.
 The Docxodus adapter forwards it only for the HTML conversion; it never alters the PDF profile.
@@ -88,3 +108,46 @@ core serializer; do not attribute an unknown-option failure to CSS rendering.
 PDF preparation also accepts `compare` with exactly two inputs and `consolidate` with a base followed
 by reviewer inputs. The native adapter assigns omitted reviewer names as `Reviewer1`, `Reviewer2`, etc.
 Both use the same source-bound operation build and immutable input checks as `build`.
+
+The redline adapter also accepts `replace-text` with one source input and
+`settings.paragraphRewrite = {"version":1,"paragraphIndex":0,"markdown":"..."}`.
+It invokes public untracked `DocxSession.ReplaceText` and saves its actual output. A failed edit
+is a measured operation failure; the adapter does not copy or synthesize control metadata.
+The benchmark independently requires no pending revisions and the declared native control trees.
+
+The `reference libreoffice` and `reference equivalent-controls` commands accept `--manifest`,
+using the same complete input/rights/digest validation as `run --manifest`. The rendering workflow
+keeps both complete tracks by default; `track=pdf` or `track=redline` selects one. Its optional
+`cases` input is a JSON array of PDF case ids. The entire registry is validated before selection;
+unknown, duplicate, empty and malformed selections are rejected. Selected cases retain their
+full declarations and get a distinct diagnostic identity. Reference reuse still requires exact
+suite, input, font/environment and calibration equivalence. No score threshold or conversion
+deadline changes with a selection.
+
+## Companion PDF completeness
+
+A PDF-track case may declare `pdfCompanion: {profile, requiredTokens, pageSizePt}`. The runner invokes
+the same production adapter again with that profile, writing `companion.pdf` and
+`companion-production.json`. This uses the existing request protocol and verifies the
+same renderer identity, source digest, actual report profile, runtime and output digest. It does not reuse the first PDF or infer
+printed content from HTML.
+
+Poppler extracts the companion through its CropBox. Each declared token (authored source text or an explicitly expected review label) must
+appear exactly its authored number of times and have positive bounds wholly within
+the page. The same PDF is rasterized at 96 DPI; each source-word rectangle must contain
+dark foreground paint (every RGB channel below 160), so pale comment/highlight
+backgrounds cannot substitute for the authored black/gray source text. This detects blank, invisible and
+white- or yellow-covered text; it is a bounded paint-presence check, not OCR or glyph-shape matching.
+`forbiddenTokens` optionally lists unique source tokens that must be absent, disjoint from
+`requiredTokens`. This prevents hidden deletions or comments from passing as permitted extra
+renderer labels. `exactInventory: true` also rejects any extra token; the hidden-comment control uses it. Every page must retain the declared paper geometry, which registry validation checks against every authored section. Extra renderer-generated author, date and navigation labels are allowed.
+A refusal or missing/duplicated/off-page source word fails mandatory checks and makes
+the case score zero. Conversion, missing-artifact, inspection and binding failures also fail these mandatory checks.
+The declaration and inspector identity are bound into the measurement contract.
+
+The primary PDF still supplies the visual comparison and its complete token inventory.
+For the complete-comment cases that primary profile hides comments, while the companion
+prints them in the margin (except the explicit hidden-profile control). This tests static
+PDF completeness without claiming Word or LibreOffice comment-layout parity. Native
+reference-engine calibrations omit the companion checks, as they omit delivered HTML
+checks, and cannot attest candidate-specific print profiles.

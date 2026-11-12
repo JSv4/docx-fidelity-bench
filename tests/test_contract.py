@@ -25,6 +25,25 @@ def result(cases):
 
 
 class MetricContract(unittest.TestCase):
+    def test_colored_rule_inspector_contract_is_required_and_hash_bound(self):
+        measured = result([case('rules', 'tables')])
+        measured['cases'][0]['checks'] = [{'name': 'assertion-colored-rule-widths', 'passed': True}]
+        with self.assertRaisesRegex(ValueError, 'Missing colored-rule'):
+            runner.validate_result(measured)
+        measured['contract']['coloredRuleInspector'] = {'version': 1, 'sources': {
+            'bench/pdf.py': 'a' * 64, 'bench/vector_rules.py': 'b' * 64}}
+        measured['contractDigest'] = common.identity(measured['contract'])
+        runner.validate_result(measured)
+        changed = copy.deepcopy(measured)
+        changed['contract']['coloredRuleInspector']['sources']['bench/vector_rules.py'] = 'c' * 64
+        changed['contractDigest'] = common.identity(changed['contract'])
+        with self.assertRaisesRegex(ValueError, 'Measurement contract changed'):
+            runner.compare(measured, changed, 0)
+        measured['contract']['coloredRuleInspector']['sources']['bench/vector_rules.py'] = 'invalid'
+        measured['contractDigest'] = common.identity(measured['contract'])
+        with self.assertRaisesRegex(ValueError, 'Invalid colored-rule'):
+            runner.validate_result(measured)
+
     def test_identical_ink_is_100(self):
         image = raster(positions=[(5, 5), (6, 5), (5, 6)])
         self.assertEqual(metrics.page_metrics(image, image, 16, 16)['score'], 100)
@@ -350,11 +369,202 @@ class RegistryContract(unittest.TestCase):
                          {'BodyWillow': 1}, {'HdrAlder': 1}]:
             with self.subTest(optional=optional):
                 edited = copy.deepcopy(registry)
-                edited['cases'][-1]['clippedTokens'] = optional
+                target = next(c for c in edited['cases'] if c['id'] == 'tables-exact-row-header-wide-control')
+                target['clippedTokens'] = optional
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 250)
+        self.assertEqual(len(common.validate_registry()['cases']), 1188)
+
+    def test_group_paper_exclusions_follow_literal_source_coordinates(self):
+        import runpy
+        import tempfile
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        proof = runpy.run_path(str(common.ROOT / 'docs/results/group-paper-placement/SourceCoordinates.py'))
+        cases = [c for c in common.validate_registry()['cases'] if c['id'].startswith('group-paper-')]
+        self.assertEqual(len(cases), 9)
+        self.assertTrue(all(a['tolerancePt'] == 0.1 for c in cases for a in c['assertions'] if a['type'] == 'marker-region'))
+        self.assertEqual(sum(proof['verify'](common.ROOT / c['input'], c)['outsideFarMember'] for c in cases), 6)
+        case = next(c for c in cases if c['id'] == 'group-paper-group-right')
+        with ZipFile(common.ROOT / case['input']) as package:
+            parts = {name: package.read(name) for name in package.namelist()}
+        for mutation in ('visible', 'rotation', 'zero-map', 'negative-indent', 'paper', 'margin', 'extent'):
+            with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as directory:
+                root = ET.fromstring(parts['word/document.xml'])
+                a, w, wps = proof['A'], proof['W'], proof['WPS']
+                shape = next(s for s in root.iter(wps + 'wsp') if next(s.iter(w + 't')).text == 'SedgeFar')
+                transform = shape.find(wps + 'spPr/' + a + 'xfrm')
+                if mutation == 'visible': transform.find(a + 'off').set('x', '0')
+                elif mutation == 'rotation': transform.set('rot', '5400000')
+                elif mutation == 'zero-map': next(root.iter(a + 'chExt')).set('cx', '0')
+                elif mutation == 'negative-indent': ET.SubElement(next(shape.iter(w + 'pPr')), w + 'ind', {w + 'left': '-20000'})
+                elif mutation == 'paper': next(root.iter(w + 'pgSz')).set(w + 'w', '20000')
+                elif mutation == 'margin': next(root.iter(w + 'pgMar')).set(w + 'left', '1400')
+                else: next(root.iter(proof['WP'] + 'extent')).set('cx', '5000000')
+                target = Path(directory) / 'changed.docx'
+                with ZipFile(target, 'w') as package:
+                    for name, data in parts.items():
+                        package.writestr(name, ET.tostring(root) if name == 'word/document.xml' else data)
+                with self.assertRaises(AssertionError): proof['verify'](target, case)
+        control = next(c for c in cases if c['id'] == 'group-paper-nested-visible-control')
+        source = proof['verify'](common.ROOT / control['input'], control)
+        words = [{'text': label, 'page': 1, 'rect': [x, y + 2, x + 60, y + 14]}
+                 for label, (x, y, width, height) in source['framesPt'].items()]
+        self.assertTrue(all(c['passed'] for c in proof['output_checks'](source, words)))
+        x, y, width, height = source['framesPt'][words[0]['text']]
+        for edge, boundary, direction in [(0, x, -1), (1, y, -1), (2, x + width, 1), (3, y + height, 1)]:
+            for rounding, expected in [(0.099, True), (0.101, False)]:
+                rounded = copy.deepcopy(words)
+                rounded[0]['rect'][edge] = boundary + direction * rounding
+                self.assertEqual(all(c['passed'] for c in proof['output_checks'](source, rounded)), expected)
+        wrong_page = copy.deepcopy(words)
+        wrong_page[0]['page'] = 2
+        for invalid in (words[1:], words + words[:1], wrong_page):
+            self.assertFalse(all(c['passed'] for c in proof['output_checks'](source, invalid)))
+        for word in words:
+            moved = copy.deepcopy(words)
+            target = next(w for w in moved if w['text'] == word['text'])
+            target['rect'][0] += 100
+            target['rect'][2] += 100
+            self.assertFalse(all(c['passed'] for c in proof['output_checks'](source, moved)))
+
+    def test_continuous_margin_pairs_isolate_geometry_and_keep_complete_labels(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        for spill in ('', '-spill'):
+            control = records['sections-margins-same' + spill + '-control']
+            with ZipFile(common.ROOT / control['input']) as package:
+                original = ET.fromstring(package.read('word/document.xml'))
+                styles = package.read('word/styles.xml')
+            self.assertEqual(len(control['tokens']), 121 if spill else 3)
+            for side in ('left', 'right', 'top', 'bottom'):
+                changed = records['sections-margins-' + side + spill]
+                self.assertEqual(changed['tokens'], control['tokens'])
+                with ZipFile(common.ROOT / changed['input']) as package:
+                    actual = ET.fromstring(package.read('word/document.xml'))
+                    self.assertEqual(package.read('word/styles.xml'), styles)
+                sections = actual.findall('.//' + w + 'sectPr')
+                self.assertEqual(len(sections), 2)
+                margins = sections[1].find(w + 'pgMar')
+                self.assertEqual(margins.get(w + side), '2880')
+                margins.set(w + side, '1440')
+                self.assertEqual(ET.tostring(actual), ET.tostring(original))
+                markers = changed['assertions']
+                self.assertEqual(len(markers), 9 if spill else 3)
+                self.assertEqual({m['page'] for m in markers}, {1, 2, 3} if spill else {1})
+                self.assertTrue(all(m.get('adjudicated') == 'word' for m in markers))
+
+    def test_explicit_reference_manifest_rejects_changed_input_before_rendering(self):
+        registry = common.read_json(common.ROOT / 'fixtures/manifest.json')
+        registry['cases'][0]['sha256'] = '0' * 64
+        with tempfile.TemporaryDirectory() as temp, patch.object(runner, 'environment') as environment:
+            with self.assertRaises(ValueError):
+                runner.reference_bundle(Path(temp) / 'reference', registry=registry)
+            environment.assert_not_called()
+
+    def test_nested_inline_reproducers_have_flat_controls_and_complete_text(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        for shape in ('hyperlink', 'field', 'mixed'):
+            source, control = [records['nested-inline-' + shape + suffix] for suffix in ('', '-control')]
+            self.assertEqual(source['tokens'], control['tokens'])
+            self.assertEqual(source['fonts'], control['fonts'])
+            self.assertEqual(source['profile'], control['profile'])
+            texts = []
+            for record in (source, control):
+                with ZipFile(common.ROOT / record['input']) as package:
+                    root = ET.fromstring(package.read('word/document.xml'))
+                texts.append(''.join(e.text or '' for e in root.iter(w + 't')))
+                wrappers = [e for e in root.iter() if e.tag in {w + n for n in ('hyperlink', 'fldSimple', 'customXml', 'sdt')}]
+                self.assertEqual(len(wrappers), 64 if record is source else 0)
+            self.assertEqual(texts[0], texts[1])
+
+    def test_adjacent_table_property_pairs_keep_independent_table_declarations(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        w = {'w': fixtures.W}
+        cases = [c for c in common.validate_registry()['cases'] if c['id'].startswith('tables-adjacent-properties-')]
+        self.assertEqual(len(cases), 4)
+        self.assertEqual({c['profile']['review'] for c in cases}, {'final', 'original'})
+        for case in cases:
+            with ZipFile(common.ROOT / case['input']) as package:
+                body = ET.fromstring(package.read('word/document.xml')).find('w:body', w)
+            tables = body.findall('w:tbl', w)
+            self.assertEqual(len(tables), 2)
+            self.assertEqual([t.find('w:tblPr/w:tblW', w).get('{%s}w' % fixtures.W) for t in tables], ['4800', '6000'])
+            self.assertIsNone(tables[0].find('w:tblPr/w:tblBorders', w))
+            self.assertEqual(len(tables[1].find('w:tblPr/w:tblBorders', w)), 4)
+            self.assertEqual(tables[1].find('w:tblPr/w:tblCellMar/w:left', w).get('{%s}w' % fixtures.W), '720')
+            children = list(body)
+            self.assertEqual(children.index(tables[1]) - children.index(tables[0]),
+                             2 if case['id'].endswith('-control') else 1)
+
+    def test_literal_tab_pairs_differ_only_in_the_text_tab_representation(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        for kind in ('body', 'header', 'footer', 'multiple'):
+            cid = 'tabs-literal-text-' + kind
+            actual, control = records[cid], records[cid + '-control']
+            self.assertEqual(actual['tokens'], control['tokens'])
+            self.assertEqual(actual['assertions'], control['assertions'])
+            with ZipFile(common.ROOT / actual['input']) as left, ZipFile(common.ROOT / control['input']) as right:
+                for part in left.namelist():
+                    if not part.endswith('.xml') or not part.startswith('word/'):
+                        self.assertEqual(left.read(part), right.read(part)); continue
+                    a, b = ET.fromstring(left.read(part)), ET.fromstring(right.read(part))
+                    for parent in a.iter():
+                        for child in list(parent):
+                            if child.tag != w + 't' or '\t' not in (child.text or ''): continue
+                            at = list(parent).index(child); parent.remove(child)
+                            for index, segment in enumerate(child.text.split('\t')):
+                                if index:
+                                    parent.insert(at, ET.Element(w + 'tab')); at += 1
+                                if segment:
+                                    node = ET.Element(w + 't'); node.text = segment; parent.insert(at, node); at += 1
+                    for root in (a, b):
+                        for text in root.iter(w + 't'): text.attrib.pop('{http://www.w3.org/XML/1998/namespace}space', None)
+                    self.assertEqual(ET.tostring(a), ET.tostring(b))
+
+    def test_deleted_tab_cases_cover_both_representations_and_an_untracked_control(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = {'w': fixtures.W}
+        for suffix in ('', '-explicit', '-control'):
+            case = records['tabs-literal-text-deleted' + suffix]
+            self.assertEqual(case['profile']['review'], 'markup')
+            self.assertEqual(case['tokens'], {'EstuaryEnd': 1, 'EstuaryMark': 1, 'North': 1})
+            with ZipFile(common.ROOT / case['input']) as package:
+                root = ET.fromstring(package.read('word/document.xml'))
+            self.assertEqual(len(root.findall('.//w:del', w)), 0 if suffix == '-control' else 1)
+            tabs = root.findall('.//w:r/w:tab', w)
+            literal = [n for n in root.iter() if '\t' in (n.text or '')]
+            self.assertEqual(len(tabs), 0 if suffix == '' else 1)
+            self.assertEqual(len(literal), 1 if suffix == '' else 0)
+
+    def test_dot_leader_source_policy_recognizes_only_rendered_tab_characters(self):
+        stop = '<w:pPr><w:tabs><w:tab w:val="right" w:leader="dot" w:pos="9360"/></w:tabs></w:pPr>'
+        inputs = [('<w:r><w:t>&#9;</w:t></w:r>', True),
+                  ('<w:del w:id="1" w:author="A"><w:r><w:delText>&#9;</w:delText></w:r></w:del>', True),
+                  ('<w:r><w:tab/></w:r>', True),
+                  ('<w:r><w:instrText>&#9;</w:instrText></w:r>', False),
+                  ('<w:r><w:t>Marker</w:t></w:r>', False),
+                  ('<w:r><w:t>...</w:t><w:tab/></w:r>', False)]
+        for content, allowed in inputs:
+            with self.subTest(content=content), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                fixtures.package(root / 'policy.docx', '<w:p>' + stop + content + '</w:p>')
+                record = {'input': 'policy.docx', 'pdfTextNormalization': 'isolated-dot-leaders-v1'}
+                if allowed: common.validate_pdf_text_policy(record, root)
+                else:
+                    with self.assertRaises(ValueError): common.validate_pdf_text_policy(record, root)
 
     def test_agreement_font_variant_changes_only_the_declared_family(self):
         from zipfile import ZipFile
@@ -505,6 +715,30 @@ class RegistryContract(unittest.TestCase):
             first.find(w + 'comment').set(w + 'author', second.find(w + 'comment').get(w + 'author'))
             self.assertEqual(ET.tostring(first), ET.tostring(second))
 
+    def test_inline_drawing_set_differs_only_in_the_drawing_and_its_deletion(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        ids = ['drawings-inline-shape', 'drawings-inline-shape-deleted', 'drawings-inline-group',
+               'drawings-inline-group-deleted', 'drawings-inline-picture-control']
+        w = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
+        wp = '{http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing}'
+        bodies = []
+        for case_id in ids:
+            case = records[case_id]
+            self.assertEqual(case['tokens'], records[ids[0]]['tokens'])
+            self.assertEqual(case['assertions'], records[ids[0]]['assertions'])
+            self.assertEqual(case['profile']['review'], 'markup' if case_id.endswith('-deleted') else 'final')
+            with ZipFile(common.ROOT / case['input']) as package:
+                body = ET.fromstring(package.read('word/document.xml')).find(w + 'body')
+                paragraphs = body.findall(w + 'p')
+                self.assertEqual(len(paragraphs), 3)
+                drawing = paragraphs[1].find('.//' + w + 'drawing')
+                self.assertEqual(drawing.find(wp + 'inline/' + wp + 'extent').attrib, {'cx': '1828800', 'cy': '914400'})
+                self.assertEqual(paragraphs[1].find(w + 'del') is not None, case_id.endswith('-deleted'))
+                bodies.append(b''.join(ET.tostring(p) for p in (paragraphs[0], paragraphs[2])))
+        self.assertEqual(len(set(bodies)), 1)
+
     def test_textbox_pair_differs_only_in_zero_relative_dimensions(self):
         import xml.etree.ElementTree as ET
         from zipfile import ZipFile
@@ -529,7 +763,260 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v52')
+        self.assertEqual(registry['suite']['id'], 'core-v167')
+
+    def test_paragraph_text_rejects_wrong_lines_and_missing_words(self):
+        import gzip
+        cases = [c for c in common.validate_registry()['cases'] if c['id'].startswith('paragraph-text-')]
+        self.assertEqual(len(cases), 16)
+        for case in cases:
+            with self.subTest(case=case['id']):
+                path = common.ROOT / 'docs/results/paragraph-text-independence' / (case['id'] + '-candidate-inspection.json.gz')
+                with gzip.open(path, 'rt') as stream:
+                    actual = json.load(stream)
+                self.assertEqual(pdf.reference_failures(case, actual, 'libreoffice'), [])
+                marker = 'landing' if '-justify-' in case['id'] else 'Water'
+                for delta in (-14, 14):
+                    changed = copy.deepcopy(actual)
+                    boundary = next(w for w in changed['words'] if w['text'] == marker)
+                    boundary['rect'][1] += delta
+                    boundary['rect'][3] += delta
+                    self.assertIn('assertion-marker-region', pdf.reference_failures(case, changed, 'libreoffice'))
+                changed = copy.deepcopy(actual)
+                changed['words'] = [w for w in changed['words'] if w['text'] != 'Hazel01']
+                self.assertIn('assertion-marker-region', pdf.reference_failures(case, changed, 'libreoffice'))
+
+    def test_single_line_grid_rejects_displaced_lines_and_wrong_pages(self):
+        import gzip
+        cases = [c for c in common.validate_registry()['cases'] if c['id'].startswith('single-line-grid-')]
+        self.assertEqual(len(cases), 8)
+        for case in cases:
+            with self.subTest(case=case['id']):
+                path = common.ROOT / 'docs/results/single-line-grid' / (case['id'] + '-candidate-inspection.json.gz')
+                with gzip.open(path, 'rt') as stream:
+                    actual = json.load(stream)
+                self.assertEqual(pdf.reference_failures(case, actual, 'libreoffice'), [])
+                slot = next(a for a in case['assertions'] if a['marker'] == 'Beech003')['rect']
+                for delta in (slot[1] - slot[3], slot[3] - slot[1]):
+                    changed = copy.deepcopy(actual)
+                    third = next(w for w in changed['words'] if w['text'] == 'Beech003')
+                    third['rect'][1] += delta
+                    third['rect'][3] += delta
+                    self.assertIn('assertion-marker-region', pdf.reference_failures(case, changed, 'libreoffice'))
+                changed = copy.deepcopy(actual)
+                next(w for w in changed['words'] if w['text'] == 'Beech010')['page'] = 2
+                self.assertIn('assertion-marker-region', pdf.reference_failures(case, changed, 'libreoffice'))
+
+    def test_automatic_spacing_rejects_a_shifted_second_paragraph(self):
+        import gzip
+        cases = [c for c in common.validate_registry()['cases'] if c['id'].startswith('automatic-body-')]
+        self.assertEqual(len(cases), 8)
+        for case in cases:
+            with self.subTest(case=case['id']):
+                path = common.ROOT / 'docs/results/automatic-body-spacing' / (case['id'] + '-candidate-inspection.json.gz')
+                with gzip.open(path, 'rt') as stream:
+                    actual = json.load(stream)
+                self.assertEqual(pdf.reference_failures(case, actual, 'libreoffice'), [])
+                for delta in (-9, 5, 9):
+                    changed = copy.deepcopy(actual)
+                    second = next(w for w in changed['words'] if w['text'] == 'BirchSecond')
+                    second['rect'][1] += delta
+                    second['rect'][3] += delta
+                    self.assertIn('assertion-marker-region', pdf.reference_failures(case, changed, 'libreoffice'))
+
+    def test_contextual_spacing_rejects_restoring_the_old_gap(self):
+        import gzip
+        cases = [c for c in common.validate_registry()['cases'] if c['id'].startswith('contextual-own-')]
+        self.assertEqual(len(cases), 9)
+        for case in cases:
+            with self.subTest(case=case['id']):
+                path = common.ROOT / 'docs/results/contextual-own-spacing' / (case['id'] + '-candidate-inspection.json.gz')
+                with gzip.open(path, 'rt') as stream:
+                    actual = json.load(stream)
+                self.assertEqual(pdf.reference_failures(case, actual, 'libreoffice'), [])
+                changed = copy.deepcopy(actual)
+                second = next(w for w in changed['words'] if w['text'] == 'OakSecond')
+                second['rect'][1] += 12
+                second['rect'][3] += 12
+                self.assertIn('assertion-marker-region', pdf.reference_failures(case, changed, 'libreoffice'))
+
+    def test_authored_table_continuation_rejects_a_second_page_only_shift(self):
+        import gzip
+        case = next(c for c in common.validate_registry()['cases']
+                    if c['id'] == 'authored-table-width-center-continuation')
+        path = common.ROOT / 'docs/results/authored-table-width/authored-table-width-center-continuation-reference-inspection.json.gz'
+        with gzip.open(path, 'rt') as stream:
+            native = json.load(stream)
+        self.assertEqual(pdf.reference_failures(case, native, 'libreoffice'), [])
+        shifted = copy.deepcopy(native)
+        for word in shifted['words']:
+            if word['page'] == 2:
+                word['rect'][0] += 21
+                word['rect'][2] += 21
+        self.assertIn('assertion-marker-region', pdf.reference_failures(case, shifted, 'libreoffice'))
+
+    def test_block_height_declarations_reject_vertical_drift_and_wrong_continuation(self):
+        import gzip
+        cases = {c['id']: c for c in common.validate_registry()['cases']}
+        for suffix, page, distance in [('picture-1', 1, 3), ('row-continuation', 2, 12)]:
+            cid = 'block-content-height-' + suffix
+            path = common.ROOT / 'docs/results/block-content-height' / (cid + '-reference-inspection.json.gz')
+            with gzip.open(path, 'rt') as stream:
+                native = json.load(stream)
+            self.assertEqual(pdf.reference_failures(cases[cid], native, 'libreoffice'), [])
+            for direction in (-1, 1):
+                shifted = copy.deepcopy(native)
+                for word in shifted['words']:
+                    if word['page'] == page and (suffix != 'picture-1' or word['text'] == 'FernBelow'):
+                        word['rect'][1] += direction * distance
+                        word['rect'][3] += direction * distance
+                self.assertIn('assertion-marker-region', pdf.reference_failures(cases[cid], shifted, 'libreoffice'))
+
+    def test_block_height_picture_declarations_reject_removed_bitmap(self):
+        import gzip
+        folder = common.ROOT / 'docs/results/block-content-height'
+        with gzip.open(folder / 'picture-missing-inspection.json.gz', 'rt') as stream:
+            missing = json.load(stream)
+        for case in common.validate_registry()['cases']:
+            if not case['id'].startswith('block-content-height-picture-'):
+                continue
+            with gzip.open(folder / (case['id'] + '-reference-inspection.json.gz'), 'rt') as stream:
+                native = json.load(stream)
+            self.assertEqual(pdf.reference_failures(case, native, 'libreoffice'), [])
+            if case['id'].endswith('picture-1'):
+                self.assertEqual(missing['words'], native['words'])
+                self.assertEqual(missing['tokens'], native['tokens'])
+            removed = dict(native, colorRegions=missing['colorRegions'])
+            failures = [c['name'] for c in pdf.correctness(case, native, removed) if not c['passed']]
+            self.assertEqual(failures, ['assertion-color-reference-geometry'] * 2)
+
+    def test_polygon_color_declarations_reject_missing_paint_but_not_an_equal_area_apex_change(self):
+        import gzip
+        folder = common.ROOT / 'docs/results/preset-polygons'
+        for case in common.validate_registry()['cases']:
+            if not case['id'].startswith('preset-polygon-'):
+                continue
+            with gzip.open(folder / (case['id'] + '-reference-inspection.json.gz'), 'rt') as stream:
+                native = json.load(stream)
+            self.assertEqual(pdf.reference_failures(case, native, 'libreoffice'), [])
+            removed = dict(native, colorRegions=[])
+            failures = [c['name'] for c in pdf.correctness(case, native, removed) if not c['passed']]
+            self.assertEqual(failures, ['assertion-color-reference-geometry'] * len(case['assertions']))
+            if case['id'] == 'preset-polygon-triangle-adjusted':
+                with gzip.open(folder / 'wrong-apex-inspection.json.gz', 'rt') as stream:
+                    mutant = json.load(stream)
+                self.assertEqual(mutant['words'], native['words'])
+                self.assertTrue(all(c['passed'] for c in pdf.correctness(case, native, mutant)))
+
+    def test_custom_path_evidence_detects_missing_paint_and_wrong_curve(self):
+        import gzip
+        folder = common.ROOT / 'docs/results/custom-paths'
+        evidence = json.loads((folder / 'evidence.json').read_text())
+        cases = [c for c in common.validate_registry()['cases'] if c['id'].startswith('custom-path-')]
+        self.assertEqual(len(cases), 11)
+        for case in cases:
+            self.assertEqual(case['profile'], {'review': 'final', 'comments': 'hidden'})
+            with gzip.open(folder / (case['id'] + '-reference-inspection.json.gz'), 'rt') as stream:
+                native = json.load(stream)
+            self.assertEqual(pdf.reference_failures(case, native, 'libreoffice'), [])
+            removed = dict(native, colorRegions=[])
+            failures = [c['name'] for c in pdf.correctness(case, native, removed) if not c['passed']]
+            self.assertEqual(failures, ['assertion-color-reference-geometry'] * len(case['assertions']))
+            panel = next(e for e in evidence['cases'] if e['id'] == case['id'])
+            for renderer in ('reference', 'candidate'):
+                observed = next(p for p in panel['panels'] if p['renderer'] == renderer)
+                probes = observed['supplementaryPaintProbes']
+                self.assertTrue(probes and all(p['passed'] for p in probes))
+                self.assertEqual(len(observed['sourcePaint']), 3)
+                self.assertTrue(all(w['inkPixels'] > 0 for w in observed['sourcePaint']))
+            if case['id'] == 'custom-path-quadratic':
+                with gzip.open(folder / 'wrong-curve-inspection.json.gz', 'rt') as stream:
+                    mutant = json.load(stream)
+                self.assertEqual(mutant['words'], native['words'])
+                self.assertTrue(all(c['passed'] for c in pdf.correctness(case, native, mutant)))
+        self.assertEqual(sum(not p['passed'] for p in evidence['wrongCurveControl']['supplementaryPaintProbes']), 2)
+
+    def test_vml_line_declarations_detect_missing_paint_wrong_pen_and_shifted_text(self):
+        import gzip
+        from copy import deepcopy
+        folder = common.ROOT / 'docs/results/vml-lines'
+        for case in common.validate_registry()['cases']:
+            if not case['id'].startswith('vml-line-'):
+                continue
+            with gzip.open(folder / (case['id'] + '-reference-inspection.json.gz'), 'rt') as stream:
+                native = json.load(stream)
+            self.assertEqual(pdf.reference_failures(case, native, 'libreoffice'), [])
+            if any(a['type'] == 'colored-rule-widths' for a in case['assertions']):
+                removed = dict(native, colorRegions=[], coloredRuleWidths=[])
+                failures = [c['name'] for c in pdf.correctness(case, native, removed) if not c['passed']]
+                self.assertEqual(failures, ['assertion-color-reference-geometry', 'assertion-colored-rule-widths'])
+                wrong_pen = deepcopy(native)
+                for rule in wrong_pen['coloredRuleWidths']:
+                    rule['widthsPt'] = [.75]
+                failures = [c['name'] for c in pdf.correctness(case, native, wrong_pen) if not c['passed']]
+                self.assertEqual(failures, ['assertion-colored-rule-widths'])
+            shifted = deepcopy(native)
+            after = next(w for w in shifted['words'] if w['text'] == 'HazelAfter')
+            after['rect'][1] += 3
+            after['rect'][3] += 3
+            failures = [c['name'] for c in pdf.correctness(case, native, shifted) if not c['passed']]
+            self.assertEqual(failures, ['assertion-marker-reference-position'])
+
+    def test_markup_paper_companions_detect_missing_revealed_unpainted_and_off_sheet_text(self):
+        import gzip
+        folder = common.ROOT / 'docs/results/markup-paper-clips'
+        for case in common.validate_registry()['cases']:
+            if not case['id'].startswith('markup-paper-clip-'):
+                continue
+            with gzip.open(folder / (case['id'] + '-candidate-inspection.json.gz'), 'rt') as stream:
+                info = json.load(stream)
+            declaration = case['pdfCompanion']
+            self.assertEqual(case['profile']['review'], 'markup' if 'Formatted:' in declaration['requiredTokens'] else 'final')
+            self.assertTrue(all(c['passed'] for c in pdf.companion_checks(declaration, info)))
+            mutations = [('missing', 'source-tokens'), ('outside', 'source-bounds'), ('unpainted', 'source-paint')]
+            if declaration.get('forbiddenTokens'):
+                mutations.append(('revealed', 'forbidden-tokens'))
+            if 'Formatted:' in declaration['requiredTokens']:
+                mutations.append(('balloon', 'source-tokens'))
+            for kind, failure in mutations:
+                mutant = copy.deepcopy(info)
+                marker = 'Formatted:' if kind == 'balloon' else 'ElmClosing'
+                word = next(w for w in mutant['words'] if w['text'] == marker)
+                if kind in ('missing', 'balloon'):
+                    mutant['words'].remove(word)
+                elif kind == 'outside':
+                    word['rect'][0] += 612
+                    word['rect'][2] += 612
+                elif kind == 'unpainted':
+                    word['inkPixels'] = 0
+                else:
+                    mutant['words'].append(dict(word, text=declaration['forbiddenTokens'][0]))
+                failures = [c['name'] for c in pdf.companion_checks(declaration, mutant) if not c['passed']]
+                self.assertIn('companion-pdf-' + failure, failures, (case['id'], kind))
+
+    def test_oversized_keep_next_inventory_detects_missing_shifted_and_moved_lines(self):
+        import gzip
+        folder = common.ROOT / 'docs/results/oversized-keep-next'
+        for case in common.validate_registry()['cases']:
+            if not case['id'].startswith('oversized-keep-next-'):
+                continue
+            with gzip.open(folder / (case['id'] + '-reference-inspection.json.gz'), 'rt') as stream:
+                native = json.load(stream)
+            self.assertEqual(pdf.reference_failures(case, native, 'libreoffice'), [])
+            for kind in ('missing', 'shifted', 'moved'):
+                mutant = copy.deepcopy(native)
+                word = next(w for w in mutant['words'] if w['text'] == 'RowanItem001')
+                if kind == 'missing':
+                    mutant['words'].remove(word)
+                    del mutant['tokens']['RowanItem001']
+                elif kind == 'shifted':
+                    word['rect'][1] += 18
+                    word['rect'][3] += 18
+                else:
+                    word['page'] += 1
+                failures = [c['name'] for c in pdf.correctness(case, native, mutant) if not c['passed']]
+                self.assertIn('assertion-marker-region', failures, (case['id'], kind))
+                self.assertEqual('expected-visible-tokens' in failures, kind == 'missing')
 
     def test_hidden_paragraph_mark_pair_changes_only_mark_visibility(self):
         import xml.etree.ElementTree as ET
@@ -553,6 +1040,62 @@ class RegistryContract(unittest.TestCase):
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['tokens']['1.'], 1)
         self.assertEqual({a['marker'] for a in pair[0]['assertions']}, {'CedarHeading.', 'CedarBody'})
+
+    def test_note_format_revision_pair_changes_only_the_run_revision(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records['notes-format-revision-markup'], records['notes-format-revision-markup-control']]
+        w = '{' + fixtures.W + '}'
+        with ZipFile(common.ROOT / pair[0]['input']) as revised, ZipFile(common.ROOT / pair[1]['input']) as plain:
+            self.assertEqual(revised.namelist(), plain.namelist())
+            for name in revised.namelist():
+                if name != 'word/footnotes.xml':
+                    self.assertEqual(revised.read(name), plain.read(name))
+            first, second = [ET.fromstring(z.read('word/footnotes.xml')) for z in (revised, plain)]
+            changes = list(first.iter(w + 'rPrChange'))
+            self.assertEqual(len(changes), 1)
+            properties = next(p for p in first.iter(w + 'rPr') if changes[0] in list(p))
+            self.assertEqual(properties.find(w + 'sz').get(w + 'val'), '20')
+            properties.remove(changes[0])
+            self.assertEqual(ET.tostring(first), ET.tostring(second))
+        for case in pair:
+            self.assertEqual(case['profile'], {'review': 'markup', 'comments': 'hidden'})
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
+        self.assertEqual({a['marker'] for a in pair[0]['assertions'] if 'marker' in a}, {'NoteQuartz'})
+
+    def test_story_comment_cases_differ_only_in_the_commented_story(self):
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        stories = {'comments-footer-story-margin': 'word/footer1.xml',
+                   'comments-footnote-story-margin': 'word/footnotes.xml',
+                   'comments-body-story-control': 'word/document.xml'}
+        cases = [records[c] for c in stories]
+        parts = ('word/document.xml', 'word/footer1.xml', 'word/footnotes.xml')
+        for case, commented in zip(cases, stories.values()):
+            with ZipFile(common.ROOT / case['input']) as package:
+                for part in parts:
+                    xml = package.read(part).decode()
+                    self.assertEqual('w:commentRangeStart w:id="5"' in xml, part == commented, (case['id'], part))
+                    self.assertNotIn('w:commentReference', xml)
+                self.assertIn(b'OakStoryNote', package.read('word/comments.xml'))
+            self.assertEqual(case['profile'], {'review': 'final', 'comments': 'hidden'})
+            self.assertEqual(case['htmlProfile'], {'review': 'final', 'comments': 'margin'})
+            self.assertEqual(case['htmlAssertions'], cases[0]['htmlAssertions'])
+            self.assertEqual(case['tokens'], cases[0]['tokens'])
+
+    def test_mixed_story_comments_keep_a_body_point_reference_and_a_ranged_note(self):
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        for cid in ('comments-footer-story-mixed-reference', 'comments-body-story-mixed-reference-control'):
+            case = records[cid]
+            with ZipFile(common.ROOT / case['input']) as package:
+                body = package.read('word/document.xml').decode()
+                self.assertIn('w:commentReference w:id="6"', body)
+                self.assertEqual('w:commentReference w:id="5"' in body, cid.endswith('-control'))
+                self.assertIn('OakBodyPoint', package.read('word/comments.xml').decode())
+            self.assertEqual([a['marker'] for a in case['htmlAssertions']], ['OakStoryNote', 'OakBodyPoint'])
 
     def _section_change_pair(self, reproducer, control):
         """The pair's inputs differ only by the w:sectPrChange on the final section; returns that
@@ -580,6 +1123,64 @@ class RegistryContract(unittest.TestCase):
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
         return change, final, settings, pair
 
+    def test_endnote_font_pair_changes_only_the_default_size(self):
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records['notes-endnote-font-' + suffix] for suffix in ('11pt', '12pt-control')]
+        with ZipFile(common.ROOT / pair[0]['input']) as note, ZipFile(common.ROOT / pair[1]['input']) as control:
+            self.assertEqual(note.namelist(), control.namelist())
+            for name in note.namelist():
+                content = note.read(name)
+                if name == 'word/styles.xml':
+                    self.assertIn(b'<w:sz w:val="22"/>', content)
+                    content = content.replace(b'<w:sz w:val="22"/>', b'<w:sz w:val="24"/>')
+                self.assertEqual(content, control.read(name))
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        self.assertEqual(pair[0]['assertions'][0]['tolerancePt'], 0.5)
+        self.assertEqual(pair[1]['assertions'][0]['rect'], [78, 121, 125, 135.5])
+
+    def test_reserved_endnotes_have_positive_ids_but_no_visible_tokens(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        for kind in ('continuationNotice', 'separator', 'continuationSeparator', 'normal'):
+            record = records['notes-reserved-' + kind.lower()]
+            with ZipFile(common.ROOT / record['input']) as archive:
+                note = ET.fromstring(archive.read('word/endnotes.xml')).find(w + 'endnote')
+                body = ET.fromstring(archive.read('word/document.xml'))
+            self.assertEqual(note.get(w + 'id'), '2')
+            self.assertEqual(note.get(w + 'type'), kind)
+            self.assertEqual(len(body.findall('.//' + w + 'endnoteReference')), int(kind == 'normal'))
+            self.assertNotIn('RESERVED', record['tokens'])
+            self.assertEqual(record['tokens'].get('i', 0), 2 if kind == 'normal' else 0)
+
+    def test_vertical_merge_cases_keep_the_same_logical_interval(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = [c for c in common.validate_registry()['cases']
+                   if c['id'].startswith('tables-merge-grid-')]
+        self.assertEqual(len(records), 5)
+        w = '{' + fixtures.W + '}'
+        for record in records:
+            with ZipFile(common.ROOT / record['input']) as archive:
+                table = ET.fromstring(archive.read('word/document.xml')).find('.//' + w + 'tbl')
+            intervals = []
+            for row in table.findall(w + 'tr'):
+                before = row.find(w + 'trPr/' + w + 'gridBefore')
+                column = int(before.get(w + 'val')) if before is not None else 0
+                for cell in row.findall(w + 'tc'):
+                    span = cell.find(w + 'tcPr/' + w + 'gridSpan')
+                    width = int(span.get(w + 'val')) if span is not None else 1
+                    if cell.find(w + 'tcPr/' + w + 'vMerge') is not None:
+                        intervals.append((column, width))
+                    column += width
+            self.assertEqual(intervals, [(2, 2 if record['id'].endswith('multi-column') else 1)] * 2)
+            self.assertEqual(record['htmlAssertions'][0]['equals'], '2')
+            self.assertEqual(record['assertions'][0]['marker'], 'MergedLabel')
+            self.assertEqual(record['tokens'].get('TopLeft', 0),
+                             0 if record['id'].endswith('starter-grid-before') else 1)
+
     def test_endnote_section_change_pair_changes_only_the_pending_change(self):
         w = '{' + fixtures.W + '}'
         change, final, settings, pair = self._section_change_pair(
@@ -598,6 +1199,34 @@ class RegistryContract(unittest.TestCase):
         self.assertEqual(size(final), ('11906', '16838'))
         self.assertEqual(size(change.find(w + 'sectPr')), ('12240', '15840'))
         self.assertEqual([a['marker'] for a in pair[0]['assertions']], ['FloatLead'])
+
+    def test_deleted_page_field_pair_changes_only_the_deletion(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records[c] for c in ('paragraphs-page-number-deleted-field', 'paragraphs-page-number-deleted-field-control')]
+        w = '{' + fixtures.W + '}'
+        with ZipFile(common.ROOT / pair[0]['input']) as deleted, ZipFile(common.ROOT / pair[1]['input']) as kept:
+            self.assertEqual(deleted.namelist(), kept.namelist())
+            for name in deleted.namelist():
+                if name != 'word/footer1.xml':
+                    self.assertEqual(deleted.read(name), kept.read(name))
+            first, second = [ET.fromstring(z.read('word/footer1.xml')) for z in (deleted, kept)]
+            paragraph = first.find(w + 'p')
+            wrapper = paragraph.find(w + 'del')
+            self.assertEqual([e.text for e in wrapper.iter(w + 'delInstrText')], [' PAGE ', ' NUMPAGES '])
+            index = list(paragraph).index(wrapper)
+            paragraph.remove(wrapper)
+            for offset, child in enumerate(wrapper):
+                paragraph.insert(index + offset, child)
+            for element in first.iter():
+                element.tag = {w + 'delText': w + 't', w + 'delInstrText': w + 'instrText'}.get(element.tag, element.tag)
+            self.assertEqual(ET.tostring(first), ET.tostring(second))
+        for case in pair:
+            self.assertEqual(case['profile'], {'review': 'markup', 'comments': 'hidden'})
+            self.assertEqual({k: case['tokens'][k] for k in '123'}, {'1': 1, '2': 1, '3': 4})
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
 
     def test_footer_frame_pair_changes_only_frame_properties(self):
         import xml.etree.ElementTree as ET
@@ -655,6 +1284,51 @@ class RegistryContract(unittest.TestCase):
             self.assertIn(region['marker'], control)
             self.assertLess(region['rect'][2], {'TabNorth': 298.7, 'TabEast': 363.3, 'TabSouth': 442.7}[region['marker']])
 
+    def test_style_frame_pair_changes_only_direct_frame_attributes(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records[c] for c in ('footer-style-frame-partial-direct', 'footer-style-frame-full-direct-control')]
+        w = '{' + fixtures.W + '}'
+        with ZipFile(common.ROOT / pair[0]['input']) as partial, ZipFile(common.ROOT / pair[1]['input']) as control:
+            self.assertEqual(partial.namelist(), control.namelist())
+            for name in partial.namelist():
+                if name != 'word/footer1.xml': self.assertEqual(partial.read(name), control.read(name))
+            style = ET.fromstring(partial.read('word/styles.xml')).find(w + 'style/' + w + 'pPr/' + w + 'framePr')
+            first, second = [ET.fromstring(z.read('word/footer1.xml')) for z in (partial, control)]
+            frames = [f.find(w + 'p/' + w + 'pPr/' + w + 'framePr') for f in (first, second)]
+            self.assertEqual(frames[0].attrib, {w + 'wrap': 'auto'})
+            self.assertEqual(frames[1].attrib, style.attrib)
+            frames[1].attrib = dict(frames[0].attrib)
+            self.assertEqual(ET.tostring(first), ET.tostring(second))
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
+        self.assertEqual({a['marker'] for a in pair[0]['assertions']}, {'ElmStampBody', 'ElmStamp01', 'ElmSheet01'})
+
+    def test_style_aligned_frame_pair_changes_only_direct_frame_attributes(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records[c] for c in ('footer-style-frame-align-direct-offset', 'footer-style-frame-align-full-direct-control')]
+        w = '{' + fixtures.W + '}'
+        with ZipFile(common.ROOT / pair[0]['input']) as offset, ZipFile(common.ROOT / pair[1]['input']) as control:
+            self.assertEqual(offset.namelist(), control.namelist())
+            for name in offset.namelist():
+                if name != 'word/footer1.xml': self.assertEqual(offset.read(name), control.read(name))
+            styles = ET.fromstring(offset.read('word/styles.xml'))
+            style = next(s for s in styles.iter(w + 'style') if s.get(w + 'styleId') == 'CentredFrame').find(w + 'pPr/' + w + 'framePr')
+            self.assertEqual(style.get(w + 'xAlign'), 'center')
+            first, second = [ET.fromstring(z.read('word/footer1.xml')) for z in (offset, control)]
+            frames = [f.find(w + 'p/' + w + 'pPr/' + w + 'framePr') for f in (first, second)]
+            self.assertEqual(frames[0].attrib, {w + 'wrap': 'around', w + 'x': '2000'})
+            restated = {k: v for k, v in style.attrib.items() if k != w + 'xAlign'} | {w + 'x': '2000'}
+            self.assertEqual(frames[1].attrib, restated)
+            frames[1].attrib = dict(frames[0].attrib)
+            self.assertEqual(ET.tostring(first), ET.tostring(second))
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
+        self.assertEqual({a['marker'] for a in pair[0]['assertions']}, {'LarchAlignBody', 'LarchAlign01', 'LarchSheet01'})
+
     def test_manual_tab_reproducer_and_narrow_left_control(self):
         import xml.etree.ElementTree as ET
         from zipfile import ZipFile
@@ -681,6 +1355,99 @@ class RegistryContract(unittest.TestCase):
             self.assertNotIn(number, control['tokens'])
         self.assertEqual(len(repro['assertions']), 6)
         self.assertEqual(control['assertions'][0]['marker'], 'CedarTitle01')
+
+    def test_right_stop_reproducers_differ_from_their_control_only_in_the_trigger(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        indent, markup, control = [records['tabs-right-stop-' + c] for c in ('in-right-indent', 'inline-markup', 'plain-control')]
+        w = '{' + fixtures.W + '}'
+        def document(case):
+            with ZipFile(common.ROOT / case['input']) as archive:
+                return ET.fromstring(archive.read('word/document.xml'))
+        def strip_indent(xml):
+            for ind in xml.iter(w + 'ind'): ind.attrib.pop(w + 'right', None)
+            return ET.tostring(xml)
+        plain, indented, marked = document(control), document(indent), document(markup)
+        # The indent reproducer is the control plus an 864-twip right indent on every entry.
+        self.assertEqual([i.get(w + 'right') for i in indented.iter(w + 'ind')], ['864'] * 4)
+        self.assertEqual(strip_indent(indented), ET.tostring(plain))
+        for paragraph in plain.iter(w + 'p'):
+            stops = paragraph.findall(w + 'pPr/' + w + 'tabs/' + w + 'tab')
+            self.assertEqual([(t.get(w + 'val'), t.get(w + 'pos'), t.get(w + 'leader')) for t in stops],
+                             [('left', '1296', None), ('right', '9360', 'dot')])
+            self.assertIsNone(paragraph.find(w + 'pPr/' + w + 'ind').get(w + 'right'))
+        # The markup reproducer adds one inert item per entry and nothing else.
+        self.assertEqual(len(list(marked.iter(w + 'bookmarkStart'))), 1)
+        self.assertEqual(len(list(marked.iter(w + 'noBreakHyphen'))), 1)
+        self.assertEqual(len(list(marked.iter(w + 'u'))), 2)
+        self.assertEqual(len(list(marked.iter(w + 'strike'))), 2)
+        self.assertEqual(len(list(plain.iter(w + 'tab'))), len(list(marked.iter(w + 'tab'))))
+        self.assertEqual(markup['tokens'].get('AlderTitle02'), 1)
+        self.assertEqual(markup['tokens'].get('Spillway-West'), 1)
+        for case in (indent, markup, control):
+            self.assertEqual({a['marker'] for a in case['assertions']},
+                             {'AlderTitle01', 'AlderTitle02', 'AlderTitle03', 'AlderTitle04', '3', '12', '27', '140'})
+            self.assertEqual(case['pdfTextNormalization'], 'isolated-dot-leaders-v1')
+        self.assertEqual(indent['tokens'], control['tokens'])
+
+    def test_overhanging_tail_pair_changes_only_the_suffix_text(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        ids = ['tabs-right-stop-long-tail', 'tabs-right-stop-short-tail-control']
+        w = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
+        with ZipFile(common.ROOT / records[ids[0]]['input']) as long, ZipFile(common.ROOT / records[ids[1]]['input']) as short:
+            self.assertEqual(long.namelist(), short.namelist())
+            for name in long.namelist():
+                if name != 'word/document.xml':
+                    self.assertEqual(long.read(name), short.read(name))
+            first = ET.fromstring(long.read('word/document.xml'))
+            second = ET.fromstring(short.read('word/document.xml'))
+            tail = list(first.iter(w + 't'))[-1]
+            self.assertEqual(len(tail.text.split()), 24)
+            tail.text = list(second.iter(w + 't'))[-1].text
+            self.assertEqual(ET.tostring(first), ET.tostring(second))
+
+    def test_leader_line_gap_reproducers_differ_from_their_controls_only_in_the_trigger(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        w = '{' + fixtures.W + '}'
+        def document(case_id):
+            with ZipFile(common.ROOT / records[case_id]['input']) as archive:
+                return ET.fromstring(archive.read('word/document.xml'))
+        def without(xml, drop):
+            for parent in list(xml.iter()):
+                for child in list(parent):
+                    if drop(child): parent.remove(child)
+            return ET.tostring(xml)
+        # Field numbers: removing the field's begin, instruction, separator and end runs leaves the control.
+        field_runs = lambda e: e.tag == w + 'r' and (e.find(w + 'fldChar') is not None or e.find(w + 'instrText') is not None)
+        field = document('tabs-right-stop-pageref-field')
+        self.assertEqual([t.text for t in field.iter(w + 'instrText')], [f' PAGEREF _Birch{i} \\h ' for i in range(4)])
+        self.assertEqual(without(field, field_runs), ET.tostring(document('tabs-right-stop-pageref-control')))
+        # A bookmark inside each link is the linked case's only addition.
+        bookmarks = lambda e: e.tag in (w + 'bookmarkStart', w + 'bookmarkEnd')
+        linked = document('tabs-right-stop-linked-bookmark')
+        self.assertEqual(len([h for h in linked.iter(w + 'hyperlink') if h.find(w + 'bookmarkStart') is not None]), 4)
+        self.assertEqual(without(linked, bookmarks), ET.tostring(document('tabs-right-stop-linked-control')))
+        # The second-stop pair differs only in where its two right-hand stops sit.
+        def stops(case_id):
+            xml = document(case_id)
+            positions = [[t.get(w + 'pos') for t in p.iter(w + 'tab') if t.get(w + 'pos')] for p in xml.iter(w + 'p')]
+            for t in xml.iter(w + 'tab'): t.attrib.pop(w + 'pos', None)
+            return positions, ET.tostring(xml)
+        (indent, rest), (control, control_rest) = stops('tabs-right-stop-second-stop-in-indent'), stops('tabs-right-stop-second-stop-control')
+        self.assertEqual(rest, control_rest)
+        self.assertEqual(indent, [['1296', '8800', '9360']] * 2 + [['1296', '8800', '8900']] * 2)
+        self.assertEqual(control, [['1296', '8000', '8400']] * 2 + [['1296', '8000', '8100']] * 2)
+        for case_id in ('tabs-right-stop-pageref-field', 'tabs-right-stop-pageref-control', 'tabs-right-stop-wrapped-title',
+                        'tabs-right-stop-second-stop-in-indent', 'tabs-right-stop-second-stop-control',
+                        'tabs-right-stop-linked-bookmark', 'tabs-right-stop-linked-control'):
+            self.assertEqual({i.get(w + 'right') for i in document(case_id).iter(w + 'ind')}, {'864'})
+            self.assertEqual(records[case_id]['pdfTextNormalization'], 'isolated-dot-leaders-v1')
+        self.assertEqual(records['tabs-right-stop-linked-bookmark']['tokens'], records['tabs-right-stop-linked-control']['tokens'])
 
     def test_legacy_header_pairs_preserve_everything_except_number_representation(self):
         import xml.etree.ElementTree as ET

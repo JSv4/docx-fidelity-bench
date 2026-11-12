@@ -1,14 +1,433 @@
+The three All Markup sheet cases for Docxodus #1559 and #1577 contain original Mariner labels and
+literal OOXML authored in `bench/fixtures.py`. No product fixture, helper, document, image or font
+program is imported. Liberation Serif is separately provisioned.
+
+The two last-line-leading cases for Docxodus #1571 contain original Thistle labels and literal
+OOXML authored in `bench/fixtures.py`. No product fixture, helper, document, image or font
+program is imported. Liberation Serif is separately provisioned.
+
+The eleven text-placement cases for Docxodus #1550 and #1562 extend the original Hazel prose
+with literal OOXML authored in `bench/fixtures.py`. No product fixture, helper, document,
+image or font program is imported. Liberation Serif is separately provisioned.
+
+The eight line-content cases for Docxodus #1565 and #1567 contain original Yarrow, Aster,
+Larkspur and Primula labels and literal OOXML authored in `bench/fixtures.py`. No product
+fixture, helper, document or font program is imported. Native Word evidence was printed from
+separately authored Times New Roman/Arial copies and is retained as diagnostic only.
+
+The eight section-mark cases for Docxodus #1572 contain original Heron and Kestrel labels and
+literal OOXML authored in bench/fixtures.py. No product fixture, helper, document, image or
+font program is imported, and no reporter attachment was opened or used.
+
+The four tracked table-insertion diagnostics use original Larch labels and literal OOXML
+authored in `bench/projection_fixtures.py`. No product fixture, helper, document or asset is
+imported. Their screenshots show measured public API output, not Word page renders.
+
+The two embedded-font cases for Docxodus #1575 contain original Liatris labels and literal OOXML
+authored in `bench/fixtures.py`. Their one embedded font part is the original `Liatris Packaged`
+program generated from geometric chevrons by `bench/collection_fonts.py`, obfuscated with an
+invented key; the package audit admits exactly those bytes. No product fixture, installed font,
+reporter attachment or third-party outline is imported. The screenshots show Docxodus output.
+
+The four compatibility and header spacing cases for Docxodus #1553 (`compat-spacing-adds*`,
+`header-automatic-spacing*`) are authored the same way, with original Marram labels.
+
+The eight bordered-paragraph spacing cases for Docxodus #1677 (`border-spacing-*`) are authored
+the same way, with original Hornbeam labels. Their review images show Docxodus output in
+Liberation Serif with the measured regions outlined, not Word page renders.
+
+The twelve bordered-box cases for Docxodus #1692 (`border-between*`, `border-contextual-edge*`,
+`border-page-start*`, `border-keep-next*`, `border-shading*`) are authored the same way, with
+original Whitebeam labels and an original light-blue fill. Their review images are of the same kind.
+
+The eight box-slab cases for Docxodus #1692 (`border-keep-last*`, `border-shading-mixed*`,
+`border-shading-open-side*`, `border-between-position*`) are authored the same way, with original
+Blackthorn labels, the same light-blue fill, an original sand fill and an original dark-blue rule.
+Their review images are of the same kind.
+
+The four missing-paragraph-default cases for Docxodus #1652 (`paragraph-default-missing`,
+`paragraph-default-no-defaults`, `paragraph-default-empty-control`,
+`paragraph-default-explicit-control`) are authored the same way, with original Teasel labels. The
+two matching redline cases (`redline-default-spacing-missing-default`,
+`redline-default-spacing-stated-default-control`) contain original Teasel sentences and literal
+OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document or font program
+is imported, and no reporter attachment was opened or used. Their review sheets show Times New
+Roman copies of these inputs as printed by Word 2024 and exported by Docxodus with separately
+installed fonts.
+
+The twenty line-grid cases for Docxodus #1551 (`grid-at-least-below-pitch*`,
+`grid-tracked-lines-before*`, `grid-at-least-above-pitch*`, `grid-revised-paragraphs*`,
+`grid-bold-word*`, `grid-larger-word*`, `grid-text-centred*`, `grid-broken-lines*`,
+`grid-broken-at-least*`, `grid-larger-word-reduced*`) are authored the same way, with original
+Tamarack labels, the original deleted word Juniper and the original styled word Sedge.
+
+The six line-break indent cases for Docxodus #1654 (`break-indent-numbered*`,
+`break-indent-hanging-tab*`, `break-indent-first-line-tab*`) contain original Teasel labels and
+literal OOXML authored in bench/fixtures.py. No product fixture, helper, document, image or font
+program is imported, and no reporter attachment was opened or used. Their screenshots show Word
+2024 and Docxodus output for these inputs.
+
+The eight automatic-spacing cases for Docxodus #1553 contain original Marram labels and literal
+OOXML authored in bench/fixtures.py. No product fixture, helper, document, image or font program
+is imported, and no reporter attachment was opened or used.
+
+The eight fractional-measure cases for Docxodus #1622 contain original Quillwort labels and
+literal OOXML authored in bench/fixtures.py. No product fixture, helper, document, image or
+font program is imported, and no reporter attachment was opened or used.
+
+The two Strict-conformance redline cases for Docxodus #1268 contain original Ledger text and
+literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document or
+font program is imported. Their review images are LibreOffice renders of these packages and of
+Docxodus outputs made from them.
+
+The three math-control redline cases for Docxodus #1189 contain original Juniper labels and
+literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document or
+font program is imported, and the issue's fixture bundle was not copied. Their review images are
+measurement cards, not page renders: Word 2024 opened the fixtures unmodified.
+
+The two default-spacing redline cases for Docxodus #1576 contain original Quince labels and
+literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document or
+font program is imported. Their review images are measurement cards, not page renders: Word 2024
+measured copies whose Liberation Serif name is changed to its metric twin Times New Roman.
+
+The twelve cell-revision redline cases for Docxodus #1404 contain original Orchard labels and
+literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document,
+image or font program is imported. The Word 2024 results their expected documents encode were
+measured on separately authored probe documents; no Word output and no file attached to the
+issue is included.
+
+The twenty cell-revision redline cases for Docxodus #1688 contain the same original Orchard labels
+and literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document,
+image or font program is imported. The Word 2024 results their expected documents encode were
+measured on separately authored probe documents and confirmed on each case's own source; no Word
+output is included.
+
+The eight cell-revision redline cases for Docxodus #1694 contain the same original Orchard labels
+and literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document,
+image or font program is imported. The Word 2024 results their expected documents encode were
+measured on separately authored probe documents and confirmed on each case's own source; no Word
+output is included.
+
+The fourteen deleted-row projection diagnostics use original Larch row labels and literal
+OOXML authored in `bench/projection_fixtures.py`. No product fixture, helper, document
+or asset is imported. Screenshots show measured API output, not Word page renders.
+
+The four raw-tracking diagnostics use original Larch labels and literal OOXML authored
+in `bench/projection_fixtures.py`. No product fixture, helper, document or asset is imported.
+Their screenshots show measured public API output, not Word page renders.
+
+The two flow-story cases contain original Gentian labels and literal OOXML authored
+in bench/fixtures.py. No product fixture, helper, document, image or font program is
+imported. Review screenshots show all authored content across three LibreOffice pages.
+
+The two text-span cases contain original Celandine labels and literal OOXML authored
+in bench/fixtures.py. No product fixture, helper, document, image or font program is
+imported. Review screenshots show these original inputs rendered by LibreOffice.
+
+The eight EMF cases contain original Iris labels, literal OOXML and metafile records
+authored in bench/fixtures.py. Their PNG control is generated from a literal pixel
+function. No product fixture, helper, image, document or font program is imported.
+
+The six mixed-minimum cases extend original Primrose labels and literal OOXML authored
+in bench/fixtures.py. Independent font metrics define line and ink bounds. No product
+fixture, helper, document or font program is imported.
+
+The four small-minimum cases contain original Primrose labels and literal OOXML
+authored in bench/fixtures.py. Line slots use the authored minimum and independent
+Liberation Serif metrics. No renderer fixture, helper, document or font is imported.
+
+The four WordPerfect-justification cases contain original Tansy labels and literal
+OOXML authored in bench/fixtures.py. Expected positions use the published expanded
+line-width rule and independently provisioned Liberation Mono metrics. No renderer
+fixture, helper, document, image or font program is imported.
+
+The six manual text-width cases contain original Juniper, Ledger and Fern labels and
+literal OOXML authored in `bench/fixtures.py`. No product fixture, helper, document,
+image or font program is imported. Liberation Mono is separately provisioned.
+
+The eight footnote-width and footer-rounding cases extend this repository’s original
+Sorrel labels with literal OOXML and Harbor body labels in `bench/fixtures.py`. No
+product fixture, helper, document, image or font program is imported. Liberation
+Mono and Serif are separately provisioned. Review sheets show the original inputs.
+
+The four running-story picture cases extend the original Sorrel paragraphs with
+justification and the independently generated diamond from `bench/fixtures.py`.
+No renderer fixture, image, helper or font program is imported.
+
 # Authorship and artifact rights
+
+The eight space-run cases for Docxodus #1565 contain original Clover labels and literal
+OOXML authored in `bench/fixtures.py`. No product fixture, helper, document, image or
+font program is imported. Liberation Serif is separately provisioned.
+
+The eight late-wrapped-paragraph cases for Docxodus #1558 extend the original Chive
+OOXML generator with later source positions, a right-edge picture and a fitting prefix.
+No product fixture, helper, document, image or font program is imported. The retained
+comparison also includes the two unchanged leading-picture controls.
+
+The six character-width cases for Docxodus #1564 contain original Sorrel labels and
+literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, document,
+image or font program is imported. Liberation Mono is separately provisioned.
+
+The eight natural-minimum cases for Docxodus #1566 contain original Oxlip labels and
+literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, document,
+image or font program is imported. Review sheets show these original inputs rendered
+by separately provisioned applications.
+
+The eight empty-run cases for Docxodus #1565 contain original Mallow labels and literal
+OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, document, image or
+font program is imported. Review sheets show only these original inputs rendered by
+separately provisioned applications.
+
+The twelve floating-paragraph cases for Docxodus #1558 contain original Chive labels,
+literal OOXML and a small solid bitmap authored in `bench/fixtures.py`. No product
+fixture, helper, document, image or font program is imported. Review sheets show only
+these original inputs rendered by separately provisioned applications.
+
+The nine grouped-paper-placement cases for Docxodus #1558 contain original Sedge labels
+and literal DrawingML authored in `bench/fixtures.py`. No product fixture, helper,
+document, image or font program is imported. Review sheets contain only these original
+inputs rendered by separately provisioned applications.
+
+The eight single-line grid cases for Docxodus #1551 contain original Beech labels and
+literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template,
+external document, image or font program is imported.
+
+The eight automatic body-spacing cases for Docxodus #1553 contain original Birch labels
+and literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template,
+external document, image or font program is imported. Review sheets show these original inputs.
+
+The nine contextual own-spacing cases for Docxodus #1553 contain original Oak labels
+and literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template,
+external document, image or font program is imported. Review sheets show these original inputs.
+
+The eight resizing off-paper cases for Docxodus #1558 contain original Fir labels and
+literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template,
+external document, image or font program is imported. Review sheets show only these
+authored inputs and separately provisioned renderers.
+
+The eight plain-equation cases for Docxodus #1554 contain original Maple text and literal
+OMML authored in `bench/fixtures.py`. No renderer fixture, helper, template, document,
+image or font program is imported. DejaVu Serif and Liberation Serif are separately
+provisioned. Labeled review sheets show only these authored inputs and their local renders.
+
+The eleven custom-path cases for Docxodus #1554 contain original Willow labels and
+literal geometry authored in `bench/fixtures.py`. No renderer fixture, helper, template,
+external document, image or font program is imported. Review sheets show these authored inputs.
+
+The seven markup-paper-clip cases for Docxodus #1558 contain original Elm labels and
+literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template,
+external document, image or font program is imported. Review sheets show these authored inputs.
+
+The seven oversized keep-next cases for Docxodus #1558 contain original Rowan labels
+and literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template,
+external document, image or font program is imported. Review sheets show these authored inputs.
+
+The nine VML-line cases for Docxodus #1554 contain original Hazel labels and literal
+OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template, external
+document, image or font program is imported. Review sheets show these authored inputs.
+
+The nine block-content-height cases for Docxodus #1568 contain original Fern labels,
+literal OOXML and a small bitmap authored in `bench/fixtures.py`. No renderer fixture,
+helper, template, external document, image or font program is imported.
+
+The eight authored-table-width cases for Docxodus #1563 contain original Ash inventory labels,
+orchard prose and literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper,
+template, external document, image or font program is imported. Review sheets show only these
+inputs rendered by separately provisioned applications.
+
+The six column-fragmentation cases for Docxodus #1558 contain original Larch labels
+and literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template,
+external document, image or font program is imported. Review sheets show only these
+authored inputs rendered by separately provisioned applications.
+
+The two font-observation ledger cases for Docxodus #1558 contain original Spruce labels
+and literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template,
+external document, image or font program is imported. Review sheets show only these
+authored inputs rendered by separately provisioned applications.
+
+The eight literal-line-ending cases for Docxodus #1564 contain original Aspen labels and
+literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, template,
+external document, image or font program is imported. Review sheets show only these
+authored inputs rendered by separately provisioned applications.
+
+The five revised-section-story cases for Docxodus #1555 contain original Juniper workshop
+and coastal survey prose and literal OOXML authored in `bench/redline_fixtures.py`. No renderer
+fixture, helper, template, external document, image or font file is imported. Review sheets
+show only these authored inputs rendered by separately provisioned applications.
+
+The five table-page-remainder cases for Docxodus #1569 contain original Alder ledger labels and
+literal OOXML authored in `bench/fixtures.py`. No renderer fixture, external document, image or
+font program is imported. Review screenshots show only these authored inputs and local renders.
+
+The two header-textbox redline cases and two unscored boundary diagnostics for Docxodus #1557 contain original Cedar register
+labels and literal OOXML authored in `bench/redline_fixtures.py`. No renderer fixture,
+helper, template, image or font program is imported. Review sheets show only these
+authored documents rendered by separately provisioned applications.
+
+The three retained-section-boundary cases for Docxodus #1545 contain original Cedar
+archive text and literal OOXML authored in `bench/redline_fixtures.py`. They import
+no renderer fixtures, helpers, templates, images or font programs. Review sheets
+show only these authored documents rendered by separately provisioned applications.
+
+The three inserted-section cases for Docxodus #1534 contain original Cedar archive
+text and literal OOXML authored in `bench/redline_fixtures.py`. No renderer fixture,
+helper, template, image or font program is imported. Review sheets show only these
+authored documents rendered by separately provisioned applications.
+
+The four complete-rewrite cases for Docxodus #1535 contain original Cedar prose and
+literal OOXML authored in `bench/redline_fixtures.py`. No renderer fixture, helper,
+template, image or font program is imported. Review sheets show only these authored
+inputs rendered by separately provisioned applications.
+
+The three field-default-spacing cases for Docxodus #1533 contain original Cedar station
+text and literal OOXML authored in `bench/redline_fixtures.py`. No renderer fixture,
+helper, template, image or font program is imported. Labeled review sheets show these
+authored documents rendered by separately provisioned applications.
+
+The seven font-observation diagnostics for Docxodus #1525 contain original Birch text and
+literal OOXML authored in `bench/font_fixtures.py`. They import no renderer fixture, helper,
+document, template, image or font program. Liberation and Noto fonts are separately provisioned;
+the repository stores only source packages, measurement metadata and authored-document screenshots.
+
+The 14 review-visibility cases for Docxodus #1523 contain original Hazel labels and
+literal OOXML authored in `bench/fixtures.py`. They import no renderer fixture, helper,
+document, template, image or font program. Liberation Sans is separately provisioned.
+Review screenshots show only these original inputs rendered by separately provisioned tools.
+
+The nine fractional-table-border cases for Docxodus #1522 contain original Alder labels
+and literal OOXML authored in `bench/fixtures.py`. They import no renderer fixture,
+helper, document, template, image or font program. Liberation Sans is separately provisioned.
+The labeled comparison sheets show only these original inputs and their unchanged page/table rasters.
+
+The eight DrawingML-group cases for Docxodus #1527 contain original Willow labels,
+literal OOXML and a small solid-color PNG authored in `bench/fixtures.py`. They import
+no document, helper, template, external image or font program. Their labeled comparison
+sheets show only these authored inputs and explicit panels where export produced no PDF.
+
+The six widow-minimum cases for Docxodus #1520 contain original Rosemary labels
+and literal WordprocessingML authored in `bench/fixtures.py`. They import no
+document, helper, template, image or font program. Labeled comparison sheets
+show only these authored inputs rendered by separately provisioned tools.
+
+The six signed-leading-indent cases for Docxodus #1519 contain original Laurel labels
+and literal WordprocessingML authored in `bench/fixtures.py`. They import no document,
+template, helper, image or font program. Liberation Serif is separately provisioned.
+The labeled comparison sheets show only these authored inputs.
+
+The ten paragraph-replacement cases for Docxodus #1526 contain original harbor text
+and literal WordprocessingML authored in `bench/redline_fixtures.py`. They import no
+document, helper, template, image or font program. Their labeled review screenshots
+show only these authored inputs rendered by separately provisioned tools.
+
+The eight frame-clearance cases for Docxodus #1510 contain original Sage labels and
+literal WordprocessingML authored in `bench/fixtures.py`. They import no document, helper,
+template, image or font program. Liberation Serif is separately provisioned.
+
+The seven frame-interval cases for Docxodus #1509 contain original Sorrel labels and
+literal WordprocessingML authored in `bench/fixtures.py`. They import no document, helper,
+template, image or font program. Liberation Serif is separately provisioned.
+
+The five endnote-comment cases for Docxodus #1505 reuse the original Maple inputs
+authored here for #1490. Only their export profile changes. They import no document,
+font program, image or external content. Labeled comparison sheets show only these
+original inputs; they include every produced PDF page and label baseline refusals.
+
+The 30 inline-frame cases for Docxodus #1487 contain original Aster labels and literal
+WordprocessingML authored in `bench/fixtures.py`. They import no renderer fixture, helper,
+document, template, image or font program. Liberation Serif is separately provisioned.
+The marker-separation assertion reads extracted PDF word rectangles; it introduces no asset
+or font redistribution and does not modify the captured pages. The 30 labeled comparison
+sheets and 30 production sheets show only these original inputs rendered by separately provisioned tools; production runs are 41236923512 and 41236925335. Local PDF
+mutation reports contain hashes and extracted Aster geometry; no PDF, font program, external
+document content or authentication data is included.
+
+The twelve textbox-fit cases for Docxodus #1492 contain original Linden text and literal
+OOXML authored in `bench/fixtures.py`, including their theme defaults. They import no document,
+template, image or font program. Liberation Serif is separately provisioned. The labeled
+review screenshots show only these original inputs rendered by separately provisioned tools.
+The production sheets show the same original inputs from runs 41226336896 and 41224613858,
+including labeled refusal panels; no authentication data or font program is included.
+
+The thirteen bordered-footnote cases for Docxodus #1491 contain original Ash inventory text
+and literal WordprocessingML authored in `bench/fixtures.py`. They import no external document,
+template, image or font program. Liberation Serif is separately provisioned. Review screenshots
+show only these original inputs rendered by separately provisioned tools.
+
+The seven complete-comment cases for Docxodus #1490 contain original Maple inventory text
+and literal OOXML authored in `bench/fixtures.py`. No external document, template, image
+or font program is imported. Liberation Serif is separately provisioned. The labeled screenshots
+under `docs/results/complete-margin-comments/` show only these original inputs rendered by
+separately provisioned tools; they contain no external document text or authentication data.
+The production sheets show these same original inputs from CI runs 41217522515 and
+41217524429, including labeled refusals and missing pages; no standalone font program is included.
+
+The seventeen following-tab cases for Docxodus #1488 contain original Wren inventory text and
+literal OOXML authored in `bench/fixtures.py`. They import no renderer fixture, document
+content, image or font program. Liberation Serif is separately provisioned under the
+existing font contract.
+The labeled comparison sheets under `docs/results/right-tab-wrapping/` show only
+these original inputs rendered by separately provisioned tools. No document from an
+external party, authentication data, native Word reference or font program is included.
+The production sheets show these same original inputs from CI runs 41211297080 and
+41211298822, including labeled panels where main produced no PDF or no second page.
+
+The six note-marker cases for Docxodus #1493 contain original Fir labels and literal OOXML
+authored in `bench/fixtures.py`. They import no renderer fixture, document content, image or
+font program. Times New Roman and Arial are separately provisioned under the existing font
+contract. Review sheets show only these original inputs rendered by separately provisioned
+tools; no native Word reference or font program is included. The production sheets contain
+these same original inputs from CI runs 41206727404 and 41206728862, with generated refusal
+panels where no PDF was produced. They contain no authentication data or external document text.
+
+The twelve section-margin cases for Docxodus #1486 contain original Hemlock labels and
+literal section properties authored in `bench/fixtures.py`. They import no renderer fixtures,
+external document content, images or font programs. Their fixed 12 pt lines isolate page
+geometry from differences in word wrapping between renderers.
+The labeled sheets under `docs/results/continuous-margins/` show only those original
+inputs rendered by separately provisioned tools. Native Word PDFs and font programs remain
+outside the source inventory; metadata records their hashes and geometry observations.
+The production sheets show the same original inputs from CI runs 41198047111 and
+41198049187. They contain no external document content, authentication data or standalone
+font program.
+
+The ten static-image cases for Docxodus #1484 contain original Poplar text, independently drawn
+pixels and literal WMF records authored in `bench/fixtures.py`. PNG and TIFF encode the same
+128 by 96 RGB image; WMF authors separate rectangle/ellipse records. The rectangle is blue
+and the ellipse purple so independent mandatory bounds and paint-coverage checks locate both. The package audit admits
+only the exact generated TIFF/WMF bytes, without accepting other binary resources by signature.
+No renderer fixture, external image, document content or font program is imported.
+The labeled sheets under `docs/results/static-images/` show only these original inputs and
+separately provisioned renderers. Word diagnostics remain outside the source inventory;
+their hashes and image-semantics observations include no native PDF or font program.
+The production sheets show these same original inputs from CI runs 41192815098 and
+41192867714, including generated failure panels where main produced no PDF. They contain
+no authentication data, external document content or standalone font program.
+
+The five ruby-guide cases for Docxodus #1483 are original Larch nursery text and literal OOXML
+authored in `bench/fixtures.py`. They contain no imported documents, images, or embedded fonts.
+The production sheets under `docs/results/ruby-annotations/` show these original inputs from
+CI runs 41184866924 and 41184896314, with generated failure panels where main produced no PDF.
+No external document content, authentication material or standalone font program is included.
+
+The endnote-font reproduction and section-sized control are original Willow text and literal
+OOXML authored in `bench/fixtures.py`, with no imported document content or embedded fonts.
+
+The Firefox line-height pair for Docxodus #1424 is original Pine text and literal OOXML
+authored in `bench/fixtures.py`. It imports no document content, images, or font programs.
+Browser screenshots use separately installed Liberation Serif and record its file hash.
 
 John Scrudato IV owns the original harness, adapter, documentation, fixture generator, text, and diamond graphic authored for this repository. The MIT license covers these files and the generated DOCX fixtures. No document templates, input documents, corpus downloads, embedded font files, or vendored libraries are included.
 
 `bench/fixtures.py` is the complete source of every PDF-track fixture, and `bench/redline_fixtures.py` of every redline-track input, expected document and authored redline under `fixtures/redline/`. It constructs OOXML packages from literal text and generates the diamond image from pixel coordinates. `fixtures/manifest.json` records each document hash, generator hash, author, license, origin, asset statement, expected text, and assertions. CI regenerates every package and compares the bytes.
 
+Authored packages hold no external resources and no embedded font programs; `bench/audit.py` (`check_package`) enforces this on every regenerated package. Two narrowly declared shapes are permitted, because cases about the package itself need them. An external hyperlink relationship from the main document may name a target on the reserved `example.com` domain (a `mailto:` listing lower-case `@example.com` addresses, or a plain `https://example.com/` path, with no query, port or percent-encoding): such a target is a navigation address that no renderer or harness loads, and it names no real party. The font table may carry an embedded-font relationship whose target part holds exactly `PLACEHOLDER_FONT_BYTES` from `bench/common.py`, a one-line ASCII string stating that it is not a font program. Every font relationship must come from the font table and reach those bytes, whatever its target is named, and every part a font-program content type (by Default extension or Override, parameters ignored) types must hold them too; part names, relationship types and content types are compared case-insensitively. Independently of all metadata, every entry's bytes must be text (UTF-8 with no NUL byte, which covers XML), a complete PNG, the exact original TIFF/WMF bytes emitted by `static_image_assets()`, or the placeholder: a font program, obfuscated or compressed, always has NUL bytes in its table directory, so an orphan one is refused whatever it is called. No generic TIFF/WMF signature exemption is granted: truncated, appended or changed binaries are refused. Any other external relationship, font relationship, font-typed or font-named entry, or binary entry is still refused.
+
 Contributions must include an author and rights record. Adding an asset requires a generator or an individually reviewed origin and redistribution grant. Git tracking alone is insufficient. Inputs are never fetched from a corpus service. Fixtures are immutable during rendering.
 
 The harness uses the Python standard library. Its opt-in PDF dot-leader token policy verifies these authored package sources and preserves raw PDF word geometry and raster evidence. This includes the independent delivered-HTML attribute inspector in `bench/html_artifacts.py`. The redline track's adapter (`adapters/docxodus-redline`) and validation tool (`tools/ooxml-validator`) are original C# sources; they are compiled outside the source tree against a separately provisioned Docxodus checkout and the DocumentFormat.OpenXml NuGet package (MIT), neither of which is copied here. LibreOffice, Poppler, qpdf, fontconfig, Node.js, and Docxodus are separately provisioned executables or renderer packages; their implementations are not copied into this repository. Their own licenses continue to apply: [LibreOffice MPL-2.0 and its distributed component notices](https://www.libreoffice.org/licenses/), Poppler GPL-2.0 or GPL-3.0 as recorded in the installed package's copyright inventory, [qpdf Apache-2.0](https://qpdf.readthedocs.io/en/stable/license.html), fontconfig MIT, Node.js MIT with its distributed notices, and Docxodus MIT with its package notices. The benchmark invokes them through process or public API boundaries. Installation does not change their licensing; consult each installed distribution's complete notices.
 
-The core documents request Liberation Serif, except for the explicitly named Times New Roman agreement variant. Install the unmodified Liberation font package separately and retain its [SIL Open Font License notices](https://github.com/liberationfonts/liberation-fonts/blob/main/LICENSE). Provision Times New Roman separately under its own license; the rendering workflow uses `ttf-mscorefonts-installer` and accepts the Core Fonts for the Web EULA. Font binaries are not committed or covered by this repository's MIT license. See Microsoft's [font redistribution and document embedding guidance](https://learn.microsoft.com/en-us/typography/fonts/font-faq). A run records the exact regular, bold, italic, and bold-italic file hashes, rejects family substitution, and checks PDF font identities. Generated reference and candidate PDFs can contain font subsets; retain the recorded font contract with the artifact bundle.
+The core documents request Liberation Serif, except for the explicitly named Times New Roman agreement variant. Install the unmodified Liberation font package separately and retain its [SIL Open Font License notices](https://github.com/liberationfonts/liberation-fonts/blob/main/LICENSE). Provision Times New Roman separately under its own license; the rendering workflow uses `ttf-mscorefonts-installer` and accepts the Core Fonts for the Web EULA. These third-party font binaries are not committed or covered by this repository's MIT license. See Microsoft's [font redistribution and document embedding guidance](https://learn.microsoft.com/en-us/typography/fonts/font-faq). A run records the exact regular, bold, italic, and bold-italic file hashes, rejects family substitution, and checks PDF font identities. Generated reference and candidate PDFs can contain font subsets; retain the recorded font contract with the artifact bundle.
 
 Before registering operator-captured Word PDFs, approve the input, image, font embedding, and artifact-publication rights. Capture metadata must explicitly attest approval. Generated reports and PDF bundles stay outside the source tree and are published as CI artifacts. This file describes the included inventory and process; it does not extend the license of separately installed software.
 
@@ -35,6 +454,344 @@ The run-in keep pair for Docxodus #1294 is original literal-text OOXML generated
 
 The default tab interval cases for Docxodus #1269 are original literal-text OOXML generated by `bench/fixtures.py`; no renderer fixtures or third-party content are imported.
 
+The table-placement cases for Docxodus #1219 and #1244 are original literal-text OOXML generated by `bench/fixtures.py`; no renderer fixtures or third-party content are imported. Their Word for the web reference PDFs were exported by the repository owner from these exact inputs.
+
 The endnote-format and floating-picture section-change pairs for Docxodus #1314 are original literal-text OOXML generated by `bench/fixtures.py`; their text, reviewer metadata, section properties and the generated diamond picture are authored here, and no renderer fixtures or third-party content are imported.
 
 The screenshots in `docs/results/pending-section-change/` are page renders of the #1314 section-change inputs above, by LibreOffice 25.8.7.3 and Docxodus, taken from this repository's render CI runs 39942526470 and 39942538985.
+
+The deleted-footer-field pair for Docxodus #1272 is original literal-text OOXML generated by `bench/fixtures.py`; its Rowan text, reviewer metadata and fields are authored here, and no renderer fixtures or third-party content are imported.
+
+The screenshot sheets under `docs/results/deleted-page-field/` crop the footer band from this repository's own CI render evidence (runs 39906312404 and 39911469648) of the two deleted-page-field fixtures: LibreOffice reference rasters and Docxodus candidate rasters of original fixture text. No third-party content is included.
+The footnote formatting-revision pair for Docxodus #1271 is original literal-text OOXML generated by `bench/fixtures.py`; no renderer fixtures or third-party content are imported.
+
+The screenshot sheets in `docs/results/note-format-revision/` show LibreOffice and Docxodus renders of the original footnote formatting-revision pair above. No third-party document content is included.
+
+The inline-drawing set for Docxodus #1270 is original literal-text OOXML generated by `bench/fixtures.py`: its shape, group and tracked-deletion markup, its text and the teal raster of its picture control are authored here, and no renderer fixtures or third-party content are imported. The screenshots in `docs/results/inline-drawing-shapes/` are page renders of these inputs by LibreOffice 25.8.7.3 and Docxodus, taken for review.
+
+The leader-line fixtures for Docxodus #1275 (right stop inside the right indent, inline markup, and their plain control) are original literal-text OOXML generated by `bench/fixtures.py`; no renderer fixtures or third-party content are imported.
+
+The six screenshots under `docs/results/right-tab-leader-lines/` show this repository's original #1275 fixtures, rendered by LibreOffice 25.8.7.3 and Docxodus f34d9b4d in CI run 39560008323 (artifact 12330606248, bench source 5df978cd4ed212666251ec8c75ede64350e66fbb). They are copied byte-for-byte from the candidate run's page-1 evidence; no third-party document content is included.
+
+The leader-line fixtures for Docxodus #1285 (`PAGEREF` page numbers, wrapping titles, a second stop inside the right indent, bookmarks inside links, a long suffix after an overhanging stop, and their controls) are original literal-text OOXML generated by `bench/fixtures.py`; no renderer fixtures or third-party content are imported.
+
+The nine screenshot sheets under `docs/results/right-tab-gaps/` show this repository's original #1285 inputs in fresh LibreOffice 25.8.7.3 and Docxodus 466ee317 public-export captures. Each page-one feature band is rasterized at 96 DPI and displayed at its original size beside the other renderer, with HTML-generated labels. `capture.json` records the exact inputs, renderer and limitations. No third-party document content is included.
+
+The Strict semantic-limit pair for Docxodus #1352 is original literal-text OOXML generated by
+`bench/redline_fixtures.py`. Its Marsh station agreement text, conformance variants and expected
+redlines are authored here; no renderer fixtures or third-party content are imported. The
+labelled screenshot sheets under `docs/results/strict-semantic-limits/` show LibreOffice 25.8.7.3
+page rasters of these original inputs and Docxodus comparison outputs, with recorded API outcomes.
+
+The column-width revision quartet for Docxodus #1322 is original literal-text OOXML authored by
+`bench/redline_fixtures.py`. Gauge labels, grids, width properties and expected native revisions
+are generated here. No renderer fixtures or third-party content are imported. The labelled
+screenshot sheets under `docs/results/column-width-revisions/` are LibreOffice 25.8.7.3 page
+rasters of Docxodus outputs from these original inputs, with recorded schema and registry outcomes.
+
+The pending-grid column-edit cases for Docxodus #1342 are original literal-text OOXML authored
+by `bench/redline_fixtures.py`. Survey marker labels, grid histories, shading, row heights and
+expected resolved documents are generated here. No product fixtures or third-party document
+content are imported. The labelled sheets under `docs/results/pending-grid-columns/` show
+LibreOffice 25.8.7.3 PDF rasters of candidate outputs from these original cases.
+
+The block-insertion cases for Docxodus #1331 are original literal-text OOXML authored by
+`bench/redline_fixtures.py`. Harbor labels, the shaded table and independent expected outputs
+are generated here. No product fixture or third-party content is imported. The labelled sheets
+under `docs/results/block-insertion/` are LibreOffice 25.8.7.3 PDF rasters of candidate outputs.
+
+The mixed-run text-edit cases for Docxodus #1337 are original OOXML authored by
+`bench/redline_fixtures.py`. Marina labels, split words, marker positions and independent
+expected redlines are generated here. No product fixtures or third-party document content
+are imported. The sheets under `docs/results/mixed-run-edits/` rasterize the candidate
+outputs after LibreOffice 25.8.7.3 rejection, followed by its PDF export.
+
+The tracked-column gap cases for Docxodus #1330 are original literal-text OOXML authored by
+`bench/redline_fixtures.py`. Waterway marker labels, nonuniform widths, omitted/merged rows
+and expected resolved packages are generated here. No product fixtures or third-party content
+are imported. The sheets under `docs/results/tracked-column-gaps/` are LibreOffice 25.8.7.3 PDF
+rasters of actual saved candidates after the declared native review attempt, including its
+unresolved output when that review fails.
+
+The adjacent-table property cases for Docxodus #1341 are original literal OOXML authored by
+`bench/fixtures.py`. Estuary and pier labels, nonuniform widths, colored borders and cell margins
+are generated here. No product fixtures or third-party content are imported. Capture sheets under
+`docs/results/adjacent-table-properties/` compare actual production PDFs with LibreOffice PDFs;
+they do not claim to be Word references.
+
+The literal-text tab cases for Docxodus #1353 are original OOXML authored by `bench/fixtures.py`.
+Estuary labels, run formatting, tab stops, running stories and controls are generated here. No product
+fixtures or third-party documents are imported. Capture sheets under `docs/results/literal-text-tabs/`
+show the authored LibreOffice reference and labelled Docxodus diagnostic PDFs; no font files are embedded.
+
+The story-comment cases for Docxodus #1310 reuse original literal-text OOXML from branch
+`fixtures/story-comments` (8bbf090): the ledger text, reviewer metadata and comment are authored
+in this repository. No product fixtures or third-party document content are imported. New labelled
+captures under `docs/results/story-comments/` rasterize these original inputs.
+
+The eleven floating-shape fixtures for Docxodus #1346 are original literal-text OOXML generated by `bench/fixtures.py`. Their Harbor text, DrawingML rectangle/group/hexagon, explicit wrapping and stacking values, and plain VML rectangle are authored here. They contain no imported document content, third-party graphics, or embedded fonts. Existing inline-drawing inputs supply unchanged controls.
+
+The labelled sheets under `docs/results/floating-shapes/` rasterize these original floating-shape inputs with LibreOffice and Docxodus. The screenshots contain the authored document text and generated geometry; no font files or third-party document content are distributed.
+
+The seven Summit reviewer-account cases for Docxodus #1317 are original literal-text OOXML
+created by `bench/redline_fixtures.py`. Their people metadata, account identifiers, comments,
+expected documents and authored redlines are generated here. The raw-package inspector and its
+negative controls are original work. No renderer fixture, external document, font binary or
+third-party text is imported.
+
+The seven review sheets under `docs/results/revision-ownership/` show these original Summit packages through Docxodus's public review renderer, together with independently read metadata and original labels. Their source/output hashes and method are recorded in `capture.json`; no third-party document content is included.
+
+The six move-range rejection cases for Docxodus #1340 use original literal-text OOXML authored in
+`bench/redline_fixtures.py`. Their expected paragraphs follow independently observed native Word
+results on the corresponding original core probes. No native Word package, renderer fixture,
+external document content, image or embedded font is imported into this corpus.
+
+The #1339 Times New Roman exact-zero and positive-height row fixtures reuse the original literal-text
+OOXML authored in commit 7851026 of this repository. Their bytes exactly match the source packages
+used for the native Word captures. There are no imported document contents, images or embedded font
+files. Native PDF font subsets remain governed by the separately provisioned font license and the
+recorded reference font contract; no font binaries are redistributed.
+
+
+The #1201 Times New Roman zero-width column fixture and 24pt control reuse original literal-text
+OOXML authored in the row-geometry branch. The package bytes match the separately retained native
+Word inputs. No external document content, images, or font binaries are imported. Rendered evidence
+contains original fixture text and separately licensed font subsets; the font contract and native
+capture hashes are retained with the unmodified local Word references.
+
+The thirteen #1202 oversized-block cases reuse six original row-geometry cases and add seven
+original literal-text OOXML probes in `bench/fixtures.py`. They contain no renderer fixtures,
+external document content, images, or embedded font binaries. The labelled evidence sheets in
+`docs/results/oversized-page-blocks/` show these authored inputs and separately authored core probes
+in native Word and public Docxodus exports. Native font subsets retain the recorded font contract;
+no font binaries are redistributed.
+
+The eight #1217 note-table flow cases reuse original literal-text OOXML from the author's
+`80ac8d7` prototype, with Times New Roman declared for the preserved Word captures. Their exact
+input bytes are reproducible by this repository's generator. Native/candidate comparison PNGs
+and PDF inspections show only these authored fixtures. No external document, template or standalone
+font binary is imported; native PDF font subsets retain the separately provisioned font license.
+
+The nineteen #1217 kept-citation and dense-chain cases reproduce original literal OOXML authored
+for the issue and the original keep/widow/separator controls. The six-part packages are generated
+here without imported documents or templates. Comparison PNGs and PDF inspections in
+`docs/results/kept-note-flow/` show only these authored fixtures. No authentication data or
+standalone font binaries are included; the separately provisioned native PDF font subsets retain
+the recorded font contract.
+
+The fourteen #1217 kept-note paragraph cases in `core-v69` reproduce original literal OOXML and
+font declarations for separately retained native Word captures. The long variants use authored
+unbreakable body/note labels and explicit note breaks, so the unchanged complete-token contract
+can adjudicate them without merging legal native wraps. All source packages regenerate exactly.
+Comparison PNGs and PDF inspections under `docs/results/kept-note-paragraphs/` contain only these
+authored fixtures. No external documents, authentication data or standalone font binaries are
+included; native PDF font subsets retain the separately provisioned font contract.
+
+
+The two #1124 justification-line cases in `core-v70` reproduce original literal OOXML and prose authored for independently captured native Word controls. Integer twip widths preserve all 45 held-out paragraphs without importing a font library or template. Both inputs regenerate byte for byte. Native/candidate PNGs and raw PDF inspections under `docs/results/justification-lines/` contain only this original text. No standalone font binary, external document or authentication data is included; native PDF font subsets retain the separately provisioned font contract.
+
+The three #1124 native text precision inputs in `core-v71` reproduce original literal OOXML and text authored for Word capture. Their glyph, word-gap and eight long-paragraph controls regenerate byte for byte without a font library, template or imported document. Native/candidate PNGs and PDF coordinate inspections under `docs/results/native-text-precision/` contain only this original text. No standalone font binary or authentication data is included. Times New Roman and Arial are separately provisioned; native font subsets retain the recorded family contract and do not establish identical font versions or rasterization.
+
+The optional Word font-binding inspector and its synthetic contract tests are original
+standard-library code. External operator-captured reference packs may contain separately
+licensed embedded fonts only with reviewed rights, source/program hashes and retained
+license notices; those packs remain outside this repository's source inventory. A reviewed
+glyph-identity attestation qualifies an exact captured font program, not a font-name alias
+or an arbitrary replacement family. This change vendors no font binary or third-party
+source document and does not alter the authored corpus or its fixture generation.
+
+The full-page raster comparisons under `docs/results/word-reference-tracks/` show
+only this repository's original authored text and diamond. They contain no font
+program binaries, authentication material or external document content. Native
+PDFs and source font parts remain in the separately licensed external capture
+pack; its OFL notices and exact source/program audit bindings are retained there.
+
+The package-shape cases for Docxodus #1384 and #1388 (`package-*` PDF inputs and the `redline-hyperlink-mailto-*` and `redline-package-*` redline cases) are original literal-text OOXML generated by `bench/fixtures.py` and `bench/redline_fixtures.py`. Their hyperlink targets use only the reserved `example.com` domain, the glossary building block and the font key are invented here, and the embedded-font part holds only the placeholder bytes declared in `bench/common.py`, which are not a font program. No renderer fixtures or third-party content are imported. The sheets under `docs/results/package-shapes/` are LibreOffice 25.8.7.3 page renders of these inputs and of Docxodus outputs produced from them, with generated labels.
+
+The twenty visible-atom/inline-XML cases for Docxodus #1387/#1409 use original Willow/Aster/Birch text and literal OOXML authored in `bench/redline_fixtures.py`. No renderer fixture, template, external content, image or embedded font is imported. The labeled PNGs under `docs/results/visible-atoms/` show public native revision resolution and flow-HTML previews of these authored inputs, captured offline. They contain no font programs or authentication data and do not claim native Word reference status.
+
+The fourteen whole-paragraph control-rewrite cases for Docxodus #1406 use original Edition text,
+ledger paths, invented store identifiers and Pine citation instructions authored literally in
+`bench/redline_fixtures.py`. No renderer fixture, template or external document content is
+imported. Any review previews under `docs/results/control-rewrite/` show only these original
+inputs and native public-API outputs; no data store, font program or authentication data is
+included. The binding metadata is intentionally authored without an external/custom-XML store.
+
+The six nested-inline cases for Docxodus #1410 are literal OOXML and Cedar text authored in
+`bench/fixtures.py`. Hyperlink anchors, constant QUOTE instructions, control ids and custom-XML
+element names are invented here. No renderer fixture/helper, template, external content,
+image, data store or embedded font program is imported. Any review captures under
+`docs/results/nested-inline-render/` show only these original inputs and their public renderer outputs.
+
+The ten inputs under `fixtures/editor/` are literal OOXML, Cedar text and invented revision
+identities authored in `bench/editor_fixtures.py`. They import no product fixture, test harness,
+document template, image, font program or external resource. The original host and action
+runner load separately provisioned public renderer bundles. Labeled screenshots under
+`docs/results/editor-review-tabs/` show only these original inputs, actual shipped UI,
+clipboard destinations and saved native-output observations.
+The #1420 moved-paragraph cases and replacement controls use original literal-text OOXML generated by
+`bench/redline_fixtures.py`; no external document, image, or embedded font is imported.
+The labelled previews in `docs/results/move-from-text/` are LibreOffice PDF rasters of those
+original cases compared by the local Docxodus build, and cropped Word Online screenshots of the
+same moved-paragraph case before and after the proposed change.
+
+The atomic-source cases for Docxodus #1421 contain original literal-text equations, field scaffolding, and drawing XML authored by `bench/redline_fixtures.py`. Their 8 by 8 solid-color PNG is generated here; no external document content, images, or embedded fonts are included.
+The labeled previews in `docs/results/atomic-source/` are LibreOffice PDF rasters of those original inputs compared by the exact recorded Docxodus candidate, with generated case/renderer labels. They contain no third-party document content, font programs or authentication data.
+
+The thirty-four export-reliability cases in `core-v74` are literal OOXML and Larch labels
+independently authored in `bench/fixtures.py`. Running stories, hidden marks, empty tables,
+fixed text boxes, line/cell continuations, citations, unused package text, fractional measures,
+and over-wide grids contain no imported product fixture, document content, graphic, or font.
+The pale page grid is generated from original pixel rules in the same generator.
+The labeled screenshots under `docs/results/export-reliability/` rasterize these exact authored
+inputs and public-renderer outputs. The optional Pillow composition helper adds only renderer
+labels around unchanged page rasters. They contain no font programs or external document content.
+
+The twenty-eight export-reliability follow-up inputs in `core-v75` are original Cobalt text,
+literal OOXML, solid vector geometry, and generated blue/gold or pale-grid pixels in
+`bench/fixtures.py`. No renderer fixture, helper, template, external document, image, or font
+program is imported. The unchanged prior DrawingML page-background case provides a shared
+control for the new VML case. Capture previews show only these independently authored inputs.
+The labeled screenshots under `docs/results/export-reliability-continuations/` contain these
+original inputs and public-renderer outputs. Optional Pillow adds labels around unchanged
+96-DPI page rasters; Poppler bitmap records contain dimensions and hashes only. No external
+document content or font program is distributed in this evidence.
+
+The forty inline-context cases in `core-v76` are original Flint text, literal OOXML,
+generated purple/gold pixels, and vector rules authored in `bench/fixtures.py`. Their paragraph,
+table, frame, textbox and wrapping structures import no product fixture or helper. One image
+part deliberately holds an original UTF-8 placeholder declared as image/png to exercise
+undecodable-resource diagnostics; its short alternate label is included in the full token
+inventory. A generated decodable PNG supplies the paired control. No external asset, document
+content or font program is imported. Labeled screenshots under `docs/results/export-inline-contexts/`
+show only these authored inputs and separately provisioned renderers. Optional Pillow composes
+unchanged 96-DPI rasters with labels; Poppler inspections record actual PDF content and geometry.
+The unsupported VML-oval cases author their `[SHAPE]` alternate labels explicitly; the
+Docxodus placeholder contract is distinguished from LibreOffice oval painting and does not
+claim vector-rendering parity.
+
+The thirty-seven positioned-story cases in `core-v77` contain original Jasper text, literal OOXML,
+a generated green checker bitmap and plain vector geometry from `bench/fixtures.py`. No renderer
+fixture, helper, diagnostic document or third-party content is imported. Legacy leaf shapes explicitly
+author their `[SHAPE]` fallback labels, so the placeholder contract does not claim oval/rectangle parity.
+The independent source-clipping proof and its Quartz mutation tests are original benchmark code.
+They inspect only tightly constrained fixed geometry and exact lines in authored packages. Vertical exclusions require printable ASCII in the pinned Liberation Serif family and a gap greater than two font ems. Original Quartz boundary probes and a standard-library reader record the separately installed font metrics without redistributing font bytes. The proof rejects
+links, conditional alternatives and unsupported ancestry; rendered-candidate assertions cannot make
+words optional. Screenshots in `docs/results/export-story-contexts/` contain only these original inputs
+and separately provisioned renderer outputs, with labels around unchanged page rasters. No font
+program is distributed.
+
+The fourteen Markdown projection inputs for Docxodus #1445 contain original Ash labels and
+literal OOXML in `bench/projection_fixtures.py`. They import no product fixture, external document,
+image or font program. The labeled screenshots under `docs/results/markdown-shapes/` show only
+these inputs' public Markdown output in Chromium, with anchor IDs shortened for readability;
+they are not native Word references. No authentication material or external content is included.
+
+The Juniper textbox pair for #1425 is original literal text and VML/WordprocessingML authored in `bench/redline_fixtures.py`, without imported documents, images, or font programs. Its labeled LibreOffice previews in `docs/results/textbox-geometry/` render those authored packages and the recorded comparison output.
+
+The composed inline-bookmark cases for Docxodus #1426 use original Maple/Cedar text and literal OOXML authored in `bench/redline_fixtures.py`, including their reviewers and expected redlines. No renderer fixtures, images or font programs are imported.
+
+The textbox marker-gap cases for Docxodus #1428 are original Spruce text and literal VML/OOXML authored in `bench/redline_fixtures.py`. They import no renderer fixtures, document templates, images, or font programs.
+
+The four reserved-endnote cases for Docxodus #1485 use original Cedar text and literal OOXML authored in `bench/fixtures.py`. No external documents, images or font programs are included. Review screenshots show only these original inputs.
+
+The five logical-grid table-merge cases for Docxodus #1489 are original literal OOXML and labels generated by `bench/fixtures.py`. Review screenshots contain only these authored inputs. No external document, image or font program is included.
+
+
+The four legacy-form cases for Docxodus #1480 use original Elm labels and literal form-field
+OOXML generated by `bench/fixtures.py`. No renderer fixture, third-party document, image or
+font program is imported. Labeled screenshots under `docs/results/legacy-form-fields/` show
+only these authored inputs and their native LibreOffice/local Docxodus renders, plus production
+Docxodus exports from CI runs 41171278328 and 41171275372. The HTML
+checkbox inspector retains small RGBA crops of these original controls, with hashes; no
+authentication material, external document content or standalone font program is included.
+
+The seven property/running-style cases for Docxodus #1481 use original Juniper text, metadata,
+and literal OOXML authored in `bench/fixtures.py`. They import no renderer fixture, document,
+image or font program. Review screenshots show only these authored inputs and their separately
+provisioned native LibreOffice and Docxodus renderings, including production exports from CI
+runs 41177656533 and 41177630479. No fresh Word reference is claimed.
+
+The six grouped-VML-textbox cases for Docxodus #1482 contain original Maple labels and literal
+VML/WordprocessingML authored in `bench/fixtures.py`. They import no renderer fixture, external
+document, image or font program. Labeled review screenshots under `docs/results/vml-group-textboxes/`
+show only these authored inputs rendered by separately provisioned LibreOffice and Docxodus.
+The production sheets show the same original inputs from CI runs 41180966026 and 41180964319;
+no authentication data, external document content or standalone font program is included.
+
+The production bordered-footnote sheets show the same original Ash inputs from CI runs41221180196 and41221181974, with labels around unchanged page rasters. They contain no external content, font programs or authentication material.
+
+The six paragraph-fragmentation cases for Docxodus #1521 contain original Copper text and literal
+OOXML generated by `bench/fixtures.py`. No product fixture, external document, image or font program
+is imported. Labeled screenshots in `docs/results/paragraph-fragmentation/` show only these authored
+inputs rendered by separately provisioned LibreOffice and Docxodus, with unchanged page rasters.
+
+The four exact-justification cases for Docxodus #1524 use original issue prose and literal OOXML
+authored in `bench/fixtures.py`. No renderer fixture, template, font program or external document
+is imported. Arial is separately provisioned. The labeled Word/Docxodus PNGs show only these
+original inputs; retained inspections and hashes contain no authentication material.
+
+The tracked-header-group cases for Docxodus #1045 use original Juniper labels and the repository's literal DrawingML generator. Their document bytes, geometry, and review metadata contain no imported content or assets.
+
+The drawing-canvas cases for Docxodus #1561 reuse the original Willow text and OOXML helpers in `bench/fixtures.py`. Their screenshots are local renders of these authored inputs; no external document content or assets are imported.
+
+The four alternate-textbox editing cases for Docxodus #1560 use original Cedar labels and literal
+DrawingML/VML authored in `bench/redline_fixtures.py`. No product fixture, external document,
+image or embedded font is imported. Review previews show only these original inputs and outputs.
+
+The eight page-break paragraph cases for Docxodus #1570 contain original Yew labels and literal OOXML authored in `bench/fixtures.py`. No product fixture, document, image or font program is imported. Labeled review sheets show only these authored inputs and their native/public renders.
+
+The nine preset-polygon cases for Docxodus #1554 contain original Elder labels and literal DrawingML authored in `bench/fixtures.py`. No product fixture, external document, image or font program is imported. Labeled review sheets and the wrong-apex PDF control show only these original inputs and locally generated derivatives.
+
+The short-rewrite cases for Docxodus #1556 contain original Myrtle prose and literal OOXML
+authored in `bench/redline_fixtures.py`. The long-rewrite controls reuse this repository's original
+Cedar prose. No product fixture, external document, image or font program is imported. Review
+sheets show only these independently authored inputs and local renders of their redlines.
+
+The sixteen paragraph-text independence cases for Docxodus #1550/#1562 contain original Hazel prose and literal OOXML authored in `bench/fixtures.py`. No renderer fixture, external document, image or font program is imported. Native and public-renderer review images show only these authored inputs.
+
+The twelve minimum-owner cases for Docxodus #1566 contain original Rue labels and literal
+OOXML authored in `bench/fixtures.py`. No renderer fixture, external document, image or
+font program is imported. Labeled comparison sheets show unchanged page rasters from
+these authored inputs, with native and public-renderer outputs.
+
+The six fixed-cell character-width cases wrap the original Sorrel paragraphs in literal fixed-table OOXML authored in `bench/fixtures.py`. No product fixture, helper, external document, image or font program is imported. The labeled comparison sheets show unchanged page rasters from these authored inputs.
+
+The sixteen minimum-story cases for Docxodus #1566 contain original Poppy and Garden labels
+and literal OOXML authored in `bench/fixtures.py`. No product fixture, external document,
+image or font program is imported. Comparison sheets show every unchanged page raster
+from these authored inputs, with explicit panels for baseline export refusals.
+
+The four fixed-pitch boundary cases use original Alder and Birch labels and literal OOXML. No product fixtures, helpers or font programs are imported. Liberation Mono is provisioned independently.
+
+The two empty-final-section cases reuse the original Gentian text and literal OOXML authored
+in `bench/fixtures.py`. No product fixture, third-party document or embedded font is imported.
+Labeled LibreOffice screenshots show these original documents.
+
+The eight font-table class cases use original Maranta labels and literal OOXML authored
+in `bench/fixtures.py`. No product fixture, external document, image or font program is
+imported. The labeled screenshots show only these original inputs rendered by separately
+provisioned LibreOffice; Liberation and Noto fonts are independently installed.
+
+The four semantic-bullet cases use original Camassia labels and literal OOXML authored
+in `bench/fixtures.py`. No product fixture, external document, image or font program is
+imported. Review screenshots show only these authored inputs rendered by separately
+provisioned LibreOffice and fonts.
+
+The four collection-font cases for Docxodus #1573 use original Liatris labels and
+literal OOXML authored in `bench/fixtures.py`. The three standalone/collection font
+programs under `fixtures/collection-fonts/` are generated from original geometric
+chevrons by `bench/collection_fonts.py`, using only Python's standard library.
+Their names, tables, metrics and outlines are authored here and covered by MIT.
+No installed font, product fixture, font-generation helper or external outline is
+copied. These fonts are external test inputs, never embedded in the source DOCX.
+Native screenshots and PDFs contain only the authored inputs and permitted font
+subsets. They do not claim Word rendering parity.
+
+The six tall-row cases for Docxodus #1558 contain original Sorrel labels and literal OOXML
+authored in `bench/fixtures.py`. No product fixture, helper, document, image or font program is
+imported, and no reporter attachment was opened or used. The review renders under
+`docs/results/tall-rows/` show only these authored inputs, rendered by Word 2024 (with Times New
+Roman substituted for Liberation Serif) and by Docxodus.
+
+The style-defined footer frames and their fully restated controls for Docxodus #1276 are original literal-text OOXML generated by `bench/fixtures.py`; no renderer fixtures or third-party content are imported.

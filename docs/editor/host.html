@@ -1,0 +1,19 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Editor diagnostic</title>
+<style>body{font:16px Arial;margin:20px}#host{height:600px;border:1px solid #c5ced8}textarea,#paste-rich{width:90%;min-height:50px;margin:12px}#paste-rich{height:90px}</style>
+<h1 id="label">Editor browser diagnostic</h1>
+<div id="host"></div>
+<textarea id="paste-plain" aria-label="Independent plain-text paste target"></textarea>
+<iframe id="paste-rich" title="Isolated rich-text paste target" srcdoc="<!doctype html><style>body{font:16px Arial}#target{min-height:50px;white-space:pre-wrap}</style><div id=target contenteditable=true></div>"></iframe>
+<script src="/editor.bundle.js"></script>
+<script type="module">
+  import { dotnet } from '/_framework/dotnet.js';
+  const runtime = await dotnet.withDiagnosticTracing(false).create();
+  const config = runtime.getConfig();
+  const exports = (await runtime.getAssemblyExports(config.mainAssemblyName)).DocxodusWasm;
+  window.editorDiagnostic = { exports, ribbon: window.DocxodusEditor.mountRibbon(document.getElementById('host'), {
+    exports, loader: false, rail: false, showRevisions: true, paginated: false,
+    fabricateClasses: new URLSearchParams(location.search).get('classes') === '1'
+  }) };
+</script>

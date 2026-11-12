@@ -46,6 +46,8 @@ try {
     reviewProfile: profile.review,
     commentProfile: profile.comments,
     ...(profile.markupPresentation === undefined ? {} : { markupPresentation: profile.markupPresentation }),
+    ...(profile.commentColumnPlacement === undefined ? {} : { commentColumnPlacement: profile.commentColumnPlacement }),
+    ...(profile.markupVisibility === undefined ? {} : { markupVisibility: profile.markupVisibility }),
   });
   const sharedOptions = {
     timeoutMs: request.timeoutMs,

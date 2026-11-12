@@ -1,0 +1,3254 @@
+{
+  "schema": 1,
+  "benchCommit": "bc00aab10f62f4fcacc654edf6b3c775a56314d8",
+  "scope": "Production public WASM export and pinned Chromium PDF; raw artifacts are retained in the linked Actions runs.",
+  "limitations": [
+    "No fresh Word reference is claimed.",
+    "Controls prove full page-raster identity, not PDF-byte or HTML/PageMap payload identity.",
+    "Text positions differ from LibreOffice; complete output does not imply native layout parity. All twelve references are eligible."
+  ],
+  "runs": {
+    "candidate": {
+      "runUrl": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/41226336896",
+      "artifactId": 13052285868,
+      "artifactZipSha256": "722635a54e420e0c4770f085f6b67f90114f7d575cac4569a04bffc0fd47ee18",
+      "coreCommit": "8ba4e1121698309483f03dab983aa0c50a3aa843",
+      "resultSha256": "6b099398e25eb5a72ea55cdf20f0706d8246d856ae1cd187e62eeac3ef6149d9",
+      "selectedManifestSha256": "886e79f04e75d8fc88f607c211f758e36c96cd512e844369df690e097569bca9",
+      "contractDigest": "8974b18b628225eb4863e1a5242598ddccc2d945df24aa3c2021cb74a1800abe",
+      "referenceBundleSha256": "38c64b55a3d9179601ae5ecc73cf196901993d02721e02db27d59a87b39a781c",
+      "calibrationResultSha256": "34e22652eec9c1e50171453c5a65b89a382aa97e1a24c2843a46aaf76782bc91",
+      "calibrationSummary": {
+        "categoryMeans": {
+          "paragraphs": 100.0
+        },
+        "closeMatchRate": 1.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 12,
+        "required": 12,
+        "score": 100.0
+      },
+      "summary": {
+        "categoryMeans": {
+          "paragraphs": 72.85240905712722
+        },
+        "closeMatchRate": 0.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 12,
+        "required": 12,
+        "score": 72.85240905712722
+      },
+      "cases": {
+        "textbox-fit-edge-default": {
+          "score": 69.84271930983935,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1471,
+              "close": false,
+              "inkF1": 0.6984271930983935,
+              "pixelMismatch": 0.002975527332144979,
+              "precision": 0.7056424201223658,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "1c52cfbed2e160eaad6d55314b4e568c3698d4f93d931e5c02c9f43590397d7c",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "43566f6c106d8411acc2193eee2e7ce38379695e2f314880651d56eacc2394f1",
+                "width": 816
+              },
+              "recall": 0.691358024691358,
+              "referenceInk": 1458,
+              "score": 69.84271930983935,
+              "ssim": 0.9950809164028313,
+              "ssimRaw": 0.9950809164028313
+            }
+          ],
+          "coreTree": "913969bc10a91d2e62d340165ddde139a0be73c2",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "53ed41319c7bef5a6aa827395245c36262917fdefbe502dcf7551ec849f2250a",
+          "pageMapDigest": "d739824a6eb365a79927486611fca808c935935240c3d1fdf2074f1b9f52b32d",
+          "files": {
+            "1-candidate.png": "60b98ef3e4cd766812057d8a5a18d428eabd83afbe0a097085bb6f3c576f2245",
+            "1-overlay.png": "cc8799ea7a4637a8ba9827222d7a2ddfad35a1bcca3c39c3aec0483abf1029d9",
+            "1-reference.png": "491a20e643faec0090489d14b3fd900eafae0607b4991991eec4f8070006b869",
+            "candidate.pdf": "36d68638d127f96448755cb18afe503c8e4be6f50c5dc1ecc30ff66fff8cffc3",
+            "evidence.json": "4f6cee69a70e83da56f55902b52cab93e8493f20bdf051d8dc4f572140313d08",
+            "production.json": "5308e56d29b24b8cd14b13bc2e517f99e23c0481dd03c22cf8390d17ec397416",
+            "reference.pdf": "edcacb9c82a61b71b22fa2f4cb8adb78c63f53680adfb03412c780d1b27f87d2"
+          }
+        },
+        "textbox-fit-edge-explicit-control": {
+          "score": 69.84271930983935,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1471,
+              "close": false,
+              "inkF1": 0.6984271930983935,
+              "pixelMismatch": 0.002975527332144979,
+              "precision": 0.7056424201223658,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "1c52cfbed2e160eaad6d55314b4e568c3698d4f93d931e5c02c9f43590397d7c",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "43566f6c106d8411acc2193eee2e7ce38379695e2f314880651d56eacc2394f1",
+                "width": 816
+              },
+              "recall": 0.691358024691358,
+              "referenceInk": 1458,
+              "score": 69.84271930983935,
+              "ssim": 0.9950809164028313,
+              "ssimRaw": 0.9950809164028313
+            }
+          ],
+          "coreTree": "913969bc10a91d2e62d340165ddde139a0be73c2",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "275553d791482f77950232b2021942ead72a955366d88ae9fb2739ddfdb2d22e",
+          "pageMapDigest": "d739824a6eb365a79927486611fca808c935935240c3d1fdf2074f1b9f52b32d",
+          "files": {
+            "1-candidate.png": "60b98ef3e4cd766812057d8a5a18d428eabd83afbe0a097085bb6f3c576f2245",
+            "1-overlay.png": "cc8799ea7a4637a8ba9827222d7a2ddfad35a1bcca3c39c3aec0483abf1029d9",
+            "1-reference.png": "491a20e643faec0090489d14b3fd900eafae0607b4991991eec4f8070006b869",
+            "candidate.pdf": "20472715e461665a26c6f1bc6f5d662bbce87bb8a2034c94bd641f948bceb922",
+            "evidence.json": "31f18f71708c64681c3cdff40ae99427525dd19ba96d5ed55323135fbe789453",
+            "production.json": "d2d92a8843140335fffae862d94fa6f1a8e36a7fdb41ab54b9bdd5011b7ff925",
+            "reference.pdf": "2184bb16a16a55197013362a95f6efcf0d888f8de949a7e2425f033d6ae02ecc"
+          }
+        },
+        "textbox-fit-onpage-default-control": {
+          "score": 72.88896473725772,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1339,
+              "close": false,
+              "inkF1": 0.7288896473725772,
+              "pixelMismatch": 0.002748068924539513,
+              "precision": 0.7744585511575803,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "93efa42cbd74dd88fef6e28bb42270611b46707962c5a30061db4869eda12ab6",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "6c43f5900638598122520c8c798734ae5e64374190753108ccab11e3129b2523",
+                "width": 816
+              },
+              "recall": 0.6883852691218131,
+              "referenceInk": 1412,
+              "score": 72.88896473725772,
+              "ssim": 0.995520344473231,
+              "ssimRaw": 0.995520344473231
+            }
+          ],
+          "coreTree": "913969bc10a91d2e62d340165ddde139a0be73c2",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "afd34aeb6a7c2ff4d346776d3d7c0dc995d892f36b2cf00a814e3d82596bae7a",
+          "pageMapDigest": "4b7a5b152b414a03699e2cec28ce5373b7e05c9cf74bc99f2546153d39aeb540",
+          "files": {
+            "1-candidate.png": "565a1c3446392ad24665b1480a973eec233afec02e2b7fc283b8a8264214b799",
+            "1-overlay.png": "e6625c7c302049aad6a64fbcf043bb84cdd099c372fe9a96193cb482c9679bbf",
+            "1-reference.png": "b547c21cf2c19b81173430da2bf95982ac26ecb53b2c368ba6aa367334785f28",
+            "candidate.pdf": "57cf38fb8d36f94c7596981e21d5ccadd53df188d04fda38e70c0edc19a6907b",
+            "evidence.json": "d0a6d73bc89fd2fd65c14f3c9757f46dcad5cc8ad440a36bf4eac4f429350164",
+            "production.json": "f096de16391edca1a041c56223e2e299c0755cbf3fc7d885f63d27ea9049b35d",
+            "reference.pdf": "237c9ba645b4506dd75a7700df2dff5bf36eeb53004b5fc9bcb7d5013535b086"
+          }
+        },
+        "textbox-fit-edge-text-default": {
+          "score": 69.84271930983935,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1471,
+              "close": false,
+              "inkF1": 0.6984271930983935,
+              "pixelMismatch": 0.002975527332144979,
+              "precision": 0.7056424201223658,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "1c52cfbed2e160eaad6d55314b4e568c3698d4f93d931e5c02c9f43590397d7c",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "43566f6c106d8411acc2193eee2e7ce38379695e2f314880651d56eacc2394f1",
+                "width": 816
+              },
+              "recall": 0.691358024691358,
+              "referenceInk": 1458,
+              "score": 69.84271930983935,
+              "ssim": 0.9950809164028313,
+              "ssimRaw": 0.9950809164028313
+            }
+          ],
+          "coreTree": "913969bc10a91d2e62d340165ddde139a0be73c2",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "8f4abbad7a5c48023431f96c25ffeb82ee53b7e4d732d461f66c295cb193305a",
+          "pageMapDigest": "d739824a6eb365a79927486611fca808c935935240c3d1fdf2074f1b9f52b32d",
+          "files": {
+            "1-candidate.png": "60b98ef3e4cd766812057d8a5a18d428eabd83afbe0a097085bb6f3c576f2245",
+            "1-overlay.png": "cc8799ea7a4637a8ba9827222d7a2ddfad35a1bcca3c39c3aec0483abf1029d9",
+            "1-reference.png": "491a20e643faec0090489d14b3fd900eafae0607b4991991eec4f8070006b869",
+            "candidate.pdf": "860e915317686a6be7342030fea7398c971207a2c539db0b615045ed711fb79e",
+            "evidence.json": "25d2aa0e225b05c9043bce6c444d7800f38155971b895be4df9bca1ed1757fb3",
+            "production.json": "a490edf46e729417e70cb861186367f92887668bfa5231a884f5a6fc28ceddff",
+            "reference.pdf": "7a60f77b1f5f56908aa6337874563cb15f7d0ae7afee61a405a4ab7f138adc48"
+          }
+        },
+        "textbox-fit-edge-line-default": {
+          "score": 69.84271930983935,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1471,
+              "close": false,
+              "inkF1": 0.6984271930983935,
+              "pixelMismatch": 0.002975527332144979,
+              "precision": 0.7056424201223658,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "1c52cfbed2e160eaad6d55314b4e568c3698d4f93d931e5c02c9f43590397d7c",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "43566f6c106d8411acc2193eee2e7ce38379695e2f314880651d56eacc2394f1",
+                "width": 816
+              },
+              "recall": 0.691358024691358,
+              "referenceInk": 1458,
+              "score": 69.84271930983935,
+              "ssim": 0.9950809164028313,
+              "ssimRaw": 0.9950809164028313
+            }
+          ],
+          "coreTree": "913969bc10a91d2e62d340165ddde139a0be73c2",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "f9b62665a6dd82a8a1caeb9e9200ee22c0f189d2972522269dc93ead214ef686",
+          "pageMapDigest": "d739824a6eb365a79927486611fca808c935935240c3d1fdf2074f1b9f52b32d",
+          "files": {
+            "1-candidate.png": "60b98ef3e4cd766812057d8a5a18d428eabd83afbe0a097085bb6f3c576f2245",
+            "1-overlay.png": "cc8799ea7a4637a8ba9827222d7a2ddfad35a1bcca3c39c3aec0483abf1029d9",
+            "1-reference.png": "491a20e643faec0090489d14b3fd900eafae0607b4991991eec4f8070006b869",
+            "candidate.pdf": "f5e1eb436ebbb84f6ea616640b85070c402bae5ad271ccf99f8dd8d8801e5069",
+            "evidence.json": "969fee8f86092d5647ab1aa50b6de63f0a2d2a720dcbd5b97b179706f5e15d40",
+            "production.json": "1ad9ab93ab9df795df177cc0be18d5e275600623f320e7d154e6e2bd2d23eaa5",
+            "reference.pdf": "942690415b5fde5ee1666d67c8bf7632efe6b0e68587179658cb489bfc5ad2c7"
+          }
+        },
+        "textbox-fit-edge-shape-default": {
+          "score": 69.84271930983935,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1471,
+              "close": false,
+              "inkF1": 0.6984271930983935,
+              "pixelMismatch": 0.002975527332144979,
+              "precision": 0.7056424201223658,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "1c52cfbed2e160eaad6d55314b4e568c3698d4f93d931e5c02c9f43590397d7c",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "43566f6c106d8411acc2193eee2e7ce38379695e2f314880651d56eacc2394f1",
+                "width": 816
+              },
+              "recall": 0.691358024691358,
+              "referenceInk": 1458,
+              "score": 69.84271930983935,
+              "ssim": 0.9950809164028313,
+              "ssimRaw": 0.9950809164028313
+            }
+          ],
+          "coreTree": "913969bc10a91d2e62d340165ddde139a0be73c2",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "3f7cf805fc46ed04a732baa3c0a91086677f018a369d12aeeb2f3b0da296e598",
+          "pageMapDigest": "d739824a6eb365a79927486611fca808c935935240c3d1fdf2074f1b9f52b32d",
+          "files": {
+            "1-candidate.png": "60b98ef3e4cd766812057d8a5a18d428eabd83afbe0a097085bb6f3c576f2245",
+            "1-overlay.png": "cc8799ea7a4637a8ba9827222d7a2ddfad35a1bcca3c39c3aec0483abf1029d9",
+            "1-reference.png": "491a20e643faec0090489d14b3fd900eafae0607b4991991eec4f8070006b869",
+            "candidate.pdf": "d836ac5db8ea2f7e15d0ba6516021c7ffbfc0b77ed30ef6426a1571ec25eb8dd",
+            "evidence.json": "891797fab1acf673153a4ee5427fc382bf17d5d6342315a33cfdc1acc0d1ab78",
+            "production.json": "f78ebb3acc390b157b824cbe42f7db5af4dee08949c68d9c2024b9976257a5f5",
+            "reference.pdf": "bc74808608160930f7bac56075fc57d4cf330ce28ef9bd92720efb24e457ca32"
+          }
+        },
+        "textbox-fit-edge-empty-theme": {
+          "score": 69.84271930983935,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1471,
+              "close": false,
+              "inkF1": 0.6984271930983935,
+              "pixelMismatch": 0.002975527332144979,
+              "precision": 0.7056424201223658,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "1c52cfbed2e160eaad6d55314b4e568c3698d4f93d931e5c02c9f43590397d7c",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "43566f6c106d8411acc2193eee2e7ce38379695e2f314880651d56eacc2394f1",
+                "width": 816
+              },
+              "recall": 0.691358024691358,
+              "referenceInk": 1458,
+              "score": 69.84271930983935,
+              "ssim": 0.9950809164028313,
+              "ssimRaw": 0.9950809164028313
+            }
+          ],
+          "coreTree": "913969bc10a91d2e62d340165ddde139a0be73c2",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "99a676c70758401664e3d5d664aa73a3699228fa091121afc0cd79ceaea1a757",
+          "pageMapDigest": "d739824a6eb365a79927486611fca808c935935240c3d1fdf2074f1b9f52b32d",
+          "files": {
+            "1-candidate.png": "60b98ef3e4cd766812057d8a5a18d428eabd83afbe0a097085bb6f3c576f2245",
+            "1-overlay.png": "cc8799ea7a4637a8ba9827222d7a2ddfad35a1bcca3c39c3aec0483abf1029d9",
+            "1-reference.png": "491a20e643faec0090489d14b3fd900eafae0607b4991991eec4f8070006b869",
+            "candidate.pdf": "0f4cfe86965f2520cc4d5283b9b835d77ffe831396f2edd68e86ca578359e9f5",
+            "evidence.json": "d2a0cc24d1757f31c9c5485496415cdf936b9847c3f3fdb4e67b543db9b560cb",
+            "production.json": "6a34bda6fcfc03907e0faa664ccd49036c2b01fefcfb3d743a777a6a369ef0c5",
+            "reference.pdf": "3622593d80935552b6da62e42cfa8d65779aacbe29ba5b146cc47fe7291cbdd9"
+          }
+        },
+        "textbox-fit-edge-local-over-theme-control": {
+          "score": 69.84271930983935,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1471,
+              "close": false,
+              "inkF1": 0.6984271930983935,
+              "pixelMismatch": 0.002975527332144979,
+              "precision": 0.7056424201223658,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "1c52cfbed2e160eaad6d55314b4e568c3698d4f93d931e5c02c9f43590397d7c",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "43566f6c106d8411acc2193eee2e7ce38379695e2f314880651d56eacc2394f1",
+                "width": 816
+              },
+              "recall": 0.691358024691358,
+              "referenceInk": 1458,
+              "score": 69.84271930983935,
+              "ssim": 0.9950809164028313,
+              "ssimRaw": 0.9950809164028313
+            }
+          ],
+          "coreTree": "913969bc10a91d2e62d340165ddde139a0be73c2",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "3489c093d5c20bd1ceff0cda17e244b73545f3d00d28d5e1395b253eb4bac85a",
+          "pageMapDigest": "d739824a6eb365a79927486611fca808c935935240c3d1fdf2074f1b9f52b32d",
+          "files": {
+            "1-candidate.png": "60b98ef3e4cd766812057d8a5a18d428eabd83afbe0a097085bb6f3c576f2245",
+            "1-overlay.png": "cc8799ea7a4637a8ba9827222d7a2ddfad35a1bcca3c39c3aec0483abf1029d9",
+            "1-reference.png": "491a20e643faec0090489d14b3fd900eafae0607b4991991eec4f8070006b869",
+            "candidate.pdf": "e0a7b97e1c7550c946c41a063bfb1539ff7b50317fc8120e71bf1c5ffc46cbf3",
+            "evidence.json": "835b97841085367cc29f0e144acb820f743c0503a9a52ff7c8ce9ae7e1cb62a4",
+            "production.json": "823cc495181747c55b56a9cf50b1e2893730c271a5f7eab1508b0e5532a84ef3",
+            "reference.pdf": "0b508ecd28cb76312bd9d05d468601db04c5d3a7f47f5063604d0e7c561b7876"
+          }
+        },
+        "textbox-fit-header-edge-default": {
+          "score": 82.1832078844509,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 2480,
+              "close": false,
+              "inkF1": 0.8218320788445089,
+              "pixelMismatch": 0.00475573752228164,
+              "precision": 0.8254032258064516,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "1ffe133f0208ea111b7ec3360b68ec1ad7bce89c9c14e73e3c8622f594a4ea10",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "5ff92db9c91701bf9329c846eb1d435f9187b59d534dd3150bf31c15b6a86590",
+                "width": 816
+              },
+              "recall": 0.8182917002417406,
+              "referenceInk": 2482,
+              "score": 82.1832078844509,
+              "ssim": 0.9931765223866305,
+              "ssimRaw": 0.9931765223866305
+            }
+          ],
+          "coreTree": "913969bc10a91d2e62d340165ddde139a0be73c2",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "f1305c1a4202bc88a760216664fd953a45b03b008848bbd513fa4efb16092e09",
+          "pageMapDigest": "d1e1e4f92f291ea429a5ab7818ff70a166eb40fe5783c14e1d7c364cbe1154ec",
+          "files": {
+            "1-candidate.png": "0872003c4639c57a1ae841928ebc6847079acf3bff27fb66342382cd0440efc9",
+            "1-overlay.png": "32a09760600192ee152041a65d4630e948b50756fe5535f26acdc36510a1d390",
+            "1-reference.png": "331d313bc7a74edf675e93ed61ee1f292ca8372a8ec8ae34e8f6352887785fbc",
+            "candidate.pdf": "32f65cbe322ac950c41c66de0f29ca40e66de77f6e9c5c97fedece52cee85cc0",
+            "evidence.json": "71ab841abc7979944ee645dfb224a542fa15b1c40d401ad210e5d9faba99424e",
+            "production.json": "55035b79f60026e471df21d25060e44de61274b54ddebb45cd847f7f10d6f2e5",
+            "reference.pdf": "2e8355074a481568cd5c916317589d21059faa3d83223571e02583b86e15a3cf"
+          }
+        },
+        "textbox-fit-footer-edge-text-default": {
+          "score": 84.479771420427,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 2422,
+              "close": false,
+              "inkF1": 0.84479771420427,
+              "pixelMismatch": 0.004642008318478907,
+              "precision": 0.8732452518579686,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "82de825acf89b2fd052b662943387dbc685798f9548a55959e9c2d4d09ad2ef7",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "80ba0a912443427512c3b8292bf1a7a8dcd757b0fceceebfe5cffdda8f6885af",
+                "width": 816
+              },
+              "recall": 0.8181451612903226,
+              "referenceInk": 2480,
+              "score": 84.479771420427,
+              "ssim": 0.993777506198693,
+              "ssimRaw": 0.993777506198693
+            }
+          ],
+          "coreTree": "913969bc10a91d2e62d340165ddde139a0be73c2",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "808cb0348e1fac1f113f6659aa91998e07a554122e663f573c2fbbaefb277dd1",
+          "pageMapDigest": "d2560feb54cfa78deade8da515c4775c054e235757ebf5f687cd804592d7d343",
+          "files": {
+            "1-candidate.png": "bca28f9010c3b981aa428dbc1dd86caaab4c0e4b486bbd74f7d40703c9b2b396",
+            "1-overlay.png": "179d5f0d1da2abd8a79c7852ebfb339a0ae18df9b2c0e7df71bf37d015e08042",
+            "1-reference.png": "a3c4d03adbc52dd5401d8211bd9e859f8f394c7098581a3fbd32b97d4ced3031",
+            "candidate.pdf": "02a4a000ae30d6144aff2f134608670b476317a33052c7489b6a538f93817f82",
+            "evidence.json": "b52793779289abc51f81bc2423f47b2cbcdcd0c8b1e0c96eb8a999a606994ac5",
+            "production.json": "8a48124b0c9029943716f3ef773f9324d571c5e227491d9ce9f6af4f0420bc05",
+            "reference.pdf": "ac681d3f882cd794ea39f2e55ff731317fe9f0e3d5e12b7bc747d3282c05ecdb"
+          }
+        },
+        "textbox-fit-onpage-text-auto-control": {
+          "score": 72.88896473725772,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1339,
+              "close": false,
+              "inkF1": 0.7288896473725772,
+              "pixelMismatch": 0.002748068924539513,
+              "precision": 0.7744585511575803,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "93efa42cbd74dd88fef6e28bb42270611b46707962c5a30061db4869eda12ab6",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "6c43f5900638598122520c8c798734ae5e64374190753108ccab11e3129b2523",
+                "width": 816
+              },
+              "recall": 0.6883852691218131,
+              "referenceInk": 1412,
+              "score": 72.88896473725772,
+              "ssim": 0.995520344473231,
+              "ssimRaw": 0.995520344473231
+            }
+          ],
+          "coreTree": "913969bc10a91d2e62d340165ddde139a0be73c2",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "c719ce7a48ac81394700e58d0a805dcf8b548eddfda88285bf037a6f20e3b377",
+          "pageMapDigest": "4b7a5b152b414a03699e2cec28ce5373b7e05c9cf74bc99f2546153d39aeb540",
+          "files": {
+            "1-candidate.png": "565a1c3446392ad24665b1480a973eec233afec02e2b7fc283b8a8264214b799",
+            "1-overlay.png": "e6625c7c302049aad6a64fbcf043bb84cdd099c372fe9a96193cb482c9679bbf",
+            "1-reference.png": "b547c21cf2c19b81173430da2bf95982ac26ecb53b2c368ba6aa367334785f28",
+            "candidate.pdf": "2274aa6ff7b165a7998fe30c5afc0b0e5d3afc9782f2afe6f2e8404101ac20a4",
+            "evidence.json": "1da02dcf7d6545267e65d260a86b7c18aabf1b199c71e026b1d32549b9bb648e",
+            "production.json": "1c2f949828bf7d98488d59d254783a9d02233a838e2c10b41aa71fd1f0983c1c",
+            "reference.pdf": "eb070764dbe580dbb315692522af47e92a64a0104c07a72b8362687f5e12f49d"
+          }
+        },
+        "textbox-fit-onpage-text-shrink-control": {
+          "score": 72.88896473725772,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1339,
+              "close": false,
+              "inkF1": 0.7288896473725772,
+              "pixelMismatch": 0.002748068924539513,
+              "precision": 0.7744585511575803,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "93efa42cbd74dd88fef6e28bb42270611b46707962c5a30061db4869eda12ab6",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "6c43f5900638598122520c8c798734ae5e64374190753108ccab11e3129b2523",
+                "width": 816
+              },
+              "recall": 0.6883852691218131,
+              "referenceInk": 1412,
+              "score": 72.88896473725772,
+              "ssim": 0.995520344473231,
+              "ssimRaw": 0.995520344473231
+            }
+          ],
+          "coreTree": "913969bc10a91d2e62d340165ddde139a0be73c2",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "de21aa880ed41e9580317ef30660f53dbbae7d74f2a4872fd8c14e84ee5b026d",
+          "pageMapDigest": "4b7a5b152b414a03699e2cec28ce5373b7e05c9cf74bc99f2546153d39aeb540",
+          "files": {
+            "1-candidate.png": "565a1c3446392ad24665b1480a973eec233afec02e2b7fc283b8a8264214b799",
+            "1-overlay.png": "e6625c7c302049aad6a64fbcf043bb84cdd099c372fe9a96193cb482c9679bbf",
+            "1-reference.png": "b547c21cf2c19b81173430da2bf95982ac26ecb53b2c368ba6aa367334785f28",
+            "candidate.pdf": "587d43b70b1337fea2d535fb2f0262aef37437e78d4e1850f89c52597e9611dd",
+            "evidence.json": "076ff812ba23b427f49739a952f5402777b086ad3d6719f99c007752af240858",
+            "production.json": "9262bf5e631844c79073bca2b314532eecdd1959f7f147337ed8153d99419873",
+            "reference.pdf": "1ba17ba19423ee7aaf9b5a016c71fd922e90cd728f087d6bc2908fc314e1fe7f"
+          }
+        }
+      }
+    },
+    "baseline": {
+      "runUrl": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/41224613858",
+      "artifactId": 13051603170,
+      "artifactZipSha256": "eeb455565a130978ee0d679ef4bb50cae8286deedb37a771f243589b2b18abe8",
+      "coreCommit": "72319002a6286d09d68eb5b555434f35fc435945",
+      "resultSha256": "10dc9907731936920f310e01a308ea20b43c57df43cc8571dea49397339a9f5c",
+      "selectedManifestSha256": "886e79f04e75d8fc88f607c211f758e36c96cd512e844369df690e097569bca9",
+      "contractDigest": "d776c5baa647e57079a738b501688d38f5bc8d5c3ba6fb7166fc7ba1a472fc06",
+      "referenceBundleSha256": "9afc449f52bb374ae87cf0c07e8078c9a503dd820edd13ad989decd4f18635d1",
+      "calibrationResultSha256": "fa77e9bc48898ebde6999488389d57a4de7f633d50c49c5d6587ee1a01e7f9bb",
+      "calibrationSummary": {
+        "categoryMeans": {
+          "paragraphs": 100.0
+        },
+        "closeMatchRate": 1.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 12,
+        "required": 12,
+        "score": 100.0
+      },
+      "summary": {
+        "categoryMeans": {
+          "paragraphs": 29.86269440262099
+        },
+        "closeMatchRate": 0.0,
+        "complete": true,
+        "mandatoryPassRate": 0.4166666666666667,
+        "measured": 12,
+        "required": 12,
+        "score": 29.86269440262099
+      },
+      "cases": {
+        "textbox-fit-edge-default": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "output_verification_failure",
+                "message": "source anchor p:body:90828cf9295496be349787c0db2686a1 has no measurable fragment in the paginated layout",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "output_verification_failure",
+            "message": "source anchor p:body:90828cf9295496be349787c0db2686a1 has no measurable fragment in the paginated layout",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "d3852cc1774c1238383f9348b9ad9b5951cf33236c87b44bcc4bf3c1ca092787",
+            "reference.pdf": "adb55a84f0d48aa8058648b70ea0a9660faf2107b2e9efd82e9d274dfbfcd99d"
+          }
+        },
+        "textbox-fit-edge-explicit-control": {
+          "score": 69.84271930983935,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1471,
+              "close": false,
+              "inkF1": 0.6984271930983935,
+              "pixelMismatch": 0.002975527332144979,
+              "precision": 0.7056424201223658,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "1c52cfbed2e160eaad6d55314b4e568c3698d4f93d931e5c02c9f43590397d7c",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "43566f6c106d8411acc2193eee2e7ce38379695e2f314880651d56eacc2394f1",
+                "width": 816
+              },
+              "recall": 0.691358024691358,
+              "referenceInk": 1458,
+              "score": 69.84271930983935,
+              "ssim": 0.9950809164028313,
+              "ssimRaw": 0.9950809164028313
+            }
+          ],
+          "coreTree": "83a4a66e74448e6b6fa085349094f273dccad69c",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "275553d791482f77950232b2021942ead72a955366d88ae9fb2739ddfdb2d22e",
+          "pageMapDigest": "608f63c482c146397912b4ae0acf78f574313e8680b2a44d693f4dc148e8b553",
+          "files": {
+            "1-candidate.png": "60b98ef3e4cd766812057d8a5a18d428eabd83afbe0a097085bb6f3c576f2245",
+            "1-overlay.png": "cc8799ea7a4637a8ba9827222d7a2ddfad35a1bcca3c39c3aec0483abf1029d9",
+            "1-reference.png": "491a20e643faec0090489d14b3fd900eafae0607b4991991eec4f8070006b869",
+            "candidate.pdf": "ec1e66d43538c44307b3e6c13986771d0ea82906a076dcf4b2d3b5890ac471a2",
+            "evidence.json": "b65bc6d1e3cddcaa2931d2c5e322853a94e76aa6e22c216582f0aafdd872b3a4",
+            "production.json": "669fdb088e47d032ab85dd8e28e6c5814c879c2f391012d48d0e3edd7fabc4f5",
+            "reference.pdf": "6c9a1b54e1e26999e6a038d02278e0c6b0e5cb6d31dc3a7555f40be0d7dc5d7b"
+          }
+        },
+        "textbox-fit-onpage-default-control": {
+          "score": 72.88896473725772,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1339,
+              "close": false,
+              "inkF1": 0.7288896473725772,
+              "pixelMismatch": 0.002748068924539513,
+              "precision": 0.7744585511575803,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "93efa42cbd74dd88fef6e28bb42270611b46707962c5a30061db4869eda12ab6",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "6c43f5900638598122520c8c798734ae5e64374190753108ccab11e3129b2523",
+                "width": 816
+              },
+              "recall": 0.6883852691218131,
+              "referenceInk": 1412,
+              "score": 72.88896473725772,
+              "ssim": 0.995520344473231,
+              "ssimRaw": 0.995520344473231
+            }
+          ],
+          "coreTree": "83a4a66e74448e6b6fa085349094f273dccad69c",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "afd34aeb6a7c2ff4d346776d3d7c0dc995d892f36b2cf00a814e3d82596bae7a",
+          "pageMapDigest": "980bbba1503d8768fd956edfad574707525ee4ef3597427e2737d4bb289ec7ed",
+          "files": {
+            "1-candidate.png": "565a1c3446392ad24665b1480a973eec233afec02e2b7fc283b8a8264214b799",
+            "1-overlay.png": "e6625c7c302049aad6a64fbcf043bb84cdd099c372fe9a96193cb482c9679bbf",
+            "1-reference.png": "b547c21cf2c19b81173430da2bf95982ac26ecb53b2c368ba6aa367334785f28",
+            "candidate.pdf": "f3f8975729578e82251bdb200d2ed05025e863c6af333f33066d9fcc95bdab95",
+            "evidence.json": "2e429bc54fe95c18a2dc7eca71936301cbcc0592621f132b693dddad9ff1586d",
+            "production.json": "7545a06e765ba093b436206d98be41c191158df7943bd3fe8b51f9d993027c40",
+            "reference.pdf": "6f50dfd5ae04f0ee5453a68645e6b8b784fc451b85835af21c62ad675c28e0d5"
+          }
+        },
+        "textbox-fit-edge-text-default": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "output_verification_failure",
+                "message": "source anchor p:body:90828cf9295496be349787c0db2686a1 has no measurable fragment in the paginated layout",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "output_verification_failure",
+            "message": "source anchor p:body:90828cf9295496be349787c0db2686a1 has no measurable fragment in the paginated layout",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "a535b2ea18ec07eee8c718686ed1e895f0e4536b51c764fc6a1d44e704de2dc3",
+            "reference.pdf": "adbee7c0aca3bf08dd8ddfc2cf47cf7a5d8bb225425991d0c1a7bf221b790307"
+          }
+        },
+        "textbox-fit-edge-line-default": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "output_verification_failure",
+                "message": "source anchor p:body:90828cf9295496be349787c0db2686a1 has no measurable fragment in the paginated layout",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "output_verification_failure",
+            "message": "source anchor p:body:90828cf9295496be349787c0db2686a1 has no measurable fragment in the paginated layout",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "ec0f2479442e3c3562d9e04e12d2b0aa89705e0afcfb78650812e0f8881aba2a",
+            "reference.pdf": "dfce32eb18c602bae4410a8cb6c8abfb3b25b9d1c19bd5752e38c448ede562ef"
+          }
+        },
+        "textbox-fit-edge-shape-default": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "output_verification_failure",
+                "message": "source anchor p:body:90828cf9295496be349787c0db2686a1 has no measurable fragment in the paginated layout",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "output_verification_failure",
+            "message": "source anchor p:body:90828cf9295496be349787c0db2686a1 has no measurable fragment in the paginated layout",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "8c508e503fc78855ba436497f3eb065fbee066af54419d619e4c8b90b00e5c8e",
+            "reference.pdf": "59d62eeb5a412761b6c5f25aa2dec22f81fa6d947873ea558523dcb3b7a1960a"
+          }
+        },
+        "textbox-fit-edge-empty-theme": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "output_verification_failure",
+                "message": "source anchor p:body:90828cf9295496be349787c0db2686a1 has no measurable fragment in the paginated layout",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "output_verification_failure",
+            "message": "source anchor p:body:90828cf9295496be349787c0db2686a1 has no measurable fragment in the paginated layout",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "5394f8e312777ec49fcada7663950d2df59a56bfc0fc088e2d0ade0b6a4fe7e8",
+            "reference.pdf": "c52cd90c2dab5ebd797d79a054d55719175a9d27cde72e8f2a6bd9254a5261e5"
+          }
+        },
+        "textbox-fit-edge-local-over-theme-control": {
+          "score": 69.84271930983935,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  742,
+                  210,
+                  791.9
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1471,
+              "close": false,
+              "inkF1": 0.6984271930983935,
+              "pixelMismatch": 0.002975527332144979,
+              "precision": 0.7056424201223658,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "1c52cfbed2e160eaad6d55314b4e568c3698d4f93d931e5c02c9f43590397d7c",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "43566f6c106d8411acc2193eee2e7ce38379695e2f314880651d56eacc2394f1",
+                "width": 816
+              },
+              "recall": 0.691358024691358,
+              "referenceInk": 1458,
+              "score": 69.84271930983935,
+              "ssim": 0.9950809164028313,
+              "ssimRaw": 0.9950809164028313
+            }
+          ],
+          "coreTree": "83a4a66e74448e6b6fa085349094f273dccad69c",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "3489c093d5c20bd1ceff0cda17e244b73545f3d00d28d5e1395b253eb4bac85a",
+          "pageMapDigest": "608f63c482c146397912b4ae0acf78f574313e8680b2a44d693f4dc148e8b553",
+          "files": {
+            "1-candidate.png": "60b98ef3e4cd766812057d8a5a18d428eabd83afbe0a097085bb6f3c576f2245",
+            "1-overlay.png": "cc8799ea7a4637a8ba9827222d7a2ddfad35a1bcca3c39c3aec0483abf1029d9",
+            "1-reference.png": "491a20e643faec0090489d14b3fd900eafae0607b4991991eec4f8070006b869",
+            "candidate.pdf": "37455237acf1fed5b0ee2b0a9827a7a86467ad9c8c106a742a65b5ff93ef7962",
+            "evidence.json": "3d2a2b7501a39343acea1fc6b53fb7444d2a481ce714848679a9422c24f3e4f4",
+            "production.json": "c4db849459aa79b19d3b792a65fd6447486643c46868e80236d609b61054b10f",
+            "reference.pdf": "2855871f5a8526f4d08682925a7c785e2125b5c08dcb2b2e5f38b7858ee98d8a"
+          }
+        },
+        "textbox-fit-header-edge-default": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "output_verification_failure",
+                "message": "source anchor p:hdr1:5976987d7e421243342798f50dbd7c76 has no measurable fragment in the paginated layout",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "output_verification_failure",
+            "message": "source anchor p:hdr1:5976987d7e421243342798f50dbd7c76 has no measurable fragment in the paginated layout",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "74dca229afa8e53695d9ad2b70bf17c87cf3fa683882c8c5e67ff4610e46007e",
+            "reference.pdf": "85f7290c0b9c100a844f5bce8212970eb1ea990eb4c9ad5de0edeb2b62ad2ff5"
+          }
+        },
+        "textbox-fit-footer-edge-text-default": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "output_verification_failure",
+                "message": "source anchor p:ftr1:2318f197f066d60dad95da45d1f99088 has no measurable fragment in the paginated layout",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "output_verification_failure",
+            "message": "source anchor p:ftr1:2318f197f066d60dad95da45d1f99088 has no measurable fragment in the paginated layout",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "6a6d633c1288b0fd6015803adbd05c95a7c14a25faeef986014befea59ec2862",
+            "reference.pdf": "d4ebd777b88a3976883c9de535227d3e25db2bb64188d313636020d38ba12300"
+          }
+        },
+        "textbox-fit-onpage-text-auto-control": {
+          "score": 72.88896473725772,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1339,
+              "close": false,
+              "inkF1": 0.7288896473725772,
+              "pixelMismatch": 0.002748068924539513,
+              "precision": 0.7744585511575803,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "93efa42cbd74dd88fef6e28bb42270611b46707962c5a30061db4869eda12ab6",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "6c43f5900638598122520c8c798734ae5e64374190753108ccab11e3129b2523",
+                "width": 816
+              },
+              "recall": 0.6883852691218131,
+              "referenceInk": 1412,
+              "score": 72.88896473725772,
+              "ssim": 0.995520344473231,
+              "ssimRaw": 0.995520344473231
+            }
+          ],
+          "coreTree": "83a4a66e74448e6b6fa085349094f273dccad69c",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "c719ce7a48ac81394700e58d0a805dcf8b548eddfda88285bf037a6f20e3b377",
+          "pageMapDigest": "980bbba1503d8768fd956edfad574707525ee4ef3597427e2737d4bb289ec7ed",
+          "files": {
+            "1-candidate.png": "565a1c3446392ad24665b1480a973eec233afec02e2b7fc283b8a8264214b799",
+            "1-overlay.png": "e6625c7c302049aad6a64fbcf043bb84cdd099c372fe9a96193cb482c9679bbf",
+            "1-reference.png": "b547c21cf2c19b81173430da2bf95982ac26ecb53b2c368ba6aa367334785f28",
+            "candidate.pdf": "434edef8927e206e8c8168937fbf2e0491a2d946218640d91207fc13c91e3423",
+            "evidence.json": "c6e883e048c959fecdd3cf5bbdd002e9be1a868af38dd4d0dfb936ec635fbaf8",
+            "production.json": "8f8cfb61dd6b4a614600b2d276ae9d5b94317123bc82fdc31c11a1d27d1b6513",
+            "reference.pdf": "f9481218c7d5f94f081ddb67166eab526bca0a164258cfc08bb6674f3f25446b"
+          }
+        },
+        "textbox-fit-onpage-text-shrink-control": {
+          "score": 72.88896473725772,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenA",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenB",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LindenC",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  54,
+                  210,
+                  125
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1339,
+              "close": false,
+              "inkF1": 0.7288896473725772,
+              "pixelMismatch": 0.002748068924539513,
+              "precision": 0.7744585511575803,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "93efa42cbd74dd88fef6e28bb42270611b46707962c5a30061db4869eda12ab6",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "6c43f5900638598122520c8c798734ae5e64374190753108ccab11e3129b2523",
+                "width": 816
+              },
+              "recall": 0.6883852691218131,
+              "referenceInk": 1412,
+              "score": 72.88896473725772,
+              "ssim": 0.995520344473231,
+              "ssimRaw": 0.995520344473231
+            }
+          ],
+          "coreTree": "83a4a66e74448e6b6fa085349094f273dccad69c",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "de21aa880ed41e9580317ef30660f53dbbae7d74f2a4872fd8c14e84ee5b026d",
+          "pageMapDigest": "980bbba1503d8768fd956edfad574707525ee4ef3597427e2737d4bb289ec7ed",
+          "files": {
+            "1-candidate.png": "565a1c3446392ad24665b1480a973eec233afec02e2b7fc283b8a8264214b799",
+            "1-overlay.png": "e6625c7c302049aad6a64fbcf043bb84cdd099c372fe9a96193cb482c9679bbf",
+            "1-reference.png": "b547c21cf2c19b81173430da2bf95982ac26ecb53b2c368ba6aa367334785f28",
+            "candidate.pdf": "dc1d1adfa6a69afc97ff9f76e8a36caca9a90e8944e622510780f0e99351137a",
+            "evidence.json": "e4fef9b4da71d55322a8d9c6baf8255c1307835ccbc6b7e67c0ad2670c93a857",
+            "production.json": "8b5f4621448e2bc7d5d2783f329228f21af5ea207f9250c7df3db5f5cb1c2a46",
+            "reference.pdf": "33143cdcaebcb4484e0210fe79747654350d5e1b5c72928fb942d09fb725a3a5"
+          }
+        }
+      }
+    }
+  },
+  "controls": {
+    "textbox-fit-edge-explicit-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "textbox-fit-onpage-default-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "textbox-fit-edge-local-over-theme-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "textbox-fit-onpage-text-auto-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "textbox-fit-onpage-text-shrink-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    }
+  },
+  "screenshots": {
+    "textbox-fit-edge-default": {
+      "file": "production-textbox-fit-edge-default.png",
+      "sha256": "1d940d7fb70f00cf60482fb1b49e5ef937516253425d2ace758ff2aa11cab70e",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-edge-default/1-reference.png",
+          "sha256": "491a20e643faec0090489d14b3fd900eafae0607b4991991eec4f8070006b869"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "output_verification_failure",
+            "message": "source anchor p:body:90828cf9295496be349787c0db2686a1 has no measurable fragment in the paginated layout",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-edge-default/1-candidate.png",
+          "sha256": "60b98ef3e4cd766812057d8a5a18d428eabd83afbe0a097085bb6f3c576f2245"
+        }
+      ]
+    },
+    "textbox-fit-edge-explicit-control": {
+      "file": "production-textbox-fit-edge-explicit-control.png",
+      "sha256": "3c1e808d2771c34c718eac621509646dd64f3e71fd310dd0c73834cd20efb7bb",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-edge-explicit-control/1-reference.png",
+          "sha256": "491a20e643faec0090489d14b3fd900eafae0607b4991991eec4f8070006b869"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-baseline/runs/candidate/textbox-fit-edge-explicit-control/1-candidate.png",
+          "sha256": "60b98ef3e4cd766812057d8a5a18d428eabd83afbe0a097085bb6f3c576f2245"
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-edge-explicit-control/1-candidate.png",
+          "sha256": "60b98ef3e4cd766812057d8a5a18d428eabd83afbe0a097085bb6f3c576f2245"
+        }
+      ]
+    },
+    "textbox-fit-onpage-default-control": {
+      "file": "production-textbox-fit-onpage-default-control.png",
+      "sha256": "359533d8c60813deda2e4ccbf733aff55ed56ff8e6c0918300865d4fc945f591",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-onpage-default-control/1-reference.png",
+          "sha256": "b547c21cf2c19b81173430da2bf95982ac26ecb53b2c368ba6aa367334785f28"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-baseline/runs/candidate/textbox-fit-onpage-default-control/1-candidate.png",
+          "sha256": "565a1c3446392ad24665b1480a973eec233afec02e2b7fc283b8a8264214b799"
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-onpage-default-control/1-candidate.png",
+          "sha256": "565a1c3446392ad24665b1480a973eec233afec02e2b7fc283b8a8264214b799"
+        }
+      ]
+    },
+    "textbox-fit-edge-text-default": {
+      "file": "production-textbox-fit-edge-text-default.png",
+      "sha256": "79c952670ef3d860bad592f976a52a52b3bd9047b6dcc6965769ddec1e096d45",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-edge-text-default/1-reference.png",
+          "sha256": "491a20e643faec0090489d14b3fd900eafae0607b4991991eec4f8070006b869"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "output_verification_failure",
+            "message": "source anchor p:body:90828cf9295496be349787c0db2686a1 has no measurable fragment in the paginated layout",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-edge-text-default/1-candidate.png",
+          "sha256": "60b98ef3e4cd766812057d8a5a18d428eabd83afbe0a097085bb6f3c576f2245"
+        }
+      ]
+    },
+    "textbox-fit-edge-line-default": {
+      "file": "production-textbox-fit-edge-line-default.png",
+      "sha256": "c162d1bf8e50976ff3c222c206560497c00df6c36b76bdff88a65ddd4237db21",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-edge-line-default/1-reference.png",
+          "sha256": "491a20e643faec0090489d14b3fd900eafae0607b4991991eec4f8070006b869"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "output_verification_failure",
+            "message": "source anchor p:body:90828cf9295496be349787c0db2686a1 has no measurable fragment in the paginated layout",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-edge-line-default/1-candidate.png",
+          "sha256": "60b98ef3e4cd766812057d8a5a18d428eabd83afbe0a097085bb6f3c576f2245"
+        }
+      ]
+    },
+    "textbox-fit-edge-shape-default": {
+      "file": "production-textbox-fit-edge-shape-default.png",
+      "sha256": "6506bbf7d1acaf9b4c8a8e8a5f75161d8aaf14cf8afb2a894da2af724f75e763",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-edge-shape-default/1-reference.png",
+          "sha256": "491a20e643faec0090489d14b3fd900eafae0607b4991991eec4f8070006b869"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "output_verification_failure",
+            "message": "source anchor p:body:90828cf9295496be349787c0db2686a1 has no measurable fragment in the paginated layout",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-edge-shape-default/1-candidate.png",
+          "sha256": "60b98ef3e4cd766812057d8a5a18d428eabd83afbe0a097085bb6f3c576f2245"
+        }
+      ]
+    },
+    "textbox-fit-edge-empty-theme": {
+      "file": "production-textbox-fit-edge-empty-theme.png",
+      "sha256": "0860af18b5224c4d29cf4d0959259528e54f89fac4a2541bc1cd6e8b7bb2018a",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-edge-empty-theme/1-reference.png",
+          "sha256": "491a20e643faec0090489d14b3fd900eafae0607b4991991eec4f8070006b869"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "output_verification_failure",
+            "message": "source anchor p:body:90828cf9295496be349787c0db2686a1 has no measurable fragment in the paginated layout",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-edge-empty-theme/1-candidate.png",
+          "sha256": "60b98ef3e4cd766812057d8a5a18d428eabd83afbe0a097085bb6f3c576f2245"
+        }
+      ]
+    },
+    "textbox-fit-edge-local-over-theme-control": {
+      "file": "production-textbox-fit-edge-local-over-theme-control.png",
+      "sha256": "fa9394be56c2c09d415f96c2150153e138c5ff51969e9afe35618f6063d2350e",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-edge-local-over-theme-control/1-reference.png",
+          "sha256": "491a20e643faec0090489d14b3fd900eafae0607b4991991eec4f8070006b869"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-baseline/runs/candidate/textbox-fit-edge-local-over-theme-control/1-candidate.png",
+          "sha256": "60b98ef3e4cd766812057d8a5a18d428eabd83afbe0a097085bb6f3c576f2245"
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-edge-local-over-theme-control/1-candidate.png",
+          "sha256": "60b98ef3e4cd766812057d8a5a18d428eabd83afbe0a097085bb6f3c576f2245"
+        }
+      ]
+    },
+    "textbox-fit-header-edge-default": {
+      "file": "production-textbox-fit-header-edge-default.png",
+      "sha256": "d2eafbcd9b72eb674414706553141c7504e8d2c3b003ba72dfbca8ba18ffc572",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-header-edge-default/1-reference.png",
+          "sha256": "331d313bc7a74edf675e93ed61ee1f292ca8372a8ec8ae34e8f6352887785fbc"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "output_verification_failure",
+            "message": "source anchor p:hdr1:5976987d7e421243342798f50dbd7c76 has no measurable fragment in the paginated layout",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-header-edge-default/1-candidate.png",
+          "sha256": "0872003c4639c57a1ae841928ebc6847079acf3bff27fb66342382cd0440efc9"
+        }
+      ]
+    },
+    "textbox-fit-footer-edge-text-default": {
+      "file": "production-textbox-fit-footer-edge-text-default.png",
+      "sha256": "7dc7438b9e2f2f3429923c81f2909614d8e0e6656cac7c63754cba64fad2f9b6",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-footer-edge-text-default/1-reference.png",
+          "sha256": "a3c4d03adbc52dd5401d8211bd9e859f8f394c7098581a3fbd32b97d4ced3031"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "output_verification_failure",
+            "message": "source anchor p:ftr1:2318f197f066d60dad95da45d1f99088 has no measurable fragment in the paginated layout",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-footer-edge-text-default/1-candidate.png",
+          "sha256": "bca28f9010c3b981aa428dbc1dd86caaab4c0e4b486bbd74f7d40703c9b2b396"
+        }
+      ]
+    },
+    "textbox-fit-onpage-text-auto-control": {
+      "file": "production-textbox-fit-onpage-text-auto-control.png",
+      "sha256": "18824468f2d3e90c9f01d4f3d19ab594b80655a0f1c8ec90b94521b88eeb7280",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-onpage-text-auto-control/1-reference.png",
+          "sha256": "b547c21cf2c19b81173430da2bf95982ac26ecb53b2c368ba6aa367334785f28"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-baseline/runs/candidate/textbox-fit-onpage-text-auto-control/1-candidate.png",
+          "sha256": "565a1c3446392ad24665b1480a973eec233afec02e2b7fc283b8a8264214b799"
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-onpage-text-auto-control/1-candidate.png",
+          "sha256": "565a1c3446392ad24665b1480a973eec233afec02e2b7fc283b8a8264214b799"
+        }
+      ]
+    },
+    "textbox-fit-onpage-text-shrink-control": {
+      "file": "production-textbox-fit-onpage-text-shrink-control.png",
+      "sha256": "9b9c3d39991a0508a1bfedcf5efec140749f4a18262cb41349ab30a59407e155",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-onpage-text-shrink-control/1-reference.png",
+          "sha256": "b547c21cf2c19b81173430da2bf95982ac26ecb53b2c368ba6aa367334785f28"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-baseline/runs/candidate/textbox-fit-onpage-text-shrink-control/1-candidate.png",
+          "sha256": "565a1c3446392ad24665b1480a973eec233afec02e2b7fc283b8a8264214b799"
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/textbox-fit-onpage-text-shrink-control/1-candidate.png",
+          "sha256": "565a1c3446392ad24665b1480a973eec233afec02e2b7fc283b8a8264214b799"
+        }
+      ]
+    }
+  },
+  "productionSelection": [
+    "textbox-fit-edge-default",
+    "textbox-fit-edge-explicit-control",
+    "textbox-fit-onpage-default-control",
+    "textbox-fit-edge-text-default",
+    "textbox-fit-edge-line-default",
+    "textbox-fit-edge-shape-default",
+    "textbox-fit-edge-empty-theme",
+    "textbox-fit-edge-local-over-theme-control",
+    "textbox-fit-header-edge-default",
+    "textbox-fit-footer-edge-text-default",
+    "textbox-fit-onpage-text-auto-control",
+    "textbox-fit-onpage-text-shrink-control"
+  ],
+  "screenshotMethod": "All actual artifact page PNGs, 96 DPI at100%, no crop/resampling; refusal panels labeled. Font DejaVuSans18; sheet2512x(90+pageCount*1056), column step832, page origin16,74."
+}

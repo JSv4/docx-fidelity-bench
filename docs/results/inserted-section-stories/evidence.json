@@ -1,0 +1,762 @@
+{
+  "before": "5bae7386facce529293c21b5a1d4e5daee34650c",
+  "after": "502036628d31946162d4dd487845a8cb2e9dfc2b",
+  "scope": "Three focused diagnostics, not a full-suite score",
+  "cases": [
+    {
+      "id": "redline-inserted-section-footer",
+      "before": {
+        "score": 0.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-footer/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/runs/1534-before-final/redline-inserted-section-footer/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 2
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-footer/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-footer/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/runs/1534-before-final/redline-inserted-section-footer/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 2
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-footer/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "ineligible": true,
+            "name": "libreoffice-rejected",
+            "passed": null,
+            "reason": "LibreOffice 25.8.7.3 retains the inserted empty section after rejecting its authored paragraph revisions, including an empty paragraph and running-story bindings; independent markup endpoints, exact review-story text and SDK checks remain mandatory"
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "headers",
+              "texts": [
+                "CEDAR REFERENCE"
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "kind": "default",
+              "scope": "redline",
+              "story": "footer",
+              "type": "section-stories",
+              "values": [
+                "",
+                "CEDAR REFERENCE"
+              ],
+              "version": 1
+            },
+            "name": "assertion-section-stories",
+            "observed": [
+              "CEDAR REFERENCE",
+              "CEDAR REFERENCE"
+            ],
+            "passed": false
+          }
+        ]
+      },
+      "after": {
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-footer/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/runs/1534-after/redline-inserted-section-footer/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-footer/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-footer/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/runs/1534-after/redline-inserted-section-footer/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-footer/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "ineligible": true,
+            "name": "libreoffice-rejected",
+            "passed": null,
+            "reason": "LibreOffice 25.8.7.3 retains the inserted empty section after rejecting its authored paragraph revisions, including an empty paragraph and running-story bindings; independent markup endpoints, exact review-story text and SDK checks remain mandatory"
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "headers",
+              "texts": [
+                "CEDAR REFERENCE"
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "kind": "default",
+              "scope": "redline",
+              "story": "footer",
+              "type": "section-stories",
+              "values": [
+                "",
+                "CEDAR REFERENCE"
+              ],
+              "version": 1
+            },
+            "name": "assertion-section-stories",
+            "observed": [
+              "",
+              "CEDAR REFERENCE"
+            ],
+            "passed": true
+          }
+        ]
+      },
+      "captures": [
+        {
+          "label": "Authored",
+          "sourceSha256": "246b8630054ce8dac91fcaf3017eb26bad4a05e605813f4256aa28982310aa5a",
+          "pdfSha256": "d1ba0879f59e4dd9fde24744b52dc394add17beeced6bbdbcebf63c093901a6c",
+          "renderer": {
+            "name": "libreoffice",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "pages": 2
+        },
+        {
+          "label": "Before",
+          "sourceSha256": "0a3a115e79cde50ee031741166c4c315e9b8f88afee23d8dc44c0acbddc20e1c",
+          "pdfSha256": "ccecec750a39702ac822c85b86ebe060b2e49874843d58529303e58bc1ebc8b3",
+          "renderer": {
+            "name": "libreoffice",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "pages": 2
+        },
+        {
+          "label": "After",
+          "sourceSha256": "c9163ee9e239ed78da84ddb53d48799f7649a607ff9fc65f677717dcba0d1ce3",
+          "pdfSha256": "64b978529bfd440903e29f935c685f0673ef4580593491532f649032f67874f8",
+          "renderer": {
+            "name": "libreoffice",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "pages": 2
+        }
+      ]
+    },
+    {
+      "id": "redline-inserted-section-header",
+      "before": {
+        "score": 0.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-header/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/runs/1534-before-final/redline-inserted-section-header/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 2
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-header/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-header/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/runs/1534-before-final/redline-inserted-section-header/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 2
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-header/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "ineligible": true,
+            "name": "libreoffice-rejected",
+            "passed": null,
+            "reason": "LibreOffice 25.8.7.3 retains the inserted empty section after rejecting its authored paragraph revisions, including an empty paragraph and running-story bindings; independent markup endpoints, exact review-story text and SDK checks remain mandatory"
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "headers",
+              "texts": [
+                "CEDAR REFERENCE"
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "kind": "default",
+              "scope": "redline",
+              "story": "header",
+              "type": "section-stories",
+              "values": [
+                "",
+                "CEDAR REFERENCE"
+              ],
+              "version": 1
+            },
+            "name": "assertion-section-stories",
+            "observed": [
+              "CEDAR REFERENCE",
+              "CEDAR REFERENCE"
+            ],
+            "passed": false
+          }
+        ]
+      },
+      "after": {
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-header/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/runs/1534-after/redline-inserted-section-header/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-header/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-header/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/runs/1534-after/redline-inserted-section-header/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-header/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "ineligible": true,
+            "name": "libreoffice-rejected",
+            "passed": null,
+            "reason": "LibreOffice 25.8.7.3 retains the inserted empty section after rejecting its authored paragraph revisions, including an empty paragraph and running-story bindings; independent markup endpoints, exact review-story text and SDK checks remain mandatory"
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "headers",
+              "texts": [
+                "CEDAR REFERENCE"
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "kind": "default",
+              "scope": "redline",
+              "story": "header",
+              "type": "section-stories",
+              "values": [
+                "",
+                "CEDAR REFERENCE"
+              ],
+              "version": 1
+            },
+            "name": "assertion-section-stories",
+            "observed": [
+              "",
+              "CEDAR REFERENCE"
+            ],
+            "passed": true
+          }
+        ]
+      },
+      "captures": [
+        {
+          "label": "Authored",
+          "sourceSha256": "3c8e5ea658f00b1494342dfa0830d18c48097cf57adb8eee2d13be8e70156598",
+          "pdfSha256": "c8ebc541847966c6510e00bd6a3816c0b54714950c38437419cf6db9161e129f",
+          "renderer": {
+            "name": "libreoffice",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "pages": 2
+        },
+        {
+          "label": "Before",
+          "sourceSha256": "0429a680819b944ebd675cbfd82c2be63a9f67252ac757aaea1e6f683e4aca8f",
+          "pdfSha256": "2dfaef643326e1766c51798e7782fd6caf7cb27f0086a7410c60797a5a263b4d",
+          "renderer": {
+            "name": "libreoffice",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "pages": 2
+        },
+        {
+          "label": "After",
+          "sourceSha256": "05093aaa82597dfce2129091ee75d60f62e72183eb81f3aa99582b4c66b8d1cb",
+          "pdfSha256": "f97e42f94a6cb6711977f533af793fc0f14e330df5df768890328b80c4c2dc89",
+          "renderer": {
+            "name": "libreoffice",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "pages": 2
+        }
+      ]
+    },
+    {
+      "id": "redline-inserted-section-footer-stable-control",
+      "before": {
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-footer-stable-control/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/runs/1534-before-final/redline-inserted-section-footer-stable-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-footer-stable-control/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-footer-stable-control/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/runs/1534-before-final/redline-inserted-section-footer-stable-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-footer-stable-control/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "headers",
+              "texts": [
+                "CEDAR REFERENCE"
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "kind": "default",
+              "scope": "redline",
+              "story": "footer",
+              "type": "section-stories",
+              "values": [
+                "",
+                "CEDAR REFERENCE"
+              ],
+              "version": 1
+            },
+            "name": "assertion-section-stories",
+            "observed": [
+              "",
+              "CEDAR REFERENCE"
+            ],
+            "passed": true
+          }
+        ]
+      },
+      "after": {
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-footer-stable-control/authored-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/runs/1534-after/redline-inserted-section-footer-stable-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-footer-stable-control/right.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-footer-stable-control/authored-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "candidate": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/runs/1534-after/redline-inserted-section-footer-stable-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 1
+              },
+              "expected": {
+                "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1534/fixtures/redline/redline-inserted-section-footer-stable-control/left.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "scope": "redline",
+              "story": "headers",
+              "texts": [
+                "CEDAR REFERENCE"
+              ],
+              "type": "untracked-text",
+              "version": 1
+            },
+            "missing": [],
+            "name": "assertion-untracked-text",
+            "passed": true
+          },
+          {
+            "declaration": {
+              "kind": "default",
+              "scope": "redline",
+              "story": "footer",
+              "type": "section-stories",
+              "values": [
+                "",
+                "CEDAR REFERENCE"
+              ],
+              "version": 1
+            },
+            "name": "assertion-section-stories",
+            "observed": [
+              "",
+              "CEDAR REFERENCE"
+            ],
+            "passed": true
+          }
+        ]
+      },
+      "captures": [
+        {
+          "label": "Authored",
+          "sourceSha256": "95bef663647ff13a239ca93dc8af7d97eb61230e8c95853de912b6b13df09ad9",
+          "pdfSha256": "15eda8aaa38cf50388e47f533e69d1ba3df22bb43fe4b2b4a0d719d57b3a1897",
+          "renderer": {
+            "name": "libreoffice",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "pages": 2
+        },
+        {
+          "label": "Before",
+          "sourceSha256": "9edf8d17e05cfcc2578ff55c810c861ea1c81f5345ed0eac4a3c11899a105836",
+          "pdfSha256": "4992c8ac08a9c2563644d6eb288a361a42b91b3e4e77fa6dca5b39ef5cbd9ca7",
+          "renderer": {
+            "name": "libreoffice",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "pages": 2
+        },
+        {
+          "label": "After",
+          "sourceSha256": "9edf8d17e05cfcc2578ff55c810c861ea1c81f5345ed0eac4a3c11899a105836",
+          "pdfSha256": "337c6aa9f63160223cc5132126067f31774417c710990bd563ac3757426c1b39",
+          "renderer": {
+            "name": "libreoffice",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "pages": 2
+        }
+      ]
+    }
+  ]
+}

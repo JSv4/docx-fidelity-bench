@@ -1,0 +1,907 @@
+{
+  "schema": 1,
+  "suite": {
+    "id": "core-v146-font-table-diagnostic",
+    "version": 146,
+    "cases": [
+      "font-table-sans-declared",
+      "font-table-sans-named-control",
+      "font-table-serif-declared",
+      "font-table-serif-named-control",
+      "font-table-mono-declared",
+      "font-table-mono-named-control",
+      "font-table-panose-mono-declared",
+      "font-table-panose-mono-named-control"
+    ]
+  },
+  "cases": [
+    {
+      "id": "font-table-sans-declared",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Missing font uses sans metadata; declared class (Docxodus #1574)",
+      "input": "fixtures/font-table-sans-declared.docx",
+      "sha256": "913a62e630d022645acaf8c3b08f252ae03cfe06aaa7d78c501e50786aff43b6",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Sans"
+      ],
+      "tokens": {
+        "After": 1,
+        "MarantaFooter": 1,
+        "MarantaHeading": 1,
+        "MarantaLedger": 1,
+        "declared": 1,
+        "iiii": 1,
+        "keep": 1,
+        "letters": 1,
+        "narrow": 1,
+        "spacing": 1,
+        "their": 1
+      },
+      "assertions": [
+        {
+          "type": "required-font-family",
+          "version": 1,
+          "family": "Liberation Sans"
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaHeading",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaLedger",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "narrow",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "letters",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "keep",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "their",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "declared",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "spacing",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "iiii",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "After",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaFooter",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "98b5da05b57a8a9654c724b901104efa6097b43820c80dac6a0eabf0a145dd81"
+      }
+    },
+    {
+      "id": "font-table-sans-named-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Missing font uses sans metadata; explicit installed-family control (Docxodus #1574)",
+      "input": "fixtures/font-table-sans-named-control.docx",
+      "sha256": "9c3d5ab7667a6ecb34f6eeceeb1cedb4011215aa553d75da81e9e36d50ba74e6",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Sans"
+      ],
+      "tokens": {
+        "After": 1,
+        "MarantaFooter": 1,
+        "MarantaHeading": 1,
+        "MarantaLedger": 1,
+        "declared": 1,
+        "iiii": 1,
+        "keep": 1,
+        "letters": 1,
+        "narrow": 1,
+        "spacing": 1,
+        "their": 1
+      },
+      "assertions": [
+        {
+          "type": "required-font-family",
+          "version": 1,
+          "family": "Liberation Sans"
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaHeading",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaLedger",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "narrow",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "letters",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "keep",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "their",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "declared",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "spacing",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "iiii",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "After",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaFooter",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "98b5da05b57a8a9654c724b901104efa6097b43820c80dac6a0eabf0a145dd81"
+      }
+    },
+    {
+      "id": "font-table-serif-declared",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Missing font uses serif metadata; declared class (Docxodus #1574)",
+      "input": "fixtures/font-table-serif-declared.docx",
+      "sha256": "dd7baf90a59b9d91dcb5a8615783f87bde20cc73247a30049c8bcde3c6e5e218",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "After": 1,
+        "MarantaFooter": 1,
+        "MarantaHeading": 1,
+        "MarantaLedger": 1,
+        "declared": 1,
+        "iiii": 1,
+        "keep": 1,
+        "letters": 1,
+        "narrow": 1,
+        "spacing": 1,
+        "their": 1
+      },
+      "assertions": [
+        {
+          "type": "required-font-family",
+          "version": 1,
+          "family": "Liberation Serif"
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaHeading",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaLedger",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "narrow",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "letters",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "keep",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "their",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "declared",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "spacing",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "iiii",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "After",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaFooter",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "98b5da05b57a8a9654c724b901104efa6097b43820c80dac6a0eabf0a145dd81"
+      }
+    },
+    {
+      "id": "font-table-serif-named-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Missing font uses serif metadata; explicit installed-family control (Docxodus #1574)",
+      "input": "fixtures/font-table-serif-named-control.docx",
+      "sha256": "46f853c5a2cb7a6b781de0b5960918f83a6d46331dc7cdf8d77f137674f49915",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "After": 1,
+        "MarantaFooter": 1,
+        "MarantaHeading": 1,
+        "MarantaLedger": 1,
+        "declared": 1,
+        "iiii": 1,
+        "keep": 1,
+        "letters": 1,
+        "narrow": 1,
+        "spacing": 1,
+        "their": 1
+      },
+      "assertions": [
+        {
+          "type": "required-font-family",
+          "version": 1,
+          "family": "Liberation Serif"
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaHeading",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaLedger",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "narrow",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "letters",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "keep",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "their",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "declared",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "spacing",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "iiii",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "After",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaFooter",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "98b5da05b57a8a9654c724b901104efa6097b43820c80dac6a0eabf0a145dd81"
+      }
+    },
+    {
+      "id": "font-table-mono-declared",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Missing font uses mono metadata; declared class (Docxodus #1574)",
+      "input": "fixtures/font-table-mono-declared.docx",
+      "sha256": "b3662f4503bb240dcabc1223a83abeb6885733b06ed2e29fb6dc03c450266bc2",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Mono"
+      ],
+      "tokens": {
+        "After": 1,
+        "MarantaFooter": 1,
+        "MarantaHeading": 1,
+        "MarantaLedger": 1,
+        "declared": 1,
+        "iiii": 1,
+        "keep": 1,
+        "letters": 1,
+        "narrow": 1,
+        "spacing": 1,
+        "their": 1
+      },
+      "assertions": [
+        {
+          "type": "required-font-family",
+          "version": 1,
+          "family": "Liberation Mono"
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaHeading",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaLedger",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "narrow",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "letters",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "keep",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "their",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "declared",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "spacing",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "iiii",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "After",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaFooter",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "98b5da05b57a8a9654c724b901104efa6097b43820c80dac6a0eabf0a145dd81"
+      }
+    },
+    {
+      "id": "font-table-mono-named-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Missing font uses mono metadata; explicit installed-family control (Docxodus #1574)",
+      "input": "fixtures/font-table-mono-named-control.docx",
+      "sha256": "465a54baa84e614757af5c4cbaef513aa579b90e8e7623f6aef82b45eeca25e4",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Mono"
+      ],
+      "tokens": {
+        "After": 1,
+        "MarantaFooter": 1,
+        "MarantaHeading": 1,
+        "MarantaLedger": 1,
+        "declared": 1,
+        "iiii": 1,
+        "keep": 1,
+        "letters": 1,
+        "narrow": 1,
+        "spacing": 1,
+        "their": 1
+      },
+      "assertions": [
+        {
+          "type": "required-font-family",
+          "version": 1,
+          "family": "Liberation Mono"
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaHeading",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaLedger",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "narrow",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "letters",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "keep",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "their",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "declared",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "spacing",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "iiii",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "After",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaFooter",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "98b5da05b57a8a9654c724b901104efa6097b43820c80dac6a0eabf0a145dd81"
+      }
+    },
+    {
+      "id": "font-table-panose-mono-declared",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Missing font uses panose-mono metadata; declared class (Docxodus #1574)",
+      "input": "fixtures/font-table-panose-mono-declared.docx",
+      "sha256": "8f01dc845f5d5f5a95d9a14030e811b46c7034203cb204439f685b493f53ebf9",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Mono"
+      ],
+      "tokens": {
+        "After": 1,
+        "MarantaFooter": 1,
+        "MarantaHeading": 1,
+        "MarantaLedger": 1,
+        "declared": 1,
+        "iiii": 1,
+        "keep": 1,
+        "letters": 1,
+        "narrow": 1,
+        "spacing": 1,
+        "their": 1
+      },
+      "assertions": [
+        {
+          "type": "required-font-family",
+          "version": 1,
+          "family": "Liberation Mono"
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaHeading",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaLedger",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "narrow",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "letters",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "keep",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "their",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "declared",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "spacing",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "iiii",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "After",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaFooter",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "98b5da05b57a8a9654c724b901104efa6097b43820c80dac6a0eabf0a145dd81"
+      }
+    },
+    {
+      "id": "font-table-panose-mono-named-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Missing font uses panose-mono metadata; explicit installed-family control (Docxodus #1574)",
+      "input": "fixtures/font-table-panose-mono-named-control.docx",
+      "sha256": "e3445e2dff2799313945a6a54a5d7a7f35144a8298263eb86d532cc902b7289e",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Mono"
+      ],
+      "tokens": {
+        "After": 1,
+        "MarantaFooter": 1,
+        "MarantaHeading": 1,
+        "MarantaLedger": 1,
+        "declared": 1,
+        "iiii": 1,
+        "keep": 1,
+        "letters": 1,
+        "narrow": 1,
+        "spacing": 1,
+        "their": 1
+      },
+      "assertions": [
+        {
+          "type": "required-font-family",
+          "version": 1,
+          "family": "Liberation Mono"
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaHeading",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaLedger",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "narrow",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "letters",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "keep",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "their",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "declared",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "spacing",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "iiii",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "After",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "MarantaFooter",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "98b5da05b57a8a9654c724b901104efa6097b43820c80dac6a0eabf0a145dd81"
+      }
+    }
+  ]
+}

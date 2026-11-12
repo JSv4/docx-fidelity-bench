@@ -1,0 +1,3696 @@
+{
+  "schema": 1,
+  "benchCommit": "61e4619be3555e3184074d8e82bcc544e150f73f",
+  "scope": "Production public WASM export and pinned Chromium PDF; raw artifacts are retained in the linked Actions runs.",
+  "limitations": [
+    "No fresh Word reference is claimed.",
+    "Controls prove full page-raster identity, not PDF-byte or HTML/PageMap payload identity.",
+    "Borders and line positions differ from LibreOffice; complete output does not imply native layout parity. Two tall-table references are ineligible and unscored; only eleven cases are selected."
+  ],
+  "runs": {
+    "candidate": {
+      "runUrl": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/41221180196",
+      "artifactId": 13050346968,
+      "artifactZipSha256": "07933f94d1007663804afff03349c245bf2e5c49f97a11425e57418ba6cb9ed7",
+      "coreCommit": "0875eab87ecaf0af716af7c585f9745d159c4a95",
+      "resultSha256": "91e3cec3fdd61a90b203d87aaec3e85b4228c31dec31893936141e36bb1b534f",
+      "selectedManifestSha256": "be22f0f4edb04a55d6f7ac2460c9dfd4ed75185b47e455dde741936c3b0da92d",
+      "contractDigest": "9c67597d6ac4dfca3aae880cf0cf866a50479fcdc0382044e67f84c612f3f8a2",
+      "referenceBundleSha256": "b39a4b9cf2f065a1b82ab0506decfbe891c0a7856aa4648e230e873ecce43ad2",
+      "calibrationResultSha256": "5547122712a2099b38ade3f04cf9f3e8d42fc637f3b7ad3cb20e856413e02e6b",
+      "calibrationSummary": {
+        "categoryMeans": {
+          "notes": 100.0
+        },
+        "closeMatchRate": 1.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 11,
+        "required": 11,
+        "score": 100.0
+      },
+      "summary": {
+        "categoryMeans": {
+          "notes": 77.1645425378445
+        },
+        "closeMatchRate": 0.09090909090909091,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 11,
+        "required": 11,
+        "score": 77.1645425378445
+      },
+      "cases": {
+        "notes-bordered-flow-box-70": {
+          "score": 65.27372437765987,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            }
+          ],
+          "pageCount": 2,
+          "pages": [
+            {
+              "candidateInk": 35261,
+              "close": false,
+              "inkF1": 0.6527372437765988,
+              "pixelMismatch": 0.07797297422756981,
+              "precision": 0.6556251949746178,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "3b31ad71bbe96c5944d0d3cb6fe75792043e38647ab0bd5233154a8d34bba4b6",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "4bf38368607b5bb3e4bc9d887abbf1c2541f0d9496a54a2753404910e60a91cc",
+                "width": 816
+              },
+              "recall": 0.6498746231651311,
+              "referenceInk": 35493,
+              "score": 65.27372437765987,
+              "ssim": 0.8377661560572133,
+              "ssimRaw": 0.8377661560572133
+            },
+            {
+              "candidateInk": 29767,
+              "close": false,
+              "inkF1": 0.9667706578898577,
+              "pixelMismatch": 0.04670324569221628,
+              "precision": 0.9853865018308866,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "c10b987eaecf3526a783490081114b9064a461381015878d2acac0c9bbe7e58f",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "1f4afcb14622148c1963b2bbe110c55641d048c969e4a4b4d32649307228a0bf",
+                "width": 816
+              },
+              "recall": 0.9488451502754244,
+              "referenceInk": 31043,
+              "score": 95.15579021701342,
+              "ssim": 0.9515579021701343,
+              "ssimRaw": 0.9515579021701343
+            }
+          ],
+          "coreTree": "83a4a66e74448e6b6fa085349094f273dccad69c",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "09d4d4e9dbf4c39657b7ecd9d3761c89cdae2cb69dcd91bd17c30399ef0a90b4",
+          "pageMapDigest": "4671fd9487616bae23e852bcb7b2861024dfd958bfd5714d1e502962cd52c1de",
+          "files": {
+            "1-candidate.png": "ed5c6323fcde5fc9c2378d60ffd87cfc4ec4900b092cdf234c1c211e4da383b6",
+            "1-overlay.png": "c2d97b318f1a3cecb188dccb3b50a8c8a07fdd9527c87134ed33fad6e0e852f6",
+            "1-reference.png": "1d942754c661a4210b5c1ed5802199ddd291a04f4bbece950df6108c70fd01c7",
+            "2-candidate.png": "89fdd4d2088c913a026073274c25dead09d0bd3d09b4f1c5781a7beef3018420",
+            "2-overlay.png": "2681936f5c085ae6a0d195cea26c4a5a29492e4e4f4f30734e7256d157456490",
+            "2-reference.png": "4d2429513eec59be99c9f430da4f74d53bec4d85822249206ee5ec74da847cdd",
+            "candidate.pdf": "edb6ece4b3c142ce446e4523484b0301165ada5ede3582ce6a5434e63a32b129",
+            "evidence.json": "13f2379d28246e2b60e734aad22979fecaca7a329a4d28de677f0a31aeadd105",
+            "production.json": "959f772e6431749d01b9df7e18f8ea9b466051b942bec4bb16f62f490d33e439",
+            "reference.pdf": "616df21e6a6041b3aa085f1dd718c58dec8cc4771c1fbb15bd197c0480469912"
+          }
+        },
+        "notes-bordered-flow-bottom-70": {
+          "score": 64.15511784664346,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            }
+          ],
+          "pageCount": 2,
+          "pages": [
+            {
+              "candidateInk": 33856,
+              "close": false,
+              "inkF1": 0.6415511784664346,
+              "pixelMismatch": 0.07755867498514557,
+              "precision": 0.6364307655954632,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "a216c4bd7325a95c887c05899433642154f9a3545ba58135f7e6639611decc8b",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "77bdca1e4159a80eb2006146e6a6080ee46735ef51288a1e9f8df22d13ff7851",
+                "width": 816
+              },
+              "recall": 0.6467546523163876,
+              "referenceInk": 33263,
+              "score": 64.15511784664346,
+              "ssim": 0.8451323096569986,
+              "ssimRaw": 0.8451323096569986
+            },
+            {
+              "candidateInk": 27534,
+              "close": false,
+              "inkF1": 0.961033431335433,
+              "pixelMismatch": 0.04631099598930481,
+              "precision": 0.9841650323236726,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "63eb0f24d7abefed567d03dd516c33ee2121d1a973104ec7af343a51c5be4554",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "2c0da15e05990831780d65672d56ba42cacbc8d1a3d04b46ee87f1ffc816db1f",
+                "width": 816
+              },
+              "recall": 0.938964220405065,
+              "referenceInk": 28983,
+              "score": 95.2364014962342,
+              "ssim": 0.9523640149623419,
+              "ssimRaw": 0.9523640149623419
+            }
+          ],
+          "coreTree": "83a4a66e74448e6b6fa085349094f273dccad69c",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "1adfaaa97f954b742d1406b30ec355a8522f0f5a35720fd8dd21ad7ea3591a5b",
+          "pageMapDigest": "0188e51d9a584121c1d2ad1e6a684ec0de53a6b70368aa5b5647e7981da197d8",
+          "files": {
+            "1-candidate.png": "9450f340cae20b4cd2050b95a81e4a0f2b204704375e6da2661368989e8b020b",
+            "1-overlay.png": "aff12811edd26bb57c1d2e0ae860d82142e853426c5ff6d35459b95d95741339",
+            "1-reference.png": "c6c7e096dae24b1a196860b69ff98311e5581cac3faf6af9d129fd664f873990",
+            "2-candidate.png": "2b211a550b7728819f8bd234fc225865600a6b91efd9c5f15017d44d83834639",
+            "2-overlay.png": "714c9b95812b84c166bb5684d419c0191194aacdcc083ee2b48c85c1b46ab535",
+            "2-reference.png": "0de7f2e8248fb14632fd339e78e163a443707439b5205f649b3d86b99750a23a",
+            "candidate.pdf": "bc72dba9642f82259eaa25d18f2beaba972d122cd5d1d850debb6e0e02387d22",
+            "evidence.json": "8ea86f356cde6cd0628d51af8c5907ea23e09cef2143f8112874774f1c37ac5a",
+            "production.json": "8aa57904fb67ab93c6b1be04fad9884d3671f86fd84870a8cd4c110d3ae2758e",
+            "reference.pdf": "47ae2e4f2735175510cd9c3eaafaf204c7cb5d41916e35d409230ec7e2cfd969"
+          }
+        },
+        "notes-bordered-flow-box-100": {
+          "score": 64.17347252864452,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            }
+          ],
+          "pageCount": 3,
+          "pages": [
+            {
+              "candidateInk": 35261,
+              "close": false,
+              "inkF1": 0.6527372437765988,
+              "pixelMismatch": 0.07797297422756981,
+              "precision": 0.6556251949746178,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "3b31ad71bbe96c5944d0d3cb6fe75792043e38647ab0bd5233154a8d34bba4b6",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "4bf38368607b5bb3e4bc9d887abbf1c2541f0d9496a54a2753404910e60a91cc",
+                "width": 816
+              },
+              "recall": 0.6498746231651311,
+              "referenceInk": 35493,
+              "score": 65.27372437765987,
+              "ssim": 0.8377661560572133,
+              "ssimRaw": 0.8377661560572133
+            },
+            {
+              "candidateInk": 35295,
+              "close": false,
+              "inkF1": 0.6417347252864453,
+              "pixelMismatch": 0.0781133949792038,
+              "precision": 0.6385607026491005,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "fb1049d3f2a6c30afbde825ab3a6acd3b9e2f02a1e2fa35c7ce267f73094f66a",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "d3d9bb33e34b5888d2ba1da54affa2bb257b09a81431d0880d9cef2fefa6c80f",
+                "width": 816
+              },
+              "recall": 0.6449404590692055,
+              "referenceInk": 34766,
+              "score": 64.17347252864452,
+              "ssim": 0.8388459337468325,
+              "ssimRaw": 0.8388459337468325
+            },
+            {
+              "candidateInk": 21873,
+              "close": false,
+              "inkF1": 0.9048570276922988,
+              "pixelMismatch": 0.0386273117201426,
+              "precision": 0.97992959356284,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "95dec95d0b7a2483032d2735ecdb5e941720daf780a154e0f2b0d129e3442cd2",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "3cea905f12a9d8a2ca81627b02441c3a56ba0d1f8f917d792f1e0cfbb838febe",
+                "width": 816
+              },
+              "recall": 0.840468591889157,
+              "referenceInk": 25694,
+              "score": 90.48570276922987,
+              "ssim": 0.9514344386685323,
+              "ssimRaw": 0.9514344386685323
+            }
+          ],
+          "coreTree": "83a4a66e74448e6b6fa085349094f273dccad69c",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "bbda1f9b59602e4ca359631790fa486ea15106aab6cb27eb201ae3c050f21ad5",
+          "pageMapDigest": "ff716c30b14a2d80a34d32fcc904715696c8045e07893502725526f33a707c37",
+          "files": {
+            "1-candidate.png": "ed5c6323fcde5fc9c2378d60ffd87cfc4ec4900b092cdf234c1c211e4da383b6",
+            "1-overlay.png": "c2d97b318f1a3cecb188dccb3b50a8c8a07fdd9527c87134ed33fad6e0e852f6",
+            "1-reference.png": "1d942754c661a4210b5c1ed5802199ddd291a04f4bbece950df6108c70fd01c7",
+            "2-candidate.png": "8e00892326ecab356007a64e2e1b267b74b31d09cc4be3276772695ea9fde0f0",
+            "2-overlay.png": "2790073f62c7f567d63c19f5ee6fd6d35c4861bc705d26b76a39bacdcb8723c3",
+            "2-reference.png": "5b3f9f7948ee67fa6e00da0e35f1a0a5faa61ae81aaa24fed5a1a19ff301e0b2",
+            "3-candidate.png": "a090f23bfdf0175a591dceeb3fe0f89b8a2dc271c3b70b31ec125eb3bba886c9",
+            "3-overlay.png": "68900af289e07bf0c8b4322cb2e8df6b673b20de009e37c5b5d18f7ed4a576e0",
+            "3-reference.png": "0b59a2ed4b1a811de2c2e8e42d4861b70d1d05723288acd05cc4364469c74071",
+            "candidate.pdf": "5f0464a4e81f2754bd637d443f694659068552043edec54673ec9eb9a544588e",
+            "evidence.json": "f8247658e91b62cd3b0d7846e202acd40aae85b46eb630906e9babc3d47672c7",
+            "production.json": "190ad91ca97edfd2df6c4f4834c8448680012f2d0ed937aff35a7a9fc60846e6",
+            "reference.pdf": "723473905eeb145a31117e3185b4c2940240d2ece51d539f26a5e29f40c572d7"
+          }
+        },
+        "notes-bordered-flow-bottom-100": {
+          "score": 63.26982062498621,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            }
+          ],
+          "pageCount": 3,
+          "pages": [
+            {
+              "candidateInk": 33856,
+              "close": false,
+              "inkF1": 0.6415511784664346,
+              "pixelMismatch": 0.07755867498514557,
+              "precision": 0.6364307655954632,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "a216c4bd7325a95c887c05899433642154f9a3545ba58135f7e6639611decc8b",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "77bdca1e4159a80eb2006146e6a6080ee46735ef51288a1e9f8df22d13ff7851",
+                "width": 816
+              },
+              "recall": 0.6467546523163876,
+              "referenceInk": 33263,
+              "score": 64.15511784664346,
+              "ssim": 0.8451323096569986,
+              "ssimRaw": 0.8451323096569986
+            },
+            {
+              "candidateInk": 33626,
+              "close": false,
+              "inkF1": 0.6326982062498621,
+              "pixelMismatch": 0.0771014371657754,
+              "precision": 0.6241301373936835,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "c3c259bf899ef30759c2873f0e08ba2e0599733a344c1fbeea6504418aa8ff64",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "fc713a634764d5ea589a464bfb621b05015a49c4b938b8824203bbf35231bf82",
+                "width": 816
+              },
+              "recall": 0.6415047946889599,
+              "referenceInk": 32536,
+              "score": 63.26982062498621,
+              "ssim": 0.8440929614314896,
+              "ssimRaw": 0.8440929614314896
+            },
+            {
+              "candidateInk": 20029,
+              "close": false,
+              "inkF1": 0.9061564699436112,
+              "pixelMismatch": 0.03710241198752228,
+              "precision": 0.9781317090219183,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "3733a4cbde81ae916d5d9e005d150fba8fe441740ef8506830a99431a9aa60cd",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "a99b280aa019518e8f4157f134ea262049f48757b822c4785e6de25a40172edb",
+                "width": 816
+              },
+              "recall": 0.8440477212256459,
+              "referenceInk": 23302,
+              "score": 90.61564699436111,
+              "ssim": 0.9546242375883925,
+              "ssimRaw": 0.9546242375883925
+            }
+          ],
+          "coreTree": "83a4a66e74448e6b6fa085349094f273dccad69c",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "8b3f243dcc91eaf14da204972ad4924a75a698ff86653b6acba60a21db16c3d6",
+          "pageMapDigest": "7a21ddd5f21c5a47edbb153f6052f96fa585623d39b2900aa95b1cd6e9d35d46",
+          "files": {
+            "1-candidate.png": "9450f340cae20b4cd2050b95a81e4a0f2b204704375e6da2661368989e8b020b",
+            "1-overlay.png": "aff12811edd26bb57c1d2e0ae860d82142e853426c5ff6d35459b95d95741339",
+            "1-reference.png": "c6c7e096dae24b1a196860b69ff98311e5581cac3faf6af9d129fd664f873990",
+            "2-candidate.png": "66bfe082a2c491632c8773b71c4e375aa9f59bd5f2b3cf01c6cb44da71ebe15c",
+            "2-overlay.png": "77e634232ed9f1e335ddfc8111b33a96a3b043e02e4c2cb23082a9dac5646249",
+            "2-reference.png": "21758c6dc64fa70cfde7eca81905d5c76b5930a93f2681bee824ffa9d04cfd2d",
+            "3-candidate.png": "20737b63489f01421d7f114cbb481327ed17db6de693b0d38d9c0247082ca4f3",
+            "3-overlay.png": "422d91607ee8a9d8a42dc3419efd8a3b9a0c153eb3d9c0170d5ee5ec6b7bb39a",
+            "3-reference.png": "752553c96bf99889715a8901cc60362f677da540847d9bdd2bbc118d3a2ddccc",
+            "candidate.pdf": "4def53eb237c29b6389a9e161155a158a037eece87be459ec95e043307798cf3",
+            "evidence.json": "9b8ef93c09692e794d6f3ff0db4034075845d83c2824c769b66a9c2e0a7f411d",
+            "production.json": "f5831d22aa447c0b8f048ae8a58c1db5604ae9102354510e2555aa4841e5ff40",
+            "reference.pdf": "0f6cf9275aacbc8d80f75f6243a26f0719cbe9cb67ff5684418535f2ba8f80cb"
+          }
+        },
+        "notes-bordered-flow-plain-control": {
+          "score": 92.79815866495483,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            }
+          ],
+          "pageCount": 2,
+          "pages": [
+            {
+              "candidateInk": 33856,
+              "close": false,
+              "inkF1": 0.968856108722987,
+              "pixelMismatch": 0.05651180926916221,
+              "precision": 0.9476311436672968,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "a216c4bd7325a95c887c05899433642154f9a3545ba58135f7e6639611decc8b",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "b00ddae44e3f0c5e2ef835fec0e20cc86145af25bd23c4157b8377de6c0f55b2",
+                "width": 816
+              },
+              "recall": 0.9910536474769448,
+              "referenceInk": 32639,
+              "score": 92.79815866495483,
+              "ssim": 0.9279815866495483,
+              "ssimRaw": 0.9279815866495483
+            },
+            {
+              "candidateInk": 26910,
+              "close": false,
+              "inkF1": 0.9601546577230049,
+              "pixelMismatch": 0.04631099598930481,
+              "precision": 0.9837978446674099,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "99234ee5f20e8f21cbd1f58b05462639e73a2b20eb1365aa49222984f70d782f",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "7f64025e88c76d2a41308a734428d8e3b944b4e47fe8a50712c0a5177655594a",
+                "width": 816
+              },
+              "recall": 0.9376212137240382,
+              "referenceInk": 28359,
+              "score": 93.8413322786416,
+              "ssim": 0.938413322786416,
+              "ssimRaw": 0.938413322786416
+            }
+          ],
+          "coreTree": "83a4a66e74448e6b6fa085349094f273dccad69c",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "23509ae20c28a6b7e87b998eba99a4ffe0c03439a772a68b0ddea0ee91239a0a",
+          "pageMapDigest": "67fef2c8b414021a681ded5fdb218f8253e60456571e644214163e18abfce69b",
+          "files": {
+            "1-candidate.png": "9450f340cae20b4cd2050b95a81e4a0f2b204704375e6da2661368989e8b020b",
+            "1-overlay.png": "5d19279684a516826b2bff41f5789acfa7a7331270ed583d210b6a38a20b82e0",
+            "1-reference.png": "e27fd66fa9d20b08c826543272be21d09c77e459d705021650c3e639ebf3751f",
+            "2-candidate.png": "d9e978052a5b6c22a0ad28a7157256b2cf4193fcce8e7b5d743bb375e889d533",
+            "2-overlay.png": "73d29b556b18804292bb8fd80389199f3a25a777f0af60cce8e07d66e62aa873",
+            "2-reference.png": "8182e5202610217679ca0264d2f958ef29e38fcfd019ab33de2a4108542de5aa",
+            "candidate.pdf": "7026b2a7ed520bd924cc72b45562e2a0e7732e03e27d928b64468e5bb92ddd66",
+            "evidence.json": "24b8e4c6f8e647c84b420cfc8b59a15cfa5513ffcd558e2860ea424cc30a984e",
+            "production.json": "75d946282cd6423927d37d39487c5f5fa1dbd52e55184bb829e5ffc80c2cb381",
+            "reference.pdf": "5c63b66189cfc326eccd2fd6f9b285f646f931be1e0d30608f7aeb01cc79cacd"
+          }
+        },
+        "notes-bordered-flow-paragraphs-control": {
+          "score": 92.79815866495483,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            }
+          ],
+          "pageCount": 2,
+          "pages": [
+            {
+              "candidateInk": 33856,
+              "close": false,
+              "inkF1": 0.968856108722987,
+              "pixelMismatch": 0.05651180926916221,
+              "precision": 0.9476311436672968,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "a216c4bd7325a95c887c05899433642154f9a3545ba58135f7e6639611decc8b",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "b00ddae44e3f0c5e2ef835fec0e20cc86145af25bd23c4157b8377de6c0f55b2",
+                "width": 816
+              },
+              "recall": 0.9910536474769448,
+              "referenceInk": 32639,
+              "score": 92.79815866495483,
+              "ssim": 0.9279815866495483,
+              "ssimRaw": 0.9279815866495483
+            },
+            {
+              "candidateInk": 26910,
+              "close": false,
+              "inkF1": 0.9601546577230049,
+              "pixelMismatch": 0.04631099598930481,
+              "precision": 0.9837978446674099,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "99234ee5f20e8f21cbd1f58b05462639e73a2b20eb1365aa49222984f70d782f",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "7f64025e88c76d2a41308a734428d8e3b944b4e47fe8a50712c0a5177655594a",
+                "width": 816
+              },
+              "recall": 0.9376212137240382,
+              "referenceInk": 28359,
+              "score": 93.8413322786416,
+              "ssim": 0.938413322786416,
+              "ssimRaw": 0.938413322786416
+            }
+          ],
+          "coreTree": "83a4a66e74448e6b6fa085349094f273dccad69c",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "dd0c9b20dac08a76491e5e1240661dc22a3e1444d6abfedf2874f5d59df1d047",
+          "pageMapDigest": "9816ac0c3ef2f6d98ac7269985c51a5b7f6fcf9a630a3b02e60520ed59c279a1",
+          "files": {
+            "1-candidate.png": "9450f340cae20b4cd2050b95a81e4a0f2b204704375e6da2661368989e8b020b",
+            "1-overlay.png": "5d19279684a516826b2bff41f5789acfa7a7331270ed583d210b6a38a20b82e0",
+            "1-reference.png": "e27fd66fa9d20b08c826543272be21d09c77e459d705021650c3e639ebf3751f",
+            "2-candidate.png": "d9e978052a5b6c22a0ad28a7157256b2cf4193fcce8e7b5d743bb375e889d533",
+            "2-overlay.png": "73d29b556b18804292bb8fd80389199f3a25a777f0af60cce8e07d66e62aa873",
+            "2-reference.png": "8182e5202610217679ca0264d2f958ef29e38fcfd019ab33de2a4108542de5aa",
+            "candidate.pdf": "4e780732c3c1ae6d1c57e27242e24c3a9f811a09575b1bf63f5f200eee736746",
+            "evidence.json": "05884bcc80d009e79ec9aa9d6340115ac7abd29a6572eae877c73f4424bad9c4",
+            "production.json": "a3a2634287a858d9835ca6ba15e05fb95f8082f07cd02ad724fa3e65809f3b52",
+            "reference.pdf": "bf895b7c369a63db87951e3b736c1dfef99916912a609b7053ce8768671c670f"
+          }
+        },
+        "notes-bordered-flow-short-control": {
+          "score": 97.46441672842012,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 4945,
+              "close": true,
+              "inkF1": 0.9746441672842012,
+              "pixelMismatch": 0.006429181521093286,
+              "precision": 0.9714863498483316,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "2f68645618cb016e72191aa2cb3fcf207b239a3d3c8490422c795a1bde69e54f",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "ede7441f5213929d14a6927846f6daa5b5abb974f7e17f360996f596190cab3c",
+                "width": 816
+              },
+              "recall": 0.9778225806451613,
+              "referenceInk": 4960,
+              "score": 97.46441672842012,
+              "ssim": 0.9911088943948446,
+              "ssimRaw": 0.9911088943948446
+            }
+          ],
+          "coreTree": "83a4a66e74448e6b6fa085349094f273dccad69c",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "d3befff68e0211d99e67857385aa0fb09e0d7549641c9a81e4b34d1c5f1ebdf7",
+          "pageMapDigest": "5cb454389d7b12c56062836226f05133ba4cff24a78eed2f23c574695e478d54",
+          "files": {
+            "1-candidate.png": "f3bd338802ac5490d59ac119f3820c16a1290b4b3fe1c8c053a2020803ed7fb0",
+            "1-overlay.png": "1c217b5d673fceac86f9bca4c5584b6bc5c26015e5bdf9893c9af7e3499b370e",
+            "1-reference.png": "458f9dbdd63a5849e23eb37ecdf8d113caa25c4209b988801af86c75ea8a5897",
+            "candidate.pdf": "7acbe79d82c1ba774b35f8729553fcccedb9643540dbcfd29fc14d4fd426ec31",
+            "evidence.json": "b479fa72e9723340c777e72c377c216e3bafd844f5e652bc8fd9e95d296bb1f9",
+            "production.json": "88f06f3285b1250e798b73e9f558563d98389600e05229eff4a28270747a2e48",
+            "reference.pdf": "19aa1e55da8a974c5e3c90fe1bf00875cc14bf6baf4d103b49cd25fa39f4e286"
+          }
+        },
+        "notes-bordered-flow-box-kept": {
+          "score": 63.061077164860244,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-4",
+              "passed": true
+            }
+          ],
+          "pageCount": 4,
+          "pages": [
+            {
+              "candidateInk": 788,
+              "close": true,
+              "inkF1": 1.0,
+              "pixelMismatch": 0.0014088495246583482,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "028a7842e4026b3fa87ec2766897cdd019142beabe45f457fbb1488a9f387803",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "bc6f299ffca73e9882ff1a08220c543eeca60e4e5c9b676532ee7159d90520f3",
+                "width": 816
+              },
+              "recall": 1.0,
+              "referenceInk": 786,
+              "score": 99.84615725896532,
+              "ssim": 0.9984615725896532,
+              "ssimRaw": 0.9984615725896532
+            },
+            {
+              "candidateInk": 36000,
+              "close": false,
+              "inkF1": 0.6306107716486025,
+              "pixelMismatch": 0.07856250928401663,
+              "precision": 0.61975,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "523241891aae6d2cc555912b26d6d54dc214eee38bcc419e2d79abc609dd03cc",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "a64cdc062024bd9375ec39494185fc8bda619eb867833016d0ad9d018f2032ad",
+                "width": 816
+              },
+              "recall": 0.6418589909816463,
+              "referenceInk": 34707,
+              "score": 63.061077164860244,
+              "ssim": 0.8358278225631058,
+              "ssimRaw": 0.8358278225631058
+            },
+            {
+              "candidateInk": 35290,
+              "close": false,
+              "inkF1": 0.6416234876866507,
+              "pixelMismatch": 0.07804376485442661,
+              "precision": 0.6385378294134315,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "5a4fcad28b596cdf409ec86728818509f6d709de02ceb29d0c31ce11646c617e",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "d3d9bb33e34b5888d2ba1da54affa2bb257b09a81431d0880d9cef2fefa6c80f",
+                "width": 816
+              },
+              "recall": 0.6447391129264224,
+              "referenceInk": 34766,
+              "score": 64.16234876866507,
+              "ssim": 0.8391574107473357,
+              "ssimRaw": 0.8391574107473357
+            },
+            {
+              "candidateInk": 20981,
+              "close": false,
+              "inkF1": 0.8821173415871949,
+              "pixelMismatch": 0.03877353498217469,
+              "precision": 0.9791239693055622,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "c55fcfee51d090698dfd88fa5059b8b91c29446bcd2cc0974e6459dab6a9e2c7",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "3cea905f12a9d8a2ca81627b02441c3a56ba0d1f8f917d792f1e0cfbb838febe",
+                "width": 816
+              },
+              "recall": 0.8025998287537947,
+              "referenceInk": 25694,
+              "score": 88.2117341587195,
+              "ssim": 0.9472252195244056,
+              "ssimRaw": 0.9472252195244056
+            }
+          ],
+          "coreTree": "83a4a66e74448e6b6fa085349094f273dccad69c",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "3cc8680458117f51b3c84694d92496638edf4fdd3d9e77ac0d6ac2940a60dcbb",
+          "pageMapDigest": "f47add8c7295fbef8194940a558d05d3732db653646637f582758ea37007b10c",
+          "files": {
+            "1-candidate.png": "31abfb9ff4680687ebba1ff097e5b45d3af6380fe562032c2358ac1db8c920f4",
+            "1-overlay.png": "108f1102d1619ec5357b4fd0aba8e60e42b00279c4e2fb695244ebf762e25765",
+            "1-reference.png": "9b23771ee3816271d5576d5da00d1100597ddba34eb19218ed4a6b4dc2738e46",
+            "2-candidate.png": "1c8703516f71acb599ae6fea76cdd84f9237b9b28701fdd638d46c7b3787b817",
+            "2-overlay.png": "9dbfee9433c8d4c5595d145a15e523328105fdd7ec79ef5e41745183e3da5dc3",
+            "2-reference.png": "7b3beb4fefb6b1aafdbc348c7c2f3f6ea98b2c4f59a6cb5292914cdc27f0c96f",
+            "3-candidate.png": "21a88cf144b801064f28bf108572ac64d2f0d974a41bf7d41d5ae0f6d767195e",
+            "3-overlay.png": "f5d45e1b2a08c15b12ccc165d96f498ea661d62bba863a3fea94de1daa09b566",
+            "3-reference.png": "5b3f9f7948ee67fa6e00da0e35f1a0a5faa61ae81aaa24fed5a1a19ff301e0b2",
+            "4-candidate.png": "610f2ac086c2117d9add539f5892e7b4995aa32799cfddd35b8386cf25d6a488",
+            "4-overlay.png": "49cb4d48011e7397d57403d62432181e1796d722842f10673f107f194907f640",
+            "4-reference.png": "0b59a2ed4b1a811de2c2e8e42d4861b70d1d05723288acd05cc4364469c74071",
+            "candidate.pdf": "d189bc39f419258c4f4cbfef7a09f79993083e97a22ac8f7c6bd6cd0e791c962",
+            "evidence.json": "27befe842c511ea06edbf9d54ef5f3e312022d0ebc6609f2f558bd12ed1350c1",
+            "production.json": "b3129c63fd8a043a30396996c25ca9f4aa3b44265f58dde2ab1a652bba0f8e80",
+            "reference.pdf": "568623cbff156429a297a97162f49b2d81f7ca45cd8a918dc33170114dcaba25"
+          }
+        },
+        "notes-bordered-flow-plain-kept-control": {
+          "score": 90.33774589069822,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-4",
+              "passed": true
+            }
+          ],
+          "pageCount": 4,
+          "pages": [
+            {
+              "candidateInk": 788,
+              "close": true,
+              "inkF1": 1.0,
+              "pixelMismatch": 0.0014088495246583482,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "028a7842e4026b3fa87ec2766897cdd019142beabe45f457fbb1488a9f387803",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "bc6f299ffca73e9882ff1a08220c543eeca60e4e5c9b676532ee7159d90520f3",
+                "width": 816
+              },
+              "recall": 1.0,
+              "referenceInk": 786,
+              "score": 99.84615725896532,
+              "ssim": 0.9984615725896532,
+              "ssimRaw": 0.9984615725896532
+            },
+            {
+              "candidateInk": 33068,
+              "close": false,
+              "inkF1": 0.9680980976110682,
+              "pixelMismatch": 0.05510295974450386,
+              "precision": 0.9463832103544212,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "fb03abc9159e99ba937963a6a7bf92ff5c69a437a4828034e251c76a293cc634",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "5a0004fe7de38f4e42826b811c790bce2c8c044160367edfe93b4d7ee7176e13",
+                "width": 816
+              },
+              "recall": 0.9908328885819232,
+              "referenceInk": 31853,
+              "score": 92.95200140598952,
+              "ssim": 0.9295200140598951,
+              "ssimRaw": 0.9295200140598951
+            },
+            {
+              "candidateInk": 33626,
+              "close": false,
+              "inkF1": 0.9657188682698292,
+              "pixelMismatch": 0.05553118501188354,
+              "precision": 0.9378457146255873,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "c3c259bf899ef30759c2873f0e08ba2e0599733a344c1fbeea6504418aa8ff64",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "cad2aea278b1ef752dbf6d7bdd9a5a49d274ef53800360b96e882aa7e2843846",
+                "width": 816
+              },
+              "recall": 0.995299573828027,
+              "referenceInk": 31912,
+              "score": 92.93478811316095,
+              "ssim": 0.9293478811316095,
+              "ssimRaw": 0.9293478811316095
+            },
+            {
+              "candidateInk": 19405,
+              "close": false,
+              "inkF1": 0.9033774589069822,
+              "pixelMismatch": 0.03710241198752228,
+              "precision": 0.9774284978098429,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "c1248d57b9ba1215cae823487e606f904f34af1ee5e94cebebc1d2590ef40390",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "11f09ee0856612d5efc22bd1e4cc8d5a91518e6e7a6625a83ef7f28a4896df40",
+                "width": 816
+              },
+              "recall": 0.8397565922920892,
+              "referenceInk": 22678,
+              "score": 90.33774589069822,
+              "ssim": 0.9424126194135415,
+              "ssimRaw": 0.9424126194135415
+            }
+          ],
+          "coreTree": "83a4a66e74448e6b6fa085349094f273dccad69c",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "67993a75028312682d2df3b9a1c6133baa80e7270ae3cb0fee4afd5feffd8906",
+          "pageMapDigest": "d38e13ba4fbdb81ed931db794710a02040309e33df349f63cf60fb1a2660446c",
+          "files": {
+            "1-candidate.png": "31abfb9ff4680687ebba1ff097e5b45d3af6380fe562032c2358ac1db8c920f4",
+            "1-overlay.png": "108f1102d1619ec5357b4fd0aba8e60e42b00279c4e2fb695244ebf762e25765",
+            "1-reference.png": "9b23771ee3816271d5576d5da00d1100597ddba34eb19218ed4a6b4dc2738e46",
+            "2-candidate.png": "6855f7d3479f0db5c2d1d5b48fe210433728cf1e177c32e4d20d5c569b67f524",
+            "2-overlay.png": "6bc31a1f7d60ce19b8e89d3becc65788dc410acded24b30f02f8f7f929b5a027",
+            "2-reference.png": "415bb70c1872401a3577250bce5c65eba7ca4e83784c4eb1f913743eda85a672",
+            "3-candidate.png": "66bfe082a2c491632c8773b71c4e375aa9f59bd5f2b3cf01c6cb44da71ebe15c",
+            "3-overlay.png": "aac14a97690a3c9f16f4a9b0f2e33b702560b11f9efdba58b29a892d5b9d2c73",
+            "3-reference.png": "987c0f8d92626e91bba855592a389832427e6130b14cef86344b9e734ba33284",
+            "4-candidate.png": "d6a10357e48f22255c0cc2e66ef54ff16d380dfae847c4fc8b7588d3d2d94d0c",
+            "4-overlay.png": "cd3e1526f2b47d246a668bdd9efffe6965801d87cdb5e8d2605b23798819eeaf",
+            "4-reference.png": "9754e37ce0c50726bfcdd5be61644d7f88dc1168df460bfd5f2ca6cac464c017",
+            "candidate.pdf": "c8e2e57685a87f4fbbd482bf58991defcaaa5b972cb4dcdc7f38534eb2bee82f",
+            "evidence.json": "39e66cd9a22d834db7f0b11c17bcc5b38c1174f387818204ac7c9f3dfa187ebe",
+            "production.json": "8caed07a3520b8e62b1767de5360f6879ee6638e1981e00402e446299ac0b8c5",
+            "reference.pdf": "56bb0742c24706b14152ad8da4c9f2c7f425ff52d34fcf3e26362a55ea1a1ee9"
+          }
+        },
+        "notes-bordered-flow-box-heading": {
+          "score": 64.14917368145912,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            }
+          ],
+          "pageCount": 3,
+          "pages": [
+            {
+              "candidateInk": 34636,
+              "close": false,
+              "inkF1": 0.649250746548257,
+              "pixelMismatch": 0.07662214980689246,
+              "precision": 0.6511144473957732,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "302897896e087eb7b3f39796893fe893793289784ed514269071e56bd86a3adb",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "7094700a2f6c28c4d94ef7337af920be5b94d4fa03d334f0b7697e99a19b1913",
+                "width": 816
+              },
+              "recall": 0.6473976842829302,
+              "referenceInk": 34892,
+              "score": 64.92507465482569,
+              "ssim": 0.8383080277690484,
+              "ssimRaw": 0.8383080277690484
+            },
+            {
+              "candidateInk": 35314,
+              "close": false,
+              "inkF1": 0.6414917368145912,
+              "pixelMismatch": 0.07814124702911468,
+              "precision": 0.6381605029166902,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "eaeed4fc9a532be270f7457b6574b7bba09db6c0b74a75c24457c3265585394a",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "6b16a91896a1d8c93f49f613a729c9e35b80ef93421cc10e9b4d1fd8d5d4c5ca",
+                "width": 816
+              },
+              "recall": 0.6448579316691591,
+              "referenceInk": 34772,
+              "score": 64.14917368145912,
+              "ssim": 0.8387838438670211,
+              "ssimRaw": 0.8387838438670211
+            },
+            {
+              "candidateInk": 22749,
+              "close": false,
+              "inkF1": 0.9218795528208862,
+              "pixelMismatch": 0.03928763740344623,
+              "precision": 0.9807024484592729,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "025fb61c3fe6ce481c708eadfee25c1dca64147d5b25d7f58fb7bdc741f5d080",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "a7a49b98e6488e57acaeb0204380b00202d65b8dfd82dbf71a0c3382151bc1dd",
+                "width": 816
+              },
+              "recall": 0.8697137975224263,
+              "referenceInk": 25751,
+              "score": 92.18795528208862,
+              "ssim": 0.9493194418007795,
+              "ssimRaw": 0.9493194418007795
+            }
+          ],
+          "coreTree": "83a4a66e74448e6b6fa085349094f273dccad69c",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "ccebc4e107e4e2b7739729c6df293c318cc318109709af7ff1a47e09f6e3f70a",
+          "pageMapDigest": "7539be5e71123fc829bd5cb84ddf51b7a3012f083805858584faf47225ff0d05",
+          "files": {
+            "1-candidate.png": "611db112fbdd0a79fe38857414c075e8408880a8ac89439ace324325828b4334",
+            "1-overlay.png": "965930a60be5248a1577ce59f17a65c46036eb03fa3efeee97daa5608decdadb",
+            "1-reference.png": "b06a74eb57a5576fece120af89a0d0809418af9d4b1e4b8975d52d3c6b9e4deb",
+            "2-candidate.png": "8ae575fa5ee742208505ef2372ff6c2c8921ba8ade877257cfa4059b7bcd3c4e",
+            "2-overlay.png": "65eb3e1e4e0032d4f8548bc279a9ef1bc3e81957440a4795c73891c8ec494464",
+            "2-reference.png": "4a63241c871e0b023df4de9021b3f3a950f738e7814de8f0bedc32ec91a16e09",
+            "3-candidate.png": "300eab719ea6ed89c71fc45f57c14bf9da32cd473eb9a35734cdc4769d380f3f",
+            "3-overlay.png": "02efb2720465ab66760f63683794f4c7be228cd84359a11df42259217a4c4040",
+            "3-reference.png": "6777935be7927414779ae38bbd00cd9ac9764d3e74b097aacf09417ccaf78b9d",
+            "candidate.pdf": "bd2cd7c1c91e1c94e61a9c15f5aebcde564c3627c5ac63d7302c05f8eb5631fa",
+            "evidence.json": "95add8d519edcadc97404936a406e96ee649528fb6bdd35ee3cc9e484a037b8b",
+            "production.json": "86a4bac57b78ef5290dbda0754bb46426ec9a59f0e67268d0ccf1c551404f3ab",
+            "reference.pdf": "c7fe3b389928c52b519f23905f3f166fb5ba4f98f4e2129d497b8199093b145f"
+          }
+        },
+        "notes-bordered-flow-plain-heading-control": {
+          "score": 91.329101743008,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            }
+          ],
+          "pageCount": 3,
+          "pages": [
+            {
+              "candidateInk": 33231,
+              "close": false,
+              "inkF1": 0.9717218635825056,
+              "pixelMismatch": 0.05532113413547237,
+              "precision": 0.9505281213324908,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "ce2b8b3ac7eab8b42fdeab1979ef3f137a93c3e6e67d5f4c327f1635d4d434b4",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "f6e222096b73f5c4c02c709df59e086a5ebb76187691fa2459ab280e5b7b3454",
+                "width": 816
+              },
+              "recall": 0.9938822648105375,
+              "referenceInk": 32038,
+              "score": 92.90176248874715,
+              "ssim": 0.9290176248874715,
+              "ssimRaw": 0.9290176248874715
+            },
+            {
+              "candidateInk": 33631,
+              "close": false,
+              "inkF1": 0.9655558594055366,
+              "pixelMismatch": 0.05557180258467023,
+              "precision": 0.9376765484225863,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "d36bfc752de1f00a22927380183486c0e153e93c92859d350e717e8603690a38",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "68917577e7315c5effbe0585563d336d6b1a99daa41b0b3e7f876fb5a5193feb",
+                "width": 816
+              },
+              "recall": 0.9951438060028824,
+              "referenceInk": 31918,
+              "score": 92.92361387787972,
+              "ssim": 0.9292361387787972,
+              "ssimRaw": 0.9292361387787972
+            },
+            {
+              "candidateInk": 20253,
+              "close": false,
+              "inkF1": 0.91329101743008,
+              "pixelMismatch": 0.03796930704099822,
+              "precision": 0.9783241988841159,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "c529427972d970b4c6db7a55e5cca8312f5a0c085d2497ac24c09f46f732111b",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "79b99ababc0d5417a5c0741450717f5c7462b79adc7e23d17cd9579cd5b2fd90",
+                "width": 816
+              },
+              "recall": 0.8563649616258628,
+              "referenceInk": 23323,
+              "score": 91.329101743008,
+              "ssim": 0.9442932907481062,
+              "ssimRaw": 0.9442932907481062
+            }
+          ],
+          "coreTree": "83a4a66e74448e6b6fa085349094f273dccad69c",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "3977e142700f2770f51ad23c78d047a35bdbc5619b41dde2054323a5d446fa82",
+          "pageMapDigest": "0e6db1f1259bad5914be4e29c8a00f0475ffad9528cc39c1404f8038dde882a0",
+          "files": {
+            "1-candidate.png": "558618d2c9291e01b62ba0ce0a6d711ae9646b73e5d8a9969260ee9557795d5f",
+            "1-overlay.png": "8ea344f1a54f3f16d35ee878b70720c68714679ee64a19661dfeffcc5a8bb7e8",
+            "1-reference.png": "ba495be1f3f7efd80597c99be162223d4e0706808310cb73f3f22843fdc3e072",
+            "2-candidate.png": "7e8d6cda535c7052c4293121a32348b9cf7e3993633826d99c5294936c9fb54b",
+            "2-overlay.png": "d5d510b92d028521e93b0769f0a24bdaeb39fcdf7298d5a969b46731988b7e8c",
+            "2-reference.png": "f2671cd91989cfb2afaf0ff42b832ceafe97d7c9fef8e06cf1725a48f417a820",
+            "3-candidate.png": "19a35f1a122a51e2e0b74ed016be574a4daf50a3662f1d0bf9bf74b7d6391781",
+            "3-overlay.png": "427da720d615bcef44259021e5ba1af3020874c238a3aea864711fa779dccd36",
+            "3-reference.png": "3dcffc35b7039d35e10ac3d46e9497f2851b95c50c087339a82d952f17547703",
+            "candidate.pdf": "d7a93f59fa16e21f11edb390d2fad5def1ea2bb357f5e3df17987e5a8498e0cd",
+            "evidence.json": "9bc3474b2cdee74df8174f034f4213753a8fd686ee81cb4e6c6e9be8df87c257",
+            "production.json": "d74a9dac3f94b1515f1f812fdfeaffbf061c9e4a7c75ed4dfe8ba11dd2b1c0fe",
+            "reference.pdf": "3d071ef08590b7352c8d03f36fc8b4078386019f8d5c4766cd9ef15611273b6c"
+          }
+        }
+      }
+    },
+    "baseline": {
+      "runUrl": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/41221181974",
+      "artifactId": 13050511767,
+      "artifactZipSha256": "9ac219efef3e2e5b75fdcbcfcf4cbe92a1a349dcc77e599d76191f9950ee169d",
+      "coreCommit": "06921d9505fdb8c0541d4f8c93ed8939296c521e",
+      "resultSha256": "edc3743d8794b137013ef0c53a3d73ad3bf5080bf0bbc4ca4ba48b80fa125925",
+      "selectedManifestSha256": "be22f0f4edb04a55d6f7ac2460c9dfd4ed75185b47e455dde741936c3b0da92d",
+      "contractDigest": "9dfa1cbd3f55bdcc944ab6b3d756aa1720bcc3b074c6ac62f99e69fd4443840f",
+      "referenceBundleSha256": "27b6ad2e261a02f41f8812952da584ef77674b7506c5bc4cfafba910fe2ff822",
+      "calibrationResultSha256": "6bcdccbe38881bb661195ca564f5355ad0ca627f9edf4b0c366bfc062fb54e6b",
+      "calibrationSummary": {
+        "categoryMeans": {
+          "notes": 100.0
+        },
+        "closeMatchRate": 1.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 11,
+        "required": 11,
+        "score": 100.0
+      },
+      "summary": {
+        "categoryMeans": {
+          "notes": 42.247961972003274
+        },
+        "closeMatchRate": 0.09090909090909091,
+        "complete": true,
+        "mandatoryPassRate": 0.45454545454545453,
+        "measured": 11,
+        "required": 11,
+        "score": 42.247961972003274
+      },
+      "cases": {
+        "notes-bordered-flow-box-70": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "pagination_failure",
+                "message": "A footnote continuation is clipped in the final page tree.",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "98320a6c7871ee4c8966120889695e92a8d8a15e3e6962cd1afd4f99cd9ea0ea",
+            "reference.pdf": "c42b6ddf653c807a9d868b0ca4944711c1e3b25cd63248d628b47375ad13dc07"
+          }
+        },
+        "notes-bordered-flow-bottom-70": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "pagination_failure",
+                "message": "A footnote continuation is clipped in the final page tree.",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "ffc0ddb40986c811778afa2398ec3b4f74af59684e66351055b81b8debfb0173",
+            "reference.pdf": "65b314e6e4fd2f5d5856b9bc122765bee0f24dcdf7ded3ac0a2dbc7f84d9f89f"
+          }
+        },
+        "notes-bordered-flow-box-100": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "pagination_failure",
+                "message": "A footnote continuation is clipped in the final page tree.",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "569d1b344ee5216e51577fa30da459bd310862b99f7645614451dc3dd5590bbb",
+            "reference.pdf": "1740889ae8159546fd55ca161998d762b3c8287d589a3d5d3cd0b18489e64105"
+          }
+        },
+        "notes-bordered-flow-bottom-100": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "pagination_failure",
+                "message": "A footnote continuation is clipped in the final page tree.",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "667306db66080e0a531533d99059e3920e8ccdb6a181a45a112614d278aaebb4",
+            "reference.pdf": "d8b2c2dbbebdbb4538ecca13c831245da4051c0b7c3a07dc68234fa09143bb89"
+          }
+        },
+        "notes-bordered-flow-plain-control": {
+          "score": 92.79815866495483,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            }
+          ],
+          "pageCount": 2,
+          "pages": [
+            {
+              "candidateInk": 33856,
+              "close": false,
+              "inkF1": 0.968856108722987,
+              "pixelMismatch": 0.05651180926916221,
+              "precision": 0.9476311436672968,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "a216c4bd7325a95c887c05899433642154f9a3545ba58135f7e6639611decc8b",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "b00ddae44e3f0c5e2ef835fec0e20cc86145af25bd23c4157b8377de6c0f55b2",
+                "width": 816
+              },
+              "recall": 0.9910536474769448,
+              "referenceInk": 32639,
+              "score": 92.79815866495483,
+              "ssim": 0.9279815866495483,
+              "ssimRaw": 0.9279815866495483
+            },
+            {
+              "candidateInk": 26910,
+              "close": false,
+              "inkF1": 0.9601546577230049,
+              "pixelMismatch": 0.04631099598930481,
+              "precision": 0.9837978446674099,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "99234ee5f20e8f21cbd1f58b05462639e73a2b20eb1365aa49222984f70d782f",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "7f64025e88c76d2a41308a734428d8e3b944b4e47fe8a50712c0a5177655594a",
+                "width": 816
+              },
+              "recall": 0.9376212137240382,
+              "referenceInk": 28359,
+              "score": 93.8413322786416,
+              "ssim": 0.938413322786416,
+              "ssimRaw": 0.938413322786416
+            }
+          ],
+          "coreTree": "84fb77831683607a65ac31251ba8df7a5947d734",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "23509ae20c28a6b7e87b998eba99a4ffe0c03439a772a68b0ddea0ee91239a0a",
+          "pageMapDigest": "89994ed3f05a2ec79665728731e971d658c2f2933fc36c1028a2a3ea8baea2e5",
+          "files": {
+            "1-candidate.png": "9450f340cae20b4cd2050b95a81e4a0f2b204704375e6da2661368989e8b020b",
+            "1-overlay.png": "5d19279684a516826b2bff41f5789acfa7a7331270ed583d210b6a38a20b82e0",
+            "1-reference.png": "e27fd66fa9d20b08c826543272be21d09c77e459d705021650c3e639ebf3751f",
+            "2-candidate.png": "d9e978052a5b6c22a0ad28a7157256b2cf4193fcce8e7b5d743bb375e889d533",
+            "2-overlay.png": "73d29b556b18804292bb8fd80389199f3a25a777f0af60cce8e07d66e62aa873",
+            "2-reference.png": "8182e5202610217679ca0264d2f958ef29e38fcfd019ab33de2a4108542de5aa",
+            "candidate.pdf": "f331a1992e820d7743a4c0da8ffb92ce15265efdd864330608b96d0ce2da8098",
+            "evidence.json": "55b63ed9ae63cd99a9b496a4187dfbf93cab6ac0b801105a0f7cb6bc87a7ee3b",
+            "production.json": "d133408dc5475e9ea0dc204d0d7fb4bcf6a31370fb006bc013c6d7c43bb6a30d",
+            "reference.pdf": "ca5c3be79ae962bb7692e815f007a57ba7b42f08f44eb75a0b67a01d57f0de70"
+          }
+        },
+        "notes-bordered-flow-paragraphs-control": {
+          "score": 92.79815866495483,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            }
+          ],
+          "pageCount": 2,
+          "pages": [
+            {
+              "candidateInk": 33856,
+              "close": false,
+              "inkF1": 0.968856108722987,
+              "pixelMismatch": 0.05651180926916221,
+              "precision": 0.9476311436672968,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "a216c4bd7325a95c887c05899433642154f9a3545ba58135f7e6639611decc8b",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "b00ddae44e3f0c5e2ef835fec0e20cc86145af25bd23c4157b8377de6c0f55b2",
+                "width": 816
+              },
+              "recall": 0.9910536474769448,
+              "referenceInk": 32639,
+              "score": 92.79815866495483,
+              "ssim": 0.9279815866495483,
+              "ssimRaw": 0.9279815866495483
+            },
+            {
+              "candidateInk": 26910,
+              "close": false,
+              "inkF1": 0.9601546577230049,
+              "pixelMismatch": 0.04631099598930481,
+              "precision": 0.9837978446674099,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "99234ee5f20e8f21cbd1f58b05462639e73a2b20eb1365aa49222984f70d782f",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "7f64025e88c76d2a41308a734428d8e3b944b4e47fe8a50712c0a5177655594a",
+                "width": 816
+              },
+              "recall": 0.9376212137240382,
+              "referenceInk": 28359,
+              "score": 93.8413322786416,
+              "ssim": 0.938413322786416,
+              "ssimRaw": 0.938413322786416
+            }
+          ],
+          "coreTree": "84fb77831683607a65ac31251ba8df7a5947d734",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "dd0c9b20dac08a76491e5e1240661dc22a3e1444d6abfedf2874f5d59df1d047",
+          "pageMapDigest": "078b692d645af9200c8c50e507138ec5b609dde1835d985a3dc85693d15e7be6",
+          "files": {
+            "1-candidate.png": "9450f340cae20b4cd2050b95a81e4a0f2b204704375e6da2661368989e8b020b",
+            "1-overlay.png": "5d19279684a516826b2bff41f5789acfa7a7331270ed583d210b6a38a20b82e0",
+            "1-reference.png": "e27fd66fa9d20b08c826543272be21d09c77e459d705021650c3e639ebf3751f",
+            "2-candidate.png": "d9e978052a5b6c22a0ad28a7157256b2cf4193fcce8e7b5d743bb375e889d533",
+            "2-overlay.png": "73d29b556b18804292bb8fd80389199f3a25a777f0af60cce8e07d66e62aa873",
+            "2-reference.png": "8182e5202610217679ca0264d2f958ef29e38fcfd019ab33de2a4108542de5aa",
+            "candidate.pdf": "43efdfddf840b975d604b2fb000894aba071a6d737303c2997891ee4b4f41a87",
+            "evidence.json": "989faf169c48cd67ef215f656b7b92c0ed0299aff9cd5e836030c83d4bf09a28",
+            "production.json": "8b4579d0595eb3b194630a6625854c3f616086916f5661131ca7c41ef36b62ac",
+            "reference.pdf": "a8a393c65583fa9fee413edc6f02b6cb07622581fb23add4a04e1e3dc9234dfa"
+          }
+        },
+        "notes-bordered-flow-short-control": {
+          "score": 97.46441672842012,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 4945,
+              "close": true,
+              "inkF1": 0.9746441672842012,
+              "pixelMismatch": 0.006429181521093286,
+              "precision": 0.9714863498483316,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "2f68645618cb016e72191aa2cb3fcf207b239a3d3c8490422c795a1bde69e54f",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "ede7441f5213929d14a6927846f6daa5b5abb974f7e17f360996f596190cab3c",
+                "width": 816
+              },
+              "recall": 0.9778225806451613,
+              "referenceInk": 4960,
+              "score": 97.46441672842012,
+              "ssim": 0.9911088943948446,
+              "ssimRaw": 0.9911088943948446
+            }
+          ],
+          "coreTree": "84fb77831683607a65ac31251ba8df7a5947d734",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "d3befff68e0211d99e67857385aa0fb09e0d7549641c9a81e4b34d1c5f1ebdf7",
+          "pageMapDigest": "f1c6734f44020f13fc669cebdaf737576c9d45bab4cb67670aad9f8c7acd0b30",
+          "files": {
+            "1-candidate.png": "f3bd338802ac5490d59ac119f3820c16a1290b4b3fe1c8c053a2020803ed7fb0",
+            "1-overlay.png": "1c217b5d673fceac86f9bca4c5584b6bc5c26015e5bdf9893c9af7e3499b370e",
+            "1-reference.png": "458f9dbdd63a5849e23eb37ecdf8d113caa25c4209b988801af86c75ea8a5897",
+            "candidate.pdf": "3aa40ec9d08c239e185aa13d6c6402551cae5ccec7c7c3541d9796d956ca8635",
+            "evidence.json": "9ef886bb859579e3660d496a241e0ff2e85eda289797d438ac7a5e00c5f7e970",
+            "production.json": "7426a1befb10402906c7c44c4c86bd7ee629fb22a256ed638083fea2427da80e",
+            "reference.pdf": "4397d0e1c0a62a7d8228c39ed4a646c673ea56d8fc4724328bc0cfb8184a5ce6"
+          }
+        },
+        "notes-bordered-flow-box-kept": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "pagination_failure",
+                "message": "A footnote continuation is clipped in the final page tree.",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "8963dcd790d61121260d9ed24be9dce6f71178d3fec810a88944d98243c0d2e0",
+            "reference.pdf": "7882a24017f8bf7f8276893867587e420eab3835df09b6acf8fbf5aaae394325"
+          }
+        },
+        "notes-bordered-flow-plain-kept-control": {
+          "score": 90.33774589069822,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-4",
+              "passed": true
+            }
+          ],
+          "pageCount": 4,
+          "pages": [
+            {
+              "candidateInk": 788,
+              "close": true,
+              "inkF1": 1.0,
+              "pixelMismatch": 0.0014088495246583482,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "028a7842e4026b3fa87ec2766897cdd019142beabe45f457fbb1488a9f387803",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "bc6f299ffca73e9882ff1a08220c543eeca60e4e5c9b676532ee7159d90520f3",
+                "width": 816
+              },
+              "recall": 1.0,
+              "referenceInk": 786,
+              "score": 99.84615725896532,
+              "ssim": 0.9984615725896532,
+              "ssimRaw": 0.9984615725896532
+            },
+            {
+              "candidateInk": 33068,
+              "close": false,
+              "inkF1": 0.9680980976110682,
+              "pixelMismatch": 0.05510295974450386,
+              "precision": 0.9463832103544212,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "fb03abc9159e99ba937963a6a7bf92ff5c69a437a4828034e251c76a293cc634",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "5a0004fe7de38f4e42826b811c790bce2c8c044160367edfe93b4d7ee7176e13",
+                "width": 816
+              },
+              "recall": 0.9908328885819232,
+              "referenceInk": 31853,
+              "score": 92.95200140598952,
+              "ssim": 0.9295200140598951,
+              "ssimRaw": 0.9295200140598951
+            },
+            {
+              "candidateInk": 33626,
+              "close": false,
+              "inkF1": 0.9657188682698292,
+              "pixelMismatch": 0.05553118501188354,
+              "precision": 0.9378457146255873,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "c3c259bf899ef30759c2873f0e08ba2e0599733a344c1fbeea6504418aa8ff64",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "cad2aea278b1ef752dbf6d7bdd9a5a49d274ef53800360b96e882aa7e2843846",
+                "width": 816
+              },
+              "recall": 0.995299573828027,
+              "referenceInk": 31912,
+              "score": 92.93478811316095,
+              "ssim": 0.9293478811316095,
+              "ssimRaw": 0.9293478811316095
+            },
+            {
+              "candidateInk": 19405,
+              "close": false,
+              "inkF1": 0.9033774589069822,
+              "pixelMismatch": 0.03710241198752228,
+              "precision": 0.9774284978098429,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "c1248d57b9ba1215cae823487e606f904f34af1ee5e94cebebc1d2590ef40390",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "11f09ee0856612d5efc22bd1e4cc8d5a91518e6e7a6625a83ef7f28a4896df40",
+                "width": 816
+              },
+              "recall": 0.8397565922920892,
+              "referenceInk": 22678,
+              "score": 90.33774589069822,
+              "ssim": 0.9424126194135415,
+              "ssimRaw": 0.9424126194135415
+            }
+          ],
+          "coreTree": "84fb77831683607a65ac31251ba8df7a5947d734",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "67993a75028312682d2df3b9a1c6133baa80e7270ae3cb0fee4afd5feffd8906",
+          "pageMapDigest": "04bf18b0cecf6590946431f0f856cc40647c6fe3f08730f2de7d40cf21a6d124",
+          "files": {
+            "1-candidate.png": "31abfb9ff4680687ebba1ff097e5b45d3af6380fe562032c2358ac1db8c920f4",
+            "1-overlay.png": "108f1102d1619ec5357b4fd0aba8e60e42b00279c4e2fb695244ebf762e25765",
+            "1-reference.png": "9b23771ee3816271d5576d5da00d1100597ddba34eb19218ed4a6b4dc2738e46",
+            "2-candidate.png": "6855f7d3479f0db5c2d1d5b48fe210433728cf1e177c32e4d20d5c569b67f524",
+            "2-overlay.png": "6bc31a1f7d60ce19b8e89d3becc65788dc410acded24b30f02f8f7f929b5a027",
+            "2-reference.png": "415bb70c1872401a3577250bce5c65eba7ca4e83784c4eb1f913743eda85a672",
+            "3-candidate.png": "66bfe082a2c491632c8773b71c4e375aa9f59bd5f2b3cf01c6cb44da71ebe15c",
+            "3-overlay.png": "aac14a97690a3c9f16f4a9b0f2e33b702560b11f9efdba58b29a892d5b9d2c73",
+            "3-reference.png": "987c0f8d92626e91bba855592a389832427e6130b14cef86344b9e734ba33284",
+            "4-candidate.png": "d6a10357e48f22255c0cc2e66ef54ff16d380dfae847c4fc8b7588d3d2d94d0c",
+            "4-overlay.png": "cd3e1526f2b47d246a668bdd9efffe6965801d87cdb5e8d2605b23798819eeaf",
+            "4-reference.png": "9754e37ce0c50726bfcdd5be61644d7f88dc1168df460bfd5f2ca6cac464c017",
+            "candidate.pdf": "14dfd65e2708ad942314e4bd7c02b0dd794a7d64c9e5d532882f18ed322aea73",
+            "evidence.json": "150dfd9b8f1bc3fb7ef728e335bfcdbfb983461002a20b7bff5c46b06879b2c5",
+            "production.json": "8501a7ffda5d97740a3da00c0eb07e7e1a91dd6aab06e43ebea6d2cc389b6302",
+            "reference.pdf": "1221b6ec3ce7dc4a810b1b2e0e6dc4f06dc3fec09c21728ce7d3b81ce940a896"
+          }
+        },
+        "notes-bordered-flow-box-heading": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "pagination_failure",
+                "message": "A footnote continuation is clipped in the final page tree.",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "f77d05d70d3d9d8b571eb7b583949b7dd638b75cdee0ca7088ee0f82c2ea2ee3",
+            "reference.pdf": "b586a023ea6f971406fcc5a43c439cd9644345166f780a3fcb583e115ae0a090"
+          }
+        },
+        "notes-bordered-flow-plain-heading-control": {
+          "score": 91.329101743008,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            }
+          ],
+          "pageCount": 3,
+          "pages": [
+            {
+              "candidateInk": 33231,
+              "close": false,
+              "inkF1": 0.9717218635825056,
+              "pixelMismatch": 0.05532113413547237,
+              "precision": 0.9505281213324908,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "ce2b8b3ac7eab8b42fdeab1979ef3f137a93c3e6e67d5f4c327f1635d4d434b4",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "f6e222096b73f5c4c02c709df59e086a5ebb76187691fa2459ab280e5b7b3454",
+                "width": 816
+              },
+              "recall": 0.9938822648105375,
+              "referenceInk": 32038,
+              "score": 92.90176248874715,
+              "ssim": 0.9290176248874715,
+              "ssimRaw": 0.9290176248874715
+            },
+            {
+              "candidateInk": 33631,
+              "close": false,
+              "inkF1": 0.9655558594055366,
+              "pixelMismatch": 0.05557180258467023,
+              "precision": 0.9376765484225863,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "d36bfc752de1f00a22927380183486c0e153e93c92859d350e717e8603690a38",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "68917577e7315c5effbe0585563d336d6b1a99daa41b0b3e7f876fb5a5193feb",
+                "width": 816
+              },
+              "recall": 0.9951438060028824,
+              "referenceInk": 31918,
+              "score": 92.92361387787972,
+              "ssim": 0.9292361387787972,
+              "ssimRaw": 0.9292361387787972
+            },
+            {
+              "candidateInk": 20253,
+              "close": false,
+              "inkF1": 0.91329101743008,
+              "pixelMismatch": 0.03796930704099822,
+              "precision": 0.9783241988841159,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "c529427972d970b4c6db7a55e5cca8312f5a0c085d2497ac24c09f46f732111b",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "79b99ababc0d5417a5c0741450717f5c7462b79adc7e23d17cd9579cd5b2fd90",
+                "width": 816
+              },
+              "recall": 0.8563649616258628,
+              "referenceInk": 23323,
+              "score": 91.329101743008,
+              "ssim": 0.9442932907481062,
+              "ssimRaw": 0.9442932907481062
+            }
+          ],
+          "coreTree": "84fb77831683607a65ac31251ba8df7a5947d734",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "3977e142700f2770f51ad23c78d047a35bdbc5619b41dde2054323a5d446fa82",
+          "pageMapDigest": "b07819a01dd6419d19344820c33c3b367debd8cc3c3e751ed6abad3f27de82d6",
+          "files": {
+            "1-candidate.png": "558618d2c9291e01b62ba0ce0a6d711ae9646b73e5d8a9969260ee9557795d5f",
+            "1-overlay.png": "8ea344f1a54f3f16d35ee878b70720c68714679ee64a19661dfeffcc5a8bb7e8",
+            "1-reference.png": "ba495be1f3f7efd80597c99be162223d4e0706808310cb73f3f22843fdc3e072",
+            "2-candidate.png": "7e8d6cda535c7052c4293121a32348b9cf7e3993633826d99c5294936c9fb54b",
+            "2-overlay.png": "d5d510b92d028521e93b0769f0a24bdaeb39fcdf7298d5a969b46731988b7e8c",
+            "2-reference.png": "f2671cd91989cfb2afaf0ff42b832ceafe97d7c9fef8e06cf1725a48f417a820",
+            "3-candidate.png": "19a35f1a122a51e2e0b74ed016be574a4daf50a3662f1d0bf9bf74b7d6391781",
+            "3-overlay.png": "427da720d615bcef44259021e5ba1af3020874c238a3aea864711fa779dccd36",
+            "3-reference.png": "3dcffc35b7039d35e10ac3d46e9497f2851b95c50c087339a82d952f17547703",
+            "candidate.pdf": "97e10aa7aefbcfef49b4d2dc9671874dd49e2c8fb59fdb1ccfcebcfca52f0492",
+            "evidence.json": "0e76efeb3b0c63f14e4ae3054c8720d150fcfe33fb80e3ead98ffe7f9e96fd5b",
+            "production.json": "34fe8964ab3ba960fd016a735f4ed1c3e5dc190e51c5d6d5a7f02905bb1053df",
+            "reference.pdf": "8734869800d6111a7c1080d9acf9ce9233d796d09ad6c5e2b48b18e7a9c829af"
+          }
+        }
+      }
+    }
+  },
+  "controls": {
+    "notes-bordered-flow-plain-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "notes-bordered-flow-paragraphs-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "notes-bordered-flow-short-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "notes-bordered-flow-plain-kept-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "notes-bordered-flow-plain-heading-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    }
+  },
+  "screenshots": {
+    "notes-bordered-flow-box-70": {
+      "file": "production-notes-bordered-flow-box-70.png",
+      "sha256": "a43353d652172fa6cb12427cfae12ff2a33bfbba56f351e684e5962e4060f8d3",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-70/1-reference.png",
+          "sha256": "1d942754c661a4210b5c1ed5802199ddd291a04f4bbece950df6108c70fd01c7"
+        },
+        {
+          "provider": "reference",
+          "page": 2,
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-70/2-reference.png",
+          "sha256": "4d2429513eec59be99c9f430da4f74d53bec4d85822249206ee5ec74da847cdd"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "baseline",
+          "page": 2,
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-70/1-candidate.png",
+          "sha256": "ed5c6323fcde5fc9c2378d60ffd87cfc4ec4900b092cdf234c1c211e4da383b6"
+        },
+        {
+          "provider": "candidate",
+          "page": 2,
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-70/2-candidate.png",
+          "sha256": "89fdd4d2088c913a026073274c25dead09d0bd3d09b4f1c5781a7beef3018420"
+        }
+      ]
+    },
+    "notes-bordered-flow-bottom-70": {
+      "file": "production-notes-bordered-flow-bottom-70.png",
+      "sha256": "0eab199df92612fab229f03ca893de4528c6bc7fd880046a0f7c6e910106d734",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-bottom-70/1-reference.png",
+          "sha256": "c6c7e096dae24b1a196860b69ff98311e5581cac3faf6af9d129fd664f873990"
+        },
+        {
+          "provider": "reference",
+          "page": 2,
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-bottom-70/2-reference.png",
+          "sha256": "0de7f2e8248fb14632fd339e78e163a443707439b5205f649b3d86b99750a23a"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "baseline",
+          "page": 2,
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-bottom-70/1-candidate.png",
+          "sha256": "9450f340cae20b4cd2050b95a81e4a0f2b204704375e6da2661368989e8b020b"
+        },
+        {
+          "provider": "candidate",
+          "page": 2,
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-bottom-70/2-candidate.png",
+          "sha256": "2b211a550b7728819f8bd234fc225865600a6b91efd9c5f15017d44d83834639"
+        }
+      ]
+    },
+    "notes-bordered-flow-box-100": {
+      "file": "production-notes-bordered-flow-box-100.png",
+      "sha256": "b4bcd61a9a7553c1fe903bbeef090e42033245c0993eebcb0b3d416507103dc4",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-100/1-reference.png",
+          "sha256": "1d942754c661a4210b5c1ed5802199ddd291a04f4bbece950df6108c70fd01c7"
+        },
+        {
+          "provider": "reference",
+          "page": 2,
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-100/2-reference.png",
+          "sha256": "5b3f9f7948ee67fa6e00da0e35f1a0a5faa61ae81aaa24fed5a1a19ff301e0b2"
+        },
+        {
+          "provider": "reference",
+          "page": 3,
+          "bounds": [
+            16,
+            2186,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-100/3-reference.png",
+          "sha256": "0b59a2ed4b1a811de2c2e8e42d4861b70d1d05723288acd05cc4364469c74071"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "baseline",
+          "page": 2,
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "baseline",
+          "page": 3,
+          "bounds": [
+            848,
+            2186,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-100/1-candidate.png",
+          "sha256": "ed5c6323fcde5fc9c2378d60ffd87cfc4ec4900b092cdf234c1c211e4da383b6"
+        },
+        {
+          "provider": "candidate",
+          "page": 2,
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-100/2-candidate.png",
+          "sha256": "8e00892326ecab356007a64e2e1b267b74b31d09cc4be3276772695ea9fde0f0"
+        },
+        {
+          "provider": "candidate",
+          "page": 3,
+          "bounds": [
+            1680,
+            2186,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-100/3-candidate.png",
+          "sha256": "a090f23bfdf0175a591dceeb3fe0f89b8a2dc271c3b70b31ec125eb3bba886c9"
+        }
+      ]
+    },
+    "notes-bordered-flow-bottom-100": {
+      "file": "production-notes-bordered-flow-bottom-100.png",
+      "sha256": "886b35f1563f8354d97296f63e7ba5a6eb7e6277c38270a50ae0dc7608e78b68",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-bottom-100/1-reference.png",
+          "sha256": "c6c7e096dae24b1a196860b69ff98311e5581cac3faf6af9d129fd664f873990"
+        },
+        {
+          "provider": "reference",
+          "page": 2,
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-bottom-100/2-reference.png",
+          "sha256": "21758c6dc64fa70cfde7eca81905d5c76b5930a93f2681bee824ffa9d04cfd2d"
+        },
+        {
+          "provider": "reference",
+          "page": 3,
+          "bounds": [
+            16,
+            2186,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-bottom-100/3-reference.png",
+          "sha256": "752553c96bf99889715a8901cc60362f677da540847d9bdd2bbc118d3a2ddccc"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "baseline",
+          "page": 2,
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "baseline",
+          "page": 3,
+          "bounds": [
+            848,
+            2186,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-bottom-100/1-candidate.png",
+          "sha256": "9450f340cae20b4cd2050b95a81e4a0f2b204704375e6da2661368989e8b020b"
+        },
+        {
+          "provider": "candidate",
+          "page": 2,
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-bottom-100/2-candidate.png",
+          "sha256": "66bfe082a2c491632c8773b71c4e375aa9f59bd5f2b3cf01c6cb44da71ebe15c"
+        },
+        {
+          "provider": "candidate",
+          "page": 3,
+          "bounds": [
+            1680,
+            2186,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-bottom-100/3-candidate.png",
+          "sha256": "20737b63489f01421d7f114cbb481327ed17db6de693b0d38d9c0247082ca4f3"
+        }
+      ]
+    },
+    "notes-bordered-flow-plain-control": {
+      "file": "production-notes-bordered-flow-plain-control.png",
+      "sha256": "f36ce37208fe67a74b69149f5a9076822fc6e95334ee503ecfe253a904b0ece9",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-plain-control/1-reference.png",
+          "sha256": "e27fd66fa9d20b08c826543272be21d09c77e459d705021650c3e639ebf3751f"
+        },
+        {
+          "provider": "reference",
+          "page": 2,
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-plain-control/2-reference.png",
+          "sha256": "8182e5202610217679ca0264d2f958ef29e38fcfd019ab33de2a4108542de5aa"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-baseline/runs/candidate/notes-bordered-flow-plain-control/1-candidate.png",
+          "sha256": "9450f340cae20b4cd2050b95a81e4a0f2b204704375e6da2661368989e8b020b"
+        },
+        {
+          "provider": "baseline",
+          "page": 2,
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-baseline/runs/candidate/notes-bordered-flow-plain-control/2-candidate.png",
+          "sha256": "d9e978052a5b6c22a0ad28a7157256b2cf4193fcce8e7b5d743bb375e889d533"
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-plain-control/1-candidate.png",
+          "sha256": "9450f340cae20b4cd2050b95a81e4a0f2b204704375e6da2661368989e8b020b"
+        },
+        {
+          "provider": "candidate",
+          "page": 2,
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-plain-control/2-candidate.png",
+          "sha256": "d9e978052a5b6c22a0ad28a7157256b2cf4193fcce8e7b5d743bb375e889d533"
+        }
+      ]
+    },
+    "notes-bordered-flow-paragraphs-control": {
+      "file": "production-notes-bordered-flow-paragraphs-control.png",
+      "sha256": "616f4ff09d7e2b43e5ecb5ea69c597f444eaa602ca8f5d6f3fe042c06507adf5",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-paragraphs-control/1-reference.png",
+          "sha256": "e27fd66fa9d20b08c826543272be21d09c77e459d705021650c3e639ebf3751f"
+        },
+        {
+          "provider": "reference",
+          "page": 2,
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-paragraphs-control/2-reference.png",
+          "sha256": "8182e5202610217679ca0264d2f958ef29e38fcfd019ab33de2a4108542de5aa"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-baseline/runs/candidate/notes-bordered-flow-paragraphs-control/1-candidate.png",
+          "sha256": "9450f340cae20b4cd2050b95a81e4a0f2b204704375e6da2661368989e8b020b"
+        },
+        {
+          "provider": "baseline",
+          "page": 2,
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-baseline/runs/candidate/notes-bordered-flow-paragraphs-control/2-candidate.png",
+          "sha256": "d9e978052a5b6c22a0ad28a7157256b2cf4193fcce8e7b5d743bb375e889d533"
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-paragraphs-control/1-candidate.png",
+          "sha256": "9450f340cae20b4cd2050b95a81e4a0f2b204704375e6da2661368989e8b020b"
+        },
+        {
+          "provider": "candidate",
+          "page": 2,
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-paragraphs-control/2-candidate.png",
+          "sha256": "d9e978052a5b6c22a0ad28a7157256b2cf4193fcce8e7b5d743bb375e889d533"
+        }
+      ]
+    },
+    "notes-bordered-flow-short-control": {
+      "file": "production-notes-bordered-flow-short-control.png",
+      "sha256": "a67ea2cae5cef3e6c55c3fd391ced05aa527d1b98d75e580981c8842a2ba9191",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-short-control/1-reference.png",
+          "sha256": "458f9dbdd63a5849e23eb37ecdf8d113caa25c4209b988801af86c75ea8a5897"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-baseline/runs/candidate/notes-bordered-flow-short-control/1-candidate.png",
+          "sha256": "f3bd338802ac5490d59ac119f3820c16a1290b4b3fe1c8c053a2020803ed7fb0"
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-short-control/1-candidate.png",
+          "sha256": "f3bd338802ac5490d59ac119f3820c16a1290b4b3fe1c8c053a2020803ed7fb0"
+        }
+      ]
+    },
+    "notes-bordered-flow-box-kept": {
+      "file": "production-notes-bordered-flow-box-kept.png",
+      "sha256": "8f012c3f62ca64f0f86a7a358dbca94e5cbb8b4c7e6ad6140982716277d7c396",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-kept/1-reference.png",
+          "sha256": "9b23771ee3816271d5576d5da00d1100597ddba34eb19218ed4a6b4dc2738e46"
+        },
+        {
+          "provider": "reference",
+          "page": 2,
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-kept/2-reference.png",
+          "sha256": "7b3beb4fefb6b1aafdbc348c7c2f3f6ea98b2c4f59a6cb5292914cdc27f0c96f"
+        },
+        {
+          "provider": "reference",
+          "page": 3,
+          "bounds": [
+            16,
+            2186,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-kept/3-reference.png",
+          "sha256": "5b3f9f7948ee67fa6e00da0e35f1a0a5faa61ae81aaa24fed5a1a19ff301e0b2"
+        },
+        {
+          "provider": "reference",
+          "page": 4,
+          "bounds": [
+            16,
+            3242,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-kept/4-reference.png",
+          "sha256": "0b59a2ed4b1a811de2c2e8e42d4861b70d1d05723288acd05cc4364469c74071"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "baseline",
+          "page": 2,
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "baseline",
+          "page": 3,
+          "bounds": [
+            848,
+            2186,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "baseline",
+          "page": 4,
+          "bounds": [
+            848,
+            3242,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-kept/1-candidate.png",
+          "sha256": "31abfb9ff4680687ebba1ff097e5b45d3af6380fe562032c2358ac1db8c920f4"
+        },
+        {
+          "provider": "candidate",
+          "page": 2,
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-kept/2-candidate.png",
+          "sha256": "1c8703516f71acb599ae6fea76cdd84f9237b9b28701fdd638d46c7b3787b817"
+        },
+        {
+          "provider": "candidate",
+          "page": 3,
+          "bounds": [
+            1680,
+            2186,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-kept/3-candidate.png",
+          "sha256": "21a88cf144b801064f28bf108572ac64d2f0d974a41bf7d41d5ae0f6d767195e"
+        },
+        {
+          "provider": "candidate",
+          "page": 4,
+          "bounds": [
+            1680,
+            3242,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-kept/4-candidate.png",
+          "sha256": "610f2ac086c2117d9add539f5892e7b4995aa32799cfddd35b8386cf25d6a488"
+        }
+      ]
+    },
+    "notes-bordered-flow-plain-kept-control": {
+      "file": "production-notes-bordered-flow-plain-kept-control.png",
+      "sha256": "f237f5496f6d5c47cfd0a8d23f1ca6f2162fc3cbadf230a006180c2ff8c82d37",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-plain-kept-control/1-reference.png",
+          "sha256": "9b23771ee3816271d5576d5da00d1100597ddba34eb19218ed4a6b4dc2738e46"
+        },
+        {
+          "provider": "reference",
+          "page": 2,
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-plain-kept-control/2-reference.png",
+          "sha256": "415bb70c1872401a3577250bce5c65eba7ca4e83784c4eb1f913743eda85a672"
+        },
+        {
+          "provider": "reference",
+          "page": 3,
+          "bounds": [
+            16,
+            2186,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-plain-kept-control/3-reference.png",
+          "sha256": "987c0f8d92626e91bba855592a389832427e6130b14cef86344b9e734ba33284"
+        },
+        {
+          "provider": "reference",
+          "page": 4,
+          "bounds": [
+            16,
+            3242,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-plain-kept-control/4-reference.png",
+          "sha256": "9754e37ce0c50726bfcdd5be61644d7f88dc1168df460bfd5f2ca6cac464c017"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-baseline/runs/candidate/notes-bordered-flow-plain-kept-control/1-candidate.png",
+          "sha256": "31abfb9ff4680687ebba1ff097e5b45d3af6380fe562032c2358ac1db8c920f4"
+        },
+        {
+          "provider": "baseline",
+          "page": 2,
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-baseline/runs/candidate/notes-bordered-flow-plain-kept-control/2-candidate.png",
+          "sha256": "6855f7d3479f0db5c2d1d5b48fe210433728cf1e177c32e4d20d5c569b67f524"
+        },
+        {
+          "provider": "baseline",
+          "page": 3,
+          "bounds": [
+            848,
+            2186,
+            816,
+            1056
+          ],
+          "path": "production-baseline/runs/candidate/notes-bordered-flow-plain-kept-control/3-candidate.png",
+          "sha256": "66bfe082a2c491632c8773b71c4e375aa9f59bd5f2b3cf01c6cb44da71ebe15c"
+        },
+        {
+          "provider": "baseline",
+          "page": 4,
+          "bounds": [
+            848,
+            3242,
+            816,
+            1056
+          ],
+          "path": "production-baseline/runs/candidate/notes-bordered-flow-plain-kept-control/4-candidate.png",
+          "sha256": "d6a10357e48f22255c0cc2e66ef54ff16d380dfae847c4fc8b7588d3d2d94d0c"
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-plain-kept-control/1-candidate.png",
+          "sha256": "31abfb9ff4680687ebba1ff097e5b45d3af6380fe562032c2358ac1db8c920f4"
+        },
+        {
+          "provider": "candidate",
+          "page": 2,
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-plain-kept-control/2-candidate.png",
+          "sha256": "6855f7d3479f0db5c2d1d5b48fe210433728cf1e177c32e4d20d5c569b67f524"
+        },
+        {
+          "provider": "candidate",
+          "page": 3,
+          "bounds": [
+            1680,
+            2186,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-plain-kept-control/3-candidate.png",
+          "sha256": "66bfe082a2c491632c8773b71c4e375aa9f59bd5f2b3cf01c6cb44da71ebe15c"
+        },
+        {
+          "provider": "candidate",
+          "page": 4,
+          "bounds": [
+            1680,
+            3242,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-plain-kept-control/4-candidate.png",
+          "sha256": "d6a10357e48f22255c0cc2e66ef54ff16d380dfae847c4fc8b7588d3d2d94d0c"
+        }
+      ]
+    },
+    "notes-bordered-flow-box-heading": {
+      "file": "production-notes-bordered-flow-box-heading.png",
+      "sha256": "f26f87a0d0c2e6d8a55a1063337fb430feeb345c7fc6a93d6bbe7e87c6981d16",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-heading/1-reference.png",
+          "sha256": "b06a74eb57a5576fece120af89a0d0809418af9d4b1e4b8975d52d3c6b9e4deb"
+        },
+        {
+          "provider": "reference",
+          "page": 2,
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-heading/2-reference.png",
+          "sha256": "4a63241c871e0b023df4de9021b3f3a950f738e7814de8f0bedc32ec91a16e09"
+        },
+        {
+          "provider": "reference",
+          "page": 3,
+          "bounds": [
+            16,
+            2186,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-heading/3-reference.png",
+          "sha256": "6777935be7927414779ae38bbd00cd9ac9764d3e74b097aacf09417ccaf78b9d"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "baseline",
+          "page": 2,
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "baseline",
+          "page": 3,
+          "bounds": [
+            848,
+            2186,
+            816,
+            1056
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          }
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-heading/1-candidate.png",
+          "sha256": "611db112fbdd0a79fe38857414c075e8408880a8ac89439ace324325828b4334"
+        },
+        {
+          "provider": "candidate",
+          "page": 2,
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-heading/2-candidate.png",
+          "sha256": "8ae575fa5ee742208505ef2372ff6c2c8921ba8ade877257cfa4059b7bcd3c4e"
+        },
+        {
+          "provider": "candidate",
+          "page": 3,
+          "bounds": [
+            1680,
+            2186,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-box-heading/3-candidate.png",
+          "sha256": "300eab719ea6ed89c71fc45f57c14bf9da32cd473eb9a35734cdc4769d380f3f"
+        }
+      ]
+    },
+    "notes-bordered-flow-plain-heading-control": {
+      "file": "production-notes-bordered-flow-plain-heading-control.png",
+      "sha256": "e3448d7e7319ec394224eab6fc2fd74bfb0166f8fe8934fa3e6372a65bafe8c4",
+      "panels": [
+        {
+          "provider": "reference",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-plain-heading-control/1-reference.png",
+          "sha256": "ba495be1f3f7efd80597c99be162223d4e0706808310cb73f3f22843fdc3e072"
+        },
+        {
+          "provider": "reference",
+          "page": 2,
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-plain-heading-control/2-reference.png",
+          "sha256": "f2671cd91989cfb2afaf0ff42b832ceafe97d7c9fef8e06cf1725a48f417a820"
+        },
+        {
+          "provider": "reference",
+          "page": 3,
+          "bounds": [
+            16,
+            2186,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-plain-heading-control/3-reference.png",
+          "sha256": "3dcffc35b7039d35e10ac3d46e9497f2851b95c50c087339a82d952f17547703"
+        },
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-baseline/runs/candidate/notes-bordered-flow-plain-heading-control/1-candidate.png",
+          "sha256": "558618d2c9291e01b62ba0ce0a6d711ae9646b73e5d8a9969260ee9557795d5f"
+        },
+        {
+          "provider": "baseline",
+          "page": 2,
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-baseline/runs/candidate/notes-bordered-flow-plain-heading-control/2-candidate.png",
+          "sha256": "7e8d6cda535c7052c4293121a32348b9cf7e3993633826d99c5294936c9fb54b"
+        },
+        {
+          "provider": "baseline",
+          "page": 3,
+          "bounds": [
+            848,
+            2186,
+            816,
+            1056
+          ],
+          "path": "production-baseline/runs/candidate/notes-bordered-flow-plain-heading-control/3-candidate.png",
+          "sha256": "19a35f1a122a51e2e0b74ed016be574a4daf50a3662f1d0bf9bf74b7d6391781"
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            1680,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-plain-heading-control/1-candidate.png",
+          "sha256": "558618d2c9291e01b62ba0ce0a6d711ae9646b73e5d8a9969260ee9557795d5f"
+        },
+        {
+          "provider": "candidate",
+          "page": 2,
+          "bounds": [
+            1680,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-plain-heading-control/2-candidate.png",
+          "sha256": "7e8d6cda535c7052c4293121a32348b9cf7e3993633826d99c5294936c9fb54b"
+        },
+        {
+          "provider": "candidate",
+          "page": 3,
+          "bounds": [
+            1680,
+            2186,
+            816,
+            1056
+          ],
+          "path": "production-candidate/runs/candidate/notes-bordered-flow-plain-heading-control/3-candidate.png",
+          "sha256": "19a35f1a122a51e2e0b74ed016be574a4daf50a3662f1d0bf9bf74b7d6391781"
+        }
+      ]
+    }
+  },
+  "productionSelection": [
+    "notes-bordered-flow-box-70",
+    "notes-bordered-flow-bottom-70",
+    "notes-bordered-flow-box-100",
+    "notes-bordered-flow-bottom-100",
+    "notes-bordered-flow-plain-control",
+    "notes-bordered-flow-paragraphs-control",
+    "notes-bordered-flow-short-control",
+    "notes-bordered-flow-box-kept",
+    "notes-bordered-flow-plain-kept-control",
+    "notes-bordered-flow-box-heading",
+    "notes-bordered-flow-plain-heading-control"
+  ],
+  "screenshotMethod": "All actual artifact page PNGs, 96 DPI at100%, no crop/resampling; refusal panels labeled. Font DejaVuSans18; sheet2512x(90+pageCount*1056), column step832, page origin16,74."
+}

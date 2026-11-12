@@ -10,6 +10,7 @@ import json
 import re
 import shutil
 import subprocess
+import tempfile
 from pathlib import Path
 
 from .common import ROOT, contained, digest, execute, read_json, write_json
@@ -40,7 +41,7 @@ def _build(sources, out, project, properties):
     command = [dotnet(), 'build', str(src / project), '-c', 'Release', '-o', str(out / 'bin'), '-nologo', '-v', 'q'] + [f'-p:{k}={v}' for k, v in properties.items()]
     print('Building: ' + ' '.join(command), flush=True)
     subprocess.run(command, check=True, timeout=1800)
-    files = {str(path.relative_to(out)): digest(path) for path in sorted((out / 'bin').glob('*.dll'))}
+    files = {path.relative_to(out).as_posix(): digest(path) for path in sorted((out / 'bin').glob('*.dll'))}
     return out, command, files
 
 
@@ -100,5 +101,17 @@ def verify_docxodus(folder, candidate):
 
 
 def validate_packages(folder, paths):
-    output = execute([dotnet(), str(Path(folder).resolve() / 'bin' / 'OoxmlValidator.dll')] + [str(p) for p in paths], timeout=300)
-    return json.loads(output)['documents']
+    """Validator findings for each path. The validator only ever sees temporary copies, so it can
+    never rewrite a fixture or a candidate output; a copy it changes still fails the run."""
+    with tempfile.TemporaryDirectory() as temp:
+        copies = {}
+        for index, path in enumerate(paths):
+            copy = Path(temp) / str(index) / Path(path).name
+            copy.parent.mkdir()
+            shutil.copyfile(path, copy)
+            copies[str(copy)] = (str(path), digest(copy))
+        output = execute([dotnet(), str(Path(folder).resolve() / 'bin' / 'OoxmlValidator.dll')] + list(copies), timeout=300)
+        if any(digest(copy) != value for copy, (_, value) in copies.items()):
+            raise ValueError('The validator modified a package it was given')
+        documents = json.loads(output)['documents']
+        return {original: documents[copy] for copy, (original, _) in copies.items()}

@@ -1,0 +1,2313 @@
+{
+  "scope": "Unscored strict-font public exports. Six eligible native references; two native explicit-spacing discrepancies. No new Word or full-suite parity claim.",
+  "manifestSha256": "fe736d46bdd5b0d85ac88084268159ea14438bc7b3f70208db59ae360ae69916",
+  "manifest": {
+    "file": "manifest.json.gz",
+    "sha256": "36ef9d68ed253a23ac18b520b9f60fecc972e233477aad20b6df17b0a482de7a",
+    "jsonSha256": "fe736d46bdd5b0d85ac88084268159ea14438bc7b3f70208db59ae360ae69916"
+  },
+  "builds": {
+    "baseline": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-contextual/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-contextual/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-contextual/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-contextual/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-contextual/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-contextual/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-contextual/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-contextual/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-contextual/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "db3d255c1ffb5892103a4eff8fab4e79f1db9f03",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "a938829fe75e59faaeea53c7c284efa68a4c389bf09d0a044f0ab2f187459e1f",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+      "schema": 1,
+      "tree": "3accc040c830c625ce04990adea0147104fd3ec0"
+    },
+    "candidate": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-auto/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-auto/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-auto/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-auto/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-auto/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-auto/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-auto/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-auto/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-auto/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "ea7577b9a5f3956e3343208f25109f1c76b4c210",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "29271459d3270a6c944ff641f4bb45bdc8f07bdc5e51caa5f41b1f4232810148",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+      "schema": 1,
+      "tree": "6996ebfab759a6acff8ece40dcd15cfda08ef24c"
+    }
+  },
+  "rendererAssets": {
+    "baseline": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 623972,
+          "sha256": "2a80bd973a7dd8b4da0b6e484c57b011f1000bcda44fa39cc665e6739064f585"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 172301,
+          "sha256": "47c9262fb9b3e76e29403feeb0b21bced56a19063e4bf0c10463b4e506504e5d"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46484,
+          "sha256": "a604dbff16d3be0f0d24cf48753404b42fe25f70fbd1393dde4934871446a420"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5461785,
+          "sha256": "7dfb2e1852fcbabace91530614eaa0c9d0dc34dbed54d96ff422b57143c2faac"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "27906dcf79ad97062c2f2a01a243abc1f499a2e60b2c8985487d9a82edd07429"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "5e08586a10f0b0c9e4354438734b392459cd64282ababf7029a48246f6da6d47"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1675029,
+          "sha256": "7216cb9019a8db40a177990f4ae6034cfe3d4f47aa598d221c4675df401082ce"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "93264a8ea309cbae423c96d2c25c245fdda64b3c13de69e74a1cc26f8a6aa041"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10551486,
+          "sha256": "6a8764abd1d3b8a221d8965cdc21b50d106b8113032a9c16854d9ca9211dd6e0"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    },
+    "candidate": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 623972,
+          "sha256": "2a80bd973a7dd8b4da0b6e484c57b011f1000bcda44fa39cc665e6739064f585"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 172301,
+          "sha256": "47c9262fb9b3e76e29403feeb0b21bced56a19063e4bf0c10463b4e506504e5d"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46484,
+          "sha256": "a604dbff16d3be0f0d24cf48753404b42fe25f70fbd1393dde4934871446a420"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5464345,
+          "sha256": "e68a364d324af5fae23f5d650457d75825aed75cab6677e7e2ab50fe945c9209"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "ff3f0c467d0619a7ddf48051e2df3b996a7d97e8c99969093c47e7977cdb4184"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "5e08586a10f0b0c9e4354438734b392459cd64282ababf7029a48246f6da6d47"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1675029,
+          "sha256": "7216cb9019a8db40a177990f4ae6034cfe3d4f47aa598d221c4675df401082ce"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "31b1889932bf78cd766b02075f030095a82b7ee3b83302ec9c30203497c481d8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10549923,
+          "sha256": "ac2f67b2056e977a84ab097cfb85b5ba4d551ef3ecf702bf1e305598fb67b815"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    }
+  },
+  "captures": {
+    "baseline": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "db3d255c1ffb5892103a4eff8fab4e79f1db9f03",
+      "sourceTree": "3accc040c830c625ce04990adea0147104fd3ec0",
+      "buildIdentitySha256": "9c448c3cd64b6ab0c38588d43883950418cb86d8cc15edda5b62823dddee22c1",
+      "manifestSha256": "fe736d46bdd5b0d85ac88084268159ea14438bc7b3f70208db59ae360ae69916",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "automatic-body-plain-explicit",
+          "inputSha256": "28ab13d5b83d3afeb86d3cb01e68e0eef54682e227ba061e9b4668d8a4da74f0",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "4e3482443762e1c437082082857e58927b7d1517a4469afdd9de14e3651cbcf2",
+          "renderReportSha256": "be0ec21e1e9226fc5467f481f5345a7dc147fbd893913039e88415039307e18b",
+          "htmlSha256": "98547d940013f5edeffa3cfa6790f621128db1304f89e304e8689db75c8aaec7",
+          "htmlFactsSha256": "c1a76f1cf408ff31238c0429b5750f4e84a58b63d90bf1bbef277802b90afa2c"
+        },
+        {
+          "id": "automatic-body-plain-implicit",
+          "inputSha256": "8767cae532af999bec5d01be4f73bd4183d480275ca5e284438f4d55760cbb4c",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "70b531bf000d921af8a12aa7aa8936e9ff9837c14c84266e57f9e897a97a626b",
+          "renderReportSha256": "4d6c2e72c78bcd5b397884a25614c378ab0fa67943c67254c72a1fd959179264",
+          "htmlSha256": "d1d519d58cb9504aca0cf2b4447b0c0fba78a437588f757cecfd042620d4ce5e",
+          "htmlFactsSha256": "88713ce55285bb7d551c153677334b7523e1813605b1c5c83c573e186c17293f"
+        },
+        {
+          "id": "automatic-body-enter-list",
+          "inputSha256": "53ef2f7503e41341087743d8ca6aa0818fa42437e3c1b36ac1f8a5d64d4754f0",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "63ce309f843789d29254bd1c2fa3c6e368bdd7c57623688c45cee636fb9deee4",
+          "renderReportSha256": "1207f0687a4cc5aa13f99a1e013e18e1cd0c5be54a743a4221b655a70c3a162d",
+          "htmlSha256": "0e479b5ae1111447bded107181d371593aa55dd89c56a6f2a786fa794e55be86",
+          "htmlFactsSha256": "9acc14ae269679c21ecef44412efe4549e384e5182ca8a5096bbb5f2d6004b68"
+        },
+        {
+          "id": "automatic-body-leave-list",
+          "inputSha256": "a35596f9e3f053a90aa41bfce29507aeaadcb0b02b617e33c31e3c93f595b234",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "df269db8a055398044ee56758fb016661dbc5be0a34f6ecfb906975135a3725d",
+          "renderReportSha256": "d16169210719d7a541979c285b54e8e70c07959b9443dd8e7e3078c736178436",
+          "htmlSha256": "8f2591b924f74dc2f0cdfb20e03d1597106aa7f6bcfe2f84ce28850b8d4e017d",
+          "htmlFactsSha256": "66dd62f1b8c8c89677fb037b4998426775b224eb297a22b43ef4778bf4685f56"
+        },
+        {
+          "id": "automatic-body-same-list",
+          "inputSha256": "8b7c6988d159fe9618838d00e1192ff6e90fe99e7a4730367017398d4ede13d1",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "5bf0b32d1ec971293471d6b8fb0fb9e7712bd6f258e9edc021a029c307c41dfb",
+          "renderReportSha256": "78265400cfc3a38d966e951fceb61e179f7ce60ac115c263fa2164b19ea9fbd7",
+          "htmlSha256": "2f1f3ec1ecc86b436e3b26d65d2553930bd3988877f129625697cb2a25037c62",
+          "htmlFactsSha256": "f0dc22af0de1d2b5b674768e018fa7bde5fece46e1f5009a8c212c1ea3e35c22"
+        },
+        {
+          "id": "automatic-body-separate-lists",
+          "inputSha256": "8243c02af9400c0d3081a24fff2be3e7cd4158d8374adacd7bf95a594dd65191",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "c5075bd6d07722c19ace780125e6b5ae1668426a61d0869d7f5838edb53af382",
+          "renderReportSha256": "5746e07dee8ce01e60f3ba4ec387a381c8975ea74e40414472246b79ad8fb20a",
+          "htmlSha256": "a526610655fd38710582d25b987de25d8981ad044d5a1197b224b9d64f3625c8",
+          "htmlFactsSha256": "6775139331e8211aff521025625b083e2c8c18ad29412545c90caa8e78926429"
+        },
+        {
+          "id": "automatic-body-disabled-control",
+          "inputSha256": "25669d660648f0ca01838e64677975f5968995de352ab960c82149d283a8e574",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "4deb4b755bf80cda953dc8b23c5cae9dbbe65e250433bf11c6eeb09318a235e9",
+          "renderReportSha256": "ff67917d2677d21e3fb4b72b103ee3591005bf320ede14d7e8854fc45c817241",
+          "htmlSha256": "2f1f3ec1ecc86b436e3b26d65d2553930bd3988877f129625697cb2a25037c62",
+          "htmlFactsSha256": "f0dc22af0de1d2b5b674768e018fa7bde5fece46e1f5009a8c212c1ea3e35c22"
+        },
+        {
+          "id": "automatic-body-neighbor-control",
+          "inputSha256": "693047748760e3cfa01bb0751421e48c86a9fb00c2e8001a216270beadd801a2",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "95c841e9901bc045d64f0f861a83467e4d55e51efde3dcabe4f43dfb06b5fc77",
+          "renderReportSha256": "e38cf43788f8227f922c46810d4dbefe684f517b2b98ac0e0ae53bb01792ac77",
+          "htmlSha256": "b1b2f8a00c80b429c2d493f4522134d12c18bb79fd05b420336740041d5e681b",
+          "htmlFactsSha256": "376e4d9534857b58b6430f8a98849a54f43b89e691c536929f365e60eea77f15"
+        }
+      ],
+      "htmlInspectorSha256": "87805e278400914cd87a2fe8e89c498748b7f45eecd5ca432b9c2be2d95b4cbb"
+    },
+    "candidate": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "ea7577b9a5f3956e3343208f25109f1c76b4c210",
+      "sourceTree": "6996ebfab759a6acff8ece40dcd15cfda08ef24c",
+      "buildIdentitySha256": "49c9b155e112e4c549af746cba5a476483d2e2a4f1a07a16489853c3681a89af",
+      "manifestSha256": "fe736d46bdd5b0d85ac88084268159ea14438bc7b3f70208db59ae360ae69916",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "automatic-body-plain-explicit",
+          "inputSha256": "28ab13d5b83d3afeb86d3cb01e68e0eef54682e227ba061e9b4668d8a4da74f0",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "b1d4e0cd27608ff19d34a9509662b4bf0513ae32ddd5aa54448ac6014bbefba7",
+          "renderReportSha256": "d1b451d5d800a4bb7372662d556a892194ccaf8a0251f0a5494003c06d6dc43c",
+          "htmlSha256": "f7bcbea80d1f0a0de15ae3fda77a18423b76265b32279ad646ba834350dcb136",
+          "htmlFactsSha256": "9e38bc1321b70c60d3d2b50ceac76048b877e2687ee70ce5b50d32f5636a21b6"
+        },
+        {
+          "id": "automatic-body-plain-implicit",
+          "inputSha256": "8767cae532af999bec5d01be4f73bd4183d480275ca5e284438f4d55760cbb4c",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "333f97009566aa90f194b83c9b17b105e8013db8e7f3cbec4e35014d9765c070",
+          "renderReportSha256": "5e8e7620fb26e4eb289085a34f81dc76e5cca266b34437526c1ff80297cd1d8d",
+          "htmlSha256": "f7bcbea80d1f0a0de15ae3fda77a18423b76265b32279ad646ba834350dcb136",
+          "htmlFactsSha256": "9e38bc1321b70c60d3d2b50ceac76048b877e2687ee70ce5b50d32f5636a21b6"
+        },
+        {
+          "id": "automatic-body-enter-list",
+          "inputSha256": "53ef2f7503e41341087743d8ca6aa0818fa42437e3c1b36ac1f8a5d64d4754f0",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "e53eb2edca94fc9f85006ed4d32d6609851d70d2ec40ae1f2bc758a4655216c5",
+          "renderReportSha256": "d20149970daf4d91d83fbdd60f9234d293b89392e93554b115580fc8014ddfe2",
+          "htmlSha256": "42412731e687bfdea71f56cc0a8f0068fd8e4f1efc3d22e5457e72bd1e15de3c",
+          "htmlFactsSha256": "c109c768f5e528f386288cb9cf20718060fb2edfc4496b2a85d0ced5f5cdfd0c"
+        },
+        {
+          "id": "automatic-body-leave-list",
+          "inputSha256": "a35596f9e3f053a90aa41bfce29507aeaadcb0b02b617e33c31e3c93f595b234",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "02bd2483a67e0335556a6e0366e69b281cecf3001ab45a495ee8d975291ffd05",
+          "renderReportSha256": "f8d02e85cf1bc2143762002d2b35b47caa9e761d7d060d878fcb10f8b0183ef7",
+          "htmlSha256": "43280f3905a6b71b4b849006f2dc6d527cdd4d3c02ab443e5d1ed5d527b8a61a",
+          "htmlFactsSha256": "f24f44365d083feef7f4ce3a1d9129647d02d38ccef57a270d69154c99440ce0"
+        },
+        {
+          "id": "automatic-body-same-list",
+          "inputSha256": "8b7c6988d159fe9618838d00e1192ff6e90fe99e7a4730367017398d4ede13d1",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "506facdb8500a72553a7be78e7b2bbad6de99d00d49ce13e135a881df88d3970",
+          "renderReportSha256": "380bf83394cb2d5572943ccf2716824c68b69dcf1964f81eb4643cb28a25e2db",
+          "htmlSha256": "df3ab8743ee2f6c312973c2f0aab3b82f2f2a90fdda08bb0968d0823044d502e",
+          "htmlFactsSha256": "24e2b9b8f7bc7e63646863959d27b66062207c656e4656cf51610200cce5d647"
+        },
+        {
+          "id": "automatic-body-separate-lists",
+          "inputSha256": "8243c02af9400c0d3081a24fff2be3e7cd4158d8374adacd7bf95a594dd65191",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "74ada06f5fc859f5a8f24883ad986f90e0c6446a5dd54b60ecd3dfbf70e8d5f4",
+          "renderReportSha256": "d481193a4c37c597c5ef31c13efc64cc18dec42a077c87288d86399750bfb297",
+          "htmlSha256": "349502581d39e36fe5c4638881f54263502d25e11691bbaeeb7bc8ef0c6f7790",
+          "htmlFactsSha256": "74adb1e9e50afe107e795c030b5dfaa8a91875fe25b52afb16d87a524011fc56"
+        },
+        {
+          "id": "automatic-body-disabled-control",
+          "inputSha256": "25669d660648f0ca01838e64677975f5968995de352ab960c82149d283a8e574",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "7ff25c01a0b9b209be10b17595bb64e74a0c6d042d6bce64527a3b385aec2f32",
+          "renderReportSha256": "98a4f349e2cd9f9fe8ea9390bb17bec22a1ab6f17cffc49d88da970a606c8b6e",
+          "htmlSha256": "2f1f3ec1ecc86b436e3b26d65d2553930bd3988877f129625697cb2a25037c62",
+          "htmlFactsSha256": "f0dc22af0de1d2b5b674768e018fa7bde5fece46e1f5009a8c212c1ea3e35c22"
+        },
+        {
+          "id": "automatic-body-neighbor-control",
+          "inputSha256": "693047748760e3cfa01bb0751421e48c86a9fb00c2e8001a216270beadd801a2",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "f0dcf4ab26df742ae6bea9175a5769ea6bc0771f8bb37ba14266eb95faef1400",
+          "renderReportSha256": "1af3520f9c2655f92a1bcfae829fca40386e0d5306256c67cae2744b82f4a3b5",
+          "htmlSha256": "fe1a97e356124afefb4243af782f985226001d67ae1c9c2174f17b50ce06b8ed",
+          "htmlFactsSha256": "f550e2e2c07116bf461ee85b1e9704c8591770f69f208002663362530f4dd7f3"
+        }
+      ],
+      "htmlInspectorSha256": "87805e278400914cd87a2fe8e89c498748b7f45eecd5ca432b9c2be2d95b4cbb"
+    }
+  },
+  "referenceBundleSha256": "727efb3d5bee1a01c70386761357b6fd3f15192e4d2747efa96fa9b168f86a33",
+  "referenceBundle": {
+    "file": "reference-bundle.json.gz",
+    "sha256": "88e43ba0a95b1c0a287ff928f3912271dadb780faef76e1e6c8a351f721d07e9",
+    "jsonSha256": "727efb3d5bee1a01c70386761357b6fd3f15192e4d2747efa96fa9b168f86a33"
+  },
+  "referenceEnvironment": {
+    "fonts": {
+      "LiberationSerif-Bold.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+      },
+      "LiberationSerif-BoldItalic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+      },
+      "LiberationSerif-Italic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+      },
+      "LiberationSerif-Regular.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+      }
+    },
+    "tools": {
+      "pdffonts": {
+        "sha256": "de0a6d649710c2ebc226656b08c70814019a93f58889f79bf1dac726a131beda",
+        "version": "pdffonts version 25.03.0"
+      },
+      "pdftocairo": {
+        "sha256": "6f56c7c8c5b015354ebed053d4b52e14b43611c9c86236562bfd112827108dc5",
+        "version": "pdftocairo version 25.03.0"
+      },
+      "pdftoppm": {
+        "sha256": "6c315e59db2a0829ecdfb6c791ad3f56bc9bd508266d20adc22238df447a74a3",
+        "version": "pdftoppm version 25.03.0"
+      },
+      "pdftotext": {
+        "sha256": "451784e28a4593637573e534d9be4c4487a3cccffae22a71e93162faa84de23c",
+        "version": "pdftotext version 25.03.0"
+      },
+      "qpdf": {
+        "sha256": "0d0462ea848601a652b666e83a07a095bb0c4d69d831beb6f94ea8e6e008f34c",
+        "version": "qpdf version 12.2.0"
+      }
+    }
+  },
+  "schema": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "documents": {
+      "fixtures/automatic-body-plain-explicit.docx": [],
+      "fixtures/automatic-body-plain-implicit.docx": [],
+      "fixtures/automatic-body-enter-list.docx": [],
+      "fixtures/automatic-body-leave-list.docx": [],
+      "fixtures/automatic-body-same-list.docx": [],
+      "fixtures/automatic-body-separate-lists.docx": [],
+      "fixtures/automatic-body-disabled-control.docx": [],
+      "fixtures/automatic-body-neighbor-control.docx": []
+    }
+  },
+  "cases": [
+    {
+      "id": "automatic-body-plain-explicit",
+      "inputSha256": "28ab13d5b83d3afeb86d3cb01e68e0eef54682e227ba061e9b4668d8a4da74f0",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "automatic-body-plain-explicit-baseline-report.json.gz",
+            "sha256": "39302bacd2f61c89ad3e8c6e1edbe45d9241c02889847974f258e220467b09f9",
+            "jsonSha256": "be0ec21e1e9226fc5467f481f5345a7dc147fbd893913039e88415039307e18b"
+          },
+          "htmlSha256": "98547d940013f5edeffa3cfa6790f621128db1304f89e304e8689db75c8aaec7",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            20.999999000000003,
+            20.99999899999999
+          ],
+          "pdf": "pdf/automatic-body-plain-explicit-baseline.pdf",
+          "pdfSha256": "4e3482443762e1c437082082857e58927b7d1517a4469afdd9de14e3651cbcf2",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "automatic-body-plain-explicit-baseline-inspection.json.gz",
+            "sha256": "32d77f7f3e57ca14794fdf1032ec77d8376eb27de692e0e74dae1b170ffbd605",
+            "jsonSha256": "c7c17d04b65764c1cbdfba7a9a573659686614846917773913c0455cdb6c2b53"
+          },
+          "pageRasterSha256": "75881afa67e606722329246bec3794188686b5e1dc00490dcfb99ff968e3c8cc"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            30.0,
+            30.0
+          ],
+          "pdf": "pdf/automatic-body-plain-explicit-reference.pdf",
+          "pdfSha256": "cfc1b7d689a03dabba1dd526cdaf2b67ff00ed3a1cd57f213a703040759e75cc",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "automatic-body-plain-explicit-reference-inspection.json.gz",
+            "sha256": "439a7747f5dc0e48b0c98b4bb913badad72fa5fb3278cda98c885278d66ec5d8",
+            "jsonSha256": "c1a001f91b8e8cf3406b3e60c54a79bf5e584edbc5366d0e18d8af735b81cbc9"
+          },
+          "pageRasterSha256": "e9f8bb04e89fdbefde1aca787ef73506dc8837f2d1fb456167c972e8fe5bfa54"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "automatic-body-plain-explicit-candidate-report.json.gz",
+            "sha256": "2ca91dd03461416e7d9e83e3271c597af0d0965b61825a1808ec490cc144f1bd",
+            "jsonSha256": "d1b451d5d800a4bb7372662d556a892194ccaf8a0251f0a5494003c06d6dc43c"
+          },
+          "htmlSha256": "f7bcbea80d1f0a0de15ae3fda77a18423b76265b32279ad646ba834350dcb136",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            29.99999799999999,
+            29.999999000000003
+          ],
+          "pdf": "pdf/automatic-body-plain-explicit-candidate.pdf",
+          "pdfSha256": "b1d4e0cd27608ff19d34a9509662b4bf0513ae32ddd5aa54448ac6014bbefba7",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "automatic-body-plain-explicit-candidate-inspection.json.gz",
+            "sha256": "87ef6e967442f39c45f0e8e56e53b2c392fdfb08deaf3ce60707722cf62d6106",
+            "jsonSha256": "f52e12716e1614710b3c308728c7a26c6769a7df7015c78335478fc43ddecd89"
+          },
+          "pageRasterSha256": "93b4e48a9965def8de670e5996b1f9466ff74770dbd2e5d85ba544dfa40292d0"
+        }
+      ],
+      "screenshot": {
+        "file": "automatic-body-plain-explicit.png",
+        "sha256": "7a80127a0f72d209304d40f48e92e2206355e7379637cc737f63e1d638d28daf"
+      }
+    },
+    {
+      "id": "automatic-body-plain-implicit",
+      "inputSha256": "8767cae532af999bec5d01be4f73bd4183d480275ca5e284438f4d55760cbb4c",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "automatic-body-plain-implicit-baseline-report.json.gz",
+            "sha256": "8f22f89ea3d78e31cbb2fd289b3cfcfe09e42c640d7f80b0b11b643f5b3044e6",
+            "jsonSha256": "4d6c2e72c78bcd5b397884a25614c378ab0fa67943c67254c72a1fd959179264"
+          },
+          "htmlSha256": "d1d519d58cb9504aca0cf2b4447b0c0fba78a437588f757cecfd042620d4ce5e",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            16.5,
+            15.749999000000003
+          ],
+          "pdf": "pdf/automatic-body-plain-implicit-baseline.pdf",
+          "pdfSha256": "70b531bf000d921af8a12aa7aa8936e9ff9837c14c84266e57f9e897a97a626b",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "automatic-body-plain-implicit-baseline-inspection.json.gz",
+            "sha256": "0325c6b9369ab0a4f7309b655186b2b68ed73b4261b313677562c6e596b9b92a",
+            "jsonSha256": "cd94051a225a2a8829ec111a6c838d7a982fffbb154e3e9dc465119f0331e4c4"
+          },
+          "pageRasterSha256": "43bd1e9f7b31c793600824a57ca2208e15ba6dffd68a46cf6daddd9e2824853a"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            30.0,
+            30.0
+          ],
+          "pdf": "pdf/automatic-body-plain-implicit-reference.pdf",
+          "pdfSha256": "21a6e97e746dd55c6b9521adc60e1757e403c2269db8fa03b0fec62e12c387a9",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "automatic-body-plain-implicit-reference-inspection.json.gz",
+            "sha256": "439a7747f5dc0e48b0c98b4bb913badad72fa5fb3278cda98c885278d66ec5d8",
+            "jsonSha256": "c1a001f91b8e8cf3406b3e60c54a79bf5e584edbc5366d0e18d8af735b81cbc9"
+          },
+          "pageRasterSha256": "e9f8bb04e89fdbefde1aca787ef73506dc8837f2d1fb456167c972e8fe5bfa54"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "automatic-body-plain-implicit-candidate-report.json.gz",
+            "sha256": "c534225eacc082188c8bbd362ab2f61180b99436c5058b41bba165aa58975703",
+            "jsonSha256": "5e8e7620fb26e4eb289085a34f81dc76e5cca266b34437526c1ff80297cd1d8d"
+          },
+          "htmlSha256": "f7bcbea80d1f0a0de15ae3fda77a18423b76265b32279ad646ba834350dcb136",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            29.99999799999999,
+            29.999999000000003
+          ],
+          "pdf": "pdf/automatic-body-plain-implicit-candidate.pdf",
+          "pdfSha256": "333f97009566aa90f194b83c9b17b105e8013db8e7f3cbec4e35014d9765c070",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "automatic-body-plain-implicit-candidate-inspection.json.gz",
+            "sha256": "87ef6e967442f39c45f0e8e56e53b2c392fdfb08deaf3ce60707722cf62d6106",
+            "jsonSha256": "f52e12716e1614710b3c308728c7a26c6769a7df7015c78335478fc43ddecd89"
+          },
+          "pageRasterSha256": "93b4e48a9965def8de670e5996b1f9466ff74770dbd2e5d85ba544dfa40292d0"
+        }
+      ],
+      "screenshot": {
+        "file": "automatic-body-plain-implicit.png",
+        "sha256": "ebd25778c84a0d1dffaadd9b82850479f776db4a26eb09f1e6285f6bf8c3e7bc"
+      }
+    },
+    {
+      "id": "automatic-body-enter-list",
+      "inputSha256": "53ef2f7503e41341087743d8ca6aa0818fa42437e3c1b36ac1f8a5d64d4754f0",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "automatic-body-enter-list-baseline-report.json.gz",
+            "sha256": "20d719208abae625bd712286bd18b2dc309496d0e902d38323a473d3f5fe52c6",
+            "jsonSha256": "1207f0687a4cc5aa13f99a1e013e18e1cd0c5be54a743a4221b655a70c3a162d"
+          },
+          "htmlSha256": "0e479b5ae1111447bded107181d371593aa55dd89c56a6f2a786fa794e55be86",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            20.999999000000003,
+            20.99999899999999
+          ],
+          "pdf": "pdf/automatic-body-enter-list-baseline.pdf",
+          "pdfSha256": "63ce309f843789d29254bd1c2fa3c6e368bdd7c57623688c45cee636fb9deee4",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "automatic-body-enter-list-baseline-inspection.json.gz",
+            "sha256": "04b128ed4af262e2614a959f1b1342e8a8624cd09808c89b95ae18d78322d2bc",
+            "jsonSha256": "c507c9ddafd0c1a2a4159bb8594a9472adc3216c819b9f3b66af11fd240c169b"
+          },
+          "pageRasterSha256": "c8796a3771030c20df8618258f571daf2c6767689e5e14e29707a2a56a33cc8c"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            30.0,
+            30.0
+          ],
+          "pdf": "pdf/automatic-body-enter-list-reference.pdf",
+          "pdfSha256": "587544924fe063a3c7bce528d222f66f85c39d78ac8bda99685612796d50c685",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "automatic-body-enter-list-reference-inspection.json.gz",
+            "sha256": "2d9e2641a578da2c8b228ecc2963cd38db6fc652d746c39c5cf3f6ab5c2fe23d",
+            "jsonSha256": "e68bb71c6b0b60fcc93022381149ec71dd571a9124e929dcb3b6aa203ea14537"
+          },
+          "pageRasterSha256": "56e604bfdcb5e90ae27caddc0577f14c6aebb933ce293d3929b8f5a32bcff7a8"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "automatic-body-enter-list-candidate-report.json.gz",
+            "sha256": "0d5b8943bc293a1df2fe806b8097aacf3ede871e0483a785be07e76a9ca1d205",
+            "jsonSha256": "d20149970daf4d91d83fbdd60f9234d293b89392e93554b115580fc8014ddfe2"
+          },
+          "htmlSha256": "42412731e687bfdea71f56cc0a8f0068fd8e4f1efc3d22e5457e72bd1e15de3c",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            29.99999799999999,
+            29.999999000000003
+          ],
+          "pdf": "pdf/automatic-body-enter-list-candidate.pdf",
+          "pdfSha256": "e53eb2edca94fc9f85006ed4d32d6609851d70d2ec40ae1f2bc758a4655216c5",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "automatic-body-enter-list-candidate-inspection.json.gz",
+            "sha256": "8f7200aad03d1c7ba1d8abd65f180a3a2660082b40a08fc2a896229de9a09079",
+            "jsonSha256": "8e9beca8e294caa847f462e244380bce6134a805a5fc44d9faa7cfb7da7c8f47"
+          },
+          "pageRasterSha256": "c28d3bbd673485ebc86b51b3099fa988230e766693fb40745eb347d15beedc06"
+        }
+      ],
+      "screenshot": {
+        "file": "automatic-body-enter-list.png",
+        "sha256": "74e658384ad547cd8c6ebbef000cf721841b3c26a49cf82b2b573b03b4a5289f"
+      }
+    },
+    {
+      "id": "automatic-body-leave-list",
+      "inputSha256": "a35596f9e3f053a90aa41bfce29507aeaadcb0b02b617e33c31e3c93f595b234",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "automatic-body-leave-list-baseline-report.json.gz",
+            "sha256": "68e610ec8242ddcc0cbc46b5102f05c23aa4155d30fbb3a503c2b2efd6d4b359",
+            "jsonSha256": "d16169210719d7a541979c285b54e8e70c07959b9443dd8e7e3078c736178436"
+          },
+          "htmlSha256": "8f2591b924f74dc2f0cdfb20e03d1597106aa7f6bcfe2f84ce28850b8d4e017d",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            20.999999000000003,
+            20.99999899999999
+          ],
+          "pdf": "pdf/automatic-body-leave-list-baseline.pdf",
+          "pdfSha256": "df269db8a055398044ee56758fb016661dbc5be0a34f6ecfb906975135a3725d",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "automatic-body-leave-list-baseline-inspection.json.gz",
+            "sha256": "16396d7549702553986cd116bd825727ea6bf9865a64497b46379dd2f1991cbb",
+            "jsonSha256": "22ecee933c58e1c70074a435df9c248616dda52dcd3dee2a880d36409a28d1ca"
+          },
+          "pageRasterSha256": "4043755a7ae424af7fe45c6cee772d1729b0ba2b5bf5b9eab79b82540c28b220"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            30.0,
+            30.0
+          ],
+          "pdf": "pdf/automatic-body-leave-list-reference.pdf",
+          "pdfSha256": "fbd14a5b4c4c5c3caa26e6b1790ca781f2fecbde25805785e95a3a5a0111615c",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "automatic-body-leave-list-reference-inspection.json.gz",
+            "sha256": "d27fc9a8c7620ecff19a99d3eea4793b1cba7badfa44d91058c03e78c7e58dc4",
+            "jsonSha256": "a75698847c4731f93cdfa03bb5675203fa55d0f3f345d74927f5aa9be54419a3"
+          },
+          "pageRasterSha256": "74b533e2d7bccee1aad36eee1fd4edace477ccdb32fbe2d90ada844c09335bfd"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "automatic-body-leave-list-candidate-report.json.gz",
+            "sha256": "cd2ffc54be9b878a6cb9edda6c733b1e19adf3302e26d94fe8cf84c2dd156b53",
+            "jsonSha256": "f8d02e85cf1bc2143762002d2b35b47caa9e761d7d060d878fcb10f8b0183ef7"
+          },
+          "htmlSha256": "43280f3905a6b71b4b849006f2dc6d527cdd4d3c02ab443e5d1ed5d527b8a61a",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            29.99999799999999,
+            29.999999000000003
+          ],
+          "pdf": "pdf/automatic-body-leave-list-candidate.pdf",
+          "pdfSha256": "02bd2483a67e0335556a6e0366e69b281cecf3001ab45a495ee8d975291ffd05",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "automatic-body-leave-list-candidate-inspection.json.gz",
+            "sha256": "a9ff3ec716240a4687d6176145c6703d93d64aece3da0ea9ad86ab61d5e9d2ea",
+            "jsonSha256": "5bc1a7a42f9dff2c0af85f9c42a9ba6125e7246663233bee87593948cd5cf6bc"
+          },
+          "pageRasterSha256": "bdbc98a78cc655203cc2c76e0d11da42192f1a64109afd842bed15d0d3d98e05"
+        }
+      ],
+      "screenshot": {
+        "file": "automatic-body-leave-list.png",
+        "sha256": "f13409da72c78ffe80ab524efca65428bdf7c9943d7644d7384c2c8f9bf2e925"
+      }
+    },
+    {
+      "id": "automatic-body-same-list",
+      "inputSha256": "8b7c6988d159fe9618838d00e1192ff6e90fe99e7a4730367017398d4ede13d1",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "automatic-body-same-list-baseline-report.json.gz",
+            "sha256": "50b227b934e01f7c455b0968bb71a2cfdcc454e57224761de60d33cb2096db3a",
+            "jsonSha256": "78265400cfc3a38d966e951fceb61e179f7ce60ac115c263fa2164b19ea9fbd7"
+          },
+          "htmlSha256": "2f1f3ec1ecc86b436e3b26d65d2553930bd3988877f129625697cb2a25037c62",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            20.999999000000003,
+            20.99999899999999
+          ],
+          "pdf": "pdf/automatic-body-same-list-baseline.pdf",
+          "pdfSha256": "5bf0b32d1ec971293471d6b8fb0fb9e7712bd6f258e9edc021a029c307c41dfb",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "automatic-body-same-list-baseline-inspection.json.gz",
+            "sha256": "d8d466f5a73a47fa9623c6f4a42c7c9595aa5f5f91d136fdcbcc7566860d1646",
+            "jsonSha256": "2a8341ac132c380b35217f7b0385676de7e1207c8d872400882d77df1b9e32bd"
+          },
+          "pageRasterSha256": "97bd1c3c9e43d1cd4cc7d6635ca74b618e96511618b711d1c3cee662d14eef9a"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            16.0,
+            30.0
+          ],
+          "pdf": "pdf/automatic-body-same-list-reference.pdf",
+          "pdfSha256": "a5851de80ce4d19c0c2237c7781b620abe98898cd994d21c13831585605f6a1f",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "automatic-body-same-list-reference-inspection.json.gz",
+            "sha256": "f6d4889affb7da0bd0f8cde46a4d113be65211afd2936f311c13ac577661a47d",
+            "jsonSha256": "9a0e27005e9417f8d64d5d6570913c267bbd37ceeb1e0ffe39675ce36dbbbb82"
+          },
+          "pageRasterSha256": "f4f3374552ce2fd749ba47115d4cb85a290fe43645ed5c56588bb45800efb290"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "automatic-body-same-list-candidate-report.json.gz",
+            "sha256": "41b98e5ca9917b557d5895dfdcc62d0e661333920118586dc10073f5f372957a",
+            "jsonSha256": "380bf83394cb2d5572943ccf2716824c68b69dcf1964f81eb4643cb28a25e2db"
+          },
+          "htmlSha256": "df3ab8743ee2f6c312973c2f0aab3b82f2f2a90fdda08bb0968d0823044d502e",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            15.749999000000003,
+            29.99999899999999
+          ],
+          "pdf": "pdf/automatic-body-same-list-candidate.pdf",
+          "pdfSha256": "506facdb8500a72553a7be78e7b2bbad6de99d00d49ce13e135a881df88d3970",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "automatic-body-same-list-candidate-inspection.json.gz",
+            "sha256": "762198af2c7b48156713b5ffeda006dddd74cba04eaab033d0ef0d25b598a28e",
+            "jsonSha256": "bb0cadb8f8cf73f922f280cbdbe7ae7e8cb200f4e0161b710838c3f058398222"
+          },
+          "pageRasterSha256": "d4fb338d3cf9ee0db5f3326c1c8b1ba607a8149f5becf822b27e02e94aa1c4ab"
+        }
+      ],
+      "screenshot": {
+        "file": "automatic-body-same-list.png",
+        "sha256": "ebdd32d8f9a755dcc56c876b341f2c9009b22d558d410d225e8d094bb0e045af"
+      }
+    },
+    {
+      "id": "automatic-body-separate-lists",
+      "inputSha256": "8243c02af9400c0d3081a24fff2be3e7cd4158d8374adacd7bf95a594dd65191",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "automatic-body-separate-lists-baseline-report.json.gz",
+            "sha256": "4a47d746ecd019dad2aa3f721c886d9d4c7672234ea2a772a1e887df33044c7d",
+            "jsonSha256": "5746e07dee8ce01e60f3ba4ec387a381c8975ea74e40414472246b79ad8fb20a"
+          },
+          "htmlSha256": "a526610655fd38710582d25b987de25d8981ad044d5a1197b224b9d64f3625c8",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            20.999999000000003,
+            20.99999899999999
+          ],
+          "pdf": "pdf/automatic-body-separate-lists-baseline.pdf",
+          "pdfSha256": "c5075bd6d07722c19ace780125e6b5ae1668426a61d0869d7f5838edb53af382",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "automatic-body-separate-lists-baseline-inspection.json.gz",
+            "sha256": "06b3b8b898793176bf71c2d41807080b50b4e65ba344cf47098be961f3b96734",
+            "jsonSha256": "cda40677b743a5ca67f058e8ff464f07d66c2305e68703fee85723c74c95c7b5"
+          },
+          "pageRasterSha256": "82f2d6c2b2e745e9aaa2009c28a2219e4ed2f3c284ce15a482582656ea35668b"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            30.0,
+            30.0
+          ],
+          "pdf": "pdf/automatic-body-separate-lists-reference.pdf",
+          "pdfSha256": "d15e72e8018ddd3a73bf74efb7d49750d0540e3bc0aa3545e6ae19d2361ac98d",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "automatic-body-separate-lists-reference-inspection.json.gz",
+            "sha256": "65f2ee3cb9595feff905d440dc24c2cd09be3b3676c1460cbd9cd7b2d15991dc",
+            "jsonSha256": "e047354ef33cd84d819c03b6dbb129efe4c7e95da9df3f5788754396ffcc5722"
+          },
+          "pageRasterSha256": "c3ecf19ae612df15f8fc1059bf4b9fcdd322d36b3faebb4cb9d0e463b12b8bfc"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "automatic-body-separate-lists-candidate-report.json.gz",
+            "sha256": "753c2ae7034ae0942ff9ba11cfd34cbe0f25a3c0e2d350c6c7fe319e14b537b2",
+            "jsonSha256": "d481193a4c37c597c5ef31c13efc64cc18dec42a077c87288d86399750bfb297"
+          },
+          "htmlSha256": "349502581d39e36fe5c4638881f54263502d25e11691bbaeeb7bc8ef0c6f7790",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            29.99999799999999,
+            29.999999000000003
+          ],
+          "pdf": "pdf/automatic-body-separate-lists-candidate.pdf",
+          "pdfSha256": "74ada06f5fc859f5a8f24883ad986f90e0c6446a5dd54b60ecd3dfbf70e8d5f4",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "automatic-body-separate-lists-candidate-inspection.json.gz",
+            "sha256": "fd1c3fce54f8ebe25d711e8005ae623b9c9951eda83761d93626589e268d4c68",
+            "jsonSha256": "a2befdb5e39160da5735f02c94e9303f34ac2b5bb873d9607a55c825756efbf8"
+          },
+          "pageRasterSha256": "99803bacd9e70d99cd73eeec21803242c580cd5cd709a4ab70f65ac5da308662"
+        }
+      ],
+      "screenshot": {
+        "file": "automatic-body-separate-lists.png",
+        "sha256": "2d14fc5538ee3509c02c8de0d948f820b80da1acad5dc764a346d9e853530e1f"
+      }
+    },
+    {
+      "id": "automatic-body-disabled-control",
+      "inputSha256": "25669d660648f0ca01838e64677975f5968995de352ab960c82149d283a8e574",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "automatic-body-disabled-control-baseline-report.json.gz",
+            "sha256": "d9780188c64dee1c134b354ea3e625d02cd63a673d0d19ef5d2fcb31bc83291b",
+            "jsonSha256": "ff67917d2677d21e3fb4b72b103ee3591005bf320ede14d7e8854fc45c817241"
+          },
+          "htmlSha256": "2f1f3ec1ecc86b436e3b26d65d2553930bd3988877f129625697cb2a25037c62",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            20.999999000000003,
+            20.99999899999999
+          ],
+          "pdf": "pdf/automatic-body-disabled-control-baseline.pdf",
+          "pdfSha256": "4deb4b755bf80cda953dc8b23c5cae9dbbe65e250433bf11c6eeb09318a235e9",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "automatic-body-disabled-control-baseline-inspection.json.gz",
+            "sha256": "d8d466f5a73a47fa9623c6f4a42c7c9595aa5f5f91d136fdcbcc7566860d1646",
+            "jsonSha256": "2a8341ac132c380b35217f7b0385676de7e1207c8d872400882d77df1b9e32bd"
+          },
+          "pageRasterSha256": "97bd1c3c9e43d1cd4cc7d6635ca74b618e96511618b711d1c3cee662d14eef9a"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            16.0,
+            21.0
+          ],
+          "pdf": "pdf/automatic-body-disabled-control-reference.pdf",
+          "pdfSha256": "afa2b375fdb4488b266a9bf62845edb5e42cd742d6bc758b20011135d69e83e4",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "automatic-body-disabled-control-reference-inspection.json.gz",
+            "sha256": "1cc64d1b89f78055697835bdbb94154189743880819daee6f374b089710d924d",
+            "jsonSha256": "5f45121c31113da6f804f0b2d9398b621825dd751dd0fda1dbebdfd2241743c6"
+          },
+          "pageRasterSha256": "54e8494fb6a54b67fb6119abd757d0969cc137dec35931b6ace020bdd16fc622"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "automatic-body-disabled-control-candidate-report.json.gz",
+            "sha256": "29722d811070172eef78a79ea91ea51f5c0769d59b39d227c090777a057d6e2d",
+            "jsonSha256": "98a4f349e2cd9f9fe8ea9390bb17bec22a1ab6f17cffc49d88da970a606c8b6e"
+          },
+          "htmlSha256": "2f1f3ec1ecc86b436e3b26d65d2553930bd3988877f129625697cb2a25037c62",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            20.999999000000003,
+            20.99999899999999
+          ],
+          "pdf": "pdf/automatic-body-disabled-control-candidate.pdf",
+          "pdfSha256": "7ff25c01a0b9b209be10b17595bb64e74a0c6d042d6bce64527a3b385aec2f32",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "automatic-body-disabled-control-candidate-inspection.json.gz",
+            "sha256": "d8d466f5a73a47fa9623c6f4a42c7c9595aa5f5f91d136fdcbcc7566860d1646",
+            "jsonSha256": "2a8341ac132c380b35217f7b0385676de7e1207c8d872400882d77df1b9e32bd"
+          },
+          "pageRasterSha256": "97bd1c3c9e43d1cd4cc7d6635ca74b618e96511618b711d1c3cee662d14eef9a"
+        }
+      ],
+      "screenshot": {
+        "file": "automatic-body-disabled-control.png",
+        "sha256": "52ebda4c26a4986581bdfcbe7a922adeb697eb327385c7cb63aee70b60a49195"
+      }
+    },
+    {
+      "id": "automatic-body-neighbor-control",
+      "inputSha256": "693047748760e3cfa01bb0751421e48c86a9fb00c2e8001a216270beadd801a2",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "automatic-body-neighbor-control-baseline-report.json.gz",
+            "sha256": "ebed411ca328c68e36c9f06576650e2300586a232d5a3e3ea50d768381ebb7b7",
+            "jsonSha256": "e38cf43788f8227f922c46810d4dbefe684f517b2b98ac0e0ae53bb01792ac77"
+          },
+          "htmlSha256": "b1b2f8a00c80b429c2d493f4522134d12c18bb79fd05b420336740041d5e681b",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            45.74999799999999,
+            20.999999000000003
+          ],
+          "pdf": "pdf/automatic-body-neighbor-control-baseline.pdf",
+          "pdfSha256": "95c841e9901bc045d64f0f861a83467e4d55e51efde3dcabe4f43dfb06b5fc77",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "automatic-body-neighbor-control-baseline-inspection.json.gz",
+            "sha256": "ce70b0281cb3d922fba31fc13c80d9f38e9d5259da167c78ad74c2f9d56726e5",
+            "jsonSha256": "5febd69c75f25bfd5629e1462dba85467214f5dc222d11386a83e0c630eafa1d"
+          },
+          "pageRasterSha256": "a848851f3f01cb3fed5bf9ec0f7b84842b9416edf8d70a54ef9cbad37f8e4d0e"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            16.0,
+            30.0
+          ],
+          "pdf": "pdf/automatic-body-neighbor-control-reference.pdf",
+          "pdfSha256": "ab81d2bfc7c320a107d712fb63134bebec73645e623ee9dbe30d6e67fcb966fb",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "automatic-body-neighbor-control-reference-inspection.json.gz",
+            "sha256": "f6d4889affb7da0bd0f8cde46a4d113be65211afd2936f311c13ac577661a47d",
+            "jsonSha256": "9a0e27005e9417f8d64d5d6570913c267bbd37ceeb1e0ffe39675ce36dbbbb82"
+          },
+          "pageRasterSha256": "f4f3374552ce2fd749ba47115d4cb85a290fe43645ed5c56588bb45800efb290"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "automatic-body-neighbor-control-candidate-report.json.gz",
+            "sha256": "8dc78ae37d5a1864bf29471c3e1f2730a16455125fdd7706a456de985f20f5fc",
+            "jsonSha256": "1af3520f9c2655f92a1bcfae829fca40386e0d5306256c67cae2744b82f4a3b5"
+          },
+          "htmlSha256": "fe1a97e356124afefb4243af782f985226001d67ae1c9c2174f17b50ce06b8ed",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            45.74999799999999,
+            29.999999000000003
+          ],
+          "pdf": "pdf/automatic-body-neighbor-control-candidate.pdf",
+          "pdfSha256": "f0dcf4ab26df742ae6bea9175a5769ea6bc0771f8bb37ba14266eb95faef1400",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "automatic-body-neighbor-control-candidate-inspection.json.gz",
+            "sha256": "5d5073ead076b4068e8bc80c249334571b542e5c2b19bdbaac5b91777b1bf751",
+            "jsonSha256": "a872169e677fcaf580613e09fe895ff4bdd432a9e7dec64e1102984d7179bbc0"
+          },
+          "pageRasterSha256": "a1d11b5fa964d4a37d000917504cd70c27bbb4fe3a967eaa414e3d4efaa385c7"
+        }
+      ],
+      "screenshot": {
+        "file": "automatic-body-neighbor-control.png",
+        "sha256": "8fb088311da1c8a62482c24f78d7aa6985cbf259d532b618cb27af98b66a49af"
+      }
+    }
+  ],
+  "tools": {
+    "docs/results/automatic-body-spacing/Compose.py": "4f82d099ec3213b442134ac1440a939eb4129f62640b0f107403d27b679373b4",
+    "docs/results/export-reliability/Capture.mjs": "242ffcbd8716ba6238990621aee97482209e846c70ffbc4171c16b204f7e1631"
+  }
+}

@@ -1,0 +1,3127 @@
+{
+  "schema": 1,
+  "description": "Focused ten-case diagnostics; complete run contracts and mandatory check outcomes copied from local result.json files. Large observed trees and engine input paths in individual checks omitted. No full-suite score.",
+  "suite": "redline-v22",
+  "requiredCases": 208,
+  "runs": {
+    "authored": {
+      "candidate": "authored-1421",
+      "contract": {
+        "adapter": {
+          "name": "authored"
+        },
+        "environment": {
+          "harness": {
+            "bench/lo_revisions.py": "a526eddb8c5022f7eb8f8feb8fbab9071b3781c87d3feae81cfc5712d1690482",
+            "bench/redline.py": "3b48b57d53d509f6aef4aba92565ee1b3266e7ebecfaf0c92ec069b65f041a2e",
+            "bench/redline_build.py": "363879d820560519e8635fab08240100799cce2ba224e1169498eb209651c053",
+            "bench/revision_ownership.py": "d927496ce7af9e8ee41b48b32d4513e35e5bfd77eeeda41970a42201dac175fb",
+            "bench/revisions.py": "b2d13e3c58885c95c4fe75269bcda6fe6420afeef51be7f43278ce7aac94e701"
+          },
+          "libreoffice": {
+            "sha256": "adf468b45764b2abce53a7d91bbf3056b33f2734c5d5f628c075753e73903c43",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "libreofficePython": {
+            "sha256": "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e",
+            "version": "3.13.7"
+          },
+          "validator": {
+            "dotnet": "10.0.301",
+            "fileFormat": "Microsoft365",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/OoxmlValidator.dll": "57a2a421133b931c260a42cd449b2489eb1598fc423d4ae80c4c78519fc20f01",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "package": "DocumentFormat.OpenXml 3.5.1"
+          }
+        },
+        "metric": {
+          "blockInsertion": "declared insertion outcomes require typed success, error, version change and undo availability",
+          "caseScore": "100 when every applicable mandatory check passes, otherwise 0",
+          "columnReview": "v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry",
+          "engines": [
+            "bench-markup",
+            "libreoffice-text"
+          ],
+          "hyperlinkTargets": "declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written",
+          "inlineTrees": "declared math and drawing subtrees retain structure, properties, textbox content and image bytes in both independently resolved views",
+          "libreofficeEligibility": "a LibreOffice comparison applies only when the authored redline passes it",
+          "paragraphRewrite": "public untracked whole-paragraph rewrites must preserve exact declared native content-control subtrees as well as independent semantic views",
+          "revisionOwnership": "account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips",
+          "revisionRegistry": "declared table operations must report the public registry count and match independent resolved table assertions",
+          "revisionText": "declared move sources and ordinary deletions must retain their appropriate text carrier",
+          "semanticPreflight": "declared identity cases must report zero changes at raw limits with and without the package supplement",
+          "spanEditing": "public span editing must preserve text and inline-marker order through both independent revision resolvers",
+          "suiteScore": "mean of category means over every required case",
+          "validity": "no OpenXmlValidator finding (id, part, description) occurs more often than in any input, and the output opens: a Package_Open finding in the output always fails, whatever the inputs did",
+          "version": 13,
+          "view": 1
+        },
+        "suiteDigest": "6ebd188f17888b09c06a2cc1b7a4679f02e68269d42f3475ae22acecfb201e23"
+      },
+      "contractDigest": "54101c35502d3f5c78410e4af44ba4452833bc07a879922e740cc36dc38538c1",
+      "summary": {
+        "byKind": {
+          "control": {
+            "measured": 5,
+            "passed": 5
+          },
+          "reproducer": {
+            "measured": 5,
+            "passed": 5
+          }
+        },
+        "categoryMeans": {
+          "consolidate": 100.0,
+          "fields": 100.0,
+          "revisions": 100.0
+        },
+        "complete": false,
+        "libreofficeComparisons": {
+          "applicable": 5,
+          "total": 20
+        },
+        "measured": 10,
+        "passRate": 0.04807692307692308,
+        "required": 208,
+        "score": null
+      },
+      "originalResultSha256": "1e443a9511af2d19b70cdf8a0dbf9f7c5cc87563dc6cc9e82917433139875d52",
+      "cases": [
+        {
+          "id": "redline-tab-equation",
+          "kind": "reproducer",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "19d888a6f595673b3aee506044714b7e77e69e7dced89f911d4fd21324a609d4",
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "III.",
+                  " Survey ledger.",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "rejected",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>n</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>k</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-tab-equation-consolidate",
+          "kind": "reproducer",
+          "operation": "consolidate",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "49a4ec2e212322016cfb310f7db9abb36457c89837d0bc2ab412e1bcb320b001",
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "markup-reviewer-Bench",
+              "passed": true
+            },
+            {
+              "name": "markup-reviewer-Other",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "III.",
+                  " Survey ",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "rejected",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>n</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>k</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-tab-equation-control",
+          "kind": "control",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "ba993274d7507dd9b0bcf809214b2cf110b9c6ba439861f52987843384f8140e",
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "III.",
+                  " Survey ledger.",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "rejected",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>n</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>k</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-tab-equation-consolidate-control",
+          "kind": "control",
+          "operation": "consolidate",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "2a0f133037c5a30bb9830d30e9b6a28758047455ed2946447f3148d5f4ade7ff",
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "markup-reviewer-Bench",
+              "passed": true
+            },
+            {
+              "name": "markup-reviewer-Other",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "III.",
+                  " Survey ",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "rejected",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>n</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>k</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-field-source-text",
+          "kind": "reproducer",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "737355f49b940349bf3ab109c5072c4a3c17bd2e0dde40e04082920d9cf07ec3",
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "rejected",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>n</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>k</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-field-source-text-control",
+          "kind": "control",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "09f4f661611bd0995915acef717dba88b7f56390404b6e1126df3c1e069627f5",
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "rejected",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>n</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>k</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-captured-field-source",
+          "kind": "reproducer",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "c17c270cc6cad1bbeb87d046b0642bd47700f3a00026bbd0d50674f2dbe1a0b9",
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 drops the tab from the authored unfinished instruction-only field on reject"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-captured-field-source-control",
+          "kind": "control",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "a9de3eb5835f83fd04941c7283ed68bafc8293e25233054dcbf44b5c5ea8b6ca",
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-shared-drawing-source",
+          "kind": "reproducer",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "b644bbc6deb7690fd32f48fc691196632e3d733f7a671bf0584f8339408f887c",
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole drawing-carrier replacement"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole drawing-carrier replacement"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "rejected",
+              "declaration": {
+                "images": {
+                  "rFill": "9f9267444ce794573dcbe8854fc61ef91942663ac7694f31fb40bdcf0acb08b9"
+                },
+                "name": "drawing",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:drawing xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:ns2=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:ns3=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" xmlns:ns4=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><ns1:inline><ns1:extent cx=\"1828800\" cy=\"457200\" /><ns1:docPr id=\"1\" name=\"Survey box\" /><ns2:graphic><ns2:graphicData uri=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><ns3:wsp><ns3:cNvSpPr txBox=\"1\" /><ns3:spPr><ns2:xfrm><ns2:off x=\"0\" y=\"0\" /><ns2:ext cx=\"1828800\" cy=\"457200\" /></ns2:xfrm><ns2:prstGeom prst=\"rect\"><ns2:avLst /></ns2:prstGeom><ns2:blipFill><ns2:blip ns4:embed=\"rFill\" /><ns2:stretch><ns2:fillRect /></ns2:stretch></ns2:blipFill></ns3:spPr><ns3:txbx><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Survey box</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns3:txbx><ns3:bodyPr /></ns3:wsp></ns2:graphicData></ns2:graphic></ns1:inline></ns0:drawing>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {
+                  "rFill": "9f9267444ce794573dcbe8854fc61ef91942663ac7694f31fb40bdcf0acb08b9"
+                },
+                "name": "drawing",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:drawing xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:ns2=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:ns3=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><ns1:inline><ns1:extent cx=\"1828800\" cy=\"457200\" /><ns1:docPr id=\"1\" name=\"Survey box\" /><ns2:graphic><ns2:graphicData uri=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><ns3:wsp><ns3:cNvSpPr txBox=\"1\" /><ns3:spPr><ns2:xfrm><ns2:off x=\"0\" y=\"0\" /><ns2:ext cx=\"1828800\" cy=\"457200\" /></ns2:xfrm><ns2:prstGeom prst=\"rect\"><ns2:avLst /></ns2:prstGeom><ns2:solidFill><ns2:srgbClr val=\"226688\" /></ns2:solidFill></ns3:spPr><ns3:txbx><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Survey box</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns3:txbx><ns3:bodyPr /></ns3:wsp></ns2:graphicData></ns2:graphic></ns1:inline></ns0:drawing>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-shared-drawing-source-control",
+          "kind": "control",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "88e35f37960145ee05c574e0b7e405f93208079818967987526a8401fab8ffe3",
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "rejected",
+              "declaration": {
+                "images": {
+                  "rFill": "9f9267444ce794573dcbe8854fc61ef91942663ac7694f31fb40bdcf0acb08b9"
+                },
+                "name": "drawing",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:drawing xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:ns2=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:ns3=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" xmlns:ns4=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><ns1:inline><ns1:extent cx=\"1828800\" cy=\"457200\" /><ns1:docPr id=\"1\" name=\"Survey box\" /><ns2:graphic><ns2:graphicData uri=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><ns3:wsp><ns3:cNvSpPr txBox=\"1\" /><ns3:spPr><ns2:xfrm><ns2:off x=\"0\" y=\"0\" /><ns2:ext cx=\"1828800\" cy=\"457200\" /></ns2:xfrm><ns2:prstGeom prst=\"rect\"><ns2:avLst /></ns2:prstGeom><ns2:blipFill><ns2:blip ns4:embed=\"rFill\" /><ns2:stretch><ns2:fillRect /></ns2:stretch></ns2:blipFill></ns3:spPr><ns3:txbx><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Survey box</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns3:txbx><ns3:bodyPr /></ns3:wsp></ns2:graphicData></ns2:graphic></ns1:inline></ns0:drawing>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {
+                  "rFill": "9f9267444ce794573dcbe8854fc61ef91942663ac7694f31fb40bdcf0acb08b9"
+                },
+                "name": "drawing",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:drawing xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:ns2=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:ns3=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" xmlns:ns4=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><ns1:inline><ns1:extent cx=\"1828800\" cy=\"457200\" /><ns1:docPr id=\"1\" name=\"Survey box\" /><ns2:graphic><ns2:graphicData uri=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><ns3:wsp><ns3:cNvSpPr txBox=\"1\" /><ns3:spPr><ns2:xfrm><ns2:off x=\"0\" y=\"0\" /><ns2:ext cx=\"1828800\" cy=\"457200\" /></ns2:xfrm><ns2:prstGeom prst=\"rect\"><ns2:avLst /></ns2:prstGeom><ns2:blipFill><ns2:blip ns4:embed=\"rFill\" /><ns2:stretch><ns2:fillRect /></ns2:stretch></ns2:blipFill></ns3:spPr><ns3:txbx><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Survey box</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns3:txbx><ns3:bodyPr /></ns3:wsp></ns2:graphicData></ns2:graphic></ns1:inline></ns0:drawing>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "baseline": {
+      "candidate": "ca20684dda3504eeacf95d85025057a99da60246",
+      "contract": {
+        "adapter": {
+          "build": {
+            "adapterSources": {
+              "adapters/docxodus-redline/DocxBenchRedline.csproj": "83843da954515292212f473d501fb539b0627513b972e3a95f7a4ab06674902a",
+              "adapters/docxodus-redline/Program.cs": "3fa3c5e1aea63c72f53365d6ea493b5350b737518fca7d983c0c31b6b21f4b01"
+            },
+            "command": [
+              "/home/jman/.dotnet/dotnet",
+              "build",
+              "/home/jman/Code/Docxodus/.local-closeout/bench-1420/runs/1421-baseline-adapter/src/DocxBenchRedline.csproj",
+              "-c",
+              "Release",
+              "-o",
+              "/home/jman/Code/Docxodus/.local-closeout/bench-1420/runs/1421-baseline-adapter/bin",
+              "-nologo",
+              "-v",
+              "q",
+              "-p:DocxodusRoot=/home/jman/Code/Docxodus/.local-closeout/issue-1421-baseline"
+            ],
+            "commit": "ca20684dda3504eeacf95d85025057a99da60246",
+            "dotnet": "10.0.301",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/DocxBenchRedline.dll": "6423d14531df047138214f0cc6915e3081100c0c2277a737379b99c1c2d22827",
+              "bin/Docxodus.dll": "dcceb482c8f5402303aed7d9ddc26aa944588db11896dcfdacd09cba9e9f065a",
+              "bin/SkiaSharp.dll": "2c9bbbe1a3d0e9407894c319821b5cdcade1f302466a950a2e5d6024aee32422",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "recipeSha256": "363879d820560519e8635fab08240100799cce2ba224e1169498eb209651c053",
+            "schema": 1,
+            "source": "/home/jman/Code/Docxodus/.local-closeout/issue-1421-baseline",
+            "tree": "1d695989dd921b1c6937c0dce34b928f60de7e2e"
+          },
+          "name": "docxodus"
+        },
+        "environment": {
+          "harness": {
+            "bench/lo_revisions.py": "a526eddb8c5022f7eb8f8feb8fbab9071b3781c87d3feae81cfc5712d1690482",
+            "bench/redline.py": "3b48b57d53d509f6aef4aba92565ee1b3266e7ebecfaf0c92ec069b65f041a2e",
+            "bench/redline_build.py": "363879d820560519e8635fab08240100799cce2ba224e1169498eb209651c053",
+            "bench/revision_ownership.py": "d927496ce7af9e8ee41b48b32d4513e35e5bfd77eeeda41970a42201dac175fb",
+            "bench/revisions.py": "b2d13e3c58885c95c4fe75269bcda6fe6420afeef51be7f43278ce7aac94e701"
+          },
+          "libreoffice": {
+            "sha256": "adf468b45764b2abce53a7d91bbf3056b33f2734c5d5f628c075753e73903c43",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "libreofficePython": {
+            "sha256": "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e",
+            "version": "3.13.7"
+          },
+          "validator": {
+            "dotnet": "10.0.301",
+            "fileFormat": "Microsoft365",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/OoxmlValidator.dll": "57a2a421133b931c260a42cd449b2489eb1598fc423d4ae80c4c78519fc20f01",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "package": "DocumentFormat.OpenXml 3.5.1"
+          }
+        },
+        "metric": {
+          "blockInsertion": "declared insertion outcomes require typed success, error, version change and undo availability",
+          "caseScore": "100 when every applicable mandatory check passes, otherwise 0",
+          "columnReview": "v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry",
+          "engines": [
+            "bench-markup",
+            "libreoffice-text"
+          ],
+          "hyperlinkTargets": "declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written",
+          "inlineTrees": "declared math and drawing subtrees retain structure, properties, textbox content and image bytes in both independently resolved views",
+          "libreofficeEligibility": "a LibreOffice comparison applies only when the authored redline passes it",
+          "paragraphRewrite": "public untracked whole-paragraph rewrites must preserve exact declared native content-control subtrees as well as independent semantic views",
+          "revisionOwnership": "account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips",
+          "revisionRegistry": "declared table operations must report the public registry count and match independent resolved table assertions",
+          "revisionText": "declared move sources and ordinary deletions must retain their appropriate text carrier",
+          "semanticPreflight": "declared identity cases must report zero changes at raw limits with and without the package supplement",
+          "spanEditing": "public span editing must preserve text and inline-marker order through both independent revision resolvers",
+          "suiteScore": "mean of category means over every required case",
+          "validity": "no OpenXmlValidator finding (id, part, description) occurs more often than in any input, and the output opens: a Package_Open finding in the output always fails, whatever the inputs did",
+          "version": 13,
+          "view": 1
+        },
+        "suiteDigest": "6ebd188f17888b09c06a2cc1b7a4679f02e68269d42f3475ae22acecfb201e23"
+      },
+      "contractDigest": "d20c4b938b1c7dd31d5d3d607a26f65dbf7fe89535e69556cd1dc69bdeaec9af",
+      "summary": {
+        "byKind": {
+          "control": {
+            "measured": 5,
+            "passed": 5
+          },
+          "reproducer": {
+            "measured": 5,
+            "passed": 0
+          }
+        },
+        "categoryMeans": {
+          "consolidate": 50.0,
+          "fields": 50.0,
+          "revisions": 50.0
+        },
+        "complete": false,
+        "libreofficeComparisons": {
+          "applicable": 5,
+          "total": 20
+        },
+        "measured": 10,
+        "passRate": 0.02403846153846154,
+        "required": 208,
+        "score": null
+      },
+      "originalResultSha256": "ccda3282bb68edfd8b13f34588c37d13806188dddf7b06728e9aef6d4c0c708c",
+      "cases": [
+        {
+          "id": "redline-tab-equation",
+          "kind": "reproducer",
+          "operation": "compare",
+          "status": "measured",
+          "score": 0.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+ca20684dda3504eeacf95d85025057a99da60246",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "2a7303e1e5c3841eb77949e1e2196bbd273bd65130488ce53f70ad5545b8d424",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": false
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "III.",
+                  " Survey ledger.",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": false,
+              "scope": "rejected",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>n</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>k</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-tab-equation-consolidate",
+          "kind": "reproducer",
+          "operation": "consolidate",
+          "status": "measured",
+          "score": 0.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+ca20684dda3504eeacf95d85025057a99da60246",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "48b8413ec2479a120bcad6704b493f37566e9bf6383560c5a6a83991dba3a549",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": false
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "markup-reviewer-Bench",
+              "passed": false
+            },
+            {
+              "name": "markup-reviewer-Other",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "III.",
+                  " Survey ",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "rejected",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>n</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": false,
+              "scope": "accepted",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>k</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-tab-equation-control",
+          "kind": "control",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+ca20684dda3504eeacf95d85025057a99da60246",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "94f32d362e07b4e5606a5d1e516ba24264ca6ed1d1810028cc5b117295560c47",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "III.",
+                  " Survey ledger.",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "rejected",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>n</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>k</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-tab-equation-consolidate-control",
+          "kind": "control",
+          "operation": "consolidate",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+ca20684dda3504eeacf95d85025057a99da60246",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "8cd78b38856a4a2efb5edc988006dbef59958afdc36b519d945b77d9ebbc6250",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "markup-reviewer-Bench",
+              "passed": true
+            },
+            {
+              "name": "markup-reviewer-Other",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "III.",
+                  " Survey ",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "rejected",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>n</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>k</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-field-source-text",
+          "kind": "reproducer",
+          "operation": "compare",
+          "status": "measured",
+          "score": 0.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+ca20684dda3504eeacf95d85025057a99da60246",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "40ace8a59a566b699eb2c659df4c7ee534ddb24190ce862093007c6992e33fee",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": false
+            },
+            {
+              "name": "markup-rejected",
+              "passed": false
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": false,
+              "scope": "rejected",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>n</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": false,
+              "scope": "accepted",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>k</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-field-source-text-control",
+          "kind": "control",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+ca20684dda3504eeacf95d85025057a99da60246",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "1bdf908089a09092ab59ca8e65ec59f15ed951196e66447510e9c1d935cd9c31",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "rejected",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>n</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>k</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-captured-field-source",
+          "kind": "reproducer",
+          "operation": "compare",
+          "status": "measured",
+          "score": 0.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+ca20684dda3504eeacf95d85025057a99da60246",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "8304d5667a44d9d45f7736c6705208514e5395f06849cdbc3acfd6bdd2b510c8",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": false
+            },
+            {
+              "name": "markup-rejected",
+              "passed": false
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": false
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 drops the tab from the authored unfinished instruction-only field on reject"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-captured-field-source-control",
+          "kind": "control",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+ca20684dda3504eeacf95d85025057a99da60246",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "41597ae47b1d89ee592b429741333164457feb87e8f0ae91855b8eeb91fd9590",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-shared-drawing-source",
+          "kind": "reproducer",
+          "operation": "compare",
+          "status": "measured",
+          "score": 0.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+ca20684dda3504eeacf95d85025057a99da60246",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "c1ff7eaf2a7c4a6b42382955950fb060c7ca4dd0dbec8f70984fdd11b39ae7dc",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": false
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole drawing-carrier replacement"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole drawing-carrier replacement"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": false,
+              "scope": "rejected",
+              "declaration": {
+                "images": {
+                  "rFill": "9f9267444ce794573dcbe8854fc61ef91942663ac7694f31fb40bdcf0acb08b9"
+                },
+                "name": "drawing",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:drawing xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:ns2=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:ns3=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" xmlns:ns4=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><ns1:inline><ns1:extent cx=\"1828800\" cy=\"457200\" /><ns1:docPr id=\"1\" name=\"Survey box\" /><ns2:graphic><ns2:graphicData uri=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><ns3:wsp><ns3:cNvSpPr txBox=\"1\" /><ns3:spPr><ns2:xfrm><ns2:off x=\"0\" y=\"0\" /><ns2:ext cx=\"1828800\" cy=\"457200\" /></ns2:xfrm><ns2:prstGeom prst=\"rect\"><ns2:avLst /></ns2:prstGeom><ns2:blipFill><ns2:blip ns4:embed=\"rFill\" /><ns2:stretch><ns2:fillRect /></ns2:stretch></ns2:blipFill></ns3:spPr><ns3:txbx><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Survey box</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns3:txbx><ns3:bodyPr /></ns3:wsp></ns2:graphicData></ns2:graphic></ns1:inline></ns0:drawing>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {
+                  "rFill": "9f9267444ce794573dcbe8854fc61ef91942663ac7694f31fb40bdcf0acb08b9"
+                },
+                "name": "drawing",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:drawing xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:ns2=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:ns3=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><ns1:inline><ns1:extent cx=\"1828800\" cy=\"457200\" /><ns1:docPr id=\"1\" name=\"Survey box\" /><ns2:graphic><ns2:graphicData uri=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><ns3:wsp><ns3:cNvSpPr txBox=\"1\" /><ns3:spPr><ns2:xfrm><ns2:off x=\"0\" y=\"0\" /><ns2:ext cx=\"1828800\" cy=\"457200\" /></ns2:xfrm><ns2:prstGeom prst=\"rect\"><ns2:avLst /></ns2:prstGeom><ns2:solidFill><ns2:srgbClr val=\"226688\" /></ns2:solidFill></ns3:spPr><ns3:txbx><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Survey box</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns3:txbx><ns3:bodyPr /></ns3:wsp></ns2:graphicData></ns2:graphic></ns1:inline></ns0:drawing>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-shared-drawing-source-control",
+          "kind": "control",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+ca20684dda3504eeacf95d85025057a99da60246",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "f6b2c069e1c03b009456c6ba8ce4096695289f6793970451ced3b3544d2ce728",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "rejected",
+              "declaration": {
+                "images": {
+                  "rFill": "9f9267444ce794573dcbe8854fc61ef91942663ac7694f31fb40bdcf0acb08b9"
+                },
+                "name": "drawing",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:drawing xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:ns2=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:ns3=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" xmlns:ns4=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><ns1:inline><ns1:extent cx=\"1828800\" cy=\"457200\" /><ns1:docPr id=\"1\" name=\"Survey box\" /><ns2:graphic><ns2:graphicData uri=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><ns3:wsp><ns3:cNvSpPr txBox=\"1\" /><ns3:spPr><ns2:xfrm><ns2:off x=\"0\" y=\"0\" /><ns2:ext cx=\"1828800\" cy=\"457200\" /></ns2:xfrm><ns2:prstGeom prst=\"rect\"><ns2:avLst /></ns2:prstGeom><ns2:blipFill><ns2:blip ns4:embed=\"rFill\" /><ns2:stretch><ns2:fillRect /></ns2:stretch></ns2:blipFill></ns3:spPr><ns3:txbx><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Survey box</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns3:txbx><ns3:bodyPr /></ns3:wsp></ns2:graphicData></ns2:graphic></ns1:inline></ns0:drawing>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {
+                  "rFill": "9f9267444ce794573dcbe8854fc61ef91942663ac7694f31fb40bdcf0acb08b9"
+                },
+                "name": "drawing",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:drawing xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:ns2=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:ns3=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" xmlns:ns4=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><ns1:inline><ns1:extent cx=\"1828800\" cy=\"457200\" /><ns1:docPr id=\"1\" name=\"Survey box\" /><ns2:graphic><ns2:graphicData uri=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><ns3:wsp><ns3:cNvSpPr txBox=\"1\" /><ns3:spPr><ns2:xfrm><ns2:off x=\"0\" y=\"0\" /><ns2:ext cx=\"1828800\" cy=\"457200\" /></ns2:xfrm><ns2:prstGeom prst=\"rect\"><ns2:avLst /></ns2:prstGeom><ns2:blipFill><ns2:blip ns4:embed=\"rFill\" /><ns2:stretch><ns2:fillRect /></ns2:stretch></ns2:blipFill></ns3:spPr><ns3:txbx><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Survey box</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns3:txbx><ns3:bodyPr /></ns3:wsp></ns2:graphicData></ns2:graphic></ns1:inline></ns0:drawing>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "candidate": {
+      "candidate": "230030f9ace7c34f57f38aa5c29b612971c639a8",
+      "contract": {
+        "adapter": {
+          "build": {
+            "adapterSources": {
+              "adapters/docxodus-redline/DocxBenchRedline.csproj": "83843da954515292212f473d501fb539b0627513b972e3a95f7a4ab06674902a",
+              "adapters/docxodus-redline/Program.cs": "3fa3c5e1aea63c72f53365d6ea493b5350b737518fca7d983c0c31b6b21f4b01"
+            },
+            "command": [
+              "/home/jman/.dotnet/dotnet",
+              "build",
+              "/home/jman/Code/Docxodus/.local-closeout/bench-1420/runs/1421-candidate-adapter/src/DocxBenchRedline.csproj",
+              "-c",
+              "Release",
+              "-o",
+              "/home/jman/Code/Docxodus/.local-closeout/bench-1420/runs/1421-candidate-adapter/bin",
+              "-nologo",
+              "-v",
+              "q",
+              "-p:DocxodusRoot=/home/jman/Code/Docxodus/.local-closeout/issue-1421"
+            ],
+            "commit": "230030f9ace7c34f57f38aa5c29b612971c639a8",
+            "dotnet": "10.0.301",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/DocxBenchRedline.dll": "884424bd9046d57de8d7fb807e98cb4c0dcefd43c1f3e40539c91d485ed9245a",
+              "bin/Docxodus.dll": "d91e0a1e01de75491d132f2c530ea8147d35c967ab420e819b1db1dcb0be9347",
+              "bin/SkiaSharp.dll": "2c9bbbe1a3d0e9407894c319821b5cdcade1f302466a950a2e5d6024aee32422",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "recipeSha256": "363879d820560519e8635fab08240100799cce2ba224e1169498eb209651c053",
+            "schema": 1,
+            "source": "/home/jman/Code/Docxodus/.local-closeout/issue-1421",
+            "tree": "167c67e9da3eaf7fd6642a08c9ce5285fc1bc30e"
+          },
+          "name": "docxodus"
+        },
+        "environment": {
+          "harness": {
+            "bench/lo_revisions.py": "a526eddb8c5022f7eb8f8feb8fbab9071b3781c87d3feae81cfc5712d1690482",
+            "bench/redline.py": "3b48b57d53d509f6aef4aba92565ee1b3266e7ebecfaf0c92ec069b65f041a2e",
+            "bench/redline_build.py": "363879d820560519e8635fab08240100799cce2ba224e1169498eb209651c053",
+            "bench/revision_ownership.py": "d927496ce7af9e8ee41b48b32d4513e35e5bfd77eeeda41970a42201dac175fb",
+            "bench/revisions.py": "b2d13e3c58885c95c4fe75269bcda6fe6420afeef51be7f43278ce7aac94e701"
+          },
+          "libreoffice": {
+            "sha256": "adf468b45764b2abce53a7d91bbf3056b33f2734c5d5f628c075753e73903c43",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "libreofficePython": {
+            "sha256": "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e",
+            "version": "3.13.7"
+          },
+          "validator": {
+            "dotnet": "10.0.301",
+            "fileFormat": "Microsoft365",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/OoxmlValidator.dll": "57a2a421133b931c260a42cd449b2489eb1598fc423d4ae80c4c78519fc20f01",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "package": "DocumentFormat.OpenXml 3.5.1"
+          }
+        },
+        "metric": {
+          "blockInsertion": "declared insertion outcomes require typed success, error, version change and undo availability",
+          "caseScore": "100 when every applicable mandatory check passes, otherwise 0",
+          "columnReview": "v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry",
+          "engines": [
+            "bench-markup",
+            "libreoffice-text"
+          ],
+          "hyperlinkTargets": "declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written",
+          "inlineTrees": "declared math and drawing subtrees retain structure, properties, textbox content and image bytes in both independently resolved views",
+          "libreofficeEligibility": "a LibreOffice comparison applies only when the authored redline passes it",
+          "paragraphRewrite": "public untracked whole-paragraph rewrites must preserve exact declared native content-control subtrees as well as independent semantic views",
+          "revisionOwnership": "account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips",
+          "revisionRegistry": "declared table operations must report the public registry count and match independent resolved table assertions",
+          "revisionText": "declared move sources and ordinary deletions must retain their appropriate text carrier",
+          "semanticPreflight": "declared identity cases must report zero changes at raw limits with and without the package supplement",
+          "spanEditing": "public span editing must preserve text and inline-marker order through both independent revision resolvers",
+          "suiteScore": "mean of category means over every required case",
+          "validity": "no OpenXmlValidator finding (id, part, description) occurs more often than in any input, and the output opens: a Package_Open finding in the output always fails, whatever the inputs did",
+          "version": 13,
+          "view": 1
+        },
+        "suiteDigest": "6ebd188f17888b09c06a2cc1b7a4679f02e68269d42f3475ae22acecfb201e23"
+      },
+      "contractDigest": "e5e2150067d9d2942994340e691969270e18fa2af1b86d38eb76a77915c6fd8e",
+      "summary": {
+        "byKind": {
+          "control": {
+            "measured": 5,
+            "passed": 5
+          },
+          "reproducer": {
+            "measured": 5,
+            "passed": 5
+          }
+        },
+        "categoryMeans": {
+          "consolidate": 100.0,
+          "fields": 100.0,
+          "revisions": 100.0
+        },
+        "complete": false,
+        "libreofficeComparisons": {
+          "applicable": 5,
+          "total": 20
+        },
+        "measured": 10,
+        "passRate": 0.04807692307692308,
+        "required": 208,
+        "score": null
+      },
+      "originalResultSha256": "3e7cf3ea4fe90dba5db1ee6b39f8025f508be79bcefe4f2cce7fe3e4b026096d",
+      "cases": [
+        {
+          "id": "redline-tab-equation",
+          "kind": "reproducer",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+230030f9ace7c34f57f38aa5c29b612971c639a8",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "c8109253730c2273bbab9b4551012dfe9fcee9d70509daf0eee5dc898e2cf884",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "III.",
+                  " Survey ledger.",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "rejected",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>n</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>k</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-tab-equation-consolidate",
+          "kind": "reproducer",
+          "operation": "consolidate",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+230030f9ace7c34f57f38aa5c29b612971c639a8",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "b68bcc8f01d45d8ae2725a82bbd2562a887bcc5739a04d133d35afe9de2ff1c7",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "markup-reviewer-Bench",
+              "passed": true
+            },
+            {
+              "name": "markup-reviewer-Other",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "III.",
+                  " Survey ",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "rejected",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>n</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>k</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-tab-equation-control",
+          "kind": "control",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+230030f9ace7c34f57f38aa5c29b612971c639a8",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "94f32d362e07b4e5606a5d1e516ba24264ca6ed1d1810028cc5b117295560c47",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "III.",
+                  " Survey ledger.",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "rejected",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>n</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>k</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-tab-equation-consolidate-control",
+          "kind": "control",
+          "operation": "consolidate",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+230030f9ace7c34f57f38aa5c29b612971c639a8",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "8cd78b38856a4a2efb5edc988006dbef59958afdc36b519d945b77d9ebbc6250",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "markup-reviewer-Bench",
+              "passed": true
+            },
+            {
+              "name": "markup-reviewer-Other",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "III.",
+                  " Survey ",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "rejected",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>n</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>k</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-field-source-text",
+          "kind": "reproducer",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+230030f9ace7c34f57f38aa5c29b612971c639a8",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "be9b6744b7309d0241c1783469f2c2a596312063bd2ea7dd7a30b595713c1635",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "rejected",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>n</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>k</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-field-source-text-control",
+          "kind": "control",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+230030f9ace7c34f57f38aa5c29b612971c639a8",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "1bdf908089a09092ab59ca8e65ec59f15ed951196e66447510e9c1d935cd9c31",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "rejected",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>n</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {},
+                "name": "oMath",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:oMath xmlns:ns0=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><ns0:nary><ns0:naryPr><ns0:chr ns0:val=\"∑\" /><ns0:limLoc ns0:val=\"undOvr\" /></ns0:naryPr><ns0:sub><ns0:r><ns0:t>i=1</ns0:t></ns0:r></ns0:sub><ns0:sup><ns0:r><ns0:t>k</ns0:t></ns0:r></ns0:sup><ns0:e><ns0:r><ns0:t>x</ns0:t></ns0:r></ns0:e></ns0:nary></ns0:oMath>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-captured-field-source",
+          "kind": "reproducer",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+230030f9ace7c34f57f38aa5c29b612971c639a8",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "1bc8360b6780f1f46e02cc82ff5ab83940e57fffe28784fc19cf0d87430ae50d",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 drops the tab from the authored unfinished instruction-only field on reject"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-captured-field-source-control",
+          "kind": "control",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+230030f9ace7c34f57f38aa5c29b612971c639a8",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "41597ae47b1d89ee592b429741333164457feb87e8f0ae91855b8eeb91fd9590",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-shared-drawing-source",
+          "kind": "reproducer",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+230030f9ace7c34f57f38aa5c29b612971c639a8",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "a84a6bfff22ef2b8098521a566da1693763f2cc0f63d5539cf0771f8ee51902c",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole drawing-carrier replacement"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole drawing-carrier replacement"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "rejected",
+              "declaration": {
+                "images": {
+                  "rFill": "9f9267444ce794573dcbe8854fc61ef91942663ac7694f31fb40bdcf0acb08b9"
+                },
+                "name": "drawing",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:drawing xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:ns2=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:ns3=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" xmlns:ns4=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><ns1:inline><ns1:extent cx=\"1828800\" cy=\"457200\" /><ns1:docPr id=\"1\" name=\"Survey box\" /><ns2:graphic><ns2:graphicData uri=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><ns3:wsp><ns3:cNvSpPr txBox=\"1\" /><ns3:spPr><ns2:xfrm><ns2:off x=\"0\" y=\"0\" /><ns2:ext cx=\"1828800\" cy=\"457200\" /></ns2:xfrm><ns2:prstGeom prst=\"rect\"><ns2:avLst /></ns2:prstGeom><ns2:blipFill><ns2:blip ns4:embed=\"rFill\" /><ns2:stretch><ns2:fillRect /></ns2:stretch></ns2:blipFill></ns3:spPr><ns3:txbx><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Survey box</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns3:txbx><ns3:bodyPr /></ns3:wsp></ns2:graphicData></ns2:graphic></ns1:inline></ns0:drawing>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {
+                  "rFill": "9f9267444ce794573dcbe8854fc61ef91942663ac7694f31fb40bdcf0acb08b9"
+                },
+                "name": "drawing",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:drawing xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:ns2=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:ns3=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><ns1:inline><ns1:extent cx=\"1828800\" cy=\"457200\" /><ns1:docPr id=\"1\" name=\"Survey box\" /><ns2:graphic><ns2:graphicData uri=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><ns3:wsp><ns3:cNvSpPr txBox=\"1\" /><ns3:spPr><ns2:xfrm><ns2:off x=\"0\" y=\"0\" /><ns2:ext cx=\"1828800\" cy=\"457200\" /></ns2:xfrm><ns2:prstGeom prst=\"rect\"><ns2:avLst /></ns2:prstGeom><ns2:solidFill><ns2:srgbClr val=\"226688\" /></ns2:solidFill></ns3:spPr><ns3:txbx><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Survey box</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns3:txbx><ns3:bodyPr /></ns3:wsp></ns2:graphicData></ns2:graphic></ns1:inline></ns0:drawing>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-shared-drawing-source-control",
+          "kind": "control",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+230030f9ace7c34f57f38aa5c29b612971c639a8",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "f6b2c069e1c03b009456c6ba8ce4096695289f6793970451ced3b3544d2ce728",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "scope": "redline",
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "rejected",
+              "declaration": {
+                "images": {
+                  "rFill": "9f9267444ce794573dcbe8854fc61ef91942663ac7694f31fb40bdcf0acb08b9"
+                },
+                "name": "drawing",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:drawing xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:ns2=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:ns3=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" xmlns:ns4=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><ns1:inline><ns1:extent cx=\"1828800\" cy=\"457200\" /><ns1:docPr id=\"1\" name=\"Survey box\" /><ns2:graphic><ns2:graphicData uri=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><ns3:wsp><ns3:cNvSpPr txBox=\"1\" /><ns3:spPr><ns2:xfrm><ns2:off x=\"0\" y=\"0\" /><ns2:ext cx=\"1828800\" cy=\"457200\" /></ns2:xfrm><ns2:prstGeom prst=\"rect\"><ns2:avLst /></ns2:prstGeom><ns2:blipFill><ns2:blip ns4:embed=\"rFill\" /><ns2:stretch><ns2:fillRect /></ns2:stretch></ns2:blipFill></ns3:spPr><ns3:txbx><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Survey box</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns3:txbx><ns3:bodyPr /></ns3:wsp></ns2:graphicData></ns2:graphic></ns1:inline></ns0:drawing>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "scope": "accepted",
+              "declaration": {
+                "images": {
+                  "rFill": "9f9267444ce794573dcbe8854fc61ef91942663ac7694f31fb40bdcf0acb08b9"
+                },
+                "name": "drawing",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:drawing xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:ns2=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:ns3=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" xmlns:ns4=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><ns1:inline><ns1:extent cx=\"1828800\" cy=\"457200\" /><ns1:docPr id=\"1\" name=\"Survey box\" /><ns2:graphic><ns2:graphicData uri=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\"><ns3:wsp><ns3:cNvSpPr txBox=\"1\" /><ns3:spPr><ns2:xfrm><ns2:off x=\"0\" y=\"0\" /><ns2:ext cx=\"1828800\" cy=\"457200\" /></ns2:xfrm><ns2:prstGeom prst=\"rect\"><ns2:avLst /></ns2:prstGeom><ns2:blipFill><ns2:blip ns4:embed=\"rFill\" /><ns2:stretch><ns2:fillRect /></ns2:stretch></ns2:blipFill></ns3:spPr><ns3:txbx><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Survey box</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns3:txbx><ns3:bodyPr /></ns3:wsp></ns2:graphicData></ns2:graphic></ns1:inline></ns0:drawing>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

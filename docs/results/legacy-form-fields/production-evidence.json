@@ -1,0 +1,685 @@
+{
+  "schema": 1,
+  "benchCommit": "b24e256803096e699a86291786fb2e8f0992e1e8",
+  "scope": "Production public WASM export and pinned Chromium PDF. Raw evidence is retained in the linked Actions artifacts.",
+  "limitations": [
+    "Only checkbox-states requested delivered HTML; control HTML identity is local diagnostic evidence, not a production claim.",
+    "Control page PNGs are byte-identical. PDF bytes and PageMap digests differ; PageMap payloads were not retained for comparison.",
+    "Word was not captured. LibreOffice uses uniform checkbox sizes and a different cached dropdown tab position; mandatory checks do not assert full visual parity."
+  ],
+  "runs": {
+    "baseline": {
+      "runUrl": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/41171278328",
+      "artifactId": 13031073916,
+      "artifactZipSha256": "3269a283408677577b2e919dde2f4ad65e2c83b6a5aecc701d1d96c5437e9fa1",
+      "coreCommit": "1240cc5dc0586293cb937c59c973550027c31fda",
+      "resultSha256": "0d5d68093cd8f4ab28d2e666911cf799d7b04ff29d5e1060622203842250d800",
+      "selectedManifestSha256": "cc6128900bf95caab2a7912bc5b290c7061e893cee768b476b3e4c9c80a9a623",
+      "contractDigest": "31e223c589579c86907345d7af4dd5194356221ed1a8a3b05b18012b9e79621b",
+      "htmlSummary": {
+        "complete": true,
+        "measured": 1,
+        "passed": 0,
+        "required": 1
+      },
+      "cases": {
+        "fields-legacy-checkbox-states": {
+          "score": 76.18607872561468,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            }
+          ],
+          "htmlChecks": [
+            {
+              "name": "html-checkbox-1",
+              "marker": "ElmCheckA",
+              "checked": false,
+              "passed": false,
+              "matches": 0,
+              "paintSha256": null
+            },
+            {
+              "name": "html-checkbox-2",
+              "marker": "ElmCheckB",
+              "checked": true,
+              "passed": false,
+              "matches": 0,
+              "paintSha256": null
+            },
+            {
+              "name": "html-checkbox-3",
+              "marker": "ElmCheckC",
+              "checked": false,
+              "passed": false,
+              "matches": 0,
+              "paintSha256": null
+            },
+            {
+              "name": "html-checkbox-4",
+              "marker": "ElmCheckD",
+              "checked": true,
+              "passed": false,
+              "matches": 0,
+              "paintSha256": null
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "pageMapDigest": "8b93325320247ee5660bc88d58e11d53f72319adce279c7d5bfd1687daadb525",
+          "files": {
+            "1-candidate.png": "103d2873c4938d860adfb5d68ff8535ed8a492260435d620af5665c5795376a3",
+            "1-overlay.png": "b851ccba1b5f27569272df8187f209fe376f6d7f1e5a758f2df7f110fb478aac",
+            "1-reference.png": "9c5b51e5ea903f81e5c7357c1457d3d4b2c8cc9fa12b28b7aad9ef8992b6aea2",
+            "candidate.html": "450fc309419f25368d870d3794755084ae39c8e44f0504e8296f7a093f07fab1",
+            "candidate.pdf": "c19642a1ce71f67a6558065a5803073e9dd4848f0341411eaabd946e0cc3a630",
+            "evidence.json": "b8c77acb647693ad7d62d4bf0d8bac5202a90a7b61682e4701028d96a2321b9d",
+            "html-browser.json": "bd5060280757ff1e9b13edb48574dfa268b0757196a00f364d2e2212903636c7",
+            "html-production.json": "aa0eb0900d9dc964cc2a2c049ae649b77d0bca4b1e6a8e042d429576dcc28192",
+            "production.json": "d4a4eeadf5517833c50c984fe6ee992405fdda5f908dc5729bffec4e8f9b325b",
+            "reference.pdf": "007a3ebf0cf6e9a8a9896ab4a2ec74b936e1374fdd01d4efb4c3ed9981e8f2b7"
+          }
+        },
+        "fields-legacy-checkbox-text-control": {
+          "score": 99.86002717024472,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            }
+          ],
+          "htmlChecks": [],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "pageMapDigest": "8df86ecf500ae79b742474e9c2847f5fff96cac9f6006ece508be22e3e2119a1",
+          "files": {
+            "1-candidate.png": "16142049a40ec84a0d31f41b2ecf6f35e91d857e60bbc2551f64eeebd9d64a98",
+            "1-overlay.png": "7d53c356c6a354bf195f923be055d03d8f4ee6385f429128ffeaec2463e57c76",
+            "1-reference.png": "6b59868fce23ab5b48da709ec5fcfb0b85a66cf209845b809364a9ae752b635f",
+            "candidate.pdf": "f964b443bac1708ef5d79a50c357a8dedce76117d5c6e43b5586c3d6dc69d85a",
+            "evidence.json": "1e6b19549d588b2d3089633909afa36c0ee245805c9f53b81b90fc5a031ffa48",
+            "production.json": "c4fc9d57f820882bdfaba1e14018bade7ab74bf804cfc2bc59c4dd0ee9594441",
+            "reference.pdf": "5b59b4350f165e4bd6c5cac5d1dcf50f4498f0cd682fbd0060bba6dc63090407"
+          }
+        },
+        "fields-legacy-dropdown-metadata": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {
+                "Amber": 1,
+                "Copper": 6,
+                "bin": 6,
+                "rack": 1
+              },
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": false
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "RouteTail",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  350,
+                  71,
+                  446,
+                  87
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": false
+            }
+          ],
+          "htmlChecks": [],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "pageMapDigest": "598423fcd0003256a2aad444ea5e6e7c5a9b23c51c1dd486013d6bc051bffdd0",
+          "files": {
+            "1-candidate.png": "5e16e908189fbd176dc70d7202d2ce8f52dd6bcff41e4f9052697f3e5a5b0f9d",
+            "1-overlay.png": "141f3657cd7c9eb5a2d54ce9ab2fedccece1078ee38d5b3562e435e068a98b9c",
+            "1-reference.png": "6649e2c3552869ac4947b0eff9c796d29fa3a9a73272c6f236f6515a7f4baed8",
+            "candidate.pdf": "a7b0390c07f97c854f981605a06bb8d0a7b060e6fa6660f915bdaf1db1ce795f",
+            "evidence.json": "ad55e841c0fe0d371cffc756440cfa1bf5799d0b1f8f97a9834be45b64be4dff",
+            "production.json": "3c341f2f6afdb9a164ba632625b4b8fed1a468f7ae11a859c1c4a3a9cbf4fa7c",
+            "reference.pdf": "541ef8d1c91f755aab0958a651b678b5bb99d75174f75f5a40924f64d824dd61"
+          }
+        },
+        "fields-legacy-dropdown-cached-control": {
+          "score": 93.84810271284287,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "RouteTail",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  350,
+                  71,
+                  446,
+                  87
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "htmlChecks": [],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "pageMapDigest": "1b662f3a6386522a28ef80eddfd35c5d3780722e3496330db11a295429a2101d",
+          "files": {
+            "1-candidate.png": "be2fa7699da1bd6595168e41fe9b0a4faf3621e1230cbc809c1ccd02d0532586",
+            "1-overlay.png": "d6edda8e830d029710c20fcefae85576bbe6f24a6b09db5951a9312d0f3b9841",
+            "1-reference.png": "6649e2c3552869ac4947b0eff9c796d29fa3a9a73272c6f236f6515a7f4baed8",
+            "candidate.pdf": "db066c4ad28c07038471b8d36bbdc118fe2439e739487fa05cc66c23c8c0ae4e",
+            "evidence.json": "254c620b7d095f984a99d7d7632d74fe9f0295c8d88bd983404fbef12eca6344",
+            "production.json": "106fa31cc7f7e4b2b3f5c33dd33d20d711a1753a1e754e784914b75e76467d21",
+            "reference.pdf": "8dbac6b2d34f96e536fca3bd587258cc0333f4a4295fac64be313c4e01326aa9"
+          }
+        }
+      }
+    },
+    "candidate": {
+      "runUrl": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/41171275372",
+      "artifactId": 13030879373,
+      "artifactZipSha256": "baf45e199f044d65fdf661dca39fbb1072e83d14afe6f8b5f74a313baa7b995f",
+      "coreCommit": "1f7dc8ddc67a9cbe36c1e44b36a6cb04d1c0f0ab",
+      "resultSha256": "3bc1502e059d7203d6b067023724edb36ffa55246acaa73dcb0cf7a4f34a70b2",
+      "selectedManifestSha256": "cc6128900bf95caab2a7912bc5b290c7061e893cee768b476b3e4c9c80a9a623",
+      "contractDigest": "116ba2fd56aebafbcddf938ff8d1ebd832fc75a981f5fb690bdd5c7715cf2201",
+      "htmlSummary": {
+        "complete": true,
+        "measured": 1,
+        "passed": 1,
+        "required": 1
+      },
+      "cases": {
+        "fields-legacy-checkbox-states": {
+          "score": 90.04058221653862,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            }
+          ],
+          "htmlChecks": [
+            {
+              "name": "html-checkbox-1",
+              "marker": "ElmCheckA",
+              "checked": false,
+              "passed": true,
+              "matches": 1,
+              "paintSha256": "4b821d6eae787d95a6b59322efaa4576e6c311ea058e065d5f63d81a94677918"
+            },
+            {
+              "name": "html-checkbox-2",
+              "marker": "ElmCheckB",
+              "checked": true,
+              "passed": true,
+              "matches": 1,
+              "paintSha256": "77bc5d2997f0403b0ba5cb2751bddcf17a243ec895f904667d300c0577d6db91"
+            },
+            {
+              "name": "html-checkbox-3",
+              "marker": "ElmCheckC",
+              "checked": false,
+              "passed": true,
+              "matches": 1,
+              "paintSha256": "91333bbc745e57f7576e4a8d544733f9c667291617ba925167a996e23fc4d585"
+            },
+            {
+              "name": "html-checkbox-4",
+              "marker": "ElmCheckD",
+              "checked": true,
+              "passed": true,
+              "matches": 1,
+              "paintSha256": "be266f00deca2913dcc376959d0956bd69a3691457c9266c3b2afa5f81a89c07"
+            }
+          ],
+          "coreTree": "81318250b45eef4567b1670c5bc2bf18f0b2adf2",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "pageMapDigest": "2a59eafc3c85c3b18bbd9d40c536e91ef14afdbab1618339d156d4232a1be1f9",
+          "files": {
+            "1-candidate.png": "b326ae4004a8fdd67487202823d41a938ac70fdb9ba0fadcee6f9d3e54b08c04",
+            "1-overlay.png": "bbf96689da8fcf9e9ed15360db5d8c63f9d4a808a20bf3a48b143668847886c7",
+            "1-reference.png": "9c5b51e5ea903f81e5c7357c1457d3d4b2c8cc9fa12b28b7aad9ef8992b6aea2",
+            "candidate.html": "175b6e0c52b1d75929efd3336f221a51a2d2a39eaa9df0122d30133a196480eb",
+            "candidate.pdf": "ac3eb4ac3683a1e2a2bc2e8c01248bea51e044a3d7fea176bb7c66ba71d3d752",
+            "evidence.json": "f317e180c7da267bbc24499a6f2e0c4b68dcefa71f9e78463b41eb7aca8aa660",
+            "html-browser.json": "de01fe5be0fcf9a4bc0eb4cd2f41daa3d39372149cb2727a206c63ebbf4bec81",
+            "html-production.json": "997623f625c8fd6baf193729f46129b85b2050f426e56bab700b0537d409c226",
+            "production.json": "26af9084bb235edcf63bca62e8370f58bc132b4a549cfc955e7b95eb9912f8be",
+            "reference.pdf": "4466c33d2bca638429c93652398a7081cd8401c9faabf4b964feacd0f72f2717"
+          }
+        },
+        "fields-legacy-checkbox-text-control": {
+          "score": 99.86002717024472,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            }
+          ],
+          "htmlChecks": [],
+          "coreTree": "81318250b45eef4567b1670c5bc2bf18f0b2adf2",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "pageMapDigest": "1df5f3beca55dae00831093435a6c591f3bc5a45fc66ca57facd061fe3e63a0d",
+          "files": {
+            "1-candidate.png": "16142049a40ec84a0d31f41b2ecf6f35e91d857e60bbc2551f64eeebd9d64a98",
+            "1-overlay.png": "7d53c356c6a354bf195f923be055d03d8f4ee6385f429128ffeaec2463e57c76",
+            "1-reference.png": "6b59868fce23ab5b48da709ec5fcfb0b85a66cf209845b809364a9ae752b635f",
+            "candidate.pdf": "9f740422901673dae0be49c235a9012f000b8d5b1e6597ec7e988187128b5030",
+            "evidence.json": "a9c9a7b6dbc7bbc12019625baaab62f0d87ea18730c7b8e9b5edc6735bd98922",
+            "production.json": "5527ae290d09afc00bf2860285368e75ca8cc14e6a40ed0dbb33470c9370a3f0",
+            "reference.pdf": "fce932c317f081cc3b7c351b9df2012a6abc4c4cfcf2921a13ea011e35d9c012"
+          }
+        },
+        "fields-legacy-dropdown-metadata": {
+          "score": 93.84810271284287,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "RouteTail",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  350,
+                  71,
+                  446,
+                  87
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "htmlChecks": [],
+          "coreTree": "81318250b45eef4567b1670c5bc2bf18f0b2adf2",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "pageMapDigest": "29aeccc654336ddf193e746a246c0138db60dd5446476f3ede0f33b5dd522ba0",
+          "files": {
+            "1-candidate.png": "be2fa7699da1bd6595168e41fe9b0a4faf3621e1230cbc809c1ccd02d0532586",
+            "1-overlay.png": "d6edda8e830d029710c20fcefae85576bbe6f24a6b09db5951a9312d0f3b9841",
+            "1-reference.png": "6649e2c3552869ac4947b0eff9c796d29fa3a9a73272c6f236f6515a7f4baed8",
+            "candidate.pdf": "0d048fc50156190ca0ed74b0a3ba985ffb7e9510eaf355fa82e6f9a0a9b3696f",
+            "evidence.json": "f6824b0ad5aab5d11939622c3d8139fc668da8f0304ca24e448562704be3208b",
+            "production.json": "ce2fa30223c9aaec0f22e3a6ff6afb785b9a5e40c20b2d5008bb609f7d99642e",
+            "reference.pdf": "65ace515d8ae5cee11d245b724a6bef6cfe4b49c9b89ec584a742dc3ab508c6d"
+          }
+        },
+        "fields-legacy-dropdown-cached-control": {
+          "score": 93.84810271284287,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "RouteTail",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  350,
+                  71,
+                  446,
+                  87
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "htmlChecks": [],
+          "coreTree": "81318250b45eef4567b1670c5bc2bf18f0b2adf2",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "pageMapDigest": "3ada98b451ca7c5a1667e5d98d2cbebbc5b8bc850a7fc2e8f98babd3ba5f96af",
+          "files": {
+            "1-candidate.png": "be2fa7699da1bd6595168e41fe9b0a4faf3621e1230cbc809c1ccd02d0532586",
+            "1-overlay.png": "d6edda8e830d029710c20fcefae85576bbe6f24a6b09db5951a9312d0f3b9841",
+            "1-reference.png": "6649e2c3552869ac4947b0eff9c796d29fa3a9a73272c6f236f6515a7f4baed8",
+            "candidate.pdf": "616dab770929bffec628b2cc0662e0af96bd8d2b2cf7802c9626e6c11fabfc9c",
+            "evidence.json": "69271b9018daeb4edddc8ebb82b0bbcea397a9c58427a63ae83fb20f6ff270c8",
+            "production.json": "72649d6b56c6492d0030255ad7d42dc2bb40b73a1b62bbe86aa16fc96dcb0db6",
+            "reference.pdf": "dfe4879cbd81a6202a285f2b8469010cd5e9b90901d1d2378b662f7de7b925e1"
+          }
+        }
+      }
+    }
+  },
+  "controls": {
+    "fields-legacy-checkbox-text-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "fields-legacy-dropdown-cached-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    }
+  }
+}

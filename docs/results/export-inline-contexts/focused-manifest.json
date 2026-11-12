@@ -1,0 +1,2319 @@
+{
+  "schema": 1,
+  "suite": {
+    "id": "export-inline-contexts-final-v1",
+    "version": 1,
+    "cases": [
+      "export-inline-context-paragraph-automatic",
+      "export-inline-context-paragraph-automatic-note",
+      "export-inline-context-paragraph-exact-control",
+      "export-inline-context-empty-tab",
+      "export-inline-context-empty-tab-control",
+      "export-inline-context-table-bookmark",
+      "export-inline-context-table-bookmark-control",
+      "export-inline-context-merged-grid-tall",
+      "export-inline-context-merged-grid-fitting-control",
+      "export-inline-context-merged-grid-unmerged-control",
+      "export-inline-context-style-frame-empty",
+      "export-inline-context-style-frame-wrap-only",
+      "export-inline-context-style-frame-ordinary-control",
+      "export-inline-context-positioned-frame-control",
+      "export-inline-context-wrap-clearance-encoded-anchor",
+      "export-inline-context-wrap-clearance-encoded-wrap",
+      "export-inline-context-wrap-clearance-signed-control",
+      "export-inline-context-wrap-clearance-positive-control",
+      "export-inline-context-header-image-undecodable",
+      "export-inline-context-header-image-decodable-control",
+      "export-inline-context-cell-oversized-kept",
+      "export-inline-context-cell-fitting-kept-control",
+      "export-inline-context-cell-oversized-unkept-control",
+      "export-inline-context-float-square",
+      "export-inline-context-float-square-control",
+      "export-inline-context-float-tight",
+      "export-inline-context-float-tight-control",
+      "export-inline-context-tab-segment-long",
+      "export-inline-context-tab-segment-fitting-control",
+      "export-inline-context-tab-segment-ordinary-control",
+      "export-inline-context-shape-atoms",
+      "export-inline-context-shape-atoms-control",
+      "export-inline-context-textbox-drawingml-natural-host1",
+      "export-inline-context-textbox-drawingml-natural-host3",
+      "export-inline-context-textbox-drawingml-exact-host1",
+      "export-inline-context-textbox-drawingml-exact-host3",
+      "export-inline-context-textbox-vml-natural-host1",
+      "export-inline-context-textbox-vml-natural-host3",
+      "export-inline-context-textbox-vml-exact-host1",
+      "export-inline-context-textbox-vml-exact-host3"
+    ]
+  },
+  "cases": [
+    {
+      "id": "export-inline-context-paragraph-automatic",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Long styled paragraph crosses pages with automatic baseline spacing; exact-line and citation controls (Docxodus #1451)",
+      "input": "fixtures/export-inline-context-paragraph-automatic.docx",
+      "sha256": "ed27db6e75fd58f445990327ebfa3e2db49db414913b99e988648d83b6b5587a",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintPulse01": 1,
+        "FlintPulse02": 1,
+        "FlintPulse03": 1,
+        "FlintPulse04": 1,
+        "FlintPulse05": 1,
+        "FlintPulse06": 1,
+        "FlintPulse07": 1,
+        "FlintPulse08": 1,
+        "FlintPulse09": 1,
+        "FlintPulse10": 1,
+        "FlintPulse11": 1,
+        "FlintPulse12": 1,
+        "FlintPulse13": 1,
+        "FlintPulse14": 1,
+        "FlintPulse15": 1,
+        "FlintPulse16": 1,
+        "FlintPulse17": 1,
+        "FlintPulse18": 1,
+        "FlintPulse19": 1,
+        "FlintPulse20": 1,
+        "FlintPulse21": 1,
+        "FlintPulse22": 1,
+        "FlintPulse23": 1,
+        "FlintPulse24": 1,
+        "FlintPulse25": 1,
+        "FlintPulse26": 1,
+        "FlintPulse27": 1,
+        "FlintPulse28": 1,
+        "FlintPulse29": 1,
+        "FlintPulse30": 1,
+        "FlintPulse31": 1,
+        "FlintPulse32": 1,
+        "FlintPulse33": 1,
+        "FlintPulse34": 1,
+        "FlintPulse35": 1,
+        "FlintPulse36": 1,
+        "FlintPulse37": 1,
+        "FlintPulse38": 1,
+        "FlintPulse39": 1,
+        "FlintPulse40": 1,
+        "FlintPulse41": 1,
+        "FlintPulse42": 1,
+        "FlintPulse43": 1,
+        "FlintPulse44": 1,
+        "FlintPulse45": 1,
+        "FlintPulse46": 1,
+        "FlintPulse47": 1,
+        "FlintPulse48": 1,
+        "FlintPulse49": 1,
+        "FlintPulse50": 1,
+        "FlintPulse51": 1,
+        "FlintPulse52": 1,
+        "FlintPulse53": 1,
+        "FlintPulse54": 1,
+        "FlintPulse55": 1,
+        "FlintPulse56": 1,
+        "FlintPulse57": 1,
+        "FlintReceipt": 1,
+        "a": 57,
+        "around": 57,
+        "copper": 57,
+        "follows": 57,
+        "gallery.": 57,
+        "quiet": 57,
+        "ribbon": 57,
+        "the": 57
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-paragraph-automatic-note",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Long styled paragraph crosses pages with automatic baseline spacing; exact-line and citation controls (Docxodus #1451)",
+      "input": "fixtures/export-inline-context-paragraph-automatic-note.docx",
+      "sha256": "c886f8bb80835f29642b3d37275f0c9afd0c9669ea746101714e7b8404f873d0",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "1": 2,
+        "FlintMarginNote": 1,
+        "FlintPulse01": 1,
+        "FlintPulse02": 1,
+        "FlintPulse03": 1,
+        "FlintPulse04": 1,
+        "FlintPulse05": 1,
+        "FlintPulse06": 1,
+        "FlintPulse07": 1,
+        "FlintPulse08": 1,
+        "FlintPulse09": 1,
+        "FlintPulse10": 1,
+        "FlintPulse11": 1,
+        "FlintPulse12": 1,
+        "FlintPulse13": 1,
+        "FlintPulse14": 1,
+        "FlintPulse15": 1,
+        "FlintPulse16": 1,
+        "FlintPulse17": 1,
+        "FlintPulse18": 1,
+        "FlintPulse19": 1,
+        "FlintPulse20": 1,
+        "FlintPulse21": 1,
+        "FlintPulse22": 1,
+        "FlintPulse23": 1,
+        "FlintPulse24": 1,
+        "FlintPulse25": 1,
+        "FlintPulse26": 1,
+        "FlintPulse27": 1,
+        "FlintPulse28": 1,
+        "FlintPulse29": 1,
+        "FlintPulse30": 1,
+        "FlintPulse31": 1,
+        "FlintPulse32": 1,
+        "FlintPulse33": 1,
+        "FlintPulse34": 1,
+        "FlintPulse35": 1,
+        "FlintPulse36": 1,
+        "FlintPulse37": 1,
+        "FlintPulse38": 1,
+        "FlintPulse39": 1,
+        "FlintPulse40": 1,
+        "FlintPulse41": 1,
+        "FlintPulse42": 1,
+        "FlintPulse43": 1,
+        "FlintPulse44": 1,
+        "FlintPulse45": 1,
+        "FlintPulse46": 1,
+        "FlintPulse47": 1,
+        "FlintPulse48": 1,
+        "FlintPulse49": 1,
+        "FlintPulse50": 1,
+        "FlintPulse51": 1,
+        "FlintPulse52": 1,
+        "FlintPulse53": 1,
+        "FlintPulse54": 1,
+        "FlintPulse55": 1,
+        "FlintPulse56": 1,
+        "FlintPulse57": 1,
+        "FlintReceipt": 1,
+        "a": 57,
+        "around": 57,
+        "copper": 57,
+        "follows": 57,
+        "gallery.": 57,
+        "quiet": 57,
+        "ribbon": 57,
+        "the": 57
+      },
+      "assertions": [
+        {
+          "type": "same-page",
+          "version": 1,
+          "markers": [
+            "FlintPulse23",
+            "FlintMarginNote"
+          ]
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-paragraph-exact-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Long styled paragraph crosses pages with automatic baseline spacing; exact-line and citation controls (Docxodus #1451)",
+      "input": "fixtures/export-inline-context-paragraph-exact-control.docx",
+      "sha256": "d7c076eef8923feba23a53ae0e9d4b46e137af22a490cba48f18ce39031c8b97",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintPulse01": 1,
+        "FlintPulse02": 1,
+        "FlintPulse03": 1,
+        "FlintPulse04": 1,
+        "FlintPulse05": 1,
+        "FlintPulse06": 1,
+        "FlintPulse07": 1,
+        "FlintPulse08": 1,
+        "FlintPulse09": 1,
+        "FlintPulse10": 1,
+        "FlintPulse11": 1,
+        "FlintPulse12": 1,
+        "FlintPulse13": 1,
+        "FlintPulse14": 1,
+        "FlintPulse15": 1,
+        "FlintPulse16": 1,
+        "FlintPulse17": 1,
+        "FlintPulse18": 1,
+        "FlintPulse19": 1,
+        "FlintPulse20": 1,
+        "FlintPulse21": 1,
+        "FlintPulse22": 1,
+        "FlintPulse23": 1,
+        "FlintPulse24": 1,
+        "FlintPulse25": 1,
+        "FlintPulse26": 1,
+        "FlintPulse27": 1,
+        "FlintPulse28": 1,
+        "FlintPulse29": 1,
+        "FlintPulse30": 1,
+        "FlintPulse31": 1,
+        "FlintPulse32": 1,
+        "FlintPulse33": 1,
+        "FlintPulse34": 1,
+        "FlintPulse35": 1,
+        "FlintPulse36": 1,
+        "FlintPulse37": 1,
+        "FlintPulse38": 1,
+        "FlintPulse39": 1,
+        "FlintPulse40": 1,
+        "FlintPulse41": 1,
+        "FlintPulse42": 1,
+        "FlintPulse43": 1,
+        "FlintPulse44": 1,
+        "FlintPulse45": 1,
+        "FlintPulse46": 1,
+        "FlintPulse47": 1,
+        "FlintPulse48": 1,
+        "FlintPulse49": 1,
+        "FlintPulse50": 1,
+        "FlintPulse51": 1,
+        "FlintPulse52": 1,
+        "FlintPulse53": 1,
+        "FlintPulse54": 1,
+        "FlintPulse55": 1,
+        "FlintPulse56": 1,
+        "FlintPulse57": 1,
+        "FlintReceipt": 1,
+        "a": 57,
+        "around": 57,
+        "copper": 57,
+        "follows": 57,
+        "gallery.": 57,
+        "quiet": 57,
+        "ribbon": 57,
+        "the": 57
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-empty-tab",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Tab after naturally wrapping prose creates an empty dotted inline advance; no-tab control (Docxodus #1455)",
+      "input": "fixtures/export-inline-context-empty-tab.docx",
+      "sha256": "7b6b3473791a1f91087ba14a22bb7704a8b335208f78841fd92b2ccee554dbf9",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintPulse01": 1,
+        "FlintPulse02": 1,
+        "FlintPulse03": 1,
+        "FlintPulse04": 1,
+        "FlintPulse05": 1,
+        "FlintPulse06": 1,
+        "FlintPulse07": 1,
+        "FlintPulse08": 1,
+        "FlintPulse09": 1,
+        "FlintPulse10": 1,
+        "FlintPulse11": 1,
+        "FlintPulse12": 1,
+        "FlintPulse13": 1,
+        "FlintPulse14": 1,
+        "FlintPulse15": 1,
+        "FlintPulse16": 1,
+        "FlintPulse17": 1,
+        "FlintPulse18": 1,
+        "FlintPulse19": 1,
+        "FlintPulse20": 1,
+        "FlintPulse21": 1,
+        "FlintPulse22": 1,
+        "FlintPulse23": 1,
+        "FlintPulse24": 1,
+        "FlintPulse25": 1,
+        "FlintPulse26": 1,
+        "FlintPulse27": 1,
+        "FlintPulse28": 1,
+        "FlintPulse29": 1,
+        "FlintPulse30": 1,
+        "FlintPulse31": 1,
+        "FlintPulse32": 1,
+        "FlintPulse33": 1,
+        "FlintPulse34": 1,
+        "FlintPulse35": 1,
+        "FlintPulse36": 1,
+        "FlintPulse37": 1,
+        "FlintPulse38": 1,
+        "FlintPulse39": 1,
+        "FlintPulse40": 1,
+        "FlintPulse41": 1,
+        "FlintPulse42": 1,
+        "FlintPulse43": 1,
+        "FlintPulse44": 1,
+        "FlintPulse45": 1,
+        "FlintPulse46": 1,
+        "FlintPulse47": 1,
+        "FlintPulse48": 1,
+        "FlintPulse49": 1,
+        "FlintPulse50": 1,
+        "FlintPulse51": 1,
+        "FlintPulse52": 1,
+        "FlintPulse53": 1,
+        "FlintPulse54": 1,
+        "FlintPulse55": 1,
+        "FlintPulse56": 1,
+        "FlintPulse57": 1,
+        "FlintTabReceipt": 1,
+        "a": 57,
+        "around": 57,
+        "copper": 57,
+        "follows": 57,
+        "gallery.": 57,
+        "quiet": 57,
+        "ribbon": 57,
+        "the": 57
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      },
+      "pdfTextNormalization": "isolated-dot-leaders-v1"
+    },
+    {
+      "id": "export-inline-context-empty-tab-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Tab after naturally wrapping prose creates an empty dotted inline advance; no-tab control (Docxodus #1455)",
+      "input": "fixtures/export-inline-context-empty-tab-control.docx",
+      "sha256": "13f02c4bc379931b62c3b3233c48136b0256676b1e5b34194b0590bf9074a794",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintPulse01": 1,
+        "FlintPulse02": 1,
+        "FlintPulse03": 1,
+        "FlintPulse04": 1,
+        "FlintPulse05": 1,
+        "FlintPulse06": 1,
+        "FlintPulse07": 1,
+        "FlintPulse08": 1,
+        "FlintPulse09": 1,
+        "FlintPulse10": 1,
+        "FlintPulse11": 1,
+        "FlintPulse12": 1,
+        "FlintPulse13": 1,
+        "FlintPulse14": 1,
+        "FlintPulse15": 1,
+        "FlintPulse16": 1,
+        "FlintPulse17": 1,
+        "FlintPulse18": 1,
+        "FlintPulse19": 1,
+        "FlintPulse20": 1,
+        "FlintPulse21": 1,
+        "FlintPulse22": 1,
+        "FlintPulse23": 1,
+        "FlintPulse24": 1,
+        "FlintPulse25": 1,
+        "FlintPulse26": 1,
+        "FlintPulse27": 1,
+        "FlintPulse28": 1,
+        "FlintPulse29": 1,
+        "FlintPulse30": 1,
+        "FlintPulse31": 1,
+        "FlintPulse32": 1,
+        "FlintPulse33": 1,
+        "FlintPulse34": 1,
+        "FlintPulse35": 1,
+        "FlintPulse36": 1,
+        "FlintPulse37": 1,
+        "FlintPulse38": 1,
+        "FlintPulse39": 1,
+        "FlintPulse40": 1,
+        "FlintPulse41": 1,
+        "FlintPulse42": 1,
+        "FlintPulse43": 1,
+        "FlintPulse44": 1,
+        "FlintPulse45": 1,
+        "FlintPulse46": 1,
+        "FlintPulse47": 1,
+        "FlintPulse48": 1,
+        "FlintPulse49": 1,
+        "FlintPulse50": 1,
+        "FlintPulse51": 1,
+        "FlintPulse52": 1,
+        "FlintPulse53": 1,
+        "FlintPulse54": 1,
+        "FlintPulse55": 1,
+        "FlintPulse56": 1,
+        "FlintPulse57": 1,
+        "FlintTabReceipt": 1,
+        "a": 57,
+        "around": 57,
+        "copper": 57,
+        "follows": 57,
+        "gallery.": 57,
+        "quiet": 57,
+        "ribbon": 57,
+        "the": 57
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-table-bookmark",
+      "version": 1,
+      "category": "tables",
+      "description": "Table-level empty bookmark precedes many ordinary rows; unbookmarked control (Docxodus #1456)",
+      "input": "fixtures/export-inline-context-table-bookmark.docx",
+      "sha256": "8ee81fa42cd0fd0ebbe068e0971e09ffb97b57f2f35918572932c10ed1012f78",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintEast01": 1,
+        "FlintEast02": 1,
+        "FlintEast03": 1,
+        "FlintEast04": 1,
+        "FlintEast05": 1,
+        "FlintEast06": 1,
+        "FlintEast07": 1,
+        "FlintEast08": 1,
+        "FlintEast09": 1,
+        "FlintEast10": 1,
+        "FlintEast11": 1,
+        "FlintEast12": 1,
+        "FlintEast13": 1,
+        "FlintEast14": 1,
+        "FlintEast15": 1,
+        "FlintEast16": 1,
+        "FlintEast17": 1,
+        "FlintEast18": 1,
+        "FlintEast19": 1,
+        "FlintEast20": 1,
+        "FlintEast21": 1,
+        "FlintEast22": 1,
+        "FlintEast23": 1,
+        "FlintEast24": 1,
+        "FlintEast25": 1,
+        "FlintEast26": 1,
+        "FlintEast27": 1,
+        "FlintEast28": 1,
+        "FlintEast29": 1,
+        "FlintEast30": 1,
+        "FlintEast31": 1,
+        "FlintEast32": 1,
+        "FlintEast33": 1,
+        "FlintEast34": 1,
+        "FlintEast35": 1,
+        "FlintEast36": 1,
+        "FlintEast37": 1,
+        "FlintEast38": 1,
+        "FlintEast39": 1,
+        "FlintEast40": 1,
+        "FlintEast41": 1,
+        "FlintEast42": 1,
+        "FlintEast43": 1,
+        "FlintEast44": 1,
+        "FlintEast45": 1,
+        "FlintEast46": 1,
+        "FlintEast47": 1,
+        "FlintTableReceipt": 1,
+        "FlintWest01": 1,
+        "FlintWest02": 1,
+        "FlintWest03": 1,
+        "FlintWest04": 1,
+        "FlintWest05": 1,
+        "FlintWest06": 1,
+        "FlintWest07": 1,
+        "FlintWest08": 1,
+        "FlintWest09": 1,
+        "FlintWest10": 1,
+        "FlintWest11": 1,
+        "FlintWest12": 1,
+        "FlintWest13": 1,
+        "FlintWest14": 1,
+        "FlintWest15": 1,
+        "FlintWest16": 1,
+        "FlintWest17": 1,
+        "FlintWest18": 1,
+        "FlintWest19": 1,
+        "FlintWest20": 1,
+        "FlintWest21": 1,
+        "FlintWest22": 1,
+        "FlintWest23": 1,
+        "FlintWest24": 1,
+        "FlintWest25": 1,
+        "FlintWest26": 1,
+        "FlintWest27": 1,
+        "FlintWest28": 1,
+        "FlintWest29": 1,
+        "FlintWest30": 1,
+        "FlintWest31": 1,
+        "FlintWest32": 1,
+        "FlintWest33": 1,
+        "FlintWest34": 1,
+        "FlintWest35": 1,
+        "FlintWest36": 1,
+        "FlintWest37": 1,
+        "FlintWest38": 1,
+        "FlintWest39": 1,
+        "FlintWest40": 1,
+        "FlintWest41": 1,
+        "FlintWest42": 1,
+        "FlintWest43": 1,
+        "FlintWest44": 1,
+        "FlintWest45": 1,
+        "FlintWest46": 1,
+        "FlintWest47": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-table-bookmark-control",
+      "version": 1,
+      "category": "tables",
+      "description": "Table-level empty bookmark precedes many ordinary rows; unbookmarked control (Docxodus #1456)",
+      "input": "fixtures/export-inline-context-table-bookmark-control.docx",
+      "sha256": "3856873472ac624bc206a53d127e0bda37fa245c7818ea94409377fa694088fd",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintEast01": 1,
+        "FlintEast02": 1,
+        "FlintEast03": 1,
+        "FlintEast04": 1,
+        "FlintEast05": 1,
+        "FlintEast06": 1,
+        "FlintEast07": 1,
+        "FlintEast08": 1,
+        "FlintEast09": 1,
+        "FlintEast10": 1,
+        "FlintEast11": 1,
+        "FlintEast12": 1,
+        "FlintEast13": 1,
+        "FlintEast14": 1,
+        "FlintEast15": 1,
+        "FlintEast16": 1,
+        "FlintEast17": 1,
+        "FlintEast18": 1,
+        "FlintEast19": 1,
+        "FlintEast20": 1,
+        "FlintEast21": 1,
+        "FlintEast22": 1,
+        "FlintEast23": 1,
+        "FlintEast24": 1,
+        "FlintEast25": 1,
+        "FlintEast26": 1,
+        "FlintEast27": 1,
+        "FlintEast28": 1,
+        "FlintEast29": 1,
+        "FlintEast30": 1,
+        "FlintEast31": 1,
+        "FlintEast32": 1,
+        "FlintEast33": 1,
+        "FlintEast34": 1,
+        "FlintEast35": 1,
+        "FlintEast36": 1,
+        "FlintEast37": 1,
+        "FlintEast38": 1,
+        "FlintEast39": 1,
+        "FlintEast40": 1,
+        "FlintEast41": 1,
+        "FlintEast42": 1,
+        "FlintEast43": 1,
+        "FlintEast44": 1,
+        "FlintEast45": 1,
+        "FlintEast46": 1,
+        "FlintEast47": 1,
+        "FlintTableReceipt": 1,
+        "FlintWest01": 1,
+        "FlintWest02": 1,
+        "FlintWest03": 1,
+        "FlintWest04": 1,
+        "FlintWest05": 1,
+        "FlintWest06": 1,
+        "FlintWest07": 1,
+        "FlintWest08": 1,
+        "FlintWest09": 1,
+        "FlintWest10": 1,
+        "FlintWest11": 1,
+        "FlintWest12": 1,
+        "FlintWest13": 1,
+        "FlintWest14": 1,
+        "FlintWest15": 1,
+        "FlintWest16": 1,
+        "FlintWest17": 1,
+        "FlintWest18": 1,
+        "FlintWest19": 1,
+        "FlintWest20": 1,
+        "FlintWest21": 1,
+        "FlintWest22": 1,
+        "FlintWest23": 1,
+        "FlintWest24": 1,
+        "FlintWest25": 1,
+        "FlintWest26": 1,
+        "FlintWest27": 1,
+        "FlintWest28": 1,
+        "FlintWest29": 1,
+        "FlintWest30": 1,
+        "FlintWest31": 1,
+        "FlintWest32": 1,
+        "FlintWest33": 1,
+        "FlintWest34": 1,
+        "FlintWest35": 1,
+        "FlintWest36": 1,
+        "FlintWest37": 1,
+        "FlintWest38": 1,
+        "FlintWest39": 1,
+        "FlintWest40": 1,
+        "FlintWest41": 1,
+        "FlintWest42": 1,
+        "FlintWest43": 1,
+        "FlintWest44": 1,
+        "FlintWest45": 1,
+        "FlintWest46": 1,
+        "FlintWest47": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-merged-grid-tall",
+      "version": 1,
+      "category": "tables",
+      "description": "Overlapping vertical merges and a horizontal span exceed a fresh page; fitting and unmerged controls (Docxodus #1458)",
+      "input": "fixtures/export-inline-context-merged-grid-tall.docx",
+      "sha256": "b2996f27c0b33cefd15b7e3991e6c4c57b19dbcd718db466bda093040ac6514a",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintBridge01": 1,
+        "FlintBridge02": 1,
+        "FlintBridge03": 1,
+        "FlintBridge04": 1,
+        "FlintBridge05": 1,
+        "FlintBridge06": 1,
+        "FlintBridge07": 1,
+        "FlintBridge08": 1,
+        "FlintBridge09": 1,
+        "FlintBridge10": 1,
+        "FlintBridge11": 1,
+        "FlintBridge12": 1,
+        "FlintBridge13": 1,
+        "FlintBridge14": 1,
+        "FlintGrid01": 1,
+        "FlintGrid02": 1,
+        "FlintGrid03": 1,
+        "FlintGrid04": 1,
+        "FlintGrid05": 1,
+        "FlintGrid06": 1,
+        "FlintGrid07": 1,
+        "FlintGrid08": 1,
+        "FlintGrid09": 1,
+        "FlintGrid10": 1,
+        "FlintGrid11": 1,
+        "FlintGrid12": 1,
+        "FlintGrid13": 1,
+        "FlintGrid14": 1,
+        "FlintGrid15": 1,
+        "FlintGrid16": 1,
+        "FlintGrid17": 1,
+        "FlintGrid18": 1,
+        "FlintGrid19": 1,
+        "FlintGrid20": 1,
+        "FlintGrid21": 1,
+        "FlintGrid22": 1,
+        "FlintGrid23": 1,
+        "FlintGrid24": 1,
+        "FlintGrid25": 1,
+        "FlintGrid26": 1,
+        "FlintGrid27": 1,
+        "FlintGrid28": 1,
+        "FlintGrid29": 1,
+        "FlintGrid30": 1,
+        "FlintGrid31": 1,
+        "FlintGrid32": 1,
+        "FlintGrid33": 1,
+        "FlintGrid34": 1,
+        "FlintGrid35": 1,
+        "FlintGrid36": 1,
+        "FlintGrid37": 1,
+        "FlintGridReceipt": 1,
+        "FlintMergeBridge": 1,
+        "FlintN": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-merged-grid-fitting-control",
+      "version": 1,
+      "category": "tables",
+      "description": "Overlapping vertical merges and a horizontal span exceed a fresh page; fitting and unmerged controls (Docxodus #1458)",
+      "input": "fixtures/export-inline-context-merged-grid-fitting-control.docx",
+      "sha256": "89bd4218000f60b80047da05320af236c55187a8fca4471a2a6e60cfd1888279",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintBridge01": 1,
+        "FlintBridge02": 1,
+        "FlintGrid01": 1,
+        "FlintGrid02": 1,
+        "FlintGrid03": 1,
+        "FlintGrid04": 1,
+        "FlintGrid05": 1,
+        "FlintGridReceipt": 1,
+        "FlintMergeBridge": 1,
+        "FlintN": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-merged-grid-unmerged-control",
+      "version": 1,
+      "category": "tables",
+      "description": "Overlapping vertical merges and a horizontal span exceed a fresh page; fitting and unmerged controls (Docxodus #1458)",
+      "input": "fixtures/export-inline-context-merged-grid-unmerged-control.docx",
+      "sha256": "33cb62f15ab80ac921ad940dba276732373366c9b3f35548431b7f1893927334",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintBridge01": 1,
+        "FlintBridge02": 1,
+        "FlintBridge03": 1,
+        "FlintBridge04": 1,
+        "FlintBridge05": 1,
+        "FlintBridge06": 1,
+        "FlintBridge07": 1,
+        "FlintBridge08": 1,
+        "FlintBridge09": 1,
+        "FlintBridge10": 1,
+        "FlintBridge11": 1,
+        "FlintBridge12": 1,
+        "FlintBridge13": 1,
+        "FlintBridge14": 1,
+        "FlintGrid01": 1,
+        "FlintGrid02": 1,
+        "FlintGrid03": 1,
+        "FlintGrid04": 1,
+        "FlintGrid05": 1,
+        "FlintGrid06": 1,
+        "FlintGrid07": 1,
+        "FlintGrid08": 1,
+        "FlintGrid09": 1,
+        "FlintGrid10": 1,
+        "FlintGrid11": 1,
+        "FlintGrid12": 1,
+        "FlintGrid13": 1,
+        "FlintGrid14": 1,
+        "FlintGrid15": 1,
+        "FlintGrid16": 1,
+        "FlintGrid17": 1,
+        "FlintGrid18": 1,
+        "FlintGrid19": 1,
+        "FlintGrid20": 1,
+        "FlintGrid21": 1,
+        "FlintGrid22": 1,
+        "FlintGrid23": 1,
+        "FlintGrid24": 1,
+        "FlintGrid25": 1,
+        "FlintGrid26": 1,
+        "FlintGrid27": 1,
+        "FlintGrid28": 1,
+        "FlintGrid29": 1,
+        "FlintGrid30": 1,
+        "FlintGrid31": 1,
+        "FlintGrid32": 1,
+        "FlintGrid33": 1,
+        "FlintGrid34": 1,
+        "FlintGrid35": 1,
+        "FlintGrid36": 1,
+        "FlintGrid37": 1,
+        "FlintGridReceipt": 1,
+        "FlintMergeBridge": 1,
+        "FlintN": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-style-frame-empty",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Inherited empty or wrap-only frame properties retain ordinary multi-page flow; style without frame control",
+      "input": "fixtures/export-inline-context-style-frame-empty.docx",
+      "sha256": "1de6114202614c9a383e1dd61df7b8da17fed1bc50cc0f0a2ab578e486dd35f3",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintFrame01": 1,
+        "FlintFrame02": 1,
+        "FlintFrame03": 1,
+        "FlintFrame04": 1,
+        "FlintFrame05": 1,
+        "FlintFrame06": 1,
+        "FlintFrame07": 1,
+        "FlintFrame08": 1,
+        "FlintFrame09": 1,
+        "FlintFrame10": 1,
+        "FlintFrame11": 1,
+        "FlintFrame12": 1,
+        "FlintFrame13": 1,
+        "FlintFrame14": 1,
+        "FlintFrame15": 1,
+        "FlintFrame16": 1,
+        "FlintFrame17": 1,
+        "FlintFrame18": 1,
+        "FlintFrame19": 1,
+        "FlintFrame20": 1,
+        "FlintFrame21": 1,
+        "FlintFrame22": 1,
+        "FlintFrame23": 1,
+        "FlintFrame24": 1,
+        "FlintFrame25": 1,
+        "FlintFrame26": 1,
+        "FlintFrame27": 1,
+        "FlintFrame28": 1,
+        "FlintFrame29": 1,
+        "FlintFrame30": 1,
+        "FlintFrame31": 1,
+        "FlintFrame32": 1,
+        "FlintFrame33": 1,
+        "FlintFrame34": 1,
+        "FlintFrame35": 1,
+        "FlintFrame36": 1,
+        "FlintFrame37": 1,
+        "FlintFrame38": 1,
+        "FlintFrame39": 1,
+        "FlintFrame40": 1,
+        "FlintFrame41": 1,
+        "FlintFrame42": 1,
+        "FlintFrame43": 1,
+        "FlintFrame44": 1,
+        "FlintFrame45": 1,
+        "FlintFrame46": 1,
+        "FlintFrame47": 1,
+        "FlintFrameReceipt": 1,
+        "cart.": 47,
+        "orchard": 47
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-style-frame-wrap-only",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Inherited empty or wrap-only frame properties retain ordinary multi-page flow; style without frame control",
+      "input": "fixtures/export-inline-context-style-frame-wrap-only.docx",
+      "sha256": "da3ed3db87c43eec9b6a93d84eab656afd6e56d9f07dbfa7763a23e3d6fc8197",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintFrame01": 1,
+        "FlintFrame02": 1,
+        "FlintFrame03": 1,
+        "FlintFrame04": 1,
+        "FlintFrame05": 1,
+        "FlintFrame06": 1,
+        "FlintFrame07": 1,
+        "FlintFrame08": 1,
+        "FlintFrame09": 1,
+        "FlintFrame10": 1,
+        "FlintFrame11": 1,
+        "FlintFrame12": 1,
+        "FlintFrame13": 1,
+        "FlintFrame14": 1,
+        "FlintFrame15": 1,
+        "FlintFrame16": 1,
+        "FlintFrame17": 1,
+        "FlintFrame18": 1,
+        "FlintFrame19": 1,
+        "FlintFrame20": 1,
+        "FlintFrame21": 1,
+        "FlintFrame22": 1,
+        "FlintFrame23": 1,
+        "FlintFrame24": 1,
+        "FlintFrame25": 1,
+        "FlintFrame26": 1,
+        "FlintFrame27": 1,
+        "FlintFrame28": 1,
+        "FlintFrame29": 1,
+        "FlintFrame30": 1,
+        "FlintFrame31": 1,
+        "FlintFrame32": 1,
+        "FlintFrame33": 1,
+        "FlintFrame34": 1,
+        "FlintFrame35": 1,
+        "FlintFrame36": 1,
+        "FlintFrame37": 1,
+        "FlintFrame38": 1,
+        "FlintFrame39": 1,
+        "FlintFrame40": 1,
+        "FlintFrame41": 1,
+        "FlintFrame42": 1,
+        "FlintFrame43": 1,
+        "FlintFrame44": 1,
+        "FlintFrame45": 1,
+        "FlintFrame46": 1,
+        "FlintFrame47": 1,
+        "FlintFrameReceipt": 1,
+        "cart.": 47,
+        "orchard": 47
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-style-frame-ordinary-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Inherited empty or wrap-only frame properties retain ordinary multi-page flow; style without frame control",
+      "input": "fixtures/export-inline-context-style-frame-ordinary-control.docx",
+      "sha256": "4b7a7530db8ab5076cc4c148255248c870b9a74751e6775f56ac7364312c75a9",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintFrame01": 1,
+        "FlintFrame02": 1,
+        "FlintFrame03": 1,
+        "FlintFrame04": 1,
+        "FlintFrame05": 1,
+        "FlintFrame06": 1,
+        "FlintFrame07": 1,
+        "FlintFrame08": 1,
+        "FlintFrame09": 1,
+        "FlintFrame10": 1,
+        "FlintFrame11": 1,
+        "FlintFrame12": 1,
+        "FlintFrame13": 1,
+        "FlintFrame14": 1,
+        "FlintFrame15": 1,
+        "FlintFrame16": 1,
+        "FlintFrame17": 1,
+        "FlintFrame18": 1,
+        "FlintFrame19": 1,
+        "FlintFrame20": 1,
+        "FlintFrame21": 1,
+        "FlintFrame22": 1,
+        "FlintFrame23": 1,
+        "FlintFrame24": 1,
+        "FlintFrame25": 1,
+        "FlintFrame26": 1,
+        "FlintFrame27": 1,
+        "FlintFrame28": 1,
+        "FlintFrame29": 1,
+        "FlintFrame30": 1,
+        "FlintFrame31": 1,
+        "FlintFrame32": 1,
+        "FlintFrame33": 1,
+        "FlintFrame34": 1,
+        "FlintFrame35": 1,
+        "FlintFrame36": 1,
+        "FlintFrame37": 1,
+        "FlintFrame38": 1,
+        "FlintFrame39": 1,
+        "FlintFrame40": 1,
+        "FlintFrame41": 1,
+        "FlintFrame42": 1,
+        "FlintFrame43": 1,
+        "FlintFrame44": 1,
+        "FlintFrame45": 1,
+        "FlintFrame46": 1,
+        "FlintFrame47": 1,
+        "FlintFrameReceipt": 1,
+        "cart.": 47,
+        "orchard": 47
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-positioned-frame-control",
+      "version": 2,
+      "category": "paragraphs",
+      "description": "A directly positioned fitting frame retains its authored page position",
+      "input": "fixtures/export-inline-context-positioned-frame-control.docx",
+      "sha256": "3f1c57b68f195139beb4a1daa23a83a9157b6a1b34e6987a52467b49d80efc76",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintFrameBody": 1,
+        "FlintPositioned": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "FlintPositioned",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            55,
+            85,
+            205,
+            115
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-wrap-clearance-encoded-anchor",
+      "version": 1,
+      "category": "images",
+      "description": "Negative top/bottom wrap clearance encoded as uint32 retains its signed size; direct-signed and positive controls",
+      "input": "fixtures/export-inline-context-wrap-clearance-encoded-anchor.docx",
+      "sha256": "322bd7a7827f359c014e8279dc30338f9f0dea32f64b3f9c21b17026148136b4",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintRuleAfter": 1,
+        "FlintRuleBefore": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-wrap-clearance-encoded-wrap",
+      "version": 1,
+      "category": "images",
+      "description": "Negative top/bottom wrap clearance encoded as uint32 retains its signed size; direct-signed and positive controls",
+      "input": "fixtures/export-inline-context-wrap-clearance-encoded-wrap.docx",
+      "sha256": "8ae273c6855be7f986381849ec5b3478d3a771e540e2c5c9bbf908c78af73b80",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintRuleAfter": 1,
+        "FlintRuleBefore": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-wrap-clearance-signed-control",
+      "version": 1,
+      "category": "images",
+      "description": "Negative top/bottom wrap clearance encoded as uint32 retains its signed size; direct-signed and positive controls",
+      "input": "fixtures/export-inline-context-wrap-clearance-signed-control.docx",
+      "sha256": "ab986a529137c53421719c01ea97a949657d636d2699bc5babdaa71f5be9abfa",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintRuleAfter": 1,
+        "FlintRuleBefore": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-wrap-clearance-positive-control",
+      "version": 1,
+      "category": "images",
+      "description": "Negative top/bottom wrap clearance encoded as uint32 retains its signed size; direct-signed and positive controls",
+      "input": "fixtures/export-inline-context-wrap-clearance-positive-control.docx",
+      "sha256": "19f4b98ebf232fb9db26bd0179204d1f45f68e9d93eb611cfb2d10e82656dc8c",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintRuleAfter": 1,
+        "FlintRuleBefore": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-header-image-undecodable",
+      "version": 2,
+      "category": "images",
+      "description": "Repeated anchored header image retains warning identity when deliberately undecodable; generated PNG control",
+      "input": "fixtures/export-inline-context-header-image-undecodable.docx",
+      "sha256": "3ffb37592bae7996f57d59fb947406c16977e38d27d3de923fc6b5ee78b237fd",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FI": 2,
+        "FlintLeafOne": 1,
+        "FlintLeafTwo": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "FlintLeafOne",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            45,
+            35,
+            295,
+            115
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "FlintLeafTwo",
+          "occurrence": 1,
+          "page": 2,
+          "rect": [
+            45,
+            35,
+            295,
+            115
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-header-image-decodable-control",
+      "version": 2,
+      "category": "images",
+      "description": "Repeated anchored header image retains warning identity when deliberately undecodable; generated PNG control",
+      "input": "fixtures/export-inline-context-header-image-decodable-control.docx",
+      "sha256": "0e6de5013e7e2682d43d7f8d51086825b2f07b34aefaff1f7d5234336ee90069",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintLeafOne": 1,
+        "FlintLeafTwo": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "FlintLeafOne",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            45,
+            35,
+            295,
+            115
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "FlintLeafTwo",
+          "occurrence": 1,
+          "page": 2,
+          "rect": [
+            45,
+            35,
+            295,
+            115
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-cell-oversized-kept",
+      "version": 1,
+      "category": "tables",
+      "description": "Terminal cell paragraph carries row/line/next/widow keeps beyond a fresh body; fitting-kept and long-unkept composition controls",
+      "input": "fixtures/export-inline-context-cell-oversized-kept.docx",
+      "sha256": "8e4f0e0e948b494d08f8a41b0f9902500803de78384379eabf0c8a8c46bc13a0",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintCell01": 1,
+        "FlintCell02": 1,
+        "FlintCell03": 1,
+        "FlintCell04": 1,
+        "FlintCell05": 1,
+        "FlintCell06": 1,
+        "FlintCell07": 1,
+        "FlintCell08": 1,
+        "FlintCell09": 1,
+        "FlintCell10": 1,
+        "FlintCell11": 1,
+        "FlintCell12": 1,
+        "FlintCell13": 1,
+        "FlintCell14": 1,
+        "FlintCell15": 1,
+        "FlintCell16": 1,
+        "FlintCell17": 1,
+        "FlintCell18": 1,
+        "FlintCell19": 1,
+        "FlintCell20": 1,
+        "FlintCell21": 1,
+        "FlintCell22": 1,
+        "FlintCell23": 1,
+        "FlintCell24": 1,
+        "FlintCell25": 1,
+        "FlintCell26": 1,
+        "FlintCell27": 1,
+        "FlintCell28": 1,
+        "FlintCell29": 1,
+        "FlintCell30": 1,
+        "FlintCell31": 1,
+        "FlintCell32": 1,
+        "FlintCell33": 1,
+        "FlintCell34": 1,
+        "FlintCell35": 1,
+        "FlintCell36": 1,
+        "FlintCell37": 1,
+        "FlintCell38": 1,
+        "FlintCell39": 1,
+        "FlintCell40": 1,
+        "FlintCell41": 1,
+        "FlintCell42": 1,
+        "FlintCell43": 1,
+        "FlintCellReceipt": 1,
+        "amber": 43,
+        "tray.": 43
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-cell-fitting-kept-control",
+      "version": 1,
+      "category": "tables",
+      "description": "Terminal cell paragraph carries row/line/next/widow keeps beyond a fresh body; fitting-kept and long-unkept composition controls",
+      "input": "fixtures/export-inline-context-cell-fitting-kept-control.docx",
+      "sha256": "ec5934bf72ce816df7f64a0ab6289e51bdb922f71590b3046a0c49c617f18e0a",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintCell01": 1,
+        "FlintCell02": 1,
+        "FlintCell03": 1,
+        "FlintCell04": 1,
+        "FlintCell05": 1,
+        "FlintCell06": 1,
+        "FlintCell07": 1,
+        "FlintCell08": 1,
+        "FlintCellReceipt": 1,
+        "amber": 8,
+        "tray.": 8
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-cell-oversized-unkept-control",
+      "version": 1,
+      "category": "tables",
+      "description": "Terminal cell paragraph carries row/line/next/widow keeps beyond a fresh body; fitting-kept and long-unkept composition controls",
+      "input": "fixtures/export-inline-context-cell-oversized-unkept-control.docx",
+      "sha256": "76f2212ad21ae72b91ac64ca6d2bb5964eab3c3e126a071c7cc964c0a146b008",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintCell01": 1,
+        "FlintCell02": 1,
+        "FlintCell03": 1,
+        "FlintCell04": 1,
+        "FlintCell05": 1,
+        "FlintCell06": 1,
+        "FlintCell07": 1,
+        "FlintCell08": 1,
+        "FlintCell09": 1,
+        "FlintCell10": 1,
+        "FlintCell11": 1,
+        "FlintCell12": 1,
+        "FlintCell13": 1,
+        "FlintCell14": 1,
+        "FlintCell15": 1,
+        "FlintCell16": 1,
+        "FlintCell17": 1,
+        "FlintCell18": 1,
+        "FlintCell19": 1,
+        "FlintCell20": 1,
+        "FlintCell21": 1,
+        "FlintCell22": 1,
+        "FlintCell23": 1,
+        "FlintCell24": 1,
+        "FlintCell25": 1,
+        "FlintCell26": 1,
+        "FlintCell27": 1,
+        "FlintCell28": 1,
+        "FlintCell29": 1,
+        "FlintCell30": 1,
+        "FlintCell31": 1,
+        "FlintCell32": 1,
+        "FlintCell33": 1,
+        "FlintCell34": 1,
+        "FlintCell35": 1,
+        "FlintCell36": 1,
+        "FlintCell37": 1,
+        "FlintCell38": 1,
+        "FlintCell39": 1,
+        "FlintCell40": 1,
+        "FlintCell41": 1,
+        "FlintCell42": 1,
+        "FlintCell43": 1,
+        "FlintCellReceipt": 1,
+        "amber": 43,
+        "tray.": 43
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-float-square",
+      "version": 1,
+      "category": "images",
+      "description": "Floating picture taller than a fresh body fits proportionally; ordinary-size same-wrap control (Docxodus #1450)",
+      "input": "fixtures/export-inline-context-float-square.docx",
+      "sha256": "9a3f3314007bd32e23011e6ece6cacf535b8bdbfcce6be0ac3ed611cee32dc02",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintFloatEnd": 1,
+        "FlintFloatStart": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-float-square-control",
+      "version": 1,
+      "category": "images",
+      "description": "Floating picture taller than a fresh body fits proportionally; ordinary-size same-wrap control (Docxodus #1450)",
+      "input": "fixtures/export-inline-context-float-square-control.docx",
+      "sha256": "fc4acc5a8e3a17509fcdeac96b6f2a9d134ae68cb218fa51bc2a07f35fb5edbd",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintFloatEnd": 1,
+        "FlintFloatStart": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-float-tight",
+      "version": 1,
+      "category": "images",
+      "description": "Floating picture taller than a fresh body fits proportionally; ordinary-size same-wrap control (Docxodus #1450)",
+      "input": "fixtures/export-inline-context-float-tight.docx",
+      "sha256": "aa26eea2673443371f7d4c0076c6e68859211f67a5281fce0798eaf1b35a1d69",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintFloatEnd": 1,
+        "FlintFloatStart": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-float-tight-control",
+      "version": 1,
+      "category": "images",
+      "description": "Floating picture taller than a fresh body fits proportionally; ordinary-size same-wrap control (Docxodus #1450)",
+      "input": "fixtures/export-inline-context-float-tight-control.docx",
+      "sha256": "b688fc186fe0dcea1f38904d5156d2c9b5152874ba095c6f05bbab35696f19c1",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintFloatEnd": 1,
+        "FlintFloatStart": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-tab-segment-long",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Manual prefix and left tab form a nonempty inline-flex segment in a long paragraph; fitting and ordinary controls",
+      "input": "fixtures/export-inline-context-tab-segment-long.docx",
+      "sha256": "d18637e8d8f3a3b2b37a84dc7b39086a58c16c4d053b3102d97671487318fff4",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "F7:": 1,
+        "FlintSegment01": 1,
+        "FlintSegment02": 1,
+        "FlintSegment03": 1,
+        "FlintSegment04": 1,
+        "FlintSegment05": 1,
+        "FlintSegment06": 1,
+        "FlintSegment07": 1,
+        "FlintSegment08": 1,
+        "FlintSegment09": 1,
+        "FlintSegment10": 1,
+        "FlintSegment11": 1,
+        "FlintSegment12": 1,
+        "FlintSegment13": 1,
+        "FlintSegment14": 1,
+        "FlintSegment15": 1,
+        "FlintSegment16": 1,
+        "FlintSegment17": 1,
+        "FlintSegment18": 1,
+        "FlintSegment19": 1,
+        "FlintSegment20": 1,
+        "FlintSegment21": 1,
+        "FlintSegment22": 1,
+        "FlintSegment23": 1,
+        "FlintSegment24": 1,
+        "FlintSegment25": 1,
+        "FlintSegment26": 1,
+        "FlintSegment27": 1,
+        "FlintSegment28": 1,
+        "FlintSegment29": 1,
+        "FlintSegment30": 1,
+        "FlintSegment31": 1,
+        "FlintSegment32": 1,
+        "FlintSegment33": 1,
+        "FlintSegment34": 1,
+        "FlintSegment35": 1,
+        "FlintSegment36": 1,
+        "FlintSegment37": 1,
+        "FlintSegment38": 1,
+        "FlintSegment39": 1,
+        "FlintSegment40": 1,
+        "FlintSegment41": 1,
+        "FlintSegmentReceipt": 1,
+        "linen": 41,
+        "shelf.": 41
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      },
+      "pdfTextNormalization": "isolated-dot-leaders-v1"
+    },
+    {
+      "id": "export-inline-context-tab-segment-fitting-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Manual prefix and left tab form a nonempty inline-flex segment in a long paragraph; fitting and ordinary controls",
+      "input": "fixtures/export-inline-context-tab-segment-fitting-control.docx",
+      "sha256": "4d592e1e0866648d927c2741abbc0f92963be8e655c6dac556d5258b0db3739c",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "F7:": 1,
+        "FlintSegment01": 1,
+        "FlintSegment02": 1,
+        "FlintSegment03": 1,
+        "FlintSegment04": 1,
+        "FlintSegment05": 1,
+        "FlintSegment06": 1,
+        "FlintSegment07": 1,
+        "FlintSegment08": 1,
+        "FlintSegment09": 1,
+        "FlintSegment10": 1,
+        "FlintSegmentReceipt": 1,
+        "linen": 10,
+        "shelf.": 10
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      },
+      "pdfTextNormalization": "isolated-dot-leaders-v1"
+    },
+    {
+      "id": "export-inline-context-tab-segment-ordinary-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Manual prefix and left tab form a nonempty inline-flex segment in a long paragraph; fitting and ordinary controls",
+      "input": "fixtures/export-inline-context-tab-segment-ordinary-control.docx",
+      "sha256": "4a10bf452a2cc3bd36ff197beb384eaca3f8305237259a8153baef5a9aafe65b",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintSegment01": 1,
+        "FlintSegment02": 1,
+        "FlintSegment03": 1,
+        "FlintSegment04": 1,
+        "FlintSegment05": 1,
+        "FlintSegment06": 1,
+        "FlintSegment07": 1,
+        "FlintSegment08": 1,
+        "FlintSegment09": 1,
+        "FlintSegment10": 1,
+        "FlintSegment11": 1,
+        "FlintSegment12": 1,
+        "FlintSegment13": 1,
+        "FlintSegment14": 1,
+        "FlintSegment15": 1,
+        "FlintSegment16": 1,
+        "FlintSegment17": 1,
+        "FlintSegment18": 1,
+        "FlintSegment19": 1,
+        "FlintSegment20": 1,
+        "FlintSegment21": 1,
+        "FlintSegment22": 1,
+        "FlintSegment23": 1,
+        "FlintSegment24": 1,
+        "FlintSegment25": 1,
+        "FlintSegment26": 1,
+        "FlintSegment27": 1,
+        "FlintSegment28": 1,
+        "FlintSegment29": 1,
+        "FlintSegment30": 1,
+        "FlintSegment31": 1,
+        "FlintSegment32": 1,
+        "FlintSegment33": 1,
+        "FlintSegment34": 1,
+        "FlintSegment35": 1,
+        "FlintSegment36": 1,
+        "FlintSegment37": 1,
+        "FlintSegment38": 1,
+        "FlintSegment39": 1,
+        "FlintSegment40": 1,
+        "FlintSegment41": 1,
+        "FlintSegmentReceipt": 1,
+        "linen": 41,
+        "shelf.": 41
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-shape-atoms",
+      "version": 1,
+      "category": "images",
+      "description": "Unsupported inline VML ovals retain their authored fallback labels beside a complete bitmap; fitting composition control, not oval-rendering parity",
+      "input": "fixtures/export-inline-context-shape-atoms.docx",
+      "sha256": "c9d0429f336080e45f9256b0dad22263bbbbb667f1b779f9956faf466ad4ae12",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintShapeReceipt": 1,
+        "[SHAPE]": 4
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-shape-atoms-control",
+      "version": 1,
+      "category": "images",
+      "description": "Unsupported inline VML ovals retain their authored fallback labels beside a complete bitmap; fitting composition control, not oval-rendering parity",
+      "input": "fixtures/export-inline-context-shape-atoms-control.docx",
+      "sha256": "dca63c14acff2bce74aac72738a50943e331267a6090c3294d87e97afd7a12b6",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintShapeReceipt": 1,
+        "[SHAPE]": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-textbox-drawingml-natural-host1",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Inline textbox uses its own line heights and stays outside host glyph-baseline lifting; single/triple host-spacing pair (Docxodus #1457)",
+      "input": "fixtures/export-inline-context-textbox-drawingml-natural-host1.docx",
+      "sha256": "97545fdd31799a81e926386a372b5e74632afeee734e0fc15469ed35ee9419cc",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintBoxLine1": 1,
+        "FlintBoxLine2": 1,
+        "FlintBoxLine3": 1,
+        "FlintBoxLine4": 1,
+        "FlintBoxReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-textbox-drawingml-natural-host3",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Inline textbox uses its own line heights and stays outside host glyph-baseline lifting; single/triple host-spacing pair (Docxodus #1457)",
+      "input": "fixtures/export-inline-context-textbox-drawingml-natural-host3.docx",
+      "sha256": "d220669681c02c4d1e53d29263f48875e7d000fcc61d361c7c9d8ea432945f9f",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintBoxLine1": 1,
+        "FlintBoxLine2": 1,
+        "FlintBoxLine3": 1,
+        "FlintBoxLine4": 1,
+        "FlintBoxReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-textbox-drawingml-exact-host1",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Inline textbox uses its own line heights and stays outside host glyph-baseline lifting; single/triple host-spacing pair (Docxodus #1457)",
+      "input": "fixtures/export-inline-context-textbox-drawingml-exact-host1.docx",
+      "sha256": "d9b5450350d2b2f28644a8a021b54c5b3a44cc69d53c12bb16e46a37b9552561",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintBoxLine1": 1,
+        "FlintBoxLine2": 1,
+        "FlintBoxLine3": 1,
+        "FlintBoxLine4": 1,
+        "FlintBoxReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-textbox-drawingml-exact-host3",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Inline textbox uses its own line heights and stays outside host glyph-baseline lifting; single/triple host-spacing pair (Docxodus #1457)",
+      "input": "fixtures/export-inline-context-textbox-drawingml-exact-host3.docx",
+      "sha256": "274e6f200a160cc051d7a77181461122fa584106845a2d538ac09926e930c863",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintBoxLine1": 1,
+        "FlintBoxLine2": 1,
+        "FlintBoxLine3": 1,
+        "FlintBoxLine4": 1,
+        "FlintBoxReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-textbox-vml-natural-host1",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Inline textbox uses its own line heights and stays outside host glyph-baseline lifting; single/triple host-spacing pair (Docxodus #1457)",
+      "input": "fixtures/export-inline-context-textbox-vml-natural-host1.docx",
+      "sha256": "3f8915629554c61b4ae0fb1ea716b17af48e412aceb3755a5933ad87a9da553a",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintBoxLine1": 1,
+        "FlintBoxLine2": 1,
+        "FlintBoxLine3": 1,
+        "FlintBoxLine4": 1,
+        "FlintBoxReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-textbox-vml-natural-host3",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Inline textbox uses its own line heights and stays outside host glyph-baseline lifting; single/triple host-spacing pair (Docxodus #1457)",
+      "input": "fixtures/export-inline-context-textbox-vml-natural-host3.docx",
+      "sha256": "9afcc4b1713fcd6534e84b6273c0b06ecef5081442f77cf58c80c3e1d4acff04",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintBoxLine1": 1,
+        "FlintBoxLine2": 1,
+        "FlintBoxLine3": 1,
+        "FlintBoxLine4": 1,
+        "FlintBoxReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-textbox-vml-exact-host1",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Inline textbox uses its own line heights and stays outside host glyph-baseline lifting; single/triple host-spacing pair (Docxodus #1457)",
+      "input": "fixtures/export-inline-context-textbox-vml-exact-host1.docx",
+      "sha256": "f864dbc3620f5f454a32c0e062631d73e68797fe4a3868bd4428afe7bc1b43d1",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintBoxLine1": 1,
+        "FlintBoxLine2": 1,
+        "FlintBoxLine3": 1,
+        "FlintBoxLine4": 1,
+        "FlintBoxReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    },
+    {
+      "id": "export-inline-context-textbox-vml-exact-host3",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Inline textbox uses its own line heights and stays outside host glyph-baseline lifting; single/triple host-spacing pair (Docxodus #1457)",
+      "input": "fixtures/export-inline-context-textbox-vml-exact-host3.docx",
+      "sha256": "e6fbf45a0b8b351c83e9438ac6081b8cd9465bfa89aaae67ff1cde67dd84d663",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintBoxLine1": 1,
+        "FlintBoxLine2": 1,
+        "FlintBoxLine3": 1,
+        "FlintBoxLine4": 1,
+        "FlintBoxReceipt": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "e05f4e0c90c99de8ebfd82fd573054023b7dbbf0f160da426f63b9377a11fb7c"
+      }
+    }
+  ]
+}

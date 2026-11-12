@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import math
 import re
+import tempfile
 import xml.etree.ElementTree as ET
 from collections import Counter
 from pathlib import Path
@@ -86,14 +87,83 @@ def normalize_text(info, policy):
     return dict(info, tokens=tokens, decorativeWords=decorative, pdfTextNormalization=policy)
 
 
-def inspect_case_pdf(path, case):
-    return normalize_text(inspect_pdf(path), case.get('pdfTextNormalization'))
+def inspect_case_pdf(path, case, *, word_font_bindings=None, font_contract=None):
+    info = normalize_text(inspect_pdf(path), case.get('pdfTextNormalization'))
+    declarations = [a for a in case.get('assertions', []) if a['type'] in ('color-reference-geometry', 'color-geometry')]
+    if declarations:
+        from .metrics import read_ppm
+        with tempfile.TemporaryDirectory(prefix='bench-color-') as folder:
+            pages = rasterize(path, folder)
+            info['colorRegions'] = []
+            for declaration in declarations:
+                page = declaration['page']
+                observed = {'page': page, 'rgb': declaration['rgb'], 'boundsPt': None, 'coverage': 0}
+                if page <= len(pages):
+                    observed.update(color_region(*read_ppm(pages[page - 1]), declaration['rgb']))
+                info['colorRegions'].append(observed)
+    rules = [a for a in case.get('assertions', []) if a['type'] == 'colored-rule-widths']
+    if rules:
+        from . import vector_rules
+        info['coloredRuleWidths'] = []
+        with tempfile.TemporaryDirectory(prefix='bench-rules-') as folder:
+            for declaration in rules:
+                page = declaration['page']
+                observed = {'page': page, 'rgb': declaration['rgb'], 'widthsPt': []}
+                try:
+                    if page > len(info['geometry']): raise ValueError('Declared rule page is missing')
+                    target = Path(folder) / f'page-{page}.svg'
+                    execute(['pdftocairo', '-f', str(page), '-l', str(page), '-svg', path, target], timeout=180)
+                    geometry = info['geometry'][page-1]
+                    box = geometry['crop']
+                    dimensions = [box[2]-box[0], box[3]-box[1]]
+                    if geometry['rotation'] % 180: dimensions.reverse()
+                    observed['widthsPt'] = vector_rules.widths(target.read_text(), declaration['rgb'], dimensions)
+                except ValueError as error:
+                    observed['error'] = str(error)
+                info['coloredRuleWidths'].append(observed)
+    if word_font_bindings is not None:
+        from .word_fonts import qualify
+        from .common import ROOT, contained
+        info = qualify(path, contained(ROOT, case['input']), info, word_font_bindings,
+                       font_contract, case['fonts'])
+    return info
 
 
-def inspect_pdf(path):
+def color_region(width, height, pixels, rgb):
+    """Measure only the declared ink blended over white, including antialias coverage.
+
+    Channel agreement rejects black text and unrelated colors. Bounds stay in the unshifted
+    96-DPI CropBox coordinate system; no candidate diagnostics or image-resource counts are used.
+    """
+    xs, ys, coverage = [], [], 0.0
+    for index in range(width * height):
+        sample = pixels[index * 3:index * 3 + 3]
+        if sample[0] == sample[1] == sample[2]: continue
+        alpha = [(255 - sample[c]) / (255 - rgb[c]) for c in range(3)]
+        amount = sum(alpha) / 3
+        if amount < 0.05 or max(alpha) - min(alpha) > 0.015 or amount > 1.015:
+            continue
+        xs.append(index % width); ys.append(index // width); coverage += min(1, amount)
+    return {'boundsPt': [min(xs) * .75, min(ys) * .75, (max(xs) + 1) * .75, (max(ys) + 1) * .75] if xs else None,
+            'coverage': coverage}
+
+
+def color_geometry_pass(declaration, reference, candidate):
+    def observation(info):
+        matches = [r for r in info.get('colorRegions', []) if r['page'] == declaration['page'] and r['rgb'] == declaration['rgb']]
+        return matches[0] if len(matches) == 1 else None
+    r = declaration if declaration['type'] == 'color-geometry' else observation(reference)
+    c = observation(candidate)
+    if not r or not c or not r['boundsPt'] or not c['boundsPt'] or r['coverage'] <= 0 or c['coverage'] <= 0:
+        return False
+    return (all(abs(a - b) <= declaration['tolerancePt'] for a, b in zip(r['boundsPt'], c['boundsPt'])) and
+            abs(c['coverage'] / r['coverage'] - 1) <= declaration['coverageTolerance'])
+
+
+def inspect_pdf(path, crop_box=False):
     structure = json.loads(execute(['qpdf', '--json=2', '--json-key=pages', '--json-key=qpdf', path]))
     geometry = geometries(structure)
-    words = bbox_words(execute(['pdftotext', '-bbox-layout', '-enc', 'UTF-8', path, '-']))
+    words = bbox_words(execute(['pdftotext', *(['-cropbox'] if crop_box else []), '-bbox-layout', '-enc', 'UTF-8', path, '-']))
     fonts_output = execute(['pdffonts', path])
     font_lines = fonts_output.splitlines()[2:]
     fonts = [line.split()[0].split('+')[-1] for line in font_lines if line.strip()]
@@ -124,7 +194,11 @@ def rasterize(pdf, folder):
 
 def font_check(info, families):
     allowed = [family.replace(' ', '').lower() for family in families]
-    return bool(info['fonts']) and all(any(font.replace('-', '').lower().startswith(family) for family in allowed) for font in info['fonts'])
+    bindings = info.get('verifiedWordFontBindings', {})
+    return bool(info['fonts']) and all(
+        any(font.replace('-', '').lower().startswith(family) for family in allowed) or
+        bindings.get(font, {}).get('family', '').replace(' ', '').lower() in allowed
+        for font in info['fonts'])
 
 
 def inventory_check(info, case):
@@ -167,8 +241,63 @@ def reference_failures(case, info, track='libreoffice'):
     return [check['name'] for check in correctness(case, info, info) if not check['passed']]
 
 
+def inspect_companion_pdf(path, declaration):
+    """Bind dark source-word extraction to paint in the same physical-page raster."""
+    from . import metrics
+    info = inspect_pdf(path, crop_box=True)
+    with tempfile.TemporaryDirectory(dir=Path(path).parent) as folder:
+        rasters = rasterize(path, folder)
+        if len(rasters) != len(info['geometry']):
+            raise ValueError('Companion PDF raster page coverage differs')
+        for page, raster in enumerate(rasters, 1):
+            width, height, pixels = metrics.read_ppm(raster)
+            # These declarations require dark source text. A pale note/highlight fill is
+            # nonwhite but cannot stand in for a printed glyph; require all RGB channels dark.
+            ink = bytearray(int(max(pixels[i:i+3]) < 160) for i in range(0, len(pixels), 3))
+            for word in info['words']:
+                if word['page'] != page or word['text'] not in declaration['requiredTokens']: continue
+                x0, y0, x1, y1 = [n * 96 / 72 for n in word['rect']]
+                word['inkPixels'] = sum(ink[y * width + x] for y in range(max(0, math.floor(y0)), min(height, math.ceil(y1)))
+                                        for x in range(max(0, math.floor(x0)), min(width, math.ceil(x1))))
+    return info
+
+
+def companion_checks(declaration, info):
+    """Check authored source text in a second print profile, without a layout reference.
+
+    Renderer-generated labels may differ; every declared source token must occur exactly as
+    often as authored and have positive bounds wholly within its physical PDF CropBox.
+    """
+    required = declaration['requiredTokens']
+    words = [w for w in info['words'] if w['text'] in required]
+    observed = Counter(w['text'] for w in (info['words'] if declaration.get('exactInventory') else words))
+    outside = []
+    for word in words:
+        geometry = info['geometry'][word['page'] - 1]
+        page = geometry['crop']
+        x0, y0, x1, y1 = word['rect']
+        width, height = page[2] - page[0], page[3] - page[1]
+        if geometry.get('rotation', 0) % 180: width, height = height, width
+        if not (0 <= x0 < x1 <= width + .25 and 0 <= y0 < y1 <= height + .25):
+            outside.append(word)
+    box = [0, 0, *declaration['pageSizePt']]
+    paper_matches = bool(info['geometry']) and all(g.get('rotation', 0) == 0 and all(
+        len(g[k]) == 4 and all(abs(a - b) <= .25 for a, b in zip(g[k], box)) for k in ('media', 'crop'))
+        for g in info['geometry'])
+    return [{'name': 'companion-pdf-paper-geometry', 'passed': paper_matches, 'expected': box},
+            {'name': 'companion-pdf-source-tokens', 'passed': observed == required,
+             'missing': dict(Counter(required) - observed), 'extra': dict(observed - Counter(required))},
+            {'name': 'companion-pdf-source-bounds', 'passed': not outside, 'outside': outside},
+            {'name': 'companion-pdf-source-paint', 'passed': bool(words) and all(w.get('inkPixels', 0) > 0 for w in words),
+             'unpainted': [w for w in words if w.get('inkPixels', 0) <= 0]}] + ([{
+                 'name': 'companion-pdf-forbidden-tokens',
+                 'passed': not any(w['text'] in declaration['forbiddenTokens'] for w in info['words']),
+                 'observed': [w for w in info['words'] if w['text'] in declaration['forbiddenTokens']],
+             }] if 'forbiddenTokens' in declaration else [])
+
+
 def correctness(case, reference, candidate):
-    checks = [{'name': 'page-count', 'passed': len(reference['geometry']) == len(candidate['geometry'])}, {'name': 'expected-visible-tokens', 'passed': inventory_check(candidate, case), 'missing': dict(Counter(case['tokens']) - Counter(candidate['tokens'])), 'extra': dict(Counter(candidate['tokens']) - Counter(case['tokens'])), 'normalizedRaw': dict(Counter(w['raw'] for w in candidate['words'] if 'raw' in w))}, {'name': 'declared-font-families', 'passed': font_check(candidate, case['fonts']), 'observed': candidate['fonts']}]
+    checks = [{'name': 'page-count', 'passed': len(reference['geometry']) == len(candidate['geometry'])}, {'name': 'expected-visible-tokens', 'passed': inventory_check(candidate, case), 'missing': dict(Counter(case['tokens']) - Counter(candidate['tokens'])), 'extra': dict(Counter(candidate['tokens']) - Counter(case['tokens'])), 'normalizedRaw': dict(Counter(w['raw'] for w in candidate['words'] if 'raw' in w))}, {'name': 'declared-font-families', 'passed': font_check(candidate, case['fonts'] + case.get('embeddedFonts', [])), 'observed': candidate['fonts']}]
     if case.get('clippedTokens'):
         checks[1]['clippedTokens'] = case['clippedTokens']
         checks[1]['observedClippedTokens'] = {word: candidate['tokens'].get(word, 0) for word in case['clippedTokens']}
@@ -185,9 +314,29 @@ def correctness(case, reference, candidate):
         checks.append({'name': f'physical-geometry-page-{i+1}', 'passed': passed})
     for assertion in case['assertions']:
         try:
-            if assertion['type'] == 'same-page':
+            if assertion['type'] == 'required-font-family':
+                passed = any(font_check(dict(candidate, fonts=[font]), [assertion['family']]) for font in candidate['fonts'])
+            elif assertion['type'] == 'colored-rule-widths':
+                from . import vector_rules
+                records = [r for r in candidate.get('coloredRuleWidths', []) if r['page'] == assertion['page'] and r['rgb'] == assertion['rgb']]
+                passed = len(records) == 1 and vector_rules.matches(assertion, records[0])
+            elif assertion['type'] in ('color-reference-geometry', 'color-geometry'):
+                passed = color_geometry_pass(assertion, reference, candidate)
+            elif assertion['type'] == 'same-page':
                 anchors = [marker(candidate, m) for m in assertion['markers']]
                 passed = len({a['page'] for a in anchors}) == 1
+            elif assertion['type'] == 'non-overlapping-markers':
+                first, second = [marker(candidate, label) for label in assertion['markers']]
+                for word in (first, second):
+                    rect = word['rect']
+                    if (not isinstance(rect, list) or len(rect) != 4 or
+                            any(type(n) not in (int, float) or not math.isfinite(n) for n in rect) or
+                            rect[2] <= rect[0] or rect[3] <= rect[1] or type(word['page']) is not int or
+                            not 1 <= word['page'] <= len(candidate['geometry'])):
+                        raise ValueError('Marker separation requires finite positive bounds on a physical page')
+                passed = first['page'] != second['page'] or any(
+                    min(first['rect'][axis + 2], second['rect'][axis + 2]) -
+                    max(first['rect'][axis], second['rect'][axis]) <= assertion['tolerancePt'] for axis in (0, 1))
             elif assertion['type'] == 'marker-reference-position':
                 a = marker(candidate, assertion['marker'])
                 expected = marker(reference, assertion['marker'])

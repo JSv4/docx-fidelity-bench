@@ -1,0 +1,1450 @@
+{
+  "schema": 1,
+  "suite": {
+    "id": "export-reliability-focused",
+    "version": 1,
+    "cases": [
+      "export-reliability-header-spacing",
+      "export-reliability-header-spacing-control",
+      "export-reliability-footer-spacing",
+      "export-reliability-footer-spacing-control",
+      "export-reliability-header-margin-cells",
+      "export-reliability-header-margin-cells-control",
+      "export-reliability-footer-margin-cells",
+      "export-reliability-footer-margin-cells-control",
+      "export-reliability-rowless-table",
+      "export-reliability-hidden-joined-source",
+      "export-reliability-hidden-final-mark",
+      "export-reliability-rowless-table-control",
+      "export-reliability-hidden-joined-source-control",
+      "export-reliability-hidden-final-mark-control",
+      "export-reliability-textbox-blank-tail",
+      "export-reliability-textbox-blank-tail-control",
+      "export-reliability-oversized-kept-paragraph",
+      "export-reliability-oversized-kept-paragraph-control",
+      "export-reliability-body-cell-paragraph",
+      "export-reliability-body-cell-nested",
+      "export-reliability-body-cell-control",
+      "export-reliability-oversized-citing-table",
+      "export-reliability-oversized-citing-table-control",
+      "export-reliability-unused-xml",
+      "export-reliability-unused-xml-control",
+      "export-reliability-body-table-width",
+      "export-reliability-body-table-width-control",
+      "export-reliability-header-picture-page-absolute",
+      "export-reliability-header-picture-page-relative",
+      "export-reliability-header-picture-inline-control",
+      "export-reliability-fractional-row",
+      "export-reliability-fractional-tab",
+      "export-reliability-fractional-row-control",
+      "export-reliability-fractional-tab-control"
+    ]
+  },
+  "cases": [
+    {
+      "id": "export-reliability-header-spacing",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Header with four adjacent 20pt paragraph margins; full story text required (Docxodus #1432)",
+      "input": "fixtures/export-reliability-header-spacing.docx",
+      "sha256": "70861036716f64d4171657d91918995355d4bfd74fb2afe79775d384339f9bf2",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchBody": 1,
+        "LarchHeaderA": 1,
+        "LarchHeaderB": 1,
+        "LarchHeaderC": 1,
+        "LarchHeaderD": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-header-spacing-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Header with four adjacent 0pt paragraph margins; full story text required (Docxodus #1432)",
+      "input": "fixtures/export-reliability-header-spacing-control.docx",
+      "sha256": "4cffe7f2a94bc9211e40b1ef5ee571fbc7d0dbc79a13e66f438262f52fd7dac6",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchBody": 1,
+        "LarchHeaderA": 1,
+        "LarchHeaderB": 1,
+        "LarchHeaderC": 1,
+        "LarchHeaderD": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-footer-spacing",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Footer with four adjacent 20pt paragraph margins; full story text required (Docxodus #1432)",
+      "input": "fixtures/export-reliability-footer-spacing.docx",
+      "sha256": "6694001306b70da928dd3e4db19b4419fa2ce2645b3ede16b3bd1dfa8cf71c97",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchBody": 1,
+        "LarchFooterA": 1,
+        "LarchFooterB": 1,
+        "LarchFooterC": 1,
+        "LarchFooterD": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-footer-spacing-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Footer with four adjacent 0pt paragraph margins; full story text required (Docxodus #1432)",
+      "input": "fixtures/export-reliability-footer-spacing-control.docx",
+      "sha256": "e23f560b5cdc2859539b1d56ef20002f7d39abcbdafc3745ec4d04371793fae2",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchBody": 1,
+        "LarchFooterA": 1,
+        "LarchFooterB": 1,
+        "LarchFooterC": 1,
+        "LarchFooterD": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-header-margin-cells",
+      "version": 2,
+      "category": "tables",
+      "description": "Header table with edge cells in both side margins; paper contains every label",
+      "input": "fixtures/export-reliability-header-margin-cells.docx",
+      "sha256": "dbe084f054f1d267c5357902267bdac4b5c261d4b4772dd006779ee4a9d9cd88",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "HL": 1,
+        "HR": 1,
+        "LarchBody": 1,
+        "LarchHeaderCore": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "HL",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            20,
+            8,
+            40,
+            25
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "HR",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            338,
+            8,
+            358,
+            25
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-header-margin-cells-control",
+      "version": 2,
+      "category": "tables",
+      "description": "Header table with edge cells inside the text width (control); paper contains every label",
+      "input": "fixtures/export-reliability-header-margin-cells-control.docx",
+      "sha256": "d1abb6197f1f2c80a85315c5e37b88a8b5348c36e9b1d31986cf9740be70e02c",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "HL": 1,
+        "HR": 1,
+        "LarchBody": 1,
+        "LarchHeaderCore": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "HL",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            38,
+            8,
+            58,
+            25
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "HR",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            320,
+            8,
+            340,
+            25
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-footer-margin-cells",
+      "version": 2,
+      "category": "tables",
+      "description": "Footer table with edge cells in both side margins; paper contains every label",
+      "input": "fixtures/export-reliability-footer-margin-cells.docx",
+      "sha256": "df890bf5a143dc8d1d1d99f61282fb2c3f03aed44a2672094166ee2dba3b25fe",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FL": 1,
+        "FR": 1,
+        "LarchBody": 1,
+        "LarchFooterCore": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "FL",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            20,
+            415,
+            40,
+            434
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "FR",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            338,
+            415,
+            358,
+            434
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-footer-margin-cells-control",
+      "version": 2,
+      "category": "tables",
+      "description": "Footer table with edge cells inside the text width (control); paper contains every label",
+      "input": "fixtures/export-reliability-footer-margin-cells-control.docx",
+      "sha256": "1cf3c0c044841a2f0ea378a145d14c60f5bcadc676d39f4a85d357f47d2b2229",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FL": 1,
+        "FR": 1,
+        "LarchBody": 1,
+        "LarchFooterCore": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "FL",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            38,
+            415,
+            58,
+            434
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "FR",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            320,
+            415,
+            340,
+            434
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-rowless-table",
+      "version": 1,
+      "category": "tables",
+      "description": "An empty table retains source identity without painted rows; ordinary paragraph control",
+      "input": "fixtures/export-reliability-rowless-table.docx",
+      "sha256": "007ba96f260d969f7043bfcdfc081a5266e6bad32bd0fbdbdb5e5fd5495341f8",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchLedger": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-hidden-joined-source",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Hidden paragraph mark and hidden text with an empty visible run; ordinary joined-text control",
+      "input": "fixtures/export-reliability-hidden-joined-source.docx",
+      "sha256": "a27528db7cd8aecd06b9b81052af94ff4803a71e5e318cd1ea0fdf349a82f405",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchLead": 1,
+        "LarchTail": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-hidden-final-mark",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Final hidden paragraph mark owns the section boundary; visible blank-line control",
+      "input": "fixtures/export-reliability-hidden-final-mark.docx",
+      "sha256": "93345ad5c9fd54561045ac6f5d2e50c48457148be2456c4fdbf3423f592719a7",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchBoundary": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-rowless-table-control",
+      "version": 1,
+      "category": "tables",
+      "description": "An empty table retains source identity without painted rows; ordinary paragraph control",
+      "input": "fixtures/export-reliability-rowless-table-control.docx",
+      "sha256": "2c0ebbd0e0342690db4852398daacc5cbe1fd4d3cb0a9bde97c2c025572449ab",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchLedger": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-hidden-joined-source-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Hidden paragraph mark and hidden text with an empty visible run; ordinary joined-text control",
+      "input": "fixtures/export-reliability-hidden-joined-source-control.docx",
+      "sha256": "71a5d35470e5407a7365da3a6ff06aa2d76721fc340c1c00ddaaa96d96b62e57",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchLead": 1,
+        "LarchTail": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-hidden-final-mark-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Final hidden paragraph mark owns the section boundary; visible blank-line control",
+      "input": "fixtures/export-reliability-hidden-final-mark-control.docx",
+      "sha256": "8c2e419c012ccf82e15a2929723d5bba2abed8ababe5709e9241cef459af1749",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchBoundary": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-textbox-blank-tail",
+      "version": 1,
+      "category": "images",
+      "description": "Fixed-height text box with a wholly clipped blank final line; no-tail control",
+      "input": "fixtures/export-reliability-textbox-blank-tail.docx",
+      "sha256": "fc0abde7ea3f9292bb043c036ec64daae02fa913a016027ffa1cf7ab9f0bfc5a",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchAfterBox": 1,
+        "LarchBox": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-textbox-blank-tail-control",
+      "version": 1,
+      "category": "images",
+      "description": "Fixed-height text box with a wholly clipped blank final line; no-tail control",
+      "input": "fixtures/export-reliability-textbox-blank-tail-control.docx",
+      "sha256": "1d89152849cc7bdb83152a8f40c552041f3c6d41719b8bb189c243b971f57f4e",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchAfterBox": 1,
+        "LarchBox": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-oversized-kept-paragraph",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Thirty-four lines exceed a fresh page with keepLines; unkept control (Docxodus #1430)",
+      "input": "fixtures/export-reliability-oversized-kept-paragraph.docx",
+      "sha256": "a739d37f5871d88126f1c971c479c37620bb1816214013ab3f4adeddc68d8ce9",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchKeep01": 1,
+        "LarchKeep02": 1,
+        "LarchKeep03": 1,
+        "LarchKeep04": 1,
+        "LarchKeep05": 1,
+        "LarchKeep06": 1,
+        "LarchKeep07": 1,
+        "LarchKeep08": 1,
+        "LarchKeep09": 1,
+        "LarchKeep10": 1,
+        "LarchKeep11": 1,
+        "LarchKeep12": 1,
+        "LarchKeep13": 1,
+        "LarchKeep14": 1,
+        "LarchKeep15": 1,
+        "LarchKeep16": 1,
+        "LarchKeep17": 1,
+        "LarchKeep18": 1,
+        "LarchKeep19": 1,
+        "LarchKeep20": 1,
+        "LarchKeep21": 1,
+        "LarchKeep22": 1,
+        "LarchKeep23": 1,
+        "LarchKeep24": 1,
+        "LarchKeep25": 1,
+        "LarchKeep26": 1,
+        "LarchKeep27": 1,
+        "LarchKeep28": 1,
+        "LarchKeep29": 1,
+        "LarchKeep30": 1,
+        "LarchKeep31": 1,
+        "LarchKeep32": 1,
+        "LarchKeep33": 1,
+        "LarchKeep34": 1,
+        "LarchKeepEnd": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-oversized-kept-paragraph-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Thirty-four lines exceed a fresh page with keepLines; unkept control (Docxodus #1430)",
+      "input": "fixtures/export-reliability-oversized-kept-paragraph-control.docx",
+      "sha256": "f7784f309a69bb1f86617793af8c97eb5da46783304b307dbceb67d4433f911b",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchKeep01": 1,
+        "LarchKeep02": 1,
+        "LarchKeep03": 1,
+        "LarchKeep04": 1,
+        "LarchKeep05": 1,
+        "LarchKeep06": 1,
+        "LarchKeep07": 1,
+        "LarchKeep08": 1,
+        "LarchKeep09": 1,
+        "LarchKeep10": 1,
+        "LarchKeep11": 1,
+        "LarchKeep12": 1,
+        "LarchKeep13": 1,
+        "LarchKeep14": 1,
+        "LarchKeep15": 1,
+        "LarchKeep16": 1,
+        "LarchKeep17": 1,
+        "LarchKeep18": 1,
+        "LarchKeep19": 1,
+        "LarchKeep20": 1,
+        "LarchKeep21": 1,
+        "LarchKeep22": 1,
+        "LarchKeep23": 1,
+        "LarchKeep24": 1,
+        "LarchKeep25": 1,
+        "LarchKeep26": 1,
+        "LarchKeep27": 1,
+        "LarchKeep28": 1,
+        "LarchKeep29": 1,
+        "LarchKeep30": 1,
+        "LarchKeep31": 1,
+        "LarchKeep32": 1,
+        "LarchKeep33": 1,
+        "LarchKeep34": 1,
+        "LarchKeepEnd": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-body-cell-paragraph",
+      "version": 1,
+      "category": "tables",
+      "description": "Oversized body cell holding paragraph; every numbered line and neighbour required (Docxodus #1433)",
+      "input": "fixtures/export-reliability-body-cell-paragraph.docx",
+      "sha256": "f3bcdddf8d80dfdcb7984d5a94f45608a7ed99e39432a8f1151a1d6a27f5fc8d",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchCell01": 1,
+        "LarchCell02": 1,
+        "LarchCell03": 1,
+        "LarchCell04": 1,
+        "LarchCell05": 1,
+        "LarchCell06": 1,
+        "LarchCell07": 1,
+        "LarchCell08": 1,
+        "LarchCell09": 1,
+        "LarchCell10": 1,
+        "LarchCell11": 1,
+        "LarchCell12": 1,
+        "LarchCell13": 1,
+        "LarchCell14": 1,
+        "LarchCell15": 1,
+        "LarchCell16": 1,
+        "LarchCell17": 1,
+        "LarchCell18": 1,
+        "LarchCell19": 1,
+        "LarchCell20": 1,
+        "LarchCell21": 1,
+        "LarchCell22": 1,
+        "LarchCell23": 1,
+        "LarchCell24": 1,
+        "LarchCell25": 1,
+        "LarchCell26": 1,
+        "LarchCell27": 1,
+        "LarchCell28": 1,
+        "LarchCell29": 1,
+        "LarchCell30": 1,
+        "LarchCell31": 1,
+        "LarchCell32": 1,
+        "LarchCell33": 1,
+        "LarchCell34": 1,
+        "SideCell": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-body-cell-nested",
+      "version": 1,
+      "category": "tables",
+      "description": "Oversized body cell holding nested; every numbered line and neighbour required (Docxodus #1433)",
+      "input": "fixtures/export-reliability-body-cell-nested.docx",
+      "sha256": "efb5847edafcb45a9fdaa6a70f552cee214647d39b23a93571aca3ab75cf1f73",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchCell01": 1,
+        "LarchCell02": 1,
+        "LarchCell03": 1,
+        "LarchCell04": 1,
+        "LarchCell05": 1,
+        "LarchCell06": 1,
+        "LarchCell07": 1,
+        "LarchCell08": 1,
+        "LarchCell09": 1,
+        "LarchCell10": 1,
+        "LarchCell11": 1,
+        "LarchCell12": 1,
+        "LarchCell13": 1,
+        "LarchCell14": 1,
+        "LarchCell15": 1,
+        "LarchCell16": 1,
+        "LarchCell17": 1,
+        "LarchCell18": 1,
+        "LarchCell19": 1,
+        "LarchCell20": 1,
+        "LarchCell21": 1,
+        "LarchCell22": 1,
+        "LarchCell23": 1,
+        "LarchCell24": 1,
+        "LarchCell25": 1,
+        "LarchCell26": 1,
+        "LarchCell27": 1,
+        "LarchCell28": 1,
+        "LarchCell29": 1,
+        "LarchCell30": 1,
+        "LarchCell31": 1,
+        "LarchCell32": 1,
+        "LarchCell33": 1,
+        "LarchCell34": 1,
+        "SideCell": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-body-cell-control",
+      "version": 1,
+      "category": "tables",
+      "description": "Oversized body cell holding control; every numbered line and neighbour required (Docxodus #1433)",
+      "input": "fixtures/export-reliability-body-cell-control.docx",
+      "sha256": "2fa6ee2ddb0b3f838be7fc3e4c6341aa4fc6ccf5ca10398605dc253a8f0cad16",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchCell01": 1,
+        "LarchCell02": 1,
+        "LarchCell03": 1,
+        "LarchCell04": 1,
+        "LarchCell05": 1,
+        "LarchCell06": 1,
+        "LarchCell07": 1,
+        "LarchCell08": 1,
+        "LarchCell09": 1,
+        "LarchCell10": 1,
+        "LarchCell11": 1,
+        "LarchCell12": 1,
+        "LarchCell13": 1,
+        "LarchCell14": 1,
+        "LarchCell15": 1,
+        "LarchCell16": 1,
+        "LarchCell17": 1,
+        "LarchCell18": 1,
+        "LarchCell19": 1,
+        "LarchCell20": 1,
+        "LarchCell21": 1,
+        "LarchCell22": 1,
+        "LarchCell23": 1,
+        "LarchCell24": 1,
+        "LarchCell25": 1,
+        "LarchCell26": 1,
+        "LarchCell27": 1,
+        "LarchCell28": 1,
+        "LarchCell29": 1,
+        "LarchCell30": 1,
+        "LarchCell31": 1,
+        "LarchCell32": 1,
+        "LarchCell33": 1,
+        "LarchCell34": 1,
+        "SideCell": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-oversized-citing-table",
+      "version": 1,
+      "category": "notes",
+      "description": "Table exceeds a fresh page and owns a footnote citation; four-row fitting control (Docxodus #1435)",
+      "input": "fixtures/export-reliability-oversized-citing-table.docx",
+      "sha256": "497d681cc923fc582ebcc409ae7af19889e821e1bd6f9e2eb3ffb959f14beef4",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "1": 2,
+        "LarchCitation01": 1,
+        "LarchCitation02": 1,
+        "LarchCitation03": 1,
+        "LarchCitation04": 1,
+        "LarchCitation05": 1,
+        "LarchCitation06": 1,
+        "LarchCitation07": 1,
+        "LarchCitation08": 1,
+        "LarchCitation09": 1,
+        "LarchCitation10": 1,
+        "LarchCitation11": 1,
+        "LarchCitation12": 1,
+        "LarchCitation13": 1,
+        "LarchCitation14": 1,
+        "LarchCitation15": 1,
+        "LarchCitation16": 1,
+        "LarchCitation17": 1,
+        "LarchCitation18": 1,
+        "LarchCitation19": 1,
+        "LarchCitation20": 1,
+        "LarchCitation21": 1,
+        "LarchCitation22": 1,
+        "LarchCitation23": 1,
+        "LarchCitation24": 1,
+        "LarchCitation25": 1,
+        "LarchCitation26": 1,
+        "LarchNote": 1
+      },
+      "assertions": [
+        {
+          "type": "same-page",
+          "version": 1,
+          "markers": [
+            "LarchCitation02",
+            "LarchNote"
+          ]
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-oversized-citing-table-control",
+      "version": 1,
+      "category": "notes",
+      "description": "Table exceeds a fresh page and owns a footnote citation; four-row fitting control (Docxodus #1435)",
+      "input": "fixtures/export-reliability-oversized-citing-table-control.docx",
+      "sha256": "5a3f8a419257b9747df21907c859e1262f667990b5ff20edd1c8b456556cc5dd",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "1": 2,
+        "LarchCitation01": 1,
+        "LarchCitation02": 1,
+        "LarchCitation03": 1,
+        "LarchCitation04": 1,
+        "LarchNote": 1
+      },
+      "assertions": [
+        {
+          "type": "same-page",
+          "version": 1,
+          "markers": [
+            "LarchCitation02",
+            "LarchNote"
+          ]
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-unused-xml",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Malformed unreferenced XML remains warning-only; well-formed unused-part control (Docxodus #1434)",
+      "input": "fixtures/export-reliability-unused-xml.docx",
+      "sha256": "c46d29d13ceb9ff2633e46bd054c1eeb56fdf5663f071e15ac0a9d3b904fb47d",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchUnusedPart": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-unused-xml-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Malformed unreferenced XML remains warning-only; well-formed unused-part control (Docxodus #1434)",
+      "input": "fixtures/export-reliability-unused-xml-control.docx",
+      "sha256": "7bc9acdd04866ea17545772e69cc3324c1b5b3d678faa72c9f5a6dd3807687e0",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchUnusedPart": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-body-table-width",
+      "version": 1,
+      "category": "tables",
+      "description": "Fixed table is wider than the paper; proportional fitting preserves every cell; fitting-width control",
+      "input": "fixtures/export-reliability-body-table-width.docx",
+      "sha256": "6de52efbcb3fd2efbadd06c0d7d989c41fd9764898e29070b99e821c17f6dd2b",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchEast": 1,
+        "LarchMiddle": 1,
+        "LarchWest": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-body-table-width-control",
+      "version": 1,
+      "category": "tables",
+      "description": "Fixed table is wider than the paper; proportional fitting preserves every cell; fitting-width control",
+      "input": "fixtures/export-reliability-body-table-width-control.docx",
+      "sha256": "3bebb489144a95e103a180e703c89f6add2ca2764f3b420428cb9ca14e962435",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchEast": 1,
+        "LarchMiddle": 1,
+        "LarchWest": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-header-picture-page-absolute",
+      "version": 2,
+      "category": "images",
+      "description": "Original pale header picture: page-absolute; page-relative variants sit at the paper origin behind body text",
+      "input": "fixtures/export-reliability-header-picture-page-absolute.docx",
+      "sha256": "ddc1448c1d4f1f1fa5d096298bb9389219910e8f3cb58faf902bf22907d73278",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchPaperMark": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "LarchPaperMark",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            35,
+            35,
+            345,
+            80
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-header-picture-page-relative",
+      "version": 2,
+      "category": "images",
+      "description": "Original pale header picture: page-relative; page-relative variants sit at the paper origin behind body text",
+      "input": "fixtures/export-reliability-header-picture-page-relative.docx",
+      "sha256": "eed28c3bdd2c357de47582094282f41153c6195af5dffc0fd23b745b76751ba0",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchPaperMark": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "LarchPaperMark",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            35,
+            35,
+            345,
+            80
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-header-picture-inline-control",
+      "version": 2,
+      "category": "images",
+      "description": "Original pale header picture: inline-control; page-relative variants sit at the paper origin behind body text",
+      "input": "fixtures/export-reliability-header-picture-inline-control.docx",
+      "sha256": "7179e39d7a39dbcdaab9316441ba7107da9b3785db7e16bd192327be9d1d9d60",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchPaperMark": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "LarchPaperMark",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            35,
+            35,
+            345,
+            80
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-fractional-row",
+      "version": 1,
+      "category": "tables",
+      "description": "Bare fractional twip row height; equivalent point-valued control (Docxodus #1436)",
+      "input": "fixtures/export-reliability-fractional-row.docx",
+      "sha256": "58ab9f7b9a13a33320a3d3e080a4b2018922dba1a09e5658f576145bb9f341fc",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchFractionalRow": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-fractional-tab",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Bare fractional twip tab position; equivalent point-valued control (Docxodus #1436)",
+      "input": "fixtures/export-reliability-fractional-tab.docx",
+      "sha256": "265a926fe57cc867c2edd84401cb3230e3b6ea9c498efccbabe98ede91ae35de",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchTabLeft": 1,
+        "LarchTabRight": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-fractional-row-control",
+      "version": 1,
+      "category": "tables",
+      "description": "Bare fractional twip row height; equivalent point-valued control (Docxodus #1436)",
+      "input": "fixtures/export-reliability-fractional-row-control.docx",
+      "sha256": "bb1b5782be6d04a9fc79c3b837f8f1230146e62d195e632c2b989f396fd7900a",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchFractionalRow": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    },
+    {
+      "id": "export-reliability-fractional-tab-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Bare fractional twip tab position; equivalent point-valued control (Docxodus #1436)",
+      "input": "fixtures/export-reliability-fractional-tab-control.docx",
+      "sha256": "cd2291aeff886f81168373e544730c7374eb9c5098cead9f3f8543c3e49c66b5",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "LarchTabLeft": 1,
+        "LarchTabRight": 1
+      },
+      "assertions": [],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "c1ae17f576ab6b6cf42316f399c1fd936f4eaec95ccf4dc9071ab045cfacf50f"
+      }
+    }
+  ]
+}
