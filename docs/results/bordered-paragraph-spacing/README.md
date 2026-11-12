@@ -74,6 +74,52 @@ which Docxodus still fills by line.
 | `border-keep-next` | ![keep](border-keep-next.png) |
 | `border-shading` | ![shading](border-shading.png) |
 
+## The paragraphs inside a box (`core-v164`)
+
+Eight original Blackthorn cases pin what [Docxodus #1692](https://github.com/JSv4/Docxodus/issues/1692)
+left open after the cases above, with the same text, lines, box and `w:pPrDefault`.
+
+| Case | Content | Word 2024 | Docxodus `main` at `80ded70a` |
+|---|---|---|---|
+| `border-keep-last` | 38 unspaced lines, two unspaced paragraphs in one box, the second with `w:keepNext`, then a line that does not fit page 1 | the first boxed paragraph stays on page 1 and the box is open below it; the second starts page 2 at the top margin with no top border, the bottom border below it, then the next line | both boxed paragraphs move to page 2 |
+| `border-keep-last-control` | the same without `w:keepNext` | both boxed paragraphs on page 1, the next line on page 2 | as Word |
+| `border-shading-mixed` | a box of two paragraphs: 14pt before and 5pt after, light blue; 20pt before and 14pt after, sand | light blue 69.6–542.5 by 102.5–124.6: from the top border through the first line and its 5pt after. Sand 124.6–156.5: the other 15pt of the collapsed 20pt, the second line, to the bottom border | each fill covers its own 16pt line at the text's width (72–540 by 103.5–119.5 and 139.5–155.5) |
+| `border-shading-mixed-control` | the same with both paragraphs light blue | one fill, 69.6–542.5 by 102.5–156.5 | as Word, within the tolerance |
+| `border-shading-open-side` | a shaded paragraph with top, left and bottom borders (`w:space="4"`) and no right border | fill 70.6–541.5 by 102.5–126.5: from the top border to the bottom border, and no wider than an unbordered paragraph's fill, so the left border's `w:space` stays white | the 16pt line only, 106.5–122.5 |
+| `border-shading-open-side-control` | the same with the right border | fill 66.6–545.5 by 102.5–126.5, through `w:space` on both sides | as Word, within the tolerance |
+| `border-between-position` | a box of two paragraphs with a 3pt dark-blue `w:between`: 5pt after the first, 20pt before the second | rule at 125.5–128.5: the first line's end (119.5), 5pt, 1pt `w:space`. Then 1pt, the other 15pt, and the second line at 144.5 | lines as Word; rule at 140.5–143.5, below all 20pt |
+| `border-between-position-control` | the same with 20pt after the first and 5pt before the second | rule at 140.5–143.5; the second line at 144.5 | as Word |
+
+Word 2024 (build 16.0.20326, November 2026) printed these exact inputs with the font renamed to Times
+New Roman. Its word boxes lie inside every region, and the numbers above are the rectangles in its
+PDFs. The fills and the rule are declared as `color-geometry`, adjudicated by Word, with the 2pt
+bound and 10% coverage tolerances of `border-shading`. The house 0.5pt black rule is two thirds of
+a 96dpi pixel, too thin for a raster scan to place, so this pair's rule is 3pt and has its own
+colour; the box around it is unchanged. Word puts the house rule at the same top, 125.5–126.
+
+The `main` column is that commit's PDF export of these inputs in Liberation Serif. It fails the four
+inputs on the assertions the table names and passes the four controls. A build of the pending
+Docxodus change for #1692 (the working tree of `fix/1692-box-paragraph-slabs`) passes all eight. So
+does Word's own print. These were checked with PyMuPDF word boxes and a PyMuPDF 96dpi raster run
+through the bench's own colour scan and pass rule, not with the bench's inspection: this machine has
+neither qpdf nor Poppler's rasteriser. MuPDF truncates colour components where Poppler rounds them,
+so pixels one level from a declared colour were counted as that colour.
+
+Not pinned: where the black borders are drawn, including the open bottom of the box on page 1 and
+the missing top border on page 2 of `border-keep-last` (they are grey, which the colour scan
+excludes); a keep on the last of three or more paragraphs, or on the last two; and a `w:between`
+rule or shading carried across a page break.
+
+Each image shows `main` above the pending change, the input beside its control, with Word's line
+slots dashed in blue and Word's paint dashed in red. They are Docxodus output, not Word page renders.
+
+| Pair | Docxodus `main` and the #1692 change |
+|---|---|
+| `border-keep-last` | ![keep last](border-keep-last.png) |
+| `border-shading-mixed` | ![mixed shading](border-shading-mixed.png) |
+| `border-shading-open-side` | ![open side](border-shading-open-side.png) |
+| `border-between-position` | ![between position](border-between-position.png) |
+
 LibreOffice reference captures and candidate scoring are pending. This machine has no pinned
 LibreOffice, so no reference bundle is included and no eligibility or fidelity score is claimed.
 All prior input hashes are unchanged.

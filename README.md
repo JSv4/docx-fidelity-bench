@@ -71,6 +71,14 @@ LibreOffice references are pending. See [the evidence and limits](docs/results/a
 Docxodus #1622: border `w:sz="4.5"` in paragraph, table and cell borders, and `w:gridCol w:w="4000.5"`.
 Word 2024 truncates each value. LibreOffice references are pending. See [the evidence and limits](docs/results/fractional-measures/README.md).
 
+`core-v164` adds four more inputs and controls for Docxodus #1692, each about the paragraphs inside
+one box: `w:keepNext` on the last of them, which Word 2024 moves alone to the next page; two with
+different shading, each filled from the paragraph above to its own space after; a shaded box with no
+right border; and a `w:between` rule, drawn below the upper paragraph's space after. Regions are
+each label's line slot and page; the fills and a 3pt coloured rule are declared as Word paints them.
+LibreOffice references are pending. See
+[the evidence and limits](docs/results/bordered-paragraph-spacing/README.md).
+
 `core-v163` adds six inputs and controls for Docxodus #1692, each about the box around bordered
 paragraphs: a `w:between` rule between the paragraphs of a box, the same beside a paragraph that has
 none, contextual spacing across the edge of the box, `w:pageBreakBefore` and `w:keepNext` on a
