@@ -36,6 +36,10 @@ The eight bordered-paragraph spacing cases for Docxodus #1677 (`border-spacing-*
 the same way, with original Hornbeam labels. Their review images show Docxodus output in
 Liberation Serif with the measured regions outlined, not Word page renders.
 
+The twelve bordered-box cases for Docxodus #1692 (`border-between*`, `border-contextual-edge*`,
+`border-page-start*`, `border-keep-next*`, `border-shading*`) are authored the same way, with
+original Whitebeam labels and an original light-blue fill. Their review images are of the same kind.
+
 The twenty line-grid cases for Docxodus #1551 (`grid-at-least-below-pitch*`,
 `grid-tracked-lines-before*`, `grid-at-least-above-pitch*`, `grid-revised-paragraphs*`,
 `grid-bold-word*`, `grid-larger-word*`, `grid-text-centred*`, `grid-broken-lines*`,
