@@ -32,6 +32,19 @@ reporter attachment or third-party outline is imported. The screenshots show Doc
 The four compatibility and header spacing cases for Docxodus #1553 (`compat-spacing-adds*`,
 `header-automatic-spacing*`) are authored the same way, with original Marram labels.
 
+The eight bordered-paragraph spacing cases for Docxodus #1677 (`border-spacing-*`) are authored
+the same way, with original Hornbeam labels. Their review images show Docxodus output in
+Liberation Serif with the measured regions outlined, not Word page renders.
+
+The twelve bordered-box cases for Docxodus #1692 (`border-between*`, `border-contextual-edge*`,
+`border-page-start*`, `border-keep-next*`, `border-shading*`) are authored the same way, with
+original Whitebeam labels and an original light-blue fill. Their review images are of the same kind.
+
+The eight box-slab cases for Docxodus #1692 (`border-keep-last*`, `border-shading-mixed*`,
+`border-shading-open-side*`, `border-between-position*`) are authored the same way, with original
+Blackthorn labels, the same light-blue fill, an original sand fill and an original dark-blue rule.
+Their review images are of the same kind.
+
 The twenty line-grid cases for Docxodus #1551 (`grid-at-least-below-pitch*`,
 `grid-tracked-lines-before*`, `grid-at-least-above-pitch*`, `grid-revised-paragraphs*`,
 `grid-bold-word*`, `grid-larger-word*`, `grid-text-centred*`, `grid-broken-lines*`,
@@ -56,6 +69,24 @@ The two default-spacing redline cases for Docxodus #1576 contain original Quince
 literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document or
 font program is imported. Their review images are measurement cards, not page renders: Word 2024
 measured copies whose Liberation Serif name is changed to its metric twin Times New Roman.
+
+The twelve cell-revision redline cases for Docxodus #1404 contain original Orchard labels and
+literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document,
+image or font program is imported. The Word 2024 results their expected documents encode were
+measured on separately authored probe documents; no Word output and no file attached to the
+issue is included.
+
+The twenty cell-revision redline cases for Docxodus #1688 contain the same original Orchard labels
+and literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document,
+image or font program is imported. The Word 2024 results their expected documents encode were
+measured on separately authored probe documents and confirmed on each case's own source; no Word
+output is included.
+
+The eight cell-revision redline cases for Docxodus #1694 contain the same original Orchard labels
+and literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document,
+image or font program is imported. The Word 2024 results their expected documents encode were
+measured on separately authored probe documents and confirmed on each case's own source; no Word
+output is included.
 
 The fourteen deleted-row projection diagnostics use original Larch row labels and literal
 OOXML authored in `bench/projection_fixtures.py`. No product fixture, helper, document

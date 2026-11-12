@@ -1,7 +1,7 @@
 # Text after a line break in a paragraph with a tab
 
 Six original Teasel inputs accompany [Docxodus #1654](https://github.com/JSv4/Docxodus/issues/1654),
-suite `core-v162`. Each holds three paragraphs of 12 pt Liberation Serif on Letter paper with 1 in
+suite `core-v165`. Each holds three paragraphs of 12 pt Liberation Serif on Letter paper with 1 in
 margins, single spacing and no paragraph spacing. Every paragraph is two labels separated by a
 line break (`w:br`), `Teasel01Open` then `Teasel01Close`.
 
