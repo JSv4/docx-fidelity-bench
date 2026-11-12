@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v37', 'version': 37}
+SUITE = {'id': 'redline-v38', 'version': 38}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -348,6 +348,7 @@ def generate():
     default_spacing_history(corpus)
     cell_revision_shapes(corpus)
     cell_revision_geometry(corpus)
+    struck_cell_deletions(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -2374,31 +2375,35 @@ ORCHARD = [['Plum lot', 'Pear lot', 'Fig lot'], ['Apple lot', 'Cherry lot', 'Dam
 
 
 def _orchard_case(corpus, name, kind, issue, description, marks, resolution, operation='revision-resolve',
-                  wrapped=False, rows_below=1, before_count=1):
+                  wrapped=False, rows_below=1, before_count=1, struck=None):
     """One Orchard table whose first row carries cell marks, resolved in one direction.
 
     `marks` holds one entry per first-row cell: None, a mark name, or (mark, author). The expected
     document applies what desktop Word 2024 does when a cell leaves its row (an accepted w:cellDel,
     a rejected w:cellIns): the cell before it takes its grid column and width, or the cell after it
     at the start of a row; a content control that held only that cell goes with it; a row left
-    without a cell is removed, and a table left without a row.
+    without a cell is removed, and a table left without a row. `struck` tracks a marked cell's own
+    content as deleted too: 'run' its run, 'mark' its run and its paragraph mark. A deleted cell
+    whose paragraph mark is deleted takes its column with it, and Word leaves the row short.
     """
     marks = [(m, 'Orchard Reviewer') if isinstance(m, str) else m for m in marks]
     def document(opening, first_row):
         rows = ([first_row] if first_row else []) + [[{'text': text, 'span': 1, 'control': None, 'mark': None} for text in ORCHARD[1]]] * rows_below
         body = ('<w:tbl><w:tblPr><w:tblW w:w="7200" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>'
                 + '<w:gridCol w:w="2400"/>' * 3 + '</w:tblGrid>')
-        identity = 7
+        rev = Revisions(6)
         for cells in rows:
             body += '<w:tr>'
             for c in cells:
                 properties = f'<w:tcW w:w="{2400 * c["span"]}" w:type="dxa"/>'
                 if c['span'] > 1:
                     properties += f'<w:gridSpan w:val="{c["span"]}"/>'
+                content = p(t(c['text']))
                 if c['mark']:
-                    properties += f'<w:{c["mark"][0]} w:id="{identity}" w:author="{c["mark"][1]}" w:date="{DATE}"/>'
-                    identity += 1
-                tc = '<w:tc><w:tcPr>' + properties + '</w:tcPr>' + p(t(c['text'])) + '</w:tc>'
+                    properties += rev.mark(*c['mark'])
+                    if struck:
+                        content = p(rev.dele(t(c['text']), c['mark'][1]), mark=rev.mark('del', c['mark'][1]) if struck == 'mark' else '')
+                tc = '<w:tc><w:tcPr>' + properties + '</w:tcPr>' + content + '</w:tc>'
                 body += sdt(tc, 'Lot', c['control']) if c['control'] else tc
             body += '</w:tr>'
         return p(t(opening)) + (body + '</w:tbl>' if rows else '') + p(t('Orchard register complete.'))
@@ -2412,7 +2417,7 @@ def _orchard_case(corpus, name, kind, issue, description, marks, resolution, ope
     leaves = [m is not None and (m[0] == 'cellDel') == (resolution == 'accept-all') for m in marks]
     resolved = [dict(c, mark=None) for c in cells]
     staying = [i for i in range(len(cells)) if not leaves[i]]
-    for i in (i for i in range(len(cells)) if leaves[i] and staying):
+    for i in (i for i in range(len(cells)) if leaves[i] and staying and struck != 'mark'):
         resolved[max((s for s in staying if s < i), default=staying[0])]['span'] += 1
     resolved = [resolved[i] for i in staying]
     case_id = 'redline-cell-' + name
@@ -2490,3 +2495,22 @@ def cell_revision_geometry(corpus):
         _orchard_case(corpus, name + '-control', 'control', 'JSv4/Docxodus#1688',
                       'Control beside ' + name + ': marks ' + resolver + ' resolved before the fix',
                       control_marks, control_resolution, **control_options)
+
+
+def struck_cell_deletions(corpus):
+    """A deleted cell whose own paragraph mark is deleted too (Docxodus #1694).
+
+    This is the markup a comparison writes for a cell the revised document no longer has. Word's
+    Accept All removes the cell and widens nothing, so the row is one cell short. Each control
+    deletes the same cell with only its run tracked as deleted, where Word widens the neighbour.
+    """
+    for resolver, name, options in [('The session', 'delete-struck-{}-accept', {}),
+                                    ('RevisionProcessor', 'processor-accept-struck-{}', {'operation': 'accept'})]:
+        for index, where in enumerate(['first', 'middle']):
+            marks = ['cellDel' if i == index else None for i in range(3)]
+            _orchard_case(corpus, name.format(where), 'reproducer', 'JSv4/Docxodus#1694',
+                          f'{resolver} accepts a deleted {where} cell whose run and paragraph mark are deleted: the row is left one cell short',
+                          marks, 'accept-all', struck='mark', **options)
+            _orchard_case(corpus, name.format(where) + '-control', 'control', 'JSv4/Docxodus#1694',
+                          f'{resolver} accepts a deleted {where} cell whose run alone is deleted: a neighbour takes the column',
+                          marks, 'accept-all', struck='run', **options)

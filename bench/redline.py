@@ -32,7 +32,7 @@ OUTPUT_OPERATIONS = {'reject', 'accept', 'column-edit', 'block-insert', 'revisio
 RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
 SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}, 'revision-resolve': {'output'}, 'accept': {'output'}}
-CONTRACT = {'version': 25, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+CONTRACT = {'version': 26, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -44,6 +44,7 @@ CONTRACT = {'version': 25, 'view': revisions.VIEW_VERSION, 'engines': ['bench-ma
             'paragraphRewrite': 'public untracked whole-paragraph rewrites must preserve exact declared native content-control subtrees as well as independent semantic views',
             'columnReview': 'v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry',
             'acceptOperation': 'accept cases compare the whole-document acceptance of one tracked input by the candidate with an authored output, as reject cases do for rejection',
+            'shortRows': 'a table-state row may declare fewer grid columns than the table grid, as Word leaves a row whose deleted cell took its column with it; never more',
             'resolutionReview': 'revision-resolve cases require the declared typed registry count/status of the input, successful public bulk resolution and an empty final registry; table-state v2 reads cells through cell-level content controls and names each cell\'s control',
             'revisionOwnership': 'account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips',
             'inlineTrees': 'declared math and drawing subtrees retain structure, properties, textbox content and image bytes in both independently resolved views; v2 checks referenced running stories with part-local image relationships',
@@ -348,7 +349,8 @@ def valid_table_state(state, controls=False):
                     or type(cell['width']) is not int or cell['width'] < 0 or cell['type'] != 'dxa'
                     or (cell['fill'] is not None and not isinstance(cell['fill'], str))):
                 return False
-        if row['before'] + row['after'] + sum(c['span'] for c in row['cells']) != len(state['grid']):
+        # A row may stop short of the grid (Word leaves it so after some cell deletions), never pass it.
+        if row['before'] + row['after'] + sum(c['span'] for c in row['cells']) > len(state['grid']):
             return False
     return True
 
