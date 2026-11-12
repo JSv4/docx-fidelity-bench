@@ -1,0 +1,1669 @@
+{
+  "kind": "local native facade and browser diagnostic; production export pending",
+  "baselineCommit": "1240cc5dc0586293cb937c59c973550027c31fda",
+  "candidateCommit": "0d5655f328d22c043b1aa6db6ea7471271ff1909",
+  "dpi": 96,
+  "cases": {
+    "textboxes-vml-body-group": {
+      "inputSha256": "77a80ef87b812440471370b84e7e442726f7812dc38fd7d730873d23572df1e9",
+      "renders": {
+        "libreoffice": {
+          "pdfSha256": "91ba545b7cca70fc41e520d8becd000e721ac796db95f13eeca964e919a0b490",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleNorthLabel",
+                "tolerancePt": 0.75
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleSouthLabel",
+                "tolerancePt": 0.75
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "ca742c328cf571acc123454ccbbdec8d1c296e7da20f649cdd4bd8b2b3686653",
+              "pngSha256": "873348877cb90610f20a18e5894216a85cfcaea466f944321d93eb48ee879f36",
+              "width": 816,
+              "height": 1056
+            }
+          ]
+        },
+        "baseline": {
+          "pdfSha256": "d95a00082cea431f94110a20f47def23e7d30ecacd506766690a0d8043e5a3c5",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": false,
+              "missing": {
+                "MapleSouthLabel": 1
+              },
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "error": "Marker 'MapleSouthLabel' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": false,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleNorthLabel",
+                "tolerancePt": 0.75
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": false,
+              "error": "Marker 'MapleSouthLabel' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleSouthLabel",
+                "tolerancePt": 0.75
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "5bfa81b6c0a567b9fba1a1e1ed1efb426f3cadd0e6c7daf30a8ab78533599b1f",
+              "pngSha256": "24df538cfbf2602fac394f1b9f0395625c484985dc22ea6bb2e894df9f697947",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "066d6d18cd9cce8423708abeb5428291de47ae13ce36d55eb2881c78836c2048"
+        },
+        "candidate": {
+          "pdfSha256": "bfadbc8660c9bd6156d11ccafc64a8ac35e7781884bc0a993be4e7e6f4edc101",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleNorthLabel",
+                "tolerancePt": 0.75
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleSouthLabel",
+                "tolerancePt": 0.75
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "33097143303a231da0120c44a1623b0dea5a2778972ea1dc4b11144c291fb527",
+              "pngSha256": "a3716ed1554575f9910f12763b11dad9824fb975affdd3750924f98b50e158a4",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "93476ebdb86cbe1ce39ac0e321e2980e75e6fa0737a9b2a35e2a6ad62aec95ef"
+        }
+      },
+      "controlRasterEqual": null
+    },
+    "textboxes-vml-body-nested": {
+      "inputSha256": "ddd2047e909fe0abf07af836c89fa68103f2b740dfa2a2364df52a3438d7ecda",
+      "renders": {
+        "libreoffice": {
+          "pdfSha256": "68be62ae21f4edaec883a1df47fe24a30d45644f76d8cc36859dbcfe1e19af8b",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleNorthLabel",
+                "tolerancePt": 0.75
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleSouthLabel",
+                "tolerancePt": 0.75
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "ca742c328cf571acc123454ccbbdec8d1c296e7da20f649cdd4bd8b2b3686653",
+              "pngSha256": "873348877cb90610f20a18e5894216a85cfcaea466f944321d93eb48ee879f36",
+              "width": 816,
+              "height": 1056
+            }
+          ]
+        },
+        "baseline": {
+          "pdfSha256": "d95a00082cea431f94110a20f47def23e7d30ecacd506766690a0d8043e5a3c5",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": false,
+              "missing": {
+                "MapleSouthLabel": 1
+              },
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "error": "Marker 'MapleSouthLabel' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": false,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleNorthLabel",
+                "tolerancePt": 0.75
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": false,
+              "error": "Marker 'MapleSouthLabel' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleSouthLabel",
+                "tolerancePt": 0.75
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "5bfa81b6c0a567b9fba1a1e1ed1efb426f3cadd0e6c7daf30a8ab78533599b1f",
+              "pngSha256": "24df538cfbf2602fac394f1b9f0395625c484985dc22ea6bb2e894df9f697947",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "066d6d18cd9cce8423708abeb5428291de47ae13ce36d55eb2881c78836c2048"
+        },
+        "candidate": {
+          "pdfSha256": "bfadbc8660c9bd6156d11ccafc64a8ac35e7781884bc0a993be4e7e6f4edc101",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleNorthLabel",
+                "tolerancePt": 0.75
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleSouthLabel",
+                "tolerancePt": 0.75
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "33097143303a231da0120c44a1623b0dea5a2778972ea1dc4b11144c291fb527",
+              "pngSha256": "a3716ed1554575f9910f12763b11dad9824fb975affdd3750924f98b50e158a4",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "7f9c388255812b8ebcc76c8921042bca4f1654fd03e7ebb9db10a70d687a8b9a"
+        }
+      },
+      "controlRasterEqual": null
+    },
+    "textboxes-vml-body-separate-control": {
+      "inputSha256": "8b55931c515861b18f627337d72b1ecb73975bfe8bd60528742b67433ef4ee51",
+      "renders": {
+        "libreoffice": {
+          "pdfSha256": "cc787f0eb53fc8d9137593d1ddbd7b6c543eae3d97a73740e77349f97269c9e5",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "bc8d977cecc122c3a2e37cb22fc451cbe37eacfd1815bc87c73a9e29ff820b2c",
+              "pngSha256": "80712cef24802531426a76af63613240c64b420499f4fa3201e848c07764c3ce",
+              "width": 816,
+              "height": 1056
+            }
+          ]
+        },
+        "baseline": {
+          "pdfSha256": "529719f379a8baf23a8660d9d0d162f461b26571bb2039a7b73b40f976f1e91a",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "33097143303a231da0120c44a1623b0dea5a2778972ea1dc4b11144c291fb527",
+              "pngSha256": "a3716ed1554575f9910f12763b11dad9824fb975affdd3750924f98b50e158a4",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "738c62afc96d4a8c845fa2b5f03f7afca959892a9c5dd5ca5e81448836d7cf1f"
+        },
+        "candidate": {
+          "pdfSha256": "bfadbc8660c9bd6156d11ccafc64a8ac35e7781884bc0a993be4e7e6f4edc101",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "33097143303a231da0120c44a1623b0dea5a2778972ea1dc4b11144c291fb527",
+              "pngSha256": "a3716ed1554575f9910f12763b11dad9824fb975affdd3750924f98b50e158a4",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "8b5f64044ae4ad87aeb3ab92658dd7f6660d1a806027b49b9e54940b06fef172"
+        }
+      },
+      "controlRasterEqual": true
+    },
+    "textboxes-vml-header-group": {
+      "inputSha256": "0d1de2a5f6726ba4db7944804b41c2a4653dd51ce82b760987bb5b5f470387bf",
+      "renders": {
+        "libreoffice": {
+          "pdfSha256": "304ab609a9c9fad12299ee7a855e6fb6922d8b11deafa68a577108379445c36b",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleNorthLabel",
+                "tolerancePt": 0.75
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleSouthLabel",
+                "tolerancePt": 0.75
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "ca742c328cf571acc123454ccbbdec8d1c296e7da20f649cdd4bd8b2b3686653",
+              "pngSha256": "873348877cb90610f20a18e5894216a85cfcaea466f944321d93eb48ee879f36",
+              "width": 816,
+              "height": 1056
+            }
+          ]
+        },
+        "baseline": {
+          "pdfSha256": "e58fa9c1f96861f937a878151176bd7cc7e3cd7e4fae675b72aa0f7486e22daa",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": false,
+              "missing": {
+                "MapleSouthLabel": 1
+              },
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "error": "Marker 'MapleSouthLabel' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": false,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleNorthLabel",
+                "tolerancePt": 0.75
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": false,
+              "error": "Marker 'MapleSouthLabel' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleSouthLabel",
+                "tolerancePt": 0.75
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "3606f01362fbf37f63083e0c75c3e2fe1103bf192ad09869f0c95fe21729368a",
+              "pngSha256": "a4774b5e404d91bacb365e8f613bbc02d44c325f5ee5dbbcf87ba4e55acb2e29",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "7b1a25ab05d342b1d5c94562eb66814e26cc004a5fc941576e6384783c7624f6"
+        },
+        "candidate": {
+          "pdfSha256": "bfadbc8660c9bd6156d11ccafc64a8ac35e7781884bc0a993be4e7e6f4edc101",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleNorthLabel",
+                "tolerancePt": 0.75
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleSouthLabel",
+                "tolerancePt": 0.75
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "33097143303a231da0120c44a1623b0dea5a2778972ea1dc4b11144c291fb527",
+              "pngSha256": "a3716ed1554575f9910f12763b11dad9824fb975affdd3750924f98b50e158a4",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "bc4715f3abb102d7a776990e783269d9cacccb24ad87df8d726219b949a712c9"
+        }
+      },
+      "controlRasterEqual": null
+    },
+    "textboxes-vml-header-nested": {
+      "inputSha256": "da7e234d702599e6582c05f95e0c339f473dde71b0056f4f6e3d2108bab81392",
+      "renders": {
+        "libreoffice": {
+          "pdfSha256": "532a4c55b955e6d17c18fcf79eed7f55ab548ee0a0b08cbee6f9c1e013d102d4",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleNorthLabel",
+                "tolerancePt": 0.75
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleSouthLabel",
+                "tolerancePt": 0.75
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "ca742c328cf571acc123454ccbbdec8d1c296e7da20f649cdd4bd8b2b3686653",
+              "pngSha256": "873348877cb90610f20a18e5894216a85cfcaea466f944321d93eb48ee879f36",
+              "width": 816,
+              "height": 1056
+            }
+          ]
+        },
+        "baseline": {
+          "pdfSha256": "e58fa9c1f96861f937a878151176bd7cc7e3cd7e4fae675b72aa0f7486e22daa",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": false,
+              "missing": {
+                "MapleSouthLabel": 1
+              },
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "error": "Marker 'MapleSouthLabel' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": false,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleNorthLabel",
+                "tolerancePt": 0.75
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": false,
+              "error": "Marker 'MapleSouthLabel' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleSouthLabel",
+                "tolerancePt": 0.75
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "3606f01362fbf37f63083e0c75c3e2fe1103bf192ad09869f0c95fe21729368a",
+              "pngSha256": "a4774b5e404d91bacb365e8f613bbc02d44c325f5ee5dbbcf87ba4e55acb2e29",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "7b1a25ab05d342b1d5c94562eb66814e26cc004a5fc941576e6384783c7624f6"
+        },
+        "candidate": {
+          "pdfSha256": "bfadbc8660c9bd6156d11ccafc64a8ac35e7781884bc0a993be4e7e6f4edc101",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleNorthLabel",
+                "tolerancePt": 0.75
+              }
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "MapleSouthLabel",
+                "tolerancePt": 0.75
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "33097143303a231da0120c44a1623b0dea5a2778972ea1dc4b11144c291fb527",
+              "pngSha256": "a3716ed1554575f9910f12763b11dad9824fb975affdd3750924f98b50e158a4",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "cde9fd5f24253dc4afa857b919f5d367d72e17c993e349594a8a110c966774d9"
+        }
+      },
+      "controlRasterEqual": null
+    },
+    "textboxes-vml-header-separate-control": {
+      "inputSha256": "93de9f78d07397e7f5ce640610a5dfcd6998885baf6787cd68b02b5db7e7d1f0",
+      "renders": {
+        "libreoffice": {
+          "pdfSha256": "223818af72fb455a9bd9bc3b0511ad47bd7d1d1a408b218deea4ef55733d2dc4",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "bc8d977cecc122c3a2e37cb22fc451cbe37eacfd1815bc87c73a9e29ff820b2c",
+              "pngSha256": "80712cef24802531426a76af63613240c64b420499f4fa3201e848c07764c3ce",
+              "width": 816,
+              "height": 1056
+            }
+          ]
+        },
+        "baseline": {
+          "pdfSha256": "529719f379a8baf23a8660d9d0d162f461b26571bb2039a7b73b40f976f1e91a",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "33097143303a231da0120c44a1623b0dea5a2778972ea1dc4b11144c291fb527",
+              "pngSha256": "a3716ed1554575f9910f12763b11dad9824fb975affdd3750924f98b50e158a4",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "131746bcda6b924e08d822c8cb80fdaa56048a9c7a8bb41cdccedbe15969dddc"
+        },
+        "candidate": {
+          "pdfSha256": "bfadbc8660c9bd6156d11ccafc64a8ac35e7781884bc0a993be4e7e6f4edc101",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleNorthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  83,
+                  131,
+                  209,
+                  158
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "MapleSouthLabel",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  227,
+                  179,
+                  353,
+                  206
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "33097143303a231da0120c44a1623b0dea5a2778972ea1dc4b11144c291fb527",
+              "pngSha256": "a3716ed1554575f9910f12763b11dad9824fb975affdd3750924f98b50e158a4",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "4b364a09c4d185b814e74091b4d9bd586e15eb9e6d54fc074d136ed05104e4c9"
+        }
+      },
+      "controlRasterEqual": true
+    }
+  },
+  "bindings": {
+    ".local-closeout/1480-evidence/baseline-bin/Docxodus.dll": "f54a04ae3349455229d4d785e69696ad97dd779af1cf0bffa6412d53cd90c432",
+    ".local-closeout/issue-1482/Docxodus.Tests/bin/Debug/net10.0/Docxodus.dll": "e3369b61c30bd5c94dc003471d9e10d99adabc7f76afff92d3d81d3f8f2e7fbc",
+    ".local-closeout/bench-1482/../1481-evidence/main-pagination.js": "0d9e4ec4481d0628032945778449c6c2ba4b1576f80e338c811ff28cb305186d",
+    ".local-closeout/issue-1482/npm/dist/pagination.bundle.js": "c7ee0f538c8dc3000837ca273668f55be59c396dc08ea33a8171a272e11a26d2"
+  },
+  "sdkValidation": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "documents": {
+      "fixtures/textboxes-vml-body-group.docx": [],
+      "fixtures/textboxes-vml-body-nested.docx": [],
+      "fixtures/textboxes-vml-body-separate-control.docx": [],
+      "fixtures/textboxes-vml-header-group.docx": [],
+      "fixtures/textboxes-vml-header-nested.docx": [],
+      "fixtures/textboxes-vml-header-separate-control.docx": []
+    }
+  },
+  "environment": {
+    "libreoffice": "LibreOffice 25.8.7.3 580(Build:3)",
+    "browser": "Google Chrome 155.0.8059.84",
+    "font": {
+      "Regular": {
+        "path": "/usr/share/fonts/truetype/liberation/LiberationSerif-Regular.ttf",
+        "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+      },
+      "Bold": {
+        "path": "/usr/share/fonts/truetype/liberation/LiberationSerif-Bold.ttf",
+        "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+      },
+      "Italic": {
+        "path": "/usr/share/fonts/truetype/liberation/LiberationSerif-Italic.ttf",
+        "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+      },
+      "Bold Italic": {
+        "path": "/usr/share/fonts/truetype/liberation/LiberationSerif-BoldItalic.ttf",
+        "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+      }
+    }
+  },
+  "screenshots": {
+    "textboxes-vml-body-group.png": "7d3a1bf6a46b58e1792e469d4614b077cddc39732fab96c42e2cdeec1982b8df",
+    "textboxes-vml-body-nested.png": "660b32a3ec19174c4f0faa383341de576caed68a5f134a17b74b8b48ae8831d9",
+    "textboxes-vml-body-separate-control.png": "359bfed4c8208f35f8f082193d6df0abb639debc028026e0215f7ec18d53b5b7",
+    "textboxes-vml-header-group.png": "3fed5fdd9103dc95eaddbb5a8eed68f003cc005758f1c59c29a7a4df137d28de",
+    "textboxes-vml-header-nested.png": "9f4ddef07cbc51b99cf2958cdb4df0cbb7d11e987e4357e008e883d402671f0f",
+    "textboxes-vml-header-separate-control.png": "c5d52bb16d12e2bd14a39b69ba2e944fa9c148f6483fb3e41ca858097031f577"
+  },
+  "scripts": {
+    "bench-convert.py": "9707540a6dc51a750fd9caa054603374dc099747f768775f0f22a1be3d9d7fde",
+    "bench-measure.py": "540d6ee5f3f2aafe4555a2cb1effad7d77ea37c9d57c5afd187f93b81bb04e80",
+    "bench-render.cjs": "7bfb0913f001ea925edaeff1c30f05c24d4c96daac267bc0399d2e94ebdfb69e",
+    "bench-sheets.cjs": "b7eb3193605fba9dc5d30bdd91cc476d5b7e9b593c8df063fc0643e5dac43e81",
+    "finalize-local.py": "c62a4be657a996840113c412f44cf6f3d107a634764022cea76ce7518cc31207"
+  },
+  "screenshotMethod": "Complete 96-DPI page rasters, displayed at 75% with generated case/provider labels; no crop or content editing.",
+  "sourceBindings": {
+    "bench/fixtures.py": "5800aaadeb71ec345424c772d4ac210d0c3fb58dfa4e7300e482cb312aa48246",
+    "fixtures/manifest.json": "7c4d27823208552fc9a7772582730626e72209e6e46c0fc1c39554b709095f60",
+    "tests/test_vml_group_textboxes.py": "103d07a10ed9981769bb690a07d090498c8e538eac4dc1ccc907b3cba06d4b22"
+  }
+}

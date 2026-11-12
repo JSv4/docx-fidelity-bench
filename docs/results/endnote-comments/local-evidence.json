@@ -1,0 +1,609 @@
+{
+  "baselineCommit": "647aee2dc65b56e749e78b52dfb512e95ea5872f",
+  "cases": {
+    "comments-complete-nested-replies-endnotes": {
+      "inputSha256": "461e31e7639368a06b083452867c1dc2f06d057f1e2b79e042bbea18cafa7da2",
+      "profile": {
+        "comments": "endnotes",
+        "review": "final"
+      },
+      "providers": {
+        "baseline": {
+          "assetsSha256": "51aadfc287ac742b1d68b8b188bbe0435be4827f2eadbdc72853312478c30314",
+          "code": "pagination_failure",
+          "id": "comments-complete-nested-replies-endnotes",
+          "inputSha256": "461e31e7639368a06b083452867c1dc2f06d057f1e2b79e042bbea18cafa7da2",
+          "message": "Page 2 body content is clipped (5591px scroll height in a 864px band; li.comment (+4727.4px), ol.comments-list (+4727.4px), aside.comments-section (+4727.4px)).",
+          "provider": "baseline",
+          "status": "failed"
+        },
+        "candidate": {
+          "allSourceChecksPass": true,
+          "assetsSha256": "607e40a309a8d3d47b4ef5868405a4189fd262680ed2e59f1eb51309dc0b72ea",
+          "checks": [
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 360,
+          "id": "comments-complete-nested-replies-endnotes",
+          "inputSha256": "461e31e7639368a06b083452867c1dc2f06d057f1e2b79e042bbea18cafa7da2",
+          "labels": 360,
+          "missing": [],
+          "pages": 7,
+          "pdfSha256": "9271228edb1fce44b3796d3c8bd6bf81377ea99a6827e98fc02f4b48fde450c7",
+          "provider": "candidate",
+          "rasters": [
+            {
+              "path": "rasters/candidate/comments-complete-nested-replies-endnotes/page-1.png",
+              "sha256": "1356029d1d31020906617cc39b02cf20d023308da8829d0dc6a0e4579c70593f"
+            },
+            {
+              "path": "rasters/candidate/comments-complete-nested-replies-endnotes/page-2.png",
+              "sha256": "e3c1b3160e04884b9e4c6bb0f52ef1f137b5b9329af6bb3ec822570f3492a9f2"
+            },
+            {
+              "path": "rasters/candidate/comments-complete-nested-replies-endnotes/page-3.png",
+              "sha256": "ded3a72ad9909b827c8f3622ba764746f65dcca3814cff8de558d6c5a464cb9b"
+            },
+            {
+              "path": "rasters/candidate/comments-complete-nested-replies-endnotes/page-4.png",
+              "sha256": "0e72488e2847fe8a7c316bb88181678ff75df81707589c937ec27f71d6f95b9c"
+            },
+            {
+              "path": "rasters/candidate/comments-complete-nested-replies-endnotes/page-5.png",
+              "sha256": "e450960d3754b7b98beea49bc747963039f4e077361282a4eae08486042a0db0"
+            },
+            {
+              "path": "rasters/candidate/comments-complete-nested-replies-endnotes/page-6.png",
+              "sha256": "e4a636b3cd6d0049bbf2857a7106850788c2af7434f610bcae453754b47aa0a9"
+            },
+            {
+              "path": "rasters/candidate/comments-complete-nested-replies-endnotes/page-7.png",
+              "sha256": "c9090558ad2043aac622f44a831e1a8684e8063d0a6662629975b24fd36ba2ac"
+            }
+          ],
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        }
+      }
+    },
+    "comments-complete-paragraphs-30-endnotes": {
+      "identicalControlRasters": true,
+      "inputSha256": "3f48588d7c26dd8afb75bb48c164cab9c025fdc51224eff5f9cea051610c62b2",
+      "profile": {
+        "comments": "endnotes",
+        "review": "final"
+      },
+      "providers": {
+        "baseline": {
+          "allSourceChecksPass": true,
+          "assetsSha256": "51aadfc287ac742b1d68b8b188bbe0435be4827f2eadbdc72853312478c30314",
+          "checks": [
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 30,
+          "id": "comments-complete-paragraphs-30-endnotes",
+          "inputSha256": "3f48588d7c26dd8afb75bb48c164cab9c025fdc51224eff5f9cea051610c62b2",
+          "labels": 30,
+          "missing": [],
+          "pages": 1,
+          "pdfSha256": "b5a57915b74b48ad696f776cfbb86e77d9e5753ff1f7c10f1137dac88e8e3a91",
+          "provider": "baseline",
+          "rasters": [
+            {
+              "path": "rasters/baseline/comments-complete-paragraphs-30-endnotes/page-1.png",
+              "sha256": "24914cac8393186327eeab9427739a43834d91dc2e2b5a4d21fb2b91a9757ddb"
+            }
+          ],
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        },
+        "candidate": {
+          "allSourceChecksPass": true,
+          "assetsSha256": "607e40a309a8d3d47b4ef5868405a4189fd262680ed2e59f1eb51309dc0b72ea",
+          "checks": [
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 30,
+          "id": "comments-complete-paragraphs-30-endnotes",
+          "inputSha256": "3f48588d7c26dd8afb75bb48c164cab9c025fdc51224eff5f9cea051610c62b2",
+          "labels": 30,
+          "missing": [],
+          "pages": 1,
+          "pdfSha256": "48df83d6aab5174b1dd1a793f764957bc840cb9c8f11cb9279bc2140bb0e5d60",
+          "provider": "candidate",
+          "rasters": [
+            {
+              "path": "rasters/candidate/comments-complete-paragraphs-30-endnotes/page-1.png",
+              "sha256": "24914cac8393186327eeab9427739a43834d91dc2e2b5a4d21fb2b91a9757ddb"
+            }
+          ],
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        }
+      }
+    },
+    "comments-complete-short-control-endnotes": {
+      "identicalControlRasters": true,
+      "inputSha256": "b18678681be500ae3419998509c5540e5bed6345e1e3d96da0376260b9282f52",
+      "profile": {
+        "comments": "endnotes",
+        "review": "final"
+      },
+      "providers": {
+        "baseline": {
+          "allSourceChecksPass": true,
+          "assetsSha256": "51aadfc287ac742b1d68b8b188bbe0435be4827f2eadbdc72853312478c30314",
+          "checks": [
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 3,
+          "id": "comments-complete-short-control-endnotes",
+          "inputSha256": "b18678681be500ae3419998509c5540e5bed6345e1e3d96da0376260b9282f52",
+          "labels": 3,
+          "missing": [],
+          "pages": 1,
+          "pdfSha256": "e8e70845b503ec03ba9effccc0bd7936a2c5002667418f10bbe8c157cdc3d105",
+          "provider": "baseline",
+          "rasters": [
+            {
+              "path": "rasters/baseline/comments-complete-short-control-endnotes/page-1.png",
+              "sha256": "b1272f2188c00ddd494046dabde764bdfd27eeb9845e7a7172caa32aebc30211"
+            }
+          ],
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        },
+        "candidate": {
+          "allSourceChecksPass": true,
+          "assetsSha256": "607e40a309a8d3d47b4ef5868405a4189fd262680ed2e59f1eb51309dc0b72ea",
+          "checks": [
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 3,
+          "id": "comments-complete-short-control-endnotes",
+          "inputSha256": "b18678681be500ae3419998509c5540e5bed6345e1e3d96da0376260b9282f52",
+          "labels": 3,
+          "missing": [],
+          "pages": 1,
+          "pdfSha256": "1832a82dfb4eb36fea934c61fdec7270edc005b29cfb16619f94d883d8ffc699",
+          "provider": "candidate",
+          "rasters": [
+            {
+              "path": "rasters/candidate/comments-complete-short-control-endnotes/page-1.png",
+              "sha256": "b1272f2188c00ddd494046dabde764bdfd27eeb9845e7a7172caa32aebc30211"
+            }
+          ],
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        }
+      }
+    },
+    "comments-complete-single-30-endnotes": {
+      "identicalControlRasters": true,
+      "inputSha256": "562dd71d7aaa86026b4c2f926c4170b9724288b0439f03259cdc0c2652c80d27",
+      "profile": {
+        "comments": "endnotes",
+        "review": "final"
+      },
+      "providers": {
+        "baseline": {
+          "allSourceChecksPass": true,
+          "assetsSha256": "51aadfc287ac742b1d68b8b188bbe0435be4827f2eadbdc72853312478c30314",
+          "checks": [
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 30,
+          "id": "comments-complete-single-30-endnotes",
+          "inputSha256": "562dd71d7aaa86026b4c2f926c4170b9724288b0439f03259cdc0c2652c80d27",
+          "labels": 30,
+          "missing": [],
+          "pages": 1,
+          "pdfSha256": "92e765642d5dc32b944ef789415d8d2c2381b12a377e913bbaf908dab8478b70",
+          "provider": "baseline",
+          "rasters": [
+            {
+              "path": "rasters/baseline/comments-complete-single-30-endnotes/page-1.png",
+              "sha256": "652aa072ed0a4312704be6f4cedca09a57f12fa84dc8f52e3f851c45c414f1e0"
+            }
+          ],
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        },
+        "candidate": {
+          "allSourceChecksPass": true,
+          "assetsSha256": "607e40a309a8d3d47b4ef5868405a4189fd262680ed2e59f1eb51309dc0b72ea",
+          "checks": [
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 30,
+          "id": "comments-complete-single-30-endnotes",
+          "inputSha256": "562dd71d7aaa86026b4c2f926c4170b9724288b0439f03259cdc0c2652c80d27",
+          "labels": 30,
+          "missing": [],
+          "pages": 1,
+          "pdfSha256": "3b6e23c41e0b339ae03ba18b76250a61ba3ce1f2bfa0d2854e541241966f9afc",
+          "provider": "candidate",
+          "rasters": [
+            {
+              "path": "rasters/candidate/comments-complete-single-30-endnotes/page-1.png",
+              "sha256": "652aa072ed0a4312704be6f4cedca09a57f12fa84dc8f52e3f851c45c414f1e0"
+            }
+          ],
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        }
+      }
+    },
+    "comments-complete-single-900-endnotes": {
+      "inputSha256": "bf6404d1edaeee0fd72c3e9521872a6ee3e5130c35c3fc754e718d5e2e577c21",
+      "profile": {
+        "comments": "endnotes",
+        "review": "final"
+      },
+      "providers": {
+        "baseline": {
+          "assetsSha256": "51aadfc287ac742b1d68b8b188bbe0435be4827f2eadbdc72853312478c30314",
+          "code": "pagination_failure",
+          "id": "comments-complete-single-900-endnotes",
+          "inputSha256": "bf6404d1edaeee0fd72c3e9521872a6ee3e5130c35c3fc754e718d5e2e577c21",
+          "message": "Page 2 body content is clipped (11980px scroll height in a 864px band; li.comment (+11116.3px), ol.comments-list (+11116.3px), aside.comments-section (+11116.3px)).",
+          "provider": "baseline",
+          "status": "failed"
+        },
+        "candidate": {
+          "allSourceChecksPass": true,
+          "assetsSha256": "607e40a309a8d3d47b4ef5868405a4189fd262680ed2e59f1eb51309dc0b72ea",
+          "checks": [
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "duplicates": [],
+          "expectedLabels": 900,
+          "id": "comments-complete-single-900-endnotes",
+          "inputSha256": "bf6404d1edaeee0fd72c3e9521872a6ee3e5130c35c3fc754e718d5e2e577c21",
+          "labels": 900,
+          "missing": [],
+          "pages": 15,
+          "pdfSha256": "4bafe48fa85ee0fd37084537227ee473837f4c9fc0ca550a850b91ea8df3e681",
+          "provider": "candidate",
+          "rasters": [
+            {
+              "path": "rasters/candidate/comments-complete-single-900-endnotes/page-01.png",
+              "sha256": "012021f192b8a968848a7a3eee309818cbbf846d0580a19c0ab8b1372741ad81"
+            },
+            {
+              "path": "rasters/candidate/comments-complete-single-900-endnotes/page-02.png",
+              "sha256": "e3c1b3160e04884b9e4c6bb0f52ef1f137b5b9329af6bb3ec822570f3492a9f2"
+            },
+            {
+              "path": "rasters/candidate/comments-complete-single-900-endnotes/page-03.png",
+              "sha256": "16e629ca2aff8a6817770fb3b1d235b08f47e3dc10e8d8cc96b457efe892e8e4"
+            },
+            {
+              "path": "rasters/candidate/comments-complete-single-900-endnotes/page-04.png",
+              "sha256": "139a55d4f73a0678468abcf9bb177c7e6db5ad3cfafeb987a0643516e4ebc25d"
+            },
+            {
+              "path": "rasters/candidate/comments-complete-single-900-endnotes/page-05.png",
+              "sha256": "3d1644ad5154bf90ecb828a92c11317c1619dcbbc6f03a7cbf921e3477afcb53"
+            },
+            {
+              "path": "rasters/candidate/comments-complete-single-900-endnotes/page-06.png",
+              "sha256": "b248cc24017333f543b0e5227909c54548a5b71bcb036f2cb263968275fa420a"
+            },
+            {
+              "path": "rasters/candidate/comments-complete-single-900-endnotes/page-07.png",
+              "sha256": "15f39a231d23146069e9842474cfb4672e10eac5d9923ee1f4e48cafde221161"
+            },
+            {
+              "path": "rasters/candidate/comments-complete-single-900-endnotes/page-08.png",
+              "sha256": "03c7e72ad7cb31cd7c1b72c3759ae4a6224aef1a65f66a631e14ab6318e063f4"
+            },
+            {
+              "path": "rasters/candidate/comments-complete-single-900-endnotes/page-09.png",
+              "sha256": "99083831a4358bceee04be51d9e316a4bf53c9b43efb1d7051d40e8a2e2520b5"
+            },
+            {
+              "path": "rasters/candidate/comments-complete-single-900-endnotes/page-10.png",
+              "sha256": "1ba2f26c55a65a23763dbfc38ce1f669b51bdfe3b3d8a8d6b3ccfefa82388c56"
+            },
+            {
+              "path": "rasters/candidate/comments-complete-single-900-endnotes/page-11.png",
+              "sha256": "4479acfeee13183ca2cc5ca315f88664e21e6862660aeda67c152fbc0840fb61"
+            },
+            {
+              "path": "rasters/candidate/comments-complete-single-900-endnotes/page-12.png",
+              "sha256": "3ef3ccb1b7d46737cc1b4617794c905aef276412905417c13f369e6d68942c85"
+            },
+            {
+              "path": "rasters/candidate/comments-complete-single-900-endnotes/page-13.png",
+              "sha256": "83878a5e78e9eac13bc53d241c362e7157338408a67c1329000e6417b5d394ad"
+            },
+            {
+              "path": "rasters/candidate/comments-complete-single-900-endnotes/page-14.png",
+              "sha256": "1c8c33b7d4f84cee5f8b9182df37e9cb0bbdcb41be2dee53420d38e39a9404f8"
+            },
+            {
+              "path": "rasters/candidate/comments-complete-single-900-endnotes/page-15.png",
+              "sha256": "a3bbae7f460a9838cf35664f62b140c0c0935de469abd3d463ab5e4face00045"
+            }
+          ],
+          "status": "complete",
+          "warnings": [
+            {
+              "code": "font_environment_unverified",
+              "message": "The browser loaded the requested CSS font families, but their exact files and substitutions are not attestable.",
+              "phase": "font_loading",
+              "remediation": "Use an explicit verified font resolver when exact font identity is required.",
+              "severity": "warning"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "kind": "local caller-owned Chromium 143 PDF diagnostics; no Word layout-parity claim",
+  "candidateCommit": "f7796806e339f9e557087ed0f9b36aa1895fb6c3"
+}

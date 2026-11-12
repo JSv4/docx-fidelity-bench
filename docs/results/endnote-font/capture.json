@@ -1,0 +1,1001 @@
+{
+  "referenceProvider": "LibreOffice25.8.7.3",
+  "candidateCommit": "4875a149249b885364885496003992b037694fa6",
+  "baselineCommit": "1240cc5dc0586293cb937c59c973550027c31fda (browser sources; native converter is recorded separately)",
+  "method": "Native converter/browser diagnostic screenshots have exactly the same decoded RGB pixels as public production export PNGs; production run/PDF bindings below.",
+  "cases": {
+    "notes-endnote-font-11pt": {
+      "inputSha256": "711d34cb7e6314e50a3b13e6c538a38b85007897de87891ac5a5705a22d00f9f",
+      "reference": {
+        "geometry": [
+          {
+            "media": [
+              0,
+              0,
+              612,
+              792
+            ],
+            "crop": [
+              0,
+              0,
+              612,
+              792
+            ],
+            "rotation": 0,
+            "userUnit": 1
+          }
+        ],
+        "words": [
+          {
+            "text": "Willow",
+            "page": 1,
+            "rect": [
+              72.1,
+              72.449,
+              105.078,
+              84.626
+            ]
+          },
+          {
+            "text": "citation",
+            "page": 1,
+            "rect": [
+              107.784,
+              72.449,
+              140.74,
+              84.626
+            ]
+          },
+          {
+            "text": "records",
+            "page": 1,
+            "rect": [
+              143.49,
+              72.449,
+              175.841,
+              84.626
+            ]
+          },
+          {
+            "text": "the",
+            "page": 1,
+            "rect": [
+              178.602,
+              72.449,
+              192.022,
+              84.626
+            ]
+          },
+          {
+            "text": "note.",
+            "page": 1,
+            "rect": [
+              194.75,
+              72.449,
+              216.442,
+              84.626
+            ]
+          },
+          {
+            "text": "i",
+            "page": 1,
+            "rect": [
+              219.3,
+              72.2476,
+              221.0728,
+              79.3324
+            ]
+          },
+          {
+            "text": "Willow",
+            "page": 1,
+            "rect": [
+              72.1,
+              92.949,
+              105.078,
+              105.126
+            ]
+          },
+          {
+            "text": "route",
+            "page": 1,
+            "rect": [
+              107.784,
+              92.949,
+              130.389,
+              105.126
+            ]
+          },
+          {
+            "text": "remains",
+            "page": 1,
+            "rect": [
+              133.117,
+              92.949,
+              167.91,
+              105.126
+            ]
+          },
+          {
+            "text": "open.",
+            "page": 1,
+            "rect": [
+              170.671,
+              92.949,
+              194.772,
+              105.126
+            ]
+          },
+          {
+            "text": "i",
+            "page": 1,
+            "rect": [
+              72.1,
+              118.249,
+              75.147,
+              130.426
+            ]
+          },
+          {
+            "text": "FontNote",
+            "page": 1,
+            "rect": [
+              77.9,
+              118.249,
+              119.414,
+              130.426
+            ]
+          },
+          {
+            "text": "Willow",
+            "page": 1,
+            "rect": [
+              122.175,
+              118.249,
+              155.153,
+              130.426
+            ]
+          },
+          {
+            "text": "ledger",
+            "page": 1,
+            "rect": [
+              157.903,
+              118.249,
+              185.348,
+              130.426
+            ]
+          },
+          {
+            "text": "keeps",
+            "page": 1,
+            "rect": [
+              188.087,
+              118.249,
+              213.101,
+              130.426
+            ]
+          },
+          {
+            "text": "the",
+            "page": 1,
+            "rect": [
+              215.862,
+              118.249,
+              229.282,
+              130.426
+            ]
+          },
+          {
+            "text": "original",
+            "page": 1,
+            "rect": [
+              232.043,
+              118.249,
+              266.22,
+              130.426
+            ]
+          },
+          {
+            "text": "paragraph",
+            "page": 1,
+            "rect": [
+              268.97,
+              118.249,
+              312.926,
+              130.426
+            ]
+          },
+          {
+            "text": "size.",
+            "page": 1,
+            "rect": [
+              315.676,
+              118.249,
+              335.487,
+              130.426
+            ]
+          }
+        ],
+        "tokens": {
+          "Willow": 3,
+          "citation": 1,
+          "records": 1,
+          "the": 2,
+          "note.": 1,
+          "i": 2,
+          "route": 1,
+          "remains": 1,
+          "open.": 1,
+          "FontNote": 1,
+          "ledger": 1,
+          "keeps": 1,
+          "original": 1,
+          "paragraph": 1,
+          "size.": 1
+        },
+        "fonts": [
+          "LiberationSerif"
+        ]
+      },
+      "captures": {
+        "libreoffice": {
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "FontNote",
+                "tolerancePt": 0.5
+              }
+            }
+          ],
+          "marker": [
+            {
+              "text": "FontNote",
+              "page": 1,
+              "rect": [
+                77.9,
+                118.249,
+                119.414,
+                130.426
+              ]
+            }
+          ],
+          "pdfSha256": "98e3d8ff0677a75dae8032124c7c1396adb5ae21eca606ca596406d18f7203d9"
+        },
+        "current": {
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": false,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "FontNote",
+                "tolerancePt": 0.5
+              }
+            }
+          ],
+          "marker": [
+            {
+              "text": "FontNote",
+              "page": 1,
+              "rect": [
+                77.806637,
+                117.702205,
+                119.334522,
+                129.878308
+              ]
+            }
+          ],
+          "pdfSha256": "1aa94bdf8535fbf29d786bf84201c530ed00d56af7ad8e37409f98ec129e855b"
+        },
+        "fixed": {
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-reference-position",
+              "passed": true,
+              "declaration": {
+                "type": "marker-reference-position",
+                "version": 1,
+                "marker": "FontNote",
+                "tolerancePt": 0.5
+              }
+            }
+          ],
+          "marker": [
+            {
+              "text": "FontNote",
+              "page": 1,
+              "rect": [
+                77.806637,
+                118.452205,
+                119.334522,
+                130.628307
+              ]
+            }
+          ],
+          "pdfSha256": "76dbfeb75259c3dd55fc2bb6e69fc30aed33d1163a32d59e287d682403f6a63d"
+        }
+      }
+    },
+    "notes-endnote-font-12pt-control": {
+      "inputSha256": "2452802f2f2fa10d950a74ec1bede0375b4a270228d9b3914ebdb5caf6057725",
+      "reference": {
+        "geometry": [
+          {
+            "media": [
+              0,
+              0,
+              612,
+              792
+            ],
+            "crop": [
+              0,
+              0,
+              612,
+              792
+            ],
+            "rotation": 0,
+            "userUnit": 1
+          }
+        ],
+        "words": [
+          {
+            "text": "Willow",
+            "page": 1,
+            "rect": [
+              72.1,
+              72.508,
+              108.04,
+              85.792
+            ]
+          },
+          {
+            "text": "citation",
+            "page": 1,
+            "rect": [
+              111.028,
+              72.508,
+              146.98,
+              85.792
+            ]
+          },
+          {
+            "text": "records",
+            "page": 1,
+            "rect": [
+              149.98,
+              72.508,
+              185.284,
+              85.792
+            ]
+          },
+          {
+            "text": "the",
+            "page": 1,
+            "rect": [
+              188.26,
+              72.508,
+              202.912,
+              85.792
+            ]
+          },
+          {
+            "text": "note.",
+            "page": 1,
+            "rect": [
+              205.936,
+              72.508,
+              229.576,
+              85.792
+            ]
+          },
+          {
+            "text": "i",
+            "page": 1,
+            "rect": [
+              232.7,
+              72.263,
+              234.639,
+              80.012
+            ]
+          },
+          {
+            "text": "Willow",
+            "page": 1,
+            "rect": [
+              72.1,
+              94.358,
+              108.04,
+              107.642
+            ]
+          },
+          {
+            "text": "route",
+            "page": 1,
+            "rect": [
+              111.028,
+              94.358,
+              135.676,
+              107.642
+            ]
+          },
+          {
+            "text": "remains",
+            "page": 1,
+            "rect": [
+              138.7,
+              94.358,
+              176.632,
+              107.642
+            ]
+          },
+          {
+            "text": "open.",
+            "page": 1,
+            "rect": [
+              179.608,
+              94.358,
+              205.948,
+              107.642
+            ]
+          },
+          {
+            "text": "i",
+            "page": 1,
+            "rect": [
+              72.1,
+              121.958,
+              75.424,
+              135.242
+            ]
+          },
+          {
+            "text": "FontNote",
+            "page": 1,
+            "rect": [
+              78.4,
+              121.958,
+              123.688,
+              135.242
+            ]
+          },
+          {
+            "text": "Willow",
+            "page": 1,
+            "rect": [
+              126.676,
+              121.958,
+              162.652,
+              135.242
+            ]
+          },
+          {
+            "text": "ledger",
+            "page": 1,
+            "rect": [
+              165.64,
+              121.958,
+              195.616,
+              135.242
+            ]
+          },
+          {
+            "text": "keeps",
+            "page": 1,
+            "rect": [
+              198.616,
+              121.958,
+              225.928,
+              135.242
+            ]
+          },
+          {
+            "text": "the",
+            "page": 1,
+            "rect": [
+              228.904,
+              121.958,
+              243.556,
+              135.242
+            ]
+          },
+          {
+            "text": "original",
+            "page": 1,
+            "rect": [
+              246.544,
+              121.958,
+              283.84,
+              135.242
+            ]
+          },
+          {
+            "text": "paragraph",
+            "page": 1,
+            "rect": [
+              286.852,
+              121.958,
+              334.792,
+              135.242
+            ]
+          },
+          {
+            "text": "size.",
+            "page": 1,
+            "rect": [
+              337.792,
+              121.958,
+              359.428,
+              135.242
+            ]
+          }
+        ],
+        "tokens": {
+          "Willow": 3,
+          "citation": 1,
+          "records": 1,
+          "the": 2,
+          "note.": 1,
+          "i": 2,
+          "route": 1,
+          "remains": 1,
+          "open.": 1,
+          "FontNote": 1,
+          "ledger": 1,
+          "keeps": 1,
+          "original": 1,
+          "paragraph": 1,
+          "size.": 1
+        },
+        "fonts": [
+          "LiberationSerif"
+        ]
+      },
+      "captures": {
+        "libreoffice": {
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "FontNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  121,
+                  125,
+                  135.5
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "marker": [
+            {
+              "text": "FontNote",
+              "page": 1,
+              "rect": [
+                78.4,
+                121.958,
+                123.688,
+                135.242
+              ]
+            }
+          ],
+          "pdfSha256": "1d045da610dca52546a69507d9c87bb23dc3f16161dc40e637084f98caa19cb1"
+        },
+        "current": {
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "FontNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  121,
+                  125,
+                  135.5
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "marker": [
+            {
+              "text": "FontNote",
+              "page": 1,
+              "rect": [
+                78.33984,
+                121.306636,
+                123.673823,
+                134.595697
+              ]
+            }
+          ],
+          "pdfSha256": "8ef62f126808b38b3147c69ca2bd42698d447ab5fa35a3c9c95fc932d2698af8"
+        },
+        "fixed": {
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "FontNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  121,
+                  125,
+                  135.5
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "marker": [
+            {
+              "text": "FontNote",
+              "page": 1,
+              "rect": [
+                78.33984,
+                121.306636,
+                123.673823,
+                134.595697
+              ]
+            }
+          ],
+          "pdfSha256": "8ef62f126808b38b3147c69ca2bd42698d447ab5fa35a3c9c95fc932d2698af8"
+        }
+      }
+    }
+  },
+  "nativeConverterCommit": "9809b579ac66d8f0166ecd75dcedf0d64c9976a3",
+  "font": {
+    "path": "/usr/share/fonts/truetype/liberation/LiberationSerif-Regular.ttf",
+    "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+  },
+  "production": {
+    "candidate": {
+      "run": 41165403204,
+      "rendererCommit": "4875a149249b885364885496003992b037694fa6",
+      "resultSha256": "58b181b89b45c758e20d8b1a832085cd46c8d8d3ccd9d6436a472d1ee29cb8bc",
+      "cases": {
+        "notes-endnote-font-11pt": {
+          "score": 99.19680968848394,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FontNote",
+                "tolerancePt": 0.5,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": true
+            }
+          ],
+          "pdfSha256": "0a60d7a133c20f0dda826faa4a794fb5d53d8f60ec1e3c45b99fe153a9904331",
+          "pngSha256": "b1c40d21073b31e3f7f6ff7096afcf1ba626653f98c9c66b7c5b3e5c374bc675",
+          "publishedDiagnosticPixelsIdentical": true,
+          "rgbSha256": "89121ed9d731e2d7a50e30fafc4754c11ea4e2bf2f4c2e8636b32fa8f37d834c"
+        },
+        "notes-endnote-font-12pt-control": {
+          "score": 98.96291406032658,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FontNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  121,
+                  125,
+                  135.5
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pdfSha256": "84ad86a107749be81964fdae0fcaa4eb81e1b9be990fb9322e1d8ae23cd978c3",
+          "pngSha256": "dfe2e337de324578075df19201bae90cab14aacfbde07abe6a3d07aed0264ec8",
+          "publishedDiagnosticPixelsIdentical": true,
+          "rgbSha256": "8b6a2479f1a2a9ab6201ffed308ba0a8e7ea206f3672c7f4c25bd93c5be8e5ed"
+        }
+      }
+    },
+    "baseline": {
+      "run": 41165406714,
+      "rendererCommit": "1240cc5dc0586293cb937c59c973550027c31fda",
+      "resultSha256": "1a77a362c633115dd0a2570af12194e125ebf72ac6a41fd3306304f47f05d272",
+      "cases": {
+        "notes-endnote-font-11pt": {
+          "score": 0.0,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FontNote",
+                "tolerancePt": 0.5,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": false
+            }
+          ],
+          "pdfSha256": "9d8ed859cc8335832adc697019badc0eb8f9ff295de266544fbd5b94b0a740fc",
+          "pngSha256": "9b740e1587e7d61d7ca7d05d2e08e9bbad711b257c3a919f88d49eaa6bf4a10f",
+          "publishedDiagnosticPixelsIdentical": true,
+          "rgbSha256": "243f2c95fff99e0576b7aac3f899a59b568bb789e371a47735864aa86b82bd43"
+        },
+        "notes-endnote-font-12pt-control": {
+          "score": 98.96291406032658,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FontNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  78,
+                  121,
+                  125,
+                  135.5
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pdfSha256": "042ba1de0d6e7306367df35b8b28cf51f434d87b19880c5a6e7514bdae2f5d86",
+          "pngSha256": "dfe2e337de324578075df19201bae90cab14aacfbde07abe6a3d07aed0264ec8",
+          "publishedDiagnosticPixelsIdentical": true,
+          "rgbSha256": "8b6a2479f1a2a9ab6201ffed308ba0a8e7ea206f3672c7f4c25bd93c5be8e5ed"
+        }
+      }
+    }
+  }
+}

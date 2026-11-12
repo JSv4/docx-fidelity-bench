@@ -1,0 +1,3775 @@
+{
+  "schema": 1,
+  "issue": 1346,
+  "purpose": "UNMEASURED visual and PDF feature diagnostics using a caller-owned browser. Production process sandbox unavailable; no eligible production candidate score or Word capture claimed.",
+  "suite": {
+    "id": "core-v62"
+  },
+  "coverage": {
+    "captured": 11,
+    "totalPdfCases": 302,
+    "complete": false
+  },
+  "diagnosticSources": {
+    "before": {
+      "schema": 1,
+      "purpose": "UNMEASURED PDF diagnostics from a caller-owned browser; production process sandbox unavailable. These are not candidate benchmark scores.",
+      "phase": "before",
+      "commit": "20dc43ebdbc5546f3bcaaa15745dd5f9c73fa3e5",
+      "tree": "0fe64e60e644e352d0ec9f3eb301a9715388e87a",
+      "buildRecord": {
+        "commands": [
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1310-completion/npm",
+            "ci"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1310-completion/npm",
+            "run",
+            "build:wasm"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1310-completion/npm",
+            "run",
+            "build:ts"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1310-completion/npm",
+            "run",
+            "build:pagination-bundle"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1310-completion/npm",
+            "run",
+            "build:worker-bundle"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1310-completion/npm",
+            "run",
+            "build:export-browser"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1310-completion/npm",
+            "run",
+            "build:export-assets"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1310-completion/npm-export",
+            "ci"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1310-completion/npm-export",
+            "run",
+            "build"
+          ]
+        ],
+        "commit": "20dc43ebdbc5546f3bcaaa15745dd5f9c73fa3e5",
+        "files": {
+          "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+          "npm-export/dist/browser-session.js": "5baf3c452f8c44ee913315a39f4f1f17d608dfe229ed6c9fb1305a0823f326c3",
+          "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+          "npm-export/dist/cli.js": "1a69a7d5a7a1304fc924e5785fe6683858347265997327cc53fc89e8275c1471",
+          "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+          "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+          "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+          "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+          "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+          "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+          "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+          "npm-export/dist/host.js": "98e5e0b697b3d5518315c52d77874b36e3e428cfb61a9211ea1d650ada6b0bc1",
+          "npm-export/dist/index.js": "e47fbd0ac7e8887d248c190944a0218911c9306db2f0d043bba023b9bdf1b9e9",
+          "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+          "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+          "npm-export/package-lock.json": "1cd67940127709c895d21242c78b3e82c443b0c2e0edda198dfe1994a803c609",
+          "npm/dist/export-assets.json": "1e8ff98439fe5535d263f28d558df84af6de7e70afed32edf348abe76457f2da",
+          "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+        },
+        "node": "v24.13.1",
+        "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+        "schema": 1,
+        "tree": "0fe64e60e644e352d0ec9f3eb301a9715388e87a"
+      },
+      "localProductionEligibility": {
+        "ok": false,
+        "findings": [
+          {
+            "code": "user_namespaces_unavailable",
+            "severity": "fatal",
+            "message": "This host denies unprivileged user namespaces, which Chromium's process sandbox requires.",
+            "remediation": "Permit unprivileged user namespaces on the render host \u2014 for example kernel.apparmor_restrict_unprivileged_userns=0 on Ubuntu 23.10 and later; in containers, use a seccomp profile that permits clone with CLONE_NEWUSER and do not drop the capabilities the namespace path needs."
+          }
+        ]
+      },
+      "browser": {
+        "version": "143.0.7499.4",
+        "chromiumSandbox": false,
+        "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209"
+      },
+      "cases": {
+        "drawings-floating-shape-top-bottom": {
+          "inputSha256": "2b22619493f7689b7ccd3deaf7631e59df68f61bd68fa1786991c596dfb8e203",
+          "pdfSha256": "3ffc25859f10967fd19f09128aec6131de846fdbe373113d3d1528743863c310",
+          "htmlSha256": "b6d8cee9f4339e1d07015f7ff2a92a1f8a087620dc2fa8bf9cad16d3beb0f034",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        },
+        "drawings-floating-group-top-bottom": {
+          "inputSha256": "9a12eca85271c8e6ca17438647df1f30539acf63cc78fde0f4eb2a0d54d9a90b",
+          "pdfSha256": "4fed71f525145e6224edad52bba1aaf04cc1c321b1969609776b06e025eacaa5",
+          "htmlSha256": "2730f3212fbdc782f22cba802a88c5d70fb8dd1148bd8235a1c6b62fe03d81d2",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        },
+        "drawings-floating-shape-mixed-top-bottom": {
+          "inputSha256": "87f22dfe1c72acfc3e3e0e98c2c69d904b7b5a6f058a1d32ef5a22c2c7f1c01e",
+          "pdfSha256": "37a26c946704b822e13b44f60e277ddf846de967e8b348daa1e02df09d6a943e",
+          "htmlSha256": "8e327b6ee27ecbf886e1fbe3bd46ba5057faef1c123bf8bb88e4dce55fdcebad",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        },
+        "drawings-floating-shape-no-wrap-control": {
+          "inputSha256": "1d1f3185578d2e3db91154ef92d53dc2c751dc70c8ac28e44f2626e207dad68e",
+          "pdfSha256": "43f25bfa7e47c5713366f63f41eb1e84d0a40eeb64d7e8469ca9f6f7fd659c4f",
+          "htmlSha256": "5ffe553a715762265cbf6af17951f7bb06e52a908487386f05e0bc4d176a58eb",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        },
+        "drawings-floating-shape-behind-text": {
+          "inputSha256": "358f8160e39890a00f8e1d331e0dd8232b7222955535137c7a3b924d9b1f591b",
+          "pdfSha256": "9c697aae3a9fde8fdc383494505a993e8762e7a13cd94d3c7faaea6bf1c2ffc8",
+          "htmlSha256": "cf9b0027e1413496a8a3c756c8232a8fd94ef7f3f850a4b3391730a82c012db3",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        },
+        "drawings-floating-shape-relative-height": {
+          "inputSha256": "55b89eb425444aef742580b678d201eeb3cd631b48f96ccf98b45293b0a28f16",
+          "pdfSha256": "917ed29fcd303e31bd9b3318848e945dc7ba8f12ec76b31d2329d025e5b93da1",
+          "htmlSha256": "1a2c47ab02bc92d50f1b99d2bb0c8276179b984e799121c1969ca8856022d3f9",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        },
+        "drawings-floating-shape-square": {
+          "inputSha256": "129bc9d6138a9110d78c9a5098821163d636da531068f2234a2709832755588f",
+          "pdfSha256": "c137ca01b92554058bac815887605a79a30e7eba22bfaa0ddbaaddd9e061fa35",
+          "htmlSha256": "b15bc8af06f20523e8371ef3e73c11254149e010f0a0108734562173339013f6",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        },
+        "drawings-floating-shape-tight": {
+          "inputSha256": "5b1b2717cce59143f787be59d2250b9211967907fefe9e6d2b525d218681f9b7",
+          "pdfSha256": "ba4f59a39930683712bb5c9aafba7cf0cd3463ffc78d8ca288b24927f99d2b54",
+          "htmlSha256": "aa052ab0e3226b09c4ebdf7bfee70c2ed6c33b1dbec74228fbd3a9412dd0294b",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        },
+        "drawings-floating-shape-through": {
+          "inputSha256": "6c4a0a6994ddb6de45a166a59feb11b9ce39f9b62bfee2e9fb36e197f3b598e7",
+          "pdfSha256": "a0d56d4917385412d5a5853ecbec1c3e4b56c13abe0ece07a7fa2ba472f36886",
+          "htmlSha256": "2807314d236924e92d70136c6ce9d7ef909b3a32972b63eac3eced573f87b99b",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        },
+        "drawings-floating-shape-unsupported": {
+          "inputSha256": "dd3e0fb29bc3ccc3d6275c9e3ad1af5e3c27e0d9c8b3210c62b5689ced3f36f1",
+          "pdfSha256": "2602e026d81c473dfc7be115ee18665f021f6a84a33bffc2c465693eb52e43c2",
+          "htmlSha256": "b6d8cee9f4339e1d07015f7ff2a92a1f8a087620dc2fa8bf9cad16d3beb0f034",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        },
+        "drawings-floating-vml-plain": {
+          "inputSha256": "c916df18b27e110469d8627951f2345866d7a719d328652f36d80320f1f84698",
+          "pdfSha256": "cd133ac4c984b0e60406503fb6be12ad4102ad0e19d398e881a5d50606b1b860",
+          "htmlSha256": "3277f58e492e99bdd5b9c2cb0c00ace7ef82b7d8e77131195baca8e6435a99af",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        }
+      }
+    },
+    "after": {
+      "schema": 1,
+      "purpose": "UNMEASURED PDF diagnostics from a caller-owned browser; production process sandbox unavailable. These are not candidate benchmark scores.",
+      "phase": "after",
+      "commit": "568438f3ec3aa8ee904feb3e97d49226434cb6f7",
+      "tree": "e2614e8d09f9ee92ce7b8db2131349315fddf7cd",
+      "buildRecord": {
+        "commands": [
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1346-completion/npm",
+            "ci"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1346-completion/npm",
+            "run",
+            "build:wasm"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1346-completion/npm",
+            "run",
+            "build:ts"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1346-completion/npm",
+            "run",
+            "build:pagination-bundle"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1346-completion/npm",
+            "run",
+            "build:worker-bundle"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1346-completion/npm",
+            "run",
+            "build:export-browser"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1346-completion/npm",
+            "run",
+            "build:export-assets"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1346-completion/npm-export",
+            "ci"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1346-completion/npm-export",
+            "run",
+            "build"
+          ]
+        ],
+        "commit": "568438f3ec3aa8ee904feb3e97d49226434cb6f7",
+        "files": {
+          "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+          "npm-export/dist/browser-session.js": "5baf3c452f8c44ee913315a39f4f1f17d608dfe229ed6c9fb1305a0823f326c3",
+          "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+          "npm-export/dist/cli.js": "1a69a7d5a7a1304fc924e5785fe6683858347265997327cc53fc89e8275c1471",
+          "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+          "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+          "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+          "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+          "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+          "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+          "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+          "npm-export/dist/host.js": "98e5e0b697b3d5518315c52d77874b36e3e428cfb61a9211ea1d650ada6b0bc1",
+          "npm-export/dist/index.js": "e47fbd0ac7e8887d248c190944a0218911c9306db2f0d043bba023b9bdf1b9e9",
+          "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+          "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+          "npm-export/package-lock.json": "1cd67940127709c895d21242c78b3e82c443b0c2e0edda198dfe1994a803c609",
+          "npm/dist/export-assets.json": "adaab8d67ea13d4e5115a117b8018fc920869accc52bcca02d70c84d74774b0f",
+          "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+        },
+        "node": "v24.13.1",
+        "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+        "schema": 1,
+        "tree": "e2614e8d09f9ee92ce7b8db2131349315fddf7cd"
+      },
+      "localProductionEligibility": {
+        "ok": false,
+        "findings": [
+          {
+            "code": "user_namespaces_unavailable",
+            "severity": "fatal",
+            "message": "This host denies unprivileged user namespaces, which Chromium's process sandbox requires.",
+            "remediation": "Permit unprivileged user namespaces on the render host \u2014 for example kernel.apparmor_restrict_unprivileged_userns=0 on Ubuntu 23.10 and later; in containers, use a seccomp profile that permits clone with CLONE_NEWUSER and do not drop the capabilities the namespace path needs."
+          }
+        ]
+      },
+      "browser": {
+        "version": "143.0.7499.4",
+        "chromiumSandbox": false,
+        "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209"
+      },
+      "cases": {
+        "drawings-floating-shape-top-bottom": {
+          "inputSha256": "2b22619493f7689b7ccd3deaf7631e59df68f61bd68fa1786991c596dfb8e203",
+          "pdfSha256": "7a017fd7505906b1f9ea8e96c2818895382e1b4496a1fcdd2202bc6af9570095",
+          "htmlSha256": "85968147c1dbd78aeacc2ed8028742ea86def3a7f0daab69cf5f6764ea4b5686",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        },
+        "drawings-floating-group-top-bottom": {
+          "inputSha256": "9a12eca85271c8e6ca17438647df1f30539acf63cc78fde0f4eb2a0d54d9a90b",
+          "pdfSha256": "43d23df035df2a3661c8fab09664c4d31edd7e2ddaeb0d3a2eb3630e5e60d3a8",
+          "htmlSha256": "d22c4492a7e4ad02c79af1f780a662159705bda682fa23c27846487fe5df242f",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        },
+        "drawings-floating-shape-mixed-top-bottom": {
+          "inputSha256": "87f22dfe1c72acfc3e3e0e98c2c69d904b7b5a6f058a1d32ef5a22c2c7f1c01e",
+          "pdfSha256": "5591a3ebc3bc9bee0ddf95ae130829096bda1d67a87527cc0ff9960bc27ef6fe",
+          "htmlSha256": "9515d73d9bbe7cd32fd909a4a67af869ef9637806e42455d91c0f969e2a59cae",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        },
+        "drawings-floating-shape-no-wrap-control": {
+          "inputSha256": "1d1f3185578d2e3db91154ef92d53dc2c751dc70c8ac28e44f2626e207dad68e",
+          "pdfSha256": "a4c2be8f17d6704df37250973f3f65a7a1aae33edd51a72baced92a833dffae6",
+          "htmlSha256": "2eec20f706b37de58d5506a90e4ffc450a8f32efe5de97b1071acae1f3fa7c33",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        },
+        "drawings-floating-shape-behind-text": {
+          "inputSha256": "358f8160e39890a00f8e1d331e0dd8232b7222955535137c7a3b924d9b1f591b",
+          "pdfSha256": "72ba67e85ca6c2e31445a04490a089928132b3cb832f4ff20b8311f5e8e9fb3b",
+          "htmlSha256": "5a3d94a234d66fbb4db6483fb3319596867de6f91a39f6bc97c6f695639a31cf",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        },
+        "drawings-floating-shape-relative-height": {
+          "inputSha256": "55b89eb425444aef742580b678d201eeb3cd631b48f96ccf98b45293b0a28f16",
+          "pdfSha256": "affc0cd17ff94a9562f762fcabb1896fd0ce4561d42789da795f1477c4da7661",
+          "htmlSha256": "e7ac413b20c2e9617a8d0e8634ffc1b3d1f55fd1247a809275c61a0c7d95e0c9",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        },
+        "drawings-floating-shape-square": {
+          "inputSha256": "129bc9d6138a9110d78c9a5098821163d636da531068f2234a2709832755588f",
+          "pdfSha256": "33e322aca603c261df3938a9c2502cd7c101a1692e5188d18684739749b4095c",
+          "htmlSha256": "272c487d689882d2f3205089adba9b5a9627a7061f69cac256b2a5d31ddfc27b",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        },
+        "drawings-floating-shape-tight": {
+          "inputSha256": "5b1b2717cce59143f787be59d2250b9211967907fefe9e6d2b525d218681f9b7",
+          "pdfSha256": "0bf8730770a37559b4770993193a5f2c1aa1c83f17ec60e57dfd0e6cd6be6d82",
+          "htmlSha256": "17d23dd891586c5870a9a52e932788a596cc58671361f607717e1f37741e79a4",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        },
+        "drawings-floating-shape-through": {
+          "inputSha256": "6c4a0a6994ddb6de45a166a59feb11b9ce39f9b62bfee2e9fb36e197f3b598e7",
+          "pdfSha256": "ebfa8cecc403b83af3bf666f75ea9a2be31d5d9dfd6c6239b14ea222b66b99da",
+          "htmlSha256": "207bc954a0d55c12676799ba72b5e6928782a4347c60159d648c80ec739e3e7a",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        },
+        "drawings-floating-shape-unsupported": {
+          "inputSha256": "dd3e0fb29bc3ccc3d6275c9e3ad1af5e3c27e0d9c8b3210c62b5689ced3f36f1",
+          "pdfSha256": "28872c50634ca3ea860bf3f37d7e4e6fe71bcac19a6abb59b503ddff350eb81d",
+          "htmlSha256": "5380824685cab378c3b528aa06a7eae3d80d1cb553c3ec0285f5f8fac28e00a4",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        },
+        "drawings-floating-vml-plain": {
+          "inputSha256": "c916df18b27e110469d8627951f2345866d7a719d328652f36d80320f1f84698",
+          "pdfSha256": "2dd850c50610b6e02c4973c7c68e0bd28757f81ce42e14678fdd853f45a56134",
+          "htmlSha256": "2dc6efc276b01c710b972928c3233f41a43719d88da339373e5efdd7a3cbd42e",
+          "pages": 1,
+          "unsupported": [],
+          "warnings": []
+        }
+      }
+    }
+  },
+  "referenceBundle": {
+    "cases": {
+      "drawings-floating-group-top-bottom": {
+        "eligible": true,
+        "ineligibleChecks": [],
+        "inputSha256": "9a12eca85271c8e6ca17438647df1f30539acf63cc78fde0f4eb2a0d54d9a90b",
+        "inspection": {
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "geometry": [
+            {
+              "crop": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "media": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "tokens": {
+            "HarborAfter": 1,
+            "HarborBefore": 1,
+            "The": 2,
+            "begins.": 1,
+            "ends.": 1,
+            "inspection": 2
+          },
+          "words": [
+            {
+              "page": 1,
+              "rect": [
+                72.1,
+                75.799,
+                133.084,
+                87.976
+              ],
+              "text": "HarborBefore"
+            },
+            {
+              "page": 1,
+              "rect": [
+                135.845,
+                75.799,
+                152.917,
+                87.976
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                155.678,
+                75.799,
+                200.844,
+                87.976
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                203.594,
+                75.799,
+                235.065,
+                87.976
+              ],
+              "text": "begins."
+            },
+            {
+              "page": 1,
+              "rect": [
+                72.1,
+                176.499,
+                126.363,
+                188.676
+              ],
+              "text": "HarborAfter"
+            },
+            {
+              "page": 1,
+              "rect": [
+                129.135,
+                176.499,
+                146.207,
+                188.676
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                148.968,
+                176.499,
+                194.123,
+                188.676
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                196.873,
+                176.499,
+                219.753,
+                188.676
+              ],
+              "text": "ends."
+            }
+          ]
+        },
+        "pdf": "drawings-floating-group-top-bottom/reference.pdf",
+        "pdfSha256": "2bd9ecd2427674efc17d3d019440485e31c872611e5e0c866e97c76aae5a6583",
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "drawings-floating-shape-behind-text": {
+        "eligible": true,
+        "ineligibleChecks": [],
+        "inputSha256": "358f8160e39890a00f8e1d331e0dd8232b7222955535137c7a3b924d9b1f591b",
+        "inspection": {
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "geometry": [
+            {
+              "crop": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "media": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "tokens": {
+            "HarborAfter": 1,
+            "HarborAnchor": 1,
+            "HarborBefore": 1,
+            "The": 2,
+            "begins.": 1,
+            "ends.": 1,
+            "inspection": 2
+          },
+          "words": [
+            {
+              "page": 1,
+              "rect": [
+                72.1,
+                75.799,
+                133.084,
+                87.976
+              ],
+              "text": "HarborBefore"
+            },
+            {
+              "page": 1,
+              "rect": [
+                135.845,
+                75.799,
+                152.917,
+                87.976
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                155.678,
+                75.799,
+                200.844,
+                87.976
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                203.594,
+                75.799,
+                235.065,
+                87.976
+              ],
+              "text": "begins."
+            },
+            {
+              "page": 1,
+              "rect": [
+                72.1,
+                91.799,
+                136.164,
+                103.976
+              ],
+              "text": "HarborAnchor"
+            },
+            {
+              "page": 1,
+              "rect": [
+                72.1,
+                107.799,
+                126.363,
+                119.976
+              ],
+              "text": "HarborAfter"
+            },
+            {
+              "page": 1,
+              "rect": [
+                129.135,
+                107.799,
+                146.207,
+                119.976
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                148.968,
+                107.799,
+                194.123,
+                119.976
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                196.873,
+                107.799,
+                219.753,
+                119.976
+              ],
+              "text": "ends."
+            }
+          ]
+        },
+        "pdf": "drawings-floating-shape-behind-text/reference.pdf",
+        "pdfSha256": "743516be507006077e6ee79c91ec3004db73cad9c1afc9b16f4d90c9bdee5233",
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "drawings-floating-shape-mixed-top-bottom": {
+        "eligible": true,
+        "ineligibleChecks": [],
+        "inputSha256": "87f22dfe1c72acfc3e3e0e98c2c69d904b7b5a6f058a1d32ef5a22c2c7f1c01e",
+        "inspection": {
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "geometry": [
+            {
+              "crop": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "media": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "tokens": {
+            "HarborAfter": 1,
+            "HarborAnchor": 1,
+            "HarborBefore": 1,
+            "The": 2,
+            "begins.": 1,
+            "ends.": 1,
+            "inspection": 2
+          },
+          "words": [
+            {
+              "page": 1,
+              "rect": [
+                72.1,
+                75.799,
+                133.084,
+                87.976
+              ],
+              "text": "HarborBefore"
+            },
+            {
+              "page": 1,
+              "rect": [
+                135.845,
+                75.799,
+                152.917,
+                87.976
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                155.678,
+                75.799,
+                200.844,
+                87.976
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                203.594,
+                75.799,
+                235.065,
+                87.976
+              ],
+              "text": "begins."
+            },
+            {
+              "page": 1,
+              "rect": [
+                72.1,
+                160.499,
+                136.164,
+                172.676
+              ],
+              "text": "HarborAnchor"
+            },
+            {
+              "page": 1,
+              "rect": [
+                72.1,
+                176.499,
+                126.363,
+                188.676
+              ],
+              "text": "HarborAfter"
+            },
+            {
+              "page": 1,
+              "rect": [
+                129.135,
+                176.499,
+                146.207,
+                188.676
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                148.968,
+                176.499,
+                194.123,
+                188.676
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                196.873,
+                176.499,
+                219.753,
+                188.676
+              ],
+              "text": "ends."
+            }
+          ]
+        },
+        "pdf": "drawings-floating-shape-mixed-top-bottom/reference.pdf",
+        "pdfSha256": "7019d71c058a29204592a75733f30a2d7ef98ab3af38d50d503497044cef8b4c",
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "drawings-floating-shape-no-wrap-control": {
+        "eligible": true,
+        "ineligibleChecks": [],
+        "inputSha256": "1d1f3185578d2e3db91154ef92d53dc2c751dc70c8ac28e44f2626e207dad68e",
+        "inspection": {
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "geometry": [
+            {
+              "crop": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "media": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "tokens": {
+            "HarborAfter": 1,
+            "HarborBefore": 1,
+            "The": 2,
+            "begins.": 1,
+            "ends.": 1,
+            "inspection": 2
+          },
+          "words": [
+            {
+              "page": 1,
+              "rect": [
+                72.1,
+                75.799,
+                133.084,
+                87.976
+              ],
+              "text": "HarborBefore"
+            },
+            {
+              "page": 1,
+              "rect": [
+                135.845,
+                75.799,
+                152.917,
+                87.976
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                155.678,
+                75.799,
+                200.844,
+                87.976
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                203.594,
+                75.799,
+                235.065,
+                87.976
+              ],
+              "text": "begins."
+            },
+            {
+              "page": 1,
+              "rect": [
+                72.1,
+                107.799,
+                126.363,
+                119.976
+              ],
+              "text": "HarborAfter"
+            },
+            {
+              "page": 1,
+              "rect": [
+                129.135,
+                107.799,
+                146.207,
+                119.976
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                148.968,
+                107.799,
+                194.123,
+                119.976
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                196.873,
+                107.799,
+                219.753,
+                119.976
+              ],
+              "text": "ends."
+            }
+          ]
+        },
+        "pdf": "drawings-floating-shape-no-wrap-control/reference.pdf",
+        "pdfSha256": "a040c6e11e65913e572c8a4df0010b84426f23d54b09d3ac613e9579d981db88",
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "drawings-floating-shape-relative-height": {
+        "eligible": true,
+        "ineligibleChecks": [],
+        "inputSha256": "55b89eb425444aef742580b678d201eeb3cd631b48f96ccf98b45293b0a28f16",
+        "inspection": {
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "geometry": [
+            {
+              "crop": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "media": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "tokens": {
+            "HarborAfter": 1,
+            "HarborBefore": 1,
+            "The": 2,
+            "begins.": 1,
+            "ends.": 1,
+            "inspection": 2
+          },
+          "words": [
+            {
+              "page": 1,
+              "rect": [
+                72.1,
+                75.799,
+                133.084,
+                87.976
+              ],
+              "text": "HarborBefore"
+            },
+            {
+              "page": 1,
+              "rect": [
+                135.845,
+                75.799,
+                152.917,
+                87.976
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                155.678,
+                75.799,
+                200.844,
+                87.976
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                203.594,
+                75.799,
+                235.065,
+                87.976
+              ],
+              "text": "begins."
+            },
+            {
+              "page": 1,
+              "rect": [
+                72.1,
+                107.799,
+                126.363,
+                119.976
+              ],
+              "text": "HarborAfter"
+            },
+            {
+              "page": 1,
+              "rect": [
+                129.135,
+                107.799,
+                146.207,
+                119.976
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                148.968,
+                107.799,
+                194.123,
+                119.976
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                196.873,
+                107.799,
+                219.753,
+                119.976
+              ],
+              "text": "ends."
+            }
+          ]
+        },
+        "pdf": "drawings-floating-shape-relative-height/reference.pdf",
+        "pdfSha256": "628872e8b4c66df9ace6d23f420c43e268d38a05ed80bc75749d6c5df1bab3ac",
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "drawings-floating-shape-square": {
+        "eligible": true,
+        "ineligibleChecks": [],
+        "inputSha256": "129bc9d6138a9110d78c9a5098821163d636da531068f2234a2709832755588f",
+        "inspection": {
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "geometry": [
+            {
+              "crop": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "media": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "tokens": {
+            "HarborAfter": 1,
+            "HarborBefore": 1,
+            "The": 2,
+            "begins.": 1,
+            "ends.": 1,
+            "inspection": 2
+          },
+          "words": [
+            {
+              "page": 1,
+              "rect": [
+                72.1,
+                75.799,
+                133.084,
+                87.976
+              ],
+              "text": "HarborBefore"
+            },
+            {
+              "page": 1,
+              "rect": [
+                135.845,
+                75.799,
+                152.917,
+                87.976
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                155.678,
+                75.799,
+                200.844,
+                87.976
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                203.594,
+                75.799,
+                235.065,
+                87.976
+              ],
+              "text": "begins."
+            },
+            {
+              "page": 1,
+              "rect": [
+                216.15,
+                107.799,
+                270.413,
+                119.976
+              ],
+              "text": "HarborAfter"
+            },
+            {
+              "page": 1,
+              "rect": [
+                273.185,
+                107.799,
+                290.257,
+                119.976
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                293.018,
+                107.799,
+                338.173,
+                119.976
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                340.923,
+                107.799,
+                363.803,
+                119.976
+              ],
+              "text": "ends."
+            }
+          ]
+        },
+        "pdf": "drawings-floating-shape-square/reference.pdf",
+        "pdfSha256": "ed0831a949ceaf491a8c94433ea5ca402f087ab3f1eb47a2ccec8470206f462a",
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "drawings-floating-shape-through": {
+        "eligible": true,
+        "ineligibleChecks": [],
+        "inputSha256": "6c4a0a6994ddb6de45a166a59feb11b9ce39f9b62bfee2e9fb36e197f3b598e7",
+        "inspection": {
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "geometry": [
+            {
+              "crop": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "media": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "tokens": {
+            "HarborAfter": 1,
+            "HarborBefore": 1,
+            "The": 2,
+            "begins.": 1,
+            "ends.": 1,
+            "inspection": 2
+          },
+          "words": [
+            {
+              "page": 1,
+              "rect": [
+                72.1,
+                75.799,
+                133.084,
+                87.976
+              ],
+              "text": "HarborBefore"
+            },
+            {
+              "page": 1,
+              "rect": [
+                135.845,
+                75.799,
+                152.917,
+                87.976
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                155.678,
+                75.799,
+                200.844,
+                87.976
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                203.594,
+                75.799,
+                235.065,
+                87.976
+              ],
+              "text": "begins."
+            },
+            {
+              "page": 1,
+              "rect": [
+                216.15,
+                107.799,
+                270.413,
+                119.976
+              ],
+              "text": "HarborAfter"
+            },
+            {
+              "page": 1,
+              "rect": [
+                273.185,
+                107.799,
+                290.257,
+                119.976
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                293.018,
+                107.799,
+                338.173,
+                119.976
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                340.923,
+                107.799,
+                363.803,
+                119.976
+              ],
+              "text": "ends."
+            }
+          ]
+        },
+        "pdf": "drawings-floating-shape-through/reference.pdf",
+        "pdfSha256": "f4a128abdf3ad285ceacc84d46e9a8dae74215d93e99d7bc215c3a60fe65e5bc",
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "drawings-floating-shape-tight": {
+        "eligible": true,
+        "ineligibleChecks": [],
+        "inputSha256": "5b1b2717cce59143f787be59d2250b9211967907fefe9e6d2b525d218681f9b7",
+        "inspection": {
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "geometry": [
+            {
+              "crop": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "media": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "tokens": {
+            "HarborAfter": 1,
+            "HarborBefore": 1,
+            "The": 2,
+            "begins.": 1,
+            "ends.": 1,
+            "inspection": 2
+          },
+          "words": [
+            {
+              "page": 1,
+              "rect": [
+                72.1,
+                75.799,
+                133.084,
+                87.976
+              ],
+              "text": "HarborBefore"
+            },
+            {
+              "page": 1,
+              "rect": [
+                135.845,
+                75.799,
+                152.917,
+                87.976
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                155.678,
+                75.799,
+                200.844,
+                87.976
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                203.594,
+                75.799,
+                235.065,
+                87.976
+              ],
+              "text": "begins."
+            },
+            {
+              "page": 1,
+              "rect": [
+                216.15,
+                107.799,
+                270.413,
+                119.976
+              ],
+              "text": "HarborAfter"
+            },
+            {
+              "page": 1,
+              "rect": [
+                273.185,
+                107.799,
+                290.257,
+                119.976
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                293.018,
+                107.799,
+                338.173,
+                119.976
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                340.923,
+                107.799,
+                363.803,
+                119.976
+              ],
+              "text": "ends."
+            }
+          ]
+        },
+        "pdf": "drawings-floating-shape-tight/reference.pdf",
+        "pdfSha256": "dbfc65daa20422b29f56abf74bb952b66da5cd0967dd25c10d08d99aa6407360",
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "drawings-floating-shape-top-bottom": {
+        "eligible": true,
+        "ineligibleChecks": [],
+        "inputSha256": "2b22619493f7689b7ccd3deaf7631e59df68f61bd68fa1786991c596dfb8e203",
+        "inspection": {
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "geometry": [
+            {
+              "crop": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "media": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "tokens": {
+            "HarborAfter": 1,
+            "HarborBefore": 1,
+            "The": 2,
+            "begins.": 1,
+            "ends.": 1,
+            "inspection": 2
+          },
+          "words": [
+            {
+              "page": 1,
+              "rect": [
+                72.1,
+                75.799,
+                133.084,
+                87.976
+              ],
+              "text": "HarborBefore"
+            },
+            {
+              "page": 1,
+              "rect": [
+                135.845,
+                75.799,
+                152.917,
+                87.976
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                155.678,
+                75.799,
+                200.844,
+                87.976
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                203.594,
+                75.799,
+                235.065,
+                87.976
+              ],
+              "text": "begins."
+            },
+            {
+              "page": 1,
+              "rect": [
+                72.1,
+                176.499,
+                126.363,
+                188.676
+              ],
+              "text": "HarborAfter"
+            },
+            {
+              "page": 1,
+              "rect": [
+                129.135,
+                176.499,
+                146.207,
+                188.676
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                148.968,
+                176.499,
+                194.123,
+                188.676
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                196.873,
+                176.499,
+                219.753,
+                188.676
+              ],
+              "text": "ends."
+            }
+          ]
+        },
+        "pdf": "drawings-floating-shape-top-bottom/reference.pdf",
+        "pdfSha256": "a0f3aa9df898b06b954ea8a02ef2d61d64e977b2464811f35a18bf018c72d1ec",
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "drawings-floating-shape-unsupported": {
+        "eligible": true,
+        "ineligibleChecks": [],
+        "inputSha256": "dd3e0fb29bc3ccc3d6275c9e3ad1af5e3c27e0d9c8b3210c62b5689ced3f36f1",
+        "inspection": {
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "geometry": [
+            {
+              "crop": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "media": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "tokens": {
+            "HarborAfter": 1,
+            "HarborBefore": 1,
+            "The": 2,
+            "begins.": 1,
+            "ends.": 1,
+            "inspection": 2
+          },
+          "words": [
+            {
+              "page": 1,
+              "rect": [
+                72.1,
+                75.799,
+                133.084,
+                87.976
+              ],
+              "text": "HarborBefore"
+            },
+            {
+              "page": 1,
+              "rect": [
+                135.845,
+                75.799,
+                152.917,
+                87.976
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                155.678,
+                75.799,
+                200.844,
+                87.976
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                203.594,
+                75.799,
+                235.065,
+                87.976
+              ],
+              "text": "begins."
+            },
+            {
+              "page": 1,
+              "rect": [
+                72.1,
+                176.499,
+                126.363,
+                188.676
+              ],
+              "text": "HarborAfter"
+            },
+            {
+              "page": 1,
+              "rect": [
+                129.135,
+                176.499,
+                146.207,
+                188.676
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                148.968,
+                176.499,
+                194.123,
+                188.676
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                196.873,
+                176.499,
+                219.753,
+                188.676
+              ],
+              "text": "ends."
+            }
+          ]
+        },
+        "pdf": "drawings-floating-shape-unsupported/reference.pdf",
+        "pdfSha256": "b022c72b365aab93680740d97cedb5a0d7b9ac981f5eb4a27945db82e6823810",
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "drawings-floating-vml-plain": {
+        "eligible": true,
+        "ineligibleChecks": [],
+        "inputSha256": "c916df18b27e110469d8627951f2345866d7a719d328652f36d80320f1f84698",
+        "inspection": {
+          "fonts": [
+            "LiberationSerif"
+          ],
+          "geometry": [
+            {
+              "crop": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "media": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "tokens": {
+            "HarborAfter": 1,
+            "HarborBefore": 1,
+            "The": 2,
+            "begins.": 1,
+            "ends.": 1,
+            "inspection": 2
+          },
+          "words": [
+            {
+              "page": 1,
+              "rect": [
+                72.1,
+                75.799,
+                133.084,
+                87.976
+              ],
+              "text": "HarborBefore"
+            },
+            {
+              "page": 1,
+              "rect": [
+                135.845,
+                75.799,
+                152.917,
+                87.976
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                155.678,
+                75.799,
+                200.844,
+                87.976
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                203.594,
+                75.799,
+                235.065,
+                87.976
+              ],
+              "text": "begins."
+            },
+            {
+              "page": 1,
+              "rect": [
+                72.1,
+                163.849,
+                126.363,
+                176.026
+              ],
+              "text": "HarborAfter"
+            },
+            {
+              "page": 1,
+              "rect": [
+                129.135,
+                163.849,
+                146.207,
+                176.026
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                148.968,
+                163.849,
+                194.123,
+                176.026
+              ],
+              "text": "inspection"
+            },
+            {
+              "page": 1,
+              "rect": [
+                196.873,
+                163.849,
+                219.753,
+                176.026
+              ],
+              "text": "ends."
+            }
+          ]
+        },
+        "pdf": "drawings-floating-vml-plain/reference.pdf",
+        "pdfSha256": "401a284ebcff2912bf65ed7ef3d97b684c0425356a8068ff089a6cb139ea9c55",
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      }
+    },
+    "environment": {
+      "fonts": {
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "Times_New_Roman.ttf": {
+          "family": "Times New Roman",
+          "sha256": "4e98adeff8ccc8ef4e3ece8d4547e288ff85fdc9c7ca711a4599c234874bbe86"
+        },
+        "Times_New_Roman_Bold.ttf": {
+          "family": "Times New Roman",
+          "sha256": "4357b63cef20c01661a53c5dae70ffd20cb4765503aaed6d38b17a57c5a90bff"
+        },
+        "Times_New_Roman_Bold_Italic.ttf": {
+          "family": "Times New Roman",
+          "sha256": "192e1b0d18e90334e999a99f8c32808d6a2e74b3698b8cd90c943c2249a46549"
+        },
+        "Times_New_Roman_Italic.ttf": {
+          "family": "Times New Roman",
+          "sha256": "c25ae529b4cecdbca148b6ccb862ee0abad770af8b1fd29c8dba619d1b8da78a"
+        }
+      },
+      "tools": {
+        "pdffonts": {
+          "sha256": "de0a6d649710c2ebc226656b08c70814019a93f58889f79bf1dac726a131beda",
+          "version": "pdffonts version 25.03.0"
+        },
+        "pdftoppm": {
+          "sha256": "6c315e59db2a0829ecdfb6c791ad3f56bc9bd508266d20adc22238df447a74a3",
+          "version": "pdftoppm version 25.03.0"
+        },
+        "pdftotext": {
+          "sha256": "451784e28a4593637573e534d9be4c4487a3cccffae22a71e93162faa84de23c",
+          "version": "pdftotext version 25.03.0"
+        },
+        "qpdf": {
+          "sha256": "0d0462ea848601a652b666e83a07a095bb0c4d69d831beb6f94ea8e6e008f34c",
+          "version": "qpdf version 12.2.0"
+        }
+      }
+    },
+    "schema": 1,
+    "suiteDigest": "00b5fcbe6250ce15ac97fe2359c98e6532b86a2d9b709289bc56302033efc99e",
+    "track": "libreoffice"
+  },
+  "cases": {
+    "drawings-floating-shape-top-bottom": {
+      "inputSha256": "2b22619493f7689b7ccd3deaf7631e59df68f61bd68fa1786991c596dfb8e203",
+      "sources": {
+        "reference": {
+          "pdfSha256": "a0f3aa9df898b06b954ea8a02ef2d61d64e977b2464811f35a18bf018c72d1ec"
+        },
+        "before": {
+          "pdfSha256": "3ffc25859f10967fd19f09128aec6131de846fdbe373113d3d1528743863c310",
+          "htmlSha256": "b6d8cee9f4339e1d07015f7ff2a92a1f8a087620dc2fa8bf9cad16d3beb0f034",
+          "renderReportSha256": "ac35b39e0af7c6b9c2e7199b5326ecaf0bccfba91fa53137e27153ffad4bdeec",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  160,
+                  540,
+                  220
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {}
+        },
+        "after": {
+          "pdfSha256": "7a017fd7505906b1f9ea8e96c2818895382e1b4496a1fcdd2202bc6af9570095",
+          "htmlSha256": "85968147c1dbd78aeacc2ed8028742ea86def3a7f0daab69cf5f6764ea4b5686",
+          "renderReportSha256": "6516802f07a7db4b1d5cf25cb8bceb784bdd1eb09fa643b22b58f1a4c1be169a",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  160,
+                  540,
+                  220
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {},
+          "unsupportedContent": []
+        }
+      },
+      "observations": [
+        {
+          "renderer": "LibreOffice reference",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-reference-native-geometry/drawings-floating-shape-top-bottom/reference.pdf",
+          "pages": 1,
+          "tealPixels": 18240,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0999984741211,
+              176.49899291992188,
+              126.3630142211914,
+              188.67599487304688
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus main a1a07d36 (before)",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-before/drawings-floating-shape-top-bottom/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 0,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0,
+              105.70220947265625,
+              128.9113311767578,
+              117.87831115722656
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus 568438f3 (after) \u2014 strict fonts",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-after-final/drawings-floating-shape-top-bottom/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 18432,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0,
+              177.70220947265625,
+              128.9113311767578,
+              189.87831115722656
+            ]
+          ]
+        }
+      ],
+      "sheetSha256": "73ccca958884e1697b7aee8838e4ec5c2ee7228e68ade7981b0e45602e3b603d"
+    },
+    "drawings-floating-group-top-bottom": {
+      "inputSha256": "9a12eca85271c8e6ca17438647df1f30539acf63cc78fde0f4eb2a0d54d9a90b",
+      "sources": {
+        "reference": {
+          "pdfSha256": "2bd9ecd2427674efc17d3d019440485e31c872611e5e0c866e97c76aae5a6583"
+        },
+        "before": {
+          "pdfSha256": "4fed71f525145e6224edad52bba1aaf04cc1c321b1969609776b06e025eacaa5",
+          "htmlSha256": "2730f3212fbdc782f22cba802a88c5d70fb8dd1148bd8235a1c6b62fe03d81d2",
+          "renderReportSha256": "9fa6426b55d36ad677beff73673770a7692ed2f137a89a5295c91921e9f4c0ab",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  160,
+                  540,
+                  220
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {}
+        },
+        "after": {
+          "pdfSha256": "43d23df035df2a3661c8fab09664c4d31edd7e2ddaeb0d3a2eb3630e5e60d3a8",
+          "htmlSha256": "d22c4492a7e4ad02c79af1f780a662159705bda682fa23c27846487fe5df242f",
+          "renderReportSha256": "a647ee9d3dfe458dbb66d01ec9f140afe59ce1f8a76a9ac15950b820f40d0e6e",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  160,
+                  540,
+                  220
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {},
+          "unsupportedContent": []
+        }
+      },
+      "observations": [
+        {
+          "renderer": "LibreOffice reference",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-reference-native-geometry/drawings-floating-group-top-bottom/reference.pdf",
+          "pages": 1,
+          "tealPixels": 18240,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0999984741211,
+              176.49899291992188,
+              126.3630142211914,
+              188.67599487304688
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus main a1a07d36 (before)",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-before/drawings-floating-group-top-bottom/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 0,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0,
+              105.70220947265625,
+              128.9113311767578,
+              117.87831115722656
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus 568438f3 (after) \u2014 strict fonts",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-after-final/drawings-floating-group-top-bottom/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 18432,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0,
+              177.70220947265625,
+              128.9113311767578,
+              189.87831115722656
+            ]
+          ]
+        }
+      ],
+      "sheetSha256": "a37d9d90060d34f83e1ab45da97cf19dc339d391b7c3145cb43ebd8fd4a97456"
+    },
+    "drawings-floating-shape-mixed-top-bottom": {
+      "inputSha256": "87f22dfe1c72acfc3e3e0e98c2c69d904b7b5a6f058a1d32ef5a22c2c7f1c01e",
+      "sources": {
+        "reference": {
+          "pdfSha256": "7019d71c058a29204592a75733f30a2d7ef98ab3af38d50d503497044cef8b4c"
+        },
+        "before": {
+          "pdfSha256": "37a26c946704b822e13b44f60e277ddf846de967e8b348daa1e02df09d6a943e",
+          "htmlSha256": "8e327b6ee27ecbf886e1fbe3bd46ba5057faef1c123bf8bb88e4dce55fdcebad",
+          "renderReportSha256": "f49287972b3c56e4c2a0a8599d808a3abdb558b36f43e0d0810694580855f4b0",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  160,
+                  540,
+                  220
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAnchor": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {}
+        },
+        "after": {
+          "pdfSha256": "5591a3ebc3bc9bee0ddf95ae130829096bda1d67a87527cc0ff9960bc27ef6fe",
+          "htmlSha256": "9515d73d9bbe7cd32fd909a4a67af869ef9637806e42455d91c0f969e2a59cae",
+          "renderReportSha256": "1e2d2bf1ea7652e27b0896d0650cd070d90be45b4512a8b6fab9c728aa7c12d3",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  160,
+                  540,
+                  220
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAnchor": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {},
+          "unsupportedContent": []
+        }
+      },
+      "observations": [
+        {
+          "renderer": "LibreOffice reference",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-reference-native-geometry/drawings-floating-shape-mixed-top-bottom/reference.pdf",
+          "pages": 1,
+          "tealPixels": 18240,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0999984741211,
+              176.49899291992188,
+              126.3630142211914,
+              188.67599487304688
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus main a1a07d36 (before)",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-before/drawings-floating-shape-mixed-top-bottom/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 0,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0,
+              105.70220947265625,
+              128.9113311767578,
+              117.87831115722656
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus 568438f3 (after) \u2014 strict fonts",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-after-final/drawings-floating-shape-mixed-top-bottom/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 18432,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0,
+              177.70220947265625,
+              128.9113311767578,
+              189.87831115722656
+            ]
+          ]
+        }
+      ],
+      "sheetSha256": "6bf8ef32486ab9c9c86d29d80cc3c9cb6e4ac33460fa95cd6162fc76aaa47c37"
+    },
+    "drawings-floating-shape-no-wrap-control": {
+      "inputSha256": "1d1f3185578d2e3db91154ef92d53dc2c751dc70c8ac28e44f2626e207dad68e",
+      "sources": {
+        "reference": {
+          "pdfSha256": "a040c6e11e65913e572c8a4df0010b84426f23d54b09d3ac613e9579d981db88"
+        },
+        "before": {
+          "pdfSha256": "43f25bfa7e47c5713366f63f41eb1e84d0a40eeb64d7e8469ca9f6f7fd659c4f",
+          "htmlSha256": "5ffe553a715762265cbf6af17951f7bb06e52a908487386f05e0bc4d176a58eb",
+          "renderReportSha256": "007b52f7887b79db4c9c7b693ef76a2fafee391b7656043b3cc45f392bfdd693",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  100,
+                  540,
+                  140
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {}
+        },
+        "after": {
+          "pdfSha256": "a4c2be8f17d6704df37250973f3f65a7a1aae33edd51a72baced92a833dffae6",
+          "htmlSha256": "2eec20f706b37de58d5506a90e4ffc450a8f32efe5de97b1071acae1f3fa7c33",
+          "renderReportSha256": "ecfa2d23b148357cb096601f0a4e3f079659c12a89fa34d6cd8d2a32d922f96f",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  100,
+                  540,
+                  140
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {},
+          "unsupportedContent": []
+        }
+      },
+      "observations": [
+        {
+          "renderer": "LibreOffice reference",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-reference-native-geometry/drawings-floating-shape-no-wrap-control/reference.pdf",
+          "pages": 1,
+          "tealPixels": 18240,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0999984741211,
+              107.7989730834961,
+              126.3630142211914,
+              119.9759750366211
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus main a1a07d36 (before)",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-before/drawings-floating-shape-no-wrap-control/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 0,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0,
+              105.70220947265625,
+              128.9113311767578,
+              117.87831115722656
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus 568438f3 (after) \u2014 strict fonts",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-after-final/drawings-floating-shape-no-wrap-control/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 18432,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0,
+              105.70220947265625,
+              128.9113311767578,
+              117.87831115722656
+            ]
+          ]
+        }
+      ],
+      "sheetSha256": "258bb5116b4e5dc963af4fd9da532d8212d05d6fddc6e6df2ffeaf0e7db15c42"
+    },
+    "drawings-floating-shape-behind-text": {
+      "inputSha256": "358f8160e39890a00f8e1d331e0dd8232b7222955535137c7a3b924d9b1f591b",
+      "sources": {
+        "reference": {
+          "pdfSha256": "743516be507006077e6ee79c91ec3004db73cad9c1afc9b16f4d90c9bdee5233"
+        },
+        "before": {
+          "pdfSha256": "9c697aae3a9fde8fdc383494505a993e8762e7a13cd94d3c7faaea6bf1c2ffc8",
+          "htmlSha256": "cf9b0027e1413496a8a3c756c8232a8fd94ef7f3f850a4b3391730a82c012db3",
+          "renderReportSha256": "86eef7cf6e9764b2910a67c06b12354bb8daa2ff1cdaf36c396a97d65bfdfa71",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  100,
+                  540,
+                  140
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAnchor": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {}
+        },
+        "after": {
+          "pdfSha256": "72ba67e85ca6c2e31445a04490a089928132b3cb832f4ff20b8311f5e8e9fb3b",
+          "htmlSha256": "5a3d94a234d66fbb4db6483fb3319596867de6f91a39f6bc97c6f695639a31cf",
+          "renderReportSha256": "6f1d04b791050d2fdd849d6a75924888acc7be433350ba1e39a921b955652bc0",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  100,
+                  540,
+                  140
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAnchor": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {},
+          "unsupportedContent": []
+        }
+      },
+      "observations": [
+        {
+          "renderer": "LibreOffice reference",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-reference-native-geometry/drawings-floating-shape-behind-text/reference.pdf",
+          "pages": 1,
+          "tealPixels": 16813,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0999984741211,
+              107.7989730834961,
+              126.3630142211914,
+              119.9759750366211
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus main a1a07d36 (before)",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-before/drawings-floating-shape-behind-text/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 0,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0,
+              105.70220947265625,
+              128.9113311767578,
+              117.87831115722656
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus 568438f3 (after) \u2014 strict fonts",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-after-final/drawings-floating-shape-behind-text/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 17097,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0,
+              105.70220947265625,
+              128.9113311767578,
+              117.87831115722656
+            ]
+          ]
+        }
+      ],
+      "sheetSha256": "5a91e0be0fc3161495fefe2b333a07426ce86ba48da85ba1bc10c08c4ddd537b"
+    },
+    "drawings-floating-shape-relative-height": {
+      "inputSha256": "55b89eb425444aef742580b678d201eeb3cd631b48f96ccf98b45293b0a28f16",
+      "sources": {
+        "reference": {
+          "pdfSha256": "628872e8b4c66df9ace6d23f420c43e268d38a05ed80bc75749d6c5df1bab3ac"
+        },
+        "before": {
+          "pdfSha256": "917ed29fcd303e31bd9b3318848e945dc7ba8f12ec76b31d2329d025e5b93da1",
+          "htmlSha256": "1a2c47ab02bc92d50f1b99d2bb0c8276179b984e799121c1969ca8856022d3f9",
+          "renderReportSha256": "823580caa16826f84c226e4430c7cc3e7c41f3768573639e74b9b28d2f68c0c2",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  100,
+                  540,
+                  140
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {}
+        },
+        "after": {
+          "pdfSha256": "affc0cd17ff94a9562f762fcabb1896fd0ce4561d42789da795f1477c4da7661",
+          "htmlSha256": "e7ac413b20c2e9617a8d0e8634ffc1b3d1f55fd1247a809275c61a0c7d95e0c9",
+          "renderReportSha256": "a92f58eb71e13432cdfe6aafb55197424824afb536e5d310afb4c194961efa1c",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  100,
+                  540,
+                  140
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {},
+          "unsupportedContent": []
+        }
+      },
+      "observations": [
+        {
+          "renderer": "LibreOffice reference",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-reference-native-geometry/drawings-floating-shape-relative-height/reference.pdf",
+          "pages": 1,
+          "tealPixels": 0,
+          "orangePixels": 18240,
+          "afterMarker": [
+            [
+              72.0999984741211,
+              107.7989730834961,
+              126.3630142211914,
+              119.9759750366211
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus main a1a07d36 (before)",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-before/drawings-floating-shape-relative-height/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 0,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0,
+              105.70220947265625,
+              128.9113311767578,
+              117.87831115722656
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus 568438f3 (after) \u2014 strict fonts",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-after-final/drawings-floating-shape-relative-height/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 18432,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0,
+              105.70220947265625,
+              128.9113311767578,
+              117.87831115722656
+            ]
+          ]
+        }
+      ],
+      "sheetSha256": "d0c0008ba3db57a2499abe4b38080e811da9092fa808c6f5e66194a48cd4ba14"
+    },
+    "drawings-floating-shape-square": {
+      "inputSha256": "129bc9d6138a9110d78c9a5098821163d636da531068f2234a2709832755588f",
+      "sources": {
+        "reference": {
+          "pdfSha256": "ed0831a949ceaf491a8c94433ea5ca402f087ab3f1eb47a2ccec8470206f462a"
+        },
+        "before": {
+          "pdfSha256": "c137ca01b92554058bac815887605a79a30e7eba22bfaa0ddbaaddd9e061fa35",
+          "htmlSha256": "b15bc8af06f20523e8371ef3e73c11254149e010f0a0108734562173339013f6",
+          "renderReportSha256": "12ca97453be0534d2d28d5854ef5768b8190973920641ea4e7f0d1e257bc4e29",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  216,
+                  100,
+                  540,
+                  140
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {}
+        },
+        "after": {
+          "pdfSha256": "33e322aca603c261df3938a9c2502cd7c101a1692e5188d18684739749b4095c",
+          "htmlSha256": "272c487d689882d2f3205089adba9b5a9627a7061f69cac256b2a5d31ddfc27b",
+          "renderReportSha256": "db6e6e46f069fdef65d89955acfe0652b585ca433e929dd61e7f504c7a45a4ac",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  216,
+                  100,
+                  540,
+                  140
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {},
+          "unsupportedContent": []
+        }
+      },
+      "observations": [
+        {
+          "renderer": "LibreOffice reference",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-reference-native-geometry/drawings-floating-shape-square/reference.pdf",
+          "pages": 1,
+          "tealPixels": 18240,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              216.14999389648438,
+              107.7989730834961,
+              270.4129638671875,
+              119.9759750366211
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus main a1a07d36 (before)",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-before/drawings-floating-shape-square/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 0,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0,
+              105.70220947265625,
+              128.9113311767578,
+              117.87831115722656
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus 568438f3 (after) \u2014 strict fonts",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-after-final/drawings-floating-shape-square/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 18432,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              216.0,
+              105.70220947265625,
+              272.9113464355469,
+              117.87831115722656
+            ]
+          ]
+        }
+      ],
+      "sheetSha256": "40d5447b17cafe31bb23a3ac3b7f2789cf0f8a98bcd789203c6c6d7f8435623e"
+    },
+    "drawings-floating-shape-tight": {
+      "inputSha256": "5b1b2717cce59143f787be59d2250b9211967907fefe9e6d2b525d218681f9b7",
+      "sources": {
+        "reference": {
+          "pdfSha256": "dbfc65daa20422b29f56abf74bb952b66da5cd0967dd25c10d08d99aa6407360"
+        },
+        "before": {
+          "pdfSha256": "ba4f59a39930683712bb5c9aafba7cf0cd3463ffc78d8ca288b24927f99d2b54",
+          "htmlSha256": "aa052ab0e3226b09c4ebdf7bfee70c2ed6c33b1dbec74228fbd3a9412dd0294b",
+          "renderReportSha256": "ba011cbac0c6c15b835d155de93b28066c98da394ee9482fbb1a13576de183ba",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  180,
+                  100,
+                  540,
+                  140
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {}
+        },
+        "after": {
+          "pdfSha256": "0bf8730770a37559b4770993193a5f2c1aa1c83f17ec60e57dfd0e6cd6be6d82",
+          "htmlSha256": "17d23dd891586c5870a9a52e932788a596cc58671361f607717e1f37741e79a4",
+          "renderReportSha256": "84201ba66d64569a336233ae2b3808a94e873a41095676e531a67a8ad9cd95a0",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  180,
+                  100,
+                  540,
+                  140
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {},
+          "unsupportedContent": []
+        }
+      },
+      "observations": [
+        {
+          "renderer": "LibreOffice reference",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-reference-native-geometry/drawings-floating-shape-tight/reference.pdf",
+          "pages": 1,
+          "tealPixels": 18240,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              216.14999389648438,
+              107.7989730834961,
+              270.4129638671875,
+              119.9759750366211
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus main a1a07d36 (before)",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-before/drawings-floating-shape-tight/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 0,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0,
+              105.70220947265625,
+              128.9113311767578,
+              117.87831115722656
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus 568438f3 (after) \u2014 strict fonts",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-after-final/drawings-floating-shape-tight/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 18432,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              199.96875,
+              105.70220947265625,
+              256.8800964355469,
+              117.87831115722656
+            ]
+          ]
+        }
+      ],
+      "sheetSha256": "22a2e2882fc51dfe423bf5d69e8dc49cff3bdaec3379c504e990b169b4b10ba3"
+    },
+    "drawings-floating-shape-through": {
+      "inputSha256": "6c4a0a6994ddb6de45a166a59feb11b9ce39f9b62bfee2e9fb36e197f3b598e7",
+      "sources": {
+        "reference": {
+          "pdfSha256": "f4a128abdf3ad285ceacc84d46e9a8dae74215d93e99d7bc215c3a60fe65e5bc"
+        },
+        "before": {
+          "pdfSha256": "a0d56d4917385412d5a5853ecbec1c3e4b56c13abe0ece07a7fa2ba472f36886",
+          "htmlSha256": "2807314d236924e92d70136c6ce9d7ef909b3a32972b63eac3eced573f87b99b",
+          "renderReportSha256": "baaebf4c1c6be3b1123f8d19499f0aa59e1701e00fc8eee86c1a481b3cf383cc",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  180,
+                  100,
+                  540,
+                  140
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {}
+        },
+        "after": {
+          "pdfSha256": "ebfa8cecc403b83af3bf666f75ea9a2be31d5d9dfd6c6239b14ea222b66b99da",
+          "htmlSha256": "207bc954a0d55c12676799ba72b5e6928782a4347c60159d648c80ec739e3e7a",
+          "renderReportSha256": "1ca045ef8f8a9c05f43330e5c557d2a67a1087ffa978a0f783c0cd1a8736c26b",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  180,
+                  100,
+                  540,
+                  140
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {},
+          "unsupportedContent": []
+        }
+      },
+      "observations": [
+        {
+          "renderer": "LibreOffice reference",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-reference-native-geometry/drawings-floating-shape-through/reference.pdf",
+          "pages": 1,
+          "tealPixels": 18240,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              216.14999389648438,
+              107.7989730834961,
+              270.4129638671875,
+              119.9759750366211
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus main a1a07d36 (before)",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-before/drawings-floating-shape-through/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 0,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0,
+              105.70220947265625,
+              128.9113311767578,
+              117.87831115722656
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus 568438f3 (after) \u2014 strict fonts",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-after-final/drawings-floating-shape-through/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 18432,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              199.96875,
+              105.70220947265625,
+              256.8800964355469,
+              117.87831115722656
+            ]
+          ]
+        }
+      ],
+      "sheetSha256": "4ecfaf762144b8437faa8c360dc02c87130789b6aab66bfb1198e86c1617b5c2"
+    },
+    "drawings-floating-shape-unsupported": {
+      "inputSha256": "dd3e0fb29bc3ccc3d6275c9e3ad1af5e3c27e0d9c8b3210c62b5689ced3f36f1",
+      "sources": {
+        "reference": {
+          "pdfSha256": "b022c72b365aab93680740d97cedb5a0d7b9ac981f5eb4a27945db82e6823810"
+        },
+        "before": {
+          "pdfSha256": "2602e026d81c473dfc7be115ee18665f021f6a84a33bffc2c465693eb52e43c2",
+          "htmlSha256": "b6d8cee9f4339e1d07015f7ff2a92a1f8a087620dc2fa8bf9cad16d3beb0f034",
+          "renderReportSha256": "ff317d06dbccebc14de3813b54ad573bfe91ade048535a4a749b5c149a84364b",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  160,
+                  540,
+                  220
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {}
+        },
+        "after": {
+          "pdfSha256": "28872c50634ca3ea860bf3f37d7e4e6fe71bcac19a6abb59b503ddff350eb81d",
+          "htmlSha256": "5380824685cab378c3b528aa06a7eae3d80d1cb553c3ec0285f5f8fac28e00a4",
+          "renderReportSha256": "5ec6986954ee423c39d4e3dbf903e7b83b36ff06606ba8244bd2f77c83fedc8e",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  160,
+                  540,
+                  220
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {},
+          "unsupportedContent": []
+        }
+      },
+      "observations": [
+        {
+          "renderer": "LibreOffice reference",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-reference-native-geometry/drawings-floating-shape-unsupported/reference.pdf",
+          "pages": 1,
+          "tealPixels": 15862,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0999984741211,
+              176.49899291992188,
+              126.3630142211914,
+              188.67599487304688
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus main a1a07d36 (before)",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-before/drawings-floating-shape-unsupported/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 0,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0,
+              105.70220947265625,
+              128.9113311767578,
+              117.87831115722656
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus 568438f3 (after) \u2014 strict fonts",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-after-final/drawings-floating-shape-unsupported/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 16032,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0,
+              177.70220947265625,
+              128.9113311767578,
+              189.87831115722656
+            ]
+          ]
+        }
+      ],
+      "sheetSha256": "3351b7cc9832d5c5d123d5e7bb676ed8ca9e155c2db1372fdd075b59d5b08c9c"
+    },
+    "drawings-floating-vml-plain": {
+      "inputSha256": "c916df18b27e110469d8627951f2345866d7a719d328652f36d80320f1f84698",
+      "sources": {
+        "reference": {
+          "pdfSha256": "401a284ebcff2912bf65ed7ef3d97b684c0425356a8068ff089a6cb139ea9c55"
+        },
+        "before": {
+          "pdfSha256": "cd133ac4c984b0e60406503fb6be12ad4102ad0e19d398e881a5d50606b1b860",
+          "htmlSha256": "3277f58e492e99bdd5b9c2cb0c00ace7ef82b7d8e77131195baca8e6435a99af",
+          "renderReportSha256": "83d448431a55eb27bd1eb185a5defdc0d26e7584bdf2393d97808018d8ba7c88",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  160,
+                  540,
+                  220
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {}
+        },
+        "after": {
+          "pdfSha256": "2dd850c50610b6e02c4973c7c68e0bd28757f81ce42e14678fdd853f45a56134",
+          "htmlSha256": "2dc6efc276b01c710b972928c3233f41a43719d88da339373e5efdd7a3cbd42e",
+          "renderReportSha256": "df8aa66ff48d3ceeb84a697e2999408645017fb323b9eb789cd502ff3b3680a1",
+          "diagnosticChecks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "version": 2,
+                "marker": "HarborAfter",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  160,
+                  540,
+                  220
+                ],
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "tokens": {
+            "HarborBefore": 1,
+            "The": 2,
+            "inspection": 2,
+            "begins.": 1,
+            "HarborAfter": 1,
+            "ends.": 1
+          },
+          "missing": {},
+          "extra": {},
+          "unsupportedContent": []
+        }
+      },
+      "observations": [
+        {
+          "renderer": "LibreOffice reference",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-reference-native-geometry/drawings-floating-vml-plain/reference.pdf",
+          "pages": 1,
+          "tealPixels": 18050,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0999984741211,
+              163.84902954101562,
+              126.3630142211914,
+              176.02603149414062
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus main a1a07d36 (before)",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-before/drawings-floating-vml-plain/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 0,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0,
+              105.70220947265625,
+              128.9113311767578,
+              117.87831115722656
+            ]
+          ]
+        },
+        {
+          "renderer": "Docxodus 568438f3 (after) \u2014 strict fonts",
+          "pdf": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1346-diagnostic-after-final/drawings-floating-vml-plain/candidate.pdf",
+          "pages": 1,
+          "tealPixels": 17860,
+          "orangePixels": 0,
+          "afterMarker": [
+            [
+              72.0,
+              166.45220947265625,
+              128.9113311767578,
+              178.62831115722656
+            ]
+          ]
+        }
+      ],
+      "sheetSha256": "03cf213f54a5364bd9b082f39ff1d27b623e537ba264ffca4dfe758c8a12e8e5"
+    }
+  },
+  "allSheetsVisuallyInspected": true,
+  "rasterDpi": 96,
+  "sheetGeneratorSha256": "49701ea920c02bc1a67dd61d1dba115d89bb8484dc72e2292efaaa945ae9c998",
+  "validatorEvidence": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "documents": {
+      "fixtures/drawings-floating-group-top-bottom.docx": [],
+      "fixtures/drawings-floating-shape-behind-text.docx": [],
+      "fixtures/drawings-floating-shape-mixed-top-bottom.docx": [],
+      "fixtures/drawings-floating-shape-no-wrap-control.docx": [],
+      "fixtures/drawings-floating-shape-relative-height.docx": [],
+      "fixtures/drawings-floating-shape-square.docx": [],
+      "fixtures/drawings-floating-shape-through.docx": [],
+      "fixtures/drawings-floating-shape-tight.docx": [],
+      "fixtures/drawings-floating-shape-top-bottom.docx": [],
+      "fixtures/drawings-floating-shape-unsupported.docx": [],
+      "fixtures/drawings-floating-vml-plain.docx": []
+    }
+  }
+}

@@ -1,0 +1,1251 @@
+{
+  "schema": 1,
+  "benchCommit": "d6748c567d9a3c581a3a0060c98fb69e8d25d215",
+  "scope": "Production public WASM export and pinned Chromium PDF; raw artifacts are retained in the linked Actions runs.",
+  "limitations": [
+    "No fresh Word reference is claimed.",
+    "Controls prove full page-raster identity, not PDF-byte or HTML/PageMap payload identity.",
+    "Separator paint and superscript placement differ from LibreOffice; all scores remain below close-match thresholds."
+  ],
+  "runs": {
+    "candidate": {
+      "runUrl": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/41206727404",
+      "artifactId": 13045620398,
+      "artifactZipSha256": "1295f7d39877aa2b20bb15e77c1d3adb16ae7473bbae66c6556cb767f58c9881",
+      "coreCommit": "ac4e6a329a2204d40cb00d3b753f1e35b8ddb528",
+      "resultSha256": "226cfbb0f1ca7b9fcf0065ff91822e1ceae49b164d3e5d6453e96b852ae40449",
+      "selectedManifestSha256": "9de6ca3e0b82d52042665cda8257bf547582fd5a463715183fc4923b6db925a7",
+      "contractDigest": "0697f449530e01ff0ad0d8c8da7b8a43e3d64aa83c6d7d5745f234c8c67219ca",
+      "referenceBundleSha256": "0be489fda0b2142c49c67b08fb176b9e8bda84796b358dd032845616c8ca963a",
+      "calibrationResultSha256": "db99730ee31d2bbd940f31ccfdf0a636bc346ed9a1e496fa547633fac05d0d86",
+      "calibrationSummary": {
+        "categoryMeans": {
+          "notes": 100.0
+        },
+        "closeMatchRate": 1.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 6,
+        "required": 6,
+        "score": 100.0
+      },
+      "summary": {
+        "categoryMeans": {
+          "notes": 83.44142116000677
+        },
+        "closeMatchRate": 0.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 6,
+        "required": 6,
+        "score": 83.44142116000677
+      },
+      "cases": {
+        "notes-marker-decoration-11pt": {
+          "score": 82.63197653606622,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "TimesNewRomanPSMT",
+                "TimesNewRomanPSMT"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ],
+                "type": "same-page",
+                "version": 1
+              },
+              "name": "assertion-same-page",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 2268,
+              "close": false,
+              "inkF1": 0.8263197653606622,
+              "pixelMismatch": 0.004493464052287581,
+              "precision": 0.8558201058201058,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "9d088daf3c4353747a8d2e566d6c37f01b93092c114e0709559e525547d170f3",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "92f6986554de851a4f0425e6b054f1556b73016670d3ffb5e83bf8e228bc7cb3",
+                "width": 816
+              },
+              "recall": 0.7987854251012145,
+              "referenceInk": 2470,
+              "score": 82.63197653606622,
+              "ssim": 0.9935899581133358,
+              "ssimRaw": 0.9935899581133358
+            }
+          ],
+          "coreTree": "e500aaa5f179e164494ea7a76e70686e79a1288a",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "39c2de20f2b6ef95aaa53aa85a1572ec51bca3e3703d268aa2298336b9be874f",
+          "pageMapDigest": "546814a95d0ff63cf8a1261bc542a50e82476a6708219d95ce4cebc5a8eb9c79",
+          "files": {
+            "1-candidate.png": "c36a8d388b92a204dd1a15ebd15d7af8a7dba7f999585c3e413ed4ba5654bf15",
+            "1-overlay.png": "edc1bf8970b8e7509245d535378288832bffb7a02efb0e8e536461af03a95f1d",
+            "1-reference.png": "4ed7fea88076bd30efe382a2b2d7193ad8bdfc2e2bb472b0fd7aeae138c0746d",
+            "candidate.pdf": "591db59e2f6dce2e081909f668c96df9ed28f0fb3b89e8e9518b57e51d526f14",
+            "evidence.json": "406ecb9d4c621614f06d19ac0617b22801a5643bf6517ffd65005d926ea1611d",
+            "production.json": "74e03c84d7d929df944889fe695408f7a858e9201d8a8df3f696e2235e5bc475",
+            "reference.pdf": "4f3d68373ba3a0421e1cf7fd6519777de0399576c7433554f5c1af85f6198b81"
+          }
+        },
+        "notes-marker-decoration-11pt5": {
+          "score": 82.63197653606622,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "TimesNewRomanPSMT",
+                "TimesNewRomanPSMT"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ],
+                "type": "same-page",
+                "version": 1
+              },
+              "name": "assertion-same-page",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 2268,
+              "close": false,
+              "inkF1": 0.8263197653606622,
+              "pixelMismatch": 0.004493464052287581,
+              "precision": 0.8558201058201058,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "9d088daf3c4353747a8d2e566d6c37f01b93092c114e0709559e525547d170f3",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "92f6986554de851a4f0425e6b054f1556b73016670d3ffb5e83bf8e228bc7cb3",
+                "width": 816
+              },
+              "recall": 0.7987854251012145,
+              "referenceInk": 2470,
+              "score": 82.63197653606622,
+              "ssim": 0.9935899581133358,
+              "ssimRaw": 0.9935899581133358
+            }
+          ],
+          "coreTree": "e500aaa5f179e164494ea7a76e70686e79a1288a",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "9986140ab7c0b158705d8b03eebbf1f9945397c781e760e4dfd7278098b4fe55",
+          "pageMapDigest": "546814a95d0ff63cf8a1261bc542a50e82476a6708219d95ce4cebc5a8eb9c79",
+          "files": {
+            "1-candidate.png": "c36a8d388b92a204dd1a15ebd15d7af8a7dba7f999585c3e413ed4ba5654bf15",
+            "1-overlay.png": "edc1bf8970b8e7509245d535378288832bffb7a02efb0e8e536461af03a95f1d",
+            "1-reference.png": "4ed7fea88076bd30efe382a2b2d7193ad8bdfc2e2bb472b0fd7aeae138c0746d",
+            "candidate.pdf": "c7f087d8e8e611a1f80c04211956740a8442c659c233b43d23fa6268e7c48162",
+            "evidence.json": "1e2107d8964ea280ba249350c7bde4b8e6614fa89458e15cd4d3bd4529ef3359",
+            "production.json": "8fd78b5ffb00e0ad0e21f1211e6a20c398634af744c123bf7ecb23dd7799e63d",
+            "reference.pdf": "c2eb3567e68fe2a00f4229314ac680723612aa0c83efd6af38ec21d1d5ac4aab"
+          }
+        },
+        "notes-marker-decoration-12pt-control": {
+          "score": 82.63197653606622,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "TimesNewRomanPSMT",
+                "TimesNewRomanPSMT"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ],
+                "type": "same-page",
+                "version": 1
+              },
+              "name": "assertion-same-page",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 2268,
+              "close": false,
+              "inkF1": 0.8263197653606622,
+              "pixelMismatch": 0.004493464052287581,
+              "precision": 0.8558201058201058,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "9d088daf3c4353747a8d2e566d6c37f01b93092c114e0709559e525547d170f3",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "92f6986554de851a4f0425e6b054f1556b73016670d3ffb5e83bf8e228bc7cb3",
+                "width": 816
+              },
+              "recall": 0.7987854251012145,
+              "referenceInk": 2470,
+              "score": 82.63197653606622,
+              "ssim": 0.9935899581133358,
+              "ssimRaw": 0.9935899581133358
+            }
+          ],
+          "coreTree": "e500aaa5f179e164494ea7a76e70686e79a1288a",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "0975422c1702638bab7415e74655e85493898208c7b0f31943cf2ab6a71aef6e",
+          "pageMapDigest": "546814a95d0ff63cf8a1261bc542a50e82476a6708219d95ce4cebc5a8eb9c79",
+          "files": {
+            "1-candidate.png": "c36a8d388b92a204dd1a15ebd15d7af8a7dba7f999585c3e413ed4ba5654bf15",
+            "1-overlay.png": "edc1bf8970b8e7509245d535378288832bffb7a02efb0e8e536461af03a95f1d",
+            "1-reference.png": "4ed7fea88076bd30efe382a2b2d7193ad8bdfc2e2bb472b0fd7aeae138c0746d",
+            "candidate.pdf": "e8cb6d3bd34812fabaccd6565fe8d287cd97f60fde4958ec3623b561ae39880b",
+            "evidence.json": "7090da0d5052a1ea4a75dbe55377daa3fbeb338b15de7b8a7321a7908adf2c0e",
+            "production.json": "e20a2ffa198921c490b5b9d02f39259e64440bdbdc26308a30ad7660604fb6bf",
+            "reference.pdf": "8684185d9ff163c83ab7b07b6fdba090020323bc89cffdda88fc3d82ca876f38"
+          }
+        },
+        "notes-marker-decoration-12pt5": {
+          "score": 82.63197653606622,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "TimesNewRomanPSMT",
+                "TimesNewRomanPSMT"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ],
+                "type": "same-page",
+                "version": 1
+              },
+              "name": "assertion-same-page",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 2268,
+              "close": false,
+              "inkF1": 0.8263197653606622,
+              "pixelMismatch": 0.004493464052287581,
+              "precision": 0.8558201058201058,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "9d088daf3c4353747a8d2e566d6c37f01b93092c114e0709559e525547d170f3",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "92f6986554de851a4f0425e6b054f1556b73016670d3ffb5e83bf8e228bc7cb3",
+                "width": 816
+              },
+              "recall": 0.7987854251012145,
+              "referenceInk": 2470,
+              "score": 82.63197653606622,
+              "ssim": 0.9935899581133358,
+              "ssimRaw": 0.9935899581133358
+            }
+          ],
+          "coreTree": "e500aaa5f179e164494ea7a76e70686e79a1288a",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "7e59bf8b1491d3a99c99c9a7ba65337d567b65d5b78274c4dceee958330c13de",
+          "pageMapDigest": "546814a95d0ff63cf8a1261bc542a50e82476a6708219d95ce4cebc5a8eb9c79",
+          "files": {
+            "1-candidate.png": "c36a8d388b92a204dd1a15ebd15d7af8a7dba7f999585c3e413ed4ba5654bf15",
+            "1-overlay.png": "edc1bf8970b8e7509245d535378288832bffb7a02efb0e8e536461af03a95f1d",
+            "1-reference.png": "4ed7fea88076bd30efe382a2b2d7193ad8bdfc2e2bb472b0fd7aeae138c0746d",
+            "candidate.pdf": "9c497f1108a4be60a54becf14eef234c5cecc48e4677c6bd15dd6e7724dc332f",
+            "evidence.json": "7695faf846c10a557181b5ae1669043fbc0831bf5364851a9b8737a788fbcc5b",
+            "production.json": "a91340e866b05621c822df719ab4b84361d9e83788a5e16bdcc9c5d7019a5a67",
+            "reference.pdf": "d0269ca14eb6e271878616c1de0ea3a86a26664fe3e8802ee862110f177299e9"
+          }
+        },
+        "notes-marker-decoration-plain-control": {
+          "score": 82.63197653606622,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "TimesNewRomanPSMT",
+                "TimesNewRomanPSMT"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ],
+                "type": "same-page",
+                "version": 1
+              },
+              "name": "assertion-same-page",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 2268,
+              "close": false,
+              "inkF1": 0.8263197653606622,
+              "pixelMismatch": 0.004493464052287581,
+              "precision": 0.8558201058201058,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "9d088daf3c4353747a8d2e566d6c37f01b93092c114e0709559e525547d170f3",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "92f6986554de851a4f0425e6b054f1556b73016670d3ffb5e83bf8e228bc7cb3",
+                "width": 816
+              },
+              "recall": 0.7987854251012145,
+              "referenceInk": 2470,
+              "score": 82.63197653606622,
+              "ssim": 0.9935899581133358,
+              "ssimRaw": 0.9935899581133358
+            }
+          ],
+          "coreTree": "e500aaa5f179e164494ea7a76e70686e79a1288a",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "b3e27954594ad9874b111c8ab2959e7ead7285c834d0c2f74e441436f7e9b7a3",
+          "pageMapDigest": "546814a95d0ff63cf8a1261bc542a50e82476a6708219d95ce4cebc5a8eb9c79",
+          "files": {
+            "1-candidate.png": "c36a8d388b92a204dd1a15ebd15d7af8a7dba7f999585c3e413ed4ba5654bf15",
+            "1-overlay.png": "edc1bf8970b8e7509245d535378288832bffb7a02efb0e8e536461af03a95f1d",
+            "1-reference.png": "4ed7fea88076bd30efe382a2b2d7193ad8bdfc2e2bb472b0fd7aeae138c0746d",
+            "candidate.pdf": "5c301062032fb057c22bf5609012c7ce7ae3142b142be72f37746853b31bd664",
+            "evidence.json": "cce5e1233987d2fd32e35dcfb9e04eef3013430e2281e5439a86527cdb3e8f27",
+            "production.json": "7f257668d311f292e5cbf07c79e4068836bdaeb263b9bfe7474cf67dd24442c3",
+            "reference.pdf": "d1eb380b50cfa369e7bbc6bf9af5b8ba121c5ce1f5ff45e1c61ecdf7e5a7de52"
+          }
+        },
+        "notes-marker-decoration-generated-control": {
+          "score": 87.4886442797095,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "TimesNewRomanPSMT",
+                "TimesNewRomanPSMT"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ],
+                "type": "same-page",
+                "version": 1
+              },
+              "name": "assertion-same-page",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 2246,
+              "close": false,
+              "inkF1": 0.874886442797095,
+              "pixelMismatch": 0.004053633764111705,
+              "precision": 0.9131789848619768,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "e02ae886fd0c7c78051680e9a83a888675ebc9e7e9f83a2d68632e5598550984",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "92f6986554de851a4f0425e6b054f1556b73016670d3ffb5e83bf8e228bc7cb3",
+                "width": 816
+              },
+              "recall": 0.8396761133603239,
+              "referenceInk": 2470,
+              "score": 87.4886442797095,
+              "ssim": 0.9954291460594487,
+              "ssimRaw": 0.9954291460594487
+            }
+          ],
+          "coreTree": "e500aaa5f179e164494ea7a76e70686e79a1288a",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "bf980a754e670cec240f5ae791ab711db46e63c5bff669ed27ebe2115697617c",
+          "pageMapDigest": "8cfb7360c32ebc207e1e70f52cf58f245daf46da028738a7d2383407c4806cdf",
+          "files": {
+            "1-candidate.png": "63930eb651578de1fbe874ce0f5951f6b24bf6c2378b63b7ca82e9cad324b2dd",
+            "1-overlay.png": "a008ceaae4dff9e2f82d7498644bcfe6cd4c2c723b8c8994703c0ea59503ab40",
+            "1-reference.png": "4ed7fea88076bd30efe382a2b2d7193ad8bdfc2e2bb472b0fd7aeae138c0746d",
+            "candidate.pdf": "58828c58f1bdc34cd85a3485a20097109b20afbfc1e43f118807f34ae96f174a",
+            "evidence.json": "a7b24d19100ea792c40cba9ed91a96ad43977a8919c2db171a1a1efe601df010",
+            "production.json": "0765d3370c180430d69e4cb81759a655fef8a15a87261bcb2e1ca41cffa2fc3f",
+            "reference.pdf": "5606c53faee273e27ac6fa47e75b07844dcf9e7cabe501e163323aa1dc1ca95b"
+          }
+        }
+      }
+    },
+    "baseline": {
+      "runUrl": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/41206728862",
+      "artifactId": 13043904758,
+      "artifactZipSha256": "b563b55d9755151d2e05420186bb4d0df1748ea23069a0611c1d41985c8e34a0",
+      "coreCommit": "889d713e50a335d62eb50667b9fb0e09b12025b4",
+      "resultSha256": "8aed047b8b97b434e5c1d694bfce3d9b9adf70085bc00a4e3ca0a83dec4fe979",
+      "selectedManifestSha256": "9de6ca3e0b82d52042665cda8257bf547582fd5a463715183fc4923b6db925a7",
+      "contractDigest": "6abe4c780a38f110ff8fcfc1c9b3048997558c8c8d6726efb3b56d5450061639",
+      "referenceBundleSha256": "11fa5d0d722208eb27506fd14d67b8e5079af59a87c27442690bf7cd58ef1318",
+      "calibrationResultSha256": "91fa2b548eab2eef75564d46bbc7b6fa0b142ea7059eb5d46d326e1b69b38160",
+      "calibrationSummary": {
+        "categoryMeans": {
+          "notes": 100.0
+        },
+        "closeMatchRate": 1.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 6,
+        "required": 6,
+        "score": 100.0
+      },
+      "summary": {
+        "categoryMeans": {
+          "notes": 42.12543289197365
+        },
+        "closeMatchRate": 0.0,
+        "complete": true,
+        "mandatoryPassRate": 0.5,
+        "measured": 6,
+        "required": 6,
+        "score": 42.12543289197365
+      },
+      "cases": {
+        "notes-marker-decoration-11pt": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "pagination_failure",
+                "message": "A footnote continuation is clipped in the final page tree.",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "d3bfc3ef8dffa29a7c7e3448be71b436f14af899919ad8a618cf6abf5568c3fd",
+            "reference.pdf": "5ac99b3b322995578ae22a02f46771d1089198c346c7d896c2c60ee1aa5a7efb"
+          }
+        },
+        "notes-marker-decoration-11pt5": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "pagination_failure",
+                "message": "A footnote continuation is clipped in the final page tree.",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "195ed61ffef6aadce38038c2207096a478984cb3413a428af2d5a1ebaf8f6558",
+            "reference.pdf": "86c19e46a20f4aed5d7cf9ad040b214c16676cd93974cdb58198c4266867d440"
+          }
+        },
+        "notes-marker-decoration-12pt-control": {
+          "score": 82.63197653606622,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "TimesNewRomanPSMT",
+                "TimesNewRomanPSMT"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ],
+                "type": "same-page",
+                "version": 1
+              },
+              "name": "assertion-same-page",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 2268,
+              "close": false,
+              "inkF1": 0.8263197653606622,
+              "pixelMismatch": 0.004493464052287581,
+              "precision": 0.8558201058201058,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "9d088daf3c4353747a8d2e566d6c37f01b93092c114e0709559e525547d170f3",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "92f6986554de851a4f0425e6b054f1556b73016670d3ffb5e83bf8e228bc7cb3",
+                "width": 816
+              },
+              "recall": 0.7987854251012145,
+              "referenceInk": 2470,
+              "score": 82.63197653606622,
+              "ssim": 0.9935899581133358,
+              "ssimRaw": 0.9935899581133358
+            }
+          ],
+          "coreTree": "746fedf34af15a626af6574e1c7f00cfc4716b95",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "0975422c1702638bab7415e74655e85493898208c7b0f31943cf2ab6a71aef6e",
+          "pageMapDigest": "73873749ef1a57d4d9b160ff53866ae85c4864b932203b6ab94f4814431955c8",
+          "files": {
+            "1-candidate.png": "c36a8d388b92a204dd1a15ebd15d7af8a7dba7f999585c3e413ed4ba5654bf15",
+            "1-overlay.png": "edc1bf8970b8e7509245d535378288832bffb7a02efb0e8e536461af03a95f1d",
+            "1-reference.png": "4ed7fea88076bd30efe382a2b2d7193ad8bdfc2e2bb472b0fd7aeae138c0746d",
+            "candidate.pdf": "3bc27cde5f06f756f7eebd87245d9ebf703aa9862e20665b786d03e1727c5e69",
+            "evidence.json": "a3dc62405ad125ee888bcb786a612864d225668463d20d05a8424ae0c422727c",
+            "production.json": "a36bc2406eb8ddb4bfca87bcccb64909b7584d7c479a5a6745efa2117de090b5",
+            "reference.pdf": "7adb9d35cbd603beab25609b044b207db0a0fe0605e064fc2c39fd7081cc9d7b"
+          }
+        },
+        "notes-marker-decoration-12pt5": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "pagination_failure",
+                "message": "A footnote continuation is clipped in the final page tree.",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "pagination_failure",
+            "message": "A footnote continuation is clipped in the final page tree.",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "8d012f630c8f925bd658c9ad437935c3a81bbcd74f9bfe8a7cc7a8cb0ea40d04",
+            "reference.pdf": "ef5d912b6722f1d310b8b5ac1a1e6ce128c53c1242df4ac973771f6eaad5902c"
+          }
+        },
+        "notes-marker-decoration-plain-control": {
+          "score": 82.63197653606622,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "TimesNewRomanPSMT",
+                "TimesNewRomanPSMT"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ],
+                "type": "same-page",
+                "version": 1
+              },
+              "name": "assertion-same-page",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 2268,
+              "close": false,
+              "inkF1": 0.8263197653606622,
+              "pixelMismatch": 0.004493464052287581,
+              "precision": 0.8558201058201058,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "9d088daf3c4353747a8d2e566d6c37f01b93092c114e0709559e525547d170f3",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "92f6986554de851a4f0425e6b054f1556b73016670d3ffb5e83bf8e228bc7cb3",
+                "width": 816
+              },
+              "recall": 0.7987854251012145,
+              "referenceInk": 2470,
+              "score": 82.63197653606622,
+              "ssim": 0.9935899581133358,
+              "ssimRaw": 0.9935899581133358
+            }
+          ],
+          "coreTree": "746fedf34af15a626af6574e1c7f00cfc4716b95",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "b3e27954594ad9874b111c8ab2959e7ead7285c834d0c2f74e441436f7e9b7a3",
+          "pageMapDigest": "73873749ef1a57d4d9b160ff53866ae85c4864b932203b6ab94f4814431955c8",
+          "files": {
+            "1-candidate.png": "c36a8d388b92a204dd1a15ebd15d7af8a7dba7f999585c3e413ed4ba5654bf15",
+            "1-overlay.png": "edc1bf8970b8e7509245d535378288832bffb7a02efb0e8e536461af03a95f1d",
+            "1-reference.png": "4ed7fea88076bd30efe382a2b2d7193ad8bdfc2e2bb472b0fd7aeae138c0746d",
+            "candidate.pdf": "724eac0de662f09cdc966a3daf023c41575ca039f6ef15859c4d283bf5f33dfe",
+            "evidence.json": "9029bede42a0f9e570b5f5aa7ff9ef7c53b95760c6fbd37448b4133f3639e0c9",
+            "production.json": "4ca373e54c82e21bce8dac291bad597b43448034291764558cbc708f4462aa85",
+            "reference.pdf": "772f10d4df3ab435ac12e9b702692bafc9b449e66169bdb891e894d53c84e6fd"
+          }
+        },
+        "notes-marker-decoration-generated-control": {
+          "score": 87.4886442797095,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "TimesNewRomanPSMT",
+                "TimesNewRomanPSMT"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ],
+                "type": "same-page",
+                "version": 1
+              },
+              "name": "assertion-same-page",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 2246,
+              "close": false,
+              "inkF1": 0.874886442797095,
+              "pixelMismatch": 0.004053633764111705,
+              "precision": 0.9131789848619768,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "e02ae886fd0c7c78051680e9a83a888675ebc9e7e9f83a2d68632e5598550984",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "92f6986554de851a4f0425e6b054f1556b73016670d3ffb5e83bf8e228bc7cb3",
+                "width": 816
+              },
+              "recall": 0.8396761133603239,
+              "referenceInk": 2470,
+              "score": 87.4886442797095,
+              "ssim": 0.9954291460594487,
+              "ssimRaw": 0.9954291460594487
+            }
+          ],
+          "coreTree": "746fedf34af15a626af6574e1c7f00cfc4716b95",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "bf980a754e670cec240f5ae791ab711db46e63c5bff669ed27ebe2115697617c",
+          "pageMapDigest": "1aa536781fa8bb9172c6b7143010399e6c676068a3874863f9d8156f7e61b2aa",
+          "files": {
+            "1-candidate.png": "63930eb651578de1fbe874ce0f5951f6b24bf6c2378b63b7ca82e9cad324b2dd",
+            "1-overlay.png": "a008ceaae4dff9e2f82d7498644bcfe6cd4c2c723b8c8994703c0ea59503ab40",
+            "1-reference.png": "4ed7fea88076bd30efe382a2b2d7193ad8bdfc2e2bb472b0fd7aeae138c0746d",
+            "candidate.pdf": "0d90ef66f48c68fb8c8eb7ec372c571740b7659e960a499b511b494f23b9da44",
+            "evidence.json": "bf3bd6773b7889e8bd45b8622760d06b98e846bea4ab1e1a3d2eb07189a74802",
+            "production.json": "46f6de10c39d2179c410cc6ee56f44bd0b3fac89681d765fd0098fc4e745aa03",
+            "reference.pdf": "d658231a28b86cdae942d23c215bdacfeb17fe6acd04ee88b4af6523152b340f"
+          }
+        }
+      }
+    }
+  },
+  "controls": {
+    "notes-marker-decoration-12pt-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "notes-marker-decoration-plain-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "notes-marker-decoration-generated-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    }
+  }
+}

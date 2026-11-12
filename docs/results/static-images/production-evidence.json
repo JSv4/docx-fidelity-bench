@@ -1,0 +1,2276 @@
+{
+  "schema": 1,
+  "benchCommit": "744582556b41e8574d6c3d91b643c2d88a67162b",
+  "scope": "Production public WASM export and pinned Chromium PDF; raw artifacts are retained in the linked Actions runs.",
+  "limitations": [
+    "Word behavior captures used substituted Times New Roman and are not font-matched oracles.",
+    "Controls prove full page-raster identity, not PDF-byte or HTML/PageMap payload identity.",
+    "Native Word and LibreOffice differ in outline geometry; full-page visual scores and close-match status are reported without claiming equivalence."
+  ],
+  "runs": {
+    "candidate": {
+      "runUrl": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/41192815098",
+      "artifactId": 13039268010,
+      "artifactZipSha256": "67e7be515f90b10ad7605c25cfa1052176ddde3ad1ca06b229073b3bea66fcf0",
+      "coreCommit": "0cb9566acf63ccaf1c0ebf16fea81b84a63342f4",
+      "resultSha256": "c022ee2eebb949b42a30633a96441968204de2b0a32a577499549f25da27c729",
+      "selectedManifestSha256": "9da88236ca1cd71afa8822d398248b5b7309134e49d17f84392a2501fb064290",
+      "contractDigest": "55ee61e615d7318f8b9e9eddbf2ef4b6b846dd97d1436ce049635e0223aca12e",
+      "referenceBundleSha256": "7fa98bec5ca3eb1d468633f4c162562f257e671cf4cba0a99bed990bdaaa4dd0",
+      "calibrationResultSha256": "49857e07f1e587acbaca722d3a5dee4cb647d276905e972735bc3e484ad1dc97",
+      "calibrationSummary": {
+        "categoryMeans": {
+          "images": 100.0
+        },
+        "closeMatchRate": 1.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 10,
+        "required": 10,
+        "score": 100.0
+      },
+      "summary": {
+        "categoryMeans": {
+          "images": 88.19827513371038
+        },
+        "closeMatchRate": 0.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 10,
+        "required": 10,
+        "score": 88.19827513371038
+      },
+      "cases": {
+        "images-static-body-png": {
+          "score": 90.82004843652226,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  48,
+                  96,
+                  160
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-reference-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-reference-geometry",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  160,
+                  64,
+                  96
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-reference-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-reference-geometry",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 2224,
+              "close": false,
+              "inkF1": 0.9082004843652225,
+              "pixelMismatch": 0.002444017379679144,
+              "precision": 0.9995503597122302,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "f059e4880ecbb6b9f1657876df8cdbf5ac0d31c4a2dc8e7d5c8ea24171030c74",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "e40b31e7e69de727aa55f34645e754343f41a03961979e8c7761a91e63fc8138",
+                "width": 816
+              },
+              "recall": 0.8321495327102804,
+              "referenceInk": 2675,
+              "score": 90.82004843652226,
+              "ssim": 0.9930584155177343,
+              "ssimRaw": 0.9930584155177343
+            }
+          ],
+          "coreTree": "ce45ac0e87942add413c683ec0a3bf9e17741782",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "55fcabe6daf41d4fb7f9b038fcd44109eb6b264250da17573c9ad26a60c10e7c",
+          "pageMapDigest": "260325d82b2f46d02399070de20f85d4e270bd56369838b19a1a84af6863ec45",
+          "files": {
+            "1-candidate.png": "ab530382fc1af63bb7ddac55b5171ba85134da3be2b763a57c0a0237f5674ef1",
+            "1-overlay.png": "daca6a403f3f095ff3bcbc7e42525fba055aa2b6ffecfc20e7ec6469cf9060b3",
+            "1-reference.png": "90020e86799b739c1bfac2f3ace6b778c90912327fdc469245da93624a588d42",
+            "candidate.pdf": "1dc08d6d5bb3378e2fa4339534516a036bf1f073926af5389148a8953722ecb3",
+            "evidence.json": "286c22323c49e039e0e4cd1df78d06ee261c4eb3a5606bbbcac705c121982b8f",
+            "production.json": "2f40bb2b994fd4304fecb6ba3a2327c7e4175225fab4d51c22a060445641b5ac",
+            "reference.pdf": "6a3de53b091761513ec6299b928002a4d4fe87d143e39f5b2906bf9d1ac928ea"
+          }
+        },
+        "images-static-header-png": {
+          "score": 90.86087311301509,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  48,
+                  96,
+                  160
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-reference-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-reference-geometry",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  160,
+                  64,
+                  96
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-reference-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-reference-geometry",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 2224,
+              "close": false,
+              "inkF1": 0.908608731130151,
+              "pixelMismatch": 0.0020912247474747475,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "0d8241b98761785291b6e08babe8df3b05398fefced9323bc0c2287ffb39a540",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "2b5195d92c8ac54a93187b6311248b39064bb494a6742413226024eeb6445b20",
+                "width": 816
+              },
+              "recall": 0.8325233644859813,
+              "referenceInk": 2675,
+              "score": 90.86087311301509,
+              "ssim": 0.9941978954790375,
+              "ssimRaw": 0.9941978954790375
+            }
+          ],
+          "coreTree": "ce45ac0e87942add413c683ec0a3bf9e17741782",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "d13cc7f7f1f58a5295057fd78750099ada51aabfa7d142b94a89e5986f620c9f",
+          "pageMapDigest": "e576b52197d90b643dac9f1c7407c36b32ac5b46c64ab9d395621b5c5e632a3a",
+          "files": {
+            "1-candidate.png": "ba7ca6f29d69510aec2acdfecf49e9f297a9da4cbeba5ee947a9d7af896ba503",
+            "1-overlay.png": "fb7aaa7cc6b5ceaf47ddda3ceea58f5bd40b247450218e05ddebe55cc463b9a8",
+            "1-reference.png": "77245c0852a4b0b4fd763037f0446f2244054e6f27f9e8cc4d225e9aa2bf81a9",
+            "candidate.pdf": "e9d2ae321c22f72085ca01c832e3f2b16d5615610495eeb604ae6f688dd73bb1",
+            "evidence.json": "3e2192b8007b237e3fc99c549191af2381eae778eec19f53dca28f1d62a4341a",
+            "production.json": "840fa86e9a21e1a84255569b6d1d66163145fccc6480e90930e13d63799aaaa9",
+            "reference.pdf": "248d405853477517291b50420b29600f48c55ef080f15bdb9ed3451875444c86"
+          }
+        },
+        "images-static-body-tiff": {
+          "score": 90.82004843652226,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  48,
+                  96,
+                  160
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-reference-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-reference-geometry",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  160,
+                  64,
+                  96
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-reference-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-reference-geometry",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 2224,
+              "close": false,
+              "inkF1": 0.9082004843652225,
+              "pixelMismatch": 0.002444017379679144,
+              "precision": 0.9995503597122302,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "f059e4880ecbb6b9f1657876df8cdbf5ac0d31c4a2dc8e7d5c8ea24171030c74",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "e40b31e7e69de727aa55f34645e754343f41a03961979e8c7761a91e63fc8138",
+                "width": 816
+              },
+              "recall": 0.8321495327102804,
+              "referenceInk": 2675,
+              "score": 90.82004843652226,
+              "ssim": 0.9930584155177343,
+              "ssimRaw": 0.9930584155177343
+            }
+          ],
+          "coreTree": "ce45ac0e87942add413c683ec0a3bf9e17741782",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "b7f61a1a41740e17d64bf467e3bbbcd168353bfbc6a0b8ac4daf89de66884b2d",
+          "pageMapDigest": "260325d82b2f46d02399070de20f85d4e270bd56369838b19a1a84af6863ec45",
+          "files": {
+            "1-candidate.png": "ab530382fc1af63bb7ddac55b5171ba85134da3be2b763a57c0a0237f5674ef1",
+            "1-overlay.png": "daca6a403f3f095ff3bcbc7e42525fba055aa2b6ffecfc20e7ec6469cf9060b3",
+            "1-reference.png": "90020e86799b739c1bfac2f3ace6b778c90912327fdc469245da93624a588d42",
+            "candidate.pdf": "9215556c2f2e60abd3710917b3febe4c998821d94faf10d0f9b1631118486328",
+            "evidence.json": "5a877ad8b0c043460adde722de83fa414154fb543877087f77820a83994310e3",
+            "production.json": "bbb53aad534689008fa0bb64c4661d09e109652b2126d34ce74d2b28e295669e",
+            "reference.pdf": "112fb7d994369b914ffc671d13efcb0c6eec24f22f8add422048c8df0dd87fb2"
+          }
+        },
+        "images-static-header-tiff": {
+          "score": 90.86087311301509,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  48,
+                  96,
+                  160
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-reference-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-reference-geometry",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  160,
+                  64,
+                  96
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-reference-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-reference-geometry",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 2224,
+              "close": false,
+              "inkF1": 0.908608731130151,
+              "pixelMismatch": 0.0020912247474747475,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "0d8241b98761785291b6e08babe8df3b05398fefced9323bc0c2287ffb39a540",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "2b5195d92c8ac54a93187b6311248b39064bb494a6742413226024eeb6445b20",
+                "width": 816
+              },
+              "recall": 0.8325233644859813,
+              "referenceInk": 2675,
+              "score": 90.86087311301509,
+              "ssim": 0.9941978954790375,
+              "ssimRaw": 0.9941978954790375
+            }
+          ],
+          "coreTree": "ce45ac0e87942add413c683ec0a3bf9e17741782",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "25a9ea1b72cc5bcb1851ab0e04848f31b820fb8e4327a20085480c7b4c308797",
+          "pageMapDigest": "e576b52197d90b643dac9f1c7407c36b32ac5b46c64ab9d395621b5c5e632a3a",
+          "files": {
+            "1-candidate.png": "ba7ca6f29d69510aec2acdfecf49e9f297a9da4cbeba5ee947a9d7af896ba503",
+            "1-overlay.png": "fb7aaa7cc6b5ceaf47ddda3ceea58f5bd40b247450218e05ddebe55cc463b9a8",
+            "1-reference.png": "77245c0852a4b0b4fd763037f0446f2244054e6f27f9e8cc4d225e9aa2bf81a9",
+            "candidate.pdf": "b64b186f2b8ed8c0083cbb8c6a41fa83a5c6f8f674d45127d89cafebcd01f282",
+            "evidence.json": "939ab76c998267dadbeda097b29f555b7233ceedf4848c036a3c0037e36d7e9e",
+            "production.json": "3b24b2a722aff81d77b1798b7c74f7e0b683b8a5a3a25d0e1f2b8aa5c20d6e61",
+            "reference.pdf": "3c704ee5579e681ca15c8f3f7643ff1c682e051260e71c677a41bc3fa1536452"
+          }
+        },
+        "images-static-body-wmf": {
+          "score": 89.91456146857563,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "boundsPt": [
+                  42.0,
+                  115.5,
+                  77.25,
+                  171.75
+                ],
+                "coverage": 912.0,
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  48,
+                  96,
+                  160
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-geometry",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "boundsPt": [
+                  88.5,
+                  121.5,
+                  125.25,
+                  158.25
+                ],
+                "coverage": 565.4866776461628,
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  160,
+                  64,
+                  96
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-geometry",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1980,
+              "close": false,
+              "inkF1": 0.8991456146857563,
+              "pixelMismatch": 0.0019380384729649435,
+              "precision": 0.9994949494949495,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "26ccba1258505addb85bac3d649fb47a8d6aa17348ccc910ffe18be1884a730b",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "8a34d8164b998556be56412dd2ad93d2a46a1a19f321adfd70ef7ac9741a749a",
+                "width": 816
+              },
+              "recall": 0.8171079429735234,
+              "referenceInk": 2455,
+              "score": 89.91456146857563,
+              "ssim": 0.9937594754730863,
+              "ssimRaw": 0.9937594754730863
+            }
+          ],
+          "coreTree": "ce45ac0e87942add413c683ec0a3bf9e17741782",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "05a59ee7a66324035dd6ab80ed516e40e664d6b7734385f9ed01114bf9dfe9dc",
+          "pageMapDigest": "260325d82b2f46d02399070de20f85d4e270bd56369838b19a1a84af6863ec45",
+          "files": {
+            "1-candidate.png": "0df76d5a6f1d3af45f3dedb35a2f371e5bbd559c9682c26383a4839b78847650",
+            "1-overlay.png": "f81845a511ae6c210e62b6d22e0f5245bbf24f2d3cbaa8536b2eead52356a584",
+            "1-reference.png": "c6cbac5ddaa774fe73a786993192d5d2066b687f30ddcdcbb18358ad9bd3d5bf",
+            "candidate.pdf": "25260ab7e0b5765ed12d28ff3d0f19ae2b4d22d5e538f10a36bec6e861bfafa1",
+            "evidence.json": "190387f402c671293bf41d7203ef753dff8c96006df9fa323298c74563d30d60",
+            "production.json": "ae0ea54704ab66916bbece15f80c15ffe255076bc252f2b71b883b57c087b9e1",
+            "reference.pdf": "89dbd9d665a93b4e6ae51ffbc69a455810abe003409ae22377e24afe482bd4a8"
+          }
+        },
+        "images-static-header-wmf": {
+          "score": 89.95965934558494,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "boundsPt": [
+                  42.0,
+                  25.5,
+                  77.25,
+                  81.75
+                ],
+                "coverage": 912.0,
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  48,
+                  96,
+                  160
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-geometry",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "boundsPt": [
+                  88.5,
+                  31.5,
+                  125.25,
+                  68.25
+                ],
+                "coverage": 565.4866776461628,
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  160,
+                  64,
+                  96
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-geometry",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1980,
+              "close": false,
+              "inkF1": 0.8995965934558494,
+              "pixelMismatch": 0.0015852458407605466,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "bdba180993ce825f98e2295f7d0306085ae025faf8edf25e863cbda31a99eb06",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "4f930db503f80173307ded031ce7e4ec022fac5148ad056010d6f94cbef09203",
+                "width": 816
+              },
+              "recall": 0.8175152749490835,
+              "referenceInk": 2455,
+              "score": 89.95965934558494,
+              "ssim": 0.994898955434389,
+              "ssimRaw": 0.994898955434389
+            }
+          ],
+          "coreTree": "ce45ac0e87942add413c683ec0a3bf9e17741782",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "53c1ccae1a17c3c641ea334e16c6a0f8c8ff53644d4dcd06cc42e0502a539963",
+          "pageMapDigest": "e576b52197d90b643dac9f1c7407c36b32ac5b46c64ab9d395621b5c5e632a3a",
+          "files": {
+            "1-candidate.png": "b134095d0ddccc273795ba04eb659fb65d93274c07374f8e40d9c6854be3b1dd",
+            "1-overlay.png": "5043d71f8af05c07b5f410ac136c86132e28c6729e81601499d2c5585bab57cf",
+            "1-reference.png": "9af0143d665421e2a4fdff82fe628fcaf6672b579435f1e021aa5b31bd7ea565",
+            "candidate.pdf": "88d4c3d978eb54ec895f138556f1863a7a1d2b53b5a9a627023d57622fea237b",
+            "evidence.json": "1c05eef7045011651da5143ca0300f006949e4fe923f403a4023ee1e1ab06728",
+            "production.json": "de119e8d03be47462a6421286f478c008429fc9aba51b85799d7c71fdb47095d",
+            "reference.pdf": "ed460b0bff93d6f8ea6da03b60a3921e21b9598ba02043b09f3defe3a4d7c511"
+          }
+        },
+        "images-static-body-wide-wmf": {
+          "score": 84.84446730680894,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "boundsPt": [
+                  48.0,
+                  115.5,
+                  118.5,
+                  171.75
+                ],
+                "coverage": 1824.0,
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  48,
+                  96,
+                  160
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-geometry",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "boundsPt": [
+                  141.0,
+                  121.5,
+                  214.5,
+                  158.25
+                ],
+                "coverage": 1130.9733552923256,
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  160,
+                  64,
+                  96
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-geometry",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 3500,
+              "close": false,
+              "inkF1": 0.8484446730680894,
+              "pixelMismatch": 0.003927139037433155,
+              "precision": 0.9811428571428571,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "7c02a182dc6e1a2745786e75ca9eff2529d3d49006209d3e80e005fd3013e196",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "df53b1d19c513f24ab5339fd714f89f7e649d530d6817d3556b152e042643bc1",
+                "width": 816
+              },
+              "recall": 0.7473646596390924,
+              "referenceInk": 5597,
+              "score": 84.84446730680894,
+              "ssim": 0.9872831508628116,
+              "ssimRaw": 0.9872831508628116
+            }
+          ],
+          "coreTree": "ce45ac0e87942add413c683ec0a3bf9e17741782",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "a049ee710111dce2e1f6f12e326b9a3642b5590a3f1c4151a6435c32d7f72c40",
+          "pageMapDigest": "260325d82b2f46d02399070de20f85d4e270bd56369838b19a1a84af6863ec45",
+          "files": {
+            "1-candidate.png": "96e504130f908113c43c81fcd94ef13128fa7158f8e6add7bf241d66213bb388",
+            "1-overlay.png": "f0ef6ff37ddd10a4c8b32ccf2924f3df5fccb03c4c79878938f9d5daf0cd9d83",
+            "1-reference.png": "6e76e6af08704fdef608f6fe84fe960b832ec00b9e199db2880a73154eee43ba",
+            "candidate.pdf": "6cbb8a4a2520292d238a570b91f5bbe50b6ce2f7b04bb7c1f6ac604b4b26330c",
+            "evidence.json": "d3ac9d4ade83757eb2ef1802176d45fe05de40abd4be91caa17021262d6d75e7",
+            "production.json": "a67c6fee212d46801696ded098b6d61c75feca0e0a4fae78c6c9117cbc10c448",
+            "reference.pdf": "bead0e9a54d4e3d88d25c342a74fc5170617d88e6262ed47ec1d7c268ef2b566"
+          }
+        },
+        "images-static-body-tall-wmf": {
+          "score": 86.7402946034611,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "boundsPt": [
+                  42.0,
+                  123.0,
+                  77.25,
+                  235.5
+                ],
+                "coverage": 1824.0,
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  48,
+                  96,
+                  160
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-geometry",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "boundsPt": [
+                  88.5,
+                  135.0,
+                  125.25,
+                  208.5
+                ],
+                "coverage": 1130.9733552923256,
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  160,
+                  64,
+                  96
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-geometry",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 3500,
+              "close": false,
+              "inkF1": 0.867402946034611,
+              "pixelMismatch": 0.0030695280005941772,
+              "precision": 0.9194285714285715,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "b447862b9fbea7c502772e959d7273795e3a106554e87c834eed1c7ddd157537",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "680ca89d34d04f097c1020474c87afb19923bef020b21753cd1b8fa33f95a3ed",
+                "width": 816
+              },
+              "recall": 0.8209497206703911,
+              "referenceInk": 3580,
+              "score": 86.7402946034611,
+              "ssim": 0.9905424012935621,
+              "ssimRaw": 0.9905424012935621
+            }
+          ],
+          "coreTree": "ce45ac0e87942add413c683ec0a3bf9e17741782",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "b3d6a7db5591bd32e5b4ae0c8591936a6762281a14e6b62e554940d2c25f3443",
+          "pageMapDigest": "31a060c2ef43042de62b527cd2055ab2f9401a36dd273adc7ccc496c86898276",
+          "files": {
+            "1-candidate.png": "863ec41fdde6b79af06d5e38853ec530f52d2cccc8dbf4a1488b6d77f61f3ad8",
+            "1-overlay.png": "c7965f29e198a227482a53548e85647cfd0228afe5f1905085b882d4f551279b",
+            "1-reference.png": "f122eedc574c7b7b2e81084d94856ed16aa579e1e599d263c3185b2c5842a08f",
+            "candidate.pdf": "ec175f6bdde8739bf22de6ee777ad87cd359e26fe751c37f15c352efcb38357f",
+            "evidence.json": "34cfea2e2665c1e48323a17825bc9e31a8f143532d6ed83e697b005d895582cd",
+            "production.json": "4dbcf1033aa69fa76418b88758e5f37cdf1455a63d254de53c8671bd39f32565",
+            "reference.pdf": "fa508adb874d38f5dee479ab63eda59a537b51fa8d9602767e9270c73c89e625"
+          }
+        },
+        "images-static-body-group-wmf": {
+          "score": 84.84446730680894,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "boundsPt": [
+                  48.0,
+                  115.5,
+                  118.5,
+                  171.75
+                ],
+                "coverage": 1824.0,
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  48,
+                  96,
+                  160
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-geometry",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "boundsPt": [
+                  141.0,
+                  121.5,
+                  214.5,
+                  158.25
+                ],
+                "coverage": 1130.9733552923256,
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  160,
+                  64,
+                  96
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-geometry",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 3500,
+              "close": false,
+              "inkF1": 0.8484446730680894,
+              "pixelMismatch": 0.003927139037433155,
+              "precision": 0.9811428571428571,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "7c02a182dc6e1a2745786e75ca9eff2529d3d49006209d3e80e005fd3013e196",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "df53b1d19c513f24ab5339fd714f89f7e649d530d6817d3556b152e042643bc1",
+                "width": 816
+              },
+              "recall": 0.7473646596390924,
+              "referenceInk": 5597,
+              "score": 84.84446730680894,
+              "ssim": 0.9872831508628116,
+              "ssimRaw": 0.9872831508628116
+            }
+          ],
+          "coreTree": "ce45ac0e87942add413c683ec0a3bf9e17741782",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "a6d03f60045994dc3cd10b5bf318bdb020a873a8b396bfc896328fcfa98e9670",
+          "pageMapDigest": "a457d6f2d6e9ba6d5581074f7946b0bd00e57de1ce2d21514ed955eea34edac2",
+          "files": {
+            "1-candidate.png": "96e504130f908113c43c81fcd94ef13128fa7158f8e6add7bf241d66213bb388",
+            "1-overlay.png": "f0ef6ff37ddd10a4c8b32ccf2924f3df5fccb03c4c79878938f9d5daf0cd9d83",
+            "1-reference.png": "6e76e6af08704fdef608f6fe84fe960b832ec00b9e199db2880a73154eee43ba",
+            "candidate.pdf": "7c3076e8912f92785bed1d2f0d33011271c1a34abd45cf384285678bab698900",
+            "evidence.json": "7e8b10749fc0df4f1a55eff1758d8c272d714d3e0d549a60ff7a660fcd64dc68",
+            "production.json": "af2b3eedafa1203f7d9bd2e8b3b5f5a98d630418d6f4be7d9b8741ec157619ce",
+            "reference.pdf": "62acb6c6ea417425875ca032bb9601ba5412e90259c2dc49154f99c7d20ceb65"
+          }
+        },
+        "images-static-body-anisotropic-wmf": {
+          "score": 82.31745820678967,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "boundsPt": [
+                  39.0,
+                  115.5,
+                  56.25,
+                  171.75
+                ],
+                "coverage": 452.0,
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  48,
+                  96,
+                  160
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-geometry",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "boundsPt": [
+                  62.25,
+                  121.5,
+                  80.25,
+                  158.25
+                ],
+                "coverage": 279.6105709375884,
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  160,
+                  64,
+                  96
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-geometry",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1208,
+              "close": false,
+              "inkF1": 0.8231745820678966,
+              "pixelMismatch": 0.001833593285799168,
+              "precision": 0.9826158940397351,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "d6fddb36b47d1262044845cf460afe887fe1bdf57815ab5e4e030297fdf85591",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "f765c3eb854bc5e351c085f011d153a00dd1bd1096e6cee8b390e9ea2ba2efad",
+                "width": 816
+              },
+              "recall": 0.7082521117608837,
+              "referenceInk": 1539,
+              "score": 82.31745820678967,
+              "ssim": 0.9941063140428891,
+              "ssimRaw": 0.9941063140428891
+            }
+          ],
+          "coreTree": "ce45ac0e87942add413c683ec0a3bf9e17741782",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "4ee076f55ed9bbcb3b5b3ec05a35551c658f3fb0d01edc33c1b919b54daacfa6",
+          "pageMapDigest": "260325d82b2f46d02399070de20f85d4e270bd56369838b19a1a84af6863ec45",
+          "files": {
+            "1-candidate.png": "eb0ec95722fd219dcd0d3ff74872878fb22a8799a64d17d4503fdbfac6fe40e9",
+            "1-overlay.png": "b58bc1c65a0eb33f1de9a44f5a60a1a04a582dd084a3a69eecb928df10fd3c11",
+            "1-reference.png": "b28b2a1db95608aed18ddfb9799d660032b687782816c1b84b1443815b184722",
+            "candidate.pdf": "b665bd3238373988d60edde013180a785626b7b5987b213a666f63cbcbfa2453",
+            "evidence.json": "f145d71c89a9e27135fbd9ee3930e28111d256f4ec31aca9dc5905f0e8c06f05",
+            "production.json": "140ab0919a602e34d26784d68df088ddeeac8985fb7b81c4f110f94ed293ccc4",
+            "reference.pdf": "00b5ab2d30bb9dab1fbcb847507af07ee083df5e8ef48ec0ff12b47fcf27dc07"
+          }
+        }
+      }
+    },
+    "baseline": {
+      "runUrl": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/41192867714",
+      "artifactId": 13039233160,
+      "artifactZipSha256": "4a2b6d94876053bb1f912459e9cd26f817797f8fb28f8981ba6a8a048c7764b7",
+      "coreCommit": "1240cc5dc0586293cb937c59c973550027c31fda",
+      "resultSha256": "ed02b5a0c2c3e9ae4de97938bc9d43d17c5e7469516a7f2769bff3bb1e1aa32a",
+      "selectedManifestSha256": "9da88236ca1cd71afa8822d398248b5b7309134e49d17f84392a2501fb064290",
+      "contractDigest": "4f0c844853c225d885c5c0f75abd8161dfac6f62a6ac9892004b1056ef173c36",
+      "referenceBundleSha256": "bcaf0c25a8f5eb33bf3048cf72589dabba67a6189e51ba7136cd3788ae607259",
+      "calibrationResultSha256": "0e1f17ff73ab6fe44e51e9e12730546ffbc5431dd4b1b7d1ba680013acf74e35",
+      "calibrationSummary": {
+        "categoryMeans": {
+          "images": 100.0
+        },
+        "closeMatchRate": 1.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 10,
+        "required": 10,
+        "score": 100.0
+      },
+      "summary": {
+        "categoryMeans": {
+          "images": 18.168092154953733
+        },
+        "closeMatchRate": 0.0,
+        "complete": true,
+        "mandatoryPassRate": 0.2,
+        "measured": 10,
+        "required": 10,
+        "score": 18.168092154953733
+      },
+      "cases": {
+        "images-static-body-png": {
+          "score": 90.82004843652226,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  48,
+                  96,
+                  160
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-reference-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-reference-geometry",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  160,
+                  64,
+                  96
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-reference-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-reference-geometry",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 2224,
+              "close": false,
+              "inkF1": 0.9082004843652225,
+              "pixelMismatch": 0.002444017379679144,
+              "precision": 0.9995503597122302,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "f059e4880ecbb6b9f1657876df8cdbf5ac0d31c4a2dc8e7d5c8ea24171030c74",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "e40b31e7e69de727aa55f34645e754343f41a03961979e8c7761a91e63fc8138",
+                "width": 816
+              },
+              "recall": 0.8321495327102804,
+              "referenceInk": 2675,
+              "score": 90.82004843652226,
+              "ssim": 0.9930584155177343,
+              "ssimRaw": 0.9930584155177343
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "55fcabe6daf41d4fb7f9b038fcd44109eb6b264250da17573c9ad26a60c10e7c",
+          "pageMapDigest": "c886cd863b31191e453f5c971a8c7102c0fba0e981212697e3dc6d2a3f76caba",
+          "files": {
+            "1-candidate.png": "ab530382fc1af63bb7ddac55b5171ba85134da3be2b763a57c0a0237f5674ef1",
+            "1-overlay.png": "daca6a403f3f095ff3bcbc7e42525fba055aa2b6ffecfc20e7ec6469cf9060b3",
+            "1-reference.png": "90020e86799b739c1bfac2f3ace6b778c90912327fdc469245da93624a588d42",
+            "candidate.pdf": "1531b52c8182b91be537aa931b74f225d7c2ef1d76454929d8e97fb362536af4",
+            "evidence.json": "16ca206c818fb00e1fd0bf3ad3f79a208f9dc81bca2513081594e5d408b6c801",
+            "production.json": "b9338f9e19c969a92949a2cf90c30a2492413ef7728cb898f77681cdf7444eaf",
+            "reference.pdf": "027174cdb85a81f6eb83faa23a717b16401d84c80802cbfaa95793474ac11fbc"
+          }
+        },
+        "images-static-header-png": {
+          "score": 90.86087311301509,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  48,
+                  96,
+                  160
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-reference-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-reference-geometry",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  160,
+                  64,
+                  96
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-reference-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-reference-geometry",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 2224,
+              "close": false,
+              "inkF1": 0.908608731130151,
+              "pixelMismatch": 0.0020912247474747475,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "0d8241b98761785291b6e08babe8df3b05398fefced9323bc0c2287ffb39a540",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "2b5195d92c8ac54a93187b6311248b39064bb494a6742413226024eeb6445b20",
+                "width": 816
+              },
+              "recall": 0.8325233644859813,
+              "referenceInk": 2675,
+              "score": 90.86087311301509,
+              "ssim": 0.9941978954790375,
+              "ssimRaw": 0.9941978954790375
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "d13cc7f7f1f58a5295057fd78750099ada51aabfa7d142b94a89e5986f620c9f",
+          "pageMapDigest": "400bcbbc8b09a1cd31c8e31b4ed165c97664f6fa25ac2ce4f4cef0da63449edf",
+          "files": {
+            "1-candidate.png": "ba7ca6f29d69510aec2acdfecf49e9f297a9da4cbeba5ee947a9d7af896ba503",
+            "1-overlay.png": "fb7aaa7cc6b5ceaf47ddda3ceea58f5bd40b247450218e05ddebe55cc463b9a8",
+            "1-reference.png": "77245c0852a4b0b4fd763037f0446f2244054e6f27f9e8cc4d225e9aa2bf81a9",
+            "candidate.pdf": "471f727636a373e51483aec8eb8f3f9711a11487c917a21eff5fe6d0126325ce",
+            "evidence.json": "f21e7d61bc01ec811f696c65ef86927d11ef4756117ff9933019c0a41591749c",
+            "production.json": "ed8211efff38cfbeec30d7f91e2c8ebe55d88a7de5b7179694191fa11026d410",
+            "reference.pdf": "4aa4a785d2c8ae3ebde8485e84c25dc2328b8a393c032906cec15d60ce9eccc6"
+          }
+        },
+        "images-static-body-tiff": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  48,
+                  96,
+                  160
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-reference-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-reference-geometry",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  160,
+                  64,
+                  96
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-reference-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-reference-geometry",
+              "passed": false
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1088,
+              "close": false,
+              "inkF1": 0.49920596213325996,
+              "pixelMismatch": 0.0039050894979203803,
+              "precision": 0.8777573529411765,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "d16b9a738522a37beb8517210b5997f257ba47f78eb15150a5218ec49050f30e",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "e40b31e7e69de727aa55f34645e754343f41a03961979e8c7761a91e63fc8138",
+                "width": 816
+              },
+              "recall": 0.348785046728972,
+              "referenceInk": 2675,
+              "score": 49.92059621332599,
+              "ssim": 0.9889296133985568,
+              "ssimRaw": 0.9889296133985568
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "b7f61a1a41740e17d64bf467e3bbbcd168353bfbc6a0b8ac4daf89de66884b2d",
+          "pageMapDigest": "c886cd863b31191e453f5c971a8c7102c0fba0e981212697e3dc6d2a3f76caba",
+          "files": {
+            "1-candidate.png": "8fb2b1c50571221db2d0426ef48b85d0bb21f04436979466deeae4950b262788",
+            "1-overlay.png": "c10bb7efd45df65ed1bfe8758a704ee093774a307e71d7a430f07b3733554c0f",
+            "1-reference.png": "90020e86799b739c1bfac2f3ace6b778c90912327fdc469245da93624a588d42",
+            "candidate.pdf": "add39c289d52d6585d9ad41fbedef2cc4a907f9ffbda602e214f0ecb639f380c",
+            "evidence.json": "37bd67b84d05bc971365debaa94c89d84924a2c80a47e184f49073d91652c809",
+            "production.json": "c8acdf010dfcfbe5749abac9a1d812617319680eaf786e4190f09fccf81ccfa4",
+            "reference.pdf": "52a6c2f7e7d89200b6571c4b88dd06fa3a902c11c08f84330b7a21483287f4f4"
+          }
+        },
+        "images-static-header-tiff": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  48,
+                  96,
+                  160
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-reference-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-reference-geometry",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  160,
+                  64,
+                  96
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-reference-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-reference-geometry",
+              "passed": false
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1088,
+              "close": false,
+              "inkF1": 0.49973751165526603,
+              "pixelMismatch": 0.003552296865715983,
+              "precision": 0.8786764705882353,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "bc4fed1cd834af61ee79274a6b0fd4fce6cfa72d347d8fbc9f20dbe9bbe20a2f",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "2b5195d92c8ac54a93187b6311248b39064bb494a6742413226024eeb6445b20",
+                "width": 816
+              },
+              "recall": 0.3491588785046729,
+              "referenceInk": 2675,
+              "score": 49.9737511655266,
+              "ssim": 0.9900690933598599,
+              "ssimRaw": 0.9900690933598599
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "25a9ea1b72cc5bcb1851ab0e04848f31b820fb8e4327a20085480c7b4c308797",
+          "pageMapDigest": "400bcbbc8b09a1cd31c8e31b4ed165c97664f6fa25ac2ce4f4cef0da63449edf",
+          "files": {
+            "1-candidate.png": "7a30cb5d94c760218e661395afd2bc7386cc8e5f6c53286d54975ffec4625193",
+            "1-overlay.png": "14ce28af98559f4548d98b570d9c70344bad37c985cec07541155949409f69bc",
+            "1-reference.png": "77245c0852a4b0b4fd763037f0446f2244054e6f27f9e8cc4d225e9aa2bf81a9",
+            "candidate.pdf": "d59d340119014ed95dce1d96e6fddabc14ead2e1af450a6a6a4d22e164c7f932",
+            "evidence.json": "e77991e751f1a5abdd1731d951dfe619eeee8b524fa15bf129f8d78b971a7d2f",
+            "production.json": "8466db82e4aa17bba8d68aa903ef4236d681f88203295f235efef5912e102d04",
+            "reference.pdf": "60f15d091bf43ca6a087e9953c1d7fcc61c08fae0e9aabefc19abb24d6607b1d"
+          }
+        },
+        "images-static-body-wmf": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "resource_policy_failure",
+                "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome.",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "resource_policy_failure",
+            "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome.",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "10202108b7a4090c75e5e8c646ad4358b50b4c9697d94e761d9f7e7c4f50aad3",
+            "reference.pdf": "14dfa5d179973185097f8881cd2995e10bee1ae60c3061f5cd73d072de894314"
+          }
+        },
+        "images-static-header-wmf": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {
+                "IMAGE]": 1,
+                "[WMF": 1
+              },
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": false
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "DejaVuSansMono",
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": false
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "boundsPt": [
+                  42.0,
+                  25.5,
+                  77.25,
+                  81.75
+                ],
+                "coverage": 912.0,
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  48,
+                  96,
+                  160
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-geometry",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "boundsPt": [
+                  88.5,
+                  31.5,
+                  125.25,
+                  68.25
+                ],
+                "coverage": 565.4866776461628,
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  160,
+                  64,
+                  96
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-geometry",
+              "passed": false
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 2799,
+              "close": false,
+              "inkF1": 0.39813015963104126,
+              "pixelMismatch": 0.004985516934046346,
+              "precision": 0.42515183994283673,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "2d26c78d02e65fd061ec98acfadc51156bd233ab73c8e942f2d52c61f2ca3e86",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "4f930db503f80173307ded031ce7e4ec022fac5148ad056010d6f94cbef09203",
+                "width": 816
+              },
+              "recall": 0.37433808553971487,
+              "referenceInk": 2455,
+              "score": 39.81301596310413,
+              "ssim": 0.9910818815476112,
+              "ssimRaw": 0.9910818815476112
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "53c1ccae1a17c3c641ea334e16c6a0f8c8ff53644d4dcd06cc42e0502a539963",
+          "pageMapDigest": "e2de1560023f223a9631fe067e140e98818259f850aab53c278fe5041562f79c",
+          "files": {
+            "1-candidate.png": "45677a7bc45489550dbf81cf2b8af26463d639efa69daa295436bb946ba42486",
+            "1-overlay.png": "06d415a36f3e4d3891efd216a98052f764d40acc039d99caf84fecdd641f4305",
+            "1-reference.png": "9af0143d665421e2a4fdff82fe628fcaf6672b579435f1e021aa5b31bd7ea565",
+            "candidate.pdf": "66c58735245a449e988fca1f429eb6edaf09622fb2b4e3da0dacf49983948ddf",
+            "evidence.json": "596e96f0ca3e057d5b4a81313625000d2a86483b6d7e88aab3fdb9e8d901be14",
+            "production.json": "01b2bcf0eef96d5aa65344834649ecfc7f1e2ba6a92a762e32f4882720a3b79a",
+            "reference.pdf": "598d72b330703c484a3c722d1a25d76eeeb196f090183e2f129c7921b6093cb9"
+          }
+        },
+        "images-static-body-wide-wmf": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "resource_policy_failure",
+                "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome.",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "resource_policy_failure",
+            "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome.",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "9221dde461d51bc558736f7dbb1a65f0dafd55f3670a1dad1304edb40c84e336",
+            "reference.pdf": "e4379465a2e71e47e65f3baf8533c8af4eccf4de8101167266d146c99333dbfc"
+          }
+        },
+        "images-static-body-tall-wmf": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "resource_policy_failure",
+                "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome.",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "resource_policy_failure",
+            "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome.",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "a38df761e8e7c043d09c6c792defd0b05f6b7e062b94bf92c5ad8414cf7b5a00",
+            "reference.pdf": "cf19294e2ad57d70c8bf9b3cb31fa9626b1f93a8a78123cb0bcc0ebe9f917180"
+          }
+        },
+        "images-static-body-group-wmf": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "boundsPt": [
+                  48.0,
+                  115.5,
+                  118.5,
+                  171.75
+                ],
+                "coverage": 1824.0,
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  48,
+                  96,
+                  160
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-geometry",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "adjudicated": "word",
+                "boundsPt": [
+                  141.0,
+                  121.5,
+                  214.5,
+                  158.25
+                ],
+                "coverage": 1130.9733552923256,
+                "coverageTolerance": 0.08,
+                "page": 1,
+                "rgb": [
+                  160,
+                  64,
+                  96
+                ],
+                "tolerancePt": 1.5,
+                "type": "color-geometry",
+                "version": 1
+              },
+              "name": "assertion-color-geometry",
+              "passed": false
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 408,
+              "close": false,
+              "inkF1": 0.13648451963575228,
+              "pixelMismatch": 0.0068295547385620915,
+              "precision": 0.9975490196078431,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "c574f6da48290a78fb48061e9edf51636b94205ab5e78c730c964a2131fc66ec",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "df53b1d19c513f24ab5339fd714f89f7e649d530d6817d3556b152e042643bc1",
+                "width": 816
+              },
+              "recall": 0.07325352867607647,
+              "referenceInk": 5597,
+              "score": 13.648451963575228,
+              "ssim": 0.9868140127289838,
+              "ssimRaw": 0.9868140127289838
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "a6d03f60045994dc3cd10b5bf318bdb020a873a8b396bfc896328fcfa98e9670",
+          "pageMapDigest": "16856207427bb47a49e341a0f2c59fb03005a4a264faab76f0777b7a52eb09b6",
+          "files": {
+            "1-candidate.png": "21f0c448681a4fb4a80eb9e5c4f6b844c11ea9bbea5e24525b2b53e511786908",
+            "1-overlay.png": "8b48b7199dc6b6618e99aa3c46925976e46a15a6d4263f944ab1e2dc894c356c",
+            "1-reference.png": "6e76e6af08704fdef608f6fe84fe960b832ec00b9e199db2880a73154eee43ba",
+            "candidate.pdf": "ced1cb94bba746ff8ff2432b35b7ddf2ca11a028bc99ace5d3f7056b4e68e565",
+            "evidence.json": "5bf96762d82f25690e4448be24d20ee84ca9473a6c009c42659a74f588ebb682",
+            "production.json": "8f02889a83594ceb4cb05b9999801af73b4e92dfb7c91dff64d59e73b3e7e5c4",
+            "reference.pdf": "e44b89e9f4dd0b11a3450ad1ad9c2e4f950a6fada3ff51de5aa7b7054527d461"
+          }
+        },
+        "images-static-body-anisotropic-wmf": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "resource_policy_failure",
+                "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome.",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "resource_policy_failure",
+            "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome.",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "73463c2818e16c2d86c20a5b2743d176d1b1cf904fd17c380bc2851ed64ccff7",
+            "reference.pdf": "3140a62552c85372285bfade92a720bd340c4c98608d3a64a4e5e205dab84758"
+          }
+        }
+      }
+    }
+  },
+  "controls": {
+    "images-static-body-png": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "images-static-header-png": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    }
+  },
+  "screenshots": {
+    "images-static-body-anisotropic-wmf-production.png": "b22822b6fd637f526f2acfc0b57a1a244a5fe730b6836aa05ae5f66c075888b3",
+    "images-static-body-group-wmf-production.png": "df6e9dfd81c0c8279304a7d1fa9229cb86a87b480b2288f3301f561ebdfabe61",
+    "images-static-body-png-production.png": "25676826f2fdc3cf8202f9a7c574eb5cbdec26523112ae88fb01770c30d6ba87",
+    "images-static-body-tall-wmf-production.png": "3ce8a676d5c6534ae7a9e9eacda4ff28369d408a378599e41c17d9cdfa82fff6",
+    "images-static-body-tiff-production.png": "491a3c26fcb6ecdc7912345d467687c09eb3b250efbaeebc56e89538192cba68",
+    "images-static-body-wide-wmf-production.png": "8584dd8490a339f6f584463e1aff7645ef7e66500bb5d6fff6b7b3a8446b1199",
+    "images-static-body-wmf-production.png": "f002060a7b32accc5c748fbc4aa47e5abf741044021d349b9602bec53680a49a",
+    "images-static-header-png-production.png": "370b2954ecd272ef78b3b45e1b616771ce1397335204f1513c4c7d4559ea05e2",
+    "images-static-header-tiff-production.png": "c38b84b6c06e24749fd8a9353ef8088f3d1f487a3129e2a51c7fe01688ebd7c1",
+    "images-static-header-wmf-production.png": "6239966f76b51682121fe1e10fbf516bbbb17aef87d54c1eaed3fa4d3b9fff4e"
+  },
+  "screenshotMethod": "Complete96-DPI production page rasters, displayed at75% with generated labels; no crop or content editing.",
+  "scripts": {
+    "record-production.py": "026ded43b670f2155c4000242ca9c67ef70dec3e6a5acad157620afe78868550",
+    "production-sheets.cjs": "aec0584e84aaa328765ee41b09ddc457a4794a088d0170c18fabcb7aa9c72243",
+    "finalize-production.py": "04f3b8b7c78721922f93240ab617ad61edc64f3e4ad60cfdf3bc4b6f2fa0f92f"
+  }
+}

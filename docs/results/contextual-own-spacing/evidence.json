@@ -1,0 +1,2476 @@
+{
+  "scope": "Unscored strict-font public exports. Seven eligible native body references; two native textbox discrepancies. No new Word or full-suite parity claim.",
+  "manifestSha256": "7b0736987fac73dffa1b7faf26be33b3add5241f28a5c7b3f4670e9c26509c13",
+  "manifest": {
+    "file": "manifest.json.gz",
+    "sha256": "037b5fd624ba9bf48bb40522eb44be3705220d28156eda2b5dbe2942f886ee79",
+    "jsonSha256": "7b0736987fac73dffa1b7faf26be33b3add5241f28a5c7b3f4670e9c26509c13"
+  },
+  "builds": {
+    "baseline": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-offpaper/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-offpaper/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-offpaper/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-offpaper/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-offpaper/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-offpaper/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-offpaper/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-offpaper/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558-offpaper/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "d59487425398a2f39b260f619b5d6044e75773bb",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "e22cf46e8c8e79cbfea009b126217fb0c6220a1927674f070c87b2a39ea8cdaf",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+      "schema": 1,
+      "tree": "911a88f9a86d25cc1f8881e788273462237990a3"
+    },
+    "candidate": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-contextual/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-contextual/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-contextual/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-contextual/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-contextual/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-contextual/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-contextual/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-contextual/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1553-contextual/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "db3d255c1ffb5892103a4eff8fab4e79f1db9f03",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "a938829fe75e59faaeea53c7c284efa68a4c389bf09d0a044f0ab2f187459e1f",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+      "schema": 1,
+      "tree": "3accc040c830c625ce04990adea0147104fd3ec0"
+    }
+  },
+  "rendererAssets": {
+    "baseline": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 623972,
+          "sha256": "2a80bd973a7dd8b4da0b6e484c57b011f1000bcda44fa39cc665e6739064f585"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 172301,
+          "sha256": "47c9262fb9b3e76e29403feeb0b21bced56a19063e4bf0c10463b4e506504e5d"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46484,
+          "sha256": "a604dbff16d3be0f0d24cf48753404b42fe25f70fbd1393dde4934871446a420"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5461785,
+          "sha256": "6ad37dbf908f14cc00726db312982c91e3974bd06bce6361e0eba031d6654f2e"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "ffa7b22516ccc91ece2c19f2ec97679562b4f02b86688c73146d3870439c350b"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "5e08586a10f0b0c9e4354438734b392459cd64282ababf7029a48246f6da6d47"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1675029,
+          "sha256": "7216cb9019a8db40a177990f4ae6034cfe3d4f47aa598d221c4675df401082ce"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "558cd7f62c666965b9fa5167f06b51f47afcec28db9ba17c253c46c9e65a308b"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10551514,
+          "sha256": "9b3b708d282e2be4d843be94871247888279e1f87701e436b6229bf82d370bcf"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    },
+    "candidate": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 623972,
+          "sha256": "2a80bd973a7dd8b4da0b6e484c57b011f1000bcda44fa39cc665e6739064f585"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 172301,
+          "sha256": "47c9262fb9b3e76e29403feeb0b21bced56a19063e4bf0c10463b4e506504e5d"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46484,
+          "sha256": "a604dbff16d3be0f0d24cf48753404b42fe25f70fbd1393dde4934871446a420"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5461785,
+          "sha256": "7dfb2e1852fcbabace91530614eaa0c9d0dc34dbed54d96ff422b57143c2faac"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "27906dcf79ad97062c2f2a01a243abc1f499a2e60b2c8985487d9a82edd07429"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "5e08586a10f0b0c9e4354438734b392459cd64282ababf7029a48246f6da6d47"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1675029,
+          "sha256": "7216cb9019a8db40a177990f4ae6034cfe3d4f47aa598d221c4675df401082ce"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "93264a8ea309cbae423c96d2c25c245fdda64b3c13de69e74a1cc26f8a6aa041"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10551486,
+          "sha256": "6a8764abd1d3b8a221d8965cdc21b50d106b8113032a9c16854d9ca9211dd6e0"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    }
+  },
+  "captures": {
+    "baseline": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "d59487425398a2f39b260f619b5d6044e75773bb",
+      "sourceTree": "911a88f9a86d25cc1f8881e788273462237990a3",
+      "buildIdentitySha256": "3fc7d154193db0a154032e1d1f76f1f727c02e03afbd870899eb3c34ddb1c2da",
+      "manifestSha256": "7b0736987fac73dffa1b7faf26be33b3add5241f28a5c7b3f4670e9c26509c13",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "contextual-own-after-first",
+          "inputSha256": "f4a6d8787b3b9b1b4623d8d4c771cb961a41a56192bb31bbeecf8f6b59da4b76",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "ead860a32b69eaa4e8b60727103566fd1ea077049da759d12b053bf7a560d4f4",
+          "renderReportSha256": "bda2df2c4165c399dfba0a84f84c53eb2ccbaad11b0fc93c055600ba18bbeb83",
+          "htmlSha256": "227e136442a0180c721e51d7ea63cab558ea2758e86bd56f952f67f746ee12d7",
+          "htmlFactsSha256": "5c6d96bc8a60f6959cf7b4291683a9262837b76a95df3ed6c7bae5f0bf3ae651"
+        },
+        {
+          "id": "contextual-own-after-both-control",
+          "inputSha256": "074572c0621ef04ae32ef49d168a1d91e68ee0e0daef33b3f8563c1b83e79418",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "32999141993216b84d0e47916579318c5b95e34a805ab40c3044c7277463c69d",
+          "renderReportSha256": "ebbe4ac19beef080a85569c323ccfbf631493f6cbcbece15b92788af33da5ffe",
+          "htmlSha256": "a80976b9fd1d84a8fa87016378f10b82158cb662bf2dea4b660097aa309a8042",
+          "htmlFactsSha256": "21058032c0b7024fbbd1b830df16808c3c2596e7db96b6ea8a83adb4ff48ac99"
+        },
+        {
+          "id": "contextual-own-after-neither-control",
+          "inputSha256": "672616d8d651970de5e072542e18031e3600fb248c5a00ea813718e8df7ce922",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "8883209a4844cf3b6501cf3b81f26c9442cd3a1194ff66ecfe1f16f8578401ac",
+          "renderReportSha256": "a554a4ddf527750baff476ee675e7e546f3538f31541192cb692d5adb638d5da",
+          "htmlSha256": "227e136442a0180c721e51d7ea63cab558ea2758e86bd56f952f67f746ee12d7",
+          "htmlFactsSha256": "5c6d96bc8a60f6959cf7b4291683a9262837b76a95df3ed6c7bae5f0bf3ae651"
+        },
+        {
+          "id": "contextual-own-before-second",
+          "inputSha256": "979e605cc8643b477a4f969f143e32ea9ac31e9e1913fc071f1a08e128d87348",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "e02d46c8aa405d28a73fc1c24905dd5960d31555ceb0b40716ff4a89ce1f03b4",
+          "renderReportSha256": "620b738107cb95cf0acfef59c0c5769db009ebe5296dda69c624cbeab0841916",
+          "htmlSha256": "2499951d1643b4ce56d79322b6c847ebb46b061721d87693ade73fe57436ffe6",
+          "htmlFactsSha256": "00f20edeed65439fcd12fbc6e4e42f9b55d02601a5e4a27493668245856b69ae"
+        },
+        {
+          "id": "contextual-own-neighbor-wins-control",
+          "inputSha256": "e9da22bb6039bccc34a804650dbce691a30a263a57c558f117cc5a003f0a82ac",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "3a6c6e25d77798d194e2a77d3a8598d8b77787c3260018627135d4c2dd0b3eed",
+          "renderReportSha256": "35256a5de5d6b353b3d5b224120131c7d20d6971af6ec00dfc5ca3c0bb4807d4",
+          "htmlSha256": "df9a845300ec1bb18910436d50eafb3ea8d99e8a29496f67effe9ce6df9040e6",
+          "htmlFactsSha256": "8bce692cf08f2f0b4f7b74f1df273d7b5e3ffbad11aebbd0c3cacaa36cbfd052"
+        },
+        {
+          "id": "contextual-own-inherited-direct-off",
+          "inputSha256": "c2f8ea81e7760ddf8793999eb0e9f1d923840d8706e4121949ab424719869e19",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "30668f6d478e426ca9d39446db171596301193bd2e6437183c6f5028385df518",
+          "renderReportSha256": "9b05921a82eb48a6468033f5a91ae843ec0010271611bcf9cb6b1c1fff9fe524",
+          "htmlSha256": "2cb46087c37c57e683a7fd9bbd0364998c52ef4935eb23a7d2d385f58fdbc940",
+          "htmlFactsSha256": "ffb123661f45ef1677669c6269ca3cbc3dee660e12c00b7284d4ceead69da759"
+        },
+        {
+          "id": "contextual-own-different-style-control",
+          "inputSha256": "101e8e83a2c2439b7a869482f4df521947261f12830130ab5fe78d4aebac7849",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "557fdd151d116941c18df835129bc1e29cd1869ff18918ccb4f662b32bc65b37",
+          "renderReportSha256": "071fb5eec7c3b8d3890e1b3555ddcadce0a80aa58567065e346a7c2a3d882a53",
+          "htmlSha256": "efca545a8d25ba238dab066049b305c1019c567acb27d39e0639cfd3e723d4c1",
+          "htmlFactsSha256": "f18e828ae4b1c7bdbfe0b179221e6c84b85b65e8b9f7452c30967946319aaf8e"
+        },
+        {
+          "id": "contextual-own-drawing-first",
+          "inputSha256": "bcd9602659ae55d461d58c1c277a73175f9e2f5d5dfb818ec7693257dda7cdac",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "7a570ae592c783c11892e57ebdd957df9ee79b44e727946a9f35bd8adcffb27e",
+          "renderReportSha256": "98025f286afbe72940320175d2cc6547a0ef829594f2305eb114a83b1744532b",
+          "htmlSha256": "753270cabafee87b83fdb9b1f1a1573cc8ccec54d3d747dac7b902af32e15e25",
+          "htmlFactsSha256": "2239a0ac82b7095bdaf3581adac95162af169b19518306389f16be246efcb97e"
+        },
+        {
+          "id": "contextual-own-vml-first",
+          "inputSha256": "4efffd67456ab59e63911c1fb7951497f4007d868d2b8c105911f809a66a4bc8",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "c7eb900c9aca1952f952daaa3f8ec8c0c18f5e9534af042e452f24c773f1087f",
+          "renderReportSha256": "892b558c89d63769f8333427bddc0e124dee40e4ebc355699fa8f15dc7b8b570",
+          "htmlSha256": "7f256e80cd65bfca7637462084c1cea68f72f9a4a21c11d3fc035c429a80f7ce",
+          "htmlFactsSha256": "5cbfc12fa4731005c5a544c261ec3b08ab7ca4ab0ce31f3524102638562d8199"
+        }
+      ],
+      "htmlInspectorSha256": "87805e278400914cd87a2fe8e89c498748b7f45eecd5ca432b9c2be2d95b4cbb"
+    },
+    "candidate": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "db3d255c1ffb5892103a4eff8fab4e79f1db9f03",
+      "sourceTree": "3accc040c830c625ce04990adea0147104fd3ec0",
+      "buildIdentitySha256": "9c448c3cd64b6ab0c38588d43883950418cb86d8cc15edda5b62823dddee22c1",
+      "manifestSha256": "7b0736987fac73dffa1b7faf26be33b3add5241f28a5c7b3f4670e9c26509c13",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "contextual-own-after-first",
+          "inputSha256": "f4a6d8787b3b9b1b4623d8d4c771cb961a41a56192bb31bbeecf8f6b59da4b76",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "e3bedf424e76db5e9041d05f534fe2e013efe79d90fc5cfb25a33fb0fa9c51fd",
+          "renderReportSha256": "b1bb350b596f068edc3609daf914aec2e838721bc0e5e8327f5890635488279f",
+          "htmlSha256": "a80976b9fd1d84a8fa87016378f10b82158cb662bf2dea4b660097aa309a8042",
+          "htmlFactsSha256": "21058032c0b7024fbbd1b830df16808c3c2596e7db96b6ea8a83adb4ff48ac99"
+        },
+        {
+          "id": "contextual-own-after-both-control",
+          "inputSha256": "074572c0621ef04ae32ef49d168a1d91e68ee0e0daef33b3f8563c1b83e79418",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "32bc4f851480055aa8613b9c8631886b47ad3934403e2f0ae7b96957f3b10a8e",
+          "renderReportSha256": "9ae2215a98b25fe5711dce835345a4fcd7ab2706947a9e5ca3e39973109311d5",
+          "htmlSha256": "a80976b9fd1d84a8fa87016378f10b82158cb662bf2dea4b660097aa309a8042",
+          "htmlFactsSha256": "21058032c0b7024fbbd1b830df16808c3c2596e7db96b6ea8a83adb4ff48ac99"
+        },
+        {
+          "id": "contextual-own-after-neither-control",
+          "inputSha256": "672616d8d651970de5e072542e18031e3600fb248c5a00ea813718e8df7ce922",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "9d6d7e3054e959e75e8d70711a0ec9a8e0155d76c721ba900d7eeea407beb9e9",
+          "renderReportSha256": "bf45bfa7153cb2e36289ff75d48936d40ba52ee85bf5b244ae29202d437162b5",
+          "htmlSha256": "227e136442a0180c721e51d7ea63cab558ea2758e86bd56f952f67f746ee12d7",
+          "htmlFactsSha256": "5c6d96bc8a60f6959cf7b4291683a9262837b76a95df3ed6c7bae5f0bf3ae651"
+        },
+        {
+          "id": "contextual-own-before-second",
+          "inputSha256": "979e605cc8643b477a4f969f143e32ea9ac31e9e1913fc071f1a08e128d87348",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "3778bcf7bfa2dd42fe15b7ffead2961178969bc11b44cdfa5943d0b9b7449444",
+          "renderReportSha256": "671c8f34172a70e640adebad09e3c634f7097f0e9a813c1eb46e34afdec673e3",
+          "htmlSha256": "fc0da64450c57e72d454e8cd1eb1cac7da4669e44593ed6bbe91f935fd71c273",
+          "htmlFactsSha256": "bfde6c00d42ca5d3ffb8d28b40847e2792f19cfda45c8ee01ba9ea95ebfe51ac"
+        },
+        {
+          "id": "contextual-own-neighbor-wins-control",
+          "inputSha256": "e9da22bb6039bccc34a804650dbce691a30a263a57c558f117cc5a003f0a82ac",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "0ec427af07d3a79dce86c29b6e873c2c0276d38d3a65deefa86f4e9a5e5289bc",
+          "renderReportSha256": "99fade4ca7542ef1ee020ad16b5170cf5fa77ce0862a0480b17d34dc88241a40",
+          "htmlSha256": "0dce1cbe2a20f417aa313971e6c98a3c4166ba7020d46e5c8ab804c1ffc52745",
+          "htmlFactsSha256": "2edae628e287d06c6846667db057d7f189f7167bf5c133cfe6c9b0474763bbfa"
+        },
+        {
+          "id": "contextual-own-inherited-direct-off",
+          "inputSha256": "c2f8ea81e7760ddf8793999eb0e9f1d923840d8706e4121949ab424719869e19",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "45b5466c5f72a250848d66ce9295a40f184133c53c67b25d9e810eb1841a8559",
+          "renderReportSha256": "2af3f8c6dc63c80a2f8834807431f279f9909039ea6f615870c0d6c8f85138c6",
+          "htmlSha256": "6fbfbb574fd04a6548d76d98e4ca90043d25ddf9462e41107b733c280160de19",
+          "htmlFactsSha256": "2f1f5b293531b7ff1b851c25f4a85b40f8d6b89e6f11a29829dda3a94b522f55"
+        },
+        {
+          "id": "contextual-own-different-style-control",
+          "inputSha256": "101e8e83a2c2439b7a869482f4df521947261f12830130ab5fe78d4aebac7849",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "7be287834558b2d3ed9070a7122caf9580803d36c502c09a20a90c9821399259",
+          "renderReportSha256": "5e3d97b2173ba96b7a26aeb1bc795850d010e6dc7a96ec6d9e6b53ea53616a9b",
+          "htmlSha256": "efca545a8d25ba238dab066049b305c1019c567acb27d39e0639cfd3e723d4c1",
+          "htmlFactsSha256": "f18e828ae4b1c7bdbfe0b179221e6c84b85b65e8b9f7452c30967946319aaf8e"
+        },
+        {
+          "id": "contextual-own-drawing-first",
+          "inputSha256": "bcd9602659ae55d461d58c1c277a73175f9e2f5d5dfb818ec7693257dda7cdac",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "533c6c77eda459b8f2fac51a3569228660e25e179894681b5073ebbaf9f1de23",
+          "renderReportSha256": "a132d8f5bb1f8feaa6f1203588d422dd59f055ee8aa5d29ef329d745d42a4bd1",
+          "htmlSha256": "f0b7537c3f3584bf119d4f3dac5046a3c92fea882c52eced10de5730eea8425a",
+          "htmlFactsSha256": "c17e30ed3411e63d0cc685528156364ffd91c8f0d810aaf3b0cf2794b4611070"
+        },
+        {
+          "id": "contextual-own-vml-first",
+          "inputSha256": "4efffd67456ab59e63911c1fb7951497f4007d868d2b8c105911f809a66a4bc8",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "7690308fbd8319d8f196e9a6ce6b42dce49663c172704a9f195763dab082394e",
+          "renderReportSha256": "d47377e5361a54f8cced9faace7de27be3f901c379d388bcb0d8f668a4b50c40",
+          "htmlSha256": "86fd866f8dcf564f686e1f6f148c042c3d6bc6f70cb578b036e1468db8b76ac3",
+          "htmlFactsSha256": "d16584a8d3a6dec1955ec7a107ca37ea687a44d8407c3936f72bcf09e5eba9be"
+        }
+      ],
+      "htmlInspectorSha256": "87805e278400914cd87a2fe8e89c498748b7f45eecd5ca432b9c2be2d95b4cbb"
+    }
+  },
+  "referenceBundleSha256": "279b0cdbfa0e7cee9336eda3f2d90840e7ebf59cd3e0b306a602c12465bd08de",
+  "referenceBundle": {
+    "file": "reference-bundle.json.gz",
+    "sha256": "e53d347aad3546956b86730d47d4d3c4993c0b19ccddf9ea0a87502aa81ff9e8",
+    "jsonSha256": "279b0cdbfa0e7cee9336eda3f2d90840e7ebf59cd3e0b306a602c12465bd08de"
+  },
+  "referenceEnvironment": {
+    "fonts": {
+      "LiberationSerif-Bold.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+      },
+      "LiberationSerif-BoldItalic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+      },
+      "LiberationSerif-Italic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+      },
+      "LiberationSerif-Regular.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+      }
+    },
+    "tools": {
+      "pdffonts": {
+        "sha256": "de0a6d649710c2ebc226656b08c70814019a93f58889f79bf1dac726a131beda",
+        "version": "pdffonts version 25.03.0"
+      },
+      "pdftocairo": {
+        "sha256": "6f56c7c8c5b015354ebed053d4b52e14b43611c9c86236562bfd112827108dc5",
+        "version": "pdftocairo version 25.03.0"
+      },
+      "pdftoppm": {
+        "sha256": "6c315e59db2a0829ecdfb6c791ad3f56bc9bd508266d20adc22238df447a74a3",
+        "version": "pdftoppm version 25.03.0"
+      },
+      "pdftotext": {
+        "sha256": "451784e28a4593637573e534d9be4c4487a3cccffae22a71e93162faa84de23c",
+        "version": "pdftotext version 25.03.0"
+      },
+      "qpdf": {
+        "sha256": "0d0462ea848601a652b666e83a07a095bb0c4d69d831beb6f94ea8e6e008f34c",
+        "version": "qpdf version 12.2.0"
+      }
+    }
+  },
+  "schema": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "documents": {
+      "fixtures/contextual-own-after-both-control.docx": [],
+      "fixtures/contextual-own-after-first.docx": [],
+      "fixtures/contextual-own-after-neither-control.docx": [],
+      "fixtures/contextual-own-before-second.docx": [],
+      "fixtures/contextual-own-different-style-control.docx": [],
+      "fixtures/contextual-own-drawing-first.docx": [],
+      "fixtures/contextual-own-inherited-direct-off.docx": [],
+      "fixtures/contextual-own-neighbor-wins-control.docx": [],
+      "fixtures/contextual-own-vml-first.docx": []
+    }
+  },
+  "cases": [
+    {
+      "id": "contextual-own-after-first",
+      "inputSha256": "f4a6d8787b3b9b1b4623d8d4c771cb961a41a56192bb31bbeecf8f6b59da4b76",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "contextual-own-after-first-baseline-report.json.gz",
+            "sha256": "a7abcfe2fca8c4632ee1e703a57d2b6405c6da4bcf65e322721f6dcdc708d587",
+            "jsonSha256": "bda2df2c4165c399dfba0a84f84c53eb2ccbaad11b0fc93c055600ba18bbeb83"
+          },
+          "htmlSha256": "227e136442a0180c721e51d7ea63cab558ea2758e86bd56f952f67f746ee12d7",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            27.749999000000003,
+            28.499999000000003
+          ],
+          "pdf": "pdf/contextual-own-after-first-baseline.pdf",
+          "pdfSha256": "ead860a32b69eaa4e8b60727103566fd1ea077049da759d12b053bf7a560d4f4",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "contextual-own-after-first-baseline-inspection.json.gz",
+            "sha256": "f68adb57f288de07a42b31298122ca1ef70a55d6e8cf72025ffff882fcf64ad0",
+            "jsonSha256": "44baf17983f5527b2eac8b39520a95f1104aff9f745cd6b6250cf2c81383c589"
+          },
+          "pageRasterSha256": "4a923ee36c37440af192b610d54d9523e575a0df9b2b48c21138454d1ecf88ab"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            15.999999999999993,
+            28.0
+          ],
+          "pdf": "pdf/contextual-own-after-first-reference.pdf",
+          "pdfSha256": "11a734d874a1108360f868db5a2a5fe4d8fbc4515bddcf18ea4e627f348f2325",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "contextual-own-after-first-reference-inspection.json.gz",
+            "sha256": "40b493b6060dcbc7496d49f2fd7ff9b6c54a060b9f03f7ee162a5bd07aefaf6c",
+            "jsonSha256": "b6fd58cf716669c99ba2dddbedb52be9a83e87fc354299ed0b04dcfeaad30038"
+          },
+          "pageRasterSha256": "64ddab485fa9e0f371e5e2759ab86ba955a46ecb4bbd14ba81c098a09f9bb673"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "contextual-own-after-first-candidate-report.json.gz",
+            "sha256": "8ac54993980dc6753a65b750570d3db27af62bc5e87cd763e9095ea496624810",
+            "jsonSha256": "b1bb350b596f068edc3609daf914aec2e838721bc0e5e8327f5890635488279f"
+          },
+          "htmlSha256": "a80976b9fd1d84a8fa87016378f10b82158cb662bf2dea4b660097aa309a8042",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            15.749999000000003,
+            28.499999000000003
+          ],
+          "pdf": "pdf/contextual-own-after-first-candidate.pdf",
+          "pdfSha256": "e3bedf424e76db5e9041d05f534fe2e013efe79d90fc5cfb25a33fb0fa9c51fd",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "contextual-own-after-first-candidate-inspection.json.gz",
+            "sha256": "6962f1236e5f58ea65c633b2e5cb38cca8768474f2f7d3e1eea1a44afdd8b577",
+            "jsonSha256": "c2a2c2a37348bbdfd9cbcad246059f88a65050770907e1b01b73b95b5325ae46"
+          },
+          "pageRasterSha256": "dd73fcb78e9890ad972cf060891486ec8c420bf571b7c30cb1a0491e417bf09c"
+        }
+      ],
+      "screenshot": {
+        "file": "contextual-own-after-first.png",
+        "sha256": "d200ca675e2f8a9d43dec7f5f7800e65b07155a3dc0016735c1af52a75278f6e"
+      }
+    },
+    {
+      "id": "contextual-own-after-both-control",
+      "inputSha256": "074572c0621ef04ae32ef49d168a1d91e68ee0e0daef33b3f8563c1b83e79418",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "contextual-own-after-both-control-baseline-report.json.gz",
+            "sha256": "7dae19626beb07f235c6c04b8d819b1dabc3a7d2a5724a646399b92da2542e6f",
+            "jsonSha256": "ebbe4ac19beef080a85569c323ccfbf631493f6cbcbece15b92788af33da5ffe"
+          },
+          "htmlSha256": "a80976b9fd1d84a8fa87016378f10b82158cb662bf2dea4b660097aa309a8042",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            15.749999000000003,
+            28.499999000000003
+          ],
+          "pdf": "pdf/contextual-own-after-both-control-baseline.pdf",
+          "pdfSha256": "32999141993216b84d0e47916579318c5b95e34a805ab40c3044c7277463c69d",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "contextual-own-after-both-control-baseline-inspection.json.gz",
+            "sha256": "6962f1236e5f58ea65c633b2e5cb38cca8768474f2f7d3e1eea1a44afdd8b577",
+            "jsonSha256": "c2a2c2a37348bbdfd9cbcad246059f88a65050770907e1b01b73b95b5325ae46"
+          },
+          "pageRasterSha256": "dd73fcb78e9890ad972cf060891486ec8c420bf571b7c30cb1a0491e417bf09c"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            15.999999999999993,
+            28.0
+          ],
+          "pdf": "pdf/contextual-own-after-both-control-reference.pdf",
+          "pdfSha256": "c090b31e02039d1eb9de70a871c66505711a3639a07f6226b5f07e1c8b1c3a1c",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "contextual-own-after-both-control-reference-inspection.json.gz",
+            "sha256": "40b493b6060dcbc7496d49f2fd7ff9b6c54a060b9f03f7ee162a5bd07aefaf6c",
+            "jsonSha256": "b6fd58cf716669c99ba2dddbedb52be9a83e87fc354299ed0b04dcfeaad30038"
+          },
+          "pageRasterSha256": "64ddab485fa9e0f371e5e2759ab86ba955a46ecb4bbd14ba81c098a09f9bb673"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "contextual-own-after-both-control-candidate-report.json.gz",
+            "sha256": "3994a79d663c601022242ce22af71102799e724cfbfdb31368b9ff79d257ccf2",
+            "jsonSha256": "9ae2215a98b25fe5711dce835345a4fcd7ab2706947a9e5ca3e39973109311d5"
+          },
+          "htmlSha256": "a80976b9fd1d84a8fa87016378f10b82158cb662bf2dea4b660097aa309a8042",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            15.749999000000003,
+            28.499999000000003
+          ],
+          "pdf": "pdf/contextual-own-after-both-control-candidate.pdf",
+          "pdfSha256": "32bc4f851480055aa8613b9c8631886b47ad3934403e2f0ae7b96957f3b10a8e",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "contextual-own-after-both-control-candidate-inspection.json.gz",
+            "sha256": "6962f1236e5f58ea65c633b2e5cb38cca8768474f2f7d3e1eea1a44afdd8b577",
+            "jsonSha256": "c2a2c2a37348bbdfd9cbcad246059f88a65050770907e1b01b73b95b5325ae46"
+          },
+          "pageRasterSha256": "dd73fcb78e9890ad972cf060891486ec8c420bf571b7c30cb1a0491e417bf09c"
+        }
+      ],
+      "screenshot": {
+        "file": "contextual-own-after-both-control.png",
+        "sha256": "6f444453f2664fac4104855450b1705ab1b837fe3d385319b43c9800e3a78e83"
+      }
+    },
+    {
+      "id": "contextual-own-after-neither-control",
+      "inputSha256": "672616d8d651970de5e072542e18031e3600fb248c5a00ea813718e8df7ce922",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "contextual-own-after-neither-control-baseline-report.json.gz",
+            "sha256": "1bdc1ddfeed67fb36a9fefbb459c32d4ad2701894b07f2b8e088c38b09831787",
+            "jsonSha256": "a554a4ddf527750baff476ee675e7e546f3538f31541192cb692d5adb638d5da"
+          },
+          "htmlSha256": "227e136442a0180c721e51d7ea63cab558ea2758e86bd56f952f67f746ee12d7",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            27.749999000000003,
+            28.499999000000003
+          ],
+          "pdf": "pdf/contextual-own-after-neither-control-baseline.pdf",
+          "pdfSha256": "8883209a4844cf3b6501cf3b81f26c9442cd3a1194ff66ecfe1f16f8578401ac",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "contextual-own-after-neither-control-baseline-inspection.json.gz",
+            "sha256": "f68adb57f288de07a42b31298122ca1ef70a55d6e8cf72025ffff882fcf64ad0",
+            "jsonSha256": "44baf17983f5527b2eac8b39520a95f1104aff9f745cd6b6250cf2c81383c589"
+          },
+          "pageRasterSha256": "4a923ee36c37440af192b610d54d9523e575a0df9b2b48c21138454d1ecf88ab"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            27.999999999999993,
+            28.0
+          ],
+          "pdf": "pdf/contextual-own-after-neither-control-reference.pdf",
+          "pdfSha256": "fc6e0a39b58601f74b76ae01ade860646af047ff54e17ccd18a7092d45c6e1d6",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "contextual-own-after-neither-control-reference-inspection.json.gz",
+            "sha256": "525ece914517b9d299b6d4c89c6e06d81d32b648b6d6517ca31da34d31c0bae2",
+            "jsonSha256": "7e2881d91d06c6be47d2253f575e30995d98421ab13c93a3be5a1243e4e054a5"
+          },
+          "pageRasterSha256": "41a252b7ce022c416a31d3e9681d95620389f9df5bb97bcc75649e495d660445"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "contextual-own-after-neither-control-candidate-report.json.gz",
+            "sha256": "55570e8a3ec2d913fb08d3ddda1e4197329eeb454fa276bdb9e414c3fde5d64d",
+            "jsonSha256": "bf45bfa7153cb2e36289ff75d48936d40ba52ee85bf5b244ae29202d437162b5"
+          },
+          "htmlSha256": "227e136442a0180c721e51d7ea63cab558ea2758e86bd56f952f67f746ee12d7",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            27.749999000000003,
+            28.499999000000003
+          ],
+          "pdf": "pdf/contextual-own-after-neither-control-candidate.pdf",
+          "pdfSha256": "9d6d7e3054e959e75e8d70711a0ec9a8e0155d76c721ba900d7eeea407beb9e9",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "contextual-own-after-neither-control-candidate-inspection.json.gz",
+            "sha256": "f68adb57f288de07a42b31298122ca1ef70a55d6e8cf72025ffff882fcf64ad0",
+            "jsonSha256": "44baf17983f5527b2eac8b39520a95f1104aff9f745cd6b6250cf2c81383c589"
+          },
+          "pageRasterSha256": "4a923ee36c37440af192b610d54d9523e575a0df9b2b48c21138454d1ecf88ab"
+        }
+      ],
+      "screenshot": {
+        "file": "contextual-own-after-neither-control.png",
+        "sha256": "8cbb755dd128462bdead94f362194ef334af28bc7ecb084129ef1f8bb79b83af"
+      }
+    },
+    {
+      "id": "contextual-own-before-second",
+      "inputSha256": "979e605cc8643b477a4f969f143e32ea9ac31e9e1913fc071f1a08e128d87348",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "contextual-own-before-second-baseline-report.json.gz",
+            "sha256": "f2c4539a4f310c8b52932411908c6f17f230cb92a555f51edb45ab338e656fc2",
+            "jsonSha256": "620b738107cb95cf0acfef59c0c5769db009ebe5296dda69c624cbeab0841916"
+          },
+          "htmlSha256": "2499951d1643b4ce56d79322b6c847ebb46b061721d87693ade73fe57436ffe6",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            27.749999000000003,
+            16.499999000000003
+          ],
+          "pdf": "pdf/contextual-own-before-second-baseline.pdf",
+          "pdfSha256": "e02d46c8aa405d28a73fc1c24905dd5960d31555ceb0b40716ff4a89ce1f03b4",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "contextual-own-before-second-baseline-inspection.json.gz",
+            "sha256": "fd2be562bc70fb363ffd8e49e3cd344ee2a3f44312ced87c84a904806301cf0d",
+            "jsonSha256": "da7350033cf7b7d6682e9125bfd4880322ca9402548e75d164dbf944fa08655d"
+          },
+          "pageRasterSha256": "9a818d19f5f705b2419f1ad6fc6814dda5abb54b6984cc314b7a9025775d55a8"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            15.999999999999993,
+            16.0
+          ],
+          "pdf": "pdf/contextual-own-before-second-reference.pdf",
+          "pdfSha256": "24ef4e3f6ae9ef9aba3715edca7fa4bab1da12cec9e62f8b04a87ae4b7dc2fe3",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "contextual-own-before-second-reference-inspection.json.gz",
+            "sha256": "750d8b747d978ccaa29aa841646b9dc3f81b2c8d84f0cc3ec8952249a58bcdf9",
+            "jsonSha256": "70cc05499d6d6310e041a9918ebbadad614a0b6395b75220a2c0287af7495dff"
+          },
+          "pageRasterSha256": "7f08731f9511d3c818132f47c45581d66a3149febf8faed202af8da805545a4d"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "contextual-own-before-second-candidate-report.json.gz",
+            "sha256": "bc6672912246444c0be13906280593763d244d640ab82d065b2f62f59c075afb",
+            "jsonSha256": "671c8f34172a70e640adebad09e3c634f7097f0e9a813c1eb46e34afdec673e3"
+          },
+          "htmlSha256": "fc0da64450c57e72d454e8cd1eb1cac7da4669e44593ed6bbe91f935fd71c273",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            15.749999000000003,
+            16.5
+          ],
+          "pdf": "pdf/contextual-own-before-second-candidate.pdf",
+          "pdfSha256": "3778bcf7bfa2dd42fe15b7ffead2961178969bc11b44cdfa5943d0b9b7449444",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "contextual-own-before-second-candidate-inspection.json.gz",
+            "sha256": "2bbef4c773f2704aa5a46652855ca5766d4e2e81427f635bc09f09bc7bff40c7",
+            "jsonSha256": "8605661abead35ca1d2ced0cddd5639094068acdd7eab290fec82e2a8e8942c7"
+          },
+          "pageRasterSha256": "c3e78e75fb1bab23eb92b982e184a0a52da4f47c44cfa04c5fcf3cabf2372489"
+        }
+      ],
+      "screenshot": {
+        "file": "contextual-own-before-second.png",
+        "sha256": "f3539f8bd944dc4ce8bce57e782471d03a7e5df94ce72720cd1695d491d3f36a"
+      }
+    },
+    {
+      "id": "contextual-own-neighbor-wins-control",
+      "inputSha256": "e9da22bb6039bccc34a804650dbce691a30a263a57c558f117cc5a003f0a82ac",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "contextual-own-neighbor-wins-control-baseline-report.json.gz",
+            "sha256": "b344a22c0fc15042e38de6eee393d8c7b5d8a807d487cdff46e1097470a12500",
+            "jsonSha256": "35256a5de5d6b353b3d5b224120131c7d20d6971af6ec00dfc5ca3c0bb4807d4"
+          },
+          "htmlSha256": "df9a845300ec1bb18910436d50eafb3ea8d99e8a29496f67effe9ce6df9040e6",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            27.749999000000003,
+            28.499999000000003
+          ],
+          "pdf": "pdf/contextual-own-neighbor-wins-control-baseline.pdf",
+          "pdfSha256": "3a6c6e25d77798d194e2a77d3a8598d8b77787c3260018627135d4c2dd0b3eed",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "contextual-own-neighbor-wins-control-baseline-inspection.json.gz",
+            "sha256": "f68adb57f288de07a42b31298122ca1ef70a55d6e8cf72025ffff882fcf64ad0",
+            "jsonSha256": "44baf17983f5527b2eac8b39520a95f1104aff9f745cd6b6250cf2c81383c589"
+          },
+          "pageRasterSha256": "4a923ee36c37440af192b610d54d9523e575a0df9b2b48c21138454d1ecf88ab"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            21.999999999999993,
+            28.0
+          ],
+          "pdf": "pdf/contextual-own-neighbor-wins-control-reference.pdf",
+          "pdfSha256": "fdf103552b3920baacaa320725427f16c82cd8ed986f42afd95ef5adc3b2ef08",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "contextual-own-neighbor-wins-control-reference-inspection.json.gz",
+            "sha256": "892585363bb79785ad1fc3aa755dbbca869870a9b0128c78126904f6b6c5b19a",
+            "jsonSha256": "ec0b9b1cd9720502d6a44b79bc2d25e9772f5a77803b9322b04a74f6270767e2"
+          },
+          "pageRasterSha256": "325999c5e2fefcd9963cd60caab118aad69be47cc369bef8ecd5b98542cd253f"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "contextual-own-neighbor-wins-control-candidate-report.json.gz",
+            "sha256": "dd7a856c7ab4f17e17c2172b0715768af58d81fdaf59f9e72050343baa84d884",
+            "jsonSha256": "99fade4ca7542ef1ee020ad16b5170cf5fa77ce0862a0480b17d34dc88241a40"
+          },
+          "htmlSha256": "0dce1cbe2a20f417aa313971e6c98a3c4166ba7020d46e5c8ab804c1ffc52745",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            21.749999000000003,
+            28.499999000000003
+          ],
+          "pdf": "pdf/contextual-own-neighbor-wins-control-candidate.pdf",
+          "pdfSha256": "0ec427af07d3a79dce86c29b6e873c2c0276d38d3a65deefa86f4e9a5e5289bc",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "contextual-own-neighbor-wins-control-candidate-inspection.json.gz",
+            "sha256": "cde38264f2847d8523d75ed6639bbdc6dfcff7725c7dc97a979c81b1398cf1f2",
+            "jsonSha256": "1e6a16ca42e807a2ef07aed7756e48fb5564316abfeefb48b29aca7383a92f0d"
+          },
+          "pageRasterSha256": "42e395109032dbca1d84120e5949ebd1d6787e17e00d5f3ae82ffe5d2aaac2f9"
+        }
+      ],
+      "screenshot": {
+        "file": "contextual-own-neighbor-wins-control.png",
+        "sha256": "8a30969e7018be312785c01138a4eeda46ae96f02eb2a4398b307e892612db6d"
+      }
+    },
+    {
+      "id": "contextual-own-inherited-direct-off",
+      "inputSha256": "c2f8ea81e7760ddf8793999eb0e9f1d923840d8706e4121949ab424719869e19",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "contextual-own-inherited-direct-off-baseline-report.json.gz",
+            "sha256": "ff1ea22d70d6602589c452729094ed33efcec6320c28c8547d8fb128809abc09",
+            "jsonSha256": "9b05921a82eb48a6468033f5a91ae843ec0010271611bcf9cb6b1c1fff9fe524"
+          },
+          "htmlSha256": "2cb46087c37c57e683a7fd9bbd0364998c52ef4935eb23a7d2d385f58fdbc940",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            27.749999000000003,
+            28.499999000000003
+          ],
+          "pdf": "pdf/contextual-own-inherited-direct-off-baseline.pdf",
+          "pdfSha256": "30668f6d478e426ca9d39446db171596301193bd2e6437183c6f5028385df518",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "contextual-own-inherited-direct-off-baseline-inspection.json.gz",
+            "sha256": "f68adb57f288de07a42b31298122ca1ef70a55d6e8cf72025ffff882fcf64ad0",
+            "jsonSha256": "44baf17983f5527b2eac8b39520a95f1104aff9f745cd6b6250cf2c81383c589"
+          },
+          "pageRasterSha256": "4a923ee36c37440af192b610d54d9523e575a0df9b2b48c21138454d1ecf88ab"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            27.999999999999993,
+            28.0
+          ],
+          "pdf": "pdf/contextual-own-inherited-direct-off-reference.pdf",
+          "pdfSha256": "f6fba14768c29226ce63f9b0442e890f54afce1184b911e8680f14e96cf7f67d",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "contextual-own-inherited-direct-off-reference-inspection.json.gz",
+            "sha256": "525ece914517b9d299b6d4c89c6e06d81d32b648b6d6517ca31da34d31c0bae2",
+            "jsonSha256": "7e2881d91d06c6be47d2253f575e30995d98421ab13c93a3be5a1243e4e054a5"
+          },
+          "pageRasterSha256": "41a252b7ce022c416a31d3e9681d95620389f9df5bb97bcc75649e495d660445"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "contextual-own-inherited-direct-off-candidate-report.json.gz",
+            "sha256": "6134cee03393ff990e8319fd467ca392530fcbdf32412d7ade4bd7167a04fcef",
+            "jsonSha256": "2af3f8c6dc63c80a2f8834807431f279f9909039ea6f615870c0d6c8f85138c6"
+          },
+          "htmlSha256": "6fbfbb574fd04a6548d76d98e4ca90043d25ddf9462e41107b733c280160de19",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            27.749999000000003,
+            28.499999000000003
+          ],
+          "pdf": "pdf/contextual-own-inherited-direct-off-candidate.pdf",
+          "pdfSha256": "45b5466c5f72a250848d66ce9295a40f184133c53c67b25d9e810eb1841a8559",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "contextual-own-inherited-direct-off-candidate-inspection.json.gz",
+            "sha256": "f68adb57f288de07a42b31298122ca1ef70a55d6e8cf72025ffff882fcf64ad0",
+            "jsonSha256": "44baf17983f5527b2eac8b39520a95f1104aff9f745cd6b6250cf2c81383c589"
+          },
+          "pageRasterSha256": "4a923ee36c37440af192b610d54d9523e575a0df9b2b48c21138454d1ecf88ab"
+        }
+      ],
+      "screenshot": {
+        "file": "contextual-own-inherited-direct-off.png",
+        "sha256": "0137411ce36a6625bef700bf67a75d09bf31f25abd8f2b0c3bea6b9886bd65d3"
+      }
+    },
+    {
+      "id": "contextual-own-different-style-control",
+      "inputSha256": "101e8e83a2c2439b7a869482f4df521947261f12830130ab5fe78d4aebac7849",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "contextual-own-different-style-control-baseline-report.json.gz",
+            "sha256": "bbd43caf6ae600c3b2d98aefdb32e00f80bb5c698b6262862c505c6cdf60d68c",
+            "jsonSha256": "071fb5eec7c3b8d3890e1b3555ddcadce0a80aa58567065e346a7c2a3d882a53"
+          },
+          "htmlSha256": "efca545a8d25ba238dab066049b305c1019c567acb27d39e0639cfd3e723d4c1",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            27.749999000000003,
+            28.499999000000003
+          ],
+          "pdf": "pdf/contextual-own-different-style-control-baseline.pdf",
+          "pdfSha256": "557fdd151d116941c18df835129bc1e29cd1869ff18918ccb4f662b32bc65b37",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "contextual-own-different-style-control-baseline-inspection.json.gz",
+            "sha256": "f68adb57f288de07a42b31298122ca1ef70a55d6e8cf72025ffff882fcf64ad0",
+            "jsonSha256": "44baf17983f5527b2eac8b39520a95f1104aff9f745cd6b6250cf2c81383c589"
+          },
+          "pageRasterSha256": "4a923ee36c37440af192b610d54d9523e575a0df9b2b48c21138454d1ecf88ab"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            27.999999999999993,
+            28.0
+          ],
+          "pdf": "pdf/contextual-own-different-style-control-reference.pdf",
+          "pdfSha256": "85957a6e32c63c0759db9ff363ba206beb5d842ffcda7293ad037ad046acfb30",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "contextual-own-different-style-control-reference-inspection.json.gz",
+            "sha256": "525ece914517b9d299b6d4c89c6e06d81d32b648b6d6517ca31da34d31c0bae2",
+            "jsonSha256": "7e2881d91d06c6be47d2253f575e30995d98421ab13c93a3be5a1243e4e054a5"
+          },
+          "pageRasterSha256": "41a252b7ce022c416a31d3e9681d95620389f9df5bb97bcc75649e495d660445"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "contextual-own-different-style-control-candidate-report.json.gz",
+            "sha256": "0fdaeb147f980f5e9bb1b8778300b876363b3b3dcda6c8b7e9e0cd61e40a4701",
+            "jsonSha256": "5e3d97b2173ba96b7a26aeb1bc795850d010e6dc7a96ec6d9e6b53ea53616a9b"
+          },
+          "htmlSha256": "efca545a8d25ba238dab066049b305c1019c567acb27d39e0639cfd3e723d4c1",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            27.749999000000003,
+            28.499999000000003
+          ],
+          "pdf": "pdf/contextual-own-different-style-control-candidate.pdf",
+          "pdfSha256": "7be287834558b2d3ed9070a7122caf9580803d36c502c09a20a90c9821399259",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "contextual-own-different-style-control-candidate-inspection.json.gz",
+            "sha256": "f68adb57f288de07a42b31298122ca1ef70a55d6e8cf72025ffff882fcf64ad0",
+            "jsonSha256": "44baf17983f5527b2eac8b39520a95f1104aff9f745cd6b6250cf2c81383c589"
+          },
+          "pageRasterSha256": "4a923ee36c37440af192b610d54d9523e575a0df9b2b48c21138454d1ecf88ab"
+        }
+      ],
+      "screenshot": {
+        "file": "contextual-own-different-style-control.png",
+        "sha256": "95e6f443d7d954f39b9bef510460f0519a269d54fe70769c6a23fa2626b697e2"
+      }
+    },
+    {
+      "id": "contextual-own-drawing-first",
+      "inputSha256": "bcd9602659ae55d461d58c1c277a73175f9e2f5d5dfb818ec7693257dda7cdac",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "contextual-own-drawing-first-baseline-report.json.gz",
+            "sha256": "dec05fba89fd95c6f52620dbedfbe41dc7981fd2aaa4e7ce0a4c00a9fbee6fb8",
+            "jsonSha256": "98025f286afbe72940320175d2cc6547a0ef829594f2305eb114a83b1744532b"
+          },
+          "htmlSha256": "753270cabafee87b83fdb9b1f1a1573cc8ccec54d3d747dac7b902af32e15e25",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            28.49999899999999,
+            27.749999000000003
+          ],
+          "pdf": "pdf/contextual-own-drawing-first-baseline.pdf",
+          "pdfSha256": "7a570ae592c783c11892e57ebdd957df9ee79b44e727946a9f35bd8adcffb27e",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "contextual-own-drawing-first-baseline-inspection.json.gz",
+            "sha256": "a3025923416b23bdb620ffcf562af0dbd876706856422f95c85ff1ad2e1ff260",
+            "jsonSha256": "b5521976fc942a3c94823fd5045a9bd97f19d7133b81e8590e7d27bb6bc3b1ef"
+          },
+          "pageRasterSha256": "3f8aea0695d6e23942123fa138266a04a314ec8c5fcd721346d94be7f92dcc6e"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            28.0,
+            28.0
+          ],
+          "pdf": "pdf/contextual-own-drawing-first-reference.pdf",
+          "pdfSha256": "088f63a114146b2ebc11b99c227955e6c2996dc38f9631a9fe78fd21a63962e7",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "contextual-own-drawing-first-reference-inspection.json.gz",
+            "sha256": "68d2cc2926546891aaf6452da0e648bf616116fc3544f73030167164742a925d",
+            "jsonSha256": "caefd7b8db91dba767700052d589f126da1d384837d27b02cd14b20e2bb45574"
+          },
+          "pageRasterSha256": "6413017bfac703ec39f21a8b799d3c2fe6de52c9b2e2952b2fb2a072b93fa7fd"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "contextual-own-drawing-first-candidate-report.json.gz",
+            "sha256": "4fb512efde32e8ec31a188001cfa9d66fa2436feb12f603383e42b0907ffe8b7",
+            "jsonSha256": "a132d8f5bb1f8feaa6f1203588d422dd59f055ee8aa5d29ef329d745d42a4bd1"
+          },
+          "htmlSha256": "f0b7537c3f3584bf119d4f3dac5046a3c92fea882c52eced10de5730eea8425a",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            16.5,
+            27.74999899999999
+          ],
+          "pdf": "pdf/contextual-own-drawing-first-candidate.pdf",
+          "pdfSha256": "533c6c77eda459b8f2fac51a3569228660e25e179894681b5073ebbaf9f1de23",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "contextual-own-drawing-first-candidate-inspection.json.gz",
+            "sha256": "ff983d228563ec925ec7e29ac39363dd9f0791ec871fef84e5845078d32ea8c5",
+            "jsonSha256": "0c01b3cd45b5bf522ac45efafbb9f3d12130440e7dfc258c4d029dc5ac9f7e06"
+          },
+          "pageRasterSha256": "20d41e4da748cc683842967f0c36ee3d7773eac63e974229a1b1517d353c8612"
+        }
+      ],
+      "screenshot": {
+        "file": "contextual-own-drawing-first.png",
+        "sha256": "7ecf790182acdfd096ea58648c0bfd3b8fd9e05ea9f37feed771e0337317e436"
+      }
+    },
+    {
+      "id": "contextual-own-vml-first",
+      "inputSha256": "4efffd67456ab59e63911c1fb7951497f4007d868d2b8c105911f809a66a4bc8",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "contextual-own-vml-first-baseline-report.json.gz",
+            "sha256": "7c005e700716a97466e890cfbf0fdbe3a6c37b5bf73c5dea02ce8324cc52c8cd",
+            "jsonSha256": "892b558c89d63769f8333427bddc0e124dee40e4ebc355699fa8f15dc7b8b570"
+          },
+          "htmlSha256": "7f256e80cd65bfca7637462084c1cea68f72f9a4a21c11d3fc035c429a80f7ce",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            28.49999899999999,
+            27.749999000000003
+          ],
+          "pdf": "pdf/contextual-own-vml-first-baseline.pdf",
+          "pdfSha256": "c7eb900c9aca1952f952daaa3f8ec8c0c18f5e9534af042e452f24c773f1087f",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "contextual-own-vml-first-baseline-inspection.json.gz",
+            "sha256": "a3025923416b23bdb620ffcf562af0dbd876706856422f95c85ff1ad2e1ff260",
+            "jsonSha256": "b5521976fc942a3c94823fd5045a9bd97f19d7133b81e8590e7d27bb6bc3b1ef"
+          },
+          "pageRasterSha256": "3f8aea0695d6e23942123fa138266a04a314ec8c5fcd721346d94be7f92dcc6e"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            28.0,
+            28.0
+          ],
+          "pdf": "pdf/contextual-own-vml-first-reference.pdf",
+          "pdfSha256": "979b05e7de5701abe5279bba25ec499509e4dca63236218d6bdc2224c559850b",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "contextual-own-vml-first-reference-inspection.json.gz",
+            "sha256": "876f255e9732761f95c765e28a13d8dfa37816a09b83a260c285fdf1c17dfae6",
+            "jsonSha256": "f334d2a6429d135973255a4ee3beec45e1fd541a541cdcae4f100af350e4312c"
+          },
+          "pageRasterSha256": "8987adacb41dd1466071b2e7b8a28c2584a073ef09511a4a6aaa7fb23b583589"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "contextual-own-vml-first-candidate-report.json.gz",
+            "sha256": "9a53082352e7e8bac94a2aa7546158fa970905f4d64f7f0852e923531fd5f4a5",
+            "jsonSha256": "d47377e5361a54f8cced9faace7de27be3f901c379d388bcb0d8f668a4b50c40"
+          },
+          "htmlSha256": "86fd866f8dcf564f686e1f6f148c042c3d6bc6f70cb578b036e1468db8b76ac3",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "stepsPt": [
+            16.5,
+            27.74999899999999
+          ],
+          "pdf": "pdf/contextual-own-vml-first-candidate.pdf",
+          "pdfSha256": "7690308fbd8319d8f196e9a6ce6b42dce49663c172704a9f195763dab082394e",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "contextual-own-vml-first-candidate-inspection.json.gz",
+            "sha256": "ff983d228563ec925ec7e29ac39363dd9f0791ec871fef84e5845078d32ea8c5",
+            "jsonSha256": "0c01b3cd45b5bf522ac45efafbb9f3d12130440e7dfc258c4d029dc5ac9f7e06"
+          },
+          "pageRasterSha256": "20d41e4da748cc683842967f0c36ee3d7773eac63e974229a1b1517d353c8612"
+        }
+      ],
+      "screenshot": {
+        "file": "contextual-own-vml-first.png",
+        "sha256": "25c319e454d4b04976ccafec0552a5840f1829dffa749430b627857ece602571"
+      }
+    }
+  ],
+  "tools": {
+    "docs/results/contextual-own-spacing/Compose.py": "5258c5addece2d4005da16706970b467e8c256c9309136126b1d2e0339a96801",
+    "docs/results/export-reliability/Capture.mjs": "242ffcbd8716ba6238990621aee97482209e846c70ffbc4171c16b204f7e1631"
+  }
+}

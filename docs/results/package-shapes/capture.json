@@ -1,0 +1,275 @@
+{
+  "afterCommit": "3a29e133c5acc684a58cdf2d9cbd74161477f06d",
+  "afterCommitNote": "Docxodus main after merging #1388 (PR #1400) and #1384 (PR #1401).",
+  "beforeCommit": "3e4335d83fa266800e38593ecbf24b94041d5ba2",
+  "cases": {
+    "package-generic-glossary": {
+      "file": "package-generic-glossary.png",
+      "htmlProbe": {
+        "fixed": {
+          "commit": "3a29e133c5acc684a58cdf2d9cbd74161477f06d",
+          "detail": "2426 chars text present",
+          "outcome": "ok"
+        },
+        "main": {
+          "commit": "3e4335d83fa266800e38593ecbf24b94041d5ba2",
+          "detail": "DocumentFormat.OpenXml.Packaging.OpenXmlPackageException: The document cannot be opened because there is an invalid part with an unexpected content type.",
+          "outcome": "threw"
+        }
+      },
+      "inputSha256": "2cd3cbf99e639bd07409aa27ceb579432b031663375e40780825e29f9ffe617c",
+      "referencePdfSha256": "9fde55af3f5061319f25ac140a9b92f4ce90114415a64525931e251d3f2e213e",
+      "sha256": "1d12e5eab0dbab7a0f2a99bf0c2a1c75ec1009dc2f0810478a16307afd57f95e",
+      "track": "pdf"
+    },
+    "package-shared-relationship-id": {
+      "file": "package-shared-relationship-id.png",
+      "htmlProbe": {
+        "fixed": {
+          "commit": "3a29e133c5acc684a58cdf2d9cbd74161477f06d",
+          "detail": "2426 chars text present",
+          "outcome": "ok"
+        },
+        "main": {
+          "commit": "3e4335d83fa266800e38593ecbf24b94041d5ba2",
+          "detail": "System.Xml.XmlException: 'rSettings' ID conflicts with the ID of an existing relationship for the specified source.",
+          "outcome": "threw"
+        }
+      },
+      "inputSha256": "529e1ed8512c9b9c5e78dffa2174bf1ce1a79935727ca960bb13adbe7ddaaeec",
+      "referencePdfSha256": "f3f6e3ecb18c12874ae64e95c7344e6739210a49060e8d86784abb4ff61d0a33",
+      "sha256": "66670083659293daa25fb993463d8eefbfd76724e6a77e6a13e82b1ee292aab1",
+      "track": "pdf"
+    },
+    "package-typed-parts-control": {
+      "file": "package-typed-parts-control.png",
+      "htmlProbe": {
+        "fixed": {
+          "commit": "3a29e133c5acc684a58cdf2d9cbd74161477f06d",
+          "detail": "2426 chars text present",
+          "outcome": "ok"
+        },
+        "main": {
+          "commit": "3e4335d83fa266800e38593ecbf24b94041d5ba2",
+          "detail": "2426 chars text present",
+          "outcome": "ok"
+        }
+      },
+      "inputSha256": "618b27d9892e63438203f4a1637fa1538ca087cd4d3c4256f2559002ea52eb48",
+      "referencePdfSha256": "68a89a30d7836a0e2d1c84a1f14b80c10da4f772c40e33aa9efcb61a6878c4cd",
+      "sha256": "961e614691017d2a289713e3bab0b22932fd2e71bbbeb8db582e266d5ef37a3c",
+      "track": "pdf"
+    },
+    "package-untyped-font": {
+      "file": "package-untyped-font.png",
+      "htmlProbe": {
+        "fixed": {
+          "commit": "3a29e133c5acc684a58cdf2d9cbd74161477f06d",
+          "detail": "2426 chars text present",
+          "outcome": "ok"
+        },
+        "main": {
+          "commit": "3e4335d83fa266800e38593ecbf24b94041d5ba2",
+          "detail": "System.InvalidOperationException: Part: /word/fonts/ExampleSans-regular.ttf doesn't exist in the package.",
+          "outcome": "threw"
+        }
+      },
+      "inputSha256": "cc66cb47a94d996efe77798194e0dfa8d4d89efddb24097b6e76c638eca9ed7f",
+      "referencePdfSha256": "188683a69604497e499482b563333651d113c1bcf9acf27ab4de7759a8aced43",
+      "sha256": "44e1673d8ea86f2fe8d09f58a949f0cf8c9c1af5050a97c4b0431394983da32c",
+      "track": "pdf"
+    },
+    "redline-hyperlink-mailto-recipients": {
+      "file": "redline-hyperlink-mailto-recipients.png",
+      "phases": {
+        "fixed": {
+          "commit": "3a29e133c5acc684a58cdf2d9cbd74161477f06d",
+          "failedChecks": [],
+          "packageSha256": "7aea2daac259d2ad05c5f41072c81a481a5929ab90e924080f31acf8d952a58e",
+          "pdfSha256": "a33cefe7e9339ceacc0a00cdbde150bc4ff03a7c5e19f8a5872dd68eb93cfdf4",
+          "score": 100.0
+        },
+        "main": {
+          "commit": "3e4335d83fa266800e38593ecbf24b94041d5ba2",
+          "failedChecks": [
+            "PowerToolsDocumentException: Invalid URI: The hostname could not be parsed."
+          ],
+          "packageSha256": null,
+          "pdfSha256": null,
+          "score": 0.0
+        }
+      },
+      "sha256": "1f7f69d09ff31a2dc34cf1bdd27b2ce34239f313d7227820339049f7d933ad1a",
+      "track": "redline"
+    },
+    "redline-hyperlink-mailto-recipients-inserted": {
+      "file": "redline-hyperlink-mailto-recipients-inserted.png",
+      "phases": {
+        "fixed": {
+          "commit": "3a29e133c5acc684a58cdf2d9cbd74161477f06d",
+          "failedChecks": [],
+          "packageSha256": "56c3885a48bcd82b0df2c2ad9017dba54f49d39d33f962147a35c642a4bbc5c0",
+          "pdfSha256": "260dd639b29f3057a2136940e657047a357ecb17c4fff5715fe1e2dc40f97d65",
+          "score": 100.0
+        },
+        "main": {
+          "commit": "3e4335d83fa266800e38593ecbf24b94041d5ba2",
+          "failedChecks": [
+            "PowerToolsDocumentException: Invalid URI: The hostname could not be parsed."
+          ],
+          "packageSha256": null,
+          "pdfSha256": null,
+          "score": 0.0
+        }
+      },
+      "sha256": "4bdf416f9dfbc01ca584eafec48f15d9e56b9cc74d1d47473cd0ab094d3c9b79",
+      "track": "redline"
+    },
+    "redline-hyperlink-mailto-single-control": {
+      "file": "redline-hyperlink-mailto-single-control.png",
+      "phases": {
+        "fixed": {
+          "commit": "3a29e133c5acc684a58cdf2d9cbd74161477f06d",
+          "failedChecks": [],
+          "packageSha256": "39ff9f92a94c18737a34dec5903bb9699763ed855ff4206c1758429c25fd60de",
+          "pdfSha256": "3d91676566829ca19c0b4cc37907f14611febb649bd7d5812a13c05558af3089",
+          "score": 100.0
+        },
+        "main": {
+          "commit": "3e4335d83fa266800e38593ecbf24b94041d5ba2",
+          "failedChecks": [],
+          "packageSha256": "39ff9f92a94c18737a34dec5903bb9699763ed855ff4206c1758429c25fd60de",
+          "pdfSha256": "63a5f2ea0800b0301efa6128f3c4bfe987d0ee7fd7fbbf1c0c32a2a0851260b7",
+          "score": 100.0
+        }
+      },
+      "sha256": "74f2d9b717ad1fa0385f2e1feb99883517d43bd3eaf843684d9912bfa12af735",
+      "track": "redline"
+    },
+    "redline-hyperlink-mailto-single-inserted-control": {
+      "file": "redline-hyperlink-mailto-single-inserted-control.png",
+      "phases": {
+        "fixed": {
+          "commit": "3a29e133c5acc684a58cdf2d9cbd74161477f06d",
+          "failedChecks": [],
+          "packageSha256": "e5095680d6439daa46687c7548a2c2ff9763b25845f60324fd7751b4270cf427",
+          "pdfSha256": "a6a379b11027182f1d9b4c8134bc90b33f4902ed03ec9cfebcf58ea2472d231a",
+          "score": 100.0
+        },
+        "main": {
+          "commit": "3e4335d83fa266800e38593ecbf24b94041d5ba2",
+          "failedChecks": [],
+          "packageSha256": "e5095680d6439daa46687c7548a2c2ff9763b25845f60324fd7751b4270cf427",
+          "pdfSha256": "3cf6c8e54d04254837caf931325b035ae3b0d53bc44b4030c1ca5ad5d43e50bd",
+          "score": 100.0
+        }
+      },
+      "sha256": "e84ecbdc03d0ee8ea39ffc0b553598d5eafd2d367153c26d57354a27f44ca726",
+      "track": "redline"
+    },
+    "redline-package-generic-glossary": {
+      "file": "redline-package-generic-glossary.png",
+      "phases": {
+        "fixed": {
+          "commit": "3a29e133c5acc684a58cdf2d9cbd74161477f06d",
+          "failedChecks": [],
+          "packageSha256": "4802f2fd284ba8868a6d91a267ca1041115d9166177a61c53dc00392a32239bd",
+          "pdfSha256": "a00538d5582c0126ff688937c41e6585c21a1aecb840c1618034549e969cdafc",
+          "score": 100.0
+        },
+        "main": {
+          "commit": "3e4335d83fa266800e38593ecbf24b94041d5ba2",
+          "failedChecks": [
+            "OpenXmlPackageException: The document cannot be opened because there is an invalid part with an unexpected content type."
+          ],
+          "packageSha256": null,
+          "pdfSha256": null,
+          "score": 0.0
+        }
+      },
+      "sha256": "91cc3c57e9c92bc3b24e8b79684125726c243b2652c68fe2ebeb83e73b77d426",
+      "track": "redline"
+    },
+    "redline-package-shared-relationship-id": {
+      "file": "redline-package-shared-relationship-id.png",
+      "phases": {
+        "fixed": {
+          "commit": "3a29e133c5acc684a58cdf2d9cbd74161477f06d",
+          "failedChecks": [],
+          "packageSha256": "23b5d725f24b9475a14a19508df9bc9892c42a78743670f1896759c31e69f646",
+          "pdfSha256": "348566442dceccf38e0a0f51623c6f96f4d59956193caf0ffd8908841f3cf0d3",
+          "score": 100.0
+        },
+        "main": {
+          "commit": "3e4335d83fa266800e38593ecbf24b94041d5ba2",
+          "failedChecks": [
+            "PowerToolsDocumentException: 'rSettings' ID conflicts with the ID of an existing relationship for the specified source."
+          ],
+          "packageSha256": null,
+          "pdfSha256": null,
+          "score": 0.0
+        }
+      },
+      "sha256": "3354428f45372feb1b373ad643af89bb0361bc3f30eb5194208eb23e8fa6d7aa",
+      "track": "redline"
+    },
+    "redline-package-typed-parts-control": {
+      "file": "redline-package-typed-parts-control.png",
+      "phases": {
+        "fixed": {
+          "commit": "3a29e133c5acc684a58cdf2d9cbd74161477f06d",
+          "failedChecks": [],
+          "packageSha256": "86157e618a08ba2f1e41ca64b96e1c7a583b24db24e77f3341a32dfc22f7b8e4",
+          "pdfSha256": "3a212d03188f9c4b217e113055c54b0ab1829929b05dd64c6939312ad23616ca",
+          "score": 100.0
+        },
+        "main": {
+          "commit": "3e4335d83fa266800e38593ecbf24b94041d5ba2",
+          "failedChecks": [],
+          "packageSha256": "86157e618a08ba2f1e41ca64b96e1c7a583b24db24e77f3341a32dfc22f7b8e4",
+          "pdfSha256": "7f9d82ec0a333a29fb39519d5b268934ebcc66f27c6e3f016e1421dc05e7e848",
+          "score": 100.0
+        }
+      },
+      "sha256": "5708494e38ea24f5cecf678ff8d057ac9caa0d887e808f90e55b38d85eabf17e",
+      "track": "redline"
+    },
+    "redline-package-untyped-font": {
+      "file": "redline-package-untyped-font.png",
+      "phases": {
+        "fixed": {
+          "commit": "3a29e133c5acc684a58cdf2d9cbd74161477f06d",
+          "failedChecks": [],
+          "packageSha256": "c425b0c3783c618f66585a64f06fe513c65ad1a9b1782f30fffaefada514563d",
+          "pdfSha256": "d1580d4f8db8595e97890b0ab3827dcc18295f8e9f9acf4ca3211efbf16820a9",
+          "score": 100.0
+        },
+        "main": {
+          "commit": "3e4335d83fa266800e38593ecbf24b94041d5ba2",
+          "failedChecks": [
+            "new schema finding Package_Open NullReferenceException: Object reference not set to an instance of an object."
+          ],
+          "packageSha256": "eb5c0056c4b0c4056de771e01fac34e4567ce7307c711a6906df53c69cb9dbc9",
+          "pdfSha256": "2f6d92f505197f69b070f551c34dd69a4ea99e897c4b90c7361426ce59cc520d",
+          "score": 0.0
+        }
+      },
+      "sha256": "8fc32994d67e62ea4cea437aafbbe596427e12c3f8454913ba854de6a33c8a19",
+      "track": "redline"
+    }
+  },
+  "pdfTrackNote": "PDF candidate scoring needs the Chromium process sandbox, unavailable on this host (kernel.apparmor_restrict_unprivileged_userns=1; the render workflow sets it to 0). The PDF panels show the registered LibreOffice reference and a byte-entry HTML conversion probe, Docxodus.Internal.HtmlConversionOps.ConvertToHtml, the entry the WASM bridge calls.",
+  "purpose": "Focused diagnostics for Docxodus #1384 and #1388; not a full-suite score or a Word reference.",
+  "raster": {
+    "crop": {
+      "height": 420,
+      "width": 816,
+      "x": 0,
+      "y": 48
+    },
+    "dpi": 96,
+    "sheet": "Unscaled 816px panels with a 72px header; left main, right fixed (redline) or reference, probe (PDF)"
+  },
+  "renderer": "LibreOffice 25.8.7.3",
+  "schema": 1
+}

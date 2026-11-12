@@ -3,6 +3,7 @@ from copy import deepcopy
 from decimal import Decimal, ROUND_HALF_UP
 from pathlib import Path
 import xml.etree.ElementTree as ET
+import struct
 from zipfile import ZipFile
 from .common import contained, digest
 
@@ -10,6 +11,10 @@ TRACK = 'libreoffice-equivalent-controls'
 W = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
 XML = '{http://www.w3.org/XML/1998/namespace}'
 RULES = {
+    **{'images-emf-' + form: {
+        'control': 'images-emf-expanded-' + form,
+        'rule': 'emf-frame-and-picture-expanded-v1',
+    } for form in ('stock', 'wide-stock')},
     'paragraphs-page-number-ordinary-legacy': {
         'control': 'paragraphs-page-number-ordinary-field',
         'rule': 'legacy-decimal-page-field-v1',
@@ -41,6 +46,10 @@ RULES = {
     'tables-vmerge-boundary-merged': {
         'control': 'tables-vmerge-boundary-merged-kept',
         'rule': 'vertical-merge-keep-with-next-v1',
+    },
+    'paragraph-mark-hidden-run-in-keep': {
+        'control': 'paragraph-mark-hidden-run-in-keep-control',
+        'rule': 'run-in-heading-keep-removed-v1',
     },
 }
 
@@ -205,6 +214,61 @@ def merge_kept_with_next(data):
     return root
 
 
+def run_in_heading_keep_removed(data):
+    """Drop keepNext and keepLines from every hidden-mark paragraph, the run-in headings.
+
+    LibreOffice 25.8.7.3 gives a block joined through a hidden paragraph mark the first paragraph's
+    keep properties, so a heading's keepNext chains the joined sections together. Docxodus #1294
+    specifies that the closing paragraph's properties govern instead; with the headings' keep
+    properties absent, the two readings agree and LibreOffice's capture shows the specified layout.
+    """
+    root = ET.fromstring(data)
+    headings = [p for p in root.iter(W + 'p') if p.find(W + 'pPr/' + W + 'rPr/' + W + 'vanish') is not None]
+    if not headings:
+        raise ValueError('Expected hidden-mark run-in headings')
+    for heading in headings:
+        properties = heading.find(W + 'pPr')
+        keeps = [child for child in properties if child.tag in (W + 'keepNext', W + 'keepLines')]
+        if {child.tag for child in keeps} != {W + 'keepNext', W + 'keepLines'} or any(child.attrib for child in keeps):
+            raise ValueError('Run-in heading does not carry plain keepNext and keepLines')
+        for child in keeps:
+            properties.remove(child)
+    return root
+
+
+
+def emf_picture_expanded(data):
+    """Expand one fixed, page-anchored Iris viewport by 5/4; the artwork stays put."""
+    root = ET.fromstring(data)
+    shapes = list(root.iter('{urn:schemas-microsoft-com:vml}shape'))
+    if len(shapes) != 1:
+        raise ValueError('Expected one page-anchored EMF picture')
+    shape = shapes[0]
+    picture = root.find('.//' + W + 'pict')
+    if picture is None or list(picture) != [shape] or len(list(root.iter(W + 'pict'))) != 1:
+        raise ValueError('Expected one unwrapped Iris picture carrier')
+    children = list(shape)
+    if (len(children) != 2 or children[0].tag != '{urn:schemas-microsoft-com:vml}imagedata'
+            or children[0].attrib != {'{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id': 'rIris'}
+            or children[1].tag != '{urn:schemas-microsoft-com:office:word}wrap'
+            or children[1].attrib != {'type': 'none'} or any(list(child) for child in children)):
+        raise ValueError('Expected uncropped, nonwrapping Iris image')
+    for width in (96, 144):
+        style = (f'position:absolute;margin-left:72pt;margin-top:90pt;width:{width}pt;height:72pt;'
+                 'mso-position-horizontal-relative:page;mso-position-vertical-relative:page;')
+        if shape.attrib == {'id': 'IrisVector', 'style': style}:
+            shape.set('style', style.replace(f'width:{width}pt;height:72pt', f'width:{width * 5 // 4}pt;height:90pt'))
+            return root
+    raise ValueError('Expected fixed Iris picture position and dimensions')
+
+
+def emf_frame_expanded(data):
+    # Only Frame changes: the reference device and every drawing record are unchanged.
+    if len(data) < 88 or struct.unpack_from('<11I', data) != (1, 88, 0, 0, 120, 90, 0, 0, 2400, 1800, 0x464d4520):
+        raise ValueError('Expected original Iris EMF frame')
+    return data[:32] + struct.pack('<II', 3000, 2250) + data[40:]
+
+
 def source(case, registry, root):
     rule = RULES.get(case['id'])
     if rule is None:
@@ -223,7 +287,12 @@ def source(case, registry, root):
     paths = [contained(root, c['input']) for c in (case, control)]
     if any(digest(path) != record['sha256'] for path, record in zip(paths, (case, control))):
         raise ValueError('Equivalent control input digest changed: ' + case['id'])
-    if rule['rule'] == 'legacy-decimal-page-field-v1':
+    binary_parts = {}
+    if rule['rule'] == 'emf-frame-and-picture-expanded-v1':
+        changed_part, normalize = 'word/document.xml', emf_picture_expanded
+        binary_parts = {'word/media/iris.emf': emf_frame_expanded}
+        changed_error = 'Equivalent control changes the EMF picture beyond its expanded viewport'
+    elif rule['rule'] == 'legacy-decimal-page-field-v1':
         changed_part, normalize = 'word/header1.xml', legacy_as_field
         changed_error = 'Equivalent control changes the decimal PAGE representation'
     elif rule['rule'] == 'exact-row-height-points-to-twips-v1':
@@ -239,6 +308,9 @@ def source(case, registry, root):
     elif rule['rule'] == 'vertical-merge-keep-with-next-v1':
         changed_part, normalize = 'word/document.xml', merge_kept_with_next
         changed_error = 'Equivalent control changes the ledger beyond keeping its merged rows together'
+    elif rule['rule'] == 'run-in-heading-keep-removed-v1':
+        changed_part, normalize = 'word/document.xml', run_in_heading_keep_removed
+        changed_error = 'Equivalent control changes the run-in sections beyond the headings\' keep properties'
     else:
         raise ValueError('Unknown equivalent-control rule')
     with ZipFile(paths[0]) as original, ZipFile(paths[1]) as comparison:
@@ -252,9 +324,12 @@ def source(case, registry, root):
                 actual = ET.fromstring(comparison.read(name))
                 if ET.tostring(expected) != ET.tostring(actual):
                     raise ValueError(changed_error)
+            elif name in binary_parts:
+                if binary_parts[name](original.read(name)) != comparison.read(name):
+                    raise ValueError('Equivalent control changes EMF drawing or mapping')
             elif original.read(name) != comparison.read(name):
                 raise ValueError('Equivalent control changes package part: ' + name)
-        if changed_part not in names:
+        if changed_part not in names or not set(binary_parts).issubset(names):
             raise ValueError('Equivalent control is missing its declared package part')
     result = {'kind': 'equivalent-control', 'caseId': control['id'], 'input': control['input'],
               'inputSha256': control['sha256'], 'rule': rule['rule']}

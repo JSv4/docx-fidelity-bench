@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "status": "unscored-manual-visual-review",
+  "manifestSha256": "0ae523d40bedd8ee2bac690ecb4086081476b96633050864cd46e68598689f97",
+  "intermediateReview": {
+    "source": "a42fc20aa1da5360c15539322041eed389ac6cf4",
+    "reviewed": [
+      "header-image-undecodable",
+      "header-image-decodable-control",
+      "paragraph-automatic",
+      "paragraph-automatic-note",
+      "paragraph-exact-control",
+      "empty-tab",
+      "empty-tab-control",
+      "table-bookmark",
+      "table-bookmark-control",
+      "merged-grid-tall",
+      "merged-grid-fitting-control",
+      "merged-grid-unmerged-control",
+      "style-frame-empty",
+      "style-frame-wrap-only",
+      "style-frame-ordinary-control",
+      "positioned-frame-control",
+      "wrap-clearance-encoded-anchor",
+      "wrap-clearance-encoded-wrap",
+      "wrap-clearance-signed-control",
+      "wrap-clearance-positive-control",
+      "cell-oversized-kept",
+      "cell-fitting-kept-control",
+      "cell-oversized-unkept-control",
+      "float-square",
+      "float-square-control",
+      "float-tight",
+      "float-tight-control",
+      "tab-segment-long",
+      "tab-segment-fitting-control",
+      "tab-segment-ordinary-control",
+      "shape-atoms",
+      "shape-atoms-control",
+      "textbox-drawingml-natural-host1",
+      "textbox-drawingml-natural-host3",
+      "textbox-drawingml-exact-host1",
+      "textbox-drawingml-exact-host3",
+      "textbox-vml-natural-host1",
+      "textbox-vml-natural-host3",
+      "textbox-vml-exact-host1",
+      "textbox-vml-exact-host3"
+    ],
+    "notes": [
+      "Undecodable image shows known Arial fallback defect on both pages; both body labels remain visible. LibreOffice shows its own fallback only on page2.",
+      "Decodable header image repeats twice; behind-text overlap follows authored position. a72 inline placement differs, ca99/a42 use page position.",
+      "Automatic paragraph preserves text/bold formatting on all3 pages; line positions differ from LibreOffice.",
+      "Automatic note stays on citing page2; text and receipt complete across4 pages. Separator weight differs from LibreOffice.",
+      "Exact-line control visually preserved from a72 to a42.",
+      "Empty-tab text complete but a42 paints no dotted leader; LibreOffice does. Pagination agent investigating raw versus continued geometry; do not claim leader fidelity.",
+      "Empty-tab no-tab control visually preserved from a72 to a42, with differing reference line endings.",
+      "Both bookmarked/plain table outputs preserve47 rows over2 pages; control layout visually unchanged, reference cell x offset differs slightly.",
+      "Oversized merged grid preserves all source labels once, ordered rows across2 pages; merged labels stay on their starting row.",
+      "Fitting/unmerged table controls visually preserved; all merged/plain labels appear at expected rows.",
+      "Inherited empty-frame case flows over2 pages with all47 records and receipt.",
+      "Wrap-only inherited frame and no-frame control retain all47 records over2 pages; ordinary control visually stable. Directly positioned frame remains at its authored page position, separate from body text.",
+      "All4 wrap-clearance cases paint the full purple rule and both labels on one page. Signed/positive controls remain visually stable; candidate spacing below the rule differs from LibreOffice.",
+      "Kept/unkept tall-cell outputs both preserve43 ordered lines plus receipt across2 pages; fitting8-line kept control stays intact and visually stable.",
+      "Oversized square/tight floats paint the complete generated image within candidate pages. LibreOffice clips the tall image at page edges despite passing text/font eligibility. Fitting same-wrap controls are visually stable.",
+      "Long manual-tab segment retains the prefix, painted leader and all41 ordered lines plus receipt over2 pages; fitting and ordinary controls are visually stable.",
+      "Shape composition retains4 authored fallback placeholders once on page1 and the complete bitmap/receipt on page2. Fitting placeholder/image control is visually stable. LibreOffice draws actual ovals, so its fallback-token contracts are ineligible.",
+      "All8 textbox cases show4 complete inner lines plus receipt in a42. Both host3 natural baseline exports fail; both host3 exact baseline PDFs omit the first line. Host1 controls are visually stable. Candidate host1/3 inner-line advances match within the recorded print tolerance; receipt position may differ from LibreOffice because the host itself still has triple spacing."
+    ]
+  },
+  "finalRasterComparison": {
+    "prior": "a42fc20aa1da5360c15539322041eed389ac6cf4",
+    "current": "cc57539ff062dd6350c31792fa205177a7cc3a01",
+    "unchangedCases": 39,
+    "changed": [
+      {
+        "id": "export-inline-context-header-image-undecodable",
+        "prior": [
+          "ca7378561bff7d16313f85983df34f3b276bd5943c5cf3f21ea8faed37629fa8",
+          "fbf719a21676c129badbb5c8d138494bb43405e9002509f0df66b84ae9875676"
+        ],
+        "current": [
+          "72130f41cea5d9f7eef5481b0647681bd6b4f8db3df459436eafaab6d46a775e",
+          "08c3674ae6a93332e69ee54befe0dd4895cb610a620f3bd3181c9571b2a39d5c"
+        ]
+      }
+    ]
+  },
+  "finalChangedPagesReviewed": [
+    "export-inline-context-header-image-undecodable:page1",
+    "export-inline-context-header-image-undecodable:page2"
+  ],
+  "finalNotes": [
+    "Both fallback labels and both body labels remain visible. The fallback typography now uses Liberation Serif; the independent font contract passes.",
+    "The 39 unchanged cases retain the completed intermediate visual review. The documented reference and leader limitations remain."
+  ]
+}

@@ -1,0 +1,1164 @@
+{
+  "scope": "Focused unscored public-API diagnostics; no Word parity or full-suite score",
+  "manifestSha256": "4c5b3aadfc020a2c1d558845d85bde3d5bd88abf4a4e7ca4d1e3cd9dbd38ac67",
+  "referenceBundleSha256": "1375d1a44e978694caf281ffd27fad30d04fec64ac853f5bcdfde1231099d0e1",
+  "referenceEnvironment": {
+    "fonts": {
+      "LiberationSerif-Bold.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+      },
+      "LiberationSerif-BoldItalic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+      },
+      "LiberationSerif-Italic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+      },
+      "LiberationSerif-Regular.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+      }
+    },
+    "tools": {
+      "pdffonts": {
+        "sha256": "de0a6d649710c2ebc226656b08c70814019a93f58889f79bf1dac726a131beda",
+        "version": "pdffonts version 25.03.0"
+      },
+      "pdftocairo": {
+        "sha256": "6f56c7c8c5b015354ebed053d4b52e14b43611c9c86236562bfd112827108dc5",
+        "version": "pdftocairo version 25.03.0"
+      },
+      "pdftoppm": {
+        "sha256": "6c315e59db2a0829ecdfb6c791ad3f56bc9bd508266d20adc22238df447a74a3",
+        "version": "pdftoppm version 25.03.0"
+      },
+      "pdftotext": {
+        "sha256": "451784e28a4593637573e534d9be4c4487a3cccffae22a71e93162faa84de23c",
+        "version": "pdftotext version 25.03.0"
+      },
+      "qpdf": {
+        "sha256": "0d0462ea848601a652b666e83a07a095bb0c4d69d831beb6f94ea8e6e008f34c",
+        "version": "qpdf version 12.2.0"
+      }
+    }
+  },
+  "captures": {
+    "baseline": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "9dd9383631b56c08a32c069b89ce7aa9acf67b75",
+      "sourceTree": "efbbc882db73668af9167f27fc2e85a3d60fca71",
+      "buildIdentitySha256": "8984ef18c85ffaaa4c47a25eca33e9b74d3f6df134d24506bae8c38d50def267",
+      "manifestSha256": "4c5b3aadfc020a2c1d558845d85bde3d5bd88abf4a4e7ca4d1e3cd9dbd38ac67",
+      "browserVersion": "143.0.7499.4",
+      "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "table-page-remainder-rows",
+          "inputSha256": "dfbdb3680e3c7220756627bb17b80cb11f9bd26c9bac79862b18872f92444ba0",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "c6588e6d672d02acde29aa8ba6febbee1644ec869410153a581bd9e5e4d08730",
+          "mandatoryPdfFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ]
+        },
+        {
+          "id": "table-page-remainder-oversized",
+          "inputSha256": "9fd1447592fc694321b8d52f6e1ff3b2f98ec050688bdcb792cc95dc3ac77722",
+          "status": "delivered",
+          "pages": 3,
+          "pdfSha256": "c18335cf3df5174b807d5032aaf9ac7b7bf147dc7bf4f6dce05c98df2fd72229",
+          "mandatoryPdfFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ]
+        },
+        {
+          "id": "table-page-remainder-cell",
+          "inputSha256": "9b8a8b793b72a229f97dc47b924fe2dd1995f24ccd364fb223adb19b609cfd6c",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "6dcc997ac09d92169c06a89d588aa89daffc7190961e905fcc6b5befa46b06e0",
+          "mandatoryPdfFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ]
+        },
+        {
+          "id": "table-page-remainder-kept-control",
+          "inputSha256": "79f34ec7b7f4bed91cc062971f3aa00f8eb0bae82b7bf0a0610ab9a2020bb571",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "f2e54b8680c2c6019429977a798d736c424dde14c1967bf8bfd5e45cd2e0cf94",
+          "mandatoryPdfFailures": []
+        },
+        {
+          "id": "table-page-remainder-cell-cant-split-control",
+          "inputSha256": "904b70d9c6d34c627d4831dc527a1d49d48fd8397fbdccb6be45465373e7af47",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "0cd7a79249d71a4748d53d114d41ef1f599335a30868638e0b01b900f3453048",
+          "mandatoryPdfFailures": []
+        }
+      ],
+      "inspectionManifestSha256": "4c5b3aadfc020a2c1d558845d85bde3d5bd88abf4a4e7ca4d1e3cd9dbd38ac67"
+    },
+    "candidate": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "49816b9d4bb54bbef19fed66d28f8990a5bb33f0",
+      "sourceTree": "29c6d6c6e66395a975f28dc4067a226cd8b14bfa",
+      "buildIdentitySha256": "88f5b39698fc5b2f8e70afbcd9534e768664c6928115e6fca0a312ac85bcd6b3",
+      "manifestSha256": "4c5b3aadfc020a2c1d558845d85bde3d5bd88abf4a4e7ca4d1e3cd9dbd38ac67",
+      "browserVersion": "143.0.7499.4",
+      "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "table-page-remainder-rows",
+          "inputSha256": "dfbdb3680e3c7220756627bb17b80cb11f9bd26c9bac79862b18872f92444ba0",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "bc51aa3385a38034562234ca5944e1c0a8c482149b5ebfc807d0273d8685655d",
+          "mandatoryPdfFailures": []
+        },
+        {
+          "id": "table-page-remainder-oversized",
+          "inputSha256": "9fd1447592fc694321b8d52f6e1ff3b2f98ec050688bdcb792cc95dc3ac77722",
+          "status": "delivered",
+          "pages": 3,
+          "pdfSha256": "e05bc55b7beace2dd2a541cfd1f8592d485477a40349bd3f2fa0fd10d4e38750",
+          "mandatoryPdfFailures": []
+        },
+        {
+          "id": "table-page-remainder-cell",
+          "inputSha256": "9b8a8b793b72a229f97dc47b924fe2dd1995f24ccd364fb223adb19b609cfd6c",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "2c670f47b5350314a448db5f90331d7c9ad883f25bccec70db2cc0cf100fce93",
+          "mandatoryPdfFailures": []
+        },
+        {
+          "id": "table-page-remainder-kept-control",
+          "inputSha256": "79f34ec7b7f4bed91cc062971f3aa00f8eb0bae82b7bf0a0610ab9a2020bb571",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "383bdbb6907e86132b74e778a1189775c137ec8bfa89f1a75f321febf7d6555b",
+          "mandatoryPdfFailures": []
+        },
+        {
+          "id": "table-page-remainder-cell-cant-split-control",
+          "inputSha256": "904b70d9c6d34c627d4831dc527a1d49d48fd8397fbdccb6be45465373e7af47",
+          "status": "delivered",
+          "pages": 2,
+          "pdfSha256": "14710c129d6342c05eb13d7c2ffc1ceded89fc4a5c8265c10a75fe941a8187df",
+          "mandatoryPdfFailures": []
+        }
+      ],
+      "inspectionManifestSha256": "4c5b3aadfc020a2c1d558845d85bde3d5bd88abf4a4e7ca4d1e3cd9dbd38ac67"
+    }
+  },
+  "schema": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "documents": {
+      "/home/jman/Code/Docxodus/.local-closeout/1569-fixture-schema/cell-cant-split.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/1569-fixture-schema/cell.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/1569-fixture-schema/columns-fit.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/1569-fixture-schema/columns.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/1569-fixture-schema/kept-bookmarks.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/1569-fixture-schema/kept-borders.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/1569-fixture-schema/kept.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/1569-fixture-schema/oversized.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/1569-fixture-schema/relocated.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/1569-fixture-schema/row-cant-split.docx": [],
+      "/home/jman/Code/Docxodus/.local-closeout/1569-fixture-schema/rows.docx": [],
+      "fixtures/table-page-remainder-cell-cant-split-control.docx": [],
+      "fixtures/table-page-remainder-cell.docx": [],
+      "fixtures/table-page-remainder-kept-control.docx": [],
+      "fixtures/table-page-remainder-oversized.docx": [],
+      "fixtures/table-page-remainder-rows.docx": []
+    }
+  },
+  "cases": [
+    {
+      "id": "table-page-remainder-rows",
+      "inputSha256": "dfbdb3680e3c7220756627bb17b80cb11f9bd26c9bac79862b18872f92444ba0",
+      "screenshot": "table-page-remainder-rows.png",
+      "screenshotSha256": "5fc2671d45730d7f205af0332bfb381cde38a1de9415857b72b9dc187319b648",
+      "panels": [
+        {
+          "renderer": "Baseline 9dd93836",
+          "pdfSha256": "c6588e6d672d02acde29aa8ba6febbee1644ec869410153a581bd9e5e4d08730",
+          "failures": [
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "pageRasterSha256": [
+            "41ec4541798a6269d31d1c978eb6fbcb9eaa698a46c76aeac698d098818a4e7a",
+            "0f1513114668aa348a836b0a191675bb587bfd603257e952f69f61891f8586f1"
+          ]
+        },
+        {
+          "renderer": "LibreOffice reference",
+          "pdfSha256": "2d0feb6a9a72dfaa89cb60e772b03b1fc38969faad5104387db7d55ff3f9eebb",
+          "failures": [],
+          "pageRasterSha256": [
+            "125508b90ae25e26f89c48fd000986e9723d44b5668e86a2864b449445e4e605",
+            "de3c5c20613424bf33450ecdc177876ef8af56cd2f7c8ec655009a2422a71af4"
+          ]
+        },
+        {
+          "renderer": "Candidate 49816b9d",
+          "pdfSha256": "bc51aa3385a38034562234ca5944e1c0a8c482149b5ebfc807d0273d8685655d",
+          "failures": [],
+          "pageRasterSha256": [
+            "7c8e0784eeb6c8e93218d8d3f4d9c31f4c47baa46823c9ebd34bb47c0a154baf",
+            "427019b948426638aaf785d91252fabcf3550cd1b53d69a2b40debe383bd2d08"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "table-page-remainder-oversized",
+      "inputSha256": "9fd1447592fc694321b8d52f6e1ff3b2f98ec050688bdcb792cc95dc3ac77722",
+      "screenshot": "table-page-remainder-oversized.png",
+      "screenshotSha256": "7c99e2f14b93e0a30436fd3f260c9b66926b086d71e7adbe924ac9c8c1917aca",
+      "panels": [
+        {
+          "renderer": "Baseline 9dd93836",
+          "pdfSha256": "c18335cf3df5174b807d5032aaf9ac7b7bf147dc7bf4f6dce05c98df2fd72229",
+          "failures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "pageRasterSha256": [
+            "41ec4541798a6269d31d1c978eb6fbcb9eaa698a46c76aeac698d098818a4e7a",
+            "fef691f6331e93f307b9983d3e593ebdc68f4991d79f6831906e419f9d9385cf",
+            "ed9aa03f6765adbce259728f34d31e62a858e9214d710b15bf579c6b2b9ea242"
+          ]
+        },
+        {
+          "renderer": "LibreOffice reference",
+          "pdfSha256": "3e3a232a3bfe5987251b13913a98730a66b85d2eacba1b6e157ec85cfa32a3a3",
+          "failures": [],
+          "pageRasterSha256": [
+            "125508b90ae25e26f89c48fd000986e9723d44b5668e86a2864b449445e4e605",
+            "0df410dc41b7b0e4b4d1b03be619909b0ddc6c81424a52d01c57dd1abee64f7b",
+            "dde3ab2a9cb21192606aa74b15076f284f44a070034d04685b42de2c8ed518f8"
+          ]
+        },
+        {
+          "renderer": "Candidate 49816b9d",
+          "pdfSha256": "e05bc55b7beace2dd2a541cfd1f8592d485477a40349bd3f2fa0fd10d4e38750",
+          "failures": [],
+          "pageRasterSha256": [
+            "7c8e0784eeb6c8e93218d8d3f4d9c31f4c47baa46823c9ebd34bb47c0a154baf",
+            "b2fc737ccdaca9c2bc7a9f9358da01d59c9c33782049e0c678d7f62b46a9ac3d",
+            "9326ee45fb24cf1ed04d6462f22531fb1b9bfcb00db9651d920a7444c194b5cb"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "table-page-remainder-cell",
+      "inputSha256": "9b8a8b793b72a229f97dc47b924fe2dd1995f24ccd364fb223adb19b609cfd6c",
+      "screenshot": "table-page-remainder-cell.png",
+      "screenshotSha256": "66ab77ddf995ed95182080788dbbf8efbabaee5431d016d79213ed6d0610990c",
+      "panels": [
+        {
+          "renderer": "Baseline 9dd93836",
+          "pdfSha256": "6dcc997ac09d92169c06a89d588aa89daffc7190961e905fcc6b5befa46b06e0",
+          "failures": [
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "pageRasterSha256": [
+            "41ec4541798a6269d31d1c978eb6fbcb9eaa698a46c76aeac698d098818a4e7a",
+            "0f1513114668aa348a836b0a191675bb587bfd603257e952f69f61891f8586f1"
+          ]
+        },
+        {
+          "renderer": "LibreOffice reference",
+          "pdfSha256": "c0db1cfa70d93bc19fac00d0dedaa732b90d15a68fcd71dc16ce11954b4e7ce4",
+          "failures": [],
+          "pageRasterSha256": [
+            "125508b90ae25e26f89c48fd000986e9723d44b5668e86a2864b449445e4e605",
+            "de3c5c20613424bf33450ecdc177876ef8af56cd2f7c8ec655009a2422a71af4"
+          ]
+        },
+        {
+          "renderer": "Candidate 49816b9d",
+          "pdfSha256": "2c670f47b5350314a448db5f90331d7c9ad883f25bccec70db2cc0cf100fce93",
+          "failures": [],
+          "pageRasterSha256": [
+            "7c8e0784eeb6c8e93218d8d3f4d9c31f4c47baa46823c9ebd34bb47c0a154baf",
+            "427019b948426638aaf785d91252fabcf3550cd1b53d69a2b40debe383bd2d08"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "table-page-remainder-kept-control",
+      "inputSha256": "79f34ec7b7f4bed91cc062971f3aa00f8eb0bae82b7bf0a0610ab9a2020bb571",
+      "screenshot": "table-page-remainder-kept-control.png",
+      "screenshotSha256": "59d10920b3873b59d174c8726bed082d0d0078799af9f4f36c83bb607b92297b",
+      "panels": [
+        {
+          "renderer": "Baseline 9dd93836",
+          "pdfSha256": "f2e54b8680c2c6019429977a798d736c424dde14c1967bf8bfd5e45cd2e0cf94",
+          "failures": [],
+          "pageRasterSha256": [
+            "41ec4541798a6269d31d1c978eb6fbcb9eaa698a46c76aeac698d098818a4e7a",
+            "0f1513114668aa348a836b0a191675bb587bfd603257e952f69f61891f8586f1"
+          ]
+        },
+        {
+          "renderer": "LibreOffice reference",
+          "pdfSha256": "da06fa4f266a2634cc3097b53991ca718d483091c137aa733a1b8385a61e3d6d",
+          "failures": [],
+          "pageRasterSha256": [
+            "e67f8eae2e14f424aa950f7fffe37be867553321a6ef6e7ae934d8789bf632ad",
+            "cc255458d32800e03dfc2eadc8b92d4df5ec16b475f182dcc0b8ab7ccb4fe65e"
+          ]
+        },
+        {
+          "renderer": "Candidate 49816b9d",
+          "pdfSha256": "383bdbb6907e86132b74e778a1189775c137ec8bfa89f1a75f321febf7d6555b",
+          "failures": [],
+          "pageRasterSha256": [
+            "41ec4541798a6269d31d1c978eb6fbcb9eaa698a46c76aeac698d098818a4e7a",
+            "0f1513114668aa348a836b0a191675bb587bfd603257e952f69f61891f8586f1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "table-page-remainder-cell-cant-split-control",
+      "inputSha256": "904b70d9c6d34c627d4831dc527a1d49d48fd8397fbdccb6be45465373e7af47",
+      "screenshot": "table-page-remainder-cell-cant-split-control.png",
+      "screenshotSha256": "db2cf1a8a6a4c0b7c30bfa4637c6a894c24868c3d64db8008eef7eda3fc5a6de",
+      "panels": [
+        {
+          "renderer": "Baseline 9dd93836",
+          "pdfSha256": "0cd7a79249d71a4748d53d114d41ef1f599335a30868638e0b01b900f3453048",
+          "failures": [],
+          "pageRasterSha256": [
+            "41ec4541798a6269d31d1c978eb6fbcb9eaa698a46c76aeac698d098818a4e7a",
+            "0f1513114668aa348a836b0a191675bb587bfd603257e952f69f61891f8586f1"
+          ]
+        },
+        {
+          "renderer": "LibreOffice reference",
+          "pdfSha256": "0cb8ca654e5747cc028477104ec031cfac44a5c7626168abf9e1df00f4e070a6",
+          "failures": [],
+          "pageRasterSha256": [
+            "e67f8eae2e14f424aa950f7fffe37be867553321a6ef6e7ae934d8789bf632ad",
+            "cc255458d32800e03dfc2eadc8b92d4df5ec16b475f182dcc0b8ab7ccb4fe65e"
+          ]
+        },
+        {
+          "renderer": "Candidate 49816b9d",
+          "pdfSha256": "14710c129d6342c05eb13d7c2ffc1ceded89fc4a5c8265c10a75fe941a8187df",
+          "failures": [],
+          "pageRasterSha256": [
+            "41ec4541798a6269d31d1c978eb6fbcb9eaa698a46c76aeac698d098818a4e7a",
+            "0f1513114668aa348a836b0a191675bb587bfd603257e952f69f61891f8586f1"
+          ]
+        }
+      ]
+    }
+  ],
+  "builds": {
+    "baseline": {
+      "identity": {
+        "commands": [
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/issue-1569-baseline/npm",
+            "ci"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/issue-1569-baseline/npm",
+            "run",
+            "build:wasm"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/issue-1569-baseline/npm",
+            "run",
+            "build:ts"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/issue-1569-baseline/npm",
+            "run",
+            "build:pagination-bundle"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/issue-1569-baseline/npm",
+            "run",
+            "build:worker-bundle"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/issue-1569-baseline/npm",
+            "run",
+            "build:export-browser"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/issue-1569-baseline/npm",
+            "run",
+            "build:export-assets"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/issue-1569-baseline/npm-export",
+            "ci"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/issue-1569-baseline/npm-export",
+            "run",
+            "build"
+          ]
+        ],
+        "commit": "9dd9383631b56c08a32c069b89ce7aa9acf67b75",
+        "files": {
+          "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+          "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+          "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+          "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+          "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+          "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+          "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+          "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+          "npm-export/dist/font-observation.js": "ae91c96b1ecf43dda46a01d5a5c922eafdca47114d58f7b2863ebb1c38d2dfa1",
+          "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+          "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+          "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+          "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+          "npm-export/dist/index.js": "686c3d6140f31f5485e06dae046e91cba7eb5a5e39884b0846d754d520a58325",
+          "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+          "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+          "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+          "npm/dist/export-assets.json": "3859eb4e2d7626253f326ad83a8eee3001e3676d7b1ffdc892ca189823c850f0",
+          "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+        },
+        "node": "v24.13.1",
+        "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+        "schema": 1,
+        "tree": "efbbc882db73668af9167f27fc2e85a3d60fca71"
+      },
+      "rendererAssets": {
+        "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+        "schemaVersion": 1,
+        "packageVersion": "0.0.0",
+        "assets": [
+          {
+            "path": "./docxodus.worker.js",
+            "mediaType": "text/javascript",
+            "byteLength": 20310,
+            "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+          },
+          {
+            "path": "./export-browser.bundle.js",
+            "mediaType": "text/javascript",
+            "byteLength": 607700,
+            "sha256": "70419684e9139980ff4d6b8e3efd3677490440b11f3985142cd7fe1d73bd52b9"
+          },
+          {
+            "path": "./export-resource-limits-v1.json",
+            "mediaType": "application/json",
+            "byteLength": 1715,
+            "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+          },
+          {
+            "path": "./pagination.bundle.js",
+            "mediaType": "text/javascript",
+            "byteLength": 164040,
+            "sha256": "a957ec6710ff3605be684525664f4ed01c3bead792551b25fafa7c0224aa245f"
+          },
+          {
+            "path": "./render-report-v2.schema.json",
+            "mediaType": "application/json",
+            "byteLength": 46448,
+            "sha256": "90c4965cfc9d129cb74f6b5f30edb55fa3662c2c5350537ba7b014b8f781b1a5"
+          },
+          {
+            "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 367893,
+            "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+          },
+          {
+            "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 5213465,
+            "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+          },
+          {
+            "path": "./wasm/_framework/Docxodus.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 5426969,
+            "sha256": "df88c025d2595827673fb13ae38856ff6096765081d965ec72625bc3c6a359a1"
+          },
+          {
+            "path": "./wasm/_framework/DocxodusWasm.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 523541,
+            "sha256": "1a359a6ea597fc0c5e75c3179ee8d91af9939d6ecc9cf8097f8d8e80cf6ac686"
+          },
+          {
+            "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 23829,
+            "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+          },
+          {
+            "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 30485,
+            "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+          },
+          {
+            "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 13589,
+            "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+          },
+          {
+            "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 9493,
+            "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+          },
+          {
+            "path": "./wasm/_framework/System.Collections.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 64277,
+            "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+          },
+          {
+            "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 7445,
+            "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+          },
+          {
+            "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 45333,
+            "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+          },
+          {
+            "path": "./wasm/_framework/System.ComponentModel.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 4885,
+            "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+          },
+          {
+            "path": "./wasm/_framework/System.Console.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 15125,
+            "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+          },
+          {
+            "path": "./wasm/_framework/System.IO.Compression.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 113941,
+            "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+          },
+          {
+            "path": "./wasm/_framework/System.IO.Packaging.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 88341,
+            "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+          },
+          {
+            "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 5909,
+            "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+          },
+          {
+            "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 75541,
+            "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+          },
+          {
+            "path": "./wasm/_framework/System.Linq.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 99093,
+            "sha256": "ddf98ca8465eefaddded15d7fe054bfddd9e0c831c9d1f36de21b191b471f0f0"
+          },
+          {
+            "path": "./wasm/_framework/System.Memory.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 15637,
+            "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+          },
+          {
+            "path": "./wasm/_framework/System.Net.Http.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 139029,
+            "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+          },
+          {
+            "path": "./wasm/_framework/System.Net.Primitives.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 7445,
+            "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+          },
+          {
+            "path": "./wasm/_framework/System.ObjectModel.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 12565,
+            "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+          },
+          {
+            "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 1674517,
+            "sha256": "2ebf53d9fe8ce4f58c19af1ce4995f1b7c950330ef0a20180269c6f9c2371aac"
+          },
+          {
+            "path": "./wasm/_framework/System.Private.Uri.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 70933,
+            "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+          },
+          {
+            "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 69397,
+            "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+          },
+          {
+            "path": "./wasm/_framework/System.Private.Xml.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 893205,
+            "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+          },
+          {
+            "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 43797,
+            "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+          },
+          {
+            "path": "./wasm/_framework/System.Runtime.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 7957,
+            "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+          },
+          {
+            "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 25365,
+            "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+          },
+          {
+            "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 29461,
+            "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+          },
+          {
+            "path": "./wasm/_framework/System.Text.Json.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 321301,
+            "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+          },
+          {
+            "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 259861,
+            "sha256": "dbe1b6341c08cbd551dcc7632b781e9f9f06911158e6225bd911daa8a3f1d526"
+          },
+          {
+            "path": "./wasm/_framework/System.Xml.Linq.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 4373,
+            "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+          },
+          {
+            "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 4885,
+            "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+          },
+          {
+            "path": "./wasm/_framework/System.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 4885,
+            "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+          },
+          {
+            "path": "./wasm/_framework/dotnet.boot.js",
+            "mediaType": "text/javascript",
+            "byteLength": 9450,
+            "sha256": "5e6ddcddbf180fcd652162ebe617d99551ae5f3b1cf2522148aa7a88da4e9cf7"
+          },
+          {
+            "path": "./wasm/_framework/dotnet.js",
+            "mediaType": "text/javascript",
+            "byteLength": 37884,
+            "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+          },
+          {
+            "path": "./wasm/_framework/dotnet.native.js",
+            "mediaType": "text/javascript",
+            "byteLength": 224345,
+            "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+          },
+          {
+            "path": "./wasm/_framework/dotnet.native.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 10555321,
+            "sha256": "e0ae83ce4c5d0e6019da18d1870099c648a7766d92dba2d69e03cfddf4674771"
+          },
+          {
+            "path": "./wasm/_framework/dotnet.runtime.js",
+            "mediaType": "text/javascript",
+            "byteLength": 198479,
+            "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+          }
+        ]
+      }
+    },
+    "candidate": {
+      "identity": {
+        "commands": [
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/issue-1569/npm",
+            "ci"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/issue-1569/npm",
+            "run",
+            "build:wasm"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/issue-1569/npm",
+            "run",
+            "build:ts"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/issue-1569/npm",
+            "run",
+            "build:pagination-bundle"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/issue-1569/npm",
+            "run",
+            "build:worker-bundle"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/issue-1569/npm",
+            "run",
+            "build:export-browser"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/issue-1569/npm",
+            "run",
+            "build:export-assets"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/issue-1569/npm-export",
+            "ci"
+          ],
+          [
+            "npm",
+            "--prefix",
+            "/home/jman/Code/Docxodus/.local-closeout/issue-1569/npm-export",
+            "run",
+            "build"
+          ]
+        ],
+        "commit": "49816b9d4bb54bbef19fed66d28f8990a5bb33f0",
+        "files": {
+          "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+          "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+          "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+          "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+          "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+          "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+          "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+          "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+          "npm-export/dist/font-observation.js": "ae91c96b1ecf43dda46a01d5a5c922eafdca47114d58f7b2863ebb1c38d2dfa1",
+          "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+          "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+          "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+          "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+          "npm-export/dist/index.js": "686c3d6140f31f5485e06dae046e91cba7eb5a5e39884b0846d754d520a58325",
+          "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+          "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+          "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+          "npm/dist/export-assets.json": "8125d6ea07e87c8e473efa2e636dd292b1674eaac581fc811dd2f09402306600",
+          "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+        },
+        "node": "v24.13.1",
+        "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+        "schema": 1,
+        "tree": "29c6d6c6e66395a975f28dc4067a226cd8b14bfa"
+      },
+      "rendererAssets": {
+        "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+        "schemaVersion": 1,
+        "packageVersion": "0.0.0",
+        "assets": [
+          {
+            "path": "./docxodus.worker.js",
+            "mediaType": "text/javascript",
+            "byteLength": 20310,
+            "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+          },
+          {
+            "path": "./export-browser.bundle.js",
+            "mediaType": "text/javascript",
+            "byteLength": 610228,
+            "sha256": "ae8e54ced7434224c0a16b27a896a3c785d072937f8a69e6fd9fe576f5ad969f"
+          },
+          {
+            "path": "./export-resource-limits-v1.json",
+            "mediaType": "application/json",
+            "byteLength": 1715,
+            "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+          },
+          {
+            "path": "./pagination.bundle.js",
+            "mediaType": "text/javascript",
+            "byteLength": 165097,
+            "sha256": "26f6dbb6b293e12ed4b646e80ca889ba0bbe5dba2cba1352669e68529092b1bf"
+          },
+          {
+            "path": "./render-report-v2.schema.json",
+            "mediaType": "application/json",
+            "byteLength": 46448,
+            "sha256": "90c4965cfc9d129cb74f6b5f30edb55fa3662c2c5350537ba7b014b8f781b1a5"
+          },
+          {
+            "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 367893,
+            "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+          },
+          {
+            "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 5213465,
+            "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+          },
+          {
+            "path": "./wasm/_framework/Docxodus.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 5426969,
+            "sha256": "0308d3aff7d76fb226cf7024ca443910d64376d873d0391f5cfdfbaab543b3ba"
+          },
+          {
+            "path": "./wasm/_framework/DocxodusWasm.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 523541,
+            "sha256": "fcf92af8cb61e79b3839dccc15a2f1fd2ecac5082aed843cae5078a58017ba13"
+          },
+          {
+            "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 23829,
+            "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+          },
+          {
+            "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 30485,
+            "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+          },
+          {
+            "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 13589,
+            "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+          },
+          {
+            "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 9493,
+            "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+          },
+          {
+            "path": "./wasm/_framework/System.Collections.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 64277,
+            "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+          },
+          {
+            "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 7445,
+            "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+          },
+          {
+            "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 45333,
+            "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+          },
+          {
+            "path": "./wasm/_framework/System.ComponentModel.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 4885,
+            "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+          },
+          {
+            "path": "./wasm/_framework/System.Console.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 15125,
+            "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+          },
+          {
+            "path": "./wasm/_framework/System.IO.Compression.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 113941,
+            "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+          },
+          {
+            "path": "./wasm/_framework/System.IO.Packaging.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 88341,
+            "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+          },
+          {
+            "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 5909,
+            "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+          },
+          {
+            "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 75541,
+            "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+          },
+          {
+            "path": "./wasm/_framework/System.Linq.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 99093,
+            "sha256": "ddf98ca8465eefaddded15d7fe054bfddd9e0c831c9d1f36de21b191b471f0f0"
+          },
+          {
+            "path": "./wasm/_framework/System.Memory.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 15637,
+            "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+          },
+          {
+            "path": "./wasm/_framework/System.Net.Http.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 139029,
+            "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+          },
+          {
+            "path": "./wasm/_framework/System.Net.Primitives.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 7445,
+            "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+          },
+          {
+            "path": "./wasm/_framework/System.ObjectModel.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 12565,
+            "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+          },
+          {
+            "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 1674517,
+            "sha256": "2ebf53d9fe8ce4f58c19af1ce4995f1b7c950330ef0a20180269c6f9c2371aac"
+          },
+          {
+            "path": "./wasm/_framework/System.Private.Uri.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 70933,
+            "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+          },
+          {
+            "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 69397,
+            "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+          },
+          {
+            "path": "./wasm/_framework/System.Private.Xml.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 893205,
+            "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+          },
+          {
+            "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 43797,
+            "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+          },
+          {
+            "path": "./wasm/_framework/System.Runtime.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 7957,
+            "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+          },
+          {
+            "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 25365,
+            "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+          },
+          {
+            "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 29461,
+            "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+          },
+          {
+            "path": "./wasm/_framework/System.Text.Json.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 321301,
+            "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+          },
+          {
+            "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 259861,
+            "sha256": "dbe1b6341c08cbd551dcc7632b781e9f9f06911158e6225bd911daa8a3f1d526"
+          },
+          {
+            "path": "./wasm/_framework/System.Xml.Linq.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 4373,
+            "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+          },
+          {
+            "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 4885,
+            "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+          },
+          {
+            "path": "./wasm/_framework/System.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 4885,
+            "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+          },
+          {
+            "path": "./wasm/_framework/dotnet.boot.js",
+            "mediaType": "text/javascript",
+            "byteLength": 9450,
+            "sha256": "f943cce96a0d27e25e99f1c3eba59861a5735bef6837f7afc96a5e2692600541"
+          },
+          {
+            "path": "./wasm/_framework/dotnet.js",
+            "mediaType": "text/javascript",
+            "byteLength": 37884,
+            "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+          },
+          {
+            "path": "./wasm/_framework/dotnet.native.js",
+            "mediaType": "text/javascript",
+            "byteLength": 224345,
+            "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+          },
+          {
+            "path": "./wasm/_framework/dotnet.native.wasm",
+            "mediaType": "application/wasm",
+            "byteLength": 10555324,
+            "sha256": "8808ca96d40d4697be0883e3ff896c5b3bcb901b965df5f317e30c254c7029aa"
+          },
+          {
+            "path": "./wasm/_framework/dotnet.runtime.js",
+            "mediaType": "text/javascript",
+            "byteLength": 198479,
+            "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+          }
+        ]
+      }
+    }
+  },
+  "tools": {
+    "docs/results/export-reliability/Capture.mjs": "8f1313540ae124063c65c5d3e747359a01cd38cda8b0cea4f5072b1d22f0dbe7",
+    "docs/results/export-reliability/Inspect.py": "f52f51d657d3d0d06f85c2ab42664e1bd120c82c461849e5eef435545d3f22bc",
+    "docs/results/table-page-remainder/Compose.py": "dc11547d37ac2267724c832d39074e020da5d9492dea6b520ecb0290bcc431ee"
+  }
+}

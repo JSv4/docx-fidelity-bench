@@ -1,0 +1,4262 @@
+{
+  "scope": "Unscored strict-font public exports. Thirteen eligible native references; three native kerning-threshold discrepancies. Line ownership only. No new Word or full-suite parity claim.",
+  "manifestSha256": "eb9070ff7fe7697a4ff98cf31c3c04ba942ab3961a975f7700792c8c435f4e91",
+  "manifest": {
+    "file": "manifest.json.gz",
+    "sha256": "8bedbcd1c7ae11bc26b359aa809115d50f95fcf0a63b535502f7c9418f56f16c",
+    "jsonSha256": "eb9070ff7fe7697a4ff98cf31c3c04ba942ab3961a975f7700792c8c435f4e91"
+  },
+  "builds": {
+    "baseline": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1551-grid/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1551-grid/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1551-grid/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1551-grid/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1551-grid/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1551-grid/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1551-grid/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1551-grid/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1551-grid/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "1d9f75c605dce3283caf843499fc126b1629af8d",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "71a05f210dcd3d1fbd09a0f04c4238a68baefc6a639211d419bb4714a18fc5ed",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+      "schema": 1,
+      "tree": "4dfd81b5e83cce2d42880c82808eb7d40623bbc8"
+    },
+    "candidate": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1550-paragraph-fit/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1550-paragraph-fit/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1550-paragraph-fit/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1550-paragraph-fit/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1550-paragraph-fit/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1550-paragraph-fit/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1550-paragraph-fit/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1550-paragraph-fit/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1550-paragraph-fit/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "fdaf268d543cbf9de45467022c9f2a4d09790d60",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "4d5bf441686dadc254df449dc1e94df31fa035b74325f9b244c45631d1a42c48",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+      "schema": 1,
+      "tree": "c77ba2652a460b941e829abdc1287a2b6396f4fe"
+    }
+  },
+  "rendererAssets": {
+    "baseline": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 626417,
+          "sha256": "dad01c874939b8a5d521368028f5cd463797f5d73eba0ab8cfa509e15ea2e969"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 173739,
+          "sha256": "8d2e6180ba6a34766ac12e0d109e348c6bd345c2d549cd7861c2a10b038740ea"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46484,
+          "sha256": "a604dbff16d3be0f0d24cf48753404b42fe25f70fbd1393dde4934871446a420"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5465881,
+          "sha256": "964dd3ba6d05cbabff18aef2f5bb18bc875d9e2350f538373f9263716446d523"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "c02c68782fd0dc6ce7774aa1e35722b7ee0af65841078c0876def154bb7f6c7a"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "5e08586a10f0b0c9e4354438734b392459cd64282ababf7029a48246f6da6d47"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1675029,
+          "sha256": "7216cb9019a8db40a177990f4ae6034cfe3d4f47aa598d221c4675df401082ce"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "03f2d61e73e99d25feeb0bc8503bbab51eab999bdfcee1c9d54173e909fbaa08"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10550817,
+          "sha256": "7caafc1094ff4e9dcc6b17c77a86a12f53dc914c2cfe24f744a66174863e1852"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    },
+    "candidate": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 626219,
+          "sha256": "f2fb928ba2c311ffa810307b3157da0c12b6617c3653b0df318d3c1055350e8f"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 173739,
+          "sha256": "8d2e6180ba6a34766ac12e0d109e348c6bd345c2d549cd7861c2a10b038740ea"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46484,
+          "sha256": "a604dbff16d3be0f0d24cf48753404b42fe25f70fbd1393dde4934871446a420"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5465881,
+          "sha256": "0e7e3e9f305be937307fd1c531c2270f5e6c0ff78b4d4f3a473dccd243186a0c"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "abb67aacaa70b3cd2c5675f3c716c1d9133127400a16fe2e1922aea916678c20"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "5e08586a10f0b0c9e4354438734b392459cd64282ababf7029a48246f6da6d47"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1675029,
+          "sha256": "7216cb9019a8db40a177990f4ae6034cfe3d4f47aa598d221c4675df401082ce"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "89b6f1313f5f75e784ba46eb6153421a69a50d9167022483805d902a3396ff12"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10550816,
+          "sha256": "d44938c8f2bade20d186c04df43f6dbd2f0f869042ea3d1d96861ae4798c9455"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    }
+  },
+  "captures": {
+    "baseline": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "1d9f75c605dce3283caf843499fc126b1629af8d",
+      "sourceTree": "4dfd81b5e83cce2d42880c82808eb7d40623bbc8",
+      "buildIdentitySha256": "f7433caf22800dfb27319ab6041356d4088ca99349792e4357342e80cb6e2a2d",
+      "manifestSha256": "eb9070ff7fe7697a4ff98cf31c3c04ba942ab3961a975f7700792c8c435f4e91",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "paragraph-text-justify-plain",
+          "inputSha256": "58d8ca1320e9b3bbafb5b99454ba1aea2c9d92b75876356e232b833d6d3e6d90",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "2ba0dd01a0e39c31ec2375a7055ea34ab6a1d2e4414285c974d80aa82cab0378",
+          "renderReportSha256": "f23685d62a101f512568e43259c8a3969642bbb789f9dc1bee6c7fabb72d6f34",
+          "htmlSha256": "cbb1fc54644e0a9c04d05c767cb374d646be7618c87412813356f05d2e0fabc6",
+          "htmlFactsSha256": "5454ff9e2f7f821854c2a5f7fcd176945bd6ba3bce4941e56347825766f1a056"
+        },
+        {
+          "id": "paragraph-text-justify-bold",
+          "inputSha256": "dd5579574105517481bd78924ca9e20a810cadd3e85f6dae9384e4f9925c5db8",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "c7604e007ce312ad2b2a5df2dff60843526a862167b171dadb4f3112ce093fc8",
+          "renderReportSha256": "ec1c47da6e19d2b7b10fe241e507fce8cef4510364e545dbb66303aa4909dec7",
+          "htmlSha256": "887eb8adcce4209d1a8e0d13f326f4cbcaf6ca32bcde9e2fcf18e668072636d1",
+          "htmlFactsSha256": "a31fcccf0f89cb6d79888038ee43557e27deff2cfb9dbb25e4f7aa27a472cf64"
+        },
+        {
+          "id": "paragraph-text-justify-table",
+          "inputSha256": "778aa428404f340abae4189dd0ebc032d582aae3d5ca7acb300942afd0f26a29",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "07469193cdaa1de6291d2450a4b43c75bfbff04611152ceccdd0a0577e74ee43",
+          "renderReportSha256": "ead6dd713e78bc8462f4679ca4a931655f56df192c5e67e9083b790733686346",
+          "htmlSha256": "a3bcef4a25f4613b184e9d03400946180068c811ab016b68469987e7f0ea4707",
+          "htmlFactsSha256": "c1ddf356bd670911edfaa054292339f48446012679d6237f66bc02b806d61435"
+        },
+        {
+          "id": "paragraph-text-justify-list",
+          "inputSha256": "9bcea79619966b40bad6f5affe1b54880f9e098acde6c7c56095f296b0f8d180",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "81dec7261da475320accd15d82189682f6d723c5101d80d0c453c48b623fc34a",
+          "renderReportSha256": "640984965192aaa398e7ee90df61f1f6105923d0e9957f1df8b615c3582729e9",
+          "htmlSha256": "0526f8c695629de5c0619a197018e2ec02904bee201f024e9ff9d8ea30ebc251",
+          "htmlFactsSha256": "24e287c00072860b373be44d7eae78680faef4596d956eb627fb729672e71baf"
+        },
+        {
+          "id": "paragraph-text-justify-link",
+          "inputSha256": "a37f02c418fa57807671493ac187085e60bbacd828a770905af25c7224f48ec9",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "a407626a358c3f54ec9f1e8b2a430c043660212c2e572c6a570ab5617d20144f",
+          "renderReportSha256": "418b054b710f3148792cf8beb5118e43c72f701ebacc350965035f495c9a0925",
+          "htmlSha256": "4a63e588d3faf45a0c0604ae2d833fcf4280e16f2ee1bfd04e4ff0d246b25b4e",
+          "htmlFactsSha256": "7b7d52cef75cba1583cf36f67111edb4353c27e5587132157c077320fbf8672e"
+        },
+        {
+          "id": "paragraph-text-kern-plain",
+          "inputSha256": "97df6eee491364a4f5a57e5326acc4d768ad8cf6b3aa9c746499ad23c2cba44a",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "d8e76cd47d1eb7e01b414ef73731dff12a4ad99d7f4ceca46db5f9f1d51fdb12",
+          "renderReportSha256": "514ddaaa9978f337eab8a799b39e294abf86a0614363b2676ac8fd87cc7a4196",
+          "htmlSha256": "68a591ca2ed2e08f1f5caf7844a755d3f820dab0b00caa65c044996923df509b",
+          "htmlFactsSha256": "8be0331cb60436e7f26448cc0026fc83f21843d69e7344516a25b9f236371558"
+        },
+        {
+          "id": "paragraph-text-kern-bold",
+          "inputSha256": "a019e63120a8deab12944f822f559254332ed90feaa0e081b42a85d9e37b4b02",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "185900bbcc29ff50584f316a80499d3ae5d2a76b1623b1a3282e8e0f2f958f66",
+          "renderReportSha256": "8636eea45d3fdb53615ef8e0a5b2cf31eca24be075e71f51e8747b168e7e953d",
+          "htmlSha256": "1a70f2fa0f4fe2d1325b90a07b24b65273b883905d33bb2b8942a7e4c335c600",
+          "htmlFactsSha256": "f5244be672785531cec4ec3bf3e1e3d66338874f542ef8d60b75e1dcf76c37ec"
+        },
+        {
+          "id": "paragraph-text-kern-table",
+          "inputSha256": "e7f05a798e23d698088f37196061e62050d029cd2a1189126cc183d2316f03e1",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "57973b5da1bedb957ddaec1abd9b622c0e67cde9c19026b73aa3cb1a357e98a2",
+          "renderReportSha256": "a75778281041b93ccb06d4f8f9ccb24f5e39607c037ba77c6b077cd9cb4fdfb2",
+          "htmlSha256": "e70754cee542eef20dd169d20438b63a6f15f46102d859bc6431aee1ecc93711",
+          "htmlFactsSha256": "6a7d852034e4e01d3377b66dc7a1d6b0dbdd36e33e32da5c6d24b762479b024d"
+        },
+        {
+          "id": "paragraph-text-kern-list",
+          "inputSha256": "4e9e18aa05ebed7d1785e4831cf4d26b0d3bcaea701f3f06d1dcaee6c81f7e29",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "9674b43a40ed18858a3b2fef77005cdc6fb940e55fec22d93ed32b4720464c02",
+          "renderReportSha256": "0148f29431883e80f93653b5547e0c8801811d11458b0c39469f820ce86dc785",
+          "htmlSha256": "c0dccc613978d4e533df1201bafbe7c52eef370416722500636f93ffc9abeb03",
+          "htmlFactsSha256": "1b5c247dd4b4a79529a77b5bd2ae7ecbaa975d2fda808832585e3988c45466cb"
+        },
+        {
+          "id": "paragraph-text-kern-link",
+          "inputSha256": "5372bb1066dcff3d5234d2841deeb63d213f9461f4f99f84d43dc9ec5f48c4b5",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "a87f4898599967b7843fedd385e414488a362c34144a094b886ab06247cf3549",
+          "renderReportSha256": "8094486e9d9c88ee683f173d168f8c973b7fd79460c5b899448885c271d35cd3",
+          "htmlSha256": "b741792195688ea8809035bccd6b6cd073fdd2ea6fd9d28613c19658f19a8e6e",
+          "htmlFactsSha256": "3729fb25a599bf05e03070c130619ff05251053f8474ec7b29565c6c08240965"
+        },
+        {
+          "id": "paragraph-text-kern-bold-run-16",
+          "inputSha256": "e03d2fbe5cbf234e8d9f913fb4530a0ceab8754055a72f1ddcc4d66a475c2841",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "a6322998ade0a7df484cf7a669b1605ccc07c4ebdcb42e0f17194bc1d83bd345",
+          "renderReportSha256": "b64827e56168e2a0e6fdc61bf2409ea9222b1bbae47990df53709db4e7eb493a",
+          "htmlSha256": "b4a80b40b65db30431c7642f4445e68d8760fdf8475959870763c82511c6c5ab",
+          "htmlFactsSha256": "0ea72d14c267488f0eaf6c9f88b88a2845282e3c78ab42467c869879ce0e04fa"
+        },
+        {
+          "id": "paragraph-text-kern-bold-run-28",
+          "inputSha256": "e79539c7ce2a71a3836316738fe6df8d6c0ed33e377a4bb1d4dd3854878bb00e",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "47b447570bbb6e020b0d0f54cac0a318683e284b0b2b0ded9967c34082bb3c7e",
+          "renderReportSha256": "c3f09f6241c65b00a2fa44f360557da72c3c5334f820556d30084be861544a99",
+          "htmlSha256": "7399ba50d45f44e02575b3a26f945d41a86cd10b528b06eed97d3d61b3fd1c0b",
+          "htmlFactsSha256": "b2280cfc7659e142e457cfa34351525f0691e2a858cfe653fe0ae25f73feba58"
+        },
+        {
+          "id": "paragraph-text-kern-bold-defaults-16",
+          "inputSha256": "6ce4bda8173098628a79ac46c5a35701d11a3a166ddaf28f1c0cb61d05bcfa39",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "fb22edd15e143a43cc31912a112a2dc0b1723e56d73f429e8b14dca7e7587668",
+          "renderReportSha256": "c99200eb6c430e733fbfb0f4a3c62decd606e0039cca379818686614d5d56af6",
+          "htmlSha256": "72506ef64b987cbffd394dccbb1a2500940bad4a4d651b3df03a03dbcc2f12b6",
+          "htmlFactsSha256": "25cccee009392125f85b79548f669dedf3acfe72ff7435e248e7a2549daa2683"
+        },
+        {
+          "id": "paragraph-text-kern-bold-defaults-28",
+          "inputSha256": "a2d332d4e9a2ba4f3b355f66f28ac4c4ff5d289eeaf928ec69e311338a180745",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "33dec0a7b7cae1bbafc4638550ba73354b6561f3c749752b3981b8e7a598cf37",
+          "renderReportSha256": "709afb76787eeb270a611396653adfd6313b318c63dd1fa66320db5cf6e3ebf5",
+          "htmlSha256": "a5166102167841b57acaec5cd05d29e55a8e1eda76a1f4cf0781ecf32bd14a0d",
+          "htmlFactsSha256": "28ad2aee1c277d530c0841df784c6d096b5a6191787ffd4321afaa1d5cf47828"
+        },
+        {
+          "id": "paragraph-text-kern-bold-style-16",
+          "inputSha256": "48d402e19f9d1ec92859b62b2a658a17b3e3e2bbe3205d2ed91d199dfb66c363",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "bb6bac5399fe106bd99fcec7f3589d74f48c1f3278d5f225a803bff6d75a5f29",
+          "renderReportSha256": "09ef9076bb0c69aca7237779d9021bcd3433a531ff14f0e00c0035a1ae23a076",
+          "htmlSha256": "72506ef64b987cbffd394dccbb1a2500940bad4a4d651b3df03a03dbcc2f12b6",
+          "htmlFactsSha256": "25cccee009392125f85b79548f669dedf3acfe72ff7435e248e7a2549daa2683"
+        },
+        {
+          "id": "paragraph-text-kern-bold-style-28",
+          "inputSha256": "644a4756f2a8fec28388ead8ae92cab62237b5acb358b94ad52baa56def8e0a5",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "a2218c88fcff8d0d75d95c9902d7036368308a57768c8d43d594e34ce9d5b65e",
+          "renderReportSha256": "de91a173a998f9cfb3ecdd99f7a151dfe4a2427e10758e8fc09bfe9ebf94540a",
+          "htmlSha256": "a5166102167841b57acaec5cd05d29e55a8e1eda76a1f4cf0781ecf32bd14a0d",
+          "htmlFactsSha256": "28ad2aee1c277d530c0841df784c6d096b5a6191787ffd4321afaa1d5cf47828"
+        }
+      ],
+      "htmlInspectorSha256": "87805e278400914cd87a2fe8e89c498748b7f45eecd5ca432b9c2be2d95b4cbb"
+    },
+    "candidate": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "fdaf268d543cbf9de45467022c9f2a4d09790d60",
+      "sourceTree": "c77ba2652a460b941e829abdc1287a2b6396f4fe",
+      "buildIdentitySha256": "5eed9e089e3035bd2f51a9553c10e4b5a41549e5ae419a7a43d6c2ffe41f1ce2",
+      "manifestSha256": "eb9070ff7fe7697a4ff98cf31c3c04ba942ab3961a975f7700792c8c435f4e91",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "paragraph-text-justify-plain",
+          "inputSha256": "58d8ca1320e9b3bbafb5b99454ba1aea2c9d92b75876356e232b833d6d3e6d90",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "347696ef7fb6ed9278aafb994a9ce11c93052acc33999bf64073a820b890b17b",
+          "renderReportSha256": "6ce20df90ccdd1bc5d322c834c8b5d50cd6162f52f2e7fa78de4701576ea45c4",
+          "htmlSha256": "cbb1fc54644e0a9c04d05c767cb374d646be7618c87412813356f05d2e0fabc6",
+          "htmlFactsSha256": "5454ff9e2f7f821854c2a5f7fcd176945bd6ba3bce4941e56347825766f1a056"
+        },
+        {
+          "id": "paragraph-text-justify-bold",
+          "inputSha256": "dd5579574105517481bd78924ca9e20a810cadd3e85f6dae9384e4f9925c5db8",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "53831e549268863b7d9e291711f3382fe01a215de68e21e237e7260b3b12090e",
+          "renderReportSha256": "f84750014deb2196347d573b1867c524a08cf710a9469dfe2babceb695131867",
+          "htmlSha256": "2a82278e7a7ba95cc7574bfe68b9650f9990be0f55b763a4fb5f46c2d89b42e9",
+          "htmlFactsSha256": "3c8c14a88adcee56ef40fecc915e0015a5cc447f294f3ea395d3ca46fb6be775"
+        },
+        {
+          "id": "paragraph-text-justify-table",
+          "inputSha256": "778aa428404f340abae4189dd0ebc032d582aae3d5ca7acb300942afd0f26a29",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "b2316ae9becbea74d1add92543a2a05755ab35c640a69cdc8969ef25ff67d215",
+          "renderReportSha256": "d62a5ecefe676563a7679d74262e318f7fb1deb34c72446793aef8cd66b1ec42",
+          "htmlSha256": "6a6344519648258a4b0a770abb2c08509704f55dd1a820b4569bb2b4d24fccbe",
+          "htmlFactsSha256": "b0b1ec9838b68d7a5160503be0c84b264701ba55a3bc0d156565898212669d28"
+        },
+        {
+          "id": "paragraph-text-justify-list",
+          "inputSha256": "9bcea79619966b40bad6f5affe1b54880f9e098acde6c7c56095f296b0f8d180",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "c9bc14a7c4b6cd603b868fb1b4500b9ba9d4c80c4a1375ec09c03a92240573a0",
+          "renderReportSha256": "826fd13070671f165ae573419777bd06aaa2d1a15e4da14ef640c459149d2662",
+          "htmlSha256": "dc4caf0a0f7b4127fa96123c2e9fa89243ca09c0ba75b0d0f77db83d8fd7c9b5",
+          "htmlFactsSha256": "9aa368937c0ca6920bf6790a78170453fdec8dcc1772097a42ba182c52fce08e"
+        },
+        {
+          "id": "paragraph-text-justify-link",
+          "inputSha256": "a37f02c418fa57807671493ac187085e60bbacd828a770905af25c7224f48ec9",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "e171ff9560fff2593b3612321875f5362750116743e0d17ae4d5cbdc963d9d35",
+          "renderReportSha256": "7ba92db5b05b94697ecfa03d8061534d20fe83d4bac80a1a06d955cad5347576",
+          "htmlSha256": "320e479b13d98826b665ff6235d1d1352bc2da121f0ad6c7a30d9f258a099432",
+          "htmlFactsSha256": "c3cd8cb35b3edfe4c3bcad9b926c826bb4adebde76bf09e5187063ec943ef783"
+        },
+        {
+          "id": "paragraph-text-kern-plain",
+          "inputSha256": "97df6eee491364a4f5a57e5326acc4d768ad8cf6b3aa9c746499ad23c2cba44a",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "bd58fc45e8ffa91710929f897b2c83aad38b71a487ab1d76ce435e4ec40e911f",
+          "renderReportSha256": "94587f66bfb233d8ffee3e81647dcdee9a6dd78f815dd5e2d3bf2ebea29f7e00",
+          "htmlSha256": "68a591ca2ed2e08f1f5caf7844a755d3f820dab0b00caa65c044996923df509b",
+          "htmlFactsSha256": "8be0331cb60436e7f26448cc0026fc83f21843d69e7344516a25b9f236371558"
+        },
+        {
+          "id": "paragraph-text-kern-bold",
+          "inputSha256": "a019e63120a8deab12944f822f559254332ed90feaa0e081b42a85d9e37b4b02",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "9d16f33af3213b58da0153415e30e8452001c797611592b7f2cad01782cf7099",
+          "renderReportSha256": "94c08c2b6d5b70fa84c672dc65cfd6c20462e36b5e92f87c191776c626693e62",
+          "htmlSha256": "e05f26fa836527ef93137a6e2a291c60a7d2ea0e686262eb6cc6baf78ab1cb5a",
+          "htmlFactsSha256": "0befe266def50b08e02278b730a864a0525fe27c54813613aa18a7b92858ba2e"
+        },
+        {
+          "id": "paragraph-text-kern-table",
+          "inputSha256": "e7f05a798e23d698088f37196061e62050d029cd2a1189126cc183d2316f03e1",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "e2becf2b450d50da1bb418e13c2e6dc589ccf4a8b2bdf665fe7edf9d716824f3",
+          "renderReportSha256": "d67e64d5305d0c979143a3bdb5076966c9fbb274ed2f362c3c0e8268d319d90f",
+          "htmlSha256": "c5cbec11e65c22d942fab0a2076fe9a95c72887ec9408c565b351e0e8fb7bad9",
+          "htmlFactsSha256": "4e65682bc2a8e2df83858c5d8b124a22bc80beee26920cb7e8fcf69270358c64"
+        },
+        {
+          "id": "paragraph-text-kern-list",
+          "inputSha256": "4e9e18aa05ebed7d1785e4831cf4d26b0d3bcaea701f3f06d1dcaee6c81f7e29",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "736a3a9201dfc11477ddc60fac474ae5d2464c8d4c51e5cd060d1f9a66aa504b",
+          "renderReportSha256": "f55d2a9f9583da4912eeb07da2d74fdf7fde5a38363f4e1aec4aedc97864fed9",
+          "htmlSha256": "02f18620da7c1312c6829152d5137bad8ac1ede3e9b16d7912879a6f085eac12",
+          "htmlFactsSha256": "bdbb5f7a6f294edfa0f06e03cdfcf14c51a1110dd91a1f28e594c704c1864626"
+        },
+        {
+          "id": "paragraph-text-kern-link",
+          "inputSha256": "5372bb1066dcff3d5234d2841deeb63d213f9461f4f99f84d43dc9ec5f48c4b5",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "d9e2fde82bb6b1ae87ff4b680b1bd998957e0fac34e18a22b8f22f3c66f863f9",
+          "renderReportSha256": "bcff2262053db3ac606c4d342084bf8d79d4f16353dbcec0f64f370719ffb614",
+          "htmlSha256": "b3ac46952c1468f4fcbd736f4955899dcbca7c18ab90c0594feb75baca27619f",
+          "htmlFactsSha256": "4cb47bcbe796df692afc94958c34d042b36e162f366a833291479a012bd5ccca"
+        },
+        {
+          "id": "paragraph-text-kern-bold-run-16",
+          "inputSha256": "e03d2fbe5cbf234e8d9f913fb4530a0ceab8754055a72f1ddcc4d66a475c2841",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "4f7313fe6ca6a0d5afbcb940cfbbc457c7c922786643acff34fa6d65848d9628",
+          "renderReportSha256": "0bc456f218a5e864b6b0eae7c5b243e08fdfca482fa626e75b72570fbf78041d",
+          "htmlSha256": "407529938b3d5e57ac7b76c120e21f8bdf6f51204f9cb265dde40e1838bd8405",
+          "htmlFactsSha256": "dbc3e74d0a1904a3e5334c5e4f4a0e60c2eb15f976be112d520926313cf71839"
+        },
+        {
+          "id": "paragraph-text-kern-bold-run-28",
+          "inputSha256": "e79539c7ce2a71a3836316738fe6df8d6c0ed33e377a4bb1d4dd3854878bb00e",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "7b262fff5a6b5d0592e4a8cf45c0251a324707dd5db4735152eaddc3d4265bbe",
+          "renderReportSha256": "d84cbc80365f4dfd20169779efc90394e817212693fe8334b44bc1ae8925a919",
+          "htmlSha256": "6235f887e61f9ac47bc56411533b5351fecdf0a4d19d5abfd779dfb1e265d7ba",
+          "htmlFactsSha256": "4bd2ac0b9b7302592f02ec67596fa427287ed8efd86e236e2a1dc494d8a3b5de"
+        },
+        {
+          "id": "paragraph-text-kern-bold-defaults-16",
+          "inputSha256": "6ce4bda8173098628a79ac46c5a35701d11a3a166ddaf28f1c0cb61d05bcfa39",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "455b692e1732ea77a3b551eff7fdabc6d4eb36f983e6cea5f14fd82389d4fc6f",
+          "renderReportSha256": "ecb4f22bf5d5de0a5d23b64e91523e2be3d75d70ee3709663805f68e29d3fe5f",
+          "htmlSha256": "343d2dad34a105f93a4b18c9f32a3f2091018fc5d527c799bf333d104656de6a",
+          "htmlFactsSha256": "197ec87bab214ab57b21bbb9ab933e952f2bf983d22ae575edad7c32c0d15aa5"
+        },
+        {
+          "id": "paragraph-text-kern-bold-defaults-28",
+          "inputSha256": "a2d332d4e9a2ba4f3b355f66f28ac4c4ff5d289eeaf928ec69e311338a180745",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "38843fe629f6464a5de621246399a81e09d86f2a9f001eaa525e6ecb83b4bd1f",
+          "renderReportSha256": "e039c3030a793e8433ed41f29950420275088c34630e720d189e9772db3e39e6",
+          "htmlSha256": "7101a7022d40f638f349d2a640b2cc22b66fc031175a00b1384331099ebd3e7a",
+          "htmlFactsSha256": "321573d75dbb7b27e5b211af2671d5b6d7a9f96725f53489b546f137577a1bd5"
+        },
+        {
+          "id": "paragraph-text-kern-bold-style-16",
+          "inputSha256": "48d402e19f9d1ec92859b62b2a658a17b3e3e2bbe3205d2ed91d199dfb66c363",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "e25e7a340cc560d5a8b9ea4206e367321729fff7c4dd4a28b6326a5ea00d250b",
+          "renderReportSha256": "4e0c2751ff100d7f62e399789ee876e233ccb2207b308ccbebd80f0fd8c0f4b9",
+          "htmlSha256": "343d2dad34a105f93a4b18c9f32a3f2091018fc5d527c799bf333d104656de6a",
+          "htmlFactsSha256": "197ec87bab214ab57b21bbb9ab933e952f2bf983d22ae575edad7c32c0d15aa5"
+        },
+        {
+          "id": "paragraph-text-kern-bold-style-28",
+          "inputSha256": "644a4756f2a8fec28388ead8ae92cab62237b5acb358b94ad52baa56def8e0a5",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "ddb2adf0a84f4caea81f5c47956c88083b3926d84c8f1022482a3c3db21a4cfe",
+          "renderReportSha256": "03a4725b259e1cb5e1357aae22790213e59613439b1aaf683640b6c051658ad1",
+          "htmlSha256": "7101a7022d40f638f349d2a640b2cc22b66fc031175a00b1384331099ebd3e7a",
+          "htmlFactsSha256": "321573d75dbb7b27e5b211af2671d5b6d7a9f96725f53489b546f137577a1bd5"
+        }
+      ],
+      "htmlInspectorSha256": "87805e278400914cd87a2fe8e89c498748b7f45eecd5ca432b9c2be2d95b4cbb"
+    }
+  },
+  "referenceBundleSha256": "0aa7700868267f93529a20982f8f90c5649eea96a1157b6d858f78882bc9c83e",
+  "referenceBundle": {
+    "file": "reference-bundle.json.gz",
+    "sha256": "4568ec442ac20306ca0baacdf40c0e2f6e003286afb2110a4dca9b458f928a24",
+    "jsonSha256": "0aa7700868267f93529a20982f8f90c5649eea96a1157b6d858f78882bc9c83e"
+  },
+  "referenceEnvironment": {
+    "fonts": {
+      "LiberationSerif-Bold.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+      },
+      "LiberationSerif-BoldItalic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+      },
+      "LiberationSerif-Italic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+      },
+      "LiberationSerif-Regular.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+      }
+    },
+    "tools": {
+      "pdffonts": {
+        "sha256": "de0a6d649710c2ebc226656b08c70814019a93f58889f79bf1dac726a131beda",
+        "version": "pdffonts version 25.03.0"
+      },
+      "pdftocairo": {
+        "sha256": "6f56c7c8c5b015354ebed053d4b52e14b43611c9c86236562bfd112827108dc5",
+        "version": "pdftocairo version 25.03.0"
+      },
+      "pdftoppm": {
+        "sha256": "6c315e59db2a0829ecdfb6c791ad3f56bc9bd508266d20adc22238df447a74a3",
+        "version": "pdftoppm version 25.03.0"
+      },
+      "pdftotext": {
+        "sha256": "451784e28a4593637573e534d9be4c4487a3cccffae22a71e93162faa84de23c",
+        "version": "pdftotext version 25.03.0"
+      },
+      "qpdf": {
+        "sha256": "0d0462ea848601a652b666e83a07a095bb0c4d69d831beb6f94ea8e6e008f34c",
+        "version": "qpdf version 12.2.0"
+      }
+    }
+  },
+  "schema": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "documents": {
+      "fixtures/paragraph-text-justify-bold.docx": [],
+      "fixtures/paragraph-text-justify-link.docx": [],
+      "fixtures/paragraph-text-justify-list.docx": [],
+      "fixtures/paragraph-text-justify-plain.docx": [],
+      "fixtures/paragraph-text-justify-table.docx": [],
+      "fixtures/paragraph-text-kern-bold-defaults-16.docx": [],
+      "fixtures/paragraph-text-kern-bold-defaults-28.docx": [],
+      "fixtures/paragraph-text-kern-bold-run-16.docx": [],
+      "fixtures/paragraph-text-kern-bold-run-28.docx": [],
+      "fixtures/paragraph-text-kern-bold-style-16.docx": [],
+      "fixtures/paragraph-text-kern-bold-style-28.docx": [],
+      "fixtures/paragraph-text-kern-bold.docx": [],
+      "fixtures/paragraph-text-kern-link.docx": [],
+      "fixtures/paragraph-text-kern-list.docx": [],
+      "fixtures/paragraph-text-kern-plain.docx": [],
+      "fixtures/paragraph-text-kern-table.docx": []
+    }
+  },
+  "cases": [
+    {
+      "id": "paragraph-text-justify-plain",
+      "inputSha256": "58d8ca1320e9b3bbafb5b99454ba1aea2c9d92b75876356e232b833d6d3e6d90",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "paragraph-text-justify-plain-baseline-report.json.gz",
+            "sha256": "111db608b020eee559dc49b621cba50d104060a469cc523fefb42d8afdc699a5",
+            "jsonSha256": "f23685d62a101f512568e43259c8a3969642bbb789f9dc1bee6c7fabb72d6f34"
+          },
+          "htmlSha256": "cbb1fc54644e0a9c04d05c767cb374d646be7618c87412813356f05d2e0fabc6",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "Our",
+            "quiet",
+            "harbor",
+            "crew",
+            "checks",
+            "every",
+            "lantern",
+            "before",
+            "an",
+            "evening",
+            "ferry",
+            "reaches",
+            "its",
+            "northern",
+            "landing"
+          ],
+          "pdf": "pdf/paragraph-text-justify-plain-baseline.pdf",
+          "pdfSha256": "2ba0dd01a0e39c31ec2375a7055ea34ab6a1d2e4414285c974d80aa82cab0378",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-justify-plain-baseline-inspection.json.gz",
+            "sha256": "009224a3be7aa0dd76840b341df2d2c09519b27e80061f9d2ba014c49a03f59f",
+            "jsonSha256": "f4f099783eefde4da54456261a45e0fa2bf2fa44636bd407eec7a4ad6960a368"
+          },
+          "pageRasterSha256": "fbe1812b1169d70b7af00f21d675033afbe264d7064aa36acc10faff069fb4f5"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "Our",
+            "quiet",
+            "harbor",
+            "crew",
+            "checks",
+            "every",
+            "lantern",
+            "before",
+            "an",
+            "evening",
+            "ferry",
+            "reaches",
+            "its",
+            "northern",
+            "landing"
+          ],
+          "pdf": "pdf/paragraph-text-justify-plain-reference.pdf",
+          "pdfSha256": "868ebe9fcdea21dcf6f3b5ec02195d065a24952d2658d0f7c483ef0f6ea261dd",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-justify-plain-reference-inspection.json.gz",
+            "sha256": "88a8b64a0e740cac5e832b02ad861a5bd824f06747ba1ac3d249c7eee644b569",
+            "jsonSha256": "4433e879dbfc88ebd06be36c0960d83d93e7ac558640343e23ed754de60728d3"
+          },
+          "pageRasterSha256": "2dd80de630d4f3661a8e837dca9c269db4a5cf62a19931bdc1ece62994b73b66"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "paragraph-text-justify-plain-candidate-report.json.gz",
+            "sha256": "47e0edc9119f5e4780b7de4e0c48ccac5071d7eea78411254bd01eb1151d7990",
+            "jsonSha256": "6ce20df90ccdd1bc5d322c834c8b5d50cd6162f52f2e7fa78de4701576ea45c4"
+          },
+          "htmlSha256": "cbb1fc54644e0a9c04d05c767cb374d646be7618c87412813356f05d2e0fabc6",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "Our",
+            "quiet",
+            "harbor",
+            "crew",
+            "checks",
+            "every",
+            "lantern",
+            "before",
+            "an",
+            "evening",
+            "ferry",
+            "reaches",
+            "its",
+            "northern",
+            "landing"
+          ],
+          "pdf": "pdf/paragraph-text-justify-plain-candidate.pdf",
+          "pdfSha256": "347696ef7fb6ed9278aafb994a9ce11c93052acc33999bf64073a820b890b17b",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-justify-plain-candidate-inspection.json.gz",
+            "sha256": "009224a3be7aa0dd76840b341df2d2c09519b27e80061f9d2ba014c49a03f59f",
+            "jsonSha256": "f4f099783eefde4da54456261a45e0fa2bf2fa44636bd407eec7a4ad6960a368"
+          },
+          "pageRasterSha256": "fbe1812b1169d70b7af00f21d675033afbe264d7064aa36acc10faff069fb4f5"
+        }
+      ],
+      "screenshot": {
+        "file": "paragraph-text-justify-plain.png",
+        "sha256": "a0f785c20dbe250c01498fb8a4a0799101d02bcc2771ced2553a9ad5a0e1e0ee"
+      }
+    },
+    {
+      "id": "paragraph-text-justify-bold",
+      "inputSha256": "dd5579574105517481bd78924ca9e20a810cadd3e85f6dae9384e4f9925c5db8",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "paragraph-text-justify-bold-baseline-report.json.gz",
+            "sha256": "bfc8ffe964b654a3a87fa279585d1c27364b44c3b0375f00ef4732a01557218a",
+            "jsonSha256": "ec1c47da6e19d2b7b10fe241e507fce8cef4510364e545dbb66303aa4909dec7"
+          },
+          "htmlSha256": "887eb8adcce4209d1a8e0d13f326f4cbcaf6ca32bcde9e2fcf18e668072636d1",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "Our",
+            "quiet",
+            "harbor",
+            "crew",
+            "checks",
+            "every",
+            "lantern",
+            "before",
+            "an",
+            "evening",
+            "ferry",
+            "reaches",
+            "its",
+            "northern"
+          ],
+          "pdf": "pdf/paragraph-text-justify-bold-baseline.pdf",
+          "pdfSha256": "c7604e007ce312ad2b2a5df2dff60843526a862167b171dadb4f3112ce093fc8",
+          "mandatoryFailures": [
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "paragraph-text-justify-bold-baseline-inspection.json.gz",
+            "sha256": "e7ec78b3d64ce8e0ab36d08c1a977f332cf126b6f233c5939cb81efe42cbe50e",
+            "jsonSha256": "aebdd4be048f9ce2c1b94057d3b7b8f35c12bd9fd5aca4536c91f73aeef0c9da"
+          },
+          "pageRasterSha256": "121fef162fd94efb7f665b5538bdd7da8641f5197d1418346ae33c6b6703de32"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "Our",
+            "quiet",
+            "harbor",
+            "crew",
+            "checks",
+            "every",
+            "lantern",
+            "before",
+            "an",
+            "evening",
+            "ferry",
+            "reaches",
+            "its",
+            "northern",
+            "landing"
+          ],
+          "pdf": "pdf/paragraph-text-justify-bold-reference.pdf",
+          "pdfSha256": "cb4672444aecb7121ee3a103c478655cfcb75bf0505505b75dbd1b7edac1226e",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-justify-bold-reference-inspection.json.gz",
+            "sha256": "1b016f36c9c2ac684597beeb560c64d6659fcafbf42ca51408b27ef616f10b66",
+            "jsonSha256": "30b20f68f2c35e1172e996683a72f4405d9586c81aef7ebe0bb8def75df1fb31"
+          },
+          "pageRasterSha256": "30a9bd3ea33839899bd20fd81095a740073bde0265b666b15571946c3d240482"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "paragraph-text-justify-bold-candidate-report.json.gz",
+            "sha256": "33346d6d0661f40ab00b3a98d65e9782f228f4138c99fea2f6e97264ef8f82c3",
+            "jsonSha256": "f84750014deb2196347d573b1867c524a08cf710a9469dfe2babceb695131867"
+          },
+          "htmlSha256": "2a82278e7a7ba95cc7574bfe68b9650f9990be0f55b763a4fb5f46c2d89b42e9",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "Our",
+            "quiet",
+            "harbor",
+            "crew",
+            "checks",
+            "every",
+            "lantern",
+            "before",
+            "an",
+            "evening",
+            "ferry",
+            "reaches",
+            "its",
+            "northern",
+            "landing"
+          ],
+          "pdf": "pdf/paragraph-text-justify-bold-candidate.pdf",
+          "pdfSha256": "53831e549268863b7d9e291711f3382fe01a215de68e21e237e7260b3b12090e",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-justify-bold-candidate-inspection.json.gz",
+            "sha256": "33272dff4a8e0c08d7c499d5b2279a921502d047ad0de8ac8a6cd851630c7ed5",
+            "jsonSha256": "ad002197836c966d9adc786caa061c361a27b497726a84f692fe031a3594245e"
+          },
+          "pageRasterSha256": "dcb457005472830500ab4249aa9489b2791a02602fd8be8225de7a80c0152bc2"
+        }
+      ],
+      "screenshot": {
+        "file": "paragraph-text-justify-bold.png",
+        "sha256": "8ce9a77b65435927fbd0dba6aada4d4df76ffd5400a8f96daca9fc7ce4ede75f"
+      }
+    },
+    {
+      "id": "paragraph-text-justify-table",
+      "inputSha256": "778aa428404f340abae4189dd0ebc032d582aae3d5ca7acb300942afd0f26a29",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "paragraph-text-justify-table-baseline-report.json.gz",
+            "sha256": "994654acce8872cf64e3dd14f305b25f5ffc8c343990c830e75b7b7ffa80a102",
+            "jsonSha256": "ead6dd713e78bc8462f4679ca4a931655f56df192c5e67e9083b790733686346"
+          },
+          "htmlSha256": "a3bcef4a25f4613b184e9d03400946180068c811ab016b68469987e7f0ea4707",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "Our",
+            "quiet",
+            "harbor",
+            "crew",
+            "checks",
+            "every",
+            "lantern",
+            "before",
+            "an",
+            "evening",
+            "ferry",
+            "reaches",
+            "its",
+            "northern"
+          ],
+          "pdf": "pdf/paragraph-text-justify-table-baseline.pdf",
+          "pdfSha256": "07469193cdaa1de6291d2450a4b43c75bfbff04611152ceccdd0a0577e74ee43",
+          "mandatoryFailures": [
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "paragraph-text-justify-table-baseline-inspection.json.gz",
+            "sha256": "9b036b513c04591c359f2fc2d96bd49f3aa470bb8e3566986c66eb0a0b0f56b9",
+            "jsonSha256": "72ac031b763009fd9f057726e4e3753e8884b6347e156da8f11263627ff95375"
+          },
+          "pageRasterSha256": "c0fc97a20824c9cf29ec107b1413f336e8aaacce8e71bad3b3d92bbc0761470d"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "Our",
+            "quiet",
+            "harbor",
+            "crew",
+            "checks",
+            "every",
+            "lantern",
+            "before",
+            "an",
+            "evening",
+            "ferry",
+            "reaches",
+            "its",
+            "northern",
+            "landing"
+          ],
+          "pdf": "pdf/paragraph-text-justify-table-reference.pdf",
+          "pdfSha256": "44c056abfe060fa3b1db06fb3b463cc1da0604073d49cc484652f44a414dccec",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-justify-table-reference-inspection.json.gz",
+            "sha256": "0555cdbe50d17716d5826fe33c5d0482418251619c6a0e9baafe9834d3da10d1",
+            "jsonSha256": "bfd7beb0df8f6eaaf7a2bc7fae6b3a058b8dca2a8b93b89ef74a9221286e1c73"
+          },
+          "pageRasterSha256": "301e3b83128ffa68dc3928a6c3acce94add97308f13ac68239022a25df3c9a0f"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "paragraph-text-justify-table-candidate-report.json.gz",
+            "sha256": "abfcffc351e460476c14ca4e9b107471d9b0a2d7421562f62a9a9ff44cc21313",
+            "jsonSha256": "d62a5ecefe676563a7679d74262e318f7fb1deb34c72446793aef8cd66b1ec42"
+          },
+          "htmlSha256": "6a6344519648258a4b0a770abb2c08509704f55dd1a820b4569bb2b4d24fccbe",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "Our",
+            "quiet",
+            "harbor",
+            "crew",
+            "checks",
+            "every",
+            "lantern",
+            "before",
+            "an",
+            "evening",
+            "ferry",
+            "reaches",
+            "its",
+            "northern",
+            "landing"
+          ],
+          "pdf": "pdf/paragraph-text-justify-table-candidate.pdf",
+          "pdfSha256": "b2316ae9becbea74d1add92543a2a05755ab35c640a69cdc8969ef25ff67d215",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-justify-table-candidate-inspection.json.gz",
+            "sha256": "f833ff17288980a7b4a48dbb4a5a3a27fd35b96cfb4cf77420fd25130352a082",
+            "jsonSha256": "0517d4d9cde248f9851b35455ed4cdfac66cc4652784b0fd1a787dc1fe0dbb7d"
+          },
+          "pageRasterSha256": "b624168ab858dfc862fd6653548ea490961cdd8377f7b8493349da504673fbf8"
+        }
+      ],
+      "screenshot": {
+        "file": "paragraph-text-justify-table.png",
+        "sha256": "bc11be9a3b1aaca5ea3d6a79389defba3dcc0a172f2356da4e8cded58dfa16c6"
+      }
+    },
+    {
+      "id": "paragraph-text-justify-list",
+      "inputSha256": "9bcea79619966b40bad6f5affe1b54880f9e098acde6c7c56095f296b0f8d180",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "paragraph-text-justify-list-baseline-report.json.gz",
+            "sha256": "1244a4b4712b78c176502e9e0bf03eae92580dce56bec25628c430416de7c87a",
+            "jsonSha256": "640984965192aaa398e7ee90df61f1f6105923d0e9957f1df8b615c3582729e9"
+          },
+          "htmlSha256": "0526f8c695629de5c0619a197018e2ec02904bee201f024e9ff9d8ea30ebc251",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "Our",
+            "quiet",
+            "harbor",
+            "crew",
+            "checks",
+            "every",
+            "lantern",
+            "before",
+            "an",
+            "evening",
+            "ferry",
+            "reaches",
+            "its",
+            "northern"
+          ],
+          "pdf": "pdf/paragraph-text-justify-list-baseline.pdf",
+          "pdfSha256": "81dec7261da475320accd15d82189682f6d723c5101d80d0c453c48b623fc34a",
+          "mandatoryFailures": [
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "paragraph-text-justify-list-baseline-inspection.json.gz",
+            "sha256": "90cbb70b28726ac9576f82dd4f117c3c88afea02f6fda14052b6fec61f93fdf7",
+            "jsonSha256": "b2a777dfa4714215bc48e0534c9503b0308b749fd870ee6dc8c1de0f30140747"
+          },
+          "pageRasterSha256": "aafec1274dd0271b54ac28589333aab536ccf83c0080884cdc080101c74b9add"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "Our",
+            "quiet",
+            "harbor",
+            "crew",
+            "checks",
+            "every",
+            "lantern",
+            "before",
+            "an",
+            "evening",
+            "ferry",
+            "reaches",
+            "its",
+            "northern",
+            "landing"
+          ],
+          "pdf": "pdf/paragraph-text-justify-list-reference.pdf",
+          "pdfSha256": "768ce032141c9699971d82c8ef31e3d1deb44db2eacf41666d3fdb6be797b4c9",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-justify-list-reference-inspection.json.gz",
+            "sha256": "f5ce1cd0923a488f8513ff2ef5dc2380d281f92335387a658ccb830c072a8287",
+            "jsonSha256": "2329567d7e963ec60740dae9e547e541a234ff4018bfd79ca66d417e7e413e07"
+          },
+          "pageRasterSha256": "b4546669e9227574d64d1a36475cec884035a233a288f85c38dbb93bd599f4e5"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "paragraph-text-justify-list-candidate-report.json.gz",
+            "sha256": "beeadd595699c66dc66ba5105382fecac618ce67de84e5549eda66f7de1a9161",
+            "jsonSha256": "826fd13070671f165ae573419777bd06aaa2d1a15e4da14ef640c459149d2662"
+          },
+          "htmlSha256": "dc4caf0a0f7b4127fa96123c2e9fa89243ca09c0ba75b0d0f77db83d8fd7c9b5",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "Our",
+            "quiet",
+            "harbor",
+            "crew",
+            "checks",
+            "every",
+            "lantern",
+            "before",
+            "an",
+            "evening",
+            "ferry",
+            "reaches",
+            "its",
+            "northern",
+            "landing"
+          ],
+          "pdf": "pdf/paragraph-text-justify-list-candidate.pdf",
+          "pdfSha256": "c9bc14a7c4b6cd603b868fb1b4500b9ba9d4c80c4a1375ec09c03a92240573a0",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-justify-list-candidate-inspection.json.gz",
+            "sha256": "37c6ea8e8063c0bda277b11ecaae5535d9485b4a4d787f83ca930dec5592a1b6",
+            "jsonSha256": "c16ba39d26cf9751fb51514d3dd4a984c82437f1c4541ecaec1e0ba5425d5a71"
+          },
+          "pageRasterSha256": "3d67948191e0f931e5703b7f97137299a1ba0d0d2a8de7d90cb114d2c5bbdcc9"
+        }
+      ],
+      "screenshot": {
+        "file": "paragraph-text-justify-list.png",
+        "sha256": "90a14c1679e441a32e9f8b0a74a429bda5010a37ddd6ea2a005584f98145871f"
+      }
+    },
+    {
+      "id": "paragraph-text-justify-link",
+      "inputSha256": "a37f02c418fa57807671493ac187085e60bbacd828a770905af25c7224f48ec9",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "paragraph-text-justify-link-baseline-report.json.gz",
+            "sha256": "01d90b698cd64580d1478b6b6c669b1b85a9ffeef66f5d8c21a59e47d4bde652",
+            "jsonSha256": "418b054b710f3148792cf8beb5118e43c72f701ebacc350965035f495c9a0925"
+          },
+          "htmlSha256": "4a63e588d3faf45a0c0604ae2d833fcf4280e16f2ee1bfd04e4ff0d246b25b4e",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "Our",
+            "quiet",
+            "harbor",
+            "crew",
+            "checks",
+            "every",
+            "lantern",
+            "before",
+            "an",
+            "evening",
+            "ferry",
+            "reaches",
+            "its",
+            "northern"
+          ],
+          "pdf": "pdf/paragraph-text-justify-link-baseline.pdf",
+          "pdfSha256": "a407626a358c3f54ec9f1e8b2a430c043660212c2e572c6a570ab5617d20144f",
+          "mandatoryFailures": [
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "paragraph-text-justify-link-baseline-inspection.json.gz",
+            "sha256": "80849abdb4f45a25a7cc7547c5765f3e65480527c1c7a3ae03a2bbddd06246fe",
+            "jsonSha256": "622049fab91a8cf3ff74a82c32f2990af59a9abefc32bf5dbd429df32f6510c9"
+          },
+          "pageRasterSha256": "ea0d51036794d8a09634b07018e32c72eb60bb3b2ff9eb1b5ff540cee15e7266"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "Our",
+            "quiet",
+            "harbor",
+            "crew",
+            "checks",
+            "every",
+            "lantern",
+            "before",
+            "an",
+            "evening",
+            "ferry",
+            "reaches",
+            "its",
+            "northern",
+            "landing"
+          ],
+          "pdf": "pdf/paragraph-text-justify-link-reference.pdf",
+          "pdfSha256": "db2a90d2ebfce19b28e56ad1168496de02b5c0f2c1aada8607b5eee9b1f7ab1a",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-justify-link-reference-inspection.json.gz",
+            "sha256": "81990231803bf3d3152238da32e2d0e8a319fee7952a7a8087e8a1714989dfc9",
+            "jsonSha256": "d452cf5c985705b8d874ae879f04083a8ff36ddcb39d7f4b8e977d2b25ef32b1"
+          },
+          "pageRasterSha256": "0ea651f6163bb7debc0f4e366fc86ebf0abc5fc5fea57c6e83bd02dc2d10de1b"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "paragraph-text-justify-link-candidate-report.json.gz",
+            "sha256": "f707e092a99636a53b3829572888fbe481efab6930fc295bd846a6f696c4692e",
+            "jsonSha256": "7ba92db5b05b94697ecfa03d8061534d20fe83d4bac80a1a06d955cad5347576"
+          },
+          "htmlSha256": "320e479b13d98826b665ff6235d1d1352bc2da121f0ad6c7a30d9f258a099432",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "Our",
+            "quiet",
+            "harbor",
+            "crew",
+            "checks",
+            "every",
+            "lantern",
+            "before",
+            "an",
+            "evening",
+            "ferry",
+            "reaches",
+            "its",
+            "northern",
+            "landing"
+          ],
+          "pdf": "pdf/paragraph-text-justify-link-candidate.pdf",
+          "pdfSha256": "e171ff9560fff2593b3612321875f5362750116743e0d17ae4d5cbdc963d9d35",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-justify-link-candidate-inspection.json.gz",
+            "sha256": "18e7d47f0fd4107032bdd408429fc9f461aefbc5bb5039124e2fbf5bac6d827d",
+            "jsonSha256": "66b09e55c160526474cf29faabbc45e2673930a8f168e1c86c1e67d59ebdd5d3"
+          },
+          "pageRasterSha256": "77f5fb1cebd1dcfd0bf806ff913c956c5c63a10996ef4727b1853310991a7a13"
+        }
+      ],
+      "screenshot": {
+        "file": "paragraph-text-justify-link.png",
+        "sha256": "b4059621d746bd33b2f0d916bd023949603c0a6bc96bc8d8ae5aaaa9824bf55d"
+      }
+    },
+    {
+      "id": "paragraph-text-kern-plain",
+      "inputSha256": "97df6eee491364a4f5a57e5326acc4d768ad8cf6b3aa9c746499ad23c2cba44a",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "paragraph-text-kern-plain-baseline-report.json.gz",
+            "sha256": "ee8cea535212ca22ec77942c4b1a609f3ab0cc4af6283381062b21e94ad83f42",
+            "jsonSha256": "514ddaaa9978f337eab8a799b39e294abf86a0614363b2676ac8fd87cc7a4196"
+          },
+          "htmlSha256": "68a591ca2ed2e08f1f5caf7844a755d3f820dab0b00caa65c044996923df509b",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm"
+          ],
+          "pdf": "pdf/paragraph-text-kern-plain-baseline.pdf",
+          "pdfSha256": "d8e76cd47d1eb7e01b414ef73731dff12a4ad99d7f4ceca46db5f9f1d51fdb12",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-plain-baseline-inspection.json.gz",
+            "sha256": "8b5fc214d23a32421e69408c04d3e84b7794cd5f5ee0b9f295c3cf18b155cb5c",
+            "jsonSha256": "bfcc6af4a76c12103cde055c7a068097bfd130db8adf1fab9620d45d64009ae2"
+          },
+          "pageRasterSha256": "f841331e9537d7bebff8aa85f22905e57f19d5aa8f07a5e2ecd9b8d1a2de3588"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm"
+          ],
+          "pdf": "pdf/paragraph-text-kern-plain-reference.pdf",
+          "pdfSha256": "7f5a9d130e0281c961936820a257a51dcc7b236675cb90cee6ef2d5dcb4495c5",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-plain-reference-inspection.json.gz",
+            "sha256": "2d6abb23d8d421fdb721c443836fd95ab665be2ad576935322b70d1c34cda5cc",
+            "jsonSha256": "1f152683e23e8590ac9d835c5d3ba350e5d01ce8237d65b84c395b4ea6107394"
+          },
+          "pageRasterSha256": "ba9b55c688aec5fa34ab1f832837158ab812a808d24ab737c4ea6c45974ce0a5"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "paragraph-text-kern-plain-candidate-report.json.gz",
+            "sha256": "a0a402616a153a127ffafd7500a90289459b60ec76699a41d82f919ee286b71e",
+            "jsonSha256": "94587f66bfb233d8ffee3e81647dcdee9a6dd78f815dd5e2d3bf2ebea29f7e00"
+          },
+          "htmlSha256": "68a591ca2ed2e08f1f5caf7844a755d3f820dab0b00caa65c044996923df509b",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm"
+          ],
+          "pdf": "pdf/paragraph-text-kern-plain-candidate.pdf",
+          "pdfSha256": "bd58fc45e8ffa91710929f897b2c83aad38b71a487ab1d76ce435e4ec40e911f",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-plain-candidate-inspection.json.gz",
+            "sha256": "8b5fc214d23a32421e69408c04d3e84b7794cd5f5ee0b9f295c3cf18b155cb5c",
+            "jsonSha256": "bfcc6af4a76c12103cde055c7a068097bfd130db8adf1fab9620d45d64009ae2"
+          },
+          "pageRasterSha256": "f841331e9537d7bebff8aa85f22905e57f19d5aa8f07a5e2ecd9b8d1a2de3588"
+        }
+      ],
+      "screenshot": {
+        "file": "paragraph-text-kern-plain.png",
+        "sha256": "56b5e1cfb83ba96ba130c5a3213e47030f5054a9f41d00d6554ff7fc8a2d90fd"
+      }
+    },
+    {
+      "id": "paragraph-text-kern-bold",
+      "inputSha256": "a019e63120a8deab12944f822f559254332ed90feaa0e081b42a85d9e37b4b02",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "paragraph-text-kern-bold-baseline-report.json.gz",
+            "sha256": "59d5eac8e7b08d6a3e5ff3c3de3220cf582307eaa34c864821abe5cb28e08fbd",
+            "jsonSha256": "8636eea45d3fdb53615ef8e0a5b2cf31eca24be075e71f51e8747b168e7e953d"
+          },
+          "htmlSha256": "1a70f2fa0f4fe2d1325b90a07b24b65273b883905d33bb2b8942a7e4c335c600",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm",
+            "Water"
+          ],
+          "pdf": "pdf/paragraph-text-kern-bold-baseline.pdf",
+          "pdfSha256": "185900bbcc29ff50584f316a80499d3ae5d2a76b1623b1a3282e8e0f2f958f66",
+          "mandatoryFailures": [
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "paragraph-text-kern-bold-baseline-inspection.json.gz",
+            "sha256": "562bbd7e76146179c2c5b9d5d549aee2fecef4624876256613893fcff4741018",
+            "jsonSha256": "2423e19dfdbd1873559b746f35918b5586def250a5e907ef1433335f27dc4f7d"
+          },
+          "pageRasterSha256": "e325c024dad5dac59b4f31c2b42088f0dd829f7a0cead2ebb6c020f4427748f1"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm"
+          ],
+          "pdf": "pdf/paragraph-text-kern-bold-reference.pdf",
+          "pdfSha256": "76d91dae00641f4d2b3f9afafdd1c849214d23759fa24ee4b3056ca9c853a063",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-bold-reference-inspection.json.gz",
+            "sha256": "0f278983ebc2acb5bed773d372240b02bada134ffd1bc68694e49d8df1163e14",
+            "jsonSha256": "8970aad530142e2b72532d675537268120395ac74b237257797f85d0b9e47ebe"
+          },
+          "pageRasterSha256": "b36ee57ae631f709d92ac597398d3adb9734acdc443e2d769dd7fa35119a1ff9"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "paragraph-text-kern-bold-candidate-report.json.gz",
+            "sha256": "5e20aa9364caae35ecd2ff9f9b85a91fecb99e7021d5aa39e96666d725fdd0f5",
+            "jsonSha256": "94c08c2b6d5b70fa84c672dc65cfd6c20462e36b5e92f87c191776c626693e62"
+          },
+          "htmlSha256": "e05f26fa836527ef93137a6e2a291c60a7d2ea0e686262eb6cc6baf78ab1cb5a",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm"
+          ],
+          "pdf": "pdf/paragraph-text-kern-bold-candidate.pdf",
+          "pdfSha256": "9d16f33af3213b58da0153415e30e8452001c797611592b7f2cad01782cf7099",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-bold-candidate-inspection.json.gz",
+            "sha256": "2b9c1aa524054169347ac62b22fd41a55c06eee06b2290ccc5931077dc988c9f",
+            "jsonSha256": "b9c176119372652d32dfb28825083ac1762ea43618d9b734b151ff071da6a4ae"
+          },
+          "pageRasterSha256": "12725c4c99d62e406bbb72fa986018ae1238f1a2760b3e61cc97ddae0f19cde8"
+        }
+      ],
+      "screenshot": {
+        "file": "paragraph-text-kern-bold.png",
+        "sha256": "f5cabbca43e7d19df3701fa0a67303b3cbd17fae7a62ead8efd2c5255f7f4868"
+      }
+    },
+    {
+      "id": "paragraph-text-kern-table",
+      "inputSha256": "e7f05a798e23d698088f37196061e62050d029cd2a1189126cc183d2316f03e1",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "paragraph-text-kern-table-baseline-report.json.gz",
+            "sha256": "e4d75f732ca9fd4ccd58db2da69f3ecbe6e521f5689cfcc4824fcc28b45dd12a",
+            "jsonSha256": "a75778281041b93ccb06d4f8f9ccb24f5e39607c037ba77c6b077cd9cb4fdfb2"
+          },
+          "htmlSha256": "e70754cee542eef20dd169d20438b63a6f15f46102d859bc6431aee1ecc93711",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm",
+            "Water"
+          ],
+          "pdf": "pdf/paragraph-text-kern-table-baseline.pdf",
+          "pdfSha256": "57973b5da1bedb957ddaec1abd9b622c0e67cde9c19026b73aa3cb1a357e98a2",
+          "mandatoryFailures": [
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "paragraph-text-kern-table-baseline-inspection.json.gz",
+            "sha256": "e219de361c9dc40027565a4466bdf88dd879e4a94a6df89322e266bed9eb6c04",
+            "jsonSha256": "da16a32a890195d0445de172624ac7d80344b7ac4b1aff94c41d1510d79aad86"
+          },
+          "pageRasterSha256": "02f20bb76f7a363f8fc708c160a5f31e3a961f821fe178a2528cef4e2fcd00fa"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm"
+          ],
+          "pdf": "pdf/paragraph-text-kern-table-reference.pdf",
+          "pdfSha256": "4509bfb7510a9d9882ce011ecfeb7a03a61887bf5ef5bfeddf96c23552c3759e",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-table-reference-inspection.json.gz",
+            "sha256": "ea2e6e7986f01f0057cf5074f07afeef8bc014b65e5bd8be3e09c9e56008c7ab",
+            "jsonSha256": "2c96248a9c54a73d0c7a6bbb92a1dec19ee1217b042a038212dbd6d477bcef13"
+          },
+          "pageRasterSha256": "171e79883f7f3304523c2f1c2bdc74bf05367cef2b3c12e02c49165d7eb44b34"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "paragraph-text-kern-table-candidate-report.json.gz",
+            "sha256": "0175e18ab2643946d73a2cadceef895a125cfc6b4a19107dceb1101e69c7400b",
+            "jsonSha256": "d67e64d5305d0c979143a3bdb5076966c9fbb274ed2f362c3c0e8268d319d90f"
+          },
+          "htmlSha256": "c5cbec11e65c22d942fab0a2076fe9a95c72887ec9408c565b351e0e8fb7bad9",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm"
+          ],
+          "pdf": "pdf/paragraph-text-kern-table-candidate.pdf",
+          "pdfSha256": "e2becf2b450d50da1bb418e13c2e6dc589ccf4a8b2bdf665fe7edf9d716824f3",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-table-candidate-inspection.json.gz",
+            "sha256": "ea3e6394431cafb1a571a4dffe2eab88938772b267baff77ba862641d85ab0a9",
+            "jsonSha256": "ddedceb9114d4bc26a90453174888c3d42548b030e56a9918ca9974d48dcb6f6"
+          },
+          "pageRasterSha256": "fa46404903f9b17da62868a9af18fc83be4ee0e6f5546cfd5569f44e2c31e77b"
+        }
+      ],
+      "screenshot": {
+        "file": "paragraph-text-kern-table.png",
+        "sha256": "c6f60a7b31271af33e574e5ec7fc896b2cef622c539e89813d917e077ea7f27c"
+      }
+    },
+    {
+      "id": "paragraph-text-kern-list",
+      "inputSha256": "4e9e18aa05ebed7d1785e4831cf4d26b0d3bcaea701f3f06d1dcaee6c81f7e29",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "paragraph-text-kern-list-baseline-report.json.gz",
+            "sha256": "9de2a7a46bb376452e1bdc8c4f8ab24da2c74e97b119270fb3df109b1d2c5ef3",
+            "jsonSha256": "0148f29431883e80f93653b5547e0c8801811d11458b0c39469f820ce86dc785"
+          },
+          "htmlSha256": "c0dccc613978d4e533df1201bafbe7c52eef370416722500636f93ffc9abeb03",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm",
+            "Water"
+          ],
+          "pdf": "pdf/paragraph-text-kern-list-baseline.pdf",
+          "pdfSha256": "9674b43a40ed18858a3b2fef77005cdc6fb940e55fec22d93ed32b4720464c02",
+          "mandatoryFailures": [
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "paragraph-text-kern-list-baseline-inspection.json.gz",
+            "sha256": "db97d16ade60cc7c27c6c538b45bb42efb78ef6c4db54502cc68e23b5968ee37",
+            "jsonSha256": "018bb5ed353f8746d8ef0820ad45f8873dc5de2b1d025e1049bb81872263f7da"
+          },
+          "pageRasterSha256": "c66a0cd9d6abeac74ffa76c4ac86845d8217ff3e34f2beaf209c61e0321fca60"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm"
+          ],
+          "pdf": "pdf/paragraph-text-kern-list-reference.pdf",
+          "pdfSha256": "7cd40fea6cad3f4d0cb9696bbd7d1d53a833b29406b0a9df76d352f8fb4dd2cf",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-list-reference-inspection.json.gz",
+            "sha256": "182c4d663b0eb9639ae11cb101683106baa8115eaf6bcf6219e874508348f750",
+            "jsonSha256": "9497b209c3bb45ec42f794c46d2f9f7c85577aef7fe5c7cfcf824dcac1706ae7"
+          },
+          "pageRasterSha256": "12c7617f3c7d9defa0807fde0c3ff1cdf03c5ca1c6baf0f96230058a0a23a8b9"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "paragraph-text-kern-list-candidate-report.json.gz",
+            "sha256": "19ca97b65389239dd3120bf3c34ca0e1e65173515cb7d8715093e508293b9d91",
+            "jsonSha256": "f55d2a9f9583da4912eeb07da2d74fdf7fde5a38363f4e1aec4aedc97864fed9"
+          },
+          "htmlSha256": "02f18620da7c1312c6829152d5137bad8ac1ede3e9b16d7912879a6f085eac12",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm"
+          ],
+          "pdf": "pdf/paragraph-text-kern-list-candidate.pdf",
+          "pdfSha256": "736a3a9201dfc11477ddc60fac474ae5d2464c8d4c51e5cd060d1f9a66aa504b",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-list-candidate-inspection.json.gz",
+            "sha256": "6472400a71edf00befd9214fd33b93a8b552427d7a37fa89665f06642b9f7032",
+            "jsonSha256": "21eb92a69a305f6d8c5416c6d24f6d52d880467d2473586c5870fad6190be7a1"
+          },
+          "pageRasterSha256": "25b56848281a3d8567343484308c445bfd4d2ffa36d660fbc6a5b773665a1b54"
+        }
+      ],
+      "screenshot": {
+        "file": "paragraph-text-kern-list.png",
+        "sha256": "2cbb926ce970979dd17c6bbe830f4d4683d6ea1a59d7b2077e4edc79a43b764f"
+      }
+    },
+    {
+      "id": "paragraph-text-kern-link",
+      "inputSha256": "5372bb1066dcff3d5234d2841deeb63d213f9461f4f99f84d43dc9ec5f48c4b5",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "paragraph-text-kern-link-baseline-report.json.gz",
+            "sha256": "519c13107fbb82fc9f4b0d3c5b42d5dc87a551c9b8559d261e35aca5fef55f23",
+            "jsonSha256": "8094486e9d9c88ee683f173d168f8c973b7fd79460c5b899448885c271d35cd3"
+          },
+          "htmlSha256": "b741792195688ea8809035bccd6b6cd073fdd2ea6fd9d28613c19658f19a8e6e",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm",
+            "Water"
+          ],
+          "pdf": "pdf/paragraph-text-kern-link-baseline.pdf",
+          "pdfSha256": "a87f4898599967b7843fedd385e414488a362c34144a094b886ab06247cf3549",
+          "mandatoryFailures": [
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "paragraph-text-kern-link-baseline-inspection.json.gz",
+            "sha256": "6717f83de8805e1fc73a9d4b8613acaa901e4962522559f612cf1e56b3c3c4a3",
+            "jsonSha256": "140c03514d9f8d71fa279e920bd81e2a2942dbead6092e2d918ebe1bd381dafe"
+          },
+          "pageRasterSha256": "403fb4853ea3899a150b62f510aac9d6738096cdafdc12029b3af0131bf01e50"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm"
+          ],
+          "pdf": "pdf/paragraph-text-kern-link-reference.pdf",
+          "pdfSha256": "f28a1fa2b4a9b8396e2d55dd5b611e4b8520a2cd00ba6a6f3bd22546e2542d9f",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-link-reference-inspection.json.gz",
+            "sha256": "888ce8e0d340ce664847dc292b949c9ddb64b0c757ccdb14e33e513d669ce026",
+            "jsonSha256": "0d72193bc89e33dced52ac6a655c08b8507c8d0a51edcfa6a2dacc182b48f150"
+          },
+          "pageRasterSha256": "d4548835ba872885f8c986cfec2b59247683c956a8d1e785ccaccaa9335be5a1"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "paragraph-text-kern-link-candidate-report.json.gz",
+            "sha256": "3b26472d03a4db138eb9272db68e48bf5059cd722cf4b85a2d13edbd2954b5f2",
+            "jsonSha256": "bcff2262053db3ac606c4d342084bf8d79d4f16353dbcec0f64f370719ffb614"
+          },
+          "htmlSha256": "b3ac46952c1468f4fcbd736f4955899dcbca7c18ab90c0594feb75baca27619f",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm"
+          ],
+          "pdf": "pdf/paragraph-text-kern-link-candidate.pdf",
+          "pdfSha256": "d9e2fde82bb6b1ae87ff4b680b1bd998957e0fac34e18a22b8f22f3c66f863f9",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-link-candidate-inspection.json.gz",
+            "sha256": "eb63151940ae673e758e53b936c689534863f4c41dacf42af59a6f306a7ba679",
+            "jsonSha256": "79e4fc9b12e2ec3591614c3c61b6d60e05560cca11809d5c73ecb21df40d20a6"
+          },
+          "pageRasterSha256": "1c93e787cd57e03d1dcc3f9ae6c15f7440699c61f0e7ae3efef7df38062594e7"
+        }
+      ],
+      "screenshot": {
+        "file": "paragraph-text-kern-link.png",
+        "sha256": "2c2b8e994d9cd8aed5df2532f9a198f4b785d935e27c9ca49bbe4e5f70d7c7f6"
+      }
+    },
+    {
+      "id": "paragraph-text-kern-bold-run-16",
+      "inputSha256": "e03d2fbe5cbf234e8d9f913fb4530a0ceab8754055a72f1ddcc4d66a475c2841",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "paragraph-text-kern-bold-run-16-baseline-report.json.gz",
+            "sha256": "bf7f12f69836edb741117698356b7793d8e9552458ae1f7d0cae8c73439470a4",
+            "jsonSha256": "b64827e56168e2a0e6fdc61bf2409ea9222b1bbae47990df53709db4e7eb493a"
+          },
+          "htmlSha256": "b4a80b40b65db30431c7642f4445e68d8760fdf8475959870763c82511c6c5ab",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm",
+            "Water"
+          ],
+          "pdf": "pdf/paragraph-text-kern-bold-run-16-baseline.pdf",
+          "pdfSha256": "a6322998ade0a7df484cf7a669b1605ccc07c4ebdcb42e0f17194bc1d83bd345",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-bold-run-16-baseline-inspection.json.gz",
+            "sha256": "562bbd7e76146179c2c5b9d5d549aee2fecef4624876256613893fcff4741018",
+            "jsonSha256": "2423e19dfdbd1873559b746f35918b5586def250a5e907ef1433335f27dc4f7d"
+          },
+          "pageRasterSha256": "e325c024dad5dac59b4f31c2b42088f0dd829f7a0cead2ebb6c020f4427748f1"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm",
+            "Water"
+          ],
+          "pdf": "pdf/paragraph-text-kern-bold-run-16-reference.pdf",
+          "pdfSha256": "e6169ca5cd920cf3e60adb89ac4b8b556697316ea914b7dbb89ec522790bd6e4",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-bold-run-16-reference-inspection.json.gz",
+            "sha256": "b1ad1004332b14bff2a6336a552762b9a11fa1073d1d94b55e562abff064623f",
+            "jsonSha256": "da6f2681154200d9e250a17007b8298242797c8c619a191773b2701097ba2d0c"
+          },
+          "pageRasterSha256": "283af60236d51d1e0115a3f4de5ee5f55df859ce5db594aa9705ba134a871af2"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "paragraph-text-kern-bold-run-16-candidate-report.json.gz",
+            "sha256": "9336f0ec8d61b66269984e55f87cdae66a694a8affa563cb8c87745c0995685a",
+            "jsonSha256": "0bc456f218a5e864b6b0eae7c5b243e08fdfca482fa626e75b72570fbf78041d"
+          },
+          "htmlSha256": "407529938b3d5e57ac7b76c120e21f8bdf6f51204f9cb265dde40e1838bd8405",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm",
+            "Water"
+          ],
+          "pdf": "pdf/paragraph-text-kern-bold-run-16-candidate.pdf",
+          "pdfSha256": "4f7313fe6ca6a0d5afbcb940cfbbc457c7c922786643acff34fa6d65848d9628",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-bold-run-16-candidate-inspection.json.gz",
+            "sha256": "f84c96f7dfbc7c8e79b1f832d2ca07487b34c9b6000fdf06b07e607dfe2e14b9",
+            "jsonSha256": "fe480711ac1803d300ce89069443fcf1ce557854adac07a39af4dedbf16cd98b"
+          },
+          "pageRasterSha256": "f98be6f1d62d917c961299f63c60166a5d057bec47f270303685b4fc14fa91ce"
+        }
+      ],
+      "screenshot": {
+        "file": "paragraph-text-kern-bold-run-16.png",
+        "sha256": "6bb759aef6ab9cc7aab0e609139fc32aa8bbf1aa949b6eb053e73d15ca905b2f"
+      }
+    },
+    {
+      "id": "paragraph-text-kern-bold-run-28",
+      "inputSha256": "e79539c7ce2a71a3836316738fe6df8d6c0ed33e377a4bb1d4dd3854878bb00e",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "paragraph-text-kern-bold-run-28-baseline-report.json.gz",
+            "sha256": "004d964bc000bedacedf852c3ffa51bac4494eafccf5bf34589de000d36dcdf8",
+            "jsonSha256": "c3f09f6241c65b00a2fa44f360557da72c3c5334f820556d30084be861544a99"
+          },
+          "htmlSha256": "7399ba50d45f44e02575b3a26f945d41a86cd10b528b06eed97d3d61b3fd1c0b",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm",
+            "Water"
+          ],
+          "pdf": "pdf/paragraph-text-kern-bold-run-28-baseline.pdf",
+          "pdfSha256": "47b447570bbb6e020b0d0f54cac0a318683e284b0b2b0ded9967c34082bb3c7e",
+          "mandatoryFailures": [
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "paragraph-text-kern-bold-run-28-baseline-inspection.json.gz",
+            "sha256": "562bbd7e76146179c2c5b9d5d549aee2fecef4624876256613893fcff4741018",
+            "jsonSha256": "2423e19dfdbd1873559b746f35918b5586def250a5e907ef1433335f27dc4f7d"
+          },
+          "pageRasterSha256": "e325c024dad5dac59b4f31c2b42088f0dd829f7a0cead2ebb6c020f4427748f1"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm",
+            "Water"
+          ],
+          "pdf": "pdf/paragraph-text-kern-bold-run-28-reference.pdf",
+          "pdfSha256": "6743bf9eeba37597c2f407b71c81985e0ca1db6766fa413eaa524568360adfcf",
+          "mandatoryFailures": [
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "paragraph-text-kern-bold-run-28-reference-inspection.json.gz",
+            "sha256": "b1ad1004332b14bff2a6336a552762b9a11fa1073d1d94b55e562abff064623f",
+            "jsonSha256": "da6f2681154200d9e250a17007b8298242797c8c619a191773b2701097ba2d0c"
+          },
+          "pageRasterSha256": "283af60236d51d1e0115a3f4de5ee5f55df859ce5db594aa9705ba134a871af2"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "paragraph-text-kern-bold-run-28-candidate-report.json.gz",
+            "sha256": "bae97cbc2ac6f538378b95bec532a94361d477a5fd22e1632496152c6036f27f",
+            "jsonSha256": "d84cbc80365f4dfd20169779efc90394e817212693fe8334b44bc1ae8925a919"
+          },
+          "htmlSha256": "6235f887e61f9ac47bc56411533b5351fecdf0a4d19d5abfd779dfb1e265d7ba",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm"
+          ],
+          "pdf": "pdf/paragraph-text-kern-bold-run-28-candidate.pdf",
+          "pdfSha256": "7b262fff5a6b5d0592e4a8cf45c0251a324707dd5db4735152eaddc3d4265bbe",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-bold-run-28-candidate-inspection.json.gz",
+            "sha256": "2b9c1aa524054169347ac62b22fd41a55c06eee06b2290ccc5931077dc988c9f",
+            "jsonSha256": "b9c176119372652d32dfb28825083ac1762ea43618d9b734b151ff071da6a4ae"
+          },
+          "pageRasterSha256": "12725c4c99d62e406bbb72fa986018ae1238f1a2760b3e61cc97ddae0f19cde8"
+        }
+      ],
+      "screenshot": {
+        "file": "paragraph-text-kern-bold-run-28.png",
+        "sha256": "644d360256cbac3ceb5e2916ccf718e8ab14f0e93e6fc232c43d91a115ac48a7"
+      }
+    },
+    {
+      "id": "paragraph-text-kern-bold-defaults-16",
+      "inputSha256": "6ce4bda8173098628a79ac46c5a35701d11a3a166ddaf28f1c0cb61d05bcfa39",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "paragraph-text-kern-bold-defaults-16-baseline-report.json.gz",
+            "sha256": "32f25a577517d9267833e587857259e7a75370c6e9277ef7da45a80a08dea61d",
+            "jsonSha256": "c99200eb6c430e733fbfb0f4a3c62decd606e0039cca379818686614d5d56af6"
+          },
+          "htmlSha256": "72506ef64b987cbffd394dccbb1a2500940bad4a4d651b3df03a03dbcc2f12b6",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm",
+            "Water"
+          ],
+          "pdf": "pdf/paragraph-text-kern-bold-defaults-16-baseline.pdf",
+          "pdfSha256": "fb22edd15e143a43cc31912a112a2dc0b1723e56d73f429e8b14dca7e7587668",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-bold-defaults-16-baseline-inspection.json.gz",
+            "sha256": "562bbd7e76146179c2c5b9d5d549aee2fecef4624876256613893fcff4741018",
+            "jsonSha256": "2423e19dfdbd1873559b746f35918b5586def250a5e907ef1433335f27dc4f7d"
+          },
+          "pageRasterSha256": "e325c024dad5dac59b4f31c2b42088f0dd829f7a0cead2ebb6c020f4427748f1"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm",
+            "Water"
+          ],
+          "pdf": "pdf/paragraph-text-kern-bold-defaults-16-reference.pdf",
+          "pdfSha256": "1d230a4f389f1a784710232d7210ce978a1e11619099d47961996523a54e3ea2",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-bold-defaults-16-reference-inspection.json.gz",
+            "sha256": "b1ad1004332b14bff2a6336a552762b9a11fa1073d1d94b55e562abff064623f",
+            "jsonSha256": "da6f2681154200d9e250a17007b8298242797c8c619a191773b2701097ba2d0c"
+          },
+          "pageRasterSha256": "283af60236d51d1e0115a3f4de5ee5f55df859ce5db594aa9705ba134a871af2"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "paragraph-text-kern-bold-defaults-16-candidate-report.json.gz",
+            "sha256": "f9060963b5f36f6ab33029b28c0457596a4736c44b3579366f7d02a6df0da8dc",
+            "jsonSha256": "ecb4f22bf5d5de0a5d23b64e91523e2be3d75d70ee3709663805f68e29d3fe5f"
+          },
+          "htmlSha256": "343d2dad34a105f93a4b18c9f32a3f2091018fc5d527c799bf333d104656de6a",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm",
+            "Water"
+          ],
+          "pdf": "pdf/paragraph-text-kern-bold-defaults-16-candidate.pdf",
+          "pdfSha256": "455b692e1732ea77a3b551eff7fdabc6d4eb36f983e6cea5f14fd82389d4fc6f",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-bold-defaults-16-candidate-inspection.json.gz",
+            "sha256": "f84c96f7dfbc7c8e79b1f832d2ca07487b34c9b6000fdf06b07e607dfe2e14b9",
+            "jsonSha256": "fe480711ac1803d300ce89069443fcf1ce557854adac07a39af4dedbf16cd98b"
+          },
+          "pageRasterSha256": "f98be6f1d62d917c961299f63c60166a5d057bec47f270303685b4fc14fa91ce"
+        }
+      ],
+      "screenshot": {
+        "file": "paragraph-text-kern-bold-defaults-16.png",
+        "sha256": "ee7d2aa3a5a6eb684dc3cb99e22d56cebe7a40602f67ee1ab6a02295d0c7de4d"
+      }
+    },
+    {
+      "id": "paragraph-text-kern-bold-defaults-28",
+      "inputSha256": "a2d332d4e9a2ba4f3b355f66f28ac4c4ff5d289eeaf928ec69e311338a180745",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "paragraph-text-kern-bold-defaults-28-baseline-report.json.gz",
+            "sha256": "d272f8899386538a298be812ef858914fe39b03e37c04181511c4bd4d49573ff",
+            "jsonSha256": "709afb76787eeb270a611396653adfd6313b318c63dd1fa66320db5cf6e3ebf5"
+          },
+          "htmlSha256": "a5166102167841b57acaec5cd05d29e55a8e1eda76a1f4cf0781ecf32bd14a0d",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm",
+            "Water"
+          ],
+          "pdf": "pdf/paragraph-text-kern-bold-defaults-28-baseline.pdf",
+          "pdfSha256": "33dec0a7b7cae1bbafc4638550ba73354b6561f3c749752b3981b8e7a598cf37",
+          "mandatoryFailures": [
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "paragraph-text-kern-bold-defaults-28-baseline-inspection.json.gz",
+            "sha256": "562bbd7e76146179c2c5b9d5d549aee2fecef4624876256613893fcff4741018",
+            "jsonSha256": "2423e19dfdbd1873559b746f35918b5586def250a5e907ef1433335f27dc4f7d"
+          },
+          "pageRasterSha256": "e325c024dad5dac59b4f31c2b42088f0dd829f7a0cead2ebb6c020f4427748f1"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm",
+            "Water"
+          ],
+          "pdf": "pdf/paragraph-text-kern-bold-defaults-28-reference.pdf",
+          "pdfSha256": "9c48f308dbbc849cc5446e103dc13c1ecdc611e4a305a37437058b631215fc08",
+          "mandatoryFailures": [
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "paragraph-text-kern-bold-defaults-28-reference-inspection.json.gz",
+            "sha256": "b1ad1004332b14bff2a6336a552762b9a11fa1073d1d94b55e562abff064623f",
+            "jsonSha256": "da6f2681154200d9e250a17007b8298242797c8c619a191773b2701097ba2d0c"
+          },
+          "pageRasterSha256": "283af60236d51d1e0115a3f4de5ee5f55df859ce5db594aa9705ba134a871af2"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "paragraph-text-kern-bold-defaults-28-candidate-report.json.gz",
+            "sha256": "1fa1539e90f4f6b01834ecc3d69b41425bc367988fa3cee55ff779d240244a38",
+            "jsonSha256": "e039c3030a793e8433ed41f29950420275088c34630e720d189e9772db3e39e6"
+          },
+          "htmlSha256": "7101a7022d40f638f349d2a640b2cc22b66fc031175a00b1384331099ebd3e7a",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm"
+          ],
+          "pdf": "pdf/paragraph-text-kern-bold-defaults-28-candidate.pdf",
+          "pdfSha256": "38843fe629f6464a5de621246399a81e09d86f2a9f001eaa525e6ecb83b4bd1f",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-bold-defaults-28-candidate-inspection.json.gz",
+            "sha256": "2b9c1aa524054169347ac62b22fd41a55c06eee06b2290ccc5931077dc988c9f",
+            "jsonSha256": "b9c176119372652d32dfb28825083ac1762ea43618d9b734b151ff071da6a4ae"
+          },
+          "pageRasterSha256": "12725c4c99d62e406bbb72fa986018ae1238f1a2760b3e61cc97ddae0f19cde8"
+        }
+      ],
+      "screenshot": {
+        "file": "paragraph-text-kern-bold-defaults-28.png",
+        "sha256": "50eedb2f3526a25b159da640e06891199a66eede791ce42ff1469aa12528459c"
+      }
+    },
+    {
+      "id": "paragraph-text-kern-bold-style-16",
+      "inputSha256": "48d402e19f9d1ec92859b62b2a658a17b3e3e2bbe3205d2ed91d199dfb66c363",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "paragraph-text-kern-bold-style-16-baseline-report.json.gz",
+            "sha256": "9a7f609077a4ff0d569429d0ea81a76f0c342cd4077d0a133feb878fcd5f8e54",
+            "jsonSha256": "09ef9076bb0c69aca7237779d9021bcd3433a531ff14f0e00c0035a1ae23a076"
+          },
+          "htmlSha256": "72506ef64b987cbffd394dccbb1a2500940bad4a4d651b3df03a03dbcc2f12b6",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm",
+            "Water"
+          ],
+          "pdf": "pdf/paragraph-text-kern-bold-style-16-baseline.pdf",
+          "pdfSha256": "bb6bac5399fe106bd99fcec7f3589d74f48c1f3278d5f225a803bff6d75a5f29",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-bold-style-16-baseline-inspection.json.gz",
+            "sha256": "562bbd7e76146179c2c5b9d5d549aee2fecef4624876256613893fcff4741018",
+            "jsonSha256": "2423e19dfdbd1873559b746f35918b5586def250a5e907ef1433335f27dc4f7d"
+          },
+          "pageRasterSha256": "e325c024dad5dac59b4f31c2b42088f0dd829f7a0cead2ebb6c020f4427748f1"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm",
+            "Water"
+          ],
+          "pdf": "pdf/paragraph-text-kern-bold-style-16-reference.pdf",
+          "pdfSha256": "c59edbefc56d12240a5aaad54578b610f7d8482f41634eae13eb620c16a73bcc",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-bold-style-16-reference-inspection.json.gz",
+            "sha256": "b1ad1004332b14bff2a6336a552762b9a11fa1073d1d94b55e562abff064623f",
+            "jsonSha256": "da6f2681154200d9e250a17007b8298242797c8c619a191773b2701097ba2d0c"
+          },
+          "pageRasterSha256": "283af60236d51d1e0115a3f4de5ee5f55df859ce5db594aa9705ba134a871af2"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "paragraph-text-kern-bold-style-16-candidate-report.json.gz",
+            "sha256": "2f5a69db856149e6d6da662d5aed9f4f544281052a4b20f97a7073f928b234fe",
+            "jsonSha256": "4e0c2751ff100d7f62e399789ee876e233ccb2207b308ccbebd80f0fd8c0f4b9"
+          },
+          "htmlSha256": "343d2dad34a105f93a4b18c9f32a3f2091018fc5d527c799bf333d104656de6a",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm",
+            "Water"
+          ],
+          "pdf": "pdf/paragraph-text-kern-bold-style-16-candidate.pdf",
+          "pdfSha256": "e25e7a340cc560d5a8b9ea4206e367321729fff7c4dd4a28b6326a5ea00d250b",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-bold-style-16-candidate-inspection.json.gz",
+            "sha256": "f84c96f7dfbc7c8e79b1f832d2ca07487b34c9b6000fdf06b07e607dfe2e14b9",
+            "jsonSha256": "fe480711ac1803d300ce89069443fcf1ce557854adac07a39af4dedbf16cd98b"
+          },
+          "pageRasterSha256": "f98be6f1d62d917c961299f63c60166a5d057bec47f270303685b4fc14fa91ce"
+        }
+      ],
+      "screenshot": {
+        "file": "paragraph-text-kern-bold-style-16.png",
+        "sha256": "f956c3f87d74de580054c71e74b21d9ec9b934e0b7ab52673d7b0bb36fc3ead1"
+      }
+    },
+    {
+      "id": "paragraph-text-kern-bold-style-28",
+      "inputSha256": "644a4756f2a8fec28388ead8ae92cab62237b5acb358b94ad52baa56def8e0a5",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "paragraph-text-kern-bold-style-28-baseline-report.json.gz",
+            "sha256": "d1090a598c1b87b76d0bd7330b6ea961d64d7b51315d1f5d7666a9fc7206c754",
+            "jsonSha256": "de91a173a998f9cfb3ecdd99f7a151dfe4a2427e10758e8fc09bfe9ebf94540a"
+          },
+          "htmlSha256": "a5166102167841b57acaec5cd05d29e55a8e1eda76a1f4cf0781ecf32bd14a0d",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm",
+            "Water"
+          ],
+          "pdf": "pdf/paragraph-text-kern-bold-style-28-baseline.pdf",
+          "pdfSha256": "a2218c88fcff8d0d75d95c9902d7036368308a57768c8d43d594e34ce9d5b65e",
+          "mandatoryFailures": [
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "paragraph-text-kern-bold-style-28-baseline-inspection.json.gz",
+            "sha256": "562bbd7e76146179c2c5b9d5d549aee2fecef4624876256613893fcff4741018",
+            "jsonSha256": "2423e19dfdbd1873559b746f35918b5586def250a5e907ef1433335f27dc4f7d"
+          },
+          "pageRasterSha256": "e325c024dad5dac59b4f31c2b42088f0dd829f7a0cead2ebb6c020f4427748f1"
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm",
+            "Water"
+          ],
+          "pdf": "pdf/paragraph-text-kern-bold-style-28-reference.pdf",
+          "pdfSha256": "07d1d6fc8342b0b9467b4c37f752e43a08a59af4d3e00d8486d88ef41ecf8b0c",
+          "mandatoryFailures": [
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "paragraph-text-kern-bold-style-28-reference-inspection.json.gz",
+            "sha256": "b1ad1004332b14bff2a6336a552762b9a11fa1073d1d94b55e562abff064623f",
+            "jsonSha256": "da6f2681154200d9e250a17007b8298242797c8c619a191773b2701097ba2d0c"
+          },
+          "pageRasterSha256": "283af60236d51d1e0115a3f4de5ee5f55df859ce5db594aa9705ba134a871af2"
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "paragraph-text-kern-bold-style-28-candidate-report.json.gz",
+            "sha256": "8f2ed11543244863581903ad61b5a96086e8332ef45d8b40cbb114b4f6d5b567",
+            "jsonSha256": "03a4725b259e1cb5e1357aae22790213e59613439b1aaf683640b6c051658ad1"
+          },
+          "htmlSha256": "7101a7022d40f638f349d2a640b2cc22b66fc031175a00b1384331099ebd3e7a",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "firstLine": [
+            "Hazel01",
+            "We",
+            "Visit",
+            "A",
+            "Quiet",
+            "Valley",
+            "Where",
+            "Tall",
+            "Willows",
+            "Wave",
+            "Beside",
+            "Warm"
+          ],
+          "pdf": "pdf/paragraph-text-kern-bold-style-28-candidate.pdf",
+          "pdfSha256": "ddb2adf0a84f4caea81f5c47956c88083b3926d84c8f1022482a3c3db21a4cfe",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "paragraph-text-kern-bold-style-28-candidate-inspection.json.gz",
+            "sha256": "2b9c1aa524054169347ac62b22fd41a55c06eee06b2290ccc5931077dc988c9f",
+            "jsonSha256": "b9c176119372652d32dfb28825083ac1762ea43618d9b734b151ff071da6a4ae"
+          },
+          "pageRasterSha256": "12725c4c99d62e406bbb72fa986018ae1238f1a2760b3e61cc97ddae0f19cde8"
+        }
+      ],
+      "screenshot": {
+        "file": "paragraph-text-kern-bold-style-28.png",
+        "sha256": "33e100fd728d390ce001769227b31c3f93dfc0d6e0fbb59e20a07042562f6e18"
+      }
+    }
+  ],
+  "tools": {
+    "docs/results/paragraph-text-independence/Compose.py": "7af3e7b4cbcdad06dbf25866d368b10b5c7b83c50442e72ccd673731e8ae0a78",
+    "docs/results/export-reliability/Capture.mjs": "242ffcbd8716ba6238990621aee97482209e846c70ffbc4171c16b204f7e1631"
+  }
+}

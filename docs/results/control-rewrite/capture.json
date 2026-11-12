@@ -1,0 +1,5152 @@
+{
+  "schema": 1,
+  "scope": "Fourteen-case diagnostic, not a full-suite or Word-reference score",
+  "baseline": "ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+  "candidate": "40e58cfe5df8db17add68773238b5d80bb46fe86",
+  "metric": {
+    "blockInsertion": "declared insertion outcomes require typed success, error, version change and undo availability",
+    "caseScore": "100 when every applicable mandatory check passes, otherwise 0",
+    "columnReview": "v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry",
+    "engines": [
+      "bench-markup",
+      "libreoffice-text"
+    ],
+    "hyperlinkTargets": "declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written",
+    "libreofficeEligibility": "a LibreOffice comparison applies only when the authored redline passes it",
+    "paragraphRewrite": "public untracked whole-paragraph rewrites must preserve exact declared native content-control subtrees as well as independent semantic views",
+    "revisionOwnership": "account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips",
+    "revisionRegistry": "declared table operations must report the public registry count and match independent resolved table assertions",
+    "semanticPreflight": "declared identity cases must report zero changes at raw limits with and without the package supplement",
+    "spanEditing": "public span editing must preserve text and inline-marker order through both independent revision resolvers",
+    "suiteScore": "mean of category means over every required case",
+    "validity": "no OpenXmlValidator finding (id, part, description) occurs more often than in any input, and the output opens: a Package_Open finding in the output always fails, whatever the inputs did",
+    "version": 11,
+    "view": 1
+  },
+  "suiteDigest": "62bc7a01ecedcb12a4afe1a4e82ae1b3b64a68f8229068cad3359475cf82115f",
+  "sourceBuild": {
+    "adapterSources": {
+      "adapters/docxodus-redline/DocxBenchRedline.csproj": "83843da954515292212f473d501fb539b0627513b972e3a95f7a4ab06674902a",
+      "adapters/docxodus-redline/Program.cs": "3fa3c5e1aea63c72f53365d6ea493b5350b737518fca7d983c0c31b6b21f4b01"
+    },
+    "command": [
+      "/home/jman/.dotnet/dotnet",
+      "build",
+      "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-candidate-shipping/src/DocxBenchRedline.csproj",
+      "-c",
+      "Release",
+      "-o",
+      "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-candidate-shipping/bin",
+      "-nologo",
+      "-v",
+      "q",
+      "-p:DocxodusRoot=/home/jman/Code/Docxodus/.local-closeout/inline-controls"
+    ],
+    "commit": "40e58cfe5df8db17add68773238b5d80bb46fe86",
+    "dotnet": "10.0.301",
+    "files": {
+      "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+      "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+      "bin/DocxBenchRedline.dll": "8e788b662a7af26856156c4ecb67d0a312274ac2d80ef433f7e82188a253ed68",
+      "bin/Docxodus.dll": "faa9696f4b1511820276efee51623fcbf9d439a9acb567844b49e1595069912d",
+      "bin/SkiaSharp.dll": "2c9bbbe1a3d0e9407894c319821b5cdcade1f302466a950a2e5d6024aee32422",
+      "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+    },
+    "recipeSha256": "363879d820560519e8635fab08240100799cce2ba224e1169498eb209651c053",
+    "schema": 1,
+    "tree": "cc7f2f63d418a73bccc99e8af13ddc1ed3c69ca1"
+  },
+  "capture": {
+    "rendererCommit": "40e58cfe5df8db17add68773238b5d80bb46fe86",
+    "renderer": "WmlToHtmlConverter.ConvertToHtml default flow for both saved outputs",
+    "method": "Offline Chromium, installed fonts, 1200x720 viewport, full-page PNG",
+    "scripts": {
+      "docs/results/control-rewrite/Capture.cs": "5c6ac7bdb0da2ccf175fd2390254de47da6a3ab6c94d53d5dc399e4ab94f3127",
+      "docs/results/control-rewrite/Capture.mjs": "cc88aedc7aa62b9e95b505b63a68b33d0a68ec77985493d6a9c122c2fabe9960"
+    },
+    "outputs": [
+      {
+        "name": "redline-control-rewrite-binding-echo",
+        "label": "Before",
+        "commit": "ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+        "outputSha256": "f16559c937b4f29e9cfb090a54ac5792d7c2829a56d2f0b2b6cea0444311b049",
+        "controlCount": 0
+      },
+      {
+        "name": "redline-control-rewrite-binding-echo",
+        "label": "After",
+        "commit": "40e58cfe5df8db17add68773238b5d80bb46fe86",
+        "outputSha256": "f90b2fa80d9fac5633d5ec7d7322023a2d79b49b179a273e52f50083a3975f42",
+        "controlCount": 1
+      },
+      {
+        "name": "redline-control-rewrite-binding-echo-control",
+        "label": "Before",
+        "commit": "ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+        "outputSha256": "f16559c937b4f29e9cfb090a54ac5792d7c2829a56d2f0b2b6cea0444311b049",
+        "controlCount": 0
+      },
+      {
+        "name": "redline-control-rewrite-binding-echo-control",
+        "label": "After",
+        "commit": "40e58cfe5df8db17add68773238b5d80bb46fe86",
+        "outputSha256": "f16559c937b4f29e9cfb090a54ac5792d7c2829a56d2f0b2b6cea0444311b049",
+        "controlCount": 0
+      },
+      {
+        "name": "redline-control-rewrite-binding-outside",
+        "label": "Before",
+        "commit": "ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+        "outputSha256": "8eba67f1b00681a5aa2a0c5f34c3af23fb4a81e1c7cf10cc49dcb9fda7a5357a",
+        "controlCount": 0
+      },
+      {
+        "name": "redline-control-rewrite-binding-outside",
+        "label": "After",
+        "commit": "40e58cfe5df8db17add68773238b5d80bb46fe86",
+        "outputSha256": "e07fe83efa13082f5eaadaa7bb68c79da82a1d27e83c5221fb635d449aaf7560",
+        "controlCount": 1
+      },
+      {
+        "name": "redline-control-rewrite-binding-outside-control",
+        "label": "Before",
+        "commit": "ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+        "outputSha256": "8eba67f1b00681a5aa2a0c5f34c3af23fb4a81e1c7cf10cc49dcb9fda7a5357a",
+        "controlCount": 0
+      },
+      {
+        "name": "redline-control-rewrite-binding-outside-control",
+        "label": "After",
+        "commit": "40e58cfe5df8db17add68773238b5d80bb46fe86",
+        "outputSha256": "8eba67f1b00681a5aa2a0c5f34c3af23fb4a81e1c7cf10cc49dcb9fda7a5357a",
+        "controlCount": 0
+      },
+      {
+        "name": "redline-control-rewrite-citation-echo",
+        "label": "Before",
+        "commit": "ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+        "outputSha256": "f16559c937b4f29e9cfb090a54ac5792d7c2829a56d2f0b2b6cea0444311b049",
+        "controlCount": 0
+      },
+      {
+        "name": "redline-control-rewrite-citation-echo",
+        "label": "After",
+        "commit": "40e58cfe5df8db17add68773238b5d80bb46fe86",
+        "outputSha256": "f73d084d4d10217d813baf27b4d536f7a5369dbf6fea8d83e93fb0fb66e02736",
+        "controlCount": 1
+      },
+      {
+        "name": "redline-control-rewrite-citation-echo-control",
+        "label": "Before",
+        "commit": "ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+        "outputSha256": "f16559c937b4f29e9cfb090a54ac5792d7c2829a56d2f0b2b6cea0444311b049",
+        "controlCount": 0
+      },
+      {
+        "name": "redline-control-rewrite-citation-echo-control",
+        "label": "After",
+        "commit": "40e58cfe5df8db17add68773238b5d80bb46fe86",
+        "outputSha256": "f16559c937b4f29e9cfb090a54ac5792d7c2829a56d2f0b2b6cea0444311b049",
+        "controlCount": 0
+      },
+      {
+        "name": "redline-control-rewrite-citation-outside",
+        "label": "Before",
+        "commit": "ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+        "outputSha256": "8eba67f1b00681a5aa2a0c5f34c3af23fb4a81e1c7cf10cc49dcb9fda7a5357a",
+        "controlCount": 0
+      },
+      {
+        "name": "redline-control-rewrite-citation-outside",
+        "label": "After",
+        "commit": "40e58cfe5df8db17add68773238b5d80bb46fe86",
+        "outputSha256": "7221dbd218803a70b6a60e25da76028adae5e99cabdc0f9aaccd1a9409e73022",
+        "controlCount": 1
+      },
+      {
+        "name": "redline-control-rewrite-citation-outside-control",
+        "label": "Before",
+        "commit": "ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+        "outputSha256": "8eba67f1b00681a5aa2a0c5f34c3af23fb4a81e1c7cf10cc49dcb9fda7a5357a",
+        "controlCount": 0
+      },
+      {
+        "name": "redline-control-rewrite-citation-outside-control",
+        "label": "After",
+        "commit": "40e58cfe5df8db17add68773238b5d80bb46fe86",
+        "outputSha256": "8eba67f1b00681a5aa2a0c5f34c3af23fb4a81e1c7cf10cc49dcb9fda7a5357a",
+        "controlCount": 0
+      },
+      {
+        "name": "redline-control-rewrite-code-break",
+        "label": "Before",
+        "commit": "ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+        "outputSha256": "13a3c59f22a3800c4ce24ebcc839563a0575d0cbce1be48f0014a64902c3aabe",
+        "controlCount": 0
+      },
+      {
+        "name": "redline-control-rewrite-code-break",
+        "label": "After",
+        "commit": "40e58cfe5df8db17add68773238b5d80bb46fe86",
+        "outputSha256": "c5e4b582909e2cef8e28388752247dea9002c315165908b2f5133ff993867122",
+        "controlCount": 1
+      },
+      {
+        "name": "redline-control-rewrite-code-break-control",
+        "label": "Before",
+        "commit": "ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+        "outputSha256": "fe0556737356aa032118b5f5a28ef82b243614e358a3610155204ba6f51f96a8",
+        "controlCount": 0
+      },
+      {
+        "name": "redline-control-rewrite-code-break-control",
+        "label": "After",
+        "commit": "40e58cfe5df8db17add68773238b5d80bb46fe86",
+        "outputSha256": "fe0556737356aa032118b5f5a28ef82b243614e358a3610155204ba6f51f96a8",
+        "controlCount": 0
+      },
+      {
+        "name": "redline-control-rewrite-link-break",
+        "label": "Before",
+        "commit": "ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+        "outputSha256": "ffe816e394eaf15f2f86b70bf4dfbadc76bd6c9a98e02acb32115c3efb80e51a",
+        "controlCount": 0
+      },
+      {
+        "name": "redline-control-rewrite-link-break",
+        "label": "After",
+        "commit": "40e58cfe5df8db17add68773238b5d80bb46fe86",
+        "outputSha256": "121e279caa0520d5963607307c61b88745cd009c554705b2d6895398ad28ca1b",
+        "controlCount": 1
+      },
+      {
+        "name": "redline-control-rewrite-link-break-control",
+        "label": "Before",
+        "commit": "ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+        "outputSha256": "c39e0725463769e2edfd84bfb4de464da3d0d2f8a811802e064cef3b15836665",
+        "controlCount": 0
+      },
+      {
+        "name": "redline-control-rewrite-link-break-control",
+        "label": "After",
+        "commit": "40e58cfe5df8db17add68773238b5d80bb46fe86",
+        "outputSha256": "c39e0725463769e2edfd84bfb4de464da3d0d2f8a811802e064cef3b15836665",
+        "controlCount": 0
+      },
+      {
+        "name": "redline-control-rewrite-strike-break",
+        "label": "Before",
+        "commit": "ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+        "outputSha256": "b3bc662fa9be4245612e2fae8a48ebe8d420cfd231aa17a606c36a7e55cdb10b",
+        "controlCount": 0
+      },
+      {
+        "name": "redline-control-rewrite-strike-break",
+        "label": "After",
+        "commit": "40e58cfe5df8db17add68773238b5d80bb46fe86",
+        "outputSha256": "7991539d5002cc6ae49986f8036787ca163dbf18c33e83df87a9e7022c48ef7a",
+        "controlCount": 1
+      },
+      {
+        "name": "redline-control-rewrite-strike-break-control",
+        "label": "Before",
+        "commit": "ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+        "outputSha256": "761ee92ff3d9bccc199c6eb3a1e6691444ef14a368d2b81b3c0848a24099bbf9",
+        "controlCount": 0
+      },
+      {
+        "name": "redline-control-rewrite-strike-break-control",
+        "label": "After",
+        "commit": "40e58cfe5df8db17add68773238b5d80bb46fe86",
+        "outputSha256": "761ee92ff3d9bccc199c6eb3a1e6691444ef14a368d2b81b3c0848a24099bbf9",
+        "controlCount": 0
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "redline-control-rewrite-binding-echo",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-control-rewrite-binding-echo/source.docx",
+          "sha256": "00bcc2a2242e56096f4f07fb8437868f67387d04b3d15fd9b5cc4a622a6e062b",
+          "role": "source"
+        }
+      ],
+      "pngSha256": "47f4b177981ce9e733482b900bd290247f79eb14ebf0345d4fe271c320bf39ab",
+      "before": {
+        "status": "measured",
+        "score": 0.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -2,6 +2,2 @@",
+              " p|body|",
+              "-t|Edition ",
+              "-m|sdt-begin",
+              "-t|7.2",
+              "-m|sdt-end",
+              "-t| registered.",
+              "+t|Edition 7.2 registered."
+            ],
+            "name": "markup-accepted",
+            "passed": false,
+            "similarity": 0.4
+          },
+          {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -2,6 +2,2 @@",
+              " p|body|",
+              "-t|Edition ",
+              "-m|sdt-begin",
+              "-t|7.2",
+              "-m|sdt-end",
+              "-t| registered.",
+              "+t|Edition 7.2 registered."
+            ],
+            "name": "markup-rejected",
+            "passed": false,
+            "similarity": 0.4
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-echo/expected.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-binding-echo/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-echo/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-echo/expected.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-binding-echo/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-echo/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:sdtPr><w:id w:val=\"21\"/><w:dataBinding w:xpath=\"/ledger[1]/edition[1]\" w:storeItemID=\"{00000000-0000-0000-0000-000000000021}\"/><w:text/></w:sdtPr><w:sdtContent><w:r><w:t xml:space=\"preserve\">7.2</w:t></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:sdtPr><w:id w:val=\"21\"/><w:dataBinding w:xpath=\"/ledger[1]/edition[1]\" w:storeItemID=\"{00000000-0000-0000-0000-000000000021}\"/><w:text/></w:sdtPr><w:sdtContent><w:r><w:t xml:space=\"preserve\">7.2</w:t></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "f16559c937b4f29e9cfb090a54ac5792d7c2829a56d2f0b2b6cea0444311b049",
+          "protocol": 1,
+          "status": "ok"
+        }
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-echo/expected.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-binding-echo/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-echo/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-echo/expected.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-binding-echo/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-echo/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:sdtPr><w:id w:val=\"21\"/><w:dataBinding w:xpath=\"/ledger[1]/edition[1]\" w:storeItemID=\"{00000000-0000-0000-0000-000000000021}\"/><w:text/></w:sdtPr><w:sdtContent><w:r><w:t xml:space=\"preserve\">7.2</w:t></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [
+              [
+                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdt",
+                {},
+                null,
+                [
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtPr",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}id",
+                        {
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val": "21"
+                        },
+                        null,
+                        []
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}dataBinding",
+                        {
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}storeItemID": "{00000000-0000-0000-0000-000000000021}",
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}xpath": "/ledger[1]/edition[1]"
+                        },
+                        null,
+                        []
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}text",
+                        {},
+                        null,
+                        []
+                      ]
+                    ]
+                  ],
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtContent",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t",
+                            {
+                              "{http://www.w3.org/XML/1998/namespace}space": "preserve"
+                            },
+                            "7.2",
+                            []
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:sdtPr><w:id w:val=\"21\"/><w:dataBinding w:xpath=\"/ledger[1]/edition[1]\" w:storeItemID=\"{00000000-0000-0000-0000-000000000021}\"/><w:text/></w:sdtPr><w:sdtContent><w:r><w:t xml:space=\"preserve\">7.2</w:t></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [
+              [
+                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdt",
+                {},
+                null,
+                [
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtPr",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}id",
+                        {
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val": "21"
+                        },
+                        null,
+                        []
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}dataBinding",
+                        {
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}storeItemID": "{00000000-0000-0000-0000-000000000021}",
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}xpath": "/ledger[1]/edition[1]"
+                        },
+                        null,
+                        []
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}text",
+                        {},
+                        null,
+                        []
+                      ]
+                    ]
+                  ],
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtContent",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t",
+                            {
+                              "{http://www.w3.org/XML/1998/namespace}space": "preserve"
+                            },
+                            "7.2",
+                            []
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+40e58cfe5df8db17add68773238b5d80bb46fe86",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "f90b2fa80d9fac5633d5ec7d7322023a2d79b49b179a273e52f50083a3975f42",
+          "protocol": 1,
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "id": "redline-control-rewrite-binding-echo-control",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-control-rewrite-binding-echo-control/source.docx",
+          "sha256": "577090777530de38189f29bcfc5b336eb7c204dc2811c31599ed9199ca9b76dd",
+          "role": "source"
+        }
+      ],
+      "pngSha256": "f2c99dec7a8ba971bc7b249066cb5dd449e952d57df5721cd950f1579993df3c",
+      "before": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-echo-control/expected.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-binding-echo-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-echo-control/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-echo-control/expected.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-binding-echo-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-echo-control/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "f16559c937b4f29e9cfb090a54ac5792d7c2829a56d2f0b2b6cea0444311b049",
+          "protocol": 1,
+          "status": "ok"
+        }
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-echo-control/expected.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-binding-echo-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-echo-control/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-echo-control/expected.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-binding-echo-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-echo-control/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+40e58cfe5df8db17add68773238b5d80bb46fe86",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "f16559c937b4f29e9cfb090a54ac5792d7c2829a56d2f0b2b6cea0444311b049",
+          "protocol": 1,
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "id": "redline-control-rewrite-binding-outside",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-control-rewrite-binding-outside/source.docx",
+          "sha256": "00bcc2a2242e56096f4f07fb8437868f67387d04b3d15fd9b5cc4a622a6e062b",
+          "role": "source"
+        }
+      ],
+      "pngSha256": "34797f4dff995425c0e732cf6945003d003f41b0bff91cff1d704d81834ce3f5",
+      "before": {
+        "status": "measured",
+        "score": 0.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -2,6 +2,2 @@",
+              " p|body|",
+              "-t|Revised edition ",
+              "-m|sdt-begin",
+              "-t|7.2",
+              "-m|sdt-end",
+              "-t| registered today.",
+              "+t|Revised edition 7.2 registered today."
+            ],
+            "name": "markup-accepted",
+            "passed": false,
+            "similarity": 0.4
+          },
+          {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -2,6 +2,2 @@",
+              " p|body|",
+              "-t|Revised edition ",
+              "-m|sdt-begin",
+              "-t|7.2",
+              "-m|sdt-end",
+              "-t| registered today.",
+              "+t|Revised edition 7.2 registered today."
+            ],
+            "name": "markup-rejected",
+            "passed": false,
+            "similarity": 0.4
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-outside/expected.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-binding-outside/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-outside/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-outside/expected.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-binding-outside/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-outside/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:sdtPr><w:id w:val=\"21\"/><w:dataBinding w:xpath=\"/ledger[1]/edition[1]\" w:storeItemID=\"{00000000-0000-0000-0000-000000000021}\"/><w:text/></w:sdtPr><w:sdtContent><w:r><w:t xml:space=\"preserve\">7.2</w:t></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:sdtPr><w:id w:val=\"21\"/><w:dataBinding w:xpath=\"/ledger[1]/edition[1]\" w:storeItemID=\"{00000000-0000-0000-0000-000000000021}\"/><w:text/></w:sdtPr><w:sdtContent><w:r><w:t xml:space=\"preserve\">7.2</w:t></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "8eba67f1b00681a5aa2a0c5f34c3af23fb4a81e1c7cf10cc49dcb9fda7a5357a",
+          "protocol": 1,
+          "status": "ok"
+        }
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-outside/expected.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-binding-outside/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-outside/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-outside/expected.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-binding-outside/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-outside/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:sdtPr><w:id w:val=\"21\"/><w:dataBinding w:xpath=\"/ledger[1]/edition[1]\" w:storeItemID=\"{00000000-0000-0000-0000-000000000021}\"/><w:text/></w:sdtPr><w:sdtContent><w:r><w:t xml:space=\"preserve\">7.2</w:t></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [
+              [
+                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdt",
+                {},
+                null,
+                [
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtPr",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}id",
+                        {
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val": "21"
+                        },
+                        null,
+                        []
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}dataBinding",
+                        {
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}storeItemID": "{00000000-0000-0000-0000-000000000021}",
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}xpath": "/ledger[1]/edition[1]"
+                        },
+                        null,
+                        []
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}text",
+                        {},
+                        null,
+                        []
+                      ]
+                    ]
+                  ],
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtContent",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t",
+                            {
+                              "{http://www.w3.org/XML/1998/namespace}space": "preserve"
+                            },
+                            "7.2",
+                            []
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:sdtPr><w:id w:val=\"21\"/><w:dataBinding w:xpath=\"/ledger[1]/edition[1]\" w:storeItemID=\"{00000000-0000-0000-0000-000000000021}\"/><w:text/></w:sdtPr><w:sdtContent><w:r><w:t xml:space=\"preserve\">7.2</w:t></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [
+              [
+                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdt",
+                {},
+                null,
+                [
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtPr",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}id",
+                        {
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val": "21"
+                        },
+                        null,
+                        []
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}dataBinding",
+                        {
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}storeItemID": "{00000000-0000-0000-0000-000000000021}",
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}xpath": "/ledger[1]/edition[1]"
+                        },
+                        null,
+                        []
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}text",
+                        {},
+                        null,
+                        []
+                      ]
+                    ]
+                  ],
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtContent",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t",
+                            {
+                              "{http://www.w3.org/XML/1998/namespace}space": "preserve"
+                            },
+                            "7.2",
+                            []
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+40e58cfe5df8db17add68773238b5d80bb46fe86",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "e07fe83efa13082f5eaadaa7bb68c79da82a1d27e83c5221fb635d449aaf7560",
+          "protocol": 1,
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "id": "redline-control-rewrite-binding-outside-control",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-control-rewrite-binding-outside-control/source.docx",
+          "sha256": "577090777530de38189f29bcfc5b336eb7c204dc2811c31599ed9199ca9b76dd",
+          "role": "source"
+        }
+      ],
+      "pngSha256": "59eaf80e9d1606cd6b859e9e3ac0ffe19559f9dc1e8c1390140894ce779b9d90",
+      "before": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-outside-control/expected.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-binding-outside-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-outside-control/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-outside-control/expected.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-binding-outside-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-outside-control/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "8eba67f1b00681a5aa2a0c5f34c3af23fb4a81e1c7cf10cc49dcb9fda7a5357a",
+          "protocol": 1,
+          "status": "ok"
+        }
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-outside-control/expected.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-binding-outside-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-outside-control/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-outside-control/expected.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-binding-outside-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-binding-outside-control/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+40e58cfe5df8db17add68773238b5d80bb46fe86",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "8eba67f1b00681a5aa2a0c5f34c3af23fb4a81e1c7cf10cc49dcb9fda7a5357a",
+          "protocol": 1,
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "id": "redline-control-rewrite-citation-echo",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-control-rewrite-citation-echo/source.docx",
+          "sha256": "4d4c3bcbbed8fa5ee1b2837213fdf11c32508ab2a2aaf96c134c7201c8689b8d",
+          "role": "source"
+        }
+      ],
+      "pngSha256": "4fd496f6425b4bae2e13fcd0c5309d4ca312b1c214ecc57e6b80a135164be6ec",
+      "before": {
+        "status": "measured",
+        "score": 0.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -2,10 +2,2 @@",
+              " p|body|",
+              "-t|Edition ",
+              "-m|sdt-begin",
+              "-m|field-begin",
+              "-m|field-instruction:CITATION Pine",
+              "-m|field-separate",
+              "-t|7.2",
+              "-m|field-end",
+              "-m|sdt-end",
+              "-t| registered.",
+              "+t|Edition 7.2 registered."
+            ],
+            "name": "markup-accepted",
+            "passed": false,
+            "similarity": 0.2857142857142857
+          },
+          {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -2,10 +2,2 @@",
+              " p|body|",
+              "-t|Edition ",
+              "-m|sdt-begin",
+              "-m|field-begin",
+              "-m|field-instruction:CITATION Pine",
+              "-m|field-separate",
+              "-t|7.2",
+              "-m|field-end",
+              "-m|sdt-end",
+              "-t| registered.",
+              "+t|Edition 7.2 registered."
+            ],
+            "name": "markup-rejected",
+            "passed": false,
+            "similarity": 0.2857142857142857
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-echo/expected.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-citation-echo/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-echo/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-echo/expected.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-citation-echo/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-echo/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:sdtPr><w:id w:val=\"21\"/><w:citation/></w:sdtPr><w:sdtContent><w:r><w:fldChar w:fldCharType=\"begin\"/></w:r><w:r><w:instrText xml:space=\"preserve\"> CITATION Pine </w:instrText></w:r><w:r><w:fldChar w:fldCharType=\"separate\"/></w:r><w:r><w:t xml:space=\"preserve\">7.2</w:t></w:r><w:r><w:fldChar w:fldCharType=\"end\"/></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:sdtPr><w:id w:val=\"21\"/><w:citation/></w:sdtPr><w:sdtContent><w:r><w:fldChar w:fldCharType=\"begin\"/></w:r><w:r><w:instrText xml:space=\"preserve\"> CITATION Pine </w:instrText></w:r><w:r><w:fldChar w:fldCharType=\"separate\"/></w:r><w:r><w:t xml:space=\"preserve\">7.2</w:t></w:r><w:r><w:fldChar w:fldCharType=\"end\"/></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "f16559c937b4f29e9cfb090a54ac5792d7c2829a56d2f0b2b6cea0444311b049",
+          "protocol": 1,
+          "status": "ok"
+        }
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-echo/expected.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-citation-echo/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-echo/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-echo/expected.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-citation-echo/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-echo/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:sdtPr><w:id w:val=\"21\"/><w:citation/></w:sdtPr><w:sdtContent><w:r><w:fldChar w:fldCharType=\"begin\"/></w:r><w:r><w:instrText xml:space=\"preserve\"> CITATION Pine </w:instrText></w:r><w:r><w:fldChar w:fldCharType=\"separate\"/></w:r><w:r><w:t xml:space=\"preserve\">7.2</w:t></w:r><w:r><w:fldChar w:fldCharType=\"end\"/></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [
+              [
+                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdt",
+                {},
+                null,
+                [
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtPr",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}id",
+                        {
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val": "21"
+                        },
+                        null,
+                        []
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}citation",
+                        {},
+                        null,
+                        []
+                      ]
+                    ]
+                  ],
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtContent",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldChar",
+                            {
+                              "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldCharType": "begin"
+                            },
+                            null,
+                            []
+                          ]
+                        ]
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}instrText",
+                            {
+                              "{http://www.w3.org/XML/1998/namespace}space": "preserve"
+                            },
+                            " CITATION Pine ",
+                            []
+                          ]
+                        ]
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldChar",
+                            {
+                              "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldCharType": "separate"
+                            },
+                            null,
+                            []
+                          ]
+                        ]
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t",
+                            {
+                              "{http://www.w3.org/XML/1998/namespace}space": "preserve"
+                            },
+                            "7.2",
+                            []
+                          ]
+                        ]
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldChar",
+                            {
+                              "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldCharType": "end"
+                            },
+                            null,
+                            []
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:sdtPr><w:id w:val=\"21\"/><w:citation/></w:sdtPr><w:sdtContent><w:r><w:fldChar w:fldCharType=\"begin\"/></w:r><w:r><w:instrText xml:space=\"preserve\"> CITATION Pine </w:instrText></w:r><w:r><w:fldChar w:fldCharType=\"separate\"/></w:r><w:r><w:t xml:space=\"preserve\">7.2</w:t></w:r><w:r><w:fldChar w:fldCharType=\"end\"/></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [
+              [
+                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdt",
+                {},
+                null,
+                [
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtPr",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}id",
+                        {
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val": "21"
+                        },
+                        null,
+                        []
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}citation",
+                        {},
+                        null,
+                        []
+                      ]
+                    ]
+                  ],
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtContent",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldChar",
+                            {
+                              "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldCharType": "begin"
+                            },
+                            null,
+                            []
+                          ]
+                        ]
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}instrText",
+                            {
+                              "{http://www.w3.org/XML/1998/namespace}space": "preserve"
+                            },
+                            " CITATION Pine ",
+                            []
+                          ]
+                        ]
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldChar",
+                            {
+                              "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldCharType": "separate"
+                            },
+                            null,
+                            []
+                          ]
+                        ]
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t",
+                            {
+                              "{http://www.w3.org/XML/1998/namespace}space": "preserve"
+                            },
+                            "7.2",
+                            []
+                          ]
+                        ]
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldChar",
+                            {
+                              "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldCharType": "end"
+                            },
+                            null,
+                            []
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+40e58cfe5df8db17add68773238b5d80bb46fe86",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "f73d084d4d10217d813baf27b4d536f7a5369dbf6fea8d83e93fb0fb66e02736",
+          "protocol": 1,
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "id": "redline-control-rewrite-citation-echo-control",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-control-rewrite-citation-echo-control/source.docx",
+          "sha256": "577090777530de38189f29bcfc5b336eb7c204dc2811c31599ed9199ca9b76dd",
+          "role": "source"
+        }
+      ],
+      "pngSha256": "2af76fc9fea7e0538552595117b8a4dc4f9c81a5aa7bf2f0cacabad3b6c10aff",
+      "before": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-echo-control/expected.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-citation-echo-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-echo-control/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-echo-control/expected.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-citation-echo-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-echo-control/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "f16559c937b4f29e9cfb090a54ac5792d7c2829a56d2f0b2b6cea0444311b049",
+          "protocol": 1,
+          "status": "ok"
+        }
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-echo-control/expected.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-citation-echo-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-echo-control/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-echo-control/expected.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-citation-echo-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-echo-control/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+40e58cfe5df8db17add68773238b5d80bb46fe86",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "f16559c937b4f29e9cfb090a54ac5792d7c2829a56d2f0b2b6cea0444311b049",
+          "protocol": 1,
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "id": "redline-control-rewrite-citation-outside",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-control-rewrite-citation-outside/source.docx",
+          "sha256": "4d4c3bcbbed8fa5ee1b2837213fdf11c32508ab2a2aaf96c134c7201c8689b8d",
+          "role": "source"
+        }
+      ],
+      "pngSha256": "aaa27afe9326d0dd37c027b87710a7e8c0ed364400b2b02b05175dec4606910f",
+      "before": {
+        "status": "measured",
+        "score": 0.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -2,10 +2,2 @@",
+              " p|body|",
+              "-t|Revised edition ",
+              "-m|sdt-begin",
+              "-m|field-begin",
+              "-m|field-instruction:CITATION Pine",
+              "-m|field-separate",
+              "-t|7.2",
+              "-m|field-end",
+              "-m|sdt-end",
+              "-t| registered today.",
+              "+t|Revised edition 7.2 registered today."
+            ],
+            "name": "markup-accepted",
+            "passed": false,
+            "similarity": 0.2857142857142857
+          },
+          {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -2,10 +2,2 @@",
+              " p|body|",
+              "-t|Revised edition ",
+              "-m|sdt-begin",
+              "-m|field-begin",
+              "-m|field-instruction:CITATION Pine",
+              "-m|field-separate",
+              "-t|7.2",
+              "-m|field-end",
+              "-m|sdt-end",
+              "-t| registered today.",
+              "+t|Revised edition 7.2 registered today."
+            ],
+            "name": "markup-rejected",
+            "passed": false,
+            "similarity": 0.2857142857142857
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-outside/expected.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-citation-outside/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-outside/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-outside/expected.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-citation-outside/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-outside/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:sdtPr><w:id w:val=\"21\"/><w:citation/></w:sdtPr><w:sdtContent><w:r><w:fldChar w:fldCharType=\"begin\"/></w:r><w:r><w:instrText xml:space=\"preserve\"> CITATION Pine </w:instrText></w:r><w:r><w:fldChar w:fldCharType=\"separate\"/></w:r><w:r><w:t xml:space=\"preserve\">7.2</w:t></w:r><w:r><w:fldChar w:fldCharType=\"end\"/></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:sdtPr><w:id w:val=\"21\"/><w:citation/></w:sdtPr><w:sdtContent><w:r><w:fldChar w:fldCharType=\"begin\"/></w:r><w:r><w:instrText xml:space=\"preserve\"> CITATION Pine </w:instrText></w:r><w:r><w:fldChar w:fldCharType=\"separate\"/></w:r><w:r><w:t xml:space=\"preserve\">7.2</w:t></w:r><w:r><w:fldChar w:fldCharType=\"end\"/></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "8eba67f1b00681a5aa2a0c5f34c3af23fb4a81e1c7cf10cc49dcb9fda7a5357a",
+          "protocol": 1,
+          "status": "ok"
+        }
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-outside/expected.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-citation-outside/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-outside/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-outside/expected.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-citation-outside/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-outside/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:sdtPr><w:id w:val=\"21\"/><w:citation/></w:sdtPr><w:sdtContent><w:r><w:fldChar w:fldCharType=\"begin\"/></w:r><w:r><w:instrText xml:space=\"preserve\"> CITATION Pine </w:instrText></w:r><w:r><w:fldChar w:fldCharType=\"separate\"/></w:r><w:r><w:t xml:space=\"preserve\">7.2</w:t></w:r><w:r><w:fldChar w:fldCharType=\"end\"/></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [
+              [
+                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdt",
+                {},
+                null,
+                [
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtPr",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}id",
+                        {
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val": "21"
+                        },
+                        null,
+                        []
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}citation",
+                        {},
+                        null,
+                        []
+                      ]
+                    ]
+                  ],
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtContent",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldChar",
+                            {
+                              "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldCharType": "begin"
+                            },
+                            null,
+                            []
+                          ]
+                        ]
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}instrText",
+                            {
+                              "{http://www.w3.org/XML/1998/namespace}space": "preserve"
+                            },
+                            " CITATION Pine ",
+                            []
+                          ]
+                        ]
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldChar",
+                            {
+                              "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldCharType": "separate"
+                            },
+                            null,
+                            []
+                          ]
+                        ]
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t",
+                            {
+                              "{http://www.w3.org/XML/1998/namespace}space": "preserve"
+                            },
+                            "7.2",
+                            []
+                          ]
+                        ]
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldChar",
+                            {
+                              "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldCharType": "end"
+                            },
+                            null,
+                            []
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:sdtPr><w:id w:val=\"21\"/><w:citation/></w:sdtPr><w:sdtContent><w:r><w:fldChar w:fldCharType=\"begin\"/></w:r><w:r><w:instrText xml:space=\"preserve\"> CITATION Pine </w:instrText></w:r><w:r><w:fldChar w:fldCharType=\"separate\"/></w:r><w:r><w:t xml:space=\"preserve\">7.2</w:t></w:r><w:r><w:fldChar w:fldCharType=\"end\"/></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [
+              [
+                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdt",
+                {},
+                null,
+                [
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtPr",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}id",
+                        {
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val": "21"
+                        },
+                        null,
+                        []
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}citation",
+                        {},
+                        null,
+                        []
+                      ]
+                    ]
+                  ],
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtContent",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldChar",
+                            {
+                              "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldCharType": "begin"
+                            },
+                            null,
+                            []
+                          ]
+                        ]
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}instrText",
+                            {
+                              "{http://www.w3.org/XML/1998/namespace}space": "preserve"
+                            },
+                            " CITATION Pine ",
+                            []
+                          ]
+                        ]
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldChar",
+                            {
+                              "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldCharType": "separate"
+                            },
+                            null,
+                            []
+                          ]
+                        ]
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t",
+                            {
+                              "{http://www.w3.org/XML/1998/namespace}space": "preserve"
+                            },
+                            "7.2",
+                            []
+                          ]
+                        ]
+                      ],
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldChar",
+                            {
+                              "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}fldCharType": "end"
+                            },
+                            null,
+                            []
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+40e58cfe5df8db17add68773238b5d80bb46fe86",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "7221dbd218803a70b6a60e25da76028adae5e99cabdc0f9aaccd1a9409e73022",
+          "protocol": 1,
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "id": "redline-control-rewrite-citation-outside-control",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-control-rewrite-citation-outside-control/source.docx",
+          "sha256": "577090777530de38189f29bcfc5b336eb7c204dc2811c31599ed9199ca9b76dd",
+          "role": "source"
+        }
+      ],
+      "pngSha256": "50e5383ebfbbe34e1b70de3fe07bfd302f22dd70516af897040bd6d3418c82ec",
+      "before": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-outside-control/expected.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-citation-outside-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-outside-control/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-outside-control/expected.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-citation-outside-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-outside-control/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "8eba67f1b00681a5aa2a0c5f34c3af23fb4a81e1c7cf10cc49dcb9fda7a5357a",
+          "protocol": 1,
+          "status": "ok"
+        }
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-outside-control/expected.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-citation-outside-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-outside-control/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-outside-control/expected.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-citation-outside-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-citation-outside-control/expected.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+40e58cfe5df8db17add68773238b5d80bb46fe86",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "8eba67f1b00681a5aa2a0c5f34c3af23fb4a81e1c7cf10cc49dcb9fda7a5357a",
+          "protocol": 1,
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "id": "redline-control-rewrite-strike-break",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-control-rewrite-strike-break/source.docx",
+          "sha256": "74e6d219cf7b672ad339062c46963986ca23ec01179bd5708c90d7663deff01f",
+          "role": "source"
+        }
+      ],
+      "pngSha256": "b1f752a1fcd156e300aaee9915ae8aef61c43152fc989f7d9f0f5b0268e77e34",
+      "before": {
+        "status": "measured",
+        "score": 0.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -2,6 +2,2 @@",
+              " p|body|",
+              "-t|Edition ",
+              "-m|sdt-begin",
+              "-t|A\nB",
+              "-m|sdt-end",
+              "-t| registered.",
+              "+t|Edition A  \nB registered."
+            ],
+            "name": "markup-accepted",
+            "passed": false,
+            "similarity": 0.4
+          },
+          {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -2,6 +2,2 @@",
+              " p|body|",
+              "-t|Edition ",
+              "-m|sdt-begin",
+              "-t|A\nB",
+              "-m|sdt-end",
+              "-t| registered.",
+              "+t|Edition A  \nB registered."
+            ],
+            "name": "markup-rejected",
+            "passed": false,
+            "similarity": 0.4
+          },
+          {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -2,2 +2,2 @@",
+              " p|body",
+              "-t|Edition A\nB registered.",
+              "+t|Edition A  \nB registered."
+            ],
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-strike-break/source.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-strike-break/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-strike-break/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": false,
+            "similarity": 0.6666666666666666
+          },
+          {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -2,2 +2,2 @@",
+              " p|body",
+              "-t|Edition A\nB registered.",
+              "+t|Edition A  \nB registered."
+            ],
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-strike-break/source.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-strike-break/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-strike-break/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": false,
+            "similarity": 0.6666666666666666
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><w:sdtPr><w:id w:val=\"22\"/></w:sdtPr><w:sdtContent><w:r><w:rPr><w:strike/></w:rPr><w:t>A</w:t><w:br/><w:t>B</w:t></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><w:sdtPr><w:id w:val=\"22\"/></w:sdtPr><w:sdtContent><w:r><w:rPr><w:strike/></w:rPr><w:t>A</w:t><w:br/><w:t>B</w:t></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "b3bc662fa9be4245612e2fae8a48ebe8d420cfd231aa17a606c36a7e55cdb10b",
+          "protocol": 1,
+          "status": "ok"
+        }
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-strike-break/source.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-strike-break/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-strike-break/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-strike-break/source.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-strike-break/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-strike-break/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><w:sdtPr><w:id w:val=\"22\"/></w:sdtPr><w:sdtContent><w:r><w:rPr><w:strike/></w:rPr><w:t>A</w:t><w:br/><w:t>B</w:t></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [
+              [
+                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdt",
+                {},
+                null,
+                [
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtPr",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}id",
+                        {
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val": "22"
+                        },
+                        null,
+                        []
+                      ]
+                    ]
+                  ],
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtContent",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}rPr",
+                            {},
+                            null,
+                            [
+                              [
+                                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}strike",
+                                {},
+                                null,
+                                []
+                              ]
+                            ]
+                          ],
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t",
+                            {},
+                            "A",
+                            []
+                          ],
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}br",
+                            {},
+                            null,
+                            []
+                          ],
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t",
+                            {},
+                            "B",
+                            []
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><w:sdtPr><w:id w:val=\"22\"/></w:sdtPr><w:sdtContent><w:r><w:rPr><w:strike/></w:rPr><w:t>A</w:t><w:br/><w:t>B</w:t></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [
+              [
+                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdt",
+                {},
+                null,
+                [
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtPr",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}id",
+                        {
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val": "22"
+                        },
+                        null,
+                        []
+                      ]
+                    ]
+                  ],
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtContent",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}rPr",
+                            {},
+                            null,
+                            [
+                              [
+                                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}strike",
+                                {},
+                                null,
+                                []
+                              ]
+                            ]
+                          ],
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t",
+                            {},
+                            "A",
+                            []
+                          ],
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}br",
+                            {},
+                            null,
+                            []
+                          ],
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t",
+                            {},
+                            "B",
+                            []
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+40e58cfe5df8db17add68773238b5d80bb46fe86",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "7991539d5002cc6ae49986f8036787ca163dbf18c33e83df87a9e7022c48ef7a",
+          "protocol": 1,
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "id": "redline-control-rewrite-strike-break-control",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-control-rewrite-strike-break-control/source.docx",
+          "sha256": "bed095f1d7a7833e117d1878fdd9be6f3faaec503cc3ea0a5204a393184a62c6",
+          "role": "source"
+        }
+      ],
+      "pngSha256": "1317be69ac7993b0e08a40aeb6c746486f4fc11276d4d7bdcadcc485c80f1d8d",
+      "before": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-strike-break-control/source.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-strike-break-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-strike-break-control/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-strike-break-control/source.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-strike-break-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-strike-break-control/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "761ee92ff3d9bccc199c6eb3a1e6691444ef14a368d2b81b3c0848a24099bbf9",
+          "protocol": 1,
+          "status": "ok"
+        }
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-strike-break-control/source.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-strike-break-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-strike-break-control/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-strike-break-control/source.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-strike-break-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-strike-break-control/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+40e58cfe5df8db17add68773238b5d80bb46fe86",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "761ee92ff3d9bccc199c6eb3a1e6691444ef14a368d2b81b3c0848a24099bbf9",
+          "protocol": 1,
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "id": "redline-control-rewrite-code-break",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-control-rewrite-code-break/source.docx",
+          "sha256": "545b6bc01fe8c357df44b4296154dbbeb99a7ab78f09f7617d694f3bffd30efc",
+          "role": "source"
+        }
+      ],
+      "pngSha256": "b75e46060e8b04d05a59e93af6919e9f25d9f74ef285abd8bc458e0f1136020c",
+      "before": {
+        "status": "measured",
+        "score": 0.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -2,6 +2,2 @@",
+              " p|body|",
+              "-t|Edition ",
+              "-m|sdt-begin",
+              "-t|A\nB",
+              "-m|sdt-end",
+              "-t| registered.",
+              "+t|Edition A  \nB registered."
+            ],
+            "name": "markup-accepted",
+            "passed": false,
+            "similarity": 0.4
+          },
+          {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -2,6 +2,2 @@",
+              " p|body|",
+              "-t|Edition ",
+              "-m|sdt-begin",
+              "-t|A\nB",
+              "-m|sdt-end",
+              "-t| registered.",
+              "+t|Edition A  \nB registered."
+            ],
+            "name": "markup-rejected",
+            "passed": false,
+            "similarity": 0.4
+          },
+          {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -2,2 +2,2 @@",
+              " p|body",
+              "-t|Edition A\nB registered.",
+              "+t|Edition A  \nB registered."
+            ],
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-code-break/source.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-code-break/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-code-break/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": false,
+            "similarity": 0.6666666666666666
+          },
+          {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -2,2 +2,2 @@",
+              " p|body",
+              "-t|Edition A\nB registered.",
+              "+t|Edition A  \nB registered."
+            ],
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-code-break/source.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-code-break/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-code-break/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": false,
+            "similarity": 0.6666666666666666
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><w:sdtPr><w:id w:val=\"22\"/></w:sdtPr><w:sdtContent><w:r><w:rPr><w:rStyle w:val=\"Code\"/></w:rPr><w:t>A</w:t><w:br/><w:t>B</w:t></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><w:sdtPr><w:id w:val=\"22\"/></w:sdtPr><w:sdtContent><w:r><w:rPr><w:rStyle w:val=\"Code\"/></w:rPr><w:t>A</w:t><w:br/><w:t>B</w:t></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "13a3c59f22a3800c4ce24ebcc839563a0575d0cbce1be48f0014a64902c3aabe",
+          "protocol": 1,
+          "status": "ok"
+        }
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-code-break/source.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-code-break/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-code-break/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-code-break/source.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-code-break/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-code-break/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><w:sdtPr><w:id w:val=\"22\"/></w:sdtPr><w:sdtContent><w:r><w:rPr><w:rStyle w:val=\"Code\"/></w:rPr><w:t>A</w:t><w:br/><w:t>B</w:t></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [
+              [
+                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdt",
+                {},
+                null,
+                [
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtPr",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}id",
+                        {
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val": "22"
+                        },
+                        null,
+                        []
+                      ]
+                    ]
+                  ],
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtContent",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}rPr",
+                            {},
+                            null,
+                            [
+                              [
+                                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}rStyle",
+                                {
+                                  "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val": "Code"
+                                },
+                                null,
+                                []
+                              ]
+                            ]
+                          ],
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t",
+                            {},
+                            "A",
+                            []
+                          ],
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}br",
+                            {},
+                            null,
+                            []
+                          ],
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t",
+                            {},
+                            "B",
+                            []
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><w:sdtPr><w:id w:val=\"22\"/></w:sdtPr><w:sdtContent><w:r><w:rPr><w:rStyle w:val=\"Code\"/></w:rPr><w:t>A</w:t><w:br/><w:t>B</w:t></w:r></w:sdtContent></w:sdt>"
+              ],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [
+              [
+                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdt",
+                {},
+                null,
+                [
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtPr",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}id",
+                        {
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val": "22"
+                        },
+                        null,
+                        []
+                      ]
+                    ]
+                  ],
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtContent",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                        {},
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}rPr",
+                            {},
+                            null,
+                            [
+                              [
+                                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}rStyle",
+                                {
+                                  "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val": "Code"
+                                },
+                                null,
+                                []
+                              ]
+                            ]
+                          ],
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t",
+                            {},
+                            "A",
+                            []
+                          ],
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}br",
+                            {},
+                            null,
+                            []
+                          ],
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t",
+                            {},
+                            "B",
+                            []
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+40e58cfe5df8db17add68773238b5d80bb46fe86",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "c5e4b582909e2cef8e28388752247dea9002c315165908b2f5133ff993867122",
+          "protocol": 1,
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "id": "redline-control-rewrite-code-break-control",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-control-rewrite-code-break-control/source.docx",
+          "sha256": "7336184d581f65ece040d969e7872d23bf3b30e18263b3933e86f8379609b4b4",
+          "role": "source"
+        }
+      ],
+      "pngSha256": "bb57ba7612400040e81aed26d377b55809989b7d5d5f13fc9b2fb5e49e46b150",
+      "before": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-code-break-control/source.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-code-break-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-code-break-control/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-code-break-control/source.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-code-break-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-code-break-control/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "fe0556737356aa032118b5f5a28ef82b243614e358a3610155204ba6f51f96a8",
+          "protocol": 1,
+          "status": "ok"
+        }
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-code-break-control/source.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-code-break-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-code-break-control/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-code-break-control/source.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-code-break-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-code-break-control/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+40e58cfe5df8db17add68773238b5d80bb46fe86",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "fe0556737356aa032118b5f5a28ef82b243614e358a3610155204ba6f51f96a8",
+          "protocol": 1,
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "id": "redline-control-rewrite-link-break",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-control-rewrite-link-break/source.docx",
+          "sha256": "d873af9f777996e1efb468e97460841d2541dd3a4494e2319e733d57302942e4",
+          "role": "source"
+        }
+      ],
+      "pngSha256": "6fee2b524e0f57dfab3782803ee6543cd5d8be9462bd5feac8bfe6750b8d79af",
+      "before": {
+        "status": "measured",
+        "score": 0.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -3,7 +3,5 @@",
+              " t|Edition ",
+              "-m|sdt-begin",
+              " m|hyperlink-begin",
+              "-t|A\nB",
+              "+t|A  \nB",
+              " m|hyperlink-end",
+              "-m|sdt-end",
+              " t| registered."
+            ],
+            "name": "markup-accepted",
+            "passed": false,
+            "similarity": 0.75
+          },
+          {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -3,7 +3,5 @@",
+              " t|Edition ",
+              "-m|sdt-begin",
+              " m|hyperlink-begin",
+              "-t|A\nB",
+              "+t|A  \nB",
+              " m|hyperlink-end",
+              "-m|sdt-end",
+              " t| registered."
+            ],
+            "name": "markup-rejected",
+            "passed": false,
+            "similarity": 0.75
+          },
+          {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -2,2 +2,2 @@",
+              " p|body",
+              "-t|Edition A\nB registered.",
+              "+t|Edition A  \nB registered."
+            ],
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-link-break/source.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-link-break/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-link-break/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": false,
+            "similarity": 0.6666666666666666
+          },
+          {
+            "diff": [
+              "--- expected",
+              "+++ actual",
+              "@@ -2,2 +2,2 @@",
+              " p|body",
+              "-t|Edition A\nB registered.",
+              "+t|Edition A  \nB registered."
+            ],
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-link-break/source.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-link-break/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-link-break/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": false,
+            "similarity": 0.6666666666666666
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><w:sdtPr><w:id w:val=\"22\"/></w:sdtPr><w:sdtContent><w:hyperlink r:id=\"rLink\"><w:r><w:t>A</w:t><w:br/><w:t>B</w:t></w:r></w:hyperlink></w:sdtContent></w:sdt>"
+              ],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><w:sdtPr><w:id w:val=\"22\"/></w:sdtPr><w:sdtContent><w:hyperlink r:id=\"rLink\"><w:r><w:t>A</w:t><w:br/><w:t>B</w:t></w:r></w:hyperlink></w:sdtContent></w:sdt>"
+              ],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": false
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "ffe816e394eaf15f2f86b70bf4dfbadc76bd6c9a98e02acb32115c3efb80e51a",
+          "protocol": 1,
+          "status": "ok"
+        }
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-link-break/source.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-link-break/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-link-break/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-link-break/source.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-link-break/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-link-break/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><w:sdtPr><w:id w:val=\"22\"/></w:sdtPr><w:sdtContent><w:hyperlink r:id=\"rLink\"><w:r><w:t>A</w:t><w:br/><w:t>B</w:t></w:r></w:hyperlink></w:sdtContent></w:sdt>"
+              ],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [
+              [
+                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdt",
+                {},
+                null,
+                [
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtPr",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}id",
+                        {
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val": "22"
+                        },
+                        null,
+                        []
+                      ]
+                    ]
+                  ],
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtContent",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hyperlink",
+                        {
+                          "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id": "rLink"
+                        },
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                            {},
+                            null,
+                            [
+                              [
+                                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t",
+                                {},
+                                "A",
+                                []
+                              ],
+                              [
+                                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}br",
+                                {},
+                                null,
+                                []
+                              ],
+                              [
+                                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t",
+                                {},
+                                "B",
+                                []
+                              ]
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [
+                "<w:sdt xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><w:sdtPr><w:id w:val=\"22\"/></w:sdtPr><w:sdtContent><w:hyperlink r:id=\"rLink\"><w:r><w:t>A</w:t><w:br/><w:t>B</w:t></w:r></w:hyperlink></w:sdtContent></w:sdt>"
+              ],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [
+              [
+                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdt",
+                {},
+                null,
+                [
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtPr",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}id",
+                        {
+                          "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val": "22"
+                        },
+                        null,
+                        []
+                      ]
+                    ]
+                  ],
+                  [
+                    "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sdtContent",
+                    {},
+                    null,
+                    [
+                      [
+                        "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}hyperlink",
+                        {
+                          "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id": "rLink"
+                        },
+                        null,
+                        [
+                          [
+                            "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}r",
+                            {},
+                            null,
+                            [
+                              [
+                                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t",
+                                {},
+                                "A",
+                                []
+                              ],
+                              [
+                                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}br",
+                                {},
+                                null,
+                                []
+                              ],
+                              [
+                                "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t",
+                                {},
+                                "B",
+                                []
+                              ]
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+40e58cfe5df8db17add68773238b5d80bb46fe86",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "121e279caa0520d5963607307c61b88745cd009c554705b2d6895398ad28ca1b",
+          "protocol": 1,
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "id": "redline-control-rewrite-link-break-control",
+      "inputs": [
+        {
+          "path": "fixtures/redline/redline-control-rewrite-link-break-control/source.docx",
+          "sha256": "867dde6fb89b68d58e28d4376a5c99d576af5ffea364719930adf60cf0723243",
+          "role": "source"
+        }
+      ],
+      "pngSha256": "6645aac7dcf5d69f5f0b0b9cb8c1eac224bc557b283a38ad1161a854e628d365",
+      "before": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-link-break-control/source.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-link-break-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-link-break-control/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-link-break-control/source.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-before14/redline-control-rewrite-link-break-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-link-break-control/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+ae68ba01f4c9fd47dd3990e2dd7c04cdc59bafb1",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "c39e0725463769e2edfd84bfb4de464da3d0d2f8a811802e064cef3b15836665",
+          "protocol": 1,
+          "status": "ok"
+        }
+      },
+      "after": {
+        "status": "measured",
+        "score": 100.0,
+        "checks": [
+          {
+            "name": "conversion",
+            "passed": true
+          },
+          {
+            "name": "readable-package",
+            "passed": true
+          },
+          {
+            "name": "markup-accepted",
+            "passed": true
+          },
+          {
+            "name": "markup-rejected",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-link-break-control/source.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-link-break-control/candidate-redline.docx",
+                "operation": "accept",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-link-break-control/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-accepted",
+            "passed": true
+          },
+          {
+            "engine": {
+              "authored": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-link-break-control/source.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "candidate": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/runs/control-rewrite-after-shipping/redline-control-rewrite-link-break-control/candidate-redline.docx",
+                "operation": "reject",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              },
+              "expected": {
+                "input": "/home/jman/Code/Docxodus/.local-closeout/bench/fixtures/redline/redline-control-rewrite-link-break-control/source.docx",
+                "operation": "load",
+                "redlinesAfter": 0,
+                "redlinesBefore": 0
+              }
+            },
+            "name": "libreoffice-rejected",
+            "passed": true
+          },
+          {
+            "name": "no-new-validation-errors",
+            "new": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "accepted",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "controls": [],
+              "scope": "rejected",
+              "type": "content-controls",
+              "version": 1
+            },
+            "name": "assertion-content-controls",
+            "observed": [],
+            "passed": true
+          },
+          {
+            "declaration": {
+              "max": 0,
+              "scope": "redline",
+              "type": "revision-count",
+              "version": 1
+            },
+            "name": "assertion-revision-count",
+            "observed": 0,
+            "passed": true
+          }
+        ],
+        "adapter": {
+          "engine": {
+            "assembly": "Docxodus",
+            "informationalVersion": "1.0.0+40e58cfe5df8db17add68773238b5d80bb46fe86",
+            "name": "docxodus",
+            "runtime": "10.0.9"
+          },
+          "outputSha256": "c39e0725463769e2edfd84bfb4de464da3d0d2f8a811802e064cef3b15836665",
+          "protocol": 1,
+          "status": "ok"
+        }
+      }
+    }
+  ]
+}

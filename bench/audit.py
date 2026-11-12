@@ -1,14 +1,119 @@
 """Verify the declared repository inventory and regenerate authored packages."""
-from pathlib import Path
+from pathlib import Path, PurePosixPath
+import re
 import tempfile
 import xml.etree.ElementTree as ET
 from unittest.mock import patch
 from zipfile import ZipFile
-from . import fixtures, redline, redline_fixtures
-from .common import ROOT, digest, execute, read_json, validate_registry, write_json
+from . import collection_fonts, editor_fixtures, fixtures, font_fixtures, projection_fixtures, redline, redline_fixtures
+from .common import PLACEHOLDER_FONT_BYTES, ROOT, digest, execute, read_json, validate_registry, write_json
+
+RELATIONSHIPS = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/'
+FONT_TABLE_PARTS = {'word/fonttable.xml', 'word/_rels/fonttable.xml.rels'}
+PNG_START, PNG_END = b'\x89PNG\r\n\x1a\n', b'IEND\xaeB`\x82'
+FONT_TYPES = ('application/vnd.openxmlformats-officedocument.obfuscatedfont', 'application/vnd.ms-opentype',
+              'application/vnd.ms-fontobject')
+AUTHORED_LEGACY_IMAGES = (frozenset(payload for kind, payload in fixtures.static_image_assets().items() if kind != 'png')
+                          | frozenset(fixtures.emf_image_assets().values()))
+# The placeholder, or the exact bytes of an original bench/collection_fonts.py program as a package embeds it.
+AUTHORED_FONT_PARTS = frozenset({PLACEHOLDER_FONT_BYTES, *fixtures.embedded_font_parts().values()})
+
+
+ADDRESS = r'[a-z0-9._-]+@example\.com'
+MAILTO = re.compile(rf'mailto:{ADDRESS}(?:\s*[;,]\s*{ADDRESS}|\s+{ADDRESS})*')
+
+
+def reserved_link_target(target):
+    """A navigation target on the reserved example.com domain: never loaded, names no real party.
+
+    A `mailto:` lists one or more lower-case example.com addresses separated by one `;` or `,` (with
+    optional spaces) or by spaces; an `https://example.com` target is a plain path. Anything else,
+    including empty addresses, query strings, ports, upper case and percent-encoding, is refused."""
+    if target.startswith('mailto:'):
+        return MAILTO.fullmatch(target) is not None
+    return re.fullmatch(r'https://example\.com(/[A-Za-z0-9._~/-]*)?', target) is not None
+
+
+def font_program_type(content_type):
+    """A content type for a font program (not the font table that lists fonts), parameters ignored."""
+    value = (content_type or '').split(';', 1)[0].strip().lower()
+    return value.startswith(('font/', 'application/x-font', 'application/font')) or value in FONT_TYPES
+
+
+def permitted_bytes(payload):
+    """Text, a complete PNG, exact authored legacy-image bytes, or an authored font part.
+
+    Every font program, obfuscated or compressed, has NUL bytes in its table directory, so this
+    refuses one whatever its name, content type or relationship."""
+    if payload in AUTHORED_FONT_PARTS or payload in AUTHORED_LEGACY_IMAGES or (payload.startswith(PNG_START) and payload.endswith(PNG_END)):
+        return True
+    if b'\0' in payload:
+        return False
+    try:
+        payload.decode('utf-8')
+    except UnicodeDecodeError:
+        return False
+    return True
+
+
+def check_package(archive):
+    """Refuse embedded assets and external resources in an authored package.
+
+    Two shapes are permitted because cases about the package itself need them: an external
+    hyperlink from the main document to a reserved example.com target, and the font table with an
+    embedded-font relationship whose target holds exactly the placeholder or an authored font part. Every font
+    relationship, wherever its target and whatever the target's name, must come from the font table
+    and reach the placeholder; so must every part a font content type types. Part names,
+    relationship types and content types are compared case-insensitively, and every entry's bytes
+    must be text, a complete PNG, one exact authored TIFF/WMF, or the placeholder.
+    """
+    names = archive.namelist()
+    by_lower = {}
+    for name in names:
+        by_lower.setdefault(name.lower(), []).append(name)
+    def placeholder(part):
+        entries = by_lower.get(part.lower(), [])
+        return bool(entries) and all(archive.read(n) in AUTHORED_FONT_PARTS for n in entries)
+    font_targets = set()
+    for name in sorted(names):
+        if not name.lower().endswith('.rels'):
+            continue
+        source = name.lower()
+        folder = PurePosixPath(name).parent.parent
+        for relationship in ET.fromstring(archive.read(name)):
+            kind = (relationship.get('Type') or '').strip().lower()
+            target = relationship.get('Target', '')
+            if (relationship.get('TargetMode') or '').strip().lower() == 'external':
+                if source != 'word/_rels/document.xml.rels' or kind != RELATIONSHIPS.lower() + 'hyperlink' or not reserved_link_target(target):
+                    raise ValueError('External document resource is not permitted')
+            elif kind.rsplit('/', 1)[-1] == 'font':
+                part = str(folder / target)
+                if source != 'word/_rels/fonttable.xml.rels' or not placeholder(part):
+                    raise ValueError('Unexpected embedded asset: font relationship to ' + part)
+                font_targets.add(part.lower())
+    for name in [n for n in names if n.lower() == '[content_types].xml']:
+        for item in ET.fromstring(archive.read(name)):
+            if not font_program_type(item.get('ContentType')):
+                continue
+            if item.tag.rsplit('}', 1)[-1] == 'Default':
+                typed = [n for n in names if n.lower().endswith('.' + (item.get('Extension') or '').lower())]
+            else:
+                typed = by_lower.get((item.get('PartName') or '').lstrip('/').lower(), [])
+            for part in typed:
+                if not placeholder(part):
+                    raise ValueError('Unexpected embedded asset: font-typed part ' + part)
+    for name in names:
+        lower = name.lower()
+        if lower.startswith('customxml/'):
+            raise ValueError('Unexpected embedded asset: ' + name)
+        if 'font' in lower and lower not in FONT_TABLE_PARTS and lower not in font_targets:
+            raise ValueError('Unexpected embedded asset: ' + name)
+        if not permitted_bytes(archive.read(name)):
+            raise ValueError('Unexpected embedded asset: binary entry ' + name)
 
 
 def audit():
+    collection_fonts.validate()
     registry = validate_registry()
     with tempfile.TemporaryDirectory() as temp, patch.object(fixtures, 'ROOT', Path(temp)):
         regenerated = fixtures.generate()
@@ -21,13 +126,7 @@ def audit():
                 if actual.read_bytes() != (Path(temp) / path).read_bytes():
                     raise ValueError('Fixture differs from its generator: ' + path)
                 with ZipFile(actual) as archive:
-                    for name in archive.namelist():
-                        if 'font' in name.lower() or name.startswith('customXml/'):
-                            raise ValueError('Unexpected embedded asset: ' + name)
-                        if name.endswith('.rels'):
-                            for relationship in ET.fromstring(archive.read(name)):
-                                if relationship.get('TargetMode') == 'External':
-                                    raise ValueError('External document resource is not permitted')
+                    check_package(archive)
     redline_registry = redline.validate_registry()
     with tempfile.TemporaryDirectory() as temp, patch.object(redline_fixtures, 'ROOT', Path(temp)):
         if redline_fixtures.generate() != redline_registry:
@@ -38,20 +137,34 @@ def audit():
                 if actual.read_bytes() != (Path(temp) / record['path']).read_bytes():
                     raise ValueError('Redline fixture differs from its generator: ' + record['path'])
                 with ZipFile(actual) as archive:
-                    for name in archive.namelist():
-                        if 'font' in name.lower() or name.startswith('customXml/'):
-                            raise ValueError('Unexpected embedded asset: ' + name)
-                        if name.endswith('.rels') and any(r.get('TargetMode') == 'External' for r in ET.fromstring(archive.read(name))):
-                            raise ValueError('External document resource is not permitted')
+                    check_package(archive)
+    editor_registry = editor_fixtures.validate()
+    with tempfile.TemporaryDirectory() as temp:
+        if editor_fixtures.generate(Path(temp)) != editor_registry:
+            raise ValueError('Editor manifest differs from its original generator')
+        for case in editor_registry['cases']:
+            actual = ROOT / case['input']
+            if actual.read_bytes() != (Path(temp) / case['input']).read_bytes():
+                raise ValueError('Editor fixture differs from its generator: ' + case['id'])
+            with ZipFile(actual) as archive:
+                check_package(archive)
+    projection_registry = projection_fixtures.validate()
+    for case in projection_registry['cases']:
+        with ZipFile(ROOT / case['input']) as archive:
+            check_package(archive)
+    font_registry = font_fixtures.validate()
+    for case in font_registry['cases']:
+        with ZipFile(ROOT / case['input']) as archive:
+            check_package(archive)
     inventory = read_json(ROOT / 'PROVENANCE.json')
     actual = set()
     for path in ROOT.rglob('*'):
         relative = path.relative_to(ROOT)
         if any(part in {'.git', '__pycache__', '.venv', 'runs', 'references', 'renderer', 'node_modules'} for part in relative.parts) or not path.is_file():
             continue
-        if str(relative) == 'PROVENANCE.json':
+        if relative.as_posix() == 'PROVENANCE.json':
             continue
-        actual.add(str(relative))
+        actual.add(relative.as_posix())
     if actual != set(inventory['files']):
         raise ValueError('Repository inventory differs from provenance record: ' + str(sorted(actual ^ set(inventory['files']))))
     if (ROOT / '.git').exists():
@@ -69,12 +182,12 @@ def record():
     files = {}
     for path in sorted(ROOT.rglob('*')):
         relative = path.relative_to(ROOT)
-        if any(part in {'.git', '__pycache__', '.venv', 'runs', 'references', 'renderer', 'node_modules'} for part in relative.parts) or not path.is_file() or str(relative) == 'PROVENANCE.json':
+        if any(part in {'.git', '__pycache__', '.venv', 'runs', 'references', 'renderer', 'node_modules'} for part in relative.parts) or not path.is_file() or relative.as_posix() == 'PROVENANCE.json':
             continue
         origin = 'Authored for this repository'
         if relative.parts[0] == 'fixtures':
-            origin = 'Generated by bench/redline_fixtures.py' if relative.parts[1] == 'redline' else 'Generated by bench/fixtures.py'
-        files[str(relative)] = {'author': 'John Scrudato IV', 'license': 'MIT', 'origin': origin, 'sha256': digest(path)}
+            origin = 'Generated by bench/' + ('collection_fonts.py' if relative.parts[1] == 'collection-fonts' else 'redline_fixtures.py' if relative.parts[1] == 'redline' else 'editor_fixtures.py' if relative.parts[1] == 'editor' else 'font_fixtures.py' if relative.parts[1] == 'fonts' else 'projection_fixtures.py' if relative.parts[1] == 'projection' else 'fixtures.py')
+        files[relative.as_posix()] = {'author': 'John Scrudato IV', 'license': 'MIT', 'origin': origin, 'sha256': digest(path)}
     write_json(ROOT / 'PROVENANCE.json', {'schema': 1, 'scope': 'Repository files excluding this self-referential inventory and untracked run/runtime outputs', 'files': files})
 
 

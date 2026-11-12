@@ -1,7 +1,7 @@
 """Redline track: run a comparison candidate and score its accept/reject round trips.
 
 A candidate turns each case's inputs into one output package: a redline for `compare` and
-`consolidate`, a resolved document for `reject`. The output is then judged by two engines that
+`consolidate`, a resolved document for `reject` and `accept`. The output is then judged by two engines that
 share no code with any candidate: the benchmark's own revision engine (`bench/revisions.py`,
 compared on the full semantic view) and LibreOffice through headless UNO (compared on the text
 view, after both sides take the same LibreOffice load/save path). See docs/REDLINE.md.
@@ -9,6 +9,7 @@ view, after both sides take the same LibreOffice load/save path). See docs/REDLI
 from __future__ import annotations
 
 import difflib
+import hashlib
 import html
 import json
 import os
@@ -16,28 +17,129 @@ import re
 import shutil
 import signal
 import subprocess
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
-from . import revisions
+from . import revisions, revision_ownership
 from .redline_build import dotnet as _dotnet, validate_packages, verify_docxodus, verify_validator
 from .common import ROOT, contained, digest, execute, identity, read_json, write_json
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
-OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}}
-CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity'}
-SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}}
-CONTRACT = {'version': 1, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'replace-text': 1, 'revision-ownership': 1, 'revision-resolve': 1, 'accept': 1}
+ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1, 2}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'positional-rewrites': {1}, 'section-stories': {1}, 'section-boundaries': {1}, 'section-flags': {1}, 'style-run-history': {1}}
+# Operations whose candidate returns the resolved document itself, not a redline.
+OUTPUT_OPERATIONS = {'reject', 'accept', 'column-edit', 'block-insert', 'revision-resolve'}
+RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
+CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
+SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}, 'revision-resolve': {'output'}, 'accept': {'output'}}
+CONTRACT = {'version': 27, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
-            'validity': 'no OpenXmlValidator finding (id, part, description) occurs more often than in any input'}
-HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'bench/redline_build.py']
+            'validity': 'no OpenXmlValidator finding (id, part, description) occurs more often than in any input, and the output opens: a Package_Open finding in the output always fails, whatever the inputs did',
+            'semanticPreflight': 'declared identity cases must report zero changes at raw limits with and without the package supplement',
+            'revisionRegistry': 'declared table operations must report the public registry count and match independent resolved table assertions',
+            'blockInsertion': 'declared insertion outcomes require typed success, error, version change and undo availability',
+            'spanEditing': 'public span editing must preserve text and inline-marker order through both independent revision resolvers; v2 requires exactly one visible regex match before ReplaceMatch',
+            'paragraphRewrite': 'public untracked whole-paragraph rewrites must preserve exact declared native content-control subtrees as well as independent semantic views',
+            'columnReview': 'v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry',
+            'acceptOperation': 'accept cases compare the whole-document acceptance of one tracked input by the candidate with an authored output, as reject cases do for rejection',
+            'shortRows': 'a table-state row may declare fewer grid columns than the table grid, as Word leaves a row whose deleted cell took its column with it; never more',
+            'resolutionReview': 'revision-resolve cases require the declared typed registry count/status of the input, successful public bulk resolution and an empty final registry; table-state v2 reads cells through cell-level content controls and names each cell\'s control',
+            'revisionOwnership': 'account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips',
+            'inlineTrees': 'declared math and drawing subtrees retain structure, properties, textbox content and image bytes in both independently resolved views; v2 checks referenced running stories with part-local image relationships',
+            'sectionFlags': 'declared first-page flags match every physical section in the review and independently resolved endpoints, excluding property history and textbox stories',
+            'sectionBoundaries': 'declared inline section breaks occur after the exact zero-based body paragraph indices in each independently resolved endpoint',
+            'revisionText': 'declared move sources and ordinary deletions must retain their appropriate text carrier',
+            'mathControls': 'a math object is removed whole when a mark on its control character (m:ctrlPr), or the deletion nested in an inserted one, removes it',
+            'hyperlinkTargets': 'declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written',
+            'styleRunHistory': 'declared style-run-history assertions require every paragraph style holding a pPrChange in the raw redline to hold an rPrChange too, since Word resets an unarchived style run slice to its built-ins on Reject All'}
+HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'bench/redline_build.py', 'bench/revision_ownership.py']
 
 
 # ---------------------------------------------------------------------------------------------
 # Registry
 # ---------------------------------------------------------------------------------------------
+
+def control_tree(element):
+    # The candidate adds addressing attributes; they are not native Word control metadata.
+    attributes = {k: v for k, v in element.attrib.items()
+                  if not k.startswith('{http://powertools.codeplex.com/2011}')}
+    text = element.text if element.text and (element.text.strip() or not len(element)) else None
+    return [element.tag, attributes, text, [control_tree(e) for e in element]]
+
+
+def valid_control_trees(values):
+    if not isinstance(values, list) or not all(isinstance(value, str) for value in values):
+        return False
+    try:
+        return all(ET.fromstring(value).tag == revisions.w('sdt') for value in values)
+    except ET.ParseError:
+        return False
+
+
+INLINE_TREES = {'oMath': revisions.m('oMath'), 'drawing': revisions.w('drawing'), 'pict': revisions.w('pict')}
+
+
+def inline_tree(element, images, version=1, preserve_space=False):
+    # Compare native structure and content. Only remappable drawing ids and engine addressing are ignored.
+    attributes = {k: v for k, v in element.attrib.items()
+                  if not k.startswith('{http://powertools.codeplex.com/2011}')
+                  and not (element.tag == '{http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing}docPr' and k == 'id')}
+    embed = '{http://schemas.openxmlformats.org/officeDocument/2006/relationships}embed'
+    if embed in attributes:
+        attributes[embed] = images.get(attributes[embed], 'unresolved:' + attributes[embed])
+    if version == 2 and element.tag == '{urn:schemas-microsoft-com:vml}imagedata':
+        image_id = '{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id'
+        if image_id in attributes:
+            attributes[image_id] = images.get(attributes[image_id], 'unresolved:' + attributes[image_id])
+    text = element.text if element.text and (element.text.strip() or not len(element)) else None
+    if version == 2:
+        space = '{http://www.w3.org/XML/1998/namespace}space'
+        preserve_space = attributes.get(space, 'preserve' if preserve_space else 'default') == 'preserve'
+        if element.tag in {revisions.w('t'), revisions.w('delText')}:
+            if text is not None and not preserve_space:
+                text = text.strip(' \t\r\n')
+            attributes.pop(space, None)
+    children = [inline_tree(e, images, version, preserve_space) for e in element]
+    children = [child for child in children if not (child[0] in {revisions.w('rPr'), revisions.m('rPr')}
+                and not child[1] and child[2] is None and not child[3])]
+    def text_run(node):
+        if node[0] not in {revisions.w('r'), revisions.m('r')}:
+            return None
+        texts = [child for child in node[3] if child[0] in {revisions.w('t'), revisions.m('t')}]
+        props = [child for child in node[3] if child[0] in {revisions.w('rPr'), revisions.m('rPr')}]
+        if len(texts) != 1 or len(props) + 1 != len(node[3]):
+            return None
+        return (node[0], node[1], props, texts[0][0], texts[0][1]), texts[0]
+    merged = []
+    for child in children:
+        previous = text_run(merged[-1]) if merged else None
+        current = text_run(child)
+        if previous is not None and current is not None and previous[0] == current[0]:
+            previous[1][2] = (previous[1][2] or '') + (current[1][2] or '')
+        else:
+            merged.append(child)
+    tag = {revisions.w('delText'): revisions.w('t'), revisions.w('delInstrText'): revisions.w('instrText')}.get(element.tag, element.tag)
+    return [tag, attributes, text, merged]
+
+
+def valid_inline_trees(assertion):
+    if assertion.get('version') == 2 and assertion.get('story') != 'headers':
+        return False
+    if not isinstance(assertion.get('name'), str) or assertion['name'] not in INLINE_TREES:
+        return False
+    trees, images = assertion.get('trees'), assertion.get('images')
+    if not isinstance(trees, list) or not all(isinstance(xml, str) for xml in trees):
+        return False
+    if not isinstance(images, dict) or not all(isinstance(k, str) and k and isinstance(v, str)
+            and re.fullmatch('[0-9a-f]{64}', v) for k, v in images.items()):
+        return False
+    try:
+        return all(ET.fromstring(xml).tag == INLINE_TREES[assertion['name']] for xml in trees)
+    except ET.ParseError:
+        return False
+
 
 def artifact_records(case):
     return case['inputs'] + list(case['expected'].values()) + [case['authored']] + list(case.get('reviewerExpected', {}).values())
@@ -58,7 +160,7 @@ def validate_registry(registry=None):
         operation = case['operation']
         if operation not in OPERATIONS or (OPERATIONS[operation] and len(case['inputs']) != OPERATIONS[operation]) or (operation == 'consolidate' and len(case['inputs']) < 3):
             raise ValueError('Invalid operation or input count: ' + case['id'])
-        expected = {'compare': {'accepted', 'rejected'}, 'consolidate': {'accepted', 'rejected'}, 'reject': {'output'}}[operation]
+        expected = {'compare': {'accepted', 'rejected'}, 'consolidate': {'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'accepted', 'rejected'}, 'replace-text': {'accepted', 'rejected'}, 'revision-ownership': {'accepted', 'rejected'}, 'revision-resolve': {'output'}, 'accept': {'output'}}[operation]
         if set(case['expected']) != expected or case['kind'] not in ('reproducer', 'control', 'identity'):
             raise ValueError('Invalid expectation or kind: ' + case['id'])
         declared = case.get('libreoffice', {})
@@ -74,6 +176,97 @@ def validate_registry(registry=None):
             raise ValueError('Stale redline generator digest: ' + case['id'])
         if case['category'] not in CATEGORIES:
             raise ValueError('Unknown redline category: ' + case['id'])
+        if operation == 'table-widths':
+            spec = case.get('tableWidths', {})
+            registry_count = case.get('revisionRegistry', {})
+            if (set(spec) != {'version', 'widths', 'tracked'} or spec['version'] != 1
+                    or type(spec['tracked']) is not bool or not isinstance(spec['widths'], list)
+                    or not spec['widths'] or any(type(w) is not int or w <= 0 for w in spec['widths'])
+                    or registry_count != {'version': 1, 'count': 1 if spec['tracked'] else 0}
+                    or type(registry_count.get('count')) is not int):
+                raise ValueError('Invalid table widths declaration: ' + case['id'])
+        elif operation == 'column-edit':
+            spec = case.get('columnEdit', {})
+            version = spec.get('version')
+            keys = {'version', 'action', 'position', 'cellIndex', 'resolution'} | ({'tracked'} if version == 2 else set())
+            if (set(spec) != keys or version not in {1, 2}
+                    or spec['action'] not in ({'insert'} if version == 2 else {'insert', 'delete'}) or spec['position'] not in {'before', 'after'}
+                    or type(spec['cellIndex']) is not int or spec['cellIndex'] < 0
+                    or spec['resolution'] not in {'reject-all', 'reject-each', 'accept-all'}
+                    or case.get('revisionRegistry') != {'version': 1, 'count': 0}
+                    or type(case['revisionRegistry']['count']) is not int):
+                raise ValueError('Invalid column edit declaration: ' + case['id'])
+            if version == 2:
+                review = case.get('columnReview', {})
+                if (type(spec['tracked']) is not bool
+                        or review != {'version': 1, 'beforeCount': 1 if spec['tracked'] else 0,
+                                      'supported': True, 'resolutionSuccess': True}
+                        or type(review.get('beforeCount')) is not int
+                        or type(review.get('supported')) is not bool or type(review.get('resolutionSuccess')) is not bool):
+                    raise ValueError('Invalid column review declaration: ' + case['id'])
+            elif 'columnReview' in case:
+                raise ValueError('Unexpected column review declaration: ' + case['id'])
+        elif operation == 'revision-resolve':
+            review = case.get('resolutionReview', {})
+            if (case.get('revisionResolve') not in ({'version': 1, 'resolution': 'accept-all'}, {'version': 1, 'resolution': 'reject-all'})
+                    or set(review) != {'version', 'beforeCount', 'supported', 'resolutionSuccess'} or review['version'] != 1
+                    or type(review['beforeCount']) is not int or review['beforeCount'] <= 0
+                    or review['supported'] is not True or review['resolutionSuccess'] is not True
+                    or case.get('revisionRegistry') != {'version': 1, 'count': 0}
+                    or type(case['revisionRegistry']['count']) is not int):
+                raise ValueError('Invalid revision resolution declaration: ' + case['id'])
+        elif operation == 'block-insert':
+            spec = case.get('blockInsert', {})
+            observed = case.get('editOutcome', {})
+            success = observed.get('success')
+            if (set(spec) != {'version', 'operation', 'anchorKind', 'position', 'markdown'} or spec['version'] != 1
+                    or spec['operation'] not in {'paragraph', 'rule', 'table'} or spec['anchorKind'] not in {'p', 'tc'}
+                    or spec['position'] not in {'before', 'after'} or not isinstance(spec['markdown'], str)
+                    or type(success) is not bool
+                    or observed != {'success': success, 'errorCode': None if success else 'AnchorWrongKind',
+                                    'versionDelta': 1 if success else 0, 'undoAvailable': success}
+                    or type(observed.get('versionDelta')) is not int or type(observed.get('undoAvailable')) is not bool):
+                raise ValueError('Invalid block insertion declaration: ' + case['id'])
+        elif operation == 'replace-text':
+            spec = case.get('paragraphRewrite', {})
+            if (not isinstance(spec, dict) or set(spec) != {'version', 'paragraphIndex', 'markdown'} or type(spec['version']) is not int or spec['version'] != 1
+                    or type(spec['paragraphIndex']) is not int or spec['paragraphIndex'] < 0
+                    or not isinstance(spec['markdown'], str)):
+                raise ValueError('Invalid paragraph rewrite declaration: ' + case['id'])
+        elif operation == 'replace-span':
+            spec = case.get('spanEdit', {})
+            version = spec.get('version')
+            keys = {'version', 'tracked', 'replacement'}
+            keys |= {'paragraphIndex', 'start', 'length'} if version == 1 else {'pattern'}
+            if (set(spec) != keys or type(version) is not int or version not in {1, 2}
+                    or type(spec['tracked']) is not bool or not isinstance(spec['replacement'], str)
+                    or (version == 1 and (any(type(spec[key]) is not int or spec[key] < 0 for key in ('paragraphIndex', 'start'))
+                        or type(spec['length']) is not int or spec['length'] <= 0))
+                    or (version == 2 and (not isinstance(spec['pattern'], str) or not spec['pattern']))):
+                raise ValueError('Invalid span edit declaration: ' + case['id'])
+        elif operation == 'revision-ownership':
+            if not revision_ownership.valid_spec(case.get('revisionOwnership'), case.get('authorNameStatus')):
+                raise ValueError('Invalid revision ownership declaration: ' + case['id'])
+        elif 'tableWidths' in case or 'revisionRegistry' in case or 'columnEdit' in case:
+
+            raise ValueError('Unexpected table width operation data: ' + case['id'])
+        if operation != 'column-edit' and 'columnReview' in case:
+            raise ValueError('Unexpected column review data: ' + case['id'])
+        if operation != 'revision-resolve' and ('revisionResolve' in case or 'resolutionReview' in case):
+            raise ValueError('Unexpected revision resolution data: ' + case['id'])
+        if operation != 'replace-text' and 'paragraphRewrite' in case:
+            raise ValueError('Unexpected paragraph rewrite data: ' + case['id'])
+        if operation != 'replace-span' and 'spanEdit' in case:
+            raise ValueError('Unexpected span edit data: ' + case['id'])
+        if operation != 'block-insert' and ('blockInsert' in case or 'editOutcome' in case):
+            raise ValueError('Unexpected block insertion data: ' + case['id'])
+        if operation != 'revision-ownership' and ('revisionOwnership' in case or 'authorNameStatus' in case):
+            raise ValueError('Unexpected revision ownership data: ' + case['id'])
+        if 'semanticPreflight' in case:
+            if (operation != 'compare' or case['category'] != 'identity'
+                    or case['semanticPreflight'] != {'version': 1, 'limits': 'raw-boundaries', 'changeCount': 0}
+                    or case['inputs'][0]['sha256'] != case['inputs'][1]['sha256']):
+                raise ValueError('Invalid semantic preflight declaration: ' + case['id'])
         if operation == 'consolidate' and any(i['role'] == 'reviewer' and not i.get('author') for i in case['inputs']):
             raise ValueError('A consolidation reviewer needs an author: ' + case['id'])
         for assertion in case['assertions']:
@@ -81,14 +274,86 @@ def validate_registry(registry=None):
                 raise ValueError('Unknown assertion type, version or scope: ' + case['id'])
             kind = assertion['type']
             valid = {'untracked-text': lambda a: a.get('story') in ('body', 'headers') and a.get('texts') and all(isinstance(x, str) and x for x in a['texts']),
+                     'paragraph-spacing': lambda a: a['scope'] in {'accepted', 'rejected'} and isinstance(a.get('values'), list)
+                         and bool(a['values']) and all(isinstance(v, dict) and set(v) == {'before', 'after', 'line', 'lineRule'}
+                             and all(isinstance(x, str) and x for x in v.values()) for v in a['values']),
                      'paragraph-count': lambda a: a.get('story') == 'body' and isinstance(a.get('count'), int) and a['count'] >= 0,
                      'revision-count': lambda a: isinstance(a.get('max'), int) and a['max'] >= 0,
-                     'para-ids-valid': lambda a: True, 'style-ids-unique': lambda a: True}[kind]
+                     'para-ids-valid': lambda a: True, 'style-ids-unique': lambda a: True,
+                     'style-run-history': lambda a: a['scope'] == 'redline',
+                     'section-boundaries': lambda a: a['scope'] in {'accepted', 'rejected'}
+                         and isinstance(a.get('afterParagraphs'), list)
+                         and all(type(i) is int and i >= 0 for i in a['afterParagraphs'])
+                         and a['afterParagraphs'] == sorted(set(a['afterParagraphs'])),
+                     'section-flags': lambda a: a['scope'] in {'redline', 'accepted', 'rejected'}
+                         and isinstance(a.get('titlePg'), list) and bool(a['titlePg'])
+                         and all(type(v) is bool for v in a['titlePg']),
+                     'section-stories': lambda a: a['scope'] == 'redline' and a.get('story') in {'header', 'footer'}
+                         and a.get('kind') in {'default', 'first', 'even'} and isinstance(a.get('values'), list)
+                         and bool(a['values']) and all(isinstance(v, str) for v in a['values']),
+                     'revision-blocks': lambda a: a['scope'] == 'redline',
+                     'positional-rewrites': lambda a: a['scope'] == 'redline'
+                         and all(isinstance(a.get(side), list) and len(a[side]) >= 2
+                             and all(isinstance(text, str) and text.strip() for text in a[side])
+                             for side in ('before', 'after')) and len(a['before']) == len(a['after']),
+                     'revision-text': lambda a: a['scope'] == 'redline' and isinstance(a.get('kind'), str) and a['kind'] in {'moveFrom', 'del'}
+                         and isinstance(a.get('text'), str) and bool(a['text']),
+                     'table-widths': lambda a: a['scope'] in {'accepted', 'rejected'} and isinstance(a.get('grid'), list)
+                         and a['grid'] and all(type(v) is int and v > 0 for v in a['grid'])
+                         and isinstance(a.get('cells'), list) and a['cells'] and all(isinstance(row, list) and row
+                             and all(type(v) is int and v > 0 for v in row) for row in a['cells'])
+                         and type(a.get('table')) is int and a['table'] > 0,
+                     'table-state': lambda a: a['scope'] == 'output' and valid_table_state(a.get('state'), controls=a['version'] == 2),
+                     'people-identity': lambda a: a['scope'] == 'redline' and isinstance(a.get('author'), str) and bool(a['author'])
+                         and revision_ownership.valid_identities(a.get('identities')),
+                     'inline-trees': lambda a: a['scope'] in {'accepted', 'rejected'} and valid_inline_trees(a),
+                     'content-controls': lambda a: a['scope'] in {'accepted', 'rejected'} and valid_control_trees(a.get('controls')),
+                     'run-atoms': lambda a: a['scope'] in {'accepted', 'rejected'} and isinstance(a.get('atoms'), list)
+                         and all(isinstance(x, dict) and set(x) == {'name', 'attributes'}
+                             and isinstance(x['name'], str) and x['name'] in RUN_ATOMS
+                             and isinstance(x['attributes'], dict) and all(isinstance(k, str) and isinstance(v, str)
+                                 for k, v in x['attributes'].items()) for x in a['atoms']),
+                     'hyperlink-targets': lambda a: a['scope'] == 'redline' and isinstance(a.get('targets'), list) and all(isinstance(x, str) and x for x in a['targets']),
+                     'pending-insertion-deletion': lambda a: a['scope'] == 'redline' and all(isinstance(a.get(k), str) and bool(a[k]) for k in ('author', 'deletedBy', 'text')),
+                     'comment-threads': lambda a: a['scope'] == 'redline' and isinstance(a.get('threads'), list) and all(
+                         isinstance(x, list) and len(x) == 2 and all(isinstance(y, str) and y for y in x) for x in a['threads'])}[kind]
             if not valid(assertion):
                 raise ValueError('Invalid assertion declaration: ' + case['id'] + ' ' + kind)
-        if operation == 'reject' and {'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0} not in case['assertions']:
+        if operation == 'replace-text' and {'type': 'revision-count', 'version': 1, 'scope': 'redline', 'max': 0} not in case['assertions']:
+            raise ValueError('An untracked rewrite must require a redline without revisions: ' + case['id'])
+        if operation in OUTPUT_OPERATIONS and {'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0} not in case['assertions']:
             raise ValueError('A reject case must require an output without revisions: ' + case['id'])
     return registry
+
+
+def valid_table_state(state, controls=False):
+    cell_keys = {'span', 'width', 'type', 'fill'} | ({'control'} if controls else set())
+    if not isinstance(state, dict) or set(state) != {'grid', 'rows'}:
+        return False
+    if not isinstance(state['grid'], list) or not state['grid'] or any(type(w) is not int or w < 0 for w in state['grid']):
+        return False
+    if not isinstance(state['rows'], list) or not state['rows']:
+        return False
+    for row in state['rows']:
+        if not isinstance(row, dict) or set(row) != {'before', 'after', 'height', 'cells'}:
+            return False
+        if any(type(row[key]) is not int or row[key] < 0 for key in ('before', 'after')):
+            return False
+        if row['height'] is not None and (type(row['height']) is not int or row['height'] < 0):
+            return False
+        if not isinstance(row['cells'], list) or not row['cells']:
+            return False
+        for cell in row['cells']:
+            if (not isinstance(cell, dict) or set(cell) != cell_keys
+                    or (controls and cell['control'] is not None and not isinstance(cell['control'], str))
+                    or type(cell['span']) is not int or cell['span'] <= 0
+                    or type(cell['width']) is not int or cell['width'] < 0 or cell['type'] != 'dxa'
+                    or (cell['fill'] is not None and not isinstance(cell['fill'], str))):
+                return False
+        # A row may stop short of the grid (Word leaves it so after some cell deletions), never pass it.
+        if row['before'] + row['after'] + sum(c['span'] for c in row['cells']) > len(state['grid']):
+            return False
+    return True
 
 
 # ---------------------------------------------------------------------------------------------
@@ -172,6 +437,22 @@ def run_candidate(adapter, build, case, output, candidate, timeout=300):
     inputs = [{'path': str(contained(ROOT, i['path'])), 'sha256': i['sha256'], 'author': i.get('author')} for i in case['inputs']]
     request = {'protocol': 1, 'operation': case['operation'], 'inputs': inputs, 'output': str(output),
                'settings': {'author': 'Bench', 'date': '2026-01-01T00:00:00Z'}}
+    if 'semanticPreflight' in case:
+        request['settings']['semanticPreflight'] = case['semanticPreflight']
+    if 'tableWidths' in case:
+        request['settings']['tableWidths'] = case['tableWidths']
+    if 'columnEdit' in case:
+        request['settings']['columnEdit'] = case['columnEdit']
+    if 'revisionResolve' in case:
+        request['settings']['revisionResolve'] = case['revisionResolve']
+    if 'blockInsert' in case:
+        request['settings']['blockInsert'] = case['blockInsert']
+    if 'paragraphRewrite' in case:
+        request['settings']['paragraphRewrite'] = case['paragraphRewrite']
+    if 'spanEdit' in case:
+        request['settings']['spanEdit'] = case['spanEdit']
+    if 'revisionOwnership' in case:
+        request['settings']['revisionOwnership'] = case['revisionOwnership']
     response = json.loads(execute([_dotnet(), str(Path(build).resolve() / 'bin' / 'DocxBenchRedline.dll')], input=json.dumps(request), timeout=timeout))
     if response.get('protocol') != 1 or response.get('status') not in ('ok', 'failed', 'unmeasured'):
         raise ValueError('Invalid redline adapter response')
@@ -197,14 +478,249 @@ def _comparison(name, expected, actual):
     return check
 
 
+
+def unarchived_style_runs(package):
+    """Ids of paragraph styles whose pPrChange has no rPrChange beside it.
+
+    Word 2024's Reject All restores a style from both markers and resets the run properties of a
+    style without an rPrChange to its built-ins: 12 pt text came back at 10 pt (Docxodus #1576).
+    """
+    w = revisions.w
+    style_path = next((path for kind, path in package.main_rels.values() if kind == 'styles'), None)
+    styles = [] if style_path is None else package.xml(style_path).findall(w('style'))
+    return sorted(style.get(w('styleId')) or '' for style in styles
+                  if style.get(w('type'), 'paragraph') == 'paragraph'
+                  and style.find(w('pPr') + '/' + w('pPrChange')) is not None
+                  and style.find(w('rPr') + '/' + w('rPrChange')) is None)
+
+
+def paragraph_spacing(package, parts, scope):
+    """Literal spacing on text-bearing top-level body paragraphs: defaults, basedOn chain, direct properties.
+
+    Resolve style revisions independently too; styles are not story parts. This intentionally
+    does not claim to measure table conditional properties, automatic spacing or pagination.
+    """
+    w = revisions.w
+    style_path = next((path for kind, path in package.main_rels.values() if kind == 'styles'), None)
+    styles = ET.Element(w('styles')) if style_path is None else revisions.resolve(
+        {style_path: package.xml(style_path)}, 'accept' if scope == 'accepted' else 'reject')[style_path]
+    definitions = {s.get(w('styleId')): s for s in styles.findall(w('style')) if s.get(w('type')) == 'paragraph'}
+    default = next((key for key, s in definitions.items() if s.get(w('default')) in ('1', 'true', 'on')), None)
+    def overlay(values, properties):
+        spacing = properties.find(w('spacing')) if properties is not None else None
+        if spacing is not None:
+            # Preserve unsupported modes too: an automatic/line-based override must fail
+            # the literal four-axis assertion, not silently look equivalent.
+            values.update({key.removeprefix(w('')): value for key, value in spacing.attrib.items()})
+    output = []
+    for paragraph in parts[package.main].find(w('body')).findall(w('p')):
+        if not any(t.text for t in paragraph.iter(w('t'))):
+            continue
+        values = dict(before='0', after='0', line='240', lineRule='auto')
+        overlay(values, styles.find(w('docDefaults') + '/' + w('pPrDefault') + '/' + w('pPr')))
+        properties = paragraph.find(w('pPr'))
+        reference = properties.find(w('pStyle')) if properties is not None else None
+        identifier = reference.get(w('val')) if reference is not None else default
+        chain, seen = [], set()
+        while identifier in definitions:
+            if identifier in seen:
+                raise ValueError('Cyclic paragraph style inheritance')
+            seen.add(identifier)
+            style = definitions[identifier]
+            chain.append(style)
+            parent = style.find(w('basedOn'))
+            identifier = parent.get(w('val')) if parent is not None else None
+        for style in reversed(chain):
+            overlay(values, style.find(w('pPr')))
+        overlay(values, properties)
+        output.append(values)
+    return output
+
+
+def body_sections(element):
+    if element.tag in {revisions.w('sectPrChange'), revisions.w('txbxContent')}:
+        return
+    for child in element:
+        if child.tag == revisions.w('sectPr') and element.tag in {revisions.w('body'), revisions.w('pPr')}:
+            yield child
+        else:
+            yield from body_sections(child)
+
 def _assertion(assertion, package, resolved):
     kind, scope = assertion['type'], assertion['scope']
     parts = resolved.get(scope)
     check = {'name': 'assertion-' + kind, 'declaration': assertion}
-    if kind == 'untracked-text':
+    if kind == 'people-identity':
+        observed = revision_ownership.people_identities(package, assertion['author'])
+        check.update(passed=observed == assertion['identities'], observed=observed)
+    elif kind == 'pending-insertion-deletion':
+        check.update(passed=revision_ownership.retained_deletion(package, assertion['author'], assertion['deletedBy'], assertion['text']))
+    elif kind == 'paragraph-spacing':
+        observed = paragraph_spacing(package, parts, scope)
+        check.update(passed=observed == assertion['values'], observed=observed)
+    elif kind == 'table-state':
+        roots = parts if parts is not None else package.story_parts()
+        tables = list(roots[package.main].iter(revisions.w('tbl')))
+        def number(element, attribute, default=None):
+            value = None if element is None else element.get(revisions.w(attribute))
+            return int(value) if value is not None and value.isdecimal() else default if value is None else value
+        observed = None
+        if len(tables) == 1:
+            table = tables[0]
+            grid = table.find(revisions.w('tblGrid'))
+            rows = []
+            for row in table.findall(revisions.w('tr')):
+                row_pr = row.find(revisions.w('trPr'))
+                row_property = lambda name: None if row_pr is None else row_pr.find(revisions.w(name))
+                cells = []
+                # Version 2 reads cells through cell-level content controls and names each cell's
+                # control by its w:id; a control holding no cell is reported as a cell-less entry.
+                def row_cells(parent, control=None):
+                    for child in parent:
+                        if child.tag == revisions.w('tc'):
+                            yield child, control
+                        elif assertion['version'] == 2 and child.tag == revisions.w('sdt'):
+                            identity = child.find(revisions.w('sdtPr') + '/' + revisions.w('id'))
+                            name = '' if identity is None else identity.get(revisions.w('val'), '')
+                            content = child.find(revisions.w('sdtContent'))
+                            held = [] if content is None else list(row_cells(content, name))
+                            yield from held or [(None, name)]
+                for cell, control in row_cells(row):
+                    pr = None if cell is None else cell.find(revisions.w('tcPr'))
+                    property_of = lambda name: None if pr is None else pr.find(revisions.w(name))
+                    width = property_of('tcW')
+                    fill = property_of('shd')
+                    cells.append({'span': None if cell is None else number(property_of('gridSpan'), 'val', 1), 'width': number(width, 'w'),
+                                  'type': None if width is None else width.get(revisions.w('type')),
+                                  'fill': None if fill is None else fill.get(revisions.w('fill')),
+                                  **({'control': control} if assertion['version'] == 2 else {})})
+                rows.append({'before': number(row_property('gridBefore'), 'val', 0),
+                             'after': number(row_property('gridAfter'), 'val', 0),
+                             'height': number(row_property('trHeight'), 'val'), 'cells': cells})
+            observed = {'grid': [] if grid is None else [number(c, 'w') for c in grid.findall(revisions.w('gridCol'))], 'rows': rows}
+        check.update(passed=observed == assertion['state'], observed=observed)
+    elif kind == 'table-widths':
+        roots = parts if parts is not None else package.story_parts()
+        tables = list(roots[package.main].iter(revisions.w('tbl')))
+        def width(element):
+            value = None if element is None else element.get(revisions.w('w'))
+            return int(value) if value is not None and value.isdecimal() else value
+        observed = None
+        if len(tables) == 1:
+            table = tables[0]
+            columns = table.find(revisions.w('tblGrid'))
+            cells = [[cell.find(revisions.w('tcPr') + '/' + revisions.w('tcW')) for cell in row.findall(revisions.w('tc'))]
+                     for row in table.findall(revisions.w('tr'))]
+            table_width = table.find(revisions.w('tblPr') + '/' + revisions.w('tblW'))
+            observed = {'grid': [] if columns is None else [width(col) for col in columns.findall(revisions.w('gridCol'))],
+                        'cells': [[width(cell) for cell in row] for row in cells], 'table': width(table_width)}
+            types_ok = all(cell is not None and cell.get(revisions.w('type')) == 'dxa' for row in cells for cell in row)
+            types_ok = types_ok and table_width is not None and table_width.get(revisions.w('type')) == 'dxa'
+        else:
+            types_ok = False
+        check.update(passed=types_ok and observed == {k: assertion[k] for k in ('grid', 'cells', 'table')}, observed=observed)
+    elif kind == 'untracked-text':
         texts = revisions.untracked_text(package, assertion['story'])
         missing = [x for x in assertion['texts'] if not any(x in text for text in texts)]
         check.update(passed=not missing, missing=missing)
+    elif kind == 'section-boundaries':
+        body = parts[package.main].find(revisions.w('body'))
+        observed = [i for i, paragraph in enumerate(body.iter(revisions.w('p')))
+                    if paragraph.find(revisions.w('pPr') + '/' + revisions.w('sectPr')) is not None]
+        check.update(passed=observed == assertion['afterParagraphs'], observed=observed)
+    elif kind == 'section-flags':
+        body = (parts[package.main] if parts is not None else package.xml(package.main)).find(revisions.w('body'))
+        flags = [section.find(revisions.w('titlePg')) for section in body_sections(body)]
+        observed = [flag is not None and flag.get(revisions.w('val'), 'true') not in {'0', 'false', 'off'} for flag in flags]
+        check.update(passed=observed == assertion['titlePg'], observed=observed)
+    elif kind == 'section-stories':
+        body = package.xml(package.main).find(revisions.w('body'))
+        observed, target = [], None
+        for section in body_sections(body):
+            references = [ref for ref in section.findall(revisions.w(assertion['story'] + 'Reference'))
+                          if ref.get(revisions.w('type'), 'default') == assertion['kind']]
+            if len(references) > 1:
+                target = False
+            elif references:
+                relationship = package.main_rels.get(references[0].get('{' + revisions.REL[:-1] + '}id'))
+                target = relationship[1] if relationship and relationship[0] == assertion['story'] else False
+            if target is False or target is not None and target not in package.members:
+                observed.append(None)
+            else:
+                observed.append('' if target is None else ''.join(t.text or '' for t in package.xml(target).iter()
+                    if t.tag in {revisions.w('t'), revisions.w('delText')}))
+        check.update(passed=observed == assertion['values'], observed=observed)
+    elif kind in {'revision-blocks', 'positional-rewrites'}:
+        body = package.xml(package.main).find(revisions.w('body'))
+        inserted, deleted, order = [], [], []
+        paragraphs = []
+        def visit(element, paragraph, in_insertion=False):
+            in_insertion = in_insertion or element.tag == revisions.w('ins')
+            side = ('deleted' if element.tag == revisions.w('delText') else
+                    'inserted' if element.tag == revisions.w('t') and in_insertion else None)
+            if side:
+                paragraphs[paragraph][side] += element.text or ''
+            elif element.tag == revisions.w('t'):
+                paragraphs[paragraph]['retained'] += element.text or ''
+            if side and (element.text or '').strip():
+                (inserted if side == 'inserted' else deleted).append(paragraph)
+                if not order or order[-1] != side:
+                    order.append(side)
+                local_order = paragraphs[paragraph]['order']
+                if not local_order or local_order[-1] != side:
+                    local_order.append(side)
+            for child in element:
+                visit(child, paragraph, in_insertion)
+        for i, paragraph in enumerate(body.findall(revisions.w('p'))):
+            paragraphs.append({'inserted': '', 'deleted': '', 'retained': '', 'order': []})
+            visit(paragraph, i)
+        # Two text-side runs permit a shared boundary paragraph, but never interleaved words.
+        if kind == 'revision-blocks':
+            check.update(passed=bool(inserted and deleted) and len(order) == 2,
+                         observed={'inserted': sorted(set(inserted)), 'deleted': sorted(set(deleted)), 'order': order})
+        else:
+            old = [(i, paragraph['deleted']) for i, paragraph in enumerate(paragraphs) if paragraph['deleted']]
+            new = [(i, paragraph['inserted']) for i, paragraph in enumerate(paragraphs) if paragraph['inserted']]
+            complete = [text for _, text in old] == assertion['before'] and [text for _, text in new] == assertion['after']
+            pairs = [(a[0], b[0]) for a, b in zip(old, new)]
+            adjacent = all(abs(a - b) <= 1 for a, b in pairs)
+            ordered = all(max(a) < min(b) for a, b in zip(pairs, pairs[1:]))
+            coherent = all(len(p['order']) <= 2 and not p['retained'].strip() for p in paragraphs)
+            check.update(passed=complete and adjacent and ordered and coherent, observed=paragraphs)
+    elif kind == 'revision-text':
+        root = package.xml(package.main).find(revisions.w('body'))
+        wrappers = list(root.iter(revisions.w(assertion['kind'])))
+        is_move = assertion['kind'] == 'moveFrom'
+        def text_of(wrapper):
+            return ''.join(t.text or '' for t in wrapper.iter(revisions.w('t' if is_move else 'delText')))
+        texts = []
+        if is_move:
+            active = {}
+            for element in root.iter():
+                if element.tag == revisions.w('moveFromRangeStart'):
+                    active[element.get(revisions.w('id'))] = []
+                elif element.tag == revisions.w('moveFrom'):
+                    for group in active.values(): group.append(text_of(element))
+                elif element.tag == revisions.w('moveFromRangeEnd'):
+                    group = active.pop(element.get(revisions.w('id')), None)
+                    if group is not None: texts.append(''.join(group))
+        else:
+            for parent in root.iter():
+                group = []
+                for child in parent:
+                    if child.tag == revisions.w('del'):
+                        group.append(text_of(child))
+                    elif child.tag in {revisions.w('proofErr'), revisions.w('bookmarkStart'), revisions.w('bookmarkEnd'),
+                                       revisions.w('commentRangeStart'), revisions.w('commentRangeEnd'),
+                                       revisions.w('permStart'), revisions.w('permEnd'), revisions.w('lastRenderedPageBreak')}:
+                        continue
+                    elif group:
+                        texts.append(''.join(group)); group = []
+                if group: texts.append(''.join(group))
+        invalid = sum(1 for wrapper in wrappers for e in wrapper.iter()
+                      if e.tag in {revisions.w('delText' if is_move else 't'),
+                                   revisions.w('delInstrText' if is_move else 'instrText')})
+        check.update(passed=any(assertion['text'] in text for text in texts) and invalid == 0, observed=texts, invalid=invalid)
     elif kind == 'paragraph-count':
         count = revisions.body_paragraph_count(package, parts)
         check.update(passed=count == assertion['count'], observed=count)
@@ -213,6 +729,46 @@ def _assertion(assertion, package, resolved):
         check.update(passed=not findings, findings=findings)
     elif kind == 'style-ids-unique':
         findings = revisions.style_id_findings(package)
+        check.update(passed=not findings, findings=findings)
+    elif kind == 'style-run-history':
+        observed = unarchived_style_runs(package)
+        check.update(passed=not observed, observed=observed)
+    elif kind == 'inline-trees':
+        root = parts[package.main] if parts is not None else package.xml(package.main)
+        roots = [(package.main, root.find(revisions.w('body')))]
+        if assertion['version'] == 2:
+            roots = []
+            for reference in root.iter():
+                if reference.tag not in {revisions.w('headerReference'), revisions.w('footerReference')}:
+                    continue
+                target = package.main_rels.get(reference.get('{' + revisions.REL[:-1] + '}id'), (None, None))[1]
+                if target in package.members and not any(name == target for name, _ in roots):
+                    roots.append((target, parts[target] if parts is not None else package.xml(target)))
+        observed = []
+        for part, tree in roots:
+            images = {identifier: hashlib.sha256(package.members[target]).hexdigest()
+                      for identifier, (relationship_type, target) in package.relationships(part).items()
+                      if relationship_type == 'image' and target in package.members}
+            observed.extend(inline_tree(e, images, version=assertion['version']) for e in tree.iter(INLINE_TREES[assertion['name']]))
+        expected = [inline_tree(ET.fromstring(xml), assertion['images'], version=assertion['version']) for xml in assertion['trees']]
+        check.update(passed=observed == expected, observed=observed)
+    elif kind == 'content-controls':
+        root = parts[package.main] if parts is not None else package.xml(package.main)
+        observed = [control_tree(e) for e in root.find(revisions.w('body')).iter(revisions.w('sdt'))]
+        expected = [control_tree(ET.fromstring(xml)) for xml in assertion['controls']]
+        check.update(passed=observed == expected, observed=observed)
+    elif kind == 'run-atoms':
+        root = parts[package.main] if parts is not None else package.xml(package.main)
+        observed = [dict(name=e.tag.split('}', 1)[-1],
+                         attributes={k.split('}', 1)[-1]: v for k, v in e.attrib.items() if k.startswith(revisions.w(''))})
+                    for run in root.find(revisions.w('body')).iter(revisions.w('r')) for e in run
+                    if e.tag in {revisions.w(name) for name in RUN_ATOMS}]
+        check.update(passed=observed == assertion['atoms'], observed=observed)
+    elif kind == 'hyperlink-targets':
+        findings = revisions.hyperlink_target_findings(package, assertion['targets'])
+        check.update(passed=not findings, findings=findings)
+    elif kind == 'comment-threads':
+        findings = revisions.comment_thread_findings(package, assertion['threads'])
         check.update(passed=not findings, findings=findings)
     elif kind == 'revision-count':
         count = revisions.revision_count(parts if parts is not None else package.story_parts())
@@ -231,6 +787,10 @@ def _validity(documents, inputs, output):
     for path in inputs:
         for key, value in counts(documents[str(path)]).items():
             allowed[key] = max(allowed.get(key, 0), value)
+    # An input the SDK cannot open reports no schema findings at all, so its Package_Open finding
+    # can never license the output's: an output that fails to open would go unvalidated.
+    for key in [k for k in allowed if k[0] == 'Package_Open']:
+        allowed[key] = 0
     new = [{'id': k[0], 'part': k[1], 'description': k[2], 'count': v, 'allowed': allowed.get(k, 0)}
            for k, v in sorted(counts(documents[str(output)]).items(), key=lambda item: str(item[0])) if v > allowed.get(k, 0)]
     return {'name': 'no-new-validation-errors', 'passed': not new, 'new': new}
@@ -240,7 +800,7 @@ def score_case(case, folder, adapter, build, candidate, env, validator):
     outcome = {'id': case['id'], 'category': case['category'], 'kind': case['kind'], 'issue': case['issue'],
                'operation': case['operation'], 'status': 'unmeasured', 'checks': []}
     inputs = [contained(ROOT, i['path']) for i in case['inputs']]
-    output = folder / ('candidate-redline.docx' if case['operation'] != 'reject' else 'candidate-output.docx')
+    output = folder / ('candidate-output.docx' if case['operation'] in OUTPUT_OPERATIONS else 'candidate-redline.docx')
     try:
         try:
             response = run_candidate(adapter, build, case, output, candidate)
@@ -268,7 +828,7 @@ def score_case(case, folder, adapter, build, candidate, env, validator):
             if digest(path) != record['sha256']:
                 raise ValueError('Benchmark fixture changed during the run: ' + record['path'])
         resolved = {'redline': None, 'output': None}
-        if case['operation'] == 'reject':
+        if case['operation'] in OUTPUT_OPERATIONS:
             outcome['checks'].append(_comparison('markup-output', revisions.view(revisions.Package(str(expected['output']))), revisions.view(package)))
         else:
             for mode, key in (('accept', 'accepted'), ('reject', 'rejected')):
@@ -294,6 +854,39 @@ def score_case(case, folder, adapter, build, candidate, env, validator):
             outcome['checks'].append({'name': 'no-new-validation-errors', 'passed': None, 'reason': 'validator not provisioned'})
         for assertion in case['assertions']:
             outcome['checks'].append(_assertion(assertion, package, resolved))
+        if 'semanticPreflight' in case:
+            expected_counts = {'withPackageChanges': 0, 'withoutPackageChanges': 0}
+            # The authored calibration's identity is established independently by both round trips.
+            observed = expected_counts if adapter == 'authored' else response.get('semanticPreflight')
+            outcome['checks'].append({'name': 'semantic-preflight',
+                                      'passed': observed == expected_counts and all(type(v) is int for v in observed.values()),
+                                      'expected': expected_counts, 'observed': observed})
+        if 'authorNameStatus' in case:
+            observed = (revision_ownership.name_status_check(case, None)['expected'] if adapter == 'authored'
+                        else response.get('revisionAuthorNameStatus'))
+            outcome['checks'].append(revision_ownership.name_status_check(case, observed))
+        if 'editOutcome' in case:
+            expected_outcome = case['editOutcome']
+            observed = expected_outcome if adapter == 'authored' else response.get('blockInsertion')
+            typed = (isinstance(observed, dict) and type(observed.get('success')) is bool
+                     and type(observed.get('versionDelta')) is int and type(observed.get('undoAvailable')) is bool)
+            outcome['checks'].append({'name': 'block-insertion-outcome', 'passed': typed and observed == expected_outcome,
+                                      'expected': expected_outcome, 'observed': observed})
+        for key, name in (('columnReview', 'column-revision-resolution'), ('resolutionReview', 'revision-resolution')):
+            if key not in case:
+                continue
+            expected_review = {field: value for field, value in case[key].items() if field != 'version'}
+            observed = expected_review if adapter == 'authored' else response.get(key)
+            typed = (isinstance(observed, dict) and type(observed.get('beforeCount')) is int
+                     and type(observed.get('supported')) is bool and type(observed.get('resolutionSuccess')) is bool)
+            outcome['checks'].append({'name': name, 'passed': typed and observed == expected_review,
+                                      'expected': expected_review, 'observed': observed})
+        if 'revisionRegistry' in case:
+            expected_count = case['revisionRegistry']['count']
+            observed_count = expected_count if adapter == 'authored' else response.get('revisionRegistryCount')
+            outcome['checks'].append({'name': 'revision-registry-count',
+                                      'passed': type(observed_count) is int and observed_count == expected_count,
+                                      'expected': expected_count, 'observed': observed_count})
         if any(c['passed'] is None and not c.get('ineligible') for c in outcome['checks']):
             raise ValueError('A required measurement is unavailable: ' + ', '.join(c['name'] for c in outcome['checks'] if c['passed'] is None and not c.get('ineligible')))
         return _finish(outcome, 'measured')
@@ -320,13 +913,16 @@ def _libreoffice_checks(case, folder, env, output, authored, expected):
         names[key] = len(items)
         items.append({'key': key, 'input': str(source), 'operation': operation, 'output': str(target)})
         return target
-    if case['operation'] == 'reject':
+    if case['operation'] in OUTPUT_OPERATIONS:
         pairs = [('output', item('expected-output', expected['output'], 'load'), item('authored-output', authored, 'load'), item('candidate-output', output, 'load'), None)]
     else:
         pairs = []
         for mode, key in (('accept', 'accepted'), ('reject', 'rejected')):
             pairs.append((key, item('expected-' + key, expected[key], 'load'), item('authored-' + key, authored, mode),
                           item('candidate-' + key, output, mode), mode))
+    # Calibrate every fixture before candidate loading can crash the shared UNO bridge.
+    items.sort(key=lambda entry: entry['key'].startswith('candidate-'))
+    names = {entry['key']: i for i, entry in enumerate(items)}
     results = libreoffice_batch(env, lo, items)
     authored_revisions = revisions.revision_count(revisions.Package(str(authored)).story_parts())
     checks = []

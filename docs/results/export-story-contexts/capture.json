@@ -1,0 +1,2108 @@
+{
+  "schema": 1,
+  "status": "unscored-public-api-diagnostics",
+  "baseline": {
+    "candidate": "a72aac79858321ed64cdc850c2e66f4b4de59153",
+    "sourceTree": "10954a1ddfc0a939657c79e8332a8a95ccdb105d",
+    "buildIdentitySha256": "42778cc4353f9d44f53daf872a475c3fe9d9360655e9a2e40cccd84c3daa9422",
+    "browserVersion": "155.0.8059.84",
+    "executableSha256": "cb19b59995072b86cc7f887b3b1c7ab1f63518a7f2ed9f0d33249e1a040e2c76",
+    "sandbox": true,
+    "fontContract": {
+      "LiberationSerif-Regular.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+      },
+      "LiberationSerif-Bold.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+      },
+      "LiberationSerif-Italic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+      },
+      "LiberationSerif-BoldItalic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+      }
+    }
+  },
+  "candidate": {
+    "candidate": "a5ae28c88617f5c405ce575d5f8b10f828d8b6c9",
+    "sourceTree": "eab4aa9cd1d154bdd708dc42abf3fa879a789c90",
+    "buildIdentitySha256": "12f73c17b3a84c254a3fb6ddaf07e75fdb7f2c3f652c3444d99b4be73c3c6a8e",
+    "browserVersion": "155.0.8059.84",
+    "executableSha256": "cb19b59995072b86cc7f887b3b1c7ab1f63518a7f2ed9f0d33249e1a040e2c76",
+    "sandbox": true,
+    "fontContract": {
+      "LiberationSerif-Regular.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+      },
+      "LiberationSerif-Bold.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+      },
+      "LiberationSerif-Italic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+      },
+      "LiberationSerif-BoldItalic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+      }
+    }
+  },
+  "manifestSha256": "141c73d126df0aac05a458e9f0ec8b73956a622ec91b63c1c8206b286756a631",
+  "referenceBundleSha256": "f3d6e47a36ad1363655c1c968137c944a0cf739b0cfcd18e549331b74465b713",
+  "referenceEnvironment": {
+    "fonts": {
+      "LiberationSerif-Bold.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+      },
+      "LiberationSerif-BoldItalic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+      },
+      "LiberationSerif-Italic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+      },
+      "LiberationSerif-Regular.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+      }
+    },
+    "tools": {
+      "pdffonts": {
+        "sha256": "de0a6d649710c2ebc226656b08c70814019a93f58889f79bf1dac726a131beda",
+        "version": "pdffonts version 25.03.0"
+      },
+      "pdftoppm": {
+        "sha256": "6c315e59db2a0829ecdfb6c791ad3f56bc9bd508266d20adc22238df447a74a3",
+        "version": "pdftoppm version 25.03.0"
+      },
+      "pdftotext": {
+        "sha256": "451784e28a4593637573e534d9be4c4487a3cccffae22a71e93162faa84de23c",
+        "version": "pdftotext version 25.03.0"
+      },
+      "qpdf": {
+        "sha256": "0d0462ea848601a652b666e83a07a095bb0c4d69d831beb6f94ea8e6e008f34c",
+        "version": "qpdf version 12.2.0"
+      }
+    }
+  },
+  "limitations": [
+    "Pinned benchmark runtime is ineligible on this host: unprivileged user namespaces are denied.",
+    "Borrowed system-browser public-API captures carry no rendering fidelity scores.",
+    "These focused cases do not establish full-suite or Word rendering parity.",
+    "Independent PDF checks do not compare candidate page counts or pixels with the reference renderer.",
+    "Any LibreOffice reference failing the declared token contract remains ineligible; placeholder contracts do not establish vector-rendering fidelity."
+  ],
+  "cases": [
+    {
+      "id": "export-story-context-mixed-tabs-drawingml-isolated-control",
+      "inputSha256": "77d489af0176d724144684777dcee1535a1fbd0ab233cfa9a7f3ac918489a326",
+      "screenshot": "export-story-context-mixed-tabs-drawingml-isolated-control.png",
+      "screenshotSha256": "da3feb447d1331cace50689542d63fb9bc4451b6ff7dd3650bd4d0255acef30a",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "390d2e5d72a162a72fdf54e7f1a98b46c789cdaae67048e7104e7a7a34eaf199",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "fe3647d91f08cb3ddb9a6ae74a48962a72eddcffa0aae1ec4d06072c197a0ecf"
+        ],
+        "LibreOffice reference": [
+          "d989aa0627f88dadfedd93a6c58d0acf903a513c7a5ea15e9a3e9802a0ae6f0a"
+        ],
+        "Candidate a5ae28c8": [
+          "fe3647d91f08cb3ddb9a6ae74a48962a72eddcffa0aae1ec4d06072c197a0ecf"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-mixed-tabs-drawingml-isolated-control",
+        "inputSha256": "77d489af0176d724144684777dcee1535a1fbd0ab233cfa9a7f3ac918489a326",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "e73f908a9b90cb28dd80f81037ad3265436937549c514bc900ac632b7fccfc19",
+        "renderReportSha256": "176578d4f2ecbca9cfd83513d285adaac609563b445068cb497a964f23ff5685",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      },
+      "candidate": {
+        "id": "export-story-context-mixed-tabs-drawingml-isolated-control",
+        "inputSha256": "77d489af0176d724144684777dcee1535a1fbd0ab233cfa9a7f3ac918489a326",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "bfaf4cbe58bf3b55b9f1fe3b59ca137413150225975db38938063ada45e0931c",
+        "renderReportSha256": "1c56978b1971a1d7395d6f5843ba569180addc9c496592b6d3001447a5b66b9b",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-mixed-tabs-drawingml-mixed",
+      "inputSha256": "0d08da457ef6b8f794e10ab288041a8ff6bc115d664d54be31fb5e7957b8e1a7",
+      "screenshot": "export-story-context-mixed-tabs-drawingml-mixed.png",
+      "screenshotSha256": "82fdb6e476e0e71829edafe763e5e8dedb7e06adb2e6be5468f16ddfd650f7d7",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "041e00544fbc51c2e1022b502ed1cb47037a23baa62f7effebd8d3b0374fdb39",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [],
+        "LibreOffice reference": [
+          "d989aa0627f88dadfedd93a6c58d0acf903a513c7a5ea15e9a3e9802a0ae6f0a"
+        ],
+        "Candidate a5ae28c8": [
+          "fe3647d91f08cb3ddb9a6ae74a48962a72eddcffa0aae1ec4d06072c197a0ecf"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-mixed-tabs-drawingml-mixed",
+        "inputSha256": "0d08da457ef6b8f794e10ab288041a8ff6bc115d664d54be31fb5e7957b8e1a7",
+        "status": "failed",
+        "code": "output_verification_failure",
+        "phase": "output_verification",
+        "message": "source anchor p:body:57e90d873d23ddc09dc102a74fca1ab1 has no measurable fragment in the paginated layout"
+      },
+      "candidate": {
+        "id": "export-story-context-mixed-tabs-drawingml-mixed",
+        "inputSha256": "0d08da457ef6b8f794e10ab288041a8ff6bc115d664d54be31fb5e7957b8e1a7",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "c817b60b7b8a34e02de8f1808cd002c5f6389f9ffab36fbf55c116ee16b4ca52",
+        "renderReportSha256": "c920d2bbcae8ffecf4de5c94e3e076ff7be368be237e97cfd73bb6e2faae2337",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-mixed-tabs-drawingml-single",
+      "inputSha256": "e16c23b475bbb01d79fd35a0e49a0c2493e0d56c7e55b5d05c54247b1b1d7c65",
+      "screenshot": "export-story-context-mixed-tabs-drawingml-single.png",
+      "screenshotSha256": "9df6384600e3bea455829515ef5fa460e981e4500ac3b4809f9b389f630609db",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "9fcc1f68a14bfe3c3f10cf6cdc55797bb59f656876b4c7657365c8cc8a3410e6",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "927ca9f944401252bc5a135f6ead38188479c926b9cdd4beb19149baef866fe2"
+        ],
+        "LibreOffice reference": [
+          "d989aa0627f88dadfedd93a6c58d0acf903a513c7a5ea15e9a3e9802a0ae6f0a"
+        ],
+        "Candidate a5ae28c8": [
+          "fe3647d91f08cb3ddb9a6ae74a48962a72eddcffa0aae1ec4d06072c197a0ecf"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-mixed-tabs-drawingml-single",
+        "inputSha256": "e16c23b475bbb01d79fd35a0e49a0c2493e0d56c7e55b5d05c54247b1b1d7c65",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "3a3747dee04402ab3c6d689799e86871d3ec52abd7ebd5143b2f7514c06d055f",
+        "renderReportSha256": "5c655866996fb84b42b4e152dfb1995894a9f8e2b93e17a47e376806ea954bb8",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": [
+          "assertion-marker-region",
+          "assertion-marker-region"
+        ]
+      },
+      "candidate": {
+        "id": "export-story-context-mixed-tabs-drawingml-single",
+        "inputSha256": "e16c23b475bbb01d79fd35a0e49a0c2493e0d56c7e55b5d05c54247b1b1d7c65",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "ae5af62fe74a6bf66e2c20dcce8c1a7f8124eed7a2535a5015b09922cf038b3b",
+        "renderReportSha256": "2a81604799624ffa55a9834382e62c390f56801f1c76727d51c6be07cd7cb435",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-mixed-tabs-vml-isolated-control",
+      "inputSha256": "3d2645c35e038591cff13c523082f62ca5d0620994e45c9294db1c3936cd2c2d",
+      "screenshot": "export-story-context-mixed-tabs-vml-isolated-control.png",
+      "screenshotSha256": "f524adf2ee5e36c9b2b7f8c544de4c879e3844c2bc860a19247dec0ba405f7ae",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "f94985527d349685f7a90b3191d58dc55e4754652fa932ea8316de8ad7805a18",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "fe3647d91f08cb3ddb9a6ae74a48962a72eddcffa0aae1ec4d06072c197a0ecf"
+        ],
+        "LibreOffice reference": [
+          "dc19113726264f2ec7e6173e7ed78dc4a43113cc59abd54881e6b0a4a1141621"
+        ],
+        "Candidate a5ae28c8": [
+          "fe3647d91f08cb3ddb9a6ae74a48962a72eddcffa0aae1ec4d06072c197a0ecf"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-mixed-tabs-vml-isolated-control",
+        "inputSha256": "3d2645c35e038591cff13c523082f62ca5d0620994e45c9294db1c3936cd2c2d",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "0eb08b71208425d3aa3b786d9370b46b6781a5bc70a039a0fda928ddc9d7d244",
+        "renderReportSha256": "8a2a8778424f5278fc7d95167f2fa20804643b23f3ab81c5f193b79f16dcc36f",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      },
+      "candidate": {
+        "id": "export-story-context-mixed-tabs-vml-isolated-control",
+        "inputSha256": "3d2645c35e038591cff13c523082f62ca5d0620994e45c9294db1c3936cd2c2d",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "891baa579c38e26d42965a155d8175d31e337f97b232d4122fa83e9b30183b3d",
+        "renderReportSha256": "c442483c01e17f1bc26cc694f0bd4701dbc7081f5a1d77c9800ca528fb8052f3",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-mixed-tabs-vml-mixed",
+      "inputSha256": "762216741259f091356e9251c1c39c38dcccf3e57958fe6ff973798d18c75e0a",
+      "screenshot": "export-story-context-mixed-tabs-vml-mixed.png",
+      "screenshotSha256": "bf410c1a84791c5e5c5eeb05546bffcfd1470524afccdfe627ad4d1fd4d9c908",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "6b13317172978ce71e361ab46cd4d48945dae13e3bc7fc2d2132aa9e3c24498f",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [],
+        "LibreOffice reference": [
+          "dc19113726264f2ec7e6173e7ed78dc4a43113cc59abd54881e6b0a4a1141621"
+        ],
+        "Candidate a5ae28c8": [
+          "fe3647d91f08cb3ddb9a6ae74a48962a72eddcffa0aae1ec4d06072c197a0ecf"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-mixed-tabs-vml-mixed",
+        "inputSha256": "762216741259f091356e9251c1c39c38dcccf3e57958fe6ff973798d18c75e0a",
+        "status": "failed",
+        "code": "output_verification_failure",
+        "phase": "output_verification",
+        "message": "source anchor p:body:d80c7e76b3bbe8e521c2d1b0104d24fd has no measurable fragment in the paginated layout"
+      },
+      "candidate": {
+        "id": "export-story-context-mixed-tabs-vml-mixed",
+        "inputSha256": "762216741259f091356e9251c1c39c38dcccf3e57958fe6ff973798d18c75e0a",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "a96b9f46f467225b8851a767ce95699424a2dc12eb57f779359b7a77e72df58f",
+        "renderReportSha256": "acc20d4deab6d8177e0cad79111679f8e66e7f6803b34f8466d1db3858672be3",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-mixed-tabs-vml-single",
+      "inputSha256": "9c0f8e9dbda0f0c867c18e9182118faa0ed2778762de7b5c0411f743aa417aec",
+      "screenshot": "export-story-context-mixed-tabs-vml-single.png",
+      "screenshotSha256": "a03938e2aa27bbd9f9b76240b4853c1acca9b91190666ffa83f1cd304cc0199c",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "96a4e16f835092a12599dc302ae1deaaa86f7d2c0e0eca38ae584d6c725c8092",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "927ca9f944401252bc5a135f6ead38188479c926b9cdd4beb19149baef866fe2"
+        ],
+        "LibreOffice reference": [
+          "dc19113726264f2ec7e6173e7ed78dc4a43113cc59abd54881e6b0a4a1141621"
+        ],
+        "Candidate a5ae28c8": [
+          "fe3647d91f08cb3ddb9a6ae74a48962a72eddcffa0aae1ec4d06072c197a0ecf"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-mixed-tabs-vml-single",
+        "inputSha256": "9c0f8e9dbda0f0c867c18e9182118faa0ed2778762de7b5c0411f743aa417aec",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "2d0c539c892ca7012e524e4236979fbed2419cf3ea832e7de287c4ea0ebbf5cb",
+        "renderReportSha256": "033c3016fb749a46f859f8ea1746c686b632566ddd46e02b57a97401ac9a7ddb",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": [
+          "assertion-marker-region",
+          "assertion-marker-region"
+        ]
+      },
+      "candidate": {
+        "id": "export-story-context-mixed-tabs-vml-single",
+        "inputSha256": "9c0f8e9dbda0f0c867c18e9182118faa0ed2778762de7b5c0411f743aa417aec",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "6d7f6508ab9872279241e0c7f3b01739e4ef454e9a7c8222f66f190bff65dea1",
+        "renderReportSha256": "32d5c8cb399e0635ddc64e95f69affa013f9413df4676cd4c5570d7750b27dbc",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-vml-panels-page",
+      "inputSha256": "521275b3d7c572ad6d728c56860b4d00a8856f80cce777a4fd6bd9f20925a6f4",
+      "screenshot": "export-story-context-vml-panels-page.png",
+      "screenshotSha256": "410fc21a10ab1560bb9ea251983cdbebc4756b0982c4c484f3eeaf127f48cc83",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "858a146dc40cba4e2df62441397cb0de42992a12a092c848e797c325af231025",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [],
+        "LibreOffice reference": [
+          "cf5c2013983020508da48c9a7258a213eb95cf6dfa98a11eee73cad708e6c0ae"
+        ],
+        "Candidate a5ae28c8": [
+          "c65844814b15f32acd7dcd328a9e466f3da77a5e5bad926910e19d51d280a7d3"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-vml-panels-page",
+        "inputSha256": "521275b3d7c572ad6d728c56860b4d00a8856f80cce777a4fd6bd9f20925a6f4",
+        "status": "failed",
+        "code": "pagination_failure",
+        "phase": "running_story_placement",
+        "message": "Page 1 body content is clipped (613px scroll height in a 533px band; p.docx-000000 (+80.0px), span.docx-000002 (+80.0px))."
+      },
+      "candidate": {
+        "id": "export-story-context-vml-panels-page",
+        "inputSha256": "521275b3d7c572ad6d728c56860b4d00a8856f80cce777a4fd6bd9f20925a6f4",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "20f387186c62f35471d7de42fb53e2806bbf5f32b81bfdd80a71441df951106d",
+        "renderReportSha256": "8b26b5a3a437edc74f7e2b3f1df3526cbc16739370efd2f3eff86543aceb0755",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-vml-panels-margin",
+      "inputSha256": "7e2fa95ff7a14fafb1806c0d408515f08f63796fe8b51a82f0376ef4e884f2a6",
+      "screenshot": "export-story-context-vml-panels-margin.png",
+      "screenshotSha256": "6f70e5f00af255443ff2691a5faec9b076d1147f8c5bac62328657fbeec83e83",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "a798ff6a6d13ace85cb69eeee94ede707efe66ec8bc56a5c46bcda5ae3b1eed1",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [],
+        "LibreOffice reference": [
+          "cf5c2013983020508da48c9a7258a213eb95cf6dfa98a11eee73cad708e6c0ae"
+        ],
+        "Candidate a5ae28c8": [
+          "c65844814b15f32acd7dcd328a9e466f3da77a5e5bad926910e19d51d280a7d3"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-vml-panels-margin",
+        "inputSha256": "7e2fa95ff7a14fafb1806c0d408515f08f63796fe8b51a82f0376ef4e884f2a6",
+        "status": "failed",
+        "code": "pagination_failure",
+        "phase": "running_story_placement",
+        "message": "Page 1 body content is clipped (613px scroll height in a 533px band; p.docx-000000 (+80.0px), span.docx-000002 (+80.0px))."
+      },
+      "candidate": {
+        "id": "export-story-context-vml-panels-margin",
+        "inputSha256": "7e2fa95ff7a14fafb1806c0d408515f08f63796fe8b51a82f0376ef4e884f2a6",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "5b2e2fe08b1378ee5c51a690f8780d93e3e0ceaee29364c17b1589c11461c4cd",
+        "renderReportSha256": "e3cda3d2c55bbbecfa363c32613f6a009f62e23599fa4de06645b15079056277",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-vml-panels-inline-control",
+      "inputSha256": "61acea8868cbf3e8b5ebb8a9ace633139cfa8758e6abdd307a8b8a2658617c6f",
+      "screenshot": "export-story-context-vml-panels-inline-control.png",
+      "screenshotSha256": "7ee6ad546c554f5e5625a5eabde5a8a628f6877bb905fd2060b236f15ab3b323",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "ec0424aa6b1c8807131a8aa6640e1975d3e7af7174fe225384087bdb967f43d9",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "31644457b2b0d7b874226f8598987c957ce1a8d3e5c4039fe06147b98cb92cb6"
+        ],
+        "LibreOffice reference": [
+          "b81cbe1890ec874cbb2a15cca1d7f88d960f82a23dd8e5a8613bc1c586c23f70"
+        ],
+        "Candidate a5ae28c8": [
+          "31644457b2b0d7b874226f8598987c957ce1a8d3e5c4039fe06147b98cb92cb6"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-vml-panels-inline-control",
+        "inputSha256": "61acea8868cbf3e8b5ebb8a9ace633139cfa8758e6abdd307a8b8a2658617c6f",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "6105d795a63b81c445fe1cb0ac0951b724a9499963da7a3861553037b134579a",
+        "renderReportSha256": "26de17b84395ba46df8b57b3d733e6151dda82bba87a450c9a6a03cd076b320e",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      },
+      "candidate": {
+        "id": "export-story-context-vml-panels-inline-control",
+        "inputSha256": "61acea8868cbf3e8b5ebb8a9ace633139cfa8758e6abdd307a8b8a2658617c6f",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "a884bc39d18d299743e9fa0d8472bbcf09639a095dd2171f6ff224f5b01b43e4",
+        "renderReportSha256": "97677069e7717fabb9ca483be665601d19e0e8823e53e940127d17df9269b507",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-linked-textboxes-continued",
+      "inputSha256": "c11d4598065a856fbd5825d615cde5b2520deb295bbc51aaebc5a70ae1d2394e",
+      "screenshot": "export-story-context-linked-textboxes-continued.png",
+      "screenshotSha256": "a4794a328e9e05a3ca754ff013982bcfaf61104a899d75d3d9fdfa7543dc59b4",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "6085b24f98bba3eb265c4fe9aea8e3fdaee7fa80ecab95a3abdc0efecc9cc3a2",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "6968212fe542b049a229891e0ddf6264b7bf447cb12960a816bf94321bb8cf9e"
+        ],
+        "LibreOffice reference": [
+          "b5f2401c6e237701c707862550797cb616dcd07f076c0ccd647e691822b26e12"
+        ],
+        "Candidate a5ae28c8": [
+          "d36388a3f6b93319be18ab7ea364599dd1c8ca7fd232b4a3a238dc1acc668e69"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-linked-textboxes-continued",
+        "inputSha256": "c11d4598065a856fbd5825d615cde5b2520deb295bbc51aaebc5a70ae1d2394e",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "5b4d9c6ba7e459a32341a8c9776c3de3050009430e9416c49e7baa15d5a33073",
+        "renderReportSha256": "3bd14071ec419f6b35d082ed055b72bd69084194dc38d3cd59229a1308d019e9",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": [
+          "expected-visible-tokens"
+        ]
+      },
+      "candidate": {
+        "id": "export-story-context-linked-textboxes-continued",
+        "inputSha256": "c11d4598065a856fbd5825d615cde5b2520deb295bbc51aaebc5a70ae1d2394e",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "1af4aacffc74a0b0bdd1465df53b215e4a1e83645315b35c6eae2cfd4476cee1",
+        "renderReportSha256": "09892233e2c3e0784fce71deed07c6668ac65ad4e13a842a4ddccafa036ac921",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-linked-textboxes-fitting-control",
+      "inputSha256": "4512df0890c3700757124e3179029219e41145ae680d7acdc9118f351cb0bcc5",
+      "screenshot": "export-story-context-linked-textboxes-fitting-control.png",
+      "screenshotSha256": "19d69fc0cad3beb1a01278e042aa6262095d81eabbe82dac96d3adc4ef6d213e",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "ee7c1a80f6d42d7766ddf70559734787bc883182491bd1f1cfc2453fd744f600",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "20dc1257a2e3d2144d08ee4004932c3e32356af9b65518ab9bb1dec4d1cb888e"
+        ],
+        "LibreOffice reference": [
+          "d451de1eb68cbd126be221ccff16d6e4bc17de04cbbf1eb2d9b10baa60c2c781"
+        ],
+        "Candidate a5ae28c8": [
+          "91b76d17c94fd1fcfbbc1a5be33342a6b35313e7e3d4ae4879a2d02459ce0b4d"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-linked-textboxes-fitting-control",
+        "inputSha256": "4512df0890c3700757124e3179029219e41145ae680d7acdc9118f351cb0bcc5",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "cf4c1519204d37c207d8e5880f3f3a5cb07c8c92d5ea2d3f4e2b9a9ed740a6b5",
+        "renderReportSha256": "08b23d6d70a742741079e4b218a9a9637682ccb7b9094a25ff4becf9c6744fbd",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      },
+      "candidate": {
+        "id": "export-story-context-linked-textboxes-fitting-control",
+        "inputSha256": "4512df0890c3700757124e3179029219e41145ae680d7acdc9118f351cb0bcc5",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "71881ea6907ed4806e206f8911d89e02d2a6245ebe596c09b05c7b527d3f541e",
+        "renderReportSha256": "d6af3a2580babf736211edb71588be55b77137a99286b3f05303e1786273c790",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-linked-textboxes-unlinked-control",
+      "inputSha256": "4a2d6d62226a491a15d8b111932d8ed190c8563872aa7827cbefe5f90519f680",
+      "screenshot": "export-story-context-linked-textboxes-unlinked-control.png",
+      "screenshotSha256": "6051b707f5dd8712818fc1f3d78c5429230033018fee6202fb919fab842a20d3",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "8c5f896607f8b97b0f05ef563e2f5c24d24a24fb52f1a392010e83f4a92966af",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "8e033a337b58b913b798aaa52f2bc722352396be140439f48ecb6cefd44a1d69"
+        ],
+        "LibreOffice reference": [
+          "e55b1f7beaabd19ddaad94a9b0170b9853efaf54f9e9c4635d77ff2d9845bdd1"
+        ],
+        "Candidate a5ae28c8": [
+          "8e033a337b58b913b798aaa52f2bc722352396be140439f48ecb6cefd44a1d69"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-linked-textboxes-unlinked-control",
+        "inputSha256": "4a2d6d62226a491a15d8b111932d8ed190c8563872aa7827cbefe5f90519f680",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "841a3d8b93d539be9db8ee7b84a263fa7b338a6ce756ae7625e104b9ebf14a46",
+        "renderReportSha256": "a01bd1309ccb345f49ffae00b172926a3a98265a502a02c8573d5b56e9a41936",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      },
+      "candidate": {
+        "id": "export-story-context-linked-textboxes-unlinked-control",
+        "inputSha256": "4a2d6d62226a491a15d8b111932d8ed190c8563872aa7827cbefe5f90519f680",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "71b6fd53f2efb361b2b5d54ca964e1de1852fbda4bc1ef4fbcd2ab5d2e128121",
+        "renderReportSha256": "62fd2debacc7679bff9280cfd7079b00d86a99e7dd6fabe8329a80b79420998a",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-source-clip-drawingml-visible-control",
+      "inputSha256": "4878e7a70ebd94dca1bb7f1ec1283911670ab904fc3f42cd655b263456df1808",
+      "screenshot": "export-story-context-source-clip-drawingml-visible-control.png",
+      "screenshotSha256": "6cc0258bc16ba5bcc7391e2f2428d6de83b55afddb46b70f3aa1f7734d70a6ce",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "3eed5d4def5c014af0d26d634c8aff3f81704617f096dbd004af2fb707037848",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "63ef729fa0dd424e49b9911866fb96c2116d861e8b815dacd026a0bf56b58cd9"
+        ],
+        "LibreOffice reference": [
+          "b547797fc888d39b2e0de06163ed3671c1a68fd58c4fb2723d4e9b89c0770c33"
+        ],
+        "Candidate a5ae28c8": [
+          "63ef729fa0dd424e49b9911866fb96c2116d861e8b815dacd026a0bf56b58cd9"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-source-clip-drawingml-visible-control",
+        "inputSha256": "4878e7a70ebd94dca1bb7f1ec1283911670ab904fc3f42cd655b263456df1808",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "8340042c4d8decea24531a217d13141162c65a14f28bfe59823ba88d96418eea",
+        "renderReportSha256": "6c5fb8de54d691cf06c2c30292a15ec45563250e421f554db90fc4efb84ecacd",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      },
+      "candidate": {
+        "id": "export-story-context-source-clip-drawingml-visible-control",
+        "inputSha256": "4878e7a70ebd94dca1bb7f1ec1283911670ab904fc3f42cd655b263456df1808",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "eb711b67c3da6013352c059c1b53c1e3d7fa69a7ccf776cbcca28afe6790df04",
+        "renderReportSha256": "42709a12e256b63d1b4f1eec459a4d8c4c15bd15d999e733e5e2133777c200de",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-source-clip-drawingml-clipped",
+      "inputSha256": "3f7234a852a64c4bb8cd838030a2d45ee4e61226d1e26bded04aa6db802843a5",
+      "screenshot": "export-story-context-source-clip-drawingml-clipped.png",
+      "screenshotSha256": "4169c7fa5f1c5ddb808185ad2801d08a8dac5700094fc75c41309457965332c4",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "96b7ed3acd626eee67df8fd6c6343150b07b7340868b78b59558143da461aba2",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [],
+        "LibreOffice reference": [
+          "7401f97e9431ccb7d5e44b5704fc7dd082990216c541d5e49a49ce8efff77130"
+        ],
+        "Candidate a5ae28c8": [
+          "5db574ce3447082f730351c5ae69ca2423a6dfb5fc221fbe50ea75faefd0ab3a"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-source-clip-drawingml-clipped",
+        "inputSha256": "3f7234a852a64c4bb8cd838030a2d45ee4e61226d1e26bded04aa6db802843a5",
+        "status": "failed",
+        "code": "output_verification_failure",
+        "phase": "output_verification",
+        "message": "source anchor p:body:91f2a8170cccf4365f2000f12dad8575 has no measurable fragment in the paginated layout"
+      },
+      "candidate": {
+        "id": "export-story-context-source-clip-drawingml-clipped",
+        "inputSha256": "3f7234a852a64c4bb8cd838030a2d45ee4e61226d1e26bded04aa6db802843a5",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "334f31cb5a24746ace676785dbb5ccf33ce72f72dbc110452e539ee494a5bb26",
+        "renderReportSha256": "5d8c7c6638e79eee27faf1c76c4899805e02cc44760a076c81460b3ca4bfc3b9",
+        "warningCodes": [
+          "source_text_clipped"
+        ],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-source-clip-vml-visible-control",
+      "inputSha256": "6ad84a1d93f01ac684459de1e1c15d1e5b57e6d7131e40547191b7c0864ac226",
+      "screenshot": "export-story-context-source-clip-vml-visible-control.png",
+      "screenshotSha256": "206a5bc751564ec252b94e9111c46b34f90d905e0e3e0d868dff411a03afbdfd",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "7def98b9c422c4eff4d050474bbfc6a2d7be9a449d2da7e159bc2b8d2198a7b7",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "63ef729fa0dd424e49b9911866fb96c2116d861e8b815dacd026a0bf56b58cd9"
+        ],
+        "LibreOffice reference": [
+          "a84894bffb0f47e593a93648b58e67f40eac7702794fbf1f5c162de26c0aabe0"
+        ],
+        "Candidate a5ae28c8": [
+          "63ef729fa0dd424e49b9911866fb96c2116d861e8b815dacd026a0bf56b58cd9"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-source-clip-vml-visible-control",
+        "inputSha256": "6ad84a1d93f01ac684459de1e1c15d1e5b57e6d7131e40547191b7c0864ac226",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "7c9aadc3d39e26b99406f6409b17b767b76698110bccbfd242fb02a577fee9d2",
+        "renderReportSha256": "1d29c2c21f797a0451464a4e1617774a68f8f5dfc2f0c45b3fcd3747776be3fa",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      },
+      "candidate": {
+        "id": "export-story-context-source-clip-vml-visible-control",
+        "inputSha256": "6ad84a1d93f01ac684459de1e1c15d1e5b57e6d7131e40547191b7c0864ac226",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "873c51e22fe705e91f50eb62ef9145a08345cd7836f40d51262b720c2a28a977",
+        "renderReportSha256": "70659362938731882fb88766350ac59d4d25da93985746a82129d9bb099cc06f",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-source-clip-vml-clipped",
+      "inputSha256": "bf8fb61a42cbf56d6384f0e7776f75438e53cd6c900177cbfe092f9d2d3aa13d",
+      "screenshot": "export-story-context-source-clip-vml-clipped.png",
+      "screenshotSha256": "c5fc80dd35fc6a7eeaa59a135f9195d17150cc09eb872ed16c348c5acbe1339e",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "9b0aeca11cc63f1542fc11092d5de160886b848a0683eef1a966785a1beb03e7",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [],
+        "LibreOffice reference": [
+          "f300806931cf24a8b5dbcf58c7683d71818609f4e472fed302d1ab8a657b2c08"
+        ],
+        "Candidate a5ae28c8": [
+          "5db574ce3447082f730351c5ae69ca2423a6dfb5fc221fbe50ea75faefd0ab3a"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-source-clip-vml-clipped",
+        "inputSha256": "bf8fb61a42cbf56d6384f0e7776f75438e53cd6c900177cbfe092f9d2d3aa13d",
+        "status": "failed",
+        "code": "output_verification_failure",
+        "phase": "output_verification",
+        "message": "source anchor p:body:4939e125a35c6ee50a1a59ec223ede6a has no measurable fragment in the paginated layout"
+      },
+      "candidate": {
+        "id": "export-story-context-source-clip-vml-clipped",
+        "inputSha256": "bf8fb61a42cbf56d6384f0e7776f75438e53cd6c900177cbfe092f9d2d3aa13d",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "2feca4e2ba088d17c64698d3842415b11522021ae91e0cc96e2e8c0be119cd79",
+        "renderReportSha256": "e2b11188cddedce38f6b8224333fbc5cbf7f519bdf74b81bb6766b7bd72bbe98",
+        "warningCodes": [
+          "source_text_clipped"
+        ],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-raised-inline-box-unraised-control",
+      "inputSha256": "ef2b6da7e3059f6bc2be22c95d30a7d32743f04071dad0a83828cfb93d8a7c3d",
+      "screenshot": "export-story-context-raised-inline-box-unraised-control.png",
+      "screenshotSha256": "c5c3153fce627020f63b9be2b31018d9743ee088e5daf865a73746c8984db3da",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "27beaf535b9c00e7ff9abb2a624ab0233ff03c6d608157b0181b8d7bab54981c",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "9bae7d227e378a058a28895b65c20a2bafc93449cf5687f271a93e26a871c59b"
+        ],
+        "LibreOffice reference": [
+          "c1198d46ba7f57c72d00b3ba51ae596e9ef3f9c1a87bc540375efa0d80aace82"
+        ],
+        "Candidate a5ae28c8": [
+          "9bae7d227e378a058a28895b65c20a2bafc93449cf5687f271a93e26a871c59b"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-raised-inline-box-unraised-control",
+        "inputSha256": "ef2b6da7e3059f6bc2be22c95d30a7d32743f04071dad0a83828cfb93d8a7c3d",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "7c225695264aa6cc7c34507fb47e841e29667ae8802a69882819d6ca6832a47d",
+        "renderReportSha256": "c1791bb78bcdf2c1d5b9b0397a672d771a845e8b314626ea98adf5d5ebd05cac",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      },
+      "candidate": {
+        "id": "export-story-context-raised-inline-box-unraised-control",
+        "inputSha256": "ef2b6da7e3059f6bc2be22c95d30a7d32743f04071dad0a83828cfb93d8a7c3d",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "ef406860be64c5d20789f54f778c402b4cba1c29b21af550e974132d785d8d9f",
+        "renderReportSha256": "6368dbcab0ba5a3e3c999acb555c603c187bd8c5d61d6c50de1223cd5a70f18e",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-raised-inline-box-raised",
+      "inputSha256": "dc7969c278ad9eb3fac72d6968c962de6280b51217df72f21cd0efcfdabcf035",
+      "screenshot": "export-story-context-raised-inline-box-raised.png",
+      "screenshotSha256": "4648b148d431e9bf7388cf239d6c4d4fb765218a163dc7df3261d4f3f273a033",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "7bf539d07c4114055e2a02f3b4685c920ba84a249b4ee1bd286693f69d8d6c05",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [],
+        "LibreOffice reference": [
+          "5a0a111d890a761c5ace528675608d036ff3a7828700d814fc98460bca69cd20"
+        ],
+        "Candidate a5ae28c8": [
+          "bdb93df4257f3b17f6e94d8d3541f591b4de7f87dd85a28dab5c626d3d533ec8"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-raised-inline-box-raised",
+        "inputSha256": "dc7969c278ad9eb3fac72d6968c962de6280b51217df72f21cd0efcfdabcf035",
+        "status": "failed",
+        "code": "output_verification_failure",
+        "phase": "output_verification",
+        "message": "source anchor p:body:bef96bad48cbf4b6b002fda706bfab83 has no measurable fragment in the paginated layout"
+      },
+      "candidate": {
+        "id": "export-story-context-raised-inline-box-raised",
+        "inputSha256": "dc7969c278ad9eb3fac72d6968c962de6280b51217df72f21cd0efcfdabcf035",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "30c461d95cc35535f3817989952fa9721b140b945fc70b57d596fe8da7e28bf4",
+        "renderReportSha256": "066b23f3759e4d1f106513fb667d121016eb918df6c709b1d8e3162f0534881c",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-offpaper-margin-paragraph-visible-control",
+      "inputSha256": "1e0d102f0d23290861de28d6db299f7efbf1612df2e6105dea42840faf27adc8",
+      "screenshot": "export-story-context-offpaper-margin-paragraph-visible-control.png",
+      "screenshotSha256": "14486b16dcaa675a8dbcb81bf6329b8d1372c2ba8ee775a4fc31581a96f26dab",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "9b0e5ac401cc340cab5f894a898b8fcd0dcb8750148163c309ede0b071a63d7b",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "81cd54a597153162d7e0b907cb9e13002b7e281126a3197f8160e20909b40f77"
+        ],
+        "LibreOffice reference": [
+          "8874e37804936e0b0aceddbc2f52ed050f27b1dfcb54854a9d06cbe86dd563be"
+        ],
+        "Candidate a5ae28c8": [
+          "81cd54a597153162d7e0b907cb9e13002b7e281126a3197f8160e20909b40f77"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-offpaper-margin-paragraph-visible-control",
+        "inputSha256": "1e0d102f0d23290861de28d6db299f7efbf1612df2e6105dea42840faf27adc8",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "4be418bfc1e9eef08f8e04932f0e825b797ad0a166d654709ec80b8f06232f3d",
+        "renderReportSha256": "d8be8fd1eeed4225224391aabfbe2c3b986c9f65d44336b2f580e9acff39c6df",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      },
+      "candidate": {
+        "id": "export-story-context-offpaper-margin-paragraph-visible-control",
+        "inputSha256": "1e0d102f0d23290861de28d6db299f7efbf1612df2e6105dea42840faf27adc8",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "0b1f2e19813a25de7d2d2a57c21abdd8b419580e797ff761ae546a5201208e42",
+        "renderReportSha256": "13936257356799a813ad4cbf7e80d0ac8fc02dd5dfc72ced944bd40be6f317b8",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-offpaper-margin-paragraph-outside",
+      "inputSha256": "f388372e53dbbe00d0dfbba4ccb4d8ae157902411c8c1d53868791df100518f7",
+      "screenshot": "export-story-context-offpaper-margin-paragraph-outside.png",
+      "screenshotSha256": "219b0e3f494a59df0f81772ceab0a2de5418188f1d1f20f89ab9e18f8abc2040",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "cafc9915fff7ca7a92e93a4a741fa944584b10a800f98476a63d27a0feb84410",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [],
+        "LibreOffice reference": [
+          "328717016be1fa241617210e532101e653abe92ce4d0c3b6afe737d330dd6de2"
+        ],
+        "Candidate a5ae28c8": [
+          "e699635131ad455c987b66452ac9ff80999be6ecec1f2519e5eeeded2a41d655"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-offpaper-margin-paragraph-outside",
+        "inputSha256": "f388372e53dbbe00d0dfbba4ccb4d8ae157902411c8c1d53868791df100518f7",
+        "status": "failed",
+        "code": "output_verification_failure",
+        "phase": "output_verification",
+        "message": "source anchor p:body:aad80ce9f5f5e32335b6a58227e961c4 has no measurable fragment in the paginated layout"
+      },
+      "candidate": {
+        "id": "export-story-context-offpaper-margin-paragraph-outside",
+        "inputSha256": "f388372e53dbbe00d0dfbba4ccb4d8ae157902411c8c1d53868791df100518f7",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "41aa81afbd48d38e694f71eff6213f25afc3c1c538cc7737082a7432b234f4af",
+        "renderReportSha256": "8624bf8521b97ff690f75052fcdbb04093088a9425f9dcf7877b1d3ec18576a8",
+        "warningCodes": [
+          "source_text_clipped",
+          "source_text_clipped"
+        ],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-textbox-tab-width-drawingml-wrapping-prefix",
+      "inputSha256": "cd4dc45fa474ecc2df392cd4bf9b4a9dc8661da26a2208f8323b2a787d27d62c",
+      "screenshot": "export-story-context-textbox-tab-width-drawingml-wrapping-prefix.png",
+      "screenshotSha256": "8fd83fca3258e39a5fd3fb7b06522c8b01cd40597bff013df93254ac22351e61",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "ccda3429d790f5e066fd179dcdc24861dde849a4289b7b3190929a06c659aa78",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "ad238a57a47b366f443926550da0aaaec579a8fd7cb7a0aee7bcdecf31c2afcf"
+        ],
+        "LibreOffice reference": [
+          "1dd5766e15218c630451299491129f120818a666ce45f0dccacb26c8e9d963cd"
+        ],
+        "Candidate a5ae28c8": [
+          "bf769cd0cefc4dede3d4d6a8518fcc4ee80fe5561dd3f377e43bdef6f842b82b"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-textbox-tab-width-drawingml-wrapping-prefix",
+        "inputSha256": "cd4dc45fa474ecc2df392cd4bf9b4a9dc8661da26a2208f8323b2a787d27d62c",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "cd4e7deb199cecca3ce481e0f836e85cb66c77c2f33337aa425724b4c4d11b37",
+        "renderReportSha256": "9ab5f1b5b9caf9b3a86e479fb27c358df981f0df5323845884e48ae4a3d6c662",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": [
+          "expected-visible-tokens"
+        ]
+      },
+      "candidate": {
+        "id": "export-story-context-textbox-tab-width-drawingml-wrapping-prefix",
+        "inputSha256": "cd4dc45fa474ecc2df392cd4bf9b4a9dc8661da26a2208f8323b2a787d27d62c",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "4072e795fd28b26cd78d1001a04f0afa0b26edbd3938b4cdd62fab67ee482ab7",
+        "renderReportSha256": "20e6ef4f06e5024b6e4256c755da9d19a6e3a3066f64254bad49831cdd1804c9",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-textbox-tab-width-drawingml-short-prefix-control",
+      "inputSha256": "6d0040ba35a6cac9993a02094f797a8ebbd18a7bed209f00647f6ee5e6995229",
+      "screenshot": "export-story-context-textbox-tab-width-drawingml-short-prefix-control.png",
+      "screenshotSha256": "a81767ac0cae7f058c406ddc306094bfa376793ce5c0ca5670f1cda3855c11f2",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "927dfcf5a4e8ff5f48a9147644b8237ef4a96410695257bdfbc13d39a3851ee6",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "17aad23aec0833fe1a5c51a0f5ced05d055cbb993cdf6745630e5ff1590e475b"
+        ],
+        "LibreOffice reference": [
+          "293d36d5cbf2ea757a55fbbea029a4da5a36d729ebf7f6f695ca4175f5f6933a"
+        ],
+        "Candidate a5ae28c8": [
+          "17aad23aec0833fe1a5c51a0f5ced05d055cbb993cdf6745630e5ff1590e475b"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-textbox-tab-width-drawingml-short-prefix-control",
+        "inputSha256": "6d0040ba35a6cac9993a02094f797a8ebbd18a7bed209f00647f6ee5e6995229",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "89b7d0100604644b435c46dadc7cfe0ceb60bc1c288c4d7c0be92f73efb6c1db",
+        "renderReportSha256": "4b4a5a5553a9c1c43c834acd952adac3084a277620f816d0a1adb330e2d4664d",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      },
+      "candidate": {
+        "id": "export-story-context-textbox-tab-width-drawingml-short-prefix-control",
+        "inputSha256": "6d0040ba35a6cac9993a02094f797a8ebbd18a7bed209f00647f6ee5e6995229",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "960a5632de5024a68602db4d37fcf9c463a348e5b8b2d1d483c85ac594804f4a",
+        "renderReportSha256": "ea98f7f4d282591e370fe2ffa5f8ea6f09895da51c5244313368dc130a737349",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-textbox-tab-width-drawingml-inset-control",
+      "inputSha256": "b3790a66032072f5012fc2a4b550307bc36df6ed69e11508f7075e2f8a88e9df",
+      "screenshot": "export-story-context-textbox-tab-width-drawingml-inset-control.png",
+      "screenshotSha256": "5035d8966f812267d16ddb3476cac9e874552771213954d9eeb63e6d23952764",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "d6c57ae538dd7bf08bbd3e1c0deef1af03b7a72b04b5527d40f678bf06afac3f",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "02b119846068ec756f924461b5fce9808d4f093975b3a0bb18761d97aa64c339"
+        ],
+        "LibreOffice reference": [
+          "363a95bdc9cfee3bbfd5a11a58d5f76f61fefab5c76f0af424403d3aef2e5043"
+        ],
+        "Candidate a5ae28c8": [
+          "8f5cc6438f01dd12a056f51b0986b979756382a2f1c0cd74c3db48aabcda7702"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-textbox-tab-width-drawingml-inset-control",
+        "inputSha256": "b3790a66032072f5012fc2a4b550307bc36df6ed69e11508f7075e2f8a88e9df",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "591364d1de0a1223f93bd247f4660e38c0cecfa43fa83412a44e266f39401399",
+        "renderReportSha256": "129410f7fb5952813c2e5f6f2428cf3bfe1b8b7c04acf34e840e02c6218f2505",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": [
+          "expected-visible-tokens"
+        ]
+      },
+      "candidate": {
+        "id": "export-story-context-textbox-tab-width-drawingml-inset-control",
+        "inputSha256": "b3790a66032072f5012fc2a4b550307bc36df6ed69e11508f7075e2f8a88e9df",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "437fb78d73e1954337869f02dc484fca932a0aa23c18556c6661ba75f6375bdc",
+        "renderReportSha256": "87f0a970752af86c1a5a7cd0a1ac4fd7b829b296040411d19f94154c0dd65309",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-textbox-tab-width-vml-wrapping-prefix",
+      "inputSha256": "36ea1cdd276f359877da6ae404162510dcc9d1abc45bf18950d31de83cec9f04",
+      "screenshot": "export-story-context-textbox-tab-width-vml-wrapping-prefix.png",
+      "screenshotSha256": "67174ab125b6bcdb89a34e7e24873f42dd477836401c0dfc3d7edbc543e1b859",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "9731c7b97de0f48a83b50313f778d4000245d5ae9ccc7f6415d1b17d48efb0aa",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "ad238a57a47b366f443926550da0aaaec579a8fd7cb7a0aee7bcdecf31c2afcf"
+        ],
+        "LibreOffice reference": [
+          "21b4b5a7fd8efe655c70a2748d6f390ebf9496bf1bea70b7f2ecebf89dccf7cd"
+        ],
+        "Candidate a5ae28c8": [
+          "bf769cd0cefc4dede3d4d6a8518fcc4ee80fe5561dd3f377e43bdef6f842b82b"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-textbox-tab-width-vml-wrapping-prefix",
+        "inputSha256": "36ea1cdd276f359877da6ae404162510dcc9d1abc45bf18950d31de83cec9f04",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "705e27815e0e9db4ded791a11935da1c080d73c9a938b8f7e4693b87d5587b50",
+        "renderReportSha256": "f44cd7a16bb6e9816f4428daa6b64bbd9add07319af4ff745ce4fbeb74ef5467",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": [
+          "expected-visible-tokens"
+        ]
+      },
+      "candidate": {
+        "id": "export-story-context-textbox-tab-width-vml-wrapping-prefix",
+        "inputSha256": "36ea1cdd276f359877da6ae404162510dcc9d1abc45bf18950d31de83cec9f04",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "f261f95da6e06b816a40e04a38176e939975b42f2643b235b6bbe9cc61a74a31",
+        "renderReportSha256": "afe36eaea92ea910f8834e7ae4d49e78fea3b7f6e0146aded1b0960a54446667",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-textbox-tab-width-vml-short-prefix-control",
+      "inputSha256": "cba87baec0bd55fe44677115e566a0c1d0e6024517722ccbee83ebd421b1a0a6",
+      "screenshot": "export-story-context-textbox-tab-width-vml-short-prefix-control.png",
+      "screenshotSha256": "93e0c5ec1cdcf4c647ce96f743c530ce44643ea98fc52724a759b7719d2f87dd",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "7f6beb34eef2552fa04fe1c4f73cbbd15f293741776f40fe456732eb31bf69bf",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "17aad23aec0833fe1a5c51a0f5ced05d055cbb993cdf6745630e5ff1590e475b"
+        ],
+        "LibreOffice reference": [
+          "5ba54087a24ec6daa36b489718a7621ad4187a2aaa95595dd735330d939dbada"
+        ],
+        "Candidate a5ae28c8": [
+          "17aad23aec0833fe1a5c51a0f5ced05d055cbb993cdf6745630e5ff1590e475b"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-textbox-tab-width-vml-short-prefix-control",
+        "inputSha256": "cba87baec0bd55fe44677115e566a0c1d0e6024517722ccbee83ebd421b1a0a6",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "50bfd02a4b225be391dc8bec73c2a528f1a7bdf89dc7cfb9cd54ac4c2e5c6f24",
+        "renderReportSha256": "a183f6810c3cbbbd9d34aa1e36117c2fca15976d44d55935c0404e50ac8e7d54",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      },
+      "candidate": {
+        "id": "export-story-context-textbox-tab-width-vml-short-prefix-control",
+        "inputSha256": "cba87baec0bd55fe44677115e566a0c1d0e6024517722ccbee83ebd421b1a0a6",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "8e01d0840229d88dc8cd26b796aa545cd6d0962dd87b6beb49dfaf09d4ae6ce9",
+        "renderReportSha256": "c056a05765af73ecda8c97e3f91d75d78cd9566ebf8288cb56c4a0c6b625ab32",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-textbox-tab-width-vml-inset-control",
+      "inputSha256": "4c516c7849165560c3fe3eb5e0062c18327d1181351106f7e215e90a26301153",
+      "screenshot": "export-story-context-textbox-tab-width-vml-inset-control.png",
+      "screenshotSha256": "96da6b5d03777cca45503e1e6bdca8e06de588505adf72e7bb80122b09017c9b",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "0ca19c987486c07e1dad082c9fcd6613d35ad3181d7e9bbf6ecd7c181052f116",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "1e221759b94a3d5ff8f226148c125f933692a6d96ac425926326fdd5af399979"
+        ],
+        "LibreOffice reference": [
+          "0213ac62039736b985a8340e1a8c25fc0853a13b597ca448369cc51bbda198f9"
+        ],
+        "Candidate a5ae28c8": [
+          "bf769cd0cefc4dede3d4d6a8518fcc4ee80fe5561dd3f377e43bdef6f842b82b"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-textbox-tab-width-vml-inset-control",
+        "inputSha256": "4c516c7849165560c3fe3eb5e0062c18327d1181351106f7e215e90a26301153",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "d2190d2bb9d5cb9f23a2fcd6c76435fedcf3dbaa8ea30fbd956a666e0f27322c",
+        "renderReportSha256": "b662f13b0eeee2f07e6a9b627a08d939cd1eff1104f830a47e1936510d8e3ada",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": [
+          "expected-visible-tokens"
+        ]
+      },
+      "candidate": {
+        "id": "export-story-context-textbox-tab-width-vml-inset-control",
+        "inputSha256": "4c516c7849165560c3fe3eb5e0062c18327d1181351106f7e215e90a26301153",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "52532a98530153b30934ec4defdc0c325dad7a4b29c47f3f1d421ecbfbc40015",
+        "renderReportSha256": "167794c1ce0dc523d7a66b89a6611e2ddfb770aae92eeecba6734f2115d7c12b",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-vml-leaf-oval-inline-control",
+      "inputSha256": "3d65a0dac611e0ccf47f0b2a2cee632b9880deaba257dee7238b9d38b08e84da",
+      "screenshot": "export-story-context-vml-leaf-oval-inline-control.png",
+      "screenshotSha256": "9f9513bb5349a2a81f205f629ab7f7615c394f2a2b0f4618dd4417f68a0f5dd9",
+      "reference": {
+        "eligible": false,
+        "pdfSha256": "015efefcdf5aa1945ddab29609ac630adc77b317241d7da4cc84e0b1547adedb",
+        "failures": [
+          "expected-visible-tokens"
+        ],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "0dcccf9d5dac95d1d0cf0784de45a5f79e7a3d3dd2c09fd9f59c50ed596ac76a"
+        ],
+        "LibreOffice reference": [
+          "c63e0a7ca655041c0efc1cea10dc6a6a66f794f7c7ae69874467a29c901d5186"
+        ],
+        "Candidate a5ae28c8": [
+          "0dcccf9d5dac95d1d0cf0784de45a5f79e7a3d3dd2c09fd9f59c50ed596ac76a"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-vml-leaf-oval-inline-control",
+        "inputSha256": "3d65a0dac611e0ccf47f0b2a2cee632b9880deaba257dee7238b9d38b08e84da",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "731dc17c54084878493b547ac8fe7c606c10e20ff92d3d6f877cdd7250254a8a",
+        "renderReportSha256": "e96dd155f9d8c5d000ea8fd9032f266f2c4ed6221ca0305a4e08ebe615928284",
+        "warningCodes": [
+          "unsupported_content_placeholder"
+        ],
+        "unsupportedContentCount": 1,
+        "mandatoryPdfFailures": []
+      },
+      "candidate": {
+        "id": "export-story-context-vml-leaf-oval-inline-control",
+        "inputSha256": "3d65a0dac611e0ccf47f0b2a2cee632b9880deaba257dee7238b9d38b08e84da",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "843eab963f16961c4cb907425733943f590480e15a8e9b6bd8493a39a46cfdef",
+        "renderReportSha256": "e2178017b0c80c6653a900cd7fd84af490a2d6d21551a78477c7bb18a91e01c3",
+        "warningCodes": [
+          "unsupported_content_placeholder"
+        ],
+        "unsupportedContentCount": 1,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-vml-leaf-oval-positioned",
+      "inputSha256": "5702562b9b9c281a30f2e4746adb9d974a9c595397ac70bc4c37a9a0bcc870b8",
+      "screenshot": "export-story-context-vml-leaf-oval-positioned.png",
+      "screenshotSha256": "7136c9f37f8c7754ec3ebb2b84b0e9112c4ce7d1a33dcfd5ea9f31cd43cd08f9",
+      "reference": {
+        "eligible": false,
+        "pdfSha256": "2e96605a3b2555a399adadaf3e4212348892428ffdb439ba5860ce6677716e97",
+        "failures": [
+          "expected-visible-tokens"
+        ],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [],
+        "LibreOffice reference": [
+          "f684432aebacedfaef92eb3d3d11d1afa7ac57d720f66829f25c10c55e9198a5"
+        ],
+        "Candidate a5ae28c8": [
+          "20cd317eed65660c375744d5bb45ff548ed3ee17a6c4712247037c30ece5219f"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-vml-leaf-oval-positioned",
+        "inputSha256": "5702562b9b9c281a30f2e4746adb9d974a9c595397ac70bc4c37a9a0bcc870b8",
+        "status": "failed",
+        "code": "pagination_failure",
+        "phase": "running_story_placement",
+        "message": "Page 1 body content is clipped (600px scroll height in a 533px band; p.docx-000000 (+66.7px), span.unsupported-placeholder.unsupported-other.docx-000002 (+66.7px))."
+      },
+      "candidate": {
+        "id": "export-story-context-vml-leaf-oval-positioned",
+        "inputSha256": "5702562b9b9c281a30f2e4746adb9d974a9c595397ac70bc4c37a9a0bcc870b8",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "acd418ec73d7aded1d584233adb9ee9bae6a84db029e0dd63ca2280847c7857e",
+        "renderReportSha256": "f62cc4d3beb67a379a485a93dea563f38f5aeaa8f0bd4ca32bf3d20de3f1ce15",
+        "warningCodes": [
+          "unsupported_content_placeholder"
+        ],
+        "unsupportedContentCount": 1,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-vml-leaf-rect-inline-control",
+      "inputSha256": "6fa937cb5d5d4ac3d8063d3a283eb1bbe786bd4dc1da120155bf5c106010f398",
+      "screenshot": "export-story-context-vml-leaf-rect-inline-control.png",
+      "screenshotSha256": "991cf918a1813aaf403f74ed1f06d39b8ef1f0a82d7c6e4b6bc98f44ea06c086",
+      "reference": {
+        "eligible": false,
+        "pdfSha256": "563ee6f9026b361316799f6d8cf148f3e146802d8372e825f6272fb5262303f7",
+        "failures": [
+          "expected-visible-tokens"
+        ],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "0dcccf9d5dac95d1d0cf0784de45a5f79e7a3d3dd2c09fd9f59c50ed596ac76a"
+        ],
+        "LibreOffice reference": [
+          "a8358aeffd2e4f2e02630ac6485869b7ccf6dbd2fc139dad0c381a49231d514b"
+        ],
+        "Candidate a5ae28c8": [
+          "0dcccf9d5dac95d1d0cf0784de45a5f79e7a3d3dd2c09fd9f59c50ed596ac76a"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-vml-leaf-rect-inline-control",
+        "inputSha256": "6fa937cb5d5d4ac3d8063d3a283eb1bbe786bd4dc1da120155bf5c106010f398",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "f11ce3be6a9c00454170a89ab358c7a3c5fe466793fe8e07e0da046985937f94",
+        "renderReportSha256": "47371b418cb74088ff659f4c8e0992616253e70aa544b87878d28971d8aa1d3b",
+        "warningCodes": [
+          "unsupported_content_placeholder"
+        ],
+        "unsupportedContentCount": 1,
+        "mandatoryPdfFailures": []
+      },
+      "candidate": {
+        "id": "export-story-context-vml-leaf-rect-inline-control",
+        "inputSha256": "6fa937cb5d5d4ac3d8063d3a283eb1bbe786bd4dc1da120155bf5c106010f398",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "5db7584c0d8719d0a8d57c0f22d3b5a381b23c15c66f441d4f396b5658f36870",
+        "renderReportSha256": "3c58600482bae7d9e459f15b36c77cb285d4dcce4e8b6a52bd4d4e2539ebddcb",
+        "warningCodes": [
+          "unsupported_content_placeholder"
+        ],
+        "unsupportedContentCount": 1,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-vml-leaf-rect-positioned",
+      "inputSha256": "bc82e596ebf6247fa16da694d2b85fc3ef70cddf8151fad766209ae6cac15b37",
+      "screenshot": "export-story-context-vml-leaf-rect-positioned.png",
+      "screenshotSha256": "b73e9a8a3b65178798b65595d0b59495f496b18b4867a1cce4af1819271ad423",
+      "reference": {
+        "eligible": false,
+        "pdfSha256": "305fd71a8ec37f2b9a05d997385b17e8bbfa728e26e7a9a9dc1104a5fa90f4c2",
+        "failures": [
+          "expected-visible-tokens"
+        ],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [],
+        "LibreOffice reference": [
+          "6e4504f6f801efeea3437352f1274fa0c24c6f83b0450c941240fa8fdf28686e"
+        ],
+        "Candidate a5ae28c8": [
+          "20cd317eed65660c375744d5bb45ff548ed3ee17a6c4712247037c30ece5219f"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-vml-leaf-rect-positioned",
+        "inputSha256": "bc82e596ebf6247fa16da694d2b85fc3ef70cddf8151fad766209ae6cac15b37",
+        "status": "failed",
+        "code": "pagination_failure",
+        "phase": "running_story_placement",
+        "message": "Page 1 body content is clipped (600px scroll height in a 533px band; p.docx-000000 (+66.7px), span.unsupported-placeholder.unsupported-other.docx-000002 (+66.7px))."
+      },
+      "candidate": {
+        "id": "export-story-context-vml-leaf-rect-positioned",
+        "inputSha256": "bc82e596ebf6247fa16da694d2b85fc3ef70cddf8151fad766209ae6cac15b37",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "c2c25a4f5b51ea49e2911d9e15060eb4638c334bd757dc4f07ac5f5749c474de",
+        "renderReportSha256": "90cc81bfb90490af8735c4d8addc073ee2cea12d1f90e3d5db8cba05133c2c26",
+        "warningCodes": [
+          "unsupported_content_placeholder"
+        ],
+        "unsupportedContentCount": 1,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-shape-clearance-front-fitting-control",
+      "inputSha256": "05d24ac77e2cc6467cfbc9566ddfe8c78dd062adf7514c83c9ec905ee507083f",
+      "screenshot": "export-story-context-shape-clearance-front-fitting-control.png",
+      "screenshotSha256": "4e2ce5482b6795f1f5756ad69779f94a1bdbdb7081fc4778b51628ccd153cec7",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "0f4bfca65625778a7fe60a980be06c4bbfbd74b710bb2981e6ef2c2a21897449",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "8e0fd0c58799669955370480d03150642357edbf4b0bc0fb15db6d33b3eb9433"
+        ],
+        "LibreOffice reference": [
+          "8744ef98d2b2c31236c2f0589977d60e04f90fc874a64d5804b1b7ccac29667f"
+        ],
+        "Candidate a5ae28c8": [
+          "8e0fd0c58799669955370480d03150642357edbf4b0bc0fb15db6d33b3eb9433"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-shape-clearance-front-fitting-control",
+        "inputSha256": "05d24ac77e2cc6467cfbc9566ddfe8c78dd062adf7514c83c9ec905ee507083f",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "905287584c609915492f2bb5f768ba9f83b7e7031c972bc2f66f80d9fc4a67c6",
+        "renderReportSha256": "cb2e539da24bf9875ec1cea17339ef41ef809dcb4cdca223f3b0c1f6a54ebf1c",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      },
+      "candidate": {
+        "id": "export-story-context-shape-clearance-front-fitting-control",
+        "inputSha256": "05d24ac77e2cc6467cfbc9566ddfe8c78dd062adf7514c83c9ec905ee507083f",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "a4e502711c353a844ee31737de52d862eab3203ce8fdd4b7af203aaf07f445c7",
+        "renderReportSha256": "fa6e3327b52f53f405a29045733271c093494a342a3df8e073a1e2b239c19e37",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-shape-clearance-front-oversized",
+      "inputSha256": "d3c302a3dfd02ae1e5d59f7030cb4276105620c32a940791513573894ba506c5",
+      "screenshot": "export-story-context-shape-clearance-front-oversized.png",
+      "screenshotSha256": "90d633fa48a86cbbfd988223bacfe3078ef6516fe7b51dbf0b20e30359404e8d",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "91cd8407865358f3851745855cdc2601286bfe6c270ff636b32c3c7e19b7cc6c",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [],
+        "LibreOffice reference": [
+          "5d475a783ff0e78c4d06530846aa40c8dbe803f0c9322c975177f09b3dbba904"
+        ],
+        "Candidate a5ae28c8": [
+          "96368abf6cc10b534712f7b487b26422bd440a23690fe8c66f84ea2cac6dfb59"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-shape-clearance-front-oversized",
+        "inputSha256": "d3c302a3dfd02ae1e5d59f7030cb4276105620c32a940791513573894ba506c5",
+        "status": "failed",
+        "code": "pagination_failure",
+        "phase": "running_story_placement",
+        "message": "Page 1 body content is clipped (592px scroll height in a 533px band; p.docx-000000 (+58.4px), span.docx-000004 (+57.0px), span.docx-000001 (+40.0px))."
+      },
+      "candidate": {
+        "id": "export-story-context-shape-clearance-front-oversized",
+        "inputSha256": "d3c302a3dfd02ae1e5d59f7030cb4276105620c32a940791513573894ba506c5",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "2ee817918cd95e39848f4c2e896d50b8b10444c09c3db6107ab6d210c1033d53",
+        "renderReportSha256": "9941d5fbda2fe1e4e4aa36b46e5a857fb1d016425807afd355470b703a2a2fbd",
+        "warningCodes": [
+          "drawing_clearance_relaxed"
+        ],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-shape-clearance-behind-fitting-control",
+      "inputSha256": "d4ad0af47c74bc6d144b2ebb9fb45501d0dd07ac2783f90756609115eb2dc3b4",
+      "screenshot": "export-story-context-shape-clearance-behind-fitting-control.png",
+      "screenshotSha256": "45362c7e0a914c32d12dc9a32276bdab9f8d6a5663b3593db4c04f8aafb156b5",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "af6063a9d11f8373737f3910366859945b6df29d61a120ee9e6fe62a57c1c3bc",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "8e0fd0c58799669955370480d03150642357edbf4b0bc0fb15db6d33b3eb9433"
+        ],
+        "LibreOffice reference": [
+          "8744ef98d2b2c31236c2f0589977d60e04f90fc874a64d5804b1b7ccac29667f"
+        ],
+        "Candidate a5ae28c8": [
+          "8e0fd0c58799669955370480d03150642357edbf4b0bc0fb15db6d33b3eb9433"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-shape-clearance-behind-fitting-control",
+        "inputSha256": "d4ad0af47c74bc6d144b2ebb9fb45501d0dd07ac2783f90756609115eb2dc3b4",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "3a68e433a833609b78e581ba29e6e39107cd74d9233aa4fad3e42910bb3c3b06",
+        "renderReportSha256": "7383b794344f1983d0ea5e968475c050079f89f70b18816076f8992741673b10",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      },
+      "candidate": {
+        "id": "export-story-context-shape-clearance-behind-fitting-control",
+        "inputSha256": "d4ad0af47c74bc6d144b2ebb9fb45501d0dd07ac2783f90756609115eb2dc3b4",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "e032d4f56d2190d45800cc1da7694b470dc80bfd19a620d79cd50b19066233bb",
+        "renderReportSha256": "7771330a22dcfc39578f499aaad6999184fb40aebe66a76c5e8a3ca56330f724",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-shape-clearance-behind-oversized",
+      "inputSha256": "cc85bfda602a4f37059e93ccd5b5b31bd88bf44eb18eb1c018f32b8dbf5b2b5e",
+      "screenshot": "export-story-context-shape-clearance-behind-oversized.png",
+      "screenshotSha256": "6e89b853dba9829d61cad9f71691e0b0d09e2dc28dc9d3d1c67df8d9c4581afe",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "b764dd1cb7b748e9507a1bcf3513d8cad03036d960e820c575e7bd1bd4312ba4",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [],
+        "LibreOffice reference": [
+          "5d475a783ff0e78c4d06530846aa40c8dbe803f0c9322c975177f09b3dbba904"
+        ],
+        "Candidate a5ae28c8": [
+          "c7cbd7a0a9feed5feb89458edf73dcb68ab9b6cb90ac58b05c16f5e95e778e21"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-shape-clearance-behind-oversized",
+        "inputSha256": "cc85bfda602a4f37059e93ccd5b5b31bd88bf44eb18eb1c018f32b8dbf5b2b5e",
+        "status": "failed",
+        "code": "pagination_failure",
+        "phase": "running_story_placement",
+        "message": "Page 1 body content is clipped (592px scroll height in a 533px band; p.docx-000000 (+58.4px), span.docx-000004 (+57.0px), span.docx-000001 (+40.0px))."
+      },
+      "candidate": {
+        "id": "export-story-context-shape-clearance-behind-oversized",
+        "inputSha256": "cc85bfda602a4f37059e93ccd5b5b31bd88bf44eb18eb1c018f32b8dbf5b2b5e",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "3d81311a067e5cb8390465c35da5be5208d83c561184db2d8dd48401dc9ad348",
+        "renderReportSha256": "e8f6a31b35aa78dfd11b74d95c06c26f7592981cf798b6b69899badaa5577c36",
+        "warningCodes": [
+          "drawing_clearance_relaxed"
+        ],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-picture-square-front",
+      "inputSha256": "f29a2f8f03e25b0f7ac8a0fbadd4be04a91fcb25855dbc8770670eb5bfcba4bc",
+      "screenshot": "export-story-context-picture-square-front.png",
+      "screenshotSha256": "f0382465bbcd9221bf5fb142176cc901bc8b281dd63902c5eb7956aa4867687b",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "b1542923493ab78bd1dc100eaabd1edaa200e759d788ef2d969b20dae9f0b4ba",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "d476f611348409c2a1ed6c1d2188b46d95e7264f5cb3c93ddc51754ec92d7d27"
+        ],
+        "Intermediate cc57539f": [
+          "d476f611348409c2a1ed6c1d2188b46d95e7264f5cb3c93ddc51754ec92d7d27"
+        ],
+        "LibreOffice reference": [
+          "fd5244bbe6f87143a779b37134ec12ec93b12603a371d83e1d0e70071a5be750"
+        ],
+        "Candidate a5ae28c8": [
+          "d476f611348409c2a1ed6c1d2188b46d95e7264f5cb3c93ddc51754ec92d7d27"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-picture-square-front",
+        "inputSha256": "f29a2f8f03e25b0f7ac8a0fbadd4be04a91fcb25855dbc8770670eb5bfcba4bc",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "8bc1ca518cc39cc1c92e24c470301da6646ff0cc7d501a9f6bd0105a6355804c",
+        "renderReportSha256": "688cfa22dc4d39f35b601d90673aa3d42036760cc46262f0ca048e6d68aa06ee",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      },
+      "candidate": {
+        "id": "export-story-context-picture-square-front",
+        "inputSha256": "f29a2f8f03e25b0f7ac8a0fbadd4be04a91fcb25855dbc8770670eb5bfcba4bc",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "6012c33f0cdb7816eeb05f5ba256a7432fdaca5c1c84c3a042c7381fd6e4d306",
+        "renderReportSha256": "f420fbc9df75dc4b8cbab348ec91fd3a9386caa49922b52c484d14d68bb2d763",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      },
+      "intermediate": {
+        "id": "export-story-context-picture-square-front",
+        "inputSha256": "f29a2f8f03e25b0f7ac8a0fbadd4be04a91fcb25855dbc8770670eb5bfcba4bc",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "62a58b9bc45e0801ee6915e58ea8984d42b1778fa3bc536fbf2491327356a943",
+        "renderReportSha256": "0a9cbae4121af5d1d28f7d5b771f48f5e229635a9d6a3ac058175a752a0d6dce",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    },
+    {
+      "id": "export-story-context-picture-square-behind",
+      "inputSha256": "9c106db8c68dc484b344ee04b244a5485423223445de61c582790a377f6251d3",
+      "screenshot": "export-story-context-picture-square-behind.png",
+      "screenshotSha256": "66b09a8991839b89498e3de4dcb656558242230214f937c184ade795e62f3dc8",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "4b7b9317e0510b29cec851bb4763e3278ab29e70aa5770c60fabade428b3cfe2",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "d476f611348409c2a1ed6c1d2188b46d95e7264f5cb3c93ddc51754ec92d7d27"
+        ],
+        "Intermediate cc57539f": [
+          "c207e0d05b8e806cac4c518f8fc67b9481d8dacb1445e4a7da07b17d797bc05c"
+        ],
+        "LibreOffice reference": [
+          "fd5244bbe6f87143a779b37134ec12ec93b12603a371d83e1d0e70071a5be750"
+        ],
+        "Candidate a5ae28c8": [
+          "d476f611348409c2a1ed6c1d2188b46d95e7264f5cb3c93ddc51754ec92d7d27"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-picture-square-behind",
+        "inputSha256": "9c106db8c68dc484b344ee04b244a5485423223445de61c582790a377f6251d3",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "e43b1a9e22414d881da218f49807ae93407cceeaf03dab7aac42808360a35408",
+        "renderReportSha256": "819ddd57f770b46c5fa199cbd996681a3a97f2868685c809d703729702ffe051",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      },
+      "candidate": {
+        "id": "export-story-context-picture-square-behind",
+        "inputSha256": "9c106db8c68dc484b344ee04b244a5485423223445de61c582790a377f6251d3",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "8f318e2b4665e4d9f4930c42de1a56a8704b94e92e6ba7b84af4e604528f6ded",
+        "renderReportSha256": "af5cee609d53c6ff0c6082fc05e97236682ec746d8223715641f55b447896e13",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      },
+      "intermediate": {
+        "id": "export-story-context-picture-square-behind",
+        "inputSha256": "9c106db8c68dc484b344ee04b244a5485423223445de61c582790a377f6251d3",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "29eebde0867921ae510657194160cce7e48fe476b9afedac54e3e19ae4bb1d71",
+        "renderReportSha256": "29b421ad0698b6b7252f89d1ff65b4a885949823919a142a1a1a86c5e63b7398",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": [
+          "assertion-marker-region"
+        ]
+      }
+    },
+    {
+      "id": "export-story-context-picture-none-behind-control",
+      "inputSha256": "63873a4847a35a1805c7796cd192b26d53766cc967cc0e9084180115340962fa",
+      "screenshot": "export-story-context-picture-none-behind-control.png",
+      "screenshotSha256": "7974f31995d8f74a86b8bf9fb27e4a0193d18999448f93bbf09cb79a540d367c",
+      "reference": {
+        "eligible": true,
+        "pdfSha256": "b2f19e8c0e3bbad4395be09201c2ce50902a4211581de528bdf8764669c8b640",
+        "failures": [],
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "pageRasterSha256": {
+        "Baseline a72aac79": [
+          "b713b570bde6d64f7aa57e695e56a247f5c64ba4cce84991da937f137e1ad1da"
+        ],
+        "Intermediate cc57539f": [
+          "c207e0d05b8e806cac4c518f8fc67b9481d8dacb1445e4a7da07b17d797bc05c"
+        ],
+        "LibreOffice reference": [
+          "e03a4ca7f8f3cb9ac527aaf0b879b7343c530a9833beeb19970b94fb74db7f73"
+        ],
+        "Candidate a5ae28c8": [
+          "c207e0d05b8e806cac4c518f8fc67b9481d8dacb1445e4a7da07b17d797bc05c"
+        ]
+      },
+      "baseline": {
+        "id": "export-story-context-picture-none-behind-control",
+        "inputSha256": "63873a4847a35a1805c7796cd192b26d53766cc967cc0e9084180115340962fa",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "a284b4e2178cb7f15c21346a17749c20260714d3627578e646b9e7076deedbd2",
+        "renderReportSha256": "00fe020e7c289d87b54518e233164cf7873791592036569229bd579d8fb78197",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": [
+          "assertion-marker-region"
+        ]
+      },
+      "candidate": {
+        "id": "export-story-context-picture-none-behind-control",
+        "inputSha256": "63873a4847a35a1805c7796cd192b26d53766cc967cc0e9084180115340962fa",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "de764690fca1970c7d89bc2f93777574072d2a88551aea4956a3f41192260098",
+        "renderReportSha256": "02dc08c344aa0d4e7bb65c2b2f015704eca40bdf0068144d4c3db23711a7d526",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      },
+      "intermediate": {
+        "id": "export-story-context-picture-none-behind-control",
+        "inputSha256": "63873a4847a35a1805c7796cd192b26d53766cc967cc0e9084180115340962fa",
+        "status": "delivered",
+        "pages": 1,
+        "pdfSha256": "7ece554e2a52e4e7f5b81046b8219a6686924d11d6640e3a0612935f78a7dccb",
+        "renderReportSha256": "7c201e2edd5e7fecaffdfeac78e6601ae05ecb7245826f48b2a4d8ea3dd8d9bc",
+        "warningCodes": [],
+        "unsupportedContentCount": 0,
+        "mandatoryPdfFailures": []
+      }
+    }
+  ],
+  "composition": {
+    "baseline": [
+      {
+        "manifestSha256": "6700abe207ffa19a35e0779d453e3d90cac0f2b7d97d4ac2e61ab7394da112b1",
+        "captureSha256": "41fe632eeb9c59dc59fe0bcf538bacded9800148c66f67252daa8e1fe0a007bc",
+        "caseIds": [
+          "export-story-context-mixed-tabs-drawingml-isolated-control",
+          "export-story-context-mixed-tabs-drawingml-mixed",
+          "export-story-context-mixed-tabs-drawingml-single",
+          "export-story-context-mixed-tabs-vml-isolated-control",
+          "export-story-context-mixed-tabs-vml-mixed",
+          "export-story-context-mixed-tabs-vml-single",
+          "export-story-context-vml-panels-page",
+          "export-story-context-vml-panels-margin",
+          "export-story-context-vml-panels-inline-control",
+          "export-story-context-linked-textboxes-continued",
+          "export-story-context-linked-textboxes-fitting-control",
+          "export-story-context-linked-textboxes-unlinked-control",
+          "export-story-context-source-clip-drawingml-visible-control",
+          "export-story-context-source-clip-drawingml-clipped",
+          "export-story-context-source-clip-vml-visible-control",
+          "export-story-context-source-clip-vml-clipped",
+          "export-story-context-raised-inline-box-unraised-control",
+          "export-story-context-raised-inline-box-raised",
+          "export-story-context-offpaper-margin-paragraph-visible-control",
+          "export-story-context-offpaper-margin-paragraph-outside",
+          "export-story-context-textbox-tab-width-drawingml-wrapping-prefix",
+          "export-story-context-textbox-tab-width-drawingml-short-prefix-control",
+          "export-story-context-textbox-tab-width-drawingml-inset-control",
+          "export-story-context-textbox-tab-width-vml-wrapping-prefix",
+          "export-story-context-textbox-tab-width-vml-short-prefix-control",
+          "export-story-context-textbox-tab-width-vml-inset-control",
+          "export-story-context-vml-leaf-oval-inline-control",
+          "export-story-context-vml-leaf-oval-positioned",
+          "export-story-context-vml-leaf-rect-inline-control",
+          "export-story-context-vml-leaf-rect-positioned",
+          "export-story-context-picture-square-front",
+          "export-story-context-picture-square-behind",
+          "export-story-context-picture-none-behind-control"
+        ]
+      },
+      {
+        "manifestSha256": "4674c0672a5cffb3021b1147c945524f6f8c3aa5302ba366ad20d77f47e09be6",
+        "captureSha256": "79ac9c37be0b74034e708deba3dcc2db6fe71d9fa5659dba2ae88f0b316d2483",
+        "caseIds": [
+          "export-story-context-shape-clearance-front-fitting-control",
+          "export-story-context-shape-clearance-front-oversized",
+          "export-story-context-shape-clearance-behind-fitting-control",
+          "export-story-context-shape-clearance-behind-oversized"
+        ]
+      }
+    ],
+    "candidate": [
+      {
+        "manifestSha256": "6700abe207ffa19a35e0779d453e3d90cac0f2b7d97d4ac2e61ab7394da112b1",
+        "captureSha256": "d8b830389f3176dbc83fa9497fea7d588b2f256450b875b62fe4a058f3f19ba4",
+        "caseIds": [
+          "export-story-context-mixed-tabs-drawingml-isolated-control",
+          "export-story-context-mixed-tabs-drawingml-mixed",
+          "export-story-context-mixed-tabs-drawingml-single",
+          "export-story-context-mixed-tabs-vml-isolated-control",
+          "export-story-context-mixed-tabs-vml-mixed",
+          "export-story-context-mixed-tabs-vml-single",
+          "export-story-context-vml-panels-page",
+          "export-story-context-vml-panels-margin",
+          "export-story-context-vml-panels-inline-control",
+          "export-story-context-linked-textboxes-continued",
+          "export-story-context-linked-textboxes-fitting-control",
+          "export-story-context-linked-textboxes-unlinked-control",
+          "export-story-context-source-clip-drawingml-visible-control",
+          "export-story-context-source-clip-drawingml-clipped",
+          "export-story-context-source-clip-vml-visible-control",
+          "export-story-context-source-clip-vml-clipped",
+          "export-story-context-raised-inline-box-unraised-control",
+          "export-story-context-raised-inline-box-raised",
+          "export-story-context-offpaper-margin-paragraph-visible-control",
+          "export-story-context-offpaper-margin-paragraph-outside",
+          "export-story-context-textbox-tab-width-drawingml-wrapping-prefix",
+          "export-story-context-textbox-tab-width-drawingml-short-prefix-control",
+          "export-story-context-textbox-tab-width-drawingml-inset-control",
+          "export-story-context-textbox-tab-width-vml-wrapping-prefix",
+          "export-story-context-textbox-tab-width-vml-short-prefix-control",
+          "export-story-context-textbox-tab-width-vml-inset-control",
+          "export-story-context-vml-leaf-oval-inline-control",
+          "export-story-context-vml-leaf-oval-positioned",
+          "export-story-context-vml-leaf-rect-inline-control",
+          "export-story-context-vml-leaf-rect-positioned",
+          "export-story-context-picture-square-front",
+          "export-story-context-picture-square-behind",
+          "export-story-context-picture-none-behind-control"
+        ]
+      },
+      {
+        "manifestSha256": "4674c0672a5cffb3021b1147c945524f6f8c3aa5302ba366ad20d77f47e09be6",
+        "captureSha256": "9319ac428a1250b9de53ba58ab68ea17db6c46736fbe7516d4e84bc1ed3a8f9c",
+        "caseIds": [
+          "export-story-context-shape-clearance-front-fitting-control",
+          "export-story-context-shape-clearance-front-oversized",
+          "export-story-context-shape-clearance-behind-fitting-control",
+          "export-story-context-shape-clearance-behind-oversized"
+        ]
+      }
+    ],
+    "reference": [
+      {
+        "manifestSha256": "6700abe207ffa19a35e0779d453e3d90cac0f2b7d97d4ac2e61ab7394da112b1",
+        "bundleSha256": "453ad08d33cc08a78e5d336e7f7a9c46480627da2cc99a7f59d702956baf1e2d",
+        "caseIds": [
+          "export-story-context-mixed-tabs-drawingml-isolated-control",
+          "export-story-context-mixed-tabs-drawingml-mixed",
+          "export-story-context-mixed-tabs-drawingml-single",
+          "export-story-context-mixed-tabs-vml-isolated-control",
+          "export-story-context-mixed-tabs-vml-mixed",
+          "export-story-context-mixed-tabs-vml-single",
+          "export-story-context-vml-panels-page",
+          "export-story-context-vml-panels-margin",
+          "export-story-context-vml-panels-inline-control",
+          "export-story-context-linked-textboxes-continued",
+          "export-story-context-linked-textboxes-fitting-control",
+          "export-story-context-linked-textboxes-unlinked-control",
+          "export-story-context-source-clip-drawingml-visible-control",
+          "export-story-context-source-clip-drawingml-clipped",
+          "export-story-context-source-clip-vml-visible-control",
+          "export-story-context-source-clip-vml-clipped",
+          "export-story-context-raised-inline-box-unraised-control",
+          "export-story-context-raised-inline-box-raised",
+          "export-story-context-offpaper-margin-paragraph-visible-control",
+          "export-story-context-offpaper-margin-paragraph-outside",
+          "export-story-context-textbox-tab-width-drawingml-wrapping-prefix",
+          "export-story-context-textbox-tab-width-drawingml-short-prefix-control",
+          "export-story-context-textbox-tab-width-drawingml-inset-control",
+          "export-story-context-textbox-tab-width-vml-wrapping-prefix",
+          "export-story-context-textbox-tab-width-vml-short-prefix-control",
+          "export-story-context-textbox-tab-width-vml-inset-control",
+          "export-story-context-vml-leaf-oval-inline-control",
+          "export-story-context-vml-leaf-oval-positioned",
+          "export-story-context-vml-leaf-rect-inline-control",
+          "export-story-context-vml-leaf-rect-positioned",
+          "export-story-context-picture-square-front",
+          "export-story-context-picture-square-behind",
+          "export-story-context-picture-none-behind-control"
+        ]
+      },
+      {
+        "manifestSha256": "4674c0672a5cffb3021b1147c945524f6f8c3aa5302ba366ad20d77f47e09be6",
+        "bundleSha256": "4e75a65e5f3767e7d3af201e3554e31c0d8c16a8e226d1df7e1a38961932939b",
+        "caseIds": [
+          "export-story-context-shape-clearance-front-fitting-control",
+          "export-story-context-shape-clearance-front-oversized",
+          "export-story-context-shape-clearance-behind-fitting-control",
+          "export-story-context-shape-clearance-behind-oversized"
+        ]
+      }
+    ]
+  },
+  "intermediate": {
+    "candidate": "cc57539ff062dd6350c31792fa205177a7cc3a01",
+    "sourceTree": "53bbd6fa566a987969d455d692b47886b9c695a5",
+    "buildIdentitySha256": "4c32e9cc04fe84e1f73889a75ad70ba8723e26381cca894b55d4c66b7e541fed",
+    "browserVersion": "155.0.8059.84",
+    "executableSha256": "cb19b59995072b86cc7f887b3b1c7ab1f63518a7f2ed9f0d33249e1a040e2c76",
+    "sandbox": true,
+    "fontContract": {
+      "LiberationSerif-Regular.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+      },
+      "LiberationSerif-Bold.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+      },
+      "LiberationSerif-Italic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+      },
+      "LiberationSerif-BoldItalic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+      }
+    },
+    "manifestSha256": "fa43b8b5cafa59a73d40bbe01a654424e84e7ab93a5700caa8e39d93086042ef",
+    "inspectionManifestSha256": "fa43b8b5cafa59a73d40bbe01a654424e84e7ab93a5700caa8e39d93086042ef"
+  },
+  "captureTools": {
+    "Capture.mjs": "3703a46ccd8e2cc1d9e6ce9480704c1aed505ff0b24b094af4771e498f6d16ce",
+    "Inspect.py": "f52f51d657d3d0d06f85c2ab42664e1bd120c82c461849e5eef435545d3f22bc",
+    "Compose.py": "498d5703738f2bd0086cae3d8a825ba7f1d04d0f28a81b1dbe3733bb46f9fa0c",
+    "Policy.mjs": "af7cb74bc8bbb2b31f6350922ad14a7025f9476cfc76268ad2102304a4e629a1",
+    "InspectPictures.py": "e419d48de24491a390a0c2539745e256f6809fc973000e4d9bb17c526f4eb443",
+    "InspectFonts.py": "02992b430351c75f824337b7d4f30b8ab31fb75c6f08c21c9599a19a6cc0c1ff",
+    "InspectStories.py": "37c41350966a0622e14c85e2b3987bda2ea692f235d06b41fef7412f2a590101",
+    "ProbeClipBoundary.py": "2417f29489997db07276f613ae5ac06649edd57fad3c417dec9b346e2ef55bbf",
+    "MergeEvidence.py": "13de5929d2e2b765eea5f5857c5481d8f5000cd285339be7abaabf4243948f40"
+  }
+}

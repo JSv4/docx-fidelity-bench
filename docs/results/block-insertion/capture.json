@@ -1,0 +1,3086 @@
+{
+  "schema": 1,
+  "purpose": "Focused block-insertion diagnostic; not a full-suite score or a Word reference. LibreOffice may repair invalid inputs when displaying them; native outcomes and schema findings remain mandatory.",
+  "beforeCommit": "934bb351891d23870c078ce0691287682f9ded89",
+  "afterCommit": "5e9c04a7128a0e8de8f0f6113bf97a40b7121ee6",
+  "beforeTreeEqualsMain": "5adfbd85cfe69d575280bc3cc0663401a3b96c98",
+  "renderer": "LibreOffice 25.8.7.3",
+  "raster": {
+    "dpi": 96,
+    "crop": {
+      "x": 0,
+      "y": 48,
+      "width": 816,
+      "height": 420
+    },
+    "sheet": "Unscaled 816px panels with a 72px header"
+  },
+  "sdk": {
+    "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-paragraph/source.docx": [],
+    "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-paragraph/expected.docx": [],
+    "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-paragraph/authored-output.docx": [],
+    "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-paragraph-control/source.docx": [],
+    "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-paragraph-control/expected.docx": [],
+    "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-paragraph-control/authored-output.docx": [],
+    "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-rule/source.docx": [],
+    "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-rule/expected.docx": [],
+    "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-rule/authored-output.docx": [],
+    "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-rule-control/source.docx": [],
+    "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-rule-control/expected.docx": [],
+    "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-rule-control/authored-output.docx": [],
+    "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-table/source.docx": [],
+    "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-table/expected.docx": [],
+    "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-table/authored-output.docx": [],
+    "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-table-control/source.docx": [],
+    "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-table-control/expected.docx": [],
+    "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-table-control/authored-output.docx": []
+  },
+  "cases": {
+    "redline-block-insert-paragraph": {
+      "file": "redline-block-insert-paragraph.png",
+      "sha256": "83847e43f52911889b363ec30d07f6196cf47d6fabdd667dc3b3ba9b07c60b04",
+      "fixtures": {
+        "fixtures/redline/redline-block-insert-paragraph/source.docx": "7846ec46f456883387e905bd345b1c480bfae9d5d59279242c9b42f50cf28d11",
+        "fixtures/redline/redline-block-insert-paragraph/expected.docx": "7846ec46f456883387e905bd345b1c480bfae9d5d59279242c9b42f50cf28d11",
+        "fixtures/redline/redline-block-insert-paragraph/authored-output.docx": "7846ec46f456883387e905bd345b1c480bfae9d5d59279242c9b42f50cf28d11"
+      },
+      "phases": {
+        "before": {
+          "packageSha256": "7a5806d3b0ef70177fec1a38d52b8dd3f33c80e3282c230b5a1b10897f6729f4",
+          "pdfSha256": "14564bf6608a9f707918088789bb02d5aacdd471eb084543ffd92b6002e5bf47",
+          "rasterSha256": "bf99fa071a397be2e930958791e2537c511baef618a304a844231cfd5e69c921"
+        },
+        "after": {
+          "packageSha256": "a8d32d1564480bff6d35cedd29a29d5e9708911cac5f2eb132e61a5249fac032",
+          "pdfSha256": "564ed25aaa674f743932bf55f7a9defb8547507d9e5a419805fd40098981284d",
+          "rasterSha256": "bf99fa071a397be2e930958791e2537c511baef618a304a844231cfd5e69c921"
+        }
+      }
+    },
+    "redline-block-insert-paragraph-control": {
+      "file": "redline-block-insert-paragraph-control.png",
+      "sha256": "edbb9251bbd09665aacd1d977521c551c258e3d0523dce6ac35cc53fd6cb5d2b",
+      "fixtures": {
+        "fixtures/redline/redline-block-insert-paragraph-control/source.docx": "7846ec46f456883387e905bd345b1c480bfae9d5d59279242c9b42f50cf28d11",
+        "fixtures/redline/redline-block-insert-paragraph-control/expected.docx": "794bb77df2e23dfd0403baa4d7eb1aef1326d81c7b5a43160951783837bc89de",
+        "fixtures/redline/redline-block-insert-paragraph-control/authored-output.docx": "794bb77df2e23dfd0403baa4d7eb1aef1326d81c7b5a43160951783837bc89de"
+      },
+      "phases": {
+        "before": {
+          "packageSha256": "5716c93b67a27567404f51e8cbce6dced28d3fa9a23464f9d170764ab23b0df6",
+          "pdfSha256": "6d0c7121c300c273346795e1e8cdd2fa47646f3b6aa1e17f0c740e6aabcae0bc",
+          "rasterSha256": "ea0f604d2a9d0c3a4905b620e684dd4a2013f89b942cd4dc988efc3bceaa4da1"
+        },
+        "after": {
+          "packageSha256": "5716c93b67a27567404f51e8cbce6dced28d3fa9a23464f9d170764ab23b0df6",
+          "pdfSha256": "98c52bbb4d4c4c680ec2070ff39ab2d4f91437d866740bfb8e5ddf9cf489b4de",
+          "rasterSha256": "ea0f604d2a9d0c3a4905b620e684dd4a2013f89b942cd4dc988efc3bceaa4da1"
+        }
+      }
+    },
+    "redline-block-insert-rule": {
+      "file": "redline-block-insert-rule.png",
+      "sha256": "658f4ce08ad0f4ed513f94535d8487e101c0788b1e2797933ee2c5334177ac14",
+      "fixtures": {
+        "fixtures/redline/redline-block-insert-rule/source.docx": "7846ec46f456883387e905bd345b1c480bfae9d5d59279242c9b42f50cf28d11",
+        "fixtures/redline/redline-block-insert-rule/expected.docx": "7846ec46f456883387e905bd345b1c480bfae9d5d59279242c9b42f50cf28d11",
+        "fixtures/redline/redline-block-insert-rule/authored-output.docx": "7846ec46f456883387e905bd345b1c480bfae9d5d59279242c9b42f50cf28d11"
+      },
+      "phases": {
+        "before": {
+          "packageSha256": "985f257a6fdbdbc975868318e735cc04cb68e89b908245ddf73f714032d270d2",
+          "pdfSha256": "c44654c08647bd9af54b91ded6715a582a5852e6adccae6ab60a1bd713602bcf",
+          "rasterSha256": "bf99fa071a397be2e930958791e2537c511baef618a304a844231cfd5e69c921"
+        },
+        "after": {
+          "packageSha256": "a8d32d1564480bff6d35cedd29a29d5e9708911cac5f2eb132e61a5249fac032",
+          "pdfSha256": "d79a290f5761bd3c22ea37bd1cb851d604837a88443cd45b7cc683b1320b6e1c",
+          "rasterSha256": "bf99fa071a397be2e930958791e2537c511baef618a304a844231cfd5e69c921"
+        }
+      }
+    },
+    "redline-block-insert-rule-control": {
+      "file": "redline-block-insert-rule-control.png",
+      "sha256": "cb88460052549aa67efeb69bcd4c287eb1babb62f4d598d96fe95396f2416d5a",
+      "fixtures": {
+        "fixtures/redline/redline-block-insert-rule-control/source.docx": "7846ec46f456883387e905bd345b1c480bfae9d5d59279242c9b42f50cf28d11",
+        "fixtures/redline/redline-block-insert-rule-control/expected.docx": "6f75f2b5342a4077f536d9c71d939027e541a74fbad1a110461b3cf2141f1efc",
+        "fixtures/redline/redline-block-insert-rule-control/authored-output.docx": "6f75f2b5342a4077f536d9c71d939027e541a74fbad1a110461b3cf2141f1efc"
+      },
+      "phases": {
+        "before": {
+          "packageSha256": "cfd9742902f81e1b1b3787282d237b10580cdc1e5d8bedff03906da766c84a80",
+          "pdfSha256": "dfaa79e82beadd7a80cc75dae47b5010d53ba2dd8636f2c5885158e27a206908",
+          "rasterSha256": "9e77cda78b663ce24eec50c13b4328f8b69091f66bf14552a3c4561b8fd9db9e"
+        },
+        "after": {
+          "packageSha256": "cfd9742902f81e1b1b3787282d237b10580cdc1e5d8bedff03906da766c84a80",
+          "pdfSha256": "a09d1a18295af6fb9cfa2b8cc0880fa39ac357a211f72d408f3a6a8d98424910",
+          "rasterSha256": "9e77cda78b663ce24eec50c13b4328f8b69091f66bf14552a3c4561b8fd9db9e"
+        }
+      }
+    },
+    "redline-block-insert-table": {
+      "file": "redline-block-insert-table.png",
+      "sha256": "63175899d87700d9b3dd411060c2fb9113fc6721237fedd5edc8454e1168175c",
+      "fixtures": {
+        "fixtures/redline/redline-block-insert-table/source.docx": "7846ec46f456883387e905bd345b1c480bfae9d5d59279242c9b42f50cf28d11",
+        "fixtures/redline/redline-block-insert-table/expected.docx": "7846ec46f456883387e905bd345b1c480bfae9d5d59279242c9b42f50cf28d11",
+        "fixtures/redline/redline-block-insert-table/authored-output.docx": "7846ec46f456883387e905bd345b1c480bfae9d5d59279242c9b42f50cf28d11"
+      },
+      "phases": {
+        "before": {
+          "packageSha256": "298bc311a60b3a2382800e59a25b18d187f0666d751e26e5d2c71e3e33d65981",
+          "pdfSha256": "940a8cd05762502d1de59647356ac44c555f0ea47b14f59fb4808864f0bd0448",
+          "rasterSha256": "bf99fa071a397be2e930958791e2537c511baef618a304a844231cfd5e69c921"
+        },
+        "after": {
+          "packageSha256": "a8d32d1564480bff6d35cedd29a29d5e9708911cac5f2eb132e61a5249fac032",
+          "pdfSha256": "85574f6751b77f01b8221f1f4a2d29f55d22443369a780f7548ef97fb214ad6e",
+          "rasterSha256": "bf99fa071a397be2e930958791e2537c511baef618a304a844231cfd5e69c921"
+        }
+      }
+    },
+    "redline-block-insert-table-control": {
+      "file": "redline-block-insert-table-control.png",
+      "sha256": "e8d7ed18c78b29954f3ff07127c7afe31deca21d567eac62cd0c48ad5c59644b",
+      "fixtures": {
+        "fixtures/redline/redline-block-insert-table-control/source.docx": "7846ec46f456883387e905bd345b1c480bfae9d5d59279242c9b42f50cf28d11",
+        "fixtures/redline/redline-block-insert-table-control/expected.docx": "a4e9d6fd9989d1437927a3eab4abb25c9f86a65ff7bdbf3ec74b99e92bfe1442",
+        "fixtures/redline/redline-block-insert-table-control/authored-output.docx": "a4e9d6fd9989d1437927a3eab4abb25c9f86a65ff7bdbf3ec74b99e92bfe1442"
+      },
+      "phases": {
+        "before": {
+          "packageSha256": "9096f5e63a117971c99d6b916fed26964d367cb60ac691a277992cffda1bf96f",
+          "pdfSha256": "e08c0792f8c3223e8cbc67a14ec08d964e59150b2f8c90031ec76cebb1051f07",
+          "rasterSha256": "bda77324103aecf962b8d49751592f4ff32edef53188357f2bb970ef500d725e"
+        },
+        "after": {
+          "packageSha256": "9096f5e63a117971c99d6b916fed26964d367cb60ac691a277992cffda1bf96f",
+          "pdfSha256": "90a8f376fb033ef7760013fbab8440b4ee9bf0bff39588dd141d8395957e4fcd",
+          "rasterSha256": "bda77324103aecf962b8d49751592f4ff32edef53188357f2bb970ef500d725e"
+        }
+      }
+    }
+  },
+  "runs": {
+    "before": {
+      "suite": {
+        "cases": [
+          "redline-field-result-beside-edit",
+          "redline-field-result-end-control",
+          "redline-field-result-tab-control",
+          "redline-field-toc-page-numbers",
+          "redline-field-toc-entry-retitled-control",
+          "redline-field-toc-page-number-control",
+          "redline-field-shared-end-append",
+          "redline-field-shared-end-trim",
+          "redline-field-shared-end-control",
+          "redline-field-close-open-sdt",
+          "redline-field-close-open-body",
+          "redline-field-close-open-sdt-control",
+          "redline-comment-straddles-sdt",
+          "redline-comment-straddles-sdt-control",
+          "redline-comment-straddles-customxml",
+          "redline-comment-straddles-customxml-control",
+          "redline-comment-para-id-collision",
+          "redline-wrapper-para-id-copies",
+          "redline-comment-para-id-control",
+          "redline-header-bookmark-only",
+          "redline-body-bookmark-only-control",
+          "redline-bookmark-end-after-replaced-word",
+          "redline-bookmark-end-after-replaced-word-control",
+          "redline-bookmark-between-blocks-fold-text",
+          "redline-bookmark-between-blocks-fold-text-control",
+          "redline-bookmark-between-blocks-fold-table",
+          "redline-bookmark-between-blocks-fold-table-control",
+          "redline-style-id-cross-type",
+          "redline-style-id-same-type-control",
+          "redline-reject-customxml",
+          "redline-reject-math",
+          "redline-reject-ruby",
+          "redline-reject-direct-control",
+          "redline-consolidate-cell-bookmark",
+          "redline-consolidate-cell-text-control",
+          "redline-boundary-bookmark-compare-tbl",
+          "redline-boundary-bookmark-compare-tr",
+          "redline-boundary-bookmark-compare-paragraph-control",
+          "redline-boundary-bookmark-consolidate-tbl",
+          "redline-boundary-bookmark-consolidate-tr",
+          "redline-boundary-bookmark-consolidate-paragraph-control",
+          "redline-identity-bytes",
+          "redline-identity-reserialized",
+          "redline-inline-customxml",
+          "redline-inline-hyperlink-control",
+          "redline-comment-add-customxml",
+          "redline-comment-remove-sdt",
+          "redline-comment-wrapper-control",
+          "redline-reviewer-added-comment",
+          "redline-reviewer-comment-control",
+          "redline-duplicate-comment-sdt",
+          "redline-duplicate-comment-sdt-control",
+          "redline-duplicate-comment-customxml",
+          "redline-duplicate-comment-customxml-control",
+          "redline-consolidated-field-result-edit",
+          "redline-consolidated-field-prefix-delete",
+          "redline-consolidated-field-bookmark-added",
+          "redline-consolidated-field-plain-control",
+          "redline-comment-identity-reused-id",
+          "redline-comment-identity-replaced-id",
+          "redline-comment-identity-distinct-control",
+          "redline-comment-identity-reviewer-collision",
+          "redline-comment-identity-reviewer-identical",
+          "redline-comment-identity-reviewer-control",
+          "redline-removed-comment-body-edited",
+          "redline-removed-comment-body-unchanged-control",
+          "redline-consolidated-note-prefix",
+          "redline-consolidated-note-suffix-control",
+          "redline-reviewer-bookmark-paragraph-edited",
+          "redline-reviewer-bookmark-paragraph-outside-control",
+          "redline-reviewer-bookmark-sdt-edited",
+          "redline-reviewer-bookmark-sdt-outside-control",
+          "redline-reviewer-bookmark-cell-edited",
+          "redline-reviewer-bookmark-cell-outside-control",
+          "redline-reviewer-bookmark-move-and-remove",
+          "redline-reviewer-bookmark-single-remove-control",
+          "redline-bookmark-name-block-position",
+          "redline-bookmark-name-mixed-position",
+          "redline-bookmark-name-inline-extent",
+          "redline-bookmark-name-consensus-control",
+          "redline-comment-reply-id-less-root",
+          "redline-comment-reply-renumbered-root",
+          "redline-comment-reply-root-para-id-control",
+          "redline-semantic-raw-limits-strict",
+          "redline-semantic-raw-limits-transitional-control",
+          "redline-table-column-widths-full",
+          "redline-table-column-widths-full-untracked-control",
+          "redline-table-column-widths-partial",
+          "redline-table-column-widths-partial-untracked-control",
+          "redline-pending-grid-plain-insert",
+          "redline-pending-grid-plain-insert-control",
+          "redline-pending-grid-plain-delete",
+          "redline-pending-grid-plain-delete-control",
+          "redline-pending-grid-no-op-insert",
+          "redline-pending-grid-no-op-insert-control",
+          "redline-pending-grid-no-op-delete",
+          "redline-pending-grid-no-op-delete-control",
+          "redline-pending-grid-merged-insert",
+          "redline-pending-grid-merged-insert-control",
+          "redline-pending-grid-merged-delete",
+          "redline-pending-grid-merged-delete-control",
+          "redline-pending-grid-omitted-insert",
+          "redline-pending-grid-omitted-insert-control",
+          "redline-pending-grid-omitted-delete",
+          "redline-pending-grid-omitted-delete-control",
+          "redline-pending-grid-merged-before-insert",
+          "redline-pending-grid-merged-before-insert-control",
+          "redline-pending-grid-merged-after-insert",
+          "redline-pending-grid-merged-after-insert-control",
+          "redline-block-insert-paragraph",
+          "redline-block-insert-paragraph-control",
+          "redline-block-insert-rule",
+          "redline-block-insert-rule-control",
+          "redline-block-insert-table",
+          "redline-block-insert-table-control"
+        ],
+        "id": "redline-v13",
+        "version": 13
+      },
+      "contract": {
+        "adapter": {
+          "build": {
+            "adapterSources": {
+              "adapters/docxodus-redline/DocxBenchRedline.csproj": "83843da954515292212f473d501fb539b0627513b972e3a95f7a4ab06674902a",
+              "adapters/docxodus-redline/Program.cs": "7214e07d3ab64d79073ad5e8911f85480b7bc9c80a72c11e592c1177b14cd2b7"
+            },
+            "command": [
+              "/home/jman/.dotnet/dotnet",
+              "build",
+              "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-adapter-before/src/DocxBenchRedline.csproj",
+              "-c",
+              "Release",
+              "-o",
+              "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-adapter-before/bin",
+              "-nologo",
+              "-v",
+              "q",
+              "-p:DocxodusRoot=/home/jman/Code/tmp/Docxodus/.goal-work/issue-1342-completion"
+            ],
+            "commit": "934bb351891d23870c078ce0691287682f9ded89",
+            "dotnet": "10.0.301",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/DocxBenchRedline.dll": "9dc02b6ef9822b501b03d6ee593d8ef00b4fb0085c89c5dc3acb8aafe3871e38",
+              "bin/Docxodus.dll": "98e90ef464cf2a6d744e8c11cbfcfd29dd1eca372cde2fc6df60b673192bc167",
+              "bin/SkiaSharp.dll": "2c9bbbe1a3d0e9407894c319821b5cdcade1f302466a950a2e5d6024aee32422",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "recipeSha256": "254236d2708f52eec51388459c5ed4a4457f3d08c42a354be2a292af5855786a",
+            "schema": 1,
+            "source": "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1342-completion",
+            "tree": "6fb59e022edf5b4c1fe5c2b229256c0c277d6fcb"
+          },
+          "name": "docxodus"
+        },
+        "environment": {
+          "harness": {
+            "bench/lo_revisions.py": "a526eddb8c5022f7eb8f8feb8fbab9071b3781c87d3feae81cfc5712d1690482",
+            "bench/redline.py": "1e8c66063446e0d96663a1a9257d8715eedcce006382f3726e63a0c051f91521",
+            "bench/redline_build.py": "254236d2708f52eec51388459c5ed4a4457f3d08c42a354be2a292af5855786a",
+            "bench/revisions.py": "504047053c333c88f8b0bd86d645bdf3794d2f0224f24a5bde19ffed7098abfc"
+          },
+          "libreoffice": {
+            "sha256": "adf468b45764b2abce53a7d91bbf3056b33f2734c5d5f628c075753e73903c43",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "libreofficePython": {
+            "sha256": "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e",
+            "version": "3.13.7"
+          },
+          "validator": {
+            "dotnet": "10.0.301",
+            "fileFormat": "Microsoft365",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/OoxmlValidator.dll": "f9e00c50ed1d3f0a80c35fa58fa415939c0b4aece4fe8dc402977d38e026f9a2",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "package": "DocumentFormat.OpenXml 3.5.1"
+          }
+        },
+        "metric": {
+          "blockInsertion": "declared insertion outcomes require typed success, error, version change and undo availability",
+          "caseScore": "100 when every applicable mandatory check passes, otherwise 0",
+          "engines": [
+            "bench-markup",
+            "libreoffice-text"
+          ],
+          "libreofficeEligibility": "a LibreOffice comparison applies only when the authored redline passes it",
+          "revisionRegistry": "declared table operations must report the public registry count and match independent resolved table assertions",
+          "semanticPreflight": "declared identity cases must report zero changes at raw limits with and without the package supplement",
+          "suiteScore": "mean of category means over every required case",
+          "validity": "no OpenXmlValidator finding (id, part, description) occurs more often than in any input",
+          "version": 5,
+          "view": 1
+        },
+        "suiteDigest": "57980e9429af0bd10c1c1f11499ef9dcbab051f479ecabe2f8314518e7c29db0"
+      },
+      "contractDigest": "d3acf0f0e700d6ee39b7212f9426f2b0a7efe190becda8f49f8b9afad3054bbd",
+      "summary": {
+        "byKind": {
+          "control": {
+            "measured": 3,
+            "passed": 3
+          },
+          "reproducer": {
+            "measured": 3,
+            "passed": 0
+          }
+        },
+        "categoryMeans": {
+          "tables": 50.0
+        },
+        "complete": false,
+        "libreofficeComparisons": {
+          "applicable": 6,
+          "total": 6
+        },
+        "measured": 6,
+        "passRate": 0.02608695652173913,
+        "required": 115,
+        "score": null
+      },
+      "cases": [
+        {
+          "id": "redline-block-insert-paragraph",
+          "status": "measured",
+          "score": 0.0,
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-output",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-paragraph/authored-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-before/redline-block-insert-paragraph/candidate-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-paragraph/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-output",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [
+                {
+                  "allowed": 0,
+                  "count": 1,
+                  "description": "The element has invalid child element 'http://schemas.openxmlformats.org/wordprocessingml/2006/main:p'.",
+                  "id": "Sch_InvalidElementContentExpectingComplex",
+                  "part": "/word/document.xml"
+                }
+              ],
+              "passed": false
+            },
+            {
+              "declaration": {
+                "max": 0,
+                "scope": "output",
+                "type": "revision-count",
+                "version": 1
+              },
+              "name": "assertion-revision-count",
+              "observed": 0,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 3,
+                "scope": "output",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 4,
+              "passed": false
+            },
+            {
+              "declaration": {
+                "scope": "output",
+                "state": {
+                  "grid": [
+                    2000
+                  ],
+                  "rows": [
+                    {
+                      "after": 0,
+                      "before": 0,
+                      "cells": [
+                        {
+                          "fill": "D9EAD3",
+                          "span": 1,
+                          "type": "dxa",
+                          "width": 2000
+                        }
+                      ],
+                      "height": null
+                    }
+                  ]
+                },
+                "type": "table-state",
+                "version": 1
+              },
+              "name": "assertion-table-state",
+              "observed": {
+                "grid": [
+                  2000
+                ],
+                "rows": [
+                  {
+                    "after": 0,
+                    "before": 0,
+                    "cells": [
+                      {
+                        "fill": "D9EAD3",
+                        "span": 1,
+                        "type": "dxa",
+                        "width": 2000
+                      }
+                    ],
+                    "height": null
+                  }
+                ]
+              },
+              "passed": true
+            },
+            {
+              "expected": {
+                "errorCode": "AnchorWrongKind",
+                "success": false,
+                "undoAvailable": false,
+                "versionDelta": 0
+              },
+              "name": "block-insertion-outcome",
+              "observed": {
+                "errorCode": null,
+                "success": true,
+                "undoAvailable": true,
+                "versionDelta": 1
+              },
+              "passed": false
+            }
+          ],
+          "adapter": {
+            "blockInsertion": {
+              "errorCode": null,
+              "success": true,
+              "undoAvailable": true,
+              "versionDelta": 1
+            },
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+934bb351891d23870c078ce0691287682f9ded89",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "7a5806d3b0ef70177fec1a38d52b8dd3f33c80e3282c230b5a1b10897f6729f4",
+            "protocol": 1,
+            "status": "ok"
+          }
+        },
+        {
+          "id": "redline-block-insert-paragraph-control",
+          "status": "measured",
+          "score": 100.0,
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-output",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-paragraph-control/authored-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-before/redline-block-insert-paragraph-control/candidate-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-paragraph-control/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-output",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "max": 0,
+                "scope": "output",
+                "type": "revision-count",
+                "version": 1
+              },
+              "name": "assertion-revision-count",
+              "observed": 0,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 4,
+                "scope": "output",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 4,
+              "passed": true
+            },
+            {
+              "expected": {
+                "errorCode": null,
+                "success": true,
+                "undoAvailable": true,
+                "versionDelta": 1
+              },
+              "name": "block-insertion-outcome",
+              "observed": {
+                "errorCode": null,
+                "success": true,
+                "undoAvailable": true,
+                "versionDelta": 1
+              },
+              "passed": true
+            }
+          ],
+          "adapter": {
+            "blockInsertion": {
+              "errorCode": null,
+              "success": true,
+              "undoAvailable": true,
+              "versionDelta": 1
+            },
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+934bb351891d23870c078ce0691287682f9ded89",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "5716c93b67a27567404f51e8cbce6dced28d3fa9a23464f9d170764ab23b0df6",
+            "protocol": 1,
+            "status": "ok"
+          }
+        },
+        {
+          "id": "redline-block-insert-rule",
+          "status": "measured",
+          "score": 0.0,
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-output",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-rule/authored-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-before/redline-block-insert-rule/candidate-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-rule/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-output",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [
+                {
+                  "allowed": 0,
+                  "count": 1,
+                  "description": "The element has invalid child element 'http://schemas.openxmlformats.org/wordprocessingml/2006/main:p'.",
+                  "id": "Sch_InvalidElementContentExpectingComplex",
+                  "part": "/word/document.xml"
+                }
+              ],
+              "passed": false
+            },
+            {
+              "declaration": {
+                "max": 0,
+                "scope": "output",
+                "type": "revision-count",
+                "version": 1
+              },
+              "name": "assertion-revision-count",
+              "observed": 0,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 3,
+                "scope": "output",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 4,
+              "passed": false
+            },
+            {
+              "declaration": {
+                "scope": "output",
+                "state": {
+                  "grid": [
+                    2000
+                  ],
+                  "rows": [
+                    {
+                      "after": 0,
+                      "before": 0,
+                      "cells": [
+                        {
+                          "fill": "D9EAD3",
+                          "span": 1,
+                          "type": "dxa",
+                          "width": 2000
+                        }
+                      ],
+                      "height": null
+                    }
+                  ]
+                },
+                "type": "table-state",
+                "version": 1
+              },
+              "name": "assertion-table-state",
+              "observed": {
+                "grid": [
+                  2000
+                ],
+                "rows": [
+                  {
+                    "after": 0,
+                    "before": 0,
+                    "cells": [
+                      {
+                        "fill": "D9EAD3",
+                        "span": 1,
+                        "type": "dxa",
+                        "width": 2000
+                      }
+                    ],
+                    "height": null
+                  }
+                ]
+              },
+              "passed": true
+            },
+            {
+              "expected": {
+                "errorCode": "AnchorWrongKind",
+                "success": false,
+                "undoAvailable": false,
+                "versionDelta": 0
+              },
+              "name": "block-insertion-outcome",
+              "observed": {
+                "errorCode": null,
+                "success": true,
+                "undoAvailable": true,
+                "versionDelta": 1
+              },
+              "passed": false
+            }
+          ],
+          "adapter": {
+            "blockInsertion": {
+              "errorCode": null,
+              "success": true,
+              "undoAvailable": true,
+              "versionDelta": 1
+            },
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+934bb351891d23870c078ce0691287682f9ded89",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "985f257a6fdbdbc975868318e735cc04cb68e89b908245ddf73f714032d270d2",
+            "protocol": 1,
+            "status": "ok"
+          }
+        },
+        {
+          "id": "redline-block-insert-rule-control",
+          "status": "measured",
+          "score": 100.0,
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-output",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-rule-control/authored-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-before/redline-block-insert-rule-control/candidate-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-rule-control/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-output",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "max": 0,
+                "scope": "output",
+                "type": "revision-count",
+                "version": 1
+              },
+              "name": "assertion-revision-count",
+              "observed": 0,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 4,
+                "scope": "output",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 4,
+              "passed": true
+            },
+            {
+              "expected": {
+                "errorCode": null,
+                "success": true,
+                "undoAvailable": true,
+                "versionDelta": 1
+              },
+              "name": "block-insertion-outcome",
+              "observed": {
+                "errorCode": null,
+                "success": true,
+                "undoAvailable": true,
+                "versionDelta": 1
+              },
+              "passed": true
+            }
+          ],
+          "adapter": {
+            "blockInsertion": {
+              "errorCode": null,
+              "success": true,
+              "undoAvailable": true,
+              "versionDelta": 1
+            },
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+934bb351891d23870c078ce0691287682f9ded89",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "cfd9742902f81e1b1b3787282d237b10580cdc1e5d8bedff03906da766c84a80",
+            "protocol": 1,
+            "status": "ok"
+          }
+        },
+        {
+          "id": "redline-block-insert-table",
+          "status": "measured",
+          "score": 0.0,
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-output",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-table/authored-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-before/redline-block-insert-table/candidate-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-table/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-output",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [
+                {
+                  "allowed": 0,
+                  "count": 1,
+                  "description": "The element has invalid child element 'http://schemas.openxmlformats.org/wordprocessingml/2006/main:tbl'.",
+                  "id": "Sch_InvalidElementContentExpectingComplex",
+                  "part": "/word/document.xml"
+                }
+              ],
+              "passed": false
+            },
+            {
+              "declaration": {
+                "max": 0,
+                "scope": "output",
+                "type": "revision-count",
+                "version": 1
+              },
+              "name": "assertion-revision-count",
+              "observed": 0,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 3,
+                "scope": "output",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 5,
+              "passed": false
+            },
+            {
+              "declaration": {
+                "scope": "output",
+                "state": {
+                  "grid": [
+                    2000
+                  ],
+                  "rows": [
+                    {
+                      "after": 0,
+                      "before": 0,
+                      "cells": [
+                        {
+                          "fill": "D9EAD3",
+                          "span": 1,
+                          "type": "dxa",
+                          "width": 2000
+                        }
+                      ],
+                      "height": null
+                    }
+                  ]
+                },
+                "type": "table-state",
+                "version": 1
+              },
+              "name": "assertion-table-state",
+              "observed": null,
+              "passed": false
+            },
+            {
+              "expected": {
+                "errorCode": "AnchorWrongKind",
+                "success": false,
+                "undoAvailable": false,
+                "versionDelta": 0
+              },
+              "name": "block-insertion-outcome",
+              "observed": {
+                "errorCode": null,
+                "success": true,
+                "undoAvailable": true,
+                "versionDelta": 1
+              },
+              "passed": false
+            }
+          ],
+          "adapter": {
+            "blockInsertion": {
+              "errorCode": null,
+              "success": true,
+              "undoAvailable": true,
+              "versionDelta": 1
+            },
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+934bb351891d23870c078ce0691287682f9ded89",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "298bc311a60b3a2382800e59a25b18d187f0666d751e26e5d2c71e3e33d65981",
+            "protocol": 1,
+            "status": "ok"
+          }
+        },
+        {
+          "id": "redline-block-insert-table-control",
+          "status": "measured",
+          "score": 100.0,
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-output",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-table-control/authored-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-before/redline-block-insert-table-control/candidate-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-table-control/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-output",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "max": 0,
+                "scope": "output",
+                "type": "revision-count",
+                "version": 1
+              },
+              "name": "assertion-revision-count",
+              "observed": 0,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 5,
+                "scope": "output",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 5,
+              "passed": true
+            },
+            {
+              "expected": {
+                "errorCode": null,
+                "success": true,
+                "undoAvailable": true,
+                "versionDelta": 1
+              },
+              "name": "block-insertion-outcome",
+              "observed": {
+                "errorCode": null,
+                "success": true,
+                "undoAvailable": true,
+                "versionDelta": 1
+              },
+              "passed": true
+            }
+          ],
+          "adapter": {
+            "blockInsertion": {
+              "errorCode": null,
+              "success": true,
+              "undoAvailable": true,
+              "versionDelta": 1
+            },
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+934bb351891d23870c078ce0691287682f9ded89",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "9096f5e63a117971c99d6b916fed26964d367cb60ac691a277992cffda1bf96f",
+            "protocol": 1,
+            "status": "ok"
+          }
+        }
+      ]
+    },
+    "after": {
+      "suite": {
+        "cases": [
+          "redline-field-result-beside-edit",
+          "redline-field-result-end-control",
+          "redline-field-result-tab-control",
+          "redline-field-toc-page-numbers",
+          "redline-field-toc-entry-retitled-control",
+          "redline-field-toc-page-number-control",
+          "redline-field-shared-end-append",
+          "redline-field-shared-end-trim",
+          "redline-field-shared-end-control",
+          "redline-field-close-open-sdt",
+          "redline-field-close-open-body",
+          "redline-field-close-open-sdt-control",
+          "redline-comment-straddles-sdt",
+          "redline-comment-straddles-sdt-control",
+          "redline-comment-straddles-customxml",
+          "redline-comment-straddles-customxml-control",
+          "redline-comment-para-id-collision",
+          "redline-wrapper-para-id-copies",
+          "redline-comment-para-id-control",
+          "redline-header-bookmark-only",
+          "redline-body-bookmark-only-control",
+          "redline-bookmark-end-after-replaced-word",
+          "redline-bookmark-end-after-replaced-word-control",
+          "redline-bookmark-between-blocks-fold-text",
+          "redline-bookmark-between-blocks-fold-text-control",
+          "redline-bookmark-between-blocks-fold-table",
+          "redline-bookmark-between-blocks-fold-table-control",
+          "redline-style-id-cross-type",
+          "redline-style-id-same-type-control",
+          "redline-reject-customxml",
+          "redline-reject-math",
+          "redline-reject-ruby",
+          "redline-reject-direct-control",
+          "redline-consolidate-cell-bookmark",
+          "redline-consolidate-cell-text-control",
+          "redline-boundary-bookmark-compare-tbl",
+          "redline-boundary-bookmark-compare-tr",
+          "redline-boundary-bookmark-compare-paragraph-control",
+          "redline-boundary-bookmark-consolidate-tbl",
+          "redline-boundary-bookmark-consolidate-tr",
+          "redline-boundary-bookmark-consolidate-paragraph-control",
+          "redline-identity-bytes",
+          "redline-identity-reserialized",
+          "redline-inline-customxml",
+          "redline-inline-hyperlink-control",
+          "redline-comment-add-customxml",
+          "redline-comment-remove-sdt",
+          "redline-comment-wrapper-control",
+          "redline-reviewer-added-comment",
+          "redline-reviewer-comment-control",
+          "redline-duplicate-comment-sdt",
+          "redline-duplicate-comment-sdt-control",
+          "redline-duplicate-comment-customxml",
+          "redline-duplicate-comment-customxml-control",
+          "redline-consolidated-field-result-edit",
+          "redline-consolidated-field-prefix-delete",
+          "redline-consolidated-field-bookmark-added",
+          "redline-consolidated-field-plain-control",
+          "redline-comment-identity-reused-id",
+          "redline-comment-identity-replaced-id",
+          "redline-comment-identity-distinct-control",
+          "redline-comment-identity-reviewer-collision",
+          "redline-comment-identity-reviewer-identical",
+          "redline-comment-identity-reviewer-control",
+          "redline-removed-comment-body-edited",
+          "redline-removed-comment-body-unchanged-control",
+          "redline-consolidated-note-prefix",
+          "redline-consolidated-note-suffix-control",
+          "redline-reviewer-bookmark-paragraph-edited",
+          "redline-reviewer-bookmark-paragraph-outside-control",
+          "redline-reviewer-bookmark-sdt-edited",
+          "redline-reviewer-bookmark-sdt-outside-control",
+          "redline-reviewer-bookmark-cell-edited",
+          "redline-reviewer-bookmark-cell-outside-control",
+          "redline-reviewer-bookmark-move-and-remove",
+          "redline-reviewer-bookmark-single-remove-control",
+          "redline-bookmark-name-block-position",
+          "redline-bookmark-name-mixed-position",
+          "redline-bookmark-name-inline-extent",
+          "redline-bookmark-name-consensus-control",
+          "redline-comment-reply-id-less-root",
+          "redline-comment-reply-renumbered-root",
+          "redline-comment-reply-root-para-id-control",
+          "redline-semantic-raw-limits-strict",
+          "redline-semantic-raw-limits-transitional-control",
+          "redline-table-column-widths-full",
+          "redline-table-column-widths-full-untracked-control",
+          "redline-table-column-widths-partial",
+          "redline-table-column-widths-partial-untracked-control",
+          "redline-pending-grid-plain-insert",
+          "redline-pending-grid-plain-insert-control",
+          "redline-pending-grid-plain-delete",
+          "redline-pending-grid-plain-delete-control",
+          "redline-pending-grid-no-op-insert",
+          "redline-pending-grid-no-op-insert-control",
+          "redline-pending-grid-no-op-delete",
+          "redline-pending-grid-no-op-delete-control",
+          "redline-pending-grid-merged-insert",
+          "redline-pending-grid-merged-insert-control",
+          "redline-pending-grid-merged-delete",
+          "redline-pending-grid-merged-delete-control",
+          "redline-pending-grid-omitted-insert",
+          "redline-pending-grid-omitted-insert-control",
+          "redline-pending-grid-omitted-delete",
+          "redline-pending-grid-omitted-delete-control",
+          "redline-pending-grid-merged-before-insert",
+          "redline-pending-grid-merged-before-insert-control",
+          "redline-pending-grid-merged-after-insert",
+          "redline-pending-grid-merged-after-insert-control",
+          "redline-block-insert-paragraph",
+          "redline-block-insert-paragraph-control",
+          "redline-block-insert-rule",
+          "redline-block-insert-rule-control",
+          "redline-block-insert-table",
+          "redline-block-insert-table-control"
+        ],
+        "id": "redline-v13",
+        "version": 13
+      },
+      "contract": {
+        "adapter": {
+          "build": {
+            "adapterSources": {
+              "adapters/docxodus-redline/DocxBenchRedline.csproj": "83843da954515292212f473d501fb539b0627513b972e3a95f7a4ab06674902a",
+              "adapters/docxodus-redline/Program.cs": "7214e07d3ab64d79073ad5e8911f85480b7bc9c80a72c11e592c1177b14cd2b7"
+            },
+            "command": [
+              "/home/jman/.dotnet/dotnet",
+              "build",
+              "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-adapter-after/src/DocxBenchRedline.csproj",
+              "-c",
+              "Release",
+              "-o",
+              "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-adapter-after/bin",
+              "-nologo",
+              "-v",
+              "q",
+              "-p:DocxodusRoot=/home/jman/Code/tmp/Docxodus/.goal-work/issue-1331-completion"
+            ],
+            "commit": "5e9c04a7128a0e8de8f0f6113bf97a40b7121ee6",
+            "dotnet": "10.0.301",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/DocxBenchRedline.dll": "48d1500143b025242a9fb92187f6bce2a973271812698decc69f00e918e21d77",
+              "bin/Docxodus.dll": "e6dceb46911916c03498a49f89cf2c35450499a53f5a735bb02e105b09479ba9",
+              "bin/SkiaSharp.dll": "2c9bbbe1a3d0e9407894c319821b5cdcade1f302466a950a2e5d6024aee32422",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "recipeSha256": "254236d2708f52eec51388459c5ed4a4457f3d08c42a354be2a292af5855786a",
+            "schema": 1,
+            "source": "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1331-completion",
+            "tree": "94f9d675cb209d0231f3e74c4fe29a50fc30a56e"
+          },
+          "name": "docxodus"
+        },
+        "environment": {
+          "harness": {
+            "bench/lo_revisions.py": "a526eddb8c5022f7eb8f8feb8fbab9071b3781c87d3feae81cfc5712d1690482",
+            "bench/redline.py": "1e8c66063446e0d96663a1a9257d8715eedcce006382f3726e63a0c051f91521",
+            "bench/redline_build.py": "254236d2708f52eec51388459c5ed4a4457f3d08c42a354be2a292af5855786a",
+            "bench/revisions.py": "504047053c333c88f8b0bd86d645bdf3794d2f0224f24a5bde19ffed7098abfc"
+          },
+          "libreoffice": {
+            "sha256": "adf468b45764b2abce53a7d91bbf3056b33f2734c5d5f628c075753e73903c43",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "libreofficePython": {
+            "sha256": "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e",
+            "version": "3.13.7"
+          },
+          "validator": {
+            "dotnet": "10.0.301",
+            "fileFormat": "Microsoft365",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/OoxmlValidator.dll": "f9e00c50ed1d3f0a80c35fa58fa415939c0b4aece4fe8dc402977d38e026f9a2",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "package": "DocumentFormat.OpenXml 3.5.1"
+          }
+        },
+        "metric": {
+          "blockInsertion": "declared insertion outcomes require typed success, error, version change and undo availability",
+          "caseScore": "100 when every applicable mandatory check passes, otherwise 0",
+          "engines": [
+            "bench-markup",
+            "libreoffice-text"
+          ],
+          "libreofficeEligibility": "a LibreOffice comparison applies only when the authored redline passes it",
+          "revisionRegistry": "declared table operations must report the public registry count and match independent resolved table assertions",
+          "semanticPreflight": "declared identity cases must report zero changes at raw limits with and without the package supplement",
+          "suiteScore": "mean of category means over every required case",
+          "validity": "no OpenXmlValidator finding (id, part, description) occurs more often than in any input",
+          "version": 5,
+          "view": 1
+        },
+        "suiteDigest": "57980e9429af0bd10c1c1f11499ef9dcbab051f479ecabe2f8314518e7c29db0"
+      },
+      "contractDigest": "c3a91200ab39f66fd146de34c717d5d1742ffd494977bdd041fc1336b3997241",
+      "summary": {
+        "byKind": {
+          "control": {
+            "measured": 3,
+            "passed": 3
+          },
+          "reproducer": {
+            "measured": 3,
+            "passed": 3
+          }
+        },
+        "categoryMeans": {
+          "tables": 100.0
+        },
+        "complete": false,
+        "libreofficeComparisons": {
+          "applicable": 6,
+          "total": 6
+        },
+        "measured": 6,
+        "passRate": 0.05217391304347826,
+        "required": 115,
+        "score": null
+      },
+      "cases": [
+        {
+          "id": "redline-block-insert-paragraph",
+          "status": "measured",
+          "score": 100.0,
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-output",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-paragraph/authored-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-after/redline-block-insert-paragraph/candidate-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-paragraph/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-output",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "max": 0,
+                "scope": "output",
+                "type": "revision-count",
+                "version": 1
+              },
+              "name": "assertion-revision-count",
+              "observed": 0,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 3,
+                "scope": "output",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 3,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "output",
+                "state": {
+                  "grid": [
+                    2000
+                  ],
+                  "rows": [
+                    {
+                      "after": 0,
+                      "before": 0,
+                      "cells": [
+                        {
+                          "fill": "D9EAD3",
+                          "span": 1,
+                          "type": "dxa",
+                          "width": 2000
+                        }
+                      ],
+                      "height": null
+                    }
+                  ]
+                },
+                "type": "table-state",
+                "version": 1
+              },
+              "name": "assertion-table-state",
+              "observed": {
+                "grid": [
+                  2000
+                ],
+                "rows": [
+                  {
+                    "after": 0,
+                    "before": 0,
+                    "cells": [
+                      {
+                        "fill": "D9EAD3",
+                        "span": 1,
+                        "type": "dxa",
+                        "width": 2000
+                      }
+                    ],
+                    "height": null
+                  }
+                ]
+              },
+              "passed": true
+            },
+            {
+              "expected": {
+                "errorCode": "AnchorWrongKind",
+                "success": false,
+                "undoAvailable": false,
+                "versionDelta": 0
+              },
+              "name": "block-insertion-outcome",
+              "observed": {
+                "errorCode": "AnchorWrongKind",
+                "success": false,
+                "undoAvailable": false,
+                "versionDelta": 0
+              },
+              "passed": true
+            }
+          ],
+          "adapter": {
+            "blockInsertion": {
+              "errorCode": "AnchorWrongKind",
+              "success": false,
+              "undoAvailable": false,
+              "versionDelta": 0
+            },
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+5e9c04a7128a0e8de8f0f6113bf97a40b7121ee6",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "a8d32d1564480bff6d35cedd29a29d5e9708911cac5f2eb132e61a5249fac032",
+            "protocol": 1,
+            "status": "ok"
+          }
+        },
+        {
+          "id": "redline-block-insert-paragraph-control",
+          "status": "measured",
+          "score": 100.0,
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-output",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-paragraph-control/authored-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-after/redline-block-insert-paragraph-control/candidate-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-paragraph-control/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-output",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "max": 0,
+                "scope": "output",
+                "type": "revision-count",
+                "version": 1
+              },
+              "name": "assertion-revision-count",
+              "observed": 0,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 4,
+                "scope": "output",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 4,
+              "passed": true
+            },
+            {
+              "expected": {
+                "errorCode": null,
+                "success": true,
+                "undoAvailable": true,
+                "versionDelta": 1
+              },
+              "name": "block-insertion-outcome",
+              "observed": {
+                "errorCode": null,
+                "success": true,
+                "undoAvailable": true,
+                "versionDelta": 1
+              },
+              "passed": true
+            }
+          ],
+          "adapter": {
+            "blockInsertion": {
+              "errorCode": null,
+              "success": true,
+              "undoAvailable": true,
+              "versionDelta": 1
+            },
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+5e9c04a7128a0e8de8f0f6113bf97a40b7121ee6",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "5716c93b67a27567404f51e8cbce6dced28d3fa9a23464f9d170764ab23b0df6",
+            "protocol": 1,
+            "status": "ok"
+          }
+        },
+        {
+          "id": "redline-block-insert-rule",
+          "status": "measured",
+          "score": 100.0,
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-output",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-rule/authored-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-after/redline-block-insert-rule/candidate-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-rule/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-output",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "max": 0,
+                "scope": "output",
+                "type": "revision-count",
+                "version": 1
+              },
+              "name": "assertion-revision-count",
+              "observed": 0,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 3,
+                "scope": "output",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 3,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "output",
+                "state": {
+                  "grid": [
+                    2000
+                  ],
+                  "rows": [
+                    {
+                      "after": 0,
+                      "before": 0,
+                      "cells": [
+                        {
+                          "fill": "D9EAD3",
+                          "span": 1,
+                          "type": "dxa",
+                          "width": 2000
+                        }
+                      ],
+                      "height": null
+                    }
+                  ]
+                },
+                "type": "table-state",
+                "version": 1
+              },
+              "name": "assertion-table-state",
+              "observed": {
+                "grid": [
+                  2000
+                ],
+                "rows": [
+                  {
+                    "after": 0,
+                    "before": 0,
+                    "cells": [
+                      {
+                        "fill": "D9EAD3",
+                        "span": 1,
+                        "type": "dxa",
+                        "width": 2000
+                      }
+                    ],
+                    "height": null
+                  }
+                ]
+              },
+              "passed": true
+            },
+            {
+              "expected": {
+                "errorCode": "AnchorWrongKind",
+                "success": false,
+                "undoAvailable": false,
+                "versionDelta": 0
+              },
+              "name": "block-insertion-outcome",
+              "observed": {
+                "errorCode": "AnchorWrongKind",
+                "success": false,
+                "undoAvailable": false,
+                "versionDelta": 0
+              },
+              "passed": true
+            }
+          ],
+          "adapter": {
+            "blockInsertion": {
+              "errorCode": "AnchorWrongKind",
+              "success": false,
+              "undoAvailable": false,
+              "versionDelta": 0
+            },
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+5e9c04a7128a0e8de8f0f6113bf97a40b7121ee6",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "a8d32d1564480bff6d35cedd29a29d5e9708911cac5f2eb132e61a5249fac032",
+            "protocol": 1,
+            "status": "ok"
+          }
+        },
+        {
+          "id": "redline-block-insert-rule-control",
+          "status": "measured",
+          "score": 100.0,
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-output",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-rule-control/authored-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-after/redline-block-insert-rule-control/candidate-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-rule-control/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-output",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "max": 0,
+                "scope": "output",
+                "type": "revision-count",
+                "version": 1
+              },
+              "name": "assertion-revision-count",
+              "observed": 0,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 4,
+                "scope": "output",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 4,
+              "passed": true
+            },
+            {
+              "expected": {
+                "errorCode": null,
+                "success": true,
+                "undoAvailable": true,
+                "versionDelta": 1
+              },
+              "name": "block-insertion-outcome",
+              "observed": {
+                "errorCode": null,
+                "success": true,
+                "undoAvailable": true,
+                "versionDelta": 1
+              },
+              "passed": true
+            }
+          ],
+          "adapter": {
+            "blockInsertion": {
+              "errorCode": null,
+              "success": true,
+              "undoAvailable": true,
+              "versionDelta": 1
+            },
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+5e9c04a7128a0e8de8f0f6113bf97a40b7121ee6",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "cfd9742902f81e1b1b3787282d237b10580cdc1e5d8bedff03906da766c84a80",
+            "protocol": 1,
+            "status": "ok"
+          }
+        },
+        {
+          "id": "redline-block-insert-table",
+          "status": "measured",
+          "score": 100.0,
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-output",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-table/authored-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-after/redline-block-insert-table/candidate-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-table/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-output",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "max": 0,
+                "scope": "output",
+                "type": "revision-count",
+                "version": 1
+              },
+              "name": "assertion-revision-count",
+              "observed": 0,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 3,
+                "scope": "output",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 3,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "output",
+                "state": {
+                  "grid": [
+                    2000
+                  ],
+                  "rows": [
+                    {
+                      "after": 0,
+                      "before": 0,
+                      "cells": [
+                        {
+                          "fill": "D9EAD3",
+                          "span": 1,
+                          "type": "dxa",
+                          "width": 2000
+                        }
+                      ],
+                      "height": null
+                    }
+                  ]
+                },
+                "type": "table-state",
+                "version": 1
+              },
+              "name": "assertion-table-state",
+              "observed": {
+                "grid": [
+                  2000
+                ],
+                "rows": [
+                  {
+                    "after": 0,
+                    "before": 0,
+                    "cells": [
+                      {
+                        "fill": "D9EAD3",
+                        "span": 1,
+                        "type": "dxa",
+                        "width": 2000
+                      }
+                    ],
+                    "height": null
+                  }
+                ]
+              },
+              "passed": true
+            },
+            {
+              "expected": {
+                "errorCode": "AnchorWrongKind",
+                "success": false,
+                "undoAvailable": false,
+                "versionDelta": 0
+              },
+              "name": "block-insertion-outcome",
+              "observed": {
+                "errorCode": "AnchorWrongKind",
+                "success": false,
+                "undoAvailable": false,
+                "versionDelta": 0
+              },
+              "passed": true
+            }
+          ],
+          "adapter": {
+            "blockInsertion": {
+              "errorCode": "AnchorWrongKind",
+              "success": false,
+              "undoAvailable": false,
+              "versionDelta": 0
+            },
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+5e9c04a7128a0e8de8f0f6113bf97a40b7121ee6",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "a8d32d1564480bff6d35cedd29a29d5e9708911cac5f2eb132e61a5249fac032",
+            "protocol": 1,
+            "status": "ok"
+          }
+        },
+        {
+          "id": "redline-block-insert-table-control",
+          "status": "measured",
+          "score": 100.0,
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-output",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-table-control/authored-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-after/redline-block-insert-table-control/candidate-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-table-control/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-output",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "max": 0,
+                "scope": "output",
+                "type": "revision-count",
+                "version": 1
+              },
+              "name": "assertion-revision-count",
+              "observed": 0,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 5,
+                "scope": "output",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 5,
+              "passed": true
+            },
+            {
+              "expected": {
+                "errorCode": null,
+                "success": true,
+                "undoAvailable": true,
+                "versionDelta": 1
+              },
+              "name": "block-insertion-outcome",
+              "observed": {
+                "errorCode": null,
+                "success": true,
+                "undoAvailable": true,
+                "versionDelta": 1
+              },
+              "passed": true
+            }
+          ],
+          "adapter": {
+            "blockInsertion": {
+              "errorCode": null,
+              "success": true,
+              "undoAvailable": true,
+              "versionDelta": 1
+            },
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+5e9c04a7128a0e8de8f0f6113bf97a40b7121ee6",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "9096f5e63a117971c99d6b916fed26964d367cb60ac691a277992cffda1bf96f",
+            "protocol": 1,
+            "status": "ok"
+          }
+        }
+      ]
+    },
+    "calibration": {
+      "suite": {
+        "cases": [
+          "redline-field-result-beside-edit",
+          "redline-field-result-end-control",
+          "redline-field-result-tab-control",
+          "redline-field-toc-page-numbers",
+          "redline-field-toc-entry-retitled-control",
+          "redline-field-toc-page-number-control",
+          "redline-field-shared-end-append",
+          "redline-field-shared-end-trim",
+          "redline-field-shared-end-control",
+          "redline-field-close-open-sdt",
+          "redline-field-close-open-body",
+          "redline-field-close-open-sdt-control",
+          "redline-comment-straddles-sdt",
+          "redline-comment-straddles-sdt-control",
+          "redline-comment-straddles-customxml",
+          "redline-comment-straddles-customxml-control",
+          "redline-comment-para-id-collision",
+          "redline-wrapper-para-id-copies",
+          "redline-comment-para-id-control",
+          "redline-header-bookmark-only",
+          "redline-body-bookmark-only-control",
+          "redline-bookmark-end-after-replaced-word",
+          "redline-bookmark-end-after-replaced-word-control",
+          "redline-bookmark-between-blocks-fold-text",
+          "redline-bookmark-between-blocks-fold-text-control",
+          "redline-bookmark-between-blocks-fold-table",
+          "redline-bookmark-between-blocks-fold-table-control",
+          "redline-style-id-cross-type",
+          "redline-style-id-same-type-control",
+          "redline-reject-customxml",
+          "redline-reject-math",
+          "redline-reject-ruby",
+          "redline-reject-direct-control",
+          "redline-consolidate-cell-bookmark",
+          "redline-consolidate-cell-text-control",
+          "redline-boundary-bookmark-compare-tbl",
+          "redline-boundary-bookmark-compare-tr",
+          "redline-boundary-bookmark-compare-paragraph-control",
+          "redline-boundary-bookmark-consolidate-tbl",
+          "redline-boundary-bookmark-consolidate-tr",
+          "redline-boundary-bookmark-consolidate-paragraph-control",
+          "redline-identity-bytes",
+          "redline-identity-reserialized",
+          "redline-inline-customxml",
+          "redline-inline-hyperlink-control",
+          "redline-comment-add-customxml",
+          "redline-comment-remove-sdt",
+          "redline-comment-wrapper-control",
+          "redline-reviewer-added-comment",
+          "redline-reviewer-comment-control",
+          "redline-duplicate-comment-sdt",
+          "redline-duplicate-comment-sdt-control",
+          "redline-duplicate-comment-customxml",
+          "redline-duplicate-comment-customxml-control",
+          "redline-consolidated-field-result-edit",
+          "redline-consolidated-field-prefix-delete",
+          "redline-consolidated-field-bookmark-added",
+          "redline-consolidated-field-plain-control",
+          "redline-comment-identity-reused-id",
+          "redline-comment-identity-replaced-id",
+          "redline-comment-identity-distinct-control",
+          "redline-comment-identity-reviewer-collision",
+          "redline-comment-identity-reviewer-identical",
+          "redline-comment-identity-reviewer-control",
+          "redline-removed-comment-body-edited",
+          "redline-removed-comment-body-unchanged-control",
+          "redline-consolidated-note-prefix",
+          "redline-consolidated-note-suffix-control",
+          "redline-reviewer-bookmark-paragraph-edited",
+          "redline-reviewer-bookmark-paragraph-outside-control",
+          "redline-reviewer-bookmark-sdt-edited",
+          "redline-reviewer-bookmark-sdt-outside-control",
+          "redline-reviewer-bookmark-cell-edited",
+          "redline-reviewer-bookmark-cell-outside-control",
+          "redline-reviewer-bookmark-move-and-remove",
+          "redline-reviewer-bookmark-single-remove-control",
+          "redline-bookmark-name-block-position",
+          "redline-bookmark-name-mixed-position",
+          "redline-bookmark-name-inline-extent",
+          "redline-bookmark-name-consensus-control",
+          "redline-comment-reply-id-less-root",
+          "redline-comment-reply-renumbered-root",
+          "redline-comment-reply-root-para-id-control",
+          "redline-semantic-raw-limits-strict",
+          "redline-semantic-raw-limits-transitional-control",
+          "redline-table-column-widths-full",
+          "redline-table-column-widths-full-untracked-control",
+          "redline-table-column-widths-partial",
+          "redline-table-column-widths-partial-untracked-control",
+          "redline-pending-grid-plain-insert",
+          "redline-pending-grid-plain-insert-control",
+          "redline-pending-grid-plain-delete",
+          "redline-pending-grid-plain-delete-control",
+          "redline-pending-grid-no-op-insert",
+          "redline-pending-grid-no-op-insert-control",
+          "redline-pending-grid-no-op-delete",
+          "redline-pending-grid-no-op-delete-control",
+          "redline-pending-grid-merged-insert",
+          "redline-pending-grid-merged-insert-control",
+          "redline-pending-grid-merged-delete",
+          "redline-pending-grid-merged-delete-control",
+          "redline-pending-grid-omitted-insert",
+          "redline-pending-grid-omitted-insert-control",
+          "redline-pending-grid-omitted-delete",
+          "redline-pending-grid-omitted-delete-control",
+          "redline-pending-grid-merged-before-insert",
+          "redline-pending-grid-merged-before-insert-control",
+          "redline-pending-grid-merged-after-insert",
+          "redline-pending-grid-merged-after-insert-control",
+          "redline-block-insert-paragraph",
+          "redline-block-insert-paragraph-control",
+          "redline-block-insert-rule",
+          "redline-block-insert-rule-control",
+          "redline-block-insert-table",
+          "redline-block-insert-table-control"
+        ],
+        "id": "redline-v13",
+        "version": 13
+      },
+      "contract": {
+        "adapter": {
+          "name": "authored"
+        },
+        "environment": {
+          "harness": {
+            "bench/lo_revisions.py": "a526eddb8c5022f7eb8f8feb8fbab9071b3781c87d3feae81cfc5712d1690482",
+            "bench/redline.py": "1e8c66063446e0d96663a1a9257d8715eedcce006382f3726e63a0c051f91521",
+            "bench/redline_build.py": "254236d2708f52eec51388459c5ed4a4457f3d08c42a354be2a292af5855786a",
+            "bench/revisions.py": "504047053c333c88f8b0bd86d645bdf3794d2f0224f24a5bde19ffed7098abfc"
+          },
+          "libreoffice": {
+            "sha256": "adf468b45764b2abce53a7d91bbf3056b33f2734c5d5f628c075753e73903c43",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "libreofficePython": {
+            "sha256": "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e",
+            "version": "3.13.7"
+          },
+          "validator": {
+            "dotnet": "10.0.301",
+            "fileFormat": "Microsoft365",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/OoxmlValidator.dll": "f9e00c50ed1d3f0a80c35fa58fa415939c0b4aece4fe8dc402977d38e026f9a2",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "package": "DocumentFormat.OpenXml 3.5.1"
+          }
+        },
+        "metric": {
+          "blockInsertion": "declared insertion outcomes require typed success, error, version change and undo availability",
+          "caseScore": "100 when every applicable mandatory check passes, otherwise 0",
+          "engines": [
+            "bench-markup",
+            "libreoffice-text"
+          ],
+          "libreofficeEligibility": "a LibreOffice comparison applies only when the authored redline passes it",
+          "revisionRegistry": "declared table operations must report the public registry count and match independent resolved table assertions",
+          "semanticPreflight": "declared identity cases must report zero changes at raw limits with and without the package supplement",
+          "suiteScore": "mean of category means over every required case",
+          "validity": "no OpenXmlValidator finding (id, part, description) occurs more often than in any input",
+          "version": 5,
+          "view": 1
+        },
+        "suiteDigest": "57980e9429af0bd10c1c1f11499ef9dcbab051f479ecabe2f8314518e7c29db0"
+      },
+      "contractDigest": "90be87297bbf11a47bdf8ed78c9b4e9cdfc7cc9f156f9021189f012df124117b",
+      "summary": {
+        "byKind": {
+          "control": {
+            "measured": 3,
+            "passed": 3
+          },
+          "reproducer": {
+            "measured": 3,
+            "passed": 3
+          }
+        },
+        "categoryMeans": {
+          "tables": 100.0
+        },
+        "complete": false,
+        "libreofficeComparisons": {
+          "applicable": 6,
+          "total": 6
+        },
+        "measured": 6,
+        "passRate": 0.05217391304347826,
+        "required": 115,
+        "score": null
+      },
+      "cases": [
+        {
+          "id": "redline-block-insert-paragraph",
+          "status": "measured",
+          "score": 100.0,
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-output",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-paragraph/authored-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-calibration/redline-block-insert-paragraph/candidate-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-paragraph/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-output",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "max": 0,
+                "scope": "output",
+                "type": "revision-count",
+                "version": 1
+              },
+              "name": "assertion-revision-count",
+              "observed": 0,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 3,
+                "scope": "output",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 3,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "output",
+                "state": {
+                  "grid": [
+                    2000
+                  ],
+                  "rows": [
+                    {
+                      "after": 0,
+                      "before": 0,
+                      "cells": [
+                        {
+                          "fill": "D9EAD3",
+                          "span": 1,
+                          "type": "dxa",
+                          "width": 2000
+                        }
+                      ],
+                      "height": null
+                    }
+                  ]
+                },
+                "type": "table-state",
+                "version": 1
+              },
+              "name": "assertion-table-state",
+              "observed": {
+                "grid": [
+                  2000
+                ],
+                "rows": [
+                  {
+                    "after": 0,
+                    "before": 0,
+                    "cells": [
+                      {
+                        "fill": "D9EAD3",
+                        "span": 1,
+                        "type": "dxa",
+                        "width": 2000
+                      }
+                    ],
+                    "height": null
+                  }
+                ]
+              },
+              "passed": true
+            },
+            {
+              "expected": {
+                "errorCode": "AnchorWrongKind",
+                "success": false,
+                "undoAvailable": false,
+                "versionDelta": 0
+              },
+              "name": "block-insertion-outcome",
+              "observed": {
+                "errorCode": "AnchorWrongKind",
+                "success": false,
+                "undoAvailable": false,
+                "versionDelta": 0
+              },
+              "passed": true
+            }
+          ],
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "7846ec46f456883387e905bd345b1c480bfae9d5d59279242c9b42f50cf28d11",
+            "status": "ok"
+          }
+        },
+        {
+          "id": "redline-block-insert-paragraph-control",
+          "status": "measured",
+          "score": 100.0,
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-output",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-paragraph-control/authored-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-calibration/redline-block-insert-paragraph-control/candidate-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-paragraph-control/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-output",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "max": 0,
+                "scope": "output",
+                "type": "revision-count",
+                "version": 1
+              },
+              "name": "assertion-revision-count",
+              "observed": 0,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 4,
+                "scope": "output",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 4,
+              "passed": true
+            },
+            {
+              "expected": {
+                "errorCode": null,
+                "success": true,
+                "undoAvailable": true,
+                "versionDelta": 1
+              },
+              "name": "block-insertion-outcome",
+              "observed": {
+                "errorCode": null,
+                "success": true,
+                "undoAvailable": true,
+                "versionDelta": 1
+              },
+              "passed": true
+            }
+          ],
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "794bb77df2e23dfd0403baa4d7eb1aef1326d81c7b5a43160951783837bc89de",
+            "status": "ok"
+          }
+        },
+        {
+          "id": "redline-block-insert-rule",
+          "status": "measured",
+          "score": 100.0,
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-output",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-rule/authored-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-calibration/redline-block-insert-rule/candidate-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-rule/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-output",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "max": 0,
+                "scope": "output",
+                "type": "revision-count",
+                "version": 1
+              },
+              "name": "assertion-revision-count",
+              "observed": 0,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 3,
+                "scope": "output",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 3,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "output",
+                "state": {
+                  "grid": [
+                    2000
+                  ],
+                  "rows": [
+                    {
+                      "after": 0,
+                      "before": 0,
+                      "cells": [
+                        {
+                          "fill": "D9EAD3",
+                          "span": 1,
+                          "type": "dxa",
+                          "width": 2000
+                        }
+                      ],
+                      "height": null
+                    }
+                  ]
+                },
+                "type": "table-state",
+                "version": 1
+              },
+              "name": "assertion-table-state",
+              "observed": {
+                "grid": [
+                  2000
+                ],
+                "rows": [
+                  {
+                    "after": 0,
+                    "before": 0,
+                    "cells": [
+                      {
+                        "fill": "D9EAD3",
+                        "span": 1,
+                        "type": "dxa",
+                        "width": 2000
+                      }
+                    ],
+                    "height": null
+                  }
+                ]
+              },
+              "passed": true
+            },
+            {
+              "expected": {
+                "errorCode": "AnchorWrongKind",
+                "success": false,
+                "undoAvailable": false,
+                "versionDelta": 0
+              },
+              "name": "block-insertion-outcome",
+              "observed": {
+                "errorCode": "AnchorWrongKind",
+                "success": false,
+                "undoAvailable": false,
+                "versionDelta": 0
+              },
+              "passed": true
+            }
+          ],
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "7846ec46f456883387e905bd345b1c480bfae9d5d59279242c9b42f50cf28d11",
+            "status": "ok"
+          }
+        },
+        {
+          "id": "redline-block-insert-rule-control",
+          "status": "measured",
+          "score": 100.0,
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-output",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-rule-control/authored-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-calibration/redline-block-insert-rule-control/candidate-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-rule-control/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-output",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "max": 0,
+                "scope": "output",
+                "type": "revision-count",
+                "version": 1
+              },
+              "name": "assertion-revision-count",
+              "observed": 0,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 4,
+                "scope": "output",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 4,
+              "passed": true
+            },
+            {
+              "expected": {
+                "errorCode": null,
+                "success": true,
+                "undoAvailable": true,
+                "versionDelta": 1
+              },
+              "name": "block-insertion-outcome",
+              "observed": {
+                "errorCode": null,
+                "success": true,
+                "undoAvailable": true,
+                "versionDelta": 1
+              },
+              "passed": true
+            }
+          ],
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "6f75f2b5342a4077f536d9c71d939027e541a74fbad1a110461b3cf2141f1efc",
+            "status": "ok"
+          }
+        },
+        {
+          "id": "redline-block-insert-table",
+          "status": "measured",
+          "score": 100.0,
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-output",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-table/authored-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-calibration/redline-block-insert-table/candidate-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-table/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-output",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "max": 0,
+                "scope": "output",
+                "type": "revision-count",
+                "version": 1
+              },
+              "name": "assertion-revision-count",
+              "observed": 0,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 3,
+                "scope": "output",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 3,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "output",
+                "state": {
+                  "grid": [
+                    2000
+                  ],
+                  "rows": [
+                    {
+                      "after": 0,
+                      "before": 0,
+                      "cells": [
+                        {
+                          "fill": "D9EAD3",
+                          "span": 1,
+                          "type": "dxa",
+                          "width": 2000
+                        }
+                      ],
+                      "height": null
+                    }
+                  ]
+                },
+                "type": "table-state",
+                "version": 1
+              },
+              "name": "assertion-table-state",
+              "observed": {
+                "grid": [
+                  2000
+                ],
+                "rows": [
+                  {
+                    "after": 0,
+                    "before": 0,
+                    "cells": [
+                      {
+                        "fill": "D9EAD3",
+                        "span": 1,
+                        "type": "dxa",
+                        "width": 2000
+                      }
+                    ],
+                    "height": null
+                  }
+                ]
+              },
+              "passed": true
+            },
+            {
+              "expected": {
+                "errorCode": "AnchorWrongKind",
+                "success": false,
+                "undoAvailable": false,
+                "versionDelta": 0
+              },
+              "name": "block-insertion-outcome",
+              "observed": {
+                "errorCode": "AnchorWrongKind",
+                "success": false,
+                "undoAvailable": false,
+                "versionDelta": 0
+              },
+              "passed": true
+            }
+          ],
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "7846ec46f456883387e905bd345b1c480bfae9d5d59279242c9b42f50cf28d11",
+            "status": "ok"
+          }
+        },
+        {
+          "id": "redline-block-insert-table-control",
+          "status": "measured",
+          "score": 100.0,
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-output",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-table-control/authored-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1331-bench-calibration/redline-block-insert-table-control/candidate-output.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1331-completion/fixtures/redline/redline-block-insert-table-control/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-output",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "max": 0,
+                "scope": "output",
+                "type": "revision-count",
+                "version": 1
+              },
+              "name": "assertion-revision-count",
+              "observed": 0,
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 5,
+                "scope": "output",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 5,
+              "passed": true
+            },
+            {
+              "expected": {
+                "errorCode": null,
+                "success": true,
+                "undoAvailable": true,
+                "versionDelta": 1
+              },
+              "name": "block-insertion-outcome",
+              "observed": {
+                "errorCode": null,
+                "success": true,
+                "undoAvailable": true,
+                "versionDelta": 1
+              },
+              "passed": true
+            }
+          ],
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "a4e9d6fd9989d1437927a3eab4abb25c9f86a65ff7bdbf3ec74b99e92bfe1442",
+            "status": "ok"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,897 @@
+{
+  "schema": 1,
+  "description": "Focused two-case diagnostics. Complete run contracts and mandatory check outcomes; large observed trees omitted. No full-suite score.",
+  "suite": "redline-v23",
+  "requiredCases": 210,
+  "runs": {
+    "authored": {
+      "candidate": "authored-calibration",
+      "contract": {
+        "adapter": {
+          "name": "authored"
+        },
+        "environment": {
+          "harness": {
+            "bench/lo_revisions.py": "a526eddb8c5022f7eb8f8feb8fbab9071b3781c87d3feae81cfc5712d1690482",
+            "bench/redline.py": "700b2e6b7a96739a7f9e2fc2e259b3abad15d482c138798e407dceae99be4769",
+            "bench/redline_build.py": "363879d820560519e8635fab08240100799cce2ba224e1169498eb209651c053",
+            "bench/revision_ownership.py": "d927496ce7af9e8ee41b48b32d4513e35e5bfd77eeeda41970a42201dac175fb",
+            "bench/revisions.py": "b2d13e3c58885c95c4fe75269bcda6fe6420afeef51be7f43278ce7aac94e701"
+          },
+          "libreoffice": {
+            "sha256": "adf468b45764b2abce53a7d91bbf3056b33f2734c5d5f628c075753e73903c43",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "libreofficePython": {
+            "sha256": "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e",
+            "version": "3.13.7"
+          },
+          "validator": {
+            "dotnet": "10.0.301",
+            "fileFormat": "Microsoft365",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/OoxmlValidator.dll": "adad1592a55ce757313b038b41ec6987b589dc5f8836a2ecf4ba121d8c5ed35c",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "package": "DocumentFormat.OpenXml 3.5.1"
+          }
+        },
+        "metric": {
+          "blockInsertion": "declared insertion outcomes require typed success, error, version change and undo availability",
+          "caseScore": "100 when every applicable mandatory check passes, otherwise 0",
+          "columnReview": "v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry",
+          "engines": [
+            "bench-markup",
+            "libreoffice-text"
+          ],
+          "hyperlinkTargets": "declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written",
+          "inlineTrees": "declared math and drawing subtrees retain structure, properties, textbox content and image bytes in both independently resolved views",
+          "libreofficeEligibility": "a LibreOffice comparison applies only when the authored redline passes it",
+          "paragraphRewrite": "public untracked whole-paragraph rewrites must preserve exact declared native content-control subtrees as well as independent semantic views",
+          "revisionOwnership": "account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips",
+          "revisionRegistry": "declared table operations must report the public registry count and match independent resolved table assertions",
+          "revisionText": "declared move sources and ordinary deletions must retain their appropriate text carrier",
+          "semanticPreflight": "declared identity cases must report zero changes at raw limits with and without the package supplement",
+          "spanEditing": "public span editing must preserve text and inline-marker order through both independent revision resolvers",
+          "suiteScore": "mean of category means over every required case",
+          "validity": "no OpenXmlValidator finding (id, part, description) occurs more often than in any input, and the output opens: a Package_Open finding in the output always fails, whatever the inputs did",
+          "version": 14,
+          "view": 1
+        },
+        "suiteDigest": "13dc4464fc6526ea63aeaa9e23d42eeb09c58f8b8a4a37119a550cb572f11b9b"
+      },
+      "contractDigest": "d1cdb9d3fd571090fa92eec865e75c9bd4e693fcdd79e780aa4434a8efd73693",
+      "summary": {
+        "byKind": {
+          "control": {
+            "measured": 1,
+            "passed": 1
+          },
+          "reproducer": {
+            "measured": 1,
+            "passed": 1
+          }
+        },
+        "categoryMeans": {
+          "revisions": 100.0
+        },
+        "complete": false,
+        "libreofficeComparisons": {
+          "applicable": 0,
+          "total": 4
+        },
+        "measured": 2,
+        "passRate": 0.009523809523809525,
+        "required": 210,
+        "score": null
+      },
+      "originalResultSha256": "303d79fc48a1fc88b7d8b5183f3ea2eee0fcd376acbbdaaee65346782b1d106a",
+      "cases": [
+        {
+          "id": "redline-textbox-geometry",
+          "kind": "reproducer",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "6a724b13d141cdeba878f0a1630e1183fbd51ff3855bfec1443329c5f30ee358",
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole textbox-carrier replacement; independent markup, exact VML geometry/text and SDK checks remain mandatory"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole textbox-carrier replacement; independent markup, exact VML geometry/text and SDK checks remain mandatory"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:80pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape><ns1:shape style=\"position:absolute;margin-left:150pt;margin-top:18pt;width:100pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:120pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape><ns1:shape style=\"position:absolute;margin-left:150pt;margin-top:18pt;width:100pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-textbox-geometry-control",
+          "kind": "control",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "69a0bef79ccaeb2903ddab6ebe68b026f964ac1bad69249315414f365a069d0f",
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole textbox-carrier replacement; independent markup, exact VML geometry/text and SDK checks remain mandatory"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole textbox-carrier replacement; independent markup, exact VML geometry/text and SDK checks remain mandatory"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:80pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape><ns1:shape style=\"position:absolute;margin-left:150pt;margin-top:18pt;width:100pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:80pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper edited.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape><ns1:shape style=\"position:absolute;margin-left:150pt;margin-top:18pt;width:100pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "baseline": {
+      "candidate": "785656a43737ba954fcab9319c3db03a50bc10a9",
+      "contract": {
+        "adapter": {
+          "build": {
+            "adapterSources": {
+              "adapters/docxodus-redline/DocxBenchRedline.csproj": "83843da954515292212f473d501fb539b0627513b972e3a95f7a4ab06674902a",
+              "adapters/docxodus-redline/Program.cs": "3fa3c5e1aea63c72f53365d6ea493b5350b737518fca7d983c0c31b6b21f4b01"
+            },
+            "command": [
+              "/home/jman/.dotnet/dotnet",
+              "build",
+              "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/textbox-main-build/src/DocxBenchRedline.csproj",
+              "-c",
+              "Release",
+              "-o",
+              "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/textbox-main-build/bin",
+              "-nologo",
+              "-v",
+              "q",
+              "-p:DocxodusRoot=/home/jman/Code/Docxodus/.local-closeout/baseline-fb831"
+            ],
+            "commit": "785656a43737ba954fcab9319c3db03a50bc10a9",
+            "dotnet": "10.0.301",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/DocxBenchRedline.dll": "f6d2bd2dfc6ee50d39e09fc823be82a24266148217fbbe486da5b7b43ee82b17",
+              "bin/Docxodus.dll": "1fed14e4c264b437e580c3539bf0a1ff8042f9d35851888fd2ff481ae69ba756",
+              "bin/SkiaSharp.dll": "2c9bbbe1a3d0e9407894c319821b5cdcade1f302466a950a2e5d6024aee32422",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "recipeSha256": "363879d820560519e8635fab08240100799cce2ba224e1169498eb209651c053",
+            "schema": 1,
+            "source": "/home/jman/Code/Docxodus/.local-closeout/baseline-fb831",
+            "tree": "50db834a58425481e3f60bd144cf02e4fc885910"
+          },
+          "name": "docxodus"
+        },
+        "environment": {
+          "harness": {
+            "bench/lo_revisions.py": "a526eddb8c5022f7eb8f8feb8fbab9071b3781c87d3feae81cfc5712d1690482",
+            "bench/redline.py": "700b2e6b7a96739a7f9e2fc2e259b3abad15d482c138798e407dceae99be4769",
+            "bench/redline_build.py": "363879d820560519e8635fab08240100799cce2ba224e1169498eb209651c053",
+            "bench/revision_ownership.py": "d927496ce7af9e8ee41b48b32d4513e35e5bfd77eeeda41970a42201dac175fb",
+            "bench/revisions.py": "b2d13e3c58885c95c4fe75269bcda6fe6420afeef51be7f43278ce7aac94e701"
+          },
+          "libreoffice": {
+            "sha256": "adf468b45764b2abce53a7d91bbf3056b33f2734c5d5f628c075753e73903c43",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "libreofficePython": {
+            "sha256": "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e",
+            "version": "3.13.7"
+          },
+          "validator": {
+            "dotnet": "10.0.301",
+            "fileFormat": "Microsoft365",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/OoxmlValidator.dll": "adad1592a55ce757313b038b41ec6987b589dc5f8836a2ecf4ba121d8c5ed35c",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "package": "DocumentFormat.OpenXml 3.5.1"
+          }
+        },
+        "metric": {
+          "blockInsertion": "declared insertion outcomes require typed success, error, version change and undo availability",
+          "caseScore": "100 when every applicable mandatory check passes, otherwise 0",
+          "columnReview": "v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry",
+          "engines": [
+            "bench-markup",
+            "libreoffice-text"
+          ],
+          "hyperlinkTargets": "declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written",
+          "inlineTrees": "declared math and drawing subtrees retain structure, properties, textbox content and image bytes in both independently resolved views",
+          "libreofficeEligibility": "a LibreOffice comparison applies only when the authored redline passes it",
+          "paragraphRewrite": "public untracked whole-paragraph rewrites must preserve exact declared native content-control subtrees as well as independent semantic views",
+          "revisionOwnership": "account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips",
+          "revisionRegistry": "declared table operations must report the public registry count and match independent resolved table assertions",
+          "revisionText": "declared move sources and ordinary deletions must retain their appropriate text carrier",
+          "semanticPreflight": "declared identity cases must report zero changes at raw limits with and without the package supplement",
+          "spanEditing": "public span editing must preserve text and inline-marker order through both independent revision resolvers",
+          "suiteScore": "mean of category means over every required case",
+          "validity": "no OpenXmlValidator finding (id, part, description) occurs more often than in any input, and the output opens: a Package_Open finding in the output always fails, whatever the inputs did",
+          "version": 14,
+          "view": 1
+        },
+        "suiteDigest": "13dc4464fc6526ea63aeaa9e23d42eeb09c58f8b8a4a37119a550cb572f11b9b"
+      },
+      "contractDigest": "4849256428fbf7bf39ac12fbc3660bbb0c83365923662fbb336181a0fbb689ee",
+      "summary": {
+        "byKind": {
+          "control": {
+            "measured": 1,
+            "passed": 1
+          },
+          "reproducer": {
+            "measured": 1,
+            "passed": 0
+          }
+        },
+        "categoryMeans": {
+          "revisions": 50.0
+        },
+        "complete": false,
+        "libreofficeComparisons": {
+          "applicable": 0,
+          "total": 4
+        },
+        "measured": 2,
+        "passRate": 0.004761904761904762,
+        "required": 210,
+        "score": null
+      },
+      "originalResultSha256": "1efed746bcee5b0ede9cb3cfc6fae1c585c7882ef112e8145070af32d34ddbc3",
+      "cases": [
+        {
+          "id": "redline-textbox-geometry",
+          "kind": "reproducer",
+          "operation": "compare",
+          "status": "measured",
+          "score": 0.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+785656a43737ba954fcab9319c3db03a50bc10a9",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "9e6205aed166478321f4b974bdebb5cd74d350fe1aa9a7b92d14eef396ca0762",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole textbox-carrier replacement; independent markup, exact VML geometry/text and SDK checks remain mandatory"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole textbox-carrier replacement; independent markup, exact VML geometry/text and SDK checks remain mandatory"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": false,
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:80pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape><ns1:shape style=\"position:absolute;margin-left:150pt;margin-top:18pt;width:100pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:120pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape><ns1:shape style=\"position:absolute;margin-left:150pt;margin-top:18pt;width:100pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-textbox-geometry-control",
+          "kind": "control",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+785656a43737ba954fcab9319c3db03a50bc10a9",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "fdb831d512771a293e20dac7754b4a7e721f93a6e38fc20c74e4698ead7eecbd",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole textbox-carrier replacement; independent markup, exact VML geometry/text and SDK checks remain mandatory"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole textbox-carrier replacement; independent markup, exact VML geometry/text and SDK checks remain mandatory"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:80pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape><ns1:shape style=\"position:absolute;margin-left:150pt;margin-top:18pt;width:100pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:80pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper edited.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape><ns1:shape style=\"position:absolute;margin-left:150pt;margin-top:18pt;width:100pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "candidate": {
+      "candidate": "7a205cc6c9dc1d0186042b7152f1ace53aa951fa",
+      "contract": {
+        "adapter": {
+          "build": {
+            "adapterSources": {
+              "adapters/docxodus-redline/DocxBenchRedline.csproj": "83843da954515292212f473d501fb539b0627513b972e3a95f7a4ab06674902a",
+              "adapters/docxodus-redline/Program.cs": "3fa3c5e1aea63c72f53365d6ea493b5350b737518fca7d983c0c31b6b21f4b01"
+            },
+            "command": [
+              "/home/jman/.dotnet/dotnet",
+              "build",
+              "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/textbox-candidate-build/src/DocxBenchRedline.csproj",
+              "-c",
+              "Release",
+              "-o",
+              "/home/jman/Code/Docxodus/.local-closeout/bench-1445/runs/textbox-candidate-build/bin",
+              "-nologo",
+              "-v",
+              "q",
+              "-p:DocxodusRoot=/home/jman/Code/Docxodus/.local-closeout/issue-1425"
+            ],
+            "commit": "7a205cc6c9dc1d0186042b7152f1ace53aa951fa",
+            "dotnet": "10.0.301",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/DocxBenchRedline.dll": "477a9255bad3be4545560f4c577d96f566325da9fc616f0b4de85fcdeb0f1fbe",
+              "bin/Docxodus.dll": "ba777a8c1036849392b5f2895975d10fe70f9cfbe5adc9a14ee6214ca697eafe",
+              "bin/SkiaSharp.dll": "2c9bbbe1a3d0e9407894c319821b5cdcade1f302466a950a2e5d6024aee32422",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "recipeSha256": "363879d820560519e8635fab08240100799cce2ba224e1169498eb209651c053",
+            "schema": 1,
+            "source": "/home/jman/Code/Docxodus/.local-closeout/issue-1425",
+            "tree": "8ff223a85b1a0b63e774c2b408bbdfc9826ccbda"
+          },
+          "name": "docxodus"
+        },
+        "environment": {
+          "harness": {
+            "bench/lo_revisions.py": "a526eddb8c5022f7eb8f8feb8fbab9071b3781c87d3feae81cfc5712d1690482",
+            "bench/redline.py": "700b2e6b7a96739a7f9e2fc2e259b3abad15d482c138798e407dceae99be4769",
+            "bench/redline_build.py": "363879d820560519e8635fab08240100799cce2ba224e1169498eb209651c053",
+            "bench/revision_ownership.py": "d927496ce7af9e8ee41b48b32d4513e35e5bfd77eeeda41970a42201dac175fb",
+            "bench/revisions.py": "b2d13e3c58885c95c4fe75269bcda6fe6420afeef51be7f43278ce7aac94e701"
+          },
+          "libreoffice": {
+            "sha256": "adf468b45764b2abce53a7d91bbf3056b33f2734c5d5f628c075753e73903c43",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "libreofficePython": {
+            "sha256": "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e",
+            "version": "3.13.7"
+          },
+          "validator": {
+            "dotnet": "10.0.301",
+            "fileFormat": "Microsoft365",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/OoxmlValidator.dll": "adad1592a55ce757313b038b41ec6987b589dc5f8836a2ecf4ba121d8c5ed35c",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "package": "DocumentFormat.OpenXml 3.5.1"
+          }
+        },
+        "metric": {
+          "blockInsertion": "declared insertion outcomes require typed success, error, version change and undo availability",
+          "caseScore": "100 when every applicable mandatory check passes, otherwise 0",
+          "columnReview": "v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry",
+          "engines": [
+            "bench-markup",
+            "libreoffice-text"
+          ],
+          "hyperlinkTargets": "declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written",
+          "inlineTrees": "declared math and drawing subtrees retain structure, properties, textbox content and image bytes in both independently resolved views",
+          "libreofficeEligibility": "a LibreOffice comparison applies only when the authored redline passes it",
+          "paragraphRewrite": "public untracked whole-paragraph rewrites must preserve exact declared native content-control subtrees as well as independent semantic views",
+          "revisionOwnership": "account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips",
+          "revisionRegistry": "declared table operations must report the public registry count and match independent resolved table assertions",
+          "revisionText": "declared move sources and ordinary deletions must retain their appropriate text carrier",
+          "semanticPreflight": "declared identity cases must report zero changes at raw limits with and without the package supplement",
+          "spanEditing": "public span editing must preserve text and inline-marker order through both independent revision resolvers",
+          "suiteScore": "mean of category means over every required case",
+          "validity": "no OpenXmlValidator finding (id, part, description) occurs more often than in any input, and the output opens: a Package_Open finding in the output always fails, whatever the inputs did",
+          "version": 14,
+          "view": 1
+        },
+        "suiteDigest": "13dc4464fc6526ea63aeaa9e23d42eeb09c58f8b8a4a37119a550cb572f11b9b"
+      },
+      "contractDigest": "b645165489085f1792765692e0d88332de8105ffa807e81cd4a9c3422e52c533",
+      "summary": {
+        "byKind": {
+          "control": {
+            "measured": 1,
+            "passed": 1
+          },
+          "reproducer": {
+            "measured": 1,
+            "passed": 1
+          }
+        },
+        "categoryMeans": {
+          "revisions": 100.0
+        },
+        "complete": false,
+        "libreofficeComparisons": {
+          "applicable": 0,
+          "total": 4
+        },
+        "measured": 2,
+        "passRate": 0.009523809523809525,
+        "required": 210,
+        "score": null
+      },
+      "originalResultSha256": "c079b819fb43fa3dee96d95a4db3816a472fd7af0f5f1ca424b39a2cf116dfb0",
+      "cases": [
+        {
+          "id": "redline-textbox-geometry",
+          "kind": "reproducer",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+7a205cc6c9dc1d0186042b7152f1ace53aa951fa",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "b2c339ac9c6361ea106395d2d805aa70020b8397b8693fd49f3756b93de8df4b",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole textbox-carrier replacement; independent markup, exact VML geometry/text and SDK checks remain mandatory"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole textbox-carrier replacement; independent markup, exact VML geometry/text and SDK checks remain mandatory"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:80pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape><ns1:shape style=\"position:absolute;margin-left:150pt;margin-top:18pt;width:100pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:120pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape><ns1:shape style=\"position:absolute;margin-left:150pt;margin-top:18pt;width:100pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "redline-textbox-geometry-control",
+          "kind": "control",
+          "operation": "compare",
+          "status": "measured",
+          "score": 100.0,
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+7a205cc6c9dc1d0186042b7152f1ace53aa951fa",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "fdb831d512771a293e20dac7754b4a7e721f93a6e38fc20c74e4698ead7eecbd",
+            "protocol": 1,
+            "status": "ok"
+          },
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "name": "libreoffice-accepted",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole textbox-carrier replacement; independent markup, exact VML geometry/text and SDK checks remain mandatory"
+            },
+            {
+              "name": "libreoffice-rejected",
+              "passed": null,
+              "ineligible": true,
+              "reason": "LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole textbox-carrier replacement; independent markup, exact VML geometry/text and SDK checks remain mandatory"
+            },
+            {
+              "name": "no-new-validation-errors",
+              "passed": true,
+              "new": []
+            },
+            {
+              "name": "assertion-untracked-text",
+              "passed": true,
+              "missing": [],
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "rejected",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:80pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper first.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape><ns1:shape style=\"position:absolute;margin-left:150pt;margin-top:18pt;width:100pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            },
+            {
+              "name": "assertion-inline-trees",
+              "passed": true,
+              "declaration": {
+                "images": {},
+                "name": "pict",
+                "scope": "accepted",
+                "trees": [
+                  "<ns0:pict xmlns:ns0=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:ns1=\"urn:schemas-microsoft-com:vml\"><ns1:shape style=\"position:absolute;margin-left:0pt;margin-top:18pt;width:80pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper edited.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape><ns1:shape style=\"position:absolute;margin-left:150pt;margin-top:18pt;width:100pt;height:40pt\" coordsize=\"21600,21600\" path=\"m,l,21600r21600,l21600,xe\" strokecolor=\"#226688\" fillcolor=\"#eef6f8\"><ns1:textbox><ns0:txbxContent><ns0:p><ns0:r><ns0:t xml:space=\"preserve\">Juniper second.</ns0:t></ns0:r></ns0:p></ns0:txbxContent></ns1:textbox></ns1:shape></ns0:pict>"
+                ],
+                "type": "inline-trees",
+                "version": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

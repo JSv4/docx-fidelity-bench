@@ -1,0 +1,5298 @@
+{
+  "scope": "Unscored strict-font public exports. Eight eligible native references; empty-run line slots and complete source inventories only. No new Word or full-suite parity claim.",
+  "manifestSha256": "4e3f94b6519045d0abae934673dc7c1aa7847e7bf206b97079ac22dda1b7fdde",
+  "manifest": {
+    "file": "manifest.json.gz",
+    "sha256": "24c6188a6edb1851dea2ade5ef09e3545e3781ad964b7101caed6ef4a53d98f9",
+    "jsonSha256": "4e3f94b6519045d0abae934673dc7c1aa7847e7bf206b97079ac22dda1b7fdde"
+  },
+  "roundingCalibration": {
+    "file": "rounding-calibration.json.gz",
+    "sha256": "4512549958677f6649064e5e5ee6e8da61cdbf76f9c9e1aa15ad3c7f99a8ad2b",
+    "jsonSha256": "6fe935a736a47daa894cc1bbd0ccb543a9f830013542de1ae41307ef25e51b92"
+  },
+  "calibration": {
+    "manifest": {
+      "file": "calibration-manifest.json.gz",
+      "sha256": "a4183c51c6c6e85a16f3cc8175ec1bd2f8cac6d3706571071ac3f92c95ab34b3",
+      "jsonSha256": "2c534bdbb798aae42973746796f519e53c5fe855d1deb77b73e69459b0ad8d40"
+    },
+    "reference": {
+      "file": "calibration-reference.json.gz",
+      "sha256": "bc86eb21cbe7b747e4eadc766757e2fde6c64d9b0d4eebb52b031d583137fd9f",
+      "jsonSha256": "a19a454754e7be973b4a53ff78d43192ba44ffc6a703c6cc22c8c9e2ec91c2fb"
+    }
+  },
+  "builds": {
+    "baseline": {
+      "schema": 1,
+      "commit": "8f18fa7a7380619a299bbbd76217ca3f37121816",
+      "tree": "8be391a28c991eca369569b6efe80f83906c20cd",
+      "node": "v24.13.1",
+      "artifactOrigin": {
+        "sourceWorktree": "/home/jman/Code/Docxodus/.local-closeout/core-closeout-integration",
+        "verificationRecord": "fit-followup-build-verification.json",
+        "verificationSha256": "709944c60b511d092bf2ffb62d38da8a2e9a48b100affc64c35bfe64f32e56ce",
+        "note": "Verified retained production artifacts from this exact source commit. Later changes in original worktree affect tests only. Snapshot provides the exact source/build pairing without rebuilding or relabeling."
+      },
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "685ef031196d29c11ccdaafd4386533da0410b678caac275d182495dc9f2df1c",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      }
+    },
+    "candidate": {
+      "schema": 1,
+      "commit": "1e45809bd8fe987ec74337cfddfe56d18cbdcab6",
+      "tree": "4ef2a3527c877bc61d92375e67c4efbb1235d3c1",
+      "node": "v24.13.1",
+      "artifactOrigin": {
+        "sourceWorktree": "/home/jman/Code/Docxodus/.local-closeout/issue-1565-empty-runs",
+        "verificationRecord": "empty-run-build-verification.json",
+        "verificationSha256": "08cd6f036acc9076426ca4423f3374283d9de6d8f35967b551b09b5fcd7464f4",
+        "note": "Verified retained production artifacts from this exact source commit. Later changes in original worktree affect tests only. Snapshot provides the exact source/build pairing without rebuilding or relabeling."
+      },
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "130f61e8a0e0d1c0aa60c35672915468988772cfacd0127b2e097124ad306d10",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      }
+    }
+  },
+  "rendererAssets": {
+    "baseline": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 626237,
+          "sha256": "422ab3933247ab98daa7cdbaaaa1166c111a702f1cbb849b6162fd475a5f5af4"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 173739,
+          "sha256": "8d2e6180ba6a34766ac12e0d109e348c6bd345c2d549cd7861c2a10b038740ea"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46484,
+          "sha256": "a604dbff16d3be0f0d24cf48753404b42fe25f70fbd1393dde4934871446a420"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5465881,
+          "sha256": "abb6769be5e131c5949f9c559d8ecdee1e9503789c827629f16b5957492b2f07"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "c391ed7ad34b07f8cc39d3ef587d332f6168ff4ce9e1a97f2994b157420fd741"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "5e08586a10f0b0c9e4354438734b392459cd64282ababf7029a48246f6da6d47"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1675029,
+          "sha256": "7216cb9019a8db40a177990f4ae6034cfe3d4f47aa598d221c4675df401082ce"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "a0860a7188606fb90c8a9f57475748ad1af41871579972faeafb0e6b76bbe9e8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10550813,
+          "sha256": "9096ea7cb36f01eeb97e528f0356331e1a55d9fb706080a588aeadfcb4d5c64a"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    },
+    "candidate": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 626237,
+          "sha256": "422ab3933247ab98daa7cdbaaaa1166c111a702f1cbb849b6162fd475a5f5af4"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 173739,
+          "sha256": "8d2e6180ba6a34766ac12e0d109e348c6bd345c2d549cd7861c2a10b038740ea"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46484,
+          "sha256": "a604dbff16d3be0f0d24cf48753404b42fe25f70fbd1393dde4934871446a420"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5466393,
+          "sha256": "c02b5a47102a525b0685e5238a996e2ce1556c7cc1a87fbdacf25406b453b473"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "4e367fef2d4da56416345f5774277382e72a0ad70ff4e3d902dce3f95654e9d3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "5e08586a10f0b0c9e4354438734b392459cd64282ababf7029a48246f6da6d47"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1675029,
+          "sha256": "7216cb9019a8db40a177990f4ae6034cfe3d4f47aa598d221c4675df401082ce"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "0dd11d5387c3980ec39c395a19cc4baa28932a0d31164793d3a4e829fd360ec7"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10551306,
+          "sha256": "206fbd99ba62830cce6b336440dfd9b9c3b4c9aa67bc594ca6baa9ec5ca8bbee"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    }
+  },
+  "captures": {
+    "baseline": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "8f18fa7a7380619a299bbbd76217ca3f37121816",
+      "sourceTree": "8be391a28c991eca369569b6efe80f83906c20cd",
+      "buildIdentitySha256": "1110e8ee0431f086eeb524081ff06d54e243904c2563a2e5829d3e1d8acdf82c",
+      "manifestSha256": "4e3f94b6519045d0abae934673dc7c1aa7847e7bf206b97079ac22dda1b7fdde",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "empty-run-1-control",
+          "inputSha256": "ac13750c3ef8f00190a48ccf993cfd8f06a97efe939fbe89b0a2655fbb83770d",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "61b056bc489f6f80aaa4d138553f743facd906f49d36b7fcf9c710b05b8c8ee5",
+          "renderReportSha256": "d4deb3b6e95be87bae23492abed8dc83321613b3d851220e5dc7f7e9281fc633",
+          "htmlSha256": "df2d5e73a63289bf2965e3da781bc4e4d1c533eafdc4bc85dbe86cf61f04310e",
+          "htmlFactsSha256": "8c9f115e318a733cf0774f042fc3f9a0990c00a2339cd979d7dd01f67960b19e"
+        },
+        {
+          "id": "empty-run-1-leading",
+          "inputSha256": "35688724995dfe769b88fa93eb248ca4ab85e23a2be40e1bd0497e3ec6df8d29",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "e486d96c027780a8b62806dc40e69be63a6857f1abfae8dffda2619466061a25",
+          "renderReportSha256": "e2f916e33a543d6cf5d37d91025fcc86707f9082c073bb4cb790f8a09a102642",
+          "htmlSha256": "1a4e0f5b07814a3a75d2068e83da26c8cbc6e1047f5323faf9f1d53cc83c1c91",
+          "htmlFactsSha256": "fd3a32f31b7eeb105a7741392f3aa7a4a688694dcefcedb3f7cf37d4c184178d"
+        },
+        {
+          "id": "empty-run-1-middle",
+          "inputSha256": "2f521526cd37ec99d3253c94482f3f627dee51f8239d1600a48214321b4fecec",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "243e3e6d1a22a4de5105ae2c1c1c292b271fc986624def9dfd28d1899d05c8d8",
+          "renderReportSha256": "98ef9a9742078f4f39549fc4cfec3059bbc9a55c1fb17eda9d808ea0575a245a",
+          "htmlSha256": "63b5d279ec1935dfd55fcf4f18247d3bcf390bde1d33401f2cddf937965f440b",
+          "htmlFactsSha256": "7ec8094952666b9e292ade0785e85416d106083fd770550ebc79e7e94ec6a8da"
+        },
+        {
+          "id": "empty-run-1-trailing",
+          "inputSha256": "05d9a62e50ceb96a7621173d2367bca84160b0db084429dc0d5596f81eaa9840",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "d6538a8ab019f1ae916bbfeda38cf0c37404836e4cc0768b21cfa75d4edbd842",
+          "renderReportSha256": "7adea63957c9382515ec3d40ccb54453c1c768683c178d6bd6db26c5161e4687",
+          "htmlSha256": "af08b3efcac89d12f1604f26af59f4ce45077fe2ab00e3f937f6305c3676dddc",
+          "htmlFactsSha256": "f74aa96cc6533880129933b4a0211c668b702230362e949e0cdd19ed643dca7f"
+        },
+        {
+          "id": "empty-run-2-control",
+          "inputSha256": "0ba193808ccdfba0bdc30d72e0869f8668b6cb63387a2fbcb11342e39f7278af",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "aebd7681af45e8b4ac3e4a163664b9908ec9d478140fdfb6a35e053c25543eaa",
+          "renderReportSha256": "de66b496ec8676c1a33ea502978ee9dc3a662203a953fc7e0a3fe92dfd406ff6",
+          "htmlSha256": "5df1430c6ba829a437743aee6936703b8dd40436d0c66ee658c4e22b099f3e1e",
+          "htmlFactsSha256": "a23a8e5c8f3f9f7802ed5891f7f63cefdda3c8413dedfdaa36f0bfe72af1f8d4"
+        },
+        {
+          "id": "empty-run-2-leading",
+          "inputSha256": "c7fda9277d9f647d76c5b39a6e433e78b9483184f2372d2f1d2b2ea38d416d01",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "2ef2614581ee6295f3e6fcd6bebd3877260f86a937965f1f38cb76574a73392d",
+          "renderReportSha256": "ac4affce76ebe5ba5e3da56e76f6c93dfff73b5c359a73c58acf02e78c95a93c",
+          "htmlSha256": "371754245a261681b91a5c3de8cf6ea902d23615ef0079041f90564e6261c779",
+          "htmlFactsSha256": "5ad9937ee98f8006dd2531f97424896a94651bc98530bb6e38682881e12e6325"
+        },
+        {
+          "id": "empty-run-2-middle",
+          "inputSha256": "b56d3a9a89d23a6a22b9ae0e29ead0d85254727bc2ead26b2a3404060f362a39",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "be72e7cdecd31fecc038a8580b01e2bf17992a336e111bbb8ca9c1ad77c2daac",
+          "renderReportSha256": "c127aba22fdce40aa6772393a13da23f23c2c23518ada2f1c2157ddbe468ecb6",
+          "htmlSha256": "3ee82fb7a51b52688071bc12452eddf8f203911807317ac5c1cf44e5ee835d90",
+          "htmlFactsSha256": "2b7a8c4101ec330decd9aed4efdc87522ba208063889a7b74320951f467dde61"
+        },
+        {
+          "id": "empty-run-2-trailing",
+          "inputSha256": "3281ea9f679ae83471e8cafbdf68f3187f33caf4e34d3ef98eeb3682605d4e47",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "2200d0bfd8ce5d4fe310100ec401262ef9846142dd236c905ad86f308581fe7c",
+          "renderReportSha256": "577d15121be4dda7523ba49422c2d123eb2e14914b0281ad226fac2c07ca3a0b",
+          "htmlSha256": "a2fc6506a6a0e4badb5e97bd10d22af99c97e45489f7ed89949fecaec8aa1173",
+          "htmlFactsSha256": "a4b19a8b58ac9b85acaa60fe135c6637bc033fe179730e56c824af8cf5607042"
+        }
+      ],
+      "htmlInspectorSha256": "87805e278400914cd87a2fe8e89c498748b7f45eecd5ca432b9c2be2d95b4cbb"
+    },
+    "candidate": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "1e45809bd8fe987ec74337cfddfe56d18cbdcab6",
+      "sourceTree": "4ef2a3527c877bc61d92375e67c4efbb1235d3c1",
+      "buildIdentitySha256": "164482bfc2ec457fbb01633ffbc20eb53285e0521bbf31d313c10062d884a405",
+      "manifestSha256": "4e3f94b6519045d0abae934673dc7c1aa7847e7bf206b97079ac22dda1b7fdde",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "empty-run-1-control",
+          "inputSha256": "ac13750c3ef8f00190a48ccf993cfd8f06a97efe939fbe89b0a2655fbb83770d",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "20594c9485fe79a7bf826daef4dfff9ef4b269b6ef8eeafdf2e6b69f4f23779e",
+          "renderReportSha256": "71960779025ee6de85ad2067a19fd257cd12eefd0023876a3c86aeca9272ea1f",
+          "htmlSha256": "df2d5e73a63289bf2965e3da781bc4e4d1c533eafdc4bc85dbe86cf61f04310e",
+          "htmlFactsSha256": "8c9f115e318a733cf0774f042fc3f9a0990c00a2339cd979d7dd01f67960b19e"
+        },
+        {
+          "id": "empty-run-1-leading",
+          "inputSha256": "35688724995dfe769b88fa93eb248ca4ab85e23a2be40e1bd0497e3ec6df8d29",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "a1a9a6d4a9a5abba64f9b856cb23fc93735181f4890dbe4a845568fed070de1e",
+          "renderReportSha256": "d829cb278f9040610db5ea3517012a073e9a7ea102915877d6aeda96972d6ca9",
+          "htmlSha256": "69f6b199912f1fc5431e527fd43c4b3973573bc368da788561cf76c8ea73f9e5",
+          "htmlFactsSha256": "67bb6d49e54b2b8fc6f617fe58db721f3e9b638ecfc25eec8d7b5eb7921cc0c9"
+        },
+        {
+          "id": "empty-run-1-middle",
+          "inputSha256": "2f521526cd37ec99d3253c94482f3f627dee51f8239d1600a48214321b4fecec",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "ce2756bbfb0a9528f651ea20352e4f8c2f7877399ebfe7739b0aed7e305de176",
+          "renderReportSha256": "452011d6dcb596fcf87bcb08f6608237a02a19c9654efb1be0a63c3c27de33ab",
+          "htmlSha256": "d16e93bcdbbc5be86b700c1c5b9e390cd37421593126f554ecb1f7d06c2aa53d",
+          "htmlFactsSha256": "6aaa9d2c2f319c90b72d9dbee81255c20de3fcf462374657ad7e4ab1b941e8e3"
+        },
+        {
+          "id": "empty-run-1-trailing",
+          "inputSha256": "05d9a62e50ceb96a7621173d2367bca84160b0db084429dc0d5596f81eaa9840",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "5dec9679b4b250752614c34e6304b1c9e3cbd5daebcf87437f51348da0ea0514",
+          "renderReportSha256": "63c5cd14847b5b331adfb5103ce901f6575d3c295dd079de6fa4578cb0cfbe23",
+          "htmlSha256": "5c891dc1aa3ac8bcffe1573df2cd9d558bc186bb3bc322a142295ec2086930b6",
+          "htmlFactsSha256": "8d9bd8f3de734897378f9427b2ebeb2fc1b66427d9d0c7cf5fe6560824d5e733"
+        },
+        {
+          "id": "empty-run-2-control",
+          "inputSha256": "0ba193808ccdfba0bdc30d72e0869f8668b6cb63387a2fbcb11342e39f7278af",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "b99615e230d470153599707b5889405aeb80c0806f9d8a00280d4875c2195113",
+          "renderReportSha256": "632b6a83586b033d4351fd9a4abb6ffe6c5273679fd9ad205899b22d8b281b77",
+          "htmlSha256": "5df1430c6ba829a437743aee6936703b8dd40436d0c66ee658c4e22b099f3e1e",
+          "htmlFactsSha256": "a23a8e5c8f3f9f7802ed5891f7f63cefdda3c8413dedfdaa36f0bfe72af1f8d4"
+        },
+        {
+          "id": "empty-run-2-leading",
+          "inputSha256": "c7fda9277d9f647d76c5b39a6e433e78b9483184f2372d2f1d2b2ea38d416d01",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "acbc1ac78bdd625ef567d4541febd39edf90c4932616bd440d08aded7b673709",
+          "renderReportSha256": "bb6439c932e5fafb8e3bd4641d6206b925b12fbda3a30f4a8a8674f16f780909",
+          "htmlSha256": "f7e4bcd949f102ba27fd0824820ce05351c2b1f8febf48dd5d4c425a4edbdb0d",
+          "htmlFactsSha256": "0e13e0fce981eb388cc04da070ae92d808f87bc4d1360648d0bded2415e95af4"
+        },
+        {
+          "id": "empty-run-2-middle",
+          "inputSha256": "b56d3a9a89d23a6a22b9ae0e29ead0d85254727bc2ead26b2a3404060f362a39",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "24eb3f15b4b8249ff7d1900609a4b9955055d6e40c0407820696e0865513d355",
+          "renderReportSha256": "0c245d2d0449c886c12c4aa1f0ee06665e15280dececb7c03e443a4d942422c1",
+          "htmlSha256": "34cd3fb3db281619a6e4bf2bc938168eb79cfd320dabcb7dbf108f1bf805437f",
+          "htmlFactsSha256": "2153aaee10c9e2d6f1731701ad48c45366f5575c788a39fff2b873467448a61b"
+        },
+        {
+          "id": "empty-run-2-trailing",
+          "inputSha256": "3281ea9f679ae83471e8cafbdf68f3187f33caf4e34d3ef98eeb3682605d4e47",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "bd6ab15137ffaa2305735edeba0a168d6e377557b5e812fc867d02e4e9647d7a",
+          "renderReportSha256": "1416e93adaca0171c6dc9164b33fb6d2d550c83290b5331a8eeea4a47ada4506",
+          "htmlSha256": "1d5ee1d139faaa04db3f66e398441abedc4c238db6ecc24706d80aa17d693d33",
+          "htmlFactsSha256": "7774ae4246a238cced590fb8bc55cb47ca102433e2a3deb7e52b4a57a75e2ef4"
+        }
+      ],
+      "htmlInspectorSha256": "87805e278400914cd87a2fe8e89c498748b7f45eecd5ca432b9c2be2d95b4cbb"
+    }
+  },
+  "referenceBundleSha256": "9a17f1921b4e225b7e4a9e05a781c69c77221bf3cff7389772a466e0fa07e345",
+  "referenceBundle": {
+    "file": "reference-bundle.json.gz",
+    "sha256": "f2c37c3a61c239e6203218bdbb015f943edf1271d0f7e4d25276d76db56fd2c9",
+    "jsonSha256": "9a17f1921b4e225b7e4a9e05a781c69c77221bf3cff7389772a466e0fa07e345"
+  },
+  "referenceEnvironment": {
+    "fonts": {
+      "LiberationSerif-Bold.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+      },
+      "LiberationSerif-BoldItalic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+      },
+      "LiberationSerif-Italic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+      },
+      "LiberationSerif-Regular.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+      }
+    },
+    "tools": {
+      "pdffonts": {
+        "sha256": "de0a6d649710c2ebc226656b08c70814019a93f58889f79bf1dac726a131beda",
+        "version": "pdffonts version 25.03.0"
+      },
+      "pdftocairo": {
+        "sha256": "6f56c7c8c5b015354ebed053d4b52e14b43611c9c86236562bfd112827108dc5",
+        "version": "pdftocairo version 25.03.0"
+      },
+      "pdftoppm": {
+        "sha256": "6c315e59db2a0829ecdfb6c791ad3f56bc9bd508266d20adc22238df447a74a3",
+        "version": "pdftoppm version 25.03.0"
+      },
+      "pdftotext": {
+        "sha256": "451784e28a4593637573e534d9be4c4487a3cccffae22a71e93162faa84de23c",
+        "version": "pdftotext version 25.03.0"
+      },
+      "qpdf": {
+        "sha256": "0d0462ea848601a652b666e83a07a095bb0c4d69d831beb6f94ea8e6e008f34c",
+        "version": "qpdf version 12.2.0"
+      }
+    }
+  },
+  "schema": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "documents": {
+      "fixtures/empty-run-1-control.docx": [],
+      "fixtures/empty-run-1-leading.docx": [],
+      "fixtures/empty-run-1-middle.docx": [],
+      "fixtures/empty-run-1-trailing.docx": [],
+      "fixtures/empty-run-2-control.docx": [],
+      "fixtures/empty-run-2-leading.docx": [],
+      "fixtures/empty-run-2-middle.docx": [],
+      "fixtures/empty-run-2-trailing.docx": []
+    }
+  },
+  "cases": [
+    {
+      "id": "empty-run-1-control",
+      "inputSha256": "ac13750c3ef8f00190a48ccf993cfd8f06a97efe939fbe89b0a2655fbb83770d",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "empty-run-1-control-baseline-report.json.gz",
+            "sha256": "b1c3e1ab87505e6ecba4ddab0f69120a87985462c06c32469f2c5dfcc21b033a",
+            "jsonSha256": "d4deb3b6e95be87bae23492abed8dc83321613b3d851220e5dc7f7e9281fc633"
+          },
+          "htmlSha256": "df2d5e73a63289bf2965e3da781bc4e4d1c533eafdc4bc85dbe86cf61f04310e",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499998999999988,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.249999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.5,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.249999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.5,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.25,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.25,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.25,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999999999972,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.249999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            }
+          ],
+          "stepsPt": [
+            13.499998999999988,
+            14.249999000000003
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-1-control-baseline.pdf",
+          "pdfSha256": "61b056bc489f6f80aaa4d138553f743facd906f49d36b7fcf9c710b05b8c8ee5",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "empty-run-1-control-baseline-inspection.json.gz",
+            "sha256": "0b4320c88e24a5662289b0759fbf3687c678cb572327950a0a9a43f8857b1f52",
+            "jsonSha256": "7b41a34f8bf5fa51a093636fde30f7ef7096dbc590c3fb83edcd5268949e5084"
+          },
+          "pageRasterSha256": [
+            "6a091bd2c478251bab0bb95bbcc68360ebcf92319e6e8beb30817c7485ce000b"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999997,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999997,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999997,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999983,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999983,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999983,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999983,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.80000000000004,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999955,
+              "tolerancePt": 0.75,
+              "passed": true
+            }
+          ],
+          "stepsPt": [
+            13.800000000000011,
+            13.799999999999997
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-1-control-reference.pdf",
+          "pdfSha256": "2c905da3c21cba1f95e27d646d5da4edd15079979ede89fe48b8afaf7401ba59",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "empty-run-1-control-reference-inspection.json.gz",
+            "sha256": "91ec4a0c013f290d777eabdb78a21581549c90d7a6f356f6892c592043b72b05",
+            "jsonSha256": "7a6099235fcfeaed75fceea74e96aea56dbcc5448b19b9602be1c3458fc231f8"
+          },
+          "pageRasterSha256": [
+            "0819980cb9cfc2cb114f294a796eef6ad2d197ddebb7f756dfd17b219e19598d"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "empty-run-1-control-candidate-report.json.gz",
+            "sha256": "31ae388820556aafdbb3ea87823c4c8a884e8468706efeba502360b8723780d9",
+            "jsonSha256": "71960779025ee6de85ad2067a19fd257cd12eefd0023876a3c86aeca9272ea1f"
+          },
+          "htmlSha256": "df2d5e73a63289bf2965e3da781bc4e4d1c533eafdc4bc85dbe86cf61f04310e",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499998999999988,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.249999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.5,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.249999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.5,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.25,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.25,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.25,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999999999972,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.249999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            }
+          ],
+          "stepsPt": [
+            13.499998999999988,
+            14.249999000000003
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-1-control-candidate.pdf",
+          "pdfSha256": "20594c9485fe79a7bf826daef4dfff9ef4b269b6ef8eeafdf2e6b69f4f23779e",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "empty-run-1-control-candidate-inspection.json.gz",
+            "sha256": "0b4320c88e24a5662289b0759fbf3687c678cb572327950a0a9a43f8857b1f52",
+            "jsonSha256": "7b41a34f8bf5fa51a093636fde30f7ef7096dbc590c3fb83edcd5268949e5084"
+          },
+          "pageRasterSha256": [
+            "6a091bd2c478251bab0bb95bbcc68360ebcf92319e6e8beb30817c7485ce000b"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "empty-run-1-control.png",
+        "sha256": "c04178107a5f9bee51d94ffd50ddd12a0e9ffa659ec775b8cea1219c54f94c2e"
+      }
+    },
+    {
+      "id": "empty-run-1-leading",
+      "inputSha256": "35688724995dfe769b88fa93eb248ca4ab85e23a2be40e1bd0497e3ec6df8d29",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "empty-run-1-leading-baseline-report.json.gz",
+            "sha256": "88c24e5a5a244bf4cd8332ea9844e83fa5b355023eac3c113c873096b3177fe2",
+            "jsonSha256": "e2f916e33a543d6cf5d37d91025fcc86707f9082c073bb4cb790f8a09a102642"
+          },
+          "htmlSha256": "1a4e0f5b07814a3a75d2068e83da26c8cbc6e1047f5323faf9f1d53cc83c1c91",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 13.798828125,
+              "observedPt": 16.49999899999999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 13.798828125,
+              "observedPt": 16.5,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 13.798828125,
+              "observedPt": 16.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.75,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 13.798828125,
+              "observedPt": 16.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 13.798828125,
+              "observedPt": 16.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.75,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 13.798828125,
+              "observedPt": 16.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.749998999999974,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 13.798828125,
+              "observedPt": 16.5,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            }
+          ],
+          "stepsPt": [
+            16.49999899999999,
+            15.749999000000003
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-1-leading-baseline.pdf",
+          "pdfSha256": "e486d96c027780a8b62806dc40e69be63a6857f1abfae8dffda2619466061a25",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "empty-run-1-leading-baseline-inspection.json.gz",
+            "sha256": "36e0d1b7012912866b733ce70da6d044edfbd6326cadcf063228f4286aff51db",
+            "jsonSha256": "020c99444d8e1b00a660697f994a7d5421e6a864825bc650b16a7529fd7c94da"
+          },
+          "pageRasterSha256": [
+            "8960791a69f12ee6b96452f85869646659fe0459c589a956c5e41a3115596354"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999997,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999997,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999997,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999983,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999983,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999983,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999983,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.80000000000004,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999955,
+              "tolerancePt": 0.75,
+              "passed": true
+            }
+          ],
+          "stepsPt": [
+            13.800000000000011,
+            13.799999999999997
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-1-leading-reference.pdf",
+          "pdfSha256": "1c212199f76ee4ac1a1bda5ddc992c748f993e07ae450d91bef9c030a04168de",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "empty-run-1-leading-reference-inspection.json.gz",
+            "sha256": "91ec4a0c013f290d777eabdb78a21581549c90d7a6f356f6892c592043b72b05",
+            "jsonSha256": "7a6099235fcfeaed75fceea74e96aea56dbcc5448b19b9602be1c3458fc231f8"
+          },
+          "pageRasterSha256": [
+            "0819980cb9cfc2cb114f294a796eef6ad2d197ddebb7f756dfd17b219e19598d"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "empty-run-1-leading-candidate-report.json.gz",
+            "sha256": "e2f718bdbbaff47342fbd59af93c89e9f75f4dae00011e9c6af824fff0835938",
+            "jsonSha256": "d829cb278f9040610db5ea3517012a073e9a7ea102915877d6aeda96972d6ca9"
+          },
+          "htmlSha256": "69f6b199912f1fc5431e527fd43c4b3973573bc368da788561cf76c8ea73f9e5",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499998999999988,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.249999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.5,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.249999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.5,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.25,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.25,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.25,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999999999972,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.249999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            }
+          ],
+          "stepsPt": [
+            13.499998999999988,
+            14.249999000000003
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-1-leading-candidate.pdf",
+          "pdfSha256": "a1a9a6d4a9a5abba64f9b856cb23fc93735181f4890dbe4a845568fed070de1e",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "empty-run-1-leading-candidate-inspection.json.gz",
+            "sha256": "0b4320c88e24a5662289b0759fbf3687c678cb572327950a0a9a43f8857b1f52",
+            "jsonSha256": "7b41a34f8bf5fa51a093636fde30f7ef7096dbc590c3fb83edcd5268949e5084"
+          },
+          "pageRasterSha256": [
+            "6a091bd2c478251bab0bb95bbcc68360ebcf92319e6e8beb30817c7485ce000b"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "empty-run-1-leading.png",
+        "sha256": "f08b626fc675553c0e0027b0ed2dc301ed563e0a5722bb046800ce2239218ea3"
+      }
+    },
+    {
+      "id": "empty-run-1-middle",
+      "inputSha256": "2f521526cd37ec99d3253c94482f3f627dee51f8239d1600a48214321b4fecec",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "empty-run-1-middle-baseline-report.json.gz",
+            "sha256": "6e93c770770fa25f0e23796a075454f08d39d239b11807ecc6680249c6523a2d",
+            "jsonSha256": "98ef9a9742078f4f39549fc4cfec3059bbc9a55c1fb17eda9d808ea0575a245a"
+          },
+          "htmlSha256": "63b5d279ec1935dfd55fcf4f18247d3bcf390bde1d33401f2cddf937965f440b",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 13.798828125,
+              "observedPt": 16.49999899999999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 13.798828125,
+              "observedPt": 16.5,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 13.798828125,
+              "observedPt": 16.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.75,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 13.798828125,
+              "observedPt": 16.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 13.798828125,
+              "observedPt": 16.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.75,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 13.798828125,
+              "observedPt": 16.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.749998999999974,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 13.798828125,
+              "observedPt": 16.5,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            }
+          ],
+          "stepsPt": [
+            16.49999899999999,
+            15.749999000000003
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-1-middle-baseline.pdf",
+          "pdfSha256": "243e3e6d1a22a4de5105ae2c1c1c292b271fc986624def9dfd28d1899d05c8d8",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "empty-run-1-middle-baseline-inspection.json.gz",
+            "sha256": "36e0d1b7012912866b733ce70da6d044edfbd6326cadcf063228f4286aff51db",
+            "jsonSha256": "020c99444d8e1b00a660697f994a7d5421e6a864825bc650b16a7529fd7c94da"
+          },
+          "pageRasterSha256": [
+            "8960791a69f12ee6b96452f85869646659fe0459c589a956c5e41a3115596354"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999997,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999997,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999997,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999983,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999983,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999983,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999983,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.80000000000004,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999955,
+              "tolerancePt": 0.75,
+              "passed": true
+            }
+          ],
+          "stepsPt": [
+            13.800000000000011,
+            13.799999999999997
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-1-middle-reference.pdf",
+          "pdfSha256": "495a84790b8c54ddc83e81ae5b398325f16839f08fd7216b3d00dc9179830d6b",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "empty-run-1-middle-reference-inspection.json.gz",
+            "sha256": "91ec4a0c013f290d777eabdb78a21581549c90d7a6f356f6892c592043b72b05",
+            "jsonSha256": "7a6099235fcfeaed75fceea74e96aea56dbcc5448b19b9602be1c3458fc231f8"
+          },
+          "pageRasterSha256": [
+            "0819980cb9cfc2cb114f294a796eef6ad2d197ddebb7f756dfd17b219e19598d"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "empty-run-1-middle-candidate-report.json.gz",
+            "sha256": "6dec3a5297966502e0f0ebed8a2f9dc0f2e580af7803e10cb81273b24abf5241",
+            "jsonSha256": "452011d6dcb596fcf87bcb08f6608237a02a19c9654efb1be0a63c3c27de33ab"
+          },
+          "htmlSha256": "d16e93bcdbbc5be86b700c1c5b9e390cd37421593126f554ecb1f7d06c2aa53d",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499998999999988,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.249999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.5,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.249999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.5,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.25,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.25,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.25,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999999999972,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.249999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            }
+          ],
+          "stepsPt": [
+            13.499998999999988,
+            14.249999000000003
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-1-middle-candidate.pdf",
+          "pdfSha256": "ce2756bbfb0a9528f651ea20352e4f8c2f7877399ebfe7739b0aed7e305de176",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "empty-run-1-middle-candidate-inspection.json.gz",
+            "sha256": "0b4320c88e24a5662289b0759fbf3687c678cb572327950a0a9a43f8857b1f52",
+            "jsonSha256": "7b41a34f8bf5fa51a093636fde30f7ef7096dbc590c3fb83edcd5268949e5084"
+          },
+          "pageRasterSha256": [
+            "6a091bd2c478251bab0bb95bbcc68360ebcf92319e6e8beb30817c7485ce000b"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "empty-run-1-middle.png",
+        "sha256": "4adbbbfe41fdbac1d47798e860b64ce56f3d3ce276df97ce1dc937e5e4a5b7e5"
+      }
+    },
+    {
+      "id": "empty-run-1-trailing",
+      "inputSha256": "05d9a62e50ceb96a7621173d2367bca84160b0db084429dc0d5596f81eaa9840",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "empty-run-1-trailing-baseline-report.json.gz",
+            "sha256": "9145a989cacc59a7e1965827c5be17049d8fa37ddaefae9e6c815d63ad282c2d",
+            "jsonSha256": "7adea63957c9382515ec3d40ccb54453c1c768683c178d6bd6db26c5161e4687"
+          },
+          "htmlSha256": "af08b3efcac89d12f1604f26af59f4ce45077fe2ab00e3f937f6305c3676dddc",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 13.798828125,
+              "observedPt": 16.49999899999999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 13.798828125,
+              "observedPt": 16.5,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 13.798828125,
+              "observedPt": 16.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.75,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 13.798828125,
+              "observedPt": 16.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 13.798828125,
+              "observedPt": 16.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.75,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 13.798828125,
+              "observedPt": 16.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.749998999999974,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 13.798828125,
+              "observedPt": 16.5,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 13.798828125,
+              "observedPt": 15.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": false
+            }
+          ],
+          "stepsPt": [
+            16.49999899999999,
+            15.749999000000003
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-1-trailing-baseline.pdf",
+          "pdfSha256": "d6538a8ab019f1ae916bbfeda38cf0c37404836e4cc0768b21cfa75d4edbd842",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "empty-run-1-trailing-baseline-inspection.json.gz",
+            "sha256": "36e0d1b7012912866b733ce70da6d044edfbd6326cadcf063228f4286aff51db",
+            "jsonSha256": "020c99444d8e1b00a660697f994a7d5421e6a864825bc650b16a7529fd7c94da"
+          },
+          "pageRasterSha256": [
+            "8960791a69f12ee6b96452f85869646659fe0459c589a956c5e41a3115596354"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999997,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999997,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999997,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999983,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999983,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999983,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.800000000000011,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999983,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.80000000000004,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.799999999999955,
+              "tolerancePt": 0.75,
+              "passed": true
+            }
+          ],
+          "stepsPt": [
+            13.800000000000011,
+            13.799999999999997
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-1-trailing-reference.pdf",
+          "pdfSha256": "22a624440b28875217db4ee07f18029a872715efd32002c2995e7300a8e7ae5c",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "empty-run-1-trailing-reference-inspection.json.gz",
+            "sha256": "91ec4a0c013f290d777eabdb78a21581549c90d7a6f356f6892c592043b72b05",
+            "jsonSha256": "7a6099235fcfeaed75fceea74e96aea56dbcc5448b19b9602be1c3458fc231f8"
+          },
+          "pageRasterSha256": [
+            "0819980cb9cfc2cb114f294a796eef6ad2d197ddebb7f756dfd17b219e19598d"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "empty-run-1-trailing-candidate-report.json.gz",
+            "sha256": "bd4025ea240bdce4fa1d174d982c28c1df21c6cecb7ed67cb77037d18766795e",
+            "jsonSha256": "63c5cd14847b5b331adfb5103ce901f6575d3c295dd079de6fa4578cb0cfbe23"
+          },
+          "htmlSha256": "5c891dc1aa3ac8bcffe1573df2cd9d558bc186bb3bc322a142295ec2086930b6",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499998999999988,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.249999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.5,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.249999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.5,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.25,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.25,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.25,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 13.798828125,
+              "observedPt": 13.499999999999972,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 13.798828125,
+              "observedPt": 14.249999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            }
+          ],
+          "stepsPt": [
+            13.499998999999988,
+            14.249999000000003
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-1-trailing-candidate.pdf",
+          "pdfSha256": "5dec9679b4b250752614c34e6304b1c9e3cbd5daebcf87437f51348da0ea0514",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "empty-run-1-trailing-candidate-inspection.json.gz",
+            "sha256": "0b4320c88e24a5662289b0759fbf3687c678cb572327950a0a9a43f8857b1f52",
+            "jsonSha256": "7b41a34f8bf5fa51a093636fde30f7ef7096dbc590c3fb83edcd5268949e5084"
+          },
+          "pageRasterSha256": [
+            "6a091bd2c478251bab0bb95bbcc68360ebcf92319e6e8beb30817c7485ce000b"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "empty-run-1-trailing.png",
+        "sha256": "328ed2c0a9ef9cb1b2156faa634898bb3d8a0e67fcdcbdc7e4dac2e83bce922c"
+      }
+    },
+    {
+      "id": "empty-run-2-control",
+      "inputSha256": "0ba193808ccdfba0bdc30d72e0869f8668b6cb63387a2fbcb11342e39f7278af",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "empty-run-2-control-baseline-report.json.gz",
+            "sha256": "3719893709826e29b033bfc6c5497d6e5e5511abf7dfb0116f083e6f25bb892c",
+            "jsonSha256": "de66b496ec8676c1a33ea502978ee9dc3a662203a953fc7e0a3fe92dfd406ff6"
+          },
+          "htmlSha256": "5df1430c6ba829a437743aee6936703b8dd40436d0c66ee658c4e22b099f3e1e",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.74999799999999,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 27.59765625,
+              "observedPt": 26.999999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749998999999974,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 27.59765625,
+              "observedPt": 26.999998000000005,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 27.59765625,
+              "observedPt": 26.999999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749998000000005,
+              "tolerancePt": 0.75,
+              "passed": true
+            }
+          ],
+          "stepsPt": [
+            27.74999799999999,
+            27.749999000000003
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-2-control-baseline.pdf",
+          "pdfSha256": "aebd7681af45e8b4ac3e4a163664b9908ec9d478140fdfb6a35e053c25543eaa",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "empty-run-2-control-baseline-inspection.json.gz",
+            "sha256": "1267e7184c01d21390edab761c30896cdc3b36c0f9bcf86f3b1159df18ddf12c",
+            "jsonSha256": "8ee8aa6f62c0ef3e2f2e8a0081148a61010ee0ffca75d9a2d9447dfabaf9e7ef"
+          },
+          "pageRasterSha256": [
+            "68af6acd1dfd9ab8ec61f8372c0414c35c8a5c7c592b8c587bdaa4dcb374e5a6"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.60000000000001,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999994,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999994,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999994,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999994,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999966,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999966,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999966,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999966,
+              "tolerancePt": 0.75,
+              "passed": true
+            }
+          ],
+          "stepsPt": [
+            27.60000000000001,
+            27.599999999999994
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-2-control-reference.pdf",
+          "pdfSha256": "4d9485c0cd1c64d3d140c9a77c808400ec668301c80aa6b0305f152695bb6e15",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "empty-run-2-control-reference-inspection.json.gz",
+            "sha256": "434c0d76d214383600fb5d166aa7a9c84f21f12a98be4aa6de7f972131c8b23b",
+            "jsonSha256": "91dbff11a96b55812416f2d78ff99b33039d5d8ffa63dc5a55f85e171864fb10"
+          },
+          "pageRasterSha256": [
+            "14a6fc2abce9b88f89fae7ef0c12df10841c7ce510afdb6d247f774146739a6a"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "empty-run-2-control-candidate-report.json.gz",
+            "sha256": "e94f95785c1fec88b77b3f33664b578d8cd03458777e36239f858de4d65dc4ad",
+            "jsonSha256": "632b6a83586b033d4351fd9a4abb6ffe6c5273679fd9ad205899b22d8b281b77"
+          },
+          "htmlSha256": "5df1430c6ba829a437743aee6936703b8dd40436d0c66ee658c4e22b099f3e1e",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.74999799999999,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 27.59765625,
+              "observedPt": 26.999999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749998999999974,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 27.59765625,
+              "observedPt": 26.999998000000005,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 27.59765625,
+              "observedPt": 26.999999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749998000000005,
+              "tolerancePt": 0.75,
+              "passed": true
+            }
+          ],
+          "stepsPt": [
+            27.74999799999999,
+            27.749999000000003
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-2-control-candidate.pdf",
+          "pdfSha256": "b99615e230d470153599707b5889405aeb80c0806f9d8a00280d4875c2195113",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "empty-run-2-control-candidate-inspection.json.gz",
+            "sha256": "1267e7184c01d21390edab761c30896cdc3b36c0f9bcf86f3b1159df18ddf12c",
+            "jsonSha256": "8ee8aa6f62c0ef3e2f2e8a0081148a61010ee0ffca75d9a2d9447dfabaf9e7ef"
+          },
+          "pageRasterSha256": [
+            "68af6acd1dfd9ab8ec61f8372c0414c35c8a5c7c592b8c587bdaa4dcb374e5a6"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "empty-run-2-control.png",
+        "sha256": "6ef203b38aad10710b9adf2765e0c67e9c48d4e56eae514687508abb7a549946"
+      }
+    },
+    {
+      "id": "empty-run-2-leading",
+      "inputSha256": "c7fda9277d9f647d76c5b39a6e433e78b9483184f2372d2f1d2b2ea38d416d01",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "empty-run-2-leading-baseline-report.json.gz",
+            "sha256": "759e5067b3552ecba63d74103e73524f88ad2d30d6dca4483a21be065f7ae984",
+            "jsonSha256": "ac4affce76ebe5ba5e3da56e76f6c93dfff73b5c359a73c58acf02e78c95a93c"
+          },
+          "htmlSha256": "371754245a261681b91a5c3de8cf6ea902d23615ef0079041f90564e6261c779",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.24999799999999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249998000000005,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.24999799999998,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249998000000005,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 27.59765625,
+              "observedPt": 31.499998000000005,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249998999999946,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249998000000005,
+              "tolerancePt": 0.75,
+              "passed": false
+            }
+          ],
+          "stepsPt": [
+            32.24999799999999,
+            32.249999
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-2-leading-baseline.pdf",
+          "pdfSha256": "2ef2614581ee6295f3e6fcd6bebd3877260f86a937965f1f38cb76574a73392d",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "empty-run-2-leading-baseline-inspection.json.gz",
+            "sha256": "72e45b76ef22904871a6633e50107b7add7272d0c31ca43ce09b81ebcd384507",
+            "jsonSha256": "1e80c29d18bd252491d4ae2e89f0988d73e2f8020b3c189c67b4e906c3172e08"
+          },
+          "pageRasterSha256": [
+            "276c53b47d14ed08adc0648a99c05303037d376af13b8b8ce54268b96b7a61e4"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.60000000000001,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999994,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999994,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999994,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999994,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999966,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999966,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999966,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999966,
+              "tolerancePt": 0.75,
+              "passed": true
+            }
+          ],
+          "stepsPt": [
+            27.60000000000001,
+            27.599999999999994
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-2-leading-reference.pdf",
+          "pdfSha256": "7ca4d77bea59095eefc0cad49d1cfe23a35e38f8848e4808cc8c1e0bfb16f19a",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "empty-run-2-leading-reference-inspection.json.gz",
+            "sha256": "434c0d76d214383600fb5d166aa7a9c84f21f12a98be4aa6de7f972131c8b23b",
+            "jsonSha256": "91dbff11a96b55812416f2d78ff99b33039d5d8ffa63dc5a55f85e171864fb10"
+          },
+          "pageRasterSha256": [
+            "14a6fc2abce9b88f89fae7ef0c12df10841c7ce510afdb6d247f774146739a6a"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "empty-run-2-leading-candidate-report.json.gz",
+            "sha256": "e84e868b1a80c6a1180a754be9c98910798f705eb6cde10950b3438f9cdef761",
+            "jsonSha256": "bb6439c932e5fafb8e3bd4641d6206b925b12fbda3a30f4a8a8674f16f780909"
+          },
+          "htmlSha256": "f7e4bcd949f102ba27fd0824820ce05351c2b1f8febf48dd5d4c425a4edbdb0d",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.74999799999999,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 27.59765625,
+              "observedPt": 26.999999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749998999999974,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 27.59765625,
+              "observedPt": 26.999998000000005,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 27.59765625,
+              "observedPt": 26.999999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749998000000005,
+              "tolerancePt": 0.75,
+              "passed": true
+            }
+          ],
+          "stepsPt": [
+            27.74999799999999,
+            27.749999000000003
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-2-leading-candidate.pdf",
+          "pdfSha256": "acbc1ac78bdd625ef567d4541febd39edf90c4932616bd440d08aded7b673709",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "empty-run-2-leading-candidate-inspection.json.gz",
+            "sha256": "1267e7184c01d21390edab761c30896cdc3b36c0f9bcf86f3b1159df18ddf12c",
+            "jsonSha256": "8ee8aa6f62c0ef3e2f2e8a0081148a61010ee0ffca75d9a2d9447dfabaf9e7ef"
+          },
+          "pageRasterSha256": [
+            "68af6acd1dfd9ab8ec61f8372c0414c35c8a5c7c592b8c587bdaa4dcb374e5a6"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "empty-run-2-leading.png",
+        "sha256": "e3ac799191db7225167db18d58358c778b051fd0da2af4ccb3493a9072eecd61"
+      }
+    },
+    {
+      "id": "empty-run-2-middle",
+      "inputSha256": "b56d3a9a89d23a6a22b9ae0e29ead0d85254727bc2ead26b2a3404060f362a39",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "empty-run-2-middle-baseline-report.json.gz",
+            "sha256": "62a35532d85d9ea9efaa8e020c7f22dd9d107b4ecd32d108131b490875449c4f",
+            "jsonSha256": "c127aba22fdce40aa6772393a13da23f23c2c23518ada2f1c2157ddbe468ecb6"
+          },
+          "htmlSha256": "3ee82fb7a51b52688071bc12452eddf8f203911807317ac5c1cf44e5ee835d90",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.24999799999999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249998000000005,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.24999799999998,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249998000000005,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 27.59765625,
+              "observedPt": 31.499998000000005,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249998999999946,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249998000000005,
+              "tolerancePt": 0.75,
+              "passed": false
+            }
+          ],
+          "stepsPt": [
+            32.24999799999999,
+            32.249999
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-2-middle-baseline.pdf",
+          "pdfSha256": "be72e7cdecd31fecc038a8580b01e2bf17992a336e111bbb8ca9c1ad77c2daac",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "empty-run-2-middle-baseline-inspection.json.gz",
+            "sha256": "72e45b76ef22904871a6633e50107b7add7272d0c31ca43ce09b81ebcd384507",
+            "jsonSha256": "1e80c29d18bd252491d4ae2e89f0988d73e2f8020b3c189c67b4e906c3172e08"
+          },
+          "pageRasterSha256": [
+            "276c53b47d14ed08adc0648a99c05303037d376af13b8b8ce54268b96b7a61e4"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.60000000000001,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999994,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999994,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999994,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999994,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999966,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999966,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999966,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999966,
+              "tolerancePt": 0.75,
+              "passed": true
+            }
+          ],
+          "stepsPt": [
+            27.60000000000001,
+            27.599999999999994
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-2-middle-reference.pdf",
+          "pdfSha256": "49038a4f12b0c9cc82e2853d1e767ee54ddeb676f141a640023f1d14deb58e6c",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "empty-run-2-middle-reference-inspection.json.gz",
+            "sha256": "434c0d76d214383600fb5d166aa7a9c84f21f12a98be4aa6de7f972131c8b23b",
+            "jsonSha256": "91dbff11a96b55812416f2d78ff99b33039d5d8ffa63dc5a55f85e171864fb10"
+          },
+          "pageRasterSha256": [
+            "14a6fc2abce9b88f89fae7ef0c12df10841c7ce510afdb6d247f774146739a6a"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "empty-run-2-middle-candidate-report.json.gz",
+            "sha256": "18df147975496a082a100249a5ed893665dadfdc19d8483e49ede0fbd58c4750",
+            "jsonSha256": "0c245d2d0449c886c12c4aa1f0ee06665e15280dececb7c03e443a4d942422c1"
+          },
+          "htmlSha256": "34cd3fb3db281619a6e4bf2bc938168eb79cfd320dabcb7dbf108f1bf805437f",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.74999799999999,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 27.59765625,
+              "observedPt": 26.999999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749998999999974,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 27.59765625,
+              "observedPt": 26.999998000000005,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 27.59765625,
+              "observedPt": 26.999999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749998000000005,
+              "tolerancePt": 0.75,
+              "passed": true
+            }
+          ],
+          "stepsPt": [
+            27.74999799999999,
+            27.749999000000003
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-2-middle-candidate.pdf",
+          "pdfSha256": "24eb3f15b4b8249ff7d1900609a4b9955055d6e40c0407820696e0865513d355",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "empty-run-2-middle-candidate-inspection.json.gz",
+            "sha256": "1267e7184c01d21390edab761c30896cdc3b36c0f9bcf86f3b1159df18ddf12c",
+            "jsonSha256": "8ee8aa6f62c0ef3e2f2e8a0081148a61010ee0ffca75d9a2d9447dfabaf9e7ef"
+          },
+          "pageRasterSha256": [
+            "68af6acd1dfd9ab8ec61f8372c0414c35c8a5c7c592b8c587bdaa4dcb374e5a6"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "empty-run-2-middle.png",
+        "sha256": "9561aa5163cce5d67925aac68767489415f490dbf168c8a6b6130ecaeeac5991"
+      }
+    },
+    {
+      "id": "empty-run-2-trailing",
+      "inputSha256": "3281ea9f679ae83471e8cafbdf68f3187f33caf4e34d3ef98eeb3682605d4e47",
+      "panels": [
+        {
+          "renderer": "baseline",
+          "report": {
+            "file": "empty-run-2-trailing-baseline-report.json.gz",
+            "sha256": "fec52a7122be438b4c8b51f6067684aac3d40cc486eb4ac110e0b60bef6dc36c",
+            "jsonSha256": "577d15121be4dda7523ba49422c2d123eb2e14914b0281ad226fac2c07ca3a0b"
+          },
+          "htmlSha256": "a2fc6506a6a0e4badb5e97bd10d22af99c97e45489f7ed89949fecaec8aa1173",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.24999799999999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249998000000005,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.24999799999998,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249998000000005,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 27.59765625,
+              "observedPt": 31.499998000000005,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249999,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249998999999946,
+              "tolerancePt": 0.75,
+              "passed": false
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 27.59765625,
+              "observedPt": 32.249998000000005,
+              "tolerancePt": 0.75,
+              "passed": false
+            }
+          ],
+          "stepsPt": [
+            32.24999799999999,
+            32.249999
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-2-trailing-baseline.pdf",
+          "pdfSha256": "2200d0bfd8ce5d4fe310100ec401262ef9846142dd236c905ad86f308581fe7c",
+          "mandatoryFailures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ],
+          "inspection": {
+            "file": "empty-run-2-trailing-baseline-inspection.json.gz",
+            "sha256": "72e45b76ef22904871a6633e50107b7add7272d0c31ca43ce09b81ebcd384507",
+            "jsonSha256": "1e80c29d18bd252491d4ae2e89f0988d73e2f8020b3c189c67b4e906c3172e08"
+          },
+          "pageRasterSha256": [
+            "276c53b47d14ed08adc0648a99c05303037d376af13b8b8ce54268b96b7a61e4"
+          ]
+        },
+        {
+          "renderer": "reference",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.60000000000001,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999994,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999994,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999994,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999994,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999966,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999966,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999966,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.600000000000023,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.599999999999966,
+              "tolerancePt": 0.75,
+              "passed": true
+            }
+          ],
+          "stepsPt": [
+            27.60000000000001,
+            27.599999999999994
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-2-trailing-reference.pdf",
+          "pdfSha256": "47bb8f7ce25247f2d226d8097319a8eb6f407f8d3c0e6c1ca2a363db42d67ea9",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "empty-run-2-trailing-reference-inspection.json.gz",
+            "sha256": "434c0d76d214383600fb5d166aa7a9c84f21f12a98be4aa6de7f972131c8b23b",
+            "jsonSha256": "91dbff11a96b55812416f2d78ff99b33039d5d8ffa63dc5a55f85e171864fb10"
+          },
+          "pageRasterSha256": [
+            "14a6fc2abce9b88f89fae7ef0c12df10841c7ce510afdb6d247f774146739a6a"
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "empty-run-2-trailing-candidate-report.json.gz",
+            "sha256": "79b01052c8caec3dc3905eea5fc43edee1984ba4f971441472585ab779cbaf6a",
+            "jsonSha256": "1416e93adaca0171c6dc9164b33fb6d2d550c83290b5331a8eeea4a47ada4506"
+          },
+          "htmlSha256": "1d5ee1d139faaa04db3f66e398441abedc4c238db6ecc24706d80aa17d693d33",
+          "checks": [
+            {
+              "name": "companion-pdf-paper-geometry",
+              "passed": true,
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ]
+            },
+            {
+              "name": "companion-pdf-source-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {}
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "passed": true,
+              "outside": []
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "pitchChecks": [
+            {
+              "first": "Mallow01",
+              "second": "Mallow02",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.74999799999999,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow02",
+              "second": "Mallow03",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow03",
+              "second": "Mallow04",
+              "expectedPt": 27.59765625,
+              "observedPt": 26.999999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow04",
+              "second": "Mallow05",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow05",
+              "second": "Mallow06",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow06",
+              "second": "Mallow07",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow07",
+              "second": "Mallow08",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749998999999974,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow08",
+              "second": "Mallow09",
+              "expectedPt": 27.59765625,
+              "observedPt": 26.999998000000005,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow09",
+              "second": "Mallow10",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow10",
+              "second": "Mallow11",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow11",
+              "second": "Mallow12",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow12",
+              "second": "Mallow13",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow13",
+              "second": "Mallow14",
+              "expectedPt": 27.59765625,
+              "observedPt": 26.999999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow14",
+              "second": "Mallow15",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749999000000003,
+              "tolerancePt": 0.75,
+              "passed": true
+            },
+            {
+              "first": "Mallow15",
+              "second": "Mallow16",
+              "expectedPt": 27.59765625,
+              "observedPt": 27.749998000000005,
+              "tolerancePt": 0.75,
+              "passed": true
+            }
+          ],
+          "stepsPt": [
+            27.74999799999999,
+            27.749999000000003
+          ],
+          "pageCount": 1,
+          "firstPageLines": 16,
+          "pdf": "pdf/empty-run-2-trailing-candidate.pdf",
+          "pdfSha256": "bd6ab15137ffaa2305735edeba0a168d6e377557b5e812fc867d02e4e9647d7a",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "empty-run-2-trailing-candidate-inspection.json.gz",
+            "sha256": "1267e7184c01d21390edab761c30896cdc3b36c0f9bcf86f3b1159df18ddf12c",
+            "jsonSha256": "8ee8aa6f62c0ef3e2f2e8a0081148a61010ee0ffca75d9a2d9447dfabaf9e7ef"
+          },
+          "pageRasterSha256": [
+            "68af6acd1dfd9ab8ec61f8372c0414c35c8a5c7c592b8c587bdaa4dcb374e5a6"
+          ]
+        }
+      ],
+      "screenshot": {
+        "file": "empty-run-2-trailing.png",
+        "sha256": "8716f578cb6751c3224f68bfb32b9393cd49d14d89bced5fad7a1fd1e89f641c"
+      }
+    }
+  ],
+  "tools": {
+    "docs/results/empty-runs/Compose.py": "255b0fb7752bb7092e8911f2b5aa69562d02c1e9c85cc40ce2cc636dfbeaf89d",
+    "docs/results/empty-runs/Pitch.py": "535321c38323b2729542704e586bd9bf45610812f206f9a3b02631b80abf9924",
+    "docs/results/export-reliability/Capture.mjs": "242ffcbd8716ba6238990621aee97482209e846c70ffbc4171c16b204f7e1631"
+  }
+}

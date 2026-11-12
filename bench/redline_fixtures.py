@@ -10,18 +10,20 @@ from __future__ import annotations
 
 import hashlib
 import json
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
-from .fixtures import custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases, consolidated_field_cases, comment_identity_cases, removed_comment_cases, note_insertion_cases, bookmark_reviewer_cases, bookmark_review_container, bookmark_conflict_cases, complex_field as field
+from .fixtures import PACKAGE_LINK_TARGET, PACKAGE_SHAPES, package_shape, custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases, consolidated_field_cases, comment_identity_cases, removed_comment_cases, note_insertion_cases, bookmark_reviewer_cases, bookmark_review_container, bookmark_conflict_cases, complex_field as field
 
 ROOT = Path(__file__).resolve().parents[1]
 W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
+W15 = 'http://schemas.microsoft.com/office/word/2012/wordml'
 R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v7', 'version': 7}
+SUITE = {'id': 'redline-v40', 'version': 40}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -111,15 +113,25 @@ def zip_write(path, parts):
             item = ZipInfo(name, (2026, 1, 1, 0, 0, 0))
             item.compress_type = ZIP_DEFLATED
             item.external_attr = 0o100644 << 16
+            item.create_system = 3  # Unix, as on Linux CI; ZipInfo otherwise records the host OS
             archive.writestr(item, payload.encode() if isinstance(payload, str) else payload)
 
 
-def package(path, body, styles=None, header=None, comments=None, footnotes=None, settings_extra=''):
-    """One minimal, valid WordprocessingML package. Optional story parts take literal XML."""
+def package(path, body, styles=None, header=None, comments=None, footnotes=None, settings_extra='', comments_extended=None, strict=False, people=None,
+            relations_extra=(), content_types_extra='', extra_parts=None, section=None):
+    """One minimal, valid WordprocessingML package. Optional story parts take literal XML.
+
+    `relations_extra` appends main-document relationships as (id, type, target) or
+    (id, type, target, 'External'); `content_types_extra` adds literal Default/Override elements;
+    `extra_parts` adds literal parts. Package-shape cases use them to write deliberate defects."""
     relations = [('rStyles', 'styles', 'styles.xml'), ('rSettings', 'settings', 'settings.xml')]
     overrides = [('/word/document.xml', 'document.main'), ('/word/styles.xml', 'styles'), ('/word/settings.xml', 'settings')]
     refs = ''
     parts = {}
+    if people is not None:
+        parts['word/people.xml'] = f'<w15:people xmlns:w15="{W15}">{people}</w15:people>'
+        relations.append(('rPeople', 'http://schemas.microsoft.com/office/2011/relationships/people', 'people.xml'))
+        overrides.append(('/word/people.xml', 'people'))
     if header is not None:
         parts['word/header1.xml'] = f'<w:hdr {NAMESPACES}>{header}</w:hdr>'
         relations.append(('rHeader', 'header', 'header1.xml'))
@@ -129,26 +141,37 @@ def package(path, body, styles=None, header=None, comments=None, footnotes=None,
         parts['word/comments.xml'] = f'<w:comments {NAMESPACES}>{comments}</w:comments>'
         relations.append(('rComments', 'comments', 'comments.xml'))
         overrides.append(('/word/comments.xml', 'comments'))
+    if comments_extended is not None:
+        parts['word/commentsExtended.xml'] = f'<w15:commentsEx xmlns:w15="{W15}">{comments_extended}</w15:commentsEx>'
+        relations.append(('rCommentsEx', 'http://schemas.microsoft.com/office/2011/relationships/commentsExtended', 'commentsExtended.xml'))
+        overrides.append(('/word/commentsExtended.xml', 'commentsExtended'))
     if footnotes is not None:
         separators = ('<w:footnote w:type="separator" w:id="-1"><w:p><w:r><w:separator/></w:r></w:p></w:footnote>'
                       '<w:footnote w:type="continuationSeparator" w:id="0"><w:p><w:r><w:continuationSeparator/></w:r></w:p></w:footnote>')
         parts['word/footnotes.xml'] = f'<w:footnotes {NAMESPACES}>{separators}{footnotes}</w:footnotes>'
         relations.append(('rFootnotes', 'footnotes', 'footnotes.xml'))
         overrides.append(('/word/footnotes.xml', 'footnotes'))
-    parts['word/document.xml'] = f'<w:document {NAMESPACES}><w:body>{body}{SECTION.format(refs=refs)}</w:body></w:document>'
+    relations.extend(relations_extra)
+    parts.update(extra_parts or {})
+    parts['word/document.xml'] = f'<w:document {NAMESPACES}><w:body>{body}{section if section is not None else SECTION.format(refs=refs)}</w:body></w:document>'
     parts['word/styles.xml'] = styles if styles is not None else styles_part()
     parts['word/settings.xml'] = (f'<w:settings xmlns:w="{W}">{settings_extra}<w:compat><w:compatSetting w:name="compatibilityMode" '
                                   'w:uri="http://schemas.microsoft.com/office/word" w:val="15"/></w:compat></w:settings>')
     parts['word/_rels/document.xml.rels'] = ('<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
-                                             + ''.join(f'<Relationship Id="{i}" Type="{R}/{k}" Target="{target}"/>' for i, k, target in relations)
+                                             + ''.join(f'<Relationship Id="{i}" Type="{k if "://" in k else R + "/" + k}" Target={quoteattr(target)}'
+                                                       + ''.join(f' TargetMode="{m}"' for m in mode) + '/>' for i, k, target, *mode in relations)
                                              + '</Relationships>')
     parts['_rels/.rels'] = ('<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
                             f'<Relationship Id="rDocument" Type="{R}/officeDocument" Target="word/document.xml"/></Relationships>')
     parts['[Content_Types].xml'] = ('<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
                                     '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
-                                    '<Default Extension="xml" ContentType="application/xml"/>'
+                                    '<Default Extension="xml" ContentType="application/xml"/>' + content_types_extra
                                     + ''.join(f'<Override PartName="{n}" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.{k}+xml"/>' for n, k in overrides)
                                     + '</Types>')
+    if strict:
+        parts = {name: xml.replace(W, 'http://purl.oclc.org/ooxml/wordprocessingml/main')
+                 .replace(R, 'http://purl.oclc.org/ooxml/officeDocument/relationships')
+                 for name, xml in parts.items()}
     zip_write(path, parts)
 
 
@@ -156,6 +179,29 @@ def package(path, body, styles=None, header=None, comments=None, footnotes=None,
 # declared-ineligible comparison is not applied; the run fails as unmeasured if the calibration
 # disagrees with this table in either direction.
 LIBREOFFICE_INELIGIBLE = {
+    **{'redline-revised-stories-' + shape: (('accepted', 'rejected') if shape in {'first-page', 'latent-first-page'} else ('accepted',),
+       'LibreOffice 25.8.7.3 retains a deleted empty boundary paragraph and its running-story section after authored Accept All; First-story rejection also materializes extra empty header references. Independent endpoints, flags, exact review stories, and SDK validity remain mandatory')
+       for shape in ('rewrite', 'first-page', 'latent-first-page', 'default-after-first', 'retained-control')},
+    **{'redline-retained-section-' + shape: ((endpoint,),
+       'LibreOffice 25.8.7.3 retains an empty paragraph and its section/footer binding when resolving the independently authored whole-paragraph boundary replacement; independent markup endpoints and SDK checks remain mandatory')
+       for shape, endpoint in (('add', 'rejected'), ('remove', 'accepted'))},
+    **{'redline-inserted-section-' + story: (('rejected',),
+       'LibreOffice 25.8.7.3 retains the inserted empty section after rejecting its authored paragraph revisions, including an empty paragraph and running-story bindings; independent markup endpoints, exact review-story text and SDK checks remain mandatory')
+       for story in ('header', 'footer')},
+    **{'redline-textbox-geometry' + suffix: (('accepted', 'rejected'),
+       'LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole textbox-carrier replacement; independent markup, exact VML geometry/text and SDK checks remain mandatory')
+       for suffix in ('', '-control')},
+    **{'redline-visible-atom-' + kind: (('accepted',),
+       'LibreOffice 25.8.7.3 resolves the schema-valid authored page/column-break deletion but keeps the break and splits the paragraph; independent markup, exact native atoms, schema and LibreOffice rejection remain mandatory')
+       for kind in ('page', 'column')},
+    'redline-visible-atom-symbol': (('rejected',),
+        'LibreOffice 25.8.7.3 imports trailing Birch text under the source Symbol font as five w:sym carriers, while authored rejection keeps w:t; its text-only view omits those symbols. Independent markup, exact native atom/font/char, schema and LibreOffice acceptance remain mandatory'),
+    **{'redline-revision-owner-' + name: (('accepted', 'rejected'),
+       'LibreOffice 25.8.7.3 does not resolve the schema-valid authored insertion containing a deletion: accept retains and joins the proposal to the closing paragraph, and reject retains the proposal; raw insertion/deletion, people, schema and benchmark-markup round trips remain mandatory')
+       for name in ('namesake-account', 'unattributed-name')},
+    **{'redline-table-column-widths-' + shape: (('accepted', 'rejected'),
+       'LibreOffice 25.8.7.3 exposes zero revisions in the schema-valid authored table-property-only width edit; independent resolved widths, registry count and schema checks remain mandatory')
+       for shape in ('full', 'partial')},
     **{'redline-reviewer-bookmark-' + kind: (('accepted', 'rejected'),
        'LibreOffice exposes zero revisions for the authored bookmark-only removal/movement; semantic, reviewer and schema checks remain mandatory')
        for kind in ('move-and-remove', 'single-remove-control')},
@@ -165,6 +211,9 @@ LIBREOFFICE_INELIGIBLE = {
         'LibreOffice retains the removed comment after accepting its deletion markers'),
     'redline-removed-comment-body-unchanged-control': (('accepted', 'rejected'),
         'LibreOffice exposes zero revisions for comment-marker changes without a text edit'),
+    **{'redline-comment-reply-' + kind: (('accepted', 'rejected'),
+       'LibreOffice exposes zero revisions for an added reply whose markers are the only change, and keeps the reply on reject')
+       for kind in ('id-less-root', 'renumbered-root', 'root-para-id-control')},
     **{'redline-comment-identity-' + kind:
        (('accepted', 'rejected') if kind == 'replaced-id' else ('rejected',),
         'LibreOffice retains comment definitions after their insertion/deletion markers are resolved; independent markup and schema checks remain required')
@@ -190,6 +239,23 @@ LIBREOFFICE_INELIGIBLE = {
 }
 
 
+# Authored 1421 calibration: LibreOffice keeps both whole-equation alternatives after either resolution.
+# Keep independent OOXML/source-order and SDK checks mandatory; this is not a candidate-specific exemption.
+for _case in ('redline-tab-equation', 'redline-tab-equation-control',
+              'redline-tab-equation-consolidate', 'redline-tab-equation-consolidate-control',
+              'redline-field-source-text', 'redline-field-source-text-control'):
+    LIBREOFFICE_INELIGIBLE[_case] = (('accepted', 'rejected'),
+        'LibreOffice 25.8.7.3 retains both whole-equation alternatives in the authored redline after accept and reject')
+LIBREOFFICE_INELIGIBLE['redline-captured-field-source'] = (('rejected',),
+    'LibreOffice 25.8.7.3 drops the tab from the authored unfinished instruction-only field on reject')
+LIBREOFFICE_INELIGIBLE['redline-textbox-marker-gap'] = (('accepted', 'rejected'),
+    'LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the independently authored whole textbox-carrier replacement')
+LIBREOFFICE_INELIGIBLE['redline-shared-drawing-source'] = (('accepted', 'rejected'),
+    'LibreOffice 25.8.7.3 retains an extra empty paragraph after resolving the authored whole drawing-carrier replacement')
+
+
+
+
 class Corpus:
     def __init__(self, root):
         self.root = root
@@ -199,9 +265,9 @@ class Corpus:
     def file(self, case_id, name, **document):
         path = self.root / 'fixtures' / 'redline' / case_id / (name + '.docx')
         package(path, **document)
-        return {'path': str(path.relative_to(self.root)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
+        return {'path': path.relative_to(self.root).as_posix(), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
 
-    def add(self, case_id, category, kind, issue, description, operation, inputs, expected, authored, assertions=()):
+    def add(self, case_id, category, kind, issue, description, operation, inputs, expected, authored, assertions=(), assets=None):
         ineligible, reason = LIBREOFFICE_INELIGIBLE.get(case_id, ((), None))
         libreoffice = {key: key not in ineligible for key in expected}
         if reason:
@@ -211,16 +277,16 @@ class Corpus:
             'description': description, 'operation': operation, 'inputs': inputs, 'expected': expected,
             'authored': authored, 'assertions': list(assertions), 'libreoffice': libreoffice,
             'rights': {'author': 'John Scrudato IV', 'license': 'MIT', 'origin': 'Authored by bench/redline_fixtures.py in this repository',
-                       'assets': 'All text is generated here; no images or embedded font files'},
+                       'assets': assets or 'All text is generated here; no images or embedded font files'},
             'generator': self.generator})
 
-    def compare(self, case_id, category, kind, issue, description, left, right, redline, assertions=()):
+    def compare(self, case_id, category, kind, issue, description, left, right, redline, assertions=(), assets=None):
         """A two-way case: accept-all of a correct redline equals right, reject-all equals left."""
         a = self.file(case_id, 'left', **left)
         b = self.file(case_id, 'right', **right)
         c = self.file(case_id, 'authored-redline', **redline)
         self.add(case_id, category, kind, issue, description, 'compare',
-                 [dict(a, role='left'), dict(b, role='right')], {'accepted': b, 'rejected': a}, c, assertions)
+                 [dict(a, role='left'), dict(b, role='right')], {'accepted': b, 'rejected': a}, c, assertions, assets)
 
 
 def untracked(*texts, story='body'):
@@ -253,11 +319,896 @@ def generate():
     inserted_notes(corpus)
     reviewer_bookmarks(corpus)
     bookmark_conflicts(corpus)
-    registry = {'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
+    reply_parents(corpus)
+    semantic_limits(corpus)
+    column_widths(corpus)
+    pending_grid_columns(corpus)
+    block_insertions(corpus)
+    mixed_run_edits(corpus)
+    tracked_column_gaps(corpus)
+    revision_ownership(corpus)
+    move_range_membership(corpus)
+    external_links(corpus)
+    package_shapes(corpus)
+    visible_atom_edits(corpus)
+    inline_control_rewrites(corpus)
+    moved_from_text(corpus)
+    atomic_source_positions(corpus)
+    textbox_geometry(corpus)
+    composed_bookmark_deltas(corpus)
+    regrouped_textbox_markers(corpus)
+    weak_replacement_anchors(corpus)
+    field_default_spacing(corpus)
+    complete_rewrites(corpus)
+    inserted_section_stories(corpus)
+    retained_section_boundaries(corpus)
+    revised_stories_deleted_boundary(corpus)
+    alternate_textbox_edits(corpus)
+    header_textbox_redlines(corpus)
+    default_spacing_history(corpus)
+    cell_revision_shapes(corpus)
+    cell_revision_geometry(corpus)
+    struck_cell_deletions(corpus)
+    math_control_revisions(corpus)
+    missing_default_spacing(corpus)
+    registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(json.dumps(registry, indent=2) + '\n')
+    target.write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
+
+
+def weak_replacement_anchors(corpus):
+    """An unrelated leading rewrite must not acquire correspondence from function words."""
+    old = 'Daylight guides polish the copper compass before closing the cabin.'
+    new = 'Evening porters arrange the willow baskets before opening the depot.'
+    middle_old = 'The steward records a quiet inspection beside the western gate.'
+    middle_new = 'The clerk records a red ledger beside the eastern quay.'
+    last_old = 'At dusk the ropes cover the crates and the cart returns inland.'
+    last_new = 'At dawn the cranes carry the barrels and the barge leaves seaward.'
+    variants = [(interior, crossing, '') for interior in (False, True) for crossing in (False, True)]
+    variants += [(False, False, 'left'), (False, False, 'right')]
+    for interior, crossing, compound in variants:
+        name = 'redline-weak-replacement-' + ('interior' if interior else 'final') + ('-crossing' if crossing else '') + ('-compound-' + compound if compound else '')
+        left = [old, middle_old + (' Saffron cargo' if crossing else ''), last_old]
+        right = [new, middle_new, ('Saffron cargo ' if crossing else '') + last_new]
+        if compound:
+            left[0] = left[0].replace('before closing', 'before-closing')
+            if compound == 'right':
+                left, right = right, left
+        rev = Revisions()
+        tracked = p(rev.ins(t(right[0])), mark=rev.mark('ins')) + p(rev.dele(t(left[0])), mark=rev.mark('del'))
+        tracked += ''.join(p(rev.ins(t(b)) + rev.dele(t(a))) for a, b in zip(left[1:], right[1:]))
+        if interior:
+            left.append(CLOSING); right.append(CLOSING); tracked += p(t(CLOSING))
+        corpus.compare(name, 'revisions', 'reproducer', 'JSv4/Docxodus#1526',
+                       'A weakly related leading rewrite stays in complete revision spans beside an edited paragraph'
+                       + (' and a real later paragraph crossing' if crossing else ''),
+                       {'body': ''.join(p(t(x)) for x in left)}, {'body': ''.join(p(t(x)) for x in right)},
+                       {'body': tracked},
+                       [{'type': 'revision-text', 'version': 1, 'scope': 'redline', 'kind': 'del', 'text': left[0]},
+                        paragraph_count(len(left), 'accepted'), paragraph_count(len(left), 'rejected')])
+
+    retained = 'Copper instruments remain under the watch of the harbor steward. '
+    rev = Revisions()
+    corpus.compare('redline-weak-replacement-retained-control', 'revisions', 'control', 'JSv4/Docxodus#1526',
+                   'A strong retained sentence still supports a fine-grained paragraph edit',
+                   {'body': p(t(retained + 'Cabin shutters close.')) + p(t(CLOSING))},
+                   {'body': p(t(retained + 'Depot shutters close.')) + p(t(CLOSING))},
+                   {'body': p(t(retained) + rev.dele(t('Cabin')) + rev.ins(t('Depot')) + t(' shutters close.')) + p(t(CLOSING))},
+                   [untracked(retained, CLOSING), paragraph_count(2)])
+    rev = Revisions()
+    corpus.compare('redline-weak-replacement-unrelated-control', 'revisions', 'control', 'JSv4/Docxodus#1526',
+                   'Completely unrelated interior paragraphs remain whole insertions and deletions',
+                   {'body': p(t('Copper compass.')) + p(t(CLOSING))},
+                   {'body': p(t('Willow baskets.')) + p(t(CLOSING))},
+                   {'body': p(rev.ins(t('Willow baskets.')), mark=rev.mark('ins'))
+                            + p(rev.dele(t('Copper compass.')), mark=rev.mark('del')) + p(t(CLOSING))},
+                   [untracked(CLOSING), paragraph_count(3)])
+    for merge in (False, True):
+        rev = Revisions()
+        first, second = 'Copper instruments', ' remain beside the quay.'
+        joined = p(t(first + second)) + p(t(CLOSING))
+        split = p(t(first)) + p(t(second)) + p(t(CLOSING))
+        corpus.compare('redline-weak-replacement-' + ('merge' if merge else 'split') + '-control',
+                       'revisions', 'control', 'JSv4/Docxodus#1526', 'An intentional paragraph boundary edit preserves retained text',
+                       {'body': split if merge else joined}, {'body': joined if merge else split},
+                       {'body': p(t(first), mark=rev.mark('del' if merge else 'ins')) + p(t(second)) + p(t(CLOSING))},
+                       [untracked(first, second, CLOSING), paragraph_count(2 if merge else 3, 'accepted'),
+                        paragraph_count(3 if merge else 2, 'rejected')])
+
+
+def regrouped_textbox_markers(corpus):
+    """A removed point between unchanged shapes, with and without carrier regrouping."""
+    def shape(text, offset):
+        return ('<v:shape xmlns:v="urn:schemas-microsoft-com:vml" '
+                f'style="position:absolute;margin-left:{offset}pt;margin-top:18pt;width:90pt;height:40pt" '
+                'coordsize="21600,21600" path="m,l,21600r21600,l21600,xe" strokecolor="#226688" fillcolor="#eef6f8">'
+                '<v:textbox><w:txbxContent>' + p(t(text)) + '</w:txbxContent></v:textbox></v:shape>')
+    def pict(shapes):
+        return '<w:r><w:pict>' + shapes + '</w:pict></w:r>'
+    first, second = shape('Spruce first.', 0), shape('Spruce second.', 120)
+    start, end = bookmark(True, 29, 'SpruceGap'), bookmark(False, 29)
+    spacing = '<w:spacing w:after="1200"/>'
+    for control in (False, True):
+        case_id = 'redline-textbox-marker-gap' + ('-control' if control else '')
+        old = pict(first) + start + end + pict(second) + t(' Spruce old ledger.')
+        new = (pict(first) + pict(second) if control else pict(first + second)) + t(' Spruce new ledger.')
+        rev = Revisions()
+        if control:
+            tracked = p(pict(first) + rev.dele(start) + rev.dele(end) + pict(second) + t(' Spruce ')
+                        + rev.dele(t('old')) + rev.ins(t('new')) + t(' ledger.'), props=spacing)
+        else:
+            tracked = p(rev.dele(old), props=spacing, mark=rev.mark('del')) + p(rev.ins(new), props=spacing, mark=rev.mark('ins'))
+        assertions = [untracked(CLOSING)]
+        for scope, content in (('rejected', old), ('accepted', new)):
+            root = ET.fromstring(f'<root {NAMESPACES}>' + content + '</root>')
+            assertions.append({'type': 'inline-trees', 'version': 1, 'scope': scope, 'name': 'pict',
+                               'trees': [ET.tostring(e, encoding='unicode') for e in root.iter('{' + W + '}pict')], 'images': {}})
+        corpus.compare(case_id, 'bookmarks', 'control' if control else 'reproducer', 'JSv4/Docxodus#1428',
+                       'Remove the point bookmark between two unchanged textboxes and edit the tail; ' +
+                       ('keep the two separate carriers' if control else 'regroup both shapes into one indivisible carrier'),
+                       {'body': p(old, props=spacing) + p(t(CLOSING))},
+                       {'body': p(new, props=spacing) + p(t(CLOSING))},
+                       {'body': tracked + p(t(CLOSING))}, assertions)
+
+
+def composed_bookmark_deltas(corpus):
+    """Authored reviewer deltas on unchanged inline content, independent of product fixtures."""
+    tab = '<w:r><w:tab/></w:r>'
+    equation = '<m:oMath><m:r><m:t>x</m:t></m:r></m:oMath>'
+    for addition in (False, True):
+        for control in (False, True):
+            case_id = 'redline-composed-bookmark-' + ('add' if addition else 'remove') + ('-control' if control else '')
+            before = not addition
+            after = before if control else addition
+            def body(marked, prefix, tail):
+                content = (bookmark(True, 17, 'MapleTab') if marked else '') + tab + (bookmark(False, 17) if marked else '')
+                return p(t(prefix) + content + equation + t(' survey ' + tail + '.')) + p(t(CLOSING))
+            documents = [('base', body(before, 'Maple', 'archive')),
+                         ('alice', body(after, 'Cedar', 'archive')),
+                         ('bob', body(before, 'Maple', 'register')),
+                         ('accepted', body(after, 'Cedar', 'register'))]
+            files = {role: corpus.file(case_id, role, body=content) for role, content in documents}
+            rev = Revisions()
+            def endpoint(start):
+                marker = bookmark(start, 17, 'MapleTab' if start else None)
+                if control: return marker if before else ''
+                return (rev.ins if addition else rev.dele)(marker, 'Alice')
+            content = rev.dele(t('Maple'), 'Alice') + rev.ins(t('Cedar'), 'Alice')
+            content += endpoint(True) + tab + endpoint(False) + equation + t(' survey ')
+            content += rev.dele(t('archive'), 'Bob') + rev.ins(t('register'), 'Bob') + t('.')
+            authored = corpus.file(case_id, 'authored-redline', body=p(content) + p(t(CLOSING)))
+            corpus.add(case_id, 'consolidate', 'control' if control else 'reproducer', 'JSv4/Docxodus#1426',
+                       'Alice edits the prefix and ' + ('keeps' if control else 'adds' if addition else 'removes') +
+                       ' a bookmark around an unchanged tab; Bob edits the suffix beside an unchanged equation',
+                       'consolidate', [dict(files['base'], role='base'), dict(files['alice'], role='reviewer', author='Alice'),
+                                       dict(files['bob'], role='reviewer', author='Bob')],
+                       {'accepted': files['accepted'], 'rejected': files['base']}, authored,
+                       [untracked(CLOSING, ' survey ')])
+            corpus.cases[-1]['reviewerExpected'] = {'Alice': files['alice'], 'Bob': files['bob']}
+
+
+def textbox_geometry(corpus):
+    """Pure VML geometry versus a body-only edit, independently authored for #1425."""
+    def shapes(width, words):
+        def shape(size, offset, text):
+            return ('<v:shape xmlns:v="urn:schemas-microsoft-com:vml" '
+                    f'style="position:absolute;margin-left:{offset}pt;margin-top:18pt;width:{size}pt;height:40pt" '
+                    'coordsize="21600,21600" path="m,l,21600r21600,l21600,xe" strokecolor="#226688" fillcolor="#eef6f8"><v:textbox><w:txbxContent>' +
+                    p(t(text)) + '</w:txbxContent></v:textbox></v:shape>')
+        return '<w:r><w:pict>' + shape(width, 0, words) + shape(100, 150, 'Juniper second.') + '</w:pict></w:r>'
+    for control in (False, True):
+        before = shapes(80, 'Juniper first.')
+        after = shapes(80 if control else 120, 'Juniper edited.' if control else 'Juniper first.')
+        left, right = t('Juniper carrier ') + before + t(' remains here.'), t('Juniper carrier ') + after + t(' remains here.')
+        rev = Revisions()
+        spacing = '<w:spacing w:after="1200"/>'
+        tracked = p(rev.dele(left), props=spacing, mark=rev.mark('del')) + p(rev.ins(right), props=spacing, mark=rev.mark('ins'))
+        assertions = [untracked(CLOSING)]
+        for scope, content in (('rejected', before), ('accepted', after)):
+            root = ET.fromstring(f'<root {NAMESPACES}>' + content + '</root>')
+            assertions.append({'type': 'inline-trees', 'version': 1, 'scope': scope, 'name': 'pict',
+                               'trees': [ET.tostring(e, encoding='unicode') for e in root.iter('{' + W + '}pict')], 'images': {}})
+        corpus.compare('redline-textbox-geometry' + ('-control' if control else ''), 'revisions',
+                       'control' if control else 'reproducer', 'JSv4/Docxodus#1425',
+                       'Two textboxes share a VML carrier; ' + ('only the first body changes' if control else 'only the first width changes'),
+                       {'body': p(left, props=spacing) + p(t(CLOSING))}, {'body': p(right, props=spacing) + p(t(CLOSING))},
+                       {'body': tracked + p(t(CLOSING))}, assertions)
+
+
+def atomic_source_positions(corpus):
+    """Source ownership beside atoms, field normalization, and indivisible drawings."""
+    issue = 'JSv4/Docxodus#1421'
+    tab = '<w:r><w:tab/></w:r>'
+    def equation(limit):
+        return ('<m:oMath><m:nary><m:naryPr><m:chr m:val="∑"/><m:limLoc m:val="undOvr"/></m:naryPr>'
+                '<m:sub><m:r><m:t>i=1</m:t></m:r></m:sub><m:sup><m:r><m:t>' + limit + '</m:t></m:r></m:sup>'
+                '<m:e><m:r><m:t>x</m:t></m:r></m:e></m:nary></m:oMath>')
+    def close(body):
+        return body + p(t(CLOSING))
+    def trees(name, before, after, images=None):
+        namespace = 'http://schemas.openxmlformats.org/officeDocument/2006/math' if name == 'oMath' else W
+        result = []
+        for scope, content in (('rejected', before), ('accepted', after)):
+            root = ET.fromstring(f'<root {NAMESPACES}>' + content + '</root>')
+            result.append({'type': 'inline-trees', 'version': 1, 'scope': scope, 'name': name,
+                           'trees': [ET.tostring(e, encoding='unicode') for e in root.iter('{' + namespace + '}' + name)],
+                           'images': images or {}})
+        return result
+    for control in (False, True):
+        lead = t('III.') + (t(' ') if control else tab)
+        def body(limit, tail):
+            return close(p(lead + equation(limit) + t(' Survey ' + tail + '.')))
+        left, right = body('n', 'ledger'), body('k', 'ledger')
+        rev = Revisions()
+        tracked = close(p(lead + rev.dele(equation('n')) + rev.ins(equation('k')) + t(' Survey ledger.')))
+        suffix = '-control' if control else ''
+        case_id = 'redline-tab-equation' + suffix
+        corpus.compare(case_id, 'revisions', 'control' if control else 'reproducer', issue,
+                       'An equation edit after ' + ('a space' if control else 'a retained tab'),
+                       {'body': left}, {'body': right}, {'body': tracked},
+                       [untracked('III.', ' Survey ledger.', CLOSING)] + trees('oMath', equation('n'), equation('k')))
+        case_id = 'redline-tab-equation-consolidate' + suffix
+        base = corpus.file(case_id, 'base', body=left)
+        alice = corpus.file(case_id, 'equation-reviewer', body=right)
+        bob = corpus.file(case_id, 'text-reviewer', body=body('n', 'schedule'))
+        accepted = corpus.file(case_id, 'accepted', body=body('k', 'schedule'))
+        rev = Revisions()
+        authored = corpus.file(case_id, 'authored-redline', body=close(p(lead +
+            rev.dele(equation('n')) + rev.ins(equation('k')) + t(' Survey ') +
+            rev.dele(t('ledger'), 'Other') + rev.ins(t('schedule'), 'Other') + t('.'))))
+        corpus.add(case_id, 'consolidate', 'control' if control else 'reproducer', issue,
+                   'Two reviewers edit an equation and following text after ' + ('a space' if control else 'a tab'),
+                   'consolidate', [dict(base, role='base'), dict(alice, role='reviewer', author=AUTHOR),
+                                   dict(bob, role='reviewer', author='Other')],
+                   {'accepted': accepted, 'rejected': base}, authored,
+                   [untracked('III.', ' Survey ', CLOSING)] + trees('oMath', equation('n'), equation('k')))
+
+    for control in (False, True):
+        # Word's field reader omits instruction-phase w:t from the visible result; it remains source content.
+        prefix = ('<w:r><w:fldChar w:fldCharType="begin"/>' + ('' if control else '<w:t>code note</w:t>') +
+                  '<w:instrText xml:space="preserve"> PAGE </w:instrText><w:fldChar w:fldCharType="separate"/>'
+                  '<w:t>1</w:t><w:fldChar w:fldCharType="end"/></w:r>' + t(' '))
+        rev = Revisions()
+        corpus.compare('redline-field-source-text' + ('-control' if control else ''), 'fields',
+                       'control' if control else 'reproducer', issue,
+                       'Equation following a field ' + ('without' if control else 'with') + ' instruction-phase text',
+                       {'body': close(p(prefix + equation('n')))}, {'body': close(p(prefix + equation('k')))},
+                       {'body': close(p(prefix + rev.dele(equation('n')) + rev.ins(equation('k'))))},
+                       [untracked(CLOSING)] + trees('oMath', equation('n'), equation('k')))
+
+    for control in (False, True):
+        prefix = ('<w:r><w:fldChar w:fldCharType="begin"/>' +
+                  ('<w:instrText> PAGE </w:instrText><w:fldChar w:fldCharType="separate"/><w:t>1</w:t><w:fldChar w:fldCharType="end"/>' if control else '') +
+                  '</w:r><w:hyperlink w:anchor="reference">' + tab + '</w:hyperlink>')
+        suffix = ''
+        left, right = prefix + t('Alder') + suffix, prefix + t('Birch') + suffix
+        rev = Revisions()
+        tracked = (p(prefix + rev.dele(t('Alder')) + rev.ins(t('Birch')) + suffix) if control else
+                   p(rev.dele('<w:r><w:fldChar w:fldCharType="begin"/></w:r>') +
+                     '<w:hyperlink w:anchor="reference">' + rev.dele(tab) + '</w:hyperlink>' + rev.dele(t('Alder')), mark=rev.mark('del')) +
+                   p(rev.ins('<w:r><w:fldChar w:fldCharType="begin"/></w:r>') +
+                     '<w:hyperlink w:anchor="reference">' + rev.ins(tab) + '</w:hyperlink>' + rev.ins(t('Birch')), mark=rev.mark('ins')))
+        corpus.compare('redline-captured-field-source' + ('-control' if control else ''), 'fields',
+                       'control' if control else 'reproducer', issue,
+                       ('Text following a closed field' if control else 'Unfinished instruction-only field') + ' with a hyperlink and edited text',
+                       {'body': close(p(left))}, {'body': close(p(right))}, {'body': close(tracked)}, [untracked(CLOSING)])
+
+    from .fixtures import png
+    image = png(8, 8, lambda x, y: (0x22, 0x66, 0x88))
+    assets = 'Original 8 by 8 solid-color PNG generated here; literal text and OOXML; no embedded fonts'
+    image_parts = {'relations_extra': [('rFill', 'image', 'media/fill.png')],
+                   'content_types_extra': '<Default Extension="png" ContentType="image/png"/>',
+                   'extra_parts': {'word/media/fill.png': image}}
+    def drawing(image_fill, text):
+        fill = ('<a:blipFill><a:blip r:embed="rFill"/><a:stretch><a:fillRect/></a:stretch></a:blipFill>' if image_fill else
+                '<a:solidFill><a:srgbClr val="226688"/></a:solidFill>')
+        return ('<w:r><w:drawing xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
+                'xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" '
+                'xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+                '<wp:inline><wp:extent cx="1828800" cy="457200"/><wp:docPr id="1" name="Survey box"/>'
+                '<a:graphic><a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+                '<wps:wsp><wps:cNvSpPr txBox="1"/><wps:spPr><a:xfrm><a:off x="0" y="0"/>'
+                '<a:ext cx="1828800" cy="457200"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom>' + fill +
+                '</wps:spPr><wps:txbx><w:txbxContent>' + p(text) + '</w:txbxContent></wps:txbx><wps:bodyPr/>'
+                '</wps:wsp></a:graphicData></a:graphic></wp:inline></w:drawing></w:r>')
+    for control in (False, True):
+        rev = Revisions()
+        left = t('Card Alder ') + drawing(True, t('Survey box'))
+        right = t('Card Birch ') + drawing(control, t('Survey box'))
+        tracked = (p(t('Card ') + rev.dele(t('Alder')) + rev.ins(t('Birch')) + t(' ') + drawing(True, t('Survey box'))) if control else
+                   p(rev.dele(left), mark=rev.mark('del')) + p(rev.ins(right.replace('docPr id="1"', 'docPr id="2"')), mark=rev.mark('ins')))
+        corpus.compare('redline-shared-drawing-source' + ('-control' if control else ''), 'revisions',
+                       'control' if control else 'reproducer', issue,
+                       'Image-filled textbox ' + ('beside an ordinary text edit' if control else 'changes to solid fill beside a text edit'),
+                       dict(image_parts, body=close(p(left))), dict(image_parts, body=close(p(right))),
+                       dict(image_parts, body=close(tracked)), [untracked(CLOSING)] +
+                       trees('drawing', left, right, {'rFill': hashlib.sha256(image).hexdigest()}), assets=assets)
+
+
+def moved_from_text(corpus):
+    """A paragraph moves; a same-position edit controls ordinary revision text."""
+    first = 'Alder introduction stays in place.'
+    moved = 'Birch paragraph moves after the final paragraph in this revision.'
+    last = 'Cedar conclusion stays in place.'
+    rev = Revisions()
+    def half(kind, content):
+        end = rev.next + 1
+        begin = f'<w:{kind}RangeStart {rev.attrs(AUTHOR)} w:name="move1"/>'
+        wrapper = f'<w:{kind} {rev.attrs(AUTHOR)}>{t(content)}</w:{kind}>'
+        return begin + wrapper + f'<w:{kind}RangeEnd w:id="{end}"/>'
+    left = p(t(first)) + p(t(moved)) + p(t(last))
+    right = p(t(first)) + p(t(last)) + p(t(moved))
+    recorded = (p(t(first)) + p(half('moveFrom', moved), mark=rev.mark('del')) + p(t(last))
+                + p(half('moveTo', moved), mark=rev.mark('ins')))
+    corpus.compare('redline-moved-from-text', 'revisions', 'reproducer', 'JSv4/Docxodus#1420',
+                   'A moved paragraph keeps ordinary text in its source move',
+                   {'body': left}, {'body': right}, {'body': recorded},
+                   [untracked(first, last), {'type': 'revision-text', 'version': 1, 'scope': 'redline', 'kind': 'moveFrom', 'text': moved}])
+    rev = Revisions()
+    prefix = moved.removesuffix('revision.')
+    control_right = p(t(first)) + p(t(prefix + 'agreement.')) + p(t(last))
+    control_redline = p(t(first)) + p(t(prefix) + rev.dele(t('revision')) + rev.ins(t('agreement')) + t('.')) + p(t(last))
+    control_assertions = [untracked(first, last), {'type': 'revision-text', 'version': 1, 'scope': 'redline', 'kind': 'del', 'text': 'revision'}]
+    corpus.compare('redline-moved-from-text-control', 'revisions', 'control', 'JSv4/Docxodus#1420',
+                   'An ordinary replacement leaves the paragraph in place',
+                   {'body': left}, {'body': control_right}, {'body': control_redline}, control_assertions)
+    for control, revised, redline in ((False, right, recorded), (True, control_right, control_redline)):
+        case_id = 'redline-moved-from-text-consolidate' + ('-control' if control else '')
+        base = corpus.file(case_id, 'base', body=left)
+        reviewer = corpus.file(case_id, 'reviewer', body=revised)
+        unchanged = corpus.file(case_id, 'unchanged-reviewer', body=left)
+        authored = corpus.file(case_id, 'authored-redline', body=redline)
+        assertions = control_assertions if control else [
+            untracked(first, last), {'type': 'revision-text', 'version': 1, 'scope': 'redline', 'kind': 'moveFrom', 'text': moved}]
+        corpus.add(case_id, 'consolidate', 'control' if control else 'reproducer', 'JSv4/Docxodus#1420',
+                   'A reviewer ' + ('replaces text in place' if control else 'moves a paragraph'), 'consolidate',
+                   [dict(base, role='base'), dict(reviewer, role='reviewer', author=AUTHOR),
+                    dict(unchanged, role='reviewer', author='Other')],
+                   {'accepted': reviewer, 'rejected': base}, authored, assertions)
+
+
+def inline_control_rewrites(corpus):
+    """Keep native metadata when only the surrounding paragraph text is rewritten."""
+    for kind in ('binding', 'citation'):
+        props = ('<w:dataBinding w:xpath="/ledger[1]/edition[1]" '
+                 'w:storeItemID="{00000000-0000-0000-0000-000000000021}"/><w:text/>'
+                 if kind == 'binding' else '<w:citation/>')
+        content = (t('7.2') if kind == 'binding' else
+                   '<w:r><w:fldChar w:fldCharType="begin"/></w:r>'
+                   '<w:r><w:instrText xml:space="preserve"> CITATION Pine </w:instrText></w:r>'
+                   '<w:r><w:fldChar w:fldCharType="separate"/></w:r>' + t('7.2') +
+                   '<w:r><w:fldChar w:fldCharType="end"/></w:r>')
+        envelope = '<w:sdt><w:sdtPr><w:id w:val="21"/>' + props + '</w:sdtPr><w:sdtContent>' + content + '</w:sdtContent></w:sdt>'
+        for outside in (False, True):
+            for control in (False, True):
+                case_id = 'redline-control-rewrite-' + kind + ('-outside' if outside else '-echo') + ('-control' if control else '')
+                middle = t('7.2') if control else envelope
+                source = corpus.file(case_id, 'source', body=p(t('Edition ') + middle + t(' registered.')))
+                prefix, suffix = ('Revised edition ', ' registered today.') if outside else ('Edition ', ' registered.')
+                expected = corpus.file(case_id, 'expected', body=p(t(prefix) + middle + t(suffix)))
+                controls = [] if control else [envelope.replace('<w:sdt>', f'<w:sdt xmlns:w="{W}">', 1)]
+                assertions = [dict(type='content-controls', version=1, scope=scope, controls=controls)
+                              for scope in ('accepted', 'rejected')]
+                assertions.append(dict(type='revision-count', version=1, scope='redline', max=0))
+                corpus.add(case_id, 'fields', 'control' if control else 'reproducer', 'JSv4/Docxodus#1406',
+                           ('Outside edit' if outside else 'Unchanged echo') + ' beside ' + kind + (' ordinary-text control' if control else ' native control'),
+                           'replace-text', [dict(source, role='source')],
+                           {'accepted': expected, 'rejected': expected}, expected, assertions)
+                corpus.cases[-1]['paragraphRewrite'] = dict(version=1, paragraphIndex=0, markdown=prefix + '7.2' + suffix)
+
+
+    # Opaque inline spans must consume the projector's hard-break marker too.
+    for kind in ('strike', 'code', 'link'):
+        for control in (False, True):
+            case_id = 'redline-control-rewrite-' + kind + '-break' + ('-control' if control else '')
+            props = '<w:strike/>' if kind == 'strike' else '<w:rStyle w:val="Code"/>' if kind == 'code' else ''
+            value = 'A B' if control else 'A  \nB'
+            run = t('A B', props) if control else '<w:r>' + ('<w:rPr>' + props + '</w:rPr>' if props else '') + '<w:t>A</w:t><w:br/><w:t>B</w:t></w:r>'
+            relations = [('rLink', 'hyperlink', 'https://example.com/document', 'External')] if kind == 'link' else []
+            content = '<w:hyperlink r:id="rLink">' + run + '</w:hyperlink>' if kind == 'link' else run
+            envelope = '<w:sdt><w:sdtPr><w:id w:val="22"/></w:sdtPr><w:sdtContent>' + content + '</w:sdtContent></w:sdt>'
+            middle = content if control else envelope
+            styles = styles_part('<w:style w:type="character" w:styleId="Code"><w:name w:val="Code"/></w:style>') if kind == 'code' else None
+            source = corpus.file(case_id, 'source', body=p(t('Edition ') + middle + t(' registered.')), relations_extra=relations, styles=styles)
+            controls = [] if control else [envelope.replace('<w:sdt>', f'<w:sdt xmlns:w="{W}" xmlns:r="{R}">', 1)]
+            assertions = [dict(type='content-controls', version=1, scope=scope, controls=controls) for scope in ('accepted', 'rejected')]
+            assertions.append(dict(type='revision-count', version=1, scope='redline', max=0))
+            payload = ('~~' + value + '~~' if kind == 'strike' else '`' + value + '`' if kind == 'code'
+                       else '[' + value + '](https://example.com/document)')
+            corpus.add(case_id, 'fields', 'control' if control else 'reproducer', 'JSv4/Docxodus#1406',
+                       'Echo a ' + kind + (' single-line ordinary-text control' if control else ' multiline native control'),
+                       'replace-text', [dict(source, role='source')], {'accepted': source, 'rejected': source}, source, assertions)
+            corpus.cases[-1]['paragraphRewrite'] = dict(version=1, paragraphIndex=0, markdown='Edition ' + payload + ' registered.')
+
+
+def visible_atom_edits(corpus):
+    """One visible character is replaced, including native atoms and an inline XML envelope."""
+    atoms = [
+        ('tab', '<w:tab/>', '\t', {}),
+        ('br', '<w:br/>', '\n', {}),
+        ('cr', '<w:cr/>', '\n', {}),
+        ('page', '<w:br w:type="page" w:clear="all"/>', '\n', {'type': 'page', 'clear': 'all'}),
+        ('column', '<w:br w:type="column"/>', '\n', {'type': 'column'}),
+        ('ptab', '<w:ptab w:alignment="right" w:relativeTo="margin" w:leader="dot"/>', '\t',
+         {'alignment': 'right', 'relativeTo': 'margin', 'leader': 'dot'}),
+        ('nonbreaking-hyphen', '<w:noBreakHyphen/>', '‑', {}),
+        ('soft-hyphen', '<w:softHyphen/>', '­', {}),
+        ('symbol', '<w:sym w:font="Symbol" w:char="03A9"/>', 'Ω', {'font': 'Symbol', 'char': '03A9'}),
+    ]
+    def document(content):
+        return p(t('Willow register.')) + p(content) + p(t('Willow complete.'))
+    for name, atom, literal, attributes in atoms:
+        for control in (False, True):
+            control_text = {'\t': '_', '\n': '|'}.get(literal, literal)
+            case_id = 'redline-visible-atom-' + name + ('-control' if control else '')
+            original = t('Aster' + control_text + 'Birch') if control else '<w:r><w:t>Aster</w:t>' + atom + '<w:t>Birch</w:t></w:r>'
+            rev = Revisions()
+            selected = t(control_text) if control else '<w:r>' + atom + '</w:r>'
+            recorded = t('Aster') + rev.dele(selected) + rev.ins(t(':')) + t('Birch')
+            source = corpus.file(case_id, 'source', body=document(original))
+            accepted = corpus.file(case_id, 'accepted', body=document(t('Aster:Birch')))
+            rejected = corpus.file(case_id, 'rejected', body=document(original))
+            authored = corpus.file(case_id, 'authored-redline', body=document(recorded))
+            carrier_name = atom.split()[0].split(':')[1].rstrip('/>')
+            assertions = [dict(type='run-atoms', version=1, scope='accepted', atoms=[]),
+                          dict(type='run-atoms', version=1, scope='rejected',
+                               atoms=[] if control else [dict(name=carrier_name, attributes=attributes)])]
+            corpus.add(case_id, 'revisions', 'control' if control else 'reproducer',
+                       'JSv4/Docxodus#1387' if name == 'tab' else 'JSv4/Docxodus#1409',
+                       'Tracked replacement of one ' + name + (' ordinary-text control' if control else ' native run atom'),
+                       'replace-span', [dict(source, role='source')],
+                       {'accepted': accepted, 'rejected': rejected}, authored, assertions)
+            corpus.cases[-1]['spanEdit'] = dict(version=1, tracked=True, paragraphIndex=1, start=5, length=1, replacement=':')
+    for control in (False, True):
+        case_id = 'redline-visible-inline-xml' + ('-control' if control else '')
+        def envelope(content):
+            return content if control else '<w:customXml w:uri="urn:willow" w:element="clause">' + content + '</w:customXml>'
+        rev = Revisions()
+        source = corpus.file(case_id, 'source', body=document(envelope(t('Willow value'))))
+        accepted = corpus.file(case_id, 'accepted', body=document(envelope(t('Willow term'))))
+        authored = corpus.file(case_id, 'authored-redline', body=document(envelope(
+            t('Willow ') + rev.dele(t('value')) + rev.ins(t('term')))))
+        corpus.add(case_id, 'revisions', 'control' if control else 'reproducer', 'JSv4/Docxodus#1409',
+                   'Replace visible text inside ' + ('ordinary runs' if control else 'inline custom XML'),
+                   'replace-span', [dict(source, role='source')], {'accepted': accepted, 'rejected': source}, authored)
+        corpus.cases[-1]['spanEdit'] = dict(version=1, tracked=True, paragraphIndex=1, start=7, length=5, replacement='term')
+
+
+
+def move_range_membership(corpus):
+    """Ordinary runs inside named move ranges survive rejection, as native Word does."""
+    def mark(tag, identifier, content='', name=None):
+        attrs = f'w:id="{identifier}"' + (f' w:name="{name}"' if name else '')
+        if tag in {'moveFrom', 'moveTo', 'moveFromRangeStart', 'moveToRangeStart'}:
+            attrs += f' w:author="Alex" w:date="2026-05-01T09:00:00Z"'
+        return f'<w:{tag} {attrs}>{content}</w:{tag}>' if content else f'<w:{tag} {attrs}/>'
+
+    source = p(t('Old: ') + mark('moveFromRangeStart', 1, name='move1')
+               + mark('moveFrom', 2, '<w:r><w:delText>amount</w:delText></w:r>')
+               + mark('moveFromRangeEnd', 1) + t(' end'))
+    for shape in ('unsplit-control', 'plain-tail-inside', 'plain-between-move-elements',
+                  'split-destination', 'plain-outside-control', 'cross-paragraph-split'):
+        start = mark('moveToRangeStart', 3, name='move1')
+        end = mark('moveToRangeEnd', 3)
+        if shape == 'unsplit-control':
+            destination = p(t('Fee ') + start + mark('moveTo', 4, t('amount')) + end + t(' due'))
+        elif shape == 'plain-tail-inside':
+            destination = p(t('Fee ') + start + mark('moveTo', 4, t('amount')) + t('XY') + end + t(' due'))
+        elif shape == 'plain-between-move-elements':
+            destination = p(t('Fee ') + start + mark('moveTo', 4, t('amo')) + t('XY')
+                            + mark('moveTo', 6, t('unt')) + end + t(' due'))
+        elif shape == 'plain-outside-control':
+            destination = p(t('Fee ') + start + mark('moveTo', 4, t('amount')) + end + t('XY due'))
+        else:
+            split = (mark('moveTo', 4, t('amo')) + end + t('XY')
+                     + mark('moveToRangeStart', 5, name='move1') + mark('moveTo', 6, t('unt'))
+                     + mark('moveToRangeEnd', 5) + t(' due'))
+            destination = (p(t('Fee ') + start + split) if shape == 'split-destination'
+                           else p(t('Fee ') + start) + p(split))
+        case_id = 'redline-move-range-' + shape
+        tracked = corpus.file(case_id, 'input', body=source + destination)
+        # Authored explicitly from Word's observed endpoints, never from a candidate result.
+        tails = (['Fee ', 'XY due'] if shape == 'cross-paragraph-split'
+                 else ['Fee  due'] if shape == 'unsplit-control' else ['Fee XY due'])
+        expected = corpus.file(case_id, 'expected', body=p(t('Old: amount end')) + ''.join(p(t(text)) for text in tails))
+        corpus.add(case_id, 'revisions', 'control' if shape.endswith('control') else 'reproducer',
+                   'JSv4/Docxodus#1340', 'Reject a named move: ' + shape.replace('-', ' '), 'reject',
+                   [dict(tracked, role='input')], {'output': expected}, expected,
+                   [{'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0}])
+
+
+def revision_ownership(corpus):
+    actor = 'Taylor'
+    account = 'S::taylor@summit.example::55555555-5555-5555-5555-555555555555'
+    other = 'S::taylor@valley.example::66666666-6666-6666-6666-666666666666'
+    identity = {'providerId': 'AD', 'userId': account}
+    before, proposal, after = 'Summit opening.', 'Summit proposed clause.', 'Summit closing.'
+
+    def people(author, user):
+        return (f'<w15:person w15:author={quoteattr(author)}><w15:presenceInfo w15:providerId="AD" '
+                f'w15:userId={quoteattr(user)}/></w15:person>') if user is not None else None
+
+    def body(content=None, mark=''):
+        return p(t(before)) + (p(content, mark=mark) if content is not None else '') + p(t(after))
+
+    for suffix, author, user, own, configure in [
+            ('namesake-account', actor, other, False, 'open'),
+            ('unattributed-name', actor, None, False, 'operation'),
+            ('upn-alias', 'Word Taylor', 'S::TAYLOR@SUMMIT.EXAMPLE::77777777-7777-7777-7777-777777777777', True, 'open'),
+            ('object-id-alias', 'Word Taylor', 'S::old@summit.example::55555555-5555-5555-5555-555555555555', True, 'operation'),
+            ('legacy-name-control', actor, other, True, 'open')]:
+        case_id = 'redline-revision-owner-' + suffix
+        rev = Revisions()
+        source_doc = dict(body=body(rev.ins(t(proposal), author), rev.mark('ins', author)), people=people(author, user))
+        source = corpus.file(case_id, 'source', **source_doc)
+        red = Revisions()
+        recorded = body() if own else body(red.ins(red.dele(t(proposal), actor), author), red.mark('ins', author) + red.mark('del', actor))
+        authored = corpus.file(case_id, 'authored-redline', body=recorded, people=people(author, user))
+        expected = corpus.file(case_id, 'resolved', body=body(), people=people(author, user))
+        assertions = [untracked(before, after), paragraph_count(2 if own else 3),
+                      {'type': 'people-identity', 'version': 1, 'scope': 'redline', 'author': author,
+                       'identities': [] if user is None else [{'providerId': 'AD', 'userId': user}]}]
+        if own:
+            assertions.append({'type': 'revision-count', 'version': 1, 'scope': 'redline', 'max': 0})
+        else:
+            assertions.append({'type': 'pending-insertion-deletion', 'version': 1, 'scope': 'redline',
+                               'author': author, 'deletedBy': actor, 'text': proposal})
+        legacy = suffix == 'legacy-name-control'
+        corpus.add(case_id, 'identity', 'control' if legacy else 'reproducer', 'JSv4/Docxodus#1317',
+                   'Delete a pending paragraph: ' + suffix.replace('-', ' '), 'revision-ownership',
+                   [dict(source, role='source')], {'accepted': expected, 'rejected': expected}, authored, assertions)
+        corpus.cases[-1]['revisionOwnership'] = {'version': 1, 'author': actor, 'identities': None if legacy else [identity],
+            'configure': configure, 'action': 'delete-block', 'paragraphIndex': 1, 'text': '', 'queryAuthor': None if legacy else author}
+        if not legacy:
+            corpus.cases[-1]['authorNameStatus'] = {'version': 1, 'before': 'own' if own else 'taken', 'after': 'own' if own else 'taken'}
+
+    # A free name is registered only by the first attributed revision or comment. Expected
+    # documents and markup are literal declarations, never copied from a candidate's output.
+    comment_styles = styles_part(
+        '<w:style w:type="paragraph" w:styleId="CommentText"><w:name w:val="annotation text"/><w:basedOn w:val="Normal"/></w:style>'
+        '<w:style w:type="character" w:styleId="CommentReference"><w:name w:val="annotation reference"/></w:style>')
+    for action, suffix in [('replace-text', 'first-revision'), ('add-comment', 'first-comment')]:
+        case_id = 'redline-revision-owner-' + suffix
+        plain = p(t(before)) + p(t(proposal)) + p(t(after))
+        source = corpus.file(case_id, 'source', body=plain, styles=comment_styles)
+        metadata = people(actor, account)
+        if action == 'replace-text':
+            rev = Revisions()
+            recorded = p(rev.dele(t(before), actor) + rev.ins(t('Summit revised opening.'), actor)) + p(t(proposal)) + p(t(after))
+            accepted_doc = dict(body=p(t('Summit revised opening.')) + p(t(proposal)) + p(t(after)))
+            rejected_doc = dict(body=plain)
+            authored_doc = dict(body=recorded)
+            text = 'Summit revised opening.'
+        else:
+            text = 'Summit account note.'
+            reference = '<w:r><w:rPr><w:rStyle w:val="CommentReference"/></w:rPr><w:commentReference w:id="1"/></w:r>'
+            marked = p(comment_marks('rangeStart', 1) + t(before) + comment_marks('rangeEnd', 1) + reference) + p(t(proposal)) + p(t(after))
+            note = (f'<w:comment w:id="1" w:author="{actor}" w:date="{DATE}">'
+                    + p('<w:r><w:rPr><w:rStyle w:val="CommentReference"/></w:rPr><w:annotationRef/></w:r>' + t(text),
+                        props='<w:pStyle w:val="CommentText"/>') + '</w:comment>')
+            accepted_doc = rejected_doc = authored_doc = dict(body=marked, comments=note)
+        accepted = corpus.file(case_id, 'accepted', **accepted_doc, styles=comment_styles, people=metadata)
+        rejected = corpus.file(case_id, 'rejected', **rejected_doc, styles=comment_styles, people=metadata)
+        authored = corpus.file(case_id, 'authored-redline', **authored_doc, styles=comment_styles, people=metadata)
+        corpus.add(case_id, 'identity', 'reproducer', 'JSv4/Docxodus#1317',
+                   'Register a free reviewer name on its ' + suffix.replace('-', ' '), 'revision-ownership',
+                   [dict(source, role='source')], {'accepted': accepted, 'rejected': rejected}, authored,
+                   [paragraph_count(3), {'type': 'people-identity', 'version': 1, 'scope': 'redline', 'author': actor, 'identities': [identity]}])
+        corpus.cases[-1]['revisionOwnership'] = {'version': 1, 'author': actor, 'identities': [identity],
+            'configure': 'operation' if action == 'add-comment' else 'open', 'action': action,
+            'paragraphIndex': 0, 'text': text, 'queryAuthor': actor}
+        corpus.cases[-1]['authorNameStatus'] = {'version': 1, 'before': 'free', 'after': 'own'}
+
+
+def semantic_limits(corpus):
+    body = p(t('Marsh station agreement.')) + p(t(' '.join(['Each survey crew records the water level.'] * 24))) + p(t(CLOSING))
+    for strict, kind, suffix in [(True, 'reproducer', 'strict'), (False, 'control', 'transitional-control')]:
+        case_id = 'redline-semantic-raw-limits-' + suffix
+        left = corpus.file(case_id, 'left', body=body, strict=strict)
+        right = corpus.file(case_id, 'right', body=body, strict=strict)
+        expected = corpus.file(case_id, 'expected', body=body)
+        authored = corpus.file(case_id, 'authored-redline', body=body)
+        corpus.add(case_id, 'identity', kind, 'JSv4/Docxodus#1352',
+                   'Identical ' + ('Strict' if strict else 'Transitional') + ' inputs remain comparable at their raw package limits',
+                   'compare', [dict(left, role='left'), dict(right, role='right')],
+                   {'accepted': expected, 'rejected': expected}, authored,
+                   [untracked('Marsh station agreement.', CLOSING), paragraph_count(3)])
+        corpus.cases[-1]['semanticPreflight'] = {'version': 1, 'limits': 'raw-boundaries', 'changeCount': 0}
+
+
+def column_widths(corpus):
+    original = [2400, 3200]
+
+    def document(widths, tracked=False):
+        revisions = Revisions()
+        def properties(values):
+            return f'<w:tblW w:w="{sum(values)}" w:type="dxa"/><w:tblLayout w:type="fixed"/>'
+        def grid(values):
+            return '<w:tblGrid>' + ''.join(f'<w:gridCol w:w="{v}"/>' for v in values) + '</w:tblGrid>'
+        pr = properties(widths)
+        if tracked and sum(widths) != sum(original):
+            pr += f'<w:tblPrChange {revisions.attrs(AUTHOR)}><w:tblPr>{properties(original)}</w:tblPr></w:tblPrChange>'
+        columns = grid(widths)
+        if tracked:
+            identifier = revisions.next
+            revisions.next += 1
+            columns = columns.replace('</w:tblGrid>', f'<w:tblGridChange w:id="{identifier}">{grid(original)}</w:tblGridChange></w:tblGrid>', 1)
+        rows = ''
+        for labels in [('North gauge', 'East gauge'), ('South gauge', 'West gauge')]:
+            cells = ''
+            for index, label in enumerate(labels):
+                cell_pr = f'<w:tcW w:w="{widths[index]}" w:type="dxa"/>'
+                if tracked and widths[index] != original[index]:
+                    cell_pr += f'<w:tcPrChange {revisions.attrs(AUTHOR)}><w:tcPr><w:tcW w:w="{original[index]}" w:type="dxa"/></w:tcPr></w:tcPrChange>'
+                cells += f'<w:tc><w:tcPr>{cell_pr}</w:tcPr>{p(t(label))}</w:tc>'
+            rows += '<w:tr>' + cells + '</w:tr>'
+        return {'body': p(t('Gauge register column widths.')) + f'<w:tbl><w:tblPr>{pr}</w:tblPr>{columns}{rows}</w:tbl>' + p(t(CLOSING))}
+
+    def assertion(values, scope):
+        return {'type': 'table-widths', 'version': 1, 'scope': scope, 'grid': values,
+                'cells': [values, values], 'table': sum(values)}
+
+    for suffix, values in [('full', [2600, 3000]), ('partial', [2400, 3000])]:
+        for tracked, kind, tail in [(True, 'reproducer', ''), (False, 'control', '-untracked-control')]:
+            case_id = 'redline-table-column-widths-' + suffix + tail
+            source = corpus.file(case_id, 'source', **document(original))
+            updated = corpus.file(case_id, 'updated', **document(values))
+            authored = corpus.file(case_id, 'authored-redline', **document(values, tracked))
+            corpus.add(case_id, 'tables', kind, 'JSv4/Docxodus#1322',
+                       ('Tracked' if tracked else 'Untracked') + ' column widths change ' + ('both columns' if suffix == 'full' else 'only the second column'),
+                       'table-widths', [dict(source, role='source')],
+                       {'accepted': updated, 'rejected': source if tracked else updated}, authored,
+                       [untracked('Gauge register column widths.', 'North gauge', 'East gauge', 'South gauge', 'West gauge', CLOSING),
+                        assertion(values, 'accepted'), assertion(original if tracked else values, 'rejected')])
+            corpus.cases[-1]['tableWidths'] = {'version': 1, 'widths': values, 'tracked': tracked}
+            corpus.cases[-1]['revisionRegistry'] = {'version': 1, 'count': 1 if tracked else 0}
+
+
+def tracked_column_gaps(corpus):
+    def cell(text, width, span=1, fill=None):
+        return {'text': text, 'span': span, 'width': width, 'type': 'dxa', 'fill': fill}
+    def row(cells, before=0, after=0):
+        return {'before': before, 'after': after, 'height': None, 'cells': cells}
+    def document(grid, rows):
+        body = '<w:tbl><w:tblPr/><w:tblGrid>' + ''.join(f'<w:gridCol w:w="{w}"/>' for w in grid) + '</w:tblGrid>'
+        for r in rows:
+            properties = ''.join(f'<w:{name} w:val="{r[key]}"/>' for name, key in [('gridBefore', 'before'), ('gridAfter', 'after')] if r[key])
+            body += '<w:tr>' + (f'<w:trPr>{properties}</w:trPr>' if properties else '')
+            for c in r['cells']:
+                cp = f'<w:tcW w:w="{c["width"]}" w:type="dxa"/>'
+                if c['span'] > 1: cp += f'<w:gridSpan w:val="{c["span"]}"/>'
+                if c['fill'] is not None: cp += f'<w:shd w:val="clear" w:fill="{c["fill"]}"/>'
+                body += '<w:tc><w:tcPr>' + cp + '</w:tcPr>' + p(t(c['text'])) + '</w:tc>'
+            body += '</w:tr>'
+        return p(t('Waterway inspection.')) + body + '</w:tbl>' + p(t('Inspection complete.'))
+    for scenario, resolution in [('leading', 'reject-all'), ('trailing', 'accept-all'),
+                                 ('merged-reject', 'reject-each'), ('merged-accept', 'accept-all')]:
+        mixed = scenario.startswith('merged')
+        if mixed:
+            grid, expanded_grid = [2100, 1300, 2600], [2100, 2100, 1300, 2600]
+            north, center, south = [cell(name, width) for name, width in [('North buoy', 2100), ('Central buoy', 1300), ('South buoy', 2600)]]
+            rows = [row([north, center, south]), row([cell('Bridge reach', 6000, 3, 'D9EAD3')]),
+                    row([south], before=2), row([north, center, south])]
+            expanded = [row([north, cell('', 2100), center, south]), row([cell('Bridge reach', 8100, 4, 'D9EAD3')]),
+                        row([south], before=3), row([north, cell('', 2100), center, south])]
+            index, position = 0, 'after'
+        else:
+            a, b, c, d, e = [cell(name, width) for name, width in [('East marker', 2400), ('West marker', 1600),
+                ('Center marker', 1600 if scenario == 'leading' else 2400), ('Upper marker', 2400), ('Lower marker', 1600)]]
+            grid = [2400, 1600]
+            if scenario == 'leading':
+                rows = [row([a, b]), row([c], before=1), row([d, e])]
+                expanded_grid = [2400, 2400, 1600]
+                expanded = [row([cell('', 2400), a, b]), row([c], before=2), row([cell('', 2400), d, e])]
+                index, position = 0, 'before'
+            else:
+                rows = [row([a, b]), row([c], after=1), row([d, e])]
+                expanded_grid = [2400, 1600, 1600]
+                expanded = [row([a, b, cell('', 1600)]), row([c], after=2), row([d, e, cell('', 1600)])]
+                index, position = 1, 'after'
+        for tracked, kind, suffix in [(True, 'reproducer', ''), (False, 'control', '-control')]:
+            case_id = 'redline-column-gap-' + scenario + suffix
+            source = corpus.file(case_id, 'source', body=document(grid, rows))
+            accepted = not tracked or resolution == 'accept-all'
+            resolved_grid, resolved_rows = (expanded_grid, expanded) if accepted else (grid, rows)
+            expected = corpus.file(case_id, 'expected', body=document(resolved_grid, resolved_rows))
+            authored = corpus.file(case_id, 'authored-output', body=document(resolved_grid, resolved_rows))
+            state = {'grid': resolved_grid, 'rows': [dict(r, cells=[{k: v for k, v in c.items() if k != 'text'} for c in r['cells']]) for r in resolved_rows]}
+            corpus.add(case_id, 'tables', kind, 'JSv4/Docxodus#1330',
+                       f'{scenario} column insertion followed by {resolution}, ' + ('tracked' if tracked else 'direct control'),
+                       'column-edit', [dict(source, role='source')], {'output': expected}, authored,
+                       [{'type': 'table-state', 'version': 1, 'scope': 'output', 'state': state},
+                        {'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0}])
+            corpus.cases[-1]['columnEdit'] = {'version': 2, 'tracked': tracked, 'action': 'insert',
+                                             'cellIndex': index, 'position': position, 'resolution': resolution}
+            corpus.cases[-1]['columnReview'] = {'version': 1, 'beforeCount': 1 if tracked else 0,
+                                               'supported': True, 'resolutionSuccess': True}
+            corpus.cases[-1]['revisionRegistry'] = {'version': 1, 'count': 0}
+
+
+def mixed_run_edits(corpus):
+    def document(content):
+        return p(t('Marina register.')) + p(content) + p(t('Survey complete.'))
+    for marker in ('tab', 'br'):
+        mark = f'<w:r><w:{marker}/></w:r>'
+        for tracked in (False, True):
+            for cut in ('before', 'across'):
+                for reproducer, kind, suffix in [(True, 'reproducer', ''), (False, 'control', '-control')]:
+                    mode = 'tracked' if tracked else 'direct'
+                    case_id = f'redline-mixed-run-{marker}-{mode}-{cut}{suffix}'
+                    length = 1 if cut == 'before' else 2
+                    replacement = ('' if tracked else 'o') if cut == 'before' else 'ur'
+                    source_content = ('<w:r><w:t>ca</w:t>' + f'<w:{marker}/>' + '<w:t>ve</w:t></w:r>') if reproducer else t('cave') + mark
+                    if reproducer:
+                        accepted_content = t('c' + replacement) + mark + t('ve' if cut == 'before' else 'e')
+                    else:
+                        accepted_content = t('c' + replacement + ('ve' if cut == 'before' else 'e')) + mark
+                    rev = Revisions()
+                    if tracked:
+                        if reproducer:
+                            recorded = t('c') + rev.dele(t('a')) + (rev.ins(t(replacement)) if replacement else '') + mark
+                            recorded += (t('ve') if cut == 'before' else rev.dele(t('v')) + t('e'))
+                        else:
+                            recorded = t('c') + rev.dele(t('a' if cut == 'before' else 'av'))
+                            recorded += (rev.ins(t(replacement)) if replacement else '') + t('ve' if cut == 'before' else 'e') + mark
+                    else:
+                        recorded = accepted_content
+                    source = corpus.file(case_id, 'source', body=document(source_content))
+                    accepted = corpus.file(case_id, 'accepted', body=document(accepted_content))
+                    rejected = corpus.file(case_id, 'rejected', body=document(source_content if tracked else accepted_content))
+                    authored = corpus.file(case_id, 'authored-redline', body=document(recorded))
+                    corpus.add(case_id, 'revisions', kind, 'JSv4/Docxodus#1337',
+                        f'{mode} text edit {cut} a {marker}, ' + ('between two text nodes in one run' if reproducer else 'after the selected text'),
+                        'replace-span', [dict(source, role='source')], {'accepted': accepted, 'rejected': rejected}, authored,
+                        [{'type': 'paragraph-count', 'version': 1, 'scope': scope, 'story': 'body', 'count': 3} for scope in ('accepted', 'rejected')])
+                    corpus.cases[-1]['spanEdit'] = {'version': 1, 'tracked': tracked, 'paragraphIndex': 1,
+                        'start': 1, 'length': length, 'replacement': replacement}
+
+
+def block_insertions(corpus):
+    def table(text):
+        return ('<w:tbl><w:tblPr/><w:tblGrid><w:gridCol w:w="2000"/></w:tblGrid><w:tr><w:tc>'
+                '<w:tcPr><w:tcW w:w="2000" w:type="dxa"/><w:shd w:val="clear" w:fill="D9EAD3"/></w:tcPr>'
+                + p(t(text)) + '</w:tc></w:tr></w:tbl>')
+    opening, original, closing = p(t('Harbor opening.')), table('Harbor cell.'), p(t('Harbor closing.'))
+    state = {'grid': [2000], 'rows': [{'before': 0, 'after': 0, 'height': None,
+             'cells': [{'span': 1, 'width': 2000, 'type': 'dxa', 'fill': 'D9EAD3'}]}]}
+    for operation in ('paragraph', 'rule', 'table'):
+        for success, kind, suffix in [(False, 'reproducer', ''), (True, 'control', '-control')]:
+            case_id = 'redline-block-insert-' + operation + suffix
+            source = corpus.file(case_id, 'source', body=opening + original + closing)
+            # The controls insert after the first body paragraph, before the existing table.
+            extra = p(t('Harbor register note.')) if operation == 'paragraph' else p('') if operation == 'rule' else table('') + p('')
+            body = opening + (extra if success else '') + original + closing
+            expected = corpus.file(case_id, 'expected', body=body)
+            authored = corpus.file(case_id, 'authored-output', body=body)
+            assertions = [{'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0},
+                          {'type': 'paragraph-count', 'version': 1, 'scope': 'output', 'story': 'body', 'count': (5 if operation == 'table' else 4) if success else 3}]
+            if not success:
+                assertions.append({'type': 'table-state', 'version': 1, 'scope': 'output', 'state': state})
+            corpus.add(case_id, 'tables', kind, 'JSv4/Docxodus#1331',
+                       'Insert a ' + operation + ' beside ' + ('a valid body paragraph' if success else 'a cell anchor without block siblings'),
+                       'block-insert', [dict(source, role='source')], {'output': expected}, authored, assertions)
+            corpus.cases[-1]['blockInsert'] = {'version': 1, 'operation': operation,
+                'anchorKind': 'p' if success else 'tc', 'position': 'after', 'markdown': 'Harbor register note.'}
+            corpus.cases[-1]['editOutcome'] = {'success': success, 'errorCode': None if success else 'AnchorWrongKind',
+                                             'versionDelta': 1 if success else 0, 'undoAvailable': success}
+
+
+def pending_grid_columns(corpus):
+    import copy
+
+    def cell(text, width=2000, span=1, fill=None):
+        return {'text': text, 'width': width, 'span': span, 'type': 'dxa', 'fill': fill}
+
+    def row(cells, before=0, height=None):
+        return {'before': before, 'after': 0, 'height': height, 'cells': cells}
+
+    def document(grid, rows, previous_grid=None):
+        rev = Revisions()
+        def cell_properties(c):
+            result = f'<w:tcW w:w="{c["width"]}" w:type="dxa"/>'
+            if c['span'] > 1:
+                result += f'<w:gridSpan w:val="{c["span"]}"/>'
+            if c['fill'] is not None:
+                result += f'<w:shd w:val="clear" w:fill="{c["fill"]}"/>'
+            return result
+        def row_properties(r):
+            result = ''.join(f'<w:{name} w:val="{r[key]}"/>' for name, key in [('gridBefore', 'before'), ('gridAfter', 'after')] if r[key])
+            return result + (f'<w:trHeight w:val="{r["height"]}"/>' if r['height'] is not None else '')
+        def columns(values):
+            return ''.join(f'<w:gridCol w:w="{v}"/>' for v in values)
+        grid_xml = columns(grid)
+        if previous_grid is not None:
+            identifier = rev.next
+            rev.next += 1
+            grid_xml += f'<w:tblGridChange w:id="{identifier}"><w:tblGrid>{columns(previous_grid)}</w:tblGrid></w:tblGridChange>'
+        row_xml = ''
+        for r in rows:
+            properties = row_properties(r)
+            if 'previous' in r:
+                properties += f'<w:trPrChange {rev.attrs("Prior Survey Reviewer")}><w:trPr>{row_properties(r["previous"])}</w:trPr></w:trPrChange>'
+            cells = ''
+            for c in r['cells']:
+                cp = cell_properties(c)
+                if 'previous' in c:
+                    cp += f'<w:tcPrChange {rev.attrs("Prior Survey Reviewer")}><w:tcPr>{cell_properties(c["previous"])}</w:tcPr></w:tcPrChange>'
+                cells += f'<w:tc><w:tcPr>{cp}</w:tcPr>{p(t(c["text"]))}</w:tc>'
+            row_xml += '<w:tr>' + (f'<w:trPr>{properties}</w:trPr>' if properties else '') + cells + '</w:tr>'
+        return {'body': p(t('Survey channel register.')) + f'<w:tbl><w:tblPr/><w:tblGrid>{grid_xml}</w:tblGrid>{row_xml}</w:tbl>' + p(t('Register closing remains.'))}
+
+    for shape in ('plain', 'no-op', 'merged', 'omitted', 'merged-before', 'merged-after'):
+        for action in (('insert',) if shape in {'merged-before', 'merged-after'} else ('insert', 'delete')):
+            for pending, kind, suffix in [(True, 'reproducer', ''), (False, 'control', '-control')]:
+                grid = [2000, 2000, 2000] if shape == 'omitted' else [2000, 2000]
+                prior = grid if shape == 'no-op' else ([3000, 1000, 2000] if shape == 'omitted' else [3000, 1000])
+                a, b, c, d, e = [cell(label) for label in ('Canal marker', 'Quay marker', 'Ridge marker', 'Jetty marker', 'Marsh marker')]
+                rows = [row([a, b]), row([c, d])]
+                index, position = 0, 'after'
+                if shape.startswith('merged'):
+                    merged = cell('Long reach marker', 4000, 2, 'D9EAD3')
+                    if pending:
+                        merged['previous'] = cell('Long reach marker', 4000, 2, 'FFF2CC')
+                    rows = [row([merged]), row([a, b])]
+                    index = 1 if shape == 'merged' else 0
+                    position = 'before' if shape == 'merged-before' else 'after'
+                elif shape == 'omitted':
+                    rows = [row([a, b], 1, 480), row([c, d, e])]
+                    if pending:
+                        rows[0]['previous'] = row([], 1, 240)
+                    index, position = 2, 'before'
+
+                source = document(grid, copy.deepcopy(rows), prior if pending else None)
+                expected_grid = prior if pending else grid
+                if shape in {'plain', 'no-op'}:
+                    if action == 'insert':
+                        expected_grid = [expected_grid[0], expected_grid[0], expected_grid[1]]
+                        expected_rows = [row([a, cell(''), b]), row([c, cell(''), d])]
+                    else:
+                        expected_grid = [expected_grid[1]]
+                        expected_rows = [row([b]), row([d])]
+                elif shape.startswith('merged'):
+                    fill = 'FFF2CC' if pending else 'D9EAD3'
+                    if action == 'insert':
+                        if shape == 'merged-after':
+                            previous_width = expected_grid[1]
+                            expected_grid = [expected_grid[0], expected_grid[1], expected_grid[1]]
+                            expected_rows = [row([cell('Long reach marker', 4000, 2, fill), cell('', previous_width, 1, fill)]), row([a, b, cell('')])]
+                        elif shape == 'merged-before':
+                            previous_width = expected_grid[0]
+                            expected_grid = [expected_grid[0], expected_grid[0], expected_grid[1]]
+                            expected_rows = [row([cell('', previous_width, 1, fill), cell('Long reach marker', 4000, 2, fill)]), row([cell(''), a, b])]
+                        else:
+                            expected_grid = [expected_grid[0], expected_grid[0], expected_grid[1]]
+                            expected_rows = [row([cell('Long reach marker', 7000 if pending else 6000, 3, fill)]), row([a, cell(''), b])]
+                    else:
+                        expected_grid = [expected_grid[1]]
+                        expected_rows = [row([cell('Long reach marker', 1000 if pending else 2000, 1, fill)]), row([b])]
+                else:
+                    height = 240 if pending else 480
+                    if action == 'insert':
+                        expected_grid = [expected_grid[0], expected_grid[0], expected_grid[1], expected_grid[2]]
+                        expected_rows = [row([a, b], 2, height), row([cell(''), c, d, e])]
+                    else:
+                        expected_grid = expected_grid[1:]
+                        expected_rows = [row([a, b], 0, height), row([d, e])]
+
+                case_id = f'redline-pending-grid-{shape}-{action}{suffix}'
+                input_record = corpus.file(case_id, 'source', **source)
+                expected = corpus.file(case_id, 'expected', **document(expected_grid, expected_rows))
+                authored = corpus.file(case_id, 'authored-output', **document(expected_grid, expected_rows))
+                state = {'grid': expected_grid, 'rows': [dict(r, cells=[{k: value for k, value in item.items() if k != 'text'} for item in r['cells']]) for r in expected_rows]}
+                corpus.add(case_id, 'tables', kind, 'JSv4/Docxodus#1342',
+                           f'Untracked column {action}, {shape} rows, followed by resolving ' + ('pending formatting' if pending else 'a revision-free control'),
+                           'column-edit', [dict(input_record, role='source')], {'output': expected}, authored,
+                           [{'type': 'table-state', 'version': 1, 'scope': 'output', 'state': state},
+                            {'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0}])
+                resolution = 'reject-each' if (action == 'delete') != (shape == 'merged') else 'reject-all'
+                corpus.cases[-1]['columnEdit'] = {'version': 1, 'action': action, 'position': position,
+                                                  'cellIndex': index, 'resolution': resolution}
+                corpus.cases[-1]['revisionRegistry'] = {'version': 1, 'count': 0}
 
 
 # ---------------------------------------------------------------------------------------------
@@ -613,6 +1564,42 @@ def rejects(corpus):
 
 
 # ---------------------------------------------------------------------------------------------
+# Docxodus #1189: a math object follows the revision marks on its control character
+# ---------------------------------------------------------------------------------------------
+
+def math_control_revisions(corpus):
+    """A fraction whose control character (m:fPr/m:ctrlPr) was inserted and later deleted, the only
+    nesting CT_MathCtrlIns allows, beside a fraction that was only deleted. Word 2024 removes the
+    whole object on Accept All in both, and on Reject All of the nested form; the expected documents
+    are authored from those endpoints, never from a candidate result."""
+    def math_run(text):
+        return f'<m:r><m:t>{escape(text)}</m:t></m:r>'
+
+    def body(fraction=''):
+        return (p(t('Juniper ratio ledger.')) + p(f'<m:oMath>{math_run("A=")}{fraction}{math_run("+B")}</m:oMath>')
+                + p(t(CLOSING)))
+
+    def fraction(shape, rev):
+        deleted = shape == 'deleted-control'
+        control = (f'<w:del {rev.attrs(AUTHOR)}><w:rPr/></w:del>' if deleted else
+                   f'<w:ins {rev.attrs(AUTHOR)}><w:del {rev.attrs("Second Reviewer")}><w:rPr/></w:del></w:ins>')
+        wrap = (lambda run: f'<w:del {rev.attrs(AUTHOR)}>{run}</w:del>') if deleted else rev.ins
+        return (f'<m:f><m:fPr><m:ctrlPr>{control}</m:ctrlPr></m:fPr><m:num>{wrap(math_run("1"))}</m:num>'
+                f'<m:den>{wrap(math_run("2"))}</m:den></m:f>')
+
+    for operation, shape, kind in [('accept', 'inserted-deleted', 'reproducer'), ('accept', 'deleted-control', 'control'),
+                                   ('reject', 'inserted-deleted', 'control')]:
+        name = f'redline-{operation}-math-control-{shape}'
+        tracked = corpus.file(name, 'tracked', body=body(fraction(shape, Revisions())))
+        expected = corpus.file(name, 'expected', body=body())
+        label = ('inserted and then deleted' if shape == 'inserted-deleted' else 'deleted')
+        corpus.add(name, 'revisions', kind, 'JSv4/Docxodus#1189',
+                   f'{operation.capitalize()}ing a fraction whose control character was {label}', operation,
+                   [dict(tracked, role='input')], {'output': expected}, expected,
+                   [{'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0}])
+
+
+# ---------------------------------------------------------------------------------------------
 # Docxodus #1175: N-way consolidation keeps a reviewer's block-level bookmarks
 # ---------------------------------------------------------------------------------------------
 
@@ -922,3 +1909,680 @@ def bookmark_conflicts(corpus):
 
 if __name__ == '__main__':
     print(f'Authored {len(generate()["cases"])} deterministic redline cases')
+
+
+# ---------------------------------------------------------------------------------------------
+# Docxodus #1312: a reply the revision adds to a comment the original numbers differently or not at all
+# ---------------------------------------------------------------------------------------------
+
+def reply_parents(corpus):
+    root_text, reply_text = 'Check the delivery date.', 'Friday is confirmed.'
+    def thread_entry(para_id, parent=None):
+        return f'<w15:commentEx w15:paraId="{para_id}"' + (f' w15:paraIdParent="{parent}"' if parent else '') + ' w15:done="0"/>'
+    def body(replied, rev=None):
+        mark = rev.ins if rev else (lambda content: content)
+        start = comment_marks('rangeStart', 1) + (mark(comment_marks('rangeStart', 2)) if replied else '')
+        end = (comment_marks('rangeEnd', 1) + comment_marks('reference', 1)
+               + (mark(comment_marks('rangeEnd', 2)) + mark(comment_marks('reference', 2)) if replied else ''))
+        return p(t('Register opening paragraph.')) + p(start + t('The seller delivers the goods.') + end) + p(t(CLOSING))
+    def document(root_id, reply_id=None, rev=None):
+        notes = comment(1, root_text, para_id=root_id) + (comment(2, reply_text, para_id=reply_id) if reply_id else '')
+        threads = None if root_id is None else thread_entry(root_id) + (thread_entry(reply_id, root_id) if reply_id else '')
+        return {'body': body(reply_id is not None, rev), 'comments': notes, 'comments_extended': threads}
+    for name, kind, original_id, revised_ids, redline_ids, description in [
+            ('redline-comment-reply-id-less-root', 'reproducer', None, ('00000001', '00000002'), ('00000001', '00000002'),
+             'the original root comment has no paragraph id and no commentsExtended part'),
+            ('redline-comment-reply-renumbered-root', 'reproducer', '0000000A', ('0000000B', '0000000C'), ('0000000A', '0000000C'),
+             'the revision numbers the root comment\'s paragraph id differently from the original'),
+            ('redline-comment-reply-root-para-id-control', 'control', '00000001', ('00000001', '00000002'), ('00000001', '00000002'),
+             'both documents give the root comment the same paragraph id')]:
+        corpus.compare(name, 'comments', kind, 'JSv4/Docxodus#1312',
+                       'The revision adds a threaded reply to an unchanged comment; ' + description,
+                       document(original_id), document(*revised_ids), document(*redline_ids, rev=Revisions()),
+                       [untracked('Register opening paragraph.', 'The seller delivers the goods.', CLOSING),
+                        {'type': 'comment-threads', 'version': 1, 'scope': 'redline', 'threads': [[reply_text, root_text]]},
+                        {'type': 'para-ids-valid', 'version': 1, 'scope': 'redline'}])
+
+
+
+# ---------------------------------------------------------------------------------------------
+# Package shapes: external targets System.Uri rejects (#1388) and parts the SDK refuses (#1384)
+# ---------------------------------------------------------------------------------------------
+
+INTRO = 'Intro: the notice terms below apply to every order.'
+ADDED = 'Added paragraph: the revised draft keeps this new line.'
+
+
+def link(rid, content):
+    return f'<w:hyperlink r:id="{rid}" w:history="1">{content}</w:hyperlink>'
+
+
+def link_paragraph(rid, rev=None):
+    if rev is None:
+        return p(t('Send notices to ') + link(rid, t('the notice desk')) + t('.'))
+    return p(rev.ins(t('Send notices to ')) + link(rid, rev.ins(t('the notice desk'))) + rev.ins(t('.')), mark=rev.mark('ins'))
+
+
+def hyperlink_targets(*targets):
+    return {'type': 'hyperlink-targets', 'version': 1, 'scope': 'redline', 'targets': list(targets)}
+
+
+def external_links(corpus):
+    """A mailto target naming several recipients, which System.Uri cannot parse, on one or both sides."""
+    for recipients, target in (('recipients', 'mailto:first@example.com;second@example.com'),
+                               ('single', 'mailto:solo@example.com')):
+        control = recipients == 'single'
+        relation = [('rLink', 'hyperlink', target, 'External')]
+        for inserted in (False, True):
+            case_id = 'redline-hyperlink-mailto-' + recipients + ('-inserted' if inserted else '') + ('-control' if control else '')
+            rev = Revisions()
+            if inserted:
+                left = dict(body=p(t(INTRO)) + p(t(CLOSING)))
+                right = dict(body=p(t(INTRO)) + link_paragraph('rLink') + p(t(CLOSING)), relations_extra=relation)
+                redline = dict(body=p(t(INTRO)) + link_paragraph('rLink', rev) + p(t(CLOSING)), relations_extra=relation)
+                texts = (INTRO, CLOSING)
+                change = 'a paragraph holding the link is inserted'
+            else:
+                shared = p(t(INTRO)) + link_paragraph('rLink')
+                left = dict(body=shared + p(t(CLOSING)), relations_extra=relation)
+                right = dict(body=shared + p(t(ADDED)) + p(t(CLOSING)), relations_extra=relation)
+                redline = dict(body=shared + p(rev.ins(t(ADDED)), mark=rev.mark('ins')) + p(t(CLOSING)), relations_extra=relation)
+                texts = (INTRO, 'Send notices to ', CLOSING)
+                change = 'an unrelated paragraph is added beside the link'
+            description = (('An external hyperlink to ' + ('one mailto recipient' if control else 'a mailto target naming two recipients, which System.Uri rejects'))
+                           + '; ' + change + '. The redline keeps the target exactly as written.')
+            corpus.compare(case_id, 'packages', 'control' if control else 'reproducer', 'JSv4/Docxodus#1388', description,
+                           left, right, redline, [untracked(*texts), hyperlink_targets(target)])
+
+
+def package_shapes(corpus):
+    """Packages the Open XML SDK refuses at open; one unrelated paragraph is added."""
+    descriptions = {
+        'typed-parts-control': 'An embedded-font part typed by a ttf Default, a glossary document with its own Override and a hyperlink under its own relationship id',
+        'untyped-font': 'The font table embeds a part that no Default or Override gives a content type',
+        'generic-glossary': 'The glossary document is typed only by the generic application/xml Default',
+        'shared-relationship-id': "An external hyperlink relationship reuses the settings relationship's id",
+    }
+    repaired = package_shape('typed-parts-control')
+    for shape in PACKAGE_SHAPES:
+        extras = package_shape(shape)
+        def document(body, form=extras):
+            return dict(body=body, relations_extra=form['relations'], content_types_extra=form['content_types'], extra_parts=form['parts'])
+        shared = p(t(INTRO)) + link_paragraph(extras['link'])
+        rev = Revisions()
+        # The authored redline writes the repaired (control) package form; the expected documents are the inputs.
+        redline = document(p(t(INTRO)) + link_paragraph(repaired['link']) + p(rev.ins(t(ADDED)), mark=rev.mark('ins')) + p(t(CLOSING)), repaired)
+        control = shape == 'typed-parts-control'
+        corpus.compare('redline-package-' + shape, 'packages', 'control' if control else 'reproducer', 'JSv4/Docxodus#1384',
+                       descriptions[shape] + '; an unrelated paragraph is added.',
+                       document(shared + p(t(CLOSING))), document(shared + p(t(ADDED)) + p(t(CLOSING))), redline,
+                       [untracked(INTRO, 'Send notices to ', CLOSING), hyperlink_targets(PACKAGE_LINK_TARGET)],
+                       assets=('All text is generated here; no images. word/fonts/ExampleSans-regular.ttf holds the '
+                               'placeholder bytes declared in bench/common.py, which are not a font program'))
+
+
+
+def field_default_spacing(corpus):
+    """An unchanged field must not suppress document-default paragraph spacing."""
+    original = ('Cedar station registers the blue parcel.', 'Place the copper token beside the door.')
+    added = ('Store the empty basket under the workbench.', 'Leave the orange ticket on the tray.')
+    def styles(after, line, normal=STYLE_NORMAL):
+        return (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+                f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="24"/>'
+                '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+                f'<w:spacing w:after="{after}" w:line="{line}" w:lineRule="auto"/>'
+                f'</w:pPr></w:pPrDefault></w:docDefaults>{normal}</w:styles>')
+    for shape in ('simple', 'complex', 'literal-control'):
+        result = (f'<w:fldSimple w:instr=" PAGE ">{t("1")}</w:fldSimple>' if shape == 'simple'
+                  else field(' PAGE ', t('1')) if shape == 'complex' else t('1'))
+        body = p(t(original[0]) + result) + p(t(original[1]))
+        rev = Revisions()
+        current = '<w:spacing w:after="280" w:line="380" w:lineRule="auto"/>'
+        previous = '<w:spacing w:after="80" w:line="260" w:lineRule="auto"/>'
+        normal = STYLE_NORMAL.replace('</w:style>', '<w:pPr>' + current
+                    + f'<w:pPrChange {rev.attrs(AUTHOR)}><w:pPr>{previous}</w:pPr></w:pPrChange></w:pPr></w:style>')
+        assertions = [untracked(*original)]
+        for scope, count, after, line in [('accepted', 4, '280', '380'), ('rejected', 2, '80', '260')]:
+            assertions.append({'type': 'paragraph-spacing', 'version': 1, 'scope': scope,
+                               'values': [dict(before='0', after=after, line=line, lineRule='auto')] * count})
+        corpus.compare('redline-field-default-spacing-' + shape, 'styles',
+                       'control' if shape == 'literal-control' else 'reproducer', 'JSv4/Docxodus#1533',
+                       'Unchanged ' + shape + ' PAGE result beside two added paragraphs and changed document-default spacing',
+                       dict(body=body, styles=styles(80, 260)),
+                       dict(body=body + ''.join(p(t(text)) for text in added), styles=styles(280, 380)),
+                       dict(body=body + ''.join(p(rev.ins(t(text)), mark=rev.mark('ins')) for text in added),
+                            styles=styles(80, 260, normal)), assertions)
+
+
+def default_spacing_history(corpus):
+    """A tracked style revision archives the style's run properties beside its spacing (Docxodus #1576).
+
+    Word 2024's Reject All restores a style from its pPrChange and rPrChange together; with no rPrChange
+    it resets the style's run properties to its built-ins, so the original returns at 10 pt.
+    """
+    original = ('Quince ferries leave the east dock at seven.', 'Quince tickets wait at the kiosk by the gate.',
+                'Quince bicycles ride free on the lower deck.')
+    wide = '<w:spacing w:after="200" w:line="276" w:lineRule="auto"/>'
+    tight = '<w:spacing w:after="0" w:line="240" w:lineRule="auto"/>'
+    run = f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:cs="{FONT}"/><w:sz w:val="24"/>'
+    def styles(defaults='', normal=''):
+        paragraph = f'<w:pPrDefault><w:pPr>{defaults}</w:pPr></w:pPrDefault>' if defaults else ''
+        return (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>{run}</w:rPr></w:rPrDefault>{paragraph}'
+                f'</w:docDefaults>{STYLE_NORMAL.replace("</w:style>", normal + "</w:style>")}</w:styles>')
+    for shape in ('document-defaults', 'normal-style-control'):
+        rev = Revisions()
+        history = (f'<w:pPr>{tight}<w:pPrChange {rev.attrs(AUTHOR)}><w:pPr>{wide}</w:pPr></w:pPrChange></w:pPr>'
+                   f'<w:rPr>{run}<w:rPrChange {rev.attrs(AUTHOR)}><w:rPr>{run}</w:rPr></w:rPrChange></w:rPr>')
+        if shape == 'document-defaults':
+            left, right, redline = styles(wide), styles(tight), styles(wide, history)
+        else:
+            left, right, redline = styles(normal=f'<w:pPr>{wide}</w:pPr>'), styles(normal=f'<w:pPr>{tight}</w:pPr>'), styles(normal=history)
+        edited = (t('Quince tickets wait at the ') + rev.dele(t('kiosk')) + rev.ins(t('booth')) + t(' by the gate.'))
+        assertions = [untracked(original[0], original[2]), {'type': 'style-run-history', 'version': 1, 'scope': 'redline'}]
+        for scope, after, line in [('accepted', '0', '240'), ('rejected', '200', '276')]:
+            assertions.append({'type': 'paragraph-spacing', 'version': 1, 'scope': scope,
+                               'values': [dict(before='0', after=after, line=line, lineRule='auto')] * 3})
+        corpus.compare('redline-default-spacing-' + shape, 'styles',
+                       'control' if shape.endswith('control') else 'reproducer', 'JSv4/Docxodus#1576',
+                       'Default paragraph spacing 200/276 becomes 0/240, declared in the '
+                       + ('document defaults' if shape == 'document-defaults' else 'Normal style') + ', beside a one-word edit',
+                       dict(body=''.join(p(t(text)) for text in original), styles=left),
+                       dict(body=p(t(original[0])) + p(t(original[1].replace('kiosk', 'booth'))) + p(t(original[2])), styles=right),
+                       dict(body=p(t(original[0])) + p(edited) + p(t(original[2])), styles=redline), assertions)
+
+
+def missing_default_spacing(corpus):
+    """A revised document without w:pPrDefault has Word's 8pt after and 1.16 lines (Docxodus #1652).
+
+    Word 2024 lays out a styles part that lacks the element with w:after="160" w:line="278", so a
+    redline from 200/276 must accept to those values. The control's revised document states them.
+    """
+    original = ('Teasel ferries leave the east dock at seven.', 'Teasel tickets wait at the kiosk by the gate.',
+                'Teasel bicycles ride free on the lower deck.')
+    wide = '<w:spacing w:after="200" w:line="276" w:lineRule="auto"/>'
+    word = '<w:spacing w:after="160" w:line="278" w:lineRule="auto"/>'
+    run = f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:cs="{FONT}"/><w:sz w:val="24"/>'
+    def styles(defaults='', normal=''):
+        paragraph = f'<w:pPrDefault><w:pPr>{defaults}</w:pPr></w:pPrDefault>' if defaults else ''
+        return (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>{run}</w:rPr></w:rPrDefault>{paragraph}'
+                f'</w:docDefaults>{STYLE_NORMAL.replace("</w:style>", normal + "</w:style>")}</w:styles>')
+    for shape in ('missing-default', 'stated-default-control'):
+        rev = Revisions()
+        history = (f'<w:pPr>{word}<w:pPrChange {rev.attrs(AUTHOR)}><w:pPr>{wide}</w:pPr></w:pPrChange></w:pPr>'
+                   f'<w:rPr>{run}<w:rPrChange {rev.attrs(AUTHOR)}><w:rPr>{run}</w:rPr></w:rPrChange></w:rPr>')
+        edited = (t('Teasel tickets wait at the ') + rev.dele(t('kiosk')) + rev.ins(t('booth')) + t(' by the gate.'))
+        assertions = [untracked(original[0], original[2]), {'type': 'style-run-history', 'version': 1, 'scope': 'redline'}]
+        for scope, after, line in [('accepted', '160', '278'), ('rejected', '200', '276')]:
+            assertions.append({'type': 'paragraph-spacing', 'version': 1, 'scope': scope,
+                               'values': [dict(before='0', after=after, line=line, lineRule='auto')] * 3})
+        corpus.compare('redline-default-spacing-' + shape, 'styles',
+                       'control' if shape.endswith('control') else 'reproducer', 'JSv4/Docxodus#1652',
+                       'Default paragraph spacing 200/276 becomes Word\'s 160/278, which the revised document '
+                       + ('states' if shape.endswith('control') else 'leaves out with its w:pPrDefault') + ', beside a one-word edit',
+                       dict(body=''.join(p(t(text)) for text in original), styles=styles(wide)),
+                       dict(body=p(t(original[0])) + p(t(original[1].replace('kiosk', 'booth'))) + p(t(original[2])),
+                            styles=styles(word if shape.endswith('control') else '')),
+                       dict(body=p(t(original[0])) + p(edited) + p(t(original[2])), styles=styles(wide, history)), assertions)
+
+
+def positional_rewrites(before, after):
+    return {'type': 'positional-rewrites', 'version': 1, 'scope': 'redline',
+            'before': list(before), 'after': list(after)}
+
+
+def complete_rewrites(corpus):
+    """Short rewrites pair whole sentences; long rewrites retain coherent side blocks."""
+    old = ('A cedar ladder reaches the copper balcony.', 'The green satchel hangs beside a marble pillar.',
+           'Two violet ribbons surround the lantern.', 'A curved handle supports the wicker hamper.')
+    new = ('The ivory banner spans a quiet orchard.', 'A bronze chariot passes the distant fountain.',
+           'The golden latch secures a square cupboard.', 'Three crimson buttons decorate the velvet jacket.')
+    for shape in ('articles', 'numbered', 'linked', 'distinct-control'):
+        def paragraphs(texts, rev=None, kind=None, start=0):
+            result = ''
+            for i, text in enumerate(texts, start):
+                if shape == 'distinct-control':
+                    text = ' '.join(word for word in text.split() if word.lower() not in {'a', 'the'})
+                if shape == 'numbered':
+                    text = f'{i + 1}. ' + text
+                content = ''
+                for j, word in enumerate(text.split()):
+                    run = t((' ' if j else '') + word)
+                    if rev:
+                        run = (rev.dele if kind == 'del' else rev.ins)(run)
+                    if shape == 'linked' and word.lower() in {'a', 'the'}:
+                        run = '<w:hyperlink w:anchor="CedarReview">' + run + '</w:hyperlink>'
+                    content += run
+                result += p(content, mark=rev.mark(kind) if rev else '')
+            return result
+        for long in (False, True):
+            before = [' '.join([text] * 4) if long else text for text in old]
+            after = [' '.join([text] * 4) if long else text for text in new]
+            left, right = paragraphs(before), paragraphs(after)
+            rev = Revisions()
+            if long:
+                authored = paragraphs(before, rev, 'del') + paragraphs(after, rev, 'ins')
+                assertions = [{'type': 'revision-blocks', 'version': 1, 'scope': 'redline'}]
+            else:
+                authored = ''.join(paragraphs([a], rev, 'del', i) + paragraphs([b], rev, 'ins', i)
+                                   for i, (a, b) in enumerate(zip(before, after)))
+                def texts(body):
+                    root = ET.fromstring(f'<root xmlns:w="{W}">{body}</root>')
+                    return [''.join(e.text or '' for e in paragraph.iter('{' + W + '}t')) for paragraph in root]
+                assertions = [positional_rewrites(texts(left), texts(right))]
+            corpus.compare('redline-complete-rewrite-' + ('long-' if long else '') + shape, 'revisions',
+                           'control' if long or shape == 'distinct-control' else 'reproducer', 'JSv4/Docxodus#1535',
+                           ('Long rewrites retain coherent side blocks: ' if long else
+                            'Short whole-sentence replacements stay beside their positional partner under #1556: ') + shape,
+                           dict(body=left), dict(body=right), dict(body=authored), assertions)
+
+    before = ['Myrtle grove closes at dusk.', 'Copper bells signal supper.']
+    after = ['Indigo workshop opens before sunrise.', 'Silver ribbons adorn baskets.']
+    def body(texts):
+        return ''.join(p(t(text)) for text in texts)
+    for shape in ('pair', 'interior-control', 'unequal-control', 'consensus'):
+        revised = after + (['Violet lanterns illuminate paths.'] if shape == 'unequal-control' else [])
+        prefix = p(t('Unchanged opening.')) if shape == 'interior-control' else ''
+        suffix = p(t('Unchanged closing.')) if shape == 'interior-control' else ''
+        left, right = prefix + body(before) + suffix, prefix + body(revised) + suffix
+        rev = Revisions()
+        def marked(texts, kind):
+            wrap = rev.dele if kind == 'del' else rev.ins
+            author = 'First' if shape == 'consensus' else AUTHOR
+            return ''.join(p(wrap(t(text), author), mark=rev.mark(kind, author)) for text in texts)
+        paired = shape in {'pair', 'consensus'}
+        markup = (''.join(marked([a], 'del') + marked([b], 'ins') for a, b in zip(before, revised))
+                  if paired else marked(before, 'del') + marked(revised, 'ins'))
+        assertions = [positional_rewrites(before, revised)] if paired else [
+            {'type': 'revision-blocks', 'version': 1, 'scope': 'redline'}]
+        case_id = 'redline-short-rewrite-' + shape
+        description = 'Whole-document positional rewrites with ' + shape.replace('-', ' ')
+        if shape != 'consensus':
+            corpus.compare(case_id, 'revisions', 'reproducer' if paired else 'control', 'JSv4/Docxodus#1556',
+                           description, dict(body=left), dict(body=right), dict(body=prefix + markup + suffix), assertions)
+        else:
+            base = corpus.file(case_id, 'base', body=left)
+            reviewer = corpus.file(case_id, 'reviewer', body=right)
+            authored = corpus.file(case_id, 'authored-redline', body=markup)
+            corpus.add(case_id, 'consolidate', 'reproducer', 'JSv4/Docxodus#1556', description, 'consolidate',
+                       [dict(base, role='base'), dict(reviewer, role='reviewer', author='First'),
+                        dict(reviewer, role='reviewer', author='Second')],
+                       {'accepted': reviewer, 'rejected': base}, authored, assertions)
+            # The default consensus policy credits the shared edit to the first reviewer.
+            corpus.cases[-1]['reviewerExpected'] = {'First': reviewer, 'Second': base}
+
+
+def revised_stories_deleted_boundary(corpus):
+    """Revised running stories belong to inserted content before an obsolete section break."""
+    old = [
+        'Juniper workshop stores brass handles in the north cabinet.',
+        'The porter checks each parcel against the morning inventory.',
+        'Copper hinges remain packed beneath the timber shelves.',
+        'Evening deliveries arrive through the covered eastern gate.',
+        'Spare canvas sheets protect the benches during winter.',
+        'A painted notice marks the locked machinery enclosure.',
+    ]
+    new = [
+        'Coastal survey bulletin records distant tides at sunrise.',
+        'Researchers compare rainfall totals across three islands.',
+        'Weather instruments require monthly checks by trained staff.',
+        'Seasonal forecasts accompany the published harbor reports.',
+    ]
+    empty_section = SECTION.format(refs='')
+    for shape in ('rewrite', 'first-page', 'latent-first-page', 'default-after-first', 'retained-control'):
+        control, first = shape == 'retained-control', shape in {'first-page', 'latent-first-page'}
+        latent = shape == 'latent-first-page'
+        old_first = shape == 'default-after-first'
+        before_section = empty_section.replace('</w:sectPr>', ('<w:titlePg/>' if old_first else '') + '</w:sectPr>')
+        kind = 'first' if first else 'default'
+        rev = Revisions()
+        refs = ''.join(f'<w:{story}Reference w:type="{kind}" r:id="r{story}"/>' for story in ('header', 'footer'))
+        revised_section = SECTION.format(refs=refs).replace('</w:sectPr>', ('<w:titlePg/>' if first else '') + '</w:sectPr>')
+        def review_section():
+            return revised_section if old_first == first else revised_section.replace('</w:sectPr>',
+                f'<w:sectPrChange {rev.attrs(AUTHOR)}>{before_section}</w:sectPrChange></w:sectPr>')
+        extras = dict(relations_extra=[('rheader', 'header', 'header1.xml'), ('rfooter', 'footer', 'footer1.xml')],
+            content_types_extra=''.join(f'<Override PartName="/word/{story}1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.{story}+xml"/>' for story in ('header', 'footer')))
+        labels = (('header', 'hdr', 'JUNIPER SURVEY'), ('footer', 'ftr', 'Coastal receipt'))
+        def stories(tracked, blank=False):
+            return {f'word/{story}1.xml': f'<w:{tag} {NAMESPACES}>' + p('' if blank else rev.ins(t(label)) if tracked else t(label)) + f'</w:{tag}>'
+                    for story, tag, label in labels}
+        left_section = SECTION.format(refs=refs).replace('</w:sectPr>', ('<w:titlePg/>' if old_first else '') + '</w:sectPr>')
+        left_body = ''.join(p(t(text), props=left_section if i == 2 else '') for i, text in enumerate(old))
+        right_texts = ([old[0]] if control else []) + new
+        authored = (p(t(old[0])) if control else '') + ''.join(p(rev.ins(t(text)), mark=rev.mark('ins')) for text in new)
+        for i, text in enumerate(old):
+            if control and i == 0:
+                continue
+            # Paragraph-mark properties precede the section carrier in CT_PPr.
+            authored += p(rev.dele(t(text)), props='<w:rPr>' + rev.mark('del') + '</w:rPr>' + (review_section() if i == 2 else ''))
+        assertions = [{'type': 'section-stories', 'version': 1, 'scope': 'redline', 'story': story,
+                       'kind': kind, 'values': [label, label]} for story, _, label in labels]
+        assertions += [{'type': 'section-flags', 'version': 1, 'scope': scope, 'titlePg': flags}
+                       for scope, flags in [('redline', [first, first]), ('accepted', [first]), ('rejected', [old_first, old_first])]]
+        assertions += [{'type': 'section-boundaries', 'version': 1, 'scope': scope, 'afterParagraphs': indices}
+                       for scope, indices in [('accepted', []), ('rejected', [2])]]
+        corpus.compare('redline-revised-stories-' + shape, 'revisions', 'control' if control else 'reproducer',
+            'JSv4/Docxodus#1555', 'A merged section with ' + ('one retained opening paragraph' if control else 'fully rewritten body text')
+            + ' shows its inserted running stories before the deleted boundary and restores original first-page flags on rejection',
+            dict(body=left_body, section=left_section, extra_parts=stories(False, blank=not latent), **extras),
+            dict(body=''.join(p(t(text)) for text in right_texts), section=revised_section, extra_parts=stories(False), **extras),
+            dict(body=authored, section=review_section(), extra_parts=stories(not latent), **extras), assertions)
+
+
+def retained_section_boundaries(corpus):
+    """The same body paragraphs gain or lose an inline section boundary."""
+    first = 'Cedar archive keeps the copper inventory ledger.'
+    last = 'The custodian closes the shutters before dusk.'
+    def section(rid):
+        return SECTION.format(refs=f'<w:footerReference w:type="default" r:id="{rid}"/>')
+    extras = dict(section=section('rStory'),
+                  relations_extra=[('rStory', 'footer', 'footer1.xml'), ('rBlank', 'footer', 'footer2.xml')],
+                  content_types_extra=''.join(f'<Override PartName="/word/footer{n}.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/>' for n in (1, 2)),
+                  extra_parts={'word/footer1.xml': f'<w:ftr {NAMESPACES}>' + p(t('CEDAR REFERENCE')) + '</w:ftr>',
+                               'word/footer2.xml': f'<w:ftr {NAMESPACES}>' + p() + '</w:ftr>'})
+    for shape in ('add', 'remove', 'stable-control'):
+        rev = Revisions()
+        control = shape == 'stable-control'
+        old_props = section('rBlank') if shape != 'add' else ''
+        new_props = section('rBlank') if shape != 'remove' else ''
+        right_text = first.replace('keeps', 'stores') if control else first
+        if control:
+            authored = p(t('Cedar archive ') + rev.dele(t('keeps')) + rev.ins(t('stores'))
+                         + t(' the copper inventory ledger.'), props=new_props)
+        else:
+            # rPr precedes sectPr in CT_PPr; each paragraph mark owns its complete old/new boundary.
+            authored = (p(rev.dele(t(first)), props='<w:rPr>' + rev.mark('del') + '</w:rPr>' + old_props)
+                        + p(rev.ins(t(right_text)), props='<w:rPr>' + rev.mark('ins') + '</w:rPr>' + new_props))
+        assertions = [untracked(last), untracked('CEDAR REFERENCE', story='headers')]
+        for scope, props in (('accepted', new_props), ('rejected', old_props)):
+            assertions.append({'type': 'section-boundaries', 'version': 1, 'scope': scope,
+                               'afterParagraphs': [0] if props else []})
+        if control:
+            assertions.append(untracked('Cedar archive '))
+        corpus.compare('redline-retained-section-' + shape, 'revisions',
+                       'control' if control else 'reproducer', 'JSv4/Docxodus#1545',
+                       'A retained paragraph ' + ('keeps its boundary during a word edit' if control else shape + 's a section boundary')
+                       + '; accept and reject restore section counts and footer ownership',
+                       dict(body=p(t(first), props=old_props) + p(t(last)), **extras),
+                       dict(body=p(t(right_text), props=new_props) + p(t(last)), **extras),
+                       dict(body=authored + p(t(last)), **extras), assertions)
+
+
+def inserted_section_stories(corpus):
+    """A wholly inserted opening section owns its empty running story."""
+    retained = p(t('Cedar archive retains the inventory ledger.')) + p(t('The custodian stores the register beside the window.'))
+    for story, control in (('footer', False), ('header', False), ('footer', True)):
+        name = 'redline-inserted-section-' + story + ('-stable-control' if control else '')
+        def section(rid):
+            return SECTION.format(refs=f'<w:{story}Reference w:type="default" r:id="{rid}"/>')
+        kind = 'hdr' if story == 'header' else 'ftr'
+        extras = dict(section=section('rStory'),
+                      relations_extra=[('rStory', story, story + '1.xml'), ('rBlank', story, story + '2.xml')],
+                      content_types_extra=''.join(f'<Override PartName="/word/{story}{n}.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.{story}+xml"/>' for n in (1, 2)),
+                      extra_parts={f'word/{story}1.xml': f'<w:{kind} {NAMESPACES}>' + p(t('CEDAR REFERENCE')) + f'</w:{kind}>',
+                                   f'word/{story}2.xml': f'<w:{kind} {NAMESPACES}>' + p() + f'</w:{kind}>'})
+        rev = Revisions()
+        def opening(tracked=False, extra=False):
+            def paragraph(text, boundary=False, inserted=False):
+                props = (f'<w:rPr>{rev.mark("ins")}</w:rPr>' if inserted else '') + (section('rBlank') if boundary else '')
+                return p(rev.ins(t(text)) if inserted else t(text), props=props)
+            return (paragraph('Arrange the visitor cards near the entrance.', inserted=tracked)
+                    + (paragraph('Place the spare labels in the drawer.', inserted=tracked or control) if extra else '')
+                    + paragraph('Close the preparation checklist.', boundary=True, inserted=tracked))
+        left = (opening() if control else '') + retained
+        # The expected revised input is untracked, including the control's added paragraph.
+        right = opening() + retained if not control else (p(t('Arrange the visitor cards near the entrance.'))
+                + p(t('Place the spare labels in the drawer.'))
+                + p(t('Close the preparation checklist.'), props=section('rBlank')) + retained)
+        authored = opening(tracked=not control, extra=control) + retained
+        corpus.compare(name, 'revisions', 'control' if control else 'reproducer', 'JSv4/Docxodus#1534',
+                       ('Stable section topology with a body insertion' if control else 'An inserted opening section with an empty ' + story)
+                       + '; the retained section keeps its unchanged running story',
+                       dict(body=left, **extras), dict(body=right, **extras), dict(body=authored, **extras),
+                       [untracked('CEDAR REFERENCE', story='headers'),
+                        {'type': 'section-stories', 'version': 1, 'scope': 'redline', 'story': story,
+                         'kind': 'default', 'values': ['', 'CEDAR REFERENCE']}])
+
+
+def alternate_textbox_edits(corpus):
+    """Visible query and synchronized edits of original DrawingML/VML textbox alternatives."""
+    ns = ('xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" '
+          'xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
+          'xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" '
+          'xmlns:v="urn:schemas-microsoft-com:vml"')
+    def textbox(content):
+        return '<w:txbxContent>' + p(content) + '</w:txbxContent>'
+    def drawing(content):
+        return ('<w:drawing><wp:inline><wp:extent cx="2540000" cy="635000"/>'
+                '<wp:docPr id="1" name="Cedar approval"/><a:graphic>'
+                '<a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+                '<wps:wsp><wps:cNvSpPr txBox="1"/><wps:spPr/><wps:txbx>' + textbox(content) +
+                '</wps:txbx><wps:bodyPr/></wps:wsp></a:graphicData></a:graphic></wp:inline></w:drawing>')
+    def vml(content):
+        return ('<w:pict><v:shape id="CedarApproval" style="width:200pt;height:50pt">'
+                '<v:textbox>' + textbox(content) + '</v:textbox></v:shape></w:pict>')
+    for match in (False, True):
+        for control in (False, True):
+            name = 'redline-alternate-textbox-' + ('match' if match else 'span') + ('-vml-control' if control else '')
+            def document(recorded=False, changed=False):
+                rev = Revisions()
+                def content():
+                    return (t('Cedar approval: ') + rev.dele(t('Alice')) + rev.ins(t('Bob')) + t(' approved.')
+                            if recorded else t('Cedar approval: ' + ('Bob' if changed else 'Alice') + ' approved.'))
+                shape = vml(content()) if control else ('<mc:AlternateContent><mc:Choice Requires="wps">' +
+                    drawing(content()) + '</mc:Choice><mc:Fallback>' + vml(content()) + '</mc:Fallback></mc:AlternateContent>')
+                return p(t('Cedar register.')) + p('<w:r ' + ns + '>' + shape + '</w:r>') + p(t('Cedar complete.'))
+            before, after = document(), document(changed=True)
+            source = corpus.file(name, 'source', body=before)
+            accepted = corpus.file(name, 'accepted', body=after)
+            authored = corpus.file(name, 'authored-redline', body=document(recorded=True))
+            assertions = []
+            for scope, body in (('accepted', after), ('rejected', before)):
+                root = ET.fromstring('<root ' + NAMESPACES + '>' + body + '</root>')
+                for carrier in ('drawing', 'pict'):
+                    assertions.append(dict(type='inline-trees', version=1, scope=scope, name=carrier,
+                        trees=[ET.tostring(e, encoding='unicode') for e in root.iter('{' + W + '}' + carrier)], images={}))
+            corpus.add(name, 'revisions', 'control' if control else 'reproducer', 'JSv4/Docxodus#1560',
+                ('Unique visible search and ReplaceMatch' if match else 'Exact span replacement') +
+                (' in one VML textbox' if control else ' in DrawingML/VML textbox alternatives'),
+                'replace-span', [dict(source, role='source')], {'accepted': accepted, 'rejected': source}, authored, assertions)
+            corpus.cases[-1]['spanEdit'] = (dict(version=2, tracked=True, pattern='Alice', replacement='Bob') if match else
+                dict(version=1, tracked=True, paragraphIndex=2, start=16, length=5, replacement='Bob'))
+
+def header_textbox_redlines(corpus, boundary_controls=False):
+    """Original two-label masthead: interior edit, retained control, and whole-group boundaries."""
+    ns = ('xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" '
+          'xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
+          'xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" '
+          'xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"')
+    def shape(index, content):
+        return (f'<wps:wsp><wps:cNvSpPr txBox="1"/><wps:spPr><a:xfrm><a:off x="{index * 1900000}" y="0"/>'
+                '<a:ext cx="1800000" cy="450000"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom>'
+                '</wps:spPr><wps:txbx><w:txbxContent>' + p(content) + '</w:txbxContent></wps:txbx><wps:bodyPr/></wps:wsp>')
+    def drawing(first):
+        return ('<w:r ' + ns + '><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" '
+                'relativeHeight="1" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1">'
+                '<wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="column"><wp:posOffset>0</wp:posOffset></wp:positionH>'
+                '<wp:positionV relativeFrom="paragraph"><wp:posOffset>0</wp:posOffset></wp:positionV>'
+                '<wp:extent cx="3700000" cy="450000"/><wp:wrapNone/><wp:docPr id="1" name="Cedar register masthead"/>'
+                '<a:graphic><a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup">'
+                '<wpg:wgp><wpg:cNvGrpSpPr/><wpg:grpSpPr><a:xfrm><a:off x="0" y="0"/>'
+                '<a:ext cx="3700000" cy="450000"/><a:chOff x="0" y="0"/><a:chExt cx="3700000" cy="450000"/>'
+                '</a:xfrm></wpg:grpSpPr>' + shape(0, first) + shape(1, t('Archive desk')) +
+                '</wpg:wgp></a:graphicData></a:graphic></wp:anchor></w:drawing></w:r>')
+    for kind in (('label', 'body-control', 'add', 'remove') if boundary_controls else ('label', 'body-control')):
+        rev = Revisions()
+        before = dict(body=p(t('Morning register remains available.')), header=p(drawing(t('Cedar bulletin'))))
+        after = dict(before)
+        authored = dict(before)
+        assertions = []
+        if kind == 'label':
+            after['header'] = p(drawing(t('Oak bulletin')))
+            authored['header'] = p(drawing(rev.dele(t('Cedar')) + rev.ins(t('Oak')) + t(' bulletin')))
+            assertions = [untracked('Archive desk', story='headers')]
+        elif kind == 'body-control':
+            after['body'] = p(t('Evening register remains available.'))
+            authored['body'] = p(rev.dele(t('Morning')) + rev.ins(t('Evening')) + t(' register remains available.'))
+            assertions = [untracked('Cedar bulletin', 'Archive desk', story='headers')]
+        elif kind == 'add':
+            before['header'] = p()
+            authored['header'] = p(rev.ins(drawing(t('Cedar bulletin'))))
+        else:
+            after['header'] = p()
+            authored['header'] = p(rev.dele(drawing(t('Cedar bulletin'))))
+        for scope, document in (('accepted', after), ('rejected', before)):
+            root = ET.fromstring('<root ' + NAMESPACES + '>' + document['header'] + '</root>')
+            assertions.append(dict(type='inline-trees', version=2, scope=scope, story='headers', name='drawing',
+                trees=[ET.tostring(e, encoding='unicode') for e in root.iter('{' + W + '}' + 'drawing')], images={}))
+        corpus.compare('redline-header-textbox-' + kind, 'revisions',
+            'reproducer' if kind == 'label' else 'control', 'JSv4/Docxodus#1557',
+            {'label': 'One label changes inside an anchored header group; its sibling stays untracked',
+             'body-control': 'A body edit retains an unchanged anchored header group',
+             'add': 'A whole header group insertion preserves both native endpoints; markup preview fallback control',
+             'remove': 'A whole header group deletion preserves both native endpoints; markup preview fallback control'}[kind],
+            before, after, authored, assertions)
+
+
+ORCHARD = [['Plum lot', 'Pear lot', 'Fig lot'], ['Apple lot', 'Cherry lot', 'Damson lot']]
+
+
+def _orchard_case(corpus, name, kind, issue, description, marks, resolution, operation='revision-resolve',
+                  wrapped=False, rows_below=1, before_count=1, struck=None):
+    """One Orchard table whose first row carries cell marks, resolved in one direction.
+
+    `marks` holds one entry per first-row cell: None, a mark name, or (mark, author). The expected
+    document applies what desktop Word 2024 does when a cell leaves its row (an accepted w:cellDel,
+    a rejected w:cellIns): the cell before it takes its grid column and width, or the cell after it
+    at the start of a row; a content control that held only that cell goes with it; a row left
+    without a cell is removed, and a table left without a row. `struck` tracks a marked cell's own
+    content as deleted too: 'run' its run, 'mark' its run and its paragraph mark. A deleted cell
+    whose paragraph mark is deleted takes its column with it, and Word leaves the row short.
+    """
+    marks = [(m, 'Orchard Reviewer') if isinstance(m, str) else m for m in marks]
+    def document(opening, first_row):
+        rows = ([first_row] if first_row else []) + [[{'text': text, 'span': 1, 'control': None, 'mark': None} for text in ORCHARD[1]]] * rows_below
+        body = ('<w:tbl><w:tblPr><w:tblW w:w="7200" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>'
+                + '<w:gridCol w:w="2400"/>' * 3 + '</w:tblGrid>')
+        rev = Revisions(6)
+        for cells in rows:
+            body += '<w:tr>'
+            for c in cells:
+                properties = f'<w:tcW w:w="{2400 * c["span"]}" w:type="dxa"/>'
+                if c['span'] > 1:
+                    properties += f'<w:gridSpan w:val="{c["span"]}"/>'
+                content = p(t(c['text']))
+                if c['mark']:
+                    properties += rev.mark(*c['mark'])
+                    if struck:
+                        content = p(rev.dele(t(c['text']), c['mark'][1]), mark=rev.mark('del', c['mark'][1]) if struck == 'mark' else '')
+                tc = '<w:tc><w:tcPr>' + properties + '</w:tcPr>' + content + '</w:tc>'
+                body += sdt(tc, 'Lot', c['control']) if c['control'] else tc
+            body += '</w:tr>'
+        return p(t(opening)) + (body + '</w:tbl>' if rows else '') + p(t('Orchard register complete.'))
+    def state(first_row):
+        row = lambda cells: {'before': 0, 'after': 0, 'height': None, 'cells': cells}
+        cell = lambda span, control: {'span': span, 'width': 2400 * span, 'type': 'dxa', 'fill': None,
+                                      'control': None if control is None else str(control)}
+        return {'grid': [2400] * 3, 'rows': ([row([cell(c['span'], c['control']) for c in first_row])] if first_row else [])
+                                            + [row([cell(1, None)] * 3)] * rows_below}
+    cells = [{'text': text, 'span': 1, 'control': 5100 + i if wrapped else None, 'mark': marks[i]} for i, text in enumerate(ORCHARD[0])]
+    leaves = [m is not None and (m[0] == 'cellDel') == (resolution == 'accept-all') for m in marks]
+    resolved = [dict(c, mark=None) for c in cells]
+    staying = [i for i in range(len(cells)) if not leaves[i]]
+    for i in (i for i in range(len(cells)) if leaves[i] and staying and struck != 'mark'):
+        resolved[max((s for s in staying if s < i), default=staying[0])]['span'] += 1
+    resolved = [resolved[i] for i in staying]
+    case_id = 'redline-cell-' + name
+    opening = 'Orchard register, ' + name.replace('-', ' ') + '.'
+    source = corpus.file(case_id, 'source', body=document(opening, cells))
+    expected = corpus.file(case_id, 'expected', body=document(opening, resolved))
+    authored = corpus.file(case_id, 'authored-output', body=document(opening, resolved))
+    has_table = bool(resolved) or rows_below > 0
+    corpus.add(case_id, 'tables', kind, issue, description, operation, [dict(source, role='source')], {'output': expected}, authored,
+               ([{'type': 'table-state', 'version': 2, 'scope': 'output', 'state': state(resolved)}] if has_table else [])
+               + [{'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0}])
+    if operation == 'revision-resolve':
+        corpus.cases[-1]['revisionResolve'] = {'version': 1, 'resolution': resolution}
+        corpus.cases[-1]['resolutionReview'] = {'version': 1, 'beforeCount': before_count, 'supported': True, 'resolutionSuccess': True}
+        corpus.cases[-1]['revisionRegistry'] = {'version': 1, 'count': 0}
+
+
+def cell_revision_shapes(corpus):
+    """Cell marks the public session resolves in bulk (Docxodus #1404)."""
+    # Each reproducer names the control beside it: a mark on a bare cell that Docxodus resolved, with
+    # Word's geometry, before the fix. Accepting any cell deletion left the absorbing cell's old
+    # width, so the accept controls mark an insertion, which keeps every cell.
+    shapes = [('delete-first-accept', False, 'cellDel', 0, 'accept-all', ('cellIns', 0)),
+              ('delete-first-reject', False, 'cellDel', 0, 'reject-all', ('cellDel', 1)),
+              ('delete-middle-accept', False, 'cellDel', 1, 'accept-all', ('cellIns', 1)),
+              ('delete-wrapped-accept', True, 'cellDel', 1, 'accept-all', ('cellIns', 1)),
+              ('delete-wrapped-reject', True, 'cellDel', 1, 'reject-all', ('cellDel', 1)),
+              ('insert-wrapped-accept', True, 'cellIns', 1, 'accept-all', ('cellIns', 1))]
+    for name, wrapped, mark, index, resolution, (control_mark, control_index) in shapes:
+        for kind, suffix in [('reproducer', ''), ('control', '-control')]:
+            if kind == 'control':
+                wrapped, mark, index = False, control_mark, control_index
+            action = {'cellDel': 'deletion', 'cellIns': 'insertion'}[mark]
+            where = ['first', 'middle'][index] + ' cell' + (' inside its own content control' if wrapped else '')
+            _orchard_case(corpus, name + suffix, kind, 'JSv4/Docxodus#1404',
+                          f'{resolution} of a tracked cell {action} on the {where} of a row',
+                          [mark if i == index else None for i in range(3)], resolution, wrapped=wrapped)
+
+
+def cell_revision_geometry(corpus):
+    """Cells that leave a row, in the session and in RevisionProcessor (Docxodus #1688).
+
+    Each reproducer is followed by a control that both resolvers already resolved with Word's
+    geometry before the fix.
+    """
+    D, I, other = 'cellDel', 'cellIns', 'Grove Reviewer'
+    session = 'the session'
+    shapes = [
+        # name, description, marks, resolution, options; then the control's marks, resolution, options
+        ('insert-middle-reject', 'rejects an inserted middle cell: the cell before it takes the column', [None, I, None], 'reject-all', {},
+         [None, D, None], 'reject-all', {}),
+        ('insert-first-reject', 'rejects an inserted first cell: the cell after it takes the column', [I, None, None], 'reject-all', {},
+         [I, None, None], 'accept-all', {}),
+        ('insert-wrapped-reject', 'rejects an inserted cell inside its own content control', [None, I, None], 'reject-all', {'wrapped': True},
+         [None, I, None], 'accept-all', {'wrapped': True}),
+        ('delete-row-accept', 'accepts the deletion of every cell of a row: the row is removed', [D, D, D], 'accept-all', {},
+         [D, D, None], 'accept-all', {}),
+        ('insert-row-reject', 'rejects the insertion of every cell of a row: the row is removed', [I, I, I], 'reject-all', {},
+         [I, I, None], 'accept-all', {}),
+        ('delete-row-shared-accept', 'accepts two reviewers\' deletions that together cover a row: the row is removed',
+         [D, (D, other), (D, other)], 'accept-all', {'before_count': 2}, [D, (D, other), None], 'accept-all', {'before_count': 2}),
+        ('delete-only-row-accept', 'accepts the deletion of every cell of a table\'s only row: the table is removed',
+         [D, D, D], 'accept-all', {'rows_below': 0}, [None, I, None], 'accept-all', {'rows_below': 0}),
+        ('processor-accept-first', 'accepts a deleted first cell: the cell after it takes the column', [D, None, None], 'accept-all', {'operation': 'accept'},
+         [None, D, None], 'accept-all', {'operation': 'accept'}),
+        ('processor-accept-wrapped', 'accepts a deleted cell inside its own content control', [None, D, None], 'accept-all', {'operation': 'accept', 'wrapped': True},
+         [None, D, None], 'accept-all', {'operation': 'accept'}),
+        ('processor-reject-insert', 'rejects an inserted middle cell: the cell before it takes the column', [None, I, None], 'reject-all', {'operation': 'reject'},
+         [None, D, None], 'reject-all', {'operation': 'reject'}),
+    ]
+    for name, description, marks, resolution, options, control_marks, control_resolution, control_options in shapes:
+        resolver = 'RevisionProcessor' if 'operation' in options else session
+        _orchard_case(corpus, name, 'reproducer', 'JSv4/Docxodus#1688', resolver[0].upper() + resolver[1:] + ' ' + description,
+                      marks, resolution, **options)
+        _orchard_case(corpus, name + '-control', 'control', 'JSv4/Docxodus#1688',
+                      'Control beside ' + name + ': marks ' + resolver + ' resolved before the fix',
+                      control_marks, control_resolution, **control_options)
+
+
+def struck_cell_deletions(corpus):
+    """A deleted cell whose own paragraph mark is deleted too (Docxodus #1694).
+
+    This is the markup a comparison writes for a cell the revised document no longer has. Word's
+    Accept All removes the cell and widens nothing, so the row is one cell short. Each control
+    deletes the same cell with only its run tracked as deleted, where Word widens the neighbour.
+    """
+    for resolver, name, options in [('The session', 'delete-struck-{}-accept', {}),
+                                    ('RevisionProcessor', 'processor-accept-struck-{}', {'operation': 'accept'})]:
+        for index, where in enumerate(['first', 'middle']):
+            marks = ['cellDel' if i == index else None for i in range(3)]
+            _orchard_case(corpus, name.format(where), 'reproducer', 'JSv4/Docxodus#1694',
+                          f'{resolver} accepts a deleted {where} cell whose run and paragraph mark are deleted: the row is left one cell short',
+                          marks, 'accept-all', struck='mark', **options)
+            _orchard_case(corpus, name.format(where) + '-control', 'control', 'JSv4/Docxodus#1694',
+                          f'{resolver} accepts a deleted {where} cell whose run alone is deleted: a neighbour takes the column',
+                          marks, 'accept-all', struck='run', **options)

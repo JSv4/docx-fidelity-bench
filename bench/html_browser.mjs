@@ -57,7 +57,74 @@ export function collectReadableFacts(declarations) {
   for (let index = 0; index < declarations.length; index++) {
     const declaration = declarations[index];
     if (declaration.type === 'marker-attribute') continue;
-    if (!['marker-readable', 'marker-computed-style', 'marker-block-width'].includes(declaration.type)) throw new Error('Unknown browser HTML assertion');
+    if (!['marker-readable', 'marker-computed-style', 'marker-block-width', 'named-checkbox', 'review-display', 'math-expression'].includes(declaration.type)) throw new Error('Unknown browser HTML assertion');
+    if (declaration.type === 'math-expression') {
+      const formulas = [...document.querySelectorAll('math')];
+      const facts = { index, marker: declaration.marker, matches: formulas.length };
+      if (formulas.length === 1) {
+        const math = formulas[0];
+        const tree = (element, depth = 0) => {
+          if (depth > 16 || element.namespaceURI !== 'http://www.w3.org/1998/Math/MathML') return null;
+          const tag = element.localName, children = [...element.children];
+          if (['mi', 'mn', 'mo'].includes(tag)) return children.length ? null : [tag, element.textContent];
+          if ([...element.childNodes].some(node => node.nodeType === 3 && node.textContent.trim())) return null;
+          if (!['math', 'mrow', 'mfrac', 'msqrt', 'mroot'].includes(tag)) return null;
+          const parts = children.map(child => tree(child, depth + 1));
+          if (parts.some(part => part === null)) return null;
+          return tag === 'math' || tag === 'mrow'
+            ? parts.length === 1 ? parts[0] : ['mrow', ...parts] : [tag, ...parts];
+        };
+        Object.assign(facts, { namespace: math.namespaceURI, display: math.getAttribute('display') ?? 'inline',
+          computedDisplay: getComputedStyle(math).display, tree: tree(math),
+          fractionBars: [...math.querySelectorAll('mfrac')].map(fraction => fraction.getAttribute('linethickness')),
+          rectangle: rectangle(math.getBoundingClientRect()), visible: true });
+        const elements = [math, ...math.querySelectorAll('*')];
+        for (let parent = math.parentElement; parent; parent = parent.parentElement) elements.push(parent);
+        for (const element of elements) {
+          const style = getComputedStyle(element);
+          if (element.matches('[hidden]') || style.display === 'none' || parseFloat(style.fontSize) === 0 ||
+              ['hidden', 'collapse'].includes(style.visibility) || Number(style.opacity) === 0) facts.visible = false;
+        }
+      }
+      observations.push(facts);
+      continue;
+    }
+    if (declaration.type === 'named-checkbox') {
+      const controls = [...document.querySelectorAll('[role="checkbox"],input[type="checkbox"]')]
+        .filter(element => element.getAttribute('aria-label') === declaration.marker);
+      const facts = { index, marker: declaration.marker, matches: controls.length,
+        text: controls.map(element => element.getAttribute('aria-label')).join(' '), ports: [] };
+      if (controls.length === 1) {
+        const control = controls[0];
+        facts.checked = control.matches('input[type="checkbox"]') ? control.checked
+          : control.getAttribute('aria-checked') === 'true' ? true : control.getAttribute('aria-checked') === 'false' ? false : null;
+        facts.visible = true;
+        facts.before = rectangle(control.getBoundingClientRect());
+        for (let parent = control; parent; parent = parent.parentElement) {
+          const style = getComputedStyle(parent);
+          if (parent.matches('[hidden],[aria-hidden="true"]') || style.display === 'none' ||
+              ['hidden', 'collapse'].includes(style.visibility) || Number(style.opacity) === 0) facts.visible = false;
+          if (['auto', 'scroll', 'hidden', 'clip'].includes(style.overflowY) ||
+              ['auto', 'scroll', 'hidden', 'clip'].includes(style.overflowX)) {
+            const clip = portRectangle(parent);
+            facts.ports.push({ overflowY: style.overflowY, overflowX: style.overflowX,
+              before: facts.before, clipBefore: clip, clipAfter: clip,
+              scrollHeight: parent.scrollHeight, clientHeight: parent.clientHeight });
+          }
+        }
+        facts.after = facts.before;
+        facts.viewport = [0, 0, document.documentElement.clientWidth, document.documentElement.clientHeight];
+        const captions = segments.filter(s => s.node.data.trim() === declaration.caption);
+        if (captions.length === 1) {
+          const range = document.createRange();
+          const caption = captions[0].node, start = caption.data.indexOf(declaration.caption);
+          range.setStart(caption, start); range.setEnd(caption, start + declaration.caption.length);
+          facts.caption = rectangle(range.getBoundingClientRect());
+        }
+      }
+      observations.push(facts);
+      continue;
+    }
     const matches = find(declaration.marker);
     const facts = { index, marker: declaration.marker, matches: matches.length, text: normalized, ports: [] };
     if (matches.length !== 1) { observations.push(facts); continue; }
@@ -65,6 +132,17 @@ export function collectReadableFacts(declarations) {
     const first = segments.find(s => s.start <= start && s.end > start);
     const last = segments.find(s => s.start < end && s.end >= end);
     if (!first || !last) throw new Error('Marker offsets do not map to delivered text nodes');
+    if (declaration.type === 'review-display') {
+      const labels = [...document.querySelectorAll('.page-balloon b')].map(element => element.textContent);
+      facts.reviewCounts = {
+        formatBalloons: labels.filter(label => label.startsWith('Formatted')).length,
+        commentBalloons: labels.filter(label => label.startsWith('Commented')).length,
+        insertions: document.querySelectorAll('ins').length,
+        deletions: document.querySelectorAll('del').length,
+        areas: document.querySelectorAll('.page-markup-area').length,
+        layers: document.querySelectorAll('.page-markup-layer').length,
+      };
+    }
     if (declaration.type === 'marker-computed-style') {
       if (declaration.property !== 'font-size') throw new Error('Unknown computed HTML style property');
       facts.computedStyle = { [declaration.property]: segments.filter(s => s.start < end && s.end > start)
@@ -134,9 +212,33 @@ export async function inspectReadableHtml(browser, html, declarations, timeoutMs
     await page.emulateMedia({ media: 'screen' });
     await page.setContent(html, { waitUntil: 'load', timeout: timeoutMs });
     await page.evaluate(() => document.fonts.ready);
+    const observations = await page.evaluate(collectReadableFacts, declarations);
+    // Read actual painted pixels independently of the delivered control's markup/ARIA.
+    // A two-pixel border around its box supplies the local background color.
+    if (declarations.some(d => d.type === 'named-checkbox')) {
+      const screenshot = await page.screenshot({ animations: 'disabled' });
+      const crops = await page.evaluate(async ({ png, rectangles }) => {
+        const image = new Image(); image.src = 'data:image/png;base64,' + png; await image.decode();
+        const canvas = document.createElement('canvas'); canvas.width = image.width; canvas.height = image.height;
+        const context = canvas.getContext('2d'); context.drawImage(image, 0, 0);
+        return rectangles.map(rect => {
+          if (!rect) return null;
+          const x = Math.floor(rect[0]) - 2, y = Math.floor(rect[1]) - 2;
+          const width = Math.ceil(rect[2]) + 2 - x, height = Math.ceil(rect[3]) + 2 - y;
+          if (x < 0 || y < 0 || width > 256 || height > 256 || x + width > image.width || y + height > image.height) return null;
+          return { x, y, width, height, rgba: [...context.getImageData(x, y, width, height).data] };
+        });
+      }, { png: screenshot.toString('base64'), rectangles: observations.map(o =>
+        declarations[o.index].type === 'named-checkbox' && o.matches === 1 ? o.after : null) });
+      for (let i = 0; i < observations.length; i++) if (crops[i]) {
+        const bytes = Buffer.from(crops[i].rgba);
+        observations[i].raster = { ...crops[i], rgba: bytes.toString('base64'),
+          sha256: createHash('sha256').update(bytes).digest('hex') };
+      }
+    }
     return { schema: VERSION, htmlSha256: createHash('sha256').update(html).digest('hex'),
       policy: { viewport: VIEWPORT, javaScriptEnabled: false, offline: true, media: 'screen' },
-      observations: await page.evaluate(collectReadableFacts, declarations) };
+      observations };
   })();
   const expired = new Promise((_, reject) => {
     timer = setTimeout(() => reject(new Error('HTML observation exceeded the shared conversion budget')), timeoutMs);

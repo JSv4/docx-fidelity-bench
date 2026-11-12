@@ -1,0 +1,132 @@
+{
+  "schema": 1,
+  "suite": {
+    "id": "export-image-identity-diagnostic-v2",
+    "version": 2,
+    "cases": [
+      "export-inline-context-header-image-undecodable",
+      "export-inline-context-header-image-decodable-control"
+    ]
+  },
+  "cases": [
+    {
+      "id": "export-inline-context-header-image-undecodable",
+      "version": 2,
+      "category": "images",
+      "description": "Repeated anchored header image retains warning identity when deliberately undecodable; generated PNG control",
+      "input": "fixtures/export-inline-context-header-image-undecodable.docx",
+      "sha256": "3ffb37592bae7996f57d59fb947406c16977e38d27d3de923fc6b5ee78b237fd",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FI": 2,
+        "FlintLeafOne": 1,
+        "FlintLeafTwo": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "FlintLeafOne",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            45,
+            35,
+            295,
+            115
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "FlintLeafTwo",
+          "occurrence": 1,
+          "page": 2,
+          "rect": [
+            45,
+            35,
+            295,
+            115
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "d8075a8e92cc0665e448c9ce2c5e597ae2cf1d44b27659b0a8a014bc67a7e6af"
+      }
+    },
+    {
+      "id": "export-inline-context-header-image-decodable-control",
+      "version": 2,
+      "category": "images",
+      "description": "Repeated anchored header image retains warning identity when deliberately undecodable; generated PNG control",
+      "input": "fixtures/export-inline-context-header-image-decodable-control.docx",
+      "sha256": "0e6de5013e7e2682d43d7f8d51086825b2f07b34aefaff1f7d5234336ee90069",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liberation Serif"
+      ],
+      "tokens": {
+        "FlintLeafOne": 1,
+        "FlintLeafTwo": 1
+      },
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "FlintLeafOne",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            45,
+            35,
+            295,
+            115
+          ],
+          "tolerancePt": 0.0001
+        },
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "FlintLeafTwo",
+          "occurrence": 1,
+          "page": 2,
+          "rect": [
+            45,
+            35,
+            295,
+            115
+          ],
+          "tolerancePt": 0.0001
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "d8075a8e92cc0665e448c9ce2c5e597ae2cf1d44b27659b0a8a014bc67a7e6af"
+      }
+    }
+  ]
+}

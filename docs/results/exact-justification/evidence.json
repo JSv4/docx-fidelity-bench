@@ -1,0 +1,3744 @@
+{
+  "schema": 1,
+  "baseCommit": "105311833190668780d12f66ecd524986474261f",
+  "candidateCommit": "536a26ea831bbd94ccbb7f1d78e5a1e444c18609",
+  "scope": "Four-case unscored diagnostics; line membership, not exact horizontal positions or raster parity.",
+  "candidateBuild": {
+    "commands": [
+      [
+        "npm",
+        "--prefix",
+        "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1524/npm",
+        "ci"
+      ],
+      [
+        "npm",
+        "--prefix",
+        "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1524/npm",
+        "run",
+        "build:wasm"
+      ],
+      [
+        "npm",
+        "--prefix",
+        "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1524/npm",
+        "run",
+        "build:ts"
+      ],
+      [
+        "npm",
+        "--prefix",
+        "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1524/npm",
+        "run",
+        "build:pagination-bundle"
+      ],
+      [
+        "npm",
+        "--prefix",
+        "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1524/npm",
+        "run",
+        "build:worker-bundle"
+      ],
+      [
+        "npm",
+        "--prefix",
+        "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1524/npm",
+        "run",
+        "build:export-browser"
+      ],
+      [
+        "npm",
+        "--prefix",
+        "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1524/npm",
+        "run",
+        "build:export-assets"
+      ],
+      [
+        "npm",
+        "--prefix",
+        "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1524/npm-export",
+        "ci"
+      ],
+      [
+        "npm",
+        "--prefix",
+        "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1524/npm-export",
+        "run",
+        "build"
+      ]
+    ],
+    "commit": "536a26ea831bbd94ccbb7f1d78e5a1e444c18609",
+    "files": {
+      "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+      "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+      "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+      "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+      "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+      "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+      "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+      "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+      "npm-export/dist/font-observation.js": "ae91c96b1ecf43dda46a01d5a5c922eafdca47114d58f7b2863ebb1c38d2dfa1",
+      "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+      "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+      "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+      "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+      "npm-export/dist/index.js": "686c3d6140f31f5485e06dae046e91cba7eb5a5e39884b0846d754d520a58325",
+      "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+      "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+      "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+      "npm/dist/export-assets.json": "45c5faa3f908e3e258bb4a9612a9aa598f51dd1c15062ad1d935bad3bfe7c04b",
+      "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+    },
+    "node": "v24.13.1",
+    "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+    "schema": 1,
+    "tree": "83696803e184f10971065e629e8ad5a305828984"
+  },
+  "candidateEnvironment": {
+    "ok": false,
+    "findings": [
+      {
+        "code": "user_namespaces_unavailable",
+        "severity": "fatal",
+        "message": "This host denies unprivileged user namespaces, which Chromium's process sandbox requires.",
+        "remediation": "Permit unprivileged user namespaces on the render host \u2014 for example kernel.apparmor_restrict_unprivileged_userns=0 on Ubuntu 23.10 and later; in containers, use a seccomp profile that permits clone with CLONE_NEWUSER and do not drop the capabilities the namespace path needs."
+      }
+    ]
+  },
+  "baseBuildLimitation": "Benchmark WASM build exceeded the wire-size budget by 2 KB; JS/export builds completed separately for this diagnostic only",
+  "libreOfficeCalibration": {
+    "categoryMeans": {
+      "paragraphs": 100.0
+    },
+    "closeMatchRate": 1.0,
+    "complete": true,
+    "mandatoryPassRate": 1.0,
+    "measured": 4,
+    "required": 4,
+    "score": 100.0
+  },
+  "fontContract": {
+    "Arial.ttf": {
+      "family": "Arial",
+      "sha256": "35c0f3559d8db569e36c31095b8a60d441643d95f59139de40e23fada819b833"
+    },
+    "Arial_Bold.ttf": {
+      "family": "Arial",
+      "sha256": "4044aa6b5bebbc36980206b45b0aaaaa5681552a48bcadb41746d5d1d71fd7b4"
+    },
+    "Arial_Bold_Italic.ttf": {
+      "family": "Arial",
+      "sha256": "2f371cd9d96b3ac544519d85c16dc43ceacdfcea35090ee8ddf3ec5857c50328"
+    },
+    "Arial_Italic.ttf": {
+      "family": "Arial",
+      "sha256": "70ade233175a6a6675e4501461af9326e6f78b1ffdf787ca0da5ab0fc8c9cfd6"
+    }
+  },
+  "schemaValidation": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "documents": {
+      "fixtures/exact-justification-mode-14-both.docx": [],
+      "fixtures/exact-justification-mode-14-left.docx": [],
+      "fixtures/exact-justification-mode-15-both.docx": [],
+      "fixtures/exact-justification-mode-15-left.docx": []
+    }
+  },
+  "cases": [
+    {
+      "id": "exact-justification-mode-14-both",
+      "inputSha256": "1c0a138a0317ca719ff9d529ff0176db371466c7b2a67a51bfa8c0e78cad823a",
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "shore.",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            0,
+            60,
+            388,
+            75
+          ],
+          "adjudicated": "word",
+          "tolerancePt": 0.0001
+        }
+      ],
+      "native": {
+        "eligible": true,
+        "pdfSha256": "ce62705062c56cc81630419fd30ba9a4f58d253c378e485f61c823592930d847",
+        "returnedDocxSha256": "1c0a138a0317ca719ff9d529ff0176db371466c7b2a67a51bfa8c0e78cad823a",
+        "inspection": {
+          "fonts": [
+            "ArialMT"
+          ],
+          "geometry": [
+            {
+              "crop": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "media": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "tokens": {
+            "Soft": 1,
+            "The": 1,
+            "amber": 1,
+            "boats": 1,
+            "dawn.": 1,
+            "dock": 1,
+            "guide": 1,
+            "lamps": 1,
+            "open": 1,
+            "quiet": 1,
+            "seven": 1,
+            "shore.": 1,
+            "stays": 1,
+            "toward": 1,
+            "until": 1
+          },
+          "words": [
+            {
+              "page": 1,
+              "rect": [
+                45.025,
+                46.17,
+                66.349,
+                59.55
+              ],
+              "text": "Soft"
+            },
+            {
+              "page": 1,
+              "rect": [
+                74.509,
+                46.17,
+                108.733,
+                59.55
+              ],
+              "text": "amber"
+            },
+            {
+              "page": 1,
+              "rect": [
+                116.977,
+                46.17,
+                149.197,
+                59.55
+              ],
+              "text": "lamps"
+            },
+            {
+              "page": 1,
+              "rect": [
+                157.189,
+                46.17,
+                186.589,
+                59.55
+              ],
+              "text": "guide"
+            },
+            {
+              "page": 1,
+              "rect": [
+                194.905,
+                46.17,
+                226.825,
+                59.55
+              ],
+              "text": "seven"
+            },
+            {
+              "page": 1,
+              "rect": [
+                235.141,
+                46.17,
+                261.205,
+                59.55
+              ],
+              "text": "quiet"
+            },
+            {
+              "page": 1,
+              "rect": [
+                269.365,
+                46.17,
+                298.849,
+                59.55
+              ],
+              "text": "boats"
+            },
+            {
+              "page": 1,
+              "rect": [
+                306.841,
+                46.17,
+                342.985,
+                59.55
+              ],
+              "text": "toward"
+            },
+            {
+              "page": 1,
+              "rect": [
+                45.025,
+                61.17,
+                78.589,
+                74.55
+              ],
+              "text": "shore."
+            },
+            {
+              "page": 1,
+              "rect": [
+                81.757,
+                61.17,
+                102.421,
+                74.55
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                105.745,
+                61.17,
+                131.233,
+                74.55
+              ],
+              "text": "dock"
+            },
+            {
+              "page": 1,
+              "rect": [
+                134.485,
+                61.17,
+                162.481,
+                74.55
+              ],
+              "text": "stays"
+            },
+            {
+              "page": 1,
+              "rect": [
+                165.733,
+                61.17,
+                192.637,
+                74.55
+              ],
+              "text": "open"
+            },
+            {
+              "page": 1,
+              "rect": [
+                195.961,
+                61.17,
+                217.861,
+                74.55
+              ],
+              "text": "until"
+            },
+            {
+              "page": 1,
+              "rect": [
+                221.185,
+                61.17,
+                253.249,
+                74.55
+              ],
+              "text": "dawn."
+            }
+          ]
+        }
+      },
+      "base": {
+        "pdfSha256": "6415fb0365464730a092365efd7a63afe2258f316e7a5cc07cb83e35c1fda365",
+        "inspection": {
+          "geometry": [
+            {
+              "media": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "crop": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "words": [
+            {
+              "text": "Soft",
+              "page": 1,
+              "rect": [
+                44.999998,
+                46.136717,
+                66.3457,
+                59.542966
+              ]
+            },
+            {
+              "text": "amber",
+              "page": 1,
+              "rect": [
+                74.609925,
+                46.136717,
+                108.623595,
+                59.542966
+              ]
+            },
+            {
+              "text": "lamps",
+              "page": 1,
+              "rect": [
+                116.88782,
+                46.136717,
+                148.897584,
+                59.542966
+              ]
+            },
+            {
+              "text": "guide",
+              "page": 1,
+              "rect": [
+                157.161809,
+                46.136717,
+                186.523135,
+                59.542966
+              ]
+            },
+            {
+              "text": "seven",
+              "page": 1,
+              "rect": [
+                194.78736,
+                46.136717,
+                226.808843,
+                59.542966
+              ]
+            },
+            {
+              "text": "quiet",
+              "page": 1,
+              "rect": [
+                235.073068,
+                46.136717,
+                261.094562,
+                59.542966
+              ]
+            },
+            {
+              "text": "boats",
+              "page": 1,
+              "rect": [
+                269.358775,
+                46.136717,
+                298.714243,
+                59.542966
+              ]
+            },
+            {
+              "text": "toward",
+              "page": 1,
+              "rect": [
+                306.978502,
+                46.136717,
+                342.996078,
+                59.542966
+              ]
+            },
+            {
+              "text": "shore.",
+              "page": 1,
+              "rect": [
+                44.999998,
+                61.136716,
+                78.351559,
+                74.542966
+              ]
+            },
+            {
+              "text": "The",
+              "page": 1,
+              "rect": [
+                81.468747,
+                61.136716,
+                102.14648,
+                74.542966
+              ]
+            },
+            {
+              "text": "dock",
+              "page": 1,
+              "rect": [
+                105.480464,
+                61.136716,
+                130.828119,
+                74.542966
+              ]
+            },
+            {
+              "text": "stays",
+              "page": 1,
+              "rect": [
+                134.162104,
+                61.136716,
+                162.169915,
+                74.542966
+              ]
+            },
+            {
+              "text": "open",
+              "page": 1,
+              "rect": [
+                165.503899,
+                61.136716,
+                192.19921,
+                74.542966
+              ]
+            },
+            {
+              "text": "until",
+              "page": 1,
+              "rect": [
+                195.533194,
+                61.136716,
+                217.546865,
+                74.542966
+              ]
+            },
+            {
+              "text": "dawn.",
+              "page": 1,
+              "rect": [
+                220.88085,
+                61.136716,
+                252.902332,
+                74.542966
+              ]
+            }
+          ],
+          "tokens": {
+            "Soft": 1,
+            "amber": 1,
+            "lamps": 1,
+            "guide": 1,
+            "seven": 1,
+            "quiet": 1,
+            "boats": 1,
+            "toward": 1,
+            "shore.": 1,
+            "The": 1,
+            "dock": 1,
+            "stays": 1,
+            "open": 1,
+            "until": 1,
+            "dawn.": 1
+          },
+          "fonts": [
+            "ArialMT"
+          ]
+        },
+        "checks": [
+          {
+            "name": "page-count",
+            "passed": true
+          },
+          {
+            "name": "expected-visible-tokens",
+            "passed": true,
+            "missing": {},
+            "extra": {},
+            "normalizedRaw": {}
+          },
+          {
+            "name": "declared-font-families",
+            "passed": true,
+            "observed": [
+              "ArialMT"
+            ]
+          },
+          {
+            "name": "physical-geometry-page-1",
+            "passed": true
+          },
+          {
+            "name": "assertion-marker-region",
+            "passed": true,
+            "declaration": {
+              "type": "marker-region",
+              "version": 2,
+              "marker": "shore.",
+              "occurrence": 1,
+              "page": 1,
+              "rect": [
+                0,
+                60,
+                388,
+                75
+              ],
+              "adjudicated": "word",
+              "tolerancePt": 0.0001
+            }
+          }
+        ]
+      },
+      "candidate": {
+        "pdfSha256": "54694cce2ae0917448646162eae2282d5c84ab3e0577ea46e311e41045b3cf68",
+        "inspection": {
+          "geometry": [
+            {
+              "media": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "crop": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "words": [
+            {
+              "text": "Soft",
+              "page": 1,
+              "rect": [
+                44.999998,
+                46.136717,
+                66.3457,
+                59.542966
+              ]
+            },
+            {
+              "text": "amber",
+              "page": 1,
+              "rect": [
+                74.609925,
+                46.136717,
+                108.623595,
+                59.542966
+              ]
+            },
+            {
+              "text": "lamps",
+              "page": 1,
+              "rect": [
+                116.88782,
+                46.136717,
+                148.897584,
+                59.542966
+              ]
+            },
+            {
+              "text": "guide",
+              "page": 1,
+              "rect": [
+                157.161809,
+                46.136717,
+                186.523135,
+                59.542966
+              ]
+            },
+            {
+              "text": "seven",
+              "page": 1,
+              "rect": [
+                194.78736,
+                46.136717,
+                226.808843,
+                59.542966
+              ]
+            },
+            {
+              "text": "quiet",
+              "page": 1,
+              "rect": [
+                235.073068,
+                46.136717,
+                261.094562,
+                59.542966
+              ]
+            },
+            {
+              "text": "boats",
+              "page": 1,
+              "rect": [
+                269.358775,
+                46.136717,
+                298.714243,
+                59.542966
+              ]
+            },
+            {
+              "text": "toward",
+              "page": 1,
+              "rect": [
+                306.978502,
+                46.136717,
+                342.996078,
+                59.542966
+              ]
+            },
+            {
+              "text": "shore.",
+              "page": 1,
+              "rect": [
+                44.999998,
+                61.136716,
+                78.351559,
+                74.542966
+              ]
+            },
+            {
+              "text": "The",
+              "page": 1,
+              "rect": [
+                81.468747,
+                61.136716,
+                102.14648,
+                74.542966
+              ]
+            },
+            {
+              "text": "dock",
+              "page": 1,
+              "rect": [
+                105.480464,
+                61.136716,
+                130.828119,
+                74.542966
+              ]
+            },
+            {
+              "text": "stays",
+              "page": 1,
+              "rect": [
+                134.162104,
+                61.136716,
+                162.169915,
+                74.542966
+              ]
+            },
+            {
+              "text": "open",
+              "page": 1,
+              "rect": [
+                165.503899,
+                61.136716,
+                192.19921,
+                74.542966
+              ]
+            },
+            {
+              "text": "until",
+              "page": 1,
+              "rect": [
+                195.533194,
+                61.136716,
+                217.546865,
+                74.542966
+              ]
+            },
+            {
+              "text": "dawn.",
+              "page": 1,
+              "rect": [
+                220.88085,
+                61.136716,
+                252.902332,
+                74.542966
+              ]
+            }
+          ],
+          "tokens": {
+            "Soft": 1,
+            "amber": 1,
+            "lamps": 1,
+            "guide": 1,
+            "seven": 1,
+            "quiet": 1,
+            "boats": 1,
+            "toward": 1,
+            "shore.": 1,
+            "The": 1,
+            "dock": 1,
+            "stays": 1,
+            "open": 1,
+            "until": 1,
+            "dawn.": 1
+          },
+          "fonts": [
+            "ArialMT"
+          ]
+        },
+        "checks": [
+          {
+            "name": "page-count",
+            "passed": true
+          },
+          {
+            "name": "expected-visible-tokens",
+            "passed": true,
+            "missing": {},
+            "extra": {},
+            "normalizedRaw": {}
+          },
+          {
+            "name": "declared-font-families",
+            "passed": true,
+            "observed": [
+              "ArialMT"
+            ]
+          },
+          {
+            "name": "physical-geometry-page-1",
+            "passed": true
+          },
+          {
+            "name": "assertion-marker-region",
+            "passed": true,
+            "declaration": {
+              "type": "marker-region",
+              "version": 2,
+              "marker": "shore.",
+              "occurrence": 1,
+              "page": 1,
+              "rect": [
+                0,
+                60,
+                388,
+                75
+              ],
+              "adjudicated": "word",
+              "tolerancePt": 0.0001
+            }
+          }
+        ]
+      },
+      "libreoffice": {
+        "eligible": true,
+        "ineligibleChecks": [],
+        "inputSha256": "1c0a138a0317ca719ff9d529ff0176db371466c7b2a67a51bfa8c0e78cad823a",
+        "inspection": {
+          "fonts": [
+            "ArialMT"
+          ],
+          "geometry": [
+            {
+              "crop": [
+                0,
+                0,
+                388.006299212598,
+                792
+              ],
+              "media": [
+                0,
+                0,
+                388.006299212598,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "tokens": {
+            "Soft": 1,
+            "The": 1,
+            "amber": 1,
+            "boats": 1,
+            "dawn.": 1,
+            "dock": 1,
+            "guide": 1,
+            "lamps": 1,
+            "open": 1,
+            "quiet": 1,
+            "seven": 1,
+            "shore.": 1,
+            "stays": 1,
+            "toward": 1,
+            "until": 1
+          },
+          "words": [
+            {
+              "page": 1,
+              "rect": [
+                45.1,
+                46.14,
+                66.4,
+                59.532
+              ],
+              "text": "Soft"
+            },
+            {
+              "page": 1,
+              "rect": [
+                74.596,
+                46.14,
+                108.556,
+                59.532
+              ],
+              "text": "amber"
+            },
+            {
+              "page": 1,
+              "rect": [
+                116.788,
+                46.14,
+                148.768,
+                59.532
+              ],
+              "text": "lamps"
+            },
+            {
+              "page": 1,
+              "rect": [
+                156.988,
+                46.14,
+                186.328,
+                59.532
+              ],
+              "text": "guide"
+            },
+            {
+              "page": 1,
+              "rect": [
+                194.524,
+                46.14,
+                226.528,
+                59.532
+              ],
+              "text": "seven"
+            },
+            {
+              "page": 1,
+              "rect": [
+                234.724,
+                46.14,
+                260.716,
+                59.532
+              ],
+              "text": "quiet"
+            },
+            {
+              "page": 1,
+              "rect": [
+                268.912,
+                46.14,
+                298.228,
+                59.532
+              ],
+              "text": "boats"
+            },
+            {
+              "page": 1,
+              "rect": [
+                306.448,
+                46.14,
+                342.436,
+                59.532
+              ],
+              "text": "toward"
+            },
+            {
+              "page": 1,
+              "rect": [
+                45.1,
+                61.14,
+                78.4,
+                74.532
+              ],
+              "text": "shore."
+            },
+            {
+              "page": 1,
+              "rect": [
+                81.712,
+                61.14,
+                102.376,
+                74.532
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                105.688,
+                61.14,
+                131.02,
+                74.532
+              ],
+              "text": "dock"
+            },
+            {
+              "page": 1,
+              "rect": [
+                134.356,
+                61.14,
+                162.34,
+                74.532
+              ],
+              "text": "stays"
+            },
+            {
+              "page": 1,
+              "rect": [
+                165.676,
+                61.14,
+                192.328,
+                74.532
+              ],
+              "text": "open"
+            },
+            {
+              "page": 1,
+              "rect": [
+                195.676,
+                61.14,
+                217.624,
+                74.532
+              ],
+              "text": "until"
+            },
+            {
+              "page": 1,
+              "rect": [
+                220.948,
+                61.14,
+                252.94,
+                74.532
+              ],
+              "text": "dawn."
+            }
+          ]
+        },
+        "pdf": "exact-justification-mode-14-both/reference.pdf",
+        "pdfSha256": "cceb21445f93eb380a2c4fd14b800543a344e49b6bcdf1fee9f2f9e25378cbd2",
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "screenshotSha256": "7fb420f2529e787547bb0900b88ce3e2b520d2c0b36215fd8cf4e2fcc82f466c"
+    },
+    {
+      "id": "exact-justification-mode-14-left",
+      "inputSha256": "d344d4cc72f08ddd4349a105d955b834864ba753f1afe8ff1c3931de6b1819b3",
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "shore.",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            0,
+            60,
+            388,
+            75
+          ],
+          "adjudicated": "word",
+          "tolerancePt": 0.0001
+        }
+      ],
+      "native": {
+        "eligible": true,
+        "pdfSha256": "4848fdcecedc1cbf9537cd589f188edeb8b9eda63c1e99923a1a91fc0abba444",
+        "returnedDocxSha256": "d344d4cc72f08ddd4349a105d955b834864ba753f1afe8ff1c3931de6b1819b3",
+        "inspection": {
+          "fonts": [
+            "ArialMT"
+          ],
+          "geometry": [
+            {
+              "crop": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "media": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "tokens": {
+            "Soft": 1,
+            "The": 1,
+            "amber": 1,
+            "boats": 1,
+            "dawn.": 1,
+            "dock": 1,
+            "guide": 1,
+            "lamps": 1,
+            "open": 1,
+            "quiet": 1,
+            "seven": 1,
+            "shore.": 1,
+            "stays": 1,
+            "toward": 1,
+            "until": 1
+          },
+          "words": [
+            {
+              "page": 1,
+              "rect": [
+                45.025,
+                46.17,
+                66.349,
+                59.55
+              ],
+              "text": "Soft"
+            },
+            {
+              "page": 1,
+              "rect": [
+                69.517,
+                46.17,
+                103.741,
+                59.55
+              ],
+              "text": "amber"
+            },
+            {
+              "page": 1,
+              "rect": [
+                106.993,
+                46.17,
+                139.213,
+                59.55
+              ],
+              "text": "lamps"
+            },
+            {
+              "page": 1,
+              "rect": [
+                142.465,
+                46.17,
+                171.865,
+                59.55
+              ],
+              "text": "guide"
+            },
+            {
+              "page": 1,
+              "rect": [
+                175.189,
+                46.17,
+                207.109,
+                59.55
+              ],
+              "text": "seven"
+            },
+            {
+              "page": 1,
+              "rect": [
+                210.433,
+                46.17,
+                236.497,
+                59.55
+              ],
+              "text": "quiet"
+            },
+            {
+              "page": 1,
+              "rect": [
+                239.665,
+                46.17,
+                269.149,
+                59.55
+              ],
+              "text": "boats"
+            },
+            {
+              "page": 1,
+              "rect": [
+                272.401,
+                46.17,
+                308.305,
+                59.55
+              ],
+              "text": "toward"
+            },
+            {
+              "page": 1,
+              "rect": [
+                45.025,
+                61.17,
+                78.589,
+                74.55
+              ],
+              "text": "shore."
+            },
+            {
+              "page": 1,
+              "rect": [
+                81.757,
+                61.17,
+                102.421,
+                74.55
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                105.745,
+                61.17,
+                131.233,
+                74.55
+              ],
+              "text": "dock"
+            },
+            {
+              "page": 1,
+              "rect": [
+                134.485,
+                61.17,
+                162.481,
+                74.55
+              ],
+              "text": "stays"
+            },
+            {
+              "page": 1,
+              "rect": [
+                165.733,
+                61.17,
+                192.637,
+                74.55
+              ],
+              "text": "open"
+            },
+            {
+              "page": 1,
+              "rect": [
+                195.961,
+                61.17,
+                217.861,
+                74.55
+              ],
+              "text": "until"
+            },
+            {
+              "page": 1,
+              "rect": [
+                221.185,
+                61.17,
+                253.249,
+                74.55
+              ],
+              "text": "dawn."
+            }
+          ]
+        }
+      },
+      "base": {
+        "pdfSha256": "5219a1c145bf54ca3fca1cdcfca11f1aafbc067381993003a512de541fb08f3b",
+        "inspection": {
+          "geometry": [
+            {
+              "media": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "crop": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "words": [
+            {
+              "text": "Soft",
+              "page": 1,
+              "rect": [
+                44.999998,
+                46.136717,
+                66.3457,
+                59.542966
+              ]
+            },
+            {
+              "text": "amber",
+              "page": 1,
+              "rect": [
+                69.679685,
+                46.136717,
+                103.693355,
+                59.542966
+              ]
+            },
+            {
+              "text": "lamps",
+              "page": 1,
+              "rect": [
+                107.027339,
+                46.136717,
+                139.037103,
+                59.542966
+              ]
+            },
+            {
+              "text": "guide",
+              "page": 1,
+              "rect": [
+                142.371087,
+                46.136717,
+                171.732414,
+                59.542966
+              ]
+            },
+            {
+              "text": "seven",
+              "page": 1,
+              "rect": [
+                175.066398,
+                46.136717,
+                207.087881,
+                59.542966
+              ]
+            },
+            {
+              "text": "quiet",
+              "page": 1,
+              "rect": [
+                210.421866,
+                46.136717,
+                236.443349,
+                59.542966
+              ]
+            },
+            {
+              "text": "boats",
+              "page": 1,
+              "rect": [
+                239.777333,
+                46.136717,
+                269.1328,
+                59.542966
+              ]
+            },
+            {
+              "text": "toward",
+              "page": 1,
+              "rect": [
+                272.466784,
+                46.136717,
+                308.484361,
+                59.542966
+              ]
+            },
+            {
+              "text": "shore.",
+              "page": 1,
+              "rect": [
+                44.999998,
+                61.136716,
+                78.351559,
+                74.542966
+              ]
+            },
+            {
+              "text": "The",
+              "page": 1,
+              "rect": [
+                81.468747,
+                61.136716,
+                102.14648,
+                74.542966
+              ]
+            },
+            {
+              "text": "dock",
+              "page": 1,
+              "rect": [
+                105.480464,
+                61.136716,
+                130.828119,
+                74.542966
+              ]
+            },
+            {
+              "text": "stays",
+              "page": 1,
+              "rect": [
+                134.162104,
+                61.136716,
+                162.169915,
+                74.542966
+              ]
+            },
+            {
+              "text": "open",
+              "page": 1,
+              "rect": [
+                165.503899,
+                61.136716,
+                192.19921,
+                74.542966
+              ]
+            },
+            {
+              "text": "until",
+              "page": 1,
+              "rect": [
+                195.533194,
+                61.136716,
+                217.546865,
+                74.542966
+              ]
+            },
+            {
+              "text": "dawn.",
+              "page": 1,
+              "rect": [
+                220.88085,
+                61.136716,
+                252.902332,
+                74.542966
+              ]
+            }
+          ],
+          "tokens": {
+            "Soft": 1,
+            "amber": 1,
+            "lamps": 1,
+            "guide": 1,
+            "seven": 1,
+            "quiet": 1,
+            "boats": 1,
+            "toward": 1,
+            "shore.": 1,
+            "The": 1,
+            "dock": 1,
+            "stays": 1,
+            "open": 1,
+            "until": 1,
+            "dawn.": 1
+          },
+          "fonts": [
+            "ArialMT"
+          ]
+        },
+        "checks": [
+          {
+            "name": "page-count",
+            "passed": true
+          },
+          {
+            "name": "expected-visible-tokens",
+            "passed": true,
+            "missing": {},
+            "extra": {},
+            "normalizedRaw": {}
+          },
+          {
+            "name": "declared-font-families",
+            "passed": true,
+            "observed": [
+              "ArialMT"
+            ]
+          },
+          {
+            "name": "physical-geometry-page-1",
+            "passed": true
+          },
+          {
+            "name": "assertion-marker-region",
+            "passed": true,
+            "declaration": {
+              "type": "marker-region",
+              "version": 2,
+              "marker": "shore.",
+              "occurrence": 1,
+              "page": 1,
+              "rect": [
+                0,
+                60,
+                388,
+                75
+              ],
+              "adjudicated": "word",
+              "tolerancePt": 0.0001
+            }
+          }
+        ]
+      },
+      "candidate": {
+        "pdfSha256": "dcd2e76b991d7b36340796111ec966b3f62735e43dee6830eeda19732794b076",
+        "inspection": {
+          "geometry": [
+            {
+              "media": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "crop": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "words": [
+            {
+              "text": "Soft",
+              "page": 1,
+              "rect": [
+                44.999998,
+                46.136717,
+                66.3457,
+                59.542966
+              ]
+            },
+            {
+              "text": "amber",
+              "page": 1,
+              "rect": [
+                69.679685,
+                46.136717,
+                103.693355,
+                59.542966
+              ]
+            },
+            {
+              "text": "lamps",
+              "page": 1,
+              "rect": [
+                107.027339,
+                46.136717,
+                139.037103,
+                59.542966
+              ]
+            },
+            {
+              "text": "guide",
+              "page": 1,
+              "rect": [
+                142.371087,
+                46.136717,
+                171.732414,
+                59.542966
+              ]
+            },
+            {
+              "text": "seven",
+              "page": 1,
+              "rect": [
+                175.066398,
+                46.136717,
+                207.087881,
+                59.542966
+              ]
+            },
+            {
+              "text": "quiet",
+              "page": 1,
+              "rect": [
+                210.421866,
+                46.136717,
+                236.443349,
+                59.542966
+              ]
+            },
+            {
+              "text": "boats",
+              "page": 1,
+              "rect": [
+                239.777333,
+                46.136717,
+                269.1328,
+                59.542966
+              ]
+            },
+            {
+              "text": "toward",
+              "page": 1,
+              "rect": [
+                272.466784,
+                46.136717,
+                308.484361,
+                59.542966
+              ]
+            },
+            {
+              "text": "shore.",
+              "page": 1,
+              "rect": [
+                44.999998,
+                61.136716,
+                78.351559,
+                74.542966
+              ]
+            },
+            {
+              "text": "The",
+              "page": 1,
+              "rect": [
+                81.468747,
+                61.136716,
+                102.14648,
+                74.542966
+              ]
+            },
+            {
+              "text": "dock",
+              "page": 1,
+              "rect": [
+                105.480464,
+                61.136716,
+                130.828119,
+                74.542966
+              ]
+            },
+            {
+              "text": "stays",
+              "page": 1,
+              "rect": [
+                134.162104,
+                61.136716,
+                162.169915,
+                74.542966
+              ]
+            },
+            {
+              "text": "open",
+              "page": 1,
+              "rect": [
+                165.503899,
+                61.136716,
+                192.19921,
+                74.542966
+              ]
+            },
+            {
+              "text": "until",
+              "page": 1,
+              "rect": [
+                195.533194,
+                61.136716,
+                217.546865,
+                74.542966
+              ]
+            },
+            {
+              "text": "dawn.",
+              "page": 1,
+              "rect": [
+                220.88085,
+                61.136716,
+                252.902332,
+                74.542966
+              ]
+            }
+          ],
+          "tokens": {
+            "Soft": 1,
+            "amber": 1,
+            "lamps": 1,
+            "guide": 1,
+            "seven": 1,
+            "quiet": 1,
+            "boats": 1,
+            "toward": 1,
+            "shore.": 1,
+            "The": 1,
+            "dock": 1,
+            "stays": 1,
+            "open": 1,
+            "until": 1,
+            "dawn.": 1
+          },
+          "fonts": [
+            "ArialMT"
+          ]
+        },
+        "checks": [
+          {
+            "name": "page-count",
+            "passed": true
+          },
+          {
+            "name": "expected-visible-tokens",
+            "passed": true,
+            "missing": {},
+            "extra": {},
+            "normalizedRaw": {}
+          },
+          {
+            "name": "declared-font-families",
+            "passed": true,
+            "observed": [
+              "ArialMT"
+            ]
+          },
+          {
+            "name": "physical-geometry-page-1",
+            "passed": true
+          },
+          {
+            "name": "assertion-marker-region",
+            "passed": true,
+            "declaration": {
+              "type": "marker-region",
+              "version": 2,
+              "marker": "shore.",
+              "occurrence": 1,
+              "page": 1,
+              "rect": [
+                0,
+                60,
+                388,
+                75
+              ],
+              "adjudicated": "word",
+              "tolerancePt": 0.0001
+            }
+          }
+        ]
+      },
+      "libreoffice": {
+        "eligible": true,
+        "ineligibleChecks": [],
+        "inputSha256": "d344d4cc72f08ddd4349a105d955b834864ba753f1afe8ff1c3931de6b1819b3",
+        "inspection": {
+          "fonts": [
+            "ArialMT"
+          ],
+          "geometry": [
+            {
+              "crop": [
+                0,
+                0,
+                388.006299212598,
+                792
+              ],
+              "media": [
+                0,
+                0,
+                388.006299212598,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "tokens": {
+            "Soft": 1,
+            "The": 1,
+            "amber": 1,
+            "boats": 1,
+            "dawn.": 1,
+            "dock": 1,
+            "guide": 1,
+            "lamps": 1,
+            "open": 1,
+            "quiet": 1,
+            "seven": 1,
+            "shore.": 1,
+            "stays": 1,
+            "toward": 1,
+            "until": 1
+          },
+          "words": [
+            {
+              "page": 1,
+              "rect": [
+                45.1,
+                46.14,
+                66.4,
+                59.532
+              ],
+              "text": "Soft"
+            },
+            {
+              "page": 1,
+              "rect": [
+                69.712,
+                46.14,
+                103.672,
+                59.532
+              ],
+              "text": "amber"
+            },
+            {
+              "page": 1,
+              "rect": [
+                107.008,
+                46.14,
+                138.988,
+                59.532
+              ],
+              "text": "lamps"
+            },
+            {
+              "page": 1,
+              "rect": [
+                142.324,
+                46.14,
+                171.664,
+                59.532
+              ],
+              "text": "guide"
+            },
+            {
+              "page": 1,
+              "rect": [
+                174.976,
+                46.14,
+                206.98,
+                59.532
+              ],
+              "text": "seven"
+            },
+            {
+              "page": 1,
+              "rect": [
+                210.292,
+                46.14,
+                236.284,
+                59.532
+              ],
+              "text": "quiet"
+            },
+            {
+              "page": 1,
+              "rect": [
+                239.596,
+                46.14,
+                268.912,
+                59.532
+              ],
+              "text": "boats"
+            },
+            {
+              "page": 1,
+              "rect": [
+                272.248,
+                46.14,
+                308.236,
+                59.532
+              ],
+              "text": "toward"
+            },
+            {
+              "page": 1,
+              "rect": [
+                45.1,
+                61.14,
+                78.4,
+                74.532
+              ],
+              "text": "shore."
+            },
+            {
+              "page": 1,
+              "rect": [
+                81.712,
+                61.14,
+                102.376,
+                74.532
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                105.688,
+                61.14,
+                131.02,
+                74.532
+              ],
+              "text": "dock"
+            },
+            {
+              "page": 1,
+              "rect": [
+                134.356,
+                61.14,
+                162.34,
+                74.532
+              ],
+              "text": "stays"
+            },
+            {
+              "page": 1,
+              "rect": [
+                165.676,
+                61.14,
+                192.328,
+                74.532
+              ],
+              "text": "open"
+            },
+            {
+              "page": 1,
+              "rect": [
+                195.676,
+                61.14,
+                217.624,
+                74.532
+              ],
+              "text": "until"
+            },
+            {
+              "page": 1,
+              "rect": [
+                220.948,
+                61.14,
+                252.94,
+                74.532
+              ],
+              "text": "dawn."
+            }
+          ]
+        },
+        "pdf": "exact-justification-mode-14-left/reference.pdf",
+        "pdfSha256": "65e0708e8635d2884f795e08ed5776c76597df8e1e67bef43d4451d78d9954a3",
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "screenshotSha256": "2a4f2e25830854cc4b786d8714aea00ade08ff5526cdb582fc8d92a82ef6dcbe"
+    },
+    {
+      "id": "exact-justification-mode-15-both",
+      "inputSha256": "137558d3de1492a328de14363a4b297a8ea9dd2071d8dec86c315efab7265480",
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "shore.",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            0,
+            45,
+            388,
+            60
+          ],
+          "adjudicated": "word",
+          "tolerancePt": 0.0001
+        }
+      ],
+      "native": {
+        "eligible": true,
+        "pdfSha256": "652794207c0c21d90f8a7c10605d00c9a9df8f85e2804386a3d480335bde20fe",
+        "returnedDocxSha256": "137558d3de1492a328de14363a4b297a8ea9dd2071d8dec86c315efab7265480",
+        "inspection": {
+          "fonts": [
+            "ArialMT"
+          ],
+          "geometry": [
+            {
+              "crop": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "media": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "tokens": {
+            "Soft": 1,
+            "The": 1,
+            "amber": 1,
+            "boats": 1,
+            "dawn.": 1,
+            "dock": 1,
+            "guide": 1,
+            "lamps": 1,
+            "open": 1,
+            "quiet": 1,
+            "seven": 1,
+            "shore.": 1,
+            "stays": 1,
+            "toward": 1,
+            "until": 1
+          },
+          "words": [
+            {
+              "page": 1,
+              "rect": [
+                45.025,
+                46.17,
+                66.349,
+                59.55
+              ],
+              "text": "Soft"
+            },
+            {
+              "page": 1,
+              "rect": [
+                69.265,
+                46.17,
+                103.489,
+                59.55
+              ],
+              "text": "amber"
+            },
+            {
+              "page": 1,
+              "rect": [
+                106.489,
+                46.17,
+                138.709,
+                59.55
+              ],
+              "text": "lamps"
+            },
+            {
+              "page": 1,
+              "rect": [
+                141.709,
+                46.17,
+                171.109,
+                59.55
+              ],
+              "text": "guide"
+            },
+            {
+              "page": 1,
+              "rect": [
+                174.181,
+                46.17,
+                206.089,
+                59.55
+              ],
+              "text": "seven"
+            },
+            {
+              "page": 1,
+              "rect": [
+                209.161,
+                46.17,
+                235.225,
+                59.55
+              ],
+              "text": "quiet"
+            },
+            {
+              "page": 1,
+              "rect": [
+                238.141,
+                46.17,
+                267.625,
+                59.55
+              ],
+              "text": "boats"
+            },
+            {
+              "page": 1,
+              "rect": [
+                270.625,
+                46.17,
+                306.517,
+                59.55
+              ],
+              "text": "toward"
+            },
+            {
+              "page": 1,
+              "rect": [
+                309.589,
+                46.17,
+                343.153,
+                59.55
+              ],
+              "text": "shore."
+            },
+            {
+              "page": 1,
+              "rect": [
+                45.025,
+                61.17,
+                65.689,
+                74.55
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                69.013,
+                61.17,
+                94.501,
+                74.55
+              ],
+              "text": "dock"
+            },
+            {
+              "page": 1,
+              "rect": [
+                97.753,
+                61.17,
+                125.749,
+                74.55
+              ],
+              "text": "stays"
+            },
+            {
+              "page": 1,
+              "rect": [
+                129.001,
+                61.17,
+                155.905,
+                74.55
+              ],
+              "text": "open"
+            },
+            {
+              "page": 1,
+              "rect": [
+                159.229,
+                61.17,
+                181.129,
+                74.55
+              ],
+              "text": "until"
+            },
+            {
+              "page": 1,
+              "rect": [
+                184.453,
+                61.17,
+                216.517,
+                74.55
+              ],
+              "text": "dawn."
+            }
+          ]
+        }
+      },
+      "base": {
+        "pdfSha256": "e4c278c33546627c137050726e010dd92e4223960ef27918a4848d56a2d810c5",
+        "inspection": {
+          "geometry": [
+            {
+              "media": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "crop": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "words": [
+            {
+              "text": "Soft",
+              "page": 1,
+              "rect": [
+                44.999998,
+                46.136717,
+                66.3457,
+                59.542966
+              ]
+            },
+            {
+              "text": "amber",
+              "page": 1,
+              "rect": [
+                74.609925,
+                46.136717,
+                108.623595,
+                59.542966
+              ]
+            },
+            {
+              "text": "lamps",
+              "page": 1,
+              "rect": [
+                116.88782,
+                46.136717,
+                148.897584,
+                59.542966
+              ]
+            },
+            {
+              "text": "guide",
+              "page": 1,
+              "rect": [
+                157.161809,
+                46.136717,
+                186.523135,
+                59.542966
+              ]
+            },
+            {
+              "text": "seven",
+              "page": 1,
+              "rect": [
+                194.78736,
+                46.136717,
+                226.808843,
+                59.542966
+              ]
+            },
+            {
+              "text": "quiet",
+              "page": 1,
+              "rect": [
+                235.073068,
+                46.136717,
+                261.094562,
+                59.542966
+              ]
+            },
+            {
+              "text": "boats",
+              "page": 1,
+              "rect": [
+                269.358775,
+                46.136717,
+                298.714243,
+                59.542966
+              ]
+            },
+            {
+              "text": "toward",
+              "page": 1,
+              "rect": [
+                306.978502,
+                46.136717,
+                342.996078,
+                59.542966
+              ]
+            },
+            {
+              "text": "shore.",
+              "page": 1,
+              "rect": [
+                44.999998,
+                61.136716,
+                78.351559,
+                74.542966
+              ]
+            },
+            {
+              "text": "The",
+              "page": 1,
+              "rect": [
+                81.468747,
+                61.136716,
+                102.14648,
+                74.542966
+              ]
+            },
+            {
+              "text": "dock",
+              "page": 1,
+              "rect": [
+                105.480464,
+                61.136716,
+                130.828119,
+                74.542966
+              ]
+            },
+            {
+              "text": "stays",
+              "page": 1,
+              "rect": [
+                134.162104,
+                61.136716,
+                162.169915,
+                74.542966
+              ]
+            },
+            {
+              "text": "open",
+              "page": 1,
+              "rect": [
+                165.503899,
+                61.136716,
+                192.19921,
+                74.542966
+              ]
+            },
+            {
+              "text": "until",
+              "page": 1,
+              "rect": [
+                195.533194,
+                61.136716,
+                217.546865,
+                74.542966
+              ]
+            },
+            {
+              "text": "dawn.",
+              "page": 1,
+              "rect": [
+                220.88085,
+                61.136716,
+                252.902332,
+                74.542966
+              ]
+            }
+          ],
+          "tokens": {
+            "Soft": 1,
+            "amber": 1,
+            "lamps": 1,
+            "guide": 1,
+            "seven": 1,
+            "quiet": 1,
+            "boats": 1,
+            "toward": 1,
+            "shore.": 1,
+            "The": 1,
+            "dock": 1,
+            "stays": 1,
+            "open": 1,
+            "until": 1,
+            "dawn.": 1
+          },
+          "fonts": [
+            "ArialMT"
+          ]
+        },
+        "checks": [
+          {
+            "name": "page-count",
+            "passed": true
+          },
+          {
+            "name": "expected-visible-tokens",
+            "passed": true,
+            "missing": {},
+            "extra": {},
+            "normalizedRaw": {}
+          },
+          {
+            "name": "declared-font-families",
+            "passed": true,
+            "observed": [
+              "ArialMT"
+            ]
+          },
+          {
+            "name": "physical-geometry-page-1",
+            "passed": true
+          },
+          {
+            "name": "assertion-marker-region",
+            "passed": false,
+            "declaration": {
+              "type": "marker-region",
+              "version": 2,
+              "marker": "shore.",
+              "occurrence": 1,
+              "page": 1,
+              "rect": [
+                0,
+                45,
+                388,
+                60
+              ],
+              "adjudicated": "word",
+              "tolerancePt": 0.0001
+            }
+          }
+        ]
+      },
+      "candidate": {
+        "pdfSha256": "7ad21b5d1e5df201e05d9de2924dc8b25c03690228d4c7d0e6739f0ced762979",
+        "inspection": {
+          "geometry": [
+            {
+              "media": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "crop": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "words": [
+            {
+              "text": "Soft",
+              "page": 1,
+              "rect": [
+                44.999998,
+                46.136717,
+                66.3457,
+                59.542966
+              ]
+            },
+            {
+              "text": "amber",
+              "page": 1,
+              "rect": [
+                69.407235,
+                46.136717,
+                103.420905,
+                59.542966
+              ]
+            },
+            {
+              "text": "lamps",
+              "page": 1,
+              "rect": [
+                106.48244,
+                46.136717,
+                138.492204,
+                59.542966
+              ]
+            },
+            {
+              "text": "guide",
+              "page": 1,
+              "rect": [
+                141.553739,
+                46.136717,
+                170.915066,
+                59.542966
+              ]
+            },
+            {
+              "text": "seven",
+              "page": 1,
+              "rect": [
+                173.976601,
+                46.136717,
+                205.998084,
+                59.542966
+              ]
+            },
+            {
+              "text": "quiet",
+              "page": 1,
+              "rect": [
+                209.059619,
+                46.136717,
+                235.081102,
+                59.542966
+              ]
+            },
+            {
+              "text": "boats",
+              "page": 1,
+              "rect": [
+                238.142637,
+                46.136717,
+                267.498104,
+                59.542966
+              ]
+            },
+            {
+              "text": "toward",
+              "page": 1,
+              "rect": [
+                270.559651,
+                46.136717,
+                306.577227,
+                59.542966
+              ]
+            },
+            {
+              "text": "shore.",
+              "page": 1,
+              "rect": [
+                309.638751,
+                46.136717,
+                342.990312,
+                59.542966
+              ]
+            },
+            {
+              "text": "The",
+              "page": 1,
+              "rect": [
+                44.999998,
+                61.136716,
+                65.677732,
+                74.542966
+              ]
+            },
+            {
+              "text": "dock",
+              "page": 1,
+              "rect": [
+                69.011716,
+                61.136716,
+                94.359371,
+                74.542966
+              ]
+            },
+            {
+              "text": "stays",
+              "page": 1,
+              "rect": [
+                97.693355,
+                61.136716,
+                125.701166,
+                74.542966
+              ]
+            },
+            {
+              "text": "open",
+              "page": 1,
+              "rect": [
+                129.035151,
+                61.136716,
+                155.730462,
+                74.542966
+              ]
+            },
+            {
+              "text": "until",
+              "page": 1,
+              "rect": [
+                159.064446,
+                61.136716,
+                181.078117,
+                74.542966
+              ]
+            },
+            {
+              "text": "dawn.",
+              "page": 1,
+              "rect": [
+                184.412101,
+                61.136716,
+                216.433584,
+                74.542966
+              ]
+            }
+          ],
+          "tokens": {
+            "Soft": 1,
+            "amber": 1,
+            "lamps": 1,
+            "guide": 1,
+            "seven": 1,
+            "quiet": 1,
+            "boats": 1,
+            "toward": 1,
+            "shore.": 1,
+            "The": 1,
+            "dock": 1,
+            "stays": 1,
+            "open": 1,
+            "until": 1,
+            "dawn.": 1
+          },
+          "fonts": [
+            "ArialMT"
+          ]
+        },
+        "checks": [
+          {
+            "name": "page-count",
+            "passed": true
+          },
+          {
+            "name": "expected-visible-tokens",
+            "passed": true,
+            "missing": {},
+            "extra": {},
+            "normalizedRaw": {}
+          },
+          {
+            "name": "declared-font-families",
+            "passed": true,
+            "observed": [
+              "ArialMT"
+            ]
+          },
+          {
+            "name": "physical-geometry-page-1",
+            "passed": true
+          },
+          {
+            "name": "assertion-marker-region",
+            "passed": true,
+            "declaration": {
+              "type": "marker-region",
+              "version": 2,
+              "marker": "shore.",
+              "occurrence": 1,
+              "page": 1,
+              "rect": [
+                0,
+                45,
+                388,
+                60
+              ],
+              "adjudicated": "word",
+              "tolerancePt": 0.0001
+            }
+          }
+        ]
+      },
+      "libreoffice": {
+        "eligible": true,
+        "ineligibleChecks": [],
+        "inputSha256": "137558d3de1492a328de14363a4b297a8ea9dd2071d8dec86c315efab7265480",
+        "inspection": {
+          "fonts": [
+            "ArialMT"
+          ],
+          "geometry": [
+            {
+              "crop": [
+                0,
+                0,
+                388.006299212598,
+                792
+              ],
+              "media": [
+                0,
+                0,
+                388.006299212598,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "tokens": {
+            "Soft": 1,
+            "The": 1,
+            "amber": 1,
+            "boats": 1,
+            "dawn.": 1,
+            "dock": 1,
+            "guide": 1,
+            "lamps": 1,
+            "open": 1,
+            "quiet": 1,
+            "seven": 1,
+            "shore.": 1,
+            "stays": 1,
+            "toward": 1,
+            "until": 1
+          },
+          "words": [
+            {
+              "page": 1,
+              "rect": [
+                45.1,
+                46.14,
+                66.4,
+                59.532
+              ],
+              "text": "Soft"
+            },
+            {
+              "page": 1,
+              "rect": [
+                69.484,
+                46.14,
+                103.444,
+                59.532
+              ],
+              "text": "amber"
+            },
+            {
+              "page": 1,
+              "rect": [
+                106.552,
+                46.14,
+                138.532,
+                59.532
+              ],
+              "text": "lamps"
+            },
+            {
+              "page": 1,
+              "rect": [
+                141.64,
+                46.14,
+                170.98,
+                59.532
+              ],
+              "text": "guide"
+            },
+            {
+              "page": 1,
+              "rect": [
+                174.064,
+                46.14,
+                206.068,
+                59.532
+              ],
+              "text": "seven"
+            },
+            {
+              "page": 1,
+              "rect": [
+                209.152,
+                46.14,
+                235.144,
+                59.532
+              ],
+              "text": "quiet"
+            },
+            {
+              "page": 1,
+              "rect": [
+                238.228,
+                46.14,
+                267.544,
+                59.532
+              ],
+              "text": "boats"
+            },
+            {
+              "page": 1,
+              "rect": [
+                270.652,
+                46.14,
+                306.64,
+                59.532
+              ],
+              "text": "toward"
+            },
+            {
+              "page": 1,
+              "rect": [
+                309.724,
+                46.14,
+                343.024,
+                59.532
+              ],
+              "text": "shore."
+            },
+            {
+              "page": 1,
+              "rect": [
+                45.1,
+                61.14,
+                65.752,
+                74.532
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                69.064,
+                61.14,
+                94.396,
+                74.532
+              ],
+              "text": "dock"
+            },
+            {
+              "page": 1,
+              "rect": [
+                97.696,
+                61.14,
+                125.716,
+                74.532
+              ],
+              "text": "stays"
+            },
+            {
+              "page": 1,
+              "rect": [
+                129.016,
+                61.14,
+                155.704,
+                74.532
+              ],
+              "text": "open"
+            },
+            {
+              "page": 1,
+              "rect": [
+                159.016,
+                61.14,
+                181.0,
+                74.532
+              ],
+              "text": "until"
+            },
+            {
+              "page": 1,
+              "rect": [
+                184.324,
+                61.14,
+                216.28,
+                74.532
+              ],
+              "text": "dawn."
+            }
+          ]
+        },
+        "pdf": "exact-justification-mode-15-both/reference.pdf",
+        "pdfSha256": "3cf456713f3bf506afddb5d0b2ab1d4bd95baae0c3b28420235fd33a35f19de7",
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "screenshotSha256": "f11b0698e334b4e6738674c1fbcfd59a2d9550e10763f28cf3f05e9c94fc9ef5"
+    },
+    {
+      "id": "exact-justification-mode-15-left",
+      "inputSha256": "9886bfecbb6b9e9a2ec826f03dd5e96cc098d3c2def4d6307b8f037c7dc7dd2a",
+      "assertions": [
+        {
+          "type": "marker-region",
+          "version": 2,
+          "marker": "shore.",
+          "occurrence": 1,
+          "page": 1,
+          "rect": [
+            0,
+            60,
+            388,
+            75
+          ],
+          "adjudicated": "word",
+          "tolerancePt": 0.0001
+        }
+      ],
+      "native": {
+        "eligible": true,
+        "pdfSha256": "619cc55d1b0d8b76c52e6f0734bd294364a9d17b432ca02b1568c99830c9956b",
+        "returnedDocxSha256": "9886bfecbb6b9e9a2ec826f03dd5e96cc098d3c2def4d6307b8f037c7dc7dd2a",
+        "inspection": {
+          "fonts": [
+            "ArialMT"
+          ],
+          "geometry": [
+            {
+              "crop": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "media": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "tokens": {
+            "Soft": 1,
+            "The": 1,
+            "amber": 1,
+            "boats": 1,
+            "dawn.": 1,
+            "dock": 1,
+            "guide": 1,
+            "lamps": 1,
+            "open": 1,
+            "quiet": 1,
+            "seven": 1,
+            "shore.": 1,
+            "stays": 1,
+            "toward": 1,
+            "until": 1
+          },
+          "words": [
+            {
+              "page": 1,
+              "rect": [
+                45.025,
+                46.17,
+                66.349,
+                59.55
+              ],
+              "text": "Soft"
+            },
+            {
+              "page": 1,
+              "rect": [
+                69.517,
+                46.17,
+                103.741,
+                59.55
+              ],
+              "text": "amber"
+            },
+            {
+              "page": 1,
+              "rect": [
+                106.993,
+                46.17,
+                139.213,
+                59.55
+              ],
+              "text": "lamps"
+            },
+            {
+              "page": 1,
+              "rect": [
+                142.465,
+                46.17,
+                171.865,
+                59.55
+              ],
+              "text": "guide"
+            },
+            {
+              "page": 1,
+              "rect": [
+                175.189,
+                46.17,
+                207.109,
+                59.55
+              ],
+              "text": "seven"
+            },
+            {
+              "page": 1,
+              "rect": [
+                210.433,
+                46.17,
+                236.497,
+                59.55
+              ],
+              "text": "quiet"
+            },
+            {
+              "page": 1,
+              "rect": [
+                239.665,
+                46.17,
+                269.149,
+                59.55
+              ],
+              "text": "boats"
+            },
+            {
+              "page": 1,
+              "rect": [
+                272.401,
+                46.17,
+                308.305,
+                59.55
+              ],
+              "text": "toward"
+            },
+            {
+              "page": 1,
+              "rect": [
+                45.025,
+                61.17,
+                78.589,
+                74.55
+              ],
+              "text": "shore."
+            },
+            {
+              "page": 1,
+              "rect": [
+                81.757,
+                61.17,
+                102.421,
+                74.55
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                105.745,
+                61.17,
+                131.233,
+                74.55
+              ],
+              "text": "dock"
+            },
+            {
+              "page": 1,
+              "rect": [
+                134.485,
+                61.17,
+                162.481,
+                74.55
+              ],
+              "text": "stays"
+            },
+            {
+              "page": 1,
+              "rect": [
+                165.733,
+                61.17,
+                192.637,
+                74.55
+              ],
+              "text": "open"
+            },
+            {
+              "page": 1,
+              "rect": [
+                195.961,
+                61.17,
+                217.861,
+                74.55
+              ],
+              "text": "until"
+            },
+            {
+              "page": 1,
+              "rect": [
+                221.185,
+                61.17,
+                253.249,
+                74.55
+              ],
+              "text": "dawn."
+            }
+          ]
+        }
+      },
+      "base": {
+        "pdfSha256": "5117f3e07ea69485c1665e173c45714305534bd17077e4237db2d693dd98dd1f",
+        "inspection": {
+          "geometry": [
+            {
+              "media": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "crop": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "words": [
+            {
+              "text": "Soft",
+              "page": 1,
+              "rect": [
+                44.999998,
+                46.136717,
+                66.3457,
+                59.542966
+              ]
+            },
+            {
+              "text": "amber",
+              "page": 1,
+              "rect": [
+                69.679685,
+                46.136717,
+                103.693355,
+                59.542966
+              ]
+            },
+            {
+              "text": "lamps",
+              "page": 1,
+              "rect": [
+                107.027339,
+                46.136717,
+                139.037103,
+                59.542966
+              ]
+            },
+            {
+              "text": "guide",
+              "page": 1,
+              "rect": [
+                142.371087,
+                46.136717,
+                171.732414,
+                59.542966
+              ]
+            },
+            {
+              "text": "seven",
+              "page": 1,
+              "rect": [
+                175.066398,
+                46.136717,
+                207.087881,
+                59.542966
+              ]
+            },
+            {
+              "text": "quiet",
+              "page": 1,
+              "rect": [
+                210.421866,
+                46.136717,
+                236.443349,
+                59.542966
+              ]
+            },
+            {
+              "text": "boats",
+              "page": 1,
+              "rect": [
+                239.777333,
+                46.136717,
+                269.1328,
+                59.542966
+              ]
+            },
+            {
+              "text": "toward",
+              "page": 1,
+              "rect": [
+                272.466784,
+                46.136717,
+                308.484361,
+                59.542966
+              ]
+            },
+            {
+              "text": "shore.",
+              "page": 1,
+              "rect": [
+                44.999998,
+                61.136716,
+                78.351559,
+                74.542966
+              ]
+            },
+            {
+              "text": "The",
+              "page": 1,
+              "rect": [
+                81.468747,
+                61.136716,
+                102.14648,
+                74.542966
+              ]
+            },
+            {
+              "text": "dock",
+              "page": 1,
+              "rect": [
+                105.480464,
+                61.136716,
+                130.828119,
+                74.542966
+              ]
+            },
+            {
+              "text": "stays",
+              "page": 1,
+              "rect": [
+                134.162104,
+                61.136716,
+                162.169915,
+                74.542966
+              ]
+            },
+            {
+              "text": "open",
+              "page": 1,
+              "rect": [
+                165.503899,
+                61.136716,
+                192.19921,
+                74.542966
+              ]
+            },
+            {
+              "text": "until",
+              "page": 1,
+              "rect": [
+                195.533194,
+                61.136716,
+                217.546865,
+                74.542966
+              ]
+            },
+            {
+              "text": "dawn.",
+              "page": 1,
+              "rect": [
+                220.88085,
+                61.136716,
+                252.902332,
+                74.542966
+              ]
+            }
+          ],
+          "tokens": {
+            "Soft": 1,
+            "amber": 1,
+            "lamps": 1,
+            "guide": 1,
+            "seven": 1,
+            "quiet": 1,
+            "boats": 1,
+            "toward": 1,
+            "shore.": 1,
+            "The": 1,
+            "dock": 1,
+            "stays": 1,
+            "open": 1,
+            "until": 1,
+            "dawn.": 1
+          },
+          "fonts": [
+            "ArialMT"
+          ]
+        },
+        "checks": [
+          {
+            "name": "page-count",
+            "passed": true
+          },
+          {
+            "name": "expected-visible-tokens",
+            "passed": true,
+            "missing": {},
+            "extra": {},
+            "normalizedRaw": {}
+          },
+          {
+            "name": "declared-font-families",
+            "passed": true,
+            "observed": [
+              "ArialMT"
+            ]
+          },
+          {
+            "name": "physical-geometry-page-1",
+            "passed": true
+          },
+          {
+            "name": "assertion-marker-region",
+            "passed": true,
+            "declaration": {
+              "type": "marker-region",
+              "version": 2,
+              "marker": "shore.",
+              "occurrence": 1,
+              "page": 1,
+              "rect": [
+                0,
+                60,
+                388,
+                75
+              ],
+              "adjudicated": "word",
+              "tolerancePt": 0.0001
+            }
+          }
+        ]
+      },
+      "candidate": {
+        "pdfSha256": "707e676ae3c6690bdcfd237a374aec165a2e0e4b418fda5f4e5fbf5812169e1e",
+        "inspection": {
+          "geometry": [
+            {
+              "media": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "crop": [
+                0,
+                0,
+                388,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "words": [
+            {
+              "text": "Soft",
+              "page": 1,
+              "rect": [
+                44.999998,
+                46.136717,
+                66.3457,
+                59.542966
+              ]
+            },
+            {
+              "text": "amber",
+              "page": 1,
+              "rect": [
+                69.679685,
+                46.136717,
+                103.693355,
+                59.542966
+              ]
+            },
+            {
+              "text": "lamps",
+              "page": 1,
+              "rect": [
+                107.027339,
+                46.136717,
+                139.037103,
+                59.542966
+              ]
+            },
+            {
+              "text": "guide",
+              "page": 1,
+              "rect": [
+                142.371087,
+                46.136717,
+                171.732414,
+                59.542966
+              ]
+            },
+            {
+              "text": "seven",
+              "page": 1,
+              "rect": [
+                175.066398,
+                46.136717,
+                207.087881,
+                59.542966
+              ]
+            },
+            {
+              "text": "quiet",
+              "page": 1,
+              "rect": [
+                210.421866,
+                46.136717,
+                236.443349,
+                59.542966
+              ]
+            },
+            {
+              "text": "boats",
+              "page": 1,
+              "rect": [
+                239.777333,
+                46.136717,
+                269.1328,
+                59.542966
+              ]
+            },
+            {
+              "text": "toward",
+              "page": 1,
+              "rect": [
+                272.466784,
+                46.136717,
+                308.484361,
+                59.542966
+              ]
+            },
+            {
+              "text": "shore.",
+              "page": 1,
+              "rect": [
+                44.999998,
+                61.136716,
+                78.351559,
+                74.542966
+              ]
+            },
+            {
+              "text": "The",
+              "page": 1,
+              "rect": [
+                81.468747,
+                61.136716,
+                102.14648,
+                74.542966
+              ]
+            },
+            {
+              "text": "dock",
+              "page": 1,
+              "rect": [
+                105.480464,
+                61.136716,
+                130.828119,
+                74.542966
+              ]
+            },
+            {
+              "text": "stays",
+              "page": 1,
+              "rect": [
+                134.162104,
+                61.136716,
+                162.169915,
+                74.542966
+              ]
+            },
+            {
+              "text": "open",
+              "page": 1,
+              "rect": [
+                165.503899,
+                61.136716,
+                192.19921,
+                74.542966
+              ]
+            },
+            {
+              "text": "until",
+              "page": 1,
+              "rect": [
+                195.533194,
+                61.136716,
+                217.546865,
+                74.542966
+              ]
+            },
+            {
+              "text": "dawn.",
+              "page": 1,
+              "rect": [
+                220.88085,
+                61.136716,
+                252.902332,
+                74.542966
+              ]
+            }
+          ],
+          "tokens": {
+            "Soft": 1,
+            "amber": 1,
+            "lamps": 1,
+            "guide": 1,
+            "seven": 1,
+            "quiet": 1,
+            "boats": 1,
+            "toward": 1,
+            "shore.": 1,
+            "The": 1,
+            "dock": 1,
+            "stays": 1,
+            "open": 1,
+            "until": 1,
+            "dawn.": 1
+          },
+          "fonts": [
+            "ArialMT"
+          ]
+        },
+        "checks": [
+          {
+            "name": "page-count",
+            "passed": true
+          },
+          {
+            "name": "expected-visible-tokens",
+            "passed": true,
+            "missing": {},
+            "extra": {},
+            "normalizedRaw": {}
+          },
+          {
+            "name": "declared-font-families",
+            "passed": true,
+            "observed": [
+              "ArialMT"
+            ]
+          },
+          {
+            "name": "physical-geometry-page-1",
+            "passed": true
+          },
+          {
+            "name": "assertion-marker-region",
+            "passed": true,
+            "declaration": {
+              "type": "marker-region",
+              "version": 2,
+              "marker": "shore.",
+              "occurrence": 1,
+              "page": 1,
+              "rect": [
+                0,
+                60,
+                388,
+                75
+              ],
+              "adjudicated": "word",
+              "tolerancePt": 0.0001
+            }
+          }
+        ]
+      },
+      "libreoffice": {
+        "eligible": true,
+        "ineligibleChecks": [],
+        "inputSha256": "9886bfecbb6b9e9a2ec826f03dd5e96cc098d3c2def4d6307b8f037c7dc7dd2a",
+        "inspection": {
+          "fonts": [
+            "ArialMT"
+          ],
+          "geometry": [
+            {
+              "crop": [
+                0,
+                0,
+                388.006299212598,
+                792
+              ],
+              "media": [
+                0,
+                0,
+                388.006299212598,
+                792
+              ],
+              "rotation": 0,
+              "userUnit": 1
+            }
+          ],
+          "tokens": {
+            "Soft": 1,
+            "The": 1,
+            "amber": 1,
+            "boats": 1,
+            "dawn.": 1,
+            "dock": 1,
+            "guide": 1,
+            "lamps": 1,
+            "open": 1,
+            "quiet": 1,
+            "seven": 1,
+            "shore.": 1,
+            "stays": 1,
+            "toward": 1,
+            "until": 1
+          },
+          "words": [
+            {
+              "page": 1,
+              "rect": [
+                45.1,
+                46.14,
+                66.4,
+                59.532
+              ],
+              "text": "Soft"
+            },
+            {
+              "page": 1,
+              "rect": [
+                69.712,
+                46.14,
+                103.672,
+                59.532
+              ],
+              "text": "amber"
+            },
+            {
+              "page": 1,
+              "rect": [
+                107.008,
+                46.14,
+                138.988,
+                59.532
+              ],
+              "text": "lamps"
+            },
+            {
+              "page": 1,
+              "rect": [
+                142.324,
+                46.14,
+                171.664,
+                59.532
+              ],
+              "text": "guide"
+            },
+            {
+              "page": 1,
+              "rect": [
+                174.976,
+                46.14,
+                206.98,
+                59.532
+              ],
+              "text": "seven"
+            },
+            {
+              "page": 1,
+              "rect": [
+                210.292,
+                46.14,
+                236.284,
+                59.532
+              ],
+              "text": "quiet"
+            },
+            {
+              "page": 1,
+              "rect": [
+                239.596,
+                46.14,
+                268.912,
+                59.532
+              ],
+              "text": "boats"
+            },
+            {
+              "page": 1,
+              "rect": [
+                272.248,
+                46.14,
+                308.236,
+                59.532
+              ],
+              "text": "toward"
+            },
+            {
+              "page": 1,
+              "rect": [
+                45.1,
+                61.14,
+                78.4,
+                74.532
+              ],
+              "text": "shore."
+            },
+            {
+              "page": 1,
+              "rect": [
+                81.712,
+                61.14,
+                102.376,
+                74.532
+              ],
+              "text": "The"
+            },
+            {
+              "page": 1,
+              "rect": [
+                105.688,
+                61.14,
+                131.02,
+                74.532
+              ],
+              "text": "dock"
+            },
+            {
+              "page": 1,
+              "rect": [
+                134.356,
+                61.14,
+                162.34,
+                74.532
+              ],
+              "text": "stays"
+            },
+            {
+              "page": 1,
+              "rect": [
+                165.676,
+                61.14,
+                192.328,
+                74.532
+              ],
+              "text": "open"
+            },
+            {
+              "page": 1,
+              "rect": [
+                195.676,
+                61.14,
+                217.624,
+                74.532
+              ],
+              "text": "until"
+            },
+            {
+              "page": 1,
+              "rect": [
+                220.948,
+                61.14,
+                252.94,
+                74.532
+              ],
+              "text": "dawn."
+            }
+          ]
+        },
+        "pdf": "exact-justification-mode-15-left/reference.pdf",
+        "pdfSha256": "030a2e7a5ef4d84d2541492998676b962f42e4e06344e387e7849568320c9566",
+        "renderer": {
+          "name": "libreoffice",
+          "version": "LibreOffice 25.8.7.3 580(Build:3)"
+        }
+      },
+      "screenshotSha256": "9ee6d63000c3da6a71b12125ae64cabc99733dd08a44a5a4ea38bbcc6e638b6e"
+    }
+  ],
+  "unchangedPreviousCases": 744,
+  "candidateMandatoryChecks": 20
+}
