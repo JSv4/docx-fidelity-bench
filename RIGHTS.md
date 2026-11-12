@@ -75,6 +75,11 @@ The eight fractional-measure cases for Docxodus #1622 contain original Quillwort
 literal OOXML authored in bench/fixtures.py. No product fixture, helper, document, image or
 font program is imported, and no reporter attachment was opened or used.
 
+The two Strict-conformance redline cases for Docxodus #1268 contain original Ledger text and
+literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document or
+font program is imported. Their review images are LibreOffice renders of these packages and of
+Docxodus outputs made from them.
+
 The three math-control redline cases for Docxodus #1189 contain original Juniper labels and
 literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document or
 font program is imported, and the issue's fixture bundle was not copied. Their review images are

@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`, `accept`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v40`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v41`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -650,3 +650,23 @@ inside, so an inserted-then-deleted object kept its inserted text on accept. No 
 a control-character mark, and all previous DOCX bytes are unchanged. Session listing and selective
 resolution of the two revisions are covered by Docxodus's own tests, not scored here. See
 [the evidence](results/math-control-revisions/README.md).
+
+## Rejecting revisions in a Strict-conformance package (Docxodus #1268)
+
+`redline-v41` adds an original pair. One paragraph deletes "Amber prism" and inserts "Indigo
+prism"; the reproducer's input is an ISO/IEC 29500 Strict package and the control's is the same
+package in the Transitional class. The two inputs differ only in the WordprocessingML namespace
+and the relationship-type URIs, which the generator's existing `strict` option substitutes after
+every part is built. Both use the `reject` operation: the output is compared whole with the
+Transitional original and must hold no revisions. LibreOffice loads both inputs, and all its
+comparisons apply.
+
+Metric contract version 28 records a change to the benchmark's own engine, which now reads the
+XML and relationship members of a Strict package under the Transitional WordprocessingML, math and
+relationship names it matches. Before, it found no revision and no text in a Strict package, so it
+could not resolve the Strict input in the authored calibration and would have scored a correct
+Strict output as empty. A candidate may therefore return either conformance class. The
+substitution finds nothing in a Transitional package, so no earlier result changes, and all
+previous DOCX bytes are unchanged. LibreOffice renders of both inputs, and of the Docxodus reject
+outputs before and after the fix, are in
+[`docs/results/strict-revision-reject/`](results/strict-revision-reject/).
