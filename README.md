@@ -71,6 +71,8 @@ LibreOffice references are pending. See [the evidence and limits](docs/results/a
 Docxodus #1622: border `w:sz="4.5"` in paragraph, table and cell borders, and `w:gridCol w:w="4000.5"`.
 Word 2024 truncates each value. LibreOffice references are pending. See [the evidence and limits](docs/results/fractional-measures/README.md).
 
+`core-v166` adds an original paragraph-style footer frame whose paragraph restates only `w:wrap` in its own `w:framePr`, and a control that restates every frame attribute directly, for Docxodus #1276. Both should resolve to the style's 432pt page-anchored frame 50.4pt from the page edge; body, frame-text and centered-footer position assertions retain misplacement. A second pair puts a 144pt frame in a style that centres it with `w:xAlign`: the reproducer's own `w:framePr` sets only `w:wrap` and `w:x`, and the control restates every attribute with `w:x` in place of `w:xAlign`. Both should place the frame 100pt from the page edge, not centred. Earlier DOCX bytes are unchanged.
+
 `core-v165` adds three inputs and controls for Docxodus #1654: a line break (`w:br`) in a numbered
 item, after a tab that reaches a hanging indent, and after a tab on an indented first line. Word
 2024 starts the text after the break at the paragraph's left indent in all three. Each control
