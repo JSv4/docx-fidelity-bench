@@ -57,6 +57,12 @@ image or font program is imported. The Word 2024 results their expected document
 measured on separately authored probe documents; no Word output and no file attached to the
 issue is included.
 
+The twenty cell-revision redline cases for Docxodus #1688 contain the same original Orchard labels
+and literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document,
+image or font program is imported. The Word 2024 results their expected documents encode were
+measured on separately authored probe documents and confirmed on each case's own source; no Word
+output is included.
+
 The fourteen deleted-row projection diagnostics use original Larch row labels and literal
 OOXML authored in `bench/projection_fixtures.py`. No product fixture, helper, document
 or asset is imported. Screenshots show measured API output, not Word page renders.

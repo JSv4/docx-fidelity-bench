@@ -25,14 +25,14 @@ from .redline_build import dotnet as _dotnet, validate_packages, verify_docxodus
 from .common import ROOT, contained, digest, execute, identity, read_json, write_json
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
-OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'replace-text': 1, 'revision-ownership': 1, 'revision-resolve': 1}
+OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'replace-text': 1, 'revision-ownership': 1, 'revision-resolve': 1, 'accept': 1}
 ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1, 2}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'positional-rewrites': {1}, 'section-stories': {1}, 'section-boundaries': {1}, 'section-flags': {1}, 'style-run-history': {1}}
 # Operations whose candidate returns the resolved document itself, not a redline.
-OUTPUT_OPERATIONS = {'reject', 'column-edit', 'block-insert', 'revision-resolve'}
+OUTPUT_OPERATIONS = {'reject', 'accept', 'column-edit', 'block-insert', 'revision-resolve'}
 RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
-SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}, 'revision-resolve': {'output'}}
-CONTRACT = {'version': 24, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}, 'revision-resolve': {'output'}, 'accept': {'output'}}
+CONTRACT = {'version': 25, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -43,6 +43,7 @@ CONTRACT = {'version': 24, 'view': revisions.VIEW_VERSION, 'engines': ['bench-ma
             'spanEditing': 'public span editing must preserve text and inline-marker order through both independent revision resolvers; v2 requires exactly one visible regex match before ReplaceMatch',
             'paragraphRewrite': 'public untracked whole-paragraph rewrites must preserve exact declared native content-control subtrees as well as independent semantic views',
             'columnReview': 'v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry',
+            'acceptOperation': 'accept cases compare the whole-document acceptance of one tracked input by the candidate with an authored output, as reject cases do for rejection',
             'resolutionReview': 'revision-resolve cases require the declared typed registry count/status of the input, successful public bulk resolution and an empty final registry; table-state v2 reads cells through cell-level content controls and names each cell\'s control',
             'revisionOwnership': 'account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips',
             'inlineTrees': 'declared math and drawing subtrees retain structure, properties, textbox content and image bytes in both independently resolved views; v2 checks referenced running stories with part-local image relationships',
@@ -157,7 +158,7 @@ def validate_registry(registry=None):
         operation = case['operation']
         if operation not in OPERATIONS or (OPERATIONS[operation] and len(case['inputs']) != OPERATIONS[operation]) or (operation == 'consolidate' and len(case['inputs']) < 3):
             raise ValueError('Invalid operation or input count: ' + case['id'])
-        expected = {'compare': {'accepted', 'rejected'}, 'consolidate': {'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'accepted', 'rejected'}, 'replace-text': {'accepted', 'rejected'}, 'revision-ownership': {'accepted', 'rejected'}, 'revision-resolve': {'output'}}[operation]
+        expected = {'compare': {'accepted', 'rejected'}, 'consolidate': {'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'accepted', 'rejected'}, 'replace-text': {'accepted', 'rejected'}, 'revision-ownership': {'accepted', 'rejected'}, 'revision-resolve': {'output'}, 'accept': {'output'}}[operation]
         if set(case['expected']) != expected or case['kind'] not in ('reproducer', 'control', 'identity'):
             raise ValueError('Invalid expectation or kind: ' + case['id'])
         declared = case.get('libreoffice', {})
