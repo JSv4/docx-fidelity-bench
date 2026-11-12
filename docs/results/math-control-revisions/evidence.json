@@ -1,0 +1,51 @@
+{
+  "builds": {
+    "baseline": "Docxodus main 1aab1f44",
+    "candidate": "Docxodus fix/1189-session-reject-math-customxml 44ec8bca"
+  },
+  "word": "Microsoft Word 2024, 16.0 build 20326, Windows 11; Revisions.AcceptAll / RejectAll on the unmodified fixture, read from Document.Content.Text and Document.Content.WordOpenXML",
+  "cases": {
+    "redline-accept-math-control-inserted-deleted": {
+      "kind": "reproducer",
+      "operation": "accept",
+      "description": "the fraction's control character was inserted and then deleted",
+      "input": "A= [fraction 1/2: m:ctrlPr > w:ins > w:del, 1 and 2 inserted] +B",
+      "wordRevisions": 2,
+      "rows": [
+        {"label": "Expected document (authored)", "equation": "A=+B", "matches": true},
+        {"label": "Word 2024, Accept All", "equation": "A=+B", "matches": true},
+        {"label": "Benchmark engine, accept", "equation": "A=+B", "matches": true},
+        {"label": "Docxodus baseline, RevisionProcessor.AcceptRevisions", "equation": "A= 1/2 +B  (fraction kept)", "matches": false},
+        {"label": "Docxodus candidate, RevisionProcessor.AcceptRevisions", "equation": "A=+B", "matches": true}
+      ]
+    },
+    "redline-accept-math-control-deleted-control": {
+      "kind": "control",
+      "operation": "accept",
+      "description": "the fraction's control character was deleted",
+      "input": "A= [fraction 1/2: m:ctrlPr > w:del, 1 and 2 deleted] +B",
+      "wordRevisions": 1,
+      "rows": [
+        {"label": "Expected document (authored)", "equation": "A=+B", "matches": true},
+        {"label": "Word 2024, Accept All", "equation": "A=+B", "matches": true},
+        {"label": "Benchmark engine, accept", "equation": "A=+B", "matches": true},
+        {"label": "Docxodus baseline, RevisionProcessor.AcceptRevisions", "equation": "A=+B", "matches": true},
+        {"label": "Docxodus candidate, RevisionProcessor.AcceptRevisions", "equation": "A=+B", "matches": true}
+      ]
+    },
+    "redline-reject-math-control-inserted-deleted": {
+      "kind": "control",
+      "operation": "reject",
+      "description": "the fraction's control character was inserted and then deleted",
+      "input": "A= [fraction 1/2: m:ctrlPr > w:ins > w:del, 1 and 2 inserted] +B",
+      "wordRevisions": 2,
+      "rows": [
+        {"label": "Expected document (authored)", "equation": "A=+B", "matches": true},
+        {"label": "Word 2024, Reject All", "equation": "A=+B", "matches": true},
+        {"label": "Benchmark engine, reject", "equation": "A=+B", "matches": true},
+        {"label": "Docxodus baseline, RevisionProcessor.RejectRevisions", "equation": "A=+B", "matches": true},
+        {"label": "Docxodus candidate, RevisionProcessor.RejectRevisions", "equation": "A=+B", "matches": true}
+      ]
+    }
+  }
+}
