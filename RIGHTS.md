@@ -40,6 +40,11 @@ The twelve bordered-box cases for Docxodus #1692 (`border-between*`, `border-con
 `border-page-start*`, `border-keep-next*`, `border-shading*`) are authored the same way, with
 original Whitebeam labels and an original light-blue fill. Their review images are of the same kind.
 
+The eight box-slab cases for Docxodus #1692 (`border-keep-last*`, `border-shading-mixed*`,
+`border-shading-open-side*`, `border-between-position*`) are authored the same way, with original
+Blackthorn labels, the same light-blue fill, an original sand fill and an original dark-blue rule.
+Their review images are of the same kind.
+
 The twenty line-grid cases for Docxodus #1551 (`grid-at-least-below-pitch*`,
 `grid-tracked-lines-before*`, `grid-at-least-above-pitch*`, `grid-revised-paragraphs*`,
 `grid-bold-word*`, `grid-larger-word*`, `grid-text-centred*`, `grid-broken-lines*`,
