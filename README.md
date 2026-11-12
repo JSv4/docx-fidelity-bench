@@ -67,6 +67,12 @@ LibreOffice references are pending. See [the evidence and limits](docs/results/a
 Docxodus #1622: border `w:sz="4.5"` in paragraph, table and cell borders, and `w:gridCol w:w="4000.5"`.
 Word 2024 truncates each value. LibreOffice references are pending. See [the evidence and limits](docs/results/fractional-measures/README.md).
 
+`core-v165` adds three inputs and controls for Docxodus #1654: a line break (`w:br`) in a numbered
+item, after a tab that reaches a hanging indent, and after a tab on an indented first line. Word
+2024 starts the text after the break at the paragraph's left indent in all three. Each control
+drops only the tab, and the list number with it. Regions are the horizontal span of each label.
+LibreOffice references are pending. See [the evidence and limits](docs/results/break-indent/README.md).
+
 `core-v164` adds four more inputs and controls for Docxodus #1692, each about the paragraphs inside
 one box: `w:keepNext` on the last of them, which Word 2024 moves alone to the next page; two with
 different shading, each filled from the paragraph above to its own space after; a shaded box with no
