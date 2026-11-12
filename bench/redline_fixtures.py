@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v40', 'version': 40}
+SUITE = {'id': 'redline-v41', 'version': 41}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -351,6 +351,7 @@ def generate():
     struck_cell_deletions(corpus)
     math_control_revisions(corpus)
     missing_default_spacing(corpus)
+    strict_rejects(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -2586,3 +2587,25 @@ def struck_cell_deletions(corpus):
             _orchard_case(corpus, name.format(where) + '-control', 'control', 'JSv4/Docxodus#1694',
                           f'{resolver} accepts a deleted {where} cell whose run alone is deleted: a neighbour takes the column',
                           marks, 'accept-all', struck='run', **options)
+
+
+# ---------------------------------------------------------------------------------------------
+# Docxodus #1268: rejecting revisions in a Strict-conformance package
+# ---------------------------------------------------------------------------------------------
+
+def strict_rejects(corpus):
+    """The same tracked replacement in a Strict package and, as the control, a Transitional one.
+
+    The two inputs differ only in namespace and relationship-type URIs; both expect the Transitional
+    original, and the scorer reads an output of either conformance class."""
+    def body(tracked, rev=None):
+        middle = rev.dele(t('Amber prism')) + rev.ins(t('Indigo prism')) if tracked else t('Amber prism')
+        return p(t('Ledger ') + middle + t(' closes.')) + p(t(CLOSING))
+    for strict in (True, False):
+        name = 'redline-reject-strict' + ('' if strict else '-control')
+        original = corpus.file(name, 'original', body=body(False))
+        tracked = corpus.file(name, 'tracked', body=body(True, Revisions()), strict=strict)
+        corpus.add(name, 'revisions', 'reproducer' if strict else 'control', 'JSv4/Docxodus#1268',
+                   'Rejecting one deletion and one insertion in a ' + ('Strict' if strict else 'Transitional') + '-conformance package',
+                   'reject', [dict(tracked, role='input')], {'output': original}, original,
+                   [{'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0}])

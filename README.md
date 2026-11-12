@@ -1,3 +1,10 @@
+`redline-v41` adds a Strict-conformance reject pair for Docxodus #1268: one paragraph deletes
+“Amber prism” and inserts “Indigo prism” in a Strict package (purl.oclc.org namespace and
+relationship-type URIs), and the control is the same package in the Transitional class. Both use
+the `reject` operation and must return the original with no revision markup. The benchmark's
+revision engine now reads a Strict package under Transitional names (metric contract 28). See
+[the redline notes](docs/REDLINE.md#rejecting-revisions-in-a-strict-conformance-package-docxodus-1268).
+
 `core-v167` adds two inputs and two controls for Docxodus #1652: three one-line paragraphs under
 a styles part with no `w:pPrDefault` (with and without `w:docDefaults`), which Word 2024 prints at
 8pt after and 1.16 lines, beside an empty and an explicit single-spacing `w:pPrDefault`. Regions are
