@@ -426,6 +426,42 @@ def compat_and_header_spacing_cases(add):
             assertions=regions(case_id))
 
 
+# Word 2024 marker boxes (PDF points, top and bottom) for the Docxodus #1652 cases, widened by 1pt:
+# Word printed the labels at 72.5, 96.5 and 120.5 without the default and at 72.5, 86.3 and 100.1 with it.
+TEASEL_SPACED = {'TeaselOpen': (71.5, 86.8), 'TeaselMiddle': (95.5, 110.8), 'TeaselClose': (119.5, 134.8)}
+TEASEL_SINGLE = {'TeaselOpen': (71.5, 86.8), 'TeaselMiddle': (85.3, 100.6), 'TeaselClose': (99.1, 114.4)}
+TEASEL_REGIONS = {
+    'paragraph-default-missing': TEASEL_SPACED, 'paragraph-default-no-defaults': TEASEL_SPACED,
+    'paragraph-default-empty-control': TEASEL_SINGLE, 'paragraph-default-explicit-control': TEASEL_SINGLE,
+}
+
+
+def missing_paragraph_default_cases(add):
+    """Word 2024 lays out a styles part without w:pPrDefault at 8pt after and 1.16 lines, and takes a
+    w:pPrDefault that is present, even empty, as written (Docxodus #1652)."""
+    text = (f'<w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/>'
+            '<w:color w:val="000000"/><w:sz w:val="24"/></w:rPr>')
+    single = '<w:pPrDefault><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault>'
+    normal = '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/>{}</w:style>'
+    shapes = {'missing': (f'<w:docDefaults><w:rPrDefault>{text}</w:rPrDefault></w:docDefaults>' + normal.format(''),
+                          'w:docDefaults holds only w:rPrDefault'),
+              'no-defaults': (normal.format(text), 'the styles part has no w:docDefaults'),
+              'empty-control': (f'<w:docDefaults><w:rPrDefault>{text}</w:rPrDefault><w:pPrDefault/></w:docDefaults>'
+                                + normal.format(''), 'w:pPrDefault is present and empty'),
+              'explicit-control': (f'<w:docDefaults><w:rPrDefault>{text}</w:rPrDefault>{single}</w:docDefaults>'
+                                   + normal.format(''), 'w:pPrDefault states single spacing and no space after')}
+    for shape, (styles, description) in shapes.items():
+        case_id = 'paragraph-default-' + shape
+        markers = TEASEL_REGIONS[case_id]
+        add(case_id, 'paragraphs',
+            'Three one-line paragraphs with no spacing of their own; ' + description
+            + ' (Word 2024 measured, Docxodus #1652)', [' '.join(markers)],
+            ''.join('<w:p>' + run(marker) + '</w:p>' for marker in markers),
+            styles_xml=f'<w:styles xmlns:w="{W}">{styles}</w:styles>',
+            assertions=[{'type': 'marker-region', 'version': 2, 'marker': marker, 'occurrence': 1, 'page': 1,
+                         'rect': [0, top, 612, bottom]} for marker, (top, bottom) in markers.items()])
+
+
 def at_least_and_tracked_grid_cases(add, cases):
     """Word 2024 gives an at-least line max(whole 18pt grid lines, minimum): one grid line below
     the pitch, and the two its text needs for 24pt text at least 30pt. It keeps a document with
@@ -7288,7 +7324,8 @@ def generate():
     bordered_slab_cases(add)
     break_indent_cases(add)
     style_frame_direct_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v166', 'version': 166, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    missing_paragraph_default_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v167', 'version': 167, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 

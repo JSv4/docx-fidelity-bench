@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v39', 'version': 39}
+SUITE = {'id': 'redline-v40', 'version': 40}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -350,6 +350,7 @@ def generate():
     cell_revision_geometry(corpus)
     struck_cell_deletions(corpus)
     math_control_revisions(corpus)
+    missing_default_spacing(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -2088,6 +2089,40 @@ def default_spacing_history(corpus):
                        dict(body=''.join(p(t(text)) for text in original), styles=left),
                        dict(body=p(t(original[0])) + p(t(original[1].replace('kiosk', 'booth'))) + p(t(original[2])), styles=right),
                        dict(body=p(t(original[0])) + p(edited) + p(t(original[2])), styles=redline), assertions)
+
+
+def missing_default_spacing(corpus):
+    """A revised document without w:pPrDefault has Word's 8pt after and 1.16 lines (Docxodus #1652).
+
+    Word 2024 lays out a styles part that lacks the element with w:after="160" w:line="278", so a
+    redline from 200/276 must accept to those values. The control's revised document states them.
+    """
+    original = ('Teasel ferries leave the east dock at seven.', 'Teasel tickets wait at the kiosk by the gate.',
+                'Teasel bicycles ride free on the lower deck.')
+    wide = '<w:spacing w:after="200" w:line="276" w:lineRule="auto"/>'
+    word = '<w:spacing w:after="160" w:line="278" w:lineRule="auto"/>'
+    run = f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:cs="{FONT}"/><w:sz w:val="24"/>'
+    def styles(defaults='', normal=''):
+        paragraph = f'<w:pPrDefault><w:pPr>{defaults}</w:pPr></w:pPrDefault>' if defaults else ''
+        return (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>{run}</w:rPr></w:rPrDefault>{paragraph}'
+                f'</w:docDefaults>{STYLE_NORMAL.replace("</w:style>", normal + "</w:style>")}</w:styles>')
+    for shape in ('missing-default', 'stated-default-control'):
+        rev = Revisions()
+        history = (f'<w:pPr>{word}<w:pPrChange {rev.attrs(AUTHOR)}><w:pPr>{wide}</w:pPr></w:pPrChange></w:pPr>'
+                   f'<w:rPr>{run}<w:rPrChange {rev.attrs(AUTHOR)}><w:rPr>{run}</w:rPr></w:rPrChange></w:rPr>')
+        edited = (t('Teasel tickets wait at the ') + rev.dele(t('kiosk')) + rev.ins(t('booth')) + t(' by the gate.'))
+        assertions = [untracked(original[0], original[2]), {'type': 'style-run-history', 'version': 1, 'scope': 'redline'}]
+        for scope, after, line in [('accepted', '160', '278'), ('rejected', '200', '276')]:
+            assertions.append({'type': 'paragraph-spacing', 'version': 1, 'scope': scope,
+                               'values': [dict(before='0', after=after, line=line, lineRule='auto')] * 3})
+        corpus.compare('redline-default-spacing-' + shape, 'styles',
+                       'control' if shape.endswith('control') else 'reproducer', 'JSv4/Docxodus#1652',
+                       'Default paragraph spacing 200/276 becomes Word\'s 160/278, which the revised document '
+                       + ('states' if shape.endswith('control') else 'leaves out with its w:pPrDefault') + ', beside a one-word edit',
+                       dict(body=''.join(p(t(text)) for text in original), styles=styles(wide)),
+                       dict(body=p(t(original[0])) + p(t(original[1].replace('kiosk', 'booth'))) + p(t(original[2])),
+                            styles=styles(word if shape.endswith('control') else '')),
+                       dict(body=p(t(original[0])) + p(edited) + p(t(original[2])), styles=styles(wide, history)), assertions)
 
 
 def positional_rewrites(before, after):
