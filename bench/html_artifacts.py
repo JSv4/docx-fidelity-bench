@@ -47,6 +47,13 @@ def validate_declaration(declaration):
                 declaration.get('property') != 'font-size' or not isinstance(declaration.get('equals'), str) or
                 re.fullmatch(r'(?:0|[1-9][0-9]*)(?:\.[0-9]+)?px', declaration['equals']) is None):
             raise ValueError('Unknown or invalid computed HTML style assertion')
+    elif declaration.get('type') == 'marker-block-width':
+        tolerance = declaration.get('tolerancePx')
+        if (set(declaration) != {'type', 'version', 'marker', 'reference', 'tolerancePx'} or
+                not isinstance(declaration.get('reference'), str) or not declaration['reference'] or
+                declaration['reference'] == declaration['marker'] or type(tolerance) not in (int, float) or
+                not math.isfinite(tolerance) or not 0 < tolerance <= 2):
+            raise ValueError('Unknown or invalid HTML block width assertion')
     elif declaration.get('type') == 'review-display':
         expected = declaration.get('expected')
         required, forbidden = declaration.get('requiredTokens'), declaration.get('forbiddenTokens')
@@ -220,6 +227,21 @@ def computed_style_pass(declaration, observation, index):
     return passed and all(v == declaration['equals'] for v in values)
 
 
+def block_width_pass(declaration, observation, index):
+    passed = marker_geometry_pass(declaration, observation, index)
+    if observation['matches'] != 1: return False
+    reference = observation.get('reference')
+    if (not isinstance(reference, dict) or reference.get('marker') != declaration['reference'] or
+            type(reference.get('matches')) is not int or reference['matches'] !=
+            len(list(re.finditer(r'(?<!\w)' + re.escape(declaration['reference']) + r'(?!\w)', observation['text'])))):
+        raise ValueError('Missing or inconsistent HTML block width reference')
+    if reference['matches'] != 1: return False
+    widths = [observation.get('blockWidth'), reference.get('blockWidth')]
+    if any(type(w) not in (int, float) or not math.isfinite(w) or w < 0 for w in widths):
+        raise ValueError('Missing HTML block width observation')
+    return passed and widths[0] > 0 and abs(widths[0] - widths[1]) <= declaration['tolerancePx']
+
+
 def review_display_pass(declaration, observation, index):
     passed = marker_geometry_pass(declaration, observation, index)
     if observation['matches'] != 1: return False
@@ -345,6 +367,11 @@ def inspect(folder, response, declarations, profile=None):
                     checks.append({'name': f'html-readable-{index + 1}', 'marker': declaration['marker'],
                                    'tokens': declaration['tokens'], 'observation': observation,
                                    'passed': readable_pass(declaration, observation, index)})
+                elif declaration['type'] == 'marker-block-width':
+                    checks.append({'name': f'html-width-{index + 1}', 'marker': declaration['marker'],
+                                   'reference': declaration['reference'], 'tolerancePx': declaration['tolerancePx'],
+                                   'observation': observation,
+                                   'passed': block_width_pass(declaration, observation, index)})
                 elif declaration['type'] == 'review-display':
                     checks.append({'name': f'html-review-{index + 1}', 'marker': declaration['marker'],
                                    'expected': declaration['expected'], 'observation': observation,
@@ -398,6 +425,10 @@ def aggregate(cases, declarations, browser_sha=None, profiles=None):
                 elif declaration['type'] == 'marker-readable':
                     valid = (item.get('name') == f'html-readable-{index + 1}' and item.get('tokens') == declaration['tokens'] and
                              item['passed'] == readable_pass(declaration, item.get('observation'), index))
+                elif declaration['type'] == 'marker-block-width':
+                    valid = (item.get('name') == f'html-width-{index + 1}' and item.get('reference') == declaration['reference'] and
+                             item.get('tolerancePx') == declaration['tolerancePx'] and
+                             item['passed'] == block_width_pass(declaration, item.get('observation'), index))
                 elif declaration['type'] == 'review-display':
                     valid = (item.get('name') == f'html-review-{index + 1}' and item.get('expected') == declaration['expected'] and
                              item['passed'] == review_display_pass(declaration, item.get('observation'), index))

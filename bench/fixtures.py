@@ -4240,6 +4240,29 @@ def markup_sheet_cases(add, cases):
         cases[-1]['profile'] = dict(profile)
 
 
+def reply_width_cases(add, cases, comment_styles):
+    """Reply text width, isolated from size: a three-level thread and a flat control (Docxodus #1277)."""
+    for case_id, threaded in [('comments-nested-reply-width', True), ('comments-flat-note-width-control', False)]:
+        ids = ['00000040', '00000050', '00000060']
+        body_text = 'CedarWidthBody The archive crew measures the cedar tray.'
+        body = para(runs='<w:commentRangeStart w:id="0"/>' + run(body_text) + '<w:commentRangeEnd w:id="0"/>'
+                    + ''.join(f'<w:r><w:commentReference w:id="{i}"/></w:r>' for i in range(3)))
+        comments = ''.join(f'<w:comment w:id="{i}" w:author="Cedar Reviewer" w:date="2026-09-10T12:00:00Z">'
+                           + f'<w:p xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" w14:paraId="{pid}">'
+                           + run(f'CedarWidth{i} Measure the tray and record its full width.') + '</w:p></w:comment>'
+                           for i, pid in enumerate(ids))
+        topology = '<w15:commentsEx xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml">' + ''.join(
+            f'<w15:commentEx w15:paraId="{pid}"' + (f' w15:paraIdParent="{ids[i - 1]}"' if threaded and i else '') + '/>'
+            for i, pid in enumerate(ids)) + '</w15:commentsEx>'
+        add(case_id, 'paragraphs', 'Root, reply and nested reply whose text must keep the root width (Docxodus #1277)' if threaded else
+            'The same three comment bodies without parent relationships',
+            [body_text], body, sect=section().replace('w:right="1440"', 'w:right="2880"'),
+            styles_xml=comment_styles, comments_xml=comments, comments_extended_xml=topology)
+        cases[-1]['htmlProfile'] = {'review': 'final', 'comments': 'margin'}
+        cases[-1]['htmlAssertions'] = [{'type': 'marker-block-width', 'version': 1, 'marker': f'CedarWidth{i}',
+                                       'reference': 'CedarWidth0', 'tolerancePx': 0.5} for i in (1, 2)]
+
+
 def generate():
     cases = []
     def add(case_id, category, description, text, body, sect=None, notes=None, image=False, assertions=None, namespaces_extra='', styles_xml=None, story=None, notes_xml=None, stories=None, extra_parts=None, footnote_list=None, numbering_xml=None, comments_xml=None, comments_extended_xml=None, comments_ids_xml=None, comments_extensible_xml=None, font=FONT, literal_parts=None, relations_extra=(), content_types_extra=''):
@@ -7325,7 +7348,8 @@ def generate():
     break_indent_cases(add)
     style_frame_direct_cases(add)
     missing_paragraph_default_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v167', 'version': 167, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    reply_width_cases(add, cases, comment_styles)
+    registry = {'schema': 1, 'suite': {'id': 'core-v168', 'version': 168, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 

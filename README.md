@@ -1,3 +1,5 @@
+`core-v168` adds an original three-level comment thread and a flat-note control for [Docxodus #1277](https://github.com/JSv4/Docxodus/issues/1277). The pair differs only in parent links. Their PDFs hide comments and retain body/page checks. The margin-profile HTML companion uses a new version 1 `marker-block-width` assertion: each reply's note paragraph must have the content width of the root note's paragraph within 0.5px, so a reply that repeats the note's border and padding inside its parent fails. All earlier DOCX files remain byte-identical. The redline suite remains `redline-v41`. New reference registration and full-suite scoring remain pending.
+
 `redline-v41` adds a Strict-conformance reject pair for Docxodus #1268: one paragraph deletes
 “Amber prism” and inserts “Indigo prism” in a Strict package (purl.oclc.org namespace and
 relationship-type URIs), and the control is the same package in the Transitional class. Both use
