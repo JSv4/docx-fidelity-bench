@@ -5,7 +5,7 @@ Word 2024 lays out a document whose styles part has no `w:pPrDefault` with 8pt a
 lines (`w:after="160" w:line="278"`), not with the schema defaults. A `w:pPrDefault` that is
 present, even empty, is taken as written.
 
-## PDF track (`core-v162`)
+## PDF track (`core-v167`)
 
 Each input is three one-line paragraphs of 12pt Liberation Serif with no spacing of their own.
 Only the styles part differs.
@@ -31,7 +31,7 @@ with `/a` (no Normal template), and in one whose user-templates folder held a co
 changed to 20pt after and double spacing. Compatibility modes 12, 14 and 15 and a Calibri-era theme
 part gave the same result.
 
-## Redline track (`redline-v36`)
+## Redline track (`redline-v40`)
 
 The original declares 200/276 default spacing; the revised document differs by one word.
 

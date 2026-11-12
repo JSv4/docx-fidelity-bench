@@ -555,6 +555,67 @@ def at_least_and_tracked_grid_cases(add, cases):
                 cases[-1]['profile'] = {'review': 'markup', 'comments': 'hidden'}
 
 
+def break_indent_cases(add):
+    """Lines after `w:br` in a paragraph that also holds a tab (Docxodus #1654). Word 2024 starts the
+    text after a line break at the paragraph's left indent, whatever tab its first line holds: a list
+    number's own, a tab that reaches the hanging indent, or one after a first-line indent. Each
+    control drops only the tab: the list number goes with it, and a space takes its place after a
+    lead label. A region is the horizontal span Word gives a label, the height of the page: 1in
+    margins put the text edge at 72pt, the hanging indent's first line at 90pt, the left indent at
+    108pt, a 1417-twip first line at 142.85pt and the default tab stop after it at 144pt."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/>'
+              '<w:color w:val="000000"/><w:sz w:val="24"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+              '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>'
+              '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
+    numbering = (f'<w:numbering xmlns:w="{W}"><w:abstractNum w:abstractNumId="0"><w:lvl w:ilvl="0"><w:start w:val="1"/>'
+                 '<w:numFmt w:val="decimal"/><w:lvlText w:val="%1."/><w:lvlJc w:val="left"/>'
+                 '<w:pPr><w:ind w:left="720" w:hanging="360"/></w:pPr></w:lvl></w:abstractNum>'
+                 '<w:num w:numId="1"><w:abstractNumId w:val="0"/></w:num></w:numbering>')
+    hanging = '<w:ind w:left="720" w:hanging="360"/>'
+    first_line = '<w:ind w:firstLine="1417"/>'
+    tab, brk = '<w:r><w:tab/></w:r>', '<w:r><w:br/></w:r>'
+    # Each kind of label's 12pt advance (69.2pt, 70.6pt, 13.3pt and 9pt) and under 3pt more: a label
+    # one 18pt first-line start off leaves its region.
+    widths = {'Open': 72, 'Close': 73, 'Lead': 16, 'number': 12}
+    # A lead label and a space, by the font's advances (T 1251, a digit 1024, a space 512 of 2048).
+    spaced = 90 + (1251 + 1024 + 512) / 2048 * 12
+
+    def region(marker, left, kind):
+        return {'type': 'marker-region', 'version': 2, 'marker': marker, 'occurrence': 1, 'page': 1,
+                'rect': [left, 0, left + widths[kind], 792]}
+
+    # kind, description, then for the input and its control: paragraph properties, what precedes the
+    # first label, the words shown there, and the left edge of the lead, first-line and later labels.
+    for kind, description, shapes in [
+        ('numbered', 'in a numbered item',
+         (('<w:numPr><w:ilvl w:val="0"/><w:numId w:val="1"/></w:numPr>', lambda n: '', lambda n: f'{n}. ', (90, 108, 108)),
+          (hanging, lambda n: '', lambda n: '', (None, 90, 108)))),
+        ('hanging-tab', 'after a tab to a hanging indent',
+         ((hanging, lambda n: run(f'T{n}') + tab, lambda n: f'T{n} ', (90, 108, 108)),
+          (hanging, lambda n: run(f'T{n} '), lambda n: f'T{n} ', (90, spaced, 108)))),
+        ('first-line-tab', 'after a tab on an indented first line',
+         ((first_line, lambda n: tab, lambda n: '', (None, 144, 72)),
+          (first_line, lambda n: '', lambda n: '', (None, 1417 / 20 + 72, 72)))),
+    ]:
+        for control, (props, before, shown, (lead, first, later)) in enumerate(shapes):
+            texts, body, assertions = [], '', []
+            for n in range(1, 4):
+                opening, closing = f'Teasel{n:02d}Open', f'Teasel{n:02d}Close'
+                texts.append(shown(n) + opening + ' ' + closing)
+                body += para(props=props, runs=before(n) + run(opening) + brk + run(closing))
+                if lead is not None:
+                    assertions.append(region(shown(n).strip(), lead, 'number' if kind == 'numbered' else 'Lead'))
+                assertions += [region(opening, first, 'Open'), region(closing, later, 'Close')]
+            add('break-indent-' + kind + ('-control' if control else ''), 'paragraphs',
+                'Text after a line break ' + description + (' with no tab (control)' if control else '')
+                + ' starts at the left indent (Word 2024 measured, Docxodus #1654)', texts, body, section(),
+                styles_xml=styles, numbering_xml=numbering if kind == 'numbered' and not control else None,
+                assertions=assertions)
+            for assertion in assertions:
+                assertion['tolerancePt'] = 0.5
+
+
 def collection_font_cases(add):
     """Requested collection-only families beside equivalent standalone-font controls."""
     from .collection_fonts import generate as generate_fonts
@@ -573,6 +634,222 @@ def collection_font_cases(add):
                 assertions=[{'type': 'required-font-family', 'version': 1, 'family': family}]
                     + [{'type': 'marker-reference-position', 'version': 1, 'marker': label, 'tolerancePt': 0.5}
                        for label in (labels[0], labels[-1])])
+
+
+def bordered_spacing_cases(add):
+    """Word 2024 draws a paragraph border around the text and w:space only: the 14pt before and after
+    lie outside the box and meet the neighbours' spacing as an unbordered paragraph's do, collapsing
+    to 14pt, adding to 28pt under doNotUseHTMLParagraphAutoSpacing, and dropping at the top of a later
+    page. Paragraphs sharing a box keep the spacing between them (Docxodus #1677). Each control drops
+    only the border. Regions are each label's 16pt line slot and page, which hold Word's word boxes."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/>'
+              '<w:color w:val="000000"/><w:sz w:val="24"/></w:rPr></w:rPrDefault></w:docDefaults>'
+              '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
+    box = '<w:pBdr>' + ''.join(f'<w:{side} w:val="single" w:sz="4" w:space="1" w:color="000000"/>'
+                               for side in ('top', 'left', 'bottom', 'right')) + '</w:pBdr>'
+    line, space, edge = 16, 14, 1.5  # edge: the 0.5pt border and its 1pt w:space
+
+    def spaced(text, boxed=None):
+        value = 0 if boxed is None else space * 20
+        return para(text, (box if boxed else '') + f'<w:spacing w:before="{value}" w:after="{value}" w:line="320" w:lineRule="exact"/>')
+
+    fill = [f'Hornbeam{n:02d}' for n in range(1, 41)]
+    # kind: description, settings, plain lead labels, spaced labels in the box, spaced labels after it,
+    # and the space between a box and the spaced paragraph after it.
+    for kind, description, compat, lead, boxed, after, gap in [
+            ('outside', '14pt before and after a bordered paragraph', '', ['HornbeamOpen'], ['HornbeamBoxed'], ['HornbeamNext'], space),
+            ('group', '14pt before and after each of three paragraphs sharing one border', '', ['HornbeamOpen'],
+             ['HornbeamOne', 'HornbeamTwo', 'HornbeamThree'], ['HornbeamNext'], space),
+            ('compat', '14pt before and after a bordered paragraph under doNotUseHTMLParagraphAutoSpacing',
+             '<w:doNotUseHTMLParagraphAutoSpacing/>', ['HornbeamOpen'], ['HornbeamBoxed'], ['HornbeamNext'], 2 * space),
+            ('page-top', 'A bordered paragraph with 14pt before and after moved to the top of page 2', '', fill,
+             ['HornbeamBoxed'], ['HornbeamNext'], space)]:
+        for control in (False, True):
+            case_id = 'border-spacing-' + kind + ('-control' if control else '')
+            rim = 0 if control else edge
+            between = 2 * space if compat else space
+            # Each label's page and the top of its line.
+            tops = {label: (1, 72 + line * index) for index, label in enumerate(lead)}
+            page, top = (2, 72 - line) if kind == 'page-top' else (1, 72 + line * (len(lead) - 1))
+            for index, label in enumerate(boxed):
+                top += line + (rim if index == 0 else between) + (0 if index or page == 2 else space)
+                tops[label] = (page, top)
+            top += line + rim + gap
+            tops[after[0]] = (page, top)
+            close = [] if kind == 'page-top' else ['HornbeamClose']
+            if close:
+                tops[close[0]] = (page, top + line + space)
+            settings = f'<w:settings xmlns:w="{W}">' + SETTINGS_BODY.replace('<w:compat>', '<w:compat>' + compat) + '</w:settings>'
+            add(case_id, 'paragraphs', description + (', without the border' if control else '')
+                + ' (Word 2024 measured, Docxodus #1677)', [' '.join(lead + boxed + after + close)],
+                ''.join(spaced(label) for label in lead) + ''.join(spaced(label, not control) for label in boxed)
+                + ''.join(spaced(label, False) for label in after) + ''.join(spaced(label) for label in close),
+                styles_xml=styles, extra_parts={'word/settings.xml': settings},
+                assertions=[{'type': 'marker-region', 'version': 2, 'marker': label, 'occurrence': 1, 'page': where,
+                             'rect': [0, start, 612, start + line]}
+                            for label, (where, start) in tops.items() if label in (lead[0], lead[-1], *boxed, *after, *close)])
+
+
+def bordered_box_cases(add):
+    """What else Word 2024 does with the box around bordered paragraphs (Docxodus #1692): a paragraph's
+    w:between is a rule below it with w:space on both sides, also beside a paragraph of the same box
+    that has none; contextual spacing applies across the edge of the box; a page start or a keep on
+    a bordered paragraph is honoured; and shading fills the box to its border. Each control drops
+    only the property under test. Regions are each label's 16pt line slot and page, which hold
+    Word's word boxes; the shading pair also declares the fill Word paints."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/>'
+              '<w:color w:val="000000"/><w:sz w:val="24"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+              '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>'
+              '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
+    sides = ''.join(f'<w:{side} w:val="single" w:sz="4" w:space="1" w:color="000000"/>'
+                    for side in ('top', 'left', 'bottom', 'right'))
+    between = '<w:between w:val="single" w:sz="4" w:space="1" w:color="000000"/>'
+    box, ruled = f'<w:pBdr>{sides}</w:pBdr>', f'<w:pBdr>{sides}{between}</w:pBdr>'
+    contextual, page_start, keep = '<w:contextualSpacing/>', '<w:pageBreakBefore/>', '<w:keepNext/>'
+    fill = [176, 196, 222]
+    shading = '<w:shd w:val="clear" w:color="auto" w:fill="B0C4DE"/>'
+
+    def spaced(text, value=0, before='', after=''):
+        return para(text, f'{before}<w:spacing w:before="{value * 20}" w:after="{value * 20}" w:line="320" w:lineRule="exact"/>{after}')
+
+    def painted(left, top, right, bottom):
+        # Word's fill, in points; coverage is its area in the 96dpi pixels the inspection counts.
+        return {'type': 'color-geometry', 'version': 1, 'page': 1, 'rgb': fill, 'adjudicated': 'word', 'tolerancePt': 2,
+                'coverageTolerance': .1, 'boundsPt': [left, top, right, bottom], 'coverage': (right - left) * (bottom - top) / .75 ** 2}
+
+    lead = [f'Whitebeam{n:02d}' for n in range(1, 40)]
+    # kind: description, body, what the control drops, then each label's page and line top with and
+    # without it, and the fill Word paints with and without it.
+    for kind, description, body, dropped, tops, control_tops, fills in [
+            ('between', 'A rule between the three paragraphs of a box, 14pt before and after each',
+             spaced('WhitebeamOpen') + ''.join(spaced(label, 14, ruled) for label in ('WhitebeamOne', 'WhitebeamTwo', 'WhitebeamThree'))
+             + spaced('WhitebeamNext', 14) + spaced('WhitebeamClose'), between,
+             # 14pt, w:space, the 0.5pt rule and w:space again separate the members.
+             {'WhitebeamOpen': (1, 72), 'WhitebeamOne': (1, 103.5), 'WhitebeamTwo': (1, 136), 'WhitebeamThree': (1, 168.5),
+              'WhitebeamNext': (1, 200), 'WhitebeamClose': (1, 230)},
+             {'WhitebeamOpen': (1, 72), 'WhitebeamOne': (1, 103.5), 'WhitebeamTwo': (1, 133.5), 'WhitebeamThree': (1, 163.5),
+              'WhitebeamNext': (1, 195), 'WhitebeamClose': (1, 225)}, None),
+            ('between-mixed', 'A paragraph without w:between between two that have it, in one box',
+             spaced('WhitebeamOpen') + spaced('WhitebeamOne', 14, ruled) + spaced('WhitebeamTwo', 14, box)
+             + spaced('WhitebeamThree', 14, ruled) + spaced('WhitebeamClose'), between,
+             # Below the first: 14pt, its rule and the rule's w:space. Below the second: 14pt and the third's w:space.
+             {'WhitebeamOpen': (1, 72), 'WhitebeamOne': (1, 103.5), 'WhitebeamTwo': (1, 135), 'WhitebeamThree': (1, 166),
+              'WhitebeamClose': (1, 197.5)},
+             {'WhitebeamOpen': (1, 72), 'WhitebeamOne': (1, 103.5), 'WhitebeamTwo': (1, 133.5), 'WhitebeamThree': (1, 163.5),
+              'WhitebeamClose': (1, 195)}, None),
+            ('contextual-edge', 'Contextual spacing on a bordered paragraph and both neighbours of its style',
+             spaced('WhitebeamOpen', 0, '', contextual) + spaced('WhitebeamBoxed', 14, box, contextual)
+             + spaced('WhitebeamNext', 14, '', contextual) + spaced('WhitebeamClose'), contextual,
+             {'WhitebeamOpen': (1, 72), 'WhitebeamBoxed': (1, 89.5), 'WhitebeamNext': (1, 107), 'WhitebeamClose': (1, 123)},
+             {'WhitebeamOpen': (1, 72), 'WhitebeamBoxed': (1, 103.5), 'WhitebeamNext': (1, 135), 'WhitebeamClose': (1, 165)}, None),
+            ('page-start', 'A bordered paragraph with pageBreakBefore',
+             spaced('WhitebeamOpen') + spaced('WhitebeamBoxed', 14, page_start + box) + spaced('WhitebeamNext', 14), page_start,
+             {'WhitebeamOpen': (1, 72), 'WhitebeamBoxed': (2, 73.5), 'WhitebeamNext': (2, 105)},
+             {'WhitebeamOpen': (1, 72), 'WhitebeamBoxed': (1, 103.5), 'WhitebeamNext': (1, 135)}, None),
+            ('keep-next', 'A bordered paragraph kept with a next paragraph that does not fit the page',
+             ''.join(spaced(label) for label in lead) + spaced('WhitebeamKept', 0, keep + box) + spaced('WhitebeamNext'), keep,
+             {lead[0]: (1, 72), lead[-1]: (1, 680), 'WhitebeamKept': (2, 73.5), 'WhitebeamNext': (2, 91)},
+             {lead[0]: (1, 72), lead[-1]: (1, 680), 'WhitebeamKept': (1, 697.5), 'WhitebeamNext': (2, 72)}, None),
+            ('shading', 'A shaded bordered paragraph, 14pt before and after',
+             spaced('WhitebeamOpen') + spaced('WhitebeamBoxed', 14, box + shading) + spaced('WhitebeamClose'), box,
+             {'WhitebeamOpen': (1, 72), 'WhitebeamBoxed': (1, 103.5), 'WhitebeamClose': (1, 135)},
+             {'WhitebeamOpen': (1, 72), 'WhitebeamBoxed': (1, 102), 'WhitebeamClose': (1, 132)},
+             # Inside the border, through its w:space; without one, the line itself (Word runs 1.4pt past the text).
+             (painted(69.6, 102.5, 542.5, 120.5), painted(70.6, 102, 541.5, 118)))]:
+        for control in (False, True):
+            where = control_tops if control else tops
+            labels = re.findall(r'Whitebeam\w+', body)
+            add('border-' + kind + ('-control' if control else ''), 'paragraphs',
+                description + (', without ' + {between: 'the rule', contextual: 'contextual spacing', page_start: 'the page start',
+                                               keep: 'the keep', box: 'the border'}[dropped] if control else '')
+                + ' (Word 2024 measured, Docxodus #1692)', [' '.join(labels)],
+                body.replace(dropped, '') if control else body, styles_xml=styles,
+                assertions=[{'type': 'marker-region', 'version': 2, 'marker': label, 'occurrence': 1, 'page': page,
+                             'rect': [0, top, 612, top + 16]} for label, (page, top) in where.items()]
+                + ([fills[control]] if fills else []))
+
+
+def bordered_slab_cases(add):
+    """Inside a box each paragraph owns a slab, from the paragraph above (or the top border) to its
+    own last line and space after (or the bottom border), and Word 2024 fills that slab with the
+    paragraph's own shading and draws its w:between rule at the slab's foot; a box open on one side
+    is still filled from its top border to its bottom border; and w:keepNext on the last paragraph
+    of a box moves that paragraph alone, splitting the box (Docxodus #1692). Regions are each
+    label's 16pt line slot and page, which hold Word's word boxes; fills and the coloured rule are
+    declared as Word paints them."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/>'
+              '<w:color w:val="000000"/><w:sz w:val="24"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+              '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>'
+              '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
+
+    def border(sides=('top', 'left', 'bottom', 'right'), space=1, between=''):
+        return '<w:pBdr>' + ''.join(f'<w:{side} w:val="single" w:sz="4" w:space="{space}" w:color="000000"/>'
+                                    for side in sides) + between + '</w:pBdr>'
+
+    def shade(rgb):
+        return '<w:shd w:val="clear" w:color="auto" w:fill="%02X%02X%02X"/>' % tuple(rgb)
+
+    def spaced(text, before=0, after=0, props=''):
+        return para(text, f'{props}<w:spacing w:before="{before * 20}" w:after="{after * 20}" w:line="320" w:lineRule="exact"/>')
+
+    def painted(rgb, left, top, right, bottom):
+        # Word's paint, in points; coverage is its area in the 96dpi pixels the inspection counts.
+        return {'type': 'color-geometry', 'version': 1, 'page': 1, 'rgb': rgb, 'adjudicated': 'word', 'tolerancePt': 2,
+                'coverageTolerance': .1, 'boundsPt': [left, top, right, bottom], 'coverage': (right - left) * (bottom - top) / .75 ** 2}
+
+    blue, sand, ink = [176, 196, 222], [224, 176, 128], [0, 72, 120]
+    box, keep = border(), '<w:keepNext/>'
+    # A 3pt rule in its own colour, so that the raster scan can place it.
+    ruled = border(between='<w:between w:val="single" w:sz="24" w:space="1" w:color="%02X%02X%02X"/>' % tuple(ink))
+    lead = [f'Blackthorn{n:02d}' for n in range(1, 39)]
+    led = ''.join(spaced(label) for label in lead)
+
+    def pair(first, second):
+        return spaced('BlackthornOpen') + first + second + spaced('BlackthornClose')
+
+    # kind: description of the input and of its control, both bodies, each label's page and line top
+    # in both, and what Word paints in both.
+    for kind, description, control_description, body, control_body, tops, control_tops, paints, control_paints in [
+            ('keep-last', 'keepNext on the last of two paragraphs in one box, whose next paragraph does not fit the page',
+             'Two paragraphs in one box whose next paragraph does not fit the page, without the keep',
+             led + spaced('BlackthornOne', props=box) + spaced('BlackthornTwo', props=keep + box) + spaced('BlackthornNext'),
+             led + spaced('BlackthornOne', props=box) + spaced('BlackthornTwo', props=box) + spaced('BlackthornNext'),
+             {lead[0]: (1, 72), lead[-1]: (1, 664), 'BlackthornOne': (1, 681.5), 'BlackthornTwo': (2, 72), 'BlackthornNext': (2, 89.5)},
+             {lead[0]: (1, 72), lead[-1]: (1, 664), 'BlackthornOne': (1, 681.5), 'BlackthornTwo': (1, 697.5), 'BlackthornNext': (2, 72)},
+             [], []),
+            ('shading-mixed', 'Two paragraphs of one box with different shading, 5pt after the first and 20pt before the second',
+             'Two paragraphs of one box with the same shading, 5pt after the first and 20pt before the second',
+             pair(spaced('BlackthornOne', 14, 5, box + shade(blue)), spaced('BlackthornTwo', 20, 14, box + shade(sand))),
+             pair(spaced('BlackthornOne', 14, 5, box + shade(blue)), spaced('BlackthornTwo', 20, 14, box + shade(blue))),
+             {'BlackthornOpen': (1, 72), 'BlackthornOne': (1, 103.5), 'BlackthornTwo': (1, 139.5), 'BlackthornClose': (1, 171)},
+             {'BlackthornOpen': (1, 72), 'BlackthornOne': (1, 103.5), 'BlackthornTwo': (1, 139.5), 'BlackthornClose': (1, 171)},
+             [painted(blue, 69.6, 102.5, 542.5, 124.6), painted(sand, 69.6, 124.6, 542.5, 156.5)],
+             [painted(blue, 69.6, 102.5, 542.5, 156.5)]),
+            ('shading-open-side', 'A shaded paragraph with top, left and bottom borders and none on the right',
+             'A shaded paragraph with a border on all four sides',
+             pair(spaced('BlackthornOne', 14, 14, border(('top', 'left', 'bottom'), 4) + shade(blue)), ''),
+             pair(spaced('BlackthornOne', 14, 14, border(space=4) + shade(blue)), ''),
+             {'BlackthornOpen': (1, 72), 'BlackthornOne': (1, 106.5), 'BlackthornClose': (1, 141)},
+             {'BlackthornOpen': (1, 72), 'BlackthornOne': (1, 106.5), 'BlackthornClose': (1, 141)},
+             [painted(blue, 70.6, 102.5, 541.5, 126.5)], [painted(blue, 66.6, 102.5, 545.5, 126.5)]),
+            ('between-position', 'A rule between two paragraphs of a box, 5pt after the first and 20pt before the second',
+             'A rule between two paragraphs of a box, 20pt after the first and 5pt before the second',
+             pair(spaced('BlackthornOne', 14, 5, ruled), spaced('BlackthornTwo', 20, 14, ruled)),
+             pair(spaced('BlackthornOne', 14, 20, ruled), spaced('BlackthornTwo', 5, 14, ruled)),
+             {'BlackthornOpen': (1, 72), 'BlackthornOne': (1, 103.5), 'BlackthornTwo': (1, 144.5), 'BlackthornClose': (1, 176)},
+             {'BlackthornOpen': (1, 72), 'BlackthornOne': (1, 103.5), 'BlackthornTwo': (1, 144.5), 'BlackthornClose': (1, 176)},
+             [painted(ink, 69.6, 125.5, 542.5, 128.5)], [painted(ink, 69.6, 140.5, 542.5, 143.5)])]:
+        for control in (False, True):
+            content = control_body if control else body
+            add('border-' + kind + ('-control' if control else ''), 'paragraphs',
+                (control_description if control else description) + ' (Word 2024 measured, Docxodus #1692)',
+                [' '.join(re.findall(r'Blackthorn\w+', content))], content, styles_xml=styles,
+                assertions=[{'type': 'marker-region', 'version': 2, 'marker': label, 'occurrence': 1, 'page': page,
+                             'rect': [0, top, 612, top + 16]} for label, (page, top) in (control_tops if control else tops).items()]
+                + (control_paints if control else paints))
 
 
 def para(text='', props='', runs=None):
@@ -925,6 +1202,43 @@ def bookmark_boundary_cases():
 def section(cols=1, kind=None):
     mode = f'<w:type w:val="{kind}"/>' if kind else ''
     return f'<w:sectPr>{mode}<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720"/><w:cols w:num="{cols}" w:space="480"/></w:sectPr>'
+
+
+def style_frame_direct_cases(add):
+    """A paragraph style defines a page-anchored footer frame and the paragraph carries its own
+    partial `w:framePr` (Docxodus #1276). Defaults, section and footer layout repeat those of the
+    `footer-paragraph-text-frame` pair."""
+    frame_styles = f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}"/><w:sz w:val="24"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="exact"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>'
+    frame_section = section().replace('<w:sectPr>', '<w:sectPr><w:footerReference w:type="default" r:id="rStory"/>')
+    # #1276: a paragraph style defines a page-anchored footer frame; the paragraph's own framePr
+    # sets only w:wrap. The control restates every style attribute directly, so both resolve alike.
+    style_frame = 'w:w="8640" w:wrap="auto" w:vAnchor="text" w:hAnchor="page" w:x="1008" w:y="40"'
+    stamp_styles = frame_styles.replace('</w:styles>', '<w:style w:type="paragraph" w:customStyle="1" w:styleId="StampFrame">'
+                                        f'<w:name w:val="Stamp Frame"/><w:pPr><w:framePr {style_frame}/></w:pPr></w:style></w:styles>')
+    for case_id, direct in [('footer-style-frame-partial-direct', 'w:wrap="auto"'), ('footer-style-frame-full-direct-control', style_frame)]:
+        body_text, frame_text, centered = 'ElmStampBody Keep the stamp ledger dry.', 'ElmStamp01 Archive stamp.', 'ElmSheet01 Leaf control.'
+        footer = para(frame_text, f'<w:pStyle w:val="StampFrame"/><w:framePr {direct}/>') + para(centered, '<w:jc w:val="center"/>')
+        add(case_id, 'paragraphs', 'Style-defined footer frame under a direct framePr that sets only w:wrap (Docxodus #1276)'
+            if direct != style_frame else 'The same style-defined footer frame with every frame attribute restated directly (control)',
+            [body_text, frame_text, centered], para(body_text), sect=frame_section,
+            styles_xml=stamp_styles, story=('footer', footer),
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker,
+                         'tolerancePt': 0.5} for marker in ('ElmStampBody', 'ElmStamp01', 'ElmSheet01')])
+    # #1276 review: the style centres its frame with w:xAlign; the paragraph's own framePr sets w:x.
+    # The paragraph's offset wins over the style's alignment. The control restates every attribute.
+    align_frame = 'w:w="2880" w:wrap="around" w:vAnchor="text" w:hAnchor="page" w:xAlign="center" w:y="40"'
+    offset_frame = 'w:w="2880" w:wrap="around" w:vAnchor="text" w:hAnchor="page" w:x="2000" w:y="40"'
+    align_styles = frame_styles.replace('</w:styles>', '<w:style w:type="paragraph" w:customStyle="1" w:styleId="CentredFrame">'
+                                        f'<w:name w:val="Centred Frame"/><w:pPr><w:framePr {align_frame}/></w:pPr></w:style></w:styles>')
+    for case_id, direct in [('footer-style-frame-align-direct-offset', 'w:wrap="around" w:x="2000"'), ('footer-style-frame-align-full-direct-control', offset_frame)]:
+        body_text, frame_text, centered = 'LarchAlignBody Keep the tally sheet flat.', 'LarchAlign01 Tally mark.', 'LarchSheet01 Leaf control.'
+        footer = para(frame_text, f'<w:pStyle w:val="CentredFrame"/><w:framePr {direct}/>') + para(centered, '<w:jc w:val="center"/>')
+        add(case_id, 'paragraphs', "Style-centred footer frame under a direct framePr that sets only w:wrap and w:x (Docxodus #1276)"
+            if direct != offset_frame else 'The same style-centred footer frame with every frame attribute restated directly, w:x in place of w:xAlign (control)',
+            [body_text, frame_text, centered], para(body_text), sect=frame_section,
+            styles_xml=align_styles, story=('footer', footer),
+            assertions=[{'type': 'marker-reference-position', 'version': 1, 'marker': marker,
+                         'tolerancePt': 0.5} for marker in ('LarchAlignBody', 'LarchAlign01', 'LarchSheet01')])
 
 
 def cell(text, extra='', nested=''):
@@ -7005,8 +7319,13 @@ def generate():
     compat_and_header_spacing_cases(add)
     section_mark_cases(add)
     at_least_and_tracked_grid_cases(add, cases)
+    bordered_spacing_cases(add)
+    bordered_box_cases(add)
+    bordered_slab_cases(add)
+    break_indent_cases(add)
+    style_frame_direct_cases(add)
     missing_paragraph_default_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v162', 'version': 162, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v167', 'version': 167, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 

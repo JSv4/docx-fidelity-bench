@@ -260,6 +260,31 @@ internal static class Program
                     result = new WmlDocument("column-edit.docx", session.Save());
                     break;
                 }
+                case "revision-resolve" when documents.Count == 1:
+                {
+                    // Bulk resolution of the input's own revisions through the public session. The
+                    // actual result is saved even when resolution is refused, so a refusal is
+                    // measured rather than replaced by an expected document.
+                    var spec = settings["revisionResolve"] as JsonObject ?? throw new InvalidDataException("Missing revision resolution");
+                    if ((int?)spec["version"] != 1) throw new InvalidDataException("Unknown revision resolution version");
+                    using var session = new DocxSession(documents[0].Document.DocumentByteArray);
+                    var before = session.ListRevisions();
+                    var resolved = (string?)spec["resolution"] switch
+                    {
+                        "reject-all" => session.RejectAllRevisions(),
+                        "accept-all" => session.AcceptAllRevisions(),
+                        _ => throw new InvalidDataException("Unknown revision resolution"),
+                    };
+                    response["resolutionReview"] = new JsonObject
+                    {
+                        ["beforeCount"] = before.Count,
+                        ["supported"] = before.All(revision => revision.ResolutionStatus == RevisionResolutionStatus.Supported),
+                        ["resolutionSuccess"] = resolved.Success,
+                    };
+                    response["revisionRegistryCount"] = session.ListRevisions().Count;
+                    result = new WmlDocument("revision-resolve.docx", session.Save());
+                    break;
+                }
                 case "table-widths" when documents.Count == 1:
                 {
                     var spec = settings["tableWidths"] as JsonObject ?? throw new InvalidDataException("Missing table widths");

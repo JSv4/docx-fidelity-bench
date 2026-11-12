@@ -374,7 +374,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 1150)
+        self.assertEqual(len(common.validate_registry()['cases']), 1188)
 
     def test_group_paper_exclusions_follow_literal_source_coordinates(self):
         import runpy
@@ -763,7 +763,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v162')
+        self.assertEqual(registry['suite']['id'], 'core-v167')
 
     def test_paragraph_text_rejects_wrong_lines_and_missing_words(self):
         import gzip
@@ -1283,6 +1283,51 @@ class RegistryContract(unittest.TestCase):
         for region in records[ids[0]]['assertions']:
             self.assertIn(region['marker'], control)
             self.assertLess(region['rect'][2], {'TabNorth': 298.7, 'TabEast': 363.3, 'TabSouth': 442.7}[region['marker']])
+
+    def test_style_frame_pair_changes_only_direct_frame_attributes(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records[c] for c in ('footer-style-frame-partial-direct', 'footer-style-frame-full-direct-control')]
+        w = '{' + fixtures.W + '}'
+        with ZipFile(common.ROOT / pair[0]['input']) as partial, ZipFile(common.ROOT / pair[1]['input']) as control:
+            self.assertEqual(partial.namelist(), control.namelist())
+            for name in partial.namelist():
+                if name != 'word/footer1.xml': self.assertEqual(partial.read(name), control.read(name))
+            style = ET.fromstring(partial.read('word/styles.xml')).find(w + 'style/' + w + 'pPr/' + w + 'framePr')
+            first, second = [ET.fromstring(z.read('word/footer1.xml')) for z in (partial, control)]
+            frames = [f.find(w + 'p/' + w + 'pPr/' + w + 'framePr') for f in (first, second)]
+            self.assertEqual(frames[0].attrib, {w + 'wrap': 'auto'})
+            self.assertEqual(frames[1].attrib, style.attrib)
+            frames[1].attrib = dict(frames[0].attrib)
+            self.assertEqual(ET.tostring(first), ET.tostring(second))
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
+        self.assertEqual({a['marker'] for a in pair[0]['assertions']}, {'ElmStampBody', 'ElmStamp01', 'ElmSheet01'})
+
+    def test_style_aligned_frame_pair_changes_only_direct_frame_attributes(self):
+        import xml.etree.ElementTree as ET
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records[c] for c in ('footer-style-frame-align-direct-offset', 'footer-style-frame-align-full-direct-control')]
+        w = '{' + fixtures.W + '}'
+        with ZipFile(common.ROOT / pair[0]['input']) as offset, ZipFile(common.ROOT / pair[1]['input']) as control:
+            self.assertEqual(offset.namelist(), control.namelist())
+            for name in offset.namelist():
+                if name != 'word/footer1.xml': self.assertEqual(offset.read(name), control.read(name))
+            styles = ET.fromstring(offset.read('word/styles.xml'))
+            style = next(s for s in styles.iter(w + 'style') if s.get(w + 'styleId') == 'CentredFrame').find(w + 'pPr/' + w + 'framePr')
+            self.assertEqual(style.get(w + 'xAlign'), 'center')
+            first, second = [ET.fromstring(z.read('word/footer1.xml')) for z in (offset, control)]
+            frames = [f.find(w + 'p/' + w + 'pPr/' + w + 'framePr') for f in (first, second)]
+            self.assertEqual(frames[0].attrib, {w + 'wrap': 'around', w + 'x': '2000'})
+            restated = {k: v for k, v in style.attrib.items() if k != w + 'xAlign'} | {w + 'x': '2000'}
+            self.assertEqual(frames[1].attrib, restated)
+            frames[1].attrib = dict(frames[0].attrib)
+            self.assertEqual(ET.tostring(first), ET.tostring(second))
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
+        self.assertEqual({a['marker'] for a in pair[0]['assertions']}, {'LarchAlignBody', 'LarchAlign01', 'LarchSheet01'})
 
     def test_manual_tab_reproducer_and_narrow_left_control(self):
         import xml.etree.ElementTree as ET
