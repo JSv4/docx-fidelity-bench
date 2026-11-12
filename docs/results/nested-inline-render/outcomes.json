@@ -1,0 +1,446 @@
+{
+  "schema": 1,
+  "suite": {
+    "cases": [
+      "nested-inline-hyperlink",
+      "nested-inline-hyperlink-control",
+      "nested-inline-field",
+      "nested-inline-field-control",
+      "nested-inline-mixed",
+      "nested-inline-mixed-control"
+    ],
+    "id": "diagnostic-7ac2dce850bd",
+    "version": 1
+  },
+  "contractDigest": "858a401b38748fbb10c65980611f74be0c9353b1a6ab8c3f3f958802771cfcf3",
+  "scope": "Six-case diagnostic; not a core-v73 headline score or scaling measurement",
+  "runs": {
+    "before": {
+      "url": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/40925979882",
+      "commit": "3b6f7f02af37a459dc88e0ec469f64f82b56afdd",
+      "summary": {
+        "categoryMeans": {
+          "paragraphs": 49.997436595053536
+        },
+        "closeMatchRate": 0.5,
+        "complete": true,
+        "mandatoryPassRate": 0.5,
+        "measured": 6,
+        "required": 6,
+        "score": 49.997436595053536
+      },
+      "cases": [
+        {
+          "id": "nested-inline-hyperlink",
+          "status": "measured",
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "readiness_timeout",
+                "message": "Export timed out during wasm_initialization.",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "referenceSource": {
+            "caseId": "nested-inline-hyperlink",
+            "input": "fixtures/nested-inline-hyperlink.docx",
+            "inputSha256": "43d6446ee733ae71dd182cbb019e8907929b3ba03ca1adf53fae4e4db95b2f02",
+            "kind": "direct"
+          }
+        },
+        {
+          "id": "nested-inline-hyperlink-control",
+          "status": "measured",
+          "score": 99.99489582755847,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            }
+          ],
+          "referenceSource": {
+            "caseId": "nested-inline-hyperlink-control",
+            "input": "fixtures/nested-inline-hyperlink-control.docx",
+            "inputSha256": "56f4a190e4306fa556298dbeeff90bc1c835544495bc6a97fadfbe08baab77e6",
+            "kind": "direct"
+          }
+        },
+        {
+          "id": "nested-inline-field",
+          "status": "measured",
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "readiness_timeout",
+                "message": "Export timed out during wasm_initialization.",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "referenceSource": {
+            "caseId": "nested-inline-field",
+            "input": "fixtures/nested-inline-field.docx",
+            "inputSha256": "f4cdcd82e87583db66ac4e6dfafcb266a76fec1fd493392184855ac5c4ecfbd2",
+            "kind": "direct"
+          }
+        },
+        {
+          "id": "nested-inline-field-control",
+          "status": "measured",
+          "score": 99.99570001855163,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            }
+          ],
+          "referenceSource": {
+            "caseId": "nested-inline-field-control",
+            "input": "fixtures/nested-inline-field-control.docx",
+            "inputSha256": "1dd92da88301c1642e12309bbd02af463c503a356f177a590171eab5c5a4f2a6",
+            "kind": "direct"
+          }
+        },
+        {
+          "id": "nested-inline-mixed",
+          "status": "measured",
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "readiness_timeout",
+                "message": "Export timed out during wasm_initialization.",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "referenceSource": {
+            "caseId": "nested-inline-mixed",
+            "input": "fixtures/nested-inline-mixed.docx",
+            "inputSha256": "8580d8e49696edc98f7242731e3b40c0b5a5bcf947a0b15dd85f36db37f26e93",
+            "kind": "direct"
+          }
+        },
+        {
+          "id": "nested-inline-mixed-control",
+          "status": "measured",
+          "score": 99.99402372421112,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            }
+          ],
+          "referenceSource": {
+            "caseId": "nested-inline-mixed-control",
+            "input": "fixtures/nested-inline-mixed-control.docx",
+            "inputSha256": "4a24e64ea5c553ba5d45e7e3556728ff37564f3398b9aaa07c27655eb722ff33",
+            "kind": "direct"
+          }
+        }
+      ]
+    },
+    "after": {
+      "url": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/40928532433",
+      "commit": "3f6f68214ceae1691dbdadaebe8de22dad58d441",
+      "summary": {
+        "categoryMeans": {
+          "paragraphs": 98.58696483371587
+        },
+        "closeMatchRate": 0.8333333333333334,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 6,
+        "required": 6,
+        "score": 98.58696483371587
+      },
+      "cases": [
+        {
+          "id": "nested-inline-hyperlink",
+          "status": "measured",
+          "score": 99.81307435169397,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            }
+          ],
+          "referenceSource": {
+            "caseId": "nested-inline-hyperlink",
+            "input": "fixtures/nested-inline-hyperlink.docx",
+            "inputSha256": "43d6446ee733ae71dd182cbb019e8907929b3ba03ca1adf53fae4e4db95b2f02",
+            "kind": "direct"
+          }
+        },
+        {
+          "id": "nested-inline-hyperlink-control",
+          "status": "measured",
+          "score": 99.99489582755847,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            }
+          ],
+          "referenceSource": {
+            "caseId": "nested-inline-hyperlink-control",
+            "input": "fixtures/nested-inline-hyperlink-control.docx",
+            "inputSha256": "56f4a190e4306fa556298dbeeff90bc1c835544495bc6a97fadfbe08baab77e6",
+            "kind": "direct"
+          }
+        },
+        {
+          "id": "nested-inline-field",
+          "status": "measured",
+          "score": 99.99570001855163,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            }
+          ],
+          "referenceSource": {
+            "caseId": "nested-inline-field",
+            "input": "fixtures/nested-inline-field.docx",
+            "inputSha256": "f4cdcd82e87583db66ac4e6dfafcb266a76fec1fd493392184855ac5c4ecfbd2",
+            "kind": "direct"
+          }
+        },
+        {
+          "id": "nested-inline-field-control",
+          "status": "measured",
+          "score": 99.99570001855163,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            }
+          ],
+          "referenceSource": {
+            "caseId": "nested-inline-field-control",
+            "input": "fixtures/nested-inline-field-control.docx",
+            "inputSha256": "1dd92da88301c1642e12309bbd02af463c503a356f177a590171eab5c5a4f2a6",
+            "kind": "direct"
+          }
+        },
+        {
+          "id": "nested-inline-mixed",
+          "status": "measured",
+          "score": 91.72839506172839,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            }
+          ],
+          "referenceSource": {
+            "caseId": "nested-inline-mixed",
+            "input": "fixtures/nested-inline-mixed.docx",
+            "inputSha256": "8580d8e49696edc98f7242731e3b40c0b5a5bcf947a0b15dd85f36db37f26e93",
+            "kind": "direct"
+          }
+        },
+        {
+          "id": "nested-inline-mixed-control",
+          "status": "measured",
+          "score": 99.99402372421112,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            }
+          ],
+          "referenceSource": {
+            "caseId": "nested-inline-mixed-control",
+            "input": "fixtures/nested-inline-mixed-control.docx",
+            "inputSha256": "4a24e64ea5c553ba5d45e7e3556728ff37564f3398b9aaa07c27655eb722ff33",
+            "kind": "direct"
+          }
+        }
+      ]
+    }
+  }
+}

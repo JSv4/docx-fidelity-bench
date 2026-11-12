@@ -1,0 +1,2954 @@
+{
+  "schema": 1,
+  "benchCommit": "94b88353c4ff4c49af5dd90446b351bee0b20fc5",
+  "scope": "Production public WASM export and pinned Chromium PDF; raw artifacts are retained in the linked Actions runs.",
+  "limitations": [
+    "Word was not captured.",
+    "Controls prove full page-raster identity, not PDF-byte or HTML/PageMap payload identity.",
+    "The wrapping pair retains pre-existing native-reference layout differences, also present in the unchanged control."
+  ],
+  "runs": {
+    "baseline": {
+      "runUrl": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/41177656533",
+      "artifactId": 13034290311,
+      "artifactZipSha256": "3ae2c53a0eb54181a30b540090dfcdedc2489abc41d80a1c1f32c05b5e0f9d0a",
+      "coreCommit": "1240cc5dc0586293cb937c59c973550027c31fda",
+      "resultSha256": "ec918183619d94e6b5d421ecd2c174fcdc286e82440865f3085c3d407a5c1ae4",
+      "selectedManifestSha256": "7c3721acd5cd3f22e694aabca3baf6fd38eb3b41556748b782fc8177eb0fb9d6",
+      "contractDigest": "42364946fa41d846487833151b71e49dc23551da138a3d1d743d747c9b1c098b",
+      "referenceBundleSha256": "fcc9754960990c27d6a011eddb1d1adf9727a84c9e34b14774d13334ddbaee89",
+      "calibrationResultSha256": "e83d815a05d789936575325dc81aaf9ab674584960b405ac35252c837c5595c0",
+      "calibrationSummary": {
+        "categoryMeans": {
+          "paragraphs": 100.0
+        },
+        "closeMatchRate": 1.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 7,
+        "required": 7,
+        "score": 100.0
+      },
+      "summary": {
+        "categoryMeans": {
+          "paragraphs": 39.85227166947623
+        },
+        "closeMatchRate": 0.2857142857142857,
+        "complete": true,
+        "mandatoryPassRate": 0.42857142857142855,
+        "measured": 7,
+        "required": 7,
+        "score": 39.85227166947623
+      },
+      "cases": {
+        "fields-property-uncached": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {
+                "BodyProperty:": 1,
+                "BodyTitle:": 1,
+                "FooterProperty:": 1,
+                "FooterTitle:": 1,
+                "HeaderProperty:": 1,
+                "HeaderTitle:": 1
+              },
+              "missing": {
+                "BodyProperty:Juniper": 1,
+                "BodyTitle:Juniper": 1,
+                "FooterProperty:Juniper": 1,
+                "FooterTitle:Juniper": 1,
+                "HeaderProperty:Juniper": 1,
+                "HeaderTitle:Juniper": 1,
+                "equipment": 6,
+                "register": 6
+              },
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": false
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "HeaderTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  70
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'HeaderTitle:Juniper' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "BodyTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  70,
+                  540,
+                  115
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'BodyTitle:Juniper' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "FooterTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  720,
+                  540,
+                  770
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'FooterTitle:Juniper' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 2243,
+              "close": false,
+              "inkF1": 0.49453861049611647,
+              "pixelMismatch": 0.009284016636957814,
+              "precision": 0.9679001337494427,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "510abf1d800eec258458985a794cbfbae6689c8d958691a81eb985892f452375",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "0e8b0f7c9dca41667e5306452b85df335659cffa5c4fd9cbdc1278169586b842",
+                "width": 816
+              },
+              "recall": 0.332114564290067,
+              "referenceInk": 6564,
+              "score": 49.453861049611646,
+              "ssim": 0.9767902796510023,
+              "ssimRaw": 0.9767902796510023
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "5ff3da9fe05253c42b9925eed120a0636be9196ac227a9b932481c8d37c26428",
+          "pageMapDigest": "89c0c24d3c44f834de9188662392afd7deb0a892302a6e70e7c80befb1aa852b",
+          "files": {
+            "1-candidate.png": "61c8cea792a5184cf97ca0fe85f9fddce8ed1e6bafeca38a054b1b844190f5e3",
+            "1-overlay.png": "7d42a62c398c6e6c024f82988bc09e51b1d906813c88bfd4c68cee4b06a8a038",
+            "1-reference.png": "c159529cdcd1e080326cd95c4f663e5775aca37631dd04062f4842304a7cda5d",
+            "candidate.pdf": "dea455b0a9b2767d1799ee679600dbd14f1adccb60bcbcab418684f5acc8e881",
+            "evidence.json": "8f4c78a276651c6e534e8aff5b85992a6019f4af7d86e524e14971db99a82e72",
+            "production.json": "7364be7c2592d48165d26c58cea73e5c75b9b86afe86ed442a150041f5b7f01b",
+            "reference.pdf": "9f52ed54f06283ff6816c4f5b0df006542944c9d0ec4cb40e99b0df590d63432"
+          }
+        },
+        "fields-property-cached-control": {
+          "score": 97.21185225456973,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "HeaderTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  70
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "BodyTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  70,
+                  540,
+                  115
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FooterTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  720,
+                  540,
+                  770
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 6563,
+              "close": true,
+              "inkF1": 0.9721185225456973,
+              "pixelMismatch": 0.010311060977421271,
+              "precision": 0.9722687795215602,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "abe2ba9f33402a251a952647634901f33f950d0ab69e89d3b44ef1b9776cde82",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "0e8b0f7c9dca41667e5306452b85df335659cffa5c4fd9cbdc1278169586b842",
+                "width": 816
+              },
+              "recall": 0.9719683120048751,
+              "referenceInk": 6564,
+              "score": 97.21185225456973,
+              "ssim": 0.9866294405582675,
+              "ssimRaw": 0.9866294405582675
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "a7f90168e5a691833754398b6f385a18bed3ff4d37e7334edab07698aa9d128b",
+          "pageMapDigest": "0cb3d5c81851a7f38c1e2bb0e1326a4f719fa2a006322fc7c77b3ec714ba4f85",
+          "files": {
+            "1-candidate.png": "a7739754d120e29a61676873875a475e1e33e8fe8b36d67c16c7cdc395a51305",
+            "1-overlay.png": "49dba710ca81106af6780f84dd219cd23b78dd551907ed4530765e1bb9add4e2",
+            "1-reference.png": "c159529cdcd1e080326cd95c4f663e5775aca37631dd04062f4842304a7cda5d",
+            "candidate.pdf": "9e623ab4e9eef3866b6fccf94965fd70374a7917e5407a8b3aab9a5f28eaad24",
+            "evidence.json": "68fa052f9cc4a871517cd1831ffe81bfc5de652097692b7663c5fd95785eb109",
+            "production.json": "cd1391165915abd2c1ef3baa3a78828876f9a51b11ad59910dee8d8541e81e5a",
+            "reference.pdf": "095066fc24c1bd8f4dee9fbb853e3ece01d4cd4a367b10f087c96a1f7fd888c3"
+          }
+        },
+        "fields-styleref-uncached": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {
+                "Closing1:": 1,
+                "Closing2:": 1,
+                "Running1:": 1,
+                "Running2:": 1
+              },
+              "missing": {
+                "Closing1:ALDER": 1,
+                "Closing2:BIRCH": 1,
+                "Running1:ALDER": 1,
+                "Running2:BIRCH": 1,
+                "SECTION": 4
+              },
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": false
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Running1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'Running1:ALDER' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "Closing1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'Closing1:ALDER' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "JuniperFirstBody",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Running2:BIRCH",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'Running2:BIRCH' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "Closing2:BIRCH",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'Closing2:BIRCH' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "JuniperSecondBody",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 2,
+          "pages": [
+            {
+              "candidateInk": 2025,
+              "close": false,
+              "inkF1": 0.7809602164141017,
+              "pixelMismatch": 0.0033700980392156864,
+              "precision": 0.9792592592592593,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "4053401c1be500cda3544afd4830f10d4d24097a49984660e9e1550b8750f329",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "9f7b7dbba71ab923c4f27e9692e4d70c780879dfdabb6fd40a75aea1ed1f118f",
+                "width": 816
+              },
+              "recall": 0.6494476933073424,
+              "referenceInk": 3078,
+              "score": 78.09602164141018,
+              "ssim": 0.9942480970273145,
+              "ssimRaw": 0.9942480970273145
+            },
+            {
+              "candidateInk": 2171,
+              "close": false,
+              "inkF1": 0.7883401794775616,
+              "pixelMismatch": 0.0033051099227569816,
+              "precision": 0.9792722247812068,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "2abce9c80a9187588f900b70a6177dd951d849c38cab5afdb2903386df26e720",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "a519b2f5e1a8b0842796f30ba9422d1171226d86a02d25dacdfe86c5b8e12de9",
+                "width": 816
+              },
+              "recall": 0.6597135740971357,
+              "referenceInk": 3212,
+              "score": 78.83401794775617,
+              "ssim": 0.9943246019093317,
+              "ssimRaw": 0.9943246019093317
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "062b28470d1351804cf66828025e891a02d642848425b4b15805470171e85782",
+          "pageMapDigest": "8c73ddcb5a62788115f283b857fb0b05bdcfda9efa6f13cfe29e6b4379bab854",
+          "files": {
+            "1-candidate.png": "b5d2287b56ffa4468886c6b6798fc8e1d648813dac7a267cba858bb9a58cd5bb",
+            "1-overlay.png": "0331c10c1b83d8b08163319a616d33bff9ab7010c501d1b6eca493cd6720fd43",
+            "1-reference.png": "ffb95d34f81948d1b3fe4a18ba99059a76eb645880d916a2919554d5b6256fbd",
+            "2-candidate.png": "10e9f2dcdf890658f8271424c1e31e338d1b6028164b8855f8f42270c8456ca3",
+            "2-overlay.png": "9f4535a944a4975da269c3b340e359f473fd7725b0f9e2ba1d06ec0b855e74f2",
+            "2-reference.png": "5e4ad15edc56b12f7d542c18db86ef48bf451c2b3887a7da598c5515476d1e01",
+            "candidate.pdf": "f89aa1b418a44ef1181dd3732cc13aa4737dceb72305eb71bc74d7c2f5e9b1dc",
+            "evidence.json": "ead5bb4930444a259d29c9065ccef61c956f43ed62d2ee0e5db8aeba4d112d27",
+            "production.json": "2d71c47205a73bb3550ebae310a1a0f4234b9fa0e19b7608720d8dd60d498ecd",
+            "reference.pdf": "ef3a77437176c443bd4631e3af75165d644fd047a083927e5a100cb1b7fa5c21"
+          }
+        },
+        "fields-styleref-stale-cache": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {
+                "Closing2:ALDER": 1,
+                "Running2:ALDER": 1
+              },
+              "missing": {
+                "Closing2:BIRCH": 1,
+                "Running2:BIRCH": 1
+              },
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": false
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Running1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Closing1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "JuniperFirstBody",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Running2:BIRCH",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'Running2:BIRCH' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "Closing2:BIRCH",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'Closing2:BIRCH' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "JuniperSecondBody",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 2,
+          "pages": [
+            {
+              "candidateInk": 3069,
+              "close": true,
+              "inkF1": 0.958187727750829,
+              "pixelMismatch": 0.003766989750445633,
+              "precision": 0.956989247311828,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "7236aa5512c833667b09db6792b4e0ab5da985aba1cb7dc232059cf45866f352",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "9f7b7dbba71ab923c4f27e9692e4d70c780879dfdabb6fd40a75aea1ed1f118f",
+                "width": 816
+              },
+              "recall": 0.9593892137751787,
+              "referenceInk": 3078,
+              "score": 95.8187727750829,
+              "ssim": 0.9961936758221183,
+              "ssimRaw": 0.9961936758221183
+            },
+            {
+              "candidateInk": 3215,
+              "close": false,
+              "inkF1": 0.910969130525644,
+              "pixelMismatch": 0.004113979872251931,
+              "precision": 0.905443234836703,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "5e23f568837956c72f8777035007e3b56606f022083d4b29692f5ed9f81ac59c",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "a519b2f5e1a8b0842796f30ba9422d1171226d86a02d25dacdfe86c5b8e12de9",
+                "width": 816
+              },
+              "recall": 0.9165628891656289,
+              "referenceInk": 3212,
+              "score": 91.0969130525644,
+              "ssim": 0.9946850144188752,
+              "ssimRaw": 0.9946850144188752
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "b14e3b3abe0557f1062005061af9a465bc8ab8dc67f12775a4fba5be8d940d84",
+          "pageMapDigest": "8d6e9263b205b21293286f926004f37abc98df9919392614b98d88932099a065",
+          "files": {
+            "1-candidate.png": "e05106c72af5076d7a2ed48bcd79e1f6234a0e9297ef6d449ff9d94bbe9b7a73",
+            "1-overlay.png": "7a71ee7073dfce23088fffe6f31e6e4a4f75d47f18cbf4e466fcce1b178ec665",
+            "1-reference.png": "ffb95d34f81948d1b3fe4a18ba99059a76eb645880d916a2919554d5b6256fbd",
+            "2-candidate.png": "afd905b3a43a0d9f049878a1b6cb8a54979080cee2d46720baaa61dab9999b8b",
+            "2-overlay.png": "bae30b57774ea60b05f2a4e1f03c6b66e8b086993d3e33c251b590883b5905f8",
+            "2-reference.png": "5e4ad15edc56b12f7d542c18db86ef48bf451c2b3887a7da598c5515476d1e01",
+            "candidate.pdf": "ddf3789744f637e4fbfbab6ebef4ba2188815dde9a122161eaac36f4f9109e1c",
+            "evidence.json": "fbaa003907b879b13bb1d547d1dd8410e2ed6deab18b443017c8ce01bf48dca7",
+            "production.json": "ff2e25a791dd3f3d989d6b3f66c6321c9c0897df64d2fe68bb0e5fe32c74f462",
+            "reference.pdf": "ae282bed514be139578ce590ba5c053b657568c3674425ae9452375636577205"
+          }
+        },
+        "fields-styleref-constant-control": {
+          "score": 95.8187727750829,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Running1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Closing1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "JuniperFirstBody",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Running2:ALDER",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Closing2:ALDER",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "JuniperSecondBody",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 2,
+          "pages": [
+            {
+              "candidateInk": 3069,
+              "close": true,
+              "inkF1": 0.958187727750829,
+              "pixelMismatch": 0.003766989750445633,
+              "precision": 0.956989247311828,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "7236aa5512c833667b09db6792b4e0ab5da985aba1cb7dc232059cf45866f352",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "9f7b7dbba71ab923c4f27e9692e4d70c780879dfdabb6fd40a75aea1ed1f118f",
+                "width": 816
+              },
+              "recall": 0.9593892137751787,
+              "referenceInk": 3078,
+              "score": 95.8187727750829,
+              "ssim": 0.9961936758221183,
+              "ssimRaw": 0.9961936758221183
+            },
+            {
+              "candidateInk": 3154,
+              "close": true,
+              "inkF1": 0.9586533664190576,
+              "pixelMismatch": 0.003867953431372549,
+              "precision": 0.9571972098922004,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "eb1364568283ecd42ddafc89b34ed707c33ac5d435eeba59e28c8d410cf62490",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "1131b9e4efaf040f9d8636e6c5f79983e5ccbb71350b745f91c46898e322e785",
+                "width": 816
+              },
+              "recall": 0.9601139601139601,
+              "referenceInk": 3159,
+              "score": 95.86533664190576,
+              "ssim": 0.9960539380909128,
+              "ssimRaw": 0.9960539380909128
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "c8b287cae5f706f1c7fb2f2c33f0096b4e78c692997b9e460ab16e3b22276319",
+          "pageMapDigest": "3e50f11ac4113576afc1400902de306affd1b8aebde4b3526b204f3c85b65c22",
+          "files": {
+            "1-candidate.png": "e05106c72af5076d7a2ed48bcd79e1f6234a0e9297ef6d449ff9d94bbe9b7a73",
+            "1-overlay.png": "7a71ee7073dfce23088fffe6f31e6e4a4f75d47f18cbf4e466fcce1b178ec665",
+            "1-reference.png": "ffb95d34f81948d1b3fe4a18ba99059a76eb645880d916a2919554d5b6256fbd",
+            "2-candidate.png": "ec331b32be4ed23805eb45ca3c197d2a5477bf26e0032ca010ca44e70eef74ef",
+            "2-overlay.png": "c626cd0a0d788fa558c9b4cf6f5d011135fd61de6229c6ca79db30bb22bd1ee2",
+            "2-reference.png": "a3012571a569e5c588a47016bc03f498429022b93443c363cb352f412d36474a",
+            "candidate.pdf": "4327124af8551d1987e7520180108cc48995785ad9b6b2890935ad8bda1ef828",
+            "evidence.json": "80eaeffb481edb952941c73bed8fd501a9c8ad177a503ec9859da0f7289657e0",
+            "production.json": "e2ee62f5fe9da4f5a2b402114e9bb01492ef38c222c358e558f08346052118d4",
+            "reference.pdf": "48185f24f47bf0959e38b42df85bde1e053c277698fcb0229ddafae59fa29cf3"
+          }
+        },
+        "fields-styleref-wrapping": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": false
+            },
+            {
+              "extra": {
+                "Running2:ALDER": 1,
+                "SECTION": 1
+              },
+              "missing": {
+                "Closing3": 1,
+                "Running2:JUNIPER": 1,
+                "Running3:JUNIPER": 1,
+                "and": 2,
+                "calibration": 2,
+                "contains": 2,
+                "detailed": 2,
+                "equipment": 2,
+                "for": 2,
+                "inspection": 2,
+                "laboratory": 2,
+                "northern": 2,
+                "record": 2,
+                "room": 2,
+                "schedule": 2,
+                "storage": 2,
+                "the": 4
+              },
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": false
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "Running2:JUNIPER",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  20,
+                  2,
+                  210,
+                  75
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'Running2:JUNIPER' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "Running3:JUNIPER",
+                "occurrence": 1,
+                "page": 3,
+                "rect": [
+                  20,
+                  2,
+                  210,
+                  75
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "error": "Marker 'Running3:JUNIPER' must occur exactly once, found 0",
+              "name": "assertion-marker-region",
+              "passed": false
+            },
+            {
+              "declaration": {
+                "marker": "JuniperWrapTail",
+                "occurrence": 1,
+                "page": 3,
+                "rect": [
+                  20,
+                  60,
+                  210,
+                  150
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": false
+            }
+          ],
+          "pageCount": 2,
+          "pages": [
+            {
+              "candidateInk": 2530,
+              "close": true,
+              "inkF1": 1.0,
+              "pixelMismatch": 0.0257316773241515,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  304,
+                  320
+                ],
+                "candidateSha256": "1fc083e3ac7c7042e1561367f8090cb54c1d13a1c6d29ade7c6213a33231bbcb",
+                "height": 321,
+                "reference": [
+                  304,
+                  321
+                ],
+                "referenceSha256": "20ca7c45eb188549e552da0a41af473a33787b867017f448e3aa8ffea4732d4c",
+                "width": 304
+              },
+              "recall": 1.0,
+              "referenceInk": 2546,
+              "score": 98.06896388211277,
+              "ssim": 0.9806896388211277,
+              "ssimRaw": 0.9806896388211277
+            },
+            {
+              "candidateInk": 11735,
+              "close": false,
+              "inkF1": 0.4245813128627305,
+              "pixelMismatch": 0.2555234464666339,
+              "precision": 0.46450788240306773,
+              "raster": {
+                "candidate": [
+                  304,
+                  320
+                ],
+                "candidateSha256": "6467be81fadfc317e8330417222ef7fcad9958cd66e7ace814424c53faeaefa4",
+                "height": 321,
+                "reference": [
+                  304,
+                  321
+                ],
+                "referenceSha256": "4d9f1a6ca1cc55751e3ec5cf032bbb587b8e6d3ccf01368f47e3b30e77484187",
+                "width": 304
+              },
+              "recall": 0.39097521151848,
+              "referenceInk": 13474,
+              "score": 42.45813128627305,
+              "ssim": 0.5108169688516022,
+              "ssimRaw": 0.5108169688516022
+            },
+            {
+              "score": 0.0,
+              "unmatched": "reference"
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "185f53759407f88ca4d85603f579fc59aa38b9b59b83d137f724b64f8a9ae3d0",
+          "pageMapDigest": "06ff903ed44a0d1adb0a377046bbef33538ceffb052bc51058135f8fdda2ae3f",
+          "files": {
+            "1-candidate.png": "5c686188a123de7b80fd3da46fbf70dc14184a27d146c560acd38d9c4c6fcacb",
+            "1-overlay.png": "1f31721579fbdfb182cd6e6df065ee845323c49a29dacc115309156a3a0009e1",
+            "1-reference.png": "fda9f7fe124df5a996699c685841af29686e8e6cb368e0269044e1b74809423a",
+            "2-candidate.png": "663c9b38e6ad3de96c8dc5fed38d948cc7425a969213ed38fede4c84a9d68ae8",
+            "2-overlay.png": "a148226f04a0c10eeeea15dbe1c3e2602911d29b67215d63f6a9dad510ab0a65",
+            "2-reference.png": "66c2b5ab02a9e15d9623298d06449a36a8939c2309618dd24941dd9964342e4a",
+            "candidate.pdf": "8bde5fe6789ad5f460c8c525e4938b22386bc52658dde66016f61eb097f480c7",
+            "evidence.json": "67a2d33d736af42394606f4becd0a38bca22f1cace2780a12c0578374ddfa72c",
+            "production.json": "1e590375e92be981c7a808d1a25f07c2805d1db388beaf9649a13fc657efa1e8",
+            "reference.pdf": "97c09196b0d38fb1a17d789cf1c71c27471ac54c29591a484c7e488cfa33a4b5"
+          }
+        },
+        "fields-styleref-wrapping-control": {
+          "score": 85.935276656681,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Running2:JUNIPER",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  20,
+                  2,
+                  210,
+                  75
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Running3:JUNIPER",
+                "occurrence": 1,
+                "page": 3,
+                "rect": [
+                  20,
+                  2,
+                  210,
+                  75
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "JuniperWrapTail",
+                "occurrence": 1,
+                "page": 3,
+                "rect": [
+                  20,
+                  60,
+                  210,
+                  150
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 3,
+          "pages": [
+            {
+              "candidateInk": 10780,
+              "close": false,
+              "inkF1": 0.9884759554334429,
+              "pixelMismatch": 0.10602147893097229,
+              "precision": 0.9894248608534323,
+              "raster": {
+                "candidate": [
+                  304,
+                  320
+                ],
+                "candidateSha256": "45f576e2281407ac77cb38026c496f67fe98d8895fde20d47171595cf7791a8c",
+                "height": 321,
+                "reference": [
+                  304,
+                  321
+                ],
+                "referenceSha256": "22e4c09c26305a8e628f43a14f8208999d3ed91a52b049bc033e5d0b1ee9b7ec",
+                "width": 304
+              },
+              "recall": 0.9875288683602771,
+              "referenceInk": 10825,
+              "score": 88.9920483780111,
+              "ssim": 0.889920483780111,
+              "ssimRaw": 0.889920483780111
+            },
+            {
+              "candidateInk": 13448,
+              "close": false,
+              "inkF1": 0.9906768650105439,
+              "pixelMismatch": 0.13934661419904903,
+              "precision": 0.9915229030339084,
+              "raster": {
+                "candidate": [
+                  304,
+                  320
+                ],
+                "candidateSha256": "af4ea2b6a4ae585a2e4c288b839e8d22a9b8927c08397f1c3d059d9ca724820a",
+                "height": 321,
+                "reference": [
+                  304,
+                  321
+                ],
+                "referenceSha256": "4d9f1a6ca1cc55751e3ec5cf032bbb587b8e6d3ccf01368f47e3b30e77484187",
+                "width": 304
+              },
+              "recall": 0.9898322695561823,
+              "referenceInk": 13474,
+              "score": 85.935276656681,
+              "ssim": 0.85935276656681,
+              "ssimRaw": 0.85935276656681
+            },
+            {
+              "candidateInk": 4784,
+              "close": false,
+              "inkF1": 0.9735387095408238,
+              "pixelMismatch": 0.06751106738809641,
+              "precision": 0.9755434782608695,
+              "raster": {
+                "candidate": [
+                  304,
+                  320
+                ],
+                "candidateSha256": "6b40131eb48982ab0cde62f040334a0c342f3982c323396968f20824e62eda3c",
+                "height": 321,
+                "reference": [
+                  304,
+                  321
+                ],
+                "referenceSha256": "d2c85b5ef5a70fd228c0b50c198320581a029081b5bdae415ffa63f22397804d",
+                "width": 304
+              },
+              "recall": 0.9715421636325591,
+              "referenceInk": 4779,
+              "score": 91.09944524283262,
+              "ssim": 0.9109944524283261,
+              "ssimRaw": 0.9109944524283261
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "bdfbbb924bc96f306dd01e09c6e4e4f6322857957ad24e843812ed4ad06bee25",
+          "pageMapDigest": "bcfa3bb94e58942f0afd3f67638d46a6f64bcffa50165b5b7fc83dd5eff3d77a",
+          "files": {
+            "1-candidate.png": "f48ee711517290d574509f6c1c5427ba21f523bb3db4c343f80d29aced237b44",
+            "1-overlay.png": "db694be4194191295b63fa4b32676bf11c22a2ea050835e5c6b9f59fe82f1b29",
+            "1-reference.png": "e866bc680971273ef010bedb7aad75fc0521fbd34c25cb54c6e31198086df0f1",
+            "2-candidate.png": "f21be89a193fc6a7bd1861d1161e313ca9593d32a5d0825e6cb335131c9a918e",
+            "2-overlay.png": "07b7ef4b79f4b0623f3ff24adb4b57265d2286a1753341c0ff3a868d423336ab",
+            "2-reference.png": "66c2b5ab02a9e15d9623298d06449a36a8939c2309618dd24941dd9964342e4a",
+            "3-candidate.png": "a9412af6c695732795d50ec5a25e90191a52e47508ef3da200da76eff8bdcaed",
+            "3-overlay.png": "a48c3c9d140ca7bcbc5165b2cb9a4eefeff72a8ce6f53a99d4b0a4f682e016a2",
+            "3-reference.png": "ec6833115902829a4ac97ae1647dfb92e4d562c7b2cce022e5233c1a83c26cfa",
+            "candidate.pdf": "0778493728e8833f0a40783a7148e821c8721dba35688a4085f8a777fc90f9a0",
+            "evidence.json": "0545fcfb58b15d986c06d009168490817ad1c93dff4f9a084f1cffc271a32a2d",
+            "production.json": "160454ffabf1582e0fc27819097c886687b4bf0bac3dfe4ad42a7ef194e54a28",
+            "reference.pdf": "fd6fb621a9027978fb5594c30547476ad8c55dcde30b1587702d3307e8524a08"
+          }
+        }
+      }
+    },
+    "candidate": {
+      "runUrl": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/41177630479",
+      "artifactId": 13033613085,
+      "artifactZipSha256": "88ee07cf860e76bddb1ba00174afca416decd9ecfe14aa8b7c43aec24afe837c",
+      "coreCommit": "8a0a2e91e72db1534da6214cb65a2765c9c22b45",
+      "resultSha256": "98e765c6d52c7c0c76dc60ef88b2375a2f56778f02e7f0f79a0e59e03249b5bb",
+      "selectedManifestSha256": "7c3721acd5cd3f22e694aabca3baf6fd38eb3b41556748b782fc8177eb0fb9d6",
+      "contractDigest": "1e0c1adc59f3c145adba4ae65f10ac24b9097ed7fa9d8c7c0ee809944f68bfde",
+      "referenceBundleSha256": "b62c97b287786047e2b2efa83d7d680142241da6967dfbc3f5f89af425ed2213",
+      "calibrationResultSha256": "90a0f1b085f053133552c78a9ac1662413a2035164e9be962ce52bde899e0fec",
+      "calibrationSummary": {
+        "categoryMeans": {
+          "paragraphs": 100.0
+        },
+        "closeMatchRate": 1.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 7,
+        "required": 7,
+        "score": 100.0
+      },
+      "summary": {
+        "categoryMeans": {
+          "paragraphs": 93.3929394496786
+        },
+        "closeMatchRate": 0.7142857142857143,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 7,
+        "required": 7,
+        "score": 93.3929394496786
+      },
+      "cases": {
+        "fields-property-uncached": {
+          "score": 97.21185225456973,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "HeaderTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  70
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "BodyTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  70,
+                  540,
+                  115
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FooterTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  720,
+                  540,
+                  770
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 6563,
+              "close": true,
+              "inkF1": 0.9721185225456973,
+              "pixelMismatch": 0.010311060977421271,
+              "precision": 0.9722687795215602,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "abe2ba9f33402a251a952647634901f33f950d0ab69e89d3b44ef1b9776cde82",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "0e8b0f7c9dca41667e5306452b85df335659cffa5c4fd9cbdc1278169586b842",
+                "width": 816
+              },
+              "recall": 0.9719683120048751,
+              "referenceInk": 6564,
+              "score": 97.21185225456973,
+              "ssim": 0.9866294405582675,
+              "ssimRaw": 0.9866294405582675
+            }
+          ],
+          "coreTree": "9a863906d565594a3bc1b6ca085878d163ef8fec",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "5ff3da9fe05253c42b9925eed120a0636be9196ac227a9b932481c8d37c26428",
+          "pageMapDigest": "83ac3d2645d26f85183f3dd1480ea7780b31c417e164405e1390d24800355b6b",
+          "files": {
+            "1-candidate.png": "a7739754d120e29a61676873875a475e1e33e8fe8b36d67c16c7cdc395a51305",
+            "1-overlay.png": "49dba710ca81106af6780f84dd219cd23b78dd551907ed4530765e1bb9add4e2",
+            "1-reference.png": "c159529cdcd1e080326cd95c4f663e5775aca37631dd04062f4842304a7cda5d",
+            "candidate.pdf": "a4be85d7ff3ac3b45d2f657d5b984b13a4052ddf66a13010c97ed72bf4eba50f",
+            "evidence.json": "78709aedd107eb6d9d75d8f530f6e4935fd7227aba69fc8fa9f36a0ee8dad1b7",
+            "production.json": "bb2eb0d5973442ac1a14513170056cff7e9e6ba5ccc55b637800d620488a24ea",
+            "reference.pdf": "1fc8404aafdaca2459785aaedd592224a47bf1639cc5be6808d3047a564ae30c"
+          }
+        },
+        "fields-property-cached-control": {
+          "score": 97.21185225456973,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "HeaderTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  70
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "BodyTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  70,
+                  540,
+                  115
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "FooterTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  720,
+                  540,
+                  770
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 6563,
+              "close": true,
+              "inkF1": 0.9721185225456973,
+              "pixelMismatch": 0.010311060977421271,
+              "precision": 0.9722687795215602,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "abe2ba9f33402a251a952647634901f33f950d0ab69e89d3b44ef1b9776cde82",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "0e8b0f7c9dca41667e5306452b85df335659cffa5c4fd9cbdc1278169586b842",
+                "width": 816
+              },
+              "recall": 0.9719683120048751,
+              "referenceInk": 6564,
+              "score": 97.21185225456973,
+              "ssim": 0.9866294405582675,
+              "ssimRaw": 0.9866294405582675
+            }
+          ],
+          "coreTree": "9a863906d565594a3bc1b6ca085878d163ef8fec",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "a7f90168e5a691833754398b6f385a18bed3ff4d37e7334edab07698aa9d128b",
+          "pageMapDigest": "eabeb8c131de37b6301c3634e55b86e528e76d3c27e14d4ddfce2a3458b4b8b1",
+          "files": {
+            "1-candidate.png": "a7739754d120e29a61676873875a475e1e33e8fe8b36d67c16c7cdc395a51305",
+            "1-overlay.png": "49dba710ca81106af6780f84dd219cd23b78dd551907ed4530765e1bb9add4e2",
+            "1-reference.png": "c159529cdcd1e080326cd95c4f663e5775aca37631dd04062f4842304a7cda5d",
+            "candidate.pdf": "80c6747d3fde4fe209addc2e4f2e71c87c99929597747dd5147cc074322d10e2",
+            "evidence.json": "3061ecfcee4bfbd2743bc7ed0ca200659d40754a86ef0d2b66a694e4be2d8cb1",
+            "production.json": "fe1e50a90393f4413399391a4302ec1cb5ef4a25ff879d4ac5e3e6feef79d3b7",
+            "reference.pdf": "5e88f05fe5689a2e8e3698a70e3804b8efe588c1502d84f67e1aeb9ac88683eb"
+          }
+        },
+        "fields-styleref-uncached": {
+          "score": 95.8187727750829,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Running1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Closing1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "JuniperFirstBody",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Running2:BIRCH",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Closing2:BIRCH",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "JuniperSecondBody",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 2,
+          "pages": [
+            {
+              "candidateInk": 3069,
+              "close": true,
+              "inkF1": 0.958187727750829,
+              "pixelMismatch": 0.003766989750445633,
+              "precision": 0.956989247311828,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "7236aa5512c833667b09db6792b4e0ab5da985aba1cb7dc232059cf45866f352",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "9f7b7dbba71ab923c4f27e9692e4d70c780879dfdabb6fd40a75aea1ed1f118f",
+                "width": 816
+              },
+              "recall": 0.9593892137751787,
+              "referenceInk": 3078,
+              "score": 95.8187727750829,
+              "ssim": 0.9961936758221183,
+              "ssimRaw": 0.9961936758221183
+            },
+            {
+              "candidateInk": 3231,
+              "close": true,
+              "inkF1": 0.9585615507137913,
+              "pixelMismatch": 0.003682273098633393,
+              "precision": 0.9575982667904673,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "e34744aa4a993b1b0ccea295b632c5dd8a91a2144670737d79cffffd21c6b6b3",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "a519b2f5e1a8b0842796f30ba9422d1171226d86a02d25dacdfe86c5b8e12de9",
+                "width": 816
+              },
+              "recall": 0.9595267745952677,
+              "referenceInk": 3212,
+              "score": 95.85615507137913,
+              "ssim": 0.9962982240553627,
+              "ssimRaw": 0.9962982240553627
+            }
+          ],
+          "coreTree": "9a863906d565594a3bc1b6ca085878d163ef8fec",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "062b28470d1351804cf66828025e891a02d642848425b4b15805470171e85782",
+          "pageMapDigest": "4f5fe7fe244a40107c574250d0780b1135bd255484da8aba994b02d44e2a4d72",
+          "files": {
+            "1-candidate.png": "e05106c72af5076d7a2ed48bcd79e1f6234a0e9297ef6d449ff9d94bbe9b7a73",
+            "1-overlay.png": "7a71ee7073dfce23088fffe6f31e6e4a4f75d47f18cbf4e466fcce1b178ec665",
+            "1-reference.png": "ffb95d34f81948d1b3fe4a18ba99059a76eb645880d916a2919554d5b6256fbd",
+            "2-candidate.png": "d6625d0ed22592b4976f8c07c95f3b2b3c4e3b19d2396d1aaa89778fa030f000",
+            "2-overlay.png": "430ea931a25da004a676a975c3736ea3788136eeba50ffd06460bb43fd459e6a",
+            "2-reference.png": "5e4ad15edc56b12f7d542c18db86ef48bf451c2b3887a7da598c5515476d1e01",
+            "candidate.pdf": "68d5ae4b9be215e76cd1f13d7d917e874889a13c8e5b400e3c19cd17f6014663",
+            "evidence.json": "7c84013a555c46b80a38546c92469d9da730236634c95cc392fc355979edcbad",
+            "production.json": "41ba99e445f73b5904c54d351b3e4cb0e9f2dc5062511e31df63ece751846ae7",
+            "reference.pdf": "18cb8306833e68194184c798c280d0a65850d0eb3a915a725fa76db2e621b636"
+          }
+        },
+        "fields-styleref-stale-cache": {
+          "score": 95.8187727750829,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Running1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Closing1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "JuniperFirstBody",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Running2:BIRCH",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Closing2:BIRCH",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "JuniperSecondBody",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 2,
+          "pages": [
+            {
+              "candidateInk": 3069,
+              "close": true,
+              "inkF1": 0.958187727750829,
+              "pixelMismatch": 0.003766989750445633,
+              "precision": 0.956989247311828,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "7236aa5512c833667b09db6792b4e0ab5da985aba1cb7dc232059cf45866f352",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "9f7b7dbba71ab923c4f27e9692e4d70c780879dfdabb6fd40a75aea1ed1f118f",
+                "width": 816
+              },
+              "recall": 0.9593892137751787,
+              "referenceInk": 3078,
+              "score": 95.8187727750829,
+              "ssim": 0.9961936758221183,
+              "ssimRaw": 0.9961936758221183
+            },
+            {
+              "candidateInk": 3231,
+              "close": true,
+              "inkF1": 0.9585615507137913,
+              "pixelMismatch": 0.003682273098633393,
+              "precision": 0.9575982667904673,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "e34744aa4a993b1b0ccea295b632c5dd8a91a2144670737d79cffffd21c6b6b3",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "a519b2f5e1a8b0842796f30ba9422d1171226d86a02d25dacdfe86c5b8e12de9",
+                "width": 816
+              },
+              "recall": 0.9595267745952677,
+              "referenceInk": 3212,
+              "score": 95.85615507137913,
+              "ssim": 0.9962982240553627,
+              "ssimRaw": 0.9962982240553627
+            }
+          ],
+          "coreTree": "9a863906d565594a3bc1b6ca085878d163ef8fec",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "b14e3b3abe0557f1062005061af9a465bc8ab8dc67f12775a4fba5be8d940d84",
+          "pageMapDigest": "0658c9367e006970f7c6921d0e83d262421b46bcaf60b6c5576321dcf09f9202",
+          "files": {
+            "1-candidate.png": "e05106c72af5076d7a2ed48bcd79e1f6234a0e9297ef6d449ff9d94bbe9b7a73",
+            "1-overlay.png": "7a71ee7073dfce23088fffe6f31e6e4a4f75d47f18cbf4e466fcce1b178ec665",
+            "1-reference.png": "ffb95d34f81948d1b3fe4a18ba99059a76eb645880d916a2919554d5b6256fbd",
+            "2-candidate.png": "d6625d0ed22592b4976f8c07c95f3b2b3c4e3b19d2396d1aaa89778fa030f000",
+            "2-overlay.png": "430ea931a25da004a676a975c3736ea3788136eeba50ffd06460bb43fd459e6a",
+            "2-reference.png": "5e4ad15edc56b12f7d542c18db86ef48bf451c2b3887a7da598c5515476d1e01",
+            "candidate.pdf": "a87b553d08aff97ceac603b11a04b5cb512859e90aa5fbeb12831ae15da8ce29",
+            "evidence.json": "5676144de85ce29d8cf7c846cb5104cbf097f8857cecc7f6f7ef1e9036c53398",
+            "production.json": "77d91a65f68086ce08593e9e055bc3823be720b9846998bda891392029d75b39",
+            "reference.pdf": "1c5724054d41d0b931389602131225d66d4b60336b7f4f3236bf8b0932b223a6"
+          }
+        },
+        "fields-styleref-constant-control": {
+          "score": 95.8187727750829,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Running1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Closing1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "JuniperFirstBody",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Running2:ALDER",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Closing2:ALDER",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "JuniperSecondBody",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 2,
+          "pages": [
+            {
+              "candidateInk": 3069,
+              "close": true,
+              "inkF1": 0.958187727750829,
+              "pixelMismatch": 0.003766989750445633,
+              "precision": 0.956989247311828,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "7236aa5512c833667b09db6792b4e0ab5da985aba1cb7dc232059cf45866f352",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "9f7b7dbba71ab923c4f27e9692e4d70c780879dfdabb6fd40a75aea1ed1f118f",
+                "width": 816
+              },
+              "recall": 0.9593892137751787,
+              "referenceInk": 3078,
+              "score": 95.8187727750829,
+              "ssim": 0.9961936758221183,
+              "ssimRaw": 0.9961936758221183
+            },
+            {
+              "candidateInk": 3154,
+              "close": true,
+              "inkF1": 0.9586533664190576,
+              "pixelMismatch": 0.003867953431372549,
+              "precision": 0.9571972098922004,
+              "raster": {
+                "candidate": [
+                  816,
+                  1056
+                ],
+                "candidateSha256": "eb1364568283ecd42ddafc89b34ed707c33ac5d435eeba59e28c8d410cf62490",
+                "height": 1056,
+                "reference": [
+                  816,
+                  1056
+                ],
+                "referenceSha256": "1131b9e4efaf040f9d8636e6c5f79983e5ccbb71350b745f91c46898e322e785",
+                "width": 816
+              },
+              "recall": 0.9601139601139601,
+              "referenceInk": 3159,
+              "score": 95.86533664190576,
+              "ssim": 0.9960539380909128,
+              "ssimRaw": 0.9960539380909128
+            }
+          ],
+          "coreTree": "9a863906d565594a3bc1b6ca085878d163ef8fec",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "c8b287cae5f706f1c7fb2f2c33f0096b4e78c692997b9e460ab16e3b22276319",
+          "pageMapDigest": "eed53284aec2d190370fdf3f2019246de03fdf6ecb95abe743af6511cd4c4c5e",
+          "files": {
+            "1-candidate.png": "e05106c72af5076d7a2ed48bcd79e1f6234a0e9297ef6d449ff9d94bbe9b7a73",
+            "1-overlay.png": "7a71ee7073dfce23088fffe6f31e6e4a4f75d47f18cbf4e466fcce1b178ec665",
+            "1-reference.png": "ffb95d34f81948d1b3fe4a18ba99059a76eb645880d916a2919554d5b6256fbd",
+            "2-candidate.png": "ec331b32be4ed23805eb45ca3c197d2a5477bf26e0032ca010ca44e70eef74ef",
+            "2-overlay.png": "c626cd0a0d788fa558c9b4cf6f5d011135fd61de6229c6ca79db30bb22bd1ee2",
+            "2-reference.png": "a3012571a569e5c588a47016bc03f498429022b93443c363cb352f412d36474a",
+            "candidate.pdf": "170eb8b9a3d99488a7d16d1a3b3599b4d4ca2e0f94e1b4bd1b85df6608becb9e",
+            "evidence.json": "1ebe5f44f916c4ce45abe73e49e441e2f83d64adfbd5271602886938d24a2740",
+            "production.json": "0b26701833ad5bc682ebe8308292dfea6901944f38c9c6e65b9b153d9c0b39fd",
+            "reference.pdf": "d81a52fb45371f79c6c81730cc02abbffe83978741168118c2b4758ef0f89a5e"
+          }
+        },
+        "fields-styleref-wrapping": {
+          "score": 85.935276656681,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Running2:JUNIPER",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  20,
+                  2,
+                  210,
+                  75
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Running3:JUNIPER",
+                "occurrence": 1,
+                "page": 3,
+                "rect": [
+                  20,
+                  2,
+                  210,
+                  75
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "JuniperWrapTail",
+                "occurrence": 1,
+                "page": 3,
+                "rect": [
+                  20,
+                  60,
+                  210,
+                  150
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 3,
+          "pages": [
+            {
+              "candidateInk": 2530,
+              "close": true,
+              "inkF1": 1.0,
+              "pixelMismatch": 0.0257316773241515,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  304,
+                  320
+                ],
+                "candidateSha256": "1fc083e3ac7c7042e1561367f8090cb54c1d13a1c6d29ade7c6213a33231bbcb",
+                "height": 321,
+                "reference": [
+                  304,
+                  321
+                ],
+                "referenceSha256": "20ca7c45eb188549e552da0a41af473a33787b867017f448e3aa8ffea4732d4c",
+                "width": 304
+              },
+              "recall": 1.0,
+              "referenceInk": 2546,
+              "score": 98.06896388211277,
+              "ssim": 0.9806896388211277,
+              "ssimRaw": 0.9806896388211277
+            },
+            {
+              "candidateInk": 13448,
+              "close": false,
+              "inkF1": 0.9906768650105439,
+              "pixelMismatch": 0.13934661419904903,
+              "precision": 0.9915229030339084,
+              "raster": {
+                "candidate": [
+                  304,
+                  320
+                ],
+                "candidateSha256": "af4ea2b6a4ae585a2e4c288b839e8d22a9b8927c08397f1c3d059d9ca724820a",
+                "height": 321,
+                "reference": [
+                  304,
+                  321
+                ],
+                "referenceSha256": "4d9f1a6ca1cc55751e3ec5cf032bbb587b8e6d3ccf01368f47e3b30e77484187",
+                "width": 304
+              },
+              "recall": 0.9898322695561823,
+              "referenceInk": 13474,
+              "score": 85.935276656681,
+              "ssim": 0.85935276656681,
+              "ssimRaw": 0.85935276656681
+            },
+            {
+              "candidateInk": 4784,
+              "close": false,
+              "inkF1": 0.9735387095408238,
+              "pixelMismatch": 0.06751106738809641,
+              "precision": 0.9755434782608695,
+              "raster": {
+                "candidate": [
+                  304,
+                  320
+                ],
+                "candidateSha256": "6b40131eb48982ab0cde62f040334a0c342f3982c323396968f20824e62eda3c",
+                "height": 321,
+                "reference": [
+                  304,
+                  321
+                ],
+                "referenceSha256": "d2c85b5ef5a70fd228c0b50c198320581a029081b5bdae415ffa63f22397804d",
+                "width": 304
+              },
+              "recall": 0.9715421636325591,
+              "referenceInk": 4779,
+              "score": 91.09944524283262,
+              "ssim": 0.9109944524283261,
+              "ssimRaw": 0.9109944524283261
+            }
+          ],
+          "coreTree": "9a863906d565594a3bc1b6ca085878d163ef8fec",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "185f53759407f88ca4d85603f579fc59aa38b9b59b83d137f724b64f8a9ae3d0",
+          "pageMapDigest": "ee78f46508aeb81d6931aecdc1c125e4010a17c1a004c88ab9516b8575f6ceae",
+          "files": {
+            "1-candidate.png": "5c686188a123de7b80fd3da46fbf70dc14184a27d146c560acd38d9c4c6fcacb",
+            "1-overlay.png": "1f31721579fbdfb182cd6e6df065ee845323c49a29dacc115309156a3a0009e1",
+            "1-reference.png": "fda9f7fe124df5a996699c685841af29686e8e6cb368e0269044e1b74809423a",
+            "2-candidate.png": "f21be89a193fc6a7bd1861d1161e313ca9593d32a5d0825e6cb335131c9a918e",
+            "2-overlay.png": "07b7ef4b79f4b0623f3ff24adb4b57265d2286a1753341c0ff3a868d423336ab",
+            "2-reference.png": "66c2b5ab02a9e15d9623298d06449a36a8939c2309618dd24941dd9964342e4a",
+            "3-candidate.png": "a9412af6c695732795d50ec5a25e90191a52e47508ef3da200da76eff8bdcaed",
+            "3-overlay.png": "a48c3c9d140ca7bcbc5165b2cb9a4eefeff72a8ce6f53a99d4b0a4f682e016a2",
+            "3-reference.png": "ec6833115902829a4ac97ae1647dfb92e4d562c7b2cce022e5233c1a83c26cfa",
+            "candidate.pdf": "6583c0c81390e0d08d8d67e15407a33b808c6ae902a7cfa66ebd696b6e88cf00",
+            "evidence.json": "4ac2ac1acc60631ec95db42b4d6827d92b609d9b12a7523c924e8ab95bf73385",
+            "production.json": "c85d4b9df006dbaf5cd7969e01623799dc3e56fe675dcc0f97165bed27dca98b",
+            "reference.pdf": "2b1333197fd663891ad0cd763b82142c9c07a5d43c6e092451a7a5979620a346"
+          }
+        },
+        "fields-styleref-wrapping-control": {
+          "score": 85.935276656681,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold",
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Running2:JUNIPER",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  20,
+                  2,
+                  210,
+                  75
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "Running3:JUNIPER",
+                "occurrence": 1,
+                "page": 3,
+                "rect": [
+                  20,
+                  2,
+                  210,
+                  75
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "JuniperWrapTail",
+                "occurrence": 1,
+                "page": 3,
+                "rect": [
+                  20,
+                  60,
+                  210,
+                  150
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 3,
+          "pages": [
+            {
+              "candidateInk": 10780,
+              "close": false,
+              "inkF1": 0.9884759554334429,
+              "pixelMismatch": 0.10602147893097229,
+              "precision": 0.9894248608534323,
+              "raster": {
+                "candidate": [
+                  304,
+                  320
+                ],
+                "candidateSha256": "45f576e2281407ac77cb38026c496f67fe98d8895fde20d47171595cf7791a8c",
+                "height": 321,
+                "reference": [
+                  304,
+                  321
+                ],
+                "referenceSha256": "22e4c09c26305a8e628f43a14f8208999d3ed91a52b049bc033e5d0b1ee9b7ec",
+                "width": 304
+              },
+              "recall": 0.9875288683602771,
+              "referenceInk": 10825,
+              "score": 88.9920483780111,
+              "ssim": 0.889920483780111,
+              "ssimRaw": 0.889920483780111
+            },
+            {
+              "candidateInk": 13448,
+              "close": false,
+              "inkF1": 0.9906768650105439,
+              "pixelMismatch": 0.13934661419904903,
+              "precision": 0.9915229030339084,
+              "raster": {
+                "candidate": [
+                  304,
+                  320
+                ],
+                "candidateSha256": "af4ea2b6a4ae585a2e4c288b839e8d22a9b8927c08397f1c3d059d9ca724820a",
+                "height": 321,
+                "reference": [
+                  304,
+                  321
+                ],
+                "referenceSha256": "4d9f1a6ca1cc55751e3ec5cf032bbb587b8e6d3ccf01368f47e3b30e77484187",
+                "width": 304
+              },
+              "recall": 0.9898322695561823,
+              "referenceInk": 13474,
+              "score": 85.935276656681,
+              "ssim": 0.85935276656681,
+              "ssimRaw": 0.85935276656681
+            },
+            {
+              "candidateInk": 4784,
+              "close": false,
+              "inkF1": 0.9735387095408238,
+              "pixelMismatch": 0.06751106738809641,
+              "precision": 0.9755434782608695,
+              "raster": {
+                "candidate": [
+                  304,
+                  320
+                ],
+                "candidateSha256": "6b40131eb48982ab0cde62f040334a0c342f3982c323396968f20824e62eda3c",
+                "height": 321,
+                "reference": [
+                  304,
+                  321
+                ],
+                "referenceSha256": "d2c85b5ef5a70fd228c0b50c198320581a029081b5bdae415ffa63f22397804d",
+                "width": 304
+              },
+              "recall": 0.9715421636325591,
+              "referenceInk": 4779,
+              "score": 91.09944524283262,
+              "ssim": 0.9109944524283261,
+              "ssimRaw": 0.9109944524283261
+            }
+          ],
+          "coreTree": "9a863906d565594a3bc1b6ca085878d163ef8fec",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "bdfbbb924bc96f306dd01e09c6e4e4f6322857957ad24e843812ed4ad06bee25",
+          "pageMapDigest": "c1cb84b1a41ef62dc80325ade3384c5e8c38e834bc6cca7e12755715f71d5fab",
+          "files": {
+            "1-candidate.png": "f48ee711517290d574509f6c1c5427ba21f523bb3db4c343f80d29aced237b44",
+            "1-overlay.png": "db694be4194191295b63fa4b32676bf11c22a2ea050835e5c6b9f59fe82f1b29",
+            "1-reference.png": "e866bc680971273ef010bedb7aad75fc0521fbd34c25cb54c6e31198086df0f1",
+            "2-candidate.png": "f21be89a193fc6a7bd1861d1161e313ca9593d32a5d0825e6cb335131c9a918e",
+            "2-overlay.png": "07b7ef4b79f4b0623f3ff24adb4b57265d2286a1753341c0ff3a868d423336ab",
+            "2-reference.png": "66c2b5ab02a9e15d9623298d06449a36a8939c2309618dd24941dd9964342e4a",
+            "3-candidate.png": "a9412af6c695732795d50ec5a25e90191a52e47508ef3da200da76eff8bdcaed",
+            "3-overlay.png": "a48c3c9d140ca7bcbc5165b2cb9a4eefeff72a8ce6f53a99d4b0a4f682e016a2",
+            "3-reference.png": "ec6833115902829a4ac97ae1647dfb92e4d562c7b2cce022e5233c1a83c26cfa",
+            "candidate.pdf": "76018052f1e0a27e271dbf4c8a5d8bbc1000e6869c5bef7c26ea98f9aef49598",
+            "evidence.json": "c0576809a0383d17920a9c5cf836bf2176ce86dcd46dee751afffa6dbf9c75e5",
+            "production.json": "f5343a86d70a1e5c506b86370bb4ccc992beb143fb73e38d3a2ef8e42a4bfa1b",
+            "reference.pdf": "4e151b2b0e4d38f6b71208f70a454367c693d8c5ed55094f6a7f2e0825988708"
+          }
+        }
+      }
+    }
+  },
+  "controls": {
+    "fields-property-cached-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "fields-styleref-constant-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "fields-styleref-wrapping-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    }
+  },
+  "screenshots": {
+    "fields-property-cached-control-production.png": "eb8e59d4f9517ef64949a8d15f001deebd07e75a3ec9029c45293e0b212324a8",
+    "fields-property-uncached-production.png": "6bb4ce17f248cf5973ec7711e3a9c872740265cd3267de1ef2790605d397b6df",
+    "fields-styleref-constant-control-production.png": "f32ea53c1e0a4c3cfe124f8fdfa703d390babe42cc28dbf28d9ad221c7352a7d",
+    "fields-styleref-stale-cache-production.png": "c3ddf49193f93855325b51d0171dee97402d867e44af0bac8ea02d9194e534e9",
+    "fields-styleref-uncached-production.png": "14ca5af7b76471ee0c10da9e3a4ad419e82da03303cf41718feab0829e25ea84",
+    "fields-styleref-wrapping-control-production.png": "67820ce42e99d69cc8b4183bdccf0f066d4a0c744e954c59bb6a6637bd36c1fc",
+    "fields-styleref-wrapping-production.png": "a43caf25ad4995b7be8dd29ca95d2f404bbaba26ca38ded323b3b0a9f739b637"
+  },
+  "screenshotComposition": {
+    "method": "Full 96 DPI artifact PNG pages displayed at 75% intrinsic width; no crops or reconstructed pages.",
+    "browser": "Google Chrome 155.0.8059.84",
+    "scriptSha256": "238b82440a8e5602c51b3ea8409d057a910962916d175319ccd1f9671e0b4875"
+  }
+}

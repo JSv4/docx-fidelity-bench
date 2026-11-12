@@ -1,0 +1,127 @@
+{
+  "builds": {
+    "baseline": "Docxodus main 8ffe24ba",
+    "candidate": "Docxodus fix/1576-default-spacing f9ac3a68"
+  },
+  "cases": {
+    "redline-default-spacing-document-defaults": {
+      "benchMarkupChecks": {
+        "authored": {
+          "paragraph-spacing:accepted": true,
+          "paragraph-spacing:rejected": true,
+          "style-run-history:redline": true,
+          "untracked-text:redline": true,
+          "view:accepted": true,
+          "view:rejected": true
+        },
+        "baseline": {
+          "paragraph-spacing:accepted": true,
+          "paragraph-spacing:rejected": true,
+          "style-run-history:redline": false,
+          "untracked-text:redline": true,
+          "view:accepted": true,
+          "view:rejected": true
+        },
+        "candidate": {
+          "paragraph-spacing:accepted": true,
+          "paragraph-spacing:rejected": true,
+          "style-run-history:redline": true,
+          "untracked-text:redline": true,
+          "view:accepted": true,
+          "view:rejected": true
+        }
+      },
+      "kind": "reproducer",
+      "word": {
+        "Baseline, after Word Reject All": {
+          "normalSizePt": 10.0,
+          "paragraphTopsPt": [
+            72.0,
+            95.0,
+            118.5
+          ],
+          "spaceAfterPt": 10.0
+        },
+        "Candidate, after Word Reject All": {
+          "normalSizePt": 12.0,
+          "paragraphTopsPt": [
+            72.0,
+            98.0,
+            123.5
+          ],
+          "spaceAfterPt": 10.0
+        },
+        "Original (left input)": {
+          "normalSizePt": 12.0,
+          "paragraphTopsPt": [
+            72.0,
+            98.0,
+            123.5
+          ],
+          "spaceAfterPt": 10.0
+        }
+      }
+    },
+    "redline-default-spacing-normal-style-control": {
+      "benchMarkupChecks": {
+        "authored": {
+          "paragraph-spacing:accepted": true,
+          "paragraph-spacing:rejected": true,
+          "style-run-history:redline": true,
+          "untracked-text:redline": true,
+          "view:accepted": true,
+          "view:rejected": true
+        },
+        "baseline": {
+          "paragraph-spacing:accepted": true,
+          "paragraph-spacing:rejected": true,
+          "style-run-history:redline": true,
+          "untracked-text:redline": true,
+          "view:accepted": true,
+          "view:rejected": true
+        },
+        "candidate": {
+          "paragraph-spacing:accepted": true,
+          "paragraph-spacing:rejected": true,
+          "style-run-history:redline": true,
+          "untracked-text:redline": true,
+          "view:accepted": true,
+          "view:rejected": true
+        }
+      },
+      "kind": "control",
+      "word": {
+        "Baseline, after Word Reject All": {
+          "normalSizePt": 12.0,
+          "paragraphTopsPt": [
+            72.0,
+            98.0,
+            123.5
+          ],
+          "spaceAfterPt": 10.0
+        },
+        "Candidate, after Word Reject All": {
+          "normalSizePt": 12.0,
+          "paragraphTopsPt": [
+            72.0,
+            98.0,
+            123.5
+          ],
+          "spaceAfterPt": 10.0
+        },
+        "Original (left input)": {
+          "normalSizePt": 12.0,
+          "paragraphTopsPt": [
+            72.0,
+            98.0,
+            123.5
+          ],
+          "spaceAfterPt": 10.0
+        }
+      }
+    }
+  },
+  "fontNote": "Word measured copies with Liberation Serif renamed to Times New Roman",
+  "issue": "JSv4/Docxodus#1576",
+  "word": "Microsoft Word 2024 (desktop), Revisions.RejectAll, Range.Information(6)"
+}

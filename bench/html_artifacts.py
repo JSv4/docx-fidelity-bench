@@ -3,9 +3,12 @@
 These feature checks accompany PDF evidence; they do not change the PDF raster score.
 """
 from html.parser import HTMLParser
+from collections import Counter
 import re
 import json
 import math
+import base64
+import hashlib
 from pathlib import Path
 from .common import digest
 
@@ -15,6 +18,7 @@ BROWSER_VERSION = 1
 BROWSER_SOURCE = Path(__file__).with_name('html_browser.mjs')
 BROWSER_POLICY = {'viewport': {'width': 1280, 'height': 1024}, 'javaScriptEnabled': False,
                   'offline': True, 'media': 'screen'}
+REVIEW_COUNTS = {'formatBalloons', 'commentBalloons', 'insertions', 'deletions', 'areas', 'layers'}
 
 
 def needs_browser(declarations):
@@ -29,6 +33,10 @@ def validate_declaration(declaration):
         if set(declaration) != {'type', 'version', 'marker', 'attribute', 'equals'} or any(
                 not isinstance(declaration[k], str) or not declaration[k] for k in ('attribute', 'equals')):
             raise ValueError('Unknown or invalid delivered HTML assertion')
+    elif declaration.get('type') == 'math-expression':
+        if (set(declaration) != {'type', 'version', 'marker', 'display', 'tree'} or
+                declaration.get('display') not in {'inline', 'block'} or not valid_math_tree(declaration.get('tree'))):
+            raise ValueError('Unknown or invalid MathML assertion')
     elif declaration.get('type') == 'marker-readable':
         tokens = declaration.get('tokens')
         if (set(declaration) != {'type', 'version', 'marker', 'tokens'} or not isinstance(tokens, list) or not tokens or
@@ -39,6 +47,23 @@ def validate_declaration(declaration):
                 declaration.get('property') != 'font-size' or not isinstance(declaration.get('equals'), str) or
                 re.fullmatch(r'(?:0|[1-9][0-9]*)(?:\.[0-9]+)?px', declaration['equals']) is None):
             raise ValueError('Unknown or invalid computed HTML style assertion')
+    elif declaration.get('type') == 'review-display':
+        expected = declaration.get('expected')
+        required, forbidden = declaration.get('requiredTokens'), declaration.get('forbiddenTokens')
+        if (set(declaration) != {'type', 'version', 'marker', 'expected', 'requiredTokens', 'forbiddenTokens'} or not isinstance(expected, dict) or
+                set(expected) != REVIEW_COUNTS or any(type(value) is not int or value < 0 for value in expected.values()) or
+                not isinstance(required, dict) or not required or
+                any(not isinstance(word, str) or len(word.split()) != 1 or word.strip() != word or
+                    type(count) is not int or count < 1 for word, count in required.items()) or
+                not isinstance(forbidden, list) or any(not isinstance(word, str) or len(word.split()) != 1 or word.strip() != word for word in forbidden) or
+                len(set(forbidden)) != len(forbidden) or set(forbidden) & set(required)):
+            raise ValueError('Unknown or invalid review display assertion')
+    elif declaration.get('type') == 'named-checkbox':
+        if (set(declaration) != {'type', 'version', 'marker', 'checked', 'sizePt', 'caption'} or
+                type(declaration.get('checked')) is not bool or
+                type(declaration.get('sizePt')) not in (int, float) or not 4 <= declaration['sizePt'] <= 72 or
+                not isinstance(declaration.get('caption'), str) or not declaration['caption']):
+            raise ValueError('Unknown or invalid checkbox HTML assertion')
     else:
         raise ValueError('Unknown or invalid delivered HTML assertion')
 
@@ -46,6 +71,34 @@ def validate_declaration(declaration):
 def valid_rectangle(value):
     return isinstance(value, list) and len(value) == 4 and all(
         type(n) in (int, float) and math.isfinite(n) for n in value) and value[2] >= value[0] and value[3] >= value[1]
+
+
+def valid_math_tree(tree, depth=0):
+    if not isinstance(tree, list) or len(tree) < 2 or not isinstance(tree[0], str) or depth > 8:
+        return False
+    if tree[0] in {'mi', 'mn', 'mo'}:
+        return len(tree) == 2 and isinstance(tree[1], str) and bool(tree[1]) and not re.search(r'\s', tree[1])
+    arity = {'mfrac': 2, 'msqrt': 1, 'mroot': 2}.get(tree[0])
+    return ((arity == len(tree) - 1 or tree[0] == 'mrow' and 2 <= len(tree) - 1 <= 16) and
+            all(valid_math_tree(child, depth + 1) for child in tree[1:]))
+
+
+def math_expression_pass(declaration, observation, index):
+    if (not isinstance(observation, dict) or type(observation.get('index')) is not int or observation['index'] != index or
+            observation.get('marker') != declaration['marker'] or type(observation.get('matches')) is not int):
+        raise ValueError('Malformed MathML observation')
+    if observation['matches'] != 1: return False
+    rectangle = observation.get('rectangle')
+    if (not valid_rectangle(rectangle) or type(observation.get('visible')) is not bool or
+            not isinstance(observation.get('computedDisplay'), str) or not isinstance(observation.get('fractionBars'), list)):
+        raise ValueError('Malformed MathML geometry')
+    def fractions(tree):
+        return int(tree[0] == 'mfrac') + sum(fractions(child) for child in tree[1:] if isinstance(child, list))
+    return (observation['visible'] and rectangle[2] > rectangle[0] and rectangle[3] > rectangle[1] and
+            observation.get('namespace') == 'http://www.w3.org/1998/Math/MathML' and
+            observation['computedDisplay'] == ('math' if declaration['display'] == 'inline' else 'block math') and
+            observation['fractionBars'] == [None] * fractions(declaration['tree']) and
+            observation.get('display') == declaration['display'] and observation.get('tree') == declaration['tree'])
 
 
 def within(rectangle, clip, axis):
@@ -89,6 +142,74 @@ def readable_pass(declaration, observation, index):
     return passed and observation['blockText'] == ' '.join(declaration['tokens'])
 
 
+def checkbox_pass(declaration, observation, index):
+    passed = marker_geometry_pass(declaration, observation, index)
+    if observation['matches'] != 1: return False
+    if (type(observation.get('visible')) is not bool or 'checked' not in observation or
+            observation['checked'] is not None and type(observation['checked']) is not bool):
+        raise ValueError('Malformed checkbox HTML observation')
+    return (passed and observation['visible'] and observation['checked'] is declaration['checked'] and
+            checkbox_ink_pass(declaration, observation))
+
+
+def checkbox_ink_pass(declaration, observation):
+    """Replay a black-on-light checkbox's pixels, without depending on its DOM drawing method.
+
+    The authored controls have square borders and an X for checked. Require all four sides,
+    both diagonals for checked, an empty center for unchecked, declared size, and caption
+    alignment. The one-pixel bands tolerate antialiasing, not missing paint or opposite state.
+    """
+    raster = observation.get('raster')
+    if raster is None: return False
+    if (not isinstance(raster, dict) or any(type(raster.get(k)) is not int for k in ('x', 'y', 'width', 'height')) or
+            not all(0 < raster[k] <= 256 for k in ('width', 'height')) or
+            not isinstance(raster.get('rgba'), str)):
+        raise ValueError('Malformed checkbox raster')
+    try: pixels = base64.b64decode(raster['rgba'], validate=True)
+    except ValueError as error: raise ValueError('Malformed checkbox pixels') from error
+    width, height = raster['width'], raster['height']
+    if len(pixels) != width * height * 4 or hashlib.sha256(pixels).hexdigest() != raster.get('sha256'):
+        raise ValueError('Checkbox raster digest or size differs')
+    bounds = observation['after']
+    expected = [math.floor(bounds[0]) - 2, math.floor(bounds[1]) - 2, math.ceil(bounds[2]) + 2, math.ceil(bounds[3]) + 2]
+    if [raster['x'], raster['y'], raster['x'] + width, raster['y'] + height] != expected:
+        raise ValueError('Checkbox raster is not the observed control crop')
+    # The source contract is black ink on a light background, including a clear 2px crop border.
+    corners = [(0, 0), (width - 1, 0), (0, height - 1), (width - 1, height - 1)]
+    if any(min(pixels[(y * width + x) * 4:(y * width + x) * 4 + 3]) < 230 for x, y in corners): return False
+    ink = {(x, y) for y in range(height) for x in range(width)
+           if max(pixels[(y * width + x) * 4:(y * width + x) * 4 + 3]) < 180}
+    if not ink: return False
+    left, right = min(x for x, _ in ink), max(x for x, _ in ink)
+    top, bottom = min(y for _, y in ink), max(y for _, y in ink)
+    size = declaration['sizePt'] / 0.75
+    if any(abs(measured - size) > 1.5 for measured in (right - left + 1, bottom - top + 1)): return False
+    if not valid_rectangle(observation.get('caption')): return False
+    caption = observation['caption']
+    if abs(raster['y'] + (top + bottom + 1) / 2 - (caption[1] + caption[3]) / 2) > 4: return False
+    if not 0 <= raster['x'] + left - caption[2] <= 8: return False
+    # A dark fill cannot impersonate a square outline; inspect its interior separately.
+    sides = [[any((x, y) in ink for y in (top, top + 1)) for x in range(left, right + 1)],
+             [any((x, y) in ink for y in (bottom - 1, bottom)) for x in range(left, right + 1)],
+             [any((x, y) in ink for x in (left, left + 1)) for y in range(top, bottom + 1)],
+             [any((x, y) in ink for x in (right - 1, right)) for y in range(top, bottom + 1)]]
+    if any(sum(side) / len(side) < 0.75 for side in sides): return False
+    inset = max(2, round(size * 0.2))
+    interior = {(x, y) for y in range(top + inset, bottom - inset + 1)
+                for x in range(left + inset, right - inset + 1)}
+    painted = ink & interior
+    if not declaration['checked']: return not painted
+    if not interior or not 0.1 <= len(painted) / len(interior) <= 0.7: return False
+    for reverse in (False, True):
+        samples = []
+        for x in range(left + inset, right - inset + 1):
+            t = (x - left) / (right - left)
+            y = round(bottom - t * (bottom - top) if reverse else top + t * (bottom - top))
+            samples.append(any((x, y + offset) in ink for offset in (-1, 0, 1)))
+        if not samples or sum(samples) / len(samples) < 0.7: return False
+    return True
+
+
 def computed_style_pass(declaration, observation, index):
     passed = marker_geometry_pass(declaration, observation, index)
     if observation['matches'] != 1: return False
@@ -97,6 +218,19 @@ def computed_style_pass(declaration, observation, index):
     if not isinstance(values, list) or not values or any(not isinstance(v, str) for v in values):
         raise ValueError('Missing computed HTML style observation')
     return passed and all(v == declaration['equals'] for v in values)
+
+
+def review_display_pass(declaration, observation, index):
+    passed = marker_geometry_pass(declaration, observation, index)
+    if observation['matches'] != 1: return False
+    counts = observation.get('reviewCounts')
+    if (not isinstance(counts, dict) or set(counts) != REVIEW_COUNTS or
+            any(type(value) is not int or value < 0 for value in counts.values())):
+        raise ValueError('Malformed review display observation')
+    tokens = Counter(observation['text'].split())
+    return (passed and counts == declaration['expected'] and
+            all(tokens[word] == count for word, count in declaration['requiredTokens'].items()) and
+            not any(tokens[word] for word in declaration['forbiddenTokens']))
 
 
 def browser_metadata_valid(value, html_sha, inspector_sha, runtime):
@@ -203,10 +337,22 @@ def inspect(folder, response, declarations, profile=None):
             result['browser'] = {k: v for k, v in browser.items() if k != 'observations'}
             for index, observation in zip(indexes, observations):
                 declaration = declarations[index]
-                if declaration['type'] == 'marker-readable':
+                if declaration['type'] == 'math-expression':
+                    checks.append({'name': f'html-math-{index + 1}', 'marker': declaration['marker'],
+                                   'observation': observation,
+                                   'passed': math_expression_pass(declaration, observation, index)})
+                elif declaration['type'] == 'marker-readable':
                     checks.append({'name': f'html-readable-{index + 1}', 'marker': declaration['marker'],
                                    'tokens': declaration['tokens'], 'observation': observation,
                                    'passed': readable_pass(declaration, observation, index)})
+                elif declaration['type'] == 'review-display':
+                    checks.append({'name': f'html-review-{index + 1}', 'marker': declaration['marker'],
+                                   'expected': declaration['expected'], 'observation': observation,
+                                   'passed': review_display_pass(declaration, observation, index)})
+                elif declaration['type'] == 'named-checkbox':
+                    checks.append({'name': f'html-checkbox-{index + 1}', 'marker': declaration['marker'],
+                                   'checked': declaration['checked'], 'observation': observation,
+                                   'passed': checkbox_pass(declaration, observation, index)})
                 else:
                     checks.append({'name': f'html-style-{index + 1}', 'marker': declaration['marker'],
                                    'property': declaration['property'], 'expected': declaration['equals'],
@@ -246,9 +392,18 @@ def aggregate(cases, declarations, browser_sha=None, profiles=None):
                 if declaration['type'] == 'marker-attribute':
                     valid = (item.get('name') == f'html-attribute-{index + 1}' and item.get('attribute') == declaration['attribute'] and
                              item.get('expected') == declaration['equals'] and item['passed'] == (item.get('actual') == declaration['equals']))
+                elif declaration['type'] == 'math-expression':
+                    valid = (item.get('name') == f'html-math-{index + 1}' and
+                             item['passed'] == math_expression_pass(declaration, item.get('observation'), index))
                 elif declaration['type'] == 'marker-readable':
                     valid = (item.get('name') == f'html-readable-{index + 1}' and item.get('tokens') == declaration['tokens'] and
                              item['passed'] == readable_pass(declaration, item.get('observation'), index))
+                elif declaration['type'] == 'review-display':
+                    valid = (item.get('name') == f'html-review-{index + 1}' and item.get('expected') == declaration['expected'] and
+                             item['passed'] == review_display_pass(declaration, item.get('observation'), index))
+                elif declaration['type'] == 'named-checkbox':
+                    valid = (item.get('name') == f'html-checkbox-{index + 1}' and item.get('checked') is declaration['checked'] and
+                             item['passed'] == checkbox_pass(declaration, item.get('observation'), index))
                 else:
                     valid = (item.get('name') == f'html-style-{index + 1}' and item.get('property') == declaration['property'] and
                              item.get('expected') == declaration['equals'] and

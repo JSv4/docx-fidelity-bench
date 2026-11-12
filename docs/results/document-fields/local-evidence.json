@@ -1,0 +1,2762 @@
+{
+  "kind": "local native facade and browser diagnostic; production export pending",
+  "baselineCommit": "1240cc5dc0586293cb937c59c973550027c31fda",
+  "candidateCommit": "8a0a2e91e72db1534da6214cb65a2765c9c22b45",
+  "dpi": 96,
+  "cases": {
+    "fields-property-uncached": {
+      "inputSha256": "5ff3da9fe05253c42b9925eed120a0636be9196ac227a9b932481c8d37c26428",
+      "renders": {
+        "libreoffice": {
+          "pdfSha256": "c73a805c702c1bdfe79af959cf3aec12a7f0077e3478e3d7e66688e25c5ddeb9",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "HeaderTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  70
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "BodyTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  70,
+                  540,
+                  115
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "FooterTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  720,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "0e8b0f7c9dca41667e5306452b85df335659cffa5c4fd9cbdc1278169586b842",
+              "pngSha256": "c159529cdcd1e080326cd95c4f663e5775aca37631dd04062f4842304a7cda5d",
+              "width": 816,
+              "height": 1056
+            }
+          ]
+        },
+        "baseline": {
+          "pdfSha256": "6b827a3d3433e3bb1cd3fee1e8517857f7512f237d06f6b4b2bd65cf3e9fb48d",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": false,
+              "missing": {
+                "BodyProperty:Juniper": 1,
+                "BodyTitle:Juniper": 1,
+                "FooterProperty:Juniper": 1,
+                "FooterTitle:Juniper": 1,
+                "HeaderProperty:Juniper": 1,
+                "HeaderTitle:Juniper": 1,
+                "equipment": 6,
+                "register": 6
+              },
+              "extra": {
+                "HeaderTitle:": 1,
+                "HeaderProperty:": 1,
+                "BodyTitle:": 1,
+                "BodyProperty:": 1,
+                "FooterTitle:": 1,
+                "FooterProperty:": 1
+              },
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "error": "Marker 'HeaderTitle:Juniper' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-region",
+                "marker": "HeaderTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  70
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "error": "Marker 'BodyTitle:Juniper' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-region",
+                "marker": "BodyTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  70,
+                  540,
+                  115
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "error": "Marker 'FooterTitle:Juniper' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-region",
+                "marker": "FooterTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  720,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "510abf1d800eec258458985a794cbfbae6689c8d958691a81eb985892f452375",
+              "pngSha256": "61c8cea792a5184cf97ca0fe85f9fddce8ed1e6bafeca38a054b1b844190f5e3",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "e0a097eb784b239e1ccdea624651a3001286b426386257ba1f95378b2d339997"
+        },
+        "candidate": {
+          "pdfSha256": "3463b6c5c136dfeb1824bfee5f82433b23abb6cdfc85e477ffcd8882af42e826",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "HeaderTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  70
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "BodyTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  70,
+                  540,
+                  115
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "FooterTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  720,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "abe2ba9f33402a251a952647634901f33f950d0ab69e89d3b44ef1b9776cde82",
+              "pngSha256": "a7739754d120e29a61676873875a475e1e33e8fe8b36d67c16c7cdc395a51305",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "e6562f6fb7d7544e46b6311b2677f7a68dbc03feafd6f2b98e1ee175ef9c119e"
+        }
+      },
+      "controlRasterEqual": null
+    },
+    "fields-property-cached-control": {
+      "inputSha256": "a7f90168e5a691833754398b6f385a18bed3ff4d37e7334edab07698aa9d128b",
+      "renders": {
+        "libreoffice": {
+          "pdfSha256": "e9511c551b35afcc2ed3f48cb5caec52172c73ec3d2d78f282f32e0fa109a85b",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "HeaderTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  70
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "BodyTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  70,
+                  540,
+                  115
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "FooterTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  720,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "0e8b0f7c9dca41667e5306452b85df335659cffa5c4fd9cbdc1278169586b842",
+              "pngSha256": "c159529cdcd1e080326cd95c4f663e5775aca37631dd04062f4842304a7cda5d",
+              "width": 816,
+              "height": 1056
+            }
+          ]
+        },
+        "baseline": {
+          "pdfSha256": "48eb1a8550c8ee14eb41be97fabf9cb3f498bdfb045d05defe7e5557a63663d1",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "HeaderTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  70
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "BodyTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  70,
+                  540,
+                  115
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "FooterTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  720,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "abe2ba9f33402a251a952647634901f33f950d0ab69e89d3b44ef1b9776cde82",
+              "pngSha256": "a7739754d120e29a61676873875a475e1e33e8fe8b36d67c16c7cdc395a51305",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "c393e4d92b047b4e5f80bf7b95095fd2e993b6c819bde4d26c95b3ff25f9788c"
+        },
+        "candidate": {
+          "pdfSha256": "3463b6c5c136dfeb1824bfee5f82433b23abb6cdfc85e477ffcd8882af42e826",
+          "pageCount": 1,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "HeaderTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  70
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "BodyTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  70,
+                  540,
+                  115
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "FooterTitle:Juniper",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  720,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "abe2ba9f33402a251a952647634901f33f950d0ab69e89d3b44ef1b9776cde82",
+              "pngSha256": "a7739754d120e29a61676873875a475e1e33e8fe8b36d67c16c7cdc395a51305",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "c393e4d92b047b4e5f80bf7b95095fd2e993b6c819bde4d26c95b3ff25f9788c"
+        }
+      },
+      "controlRasterEqual": true
+    },
+    "fields-styleref-uncached": {
+      "inputSha256": "062b28470d1351804cf66828025e891a02d642848425b4b15805470171e85782",
+      "renders": {
+        "libreoffice": {
+          "pdfSha256": "8ab88273cd8fdea475956b44a03a2b7270770b2f02fac0453df9a6628f20355a",
+          "pageCount": 2,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Closing1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperFirstBody",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running2:BIRCH",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Closing2:BIRCH",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperSecondBody",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "9f7b7dbba71ab923c4f27e9692e4d70c780879dfdabb6fd40a75aea1ed1f118f",
+              "pngSha256": "ffb95d34f81948d1b3fe4a18ba99059a76eb645880d916a2919554d5b6256fbd",
+              "width": 816,
+              "height": 1056
+            },
+            {
+              "ppmSha256": "a519b2f5e1a8b0842796f30ba9422d1171226d86a02d25dacdfe86c5b8e12de9",
+              "pngSha256": "5e4ad15edc56b12f7d542c18db86ef48bf451c2b3887a7da598c5515476d1e01",
+              "width": 816,
+              "height": 1056
+            }
+          ]
+        },
+        "baseline": {
+          "pdfSha256": "55f2438d9d6fbf176573a196016dc88303b42e145c68a3bb2147b42f57d12ad0",
+          "pageCount": 2,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": false,
+              "missing": {
+                "Closing1:ALDER": 1,
+                "Closing2:BIRCH": 1,
+                "Running1:ALDER": 1,
+                "Running2:BIRCH": 1,
+                "SECTION": 4
+              },
+              "extra": {
+                "Running1:": 1,
+                "Closing1:": 1,
+                "Running2:": 1,
+                "Closing2:": 1
+              },
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "error": "Marker 'Running1:ALDER' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "error": "Marker 'Closing1:ALDER' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Closing1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperFirstBody",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "error": "Marker 'Running2:BIRCH' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running2:BIRCH",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "error": "Marker 'Closing2:BIRCH' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Closing2:BIRCH",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperSecondBody",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "4053401c1be500cda3544afd4830f10d4d24097a49984660e9e1550b8750f329",
+              "pngSha256": "b5d2287b56ffa4468886c6b6798fc8e1d648813dac7a267cba858bb9a58cd5bb",
+              "width": 816,
+              "height": 1056
+            },
+            {
+              "ppmSha256": "2abce9c80a9187588f900b70a6177dd951d849c38cab5afdb2903386df26e720",
+              "pngSha256": "10e9f2dcdf890658f8271424c1e31e338d1b6028164b8855f8f42270c8456ca3",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "525348ac2123b65c6b930f285088625e012bd2dffd383b8d10608628c3753219"
+        },
+        "candidate": {
+          "pdfSha256": "52369cc40dad15cbdaf442d7b8c0a2797f6c98e53b298f0ca6e4217ab10d3f78",
+          "pageCount": 2,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Closing1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperFirstBody",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running2:BIRCH",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Closing2:BIRCH",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperSecondBody",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "7236aa5512c833667b09db6792b4e0ab5da985aba1cb7dc232059cf45866f352",
+              "pngSha256": "e05106c72af5076d7a2ed48bcd79e1f6234a0e9297ef6d449ff9d94bbe9b7a73",
+              "width": 816,
+              "height": 1056
+            },
+            {
+              "ppmSha256": "e34744aa4a993b1b0ccea295b632c5dd8a91a2144670737d79cffffd21c6b6b3",
+              "pngSha256": "d6625d0ed22592b4976f8c07c95f3b2b3c4e3b19d2396d1aaa89778fa030f000",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "976bd3499b87026ac331f2be7c3be98507d4bb735310fa7bf270aac526b77cd8"
+        }
+      },
+      "controlRasterEqual": null
+    },
+    "fields-styleref-stale-cache": {
+      "inputSha256": "b14e3b3abe0557f1062005061af9a465bc8ab8dc67f12775a4fba5be8d940d84",
+      "renders": {
+        "libreoffice": {
+          "pdfSha256": "88508806fb792ebfd791d3ed176c9055eec7e36ac2068afc4a45c738845708b7",
+          "pageCount": 2,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Closing1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperFirstBody",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running2:BIRCH",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Closing2:BIRCH",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperSecondBody",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "9f7b7dbba71ab923c4f27e9692e4d70c780879dfdabb6fd40a75aea1ed1f118f",
+              "pngSha256": "ffb95d34f81948d1b3fe4a18ba99059a76eb645880d916a2919554d5b6256fbd",
+              "width": 816,
+              "height": 1056
+            },
+            {
+              "ppmSha256": "a519b2f5e1a8b0842796f30ba9422d1171226d86a02d25dacdfe86c5b8e12de9",
+              "pngSha256": "5e4ad15edc56b12f7d542c18db86ef48bf451c2b3887a7da598c5515476d1e01",
+              "width": 816,
+              "height": 1056
+            }
+          ]
+        },
+        "baseline": {
+          "pdfSha256": "0879d71d2b9477d7c91fc9c4ee6087392afd7fada827b2b5c8fff949fdc64718",
+          "pageCount": 2,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": false,
+              "missing": {
+                "Closing2:BIRCH": 1,
+                "Running2:BIRCH": 1
+              },
+              "extra": {
+                "Running2:ALDER": 1,
+                "Closing2:ALDER": 1
+              },
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Closing1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperFirstBody",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "error": "Marker 'Running2:BIRCH' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running2:BIRCH",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "error": "Marker 'Closing2:BIRCH' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Closing2:BIRCH",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperSecondBody",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "7236aa5512c833667b09db6792b4e0ab5da985aba1cb7dc232059cf45866f352",
+              "pngSha256": "e05106c72af5076d7a2ed48bcd79e1f6234a0e9297ef6d449ff9d94bbe9b7a73",
+              "width": 816,
+              "height": 1056
+            },
+            {
+              "ppmSha256": "5e23f568837956c72f8777035007e3b56606f022083d4b29692f5ed9f81ac59c",
+              "pngSha256": "afd905b3a43a0d9f049878a1b6cb8a54979080cee2d46720baaa61dab9999b8b",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "900ccec5625a530b14fc811421ac1b3c84eb8ffaebe9624da784b32ddc1a5366"
+        },
+        "candidate": {
+          "pdfSha256": "52369cc40dad15cbdaf442d7b8c0a2797f6c98e53b298f0ca6e4217ab10d3f78",
+          "pageCount": 2,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Closing1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperFirstBody",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running2:BIRCH",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Closing2:BIRCH",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperSecondBody",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "7236aa5512c833667b09db6792b4e0ab5da985aba1cb7dc232059cf45866f352",
+              "pngSha256": "e05106c72af5076d7a2ed48bcd79e1f6234a0e9297ef6d449ff9d94bbe9b7a73",
+              "width": 816,
+              "height": 1056
+            },
+            {
+              "ppmSha256": "e34744aa4a993b1b0ccea295b632c5dd8a91a2144670737d79cffffd21c6b6b3",
+              "pngSha256": "d6625d0ed22592b4976f8c07c95f3b2b3c4e3b19d2396d1aaa89778fa030f000",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "9e92ed8ef43d0008f8458e53dd1f894e21fc64d76dad75c34e647fcf8daf8bd8"
+        }
+      },
+      "controlRasterEqual": null
+    },
+    "fields-styleref-constant-control": {
+      "inputSha256": "c8b287cae5f706f1c7fb2f2c33f0096b4e78c692997b9e460ab16e3b22276319",
+      "renders": {
+        "libreoffice": {
+          "pdfSha256": "7eb869b18296e7aab6587f08caa89962528e2d08b500d5ad2d8bbba4ed5e6325",
+          "pageCount": 2,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Closing1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperFirstBody",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running2:ALDER",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Closing2:ALDER",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperSecondBody",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "9f7b7dbba71ab923c4f27e9692e4d70c780879dfdabb6fd40a75aea1ed1f118f",
+              "pngSha256": "ffb95d34f81948d1b3fe4a18ba99059a76eb645880d916a2919554d5b6256fbd",
+              "width": 816,
+              "height": 1056
+            },
+            {
+              "ppmSha256": "1131b9e4efaf040f9d8636e6c5f79983e5ccbb71350b745f91c46898e322e785",
+              "pngSha256": "a3012571a569e5c588a47016bc03f498429022b93443c363cb352f412d36474a",
+              "width": 816,
+              "height": 1056
+            }
+          ]
+        },
+        "baseline": {
+          "pdfSha256": "e657a5fe79ea93d15017feae881643a23e5b45dccdb42ea3baabb62c92694c73",
+          "pageCount": 2,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Closing1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperFirstBody",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running2:ALDER",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Closing2:ALDER",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperSecondBody",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "7236aa5512c833667b09db6792b4e0ab5da985aba1cb7dc232059cf45866f352",
+              "pngSha256": "e05106c72af5076d7a2ed48bcd79e1f6234a0e9297ef6d449ff9d94bbe9b7a73",
+              "width": 816,
+              "height": 1056
+            },
+            {
+              "ppmSha256": "eb1364568283ecd42ddafc89b34ed707c33ac5d435eeba59e28c8d410cf62490",
+              "pngSha256": "ec331b32be4ed23805eb45ca3c197d2a5477bf26e0032ca010ca44e70eef74ef",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "73100e037e32b5ba483cce8a7169c6759e4ea914cbfe2c2ba7a114489d540d98"
+        },
+        "candidate": {
+          "pdfSha256": "c6abe403f1ac5c707665637ac96090636b933a72e28185065f1b6872844250f1",
+          "pageCount": 2,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Closing1:ALDER",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperFirstBody",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running2:ALDER",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  25,
+                  540,
+                  60
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Closing2:ALDER",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  730,
+                  540,
+                  770
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperSecondBody",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  60,
+                  80,
+                  540,
+                  120
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "7236aa5512c833667b09db6792b4e0ab5da985aba1cb7dc232059cf45866f352",
+              "pngSha256": "e05106c72af5076d7a2ed48bcd79e1f6234a0e9297ef6d449ff9d94bbe9b7a73",
+              "width": 816,
+              "height": 1056
+            },
+            {
+              "ppmSha256": "eb1364568283ecd42ddafc89b34ed707c33ac5d435eeba59e28c8d410cf62490",
+              "pngSha256": "ec331b32be4ed23805eb45ca3c197d2a5477bf26e0032ca010ca44e70eef74ef",
+              "width": 816,
+              "height": 1056
+            }
+          ],
+          "htmlSha256": "0a0156bd86a52486f7b85191dbc35425c9d7013cb9a920373bd2d30f543d89bf"
+        }
+      },
+      "controlRasterEqual": true
+    },
+    "fields-styleref-wrapping": {
+      "inputSha256": "185f53759407f88ca4d85603f579fc59aa38b9b59b83d137f724b64f8a9ae3d0",
+      "renders": {
+        "libreoffice": {
+          "pdfSha256": "31f7b9372db155f239e56e61749199f5612552c9cb524148d8b158944703edb8",
+          "pageCount": 3,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running2:JUNIPER",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  20,
+                  2,
+                  210,
+                  75
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running3:JUNIPER",
+                "occurrence": 1,
+                "page": 3,
+                "rect": [
+                  20,
+                  2,
+                  210,
+                  75
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperWrapTail",
+                "occurrence": 1,
+                "page": 3,
+                "rect": [
+                  20,
+                  60,
+                  210,
+                  150
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "20ca7c45eb188549e552da0a41af473a33787b867017f448e3aa8ffea4732d4c",
+              "pngSha256": "fda9f7fe124df5a996699c685841af29686e8e6cb368e0269044e1b74809423a",
+              "width": 304,
+              "height": 321
+            },
+            {
+              "ppmSha256": "4d9f1a6ca1cc55751e3ec5cf032bbb587b8e6d3ccf01368f47e3b30e77484187",
+              "pngSha256": "66c2b5ab02a9e15d9623298d06449a36a8939c2309618dd24941dd9964342e4a",
+              "width": 304,
+              "height": 321
+            },
+            {
+              "ppmSha256": "d2c85b5ef5a70fd228c0b50c198320581a029081b5bdae415ffa63f22397804d",
+              "pngSha256": "ec6833115902829a4ac97ae1647dfb92e4d562c7b2cce022e5233c1a83c26cfa",
+              "width": 304,
+              "height": 321
+            }
+          ]
+        },
+        "baseline": {
+          "pdfSha256": "1a155f19383c2660c9def202e45c1d75c908020b4b100c68fd31f060b6dab35d",
+          "pageCount": 2,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": false
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": false,
+              "missing": {
+                "Closing3": 1,
+                "Running2:JUNIPER": 1,
+                "Running3:JUNIPER": 1,
+                "and": 2,
+                "calibration": 2,
+                "contains": 2,
+                "detailed": 2,
+                "equipment": 2,
+                "for": 2,
+                "inspection": 2,
+                "laboratory": 2,
+                "northern": 2,
+                "record": 2,
+                "room": 2,
+                "schedule": 2,
+                "storage": 2,
+                "the": 4
+              },
+              "extra": {
+                "SECTION": 1,
+                "Running2:ALDER": 1
+              },
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": false
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "error": "Marker 'Running2:JUNIPER' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running2:JUNIPER",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  20,
+                  2,
+                  210,
+                  75
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "error": "Marker 'Running3:JUNIPER' must occur exactly once, found 0",
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running3:JUNIPER",
+                "occurrence": 1,
+                "page": 3,
+                "rect": [
+                  20,
+                  2,
+                  210,
+                  75
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": false,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperWrapTail",
+                "occurrence": 1,
+                "page": 3,
+                "rect": [
+                  20,
+                  60,
+                  210,
+                  150
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "1fc083e3ac7c7042e1561367f8090cb54c1d13a1c6d29ade7c6213a33231bbcb",
+              "pngSha256": "977ad18c40d30e42a6459881277a969aceafae80b8dbadb625a3fc1e278a92d7",
+              "width": 304,
+              "height": 320
+            },
+            {
+              "ppmSha256": "6467be81fadfc317e8330417222ef7fcad9958cd66e7ace814424c53faeaefa4",
+              "pngSha256": "289ea60ed76c4c49466ca893859dfc416eea9af815c2f025815fbfe62f26ae53",
+              "width": 304,
+              "height": 320
+            }
+          ],
+          "htmlSha256": "f30e9d5466cc56c68fbbadafa5fbab4517256a2f2e043589ecce8e956fff7f31"
+        },
+        "candidate": {
+          "pdfSha256": "55a9d695a5c70741b984a6babae0113c395c428c5555d9db9d6619108fc6f4a7",
+          "pageCount": 3,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running2:JUNIPER",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  20,
+                  2,
+                  210,
+                  75
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running3:JUNIPER",
+                "occurrence": 1,
+                "page": 3,
+                "rect": [
+                  20,
+                  2,
+                  210,
+                  75
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperWrapTail",
+                "occurrence": 1,
+                "page": 3,
+                "rect": [
+                  20,
+                  60,
+                  210,
+                  150
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "1fc083e3ac7c7042e1561367f8090cb54c1d13a1c6d29ade7c6213a33231bbcb",
+              "pngSha256": "977ad18c40d30e42a6459881277a969aceafae80b8dbadb625a3fc1e278a92d7",
+              "width": 304,
+              "height": 320
+            },
+            {
+              "ppmSha256": "af4ea2b6a4ae585a2e4c288b839e8d22a9b8927c08397f1c3d059d9ca724820a",
+              "pngSha256": "e882bb9dfadf4d2a5031389490ac1b0c5065de4d43043caf5d48afa998a9d303",
+              "width": 304,
+              "height": 320
+            },
+            {
+              "ppmSha256": "6b40131eb48982ab0cde62f040334a0c342f3982c323396968f20824e62eda3c",
+              "pngSha256": "4f45aa2a23f9c6bfd4434ea4bb3f86a1f691ab48e52cdebc1bfcae473f9457aa",
+              "width": 304,
+              "height": 320
+            }
+          ],
+          "htmlSha256": "f537feca1c5c3dc506c0b9a3613bd61ca5c4a8ddc1c24ebce3ca947b3cf3a11f"
+        }
+      },
+      "controlRasterEqual": null
+    },
+    "fields-styleref-wrapping-control": {
+      "inputSha256": "bdfbbb924bc96f306dd01e09c6e4e4f6322857957ad24e843812ed4ad06bee25",
+      "renders": {
+        "libreoffice": {
+          "pdfSha256": "2317e8840b36c17057a657bae7885f5e74a3bdf449b9ef783f2f40f406fb510d",
+          "pageCount": 3,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running2:JUNIPER",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  20,
+                  2,
+                  210,
+                  75
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running3:JUNIPER",
+                "occurrence": 1,
+                "page": 3,
+                "rect": [
+                  20,
+                  2,
+                  210,
+                  75
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperWrapTail",
+                "occurrence": 1,
+                "page": 3,
+                "rect": [
+                  20,
+                  60,
+                  210,
+                  150
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "22e4c09c26305a8e628f43a14f8208999d3ed91a52b049bc033e5d0b1ee9b7ec",
+              "pngSha256": "e866bc680971273ef010bedb7aad75fc0521fbd34c25cb54c6e31198086df0f1",
+              "width": 304,
+              "height": 321
+            },
+            {
+              "ppmSha256": "4d9f1a6ca1cc55751e3ec5cf032bbb587b8e6d3ccf01368f47e3b30e77484187",
+              "pngSha256": "66c2b5ab02a9e15d9623298d06449a36a8939c2309618dd24941dd9964342e4a",
+              "width": 304,
+              "height": 321
+            },
+            {
+              "ppmSha256": "d2c85b5ef5a70fd228c0b50c198320581a029081b5bdae415ffa63f22397804d",
+              "pngSha256": "ec6833115902829a4ac97ae1647dfb92e4d562c7b2cce022e5233c1a83c26cfa",
+              "width": 304,
+              "height": 321
+            }
+          ]
+        },
+        "baseline": {
+          "pdfSha256": "c66f90b88eb8cec75464e224b31a98c00bc4f7a411a4d52c49b3407e72d25485",
+          "pageCount": 3,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running2:JUNIPER",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  20,
+                  2,
+                  210,
+                  75
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running3:JUNIPER",
+                "occurrence": 1,
+                "page": 3,
+                "rect": [
+                  20,
+                  2,
+                  210,
+                  75
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperWrapTail",
+                "occurrence": 1,
+                "page": 3,
+                "rect": [
+                  20,
+                  60,
+                  210,
+                  150
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "45f576e2281407ac77cb38026c496f67fe98d8895fde20d47171595cf7791a8c",
+              "pngSha256": "559f25eabf52cb5d81b12883719ece0c3294fb8d45903ba8bf9103e5a5e2b9bf",
+              "width": 304,
+              "height": 320
+            },
+            {
+              "ppmSha256": "af4ea2b6a4ae585a2e4c288b839e8d22a9b8927c08397f1c3d059d9ca724820a",
+              "pngSha256": "e882bb9dfadf4d2a5031389490ac1b0c5065de4d43043caf5d48afa998a9d303",
+              "width": 304,
+              "height": 320
+            },
+            {
+              "ppmSha256": "6b40131eb48982ab0cde62f040334a0c342f3982c323396968f20824e62eda3c",
+              "pngSha256": "4f45aa2a23f9c6bfd4434ea4bb3f86a1f691ab48e52cdebc1bfcae473f9457aa",
+              "width": 304,
+              "height": 320
+            }
+          ],
+          "htmlSha256": "250507ab0944d4fa985cd729783047862e3538c6db0e65537937cfa31792a7c7"
+        },
+        "candidate": {
+          "pdfSha256": "b677e1ac44eb5c4dc66df5754d427f654cf8ed9452e9a739c43f68e24fe0640d",
+          "pageCount": 3,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running2:JUNIPER",
+                "occurrence": 1,
+                "page": 2,
+                "rect": [
+                  20,
+                  2,
+                  210,
+                  75
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "Running3:JUNIPER",
+                "occurrence": 1,
+                "page": 3,
+                "rect": [
+                  20,
+                  2,
+                  210,
+                  75
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "JuniperWrapTail",
+                "occurrence": 1,
+                "page": 3,
+                "rect": [
+                  20,
+                  60,
+                  210,
+                  150
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            }
+          ],
+          "pages": [
+            {
+              "ppmSha256": "45f576e2281407ac77cb38026c496f67fe98d8895fde20d47171595cf7791a8c",
+              "pngSha256": "559f25eabf52cb5d81b12883719ece0c3294fb8d45903ba8bf9103e5a5e2b9bf",
+              "width": 304,
+              "height": 320
+            },
+            {
+              "ppmSha256": "af4ea2b6a4ae585a2e4c288b839e8d22a9b8927c08397f1c3d059d9ca724820a",
+              "pngSha256": "e882bb9dfadf4d2a5031389490ac1b0c5065de4d43043caf5d48afa998a9d303",
+              "width": 304,
+              "height": 320
+            },
+            {
+              "ppmSha256": "6b40131eb48982ab0cde62f040334a0c342f3982c323396968f20824e62eda3c",
+              "pngSha256": "4f45aa2a23f9c6bfd4434ea4bb3f86a1f691ab48e52cdebc1bfcae473f9457aa",
+              "width": 304,
+              "height": 320
+            }
+          ],
+          "htmlSha256": "5a2bfb30c495f9eaecb88769827b2585fc81c83f76e6856485383558699fd00f"
+        }
+      },
+      "controlRasterEqual": true
+    }
+  },
+  "bindings": {
+    ".local-closeout/1480-evidence/baseline-bin/Docxodus.dll": "f54a04ae3349455229d4d785e69696ad97dd779af1cf0bffa6412d53cd90c432",
+    ".local-closeout/issue-1481/Docxodus.Tests/bin/Debug/net10.0/Docxodus.dll": "3a707aa1709b97186c25759902856cedadf0c5f2a4f8fd7eccbcbbd83e086962",
+    ".local-closeout/1481-evidence/main-pagination.js": "0d9e4ec4481d0628032945778449c6c2ba4b1576f80e338c811ff28cb305186d",
+    ".local-closeout/issue-1481/npm/dist/pagination.bundle.js": "20056bcd39a66d29c5b078e528f91dc83335baedb8241f64baccd7103e66db86"
+  },
+  "runtime": {
+    "libreoffice": "LibreOffice 25.8.7.3 580(Build:3)",
+    "chromium": "Google Chrome 155.0.8059.84"
+  },
+  "captures": {
+    "renderer": "native reflection facade plus Chromium pagination, not production convertDocxToPdf",
+    "word": "not captured",
+    "baselineCSharpInformationalVersion": "1.0.0+1240cc5dc0586293cb937c59c973550027c31fda",
+    "candidateCSharpInformationalVersion": "1.0.0+8a0a2e91e72db1534da6214cb65a2765c9c22b45"
+  },
+  "screenshots": {
+    "fields-property-cached-control.png": "be28ec0b9c8903a9224e42cf52f3b79842aab6107c3a0812a57e040a175de09a",
+    "fields-property-uncached.png": "69cebafc9f6ad23fd8998f8f3f5f365b5aa49eec2ac5830700f635af88a18de5",
+    "fields-styleref-constant-control.png": "ecb22ab3d6e6b6febfbd50aa0e0be2fb128631cbd0779bea54b047f6f0d60de5",
+    "fields-styleref-stale-cache.png": "784b5706c557b158a9e9565cd2971f36e8a472f4bf47a7fd14d4c3e340822afe",
+    "fields-styleref-uncached.png": "eaf0e26608cf4c2e3c444d756884b8ef98c84aeb90a6db3f54a26cb4c0dda69e",
+    "fields-styleref-wrapping-control.png": "32654e5d70eca4a4301eb0a14d3338940c3ecafb5075035120a84e4dfa709933",
+    "fields-styleref-wrapping.png": "525a66a815cff536aa67df92a916a3d2b74d11b0c0352089f1d6f531828d7283"
+  },
+  "sdkValidation": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "documents": {
+      ".local-closeout/bench-1481/fixtures/fields-property-uncached.docx": [],
+      ".local-closeout/bench-1481/fixtures/fields-property-cached-control.docx": [],
+      ".local-closeout/bench-1481/fixtures/fields-styleref-uncached.docx": [],
+      ".local-closeout/bench-1481/fixtures/fields-styleref-stale-cache.docx": [],
+      ".local-closeout/bench-1481/fixtures/fields-styleref-constant-control.docx": [],
+      ".local-closeout/bench-1481/fixtures/fields-styleref-wrapping.docx": [],
+      ".local-closeout/bench-1481/fixtures/fields-styleref-wrapping-control.docx": []
+    }
+  }
+}

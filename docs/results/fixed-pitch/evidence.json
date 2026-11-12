@@ -1,0 +1,358 @@
+{
+  "scope": "Unscored public-export diagnostic. The baseline is unpublished development commit 7d1026ed, not released main. These independent labels exercise the bounded fixed-pitch inference from the issue author confirmation of the original Docxodus #1564 line. No Word captures of these inputs or new fidelity score are claimed.",
+  "builds": {
+    "baseline": {
+      "schema": 1,
+      "commit": "7d1026edf971338accbbeb3bff82953cd63e993c",
+      "tree": "06e99efb7c46b4ef6e4da031d320e655cd5f61e8",
+      "node": "v24.13.1",
+      "recipe": "Reused completed full npm production build; no source changes since build except docs, tests and measured bundle gate metadata. Export package built separately.",
+      "buildLogSha256": "7da98c8b9419fee36efe18e7af594a1d3baec2fa23283718547fdd2af4125dbb",
+      "files": {
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "92e2f3b5209c33f3a190ef552bd45de822891b806feffff883a2c6d869402ea8",
+        "npm/src/line-metrics.ts": "78663f65e268502eaf52da84ebd73c02190ef7b6354ac04be82b48deb74aedae",
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab"
+      }
+    },
+    "candidate": {
+      "schema": 1,
+      "commit": "38cad37f3c2f32c860637e0396dc5906e0d82a0b",
+      "tree": "cc2435133d5f81996ca93a2342a85b451980f0e8",
+      "node": "v24.13.1",
+      "recipe": "Full npm run build; npm-export npm run build. No production source edits after the final build. Reused this completed build with file hashes verified.",
+      "buildLogSha256": "d4d4e4e58b2d3ac938ef0d8c95ee6d8841199468c67852508b25f4ec66924590",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/docxodus.worker.js": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10",
+        "npm/dist/export-assets.json": "47ea74d4f35608af144056fdf7accd39724bc71afdbdf5a1b6eaae1c7ed0e2a3",
+        "npm/dist/export-browser.bundle.js": "3c9ecd08b9d1cdde9d1cc87baf9f791b09bd1bbcee2d0132dcaf70cc91b033eb",
+        "npm/dist/export-resource-limits-v1.json": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347",
+        "npm/dist/pagination.bundle.js": "ce4423c5a6bcad9745caeb10afccbda1c24e456fb87b994c988104d4b0dac956",
+        "npm/dist/render-report-v2.schema.json": "a604dbff16d3be0f0d24cf48753404b42fe25f70fbd1393dde4934871446a420",
+        "npm/dist/wasm/_framework/DocumentFormat.OpenXml.Framework.wasm": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754",
+        "npm/dist/wasm/_framework/DocumentFormat.OpenXml.wasm": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9",
+        "npm/dist/wasm/_framework/Docxodus.wasm": "0fa0b4b340d1d641a5cb461f3cbf80e4fbbdc0d487c1e13e8889456836dccaee",
+        "npm/dist/wasm/_framework/DocxodusWasm.wasm": "4b84263f05c6349e6fcb03fc9038830568a077686debfb102494bd2b34035100",
+        "npm/dist/wasm/_framework/System.Collections.Concurrent.wasm": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982",
+        "npm/dist/wasm/_framework/System.Collections.Immutable.wasm": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3",
+        "npm/dist/wasm/_framework/System.Collections.NonGeneric.wasm": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12",
+        "npm/dist/wasm/_framework/System.Collections.Specialized.wasm": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d",
+        "npm/dist/wasm/_framework/System.Collections.wasm": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b",
+        "npm/dist/wasm/_framework/System.ComponentModel.Primitives.wasm": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40",
+        "npm/dist/wasm/_framework/System.ComponentModel.TypeConverter.wasm": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721",
+        "npm/dist/wasm/_framework/System.ComponentModel.wasm": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36",
+        "npm/dist/wasm/_framework/System.Console.wasm": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b",
+        "npm/dist/wasm/_framework/System.IO.Compression.wasm": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731",
+        "npm/dist/wasm/_framework/System.IO.Packaging.wasm": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b",
+        "npm/dist/wasm/_framework/System.IO.Pipelines.wasm": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed",
+        "npm/dist/wasm/_framework/System.Linq.Expressions.wasm": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2",
+        "npm/dist/wasm/_framework/System.Linq.wasm": "5e08586a10f0b0c9e4354438734b392459cd64282ababf7029a48246f6da6d47",
+        "npm/dist/wasm/_framework/System.Memory.wasm": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515",
+        "npm/dist/wasm/_framework/System.Net.Http.wasm": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3",
+        "npm/dist/wasm/_framework/System.Net.Primitives.wasm": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4",
+        "npm/dist/wasm/_framework/System.ObjectModel.wasm": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162",
+        "npm/dist/wasm/_framework/System.Private.CoreLib.wasm": "7216cb9019a8db40a177990f4ae6034cfe3d4f47aa598d221c4675df401082ce",
+        "npm/dist/wasm/_framework/System.Private.Uri.wasm": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b",
+        "npm/dist/wasm/_framework/System.Private.Xml.Linq.wasm": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0",
+        "npm/dist/wasm/_framework/System.Private.Xml.wasm": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c",
+        "npm/dist/wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4",
+        "npm/dist/wasm/_framework/System.Runtime.wasm": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e",
+        "npm/dist/wasm/_framework/System.Security.Cryptography.wasm": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb",
+        "npm/dist/wasm/_framework/System.Text.Encodings.Web.wasm": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f",
+        "npm/dist/wasm/_framework/System.Text.Json.wasm": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312",
+        "npm/dist/wasm/_framework/System.Text.RegularExpressions.wasm": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc",
+        "npm/dist/wasm/_framework/System.Xml.Linq.wasm": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db",
+        "npm/dist/wasm/_framework/System.Xml.XDocument.wasm": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364",
+        "npm/dist/wasm/_framework/System.wasm": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849",
+        "npm/dist/wasm/_framework/dotnet.boot.js": "0a5c139cd4f849ac4a883e91782cf7f39a06230c4c29e40febc9c77ff186d021",
+        "npm/dist/wasm/_framework/dotnet.js": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8",
+        "npm/dist/wasm/_framework/dotnet.native.js": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f",
+        "npm/dist/wasm/_framework/dotnet.native.wasm": "6f4228e4020842e789047daaffa2eb4a3a84cd74b6680bc481f0887ce6d239e3",
+        "npm/dist/wasm/_framework/dotnet.runtime.js": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63",
+        "npm/dist/word-text.js": "6cc112b382eab5f6f845c0e1831dfa02b3b962d37b9e480fbc697c98ff061a8e",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb",
+        "npm/src/word-text.ts": "14f275f06f19f749c3edaef3e904f96b82e261a023e3e6d9131e4739f0690cfe"
+      }
+    }
+  },
+  "captures": {
+    "baseline": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "7d1026edf971338accbbeb3bff82953cd63e993c",
+      "sourceTree": "06e99efb7c46b4ef6e4da031d320e655cd5f61e8",
+      "buildIdentitySha256": "d25b964b503efea5a3157c81f6bddff25a5b696b3d554ac7f01ca7d07ff20681",
+      "manifestSha256": "59c9bcf5c36773087aaa29c1a4b569c3329eaaaf7896f8bf83e1b4d15bd2c382",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationMono-Regular.ttf": {
+          "family": "Liberation Mono",
+          "sha256": "395fa5ab8d40c8eba390ced528744ea75a7f69aabf3e68b6f925ca0e39a27370"
+        },
+        "LiberationMono-Bold.ttf": {
+          "family": "Liberation Mono",
+          "sha256": "626655e94dd82f3f42549daf995c921b0915fa8ab1f4b839559e8892ea41d240"
+        },
+        "LiberationMono-Italic.ttf": {
+          "family": "Liberation Mono",
+          "sha256": "a71b2c25c89da05cf0e7c4dbba8d473fdead0b181ae56165217747d2c1f39215"
+        },
+        "LiberationMono-BoldItalic.ttf": {
+          "family": "Liberation Mono",
+          "sha256": "15eb161953e3ecc7fc05a3fec8a59e0f4e0a54a4e375736adf8e98d65981f813"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "fixed-pitch-legacy-exact",
+          "inputSha256": "27b507bcbe1aa2d76bc2c9572862e82e71b61e39f65404eacd9f50c94e48cfb5",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "fc1712b5b36a5132a55054b3de502e125666dd2a820488e687702df7fccdc5a2",
+          "renderReportSha256": "0f7a0c1bb468da0f518ce5b371b6de56e854961d419a76fa9034538a262f66e8",
+          "htmlSha256": "7696993db27e3fb70dc09870c0d7e9271fe92cfbbc0ad15d0c71f458786825a1",
+          "htmlFactsSha256": "3bd610bae4d7dfc8417e53d2939d4b6c9d2f7fb6623f219122e6918af56f639e"
+        },
+        {
+          "id": "fixed-pitch-modern-exact",
+          "inputSha256": "3f59e5321b77c60fc748747122cfe3493bf80e29c92a29a7485f2437477ed345",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "8d20f30a1974c29916486a4fe7b1b70254eb6ef392c3bd9391d8a5a13f455b46",
+          "renderReportSha256": "84c417e231872f2f6b7af345803de3d4cf4ed3a7619efe338a29dccc5eed4b88",
+          "htmlSha256": "8058a3323893702d4b8235e624a141e0f734950d53d1cfdb1c2b2fe7a9bacb05",
+          "htmlFactsSha256": "0756d3465ae6c63bb7afdedd12b0d934d214682e394f5348a195f320014225cf"
+        },
+        {
+          "id": "fixed-pitch-indented-exact",
+          "inputSha256": "2f9242ca77eb8a9a59107fbfc9e0acd6d4abf095729e97b496f8ec93be77fd2f",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "253544dc7b79ec485cec9413778542b185e5699a029014743046c89143851ad9",
+          "renderReportSha256": "a67791cb39ee25878e74195b55711414e79fed2a79416b9d2dceb597f3bb2dd4",
+          "htmlSha256": "3c29dc0bfa83f379e6616eed81fa266b8db2686f84c905c63aad5e60320047cf",
+          "htmlFactsSha256": "a455aef4aad2c49b8c7290e53d3f8161c1e655694b51a38a71aee6fd1b0c68f4"
+        },
+        {
+          "id": "fixed-pitch-narrow-control",
+          "inputSha256": "b37343a1796cfc848010a36e021fcefb876db44130433518187f365bf8cbcd67",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "183eb6198cdbef48a760d49f1a6e813923aded799e2b2e3f91d17ec55f768a2c",
+          "renderReportSha256": "e08e240de11ef6661c4ce60a7f9de86f35fcabeb607c830c0cb8738be9a0a465",
+          "htmlSha256": "c90eba1a1f89cfaa77cbef00c39d67e5526c4168d3e771764fd1b458b0d62f01",
+          "htmlFactsSha256": "f52d5b6f459db4663d3c336ab3899755c1548cf4cb2d5031754ca10fd2b1f023"
+        }
+      ],
+      "htmlInspectorSha256": "87805e278400914cd87a2fe8e89c498748b7f45eecd5ca432b9c2be2d95b4cbb"
+    },
+    "candidate": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "38cad37f3c2f32c860637e0396dc5906e0d82a0b",
+      "sourceTree": "cc2435133d5f81996ca93a2342a85b451980f0e8",
+      "buildIdentitySha256": "e8ddf056fd7438f534fe0c4f4bea3b12f00831aca0ed1e9a3aa60bb2231060d0",
+      "manifestSha256": "59c9bcf5c36773087aaa29c1a4b569c3329eaaaf7896f8bf83e1b4d15bd2c382",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationMono-Regular.ttf": {
+          "family": "Liberation Mono",
+          "sha256": "395fa5ab8d40c8eba390ced528744ea75a7f69aabf3e68b6f925ca0e39a27370"
+        },
+        "LiberationMono-Bold.ttf": {
+          "family": "Liberation Mono",
+          "sha256": "626655e94dd82f3f42549daf995c921b0915fa8ab1f4b839559e8892ea41d240"
+        },
+        "LiberationMono-Italic.ttf": {
+          "family": "Liberation Mono",
+          "sha256": "a71b2c25c89da05cf0e7c4dbba8d473fdead0b181ae56165217747d2c1f39215"
+        },
+        "LiberationMono-BoldItalic.ttf": {
+          "family": "Liberation Mono",
+          "sha256": "15eb161953e3ecc7fc05a3fec8a59e0f4e0a54a4e375736adf8e98d65981f813"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "fixed-pitch-legacy-exact",
+          "inputSha256": "27b507bcbe1aa2d76bc2c9572862e82e71b61e39f65404eacd9f50c94e48cfb5",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "3ba03cb804bf002515d9976a7e5f98bb43b96d87ca476d52d3378c29efd72e95",
+          "renderReportSha256": "56dcd7a84083fea1134ee5da8da428807384f13cd289728027e3aab0c0fe27b0",
+          "htmlSha256": "abf9ba1eb0057598539488cd8d2825b8814c8394689be829fdf882490742e16e",
+          "htmlFactsSha256": "ee78e1946993472e5216c392812131dca7e6a8b26b1fce49db714b8625d8e8c7"
+        },
+        {
+          "id": "fixed-pitch-modern-exact",
+          "inputSha256": "3f59e5321b77c60fc748747122cfe3493bf80e29c92a29a7485f2437477ed345",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "25f8998cd920924085b798f2db6d41955c65951eab00e0bf2f92e234d8f6633b",
+          "renderReportSha256": "acf3371fd679870579d8b270e857520ccc3ce04f49ad004f94b6ac44cce2b4a2",
+          "htmlSha256": "d1446330bf1fa3938fd68a01a0216bb79355cdd7bbcae1967755e397b556a645",
+          "htmlFactsSha256": "e2f62baf7e9587342193e4d49c09ad2a7c36c3a9a49beecc5fac0f05b02b6c03"
+        },
+        {
+          "id": "fixed-pitch-indented-exact",
+          "inputSha256": "2f9242ca77eb8a9a59107fbfc9e0acd6d4abf095729e97b496f8ec93be77fd2f",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "62560935d147720f28a2c075f916bd4e90f6119b9bef2a10fa94ec578f342f7c",
+          "renderReportSha256": "f8b0a3f80c8592d633eae97aef54c331c38e420499c539cc51515512dd4a7b3a",
+          "htmlSha256": "13456ac7595fd0fd501df5e569bdaf40f75be6a8f0894819c9edf3bab9c34de3",
+          "htmlFactsSha256": "ad104533039845d9e20194ca5201b7e4c4aa1d1efcaf32dde95c29a12ebae65c"
+        },
+        {
+          "id": "fixed-pitch-narrow-control",
+          "inputSha256": "b37343a1796cfc848010a36e021fcefb876db44130433518187f365bf8cbcd67",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "7ebbfa68084a806c7dd8dad76c85b646c78a3c8361616ad2a367f008386836bb",
+          "renderReportSha256": "73781bba598aa98fc4b453415741082ef597377533191c5c89a4ebf29ab2ec1e",
+          "htmlSha256": "662ee5a0f24ee880a48383309fccef2e76af19d78d49667b914b55a36035e600",
+          "htmlFactsSha256": "226f24d86b77b9730138352f51e6779ad975f8a5c24a121dafce667cce016067"
+        }
+      ],
+      "htmlInspectorSha256": "87805e278400914cd87a2fe8e89c498748b7f45eecd5ca432b9c2be2d95b4cbb"
+    }
+  },
+  "manifestSha256": "59c9bcf5c36773087aaa29c1a4b569c3329eaaaf7896f8bf83e1b4d15bd2c382",
+  "cases": [
+    {
+      "id": "fixed-pitch-legacy-exact",
+      "inputSha256": "27b507bcbe1aa2d76bc2c9572862e82e71b61e39f65404eacd9f50c94e48cfb5",
+      "renderers": {
+        "baseline": {
+          "pdf": "pdf/fixed-pitch-legacy-exact-baseline.pdf",
+          "sha256": "fc1712b5b36a5132a55054b3de502e125666dd2a820488e687702df7fccdc5a2",
+          "facts": "fixed-pitch-legacy-exact-baseline.json.gz",
+          "factsSha256": "9f437388cd6bcb7bd90d6b609d4315f4c6abefdb45c330a25c1cd273ba5847db",
+          "failures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ]
+        },
+        "candidate": {
+          "pdf": "pdf/fixed-pitch-legacy-exact-candidate.pdf",
+          "sha256": "3ba03cb804bf002515d9976a7e5f98bb43b96d87ca476d52d3378c29efd72e95",
+          "facts": "fixed-pitch-legacy-exact-candidate.json.gz",
+          "factsSha256": "b7f153ec6f3e0390446043baa905c5137d8fd378a9a5661b71c719cb28968c0f",
+          "failures": []
+        }
+      },
+      "screenshot": "fixed-pitch-legacy-exact.png"
+    },
+    {
+      "id": "fixed-pitch-modern-exact",
+      "inputSha256": "3f59e5321b77c60fc748747122cfe3493bf80e29c92a29a7485f2437477ed345",
+      "renderers": {
+        "baseline": {
+          "pdf": "pdf/fixed-pitch-modern-exact-baseline.pdf",
+          "sha256": "8d20f30a1974c29916486a4fe7b1b70254eb6ef392c3bd9391d8a5a13f455b46",
+          "facts": "fixed-pitch-modern-exact-baseline.json.gz",
+          "factsSha256": "f5d7258b4685371158d6d5050f7376bca81ccfc9f9e1fc20b5d32169fd397102",
+          "failures": []
+        },
+        "candidate": {
+          "pdf": "pdf/fixed-pitch-modern-exact-candidate.pdf",
+          "sha256": "25f8998cd920924085b798f2db6d41955c65951eab00e0bf2f92e234d8f6633b",
+          "facts": "fixed-pitch-modern-exact-candidate.json.gz",
+          "factsSha256": "d83b734dd50ad6a51af01f3169ac52837b9a73bf2f0ff62c0fc37eab47423f8e",
+          "failures": []
+        }
+      },
+      "controlMaxCoordinateDeltaPt": 0.011718999999999369,
+      "screenshot": "fixed-pitch-modern-exact.png"
+    },
+    {
+      "id": "fixed-pitch-indented-exact",
+      "inputSha256": "2f9242ca77eb8a9a59107fbfc9e0acd6d4abf095729e97b496f8ec93be77fd2f",
+      "renderers": {
+        "baseline": {
+          "pdf": "pdf/fixed-pitch-indented-exact-baseline.pdf",
+          "sha256": "253544dc7b79ec485cec9413778542b185e5699a029014743046c89143851ad9",
+          "facts": "fixed-pitch-indented-exact-baseline.json.gz",
+          "factsSha256": "ae025f74ad542a019dd1f5c987630c307b1515bc5108ea33ba031ea8110cb71d",
+          "failures": [
+            "assertion-marker-region",
+            "assertion-marker-region",
+            "assertion-marker-region"
+          ]
+        },
+        "candidate": {
+          "pdf": "pdf/fixed-pitch-indented-exact-candidate.pdf",
+          "sha256": "62560935d147720f28a2c075f916bd4e90f6119b9bef2a10fa94ec578f342f7c",
+          "facts": "fixed-pitch-indented-exact-candidate.json.gz",
+          "factsSha256": "0791f22b7c44ba04d94c4d927bda4c0effcd0e2e25a574f011550eb461b4493e",
+          "failures": []
+        }
+      },
+      "screenshot": "fixed-pitch-indented-exact.png"
+    },
+    {
+      "id": "fixed-pitch-narrow-control",
+      "inputSha256": "b37343a1796cfc848010a36e021fcefb876db44130433518187f365bf8cbcd67",
+      "renderers": {
+        "baseline": {
+          "pdf": "pdf/fixed-pitch-narrow-control-baseline.pdf",
+          "sha256": "183eb6198cdbef48a760d49f1a6e813923aded799e2b2e3f91d17ec55f768a2c",
+          "facts": "fixed-pitch-narrow-control-baseline.json.gz",
+          "factsSha256": "d2d02b990f67ddab52cd683fd10215baa23b6546634af79b9b8e1b00d01f17a8",
+          "failures": []
+        },
+        "candidate": {
+          "pdf": "pdf/fixed-pitch-narrow-control-candidate.pdf",
+          "sha256": "7ebbfa68084a806c7dd8dad76c85b646c78a3c8361616ad2a367f008386836bb",
+          "facts": "fixed-pitch-narrow-control-candidate.json.gz",
+          "factsSha256": "6b923427bed3edded2d43414ff889c3d2bf6cb812dd058f3f09fb17e080640d4",
+          "failures": []
+        }
+      },
+      "controlMaxCoordinateDeltaPt": 0.058589999999981046,
+      "screenshot": "fixed-pitch-narrow-control.png"
+    }
+  ]
+}

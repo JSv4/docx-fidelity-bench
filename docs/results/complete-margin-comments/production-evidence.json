@@ -1,0 +1,3734 @@
+{
+  "schema": 1,
+  "benchmarkCommit": "9839ac1c948779cc17a126cf3e344dff18b000a0",
+  "scope": "Production owned-process public export; companion completeness is mandatory, primary hidden-comment layout is compared with LibreOffice.",
+  "limitations": [
+    "No native margin-comment layout parity claim.",
+    "Dark paint in source-word bounds is not OCR or glyph-shape verification."
+  ],
+  "runs": {
+    "candidate": {
+      "runUrl": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/41217522515",
+      "artifactId": 13048913136,
+      "artifactZipSha256": "b3f28099da84968adb345981a80e3a678ab9193ef8deb387b4acee7826146acf",
+      "coreCommit": "cd446c19bf6b13aab0726451f50412c4c84d55c4",
+      "resultSha256": "9625050e4ba89e9184407a7f58f958ae8af3e4ea9cdba620b12f26101263fb0b",
+      "contractDigest": "b68b297075a3142bb83385ecf0102853700e2b14a4a525f5ec4088c89ead2089",
+      "selectedManifestSha256": "2a01f1ab24ed40ea4b3c9d6dc80156da1aeb03162a04e06568a4fc40f4ba1072",
+      "calibrationSummary": {
+        "categoryMeans": {
+          "paragraphs": 100.0
+        },
+        "closeMatchRate": 1.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 7,
+        "required": 7,
+        "score": 100.0
+      },
+      "summary": {
+        "categoryMeans": {
+          "paragraphs": 99.9944250506173
+        },
+        "closeMatchRate": 1.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 7,
+        "required": 7,
+        "score": 99.9944250506173
+      },
+      "cases": {
+        "comments-complete-single-30": {
+          "score": 99.9944250506173,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "profile": {
+            "comments": "margin",
+            "review": "final"
+          },
+          "inputSha256": "562dd71d7aaa86026b4c2f926c4170b9724288b0439f03259cdc0c2652c80d27",
+          "runtime": {
+            "rendererFingerprint": "57ceb5f20885c3e46d3cd8c57ee4da3160359328187391d79af9cd110a7a2a20",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          },
+          "files": {
+            "1-candidate.png": "da046c9d27b5333fe695d713f8beadad242e14721b948689e2b91c6921e36c40",
+            "1-overlay.png": "42bfc04626f3c9fce71b56f724796fab18f253563ab9ea8653d5eae4151e6cec",
+            "1-reference.png": "3b003bd146ab20c0d79955dc0ff347a0060c855d92f38384397ca3f6eb17f44f",
+            "candidate.pdf": "949a49d4dcc85b3631f1e66a0eeb9938137c9753cc06463cd220fff7818f054d",
+            "companion-production.json": "a17bd3eaf33e2d2a2ab312a3bd415dc2c148bfda20334c5981a507458709ebbd",
+            "companion.pdf": "ff8d3d0ddfaa06a6fb5066c539c5eb49402d2a38418185bcf67ba902d3890309",
+            "evidence.json": "d04b957c4b1f960bceee6f2cd6c64ebf925a29e6d26d5704d40e0aeec28eb895",
+            "production.json": "6d2011456417bf4088f6a894de017ec52e813dab1eefcdd4f4df55a0dce68d23",
+            "reference.pdf": "e4ea63efb2a288c47f955c8e69f3ad0af7088f614985fa66358942c99346c912"
+          },
+          "pagesPng": [
+            {
+              "path": "production-rasters/candidate/comments-complete-single-30/page-1.png",
+              "sha256": "47b1c21252cdea5748e81fd7eb4a1927ca6c13faa7e4d2c99d8c73c158e73b76"
+            },
+            {
+              "path": "production-rasters/candidate/comments-complete-single-30/page-2.png",
+              "sha256": "19c7fe1cc548c3bc012311a3d5295d07162ece4e88d5ea8b85f7d07b3d79ec30"
+            }
+          ],
+          "pageCount": 2,
+          "companionRuntime": {
+            "rendererFingerprint": "f9495c13d6cedc983402bbc55d4038a609604614d1867687d46c0013094a641e",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          }
+        },
+        "comments-complete-single-900": {
+          "score": 99.9944250506173,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "profile": {
+            "comments": "margin",
+            "review": "final"
+          },
+          "inputSha256": "bf6404d1edaeee0fd72c3e9521872a6ee3e5130c35c3fc754e718d5e2e577c21",
+          "runtime": {
+            "rendererFingerprint": "57ceb5f20885c3e46d3cd8c57ee4da3160359328187391d79af9cd110a7a2a20",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          },
+          "files": {
+            "1-candidate.png": "da046c9d27b5333fe695d713f8beadad242e14721b948689e2b91c6921e36c40",
+            "1-overlay.png": "42bfc04626f3c9fce71b56f724796fab18f253563ab9ea8653d5eae4151e6cec",
+            "1-reference.png": "3b003bd146ab20c0d79955dc0ff347a0060c855d92f38384397ca3f6eb17f44f",
+            "candidate.pdf": "023c026aa9984d69ee6b6ceddea13bc40f27d556b6476f0e697e51237798cd52",
+            "companion-production.json": "48f92aa688ad17348b53bc51ac5a407e13bcaed70f316424cb06b0efa89e59ef",
+            "companion.pdf": "ea8a4c785333d883e20ac98732ea90080fe81784a654de16f7ac217ac27bba2e",
+            "evidence.json": "f5dbbf0952a528daf27ce4e77895ea06f356258f2f47b51c01935af8a135fec5",
+            "production.json": "54703d0373f431ea10f8d5b0a01f20ca06a6f88d0922e1acf785da6376cb3140",
+            "reference.pdf": "6bab1f8f4c02ec5654d3d79bd22f8ecfdd8567e15cf1d7036f221b6002d2b021"
+          },
+          "pagesPng": [
+            {
+              "path": "production-rasters/candidate/comments-complete-single-900/page-01.png",
+              "sha256": "47b1c21252cdea5748e81fd7eb4a1927ca6c13faa7e4d2c99d8c73c158e73b76"
+            },
+            {
+              "path": "production-rasters/candidate/comments-complete-single-900/page-02.png",
+              "sha256": "16c5b1a3db025a48055e6a80cd42f3a38ef83453e43be46a724518364d0ec4ab"
+            },
+            {
+              "path": "production-rasters/candidate/comments-complete-single-900/page-03.png",
+              "sha256": "8090d3a7ff1cb16ea076b8dcb28bb6bd076af34fdd6930b6a905fa88bdb8b9d2"
+            },
+            {
+              "path": "production-rasters/candidate/comments-complete-single-900/page-04.png",
+              "sha256": "c261eab0cc8e626b5579e2c90e1b74ba428b59b87872bfe71b53f18f730ed837"
+            },
+            {
+              "path": "production-rasters/candidate/comments-complete-single-900/page-05.png",
+              "sha256": "e06c07c4c12ea71a011d592b072452fde4024c301e19b18df93385b7a6050380"
+            },
+            {
+              "path": "production-rasters/candidate/comments-complete-single-900/page-06.png",
+              "sha256": "0e8ec2f2535f9b1b23e51201a18dbcb9254efd4bdc3ac067b3894e7e492efc6c"
+            },
+            {
+              "path": "production-rasters/candidate/comments-complete-single-900/page-07.png",
+              "sha256": "9161d8a24865c7cc5cbdd50cd66c1d9fb7e9ba72d2b28d1c70b2c703604a1279"
+            },
+            {
+              "path": "production-rasters/candidate/comments-complete-single-900/page-08.png",
+              "sha256": "85467cd79b47d45fe650974c74e5b4475358bb520928b40ff93b07855309edf2"
+            },
+            {
+              "path": "production-rasters/candidate/comments-complete-single-900/page-09.png",
+              "sha256": "c17551a4deff1f3474d29ae74ae09ba0417d39d1c7ca2c530a9d928c2eef82ef"
+            },
+            {
+              "path": "production-rasters/candidate/comments-complete-single-900/page-10.png",
+              "sha256": "c0c362b1fc513c6ad05ca96c8d89a70fdc67a662ea6cec71923df5ddb8c5ec97"
+            },
+            {
+              "path": "production-rasters/candidate/comments-complete-single-900/page-11.png",
+              "sha256": "9074dc442fce125bf7874406af485b01ecd35596d29a5d23490dad6366f0ba07"
+            }
+          ],
+          "pageCount": 11,
+          "companionRuntime": {
+            "rendererFingerprint": "f9495c13d6cedc983402bbc55d4038a609604614d1867687d46c0013094a641e",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          }
+        },
+        "comments-complete-paragraphs-30": {
+          "score": 99.9944250506173,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "profile": {
+            "comments": "margin",
+            "review": "final"
+          },
+          "inputSha256": "3f48588d7c26dd8afb75bb48c164cab9c025fdc51224eff5f9cea051610c62b2",
+          "runtime": {
+            "rendererFingerprint": "57ceb5f20885c3e46d3cd8c57ee4da3160359328187391d79af9cd110a7a2a20",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          },
+          "files": {
+            "1-candidate.png": "da046c9d27b5333fe695d713f8beadad242e14721b948689e2b91c6921e36c40",
+            "1-overlay.png": "42bfc04626f3c9fce71b56f724796fab18f253563ab9ea8653d5eae4151e6cec",
+            "1-reference.png": "3b003bd146ab20c0d79955dc0ff347a0060c855d92f38384397ca3f6eb17f44f",
+            "candidate.pdf": "99bec0c4fae044fc95b6d613448a74e3acebfbd5488747dff903db90eeaf106f",
+            "companion-production.json": "3f637a247e83df8f34cb99a8b9e6f33c0cbda00f6f598db503008394cec57c76",
+            "companion.pdf": "40e5d2424bed5b6d4aba7b192ea88dad2fa90b422e80b9fd902291b22df3babd",
+            "evidence.json": "e1ea50db05bb971d721fea8b06a857746820b2ce12e45f053f5c2f7701f11824",
+            "production.json": "237cc378dc2b11e67dbe640782b0d62994870c00701355b1889e3f69730ce6e9",
+            "reference.pdf": "eee2573b1e642796ceba0a58a11a19ab41ee776ce4908a9ebbb51d5645d6f855"
+          },
+          "pagesPng": [
+            {
+              "path": "production-rasters/candidate/comments-complete-paragraphs-30/page-1.png",
+              "sha256": "47b1c21252cdea5748e81fd7eb4a1927ca6c13faa7e4d2c99d8c73c158e73b76"
+            },
+            {
+              "path": "production-rasters/candidate/comments-complete-paragraphs-30/page-2.png",
+              "sha256": "627fef502c0fd17d539e0b9909fcca705fd65eecf8d90ac565b97f3847e748c5"
+            }
+          ],
+          "pageCount": 2,
+          "companionRuntime": {
+            "rendererFingerprint": "f9495c13d6cedc983402bbc55d4038a609604614d1867687d46c0013094a641e",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          }
+        },
+        "comments-complete-many-notes": {
+          "score": 99.9944250506173,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "profile": {
+            "comments": "margin",
+            "review": "final"
+          },
+          "inputSha256": "5bc79f347ca938897b680147025dc20ca0d7549260eaf7687b1e62b9768a4623",
+          "runtime": {
+            "rendererFingerprint": "57ceb5f20885c3e46d3cd8c57ee4da3160359328187391d79af9cd110a7a2a20",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          },
+          "files": {
+            "1-candidate.png": "da046c9d27b5333fe695d713f8beadad242e14721b948689e2b91c6921e36c40",
+            "1-overlay.png": "42bfc04626f3c9fce71b56f724796fab18f253563ab9ea8653d5eae4151e6cec",
+            "1-reference.png": "3b003bd146ab20c0d79955dc0ff347a0060c855d92f38384397ca3f6eb17f44f",
+            "candidate.pdf": "c2204b2cdd8a0f9be2a7b54cbc985064e4fa9f4dad6576acc0786731d944c582",
+            "companion-production.json": "b96c31450f40e4b5ef559a7a547f38f2adccc5b12062bf97ab7fe3478cc6073d",
+            "companion.pdf": "acb6845aa8f66baeb7701da93a2c43c9f1d57266372e292a01cdd9629ac94a9c",
+            "evidence.json": "afae45f7b2007a043d18561bfb06e87df86d8508694be27de0399e65120b6d5a",
+            "production.json": "481f64bdbc7d880f3f391253c52d17f94046f2b6caa6abffdc8bcd4599926f4b",
+            "reference.pdf": "3963bb1ba7947b9ab14b4e516f833f830a711ae550019caab45f1278dabf05c4"
+          },
+          "pagesPng": [
+            {
+              "path": "production-rasters/candidate/comments-complete-many-notes/page-1.png",
+              "sha256": "bc5b3fc7028b9131ae18f5138cacfd6b3f6c750e96a0d902975d3f4ea2348726"
+            },
+            {
+              "path": "production-rasters/candidate/comments-complete-many-notes/page-2.png",
+              "sha256": "304d9dbcaf96c652862b316313c35c3de8db9ad2cfd32c9e8f393a20bf50a88e"
+            },
+            {
+              "path": "production-rasters/candidate/comments-complete-many-notes/page-3.png",
+              "sha256": "d6e6326e181bb6c89a415d7719f9d56d97b77fa166168d62e2da762853d5f2d3"
+            },
+            {
+              "path": "production-rasters/candidate/comments-complete-many-notes/page-4.png",
+              "sha256": "76dd3a1869a6388522fb16e41320412611d985beb5a3f73adc7f459e2cda0dd8"
+            }
+          ],
+          "pageCount": 4,
+          "companionRuntime": {
+            "rendererFingerprint": "8675aa61ca0c54da581b70feccb8d86701b52e902acc69fd2050e58882ca5a54",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          }
+        },
+        "comments-complete-nested-replies": {
+          "score": 99.9944250506173,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "profile": {
+            "comments": "margin",
+            "review": "final"
+          },
+          "inputSha256": "461e31e7639368a06b083452867c1dc2f06d057f1e2b79e042bbea18cafa7da2",
+          "runtime": {
+            "rendererFingerprint": "57ceb5f20885c3e46d3cd8c57ee4da3160359328187391d79af9cd110a7a2a20",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          },
+          "files": {
+            "1-candidate.png": "da046c9d27b5333fe695d713f8beadad242e14721b948689e2b91c6921e36c40",
+            "1-overlay.png": "42bfc04626f3c9fce71b56f724796fab18f253563ab9ea8653d5eae4151e6cec",
+            "1-reference.png": "3b003bd146ab20c0d79955dc0ff347a0060c855d92f38384397ca3f6eb17f44f",
+            "candidate.pdf": "1aff8b15822dea015dc43f7efd97f8bd0e4e9fa44734a61a4c63dcd6235abe0b",
+            "companion-production.json": "f78b8a49dbed3f676c82eec422e1a2c9056e46396ec4307a1954d5dbef941d75",
+            "companion.pdf": "35187fc04fc256c6d044053a4eaffda3afcf17c9f7d7b12e01a98a875b572673",
+            "evidence.json": "676861bab429b357f0deb9203c5e66571d9394c59cebf658438be5eb3278078f",
+            "production.json": "20f289085a65ca12c91c37a756ac3297b2baf2fecdf2c3c18568a1a974c12a8b",
+            "reference.pdf": "62d3de297bc8f170f94321c0e34b7ab812b5f24e60e15366a599e3818c52a361"
+          },
+          "pagesPng": [
+            {
+              "path": "production-rasters/candidate/comments-complete-nested-replies/page-1.png",
+              "sha256": "7e5e38909e21f8099cb9edc23e8d15fefe939d7702968473176262791ce95594"
+            },
+            {
+              "path": "production-rasters/candidate/comments-complete-nested-replies/page-2.png",
+              "sha256": "16c5b1a3db025a48055e6a80cd42f3a38ef83453e43be46a724518364d0ec4ab"
+            },
+            {
+              "path": "production-rasters/candidate/comments-complete-nested-replies/page-3.png",
+              "sha256": "74579ca0382d12b2b50940ef1e51612be7557d2091b5e9f9d1c47e4e261aa47e"
+            },
+            {
+              "path": "production-rasters/candidate/comments-complete-nested-replies/page-4.png",
+              "sha256": "bf90b2ec62c0b8bcec2f56f68dad9b9a37c79cb37965684b2191187f1e9d3a07"
+            },
+            {
+              "path": "production-rasters/candidate/comments-complete-nested-replies/page-5.png",
+              "sha256": "6a5f3e1071e398c6ee52cb3cb9014e851f1de498782c7d1f14b483f5fcd03c78"
+            }
+          ],
+          "pageCount": 5,
+          "companionRuntime": {
+            "rendererFingerprint": "98d0c35e1a2846ca213595fd9fe62e54c94d7a14021624877a2bd8520a07000a",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          }
+        },
+        "comments-complete-short-control": {
+          "score": 99.9944250506173,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "profile": {
+            "comments": "margin",
+            "review": "final"
+          },
+          "inputSha256": "b18678681be500ae3419998509c5540e5bed6345e1e3d96da0376260b9282f52",
+          "runtime": {
+            "rendererFingerprint": "57ceb5f20885c3e46d3cd8c57ee4da3160359328187391d79af9cd110a7a2a20",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          },
+          "files": {
+            "1-candidate.png": "da046c9d27b5333fe695d713f8beadad242e14721b948689e2b91c6921e36c40",
+            "1-overlay.png": "42bfc04626f3c9fce71b56f724796fab18f253563ab9ea8653d5eae4151e6cec",
+            "1-reference.png": "3b003bd146ab20c0d79955dc0ff347a0060c855d92f38384397ca3f6eb17f44f",
+            "candidate.pdf": "7ea9204eb453d799253f52c9b7855ecb948a292b41465894686af473010ccace",
+            "companion-production.json": "5e631d84b893ed8b43565a5beef9527531f6c12cdea9633fb77ac122353cbb26",
+            "companion.pdf": "56f26aaa5d37a0f4eb123865d19f1b9ef2b060b0254c5ccd06fd6399959c8a1b",
+            "evidence.json": "43ce922c95c588ff70b188c502e1f47ebb2909d866b32628f489dfffc3f197b1",
+            "production.json": "d022a14279edf5072207ae9b58f752c0f05c8b0e9b68515dd4b0fd9825adc461",
+            "reference.pdf": "5c63f03dc63a8f99a6f7dfd6b1330769ea44ea9efea9c42dee88c8ab4bcc0563"
+          },
+          "pagesPng": [
+            {
+              "path": "production-rasters/candidate/comments-complete-short-control/page-1.png",
+              "sha256": "b564325013965eae11bf8d5b8351ccdff10acd0aa874ff1dd367f18a15820090"
+            }
+          ],
+          "pageCount": 1,
+          "companionRuntime": {
+            "rendererFingerprint": "f9495c13d6cedc983402bbc55d4038a609604614d1867687d46c0013094a641e",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          }
+        },
+        "comments-complete-hidden-control": {
+          "score": 99.9944250506173,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "profile": {
+            "comments": "hidden",
+            "review": "final"
+          },
+          "inputSha256": "bf6404d1edaeee0fd72c3e9521872a6ee3e5130c35c3fc754e718d5e2e577c21",
+          "runtime": {
+            "rendererFingerprint": "57ceb5f20885c3e46d3cd8c57ee4da3160359328187391d79af9cd110a7a2a20",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          },
+          "files": {
+            "1-candidate.png": "da046c9d27b5333fe695d713f8beadad242e14721b948689e2b91c6921e36c40",
+            "1-overlay.png": "42bfc04626f3c9fce71b56f724796fab18f253563ab9ea8653d5eae4151e6cec",
+            "1-reference.png": "3b003bd146ab20c0d79955dc0ff347a0060c855d92f38384397ca3f6eb17f44f",
+            "candidate.pdf": "ce6c4b270d77ae2bf0739f80821d45e24f8616025fb6fd0445ef800784ea89d3",
+            "companion-production.json": "3f493f9481fe77e4e58ff4de9e46b7c672d581c6bcecca201c019b17348d23af",
+            "companion.pdf": "7ccb68e082fdb6379416ecb8930bcd403f1c7a7bbe8e5e86848c1df1737ceefe",
+            "evidence.json": "80629effe908d4ed056f3d724f30cd6f9bde3c534899e1a4578d11813adcbae8",
+            "production.json": "f2051697afb923ed664c03afc82f850f7b4682a56d900826c63e6b8d81f44f8a",
+            "reference.pdf": "27c9fb3320428e6d55f1b99b1f6f7cb6fcbe567ef31cb37ccd48e778a22b3289"
+          },
+          "pagesPng": [
+            {
+              "path": "production-rasters/candidate/comments-complete-hidden-control/page-1.png",
+              "sha256": "fc0e6016c49163bf5be5e887156514277facf6598dba200b2d1afdf3bf3bd21a"
+            }
+          ],
+          "pageCount": 1,
+          "companionRuntime": {
+            "rendererFingerprint": "57ceb5f20885c3e46d3cd8c57ee4da3160359328187391d79af9cd110a7a2a20",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          }
+        }
+      }
+    },
+    "baseline": {
+      "runUrl": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/41217524429",
+      "artifactId": 13049086229,
+      "artifactZipSha256": "784b58c96c8ac0e453b3a26d06cedf61eda3c8d005ae3ea25e007ead1dd86ff9",
+      "coreCommit": "784c03358775efcb8b53f9ec813bc93de30acc8d",
+      "resultSha256": "86893d185cb4dd66bb47afc372c027709c3f8217f11ff5c95bc44aaf9cafb849",
+      "contractDigest": "b34ab37e72efb446c8755c995a3af8e643bedc824cd09d4bb3bf6b376cb9dfd0",
+      "selectedManifestSha256": "2a01f1ab24ed40ea4b3c9d6dc80156da1aeb03162a04e06568a4fc40f4ba1072",
+      "calibrationSummary": {
+        "categoryMeans": {
+          "paragraphs": 100.0
+        },
+        "closeMatchRate": 1.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 7,
+        "required": 7,
+        "score": 100.0
+      },
+      "summary": {
+        "categoryMeans": {
+          "paragraphs": 28.569835728747798
+        },
+        "closeMatchRate": 0.2857142857142857,
+        "complete": true,
+        "mandatoryPassRate": 0.2857142857142857,
+        "measured": 7,
+        "required": 7,
+        "score": 28.569835728747798
+      },
+      "cases": {
+        "comments-complete-single-30": {
+          "score": 0.0,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {
+                "M00009": 1,
+                "M00010": 1,
+                "M00011": 1,
+                "M00012": 1,
+                "M00013": 1,
+                "M00014": 1,
+                "M00015": 1,
+                "M00016": 1,
+                "M00017": 1,
+                "M00018": 1,
+                "M00019": 1,
+                "M00020": 1,
+                "M00021": 1,
+                "M00022": 1,
+                "M00023": 1,
+                "M00024": 1,
+                "M00025": 1,
+                "M00026": 1,
+                "M00027": 1,
+                "M00028": 1,
+                "M00029": 1,
+                "The": 21,
+                "blue": 22,
+                "cabinet": 21,
+                "each": 22,
+                "folder": 22,
+                "for": 22,
+                "keeps": 21,
+                "one": 21,
+                "route.": 22
+              },
+              "name": "companion-pdf-source-tokens",
+              "passed": false
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "profile": {
+            "comments": "margin",
+            "review": "final"
+          },
+          "inputSha256": "562dd71d7aaa86026b4c2f926c4170b9724288b0439f03259cdc0c2652c80d27",
+          "runtime": {
+            "rendererFingerprint": "b10f94efda7cd9c31412a9097a7820b7b3dfc1b9e1ea2ed235afc0fd915d7c12",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          },
+          "files": {
+            "1-candidate.png": "da046c9d27b5333fe695d713f8beadad242e14721b948689e2b91c6921e36c40",
+            "1-overlay.png": "42bfc04626f3c9fce71b56f724796fab18f253563ab9ea8653d5eae4151e6cec",
+            "1-reference.png": "3b003bd146ab20c0d79955dc0ff347a0060c855d92f38384397ca3f6eb17f44f",
+            "candidate.pdf": "ae3f6df0bd8ec36ad6d8d01d9b3e99b5dade17761dd69195de50cd3c8f653107",
+            "companion-production.json": "e3c2e8be3fa646304cf5890686873e888c8d266a65f3c62cc00b2f9fc2f3f13e",
+            "companion.pdf": "b52fc3908a672ea2107d18f09950f07ef33d61844e825ecc3869af4f63c48ab3",
+            "evidence.json": "6ae5e460f189b050882c2d1a17ad63618ad4e773bfbd77bd9213bef5d14a7df6",
+            "production.json": "95211536716958dd0dd3668078d745a92dca8c3ac10c53d441c82e6a3b85cba0",
+            "reference.pdf": "f7e038ffd801db4919e10bdb1be02b2a6b4184ea9b5870f9e6110d8350b697e9"
+          },
+          "pagesPng": [
+            {
+              "path": "production-rasters/baseline/comments-complete-single-30/page-1.png",
+              "sha256": "062eeb00cee024d5bff662297a3d3e6ebde3538bed6f2234d6d2953339ed77aa"
+            }
+          ],
+          "pageCount": 1,
+          "companionRuntime": {
+            "rendererFingerprint": "ab78e72c358bcba2f5ca5f23ad8ad5a25c0f72ea39bc922ccb49d19fb23f5169",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          }
+        },
+        "comments-complete-single-900": {
+          "score": 0.0,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {
+                "M00009": 1,
+                "M00010": 1,
+                "M00011": 1,
+                "M00012": 1,
+                "M00013": 1,
+                "M00014": 1,
+                "M00015": 1,
+                "M00016": 1,
+                "M00017": 1,
+                "M00018": 1,
+                "M00019": 1,
+                "M00020": 1,
+                "M00021": 1,
+                "M00022": 1,
+                "M00023": 1,
+                "M00024": 1,
+                "M00025": 1,
+                "M00026": 1,
+                "M00027": 1,
+                "M00028": 1,
+                "M00029": 1,
+                "M00030": 1,
+                "M00031": 1,
+                "M00032": 1,
+                "M00033": 1,
+                "M00034": 1,
+                "M00035": 1,
+                "M00036": 1,
+                "M00037": 1,
+                "M00038": 1,
+                "M00039": 1,
+                "M00040": 1,
+                "M00041": 1,
+                "M00042": 1,
+                "M00043": 1,
+                "M00044": 1,
+                "M00045": 1,
+                "M00046": 1,
+                "M00047": 1,
+                "M00048": 1,
+                "M00049": 1,
+                "M00050": 1,
+                "M00051": 1,
+                "M00052": 1,
+                "M00053": 1,
+                "M00054": 1,
+                "M00055": 1,
+                "M00056": 1,
+                "M00057": 1,
+                "M00058": 1,
+                "M00059": 1,
+                "M00060": 1,
+                "M00061": 1,
+                "M00062": 1,
+                "M00063": 1,
+                "M00064": 1,
+                "M00065": 1,
+                "M00066": 1,
+                "M00067": 1,
+                "M00068": 1,
+                "M00069": 1,
+                "M00070": 1,
+                "M00071": 1,
+                "M00072": 1,
+                "M00073": 1,
+                "M00074": 1,
+                "M00075": 1,
+                "M00076": 1,
+                "M00077": 1,
+                "M00078": 1,
+                "M00079": 1,
+                "M00080": 1,
+                "M00081": 1,
+                "M00082": 1,
+                "M00083": 1,
+                "M00084": 1,
+                "M00085": 1,
+                "M00086": 1,
+                "M00087": 1,
+                "M00088": 1,
+                "M00089": 1,
+                "M00090": 1,
+                "M00091": 1,
+                "M00092": 1,
+                "M00093": 1,
+                "M00094": 1,
+                "M00095": 1,
+                "M00096": 1,
+                "M00097": 1,
+                "M00098": 1,
+                "M00099": 1,
+                "M00100": 1,
+                "M00101": 1,
+                "M00102": 1,
+                "M00103": 1,
+                "M00104": 1,
+                "M00105": 1,
+                "M00106": 1,
+                "M00107": 1,
+                "M00108": 1,
+                "M00109": 1,
+                "M00110": 1,
+                "M00111": 1,
+                "M00112": 1,
+                "M00113": 1,
+                "M00114": 1,
+                "M00115": 1,
+                "M00116": 1,
+                "M00117": 1,
+                "M00118": 1,
+                "M00119": 1,
+                "M00120": 1,
+                "M00121": 1,
+                "M00122": 1,
+                "M00123": 1,
+                "M00124": 1,
+                "M00125": 1,
+                "M00126": 1,
+                "M00127": 1,
+                "M00128": 1,
+                "M00129": 1,
+                "M00130": 1,
+                "M00131": 1,
+                "M00132": 1,
+                "M00133": 1,
+                "M00134": 1,
+                "M00135": 1,
+                "M00136": 1,
+                "M00137": 1,
+                "M00138": 1,
+                "M00139": 1,
+                "M00140": 1,
+                "M00141": 1,
+                "M00142": 1,
+                "M00143": 1,
+                "M00144": 1,
+                "M00145": 1,
+                "M00146": 1,
+                "M00147": 1,
+                "M00148": 1,
+                "M00149": 1,
+                "M00150": 1,
+                "M00151": 1,
+                "M00152": 1,
+                "M00153": 1,
+                "M00154": 1,
+                "M00155": 1,
+                "M00156": 1,
+                "M00157": 1,
+                "M00158": 1,
+                "M00159": 1,
+                "M00160": 1,
+                "M00161": 1,
+                "M00162": 1,
+                "M00163": 1,
+                "M00164": 1,
+                "M00165": 1,
+                "M00166": 1,
+                "M00167": 1,
+                "M00168": 1,
+                "M00169": 1,
+                "M00170": 1,
+                "M00171": 1,
+                "M00172": 1,
+                "M00173": 1,
+                "M00174": 1,
+                "M00175": 1,
+                "M00176": 1,
+                "M00177": 1,
+                "M00178": 1,
+                "M00179": 1,
+                "M00180": 1,
+                "M00181": 1,
+                "M00182": 1,
+                "M00183": 1,
+                "M00184": 1,
+                "M00185": 1,
+                "M00186": 1,
+                "M00187": 1,
+                "M00188": 1,
+                "M00189": 1,
+                "M00190": 1,
+                "M00191": 1,
+                "M00192": 1,
+                "M00193": 1,
+                "M00194": 1,
+                "M00195": 1,
+                "M00196": 1,
+                "M00197": 1,
+                "M00198": 1,
+                "M00199": 1,
+                "M00200": 1,
+                "M00201": 1,
+                "M00202": 1,
+                "M00203": 1,
+                "M00204": 1,
+                "M00205": 1,
+                "M00206": 1,
+                "M00207": 1,
+                "M00208": 1,
+                "M00209": 1,
+                "M00210": 1,
+                "M00211": 1,
+                "M00212": 1,
+                "M00213": 1,
+                "M00214": 1,
+                "M00215": 1,
+                "M00216": 1,
+                "M00217": 1,
+                "M00218": 1,
+                "M00219": 1,
+                "M00220": 1,
+                "M00221": 1,
+                "M00222": 1,
+                "M00223": 1,
+                "M00224": 1,
+                "M00225": 1,
+                "M00226": 1,
+                "M00227": 1,
+                "M00228": 1,
+                "M00229": 1,
+                "M00230": 1,
+                "M00231": 1,
+                "M00232": 1,
+                "M00233": 1,
+                "M00234": 1,
+                "M00235": 1,
+                "M00236": 1,
+                "M00237": 1,
+                "M00238": 1,
+                "M00239": 1,
+                "M00240": 1,
+                "M00241": 1,
+                "M00242": 1,
+                "M00243": 1,
+                "M00244": 1,
+                "M00245": 1,
+                "M00246": 1,
+                "M00247": 1,
+                "M00248": 1,
+                "M00249": 1,
+                "M00250": 1,
+                "M00251": 1,
+                "M00252": 1,
+                "M00253": 1,
+                "M00254": 1,
+                "M00255": 1,
+                "M00256": 1,
+                "M00257": 1,
+                "M00258": 1,
+                "M00259": 1,
+                "M00260": 1,
+                "M00261": 1,
+                "M00262": 1,
+                "M00263": 1,
+                "M00264": 1,
+                "M00265": 1,
+                "M00266": 1,
+                "M00267": 1,
+                "M00268": 1,
+                "M00269": 1,
+                "M00270": 1,
+                "M00271": 1,
+                "M00272": 1,
+                "M00273": 1,
+                "M00274": 1,
+                "M00275": 1,
+                "M00276": 1,
+                "M00277": 1,
+                "M00278": 1,
+                "M00279": 1,
+                "M00280": 1,
+                "M00281": 1,
+                "M00282": 1,
+                "M00283": 1,
+                "M00284": 1,
+                "M00285": 1,
+                "M00286": 1,
+                "M00287": 1,
+                "M00288": 1,
+                "M00289": 1,
+                "M00290": 1,
+                "M00291": 1,
+                "M00292": 1,
+                "M00293": 1,
+                "M00294": 1,
+                "M00295": 1,
+                "M00296": 1,
+                "M00297": 1,
+                "M00298": 1,
+                "M00299": 1,
+                "M00300": 1,
+                "M00301": 1,
+                "M00302": 1,
+                "M00303": 1,
+                "M00304": 1,
+                "M00305": 1,
+                "M00306": 1,
+                "M00307": 1,
+                "M00308": 1,
+                "M00309": 1,
+                "M00310": 1,
+                "M00311": 1,
+                "M00312": 1,
+                "M00313": 1,
+                "M00314": 1,
+                "M00315": 1,
+                "M00316": 1,
+                "M00317": 1,
+                "M00318": 1,
+                "M00319": 1,
+                "M00320": 1,
+                "M00321": 1,
+                "M00322": 1,
+                "M00323": 1,
+                "M00324": 1,
+                "M00325": 1,
+                "M00326": 1,
+                "M00327": 1,
+                "M00328": 1,
+                "M00329": 1,
+                "M00330": 1,
+                "M00331": 1,
+                "M00332": 1,
+                "M00333": 1,
+                "M00334": 1,
+                "M00335": 1,
+                "M00336": 1,
+                "M00337": 1,
+                "M00338": 1,
+                "M00339": 1,
+                "M00340": 1,
+                "M00341": 1,
+                "M00342": 1,
+                "M00343": 1,
+                "M00344": 1,
+                "M00345": 1,
+                "M00346": 1,
+                "M00347": 1,
+                "M00348": 1,
+                "M00349": 1,
+                "M00350": 1,
+                "M00351": 1,
+                "M00352": 1,
+                "M00353": 1,
+                "M00354": 1,
+                "M00355": 1,
+                "M00356": 1,
+                "M00357": 1,
+                "M00358": 1,
+                "M00359": 1,
+                "M00360": 1,
+                "M00361": 1,
+                "M00362": 1,
+                "M00363": 1,
+                "M00364": 1,
+                "M00365": 1,
+                "M00366": 1,
+                "M00367": 1,
+                "M00368": 1,
+                "M00369": 1,
+                "M00370": 1,
+                "M00371": 1,
+                "M00372": 1,
+                "M00373": 1,
+                "M00374": 1,
+                "M00375": 1,
+                "M00376": 1,
+                "M00377": 1,
+                "M00378": 1,
+                "M00379": 1,
+                "M00380": 1,
+                "M00381": 1,
+                "M00382": 1,
+                "M00383": 1,
+                "M00384": 1,
+                "M00385": 1,
+                "M00386": 1,
+                "M00387": 1,
+                "M00388": 1,
+                "M00389": 1,
+                "M00390": 1,
+                "M00391": 1,
+                "M00392": 1,
+                "M00393": 1,
+                "M00394": 1,
+                "M00395": 1,
+                "M00396": 1,
+                "M00397": 1,
+                "M00398": 1,
+                "M00399": 1,
+                "M00400": 1,
+                "M00401": 1,
+                "M00402": 1,
+                "M00403": 1,
+                "M00404": 1,
+                "M00405": 1,
+                "M00406": 1,
+                "M00407": 1,
+                "M00408": 1,
+                "M00409": 1,
+                "M00410": 1,
+                "M00411": 1,
+                "M00412": 1,
+                "M00413": 1,
+                "M00414": 1,
+                "M00415": 1,
+                "M00416": 1,
+                "M00417": 1,
+                "M00418": 1,
+                "M00419": 1,
+                "M00420": 1,
+                "M00421": 1,
+                "M00422": 1,
+                "M00423": 1,
+                "M00424": 1,
+                "M00425": 1,
+                "M00426": 1,
+                "M00427": 1,
+                "M00428": 1,
+                "M00429": 1,
+                "M00430": 1,
+                "M00431": 1,
+                "M00432": 1,
+                "M00433": 1,
+                "M00434": 1,
+                "M00435": 1,
+                "M00436": 1,
+                "M00437": 1,
+                "M00438": 1,
+                "M00439": 1,
+                "M00440": 1,
+                "M00441": 1,
+                "M00442": 1,
+                "M00443": 1,
+                "M00444": 1,
+                "M00445": 1,
+                "M00446": 1,
+                "M00447": 1,
+                "M00448": 1,
+                "M00449": 1,
+                "M00450": 1,
+                "M00451": 1,
+                "M00452": 1,
+                "M00453": 1,
+                "M00454": 1,
+                "M00455": 1,
+                "M00456": 1,
+                "M00457": 1,
+                "M00458": 1,
+                "M00459": 1,
+                "M00460": 1,
+                "M00461": 1,
+                "M00462": 1,
+                "M00463": 1,
+                "M00464": 1,
+                "M00465": 1,
+                "M00466": 1,
+                "M00467": 1,
+                "M00468": 1,
+                "M00469": 1,
+                "M00470": 1,
+                "M00471": 1,
+                "M00472": 1,
+                "M00473": 1,
+                "M00474": 1,
+                "M00475": 1,
+                "M00476": 1,
+                "M00477": 1,
+                "M00478": 1,
+                "M00479": 1,
+                "M00480": 1,
+                "M00481": 1,
+                "M00482": 1,
+                "M00483": 1,
+                "M00484": 1,
+                "M00485": 1,
+                "M00486": 1,
+                "M00487": 1,
+                "M00488": 1,
+                "M00489": 1,
+                "M00490": 1,
+                "M00491": 1,
+                "M00492": 1,
+                "M00493": 1,
+                "M00494": 1,
+                "M00495": 1,
+                "M00496": 1,
+                "M00497": 1,
+                "M00498": 1,
+                "M00499": 1,
+                "M00500": 1,
+                "M00501": 1,
+                "M00502": 1,
+                "M00503": 1,
+                "M00504": 1,
+                "M00505": 1,
+                "M00506": 1,
+                "M00507": 1,
+                "M00508": 1,
+                "M00509": 1,
+                "M00510": 1,
+                "M00511": 1,
+                "M00512": 1,
+                "M00513": 1,
+                "M00514": 1,
+                "M00515": 1,
+                "M00516": 1,
+                "M00517": 1,
+                "M00518": 1,
+                "M00519": 1,
+                "M00520": 1,
+                "M00521": 1,
+                "M00522": 1,
+                "M00523": 1,
+                "M00524": 1,
+                "M00525": 1,
+                "M00526": 1,
+                "M00527": 1,
+                "M00528": 1,
+                "M00529": 1,
+                "M00530": 1,
+                "M00531": 1,
+                "M00532": 1,
+                "M00533": 1,
+                "M00534": 1,
+                "M00535": 1,
+                "M00536": 1,
+                "M00537": 1,
+                "M00538": 1,
+                "M00539": 1,
+                "M00540": 1,
+                "M00541": 1,
+                "M00542": 1,
+                "M00543": 1,
+                "M00544": 1,
+                "M00545": 1,
+                "M00546": 1,
+                "M00547": 1,
+                "M00548": 1,
+                "M00549": 1,
+                "M00550": 1,
+                "M00551": 1,
+                "M00552": 1,
+                "M00553": 1,
+                "M00554": 1,
+                "M00555": 1,
+                "M00556": 1,
+                "M00557": 1,
+                "M00558": 1,
+                "M00559": 1,
+                "M00560": 1,
+                "M00561": 1,
+                "M00562": 1,
+                "M00563": 1,
+                "M00564": 1,
+                "M00565": 1,
+                "M00566": 1,
+                "M00567": 1,
+                "M00568": 1,
+                "M00569": 1,
+                "M00570": 1,
+                "M00571": 1,
+                "M00572": 1,
+                "M00573": 1,
+                "M00574": 1,
+                "M00575": 1,
+                "M00576": 1,
+                "M00577": 1,
+                "M00578": 1,
+                "M00579": 1,
+                "M00580": 1,
+                "M00581": 1,
+                "M00582": 1,
+                "M00583": 1,
+                "M00584": 1,
+                "M00585": 1,
+                "M00586": 1,
+                "M00587": 1,
+                "M00588": 1,
+                "M00589": 1,
+                "M00590": 1,
+                "M00591": 1,
+                "M00592": 1,
+                "M00593": 1,
+                "M00594": 1,
+                "M00595": 1,
+                "M00596": 1,
+                "M00597": 1,
+                "M00598": 1,
+                "M00599": 1,
+                "M00600": 1,
+                "M00601": 1,
+                "M00602": 1,
+                "M00603": 1,
+                "M00604": 1,
+                "M00605": 1,
+                "M00606": 1,
+                "M00607": 1,
+                "M00608": 1,
+                "M00609": 1,
+                "M00610": 1,
+                "M00611": 1,
+                "M00612": 1,
+                "M00613": 1,
+                "M00614": 1,
+                "M00615": 1,
+                "M00616": 1,
+                "M00617": 1,
+                "M00618": 1,
+                "M00619": 1,
+                "M00620": 1,
+                "M00621": 1,
+                "M00622": 1,
+                "M00623": 1,
+                "M00624": 1,
+                "M00625": 1,
+                "M00626": 1,
+                "M00627": 1,
+                "M00628": 1,
+                "M00629": 1,
+                "M00630": 1,
+                "M00631": 1,
+                "M00632": 1,
+                "M00633": 1,
+                "M00634": 1,
+                "M00635": 1,
+                "M00636": 1,
+                "M00637": 1,
+                "M00638": 1,
+                "M00639": 1,
+                "M00640": 1,
+                "M00641": 1,
+                "M00642": 1,
+                "M00643": 1,
+                "M00644": 1,
+                "M00645": 1,
+                "M00646": 1,
+                "M00647": 1,
+                "M00648": 1,
+                "M00649": 1,
+                "M00650": 1,
+                "M00651": 1,
+                "M00652": 1,
+                "M00653": 1,
+                "M00654": 1,
+                "M00655": 1,
+                "M00656": 1,
+                "M00657": 1,
+                "M00658": 1,
+                "M00659": 1,
+                "M00660": 1,
+                "M00661": 1,
+                "M00662": 1,
+                "M00663": 1,
+                "M00664": 1,
+                "M00665": 1,
+                "M00666": 1,
+                "M00667": 1,
+                "M00668": 1,
+                "M00669": 1,
+                "M00670": 1,
+                "M00671": 1,
+                "M00672": 1,
+                "M00673": 1,
+                "M00674": 1,
+                "M00675": 1,
+                "M00676": 1,
+                "M00677": 1,
+                "M00678": 1,
+                "M00679": 1,
+                "M00680": 1,
+                "M00681": 1,
+                "M00682": 1,
+                "M00683": 1,
+                "M00684": 1,
+                "M00685": 1,
+                "M00686": 1,
+                "M00687": 1,
+                "M00688": 1,
+                "M00689": 1,
+                "M00690": 1,
+                "M00691": 1,
+                "M00692": 1,
+                "M00693": 1,
+                "M00694": 1,
+                "M00695": 1,
+                "M00696": 1,
+                "M00697": 1,
+                "M00698": 1,
+                "M00699": 1,
+                "M00700": 1,
+                "M00701": 1,
+                "M00702": 1,
+                "M00703": 1,
+                "M00704": 1,
+                "M00705": 1,
+                "M00706": 1,
+                "M00707": 1,
+                "M00708": 1,
+                "M00709": 1,
+                "M00710": 1,
+                "M00711": 1,
+                "M00712": 1,
+                "M00713": 1,
+                "M00714": 1,
+                "M00715": 1,
+                "M00716": 1,
+                "M00717": 1,
+                "M00718": 1,
+                "M00719": 1,
+                "M00720": 1,
+                "M00721": 1,
+                "M00722": 1,
+                "M00723": 1,
+                "M00724": 1,
+                "M00725": 1,
+                "M00726": 1,
+                "M00727": 1,
+                "M00728": 1,
+                "M00729": 1,
+                "M00730": 1,
+                "M00731": 1,
+                "M00732": 1,
+                "M00733": 1,
+                "M00734": 1,
+                "M00735": 1,
+                "M00736": 1,
+                "M00737": 1,
+                "M00738": 1,
+                "M00739": 1,
+                "M00740": 1,
+                "M00741": 1,
+                "M00742": 1,
+                "M00743": 1,
+                "M00744": 1,
+                "M00745": 1,
+                "M00746": 1,
+                "M00747": 1,
+                "M00748": 1,
+                "M00749": 1,
+                "M00750": 1,
+                "M00751": 1,
+                "M00752": 1,
+                "M00753": 1,
+                "M00754": 1,
+                "M00755": 1,
+                "M00756": 1,
+                "M00757": 1,
+                "M00758": 1,
+                "M00759": 1,
+                "M00760": 1,
+                "M00761": 1,
+                "M00762": 1,
+                "M00763": 1,
+                "M00764": 1,
+                "M00765": 1,
+                "M00766": 1,
+                "M00767": 1,
+                "M00768": 1,
+                "M00769": 1,
+                "M00770": 1,
+                "M00771": 1,
+                "M00772": 1,
+                "M00773": 1,
+                "M00774": 1,
+                "M00775": 1,
+                "M00776": 1,
+                "M00777": 1,
+                "M00778": 1,
+                "M00779": 1,
+                "M00780": 1,
+                "M00781": 1,
+                "M00782": 1,
+                "M00783": 1,
+                "M00784": 1,
+                "M00785": 1,
+                "M00786": 1,
+                "M00787": 1,
+                "M00788": 1,
+                "M00789": 1,
+                "M00790": 1,
+                "M00791": 1,
+                "M00792": 1,
+                "M00793": 1,
+                "M00794": 1,
+                "M00795": 1,
+                "M00796": 1,
+                "M00797": 1,
+                "M00798": 1,
+                "M00799": 1,
+                "M00800": 1,
+                "M00801": 1,
+                "M00802": 1,
+                "M00803": 1,
+                "M00804": 1,
+                "M00805": 1,
+                "M00806": 1,
+                "M00807": 1,
+                "M00808": 1,
+                "M00809": 1,
+                "M00810": 1,
+                "M00811": 1,
+                "M00812": 1,
+                "M00813": 1,
+                "M00814": 1,
+                "M00815": 1,
+                "M00816": 1,
+                "M00817": 1,
+                "M00818": 1,
+                "M00819": 1,
+                "M00820": 1,
+                "M00821": 1,
+                "M00822": 1,
+                "M00823": 1,
+                "M00824": 1,
+                "M00825": 1,
+                "M00826": 1,
+                "M00827": 1,
+                "M00828": 1,
+                "M00829": 1,
+                "M00830": 1,
+                "M00831": 1,
+                "M00832": 1,
+                "M00833": 1,
+                "M00834": 1,
+                "M00835": 1,
+                "M00836": 1,
+                "M00837": 1,
+                "M00838": 1,
+                "M00839": 1,
+                "M00840": 1,
+                "M00841": 1,
+                "M00842": 1,
+                "M00843": 1,
+                "M00844": 1,
+                "M00845": 1,
+                "M00846": 1,
+                "M00847": 1,
+                "M00848": 1,
+                "M00849": 1,
+                "M00850": 1,
+                "M00851": 1,
+                "M00852": 1,
+                "M00853": 1,
+                "M00854": 1,
+                "M00855": 1,
+                "M00856": 1,
+                "M00857": 1,
+                "M00858": 1,
+                "M00859": 1,
+                "M00860": 1,
+                "M00861": 1,
+                "M00862": 1,
+                "M00863": 1,
+                "M00864": 1,
+                "M00865": 1,
+                "M00866": 1,
+                "M00867": 1,
+                "M00868": 1,
+                "M00869": 1,
+                "M00870": 1,
+                "M00871": 1,
+                "M00872": 1,
+                "M00873": 1,
+                "M00874": 1,
+                "M00875": 1,
+                "M00876": 1,
+                "M00877": 1,
+                "M00878": 1,
+                "M00879": 1,
+                "M00880": 1,
+                "M00881": 1,
+                "M00882": 1,
+                "M00883": 1,
+                "M00884": 1,
+                "M00885": 1,
+                "M00886": 1,
+                "M00887": 1,
+                "M00888": 1,
+                "M00889": 1,
+                "M00890": 1,
+                "M00891": 1,
+                "M00892": 1,
+                "M00893": 1,
+                "M00894": 1,
+                "M00895": 1,
+                "M00896": 1,
+                "M00897": 1,
+                "M00898": 1,
+                "M00899": 1,
+                "The": 891,
+                "blue": 892,
+                "cabinet": 891,
+                "each": 892,
+                "folder": 892,
+                "for": 892,
+                "keeps": 891,
+                "one": 891,
+                "route.": 892
+              },
+              "name": "companion-pdf-source-tokens",
+              "passed": false
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "profile": {
+            "comments": "margin",
+            "review": "final"
+          },
+          "inputSha256": "bf6404d1edaeee0fd72c3e9521872a6ee3e5130c35c3fc754e718d5e2e577c21",
+          "runtime": {
+            "rendererFingerprint": "b10f94efda7cd9c31412a9097a7820b7b3dfc1b9e1ea2ed235afc0fd915d7c12",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          },
+          "files": {
+            "1-candidate.png": "da046c9d27b5333fe695d713f8beadad242e14721b948689e2b91c6921e36c40",
+            "1-overlay.png": "42bfc04626f3c9fce71b56f724796fab18f253563ab9ea8653d5eae4151e6cec",
+            "1-reference.png": "3b003bd146ab20c0d79955dc0ff347a0060c855d92f38384397ca3f6eb17f44f",
+            "candidate.pdf": "b9591bdfb31e722db55bbabcc1d80240eae6fac0198a782258be1e5643f2dc12",
+            "companion-production.json": "9aadd33d34b2798476828e78d99fa5b1f4e6729ae9b1a569138f246a940d42b0",
+            "companion.pdf": "7000366ab3508c628e202d766ab4667735f8e4a56b53b41b0c800c3869ffcf33",
+            "evidence.json": "8dce852efe061ab7b7526ac0a4e7c621fcaf0949fe491033253b42513835d8bd",
+            "production.json": "60a5666bb83720467d7cba9569ea147ffc5e4e286780a17b82eb4652604f6b6a",
+            "reference.pdf": "3e97256ac03dec8dac3c9f94da77f603bf9f38c8ab7699e941edf981bb24809d"
+          },
+          "pagesPng": [
+            {
+              "path": "production-rasters/baseline/comments-complete-single-900/page-1.png",
+              "sha256": "062eeb00cee024d5bff662297a3d3e6ebde3538bed6f2234d6d2953339ed77aa"
+            }
+          ],
+          "pageCount": 1,
+          "companionRuntime": {
+            "rendererFingerprint": "ab78e72c358bcba2f5ca5f23ad8ad5a25c0f72ea39bc922ccb49d19fb23f5169",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          }
+        },
+        "comments-complete-paragraphs-30": {
+          "score": 0.0,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "error": "Companion conversion failed: {'code': 'output_verification_failure', 'phase': 'conversion', 'message': 'source anchor p:cmt:5505a75101a740304e2cafed6efbef07 has no measurable fragment in the paginated layout'}",
+              "name": "companion-pdf-artifact",
+              "passed": false
+            }
+          ],
+          "profile": {
+            "comments": "margin",
+            "review": "final"
+          },
+          "inputSha256": "3f48588d7c26dd8afb75bb48c164cab9c025fdc51224eff5f9cea051610c62b2",
+          "runtime": {
+            "rendererFingerprint": "b10f94efda7cd9c31412a9097a7820b7b3dfc1b9e1ea2ed235afc0fd915d7c12",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          },
+          "files": {
+            "1-candidate.png": "da046c9d27b5333fe695d713f8beadad242e14721b948689e2b91c6921e36c40",
+            "1-overlay.png": "42bfc04626f3c9fce71b56f724796fab18f253563ab9ea8653d5eae4151e6cec",
+            "1-reference.png": "3b003bd146ab20c0d79955dc0ff347a0060c855d92f38384397ca3f6eb17f44f",
+            "candidate.pdf": "edc76f4fc4881a37f408541c92f66e15ed8ff96a9be057ed5bcd726719137c85",
+            "evidence.json": "a62d79abd6f0ca6ec4a6804a07948aca73bb1b172611704c002b0a29a3722b57",
+            "production.json": "d25bd7b447b47470dcdb07873f03430e0ff21287e569fc41edb1be17d3e25677",
+            "reference.pdf": "bc68f1df3e4be5a53888428801c7e5611983c9238bc183ea0f80370138cbea9e"
+          },
+          "pagesPng": [],
+          "pageCount": 0,
+          "error": {
+            "code": "output_verification_failure",
+            "message": "source anchor p:cmt:5505a75101a740304e2cafed6efbef07 has no measurable fragment in the paginated layout",
+            "phase": "conversion"
+          }
+        },
+        "comments-complete-many-notes": {
+          "score": 0.0,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "error": "Companion conversion failed: {'code': 'output_verification_failure', 'phase': 'conversion', 'message': 'source anchor p:cmt:e035a526f84c12601b71591b113fb77b has no measurable fragment in the paginated layout'}",
+              "name": "companion-pdf-artifact",
+              "passed": false
+            }
+          ],
+          "profile": {
+            "comments": "margin",
+            "review": "final"
+          },
+          "inputSha256": "5bc79f347ca938897b680147025dc20ca0d7549260eaf7687b1e62b9768a4623",
+          "runtime": {
+            "rendererFingerprint": "b10f94efda7cd9c31412a9097a7820b7b3dfc1b9e1ea2ed235afc0fd915d7c12",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          },
+          "files": {
+            "1-candidate.png": "da046c9d27b5333fe695d713f8beadad242e14721b948689e2b91c6921e36c40",
+            "1-overlay.png": "42bfc04626f3c9fce71b56f724796fab18f253563ab9ea8653d5eae4151e6cec",
+            "1-reference.png": "3b003bd146ab20c0d79955dc0ff347a0060c855d92f38384397ca3f6eb17f44f",
+            "candidate.pdf": "0e46d7927be18d8040f2391d6cba9c0d13b881bc237f1bfb23958998c78b090c",
+            "evidence.json": "b536d52850a2bb195de0a45a9ec351df606c3a1ab79b8395119fc8556adb908f",
+            "production.json": "6d0b4c6e12696400fba63c6545f4b1ab8fb3d1571b2696871be0f7157562dcf4",
+            "reference.pdf": "467cca6e7607c5d62182d4acb471dd25edc876d5f4d203c4f22ccd320a9fd7b2"
+          },
+          "pagesPng": [],
+          "pageCount": 0,
+          "error": {
+            "code": "output_verification_failure",
+            "message": "source anchor p:cmt:e035a526f84c12601b71591b113fb77b has no measurable fragment in the paginated layout",
+            "phase": "conversion"
+          }
+        },
+        "comments-complete-nested-replies": {
+          "score": 0.0,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "error": "Companion conversion failed: {'code': 'output_verification_failure', 'phase': 'conversion', 'message': 'source anchor cmt:cmt:a8388509f14e98aa76e80baf7fa51a26 has no measurable fragment in the paginated layout'}",
+              "name": "companion-pdf-artifact",
+              "passed": false
+            }
+          ],
+          "profile": {
+            "comments": "margin",
+            "review": "final"
+          },
+          "inputSha256": "461e31e7639368a06b083452867c1dc2f06d057f1e2b79e042bbea18cafa7da2",
+          "runtime": {
+            "rendererFingerprint": "b10f94efda7cd9c31412a9097a7820b7b3dfc1b9e1ea2ed235afc0fd915d7c12",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          },
+          "files": {
+            "1-candidate.png": "da046c9d27b5333fe695d713f8beadad242e14721b948689e2b91c6921e36c40",
+            "1-overlay.png": "42bfc04626f3c9fce71b56f724796fab18f253563ab9ea8653d5eae4151e6cec",
+            "1-reference.png": "3b003bd146ab20c0d79955dc0ff347a0060c855d92f38384397ca3f6eb17f44f",
+            "candidate.pdf": "0ef048f21c290613d571828dda1dd8ec22749529a01f315b718dc7328566c643",
+            "evidence.json": "3c87f212ebecf0a197377c63dcf108ad31408d0f0381956b45187505be6fca3a",
+            "production.json": "bfc5b45eb9b447e37621c4f46dfe10d75b0f8d9a7c3c62d41bccd5b6466c8b80",
+            "reference.pdf": "bbed210c046f42ba9a7fdbfde9fd8e0b5a804ae3d765f12921024f3061e3b28b"
+          },
+          "pagesPng": [],
+          "pageCount": 0,
+          "error": {
+            "code": "output_verification_failure",
+            "message": "source anchor cmt:cmt:a8388509f14e98aa76e80baf7fa51a26 has no measurable fragment in the paginated layout",
+            "phase": "conversion"
+          }
+        },
+        "comments-complete-short-control": {
+          "score": 99.9944250506173,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "profile": {
+            "comments": "margin",
+            "review": "final"
+          },
+          "inputSha256": "b18678681be500ae3419998509c5540e5bed6345e1e3d96da0376260b9282f52",
+          "runtime": {
+            "rendererFingerprint": "b10f94efda7cd9c31412a9097a7820b7b3dfc1b9e1ea2ed235afc0fd915d7c12",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          },
+          "files": {
+            "1-candidate.png": "da046c9d27b5333fe695d713f8beadad242e14721b948689e2b91c6921e36c40",
+            "1-overlay.png": "42bfc04626f3c9fce71b56f724796fab18f253563ab9ea8653d5eae4151e6cec",
+            "1-reference.png": "3b003bd146ab20c0d79955dc0ff347a0060c855d92f38384397ca3f6eb17f44f",
+            "candidate.pdf": "14560347920fbbf6ae33ccd4029db77ebac732d00c2580986b004830ad2ecceb",
+            "companion-production.json": "b9c91399e3e4a6cd22d7a521e6f1cb9d1c587c20ec34713f8b2956b6d2759565",
+            "companion.pdf": "00f0d4c276904abe37f722d14727cbebfc0389e03b1ad54edbf15e0207ab9f95",
+            "evidence.json": "d640ce2029f23648085b22ef0d1ae3a1e9c33be9bd2f2384dbca5c254161664e",
+            "production.json": "f378add8f49377c5fadb95e2247794d259a1692cf5c0a0fee7de62154704ec8d",
+            "reference.pdf": "bfd382dc30c0634c1323228f22d12f69775a2abcd70d80d5ade789e2307be8ca"
+          },
+          "pagesPng": [
+            {
+              "path": "production-rasters/baseline/comments-complete-short-control/page-1.png",
+              "sha256": "b564325013965eae11bf8d5b8351ccdff10acd0aa874ff1dd367f18a15820090"
+            }
+          ],
+          "pageCount": 1,
+          "companionRuntime": {
+            "rendererFingerprint": "ab78e72c358bcba2f5ca5f23ad8ad5a25c0f72ea39bc922ccb49d19fb23f5169",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          }
+        },
+        "comments-complete-hidden-control": {
+          "score": 99.9944250506173,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "expected": [
+                0,
+                0,
+                612,
+                792
+              ],
+              "name": "companion-pdf-paper-geometry",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "companion-pdf-source-tokens",
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-bounds",
+              "outside": [],
+              "passed": true
+            },
+            {
+              "name": "companion-pdf-source-paint",
+              "passed": true,
+              "unpainted": []
+            }
+          ],
+          "profile": {
+            "comments": "hidden",
+            "review": "final"
+          },
+          "inputSha256": "bf6404d1edaeee0fd72c3e9521872a6ee3e5130c35c3fc754e718d5e2e577c21",
+          "runtime": {
+            "rendererFingerprint": "b10f94efda7cd9c31412a9097a7820b7b3dfc1b9e1ea2ed235afc0fd915d7c12",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          },
+          "files": {
+            "1-candidate.png": "da046c9d27b5333fe695d713f8beadad242e14721b948689e2b91c6921e36c40",
+            "1-overlay.png": "42bfc04626f3c9fce71b56f724796fab18f253563ab9ea8653d5eae4151e6cec",
+            "1-reference.png": "3b003bd146ab20c0d79955dc0ff347a0060c855d92f38384397ca3f6eb17f44f",
+            "candidate.pdf": "66922f13fd04096e781a500f7cb8551f97b2c26537b920cbe4bbebe58b8fcec6",
+            "companion-production.json": "82c7bc6f813e0421280694a5e1a755f83a070a2e1fa2cecf0af9d19424b4a034",
+            "companion.pdf": "704ecad4c225d31733ec1a7baa03cffa3e8c747afb8282b68455c3f0aa8274ce",
+            "evidence.json": "f076e80b4764f617f6a29bd0422f0ddcb33ad0ff1e9fdf5289a8a1f096bf9928",
+            "production.json": "4977fa6ee98113ca6250694f2726a104e9a1925d8c13a5314a385ca5e57d85e2",
+            "reference.pdf": "5a2ef718fc9d856f6ee8553e310c2faf96a061080df7d1680169ad285bb5ce43"
+          },
+          "pagesPng": [
+            {
+              "path": "production-rasters/baseline/comments-complete-hidden-control/page-1.png",
+              "sha256": "fc0e6016c49163bf5be5e887156514277facf6598dba200b2d1afdf3bf3bd21a"
+            }
+          ],
+          "pageCount": 1,
+          "companionRuntime": {
+            "rendererFingerprint": "b10f94efda7cd9c31412a9097a7820b7b3dfc1b9e1ea2ed235afc0fd915d7c12",
+            "verification": "nodeVerified",
+            "fidelityTier": "releaseBaselined",
+            "observed": {
+              "runtimeKind": "nodeChromium",
+              "locale": "en-US",
+              "timezone": "UTC",
+              "viewport": [
+                1600,
+                1200
+              ],
+              "deviceScaleFactor": 1,
+              "media": {
+                "colorScheme": "light",
+                "reducedMotion": "reduce",
+                "forcedColors": "none",
+                "printMedia": true
+              },
+              "networkIsolation": "ownedProcessRestricted",
+              "playwrightVersion": "1.57.0",
+              "browserProduct": "Chromium",
+              "browserBuild": "143.0.7499.4",
+              "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+              "launchFlags": [
+                "--disable-background-networking",
+                "--disable-component-update",
+                "--disable-default-apps",
+                "--disable-domain-reliability",
+                "--disable-sync",
+                "--host-resolver-rules=MAP * ~NOTFOUND",
+                "--metrics-recording-only",
+                "--no-default-browser-check",
+                "--no-first-run"
+              ],
+              "operatingSystem": "linux",
+              "architecture": "x64"
+            }
+          }
+        }
+      }
+    }
+  },
+  "controls": {
+    "comments-complete-single-30": {
+      "primaryPagePngByteIdentical": true,
+      "referencePagePngByteIdentical": true
+    },
+    "comments-complete-single-900": {
+      "primaryPagePngByteIdentical": true,
+      "referencePagePngByteIdentical": true
+    },
+    "comments-complete-paragraphs-30": {
+      "primaryPagePngByteIdentical": true,
+      "referencePagePngByteIdentical": true
+    },
+    "comments-complete-many-notes": {
+      "primaryPagePngByteIdentical": true,
+      "referencePagePngByteIdentical": true
+    },
+    "comments-complete-nested-replies": {
+      "primaryPagePngByteIdentical": true,
+      "referencePagePngByteIdentical": true
+    },
+    "comments-complete-short-control": {
+      "primaryPagePngByteIdentical": true,
+      "referencePagePngByteIdentical": true,
+      "companionPagePngByteIdentical": true
+    },
+    "comments-complete-hidden-control": {
+      "primaryPagePngByteIdentical": true,
+      "referencePagePngByteIdentical": true,
+      "companionPagePngByteIdentical": true
+    }
+  },
+  "screenshots": {
+    "comments-complete-single-30": {
+      "file": "comments-complete-single-30-production.png",
+      "sha256": "bb8306f1db21398c500aa4ce39f83c3157ac8712ab1bd6176d0dbb4027aeee09",
+      "panels": [
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-rasters/baseline/comments-complete-single-30/page-1.png",
+          "sha256": "062eeb00cee024d5bff662297a3d3e6ebde3538bed6f2234d6d2953339ed77aa"
+        },
+        {
+          "provider": "baseline",
+          "page": 2,
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-single-30/page-1.png",
+          "sha256": "47b1c21252cdea5748e81fd7eb4a1927ca6c13faa7e4d2c99d8c73c158e73b76"
+        },
+        {
+          "provider": "candidate",
+          "page": 2,
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-single-30/page-2.png",
+          "sha256": "19c7fe1cc548c3bc012311a3d5295d07162ece4e88d5ea8b85f7d07b3d79ec30"
+        }
+      ]
+    },
+    "comments-complete-single-900": {
+      "file": "comments-complete-single-900-production.png",
+      "sha256": "e907bbed5c07bb28807772cf04e50b39ae86f9272904fc55cea2dc1308bfae19",
+      "panels": [
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-rasters/baseline/comments-complete-single-900/page-1.png",
+          "sha256": "062eeb00cee024d5bff662297a3d3e6ebde3538bed6f2234d6d2953339ed77aa"
+        },
+        {
+          "provider": "baseline",
+          "page": 2,
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "baseline",
+          "page": 3,
+          "bounds": [
+            16,
+            2186,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "baseline",
+          "page": 4,
+          "bounds": [
+            16,
+            3242,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "baseline",
+          "page": 5,
+          "bounds": [
+            16,
+            4298,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "baseline",
+          "page": 6,
+          "bounds": [
+            16,
+            5354,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "baseline",
+          "page": 7,
+          "bounds": [
+            16,
+            6410,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "baseline",
+          "page": 8,
+          "bounds": [
+            16,
+            7466,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "baseline",
+          "page": 9,
+          "bounds": [
+            16,
+            8522,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "baseline",
+          "page": 10,
+          "bounds": [
+            16,
+            9578,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "baseline",
+          "page": 11,
+          "bounds": [
+            16,
+            10634,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-single-900/page-01.png",
+          "sha256": "47b1c21252cdea5748e81fd7eb4a1927ca6c13faa7e4d2c99d8c73c158e73b76"
+        },
+        {
+          "provider": "candidate",
+          "page": 2,
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-single-900/page-02.png",
+          "sha256": "16c5b1a3db025a48055e6a80cd42f3a38ef83453e43be46a724518364d0ec4ab"
+        },
+        {
+          "provider": "candidate",
+          "page": 3,
+          "bounds": [
+            848,
+            2186,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-single-900/page-03.png",
+          "sha256": "8090d3a7ff1cb16ea076b8dcb28bb6bd076af34fdd6930b6a905fa88bdb8b9d2"
+        },
+        {
+          "provider": "candidate",
+          "page": 4,
+          "bounds": [
+            848,
+            3242,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-single-900/page-04.png",
+          "sha256": "c261eab0cc8e626b5579e2c90e1b74ba428b59b87872bfe71b53f18f730ed837"
+        },
+        {
+          "provider": "candidate",
+          "page": 5,
+          "bounds": [
+            848,
+            4298,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-single-900/page-05.png",
+          "sha256": "e06c07c4c12ea71a011d592b072452fde4024c301e19b18df93385b7a6050380"
+        },
+        {
+          "provider": "candidate",
+          "page": 6,
+          "bounds": [
+            848,
+            5354,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-single-900/page-06.png",
+          "sha256": "0e8ec2f2535f9b1b23e51201a18dbcb9254efd4bdc3ac067b3894e7e492efc6c"
+        },
+        {
+          "provider": "candidate",
+          "page": 7,
+          "bounds": [
+            848,
+            6410,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-single-900/page-07.png",
+          "sha256": "9161d8a24865c7cc5cbdd50cd66c1d9fb7e9ba72d2b28d1c70b2c703604a1279"
+        },
+        {
+          "provider": "candidate",
+          "page": 8,
+          "bounds": [
+            848,
+            7466,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-single-900/page-08.png",
+          "sha256": "85467cd79b47d45fe650974c74e5b4475358bb520928b40ff93b07855309edf2"
+        },
+        {
+          "provider": "candidate",
+          "page": 9,
+          "bounds": [
+            848,
+            8522,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-single-900/page-09.png",
+          "sha256": "c17551a4deff1f3474d29ae74ae09ba0417d39d1c7ca2c530a9d928c2eef82ef"
+        },
+        {
+          "provider": "candidate",
+          "page": 10,
+          "bounds": [
+            848,
+            9578,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-single-900/page-10.png",
+          "sha256": "c0c362b1fc513c6ad05ca96c8d89a70fdc67a662ea6cec71923df5ddb8c5ec97"
+        },
+        {
+          "provider": "candidate",
+          "page": 11,
+          "bounds": [
+            848,
+            10634,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-single-900/page-11.png",
+          "sha256": "9074dc442fce125bf7874406af485b01ecd35596d29a5d23490dad6366f0ba07"
+        }
+      ]
+    },
+    "comments-complete-paragraphs-30": {
+      "file": "comments-complete-paragraphs-30-production.png",
+      "sha256": "6ef4ae8d42cce13aa22f663b6001e0285bc6d85e97080d3e5039ce673551a145",
+      "panels": [
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "baseline",
+          "page": 2,
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-paragraphs-30/page-1.png",
+          "sha256": "47b1c21252cdea5748e81fd7eb4a1927ca6c13faa7e4d2c99d8c73c158e73b76"
+        },
+        {
+          "provider": "candidate",
+          "page": 2,
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-paragraphs-30/page-2.png",
+          "sha256": "627fef502c0fd17d539e0b9909fcca705fd65eecf8d90ac565b97f3847e748c5"
+        }
+      ]
+    },
+    "comments-complete-many-notes": {
+      "file": "comments-complete-many-notes-production.png",
+      "sha256": "b82400fba8c9d89dcf1c4568765f22dc1ab35ae131b8cfba1e6d73ebb81f7118",
+      "panels": [
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "baseline",
+          "page": 2,
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "baseline",
+          "page": 3,
+          "bounds": [
+            16,
+            2186,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "baseline",
+          "page": 4,
+          "bounds": [
+            16,
+            3242,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-many-notes/page-1.png",
+          "sha256": "bc5b3fc7028b9131ae18f5138cacfd6b3f6c750e96a0d902975d3f4ea2348726"
+        },
+        {
+          "provider": "candidate",
+          "page": 2,
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-many-notes/page-2.png",
+          "sha256": "304d9dbcaf96c652862b316313c35c3de8db9ad2cfd32c9e8f393a20bf50a88e"
+        },
+        {
+          "provider": "candidate",
+          "page": 3,
+          "bounds": [
+            848,
+            2186,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-many-notes/page-3.png",
+          "sha256": "d6e6326e181bb6c89a415d7719f9d56d97b77fa166168d62e2da762853d5f2d3"
+        },
+        {
+          "provider": "candidate",
+          "page": 4,
+          "bounds": [
+            848,
+            3242,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-many-notes/page-4.png",
+          "sha256": "76dd3a1869a6388522fb16e41320412611d985beb5a3f73adc7f459e2cda0dd8"
+        }
+      ]
+    },
+    "comments-complete-nested-replies": {
+      "file": "comments-complete-nested-replies-production.png",
+      "sha256": "bf6ecf013fdf68c2f08c008f28df0e116778f91659a4fd358ecbf3ab1fdb740b",
+      "panels": [
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "baseline",
+          "page": 2,
+          "bounds": [
+            16,
+            1130,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "baseline",
+          "page": 3,
+          "bounds": [
+            16,
+            2186,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "baseline",
+          "page": 4,
+          "bounds": [
+            16,
+            3242,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "baseline",
+          "page": 5,
+          "bounds": [
+            16,
+            4298,
+            816,
+            1056
+          ],
+          "missingPage": true
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-nested-replies/page-1.png",
+          "sha256": "7e5e38909e21f8099cb9edc23e8d15fefe939d7702968473176262791ce95594"
+        },
+        {
+          "provider": "candidate",
+          "page": 2,
+          "bounds": [
+            848,
+            1130,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-nested-replies/page-2.png",
+          "sha256": "16c5b1a3db025a48055e6a80cd42f3a38ef83453e43be46a724518364d0ec4ab"
+        },
+        {
+          "provider": "candidate",
+          "page": 3,
+          "bounds": [
+            848,
+            2186,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-nested-replies/page-3.png",
+          "sha256": "74579ca0382d12b2b50940ef1e51612be7557d2091b5e9f9d1c47e4e261aa47e"
+        },
+        {
+          "provider": "candidate",
+          "page": 4,
+          "bounds": [
+            848,
+            3242,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-nested-replies/page-4.png",
+          "sha256": "bf90b2ec62c0b8bcec2f56f68dad9b9a37c79cb37965684b2191187f1e9d3a07"
+        },
+        {
+          "provider": "candidate",
+          "page": 5,
+          "bounds": [
+            848,
+            4298,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-nested-replies/page-5.png",
+          "sha256": "6a5f3e1071e398c6ee52cb3cb9014e851f1de498782c7d1f14b483f5fcd03c78"
+        }
+      ]
+    },
+    "comments-complete-short-control": {
+      "file": "comments-complete-short-control-production.png",
+      "sha256": "57911f1459e409c33ea72bd4fc398af87a7de4190dcdae125a5700bb556ac16d",
+      "panels": [
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-rasters/baseline/comments-complete-short-control/page-1.png",
+          "sha256": "b564325013965eae11bf8d5b8351ccdff10acd0aa874ff1dd367f18a15820090"
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-short-control/page-1.png",
+          "sha256": "b564325013965eae11bf8d5b8351ccdff10acd0aa874ff1dd367f18a15820090"
+        }
+      ]
+    },
+    "comments-complete-hidden-control": {
+      "file": "comments-complete-hidden-control-production.png",
+      "sha256": "32b432f49805147c9d809c7d2a9ca1ba4c1622ee900ab7b0c1db93d216831fc3",
+      "panels": [
+        {
+          "provider": "baseline",
+          "page": 1,
+          "bounds": [
+            16,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-rasters/baseline/comments-complete-hidden-control/page-1.png",
+          "sha256": "fc0e6016c49163bf5be5e887156514277facf6598dba200b2d1afdf3bf3bd21a"
+        },
+        {
+          "provider": "candidate",
+          "page": 1,
+          "bounds": [
+            848,
+            74,
+            816,
+            1056
+          ],
+          "path": "production-rasters/candidate/comments-complete-hidden-control/page-1.png",
+          "sha256": "fc0e6016c49163bf5be5e887156514277facf6598dba200b2d1afdf3bf3bd21a"
+        }
+      ]
+    }
+  },
+  "scriptSha256": "616573d3ab35a91950bae24f3956315a6ad6dd9fa7a14a747458c1b980a27b3d"
+}

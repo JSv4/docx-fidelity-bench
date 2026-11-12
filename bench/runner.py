@@ -7,10 +7,11 @@ from pathlib import Path
 from . import adapters, metrics, pdf, report, reference_controls, html_artifacts
 from .common import WORD_TRACKS, ROOT, contained, digest, identity, read_json, validate_registry, write_json
 from .environment import environment
+from .suites import select_suite
 
 
-def reference_bundle(output):
-    registry = validate_registry()
+def reference_bundle(output, suite=None, registry=None):
+    registry = select_suite(validate_registry(registry), suite)
     env = environment([f for c in registry['cases'] for f in c['fonts']])
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=False)
@@ -23,7 +24,7 @@ def reference_bundle(output):
         info = pdf.inspect_case_pdf(path, case)
         failures = pdf.reference_failures(case, info, 'libreoffice')
         eligible = not failures
-        bundle['cases'][case['id']] = {'inputSha256': case['sha256'], 'pdf': str(path.relative_to(output)), 'pdfSha256': digest(path), 'renderer': response['renderer'], 'eligible': eligible, 'ineligibleChecks': failures, 'inspection': info}
+        bundle['cases'][case['id']] = {'inputSha256': case['sha256'], 'pdf': path.relative_to(output).as_posix(), 'pdfSha256': digest(path), 'renderer': response['renderer'], 'eligible': eligible, 'ineligibleChecks': failures, 'inspection': info}
         write_json(output / 'bundle.json', bundle)
         print(case['id'] + (': reference registered' if eligible else ': reference ineligible (' + ', '.join(failures) + ')'), flush=True)
     return bundle
@@ -34,6 +35,22 @@ def validate_bundle(bundle, root, registry, env):
         raise ValueError('Unknown reference track or bundle version')
     if bundle['suiteDigest'] != identity(registry) or bundle['environment'] != env['contract']:
         raise ValueError('Reference suite or measurement/font environment changed')
+    font_bindings = bundle.get('capture', {}).get('fontIdentityBindings', {})
+    if (not isinstance(font_bindings, dict) or
+            not set(font_bindings).issubset(bundle['cases'])):
+        raise ValueError('Word font bindings must address exact registered capture cases')
+    if font_bindings:
+        from . import word_fonts
+        capture = bundle['capture']
+        if (bundle['track'] not in WORD_TRACKS or capture.get('track') != bundle['track'] or
+                capture.get('rightsApproved') is not True or
+                capture.get('profile') != {'review': 'final', 'comments': 'hidden'} or
+                capture.get('fontContract') != env['contract']['fonts'] or
+                bundle.get('fontIdentityInspectorVersion') != word_fonts.VERSION or
+                bundle.get('fontIdentityInspectorSha256') != digest(Path(word_fonts.__file__))):
+            raise ValueError('Word font identity binding verifier changed or is unverified')
+    elif any(key in bundle for key in ('fontIdentityInspectorVersion', 'fontIdentityInspectorSha256')):
+        raise ValueError('Word font identity evidence lacks its capture bindings')
     source_bundle = None
     if bundle['track'] == reference_controls.TRACK:
         if bundle.get('sourceBundle') != 'direct/bundle.json' or bundle.get('controlPolicy') != reference_controls.policy():
@@ -51,6 +68,11 @@ def validate_bundle(bundle, root, registry, env):
         case = next((c for c in registry['cases'] if c['id'] == cid), None)
         if not case or case['sha256'] != entry['inputSha256'] or digest(contained(root, entry['pdf'])) != entry['pdfSha256']:
             raise ValueError('Stale or unknown reference: ' + cid)
+        if cid in font_bindings:
+            captured = bundle['capture'].get('cases', {}).get(cid, {})
+            if (captured.get('inputSha256') != entry['inputSha256'] or
+                    captured.get('pdfSha256') != entry['pdfSha256']):
+                raise ValueError('Word font binding capture digests changed: ' + cid)
         if case.get('pdfTextNormalization') and entry.get('inspection', {}).get('pdfTextNormalization') != case['pdfTextNormalization']:
             raise ValueError('Reference PDF text normalization evidence is missing or changed')
         if source_bundle is not None:
@@ -63,8 +85,8 @@ def validate_bundle(bundle, root, registry, env):
                     raise ValueError('Equivalent-control capture evidence changed: ' + cid)
 
 
-def equivalent_reference_bundle(output, reference):
-    registry = validate_registry()
+def equivalent_reference_bundle(output, reference, registry=None):
+    registry = validate_registry(registry)
     env = environment([f for c in registry['cases'] for f in c['fonts']])
     source_root = Path(reference).resolve().parent
     original = read_json(reference)
@@ -93,7 +115,7 @@ def equivalent_reference_bundle(output, reference):
         path = output / cid / 'reference.pdf'
         path.parent.mkdir()
         shutil.copyfile(contained(source_root, capture['pdf']), path)
-        entry = dict(capture, inputSha256=case['sha256'], pdf=str(path.relative_to(output)), referenceSource=source)
+        entry = dict(capture, inputSha256=case['sha256'], pdf=path.relative_to(output).as_posix(), referenceSource=source)
         bundle['cases'][cid] = entry
         print(cid + ': ' + source['kind'] + ' reference from ' + source['caseId'] +
               (' registered' if entry['eligible'] else ' ineligible'), flush=True)
@@ -102,8 +124,47 @@ def equivalent_reference_bundle(output, reference):
     return bundle
 
 
-def run(output, reference, adapter, candidate):
-    registry = validate_registry()
+def render_companion(adapter, request, declaration, folder, primary):
+    """Print and inspect a second profile; a primary PDF cannot stand in for this output."""
+    evidence = {'profile': declaration['profile']}
+    try:
+        companion_request = {k: v for k, v in request.items() if not k.startswith('html')}
+        companion_request.update(profile=declaration['profile'], output=str(folder / 'companion.pdf'),
+                                 report=str(folder / 'companion-production.json'))
+        response = adapters.render(adapter, companion_request)
+        evidence['adapter'] = response
+        if response['status'] != 'ok':
+            raise ValueError('Companion conversion failed: ' + str(response.get('error')))
+        production = read_json(folder / 'companion-production.json')
+        original = read_json(request['report'])
+        profile = production.get('options', {})
+        expected = declaration['profile']
+        pdf_sha = digest(folder / 'companion.pdf')
+        environment = production.get('environment', {})
+        original_environment = original.get('environment', {})
+        # rendererFingerprint includes the view profile; the observed process/runtime does not.
+        if (response.get('renderer') != primary.get('renderer') or
+                production.get('status') != 'complete' or production.get('source') != original.get('source') or
+                production.get('source', {}).get('rawPackageBytesDigest') != request['inputSha256'] or
+                environment.get('verification') != 'nodeVerified' or environment.get('fidelityTier') != 'releaseBaselined' or
+                any(environment.get(key) != original_environment.get(key) for key in ('verification', 'fidelityTier', 'observed')) or
+                any(environment.get('observed', {}).get(key) != value for key, value in primary['renderer']['runtime'].items()) or
+                profile.get('reviewProfile') != expected['review'] or profile.get('commentProfile') != expected['comments'] or
+                profile.get('markupPresentation', 'html') != expected.get('markupPresentation', 'html') or
+                profile.get('commentColumnPlacement', 'margin') != expected.get('commentColumnPlacement', 'margin') or
+                profile.get('markupVisibility', {}) != {key: False for key, value in expected.get('markupVisibility', {}).items() if value is False} or
+                production.get('bindings', {}).get('pdfDigest') != pdf_sha or response.get('pdfSha256') != pdf_sha):
+            raise ValueError('Companion source, profile, runtime or PDF binding differs')
+        evidence.update(productionSha256=digest(folder / 'companion-production.json'), pdfSha256=pdf_sha,
+                        sourceSha256=request['inputSha256'], inspection=pdf.inspect_companion_pdf(folder / 'companion.pdf', declaration))
+        evidence['checks'] = pdf.companion_checks(declaration, evidence['inspection'])
+    except Exception as error:
+        evidence['checks'] = [{'name': 'companion-pdf-artifact', 'passed': False, 'error': str(error)}]
+    return evidence
+
+
+def run(output, reference, adapter, candidate, suite=None, registry=None):
+    registry = select_suite(validate_registry(registry), suite)
     env = environment([f for c in registry['cases'] for f in c['fonts']])
     ref_root = Path(reference).resolve().parent
     bundle = read_json(reference)
@@ -112,6 +173,9 @@ def run(output, reference, adapter, candidate):
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=False)
     contract = {'metric': metrics.CONTRACT, 'suiteDigest': identity(registry), 'referenceDigest': identity(bundle), 'environment': env['contract'], 'adapter': adapter if isinstance(adapter, str) else {'argv': adapter, 'sourceSha256': digest(ROOT / 'adapters/docxodus.mjs')}}
+    # There is one renderer layout mode today. Keep the identity explicit so a
+    # future mode cannot silently reuse another mode's accepted measurements.
+    contract['layoutProfile'] = 'default'
     if any(c.get('preparation') for c in registry['cases']):
         contract['preparationSources'] = {name: digest(ROOT / name) for name in
             ['bench/adapters.py', 'bench/redline.py', 'bench/redline_build.py', 'bench/revisions.py',
@@ -120,10 +184,18 @@ def run(output, reference, adapter, candidate):
     if pdf_policies:
         contract.update(pdfTextNormalizations=pdf_policies, pdfTextInspectorVersion=pdf.PDF_TEXT_POLICY_VERSION,
                         pdfTextInspectorSha256=digest(Path(pdf.__file__)))
+    if any(a['type'] == 'colored-rule-widths' for c in registry['cases'] for a in c['assertions']):
+        contract['coloredRuleInspector'] = {'version': 1, 'sources': {
+            name: digest(ROOT / name) for name in ('bench/pdf.py', 'bench/vector_rules.py')}}
     html_declarations = {c['id']: c['htmlAssertions'] for c in registry['cases'] if c.get('htmlAssertions')}
+    companions = {c['id']: c['pdfCompanion'] for c in registry['cases'] if c.get('pdfCompanion')}
     # A reference-engine calibration measures PDFs; it cannot attest another artifact's metadata.
     if adapter in ('libreoffice', 'libreoffice-reference'):
         html_declarations = {}
+        companions = {}
+    if companions:
+        contract.update(pdfCompanions=companions, pdfCompanionInspectorVersion=1,
+                        pdfCompanionInspectorSha256=digest(Path(pdf.__file__)))
     if html_declarations:
         contract.update(htmlAssertions=html_declarations, htmlInspectorVersion=html_artifacts.VERSION,
                         htmlInspectorSha256=digest(Path(html_artifacts.__file__)))
@@ -149,7 +221,11 @@ def run(output, reference, adapter, candidate):
                     direct_capture = direct_bundle['cases'][case['id']]
                     direct_root = contained(ref_root, bundle['sourceBundle']).parent
                     shutil.copyfile(contained(direct_root, direct_capture['pdf']), folder / 'direct-reference.pdf')
-            reference_info = pdf.inspect_case_pdf(reference_path, case)
+            bindings = bundle.get('capture', {}).get('fontIdentityBindings', {}).get(case['id'])
+            if bindings is not None and bundle['track'] not in WORD_TRACKS:
+                raise ValueError('Font identity bindings require an explicit Word capture track')
+            reference_info = pdf.inspect_case_pdf(reference_path, case, word_font_bindings=bindings,
+                                                 font_contract=env['contract']['fonts']) if bindings is not None else pdf.inspect_case_pdf(reference_path, case)
             failures = pdf.reference_failures(case, reference_info, bundle['track'])
             if failures:
                 raise ValueError('Reference fails its own mandatory checks: ' + ', '.join(failures))
@@ -183,6 +259,10 @@ def run(output, reference, adapter, candidate):
                     # LibreOffice measured against a LibreOffice track is a calibration of the reference engine.
                     calibration = adapter in ('libreoffice', 'libreoffice-reference')
                     outcome['checks'] = pdf.correctness(pdf.binding_case(case, bundle['track'], calibration), reference_info, candidate_info)
+                    if case['id'] in companions:
+                        companion = render_companion(adapter, request, companions[case['id']], folder, response)
+                        outcome['companionPdf'] = companion
+                        outcome['checks'].extend(companion['checks'])
                     with tempfile.TemporaryDirectory(dir=folder) as tmp:
                         rpages = pdf.rasterize(reference_path, Path(tmp) / 'r')
                         cpages = pdf.rasterize(candidate_path, Path(tmp) / 'c')
@@ -236,13 +316,21 @@ def run(output, reference, adapter, candidate):
 def compare(previous, current, tolerance):
     validate_result(previous)
     validate_result(current)
+    if previous.get('track') != current.get('track'):
+        raise ValueError('Reference provider track changed')
+    if previous['contract'].get('layoutProfile', 'default') != current['contract'].get('layoutProfile', 'default'):
+        raise ValueError('Renderer layout profile changed')
     if not math_valid_tolerance(tolerance):
         raise ValueError('Regression tolerance must be finite and nonnegative')
     if not previous['summary']['complete'] or not current['summary']['complete']:
         raise ValueError('Cannot gate or refresh an incomplete run')
     if any(not r.get('htmlSummary', {'complete': True})['complete'] for r in (previous, current)):
         raise ValueError('Cannot gate unmeasured delivered HTML checks')
-    if previous['contractDigest'] != current['contractDigest'] or identity(previous['contract']) != previous['contractDigest'] or identity(current['contract']) != current['contractDigest']:
+    # Older records had only the implicit default layout mode. Normalize that
+    # identity for comparison without rewriting either stored result or digest.
+    prior_contract = dict(previous['contract'], layoutProfile=previous['contract'].get('layoutProfile', 'default'))
+    current_contract = dict(current['contract'], layoutProfile=current['contract'].get('layoutProfile', 'default'))
+    if prior_contract != current_contract or identity(previous['contract']) != previous['contractDigest'] or identity(current['contract']) != current['contractDigest']:
         raise ValueError('Measurement contract changed or is corrupt')
     findings = []
     before = {c['id']: c for c in previous['cases']}
@@ -269,7 +357,27 @@ def math_valid_tolerance(value):
 def validate_result(result):
     if result['schema'] != 1 or result['contract']['metric'] != metrics.CONTRACT or identity(result['contract']) != result['contractDigest']:
         raise ValueError('Invalid result measurement contract')
+    layout = result['contract'].get('layoutProfile', 'default')
+    if not isinstance(layout, str) or not re.fullmatch('[a-z][a-z0-9-]{0,63}', layout):
+        raise ValueError('Invalid renderer layout profile identity')
+    companions = result['contract'].get('pdfCompanions', {})
+    if (not isinstance(companions, dict) or not set(companions).issubset(result['suite']['cases']) or
+            (companions and (type(result['contract'].get('pdfCompanionInspectorVersion')) is not int or
+             result['contract']['pdfCompanionInspectorVersion'] != 1 or
+             not re.fullmatch('[a-f0-9]{64}', str(result['contract'].get('pdfCompanionInspectorSha256', '')))))):
+        raise ValueError('Invalid companion PDF measurement contract')
+    from .common import validate_pdf_companion
+    for declaration in companions.values(): validate_pdf_companion(declaration)
     pdf_policies = result['contract'].get('pdfTextNormalizations', {})
+    rules = result['contract'].get('coloredRuleInspector')
+    if rules is not None and (not isinstance(rules, dict) or set(rules) != {'version', 'sources'} or
+            type(rules['version']) is not int or rules['version'] != 1 or
+            not isinstance(rules['sources'], dict) or set(rules['sources']) != {'bench/pdf.py', 'bench/vector_rules.py'} or
+            any(not isinstance(value, str) or not re.fullmatch('[a-f0-9]{64}', value) for value in rules['sources'].values())):
+        raise ValueError('Invalid colored-rule inspector contract')
+    if rules is None and any(check.get('name') == 'assertion-colored-rule-widths'
+                             for case in result['cases'] for check in case.get('checks', [])):
+        raise ValueError('Missing colored-rule inspector contract')
     if 'pdfTextNormalizations' in result['contract'] and (not isinstance(pdf_policies, dict) or
             any(not isinstance(policy, str) or policy not in pdf.PDF_TEXT_POLICIES for policy in pdf_policies.values()) or
             not set(pdf_policies).issubset(result['suite']['cases']) or
@@ -305,6 +413,19 @@ def validate_result(result):
     if expected != result['summary']:
         raise ValueError('Invalid coverage or aggregation summary')
     for case in result['cases']:
+        if case['id'] in companions and case['status'] == 'measured' and not any(
+                c['name'] in ('conversion', 'valid-pdf') and c['passed'] is False for c in case['checks']):
+            companion = case.get('companionPdf', {})
+            response = companion.get('adapter', {})
+            if companion.get('profile') != companions[case['id']]['profile']:
+                raise ValueError('Invalid companion PDF profile')
+            checks = [c for c in case['checks'] if c['name'].startswith('companion-pdf-')]
+            recorded = companion.get('checks', [])
+            failed = len(recorded) == 1 and recorded[0].get('name') == 'companion-pdf-artifact' and recorded[0].get('passed') is False
+            if checks != recorded or (not failed and (response.get('status') != 'ok' or
+                    response.get('renderer') != case['adapter'].get('renderer') or
+                    recorded != pdf.companion_checks(companions[case['id']], companion['inspection']))):
+                raise ValueError('Missing or changed companion PDF checks')
         if case['id'] in pdf_policies and case['status'] == 'measured':
             failed_conversion = any(c['name'] in ('conversion', 'valid-pdf') and c['passed'] is False
                                     for c in case['checks'])

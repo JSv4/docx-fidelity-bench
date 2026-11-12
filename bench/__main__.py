@@ -19,18 +19,24 @@ def main():
     refs = ref.add_subparsers(dest='operation', required=True)
     create = refs.add_parser('libreoffice')
     create.add_argument('--out', required=True)
+    create.add_argument('--suite', help='Registered suite; defaults to the complete corpus')
+    create.add_argument('--manifest', help='Explicit validated manifest, as supported by run')
     controls = refs.add_parser('equivalent-controls')
     controls.add_argument('--reference', required=True, help='Immutable direct LibreOffice bundle')
     controls.add_argument('--out', required=True)
+    controls.add_argument('--manifest', help='Explicit validated manifest, as supported by run')
     capture = refs.add_parser('import')
     capture.add_argument('--metadata', required=True)
     capture.add_argument('--pdf-dir', required=True)
     capture.add_argument('--out', required=True)
+    capture.add_argument('--manifest', help='Explicit immutable capture-pack manifest; default authored corpus otherwise')
     run = sub.add_parser('run')
     run.add_argument('--reference', required=True)
     run.add_argument('--adapter', choices=['docxodus', 'libreoffice', 'libreoffice-reference'], required=True)
     run.add_argument('--candidate', required=True, help='Exact source commit for Docxodus; explicit identity for other adapters')
     run.add_argument('--out', required=True)
+    run.add_argument('--suite', help='Registered suite; defaults to the complete corpus')
+    run.add_argument('--manifest', help='Explicit immutable capture-pack manifest; default authored corpus otherwise')
     run.add_argument('--gate', choices=['report', 'mandatory', 'close'], default='report')
     compare = sub.add_parser('compare')
     compare.add_argument('previous')
@@ -62,20 +68,21 @@ def main():
     args = parser.parse_args()
     if args.command == 'redline':
         return redline_command(args)
-    registry = validate_registry()
+    registry = validate_registry(read_json(args.manifest) if getattr(args, 'manifest', None) else None)
     if args.command == 'validate':
         print(f'Validated {len(registry["cases"])} authored cases in {registry["suite"]["id"]}')
     elif args.command == 'build-docxodus':
         docxodus(args.source, args.commit)
     elif args.command == 'reference' and args.operation == 'libreoffice':
-        runner.reference_bundle(args.out)
+        runner.reference_bundle(args.out, suite=args.suite, registry=registry)
     elif args.command == 'reference' and args.operation == 'equivalent-controls':
-        runner.equivalent_reference_bundle(args.out, args.reference)
+        runner.equivalent_reference_bundle(args.out, args.reference, registry=registry)
     elif args.command == 'reference':
         import_reference(registry, args)
     elif args.command == 'run':
         adapter = args.adapter if args.adapter != 'docxodus' else ['node', str(ROOT / 'adapters/docxodus.mjs')]
-        result = runner.run(args.out, args.reference, adapter, args.candidate)
+        extra = {'registry': registry} if args.manifest else {}
+        result = runner.run(args.out, args.reference, adapter, args.candidate, suite=args.suite, **extra)
         print(result['summary'])
         if 'htmlSummary' in result:
             print('Delivered HTML:', result['htmlSummary'])
@@ -141,9 +148,18 @@ def import_reference(registry, args):
     env = environment([f for c in registry['cases'] for f in c['fonts']])
     if metadata['fontContract'] != env['contract']['fonts'] or metadata['profile'] != {'review': 'final', 'comments': 'hidden'}:
         raise ValueError('Capture font or view contract is unverified or mismatched')
+    font_bindings = metadata.get('fontIdentityBindings', {})
+    if (not isinstance(font_bindings, dict) or
+            not set(font_bindings).issubset(metadata['cases']) or
+            not set(font_bindings).issubset({case['id'] for case in registry['cases']})):
+        raise ValueError('Word font bindings must address exact declared capture cases')
     output = Path(args.out).resolve()
     output.mkdir(parents=True, exist_ok=False)
     bundle = {'schema': 1, 'track': metadata['track'], 'suiteDigest': identity(registry), 'environment': env['contract'], 'capture': metadata, 'cases': {}}
+    if font_bindings:
+        from . import word_fonts
+        bundle.update(fontIdentityInspectorVersion=word_fonts.VERSION,
+                      fontIdentityInspectorSha256=digest(Path(word_fonts.__file__)))
     for case in registry['cases']:
         record = metadata['cases'].get(case['id'])
         if not record:
@@ -155,7 +171,9 @@ def import_reference(registry, args):
             raise ValueError('Capture PDF mismatch: ' + case['id'])
         target = output / (case['id'] + '.pdf')
         shutil.copyfile(source, target)
-        info = pdf.inspect_case_pdf(target, case)
+        bindings = font_bindings.get(case['id'])
+        info = pdf.inspect_case_pdf(target, case, word_font_bindings=bindings,
+                                    font_contract=env['contract']['fonts']) if bindings is not None else pdf.inspect_case_pdf(target, case)
         failures = pdf.reference_failures(case, info, metadata['track'])
         bundle['cases'][case['id']] = {'inputSha256': case['sha256'], 'pdf': target.name, 'pdfSha256': digest(target), 'eligible': not failures, 'ineligibleChecks': failures, 'inspection': info}
     write_json(output / 'bundle.json', bundle)

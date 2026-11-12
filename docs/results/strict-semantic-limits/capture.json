@@ -1,0 +1,1303 @@
+{
+  "schema": 1,
+  "purpose": "Focused redline evidence; no full-suite score is claimed",
+  "beforeCommit": "abbbf638d44eec2d3051b04ae3719b71690a8c4f",
+  "afterCommit": "11effdaef154e8ecb8b7c5590f71e0b34350cc99",
+  "screenshotMethod": "LibreOffice 25.8.7.3 PDF exports rasterized at 96 dpi; x=0,y=48,width=816,height=420; unscaled page bands composed in Chromium with API-result captions",
+  "screenshots": {
+    "strict": {
+      "file": "strict.png",
+      "sha256": "a32113a1f75bd36d31d30b2847f86b66fb2189f13e6493533296ac63aa5ceb35"
+    },
+    "transitional-control": {
+      "file": "transitional-control.png",
+      "sha256": "db2af3f92af1c10873b636d7227c57cb6f7c3dbb62a22225bc2cbff77ee0e63f"
+    }
+  },
+  "runs": {
+    "before": {
+      "suite": {
+        "cases": [
+          "redline-field-result-beside-edit",
+          "redline-field-result-end-control",
+          "redline-field-result-tab-control",
+          "redline-field-toc-page-numbers",
+          "redline-field-toc-entry-retitled-control",
+          "redline-field-toc-page-number-control",
+          "redline-field-shared-end-append",
+          "redline-field-shared-end-trim",
+          "redline-field-shared-end-control",
+          "redline-field-close-open-sdt",
+          "redline-field-close-open-body",
+          "redline-field-close-open-sdt-control",
+          "redline-comment-straddles-sdt",
+          "redline-comment-straddles-sdt-control",
+          "redline-comment-straddles-customxml",
+          "redline-comment-straddles-customxml-control",
+          "redline-comment-para-id-collision",
+          "redline-wrapper-para-id-copies",
+          "redline-comment-para-id-control",
+          "redline-header-bookmark-only",
+          "redline-body-bookmark-only-control",
+          "redline-bookmark-end-after-replaced-word",
+          "redline-bookmark-end-after-replaced-word-control",
+          "redline-bookmark-between-blocks-fold-text",
+          "redline-bookmark-between-blocks-fold-text-control",
+          "redline-bookmark-between-blocks-fold-table",
+          "redline-bookmark-between-blocks-fold-table-control",
+          "redline-style-id-cross-type",
+          "redline-style-id-same-type-control",
+          "redline-reject-customxml",
+          "redline-reject-math",
+          "redline-reject-ruby",
+          "redline-reject-direct-control",
+          "redline-consolidate-cell-bookmark",
+          "redline-consolidate-cell-text-control",
+          "redline-boundary-bookmark-compare-tbl",
+          "redline-boundary-bookmark-compare-tr",
+          "redline-boundary-bookmark-compare-paragraph-control",
+          "redline-boundary-bookmark-consolidate-tbl",
+          "redline-boundary-bookmark-consolidate-tr",
+          "redline-boundary-bookmark-consolidate-paragraph-control",
+          "redline-identity-bytes",
+          "redline-identity-reserialized",
+          "redline-inline-customxml",
+          "redline-inline-hyperlink-control",
+          "redline-comment-add-customxml",
+          "redline-comment-remove-sdt",
+          "redline-comment-wrapper-control",
+          "redline-reviewer-added-comment",
+          "redline-reviewer-comment-control",
+          "redline-duplicate-comment-sdt",
+          "redline-duplicate-comment-sdt-control",
+          "redline-duplicate-comment-customxml",
+          "redline-duplicate-comment-customxml-control",
+          "redline-consolidated-field-result-edit",
+          "redline-consolidated-field-prefix-delete",
+          "redline-consolidated-field-bookmark-added",
+          "redline-consolidated-field-plain-control",
+          "redline-comment-identity-reused-id",
+          "redline-comment-identity-replaced-id",
+          "redline-comment-identity-distinct-control",
+          "redline-comment-identity-reviewer-collision",
+          "redline-comment-identity-reviewer-identical",
+          "redline-comment-identity-reviewer-control",
+          "redline-removed-comment-body-edited",
+          "redline-removed-comment-body-unchanged-control",
+          "redline-consolidated-note-prefix",
+          "redline-consolidated-note-suffix-control",
+          "redline-reviewer-bookmark-paragraph-edited",
+          "redline-reviewer-bookmark-paragraph-outside-control",
+          "redline-reviewer-bookmark-sdt-edited",
+          "redline-reviewer-bookmark-sdt-outside-control",
+          "redline-reviewer-bookmark-cell-edited",
+          "redline-reviewer-bookmark-cell-outside-control",
+          "redline-reviewer-bookmark-move-and-remove",
+          "redline-reviewer-bookmark-single-remove-control",
+          "redline-bookmark-name-block-position",
+          "redline-bookmark-name-mixed-position",
+          "redline-bookmark-name-inline-extent",
+          "redline-bookmark-name-consensus-control",
+          "redline-comment-reply-id-less-root",
+          "redline-comment-reply-renumbered-root",
+          "redline-comment-reply-root-para-id-control",
+          "redline-semantic-raw-limits-strict",
+          "redline-semantic-raw-limits-transitional-control"
+        ],
+        "id": "redline-v10",
+        "version": 10
+      },
+      "contract": {
+        "adapter": {
+          "build": {
+            "adapterSources": {
+              "adapters/docxodus-redline/DocxBenchRedline.csproj": "83843da954515292212f473d501fb539b0627513b972e3a95f7a4ab06674902a",
+              "adapters/docxodus-redline/Program.cs": "b3894da46d3dbb5b12ee6d35ae34904b93320c0e69d7d1c0e30671694080098d"
+            },
+            "command": [
+              "/home/jman/.dotnet/dotnet",
+              "build",
+              "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1352-bench-adapter-before/src/DocxBenchRedline.csproj",
+              "-c",
+              "Release",
+              "-o",
+              "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1352-bench-adapter-before/bin",
+              "-nologo",
+              "-v",
+              "q",
+              "-p:DocxodusRoot=/home/jman/Code/tmp/Docxodus/.goal-work/pr-1345-completion"
+            ],
+            "commit": "abbbf638d44eec2d3051b04ae3719b71690a8c4f",
+            "dotnet": "10.0.301",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/DocxBenchRedline.dll": "2e54875ef3e22b0c4d8ec42b6b756555d92556bb4481905d296ee38c1635ad12",
+              "bin/Docxodus.dll": "cf2d4e69171706173ac68d90612879d312799f1dc6062a00aeb82354bf66c12e",
+              "bin/SkiaSharp.dll": "2c9bbbe1a3d0e9407894c319821b5cdcade1f302466a950a2e5d6024aee32422",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "recipeSha256": "254236d2708f52eec51388459c5ed4a4457f3d08c42a354be2a292af5855786a",
+            "schema": 1,
+            "source": "/home/jman/Code/tmp/Docxodus/.goal-work/pr-1345-completion",
+            "tree": "55993b7925f9fd49acdaa7290d2ae473a83fdf4a"
+          },
+          "name": "docxodus"
+        },
+        "environment": {
+          "harness": {
+            "bench/lo_revisions.py": "a526eddb8c5022f7eb8f8feb8fbab9071b3781c87d3feae81cfc5712d1690482",
+            "bench/redline.py": "35f6eff2c7d16090b4dd0caaeb14ffa36ef2e5eb385b16c08baa5185ffda627e",
+            "bench/redline_build.py": "254236d2708f52eec51388459c5ed4a4457f3d08c42a354be2a292af5855786a",
+            "bench/revisions.py": "504047053c333c88f8b0bd86d645bdf3794d2f0224f24a5bde19ffed7098abfc"
+          },
+          "libreoffice": {
+            "sha256": "adf468b45764b2abce53a7d91bbf3056b33f2734c5d5f628c075753e73903c43",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "libreofficePython": {
+            "sha256": "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e",
+            "version": "3.13.7"
+          },
+          "validator": {
+            "dotnet": "10.0.301",
+            "fileFormat": "Microsoft365",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/OoxmlValidator.dll": "f9e00c50ed1d3f0a80c35fa58fa415939c0b4aece4fe8dc402977d38e026f9a2",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "package": "DocumentFormat.OpenXml 3.5.1"
+          }
+        },
+        "metric": {
+          "caseScore": "100 when every applicable mandatory check passes, otherwise 0",
+          "engines": [
+            "bench-markup",
+            "libreoffice-text"
+          ],
+          "libreofficeEligibility": "a LibreOffice comparison applies only when the authored redline passes it",
+          "semanticPreflight": "declared identity cases must report zero changes at raw limits with and without the package supplement",
+          "suiteScore": "mean of category means over every required case",
+          "validity": "no OpenXmlValidator finding (id, part, description) occurs more often than in any input",
+          "version": 2,
+          "view": 1
+        },
+        "suiteDigest": "6f3434727fa3dab84e9b1c1a6fe874d68ee5345891af0549ab4cdf419d1396f0"
+      },
+      "summary": {
+        "byKind": {
+          "control": {
+            "measured": 1,
+            "passed": 1
+          },
+          "reproducer": {
+            "measured": 1,
+            "passed": 0
+          }
+        },
+        "categoryMeans": {
+          "identity": 50.0
+        },
+        "complete": false,
+        "libreofficeComparisons": {
+          "applicable": 2,
+          "total": 2
+        },
+        "measured": 2,
+        "passRate": 0.011764705882352941,
+        "required": 85,
+        "score": null
+      },
+      "cases": [
+        {
+          "adapter": {
+            "error": {
+              "message": "The left package failed manifest preflight: compression_ratio_limit_exceeded (/word/document.xml), content_types_unreadable (/[Content_Types].xml), entry_size_limit_exceeded (/word/document.xml), total_expansion_limit_exceeded (entries[].size).",
+              "phase": "operation",
+              "type": "System.IO.InvalidDataException"
+            },
+            "protocol": 1,
+            "status": "failed"
+          },
+          "category": "identity",
+          "checks": [
+            {
+              "error": {
+                "message": "The left package failed manifest preflight: compression_ratio_limit_exceeded (/word/document.xml), content_types_unreadable (/[Content_Types].xml), entry_size_limit_exceeded (/word/document.xml), total_expansion_limit_exceeded (entries[].size).",
+                "phase": "operation",
+                "type": "System.IO.InvalidDataException"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "id": "redline-semantic-raw-limits-strict",
+          "issue": "JSv4/Docxodus#1352",
+          "kind": "reproducer",
+          "operation": "compare",
+          "score": 0.0,
+          "status": "measured"
+        },
+        {
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+abbbf638d44eec2d3051b04ae3719b71690a8c4f",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "662cdcf38693be5c2ed44bc9af2f2dc7b6c30060c317eaf2a8f68d450eac6b08",
+            "protocol": 1,
+            "semanticPreflight": {
+              "withPackageChanges": 0,
+              "withoutPackageChanges": 0
+            },
+            "status": "ok"
+          },
+          "category": "identity",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1352-completion/fixtures/redline/redline-semantic-raw-limits-transitional-control/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1352-bench-before/redline-semantic-raw-limits-transitional-control/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1352-completion/fixtures/redline/redline-semantic-raw-limits-transitional-control/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1352-completion/fixtures/redline/redline-semantic-raw-limits-transitional-control/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1352-bench-before/redline-semantic-raw-limits-transitional-control/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1352-completion/fixtures/redline/redline-semantic-raw-limits-transitional-control/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Marsh station agreement.",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 3,
+                "scope": "redline",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 3,
+              "passed": true
+            },
+            {
+              "expected": {
+                "withPackageChanges": 0,
+                "withoutPackageChanges": 0
+              },
+              "name": "semantic-preflight",
+              "observed": {
+                "withPackageChanges": 0,
+                "withoutPackageChanges": 0
+              },
+              "passed": true
+            }
+          ],
+          "id": "redline-semantic-raw-limits-transitional-control",
+          "issue": "JSv4/Docxodus#1352",
+          "kind": "control",
+          "operation": "compare",
+          "score": 100.0,
+          "status": "measured"
+        }
+      ]
+    },
+    "after": {
+      "suite": {
+        "cases": [
+          "redline-field-result-beside-edit",
+          "redline-field-result-end-control",
+          "redline-field-result-tab-control",
+          "redline-field-toc-page-numbers",
+          "redline-field-toc-entry-retitled-control",
+          "redline-field-toc-page-number-control",
+          "redline-field-shared-end-append",
+          "redline-field-shared-end-trim",
+          "redline-field-shared-end-control",
+          "redline-field-close-open-sdt",
+          "redline-field-close-open-body",
+          "redline-field-close-open-sdt-control",
+          "redline-comment-straddles-sdt",
+          "redline-comment-straddles-sdt-control",
+          "redline-comment-straddles-customxml",
+          "redline-comment-straddles-customxml-control",
+          "redline-comment-para-id-collision",
+          "redline-wrapper-para-id-copies",
+          "redline-comment-para-id-control",
+          "redline-header-bookmark-only",
+          "redline-body-bookmark-only-control",
+          "redline-bookmark-end-after-replaced-word",
+          "redline-bookmark-end-after-replaced-word-control",
+          "redline-bookmark-between-blocks-fold-text",
+          "redline-bookmark-between-blocks-fold-text-control",
+          "redline-bookmark-between-blocks-fold-table",
+          "redline-bookmark-between-blocks-fold-table-control",
+          "redline-style-id-cross-type",
+          "redline-style-id-same-type-control",
+          "redline-reject-customxml",
+          "redline-reject-math",
+          "redline-reject-ruby",
+          "redline-reject-direct-control",
+          "redline-consolidate-cell-bookmark",
+          "redline-consolidate-cell-text-control",
+          "redline-boundary-bookmark-compare-tbl",
+          "redline-boundary-bookmark-compare-tr",
+          "redline-boundary-bookmark-compare-paragraph-control",
+          "redline-boundary-bookmark-consolidate-tbl",
+          "redline-boundary-bookmark-consolidate-tr",
+          "redline-boundary-bookmark-consolidate-paragraph-control",
+          "redline-identity-bytes",
+          "redline-identity-reserialized",
+          "redline-inline-customxml",
+          "redline-inline-hyperlink-control",
+          "redline-comment-add-customxml",
+          "redline-comment-remove-sdt",
+          "redline-comment-wrapper-control",
+          "redline-reviewer-added-comment",
+          "redline-reviewer-comment-control",
+          "redline-duplicate-comment-sdt",
+          "redline-duplicate-comment-sdt-control",
+          "redline-duplicate-comment-customxml",
+          "redline-duplicate-comment-customxml-control",
+          "redline-consolidated-field-result-edit",
+          "redline-consolidated-field-prefix-delete",
+          "redline-consolidated-field-bookmark-added",
+          "redline-consolidated-field-plain-control",
+          "redline-comment-identity-reused-id",
+          "redline-comment-identity-replaced-id",
+          "redline-comment-identity-distinct-control",
+          "redline-comment-identity-reviewer-collision",
+          "redline-comment-identity-reviewer-identical",
+          "redline-comment-identity-reviewer-control",
+          "redline-removed-comment-body-edited",
+          "redline-removed-comment-body-unchanged-control",
+          "redline-consolidated-note-prefix",
+          "redline-consolidated-note-suffix-control",
+          "redline-reviewer-bookmark-paragraph-edited",
+          "redline-reviewer-bookmark-paragraph-outside-control",
+          "redline-reviewer-bookmark-sdt-edited",
+          "redline-reviewer-bookmark-sdt-outside-control",
+          "redline-reviewer-bookmark-cell-edited",
+          "redline-reviewer-bookmark-cell-outside-control",
+          "redline-reviewer-bookmark-move-and-remove",
+          "redline-reviewer-bookmark-single-remove-control",
+          "redline-bookmark-name-block-position",
+          "redline-bookmark-name-mixed-position",
+          "redline-bookmark-name-inline-extent",
+          "redline-bookmark-name-consensus-control",
+          "redline-comment-reply-id-less-root",
+          "redline-comment-reply-renumbered-root",
+          "redline-comment-reply-root-para-id-control",
+          "redline-semantic-raw-limits-strict",
+          "redline-semantic-raw-limits-transitional-control"
+        ],
+        "id": "redline-v10",
+        "version": 10
+      },
+      "contract": {
+        "adapter": {
+          "build": {
+            "adapterSources": {
+              "adapters/docxodus-redline/DocxBenchRedline.csproj": "83843da954515292212f473d501fb539b0627513b972e3a95f7a4ab06674902a",
+              "adapters/docxodus-redline/Program.cs": "b3894da46d3dbb5b12ee6d35ae34904b93320c0e69d7d1c0e30671694080098d"
+            },
+            "command": [
+              "/home/jman/.dotnet/dotnet",
+              "build",
+              "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1352-bench-adapter-after/src/DocxBenchRedline.csproj",
+              "-c",
+              "Release",
+              "-o",
+              "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1352-bench-adapter-after/bin",
+              "-nologo",
+              "-v",
+              "q",
+              "-p:DocxodusRoot=/home/jman/Code/tmp/Docxodus/.goal-work/issue-1352-completion"
+            ],
+            "commit": "11effdaef154e8ecb8b7c5590f71e0b34350cc99",
+            "dotnet": "10.0.301",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/DocxBenchRedline.dll": "116db63b9f8c6c77e3c04df5a6e55e5b03b201368d06520ae672c4a2bb578956",
+              "bin/Docxodus.dll": "7f3146692e3dd12159d4d34f188c82699fecd9fe94fe1fe4378435f384e683d9",
+              "bin/SkiaSharp.dll": "2c9bbbe1a3d0e9407894c319821b5cdcade1f302466a950a2e5d6024aee32422",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "recipeSha256": "254236d2708f52eec51388459c5ed4a4457f3d08c42a354be2a292af5855786a",
+            "schema": 1,
+            "source": "/home/jman/Code/tmp/Docxodus/.goal-work/issue-1352-completion",
+            "tree": "aeb45e5a7ad0c8b27e77128992193195fab3538e"
+          },
+          "name": "docxodus"
+        },
+        "environment": {
+          "harness": {
+            "bench/lo_revisions.py": "a526eddb8c5022f7eb8f8feb8fbab9071b3781c87d3feae81cfc5712d1690482",
+            "bench/redline.py": "35f6eff2c7d16090b4dd0caaeb14ffa36ef2e5eb385b16c08baa5185ffda627e",
+            "bench/redline_build.py": "254236d2708f52eec51388459c5ed4a4457f3d08c42a354be2a292af5855786a",
+            "bench/revisions.py": "504047053c333c88f8b0bd86d645bdf3794d2f0224f24a5bde19ffed7098abfc"
+          },
+          "libreoffice": {
+            "sha256": "adf468b45764b2abce53a7d91bbf3056b33f2734c5d5f628c075753e73903c43",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "libreofficePython": {
+            "sha256": "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e",
+            "version": "3.13.7"
+          },
+          "validator": {
+            "dotnet": "10.0.301",
+            "fileFormat": "Microsoft365",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/OoxmlValidator.dll": "f9e00c50ed1d3f0a80c35fa58fa415939c0b4aece4fe8dc402977d38e026f9a2",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "package": "DocumentFormat.OpenXml 3.5.1"
+          }
+        },
+        "metric": {
+          "caseScore": "100 when every applicable mandatory check passes, otherwise 0",
+          "engines": [
+            "bench-markup",
+            "libreoffice-text"
+          ],
+          "libreofficeEligibility": "a LibreOffice comparison applies only when the authored redline passes it",
+          "semanticPreflight": "declared identity cases must report zero changes at raw limits with and without the package supplement",
+          "suiteScore": "mean of category means over every required case",
+          "validity": "no OpenXmlValidator finding (id, part, description) occurs more often than in any input",
+          "version": 2,
+          "view": 1
+        },
+        "suiteDigest": "6f3434727fa3dab84e9b1c1a6fe874d68ee5345891af0549ab4cdf419d1396f0"
+      },
+      "summary": {
+        "byKind": {
+          "control": {
+            "measured": 1,
+            "passed": 1
+          },
+          "reproducer": {
+            "measured": 1,
+            "passed": 1
+          }
+        },
+        "categoryMeans": {
+          "identity": 100.0
+        },
+        "complete": false,
+        "libreofficeComparisons": {
+          "applicable": 4,
+          "total": 4
+        },
+        "measured": 2,
+        "passRate": 0.023529411764705882,
+        "required": 85,
+        "score": null
+      },
+      "cases": [
+        {
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+11effdaef154e8ecb8b7c5590f71e0b34350cc99",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "6ad2dbef149ec8381725709619193c07653f4119ad5dcd56bf6715303b129361",
+            "protocol": 1,
+            "semanticPreflight": {
+              "withPackageChanges": 0,
+              "withoutPackageChanges": 0
+            },
+            "status": "ok"
+          },
+          "category": "identity",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1352-completion/fixtures/redline/redline-semantic-raw-limits-strict/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1352-bench-after/redline-semantic-raw-limits-strict/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1352-completion/fixtures/redline/redline-semantic-raw-limits-strict/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1352-completion/fixtures/redline/redline-semantic-raw-limits-strict/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1352-bench-after/redline-semantic-raw-limits-strict/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1352-completion/fixtures/redline/redline-semantic-raw-limits-strict/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Marsh station agreement.",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 3,
+                "scope": "redline",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 3,
+              "passed": true
+            },
+            {
+              "expected": {
+                "withPackageChanges": 0,
+                "withoutPackageChanges": 0
+              },
+              "name": "semantic-preflight",
+              "observed": {
+                "withPackageChanges": 0,
+                "withoutPackageChanges": 0
+              },
+              "passed": true
+            }
+          ],
+          "id": "redline-semantic-raw-limits-strict",
+          "issue": "JSv4/Docxodus#1352",
+          "kind": "reproducer",
+          "operation": "compare",
+          "score": 100.0,
+          "status": "measured"
+        },
+        {
+          "adapter": {
+            "engine": {
+              "assembly": "Docxodus",
+              "informationalVersion": "1.0.0+11effdaef154e8ecb8b7c5590f71e0b34350cc99",
+              "name": "docxodus",
+              "runtime": "10.0.9"
+            },
+            "outputSha256": "662cdcf38693be5c2ed44bc9af2f2dc7b6c30060c317eaf2a8f68d450eac6b08",
+            "protocol": 1,
+            "semanticPreflight": {
+              "withPackageChanges": 0,
+              "withoutPackageChanges": 0
+            },
+            "status": "ok"
+          },
+          "category": "identity",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1352-completion/fixtures/redline/redline-semantic-raw-limits-transitional-control/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1352-bench-after/redline-semantic-raw-limits-transitional-control/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1352-completion/fixtures/redline/redline-semantic-raw-limits-transitional-control/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1352-completion/fixtures/redline/redline-semantic-raw-limits-transitional-control/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1352-bench-after/redline-semantic-raw-limits-transitional-control/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1352-completion/fixtures/redline/redline-semantic-raw-limits-transitional-control/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Marsh station agreement.",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 3,
+                "scope": "redline",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 3,
+              "passed": true
+            },
+            {
+              "expected": {
+                "withPackageChanges": 0,
+                "withoutPackageChanges": 0
+              },
+              "name": "semantic-preflight",
+              "observed": {
+                "withPackageChanges": 0,
+                "withoutPackageChanges": 0
+              },
+              "passed": true
+            }
+          ],
+          "id": "redline-semantic-raw-limits-transitional-control",
+          "issue": "JSv4/Docxodus#1352",
+          "kind": "control",
+          "operation": "compare",
+          "score": 100.0,
+          "status": "measured"
+        }
+      ]
+    },
+    "calibration": {
+      "suite": {
+        "cases": [
+          "redline-field-result-beside-edit",
+          "redline-field-result-end-control",
+          "redline-field-result-tab-control",
+          "redline-field-toc-page-numbers",
+          "redline-field-toc-entry-retitled-control",
+          "redline-field-toc-page-number-control",
+          "redline-field-shared-end-append",
+          "redline-field-shared-end-trim",
+          "redline-field-shared-end-control",
+          "redline-field-close-open-sdt",
+          "redline-field-close-open-body",
+          "redline-field-close-open-sdt-control",
+          "redline-comment-straddles-sdt",
+          "redline-comment-straddles-sdt-control",
+          "redline-comment-straddles-customxml",
+          "redline-comment-straddles-customxml-control",
+          "redline-comment-para-id-collision",
+          "redline-wrapper-para-id-copies",
+          "redline-comment-para-id-control",
+          "redline-header-bookmark-only",
+          "redline-body-bookmark-only-control",
+          "redline-bookmark-end-after-replaced-word",
+          "redline-bookmark-end-after-replaced-word-control",
+          "redline-bookmark-between-blocks-fold-text",
+          "redline-bookmark-between-blocks-fold-text-control",
+          "redline-bookmark-between-blocks-fold-table",
+          "redline-bookmark-between-blocks-fold-table-control",
+          "redline-style-id-cross-type",
+          "redline-style-id-same-type-control",
+          "redline-reject-customxml",
+          "redline-reject-math",
+          "redline-reject-ruby",
+          "redline-reject-direct-control",
+          "redline-consolidate-cell-bookmark",
+          "redline-consolidate-cell-text-control",
+          "redline-boundary-bookmark-compare-tbl",
+          "redline-boundary-bookmark-compare-tr",
+          "redline-boundary-bookmark-compare-paragraph-control",
+          "redline-boundary-bookmark-consolidate-tbl",
+          "redline-boundary-bookmark-consolidate-tr",
+          "redline-boundary-bookmark-consolidate-paragraph-control",
+          "redline-identity-bytes",
+          "redline-identity-reserialized",
+          "redline-inline-customxml",
+          "redline-inline-hyperlink-control",
+          "redline-comment-add-customxml",
+          "redline-comment-remove-sdt",
+          "redline-comment-wrapper-control",
+          "redline-reviewer-added-comment",
+          "redline-reviewer-comment-control",
+          "redline-duplicate-comment-sdt",
+          "redline-duplicate-comment-sdt-control",
+          "redline-duplicate-comment-customxml",
+          "redline-duplicate-comment-customxml-control",
+          "redline-consolidated-field-result-edit",
+          "redline-consolidated-field-prefix-delete",
+          "redline-consolidated-field-bookmark-added",
+          "redline-consolidated-field-plain-control",
+          "redline-comment-identity-reused-id",
+          "redline-comment-identity-replaced-id",
+          "redline-comment-identity-distinct-control",
+          "redline-comment-identity-reviewer-collision",
+          "redline-comment-identity-reviewer-identical",
+          "redline-comment-identity-reviewer-control",
+          "redline-removed-comment-body-edited",
+          "redline-removed-comment-body-unchanged-control",
+          "redline-consolidated-note-prefix",
+          "redline-consolidated-note-suffix-control",
+          "redline-reviewer-bookmark-paragraph-edited",
+          "redline-reviewer-bookmark-paragraph-outside-control",
+          "redline-reviewer-bookmark-sdt-edited",
+          "redline-reviewer-bookmark-sdt-outside-control",
+          "redline-reviewer-bookmark-cell-edited",
+          "redline-reviewer-bookmark-cell-outside-control",
+          "redline-reviewer-bookmark-move-and-remove",
+          "redline-reviewer-bookmark-single-remove-control",
+          "redline-bookmark-name-block-position",
+          "redline-bookmark-name-mixed-position",
+          "redline-bookmark-name-inline-extent",
+          "redline-bookmark-name-consensus-control",
+          "redline-comment-reply-id-less-root",
+          "redline-comment-reply-renumbered-root",
+          "redline-comment-reply-root-para-id-control",
+          "redline-semantic-raw-limits-strict",
+          "redline-semantic-raw-limits-transitional-control"
+        ],
+        "id": "redline-v10",
+        "version": 10
+      },
+      "contract": {
+        "adapter": {
+          "name": "authored"
+        },
+        "environment": {
+          "harness": {
+            "bench/lo_revisions.py": "a526eddb8c5022f7eb8f8feb8fbab9071b3781c87d3feae81cfc5712d1690482",
+            "bench/redline.py": "35f6eff2c7d16090b4dd0caaeb14ffa36ef2e5eb385b16c08baa5185ffda627e",
+            "bench/redline_build.py": "254236d2708f52eec51388459c5ed4a4457f3d08c42a354be2a292af5855786a",
+            "bench/revisions.py": "504047053c333c88f8b0bd86d645bdf3794d2f0224f24a5bde19ffed7098abfc"
+          },
+          "libreoffice": {
+            "sha256": "adf468b45764b2abce53a7d91bbf3056b33f2734c5d5f628c075753e73903c43",
+            "version": "LibreOffice 25.8.7.3 580(Build:3)"
+          },
+          "libreofficePython": {
+            "sha256": "efb29ce53d36ebaeee80e3aa44fd6c7f9d71bbded5fe1665240b2ed8ecaeee0e",
+            "version": "3.13.7"
+          },
+          "validator": {
+            "dotnet": "10.0.301",
+            "fileFormat": "Microsoft365",
+            "files": {
+              "bin/DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+              "bin/DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+              "bin/OoxmlValidator.dll": "f9e00c50ed1d3f0a80c35fa58fa415939c0b4aece4fe8dc402977d38e026f9a2",
+              "bin/System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+            },
+            "package": "DocumentFormat.OpenXml 3.5.1"
+          }
+        },
+        "metric": {
+          "caseScore": "100 when every applicable mandatory check passes, otherwise 0",
+          "engines": [
+            "bench-markup",
+            "libreoffice-text"
+          ],
+          "libreofficeEligibility": "a LibreOffice comparison applies only when the authored redline passes it",
+          "semanticPreflight": "declared identity cases must report zero changes at raw limits with and without the package supplement",
+          "suiteScore": "mean of category means over every required case",
+          "validity": "no OpenXmlValidator finding (id, part, description) occurs more often than in any input",
+          "version": 2,
+          "view": 1
+        },
+        "suiteDigest": "6f3434727fa3dab84e9b1c1a6fe874d68ee5345891af0549ab4cdf419d1396f0"
+      },
+      "summary": {
+        "byKind": {
+          "control": {
+            "measured": 1,
+            "passed": 1
+          },
+          "reproducer": {
+            "measured": 1,
+            "passed": 1
+          }
+        },
+        "categoryMeans": {
+          "identity": 100.0
+        },
+        "complete": false,
+        "libreofficeComparisons": {
+          "applicable": 4,
+          "total": 4
+        },
+        "measured": 2,
+        "passRate": 0.023529411764705882,
+        "required": 85,
+        "score": null
+      },
+      "cases": [
+        {
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "662cdcf38693be5c2ed44bc9af2f2dc7b6c30060c317eaf2a8f68d450eac6b08",
+            "status": "ok"
+          },
+          "category": "identity",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1352-completion/fixtures/redline/redline-semantic-raw-limits-strict/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1352-bench-calibration/redline-semantic-raw-limits-strict/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1352-completion/fixtures/redline/redline-semantic-raw-limits-strict/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1352-completion/fixtures/redline/redline-semantic-raw-limits-strict/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1352-bench-calibration/redline-semantic-raw-limits-strict/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1352-completion/fixtures/redline/redline-semantic-raw-limits-strict/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Marsh station agreement.",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 3,
+                "scope": "redline",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 3,
+              "passed": true
+            },
+            {
+              "expected": {
+                "withPackageChanges": 0,
+                "withoutPackageChanges": 0
+              },
+              "name": "semantic-preflight",
+              "observed": {
+                "withPackageChanges": 0,
+                "withoutPackageChanges": 0
+              },
+              "passed": true
+            }
+          ],
+          "id": "redline-semantic-raw-limits-strict",
+          "issue": "JSv4/Docxodus#1352",
+          "kind": "reproducer",
+          "operation": "compare",
+          "score": 100.0,
+          "status": "measured"
+        },
+        {
+          "adapter": {
+            "engine": {
+              "name": "authored-redline"
+            },
+            "outputSha256": "662cdcf38693be5c2ed44bc9af2f2dc7b6c30060c317eaf2a8f68d450eac6b08",
+            "status": "ok"
+          },
+          "category": "identity",
+          "checks": [
+            {
+              "name": "conversion",
+              "passed": true
+            },
+            {
+              "name": "readable-package",
+              "passed": true
+            },
+            {
+              "name": "markup-accepted",
+              "passed": true
+            },
+            {
+              "name": "markup-rejected",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1352-completion/fixtures/redline/redline-semantic-raw-limits-transitional-control/authored-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1352-bench-calibration/redline-semantic-raw-limits-transitional-control/candidate-redline.docx",
+                  "operation": "accept",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1352-completion/fixtures/redline/redline-semantic-raw-limits-transitional-control/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-accepted",
+              "passed": true
+            },
+            {
+              "engine": {
+                "authored": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1352-completion/fixtures/redline/redline-semantic-raw-limits-transitional-control/authored-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "candidate": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/runs/1352-bench-calibration/redline-semantic-raw-limits-transitional-control/candidate-redline.docx",
+                  "operation": "reject",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                },
+                "expected": {
+                  "input": "/home/jman/Code/tmp/Docxodus/.goal-work/bench-1352-completion/fixtures/redline/redline-semantic-raw-limits-transitional-control/expected.docx",
+                  "operation": "load",
+                  "redlinesAfter": 0,
+                  "redlinesBefore": 0
+                }
+              },
+              "name": "libreoffice-rejected",
+              "passed": true
+            },
+            {
+              "name": "no-new-validation-errors",
+              "new": [],
+              "passed": true
+            },
+            {
+              "declaration": {
+                "scope": "redline",
+                "story": "body",
+                "texts": [
+                  "Marsh station agreement.",
+                  "Closing line remains unchanged."
+                ],
+                "type": "untracked-text",
+                "version": 1
+              },
+              "missing": [],
+              "name": "assertion-untracked-text",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "count": 3,
+                "scope": "redline",
+                "story": "body",
+                "type": "paragraph-count",
+                "version": 1
+              },
+              "name": "assertion-paragraph-count",
+              "observed": 3,
+              "passed": true
+            },
+            {
+              "expected": {
+                "withPackageChanges": 0,
+                "withoutPackageChanges": 0
+              },
+              "name": "semantic-preflight",
+              "observed": {
+                "withPackageChanges": 0,
+                "withoutPackageChanges": 0
+              },
+              "passed": true
+            }
+          ],
+          "id": "redline-semantic-raw-limits-transitional-control",
+          "issue": "JSv4/Docxodus#1352",
+          "kind": "control",
+          "operation": "compare",
+          "score": 100.0,
+          "status": "measured"
+        }
+      ]
+    }
+  },
+  "sdkFindings": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "documents": {
+      "fixtures/redline/redline-semantic-raw-limits-strict/authored-redline.docx": [],
+      "fixtures/redline/redline-semantic-raw-limits-strict/expected.docx": [],
+      "fixtures/redline/redline-semantic-raw-limits-strict/left.docx": [],
+      "fixtures/redline/redline-semantic-raw-limits-strict/right.docx": [],
+      "fixtures/redline/redline-semantic-raw-limits-transitional-control/authored-redline.docx": [],
+      "fixtures/redline/redline-semantic-raw-limits-transitional-control/expected.docx": [],
+      "fixtures/redline/redline-semantic-raw-limits-transitional-control/left.docx": [],
+      "fixtures/redline/redline-semantic-raw-limits-transitional-control/right.docx": []
+    }
+  },
+  "inputs": {
+    "redline-semantic-raw-limits-strict": [
+      {
+        "path": "fixtures/redline/redline-semantic-raw-limits-strict/left.docx",
+        "sha256": "916ea5f4e60f6b3bfd2802b9ccdf3d6dbaa4f5d98691018e7435084fd274086f",
+        "role": "left"
+      },
+      {
+        "path": "fixtures/redline/redline-semantic-raw-limits-strict/right.docx",
+        "sha256": "916ea5f4e60f6b3bfd2802b9ccdf3d6dbaa4f5d98691018e7435084fd274086f",
+        "role": "right"
+      }
+    ],
+    "redline-semantic-raw-limits-transitional-control": [
+      {
+        "path": "fixtures/redline/redline-semantic-raw-limits-transitional-control/left.docx",
+        "sha256": "662cdcf38693be5c2ed44bc9af2f2dc7b6c30060c317eaf2a8f68d450eac6b08",
+        "role": "left"
+      },
+      {
+        "path": "fixtures/redline/redline-semantic-raw-limits-transitional-control/right.docx",
+        "sha256": "662cdcf38693be5c2ed44bc9af2f2dc7b6c30060c317eaf2a8f68d450eac6b08",
+        "role": "right"
+      }
+    ]
+  }
+}

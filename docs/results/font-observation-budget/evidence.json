@@ -1,0 +1,1461 @@
+{
+  "scope": "Unscored strict-font public export diagnostics; no Word or full-suite parity claim",
+  "manifestSha256": "0d7d3ea814842177739c984061c3ef03a3b2fbc7623c53b4dd16c3d74ba8a6b0",
+  "builds": {
+    "baseline-final": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1564-baseline/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1564-baseline/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1564-baseline/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1564-baseline/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1564-baseline/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1564-baseline/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1564-baseline/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1564-baseline/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1564-baseline/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "5c8329174f91692519e24217b2feacde2134e8b3",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "ae91c96b1ecf43dda46a01d5a5c922eafdca47114d58f7b2863ebb1c38d2dfa1",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "686c3d6140f31f5485e06dae046e91cba7eb5a5e39884b0846d754d520a58325",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "3943d816413d46b9c6850f06cd49f97b3eacabc6ce460bbd1a5133dba38d98a5",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+      "schema": 1,
+      "tree": "c46e339d89909b43ab92d25970783495ae863e4d"
+    },
+    "candidate": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1558/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "563a4c37e52ce3adc8e2d43be29e98b023c09227",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "4c387347728bcc06ac6339bd549317bbdb688ebb5a8e8ddba4c1a0c08e7b89fc",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+      "schema": 1,
+      "tree": "3265d1b7a3ffe2fb1fef1770e7fe8a990d3c9a8c"
+    }
+  },
+  "rendererAssets": {
+    "baseline-final": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 610228,
+          "sha256": "ae8e54ced7434224c0a16b27a896a3c785d072937f8a69e6fd9fe576f5ad969f"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 165097,
+          "sha256": "26f6dbb6b293e12ed4b646e80ca889ba0bbe5dba2cba1352669e68529092b1bf"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46448,
+          "sha256": "90c4965cfc9d129cb74f6b5f30edb55fa3662c2c5350537ba7b014b8f781b1a5"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5434137,
+          "sha256": "d89747fe6fe7efbaea6c506d640b24bc79531e71403d6e19367eadb581007671"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "0b46375018b836cb8268024cbaea917b8a6c26821c7f692cf0a98b577cd3379e"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "ddf98ca8465eefaddded15d7fe054bfddd9e0c831c9d1f36de21b191b471f0f0"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1674517,
+          "sha256": "2ebf53d9fe8ce4f58c19af1ce4995f1b7c950330ef0a20180269c6f9c2371aac"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "b5edc523942e6dc6b4278ab2be8db65f2fac95971e3af55141f7a4ea003b4ce4"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10555218,
+          "sha256": "99ce75e60f0b2310e73874ac3d8add7262ffbdbd6cbb550dfe398d0b4d42a826"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    },
+    "candidate": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 610228,
+          "sha256": "ae8e54ced7434224c0a16b27a896a3c785d072937f8a69e6fd9fe576f5ad969f"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 165097,
+          "sha256": "26f6dbb6b293e12ed4b646e80ca889ba0bbe5dba2cba1352669e68529092b1bf"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46484,
+          "sha256": "a604dbff16d3be0f0d24cf48753404b42fe25f70fbd1393dde4934871446a420"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5437721,
+          "sha256": "3b351e3b2979ce61fb61538a62414757e93da5fff51bb73e47ab1faedfbc2f2b"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "29333f7e9c09e79aefee295f316120d25174edb2e7766d5dd2ba70a97da0ff1e"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "ddf98ca8465eefaddded15d7fe054bfddd9e0c831c9d1f36de21b191b471f0f0"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1674517,
+          "sha256": "2ebf53d9fe8ce4f58c19af1ce4995f1b7c950330ef0a20180269c6f9c2371aac"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "f2fd717be37562b3e9ddcbe732c5286ae473bed43b7b674e78657f2267f1b040"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10549690,
+          "sha256": "81e187268605dabbf1f855d12546d90707d2f844e2b4ec8d344b462a369fb197"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    }
+  },
+  "captures": {
+    "baseline-final": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "5c8329174f91692519e24217b2feacde2134e8b3",
+      "sourceTree": "c46e339d89909b43ab92d25970783495ae863e4d",
+      "buildIdentitySha256": "078d53e831c8297d507f68ab22a15d0f075afbfa3c1bd1c73c6d1ec389197f2a",
+      "manifestSha256": "0d7d3ea814842177739c984061c3ef03a3b2fbc7623c53b4dd16c3d74ba8a6b0",
+      "browserVersion": "143.0.7499.4",
+      "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "font-observation-ledger-3000",
+          "inputSha256": "784433eca2e9959843138593f22753e3373af66846f9dac664526faa1146cc78",
+          "status": "delivered",
+          "pages": 56,
+          "pdfSha256": "3b30020beb8233ad9e8d02cee80a1c2985a878e258caee64a907755bf2ea4fd7",
+          "renderReportSha256": "eb5f1a0141c79de8cec2413ebe7bff65350a8c6ff98e8b5bbd99503baf938de7"
+        },
+        {
+          "id": "font-observation-ledger-6000",
+          "inputSha256": "7ab60d8d31ceb8aad6ff19a2591939e0fcd8f17630b135c38bdf6db197c1e6ea",
+          "status": "failed",
+          "code": "resource_limit",
+          "phase": "output_verification",
+          "message": "Font observations exceed the remaining renderDiagnostics limit."
+        }
+      ]
+    },
+    "candidate": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "563a4c37e52ce3adc8e2d43be29e98b023c09227",
+      "sourceTree": "3265d1b7a3ffe2fb1fef1770e7fe8a990d3c9a8c",
+      "buildIdentitySha256": "b3b59fe5e9664f527f52fa3bbac5c30445b621d68fb25dd2314759b52adea465",
+      "manifestSha256": "0d7d3ea814842177739c984061c3ef03a3b2fbc7623c53b4dd16c3d74ba8a6b0",
+      "browserVersion": "143.0.7499.4",
+      "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+      "sandbox": true,
+      "fontContract": {
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "font-observation-ledger-3000",
+          "inputSha256": "784433eca2e9959843138593f22753e3373af66846f9dac664526faa1146cc78",
+          "status": "delivered",
+          "pages": 56,
+          "pdfSha256": "d31a23edb6d31b02c6e3d639d1bc02deee1ffac475dc1cd35f5ace2772608df1",
+          "renderReportSha256": "99360a390e15f61c15eda6668d5ed8fadb55b40ca5e5581c292ac9e1752c2bc6"
+        },
+        {
+          "id": "font-observation-ledger-6000",
+          "inputSha256": "7ab60d8d31ceb8aad6ff19a2591939e0fcd8f17630b135c38bdf6db197c1e6ea",
+          "status": "delivered",
+          "pages": 112,
+          "pdfSha256": "92cc1ceb94515017a83fbf11167f825806f9b756c0eda36304d98d2678c02443",
+          "renderReportSha256": "1dd011471c9d2da87508d0e210899aa243128f2b9bb37b4096492d52b3b64a18"
+        }
+      ]
+    }
+  },
+  "referenceBundleSha256": "9325358c1e639f41d09c45ab6740f43db4d258a9a9b97e7d676855e4b4ecb435",
+  "referenceEnvironment": {
+    "fonts": {
+      "LiberationSerif-Bold.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+      },
+      "LiberationSerif-BoldItalic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+      },
+      "LiberationSerif-Italic.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+      },
+      "LiberationSerif-Regular.ttf": {
+        "family": "Liberation Serif",
+        "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+      }
+    },
+    "tools": {
+      "pdffonts": {
+        "sha256": "de0a6d649710c2ebc226656b08c70814019a93f58889f79bf1dac726a131beda",
+        "version": "pdffonts version 25.03.0"
+      },
+      "pdftocairo": {
+        "sha256": "6f56c7c8c5b015354ebed053d4b52e14b43611c9c86236562bfd112827108dc5",
+        "version": "pdftocairo version 25.03.0"
+      },
+      "pdftoppm": {
+        "sha256": "6c315e59db2a0829ecdfb6c791ad3f56bc9bd508266d20adc22238df447a74a3",
+        "version": "pdftoppm version 25.03.0"
+      },
+      "pdftotext": {
+        "sha256": "451784e28a4593637573e534d9be4c4487a3cccffae22a71e93162faa84de23c",
+        "version": "pdftotext version 25.03.0"
+      },
+      "qpdf": {
+        "sha256": "0d0462ea848601a652b666e83a07a095bb0c4d69d831beb6f94ea8e6e008f34c",
+        "version": "qpdf version 12.2.0"
+      }
+    }
+  },
+  "schema": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "documents": {
+      "fixtures/font-observation-ledger-3000.docx": [],
+      "fixtures/font-observation-ledger-6000.docx": []
+    }
+  },
+  "cases": [
+    {
+      "id": "font-observation-ledger-3000",
+      "inputSha256": "784433eca2e9959843138593f22753e3373af66846f9dac664526faa1146cc78",
+      "labels": 3000,
+      "panels": [
+        {
+          "renderer": "baseline-final",
+          "report": {
+            "file": "font-observation-ledger-3000-baseline-final-report.json.gz",
+            "sha256": "edd3f7de2529f739fe9e0f409be5428545675a1af285967754470952be4704b1",
+            "jsonSha256": "eb5f1a0141c79de8cec2413ebe7bff65350a8c6ff98e8b5bbd99503baf938de7"
+          },
+          "observation": {
+            "status": "observed",
+            "method": "chromium-cdp",
+            "media": "print",
+            "fileIdentity": "unavailable",
+            "useCount": 3000
+          },
+          "warnings": [],
+          "pdfSha256": "3b30020beb8233ad9e8d02cee80a1c2985a878e258caee64a907755bf2ea4fd7",
+          "pages": 56,
+          "labelsWithinPages": 3000,
+          "inspection": {
+            "file": "font-observation-ledger-3000-baseline-final-inspection.json.gz",
+            "sha256": "4b9350ef27505dc9a6c4356cded0ebf513334d1225af7813c27fcf91dfe73e7b",
+            "jsonSha256": "154003fda4044210fa1aaf6e2c38847456984b7ecae23575dcab3ea06980ec8a"
+          },
+          "pageRasterSha256": [
+            "defdd4ac78c5a7dee002a55401261445736dcee14c6b01e9c8ba62e82dd88443",
+            "7ec0aed7055856e7b125419f7ba790bd03d54e2d75804bd8d46dd1232e4bef3e",
+            "77f18a34e872d2cf8e01c7ea9ac520da86501b2afbb71a47198bc2900e646bb9",
+            "07713b93b78490480272988f70f4ad8651bc5cc22e77fe7618c7247d273bbef6",
+            "be11c970c865aeb16c04b76d673473d12ef312e1d8e740699ba09c3f781c7093",
+            "4e6ae1ec31e9ce7a92656d92dcd0a88d8d504b318223f31d21ade64dbbfcfbcd",
+            "c1ca34db273ce01c9d8b8b6c8b1549d9b1d1949280480610900676b0802ce452",
+            "9649617366b4944462046c403e61e789a759c682d2fdff59d9a3e28e582fa242",
+            "ae4f084009d0301e86d7cde0efde779ef00890548edc8570a83889078d782c00",
+            "1cee145fda24d837386d328f74f464ebf3b91a1e2c713b908bf52e9018f57191",
+            "f25f342e819fa2621426039bbbbabf82b377666cfeee63ef8f14f4598a423e20",
+            "a4478fe59ff6db62471969102ebccd5528092e21c092f0fe870370910388e504",
+            "d46ac7d16c27e259eb4570bd1f529188b25c7107becd3384f1b489bbe0e39e6c",
+            "9067e87bcd30cb6915e67c28877dcdaf6fbcef29428b6dfd7e23c9b894c55c11",
+            "e2c1676f01e291f49f70810618767d323991d03bddcd104501f07d9a98d8e88b",
+            "9cae0cf99727ddba963d9e68d9ba8820104de2c95076688a84e0eda4d25e00d6",
+            "a7fbe9416a28ee558dde567d4300aa51a93c09eaa47745e7baedc1edc75e1f26",
+            "156526b3b66b9b9e893fac1fc7da85590d143d5594f160952e09313d89051dba",
+            "949b79094d32e8513035f406255ab8e1db06829c034dd3e9bcd213bab396d192",
+            "c9985c5e0f0958f95c96701e674b424ac313007eae3f9783de97accb629ce0f4",
+            "4b9db6ba2517f040d927f84f9f75a37f1c5bd745d4f5ac48e223b10155f3dcc9",
+            "84b6d53fb698c7a34a78e424153d21fdc84cabeab2422394fada41cdb606e668",
+            "6b3806c1e01821da6d8a96c6896ae8ba6fba5df65adf956677effb773f5b398a",
+            "a17bd49a4655e885e502f7391744b61a2c25c2ba6947f52e0f7a35e3e9e07aa3",
+            "c698ea5d9bf79f5de62ad65d637c3039c673a77f699076e4a1d80458775160ce",
+            "741227a3020cb72b6aa0aa14cf33dc35de80d3a45515c6688e54af2eb27a27eb",
+            "5109114ab985ba01898cb0f1790d738a7c952c78b0e095cfd2792fd379d791b7",
+            "a78f13e035b30f69ba2d26881f6fbab119de2852e855e68f759da4968294c143",
+            "1df804148a8311e6d222421dad0f150ace78e8fd0b4e468d534e7ab790e54808",
+            "b2475b43165fb4eba0185b2fbe224681837e6a70e1d10bf28195285477fa25f6",
+            "4ccd61e932d70e9736670555b2249308dd01f01dd0208d688cde6b5513667ef1",
+            "b92e19f64d5ae474a00368a9ed48faf8900988dcb6b93f61d32b59eee1d2d77f",
+            "ab711a6ef1e6ed767f0027bf9c48388bf460c9538c1218e0c3e5a8c0dd7fe218",
+            "9dd2f57e131cbf083de54b380973f7e32dad0bacd98ad9032da18698740d0f57",
+            "b3e5104c4fba85e0bd13e3bc90880799a6b4caa86a8907f4263b692c08a944d8",
+            "ce22c9b0605d1f5c5bae05106ab224541efce67a14f03c32f3d7b6eaaff44f5a",
+            "4c80eaf47e0d64ce6d37154dab12e4d1522d70db4026395e4c80b96412294c34",
+            "a86c91d0a4cdb335f615e86bc88034faf9866e9864006317e5c5861abc9f6c2b",
+            "7b510ac05977060caae7b11f707774202ba157544503136bb7285bc91aa94cda",
+            "ec45f9727f91f4fda6dfce80d5fb3bd6ce3f06ea85a0e5a9aa802a88404ec6b8",
+            "6f850985b32397f126278a70c89e9ac3541fd03787c665224e3c8fcce81d1417",
+            "0c7b64fcdc4ad89f3a81d77bdcb58f034832197bcfd4af609f02f1cc8c40f900",
+            "5567c18363455a8f087ed72289bf2cbc3a832708495d5d017bf2c676ac5684d0",
+            "9e59022210d2d3f668782bb7c8f9bdd96c26f8c9442b1748968069aa10d78ced",
+            "2fb4b5703c515ea2cd8faf6c3a4bce3082addaa24a4686e666ace8494a57c862",
+            "236a9d3b17f334fdb82d8d80bd800ecaa2b687dc4ff4ef1cf3758e145d82cc9b",
+            "5f15cb1ba0d87fdf37d41c93059cf015a552a801adafb3c6ac187d24a2b4369b",
+            "1692532d5b1a9eb162208d5931f57f2a9143ae2a22117c0f3712169205a63c6b",
+            "b227a55195ddaa877ab7eb952ab18f59656acc9fafc0dc4d56198be76383254d",
+            "de3b5b2cf338f3a19226281235552a5241c52727507cb047f78ad511ea3c9999",
+            "f2ce804b078c1736328e066efabbe91b8ff8ac2a1b6ff4a24c1d82a5dde1f638",
+            "88a0946721d40ea2b7c313f5c273fc2cbc65a5c5105fe0c362fd81e55b000ec4",
+            "e628c6643070753414c0c14360c641c7d2d43cc18c82d4ff2bec0b7bb649e758",
+            "68e1552cafc0b02bc2c726d26136dbe231531c3463a916d17165003ce8bd7acb",
+            "a9f02f1bcbd9232d2e475d79dd7ec51020c9d3990ee9fbda881b5cde1386bef8",
+            "a155fb2c5e6456579065e56a42beff155c34b8331339aaddde02b88c83292052"
+          ],
+          "contactSheet": {
+            "file": "font-observation-ledger-3000-baseline-final-all-pages.png",
+            "sha256": "ede3f4817319de44716de621dec852ac38f6b6ac526daeae1d5b08a0af5fab9a"
+          }
+        },
+        {
+          "renderer": "reference-final",
+          "pdfSha256": "b3dcf8d9ab30a6d1a4b7ac1550d178ec7ed7af0eb0b648a431ad7f731e23e4e5",
+          "pages": 56,
+          "labelsWithinPages": 3000,
+          "inspection": {
+            "file": "font-observation-ledger-3000-reference-final-inspection.json.gz",
+            "sha256": "5592f85120df855d47cd707b4dcc912560213ac0b6026ba682bf0249834052b3",
+            "jsonSha256": "d91942cd4adf6ceee47ba0caa37b5c89ca92939adc5edbba69c08aa9cb8d8f2a"
+          },
+          "pageRasterSha256": [
+            "9150e6cf967417491fc4b89b3ca60240fadb50322ee58bbf7a375ca5b693e038",
+            "bc19b54793b2a35f400b3396843c3144c048a54a408184518fa535a996f93cb9",
+            "1648399a0c99c14e6a0f6c09dc100f652877dac924b446619928c27127e21f15",
+            "b6729ac4da31912ee2d5119f59626666f7ed76af59eb8b26bc57656b8b685a0a",
+            "f57c8c5b4d272ebc508c3ac60473c048889abc9d25ef83858114aab7297b6634",
+            "fd718fcf34135b92fcc53a241952a46e9503a8209d214e327673917aab6fa752",
+            "413318bde684cb16f4d06feb70762f878ff8e31d55d5a3677d2b14a03bcee3ec",
+            "cb7ecd0ae5e67a43f377b8052d6a7e50e93c978b6aaf8e93aa185389f7be50ee",
+            "7e37cc1d16e7f5a975c6c4eaf084611c3378cd2538cf53e1dbbe8c022ac3953f",
+            "d10db18dd22ebac69bbfcf842bd52f391f64ea6354b1399276e0b93a81754c10",
+            "eb01806c6461aa954beb44d32d42bcde688f8c1bec0df516c1e928bb604bfbab",
+            "134900f70442360cc0fa62f595798e45dccd857625d17bc255f72d862b5536b3",
+            "eb18ba7aeb9b0ee3fedf548b91ef6d6011dc6f971a34a0acd203e94ec382f04c",
+            "c9a958eccdd2c04193d14c027777a05026bf60a4517d49d9e5fa2c1bc04975a5",
+            "7f4e3bf1e674fa6bfd9f9a0bcfd09972e908db82461ca0e550e64c785392822e",
+            "ab32719171226670ff808ab8179cc363c61b01da3d73fe1af95e1bbd73678d01",
+            "c4f3ce40a39d7d0fb7ad30412e276fc1874d7ff8ef5a3b740ff1ec02200d7d99",
+            "21c3734a99d912ffee321f98f65b9ce49a2c51b534643e438108fee71b6bf854",
+            "5241cfc33a2ce48266372075fdba354f61a0006fe68ddb3fb390431cfb9ddc17",
+            "2d8019aefa0f7a329149aa024f1cc2e7b11ff601b138c06a4aa0ac8ec3c5f81a",
+            "96192f55fccccc730c8abfc2936fc8824b8ee0a76e0dded00e4b4bfb3ae90af4",
+            "5934da5ff6aa7b5528d4d3c0026a4369801743f17fd28459f6607fb0e76672b8",
+            "1af71cfd48b182152e86612c8ac4d2f77d44e45fbbec3e2c1f1c950b174935bd",
+            "22c9cf6e0182f74a7d7492180d9c1e109fb4e4a6665990521c811d8ae8f22edd",
+            "4598af1bbcdc80e0e53bcea3ad4333aa873fc888cc6a5a32a09b2be22ad209fd",
+            "775b3647154e0b32f19982e45d7cb853cf00fcfc407c7938b19d649df2f1850f",
+            "aaca9e0e877e19c458cd7336ae4e41ff7e7cb8f075c336a1b158f9ce3b08be3b",
+            "120bc7df9b37b76ea8e180a0ca5b69d6106c150b1dae63da62788b85cda69767",
+            "f0947a50243f2d887eb590b04563419f5a50d6f61e42a260952b2c8349e674ce",
+            "aa26e7bbe02210f8a55da0eeed7971d107f2d33c45c04b7b32f13345afcf6e12",
+            "5c053aa4f388973403008529d204c5387dfdfe535f52e0df1f392c683f727860",
+            "f00cf5d00b6b4aba786ef0cf0ae4fe9a1f11a55898f97e535bbe29715b35b00a",
+            "66e8fa5b875396dcb9d65561e6b99a7c8330bf44891162e2d4189870fc5098a0",
+            "9115f72d7e3ecbb78affcaced4b9f804aa608d976f26f25643c205eb738a3ee2",
+            "e80c69d746a934a5e093658118fba163ca82035317b68d3a62b85988bfe2786a",
+            "b17f4adaf1a8e2570f479af1a269f19ef8180e26c2afcbf902d57538a2de1036",
+            "4c880c51abcc542daadbafeea0f05cf3762edb61fb65e425de58509bfde34763",
+            "746c45f2682d039098d7c8d3094f33c8d31bbdcdf32548791e41c572a08b9a67",
+            "aec73a3d7d4ff82f587363452d61fa77c44d64d3ea89f909a6ea825b4cf909d1",
+            "84c115737aca771def016c3d5a79c8da0a3adfdd84e42b529943555edd25390c",
+            "536db0d3624c8d7f8209a16ccde3e421f004bed219097e9b79a41b064dc70a02",
+            "9e1927a8c5d1db6d998174527d150135b33ee91594d2112382a392930957dd2a",
+            "5cdfa55d8450e4bd5180f67d42853a71d488a689d48a3623b3bcdda567d9a54a",
+            "393e79c584d29fa9cee7679e375b7916da5ca4cb55cc643bcdcee50d6ae9fd08",
+            "b77a5c047e811d03ea0e11b27bd5495e19e132c35dee13cb5170d68c0d31c9bf",
+            "26986c4fa229a2a61539888cf880a6156926d035e7f42bff10a758f78ff98fc1",
+            "092f0a94520f8a356aefd0a136a0bde3f8c26d834795b727858494783d1a4386",
+            "fb7c4a74680726fd748ba5ed76924599d955ff4011ebcb2bbbff103af543f1dc",
+            "17d2bb2896b5f253fced3c97486122d39178af36ac7b45ec493aab26772ca5a8",
+            "81dbf0c8dad7e1449da6c4ab1f99db47fbaa5a74e3126c4485526cee841ed9c1",
+            "95ebf7dde76199f61bd419b6b9165ed029dc4023876b1c49b0c212df648f46c7",
+            "7a2825c3ecadd8875003b479f539d7afbc22550e3f60edf4856fa56949f5bad1",
+            "901e0e014baadfe1667f675f324ca2ce49c11e37ba4a4856099610c6ca6dbaef",
+            "0cb341c0f80b217a80f493a569789fe2cc87b2653399a9b7d6d90adcc9bf8632",
+            "b5f7b168fc5749a249fbd4aaf1d947c20af790f02a2ed90e4dc78a5b61c6f186",
+            "da1e8046a15bc19a00642c037672b8e9c923eb057b6da7df5c590080cf149d4a"
+          ],
+          "contactSheet": {
+            "file": "font-observation-ledger-3000-reference-final-all-pages.png",
+            "sha256": "b2f9927a3386fd687b25d44683bd2648511bcbf4400d12b3f82748eaf99e442d"
+          }
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "font-observation-ledger-3000-candidate-report.json.gz",
+            "sha256": "8dec8017bead095ec3548daa59585b7f8138f858f6cc05c897f39acfd4dc43e9",
+            "jsonSha256": "99360a390e15f61c15eda6668d5ed8fadb55b40ca5e5581c292ac9e1752c2bc6"
+          },
+          "observation": {
+            "status": "observed",
+            "method": "chromium-cdp",
+            "media": "print",
+            "fileIdentity": "unavailable",
+            "useCount": 3000
+          },
+          "warnings": [],
+          "pdfSha256": "d31a23edb6d31b02c6e3d639d1bc02deee1ffac475dc1cd35f5ace2772608df1",
+          "pages": 56,
+          "labelsWithinPages": 3000,
+          "inspection": {
+            "file": "font-observation-ledger-3000-candidate-inspection.json.gz",
+            "sha256": "4b9350ef27505dc9a6c4356cded0ebf513334d1225af7813c27fcf91dfe73e7b",
+            "jsonSha256": "154003fda4044210fa1aaf6e2c38847456984b7ecae23575dcab3ea06980ec8a"
+          },
+          "pageRasterSha256": [
+            "defdd4ac78c5a7dee002a55401261445736dcee14c6b01e9c8ba62e82dd88443",
+            "7ec0aed7055856e7b125419f7ba790bd03d54e2d75804bd8d46dd1232e4bef3e",
+            "77f18a34e872d2cf8e01c7ea9ac520da86501b2afbb71a47198bc2900e646bb9",
+            "07713b93b78490480272988f70f4ad8651bc5cc22e77fe7618c7247d273bbef6",
+            "be11c970c865aeb16c04b76d673473d12ef312e1d8e740699ba09c3f781c7093",
+            "4e6ae1ec31e9ce7a92656d92dcd0a88d8d504b318223f31d21ade64dbbfcfbcd",
+            "c1ca34db273ce01c9d8b8b6c8b1549d9b1d1949280480610900676b0802ce452",
+            "9649617366b4944462046c403e61e789a759c682d2fdff59d9a3e28e582fa242",
+            "ae4f084009d0301e86d7cde0efde779ef00890548edc8570a83889078d782c00",
+            "1cee145fda24d837386d328f74f464ebf3b91a1e2c713b908bf52e9018f57191",
+            "f25f342e819fa2621426039bbbbabf82b377666cfeee63ef8f14f4598a423e20",
+            "a4478fe59ff6db62471969102ebccd5528092e21c092f0fe870370910388e504",
+            "d46ac7d16c27e259eb4570bd1f529188b25c7107becd3384f1b489bbe0e39e6c",
+            "9067e87bcd30cb6915e67c28877dcdaf6fbcef29428b6dfd7e23c9b894c55c11",
+            "e2c1676f01e291f49f70810618767d323991d03bddcd104501f07d9a98d8e88b",
+            "9cae0cf99727ddba963d9e68d9ba8820104de2c95076688a84e0eda4d25e00d6",
+            "a7fbe9416a28ee558dde567d4300aa51a93c09eaa47745e7baedc1edc75e1f26",
+            "156526b3b66b9b9e893fac1fc7da85590d143d5594f160952e09313d89051dba",
+            "949b79094d32e8513035f406255ab8e1db06829c034dd3e9bcd213bab396d192",
+            "c9985c5e0f0958f95c96701e674b424ac313007eae3f9783de97accb629ce0f4",
+            "4b9db6ba2517f040d927f84f9f75a37f1c5bd745d4f5ac48e223b10155f3dcc9",
+            "84b6d53fb698c7a34a78e424153d21fdc84cabeab2422394fada41cdb606e668",
+            "6b3806c1e01821da6d8a96c6896ae8ba6fba5df65adf956677effb773f5b398a",
+            "a17bd49a4655e885e502f7391744b61a2c25c2ba6947f52e0f7a35e3e9e07aa3",
+            "c698ea5d9bf79f5de62ad65d637c3039c673a77f699076e4a1d80458775160ce",
+            "741227a3020cb72b6aa0aa14cf33dc35de80d3a45515c6688e54af2eb27a27eb",
+            "5109114ab985ba01898cb0f1790d738a7c952c78b0e095cfd2792fd379d791b7",
+            "a78f13e035b30f69ba2d26881f6fbab119de2852e855e68f759da4968294c143",
+            "1df804148a8311e6d222421dad0f150ace78e8fd0b4e468d534e7ab790e54808",
+            "b2475b43165fb4eba0185b2fbe224681837e6a70e1d10bf28195285477fa25f6",
+            "4ccd61e932d70e9736670555b2249308dd01f01dd0208d688cde6b5513667ef1",
+            "b92e19f64d5ae474a00368a9ed48faf8900988dcb6b93f61d32b59eee1d2d77f",
+            "ab711a6ef1e6ed767f0027bf9c48388bf460c9538c1218e0c3e5a8c0dd7fe218",
+            "9dd2f57e131cbf083de54b380973f7e32dad0bacd98ad9032da18698740d0f57",
+            "b3e5104c4fba85e0bd13e3bc90880799a6b4caa86a8907f4263b692c08a944d8",
+            "ce22c9b0605d1f5c5bae05106ab224541efce67a14f03c32f3d7b6eaaff44f5a",
+            "4c80eaf47e0d64ce6d37154dab12e4d1522d70db4026395e4c80b96412294c34",
+            "a86c91d0a4cdb335f615e86bc88034faf9866e9864006317e5c5861abc9f6c2b",
+            "7b510ac05977060caae7b11f707774202ba157544503136bb7285bc91aa94cda",
+            "ec45f9727f91f4fda6dfce80d5fb3bd6ce3f06ea85a0e5a9aa802a88404ec6b8",
+            "6f850985b32397f126278a70c89e9ac3541fd03787c665224e3c8fcce81d1417",
+            "0c7b64fcdc4ad89f3a81d77bdcb58f034832197bcfd4af609f02f1cc8c40f900",
+            "5567c18363455a8f087ed72289bf2cbc3a832708495d5d017bf2c676ac5684d0",
+            "9e59022210d2d3f668782bb7c8f9bdd96c26f8c9442b1748968069aa10d78ced",
+            "2fb4b5703c515ea2cd8faf6c3a4bce3082addaa24a4686e666ace8494a57c862",
+            "236a9d3b17f334fdb82d8d80bd800ecaa2b687dc4ff4ef1cf3758e145d82cc9b",
+            "5f15cb1ba0d87fdf37d41c93059cf015a552a801adafb3c6ac187d24a2b4369b",
+            "1692532d5b1a9eb162208d5931f57f2a9143ae2a22117c0f3712169205a63c6b",
+            "b227a55195ddaa877ab7eb952ab18f59656acc9fafc0dc4d56198be76383254d",
+            "de3b5b2cf338f3a19226281235552a5241c52727507cb047f78ad511ea3c9999",
+            "f2ce804b078c1736328e066efabbe91b8ff8ac2a1b6ff4a24c1d82a5dde1f638",
+            "88a0946721d40ea2b7c313f5c273fc2cbc65a5c5105fe0c362fd81e55b000ec4",
+            "e628c6643070753414c0c14360c641c7d2d43cc18c82d4ff2bec0b7bb649e758",
+            "68e1552cafc0b02bc2c726d26136dbe231531c3463a916d17165003ce8bd7acb",
+            "a9f02f1bcbd9232d2e475d79dd7ec51020c9d3990ee9fbda881b5cde1386bef8",
+            "a155fb2c5e6456579065e56a42beff155c34b8331339aaddde02b88c83292052"
+          ],
+          "contactSheet": {
+            "file": "font-observation-ledger-3000-candidate-all-pages.png",
+            "sha256": "223b08e2bc25523ff7bc19a763c9cbb0425cbfa3ee79cf8833f13978f3284fbf"
+          }
+        }
+      ],
+      "screenshot": {
+        "file": "font-observation-ledger-3000.png",
+        "sha256": "0df3e171b36642c9e3d58f743c5514eee7893aa2915a949e3ff8ead4a2194836"
+      }
+    },
+    {
+      "id": "font-observation-ledger-6000",
+      "inputSha256": "7ab60d8d31ceb8aad6ff19a2591939e0fcd8f17630b135c38bdf6db197c1e6ea",
+      "labels": 6000,
+      "panels": [
+        {
+          "renderer": "baseline-final",
+          "failure": {
+            "id": "font-observation-ledger-6000",
+            "inputSha256": "7ab60d8d31ceb8aad6ff19a2591939e0fcd8f17630b135c38bdf6db197c1e6ea",
+            "status": "failed",
+            "code": "resource_limit",
+            "phase": "output_verification",
+            "message": "Font observations exceed the remaining renderDiagnostics limit."
+          }
+        },
+        {
+          "renderer": "reference-final",
+          "pdfSha256": "e4a7a02d723240575f5348d3f258ba23788e8adbf4c0117135021799847cf732",
+          "pages": 112,
+          "labelsWithinPages": 6000,
+          "inspection": {
+            "file": "font-observation-ledger-6000-reference-final-inspection.json.gz",
+            "sha256": "5097068d4c88a7fdf3d6cc69ec12e7517113198d40c4c02defadd532abbfb38d",
+            "jsonSha256": "56398c93e41a3870bcb19f3c6841911628d3b49b60c94a4d445be1b61c875109"
+          },
+          "pageRasterSha256": [
+            "9150e6cf967417491fc4b89b3ca60240fadb50322ee58bbf7a375ca5b693e038",
+            "bc19b54793b2a35f400b3396843c3144c048a54a408184518fa535a996f93cb9",
+            "1648399a0c99c14e6a0f6c09dc100f652877dac924b446619928c27127e21f15",
+            "b6729ac4da31912ee2d5119f59626666f7ed76af59eb8b26bc57656b8b685a0a",
+            "f57c8c5b4d272ebc508c3ac60473c048889abc9d25ef83858114aab7297b6634",
+            "fd718fcf34135b92fcc53a241952a46e9503a8209d214e327673917aab6fa752",
+            "413318bde684cb16f4d06feb70762f878ff8e31d55d5a3677d2b14a03bcee3ec",
+            "cb7ecd0ae5e67a43f377b8052d6a7e50e93c978b6aaf8e93aa185389f7be50ee",
+            "7e37cc1d16e7f5a975c6c4eaf084611c3378cd2538cf53e1dbbe8c022ac3953f",
+            "d10db18dd22ebac69bbfcf842bd52f391f64ea6354b1399276e0b93a81754c10",
+            "eb01806c6461aa954beb44d32d42bcde688f8c1bec0df516c1e928bb604bfbab",
+            "134900f70442360cc0fa62f595798e45dccd857625d17bc255f72d862b5536b3",
+            "eb18ba7aeb9b0ee3fedf548b91ef6d6011dc6f971a34a0acd203e94ec382f04c",
+            "c9a958eccdd2c04193d14c027777a05026bf60a4517d49d9e5fa2c1bc04975a5",
+            "7f4e3bf1e674fa6bfd9f9a0bcfd09972e908db82461ca0e550e64c785392822e",
+            "ab32719171226670ff808ab8179cc363c61b01da3d73fe1af95e1bbd73678d01",
+            "c4f3ce40a39d7d0fb7ad30412e276fc1874d7ff8ef5a3b740ff1ec02200d7d99",
+            "21c3734a99d912ffee321f98f65b9ce49a2c51b534643e438108fee71b6bf854",
+            "5241cfc33a2ce48266372075fdba354f61a0006fe68ddb3fb390431cfb9ddc17",
+            "2d8019aefa0f7a329149aa024f1cc2e7b11ff601b138c06a4aa0ac8ec3c5f81a",
+            "96192f55fccccc730c8abfc2936fc8824b8ee0a76e0dded00e4b4bfb3ae90af4",
+            "5934da5ff6aa7b5528d4d3c0026a4369801743f17fd28459f6607fb0e76672b8",
+            "1af71cfd48b182152e86612c8ac4d2f77d44e45fbbec3e2c1f1c950b174935bd",
+            "22c9cf6e0182f74a7d7492180d9c1e109fb4e4a6665990521c811d8ae8f22edd",
+            "4598af1bbcdc80e0e53bcea3ad4333aa873fc888cc6a5a32a09b2be22ad209fd",
+            "775b3647154e0b32f19982e45d7cb853cf00fcfc407c7938b19d649df2f1850f",
+            "aaca9e0e877e19c458cd7336ae4e41ff7e7cb8f075c336a1b158f9ce3b08be3b",
+            "120bc7df9b37b76ea8e180a0ca5b69d6106c150b1dae63da62788b85cda69767",
+            "f0947a50243f2d887eb590b04563419f5a50d6f61e42a260952b2c8349e674ce",
+            "aa26e7bbe02210f8a55da0eeed7971d107f2d33c45c04b7b32f13345afcf6e12",
+            "5c053aa4f388973403008529d204c5387dfdfe535f52e0df1f392c683f727860",
+            "f00cf5d00b6b4aba786ef0cf0ae4fe9a1f11a55898f97e535bbe29715b35b00a",
+            "66e8fa5b875396dcb9d65561e6b99a7c8330bf44891162e2d4189870fc5098a0",
+            "9115f72d7e3ecbb78affcaced4b9f804aa608d976f26f25643c205eb738a3ee2",
+            "e80c69d746a934a5e093658118fba163ca82035317b68d3a62b85988bfe2786a",
+            "b17f4adaf1a8e2570f479af1a269f19ef8180e26c2afcbf902d57538a2de1036",
+            "4c880c51abcc542daadbafeea0f05cf3762edb61fb65e425de58509bfde34763",
+            "746c45f2682d039098d7c8d3094f33c8d31bbdcdf32548791e41c572a08b9a67",
+            "aec73a3d7d4ff82f587363452d61fa77c44d64d3ea89f909a6ea825b4cf909d1",
+            "84c115737aca771def016c3d5a79c8da0a3adfdd84e42b529943555edd25390c",
+            "536db0d3624c8d7f8209a16ccde3e421f004bed219097e9b79a41b064dc70a02",
+            "9e1927a8c5d1db6d998174527d150135b33ee91594d2112382a392930957dd2a",
+            "5cdfa55d8450e4bd5180f67d42853a71d488a689d48a3623b3bcdda567d9a54a",
+            "393e79c584d29fa9cee7679e375b7916da5ca4cb55cc643bcdcee50d6ae9fd08",
+            "b77a5c047e811d03ea0e11b27bd5495e19e132c35dee13cb5170d68c0d31c9bf",
+            "26986c4fa229a2a61539888cf880a6156926d035e7f42bff10a758f78ff98fc1",
+            "092f0a94520f8a356aefd0a136a0bde3f8c26d834795b727858494783d1a4386",
+            "fb7c4a74680726fd748ba5ed76924599d955ff4011ebcb2bbbff103af543f1dc",
+            "17d2bb2896b5f253fced3c97486122d39178af36ac7b45ec493aab26772ca5a8",
+            "81dbf0c8dad7e1449da6c4ab1f99db47fbaa5a74e3126c4485526cee841ed9c1",
+            "95ebf7dde76199f61bd419b6b9165ed029dc4023876b1c49b0c212df648f46c7",
+            "7a2825c3ecadd8875003b479f539d7afbc22550e3f60edf4856fa56949f5bad1",
+            "901e0e014baadfe1667f675f324ca2ce49c11e37ba4a4856099610c6ca6dbaef",
+            "0cb341c0f80b217a80f493a569789fe2cc87b2653399a9b7d6d90adcc9bf8632",
+            "b5f7b168fc5749a249fbd4aaf1d947c20af790f02a2ed90e4dc78a5b61c6f186",
+            "acbc7c4fc495fa2c54b9168e52e12e2d86f41d1e8536d5f2cd18850335aa741f",
+            "773ad6830872ea3030840acef7c8751db17fb43ce5b8ac8525463c3e477d4d06",
+            "72a385d64ee04695ad4af2d6fc3608af20fa7d5858850ba0095b0dc993e95c53",
+            "1c79804ed06de379496c0727d2c036c92405efb179350c18beafb00c2947e98e",
+            "fc66df00773f88853843af2ab17024d7891526e81cd0269d9285935679b5c895",
+            "8de224ecf0ea2e46001f4d60796bee6b1b3e6c28f5f68b1cfac89a560c5be290",
+            "e46e5080361958c7c9b3ea755736086b9faf1715d91a86e6cfe0aec0e1190cb8",
+            "f53aa81dff802a06178421e34c3b7db92f23ae24cd994e5ff1e5bb3960f811fa",
+            "24a101cd4b79d70786e60c6e93cbd7a412a086c7909b8d71f51590b56b23c6d7",
+            "1b6e92ee42c96f6a50b56a816674d259c9814832e90846e109ca11500ca332c3",
+            "51aebf0775b591a1b8e2ade9c9e1f0bd5b45f2924f9a5627e5a9010c53236154",
+            "1e0c1fdcd71719ce233dde8282125ba275ca812cb6e0af8fa41fc35b1fcb4f9c",
+            "16fa34e65f534b0cea84043a18251f884a7041d5b894dac5704e6d85fa30bb1a",
+            "68f7afdb697955b320478d08deadc580a079c0b3f54f59fc9071891f510e4f8a",
+            "9331c6a8c9c33adfd81d4affe327a1c23e8c0515e5be5e076a5c4af472c66c4f",
+            "abe3bce8cc72f5d3c1ef9b3f85bcbdef89a080104839290f4b7c21849e836262",
+            "b0b81ffe89454b4dd5ee9030ce79f56647ef7094a015430e0b1e3f007f4e7a6e",
+            "44e74abbcbd9218c208f18abada4fc585c7100293c6ed14062e10ea16783d8dc",
+            "861a6e598b239f1740f0fd8ca32c5a1fbbe5c1f221e5c0e6d8cfe5a417eea7f8",
+            "bdbbf8e9c3939fcf0f08b1d23e5a481bc3b41585d10d00809763370dfb6c5ded",
+            "64fb107846b52642e1c347f486c8c8ed07c26264f6211683c0a5f31734fd912b",
+            "3a9b6d3961220ea427f9a68bac450ccaad23986a11e3f3c2b6c2f084528018ec",
+            "b49fb5f3fc7ba41e0bca90fe835c5b8ea5057983abf73d3c7aa3e5bc1840ad9f",
+            "74b1ca69092b3f2a7ca2be7a02aa0ce12fb23696781d31979cf7664e8e49146a",
+            "2bbb344af2505db74b87543cfe41afdc9d56661aed1567dee70cafd2d220d669",
+            "b2a44b3a2239e3a58cf3df01d8c57e1140d6d57411fc7cf67d561d24aeebf605",
+            "dad424ae94a1cbb7c27cf4910977a47bcf5b2d8f18f7a971574ef69240c11e0c",
+            "582733431b227660c4caa5b3432b91ed20da5f4b7ee73ceaa2028d79cbafd0fc",
+            "4e78349c4f064397e9814124d213333e843575a041640b9bdf5523aa94cb568b",
+            "e06baee2c8b6b1cba1456a99255be1d5ff6e2374e786258b81c37958ab3159a3",
+            "0f3aa1446f3c3ae181b4b7aade55d3e228753edb8e82520d6f3f9cff7c7b6245",
+            "74c0db35745449302051eeb8d0334d7fc4f3f0f4320b7e878a4aa0d71d036de1",
+            "b83c413eebd55922ad8de7d6da532f9b213dbc5d6725baeb1fee97bc3bade2e6",
+            "e5efb0342ded04313d31094fe983755dd691bc237e484d3d1477b09f21d01b13",
+            "76cbaa1853b395f6d5823d541e00893ee40d984442c176012460dcdd3da8fef2",
+            "71a2c5c35276630b497002be0dd20da589dbed96504428d3c53fbb59c50b1dbb",
+            "53ed68bbc9d25821d83c0ba137c5762ab3852e0426b35d92b4470dbd310d23e6",
+            "bae71b2fea70a77fa50131f26bce5ec8649bdf496a27335d62434a21a906b93a",
+            "097fda721ab851d0bfed45134dcca18e2191979dab09a18239ec5b928f507742",
+            "c9a83698910f11a9c39b0a10b477af773d51d0b4d6e65786bed203e045707983",
+            "23d61ef8ddfb77193acc2152f0d7102e603260487806239f73a3a89d0472a121",
+            "503c444fcecdc953dc15d75c8b621b72d58ead744d303f0d73a6647c4b93a520",
+            "655412dd78fa130f217a73ef43c565e09cf705543e3ae6e16a2a33c63833df5a",
+            "600f4b3b3bf1eaf7b8c0031192a066e5f987f103fecdaad0d64b2e81c7002874",
+            "ba649f600f713c5d9f8580099dcd725acc638cb89cd5a1c99fe01d78f1430f62",
+            "503793da25f42bc80d361cb6c61d0dd85fc8a8e7fb143329a17ed24833c33c03",
+            "97cb1d59737e579a013894164c265c5efefaa50c1c5ec69b2b4f9cc70c3eda3e",
+            "71d03002b97d9cb9d930dd6ec01825d18a2f596dcea807790de733ac1f7f5094",
+            "e8d8c11cb1d91b8f4f7a9e9a6bb0c14d6de4df6f30c187c263f449465ae37398",
+            "0564c3ff369e3857e3463ec64c2b9da91ecd742780934227bea9158d4e1d4ea0",
+            "91206bf95b8f4a239b417fc1a984c619818def1d05c7b5c69d83f0c54febde5e",
+            "59b222cceb2519e1c2c99b2511006eb97b9b5ba3a9d37465d8cd1743851cdda7",
+            "e9c55ca20e282aa491a484d4fa496034465d83a6b89271e7907b4e443ec827ee",
+            "4c62efbda3821c5e20039bfa94280c1fea4e21aa5f3881708c40dba56585017c",
+            "5fe5658c04f4e8b9d66929984c06ed7ad2a30a41b4392b8b31c5ab214036dde2",
+            "e3f58cfb756cf5392556851528d4e1abd320a1bfaf1690c24873475c9aa5b239",
+            "77c24a1de4613b8895c34e195ab801facdab58e32f39c51e8b401bb10bbcc003"
+          ],
+          "contactSheet": {
+            "file": "font-observation-ledger-6000-reference-final-all-pages.png",
+            "sha256": "ffe507f285857840e82bd0107a499fc8c4c24430ccb4f78e5e4a2488787fd863"
+          }
+        },
+        {
+          "renderer": "candidate",
+          "report": {
+            "file": "font-observation-ledger-6000-candidate-report.json.gz",
+            "sha256": "d29d52889789fbb13e819ab7e937a06d36c07067baf8cdaec8a10310b2698927",
+            "jsonSha256": "1dd011471c9d2da87508d0e210899aa243128f2b9bb37b4096492d52b3b64a18"
+          },
+          "observation": {
+            "status": "unavailable",
+            "reason": "diagnostic_limit",
+            "useCount": 0
+          },
+          "warnings": [
+            {
+              "code": "font_observation_limit",
+              "severity": "warning",
+              "phase": "output_verification",
+              "message": "Font observation exceeded the diagnostic budget; incomplete observations were discarded.",
+              "remediation": "Use a smaller document when complete platform-font observations are required."
+            }
+          ],
+          "pdfSha256": "92cc1ceb94515017a83fbf11167f825806f9b756c0eda36304d98d2678c02443",
+          "pages": 112,
+          "labelsWithinPages": 6000,
+          "inspection": {
+            "file": "font-observation-ledger-6000-candidate-inspection.json.gz",
+            "sha256": "aed950cefc103606da07e90eaa684bf0911c16b0023e690067527854f71f588b",
+            "jsonSha256": "4e7897bbd6cde3ad2e2f7df773273e0414739750d1da9e9763f300b20e583d76"
+          },
+          "pageRasterSha256": [
+            "defdd4ac78c5a7dee002a55401261445736dcee14c6b01e9c8ba62e82dd88443",
+            "7ec0aed7055856e7b125419f7ba790bd03d54e2d75804bd8d46dd1232e4bef3e",
+            "77f18a34e872d2cf8e01c7ea9ac520da86501b2afbb71a47198bc2900e646bb9",
+            "07713b93b78490480272988f70f4ad8651bc5cc22e77fe7618c7247d273bbef6",
+            "be11c970c865aeb16c04b76d673473d12ef312e1d8e740699ba09c3f781c7093",
+            "4e6ae1ec31e9ce7a92656d92dcd0a88d8d504b318223f31d21ade64dbbfcfbcd",
+            "c1ca34db273ce01c9d8b8b6c8b1549d9b1d1949280480610900676b0802ce452",
+            "9649617366b4944462046c403e61e789a759c682d2fdff59d9a3e28e582fa242",
+            "ae4f084009d0301e86d7cde0efde779ef00890548edc8570a83889078d782c00",
+            "1cee145fda24d837386d328f74f464ebf3b91a1e2c713b908bf52e9018f57191",
+            "f25f342e819fa2621426039bbbbabf82b377666cfeee63ef8f14f4598a423e20",
+            "a4478fe59ff6db62471969102ebccd5528092e21c092f0fe870370910388e504",
+            "d46ac7d16c27e259eb4570bd1f529188b25c7107becd3384f1b489bbe0e39e6c",
+            "9067e87bcd30cb6915e67c28877dcdaf6fbcef29428b6dfd7e23c9b894c55c11",
+            "e2c1676f01e291f49f70810618767d323991d03bddcd104501f07d9a98d8e88b",
+            "9cae0cf99727ddba963d9e68d9ba8820104de2c95076688a84e0eda4d25e00d6",
+            "a7fbe9416a28ee558dde567d4300aa51a93c09eaa47745e7baedc1edc75e1f26",
+            "156526b3b66b9b9e893fac1fc7da85590d143d5594f160952e09313d89051dba",
+            "949b79094d32e8513035f406255ab8e1db06829c034dd3e9bcd213bab396d192",
+            "c9985c5e0f0958f95c96701e674b424ac313007eae3f9783de97accb629ce0f4",
+            "4b9db6ba2517f040d927f84f9f75a37f1c5bd745d4f5ac48e223b10155f3dcc9",
+            "84b6d53fb698c7a34a78e424153d21fdc84cabeab2422394fada41cdb606e668",
+            "6b3806c1e01821da6d8a96c6896ae8ba6fba5df65adf956677effb773f5b398a",
+            "a17bd49a4655e885e502f7391744b61a2c25c2ba6947f52e0f7a35e3e9e07aa3",
+            "c698ea5d9bf79f5de62ad65d637c3039c673a77f699076e4a1d80458775160ce",
+            "741227a3020cb72b6aa0aa14cf33dc35de80d3a45515c6688e54af2eb27a27eb",
+            "5109114ab985ba01898cb0f1790d738a7c952c78b0e095cfd2792fd379d791b7",
+            "a78f13e035b30f69ba2d26881f6fbab119de2852e855e68f759da4968294c143",
+            "1df804148a8311e6d222421dad0f150ace78e8fd0b4e468d534e7ab790e54808",
+            "b2475b43165fb4eba0185b2fbe224681837e6a70e1d10bf28195285477fa25f6",
+            "4ccd61e932d70e9736670555b2249308dd01f01dd0208d688cde6b5513667ef1",
+            "b92e19f64d5ae474a00368a9ed48faf8900988dcb6b93f61d32b59eee1d2d77f",
+            "ab711a6ef1e6ed767f0027bf9c48388bf460c9538c1218e0c3e5a8c0dd7fe218",
+            "9dd2f57e131cbf083de54b380973f7e32dad0bacd98ad9032da18698740d0f57",
+            "b3e5104c4fba85e0bd13e3bc90880799a6b4caa86a8907f4263b692c08a944d8",
+            "ce22c9b0605d1f5c5bae05106ab224541efce67a14f03c32f3d7b6eaaff44f5a",
+            "4c80eaf47e0d64ce6d37154dab12e4d1522d70db4026395e4c80b96412294c34",
+            "a86c91d0a4cdb335f615e86bc88034faf9866e9864006317e5c5861abc9f6c2b",
+            "7b510ac05977060caae7b11f707774202ba157544503136bb7285bc91aa94cda",
+            "ec45f9727f91f4fda6dfce80d5fb3bd6ce3f06ea85a0e5a9aa802a88404ec6b8",
+            "6f850985b32397f126278a70c89e9ac3541fd03787c665224e3c8fcce81d1417",
+            "0c7b64fcdc4ad89f3a81d77bdcb58f034832197bcfd4af609f02f1cc8c40f900",
+            "5567c18363455a8f087ed72289bf2cbc3a832708495d5d017bf2c676ac5684d0",
+            "9e59022210d2d3f668782bb7c8f9bdd96c26f8c9442b1748968069aa10d78ced",
+            "2fb4b5703c515ea2cd8faf6c3a4bce3082addaa24a4686e666ace8494a57c862",
+            "236a9d3b17f334fdb82d8d80bd800ecaa2b687dc4ff4ef1cf3758e145d82cc9b",
+            "5f15cb1ba0d87fdf37d41c93059cf015a552a801adafb3c6ac187d24a2b4369b",
+            "1692532d5b1a9eb162208d5931f57f2a9143ae2a22117c0f3712169205a63c6b",
+            "b227a55195ddaa877ab7eb952ab18f59656acc9fafc0dc4d56198be76383254d",
+            "de3b5b2cf338f3a19226281235552a5241c52727507cb047f78ad511ea3c9999",
+            "f2ce804b078c1736328e066efabbe91b8ff8ac2a1b6ff4a24c1d82a5dde1f638",
+            "88a0946721d40ea2b7c313f5c273fc2cbc65a5c5105fe0c362fd81e55b000ec4",
+            "e628c6643070753414c0c14360c641c7d2d43cc18c82d4ff2bec0b7bb649e758",
+            "68e1552cafc0b02bc2c726d26136dbe231531c3463a916d17165003ce8bd7acb",
+            "a9f02f1bcbd9232d2e475d79dd7ec51020c9d3990ee9fbda881b5cde1386bef8",
+            "257f083f6377210d652a994663f36e9fd155bc1f42bbe6f9a6a3fdaf64c4bda8",
+            "715dddaf8a249b7fac6ed4ed0600a449d397f9485cca4d6842c624732bc53503",
+            "df916f8050724b1abe38ac12039f56e6ae20063768bb564d835c5225c13beca6",
+            "51c1125397aad2d1e7b8852b25c13f3f64773972df533418632457f0d3f97864",
+            "4ea918a26216115b35a199e932eb6c2714519edac401fc0abc08b0d6190fbf81",
+            "43701574ff64adeadd3d7059fa1e4377ccea5867ae4c99d7d38192812d4b51bc",
+            "9e25501a02fd8a076e25cafa26447c17a2e6448e6a22e3105297ba15b68192fb",
+            "7a8808b12d3f9ab2925addbdb593156f311a2d14bf65917ad4089b0e940cb328",
+            "99e5b3feaaea00d8dcce805ed9cc4886ac9d1d2cd7c40a15a0b943f31112981e",
+            "b712d657de23d0b5f9d3d39b3c2210343aba59b09661a02f6f054c3e5ddacf88",
+            "a7a5228fb7fd24d46a43686d184a5be35a00056aedfa9379a260264ec7b83a66",
+            "2d11fd7ee18ee775c31d7b3362d2c02d822e8bf06e8b31c1362503e42764a981",
+            "06b7d6629c2038727b2a3eefc15b720fa21bd05d06dfb6d2bbbf28aadd3bdefb",
+            "b0896d44c4f25db1231f29288cff8c101363798629265726d10b3f603908bfe5",
+            "0a3611307ef6e71c57163d84157dc2ef2e0dd56dc9390ee5464655f80bbd881a",
+            "ba23dcba45214807728e51fc0e4eed5ef75db49ed50bc480adbdfb02be9798d8",
+            "9a512f59a10faa80db33b8d92fff8825b8ee552f2b10194c757b4cc1e8d14306",
+            "7a223dbd8f6e782c83e6054b27a269ab829022add701d9c801b919d0e2da5225",
+            "cb50284e383e4959c82f08ff698d69cc71610092da19f800babb8564a8007154",
+            "edd5bacbe4147665aecea73af6344cc1ea9565ce6b6c0a879eaf93049a191017",
+            "87bd382432e96cec32cb7c6fb7d949846976a276b8cbcaee2ba6688e893695ae",
+            "6c008b3ae4eab40ad9382bc3ea1e82b78c2f8502ae88ec2dc0464e8a8fbb242a",
+            "66ed35e2fa4bd404c3ded99475a207f9d00acf462689ee9045d6743bb998d495",
+            "cb5d6224c319c96a8568d5963b6bd56c005970651759c90726a3f7faaba5c1a0",
+            "1d09b00577877bc0395791130520974ab22699a04e6f933651342701747108d8",
+            "6729a5d943fc02d60e0273a994c9a4f3d53d5a3b84171dcef939c2df29587967",
+            "ccaa74e6e4030cd95bf85d1e0a22d8c17e308fe065a96e3792b2faa6849d667d",
+            "832d2462849dc20bd6033182d5907777cf9329fca24af073df30bcf0dac46ad7",
+            "c5c8e396479fba5ed0e09699b63ad1d8d18658b59a7f525c469bd5cec783d8e3",
+            "8a9fed3669c17ec6e8cb5f809e12c735881e788b599c5142b7ba8291d60e1819",
+            "0b3bc91ff78bec3ea45337082ae2108c67fd07c4ccd15ff22cea09cbd156fed2",
+            "143434bc0b5846bfa84f4e01a837835b9f36491334c0205deb84cc12e85a1b3a",
+            "68ccdeb2696d6b61dcb16f5071be924dc42ddba7df9eeb72c758af3f22d2e66f",
+            "081840f455bfa14d575f4136f7b0d5b8282308fd2ea9f9330f07be18f97329fd",
+            "18459810aa22ea25fc2b1da09a03b630269ccd93bfc50dd4d7e929430c57f50b",
+            "7f958da5137c9d2d9979f7674f7ff231332c0c72f4a129949822c8c658fa15bf",
+            "4aa668709d1630d46c0423983736d2854ea71750009adb948cbda3ca1f6809ce",
+            "992694a55028d7109dc663a112405bce86f5c10850c219d5a768cd579cd9b76e",
+            "112feceb06600bebf81338b3612e9c71f1d0ccc771f40a9dfc3326369ceb8cc5",
+            "ed9898bf02e9120bba442bc60ea9827c72c783818f20ff26e18f55f561378108",
+            "1870093fb42f775a40a3abfda4f38b805bc1dadbac532a6ef2275f571cffe672",
+            "5ec80e37af6c895215c2d1b1e88e3908f29b7569dfb24460c2165def4ccf3a1b",
+            "ceba29032c89901bc2a050d73d9a486afe70815d9ccebe48b67fad4902b8e723",
+            "d9cad2e12486e28dc373984f2c40dfa631d9751237c632b08d2cf2b12e615b5c",
+            "f0a7e703406b7967f849669a3d1c8b3001ce835982ad54c0ed4385e626d99028",
+            "d0f5026b281d90660bea12abddf555b41b7a68404077503f3d3a272c593dcb26",
+            "e002dce27e3ce82ff804ae7c3b526eb5aa2bd27d95049095bc0ff09f3c94d263",
+            "eec273c8b9faa4ea27d110d5d8de5bec1571ba9f4ae2fb11e86e80b06a263928",
+            "118daabd425ba5d63642e680d8558892b9ac9151558f678bd5b2b6ea58ddfa2d",
+            "c0890a0bbd53bc04ee7f0dd916decee969958de6bed8dca583eda631d0ab82c8",
+            "047bc80de76031e4087c595abee410acafcb251fdc8e211d6ef25b91c1fa1d04",
+            "4a99e1cd63858d4c3c4d1483f59fb12e3eb1f08a2ad3368e9aca2ad2140dc1e1",
+            "7bbbe674f6112a7aa66a31fef33a88c83a89a82eb1f5ae5a4b2e07017fb59067",
+            "d63df7920eec9812b0b52a0e9574d91916fbf3edb21c05d24df795bbadafe7ed",
+            "2012be711dd2ef410786aa2554ff45382b20347ed4694fdde657b7d8e262f6ce",
+            "89a3df164396e647050d6e38a3cd70e7bd2fefa41245777b905ac0acb5c532cb",
+            "214376a3fa05a242e94c77c28e1949475ac67f7c2e859601e7e5e873d1199ac8"
+          ],
+          "contactSheet": {
+            "file": "font-observation-ledger-6000-candidate-all-pages.png",
+            "sha256": "a34645aab891e18ad07b2d0c12d1cb0310b43df941ecf9f80b7b252d7d5889a9"
+          }
+        }
+      ],
+      "screenshot": {
+        "file": "font-observation-ledger-6000.png",
+        "sha256": "55840162146f9b2d8a157bd07cbbeb930beb0c2b8ebda66cafe03ffc75dad34f"
+      }
+    }
+  ],
+  "referenceBundle": {
+    "file": "reference-bundle.json.gz",
+    "sha256": "6df4c6b5eae8464010bacda9a1cdad0afcd3c5a0d1c1c423b3a9376b15324f8d",
+    "jsonSha256": "9325358c1e639f41d09c45ab6740f43db4d258a9a9b97e7d676855e4b4ecb435"
+  },
+  "tools": {
+    "docs/results/font-observation-budget/Compose.py": "1c1c25cacf1c81f4fae86966ba5c7ebee159e824588ca5766d90ab403cdea5cb",
+    "docs/results/export-reliability/Capture.mjs": "913af2a6c436b757a32d31fed85cae0db4ed24044e51a6c4b783024e7dfb82dc"
+  }
+}

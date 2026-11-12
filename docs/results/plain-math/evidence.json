@@ -1,0 +1,2860 @@
+{
+  "scope": "Unscored source/structure/paint diagnostics; no Word typography or native geometry parity claim",
+  "builds": {
+    "baseline": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-custom/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-custom/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-custom/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-custom/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-custom/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-custom/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-custom/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-custom/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-custom/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "478a9a7acd6abff438aa757aedc6e185830214f8",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "80aa9fc7871f11a3f5193c404faa599a4cd292ba54d2da1b8fc9c57b4ebaf41c",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+      "schema": 1,
+      "tree": "d21de74410501e18a9099a2ef2b8c561461d5ac9"
+    },
+    "candidate": {
+      "commands": [
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-math/npm",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-math/npm",
+          "run",
+          "build:wasm"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-math/npm",
+          "run",
+          "build:ts"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-math/npm",
+          "run",
+          "build:pagination-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-math/npm",
+          "run",
+          "build:worker-bundle"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-math/npm",
+          "run",
+          "build:export-browser"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-math/npm",
+          "run",
+          "build:export-assets"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-math/npm-export",
+          "ci"
+        ],
+        [
+          "npm",
+          "--prefix",
+          "/home/jman/Code/Docxodus/.local-closeout/issue-1554-math/npm-export",
+          "run",
+          "build"
+        ]
+      ],
+      "commit": "3ab1a4639da3d2b503911f33ec6fc168e34d35cb",
+      "files": {
+        "npm-export/dist/assets.js": "028486e07dc84380f3aadaec6ff4b1d12c1b6690cc8b33dc396a69a807839be0",
+        "npm-export/dist/browser-session.js": "6d07ee1959c7c94c308954b6a4538120590548d4763427a459cabae351997b4e",
+        "npm-export/dist/canonical.js": "7b023712c033bd4446066ed5795d01e8e65f9b265dd27cf41bd189312ffb4db7",
+        "npm-export/dist/cli.js": "546c7c82cc5272134b969c574862c3bc9bed7f7cd580aabb140451e4ba0343e4",
+        "npm-export/dist/contracts.js": "9f0caa7fbfedb4f03193abbddf47fb72c0f1d47f0b99f23725408580c888ed35",
+        "npm-export/dist/diagnostics.js": "400d6c60b98d59d34306836fe37f28009aa374e7b8a03b0372afc2e2889594d0",
+        "npm-export/dist/environment.js": "1ab8452cd877090e6d254ff1f2c0193d932874c36e51a9a6e5df3eeb775f9dfe",
+        "npm-export/dist/files.js": "b9cc324d964d5a251ee9e4e1559633904590001d47c7e5a039a18276a1c2bced",
+        "npm-export/dist/font-observation.js": "20d511aed4d06761500620f83e9ea05ed738ef968d51b49ef036886c56bcce3e",
+        "npm-export/dist/fonts/discovery.js": "a9562cf7da5d778761ab337a5ef0090cfa78ebe0102911ea0264a2a356031389",
+        "npm-export/dist/fonts/index.js": "9b7128c567d71d5e91c610537eba906e750634769b6e710fce2102d7dd09102c",
+        "npm-export/dist/fonts/resolver.js": "00ac6cae0daa00218a8e6aeb56f9c3621875586ff1d465013c152e8ab7bc010b",
+        "npm-export/dist/host.js": "cb81e5eebbbb75b35f330a041084ba82744b748bdb471e4274bbec1d497ca849",
+        "npm-export/dist/index.js": "b802b92b0179d0a73348c372b40dbf5365bba98db278efe60d1887440194ec11",
+        "npm-export/dist/pdf.js": "c5ed9fc97fb57656c2ba61e16f46df403cd449e56a87070ce6f61d52ab4281a1",
+        "npm-export/dist/strict-json.js": "451292a5e95b9af5428447115e84e16c984a84519dad0c729d48c8a60d1f84ab",
+        "npm-export/package-lock.json": "01360d1b3c66fdf86041b92ed7360c5be83e8ba9a32d586ad1417aceb7f929a9",
+        "npm/dist/export-assets.json": "67769f1cf931529aa1dd3c182fa96c18e5e9380c519dd36f301543e1a7ebde9b",
+        "npm/package-lock.json": "8efc99d5eed18601cb688028c6a163a0fbe8463090a170e1b7a6b7260576cdeb"
+      },
+      "node": "v24.13.1",
+      "recipeSha256": "6b70b1c06a91160f95d17602f26d32e97968aa884d76af9f1ad56abf29df0feb",
+      "schema": 1,
+      "tree": "56b21a8593e7cc4c2a62214ac9161ecb9567c370"
+    }
+  },
+  "assets": {
+    "baseline": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 619895,
+          "sha256": "079d75f567efcbb4b5e254c414f810507c871481a476035643f942df9d4bd3fa"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 170344,
+          "sha256": "ea2e193b386bcc305d4db37af0e830ca66a7b8ae82957829b2d11f83ef5004d9"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46484,
+          "sha256": "a604dbff16d3be0f0d24cf48753404b42fe25f70fbd1393dde4934871446a420"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5451545,
+          "sha256": "1e5776dbe1708dcddcd8c6ae3a33c9566631f8979e14925aba8c7a390a64ad64"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "4e423b2df1b90c200e7bf42257ff57157e2316e854f7732178b577fa2fc7ce36"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "5e08586a10f0b0c9e4354438734b392459cd64282ababf7029a48246f6da6d47"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1674517,
+          "sha256": "2ebf53d9fe8ce4f58c19af1ce4995f1b7c950330ef0a20180269c6f9c2371aac"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "c72227328c60ef985e608525add062810a573e0f8350e4f7464121b6e140ceed"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10548535,
+          "sha256": "59285e2718c95299b048574762a277f11eb5d9493e4573383ecf1935e8473172"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    },
+    "candidate": {
+      "schema": "https://docxodus.dev/schemas/export/export-assets/v1",
+      "schemaVersion": 1,
+      "packageVersion": "0.0.0",
+      "assets": [
+        {
+          "path": "./docxodus.worker.js",
+          "mediaType": "text/javascript",
+          "byteLength": 20310,
+          "sha256": "c46db0cf88633151216f5408807ee2d945088228745ff75eb5b6f20d00305c10"
+        },
+        {
+          "path": "./export-browser.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 622290,
+          "sha256": "ae9c644b3a0a9d072f76df0ec362f3ffde4f5e6945367a9d58c21933007a8cce"
+        },
+        {
+          "path": "./export-resource-limits-v1.json",
+          "mediaType": "application/json",
+          "byteLength": 1715,
+          "sha256": "c23c128f885174a7089be1157ee673d1aec0b3e51786517e2f0e44593c5e5347"
+        },
+        {
+          "path": "./pagination.bundle.js",
+          "mediaType": "text/javascript",
+          "byteLength": 171174,
+          "sha256": "3bc799e35d593581dbdd5760a72e9d55e0c620a8cb84f699cd8c09747d4b40a1"
+        },
+        {
+          "path": "./render-report-v2.schema.json",
+          "mediaType": "application/json",
+          "byteLength": 46484,
+          "sha256": "a604dbff16d3be0f0d24cf48753404b42fe25f70fbd1393dde4934871446a420"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.Framework.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 367893,
+          "sha256": "bae4f086161ded0fd4593826bf8b7bfb00de5f420612ea1d5fb3fb310ad6c754"
+        },
+        {
+          "path": "./wasm/_framework/DocumentFormat.OpenXml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5213465,
+          "sha256": "ed6aefd97b57c33435ff4451e8396fe26b1e7c96a5fb848984d7bd503a7520f9"
+        },
+        {
+          "path": "./wasm/_framework/Docxodus.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5460761,
+          "sha256": "03b9c73d822cab9e972588d41fa8e6daca4d7606cbc53778902dbed00b6c5b6f"
+        },
+        {
+          "path": "./wasm/_framework/DocxodusWasm.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 523541,
+          "sha256": "5de8dfe19a627b83dc30055f55cfd9b2638841d485e4eb71ec900e634e119a51"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Concurrent.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 23829,
+          "sha256": "4355a4839a7062eaa5e5add2633705abeb5e96bee63947bc2bcb4702e613e982"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Immutable.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 30485,
+          "sha256": "784cda027c2c244de32071a8ea12df8220fe5d19eb0a622c9837a27309318bb3"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.NonGeneric.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 13589,
+          "sha256": "7f2ce86ad0d1917007856abe0860d666e7060215a1fd063f00ffe09c5c318c12"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.Specialized.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 9493,
+          "sha256": "b01af82471d554f026d4fb4f82eda647361bc3d44803825c40b02bc585a5f01d"
+        },
+        {
+          "path": "./wasm/_framework/System.Collections.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 64277,
+          "sha256": "7cd4981b45d5a60fba8c83407c33bb7bccace924d72da7f4ad35dd0d97c1556b"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "4093d1245e3aed875f808f5254dd7bdf54e6698bda4789cf304e379c7f808d40"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.TypeConverter.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 45333,
+          "sha256": "81222dd418ba18dfba0960d7875112bd143a3973e53cd87b7c3a6dee54b42721"
+        },
+        {
+          "path": "./wasm/_framework/System.ComponentModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "165aa2ad52fdb0866ebb9076bb2b0c7ad8030587095b9f125aa2f03584052b36"
+        },
+        {
+          "path": "./wasm/_framework/System.Console.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15125,
+          "sha256": "3717bb94b232f769500c64831e030820a2b3f57fa552e01484565437c518844b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Compression.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 113941,
+          "sha256": "ba1f106d94d217964f79e595021170ca7e098dc25048485e8c35a460efe8f731"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Packaging.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 88341,
+          "sha256": "4343d81aca397d9421bed1667fd1aa391bdc9f81814185bbe8f7adcd3304998b"
+        },
+        {
+          "path": "./wasm/_framework/System.IO.Pipelines.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 5909,
+          "sha256": "5a5539a2a9c0176a7b539125765f9e34bccb3eb62165f875691176070cf74bed"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.Expressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 75541,
+          "sha256": "826616cc086d94cd0d1d83ac11304f870514d19d695982919e5eb01a1d1b41f2"
+        },
+        {
+          "path": "./wasm/_framework/System.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 99093,
+          "sha256": "5e08586a10f0b0c9e4354438734b392459cd64282ababf7029a48246f6da6d47"
+        },
+        {
+          "path": "./wasm/_framework/System.Memory.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 15637,
+          "sha256": "0e48d97aaa84f7f09091113c766c0d96d19fd0f5fc8c95e358b5af32af783515"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Http.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 139029,
+          "sha256": "10f89b61aa6b7255ab11e079ea4b0666f1a54e3c972bd8a02df568e013bcb7f3"
+        },
+        {
+          "path": "./wasm/_framework/System.Net.Primitives.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7445,
+          "sha256": "c003f7f65acfc5ddb8024b2ff75d4573d41e42194cb62bd68ba4403675bed3e4"
+        },
+        {
+          "path": "./wasm/_framework/System.ObjectModel.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 12565,
+          "sha256": "f94b7799f30c9a564ac4179a0653ba8333f5e809d949a7c4bab306a2b49d2162"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.CoreLib.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 1675029,
+          "sha256": "7216cb9019a8db40a177990f4ae6034cfe3d4f47aa598d221c4675df401082ce"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Uri.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 70933,
+          "sha256": "04ce3fa7ffaeedbe6776ec0fdb0ec84a0c98d055fee70e08f177794dde59df0b"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 69397,
+          "sha256": "1640fb27055c510abb5d02869f4ae2066399cdeffbe41a119c9ef60ab9662db0"
+        },
+        {
+          "path": "./wasm/_framework/System.Private.Xml.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 893205,
+          "sha256": "befc0e03fe4a081594727a05b2b0854b7560977bfdc39d9c5fbba4248ca7a66c"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.InteropServices.JavaScript.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 43797,
+          "sha256": "50b54ec230c2510472470ea2bea55842486336d3aaa30faa0d976a9fa612c6d4"
+        },
+        {
+          "path": "./wasm/_framework/System.Runtime.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 7957,
+          "sha256": "f2ecbede5358586d77373963247a9e2e7bb784cded1896ab76dbc0d350d9294e"
+        },
+        {
+          "path": "./wasm/_framework/System.Security.Cryptography.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 25365,
+          "sha256": "bcda2b343ea8de6710fe2b2dba6e625334db48118842c924bb2ddeacfd5defdb"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Encodings.Web.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 29461,
+          "sha256": "e8df14917c716c5ff4e2773f322ab74478ed392fe2980ec23ac31c5f444dbf6f"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.Json.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 321301,
+          "sha256": "be5ae840d7d08152795e0d025ab039becee3fa90775f9bb9e9eb135f8603b312"
+        },
+        {
+          "path": "./wasm/_framework/System.Text.RegularExpressions.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 259861,
+          "sha256": "1ddafd5053123a5a5e637855056e06b5bf9b062796f22201c1d1b104bcc775bc"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.Linq.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4373,
+          "sha256": "4fef5175f5017e796fae8db5c24f159a661edd90df2a260405b24f09f2e2b9db"
+        },
+        {
+          "path": "./wasm/_framework/System.Xml.XDocument.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "e807d14a7167ad77fdf6924aa3d43820d32c4efa8b1aa22f5adccf8beee3a364"
+        },
+        {
+          "path": "./wasm/_framework/System.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 4885,
+          "sha256": "4db5c18906b7f04d93ae3592c19624f65f6c4f3b69f2943830b27254f0696849"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.boot.js",
+          "mediaType": "text/javascript",
+          "byteLength": 9450,
+          "sha256": "adfa7a7b5e4df2fc0700ec2b4de1ed8e04eda16c795996dfc2718be641cd6265"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.js",
+          "mediaType": "text/javascript",
+          "byteLength": 37884,
+          "sha256": "9f3c628b9e0db999798561db6793e5534d4715985407a670f82ec50eb54f22a8"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.js",
+          "mediaType": "text/javascript",
+          "byteLength": 224345,
+          "sha256": "b2566641a067497002f5998b8e52a87a553239c775dd0f98cea0f6fdba42028f"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.native.wasm",
+          "mediaType": "application/wasm",
+          "byteLength": 10551530,
+          "sha256": "72b3d03eea6fbacb974d340b0a218a07660dae64f2447044b4be2544fe143f45"
+        },
+        {
+          "path": "./wasm/_framework/dotnet.runtime.js",
+          "mediaType": "text/javascript",
+          "byteLength": 198479,
+          "sha256": "ee2deeb1f4eb9f30bff6a58ee2c8b9070e30ec3f5f5129d205d850e3b6e55f63"
+        }
+      ]
+    }
+  },
+  "captures": {
+    "baseline-strict": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "478a9a7acd6abff438aa757aedc6e185830214f8",
+      "sourceTree": "d21de74410501e18a9099a2ef2b8c561461d5ac9",
+      "buildIdentitySha256": "7e23d61a1f3a323a9d5923b305f4adaa7aae8cc0e6dc163420755abbd034af26",
+      "manifestSha256": "3c5bbe6a7a217857a3e15c7949cdbe4395997d678d557340cc8e13e7e7a31efe",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "DejaVuSerif.ttf": {
+          "family": "DejaVu Serif",
+          "sha256": "8f2c103bfa3fd5de71f1b92b18f21906b5a26871fb7e19a9a4c9af539c3cc7ab"
+        },
+        "DejaVuSerif-Bold.ttf": {
+          "family": "DejaVu Serif",
+          "sha256": "847b33e13925f19ff87e4d934d6b3cf7cac35ce16424f6f670e40c2f377cf2df"
+        },
+        "DejaVuSerif-Italic.ttf": {
+          "family": "DejaVu Serif",
+          "sha256": "1d7476da447f9455a47c41adfd6ac2b1fc1b65e660f3ea4bf36128506c7e094c"
+        },
+        "DejaVuSerif-BoldItalic.ttf": {
+          "family": "DejaVu Serif",
+          "sha256": "e4662d0bcf9039a5d1fb7b52f964aebdde4563be9e5a8521299936f4818c0ab2"
+        },
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "plain-math-fraction-inline",
+          "inputSha256": "c710412751cf2c0639f3850568be920ab452d9ddcca8c5a024836b64e41ec555",
+          "status": "failed",
+          "code": "resource_policy_failure",
+          "phase": "font_loading",
+          "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome."
+        },
+        {
+          "id": "plain-math-fraction-display",
+          "inputSha256": "22068cb204317844735f1b641caf8d351244d2389438ae774ee9953c984aee9b",
+          "status": "failed",
+          "code": "resource_policy_failure",
+          "phase": "font_loading",
+          "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome."
+        },
+        {
+          "id": "plain-math-root-inline",
+          "inputSha256": "b22f52408c0539c21ed606bda5a00f98c7c46b1fc633176ea409ea80771ca592",
+          "status": "failed",
+          "code": "resource_policy_failure",
+          "phase": "font_loading",
+          "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome."
+        },
+        {
+          "id": "plain-math-root-display",
+          "inputSha256": "eba2475dd9ee895d2fcffa0fce1d6448586f5ceee21034283c8285f44c984635",
+          "status": "failed",
+          "code": "resource_policy_failure",
+          "phase": "font_loading",
+          "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome."
+        },
+        {
+          "id": "plain-math-indexed-inline",
+          "inputSha256": "a2a706fd1a0200ab3656a90559037715d384e934e855e00278d7e4fc31dd878c",
+          "status": "failed",
+          "code": "resource_policy_failure",
+          "phase": "font_loading",
+          "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome."
+        },
+        {
+          "id": "plain-math-indexed-display",
+          "inputSha256": "b11f1a5eba178299288fa8abc52faf8dc0cb1472281f36c99a29dec2a2ba6f3a",
+          "status": "failed",
+          "code": "resource_policy_failure",
+          "phase": "font_loading",
+          "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome."
+        },
+        {
+          "id": "plain-math-fraction-prose-control",
+          "inputSha256": "2a00eb9733bc5a5fe13373d2b42d137df3315cbe5d2721a7538ff0137acf7db0",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "1d0098c56f7ccab3b3917738f5df20b5157087e933071682557eae13471a21d6",
+          "renderReportSha256": "8e5deddee58392037a041902474be4ac6c74fbd52226753b924e745faf9b43b6",
+          "htmlSha256": "7ebc9da6c70927292ef28f64fb7b6db6197700fa358ad8b693ef68363462f7b8",
+          "htmlFactsSha256": "3de105409650174a8f046776b8cfb7d62fa89d89f22f44f2ead4e8d6a349ea98"
+        },
+        {
+          "id": "plain-math-root-prose-control",
+          "inputSha256": "9f298d13eabdbbfbfe31967b8a146091b0dcd0a0e6e398cc7bef320a0e9dd31d",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "6253f4f18239fc325523ffa7aec15fc11b55c478b240fb51bf63c2c94147d045",
+          "renderReportSha256": "b39a9b4b7aa5e1e2c37ad07bbe3a5dd96e8faa701da3715a0bba4b40a5ddaf1e",
+          "htmlSha256": "26743e8d783c69c6692bdb0ef0ef4c0d78a64b9d982251d06fb251c6c5c8dc29",
+          "htmlFactsSha256": "4dad29e8be6dd03180769e15f898ab1df9493037e63b2536f69256f250a1623f"
+        }
+      ],
+      "htmlInspectorSha256": "87805e278400914cd87a2fe8e89c498748b7f45eecd5ca432b9c2be2d95b4cbb"
+    },
+    "baseline-visible": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "478a9a7acd6abff438aa757aedc6e185830214f8",
+      "sourceTree": "d21de74410501e18a9099a2ef2b8c561461d5ac9",
+      "buildIdentitySha256": "7e23d61a1f3a323a9d5923b305f4adaa7aae8cc0e6dc163420755abbd034af26",
+      "manifestSha256": "3c5bbe6a7a217857a3e15c7949cdbe4395997d678d557340cc8e13e7e7a31efe",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "DejaVuSerif.ttf": {
+          "family": "DejaVu Serif",
+          "sha256": "8f2c103bfa3fd5de71f1b92b18f21906b5a26871fb7e19a9a4c9af539c3cc7ab"
+        },
+        "DejaVuSerif-Bold.ttf": {
+          "family": "DejaVu Serif",
+          "sha256": "847b33e13925f19ff87e4d934d6b3cf7cac35ce16424f6f670e40c2f377cf2df"
+        },
+        "DejaVuSerif-Italic.ttf": {
+          "family": "DejaVu Serif",
+          "sha256": "1d7476da447f9455a47c41adfd6ac2b1fc1b65e660f3ea4bf36128506c7e094c"
+        },
+        "DejaVuSerif-BoldItalic.ttf": {
+          "family": "DejaVu Serif",
+          "sha256": "e4662d0bcf9039a5d1fb7b52f964aebdde4563be9e5a8521299936f4818c0ab2"
+        },
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "permissive-diagnostic",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "plain-math-fraction-inline",
+          "inputSha256": "c710412751cf2c0639f3850568be920ab452d9ddcca8c5a024836b64e41ec555",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "5a90ba532b55b17e8656ea8ae8124d5f85720f6b9e9283cc42df3ebb126e08e9",
+          "renderReportSha256": "7063a0b92be130f32a14b48aac6b47db535714d33efbcd94b83da381d1f09801",
+          "htmlSha256": "59691c04e97096e06cbac7324a5d8f6f6aa1f7a5f23fc28253dd4f3290604d5b",
+          "htmlFactsSha256": "ef9ae5960c8e5ae82a03841896a4b523dcb858713b599c90adfdf0b9c5ad87ac"
+        },
+        {
+          "id": "plain-math-fraction-display",
+          "inputSha256": "22068cb204317844735f1b641caf8d351244d2389438ae774ee9953c984aee9b",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "d1ab596447c4dad5753604a017efd07682b09126c52b9ea1fe9ef88387bfad59",
+          "renderReportSha256": "2307446b46ce20939e4fbbf15430e2ca1dd9d27a7bc0e04fbababd6721bae192",
+          "htmlSha256": "4a0cd6ecf8811d017d7b1eb36b89dc456a91e4e5e42cacfb189fcafa6d0d1b57",
+          "htmlFactsSha256": "1184a7a423cf9bb231eb5043dbdc3a5cdc6f62be707642085644f2d01d1409f2"
+        },
+        {
+          "id": "plain-math-root-inline",
+          "inputSha256": "b22f52408c0539c21ed606bda5a00f98c7c46b1fc633176ea409ea80771ca592",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "599487bb83a089ab77c9be7c2371a09432565cfcba904926ece1093fdca5a41b",
+          "renderReportSha256": "082ecb8098a62815b9f02173bcc1f7ad70aca9c7b5a4c6c763c9eb2557543b72",
+          "htmlSha256": "adb7ab22493cf5167741020466b1f1712c752cc9dd547301a4bf22a08f63668a",
+          "htmlFactsSha256": "f372d7f27082b25a7afeb85c7ce6b968400551c38f21063dcd9d7b891fa0514a"
+        },
+        {
+          "id": "plain-math-root-display",
+          "inputSha256": "eba2475dd9ee895d2fcffa0fce1d6448586f5ceee21034283c8285f44c984635",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "8e5fef685f611231c3b6c910704b3bf24e0f20d0ad25210e97737b93ba00551e",
+          "renderReportSha256": "e58a07180da20c8ec50d176aef3e63327e1327de4525524fba9da985d6bae518",
+          "htmlSha256": "101d2937cba78e9f46dc2b83b2c4ac751c929f37bc2a9082fb0a76098f86dc2a",
+          "htmlFactsSha256": "18bcb5e4c67a11e8683e1ec79c30c97826378a15094f5f86aa13f67d83df0c96"
+        },
+        {
+          "id": "plain-math-indexed-inline",
+          "inputSha256": "a2a706fd1a0200ab3656a90559037715d384e934e855e00278d7e4fc31dd878c",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "d25f5fda39c760d78a6738576eb58bfbd6da6e72bc5a74e3425794583d98251c",
+          "renderReportSha256": "63b0de8de75e612ab54c2d7e84bce76c1f2702e22e3eb017186c57052c40a205",
+          "htmlSha256": "56e3efdbf49a5088ade49302450ccf42faa317eb87caadb084ca5b371718b33e",
+          "htmlFactsSha256": "dd12499b55845398a65c5fd6a22c1e2ae6d854dd4a4cf0a582ccfe375d698de0"
+        },
+        {
+          "id": "plain-math-indexed-display",
+          "inputSha256": "b11f1a5eba178299288fa8abc52faf8dc0cb1472281f36c99a29dec2a2ba6f3a",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "0620e69132b4f2bc3392ae20ffcdd2c6c96f1e4def9e83d4f808907f947362ed",
+          "renderReportSha256": "bf4ccc619f12da100bbab77ad7e5967461c38310a78592a0f5f639043aec828a",
+          "htmlSha256": "4127fd8207baafd3ad5e18b9291f14fdc18399739f74306e4451d17cc8a611b0",
+          "htmlFactsSha256": "b677952b3c84962c4a8d82f7c642759557e7ed23f0702c05c07d76eb917b72d2"
+        },
+        {
+          "id": "plain-math-fraction-prose-control",
+          "inputSha256": "2a00eb9733bc5a5fe13373d2b42d137df3315cbe5d2721a7538ff0137acf7db0",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "bcf1de99ad3b18ce243a84f372fed686ecc44cf1bf1decd2e9def393ddde991b",
+          "renderReportSha256": "0995f6740f3aa3a796b2965f10d7dea0e06cd57151214b54b28f638ec2d5caff",
+          "htmlSha256": "7ebc9da6c70927292ef28f64fb7b6db6197700fa358ad8b693ef68363462f7b8",
+          "htmlFactsSha256": "3de105409650174a8f046776b8cfb7d62fa89d89f22f44f2ead4e8d6a349ea98"
+        },
+        {
+          "id": "plain-math-root-prose-control",
+          "inputSha256": "9f298d13eabdbbfbfe31967b8a146091b0dcd0a0e6e398cc7bef320a0e9dd31d",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "f43a57eee705c74bb1f807701949981e65734ea27f4e61d168b6d7a461b5ed0f",
+          "renderReportSha256": "90e9212c9f85289a5d7f43350b82d0bed6025a567fea09813d64567d7cfa2bcb",
+          "htmlSha256": "26743e8d783c69c6692bdb0ef0ef4c0d78a64b9d982251d06fb251c6c5c8dc29",
+          "htmlFactsSha256": "4dad29e8be6dd03180769e15f898ab1df9493037e63b2536f69256f250a1623f"
+        }
+      ],
+      "htmlInspectorSha256": "87805e278400914cd87a2fe8e89c498748b7f45eecd5ca432b9c2be2d95b4cbb"
+    },
+    "candidate": {
+      "schema": 1,
+      "status": "unscored-public-api-diagnostic",
+      "candidate": "3ab1a4639da3d2b503911f33ec6fc168e34d35cb",
+      "sourceTree": "56b21a8593e7cc4c2a62214ac9161ecb9567c370",
+      "buildIdentitySha256": "f02c7598bca664d8c8e7c51239e5d31270bbcb8e339e95dbab119e55716ca713",
+      "manifestSha256": "3c5bbe6a7a217857a3e15c7949cdbe4395997d678d557340cc8e13e7e7a31efe",
+      "browserVersion": "157.0.8103.38",
+      "executableSha256": "fa67e06a5bcd0525739996fb8e3ecff449039e6165c15ea7968d3935e59e829e",
+      "sandbox": true,
+      "fontContract": {
+        "DejaVuSerif.ttf": {
+          "family": "DejaVu Serif",
+          "sha256": "8f2c103bfa3fd5de71f1b92b18f21906b5a26871fb7e19a9a4c9af539c3cc7ab"
+        },
+        "DejaVuSerif-Bold.ttf": {
+          "family": "DejaVu Serif",
+          "sha256": "847b33e13925f19ff87e4d934d6b3cf7cac35ce16424f6f670e40c2f377cf2df"
+        },
+        "DejaVuSerif-Italic.ttf": {
+          "family": "DejaVu Serif",
+          "sha256": "1d7476da447f9455a47c41adfd6ac2b1fc1b65e660f3ea4bf36128506c7e094c"
+        },
+        "DejaVuSerif-BoldItalic.ttf": {
+          "family": "DejaVu Serif",
+          "sha256": "e4662d0bcf9039a5d1fb7b52f964aebdde4563be9e5a8521299936f4818c0ab2"
+        },
+        "LiberationSerif-Regular.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "705903ae1382f0150f115d6f10a30f5b2f3d6ade649c474afe6366c39174fb65"
+        },
+        "LiberationSerif-Bold.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "9e66c25e20868756bf12eb24a520a4552727c9cd108f577f7ae33e3c0110e39c"
+        },
+        "LiberationSerif-Italic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "eaeaf7f2b12544ecde64290c1fa7ec403ff70fd58b313637b265400b20249242"
+        },
+        "LiberationSerif-BoldItalic.ttf": {
+          "family": "Liberation Serif",
+          "sha256": "379010e87421a883f7bbfa7936d23dfe0257a54ce850819b74556e9f2c615a8a"
+        }
+      },
+      "fontPolicy": "strict",
+      "note": "Borrowed system Chromium; no pinned-runtime qualification or rendering fidelity score.",
+      "cases": [
+        {
+          "id": "plain-math-fraction-inline",
+          "inputSha256": "c710412751cf2c0639f3850568be920ab452d9ddcca8c5a024836b64e41ec555",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "b56b93201afce49b9231af7fd1f2fdabcb230436df8a34b68d909ea07266af5b",
+          "renderReportSha256": "9608bc146472aa2f419d02b45066804c7ff2e35ca66d14f947f7ee5f4c59aa71",
+          "htmlSha256": "aab01ea71f882e66980684a7d1d37de15fd8b33e31b8be85a4b1874777ae6109",
+          "htmlFactsSha256": "745132fdc3d44a3f91364f23afdda47074f5e0fd9bbf551765359fff253bafee"
+        },
+        {
+          "id": "plain-math-fraction-display",
+          "inputSha256": "22068cb204317844735f1b641caf8d351244d2389438ae774ee9953c984aee9b",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "16b06dda9f83f245764a1527254cc6d9e3b6f50c06c35ae5f30490216b1213d6",
+          "renderReportSha256": "35c64f70452f4b3e3dee19399f9241cdd1f8b7b2dcfef0a8b77144513139c5fa",
+          "htmlSha256": "1f52f1375aaf3b37e7e5e00ad5d983a7992838650b001379a646bf9421079801",
+          "htmlFactsSha256": "d8e843f680ff449ba586b8a447765b3c52b9c052ec8df8a975802b92b7c17ebc"
+        },
+        {
+          "id": "plain-math-root-inline",
+          "inputSha256": "b22f52408c0539c21ed606bda5a00f98c7c46b1fc633176ea409ea80771ca592",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "4829bd3b11ac56d6731bc4b07b162fc07ff79c8d21c2057c3c09ec4aed39858a",
+          "renderReportSha256": "1a758c8b178f0e768860575c43db57593c1cbb8f61ec6ced88b7cdf6f66d8c46",
+          "htmlSha256": "ca958eed3a396e3e1bcaac6854fd3408bfcc9bd4c55ea5475982c99bea6abbd7",
+          "htmlFactsSha256": "54a679368000d8e67a6ea6913b27cc0ddaed7177d0ca6c8c8f25f5c4e0f13650"
+        },
+        {
+          "id": "plain-math-root-display",
+          "inputSha256": "eba2475dd9ee895d2fcffa0fce1d6448586f5ceee21034283c8285f44c984635",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "a5485bb641ad4c6212c45e21885809acf45e4eb22610c95ec4692aece6ac9731",
+          "renderReportSha256": "862d95c0b83ba69d04318515cf7919cb8871a185474f048fac0cffa4e9efd2a9",
+          "htmlSha256": "3bb0a60f15af6c5c0e659485f79b0c9d06e3996782a0200fadbf1d067ba069a5",
+          "htmlFactsSha256": "8112afadf8f71d56b5c7dfd6d29d1652eb8425b2f8648bb8e967558146b2d5e6"
+        },
+        {
+          "id": "plain-math-indexed-inline",
+          "inputSha256": "a2a706fd1a0200ab3656a90559037715d384e934e855e00278d7e4fc31dd878c",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "c39232d520ae7521781cc8e04675b5c825a910471079ba08d0b38e7e736bb40c",
+          "renderReportSha256": "91cf440e50b9cc4340b591923c96265187e1828e3b3329a8278469b7c60be6ab",
+          "htmlSha256": "e523e788ad8fee6d29a4316b8bd15329f9c9fe80a71af7959bc3823409905eeb",
+          "htmlFactsSha256": "c489d591aa18566053b18624715c362461f9d394ae066370d80f67b106ad3b68"
+        },
+        {
+          "id": "plain-math-indexed-display",
+          "inputSha256": "b11f1a5eba178299288fa8abc52faf8dc0cb1472281f36c99a29dec2a2ba6f3a",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "8754bc234244b41e59093e4cc92a13709d57da55040aaf9272641fd8d390b7df",
+          "renderReportSha256": "a4ee7ed2f87ad1e10f298a927fa80eb2b8d2c0bde186f687bbc28baf19bb38e4",
+          "htmlSha256": "4f59c0b7ffc078de89d1bf2546ad89ff3656abfad10fc8fc56c6123c9977ae23",
+          "htmlFactsSha256": "85e2ca4369673dac089f38b15b194aa2bb9bee5eaf846ff053d13b4a2feeb9e3"
+        },
+        {
+          "id": "plain-math-fraction-prose-control",
+          "inputSha256": "2a00eb9733bc5a5fe13373d2b42d137df3315cbe5d2721a7538ff0137acf7db0",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "66594b24ebba3817bcab44ea02cc1b4cdd621ebcc88d2a3a6996208a8e1175bc",
+          "renderReportSha256": "6612f19b6a3bb626f47579d2c6b8338bcdd607ceb79549606aea87e4ab265df1",
+          "htmlSha256": "7ebc9da6c70927292ef28f64fb7b6db6197700fa358ad8b693ef68363462f7b8",
+          "htmlFactsSha256": "3de105409650174a8f046776b8cfb7d62fa89d89f22f44f2ead4e8d6a349ea98"
+        },
+        {
+          "id": "plain-math-root-prose-control",
+          "inputSha256": "9f298d13eabdbbfbfe31967b8a146091b0dcd0a0e6e398cc7bef320a0e9dd31d",
+          "status": "delivered",
+          "pages": 1,
+          "pdfSha256": "97915726c9ff4515dc0732d100bd2bf50c4590f468b66dfbcfdf59b06330875e",
+          "renderReportSha256": "f06b418c22b9f4580a4760cd6019cd1ab546f263fd92d6e1b304c10196d73630",
+          "htmlSha256": "26743e8d783c69c6692bdb0ef0ef4c0d78a64b9d982251d06fb251c6c5c8dc29",
+          "htmlFactsSha256": "4dad29e8be6dd03180769e15f898ab1df9493037e63b2536f69256f250a1623f"
+        }
+      ],
+      "htmlInspectorSha256": "87805e278400914cd87a2fe8e89c498748b7f45eecd5ca432b9c2be2d95b4cbb"
+    }
+  },
+  "manifestSha256": "3c5bbe6a7a217857a3e15c7949cdbe4395997d678d557340cc8e13e7e7a31efe",
+  "manifest": {
+    "file": "manifest.json.gz",
+    "sha256": "f0372a369930f621f0a91883276043db234a94c1c08ee2bc6a73d9d9a1a919e2",
+    "jsonSha256": "3c5bbe6a7a217857a3e15c7949cdbe4395997d678d557340cc8e13e7e7a31efe"
+  },
+  "reference": {
+    "file": "reference-bundle.json.gz",
+    "sha256": "57ea15f660e585e01758bc334953214896fb0005d1aad9be432c7f234d1cbf10",
+    "jsonSha256": "47019aa214b1478923fb99bc0c2fe5f617c9d3dd46bc78da28e3582545594ded"
+  },
+  "schema": {
+    "fileFormat": "Microsoft365",
+    "sdk": "3.5.1.0",
+    "documents": {
+      "fixtures/plain-math-fraction-display.docx": [],
+      "fixtures/plain-math-fraction-inline.docx": [],
+      "fixtures/plain-math-fraction-prose-control.docx": [],
+      "fixtures/plain-math-indexed-display.docx": [],
+      "fixtures/plain-math-indexed-inline.docx": [],
+      "fixtures/plain-math-root-display.docx": [],
+      "fixtures/plain-math-root-inline.docx": [],
+      "fixtures/plain-math-root-prose-control.docx": []
+    }
+  },
+  "cases": [
+    {
+      "id": "plain-math-fraction-inline",
+      "inputSha256": "c710412751cf2c0639f3850568be920ab452d9ddcca8c5a024836b64e41ec555",
+      "panels": [
+        {
+          "renderer": "baseline-strict",
+          "refusal": {
+            "id": "plain-math-fraction-inline",
+            "inputSha256": "c710412751cf2c0639f3850568be920ab452d9ddcca8c5a024836b64e41ec555",
+            "status": "failed",
+            "code": "resource_policy_failure",
+            "phase": "font_loading",
+            "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome."
+          }
+        },
+        {
+          "renderer": "baseline-visible",
+          "mathStructurePass": false,
+          "facts": {
+            "file": "plain-math-fraction-inline-baseline-visible-html-facts.json.gz",
+            "sha256": "c331cbe5aa056babaf9473a236d940b76d9ec34589de25b1065a00d5499c9da6",
+            "jsonSha256": "ef9ae5960c8e5ae82a03841896a4b523dcb858713b599c90adfdf0b9c5ad87ac"
+          },
+          "report": {
+            "file": "plain-math-fraction-inline-baseline-visible-report.json.gz",
+            "sha256": "4caf7da92df1888bd171693924399449981f1dc0fa0ee85ef6b8a0b37722e609",
+            "jsonSha256": "7063a0b92be130f32a14b48aac6b47db535714d33efbcd94b83da381d1f09801"
+          },
+          "pdf": "plain-math-fraction-inline-baseline-visible.pdf",
+          "pdfSha256": "5a90ba532b55b17e8656ea8ae8124d5f85720f6b9e9283cc42df3ebb126e08e9",
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "declared-font-families",
+            "assertion-same-page",
+            "assertion-required-font-family"
+          ],
+          "inspection": {
+            "file": "plain-math-fraction-inline-baseline-visible-inspection.json.gz",
+            "sha256": "f0cf43a79e5cd238c929c5da2ff7081346ab0a43dda623f8d468c5e5efea3ae7",
+            "jsonSha256": "6b4cf11439821d34a626f665f68b56055dcff7576a0c56bbf51f6917945efc03"
+          },
+          "cropPt": [
+            67.249997,
+            69.556638,
+            134.320307,
+            118.845698
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "mathStructurePass": true,
+          "facts": {
+            "file": "plain-math-fraction-inline-candidate-html-facts.json.gz",
+            "sha256": "69e6a86d0645fe8a370cf23aa7682dede35ac6baf571236a77595c483152add5",
+            "jsonSha256": "745132fdc3d44a3f91364f23afdda47074f5e0fd9bbf551765359fff253bafee"
+          },
+          "report": {
+            "file": "plain-math-fraction-inline-candidate-report.json.gz",
+            "sha256": "d0938dfe21e7c770f26b9cfc3ae5979e41e6f7afc24611f6a2266df26d102c91",
+            "jsonSha256": "9608bc146472aa2f419d02b45066804c7ff2e35ca66d14f947f7ee5f4c59aa71"
+          },
+          "sourcePaint": [
+            {
+              "text": "MapleBegin",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.556638,
+                131.320307,
+                85.8457
+              ],
+              "inkPixels": 337
+            },
+            {
+              "text": "27.5",
+              "page": 1,
+              "rect": [
+                72.749997,
+                84.089059,
+                94.121286,
+                95.264059
+              ],
+              "inkPixels": 105
+            },
+            {
+              "text": "9",
+              "page": 1,
+              "rect": [
+                80.378903,
+                93.089058,
+                86.486715,
+                104.264058
+              ],
+              "inkPixels": 38
+            },
+            {
+              "text": "MapleEnd",
+              "page": 1,
+              "rect": [
+                71.999997,
+                102.556636,
+                121.986323,
+                115.845698
+              ],
+              "inkPixels": 271
+            }
+          ],
+          "fractionBar": {
+            "passed": true,
+            "rules": [
+              {
+                "rect": [
+                  72.75,
+                  93.75,
+                  94.5,
+                  94.5
+                ],
+                "darkPixels": 261,
+                "pixels": 261
+              }
+            ]
+          },
+          "pdf": "plain-math-fraction-inline-candidate.pdf",
+          "pdfSha256": "b56b93201afce49b9231af7fd1f2fdabcb230436df8a34b68d909ea07266af5b",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "plain-math-fraction-inline-candidate-inspection.json.gz",
+            "sha256": "880f97f0ab0165504a6827b0e09a9a2300632004ab0b02418323f98334f1ed65",
+            "jsonSha256": "5593852b0a765faeca9c502d5b72763b34bd521c3c644bcb6a11b2d5078e2189"
+          },
+          "cropPt": [
+            62.74999699999999,
+            69.556638,
+            134.320307,
+            118.845698
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": false,
+          "pdf": "plain-math-fraction-inline-reference.pdf",
+          "pdfSha256": "ec1dd056b80ba1a45ca87d6da32bb38978447df85e18aa35fa59883f0523a789",
+          "mandatoryFailures": [
+            "assertion-required-font-family"
+          ],
+          "inspection": {
+            "file": "plain-math-fraction-inline-reference-inspection.json.gz",
+            "sha256": "f74bb3b666a229d066d6ecf8811e5902fa1883f3a11fd7b1258b7bd11d14f915",
+            "jsonSha256": "0f7a4d1015219b7a97f1e539db720e6c9d212b450b69c1838baa9be501261ab7"
+          },
+          "cropPt": [
+            63.3,
+            69.508,
+            134.368,
+            131.042
+          ]
+        }
+      ],
+      "reviewSheet": {
+        "file": "plain-math-fraction-inline.png",
+        "sha256": "1f3e81180383792d82dc79a7b8cde65d2049bd7661338d70e87f819d2013e516"
+      }
+    },
+    {
+      "id": "plain-math-fraction-display",
+      "inputSha256": "22068cb204317844735f1b641caf8d351244d2389438ae774ee9953c984aee9b",
+      "panels": [
+        {
+          "renderer": "baseline-strict",
+          "refusal": {
+            "id": "plain-math-fraction-display",
+            "inputSha256": "22068cb204317844735f1b641caf8d351244d2389438ae774ee9953c984aee9b",
+            "status": "failed",
+            "code": "resource_policy_failure",
+            "phase": "font_loading",
+            "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome."
+          }
+        },
+        {
+          "renderer": "baseline-visible",
+          "mathStructurePass": false,
+          "facts": {
+            "file": "plain-math-fraction-display-baseline-visible-html-facts.json.gz",
+            "sha256": "81f3e08d1a9217b325d4382e182a3e35d16100d5ef4c5270db62df04c389fb50",
+            "jsonSha256": "1184a7a423cf9bb231eb5043dbdc3a5cdc6f62be707642085644f2d01d1409f2"
+          },
+          "report": {
+            "file": "plain-math-fraction-display-baseline-visible-report.json.gz",
+            "sha256": "df5a042f03c0e95449441eb2df6101b26fb8601574b67f9cb53d91d7492dc26d",
+            "jsonSha256": "2307446b46ce20939e4fbbf15430e2ca1dd9d27a7bc0e04fbababd6721bae192"
+          },
+          "pdf": "plain-math-fraction-display-baseline-visible.pdf",
+          "pdfSha256": "d1ab596447c4dad5753604a017efd07682b09126c52b9ea1fe9ef88387bfad59",
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "declared-font-families",
+            "assertion-same-page",
+            "assertion-required-font-family"
+          ],
+          "inspection": {
+            "file": "plain-math-fraction-display-baseline-visible-inspection.json.gz",
+            "sha256": "f0cf43a79e5cd238c929c5da2ff7081346ab0a43dda623f8d468c5e5efea3ae7",
+            "jsonSha256": "6b4cf11439821d34a626f665f68b56055dcff7576a0c56bbf51f6917945efc03"
+          },
+          "cropPt": [
+            67.249997,
+            69.556638,
+            134.320307,
+            118.845698
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "mathStructurePass": true,
+          "facts": {
+            "file": "plain-math-fraction-display-candidate-html-facts.json.gz",
+            "sha256": "ae7f2eb295844329da1062786036875f79a49727afb9c0d0c3ef0144aae7393b",
+            "jsonSha256": "d8e843f680ff449ba586b8a447765b3c52b9c052ec8df8a975802b92b7c17ebc"
+          },
+          "report": {
+            "file": "plain-math-fraction-display-candidate-report.json.gz",
+            "sha256": "824cfa8c659ebc1141aae1defc638468151cf065d687090929726cd8b4432115",
+            "jsonSha256": "35c64f70452f4b3e3dee19399f9241cdd1f8b7b2dcfef0a8b77144513139c5fa"
+          },
+          "sourcePaint": [
+            {
+              "text": "MapleBegin",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.556638,
+                131.320307,
+                85.8457
+              ],
+              "inkPixels": 321
+            },
+            {
+              "text": "MapleEnd",
+              "page": 1,
+              "rect": [
+                71.999997,
+                107.806636,
+                121.986323,
+                121.095698
+              ],
+              "inkPixels": 271
+            },
+            {
+              "text": "27.5",
+              "page": 1,
+              "rect": [
+                292.640613,
+                83.361325,
+                319.359362,
+                97.330074
+              ],
+              "inkPixels": 146
+            },
+            {
+              "text": "9",
+              "page": 1,
+              "rect": [
+                302.179675,
+                96.111324,
+                309.81444,
+                110.080073
+              ],
+              "inkPixels": 59
+            }
+          ],
+          "fractionBar": {
+            "passed": true,
+            "rules": [
+              {
+                "rect": [
+                  292.5,
+                  96.75,
+                  319.5,
+                  97.5
+                ],
+                "darkPixels": 324,
+                "pixels": 324
+              }
+            ]
+          },
+          "pdf": "plain-math-fraction-display-candidate.pdf",
+          "pdfSha256": "16b06dda9f83f245764a1527254cc6d9e3b6f50c06c35ae5f30490216b1213d6",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "plain-math-fraction-display-candidate-inspection.json.gz",
+            "sha256": "a2cf52302edcc601f41574b3c5d9c9c0182b38f98fef20f37cce37401e15774b",
+            "jsonSha256": "093011cfdf8efe3808a2b3818b1352e8f47055b22571ff9a02c9451d4380c4d6"
+          },
+          "cropPt": [
+            282.640613,
+            73.361325,
+            329.359362,
+            120.080073
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": false,
+          "pdf": "plain-math-fraction-display-reference.pdf",
+          "pdfSha256": "550a69062ce390f6292ed2fa176ce4e4be063737ece9b80c1fd9d80cace9fe97",
+          "mandatoryFailures": [
+            "assertion-required-font-family"
+          ],
+          "inspection": {
+            "file": "plain-math-fraction-display-reference-inspection.json.gz",
+            "sha256": "e752fe5e179b85db945087690aa21e28164b45ae3a796d1cb737d80b9ec89911",
+            "jsonSha256": "11507864d537118ee20218a51748f9338aedb551bc2d4a7b0d515ec6fc736fad"
+          },
+          "cropPt": [
+            285.5,
+            75.858,
+            326.5,
+            124.242
+          ]
+        }
+      ],
+      "reviewSheet": {
+        "file": "plain-math-fraction-display.png",
+        "sha256": "93704a9ea80b7ef92f225d5f1ea7511572f7883d4eab09e0681974da6eae8fa1"
+      }
+    },
+    {
+      "id": "plain-math-root-inline",
+      "inputSha256": "b22f52408c0539c21ed606bda5a00f98c7c46b1fc633176ea409ea80771ca592",
+      "panels": [
+        {
+          "renderer": "baseline-strict",
+          "refusal": {
+            "id": "plain-math-root-inline",
+            "inputSha256": "b22f52408c0539c21ed606bda5a00f98c7c46b1fc633176ea409ea80771ca592",
+            "status": "failed",
+            "code": "resource_policy_failure",
+            "phase": "font_loading",
+            "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome."
+          }
+        },
+        {
+          "renderer": "baseline-visible",
+          "mathStructurePass": false,
+          "facts": {
+            "file": "plain-math-root-inline-baseline-visible-html-facts.json.gz",
+            "sha256": "19e1f8242f54111f0b6562d19e2602f7f8cabe78512d6de60abe131327a019f5",
+            "jsonSha256": "f372d7f27082b25a7afeb85c7ce6b968400551c38f21063dcd9d7b891fa0514a"
+          },
+          "report": {
+            "file": "plain-math-root-inline-baseline-visible-report.json.gz",
+            "sha256": "971f34d5acb79ccb64e7843e3bf2af23590548efbeff746bef95a7cc426d935a",
+            "jsonSha256": "082ecb8098a62815b9f02173bcc1f7ad70aca9c7b5a4c6c763c9eb2557543b72"
+          },
+          "pdf": "plain-math-root-inline-baseline-visible.pdf",
+          "pdfSha256": "599487bb83a089ab77c9be7c2371a09432565cfcba904926ece1093fdca5a41b",
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "declared-font-families",
+            "assertion-same-page",
+            "assertion-required-font-family"
+          ],
+          "inspection": {
+            "file": "plain-math-root-inline-baseline-visible-inspection.json.gz",
+            "sha256": "f0cf43a79e5cd238c929c5da2ff7081346ab0a43dda623f8d468c5e5efea3ae7",
+            "jsonSha256": "6b4cf11439821d34a626f665f68b56055dcff7576a0c56bbf51f6917945efc03"
+          },
+          "cropPt": [
+            67.249997,
+            69.556638,
+            134.320307,
+            118.845698
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "mathStructurePass": true,
+          "facts": {
+            "file": "plain-math-root-inline-candidate-html-facts.json.gz",
+            "sha256": "82bcd0a6335bd2ce2e91faa1bee413519392e50d28ef5ca8b3e3682a7a948587",
+            "jsonSha256": "54a679368000d8e67a6ea6913b27cc0ddaed7177d0ca6c8c8f25f5c4e0f13650"
+          },
+          "report": {
+            "file": "plain-math-root-inline-candidate-report.json.gz",
+            "sha256": "5a45ce163566ce68e2643f4fb71519e892e45e2a19fe8f946bd0c76f7c2b510e",
+            "jsonSha256": "1a758c8b178f0e768860575c43db57593c1cbb8f61ec6ced88b7cdf6f66d8c46"
+          },
+          "sourcePaint": [
+            {
+              "text": "MapleBegin",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.556638,
+                131.320307,
+                85.8457
+              ],
+              "inkPixels": 321
+            },
+            {
+              "text": "\u221a64",
+              "page": 1,
+              "rect": [
+                71.999997,
+                86.126949,
+                94.019527,
+                100.095699
+              ],
+              "inkPixels": 141
+            },
+            {
+              "text": "MapleEnd",
+              "page": 1,
+              "rect": [
+                71.999997,
+                101.056636,
+                121.986323,
+                114.345698
+              ],
+              "inkPixels": 273
+            }
+          ],
+          "pdf": "plain-math-root-inline-candidate.pdf",
+          "pdfSha256": "4829bd3b11ac56d6731bc4b07b162fc07ff79c8d21c2057c3c09ec4aed39858a",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "plain-math-root-inline-candidate-inspection.json.gz",
+            "sha256": "297a79b2d0b2caf2360a5f9b1764792462165868916e73bd5e4b69ed457146c8",
+            "jsonSha256": "3c4209130917bbdb729fbdb20c507fda1848c845656972df1d65f30071fb6c9a"
+          },
+          "cropPt": [
+            61.99999699999999,
+            69.556638,
+            134.320307,
+            117.345698
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": false,
+          "pdf": "plain-math-root-inline-reference.pdf",
+          "pdfSha256": "ff4ecc1d9d94a15eb7727d47561f804ddb57dd064cc5496d88c9f8c592630d24",
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "declared-font-families",
+            "assertion-same-page",
+            "assertion-required-font-family"
+          ],
+          "inspection": {
+            "file": "plain-math-root-inline-reference-inspection.json.gz",
+            "sha256": "bc78964e70655afb6679789442d7c2b130037208b9d876d3f54e521ca8571fc0",
+            "jsonSha256": "b4b165ec903274a7ed0909c5fb11136272908fcf9a49ba06015e1a15e2db0240"
+          },
+          "cropPt": [
+            62.25,
+            69.508,
+            134.368,
+            116.992
+          ]
+        }
+      ],
+      "reviewSheet": {
+        "file": "plain-math-root-inline.png",
+        "sha256": "684f74afd52b2eae711d858e416e3172ffa9e04a2283eb29b07d30986d77e839"
+      }
+    },
+    {
+      "id": "plain-math-root-display",
+      "inputSha256": "eba2475dd9ee895d2fcffa0fce1d6448586f5ceee21034283c8285f44c984635",
+      "panels": [
+        {
+          "renderer": "baseline-strict",
+          "refusal": {
+            "id": "plain-math-root-display",
+            "inputSha256": "eba2475dd9ee895d2fcffa0fce1d6448586f5ceee21034283c8285f44c984635",
+            "status": "failed",
+            "code": "resource_policy_failure",
+            "phase": "font_loading",
+            "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome."
+          }
+        },
+        {
+          "renderer": "baseline-visible",
+          "mathStructurePass": false,
+          "facts": {
+            "file": "plain-math-root-display-baseline-visible-html-facts.json.gz",
+            "sha256": "e222e8e36513665e7c7d55e5c32f774a875bff75e776cd3031391970678071ba",
+            "jsonSha256": "18bcb5e4c67a11e8683e1ec79c30c97826378a15094f5f86aa13f67d83df0c96"
+          },
+          "report": {
+            "file": "plain-math-root-display-baseline-visible-report.json.gz",
+            "sha256": "b995b6dc5ccf3f936c25fee67f3d02d2f0f7c711173aadeb8155e4f2d6834167",
+            "jsonSha256": "e58a07180da20c8ec50d176aef3e63327e1327de4525524fba9da985d6bae518"
+          },
+          "pdf": "plain-math-root-display-baseline-visible.pdf",
+          "pdfSha256": "8e5fef685f611231c3b6c910704b3bf24e0f20d0ad25210e97737b93ba00551e",
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "declared-font-families",
+            "assertion-same-page",
+            "assertion-required-font-family"
+          ],
+          "inspection": {
+            "file": "plain-math-root-display-baseline-visible-inspection.json.gz",
+            "sha256": "f0cf43a79e5cd238c929c5da2ff7081346ab0a43dda623f8d468c5e5efea3ae7",
+            "jsonSha256": "6b4cf11439821d34a626f665f68b56055dcff7576a0c56bbf51f6917945efc03"
+          },
+          "cropPt": [
+            67.249997,
+            69.556638,
+            134.320307,
+            118.845698
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "mathStructurePass": true,
+          "facts": {
+            "file": "plain-math-root-display-candidate-html-facts.json.gz",
+            "sha256": "d05ecf9839b1c15fc4ef7b6e345f0b1c0f24c4a1e19feba582e8a0e75f6691bb",
+            "jsonSha256": "8112afadf8f71d56b5c7dfd6d29d1652eb8425b2f8648bb8e967558146b2d5e6"
+          },
+          "report": {
+            "file": "plain-math-root-display-candidate-report.json.gz",
+            "sha256": "5e6dadc404a04e420b0bf11de8411e79cf7484dedd9438c636b948b51e5dcc4a",
+            "jsonSha256": "862d95c0b83ba69d04318515cf7919cb8871a185474f048fac0cffa4e9efd2a9"
+          },
+          "sourcePaint": [
+            {
+              "text": "MapleBegin",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.556638,
+                131.320307,
+                85.8457
+              ],
+              "inkPixels": 321
+            },
+            {
+              "text": "MapleEnd",
+              "page": 1,
+              "rect": [
+                71.999997,
+                101.056636,
+                121.986323,
+                114.345698
+              ],
+              "inkPixels": 271
+            },
+            {
+              "text": "\u221a64",
+              "page": 1,
+              "rect": [
+                294.53905,
+                86.126949,
+                316.558581,
+                101.830074
+              ],
+              "inkPixels": 151
+            }
+          ],
+          "pdf": "plain-math-root-display-candidate.pdf",
+          "pdfSha256": "a5485bb641ad4c6212c45e21885809acf45e4eb22610c95ec4692aece6ac9731",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "plain-math-root-display-candidate-inspection.json.gz",
+            "sha256": "6fa0d1b13645736df930e2d762098b91845b4027d8b6d0ae42a302869156704a",
+            "jsonSha256": "4de4d4e8be18e4b25f7cf07f99b56a67aea31cef6f296522cf3afdab6011cb76"
+          },
+          "cropPt": [
+            284.53905,
+            76.126949,
+            326.558581,
+            111.830074
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": false,
+          "pdf": "plain-math-root-display-reference.pdf",
+          "pdfSha256": "8547344c259fd5ddfc1b0292d138809dbf0b861bebe6a2187fbc7beb1f9869ad",
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "declared-font-families",
+            "assertion-same-page",
+            "assertion-required-font-family"
+          ],
+          "inspection": {
+            "file": "plain-math-root-display-reference-inspection.json.gz",
+            "sha256": "29420ad7cf5ecda57372500007bb1d9e2c8cd1fe48a15ad913f4aed43f106c4b",
+            "jsonSha256": "93f0643826c2a293134f06e83ac797c21ceba104f0404268e140d08e8bfc3cac"
+          },
+          "cropPt": [
+            286.25,
+            74.6378,
+            325.55,
+            112.8364
+          ]
+        }
+      ],
+      "reviewSheet": {
+        "file": "plain-math-root-display.png",
+        "sha256": "484e4eab18fcd2a58d6bac7db90cfcb7c9294f1d198f6c1de7a36c10b7c290b2"
+      }
+    },
+    {
+      "id": "plain-math-indexed-inline",
+      "inputSha256": "a2a706fd1a0200ab3656a90559037715d384e934e855e00278d7e4fc31dd878c",
+      "panels": [
+        {
+          "renderer": "baseline-strict",
+          "refusal": {
+            "id": "plain-math-indexed-inline",
+            "inputSha256": "a2a706fd1a0200ab3656a90559037715d384e934e855e00278d7e4fc31dd878c",
+            "status": "failed",
+            "code": "resource_policy_failure",
+            "phase": "font_loading",
+            "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome."
+          }
+        },
+        {
+          "renderer": "baseline-visible",
+          "mathStructurePass": false,
+          "facts": {
+            "file": "plain-math-indexed-inline-baseline-visible-html-facts.json.gz",
+            "sha256": "0c2ebde77721b71df437947dfbfc83cc98b0e1239b56f28f119e99a9aac443eb",
+            "jsonSha256": "dd12499b55845398a65c5fd6a22c1e2ae6d854dd4a4cf0a582ccfe375d698de0"
+          },
+          "report": {
+            "file": "plain-math-indexed-inline-baseline-visible-report.json.gz",
+            "sha256": "30a56e58943109554084cd393bfad1752375bd187e9e4f2f5b565a949638d45a",
+            "jsonSha256": "63b0de8de75e612ab54c2d7e84bce76c1f2702e22e3eb017186c57052c40a205"
+          },
+          "pdf": "plain-math-indexed-inline-baseline-visible.pdf",
+          "pdfSha256": "d25f5fda39c760d78a6738576eb58bfbd6da6e72bc5a74e3425794583d98251c",
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "declared-font-families",
+            "assertion-same-page",
+            "assertion-required-font-family"
+          ],
+          "inspection": {
+            "file": "plain-math-indexed-inline-baseline-visible-inspection.json.gz",
+            "sha256": "f0cf43a79e5cd238c929c5da2ff7081346ab0a43dda623f8d468c5e5efea3ae7",
+            "jsonSha256": "6b4cf11439821d34a626f665f68b56055dcff7576a0c56bbf51f6917945efc03"
+          },
+          "cropPt": [
+            67.249997,
+            69.556638,
+            134.320307,
+            118.845698
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "mathStructurePass": true,
+          "facts": {
+            "file": "plain-math-indexed-inline-candidate-html-facts.json.gz",
+            "sha256": "96a107842b391543016f382900f60ca2957d8750ebafeda00b5bc7983a45268c",
+            "jsonSha256": "c489d591aa18566053b18624715c362461f9d394ae066370d80f67b106ad3b68"
+          },
+          "report": {
+            "file": "plain-math-indexed-inline-candidate-report.json.gz",
+            "sha256": "4eb601466232c21b489c4608d553cbeafd7ca029f1bef8f9c6ea8f9fc5ed822b",
+            "jsonSha256": "91cf440e50b9cc4340b591923c96265187e1828e3b3329a8278469b7c60be6ab"
+          },
+          "sourcePaint": [
+            {
+              "text": "MapleBegin",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.556638,
+                131.320307,
+                85.8457
+              ],
+              "inkPixels": 321
+            },
+            {
+              "text": "3",
+              "page": 1,
+              "rect": [
+                75.328122,
+                85.566793,
+                79.908981,
+                93.948043
+              ],
+              "inkPixels": 22
+            },
+            {
+              "text": "\u221a125",
+              "page": 1,
+              "rect": [
+                75.328122,
+                86.126949,
+                104.982418,
+                100.095699
+              ],
+              "inkPixels": 192
+            },
+            {
+              "text": "MapleEnd",
+              "page": 1,
+              "rect": [
+                71.999997,
+                101.056636,
+                121.986323,
+                114.345698
+              ],
+              "inkPixels": 272
+            }
+          ],
+          "pdf": "plain-math-indexed-inline-candidate.pdf",
+          "pdfSha256": "c39232d520ae7521781cc8e04675b5c825a910471079ba08d0b38e7e736bb40c",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "plain-math-indexed-inline-candidate-inspection.json.gz",
+            "sha256": "bded344d00763b7776d9e2a41acb5f84825096674d5e59f2580f43b9ab2b3456",
+            "jsonSha256": "00f095d2e31e7ab6db086c04ab20b8168be9c27a99b5fbf2832f0f9966ed5ef0"
+          },
+          "cropPt": [
+            65.328122,
+            69.556638,
+            134.320307,
+            117.345698
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": false,
+          "pdf": "plain-math-indexed-inline-reference.pdf",
+          "pdfSha256": "d720c3321b38e427fa5ca072876a15dededf0858f39ccea1dadd743cf4268ba8",
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "declared-font-families",
+            "assertion-same-page",
+            "assertion-required-font-family"
+          ],
+          "inspection": {
+            "file": "plain-math-indexed-inline-reference-inspection.json.gz",
+            "sha256": "24f398be5fe79f9a7484ac869442df89de88cdb756dc937e5814245409d67033",
+            "jsonSha256": "0d036017a1a496dceeededb9582463517feabaf7b96219adb103649f060927fd"
+          },
+          "cropPt": [
+            62.25,
+            69.508,
+            134.368,
+            118.192
+          ]
+        }
+      ],
+      "reviewSheet": {
+        "file": "plain-math-indexed-inline.png",
+        "sha256": "490c9229e0f05cdfe98dfa485f43f8632ec03486e41e6d108e826daf0c0e3c8d"
+      }
+    },
+    {
+      "id": "plain-math-indexed-display",
+      "inputSha256": "b11f1a5eba178299288fa8abc52faf8dc0cb1472281f36c99a29dec2a2ba6f3a",
+      "panels": [
+        {
+          "renderer": "baseline-strict",
+          "refusal": {
+            "id": "plain-math-indexed-display",
+            "inputSha256": "b11f1a5eba178299288fa8abc52faf8dc0cb1472281f36c99a29dec2a2ba6f3a",
+            "status": "failed",
+            "code": "resource_policy_failure",
+            "phase": "font_loading",
+            "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome."
+          }
+        },
+        {
+          "renderer": "baseline-visible",
+          "mathStructurePass": false,
+          "facts": {
+            "file": "plain-math-indexed-display-baseline-visible-html-facts.json.gz",
+            "sha256": "e3f2dc5c407f2ce280b3ecb9d623ee24b36c58c1bfcdb0509f7182a33a876678",
+            "jsonSha256": "b677952b3c84962c4a8d82f7c642759557e7ed23f0702c05c07d76eb917b72d2"
+          },
+          "report": {
+            "file": "plain-math-indexed-display-baseline-visible-report.json.gz",
+            "sha256": "413e4fa3382ebe6f014ad16740cb9a243c609d14d0c87bdebbb7b49462fddf78",
+            "jsonSha256": "bf4ccc619f12da100bbab77ad7e5967461c38310a78592a0f5f639043aec828a"
+          },
+          "pdf": "plain-math-indexed-display-baseline-visible.pdf",
+          "pdfSha256": "0620e69132b4f2bc3392ae20ffcdd2c6c96f1e4def9e83d4f808907f947362ed",
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "declared-font-families",
+            "assertion-same-page",
+            "assertion-required-font-family"
+          ],
+          "inspection": {
+            "file": "plain-math-indexed-display-baseline-visible-inspection.json.gz",
+            "sha256": "f0cf43a79e5cd238c929c5da2ff7081346ab0a43dda623f8d468c5e5efea3ae7",
+            "jsonSha256": "6b4cf11439821d34a626f665f68b56055dcff7576a0c56bbf51f6917945efc03"
+          },
+          "cropPt": [
+            67.249997,
+            69.556638,
+            134.320307,
+            118.845698
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "mathStructurePass": true,
+          "facts": {
+            "file": "plain-math-indexed-display-candidate-html-facts.json.gz",
+            "sha256": "6037782652d6bde30f58990b5f859cfb04d3f607e922279e9a37f616d3c4adbb",
+            "jsonSha256": "85e2ca4369673dac089f38b15b194aa2bb9bee5eaf846ff053d13b4a2feeb9e3"
+          },
+          "report": {
+            "file": "plain-math-indexed-display-candidate-report.json.gz",
+            "sha256": "2313fa4a6dcc2f914b0f002b9e02393fc5982f8e3b46269b67f0f918f53c37b8",
+            "jsonSha256": "a4ee7ed2f87ad1e10f298a927fa80eb2b8d2c0bde186f687bbc28baf19bb38e4"
+          },
+          "sourcePaint": [
+            {
+              "text": "MapleBegin",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.556638,
+                131.320307,
+                85.8457
+              ],
+              "inkPixels": 321
+            },
+            {
+              "text": "MapleEnd",
+              "page": 1,
+              "rect": [
+                71.999997,
+                101.056636,
+                121.986323,
+                114.345698
+              ],
+              "inkPixels": 271
+            },
+            {
+              "text": "3",
+              "page": 1,
+              "rect": [
+                292.3828,
+                85.566793,
+                296.96366,
+                93.948043
+              ],
+              "inkPixels": 19
+            },
+            {
+              "text": "\u221a125",
+              "page": 1,
+              "rect": [
+                292.3828,
+                86.126949,
+                322.037096,
+                101.830074
+              ],
+              "inkPixels": 187
+            }
+          ],
+          "pdf": "plain-math-indexed-display-candidate.pdf",
+          "pdfSha256": "8754bc234244b41e59093e4cc92a13709d57da55040aaf9272641fd8d390b7df",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "plain-math-indexed-display-candidate-inspection.json.gz",
+            "sha256": "a568742a7a47608c96d20b13c28da6862db45dc5eaeb43a30cb8e96421f51a3f",
+            "jsonSha256": "45ec61444496dfb231e011bfca0da39e950d1a10fdcf70e44cbd05b8667ff558"
+          },
+          "cropPt": [
+            282.3828,
+            75.566793,
+            332.037096,
+            111.830074
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": false,
+          "pdf": "plain-math-indexed-display-reference.pdf",
+          "pdfSha256": "cd03cca8d53c830b056e887963b63592ff34a2bfa891761611f8324e00eeec91",
+          "mandatoryFailures": [
+            "expected-visible-tokens",
+            "declared-font-families",
+            "assertion-same-page",
+            "assertion-required-font-family"
+          ],
+          "inspection": {
+            "file": "plain-math-indexed-display-reference-inspection.json.gz",
+            "sha256": "a729393876a55b813c8840bcf069e5e1b83c6f086001b225750184084ec6bb44",
+            "jsonSha256": "88c7088ab60ebaf980ae72e99ae2facdfb17f9e5d87fd815e8446d83ab47f697"
+          },
+          "cropPt": [
+            283.45,
+            75.8348,
+            328.65,
+            114.0364
+          ]
+        }
+      ],
+      "reviewSheet": {
+        "file": "plain-math-indexed-display.png",
+        "sha256": "b67537d3c4afde0a902f440e68b0c09d380d3eececfe6a118088c14e9dd88bb0"
+      }
+    },
+    {
+      "id": "plain-math-fraction-prose-control",
+      "inputSha256": "2a00eb9733bc5a5fe13373d2b42d137df3315cbe5d2721a7538ff0137acf7db0",
+      "panels": [
+        {
+          "renderer": "baseline-strict",
+          "facts": {
+            "file": "plain-math-fraction-prose-control-baseline-strict-html-facts.json.gz",
+            "sha256": "54449cbe92cc5056c6bc4f483f1a2254cb98c8c2756dc3d08c372ed9758840d9",
+            "jsonSha256": "3de105409650174a8f046776b8cfb7d62fa89d89f22f44f2ead4e8d6a349ea98"
+          },
+          "report": {
+            "file": "plain-math-fraction-prose-control-baseline-strict-report.json.gz",
+            "sha256": "538fb71eed070eb2a6518d3b7db33631655bac9346b926cb25d63c131e342761",
+            "jsonSha256": "8e5deddee58392037a041902474be4ac6c74fbd52226753b924e745faf9b43b6"
+          },
+          "sourcePaint": [
+            {
+              "text": "MapleBegin",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.509763,
+                131.320307,
+                85.798825
+              ],
+              "inkPixels": 321
+            },
+            {
+              "text": "MaplePlain",
+              "page": 1,
+              "rect": [
+                71.999997,
+                86.302731,
+                127.324214,
+                99.591793
+              ],
+              "inkPixels": 283
+            },
+            {
+              "text": "27.5",
+              "page": 1,
+              "rect": [
+                130.324213,
+                86.302731,
+                151.324212,
+                99.591793
+              ],
+              "inkPixels": 81
+            },
+            {
+              "text": "/",
+              "page": 1,
+              "rect": [
+                154.324212,
+                86.302731,
+                157.658197,
+                99.591793
+              ],
+              "inkPixels": 10
+            },
+            {
+              "text": "9",
+              "page": 1,
+              "rect": [
+                160.652337,
+                86.302731,
+                166.652337,
+                99.591793
+              ],
+              "inkPixels": 32
+            },
+            {
+              "text": "MapleEnd",
+              "page": 1,
+              "rect": [
+                71.999997,
+                100.107418,
+                121.986323,
+                113.39648
+              ],
+              "inkPixels": 271
+            }
+          ],
+          "pdf": "plain-math-fraction-prose-control-baseline-strict.pdf",
+          "pdfSha256": "1d0098c56f7ccab3b3917738f5df20b5157087e933071682557eae13471a21d6",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "plain-math-fraction-prose-control-baseline-strict-inspection.json.gz",
+            "sha256": "86c3a6e8b788285df41892fda2534a2720052821c4837ac3264ae487abf87ebd",
+            "jsonSha256": "a420e6c0de7cb15fa613901c1d950d4612f1c9a39d495f54777b1481a3450ef5"
+          }
+        },
+        {
+          "renderer": "baseline-visible",
+          "facts": {
+            "file": "plain-math-fraction-prose-control-baseline-visible-html-facts.json.gz",
+            "sha256": "54449cbe92cc5056c6bc4f483f1a2254cb98c8c2756dc3d08c372ed9758840d9",
+            "jsonSha256": "3de105409650174a8f046776b8cfb7d62fa89d89f22f44f2ead4e8d6a349ea98"
+          },
+          "report": {
+            "file": "plain-math-fraction-prose-control-baseline-visible-report.json.gz",
+            "sha256": "93cf46b106d84077f7a1f27c2e344d4655535269523edc4da36714e9c9bcee9f",
+            "jsonSha256": "0995f6740f3aa3a796b2965f10d7dea0e06cd57151214b54b28f638ec2d5caff"
+          },
+          "sourcePaint": [
+            {
+              "text": "MapleBegin",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.509763,
+                131.320307,
+                85.798825
+              ],
+              "inkPixels": 321
+            },
+            {
+              "text": "MaplePlain",
+              "page": 1,
+              "rect": [
+                71.999997,
+                86.302731,
+                127.324214,
+                99.591793
+              ],
+              "inkPixels": 283
+            },
+            {
+              "text": "27.5",
+              "page": 1,
+              "rect": [
+                130.324213,
+                86.302731,
+                151.324212,
+                99.591793
+              ],
+              "inkPixels": 81
+            },
+            {
+              "text": "/",
+              "page": 1,
+              "rect": [
+                154.324212,
+                86.302731,
+                157.658197,
+                99.591793
+              ],
+              "inkPixels": 10
+            },
+            {
+              "text": "9",
+              "page": 1,
+              "rect": [
+                160.652337,
+                86.302731,
+                166.652337,
+                99.591793
+              ],
+              "inkPixels": 32
+            },
+            {
+              "text": "MapleEnd",
+              "page": 1,
+              "rect": [
+                71.999997,
+                100.107418,
+                121.986323,
+                113.39648
+              ],
+              "inkPixels": 271
+            }
+          ],
+          "pdf": "plain-math-fraction-prose-control-baseline-visible.pdf",
+          "pdfSha256": "bcf1de99ad3b18ce243a84f372fed686ecc44cf1bf1decd2e9def393ddde991b",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "plain-math-fraction-prose-control-baseline-visible-inspection.json.gz",
+            "sha256": "86c3a6e8b788285df41892fda2534a2720052821c4837ac3264ae487abf87ebd",
+            "jsonSha256": "a420e6c0de7cb15fa613901c1d950d4612f1c9a39d495f54777b1481a3450ef5"
+          },
+          "cropPt": [
+            61.99999699999999,
+            69.509763,
+            176.652337,
+            116.39648
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "facts": {
+            "file": "plain-math-fraction-prose-control-candidate-html-facts.json.gz",
+            "sha256": "54449cbe92cc5056c6bc4f483f1a2254cb98c8c2756dc3d08c372ed9758840d9",
+            "jsonSha256": "3de105409650174a8f046776b8cfb7d62fa89d89f22f44f2ead4e8d6a349ea98"
+          },
+          "report": {
+            "file": "plain-math-fraction-prose-control-candidate-report.json.gz",
+            "sha256": "30484919ba6f99a3d31d1135fd20d740a71742e4201f021fb07dabcd1a098800",
+            "jsonSha256": "6612f19b6a3bb626f47579d2c6b8338bcdd607ceb79549606aea87e4ab265df1"
+          },
+          "sourcePaint": [
+            {
+              "text": "MapleBegin",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.509763,
+                131.320307,
+                85.798825
+              ],
+              "inkPixels": 321
+            },
+            {
+              "text": "MaplePlain",
+              "page": 1,
+              "rect": [
+                71.999997,
+                86.302731,
+                127.324214,
+                99.591793
+              ],
+              "inkPixels": 283
+            },
+            {
+              "text": "27.5",
+              "page": 1,
+              "rect": [
+                130.324213,
+                86.302731,
+                151.324212,
+                99.591793
+              ],
+              "inkPixels": 81
+            },
+            {
+              "text": "/",
+              "page": 1,
+              "rect": [
+                154.324212,
+                86.302731,
+                157.658197,
+                99.591793
+              ],
+              "inkPixels": 10
+            },
+            {
+              "text": "9",
+              "page": 1,
+              "rect": [
+                160.652337,
+                86.302731,
+                166.652337,
+                99.591793
+              ],
+              "inkPixels": 32
+            },
+            {
+              "text": "MapleEnd",
+              "page": 1,
+              "rect": [
+                71.999997,
+                100.107418,
+                121.986323,
+                113.39648
+              ],
+              "inkPixels": 271
+            }
+          ],
+          "pdf": "plain-math-fraction-prose-control-candidate.pdf",
+          "pdfSha256": "66594b24ebba3817bcab44ea02cc1b4cdd621ebcc88d2a3a6996208a8e1175bc",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "plain-math-fraction-prose-control-candidate-inspection.json.gz",
+            "sha256": "86c3a6e8b788285df41892fda2534a2720052821c4837ac3264ae487abf87ebd",
+            "jsonSha256": "a420e6c0de7cb15fa613901c1d950d4612f1c9a39d495f54777b1481a3450ef5"
+          },
+          "cropPt": [
+            61.99999699999999,
+            69.509763,
+            176.652337,
+            116.39648
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "sourcePaint": [
+            {
+              "text": "MapleBegin",
+              "page": 1,
+              "rect": [
+                72.1,
+                72.508,
+                131.368,
+                85.792
+              ],
+              "inkPixels": 318
+            },
+            {
+              "text": "MaplePlain",
+              "page": 1,
+              "rect": [
+                72.1,
+                86.308,
+                127.36,
+                99.592
+              ],
+              "inkPixels": 277
+            },
+            {
+              "text": "27.5",
+              "page": 1,
+              "rect": [
+                130.36,
+                86.308,
+                151.36,
+                99.592
+              ],
+              "inkPixels": 81
+            },
+            {
+              "text": "/",
+              "page": 1,
+              "rect": [
+                154.36,
+                86.308,
+                157.684,
+                99.592
+              ],
+              "inkPixels": 10
+            },
+            {
+              "text": "9",
+              "page": 1,
+              "rect": [
+                160.696,
+                86.308,
+                166.696,
+                99.592
+              ],
+              "inkPixels": 36
+            },
+            {
+              "text": "MapleEnd",
+              "page": 1,
+              "rect": [
+                72.1,
+                100.108,
+                122.032,
+                113.392
+              ],
+              "inkPixels": 268
+            }
+          ],
+          "pdf": "plain-math-fraction-prose-control-reference.pdf",
+          "pdfSha256": "05fc0960ec6b0b3de25beee6813fc1e4280ffc74d527ba196557fd67c6bd87a0",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "plain-math-fraction-prose-control-reference-inspection.json.gz",
+            "sha256": "8e7e5156edbcbe601620fbcee1ab53262dd6fa20ead89cfe6b30264ae41bf218",
+            "jsonSha256": "9a3f3b803b0fd45cfe037eb658ec1f57cd21c7834b3afdd3dd3ff1ad140f7155"
+          },
+          "cropPt": [
+            62.099999999999994,
+            69.508,
+            176.696,
+            116.392
+          ]
+        }
+      ],
+      "reviewSheet": {
+        "file": "plain-math-fraction-prose-control.png",
+        "sha256": "afca92ea6df208ff20703b8cdf9c18e763fac951bc1123a1e4c9a2c009ff6c4c"
+      }
+    },
+    {
+      "id": "plain-math-root-prose-control",
+      "inputSha256": "9f298d13eabdbbfbfe31967b8a146091b0dcd0a0e6e398cc7bef320a0e9dd31d",
+      "panels": [
+        {
+          "renderer": "baseline-strict",
+          "facts": {
+            "file": "plain-math-root-prose-control-baseline-strict-html-facts.json.gz",
+            "sha256": "14a67f814491a9c2dde5da0e1ea68c9268d1324436bc4a10fc30c4313f0414f7",
+            "jsonSha256": "4dad29e8be6dd03180769e15f898ab1df9493037e63b2536f69256f250a1623f"
+          },
+          "report": {
+            "file": "plain-math-root-prose-control-baseline-strict-report.json.gz",
+            "sha256": "5abc97d0a02da92d265b7e0865c99e299cdc30e11c9b735a73d0172dd13c90c8",
+            "jsonSha256": "b39a9b4b7aa5e1e2c37ad07bbe3a5dd96e8faa701da3715a0bba4b40a5ddaf1e"
+          },
+          "sourcePaint": [
+            {
+              "text": "MapleBegin",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.509763,
+                131.320307,
+                85.798825
+              ],
+              "inkPixels": 321
+            },
+            {
+              "text": "MaplePlain",
+              "page": 1,
+              "rect": [
+                71.999997,
+                86.302731,
+                127.324214,
+                99.591793
+              ],
+              "inkPixels": 283
+            },
+            {
+              "text": "root",
+              "page": 1,
+              "rect": [
+                130.324213,
+                86.302731,
+                149.654291,
+                99.591793
+              ],
+              "inkPixels": 73
+            },
+            {
+              "text": "64",
+              "page": 1,
+              "rect": [
+                152.648431,
+                86.302731,
+                164.648431,
+                99.591793
+              ],
+              "inkPixels": 73
+            },
+            {
+              "text": "index",
+              "page": 1,
+              "rect": [
+                167.648431,
+                86.302731,
+                194.308586,
+                99.591793
+              ],
+              "inkPixels": 122
+            },
+            {
+              "text": "3",
+              "page": 1,
+              "rect": [
+                197.308586,
+                86.302731,
+                203.308585,
+                99.591793
+              ],
+              "inkPixels": 28
+            },
+            {
+              "text": "MapleEnd",
+              "page": 1,
+              "rect": [
+                71.999997,
+                100.107418,
+                121.986323,
+                113.39648
+              ],
+              "inkPixels": 271
+            }
+          ],
+          "pdf": "plain-math-root-prose-control-baseline-strict.pdf",
+          "pdfSha256": "6253f4f18239fc325523ffa7aec15fc11b55c478b240fb51bf63c2c94147d045",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "plain-math-root-prose-control-baseline-strict-inspection.json.gz",
+            "sha256": "f427c719e8fadc418e55d2e6522dafb8407b103cba8a57663b9ea3e4942c8786",
+            "jsonSha256": "8c35016d1ebf2bc5a6d5d7ed89c047681d4339b281e22d604df6b722686fc27d"
+          }
+        },
+        {
+          "renderer": "baseline-visible",
+          "facts": {
+            "file": "plain-math-root-prose-control-baseline-visible-html-facts.json.gz",
+            "sha256": "14a67f814491a9c2dde5da0e1ea68c9268d1324436bc4a10fc30c4313f0414f7",
+            "jsonSha256": "4dad29e8be6dd03180769e15f898ab1df9493037e63b2536f69256f250a1623f"
+          },
+          "report": {
+            "file": "plain-math-root-prose-control-baseline-visible-report.json.gz",
+            "sha256": "651328270c76f1107633724de343d63d81432f9bdd9f5cdf2f270b50b7822435",
+            "jsonSha256": "90e9212c9f85289a5d7f43350b82d0bed6025a567fea09813d64567d7cfa2bcb"
+          },
+          "sourcePaint": [
+            {
+              "text": "MapleBegin",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.509763,
+                131.320307,
+                85.798825
+              ],
+              "inkPixels": 321
+            },
+            {
+              "text": "MaplePlain",
+              "page": 1,
+              "rect": [
+                71.999997,
+                86.302731,
+                127.324214,
+                99.591793
+              ],
+              "inkPixels": 283
+            },
+            {
+              "text": "root",
+              "page": 1,
+              "rect": [
+                130.324213,
+                86.302731,
+                149.654291,
+                99.591793
+              ],
+              "inkPixels": 73
+            },
+            {
+              "text": "64",
+              "page": 1,
+              "rect": [
+                152.648431,
+                86.302731,
+                164.648431,
+                99.591793
+              ],
+              "inkPixels": 73
+            },
+            {
+              "text": "index",
+              "page": 1,
+              "rect": [
+                167.648431,
+                86.302731,
+                194.308586,
+                99.591793
+              ],
+              "inkPixels": 122
+            },
+            {
+              "text": "3",
+              "page": 1,
+              "rect": [
+                197.308586,
+                86.302731,
+                203.308585,
+                99.591793
+              ],
+              "inkPixels": 28
+            },
+            {
+              "text": "MapleEnd",
+              "page": 1,
+              "rect": [
+                71.999997,
+                100.107418,
+                121.986323,
+                113.39648
+              ],
+              "inkPixels": 271
+            }
+          ],
+          "pdf": "plain-math-root-prose-control-baseline-visible.pdf",
+          "pdfSha256": "f43a57eee705c74bb1f807701949981e65734ea27f4e61d168b6d7a461b5ed0f",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "plain-math-root-prose-control-baseline-visible-inspection.json.gz",
+            "sha256": "f427c719e8fadc418e55d2e6522dafb8407b103cba8a57663b9ea3e4942c8786",
+            "jsonSha256": "8c35016d1ebf2bc5a6d5d7ed89c047681d4339b281e22d604df6b722686fc27d"
+          },
+          "cropPt": [
+            61.99999699999999,
+            69.509763,
+            213.308585,
+            116.39648
+          ]
+        },
+        {
+          "renderer": "candidate",
+          "facts": {
+            "file": "plain-math-root-prose-control-candidate-html-facts.json.gz",
+            "sha256": "14a67f814491a9c2dde5da0e1ea68c9268d1324436bc4a10fc30c4313f0414f7",
+            "jsonSha256": "4dad29e8be6dd03180769e15f898ab1df9493037e63b2536f69256f250a1623f"
+          },
+          "report": {
+            "file": "plain-math-root-prose-control-candidate-report.json.gz",
+            "sha256": "44e145684211df567e26ea816b02be4858a55af8be4ce52cb49fe75d9ea80e1c",
+            "jsonSha256": "f06b418c22b9f4580a4760cd6019cd1ab546f263fd92d6e1b304c10196d73630"
+          },
+          "sourcePaint": [
+            {
+              "text": "MapleBegin",
+              "page": 1,
+              "rect": [
+                71.999997,
+                72.509763,
+                131.320307,
+                85.798825
+              ],
+              "inkPixels": 321
+            },
+            {
+              "text": "MaplePlain",
+              "page": 1,
+              "rect": [
+                71.999997,
+                86.302731,
+                127.324214,
+                99.591793
+              ],
+              "inkPixels": 283
+            },
+            {
+              "text": "root",
+              "page": 1,
+              "rect": [
+                130.324213,
+                86.302731,
+                149.654291,
+                99.591793
+              ],
+              "inkPixels": 73
+            },
+            {
+              "text": "64",
+              "page": 1,
+              "rect": [
+                152.648431,
+                86.302731,
+                164.648431,
+                99.591793
+              ],
+              "inkPixels": 73
+            },
+            {
+              "text": "index",
+              "page": 1,
+              "rect": [
+                167.648431,
+                86.302731,
+                194.308586,
+                99.591793
+              ],
+              "inkPixels": 122
+            },
+            {
+              "text": "3",
+              "page": 1,
+              "rect": [
+                197.308586,
+                86.302731,
+                203.308585,
+                99.591793
+              ],
+              "inkPixels": 28
+            },
+            {
+              "text": "MapleEnd",
+              "page": 1,
+              "rect": [
+                71.999997,
+                100.107418,
+                121.986323,
+                113.39648
+              ],
+              "inkPixels": 271
+            }
+          ],
+          "pdf": "plain-math-root-prose-control-candidate.pdf",
+          "pdfSha256": "97915726c9ff4515dc0732d100bd2bf50c4590f468b66dfbcfdf59b06330875e",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "plain-math-root-prose-control-candidate-inspection.json.gz",
+            "sha256": "f427c719e8fadc418e55d2e6522dafb8407b103cba8a57663b9ea3e4942c8786",
+            "jsonSha256": "8c35016d1ebf2bc5a6d5d7ed89c047681d4339b281e22d604df6b722686fc27d"
+          },
+          "cropPt": [
+            61.99999699999999,
+            69.509763,
+            213.308585,
+            116.39648
+          ]
+        },
+        {
+          "renderer": "reference",
+          "referenceEligible": true,
+          "sourcePaint": [
+            {
+              "text": "MapleBegin",
+              "page": 1,
+              "rect": [
+                72.1,
+                72.508,
+                131.368,
+                85.792
+              ],
+              "inkPixels": 318
+            },
+            {
+              "text": "MaplePlain",
+              "page": 1,
+              "rect": [
+                72.1,
+                86.308,
+                127.36,
+                99.592
+              ],
+              "inkPixels": 277
+            },
+            {
+              "text": "root",
+              "page": 1,
+              "rect": [
+                130.36,
+                86.308,
+                149.68,
+                99.592
+              ],
+              "inkPixels": 73
+            },
+            {
+              "text": "64",
+              "page": 1,
+              "rect": [
+                152.692,
+                86.308,
+                164.692,
+                99.592
+              ],
+              "inkPixels": 73
+            },
+            {
+              "text": "index",
+              "page": 1,
+              "rect": [
+                167.692,
+                86.308,
+                194.332,
+                99.592
+              ],
+              "inkPixels": 122
+            },
+            {
+              "text": "3",
+              "page": 1,
+              "rect": [
+                197.332,
+                86.308,
+                203.332,
+                99.592
+              ],
+              "inkPixels": 28
+            },
+            {
+              "text": "MapleEnd",
+              "page": 1,
+              "rect": [
+                72.1,
+                100.108,
+                122.032,
+                113.392
+              ],
+              "inkPixels": 268
+            }
+          ],
+          "pdf": "plain-math-root-prose-control-reference.pdf",
+          "pdfSha256": "0ae18fb5a35d163d4f536935db2f97d770c272fa7b340b190f4ce559da8af34b",
+          "mandatoryFailures": [],
+          "inspection": {
+            "file": "plain-math-root-prose-control-reference-inspection.json.gz",
+            "sha256": "97a63034559c4e435467b5787b5fcb6b264645fa719d450e2e154cb1058abe19",
+            "jsonSha256": "4252ab3d429231c55f2008dc74c72fa171ed39fdf1eb10ece58eb72894b5d9a6"
+          },
+          "cropPt": [
+            62.099999999999994,
+            69.508,
+            213.332,
+            116.392
+          ]
+        }
+      ],
+      "reviewSheet": {
+        "file": "plain-math-root-prose-control.png",
+        "sha256": "fe5119943c3016c71e27f1baa7db181cab3aaf3d2943e054ed2c49d66ba974a9"
+      }
+    }
+  ],
+  "negativeBar": {
+    "file": "zero-bar.pdf",
+    "sha256": "27adea182d3f5b1603bf62209dd8cfe8d84a66dbd28070b261aedaa05b3a5c1e",
+    "probe": {
+      "passed": false,
+      "rules": []
+    }
+  }
+}

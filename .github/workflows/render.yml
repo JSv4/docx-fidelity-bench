@@ -12,15 +12,33 @@ on:
         required: false
         default: ''
         type: string
+      track:
+        description: Track to measure; both preserves the default full-corpus behavior
+        required: false
+        default: both
+        type: choice
+        options: [both, pdf, redline, fonts]
+      baseline:
+        description: Exact baseline Docxodus commit, required only for the unweighted fonts track
+        required: false
+        default: ''
+        type: string
+      cases:
+        description: Optional JSON array of PDF case ids; records a distinct diagnostic suite
+        required: false
+        default: ''
+        type: string
 permissions:
   contents: read
   actions: read
 jobs:
   measure:
+    if: ${{ inputs.track != 'redline' && inputs.track != 'fonts' }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 60
+    timeout-minutes: 90
     env:
       BENCH_LIBREOFFICE: /opt/libreoffice25.8/program/soffice
+      BENCH_MANIFEST: fixtures/manifest.json
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Audit original inputs
@@ -30,6 +48,21 @@ jobs:
           node --test tests/test-adapter.mjs
           mkdir -p runs
           echo '<!doctype html><title>Rendering evidence</title><p>Setup is pending or failed.</p><p><a href="candidate/index.html">Candidate report if available</a></p>' > runs/index.html
+      - name: Select explicit diagnostic cases
+        if: ${{ inputs.cases != '' }}
+        env:
+          CASE_SELECTION: ${{ inputs.cases }}
+        run: |
+          python3 - <<'PYCODE'
+          import json, os
+          from bench.common import validate_registry, write_json
+          from bench.suites import select_cases
+          registry = select_cases(validate_registry(), json.loads(os.environ['CASE_SELECTION']))
+          write_json('runs/selected-manifest.json', registry)
+          with open(os.environ['GITHUB_ENV'], 'a') as output:
+              output.write('BENCH_MANIFEST=runs/selected-manifest.json\n')
+          print('Diagnostic selection:', registry['suite'])
+          PYCODE
       - name: Checkout pinned renderer production source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
@@ -98,8 +131,8 @@ jobs:
       - name: Register immutable LibreOffice reference bundles
         if: ${{ inputs.reference_run == '' }}
         run: |
-          python3 -m bench reference libreoffice --out references/lo-direct
-          python3 -m bench reference equivalent-controls --reference references/lo-direct/bundle.json --out references/lo
+          python3 -m bench reference libreoffice --manifest "$BENCH_MANIFEST" --out references/lo-direct
+          python3 -m bench reference equivalent-controls --manifest "$BENCH_MANIFEST" --reference references/lo-direct/bundle.json --out references/lo
       - name: Reuse the registered reference bundle and its calibration
         if: ${{ inputs.reference_run != '' }}
         env:
@@ -112,10 +145,11 @@ jobs:
           cp -a recovered/runs/calibration runs/calibration
           cp recovered/runs/candidate/result.json runs/baseline-result.json
           python3 - <<'PYCODE'
+          import os
           from bench.common import read_json, identity, validate_registry
           from bench.environment import environment
           from bench import runner
-          registry = validate_registry()
+          registry = validate_registry(read_json(os.environ['BENCH_MANIFEST']))
           env = environment([f for c in registry['cases'] for f in c['fonts']])
           bundle = read_json('references/lo/bundle.json')
           runner.validate_bundle(bundle, __import__('pathlib').Path('references/lo').resolve(), registry, env)
@@ -129,7 +163,7 @@ jobs:
       - name: Verify reference-provider calibration
         if: ${{ inputs.reference_run == '' }}
         run: |
-          python3 -m bench run --reference references/lo/bundle.json --adapter libreoffice-reference --candidate reference-calibration --out runs/calibration --gate close
+          python3 -m bench run --manifest "$BENCH_MANIFEST" --reference references/lo/bundle.json --adapter libreoffice-reference --candidate reference-calibration --out runs/calibration --gate close
           python3 -c 'import json; r=json.load(open("runs/calibration/result.json")); assert r["summary"]["score"] == 100, r["summary"]'
       - name: Measure delivered candidate PDFs
         env:
@@ -138,7 +172,7 @@ jobs:
           export DOCXODUS_SOURCE_ROOT="$PWD/renderer"
           export DOCXODUS_EXPORT_MODULE="$PWD/renderer/npm-export/dist/index.js"
           export DOCXODUS_OPERATION_BUILD="$RUNNER_TEMP/pdf-operations"
-          python3 -m bench run --reference references/lo/bundle.json --adapter docxodus --candidate "$CANDIDATE_COMMIT" --out runs/candidate --gate report
+          python3 -m bench run --manifest "$BENCH_MANIFEST" --reference references/lo/bundle.json --adapter docxodus --candidate "$CANDIDATE_COMMIT" --out runs/candidate --gate report
       - name: Compare with the reused run's candidate
         if: ${{ inputs.reference_run != '' }}
         run: |
@@ -157,7 +191,90 @@ jobs:
             references/
           retention-days: 30
           if-no-files-found: error
+  fonts:
+    if: ${{ inputs.track == 'fonts' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Validate original inputs and exact revisions
+        env:
+          BASELINE_COMMIT: ${{ inputs.baseline }}
+          CANDIDATE_COMMIT: ${{ inputs.candidate }}
+        run: |
+          python3 -m bench.audit
+          python3 -m unittest discover -s tests -p test_fonts.py -v
+          python3 - <<'PYCODE'
+          import os, re
+          assert all(re.fullmatch('[0-9a-f]{40}', os.environ[k]) for k in ['BASELINE_COMMIT', 'CANDIDATE_COMMIT'])
+          PYCODE
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: JSv4/Docxodus
+          ref: ${{ inputs.candidate }}
+          path: renderer/candidate
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: JSv4/Docxodus
+          ref: ${{ inputs.baseline }}
+          path: renderer/baseline
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: '22'
+      - name: Provision independent PDF tools and fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils qpdf fontconfig fonts-liberation2 fonts-noto-cjk fonts-noto-color-emoji
+          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+          python3 - <<'PYCODE'
+          import os, subprocess
+          from pathlib import Path
+          family, path = subprocess.check_output(['fc-match', '-f', '%{family}\n%{file}', 'Liberation Sans'], text=True).splitlines()
+          assert 'Liberation Sans' in family.split(','), family
+          directory = Path(path).resolve().parent
+          assert directory.is_dir()
+          with open(os.environ['GITHUB_ENV'], 'a') as output:
+              output.write('BENCH_FONT_DIRECTORY=' + str(directory) + '\n')
+          PYCODE
+          dotnet workload install wasm-tools
+          python3 -m bench redline build-validator --out "$RUNNER_TEMP/font-validator"
+      - name: Build and observe exact baseline and candidate
+        env:
+          BASELINE_COMMIT: ${{ inputs.baseline }}
+          CANDIDATE_COMMIT: ${{ inputs.candidate }}
+        run: |
+          python3 -m bench build-docxodus --source renderer/baseline --commit "$BASELINE_COMMIT"
+          npm --prefix renderer/baseline/npm exec -- playwright install --with-deps chromium
+          python3 -m bench.fonts --source renderer/baseline --commit "$BASELINE_COMMIT" --validator "$RUNNER_TEMP/font-validator" --output runs/font-baseline
+          python3 -m bench build-docxodus --source renderer/candidate --commit "$CANDIDATE_COMMIT"
+          python3 -m bench.fonts --source renderer/candidate --commit "$CANDIDATE_COMMIT" --validator "$RUNNER_TEMP/font-validator" --output runs/font-candidate
+      - name: Require complete candidate and identical measurement environment
+        run: |
+          python3 - <<'PYCODE'
+          import json
+          from pathlib import Path
+          def read(side, file): return json.loads((Path('runs/font-' + side) / file).read_text())
+          result = read('candidate', 'result.json')
+          assert result['summary']['passed'] == result['summary']['required'] == 7
+          assert read('baseline', 'result.json')['summary']['observed'] == 7
+          for key in ['sources', 'fontFiles', 'tools', 'systemFontCatalogSha256', 'manifestSha256']:
+              assert read('baseline', 'build.json')[key] == read('candidate', 'build.json')[key], key
+          for key in ['browser', 'browserExecutableSha256']:
+              assert read('baseline', 'observations.json')[key] == read('candidate', 'observations.json')[key], key
+          PYCODE
+      - name: Preserve font diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: font-diagnostic-evidence
+          path: runs/
+          retention-days: 30
+          if-no-files-found: warn
   redline:
+    if: ${{ inputs.track != 'pdf' && inputs.track != 'fonts' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     env:

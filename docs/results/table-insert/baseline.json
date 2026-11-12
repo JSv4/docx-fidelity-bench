@@ -1,0 +1,1463 @@
+{
+  "build": {
+    "adapterSources": {
+      "adapters/docxodus-projection/DocxBenchProjection.csproj": "480e342d3bb0fdf7faaf41738c59a34b6323980f24a45eb0823110ddfa54e6da",
+      "adapters/docxodus-projection/Program.cs": "27c167fb9d2205cf98786ab0eec6986a750121bf648b65981cb0cd0b46de7d1e"
+    },
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.EXE",
+      "build",
+      "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\runs\\table-base\\src\\DocxBenchProjection.csproj",
+      "-c",
+      "Release",
+      "-o",
+      "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\runs\\table-base\\bin",
+      "-nologo",
+      "-v",
+      "q",
+      "-p:DocxodusRoot=C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\main-clone"
+    ],
+    "commit": "db50563461cb35786fbbb269483e06bab0ec5c83",
+    "dotnet": "10.0.403",
+    "files": {
+      "bin\\DocumentFormat.OpenXml.Framework.dll": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+      "bin\\DocumentFormat.OpenXml.dll": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+      "bin\\DocxBenchProjection.dll": "44e1961aa5a56fd09dde63e19e6ecf40da2e4802b28718dd19e03695e3452242",
+      "bin\\Docxodus.dll": "56e44e7f5cc83e446f17430256c5e2fa501e38fe3f481a70264b76e8571a0d00",
+      "bin\\SkiaSharp.dll": "71274ef112eefdf5ca8a1517086787bc786c7103c30115abbb9dc424a09db43e",
+      "bin\\System.IO.Packaging.dll": "1f27c2b1f02a185b370ef9d801597074b0ee09e338c6cf89193e403f7808821c"
+    },
+    "recipeSha256": "1df38aaeb3420ee8251878bcb05251fbc71b52357a8bf51217b08a31dcf40ff9",
+    "schema": 1,
+    "source": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\main-clone",
+    "tree": "763cf395dfcfe5daf5755dac56077f41c2a91970"
+  },
+  "cases": [
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "vml",
+      "inputSha256": "9606738de612ae2eeb0015fff9111a32228f712c50100ab24e5efcd7a8d0990b",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost\r\n\r\n{#p:body:0cb94e7e5132e54d459948d96e7995e2} AshInside\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:a5ea3cab122e06ddb0fe999125397ec9",
+            "markdown": "# Document\r\n\r\n{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost\r\n\r\n{#p:body:0cb94e7e5132e54d459948d96e7995e2} AshInside\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r",
+            "text": "AshHostAshInside"
+          },
+          {
+            "id": "p:body:0cb94e7e5132e54d459948d96e7995e2",
+            "markdown": "",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\vml.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "vml-control",
+      "inputSha256": "d44e37f2ceaae9d96d7f6e3c6ec1b93425c5eca7d340fd31f97123ff220cbcbb",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\r\n\r\n{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "# Document\r\n\r\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\r\n\r\n{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:d78ac2b96bb4f08cdedd208c3faa704b",
+            "markdown": "",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\vml-control.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "choice",
+      "inputSha256": "9c94d742947fb31222e2e679bb2018f53138cc2f7254cb856a033b3b5284f1d4",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost\r\n\r\n{#p:body:81f4d054c60618b2088343fb43231126} AshInside\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:a5ea3cab122e06ddb0fe999125397ec9",
+            "markdown": "# Document\r\n\r\n{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost\r\n\r\n{#p:body:81f4d054c60618b2088343fb43231126} AshInside\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r",
+            "text": "AshHostAshInsideInactiveFallback"
+          },
+          {
+            "id": "p:body:81f4d054c60618b2088343fb43231126",
+            "markdown": "",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:31cf5162da428e1ab7afbdfdc669948e",
+            "markdown": "",
+            "text": "InactiveFallback"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\choice.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "choice-control",
+      "inputSha256": "d44e37f2ceaae9d96d7f6e3c6ec1b93425c5eca7d340fd31f97123ff220cbcbb",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\r\n\r\n{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "# Document\r\n\r\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\r\n\r\n{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:d78ac2b96bb4f08cdedd208c3faa704b",
+            "markdown": "",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\choice-control.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "fallback",
+      "inputSha256": "363e0f49f50a841adb48ad9a5c97df615c235c2e6471ff456586ba8cf12daa78",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost\r\n\r\n{#p:body:31531543be2a33f15de71635c22539a9} AshInside\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:a5ea3cab122e06ddb0fe999125397ec9",
+            "markdown": "# Document\r\n\r\n{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost\r\n\r\n{#p:body:31531543be2a33f15de71635c22539a9} AshInside\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r",
+            "text": "AshHostInactiveChoiceAshInside"
+          },
+          {
+            "id": "p:body:6c4c04ce36fec6a85510455e34d8e7ef",
+            "markdown": "",
+            "text": "InactiveChoice"
+          },
+          {
+            "id": "p:body:31531543be2a33f15de71635c22539a9",
+            "markdown": "",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\fallback.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "fallback-control",
+      "inputSha256": "d44e37f2ceaae9d96d7f6e3c6ec1b93425c5eca7d340fd31f97123ff220cbcbb",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\r\n\r\n{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "# Document\r\n\r\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\r\n\r\n{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:d78ac2b96bb4f08cdedd208c3faa704b",
+            "markdown": "",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\fallback-control.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "group-sdt",
+      "inputSha256": "df47c63ae310364c772cccf0fa6869cfaf68f58e783027d24e400d55dc7a69f6",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost\r\n\r\n{#p:body:a65782770eadd9ac1c096f9d0a51dbca} AshInside\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:a5ea3cab122e06ddb0fe999125397ec9",
+            "markdown": "# Document\r\n\r\n{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost\r\n\r\n{#p:body:a65782770eadd9ac1c096f9d0a51dbca} AshInside\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r",
+            "text": "AshHostAshInside"
+          },
+          {
+            "id": "p:body:a65782770eadd9ac1c096f9d0a51dbca",
+            "markdown": "",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\group-sdt.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "group-sdt-control",
+      "inputSha256": "d44e37f2ceaae9d96d7f6e3c6ec1b93425c5eca7d340fd31f97123ff220cbcbb",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\r\n\r\n{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "# Document\r\n\r\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\r\n\r\n{#p:body:d78ac2b96bb4f08cdedd208c3faa704b} AshInside\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:d78ac2b96bb4f08cdedd208c3faa704b",
+            "markdown": "",
+            "text": "AshInside"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\group-sdt-control.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "row-sdt",
+      "inputSha256": "028a2f43add39d4352d0e4a5cf38796e65bb0f61c3b24b6e4c5ac746066d4cc2",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| AshLeft | AshRight |\r\n| --- | --- |\r\n\r\n{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "# Document\r\n\r\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| AshLeft | AshRight |\r\n| --- | --- |\r\n\r\n{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:e45e718ea29d19bb9ee92b9a51966310",
+            "markdown": "",
+            "text": "AshLeft"
+          },
+          {
+            "id": "p:body:91ef3a8cb9a3effc09d1abaf9286b7e0",
+            "markdown": "",
+            "text": "AshRight"
+          },
+          {
+            "id": "p:body:85539f966de15e2870f0e7d21e1839c5",
+            "markdown": "",
+            "text": "AshTail"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\row-sdt.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "row-sdt-control",
+      "inputSha256": "e9356cd29b91d49f4f2ba4f785dc87a8989fd55063bc8cc5337a78de69674cb4",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| AshLeft | AshRight |\r\n| --- | --- |\r\n\r\n{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "# Document\r\n\r\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| AshLeft | AshRight |\r\n| --- | --- |\r\n\r\n{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:2ba0b4acf1ff0cc0104b19fb995b7489",
+            "markdown": "",
+            "text": "AshLeft"
+          },
+          {
+            "id": "p:body:443a2c8deb115ef415b13cf147b40d4b",
+            "markdown": "",
+            "text": "AshRight"
+          },
+          {
+            "id": "p:body:85539f966de15e2870f0e7d21e1839c5",
+            "markdown": "",
+            "text": "AshTail"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\row-sdt-control.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "cell-sdt",
+      "inputSha256": "fdf81446ee28fb537e5355b0936b891699a6bcabc703f53856ed2a1fe083e288",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| AshLeft | AshRight |\r\n| --- | --- |\r\n\r\n{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "# Document\r\n\r\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| AshLeft | AshRight |\r\n| --- | --- |\r\n\r\n{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:2ba0b4acf1ff0cc0104b19fb995b7489",
+            "markdown": "",
+            "text": "AshLeft"
+          },
+          {
+            "id": "p:body:e0131561cc2bc89ba70e0ab5f9564aef",
+            "markdown": "",
+            "text": "AshRight"
+          },
+          {
+            "id": "p:body:85539f966de15e2870f0e7d21e1839c5",
+            "markdown": "",
+            "text": "AshTail"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\cell-sdt.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "cell-sdt-control",
+      "inputSha256": "e9356cd29b91d49f4f2ba4f785dc87a8989fd55063bc8cc5337a78de69674cb4",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| AshLeft | AshRight |\r\n| --- | --- |\r\n\r\n{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "# Document\r\n\r\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| AshLeft | AshRight |\r\n| --- | --- |\r\n\r\n{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:2ba0b4acf1ff0cc0104b19fb995b7489",
+            "markdown": "",
+            "text": "AshLeft"
+          },
+          {
+            "id": "p:body:443a2c8deb115ef415b13cf147b40d4b",
+            "markdown": "",
+            "text": "AshRight"
+          },
+          {
+            "id": "p:body:85539f966de15e2870f0e7d21e1839c5",
+            "markdown": "",
+            "text": "AshTail"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\cell-sdt-control.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "table-in-box",
+      "inputSha256": "c2cd4aab679dcda30f769bd59ca9c49405b09b6192457fbd0fb4389c7917414f",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost\r\n\r\n{#tbl:body:b838405a453835eeaec5bdc175910481}\r\n| AshLeft | AshRight |\r\n| --- | --- |\r\n\r\n{#p:body:411923fd832ee5b27a9b2ec41a7c9a2b} AshTail\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:a5ea3cab122e06ddb0fe999125397ec9",
+            "markdown": "# Document\r\n\r\n{#p:body:a5ea3cab122e06ddb0fe999125397ec9} AshHost\r\n\r\n{#tbl:body:b838405a453835eeaec5bdc175910481}\r\n| AshLeft | AshRight |\r\n| --- | --- |\r\n\r\n{#p:body:411923fd832ee5b27a9b2ec41a7c9a2b} AshTail\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r",
+            "text": "AshHostAshLeftAshRightAshTail"
+          },
+          {
+            "id": "p:body:089e8f7da0001a8c3c8ba89939aa2aee",
+            "markdown": "",
+            "text": "AshLeft"
+          },
+          {
+            "id": "p:body:d1514611c3c88a9c51f50308c1decbd2",
+            "markdown": "",
+            "text": "AshRight"
+          },
+          {
+            "id": "p:body:411923fd832ee5b27a9b2ec41a7c9a2b",
+            "markdown": "",
+            "text": "AshTail"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\table-in-box.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "table-in-box-control",
+      "inputSha256": "e9356cd29b91d49f4f2ba4f785dc87a8989fd55063bc8cc5337a78de69674cb4",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| AshLeft | AshRight |\r\n| --- | --- |\r\n\r\n{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:ad9da6e4b9ae109d65c6f419179c9e76",
+            "markdown": "# Document\r\n\r\n{#p:body:ad9da6e4b9ae109d65c6f419179c9e76} AshHost\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| AshLeft | AshRight |\r\n| --- | --- |\r\n\r\n{#p:body:85539f966de15e2870f0e7d21e1839c5} AshTail\r\n\r\n{#p:body:ef658c17426eda9fa2bdaae9f25675e0} AshFollowing\r\n\r",
+            "text": "AshHost"
+          },
+          {
+            "id": "p:body:2ba0b4acf1ff0cc0104b19fb995b7489",
+            "markdown": "",
+            "text": "AshLeft"
+          },
+          {
+            "id": "p:body:443a2c8deb115ef415b13cf147b40d4b",
+            "markdown": "",
+            "text": "AshRight"
+          },
+          {
+            "id": "p:body:85539f966de15e2870f0e7d21e1839c5",
+            "markdown": "",
+            "text": "AshTail"
+          },
+          {
+            "id": "p:body:ef658c17426eda9fa2bdaae9f25675e0",
+            "markdown": "",
+            "text": "AshFollowing"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\table-in-box-control.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "rawMutation": true,
+        "schema": true
+      },
+      "id": "raw-replace-tracked",
+      "inputSha256": "8216fedfc71ed3b740b16039c2210e8e5b0262887f753a56997f8fbd7f7bd163",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:4f0550788f63cdb7140c978ae665db74} LarchOriginal\r\n\r\n{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:4f0550788f63cdb7140c978ae665db74",
+            "markdown": "# Document\r\n\r\n{#p:body:4f0550788f63cdb7140c978ae665db74} LarchOriginal\r\n\r\n{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail\r\n\r",
+            "text": "LarchOriginal"
+          },
+          {
+            "id": "p:body:ea8c9fc951d37499ed663254d774666e",
+            "markdown": "",
+            "text": "LarchTail"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\raw-replace-tracked.docx",
+        "raw": {
+          "error": "TrackedOperationUnsupported",
+          "revisionCount": 0,
+          "success": false,
+          "unchanged": true,
+          "undo": false
+        },
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "rawMutation": true,
+        "schema": true
+      },
+      "id": "raw-replace-control",
+      "inputSha256": "8216fedfc71ed3b740b16039c2210e8e5b0262887f753a56997f8fbd7f7bd163",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:4f0550788f63cdb7140c978ae665db74} LarchReplacement\r\n\r\n{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:4f0550788f63cdb7140c978ae665db74",
+            "markdown": "# Document\r\n\r\n{#p:body:4f0550788f63cdb7140c978ae665db74} LarchReplacement\r\n\r\n{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail\r\n\r",
+            "text": "LarchReplacement"
+          },
+          {
+            "id": "p:body:ea8c9fc951d37499ed663254d774666e",
+            "markdown": "",
+            "text": "LarchTail"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\raw-replace-control.docx",
+        "raw": {
+          "error": null,
+          "revisionCount": 0,
+          "success": true,
+          "unchanged": false,
+          "undo": true
+        },
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "rawMutation": true,
+        "schema": true
+      },
+      "id": "raw-insert-tracked",
+      "inputSha256": "8216fedfc71ed3b740b16039c2210e8e5b0262887f753a56997f8fbd7f7bd163",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:4f0550788f63cdb7140c978ae665db74} LarchOriginal\r\n\r\n{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:4f0550788f63cdb7140c978ae665db74",
+            "markdown": "# Document\r\n\r\n{#p:body:4f0550788f63cdb7140c978ae665db74} LarchOriginal\r\n\r\n{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail\r\n\r",
+            "text": "LarchOriginal"
+          },
+          {
+            "id": "p:body:ea8c9fc951d37499ed663254d774666e",
+            "markdown": "",
+            "text": "LarchTail"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\raw-insert-tracked.docx",
+        "raw": {
+          "error": "TrackedOperationUnsupported",
+          "revisionCount": 0,
+          "success": false,
+          "unchanged": true,
+          "undo": false
+        },
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "rawMutation": true,
+        "schema": true
+      },
+      "id": "raw-insert-control",
+      "inputSha256": "8216fedfc71ed3b740b16039c2210e8e5b0262887f753a56997f8fbd7f7bd163",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:4f0550788f63cdb7140c978ae665db74} LarchOriginal\r\n\r\n{#p:body:51527d5290584485b1b19345d9d3d7c0} LarchReplacement\r\n\r\n{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:4f0550788f63cdb7140c978ae665db74",
+            "markdown": "# Document\r\n\r\n{#p:body:4f0550788f63cdb7140c978ae665db74} LarchOriginal\r\n\r\n{#p:body:51527d5290584485b1b19345d9d3d7c0} LarchReplacement\r\n\r\n{#p:body:ea8c9fc951d37499ed663254d774666e} LarchTail\r\n\r",
+            "text": "LarchOriginal"
+          },
+          {
+            "id": "p:body:51527d5290584485b1b19345d9d3d7c0",
+            "markdown": "",
+            "text": "LarchReplacement"
+          },
+          {
+            "id": "p:body:ea8c9fc951d37499ed663254d774666e",
+            "markdown": "",
+            "text": "LarchTail"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\raw-insert-control.docx",
+        "raw": {
+          "error": null,
+          "revisionCount": 0,
+          "success": true,
+          "unchanged": false,
+          "undo": true
+        },
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": false,
+        "paragraphAnchors": false,
+        "schema": true,
+        "tableInsert": false
+      },
+      "id": "table-insert-before-table-tracked",
+      "inputSha256": "2cac2efefb658aab7a0bcbe2e19aec6443d3bb634a14a05d4e84cd65cc68e387",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:b98f63f4aba0b325ec88957878a3bb28} LarchAlpha\r\n\r\n{#p:body:6a964458cb2b3186ea841553939d9db5} LarchBravo\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchCell |\r\n| --- |\r\n\r\n{#p:body:18e5bb9f95abf9e2e901465bb46d9960} LarchCharlie\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:b98f63f4aba0b325ec88957878a3bb28",
+            "markdown": "# Document\r\n\r\n{#p:body:b98f63f4aba0b325ec88957878a3bb28} LarchAlpha\r\n\r\n{#p:body:6a964458cb2b3186ea841553939d9db5} LarchBravo\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchCell |\r\n| --- |\r\n\r\n{#p:body:18e5bb9f95abf9e2e901465bb46d9960} LarchCharlie\r\n\r",
+            "text": "LarchAlpha"
+          },
+          {
+            "id": "p:body:6a964458cb2b3186ea841553939d9db5",
+            "markdown": "",
+            "text": "LarchBravo"
+          },
+          {
+            "id": "p:body:fd623c2e2985eb120c615ee4537fc132",
+            "markdown": "",
+            "text": "LarchCell"
+          },
+          {
+            "id": "p:body:18e5bb9f95abf9e2e901465bb46d9960",
+            "markdown": "",
+            "text": "LarchCharlie"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\table-insert-before-table-tracked.docx",
+        "raw": null,
+        "table": {
+          "accepted": "# Document\r\n\r\n{#p:body:b98f63f4aba0b325ec88957878a3bb28} LarchAlpha\r\n\r\n{#p:body:6a964458cb2b3186ea841553939d9db5} LarchBravo\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchCell |\r\n| --- |\r\n\r\n{#p:body:18e5bb9f95abf9e2e901465bb46d9960} LarchCharlie\r\n\r\n",
+          "error": "TrackedOperationUnsupported",
+          "rejected": "# Document\r\n\r\n{#p:body:b98f63f4aba0b325ec88957878a3bb28} LarchAlpha\r\n\r\n{#p:body:6a964458cb2b3186ea841553939d9db5} LarchBravo\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchCell |\r\n| --- |\r\n\r\n{#p:body:18e5bb9f95abf9e2e901465bb46d9960} LarchCharlie\r\n\r\n",
+          "revisionCount": 0,
+          "success": false,
+          "undo": false
+        }
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true,
+        "tableInsert": true
+      },
+      "id": "table-insert-before-table-control",
+      "inputSha256": "2cac2efefb658aab7a0bcbe2e19aec6443d3bb634a14a05d4e84cd65cc68e387",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:b98f63f4aba0b325ec88957878a3bb28} LarchAlpha\r\n\r\n{#p:body:6a964458cb2b3186ea841553939d9db5} LarchBravo\r\n\r\n{#tbl:body:340e169e388b4b0b833b2ddd766321b9}\r\n| LarchNew |\r\n| --- |\r\n\r\n{#p:body:34443c97856b4854a3d579d0be25b2fe}\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchCell |\r\n| --- |\r\n\r\n{#p:body:18e5bb9f95abf9e2e901465bb46d9960} LarchCharlie\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:b98f63f4aba0b325ec88957878a3bb28",
+            "markdown": "# Document\r\n\r\n{#p:body:b98f63f4aba0b325ec88957878a3bb28} LarchAlpha\r\n\r\n{#p:body:6a964458cb2b3186ea841553939d9db5} LarchBravo\r\n\r\n{#tbl:body:340e169e388b4b0b833b2ddd766321b9}\r\n| LarchNew |\r\n| --- |\r\n\r\n{#p:body:34443c97856b4854a3d579d0be25b2fe}\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchCell |\r\n| --- |\r\n\r\n{#p:body:18e5bb9f95abf9e2e901465bb46d9960} LarchCharlie\r\n\r",
+            "text": "LarchAlpha"
+          },
+          {
+            "id": "p:body:6a964458cb2b3186ea841553939d9db5",
+            "markdown": "",
+            "text": "LarchBravo"
+          },
+          {
+            "id": "p:body:abd103906b1246939627680acb59861d",
+            "markdown": "",
+            "text": "LarchNew"
+          },
+          {
+            "id": "p:body:34443c97856b4854a3d579d0be25b2fe",
+            "markdown": "",
+            "text": ""
+          },
+          {
+            "id": "p:body:fd623c2e2985eb120c615ee4537fc132",
+            "markdown": "",
+            "text": "LarchCell"
+          },
+          {
+            "id": "p:body:18e5bb9f95abf9e2e901465bb46d9960",
+            "markdown": "",
+            "text": "LarchCharlie"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\table-insert-before-table-control.docx",
+        "raw": null,
+        "table": {
+          "accepted": "# Document\r\n\r\n{#p:body:b98f63f4aba0b325ec88957878a3bb28} LarchAlpha\r\n\r\n{#p:body:6a964458cb2b3186ea841553939d9db5} LarchBravo\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchNew |\r\n| --- |\r\n\r\n{#p:body:933923954acd4ae619d469db0dd3a51f}\r\n\r\n{#tbl:body:1a45e2fbb3b8f8b210fdc984f054c9b8}\r\n| LarchCell |\r\n| --- |\r\n\r\n{#p:body:18e5bb9f95abf9e2e901465bb46d9960} LarchCharlie\r\n\r\n",
+          "error": null,
+          "rejected": "# Document\r\n\r\n{#p:body:b98f63f4aba0b325ec88957878a3bb28} LarchAlpha\r\n\r\n{#p:body:6a964458cb2b3186ea841553939d9db5} LarchBravo\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchNew |\r\n| --- |\r\n\r\n{#p:body:933923954acd4ae619d469db0dd3a51f}\r\n\r\n{#tbl:body:1a45e2fbb3b8f8b210fdc984f054c9b8}\r\n| LarchCell |\r\n| --- |\r\n\r\n{#p:body:18e5bb9f95abf9e2e901465bb46d9960} LarchCharlie\r\n\r\n",
+          "revisionCount": 0,
+          "success": true,
+          "undo": true
+        }
+      }
+    },
+    {
+      "checks": {
+        "completeText": false,
+        "paragraphAnchors": false,
+        "schema": true,
+        "tableInsert": false
+      },
+      "id": "table-insert-end-of-body-tracked",
+      "inputSha256": "2cac2efefb658aab7a0bcbe2e19aec6443d3bb634a14a05d4e84cd65cc68e387",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:b98f63f4aba0b325ec88957878a3bb28} LarchAlpha\r\n\r\n{#p:body:6a964458cb2b3186ea841553939d9db5} LarchBravo\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchCell |\r\n| --- |\r\n\r\n{#p:body:18e5bb9f95abf9e2e901465bb46d9960} LarchCharlie\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:b98f63f4aba0b325ec88957878a3bb28",
+            "markdown": "# Document\r\n\r\n{#p:body:b98f63f4aba0b325ec88957878a3bb28} LarchAlpha\r\n\r\n{#p:body:6a964458cb2b3186ea841553939d9db5} LarchBravo\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchCell |\r\n| --- |\r\n\r\n{#p:body:18e5bb9f95abf9e2e901465bb46d9960} LarchCharlie\r\n\r",
+            "text": "LarchAlpha"
+          },
+          {
+            "id": "p:body:6a964458cb2b3186ea841553939d9db5",
+            "markdown": "",
+            "text": "LarchBravo"
+          },
+          {
+            "id": "p:body:fd623c2e2985eb120c615ee4537fc132",
+            "markdown": "",
+            "text": "LarchCell"
+          },
+          {
+            "id": "p:body:18e5bb9f95abf9e2e901465bb46d9960",
+            "markdown": "",
+            "text": "LarchCharlie"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\table-insert-end-of-body-tracked.docx",
+        "raw": null,
+        "table": {
+          "accepted": "# Document\r\n\r\n{#p:body:b98f63f4aba0b325ec88957878a3bb28} LarchAlpha\r\n\r\n{#p:body:6a964458cb2b3186ea841553939d9db5} LarchBravo\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchCell |\r\n| --- |\r\n\r\n{#p:body:18e5bb9f95abf9e2e901465bb46d9960} LarchCharlie\r\n\r\n",
+          "error": "TrackedOperationUnsupported",
+          "rejected": "# Document\r\n\r\n{#p:body:b98f63f4aba0b325ec88957878a3bb28} LarchAlpha\r\n\r\n{#p:body:6a964458cb2b3186ea841553939d9db5} LarchBravo\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchCell |\r\n| --- |\r\n\r\n{#p:body:18e5bb9f95abf9e2e901465bb46d9960} LarchCharlie\r\n\r\n",
+          "revisionCount": 0,
+          "success": false,
+          "undo": false
+        }
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true,
+        "tableInsert": true
+      },
+      "id": "table-insert-end-of-body-control",
+      "inputSha256": "2cac2efefb658aab7a0bcbe2e19aec6443d3bb634a14a05d4e84cd65cc68e387",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:b98f63f4aba0b325ec88957878a3bb28} LarchAlpha\r\n\r\n{#p:body:6a964458cb2b3186ea841553939d9db5} LarchBravo\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchCell |\r\n| --- |\r\n\r\n{#p:body:18e5bb9f95abf9e2e901465bb46d9960} LarchCharlie\r\n\r\n{#tbl:body:70d0973657844a478f1af05a3a432837}\r\n| LarchNew |\r\n| --- |\r\n\r\n{#p:body:529760240e684d018ab45661547e5beb}\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:b98f63f4aba0b325ec88957878a3bb28",
+            "markdown": "# Document\r\n\r\n{#p:body:b98f63f4aba0b325ec88957878a3bb28} LarchAlpha\r\n\r\n{#p:body:6a964458cb2b3186ea841553939d9db5} LarchBravo\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchCell |\r\n| --- |\r\n\r\n{#p:body:18e5bb9f95abf9e2e901465bb46d9960} LarchCharlie\r\n\r\n{#tbl:body:70d0973657844a478f1af05a3a432837}\r\n| LarchNew |\r\n| --- |\r\n\r\n{#p:body:529760240e684d018ab45661547e5beb}\r\n\r",
+            "text": "LarchAlpha"
+          },
+          {
+            "id": "p:body:6a964458cb2b3186ea841553939d9db5",
+            "markdown": "",
+            "text": "LarchBravo"
+          },
+          {
+            "id": "p:body:fd623c2e2985eb120c615ee4537fc132",
+            "markdown": "",
+            "text": "LarchCell"
+          },
+          {
+            "id": "p:body:18e5bb9f95abf9e2e901465bb46d9960",
+            "markdown": "",
+            "text": "LarchCharlie"
+          },
+          {
+            "id": "p:body:3be3e364095d4d02a35a58ef9d9d3cda",
+            "markdown": "",
+            "text": "LarchNew"
+          },
+          {
+            "id": "p:body:529760240e684d018ab45661547e5beb",
+            "markdown": "",
+            "text": ""
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\table-insert-end-of-body-control.docx",
+        "raw": null,
+        "table": {
+          "accepted": "# Document\r\n\r\n{#p:body:b98f63f4aba0b325ec88957878a3bb28} LarchAlpha\r\n\r\n{#p:body:6a964458cb2b3186ea841553939d9db5} LarchBravo\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchCell |\r\n| --- |\r\n\r\n{#p:body:18e5bb9f95abf9e2e901465bb46d9960} LarchCharlie\r\n\r\n{#tbl:body:1a45e2fbb3b8f8b210fdc984f054c9b8}\r\n| LarchNew |\r\n| --- |\r\n\r\n{#p:body:933923954acd4ae619d469db0dd3a51f}\r\n\r\n",
+          "error": null,
+          "rejected": "# Document\r\n\r\n{#p:body:b98f63f4aba0b325ec88957878a3bb28} LarchAlpha\r\n\r\n{#p:body:6a964458cb2b3186ea841553939d9db5} LarchBravo\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchCell |\r\n| --- |\r\n\r\n{#p:body:18e5bb9f95abf9e2e901465bb46d9960} LarchCharlie\r\n\r\n{#tbl:body:1a45e2fbb3b8f8b210fdc984f054c9b8}\r\n| LarchNew |\r\n| --- |\r\n\r\n{#p:body:933923954acd4ae619d469db0dd3a51f}\r\n\r\n",
+          "revisionCount": 0,
+          "success": true,
+          "undo": true
+        }
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "deleted-row-middle",
+      "inputSha256": "2e14ab36129add58b8fd98bca6ec0769dcf460171210a8feb42e1f48eb1d080a",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchHeader |\r\n| --- |\r\n| LarchTail |\r\n\r\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:8e7190fe7115788ebc42b88d0b7027e0",
+            "markdown": "",
+            "text": "LarchHeader"
+          },
+          {
+            "id": "p:body:e47dd00eb7b68b9fccd3c0d7c7406c63",
+            "markdown": "",
+            "text": ""
+          },
+          {
+            "id": "p:body:b398fed8cb79f7da5d04a4939da8567d",
+            "markdown": "",
+            "text": "LarchTail"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\deleted-row-middle.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "deleted-row-middle-control",
+      "inputSha256": "6282f1c14ba0ca42b453b51d3f31841ea245ec3eccc8fbe442826e44cd5ea9dd",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchHeader |\r\n| --- |\r\n| LarchRemoved |\r\n| LarchTail |\r\n\r\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:8e7190fe7115788ebc42b88d0b7027e0",
+            "markdown": "",
+            "text": "LarchHeader"
+          },
+          {
+            "id": "p:body:a95d497428f2f92c7ab3ca69e3c4871d",
+            "markdown": "",
+            "text": "LarchRemoved"
+          },
+          {
+            "id": "p:body:b398fed8cb79f7da5d04a4939da8567d",
+            "markdown": "",
+            "text": "LarchTail"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\deleted-row-middle-control.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "deleted-row-first",
+      "inputSha256": "5e70bf940d9617fcfa8976989e12d4c5d558eb103395d11c0994fb5d73a05db3",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchHeader |\r\n| --- |\r\n| LarchTail |\r\n\r\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:13842df7eacbc008bbb31d515cf5972b",
+            "markdown": "",
+            "text": ""
+          },
+          {
+            "id": "p:body:3f1aed1570c3ee4f4b58df0c2d453a50",
+            "markdown": "",
+            "text": "LarchHeader"
+          },
+          {
+            "id": "p:body:b398fed8cb79f7da5d04a4939da8567d",
+            "markdown": "",
+            "text": "LarchTail"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\deleted-row-first.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "deleted-row-first-control",
+      "inputSha256": "bd48f75db5d470b91f7888f2dc6b0ac387b5213c5250de3f954be407e773250e",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchRemoved |\r\n| --- |\r\n| LarchHeader |\r\n| LarchTail |\r\n\r\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:c9e0319ec0ea8dfaa5c7e680e5933109",
+            "markdown": "",
+            "text": "LarchRemoved"
+          },
+          {
+            "id": "p:body:3f1aed1570c3ee4f4b58df0c2d453a50",
+            "markdown": "",
+            "text": "LarchHeader"
+          },
+          {
+            "id": "p:body:b398fed8cb79f7da5d04a4939da8567d",
+            "markdown": "",
+            "text": "LarchTail"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\deleted-row-first-control.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "deleted-row-only",
+      "inputSha256": "8536353a9eb564da8f56f9493ff08e9e9a08900847d1ce9ceb3d7cfbec47886f",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:13842df7eacbc008bbb31d515cf5972b",
+            "markdown": "",
+            "text": ""
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "# Document\r\n\r\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\r\n\r",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\deleted-row-only.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "deleted-row-only-control",
+      "inputSha256": "48261b639d1a00c630caca144977ba622b0094a557c87c4317ed9da15ebab196",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchRemoved |\r\n| --- |\r\n\r\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:c9e0319ec0ea8dfaa5c7e680e5933109",
+            "markdown": "",
+            "text": "LarchRemoved"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\deleted-row-only-control.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "deleted-row-wrapped",
+      "inputSha256": "5cb6d42ccc7aa0334cff1e5703145cd41e4a83da398885d6e4a58579718dfbef",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchHeader |\r\n| --- |\r\n| LarchTail |\r\n\r\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:8e7190fe7115788ebc42b88d0b7027e0",
+            "markdown": "",
+            "text": "LarchHeader"
+          },
+          {
+            "id": "p:body:9111e3ea6c12d10321792a12f3b89448",
+            "markdown": "",
+            "text": ""
+          },
+          {
+            "id": "p:body:1ebd118b4b8af16201b23b9a02b7136c",
+            "markdown": "",
+            "text": "LarchTail"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\deleted-row-wrapped.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "deleted-row-wrapped-control",
+      "inputSha256": "bcb02169a1622445545503589cff57cfe1f12930aafb7f431fe226cebbb173f7",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchHeader |\r\n| --- |\r\n| LarchRemoved |\r\n| LarchTail |\r\n\r\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:8e7190fe7115788ebc42b88d0b7027e0",
+            "markdown": "",
+            "text": "LarchHeader"
+          },
+          {
+            "id": "p:body:98583573c66744e54d9ff52db1a4813c",
+            "markdown": "",
+            "text": "LarchRemoved"
+          },
+          {
+            "id": "p:body:1ebd118b4b8af16201b23b9a02b7136c",
+            "markdown": "",
+            "text": "LarchTail"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\deleted-row-wrapped-control.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "deleted-row-merged",
+      "inputSha256": "42f563d180694e7e496d8cf0c4e2f96c732cd5b60394e098893775af2a120bbf",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchHeader0 | LarchHeader1 |\r\n| --- | --- |\r\n| LarchTail0 | LarchTail1 |\r\n\r\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:4182e55921251e5d1e13cfe0e7a42ef6",
+            "markdown": "",
+            "text": "LarchHeader0"
+          },
+          {
+            "id": "p:body:beaf706ff8cfa1a1c2c7b705668d34f7",
+            "markdown": "",
+            "text": "LarchHeader1"
+          },
+          {
+            "id": "p:body:e47dd00eb7b68b9fccd3c0d7c7406c63",
+            "markdown": "",
+            "text": ""
+          },
+          {
+            "id": "p:body:d72829e3ed5ed639743032ee0b1e5c6f",
+            "markdown": "",
+            "text": "LarchTail0"
+          },
+          {
+            "id": "p:body:f1150a4fc6deb2398e6a2d5e07bc86a1",
+            "markdown": "",
+            "text": "LarchTail1"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\deleted-row-merged.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "deleted-row-merged-control",
+      "inputSha256": "42aa03d188e897c88fcca001fdadb4f2bcc23082053798175c4df231c6cf0125",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n```table\r\nrows: 3\r\ncols: 2\r\n```\r\n\r\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:4182e55921251e5d1e13cfe0e7a42ef6",
+            "markdown": "",
+            "text": "LarchHeader0"
+          },
+          {
+            "id": "p:body:beaf706ff8cfa1a1c2c7b705668d34f7",
+            "markdown": "",
+            "text": "LarchHeader1"
+          },
+          {
+            "id": "p:body:a95d497428f2f92c7ab3ca69e3c4871d",
+            "markdown": "",
+            "text": "LarchRemoved"
+          },
+          {
+            "id": "p:body:d72829e3ed5ed639743032ee0b1e5c6f",
+            "markdown": "",
+            "text": "LarchTail0"
+          },
+          {
+            "id": "p:body:f1150a4fc6deb2398e6a2d5e07bc86a1",
+            "markdown": "",
+            "text": "LarchTail1"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\deleted-row-merged-control.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "deleted-row-textbox",
+      "inputSha256": "46e36f664d1253fea781362122b45c99d4c7ecb66760c8716ec82a909205196a",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchHeader |\r\n| --- |\r\n| LarchTail |\r\n\r\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:8e7190fe7115788ebc42b88d0b7027e0",
+            "markdown": "",
+            "text": "LarchHeader"
+          },
+          {
+            "id": "p:body:8258d1d40deb58de076bea8a9cc7a345",
+            "markdown": "",
+            "text": "LarchBox"
+          },
+          {
+            "id": "p:body:df9b70616367554eca1eec2565717587",
+            "markdown": "",
+            "text": "LarchBox"
+          },
+          {
+            "id": "p:body:b398fed8cb79f7da5d04a4939da8567d",
+            "markdown": "",
+            "text": "LarchTail"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\deleted-row-textbox.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "deleted-row-textbox-control",
+      "inputSha256": "03f35cd2ad0f9b6a98964d1a7c8eb2cffb473b5177895a90162ed09e2ff99a99",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n| LarchHeader |\r\n| --- |\r\n| LarchRemoved |\r\n| LarchTail |\r\n\r\n{#p:body:df9b70616367554eca1eec2565717587} LarchBox\r\n\r\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:8e7190fe7115788ebc42b88d0b7027e0",
+            "markdown": "",
+            "text": "LarchHeader"
+          },
+          {
+            "id": "p:body:8258d1d40deb58de076bea8a9cc7a345",
+            "markdown": "",
+            "text": "LarchRemovedLarchBox"
+          },
+          {
+            "id": "p:body:df9b70616367554eca1eec2565717587",
+            "markdown": "",
+            "text": "LarchBox"
+          },
+          {
+            "id": "p:body:b398fed8cb79f7da5d04a4939da8567d",
+            "markdown": "",
+            "text": "LarchTail"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\deleted-row-textbox-control.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "deleted-row-opaque",
+      "inputSha256": "2e14ab36129add58b8fd98bca6ec0769dcf460171210a8feb42e1f48eb1d080a",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n```table\r\nrows: 2\r\ncols: 1\r\n```\r\n\r\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:8e7190fe7115788ebc42b88d0b7027e0",
+            "markdown": "",
+            "text": "LarchHeader"
+          },
+          {
+            "id": "p:body:e47dd00eb7b68b9fccd3c0d7c7406c63",
+            "markdown": "",
+            "text": ""
+          },
+          {
+            "id": "p:body:b398fed8cb79f7da5d04a4939da8567d",
+            "markdown": "",
+            "text": "LarchTail"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\deleted-row-opaque.docx",
+        "raw": null,
+        "table": null
+      }
+    },
+    {
+      "checks": {
+        "completeText": true,
+        "paragraphAnchors": false,
+        "schema": true
+      },
+      "id": "deleted-row-opaque-control",
+      "inputSha256": "6282f1c14ba0ca42b453b51d3f31841ea245ec3eccc8fbe442826e44cd5ea9dd",
+      "observation": {
+        "errors": [],
+        "markdown": "# Document\r\n\r\n{#tbl:body:c8d7175430d2890a576660d37129f163}\r\n```table\r\nrows: 3\r\ncols: 1\r\n```\r\n\r\n{#p:body:f01b396178a3983a504afd262adb7890} LarchAfter\r\n\r\n",
+        "paragraphs": [
+          {
+            "id": "p:body:8e7190fe7115788ebc42b88d0b7027e0",
+            "markdown": "",
+            "text": "LarchHeader"
+          },
+          {
+            "id": "p:body:a95d497428f2f92c7ab3ca69e3c4871d",
+            "markdown": "",
+            "text": "LarchRemoved"
+          },
+          {
+            "id": "p:body:b398fed8cb79f7da5d04a4939da8567d",
+            "markdown": "",
+            "text": "LarchTail"
+          },
+          {
+            "id": "p:body:f01b396178a3983a504afd262adb7890",
+            "markdown": "",
+            "text": "LarchAfter"
+          }
+        ],
+        "path": "C:\\Users\\johns\\AppData\\Local\\Temp\\claude\\bb4fa00b801c8ea8\\e445c6e6-2af6-434c-a995-4c21ad9fbee6\\scratchpad\\1626\\bench\\fixtures\\projection\\deleted-row-opaque-control.docx",
+        "raw": null,
+        "table": null
+      }
+    }
+  ],
+  "manifestSha256": "b6c79d25eb0cca589e1a639be0187aa6181e069475ce711c7efdf4544566c048",
+  "scope": "Unweighted exact Markdown and anchor checks; no PDF/redline score",
+  "suite": "projection-v4"
+}

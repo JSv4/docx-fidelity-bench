@@ -21,6 +21,6 @@ def docxodus(source, commit):
         print('Building: ' + ' '.join(command), flush=True)
         subprocess.run(command, check=True, timeout=1800)
     files = ['npm/package-lock.json', 'npm-export/package-lock.json', 'npm/dist/export-assets.json', 'npm-export/dist/index.js']
-    files += [str(path.relative_to(source)) for path in sorted((source / 'npm-export/dist').rglob('*.js')) if str(path.relative_to(source)) not in files]
+    files += [path.relative_to(source).as_posix() for path in sorted((source / 'npm-export/dist').rglob('*.js')) if path.relative_to(source).as_posix() not in files]
     write_json(record_path, {'schema': 1, 'commit': commit, 'tree': execute(['git', '-C', source, 'rev-parse', 'HEAD^{tree}']).strip(), 'recipeSha256': digest(Path(__file__)), 'node': execute(['node', '--version']).strip(), 'commands': commands, 'files': {name: digest(source / name) for name in files}})
     print('Recorded source-bound build identity: ' + str(record_path), flush=True)

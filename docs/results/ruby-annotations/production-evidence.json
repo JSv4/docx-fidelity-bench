@@ -1,0 +1,1154 @@
+{
+  "schema": 1,
+  "benchCommit": "a209280e209b17715abdc79cad99f17eb8600ea2",
+  "scope": "Production public WASM export and pinned Chromium PDF; raw artifacts are retained in the linked Actions runs.",
+  "limitations": [
+    "Word behavior captures used substituted Times New Roman and are not font-matched oracles.",
+    "Controls prove full page-raster identity, not PDF-byte or HTML/PageMap payload identity.",
+    "Two cases do not meet close-match thresholds although all mandatory content and geometry checks pass; native layout differences are described in the accompanying README."
+  ],
+  "runs": {
+    "baseline": {
+      "runUrl": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/41184896314",
+      "artifactId": 13036603204,
+      "artifactZipSha256": "fd5e4a442f760124c81ef40d7520ebfd7a8a73f7c8090e73f3a6d054e52a6ec5",
+      "coreCommit": "1240cc5dc0586293cb937c59c973550027c31fda",
+      "resultSha256": "087acdd88c517f8a59c529bc92d2e9e11d7584e9912fb347c9c15632cc5594ed",
+      "selectedManifestSha256": "a6110905ca86ac6a2215bb4977238ea10f87acc043ab2f9e6149bf3fb28b5291",
+      "contractDigest": "f0cc0139b472ed79119889fe1c81960f9f34c4603fd733f48b214a55178d4c8e",
+      "referenceBundleSha256": "1e5b3743eb42926ce5e7fd4590ac197fec1781b27ed9745bd2863b3a698dac29",
+      "calibrationResultSha256": "9a755f3b86aa8f8335faeb50b19501a98610aa8854a5505909f30bca7378d154",
+      "calibrationSummary": {
+        "categoryMeans": {
+          "paragraphs": 100.0
+        },
+        "closeMatchRate": 1.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 5,
+        "required": 5,
+        "score": 100.0
+      },
+      "summary": {
+        "categoryMeans": {
+          "paragraphs": 39.870187806766175
+        },
+        "closeMatchRate": 0.4,
+        "complete": true,
+        "mandatoryPassRate": 0.4,
+        "measured": 5,
+        "required": 5,
+        "score": 39.870187806766175
+      },
+      "cases": {
+        "ruby-center": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "resource_policy_failure",
+                "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome.",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "resource_policy_failure",
+            "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome.",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "8acafd93cd3c9b791237b196c963b31d5b1410a90a3c52089398c4b1c6cc67c8",
+            "reference.pdf": "666cd4441b5a5d56a41818c4509eae1e230cefc845a5501e8c47ddc8092dc379"
+          }
+        },
+        "ruby-multiple-base": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "resource_policy_failure",
+                "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome.",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "resource_policy_failure",
+            "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome.",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "7c34dbfe4b388bb9318286bd170a5ea254fd545ba14fc86e8ed5ffbb75b7a842",
+            "reference.pdf": "5fd63b91901f55281a5c543da847e5c57688c5e9c6398445107dab1464ad0c53"
+          }
+        },
+        "ruby-long": {
+          "score": 0.0,
+          "close": false,
+          "checks": [
+            {
+              "error": {
+                "code": "resource_policy_failure",
+                "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome.",
+                "phase": "conversion"
+              },
+              "name": "conversion",
+              "passed": false
+            }
+          ],
+          "error": {
+            "code": "resource_policy_failure",
+            "message": "Strict font policy rejected a non-exact, unverified, or incompletely covered font outcome.",
+            "phase": "conversion"
+          },
+          "pageCount": 0,
+          "pages": [],
+          "files": {
+            "evidence.json": "df03445df15bc7286c2f62abc2ee0bc8cb987ec61e137326be7e1a92fe596d07",
+            "reference.pdf": "ccc73d07f56b769897362e19f5a63a1a99f162fe03a9d97a2cb421817df590e7"
+          }
+        },
+        "ruby-plain-control": {
+          "score": 99.92338410607313,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ],
+                "type": "same-page",
+                "version": 1
+              },
+              "name": "assertion-same-page",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1550,
+              "close": true,
+              "inkF1": 1.0,
+              "pixelMismatch": 0.006425233644859813,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  400,
+                  320
+                ],
+                "candidateSha256": "9c9f67b41e4a4e23acb64144d60e2b7c7e2212e19acbdf2634e0f3a457d26424",
+                "height": 321,
+                "reference": [
+                  400,
+                  321
+                ],
+                "referenceSha256": "ba8b5241a17bafcfc39d14f5396877e649605773e664da215039e432ad5f4a3b",
+                "width": 400
+              },
+              "recall": 1.0,
+              "referenceInk": 1559,
+              "score": 99.92338410607313,
+              "ssim": 0.9992338410607313,
+              "ssimRaw": 0.9992338410607313
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "995a3a8b903e9a70bef0ad6002630b992a8f45b71eb3a21c272ebc126c2fbf40",
+          "pageMapDigest": "c57e08a74c575c1e7e44560f82b08fb9a6f2d3991dd3f55bdcf8cfed20d612a5",
+          "files": {
+            "1-candidate.png": "4cb5c3d342de7339888e8cd0e6d0cc9ee51e63c0c086c9f2aab9d2b9b2a8ed97",
+            "1-overlay.png": "96bf589bd0960e2c9af7f636c32ed5a2864b5ee82d985db9a27b1b17112a831a",
+            "1-reference.png": "9b89293ae9569f97e7c4de2898928d2eae351b6527c8a16e1aa1f771a3db127b",
+            "candidate.pdf": "a30d57960a7cbda142cc730f625ecd93fab30c0de65a7eb9626efb0fa018f1e5",
+            "evidence.json": "b9adbf9826c502456d576a856a5706b1396f5fa517612f7162c786f0a640149a",
+            "production.json": "3b50ea37c2ea1f6b740bb7ae833bac1637fa89033beaf27c1368cc5e3f531b7b",
+            "reference.pdf": "1e8ba21244cb4274e848f49bb0eaa0bf020041194565fa2e8064fb3954237db9"
+          }
+        },
+        "ruby-long-plain-control": {
+          "score": 99.42755492775775,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ],
+                "type": "same-page",
+                "version": 1
+              },
+              "name": "assertion-same-page",
+              "passed": true
+            }
+          ],
+          "pageCount": 3,
+          "pages": [
+            {
+              "candidateInk": 18537,
+              "close": true,
+              "inkF1": 1.0,
+              "pixelMismatch": 0.055786604361370715,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  400,
+                  320
+                ],
+                "candidateSha256": "92825216f5750692c322a0bacaeb18f6d8f48b1baf8edf8733336d9c1b53f043",
+                "height": 321,
+                "reference": [
+                  400,
+                  321
+                ],
+                "referenceSha256": "4c5ddd22a3fad633721181253292e6ced5abef430c258fa4d33f847d06a961b4",
+                "width": 400
+              },
+              "recall": 1.0,
+              "referenceInk": 18551,
+              "score": 99.44886475667666,
+              "ssim": 0.9944886475667666,
+              "ssimRaw": 0.9944886475667666
+            },
+            {
+              "candidateInk": 18579,
+              "close": true,
+              "inkF1": 1.0,
+              "pixelMismatch": 0.057834890965732084,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  400,
+                  320
+                ],
+                "candidateSha256": "8e606eb8912265d782f58818ebc77980cd980b24e9ecb03241c02bdccc077d95",
+                "height": 321,
+                "reference": [
+                  400,
+                  321
+                ],
+                "referenceSha256": "02dbca7616f4448432aed8623f96a44b39c315cfdfe255c975aa43635c6dfae2",
+                "width": 400
+              },
+              "recall": 1.0,
+              "referenceInk": 18586,
+              "score": 99.42755492775775,
+              "ssim": 0.9942755492775776,
+              "ssimRaw": 0.9942755492775776
+            },
+            {
+              "candidateInk": 12542,
+              "close": true,
+              "inkF1": 1.0,
+              "pixelMismatch": 0.03739096573208723,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  400,
+                  320
+                ],
+                "candidateSha256": "efdcd044aded192420735c5430954566b676c612a8a52f2738839cd68c3b92e3",
+                "height": 321,
+                "reference": [
+                  400,
+                  321
+                ],
+                "referenceSha256": "c7128514d42806728de25eaaa5a379ec3679e5da27f7af5e5bc954e450098c39",
+                "width": 400
+              },
+              "recall": 1.0,
+              "referenceInk": 12528,
+              "score": 99.59757298949607,
+              "ssim": 0.9959757298949607,
+              "ssimRaw": 0.9959757298949607
+            }
+          ],
+          "coreTree": "f7fd04717fbaeec391ffa6362ef229097531b350",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "324f12432928e03d4fecbd44ba6304ed9e3448c77bef51bacacf5220c18cdf33",
+          "pageMapDigest": "d83171dfb30caac5a146c586da95392ec915636cde1ea10a9005e33b2ec66804",
+          "files": {
+            "1-candidate.png": "72591737ef3cca259e6ed9a13cb3e4775dd3eab583432d95fd262b1aa22c82dc",
+            "1-overlay.png": "16921ee9b0ca1c7cf8821ab3ec0d6d98b32c85200440412945c5948dde9e2736",
+            "1-reference.png": "549fff8d7abd83739385996ad438f72c3e0de0c65649fcc20502d331ad42de5a",
+            "2-candidate.png": "f2204f1fb062988c64d65f280928c27bb389f265a6da6fbe7eca29495d054c58",
+            "2-overlay.png": "53778bf6dbeff591abfed19ccc867041b2716ed2804dfb108313beaff683ae09",
+            "2-reference.png": "8101682bddbcb346a9627bfc4395971d49ae164a2feede0d39f6e8fd8438c612",
+            "3-candidate.png": "5576506975b71e0f7caa0b886cc0e3e5dd316e0a8561875d9ab4252aa59f76a5",
+            "3-overlay.png": "a02c7372230b40156544504b6475b378def980113958b6dc4212de9743136320",
+            "3-reference.png": "130e124828d1b2f9d8488476d838d38a70204788574dba4fd34816c7adda639b",
+            "candidate.pdf": "80b63cbed108bdec14f391eef3b3d29163bbaae8f364f817d249dc76fb494a05",
+            "evidence.json": "936cc27076a3fc0401ecbc336b24bfc4cbb715297b720c2b4893ee4aae326938",
+            "production.json": "727840874740da6f6959e62020ed37f7804fca65670c1049391f1d9d95ade61f",
+            "reference.pdf": "fe5af2d568d5ab12bc6600a4042671d24c4e15ff412d7bf321de006dce8b9696"
+          }
+        }
+      }
+    },
+    "candidate": {
+      "runUrl": "https://github.com/JSv4/docx-fidelity-bench/actions/runs/41184866924",
+      "artifactId": 13036603328,
+      "artifactZipSha256": "4f3fe07536c988de99e967d17322eaa66f214e4fcbf3d16d1551a30e3a8736ac",
+      "coreCommit": "b713506aa61efc26f03c58b4adb33d2c86fc1406",
+      "resultSha256": "1c3d68831f5787588aba40568b3c1cd52ad9ea9a4e3d1af8f0e02896343b1573",
+      "selectedManifestSha256": "a6110905ca86ac6a2215bb4977238ea10f87acc043ab2f9e6149bf3fb28b5291",
+      "contractDigest": "f672a90258e919c89a00a5e0c539fae815ad445fd99261bc1fea95e670e5c803",
+      "referenceBundleSha256": "d847bd6d163d592884a73f19566bbfd9bf7b38b97ec5948508b6f1609c090859",
+      "calibrationResultSha256": "8be738704484f1eda73f7fb6e159aec2f4ec731ce53dca0af9f75413feb23b27",
+      "calibrationSummary": {
+        "categoryMeans": {
+          "paragraphs": 100.0
+        },
+        "closeMatchRate": 1.0,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 5,
+        "required": 5,
+        "score": 100.0
+      },
+      "summary": {
+        "categoryMeans": {
+          "paragraphs": 95.541193644037
+        },
+        "closeMatchRate": 0.6,
+        "complete": true,
+        "mandatoryPassRate": 1.0,
+        "measured": 5,
+        "required": 5,
+        "score": 95.541193644037
+      },
+      "cases": {
+        "ruby-center": {
+          "score": 98.1034036920281,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ],
+                "type": "same-page",
+                "version": 1
+              },
+              "name": "assertion-same-page",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LARCH",
+                "tolerancePt": 1.25,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "needle",
+                "tolerancePt": 1.25,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1445,
+              "close": true,
+              "inkF1": 0.9993045897079277,
+              "pixelMismatch": 0.015085669781931463,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  400,
+                  320
+                ],
+                "candidateSha256": "0fb993c842df153bc03985151be7411ae5dc398c0cb1ba95cbf69e3b137f8713",
+                "height": 321,
+                "reference": [
+                  400,
+                  321
+                ],
+                "referenceSha256": "66f83818d24c393dad557ad3011e7603774a3076204a448cc28941cb86be31b1",
+                "width": 400
+              },
+              "recall": 0.9986101459346769,
+              "referenceInk": 1439,
+              "score": 98.1034036920281,
+              "ssim": 0.981034036920281,
+              "ssimRaw": 0.981034036920281
+            }
+          ],
+          "coreTree": "84df69f22606ff40a721dcacfb04c956a4973ec0",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "956fa4e8fad192da13a56f0a6546eefe8e6836779e52b06c72da0f7dc1601324",
+          "pageMapDigest": "261dd6c485d2f666e9aff6b3c6b47d87360eb54c46b9f43de050832f5308a3c8",
+          "files": {
+            "1-candidate.png": "546c5831ff9a1f2c1f9e4d60a9d2e2ad0f18975b8a9db4022888c6910a9fbc1c",
+            "1-overlay.png": "a298288e6ce6328f9b16c56e9b760df02949d6671d29535b7b415f457f22c0e0",
+            "1-reference.png": "decf43398b30b29c0dac5804d1eb548ac2b3dc7fdc7ca0977ed4867d4d12c7d0",
+            "candidate.pdf": "c5937ff89692d91addfe8bd76a6a48b67e757000309d0202f03c0c9912ff99d1",
+            "evidence.json": "f4dd8810891e9b1856bf23208f097968447b4e5841eb4f025beb85131a3b30b3",
+            "production.json": "584f07821ad28ebcfd9cb23cbf9cfbf471310bfa6d20950badc44e3b1d2ea828",
+            "reference.pdf": "7d82dc4a8114db6d45dc60ad34afc9b0b2e77fb3908c500b423ad23f977bc250"
+          }
+        },
+        "ruby-multiple-base": {
+          "score": 96.28190260269719,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif",
+                "LiberationSerif-Bold"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ],
+                "type": "same-page",
+                "version": 1
+              },
+              "name": "assertion-same-page",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LARCH",
+                "tolerancePt": 1.25,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "needle",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  94,
+                  29,
+                  126,
+                  38
+                ],
+                "tolerancePt": 0.0001,
+                "type": "marker-region",
+                "version": 2
+              },
+              "name": "assertion-marker-region",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1474,
+              "close": false,
+              "inkF1": 0.9628190260269719,
+              "pixelMismatch": 0.017258566978193148,
+              "precision": 0.9606512890094979,
+              "raster": {
+                "candidate": [
+                  400,
+                  320
+                ],
+                "candidateSha256": "a04fa2ebd5ee9f745daeb1afa7db5e24235dc154a94a7a294b20582b7d58f4da",
+                "height": 321,
+                "reference": [
+                  400,
+                  321
+                ],
+                "referenceSha256": "f1d458af13f071d444db4544e3681452b4d76226e24cbf845460db868bb929e8",
+                "width": 400
+              },
+              "recall": 0.9649965682910089,
+              "referenceInk": 1457,
+              "score": 96.28190260269719,
+              "ssim": 0.9767457863677761,
+              "ssimRaw": 0.9767457863677761
+            }
+          ],
+          "coreTree": "84df69f22606ff40a721dcacfb04c956a4973ec0",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "daa4d6483756c68ada828616ed0deb00e45d6b49c416145251776af1f5f23dd8",
+          "pageMapDigest": "822490a640a77f6851666abd2d8a4378cad6b50625387dcfff6f88ec00365d3c",
+          "files": {
+            "1-candidate.png": "b676f41af940363be1d7681c23c0fcf8345602ddc5a04ba19859adfaaecd2f77",
+            "1-overlay.png": "08b52b4c4a427b9aefa71bb640e7fad6cdd7cf21c6085e4c226ab46b237156b6",
+            "1-reference.png": "0374f9cc4aaa8e357eccf8e587aa244eb94510b06687cd657e52ae0af4e94cc0",
+            "candidate.pdf": "47ca7906188f28225ab645029bbee94814a701deead51aef03049e104a2e1350",
+            "evidence.json": "19880f2fa2e64b972bbdb4d15301e339a0112abdc40dd2b7b7c223f714aa667f",
+            "production.json": "f41802f45065578671426af273d92523424b2b4dd8ecd686361ee560c466ea4a",
+            "reference.pdf": "198a61dcd325bd8e9c476b8f04a9f78a3738394fb59f99441e05f0f1dcdad6b4"
+          }
+        },
+        "ruby-long": {
+          "score": 83.96972289162878,
+          "close": false,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ],
+                "type": "same-page",
+                "version": 1
+              },
+              "name": "assertion-same-page",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "LARCH",
+                "tolerancePt": 1.25,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "marker": "needle",
+                "tolerancePt": 1.25,
+                "type": "marker-reference-position",
+                "version": 1
+              },
+              "name": "assertion-marker-reference-position",
+              "passed": true
+            }
+          ],
+          "pageCount": 3,
+          "pages": [
+            {
+              "candidateInk": 17120,
+              "close": false,
+              "inkF1": 0.9995618467731802,
+              "pixelMismatch": 0.14719626168224298,
+              "precision": 0.9995911214953271,
+              "raster": {
+                "candidate": [
+                  400,
+                  320
+                ],
+                "candidateSha256": "d1b5ab15f1218c37f63f92200f8eba14aa8f071483b8f0986ff11236d50828bd",
+                "height": 321,
+                "reference": [
+                  400,
+                  321
+                ],
+                "referenceSha256": "08ae0e3c3eff086d1e1e268b12d8cbdebbe7de0a3064e420f863f667fc87fdb5",
+                "width": 400
+              },
+              "recall": 0.9995325737657026,
+              "referenceInk": 17115,
+              "score": 83.96972289162878,
+              "ssim": 0.8396972289162878,
+              "ssimRaw": 0.8396972289162878
+            },
+            {
+              "candidateInk": 18611,
+              "close": false,
+              "inkF1": 0.9995433580638423,
+              "pixelMismatch": 0.15697819314641745,
+              "precision": 0.9995701466874429,
+              "raster": {
+                "candidate": [
+                  400,
+                  320
+                ],
+                "candidateSha256": "52fc013e44451d484ae591a44fc9e11c4e66da3163e9b688d167bf102d79dc08",
+                "height": 321,
+                "reference": [
+                  400,
+                  321
+                ],
+                "referenceSha256": "4f65b6359df02c7ea20f32dacbc1b67b105465a72ae5c00562c453961681ba9a",
+                "width": 400
+              },
+              "recall": 0.999516570876081,
+              "referenceInk": 18617,
+              "score": 85.11161001308459,
+              "ssim": 0.8511161001308459,
+              "ssimRaw": 0.8511161001308459
+            },
+            {
+              "candidateInk": 13810,
+              "close": false,
+              "inkF1": 0.9893934216309644,
+              "pixelMismatch": 0.12501557632398755,
+              "precision": 0.990296886314265,
+              "raster": {
+                "candidate": [
+                  400,
+                  320
+                ],
+                "candidateSha256": "45970a9061c1bd28e3b109e649201a33ca187422566f41ed1fa9f5fa4c46ae68",
+                "height": 321,
+                "reference": [
+                  400,
+                  321
+                ],
+                "referenceSha256": "de1216dd5ed1fc073632c6a583e111b5b2ebaf58101182f97bcd293fbe4cc27d",
+                "width": 400
+              },
+              "recall": 0.9884916039374638,
+              "referenceInk": 13816,
+              "score": 84.61094827951493,
+              "ssim": 0.8461094827951493,
+              "ssimRaw": 0.8461094827951493
+            }
+          ],
+          "coreTree": "84df69f22606ff40a721dcacfb04c956a4973ec0",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "6c193dd05e15aa774c4d1451f15591d36b846f9575d53afadc0db947b056d0a7",
+          "pageMapDigest": "d47191a75d4a1eecfb9cf6961135ce5ce546c5a509280764cb59b5e5151664cd",
+          "files": {
+            "1-candidate.png": "bee356d144bec8e5713c1da3edee8e08acc5896fbab5d5b8d2b05c12c3974bb4",
+            "1-overlay.png": "5035e60edf4784af52b56f28979733cf0d84047c56db2e06c9387288f7a7fb63",
+            "1-reference.png": "b878378a7e9b329bf7f316554107ddcda7047d842c3662109412f211cd053024",
+            "2-candidate.png": "45e44c8dc518d56a927c0855ab3c66f76b8db35da83e0f5c3f5fbbdb32b84ccf",
+            "2-overlay.png": "5854e79523d25fa4b94d49e7dbf9cbb70a536fabbc4dd36cfa285c05284a5992",
+            "2-reference.png": "156d4f67fa824a6644d156c24bc2ebb311be3d2268e79a72c7725d6512e5406a",
+            "3-candidate.png": "6d9c1c1867a2006cde02a9ce8c8c1f20a814c4e51b0b6081d2472538eba3327a",
+            "3-overlay.png": "5a16c44ee576a1f854e361fc1d7b3a54b52c282bab3e3e98e280fc089e87ebb1",
+            "3-reference.png": "8536ab7c85e33bf4d571eeb2529db351277f9738bac5c6855ecd779a6e75b1cc",
+            "candidate.pdf": "5f0741fe94ca1808a67062817e20ca30f9c9e8c946d135540b62ee0d1634f71d",
+            "evidence.json": "e8c29e7cba6f3fc8dfe80c731865bab42cbfec7d67e987bb3cc47ccf97ec019b",
+            "production.json": "8d117d1f99c8eb62501b53260b2618f79993f5e22dde06355e0a6d65d788d241",
+            "reference.pdf": "eb3319d824124ddcd9a597ab494a2f528a60166ca8f2a92a6647830ee65f1bcb"
+          }
+        },
+        "ruby-plain-control": {
+          "score": 99.92338410607313,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ],
+                "type": "same-page",
+                "version": 1
+              },
+              "name": "assertion-same-page",
+              "passed": true
+            }
+          ],
+          "pageCount": 1,
+          "pages": [
+            {
+              "candidateInk": 1550,
+              "close": true,
+              "inkF1": 1.0,
+              "pixelMismatch": 0.006425233644859813,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  400,
+                  320
+                ],
+                "candidateSha256": "9c9f67b41e4a4e23acb64144d60e2b7c7e2212e19acbdf2634e0f3a457d26424",
+                "height": 321,
+                "reference": [
+                  400,
+                  321
+                ],
+                "referenceSha256": "ba8b5241a17bafcfc39d14f5396877e649605773e664da215039e432ad5f4a3b",
+                "width": 400
+              },
+              "recall": 1.0,
+              "referenceInk": 1559,
+              "score": 99.92338410607313,
+              "ssim": 0.9992338410607313,
+              "ssimRaw": 0.9992338410607313
+            }
+          ],
+          "coreTree": "84df69f22606ff40a721dcacfb04c956a4973ec0",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "995a3a8b903e9a70bef0ad6002630b992a8f45b71eb3a21c272ebc126c2fbf40",
+          "pageMapDigest": "1cd527f89bf7bba6ce65df98ff8e72d83f680a27265ab083f51def27ae218ac7",
+          "files": {
+            "1-candidate.png": "4cb5c3d342de7339888e8cd0e6d0cc9ee51e63c0c086c9f2aab9d2b9b2a8ed97",
+            "1-overlay.png": "96bf589bd0960e2c9af7f636c32ed5a2864b5ee82d985db9a27b1b17112a831a",
+            "1-reference.png": "9b89293ae9569f97e7c4de2898928d2eae351b6527c8a16e1aa1f771a3db127b",
+            "candidate.pdf": "8b94c2a55904db87c423f07c488168305b3b9eecba4223cc5817e89205668bea",
+            "evidence.json": "fe8d1687831b6e6b52a941b839945080d981301d97cf64e769c375b50a7f9fbe",
+            "production.json": "1cd5750ffcf8940da699d7fefd7f2f1a4825920e6bf3742b1aba8a70636c357e",
+            "reference.pdf": "54ca111b97352d149a37ff3e21ab1a7aa8b819e85bb20271be792f4798ee3e70"
+          }
+        },
+        "ruby-long-plain-control": {
+          "score": 99.42755492775775,
+          "close": true,
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "extra": {},
+              "missing": {},
+              "name": "expected-visible-tokens",
+              "normalizedRaw": {},
+              "passed": true
+            },
+            {
+              "name": "declared-font-families",
+              "observed": [
+                "LiberationSerif"
+              ],
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-2",
+              "passed": true
+            },
+            {
+              "name": "physical-geometry-page-3",
+              "passed": true
+            },
+            {
+              "declaration": {
+                "markers": [
+                  "LARCH",
+                  "needle"
+                ],
+                "type": "same-page",
+                "version": 1
+              },
+              "name": "assertion-same-page",
+              "passed": true
+            }
+          ],
+          "pageCount": 3,
+          "pages": [
+            {
+              "candidateInk": 18537,
+              "close": true,
+              "inkF1": 1.0,
+              "pixelMismatch": 0.055786604361370715,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  400,
+                  320
+                ],
+                "candidateSha256": "92825216f5750692c322a0bacaeb18f6d8f48b1baf8edf8733336d9c1b53f043",
+                "height": 321,
+                "reference": [
+                  400,
+                  321
+                ],
+                "referenceSha256": "4c5ddd22a3fad633721181253292e6ced5abef430c258fa4d33f847d06a961b4",
+                "width": 400
+              },
+              "recall": 1.0,
+              "referenceInk": 18551,
+              "score": 99.44886475667666,
+              "ssim": 0.9944886475667666,
+              "ssimRaw": 0.9944886475667666
+            },
+            {
+              "candidateInk": 18579,
+              "close": true,
+              "inkF1": 1.0,
+              "pixelMismatch": 0.057834890965732084,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  400,
+                  320
+                ],
+                "candidateSha256": "8e606eb8912265d782f58818ebc77980cd980b24e9ecb03241c02bdccc077d95",
+                "height": 321,
+                "reference": [
+                  400,
+                  321
+                ],
+                "referenceSha256": "02dbca7616f4448432aed8623f96a44b39c315cfdfe255c975aa43635c6dfae2",
+                "width": 400
+              },
+              "recall": 1.0,
+              "referenceInk": 18586,
+              "score": 99.42755492775775,
+              "ssim": 0.9942755492775776,
+              "ssimRaw": 0.9942755492775776
+            },
+            {
+              "candidateInk": 12542,
+              "close": true,
+              "inkF1": 1.0,
+              "pixelMismatch": 0.03739096573208723,
+              "precision": 1.0,
+              "raster": {
+                "candidate": [
+                  400,
+                  320
+                ],
+                "candidateSha256": "efdcd044aded192420735c5430954566b676c612a8a52f2738839cd68c3b92e3",
+                "height": 321,
+                "reference": [
+                  400,
+                  321
+                ],
+                "referenceSha256": "c7128514d42806728de25eaaa5a379ec3679e5da27f7af5e5bc954e450098c39",
+                "width": 400
+              },
+              "recall": 1.0,
+              "referenceInk": 12528,
+              "score": 99.59757298949607,
+              "ssim": 0.9959757298949607,
+              "ssimRaw": 0.9959757298949607
+            }
+          ],
+          "coreTree": "84df69f22606ff40a721dcacfb04c956a4973ec0",
+          "runtime": {
+            "architecture": "x64",
+            "browserBuild": "143.0.7499.4",
+            "browserProduct": "Chromium",
+            "executableSha256": "2e61bc3fd990bd4d7b419ef6b6303c67aaed683e5b83b3b25e416f015f343209",
+            "launchFlags": [
+              "--disable-background-networking",
+              "--disable-component-update",
+              "--disable-default-apps",
+              "--disable-domain-reliability",
+              "--disable-sync",
+              "--host-resolver-rules=MAP * ~NOTFOUND",
+              "--metrics-recording-only",
+              "--no-default-browser-check",
+              "--no-first-run"
+            ],
+            "operatingSystem": "linux",
+            "playwrightVersion": "1.57.0"
+          },
+          "inputSha256": "324f12432928e03d4fecbd44ba6304ed9e3448c77bef51bacacf5220c18cdf33",
+          "pageMapDigest": "c9b5d0bfc5c1838d063b7d2e73a15542c9750e249f710bf8184032dc050efa69",
+          "files": {
+            "1-candidate.png": "72591737ef3cca259e6ed9a13cb3e4775dd3eab583432d95fd262b1aa22c82dc",
+            "1-overlay.png": "16921ee9b0ca1c7cf8821ab3ec0d6d98b32c85200440412945c5948dde9e2736",
+            "1-reference.png": "549fff8d7abd83739385996ad438f72c3e0de0c65649fcc20502d331ad42de5a",
+            "2-candidate.png": "f2204f1fb062988c64d65f280928c27bb389f265a6da6fbe7eca29495d054c58",
+            "2-overlay.png": "53778bf6dbeff591abfed19ccc867041b2716ed2804dfb108313beaff683ae09",
+            "2-reference.png": "8101682bddbcb346a9627bfc4395971d49ae164a2feede0d39f6e8fd8438c612",
+            "3-candidate.png": "5576506975b71e0f7caa0b886cc0e3e5dd316e0a8561875d9ab4252aa59f76a5",
+            "3-overlay.png": "a02c7372230b40156544504b6475b378def980113958b6dc4212de9743136320",
+            "3-reference.png": "130e124828d1b2f9d8488476d838d38a70204788574dba4fd34816c7adda639b",
+            "candidate.pdf": "ca58dafbd2af4ba1b524f15e2d0c7332700e7f72592e4d277c2291fe3c2f36fc",
+            "evidence.json": "0d145d8b7f56953ec1b90d2cfb95a5720a6ad7b11b6fb509703dec8ddadfc8f7",
+            "production.json": "a602ca362ab323ec91e74d89634e46398a076a1a2a7fc17ec451440d65098a0c",
+            "reference.pdf": "8a4feb78f6de6a17beb44a121190d949da57095b73ddea3afe68d797f2b0f354"
+          }
+        }
+      }
+    }
+  },
+  "controls": {
+    "ruby-plain-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    },
+    "ruby-long-plain-control": {
+      "pagePngByteIdentical": true,
+      "scoreIdentical": true,
+      "pdfByteIdentical": false,
+      "pageMapDigestIdentical": false
+    }
+  },
+  "screenshots": {
+    "ruby-center-production.png": "5e1706bf450522258a7c5824511180fb7bda258a569c68bf4fb7fffc5ba167c1",
+    "ruby-long-plain-control-production.png": "c7f6ad2de423ec50205a2780b3c0e7686c26660431b2b3911c305acb153362b7",
+    "ruby-long-production.png": "087c18b95deb949e982c2cb2a7a856c6c61e0286f2857dc4e10f122b83c116e1",
+    "ruby-multiple-base-production.png": "1446dbf60116e9efaca5954a562d28e53a2ba7c49708a1140e049a833eabcaf3",
+    "ruby-plain-control-production.png": "892a9991f86f4604c19ecb1a05be0b9e377509b4e5e4677617d03e4b9bc5e47a"
+  },
+  "screenshotMethod": "Complete96-DPI production page rasters, displayed at75% with generated labels; no crop or content editing.",
+  "scripts": {
+    "record-production.py": "04aa65aaab7bdbcdea84f7b968a5a4fbda4a35f5d6efa8140dfc1f8698613336",
+    "production-sheets.cjs": "f465aa4aa68268e413ad502446d568ce502692c5a61b6e001007130f6a360a8c",
+    "finalize-production.py": "a46c0306836e296e28a20ee2c2ae34d2b7a4b1f5e945dff39d3c55b1b3ceb420"
+  }
+}

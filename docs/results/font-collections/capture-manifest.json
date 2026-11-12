@@ -1,0 +1,235 @@
+{
+  "schema": 1,
+  "suite": {
+    "id": "collection-fonts-v1",
+    "version": 1,
+    "cases": [
+      "font-collection-ttc-requested",
+      "font-collection-ttc-standalone-control",
+      "font-collection-otc-requested",
+      "font-collection-otc-standalone-control"
+    ]
+  },
+  "cases": [
+    {
+      "id": "font-collection-ttc-requested",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Original collection-only face and standalone geometric-font control (Docxodus #1573)",
+      "input": "fixtures/font-collection-ttc-requested.docx",
+      "sha256": "24665c9df94c1331dea8b3c54d4e1b95b8a4b482fcde44d69c18e5713e271500",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liatris TTC"
+      ],
+      "tokens": {
+        "ASH": 1,
+        "EAST": 1,
+        "LIATRISEND": 1,
+        "LIATRISTTC": 1,
+        "MAPLE": 1,
+        "NORTH": 1,
+        "OAK": 1,
+        "SOUTH": 1,
+        "WEST": 1
+      },
+      "assertions": [
+        {
+          "type": "required-font-family",
+          "version": 1,
+          "family": "Liatris TTC"
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "LIATRISTTC",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "LIATRISEND",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "89073fc2733ce2b8049d6451b39cf428bc7846ee92bed3cb950f3d1e236a961e"
+      }
+    },
+    {
+      "id": "font-collection-ttc-standalone-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Original collection-only face and standalone geometric-font control (Docxodus #1573)",
+      "input": "fixtures/font-collection-ttc-standalone-control.docx",
+      "sha256": "eefa70d0a2a109fab8e1d4707cb52f6da548b235a3f30f2e65f99b3109f945d4",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liatris Plain"
+      ],
+      "tokens": {
+        "ASH": 1,
+        "EAST": 1,
+        "LIATRISEND": 1,
+        "LIATRISTTC": 1,
+        "MAPLE": 1,
+        "NORTH": 1,
+        "OAK": 1,
+        "SOUTH": 1,
+        "WEST": 1
+      },
+      "assertions": [
+        {
+          "type": "required-font-family",
+          "version": 1,
+          "family": "Liatris Plain"
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "LIATRISTTC",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "LIATRISEND",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "89073fc2733ce2b8049d6451b39cf428bc7846ee92bed3cb950f3d1e236a961e"
+      }
+    },
+    {
+      "id": "font-collection-otc-requested",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Original collection-only face and standalone geometric-font control (Docxodus #1573)",
+      "input": "fixtures/font-collection-otc-requested.docx",
+      "sha256": "214c40fd9c294496a60f927b0286b8797c68569302d27aef5dc8560caf68bf6a",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liatris OTC"
+      ],
+      "tokens": {
+        "ASH": 1,
+        "EAST": 1,
+        "LIATRISEND": 1,
+        "LIATRISOTC": 1,
+        "MAPLE": 1,
+        "NORTH": 1,
+        "OAK": 1,
+        "SOUTH": 1,
+        "WEST": 1
+      },
+      "assertions": [
+        {
+          "type": "required-font-family",
+          "version": 1,
+          "family": "Liatris OTC"
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "LIATRISOTC",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "LIATRISEND",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "89073fc2733ce2b8049d6451b39cf428bc7846ee92bed3cb950f3d1e236a961e"
+      }
+    },
+    {
+      "id": "font-collection-otc-standalone-control",
+      "version": 1,
+      "category": "paragraphs",
+      "description": "Original collection-only face and standalone geometric-font control (Docxodus #1573)",
+      "input": "fixtures/font-collection-otc-standalone-control.docx",
+      "sha256": "5d12c28067c185e69d1a616efe15b8529d5d7e85b423d71a5c3d65c71475a535",
+      "rights": {
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Authored by bench/fixtures.py in this repository",
+        "assets": "All text and graphics are generated here; no embedded font files"
+      },
+      "profile": {
+        "review": "final",
+        "comments": "hidden"
+      },
+      "fonts": [
+        "Liatris Plain"
+      ],
+      "tokens": {
+        "ASH": 1,
+        "EAST": 1,
+        "LIATRISEND": 1,
+        "LIATRISOTC": 1,
+        "MAPLE": 1,
+        "NORTH": 1,
+        "OAK": 1,
+        "SOUTH": 1,
+        "WEST": 1
+      },
+      "assertions": [
+        {
+          "type": "required-font-family",
+          "version": 1,
+          "family": "Liatris Plain"
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "LIATRISOTC",
+          "tolerancePt": 0.5
+        },
+        {
+          "type": "marker-reference-position",
+          "version": 1,
+          "marker": "LIATRISEND",
+          "tolerancePt": 0.5
+        }
+      ],
+      "generator": {
+        "path": "bench/fixtures.py",
+        "sha256": "89073fc2733ce2b8049d6451b39cf428bc7846ee92bed3cb950f3d1e236a961e"
+      }
+    }
+  ]
+}

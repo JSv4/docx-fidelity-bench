@@ -1,0 +1,161 @@
+{
+  "cases": [
+    {
+      "control": false,
+      "id": "used-missing",
+      "input": "fixtures/fonts/used-missing.docx",
+      "pages": [
+        {
+          "family": "Absent Birch Sans",
+          "missing": true,
+          "partial": false,
+          "text": "Birch shelves hold seven tools."
+        }
+      ],
+      "rights": {
+        "assets": "No imported document, font program, image or external resource",
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Birch text authored for this diagnostic"
+      },
+      "sha256": "5c2328a720a4c6e9e0e0e1c81af5e1e51e4693ff7898bf710983f634b734669e"
+    },
+    {
+      "control": true,
+      "id": "configured-control",
+      "input": "fixtures/fonts/configured-control.docx",
+      "pages": [
+        {
+          "family": "Liberation Sans",
+          "missing": false,
+          "partial": false,
+          "text": "Birch shelves hold seven tools."
+        }
+      ],
+      "rights": {
+        "assets": "No imported document, font program, image or external resource",
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Birch text authored for this diagnostic"
+      },
+      "sha256": "a8ee5e5a1d425053e63237e83f8d7c1212fe276058ba3762f8a7f8592b36cd94"
+    },
+    {
+      "control": true,
+      "id": "unused-style-control",
+      "input": "fixtures/fonts/unused-style-control.docx",
+      "pages": [
+        {
+          "family": "Liberation Sans",
+          "missing": false,
+          "partial": false,
+          "text": "Birch shelves hold seven tools."
+        }
+      ],
+      "rights": {
+        "assets": "No imported document, font program, image or external resource",
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Birch text authored for this diagnostic"
+      },
+      "sha256": "be74ae233bd8a827659f926c5a7f13212be617bf2a990c90d693406b25e3c37b"
+    },
+    {
+      "control": true,
+      "id": "unused-table-control",
+      "input": "fixtures/fonts/unused-table-control.docx",
+      "pages": [
+        {
+          "family": "Liberation Sans",
+          "missing": false,
+          "partial": false,
+          "text": "Birch shelves hold seven tools."
+        }
+      ],
+      "rights": {
+        "assets": "No imported document, font program, image or external resource",
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Birch text authored for this diagnostic"
+      },
+      "sha256": "53ffd87d40d2f1ab8d9ea83426146fdf4bc0d36f94448dec7d658ea4441f11a5"
+    },
+    {
+      "control": false,
+      "id": "mixed-glyphs",
+      "input": "fixtures/fonts/mixed-glyphs.docx",
+      "pages": [
+        {
+          "family": "Liberation Sans",
+          "missing": false,
+          "partial": true,
+          "text": "Birch A\u6f22\ud83d\ude00"
+        }
+      ],
+      "rights": {
+        "assets": "No imported document, font program, image or external resource",
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Birch text authored for this diagnostic"
+      },
+      "sha256": "06f44ff71c9ca8d152e6ec30d9c461fecaec1088116d7899c9621f5413beeb90"
+    },
+    {
+      "control": false,
+      "id": "separate-requests",
+      "input": "fixtures/fonts/separate-requests.docx",
+      "pages": [
+        {
+          "family": "Liberation Sans",
+          "missing": false,
+          "partial": false,
+          "text": "Birch first shelf."
+        },
+        {
+          "family": "Liberation Serif",
+          "missing": false,
+          "partial": false,
+          "text": "Cedar second shelf."
+        }
+      ],
+      "rights": {
+        "assets": "No imported document, font program, image or external resource",
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Birch text authored for this diagnostic"
+      },
+      "sha256": "aad4496a5e5b84d8400bdec5db456406d318af8c59cf4bed44991d8d72e7fbec"
+    },
+    {
+      "control": false,
+      "id": "missing-separate",
+      "input": "fixtures/fonts/missing-separate.docx",
+      "pages": [
+        {
+          "family": "Absent Birch Sans",
+          "missing": true,
+          "partial": false,
+          "text": "Birch first shelf."
+        },
+        {
+          "family": "Liberation Serif",
+          "missing": false,
+          "partial": false,
+          "text": "Cedar second shelf."
+        }
+      ],
+      "rights": {
+        "assets": "No imported document, font program, image or external resource",
+        "author": "John Scrudato IV",
+        "license": "MIT",
+        "origin": "Original literal OOXML and Birch text authored for this diagnostic"
+      },
+      "sha256": "fe700b33cf7be669bc6410d18f6393d56aa88dbca221fac474819bddb6ba359f"
+    }
+  ],
+  "generatorSha256": "c4d76f34346243096f266d97fd40ed08a9d0493127e917b970810bc162dd20f7",
+  "schema": 1,
+  "scope": "Unweighted diagnostic; no PDF/redline fidelity score or verified font-file claim",
+  "suite": "font-observation-v1",
+  "version": 1
+}

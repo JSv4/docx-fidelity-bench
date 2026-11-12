@@ -1,0 +1,2579 @@
+{
+  "kind": "local diagnostics; no full-suite score or fresh Word capture",
+  "renderers": [
+    "LibreOffice",
+    "existing15.0.0build4bb8386be06ded02dd41564fcf2d18742dd04cbe",
+    "candidate"
+  ],
+  "candidateSource": {
+    "commit": "bf6810a5bc9e19c5af1e50b42e11b50c604cde69",
+    "tree": "e24a563a972e1772e96ff4d03f6b08c13a17e0ca",
+    "files": {
+      "Docxodus/WmlToHtmlConverter.cs": "44f95620277eede02491dd20d9d6a2ce4f0c8bbf12aa266a8a78f7d2b92b18df",
+      "Docxodus/WmlToHtmlConverter.TableBorders.cs": "1a8440dcd96658ec488d675bae364a0e347fa2c5f4f46ea51841aaab092c3de0",
+      "npm/src/table-borders.ts": "bd7400c9982c6a093fe55fb47d09d9314fcab2e7b4caed58178edc8d4b1a1e4d",
+      "npm/src/pagination.ts": "bb61ba35f4fb362bff04a0b04430380037c63c07720a93620239bf99e021ba11",
+      "npm/src/export-browser.ts": "4b177ae3d21faff2e3701c934ea468d3380550753a939274ce496383a3b7ac28",
+      "npm/dist/export-assets.json": "f2d235e367a8df16576f65cb06b918cb28ba9dfc0e82216bd4519a49cd749ac2"
+    }
+  },
+  "cases": {
+    "tables-fractional-border-quarter": {
+      "inputSha256": "43b97c84498c73d67969fe8797af3473fdd01ff48e1a210e49050e3caecd7445",
+      "pdfSha256": [
+        "193806666c0e8102a2b09711fc0ec930a7dce18247a5ff7befbf7ace8457bd48",
+        "4fb1f3cd79160bfed7146294641344177d252b58e43fef41be4c22ac0dde8bda",
+        "61924946be0d4f80ad092d59a875fcb57e4b212da97d87cba91bc907b69ede09"
+      ],
+      "referenceChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": true,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.25
+            ],
+            "tolerancePt": 0.01
+          }
+        }
+      ],
+      "baselineChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": false,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.25
+            ],
+            "tolerancePt": 0.01
+          }
+        }
+      ],
+      "candidateChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": true,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.25
+            ],
+            "tolerancePt": 0.01
+          }
+        }
+      ],
+      "vectorWidths": [
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.25,
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75
+            ]
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.25,
+              0.25,
+              0.25,
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          }
+        ]
+      ],
+      "colorRegions": [
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              312.75,
+              96.75
+            ],
+            "coverage": 735.0
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              312.75,
+              97.5
+            ],
+            "coverage": 738.0
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              312.75,
+              96.75
+            ],
+            "coverage": 734.0
+          }
+        ]
+      ],
+      "screenshotSha256": "ce4473b543d157a8f0eae39abe3b19bb0a4dfc934628ea839b813ac6fed85d99"
+    },
+    "tables-fractional-border-half": {
+      "inputSha256": "817cb0bf2f7cf609eb2765c9c3005355d1ede686c17f40176434d865284655a3",
+      "pdfSha256": [
+        "d75ca9988f4f75d5e272930998ea3aa8adeaea1d3a769a39c8ab5c1f63b80e43",
+        "fd8361bca356e93b0f04ddc0f98a5fa0605814abbd73c91cb17773f6be0fa35f",
+        "db526fc46f2c486e6ecc7732577e487e512a5893e903dbccc606e4bd8347bd42"
+      ],
+      "referenceChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": true,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.5
+            ],
+            "tolerancePt": 0.01
+          }
+        }
+      ],
+      "baselineChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": false,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.5
+            ],
+            "tolerancePt": 0.01
+          }
+        }
+      ],
+      "candidateChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": true,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.5
+            ],
+            "tolerancePt": 0.01
+          }
+        }
+      ],
+      "vectorWidths": [
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5
+            ]
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75
+            ]
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5
+            ]
+          }
+        ]
+      ],
+      "colorRegions": [
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              312.75,
+              97.5
+            ],
+            "coverage": 738.0
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              312.75,
+              97.5
+            ],
+            "coverage": 738.0
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              312.75,
+              97.5
+            ],
+            "coverage": 738.0
+          }
+        ]
+      ],
+      "screenshotSha256": "9eb270f9c22bea52317fbafbcf19a50d8be5cc40940d3a5d4100530ed65ae893"
+    },
+    "tables-fractional-border-one": {
+      "inputSha256": "4606d71f86e2a671d4f57f4c62d32f04c159c6a30cee7b9ec1a49a7e32e26645",
+      "pdfSha256": [
+        "3226fdf5f78bd1b71d959626e7c6bcd33cbcf0228c2179e2ad4b03f28ed65d6f",
+        "782bf95b1f40d3614abc8bff06233a9afa1e9f4d0aa771120debb290cdfe9307",
+        "3f85768bcd2a3a0c0be5ff3ee5772b90a74ac64024d4201d276045386c21b3b5"
+      ],
+      "referenceChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": true,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              1.0
+            ],
+            "tolerancePt": 0.01
+          }
+        }
+      ],
+      "baselineChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": false,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": false,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              1.0
+            ],
+            "tolerancePt": 0.01
+          }
+        }
+      ],
+      "candidateChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": true,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              1.0
+            ],
+            "tolerancePt": 0.01
+          }
+        }
+      ],
+      "vectorWidths": [
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75
+            ]
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        ]
+      ],
+      "colorRegions": [
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              312.75,
+              98.25
+            ],
+            "coverage": 1059.0
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              312.75,
+              97.5
+            ],
+            "coverage": 738.0
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              312.75,
+              98.25
+            ],
+            "coverage": 1059.0
+          }
+        ]
+      ],
+      "screenshotSha256": "a4b47b902ef153829f04bc84511bf14c56a5cab54dbe191a2e5256b3412da420"
+    },
+    "tables-fractional-border-style-quarter": {
+      "inputSha256": "c1600b33127cddc7a655f35230b7bd123bf710cfb5f332eee373039ffa8bcc50",
+      "pdfSha256": [
+        "02f0bd75ea1f334bd1640d3e572728c0828472c3e6845a344c1e6939587032a6",
+        "c33bb4e17d65ef618af37533ba6b773fac4e944eac3891b78c2ad6e7866561c5",
+        "387465be79a690245ffbad3e79053b8f0bb7306fef471911296ae9b6a16fe7ff"
+      ],
+      "referenceChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": true,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.25
+            ],
+            "tolerancePt": 0.01
+          }
+        }
+      ],
+      "baselineChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": false,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.25
+            ],
+            "tolerancePt": 0.01
+          }
+        }
+      ],
+      "candidateChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": true,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.25
+            ],
+            "tolerancePt": 0.01
+          }
+        }
+      ],
+      "vectorWidths": [
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.25,
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75
+            ]
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.25,
+              0.25,
+              0.25,
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          }
+        ]
+      ],
+      "colorRegions": [
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              312.75,
+              96.75
+            ],
+            "coverage": 735.0
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              312.75,
+              97.5
+            ],
+            "coverage": 738.0
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              312.75,
+              96.75
+            ],
+            "coverage": 734.0
+          }
+        ]
+      ],
+      "screenshotSha256": "4cd169362a79e5fdf9d4e05d871e1af46f80b25333d7d97110a5ac5c189715a7"
+    },
+    "tables-fractional-border-merged-segments": {
+      "inputSha256": "6659c6deb0ec576e9d85ee0aa3ecc34c2215e3a4d76a019a0e976f9bf5a458a1",
+      "pdfSha256": [
+        "3b7b8a246308a72ba4d05c0a36e541c06d5dcf9d48cf24f033966a68134a5840",
+        "3c3a9656df06fa0bb6ebb1266a10fe5dbc24a97d39980fb20f808b815dcce3c3",
+        "7d62321cbd9f5cb3b718336de736406537a12836581b9ec9a1f3ecfbd98f80ac"
+      ],
+      "referenceChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": true,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.25,
+              1
+            ],
+            "tolerancePt": 0.01
+          }
+        }
+      ],
+      "baselineChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": false,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": false,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.25,
+              1
+            ],
+            "tolerancePt": 0.01
+          }
+        }
+      ],
+      "candidateChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": true,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.25,
+              1
+            ],
+            "tolerancePt": 0.01
+          }
+        }
+      ],
+      "vectorWidths": [
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.25,
+              0.25,
+              1.0,
+              0.25,
+              1.0,
+              0.25,
+              1.0,
+              0.25,
+              1.0
+            ]
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75
+            ]
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.25,
+              0.25,
+              1.0,
+              0.25,
+              0.25,
+              0.25,
+              1.0,
+              0.25,
+              1.0,
+              1.0
+            ]
+          }
+        ]
+      ],
+      "colorRegions": [
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              312.75,
+              122.25
+            ],
+            "coverage": 1348.0
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              312.75,
+              122.25
+            ],
+            "coverage": 1123.0
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              312.75,
+              122.25
+            ],
+            "coverage": 1348.0
+          }
+        ]
+      ],
+      "screenshotSha256": "b75925aa8f9cac8674108b430705eccece5d2cb05278bbcc436af95bea5cfdc0"
+    },
+    "tables-fractional-border-wrap-quarter": {
+      "inputSha256": "53e0c1a1cc56032601fbbf79254c5fcf792d4e5a9b4240edfe21d48d0a3939e8",
+      "pdfSha256": [
+        "41897160b684e534f06118848d7f8f9a10e610670ad014082975a848fdfddaf6",
+        "0cc2209c79c34a43725997d7683a8306a0935cd0d1d6b79c3ded05c760a82212",
+        "5ae47434f06589b41586da6740dc2d9d5fd94a2caea78730f2075237c5649b21"
+      ],
+      "referenceChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": true,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.25
+            ],
+            "tolerancePt": 0.01
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "iii",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              72,
+              72,
+              192,
+              91.75
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        }
+      ],
+      "baselineChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": false,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": false,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.25
+            ],
+            "tolerancePt": 0.01
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": false,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "iii",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              72,
+              72,
+              192,
+              91.75
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        }
+      ],
+      "candidateChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": true,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.25
+            ],
+            "tolerancePt": 0.01
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "iii",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              72,
+              72,
+              192,
+              91.75
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        }
+      ],
+      "vectorWidths": [
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.25,
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75
+            ]
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.25,
+              0.25,
+              0.25,
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          }
+        ]
+      ],
+      "colorRegions": [
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              312.75,
+              96.75
+            ],
+            "coverage": 735.0
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              312.75,
+              112.5
+            ],
+            "coverage": 798.0
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              312.75,
+              96.75
+            ],
+            "coverage": 734.0
+          }
+        ]
+      ],
+      "screenshotSha256": "ba928e2fb436f02715466e51095155917e72401638b8bc1b09186495f2da418d"
+    },
+    "tables-fractional-border-wrap-one": {
+      "inputSha256": "f638eac50599c74ff6f08eecf02430f7d6c96689179a1595e7278a9f5f4f8172",
+      "pdfSha256": [
+        "0439efc087f8a7ad694cc4c7e4714cf728b4bca8f69701f99e605b15fccb3227",
+        "878bc6d7e0031fd44d33ca8b39650c28f9b1d6c65c4ba73a95d9db2299238271",
+        "7fb6ca3d04f83ccba30b6785fea3f04853ce061f15dfef8b14108e86a07d5405"
+      ],
+      "referenceChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": true,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              1.0
+            ],
+            "tolerancePt": 0.01
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "iii",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              72,
+              72,
+              192,
+              92.5
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        }
+      ],
+      "baselineChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": false,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": false,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              1.0
+            ],
+            "tolerancePt": 0.01
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": false,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "iii",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              72,
+              72,
+              192,
+              92.5
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        }
+      ],
+      "candidateChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": true,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              1.0
+            ],
+            "tolerancePt": 0.01
+          }
+        },
+        {
+          "name": "assertion-marker-region",
+          "passed": true,
+          "declaration": {
+            "type": "marker-region",
+            "marker": "iii",
+            "occurrence": 1,
+            "page": 1,
+            "rect": [
+              72,
+              72,
+              192,
+              92.5
+            ],
+            "version": 2,
+            "tolerancePt": 0.0001
+          }
+        }
+      ],
+      "vectorWidths": [
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75,
+              0.75
+            ]
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        ]
+      ],
+      "colorRegions": [
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              312.75,
+              98.25
+            ],
+            "coverage": 1059.0
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              312.75,
+              112.5
+            ],
+            "coverage": 798.0
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              312.75,
+              98.25
+            ],
+            "coverage": 1059.0
+          }
+        ]
+      ],
+      "screenshotSha256": "f21f02124afed7cd8f451c45368e2ab7e889111ded2fea9db22cb1a11565fe71"
+    },
+    "tables-fractional-border-no-border-control": {
+      "inputSha256": "f7013c211bb62ad1aeff926d88427662920774892c68dc9e9b0247daecb6fefa",
+      "pdfSha256": [
+        "9dad8d2f32ef2c129b8ab265b6686450e2039544723f17ea806ce10094712398",
+        "ca8b0ec26e7f9aefb33e4d08c0079b39ed8f176a008f604e3cc83ed0b2f71a69",
+        "f47d0db8c1b07e7733361cdb78db5dc6357f809c2d332a1713491eb03b95eb74"
+      ],
+      "referenceChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        }
+      ],
+      "baselineChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        }
+      ],
+      "candidateChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        }
+      ],
+      "vectorWidths": [
+        null,
+        null,
+        null
+      ],
+      "colorRegions": [
+        null,
+        null,
+        null
+      ],
+      "screenshotSha256": "88702590ad404116e9d9336c3ca14fa95ab7639a89bf93f8da41e2e8a97b3f9d"
+    },
+    "tables-fractional-border-three-point-control": {
+      "inputSha256": "58be1340a328becda9f9b5a78e81993aa92c732851d012c91381dc364a2a95da",
+      "pdfSha256": [
+        "dbb189fb9ffe8d68b2f5cba3ab5cd3fd6310fff8ff8462f24ffe3d5b172f7fd1",
+        "32eb8eafff07ecc6d23c1237933f81af7cadcfa5183f4f3321950d374f5784a9",
+        "51a66d8de6876db9cde782045b4dfec50cd116ac8b0bb869c65af6afe1d32f47"
+      ],
+      "referenceChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": true,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              3.0
+            ],
+            "tolerancePt": 0.01
+          }
+        }
+      ],
+      "baselineChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": true,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              3.0
+            ],
+            "tolerancePt": 0.01
+          }
+        }
+      ],
+      "candidateChecks": [
+        {
+          "name": "page-count",
+          "passed": true
+        },
+        {
+          "name": "expected-visible-tokens",
+          "passed": true,
+          "missing": {},
+          "extra": {},
+          "normalizedRaw": {}
+        },
+        {
+          "name": "declared-font-families",
+          "passed": true,
+          "observed": [
+            "LiberationSans"
+          ]
+        },
+        {
+          "name": "physical-geometry-page-1",
+          "passed": true
+        },
+        {
+          "name": "assertion-color-reference-geometry",
+          "passed": true,
+          "declaration": {
+            "type": "color-reference-geometry",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "tolerancePt": 1.5,
+            "coverageTolerance": 0.08
+          }
+        },
+        {
+          "name": "assertion-colored-rule-widths",
+          "passed": true,
+          "declaration": {
+            "type": "colored-rule-widths",
+            "version": 1,
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              3.0
+            ],
+            "tolerancePt": 0.01
+          }
+        }
+      ],
+      "vectorWidths": [
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              3.0,
+              3.0,
+              3.0,
+              3.0,
+              3.0
+            ]
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              3.0,
+              3.0,
+              3.0,
+              3.0,
+              3.0,
+              3.0,
+              3.0
+            ]
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "widthsPt": [
+              3.0,
+              3.0,
+              3.0,
+              3.0,
+              3.0,
+              3.0,
+              3.0
+            ]
+          }
+        ]
+      ],
+      "colorRegions": [
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              315.0,
+              102.0
+            ],
+            "coverage": 2976.0
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              315.0,
+              102.0
+            ],
+            "coverage": 2976.0
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "rgb": [
+              32,
+              80,
+              128
+            ],
+            "boundsPt": [
+              72.0,
+              72.0,
+              315.0,
+              102.0
+            ],
+            "coverage": 2976.0
+          }
+        ]
+      ],
+      "screenshotSha256": "f9e74e58099618aa11abe25700af185a1b456e54e4446c5405d02469acb0e8a4"
+    }
+  }
+}

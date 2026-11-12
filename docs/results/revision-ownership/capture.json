@@ -1,0 +1,548 @@
+{
+  "renderer": "Docxodus d7165e76a022128b778076d1c6528b08dd6f50d6 public DocxSessionBridge.RenderHtmlForReview(handle, \"docx-\", false, false, 1, true)",
+  "beforeEditingCandidate": "568438f3ec3aa8ee904feb3e97d49226434cb6f7",
+  "afterEditingCandidate": "d7165e76a022128b778076d1c6528b08dd6f50d6",
+  "purpose": "Browser screenshots of saved DOCX checkpoints plus independently read raw package metadata. No Word capture, PDF scoring or full-suite score.",
+  "cases": [
+    {
+      "id": "redline-revision-owner-namesake-account",
+      "image": "redline-revision-owner-namesake-account.png",
+      "imageSha256": "05fd4f6d76171edd3c9935dcad41121f9bca9bb6da2d77c8afb28e618a620311",
+      "inputs": {
+        "source": {
+          "sha256": "a7ee875f0cbe086b03e1414a2fac14c6926f354ad4947ff3f6e29c6c7da2a0c3",
+          "metadata": {
+            "people": [
+              {
+                "author": "Taylor",
+                "providerId": "AD",
+                "userId": "S::taylor@valley.example::66666666-6666-6666-6666-666666666666"
+              }
+            ],
+            "revisions": [
+              {
+                "type": "insertion",
+                "author": "Taylor",
+                "text": "[paragraph mark]"
+              },
+              {
+                "type": "insertion",
+                "author": "Taylor",
+                "text": "Summit proposed clause."
+              }
+            ],
+            "comments": []
+          }
+        },
+        "before": {
+          "sha256": "b63ec099dc7d4f96f6fd151318fa4eb2ea6683a3b3d2f69d4eab10dad597964e",
+          "metadata": {
+            "people": [
+              {
+                "author": "Taylor",
+                "providerId": "AD",
+                "userId": "S::taylor@valley.example::66666666-6666-6666-6666-666666666666"
+              }
+            ],
+            "revisions": [],
+            "comments": []
+          }
+        },
+        "after": {
+          "sha256": "4816f99242e1c4b37063eed1306d666aa30b16b2607c45488cc5771d8a0114d1",
+          "metadata": {
+            "people": [
+              {
+                "author": "Taylor",
+                "providerId": "AD",
+                "userId": "S::taylor@valley.example::66666666-6666-6666-6666-666666666666"
+              }
+            ],
+            "revisions": [
+              {
+                "type": "insertion",
+                "author": "Taylor",
+                "text": "[paragraph mark]"
+              },
+              {
+                "type": "deletion",
+                "author": "Taylor",
+                "text": "[paragraph mark]"
+              },
+              {
+                "type": "insertion",
+                "author": "Taylor",
+                "text": "Summit proposed clause."
+              },
+              {
+                "type": "deletion",
+                "author": "Taylor",
+                "text": "Summit proposed clause."
+              }
+            ],
+            "comments": []
+          }
+        }
+      },
+      "observedStatus": {
+        "after": {
+          "author": "Taylor",
+          "status": "taken"
+        },
+        "before": {
+          "author": "Taylor",
+          "status": "taken"
+        }
+      },
+      "newCaseScore": 100
+    },
+    {
+      "id": "redline-revision-owner-unattributed-name",
+      "image": "redline-revision-owner-unattributed-name.png",
+      "imageSha256": "7e565e0ca7d703e21ba2e448e40df54cb1e1e9918574cd76430ea28ca9934bc9",
+      "inputs": {
+        "source": {
+          "sha256": "342942dc38851f7c1175234397e3eb4630e446502391d72c3a7affc31854cc41",
+          "metadata": {
+            "people": [],
+            "revisions": [
+              {
+                "type": "insertion",
+                "author": "Taylor",
+                "text": "[paragraph mark]"
+              },
+              {
+                "type": "insertion",
+                "author": "Taylor",
+                "text": "Summit proposed clause."
+              }
+            ],
+            "comments": []
+          }
+        },
+        "before": {
+          "sha256": "15959da7b48067cce31f225121be27c796b59ec624f76d7c338946b7bf497ea3",
+          "metadata": {
+            "people": [],
+            "revisions": [],
+            "comments": []
+          }
+        },
+        "after": {
+          "sha256": "892070897b813a86366ea50c946a7f3867882bf813df8f293275c36c4ee01519",
+          "metadata": {
+            "people": [],
+            "revisions": [
+              {
+                "type": "insertion",
+                "author": "Taylor",
+                "text": "[paragraph mark]"
+              },
+              {
+                "type": "deletion",
+                "author": "Taylor",
+                "text": "[paragraph mark]"
+              },
+              {
+                "type": "insertion",
+                "author": "Taylor",
+                "text": "Summit proposed clause."
+              },
+              {
+                "type": "deletion",
+                "author": "Taylor",
+                "text": "Summit proposed clause."
+              }
+            ],
+            "comments": []
+          }
+        }
+      },
+      "observedStatus": {
+        "after": {
+          "author": "Taylor",
+          "status": "taken"
+        },
+        "before": {
+          "author": "Taylor",
+          "status": "taken"
+        }
+      },
+      "newCaseScore": 100
+    },
+    {
+      "id": "redline-revision-owner-upn-alias",
+      "image": "redline-revision-owner-upn-alias.png",
+      "imageSha256": "e6d510ce94a98a065f372409a5d0477591db9507d3b4bd54e307b902c2afd716",
+      "inputs": {
+        "source": {
+          "sha256": "94dbd458da8b496d884839559d51120e3e9de2e93468261f9e3aa286909ffe6f",
+          "metadata": {
+            "people": [
+              {
+                "author": "Word Taylor",
+                "providerId": "AD",
+                "userId": "S::TAYLOR@SUMMIT.EXAMPLE::77777777-7777-7777-7777-777777777777"
+              }
+            ],
+            "revisions": [
+              {
+                "type": "insertion",
+                "author": "Word Taylor",
+                "text": "[paragraph mark]"
+              },
+              {
+                "type": "insertion",
+                "author": "Word Taylor",
+                "text": "Summit proposed clause."
+              }
+            ],
+            "comments": []
+          }
+        },
+        "before": {
+          "sha256": "07dbd2ef33d410669f3062bd27c053b59021aa4247d953f5eae3572ee9dc91df",
+          "metadata": {
+            "people": [
+              {
+                "author": "Word Taylor",
+                "providerId": "AD",
+                "userId": "S::TAYLOR@SUMMIT.EXAMPLE::77777777-7777-7777-7777-777777777777"
+              }
+            ],
+            "revisions": [
+              {
+                "type": "insertion",
+                "author": "Word Taylor",
+                "text": "[paragraph mark]"
+              },
+              {
+                "type": "deletion",
+                "author": "Taylor",
+                "text": "[paragraph mark]"
+              },
+              {
+                "type": "insertion",
+                "author": "Word Taylor",
+                "text": "Summit proposed clause."
+              },
+              {
+                "type": "deletion",
+                "author": "Taylor",
+                "text": "Summit proposed clause."
+              }
+            ],
+            "comments": []
+          }
+        },
+        "after": {
+          "sha256": "1d7940ef33c0435e2cca1710b68169b354d1ce40e79c659dd4c950545611cf4a",
+          "metadata": {
+            "people": [
+              {
+                "author": "Word Taylor",
+                "providerId": "AD",
+                "userId": "S::TAYLOR@SUMMIT.EXAMPLE::77777777-7777-7777-7777-777777777777"
+              }
+            ],
+            "revisions": [],
+            "comments": []
+          }
+        }
+      },
+      "observedStatus": {
+        "after": {
+          "author": "Word Taylor",
+          "status": "own"
+        },
+        "before": {
+          "author": "Word Taylor",
+          "status": "own"
+        }
+      },
+      "newCaseScore": 100
+    },
+    {
+      "id": "redline-revision-owner-object-id-alias",
+      "image": "redline-revision-owner-object-id-alias.png",
+      "imageSha256": "4ec338c347a93390aaeeecfadd6dd92b44e3762beb7cb0359bd20642013c9281",
+      "inputs": {
+        "source": {
+          "sha256": "4af0d9ee311aac75a9c231345748a2bf11b463697fdd60892a0450559e9c4f6b",
+          "metadata": {
+            "people": [
+              {
+                "author": "Word Taylor",
+                "providerId": "AD",
+                "userId": "S::old@summit.example::55555555-5555-5555-5555-555555555555"
+              }
+            ],
+            "revisions": [
+              {
+                "type": "insertion",
+                "author": "Word Taylor",
+                "text": "[paragraph mark]"
+              },
+              {
+                "type": "insertion",
+                "author": "Word Taylor",
+                "text": "Summit proposed clause."
+              }
+            ],
+            "comments": []
+          }
+        },
+        "before": {
+          "sha256": "16bee776d2edb2b387f70ce4600b5adb202006e04439867e5993890be3b9f842",
+          "metadata": {
+            "people": [
+              {
+                "author": "Word Taylor",
+                "providerId": "AD",
+                "userId": "S::old@summit.example::55555555-5555-5555-5555-555555555555"
+              }
+            ],
+            "revisions": [
+              {
+                "type": "insertion",
+                "author": "Word Taylor",
+                "text": "[paragraph mark]"
+              },
+              {
+                "type": "deletion",
+                "author": "Taylor",
+                "text": "[paragraph mark]"
+              },
+              {
+                "type": "insertion",
+                "author": "Word Taylor",
+                "text": "Summit proposed clause."
+              },
+              {
+                "type": "deletion",
+                "author": "Taylor",
+                "text": "Summit proposed clause."
+              }
+            ],
+            "comments": []
+          }
+        },
+        "after": {
+          "sha256": "0c286da0f0210ed01de739bfccd3bee358d80ba03274106a955b023598a9ea85",
+          "metadata": {
+            "people": [
+              {
+                "author": "Word Taylor",
+                "providerId": "AD",
+                "userId": "S::old@summit.example::55555555-5555-5555-5555-555555555555"
+              }
+            ],
+            "revisions": [],
+            "comments": []
+          }
+        }
+      },
+      "observedStatus": {
+        "after": {
+          "author": "Word Taylor",
+          "status": "own"
+        },
+        "before": {
+          "author": "Word Taylor",
+          "status": "own"
+        }
+      },
+      "newCaseScore": 100
+    },
+    {
+      "id": "redline-revision-owner-legacy-name-control",
+      "image": "redline-revision-owner-legacy-name-control.png",
+      "imageSha256": "4fdab9d5c04c9fd73b049370e58409899ba878b3f340ad711647999e5ec4fbbb",
+      "inputs": {
+        "source": {
+          "sha256": "a7ee875f0cbe086b03e1414a2fac14c6926f354ad4947ff3f6e29c6c7da2a0c3",
+          "metadata": {
+            "people": [
+              {
+                "author": "Taylor",
+                "providerId": "AD",
+                "userId": "S::taylor@valley.example::66666666-6666-6666-6666-666666666666"
+              }
+            ],
+            "revisions": [
+              {
+                "type": "insertion",
+                "author": "Taylor",
+                "text": "[paragraph mark]"
+              },
+              {
+                "type": "insertion",
+                "author": "Taylor",
+                "text": "Summit proposed clause."
+              }
+            ],
+            "comments": []
+          }
+        },
+        "before": {
+          "sha256": "b63ec099dc7d4f96f6fd151318fa4eb2ea6683a3b3d2f69d4eab10dad597964e",
+          "metadata": {
+            "people": [
+              {
+                "author": "Taylor",
+                "providerId": "AD",
+                "userId": "S::taylor@valley.example::66666666-6666-6666-6666-666666666666"
+              }
+            ],
+            "revisions": [],
+            "comments": []
+          }
+        },
+        "after": {
+          "sha256": "30f08cb7e8c57db320d418f3dfd5e2c426e301cf405a98c80193d30bba62a7b1",
+          "metadata": {
+            "people": [
+              {
+                "author": "Taylor",
+                "providerId": "AD",
+                "userId": "S::taylor@valley.example::66666666-6666-6666-6666-666666666666"
+              }
+            ],
+            "revisions": [],
+            "comments": []
+          }
+        }
+      },
+      "observedStatus": null,
+      "newCaseScore": 100
+    },
+    {
+      "id": "redline-revision-owner-first-revision",
+      "image": "redline-revision-owner-first-revision.png",
+      "imageSha256": "008a5dc6a1ac068d853206268f06eda9907447155a239783227f472d6d9e2d06",
+      "inputs": {
+        "source": {
+          "sha256": "b22b0ad0d0194e230f841f6ae10e47980d165105b9a1f9eab4ebf4ed7f6b36d0",
+          "metadata": {
+            "people": [],
+            "revisions": [],
+            "comments": []
+          }
+        },
+        "before": {
+          "sha256": "a8d772a9905ea4858603a481d75b141d9e6b9147228c828a3baafd01703023b3",
+          "metadata": {
+            "people": [],
+            "revisions": [
+              {
+                "type": "deletion",
+                "author": "Taylor",
+                "text": "Summit opening."
+              },
+              {
+                "type": "insertion",
+                "author": "Taylor",
+                "text": "Summit revised opening."
+              }
+            ],
+            "comments": []
+          }
+        },
+        "after": {
+          "sha256": "b1f30e57e5cf7fcfd3edab5dda9392b5d6d3a8f02cd84335d91f723ce7083b8d",
+          "metadata": {
+            "people": [
+              {
+                "author": "Taylor",
+                "providerId": "AD",
+                "userId": "S::taylor@summit.example::55555555-5555-5555-5555-555555555555"
+              }
+            ],
+            "revisions": [
+              {
+                "type": "deletion",
+                "author": "Taylor",
+                "text": "Summit opening."
+              },
+              {
+                "type": "insertion",
+                "author": "Taylor",
+                "text": "Summit revised opening."
+              }
+            ],
+            "comments": []
+          }
+        }
+      },
+      "observedStatus": {
+        "after": {
+          "author": "Taylor",
+          "status": "own"
+        },
+        "before": {
+          "author": "Taylor",
+          "status": "free"
+        }
+      },
+      "newCaseScore": 100
+    },
+    {
+      "id": "redline-revision-owner-first-comment",
+      "image": "redline-revision-owner-first-comment.png",
+      "imageSha256": "a34b9bf9d25450952216ddfd476d95cdb437d52a5979026430d372e42ac5b172",
+      "inputs": {
+        "source": {
+          "sha256": "b22b0ad0d0194e230f841f6ae10e47980d165105b9a1f9eab4ebf4ed7f6b36d0",
+          "metadata": {
+            "people": [],
+            "revisions": [],
+            "comments": []
+          }
+        },
+        "before": {
+          "sha256": "00acf447e7f67dfbe456cbb45f1633f2c0ce4a751ac052c2f69afda7e7a4baf0",
+          "metadata": {
+            "people": [],
+            "revisions": [],
+            "comments": [
+              {
+                "author": "Taylor",
+                "text": "Summit account note."
+              }
+            ]
+          }
+        },
+        "after": {
+          "sha256": "e9a9eb5bb6660a871b4ee386a245dd6ffe26eb14af8d57de2c7dd0a6dc2a7908",
+          "metadata": {
+            "people": [
+              {
+                "author": "Taylor",
+                "providerId": "AD",
+                "userId": "S::taylor@summit.example::55555555-5555-5555-5555-555555555555"
+              }
+            ],
+            "revisions": [],
+            "comments": [
+              {
+                "author": "Taylor",
+                "text": "Summit account note."
+              }
+            ]
+          }
+        }
+      },
+      "observedStatus": {
+        "after": {
+          "author": "Taylor",
+          "status": "own"
+        },
+        "before": {
+          "author": "Taylor",
+          "status": "free"
+        }
+      },
+      "newCaseScore": 100
+    }
+  ]
+}

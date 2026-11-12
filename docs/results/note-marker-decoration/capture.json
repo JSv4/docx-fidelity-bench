@@ -1,0 +1,4208 @@
+{
+  "kind": "local public API diagnostics; not production CI",
+  "browser": "143.0.7499.4",
+  "libreoffice": "25.8.7.3",
+  "baselineCommit": "889d713e50a335d62eb50667b9fb0e09b12025b4",
+  "baselineTreeEquivalentTo": "763314857e5fa0ede6efac41630fa941de835058",
+  "candidate": {
+    "baseCommit": "763314857e5fa0ede6efac41630fa941de835058",
+    "files": [
+      {
+        "path": "npm/src/line-metrics.ts",
+        "sha256": "4e2b178fdbca1a55e410dfd8ab1e3e750238f2070f7f9d0c42dc53c69c65d654"
+      },
+      {
+        "path": "npm/src/export-browser.ts",
+        "sha256": "43aee00bd9e4bb28213267f9d046eaca963c1d39c0ea65faf1593f372081d8ff"
+      },
+      {
+        "path": "npm/tests/docx-note-format-revision-fixture.ts",
+        "sha256": "9ffa1298659fcb2df8773f5c033dbdf03937f014a1c3b180dd105150badc3c5e"
+      },
+      {
+        "path": "npm/tests/export-note-format-revision.spec.ts",
+        "sha256": "ca52d0f098f74a76779f010998e98f1f0b7f3dbc4a0636af985e562942c8455d"
+      }
+    ],
+    "sourceCommit": "ac4e6a329a2204d40cb00d3b753f1e35b8ddb528",
+    "uncommittedAtCapture": true,
+    "recordedFilesMatchCommit": true
+  },
+  "publicCaptures": [
+    {
+      "provider": "baseline",
+      "file": "notes-marker-decoration-11pt.docx",
+      "inputSha256": "39c2de20f2b6ef95aaa53aa85a1572ec51bca3e3703d268aa2298336b9be874f",
+      "assetsSha256": "eeaa0193401ab93274b7318f00b4bd5d139c3c6ae7544ab572a4d002136dd179",
+      "status": "failed",
+      "error": {
+        "code": "pagination_failure",
+        "message": "A footnote continuation is clipped in the final page tree."
+      }
+    },
+    {
+      "provider": "baseline",
+      "file": "notes-marker-decoration-11pt5.docx",
+      "inputSha256": "9986140ab7c0b158705d8b03eebbf1f9945397c781e760e4dfd7278098b4fe55",
+      "assetsSha256": "eeaa0193401ab93274b7318f00b4bd5d139c3c6ae7544ab572a4d002136dd179",
+      "status": "failed",
+      "error": {
+        "code": "pagination_failure",
+        "message": "A footnote continuation is clipped in the final page tree."
+      }
+    },
+    {
+      "provider": "baseline",
+      "file": "notes-marker-decoration-12pt-control.docx",
+      "inputSha256": "0975422c1702638bab7415e74655e85493898208c7b0f31943cf2ab6a71aef6e",
+      "assetsSha256": "eeaa0193401ab93274b7318f00b4bd5d139c3c6ae7544ab572a4d002136dd179",
+      "pdfSha256": "5c8cc9828b04758f690b0e05f434c2d29e370fde5d40df37ca939e597125fa6f",
+      "htmlSha256": "97b772f93e5f9f3a6ad5c6f17b858d700b1ef3e390cb0314f78b01d678d8427f",
+      "status": "complete"
+    },
+    {
+      "provider": "baseline",
+      "file": "notes-marker-decoration-12pt5.docx",
+      "inputSha256": "7e59bf8b1491d3a99c99c9a7ba65337d567b65d5b78274c4dceee958330c13de",
+      "assetsSha256": "eeaa0193401ab93274b7318f00b4bd5d139c3c6ae7544ab572a4d002136dd179",
+      "status": "failed",
+      "error": {
+        "code": "pagination_failure",
+        "message": "A footnote continuation is clipped in the final page tree."
+      }
+    },
+    {
+      "provider": "baseline",
+      "file": "notes-marker-decoration-generated-control.docx",
+      "inputSha256": "bf980a754e670cec240f5ae791ab711db46e63c5bff669ed27ebe2115697617c",
+      "assetsSha256": "eeaa0193401ab93274b7318f00b4bd5d139c3c6ae7544ab572a4d002136dd179",
+      "pdfSha256": "50141c6bd520dd0e72f38c8deb09433554c67967d9cc01cd7e8508b2caaa13c3",
+      "htmlSha256": "a911f2087361514f95658b835b70980564094fe73b2954f25bc2cef647e1e315",
+      "status": "complete"
+    },
+    {
+      "provider": "baseline",
+      "file": "notes-marker-decoration-plain-control.docx",
+      "inputSha256": "b3e27954594ad9874b111c8ab2959e7ead7285c834d0c2f74e441436f7e9b7a3",
+      "assetsSha256": "eeaa0193401ab93274b7318f00b4bd5d139c3c6ae7544ab572a4d002136dd179",
+      "pdfSha256": "37a069eb817ddcb4f988c7ab795b1f83c1cb573a36817aaee51deb0adadae407",
+      "htmlSha256": "285d83a83cdf3d90579230e32779bbb4105ffe97eed7dd39c3a438dbcb9f8eb3",
+      "status": "complete"
+    },
+    {
+      "provider": "candidate",
+      "file": "notes-marker-decoration-11pt.docx",
+      "inputSha256": "39c2de20f2b6ef95aaa53aa85a1572ec51bca3e3703d268aa2298336b9be874f",
+      "assetsSha256": "d298c29aa6bca5f52f5fcbfb2a8d72030c64c5b4e62407fc61595853acbc895c",
+      "pdfSha256": "73842136d169e4bcb3ccb37941077b548e916d72262e8c86150a7af1dd3cde8e",
+      "htmlSha256": "b342f5c5478623028d6665cf2bb2dd33c82b0091d8efec134dc07b21710c1b23",
+      "status": "complete"
+    },
+    {
+      "provider": "candidate",
+      "file": "notes-marker-decoration-11pt5.docx",
+      "inputSha256": "9986140ab7c0b158705d8b03eebbf1f9945397c781e760e4dfd7278098b4fe55",
+      "assetsSha256": "d298c29aa6bca5f52f5fcbfb2a8d72030c64c5b4e62407fc61595853acbc895c",
+      "pdfSha256": "2094555d49b03dc478ce16db7bd9481fee07e8d71a771ea8f590c26d607957d5",
+      "htmlSha256": "fc229a76531a8682601260c238900ad82eaa1963611e1d8d3279c284e791963a",
+      "status": "complete"
+    },
+    {
+      "provider": "candidate",
+      "file": "notes-marker-decoration-12pt-control.docx",
+      "inputSha256": "0975422c1702638bab7415e74655e85493898208c7b0f31943cf2ab6a71aef6e",
+      "assetsSha256": "d298c29aa6bca5f52f5fcbfb2a8d72030c64c5b4e62407fc61595853acbc895c",
+      "pdfSha256": "61fa61eb05ade47a0c564a20b45f18952b2eacb2fd9ea2e53a694ffc25153a78",
+      "htmlSha256": "97b772f93e5f9f3a6ad5c6f17b858d700b1ef3e390cb0314f78b01d678d8427f",
+      "status": "complete"
+    },
+    {
+      "provider": "candidate",
+      "file": "notes-marker-decoration-12pt5.docx",
+      "inputSha256": "7e59bf8b1491d3a99c99c9a7ba65337d567b65d5b78274c4dceee958330c13de",
+      "assetsSha256": "d298c29aa6bca5f52f5fcbfb2a8d72030c64c5b4e62407fc61595853acbc895c",
+      "pdfSha256": "43dcff6a279cd9cd09a4b668c9e31e0d485d083088862e55082fee5f5372999b",
+      "htmlSha256": "3b48209c0c45f9857e980c002e4c299f850b426e3687836e351722a5062b6e12",
+      "status": "complete"
+    },
+    {
+      "provider": "candidate",
+      "file": "notes-marker-decoration-generated-control.docx",
+      "inputSha256": "bf980a754e670cec240f5ae791ab711db46e63c5bff669ed27ebe2115697617c",
+      "assetsSha256": "d298c29aa6bca5f52f5fcbfb2a8d72030c64c5b4e62407fc61595853acbc895c",
+      "pdfSha256": "f8bf7c8ac531041de85c5632a7284b040a1e5889cd33e130d5c5767d62584ac0",
+      "htmlSha256": "a911f2087361514f95658b835b70980564094fe73b2954f25bc2cef647e1e315",
+      "status": "complete"
+    },
+    {
+      "provider": "candidate",
+      "file": "notes-marker-decoration-plain-control.docx",
+      "inputSha256": "b3e27954594ad9874b111c8ab2959e7ead7285c834d0c2f74e441436f7e9b7a3",
+      "assetsSha256": "d298c29aa6bca5f52f5fcbfb2a8d72030c64c5b4e62407fc61595853acbc895c",
+      "pdfSha256": "a76065009a487f8233c133a5aea1911a24930f007d3ca012fb27fb2e0d43f8cc",
+      "htmlSha256": "285d83a83cdf3d90579230e32779bbb4105ffe97eed7dd39c3a438dbcb9f8eb3",
+      "status": "complete"
+    }
+  ],
+  "cases": [
+    {
+      "id": "notes-marker-decoration-11pt",
+      "inputSha256": "39c2de20f2b6ef95aaa53aa85a1572ec51bca3e3703d268aa2298336b9be874f",
+      "providers": {
+        "libreoffice": {
+          "pdfSha256": "fc4772bd86221646a389201731cd1bfce5039ac0603fa8bc8220cbea6321a08e",
+          "inspection": {
+            "geometry": [
+              {
+                "media": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "crop": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "rotation": 0,
+                "userUnit": 1
+              }
+            ],
+            "words": [
+              {
+                "text": "FirCite",
+                "page": 1,
+                "rect": [
+                  72.1,
+                  72.508,
+                  106.024,
+                  85.792
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  109.048,
+                  72.508,
+                  127.66,
+                  85.792
+                ]
+              },
+              {
+                "text": "inventory",
+                "page": 1,
+                "rect": [
+                  130.684,
+                  72.508,
+                  176.608,
+                  85.792
+                ]
+              },
+              {
+                "text": "cites",
+                "page": 1,
+                "rect": [
+                  179.608,
+                  72.508,
+                  201.592,
+                  85.792
+                ]
+              },
+              {
+                "text": "one",
+                "page": 1,
+                "rect": [
+                  204.568,
+                  72.508,
+                  221.884,
+                  85.792
+                ]
+              },
+              {
+                "text": "note.",
+                "page": 1,
+                "rect": [
+                  224.908,
+                  72.508,
+                  248.548,
+                  85.792
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  248.7,
+                  72.263,
+                  252.2,
+                  80.012
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  72.1,
+                  708.89,
+                  77.1,
+                  719.96
+                ]
+              },
+              {
+                "text": "FirNote",
+                "page": 1,
+                "rect": [
+                  79.6,
+                  708.89,
+                  110.66,
+                  719.96
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  113.17,
+                  708.89,
+                  128.7,
+                  719.96
+                ]
+              },
+              {
+                "text": "eastern",
+                "page": 1,
+                "rect": [
+                  131.21,
+                  708.89,
+                  159.47,
+                  719.96
+                ]
+              },
+              {
+                "text": "shelf",
+                "page": 1,
+                "rect": [
+                  161.97,
+                  708.89,
+                  181.38,
+                  719.96
+                ]
+              },
+              {
+                "text": "holds",
+                "page": 1,
+                "rect": [
+                  183.89,
+                  708.89,
+                  205.53,
+                  719.96
+                ]
+              },
+              {
+                "text": "the",
+                "page": 1,
+                "rect": [
+                  208.03,
+                  708.89,
+                  220.25,
+                  719.96
+                ]
+              },
+              {
+                "text": "spare",
+                "page": 1,
+                "rect": [
+                  222.72,
+                  708.89,
+                  243.82,
+                  719.96
+                ]
+              },
+              {
+                "text": "slate.",
+                "page": 1,
+                "rect": [
+                  246.29,
+                  708.89,
+                  267.1,
+                  719.96
+                ]
+              }
+            ],
+            "tokens": {
+              "1": 2,
+              "FirCite": 1,
+              "The": 2,
+              "inventory": 1,
+              "cites": 1,
+              "one": 1,
+              "note.": 1,
+              "FirNote": 1,
+              "eastern": 1,
+              "shelf": 1,
+              "holds": 1,
+              "the": 1,
+              "spare": 1,
+              "slate.": 1
+            },
+            "fonts": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          "rasters": [
+            {
+              "path": "libreoffice/notes-marker-decoration-11pt-raster/page-1.ppm",
+              "sha256": "92f6986554de851a4f0425e6b054f1556b73016670d3ffb5e83bf8e228bc7cb3"
+            }
+          ],
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "TimesNewRomanPSMT"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ]
+              }
+            }
+          ],
+          "passed": true,
+          "pagePngSha256": "a05f3aead242eba60060d487fbb1a25f4c3d8a3c343ba655159243f37f4bf04b"
+        },
+        "baseline": {
+          "status": "export-failed"
+        },
+        "candidate": {
+          "pdfSha256": "73842136d169e4bcb3ccb37941077b548e916d72262e8c86150a7af1dd3cde8e",
+          "inspection": {
+            "geometry": [
+              {
+                "media": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "crop": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "rotation": 0,
+                "userUnit": 1
+              }
+            ],
+            "words": [
+              {
+                "text": "FirCite",
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  72.556638,
+                  106.001949,
+                  85.8457
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  108.785152,
+                  72.556638,
+                  127.441401,
+                  85.8457
+                ]
+              },
+              {
+                "text": "inventory",
+                "page": 1,
+                "rect": [
+                  130.441401,
+                  72.556638,
+                  176.431633,
+                  85.8457
+                ]
+              },
+              {
+                "text": "cites",
+                "page": 1,
+                "rect": [
+                  179.431633,
+                  72.556638,
+                  201.421867,
+                  85.8457
+                ]
+              },
+              {
+                "text": "one",
+                "page": 1,
+                "rect": [
+                  204.421867,
+                  72.556638,
+                  221.748038,
+                  85.8457
+                ]
+              },
+              {
+                "text": "note.",
+                "page": 1,
+                "rect": [
+                  224.748038,
+                  72.556638,
+                  248.408193,
+                  85.8457
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  248.414052,
+                  72.162595,
+                  252.314052,
+                  80.800485
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  708.516877,
+                  75.247497,
+                  715.709582
+                ]
+              },
+              {
+                "text": "FirNote",
+                "page": 1,
+                "rect": [
+                  77.745114,
+                  708.841066,
+                  108.842007,
+                  719.912515
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  111.159789,
+                  708.841066,
+                  126.701221,
+                  719.912515
+                ]
+              },
+              {
+                "text": "eastern",
+                "page": 1,
+                "rect": [
+                  129.199626,
+                  708.841066,
+                  157.504725,
+                  719.912515
+                ]
+              },
+              {
+                "text": "shelf",
+                "page": 1,
+                "rect": [
+                  160.003045,
+                  708.841066,
+                  179.434413,
+                  719.912515
+                ]
+              },
+              {
+                "text": "holds",
+                "page": 1,
+                "rect": [
+                  181.932969,
+                  708.841066,
+                  203.594978,
+                  719.912515
+                ]
+              },
+              {
+                "text": "the",
+                "page": 1,
+                "rect": [
+                  206.09346,
+                  708.841066,
+                  218.306114,
+                  719.912515
+                ]
+              },
+              {
+                "text": "spare",
+                "page": 1,
+                "rect": [
+                  220.804519,
+                  708.841066,
+                  241.895545,
+                  719.912515
+                ]
+              },
+              {
+                "text": "slate.",
+                "page": 1,
+                "rect": [
+                  244.393949,
+                  708.841066,
+                  265.211389,
+                  719.912515
+                ]
+              }
+            ],
+            "tokens": {
+              "1": 2,
+              "FirCite": 1,
+              "The": 2,
+              "inventory": 1,
+              "cites": 1,
+              "one": 1,
+              "note.": 1,
+              "FirNote": 1,
+              "eastern": 1,
+              "shelf": 1,
+              "holds": 1,
+              "the": 1,
+              "spare": 1,
+              "slate.": 1
+            },
+            "fonts": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          "rasters": [
+            {
+              "path": "candidate/notes-marker-decoration-11pt-raster/page-1.ppm",
+              "sha256": "9d088daf3c4353747a8d2e566d6c37f01b93092c114e0709559e525547d170f3"
+            }
+          ],
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "TimesNewRomanPSMT"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ]
+              }
+            }
+          ],
+          "passed": true,
+          "pagePngSha256": "b86e8c4948e3547dbb496be00d49c3641edfc96a81a084d684840a0abb60b867"
+        }
+      },
+      "sheet": {
+        "path": "notes-marker-decoration-11pt.png",
+        "sha256": "cc23bf1fb59bfbc092a2bf2fd1910de019d3e642d860f5b48f0ade9bd18b4e85"
+      }
+    },
+    {
+      "id": "notes-marker-decoration-11pt5",
+      "inputSha256": "9986140ab7c0b158705d8b03eebbf1f9945397c781e760e4dfd7278098b4fe55",
+      "providers": {
+        "libreoffice": {
+          "pdfSha256": "adf4d556cbdff90f11315cf7e2987d5a3490696e3bc86a6942c063239c491f1f",
+          "inspection": {
+            "geometry": [
+              {
+                "media": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "crop": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "rotation": 0,
+                "userUnit": 1
+              }
+            ],
+            "words": [
+              {
+                "text": "FirCite",
+                "page": 1,
+                "rect": [
+                  72.1,
+                  72.508,
+                  106.024,
+                  85.792
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  109.048,
+                  72.508,
+                  127.66,
+                  85.792
+                ]
+              },
+              {
+                "text": "inventory",
+                "page": 1,
+                "rect": [
+                  130.684,
+                  72.508,
+                  176.608,
+                  85.792
+                ]
+              },
+              {
+                "text": "cites",
+                "page": 1,
+                "rect": [
+                  179.608,
+                  72.508,
+                  201.592,
+                  85.792
+                ]
+              },
+              {
+                "text": "one",
+                "page": 1,
+                "rect": [
+                  204.568,
+                  72.508,
+                  221.884,
+                  85.792
+                ]
+              },
+              {
+                "text": "note.",
+                "page": 1,
+                "rect": [
+                  224.908,
+                  72.508,
+                  248.548,
+                  85.792
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  248.7,
+                  72.263,
+                  252.2,
+                  80.012
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  72.1,
+                  708.89,
+                  77.1,
+                  719.96
+                ]
+              },
+              {
+                "text": "FirNote",
+                "page": 1,
+                "rect": [
+                  79.6,
+                  708.89,
+                  110.66,
+                  719.96
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  113.17,
+                  708.89,
+                  128.7,
+                  719.96
+                ]
+              },
+              {
+                "text": "eastern",
+                "page": 1,
+                "rect": [
+                  131.21,
+                  708.89,
+                  159.47,
+                  719.96
+                ]
+              },
+              {
+                "text": "shelf",
+                "page": 1,
+                "rect": [
+                  161.97,
+                  708.89,
+                  181.38,
+                  719.96
+                ]
+              },
+              {
+                "text": "holds",
+                "page": 1,
+                "rect": [
+                  183.89,
+                  708.89,
+                  205.53,
+                  719.96
+                ]
+              },
+              {
+                "text": "the",
+                "page": 1,
+                "rect": [
+                  208.03,
+                  708.89,
+                  220.25,
+                  719.96
+                ]
+              },
+              {
+                "text": "spare",
+                "page": 1,
+                "rect": [
+                  222.72,
+                  708.89,
+                  243.82,
+                  719.96
+                ]
+              },
+              {
+                "text": "slate.",
+                "page": 1,
+                "rect": [
+                  246.29,
+                  708.89,
+                  267.1,
+                  719.96
+                ]
+              }
+            ],
+            "tokens": {
+              "1": 2,
+              "FirCite": 1,
+              "The": 2,
+              "inventory": 1,
+              "cites": 1,
+              "one": 1,
+              "note.": 1,
+              "FirNote": 1,
+              "eastern": 1,
+              "shelf": 1,
+              "holds": 1,
+              "the": 1,
+              "spare": 1,
+              "slate.": 1
+            },
+            "fonts": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          "rasters": [
+            {
+              "path": "libreoffice/notes-marker-decoration-11pt5-raster/page-1.ppm",
+              "sha256": "92f6986554de851a4f0425e6b054f1556b73016670d3ffb5e83bf8e228bc7cb3"
+            }
+          ],
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "TimesNewRomanPSMT"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ]
+              }
+            }
+          ],
+          "passed": true,
+          "pagePngSha256": "a05f3aead242eba60060d487fbb1a25f4c3d8a3c343ba655159243f37f4bf04b"
+        },
+        "baseline": {
+          "status": "export-failed"
+        },
+        "candidate": {
+          "pdfSha256": "2094555d49b03dc478ce16db7bd9481fee07e8d71a771ea8f590c26d607957d5",
+          "inspection": {
+            "geometry": [
+              {
+                "media": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "crop": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "rotation": 0,
+                "userUnit": 1
+              }
+            ],
+            "words": [
+              {
+                "text": "FirCite",
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  72.556638,
+                  106.001949,
+                  85.8457
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  108.785152,
+                  72.556638,
+                  127.441401,
+                  85.8457
+                ]
+              },
+              {
+                "text": "inventory",
+                "page": 1,
+                "rect": [
+                  130.441401,
+                  72.556638,
+                  176.431633,
+                  85.8457
+                ]
+              },
+              {
+                "text": "cites",
+                "page": 1,
+                "rect": [
+                  179.431633,
+                  72.556638,
+                  201.421867,
+                  85.8457
+                ]
+              },
+              {
+                "text": "one",
+                "page": 1,
+                "rect": [
+                  204.421867,
+                  72.556638,
+                  221.748038,
+                  85.8457
+                ]
+              },
+              {
+                "text": "note.",
+                "page": 1,
+                "rect": [
+                  224.748038,
+                  72.556638,
+                  248.408193,
+                  85.8457
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  248.414052,
+                  72.162595,
+                  252.314052,
+                  80.800485
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  708.516877,
+                  75.247497,
+                  715.709582
+                ]
+              },
+              {
+                "text": "FirNote",
+                "page": 1,
+                "rect": [
+                  77.745114,
+                  708.841066,
+                  108.842007,
+                  719.912515
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  111.159789,
+                  708.841066,
+                  126.701221,
+                  719.912515
+                ]
+              },
+              {
+                "text": "eastern",
+                "page": 1,
+                "rect": [
+                  129.199626,
+                  708.841066,
+                  157.504725,
+                  719.912515
+                ]
+              },
+              {
+                "text": "shelf",
+                "page": 1,
+                "rect": [
+                  160.003045,
+                  708.841066,
+                  179.434413,
+                  719.912515
+                ]
+              },
+              {
+                "text": "holds",
+                "page": 1,
+                "rect": [
+                  181.932969,
+                  708.841066,
+                  203.594978,
+                  719.912515
+                ]
+              },
+              {
+                "text": "the",
+                "page": 1,
+                "rect": [
+                  206.09346,
+                  708.841066,
+                  218.306114,
+                  719.912515
+                ]
+              },
+              {
+                "text": "spare",
+                "page": 1,
+                "rect": [
+                  220.804519,
+                  708.841066,
+                  241.895545,
+                  719.912515
+                ]
+              },
+              {
+                "text": "slate.",
+                "page": 1,
+                "rect": [
+                  244.393949,
+                  708.841066,
+                  265.211389,
+                  719.912515
+                ]
+              }
+            ],
+            "tokens": {
+              "1": 2,
+              "FirCite": 1,
+              "The": 2,
+              "inventory": 1,
+              "cites": 1,
+              "one": 1,
+              "note.": 1,
+              "FirNote": 1,
+              "eastern": 1,
+              "shelf": 1,
+              "holds": 1,
+              "the": 1,
+              "spare": 1,
+              "slate.": 1
+            },
+            "fonts": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          "rasters": [
+            {
+              "path": "candidate/notes-marker-decoration-11pt5-raster/page-1.ppm",
+              "sha256": "9d088daf3c4353747a8d2e566d6c37f01b93092c114e0709559e525547d170f3"
+            }
+          ],
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "TimesNewRomanPSMT"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ]
+              }
+            }
+          ],
+          "passed": true,
+          "pagePngSha256": "b86e8c4948e3547dbb496be00d49c3641edfc96a81a084d684840a0abb60b867"
+        }
+      },
+      "sheet": {
+        "path": "notes-marker-decoration-11pt5.png",
+        "sha256": "a3ee8a64ffe2fe4f6b1e0dea6deebd2c01b1879f106f4800eaace3084d3ea0d7"
+      }
+    },
+    {
+      "id": "notes-marker-decoration-12pt-control",
+      "inputSha256": "0975422c1702638bab7415e74655e85493898208c7b0f31943cf2ab6a71aef6e",
+      "providers": {
+        "libreoffice": {
+          "pdfSha256": "6a6d6207b8b9aaae058e390a51434f984b7e95627693954820bbcba6cc48f57d",
+          "inspection": {
+            "geometry": [
+              {
+                "media": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "crop": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "rotation": 0,
+                "userUnit": 1
+              }
+            ],
+            "words": [
+              {
+                "text": "FirCite",
+                "page": 1,
+                "rect": [
+                  72.1,
+                  72.508,
+                  106.024,
+                  85.792
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  109.048,
+                  72.508,
+                  127.66,
+                  85.792
+                ]
+              },
+              {
+                "text": "inventory",
+                "page": 1,
+                "rect": [
+                  130.684,
+                  72.508,
+                  176.608,
+                  85.792
+                ]
+              },
+              {
+                "text": "cites",
+                "page": 1,
+                "rect": [
+                  179.608,
+                  72.508,
+                  201.592,
+                  85.792
+                ]
+              },
+              {
+                "text": "one",
+                "page": 1,
+                "rect": [
+                  204.568,
+                  72.508,
+                  221.884,
+                  85.792
+                ]
+              },
+              {
+                "text": "note.",
+                "page": 1,
+                "rect": [
+                  224.908,
+                  72.508,
+                  248.548,
+                  85.792
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  248.7,
+                  72.263,
+                  252.2,
+                  80.012
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  72.1,
+                  708.89,
+                  77.1,
+                  719.96
+                ]
+              },
+              {
+                "text": "FirNote",
+                "page": 1,
+                "rect": [
+                  79.6,
+                  708.89,
+                  110.66,
+                  719.96
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  113.17,
+                  708.89,
+                  128.7,
+                  719.96
+                ]
+              },
+              {
+                "text": "eastern",
+                "page": 1,
+                "rect": [
+                  131.21,
+                  708.89,
+                  159.47,
+                  719.96
+                ]
+              },
+              {
+                "text": "shelf",
+                "page": 1,
+                "rect": [
+                  161.97,
+                  708.89,
+                  181.38,
+                  719.96
+                ]
+              },
+              {
+                "text": "holds",
+                "page": 1,
+                "rect": [
+                  183.89,
+                  708.89,
+                  205.53,
+                  719.96
+                ]
+              },
+              {
+                "text": "the",
+                "page": 1,
+                "rect": [
+                  208.03,
+                  708.89,
+                  220.25,
+                  719.96
+                ]
+              },
+              {
+                "text": "spare",
+                "page": 1,
+                "rect": [
+                  222.72,
+                  708.89,
+                  243.82,
+                  719.96
+                ]
+              },
+              {
+                "text": "slate.",
+                "page": 1,
+                "rect": [
+                  246.29,
+                  708.89,
+                  267.1,
+                  719.96
+                ]
+              }
+            ],
+            "tokens": {
+              "1": 2,
+              "FirCite": 1,
+              "The": 2,
+              "inventory": 1,
+              "cites": 1,
+              "one": 1,
+              "note.": 1,
+              "FirNote": 1,
+              "eastern": 1,
+              "shelf": 1,
+              "holds": 1,
+              "the": 1,
+              "spare": 1,
+              "slate.": 1
+            },
+            "fonts": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          "rasters": [
+            {
+              "path": "libreoffice/notes-marker-decoration-12pt-control-raster/page-1.ppm",
+              "sha256": "92f6986554de851a4f0425e6b054f1556b73016670d3ffb5e83bf8e228bc7cb3"
+            }
+          ],
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "TimesNewRomanPSMT"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ]
+              }
+            }
+          ],
+          "passed": true,
+          "pagePngSha256": "a05f3aead242eba60060d487fbb1a25f4c3d8a3c343ba655159243f37f4bf04b"
+        },
+        "baseline": {
+          "pdfSha256": "5c8cc9828b04758f690b0e05f434c2d29e370fde5d40df37ca939e597125fa6f",
+          "inspection": {
+            "geometry": [
+              {
+                "media": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "crop": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "rotation": 0,
+                "userUnit": 1
+              }
+            ],
+            "words": [
+              {
+                "text": "FirCite",
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  72.556638,
+                  106.001949,
+                  85.8457
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  108.785152,
+                  72.556638,
+                  127.441401,
+                  85.8457
+                ]
+              },
+              {
+                "text": "inventory",
+                "page": 1,
+                "rect": [
+                  130.441401,
+                  72.556638,
+                  176.431633,
+                  85.8457
+                ]
+              },
+              {
+                "text": "cites",
+                "page": 1,
+                "rect": [
+                  179.431633,
+                  72.556638,
+                  201.421867,
+                  85.8457
+                ]
+              },
+              {
+                "text": "one",
+                "page": 1,
+                "rect": [
+                  204.421867,
+                  72.556638,
+                  221.748038,
+                  85.8457
+                ]
+              },
+              {
+                "text": "note.",
+                "page": 1,
+                "rect": [
+                  224.748038,
+                  72.556638,
+                  248.408193,
+                  85.8457
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  248.414052,
+                  72.162595,
+                  252.314052,
+                  80.800485
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  708.516877,
+                  75.247497,
+                  715.709582
+                ]
+              },
+              {
+                "text": "FirNote",
+                "page": 1,
+                "rect": [
+                  77.745114,
+                  708.841066,
+                  108.842007,
+                  719.912515
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  111.159789,
+                  708.841066,
+                  126.701221,
+                  719.912515
+                ]
+              },
+              {
+                "text": "eastern",
+                "page": 1,
+                "rect": [
+                  129.199626,
+                  708.841066,
+                  157.504725,
+                  719.912515
+                ]
+              },
+              {
+                "text": "shelf",
+                "page": 1,
+                "rect": [
+                  160.003045,
+                  708.841066,
+                  179.434413,
+                  719.912515
+                ]
+              },
+              {
+                "text": "holds",
+                "page": 1,
+                "rect": [
+                  181.932969,
+                  708.841066,
+                  203.594978,
+                  719.912515
+                ]
+              },
+              {
+                "text": "the",
+                "page": 1,
+                "rect": [
+                  206.09346,
+                  708.841066,
+                  218.306114,
+                  719.912515
+                ]
+              },
+              {
+                "text": "spare",
+                "page": 1,
+                "rect": [
+                  220.804519,
+                  708.841066,
+                  241.895545,
+                  719.912515
+                ]
+              },
+              {
+                "text": "slate.",
+                "page": 1,
+                "rect": [
+                  244.393949,
+                  708.841066,
+                  265.211389,
+                  719.912515
+                ]
+              }
+            ],
+            "tokens": {
+              "1": 2,
+              "FirCite": 1,
+              "The": 2,
+              "inventory": 1,
+              "cites": 1,
+              "one": 1,
+              "note.": 1,
+              "FirNote": 1,
+              "eastern": 1,
+              "shelf": 1,
+              "holds": 1,
+              "the": 1,
+              "spare": 1,
+              "slate.": 1
+            },
+            "fonts": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          "rasters": [
+            {
+              "path": "baseline/notes-marker-decoration-12pt-control-raster/page-1.ppm",
+              "sha256": "9d088daf3c4353747a8d2e566d6c37f01b93092c114e0709559e525547d170f3"
+            }
+          ],
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "TimesNewRomanPSMT"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ]
+              }
+            }
+          ],
+          "passed": true,
+          "pagePngSha256": "b86e8c4948e3547dbb496be00d49c3641edfc96a81a084d684840a0abb60b867"
+        },
+        "candidate": {
+          "pdfSha256": "61fa61eb05ade47a0c564a20b45f18952b2eacb2fd9ea2e53a694ffc25153a78",
+          "inspection": {
+            "geometry": [
+              {
+                "media": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "crop": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "rotation": 0,
+                "userUnit": 1
+              }
+            ],
+            "words": [
+              {
+                "text": "FirCite",
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  72.556638,
+                  106.001949,
+                  85.8457
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  108.785152,
+                  72.556638,
+                  127.441401,
+                  85.8457
+                ]
+              },
+              {
+                "text": "inventory",
+                "page": 1,
+                "rect": [
+                  130.441401,
+                  72.556638,
+                  176.431633,
+                  85.8457
+                ]
+              },
+              {
+                "text": "cites",
+                "page": 1,
+                "rect": [
+                  179.431633,
+                  72.556638,
+                  201.421867,
+                  85.8457
+                ]
+              },
+              {
+                "text": "one",
+                "page": 1,
+                "rect": [
+                  204.421867,
+                  72.556638,
+                  221.748038,
+                  85.8457
+                ]
+              },
+              {
+                "text": "note.",
+                "page": 1,
+                "rect": [
+                  224.748038,
+                  72.556638,
+                  248.408193,
+                  85.8457
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  248.414052,
+                  72.162595,
+                  252.314052,
+                  80.800485
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  708.516877,
+                  75.247497,
+                  715.709582
+                ]
+              },
+              {
+                "text": "FirNote",
+                "page": 1,
+                "rect": [
+                  77.745114,
+                  708.841066,
+                  108.842007,
+                  719.912515
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  111.159789,
+                  708.841066,
+                  126.701221,
+                  719.912515
+                ]
+              },
+              {
+                "text": "eastern",
+                "page": 1,
+                "rect": [
+                  129.199626,
+                  708.841066,
+                  157.504725,
+                  719.912515
+                ]
+              },
+              {
+                "text": "shelf",
+                "page": 1,
+                "rect": [
+                  160.003045,
+                  708.841066,
+                  179.434413,
+                  719.912515
+                ]
+              },
+              {
+                "text": "holds",
+                "page": 1,
+                "rect": [
+                  181.932969,
+                  708.841066,
+                  203.594978,
+                  719.912515
+                ]
+              },
+              {
+                "text": "the",
+                "page": 1,
+                "rect": [
+                  206.09346,
+                  708.841066,
+                  218.306114,
+                  719.912515
+                ]
+              },
+              {
+                "text": "spare",
+                "page": 1,
+                "rect": [
+                  220.804519,
+                  708.841066,
+                  241.895545,
+                  719.912515
+                ]
+              },
+              {
+                "text": "slate.",
+                "page": 1,
+                "rect": [
+                  244.393949,
+                  708.841066,
+                  265.211389,
+                  719.912515
+                ]
+              }
+            ],
+            "tokens": {
+              "1": 2,
+              "FirCite": 1,
+              "The": 2,
+              "inventory": 1,
+              "cites": 1,
+              "one": 1,
+              "note.": 1,
+              "FirNote": 1,
+              "eastern": 1,
+              "shelf": 1,
+              "holds": 1,
+              "the": 1,
+              "spare": 1,
+              "slate.": 1
+            },
+            "fonts": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          "rasters": [
+            {
+              "path": "candidate/notes-marker-decoration-12pt-control-raster/page-1.ppm",
+              "sha256": "9d088daf3c4353747a8d2e566d6c37f01b93092c114e0709559e525547d170f3"
+            }
+          ],
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "TimesNewRomanPSMT"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ]
+              }
+            }
+          ],
+          "passed": true,
+          "pagePngSha256": "b86e8c4948e3547dbb496be00d49c3641edfc96a81a084d684840a0abb60b867"
+        }
+      },
+      "sheet": {
+        "path": "notes-marker-decoration-12pt-control.png",
+        "sha256": "980f4621913f36b5aa2682750a326dee0bcd6d3334e21d11954db69aac718629"
+      }
+    },
+    {
+      "id": "notes-marker-decoration-12pt5",
+      "inputSha256": "7e59bf8b1491d3a99c99c9a7ba65337d567b65d5b78274c4dceee958330c13de",
+      "providers": {
+        "libreoffice": {
+          "pdfSha256": "9b1e5812daa7edd850634fd08113daacbdea9c9b9b877725208603842382ede4",
+          "inspection": {
+            "geometry": [
+              {
+                "media": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "crop": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "rotation": 0,
+                "userUnit": 1
+              }
+            ],
+            "words": [
+              {
+                "text": "FirCite",
+                "page": 1,
+                "rect": [
+                  72.1,
+                  72.508,
+                  106.024,
+                  85.792
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  109.048,
+                  72.508,
+                  127.66,
+                  85.792
+                ]
+              },
+              {
+                "text": "inventory",
+                "page": 1,
+                "rect": [
+                  130.684,
+                  72.508,
+                  176.608,
+                  85.792
+                ]
+              },
+              {
+                "text": "cites",
+                "page": 1,
+                "rect": [
+                  179.608,
+                  72.508,
+                  201.592,
+                  85.792
+                ]
+              },
+              {
+                "text": "one",
+                "page": 1,
+                "rect": [
+                  204.568,
+                  72.508,
+                  221.884,
+                  85.792
+                ]
+              },
+              {
+                "text": "note.",
+                "page": 1,
+                "rect": [
+                  224.908,
+                  72.508,
+                  248.548,
+                  85.792
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  248.7,
+                  72.263,
+                  252.2,
+                  80.012
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  72.1,
+                  708.89,
+                  77.1,
+                  719.96
+                ]
+              },
+              {
+                "text": "FirNote",
+                "page": 1,
+                "rect": [
+                  79.6,
+                  708.89,
+                  110.66,
+                  719.96
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  113.17,
+                  708.89,
+                  128.7,
+                  719.96
+                ]
+              },
+              {
+                "text": "eastern",
+                "page": 1,
+                "rect": [
+                  131.21,
+                  708.89,
+                  159.47,
+                  719.96
+                ]
+              },
+              {
+                "text": "shelf",
+                "page": 1,
+                "rect": [
+                  161.97,
+                  708.89,
+                  181.38,
+                  719.96
+                ]
+              },
+              {
+                "text": "holds",
+                "page": 1,
+                "rect": [
+                  183.89,
+                  708.89,
+                  205.53,
+                  719.96
+                ]
+              },
+              {
+                "text": "the",
+                "page": 1,
+                "rect": [
+                  208.03,
+                  708.89,
+                  220.25,
+                  719.96
+                ]
+              },
+              {
+                "text": "spare",
+                "page": 1,
+                "rect": [
+                  222.72,
+                  708.89,
+                  243.82,
+                  719.96
+                ]
+              },
+              {
+                "text": "slate.",
+                "page": 1,
+                "rect": [
+                  246.29,
+                  708.89,
+                  267.1,
+                  719.96
+                ]
+              }
+            ],
+            "tokens": {
+              "1": 2,
+              "FirCite": 1,
+              "The": 2,
+              "inventory": 1,
+              "cites": 1,
+              "one": 1,
+              "note.": 1,
+              "FirNote": 1,
+              "eastern": 1,
+              "shelf": 1,
+              "holds": 1,
+              "the": 1,
+              "spare": 1,
+              "slate.": 1
+            },
+            "fonts": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          "rasters": [
+            {
+              "path": "libreoffice/notes-marker-decoration-12pt5-raster/page-1.ppm",
+              "sha256": "92f6986554de851a4f0425e6b054f1556b73016670d3ffb5e83bf8e228bc7cb3"
+            }
+          ],
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "TimesNewRomanPSMT"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ]
+              }
+            }
+          ],
+          "passed": true,
+          "pagePngSha256": "a05f3aead242eba60060d487fbb1a25f4c3d8a3c343ba655159243f37f4bf04b"
+        },
+        "baseline": {
+          "status": "export-failed"
+        },
+        "candidate": {
+          "pdfSha256": "43dcff6a279cd9cd09a4b668c9e31e0d485d083088862e55082fee5f5372999b",
+          "inspection": {
+            "geometry": [
+              {
+                "media": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "crop": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "rotation": 0,
+                "userUnit": 1
+              }
+            ],
+            "words": [
+              {
+                "text": "FirCite",
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  72.556638,
+                  106.001949,
+                  85.8457
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  108.785152,
+                  72.556638,
+                  127.441401,
+                  85.8457
+                ]
+              },
+              {
+                "text": "inventory",
+                "page": 1,
+                "rect": [
+                  130.441401,
+                  72.556638,
+                  176.431633,
+                  85.8457
+                ]
+              },
+              {
+                "text": "cites",
+                "page": 1,
+                "rect": [
+                  179.431633,
+                  72.556638,
+                  201.421867,
+                  85.8457
+                ]
+              },
+              {
+                "text": "one",
+                "page": 1,
+                "rect": [
+                  204.421867,
+                  72.556638,
+                  221.748038,
+                  85.8457
+                ]
+              },
+              {
+                "text": "note.",
+                "page": 1,
+                "rect": [
+                  224.748038,
+                  72.556638,
+                  248.408193,
+                  85.8457
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  248.414052,
+                  72.162595,
+                  252.314052,
+                  80.800485
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  708.516877,
+                  75.247497,
+                  715.709582
+                ]
+              },
+              {
+                "text": "FirNote",
+                "page": 1,
+                "rect": [
+                  77.745114,
+                  708.841066,
+                  108.842007,
+                  719.912515
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  111.159789,
+                  708.841066,
+                  126.701221,
+                  719.912515
+                ]
+              },
+              {
+                "text": "eastern",
+                "page": 1,
+                "rect": [
+                  129.199626,
+                  708.841066,
+                  157.504725,
+                  719.912515
+                ]
+              },
+              {
+                "text": "shelf",
+                "page": 1,
+                "rect": [
+                  160.003045,
+                  708.841066,
+                  179.434413,
+                  719.912515
+                ]
+              },
+              {
+                "text": "holds",
+                "page": 1,
+                "rect": [
+                  181.932969,
+                  708.841066,
+                  203.594978,
+                  719.912515
+                ]
+              },
+              {
+                "text": "the",
+                "page": 1,
+                "rect": [
+                  206.09346,
+                  708.841066,
+                  218.306114,
+                  719.912515
+                ]
+              },
+              {
+                "text": "spare",
+                "page": 1,
+                "rect": [
+                  220.804519,
+                  708.841066,
+                  241.895545,
+                  719.912515
+                ]
+              },
+              {
+                "text": "slate.",
+                "page": 1,
+                "rect": [
+                  244.393949,
+                  708.841066,
+                  265.211389,
+                  719.912515
+                ]
+              }
+            ],
+            "tokens": {
+              "1": 2,
+              "FirCite": 1,
+              "The": 2,
+              "inventory": 1,
+              "cites": 1,
+              "one": 1,
+              "note.": 1,
+              "FirNote": 1,
+              "eastern": 1,
+              "shelf": 1,
+              "holds": 1,
+              "the": 1,
+              "spare": 1,
+              "slate.": 1
+            },
+            "fonts": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          "rasters": [
+            {
+              "path": "candidate/notes-marker-decoration-12pt5-raster/page-1.ppm",
+              "sha256": "9d088daf3c4353747a8d2e566d6c37f01b93092c114e0709559e525547d170f3"
+            }
+          ],
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "TimesNewRomanPSMT"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ]
+              }
+            }
+          ],
+          "passed": true,
+          "pagePngSha256": "b86e8c4948e3547dbb496be00d49c3641edfc96a81a084d684840a0abb60b867"
+        }
+      },
+      "sheet": {
+        "path": "notes-marker-decoration-12pt5.png",
+        "sha256": "03d8f189c09764f75b7c02e3ed8c07585f60fe39200a294c1bc9d71fd1e88f83"
+      }
+    },
+    {
+      "id": "notes-marker-decoration-plain-control",
+      "inputSha256": "b3e27954594ad9874b111c8ab2959e7ead7285c834d0c2f74e441436f7e9b7a3",
+      "providers": {
+        "libreoffice": {
+          "pdfSha256": "fae123cba594d2e01c760a375cea300424cea512857f95b94b0b4e20408bf108",
+          "inspection": {
+            "geometry": [
+              {
+                "media": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "crop": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "rotation": 0,
+                "userUnit": 1
+              }
+            ],
+            "words": [
+              {
+                "text": "FirCite",
+                "page": 1,
+                "rect": [
+                  72.1,
+                  72.508,
+                  106.024,
+                  85.792
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  109.048,
+                  72.508,
+                  127.66,
+                  85.792
+                ]
+              },
+              {
+                "text": "inventory",
+                "page": 1,
+                "rect": [
+                  130.684,
+                  72.508,
+                  176.608,
+                  85.792
+                ]
+              },
+              {
+                "text": "cites",
+                "page": 1,
+                "rect": [
+                  179.608,
+                  72.508,
+                  201.592,
+                  85.792
+                ]
+              },
+              {
+                "text": "one",
+                "page": 1,
+                "rect": [
+                  204.568,
+                  72.508,
+                  221.884,
+                  85.792
+                ]
+              },
+              {
+                "text": "note.",
+                "page": 1,
+                "rect": [
+                  224.908,
+                  72.508,
+                  248.548,
+                  85.792
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  248.7,
+                  72.263,
+                  252.2,
+                  80.012
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  72.1,
+                  708.89,
+                  77.1,
+                  719.96
+                ]
+              },
+              {
+                "text": "FirNote",
+                "page": 1,
+                "rect": [
+                  79.6,
+                  708.89,
+                  110.66,
+                  719.96
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  113.17,
+                  708.89,
+                  128.7,
+                  719.96
+                ]
+              },
+              {
+                "text": "eastern",
+                "page": 1,
+                "rect": [
+                  131.21,
+                  708.89,
+                  159.47,
+                  719.96
+                ]
+              },
+              {
+                "text": "shelf",
+                "page": 1,
+                "rect": [
+                  161.97,
+                  708.89,
+                  181.38,
+                  719.96
+                ]
+              },
+              {
+                "text": "holds",
+                "page": 1,
+                "rect": [
+                  183.89,
+                  708.89,
+                  205.53,
+                  719.96
+                ]
+              },
+              {
+                "text": "the",
+                "page": 1,
+                "rect": [
+                  208.03,
+                  708.89,
+                  220.25,
+                  719.96
+                ]
+              },
+              {
+                "text": "spare",
+                "page": 1,
+                "rect": [
+                  222.72,
+                  708.89,
+                  243.82,
+                  719.96
+                ]
+              },
+              {
+                "text": "slate.",
+                "page": 1,
+                "rect": [
+                  246.29,
+                  708.89,
+                  267.1,
+                  719.96
+                ]
+              }
+            ],
+            "tokens": {
+              "1": 2,
+              "FirCite": 1,
+              "The": 2,
+              "inventory": 1,
+              "cites": 1,
+              "one": 1,
+              "note.": 1,
+              "FirNote": 1,
+              "eastern": 1,
+              "shelf": 1,
+              "holds": 1,
+              "the": 1,
+              "spare": 1,
+              "slate.": 1
+            },
+            "fonts": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          "rasters": [
+            {
+              "path": "libreoffice/notes-marker-decoration-plain-control-raster/page-1.ppm",
+              "sha256": "92f6986554de851a4f0425e6b054f1556b73016670d3ffb5e83bf8e228bc7cb3"
+            }
+          ],
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "TimesNewRomanPSMT"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ]
+              }
+            }
+          ],
+          "passed": true,
+          "pagePngSha256": "a05f3aead242eba60060d487fbb1a25f4c3d8a3c343ba655159243f37f4bf04b"
+        },
+        "baseline": {
+          "pdfSha256": "37a069eb817ddcb4f988c7ab795b1f83c1cb573a36817aaee51deb0adadae407",
+          "inspection": {
+            "geometry": [
+              {
+                "media": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "crop": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "rotation": 0,
+                "userUnit": 1
+              }
+            ],
+            "words": [
+              {
+                "text": "FirCite",
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  72.556638,
+                  106.001949,
+                  85.8457
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  108.785152,
+                  72.556638,
+                  127.441401,
+                  85.8457
+                ]
+              },
+              {
+                "text": "inventory",
+                "page": 1,
+                "rect": [
+                  130.441401,
+                  72.556638,
+                  176.431633,
+                  85.8457
+                ]
+              },
+              {
+                "text": "cites",
+                "page": 1,
+                "rect": [
+                  179.431633,
+                  72.556638,
+                  201.421867,
+                  85.8457
+                ]
+              },
+              {
+                "text": "one",
+                "page": 1,
+                "rect": [
+                  204.421867,
+                  72.556638,
+                  221.748038,
+                  85.8457
+                ]
+              },
+              {
+                "text": "note.",
+                "page": 1,
+                "rect": [
+                  224.748038,
+                  72.556638,
+                  248.408193,
+                  85.8457
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  248.414052,
+                  72.162595,
+                  252.314052,
+                  80.800485
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  708.516877,
+                  75.247497,
+                  715.709582
+                ]
+              },
+              {
+                "text": "FirNote",
+                "page": 1,
+                "rect": [
+                  77.745114,
+                  708.841066,
+                  108.842007,
+                  719.912515
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  111.159789,
+                  708.841066,
+                  126.701221,
+                  719.912515
+                ]
+              },
+              {
+                "text": "eastern",
+                "page": 1,
+                "rect": [
+                  129.199626,
+                  708.841066,
+                  157.504725,
+                  719.912515
+                ]
+              },
+              {
+                "text": "shelf",
+                "page": 1,
+                "rect": [
+                  160.003045,
+                  708.841066,
+                  179.434413,
+                  719.912515
+                ]
+              },
+              {
+                "text": "holds",
+                "page": 1,
+                "rect": [
+                  181.932969,
+                  708.841066,
+                  203.594978,
+                  719.912515
+                ]
+              },
+              {
+                "text": "the",
+                "page": 1,
+                "rect": [
+                  206.09346,
+                  708.841066,
+                  218.306114,
+                  719.912515
+                ]
+              },
+              {
+                "text": "spare",
+                "page": 1,
+                "rect": [
+                  220.804519,
+                  708.841066,
+                  241.895545,
+                  719.912515
+                ]
+              },
+              {
+                "text": "slate.",
+                "page": 1,
+                "rect": [
+                  244.393949,
+                  708.841066,
+                  265.211389,
+                  719.912515
+                ]
+              }
+            ],
+            "tokens": {
+              "1": 2,
+              "FirCite": 1,
+              "The": 2,
+              "inventory": 1,
+              "cites": 1,
+              "one": 1,
+              "note.": 1,
+              "FirNote": 1,
+              "eastern": 1,
+              "shelf": 1,
+              "holds": 1,
+              "the": 1,
+              "spare": 1,
+              "slate.": 1
+            },
+            "fonts": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          "rasters": [
+            {
+              "path": "baseline/notes-marker-decoration-plain-control-raster/page-1.ppm",
+              "sha256": "9d088daf3c4353747a8d2e566d6c37f01b93092c114e0709559e525547d170f3"
+            }
+          ],
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "TimesNewRomanPSMT"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ]
+              }
+            }
+          ],
+          "passed": true,
+          "pagePngSha256": "b86e8c4948e3547dbb496be00d49c3641edfc96a81a084d684840a0abb60b867"
+        },
+        "candidate": {
+          "pdfSha256": "a76065009a487f8233c133a5aea1911a24930f007d3ca012fb27fb2e0d43f8cc",
+          "inspection": {
+            "geometry": [
+              {
+                "media": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "crop": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "rotation": 0,
+                "userUnit": 1
+              }
+            ],
+            "words": [
+              {
+                "text": "FirCite",
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  72.556638,
+                  106.001949,
+                  85.8457
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  108.785152,
+                  72.556638,
+                  127.441401,
+                  85.8457
+                ]
+              },
+              {
+                "text": "inventory",
+                "page": 1,
+                "rect": [
+                  130.441401,
+                  72.556638,
+                  176.431633,
+                  85.8457
+                ]
+              },
+              {
+                "text": "cites",
+                "page": 1,
+                "rect": [
+                  179.431633,
+                  72.556638,
+                  201.421867,
+                  85.8457
+                ]
+              },
+              {
+                "text": "one",
+                "page": 1,
+                "rect": [
+                  204.421867,
+                  72.556638,
+                  221.748038,
+                  85.8457
+                ]
+              },
+              {
+                "text": "note.",
+                "page": 1,
+                "rect": [
+                  224.748038,
+                  72.556638,
+                  248.408193,
+                  85.8457
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  248.414052,
+                  72.162595,
+                  252.314052,
+                  80.800485
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  708.516877,
+                  75.247497,
+                  715.709582
+                ]
+              },
+              {
+                "text": "FirNote",
+                "page": 1,
+                "rect": [
+                  77.745114,
+                  708.841066,
+                  108.842007,
+                  719.912515
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  111.159789,
+                  708.841066,
+                  126.701221,
+                  719.912515
+                ]
+              },
+              {
+                "text": "eastern",
+                "page": 1,
+                "rect": [
+                  129.199626,
+                  708.841066,
+                  157.504725,
+                  719.912515
+                ]
+              },
+              {
+                "text": "shelf",
+                "page": 1,
+                "rect": [
+                  160.003045,
+                  708.841066,
+                  179.434413,
+                  719.912515
+                ]
+              },
+              {
+                "text": "holds",
+                "page": 1,
+                "rect": [
+                  181.932969,
+                  708.841066,
+                  203.594978,
+                  719.912515
+                ]
+              },
+              {
+                "text": "the",
+                "page": 1,
+                "rect": [
+                  206.09346,
+                  708.841066,
+                  218.306114,
+                  719.912515
+                ]
+              },
+              {
+                "text": "spare",
+                "page": 1,
+                "rect": [
+                  220.804519,
+                  708.841066,
+                  241.895545,
+                  719.912515
+                ]
+              },
+              {
+                "text": "slate.",
+                "page": 1,
+                "rect": [
+                  244.393949,
+                  708.841066,
+                  265.211389,
+                  719.912515
+                ]
+              }
+            ],
+            "tokens": {
+              "1": 2,
+              "FirCite": 1,
+              "The": 2,
+              "inventory": 1,
+              "cites": 1,
+              "one": 1,
+              "note.": 1,
+              "FirNote": 1,
+              "eastern": 1,
+              "shelf": 1,
+              "holds": 1,
+              "the": 1,
+              "spare": 1,
+              "slate.": 1
+            },
+            "fonts": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          "rasters": [
+            {
+              "path": "candidate/notes-marker-decoration-plain-control-raster/page-1.ppm",
+              "sha256": "9d088daf3c4353747a8d2e566d6c37f01b93092c114e0709559e525547d170f3"
+            }
+          ],
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "TimesNewRomanPSMT"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ]
+              }
+            }
+          ],
+          "passed": true,
+          "pagePngSha256": "b86e8c4948e3547dbb496be00d49c3641edfc96a81a084d684840a0abb60b867"
+        }
+      },
+      "sheet": {
+        "path": "notes-marker-decoration-plain-control.png",
+        "sha256": "1425a3598ea2316cb03d0ead3b63cb06331bc34e51b6d32a0675bd0a1670f070"
+      }
+    },
+    {
+      "id": "notes-marker-decoration-generated-control",
+      "inputSha256": "bf980a754e670cec240f5ae791ab711db46e63c5bff669ed27ebe2115697617c",
+      "providers": {
+        "libreoffice": {
+          "pdfSha256": "1ec81dae257c391ee41c657ccf6419d44368ecf46c77b8a30a2ffc1960102237",
+          "inspection": {
+            "geometry": [
+              {
+                "media": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "crop": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "rotation": 0,
+                "userUnit": 1
+              }
+            ],
+            "words": [
+              {
+                "text": "FirCite",
+                "page": 1,
+                "rect": [
+                  72.1,
+                  72.508,
+                  106.024,
+                  85.792
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  109.048,
+                  72.508,
+                  127.66,
+                  85.792
+                ]
+              },
+              {
+                "text": "inventory",
+                "page": 1,
+                "rect": [
+                  130.684,
+                  72.508,
+                  176.608,
+                  85.792
+                ]
+              },
+              {
+                "text": "cites",
+                "page": 1,
+                "rect": [
+                  179.608,
+                  72.508,
+                  201.592,
+                  85.792
+                ]
+              },
+              {
+                "text": "one",
+                "page": 1,
+                "rect": [
+                  204.568,
+                  72.508,
+                  221.884,
+                  85.792
+                ]
+              },
+              {
+                "text": "note.",
+                "page": 1,
+                "rect": [
+                  224.908,
+                  72.508,
+                  248.548,
+                  85.792
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  248.7,
+                  72.263,
+                  252.2,
+                  80.012
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  72.1,
+                  708.89,
+                  77.1,
+                  719.96
+                ]
+              },
+              {
+                "text": "FirNote",
+                "page": 1,
+                "rect": [
+                  79.6,
+                  708.89,
+                  110.66,
+                  719.96
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  113.17,
+                  708.89,
+                  128.7,
+                  719.96
+                ]
+              },
+              {
+                "text": "eastern",
+                "page": 1,
+                "rect": [
+                  131.21,
+                  708.89,
+                  159.47,
+                  719.96
+                ]
+              },
+              {
+                "text": "shelf",
+                "page": 1,
+                "rect": [
+                  161.97,
+                  708.89,
+                  181.38,
+                  719.96
+                ]
+              },
+              {
+                "text": "holds",
+                "page": 1,
+                "rect": [
+                  183.89,
+                  708.89,
+                  205.53,
+                  719.96
+                ]
+              },
+              {
+                "text": "the",
+                "page": 1,
+                "rect": [
+                  208.03,
+                  708.89,
+                  220.25,
+                  719.96
+                ]
+              },
+              {
+                "text": "spare",
+                "page": 1,
+                "rect": [
+                  222.72,
+                  708.89,
+                  243.82,
+                  719.96
+                ]
+              },
+              {
+                "text": "slate.",
+                "page": 1,
+                "rect": [
+                  246.29,
+                  708.89,
+                  267.1,
+                  719.96
+                ]
+              }
+            ],
+            "tokens": {
+              "1": 2,
+              "FirCite": 1,
+              "The": 2,
+              "inventory": 1,
+              "cites": 1,
+              "one": 1,
+              "note.": 1,
+              "FirNote": 1,
+              "eastern": 1,
+              "shelf": 1,
+              "holds": 1,
+              "the": 1,
+              "spare": 1,
+              "slate.": 1
+            },
+            "fonts": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          "rasters": [
+            {
+              "path": "libreoffice/notes-marker-decoration-generated-control-raster/page-1.ppm",
+              "sha256": "92f6986554de851a4f0425e6b054f1556b73016670d3ffb5e83bf8e228bc7cb3"
+            }
+          ],
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "TimesNewRomanPSMT"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ]
+              }
+            }
+          ],
+          "passed": true,
+          "pagePngSha256": "a05f3aead242eba60060d487fbb1a25f4c3d8a3c343ba655159243f37f4bf04b"
+        },
+        "baseline": {
+          "pdfSha256": "50141c6bd520dd0e72f38c8deb09433554c67967d9cc01cd7e8508b2caaa13c3",
+          "inspection": {
+            "geometry": [
+              {
+                "media": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "crop": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "rotation": 0,
+                "userUnit": 1
+              }
+            ],
+            "words": [
+              {
+                "text": "FirCite",
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  72.556638,
+                  106.001949,
+                  85.8457
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  108.785152,
+                  72.556638,
+                  127.441401,
+                  85.8457
+                ]
+              },
+              {
+                "text": "inventory",
+                "page": 1,
+                "rect": [
+                  130.441401,
+                  72.556638,
+                  176.431633,
+                  85.8457
+                ]
+              },
+              {
+                "text": "cites",
+                "page": 1,
+                "rect": [
+                  179.431633,
+                  72.556638,
+                  201.421867,
+                  85.8457
+                ]
+              },
+              {
+                "text": "one",
+                "page": 1,
+                "rect": [
+                  204.421867,
+                  72.556638,
+                  221.748038,
+                  85.8457
+                ]
+              },
+              {
+                "text": "note.",
+                "page": 1,
+                "rect": [
+                  224.748038,
+                  72.556638,
+                  248.408193,
+                  85.8457
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  248.414052,
+                  72.162595,
+                  252.314052,
+                  80.800485
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  708.96219,
+                  75.247497,
+                  716.154894
+                ]
+              },
+              {
+                "text": "FirNote",
+                "page": 1,
+                "rect": [
+                  79.737301,
+                  708.841066,
+                  110.834194,
+                  719.912515
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  113.151977,
+                  708.841066,
+                  128.693408,
+                  719.912515
+                ]
+              },
+              {
+                "text": "eastern",
+                "page": 1,
+                "rect": [
+                  131.191813,
+                  708.841066,
+                  159.496913,
+                  719.912515
+                ]
+              },
+              {
+                "text": "shelf",
+                "page": 1,
+                "rect": [
+                  161.995233,
+                  708.841066,
+                  181.426601,
+                  719.912515
+                ]
+              },
+              {
+                "text": "holds",
+                "page": 1,
+                "rect": [
+                  183.925156,
+                  708.841066,
+                  205.587165,
+                  719.912515
+                ]
+              },
+              {
+                "text": "the",
+                "page": 1,
+                "rect": [
+                  208.085647,
+                  708.841066,
+                  220.298301,
+                  719.912515
+                ]
+              },
+              {
+                "text": "spare",
+                "page": 1,
+                "rect": [
+                  222.796706,
+                  708.841066,
+                  243.887732,
+                  719.912515
+                ]
+              },
+              {
+                "text": "slate.",
+                "page": 1,
+                "rect": [
+                  246.386137,
+                  708.841066,
+                  267.203577,
+                  719.912515
+                ]
+              }
+            ],
+            "tokens": {
+              "1": 2,
+              "FirCite": 1,
+              "The": 2,
+              "inventory": 1,
+              "cites": 1,
+              "one": 1,
+              "note.": 1,
+              "FirNote": 1,
+              "eastern": 1,
+              "shelf": 1,
+              "holds": 1,
+              "the": 1,
+              "spare": 1,
+              "slate.": 1
+            },
+            "fonts": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          "rasters": [
+            {
+              "path": "baseline/notes-marker-decoration-generated-control-raster/page-1.ppm",
+              "sha256": "e02ae886fd0c7c78051680e9a83a888675ebc9e7e9f83a2d68632e5598550984"
+            }
+          ],
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "TimesNewRomanPSMT"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ]
+              }
+            }
+          ],
+          "passed": true,
+          "pagePngSha256": "256d0efefa7cdff636540a6e617ac450f1ea85264d2630e2cd0be059ec2ce20e"
+        },
+        "candidate": {
+          "pdfSha256": "f8bf7c8ac531041de85c5632a7284b040a1e5889cd33e130d5c5767d62584ac0",
+          "inspection": {
+            "geometry": [
+              {
+                "media": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "crop": [
+                  0,
+                  0,
+                  612,
+                  792
+                ],
+                "rotation": 0,
+                "userUnit": 1
+              }
+            ],
+            "words": [
+              {
+                "text": "FirCite",
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  72.556638,
+                  106.001949,
+                  85.8457
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  108.785152,
+                  72.556638,
+                  127.441401,
+                  85.8457
+                ]
+              },
+              {
+                "text": "inventory",
+                "page": 1,
+                "rect": [
+                  130.441401,
+                  72.556638,
+                  176.431633,
+                  85.8457
+                ]
+              },
+              {
+                "text": "cites",
+                "page": 1,
+                "rect": [
+                  179.431633,
+                  72.556638,
+                  201.421867,
+                  85.8457
+                ]
+              },
+              {
+                "text": "one",
+                "page": 1,
+                "rect": [
+                  204.421867,
+                  72.556638,
+                  221.748038,
+                  85.8457
+                ]
+              },
+              {
+                "text": "note.",
+                "page": 1,
+                "rect": [
+                  224.748038,
+                  72.556638,
+                  248.408193,
+                  85.8457
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  248.414052,
+                  72.162595,
+                  252.314052,
+                  80.800485
+                ]
+              },
+              {
+                "text": "1",
+                "page": 1,
+                "rect": [
+                  71.999997,
+                  708.96219,
+                  75.247497,
+                  716.154894
+                ]
+              },
+              {
+                "text": "FirNote",
+                "page": 1,
+                "rect": [
+                  79.737301,
+                  708.841066,
+                  110.834194,
+                  719.912515
+                ]
+              },
+              {
+                "text": "The",
+                "page": 1,
+                "rect": [
+                  113.151977,
+                  708.841066,
+                  128.693408,
+                  719.912515
+                ]
+              },
+              {
+                "text": "eastern",
+                "page": 1,
+                "rect": [
+                  131.191813,
+                  708.841066,
+                  159.496913,
+                  719.912515
+                ]
+              },
+              {
+                "text": "shelf",
+                "page": 1,
+                "rect": [
+                  161.995233,
+                  708.841066,
+                  181.426601,
+                  719.912515
+                ]
+              },
+              {
+                "text": "holds",
+                "page": 1,
+                "rect": [
+                  183.925156,
+                  708.841066,
+                  205.587165,
+                  719.912515
+                ]
+              },
+              {
+                "text": "the",
+                "page": 1,
+                "rect": [
+                  208.085647,
+                  708.841066,
+                  220.298301,
+                  719.912515
+                ]
+              },
+              {
+                "text": "spare",
+                "page": 1,
+                "rect": [
+                  222.796706,
+                  708.841066,
+                  243.887732,
+                  719.912515
+                ]
+              },
+              {
+                "text": "slate.",
+                "page": 1,
+                "rect": [
+                  246.386137,
+                  708.841066,
+                  267.203577,
+                  719.912515
+                ]
+              }
+            ],
+            "tokens": {
+              "1": 2,
+              "FirCite": 1,
+              "The": 2,
+              "inventory": 1,
+              "cites": 1,
+              "one": 1,
+              "note.": 1,
+              "FirNote": 1,
+              "eastern": 1,
+              "shelf": 1,
+              "holds": 1,
+              "the": 1,
+              "spare": 1,
+              "slate.": 1
+            },
+            "fonts": [
+              "TimesNewRomanPSMT"
+            ]
+          },
+          "rasters": [
+            {
+              "path": "candidate/notes-marker-decoration-generated-control-raster/page-1.ppm",
+              "sha256": "e02ae886fd0c7c78051680e9a83a888675ebc9e7e9f83a2d68632e5598550984"
+            }
+          ],
+          "checks": [
+            {
+              "name": "page-count",
+              "passed": true
+            },
+            {
+              "name": "expected-visible-tokens",
+              "passed": true,
+              "missing": {},
+              "extra": {},
+              "normalizedRaw": {}
+            },
+            {
+              "name": "declared-font-families",
+              "passed": true,
+              "observed": [
+                "TimesNewRomanPSMT"
+              ]
+            },
+            {
+              "name": "physical-geometry-page-1",
+              "passed": true
+            },
+            {
+              "name": "assertion-marker-region",
+              "passed": true,
+              "declaration": {
+                "type": "marker-region",
+                "marker": "FirNote",
+                "occurrence": 1,
+                "page": 1,
+                "rect": [
+                  72,
+                  700,
+                  130,
+                  724
+                ],
+                "version": 2,
+                "tolerancePt": 0.0001
+              }
+            },
+            {
+              "name": "assertion-same-page",
+              "passed": true,
+              "declaration": {
+                "type": "same-page",
+                "version": 1,
+                "markers": [
+                  "FirCite",
+                  "FirNote"
+                ]
+              }
+            }
+          ],
+          "passed": true,
+          "pagePngSha256": "256d0efefa7cdff636540a6e617ac450f1ea85264d2630e2cd0be059ec2ce20e"
+        }
+      },
+      "sheet": {
+        "path": "notes-marker-decoration-generated-control.png",
+        "sha256": "6106291eccad91141bb00daa32b216ec328ed615c752242882dd540c3c8e4357"
+      }
+    }
+  ]
+}

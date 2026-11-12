@@ -1,0 +1,366 @@
+{
+  "schema": 1,
+  "status": "unscored-bitmap-diagnostic",
+  "tool": {
+    "sha256": "0e511f7429710d6b663682ff973dd41cfb3a3aca8dbb8c739dd7a035f7b2311d",
+    "version": "pdfimages version 25.03.0"
+  },
+  "note": "Counts are Poppler bitmap entries, excluding masks. Integer PPI is retained as reported; no precise physical-size or fidelity score is inferred.",
+  "sources": {
+    "baseline": "a72aac79858321ed64cdc850c2e66f4b4de59153",
+    "candidate": "88d060e6ac35d9de87bfe7f64e13216316f115e5"
+  },
+  "cases": [
+    {
+      "id": "export-reliability-header-picture-page-absolute",
+      "renderer": "baseline",
+      "inputSha256": "ddc1448c1d4f1f1fa5d096298bb9389219910e8f3cb58faf902bf22907d73278",
+      "expectedBitmapEntries": 1,
+      "status": "delivered",
+      "pdfSha256": "423c05b4574a08d364ed0eb49d5cd5454c0ba06ebca665dd42dc33bfbd6fa9d3",
+      "bitmapEntries": [
+        {
+          "page": 1,
+          "index": 0,
+          "widthPixels": 64,
+          "heightPixels": 64,
+          "xPpi": 12.0,
+          "yPpi": 10.0
+        }
+      ],
+      "countMatches": true
+    },
+    {
+      "id": "export-reliability-inline-picture-lines",
+      "renderer": "baseline",
+      "inputSha256": "0095ea3049a810735df51a1c13bd60fa5c3904359485488331ebc40416aa88ae",
+      "expectedBitmapEntries": 3,
+      "status": "failed"
+    },
+    {
+      "id": "export-reliability-inline-picture-lines-control",
+      "renderer": "baseline",
+      "inputSha256": "a4172daa76b864e3a10afb1f281fb073f20b89d2d95b58560690a5ef2e344e60",
+      "expectedBitmapEntries": 3,
+      "status": "delivered",
+      "pdfSha256": "a66ab3af3b1088497af09d87b58315184b3e35f33568ab3ed3fdec90a7016672",
+      "bitmapEntries": [
+        {
+          "page": 1,
+          "index": 0,
+          "widthPixels": 64,
+          "heightPixels": 64,
+          "xPpi": 64.0,
+          "yPpi": 46.0
+        },
+        {
+          "page": 2,
+          "index": 1,
+          "widthPixels": 64,
+          "heightPixels": 64,
+          "xPpi": 64.0,
+          "yPpi": 46.0
+        },
+        {
+          "page": 3,
+          "index": 2,
+          "widthPixels": 64,
+          "heightPixels": 64,
+          "xPpi": 64.0,
+          "yPpi": 46.0
+        }
+      ],
+      "countMatches": true
+    },
+    {
+      "id": "export-reliability-inline-picture-oversized",
+      "renderer": "baseline",
+      "inputSha256": "aa8f1f951473ad330a344b6b28847529f0fa34fb7ee0a2c8a9bfbfd264d28267",
+      "expectedBitmapEntries": 1,
+      "status": "failed"
+    },
+    {
+      "id": "export-reliability-inline-picture-fitting-control",
+      "renderer": "baseline",
+      "inputSha256": "1247069231b7d115afa69da838755f9061cd9400fd06422fd9f4f8f0e8faf9dd",
+      "expectedBitmapEntries": 1,
+      "status": "delivered",
+      "pdfSha256": "df16d4dab3625e1675aa9e1756047e0c56e9f59c19ea53175c420369d5fea33d",
+      "bitmapEntries": [
+        {
+          "page": 1,
+          "index": 0,
+          "widthPixels": 64,
+          "heightPixels": 64,
+          "xPpi": 77.0,
+          "yPpi": 29.0
+        }
+      ],
+      "countMatches": true
+    },
+    {
+      "id": "export-reliability-inline-picture-fitting-pair",
+      "renderer": "baseline",
+      "inputSha256": "923816b556285e4fa0466a244f4ea93497119205c10d5252da8c9a08f93aa962",
+      "expectedBitmapEntries": 2,
+      "status": "failed"
+    },
+    {
+      "id": "export-reliability-floating-picture-height",
+      "renderer": "baseline",
+      "inputSha256": "bb283b8acbeb8375ae2ea410002a3c123df8a65d67c7f5d3adfe23645406ecde",
+      "expectedBitmapEntries": 1,
+      "status": "failed"
+    },
+    {
+      "id": "export-reliability-floating-picture-height-control",
+      "renderer": "baseline",
+      "inputSha256": "9704ecaa1cf65001563b38671f720badfe56db6f67868975f95ac37820733387",
+      "expectedBitmapEntries": 1,
+      "status": "delivered",
+      "pdfSha256": "fc32a26586ca1742ebd9c563dbfa2edb2f57c8fec892ef8b7ccfb0b06dc8d0a5",
+      "bitmapEntries": [
+        {
+          "page": 1,
+          "index": 0,
+          "widthPixels": 64,
+          "heightPixels": 64,
+          "xPpi": 21.0,
+          "yPpi": 35.0
+        }
+      ],
+      "countMatches": true
+    },
+    {
+      "id": "export-reliability-header-vml-background",
+      "renderer": "baseline",
+      "inputSha256": "f7ed49ea6465b8fca9ee0004e753e003b75d6d763369f0dce9997800d0c6fe00",
+      "expectedBitmapEntries": 1,
+      "status": "delivered",
+      "pdfSha256": "e2424d87258ddc0e9770db332b2e650c5b85c9bc97617c544d921f4f292dc81c",
+      "bitmapEntries": [
+        {
+          "page": 1,
+          "index": 0,
+          "widthPixels": 64,
+          "heightPixels": 64,
+          "xPpi": 12.0,
+          "yPpi": 10.0
+        }
+      ],
+      "countMatches": true
+    },
+    {
+      "id": "export-reliability-header-picture-page-absolute",
+      "renderer": "candidate",
+      "inputSha256": "ddc1448c1d4f1f1fa5d096298bb9389219910e8f3cb58faf902bf22907d73278",
+      "expectedBitmapEntries": 1,
+      "status": "delivered",
+      "pdfSha256": "d2b9457517aaac84f5ae3428e65ec8b4510b8a69c41d9d38f086879720a28316",
+      "bitmapEntries": [
+        {
+          "page": 1,
+          "index": 0,
+          "widthPixels": 64,
+          "heightPixels": 64,
+          "xPpi": 12.0,
+          "yPpi": 10.0
+        }
+      ],
+      "countMatches": true
+    },
+    {
+      "id": "export-reliability-inline-picture-lines",
+      "renderer": "candidate",
+      "inputSha256": "0095ea3049a810735df51a1c13bd60fa5c3904359485488331ebc40416aa88ae",
+      "expectedBitmapEntries": 3,
+      "status": "delivered",
+      "pdfSha256": "70071ec68bd440d9b4b5f185dc9d58e1296e169cad03fc8c64d9baef52e22454",
+      "bitmapEntries": [
+        {
+          "page": 1,
+          "index": 0,
+          "widthPixels": 64,
+          "heightPixels": 64,
+          "xPpi": 64.0,
+          "yPpi": 46.0
+        },
+        {
+          "page": 2,
+          "index": 1,
+          "widthPixels": 64,
+          "heightPixels": 64,
+          "xPpi": 64.0,
+          "yPpi": 46.0
+        },
+        {
+          "page": 3,
+          "index": 2,
+          "widthPixels": 64,
+          "heightPixels": 64,
+          "xPpi": 64.0,
+          "yPpi": 46.0
+        }
+      ],
+      "countMatches": true
+    },
+    {
+      "id": "export-reliability-inline-picture-lines-control",
+      "renderer": "candidate",
+      "inputSha256": "a4172daa76b864e3a10afb1f281fb073f20b89d2d95b58560690a5ef2e344e60",
+      "expectedBitmapEntries": 3,
+      "status": "delivered",
+      "pdfSha256": "ab6dcf8a43101024333e5199b499bc6c575725bac2cfbba85d06e76cff96c528",
+      "bitmapEntries": [
+        {
+          "page": 1,
+          "index": 0,
+          "widthPixels": 64,
+          "heightPixels": 64,
+          "xPpi": 64.0,
+          "yPpi": 46.0
+        },
+        {
+          "page": 2,
+          "index": 1,
+          "widthPixels": 64,
+          "heightPixels": 64,
+          "xPpi": 64.0,
+          "yPpi": 46.0
+        },
+        {
+          "page": 3,
+          "index": 2,
+          "widthPixels": 64,
+          "heightPixels": 64,
+          "xPpi": 64.0,
+          "yPpi": 46.0
+        }
+      ],
+      "countMatches": true
+    },
+    {
+      "id": "export-reliability-inline-picture-oversized",
+      "renderer": "candidate",
+      "inputSha256": "aa8f1f951473ad330a344b6b28847529f0fa34fb7ee0a2c8a9bfbfd264d28267",
+      "expectedBitmapEntries": 1,
+      "status": "delivered",
+      "pdfSha256": "2a616bb7f518176fa0d007681e97e0e0d120d3033517553d7c1fc5b767356a2f",
+      "bitmapEntries": [
+        {
+          "page": 1,
+          "index": 0,
+          "widthPixels": 64,
+          "heightPixels": 64,
+          "xPpi": 192.0,
+          "yPpi": 24.0
+        }
+      ],
+      "countMatches": true
+    },
+    {
+      "id": "export-reliability-inline-picture-fitting-control",
+      "renderer": "candidate",
+      "inputSha256": "1247069231b7d115afa69da838755f9061cd9400fd06422fd9f4f8f0e8faf9dd",
+      "expectedBitmapEntries": 1,
+      "status": "delivered",
+      "pdfSha256": "cae6cf9459014722807cc37aca67249ded358f74cf8216323d381199ba1c8ff6",
+      "bitmapEntries": [
+        {
+          "page": 1,
+          "index": 0,
+          "widthPixels": 64,
+          "heightPixels": 64,
+          "xPpi": 77.0,
+          "yPpi": 29.0
+        }
+      ],
+      "countMatches": true
+    },
+    {
+      "id": "export-reliability-inline-picture-fitting-pair",
+      "renderer": "candidate",
+      "inputSha256": "923816b556285e4fa0466a244f4ea93497119205c10d5252da8c9a08f93aa962",
+      "expectedBitmapEntries": 2,
+      "status": "delivered",
+      "pdfSha256": "e9bccf00f691013c7717ccb269ce1edcad830f3a6eafe3e4a71957b0e061b5e9",
+      "bitmapEntries": [
+        {
+          "page": 1,
+          "index": 0,
+          "widthPixels": 64,
+          "heightPixels": 64,
+          "xPpi": 77.0,
+          "yPpi": 29.0
+        },
+        {
+          "page": 2,
+          "index": 1,
+          "widthPixels": 64,
+          "heightPixels": 64,
+          "xPpi": 77.0,
+          "yPpi": 29.0
+        }
+      ],
+      "countMatches": true
+    },
+    {
+      "id": "export-reliability-floating-picture-height",
+      "renderer": "candidate",
+      "inputSha256": "bb283b8acbeb8375ae2ea410002a3c123df8a65d67c7f5d3adfe23645406ecde",
+      "expectedBitmapEntries": 1,
+      "status": "delivered",
+      "pdfSha256": "181a3bedfef436aeb746ee284751cd9ac6072a6161a4e37c8944b30087859083",
+      "bitmapEntries": [
+        {
+          "page": 2,
+          "index": 0,
+          "widthPixels": 64,
+          "heightPixels": 64,
+          "xPpi": 21.0,
+          "yPpi": 21.0
+        }
+      ],
+      "countMatches": true
+    },
+    {
+      "id": "export-reliability-floating-picture-height-control",
+      "renderer": "candidate",
+      "inputSha256": "9704ecaa1cf65001563b38671f720badfe56db6f67868975f95ac37820733387",
+      "expectedBitmapEntries": 1,
+      "status": "delivered",
+      "pdfSha256": "74052cf52a8b53c0c439f42dbb93778bd68d758621ad8c6dac1ab6a553a684ed",
+      "bitmapEntries": [
+        {
+          "page": 1,
+          "index": 0,
+          "widthPixels": 64,
+          "heightPixels": 64,
+          "xPpi": 21.0,
+          "yPpi": 35.0
+        }
+      ],
+      "countMatches": true
+    },
+    {
+      "id": "export-reliability-header-vml-background",
+      "renderer": "candidate",
+      "inputSha256": "f7ed49ea6465b8fca9ee0004e753e003b75d6d763369f0dce9997800d0c6fe00",
+      "expectedBitmapEntries": 1,
+      "status": "delivered",
+      "pdfSha256": "30598188f898733d53338dd634971aa53e6d38ac699ea0df671dae356acf3f83",
+      "bitmapEntries": [
+        {
+          "page": 1,
+          "index": 0,
+          "widthPixels": 64,
+          "heightPixels": 64,
+          "xPpi": 12.0,
+          "yPpi": 10.0
+        }
+      ],
+      "countMatches": true
+    }
+  ],
+  "captureToolSha256": "606de9013fc4c0166ac29c811d7f9aeff8515a88e7992adf2f9196fc3fdd264a"
+}
