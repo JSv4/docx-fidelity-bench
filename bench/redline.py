@@ -25,12 +25,14 @@ from .redline_build import dotnet as _dotnet, validate_packages, verify_docxodus
 from .common import ROOT, contained, digest, execute, identity, read_json, write_json
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
-OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'replace-text': 1, 'revision-ownership': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'positional-rewrites': {1}, 'section-stories': {1}, 'section-boundaries': {1}, 'section-flags': {1}, 'style-run-history': {1}}
+OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'replace-text': 1, 'revision-ownership': 1, 'revision-resolve': 1}
+ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1, 2}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'positional-rewrites': {1}, 'section-stories': {1}, 'section-boundaries': {1}, 'section-flags': {1}, 'style-run-history': {1}}
+# Operations whose candidate returns the resolved document itself, not a redline.
+OUTPUT_OPERATIONS = {'reject', 'column-edit', 'block-insert', 'revision-resolve'}
 RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
-SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}}
-CONTRACT = {'version': 23, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}, 'revision-resolve': {'output'}}
+CONTRACT = {'version': 24, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -41,6 +43,7 @@ CONTRACT = {'version': 23, 'view': revisions.VIEW_VERSION, 'engines': ['bench-ma
             'spanEditing': 'public span editing must preserve text and inline-marker order through both independent revision resolvers; v2 requires exactly one visible regex match before ReplaceMatch',
             'paragraphRewrite': 'public untracked whole-paragraph rewrites must preserve exact declared native content-control subtrees as well as independent semantic views',
             'columnReview': 'v2 column edits require the declared typed registry count/status before resolution, successful public resolution and an empty final registry',
+            'resolutionReview': 'revision-resolve cases require the declared typed registry count/status of the input, successful public bulk resolution and an empty final registry; table-state v2 reads cells through cell-level content controls and names each cell\'s control',
             'revisionOwnership': 'account-configured edits require declared before/after public name status, exact raw reviewer identities and retained insertion/deletion markup, in addition to independent round trips',
             'inlineTrees': 'declared math and drawing subtrees retain structure, properties, textbox content and image bytes in both independently resolved views; v2 checks referenced running stories with part-local image relationships',
             'sectionFlags': 'declared first-page flags match every physical section in the review and independently resolved endpoints, excluding property history and textbox stories',
@@ -154,7 +157,7 @@ def validate_registry(registry=None):
         operation = case['operation']
         if operation not in OPERATIONS or (OPERATIONS[operation] and len(case['inputs']) != OPERATIONS[operation]) or (operation == 'consolidate' and len(case['inputs']) < 3):
             raise ValueError('Invalid operation or input count: ' + case['id'])
-        expected = {'compare': {'accepted', 'rejected'}, 'consolidate': {'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'accepted', 'rejected'}, 'replace-text': {'accepted', 'rejected'}, 'revision-ownership': {'accepted', 'rejected'}}[operation]
+        expected = {'compare': {'accepted', 'rejected'}, 'consolidate': {'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'accepted', 'rejected'}, 'replace-text': {'accepted', 'rejected'}, 'revision-ownership': {'accepted', 'rejected'}, 'revision-resolve': {'output'}}[operation]
         if set(case['expected']) != expected or case['kind'] not in ('reproducer', 'control', 'identity'):
             raise ValueError('Invalid expectation or kind: ' + case['id'])
         declared = case.get('libreoffice', {})
@@ -200,6 +203,15 @@ def validate_registry(registry=None):
                     raise ValueError('Invalid column review declaration: ' + case['id'])
             elif 'columnReview' in case:
                 raise ValueError('Unexpected column review declaration: ' + case['id'])
+        elif operation == 'revision-resolve':
+            review = case.get('resolutionReview', {})
+            if (case.get('revisionResolve') not in ({'version': 1, 'resolution': 'accept-all'}, {'version': 1, 'resolution': 'reject-all'})
+                    or set(review) != {'version', 'beforeCount', 'supported', 'resolutionSuccess'} or review['version'] != 1
+                    or type(review['beforeCount']) is not int or review['beforeCount'] <= 0
+                    or review['supported'] is not True or review['resolutionSuccess'] is not True
+                    or case.get('revisionRegistry') != {'version': 1, 'count': 0}
+                    or type(case['revisionRegistry']['count']) is not int):
+                raise ValueError('Invalid revision resolution declaration: ' + case['id'])
         elif operation == 'block-insert':
             spec = case.get('blockInsert', {})
             observed = case.get('editOutcome', {})
@@ -237,6 +249,8 @@ def validate_registry(registry=None):
             raise ValueError('Unexpected table width operation data: ' + case['id'])
         if operation != 'column-edit' and 'columnReview' in case:
             raise ValueError('Unexpected column review data: ' + case['id'])
+        if operation != 'revision-resolve' and ('revisionResolve' in case or 'resolutionReview' in case):
+            raise ValueError('Unexpected revision resolution data: ' + case['id'])
         if operation != 'replace-text' and 'paragraphRewrite' in case:
             raise ValueError('Unexpected paragraph rewrite data: ' + case['id'])
         if operation != 'replace-span' and 'spanEdit' in case:
@@ -286,7 +300,7 @@ def validate_registry(registry=None):
                          and isinstance(a.get('cells'), list) and a['cells'] and all(isinstance(row, list) and row
                              and all(type(v) is int and v > 0 for v in row) for row in a['cells'])
                          and type(a.get('table')) is int and a['table'] > 0,
-                     'table-state': lambda a: a['scope'] == 'output' and valid_table_state(a.get('state')),
+                     'table-state': lambda a: a['scope'] == 'output' and valid_table_state(a.get('state'), controls=a['version'] == 2),
                      'people-identity': lambda a: a['scope'] == 'redline' and isinstance(a.get('author'), str) and bool(a['author'])
                          and revision_ownership.valid_identities(a.get('identities')),
                      'inline-trees': lambda a: a['scope'] in {'accepted', 'rejected'} and valid_inline_trees(a),
@@ -304,12 +318,13 @@ def validate_registry(registry=None):
                 raise ValueError('Invalid assertion declaration: ' + case['id'] + ' ' + kind)
         if operation == 'replace-text' and {'type': 'revision-count', 'version': 1, 'scope': 'redline', 'max': 0} not in case['assertions']:
             raise ValueError('An untracked rewrite must require a redline without revisions: ' + case['id'])
-        if operation in {'reject', 'column-edit', 'block-insert'} and {'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0} not in case['assertions']:
+        if operation in OUTPUT_OPERATIONS and {'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0} not in case['assertions']:
             raise ValueError('A reject case must require an output without revisions: ' + case['id'])
     return registry
 
 
-def valid_table_state(state):
+def valid_table_state(state, controls=False):
+    cell_keys = {'span', 'width', 'type', 'fill'} | ({'control'} if controls else set())
     if not isinstance(state, dict) or set(state) != {'grid', 'rows'}:
         return False
     if not isinstance(state['grid'], list) or not state['grid'] or any(type(w) is not int or w < 0 for w in state['grid']):
@@ -326,7 +341,8 @@ def valid_table_state(state):
         if not isinstance(row['cells'], list) or not row['cells']:
             return False
         for cell in row['cells']:
-            if (not isinstance(cell, dict) or set(cell) != {'span', 'width', 'type', 'fill'}
+            if (not isinstance(cell, dict) or set(cell) != cell_keys
+                    or (controls and cell['control'] is not None and not isinstance(cell['control'], str))
                     or type(cell['span']) is not int or cell['span'] <= 0
                     or type(cell['width']) is not int or cell['width'] < 0 or cell['type'] != 'dxa'
                     or (cell['fill'] is not None and not isinstance(cell['fill'], str))):
@@ -423,6 +439,8 @@ def run_candidate(adapter, build, case, output, candidate, timeout=300):
         request['settings']['tableWidths'] = case['tableWidths']
     if 'columnEdit' in case:
         request['settings']['columnEdit'] = case['columnEdit']
+    if 'revisionResolve' in case:
+        request['settings']['revisionResolve'] = case['revisionResolve']
     if 'blockInsert' in case:
         request['settings']['blockInsert'] = case['blockInsert']
     if 'paragraphRewrite' in case:
@@ -551,14 +569,27 @@ def _assertion(assertion, package, resolved):
                 row_pr = row.find(revisions.w('trPr'))
                 row_property = lambda name: None if row_pr is None else row_pr.find(revisions.w(name))
                 cells = []
-                for cell in row.findall(revisions.w('tc')):
-                    pr = cell.find(revisions.w('tcPr'))
+                # Version 2 reads cells through cell-level content controls and names each cell's
+                # control by its w:id; a control holding no cell is reported as a cell-less entry.
+                def row_cells(parent, control=None):
+                    for child in parent:
+                        if child.tag == revisions.w('tc'):
+                            yield child, control
+                        elif assertion['version'] == 2 and child.tag == revisions.w('sdt'):
+                            identity = child.find(revisions.w('sdtPr') + '/' + revisions.w('id'))
+                            name = '' if identity is None else identity.get(revisions.w('val'), '')
+                            content = child.find(revisions.w('sdtContent'))
+                            held = [] if content is None else list(row_cells(content, name))
+                            yield from held or [(None, name)]
+                for cell, control in row_cells(row):
+                    pr = None if cell is None else cell.find(revisions.w('tcPr'))
                     property_of = lambda name: None if pr is None else pr.find(revisions.w(name))
                     width = property_of('tcW')
                     fill = property_of('shd')
-                    cells.append({'span': number(property_of('gridSpan'), 'val', 1), 'width': number(width, 'w'),
+                    cells.append({'span': None if cell is None else number(property_of('gridSpan'), 'val', 1), 'width': number(width, 'w'),
                                   'type': None if width is None else width.get(revisions.w('type')),
-                                  'fill': None if fill is None else fill.get(revisions.w('fill'))})
+                                  'fill': None if fill is None else fill.get(revisions.w('fill')),
+                                  **({'control': control} if assertion['version'] == 2 else {})})
                 rows.append({'before': number(row_property('gridBefore'), 'val', 0),
                              'after': number(row_property('gridAfter'), 'val', 0),
                              'height': number(row_property('trHeight'), 'val'), 'cells': cells})
@@ -765,7 +796,7 @@ def score_case(case, folder, adapter, build, candidate, env, validator):
     outcome = {'id': case['id'], 'category': case['category'], 'kind': case['kind'], 'issue': case['issue'],
                'operation': case['operation'], 'status': 'unmeasured', 'checks': []}
     inputs = [contained(ROOT, i['path']) for i in case['inputs']]
-    output = folder / ('candidate-output.docx' if case['operation'] in {'reject', 'column-edit', 'block-insert'} else 'candidate-redline.docx')
+    output = folder / ('candidate-output.docx' if case['operation'] in OUTPUT_OPERATIONS else 'candidate-redline.docx')
     try:
         try:
             response = run_candidate(adapter, build, case, output, candidate)
@@ -793,7 +824,7 @@ def score_case(case, folder, adapter, build, candidate, env, validator):
             if digest(path) != record['sha256']:
                 raise ValueError('Benchmark fixture changed during the run: ' + record['path'])
         resolved = {'redline': None, 'output': None}
-        if case['operation'] in {'reject', 'column-edit', 'block-insert'}:
+        if case['operation'] in OUTPUT_OPERATIONS:
             outcome['checks'].append(_comparison('markup-output', revisions.view(revisions.Package(str(expected['output']))), revisions.view(package)))
         else:
             for mode, key in (('accept', 'accepted'), ('reject', 'rejected')):
@@ -837,12 +868,14 @@ def score_case(case, folder, adapter, build, candidate, env, validator):
                      and type(observed.get('versionDelta')) is int and type(observed.get('undoAvailable')) is bool)
             outcome['checks'].append({'name': 'block-insertion-outcome', 'passed': typed and observed == expected_outcome,
                                       'expected': expected_outcome, 'observed': observed})
-        if 'columnReview' in case:
-            expected_review = {key: value for key, value in case['columnReview'].items() if key != 'version'}
-            observed = expected_review if adapter == 'authored' else response.get('columnReview')
+        for key, name in (('columnReview', 'column-revision-resolution'), ('resolutionReview', 'revision-resolution')):
+            if key not in case:
+                continue
+            expected_review = {field: value for field, value in case[key].items() if field != 'version'}
+            observed = expected_review if adapter == 'authored' else response.get(key)
             typed = (isinstance(observed, dict) and type(observed.get('beforeCount')) is int
                      and type(observed.get('supported')) is bool and type(observed.get('resolutionSuccess')) is bool)
-            outcome['checks'].append({'name': 'column-revision-resolution', 'passed': typed and observed == expected_review,
+            outcome['checks'].append({'name': name, 'passed': typed and observed == expected_review,
                                       'expected': expected_review, 'observed': observed})
         if 'revisionRegistry' in case:
             expected_count = case['revisionRegistry']['count']
@@ -876,7 +909,7 @@ def _libreoffice_checks(case, folder, env, output, authored, expected):
         names[key] = len(items)
         items.append({'key': key, 'input': str(source), 'operation': operation, 'output': str(target)})
         return target
-    if case['operation'] in {'reject', 'column-edit', 'block-insert'}:
+    if case['operation'] in OUTPUT_OPERATIONS:
         pairs = [('output', item('expected-output', expected['output'], 'load'), item('authored-output', authored, 'load'), item('candidate-output', output, 'load'), None)]
     else:
         pairs = []

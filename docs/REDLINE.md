@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v35`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v36`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -503,3 +503,54 @@ differ. Each authored redline records the spacing on `Normal` with both a `w:pPr
 cases pin Word's Reject All behaviour, not its Compare output: for document-default differences
 Word's Compare adopts the revised defaults untracked, which cannot reject to the original. See
 [the evidence](results/default-spacing-history/README.md).
+
+## Session revision resolution
+
+The `revision-resolve` operation opens one package that already holds tracked changes through
+the public `DocxSession` API, lists its revisions, runs the declared bulk resolver and saves the
+result. The `revisionResolve` declaration v1 names the resolution (`accept-all` or `reject-all`).
+The adapter saves the session's actual document even when resolution is refused, so a refusal is
+measured and never replaced by an expected document.
+
+A mandatory `resolutionReview` declaration v1 requires the exact positive integer `beforeCount`,
+boolean `supported` true for every listed revision, and boolean `resolutionSuccess` true. Missing
+or mistyped observations fail. The final registry count must be the integer zero, and independent
+markup inspection also requires no revisions. Metric contract version 24 records the operation
+and the observation. Authored calibration validates the independently authored packages and
+assertions; it does not claim to execute a candidate API.
+
+`table-state` v2 extends v1 for these cases. It reads a row's cells through cell-level content
+controls (`w:tr/w:sdt/w:sdtContent/w:tc`) and adds a `control` entry to every cell: the `w:id` of
+the control around it, or null. A control left holding no cell is reported as an entry without a
+span, so it cannot match a declared state. Version 1 still reads only a row's direct cells, so
+earlier declarations and measurements are unchanged.
+
+### Cell revisions (Docxodus #1404)
+
+`redline-v36` adds twelve original Orchard cases: a three-column fixed-layout table whose first
+row carries one `w:cellDel` or `w:cellIns`, above an unrevised row.
+
+| Reproducer | Mark | Resolution | Expected first row | Control |
+| --- | --- | --- | --- | --- |
+| `redline-cell-delete-first-accept` | deletion on the first cell | accept all | the second cell spans two columns and is 4800 wide | insertion on the first cell, accepted |
+| `redline-cell-delete-first-reject` | the same | reject all | three cells | deletion on the middle cell, rejected |
+| `redline-cell-delete-middle-accept` | deletion on the middle cell | accept all | the first cell spans two columns and is 4800 wide | insertion on the middle cell, accepted |
+| `redline-cell-delete-wrapped-accept` | deletion on the middle cell; every cell in its own content control | accept all | the first cell spans two columns in its control and is 4800 wide; the deleted cell's control is gone | insertion on a bare middle cell, accepted |
+| `redline-cell-delete-wrapped-reject` | the same | reject all | three cells, each in its control | deletion on a bare middle cell, rejected |
+| `redline-cell-insert-wrapped-accept` | insertion on the middle cell; every cell in its own content control | accept all | three cells, each in its control | insertion on a bare middle cell, accepted |
+
+The expected documents follow desktop Word 2024 (16.0.20326) Accept All and Reject All on
+authored probes: a deleted cell gives its grid column and its `w:tcW` to the cell before it, or to
+the cell after it when it starts the row, and a content control around the removed cell alone
+leaves the row with it. Docxodus main before the fix lists the first-cell and wrapped
+reproducers' revisions as unresolvable and refuses bulk resolution. It resolves the bare
+middle-cell deletion but keeps the absorbing cell's old 2400 width, which the exact `table-state`
+widths catch; that is why the accept controls mark an insertion, which keeps every cell.
+
+Rejecting a tracked cell insertion is deliberately absent. Word widens the neighbouring cell;
+Docxodus removes the cell without widening, for bare and wrapped cells alike, which is a separate
+open difference from the defects pinned here.
+
+All twelve LibreOffice loaded-text comparisons are declared eligible: the outputs hold no
+revisions, so LibreOffice only loads the expected, authored and candidate documents the same way.
+All previous DOCX bytes are unchanged.

@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v35', 'version': 35}
+SUITE = {'id': 'redline-v36', 'version': 36}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -346,6 +346,7 @@ def generate():
     alternate_textbox_edits(corpus)
     header_textbox_redlines(corpus)
     default_spacing_history(corpus)
+    cell_revision_shapes(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -2366,3 +2367,69 @@ def header_textbox_redlines(corpus, boundary_controls=False):
              'add': 'A whole header group insertion preserves both native endpoints; markup preview fallback control',
              'remove': 'A whole header group deletion preserves both native endpoints; markup preview fallback control'}[kind],
             before, after, authored, assertions)
+
+
+def cell_revision_shapes(corpus):
+    """Cell marks the public session resolves in bulk (Docxodus #1404).
+
+    The expected geometry is what desktop Word 2024 writes: a deleted cell gives its grid column
+    and its width to the cell before it, or to the cell after it when it starts the row, and a
+    content control that held only that cell leaves the row with it.
+    """
+    labels = [['Plum lot', 'Pear lot', 'Fig lot'], ['Apple lot', 'Cherry lot', 'Damson lot']]
+    def document(opening, first_row):
+        rows = [first_row, [{'text': text, 'span': 1, 'control': None, 'mark': None} for text in labels[1]]]
+        body = ('<w:tbl><w:tblPr><w:tblW w:w="7200" w:type="dxa"/><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>'
+                + '<w:gridCol w:w="2400"/>' * 3 + '</w:tblGrid>')
+        for cells in rows:
+            body += '<w:tr>'
+            for c in cells:
+                properties = f'<w:tcW w:w="{2400 * c["span"]}" w:type="dxa"/>'
+                if c['span'] > 1:
+                    properties += f'<w:gridSpan w:val="{c["span"]}"/>'
+                if c['mark']:
+                    properties += f'<w:{c["mark"]} w:id="7" w:author="Orchard Reviewer" w:date="{DATE}"/>'
+                tc = '<w:tc><w:tcPr>' + properties + '</w:tcPr>' + p(t(c['text'])) + '</w:tc>'
+                body += sdt(tc, 'Lot', c['control']) if c['control'] else tc
+            body += '</w:tr>'
+        return p(t(opening)) + body + '</w:tbl>' + p(t('Orchard register complete.'))
+    def state(first_row):
+        row = lambda cells: {'before': 0, 'after': 0, 'height': None, 'cells': cells}
+        cell = lambda span, control: {'span': span, 'width': 2400 * span, 'type': 'dxa', 'fill': None,
+                                      'control': None if control is None else str(control)}
+        return {'grid': [2400] * 3, 'rows': [row([cell(c['span'], c['control']) for c in first_row]), row([cell(1, None)] * 3)]}
+    # Each reproducer names the control beside it: a mark on a bare cell that Docxodus resolved, with
+    # Word's geometry, before the fix. Accepting any cell deletion left the absorbing cell's old
+    # width, so the accept controls mark an insertion, which keeps every cell.
+    shapes = [('delete-first-accept', False, 'cellDel', 0, 'accept-all', ('cellIns', 0)),
+              ('delete-first-reject', False, 'cellDel', 0, 'reject-all', ('cellDel', 1)),
+              ('delete-middle-accept', False, 'cellDel', 1, 'accept-all', ('cellIns', 1)),
+              ('delete-wrapped-accept', True, 'cellDel', 1, 'accept-all', ('cellIns', 1)),
+              ('delete-wrapped-reject', True, 'cellDel', 1, 'reject-all', ('cellDel', 1)),
+              ('insert-wrapped-accept', True, 'cellIns', 1, 'accept-all', ('cellIns', 1))]
+    position = ['first', 'middle']
+    for name, wrapped, mark, index, resolution, (control_mark, control_index) in shapes:
+        for kind, suffix in [('reproducer', ''), ('control', '-control')]:
+            if kind == 'control':
+                wrapped, mark, index = False, control_mark, control_index
+            cells = [{'text': text, 'span': 1, 'control': 5100 + i if wrapped else None,
+                      'mark': mark if i == index else None} for i, text in enumerate(labels[0])]
+            resolved = [dict(c, mark=None) for c in cells]
+            if mark == 'cellDel' and resolution == 'accept-all':
+                resolved[index - 1 if index > 0 else index + 1]['span'] = 2
+                del resolved[index]
+            case_id = 'redline-cell-' + name + suffix
+            opening = 'Orchard register, ' + (name + suffix).replace('-', ' ') + '.'
+            action = {'cellDel': 'deletion', 'cellIns': 'insertion'}[mark]
+            where = position[index] + ' cell' + (' inside its own content control' if wrapped else '')
+            source = corpus.file(case_id, 'source', body=document(opening, cells))
+            expected = corpus.file(case_id, 'expected', body=document(opening, resolved))
+            authored = corpus.file(case_id, 'authored-output', body=document(opening, resolved))
+            corpus.add(case_id, 'tables', kind, 'JSv4/Docxodus#1404',
+                       f'{resolution} of a tracked cell {action} on the {where} of a row',
+                       'revision-resolve', [dict(source, role='source')], {'output': expected}, authored,
+                       [{'type': 'table-state', 'version': 2, 'scope': 'output', 'state': state(resolved)},
+                        {'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0}])
+            corpus.cases[-1]['revisionResolve'] = {'version': 1, 'resolution': resolution}
+            corpus.cases[-1]['resolutionReview'] = {'version': 1, 'beforeCount': 1, 'supported': True, 'resolutionSuccess': True}
+            corpus.cases[-1]['revisionRegistry'] = {'version': 1, 'count': 0}
