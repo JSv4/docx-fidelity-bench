@@ -539,6 +539,141 @@ def collection_font_cases(add):
                        for label in (labels[0], labels[-1])])
 
 
+def bordered_spacing_cases(add):
+    """Word 2024 draws a paragraph border around the text and w:space only: the 14pt before and after
+    lie outside the box and meet the neighbours' spacing as an unbordered paragraph's do, collapsing
+    to 14pt, adding to 28pt under doNotUseHTMLParagraphAutoSpacing, and dropping at the top of a later
+    page. Paragraphs sharing a box keep the spacing between them (Docxodus #1677). Each control drops
+    only the border. Regions are each label's 16pt line slot and page, which hold Word's word boxes."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/>'
+              '<w:color w:val="000000"/><w:sz w:val="24"/></w:rPr></w:rPrDefault></w:docDefaults>'
+              '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
+    box = '<w:pBdr>' + ''.join(f'<w:{side} w:val="single" w:sz="4" w:space="1" w:color="000000"/>'
+                               for side in ('top', 'left', 'bottom', 'right')) + '</w:pBdr>'
+    line, space, edge = 16, 14, 1.5  # edge: the 0.5pt border and its 1pt w:space
+
+    def spaced(text, boxed=None):
+        value = 0 if boxed is None else space * 20
+        return para(text, (box if boxed else '') + f'<w:spacing w:before="{value}" w:after="{value}" w:line="320" w:lineRule="exact"/>')
+
+    fill = [f'Hornbeam{n:02d}' for n in range(1, 41)]
+    # kind: description, settings, plain lead labels, spaced labels in the box, spaced labels after it,
+    # and the space between a box and the spaced paragraph after it.
+    for kind, description, compat, lead, boxed, after, gap in [
+            ('outside', '14pt before and after a bordered paragraph', '', ['HornbeamOpen'], ['HornbeamBoxed'], ['HornbeamNext'], space),
+            ('group', '14pt before and after each of three paragraphs sharing one border', '', ['HornbeamOpen'],
+             ['HornbeamOne', 'HornbeamTwo', 'HornbeamThree'], ['HornbeamNext'], space),
+            ('compat', '14pt before and after a bordered paragraph under doNotUseHTMLParagraphAutoSpacing',
+             '<w:doNotUseHTMLParagraphAutoSpacing/>', ['HornbeamOpen'], ['HornbeamBoxed'], ['HornbeamNext'], 2 * space),
+            ('page-top', 'A bordered paragraph with 14pt before and after moved to the top of page 2', '', fill,
+             ['HornbeamBoxed'], ['HornbeamNext'], space)]:
+        for control in (False, True):
+            case_id = 'border-spacing-' + kind + ('-control' if control else '')
+            rim = 0 if control else edge
+            between = 2 * space if compat else space
+            # Each label's page and the top of its line.
+            tops = {label: (1, 72 + line * index) for index, label in enumerate(lead)}
+            page, top = (2, 72 - line) if kind == 'page-top' else (1, 72 + line * (len(lead) - 1))
+            for index, label in enumerate(boxed):
+                top += line + (rim if index == 0 else between) + (0 if index or page == 2 else space)
+                tops[label] = (page, top)
+            top += line + rim + gap
+            tops[after[0]] = (page, top)
+            close = [] if kind == 'page-top' else ['HornbeamClose']
+            if close:
+                tops[close[0]] = (page, top + line + space)
+            settings = f'<w:settings xmlns:w="{W}">' + SETTINGS_BODY.replace('<w:compat>', '<w:compat>' + compat) + '</w:settings>'
+            add(case_id, 'paragraphs', description + (', without the border' if control else '')
+                + ' (Word 2024 measured, Docxodus #1677)', [' '.join(lead + boxed + after + close)],
+                ''.join(spaced(label) for label in lead) + ''.join(spaced(label, not control) for label in boxed)
+                + ''.join(spaced(label, False) for label in after) + ''.join(spaced(label) for label in close),
+                styles_xml=styles, extra_parts={'word/settings.xml': settings},
+                assertions=[{'type': 'marker-region', 'version': 2, 'marker': label, 'occurrence': 1, 'page': where,
+                             'rect': [0, start, 612, start + line]}
+                            for label, (where, start) in tops.items() if label in (lead[0], lead[-1], *boxed, *after, *close)])
+
+
+def bordered_box_cases(add):
+    """What else Word 2024 does with the box around bordered paragraphs (Docxodus #1692): a paragraph's
+    w:between is a rule below it with w:space on both sides, also beside a paragraph of the same box
+    that has none; contextual spacing applies across the edge of the box; a page start or a keep on
+    a bordered paragraph is honoured; and shading fills the box to its border. Each control drops
+    only the property under test. Regions are each label's 16pt line slot and page, which hold
+    Word's word boxes; the shading pair also declares the fill Word paints."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/>'
+              '<w:color w:val="000000"/><w:sz w:val="24"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+              '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>'
+              '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
+    sides = ''.join(f'<w:{side} w:val="single" w:sz="4" w:space="1" w:color="000000"/>'
+                    for side in ('top', 'left', 'bottom', 'right'))
+    between = '<w:between w:val="single" w:sz="4" w:space="1" w:color="000000"/>'
+    box, ruled = f'<w:pBdr>{sides}</w:pBdr>', f'<w:pBdr>{sides}{between}</w:pBdr>'
+    contextual, page_start, keep = '<w:contextualSpacing/>', '<w:pageBreakBefore/>', '<w:keepNext/>'
+    fill = [176, 196, 222]
+    shading = '<w:shd w:val="clear" w:color="auto" w:fill="B0C4DE"/>'
+
+    def spaced(text, value=0, before='', after=''):
+        return para(text, f'{before}<w:spacing w:before="{value * 20}" w:after="{value * 20}" w:line="320" w:lineRule="exact"/>{after}')
+
+    def painted(left, top, right, bottom):
+        # Word's fill, in points; coverage is its area in the 96dpi pixels the inspection counts.
+        return {'type': 'color-geometry', 'version': 1, 'page': 1, 'rgb': fill, 'adjudicated': 'word', 'tolerancePt': 2,
+                'coverageTolerance': .1, 'boundsPt': [left, top, right, bottom], 'coverage': (right - left) * (bottom - top) / .75 ** 2}
+
+    lead = [f'Whitebeam{n:02d}' for n in range(1, 40)]
+    # kind: description, body, what the control drops, then each label's page and line top with and
+    # without it, and the fill Word paints with and without it.
+    for kind, description, body, dropped, tops, control_tops, fills in [
+            ('between', 'A rule between the three paragraphs of a box, 14pt before and after each',
+             spaced('WhitebeamOpen') + ''.join(spaced(label, 14, ruled) for label in ('WhitebeamOne', 'WhitebeamTwo', 'WhitebeamThree'))
+             + spaced('WhitebeamNext', 14) + spaced('WhitebeamClose'), between,
+             # 14pt, w:space, the 0.5pt rule and w:space again separate the members.
+             {'WhitebeamOpen': (1, 72), 'WhitebeamOne': (1, 103.5), 'WhitebeamTwo': (1, 136), 'WhitebeamThree': (1, 168.5),
+              'WhitebeamNext': (1, 200), 'WhitebeamClose': (1, 230)},
+             {'WhitebeamOpen': (1, 72), 'WhitebeamOne': (1, 103.5), 'WhitebeamTwo': (1, 133.5), 'WhitebeamThree': (1, 163.5),
+              'WhitebeamNext': (1, 195), 'WhitebeamClose': (1, 225)}, None),
+            ('between-mixed', 'A paragraph without w:between between two that have it, in one box',
+             spaced('WhitebeamOpen') + spaced('WhitebeamOne', 14, ruled) + spaced('WhitebeamTwo', 14, box)
+             + spaced('WhitebeamThree', 14, ruled) + spaced('WhitebeamClose'), between,
+             # Below the first: 14pt, its rule and the rule's w:space. Below the second: 14pt and the third's w:space.
+             {'WhitebeamOpen': (1, 72), 'WhitebeamOne': (1, 103.5), 'WhitebeamTwo': (1, 135), 'WhitebeamThree': (1, 166),
+              'WhitebeamClose': (1, 197.5)},
+             {'WhitebeamOpen': (1, 72), 'WhitebeamOne': (1, 103.5), 'WhitebeamTwo': (1, 133.5), 'WhitebeamThree': (1, 163.5),
+              'WhitebeamClose': (1, 195)}, None),
+            ('contextual-edge', 'Contextual spacing on a bordered paragraph and both neighbours of its style',
+             spaced('WhitebeamOpen', 0, '', contextual) + spaced('WhitebeamBoxed', 14, box, contextual)
+             + spaced('WhitebeamNext', 14, '', contextual) + spaced('WhitebeamClose'), contextual,
+             {'WhitebeamOpen': (1, 72), 'WhitebeamBoxed': (1, 89.5), 'WhitebeamNext': (1, 107), 'WhitebeamClose': (1, 123)},
+             {'WhitebeamOpen': (1, 72), 'WhitebeamBoxed': (1, 103.5), 'WhitebeamNext': (1, 135), 'WhitebeamClose': (1, 165)}, None),
+            ('page-start', 'A bordered paragraph with pageBreakBefore',
+             spaced('WhitebeamOpen') + spaced('WhitebeamBoxed', 14, page_start + box) + spaced('WhitebeamNext', 14), page_start,
+             {'WhitebeamOpen': (1, 72), 'WhitebeamBoxed': (2, 73.5), 'WhitebeamNext': (2, 105)},
+             {'WhitebeamOpen': (1, 72), 'WhitebeamBoxed': (1, 103.5), 'WhitebeamNext': (1, 135)}, None),
+            ('keep-next', 'A bordered paragraph kept with a next paragraph that does not fit the page',
+             ''.join(spaced(label) for label in lead) + spaced('WhitebeamKept', 0, keep + box) + spaced('WhitebeamNext'), keep,
+             {lead[0]: (1, 72), lead[-1]: (1, 680), 'WhitebeamKept': (2, 73.5), 'WhitebeamNext': (2, 91)},
+             {lead[0]: (1, 72), lead[-1]: (1, 680), 'WhitebeamKept': (1, 697.5), 'WhitebeamNext': (2, 72)}, None),
+            ('shading', 'A shaded bordered paragraph, 14pt before and after',
+             spaced('WhitebeamOpen') + spaced('WhitebeamBoxed', 14, box + shading) + spaced('WhitebeamClose'), box,
+             {'WhitebeamOpen': (1, 72), 'WhitebeamBoxed': (1, 103.5), 'WhitebeamClose': (1, 135)},
+             {'WhitebeamOpen': (1, 72), 'WhitebeamBoxed': (1, 102), 'WhitebeamClose': (1, 132)},
+             # Inside the border, through its w:space; without one, the line itself (Word runs 1.4pt past the text).
+             (painted(69.6, 102.5, 542.5, 120.5), painted(70.6, 102, 541.5, 118)))]:
+        for control in (False, True):
+            where = control_tops if control else tops
+            labels = re.findall(r'Whitebeam\w+', body)
+            add('border-' + kind + ('-control' if control else ''), 'paragraphs',
+                description + (', without ' + {between: 'the rule', contextual: 'contextual spacing', page_start: 'the page start',
+                                               keep: 'the keep', box: 'the border'}[dropped] if control else '')
+                + ' (Word 2024 measured, Docxodus #1692)', [' '.join(labels)],
+                body.replace(dropped, '') if control else body, styles_xml=styles,
+                assertions=[{'type': 'marker-region', 'version': 2, 'marker': label, 'occurrence': 1, 'page': page,
+                             'rect': [0, top, 612, top + 16]} for label, (page, top) in where.items()]
+                + ([fills[control]] if fills else []))
+
+
 def para(text='', props='', runs=None):
     return f'<w:p><w:pPr>{props}</w:pPr>{run(text) if runs is None else runs}</w:p>'
 
@@ -6969,7 +7104,9 @@ def generate():
     compat_and_header_spacing_cases(add)
     section_mark_cases(add)
     at_least_and_tracked_grid_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v161', 'version': 161, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    bordered_spacing_cases(add)
+    bordered_box_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v163', 'version': 163, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 

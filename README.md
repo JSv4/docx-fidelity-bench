@@ -2,9 +2,24 @@
 an 18pt list number, a centered lead label and a mapped Symbol bullet, each with a control.
 Slots follow native Word's per-line rule. See [the Word evidence and labeled renders](docs/results/line-content-height/README.md).
 
-`redline-v36` adds an `accept` operation and three math cases for Docxodus #1189: a fraction whose
-control character was inserted and then deleted is removed by Accept All and by Reject All, as in
-Word 2024. See [evidence](docs/results/math-control-revisions/README.md).
+`redline-v39` adds three math cases for Docxodus #1189: a fraction whose control character was
+inserted and then deleted is removed by Accept All and by Reject All, as in Word 2024. Two use the
+`accept` operation and one `reject`. See [evidence](docs/results/math-control-revisions/README.md).
+
+`redline-v38` adds eight cell-revision cases for Docxodus #1694: a deleted cell whose own paragraph
+mark is tracked as deleted, accepted through the session and through `RevisionProcessor`. Word
+leaves the row one cell short; each control deletes only the cell's run, where Word widens the
+neighbour. See [the redline notes](docs/REDLINE.md#a-deleted-cell-whose-paragraph-mark-is-deleted-docxodus-1694).
+
+`redline-v37` adds twenty cell-revision cases for Docxodus #1688: rejected cell insertions, rows and
+a table whose every cell leaves, and `RevisionProcessor` accepting a deleted first cell and a
+deleted cell inside a content control, each beside a control. A new `accept` operation mirrors
+`reject`. See [the redline notes](docs/REDLINE.md#cells-that-leave-a-row-docxodus-1688).
+
+`redline-v36` adds twelve cell-revision cases for Docxodus #1404: a tracked deletion of a row's
+first or middle cell, and tracked deletions and an insertion on cells wrapped in their own content
+controls, each resolved in bulk through the public session and each with a bare-cell
+control that resolved before the fix. Expected geometry is what desktop Word 2024 writes. See [the redline notes](docs/REDLINE.md#session-revision-resolution).
 
 `redline-v35` adds a document-default spacing reproducer and a `Normal`-style control for
 Docxodus #1576, with a `style-run-history` check: Word's Reject All resets a style's run
@@ -55,6 +70,22 @@ LibreOffice references are pending. See [the evidence and limits](docs/results/a
 `core-v149` adds four fractional whole-number measure inputs and whole-value controls for
 Docxodus #1622: border `w:sz="4.5"` in paragraph, table and cell borders, and `w:gridCol w:w="4000.5"`.
 Word 2024 truncates each value. LibreOffice references are pending. See [the evidence and limits](docs/results/fractional-measures/README.md).
+
+`core-v163` adds six inputs and controls for Docxodus #1692, each about the box around bordered
+paragraphs: a `w:between` rule between the paragraphs of a box, the same beside a paragraph that has
+none, contextual spacing across the edge of the box, `w:pageBreakBefore` and `w:keepNext` on a
+bordered paragraph, and shading, which Word 2024 fills to the border. Each control drops only the
+property under test. Regions are each label's line slot and page, which hold Word 2024's word boxes;
+the shading pair declares the fill Word paints. LibreOffice references are pending. See
+[the evidence and limits](docs/results/bordered-paragraph-spacing/README.md).
+
+`core-v162` adds four inputs and controls for Docxodus #1677: a bordered paragraph with 14pt before
+and after between other paragraphs, three such paragraphs sharing one box, the first under
+`w:doNotUseHTMLParagraphAutoSpacing`, and one moved to the top of page 2. Word 2024 draws the border
+around the text only, so the spacing lies outside the box and collapses, adds or drops as an
+unbordered paragraph's does. Each control drops only the border. Regions are each label's line slot
+and page, which hold Word 2024's word boxes. LibreOffice references are pending. See
+[the evidence and limits](docs/results/bordered-paragraph-spacing/README.md).
 
 `core-v161` adds three inputs and controls for Docxodus #1551: three labels a paragraph split by
 line breaks on an 18pt line grid, which Word 2024 puts on the grid as it does wrapped lines (18pt,
