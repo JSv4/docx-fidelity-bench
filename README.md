@@ -2,6 +2,21 @@
 an 18pt list number, a centered lead label and a mapped Symbol bullet, each with a control.
 Slots follow native Word's per-line rule. See [the Word evidence and labeled renders](docs/results/line-content-height/README.md).
 
+`redline-v38` adds eight cell-revision cases for Docxodus #1694: a deleted cell whose own paragraph
+mark is tracked as deleted, accepted through the session and through `RevisionProcessor`. Word
+leaves the row one cell short; each control deletes only the cell's run, where Word widens the
+neighbour. See [the redline notes](docs/REDLINE.md#a-deleted-cell-whose-paragraph-mark-is-deleted-docxodus-1694).
+
+`redline-v37` adds twenty cell-revision cases for Docxodus #1688: rejected cell insertions, rows and
+a table whose every cell leaves, and `RevisionProcessor` accepting a deleted first cell and a
+deleted cell inside a content control, each beside a control. A new `accept` operation mirrors
+`reject`. See [the redline notes](docs/REDLINE.md#cells-that-leave-a-row-docxodus-1688).
+
+`redline-v36` adds twelve cell-revision cases for Docxodus #1404: a tracked deletion of a row's
+first or middle cell, and tracked deletions and an insertion on cells wrapped in their own content
+controls, each resolved in bulk through the public session and each with a bare-cell
+control that resolved before the fix. Expected geometry is what desktop Word 2024 writes. See [the redline notes](docs/REDLINE.md#session-revision-resolution).
+
 `redline-v35` adds a document-default spacing reproducer and a `Normal`-style control for
 Docxodus #1576, with a `style-run-history` check: Word's Reject All resets a style's run
 properties when its spacing revision has no `w:rPrChange`. See [evidence](docs/results/default-spacing-history/README.md).
