@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v38', 'version': 38}
+SUITE = {'id': 'redline-v39', 'version': 39}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -349,6 +349,7 @@ def generate():
     cell_revision_shapes(corpus)
     cell_revision_geometry(corpus)
     struck_cell_deletions(corpus)
+    math_control_revisions(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -1558,6 +1559,42 @@ def rejects(corpus):
         corpus.add(name, 'revisions', 'control' if kind == 'direct' else 'reproducer', 'JSv4/Docxodus#1176',
                    'Rejecting one insertion and one deletion held by ' + label, 'reject',
                    [dict(tracked, role='input')], {'output': original}, original,
+                   [{'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0}])
+
+
+# ---------------------------------------------------------------------------------------------
+# Docxodus #1189: a math object follows the revision marks on its control character
+# ---------------------------------------------------------------------------------------------
+
+def math_control_revisions(corpus):
+    """A fraction whose control character (m:fPr/m:ctrlPr) was inserted and later deleted, the only
+    nesting CT_MathCtrlIns allows, beside a fraction that was only deleted. Word 2024 removes the
+    whole object on Accept All in both, and on Reject All of the nested form; the expected documents
+    are authored from those endpoints, never from a candidate result."""
+    def math_run(text):
+        return f'<m:r><m:t>{escape(text)}</m:t></m:r>'
+
+    def body(fraction=''):
+        return (p(t('Juniper ratio ledger.')) + p(f'<m:oMath>{math_run("A=")}{fraction}{math_run("+B")}</m:oMath>')
+                + p(t(CLOSING)))
+
+    def fraction(shape, rev):
+        deleted = shape == 'deleted-control'
+        control = (f'<w:del {rev.attrs(AUTHOR)}><w:rPr/></w:del>' if deleted else
+                   f'<w:ins {rev.attrs(AUTHOR)}><w:del {rev.attrs("Second Reviewer")}><w:rPr/></w:del></w:ins>')
+        wrap = (lambda run: f'<w:del {rev.attrs(AUTHOR)}>{run}</w:del>') if deleted else rev.ins
+        return (f'<m:f><m:fPr><m:ctrlPr>{control}</m:ctrlPr></m:fPr><m:num>{wrap(math_run("1"))}</m:num>'
+                f'<m:den>{wrap(math_run("2"))}</m:den></m:f>')
+
+    for operation, shape, kind in [('accept', 'inserted-deleted', 'reproducer'), ('accept', 'deleted-control', 'control'),
+                                   ('reject', 'inserted-deleted', 'control')]:
+        name = f'redline-{operation}-math-control-{shape}'
+        tracked = corpus.file(name, 'tracked', body=body(fraction(shape, Revisions())))
+        expected = corpus.file(name, 'expected', body=body())
+        label = ('inserted and then deleted' if shape == 'inserted-deleted' else 'deleted')
+        corpus.add(name, 'revisions', kind, 'JSv4/Docxodus#1189',
+                   f'{operation.capitalize()}ing a fraction whose control character was {label}', operation,
+                   [dict(tracked, role='input')], {'output': expected}, expected,
                    [{'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0}])
 
 

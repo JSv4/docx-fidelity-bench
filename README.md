@@ -2,6 +2,10 @@
 an 18pt list number, a centered lead label and a mapped Symbol bullet, each with a control.
 Slots follow native Word's per-line rule. See [the Word evidence and labeled renders](docs/results/line-content-height/README.md).
 
+`redline-v39` adds three math cases for Docxodus #1189: a fraction whose control character was
+inserted and then deleted is removed by Accept All and by Reject All, as in Word 2024. Two use the
+`accept` operation and one `reject`. See [evidence](docs/results/math-control-revisions/README.md).
+
 `redline-v38` adds eight cell-revision cases for Docxodus #1694: a deleted cell whose own paragraph
 mark is tracked as deleted, accepted through the session and through `RevisionProcessor`. Word
 leaves the row one cell short; each control deletes only the cell's run, where Word widens the

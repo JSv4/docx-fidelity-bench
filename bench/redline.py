@@ -1,7 +1,7 @@
 """Redline track: run a comparison candidate and score its accept/reject round trips.
 
 A candidate turns each case's inputs into one output package: a redline for `compare` and
-`consolidate`, a resolved document for `reject`. The output is then judged by two engines that
+`consolidate`, a resolved document for `reject` and `accept`. The output is then judged by two engines that
 share no code with any candidate: the benchmark's own revision engine (`bench/revisions.py`,
 compared on the full semantic view) and LibreOffice through headless UNO (compared on the text
 view, after both sides take the same LibreOffice load/save path). See docs/REDLINE.md.
@@ -32,7 +32,7 @@ OUTPUT_OPERATIONS = {'reject', 'accept', 'column-edit', 'block-insert', 'revisio
 RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
 SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}, 'revision-resolve': {'output'}, 'accept': {'output'}}
-CONTRACT = {'version': 26, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+CONTRACT = {'version': 27, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -51,6 +51,7 @@ CONTRACT = {'version': 26, 'view': revisions.VIEW_VERSION, 'engines': ['bench-ma
             'sectionFlags': 'declared first-page flags match every physical section in the review and independently resolved endpoints, excluding property history and textbox stories',
             'sectionBoundaries': 'declared inline section breaks occur after the exact zero-based body paragraph indices in each independently resolved endpoint',
             'revisionText': 'declared move sources and ordinary deletions must retain their appropriate text carrier',
+            'mathControls': 'a math object is removed whole when a mark on its control character (m:ctrlPr), or the deletion nested in an inserted one, removes it',
             'hyperlinkTargets': 'declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written',
             'styleRunHistory': 'declared style-run-history assertions require every paragraph style holding a pPrChange in the raw redline to hold an rPrChange too, since Word resets an unarchived style run slice to its built-ins on Reject All'}
 HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'bench/redline_build.py', 'bench/revision_ownership.py']

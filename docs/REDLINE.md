@@ -1,15 +1,15 @@
 # Redline track scoring
 
-The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
+The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`, `accept`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v38`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v39`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
 `bench/redline_fixtures.py` authors every package from literal text and original OOXML. Regenerating it must reproduce every file byte for byte; `python3 -m bench.audit` and the tests check this. Each case records:
 
 - `operation` and its `inputs`, each with a path, SHA-256 and role (`left`/`right`, `base`/`reviewer`, or the tracked `input`);
-- `expected`: for `compare` and `consolidate`, the document accept-all must produce (`accepted`: the revised document, or for consolidation the authored merge of every reviewer's change) and the document reject-all must produce (`rejected`: the original or base); for `reject`, the `output` the operation must produce;
+- `expected`: for `compare` and `consolidate`, the document accept-all must produce (`accepted`: the revised document, or for consolidation the authored merge of every reviewer's change) and the document reject-all must produce (`rejected`: the original or base); for `reject` and `accept`, the `output` the operation must produce;
 - `authored`: a redline (or resolved output) that is correct by construction, used for calibration;
 - optional `reviewerExpected`: independently authored documents, with paths and SHA-256 digests, for every consolidation reviewer when conflict resolution or consensus attribution makes a selective result differ from an input; all selective comparisons remain mandatory;
 - `assertions`: declared, versioned structural checks;
@@ -23,10 +23,11 @@ Every reproducer has a control: the same document shape without the trigger. Con
 A case scores **100** when every applicable check passes and **0** otherwise. There is no partial credit: a redline that is wrong on accept or reject is wrong. The evidence keeps a similarity ratio and a short diff for each failed comparison as diagnostics only.
 
 1. **Conversion and integrity.** The candidate returns status `ok` with the output's digest. Its inputs are unchanged. The output opens as a package with one main document. The case's expected documents and authored redline are re-verified against the manifest digests when the case is scored. A known candidate failure (`failed`) scores zero; an unverifiable build or environment (`unmeasured`) blocks the suite score.
-2. **Round trip through the benchmark's revision engine.** `bench/revisions.py` accepts every revision of the candidate's package and compares the result with `expected.accepted`, then rejects every revision and compares with `expected.rejected`. For `reject` cases, the candidate's output itself is compared with `expected.output`. This engine is written for this repository and shares no code with any candidate. It applies ECMA-376 Part 1 §17.13.5 markup directly:
+2. **Round trip through the benchmark's revision engine.** `bench/revisions.py` accepts every revision of the candidate's package and compares the result with `expected.accepted`, then rejects every revision and compares with `expected.rejected`. For `reject` and `accept` cases, the candidate's output itself is compared with `expected.output`. This engine is written for this repository and shares no code with any candidate. It applies ECMA-376 Part 1 §17.13.5 markup directly:
    - accepting keeps `w:ins` and `w:moveTo` content and drops `w:del` and `w:moveFrom` content; rejecting does the reverse, restoring deleted text and field instructions;
    - a removed paragraph mark joins its paragraph to the next paragraph of the same container, whose properties the joined paragraph keeps; a removed mark with no following paragraph keeps its paragraph unless the paragraph is empty and not the last of the body or the only paragraph of a cell, note, comment or header;
    - row markers (`w:trPr/w:ins|del`), cell markers (`w:cellIns`/`w:cellDel`) and revision markers in a math run's properties are resolved; move range markers are dropped;
+   - a math object follows the marks on its control character (`m:*Pr/m:ctrlPr/w:ins|del`, and the `w:del` nested in a `w:ins` for a character inserted and later deleted): a removing mark takes the whole object and its text, whatever marks that text carries, as Word 2024 does;
    - custom-XML insertion, deletion and move ranges resolve the enclosing tags independently of their content. One enclosing range or two ranges crossing the opening and closing tags can remove an envelope; untracked content and unrelated empty inline envelopes survive. Partial removal of only one tag is reported as unsupported rather than treated as a successful resolution (see [custom-XML range semantics](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.wordprocessing.customxmlinsrangestart));
    - property-change records (`w:rPrChange`, `w:pPrChange`, `w:sectPrChange`, `w:tblPrChange`, `w:trPrChange`, `w:tcPrChange`, `w:tblGridChange`, `w:tblPrExChange`, `w:numberingChange`) are dropped on accept and restore the prior properties on reject;
    - a block content control or custom-XML element left with no content is removed, as is a table left with no rows, and a hyperlink that had content before resolution and has none after it (a hyperlink has no tracked-change form of its own, so rejecting an inserted link leaves an empty `w:hyperlink`). A hyperlink the source wrote empty is kept.
@@ -41,7 +42,7 @@ A case scores **100** when every applicable check passes and **0** otherwise. Th
    - `style-run-history` v1 (scope `redline`): every paragraph style whose `w:pPr` holds a `w:pPrChange` also has a `w:rPr` holding a `w:rPrChange`. Word 2024's Reject All restores a style from both markers and resets the run properties of a style without the second to its built-ins, so a spacing-only style revision rejects with 10 pt text; neither round trip sees this. The check is one-directional, because a run-only style revision was not measured. Metric contract 23 records this check;
    - `comment-threads` v1 (scope `redline`): in the comments and commentsExtended parts, every entry is keyed to a comment's last-paragraph `w14:paraId`, every `w15:paraIdParent` names the last-paragraph `w14:paraId` of a comment that has its own entry, and for each declared `[reply, parent]` pair exactly one comment holds the reply's text and its entry names the comment holding the parent's text. Comment threading is not part of the semantic view, so neither round trip sees a reply detached from its parent;
    - `hyperlink-targets` v1 (scope `redline`): every `w:hyperlink` in the main document with an `r:id` resolves to exactly one relationship of the main part, of the hyperlink type with `TargetMode="External"`, and the set of their `Target` values equals the declared `targets`, compared as written after XML parsing, with no URI normalization. The semantic view records only a hyperlink's boundaries, so neither round trip sees a target rewritten (for example to the SDK's `rewritten://` placeholder), trimmed or dropped, or a link left on a relationship id another relationship also holds;
-   - `revision-count` v1: at most `max` revision records in the redline or output (scope `redline` or `output`); a `w:delText` or `w:delInstrText` outside any deletion also counts. Every `reject` case requires zero.
+   - `revision-count` v1: at most `max` revision records in the redline or output (scope `redline` or `output`); a `w:delText` or `w:delInstrText` outside any deletion also counts. Every `reject` and `accept` case requires zero.
    - `revision-text` v1 (scope `redline`): the declared body text occurs in a named move-source range as `w:t`, or in adjacent ordinary deletion wrappers as `w:delText`. It forbids deletion-only carriers in move sources and ordinary carriers in deletions. Metric contract version 12 records this check, which catches #1420 even when accept/reject and schema checks pass.
 
    - `section-boundaries` v1 (scope `accepted` or `rejected`): inline section breaks must occur after exactly the declared zero-based body paragraph indices in `afterParagraphs`. Paragraphs are enumerated in XML document order beneath the body, including nested containers; the trailing body section properties are excluded. This binds section and running-story changes to their carrier paragraphs even when the semantic view and section-story order match. Metric contract version 18 records this check.
@@ -97,7 +98,7 @@ python3 -m bench redline run --adapter authored --candidate authored-calibration
 python3 -m bench redline run --adapter docxodus --candidate FULL_COMMIT_SHA --build /path/to/adapter --validator /path/to/validator --out runs/redline
 ```
 
-`build-docxodus` requires a clean checkout at the exact commit. It compiles `adapters/docxodus-redline` against that checkout's `Docxodus/Docxodus.csproj` into the output directory and records the commit, tree, adapter source digests, build recipe digest, .NET SDK version and every built assembly's digest in `redline-build.json`. Each case re-verifies that record and the checkout before invoking the adapter. The adapter calls `DocxCompare.Compare`, `DocxCompare.Consolidate` or `RevisionProcessor.RejectRevisions`, with the author `Bench` and the fixed date `2026-01-01T00:00:00Z` so outputs are reproducible.
+`build-docxodus` requires a clean checkout at the exact commit. It compiles `adapters/docxodus-redline` against that checkout's `Docxodus/Docxodus.csproj` into the output directory and records the commit, tree, adapter source digests, build recipe digest, .NET SDK version and every built assembly's digest in `redline-build.json`. Each case re-verifies that record and the checkout before invoking the adapter. The adapter calls `DocxCompare.Compare`, `DocxCompare.Consolidate` or `RevisionProcessor.RejectRevisions` (`accept`: `RevisionProcessor.AcceptRevisions`), with the author `Bench` and the fixed date `2026-01-01T00:00:00Z` so outputs are reproducible.
 
 LibreOffice is found through `BENCH_LIBREOFFICE` or `PATH`; the UNO driver runs under `BENCH_LIBREOFFICE_PYTHON`, or the `python` LibreOffice ships beside `soffice`, or `/usr/bin/python3`. Their versions and digests are recorded with the run.
 
@@ -623,3 +624,20 @@ candidate's redline with the benchmark's own engine, which removes a deleted cel
 in every case, and its view does not carry spans or widths, so it cannot see this defect; the
 resolvers that had it are measured directly above. All eight LibreOffice loaded-text comparisons
 are declared eligible. All previous DOCX bytes are unchanged.
+
+## Math objects inserted and then deleted (Docxodus #1189)
+
+`redline-v39` adds three original Juniper cases. A fraction's control character
+(`m:fPr/m:ctrlPr`) carries `w:ins > w:del`, the only nesting `CT_MathCtrlIns` allows, with its
+numerator and denominator inserted. Word 2024 removes the fraction on Accept All and on Reject
+All. The reproducer accepts that document through the `accept` operation; the controls accept a
+fraction that was only deleted and reject the nested form. Each output is compared whole with the
+declared document and must hold no revisions. Expected documents are authored from Word's
+endpoints.
+
+Metric contract version 27 records a change to the benchmark's own engine, which now removes a
+math object whose control character carries a removing mark. Before, it resolved only the text
+inside, so an inserted-then-deleted object kept its inserted text on accept. No earlier case holds
+a control-character mark, and all previous DOCX bytes are unchanged. Session listing and selective
+resolution of the two revisions are covered by Docxodus's own tests, not scored here. See
+[the evidence](results/math-control-revisions/README.md).

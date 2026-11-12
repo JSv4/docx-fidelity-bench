@@ -166,10 +166,26 @@ def _removed_custom_xml(root, policy):
     return removed
 
 
+def _control_marks(element):
+    """Revision marks on a math object's control character (m:*Pr/m:ctrlPr), with the deletion nested
+    in an inserted one. Word resolves the whole object, text included, by these marks alone:
+    measured in Word 2024 for Docxodus #1189 (docs/results/math-control-revisions)."""
+    if not element.tag.startswith('{' + M + '}'):
+        return
+    for properties in element:
+        if properties.tag.startswith('{' + M + '}') and properties.tag.endswith('Pr'):
+            for mark in properties.iterfind(m('ctrlPr') + '/*'):
+                if mark.tag in (w('ins'), w('del')):
+                    yield mark
+                    yield from mark.iterfind(w('del'))
+
+
 def _resolve_content(element, policy, removed_xml):
     kept = []
     for child in list(element):
         tag = child.tag
+        if any(_removes(mark, policy) for mark in _control_marks(child)):
+            continue
         if tag in WRAPPERS and element.tag not in MARKER_PARENTS:
             if not _removes(child, policy):
                 _resolve_content(child, policy, removed_xml)

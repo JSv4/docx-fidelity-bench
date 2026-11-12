@@ -65,6 +65,11 @@ The eight fractional-measure cases for Docxodus #1622 contain original Quillwort
 literal OOXML authored in bench/fixtures.py. No product fixture, helper, document, image or
 font program is imported, and no reporter attachment was opened or used.
 
+The three math-control redline cases for Docxodus #1189 contain original Juniper labels and
+literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document or
+font program is imported, and the issue's fixture bundle was not copied. Their review images are
+measurement cards, not page renders: Word 2024 opened the fixtures unmodified.
+
 The two default-spacing redline cases for Docxodus #1576 contain original Quince labels and
 literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document or
 font program is imported. Their review images are measurement cards, not page renders: Word 2024
