@@ -211,6 +211,10 @@ OMML authored in `bench/fixtures.py`. No renderer fixture, helper, template, doc
 image or font program is imported. DejaVu Serif and Liberation Serif are separately
 provisioned. Labeled review sheets show only these authored inputs and their local renders.
 
+The two default-math-settings cases for Docxodus #1710 reuse that original Maple fraction. Their settings block is
+the list of element names and default values Word writes into `word/settings.xml`, typed here as literal OOXML; no
+Word-saved file or renderer fixture content is included.
+
 The eleven custom-path cases for Docxodus #1554 contain original Willow labels and
 literal geometry authored in `bench/fixtures.py`. No renderer fixture, helper, template,
 external document, image or font program is imported. Review sheets show these authored inputs.
