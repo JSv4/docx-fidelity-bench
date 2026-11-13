@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v41', 'version': 41}
+SUITE = {'id': 'redline-v42', 'version': 42}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -352,6 +352,7 @@ def generate():
     math_control_revisions(corpus)
     missing_default_spacing(corpus)
     strict_rejects(corpus)
+    unkept_note_citations(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -2609,3 +2610,56 @@ def strict_rejects(corpus):
                    'Rejecting one deletion and one insertion in a ' + ('Strict' if strict else 'Transitional') + '-conformance package',
                    'reject', [dict(tracked, role='input')], {'output': original}, original,
                    [{'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0}])
+
+
+# ---------------------------------------------------------------------------------------------
+# Docxodus #1701: notes whose citations the comparison does not keep
+# ---------------------------------------------------------------------------------------------
+
+def unkept_note_citations(corpus):
+    """Two cited paragraphs, replaced whole in the reproducer and edited by one word in the control.
+
+    Both documents number their footnotes 1 and 2. Where a paragraph is replaced, its citation is
+    deleted with it and the revision's citation inserted, so each of the four notes belongs to one
+    document and needs an id of its own: desktop Word 2024 refuses a document in which two references
+    name one note. Where a paragraph keeps its citation, the note behind it is one note with tracked
+    edits, however much of its text changed."""
+    def cite(identifier):
+        return f'<w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr><w:footnoteReference w:id="{identifier}"/></w:r>'
+    mark = '<w:r><w:rPr><w:vertAlign w:val="superscript"/></w:rPr><w:footnoteRef/></w:r>'
+    def note(identifier, content):
+        return f'<w:footnote w:id="{identifier}">{content}</w:footnote>'
+    def document(entries):
+        return dict(body=''.join(p(t(text) + cite(i)) for i, (text, _) in enumerate(entries, 1)) + p(t(CLOSING)),
+                    footnotes=''.join(note(i, p(mark + t(' ' + source))) for i, (_, source) in enumerate(entries, 1)))
+    original = [('Heron pond is dredged each autumn.', 'Pond ledger, volume two.'),
+                ('Sluice boards are tarred each spring.', 'Sluice warden notebook.')]
+    replaced = [('Kestrel boxes hang along the north barn.', 'Barn survey sheet.'),
+                ('Owl pellets are logged every month.', 'Pellet register.')]
+    edited = [('Heron pond is dredged each winter.', 'Barn survey sheet.'),
+              ('Sluice boards are tarred each summer.', 'Pellet register.')]
+
+    rev = Revisions()
+    def whole(entries, first, wrap, kind):
+        body = ''.join(p(wrap(t(text) + cite(i)), mark=rev.mark(kind)) for i, (text, _) in enumerate(entries, first))
+        notes = ''.join(note(i, p(wrap(mark + t(' ' + source)), mark=rev.mark(kind))) for i, (_, source) in enumerate(entries, first))
+        return body, notes
+    inserted = whole(replaced, 1, rev.ins, 'ins')
+    deleted = whole(original, 3, rev.dele, 'del')
+    corpus.compare('redline-note-citations-replaced', 'revisions', 'reproducer', 'JSv4/Docxodus#1701',
+                   'Two cited paragraphs replaced whole: the deleted and the inserted citations name four notes',
+                   document(original), document(replaced),
+                   dict(body=inserted[0] + deleted[0] + p(t(CLOSING)), footnotes=inserted[1] + deleted[1]),
+                   [untracked(CLOSING), {'type': 'note-citations', 'version': 1, 'scope': 'redline'}])
+
+    rev = Revisions()
+    body, notes = '', ''
+    for i, ((before, old), (after, new)) in enumerate(zip(original, edited), 1):
+        stem, was, now = before.rsplit(' ', 1)[0] + ' ', before.rsplit(' ', 1)[1][:-1], after.rsplit(' ', 1)[1][:-1]
+        body += p(t(stem) + rev.dele(t(was)) + rev.ins(t(now)) + t('.') + cite(i))
+        notes += note(i, p(mark + t(' ') + rev.dele(t(old)) + rev.ins(t(new))))
+    corpus.compare('redline-note-citations-kept-control', 'revisions', 'control', 'JSv4/Docxodus#1701',
+                   'Two cited paragraphs edited by one word: each kept citation names one note with tracked edits',
+                   document(original), document(edited), dict(body=body + p(t(CLOSING)), footnotes=notes),
+                   [untracked(CLOSING, 'Heron pond is dredged each ', 'Sluice boards are tarred each '),
+                    {'type': 'note-citations', 'version': 1, 'scope': 'redline'}])

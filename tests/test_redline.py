@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v41')
-        self.assertEqual(len(registry['cases']), 307)
+        self.assertEqual(registry['suite']['id'], 'redline-v42')
+        self.assertEqual(len(registry['cases']), 309)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694, 1701)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -474,6 +474,33 @@ class AuthoredCalibration(unittest.TestCase):
                 styles.find(W + 'style/' + W + 'pPr').remove(styles.find(W + 'style/' + W + 'pPr/' + W + 'pPrChange'))
                 parts['word/styles.xml'] = ET.tostring(styles)
                 self.assertTrue(redline._assertion(assertion, revisions.Package(parts), {})['passed'])
+
+    def test_note_citations_require_every_reference_to_name_a_note_of_its_own(self):
+        record = case('redline-note-citations-replaced')
+        declaration = next(a for a in record['assertions'] if a['type'] == 'note-citations')
+        for name in ('redline-note-citations-replaced', 'redline-note-citations-kept-control'):
+            self.assertTrue(redline._assertion(declaration, load(case(name)['authored']), {})['passed'], name)
+        # Docxodus before #1701: each deleted citation takes an inserted citation's id and the two
+        # notes share one definition. Both round trips still reproduce the two documents.
+        parts = members(record['authored'])
+        document = ET.fromstring(parts['word/document.xml'])
+        for reference in document.iter(W + 'footnoteReference'):
+            reference.set(W + 'id', str((int(reference.get(W + 'id')) - 1) % 2 + 1))
+        notes = ET.fromstring(parts['word/footnotes.xml'])
+        by_id = {note.get(W + 'id'): note for note in notes}
+        for kept, merged in (('1', '3'), ('2', '4')):
+            by_id[kept].extend(list(by_id[merged]))
+            notes.remove(by_id[merged])
+        parts.update({'word/document.xml': ET.tostring(document), 'word/footnotes.xml': ET.tostring(notes)})
+        shared = revisions.Package(parts)
+        self.assertEqual(views(shared), views(load(record['authored'])))
+        self.assertEqual(redline._assertion(declaration, shared, {})['findings'],
+                         [{'kind': 'footnote', 'id': identifier, 'problem': 'cited by 2 references'} for identifier in ('1', '2')])
+        # A separator is not a content note, and neither is a note the part does not define.
+        for identifier in ('0', '9'):
+            dangling = rewrite(record['authored'], lambda root: next(root.iter(W + 'footnoteReference')).set(W + 'id', identifier))
+            self.assertIn({'kind': 'footnote', 'id': identifier, 'problem': 'names 0 content notes'},
+                          redline._assertion(declaration, dangling, {})['findings'])
 
     def test_missing_default_cases_reject_single_spacing_recorded_for_the_revised_side(self):
         for shape in ('missing-default', 'stated-default-control'):

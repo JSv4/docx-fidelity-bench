@@ -1,5 +1,13 @@
 `core-v168` adds an original three-level comment thread and a flat-note control for [Docxodus #1277](https://github.com/JSv4/Docxodus/issues/1277). The pair differs only in parent links. Their PDFs hide comments and retain body/page checks. The margin-profile HTML companion uses a new version 1 `marker-block-width` assertion: each reply's note paragraph must have the content width of the root note's paragraph within 0.5px, so a reply that repeats the note's border and padding inside its parent fails. All earlier DOCX files remain byte-identical. The redline suite remains `redline-v41`. New reference registration and full-suite scoring remain pending.
 
+`redline-v42` adds a footnote pair for Docxodus #1701: two cited paragraphs are replaced whole, so
+the redline holds two deleted and two inserted citations, and each must name a note of its own;
+the control edits one word in each paragraph and keeps both citations. A new `note-citations`
+assertion (metric contract 29) requires every footnote and endnote reference of the raw redline
+to name one content note that no other reference names: Word 2024 refuses a document in which
+two references share a note, and neither round trip sees it. See
+[the redline notes](docs/REDLINE.md#notes-whose-citations-the-comparison-does-not-keep-docxodus-1701).
+
 `redline-v41` adds a Strict-conformance reject pair for Docxodus #1268: one paragraph deletes
 “Amber prism” and inserts “Indigo prism” in a Strict package (purl.oclc.org namespace and
 relationship-type URIs), and the control is the same package in the Transitional class. Both use

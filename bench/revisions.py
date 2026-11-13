@@ -730,6 +730,28 @@ def comment_thread_findings(package, threads):
     return findings
 
 
+def note_citation_findings(package):
+    """Footnote and endnote references in the main document that do not each name a note of their own.
+
+    Every w:footnoteReference and w:endnoteReference must name exactly one content note (no w:type, or
+    w:type="normal") of the related part, and no two references may name the same note, tracked or not.
+    Desktop Word 2024 refuses to open a document in which two references share a note (Docxodus #1701).
+    Accept All and Reject All each drop one of a deleted and an inserted reference, so neither round trip
+    sees a redline that gives both one id."""
+    findings = []
+    for kind in ('footnote', 'endnote'):
+        path = next((target for relation, target in package.main_rels.values() if relation == kind + 's'), None)
+        notes = [] if path is None or path not in package.members else package.xml(path).findall(w(kind))
+        defined = [note.get(w('id')) for note in notes if note.get(w('type')) in (None, 'normal')]
+        cited = [reference.get(w('id')) for reference in package.xml(package.main).iter(w(kind + 'Reference'))]
+        for identifier in sorted(set(cited), key=cited.index):
+            if defined.count(identifier) != 1:
+                findings.append({'kind': kind, 'id': identifier, 'problem': f'names {defined.count(identifier)} content notes'})
+            elif cited.count(identifier) != 1:
+                findings.append({'kind': kind, 'id': identifier, 'problem': f'cited by {cited.count(identifier)} references'})
+    return findings
+
+
 def hyperlink_target_findings(package, targets):
     """Main-document hyperlinks whose relationship is not one external hyperlink, or whose targets differ.
 
