@@ -1,3 +1,11 @@
+`redline-v42` adds three cases for [Docxodus #1700](https://github.com/JSv4/Docxodus/issues/1700),
+lists whose bullet is a picture: a revision adding such a list, a list replaced by an unrelated
+one where both documents number their picture bullet 0, and a control adding the same list with
+an ordinary bullet. A new `picture-bullets` check (metric contract 29) reads, for every list
+paragraph of each resolved endpoint, the image its level draws. Word 2024 refuses a redline whose
+level names a missing picture bullet, and neither round trip nor the SDK validator sees it. See
+[evidence](docs/results/picture-bullets/README.md).
+
 `core-v168` adds an original three-level comment thread and a flat-note control for [Docxodus #1277](https://github.com/JSv4/Docxodus/issues/1277). The pair differs only in parent links. Their PDFs hide comments and retain body/page checks. The margin-profile HTML companion uses a new version 1 `marker-block-width` assertion: each reply's note paragraph must have the content width of the root note's paragraph within 0.5px, so a reply that repeats the note's border and padding inside its parent fails. All earlier DOCX files remain byte-identical. The redline suite remains `redline-v41`. New reference registration and full-suite scoring remain pending.
 
 `redline-v41` adds a Strict-conformance reject pair for Docxodus #1268: one paragraph deletes

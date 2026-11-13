@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`, `accept`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v41`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v42`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -40,6 +40,7 @@ A case scores **100** when every applicable check passes and **0** otherwise. Th
    - `para-ids-valid` v1: every `w14:paraId` in every XML part is eight hexadecimal digits, below `0x80000000`, and unique across the package;
    - `style-ids-unique` v1: no two `w:style` elements share a `w:styleId`, whatever their types;
    - `style-run-history` v1 (scope `redline`): every paragraph style whose `w:pPr` holds a `w:pPrChange` also has a `w:rPr` holding a `w:rPrChange`. Word 2024's Reject All restores a style from both markers and resets the run properties of a style without the second to its built-ins, so a spacing-only style revision rejects with 10 pt text; neither round trip sees this. The check is one-directional, because a run-only style revision was not measured. Metric contract 23 records this check;
+   - `picture-bullets` v1 (scope `accepted` or `rejected`): the body paragraphs with text that are list items, in order, each with the SHA-256 of the image its level draws as a bullet (or none), equal the declared `items`. A level names its picture through `w:lvlPicBulletId`, a `w:numPicBullet` of that id in the numbering part and an image relationship of that part; a level override of the list instance is read before the definition. A missing bullet or image is reported as `unresolved` and fails. Neither round trip reads the numbering part, and the SDK validator accepts a level naming a bullet that does not exist, which Word 2024 refuses to open. Metric contract 29 records this check;
    - `comment-threads` v1 (scope `redline`): in the comments and commentsExtended parts, every entry is keyed to a comment's last-paragraph `w14:paraId`, every `w15:paraIdParent` names the last-paragraph `w14:paraId` of a comment that has its own entry, and for each declared `[reply, parent]` pair exactly one comment holds the reply's text and its entry names the comment holding the parent's text. Comment threading is not part of the semantic view, so neither round trip sees a reply detached from its parent;
    - `hyperlink-targets` v1 (scope `redline`): every `w:hyperlink` in the main document with an `r:id` resolves to exactly one relationship of the main part, of the hyperlink type with `TargetMode="External"`, and the set of their `Target` values equals the declared `targets`, compared as written after XML parsing, with no URI normalization. The semantic view records only a hyperlink's boundaries, so neither round trip sees a target rewritten (for example to the SDK's `rewritten://` placeholder), trimmed or dropped, or a link left on a relationship id another relationship also holds;
    - `revision-count` v1: at most `max` revision records in the redline or output (scope `redline` or `output`); a `w:delText` or `w:delInstrText` outside any deletion also counts. Every `reject` and `accept` case requires zero.
@@ -670,3 +671,24 @@ substitution finds nothing in a Transitional package, so no earlier result chang
 previous DOCX bytes are unchanged. LibreOffice renders of both inputs, and of the Docxodus reject
 outputs before and after the fix, are in
 [`docs/results/strict-revision-reject/`](results/strict-revision-reject/).
+
+## Lists with picture bullets (Docxodus #1700)
+
+`redline-v42` adds three original cases. A picture bullet is three linked pieces: a level's
+`w:lvlPicBulletId`, the `w:numPicBullet` it names in the numbering part, and the image that bullet
+names through the numbering part's relationships. A redline built on the original has to bring
+all three for a list it takes from the revision.
+
+- `redline-picture-bullet-inserted` (reproducer): the original has no numbering part; the revision
+  adds a two-item list with a teal picture bullet.
+- `redline-picture-bullet-shared-id` (reproducer): the original's list has a rust picture bullet and
+  the revision replaces it with an unrelated list that has a teal one. Both documents number their
+  picture bullet 0, so the imported bullet needs an id of its own.
+- `redline-picture-bullet-symbol-control` (control): the first case with an ordinary bullet.
+
+Accept/reject round trips, `untracked-text` and the new `picture-bullets` v1 check on both
+endpoints are mandatory. The semantic view does not compare numbering, so the endpoints alone
+cannot see a list drawn with the wrong picture or naming a bullet that is not there. Each authored
+redline carries every bullet it needs under distinct ids. Word 2024 results and renders are in
+[`docs/results/picture-bullets/`](results/picture-bullets/). The authored redlines were not run
+through LibreOffice or the SDK validator on the capture machine; CI runs both.

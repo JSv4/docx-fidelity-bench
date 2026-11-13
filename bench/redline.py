@@ -26,13 +26,13 @@ from .common import ROOT, contained, digest, execute, identity, read_json, write
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
 OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'replace-text': 1, 'revision-ownership': 1, 'revision-resolve': 1, 'accept': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1, 2}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'positional-rewrites': {1}, 'section-stories': {1}, 'section-boundaries': {1}, 'section-flags': {1}, 'style-run-history': {1}}
+ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1, 2}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'positional-rewrites': {1}, 'section-stories': {1}, 'section-boundaries': {1}, 'section-flags': {1}, 'style-run-history': {1}, 'picture-bullets': {1}}
 # Operations whose candidate returns the resolved document itself, not a redline.
 OUTPUT_OPERATIONS = {'reject', 'accept', 'column-edit', 'block-insert', 'revision-resolve'}
 RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
 SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}, 'revision-resolve': {'output'}, 'accept': {'output'}}
-CONTRACT = {'version': 28, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+CONTRACT = {'version': 29, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -54,7 +54,8 @@ CONTRACT = {'version': 28, 'view': revisions.VIEW_VERSION, 'engines': ['bench-ma
             'mathControls': 'a math object is removed whole when a mark on its control character (m:ctrlPr), or the deletion nested in an inserted one, removes it',
             'hyperlinkTargets': 'declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written',
             'styleRunHistory': 'declared style-run-history assertions require every paragraph style holding a pPrChange in the raw redline to hold an rPrChange too, since Word resets an unarchived style run slice to its built-ins on Reject All',
-            'strictPackages': 'a package in the ISO/IEC 29500 Strict conformance class is read under the Transitional WordprocessingML, math and relationship names, so an input or an output of either class is resolved and viewed alike'}
+            'strictPackages': 'a package in the ISO/IEC 29500 Strict conformance class is read under the Transitional WordprocessingML, math and relationship names, so an input or an output of either class is resolved and viewed alike',
+            'pictureBullets': 'declared picture-bullets assertions require every body list paragraph of an independently resolved endpoint to draw the declared bullet: the bytes of the image its level names through a picture bullet of the numbering part, or none'}
 HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'bench/redline_build.py', 'bench/revision_ownership.py']
 
 
@@ -282,6 +283,9 @@ def validate_registry(registry=None):
                      'revision-count': lambda a: isinstance(a.get('max'), int) and a['max'] >= 0,
                      'para-ids-valid': lambda a: True, 'style-ids-unique': lambda a: True,
                      'style-run-history': lambda a: a['scope'] == 'redline',
+                     'picture-bullets': lambda a: a['scope'] in {'accepted', 'rejected'} and isinstance(a.get('items'), list)
+                         and all(isinstance(x, list) and len(x) == 2 and isinstance(x[0], str) and x[0]
+                             and (x[1] is None or isinstance(x[1], str) and re.fullmatch('[0-9a-f]{64}', x[1])) for x in a['items']),
                      'section-boundaries': lambda a: a['scope'] in {'accepted', 'rejected'}
                          and isinstance(a.get('afterParagraphs'), list)
                          and all(type(i) is int and i >= 0 for i in a['afterParagraphs'])
@@ -493,6 +497,60 @@ def unarchived_style_runs(package):
                   if style.get(w('type'), 'paragraph') == 'paragraph'
                   and style.find(w('pPr') + '/' + w('pPrChange')) is not None
                   and style.find(w('rPr') + '/' + w('rPrChange')) is None)
+
+
+def picture_bullets(package, root):
+    """[text, picture] for every body paragraph with text that is a list item, in document order.
+
+    The picture is the SHA-256 of the image the paragraph's level draws as its bullet, None for an
+    ordinary bullet or number, or a string starting 'unresolved' when the chain is broken. A level
+    names its picture in three steps: w:lvlPicBulletId gives the id of a w:numPicBullet in the same
+    numbering part, whose shape names an image relationship of that part. Word 2024 refuses to open
+    a package whose level names a bullet the part does not define (Docxodus #1700); the Open XML SDK
+    validator reports nothing, and neither round trip reads the numbering part.
+    """
+    w = revisions.w
+    path = next((target for kind, target in package.main_rels.values() if kind == 'numbering' and target in package.members), None)
+    numbering = None if path is None else package.xml(path)
+    relationships = {} if path is None else package.relationships(path)
+
+    def one(parent, tag, attribute, value):
+        return next((e for e in parent.findall(w(tag)) if e.get(w(attribute)) == value), None)
+
+    def picture(properties):
+        def value(name, default=None):
+            element = properties.find(w(name))
+            return default if element is None else element.get(w('val'), default)
+        num = None if numbering is None else one(numbering, 'num', 'numId', value('numId'))
+        if num is None:
+            return 'unresolved: list ' + str(value('numId'))
+        level = value('ilvl', '0')
+        reference = num.find(w('abstractNumId'))
+        abstract = None if reference is None else one(numbering, 'abstractNum', 'abstractNumId', reference.get(w('val')))
+        levels = [o.find(w('lvl')) for o in num.findall(w('lvlOverride')) if o.get(w('ilvl')) == level]
+        levels.append(None if abstract is None else one(abstract, 'lvl', 'ilvl', level))
+        definition = next((e for e in levels if e is not None), None)
+        named = None if definition is None else definition.find(w('lvlPicBulletId'))
+        if named is None:
+            return None
+        bullet = one(numbering, 'numPicBullet', 'numPicBulletId', named.get(w('val')))
+        if bullet is None:
+            return 'unresolved: picture bullet ' + str(named.get(w('val')))
+        targets = [relationships[v][1] for e in bullet.iter() for k, v in e.attrib.items()
+                   if k.startswith('{' + revisions.REL[:-1] + '}') and relationships.get(v, ('', ''))[0] == 'image'
+                   and relationships[v][1] in package.members]
+        if len(targets) != 1:
+            return 'unresolved: image of picture bullet ' + str(named.get(w('val')))
+        return hashlib.sha256(package.members[targets[0]]).hexdigest()
+
+    items = []
+    for paragraph in root.find(w('body')).iter(w('p')):
+        properties = paragraph.find(w('pPr') + '/' + w('numPr'))
+        # A rejected deletion keeps its w:delText carrier in the resolved tree.
+        text = ''.join(e.text or '' for e in paragraph.iter() if e.tag in (w('t'), w('delText')))
+        if properties is not None and text:
+            items.append([text, picture(properties)])
+    return items
 
 
 def paragraph_spacing(package, parts, scope):
@@ -731,6 +789,9 @@ def _assertion(assertion, package, resolved):
     elif kind == 'style-ids-unique':
         findings = revisions.style_id_findings(package)
         check.update(passed=not findings, findings=findings)
+    elif kind == 'picture-bullets':
+        observed = picture_bullets(package, parts[package.main])
+        check.update(passed=observed == assertion['items'], observed=observed)
     elif kind == 'style-run-history':
         observed = unarchived_style_runs(package)
         check.update(passed=not observed, observed=observed)
