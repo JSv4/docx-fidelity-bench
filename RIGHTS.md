@@ -75,6 +75,14 @@ The eight fractional-measure cases for Docxodus #1622 contain original Quillwort
 literal OOXML authored in bench/fixtures.py. No product fixture, helper, document, image or
 font program is imported, and no reporter attachment was opened or used.
 
+The two note-citation redline cases for Docxodus #1701 contain original Heron pond and Kestrel
+text and literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper,
+document, image or font program is imported, and the reproduction scripts attached to the issue
+were not used. The Word 2024 behaviour the new assertion encodes was measured on separately
+authored probe documents and confirmed on each case's own files; their review images are
+Docxodus HTML renders of these packages and of Docxodus outputs made from them. No Word output
+is included.
+
 The two Strict-conformance redline cases for Docxodus #1268 contain original Ledger text and
 literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document or
 font program is imported. Their review images are LibreOffice renders of these packages and of

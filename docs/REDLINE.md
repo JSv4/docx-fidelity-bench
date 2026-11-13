@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`, `accept`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v41`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v42`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -40,6 +40,7 @@ A case scores **100** when every applicable check passes and **0** otherwise. Th
    - `para-ids-valid` v1: every `w14:paraId` in every XML part is eight hexadecimal digits, below `0x80000000`, and unique across the package;
    - `style-ids-unique` v1: no two `w:style` elements share a `w:styleId`, whatever their types;
    - `style-run-history` v1 (scope `redline`): every paragraph style whose `w:pPr` holds a `w:pPrChange` also has a `w:rPr` holding a `w:rPrChange`. Word 2024's Reject All restores a style from both markers and resets the run properties of a style without the second to its built-ins, so a spacing-only style revision rejects with 10 pt text; neither round trip sees this. The check is one-directional, because a run-only style revision was not measured. Metric contract 23 records this check;
+   - `note-citations` v1 (scope `redline`): every `w:footnoteReference` and `w:endnoteReference` in the main document names exactly one content note (no `w:type`, or `w:type="normal"`) of the related part, and no two references name the same note, tracked or not. Word 2024 refuses to open a document in which two references share a note. Accept All and Reject All each drop one of a deleted and an inserted reference, so neither round trip sees a redline that gives both one id (Docxodus #1701). Metric contract 29 records this check;
    - `comment-threads` v1 (scope `redline`): in the comments and commentsExtended parts, every entry is keyed to a comment's last-paragraph `w14:paraId`, every `w15:paraIdParent` names the last-paragraph `w14:paraId` of a comment that has its own entry, and for each declared `[reply, parent]` pair exactly one comment holds the reply's text and its entry names the comment holding the parent's text. Comment threading is not part of the semantic view, so neither round trip sees a reply detached from its parent;
    - `hyperlink-targets` v1 (scope `redline`): every `w:hyperlink` in the main document with an `r:id` resolves to exactly one relationship of the main part, of the hyperlink type with `TargetMode="External"`, and the set of their `Target` values equals the declared `targets`, compared as written after XML parsing, with no URI normalization. The semantic view records only a hyperlink's boundaries, so neither round trip sees a target rewritten (for example to the SDK's `rewritten://` placeholder), trimmed or dropped, or a link left on a relationship id another relationship also holds;
    - `revision-count` v1: at most `max` revision records in the redline or output (scope `redline` or `output`); a `w:delText` or `w:delInstrText` outside any deletion also counts. Every `reject` and `accept` case requires zero.
@@ -670,3 +671,45 @@ substitution finds nothing in a Transitional package, so no earlier result chang
 previous DOCX bytes are unchanged. LibreOffice renders of both inputs, and of the Docxodus reject
 outputs before and after the fix, are in
 [`docs/results/strict-revision-reject/`](results/strict-revision-reject/).
+
+## Notes whose citations the comparison does not keep (Docxodus #1701)
+
+`redline-v42` adds an original pair. The original cites footnotes 1 and 2 from "Heron pond is
+dredged each autumn." and "Sluice boards are tarred each spring."; the revision of the reproducer
+replaces both paragraphs ("Kestrel boxes hang along the north barn.", "Owl pellets are logged every
+month.") and cites its own footnotes 1 and 2. No citation survives, so a correct redline writes
+four: two in deleted text and two in inserted text, each naming a note of its own. The authored
+redline gives the inserted notes ids 1 and 2 and the deleted notes ids 3 and 4, each wholly
+inserted or wholly deleted with one `w:footnoteRef`. The control changes one word in each paragraph
+and rewrites both notes: each citation is kept, and its note is one definition with tracked edits.
+
+Docxodus before the fix paired the leftover notes by position, wrote the deleted citations with
+the inserted citations' ids and merged each pair into one definition. Accepting drops the deleted
+citations and rejecting drops the inserted ones, so both of the benchmark's round trips pass and
+the Open XML SDK reports nothing; only opening the file shows the fault. Measured in desktop Word 2024
+(16.0 build 20326, Windows 11) through `Documents.Open`:
+
+| Document | Word 2024 |
+| --- | --- |
+| Both inputs, both authored redlines | Open; Accept All and Reject All give the revised and the original documents, notes included |
+| Two untracked `w:footnoteReference w:id="1"` in one paragraph | "The file appears to be corrupted." |
+| A deleted and an inserted reference with id 1, definition untouched | "The file appears to be corrupted." |
+| Two deleted references with id 1 | "The file appears to be corrupted." |
+| Docxodus `57f5d346` redline of the reproducer (ids 1, 2, 1, 2) | "The file appears to be corrupted." |
+| The same citations with one inserted and one deleted `w:footnoteRef` in a kept note (the control shape, whole note rewritten) | Opens; resolves correctly |
+
+So the rule is about references, not revisions: Word requires every footnote or endnote to be
+cited by exactly one reference in the document. `note-citations` v1 (scope `redline`) checks that
+on the raw redline: every `w:footnoteReference` and `w:endnoteReference` in the main document
+names exactly one content note (no `w:type`, or `w:type="normal"`) of the related part, and no two
+references name the same note. Metric contract version 29 records the check. It is declared on
+both cases; no earlier case declares it, and all previous DOCX bytes are unchanged. The tests
+build the pre-fix shape from the authored redline, show that both of the benchmark's resolved views
+still equal the authored ones, and that the new check alone fails it.
+
+LibreOffice was not available where these cases were authored, so its four comparisons are
+declared eligible on the strength of the #1212 note cases, which use the same wholly inserted note
+shape; CI's authored calibration is the check, and a disagreement there must be recorded in
+`LIBREOFFICE_INELIGIBLE` with what LibreOffice did. Labelled renders of the inputs, the authored
+redlines and the Docxodus redlines before and after the fix are in
+[`docs/results/unkept-note-citations/`](results/unkept-note-citations/README.md).
