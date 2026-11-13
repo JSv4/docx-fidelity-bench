@@ -4140,6 +4140,25 @@ def plain_math_cases(add, cases):
             cases[-1]['fonts'].append('DejaVu Serif')
             cases[-1]['htmlAssertions'] = [{'type': 'math-expression', 'version': 1, 'marker': 'MapleFormula',
                                            'display': 'block' if display else 'inline', 'tree': tree}]
+    # Docxodus #1710: the settings Word writes into every document it saves, each at the value it has when
+    # absent, so Word draws these exactly as the fraction cases above, which are their controls.
+    word_settings = settings.replace('</m:mathPr>', '<m:brkBin m:val="before"/><m:brkBinSub m:val="--"/>'
+        '<m:smallFrac m:val="0"/><m:dispDef/><m:lMargin m:val="0"/><m:rMargin m:val="0"/>'
+        '<m:defJc m:val="centerGroup"/><m:wrapIndent m:val="1440"/><m:intLim m:val="subSup"/>'
+        '<m:naryLim m:val="undOvr"/></m:mathPr>')
+    formula, operands, tree = formulas['fraction']
+    for display in (False, True):
+        expression = '<m:oMath>' + formula + '</m:oMath>'
+        if display: expression = '<m:oMathPara>' + expression + '</m:oMathPara>'
+        add('plain-math-word-settings-' + ('display' if display else 'inline'), 'paragraphs',
+            'Maple fraction under the math settings Word saves by default (Docxodus #1710)',
+            ['MapleBegin', *operands, 'MapleEnd'], para('MapleBegin') + para(runs=expression) + para('MapleEnd'),
+            styles_xml=styles, namespaces_extra=f' xmlns:m="{m}"', extra_parts={'word/settings.xml': word_settings},
+            assertions=[{'type': 'same-page', 'version': 1, 'markers': ['MapleBegin', *operands, 'MapleEnd']},
+                        {'type': 'required-font-family', 'version': 1, 'family': 'DejaVu Serif'}])
+        cases[-1]['fonts'].append('DejaVu Serif')
+        cases[-1]['htmlAssertions'] = [{'type': 'math-expression', 'version': 1, 'marker': 'MapleFormula',
+                                       'display': 'block' if display else 'inline', 'tree': tree}]
     for kind, text in [('fraction', 'MaplePlain 27.5 / 9'), ('root', 'MaplePlain root 64 index 3')]:
         add('plain-math-' + kind + '-prose-control', 'paragraphs', 'Ordinary Maple prose without an equation',
             ['MapleBegin', text, 'MapleEnd'], para('MapleBegin') + para(text) + para('MapleEnd'), styles_xml=styles,
@@ -7349,7 +7368,7 @@ def generate():
     style_frame_direct_cases(add)
     missing_paragraph_default_cases(add)
     reply_width_cases(add, cases, comment_styles)
-    registry = {'schema': 1, 'suite': {'id': 'core-v168', 'version': 168, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v169', 'version': 169, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 
