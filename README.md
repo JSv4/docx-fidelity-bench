@@ -1,3 +1,11 @@
+`redline-v44` adds three cases for [Docxodus #1700](https://github.com/JSv4/Docxodus/issues/1700),
+lists whose bullet is a picture: a revision adding such a list, a list replaced by an unrelated
+one where both documents number their picture bullet 0, and a control adding the same list with
+an ordinary bullet. A new `picture-bullets` check (metric contract 31) reads, for every list
+paragraph of each resolved endpoint, the image its level draws. Word 2024 refuses a redline whose
+level names a missing picture bullet, and neither round trip nor the SDK validator sees it. See
+[evidence](docs/results/picture-bullets/README.md).
+
 `redline-v43` adds a text-box deletion pair for Docxodus #1699: a deleted run that anchors a text box
 keeps the box's text ordinary, as Word 2024 writes it, and a control deletes the paragraph beside a
 box that stays. A new `deleted-text-owned` assertion requires deleted text to lie in a deletion of

@@ -1,0 +1,374 @@
+{
+  "builds": {
+    "baseline": "main `57f5d346`",
+    "candidate": "the fix branch `cf7dc210` ([JSv4/Docxodus#1700](https://github.com/JSv4/Docxodus/issues/1700))"
+  },
+  "cases": {
+    "redline-picture-bullet-inserted": {
+      "benchMarkupChecks": {
+        "authored": {
+          "picture-bullets:accepted": true,
+          "picture-bullets:rejected": true,
+          "untracked-text:redline": true,
+          "view:accepted": true,
+          "view:rejected": true
+        },
+        "baseline": {
+          "picture-bullets:accepted": false,
+          "picture-bullets:accepted:observed": [
+            [
+              "Sorrel step: inspect the intake valves.",
+              "unresolved: picture bullet 0"
+            ],
+            [
+              "Sorrel step: log the coolant reading.",
+              "unresolved: picture bullet 0"
+            ]
+          ],
+          "picture-bullets:rejected": true,
+          "untracked-text:redline": true,
+          "view:accepted": true,
+          "view:rejected": true
+        },
+        "candidate": {
+          "picture-bullets:accepted": true,
+          "picture-bullets:rejected": true,
+          "untracked-text:redline": true,
+          "view:accepted": true,
+          "view:rejected": true
+        }
+      },
+      "kind": "reproducer",
+      "word": {
+        "authored": {
+          "accept": {
+            "listParagraphs": 2,
+            "ok": true,
+            "pictureBullets": [
+              true,
+              true
+            ],
+            "revisionsAfter": 0,
+            "revisionsBefore": 1
+          },
+          "open": {
+            "listParagraphs": 2,
+            "ok": true,
+            "pictureBullets": [
+              true,
+              true
+            ],
+            "revisionsAfter": 1,
+            "revisionsBefore": 1
+          },
+          "reject": {
+            "listParagraphs": 0,
+            "ok": true,
+            "pictureBullets": [],
+            "revisionsAfter": 0,
+            "revisionsBefore": 1
+          }
+        },
+        "baseline": {
+          "accept": {
+            "message": "The file appears to be corrupted.",
+            "ok": false
+          },
+          "open": {
+            "message": "The file appears to be corrupted.",
+            "ok": false
+          },
+          "reject": {
+            "message": "The file appears to be corrupted.",
+            "ok": false
+          }
+        },
+        "candidate": {
+          "accept": {
+            "listParagraphs": 2,
+            "ok": true,
+            "pictureBullets": [
+              true,
+              true
+            ],
+            "revisionsAfter": 0,
+            "revisionsBefore": 1
+          },
+          "open": {
+            "listParagraphs": 2,
+            "ok": true,
+            "pictureBullets": [
+              true,
+              true
+            ],
+            "revisionsAfter": 1,
+            "revisionsBefore": 1
+          },
+          "reject": {
+            "listParagraphs": 0,
+            "ok": true,
+            "pictureBullets": [],
+            "revisionsAfter": 0,
+            "revisionsBefore": 1
+          }
+        }
+      }
+    },
+    "redline-picture-bullet-shared-id": {
+      "benchMarkupChecks": {
+        "authored": {
+          "picture-bullets:accepted": true,
+          "picture-bullets:rejected": true,
+          "untracked-text:redline": true,
+          "view:accepted": true,
+          "view:rejected": true
+        },
+        "baseline": {
+          "picture-bullets:accepted": false,
+          "picture-bullets:accepted:observed": [
+            [
+              "Sorrel step: inspect the intake valves.",
+              "065d2c5168fe17e18a1eb86f16528b7f01b31d0ddece004e0c4886b25d0bcc86"
+            ],
+            [
+              "Sorrel step: log the coolant reading.",
+              "065d2c5168fe17e18a1eb86f16528b7f01b31d0ddece004e0c4886b25d0bcc86"
+            ]
+          ],
+          "picture-bullets:rejected": true,
+          "untracked-text:redline": true,
+          "view:accepted": true,
+          "view:rejected": true
+        },
+        "candidate": {
+          "picture-bullets:accepted": true,
+          "picture-bullets:rejected": true,
+          "untracked-text:redline": true,
+          "view:accepted": true,
+          "view:rejected": true
+        }
+      },
+      "kind": "reproducer",
+      "word": {
+        "authored": {
+          "accept": {
+            "listParagraphs": 2,
+            "ok": true,
+            "pictureBullets": [
+              true,
+              true
+            ],
+            "revisionsAfter": 0,
+            "revisionsBefore": 2
+          },
+          "open": {
+            "listParagraphs": 4,
+            "ok": true,
+            "pictureBullets": [
+              true,
+              true,
+              true,
+              true
+            ],
+            "revisionsAfter": 2,
+            "revisionsBefore": 2
+          },
+          "reject": {
+            "listParagraphs": 2,
+            "ok": true,
+            "pictureBullets": [
+              true,
+              true
+            ],
+            "revisionsAfter": 0,
+            "revisionsBefore": 2
+          }
+        },
+        "baseline": {
+          "accept": {
+            "listParagraphs": 2,
+            "ok": true,
+            "pictureBullets": [
+              true,
+              true
+            ],
+            "revisionsAfter": 0,
+            "revisionsBefore": 3
+          },
+          "open": {
+            "listParagraphs": 4,
+            "ok": true,
+            "pictureBullets": [
+              true,
+              true,
+              true,
+              true
+            ],
+            "revisionsAfter": 3,
+            "revisionsBefore": 3
+          },
+          "reject": {
+            "listParagraphs": 2,
+            "ok": true,
+            "pictureBullets": [
+              true,
+              true
+            ],
+            "revisionsAfter": 0,
+            "revisionsBefore": 3
+          }
+        },
+        "candidate": {
+          "accept": {
+            "listParagraphs": 2,
+            "ok": true,
+            "pictureBullets": [
+              true,
+              true
+            ],
+            "revisionsAfter": 0,
+            "revisionsBefore": 3
+          },
+          "open": {
+            "listParagraphs": 4,
+            "ok": true,
+            "pictureBullets": [
+              true,
+              true,
+              true,
+              true
+            ],
+            "revisionsAfter": 3,
+            "revisionsBefore": 3
+          },
+          "reject": {
+            "listParagraphs": 2,
+            "ok": true,
+            "pictureBullets": [
+              true,
+              true
+            ],
+            "revisionsAfter": 0,
+            "revisionsBefore": 3
+          }
+        }
+      }
+    },
+    "redline-picture-bullet-symbol-control": {
+      "benchMarkupChecks": {
+        "authored": {
+          "picture-bullets:accepted": true,
+          "picture-bullets:rejected": true,
+          "untracked-text:redline": true,
+          "view:accepted": true,
+          "view:rejected": true
+        },
+        "baseline": {
+          "picture-bullets:accepted": true,
+          "picture-bullets:rejected": true,
+          "untracked-text:redline": true,
+          "view:accepted": true,
+          "view:rejected": true
+        },
+        "candidate": {
+          "picture-bullets:accepted": true,
+          "picture-bullets:rejected": true,
+          "untracked-text:redline": true,
+          "view:accepted": true,
+          "view:rejected": true
+        }
+      },
+      "kind": "control",
+      "word": {
+        "authored": {
+          "accept": {
+            "listParagraphs": 2,
+            "ok": true,
+            "pictureBullets": [
+              false,
+              false
+            ],
+            "revisionsAfter": 0,
+            "revisionsBefore": 1
+          },
+          "open": {
+            "listParagraphs": 2,
+            "ok": true,
+            "pictureBullets": [
+              false,
+              false
+            ],
+            "revisionsAfter": 1,
+            "revisionsBefore": 1
+          },
+          "reject": {
+            "listParagraphs": 0,
+            "ok": true,
+            "pictureBullets": [],
+            "revisionsAfter": 0,
+            "revisionsBefore": 1
+          }
+        },
+        "baseline": {
+          "accept": {
+            "listParagraphs": 2,
+            "ok": true,
+            "pictureBullets": [
+              false,
+              false
+            ],
+            "revisionsAfter": 0,
+            "revisionsBefore": 1
+          },
+          "open": {
+            "listParagraphs": 2,
+            "ok": true,
+            "pictureBullets": [
+              false,
+              false
+            ],
+            "revisionsAfter": 1,
+            "revisionsBefore": 1
+          },
+          "reject": {
+            "listParagraphs": 0,
+            "ok": true,
+            "pictureBullets": [],
+            "revisionsAfter": 0,
+            "revisionsBefore": 1
+          }
+        },
+        "candidate": {
+          "accept": {
+            "listParagraphs": 2,
+            "ok": true,
+            "pictureBullets": [
+              false,
+              false
+            ],
+            "revisionsAfter": 0,
+            "revisionsBefore": 1
+          },
+          "open": {
+            "listParagraphs": 2,
+            "ok": true,
+            "pictureBullets": [
+              false,
+              false
+            ],
+            "revisionsAfter": 1,
+            "revisionsBefore": 1
+          },
+          "reject": {
+            "listParagraphs": 0,
+            "ok": true,
+            "pictureBullets": [],
+            "revisionsAfter": 0,
+            "revisionsBefore": 1
+          }
+        }
+      }
+    }
+  },
+  "word": "Word 16.0.20326 (Windows), Documents.Open with repair off on a scratch copy, then Document.AcceptAllRevisions / RejectAllRevisions"
+}

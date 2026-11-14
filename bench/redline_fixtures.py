@@ -14,7 +14,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
-from .fixtures import PACKAGE_LINK_TARGET, PACKAGE_SHAPES, package_shape, custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases, consolidated_field_cases, comment_identity_cases, removed_comment_cases, note_insertion_cases, bookmark_reviewer_cases, bookmark_review_container, bookmark_conflict_cases, complex_field as field
+from .fixtures import png, PACKAGE_LINK_TARGET, PACKAGE_SHAPES, package_shape, custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases, consolidated_field_cases, comment_identity_cases, removed_comment_cases, note_insertion_cases, bookmark_reviewer_cases, bookmark_review_container, bookmark_conflict_cases, complex_field as field
 
 ROOT = Path(__file__).resolve().parents[1]
 W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v43', 'version': 43}
+SUITE = {'id': 'redline-v44', 'version': 44}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -354,6 +354,7 @@ def generate():
     strict_rejects(corpus)
     strict_chart_parts(corpus)
     deleted_textbox_text(corpus)
+    picture_bullet_lists(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -2713,3 +2714,67 @@ def deleted_textbox_text(corpus):
                    'A paragraph beside a text box is deleted; the box stays',
                    {'body': p(t(lead) + box) + p(t(note)) + p(t(closing))}, {'body': p(t(lead) + box) + p(t(closing))},
                    {'body': p(t(lead) + box) + p(rev.dele(t(note)), mark=rev.mark('del')) + p(t(closing))}, assertions)
+
+
+def picture_bullet_lists(corpus):
+    """Lists whose bullet is a picture, added by the revision or replaced by an unrelated list.
+
+    A level names its picture by w:lvlPicBulletId, the id of a w:numPicBullet in the numbering part,
+    whose shape names an image relationship of that part. A redline built on the original must bring
+    all three for a list it takes from the revision. In the shared-id case both documents call their
+    own, different picture "bullet 0". The control adds the same list with an ordinary bullet."""
+    teal, rust = png(8, 8, lambda x, y: (0, 128, 128)), png(8, 8, lambda x, y: (176, 64, 32))
+    lead = 'Sorrel depot checklist applies to every shift.'
+    added = ['Sorrel step: inspect the intake valves.', 'Sorrel step: log the coolant reading.']
+    former = ['Fennel task: sweep the loading bay.', 'Fennel task: stack the empty crates.']
+
+    def lists(pictures, levels):
+        """A numbering part: one picture bullet per image, and list i+1 on definition i with (indent, bullet id)."""
+        bullets = ''.join(f'<w:numPicBullet w:numPicBulletId="{i}"><w:pict><v:shape id="_x0000_i{1025 + i}" style="width:9pt;height:9pt" o:bullet="t">'
+                          f'<v:imagedata r:id="rBullet{i}" o:title=""/></v:shape></w:pict></w:numPicBullet>' for i in range(len(pictures)))
+        definitions = ''.join(f'<w:abstractNum w:abstractNumId="{i}"><w:multiLevelType w:val="hybridMultilevel"/><w:lvl w:ilvl="0"><w:start w:val="1"/>'
+                              '<w:numFmt w:val="bullet"/><w:lvlText w:val="o"/>' + ('' if bullet is None else f'<w:lvlPicBulletId w:val="{bullet}"/>')
+                              + f'<w:lvlJc w:val="left"/><w:pPr><w:ind w:left="{indent}" w:hanging="360"/></w:pPr></w:lvl></w:abstractNum>'
+                              for i, (indent, bullet) in enumerate(levels))
+        instances = ''.join(f'<w:num w:numId="{i + 1}"><w:abstractNumId w:val="{i}"/></w:num>' for i in range(len(levels)))
+        parts = {'word/numbering.xml': f'<w:numbering xmlns:w="{W}" xmlns:r="{R}" xmlns:v="urn:schemas-microsoft-com:vml" '
+                                       f'xmlns:o="urn:schemas-microsoft-com:office:office">{bullets}{definitions}{instances}</w:numbering>'}
+        types = '<Override PartName="/word/numbering.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml"/>'
+        if pictures:
+            parts['word/_rels/numbering.xml.rels'] = ('<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+                                                      + ''.join(f'<Relationship Id="rBullet{i}" Type="{R}/image" Target="media/bullet{i}.png"/>' for i in range(len(pictures)))
+                                                      + '</Relationships>')
+            parts.update({f'word/media/bullet{i}.png': payload for i, payload in enumerate(pictures)})
+            types = '<Default Extension="png" ContentType="image/png"/>' + types
+        return dict(relations_extra=[('rNumbering', 'numbering', 'numbering.xml')], content_types_extra=types, extra_parts=parts)
+
+    def items(texts, number, wrap=None, mark=''):
+        return ''.join(p(wrap(t(text)) if wrap else t(text), props=f'<w:numPr><w:ilvl w:val="0"/><w:numId w:val="{number}"/></w:numPr>', mark=mark() if mark else '')
+                       for text in texts)
+
+    def drawn(scope, texts, picture):
+        return {'type': 'picture-bullets', 'version': 1, 'scope': scope,
+                'items': [[text, picture and hashlib.sha256(picture).hexdigest()] for text in texts]}
+
+    def document(middle, **numbering):
+        return dict(body=p(t(lead)) + middle + p(t(CLOSING)), **numbering)
+
+    assets = ('All text is generated here. word/media/bullet*.png are original single-colour 8x8 PNG squares written by '
+              'fixtures.png in this function; no other images or embedded font files')
+    for picture in (teal, None):
+        numbering = lists([picture] if picture else [], [(720, 0 if picture else None)])
+        rev = Revisions()
+        corpus.compare('redline-picture-bullet-inserted' if picture else 'redline-picture-bullet-symbol-control', 'packages',
+                       'reproducer' if picture else 'control', 'JSv4/Docxodus#1700',
+                       'The revision adds a two-item list whose bullet is ' + ('a picture' if picture else 'an ordinary character')
+                       + ' to a document with no numbering part.',
+                       document(''), document(items(added, 1), **numbering),
+                       document(items(added, 1, rev.ins, lambda: rev.mark('ins')), **numbering),
+                       [untracked(lead, CLOSING), drawn('accepted', added, picture), drawn('rejected', [], None)], assets)
+    rev = Revisions()
+    corpus.compare('redline-picture-bullet-shared-id', 'packages', 'reproducer', 'JSv4/Docxodus#1700',
+                   'A list with one picture bullet is replaced by an unrelated list with another; both documents number their picture bullet 0.',
+                   document(items(former, 1), **lists([rust], [(720, 0)])), document(items(added, 1), **lists([teal], [(900, 0)])),
+                   document(items(former, 1, rev.dele, lambda: rev.mark('del')) + items(added, 2, rev.ins, lambda: rev.mark('ins')),
+                            **lists([rust, teal], [(720, 0), (900, 1)])),
+                   [untracked(lead, CLOSING), drawn('accepted', added, teal), drawn('rejected', former, rust)], assets)

@@ -1,3 +1,10 @@
+The three picture-bullet redline cases for Docxodus #1700 contain original Sorrel and Fennel labels
+and literal OOXML authored in `bench/redline_fixtures.py`. Their only images are single-colour 8x8
+PNG squares written by `fixtures.png` in that function. No product fixture, helper, document,
+third-party image or font program is imported, and the issue's reproduction scripts were not used.
+Their review images show Word 2024 drawing Docxodus output, with Liberation Serif substituted by
+Word because the capture machine does not have it.
+
 The three All Markup sheet cases for Docxodus #1559 and #1577 contain original Mariner labels and
 literal OOXML authored in `bench/fixtures.py`. No product fixture, helper, document, image or font
 program is imported. Liberation Serif is separately provisioned.
