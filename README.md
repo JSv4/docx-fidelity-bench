@@ -1,3 +1,13 @@
+`core-v169` adds an original Medlar table and a control for [Docxodus #1737](https://github.com/JSv4/Docxodus/issues/1737):
+40 bordered rows taller than a Letter page, each holding a tracked custom XML insertion range
+(`w:customXmlInsRangeStart`/`w:customXmlInsRangeEnd`) between its first and second cells, beside the
+same table without the ranges. Word 2024 prints both alike in final view and in All Markup, on
+three pages (rows 1–19, 20–38, 39–40) with no mark for the ranges; Word-adjudicated whole-page
+`marker-region` assertions pin those pages in the final print. Each case's PDF companion prints the
+All Markup balloon profile and must hold every Medlar label exactly once on the paper, so a renderer
+that cannot split the table there fails it. All earlier DOCX files remain byte-identical.
+LibreOffice references are pending. See [the evidence and limits](docs/results/table-range-boundaries/README.md).
+
 `core-v168` adds an original three-level comment thread and a flat-note control for [Docxodus #1277](https://github.com/JSv4/Docxodus/issues/1277). The pair differs only in parent links. Their PDFs hide comments and retain body/page checks. The margin-profile HTML companion uses a new version 1 `marker-block-width` assertion: each reply's note paragraph must have the content width of the root note's paragraph within 0.5px, so a reply that repeats the note's border and padding inside its parent fails. All earlier DOCX files remain byte-identical. The redline suite remains `redline-v41`. New reference registration and full-suite scoring remain pending.
 
 `redline-v41` adds a Strict-conformance reject pair for Docxodus #1268: one paragraph deletes
