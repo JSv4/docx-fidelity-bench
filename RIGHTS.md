@@ -2,6 +2,12 @@ The three All Markup sheet cases for Docxodus #1559 and #1577 contain original M
 literal OOXML authored in `bench/fixtures.py`. No product fixture, helper, document, image or font
 program is imported. Liberation Serif is separately provisioned.
 
+The four note-page-foot cases for Docxodus #1738 (`notes-page-foot-*`) contain original Rowan
+labels, orchard prose written for the issue, and literal OOXML authored in `bench/fixtures.py`. No
+product fixture, helper, document, image or font program is imported. Their review images show
+Docxodus output with the markers outlined, not Word page renders. Liberation Serif is separately
+provisioned.
+
 The two last-line-leading cases for Docxodus #1571 contain original Thistle labels and literal
 OOXML authored in `bench/fixtures.py`. No product fixture, helper, document, image or font
 program is imported. Liberation Serif is separately provisioned.
