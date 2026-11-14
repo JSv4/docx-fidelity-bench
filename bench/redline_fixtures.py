@@ -14,7 +14,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
-from .fixtures import PACKAGE_LINK_TARGET, PACKAGE_SHAPES, package_shape, custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases, consolidated_field_cases, comment_identity_cases, removed_comment_cases, note_insertion_cases, bookmark_reviewer_cases, bookmark_review_container, bookmark_conflict_cases, complex_field as field
+from .fixtures import png, PACKAGE_LINK_TARGET, PACKAGE_SHAPES, package_shape, custom_xml_link, comment_view_cases, comment_view_mark, comment_view_note, comment_view_wrapper, duplicate_comment_cases, consolidated_field_cases, comment_identity_cases, removed_comment_cases, note_insertion_cases, bookmark_reviewer_cases, bookmark_review_container, bookmark_conflict_cases, complex_field as field
 
 ROOT = Path(__file__).resolve().parents[1]
 W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v41', 'version': 41}
+SUITE = {'id': 'redline-v44', 'version': 44}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -352,6 +352,9 @@ def generate():
     math_control_revisions(corpus)
     missing_default_spacing(corpus)
     strict_rejects(corpus)
+    strict_chart_parts(corpus)
+    deleted_textbox_text(corpus)
+    picture_bullet_lists(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -2609,3 +2612,169 @@ def strict_rejects(corpus):
                    'Rejecting one deletion and one insertion in a ' + ('Strict' if strict else 'Transitional') + '-conformance package',
                    'reject', [dict(tracked, role='input')], {'output': original}, original,
                    [{'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0}])
+
+
+# ---------------------------------------------------------------------------------------------
+# Docxodus #1702: an inserted chart whose part is written in the Strict namespaces
+# ---------------------------------------------------------------------------------------------
+
+def strict_chart_parts(corpus):
+    """A Transitional package gains a chart whose own part uses the Strict namespaces.
+
+    The chart names its annotation drawing through r:id. In the reproducer that attribute is in the
+    Strict relationships namespace; the control's chart part is Transitional. Nothing else differs."""
+    transitional = {'c': 'http://schemas.openxmlformats.org/drawingml/2006/chart',
+                    'a': 'http://schemas.openxmlformats.org/drawingml/2006/main', 'r': R}
+    strict_names = {'c': 'http://purl.oclc.org/ooxml/drawingml/chart', 'a': 'http://purl.oclc.org/ooxml/drawingml/main',
+                    'r': 'http://purl.oclc.org/ooxml/officeDocument/relationships'}
+    def points(values):
+        return f'<c:ptCount val="{len(values)}"/>' + ''.join(f'<c:pt idx="{i}"><c:v>{v}</c:v></c:pt>' for i, v in enumerate(values))
+    def chart(names):
+        axis = ('<c:{0}><c:axId val="{1}"/><c:scaling><c:orientation val="minMax"/></c:scaling><c:delete val="0"/>'
+                '<c:axPos val="{2}"/><c:crossAx val="{3}"/></c:{0}>')
+        return ('<c:chartSpace ' + ' '.join(f'xmlns:{k}="{v}"' for k, v in names.items()) + '>'
+                '<c:chart><c:autoTitleDeleted val="1"/><c:plotArea><c:layout/><c:barChart><c:barDir val="col"/>'
+                '<c:grouping val="clustered"/><c:varyColors val="0"/><c:ser><c:idx val="0"/><c:order val="0"/>'
+                '<c:cat><c:strLit>' + points(('Alder', 'Birch', 'Cedar')) + '</c:strLit></c:cat>'
+                '<c:val><c:numLit><c:formatCode>General</c:formatCode>' + points((41, 36, 29)) + '</c:numLit></c:val>'
+                '</c:ser><c:axId val="501"/><c:axId val="502"/></c:barChart>'
+                + axis.format('catAx', 501, 'b', 502) + axis.format('valAx', 502, 'l', 501) +
+                '</c:plotArea><c:plotVisOnly val="1"/></c:chart><c:userShapes r:id="rShapes"/></c:chartSpace>')
+    shapes = ('<c:userShapes xmlns:c="' + transitional['c'] + '" xmlns:a="' + transitional['a'] + '" '
+              'xmlns:cdr="http://schemas.openxmlformats.org/drawingml/2006/chartDrawing"><cdr:relSizeAnchor>'
+              '<cdr:from><cdr:x>0.55</cdr:x><cdr:y>0.04</cdr:y></cdr:from><cdr:to><cdr:x>0.97</cdr:x><cdr:y>0.2</cdr:y></cdr:to>'
+              '<cdr:sp macro="" textlink=""><cdr:nvSpPr><cdr:cNvPr id="2" name="Note"/><cdr:cNvSpPr txBox="1"/></cdr:nvSpPr>'
+              '<cdr:spPr><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></cdr:spPr><cdr:txBody><a:bodyPr/>'
+              '<a:p><a:r><a:rPr lang="en-US" sz="1000"/><a:t>Crates per week</a:t></a:r></a:p></cdr:txBody></cdr:sp>'
+              '</cdr:relSizeAnchor></c:userShapes>')
+    drawing = ('<w:r><w:drawing xmlns:a="' + transitional['a'] + '" xmlns:c="' + transitional['c'] + '" '
+               'xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">'
+               '<wp:inline distT="0" distB="0" distL="0" distR="0"><wp:extent cx="4572000" cy="2743200"/>'
+               '<wp:docPr id="1" name="Crate chart"/><wp:cNvGraphicFramePr/><a:graphic>'
+               '<a:graphicData uri="' + transitional['c'] + '"><c:chart r:id="rChart"/></a:graphicData></a:graphic>'
+               '</wp:inline></w:drawing></w:r>')
+    for strict in (True, False):
+        chart_parts = dict(
+            relations_extra=[('rChart', 'chart', 'charts/chart1.xml')],
+            content_types_extra=('<Override PartName="/word/charts/chart1.xml" ContentType="application/vnd.openxmlformats-officedocument.drawingml.chart+xml"/>'
+                                 '<Override PartName="/word/drawings/drawing1.xml" ContentType="application/vnd.openxmlformats-officedocument.drawingml.chartshapes+xml"/>'),
+            extra_parts={'word/charts/chart1.xml': chart(strict_names if strict else transitional),
+                         'word/charts/_rels/chart1.xml.rels': ('<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+                                                               f'<Relationship Id="rShapes" Type="{R}/chartUserShapes" Target="../drawings/drawing1.xml"/></Relationships>'),
+                         'word/drawings/drawing1.xml': shapes})
+        rev = Revisions()
+        corpus.compare('redline-insert-chart-strict-part' + ('' if strict else '-control'), 'packages',
+                       'reproducer' if strict else 'control', 'JSv4/Docxodus#1702',
+                       'A paragraph holding a chart is inserted; the chart part names its annotation drawing through r:id in the '
+                       + ('Strict' if strict else 'Transitional') + ' relationships namespace. The redline keeps that drawing.',
+                       dict(body=p(t(INTRO)) + p(t(CLOSING))),
+                       dict(chart_parts, body=p(t(INTRO)) + p(drawing) + p(t(CLOSING))),
+                       dict(chart_parts, body=p(t(INTRO)) + p(rev.ins(drawing), mark=rev.mark('ins')) + p(t(CLOSING))),
+                       [untracked(INTRO, CLOSING), {'type': 'relationship-ids', 'version': 1, 'scope': 'redline'}],
+                       assets='All text and chart XML are generated here; no images, workbooks or embedded font files')
+
+
+def deleted_textbox_text(corpus):
+    """A deleted run that anchors a text box (Docxodus #1699).
+
+    A text box is a story of its own: the w:del around the anchoring run does not reach into
+    w:txbxContent. Word 2024 writes the box's text as ordinary w:t when it tracks the deletion of a
+    text box, and reports a package whose box holds w:delText with no deletion of its own as
+    corrupt. The control deletes a paragraph beside a text box that stays.
+    """
+    ns = ('xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" '
+          'xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
+          'xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" '
+          'xmlns:v="urn:schemas-microsoft-com:vml"')
+    story = '<w:txbxContent>' + p(t('Hawthorn filters rotate weekly.')) + '</w:txbxContent>'
+    box = ('<w:r ' + ns + '><mc:AlternateContent><mc:Choice Requires="wps"><w:drawing>'
+           '<wp:anchor distT="0" distB="0" distL="114300" distR="114300" simplePos="0" relativeHeight="2" '
+           'behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1"><wp:simplePos x="0" y="0"/>'
+           '<wp:positionH relativeFrom="column"><wp:posOffset>0</wp:posOffset></wp:positionH>'
+           '<wp:positionV relativeFrom="paragraph"><wp:posOffset>228600</wp:posOffset></wp:positionV>'
+           '<wp:extent cx="2286000" cy="457200"/><wp:effectExtent l="0" t="0" r="0" b="0"/>'
+           '<wp:wrapSquare wrapText="bothSides"/><wp:docPr id="1" name="Hawthorn callout"/><wp:cNvGraphicFramePr/>'
+           '<a:graphic><a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+           '<wps:wsp><wps:cNvSpPr txBox="1"/><wps:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="2286000" cy="457200"/></a:xfrm>'
+           '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></wps:spPr><wps:txbx>' + story + '</wps:txbx>'
+           '<wps:bodyPr rot="0" vert="horz" wrap="square" lIns="91440" tIns="45720" rIns="91440" bIns="45720" anchor="t"/>'
+           '</wps:wsp></a:graphicData></a:graphic></wp:anchor></w:drawing></mc:Choice><mc:Fallback><w:pict>'
+           '<v:shape id="HawthornCallout" type="#_x0000_t202" style="position:absolute;margin-top:18pt;width:180pt;height:36pt;z-index:2">'
+           '<v:textbox>' + story + '</v:textbox></v:shape></w:pict></mc:Fallback></mc:AlternateContent></w:r>')
+    lead, note, closing = 'Hawthorn maintenance plan. ', 'Hawthorn review is yearly.', 'Hawthorn register complete.'
+    assertions = [untracked(closing), {'type': 'deleted-text-owned', 'version': 1, 'scope': 'redline'}]
+    rev = Revisions()
+    # Not rev.dele: the box's text keeps its ordinary spelling inside the deleted run.
+    corpus.compare('redline-deleted-textbox-text', 'revisions', 'reproducer', 'JSv4/Docxodus#1699',
+                   'The run anchoring a text box is deleted; the text inside the box stays ordinary',
+                   {'body': p(t(lead) + box) + p(t(closing))}, {'body': p(t(lead)) + p(t(closing))},
+                   {'body': p(t(lead) + f'<w:del {rev.attrs(AUTHOR)}>{box}</w:del>') + p(t(closing))}, assertions)
+    rev = Revisions()
+    corpus.compare('redline-deleted-textbox-text-control', 'revisions', 'control', 'JSv4/Docxodus#1699',
+                   'A paragraph beside a text box is deleted; the box stays',
+                   {'body': p(t(lead) + box) + p(t(note)) + p(t(closing))}, {'body': p(t(lead) + box) + p(t(closing))},
+                   {'body': p(t(lead) + box) + p(rev.dele(t(note)), mark=rev.mark('del')) + p(t(closing))}, assertions)
+
+
+def picture_bullet_lists(corpus):
+    """Lists whose bullet is a picture, added by the revision or replaced by an unrelated list.
+
+    A level names its picture by w:lvlPicBulletId, the id of a w:numPicBullet in the numbering part,
+    whose shape names an image relationship of that part. A redline built on the original must bring
+    all three for a list it takes from the revision. In the shared-id case both documents call their
+    own, different picture "bullet 0". The control adds the same list with an ordinary bullet."""
+    teal, rust = png(8, 8, lambda x, y: (0, 128, 128)), png(8, 8, lambda x, y: (176, 64, 32))
+    lead = 'Sorrel depot checklist applies to every shift.'
+    added = ['Sorrel step: inspect the intake valves.', 'Sorrel step: log the coolant reading.']
+    former = ['Fennel task: sweep the loading bay.', 'Fennel task: stack the empty crates.']
+
+    def lists(pictures, levels):
+        """A numbering part: one picture bullet per image, and list i+1 on definition i with (indent, bullet id)."""
+        bullets = ''.join(f'<w:numPicBullet w:numPicBulletId="{i}"><w:pict><v:shape id="_x0000_i{1025 + i}" style="width:9pt;height:9pt" o:bullet="t">'
+                          f'<v:imagedata r:id="rBullet{i}" o:title=""/></v:shape></w:pict></w:numPicBullet>' for i in range(len(pictures)))
+        definitions = ''.join(f'<w:abstractNum w:abstractNumId="{i}"><w:multiLevelType w:val="hybridMultilevel"/><w:lvl w:ilvl="0"><w:start w:val="1"/>'
+                              '<w:numFmt w:val="bullet"/><w:lvlText w:val="o"/>' + ('' if bullet is None else f'<w:lvlPicBulletId w:val="{bullet}"/>')
+                              + f'<w:lvlJc w:val="left"/><w:pPr><w:ind w:left="{indent}" w:hanging="360"/></w:pPr></w:lvl></w:abstractNum>'
+                              for i, (indent, bullet) in enumerate(levels))
+        instances = ''.join(f'<w:num w:numId="{i + 1}"><w:abstractNumId w:val="{i}"/></w:num>' for i in range(len(levels)))
+        parts = {'word/numbering.xml': f'<w:numbering xmlns:w="{W}" xmlns:r="{R}" xmlns:v="urn:schemas-microsoft-com:vml" '
+                                       f'xmlns:o="urn:schemas-microsoft-com:office:office">{bullets}{definitions}{instances}</w:numbering>'}
+        types = '<Override PartName="/word/numbering.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml"/>'
+        if pictures:
+            parts['word/_rels/numbering.xml.rels'] = ('<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+                                                      + ''.join(f'<Relationship Id="rBullet{i}" Type="{R}/image" Target="media/bullet{i}.png"/>' for i in range(len(pictures)))
+                                                      + '</Relationships>')
+            parts.update({f'word/media/bullet{i}.png': payload for i, payload in enumerate(pictures)})
+            types = '<Default Extension="png" ContentType="image/png"/>' + types
+        return dict(relations_extra=[('rNumbering', 'numbering', 'numbering.xml')], content_types_extra=types, extra_parts=parts)
+
+    def items(texts, number, wrap=None, mark=''):
+        return ''.join(p(wrap(t(text)) if wrap else t(text), props=f'<w:numPr><w:ilvl w:val="0"/><w:numId w:val="{number}"/></w:numPr>', mark=mark() if mark else '')
+                       for text in texts)
+
+    def drawn(scope, texts, picture):
+        return {'type': 'picture-bullets', 'version': 1, 'scope': scope,
+                'items': [[text, picture and hashlib.sha256(picture).hexdigest()] for text in texts]}
+
+    def document(middle, **numbering):
+        return dict(body=p(t(lead)) + middle + p(t(CLOSING)), **numbering)
+
+    assets = ('All text is generated here. word/media/bullet*.png are original single-colour 8x8 PNG squares written by '
+              'fixtures.png in this function; no other images or embedded font files')
+    for picture in (teal, None):
+        numbering = lists([picture] if picture else [], [(720, 0 if picture else None)])
+        rev = Revisions()
+        corpus.compare('redline-picture-bullet-inserted' if picture else 'redline-picture-bullet-symbol-control', 'packages',
+                       'reproducer' if picture else 'control', 'JSv4/Docxodus#1700',
+                       'The revision adds a two-item list whose bullet is ' + ('a picture' if picture else 'an ordinary character')
+                       + ' to a document with no numbering part.',
+                       document(''), document(items(added, 1), **numbering),
+                       document(items(added, 1, rev.ins, lambda: rev.mark('ins')), **numbering),
+                       [untracked(lead, CLOSING), drawn('accepted', added, picture), drawn('rejected', [], None)], assets)
+    rev = Revisions()
+    corpus.compare('redline-picture-bullet-shared-id', 'packages', 'reproducer', 'JSv4/Docxodus#1700',
+                   'A list with one picture bullet is replaced by an unrelated list with another; both documents number their picture bullet 0.',
+                   document(items(former, 1), **lists([rust], [(720, 0)])), document(items(added, 1), **lists([teal], [(900, 0)])),
+                   document(items(former, 1, rev.dele, lambda: rev.mark('del')) + items(added, 2, rev.ins, lambda: rev.mark('ins')),
+                            **lists([rust, teal], [(720, 0), (900, 1)])),
+                   [untracked(lead, CLOSING), drawn('accepted', added, teal), drawn('rejected', former, rust)], assets)
