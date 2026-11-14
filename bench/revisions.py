@@ -730,6 +730,32 @@ def comment_thread_findings(package, threads):
     return findings
 
 
+def relationship_id_findings(package):
+    """Relationship-namespace attributes whose id the part's own relationships do not resolve.
+
+    Every attribute in the relationships namespace (r:id, r:embed, ...), in every XML part, must
+    name a relationship of that part that is external or whose target is in the package. Strict
+    names are read as Transitional. The semantic view does not follow a drawing into the parts it
+    names, and the SDK validator reports nothing for an id that names no relationship."""
+    findings = []
+    for name in sorted(package.members):
+        if not name.endswith('.xml') or name == '[Content_Types].xml':
+            continue
+        folder, leaf = posixpath.split(name)
+        path = posixpath.join(folder, '_rels', leaf + '.rels')
+        held = {}
+        for item in (ET.fromstring(package.members[path]) if path in package.members else []):
+            target = item.get('Target', '')
+            target = target[1:] if target.startswith('/') else posixpath.normpath(posixpath.join(folder, target))
+            held[item.get('Id')] = item.get('TargetMode') == 'External' or target in package.members
+        for element in package.xml(name).iter():
+            for attribute, value in element.attrib.items():
+                if attribute.startswith('{' + REL[:-1] + '}') and not held.get(value):
+                    findings.append({'part': name, 'attribute': attribute.rsplit('}', 1)[1], 'id': value,
+                                     'problem': 'target is not in the package' if value in held else 'names no relationship'})
+    return findings
+
+
 def hyperlink_target_findings(package, targets):
     """Main-document hyperlinks whose relationship is not one external hyperlink, or whose targets differ.
 

@@ -42,6 +42,7 @@ A case scores **100** when every applicable check passes and **0** otherwise. Th
    - `style-run-history` v1 (scope `redline`): every paragraph style whose `w:pPr` holds a `w:pPrChange` also has a `w:rPr` holding a `w:rPrChange`. Word 2024's Reject All restores a style from both markers and resets the run properties of a style without the second to its built-ins, so a spacing-only style revision rejects with 10 pt text; neither round trip sees this. The check is one-directional, because a run-only style revision was not measured. Metric contract 23 records this check;
    - `comment-threads` v1 (scope `redline`): in the comments and commentsExtended parts, every entry is keyed to a comment's last-paragraph `w14:paraId`, every `w15:paraIdParent` names the last-paragraph `w14:paraId` of a comment that has its own entry, and for each declared `[reply, parent]` pair exactly one comment holds the reply's text and its entry names the comment holding the parent's text. Comment threading is not part of the semantic view, so neither round trip sees a reply detached from its parent;
    - `hyperlink-targets` v1 (scope `redline`): every `w:hyperlink` in the main document with an `r:id` resolves to exactly one relationship of the main part, of the hyperlink type with `TargetMode="External"`, and the set of their `Target` values equals the declared `targets`, compared as written after XML parsing, with no URI normalization. The semantic view records only a hyperlink's boundaries, so neither round trip sees a target rewritten (for example to the SDK's `rewritten://` placeholder), trimmed or dropped, or a link left on a relationship id another relationship also holds;
+   - `relationship-ids` v1 (scope `redline`): every attribute in the relationships namespace (`r:id`, `r:embed`, …), in every XML part of the redline, names a relationship of that same part that is external or whose target is in the package; Strict names are read as Transitional. The semantic view does not follow a drawing into the parts it names and the SDK validator reports nothing for an id that names no relationship, so neither round trip nor validity sees a chart copied without its own relationships, which Word 2024 refuses to open. Metric contract 29 records this check;
    - `revision-count` v1: at most `max` revision records in the redline or output (scope `redline` or `output`); a `w:delText` or `w:delInstrText` outside any deletion also counts. Every `reject` and `accept` case requires zero.
    - `revision-text` v1 (scope `redline`): the declared body text occurs in a named move-source range as `w:t`, or in adjacent ordinary deletion wrappers as `w:delText`. It forbids deletion-only carriers in move sources and ordinary carriers in deletions. Metric contract version 12 records this check, which catches #1420 even when accept/reject and schema checks pass.
 
@@ -670,3 +671,31 @@ substitution finds nothing in a Transitional package, so no earlier result chang
 previous DOCX bytes are unchanged. LibreOffice renders of both inputs, and of the Docxodus reject
 outputs before and after the fix, are in
 [`docs/results/strict-revision-reject/`](results/strict-revision-reject/).
+
+## An inserted chart whose part is Strict (Docxodus #1702)
+
+`redline-v42` adds an original pair in the `packages` category. The original holds two
+paragraphs; the revision inserts a paragraph between them that holds a bar chart (Alder, Birch,
+Cedar, literal values, no workbook). The chart part names an annotation drawing, a text box
+reading "Crates per week", through `c:userShapes/@r:id`. In the reproducer the chart part alone
+is written in the Strict namespaces (`http://purl.oclc.org/ooxml/drawingml/chart`,
+`…/drawingml/main` and `…/officeDocument/relationships`) while the main document, every
+relationship type and the annotation drawing stay Transitional; the control's chart part is
+Transitional too. Word 2024 (16.0.20326) opens both revisions and shows the chart, so a package
+may mix the classes part by part. An annotation drawing stands in for the embedded workbook of
+the issue's report because an authored package may hold only text and PNG entries.
+
+Before the fix Docxodus followed a relationship attribute only in the Transitional namespace. It
+copied the Strict chart part into the redline without its relationships part and without the
+drawing, leaving `r:id="rShapes"` naming nothing. The semantic view does not read a chart part,
+so the new `relationship-ids` assertion is the check that names the defect: `word/charts/…xml`
+holds an id that names no relationship. Word 2024 refuses that redline ("The file appears to be
+corrupted") and opens the redline written after the fix, where Accept All keeps the chart and
+Reject All removes it. The control's redline passes the assertion and opens before and after.
+
+Metric contract version 29 records the assertion. No earlier case declares it, so no earlier
+result changes, and all previous DOCX bytes are unchanged. Word 2024 prints of both revisions and
+of the Docxodus redline after the fix are in
+[`docs/results/strict-chart-part/`](results/strict-chart-part/); the redline before the fix has
+no print because Word does not open it. LibreOffice references and full-suite scoring are
+pending.
