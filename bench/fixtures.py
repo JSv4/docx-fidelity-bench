@@ -3821,6 +3821,98 @@ def markup_paper_clip_cases(add, cases):
         cases[-1]['pdfCompanion'] = companion
 
 
+def offpaper_content_cases(add, cases):
+    """Original Pawpaw and Wolfberry labels: the paper edge clips content placed wholly past it."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="22"/>'
+              '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+              '<w:spacing w:before="0" w:after="0" w:line="300" w:lineRule="exact"/>'
+              '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    paper = ('<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" '
+             'w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720"/></w:sectPr>')
+
+    # A fixed 720pt grid at the 72pt margin of 612pt paper: the fifth column (492-642pt) crosses
+    # the paper edge, the sixth (642-792pt) lies wholly past it (Docxodus #1733).
+    grid = [1800, 2200, 2400, 2000, 3000, 3000]
+    borders = ''.join(f'<w:{side} w:val="single" w:sz="4" w:space="0" w:color="345678"/>'
+                      for side in ('top', 'left', 'bottom', 'right', 'insideH', 'insideV'))
+
+    def cell(width, text, span=1):
+        return (f'<w:tc><w:tcPr><w:tcW w:w="{width}" w:type="dxa"/>'
+                + (f'<w:gridSpan w:val="{span}"/>' if span > 1 else '') + '</w:tcPr>' + para(text) + '</w:tc>')
+
+    def row(labels, last=()):
+        # The last row uses all six columns; with columns unused by every row, Word widens the rest.
+        if len(last) == 1:
+            tail = cell(grid[4] + grid[5], last[0], 2)
+        else:
+            tail = ''.join(cell(width, label) for width, label in zip(grid[4:], last))
+        return ('<w:tr>' + ('' if last else '<w:trPr><w:gridAfter w:val="2"/></w:trPr>')
+                + cell(grid[0], labels[0]) + cell(grid[1], labels[1]) + cell(grid[2] + grid[3], labels[2], 2)
+                + tail + '</w:tr>')
+
+    for kind in ('beyond', 'edge-control'):
+        # The control's crossing cell spans the last two columns, so no cell lies wholly past the edge.
+        last = ['PawpawChecked'] + (['PawpawSigned'] if kind == 'beyond' else [])
+        rows = [[f'PawpawLine{n}', f'PawpawUnit{n}', f'PawpawCount{n}'] for n in (1, 2)]
+        table = ('<w:tbl><w:tblPr>' + f'<w:tblW w:w="{sum(grid)}" w:type="dxa"/><w:tblBorders>{borders}</w:tblBorders>'
+                 '<w:tblLayout w:type="fixed"/><w:tblCellMar><w:left w:w="0" w:type="dxa"/>'
+                 '<w:right w:w="0" w:type="dxa"/></w:tblCellMar></w:tblPr><w:tblGrid>'
+                 + ''.join(f'<w:gridCol w:w="{width}"/>' for width in grid) + '</w:tblGrid>'
+                 + ''.join(row(labels) for labels in rows) + row(['PawpawTotal', 'PawpawAll', 'PawpawSum'], last) + '</w:tbl>')
+        tokens = (['PawpawInventory'] + [label for labels in rows for label in labels]
+                  + ['PawpawTotal', 'PawpawAll', 'PawpawSum', 'PawpawChecked', 'PawpawClosing'])
+        add('offpaper-table-cell-' + kind, 'tables',
+            'Pawpaw fixed table wider than the paper: ' + ('its last cell lies wholly past the edge'
+                if kind == 'beyond' else 'control whose crossing cell spans that column') + '; the crossing cell prints (Docxodus #1733)',
+            tokens, para('PawpawInventory') + table + para('PawpawClosing'), sect=paper, styles_xml=styles,
+            assertions=[dict(type='marker-region', marker='PawpawChecked', occurrence=1, page=1, rect=[488, 87, 612, 160]),
+                        dict(type='same-page', version=1, markers=['PawpawInventory', 'PawpawChecked', 'PawpawClosing'])])
+        companion = dict(profile=dict(review='final', comments='hidden'), pageSizePt=[612, 792],
+                         requiredTokens=dict(Counter(tokens)), exactInventory=True)
+        if kind == 'beyond':
+            companion['forbiddenTokens'] = ['PawpawSigned']
+        cases[-1]['pdfCompanion'] = companion
+
+    # Two linked fixed frames anchored to the first paragraph, 792pt below its top: both lie
+    # wholly below 792pt paper. The control places them 144pt below it (Docxodus #1734).
+    def frame(index, left, top, story):
+        cx, cy = 216 * 12700, 72 * 12700
+        return ('<w:r><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" '
+                f'relativeHeight="{index}" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1">'
+                '<wp:simplePos x="0" y="0"/>'
+                f'<wp:positionH relativeFrom="column"><wp:posOffset>{left * 12700}</wp:posOffset></wp:positionH>'
+                f'<wp:positionV relativeFrom="paragraph"><wp:posOffset>{top * 12700}</wp:posOffset></wp:positionV>'
+                f'<wp:extent cx="{cx}" cy="{cy}"/><wp:wrapNone/><wp:docPr id="{80 + index}" name="Wolfberry frame {index}"/>'
+                '<a:graphic><a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+                '<wps:wsp><wps:cNvSpPr txBox="1"/><wps:spPr><a:xfrm><a:off x="0" y="0"/>'
+                f'<a:ext cx="{cx}" cy="{cy}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom>'
+                '<a:noFill/><a:ln w="6350"><a:solidFill><a:srgbClr val="5A3E6B"/></a:solidFill></a:ln></wps:spPr>'
+                + story + '<wps:bodyPr lIns="0" tIns="0" rIns="0" bIns="0"><a:noAutofit/></wps:bodyPr>'
+                '</wps:wsp></a:graphicData></a:graphic></wp:anchor></w:drawing></w:r>')
+
+    story = ['WolfberryGate', 'WolfberryDesk']
+    content = '<wps:txbx id="85"><w:txbxContent>' + ''.join(para(label) for label in story) + '</w:txbxContent></wps:txbx>'
+    for kind, top in (('below', 792), ('on-paper-control', 144)):
+        visible = [] if kind == 'below' else story
+        tokens = ['WolfberryNotes', 'WolfberryClosing'] + visible
+        boxes = frame(1, 0, top, content) + frame(2, 230, top, '<wps:linkedTxbx id="85" seq="1"/>')
+        assertions = [dict(type='same-page', version=1, markers=tokens)]
+        if visible:
+            assertions.append(dict(type='marker-region', marker='WolfberryGate', occurrence=1, page=1, rect=[68, 210, 290, 236]))
+        add('offpaper-linked-story-' + kind, 'paragraphs',
+            'Wolfberry linked text-box story ' + ('whose two frames lie wholly below the paper'
+                if kind == 'below' else 'with both frames on the paper (control)') + ' (Docxodus #1734)',
+            tokens, para(runs=boxes + run('WolfberryNotes')) + para('WolfberryClosing'), sect=paper, styles_xml=styles,
+            assertions=assertions,
+            namespaces_extra=' xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"')
+        companion = dict(profile=dict(review='final', comments='hidden'), pageSizePt=[612, 792],
+                         requiredTokens=dict(Counter(tokens)), exactInventory=True)
+        if not visible:
+            companion['forbiddenTokens'] = story
+        cases[-1]['pdfCompanion'] = companion
+
+
 def oversized_keep_next_cases(add):
     """Original Rowan inventories exercise an impossible keep without sharing renderer fixtures."""
     styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
@@ -7349,7 +7441,8 @@ def generate():
     style_frame_direct_cases(add)
     missing_paragraph_default_cases(add)
     reply_width_cases(add, cases, comment_styles)
-    registry = {'schema': 1, 'suite': {'id': 'core-v168', 'version': 168, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    offpaper_content_cases(add, cases)
+    registry = {'schema': 1, 'suite': {'id': 'core-v169', 'version': 169, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 

@@ -1,3 +1,8 @@
+The four off-paper content cases for Docxodus #1733 and #1734 contain original Pawpaw and Wolfberry
+labels and literal OOXML authored in `bench/fixtures.py`. No product fixture, helper, document, image
+or font program is imported, and no reporter attachment was opened or used. Their review sheet shows
+Word 2024 and Docxodus PDFs of these inputs, drawn with pdf.js.
+
 The three All Markup sheet cases for Docxodus #1559 and #1577 contain original Mariner labels and
 literal OOXML authored in `bench/fixtures.py`. No product fixture, helper, document, image or font
 program is imported. Liberation Serif is separately provisioned.
