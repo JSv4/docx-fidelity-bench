@@ -1,3 +1,5 @@
+`core-v173` adds an original reproducer and control for [Docxodus #1750](https://github.com/JSv4/Docxodus/issues/1750): a fixed 450pt Quince table whose rows all leave its last two grid columns unused (`w:gridAfter`). Word 2024 drops those columns and widens the other three in proportion to the table's preferred width, so `QuinceSum1` starts at 387pt; Docxodus 0af51ef5 keeps the grid's widths and starts it at 247pt. In `table-grid-unused-columns-filled-control` the last row fills the grid and nothing widens. Two version 2 `marker-region` checks per case pin the second and third cells' first words. `core-v169` to `core-v172` are claimed by open PRs. All earlier DOCX files remain byte-identical. The redline suite is unchanged. New reference registration and full-suite scoring remain pending. See [the evidence](docs/results/unused-grid-columns/README.md).
+
 `redline-v44` adds three cases for [Docxodus #1700](https://github.com/JSv4/Docxodus/issues/1700),
 lists whose bullet is a picture: a revision adding such a list, a list replaced by an unrelated
 one where both documents number their picture bullet 0, and a control adding the same list with
