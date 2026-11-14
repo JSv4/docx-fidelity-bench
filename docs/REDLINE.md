@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`, `accept`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v41`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v42`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -45,6 +45,7 @@ A case scores **100** when every applicable check passes and **0** otherwise. Th
    - `revision-count` v1: at most `max` revision records in the redline or output (scope `redline` or `output`); a `w:delText` or `w:delInstrText` outside any deletion also counts. Every `reject` and `accept` case requires zero.
    - `revision-text` v1 (scope `redline`): the declared body text occurs in a named move-source range as `w:t`, or in adjacent ordinary deletion wrappers as `w:delText`. It forbids deletion-only carriers in move sources and ordinary carriers in deletions. Metric contract version 12 records this check, which catches #1420 even when accept/reject and schema checks pass.
 
+   - `move-pairs` v1 (scope `redline`): every move name in the main document has as many source ranges as destination ranges, and each source range holds the same moved text (`w:t` inside `w:moveFrom`) as the destination range (`w:t` inside `w:moveTo`) it pairs with in document order. Word 2024 rejects a move by carrying each destination range's moved text back to the source range it pairs with, and ignores what `w:moveFrom` holds, so a redline whose halves hold different text rejects to the destination's wording in Word while both round trips pass. A redline with no move passes. Metric contract 29 records this check.
    - `section-boundaries` v1 (scope `accepted` or `rejected`): inline section breaks must occur after exactly the declared zero-based body paragraph indices in `afterParagraphs`. Paragraphs are enumerated in XML document order beneath the body, including nested containers; the trailing body section properties are excluded. This binds section and running-story changes to their carrier paragraphs even when the semantic view and section-story order match. Metric contract version 18 records this check.
    - `inline-trees` v1 (scope `accepted` or `rejected`): the complete ordered `m:oMath`, `w:drawing`, or `w:pict` subtrees in the resolved body match declared XML. It retains operators, properties, geometry and textbox content; image references resolve to the SHA-256 of their actual package bytes. Only engine addressing attributes and remappable `wp:docPr/@id` values are ignored. Surviving deleted text carriers normalize to ordinary text, empty run properties are discarded, and adjacent plain text runs with identical attributes and properties coalesce. Metric contract version 14 additionally includes VML pict carriers.
 
@@ -670,3 +671,15 @@ substitution finds nothing in a Transitional package, so no earlier result chang
 previous DOCX bytes are unchanged. LibreOffice renders of both inputs, and of the Docxodus reject
 outputs before and after the fix, are in
 [`docs/results/strict-revision-reject/`](results/strict-revision-reject/).
+
+## A moved and edited paragraph (Docxodus #1716)
+
+`redline-v42` adds four original Medlar cases. A paragraph moves past the closing paragraph, and in
+the reproducers its ordinal changes from "THIRD" to "FIFTH"; the controls move it unedited. Two cases
+compare the pair and two consolidate it, with a second reviewer who changes nothing. Each authored
+redline moves only the text both versions share and deletes and inserts the ordinal beside the move
+ranges. The new `move-pairs` v1 check is mandatory with the round trips: the bench's engine restores
+what `w:moveFrom` holds, so a redline with the whole old paragraph in its source and the whole new one
+in its destination passes both round trips, while Word 2024's Reject All puts "FIFTH" in the original
+place. No earlier case changes, and all previous DOCX bytes are unchanged. See
+[the evidence](results/edited-moves/README.md).

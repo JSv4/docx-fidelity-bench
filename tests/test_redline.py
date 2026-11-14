@@ -637,6 +637,41 @@ class AuthoredCalibration(unittest.TestCase):
             altered = rewrite(record['authored'], change)
             self.assertFalse(redline._assertion(assertion, altered, {'redline': None})['passed'], mutation)
 
+    def test_move_pairs_require_each_source_range_to_hold_its_destination_range_text(self):
+        for case_id in ('redline-edited-move', 'redline-edited-move-control', 'redline-edited-move-consolidate'):
+            with self.subTest(case=case_id):
+                record = case(case_id)
+                assertion = next(a for a in record['assertions'] if a['type'] == 'move-pairs')
+                self.assertTrue(redline._assertion(assertion, load(record['authored']), {'redline': None})['passed'])
+        record = case('redline-edited-move')
+        assertion = next(a for a in record['assertions'] if a['type'] == 'move-pairs')
+        def whole_halves(root):
+            # What Docxodus wrote before #1716: the old ordinal moved with the text, the new one arrived with it.
+            for kind, edit, text in (('moveFrom', 'del', 'THIRD'), ('moveTo', 'ins', 'FIFTH')):
+                paragraph = next(p for p in root.iter(W + 'p') if p.find(W + kind) is not None)
+                paragraph.remove(paragraph.find(W + edit))
+                moved = next(paragraph.find(W + kind).iter(W + 't'))
+                moved.text = text + moved.text
+        mutant = rewrite(record['authored'], whole_halves)
+        # Both round trips still pass on the bench's engine, which restores what w:moveFrom holds.
+        self.assertEqual(views(mutant), views(load(record['authored'])))
+        self.assertFalse(redline._assertion(assertion, mutant, {'redline': None})['passed'])
+        def split_destination(root):
+            # The same moved text in two destination ranges against one source range: Word pairs ranges in
+            # order, so its reject loses the first stretch.
+            paragraph = next(p for p in root.iter(W + 'p') if p.find(W + 'moveTo') is not None)
+            move, end = paragraph.find(W + 'moveTo'), paragraph.find(W + 'moveToRangeEnd')
+            text = next(move.iter(W + 't'))
+            second = copy.deepcopy(move); second.set(W + 'id', '998')
+            text.text, next(second.iter(W + 't')).text = text.text[:8], text.text[8:]
+            at = list(paragraph).index(end) + 1
+            for offset, element in enumerate((ET.Element(W + 'moveToRangeStart', {W + 'id': '997', W + 'name': 'move1'}),
+                                              second, ET.Element(W + 'moveToRangeEnd', {W + 'id': '997'}))):
+                paragraph.insert(at + offset, element)
+        split = rewrite(record['authored'], split_destination)
+        self.assertEqual(views(split), views(load(record['authored'])))
+        self.assertFalse(redline._assertion(assertion, split, {'redline': None})['passed'])
+
     def test_revision_text_rejects_wrong_deletion_carrier(self):
         record = case('redline-moved-from-text-control')
         assertion = next(a for a in record['assertions'] if a['type'] == 'revision-text')

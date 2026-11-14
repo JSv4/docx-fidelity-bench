@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v41', 'version': 41}
+SUITE = {'id': 'redline-v42', 'version': 42}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -352,6 +352,7 @@ def generate():
     math_control_revisions(corpus)
     missing_default_spacing(corpus)
     strict_rejects(corpus)
+    edited_moves(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -667,6 +668,48 @@ def moved_from_text(corpus):
                    'A reviewer ' + ('replaces text in place' if control else 'moves a paragraph'), 'consolidate',
                    [dict(base, role='base'), dict(reviewer, role='reviewer', author=AUTHOR),
                     dict(unchanged, role='reviewer', author='Other')],
+                   {'accepted': reviewer, 'rejected': base}, authored, assertions)
+
+
+def edited_moves(corpus):
+    """A paragraph that moves and is edited moves the same text in both halves (Docxodus #1716).
+
+    Word 2024 rejects a move by carrying each destination range's moved text back to the source range it
+    pairs with in order, and ignores what w:moveFrom holds. A redline with the whole old paragraph in its
+    source and the whole new one in its destination therefore rejects to the new wording in the old place.
+    A correct redline moves the text both versions share and deletes and inserts the renumbered ordinal
+    beside the ranges. The control moves the same paragraph unedited."""
+    first = 'Medlar lease opens with the parties named.'
+    shared = '. Upkeep. The tenant keeps the garden and the gate in good repair.'
+    last = 'Medlar lease closes with both signatures.'
+    left = p(t(first)) + p(t('THIRD' + shared)) + p(t(last))
+    for control in (False, True):
+        rev = Revisions()
+        def half(kind, text, edit=''):
+            end = rev.next + 1
+            begin = f'<w:{kind}RangeStart {rev.attrs(AUTHOR)} w:name="move1"/>'
+            return edit + begin + f'<w:{kind} {rev.attrs(AUTHOR)}>{t(text)}</w:{kind}><w:{kind}RangeEnd w:id="{end}"/>'
+        moved = shared if not control else 'THIRD' + shared
+        right = p(t(first)) + p(t(last)) + p(t(('THIRD' if control else 'FIFTH') + shared))
+        source = half('moveFrom', moved, '' if control else rev.dele(t('THIRD')))
+        destination = half('moveTo', moved, '' if control else rev.ins(t('FIFTH')))
+        redline = p(t(first)) + p(source, mark=rev.mark('del')) + p(t(last)) + p(destination, mark=rev.mark('ins'))
+        assertions = [untracked(first, last), {'type': 'move-pairs', 'version': 1, 'scope': 'redline'}]
+        kind = 'control' if control else 'reproducer'
+        what = 'moves unedited' if control else 'moves and its ordinal is renumbered'
+        suffix = '-control' if control else ''
+        corpus.compare('redline-edited-move' + suffix, 'revisions', kind, 'JSv4/Docxodus#1716',
+                       'A paragraph ' + what + '; each move range holds the same text in source and destination',
+                       {'body': left}, {'body': right}, {'body': redline}, assertions)
+        case_id = 'redline-edited-move-consolidate' + suffix
+        base = corpus.file(case_id, 'base', body=left)
+        reviewer = corpus.file(case_id, 'reviewer', body=right)
+        unchanged = corpus.file(case_id, 'unchanged-reviewer', body=left)
+        authored = corpus.file(case_id, 'authored-redline', body=redline)
+        corpus.add(case_id, 'consolidate', kind, 'JSv4/Docxodus#1716',
+                   'A reviewer\'s paragraph ' + what + '; each move range holds the same text in source and destination',
+                   'consolidate', [dict(base, role='base'), dict(reviewer, role='reviewer', author=AUTHOR),
+                                   dict(unchanged, role='reviewer', author='Other')],
                    {'accepted': reviewer, 'rejected': base}, authored, assertions)
 
 

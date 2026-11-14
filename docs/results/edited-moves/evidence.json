@@ -1,0 +1,281 @@
+{
+  "builds": {
+    "baseline": "Docxodus main a8b1d6ce",
+    "candidate": "Docxodus fix/1716-edited-move-shared-text 643c0cac"
+  },
+  "word": "Word 2024 (16.0.20326) over COM: Documents.Open read-only, then Revisions.AcceptAll or RejectAll; paragraph texts of the result",
+  "cases": {
+    "redline-edited-move": {
+      "kind": "reproducer",
+      "operation": "compare",
+      "original": [
+        "Medlar lease opens with the parties named.",
+        "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair.",
+        "Medlar lease closes with both signatures."
+      ],
+      "revised": [
+        "Medlar lease opens with the parties named.",
+        "Medlar lease closes with both signatures.",
+        "FIFTH. Upkeep. The tenant keeps the garden and the gate in good repair."
+      ],
+      "benchMarkupChecks": {
+        "authored": {
+          "view:accepted": true,
+          "view:rejected": true,
+          "untracked-text:redline": true,
+          "move-pairs:redline": true
+        },
+        "baseline": {
+          "view:accepted": true,
+          "view:rejected": true,
+          "untracked-text:redline": true,
+          "move-pairs:redline": false
+        },
+        "candidate": {
+          "view:accepted": true,
+          "view:rejected": true,
+          "untracked-text:redline": true,
+          "move-pairs:redline": true
+        }
+      },
+      "wordAcceptAll": {
+        "authored": [
+          "Medlar lease opens with the parties named.",
+          "Medlar lease closes with both signatures.",
+          "FIFTH. Upkeep. The tenant keeps the garden and the gate in good repair."
+        ],
+        "baseline": [
+          "Medlar lease opens with the parties named.",
+          "Medlar lease closes with both signatures.",
+          "FIFTH. Upkeep. The tenant keeps the garden and the gate in good repair."
+        ],
+        "candidate": [
+          "Medlar lease opens with the parties named.",
+          "Medlar lease closes with both signatures.",
+          "FIFTH. Upkeep. The tenant keeps the garden and the gate in good repair."
+        ]
+      },
+      "wordRejectAll": {
+        "authored": [
+          "Medlar lease opens with the parties named.",
+          "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair.",
+          "Medlar lease closes with both signatures."
+        ],
+        "baseline": [
+          "Medlar lease opens with the parties named.",
+          "FIFTH. Upkeep. The tenant keeps the garden and the gate in good repair.",
+          "Medlar lease closes with both signatures."
+        ],
+        "candidate": [
+          "Medlar lease opens with the parties named.",
+          "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair.",
+          "Medlar lease closes with both signatures."
+        ]
+      }
+    },
+    "redline-edited-move-consolidate": {
+      "kind": "reproducer",
+      "operation": "consolidate",
+      "original": [
+        "Medlar lease opens with the parties named.",
+        "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair.",
+        "Medlar lease closes with both signatures."
+      ],
+      "revised": [
+        "Medlar lease opens with the parties named.",
+        "Medlar lease closes with both signatures.",
+        "FIFTH. Upkeep. The tenant keeps the garden and the gate in good repair."
+      ],
+      "benchMarkupChecks": {
+        "authored": {
+          "view:accepted": true,
+          "view:rejected": true,
+          "untracked-text:redline": true,
+          "move-pairs:redline": true
+        },
+        "baseline": {
+          "view:accepted": true,
+          "view:rejected": true,
+          "untracked-text:redline": true,
+          "move-pairs:redline": false
+        },
+        "candidate": {
+          "view:accepted": true,
+          "view:rejected": true,
+          "untracked-text:redline": true,
+          "move-pairs:redline": true
+        }
+      },
+      "wordAcceptAll": {
+        "authored": [
+          "Medlar lease opens with the parties named.",
+          "Medlar lease closes with both signatures.",
+          "FIFTH. Upkeep. The tenant keeps the garden and the gate in good repair."
+        ],
+        "baseline": [
+          "Medlar lease opens with the parties named.",
+          "Medlar lease closes with both signatures.",
+          "FIFTH. Upkeep. The tenant keeps the garden and the gate in good repair."
+        ],
+        "candidate": [
+          "Medlar lease opens with the parties named.",
+          "Medlar lease closes with both signatures.",
+          "FIFTH. Upkeep. The tenant keeps the garden and the gate in good repair."
+        ]
+      },
+      "wordRejectAll": {
+        "authored": [
+          "Medlar lease opens with the parties named.",
+          "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair.",
+          "Medlar lease closes with both signatures."
+        ],
+        "baseline": [
+          "Medlar lease opens with the parties named.",
+          "FIFTH. Upkeep. The tenant keeps the garden and the gate in good repair.",
+          "Medlar lease closes with both signatures."
+        ],
+        "candidate": [
+          "Medlar lease opens with the parties named.",
+          "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair.",
+          "Medlar lease closes with both signatures."
+        ]
+      }
+    },
+    "redline-edited-move-control": {
+      "kind": "control",
+      "operation": "compare",
+      "original": [
+        "Medlar lease opens with the parties named.",
+        "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair.",
+        "Medlar lease closes with both signatures."
+      ],
+      "revised": [
+        "Medlar lease opens with the parties named.",
+        "Medlar lease closes with both signatures.",
+        "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair."
+      ],
+      "benchMarkupChecks": {
+        "authored": {
+          "view:accepted": true,
+          "view:rejected": true,
+          "untracked-text:redline": true,
+          "move-pairs:redline": true
+        },
+        "baseline": {
+          "view:accepted": true,
+          "view:rejected": true,
+          "untracked-text:redline": true,
+          "move-pairs:redline": true
+        },
+        "candidate": {
+          "view:accepted": true,
+          "view:rejected": true,
+          "untracked-text:redline": true,
+          "move-pairs:redline": true
+        }
+      },
+      "wordAcceptAll": {
+        "authored": [
+          "Medlar lease opens with the parties named.",
+          "Medlar lease closes with both signatures.",
+          "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair."
+        ],
+        "baseline": [
+          "Medlar lease opens with the parties named.",
+          "Medlar lease closes with both signatures.",
+          "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair."
+        ],
+        "candidate": [
+          "Medlar lease opens with the parties named.",
+          "Medlar lease closes with both signatures.",
+          "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair."
+        ]
+      },
+      "wordRejectAll": {
+        "authored": [
+          "Medlar lease opens with the parties named.",
+          "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair.",
+          "Medlar lease closes with both signatures."
+        ],
+        "baseline": [
+          "Medlar lease opens with the parties named.",
+          "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair.",
+          "Medlar lease closes with both signatures."
+        ],
+        "candidate": [
+          "Medlar lease opens with the parties named.",
+          "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair.",
+          "Medlar lease closes with both signatures."
+        ]
+      }
+    },
+    "redline-edited-move-consolidate-control": {
+      "kind": "control",
+      "operation": "consolidate",
+      "original": [
+        "Medlar lease opens with the parties named.",
+        "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair.",
+        "Medlar lease closes with both signatures."
+      ],
+      "revised": [
+        "Medlar lease opens with the parties named.",
+        "Medlar lease closes with both signatures.",
+        "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair."
+      ],
+      "benchMarkupChecks": {
+        "authored": {
+          "view:accepted": true,
+          "view:rejected": true,
+          "untracked-text:redline": true,
+          "move-pairs:redline": true
+        },
+        "baseline": {
+          "view:accepted": true,
+          "view:rejected": true,
+          "untracked-text:redline": true,
+          "move-pairs:redline": true
+        },
+        "candidate": {
+          "view:accepted": true,
+          "view:rejected": true,
+          "untracked-text:redline": true,
+          "move-pairs:redline": true
+        }
+      },
+      "wordAcceptAll": {
+        "authored": [
+          "Medlar lease opens with the parties named.",
+          "Medlar lease closes with both signatures.",
+          "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair."
+        ],
+        "baseline": [
+          "Medlar lease opens with the parties named.",
+          "Medlar lease closes with both signatures.",
+          "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair."
+        ],
+        "candidate": [
+          "Medlar lease opens with the parties named.",
+          "Medlar lease closes with both signatures.",
+          "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair."
+        ]
+      },
+      "wordRejectAll": {
+        "authored": [
+          "Medlar lease opens with the parties named.",
+          "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair.",
+          "Medlar lease closes with both signatures."
+        ],
+        "baseline": [
+          "Medlar lease opens with the parties named.",
+          "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair.",
+          "Medlar lease closes with both signatures."
+        ],
+        "candidate": [
+          "Medlar lease opens with the parties named.",
+          "THIRD. Upkeep. The tenant keeps the garden and the gate in good repair.",
+          "Medlar lease closes with both signatures."
+        ]
+      }
+    }
+  }
+}
