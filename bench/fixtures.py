@@ -2794,10 +2794,11 @@ def note_page_foot_cases(add):
     double-spaced, each citing one-line notes about 70% of the way through. Under widow control Word
     keeps a paragraph's leading beside the notes it brings, so the fifth paragraph breaks before its
     citing line, which moves to page 2 with its note. Before compatibility mode 15 a fifth paragraph
-    that brings no note ends page 1 with its leading under the note band; in mode 15 Word keeps that
-    leading above the band, which these cases do not pin. Controls: the four paragraphs alone, and
-    eight at 1.5 lines. RowanEnd closes the last paragraph; each marker's region is the page Word
-    2024 prints it on."""
+    that brings no note ends page 1 with its leading under the note band. In mode 15 Word keeps every
+    last line's leading above a band that holds notes (Docxodus #1751), so that paragraph, and a last
+    line without widow control, continue on page 2. Controls: the four paragraphs alone, eight at 1.5
+    lines, and the mode 14 counterparts. RowanEnd closes the last paragraph; each marker's region is
+    the page Word 2024 prints it on."""
     mode_14 = {'word/settings.xml': f'<w:settings xmlns:w="{W}">' + SETTINGS_BODY.replace('w:val="15"', 'w:val="14"') + '</w:settings>'}
     styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
               f'<w:rFonts w:ascii="{FONT}" w:hAnsi="{FONT}" w:eastAsia="{FONT}" w:cs="{FONT}"/>'
@@ -2805,13 +2806,8 @@ def note_page_foot_cases(add):
               '<w:spacing w:before="0" w:after="0" w:line="278" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>'
               '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>')
     superscript = '<w:rPr><w:vertAlign w:val="superscript"/></w:rPr>'
-    # kind, description, w:line, notes each paragraph cites, each note's page, RowanEnd's page, mode 14
-    for kind, description, line, cites, pages, end, legacy in [
-            ('citing-line', 'the fifth paragraph cites a note on the line that would end page 1', 480, [1] * 5, [1, 1, 1, 1, 2], 2, False),
-            ('citing-line-control', 'control: the first four paragraphs alone', 480, [1] * 4, [1] * 4, 1, False),
-            ('uncited-line', 'the first paragraph cites two notes and the fifth none, compatibility mode 14', 480,
-             [2, 1, 1, 1, 0], [1] * 5, 1, True),
-            ('one-and-a-half-control', 'control: eight paragraphs at 1.5 lines', 360, [1] * 8, [1] * 6 + [2, 2], 2, False)]:
+    # w:line, notes each paragraph cites, each note's page, RowanEnd's page
+    def case(kind, description, line, cites, pages, end, mode=15, widow=True, issue='#1738'):
         body, notes, texts = '', [], []
         for number, count in enumerate(cites, 1):
             text = ' '.join(f'In season {number} the orchard crew pruned row {row}, logged the yield by hand, '
@@ -2826,15 +2822,27 @@ def note_page_foot_cases(add):
                 notes.append((note, para(props='<w:spacing w:after="0"/>', runs=f'<w:r>{superscript}<w:footnoteRef/></w:r>'
                                          + run(f' RowanNote{note} is filed with the cooperative.'))))
                 texts += [f'RowanCite{note}', str(note), str(note), f'RowanNote{note} is filed with the cooperative.']
-            body += para(props=f'<w:spacing w:after="0" w:line="{line}" w:lineRule="auto"/><w:ind w:firstLine="720"/><w:jc w:val="both"/>',
+            body += para(props=('' if widow else '<w:widowControl w:val="0"/>')
+                         + f'<w:spacing w:after="0" w:line="{line}" w:lineRule="auto"/><w:ind w:firstLine="720"/><w:jc w:val="both"/>',
                          runs=runs + run(text[cut:]))
             texts.append(text)
         assertions = [{'type': 'marker-region', 'marker': 'RowanEnd', 'occurrence': 1, 'page': end, 'rect': [0, 0, 612, 792]}]
         for note, page in enumerate(pages, 1):
             assertions += [{'type': 'marker-region', 'marker': f'RowanNote{note}', 'occurrence': 1, 'page': page, 'rect': [0, 0, 612, 792]},
                            {'type': 'same-page', 'version': 1, 'markers': [f'RowanCite{note}', f'RowanNote{note}']}]
-        add('notes-page-foot-' + kind, 'notes', f'Double-spaced citing paragraphs at a page foot: {description} (Docxodus #1738)',
-            texts, body, styles_xml=styles, footnote_list=notes, assertions=assertions, extra_parts=mode_14 if legacy else None)
+        add('notes-page-foot-' + kind, 'notes', f'Double-spaced citing paragraphs at a page foot: {description} (Docxodus {issue})',
+            texts, body, styles_xml=styles, footnote_list=notes, assertions=assertions, extra_parts=mode_14 if mode == 14 else None)
+
+    case('citing-line', 'the fifth paragraph cites a note on the line that would end page 1', 480, [1] * 5, [1, 1, 1, 1, 2], 2)
+    case('citing-line-control', 'control: the first four paragraphs alone', 480, [1] * 4, [1] * 4, 1)
+    case('uncited-line', 'the first paragraph cites two notes and the fifth none, compatibility mode 14', 480,
+         [2, 1, 1, 1, 0], [1] * 5, 1, mode=14)
+    case('one-and-a-half-control', 'control: eight paragraphs at 1.5 lines', 360, [1] * 8, [1] * 6 + [2, 2], 2)
+    case('uncited-line-mode-15', 'the first paragraph cites two notes and the fifth none, compatibility mode 15', 480,
+         [2, 1, 1, 1, 0], [1] * 5, 2, issue='#1751')
+    case('widow-off', 'widow control off, compatibility mode 15', 480, [1] * 5, [1] * 5, 2, widow=False, issue='#1751')
+    case('widow-off-mode-14-control', 'control: widow control off, compatibility mode 14', 480, [1] * 5, [1] * 5, 1,
+         mode=14, widow=False, issue='#1751')
 
 
 def character_width_cases(add, cases, cell=False):
@@ -7398,7 +7406,7 @@ def generate():
     missing_paragraph_default_cases(add)
     reply_width_cases(add, cases, comment_styles)
     note_page_foot_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v171', 'version': 171, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v172', 'version': 172, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 

@@ -1,3 +1,11 @@
+`core-v172` adds two inputs and a control for Docxodus #1751, on the #1738 page-foot paragraphs: in
+compatibility mode 15 Word 2024 keeps a page's last body line's leading above a note band that holds
+notes. A fifth paragraph that cites nothing (`notes-page-foot-uncited-line-mode-15`) and a fifth
+paragraph without widow control (`notes-page-foot-widow-off`) therefore end on page 2; their mode 14
+counterparts (`notes-page-foot-uncited-line` and the new `notes-page-foot-widow-off-mode-14-control`)
+end on page 1. Regions are the page of each marker in Word 2024. All earlier DOCX files remain
+byte-identical. LibreOffice references are pending. See [the evidence and limits](docs/results/note-page-foot/README.md).
+
 `core-v171` adds two inputs and two controls for Docxodus #1738: double-spaced paragraphs, each
 citing a one-line footnote, where the fifth runs across the foot of page 1. Word 2024 moves the
 fifth paragraph's citing line to page 2 with its note; in compatibility mode 14, a fifth paragraph

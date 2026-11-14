@@ -9,6 +9,13 @@ The three All Markup sheet cases for Docxodus #1559 and #1577 contain original M
 literal OOXML authored in `bench/fixtures.py`. No product fixture, helper, document, image or font
 program is imported. Liberation Serif is separately provisioned.
 
+The three compatibility-mode note-page-foot cases for Docxodus #1751
+(`notes-page-foot-uncited-line-mode-15`, `notes-page-foot-widow-off`,
+`notes-page-foot-widow-off-mode-14-control`) are authored the same way, from the same Rowan prose and
+helper. Their review images pair Word 2024 page renders of these inputs, with the font renamed to
+Times New Roman, with Docxodus output of the same inputs, rasterized with the markers outlined; no
+Word-written file is committed. Liberation Serif is separately provisioned.
+
 The four note-page-foot cases for Docxodus #1738 (`notes-page-foot-*`) contain original Rowan
 labels, orchard prose written for the issue, and literal OOXML authored in `bench/fixtures.py`. No
 product fixture, helper, document, image or font program is imported. Their review images show
