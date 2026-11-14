@@ -1,4 +1,4 @@
-`core-v169` adds two inputs and two controls for Docxodus #1738: double-spaced paragraphs, each
+`core-v171` adds two inputs and two controls for Docxodus #1738: double-spaced paragraphs, each
 citing a one-line footnote, where the fifth runs across the foot of page 1. Word 2024 moves the
 fifth paragraph's citing line to page 2 with its note; in compatibility mode 14, a fifth paragraph
 that cites nothing ends page 1 with its leading under the note band. The controls are the four

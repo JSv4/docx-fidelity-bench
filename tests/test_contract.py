@@ -773,7 +773,7 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v169')
+        self.assertEqual(registry['suite']['id'], 'core-v171')
 
     def test_paragraph_text_rejects_wrong_lines_and_missing_words(self):
         import gzip
