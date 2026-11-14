@@ -85,6 +85,12 @@ literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helpe
 font program is imported, and the issue's fixture bundle was not copied. Their review images are
 measurement cards, not page renders: Word 2024 opened the fixtures unmodified.
 
+The four edited-move redline cases for Docxodus #1716 contain original Medlar lease sentences and
+literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document or font
+program is imported, and the issue's reproduction files were not copied. Their review images are
+measurement cards, not page renders: Word 2024 opened the fixtures and the Docxodus outputs made from
+them unmodified, and no Word-saved file is included.
+
 The two default-spacing redline cases for Docxodus #1576 contain original Quince labels and
 literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document or
 font program is imported. Their review images are measurement cards, not page renders: Word 2024

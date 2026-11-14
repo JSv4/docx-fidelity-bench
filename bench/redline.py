@@ -26,13 +26,13 @@ from .common import ROOT, contained, digest, execute, identity, read_json, write
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
 OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'replace-text': 1, 'revision-ownership': 1, 'revision-resolve': 1, 'accept': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1, 2}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'positional-rewrites': {1}, 'section-stories': {1}, 'section-boundaries': {1}, 'section-flags': {1}, 'style-run-history': {1}}
+ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1, 2}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'positional-rewrites': {1}, 'section-stories': {1}, 'section-boundaries': {1}, 'section-flags': {1}, 'style-run-history': {1}, 'move-pairs': {1}}
 # Operations whose candidate returns the resolved document itself, not a redline.
 OUTPUT_OPERATIONS = {'reject', 'accept', 'column-edit', 'block-insert', 'revision-resolve'}
 RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
 SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}, 'revision-resolve': {'output'}, 'accept': {'output'}}
-CONTRACT = {'version': 28, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+CONTRACT = {'version': 29, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -54,6 +54,7 @@ CONTRACT = {'version': 28, 'view': revisions.VIEW_VERSION, 'engines': ['bench-ma
             'mathControls': 'a math object is removed whole when a mark on its control character (m:ctrlPr), or the deletion nested in an inserted one, removes it',
             'hyperlinkTargets': 'declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written',
             'styleRunHistory': 'declared style-run-history assertions require every paragraph style holding a pPrChange in the raw redline to hold an rPrChange too, since Word resets an unarchived style run slice to its built-ins on Reject All',
+            'movePairs': 'declared move-pairs assertions require every move name in the raw redline to have as many source ranges as destination ranges, each holding the moved text of the range it pairs with in order, since Word rejects a move by carrying each destination range back to its source range',
             'strictPackages': 'a package in the ISO/IEC 29500 Strict conformance class is read under the Transitional WordprocessingML, math and relationship names, so an input or an output of either class is resolved and viewed alike'}
 HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'bench/redline_build.py', 'bench/revision_ownership.py']
 
@@ -282,6 +283,7 @@ def validate_registry(registry=None):
                      'revision-count': lambda a: isinstance(a.get('max'), int) and a['max'] >= 0,
                      'para-ids-valid': lambda a: True, 'style-ids-unique': lambda a: True,
                      'style-run-history': lambda a: a['scope'] == 'redline',
+                     'move-pairs': lambda a: a['scope'] == 'redline',
                      'section-boundaries': lambda a: a['scope'] in {'accepted', 'rejected'}
                          and isinstance(a.get('afterParagraphs'), list)
                          and all(type(i) is int and i >= 0 for i in a['afterParagraphs'])
@@ -493,6 +495,35 @@ def unarchived_style_runs(package):
                   if style.get(w('type'), 'paragraph') == 'paragraph'
                   and style.find(w('pPr') + '/' + w('pPrChange')) is not None
                   and style.find(w('rPr') + '/' + w('rPrChange')) is None)
+
+
+def move_range_texts(package):
+    """Each move name's source and destination ranges, as the moved text each holds, in document order.
+
+    The moved text of a range is the w:t inside w:moveFrom (source) or w:moveTo (destination) between the
+    range's start and its end; a deletion or insertion beside or inside the range is not moved text.
+    Word 2024 rejects a move by carrying each destination range's moved text back to the source range it
+    pairs with in order (Docxodus #1716).
+    """
+    w = revisions.w
+    sides = {'moveFrom': {}, 'moveTo': {}}
+    active = {}
+    def walk(element, moved):
+        for side, names in sides.items():
+            if element.tag == w(side + 'RangeStart'):
+                active[(side, element.get(w('id')))] = (element.get(w('name')) or '', [])
+            elif element.tag == w(side + 'RangeEnd'):
+                name, texts = active.pop((side, element.get(w('id'))), (None, None))
+                if name is not None:
+                    names.setdefault(name, []).append(''.join(texts))
+        if element.tag == w('t') and moved:
+            for (side, _), (_, texts) in active.items():
+                if side == moved:
+                    texts.append(element.text or '')
+        for child in element:
+            walk(child, next((side for side in sides if child.tag == w(side)), moved))
+    walk(package.xml(package.main).find(w('body')), None)
+    return sides
 
 
 def paragraph_spacing(package, parts, scope):
@@ -734,6 +765,9 @@ def _assertion(assertion, package, resolved):
     elif kind == 'style-run-history':
         observed = unarchived_style_runs(package)
         check.update(passed=not observed, observed=observed)
+    elif kind == 'move-pairs':
+        observed = move_range_texts(package)
+        check.update(passed=observed['moveFrom'] == observed['moveTo'], observed=observed)
     elif kind == 'inline-trees':
         root = parts[package.main] if parts is not None else package.xml(package.main)
         roots = [(package.main, root.find(revisions.w('body')))]
