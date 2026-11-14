@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v41')
-        self.assertEqual(len(registry['cases']), 307)
+        self.assertEqual(registry['suite']['id'], 'redline-v44')
+        self.assertEqual(len(registry['cases']), 314)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694, 1699, 1700, 1702)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -492,6 +492,54 @@ class AuthoredCalibration(unittest.TestCase):
                 resolved = {'accepted': revisions.resolve(mutant.story_parts(), 'accept')}
                 self.assertFalse(redline._assertion(accepted, mutant, resolved)['passed'])
 
+    def test_picture_bullets_require_the_bullet_definition_and_its_image(self):
+        def checks(record, package):
+            parts = package.story_parts()
+            resolved = {'accepted': revisions.resolve(parts, 'accept'), 'rejected': revisions.resolve(parts, 'reject')}
+            return {a['scope']: redline._assertion(a, package, resolved) for a in record['assertions'] if a['type'] == 'picture-bullets'}
+        for name in ('inserted', 'shared-id', 'symbol-control'):
+            with self.subTest(case=name):
+                record = case('redline-picture-bullet-' + name)
+                self.assertTrue(all(check['passed'] for check in checks(record, load(record['authored'])).values()))
+        record = case('redline-picture-bullet-inserted')
+        authored = load(record['authored'])
+        steps = [item[0] for item in checks(record, authored)['accepted']['observed']]
+        def observed(change):
+            parts = dict(authored.members)
+            change(parts)
+            # Neither round trip reads the numbering part, so only this check sees the loss.
+            self.assertEqual(views(revisions.Package(parts)), views(authored))
+            return checks(record, revisions.Package(parts))['accepted']
+        def without_definition(parts):
+            numbering = ET.fromstring(parts['word/numbering.xml'])
+            numbering.remove(numbering.find(W + 'numPicBullet'))
+            parts['word/numbering.xml'] = ET.tostring(numbering)
+        # What Docxodus wrote before #1700: the level's reference without the bullet it names.
+        result = observed(without_definition)
+        self.assertFalse(result['passed'])
+        self.assertEqual(result['observed'], [[step, 'unresolved: picture bullet 0'] for step in steps])
+        for change in (lambda parts: parts.pop('word/_rels/numbering.xml.rels'), lambda parts: parts.pop('word/media/bullet0.png')):
+            result = observed(change)
+            self.assertEqual(result['observed'], [[step, 'unresolved: image of picture bullet 0'] for step in steps])
+        # Another picture's bytes, and the list drawn with an ordinary bullet.
+        other = load(case('redline-picture-bullet-shared-id')['authored']).members['word/media/bullet0.png']
+        self.assertFalse(observed(lambda parts: parts.update({'word/media/bullet0.png': other}))['passed'])
+        self.assertEqual(observed(lambda parts: parts.update({'word/numbering.xml': parts['word/numbering.xml'].replace(b'<w:lvlPicBulletId w:val="0"/>', b'')}))['observed'],
+                         [[step, None] for step in steps])
+        # A level override of the list instance names the picture as well as the definition's level does.
+        def overridden(parts):
+            numbering = parts['word/numbering.xml'].replace(b'<w:lvlPicBulletId w:val="0"/>', b'')
+            parts['word/numbering.xml'] = numbering.replace(b'<w:abstractNumId w:val="0"/></w:num>',
+                b'<w:abstractNumId w:val="0"/><w:lvlOverride w:ilvl="0"><w:lvl w:ilvl="0"><w:lvlText w:val="o"/><w:lvlPicBulletId w:val="0"/></w:lvl></w:lvlOverride></w:num>')
+        self.assertTrue(observed(overridden)['passed'])
+        registry = redline.validate_registry()
+        for field, value in (('scope', 'redline'), ('items', None), ('items', [['step']]), ('items', [['step', 'not-a-digest']]), ('items', [['', None]])):
+            mutant = copy.deepcopy(registry)
+            target = next(c for c in mutant['cases'] if c['id'] == 'redline-picture-bullet-inserted')
+            next(a for a in target['assertions'] if a['type'] == 'picture-bullets')[field] = value
+            with self.assertRaises(ValueError):
+                redline.validate_registry(mutant)
+
     def test_field_spacing_cases_reject_field_loss_despite_equal_text_and_spacing(self):
         for shape in ('simple', 'complex'):
             with self.subTest(shape=shape):
@@ -701,6 +749,36 @@ class AuthoredCalibration(unittest.TestCase):
                       Id='rTestHeader', Type='http://schemas.openxmlformats.org/officeDocument/2006/relationships/header', Target='header1.xml')
         parts['word/_rels/document.xml.rels'] = ET.tostring(rels)
         self.assertFalse(redline._assertion(assertion, revisions.Package(parts), {'redline': None})['passed'])
+
+    def test_deleted_text_must_lie_in_a_deletion_of_its_own_story(self):
+        # #1699: the deletion around a text box's anchoring run does not reach into w:txbxContent.
+        assertion = {'type': 'deleted-text-owned', 'version': 1, 'scope': 'redline'}
+        for name in ('redline-deleted-textbox-text', 'redline-deleted-textbox-text-control'):
+            record = case(name)
+            self.assertIn(assertion, record['assertions'])
+            self.assertTrue(redline._assertion(assertion, load(record['authored']), {'redline': None})['passed'], name)
+        authored = case('redline-deleted-textbox-text')['authored']
+        def renamed(root):
+            for box in root.iter(W + 'txbxContent'):
+                for text in box.iter(W + 't'):
+                    text.tag = W + 'delText'
+        check = redline._assertion(assertion, rewrite(authored, renamed), {'redline': None})
+        self.assertFalse(check['passed'])
+        self.assertEqual(check['findings'], ['Hawthorn filters rotate weekly.'] * 2)
+        def wrapped(root):
+            renamed(root)
+            for paragraph in [p for box in root.iter(W + 'txbxContent') for p in box.iter(W + 'p')]:
+                run = paragraph.find(W + 'r')
+                paragraph.remove(run)
+                ET.SubElement(paragraph, W + 'del', {W + 'id': '900', W + 'author': 'Bench'}).append(run)
+        self.assertTrue(redline._assertion(assertion, rewrite(authored, wrapped), {'redline': None})['passed'])
+        def bare(root):
+            next(t for t in root.iter(W + 't') if t.text == 'Hawthorn register complete.').tag = W + 'delText'
+        self.assertFalse(redline._assertion(assertion, rewrite(authored, bare), {'redline': None})['passed'])
+        registry = common.read_json(redline.MANIFEST)
+        registry['cases'][0]['assertions'].append(dict(assertion, scope='accepted'))
+        with self.assertRaises(ValueError):
+            redline.validate_registry(registry)
 
     def test_malformed_revision_text_declarations_are_rejected(self):
         for scope, kind, text in [('redline', 'moveFrom', ''), ('redline', 'del', None),
@@ -1431,6 +1509,28 @@ class ScoringContract(unittest.TestCase):
             finding = {'id': 'x', 'part': None, 'path': None, 'description': 'd'}
             with patch.object(redline_build, 'execute', side_effect=lambda argv, **_k: json.dumps({'documents': {argv[2]: [finding]}})):
                 self.assertEqual(redline_build.validate_packages(temp, [path]), {str(path): [finding]})
+
+    def test_relationship_ids_must_resolve_in_their_own_part(self):
+        for name in ('redline-insert-chart-strict-part', 'redline-insert-chart-strict-part-control'):
+            record = case(name)
+            self.assertEqual(revisions.relationship_id_findings(load(record['authored'])), [], name)
+            # The chart part copied without its relationships, and with a relationship whose target was not copied.
+            parts = members(record['authored'])
+            rels = parts.pop('word/charts/_rels/chart1.xml.rels')
+            finding = {'part': 'word/charts/chart1.xml', 'attribute': 'id', 'id': 'rShapes'}
+            self.assertEqual(revisions.relationship_id_findings(revisions.Package(parts)), [dict(finding, problem='names no relationship')], name)
+            parts = members(record['authored'])
+            del parts['word/drawings/drawing1.xml']
+            self.assertEqual(revisions.relationship_id_findings(revisions.Package(parts)), [dict(finding, problem='target is not in the package')], name)
+            # The main document's own ids are held to the same rule.
+            parts = members(record['authored'])
+            parts['word/document.xml'] = parts['word/document.xml'].replace(b'r:id="rChart"', b'r:id="rGone"')
+            self.assertEqual([f['id'] for f in revisions.relationship_id_findings(revisions.Package(parts))], ['rGone'], name)
+        with zipfile.ZipFile(common.ROOT / case('redline-insert-chart-strict-part')['inputs'][1]['path']) as archive:
+            self.assertIn(b'xmlns:r="http://purl.oclc.org/ooxml/officeDocument/relationships"', archive.read('word/charts/chart1.xml'))
+            self.assertNotIn(b'purl.oclc.org', archive.read('word/document.xml') + archive.read('word/_rels/document.xml.rels'))
+        # An external relationship resolves without a part.
+        self.assertEqual(revisions.relationship_id_findings(load(case('redline-hyperlink-mailto-recipients')['authored'])), [])
 
     def test_hyperlink_targets_must_resolve_to_the_declared_external_targets(self):
         record = case('redline-hyperlink-mailto-recipients')
