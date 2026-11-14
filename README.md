@@ -1,4 +1,4 @@
-`redline-v42` adds four comparison cases for [Docxodus #1739](https://github.com/JSv4/Docxodus/issues/1739):
+`redline-v43` adds four comparison cases for [Docxodus #1739](https://github.com/JSv4/Docxodus/issues/1739):
 clauses rewritten in other words that keep only their `(a)`-style label and a few articles and
 prepositions, alone and two side by side. A redline that diffs each old clause against its new one
 strings short insertions and deletions around those shared words; the new `revision-blocks`
