@@ -1,3 +1,10 @@
+The two table range-boundary cases for Docxodus #1737 (`table-range-boundaries`,
+`table-range-boundaries-control`) contain original Medlar labels and literal OOXML authored in
+`bench/fixtures.py`. No product fixture, helper, document, image or font program is imported, and
+no reporter attachment was opened or used. The review renders under
+`docs/results/table-range-boundaries/` show only Times New Roman copies of these authored inputs,
+printed by Word 2024 and exported by Docxodus with installed fonts.
+
 The three All Markup sheet cases for Docxodus #1559 and #1577 contain original Mariner labels and
 literal OOXML authored in `bench/fixtures.py`. No product fixture, helper, document, image or font
 program is imported. Liberation Serif is separately provisioned.

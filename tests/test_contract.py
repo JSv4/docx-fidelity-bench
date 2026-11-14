@@ -374,7 +374,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 1190)
+        self.assertEqual(len(common.validate_registry()['cases']), 1192)
 
     def test_group_paper_exclusions_follow_literal_source_coordinates(self):
         import runpy
@@ -773,7 +773,27 @@ class RegistryContract(unittest.TestCase):
             self.assertEqual(ET.tostring(original), ET.tostring(actual))
         self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
         self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
-        self.assertEqual(registry['suite']['id'], 'core-v168')
+        self.assertEqual(registry['suite']['id'], 'core-v169')
+
+    def test_table_range_boundary_control_drops_only_the_row_level_markers(self):
+        import re
+        from zipfile import ZipFile
+        records = {c['id']: c for c in common.validate_registry()['cases']}
+        pair = [records[c] for c in ('table-range-boundaries', 'table-range-boundaries-control')]
+        with ZipFile(common.ROOT / pair[0]['input']) as ranges, ZipFile(common.ROOT / pair[1]['input']) as control:
+            self.assertEqual(ranges.namelist(), control.namelist())
+            for name in ranges.namelist():
+                if name != 'word/document.xml': self.assertEqual(ranges.read(name), control.read(name))
+            document = ranges.read('word/document.xml').decode()
+            markers = re.findall(r'</w:tc>(<w:customXmlInsRangeStart [^>]*/><w:customXmlInsRangeEnd [^>]*/>)<w:tc>', document)
+            self.assertEqual(len(markers), 40)
+            self.assertEqual(re.sub(r'<w:customXmlIns[^>]*/>', '', document), control.read('word/document.xml').decode())
+        self.assertEqual(pair[0]['tokens'], pair[1]['tokens'])
+        self.assertEqual(pair[0]['assertions'], pair[1]['assertions'])
+        self.assertEqual(pair[0]['pdfCompanion'], pair[1]['pdfCompanion'])
+        self.assertEqual(pair[0]['pdfCompanion']['profile'], {'review': 'markup', 'comments': 'margin',
+                                                              'markupPresentation': 'word', 'commentColumnPlacement': 'balloons'})
+        self.assertEqual(pair[0]['pdfCompanion']['requiredTokens'], pair[0]['tokens'])
 
     def test_paragraph_text_rejects_wrong_lines_and_missing_words(self):
         import gzip

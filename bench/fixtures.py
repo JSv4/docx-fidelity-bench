@@ -4198,6 +4198,59 @@ def tall_row_cases(add):
                       for marker, (page, rect) in TALL_ROW_WORD.get(case_id, {}).items()]
         add(case_id, 'tables', f'Sorrel {case_id.replace("-", " ")} (Docxodus #1558)', labels, body,
             sect=paper, styles_xml=styles, assertions=assertions)
+
+
+def table_range_boundary_cases(add, cases):
+    """Original Medlar log: a 40-row table taller than a page whose every row holds a tracked
+    custom XML insertion range between its first and second cells (Docxodus #1737).
+
+    The range markers are row-level children of `w:tr`; they hold no text, and the reference
+    layout prints neither a mark nor a different row for them. The control is the same table
+    without the markers. The final print keeps the layout comparison; the companion prints the
+    All Markup balloon profile, where a renderer that puts what it draws for the markers beside
+    the cells, rather than in one, can no longer split the table between rows.
+    """
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif" w:cs="Liberation Serif"/>'
+              '<w:sz w:val="22"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+              '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="exact"/>'
+              '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    paper = ('<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" '
+             'w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr>')
+    edges = ''.join(f'<w:{side} w:val="single" w:sz="4" w:space="0" w:color="000000"/>'
+                    for side in ('top', 'left', 'bottom', 'right', 'insideH', 'insideV'))
+    widths = (1800, 4560, 3000)
+
+    def cell(width, label):
+        return f'<w:tc><w:tcPr><w:tcW w:w="{width}" w:type="dxa"/></w:tcPr>{para(label)}</w:tc>'
+
+    for case_id, ranges in (('table-range-boundaries', True), ('table-range-boundaries-control', False)):
+        labels, rows = ['MedlarOpening'], ''
+        for i in range(1, 41):
+            row = [f'MedlarStep{i:02d}', f'MedlarTray{i:02d}', f'MedlarWeight{i:02d}']
+            labels += row
+            marker = (f'<w:customXmlInsRangeStart w:id="{i}" w:author="Medlar Reviewer" w:date="2026-01-05T09:00:00Z"/>'
+                      f'<w:customXmlInsRangeEnd w:id="{i}"/>') if ranges else ''
+            rows += ('<w:tr>' + cell(widths[0], row[0]) + marker
+                     + cell(widths[1], row[1]) + cell(widths[2], row[2]) + '</w:tr>')
+        labels.append('MedlarClosing')
+        table = (f'<w:tbl><w:tblPr><w:tblW w:w="9360" w:type="dxa"/><w:tblBorders>{edges}</w:tblBorders>'
+                 '<w:tblLayout w:type="fixed"/><w:tblCellMar><w:top w:w="200" w:type="dxa"/>'
+                 '<w:bottom w:w="200" w:type="dxa"/></w:tblCellMar></w:tblPr><w:tblGrid>'
+                 + ''.join(f'<w:gridCol w:w="{width}"/>' for width in widths) + '</w:tblGrid>' + rows + '</w:tbl>')
+        # Word 2024 prints both inputs alike, in final and in All Markup: rows 1-19, 20-38 and 39-40.
+        assertions = [dict(type='marker-region', marker=f'MedlarStep{row:02d}', occurrence=1, page=page,
+                           rect=[0, 0, 612, 792], adjudicated='word') for row, page in ((1, 1), (20, 2), (39, 3))]
+        add(case_id, 'tables',
+            'Medlar table taller than a page ' + ('with a tracked custom XML range between the cells of every row'
+                                                  if ranges else 'without range markers (control)') + ' (Docxodus #1737)',
+            labels, para('MedlarOpening') + table + para('MedlarClosing'), sect=paper, styles_xml=styles,
+            assertions=assertions)
+        cases[-1]['pdfCompanion'] = dict(
+            profile=dict(review='markup', comments='margin', markupPresentation='word', commentColumnPlacement='balloons'),
+            pageSizePt=[612, 792], requiredTokens=dict(Counter(labels)))
+
+
 def markup_sheet_cases(add, cases):
     """Original Mariner logbook: where Word's All Markup print puts the shrunken page (Docxodus #1559, #1577).
 
@@ -7349,7 +7402,8 @@ def generate():
     style_frame_direct_cases(add)
     missing_paragraph_default_cases(add)
     reply_width_cases(add, cases, comment_styles)
-    registry = {'schema': 1, 'suite': {'id': 'core-v168', 'version': 168, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    table_range_boundary_cases(add, cases)
+    registry = {'schema': 1, 'suite': {'id': 'core-v169', 'version': 169, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 
