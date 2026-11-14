@@ -1,3 +1,5 @@
+`core-v173` adds an original reproducer and control for [Docxodus #1750](https://github.com/JSv4/Docxodus/issues/1750): a fixed 450pt Quince table whose rows all leave its last two grid columns unused (`w:gridAfter`). Word 2024 drops those columns and widens the other three in proportion to the table's preferred width, so `QuinceSum1` starts at 387pt; Docxodus 0af51ef5 keeps the grid's widths and starts it at 247pt. In `table-grid-unused-columns-filled-control` the last row fills the grid and nothing widens. Two version 2 `marker-region` checks per case pin the second and third cells' first words. `core-v169` and `core-v170` are claimed by open PRs. All earlier DOCX files remain byte-identical. The redline suite is unchanged. New reference registration and full-suite scoring remain pending. See [the evidence](docs/results/unused-grid-columns/README.md).
+
 `core-v172` adds two inputs and a control for Docxodus #1751, on the #1738 page-foot paragraphs: in
 compatibility mode 15 Word 2024 keeps a page's last body line's leading above a note band that holds
 notes. A fifth paragraph that cites nothing (`notes-page-foot-uncited-line-mode-15`) and a fifth

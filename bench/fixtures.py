@@ -4296,6 +4296,47 @@ def markup_sheet_cases(add, cases):
         cases[-1]['profile'] = dict(profile)
 
 
+def unused_grid_column_cases(add):
+    """Original Quince labels: grid columns no row reaches leave the table (Docxodus #1750)."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="22"/>'
+              '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr>'
+              '<w:spacing w:before="0" w:after="0" w:line="300" w:lineRule="exact"/>'
+              '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    paper = ('<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" '
+             'w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720"/></w:sectPr>')
+    # A fixed 450pt grid at the 72pt margin. Rows of three cells leave the last two columns
+    # unused; Word drops them and widens the three to 90, 225 and 135pt (x 72, 162, 387).
+    grid = [1000, 2500, 1500, 2000, 2000]
+    borders = ''.join(f'<w:{side} w:val="single" w:sz="4" w:space="0" w:color="345678"/>'
+                      for side in ('top', 'left', 'bottom', 'right', 'insideH', 'insideV'))
+
+    def cell(width, text):
+        return f'<w:tc><w:tcPr><w:tcW w:w="{width}" w:type="dxa"/></w:tcPr>' + para(text) + '</w:tc>'
+
+    for kind in ('trailing', 'filled-control'):
+        # The control's last row fills all five columns, so Word keeps the grid (x 72, 122, 247).
+        rows = [[f'Quince{n}', f'QuinceUnit{n}', f'QuinceSum{n}'] for n in (1, 2, 3)]
+        last = ['QuinceMark3', 'QuinceSeal3'] if kind == 'filled-control' else []
+        body = ''.join('<w:tr>' + ('' if n == 3 and last else '<w:trPr><w:gridAfter w:val="2"/></w:trPr>')
+                       + ''.join(cell(width, label) for width, label in zip(grid, labels + (last if n == 3 else [])))
+                       + '</w:tr>' for n, labels in enumerate(rows, 1))
+        table = ('<w:tbl><w:tblPr>' + f'<w:tblW w:w="{sum(grid)}" w:type="dxa"/><w:tblBorders>{borders}</w:tblBorders>'
+                 '<w:tblLayout w:type="fixed"/><w:tblCellMar><w:left w:w="0" w:type="dxa"/>'
+                 '<w:right w:w="0" w:type="dxa"/></w:tblCellMar></w:tblPr><w:tblGrid>'
+                 + ''.join(f'<w:gridCol w:w="{width}"/>' for width in grid) + '</w:tblGrid>' + body + '</w:tbl>')
+        tokens = ['QuinceInventory'] + [label for labels in rows for label in labels] + last + ['QuinceClosing']
+        unit, total = ([158, 80, 380, 112], [383, 80, 540, 112]) if kind == 'trailing' else ([118, 80, 240, 112], [243, 80, 370, 112])
+        add('table-grid-unused-columns-' + kind, 'tables',
+            'Quince fixed table whose rows ' + ('all leave its last two grid columns unused: Word widens the rest to the table width'
+                if kind == 'trailing' else 'leave its last two grid columns unused but one, which fills the grid (control)')
+            + ' (Docxodus #1750)',
+            tokens, para('QuinceInventory') + table + para('QuinceClosing'), sect=paper, styles_xml=styles,
+            assertions=[dict(type='marker-region', marker='QuinceUnit1', occurrence=1, page=1, rect=unit),
+                        dict(type='marker-region', marker='QuinceSum1', occurrence=1, page=1, rect=total),
+                        dict(type='same-page', version=1, markers=['QuinceInventory', 'QuinceSum3', 'QuinceClosing'])])
+
+
 def reply_width_cases(add, cases, comment_styles):
     """Reply text width, isolated from size: a three-level thread and a flat control (Docxodus #1277)."""
     for case_id, threaded in [('comments-nested-reply-width', True), ('comments-flat-note-width-control', False)]:
@@ -7406,7 +7447,8 @@ def generate():
     missing_paragraph_default_cases(add)
     reply_width_cases(add, cases, comment_styles)
     note_page_foot_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v172', 'version': 172, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    unused_grid_column_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v173', 'version': 173, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 

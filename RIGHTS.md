@@ -1,3 +1,8 @@
+The two unused-grid-column cases for Docxodus #1750 contain original Quince labels and literal OOXML
+authored in `bench/fixtures.py`. No product fixture, helper, document, image or font program is
+imported, and no reporter attachment was opened or used. Their review sheet shows Word 2024 and
+Docxodus PDFs of these inputs, drawn with pdf.js.
+
 The three picture-bullet redline cases for Docxodus #1700 contain original Sorrel and Fennel labels
 and literal OOXML authored in `bench/redline_fixtures.py`. Their only images are single-colour 8x8
 PNG squares written by `fixtures.png` in that function. No product fixture, helper, document,
