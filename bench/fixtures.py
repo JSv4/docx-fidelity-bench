@@ -4146,6 +4146,33 @@ def plain_math_cases(add, cases):
             assertions=[{'type': 'same-page', 'version': 1, 'markers': ['MapleBegin', 'MaplePlain', 'MapleEnd']}])
 
 
+def spaced_math_cases(add, cases):
+    """A display equation whose math text holds spaces (Docxodus #1705). Word's gallery Taylor expansion
+    sets its condition after a plain-style run of two spaces, and Word draws each space at the math
+    font's space width; Docxodus turned any equation holding one into a [MATH] placeholder, so its
+    operands never reached the PDF. The control holds an operator in that run instead, which Docxodus
+    already drew. Original Yarrow labels; the operands are those of the plain Maple fraction."""
+    m = 'http://schemas.openxmlformats.org/officeDocument/2006/math'
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+              '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="24"/>'
+              '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0" '
+              'w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    settings = (f'<w:settings xmlns:w="{W}" xmlns:m="{m}"><m:mathPr>'
+                '<m:mathFont m:val="DejaVu Serif"/></m:mathPr></w:settings>')
+    for control, middle, operands in ((False, '  ', ['27.5', '9']), (True, '+', ['27.5', '+', '9'])):
+        formula = ('<m:r><m:t>27.5</m:t></m:r><m:r><m:rPr><m:sty m:val="p"/></m:rPr>'
+                   f'<m:t xml:space="preserve">{middle}</m:t></m:r><m:r><m:t>9</m:t></m:r>')
+        add('spaced-math-display' + ('-control' if control else ''), 'paragraphs',
+            'Yarrow display equation with ' + ('an operator (control)' if control else 'a plain run of two spaces')
+            + ' between its operands (Docxodus #1705)',
+            ['YarrowBegin', *operands, 'YarrowEnd'],
+            para('YarrowBegin') + para(runs='<m:oMathPara><m:oMath>' + formula + '</m:oMath></m:oMathPara>') + para('YarrowEnd'),
+            styles_xml=styles, namespaces_extra=f' xmlns:m="{m}"', extra_parts={'word/settings.xml': settings},
+            assertions=[{'type': 'same-page', 'version': 1, 'markers': ['YarrowBegin', *operands, 'YarrowEnd']},
+                        {'type': 'required-font-family', 'version': 1, 'family': 'DejaVu Serif'}])
+        cases[-1]['fonts'].append('DejaVu Serif')
+
+
 # Word 2024 marker boxes (page, rect in points) for the tall-row cases, from its own PDF of each input.
 TALL_ROW_WORD = {
     'aligned-tall-row-center': {'SorrelLine001': (1, [72.744, 84.263, 136.423, 96.485]), 'SorrelRight': (1, [306.77, 390.293, 358.183, 402.515]), 'SorrelLine070': (2, [72.744, 276.293, 136.423, 288.515]), 'SorrelClosing': (2, [72.024, 288.773, 133.208, 300.995])},
@@ -7349,7 +7376,8 @@ def generate():
     style_frame_direct_cases(add)
     missing_paragraph_default_cases(add)
     reply_width_cases(add, cases, comment_styles)
-    registry = {'schema': 1, 'suite': {'id': 'core-v168', 'version': 168, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    spaced_math_cases(add, cases)
+    registry = {'schema': 1, 'suite': {'id': 'core-v169', 'version': 169, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 
