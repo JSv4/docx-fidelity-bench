@@ -1,3 +1,10 @@
+`core-v171` adds two inputs and two controls for Docxodus #1738: double-spaced paragraphs, each
+citing a one-line footnote, where the fifth runs across the foot of page 1. Word 2024 moves the
+fifth paragraph's citing line to page 2 with its note; in compatibility mode 14, a fifth paragraph
+that cites nothing ends page 1 with its leading under the note band. The controls are the four
+paragraphs alone and eight paragraphs at 1.5 lines. Regions are the page of each marker in Word
+2024. LibreOffice references are pending. See [the evidence and limits](docs/results/note-page-foot/README.md).
+
 `redline-v44` adds three cases for [Docxodus #1700](https://github.com/JSv4/Docxodus/issues/1700),
 lists whose bullet is a picture: a revision adding such a list, a list replaced by an unrelated
 one where both documents number their picture bullet 0, and a control adding the same list with
