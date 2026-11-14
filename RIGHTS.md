@@ -82,6 +82,12 @@ The eight fractional-measure cases for Docxodus #1622 contain original Quillwort
 literal OOXML authored in bench/fixtures.py. No product fixture, helper, document, image or
 font program is imported, and no reporter attachment was opened or used.
 
+The two inserted-chart redline cases for Docxodus #1702 contain original Alder, Birch and Cedar
+labels and literal WordprocessingML and chart XML authored in `bench/redline_fixtures.py`. No
+product fixture, helper, document, workbook, image or font program is imported, and the issue's
+fixture script was not copied. Their review images are Word 2024 prints of these packages and of
+a Docxodus output made from them.
+
 The two Strict-conformance redline cases for Docxodus #1268 contain original Ledger text and
 literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document or
 font program is imported. Their review images are LibreOffice renders of these packages and of
@@ -108,6 +114,12 @@ and literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, h
 image or font program is imported. The Word 2024 results their expected documents encode were
 measured on separately authored probe documents and confirmed on each case's own source; no Word
 output is included.
+
+The two text-box deletion redline cases for Docxodus #1699 contain original Hawthorn text and
+literal OOXML authored in `bench/redline_fixtures.py`, including the DrawingML and VML text-box
+markup. No product fixture, helper, document, image or font program is imported. The Word 2024
+behaviour their authored redline encodes was measured on a separately authored probe document and
+confirmed on each case's own files; no Word output is included.
 
 The eight cell-revision redline cases for Docxodus #1694 contain the same original Orchard labels
 and literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document,

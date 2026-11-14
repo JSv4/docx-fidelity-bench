@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`, `accept`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v42`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v44`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -40,10 +40,12 @@ A case scores **100** when every applicable check passes and **0** otherwise. Th
    - `para-ids-valid` v1: every `w14:paraId` in every XML part is eight hexadecimal digits, below `0x80000000`, and unique across the package;
    - `style-ids-unique` v1: no two `w:style` elements share a `w:styleId`, whatever their types;
    - `style-run-history` v1 (scope `redline`): every paragraph style whose `w:pPr` holds a `w:pPrChange` also has a `w:rPr` holding a `w:rPrChange`. Word 2024's Reject All restores a style from both markers and resets the run properties of a style without the second to its built-ins, so a spacing-only style revision rejects with 10 pt text; neither round trip sees this. The check is one-directional, because a run-only style revision was not measured. Metric contract 23 records this check;
-   - `picture-bullets` v1 (scope `accepted` or `rejected`): the body paragraphs with text that are list items, in order, each with the SHA-256 of the image its level draws as a bullet (or none), equal the declared `items`. A level names its picture through `w:lvlPicBulletId`, a `w:numPicBullet` of that id in the numbering part and an image relationship of that part; a level override of the list instance is read before the definition. A missing bullet or image is reported as `unresolved` and fails. Neither round trip reads the numbering part, and the SDK validator accepts a level naming a bullet that does not exist, which Word 2024 refuses to open. Metric contract 29 records this check;
+   - `picture-bullets` v1 (scope `accepted` or `rejected`): the body paragraphs with text that are list items, in order, each with the SHA-256 of the image its level draws as a bullet (or none), equal the declared `items`. A level names its picture through `w:lvlPicBulletId`, a `w:numPicBullet` of that id in the numbering part and an image relationship of that part; a level override of the list instance is read before the definition. A missing bullet or image is reported as `unresolved` and fails. Neither round trip reads the numbering part, and the SDK validator accepts a level naming a bullet that does not exist, which Word 2024 refuses to open. Metric contract 31 records this check;
    - `comment-threads` v1 (scope `redline`): in the comments and commentsExtended parts, every entry is keyed to a comment's last-paragraph `w14:paraId`, every `w15:paraIdParent` names the last-paragraph `w14:paraId` of a comment that has its own entry, and for each declared `[reply, parent]` pair exactly one comment holds the reply's text and its entry names the comment holding the parent's text. Comment threading is not part of the semantic view, so neither round trip sees a reply detached from its parent;
    - `hyperlink-targets` v1 (scope `redline`): every `w:hyperlink` in the main document with an `r:id` resolves to exactly one relationship of the main part, of the hyperlink type with `TargetMode="External"`, and the set of their `Target` values equals the declared `targets`, compared as written after XML parsing, with no URI normalization. The semantic view records only a hyperlink's boundaries, so neither round trip sees a target rewritten (for example to the SDK's `rewritten://` placeholder), trimmed or dropped, or a link left on a relationship id another relationship also holds;
+   - `relationship-ids` v1 (scope `redline`): every attribute in the relationships namespace (`r:id`, `r:embed`, …), in every XML part of the redline, names a relationship of that same part that is external or whose target is in the package; Strict names are read as Transitional. The semantic view does not follow a drawing into the parts it names and the SDK validator reports nothing for an id that names no relationship, so neither round trip nor validity sees a chart copied without its own relationships, which Word 2024 refuses to open. Metric contract 29 records this check;
    - `revision-count` v1: at most `max` revision records in the redline or output (scope `redline` or `output`); a `w:delText` or `w:delInstrText` outside any deletion also counts. Every `reject` and `accept` case requires zero.
+   - `deleted-text-owned` v1 (scope `redline`): every `w:delText` and `w:delInstrText` in the raw redline lies in a `w:del` or `w:moveFrom` of its own story. A text box (`w:txbxContent`) is a story of its own, so a deletion around the run that anchors the box does not count for the text inside it. Word 2024 reports a package that breaks this as corrupt, while both round trips and the schema pass it. Metric contract 30 records this check.
    - `revision-text` v1 (scope `redline`): the declared body text occurs in a named move-source range as `w:t`, or in adjacent ordinary deletion wrappers as `w:delText`. It forbids deletion-only carriers in move sources and ordinary carriers in deletions. Metric contract version 12 records this check, which catches #1420 even when accept/reject and schema checks pass.
 
    - `section-boundaries` v1 (scope `accepted` or `rejected`): inline section breaks must occur after exactly the declared zero-based body paragraph indices in `afterParagraphs`. Paragraphs are enumerated in XML document order beneath the body, including nested containers; the trailing body section properties are excluded. This binds section and running-story changes to their carrier paragraphs even when the semantic view and section-story order match. Metric contract version 18 records this check.
@@ -672,9 +674,68 @@ previous DOCX bytes are unchanged. LibreOffice renders of both inputs, and of th
 outputs before and after the fix, are in
 [`docs/results/strict-revision-reject/`](results/strict-revision-reject/).
 
+## An inserted chart whose part is Strict (Docxodus #1702)
+
+`redline-v42` adds an original pair in the `packages` category. The original holds two
+paragraphs; the revision inserts a paragraph between them that holds a bar chart (Alder, Birch,
+Cedar, literal values, no workbook). The chart part names an annotation drawing, a text box
+reading "Crates per week", through `c:userShapes/@r:id`. In the reproducer the chart part alone
+is written in the Strict namespaces (`http://purl.oclc.org/ooxml/drawingml/chart`,
+`…/drawingml/main` and `…/officeDocument/relationships`) while the main document, every
+relationship type and the annotation drawing stay Transitional; the control's chart part is
+Transitional too. Word 2024 (16.0.20326) opens both revisions and shows the chart, so a package
+may mix the classes part by part. An annotation drawing stands in for the embedded workbook of
+the issue's report because an authored package may hold only text and PNG entries.
+
+Before the fix Docxodus followed a relationship attribute only in the Transitional namespace. It
+copied the Strict chart part into the redline without its relationships part and without the
+drawing, leaving `r:id="rShapes"` naming nothing. The semantic view does not read a chart part,
+so the new `relationship-ids` assertion is the check that names the defect: `word/charts/…xml`
+holds an id that names no relationship. Word 2024 refuses that redline ("The file appears to be
+corrupted") and opens the redline written after the fix, where Accept All keeps the chart and
+Reject All removes it. The control's redline passes the assertion and opens before and after.
+
+Metric contract version 29 records the assertion. No earlier case declares it, so no earlier
+result changes, and all previous DOCX bytes are unchanged. Word 2024 prints of both revisions and
+of the Docxodus redline after the fix are in
+[`docs/results/strict-chart-part/`](results/strict-chart-part/); the redline before the fix has
+no print because Word does not open it. LibreOffice references and full-suite scoring are
+pending.
+
+## A deleted run that anchors a text box (Docxodus #1699)
+
+`redline-v43` adds an original Hawthorn pair. A paragraph's second run anchors a text box, written
+as Word writes it: a DrawingML shape in `mc:Choice` and its VML fallback, each holding the box's
+story. In the reproducer the revision removes that run. In the control the box stays and the
+paragraph after it is removed.
+
+A text box is a story of its own, and the `w:del` around the anchoring run does not reach into
+it. Desktop Word 2024 (16.0.20326), tracking the deletion of a text box, leaves the text inside
+`w:txbxContent` as `w:t`; the authored redline is that shape. A redline that renames the box's
+text to `w:delText` without a deletion inside the box does not open in Word ("The file appears to
+be corrupted."), and so can be neither accepted nor rejected there. Before the fix Docxodus wrote
+exactly that for the reproducer.
+
+Neither round trip sees the defect, because the benchmark's engine restores every `w:delText` on
+reject and drops the deleted run on accept, and the Open XML SDK reports nothing. The cases
+therefore declare the new `deleted-text-owned` v1 assertion, recorded by metric contract
+version 30. Word opened each case's inputs and authored redline, and resolved the authored
+redlines to the expected documents with Accept All and Reject All.
+
+| Case | Change | Docxodus before the fix | With the fix |
+| --- | --- | --- | --- |
+| `redline-deleted-textbox-text` | the run anchoring the box is deleted | two `w:delText` with no deletion in the box; Word refuses the file | box text stays `w:t`; Word opens, accepts and rejects |
+| `redline-deleted-textbox-text-control` | the paragraph after the box is deleted | passes | passes |
+
+The authored redlines of the earlier `redline-textbox-geometry` pair delete a whole text-box
+carrier with the box's text renamed, the shape this assertion rejects. Those cases do not declare
+it and their bytes are unchanged; correcting them is left to a separate change. LibreOffice was not
+available where these cases were authored, so both comparisons are declared eligible and await the
+calibration CI runs. All previous DOCX bytes are unchanged.
+
 ## Lists with picture bullets (Docxodus #1700)
 
-`redline-v42` adds three original cases. A picture bullet is three linked pieces: a level's
+`redline-v44` adds three original cases. A picture bullet is three linked pieces: a level's
 `w:lvlPicBulletId`, the `w:numPicBullet` it names in the numbering part, and the image that bullet
 names through the numbering part's relationships. A redline built on the original has to bring
 all three for a list it takes from the revision.

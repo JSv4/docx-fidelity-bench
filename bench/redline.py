@@ -26,13 +26,13 @@ from .common import ROOT, contained, digest, execute, identity, read_json, write
 
 MANIFEST = ROOT / 'fixtures' / 'redline' / 'manifest.json'
 OPERATIONS = {'compare': 2, 'consolidate': None, 'reject': 1, 'table-widths': 1, 'column-edit': 1, 'block-insert': 1, 'replace-span': 1, 'replace-text': 1, 'revision-ownership': 1, 'revision-resolve': 1, 'accept': 1}
-ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1, 2}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'positional-rewrites': {1}, 'section-stories': {1}, 'section-boundaries': {1}, 'section-flags': {1}, 'style-run-history': {1}, 'picture-bullets': {1}}
+ASSERTIONS = {'untracked-text': {1}, 'paragraph-count': {1}, 'para-ids-valid': {1}, 'style-ids-unique': {1}, 'revision-count': {1}, 'comment-threads': {1}, 'table-widths': {1}, 'table-state': {1, 2}, 'people-identity': {1}, 'pending-insertion-deletion': {1}, 'hyperlink-targets': {1}, 'run-atoms': {1}, 'content-controls': {1}, 'revision-text': {1}, 'inline-trees': {1, 2}, 'paragraph-spacing': {1}, 'revision-blocks': {1}, 'positional-rewrites': {1}, 'section-stories': {1}, 'section-boundaries': {1}, 'section-flags': {1}, 'style-run-history': {1}, 'relationship-ids': {1}, 'deleted-text-owned': {1}, 'picture-bullets': {1}}
 # Operations whose candidate returns the resolved document itself, not a redline.
 OUTPUT_OPERATIONS = {'reject', 'accept', 'column-edit', 'block-insert', 'revision-resolve'}
 RUN_ATOMS = {'tab', 'ptab', 'br', 'cr', 'noBreakHyphen', 'softHyphen', 'sym'}
 CATEGORIES = {'fields', 'comments', 'bookmarks', 'styles', 'revisions', 'consolidate', 'identity', 'tables', 'packages'}
 SCOPES = {'compare': {'redline', 'accepted', 'rejected'}, 'consolidate': {'redline', 'accepted', 'rejected'}, 'reject': {'output'}, 'table-widths': {'redline', 'accepted', 'rejected'}, 'column-edit': {'output'}, 'block-insert': {'output'}, 'replace-span': {'redline', 'accepted', 'rejected'}, 'replace-text': {'redline', 'accepted', 'rejected'}, 'revision-ownership': {'redline', 'accepted', 'rejected'}, 'revision-resolve': {'output'}, 'accept': {'output'}}
-CONTRACT = {'version': 29, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
+CONTRACT = {'version': 31, 'view': revisions.VIEW_VERSION, 'engines': ['bench-markup', 'libreoffice-text'],
             'caseScore': '100 when every applicable mandatory check passes, otherwise 0',
             'suiteScore': 'mean of category means over every required case',
             'libreofficeEligibility': 'a LibreOffice comparison applies only when the authored redline passes it',
@@ -51,10 +51,12 @@ CONTRACT = {'version': 29, 'view': revisions.VIEW_VERSION, 'engines': ['bench-ma
             'sectionFlags': 'declared first-page flags match every physical section in the review and independently resolved endpoints, excluding property history and textbox stories',
             'sectionBoundaries': 'declared inline section breaks occur after the exact zero-based body paragraph indices in each independently resolved endpoint',
             'revisionText': 'declared move sources and ordinary deletions must retain their appropriate text carrier',
+            'deletedTextOwned': 'declared deleted-text-owned assertions require every w:delText and w:delInstrText in the raw redline to lie in a w:del or w:moveFrom of its own story; a deletion around a text box does not reach into w:txbxContent',
             'mathControls': 'a math object is removed whole when a mark on its control character (m:ctrlPr), or the deletion nested in an inserted one, removes it',
             'hyperlinkTargets': 'declared hyperlink-target assertions require every main-document hyperlink to resolve to one external relationship, and the set of their targets to equal the declared strings as written',
             'styleRunHistory': 'declared style-run-history assertions require every paragraph style holding a pPrChange in the raw redline to hold an rPrChange too, since Word resets an unarchived style run slice to its built-ins on Reject All',
             'strictPackages': 'a package in the ISO/IEC 29500 Strict conformance class is read under the Transitional WordprocessingML, math and relationship names, so an input or an output of either class is resolved and viewed alike',
+            'relationshipIds': 'declared relationship-ids assertions require every relationship-namespace attribute in every XML part of the redline to name a relationship of that part that is external or whose target is in the package',
             'pictureBullets': 'declared picture-bullets assertions require every body list paragraph of an independently resolved endpoint to draw the declared bullet: the bytes of the image its level names through a picture bullet of the numbering part, or none'}
 HARNESS = ['bench/redline.py', 'bench/revisions.py', 'bench/lo_revisions.py', 'bench/redline_build.py', 'bench/revision_ownership.py']
 
@@ -283,6 +285,8 @@ def validate_registry(registry=None):
                      'revision-count': lambda a: isinstance(a.get('max'), int) and a['max'] >= 0,
                      'para-ids-valid': lambda a: True, 'style-ids-unique': lambda a: True,
                      'style-run-history': lambda a: a['scope'] == 'redline',
+                     'relationship-ids': lambda a: a['scope'] == 'redline',
+                     'deleted-text-owned': lambda a: a['scope'] == 'redline',
                      'picture-bullets': lambda a: a['scope'] in {'accepted', 'rejected'} and isinstance(a.get('items'), list)
                          and all(isinstance(x, list) and len(x) == 2 and isinstance(x[0], str) and x[0]
                              and (x[1] is None or isinstance(x[1], str) and re.fullmatch('[0-9a-f]{64}', x[1])) for x in a['items']),
@@ -829,8 +833,14 @@ def _assertion(assertion, package, resolved):
     elif kind == 'hyperlink-targets':
         findings = revisions.hyperlink_target_findings(package, assertion['targets'])
         check.update(passed=not findings, findings=findings)
+    elif kind == 'relationship-ids':
+        findings = revisions.relationship_id_findings(package)
+        check.update(passed=not findings, findings=findings)
     elif kind == 'comment-threads':
         findings = revisions.comment_thread_findings(package, assertion['threads'])
+        check.update(passed=not findings, findings=findings)
+    elif kind == 'deleted-text-owned':
+        findings = revisions.unowned_deleted_text(package.story_parts())
         check.update(passed=not findings, findings=findings)
     elif kind == 'revision-count':
         count = revisions.revision_count(parts if parts is not None else package.story_parts())
