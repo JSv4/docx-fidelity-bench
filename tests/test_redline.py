@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v42')
-        self.assertEqual(len(registry['cases']), 309)
+        self.assertEqual(registry['suite']['id'], 'redline-v43')
+        self.assertEqual(len(registry['cases']), 311)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694, 1702)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694, 1699, 1702)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -701,6 +701,36 @@ class AuthoredCalibration(unittest.TestCase):
                       Id='rTestHeader', Type='http://schemas.openxmlformats.org/officeDocument/2006/relationships/header', Target='header1.xml')
         parts['word/_rels/document.xml.rels'] = ET.tostring(rels)
         self.assertFalse(redline._assertion(assertion, revisions.Package(parts), {'redline': None})['passed'])
+
+    def test_deleted_text_must_lie_in_a_deletion_of_its_own_story(self):
+        # #1699: the deletion around a text box's anchoring run does not reach into w:txbxContent.
+        assertion = {'type': 'deleted-text-owned', 'version': 1, 'scope': 'redline'}
+        for name in ('redline-deleted-textbox-text', 'redline-deleted-textbox-text-control'):
+            record = case(name)
+            self.assertIn(assertion, record['assertions'])
+            self.assertTrue(redline._assertion(assertion, load(record['authored']), {'redline': None})['passed'], name)
+        authored = case('redline-deleted-textbox-text')['authored']
+        def renamed(root):
+            for box in root.iter(W + 'txbxContent'):
+                for text in box.iter(W + 't'):
+                    text.tag = W + 'delText'
+        check = redline._assertion(assertion, rewrite(authored, renamed), {'redline': None})
+        self.assertFalse(check['passed'])
+        self.assertEqual(check['findings'], ['Hawthorn filters rotate weekly.'] * 2)
+        def wrapped(root):
+            renamed(root)
+            for paragraph in [p for box in root.iter(W + 'txbxContent') for p in box.iter(W + 'p')]:
+                run = paragraph.find(W + 'r')
+                paragraph.remove(run)
+                ET.SubElement(paragraph, W + 'del', {W + 'id': '900', W + 'author': 'Bench'}).append(run)
+        self.assertTrue(redline._assertion(assertion, rewrite(authored, wrapped), {'redline': None})['passed'])
+        def bare(root):
+            next(t for t in root.iter(W + 't') if t.text == 'Hawthorn register complete.').tag = W + 'delText'
+        self.assertFalse(redline._assertion(assertion, rewrite(authored, bare), {'redline': None})['passed'])
+        registry = common.read_json(redline.MANIFEST)
+        registry['cases'][0]['assertions'].append(dict(assertion, scope='accepted'))
+        with self.assertRaises(ValueError):
+            redline.validate_registry(registry)
 
     def test_malformed_revision_text_declarations_are_rejected(self):
         for scope, kind, text in [('redline', 'moveFrom', ''), ('redline', 'del', None),

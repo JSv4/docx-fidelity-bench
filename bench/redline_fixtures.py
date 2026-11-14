@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v42', 'version': 42}
+SUITE = {'id': 'redline-v43', 'version': 43}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -353,6 +353,7 @@ def generate():
     missing_default_spacing(corpus)
     strict_rejects(corpus)
     strict_chart_parts(corpus)
+    deleted_textbox_text(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -2670,3 +2671,45 @@ def strict_chart_parts(corpus):
                        dict(chart_parts, body=p(t(INTRO)) + p(rev.ins(drawing), mark=rev.mark('ins')) + p(t(CLOSING))),
                        [untracked(INTRO, CLOSING), {'type': 'relationship-ids', 'version': 1, 'scope': 'redline'}],
                        assets='All text and chart XML are generated here; no images, workbooks or embedded font files')
+
+
+def deleted_textbox_text(corpus):
+    """A deleted run that anchors a text box (Docxodus #1699).
+
+    A text box is a story of its own: the w:del around the anchoring run does not reach into
+    w:txbxContent. Word 2024 writes the box's text as ordinary w:t when it tracks the deletion of a
+    text box, and reports a package whose box holds w:delText with no deletion of its own as
+    corrupt. The control deletes a paragraph beside a text box that stays.
+    """
+    ns = ('xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" '
+          'xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
+          'xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" '
+          'xmlns:v="urn:schemas-microsoft-com:vml"')
+    story = '<w:txbxContent>' + p(t('Hawthorn filters rotate weekly.')) + '</w:txbxContent>'
+    box = ('<w:r ' + ns + '><mc:AlternateContent><mc:Choice Requires="wps"><w:drawing>'
+           '<wp:anchor distT="0" distB="0" distL="114300" distR="114300" simplePos="0" relativeHeight="2" '
+           'behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1"><wp:simplePos x="0" y="0"/>'
+           '<wp:positionH relativeFrom="column"><wp:posOffset>0</wp:posOffset></wp:positionH>'
+           '<wp:positionV relativeFrom="paragraph"><wp:posOffset>228600</wp:posOffset></wp:positionV>'
+           '<wp:extent cx="2286000" cy="457200"/><wp:effectExtent l="0" t="0" r="0" b="0"/>'
+           '<wp:wrapSquare wrapText="bothSides"/><wp:docPr id="1" name="Hawthorn callout"/><wp:cNvGraphicFramePr/>'
+           '<a:graphic><a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+           '<wps:wsp><wps:cNvSpPr txBox="1"/><wps:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="2286000" cy="457200"/></a:xfrm>'
+           '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></wps:spPr><wps:txbx>' + story + '</wps:txbx>'
+           '<wps:bodyPr rot="0" vert="horz" wrap="square" lIns="91440" tIns="45720" rIns="91440" bIns="45720" anchor="t"/>'
+           '</wps:wsp></a:graphicData></a:graphic></wp:anchor></w:drawing></mc:Choice><mc:Fallback><w:pict>'
+           '<v:shape id="HawthornCallout" type="#_x0000_t202" style="position:absolute;margin-top:18pt;width:180pt;height:36pt;z-index:2">'
+           '<v:textbox>' + story + '</v:textbox></v:shape></w:pict></mc:Fallback></mc:AlternateContent></w:r>')
+    lead, note, closing = 'Hawthorn maintenance plan. ', 'Hawthorn review is yearly.', 'Hawthorn register complete.'
+    assertions = [untracked(closing), {'type': 'deleted-text-owned', 'version': 1, 'scope': 'redline'}]
+    rev = Revisions()
+    # Not rev.dele: the box's text keeps its ordinary spelling inside the deleted run.
+    corpus.compare('redline-deleted-textbox-text', 'revisions', 'reproducer', 'JSv4/Docxodus#1699',
+                   'The run anchoring a text box is deleted; the text inside the box stays ordinary',
+                   {'body': p(t(lead) + box) + p(t(closing))}, {'body': p(t(lead)) + p(t(closing))},
+                   {'body': p(t(lead) + f'<w:del {rev.attrs(AUTHOR)}>{box}</w:del>') + p(t(closing))}, assertions)
+    rev = Revisions()
+    corpus.compare('redline-deleted-textbox-text-control', 'revisions', 'control', 'JSv4/Docxodus#1699',
+                   'A paragraph beside a text box is deleted; the box stays',
+                   {'body': p(t(lead) + box) + p(t(note)) + p(t(closing))}, {'body': p(t(lead) + box) + p(t(closing))},
+                   {'body': p(t(lead) + box) + p(rev.dele(t(note)), mark=rev.mark('del')) + p(t(closing))}, assertions)

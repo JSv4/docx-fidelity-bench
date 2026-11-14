@@ -354,6 +354,21 @@ def revision_count(parts):
     return total
 
 
+def unowned_deleted_text(parts):
+    """The text of each deleted-text element with no w:del or w:moveFrom around it inside its own
+    story. A text box (w:txbxContent) is a story of its own, which a deletion around the run that
+    anchors the box does not reach into; Word 2024 reports a package holding one as corrupt."""
+    found = []
+    def walk(element, deleted):
+        for child in element:
+            if child.tag in (w('delText'), w('delInstrText')) and not deleted:
+                found.append(child.text or '')
+            walk(child, child.tag != w('txbxContent') and (deleted or child.tag in (w('del'), w('moveFrom'))))
+    for root in parts.values():
+        walk(root, False)
+    return found
+
+
 # ---------------------------------------------------------------------------------------------
 # Semantic view
 # ---------------------------------------------------------------------------------------------

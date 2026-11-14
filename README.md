@@ -1,3 +1,9 @@
+`redline-v43` adds a text-box deletion pair for Docxodus #1699: a deleted run that anchors a text box
+keeps the box's text ordinary, as Word 2024 writes it, and a control deletes the paragraph beside a
+box that stays. A new `deleted-text-owned` assertion requires deleted text to lie in a deletion of
+its own story, which neither round trip nor the schema checks. See
+[the redline notes](docs/REDLINE.md#a-deleted-run-that-anchors-a-text-box-docxodus-1699).
+
 `redline-v42` adds an inserted-chart pair for Docxodus #1702. The revised document is a Transitional
 package whose chart part alone is written in the Strict namespaces, so the `r:id` naming the
 chart's annotation drawing is in the Strict relationships namespace; the control's chart part is

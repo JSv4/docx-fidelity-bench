@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`, `accept`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v41`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v43`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -44,6 +44,7 @@ A case scores **100** when every applicable check passes and **0** otherwise. Th
    - `hyperlink-targets` v1 (scope `redline`): every `w:hyperlink` in the main document with an `r:id` resolves to exactly one relationship of the main part, of the hyperlink type with `TargetMode="External"`, and the set of their `Target` values equals the declared `targets`, compared as written after XML parsing, with no URI normalization. The semantic view records only a hyperlink's boundaries, so neither round trip sees a target rewritten (for example to the SDK's `rewritten://` placeholder), trimmed or dropped, or a link left on a relationship id another relationship also holds;
    - `relationship-ids` v1 (scope `redline`): every attribute in the relationships namespace (`r:id`, `r:embed`, …), in every XML part of the redline, names a relationship of that same part that is external or whose target is in the package; Strict names are read as Transitional. The semantic view does not follow a drawing into the parts it names and the SDK validator reports nothing for an id that names no relationship, so neither round trip nor validity sees a chart copied without its own relationships, which Word 2024 refuses to open. Metric contract 29 records this check;
    - `revision-count` v1: at most `max` revision records in the redline or output (scope `redline` or `output`); a `w:delText` or `w:delInstrText` outside any deletion also counts. Every `reject` and `accept` case requires zero.
+   - `deleted-text-owned` v1 (scope `redline`): every `w:delText` and `w:delInstrText` in the raw redline lies in a `w:del` or `w:moveFrom` of its own story. A text box (`w:txbxContent`) is a story of its own, so a deletion around the run that anchors the box does not count for the text inside it. Word 2024 reports a package that breaks this as corrupt, while both round trips and the schema pass it. Metric contract 30 records this check.
    - `revision-text` v1 (scope `redline`): the declared body text occurs in a named move-source range as `w:t`, or in adjacent ordinary deletion wrappers as `w:delText`. It forbids deletion-only carriers in move sources and ordinary carriers in deletions. Metric contract version 12 records this check, which catches #1420 even when accept/reject and schema checks pass.
 
    - `section-boundaries` v1 (scope `accepted` or `rejected`): inline section breaks must occur after exactly the declared zero-based body paragraph indices in `afterParagraphs`. Paragraphs are enumerated in XML document order beneath the body, including nested containers; the trailing body section properties are excluded. This binds section and running-story changes to their carrier paragraphs even when the semantic view and section-story order match. Metric contract version 18 records this check.
@@ -699,3 +700,34 @@ of the Docxodus redline after the fix are in
 [`docs/results/strict-chart-part/`](results/strict-chart-part/); the redline before the fix has
 no print because Word does not open it. LibreOffice references and full-suite scoring are
 pending.
+
+## A deleted run that anchors a text box (Docxodus #1699)
+
+`redline-v43` adds an original Hawthorn pair. A paragraph's second run anchors a text box, written
+as Word writes it: a DrawingML shape in `mc:Choice` and its VML fallback, each holding the box's
+story. In the reproducer the revision removes that run. In the control the box stays and the
+paragraph after it is removed.
+
+A text box is a story of its own, and the `w:del` around the anchoring run does not reach into
+it. Desktop Word 2024 (16.0.20326), tracking the deletion of a text box, leaves the text inside
+`w:txbxContent` as `w:t`; the authored redline is that shape. A redline that renames the box's
+text to `w:delText` without a deletion inside the box does not open in Word ("The file appears to
+be corrupted."), and so can be neither accepted nor rejected there. Before the fix Docxodus wrote
+exactly that for the reproducer.
+
+Neither round trip sees the defect, because the benchmark's engine restores every `w:delText` on
+reject and drops the deleted run on accept, and the Open XML SDK reports nothing. The cases
+therefore declare the new `deleted-text-owned` v1 assertion, recorded by metric contract
+version 30. Word opened each case's inputs and authored redline, and resolved the authored
+redlines to the expected documents with Accept All and Reject All.
+
+| Case | Change | Docxodus before the fix | With the fix |
+| --- | --- | --- | --- |
+| `redline-deleted-textbox-text` | the run anchoring the box is deleted | two `w:delText` with no deletion in the box; Word refuses the file | box text stays `w:t`; Word opens, accepts and rejects |
+| `redline-deleted-textbox-text-control` | the paragraph after the box is deleted | passes | passes |
+
+The authored redlines of the earlier `redline-textbox-geometry` pair delete a whole text-box
+carrier with the box's text renamed, the shape this assertion rejects. Those cases do not declare
+it and their bytes are unchanged; correcting them is left to a separate change. LibreOffice was not
+available where these cases were authored, so both comparisons are declared eligible and await the
+calibration CI runs. All previous DOCX bytes are unchanged.
