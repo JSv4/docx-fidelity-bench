@@ -3577,9 +3577,14 @@ def floating_paragraph_cases(add, cases):
     late_variants = [(f'square-after-{n}', 'square', [n], 0) for n in (1, 28, 29, 30, 78)]
     late_variants += [('tight-after-30', 'tight', [30], 0), ('square-right-after-30', 'square', [30], 0),
                       ('square-after-1-prefix', 'square', [1], 24)]
+    # Docxodus #1736: the right-edge tile placed by a column offset (312pt, so its right edge meets
+    # the column's) instead of right alignment. Source and expected layout otherwise match the
+    # square-right-after-30 control.
+    late_variants += [('square-offset-after-30', 'square', [30], 0)]
     for kind, wrap, positions, prefix in variants + late_variants:
         late = (kind, wrap, positions, prefix) in late_variants
-        right_edge = 'right' in kind
+        offset_edge = 'offset' in kind
+        right_edge = 'right' in kind or offset_edge
         def drawing(number):
             wrapping = ('<wp:wrapNone/>' if wrap == 'none' else '<wp:wrapSquare wrapText="bothSides"/>'
                 if wrap == 'square' else '<wp:wrapTight wrapText="bothSides"><wp:wrapPolygon edited="0">'
@@ -3588,8 +3593,9 @@ def floating_paragraph_cases(add, cases):
             return ('<w:r><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" '
                 'relativeHeight="1" behindDoc="0" locked="0" layoutInCell="1" allowOverlap="1">'
                 '<wp:simplePos x="0" y="0"/><wp:positionH relativeFrom="column">'
-                + ('<wp:align>right</wp:align>' if right_edge else '<wp:posOffset>'
-                   + str((180 if kind == 'multiple' and number == 2 else 240) * 12700 if wrap == 'none' else 0) + '</wp:posOffset>') + '</wp:positionH>'
+                + ('<wp:align>right</wp:align>' if right_edge and not offset_edge else '<wp:posOffset>'
+                   + str(312 * 12700 if offset_edge else (180 if kind == 'multiple' and number == 2 else 240) * 12700
+                         if wrap == 'none' else 0) + '</wp:posOffset>') + '</wp:positionH>'
                 '<wp:positionV relativeFrom="paragraph"><wp:posOffset>0</wp:posOffset></wp:positionV>'
                 '<wp:extent cx="609600" cy="609600"/>' + wrapping + f'<wp:docPr id="{number}" name="Chive tile {number}"/>'
                 '<a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">'
@@ -3621,11 +3627,67 @@ def floating_paragraph_cases(add, cases):
         assertions += [dict(type='color-reference-geometry', version=1, page=page, rgb=[38, 102, 144],
             tolerancePt=1, coverageTolerance=0.04) for page in sorted(set(image_pages))]
         add(('late-wrapped-paragraph-' if late else 'floating-paragraph-') + kind, 'images',
-            'Chive floating picture source ownership: ' + kind + ' (part of Docxodus #1558)',
+            'Chive floating picture source ownership: ' + kind
+            + (' (Docxodus #1736; control late-wrapped-paragraph-square-right-after-30)' if offset_edge
+               else ' (part of Docxodus #1558)'),
             lead + [label + ' recorded.' for label in labels] + ['ChiveComplete'], body,
             sect=paper, styles_xml=styles, assertions=assertions,
             extra_parts={'word/media/chive.png': png(8, 8, lambda x, y: (38, 102, 144))},
             relations_extra=[('rChive', 'image', 'media/chive.png')])
+        cases[-1]['pdfCompanion'] = dict(profile=dict(review='final', comments='hidden'),
+            pageSizePt=[432, 594], requiredTokens=cases[-1]['tokens'], exactInventory=True)
+
+
+def inline_text_box_paragraph_cases(add, cases):
+    """Original Bryony lines: an inline legacy text box moves whole with its line (Docxodus #1735).
+
+    One 78-line paragraph on the Chive paper, at least 18pt a line, holds a 150 by 60pt text box in
+    the line flow after Bryony055. That is the last line to fit on page 2 for any box line over 54 and
+    up to 72pt tall, so where a renderer sits the box against its line's text moves no other line. The
+    control is the same paragraph without the box. Regions hold Word 2024's word boxes: each label
+    in its 18pt line with 1pt to spare (Word sets the text at the bottom of the line), Bryony055
+    anywhere in the box's line, the box's story text inside the box, and its fill whole on page 2."""
+    styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
+        '<w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif"/><w:sz w:val="22"/>'
+        '</w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:keepLines w:val="0"/><w:widowControl w:val="0"/>'
+        '<w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="atLeast"/>'
+        '</w:pPr></w:pPrDefault></w:docDefaults></w:styles>')
+    paper = ('<w:sectPr><w:pgSz w:w="8640" w:h="11880"/><w:pgMar w:top="720" '
+        'w:right="720" w:bottom="720" w:left="720"/></w:sectPr>')
+    fill = [176, 196, 222]
+    box = ('<w:r><w:pict><v:shape id="BryonyBox" type="#_x0000_t202" style="width:150pt;height:60pt" '
+           'filled="t" fillcolor="#B0C4DE" stroked="f"><v:textbox><w:txbxContent>' + para('BryonyGauge')
+           + '</w:txbxContent></v:textbox></v:shape></w:pict></w:r>')
+    labels = [f'Bryony{n:03d}' for n in range(1, 79)]
+    for control in (False, True):
+        runs = ''
+        for index, label in enumerate(labels):
+            if index: runs += '<w:r><w:br/></w:r>'
+            runs += run(label + ' recorded.') + ('' if control or index != 54 else box)
+        # Each label's page and line slot; with the box, page 2 ends on the box's line.
+        slots = ([(n // 29 + 1, n % 29) for n in range(79)] if control else
+                 [(1, n) for n in range(29)] + [(2, n) for n in range(26)] + [(3, n) for n in range(24)])
+        assertions = []
+        for label, (page, slot) in zip(labels + ['BryonyComplete'], slots):
+            top = 36 + slot * 18
+            # The box's line spans the box, 486pt to the 558pt body bottom; its label may sit anywhere in it.
+            bottom = 559 if not control and label == 'Bryony055' else top + 19
+            assertions.append(dict(type='marker-region', marker=label, occurrence=1, page=page,
+                                   rect=[36, top - 1, 384, bottom]))
+        if not control:
+            # The box follows the label's text at 129.5pt; its story text lies anywhere inside it.
+            assertions.append(dict(type='marker-region', marker='BryonyGauge', occurrence=1, page=2,
+                                   rect=[128.5, 485, 280.5, 547]))
+            # The whole fill on page 2, not cut at a page break; coverage is its area in 96dpi pixels.
+            assertions.append({'type': 'color-geometry', 'version': 1, 'page': 2, 'rgb': fill, 'adjudicated': 'word',
+                               'tolerancePt': 2, 'coverageTolerance': .1, 'boundsPt': [129.5, 486, 279.5, 546],
+                               'coverage': 150 * 60 / .75 ** 2})
+        add('inline-text-box-paragraph' + ('-control' if control else ''), 'paragraphs',
+            ('Bryony paragraph without its inline text box (control for inline-text-box-paragraph)' if control else
+             'Bryony paragraph longer than a page holding an inline legacy text box (Docxodus #1735)'),
+            [label + ' recorded.' for label in labels] + ([] if control else ['BryonyGauge']) + ['BryonyComplete'],
+            para(runs=runs) + para('BryonyComplete'), sect=paper, styles_xml=styles, assertions=assertions,
+            namespaces_extra=' xmlns:v="urn:schemas-microsoft-com:vml"')
         cases[-1]['pdfCompanion'] = dict(profile=dict(review='final', comments='hidden'),
             pageSizePt=[432, 594], requiredTokens=cases[-1]['tokens'], exactInventory=True)
 
@@ -7349,7 +7411,8 @@ def generate():
     style_frame_direct_cases(add)
     missing_paragraph_default_cases(add)
     reply_width_cases(add, cases, comment_styles)
-    registry = {'schema': 1, 'suite': {'id': 'core-v168', 'version': 168, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    inline_text_box_paragraph_cases(add, cases)
+    registry = {'schema': 1, 'suite': {'id': 'core-v170', 'version': 170, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 
