@@ -1,8 +1,16 @@
-`redline-v42` adds a text-box deletion pair for Docxodus #1699: a deleted run that anchors a text box
+`redline-v43` adds a text-box deletion pair for Docxodus #1699: a deleted run that anchors a text box
 keeps the box's text ordinary, as Word 2024 writes it, and a control deletes the paragraph beside a
 box that stays. A new `deleted-text-owned` assertion requires deleted text to lie in a deletion of
 its own story, which neither round trip nor the schema checks. See
 [the redline notes](docs/REDLINE.md#a-deleted-run-that-anchors-a-text-box-docxodus-1699).
+
+`redline-v42` adds an inserted-chart pair for Docxodus #1702. The revised document is a Transitional
+package whose chart part alone is written in the Strict namespaces, so the `r:id` naming the
+chart's annotation drawing is in the Strict relationships namespace; the control's chart part is
+Transitional. A new `relationship-ids` assertion requires every relationship id written in a part
+of the redline to resolve in that part (metric contract 29). Word 2024 refuses a redline that
+leaves the id dangling. LibreOffice references are pending. See
+[the redline notes](docs/REDLINE.md#an-inserted-chart-whose-part-is-strict-docxodus-1702).
 
 `core-v168` adds an original three-level comment thread and a flat-note control for [Docxodus #1277](https://github.com/JSv4/Docxodus/issues/1277). The pair differs only in parent links. Their PDFs hide comments and retain body/page checks. The margin-profile HTML companion uses a new version 1 `marker-block-width` assertion: each reply's note paragraph must have the content width of the root note's paragraph within 0.5px, so a reply that repeats the note's border and padding inside its parent fails. All earlier DOCX files remain byte-identical. The redline suite remains `redline-v41`. New reference registration and full-suite scoring remain pending.
 

@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v42')
-        self.assertEqual(len(registry['cases']), 309)
+        self.assertEqual(registry['suite']['id'], 'redline-v43')
+        self.assertEqual(len(registry['cases']), 311)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694, 1699)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694, 1699, 1702)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -1461,6 +1461,28 @@ class ScoringContract(unittest.TestCase):
             finding = {'id': 'x', 'part': None, 'path': None, 'description': 'd'}
             with patch.object(redline_build, 'execute', side_effect=lambda argv, **_k: json.dumps({'documents': {argv[2]: [finding]}})):
                 self.assertEqual(redline_build.validate_packages(temp, [path]), {str(path): [finding]})
+
+    def test_relationship_ids_must_resolve_in_their_own_part(self):
+        for name in ('redline-insert-chart-strict-part', 'redline-insert-chart-strict-part-control'):
+            record = case(name)
+            self.assertEqual(revisions.relationship_id_findings(load(record['authored'])), [], name)
+            # The chart part copied without its relationships, and with a relationship whose target was not copied.
+            parts = members(record['authored'])
+            rels = parts.pop('word/charts/_rels/chart1.xml.rels')
+            finding = {'part': 'word/charts/chart1.xml', 'attribute': 'id', 'id': 'rShapes'}
+            self.assertEqual(revisions.relationship_id_findings(revisions.Package(parts)), [dict(finding, problem='names no relationship')], name)
+            parts = members(record['authored'])
+            del parts['word/drawings/drawing1.xml']
+            self.assertEqual(revisions.relationship_id_findings(revisions.Package(parts)), [dict(finding, problem='target is not in the package')], name)
+            # The main document's own ids are held to the same rule.
+            parts = members(record['authored'])
+            parts['word/document.xml'] = parts['word/document.xml'].replace(b'r:id="rChart"', b'r:id="rGone"')
+            self.assertEqual([f['id'] for f in revisions.relationship_id_findings(revisions.Package(parts))], ['rGone'], name)
+        with zipfile.ZipFile(common.ROOT / case('redline-insert-chart-strict-part')['inputs'][1]['path']) as archive:
+            self.assertIn(b'xmlns:r="http://purl.oclc.org/ooxml/officeDocument/relationships"', archive.read('word/charts/chart1.xml'))
+            self.assertNotIn(b'purl.oclc.org', archive.read('word/document.xml') + archive.read('word/_rels/document.xml.rels'))
+        # An external relationship resolves without a part.
+        self.assertEqual(revisions.relationship_id_findings(load(case('redline-hyperlink-mailto-recipients')['authored'])), [])
 
     def test_hyperlink_targets_must_resolve_to_the_declared_external_targets(self):
         record = case('redline-hyperlink-mailto-recipients')
