@@ -7442,7 +7442,7 @@ def generate():
     missing_paragraph_default_cases(add)
     reply_width_cases(add, cases, comment_styles)
     offpaper_content_cases(add, cases)
-    registry = {'schema': 1, 'suite': {'id': 'core-v169', 'version': 169, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    registry = {'schema': 1, 'suite': {'id': 'core-v170', 'version': 170, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 

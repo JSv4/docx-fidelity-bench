@@ -1,6 +1,6 @@
 # Content placed wholly past the paper edge (Docxodus #1733, #1734)
 
-`cases.png` shows page 1 of each `core-v169` off-paper case and its control. The columns are Word 2024
+`cases.png` shows page 1 of each `core-v170` off-paper case and its control. The columns are Word 2024
 (16.0.20326, Windows 11, `SaveAs2` to PDF), Docxodus `main` at a8b1d6ce, and Docxodus with the fix.
 Each page is drawn from its PDF with pdf.js. These are illustrations, not registered references: the
 machine had no Liberation Serif, so Word and Docxodus both printed Times New Roman in its place.
