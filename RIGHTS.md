@@ -165,6 +165,14 @@ OOXML generator with later source positions, a right-edge picture and a fitting 
 No product fixture, helper, document, image or font program is imported. The retained
 comparison also includes the two unchanged leading-picture controls.
 
+The offset-picture case for Docxodus #1736 (`late-wrapped-paragraph-square-offset-after-30`)
+extends the same Chive generator with a column offset. The two inline-text-box cases for
+Docxodus #1735 (`inline-text-box-paragraph*`) contain original Bryony labels, an original
+light-blue fill and literal OOXML authored in `bench/fixtures.py`. No product fixture, helper,
+document, image or font program is imported, and no reporter attachment was opened or used.
+Their review sheet shows Times New Roman copies of these inputs as printed by Word 2024 and
+exported by Docxodus; no Word-saved document is included.
+
 The six character-width cases for Docxodus #1564 contain original Sorrel labels and
 literal OOXML authored in `bench/fixtures.py`. No renderer fixture, helper, document,
 image or font program is imported. Liberation Mono is separately provisioned.
