@@ -1,3 +1,10 @@
+`core-v171` adds two inputs and two controls for Docxodus #1738: double-spaced paragraphs, each
+citing a one-line footnote, where the fifth runs across the foot of page 1. Word 2024 moves the
+fifth paragraph's citing line to page 2 with its note; in compatibility mode 14, a fifth paragraph
+that cites nothing ends page 1 with its leading under the note band. The controls are the four
+paragraphs alone and eight paragraphs at 1.5 lines. Regions are the page of each marker in Word
+2024. LibreOffice references are pending. See [the evidence and limits](docs/results/note-page-foot/README.md).
+
 `core-v168` adds an original three-level comment thread and a flat-note control for [Docxodus #1277](https://github.com/JSv4/Docxodus/issues/1277). The pair differs only in parent links. Their PDFs hide comments and retain body/page checks. The margin-profile HTML companion uses a new version 1 `marker-block-width` assertion: each reply's note paragraph must have the content width of the root note's paragraph within 0.5px, so a reply that repeats the note's border and padding inside its parent fails. All earlier DOCX files remain byte-identical. The redline suite remains `redline-v41`. New reference registration and full-suite scoring remain pending.
 
 `redline-v41` adds a Strict-conformance reject pair for Docxodus #1268: one paragraph deletes
