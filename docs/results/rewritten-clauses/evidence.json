@@ -1,0 +1,33 @@
+{
+  "before": "a8b1d6cef5dbcb7398ebb6737581d0f7ce983a7c",
+  "after": "8007b6a86e96ff49ba7814ec29eb34cd4cdc48f6",
+  "scope": "Four focused cases checked with the benchmark's revision engine and assertions; no validator or LibreOffice run, not a suite score",
+  "candidate": "Docxodus redline CLI (DocxCompare.Compare) built from each commit",
+  "cases": [
+    {
+      "id": "redline-rewritten-clause",
+      "before": {"markup-accepted": true, "markup-rejected": true, "assertion-revision-blocks": false},
+      "after": {"markup-accepted": true, "markup-rejected": true, "assertion-revision-blocks": true},
+      "authored": {"markup-accepted": true, "markup-rejected": true, "assertion-revision-blocks": true}
+    },
+    {
+      "id": "redline-rewritten-clauses",
+      "before": {"markup-accepted": true, "markup-rejected": true, "assertion-revision-blocks": false},
+      "after": {"markup-accepted": true, "markup-rejected": true, "assertion-revision-blocks": true},
+      "authored": {"markup-accepted": true, "markup-rejected": true, "assertion-revision-blocks": true}
+    },
+    {
+      "id": "redline-rewritten-clause-heavy-edit-control",
+      "before": {"markup-accepted": true, "markup-rejected": true, "assertion-untracked-text": true},
+      "after": {"markup-accepted": true, "markup-rejected": true, "assertion-untracked-text": true},
+      "authored": {"markup-accepted": true, "markup-rejected": true, "assertion-untracked-text": true}
+    },
+    {
+      "id": "redline-rewritten-clauses-edited-control",
+      "before": {"markup-accepted": true, "markup-rejected": true, "assertion-untracked-text": true},
+      "after": {"markup-accepted": true, "markup-rejected": true, "assertion-untracked-text": true},
+      "authored": {"markup-accepted": true, "markup-rejected": true, "assertion-untracked-text": true}
+    }
+  ],
+  "screenshots": "docx2html --track-changes --word-markup --inline-styles from the 8007b6a8 build, captured with headless Edge at 1100x560"
+}

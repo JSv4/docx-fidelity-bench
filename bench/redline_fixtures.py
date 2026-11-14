@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v41', 'version': 41}
+SUITE = {'id': 'redline-v43', 'version': 43}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -352,6 +352,7 @@ def generate():
     math_control_revisions(corpus)
     missing_default_spacing(corpus)
     strict_rejects(corpus)
+    rewritten_clauses(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -2609,3 +2610,69 @@ def strict_rejects(corpus):
                    'Rejecting one deletion and one insertion in a ' + ('Strict' if strict else 'Transitional') + '-conformance package',
                    'reject', [dict(tracked, role='input')], {'output': original}, original,
                    [{'type': 'revision-count', 'version': 1, 'scope': 'output', 'max': 0}])
+
+
+def rewritten_clauses(corpus):
+    """Clauses rewritten in other words keep only their labels and a few articles and prepositions.
+
+    A comparison that diffs each old clause against its new one word by word strings short insertions and
+    deletions around those shared words; the reproducers require each side's text to form one block. The
+    controls keep a heavily but positionally edited clause, and an edited clause beside the rewrites, in place."""
+    old = ['(a) For courier by with for warehouse on supplier voucher for by ledger supplier manifest courier with.',
+           '(b) For courier by with for warehouse on supplier voucher for by ledger supplier manifest courier with.',
+           '(c) For courier and voucher courier shipment by with a and by manifest a for and manifest.']
+    new = ['(a) Lease garden tenant of for utilities and utilities on fixtures notice repair fixtures by notice tenant.',
+           '(b) Lease garden tenant of for utilities and utilities on fixtures notice repair fixtures by notice tenant.',
+           '(c) Inspection with keys landlord notice deposit rent notice keys utilities to by deposit on premises utilities.']
+    edited = ('(d) The supplier ', ('shall', 'must'), ' deliver the goods to the warehouse before the end of each ',
+              ('month', 'quarter'), '.')
+
+    def body(texts, tail=''):
+        return p(t('Clause 1')) + ''.join(p(t(text)) for text in texts) + tail + p(t('Clause 2'))
+
+    def replaced(before, after, rev):
+        return (''.join(p(rev.ins(t(text)), mark=rev.mark('ins')) for text in after)
+                + ''.join(p(rev.dele(t(text)), mark=rev.mark('del')) for text in before))
+
+    def edited_paragraph(side, rev=None):
+        content = ''
+        for piece in edited:
+            if isinstance(piece, str):
+                content += t(piece)
+            elif rev is None:
+                content += t(piece[side])
+            else:
+                content += rev.dele(t(piece[0])) + rev.ins(t(piece[1]))
+        return p(content)
+
+    for name, indexes in (('clause', [0]), ('clauses', [1, 2])):
+        before, after = [old[i] for i in indexes], [new[i] for i in indexes]
+        rev = Revisions()
+        corpus.compare('redline-rewritten-' + name, 'revisions', 'reproducer', 'JSv4/Docxodus#1739',
+                       'A rewritten clause sharing only its label and a few short words is replaced as one block'
+                       + ('' if name == 'clause' else ', beside another'),
+                       dict(body=body(before)), dict(body=body(after)),
+                       dict(body=p(t('Clause 1')) + replaced(before, after, rev) + p(t('Clause 2'))),
+                       [{'type': 'revision-blocks', 'version': 1, 'scope': 'redline'}])
+
+    kept = {4: 'keword', 9: 'kjword', 13: 'knword'}
+    def words(side):
+        return [kept.get(i, side + 'abcdefghijklmnopqrst'[i] + 'word') for i in range(20)]
+    rev = Revisions()
+    content = ''
+    for i, (a, b) in enumerate(zip(words('o'), words('n'))):
+        lead = ' ' if i else ''
+        content += t(lead + a) if a == b else t(lead) + rev.dele(t(a)) + rev.ins(t(b))
+    corpus.compare('redline-rewritten-clause-heavy-edit-control', 'revisions', 'control', 'JSv4/Docxodus#1739',
+                   'Twenty words of which three are kept in place stay one edited paragraph',
+                   dict(body=body([' '.join(words('o')) + '.'])), dict(body=body([' '.join(words('n')) + '.'])),
+                   dict(body=p(t('Clause 1')) + p(content + t('.')) + p(t('Clause 2'))),
+                   [untracked(*kept.values())])
+
+    rev = Revisions()
+    corpus.compare('redline-rewritten-clauses-edited-control', 'revisions', 'control', 'JSv4/Docxodus#1739',
+                   'An edited clause after rewritten ones stays one edited paragraph',
+                   dict(body=body(old[1:], edited_paragraph(0))), dict(body=body(new[1:], edited_paragraph(1))),
+                   dict(body=p(t('Clause 1')) + replaced(old[1:], new[1:], rev) + edited_paragraph(None, rev)
+                        + p(t('Clause 2'))),
+                   [untracked(edited[0], edited[2])])

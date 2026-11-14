@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`, `accept`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v41`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v43`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -670,3 +670,26 @@ substitution finds nothing in a Transitional package, so no earlier result chang
 previous DOCX bytes are unchanged. LibreOffice renders of both inputs, and of the Docxodus reject
 outputs before and after the fix, are in
 [`docs/results/strict-revision-reject/`](results/strict-revision-reject/).
+
+## Rewritten clauses (Docxodus #1739)
+
+`redline-v43` adds two original reproducers and two controls. In each reproducer a clause is
+rewritten in an unrelated vocabulary but keeps its `(a)`, `(b)` or `(c)` label and a handful of
+articles and prepositions, scattered through the sentence in different places; `redline-rewritten-clause`
+has one such clause between unchanged headings and `redline-rewritten-clauses` two. The existing
+`revision-blocks` assertion requires the inserted and the deleted text to form one run each in
+body order, so a redline that pairs each old clause with its new one and diffs them word by word,
+keeping the label and the shared short words unmarked between short insertions and deletions,
+fails while both round trips still pass. The authored redline inserts the new clauses and deletes
+the old ones whole.
+
+The controls guard the other side of the same decision. `redline-rewritten-clause-heavy-edit-control`
+replaces seventeen of twenty words but keeps three in their places; `untracked-text` requires the
+three to stay outside every revision, as an edited paragraph keeps them.
+`redline-rewritten-clauses-edited-control` follows the two rewritten clauses with a clause that
+changes two words, which must stay one edited paragraph. All texts are literal and authored here.
+Every LibreOffice comparison is declared eligible: the authored redlines hold only plain runs and
+whole-paragraph insertions and deletions, the shape `redline-weak-replacement-unrelated-control`
+already calibrates. No earlier DOCX bytes change. Docxodus `a8b1d6ce` fails both reproducers on the
+assertion alone and passes the controls; the fix passes all four. See
+[the evidence and labelled review sheets](results/rewritten-clauses/README.md).
