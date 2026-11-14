@@ -1,4 +1,19 @@
-`core-v173` adds an original reproducer and control for [Docxodus #1750](https://github.com/JSv4/Docxodus/issues/1750): a fixed 450pt Quince table whose rows all leave its last two grid columns unused (`w:gridAfter`). Word 2024 drops those columns and widens the other three in proportion to the table's preferred width, so `QuinceSum1` starts at 387pt; Docxodus 0af51ef5 keeps the grid's widths and starts it at 247pt. In `table-grid-unused-columns-filled-control` the last row fills the grid and nothing widens. Two version 2 `marker-region` checks per case pin the second and third cells' first words. `core-v169` to `core-v172` are claimed by open PRs. All earlier DOCX files remain byte-identical. The redline suite is unchanged. New reference registration and full-suite scoring remain pending. See [the evidence](docs/results/unused-grid-columns/README.md).
+`core-v173` adds an original reproducer and control for [Docxodus #1750](https://github.com/JSv4/Docxodus/issues/1750): a fixed 450pt Quince table whose rows all leave its last two grid columns unused (`w:gridAfter`). Word 2024 drops those columns and widens the other three in proportion to the table's preferred width, so `QuinceSum1` starts at 387pt; Docxodus 0af51ef5 keeps the grid's widths and starts it at 247pt. In `table-grid-unused-columns-filled-control` the last row fills the grid and nothing widens. Two version 2 `marker-region` checks per case pin the second and third cells' first words. `core-v169` and `core-v170` are claimed by open PRs. All earlier DOCX files remain byte-identical. The redline suite is unchanged. New reference registration and full-suite scoring remain pending. See [the evidence](docs/results/unused-grid-columns/README.md).
+
+`core-v172` adds two inputs and a control for Docxodus #1751, on the #1738 page-foot paragraphs: in
+compatibility mode 15 Word 2024 keeps a page's last body line's leading above a note band that holds
+notes. A fifth paragraph that cites nothing (`notes-page-foot-uncited-line-mode-15`) and a fifth
+paragraph without widow control (`notes-page-foot-widow-off`) therefore end on page 2; their mode 14
+counterparts (`notes-page-foot-uncited-line` and the new `notes-page-foot-widow-off-mode-14-control`)
+end on page 1. Regions are the page of each marker in Word 2024. All earlier DOCX files remain
+byte-identical. LibreOffice references are pending. See [the evidence and limits](docs/results/note-page-foot/README.md).
+
+`core-v171` adds two inputs and two controls for Docxodus #1738: double-spaced paragraphs, each
+citing a one-line footnote, where the fifth runs across the foot of page 1. Word 2024 moves the
+fifth paragraph's citing line to page 2 with its note; in compatibility mode 14, a fifth paragraph
+that cites nothing ends page 1 with its leading under the note band. The controls are the four
+paragraphs alone and eight paragraphs at 1.5 lines. Regions are the page of each marker in Word
+2024. LibreOffice references are pending. See [the evidence and limits](docs/results/note-page-foot/README.md).
 
 `redline-v44` adds three cases for [Docxodus #1700](https://github.com/JSv4/Docxodus/issues/1700),
 lists whose bullet is a picture: a revision adding such a list, a list replaced by an unrelated

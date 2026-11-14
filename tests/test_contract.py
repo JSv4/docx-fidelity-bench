@@ -374,7 +374,7 @@ class RegistryContract(unittest.TestCase):
                 with self.assertRaises(ValueError): common.validate_registry(edited)
 
     def test_registry_is_valid(self):
-        self.assertEqual(len(common.validate_registry()['cases']), 1192)
+        self.assertEqual(len(common.validate_registry()['cases']), 1199)
 
     def test_group_paper_exclusions_follow_literal_source_coordinates(self):
         import runpy
