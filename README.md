@@ -1,3 +1,10 @@
+`core-v169` adds a display equation whose math text holds a plain-style run of two spaces, and a
+control with an operator in that run, for [Docxodus #1705](https://github.com/JSv4/Docxodus/issues/1705).
+Docxodus used to turn such an equation into a `[MATH]` placeholder, so its operands never reached the
+PDF; the reference layout draws the spaces at the font's space width. Both cases keep every token on
+one page and require the DejaVu Serif math face. All earlier DOCX files remain byte-identical.
+References are pending. See [the evidence and limits](docs/results/spaced-math/README.md).
+
 `core-v168` adds an original three-level comment thread and a flat-note control for [Docxodus #1277](https://github.com/JSv4/Docxodus/issues/1277). The pair differs only in parent links. Their PDFs hide comments and retain body/page checks. The margin-profile HTML companion uses a new version 1 `marker-block-width` assertion: each reply's note paragraph must have the content width of the root note's paragraph within 0.5px, so a reply that repeats the note's border and padding inside its parent fails. All earlier DOCX files remain byte-identical. The redline suite remains `redline-v41`. New reference registration and full-suite scoring remain pending.
 
 `redline-v41` adds a Strict-conformance reject pair for Docxodus #1268: one paragraph deletes

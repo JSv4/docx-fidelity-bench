@@ -61,6 +61,12 @@ The twenty line-grid cases for Docxodus #1551 (`grid-at-least-below-pitch*`,
 `grid-broken-at-least*`, `grid-larger-word-reduced*`) are authored the same way, with original
 Tamarack labels, the original deleted word Juniper and the original styled word Sedge.
 
+The two spaced-equation cases for Docxodus #1705 (`spaced-math-display*`) contain original Yarrow
+labels, the operands of the plain Maple fraction and literal OOXML authored in bench/fixtures.py. No
+product fixture, helper, document, image or font program is imported, and no reporter attachment was
+opened or used. Their screenshots show a reference layout and Docxodus output for renamed-font copies
+of these inputs.
+
 The six line-break indent cases for Docxodus #1654 (`break-indent-numbered*`,
 `break-indent-hanging-tab*`, `break-indent-first-line-tab*`) contain original Teasel labels and
 literal OOXML authored in bench/fixtures.py. No product fixture, helper, document, image or font
