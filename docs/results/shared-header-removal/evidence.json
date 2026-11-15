@@ -1,0 +1,217 @@
+{
+ "reference": {
+  "application": "desktop word processor",
+  "build": "16.0.20326",
+  "method": "Documents.Open read-only, then Reject All or Accept All on every story range; each section's primary header read as opened and after each"
+ },
+ "baseline": "644bbc9a2119278554138650337e9848fd6e13f8",
+ "candidate": "8ac97adb4c1f5e454a04767e89aea2fd21ce2645",
+ "cases": {
+  "redline-shared-header-removed": {
+   "authored": {
+    "renderer": "authored redline",
+    "failedChecks": [],
+    "reference": {
+     "review": {
+      "sections": 3,
+      "headers": [
+       "Tower ledger",
+       "Stair ledger",
+       "Tower ledger"
+      ],
+      "remainingRevisions": 3
+     },
+     "reject": {
+      "sections": 3,
+      "headers": [
+       "Tower ledger",
+       "Stair ledger",
+       "Tower ledger"
+      ],
+      "remainingRevisions": 0
+     },
+     "accept": {
+      "sections": 3,
+      "headers": [
+       "",
+       "",
+       ""
+      ],
+      "remainingRevisions": 0
+     }
+    }
+   },
+   "main": {
+    "renderer": "Docxodus 644bbc9a (baseline)",
+    "failedChecks": [
+     "markup-accepted",
+     "markup-rejected",
+     "assertion-section-stories"
+    ],
+    "reference": {
+     "review": {
+      "sections": 3,
+      "headers": [
+       "",
+       "Stair ledger",
+       "Tower ledger"
+      ],
+      "remainingRevisions": 2
+     },
+     "reject": {
+      "sections": 3,
+      "headers": [
+       "",
+       "Stair ledger",
+       "Tower ledger"
+      ],
+      "remainingRevisions": 0
+     },
+     "accept": {
+      "sections": 3,
+      "headers": [
+       "",
+       "",
+       ""
+      ],
+      "remainingRevisions": 0
+     }
+    }
+   },
+   "fix": {
+    "renderer": "Docxodus 8ac97adb (fix, JSv4/Docxodus#1769)",
+    "failedChecks": [],
+    "reference": {
+     "review": {
+      "sections": 3,
+      "headers": [
+       "Tower ledger",
+       "Stair ledger",
+       "Tower ledger"
+      ],
+      "remainingRevisions": 3
+     },
+     "reject": {
+      "sections": 3,
+      "headers": [
+       "Tower ledger",
+       "Stair ledger",
+       "Tower ledger"
+      ],
+      "remainingRevisions": 0
+     },
+     "accept": {
+      "sections": 3,
+      "headers": [
+       "",
+       "",
+       ""
+      ],
+      "remainingRevisions": 0
+     }
+    }
+   }
+  },
+  "redline-shared-header-removed-own-control": {
+   "authored": {
+    "renderer": "authored redline",
+    "failedChecks": [],
+    "reference": {
+     "review": {
+      "sections": 3,
+      "headers": [
+       "Tower ledger",
+       "Stair ledger",
+       "Chest ledger"
+      ],
+      "remainingRevisions": 3
+     },
+     "reject": {
+      "sections": 3,
+      "headers": [
+       "Tower ledger",
+       "Stair ledger",
+       "Chest ledger"
+      ],
+      "remainingRevisions": 0
+     },
+     "accept": {
+      "sections": 3,
+      "headers": [
+       "",
+       "",
+       ""
+      ],
+      "remainingRevisions": 0
+     }
+    }
+   },
+   "main": {
+    "renderer": "Docxodus 644bbc9a (baseline)",
+    "failedChecks": [],
+    "reference": {
+     "review": {
+      "sections": 3,
+      "headers": [
+       "Tower ledger",
+       "Stair ledger",
+       "Chest ledger"
+      ],
+      "remainingRevisions": 3
+     },
+     "reject": {
+      "sections": 3,
+      "headers": [
+       "Tower ledger",
+       "Stair ledger",
+       "Chest ledger"
+      ],
+      "remainingRevisions": 0
+     },
+     "accept": {
+      "sections": 3,
+      "headers": [
+       "",
+       "",
+       ""
+      ],
+      "remainingRevisions": 0
+     }
+    }
+   },
+   "fix": {
+    "renderer": "Docxodus 8ac97adb (fix, JSv4/Docxodus#1769)",
+    "failedChecks": [],
+    "reference": {
+     "review": {
+      "sections": 3,
+      "headers": [
+       "Tower ledger",
+       "Stair ledger",
+       "Chest ledger"
+      ],
+      "remainingRevisions": 3
+     },
+     "reject": {
+      "sections": 3,
+      "headers": [
+       "Tower ledger",
+       "Stair ledger",
+       "Chest ledger"
+      ],
+      "remainingRevisions": 0
+     },
+     "accept": {
+      "sections": 3,
+      "headers": [
+       "",
+       "",
+       ""
+      ],
+      "remainingRevisions": 0
+     }
+    }
+   }
+  }
+ }
+}
