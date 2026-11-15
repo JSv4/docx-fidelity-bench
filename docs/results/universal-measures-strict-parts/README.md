@@ -1,11 +1,11 @@
 # Universal measures and a Strict chart part (Docxodus #1764)
 
-`cases.png` shows each `core-v174` case. The columns are Word 2024 (16.0.20326, Windows 11, `SaveAs2` to
-PDF, page 1 drawn with PyMuPDF), and Docxodus `main` at 644bbc9a and with the fix, each as its HTML render
+`cases.png` shows each `core-v174` case. The columns are a desktop word processor's PDF (build 16.0.20326,
+Windows 11, page 1 drawn with PyMuPDF), and Docxodus `main` at 644bbc9a and with the fix, each as its HTML render
 in Chromium. These are illustrations, not registered references: the machine had no Liberation Serif, so
-Word printed a substitute. The checked positions do not depend on the font.
+the word processor printed a substitute. The checked positions do not depend on the font.
 
-| Case | Word 2024 | Docxodus 644bbc9a | Docxodus with the fix |
+| Case | Desktop word processor | Docxodus 644bbc9a | Docxodus with the fix |
 | --- | --- | --- | --- |
 | `section-page-universal-measures` | A4 (595.3 × 841.9pt), 56.7pt margins; `JuniperEdge` ends at 538.7pt | paginated page 612 × 792pt (Letter) | 595.3 × 841.9pt |
 | `section-page-universal-measures-twips-control` | the same | 595.3 × 841.9pt | Unchanged |
