@@ -1,3 +1,8 @@
+The four universal-measure and Strict-chart cases for Docxodus #1764 contain original Juniper and Kiln
+labels and literal OOXML authored in `bench/fixtures.py`. No product fixture, helper, document, image or
+font program is imported, and no reporter attachment was opened or used. Their review sheet shows Word
+2024 PDFs of these inputs and Docxodus HTML renders of them.
+
 The two mixed-section-story redline cases for Docxodus #1757 contain original quarry and kiln text
 and literal OOXML authored in `bench/redline_fixtures.py`. No product fixture, helper, document,
 image or font program is imported, and the issue's reproduction scripts were not used. Their review

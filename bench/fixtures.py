@@ -4296,6 +4296,67 @@ def markup_sheet_cases(add, cases):
         cases[-1]['profile'] = dict(profile)
 
 
+def universal_measure_page_cases(add):
+    """Original Juniper labels: an A4 page whose size and margins are universal measures, as a Strict
+    save writes every twips measure, against the same page in twips (Docxodus #1764)."""
+    forms = {'units': ('595.30pt', '841.90pt', '56.70pt', '35.40pt', '0pt'),
+             'twips-control': ('11906', '16838', '1134', '708', '0')}
+    for kind, (width, height, margin, distance, gutter) in forms.items():
+        sect = (f'<w:sectPr><w:pgSz w:w="{width}" w:h="{height}"/><w:pgMar w:top="{margin}" w:right="{margin}" '
+                f'w:bottom="{margin}" w:left="{margin}" w:header="{distance}" w:footer="{distance}" w:gutter="{gutter}"/></w:sectPr>')
+        # The right-aligned word ends at the right margin, 538.6pt across an A4 page; on a Letter page
+        # it would end at 555.3pt.
+        add('section-page-universal-measures' + ('' if kind == 'units' else '-twips-control'), 'sections',
+            'Juniper A4 page whose size and margins are written ' + ('with units (595.30pt, 56.70pt)' if kind == 'units'
+                else 'in twips (control)') + ' (Docxodus #1764)',
+            ['JuniperLedger', 'JuniperEdge'], para('JuniperLedger') + para('JuniperEdge', '<w:jc w:val="right"/>'), sect=sect,
+            assertions=[dict(type='marker-region', marker='JuniperLedger', occurrence=1, page=1, rect=[55.5, 50, 160, 74]),
+                        dict(type='marker-region', marker='JuniperEdge', occurrence=1, page=1, rect=[420, 72, 540.5, 100])])
+
+
+def strict_chart_part_cases(add):
+    """Original Kiln labels: a bar chart whose part alone is written in the Strict namespaces, inside a
+    Transitional package, and the same chart part in the Transitional namespaces (Docxodus #1764)."""
+    transitional = ('http://schemas.openxmlformats.org/drawingml/2006/chart', 'http://schemas.openxmlformats.org/drawingml/2006/main')
+    strict = ('http://purl.oclc.org/ooxml/drawingml/chart', 'http://purl.oclc.org/ooxml/drawingml/main')
+
+    def points(values):
+        return f'<c:ptCount val="{len(values)}"/>' + ''.join(f'<c:pt idx="{i}"><c:v>{v}</c:v></c:pt>' for i, v in enumerate(values))
+
+    labels = ['KilnNorth', 'KilnSouth', 'KilnEast']
+    for kind in ('strict-part', 'transitional-part-control'):
+        c, a = strict if kind == 'strict-part' else transitional
+        darken = '75%' if kind == 'strict-part' else '75000'
+        # Literal categories and values, no workbook. The value axis is pinned to 0-50 in steps of 10,
+        # so every renderer prints the same six labels beside the three categories.
+        chart = (f'<c:chartSpace xmlns:c="{c}" xmlns:a="{a}"><c:chart><c:autoTitleDeleted val="1"/><c:plotArea><c:layout/>'
+                 '<c:barChart><c:barDir val="col"/><c:grouping val="clustered"/><c:varyColors val="0"/>'
+                 '<c:ser><c:idx val="0"/><c:order val="0"/>'
+                 f'<c:spPr><a:solidFill><a:srgbClr val="5B9BD5"><a:lumMod val="{darken}"/></a:srgbClr></a:solidFill></c:spPr>'
+                 f'<c:cat><c:strLit>{points(labels)}</c:strLit></c:cat>'
+                 f'<c:val><c:numLit><c:formatCode>General</c:formatCode>{points([41, 36, 29])}</c:numLit></c:val></c:ser>'
+                 '<c:axId val="501"/><c:axId val="502"/></c:barChart>'
+                 '<c:catAx><c:axId val="501"/><c:scaling><c:orientation val="minMax"/></c:scaling><c:delete val="0"/>'
+                 '<c:axPos val="b"/><c:crossAx val="502"/></c:catAx>'
+                 '<c:valAx><c:axId val="502"/><c:scaling><c:orientation val="minMax"/><c:max val="50"/><c:min val="0"/></c:scaling>'
+                 '<c:delete val="0"/><c:axPos val="l"/><c:numFmt formatCode="General" sourceLinked="0"/><c:crossAx val="501"/>'
+                 '<c:majorUnit val="10"/></c:valAx>'
+                 '</c:plotArea><c:plotVisOnly val="1"/></c:chart></c:chartSpace>')
+        drawing = ('<w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0"><wp:extent cx="4572000" cy="2743200"/>'
+                   '<wp:docPr id="1" name="Kiln chart"/><a:graphic>'
+                   f'<a:graphicData uri="{transitional[0]}"><c:chart r:id="rKilnChart"/></a:graphicData></a:graphic>'
+                   '</wp:inline></w:drawing></w:r>')
+        add('chart-' + kind, 'images',
+            'Kiln bar chart whose chart part is written in the ' + ('Strict namespaces inside a Transitional package'
+                if kind == 'strict-part' else 'Transitional namespaces (control)') + ' (Docxodus #1764)',
+            ['KilnFirings'] + labels + [str(tick) for tick in range(0, 60, 10)] + ['KilnClosing'], para('KilnFirings') + para(runs=drawing) + para('KilnClosing'),
+            namespaces_extra=f' xmlns:c="{transitional[0]}"', extra_parts={'word/charts/chart1.xml': chart},
+            relations_extra=[('rKilnChart', 'chart', 'charts/chart1.xml')],
+            content_types_extra='<Override PartName="/word/charts/chart1.xml" '
+                                'ContentType="application/vnd.openxmlformats-officedocument.drawingml.chart+xml"/>',
+            assertions=[dict(type='same-page', version=1, markers=['KilnFirings'] + labels + ['KilnClosing'])])
+
+
 def unused_grid_column_cases(add):
     """Original Quince labels: grid columns no row reaches leave the table (Docxodus #1750)."""
     styles = (f'<w:styles xmlns:w="{W}"><w:docDefaults><w:rPrDefault><w:rPr>'
@@ -7448,7 +7509,9 @@ def generate():
     reply_width_cases(add, cases, comment_styles)
     note_page_foot_cases(add)
     unused_grid_column_cases(add)
-    registry = {'schema': 1, 'suite': {'id': 'core-v173', 'version': 173, 'cases': [c['id'] for c in cases]}, 'cases': cases}
+    universal_measure_page_cases(add)
+    strict_chart_part_cases(add)
+    registry = {'schema': 1, 'suite': {'id': 'core-v174', 'version': 174, 'cases': [c['id'] for c in cases]}, 'cases': cases}
     (ROOT / 'fixtures' / 'manifest.json').write_text(json.dumps(registry, indent=2) + '\n', newline='\n')
     return registry
 
