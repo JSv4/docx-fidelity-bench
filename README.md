@@ -2,7 +2,7 @@
 two lock-note sections whose revision names its header parts by relationship ids of its own, or turns off a
 section's title page. In `redline-revision-part-two-stories` the revision keeps the first section's header under
 a new id and lets the second section inherit it; in `redline-header-ids-swapped` the two unchanged headers swap
-ids; `redline-header-ids-renamed-control` keeps both under new ids. Docxodus 54eb5836 wrote a section break both
+ids; `redline-header-ids-renamed-control` keeps both under new ids (these two also change one word of the body). Docxodus 54eb5836 wrote a section break both
 documents share with the revision's references and resolved them in the original's package, so rejecting the first
 reproducer put the second section's header in the first section, and both endpoints of the second showed the
 second header twice. In `redline-inline-title-page-off` only the first section's `w:titlePg` changes, so the

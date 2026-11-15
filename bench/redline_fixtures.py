@@ -3067,17 +3067,17 @@ LOCK_NOTES = ['The lock keeper opens the upper gates once the basin water settle
               'Barges wait below the weir until the lower paddles are drawn.']
 
 
-def lock_document(stories, refs, kinds=('default',), first_props='', first_top=1440):
+def lock_document(stories, refs, kinds=('default',), first_props='', first_top=1440, second=None):
     """Two sections of lock notes. `stories` maps a header relationship id to its paragraphs. `refs` gives
     each section's ids, one per kind in `kinds` (None for no reference). `first_props` is literal OOXML
     that ends the first section's properties (a `w:titlePg`, a `w:sectPrChange`), and `first_top` is that
-    section's top margin in twips."""
+    section's top margin in twips. `second` replaces the second section's runs."""
     def sect(ids, props='', top=1440):
         refs_xml = ''.join(f'<w:headerReference w:type="{kind}" r:id="{rid}"/>' for kind, rid in zip(kinds, ids or ()))
         return (SECTION.format(refs=refs_xml).replace('w:top="1440"', f'w:top="{top}"')
                 .replace('</w:sectPr>', props + '</w:sectPr>'))
     names = {rid: f'header{n}.xml' for n, rid in enumerate(stories, 1)}
-    return dict(body=p(t(LOCK_NOTES[0]), props=sect(refs[0], first_props, first_top)) + p(t(LOCK_NOTES[1])),
+    return dict(body=p(t(LOCK_NOTES[0]), props=sect(refs[0], first_props, first_top)) + p(second or t(LOCK_NOTES[1])),
                 section=sect(refs[1]),
                 relations_extra=[(rid, 'header', name) for rid, name in names.items()],
                 content_types_extra=''.join(f'<Override PartName="/word/{name}" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.header+xml"/>' for name in names.values()),
@@ -3091,28 +3091,33 @@ def revision_part_two_stories(corpus):
     `Lower basin` under `rHeader2`. In `redline-revision-part-two-stories` the revision keeps `Upper basin`
     in the first section under a new id, `rHeader3`, and lets the second section inherit it, so one
     revision part pairs with two original stories: unchanged against the first section's, changed against
-    the second's. In `redline-header-ids-swapped` nothing changes but the ids: the revision gives
+    the second's. In `redline-header-ids-swapped` both headers are unchanged but the revision gives
     `Upper basin` the id `rHeader2` and `Lower basin` the id `rHeader1`. In the control,
-    `redline-header-ids-renamed-control`, both stories are unchanged under ids the original does not use.
+    `redline-header-ids-renamed-control`, both are unchanged under ids the original does not use. In these
+    two the revision also changes one word of the second section's text, `paddles` to `sluices`.
     Header references cannot be tracked, so a correct redline keeps a reference in every section. Reject
     must show each original header in its own section. Accept must show the revision's; for the first
     reproducer the second section keeps its reference, so the accepted expectation is the revision with
     `Upper basin` referenced from both sections."""
     original = {'rHeader1': p(t('Upper basin')), 'rHeader2': p(t('Lower basin'))}
     left_refs = [('rHeader1',), ('rHeader2',)]
+    head, tail = LOCK_NOTES[1].split('paddles')
+    edited = t(head + 'sluices' + tail)
     cases = [
         ('redline-revision-part-two-stories', 'reproducer',
          "The revision keeps the first section's header under a new relationship id and lets the second section "
          "inherit it, so one revision part pairs with two original headers; reject restores each section's own header",
          lock_document({'rHeader3': p(t('Upper basin'))}, [('rHeader3',), None])),
         ('redline-header-ids-swapped', 'reproducer',
-         "Both headers are unchanged but the revision swaps their relationship ids; accept and reject keep each "
-         "section's own header",
-         lock_document({'rHeader2': p(t('Upper basin')), 'rHeader1': p(t('Lower basin'))}, [('rHeader2',), ('rHeader1',)])),
+         "Both headers are unchanged but the revision swaps their relationship ids and edits a word of the body; "
+         "accept and reject keep each section's own header",
+         lock_document({'rHeader2': p(t('Upper basin')), 'rHeader1': p(t('Lower basin'))}, [('rHeader2',), ('rHeader1',)],
+                       second=edited)),
         ('redline-header-ids-renamed-control', 'control',
-         "Both headers are unchanged under relationship ids the original does not use; accept and reject keep each "
-         "section's own header",
-         lock_document({'rHeader3': p(t('Upper basin')), 'rHeader4': p(t('Lower basin'))}, [('rHeader3',), ('rHeader4',)])),
+         "Both headers are unchanged under relationship ids the original does not use and the revision edits a word "
+         "of the body; accept and reject keep each section's own header",
+         lock_document({'rHeader3': p(t('Upper basin')), 'rHeader4': p(t('Lower basin'))}, [('rHeader3',), ('rHeader4',)],
+                       second=edited)),
     ]
     for case_id, kind, description, revised in cases:
         shared = case_id == 'redline-revision-part-two-stories'
@@ -3121,12 +3126,14 @@ def revision_part_two_stories(corpus):
         right = corpus.file(case_id, 'right', **revised)
         accepted = corpus.file(case_id, 'accepted', **lock_document(
             {'rHeader1': p(t('Upper basin')), 'rHeader2': p(t('Upper basin'))}, left_refs)) if shared else right
-        second = p(rev.dele(t('Lower')) + rev.ins(t('Upper')) + t(' basin')) if shared else p(t('Lower basin'))
+        header = p(rev.dele(t('Lower')) + rev.ins(t('Upper')) + t(' basin')) if shared else p(t('Lower basin'))
+        body = None if shared else t(head) + rev.dele(t('paddles')) + rev.ins(t('sluices')) + t(tail)
         authored = corpus.file(case_id, 'authored-redline', **lock_document(
-            {'rHeader1': p(t('Upper basin')), 'rHeader2': second}, left_refs))
+            {'rHeader1': p(t('Upper basin')), 'rHeader2': header}, left_refs, second=body))
+        kept = LOCK_NOTES if shared else (LOCK_NOTES[0], head.rstrip(), tail.strip())
         corpus.add(case_id, 'revisions', kind, 'JSv4/Docxodus#1771', description, 'compare',
                    [dict(left, role='left'), dict(right, role='right')], {'accepted': accepted, 'rejected': left},
-                   authored, [untracked(*LOCK_NOTES)])
+                   authored, [untracked(*kept)])
 
 
 def inline_title_page(corpus):

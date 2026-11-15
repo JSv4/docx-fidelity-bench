@@ -8,7 +8,8 @@ The references name parts by the revision's relationship ids. The redline is bui
 package, so Docxodus looked a revision id up there, or took whichever output the revision's part was last
 paired with. When the revision kept the first section's header under a part of its own and let the second
 section inherit it, rejecting showed the second section's header in the first; when the two documents only
-disagreed about which ids their two headers had, both accept and reject showed the second header twice.
+disagreed about which ids their two headers had, both accept and reject showed the second header twice. (In
+the swapped and renamed pairs the revision also changes one word of the body, so each has a change to record.)
 
 The properties were recorded in `w:sectPrChange` only when the paragraph ending the section counted as
 changed, which under Docxodus's default policy needs a change of page size, margins, orientation or section

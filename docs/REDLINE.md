@@ -865,10 +865,13 @@ The first three give the original's sections the headers `Upper basin` (relation
 - `redline-revision-part-two-stories` (reproducer): the revision keeps `Upper basin` in the first section
   under a new id, `rHeader3`, and lets the second section inherit it. That one revision part pairs with two
   original stories: unchanged against the first section's, changed against the second's.
-- `redline-header-ids-swapped` (reproducer): nothing changes but the ids; the revision gives `Upper basin`
+- `redline-header-ids-swapped` (reproducer): both headers are unchanged, but the revision gives `Upper basin`
   the id `rHeader2` and `Lower basin` the id `rHeader1`.
 - `redline-header-ids-renamed-control` (control): both headers are unchanged under ids the original does not
   use.
+
+In these two the revision also changes one word of the second section's text (`paddles` to `sluices`), so the
+comparison has a change to record and copying either input fails a round trip.
 
 Header references cannot be tracked, so a correct redline keeps a reference in every section, and in the
 first reproducer the second section's story reads `Upper basin` once accepted: its accepted expectation is the
