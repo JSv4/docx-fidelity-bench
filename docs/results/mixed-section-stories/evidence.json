@@ -1,0 +1,209 @@
+{
+  "word": {
+    "application": "Word 2024",
+    "build": "16.0.20326",
+    "method": "Documents.Open read-only, then Reject All or Accept All on every story range; headers read per section"
+  },
+  "baseline": "1d45d5513ea27719747e7cf2a5116332c7703c5c",
+  "cases": {
+    "redline-mixed-section-stories": {
+      "authored": {
+        "renderer": "authored redline",
+        "failedChecks": [],
+        "word": {
+          "review": {
+            "sections": 4,
+            "headers": [
+              "Kiln register 1",
+              "Kiln register 2Quarry ledger 1",
+              "Quarry ledger 2",
+              "Kiln register 2Quarry ledger 3"
+            ],
+            "remainingRevisions": 7
+          },
+          "reject": {
+            "sections": 3,
+            "headers": [
+              "Quarry ledger 1",
+              "Quarry ledger 2",
+              "Quarry ledger 3"
+            ],
+            "remainingRevisions": 0
+          },
+          "accept": {
+            "sections": 2,
+            "headers": [
+              "Kiln register 1",
+              "Kiln register 2"
+            ],
+            "remainingRevisions": 0
+          }
+        }
+      },
+      "main": {
+        "renderer": "Docxodus 1d45d551 (baseline)",
+        "failedChecks": [
+          "markup-rejected",
+          "assertion-section-stories"
+        ],
+        "word": {
+          "review": {
+            "sections": 4,
+            "headers": [
+              "Kiln register 1Quarry ledger 1",
+              "Kiln register 2Quarry ledger 2",
+              "Kiln register 2Quarry ledger 3",
+              "Kiln register 2Quarry ledger 3"
+            ],
+            "remainingRevisions": 10
+          },
+          "reject": {
+            "sections": 3,
+            "headers": [
+              "Quarry ledger 2",
+              "Quarry ledger 3",
+              "Quarry ledger 3"
+            ],
+            "remainingRevisions": 0
+          },
+          "accept": {
+            "sections": 2,
+            "headers": [
+              "Kiln register 1",
+              "Kiln register 2"
+            ],
+            "remainingRevisions": 0
+          }
+        }
+      },
+      "fix": {
+        "renderer": "Docxodus 76bf92e474ec5033a19876a2ff69c02d2d90cf19 (candidate)",
+        "failedChecks": [],
+        "word": {
+          "review": {
+            "sections": 4,
+            "headers": [
+              "Kiln register 1",
+              "Kiln register 2Quarry ledger 1",
+              "Quarry ledger 2",
+              "Kiln register 2Quarry ledger 3"
+            ],
+            "remainingRevisions": 7
+          },
+          "reject": {
+            "sections": 3,
+            "headers": [
+              "Quarry ledger 1",
+              "Quarry ledger 2",
+              "Quarry ledger 3"
+            ],
+            "remainingRevisions": 0
+          },
+          "accept": {
+            "sections": 2,
+            "headers": [
+              "Kiln register 1",
+              "Kiln register 2"
+            ],
+            "remainingRevisions": 0
+          }
+        }
+      }
+    },
+    "redline-mixed-section-stories-deleted-control": {
+      "authored": {
+        "renderer": "authored redline",
+        "failedChecks": [],
+        "word": {
+          "review": {
+            "sections": 3,
+            "headers": [
+              "Kiln register 1Quarry ledger 1",
+              "Quarry ledger 2",
+              "Kiln register 1Quarry ledger 3"
+            ],
+            "remainingRevisions": 6
+          },
+          "reject": {
+            "sections": 3,
+            "headers": [
+              "Quarry ledger 1",
+              "Quarry ledger 2",
+              "Quarry ledger 3"
+            ],
+            "remainingRevisions": 0
+          },
+          "accept": {
+            "sections": 1,
+            "headers": [
+              "Kiln register 1"
+            ],
+            "remainingRevisions": 0
+          }
+        }
+      },
+      "main": {
+        "renderer": "Docxodus 1d45d551 (baseline)",
+        "failedChecks": [],
+        "word": {
+          "review": {
+            "sections": 3,
+            "headers": [
+              "Kiln register 1Quarry ledger 1",
+              "Quarry ledger 2",
+              "Kiln register 1Quarry ledger 3"
+            ],
+            "remainingRevisions": 7
+          },
+          "reject": {
+            "sections": 3,
+            "headers": [
+              "Quarry ledger 1",
+              "Quarry ledger 2",
+              "Quarry ledger 3"
+            ],
+            "remainingRevisions": 0
+          },
+          "accept": {
+            "sections": 1,
+            "headers": [
+              "Kiln register 1"
+            ],
+            "remainingRevisions": 0
+          }
+        }
+      },
+      "fix": {
+        "renderer": "Docxodus 76bf92e474ec5033a19876a2ff69c02d2d90cf19 (candidate)",
+        "failedChecks": [],
+        "word": {
+          "review": {
+            "sections": 3,
+            "headers": [
+              "Kiln register 1Quarry ledger 1",
+              "Quarry ledger 2",
+              "Kiln register 1Quarry ledger 3"
+            ],
+            "remainingRevisions": 6
+          },
+          "reject": {
+            "sections": 3,
+            "headers": [
+              "Quarry ledger 1",
+              "Quarry ledger 2",
+              "Quarry ledger 3"
+            ],
+            "remainingRevisions": 0
+          },
+          "accept": {
+            "sections": 1,
+            "headers": [
+              "Kiln register 1"
+            ],
+            "remainingRevisions": 0
+          }
+        }
+      }
+    }
+  }
+}

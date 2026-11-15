@@ -355,6 +355,8 @@ def generate():
     strict_chart_parts(corpus)
     deleted_textbox_text(corpus)
     picture_bullet_lists(corpus)
+    mixed_section_stories(corpus)
+    strict_values(corpus)
     tab_break_edits(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
@@ -2779,6 +2781,144 @@ def picture_bullet_lists(corpus):
                    document(items(former, 1, rev.dele, lambda: rev.mark('del')) + items(added, 2, rev.ins, lambda: rev.mark('ins')),
                             **lists([rust, teal], [(720, 0), (900, 1)])),
                    [untracked(lead, CLOSING), drawn('accepted', added, teal), drawn('rejected', former, rust)], assets)
+
+
+def mixed_section_stories(corpus):
+    """Section breaks both deleted and inserted: each review section keeps the stories of what it holds.
+
+    The original has three sections of quarry notes, each with its own default header. The reproducer's
+    revision replaces the whole body with two sections of unrelated kiln notes, each with its own header,
+    so the comparison deletes two section breaks and inserts one. The redline writes the inserted kiln
+    paragraphs before the deleted quarry ones; every review section pairs the headers of the sections
+    whose content it holds, and reject restores each original header in place. A section holding only
+    quarry text disappears on accept, so it keeps its own quarry header unchanged, as the reference
+    compare leaves it. The control's revision has one section, so only deleted breaks occur."""
+    quarry = ['Masons split granite blocks at the northern quarry face before the carts arrive.',
+              'The foreman records every cracked slab in a notebook kept beside the crane.',
+              'Rainwater drains from the lowest bench through a channel cut last winter.']
+    kiln = ['Potters stack glazed bowls on the upper shelves of the brick kiln at dawn.',
+            'A thermometer above the firebox shows when the second glaze may begin.']
+
+    def document(sections, headers):
+        """`sections` lists (paragraph makers, header relationship id); a maker takes the paragraph's
+        section properties, empty except on the last paragraph of a non-final section."""
+        names = {rid: f'header{n}.xml' for n, rid in enumerate(headers, 1)}
+        def sect(rid):
+            return SECTION.format(refs=f'<w:headerReference w:type="default" r:id="{rid}"/>')
+        body = ''
+        for i, (makers, rid) in enumerate(sections):
+            for j, make in enumerate(makers):
+                body += make(sect(rid) if i < len(sections) - 1 and j == len(makers) - 1 else '')
+        return dict(body=body, section=sect(sections[-1][1]),
+                    relations_extra=[(rid, 'header', name) for rid, name in names.items()],
+                    content_types_extra=''.join(f'<Override PartName="/word/{name}" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.header+xml"/>' for name in names.values()),
+                    extra_parts={f'word/{name}': f'<w:hdr {NAMESPACES}>{headers[rid]}</w:hdr>' for rid, name in names.items()})
+
+    def plain(text):
+        return lambda props: p(t(text), props=props)
+
+    for control in (False, True):
+        rev = Revisions()
+        # Paragraph-mark properties precede the section carrier in CT_PPr.
+        def inserted(text):
+            return lambda props: p(rev.ins(t(text)), props='<w:rPr>' + rev.mark('ins') + '</w:rPr>' + props)
+        def deleted(text):
+            return lambda props: p(rev.dele(t(text)), props='<w:rPr>' + rev.mark('del') + '</w:rPr>' + props)
+        def story(inserted_label=None, deleted_label=None):
+            return p((rev.ins(t(inserted_label)) if inserted_label else '') + (rev.dele(t(deleted_label)) if deleted_label else ''))
+        left = document([([plain(text)], f'rQuarry{n}') for n, text in enumerate(quarry, 1)],
+                        {f'rQuarry{n}': p(t(f'Quarry ledger {n}')) for n in (1, 2, 3)})
+        if control:
+            right = document([([plain(text) for text in kiln], 'rKiln1')], {'rKiln1': p(t('Kiln register 1'))})
+            # The kiln text shares the first deleted carrier's section; the rest hold quarry text only.
+            authored = document([([inserted(text) for text in kiln] + [deleted(quarry[0])], 'rReview1'),
+                                 ([deleted(quarry[1])], 'rReview2'), ([deleted(quarry[2])], 'rReview3')],
+                                {'rReview1': story('Kiln register 1', 'Quarry ledger 1'),
+                                 'rReview2': p(t('Quarry ledger 2')),
+                                 'rReview3': story('Kiln register 1', 'Quarry ledger 3')})
+            values = ['Kiln register 1Quarry ledger 1', 'Quarry ledger 2', 'Kiln register 1Quarry ledger 3']
+            boundaries = [('accepted', []), ('rejected', [0, 1])]
+        else:
+            right = document([([plain(text)], f'rKiln{n}') for n, text in enumerate(kiln, 1)],
+                             {f'rKiln{n}': p(t(f'Kiln register {n}')) for n in (1, 2)})
+            # The inserted kiln boundary opens the review; the second kiln section's text shares the
+            # first deleted carrier's section, and the last review section pairs both final sections.
+            authored = document([([inserted(kiln[0])], 'rReview1'), ([inserted(kiln[1]), deleted(quarry[0])], 'rReview2'),
+                                 ([deleted(quarry[1])], 'rReview3'), ([deleted(quarry[2])], 'rReview4')],
+                                {'rReview1': story('Kiln register 1'),
+                                 'rReview2': story('Kiln register 2', 'Quarry ledger 1'),
+                                 'rReview3': p(t('Quarry ledger 2')),
+                                 'rReview4': story('Kiln register 2', 'Quarry ledger 3')})
+            values = ['Kiln register 1', 'Kiln register 2Quarry ledger 1', 'Quarry ledger 2', 'Kiln register 2Quarry ledger 3']
+            boundaries = [('accepted', [0]), ('rejected', [0, 1])]
+        assertions = [{'type': 'section-stories', 'version': 1, 'scope': 'redline', 'story': 'header',
+                       'kind': 'default', 'values': values}]
+        assertions += [{'type': 'section-boundaries', 'version': 1, 'scope': scope, 'afterParagraphs': indices}
+                       for scope, indices in boundaries]
+        corpus.compare('redline-mixed-section-stories' + ('-deleted-control' if control else ''), 'revisions',
+                       'control' if control else 'reproducer', 'JSv4/Docxodus#1757',
+                       'A three-section body replaced by unrelated text in ' + ('one section, so only section breaks are deleted'
+                       if control else 'two sections, so section breaks are both deleted and inserted')
+                       + '; each review section keeps the headers of the sections it holds and reject restores every original header',
+                       left, right, authored, assertions)
+
+
+# ---------------------------------------------------------------------------------------------
+# Docxodus #1758: values Strict writes in a form Transitional does not have
+# ---------------------------------------------------------------------------------------------
+
+def strict_values(corpus):
+    """A Strict package whose header row carries w:cnfStyle, which Strict writes with its twelve flags
+    and no w:val, and whose shape darkens its fill with a:lumMod, which Strict writes as a percent
+    string ("50%"). The revision changes one word of the closing paragraph.
+
+    The control is the same pair written as Transitional (w:val="100000000000", val="50000"). The
+    authored redline is Transitional in both cases and writes each value in its Transitional form."""
+    flags = ('firstRow', 'lastRow', 'firstColumn', 'lastColumn', 'oddVBand', 'evenVBand', 'oddHBand', 'evenHBand',
+             'firstRowFirstColumn', 'firstRowLastColumn', 'lastRowFirstColumn', 'lastRowLastColumn')
+    strict_names = {'a': 'http://purl.oclc.org/ooxml/drawingml/main',
+                    'wp': 'http://purl.oclc.org/ooxml/drawingml/wordprocessingDrawing'}
+    transitional = {'a': 'http://schemas.openxmlformats.org/drawingml/2006/main',
+                    'wp': 'http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing',
+                    'wps': 'http://schemas.microsoft.com/office/word/2010/wordprocessingShape'}
+
+    def cnf(strict):
+        return ('<w:cnfStyle ' + ('' if strict else 'w:val="100000000000" ')
+                + ' '.join(f'w:{flag}="{int(flag == "firstRow")}"' for flag in flags) + '/>')
+
+    def cell(text, header, strict):
+        return (f'<w:tc><w:tcPr>{cnf(strict) if header else ""}<w:tcW w:w="2400" w:type="dxa"/></w:tcPr>'
+                + p(t(text), props=cnf(strict) if header else '') + '</w:tc>')
+
+    def body(closing, strict):
+        # A Strict save folds the shape's wps elements into the wordprocessingDrawing namespace.
+        shape = 'wp' if strict else 'wps'
+        table = ('<w:tbl><w:tblPr><w:tblW w:w="4800" w:type="dxa"/></w:tblPr>'
+                 '<w:tblGrid><w:gridCol w:w="2400"/><w:gridCol w:w="2400"/></w:tblGrid>'
+                 f'<w:tr><w:trPr>{cnf(strict)}</w:trPr>{cell("Batch", True, strict)}{cell("Firing", True, strict)}</w:tr>'
+                 f'<w:tr>{cell("Kiln glaze", False, strict)}{cell("Cone 6", False, strict)}</w:tr></w:tbl>')
+        drawing = ('<w:r><w:drawing ' + ' '.join(f'xmlns:{k}="{v}"' for k, v in (strict_names if strict else transitional).items()) + '>'
+                   '<wp:inline distT="0" distB="0" distL="0" distR="0"><wp:extent cx="914400" cy="457200"/>'
+                   '<wp:docPr id="1" name="Badge"/><a:graphic>'
+                   f'<a:graphicData uri="{transitional["wps"]}"><{shape}:wsp><{shape}:cNvSpPr/><{shape}:spPr>'
+                   '<a:xfrm><a:off x="0" y="0"/><a:ext cx="914400" cy="457200"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom>'
+                   f'<a:solidFill><a:srgbClr val="4472C4"><a:lumMod val="{"50%" if strict else "50000"}"/></a:srgbClr></a:solidFill>'
+                   f'</{shape}:spPr><{shape}:bodyPr/></{shape}:wsp></a:graphicData></a:graphic></wp:inline></w:drawing></w:r>')
+        return p(t('Kiln roster')) + table + p(drawing) + closing
+
+    kept, rest = 'Vent every ', ' before the night shift.'
+    for strict in (True, False):
+        rev = Revisions()
+        corpus.compare('redline-strict-values' + ('' if strict else '-control'), 'packages',
+                       'reproducer' if strict else 'control', 'JSv4/Docxodus#1758',
+                       'One word of the closing paragraph changes in a ' + ('Strict' if strict else 'Transitional')
+                       + '-conformance package whose header row carries w:cnfStyle and whose shape darkens its fill '
+                       'with a:lumMod. The redline writes both values in their Transitional form.',
+                       dict(body=body(p(t(kept + 'flue' + rest)), strict), strict=strict),
+                       dict(body=body(p(t(kept + 'damper' + rest)), strict), strict=strict),
+                       dict(body=body(p(t(kept) + rev.dele(t('flue')) + rev.ins(t('damper')) + t(rest)), False)),
+                       [untracked('Kiln roster', 'Batch', 'Firing', 'Kiln glaze', 'Cone 6', kept, rest)],
+                       assets='All text, table and shape XML are generated here; no images or embedded font files')
 
 
 def tab_break_edits(corpus):

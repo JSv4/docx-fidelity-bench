@@ -7,6 +7,16 @@ replaced by a tab, and an edited tabbed clause, as edits. The existing `revision
 `untracked-text` assertions decide them, so a redline that keeps spaces, a tab or a lone comma unmarked between
 one-word revisions fails while both round trips pass. See [the redline notes](docs/REDLINE.md#tabs-and-line-breaks-docxodus-1759).
 
+`redline-v49` adds an original Strict pair and its Transitional control for
+[Docxodus #1758](https://github.com/JSv4/Docxodus/issues/1758). The Strict inputs write a header row's
+`w:cnfStyle` without `w:val` and a shape's `a:lumMod` as `50%`, both valid in Strict. A redline that
+keeps those values fails the mandatory `no-new-validation-errors` rule, because Transitional requires
+`w:val` and writes percentages in thousandths. No new assertion is needed and all earlier DOCX files
+remain byte-identical. LibreOffice references are pending. See
+[the redline notes](docs/REDLINE.md#values-strict-writes-in-a-form-transitional-does-not-have-docxodus-1758).
+
+`redline-v48` adds a reproducer and control for [Docxodus #1757](https://github.com/JSv4/Docxodus/issues/1757), comparisons that replace a three-section quarry document, each section under its own header, with unrelated kiln text. In `redline-mixed-section-stories` the revision has two sections, so section breaks are both deleted and inserted; Docxodus 1d45d551 then paired headers by section number, and rejecting its redline put the first two quarry sections under the next sections' headers. In `redline-mixed-section-stories-deleted-control` the revision has one section, so breaks are only deleted. The reject round trip catches the defect, and a `section-stories` check pins each review section's header text. `redline-v45` to `redline-v47` are claimed by open PRs. All earlier DOCX files remain byte-identical. See [the evidence](docs/results/mixed-section-stories/README.md).
+
 `core-v173` adds an original reproducer and control for [Docxodus #1750](https://github.com/JSv4/Docxodus/issues/1750): a fixed 450pt Quince table whose rows all leave its last two grid columns unused (`w:gridAfter`). Word 2024 drops those columns and widens the other three in proportion to the table's preferred width, so `QuinceSum1` starts at 387pt; Docxodus 0af51ef5 keeps the grid's widths and starts it at 247pt. In `table-grid-unused-columns-filled-control` the last row fills the grid and nothing widens. Two version 2 `marker-region` checks per case pin the second and third cells' first words. `core-v169` and `core-v170` are claimed by open PRs. All earlier DOCX files remain byte-identical. The redline suite is unchanged. New reference registration and full-suite scoring remain pending. See [the evidence](docs/results/unused-grid-columns/README.md).
 
 `core-v172` adds two inputs and a control for Docxodus #1751, on the #1738 page-foot paragraphs: in

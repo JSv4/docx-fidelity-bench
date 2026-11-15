@@ -754,6 +754,51 @@ redline carries every bullet it needs under distinct ids. Word 2024 results and 
 [`docs/results/picture-bullets/`](results/picture-bullets/). The authored redlines were not run
 through LibreOffice or the SDK validator on the capture machine; CI runs both.
 
+## Section breaks both deleted and inserted (Docxodus #1757)
+
+`redline-v48` adds two original cases. The original has three sections of quarry notes, each under
+its own default header (`Quarry ledger 1` to `3`), and both revisions replace the whole body with
+unrelated kiln notes.
+
+- `redline-mixed-section-stories` (reproducer): the revision has two sections, each under its own
+  header (`Kiln register 1`, `2`), so the comparison deletes two section breaks and inserts one.
+  The review document holds four sections: the first kiln section, then the second kiln section's
+  text with the first quarry section, then the second and third quarry sections.
+- `redline-mixed-section-stories-deleted-control` (control): the revision has one section, so
+  section breaks are only deleted.
+
+Each review section's header pairs the headers of the sections whose text it holds. A section that
+holds only quarry text disappears on accept, so its authored header is the quarry one, unchanged,
+as Word 2024's own compare leaves it. Accept/reject round trips (whose semantic view lists each
+section's header), `section-boundaries` on both endpoints and an exact `section-stories` list of the
+review headers' text are mandatory. Docxodus 1d45d551 paired headers by section number once breaks
+were both deleted and inserted, so its rejected reproducer has `Quarry ledger 2`, `3`, `3`. Word
+2024 results and renders are in
+[`docs/results/mixed-section-stories/`](results/mixed-section-stories/). LibreOffice was not
+available on the capture machine; CI runs it.
+
+## Values Strict writes in a form Transitional does not have (Docxodus #1758)
+
+`redline-v49` adds an original Kiln pair in the `packages` category. The document holds a two-row
+table whose header row carries `w:cnfStyle` on the row, both cells and both cell paragraphs, and a
+rectangle filled with `4472C4` darkened by `a:lumMod`. The revision changes one word of the closing
+paragraph. In the reproducer both inputs are Strict packages, written as a Strict save writes them:
+`w:cnfStyle` holds only its twelve flags, `a:lumMod` is `val="50%"`, and the shape's `wps` elements
+are folded into the `wordprocessingDrawing` namespace. The control is the same pair in the
+Transitional class (`w:val="100000000000"`, `val="50000"`, a `wps` shape). Both authored redlines
+are Transitional and write each value in its Transitional form.
+
+The Open XML SDK validator reports nothing for any input. Before the fix Docxodus renamed a Strict
+input's namespaces and kept its values, so the reproducer's redline carried five `w:cnfStyle` with
+no `w:val`, which Transitional requires, and an `a:lumMod` of `50%`, which it types as an integer.
+The mandatory `no-new-validation-errors` rule fails it on those six findings. The round trips and
+`untracked-text` pass, because neither value is part of the semantic view. No new assertion is
+needed. The control passes before and after.
+
+No earlier case changes, and all previous DOCX bytes are unchanged. Results and renders of the
+Docxodus redlines before and after the fix are in [`docs/results/strict-values/`](results/strict-values/).
+LibreOffice references and full-suite scoring are pending.
+
 ## Tabs and line breaks (Docxodus #1759)
 
 `redline-v50` adds five original reproducers and six controls. The reference compare treats a tab or a break
