@@ -47,10 +47,10 @@ def case(case_id):
 class RedlineRegistry(unittest.TestCase):
     def test_registry_is_valid_and_versioned(self):
         registry = redline.validate_registry()
-        self.assertEqual(registry['suite']['id'], 'redline-v50')
-        self.assertEqual(len(registry['cases']), 329)
+        self.assertEqual(registry['suite']['id'], 'redline-v51')
+        self.assertEqual(len(registry['cases']), 331)
         issues = {c['issue'] for c in registry['cases'] if c['issue']}
-        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694, 1699, 1700, 1702, 1757, 1758, 1759)})
+        self.assertEqual(issues, {f'JSv4/Docxodus#{n}' for n in (1165, 1166, 1167, 1170, 1174, 1175, 1176, 1183, 1184, 1188, 1189, 1190, 1195, 1196, 1197, 1206, 1210, 1211, 1212, 1218, 1268, 1312, 1317, 1322, 1330, 1331, 1337, 1340, 1342, 1352, 1384, 1387, 1388, 1404, 1406, 1409, 1420, 1421, 1425, 1426, 1428, 1526, 1533, 1534, 1535, 1545, 1555, 1556, 1557, 1560, 1576, 1652, 1688, 1694, 1699, 1700, 1702, 1757, 1758, 1759, 1763)})
 
     def test_every_issue_has_a_reproducer_and_a_control(self):
         by_issue = {}
@@ -255,6 +255,21 @@ class AuthoredCalibration(unittest.TestCase):
             for reference, target in zip(references[1:3], targets[2:4]):
                 reference.set(rid, target)
         mutant = rewrite(record['authored'], by_number)
+        self.assertNotEqual(views(mutant)[1], rejected)
+        self.assertFalse(redline._assertion(assertion, mutant, {})['passed'])
+
+    def test_shared_header_removal_catches_a_first_section_left_unreferenced(self):
+        record = case('redline-shared-header-removed')
+        assertion = next(a for a in record['assertions'] if a['type'] == 'section-stories')
+        rejected = revisions.view(load(record['expected']['rejected']))
+        self.assertEqual(views(load(record['authored']))[1], rejected)
+        self.assertTrue(redline._assertion(assertion, load(record['authored']), {})['passed'])
+        def unreferenced_first_section(root):
+            # The first section break carries the revision's section properties, which have no header.
+            root.set('xmlns:w14', revisions.W14)
+            first = next(root.iter(W + 'sectPr'))
+            first.remove(first.find(W + 'headerReference'))
+        mutant = rewrite(record['authored'], unreferenced_first_section)
         self.assertNotEqual(views(mutant)[1], rejected)
         self.assertFalse(redline._assertion(assertion, mutant, {})['passed'])
 
