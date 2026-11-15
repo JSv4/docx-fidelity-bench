@@ -1,3 +1,12 @@
+`redline-v50` adds eleven comparison cases for [Docxodus #1759](https://github.com/JSv4/Docxodus/issues/1759):
+a tab or line break in a paragraph must not change how the text around it is compared. Five reproducers (a
+phrase replaced in a paragraph that starts with a tab or a line break, or with a tab between the replaced words;
+a lone shared comma between replaced words after a leading tab; and a clause laid out as tab, label, tab, text
+rewritten in other words) each have a control without the tab or break, and two more controls keep a space
+replaced by a tab, and an edited tabbed clause, as edits. The existing `revision-blocks`, `revision-text` and
+`untracked-text` assertions decide them, so a redline that keeps spaces, a tab or a lone comma unmarked between
+one-word revisions fails while both round trips pass. See [the redline notes](docs/REDLINE.md#tabs-and-line-breaks-docxodus-1759).
+
 `redline-v49` adds an original Strict pair and its Transitional control for
 [Docxodus #1758](https://github.com/JSv4/Docxodus/issues/1758). The Strict inputs write a header row's
 `w:cnfStyle` without `w:val` and a shape's `a:lumMod` as `50%`, both valid in Strict. A redline that
