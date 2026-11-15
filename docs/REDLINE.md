@@ -2,7 +2,7 @@
 
 The redline track measures document comparison, not rendering. A candidate receives authored inputs and returns one package: a redline for a two-way comparison (`compare`) or an N-way consolidation (`consolidate`), or a resolved document for a revision operation (`reject`, `accept`). The benchmark then asks one question of that package: do its tracked changes reproduce the declared documents exactly, and is the package sound?
 
-The suite is `redline-v48`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
+The suite is `redline-v49`, in `fixtures/redline/manifest.json`. It is separate from the PDF suite and has its own version, digest and results. Like the PDF track it is report-only: CI records the measurement but gates nothing.
 
 ## Cases
 
@@ -776,3 +776,25 @@ were both deleted and inserted, so its rejected reproducer has `Quarry ledger 2`
 2024 results and renders are in
 [`docs/results/mixed-section-stories/`](results/mixed-section-stories/). LibreOffice was not
 available on the capture machine; CI runs it.
+
+## Values Strict writes in a form Transitional does not have (Docxodus #1758)
+
+`redline-v49` adds an original Kiln pair in the `packages` category. The document holds a two-row
+table whose header row carries `w:cnfStyle` on the row, both cells and both cell paragraphs, and a
+rectangle filled with `4472C4` darkened by `a:lumMod`. The revision changes one word of the closing
+paragraph. In the reproducer both inputs are Strict packages, written as a Strict save writes them:
+`w:cnfStyle` holds only its twelve flags, `a:lumMod` is `val="50%"`, and the shape's `wps` elements
+are folded into the `wordprocessingDrawing` namespace. The control is the same pair in the
+Transitional class (`w:val="100000000000"`, `val="50000"`, a `wps` shape). Both authored redlines
+are Transitional and write each value in its Transitional form.
+
+The Open XML SDK validator reports nothing for any input. Before the fix Docxodus renamed a Strict
+input's namespaces and kept its values, so the reproducer's redline carried five `w:cnfStyle` with
+no `w:val`, which Transitional requires, and an `a:lumMod` of `50%`, which it types as an integer.
+The mandatory `no-new-validation-errors` rule fails it on those six findings. The round trips and
+`untracked-text` pass, because neither value is part of the semantic view. No new assertion is
+needed. The control passes before and after.
+
+No earlier case changes, and all previous DOCX bytes are unchanged. Results and renders of the
+Docxodus redlines before and after the fix are in [`docs/results/strict-values/`](results/strict-values/).
+LibreOffice references and full-suite scoring are pending.

@@ -1,0 +1,160 @@
+{
+ "builds": {
+  "baseline": "Docxodus main `1d45d551`",
+  "candidate": "the fix branch for [JSv4/Docxodus#1758](https://github.com/JSv4/Docxodus/issues/1758)"
+ },
+ "validator": "tools/ooxml-validator (DocumentFormat.OpenXml 3.5.1, FileFormatVersions.Microsoft365)",
+ "desktop": "a desktop word processor (16.0.20326, Windows) through COM: Documents.Open read-only, then Accept All and Reject All on fresh opens; fill is the shape's Fill.ForeColor",
+ "cases": {
+  "redline-strict-values": {
+   "kind": "reproducer",
+   "benchChecks": {
+    "authored": {
+     "view:accepted": true,
+     "view:rejected": true,
+     "no-new-validation-errors": true,
+     "untracked-text:redline": true
+    },
+    "baseline": {
+     "view:accepted": true,
+     "view:rejected": true,
+     "no-new-validation-errors": false,
+     "no-new-validation-errors:new": [
+      {
+       "id": "Sch_AttributeValueDataTypeDetailed",
+       "part": "/word/document.xml",
+       "description": "The attribute 'val' has invalid value '50%'. The string '50%' is not a valid 'Int32' value.",
+       "count": 1,
+       "allowed": 0
+      },
+      {
+       "id": "Sch_MissRequiredAttribute",
+       "part": "/word/document.xml",
+       "description": "The required attribute 'val' is missing.",
+       "count": 5,
+       "allowed": 0
+      }
+     ],
+     "untracked-text:redline": true
+    },
+    "candidate": {
+     "view:accepted": true,
+     "view:rejected": true,
+     "no-new-validation-errors": true,
+     "untracked-text:redline": true
+    }
+   },
+   "desktop": {
+    "left": {
+     "open": true,
+     "revisions": 0,
+     "fill": "643820",
+     "brightness": -0.5
+    },
+    "right": {
+     "open": true,
+     "revisions": 0,
+     "fill": "643820",
+     "brightness": -0.5
+    },
+    "authored": {
+     "open": true,
+     "revisions": 2,
+     "fill": "643820",
+     "brightness": -0.5,
+     "accepted": "Kiln roster | Batch | Firing | Kiln glaze | Cone 6 | / | Vent every damper before the night shift. |",
+     "revisionsAfterAccept": 0,
+     "rejected": "Kiln roster | Batch | Firing | Kiln glaze | Cone 6 | / | Vent every flue before the night shift. |",
+     "revisionsAfterReject": 0
+    },
+    "baseline": {
+     "open": true,
+     "revisions": 2,
+     "fill": "643820",
+     "brightness": -0.5,
+     "accepted": "Kiln roster | Batch | Firing | Kiln glaze | Cone 6 | / | Vent every damper before the night shift. |",
+     "revisionsAfterAccept": 0,
+     "rejected": "Kiln roster | Batch | Firing | Kiln glaze | Cone 6 | / | Vent every flue before the night shift. |",
+     "revisionsAfterReject": 0
+    },
+    "candidate": {
+     "open": true,
+     "revisions": 2,
+     "fill": "643820",
+     "brightness": -0.5,
+     "accepted": "Kiln roster | Batch | Firing | Kiln glaze | Cone 6 | / | Vent every damper before the night shift. |",
+     "revisionsAfterAccept": 0,
+     "rejected": "Kiln roster | Batch | Firing | Kiln glaze | Cone 6 | / | Vent every flue before the night shift. |",
+     "revisionsAfterReject": 0
+    }
+   }
+  },
+  "redline-strict-values-control": {
+   "kind": "control",
+   "benchChecks": {
+    "authored": {
+     "view:accepted": true,
+     "view:rejected": true,
+     "no-new-validation-errors": true,
+     "untracked-text:redline": true
+    },
+    "baseline": {
+     "view:accepted": true,
+     "view:rejected": true,
+     "no-new-validation-errors": true,
+     "untracked-text:redline": true
+    },
+    "candidate": {
+     "view:accepted": true,
+     "view:rejected": true,
+     "no-new-validation-errors": true,
+     "untracked-text:redline": true
+    }
+   },
+   "desktop": {
+    "left": {
+     "open": true,
+     "revisions": 0,
+     "fill": "643820",
+     "brightness": -0.5
+    },
+    "right": {
+     "open": true,
+     "revisions": 0,
+     "fill": "643820",
+     "brightness": -0.5
+    },
+    "authored": {
+     "open": true,
+     "revisions": 2,
+     "fill": "643820",
+     "brightness": -0.5,
+     "accepted": "Kiln roster | Batch | Firing | Kiln glaze | Cone 6 | / | Vent every damper before the night shift. |",
+     "revisionsAfterAccept": 0,
+     "rejected": "Kiln roster | Batch | Firing | Kiln glaze | Cone 6 | / | Vent every flue before the night shift. |",
+     "revisionsAfterReject": 0
+    },
+    "baseline": {
+     "open": true,
+     "revisions": 2,
+     "fill": "643820",
+     "brightness": -0.5,
+     "accepted": "Kiln roster | Batch | Firing | Kiln glaze | Cone 6 | / | Vent every damper before the night shift. |",
+     "revisionsAfterAccept": 0,
+     "rejected": "Kiln roster | Batch | Firing | Kiln glaze | Cone 6 | / | Vent every flue before the night shift. |",
+     "revisionsAfterReject": 0
+    },
+    "candidate": {
+     "open": true,
+     "revisions": 2,
+     "fill": "643820",
+     "brightness": -0.5,
+     "accepted": "Kiln roster | Batch | Firing | Kiln glaze | Cone 6 | / | Vent every damper before the night shift. |",
+     "revisionsAfterAccept": 0,
+     "rejected": "Kiln roster | Batch | Firing | Kiln glaze | Cone 6 | / | Vent every flue before the night shift. |",
+     "revisionsAfterReject": 0
+    }
+   }
+  }
+ }
+}
