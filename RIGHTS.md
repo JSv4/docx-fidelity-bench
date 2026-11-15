@@ -1,3 +1,10 @@
+The two Strict-value redline cases for Docxodus #1758 (`redline-strict-values`,
+`redline-strict-values-control`) contain original Kiln labels and literal WordprocessingML and
+DrawingML authored in `bench/redline_fixtures.py`. No product fixture, helper, document, image or
+font program is imported, and the issue's reproduction script was not used. Their review images show
+a desktop word processor drawing Docxodus output, with Liberation Serif substituted because the
+capture machine does not have it.
+
 The two unused-grid-column cases for Docxodus #1750 contain original Quince labels and literal OOXML
 authored in `bench/fixtures.py`. No product fixture, helper, document, image or font program is
 imported, and no reporter attachment was opened or used. Their review sheet shows Word 2024 and

@@ -1,3 +1,11 @@
+`redline-v49` adds an original Strict pair and its Transitional control for
+[Docxodus #1758](https://github.com/JSv4/Docxodus/issues/1758). The Strict inputs write a header row's
+`w:cnfStyle` without `w:val` and a shape's `a:lumMod` as `50%`, both valid in Strict. A redline that
+keeps those values fails the mandatory `no-new-validation-errors` rule, because Transitional requires
+`w:val` and writes percentages in thousandths. No new assertion is needed and all earlier DOCX files
+remain byte-identical. LibreOffice references are pending. See
+[the redline notes](docs/REDLINE.md#values-strict-writes-in-a-form-transitional-does-not-have-docxodus-1758).
+
 `core-v173` adds an original reproducer and control for [Docxodus #1750](https://github.com/JSv4/Docxodus/issues/1750): a fixed 450pt Quince table whose rows all leave its last two grid columns unused (`w:gridAfter`). Word 2024 drops those columns and widens the other three in proportion to the table's preferred width, so `QuinceSum1` starts at 387pt; Docxodus 0af51ef5 keeps the grid's widths and starts it at 247pt. In `table-grid-unused-columns-filled-control` the last row fills the grid and nothing widens. Two version 2 `marker-region` checks per case pin the second and third cells' first words. `core-v169` and `core-v170` are claimed by open PRs. All earlier DOCX files remain byte-identical. The redline suite is unchanged. New reference registration and full-suite scoring remain pending. See [the evidence](docs/results/unused-grid-columns/README.md).
 
 `core-v172` adds two inputs and a control for Docxodus #1751, on the #1738 page-foot paragraphs: in

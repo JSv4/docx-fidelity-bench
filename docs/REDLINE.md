@@ -753,3 +753,25 @@ cannot see a list drawn with the wrong picture or naming a bullet that is not th
 redline carries every bullet it needs under distinct ids. Word 2024 results and renders are in
 [`docs/results/picture-bullets/`](results/picture-bullets/). The authored redlines were not run
 through LibreOffice or the SDK validator on the capture machine; CI runs both.
+
+## Values Strict writes in a form Transitional does not have (Docxodus #1758)
+
+`redline-v49` adds an original Kiln pair in the `packages` category. The document holds a two-row
+table whose header row carries `w:cnfStyle` on the row, both cells and both cell paragraphs, and a
+rectangle filled with `4472C4` darkened by `a:lumMod`. The revision changes one word of the closing
+paragraph. In the reproducer both inputs are Strict packages, written as a Strict save writes them:
+`w:cnfStyle` holds only its twelve flags, `a:lumMod` is `val="50%"`, and the shape's `wps` elements
+are folded into the `wordprocessingDrawing` namespace. The control is the same pair in the
+Transitional class (`w:val="100000000000"`, `val="50000"`, a `wps` shape). Both authored redlines
+are Transitional and write each value in its Transitional form.
+
+The Open XML SDK validator reports nothing for any input. Before the fix Docxodus renamed a Strict
+input's namespaces and kept its values, so the reproducer's redline carried five `w:cnfStyle` with
+no `w:val`, which Transitional requires, and an `a:lumMod` of `50%`, which it types as an integer.
+The mandatory `no-new-validation-errors` rule fails it on those six findings. The round trips and
+`untracked-text` pass, because neither value is part of the semantic view. No new assertion is
+needed. The control passes before and after.
+
+No earlier case changes, and all previous DOCX bytes are unchanged. Results and renders of the
+Docxodus redlines before and after the fix are in [`docs/results/strict-values/`](results/strict-values/).
+LibreOffice references and full-suite scoring are pending.

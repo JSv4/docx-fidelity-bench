@@ -23,7 +23,7 @@ R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 FONT = 'Liberation Serif'
 AUTHOR = 'Bench'
 DATE = '2026-01-01T00:00:00Z'
-SUITE = {'id': 'redline-v44', 'version': 44}
+SUITE = {'id': 'redline-v49', 'version': 49}
 NAMESPACES = (f'xmlns:w="{W}" xmlns:r="{R}" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" '
               'xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" '
               'xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="w14"')
@@ -355,6 +355,7 @@ def generate():
     strict_chart_parts(corpus)
     deleted_textbox_text(corpus)
     picture_bullet_lists(corpus)
+    strict_values(corpus)
     registry ={'schema': 1, 'suite': dict(SUITE, cases=[c['id'] for c in corpus.cases]), 'cases': corpus.cases}
     target = ROOT / 'fixtures' / 'redline' / 'manifest.json'
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -2778,3 +2779,61 @@ def picture_bullet_lists(corpus):
                    document(items(former, 1, rev.dele, lambda: rev.mark('del')) + items(added, 2, rev.ins, lambda: rev.mark('ins')),
                             **lists([rust, teal], [(720, 0), (900, 1)])),
                    [untracked(lead, CLOSING), drawn('accepted', added, teal), drawn('rejected', former, rust)], assets)
+
+
+# ---------------------------------------------------------------------------------------------
+# Docxodus #1758: values Strict writes in a form Transitional does not have
+# ---------------------------------------------------------------------------------------------
+
+def strict_values(corpus):
+    """A Strict package whose header row carries w:cnfStyle, which Strict writes with its twelve flags
+    and no w:val, and whose shape darkens its fill with a:lumMod, which Strict writes as a percent
+    string ("50%"). The revision changes one word of the closing paragraph.
+
+    The control is the same pair written as Transitional (w:val="100000000000", val="50000"). The
+    authored redline is Transitional in both cases and writes each value in its Transitional form."""
+    flags = ('firstRow', 'lastRow', 'firstColumn', 'lastColumn', 'oddVBand', 'evenVBand', 'oddHBand', 'evenHBand',
+             'firstRowFirstColumn', 'firstRowLastColumn', 'lastRowFirstColumn', 'lastRowLastColumn')
+    strict_names = {'a': 'http://purl.oclc.org/ooxml/drawingml/main',
+                    'wp': 'http://purl.oclc.org/ooxml/drawingml/wordprocessingDrawing'}
+    transitional = {'a': 'http://schemas.openxmlformats.org/drawingml/2006/main',
+                    'wp': 'http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing',
+                    'wps': 'http://schemas.microsoft.com/office/word/2010/wordprocessingShape'}
+
+    def cnf(strict):
+        return ('<w:cnfStyle ' + ('' if strict else 'w:val="100000000000" ')
+                + ' '.join(f'w:{flag}="{int(flag == "firstRow")}"' for flag in flags) + '/>')
+
+    def cell(text, header, strict):
+        return (f'<w:tc><w:tcPr>{cnf(strict) if header else ""}<w:tcW w:w="2400" w:type="dxa"/></w:tcPr>'
+                + p(t(text), props=cnf(strict) if header else '') + '</w:tc>')
+
+    def body(closing, strict):
+        # A Strict save folds the shape's wps elements into the wordprocessingDrawing namespace.
+        shape = 'wp' if strict else 'wps'
+        table = ('<w:tbl><w:tblPr><w:tblW w:w="4800" w:type="dxa"/></w:tblPr>'
+                 '<w:tblGrid><w:gridCol w:w="2400"/><w:gridCol w:w="2400"/></w:tblGrid>'
+                 f'<w:tr><w:trPr>{cnf(strict)}</w:trPr>{cell("Batch", True, strict)}{cell("Firing", True, strict)}</w:tr>'
+                 f'<w:tr>{cell("Kiln glaze", False, strict)}{cell("Cone 6", False, strict)}</w:tr></w:tbl>')
+        drawing = ('<w:r><w:drawing ' + ' '.join(f'xmlns:{k}="{v}"' for k, v in (strict_names if strict else transitional).items()) + '>'
+                   '<wp:inline distT="0" distB="0" distL="0" distR="0"><wp:extent cx="914400" cy="457200"/>'
+                   '<wp:docPr id="1" name="Badge"/><a:graphic>'
+                   f'<a:graphicData uri="{transitional["wps"]}"><{shape}:wsp><{shape}:cNvSpPr/><{shape}:spPr>'
+                   '<a:xfrm><a:off x="0" y="0"/><a:ext cx="914400" cy="457200"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom>'
+                   f'<a:solidFill><a:srgbClr val="4472C4"><a:lumMod val="{"50%" if strict else "50000"}"/></a:srgbClr></a:solidFill>'
+                   f'</{shape}:spPr><{shape}:bodyPr/></{shape}:wsp></a:graphicData></a:graphic></wp:inline></w:drawing></w:r>')
+        return p(t('Kiln roster')) + table + p(drawing) + closing
+
+    kept, rest = 'Vent every ', ' before the night shift.'
+    for strict in (True, False):
+        rev = Revisions()
+        corpus.compare('redline-strict-values' + ('' if strict else '-control'), 'packages',
+                       'reproducer' if strict else 'control', 'JSv4/Docxodus#1758',
+                       'One word of the closing paragraph changes in a ' + ('Strict' if strict else 'Transitional')
+                       + '-conformance package whose header row carries w:cnfStyle and whose shape darkens its fill '
+                       'with a:lumMod. The redline writes both values in their Transitional form.',
+                       dict(body=body(p(t(kept + 'flue' + rest)), strict), strict=strict),
+                       dict(body=body(p(t(kept + 'damper' + rest)), strict), strict=strict),
+                       dict(body=body(p(t(kept) + rev.dele(t('flue')) + rev.ins(t('damper')) + t(rest)), False)),
+                       [untracked('Kiln roster', 'Batch', 'Firing', 'Kiln glaze', 'Cone 6', kept, rest)],
+                       assets='All text, table and shape XML are generated here; no images or embedded font files')
